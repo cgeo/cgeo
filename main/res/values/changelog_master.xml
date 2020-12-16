@@ -12,11 +12,13 @@
 <li>Fix: Skip artificial track points in position history</li>
 <li>New: Added option to \"Individual route\" map menu to automatically set the first route point as navigation target (OpenStreetMap only)</li>
 <li>New: Added option to reset individual navigation target set from either cache/waypoint popup or \"Individual route\" (OpenStreetMap only)</li>
+<li>New: Ask for filename on individual route export</li>
 </ul>
 
 <h4>Cache details:</h4>
 <ul>
 <li>New: Allow deleting original waypoint for user-defined caches (effectively allowing changing cache coordinates for UDC)</li>
+<li>Change: Field note encoding: Charset changed to UTF16 LE</li>
 </ul>
 
 <h4>Other:</h4>
@@ -24,8 +26,6 @@
 <li>Change: Removed \"Use English\" option in favor of a built-in language selector</li>
 <li>Change: Disable mainscreen transparency on Sailfish OS</li>
 <li>Change: Custom tab implementation instead of internal browser</li>
-<li>Change: Field note encoding: Charset changed to UTF16 LE</li>
-<li>New: Ask for filename on individual route export</li>
 <li>New: Added share option after creating a backup</li>
 <li>New: View settings: Added option to add new settings</li>
 <li>New: Added Ukrainian translation</li>
