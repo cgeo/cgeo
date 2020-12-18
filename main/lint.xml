@@ -49,5 +49,6 @@
         <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
         <ignore path="res/*/ic_launcher_round.xml" />
         <ignore path="res/values/vpi__colors.xml" />
+        <ignore path="res/values-*/strings.xml" />
     </issue>
 </lint>
