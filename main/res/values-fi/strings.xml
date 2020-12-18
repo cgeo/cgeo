@@ -445,6 +445,9 @@
     <string name="contribution_documentation">dokumentaatio</string>
     <string name="contribution_projectleader">avoimen lähdekoodin projektin johtaja</string>
     <string name="contribution_graphics">grafiikat</string>
+    <string name="debug_user_error_report_title">Ilmoita ongelmasta</string>
+    <string name="debug_user_error_errortext">Tapahtui odottamaton virhe, ja haluaisimme pyytää sinua raportoimaan siitä meille:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Auta meitä korjaamaan c:geon ongelmia raportoimalla ne sähköpostin kautta. Raportti sisältää järjestelmätietoja sekä c:geon lokitiedoston. Lisääthän sähköpostiin myös yksityiskohtaisen virheselosteen. Muita yhteydenottotapoja löydät kohdasta <i>Tietoja c:geosta</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>
@@ -1785,6 +1788,10 @@
     <string name="downloadmanager_not_available">Karttatiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto tallennetaan järjestelmän lataushakemistoon ja se on siirrettävä manuaalisesti karttahakemistoon.</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
+    <string name="downloadmap_confirmation">Ladataanko kartta \"%1$s\"?\n\nTämä voi viedä jonkin aikaa ja voi johtaa merkittäviin kustannuksiin, verkkoyhteydestäsi riippuen.\n\nKokotieto: %2$s</string>
+    <string name="downloadmap_handling">Itse lataus käsitellään taustalla järjestelmäsi latauksenhallinnan kautta. Sinun pitäisi nähdä ilmoitus heti kun lataus alkaa (tämä voi viedä jonkin aikaa).</string>
+    <string name="button_continue">Jatka</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
