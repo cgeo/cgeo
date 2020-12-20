@@ -173,8 +173,8 @@ public final class Dialogs {
         final AlertDialog dialog = builder.setTitle(title)
                 .setCancelable(true)
                 .setMessage(msg)
-                .setPositiveButton(android.R.string.yes, yesListener)
-                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(R.string.yes, yesListener)
+                .setNegativeButton(R.string.no, null)
                 .create();
         dialog.setOwnerActivity(context);
         dialog.show();
