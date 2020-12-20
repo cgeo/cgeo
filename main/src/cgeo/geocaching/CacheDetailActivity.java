@@ -515,7 +515,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             new AsyncTask<Void, Void, Boolean>() {
                 @Override
                 protected Boolean doInBackground(final Void... params) {
-                    if (cache.duplicateWaypoint(selectedWaypoint) != null) {
+                    if (cache.duplicateWaypoint(selectedWaypoint, true) != null) {
                         DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                         return true;
                     }
@@ -1938,7 +1938,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 final Waypoint oldWaypoint = DataStore.loadWaypoint(Waypoint.hasClipboardWaypoint());
                 if (null != oldWaypoint) {
                     ensureSaved();
-                    final Waypoint newWaypoint = cache.duplicateWaypoint(oldWaypoint);
+                    final Waypoint newWaypoint = cache.duplicateWaypoint(oldWaypoint, cache.getGeocode().equals(oldWaypoint.getGeocode()));
                     if (null != newWaypoint) {
                         DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                         addWaypointAndSort(sortedWaypoints, newWaypoint);
