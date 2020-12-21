@@ -1766,6 +1766,8 @@
     <string name="switch_manual">Handmatig</string>
     <string name="switch_auto">Automatisch</string>
     <string name="switch_default">(standaard)</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nee</string>
     <!-- view settings -->
     <string name="view_settings">Instellingen bekijken</string>
     <string name="delete_setting">Instelling verwijderen</string>
