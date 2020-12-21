@@ -446,6 +446,9 @@
     <string name="contribution_documentation">Handbuch</string>
     <string name="contribution_projectleader">Open Source Projektleiter</string>
     <string name="contribution_graphics">Grafiken</string>
+    <string name="debug_user_error_report_title">Problem melden</string>
+    <string name="debug_user_error_errortext">Ein unerwartetes Problem ist aufgetreten, bitte melde es uns:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Hilf uns dabei Probleme in c:geo zu beheben, indem du diese per E-Mail zusammen deinen Systeminformationen und einer c:geo Logdatei meldest. Bitte füge der E-Mail auch eine detailierte Fehlerbeschreibung hinzu. Andere Kontaktmöglichkeiten findest du in <i>Über c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Öffne Einstellungen?</string>
     <string name="settings_title_services">Dienste</string>
@@ -560,6 +563,9 @@
     <string name="init_summary_transparentBackground">Verwende transparenten Hintergrund (Neustart erforderlich)</string>
     <string name="init_address">Ort statt Koordinaten</string>
     <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
+    <string name="init_select_language">Sprache auswählen</string>
+    <string name="init_summary_select_language">Wähle In-App-Sprache (Neustart erforderlich)\n</string>
+    <string name="init_use_default_language">Systemsprache verwenden</string>
     <string name="init_category_exclude">Caches ausblenden</string>
     <string name="init_exclude">Eigene/Gefundene ausblenden</string>
     <string name="init_summary_exclude">Eigene/gefundene Caches ausblenden</string>
@@ -1722,6 +1728,8 @@
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Automatisch als Ziel setzen</string>
     <string name="map_disable_autotarget_individual_route">\"Automatisch als Ziel setzen\" deaktiviert</string>
+    <string name="map_clear_manual_targets">Manuelle Ziele löschen</string>
+    <string name="map_manual_targets_cleared">Manuelle Ziele gelöscht</string>
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
     <string name="map_clear_individual_route_confirm">Möchtest du alle Caches / Wegpunkte von deiner individuellen Route entfernen?</string>
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
@@ -1758,6 +1766,8 @@
     <string name="switch_manual">Manuell</string>
     <string name="switch_auto">Automatisch</string>
     <string name="switch_default">(Standard)</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
     <!-- view settings -->
     <string name="view_settings">Einstellungen anzeigen</string>
     <string name="delete_setting">Einstellung löschen</string>
