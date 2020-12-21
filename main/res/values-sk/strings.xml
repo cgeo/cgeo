@@ -447,6 +447,9 @@
     <string name="contribution_documentation">dokumentácia</string>
     <string name="contribution_projectleader">líder projektu otvoreného zdrojového kódu</string>
     <string name="contribution_graphics">grafika</string>
+    <string name="debug_user_error_report_title">Nahlásenie problému</string>
+    <string name="debug_user_error_errortext">Vyskytol sa nečakaný problém a radi by sme vás požiadali, aby ste nám ho nahlásili:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Pomôžte nám s opravou problémov aplikácie c:geo pomocou e-mailu s informáciami o systéme a súborom denníka z aplikácie c:geo. Do vášho e-mailu vložte aj podrobný popis chyby, prosím. Ďalšie možnosti kontaktu nájdete v časti <i>O aplikácii c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otvoriť nastavenia?</string>
     <string name="settings_title_services">Služby</string>
@@ -1831,6 +1834,10 @@
     <string name="downloadmanager_not_available">Súbor s mapou sa nedá prevziať, systémový správca preberania nie je k dispozícii</string>
     <string name="download_started">Prevzatie spustené na pozadí</string>
     <string name="downloadmap_target_not_writable">Do cieľového miesta „%s“ sa nedá zapisovať – prevzatý mapový súbor bude uložený do systémového priečinka prevzatých súborov a treba ho ručne presunúť do priečinka máp.</string>
+    <string name="downloadmap_allow_metered_network">Povoliť prevzatie cez meranú sieť (napr. mobilné pripojenie)</string>
+    <string name="downloadmap_confirmation">Prevziať mapu \"%1$s\"?\n\nMôže to nejakú dobu trvať a môžu byť účtované veľké poplatky v závislosti od sieťového pripojenia.\n\nInformácie o veľkosti: %2$s</string>
+    <string name="downloadmap_handling">Samotné prevzatie bude spracované systémovým správcom preberania na pozadí. Keď sa začne preberať, uvidíte upozornenie. Prevzatie môže nejakú dobu trvať.</string>
+    <string name="button_continue">Ďalej</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazať históriu trasy</string>
     <string name="map_trailhistory_cleared">História trasy vymazaná</string>
