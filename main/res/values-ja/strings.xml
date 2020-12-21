@@ -446,7 +446,7 @@
     <string name="contribution_graphics">グラフィックス</string>
     <string name="debug_user_error_report_title">問題を報告</string>
     <string name="debug_user_error_errortext">予期しない問題が発生しました。報告をお願いします:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。 その他の連絡先などは<i>c:geoについて</i></p>をご覧ください。]]></string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。その際はエラーの詳細も含めてください。その他の連絡先などは<i>c:geoについて</i></p>をご覧ください。]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
     <string name="settings_title_services">サービス</string>

@@ -447,6 +447,9 @@
     <string name="contribution_documentation">dokumentacja</string>
     <string name="contribution_projectleader">lider projektu open source</string>
     <string name="contribution_graphics">grafika</string>
+    <string name="debug_user_error_report_title">Zgłoś problem</string>
+    <string name="debug_user_error_errortext">Wystąpił nieoczekiwany problem, prosimy o przesłanie zgłoszenia:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Pomóż nam naprawić problemy c:geo zgłaszając je pocztą elektroniczną z informacjami systemowymi i załączonym plikiem dziennika c:geo. Proszę podać również szczegółowy opis błędu w wiadomości e-mail. Inne opcje kontaktu można znaleźć na stronie <i>O c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otworzyć ustawienia?</string>
     <string name="settings_title_services">Usługi</string>
@@ -1831,6 +1834,10 @@
     <string name="downloadmanager_not_available">Nie można pobrać pliku mapy, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
     <string name="downloadmap_target_not_writable">Cel \"%s\" nie jest możliwy do zapisania - pobrany plik mapy zostanie zapisany w systemowym katalogu pobranych i musi być przeniesiony ręcznie do katalogu z mapami.</string>
+    <string name="downloadmap_allow_metered_network">Zezwalaj na pobieranie przez dowolną sieć (np. połączenie komórkowe)</string>
+    <string name="downloadmap_confirmation">Pobrać mapę \"%1$s\"?\n\nMoże to zająć trochę czasu oraz wiązać się ze znacznymi kosztami, w zależności od Twojego połączenia sieciowego.\n\nInformacje o rozmiarze: %2$s</string>
+    <string name="downloadmap_handling">Pobieranie będzie obsługiwane w tle przez systemowego menedżera pobierania. Powiadomienie powinno pojawić się zaraz po rozpoczęciu pobieranie (co może chwilę potrwać).</string>
+    <string name="button_continue">Kontynuuj</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
     <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>

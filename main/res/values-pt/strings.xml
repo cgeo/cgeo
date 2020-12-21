@@ -448,7 +448,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="contribution_graphics">grafismo</string>
     <string name="debug_user_error_report_title">Reportar um problema</string>
     <string name="debug_user_error_errortext">Ocorreu um problema inesperado que gostaríamos que nos reportasse:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Ajude-nos a corrigir os problemas de c:geo relatando-os por e-mail com informações do sistema e o ficheiro de depuração anexado. Mais opções de contacto podem ser encontradas em <i>Sobre o c:geo</i></p>]]></string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Ajude-nos a corrigir os problemas de c:geo relatando-os por e-mail com informações do sistema e o ficheiro de registo do c:geo incluído. Por favor, inclua no e-mail uma descrição detalhada do erro. Outras opções de contacto podem ser encontradas em <i>Acerca do c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Abrir definições?</string>
     <string name="settings_title_services">Serviços</string>
@@ -577,6 +577,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="brouter_recalculating">A recalcular a rota em segundo plano…</string>
     <string name="init_summary_brouterShowBothDistances">Se a navegação estiver activa: Mostra a distância em linha recta além do comprimento da rota.</string>
     <string name="init_bigSmileysOnMap">Grandes ícones nas caches registadas</string>
+    <string name="init_summary_bigSmileysOnMap">Se estiver activo, serão mostrados no mapa emoticons grandes para caches que tenha registado (requer reinício da aplicação).</string>
     <string name="init_disabled">Excluir Desactivadas</string>
     <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>

@@ -446,6 +446,9 @@
     <string name="contribution_documentation">Documentació</string>
     <string name="contribution_projectleader">Projecte de codi obert</string>
     <string name="contribution_graphics">Gràfics</string>
+    <string name="debug_user_error_report_title">Informar d\'un problema</string>
+    <string name="debug_user_error_errortext">S\'ha produït un problema inesperat que us sol·licitaríem que ens comuniqueu:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Ajudeu-nos a solucionar problemes de c: geo , Aviseu per correu electrònic amb la informació del sistema i el fitxer de registre c: geo. Incloeu al vostre correu també una descripció detallada de l’error Es poden trobar altres opcions de contacte a <i>Quant a c: geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Obrir la configuració?</string>
     <string name="settings_title_services">Serveis</string>
@@ -1782,6 +1785,10 @@
     <string name="downloadmanager_not_available">El fitxer del mapa no es pot descarregar, el gestor de descàrregues del sistema no està disponible</string>
     <string name="download_started">La descàrrega s\'ha iniciat en segon pla</string>
     <string name="downloadmap_target_not_writable">L\'objectiu \"%s\" no es pot escriure: el fitxer de mapa descarregat s\'emmagatzemarà al directori de descàrrega del sistema i s\'ha de moure manualment al directori del mapa.</string>
+    <string name="downloadmap_allow_metered_network">Permet la baixada per xarxa (per exemple: connexió mòbil)</string>
+    <string name="downloadmap_confirmation">Voleu baixar el mapa \"%1$s\"?\n\nAixò pot trigar força temps i pot comportar costos importants, segons la vostra connexió de xarxa.\n\nInformació sobre la mida: %2$s</string>
+    <string name="downloadmap_handling">El gestor de descàrregues del vostre sistema gestionarà la descàrrega en segon pla. Hauríeu de veure una notificació tan aviat com hagi començat la baixada (pot trigar una estona).</string>
+    <string name="button_continue">Continua</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
     <string name="map_trailhistory_cleared">S\'ha esborrat el traçat</string>
