@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB\n%4$s</string>
     <string name="log_image_titleprefix">Billede</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversæt til %s</string>
@@ -155,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login-side kan ikke indlæses</string>
+    <string name="err_captcha">Captcha påkrævet. Se venligst vores <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for vejledning.</string>
     <string name="err_server">Kan ikke forbinde til Geocaching.com (server eller forbindelsesfejl?)</string>
     <string name="err_server_ec">Kan ikke forbinde til Extremecaching.com. Hjemmesiden kan være nede eller du har ikke forbindelse til Internettet.</string>
     <string name="err_server_su">Kan ikke forbinde til Geocaching.su. Serveren kan være nede eller din enhed mangler forbindelse til Internettet.</string>
@@ -216,6 +218,7 @@
     <string name="err_parse_lat_lon">c:geo kan ikke fortolke breddegrad eller længdegrad.</string>
     <string name="err_rendertheme_file_unreadable">Det valgte korttema kunne ikke indlæses. Vender tilbage til det indbyggede.</string>
     <string name="err_rendertheme_invalid">Det valgte korttema er ikke gyldigt for denne version af Mapsforge. Vender tilbage til det indbyggede.</string>
+    <string name="err_invalid_filename_char">Tegnet \'%c\' er ikke tilladt</string>
     <string name="warn_save_nothing">Der er ikke noget at gemme.</string>
     <string name="warn_no_cache_coord">Der er ingen cache med disse koordinater.</string>
     <string name="warn_no_coordinates">Position er ikke angivet.</string>
@@ -474,6 +477,7 @@
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Vælg foretrukken navigationsmetode og vælg eksterne apps.</string>
     <string name="settings_title_system">System</string>
+    <string name="settings_summary_system">Systemspecifikke indstillinger og fejlfindingsindstillinger.</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching-platform</string>
@@ -543,6 +547,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Logtekst</string>
     <string name="init_signature_template_size">Størrelse</string>
+    <string name="init_signature_template_type">Type</string>
     <string name="init_ratingwanted">GCVote vurdering</string>
     <string name="init_summary_ratingwanted">Indlæs cachebedømmelser fra GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
@@ -555,6 +560,8 @@
     <string name="init_summary_transparentBackground">Brug gennemsigtig baggrund (kræver genstart)</string>
     <string name="init_address">Vis adresse på hovedskærm</string>
     <string name="init_summary_address">Vis adresse på hovedskærm</string>
+    <string name="init_select_language">Vælg sprog</string>
+    <string name="init_use_default_language">Brug standardsprog</string>
     <string name="init_exclude">Udelad egne og fundne cacher</string>
     <string name="init_summary_exclude">Udelad egne og fundne cacher</string>
     <string name="init_showwaypoints">Vis rutepunkter</string>
@@ -570,6 +577,7 @@
     <string name="init_summary_disabled">Udelad deaktiverede cacher</string>
     <string name="init_archived">Udelad arkiverede</string>
     <string name="init_summary_archived">Udelad arkiverede caches</string>
+    <string name="init_global_wp_extraction_disable">Deaktivér waypoint-udtræk</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktivér ekstraktion af rutepunkter personlige cachenoter. Dette kan stadig aktiveres for individuelle cacher ved at deaktivere afkrydsningsfeltet under den personlige cache-note</string>
     <string name="init_save_log_img">Lagring af billeder</string>
     <string name="init_summary_save_log_img">Gem billeder fra logbeskeder</string>
@@ -585,31 +593,50 @@
     <string name="init_summary_livelist">Vis retning til cacher i lister</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Opret Sikkerhedskopi</string>
+    <string name="init_backup_summary">Bemærk venligst, at denne funktion kan sikkerhedskopiere caches, waypoints &amp; indstillinger, men ikke cachebilleder. \nFor at kunne gendanne data hvis du mister din telefon, skal backupfilerne kopieres til en uafhængig placering.</string>
     <string name="init_restore_title">Genskab fra sikkerhedskopi</string>
     <string name="init_backup_caches">caches og waypoints</string>
     <string name="init_backup_program_settings">programindstillinger</string>
+    <string name="init_backup_logins">medtag kontooplysninger</string>
+    <string name="init_backup_logins_summary">Dette vil gemme dine indtastede loginoplysninger i backup-en.</string>
     <string name="init_backup">Backup af cache- og rutepunktdata</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_finished">Sikkerhedskopiering færdig</string>
+    <string name="init_backup_backup_failed">Sikkerhedskopiering mislykkedes</string>
     <string name="init_backup_now">Start sikkerhedskopiering</string>
     <string name="init_backup_running">Opretter backup af cache-database…</string>
     <string name="init_backup_restore">Gendan fra backup</string>
     <string name="init_restore_restored">Gendannelse fuldført</string>
     <string name="init_backup_start_restore">Start gendannelse</string>
+    <string name="init_backup_restore_different_backup">Gendan en anden sikkerhedskopi</string>
+    <string name="init_backup_backup_history">Sikkerhedskopieringshistorik</string>
+    <string name="init_backup_history_length_title">Gem højst (x) backups</string>
+    <string name="init_backup_history_length_summary">Beslut, hvor mange sikkerhedskopier du vil bevare. Når grænsen er nået, slettes de ældste automatisk.</string>
+    <string name="init_backup_history_length_min">Kun seneste</string>
+    <string name="init_backup_history_length_max">Behold alle</string>
+    <string name="init_backup_history_delete_warning">Du har flere sikkerhedskopier end din konfigurerede maksimale værdi tillader. Vil du virkelig fjerne alle overskydende sikkerhedskopier?</string>
+    <string name="init_user_confirmation">Jeg ved, hvad jeg gør</string>
     <string name="init_backup_success">Database blev kopieret til:</string>
     <string name="init_backup_failed">Backup af database fejlede.</string>
     <string name="init_backup_unnecessary">Databasen er tom og det er ikke nødvendigt at tage backup.</string>
+    <string name="init_backup_folder_exists_error">Kunne ikke oprette en ny mappe til sikkerhedskopier. Har du allerede lavet en sikkerhedskopi i det sidste minut?</string>
     <string name="init_backup_no_backup_available">Ingen backupfil tilgængelig.</string>
+    <string name="restore_confirm_overwrite_database">ADVARSEL: Dette overskriver %s på din enhed!</string>
+    <string name="restore_confirm_overwrite_database_and_settings">ADVARSEL: Dette vil overskrive %s og dine aktuelle indstillinger på din enhed!</string>
+    <string name="restore_confirm_overwrite_settings">ADVARSEL: Dette vil overskrive dine aktuelle indstillinger på din enhed!</string>
+    <string name="restore_information">Vælg hvad du vil gendanne:</string>
     <string name="init_restore_success">Gendannelse fuldført.</string>
     <string name="init_restore_failed_dbrecreated">Gendannelse mislykkedes: Der er fejl i backupfilen og databasen blev i stedet genskabt.</string>
     <string name="init_restore_failed">Gendannelse fejlede.</string>
     <string name="init_restore_running">Gendanner cache-database…</string>
     <string name="init_restore_confirm">Databasen er tom. Vil du gendanne databasen fra backup?</string>
     <string name="init_backup_last">Dato for sidste backup</string>
+    <string name="init_backup_unavailable">ikke tilgængelig</string>
     <string name="init_backup_last_no">Der er ikke tidligere taget backup.</string>
     <string name="init_restore_version_error">Uventet format - databasen kan ikke indlæses.\n\nForventet version er %1$d,\nbackup-en er version %2$d</string>
     <string name="settings_title_backup">Backup/gendannelse</string>
     <string name="settings_summary_backup">Udfør backup og gendannelse af cache- og rutepunktdata samt app-indstillinger.</string>
+    <string name="init_backup_settings_logins">Sikkerhedskopiér kontodata</string>
     <string name="init_backup_settings_backup_full_confirm">Ønsker du at gemme følsomme kontoindstillinger? Disse data kan være tilgængelige for andre apps.</string>
     <string name="settings_savingerror">Fejl under lagring af indstillinger</string>
     <string name="settings_saved">Indstillingerne blev gemt til:</string>
@@ -749,6 +776,7 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombineret (offline)</string>
+    <string name="map_source_attribution_dialog_title">Kort-akkrediteringer</string>
     <string name="init_sendToCgeo">Send2c:geo</string>
     <string name="settings_info_send2cgeo_title">Beskrivelse af send2c:geo</string>
     <string name="init_sendToCgeo_name">Din enheds navn</string>
@@ -803,6 +831,7 @@
     <string name="cache_offline_drop">Fjern</string>
     <string name="cache_delete_userdefined_waypoints">Slet brugerdefinerede waypoints</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Slet alle cachens brugerdefinerede waypoints?\n\nSletningen kan ikke fortrydes.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Bemærk: Du har aktiveret \"waypoints fra note\". Hvis du har koordinater i din personlige note som c:geo kan genkende, vil waypoints automatisk blive genskabt for dem. Du kan deaktivere dette i dialogen til redigering af personlige noter.</string>
     <string name="cache_delete_userdefined_waypoints_success">Brugerdefinerede waypoints er slettet</string>
     <string name="cache_offline_store">Gem</string>
     <string name="cache_offline_stored">Gemt i telefon</string>
@@ -915,7 +944,9 @@
     <string name="cache_menu_map_ext">Andre eksterne apps</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Åbn i browser</string>
+    <string name="cache_menu_open_with">Åbn med…</string>
     <string name="cache_menu_visit">Log besøg</string>
+    <string name="cache_log_too_long">c:geo kunne ikke indsende din log da den er for lang. Men tak for at du forsøgte at skrive sådan en omfattende log ;-)</string>
     <string name="cache_menu_visit_offline">Hurtig offline log</string>
     <string name="cache_menu_spoilers">Spoilerbilleder</string>
     <string name="cache_menu_around">Cacher i nærheden</string>
@@ -934,6 +965,8 @@
     <string name="cache_menu_checker">Åben Geochecker</string>
     <string name="cache_menu_challenge_checker">Søg efter cacher med geo-checker</string>
     <string name="cache_menu_ignore">Ignorér cache</string>
+    <string name="cache_log_menu_decrypt">Dekryptér/kryptér</string>
+    <string name="cache_log_menu_title">Log %1$s af %2$s</string>
     <string name="ignore_confirm_title">Vær forsigtig</string>
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
@@ -969,6 +1002,7 @@
     <string name="cache_terrain">Terræn</string>
     <string name="cache_rating">Vurdering</string>
     <string name="cache_own_rating">Din vurdering</string>
+    <string name="cache_rating_of_new">%1$.1f af %2$d</string>
     <string name="cache_favorite">Favorit</string>
     <string name="cache_owner">Ejer</string>
     <string name="cache_hidden">Gemt</string>
@@ -999,6 +1033,7 @@
     <string name="context_share_as_text">Del tekst</string>
     <string name="context_share_as_link">Del link</string>
     <string name="create_internal_cache">Opret brugerdefineret cache</string>
+    <string name="create_internal_cache_short">Ny cache</string>
     <string name="internal_cache_default_name">Brugerdefineret cache #%1$d</string>
     <string name="internal_cache_default_description">Dette er en brugerdefineret cache</string>
     <string name="internal_cache_default_owner">Dig</string>
@@ -1013,6 +1048,7 @@
     <string name="cc_hint_minutes">minutter</string>
     <string name="cc_hint_seconds">sekunder</string>
     <string name="cc_hint_fraction">brøkdel</string>
+    <string name="lowercase">små bogstaver</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Søger efter filer\ni</string>
@@ -1190,6 +1226,7 @@
     <string name="user_menu_view_found">Fundne cacher</string>
     <string name="user_menu_open_browser">Åbn profil i browser</string>
     <string name="user_menu_send_message">Send besked</string>
+    <string name="user_menu_send_email">Send email</string>
     <string name="user_menu_open_contact">Åbn kontaktdetaljer</string>
     <string name="user_unknown">Ukendt brugerkonto</string>
     <!-- navigation -->
