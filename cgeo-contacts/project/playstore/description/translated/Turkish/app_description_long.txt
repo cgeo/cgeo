@@ -1,12 +1,12 @@
-This is a contacts plugin for c:geo, an open source geocaching app. It will only work with the c:geo app installed and allows direct access to your phonebook when clicking on a username in c:geo.
+Bu, açık kaynaklı bir geocaching uygulaması olan c:geo için bir rehber eklentisidir. Yalnızca c:geo uygulaması yüklüyken çalışır ve c:geo'da bir kullanıcı adına tıkladığınızda telefon defterinize doğrudan erişime izin verir.
 
 Kullanım:
-When you click on a username in c:geo (e.g. in the cache logbook) the menu will contain an item to open the corresponding contact card in your phone contacts. This will allow you to directly call or message the user.
+c:geo'da bir kullanıcı adına tıkladığınızda (ör. önbellek kayıt defterinde) menü, telefon rehberinizdeki ilgili kişi kartını açmak için bir öğe içerecektir. Bu, kullanıcıyı doğrudan aramanıza veya mesaj göndermenize olanak tanır.
 
 Açıklama:
-The username of the person needs to be stored in the name- or alias-field of your contacts in order for the plugin to match the geocaching username to the contact.
+Eklentinin kullanıcı adını kişiyle eşleştirmesi için kişinin kullanıcı adının kişilerinizin adı veya takma adı alanında saklanması gerekir.
 
-Comments in PlayStore can not be answered! If you have problems installing or using c:geo please first have a look at our FAQ: https://faq.cgeo.org
-If there are still problems, contact support via email.
+PlayStore'daki yorumlar cevaplanmayacak! c:geo kurulumunda veya kullanımında sorun yaşıyorsanız, lütfen öncelikle SSS bölümümüze bir göz atın: https://faq.cgeo.org
+Hala sorun varsa, e-posta yoluyla destek ile iletişime geçiniz.
 
-If you would like to know why this c:geo plugin needs the permissions requested, please check https://www.cgeo.org/faq.html#plugin-contacts-privacy for an explanation.
+Bu c:geo eklentisinin neden istenen izinlere ihtiyacı olduğunu öğrenmek istiyorsanız, lütfen bir açıklama için https://www.cgeo.org/faq.html#plugin-contacts-privacy adresini kontrol edin.

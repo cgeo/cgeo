@@ -448,7 +448,7 @@
     <string name="contribution_graphics">graphics</string>
     <string name="debug_user_error_report_title">Probleem melden</string>
     <string name="debug_user_error_errortext">Er is een onverwacht probleem opgetreden, gelieve deze aan ons te rapporteren:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Help ons c:geo problemen op te lossen door ze per e-mail te rapporteren met systeeminformatie en het c:geo logbestand. Meer contactopties vind je bij <i>over c:geo</i></p>]]></string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Help ons c:geo problemen op te lossen door ze per e-mail te rapporteren met systeeminformatie en het c:geo logbestand. Voeg alsjeblieft ook een gedetailleerde foutbeschrijving toe aan je e-mail. Andere contactopties zijn te vinden bij <i>over c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Instellingen openen?</string>
     <string name="settings_title_services">Diensten</string>
@@ -1766,6 +1766,8 @@
     <string name="switch_manual">Handmatig</string>
     <string name="switch_auto">Automatisch</string>
     <string name="switch_default">(standaard)</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nee</string>
     <!-- view settings -->
     <string name="view_settings">Instellingen bekijken</string>
     <string name="delete_setting">Instelling verwijderen</string>

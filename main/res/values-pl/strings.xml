@@ -218,6 +218,7 @@
     <string name="err_parse_lat_lon">c:geo nie może obliczyć szerokości lub długości geograficznej.</string>
     <string name="err_rendertheme_file_unreadable">Nie można załadować wybranego motywu. Przywracanie wbudowanego motywu.</string>
     <string name="err_rendertheme_invalid">Wybrany motyw nie jest prawidłowy dla tej wersji mapsforge. Przywracanie wbudowanego motywu.</string>
+    <string name="err_invalid_filename_char">Niedozwolony znak \'%c\'</string>
     <string name="warn_save_nothing">Nie ma nic do zapisania.</string>
     <string name="warn_no_cache_coord">Brak skrzynek ze współrzędnymi.</string>
     <string name="warn_no_coordinates">Brak współrzędnych.</string>
@@ -447,6 +448,9 @@
     <string name="contribution_documentation">dokumentacja</string>
     <string name="contribution_projectleader">lider projektu open source</string>
     <string name="contribution_graphics">grafika</string>
+    <string name="debug_user_error_report_title">Zgłoś problem</string>
+    <string name="debug_user_error_errortext">Wystąpił nieoczekiwany problem, prosimy o przesłanie zgłoszenia:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Pomóż nam naprawić problemy c:geo zgłaszając je pocztą elektroniczną z informacjami systemowymi i załączonym plikiem dziennika c:geo. Proszę podać również szczegółowy opis błędu w wiadomości e-mail. Inne opcje kontaktu można znaleźć na stronie <i>O c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otworzyć ustawienia?</string>
     <string name="settings_title_services">Usługi</string>
@@ -478,6 +482,7 @@
     <string name="settings_title_navigation">Nawigacja</string>
     <string name="settings_summary_navigation">Wybierz preferowane metody nawigacji i zewnętrzne aplikacje nawigacyjne.</string>
     <string name="settings_title_system">System</string>
+    <string name="settings_summary_system">Ustawienia specyficzne dla systemu i opcje debugowania.</string>
     <string name="settings_title_navigation_menu">Menu nawigacji</string>
     <string name="settings_category_browser">Przeglądarka</string>
     <string name="settings_category_geocaching_platform">Platforma Geocaching</string>
@@ -560,6 +565,10 @@
     <string name="init_summary_transparentBackground">Użyj przezroczystego tła (wymagany restart)</string>
     <string name="init_address">Pokaż adres</string>
     <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
+    <string name="init_select_language">Wybierz język</string>
+    <string name="init_summary_select_language">Wybierz język aplikacji (wymaga ponownego uruchomienia)\n</string>
+    <string name="init_use_default_language">Użyj domyślnego języka</string>
+    <string name="init_category_exclude">Wyklucz skrytki</string>
     <string name="init_exclude">Wyklucz własne lub już znalezione skrzynki</string>
     <string name="init_summary_exclude">Wyklucz własne lub już znalezione skrzynki</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacji na mapie</string>
@@ -571,12 +580,16 @@
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
+    <string name="init_bigSmileysOnMap">Duże ikony dla zalogowanych skrzynek</string>
+    <string name="init_summary_bigSmileysOnMap">Jeśli włączone, duże ikony będą wyświetlane dla zalogowanych skrzynek zamiast ikon typu skrzynki (wymaga ponownego uruchomienia).</string>
     <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_archived">Wyklucz zarchiwizowane</string>
     <string name="init_summary_archived">Wyklucz zarchiwizowane skrzynki</string>
     <string name="init_global_wp_extraction_disable">Wyłącz ekstrakcję punktu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacyjnych z osobistych notatek w skrytce. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki</string>
+    <string name="init_customtabs_as_browser">Użyj widoku internetowego Chrome</string>
+    <string name="init_summary_customtabs_as_browser">Witryny zewnętrzne będą wyświetlane bez opuszczania c:geo (możliwe tylko, jeśli jest zainstalowany Chrome)</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
@@ -600,6 +613,7 @@
     <string name="init_backup">Kopia skrzynek i punktów nawigacyjnych</string>
     <string name="init_backup_backup">Wykonaj kopię zapasową</string>
     <string name="init_backup_finished">Utworzono kopię zapasową</string>
+    <string name="init_backup_backup_failed">Tworzenie kopii zapasowej nie powiodło się</string>
     <string name="init_backup_now">Utwórz kopię zapasową</string>
     <string name="init_backup_running">Tworzę kopię zapasową bazy skrzynek…</string>
     <string name="init_backup_restore">Przywróć</string>
@@ -618,6 +632,7 @@
     <string name="init_backup_unnecessary">Baza danych jest pusta, tworzenie kopii zapasowej nie jest potrzebne.</string>
     <string name="init_backup_folder_exists_error">Nie można utworzyć nowego katalogu kopii zapasowej. Czy wykonałeś już kopię zapasową w ciągu ostatniej minuty?</string>
     <string name="init_backup_no_backup_available">Plik kopii zapasowej nie jest dostępny.</string>
+    <string name="backup_confirm_overwrite">Spowoduje to usunięcie najstarszego istniejącego katalogu kopii zapasowej z %s. \nCzy chcesz kontynuować?</string>
     <string name="restore_confirm_overwrite_database">UWAGA: To nadpisze %s na twoim urządzeniu!</string>
     <string name="restore_confirm_overwrite_database_and_settings">OSTRZEŻENIE: To nadpisze %s i twoje bieżące ustawienia na Twoim urządzeniu!</string>
     <string name="restore_confirm_overwrite_settings">OSTRZEŻENIE: To nadpisze aktualne ustawienia na twoim urządzeniu!</string>
@@ -637,6 +652,7 @@
     <string name="init_backup_settings_backup_full_confirm">Czy na pewno chcesz zachować wrażliwe dane dotyczące konta? Takie dane mogą być odczytane przez inne aplikacje.</string>
     <string name="settings_savingerror">Błąd podczas zapisywania ustawień</string>
     <string name="settings_saved">Ustawienia zapisano w:</string>
+    <string name="backup_saved">Pomyślnie zapisano kopię zapasową w:</string>
     <string name="init_backup_settings_restore">Przywróć ustawienia</string>
     <string name="settings_readingerror">Błąd odczytu ustawień</string>
     <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
@@ -774,6 +790,7 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
     <string name="map_source_attribution_dialog_title">Przypisania mapy</string>
+    <string name="map_source_attribution_legacy_text">Dotknij, aby wyświetlić autorów mapy</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
     <string name="init_sendToCgeo_name">Nazwa urządzenia</string>
@@ -955,6 +972,7 @@
     <string name="cache_menu_map_ext">Inne aplikacje zewnętrzne</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otwórz w przeglądarce</string>
+    <string name="cache_menu_open_with">Otwórz za pomocą…</string>
     <string name="cache_menu_visit">Wpisz wizytę</string>
     <string name="cache_log_too_long">c:geo nie mógł przesłać twojego logu, jest zbyt długi. Ale dziękujemy za próbę zapisu tak rozległego logu ;-)</string>
     <string name="cache_menu_visit_offline">Szybki log offline</string>
@@ -1012,6 +1030,7 @@
     <string name="cache_terrain">Teren</string>
     <string name="cache_rating">Ocena</string>
     <string name="cache_own_rating">Własna ocena</string>
+    <string name="cache_rating_of_new">%1$.1f z %2$d</string>
     <string name="cache_favorite">Ulubiona</string>
     <string name="cache_owner">Właściciel</string>
     <string name="cache_hidden">Ukryta</string>
@@ -1159,6 +1178,13 @@
     <string name="map_rotation">Obrót mapy</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
     <string name="map_show_circles">Pokaż okręgi</string>
+    <string name="map_showc_ownfound">Pokaż własne/znalezione skrzynki</string>
+    <string name="map_showc_disabled">Pokaż wyłączone skrzynki</string>
+    <string name="map_showc_archived">Pokaż zarchiwizowane skrzynki</string>
+    <string name="map_showwp_original">Pokaż oryginalne punkty nawigacji</string>
+    <string name="map_showwp_parking">Pokaż parkingi z punktów nawigacji</string>
+    <string name="map_showwp_visited">Ukryj odwiedzone punkty nawigacji</string>
+    <string name="map_show_track">Pokaż ścieżkę/trasę GPX</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
     <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>
@@ -1173,6 +1199,8 @@
     <string name="map_routing">Nawigacja</string>
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczną rotację mapy?\n\nMożesz włączyć ją ponownie za pomocą menu rotacji mapy</string>
+    <string name="quick_settings">Szybkie ustawienia</string>
+    <string name="map_show_in_map">Pokaż na mapie</string>
     <!-- search -->
     <string name="search_bar_hint">Szukaj skrzynek</string>
     <string name="search_bar_desc">Skrzynki (GC-kod, słowo kluczowe), przedmioty podróżne (TB-kod)</string>
@@ -1185,8 +1213,10 @@
     <string name="search_kw">Słowa kluczowe</string>
     <string name="search_kw_prefill">Słowo kluczowe</string>
     <string name="search_kw_button">Szukaj wg słowa kluczowego</string>
+    <string name="search_fbu">Znalezione przez</string>
     <string name="search_fbu_prefill">Nazwa użytkownika</string>
     <string name="search_fbu_button">Szukaj według nazwy użytkownika</string>
+    <string name="search_hbu">Ukryte przez</string>
     <string name="search_hbu_prefill">Właściciel</string>
     <string name="search_hbu_button">Szukaj według właściciela</string>
     <string name="search_tb">Przedmioty podróżne</string>
@@ -1246,7 +1276,9 @@
     <string name="navigation">Nawigacja</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Tylko GPS</string>
+    <string name="use_compass">Wszystkie czujniki użyte</string>
     <string name="destination_select">Wybierz cel</string>
+    <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
     <string name="osmand_marker_cgeo">Marker z c:geo</string>
     <string name="device_heading_label">Urządzenie:</string>
     <string name="device_orientation">Orientacja</string>
@@ -1309,6 +1341,7 @@
     <string name="export_modifiedcoords_success">Eksportowanie zakończone</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Eksportowanie zakończone: %1$d nieudane / %2$d ok</string>
     <string name="export_modifiedcoords_error">Eksportowanie nie powiodło się</string>
+    <string name="filename_without_extension">Nazwa pliku (bez rozszerzenia)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Psy dozwolone</string>
     <string name="attribute_dogs_no">Psy niedozwolone</string>
@@ -1735,6 +1768,10 @@
     <string name="map_export_individual_route">Eksportuj indywidualną trasę</string>
     <string name="map_load_individual_route">Załaduj indywidualną trasę</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
+    <string name="map_autotarget_individual_route">Automatycznie ustaw jako cel</string>
+    <string name="map_disable_autotarget_individual_route">Wyłączono \"Automatycznie ustaw jako cel\"</string>
+    <string name="map_clear_manual_targets">Wyczyść ręczne cele</string>
+    <string name="map_manual_targets_cleared">Ręczne cele wyczyszczone</string>
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
     <string name="map_clear_individual_route_confirm">Czy chcesz usunąć wszystkie skrzynki/punkty trasy z Twojej drogi?</string>
     <string name="map_individual_route_cleared">Indywidualna trasa wyczyszczona</string>
@@ -1784,6 +1821,12 @@
     <string name="edit_setting_error_invalid_data">Wprowadzono nieprawidłowe dane \"%s\". Wartość ustawienia nie uległa zmianie.</string>
     <string name="activate_editmode_title">Aktywuj tryb edycji</string>
     <string name="activate_editmode_warning">Wkraczasz tutaj niebezpieczny obszar!\n\nZmiana ustawień może spowodować pomylenie c:geo lub zapobieżenie dalszemu uruchomieniu programu, więc bądź ostrożny!\n\nCzy na pewno chcesz kontynuować na własne ryzyko?</string>
+    <string name="add_setting">Dodaj ustawienie</string>
+    <string name="add_setting_preference_name">Nazwa preferencji</string>
+    <string name="add_setting_preference_type">Typ preferencji</string>
+    <string name="add_setting_missing_name">Musisz wybrać nazwę preferencji</string>
+    <string name="add_setting_missing_type">Musisz wybrać typ preferencji</string>
+    <string name="add_setting_already_exists">Preferencje o takiej nazwie już istnieją</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geo Lokalny Obsługa plików</string>
     <string name="localfile_title">Otwórz plik lokalny</string>
@@ -1807,6 +1850,10 @@
     <string name="downloadmanager_not_available">Nie można pobrać pliku mapy, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
     <string name="downloadmap_target_not_writable">Cel \"%s\" nie jest możliwy do zapisania - pobrany plik mapy zostanie zapisany w systemowym katalogu pobranych i musi być przeniesiony ręcznie do katalogu z mapami.</string>
+    <string name="downloadmap_allow_metered_network">Zezwalaj na pobieranie przez dowolną sieć (np. połączenie komórkowe)</string>
+    <string name="downloadmap_confirmation">Pobrać mapę \"%1$s\"?\n\nMoże to zająć trochę czasu oraz wiązać się ze znacznymi kosztami, w zależności od Twojego połączenia sieciowego.\n\nInformacje o rozmiarze: %2$s</string>
+    <string name="downloadmap_handling">Pobieranie będzie obsługiwane w tle przez systemowego menedżera pobierania. Powiadomienie powinno pojawić się zaraz po rozpoczęciu pobieranie (co może chwilę potrwać).</string>
+    <string name="button_continue">Kontynuuj</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
     <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>

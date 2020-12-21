@@ -219,6 +219,7 @@
     <string name="err_parse_lat_lon">El c:geo no pot calcular la latitud o la longitud.</string>
     <string name="err_rendertheme_file_unreadable">No s\'ha pogut carregar el tema de la representació seleccionada. S\'utilitzarà el predefinit.</string>
     <string name="err_rendertheme_invalid">El tema de representació seleccionat no és vàlid per aquesta versió de mapsforge. S\'utilitzarà el predefinit.</string>
+    <string name="err_invalid_filename_char">No es permet el caràcter \'%c\'</string>
     <string name="warn_save_nothing">No hi ha res per desar.</string>
     <string name="warn_no_cache_coord">No hi ha cap catxé amb les coordenades.</string>
     <string name="warn_no_coordinates">No s\'han indicat les coordenades.</string>
@@ -446,6 +447,9 @@
     <string name="contribution_documentation">Documentació</string>
     <string name="contribution_projectleader">Projecte de codi obert</string>
     <string name="contribution_graphics">Gràfics</string>
+    <string name="debug_user_error_report_title">Informar d\'un problema</string>
+    <string name="debug_user_error_errortext">S\'ha produït un problema inesperat que us sol·licitaríem que ens comuniqueu:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Ajudeu-nos a solucionar problemes de c: geo , Aviseu per correu electrònic amb la informació del sistema i el fitxer de registre c: geo. Incloeu al vostre correu també una descripció detallada de l’error Es poden trobar altres opcions de contacte a <i>Quant a c: geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Obrir la configuració?</string>
     <string name="settings_title_services">Serveis</string>
@@ -477,6 +481,7 @@
     <string name="settings_title_navigation">Navegació</string>
     <string name="settings_summary_navigation">Tria un mètode com preferit de navegació i selecciona la aplicació de navegació externa.</string>
     <string name="settings_title_system">Sistema</string>
+    <string name="settings_summary_system">Configuració i opcions de depuració específiques del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegació</string>
     <string name="settings_category_browser">Navegador</string>
     <string name="settings_category_geocaching_platform">Plataformes de Geocatxing</string>
@@ -559,6 +564,10 @@
     <string name="init_summary_transparentBackground">Utilitzeu un fons transparent (cal reiniciar)</string>
     <string name="init_address">Mostra l\'adreça</string>
     <string name="init_summary_address">Mostra l\'adreça en lloc de les coordenades a la pantalla principal</string>
+    <string name="init_select_language">Seleccionar idioma</string>
+    <string name="init_summary_select_language">Seleccioneu l\'idioma de l\'aplicació (requereix un reinici)\n</string>
+    <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
+    <string name="init_category_exclude">Exclou catxés</string>
     <string name="init_exclude">Exclou els propis i els trobats</string>
     <string name="init_summary_exclude">Exclou els teus propis catxés o els que ja has trobat</string>
     <string name="init_showwaypoints">Mostra les fites</string>
@@ -570,12 +579,16 @@
     <string name="init_brouterShowBothDistances">Mostra la distància en línia recta</string>
     <string name="brouter_recalculating">S\'està recalculant la ruta en segon pla…</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
+    <string name="init_bigSmileysOnMap">Icones grans per catxes registrats</string>
+    <string name="init_summary_bigSmileysOnMap">Si està activat, es mostraran emoticones grans al mapa pels catxés registrats en lloc de la icona del tipus de catxe (cal reiniciar-lo).</string>
     <string name="init_disabled">Exclou els desactivats</string>
     <string name="init_summary_disabled">Exclou els catxés desactivats</string>
     <string name="init_archived">Exclou arxivats</string>
     <string name="init_summary_archived">Exclou els catxés desactivats</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
+    <string name="init_customtabs_as_browser">Utilitzeu Chrome</string>
+    <string name="init_summary_customtabs_as_browser">Els llocs web externs es mostraran sense deixar c: geo (només és possible si hi ha instal·lat Chrome)</string>
     <string name="init_save_log_img">Desa les imatges</string>
     <string name="init_summary_save_log_img">Desa les imatges dels registres</string>
     <string name="init_units">Utilitza les unitats imperials (milles/peus)</string>
@@ -599,6 +612,7 @@
     <string name="init_backup">Cópia  seguretat Catxés / Punts de ruta</string>
     <string name="init_backup_backup">Còpia de seguretat</string>
     <string name="init_backup_finished">Còpia de seguretat finalitzada</string>
+    <string name="init_backup_backup_failed">Ha fallat la còpia de seguretat</string>
     <string name="init_backup_now">Inicieu la còpia de seguretat</string>
     <string name="init_backup_running">S\'està creant una còpia de seguretat de la base de dades dels catxés…</string>
     <string name="init_backup_restore">Restaura</string>
@@ -617,6 +631,7 @@
     <string name="init_backup_unnecessary">La base de dades està buida, no cal fer una còpia de seguretat.</string>
     <string name="init_backup_folder_exists_error">No s\'ha pogut crear un nou directori de còpia de seguretat . Heu fet una còpia de seguretat en l\'últim minut?</string>
     <string name="init_backup_no_backup_available">No hi ha cap còpia de seguretat disponible.</string>
+    <string name="backup_confirm_overwrite">Això suprimirà el directori de còpia de seguretat existent més antic de %s. \nVoleu continuar?</string>
     <string name="restore_confirm_overwrite_database">AVÍS: Això sobreescriurà %s al vostre dispositiu.</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVÍS: Això sobreescriurà %si la configuració actual al dispositiu.</string>
     <string name="restore_confirm_overwrite_settings">AVÍS: Això sobreescriurà la configuració actual al dispositiu.</string>
@@ -636,6 +651,7 @@
     <string name="init_backup_settings_backup_full_confirm">Voleu emmagatzemar dades relacionades amb el compte? Es poden llegir per altres aplicacions.</string>
     <string name="settings_savingerror">Error en desar la configuració</string>
     <string name="settings_saved">Configuració desada correctament a:</string>
+    <string name="backup_saved">La còpia de seguretat s\'ha desat correctament a:</string>
     <string name="init_backup_settings_restore">Restablir la configuració</string>
     <string name="settings_readingerror">S\'ha produït un error en llegir la configuració</string>
     <string name="settings_restart">c:geo s\'ha de reiniciar  per fer efectiva la nova configuració</string>
@@ -773,6 +789,7 @@
     <string name="map_source_osm_offline">Fora de línia</string>
     <string name="map_source_osm_offline_combined">Combinat (Fora de línia)</string>
     <string name="map_source_attribution_dialog_title">Atribucions del mapa</string>
+    <string name="map_source_attribution_legacy_text">Toqueu per atribuir el mapa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
     <string name="init_sendToCgeo_name">El nom del teu dispositiu</string>
@@ -940,6 +957,7 @@
     <string name="cache_menu_map_ext">Altres aplicacions externes</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Obre al navegador</string>
+    <string name="cache_menu_open_with">Obre amb…</string>
     <string name="cache_menu_visit">Registra visita</string>
     <string name="cache_log_too_long">c: geo no ha pogut enviar el registre perquè és massa llarg. Però gràcies per intentar escriure un registre tan extens ;-)</string>
     <string name="cache_menu_visit_offline">Registre ràpid fora de línia</string>
@@ -997,6 +1015,7 @@
     <string name="cache_terrain">Terreny</string>
     <string name="cache_rating">Puntuació</string>
     <string name="cache_own_rating">La vostra valoració</string>
+    <string name="cache_rating_of_new">%1$.1f de %2$d</string>
     <string name="cache_favorite">Preferit</string>
     <string name="cache_owner">Propietari</string>
     <string name="cache_hidden">Amagat</string>
@@ -1142,6 +1161,13 @@
     <string name="map_rotation">Mapa rotatori</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
     <string name="map_show_circles">Mostra els cercles</string>
+    <string name="map_showc_ownfound">Mostra catxes pròpies / trobades</string>
+    <string name="map_showc_disabled">Mostra catxes desactivats</string>
+    <string name="map_showc_archived">Mostra catxes arxivats</string>
+    <string name="map_showwp_original">Mostra punt ruta originals</string>
+    <string name="map_showwp_parking">Mostra punts ruta parking</string>
+    <string name="map_showwp_visited">Mostra punts ruta visitats</string>
+    <string name="map_show_track">Mostra GPX track/ruta</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
     <string name="init_summary_hidewp_original">Amaga els punts de ruta originals del mapa</string>
     <string name="init_summary_hidewp_parking">Amaga els punts d\'aparcament al mapa</string>
@@ -1156,6 +1182,8 @@
     <string name="map_routing">Encaminant</string>
     <string name="map_gm_autorotation">Mapa autorotatori</string>
     <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
+    <string name="quick_settings">Configuració ràpida</string>
+    <string name="map_show_in_map">Mostra al mapa</string>
     <!-- search -->
     <string name="search_bar_hint">Cerca de catxés</string>
     <string name="search_bar_desc">Catxés (codi del catxé, paraula clau), Traçables (codi TB)</string>
@@ -1168,8 +1196,10 @@
     <string name="search_kw">Paraules clau</string>
     <string name="search_kw_prefill">Paraula clau</string>
     <string name="search_kw_button">Cerca per paraula clau</string>
+    <string name="search_fbu">Trobat per</string>
     <string name="search_fbu_prefill">Nom d\'usuari</string>
     <string name="search_fbu_button">Cerca per nom d\'usuari</string>
+    <string name="search_hbu">Amagat per</string>
     <string name="search_hbu_prefill">Propietari</string>
     <string name="search_hbu_button">Cerca pel nom del propietari</string>
     <string name="search_tb">Traçable</string>
@@ -1229,7 +1259,9 @@
     <string name="navigation">Navegació</string>
     <string name="compass_title">Brúixola</string>
     <string name="use_gps">Utilitzar només el GPS</string>
+    <string name="use_compass">Tots els sensors utilitzats</string>
     <string name="destination_select">Tria destinació</string>
+    <string name="navigation_direct_navigation">Navegació directa</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
     <string name="device_heading_label">Dispositiu:</string>
     <string name="device_orientation">Orientació</string>
@@ -1290,6 +1322,7 @@
     <string name="export_modifiedcoords_success">S\'ha pujat amb èxit</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Pujada finalitzada: %1$d error / %2$d ok</string>
     <string name="export_modifiedcoords_error">Ha fallat la pujada</string>
+    <string name="filename_without_extension">Nom del fitxer (sense extensió)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Els gossos hi són admesos</string>
     <string name="attribute_dogs_no">No s\'admeten els gossos</string>
@@ -1695,6 +1728,10 @@
     <string name="map_export_individual_route">Exporta una ruta individual</string>
     <string name="map_load_individual_route">Carrega la ruta individual</string>
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
+    <string name="map_autotarget_individual_route">Estableix com a objectiu automàticament</string>
+    <string name="map_disable_autotarget_individual_route">Desactivat \"Estableix com a objectiu automàticament\"</string>
+    <string name="map_clear_manual_targets">Esborrar objectius manuals</string>
+    <string name="map_manual_targets_cleared">Objectius manuals esborrats</string>
     <string name="map_clear_individual_route">Esborra la ruta individual</string>
     <string name="map_clear_individual_route_confirm">Voleu eliminar tots els catxés / waypoints de la vostra ruta individual?</string>
     <string name="map_individual_route_cleared">Ruta individual esborrada</string>
@@ -1735,6 +1772,12 @@
     <string name="edit_setting_error_invalid_data">S\'han introduït les dades \"%s\" no vàlides. El valor de la configuració no s\'ha canviat.</string>
     <string name="activate_editmode_title">Activeu el mode d\'edició</string>
     <string name="activate_editmode_warning">Esteu entrant en una zona perillosa aquí!\n\nCanviar directament els paràmetres pot confondre c: geo o evitar que s’iniciïn més programes, així que aneu amb compte.\n\nEstà segur que vol continuar pel seu propi risc?</string>
+    <string name="add_setting">Afegeix una configuració</string>
+    <string name="add_setting_preference_name">Nom de preferència</string>
+    <string name="add_setting_preference_type">Tipus de preferència</string>
+    <string name="add_setting_missing_name">Heu de seleccionar un nom de preferència</string>
+    <string name="add_setting_missing_type">Heu de seleccionar un tipus de preferència</string>
+    <string name="add_setting_already_exists">Ja existeix una preferència amb aquest nom</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">gestor de fitxers local c:geo</string>
     <string name="localfile_title">Obrir un fitxer local</string>
@@ -1758,6 +1801,10 @@
     <string name="downloadmanager_not_available">El fitxer del mapa no es pot descarregar, el gestor de descàrregues del sistema no està disponible</string>
     <string name="download_started">La descàrrega s\'ha iniciat en segon pla</string>
     <string name="downloadmap_target_not_writable">L\'objectiu \"%s\" no es pot escriure: el fitxer de mapa descarregat s\'emmagatzemarà al directori de descàrrega del sistema i s\'ha de moure manualment al directori del mapa.</string>
+    <string name="downloadmap_allow_metered_network">Permet la baixada per xarxa (per exemple: connexió mòbil)</string>
+    <string name="downloadmap_confirmation">Voleu baixar el mapa \"%1$s\"?\n\nAixò pot trigar força temps i pot comportar costos importants, segons la vostra connexió de xarxa.\n\nInformació sobre la mida: %2$s</string>
+    <string name="downloadmap_handling">El gestor de descàrregues del vostre sistema gestionarà la descàrrega en segon pla. Hauríeu de veure una notificació tan aviat com hagi començat la baixada (pot trigar una estona).</string>
+    <string name="button_continue">Continua</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
     <string name="map_trailhistory_cleared">S\'ha esborrat el traçat</string>
