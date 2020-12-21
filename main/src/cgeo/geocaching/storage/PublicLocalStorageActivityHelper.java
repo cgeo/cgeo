@@ -1,14 +1,19 @@
 package cgeo.geocaching.storage;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 
+import androidx.annotation.StringRes;
+import androidx.core.text.HtmlCompat;
 import androidx.core.util.Consumer;
 
 /**
@@ -46,7 +51,12 @@ public class PublicLocalStorageActivityHelper {
      * Call this method in {@link Activity#onCreate(Bundle)} with all PublicLocalFolders this Activity MIGHT need to access.
      */
     public void checkAndGrantBaseFolderAccess() {
-        checkAndGrantFolderAccess(PublicLocalFolder.BASE_DIR, true, null);
+        checkAndGrantFolderAccess(
+            PublicLocalFolder.BASE_DIR,
+            true,
+            R.string.publiclocalstorage_grantaccess_dialog_msg_basedir_html,
+            //check after setting whether access is now granted. If not, repeat...
+            folder -> checkAndGrantBaseFolderAccess());
     }
 
     /**
@@ -55,41 +65,50 @@ public class PublicLocalStorageActivityHelper {
      * does call {@link #onActivityResult(int, int, Intent)}
      * @param folder folder to ask/grant access for
      * @param requestGrantIfNecessary if true and folder does NOT have necessary grants, then these grants are requested
+     * @param detailMessageHtml resourceid for a HTML message to display as explaining message to the user
      * @param callback if grants are requested, then this callback is called when request is granted
      * @return true if grant is already available, false otherwise
      */
-    private boolean checkAndGrantFolderAccess(final PublicLocalFolder folder, final boolean requestGrantIfNecessary, final Consumer<PublicLocalFolder> callback) {
+    private boolean checkAndGrantFolderAccess(final PublicLocalFolder folder, final boolean requestGrantIfNecessary, @StringRes  final int detailMessageHtml, final Consumer<PublicLocalFolder> callback) {
 
         if (PublicLocalStorage.get().checkAvailability(folder)) {
             return true;
         }
         if (requestGrantIfNecessary) {
-            //TODO: internationalize
-            Dialogs.message(this.activity,
-                "Select and grant access to folder",
-                "Please select and grant read/write access to parent folder for subfolder '" + folder.getSubfolder() + "'",
-                activity.getString(android.R.string.ok),
-                (d, p) -> {
+            final AlertDialog dialog = Dialogs.newBuilder(activity)
+                .setTitle(R.string.publiclocalstorage_grantaccess_dialog_title)
+                .setMessage(HtmlCompat.fromHtml(activity.getString(detailMessageHtml), HtmlCompat.FROM_HTML_MODE_LEGACY))
+                .setPositiveButton(android.R.string.ok, (d, p) -> {
                     d.dismiss();
                     selectFolderUri(folder, callback);
-                });
+                })
+                .create();
+            dialog.show();
+            Dialogs.makeLinksClickable(dialog);
         }
         return false;
     }
 
     public void selectFolderUri(final PublicLocalFolder folder, final Consumer<PublicLocalFolder> callback) {
         //if this is not the base dir, user may choose to use default dir or user-selected dir
-        if (!PublicLocalFolder.BASE_DIR.equals(folder)) {
+        if (folder.canUseDefault()) {
             Dialogs.newBuilder(activity)
-                .setTitle("Default or user-defined?")
-                .setMessage("For " + folder + " with Uri " + folder.getUserDisplayableUri())
-                .setPositiveButton("User-Defined", (d, p) -> {
+                .setTitle(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_title)
+                .setMessage(activity.getString(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_msg, folder.getDefaultFolderUserDisplayableUri()))
+                .setPositiveButton(R.string.publiclocalstorage_userdefined, (d, p) -> {
                     d.dismiss();
                     selectUserFolderUri(folder, callback);
                 })
-                .setNegativeButton("Default", (d, p) -> {
+                .setNegativeButton(R.string.publiclocalstorage_default, (d, p) -> {
                     d.dismiss();
                     folder.setUri(null);
+                    if (callback != null) {
+                        callback.accept(folder);
+                    }
+                })
+                .setNeutralButton(android.R.string.cancel, (d, p) -> {
+                    d.dismiss();
+                    report(false, R.string.publiclocalstorage_folder_selection_aborted, folder.getUserDisplayableName());
                     if (callback != null) {
                         callback.accept(folder);
                     }
@@ -107,7 +126,7 @@ public class PublicLocalStorageActivityHelper {
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | (folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         Log.i("Start uri dir: " + folder.getBaseUri());
-        final Uri startUri = folder.getBaseUri();
+        final Uri startUri = folder.getUri();
         if (startUri != null) {
             // Note: on SDK21, setting DocumentsContract.EXTRA_INITIAL_URI to either null
             // OR Uri.fromFile(LocalStorage.getExternalPublicCgeoDirectory()) leads to doc dialog not working in emulator
@@ -117,7 +136,7 @@ public class PublicLocalStorageActivityHelper {
 
         runningIntentData = new IntentData(folder, callback);
 
-        ((Activity) this.activity).startActivityForResult(intent, REQUEST_CODE_GRANT_FOLDER_URI_ACCESS);
+        this.activity.startActivityForResult(intent, REQUEST_CODE_GRANT_FOLDER_URI_ACCESS);
     }
 
     public void selectFile(final String type, final Uri startUri, final Consumer<Uri> callback) {
@@ -142,30 +161,38 @@ public class PublicLocalStorageActivityHelper {
         if (requestCode != REQUEST_CODE_GRANT_FOLDER_URI_ACCESS && requestCode != REQUEST_CODE_SELECT_FILE) {
             return false;
         }
-        if (resultCode != Activity.RESULT_OK || intent == null || runningIntentData == null) {
+        if (runningIntentData == null) {
+            report(true, R.string.publiclocalstorage_folder_selection_aborted, "unknown");
             return true;
         }
 
+        final boolean resultOk = resultCode == Activity.RESULT_OK && intent != null;
+
         switch (requestCode) {
             case REQUEST_CODE_GRANT_FOLDER_URI_ACCESS:
-                final Uri uri = intent.getData();
-                if (uri != null) {
+                final Uri uri = !resultOk || intent == null ? null : intent.getData();
+                if (uri == null) {
+                    report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.getUserDisplayableName());
+                } else {
                     final int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | (runningIntentData.folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
                     activity.getContentResolver().takePersistableUriPermission(uri, flags);
                     Log.e("permissions: " + uri.getPath());
                     runningIntentData.folder.setUri(uri);
-                    if (runningIntentData.callback != null) {
-                        ((Consumer<PublicLocalFolder>) runningIntentData.callback).accept(runningIntentData.folder);
-                    }
+                    report(false, R.string.publiclocalstorage_folder_selection_success, runningIntentData.folder.getUserDisplayableName());
+                }
+                if (runningIntentData.callback != null) {
+                    ((Consumer<PublicLocalFolder>) runningIntentData.callback).accept(runningIntentData.folder);
                 }
                 break;
             case REQUEST_CODE_SELECT_FILE:
-                final Uri fileuri = intent.getData();
-                if (fileuri != null) {
-                    Log.e("File: " + fileuri.getPath());
-                    if (runningIntentData.callback != null) {
-                        ((Consumer<Uri>) runningIntentData.callback).accept(fileuri);
-                    }
+                final Uri fileuri = !resultOk || intent == null ? null : intent.getData();
+                if (fileuri == null) {
+                    report(true, R.string.publiclocalstorage_file_selection_aborted);
+                } else {
+                    report(true, R.string.publiclocalstorage_file_selection_success, fileuri);
+                }
+                if (runningIntentData.callback != null) {
+                    ((Consumer<Uri>) runningIntentData.callback).accept(fileuri);
                 }
                 break;
             default: //for codacy
@@ -174,6 +201,16 @@ public class PublicLocalStorageActivityHelper {
 
         runningIntentData = null;
         return true;
+    }
+
+    private void report(final boolean isWarning, @StringRes final int messageId, final Object ... params) {
+        final String message = activity.getString(messageId, params);
+        if (isWarning) {
+            Log.w("PublicLocalStorageActivityHelper: " + message);
+        } else {
+            Log.i("PublicLocalStorageActivityHelper: " + message);
+        }
+        ActivityMixin.showToast(activity, message);
     }
 
 }

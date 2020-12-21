@@ -62,8 +62,10 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -191,9 +193,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         bindGeocachingUserToGCVoteuser();
 
         //PublicFolder initialization
-        for (PublicLocalFolder folder : new PublicLocalFolder[] { PublicLocalFolder.OFFLINE_MAPS }) {
-            initPublicFolder(folder);
-        }
+        initPublicFolders(new PublicLocalFolder[] { PublicLocalFolder.BASE_DIR, PublicLocalFolder.OFFLINE_MAPS });
+
     }
 
     private void initNavigationMenuPreferences() {
@@ -399,19 +400,33 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         defaultNavigationTool2.setEntryValues(values);
     }
 
-    private void initPublicFolder(final PublicLocalFolder folder) {
-        final Preference pref = getPreference(folder.getPrefKeyId());
-        if (pref == null) {
-            return;
+    private void initPublicFolders(final PublicLocalFolder[] folders) {
+
+        final Map<Integer, PublicLocalFolder> prefMap = new HashMap<>();
+        for (PublicLocalFolder folder : folders) {
+            final Preference pref = getPreference(folder.getPrefKeyId());
+            if (pref != null) {
+                prefMap.put(folder.getPrefKeyId(), folder);
+            }
         }
 
-        bindSummaryToValue(pref, folder.getUserDisplayableUri());
-        pref.setOnPreferenceClickListener(
-            preference -> {
-                publicLocalStorage.selectFolderUri(folder,
-                    plf -> preference.setSummary(plf.getUserDisplayableUri()));
-                return false;
-            });
+        for (Integer prefKeyId : prefMap.keySet()) {
+            final Preference pref = getPreference(prefKeyId);
+            final PublicLocalFolder folder = prefMap.get(prefKeyId);
+            bindSummaryToValue(pref, folder.getUserDisplayableName());
+            pref.setOnPreferenceClickListener(
+                preference -> {
+                    publicLocalStorage.selectFolderUri(folder,
+                        plf -> {
+                        for (Integer pkId : prefMap.keySet()) {
+                            final Preference p = getPreference(pkId);
+                            final PublicLocalFolder f = prefMap.get(pkId);
+                            p.setSummary(f.getUserDisplayableName());
+                        }
+                    });
+                    return false;
+                });
+        }
     }
 
     private void initDirChoosers() {

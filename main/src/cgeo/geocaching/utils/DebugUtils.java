@@ -116,7 +116,7 @@ public class DebugUtils {
                 if (returnCode == 0) {
                     result.set(file.exists() ? LogcatResults.LOGCAT_OK.ordinal() : LogcatResults.LOGCAT_EMPTY.ordinal());
 
-                    PublicLocalStorage.get().writeTempFileToStorage(PublicLocalFolder.LOGFILES, null, file);
+                    PublicLocalStorage.get().writeTempFileToStorage(PublicLocalFolder.LOGFILES, FileNameCreator.LOGFILE, file);
                 }
 
             } catch (IOException | InterruptedException e) {

@@ -1,89 +1,139 @@
 package cgeo.geocaching.storage;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.CalendarUtils;
 
+import android.content.Context;
 import android.net.Uri;
 
 import androidx.annotation.AnyRes;
-
-import java.util.concurrent.atomic.AtomicInteger;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class PublicLocalFolder {
 
+    public static final String EMPTY = "---";
+
     /** Base directory  */
-    public static final PublicLocalFolder BASE_DIR = new PublicLocalFolder(R.string.pref_publicfolder_basedir, null, "map", "map");
+    public static final PublicLocalFolder BASE_DIR = new PublicLocalFolder(R.string.pref_publicfolder_basedir, null, false);
 
     /** Offline Maps folder where cgeo looks for offline map files (also the one where c:geo downloads its own offline maps) */
-    public static final PublicLocalFolder OFFLINE_MAPS = new PublicLocalFolder(R.string.pref_publicfolder_offlinemaps, "maps", "map", "map");
+    public static final PublicLocalFolder OFFLINE_MAPS = new PublicLocalFolder(R.string.pref_publicfolder_offlinemaps, "maps");
     /** Offline Maps: optional folder for map themes (configured in settings) with user-supplied theme data */
-    public static final PublicLocalFolder OFFLINE_MAP_THEMES = new PublicLocalFolder(R.string.pref_publicfolder_offlinemapthemes, "maps", "map", "map");
-
+    public static final PublicLocalFolder OFFLINE_MAP_THEMES = new PublicLocalFolder(R.string.pref_publicfolder_offlinemapthemes, "themes");
     /** Target folder for written logfiles */
-    public static final PublicLocalFolder LOGFILES = new PublicLocalFolder(R.string.pref_publicfolder_logfiles, "logfiles", "logcat", "txt");
-
-    //public static final PublicLocalFolder BACKUP = new PublicLocalFolder("backup", "", "sqlite");
-    //public static final PublicLocalFolder GPX = new PublicLocalFolder("gpx", "gpx", "jpg", () -> MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-
-    private final AtomicInteger fileNameCounter = new AtomicInteger(1);
+    public static final PublicLocalFolder LOGFILES = new PublicLocalFolder(R.string.pref_publicfolder_logfiles, "logfiles");
 
     @AnyRes
     private final int prefKeyId;
     private final String defaultSubfolder;
-    private final String defaultFilePrefix;
-    private final String defaultFileSuffix;
     private final boolean needsWrite;
+    private final boolean canUseDefault;
 
     @AnyRes
     public int getPrefKeyId() {
         return prefKeyId;
     }
 
-    private PublicLocalFolder(@AnyRes final int prefKeyId, final String defaultSubfolder, final String defaultFilePrefix, final String defaultFileSuffix) {
+    private PublicLocalFolder(@AnyRes final int prefKeyId, final String defaultSubfolder) {
+        this(prefKeyId, defaultSubfolder, true);
+    }
+
+    private PublicLocalFolder(@AnyRes final int prefKeyId, final String defaultSubfolder, final boolean canUseDefault) {
         this.defaultSubfolder = defaultSubfolder;
-        this.defaultFilePrefix = defaultFilePrefix;
-        this.defaultFileSuffix = defaultFileSuffix;
         this.prefKeyId = prefKeyId;
-        this.needsWrite = true; //TODO
+        this.needsWrite = true;
+        this.canUseDefault = canUseDefault;
+    }
+
+    @Nullable
+    public Uri getUri() {
+        final Uri baseUri = getBaseUri();
+        if (baseUri != null && !isUserDefinedLocation()) {
+            return Uri.withAppendedPath(baseUri, getDefaultSubfolder());
+        }
+        return baseUri;
     }
 
     public Uri getBaseUri() {
-        final Uri uri = Settings.getPublicFolderUri(this);
-        return uri == null ? Settings.getPublicFolderUri(BASE_DIR) : uri;
+        if (isUserDefinedLocation()) {
+            return Settings.getPublicFolderUri(this);
+        }
+        return Settings.getPublicFolderUri(BASE_DIR);
     }
 
     public boolean isUserDefinedLocation() {
         return Settings.getPublicFolderUri(this) != null;
     }
 
-    public String getUserDisplayableUri() {
-        if (!isUserDefinedLocation()) {
-            return getBaseUri().toString() + "/" + getSubfolder();
+    public boolean canUseDefault() {
+        return canUseDefault;
+    }
+
+    @NonNull
+    public String getUserDisplayableName() {
+        String result = getUri() == null ? EMPTY : getUri().getPath();
+        if (!canUseDefault()) {
+            return result;
         }
-        return getBaseUri().toString();
+
+        result += " (";
+        if (CgeoApplication.getInstance() == null) {
+            //this codepath is only chosen if no translation is available (e.g. in local unit tests)
+            result += isUserDefinedLocation() ? "User-Defined" : "Default";
+        } else {
+            final Context ctx = CgeoApplication.getInstance().getApplicationContext();
+            result += isUserDefinedLocation() ? ctx.getString(R.string.publiclocalstorage_userdefined) : ctx.getString(R.string.publiclocalstorage_default);
+        }
+        result += ")";
+        return result;
+    }
+
+    @NonNull
+    public Uri getDefaultFolderUri() {
+        final Uri defaultBaseUri = Settings.getPublicFolderUri(BASE_DIR);
+        if (defaultBaseUri == null) {
+            return null;
+        }
+        return Uri.withAppendedPath(defaultBaseUri, getDefaultSubfolder());
+    }
+
+    @NonNull
+    public String getDefaultFolderUserDisplayableUri() {
+        final Uri defaultFolderUri = getDefaultFolderUri();
+        return defaultFolderUri == null ? EMPTY : defaultFolderUri.getPath();
     }
 
     public void setUri(final Uri uri) {
-        Settings.setPublicFolderUri(this, uri);
+        if (equalsUri(uri, getDefaultFolderUri())) {
+            //if user selected the default uri, then we set it to default
+            Settings.setPublicFolderUri(this, null);
+        } else {
+            Settings.setPublicFolderUri(this, uri);
+        }
     }
 
-    public String getSubfolder() {
-        return isUserDefinedLocation() ? null : defaultSubfolder;
+    public static boolean equalsUri(final Uri uri1, final Uri uri2) {
+        final boolean uri1IsNull = uri1 == null;
+        final boolean uri2IsNull = uri1 == null;
+        if (uri1IsNull && uri2IsNull) {
+            return true;
+        }
+        if (uri1IsNull || uri2IsNull) {
+            return false;
+        }
+
+        return uri1.toString().replaceAll("%2F", "/").equals(uri2.toString().replaceAll("%2F", "/"));
+    }
+
+    @Nullable
+    public String getDefaultSubfolder() {
+        return defaultSubfolder;
     }
 
     public boolean needsWrite() {
-        return needsWrite || getSubfolder() != null;  //if there's a subfolder, we need to create it and need write permission
-    }
-
-    public String createNewFilename() {
-        return defaultFilePrefix + "_" + CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm-ss") + "-" + (fileNameCounter.addAndGet(1))
-            + "." + defaultFileSuffix;
-    }
-
-    public String getDefaultMimeType() {
-        //TODO make configurable
-        return "text/plain";
+        return needsWrite;
     }
 
     @Override
@@ -96,8 +146,9 @@ public class PublicLocalFolder {
         return this.prefKeyId;
     }
 
+    @Override
     public String toString() {
-        return getUserDisplayableUri();
+        return getUserDisplayableName() + "[" + getUri() + "]";
     }
 
 }

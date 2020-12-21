@@ -7,6 +7,7 @@ import cgeo.geocaching.storage.PublicLocalFolder;
 import cgeo.geocaching.storage.PublicLocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
+import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import static cgeo.geocaching.utils.FileUtils.getFilenameFromPath;
@@ -76,7 +77,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
             }
         }
         if (filename == null) {
-            filename = PublicLocalFolder.OFFLINE_MAPS.createNewFilename();
+            filename = FileNameCreator.OFFLINE_MAPS.createName();
         }
         fileinfo = filename;
         if (fileinfo != null) {

@@ -1,8 +1,10 @@
 package cgeo.geocaching.storage;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -12,6 +14,8 @@ import android.net.Uri;
 import android.provider.DocumentsContract;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.documentfile.provider.DocumentFile;
 
 import java.io.File;
@@ -24,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
@@ -32,6 +37,9 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  *
  * Note that methods of this class do not ask user for access permissions. This is done using
  * {@link PublicLocalStorageActivityHelper} in conjunction with c:geos Ativities.
+ *
+ * Implementation reference(s):
+ * * helper methods: https://stackoverflow.com/questions/34927748/android-5-0-documentfile-from-tree-uri
  */
 public class PublicLocalStorage {
 
@@ -47,38 +55,60 @@ public class PublicLocalStorage {
         this.context = CgeoApplication.getInstance().getApplicationContext();
     }
 
+    /**
+     * Gets the Folder FIle; creates it if necessary and performs all possible error handlings
+     *
+     * This method is in many respects the core method of this class
+     *
+     * @param folder folder to get file for
+     * @return file folder, or null if creation/retrieving was not at all possible
+     */
+    @Nullable
     private DocumentFile getFolderFile(final PublicLocalFolder folder) {
 
         if (!checkUriPermissions(folder)) {
             //if this is a user-selected folder and base dir is ok we initiate a fallback to default folder
-            if (!folder.isUserDefinedLocation() || checkUriPermissions(PublicLocalFolder.BASE_DIR)) {
+            if (!folder.isUserDefinedLocation() || !checkUriPermissions(PublicLocalFolder.BASE_DIR)) {
                 return null;
             }
 
-            //TODO: internationalize!
-            toast("Switching dir " + folder + " from " + folder.getUserDisplayableUri() + " to default");
+            final String folderUserdefined = folder.getUserDisplayableName();
             folder.setUri(null);
+            final String folderDefault = folder.getUserDisplayableName();
             if (!checkUriPermissions(folder)) {
+                reportProblem(R.string.publiclocalstorage_err_folders_inaccessable_abort, folderUserdefined, folderDefault);
                 return null;
             }
+            reportProblem(R.string.publiclocalstorage_err_userdefinedfolder_inaccessable_usedefault, folderUserdefined, folderDefault);
         }
 
         final DocumentFile baseDir = DocumentFile.fromTreeUri(context, folder.getBaseUri());
         if (baseDir == null || !baseDir.isDirectory()) {
+            reportProblem(R.string.publiclocalstorage_err_folder_not_a_directory_abort, folder.getBaseUri());
             return null;
         }
-        if (folder.getSubfolder() == null) {
+       if (folder.isUserDefinedLocation() || folder.getDefaultSubfolder() == null) {
             return baseDir;
         }
+       String subfoldername = folder.getDefaultSubfolder();
+       if (StringUtils.isBlank(subfoldername)) {
+           subfoldername = "default";
+       }
         for (DocumentFile child : baseDir.listFiles()) {
-            if (folder.getSubfolder().equals(child.getName())) {
+            if (subfoldername.equals(child.getName())) {
                 if (!child.isDirectory()) {
-                    return null;
+                    reportProblem(R.string.publiclocalstorage_err_subfolder_not_a_directory_usebase, child.getName(), folder.getBaseUri());
+                    return baseDir;
                 }
                 return child;
             }
         }
-        return baseDir.createDirectory(folder.getSubfolder());
+        final DocumentFile newChild = baseDir.createDirectory(subfoldername);
+        if (newChild == null) {
+            reportProblem(R.string.publiclocalstorage_err_subfolder_not_a_directory_usebase, folder.getDefaultSubfolder(), folder.getBaseUri());
+            return baseDir;
+        }
+        return newChild;
     }
 
     private boolean checkUriPermissions(final PublicLocalFolder folder) {
@@ -120,11 +150,16 @@ public class PublicLocalStorage {
 
     /** Write something to external storage */
     public boolean writeTempFileToStorage(final PublicLocalFolder folder, final String name, final File tempFile) {
+        return writeTempFileToStorage(folder, FileNameCreator.forName(name), tempFile);
+    }
+
+    public boolean writeTempFileToStorage(final PublicLocalFolder folder, final FileNameCreator nameCreator, final File tempFile) {
+        final FileNameCreator creator = nameCreator == null ? FileNameCreator.DEFAULT : nameCreator;
         InputStream in = null;
         OutputStream out = null;
         try {
             in = new FileInputStream(tempFile);
-            out = openForWrite(create(folder, name));
+            out = openForWrite(create(folder, creator));
             IOUtils.copy(in, out);
         } catch (IOException ie) {
             Log.w("Problems writing file '" + tempFile + "' to '" + folder + "'", ie);
@@ -137,13 +172,18 @@ public class PublicLocalStorage {
 
     /** Creates a new storage location and returns its OutputStream. Remember to close it after usage! */
     public Uri create(final PublicLocalFolder folder, final String name) {
+        return create(folder, FileNameCreator.forName(name));
+    }
+
+    public Uri create(final PublicLocalFolder folder, final FileNameCreator nameCreator) {
+        final FileNameCreator creator = nameCreator == null ? FileNameCreator.DEFAULT : nameCreator;
         try {
             final DocumentFile folderFile = getFolderFile(folder);
             if (folderFile == null) {
                 return null;
             }
-            final String docName = name == null ? folder.createNewFilename() : name;
-            return DocumentsContract.createDocument(context.getContentResolver(), folderFile.getUri(), folder.getDefaultMimeType(), docName);
+            final String docName = creator.createName();
+            return DocumentsContract.createDocument(context.getContentResolver(), folderFile.getUri(), creator.getMimeType(), docName);
 
         } catch (IOException ioe) {
             Log.w("Problem creating new storage file in '" + folder + "'", ioe);
@@ -229,116 +269,15 @@ public class PublicLocalStorage {
         return df != null && df.exists() && df.canRead();
     }
 
-    private void toast(final String message) {
+    private void reportProblem(@StringRes final int messageId, final Object ... params) {
+        final String message = context.getString(messageId, params);
+        Log.w("PublicLocalStorage: " + message);
         ActivityMixin.showToast(context, message);
     }
 
     //some helper methods copied from stackoverflow: https://stackoverflow.com/questions/34927748/android-5-0-documentfile-from-tree-uri
     //might come in handy later
 
-//
-//        private static final String PRIMARY_VOLUME_NAME = "primary";
-//
-//        @Nullable
-//        public static String getFullPathFromTreeUri(@Nullable final Uri treeUri, Context con) {
-//            if (treeUri == null) return null;
-//            String volumePath = getVolumePath(getVolumeIdFromTreeUri(treeUri),con);
-//            if (volumePath == null) return File.separator;
-//            if (volumePath.endsWith(File.separator))
-//                volumePath = volumePath.substring(0, volumePath.length() - 1);
-//
-//            String documentPath = getDocumentPathFromTreeUri(treeUri);
-//            if (documentPath.endsWith(File.separator))
-//                documentPath = documentPath.substring(0, documentPath.length() - 1);
-//
-//            if (documentPath.length() > 0) {
-//                if (documentPath.startsWith(File.separator))
-//                    return volumePath + documentPath;
-//                else
-//                    return volumePath + File.separator + documentPath;
-//            }
-//            else return volumePath;
-//        }
-//
-//
-//        private static String getVolumePath(final String volumeId, Context context) {
-//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-//                return null;
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-//                return getVolumePathForAndroid11AndAbove(volumeId, context);
-//            else
-//                return getVolumePathBeforeAndroid11(volumeId, context);
-//        }
-//
-//
-//        private static String getVolumePathBeforeAndroid11(final String volumeId, Context context){
-//            try {
-//                StorageManager mStorageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
-//                Class<?> storageVolumeClazz = Class.forName("android.os.storage.StorageVolume");
-//                Method getVolumeList = mStorageManager.getClass().getMethod("getVolumeList");
-//                Method getUuid = storageVolumeClazz.getMethod("getUuid");
-//                Method getPath = storageVolumeClazz.getMethod("getPath");
-//                Method isPrimary = storageVolumeClazz.getMethod("isPrimary");
-//                Object result = getVolumeList.invoke(mStorageManager);
-//
-//                final int length = Array.getLength(result);
-//                for (int i = 0; i < length; i++) {
-//                    Object storageVolumeElement = Array.get(result, i);
-//                    String uuid = (String) getUuid.invoke(storageVolumeElement);
-//                    Boolean primary = (Boolean) isPrimary.invoke(storageVolumeElement);
-//
-//                    if (primary && PRIMARY_VOLUME_NAME.equals(volumeId))    // primary volume?
-//                        return (String) getPath.invoke(storageVolumeElement);
-//
-//                    if (uuid != null && uuid.equals(volumeId))    // other volumes?
-//                        return (String) getPath.invoke(storageVolumeElement);
-//                }
-//                // not found.
-//                return null;
-//            } catch (Exception ex) {
-//                return null;
-//            }
-//        }
-//
-//        @TargetApi(Build.VERSION_CODES.R)
-//        private static String getVolumePathForAndroid11AndAbove(final String volumeId, Context context) {
-//            try {
-//                StorageManager mStorageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
-//                List<StorageVolume> storageVolumes = mStorageManager.getStorageVolumes();
-//                for (StorageVolume storageVolume : storageVolumes) {
-//                    // primary volume?
-//                    if (storageVolume.isPrimary() && PRIMARY_VOLUME_NAME.equals(volumeId))
-//                        return storageVolume.getDirectory().getPath();
-//
-//                    // other volumes?
-//                    String uuid = storageVolume.getUuid();
-//                    if (uuid != null && uuid.equals(volumeId))
-//                        return storageVolume.getDirectory().getPath();
-//
-//                }
-//                // not found.
-//                return null;
-//            } catch (Exception ex) {
-//                return null;
-//            }
-//        }
-//
-//        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-//        private static String getVolumeIdFromTreeUri(final Uri treeUri) {
-//            final String docId = DocumentsContract.getTreeDocumentId(treeUri);
-//            final String[] split = docId.split(":");
-//            if (split.length > 0) return split[0];
-//            else return null;
-//        }
-//
-//
-//        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-//        private static String getDocumentPathFromTreeUri(final Uri treeUri) {
-//            final String docId = DocumentsContract.getTreeDocumentId(treeUri);
-//            final String[] split = docId.split(":");
-//            if ((split.length >= 2) && (split[1] != null)) return split[1];
-//            else return File.separator;
-//        }
 
 
 }

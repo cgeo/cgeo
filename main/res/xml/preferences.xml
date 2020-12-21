@@ -1048,6 +1048,13 @@
         android:title="@string/settings_title_system"
         android:summary="@string/settings_summary_system" >
 
+        <PreferenceCategory android:title="@string/init_local_file_syytem"
+            android:layout="@layout/preference_category" >
+            <Preference
+                android:key="@string/pref_publicfolder_basedir"
+                android:title="@string/init_base_directory_description" />
+        </PreferenceCategory>
+
         <PreferenceCategory android:title="@string/init_location"
             android:layout="@layout/preference_category"
             android:summary="@string/init_location_note">
