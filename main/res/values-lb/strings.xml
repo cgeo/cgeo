@@ -1,11 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
+    <string name="cache">Cache</string>
+    <string name="detail">Detailer</string>
+    <string name="search">Sichen</string>
+    <string name="helpers">Nëtzlech Apps</string>
+    <string name="about">Iwwert den c:geo</string>
+    <string name="latitude">Breitengrad</string>
+    <string name="longitude">Längengrad</string>
     <!-- actionbar -->
+    <string name="settings_titlebar">Astellungen vum c:geo</string>
     <!-- caches -->
+    <string name="all_types">All Zorten Cachen</string>
+    <string name="traditional">Traditionell Cachen</string>
+    <string name="multi">Multi-cache</string>
+    <string name="mystery">Mystery Cache</string>
+    <string name="letterbox">Bréifboîte Hybrid</string>
+    <string name="event">Event Cache</string>
+    <string name="mega">Mega-Event Cache</string>
+    <string name="giga">Giga-Event Cache</string>
+    <string name="earth">Äerd-Cache</string>
+    <string name="cito">Cache in Dreck out Event</string>
+    <string name="webcam">Webcam Cache</string>
+    <string name="virtual">Virtuellen Cache</string>
+    <string name="wherigo">Wherigo Cache</string>
+    <string name="communceleb">Gemeinschafts-Feier Event</string>
+    <string name="ape">Projet APE Cache</string>
+    <string name="gchq">Geocaching HQ</string>
+    <string name="gchqceleb">Geocaching HQ Feier</string>
+    <string name="gps">GPS Aventuren Presentatioun</string>
+    <string name="block">Geocaching HQ Block Party</string>
+    <string name="locationless">Ouni Veranstaltungs-Plaz (Hannerzeg) Cache</string>
+    <string name="userdefined">Benotzerdefinéierten Cache</string>
+    <string name="unknown">Onbekannten Typ</string>
     <!-- cache sizes -->
+    <string name="cache_size_micro">Micro</string>
+    <string name="cache_size_small">Kleng</string>
+    <string name="cache_size_regular">Normal</string>
+    <string name="cache_size_large">Grouss</string>
+    <string name="cache_size_other">Aneren</string>
+    <string name="cache_size_virtual">Virtuell</string>
+    <string name="cache_size_notchosen">Net ausgewielt</string>
+    <string name="cache_size_unknown">Onbekannt</string>
+    <string name="cache_size_nano">Nano</string>
+    <string name="cache_size_very_large">Ganz grouss</string>
     <!-- waypoints -->
+    <string name="wp_final">Endgülteg Positioun</string>
+    <string name="wp_stage">Etapp vun engem Multicache</string>
+    <string name="wp_puzzle">Fro fir ze beäntweren</string>
+    <string name="wp_pkg">Parkplaz</string>
+    <string name="wp_trailhead">Ufank vum Trail</string>
+    <string name="wp_waypoint">Referenzpunkt</string>
+    <string name="wp_original">Original Koordinaten</string>
     <!-- logs -->
+    <string name="log_found">Fonnt</string>
+    <string name="log_dnf">Net fonnt</string>
+    <string name="log_stars_35_description">Guer net schlecht</string>
+    <string name="log_stars_4_description">Besser als den Duerchschnëtt</string>
+    <string name="log_stars_45_description">Ganz gutt</string>
+    <string name="log_stars_5_description">Genial</string>
+    <string name="log_webcam">Webcam Foto geholl</string>
+    <string name="log_new_log">Log</string>
+    <string name="log_new_log_text">Text loggen</string>
+    <string name="log_announcement">Annonce</string>
+    <string name="log_today">Haut</string>
+    <string name="log_yesterday">Gëschter</string>
+    <string name="log_smilies">Smilieen</string>
+    <string name="log_image">Bild</string>
+    <string name="log_images">Biller</string>
+    <string name="log_image_attach">Bild unhänken</string>
+    <string name="log_image_stored">Bestoend</string>
+    <string name="log_image_camera">Nei</string>
+    <string name="log_image_delete">Läschen</string>
+    <string name="log_image_caption">Ënnertitel</string>
+    <string name="log_image_description">Beschreiwung</string>
+    <string name="log_image_scale">Scaléieren</string>
+    <string name="log_password_title">Log Passwuert:</string>
+    <string name="log_report_problem">Problem mellen:</string>
+    <string name="log_hint_log_password">Äert Log Passwuert aginn</string>
+    <string name="log_oc_team_comment">Kommentar vum OC Team</string>
+    <string name="log_your_saved_log">Äeren gespeicherten Log</string>
+    <string name="log_empty_logbook">D\'Logbuch vu dësem Cache ass eidel.</string>
+    <string name="log_problem_none">Kee Problem</string>
+    <string name="log_problem_needs_maintenance_text">Dëse Geocacher huet gemellt, datt et e Problem mat dësem Cache gëtt.</string>
+    <string name="log_problem_log_full_label">D\'Logbuch as voll</string>
+    <string name="log_problem_log_full_text">Dëse Geocacher huet gemellt, datt d\'Logbuch voll ass.</string>
+    <string name="log_problem_damaged_label">Behälter ass beschiedegt</string>
+    <string name="log_problem_damaged_text">Dëse Geocacher huet gemellt, datt d\'Behälter beschiedegt ass.</string>
+    <string name="log_problem_missing_label">De Cache kéint verschwonne sinn</string>
+    <string name="log_problem_missing_text">Dëse Geocacher huet gemellt, datt de Cache verschwonne kéint sinn.</string>
+    <string name="log_problem_other_text">Dëse Geocacher huet gemellt, datt et ee Problem mat dësem Cache gëtt.</string>
+    <string name="log_problem_archive_label">Cache misst archivéiert ginn</string>
+    <string name="log_problem_archive_text">Dëse Geocacher huet gemellt datt dëse Cache archivéiert misst ginn. Ee Reviewer gouf benoriichtegt.</string>
+    <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <!-- errors, warnings, info toasts -->
     <!-- location service -->
