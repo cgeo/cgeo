@@ -46,29 +46,29 @@
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, p=project leader, s=support, t=testing) -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
-    Bananeweizen||c|
     bekuno|https://github.com/bekuno|c|
     bmuzzin|https://github.com/bmuzzin|c|
     capoaira|https://github.com/capoaira|c|
+    cayacdev|https://github.com/cayacdev|c|
     eddiemuc|https://github.com/eddiemuc|c|
     fm-sys|https://github.com/fm-sys|cg|
     geocachermgo|https://github.com/geocachermgo|t|
-    jakedot||c|
-    jgoestl||c|
-    jonas-koeritz||c|
-    Lineflyer||tsd|
+    jakedot|https://github.com/jakedot|c|
+    jgoestl|https://github.com/jgoestl|c|
+    jonas-koeritz|https://github.com/jonas-koeritz|c|
+    Lineflyer|https://github.com/Lineflyer|tsd|
     Lomanic|https://github.com/Lomanic|c|
     MagpieFourtyTwo|https://github.com/MagpieFourtyTwo|t|
     moving-bits|https://github.com/moving-bits|cg|
     mucek4||cp|
     murggel|https://github.com/murggel|c|
-    okainov||c|
+    okainov|https://github.com/okainov|c|
     osma|https://github.com/osma|c|
-    Peter Storch||c|
-    Rainer S.||c|
+    Peter Storch|https://github.com/pstorch|c|
+    Rainer S.|https://github.com/rsudev|c|
     SammysHP|https://www.sammyshp.de/||
-    Samuel Tardieu|https://www.rfc1149.net/sam.html||
-    UniQP||c|
+    TakoTheDank|https://github.com/TacoTheDank|c|
+    UniQP|https://github.com/UniQP|c|
     </string>
 
     <!-- other contributors, meaning: before last year -->
@@ -76,6 +76,7 @@
     <string translatable="false" name="contributors_other">
     avogadogc|||
     Arne Schwabe||c|
+    Bananeweizen||c|
     bjdupuis||c|
     blafoo||c|
     campbeb||c|
@@ -101,6 +102,7 @@
     Portree Kid|https://github.com/Portree-Kid|c|
     Ray||c|
     RoadRunner-||c|
+    Samuel Tardieu|https://www.rfc1149.net/sam.html||
     stephanme/Geoteufel||c|
     thiasB||c|
     YraFyra||c|
