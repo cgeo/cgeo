@@ -2459,7 +2459,7 @@ public class DataStore {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "DataStore.loadCachesFromGeoCodes(#%d)", geocodes.size())) {
             cLog.add("flags:%s", loadFlags);
 
-            // do not log the entire collection of geo codes to the debug log. This can be more than 100 KB of text for large lists!
+            // do not log the entire collection of geo codes to the debug log. This can be more than 100 kB of text for large lists!
             cLog.add("gc" + cLog.toStringLimited(geocodes, 10));
 
             init();

@@ -17,8 +17,6 @@
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal" >
 
-
-
         <ImageView
             android:id="@+id/image_thumbnail"
             style="@style/action_bar_action"
@@ -31,7 +29,6 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ic_menu_add"
             tools:src="@tools:sample/avatars"/>
-
 
         <LinearLayout
             android:layout_toRightOf="@id/image_thumbnail"
@@ -68,7 +65,7 @@
                 android:textSize="14sp"
                 android:visibility="visible"
                 tools:visiblity="visible"
-                tools:text="Add info: size, Location and KB"/>
+                tools:text="Details: resolution, size, name"/>
 
             <TextView
                 android:id="@+id/image_description"
@@ -82,7 +79,7 @@
                 android:textSize="14sp"
                 android:visibility="visible"
                 tools:visiblity="visible"
-                tools:text="@tools:sample/lorem/random"
+                tools:text="Description for the image"
                 android:maxLines="2" />
         </LinearLayout>
 
