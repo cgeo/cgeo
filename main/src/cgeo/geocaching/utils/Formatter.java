@@ -226,7 +226,7 @@ public final class Formatter {
 
     @NonNull
     public static String formatFavCount(final int favCount) {
-        return favCount >= 1000 ? (favCount / 1000) + "k" : favCount >= 0 ? Integer.toString(favCount) : "?";
+        return favCount >= 10000 ? (favCount / 1000) + "k" : favCount >= 0 ? Integer.toString(favCount) : "?";
     }
 
     @NonNull
