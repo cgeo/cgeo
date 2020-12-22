@@ -1750,6 +1750,8 @@
     <string name="switch_manual">Χειροκίνητα</string>
     <string name="switch_auto">Αυτόματα</string>
     <string name="switch_default">(Προεπιλογή)</string>
+    <string name="yes">Ναι</string>
+    <string name="no">Όχι</string>
     <!-- view settings -->
     <string name="view_settings">Ρυθμίσεις προβολής</string>
     <string name="delete_setting">Διαγραφή ρύθμισης</string>
