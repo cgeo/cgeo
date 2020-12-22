@@ -1735,6 +1735,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="switch_manual">手動</string>
     <string name="switch_auto">自動</string>
     <string name="switch_default">(デフォルト)</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
     <!-- view settings -->
     <string name="view_settings">設定値を表示</string>
     <string name="delete_setting">設定キーの削除</string>
