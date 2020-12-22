@@ -1,1 +1,1 @@
-This is a contacts plugin for c:geo
+Dette er en kontakt-plugin for c:geo
