@@ -217,6 +217,7 @@
     <string name="err_parse_lat_lon">c:geo n\'arrive pas à lire la latitude ou la longitude.</string>
     <string name="err_rendertheme_file_unreadable">Impossible de charger le thème de rendu sélectionné. Retour au thème intégré.</string>
     <string name="err_rendertheme_invalid">Le thème de rendu sélectionné n\'est pas valide pour cette version de mapsforge. Retour au thème intégré.</string>
+    <string name="err_invalid_filename_char">Le caractère \'%c\' est interdit</string>
     <string name="warn_save_nothing">Il n\'y a rien à enregistrer.</string>
     <string name="warn_no_cache_coord">Il n\'y pas de caches avec les coordonnées associées.</string>
     <string name="warn_no_coordinates">Aucune coordonnée associée.</string>
@@ -444,6 +445,8 @@
     <string name="contribution_documentation">documentation</string>
     <string name="contribution_projectleader">chef de projet open source</string>
     <string name="contribution_graphics">graphiques</string>
+    <string name="debug_user_error_report_title">Signaler un problème</string>
+    <string name="debug_user_error_errortext">Une erreur est survenue, merci de nous la signaler :</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ouvrir les paramètres ?</string>
     <string name="settings_title_services">Services</string>
@@ -557,6 +560,10 @@
     <string name="init_summary_transparentBackground">Utiliser un arrière-plan transparent (redémarrage nécessaire)</string>
     <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
     <string name="init_summary_address">Sur l\'écran d\'accueil, afficher l\'adresse plutôt que les coordonnées</string>
+    <string name="init_select_language">Sélectionner la langue</string>
+    <string name="init_summary_select_language">Sélectionnez la langue de l\'application (nécessite un redémarrage)\n</string>
+    <string name="init_use_default_language">Utiliser la langue par défaut</string>
+    <string name="init_category_exclude">Exclure des caches</string>
     <string name="init_exclude">Exclure mes caches et les caches trouvées</string>
     <string name="init_summary_exclude">Exclure mes caches et les caches trouvées</string>
     <string name="init_showwaypoints">Afficher les points de passage</string>
@@ -574,6 +581,7 @@
     <string name="init_summary_disabled">Exclure les caches désactivées</string>
     <string name="init_archived">Exclure les éléments archivés</string>
     <string name="init_summary_archived">Exclure les caches archivées</string>
+    <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
     <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction de points de passage à partir de notes personnelles du cache. Il peut toujours être activé pour chaque cache en désactivant la case à cocher sous les notes personnelles de cache</string>
     <string name="init_save_log_img">Enregistrer les images</string>
     <string name="init_summary_save_log_img">Enregistrer les images des visites</string>
@@ -592,19 +600,28 @@
     <string name="init_restore_title">Restaurer une sauvegarde</string>
     <string name="init_backup_caches">caches et points de passage</string>
     <string name="init_backup_program_settings">Paramètres (du programme)</string>
+    <string name="init_backup_logins">Inclure les données du compte</string>
+    <string name="init_backup_logins_summary">Vos identifiants de connexion seront stockés dans la sauvegarde.</string>
     <string name="init_backup">Sauvegarde des caches / points de passage</string>
     <string name="init_backup_backup">Sauvegarde</string>
     <string name="init_backup_finished">Sauvegarde terminée</string>
+    <string name="init_backup_backup_failed">Échec de la sauvegarde</string>
     <string name="init_backup_now">Démarrer la sauvegarde</string>
     <string name="init_backup_running">Création de la copie de sauvegarde…</string>
     <string name="init_backup_restore">Restauration</string>
     <string name="init_restore_restored">Restauration terminée</string>
     <string name="init_backup_start_restore">Démarrer la restauration</string>
     <string name="init_backup_backup_history">Historique des sauvegardes</string>
+    <string name="init_backup_history_length_title">Nombre maximum de sauvegardes conservées</string>
+    <string name="init_backup_history_length_summary">Décidez combien de sauvegardes doivent être conservées. Lorsque la limite est atteinte, les plus anciennes seront supprimées automatiquement.</string>
+    <string name="init_backup_history_length_min">Seulement les récents</string>
+    <string name="init_backup_history_length_max">Conserver tout</string>
+    <string name="init_backup_history_delete_warning">Vous avez enregistré plus de sauvegardes que la valeur maximale que vous avez configurée autorise. Voulez-vous vraiment supprimer toutes les sauvegardes excédentaires ?</string>
     <string name="init_user_confirmation">Je sais ce que je fais</string>
     <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
     <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
     <string name="init_backup_unnecessary">La base de données est vide, sauvegarde non nécessaire.</string>
+    <string name="init_backup_folder_exists_error">Impossible de créer un nouveau répertoire de sauvegarde. Avez-vous déjà fait une sauvegarde au cours de la dernière minute ?</string>
     <string name="init_backup_no_backup_available">Aucun fichier de sauvegarde n\'est disponible.</string>
     <string name="restore_confirm_overwrite_database">AVERTISSEMENT : Ceci écrasera %s sur votre appareil !</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVERTISSEMENT : Ceci écrasera %s et vos paramètres actuels sur votre appareil!</string>
@@ -625,6 +642,7 @@
     <string name="init_backup_settings_backup_full_confirm">Voulez-vous stocker des données sensibles liées au compte ? Elles peuvent être lisibles par d\'autres applications.</string>
     <string name="settings_savingerror">Erreur lors de l\'enregistrement des paramètres</string>
     <string name="settings_saved">Paramètres enregistrés avec succès dans :</string>
+    <string name="backup_saved">La sauvegarde a été enregistrée avec succès dans :</string>
     <string name="init_backup_settings_restore">Restaurer les paramètres</string>
     <string name="settings_readingerror">Erreur lors de la lecture des paramètres</string>
     <string name="settings_restart">c:geo doit être redémarré maintenant pour prendre en compte les paramètres chargés</string>
@@ -761,6 +779,8 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">hors-ligne</string>
     <string name="map_source_osm_offline_combined">Combiné (Hors-ligne)</string>
+    <string name="map_source_attribution_dialog_title">Crédits pour la carte</string>
+    <string name="map_source_attribution_legacy_text">Appuyez pour afficher les crédits de la carte</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
     <string name="settings_info_send2cgeo_title">Informations sur send2cgeo</string>
     <string name="init_sendToCgeo_name">Le nom de votre appareil</string>
@@ -928,7 +948,9 @@
     <string name="cache_menu_map_ext">Autres applications externes</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
+    <string name="cache_menu_open_with">Ouvrir avec…</string>
     <string name="cache_menu_visit">Signaler votre visite</string>
+    <string name="cache_log_too_long">c:geo n\'a pas pu envoyer votre log car il est trop long. Merci d\'avoir essayé d\'écrire un log aussi complet ;-).</string>
     <string name="cache_menu_visit_offline">Visite rapide hors-ligne</string>
     <string name="cache_menu_spoilers">Images indices</string>
     <string name="cache_menu_around">Alentours</string>
@@ -1015,6 +1037,7 @@
     <string name="context_share_as_text">Partager comme texte</string>
     <string name="context_share_as_link">Partager le lien</string>
     <string name="create_internal_cache">Créer une cache personnelle</string>
+    <string name="create_internal_cache_short">Nouvelle cache</string>
     <string name="internal_cache_default_name">Cache personnalisée #%1$d</string>
     <string name="internal_cache_default_description">Ceci est une cache personnelle</string>
     <string name="internal_cache_default_owner">Vous</string>
@@ -1030,6 +1053,7 @@
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">secondes</string>
     <string name="cc_hint_fraction">fraction</string>
+    <string name="lowercase">minuscules</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Recherche de fichiers\nin</string>
@@ -1128,6 +1152,13 @@
     <string name="map_rotation">Rotation de la carte</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
     <string name="map_show_circles">Afficher les cercles</string>
+    <string name="map_showc_ownfound">Afficher les caches placées / trouvées</string>
+    <string name="map_showc_disabled">Afficher les caches désactivées</string>
+    <string name="map_showc_archived">Afficher les caches archivées</string>
+    <string name="map_showwp_original">Afficher les points de passage d\'origine</string>
+    <string name="map_showwp_parking">Afficher les points de passage de stationnement</string>
+    <string name="map_showwp_visited">Afficher les points de passage visités</string>
+    <string name="map_show_track">Afficher la trace GPX / l\'itinéraire</string>
     <string name="init_hidewp">Masquer tous les points de passage</string>
     <string name="init_summary_hidewp_original">Masquer les points de passage d\'origine sur la carte</string>
     <string name="init_summary_hidewp_parking">Masquer les points de passage de stationnement sur la carte</string>
@@ -1143,6 +1174,7 @@
     <string name="map_gm_autorotation">Rotation automatique de la carte</string>
     <string name="map_gm_autorotation_disable">Désactiver la rotation automatique de la carte ?\n\nVous pourrez l\'activer à nouveau depuis le menu Rotation de la carte</string>
     <string name="quick_settings">Paramètres rapides</string>
+    <string name="map_show_in_map">Afficher sur la carte</string>
     <!-- search -->
     <string name="search_bar_hint">Recherche globale</string>
     <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (code TB)</string>
@@ -1155,14 +1187,17 @@
     <string name="search_kw">Mots-clés</string>
     <string name="search_kw_prefill">Mot-clé</string>
     <string name="search_kw_button">Rechercher par Mot-clé</string>
+    <string name="search_fbu">Trouvée par</string>
     <string name="search_fbu_prefill">Nom d\'utilisateur</string>
     <string name="search_fbu_button">Rechercher par Découvreur</string>
+    <string name="search_hbu">Cachée par</string>
     <string name="search_hbu_prefill">Nom d\'utilisateur</string>
     <string name="search_hbu_button">Rechercher par Propriétaire</string>
     <string name="search_tb">Objet voyageur</string>
     <string name="search_tb_hint">Code de l\'objet voyageur</string>
     <string name="search_tb_button">Rechercher l\'Objet voyageur</string>
     <string name="search_destination">Ouvrir la destination dans c:geo</string>
+    <string name="add_target_to">Ajouter la cible à</string>
     <string name="search_address_started">Rechercher le lieu</string>
     <string name="search_address_result">Lieux trouvés</string>
     <string name="search_own_caches">Chercher mes caches</string>
@@ -1208,6 +1243,7 @@
     <string name="user_menu_view_found">Caches trouvées</string>
     <string name="user_menu_open_browser">Ouvrir le profil dans un navigateur</string>
     <string name="user_menu_send_message">Envoyer un message</string>
+    <string name="user_menu_send_email">Envoyer un courriel</string>
     <string name="user_menu_open_contact">Ouvrir la fiche du contact</string>
     <string name="user_unknown">Utilisateur inconnu</string>
     <!-- navigation -->
@@ -1277,6 +1313,7 @@
     <string name="export_modifiedcoords_success">Envoi réussi</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Envoi terminé : %1$d échec / %2$d ok</string>
     <string name="export_modifiedcoords_error">Échec de l\'envoi</string>
+    <string name="filename_without_extension">Nom du fichier (sans extension)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Chiens autorisés</string>
     <string name="attribute_dogs_no">Chiens interdits</string>
@@ -1510,6 +1547,17 @@
     <string name="attribute_challengecache_no">N\'est pas une cache challenge</string>
     <string name="attribute_hqsolutionchecker_yes">Checker Geocaching.com activé</string>
     <string name="attribute_hqsolutionchecker_no">Checker Geocaching.com désactivé</string>
+    <string name="attribute_handicaching_yes">Évalué sur Handicaching.com</string>
+    <string name="attribute_handicaching_no">Non évalué sur Handicaching.com</string>
+    <string name="attribute_ads_yes">Contient de la publicité</string>
+    <string name="attribute_ads_no">Ne contient aucune publicité</string>
+    <string name="attribute_video_surveil_yes">Zone sous vidéo-surveillance</string>
+    <string name="attribute_video_surveil_no">Zone sans vidéo-surveillance</string>
+    <string name="attribute_trackables_yes">Convient aux objets voyageurs</string>
+    <string name="attribute_trackables_no">Ne convient pas aux objets voyageurs</string>
+    <string name="attribute_historic_yes">Bâtiment abandonné / Ruine</string>
+    <string name="attribute_historic_no">Aucun bâtiment abandonné ou ruine</string>
+    <string name="attribute_blind_people_yes">Handicap : non-voyant</string>
     <!-- next things -->
     <string name="quote">Pour faciliter le géocaching.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1519,6 +1567,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo sur Google Play</a></string>
     <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
+    <string name="github_title">suivi de bugs</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Une nouvelle version de c:geo est disponible.\nAppuyez ici pour l\'installer.</string>
@@ -1665,6 +1714,9 @@
     <string name="map_load_individual_route">Charger un itinéraire individuel</string>
     <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
     <string name="map_autotarget_individual_route">Définir automatiquement comme cible</string>
+    <string name="map_disable_autotarget_individual_route">\"Définir automatiquement comme cible\" désactivé</string>
+    <string name="map_clear_manual_targets">Supprimer les cibles manuelles</string>
+    <string name="map_manual_targets_cleared">Cibles manuelles supprimées</string>
     <string name="map_clear_individual_route">Effacer l\'itinéraire individuel</string>
     <string name="map_clear_individual_route_confirm">Voulez-vous supprimer toutes les caches/points de passage de votre itinéraire individuel ?</string>
     <string name="map_individual_route_cleared">Itinéraire individuel effacé</string>
@@ -1699,6 +1751,8 @@
     <string name="switch_manual">Manuel</string>
     <string name="switch_auto">Automatique</string>
     <string name="switch_default">(par défaut)</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
     <!-- view settings -->
     <string name="view_settings">Afficher les paramètres</string>
     <string name="delete_setting">Supprimer le paramètre</string>
@@ -1708,6 +1762,7 @@
     <string name="edit_setting_error_invalid_data">Saisie \"%s\" invalide. La valeur du paramètre reste inchangée.</string>
     <string name="activate_editmode_title">Activer le mode édition</string>
     <string name="activate_editmode_warning">Vous entrez dans une zone dangereuse !\n\nModifier les paramètres directement peut perturber c:geo et par exemple empêcher le démarrage de l\'application. Soyez prudents !\n\nÊtes-vous certain de vouloir continuer (à vos risques et périls) ?</string>
+    <string name="add_setting">Ajouter le paramètre</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">Gestionnaire de fichiers locaux c:geo</string>
     <string name="localfile_title">Ouvrir un fichier local</string>
