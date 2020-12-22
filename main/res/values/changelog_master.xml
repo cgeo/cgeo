@@ -1,42 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the master branch -->
-  <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
-<h1>Nightly builds:</h1>
-
-<h4>Map:</h4>
-<ul>
-<li>Please note, that your map selection will be reset due to the need of some internal changes in preparation for more Android 11 compatibility. This will happen once after upgrading to this version, and you can select the map of your choice after that. We apologize for any inconvenience.</li>
-<li>New: \"Quick settings\" icon in the map\'s bottom center giving access to several map settings</li>
-<li>Change: Removed \"Map settings\", \"Hide\" and \"Routing\" menu entries in favor of the new \"Quick settings\" popup</li>
-<li>Fix: Skip artificial track points in position history</li>
-<li>New: Added option to \"Individual route\" map menu to automatically set the first route point as navigation target (OpenStreetMap only)</li>
-<li>New: Added option to reset individual navigation target set from either cache/waypoint popup or \"Individual route\" (OpenStreetMap only)</li>
-<li>New: Ask for filename on individual route export</li>
-<li>New: Display a blue emoji for caches which are logged as DNF</li>
-<li>New: Allow setting navigation target from cache/waypoint popup for Google Maps (already existed for OpenStreetMap maps)</li>
-<li>Fix: Clear orphaned proximity circles on Google Maps</li>
-</ul>
-
-<h4>Cache details:</h4>
-<ul>
-<li>New: Allow deleting original waypoint for user-defined caches (effectively allowing changing cache coordinates for UDC)</li>
-<li>Change: Field note encoding: Charset changed to UTF16 LE</li>
-</ul>
-
-<h4>Other:</h4>
-<ul>
-<li>Change: Removed \"Use English\" option in favor of a built-in language selector</li>
-<li>Change: Disable mainscreen transparency on Sailfish OS</li>
-<li>Change: Custom tab implementation instead of internal browser</li>
-<li>Change: Enlarge search field on mainscreen during search</li>
-<li>New: Added share option after creating a backup</li>
-<li>New: View settings: Added option to add new settings</li>
-<li>New: Added Ukrainian translation</li>
-<li>New: Automatically insert support email address if sending logfile</li>
-<li>Fix: Open about activity on click at c:geo\'s logo</li>
-<li>Fixed several theming issues</li>
-</ul>
-</div>]]></Data>
+  <string name="changelog_master" translatable="false"><Data></Data>
   </string>
 </resources>
