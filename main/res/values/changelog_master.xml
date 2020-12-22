@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the master branch -->
-  <string name="changelog_master" translatable="false"><Data></Data>
+  <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
+<h1>Nightly build:</h1>
+
+</div>]]>
+  </Data>
   </string>
 </resources>
