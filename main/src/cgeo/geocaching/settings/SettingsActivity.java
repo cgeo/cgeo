@@ -195,7 +195,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         bindGeocachingUserToGCVoteuser();
 
         //PublicFolder initialization
-        initPublicFolders(new PublicLocalFolder[] { PublicLocalFolder.BASE_DIR, PublicLocalFolder.OFFLINE_MAPS });
+        initPublicFolders(PublicLocalFolder.ALL);
 
     }
 

@@ -9,9 +9,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Consumer;
@@ -30,7 +32,7 @@ public class PublicLocalStorageActivityHelper {
 
     private final Activity activity;
 
-    //stores intermediate data of a running intent. (This will no longer be neccessary with Activity Result API)
+    //stores intermediate data of a running intent by return code. (This will no longer be neccessary with Activity Result API)
     private IntentData<?> runningIntentData;
 
     private static class IntentData<T> {
@@ -71,7 +73,7 @@ public class PublicLocalStorageActivityHelper {
      */
     private boolean checkAndGrantFolderAccess(final PublicLocalFolder folder, final boolean requestGrantIfNecessary, @StringRes  final int detailMessageHtml, final Consumer<PublicLocalFolder> callback) {
 
-        if (PublicLocalStorage.get().checkAvailability(folder)) {
+        if (PublicLocalStorage.get().checkFolderAvailability(folder)) {
             return true;
         }
         if (requestGrantIfNecessary) {
@@ -89,9 +91,15 @@ public class PublicLocalStorageActivityHelper {
         return false;
     }
 
+    /**
+     * Starts user selection of a new Uri for the given folder.
+     * If this is not the base folder, user is also asked whether the default folder under base folder shall be used.
+     * @param folder folder to request a new place from user
+     * @param callback called after user changed the uri. Callback is always called, even if user cancelled or error occured
+     */
     public void selectFolderUri(final PublicLocalFolder folder, final Consumer<PublicLocalFolder> callback) {
         //if this is not the base dir, user may choose to use default dir or user-selected dir
-        if (folder.canUseDefault()) {
+        if (!folder.isBaseFolder()) {
             Dialogs.newBuilder(activity)
                 .setTitle(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_title)
                 .setMessage(activity.getString(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_msg, folder.getDefaultFolderUserDisplayableUri()))
@@ -101,7 +109,7 @@ public class PublicLocalStorageActivityHelper {
                 })
                 .setNegativeButton(R.string.publiclocalstorage_default, (d, p) -> {
                     d.dismiss();
-                    folder.setUri(null);
+                    PublicLocalStorage.get().setFolderUri(folder, null);
                     if (callback != null) {
                         callback.accept(folder);
                     }
@@ -127,33 +135,35 @@ public class PublicLocalStorageActivityHelper {
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | (folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         Log.i("Start uri dir: " + folder.getBaseUri());
         final Uri startUri = folder.getUri();
-        if (startUri != null) {
-            // Note: on SDK21, setting DocumentsContract.EXTRA_INITIAL_URI to either null
-            // OR Uri.fromFile(LocalStorage.getExternalPublicCgeoDirectory()) leads to doc dialog not working in emulator
-            // (Pixel 4 API 21)
+        if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Field is only supported starting with SDK26
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);
         }
 
-        runningIntentData = new IntentData(folder, callback);
+        runningIntentData = new IntentData<>(folder, callback);
 
         this.activity.startActivityForResult(intent, REQUEST_CODE_GRANT_FOLDER_URI_ACCESS);
     }
 
-    public void selectFile(final String type, final Uri startUri, final Consumer<Uri> callback) {
+    /**
+     * Asks user to select a file for single usage (e.g. to import something into c:geo
+     * @param type mime type, used for intent search
+     * @param startUri hint for intent where to start search
+     * @param callback called when user made selection. If user aborts search, callback is called with value null
+     */
+    public void selectFile(@Nullable final String type, @Nullable final Uri startUri, final Consumer<Uri> callback) {
         // call for document tree dialog
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType(type == null ? "*/*" : type);
-        if (startUri != null) {
-            // Note: on SDK21, setting DocumentsContract.EXTRA_INITIAL_URI to either null
-            // OR Uri.fromFile(LocalStorage.getExternalPublicCgeoDirectory()) leads to doc dialog not working in emulator
-            // (Pixel 4 API 21)
+        if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Attribute is supported starting SDK26 / O
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);
         }
 
-        runningIntentData = new IntentData(null, callback);
+        runningIntentData = new IntentData<>(null, callback);
 
-        ((Activity) this.activity).startActivityForResult(intent, REQUEST_CODE_SELECT_FILE);
+        this.activity.startActivityForResult(intent, REQUEST_CODE_SELECT_FILE);
     }
 
     /** You MUST include in {@link Activity#onActivityResult(int, int, Intent)} of using Activity */
@@ -177,7 +187,7 @@ public class PublicLocalStorageActivityHelper {
                     final int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | (runningIntentData.folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
                     activity.getContentResolver().takePersistableUriPermission(uri, flags);
                     Log.e("permissions: " + uri.getPath());
-                    runningIntentData.folder.setUri(uri);
+                    PublicLocalStorage.get().setFolderUri(runningIntentData.folder, uri);
                     report(false, R.string.publiclocalstorage_folder_selection_success, runningIntentData.folder.getUserDisplayableName());
                 }
                 if (runningIntentData.callback != null) {

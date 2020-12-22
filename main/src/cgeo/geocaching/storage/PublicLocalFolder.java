@@ -11,42 +11,44 @@ import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+/**
+ * Instances of this class represent a local public folder to store information in.
+ */
 public class PublicLocalFolder {
 
     public static final String EMPTY = "---";
 
     /** Base directory  */
-    public static final PublicLocalFolder BASE_DIR = new PublicLocalFolder(R.string.pref_publicfolder_basedir, null, false);
+    public static final PublicLocalFolder BASE_DIR = new PublicLocalFolder(R.string.pref_publicfolder_basedir, "BASE", null);
 
     /** Offline Maps folder where cgeo looks for offline map files (also the one where c:geo downloads its own offline maps) */
-    public static final PublicLocalFolder OFFLINE_MAPS = new PublicLocalFolder(R.string.pref_publicfolder_offlinemaps, "maps");
+    public static final PublicLocalFolder OFFLINE_MAPS = new PublicLocalFolder(R.string.pref_publicfolder_offlinemaps, "OFFLINE_MAPS", "maps");
     /** Offline Maps: optional folder for map themes (configured in settings) with user-supplied theme data */
-    public static final PublicLocalFolder OFFLINE_MAP_THEMES = new PublicLocalFolder(R.string.pref_publicfolder_offlinemapthemes, "themes");
+    public static final PublicLocalFolder OFFLINE_MAP_THEMES = new PublicLocalFolder(R.string.pref_publicfolder_offlinemapthemes, "OFFLINE_MAPS_THEMES", "themes");
     /** Target folder for written logfiles */
-    public static final PublicLocalFolder LOGFILES = new PublicLocalFolder(R.string.pref_publicfolder_logfiles, "logfiles");
+    public static final PublicLocalFolder LOGFILES = new PublicLocalFolder(R.string.pref_publicfolder_logfiles, "LOGFILES", "logfiles");
+
+    public static final PublicLocalFolder[] ALL = new PublicLocalFolder[]{BASE_DIR, OFFLINE_MAPS, OFFLINE_MAP_THEMES, LOGFILES };
 
     @AnyRes
     private final int prefKeyId;
+    private final String title;
     private final String defaultSubfolder;
     private final boolean needsWrite;
-    private final boolean canUseDefault;
 
     @AnyRes
     public int getPrefKeyId() {
         return prefKeyId;
     }
 
-    private PublicLocalFolder(@AnyRes final int prefKeyId, final String defaultSubfolder) {
-        this(prefKeyId, defaultSubfolder, true);
-    }
-
-    private PublicLocalFolder(@AnyRes final int prefKeyId, final String defaultSubfolder, final boolean canUseDefault) {
+    private PublicLocalFolder(@AnyRes final int prefKeyId, final String title, final String defaultSubfolder) {
+        this.title = title;
         this.defaultSubfolder = defaultSubfolder;
         this.prefKeyId = prefKeyId;
         this.needsWrite = true;
-        this.canUseDefault = canUseDefault;
     }
 
+    /** Uri associated with this folder */
     @Nullable
     public Uri getUri() {
         final Uri baseUri = getBaseUri();
@@ -56,6 +58,7 @@ public class PublicLocalFolder {
         return baseUri;
     }
 
+    /** Base Uri associated with this folder. The base uri is the uri where we need to grant permission for */
     public Uri getBaseUri() {
         if (isUserDefinedLocation()) {
             return Settings.getPublicFolderUri(this);
@@ -63,18 +66,21 @@ public class PublicLocalFolder {
         return Settings.getPublicFolderUri(BASE_DIR);
     }
 
+    /** A folder is user-defined if user has explicitely selected the location. Otherwise it is a default folder (subfolder of BASE directory) */
     public boolean isUserDefinedLocation() {
         return Settings.getPublicFolderUri(this) != null;
     }
 
-    public boolean canUseDefault() {
-        return canUseDefault;
+    /** True if this instance represents the c:geo BASE directory */
+    public boolean isBaseFolder() {
+        return BASE_DIR.equals(this);
     }
 
+    /** Returns a representation of this folder's location fit to show to an end user */
     @NonNull
     public String getUserDisplayableName() {
         String result = getUri() == null ? EMPTY : getUri().getPath();
-        if (!canUseDefault()) {
+        if (isBaseFolder()) {
             return result;
         }
 
@@ -90,6 +96,7 @@ public class PublicLocalFolder {
         return result;
     }
 
+    /** Returns the Uri of this folder IF it would be in default-mode */
     @NonNull
     public Uri getDefaultFolderUri() {
         final Uri defaultBaseUri = Settings.getPublicFolderUri(BASE_DIR);
@@ -99,12 +106,17 @@ public class PublicLocalFolder {
         return Uri.withAppendedPath(defaultBaseUri, getDefaultSubfolder());
     }
 
+    /** Returns a user-showable form of the Uri of this folder IF it would be in default-mode */
     @NonNull
     public String getDefaultFolderUserDisplayableUri() {
         final Uri defaultFolderUri = getDefaultFolderUri();
         return defaultFolderUri == null ? EMPTY : defaultFolderUri.getPath();
     }
 
+    /**
+     * sets this folder's uri to a new value. Setting it to null means "use default folder"
+     * Note: this method should be called only via {@link cgeo.geocaching.storage.PublicLocalStorage#setFolderUri(cgeo.geocaching.storage.PublicLocalFolder, android.net.Uri)}
+     */
     public void setUri(final Uri uri) {
         if (equalsUri(uri, getDefaultFolderUri())) {
             //if user selected the default uri, then we set it to default
@@ -114,9 +126,10 @@ public class PublicLocalFolder {
         }
     }
 
-    public static boolean equalsUri(final Uri uri1, final Uri uri2) {
+    /** Helper method to compare two Uris and also considering encoded / */
+    private static boolean equalsUri(final Uri uri1, final Uri uri2) {
         final boolean uri1IsNull = uri1 == null;
-        final boolean uri2IsNull = uri1 == null;
+        final boolean uri2IsNull = uri2 == null;
         if (uri1IsNull && uri2IsNull) {
             return true;
         }
@@ -148,7 +161,7 @@ public class PublicLocalFolder {
 
     @Override
     public String toString() {
-        return getUserDisplayableName() + "[" + getUri() + "]";
+        return title + ": " + getUserDisplayableName() + "[" + getUri() + "]";
     }
 
 }

@@ -17,6 +17,7 @@ public class FileNameCreator {
 
     public static final FileNameCreator OFFLINE_MAPS = new FileNameCreator(MIME_TYPE_BINARY, "mapfile", "map");
     public static final FileNameCreator LOGFILE = new FileNameCreator(MIME_TYPE_TEXT, "logcat", "txt");
+    public static final FileNameCreator MEMORY_DUMP = new FileNameCreator(MIME_TYPE_BINARY, "cgeo_dump", "hprof");
 
     private final AtomicInteger fileNameCounter = new AtomicInteger(1);
 
