@@ -20,6 +20,7 @@ import org.mapsforge.core.model.Rectangle;
 import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
+import org.mapsforge.map.layer.overlay.Circle;
 
 public class PositionLayer extends Layer {
 
@@ -29,6 +30,7 @@ public class PositionLayer extends Layer {
     private android.graphics.Bitmap arrowNative = null;
     private Bitmap arrow = null;
     private Paint accuracyCircle = null;
+    private Paint accuracyCircleFill = null;
     private int widthArrowHalf = 0;
     private int heightArrowHalf = 0;
 
@@ -39,37 +41,35 @@ public class PositionLayer extends Layer {
             return;
         }
 
+        // prepare accuracy circle
+
         final float accuracy = coordinates.getAccuracy();
+        if (accuracyCircle == null) {
+            accuracyCircle = AndroidGraphicFactory.INSTANCE.createPaint();
+            accuracyCircle.setStyle(Style.STROKE);
+            accuracyCircle.setStrokeWidth(1.0f);
+            accuracyCircle.setColor(0x66000000);
+
+            accuracyCircleFill = AndroidGraphicFactory.INSTANCE.createPaint();
+            accuracyCircleFill.setStyle(Style.FILL);
+            accuracyCircleFill.setColor(0x08000000);
+        }
+        final Circle circle = new Circle(location, accuracy, accuracyCircleFill, accuracyCircle);
+        circle.setDisplayModel(this.getDisplayModel());
+        circle.draw(boundingBox, zoomLevel, canvas, topLeftPoint);
+
+        // prepare heading indicator
 
         final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
         final double pixelX = MercatorProjection.longitudeToPixelX(this.location.longitude, mapSize);
         final double pixelY = MercatorProjection.latitudeToPixelY(this.location.latitude, mapSize);
-
         final int centerX = (int) (pixelX - topLeftPoint.x);
         final int centerY = (int) (pixelY - topLeftPoint.y);
 
-        final int radius = (int) MercatorProjection.metersToPixelsWithScaleFactor(accuracy, location.latitude,
-                this.displayModel.getScaleFactor(), this.displayModel.getTileSize());
-
-        if (accuracyCircle == null) {
-            accuracyCircle = AndroidGraphicFactory.INSTANCE.createPaint();
-            accuracyCircle.setStrokeWidth(1.0f);
-        }
-
-        accuracyCircle.setColor(0x66000000);
-        accuracyCircle.setStyle(Style.STROKE);
-        canvas.drawCircle(centerX, centerY, radius, accuracyCircle);
-
-        accuracyCircle.setColor(0x08000000);
-        accuracyCircle.setStyle(Style.FILL);
-        canvas.drawCircle(centerX, centerY, radius, accuracyCircle);
-
         if (arrow == null) {
             arrowNative = BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron);
-
             rotateArrow();
         }
-
 
         final int left = centerX - widthArrowHalf;
         final int top = centerY - heightArrowHalf;
@@ -80,13 +80,10 @@ public class PositionLayer extends Layer {
         if (!canvasRectangle.intersects(bitmapRectangle)) {
             return;
         }
-
         canvas.drawBitmap(arrow, left, top);
-
     }
 
     private void rotateArrow() {
-
         if (arrowNative == null) {
             return;
         }
@@ -104,9 +101,7 @@ public class PositionLayer extends Layer {
 
     public void setHeading(final float bearingNow) {
         if (heading != bearingNow) {
-
             heading = bearingNow;
-
             rotateArrow();
         }
     }
