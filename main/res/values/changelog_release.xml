@@ -16,6 +16,7 @@
 <li>New: Display a blue emoji for caches which are logged as DNF</li>
 <li>New: Allow setting navigation target from cache/waypoint popup for Google Maps (already existed for OpenStreetMap maps)</li>
 <li>Fix: Clear orphaned proximity circles on Google Maps</li>
+<li>Fix: Proximity circled on OpenStreetMap maps not showing</li>
 </ul>
 
 <h4>Cache details:</h4>
