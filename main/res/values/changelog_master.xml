@@ -4,6 +4,21 @@
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
 <h1>Nightly build:</h1>
 
+<h4>Map:</h4>
+<ul>
+<li>...</li>
+</ul>
+
+<h4>Cache details:</h4>
+<ul>
+<li>...</li>
+</ul>
+
+<h4>Other:</h4>
+<ul>
+<li>Change: Unified export dialogs. \"Share\" option can be selected after export now.</li>
+</ul>
+
 </div>]]>
   </Data>
   </string>
