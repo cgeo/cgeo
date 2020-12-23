@@ -147,7 +147,6 @@
     <string name="log_problem_archive_text">Tämä kätköilijä ilmoitti, että kätkö pitäisi arkistoida. Vapaaehtoiselle kätkötarkastajalle on ilmoitettu.</string>
     <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Kuva</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
@@ -1804,7 +1803,7 @@
     <string name="downloadmanager_not_available">Karttatiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto tallennetaan järjestelmän lataushakemistoon ja se on siirrettävä manuaalisesti karttahakemistoon.</string>
-    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
     <string name="downloadmap_confirmation">Ladataanko kartta \"%1$s\"?\n\nTämä voi viedä jonkin aikaa ja voi johtaa merkittäviin kustannuksiin, verkkoyhteydestäsi riippuen.\n\nKokotieto: %2$s</string>
     <string name="downloadmap_handling">Itse lataus käsitellään taustalla järjestelmäsi latauksenhallinnan kautta. Sinun pitäisi nähdä ilmoitus heti kun lataus alkaa (tämä voi viedä jonkin aikaa).</string>
     <string name="button_continue">Jatka</string>
