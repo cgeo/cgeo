@@ -8,6 +8,8 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,15 +36,17 @@ public class DebugUtils {
     }
 
     public static void createMemoryDump(@NonNull final Context context) {
-        try {
-            final File file = FileUtils.getUniqueNamedLogfile("cgeo_dump", "hprof");
-            android.os.Debug.dumpHprofData(file.getPath());
-            Toast.makeText(context, context.getString(R.string.init_memory_dumped, file.getAbsolutePath()),
-                    Toast.LENGTH_LONG).show();
-            ShareUtils.share(context, file, R.string.init_memory_dump);
-        } catch (final IOException e) {
-            Log.e("createMemoryDump", e);
-        }
+        Toast.makeText(context, R.string.init_please_wait, Toast.LENGTH_LONG).show();
+        final File file = FileUtils.getUniqueNamedLogfile("cgeo_dump", "hprof");
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                try {
+                    android.os.Debug.dumpHprofData(file.getPath());
+                } catch (IOException e) {
+                    Log.e("createMemoryDump", e);
+                }
+                ShareUtils.shareFileOrDismissDialog(context, file, "*/*", R.string.init_memory_dump, context.getString(R.string.init_memory_dumped, file.getAbsolutePath()));
+                }, 1000);
     }
 
     public static void askUserToReportProblem(@NonNull final Activity context, @Nullable final String errorMsg) {
