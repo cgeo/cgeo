@@ -15,6 +15,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ShareUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -169,10 +170,10 @@ public class FieldNoteExport extends AbstractExport {
         protected void onPostExecuteInternal(final Boolean result) {
             if (activity != null) {
                 final Context nonNullActivity = activity;
-                if (result) {
+                if (result && exportFile != null) {
                     Settings.setFieldnoteExportDate(System.currentTimeMillis());
 
-                    ActivityMixin.showToast(activity, getName() + ' ' + nonNullActivity.getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                    ShareUtils.shareFileOrDismissDialog(activity, exportFile, "text/plain", R.string.export, getName() + " " + nonNullActivity.getString(R.string.export_exportedto) + ": " + exportFile.toString());
 
                     if (upload) {
                         ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_fieldnotes_upload_success));
