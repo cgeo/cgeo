@@ -671,7 +671,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
         menuItemToggleWaypointsFromNote.setVisible(cache != null);
         setMenuPreventWaypointsFromNote(cache != null && cache.isPreventWaypointsFromNote());
-        menu.findItem(R.id.menu_toggleWaypointsFromNote).setTitle(cache != null && cache.isPreventWaypointsFromNote() ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote);
+        menu.findItem(R.id.menu_toggleWaypointsFromNote).setTitle(cache != null && cache.isPreventWaypointsFromNote() ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote).setVisible(cache != null);
         menu.findItem(R.id.menu_export).setVisible(cache != null);
         if (cache != null) {
             if (connector instanceof IgnoreCapability) {

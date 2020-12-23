@@ -147,7 +147,7 @@
         android:id="@+id/menu_toggleWaypointsFromNote"
         android:title="@string/cache_menu_preventWaypointsFromNote"
         app:showAsAction="ifRoom"
-        android:visible="true">
+        android:visible="false">
     </item>
     <item
         android:id="@+id/menu_clear_goto_history"
