@@ -147,7 +147,6 @@
     <string name="log_problem_archive_text">Dieser Geocacher hat gemeldet, dass dieser Cache archiviert werden sollte. Ein Reviewer wurde benachrichtigt.</string>
     <string name="log_image_scale_option_noscaling">Keine Skalierung</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Übersetze in %s</string>
@@ -621,7 +620,7 @@
     <string name="init_backup_backup_history">Sicherungshistorie</string>
     <string name="init_backup_history_length_title">Maximal gespeicherte Sicherungen</string>
     <string name="init_backup_history_length_summary">Entscheide, wie viele Sicherungen behalten werden sollen. Wenn das Limit erreicht ist, werden die ältesten Sicherungen automatisch gelöscht.</string>
-    <string name="init_backup_history_length_min">Nur kürzliche</string>
+    <string name="init_backup_history_length_min">Nur neustes</string>
     <string name="init_backup_history_length_max">Alle behalten</string>
     <string name="init_backup_history_delete_warning">Du hast mehr Sicherungen als der eingestellte Maximalwert zulässt. Möchtest du wirklich alle überschüssigen Sicherungen löschen?</string>
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
