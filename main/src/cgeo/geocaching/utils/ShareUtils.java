@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.ShareBroadcastReceiver;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
@@ -33,12 +34,16 @@ public class ShareUtils {
         // utility class
     }
 
-    public static void share(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int titleResourceId) {
-        shareInternal(context, mimeType, null, null, file, titleResourceId);
+    /**
+     * Standard message box + additional share button for file sharing
+     */
+    public static void shareFileOrDismissDialog(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int title, final String msg) {
+        Dialogs.messageNeutral(context, context.getString(title), msg, R.string.cache_share_field,
+            (dialog, which) -> share(context, file, mimeType, title));
     }
 
-    public static void share(final Context context, @NonNull final File file, @StringRes final int titleResourceId) {
-        shareInternal(context, "*/*", null, null, file, titleResourceId);
+    public static void share(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int titleResourceId) {
+        shareInternal(context, mimeType, null, null, file, titleResourceId);
     }
 
     public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId) {
