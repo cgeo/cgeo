@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.text.InputFilter;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -74,14 +73,10 @@ public class IndividualRouteExport {
         final TextView text = layout.findViewById(R.id.info);
         text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), filename + FileUtils.GPX_FILE_EXTENSION));
 
-        final CheckBox shareOption = layout.findViewById(R.id.share);
-        shareOption.setChecked(Settings.getShareAfterExport());
-
         builder
             .setPositiveButton(R.string.export, (dialog, which) -> {
                 final String temp = StringUtils.trim(editFilename.getText().toString());
                 filename = (StringUtils.isNotBlank(temp) ? temp : filename) + FileUtils.GPX_FILE_EXTENSION;
-                Settings.setShareAfterExport(shareOption.isChecked());
                 dialog.dismiss();
                 new Export(activity).execute(route.getSegments());
             })
@@ -165,10 +160,7 @@ public class IndividualRouteExport {
         protected void onPostExecuteInternal(final File exportFile) {
             if (null != activity) {
                 if (null != exportFile) {
-                    ActivityMixin.showToast(activity, String.format(activity.getString(R.string.export_individualroute_success), exportFile.toString()));
-                    if (Settings.getShareAfterExport()) {
-                        ShareUtils.share(activity, exportFile, "application/xml", R.string.export_gpx_to);
-                    }
+                    ShareUtils.shareFileOrDismissDialog(activity, exportFile, "application/xml", R.string.export, String.format(activity.getString(R.string.export_individualroute_success), exportFile.toString()));
                 } else {
                     ActivityMixin.showToast(activity, activity.getString(R.string.export_failed));
                 }

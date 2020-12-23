@@ -55,14 +55,10 @@ public class TrailHistoryExport {
         final TextView text = layout.findViewById(R.id.info);
         text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), filename));
 
-        final CheckBox shareOption = layout.findViewById(R.id.share);
-        shareOption.setChecked(Settings.getShareAfterExport());
-
         final CheckBox clearAfterExport = layout.findViewById(R.id.clear_trailhistory_after_export);
         clearAfterExport.setChecked(Settings.getClearTrailAfterExportStatus());
 
         builder.setPositiveButton(R.string.export, (dialog, which) -> {
-            Settings.setShareAfterExport(shareOption.isChecked());
             Settings.setClearTrailAfterExportStatus(clearAfterExport.isChecked());
             dialog.dismiss();
             new Export(activity, clearTrailHistory).execute(DataStore.loadTrailHistoryAsArray());
@@ -155,10 +151,7 @@ public class TrailHistoryExport {
         protected void onPostExecuteInternal(final File exportFile) {
             if (null != activity) {
                 if (null != exportFile) {
-                    ActivityMixin.showToast(activity, String.format(activity.getString(R.string.export_trailhistory_success), exportFile.toString()));
-                    if (Settings.getShareAfterExport()) {
-                        ShareUtils.share(activity, exportFile, "application/xml", R.string.export_gpx_to);
-                    }
+                    ShareUtils.shareFileOrDismissDialog(activity, exportFile, "application/xml", R.string.export, String.format(activity.getString(R.string.export_trailhistory_success), exportFile.toString()));
                     if (Settings.getClearTrailAfterExportStatus()) {
                         clearTrailHistory.run();
                     }

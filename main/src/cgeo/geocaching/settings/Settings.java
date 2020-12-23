@@ -1212,13 +1212,6 @@ public class Settings {
         putString(R.string.pref_dataDir, extDir);
     }
 
-    public static boolean getShareAfterExport() {
-        return getBoolean(R.string.pref_shareafterexport, true);
-    }
-
-    public static void setShareAfterExport(final boolean shareAfterExport) {
-        putBoolean(R.string.pref_shareafterexport, shareAfterExport);
-    }
     public static boolean getIncludeFoundStatus() {
         return getBoolean(R.string.pref_includefoundstatus, true);
     }
