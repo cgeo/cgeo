@@ -39,10 +39,10 @@ public class ShareUtils {
      */
     public static void shareFileOrDismissDialog(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int title, final String msg) {
         Dialogs.messageNeutral(context, context.getString(title), msg, R.string.cache_share_field,
-            (dialog, which) -> share(context, file, mimeType, title));
+            (dialog, which) -> shareInternal(context, file, mimeType, title));
     }
 
-    public static void share(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int titleResourceId) {
+    private static void shareInternal(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int titleResourceId) {
         shareInternal(context, mimeType, null, null, file, titleResourceId);
     }
 

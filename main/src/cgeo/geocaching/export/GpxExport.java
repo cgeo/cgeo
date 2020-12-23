@@ -83,14 +83,10 @@ public class GpxExport extends AbstractExport {
         final TextView text = layout.findViewById(R.id.info);
         text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), fileName));
 
-        final CheckBox shareOption = layout.findViewById(R.id.share);
-        shareOption.setChecked(Settings.getShareAfterExport());
-
         final CheckBox includeFoundStatus = layout.findViewById(R.id.include_found_status);
         includeFoundStatus.setChecked(Settings.getIncludeFoundStatus());
 
         builder.setPositiveButton(R.string.export, (dialog, which) -> {
-            Settings.setShareAfterExport(shareOption.isChecked());
             Settings.setIncludeFoundStatus(includeFoundStatus.isChecked());
             dialog.dismiss();
             new ExportTask(activity).execute(geocodes);
@@ -158,10 +154,7 @@ public class GpxExport extends AbstractExport {
             final Activity activityLocal = activity;
             if (activityLocal != null) {
                 if (exportFile != null) {
-                    ActivityMixin.showToast(activityLocal, getName() + ' ' + activityLocal.getString(R.string.export_exportedto) + ": " + exportFile.toString());
-                    if (Settings.getShareAfterExport()) {
-                        ShareUtils.share(activityLocal, exportFile, "application/xml", R.string.export_gpx_to);
-                    }
+                        ShareUtils.shareFileOrDismissDialog(activityLocal, exportFile, "application/xml", R.string.export, getName() + ' ' + activityLocal.getString(R.string.export_exportedto) + ": " + exportFile.toString());
                 } else {
                     ActivityMixin.showToast(activityLocal, activityLocal.getString(R.string.export_failed));
                 }

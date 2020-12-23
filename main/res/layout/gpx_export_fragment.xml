@@ -17,9 +17,4 @@
         android:paddingBottom="20dp"
         android:paddingLeft="8dp"/>
 
-    <CheckBox
-        android:id="@+id/share"
-        style="@style/checkbox_full"
-        android:text="@string/init_share_after_export" />
-
 </LinearLayout>
