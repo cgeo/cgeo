@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s</string>
@@ -738,6 +739,7 @@
     <string name="init_create_memory_dump">Geheugendump maken</string>
     <string name="init_memory_dump">Geheugendump</string>
     <string name="init_memory_dumped">Geheugen gedumpt naar %s</string>
+    <string name="init_please_wait">Even geduld…</string>
     <string name="init_hardware_acceleration_title">Hardware acceleratie</string>
     <string name="init_hardware_acceleration_note">Hardware acceleratie maakt grafische elementen op het scherm sneller. Echter op sommige apparaten bevat het Android besturingssysteem bugs en sommige tekst kan wazig lijken (met name vette karakters). Schakel hardwareacceleratie uit als dit bij u gebeurt.</string>
     <string name="init_hardware_acceleration">Schakel hardware acceleratie in</string>
