@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Dieser Geocacher hat gemeldet, dass dieser Cache archiviert werden sollte. Ein Reviewer wurde benachrichtigt.</string>
     <string name="log_image_scale_option_noscaling">Keine Skalierung</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Übersetze in %s</string>
@@ -738,6 +739,7 @@
     <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
     <string name="init_memory_dump">Speicherabbild</string>
     <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
+    <string name="init_please_wait">Bitte warten…</string>
     <string name="init_hardware_acceleration_title">Hardwarebeschleunigte Darstellung</string>
     <string name="init_hardware_acceleration_note">Mittels Hardwarebeschleunigung werden grafische Elemente schneller auf den Bildschirm dargestellt. Jedoch enthalten manche Android-Systeme Fehler, die zu verschwommenem Text (meistens bei fettgedruckten Zeichen) führen können. In diesem Fall sollte die Hardwarebeschleunigung deaktiviert werden.</string>
     <string name="init_hardware_acceleration">Hardwarebeschleunigung aktivieren</string>
