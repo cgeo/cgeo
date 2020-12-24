@@ -738,6 +738,7 @@
     <string name="init_create_memory_dump">メモリ・ダンプを作成</string>
     <string name="init_memory_dump">メモリ・ダンプ</string>
     <string name="init_memory_dumped">%sへメモリがダンプされた</string>
+    <string name="init_please_wait">お待ちください…</string>
     <string name="init_hardware_acceleration_title">ハードウェアアクセラレーション機能</string>
     <string name="init_hardware_acceleration_note">ハードウェアアクセラレーション機能は画面表示を高速化します。しかし一部のデバイスではAndroidオペレーティングシステムのバグのせいでテキストの一部分(特に太字の文字)がぼやけて表示されます。これが発生する場合はハードウェアアクセラレーションを無効にしてください</string>
     <string name="init_hardware_acceleration">ハードウェアアクセラレーションを有効化</string>
