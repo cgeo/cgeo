@@ -1,11 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:гео</string>
     <!-- basics -->
+    <string name="cache">Кеш</string>
+    <string name="detail">Деталі</string>
+    <string name="search">Пошук</string>
+    <string name="helpers">Kорисні програми</string>
+    <string name="about">Про c:гео</string>
+    <string name="latitude">Широта</string>
+    <string name="longitude">Довжина</string>
     <!-- actionbar -->
+    <string name="settings_titlebar">C:гео налаштування</string>
     <!-- caches -->
+    <string name="all_types">Усі типи кешу</string>
+    <string name="traditional">Традиційний кеш</string>
+    <string name="multi">Мультикеш</string>
+    <string name="mystery">Таємничий кеш</string>
+    <string name="letterbox">Letterbox Hybrid</string>
+    <string name="event">Кеш Подій</string>
+    <string name="mega">Кеш мега-подій</string>
+    <string name="giga">Кеш подій гіга</string>
+    <string name="earth">Земляний кеш</string>
+    <string name="cito">Подія CITO</string>
+    <string name="webcam">Кеш веб-камери</string>
+    <string name="virtual">Віртуальний кеш</string>
+    <string name="wherigo">Кеш Wherigo</string>
+    <string name="communceleb">Подія святкування спільноти</string>
+    <string name="ape">Кеш проекту APE</string>
+    <string name="gchq">Штаб геокешингу</string>
+    <string name="gchqceleb">Святкування штаб-квартири геокешингу</string>
+    <string name="gps">Лабіринт пригод з GPS</string>
+    <string name="block">Geocaching HQ Block Party</string>
+    <string name="locationless">Безрозмірний (зворотний) кеш</string>
+    <string name="unknown">Невідомий тип</string>
     <!-- cache sizes -->
+    <string name="cache_size_micro">Мікро</string>
+    <string name="cache_size_small">Малий</string>
+    <string name="cache_size_regular">Регулярний</string>
+    <string name="cache_size_large">Великий</string>
+    <string name="cache_size_other">Інший</string>
+    <string name="cache_size_virtual">Віртуальний</string>
+    <string name="cache_size_notchosen">Не вибрано</string>
+    <string name="cache_size_unknown">Невідомий</string>
+    <string name="cache_size_nano">Нано</string>
+    <string name="cache_size_very_large">Дуже великий</string>
     <!-- waypoints -->
+    <string name="wp_final">Кінцеве розташування</string>
+    <string name="wp_stage">Етап мультикешy</string>
+    <string name="wp_puzzle">Питання для відповіді</string>
+    <string name="wp_pkg">Стоянка</string>
+    <string name="wp_trailhead">Початок</string>
+    <string name="wp_waypoint">Орієнтир</string>
+    <string name="wp_original">Оригінальні координати</string>
     <!-- logs -->
+    <string name="log_found">Знайдено</string>
+    <string name="log_dnf">Не знайдено</string>
+    <string name="log_note">Оформлення приміткu</string>
+    <string name="log_published">Oпублікований</string>
+    <string name="log_attend">Я братиму участь</string>
+    <string name="log_attended">Взяв участь</string>
+    <string name="log_retrieved">Відновити</string>
+    <string name="log_placed">Розташування</string>
+    <string name="log_grabbed">Cxoпuв кудись</string>
+    <string name="log_movecollection">Переміщуватися до колекції</string>
+    <string name="log_moveinventory">Перейти до інвентарю</string>
+    <string name="log_maintained">Проведене технічне обслуговування</string>
+    <string name="log_maintenance_needed">Вимагається обслуговування</string>
+    <string name="log_update">Оновлені координати</string>
+    <string name="log_archived">Архівний</string>
+    <string name="log_needs_archived">Вимагає архівування</string>
+    <string name="log_discovered">Відкривати</string>
+    <string name="log_reviewer">Оглядова примітка</string>
+    <string name="log_submit_for_review">Подати на огляд</string>
     <!-- translation -->
     <!-- errors, warnings, info toasts -->
     <!-- location service -->
