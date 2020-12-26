@@ -242,6 +242,7 @@
         <item name="buttonBarButtonStyle">@style/button_borderless</item>
         <item name="background">?android:attr/selectableItemBackground</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
 
@@ -250,6 +251,7 @@
         <item name="buttonBarButtonStyle">@style/button_borderless</item>
         <item name="background">?android:attr/selectableItemBackground</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
 
