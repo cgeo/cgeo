@@ -344,7 +344,7 @@
     <string name="caches_upload_modifiedcoords_warning">Tüm seçili cache\'ler için değiştirilmiş koordinatları yüklemek ve sunucuda varolan koordinatların üzerine yazmak istiyor musunuz? Bu işlem geri alınamaz.</string>
     <string name="caches_upload_allcoords">Tüm Cache\'lerin koordinatlarını güncelle</string>
     <string name="caches_upload_allcoords_dialogtitle">UYARI - Tüm koordinatlar yükleniyor</string>
-    <string name="caches_upload_allcoords_warning">Bu, listenizin tüm (seçilen) önbellekleri için sunucudaki mevcut koordinatların üzerine c: geo! \'Daki ​​mevcut listeleme koordinatlarının üzerine yazacaktır! Bu sadece özel durumlarda kullanılmalıdır, örn: listeleme olarak düzeltilmiş koordinatları içeren bir GPX dosyasını içe aktardığınızda.Bu geri alınamaz ve sadece ne yaptığınızı biliyorsanız kullanmalısınız.Normal durumlarda, aynı menüde \"Değiştirilmiş koordinatları yükle\" işlevini kullanmayı tercih edebilirsiniz.</string>
+    <string name="caches_upload_allcoords_warning">Bu, listenizin tüm (seçilen) Geocache\'leri için sunucudaki mevcut koordinatların üzerine c: geo! \'daki ​​mevcut listeleme koordinatlarının üzerine yazacaktır! Bu sadece özel durumlarda kullanılmalıdır, örn: listeleme olarak düzeltilmiş koordinatları içeren bir GPX dosyasını içe aktardığınızda. Bu geri alınamaz ve sadece ne yaptığınızı biliyorsanız kullanmalısınız. Normal durumlarda, aynı menüde \"Değiştirilmiş koordinatları yükle\" işlevini kullanmayı tercih edebilirsiniz.</string>
     <string name="caches_refresh_selected">Seçilmişleri yenile</string>
     <string name="caches_refresh_all">Hepsini yenile</string>
     <string name="caches_move_selected">Seçileni taşı</string>
@@ -558,6 +558,7 @@
     <string name="init_summary_transparentBackground">Saydam arkaplan kullan (yeniden başlatmak gereklidir)</string>
     <string name="init_address">Adres Göster</string>
     <string name="init_summary_address">Ana ekranda koordinatlar yerine adresi göster</string>
+    <string name="init_select_language">Dil seçin</string>
     <string name="init_exclude">Sahibi Olduklarımı ve Bulduklarımı Dahil Etme</string>
     <string name="init_summary_exclude">Sahibi olduklarımı ve bulduklarımı dahil etme</string>
     <string name="init_showwaypoints">Yol Noktalarını Göster</string>
@@ -584,14 +585,14 @@
     <string name="init_choose_list">Listelemek İçin Sor</string>
     <string name="init_summary_choose_list">Geocache\'lerin hangi listede depolanacağını sor</string>
     <string name="init_listdisplay">Diğer listeler</string>
-    <string name="init_summary_listdisplay">Önbellek listesindeki ek listelere önbellek üyeliğini göster</string>
+    <string name="init_summary_listdisplay">Geocache listesindeki ek listelere Geocache üyeliğini göster</string>
     <string name="init_livelist">Yön göster</string>
     <string name="init_summary_livelist">Listedeki Geocache\'lerin yönünü göster</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Yedek Oluştur</string>
     <string name="init_backup_summary">Lütfen bu özelliğin önbellekleri, ara noktaları &amp; ayarları yedekleyebileceğini, ancak önbellek görüntülerini yedekleyemeyeceğini unutmayın. \n Telefonunuzu kaybettikten sonra bile verileri geri yükleyebilmek için, yedekleme dosyalarının bağımsız bir konuma kopyalanması gerekir.</string>
     <string name="init_restore_title">Yedeklemeyi geri yükle</string>
-    <string name="init_backup_caches">önbellekler ve ara noktalar</string>
+    <string name="init_backup_caches">Geocache\'ler ve yol noktaları</string>
     <string name="init_backup_program_settings">program ayarları</string>
     <string name="init_backup_logins">Hesap verilerini dahil et</string>
     <string name="init_backup_logins_summary">Bu, girdiğiniz oturum kimlik bilgilerinizi yedeklemede kullanılacak.</string>
@@ -672,7 +673,7 @@
     <string name="init_trackwidth">Bireysel yol çizgisi genişliği</string>
     <string name="init_trackwidth_summary">Ayrı izleme hattı için genişlik seçin</string>
     <string name="init_circlecolor">Çember kenar rengi</string>
-    <string name="init_circlecolor_summary">Daire çizgisi için renk ve opaklığı seçin. Daireler, bir önbellek veya fiziksel yol noktası etrafındaki minimum yarıçap için görsel bir temsil olarak kullanılır; burada başka hiçbir önbelleğe veya fiziksel geçiş noktasına izin verilmez. (Geocaching.com için geçerlidir)</string>
+    <string name="init_circlecolor_summary">Daire çizgisi için renk ve opaklığı seçin. Daireler, bir Geocache veya fiziksel yol noktası etrafındaki minimum yarıçap için görsel bir temsil olarak kullanılır; burada başka hiçbir Geocache veya fiziksel yol noktası oluşturulamaz. (Geocaching.com için geçerlidir)</string>
     <string name="init_circlefillcolor">Daire dolgu rengi</string>
     <string name="init_circlefillcolor_summary">Doldurulacak dairelerin rengini ve opaklığını seçin</string>
     <string name="init_share_after_export">GPX Dışa aktarmadan sonra paylaşım menüsünü aç</string>
@@ -724,6 +725,7 @@
     <string name="init_create_memory_dump">Bellek dökümü oluştur</string>
     <string name="init_memory_dump">Bellek dökümü</string>
     <string name="init_memory_dumped">Bellek boşaltıldı %s</string>
+    <string name="init_please_wait">Lütfen bekleyin…</string>
     <string name="init_hardware_acceleration_title">Donanım hızlandırmalı sunum</string>
     <string name="init_hardware_acceleration_note">Donanım hızlanması, grafik ögelerini ekranda daha hızlı hale getirir. Ancak bazı cihazlarda Android işletim sistemi hata içerir ve bazı metinler bulanık görünebilir (özellikle kalın karakterler). Bu gerçekleşirse donanım hızlanmasını devre dışı bırakın.</string>
     <string name="init_hardware_acceleration">Donanım hızlanmasını aç</string>
@@ -749,13 +751,13 @@
     <string name="feature_search_geocode">Geocode\'a göre ara</string>
     <string name="feature_search_owner">Sahibine göre ara</string>
     <string name="feature_search_finder">Bulanlara göre ara</string>
-    <string name="feature_favorite">Sık kullanılanlara önbellek ekleme</string>
-    <string name="feature_voting">Önbellekler için oylama</string>
+    <string name="feature_favorite">Favorilere Geocache ekleme</string>
+    <string name="feature_voting">Geocache\'ler için oylama</string>
     <string name="init_maplines_title">Harita çizgilerinin özelleştirilmesi</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Mesafe bildirimi</string>
     <string name="init_proximityNotificationGeneral">Haritada genel mesafe bildirimi</string>
-    <string name="init_summary_proximityNotificationGeneral">Şu anda haritada görünen önbellek veya ara nokta uzak mesafeden veya yakın mesafeden daha yakınsa tek bir bildirim çalın. İki mesafe için farklı tonlar kullanılır.</string>
+    <string name="init_summary_proximityNotificationGeneral">Haritada görünen Geocache veya yol noktası uzak mesafeden veya yakın mesafeden daha yakınsa tek bir bildirim çalın. İki mesafe için farklı tonlar kullanılır.</string>
     <string name="init_proximityNotificationSpecific">Belirli yol noltası mesafe bildirimi</string>
     <string name="init_summary_proximityNotificationSpecific">O anda seçili önbellek veya ara nokta uzak mesafeden veya yakın mesafeden daha yakınsa, tekrarlanan bir bildirim çal. Önbellek veya ara nokta ayrıntıları açılırsa, haritada önbellek veya ara nokta açılır pencereleri gösterilirse veya pusula etkinse çalışır. İki mesafe için farklı tonlar kullanılır.</string>
     <string name="far_distance">Uzak mesafe</string>
@@ -941,7 +943,7 @@
     <string name="cache_menu_browser">Tarayıcıda aç</string>
     <string name="cache_menu_open_with">Birlikte aç…</string>
     <string name="cache_menu_visit">Ziyaretini Kaydet</string>
-    <string name="cache_log_too_long">c:geo, günlüğünüzü gönderemedi çünkü çok uzun. Ama böylesine kapsamlı bir günlük yazmaya çalıştığınız için teşekkürler ;-)</string>
+    <string name="cache_log_too_long">c:geo, kaydınızı gönderemedi çünkü çok uzun. Ama böylesine kapsamlı bir kayıt yazmaya çalıştığınız için teşekkürler ;-)</string>
     <string name="cache_menu_visit_offline">Hızlı çevrimdışı kayıt</string>
     <string name="cache_menu_spoilers">İpucu Görseller</string>
     <string name="cache_menu_around">Yakınlardaki Geocache\'ler</string>
@@ -1023,19 +1025,19 @@
     <string name="cache_listed_on">%s listesinde</string>
     <string name="cache_whereyougo_start">Bu kartuşu indirmek ve başlatmak için WhereYouGo\'yu açın</string>
     <string name="cache_whereyougo_install">Bu kartuşu indirmek ve başlatmak için WhereYouGo oynatıcısını kurun</string>
-    <string name="cache_chirpwolf_start">Bu önbellek için chirp verilerini okumak için Chirp Wolf\'u açın</string>
+    <string name="cache_chirpwolf_start">Bu Geocache\'in chirp verilerini okumak için Chirp Wolf\'u açın</string>
     <string name="cache_chirpwolf_install">Chirp verilerini okuyabilmek için Chirp Wolf\'u kurun</string>
     <string name="context_share_as_text">Metni paylaş</string>
     <string name="context_share_as_link">Bağlantıyı paylaş</string>
-    <string name="create_internal_cache">Kullanıcı tanımlı önbellek oluşturun</string>
-    <string name="create_internal_cache_short">Yeni önbellek</string>
+    <string name="create_internal_cache">Kullanıcı tanımlı Geocache oluşturun</string>
+    <string name="create_internal_cache_short">Yeni Geocache</string>
     <string name="internal_cache_default_name">Kullanıcı tanımlı cache #%1$d</string>
-    <string name="internal_cache_default_description">Bu, kullanıcı tanımlı bir önbellektir</string>
+    <string name="internal_cache_default_description">Bu, kullanıcı tanımlı bir Geocache\'dir</string>
     <string name="internal_cache_default_owner">Siz</string>
     <string name="internal_goto_targets_title">\'Konuma git\' hedefleri</string>
-    <string name="internal_goto_targets_description">Bu önbellek, son \"Git\" hedeflerinizi depolar. Ana menüdeki \"Git\" işlevini kullandığınızda otomatik olarak oluşturulur. Oraya girilen koordinatlar bu önbelleğin ara noktalarında saklanacaktır. Bu koordinatlara artık ihtiyacınız yoksa, bu önbelleği veya ara noktalarından herhangi birini güvenle silebilirsiniz. Ayrıca, önbelleği istediğiniz başka bir listeye taşıyabilirsiniz.</string>
+    <string name="internal_goto_targets_description">Bu Geocache, son \"Git\" hedeflerinizi kaydeder. Ana menüdeki \"Git\" işlevini kullandığınızda otomatik olarak oluşturulur. Oraya girilen koordinatlar bu Geocache\'in ara noktalarında saklanacaktır. Bu koordinatlara artık ihtiyacınız yoksa, bu Geocache\'i veya ara noktalarından herhangi birini güvenle silebilirsiniz. Ayrıca, Geocache\'i istediğiniz başka bir listeye taşıyabilirsiniz.</string>
     <string name="init_longtap_map">Haritaya uzun basın</string>
-    <string name="init_summary_longtap_map">Harita simgesine uzun dokunuşu etkinleştirin (bireysel bir rota oluşturun) veya boş harita alanında (kullanıcı tanımlı bir önbellek oluşturun)</string>
+    <string name="init_summary_longtap_map">Harita simgesine uzun dokunuşu etkinleştirin (bireysel bir rota oluşturun) veya boş harita alanında (kullanıcı tanımlı Geocache oluşturun)</string>
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
@@ -1156,6 +1158,8 @@
     <string name="map_select_multiple_items">Öğe seç</string>
     <string name="map_routing">Yönlendirme</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
+    <string name="quick_settings">Hızlı ayarlar</string>
+    <string name="map_show_in_map">Haritada göster</string>
     <!-- search -->
     <string name="search_bar_hint">Geocache\'leri ara</string>
     <string name="search_bar_desc">Geocache\'ler (geocode, anahtar kelime), Trackable (TB kodu)</string>
@@ -1168,8 +1172,10 @@
     <string name="search_kw">Anahtar kelimeler</string>
     <string name="search_kw_prefill">Anahtar kelime</string>
     <string name="search_kw_button">Anahtar kelimeye göre ara</string>
+    <string name="search_fbu">Bulan</string>
     <string name="search_fbu_prefill">Kullanıcı adı</string>
     <string name="search_fbu_button">Kullanıcı adına göre ara</string>
+    <string name="search_hbu">Saklayan</string>
     <string name="search_hbu_prefill">Sahibi</string>
     <string name="search_hbu_button">Sahibine göre ara</string>
     <string name="search_tb">Trackable</string>
@@ -1519,8 +1525,8 @@
     <string name="attribute_bonuscache_no">Bonus cache değil</string>
     <string name="attribute_powertrail_yes">Bir güç yolunun parçası</string>
     <string name="attribute_powertrail_no">Güç yolunun parçası değil</string>
-    <string name="attribute_challengecache_yes">Zorluk önbelleği</string>
-    <string name="attribute_challengecache_no">Meydan okuma önbelleği yok</string>
+    <string name="attribute_challengecache_yes">Challenge Geocache\'i</string>
+    <string name="attribute_challengecache_no">Challenge Geocache değil</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com çözüm denetleyicisi etkinleştirildi</string>
     <string name="attribute_hqsolutionchecker_no">Geocaching.com çözüm denetleyicisi etkin değil</string>
     <string name="attribute_handicaching_yes">Handicaching.com\'da derecelendirildi</string>
@@ -1690,6 +1696,8 @@
     <string name="switch_manual">Elle</string>
     <string name="switch_auto">Otomatik</string>
     <string name="switch_default">(varsayılan)</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
     <!-- view settings -->
     <string name="view_settings">Görünüm ayarları</string>
     <string name="delete_setting">Ayarları sil</string>
@@ -1703,6 +1711,7 @@
     <string name="downloadmap_title">Çevrimdışı harita indir</string>
     <string name="downloadmap_choose">Harita seç</string>
     <string name="downloadmap_filename">%s İndiriliyor</string>
+    <string name="button_continue">Devam et</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geçmiş İz\'i sil</string>
     <string name="map_trailhistory_cleared">Geçmiş İz\'i silindi</string>
