@@ -9,6 +9,7 @@
 <li>Please note, that your map selection will be reset due to the need of some internal changes in preparation for more Android 11 compatibility. This will happen once after upgrading to this version, and you can select the map of your choice after that. We apologize for any inconvenience.</li>
 <li>New: \"Quick settings\" icon in the map\'s bottom center giving access to several map settings</li>
 <li>Change: Removed \"Map settings\", \"Hide\" and \"Routing\" menu entries in favor of the new \"Quick settings\" popup</li>
+<li>Change: Removed \"Delete\" and \"Prevent waypoints from note\" entries in cache popup menu</li>
 <li>Fix: Skip artificial track points in position history</li>
 <li>New: Added option to \"Individual route\" map menu to automatically set the first route point as navigation target (OpenStreetMap only)</li>
 <li>New: Added option to reset individual navigation target set from either cache/waypoint popup or \"Individual route\" (OpenStreetMap only)</li>
