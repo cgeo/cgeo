@@ -83,7 +83,6 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         final boolean hasCoords = cache.getCoords() != null;
         menu.findItem(R.id.menu_default_navigation).setVisible(hasCoords);
         menu.findItem(R.id.menu_navigate).setVisible(hasCoords);
-        menu.findItem(R.id.menu_delete).setVisible(cache.isOffline());
         menu.findItem(R.id.menu_share).setVisible(!InternalConnector.getInstance().canHandle(cache.getGeocode()));
         menu.findItem(R.id.menu_caches_around).setVisible(hasCoords && cache.supportsCachesAround());
         menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
