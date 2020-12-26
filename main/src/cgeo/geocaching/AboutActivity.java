@@ -344,10 +344,4 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         fromActivity.startActivity(intent);
     }
 
-    public static void showStarting(final Activity fromActivity) {
-        final Intent intent = new Intent(fromActivity, AboutActivity.class);
-        intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.STARTING.ordinal());
-        fromActivity.startActivity(intent);
-    }
-
 }

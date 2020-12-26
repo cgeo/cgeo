@@ -452,4 +452,35 @@
         <item name="android:windowBackground">@drawable/splashscreen_background</item>
     </style>
 
+    <!-- installation wizard styles -->
+    <style name="InstallationWizardMarginsLR">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <style name="InstallationWizardButtonFull" parent="InstallationWizardMarginsLR">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">6dp</item>
+    </style>
+
+    <style name="InstallationWizardButtonFooter" parent="InstallationWizardMarginsLR">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
+    <style name="InstallationWizardTextViewBase" parent="InstallationWizardMarginsLR">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="InstallationWizardTextViewAdvanced" parent="InstallationWizardTextViewBase">
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

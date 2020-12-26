@@ -2024,4 +2024,30 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Export individual route</string>
     <string name="export_individualroute_success">Exported individual route to \"%s\"</string>
+
+    <!-- install wizard -->
+    <string name="previous">Previous</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    <string name="advanced">Advanced</string>
+    <string name="newline">\n</string>
+    <string name="wizard_welcome_title">Welcome to c:geo</string>
+    <string name="wizard_intro">It looks like this is the first time c:geo is used on this device. Shall I help you with configuration? It\'s just a few steps.</string>
+    <string name="wizard_outro">Thanks for configuring c:geo.\nHave fun!</string>
+    <string name="wizard_permissions_title">Set app permissions</string>
+    <string name="wizard_permissions_intro">c:geo needs certain permissions to function correctly. I will explain them in the next steps.\nWithout these permissions you will not be able to use c:geo.</string>
+    <string name="wizard_platforms_title">Configure platforms</string>
+    <string name="wizard_platforms_intro">To download caches you need an account for at least one of the geocaching platforms supported by c:geo.\nIn the next step you can optionally create an account for and set-up the connection to geocaching.com.</string>
+    <string name="wizard_platforms_gc_title">Configure geocaching.com</string>
+    <string name="wizard_welcome_advanced">Advanced configuration</string>
+    <string name="wizard_advanced_offlinemaps_label">Offline maps</string>
+    <string name="wizard_advanced_offlinemaps_info">c:geo can download map files for offline usage</string>
+    <string name="wizard_advanced_brouter_label">Routing app</string>
+    <string name="wizard_advanced_brouter_info">c:geo can navigate to targets and show routing info on your map by installing and configuring a companion app named \"BRouter Offline Navigation\"</string>
+    <string name="wizard_advanced_services_label">Geocaching services</string>
+    <string name="wizard_advanced_services_info">c:geo supports several geocaching services</string>
+    <string name="wizard_advanced_restore_label">Restore</string>
+    <string name="wizard_advanced_restore_info">Restore settings / data from a previous installation</string>
+
 </resources>

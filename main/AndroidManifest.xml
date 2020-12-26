@@ -119,6 +119,13 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
+            android:name=".InstallWizardActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/cgeo_main"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
             android:name=".SearchActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"

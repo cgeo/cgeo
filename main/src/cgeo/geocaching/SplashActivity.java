@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.settings.Settings;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,10 +14,16 @@ class SplashActivity extends AppCompatActivity {
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
 
-        // continue by starting MainActivity and finishing this one
-        final Intent main = new Intent(this, MainActivity.class);
-        main.putExtras(getIntent());
-        startActivity(main, null);
+        final Intent intent;
+        if (Settings.getLastChangelogChecksum() == 0) {
+            // new install => run installation wizard
+            intent = new Intent(this, InstallWizardActivity.class);
+        } else {
+            // otherwise regular startup
+            intent = new Intent(this, MainActivity.class);
+            intent.putExtras(getIntent());
+        }
+        startActivity(intent);
         finish();
     }
 
