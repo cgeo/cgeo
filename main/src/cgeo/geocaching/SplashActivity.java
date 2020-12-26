@@ -15,7 +15,7 @@ class SplashActivity extends AppCompatActivity {
         // continue by starting MainActivity and finishing this one
         final Intent main = new Intent(this, MainActivity.class);
         main.putExtras(getIntent());
-        startActivity(main);
+        startActivity(main, null);
         finish();
     }
 
