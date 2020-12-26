@@ -787,10 +787,7 @@ public class MainActivity extends AbstractActionBarActivity {
             final long checksum = TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
             Settings.setLastChangelogChecksum(checksum);
 
-            if (lastChecksum == 0) {
-                // show starting page after install
-                AboutActivity.showStarting(this);
-            } else if (lastChecksum != checksum) {
+            if (lastChecksum != checksum) {
                 // show change log page after update
                 AboutActivity.showChangeLog(this);
             }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/wizard_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        style="@style/InstallationWizardMarginsLR" />
+
+    <TextView
+        android:id="@+id/wizard_title"
+        android:layout_below="@id/wizard_logo"
+        android:layout_marginTop="32dp"
+        style="@style/InstallationWizardTextViewBase"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/wizard_text"
+        android:layout_below="@id/wizard_title"
+        android:layout_marginTop="32dp"
+        style="@style/InstallationWizardTextViewBase"
+        android:textSize="22sp" />
+
+    <include layout="@layout/install_wizard_footer" />
+
+</RelativeLayout>

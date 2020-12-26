@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wizard_header"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/wizard_prev"
+        android:layout_alignParentBottom="true"
+        style="@style/InstallationWizardButtonFooter"
+        android:text="@string/previous" />
+    <Button
+        android:id="@+id/wizard_skip"
+        android:layout_centerHorizontal="true"
+        style="@style/InstallationWizardButtonFooter"
+        android:text="@string/skip" />
+    <Button
+        android:id="@+id/wizard_next"
+        android:layout_alignParentRight="true"
+        style="@style/InstallationWizardButtonFooter"
+        android:text="@string/next" />
+</RelativeLayout>

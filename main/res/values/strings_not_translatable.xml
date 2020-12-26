@@ -31,6 +31,7 @@
     <string translatable="false" name="settings_themes_url">https://manual.cgeo.org/en/offlinemaps</string>
     <string translatable="false" name="settings_send2cgeo_url">https://send2.cgeo.org/</string>
     <string translatable="false" name="settings_facebook_login_url">https://faq.cgeo.org/#facebook-login</string>
+    <string translatable="false" name="manual_firststeps">https://manual.cgeo.org/en/firststeps</string>
 
     <string translatable="false" name="map_attribution_openstreetmap_html"><![CDATA[<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>]]></string>
     <string translatable="false" name="map_attribution_openstreetmapde_html"><![CDATA[© <a href="https://openstreetmap.de/">OpenStreetMap DE</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
@@ -207,8 +208,9 @@
     <string translatable="false" name="cgeo_queryMapFile_resultParam">mapfile</string>
     <string translatable="false" name="cgeo_queryMapFile_actionParam">forceAndFeedback</string>
 
-    <!-- Chirp Wolf play store id -->
+    <!-- play store ids -->
     <string translatable="false" name="chirpwolf_package">de.wolffire.chirpwolf</string>
+    <string translatable="false" name="brouter_package">btools.routingapp</string>
 
     <!-- map server urls -->
     <string translatable="false" name="mapserver_osm_v5">https://ftp-stud.hs-esslingen.de/pub/Mirrors/download.mapsforge.org/maps/v5/</string>

@@ -459,6 +459,10 @@ public class Settings {
         return getBoolean(R.string.pref_connectorGCActive, false);
     }
 
+    public static void setGCConnectorActive(final boolean value) {
+        putBoolean(R.string.pref_connectorGCActive, value);
+    }
+
     public static boolean isECConnectorActive() {
         return getBoolean(R.string.pref_connectorECActive, false);
     }
