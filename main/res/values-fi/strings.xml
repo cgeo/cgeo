@@ -147,7 +147,7 @@
     <string name="log_problem_archive_text">Tämä kätköilijä ilmoitti, että kätkö pitäisi arkistoida. Vapaaehtoiselle kätkötarkastajalle on ilmoitettu.</string>
     <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">Kuva</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
@@ -739,6 +739,7 @@
     <string name="init_create_memory_dump">Luo muistivedos</string>
     <string name="init_memory_dump">Muistivedos</string>
     <string name="init_memory_dumped">Muistivedos luotu %s</string>
+    <string name="init_please_wait">Hetkinen…</string>
     <string name="init_hardware_acceleration_title">Grafiikan parannus</string>
     <string name="init_hardware_acceleration_note">Laitteistokiihdytys esittää graafisia elementtejä nopeammin. Kuitenkin jotkut Android-laitteet sisältävät bugin, joka näyttää tekstit epäselvinä (huomattavan lihavoidut merkit). Ota laitteistokiihdytys pois käytöstä, jos tämä tapahtuu sinulle.</string>
     <string name="init_hardware_acceleration">Mahdollista laitteistokiihdytys</string>
@@ -1766,6 +1767,8 @@
     <string name="switch_manual">Manuaalinen</string>
     <string name="switch_auto">Automaattinen</string>
     <string name="switch_default">(oletus)</string>
+    <string name="yes">Kyllä</string>
+    <string name="no">Ei</string>
     <!-- view settings -->
     <string name="view_settings">Näytä asetukset</string>
     <string name="delete_setting">Poista asetus</string>

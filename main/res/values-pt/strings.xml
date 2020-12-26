@@ -147,7 +147,7 @@
     <string name="log_problem_archive_text">Este geocacher reportou que esta geocache deve ser arquivada. Um revisor voluntário da comunidade foi notificado.</string>
     <string name="log_image_scale_option_noscaling">Não redimensionar</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">Imagem</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduzir para %s</string>
@@ -740,6 +740,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_create_memory_dump">Criar imagem de erro da memória</string>
     <string name="init_memory_dump">Imagem de erro da memória</string>
     <string name="init_memory_dumped">Imagem de erro da memória em %s</string>
+    <string name="init_please_wait">Por favor, aguarde…</string>
     <string name="init_hardware_acceleration_title">Renderização acelerada por hardware</string>
     <string name="init_hardware_acceleration_note">A aceleração por hardware processa os elementos gráficos mais rapidamente no ecrã. No entanto, em alguns dispositivos o sistema operativo Android contém erros e algum texto pode aparecer desfocado (principalmente caracteres a negrito). Desactive a aceleração por hardware se isso lhe acontecer.</string>
     <string name="init_hardware_acceleration">Activar renderização acelerada por hardware</string>
