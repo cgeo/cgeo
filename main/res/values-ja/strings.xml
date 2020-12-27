@@ -1793,4 +1793,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- individual route export -->
     <string name="export_individualroute_title">個別ルートのエクスポート</string>
     <string name="export_individualroute_success">個別ルートを「%s」にエクスポートしました</string>
+    <!-- install wizard -->
 </resources>
