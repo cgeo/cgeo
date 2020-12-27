@@ -77,7 +77,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         setNavigation(this::basicConfiguration, 0, null, 0, this::finishWizard, R.string.finish);
 
         findViewById(R.id.wizard_offlinemaps).setOnClickListener(v -> startActivityForResult(new Intent(this, MapDownloadSelectorActivity.class), MapDownloadUtils.REQUEST_CODE));
-        findViewById(R.id.wizard_brouter).setOnClickListener(v -> ProcessUtils.openMarket(this, getString(R.string.brouter_package)));
+        findViewById(R.id.wizard_brouter).setOnClickListener(v -> ProcessUtils.openMarket(this, getString(R.string.package_brouter)));
         findViewById(R.id.wizard_services).setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, this));
         findViewById(R.id.wizard_restore).setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_backup, this));
     }

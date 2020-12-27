@@ -25,7 +25,7 @@ public class QueryMapFile extends Activity {
         if (forceAndFeedback || (mapFile != null && !"".equals(mapFile))) {
             try {
                 final Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setComponent(new ComponentName(getString(R.string.whereyougo_package), getString(R.string.whereyougo_action_Mapsforge)));
+                intent.setComponent(new ComponentName(getString(R.string.package_whereyougo), getString(R.string.whereyougo_action_Mapsforge)));
                 intent.putExtra(getString(R.string.cgeo_queryMapFile_resultParam), mapFile);
                 intent.putExtra(getString(R.string.cgeo_queryMapFile_actionParam), forceAndFeedback);
                 startActivity(intent);

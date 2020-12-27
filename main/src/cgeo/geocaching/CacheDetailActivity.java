@@ -1530,14 +1530,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         CacheDetailActivity.this.startActivity(intent);
                     } else {
-                        ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.whereyougo_package));
+                        ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.package_whereyougo));
                     }
                 });
             }
         }
 
         private void updateChirpWolfBox() {
-            final Intent chirpWolf = ProcessUtils.getLaunchIntent(getString(R.string.chirpwolf_package));
+            final Intent chirpWolf = ProcessUtils.getLaunchIntent(getString(R.string.package_chirpwolf));
             final String compare = CacheAttribute.WIRELESSBEACON.getValue(true);
             boolean isEnabled = false;
             for (String current : cache.getAttributes()) {
@@ -1554,12 +1554,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 final ImageButton buttonCW = view.findViewById(R.id.send_to_chirp);
                 buttonCW.setOnClickListener(v -> {
                     // re-check installation state, might have changed since creating the view
-                    final Intent chirpWolf2 = ProcessUtils.getLaunchIntent(getString(R.string.chirpwolf_package));
+                    final Intent chirpWolf2 = ProcessUtils.getLaunchIntent(getString(R.string.package_chirpwolf));
                     if (null != chirpWolf2) {
                         chirpWolf2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         CacheDetailActivity.this.startActivity(chirpWolf2);
                     } else {
-                        ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.chirpwolf_package));
+                        ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.package_chirpwolf));
                     }
                 });
             }

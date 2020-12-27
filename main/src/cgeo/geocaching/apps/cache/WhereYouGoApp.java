@@ -55,6 +55,6 @@ public class WhereYouGoApp extends AbstractGeneralApp {
     }
 
     public static boolean isWhereYouGoInstalled() {
-        return null != ProcessUtils.getLaunchIntent(getString(R.string.whereyougo_package));
+        return null != ProcessUtils.getLaunchIntent(getString(R.string.package_whereyougo));
     }
 }
