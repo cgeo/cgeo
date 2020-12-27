@@ -1565,4 +1565,5 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_trail_show">Rādīt pārvietojumu</string>
     <!-- history track export -->
     <!-- individual route export -->
+    <!-- install wizard -->
 </resources>
