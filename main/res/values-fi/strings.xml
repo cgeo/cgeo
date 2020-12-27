@@ -1824,4 +1824,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Vie yksittäinen reitti</string>
     <string name="export_individualroute_success">Viety yksittäinen reitti kohteeseen \"%s\"</string>
+    <!-- install wizard -->
 </resources>
