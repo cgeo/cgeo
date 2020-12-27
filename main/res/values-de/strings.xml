@@ -1824,4 +1824,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Individuelle Route exportieren</string>
     <string name="export_individualroute_success">Individuelle Route nach \"%s\" exportiert</string>
+    <!-- install wizard -->
 </resources>
