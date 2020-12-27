@@ -727,6 +727,10 @@
     <string name="init_circlecolor_summary">Select color and opaqueness for circle line. Circles are used as a visual representation for the minimum radius around a cache or physical waypoint, wherein no other cache or physical waypoint is allowed. (Applies to geocaching.com)</string>
     <string name="init_circlefillcolor">Circle fill color</string>
     <string name="init_circlefillcolor_summary">Select color and opaqueness for the circles to be filled with</string>
+    <string name="init_accuracycirclecolor">Accuracy circle line color</string>
+    <string name="init_accuracycirclecolor_summary">Select color and opaqueness for accuracy circle line. Accuracy circle is used as a visual representation for location signal accuracy.</string>
+    <string name="init_accuracycirclefillcolor">Accuracy circle fill color</string>
+    <string name="init_accuracycirclefillcolor_summary">Select color and opaqueness for the accuracy circles to be filled with</string>
     <string name="init_share_after_export">Open share menu after GPX export</string>
     <string name="init_include_found_status">Include \"Found\" status</string>
     <string name="init_trackautovisit">Visit TBs</string>

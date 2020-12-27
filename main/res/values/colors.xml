@@ -35,5 +35,7 @@
     <color name="default_directioncolor">#80FF3333</color>
     <color name="default_circlecolor">#44BB0000</color>
     <color name="default_circlefillcolor">#66BB0000</color>
+    <color name="default_accuracycirclecolor">#66000000</color>
+    <color name="default_accuracycirclefillcolor">#08000000</color>
 
 </resources>
