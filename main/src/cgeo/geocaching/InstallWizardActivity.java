@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.settings.Credentials;
@@ -33,7 +35,8 @@ public class InstallWizardActivity extends AppCompatActivity {
     private enum WizardStep {
         WIZARD_START,
         WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION,
-        WIZARD_PLATFORMS_GC, WIZARD_PLATFORMS_OTHERS,
+        WIZARD_PLATFORMS,
+        WIZARD_ADVANCED,
         WIZARD_END
     }
     private WizardStep step = WizardStep.WIZARD_START;
@@ -46,7 +49,14 @@ public class InstallWizardActivity extends AppCompatActivity {
     private ImageView logo = null;
     private TextView title = null;
     private TextView text = null;
-    private Button button = null;
+
+    private TextView button1Info = null;
+    private Button button1 = null;
+    private TextView button2Info = null;
+    private Button button2 = null;
+    private TextView button3Info = null;
+    private Button button3 = null;
+
     private Button prev = null;
     private Button skip = null;
     private Button next = null;
@@ -58,40 +68,32 @@ public class InstallWizardActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             step = WizardStep.values()[savedInstanceState.getInt(BUNDLE_STEP)];
         }
-        basicConfiguration();
-    }
-
-    private void basicConfiguration() {
         setContentView(R.layout.install_wizard);
-        bindTitleAndFooter();
+
         logo = findViewById(R.id.wizard_logo);
-        text = findViewById(R.id.wizard_text);
-        button = findViewById(R.id.wizard_button);
-        updateDialog();
-    }
-
-    private void advancedConfiguration() {
-        setContentView(R.layout.install_wizard_advanced);
-        bindTitleAndFooter();
-        title.setText(R.string.wizard_welcome_advanced);
-        setNavigation(this::basicConfiguration, 0, null, 0, this::finishWizard, R.string.finish);
-
-        findViewById(R.id.wizard_offlinemaps).setOnClickListener(v -> startActivityForResult(new Intent(this, MapDownloadSelectorActivity.class), MapDownloadUtils.REQUEST_CODE));
-        findViewById(R.id.wizard_brouter).setOnClickListener(v -> ProcessUtils.openMarket(this, getString(R.string.package_brouter)));
-        findViewById(R.id.wizard_services).setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, this));
-        findViewById(R.id.wizard_restore).setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_backup, this));
-    }
-
-    private void bindTitleAndFooter() {
         title = findViewById(R.id.wizard_title);
+        text = findViewById(R.id.wizard_text);
+
+        button1Info = findViewById(R.id.wizard_button1_info);
+        button1 = findViewById(R.id.wizard_button1);
+        button2Info = findViewById(R.id.wizard_button2_info);
+        button2 = findViewById(R.id.wizard_button2);
+        button3Info = findViewById(R.id.wizard_button3_info);
+        button3 = findViewById(R.id.wizard_button3);
+
         prev = findViewById(R.id.wizard_prev);
         skip = findViewById(R.id.wizard_skip);
         next = findViewById(R.id.wizard_next);
+
+        updateDialog();
     }
 
     private void updateDialog() {
         logo.setImageResource(R.mipmap.ic_launcher);
-        setButton(0, null);
+        text.setVisibility(View.VISIBLE);
+        setButton(button1, 0, null, button1Info, 0);
+        setButton(button2, 0, null, button2Info, 0);
+        setButton(button3, 0, null, button3Info, 0);
         switch (step) {
             case WIZARD_START: {
                 title.setText(R.string.wizard_welcome_title);
@@ -115,21 +117,46 @@ public class InstallWizardActivity extends AppCompatActivity {
                 text.setText(R.string.location_permission_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestLocation, 0);
                 break;
-            case WIZARD_PLATFORMS_GC:
+            case WIZARD_PLATFORMS:
                 title.setText(R.string.wizard_platforms_title);
                 text.setText(R.string.wizard_platforms_intro);
-                setNavigation(this::gotoPrevious, 0, this::gotoNext, 0, this::authorizeGC, 0);
-                break;
-            case WIZARD_PLATFORMS_OTHERS:
-                title.setText(R.string.wizard_platforms_title);
-                text.setText(R.string.wizard_platforms_others);
-                setButton(R.string.wizard_advanced_services_label, v -> SettingsActivity.openForScreen(R.string.preference_screen_services, this));
                 setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, 0);
+                setButton(button1, R.string.wizard_platforms_gc, v -> authorizeGC(), button1Info, 0);
+                setButton(button2, R.string.wizard_platforms_others, v -> SettingsActivity.openForScreen(R.string.preference_screen_services, this), button2Info, 0);
+                break;
+            case WIZARD_ADVANCED:
+                title.setText(R.string.wizard_welcome_advanced);
+                text.setVisibility(View.GONE);
+                setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, 0);
+                setButton(button1, R.string.wizard_advanced_offlinemaps_label, v -> startActivityForResult(new Intent(this, MapDownloadSelectorActivity.class), MapDownloadUtils.REQUEST_CODE), button1Info, R.string.wizard_advanced_offlinemaps_info);
+                setButton(button2, R.string.wizard_advanced_brouter_label, v -> ProcessUtils.openMarket(this, getString(R.string.package_brouter)), button2Info, R.string.wizard_advanced_brouter_info);
+                setButton(button3, R.string.wizard_advanced_restore_label, v -> SettingsActivity.openForScreen(R.string.preference_screen_backup, this), button3Info, R.string.wizard_advanced_restore_info);
                 break;
             case WIZARD_END: {
                 title.setText(R.string.wizard_welcome_title);
-                text.setText(R.string.wizard_outro);
-                setNavigation(this::gotoPrevious, 0, this::advancedConfiguration, R.string.advanced, this::finishWizard, R.string.finish);
+                final StringBuilder info = new StringBuilder();
+                info.append(getString(R.string.wizard_status_title)).append(":\n")
+                    .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                    .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                    .append(getString(R.string.wizard_status_platform));
+                boolean platformConfigured = false;
+                for (final IConnector conn : ConnectorFactory.getActiveConnectorsWithValidCredentials()) {
+                    if (!platformConfigured) {
+                        info.append(":\n");
+                    }
+                    info.append("- ").append(conn.getName()).append(": ").append(getString(android.R.string.ok)).append("\n");
+                    platformConfigured = true;
+                }
+                if (!platformConfigured) {
+                    info.append(": ").append(getString(R.string.status_not_ok)).append("\n");
+                }
+                button1Info.setVisibility(View.VISIBLE);
+                button1Info.setText(info);
+
+                final boolean configurationOK = hasStoragePermission() && hasLocationPermission() && platformConfigured;
+                text.setText(configurationOK ? R.string.wizard_outro_ok : R.string.wizard_outro_error);
+
+                setNavigation(this::gotoPrevious, 0, null, 0, this::finishWizard, R.string.finish);
                 break;
             }
             default: {
@@ -165,7 +192,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         }
     }
 
-    private void setButton(final int labelResId, @Nullable final View.OnClickListener listener) {
+    private void setButton(final Button button, final int labelResId, @Nullable final View.OnClickListener listener, final TextView buttonInfo, final int infoResId) {
         if (button != null) {
             if (listener == null) {
                 button.setVisibility(View.GONE);
@@ -173,6 +200,14 @@ public class InstallWizardActivity extends AppCompatActivity {
                 button.setVisibility(View.VISIBLE);
                 button.setText(labelResId);
                 button.setOnClickListener(listener);
+            }
+        }
+        if (buttonInfo != null) {
+            if (infoResId == 0) {
+                buttonInfo.setVisibility(View.GONE);
+            } else {
+                buttonInfo.setVisibility(View.VISIBLE);
+                buttonInfo.setText(infoResId);
             }
         }
     }
@@ -204,7 +239,6 @@ public class InstallWizardActivity extends AppCompatActivity {
         return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (hasStoragePermission() && hasLocationPermission())))
             || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission()))
             || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission()))
-            || (step == WizardStep.WIZARD_PLATFORMS_GC && hasValidGCCredentials())
             ;
     }
 
