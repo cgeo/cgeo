@@ -1766,4 +1766,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Exportera individuell rutt</string>
     <string name="export_individualroute_success">Enskilda rutten exporterades till \"%s\"</string>
+    <!-- install wizard -->
 </resources>
