@@ -467,7 +467,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private void routingModeChanged(final RoutingMode newValue) {
         Settings.setRoutingMode(newValue);
-        Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+        if ((null != manualRoute && manualRoute.getNumSegments() > 0) || null != tracks) {
+            Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+        }
         manualRoute.reloadRoute(routeLayer);
         if (null != tracks) {
             try {

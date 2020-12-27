@@ -849,7 +849,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private void routingModeChanged(final RoutingMode newValue) {
         Settings.setRoutingMode(newValue);
-        Toast.makeText(activity, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+        if ((null != manualRoute && manualRoute.getNumSegments() > 0) || null != tracks) {
+            Toast.makeText(activity, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+        }
         manualRoute.reloadRoute(overlayPositionAndScale);
         if (null != tracks) {
             try {
