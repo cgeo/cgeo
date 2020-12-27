@@ -1285,6 +1285,7 @@
     <string name="map_gm_autorotation">Map auto rotation</string>
     <string name="map_gm_autorotation_disable">Disable map auto rotation?\n\nYou can enable it again using the Map rotation menu</string>
     <string name="quick_settings">Quick settings</string>
+    <string name="quick_settings_info">Some map settings (Map settings, hide, routing) have been moved to the new \"Quick settings\" popup.\nYou can open this popup using the icon in the map\'s bottom center.</string>
     <string name="map_show_in_map">Show in map</string>
 
     <!-- search -->
