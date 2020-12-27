@@ -48,7 +48,7 @@ public class FileNameCreator {
     }
 
     public String getMimeType() {
-        return mimeType == null ? MIME_TYPE_TEXT : mimeType;
+        return mimeType;
     }
 
     public String createName() {

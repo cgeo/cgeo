@@ -167,7 +167,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         }
         AndroidBeam.disable(this);
         initializeCommonFields();
-        getPublicLocalStorage().checkAndGrantBaseFolderAccess();
     }
 
     private void initializeCommonFields() {

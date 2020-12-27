@@ -136,8 +136,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
-
-        publicLocalStorage.checkAndGrantBaseFolderAccess();
     }
 
     private void openInitialScreen(final int initialScreen) {
@@ -195,7 +193,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         bindGeocachingUserToGCVoteuser();
 
         //PublicFolder initialization
-        initPublicFolders(PublicLocalFolder.ALL);
+        initPublicFolders(PublicLocalFolder.values());
 
     }
 

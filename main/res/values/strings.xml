@@ -845,7 +845,7 @@
     <string name="publiclocalstorage_userdefined">User-Defined</string>
     <string name="publiclocalstorage_default">Default</string>
     <string name="publiclocalstorage_grantaccess_dialog_title">Please grant access to folder</string>
-    <string name="publiclocalstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo needs a local folder to store its public data. Starting with Android 11 / SDK30, permissions to use this folder needs to be explicitely granted by end user.</p><p>In the following dialog, please select or create such a folder on your device. If you upgraded c:geo from a previous version, select folder "cgeo" on your device root.</p>]]></string>
+    <string name="publiclocalstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo needs a local folder to store its public data. Starting with Android 11 / SDK30, permissions to use this folder needs to be explicitely granted by end user.</p><p>Please select or create such a folder on your device (click ok to start). If you upgraded c:geo from a previous version, we advise you to select folder "cgeo" on your device root.</p><p>Until then c:geo tries to use a deprecated API to write files to \'%s\'</p>]]></string>
     <string name="publiclocalstorage_selectfolder_dialog_user_or_default_title">User-defined or default?</string>
     <string name="publiclocalstorage_selectfolder_dialog_user_or_default_msg">Do you want to use the default location \'%s\' or select a user-defined folder?</string>
     <string name="publiclocalstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
@@ -857,6 +857,11 @@
     <string name="publiclocalstorage_err_folder_not_a_directory_abort">Folder \'%s\' inaccessible or not a directory, aborting access</string>
     <string name="publiclocalstorage_err_subfolder_not_a_directory_usebase">\'%s\' in folder \'%s\' is not a folder, using base folder instead"</string>
     <string name="publiclocalstorage_err_subfolder_creation_problem_usebase">Subfolder \'%s\' in folder \'%s\' could not be created, using base folder instead</string>
+    <string name="publiclocalstorage_err_reading_file_does_not_exist">File \'%s\' could not be read, it doesn\'t seem to exist</string>
+    <string name="publiclocalstorage_err_reading_file_no_permission">File \'%s\' could not be read, insufficient permissions</string>
+    <string name="publiclocalstorage_err_writing_file_Io_problem">File \'%s\' could not be written, an IO problem occured</string>
+    <string name="publiclocalstorage_err_writing_file_no_permission">File \'%s\' could not be written, insufficient permissions</string>
+
 
     <!-- auth generic -->
     <string name="auth_authorize">Authorize c:geo</string>

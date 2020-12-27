@@ -22,7 +22,7 @@ public class QueryMapFile extends Activity {
         final Bundle bundle = getIntent().getExtras();
         final boolean forceAndFeedback = null != bundle && bundle.getBoolean(getString(R.string.cgeo_queryMapFile_actionParam));
 
-        final String mapFile = Settings.getPublicFolderUri(PublicLocalFolder.OFFLINE_MAPS).toString();
+        final String mapFile = Settings.getPublicLocalFolderUri(PublicLocalFolder.OFFLINE_MAPS).toString();
         if (forceAndFeedback || (mapFile != null && !"".equals(mapFile))) {
             try {
                 final Intent intent = new Intent(Intent.ACTION_SENDTO);

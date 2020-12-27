@@ -126,8 +126,8 @@ public final class SystemInformation {
     }
 
     private static void appendPublicFolders(@NonNull final StringBuilder body) {
-        body.append("\nPublic Folders: #").append(PublicLocalFolder.ALL.length);
-        for (PublicLocalFolder folder : PublicLocalFolder.ALL) {
+        body.append("\nPublic Folders: #").append(PublicLocalFolder.values().length);
+        for (PublicLocalFolder folder : PublicLocalFolder.values()) {
             body.append("\n- ").append(folder.toString())
                 .append(" (").append(PublicLocalStorage.get().getFolderSystemInformation(folder)).append(")");
         }

@@ -10,7 +10,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.DocumentsContract;
 
 import androidx.annotation.Nullable;
@@ -49,46 +48,32 @@ public class PublicLocalStorageActivityHelper {
         this.activity = activity;
     }
 
-    /** convenience version of {@link #checkAndGrantFolderAccess(PublicLocalFolder, boolean, Consumer)}.
-     * Call this method in {@link Activity#onCreate(Bundle)} with all PublicLocalFolders this Activity MIGHT need to access.
+    /** Should be called on startup to check whether base dir is set as wanted.
      */
-    public void checkAndGrantBaseFolderAccess() {
-        checkAndGrantFolderAccess(
-            PublicLocalFolder.BASE_DIR,
-            true,
-            R.string.publiclocalstorage_grantaccess_dialog_msg_basedir_html,
-            //check after setting whether access is now granted. If not, repeat...
-            folder -> checkAndGrantBaseFolderAccess());
-    }
+    public void checkBaseFolderAccess() {
 
-    /**
-     * Checks and (if necessary) asks for grant of a read/write permission for a folder. Note that asking for grants is only possible
-     * when the context associated with this instance is an Activity AND in this Activities {@link Activity#onActivityResult(int, int, Intent)} method
-     * does call {@link #onActivityResult(int, int, Intent)}
-     * @param folder folder to ask/grant access for
-     * @param requestGrantIfNecessary if true and folder does NOT have necessary grants, then these grants are requested
-     * @param detailMessageHtml resourceid for a HTML message to display as explaining message to the user
-     * @param callback if grants are requested, then this callback is called when request is granted
-     * @return true if grant is already available, false otherwise
-     */
-    private boolean checkAndGrantFolderAccess(final PublicLocalFolder folder, final boolean requestGrantIfNecessary, @StringRes  final int detailMessageHtml, final Consumer<PublicLocalFolder> callback) {
+        final PublicLocalFolder folder = PublicLocalFolder.BASE;
 
-        if (PublicLocalStorage.get().checkFolderAvailability(folder)) {
-            return true;
+        if (folder.isUserDefinedLocation() && PublicLocalStorage.get().checkFolderAvailability(folder)) {
+            //everything is as we want it
+            return;
         }
-        if (requestGrantIfNecessary) {
-            final AlertDialog dialog = Dialogs.newBuilder(activity)
-                .setTitle(R.string.publiclocalstorage_grantaccess_dialog_title)
-                .setMessage(HtmlCompat.fromHtml(activity.getString(detailMessageHtml), HtmlCompat.FROM_HTML_MODE_LEGACY))
-                .setPositiveButton(android.R.string.ok, (d, p) -> {
-                    d.dismiss();
-                    selectFolderUri(folder, callback);
-                })
-                .create();
-            dialog.show();
-            Dialogs.makeLinksClickable(dialog);
-        }
-        return false;
+
+        //ask/remind user to choose an explicit BASE dir, otherwise the default will be used
+        final AlertDialog dialog = Dialogs.newBuilder(activity)
+            .setTitle(R.string.publiclocalstorage_grantaccess_dialog_title)
+            .setMessage(HtmlCompat.fromHtml(activity.getString(R.string.publiclocalstorage_grantaccess_dialog_msg_basedir_html, folder.getDefaultLocation().getUserDisplayableName()),
+                HtmlCompat.FROM_HTML_MODE_LEGACY))
+            .setPositiveButton(android.R.string.ok, (d, p) -> {
+                d.dismiss();
+                selectFolderUri(folder, null);
+            })
+            .setNegativeButton(android.R.string.cancel, (d, p) -> {
+                d.dismiss();
+            })
+            .create();
+        dialog.show();
+        Dialogs.makeLinksClickable(dialog);
     }
 
     /**
@@ -98,11 +83,11 @@ public class PublicLocalStorageActivityHelper {
      * @param callback called after user changed the uri. Callback is always called, even if user cancelled or error occured
      */
     public void selectFolderUri(final PublicLocalFolder folder, final Consumer<PublicLocalFolder> callback) {
-        //if this is not the base dir, user may choose to use default dir or user-selected dir
-        if (!folder.isBaseFolder()) {
+
+        if (!PublicLocalFolder.BASE.equals(folder)) {
             Dialogs.newBuilder(activity)
                 .setTitle(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_title)
-                .setMessage(activity.getString(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_msg, folder.getDefaultFolderUserDisplayableUri()))
+                .setMessage(activity.getString(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_msg, folder.getDefaultLocation().getUserDisplayableName()))
                 .setPositiveButton(R.string.publiclocalstorage_userdefined, (d, p) -> {
                     d.dismiss();
                     selectUserFolderUri(folder, callback);
@@ -124,7 +109,7 @@ public class PublicLocalStorageActivityHelper {
                 .setCancelable(true)
                 .create().show();
         } else {
-            selectUserFolderUri(folder, callback);
+            selectUserFolderUri(folder,  callback);
         }
     }
 
@@ -133,8 +118,8 @@ public class PublicLocalStorageActivityHelper {
         // call for document tree dialog
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | (folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-        Log.i("Start uri dir: " + folder.getBaseUri());
-        final Uri startUri = folder.getUri();
+        Log.i("Start uri dir: " + folder);
+        final Uri startUri = folder.getLocation().getUri();
         if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Field is only supported starting with SDK26
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);

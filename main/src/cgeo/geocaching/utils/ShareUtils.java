@@ -47,12 +47,12 @@ public class ShareUtils {
 
     public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final Uri uri, @StringRes final int titleResourceId, final String receiver) {
         final String usedReceiver = receiver == null ? context.getString(R.string.support_mail) : receiver;
-        final Intent intent = createShareIntentInternal(TYPE_EMAIL, subject, body, uri, usedReceiver);
+        final Intent intent = createShareIntentInternal(context, TYPE_EMAIL, subject, body, uri, usedReceiver);
         shareInternal(context, intent, titleResourceId);
     }
 
     private static void shareInternal(final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final File file, @StringRes final int titleResourceId) {
-        final Intent intent = createShareIntentInternal(mimeType, subject, body, fileToUri(context, file), null);
+        final Intent intent = createShareIntentInternal(context, mimeType, subject, body, fileToUri(context, file), null);
         shareInternal(context, intent, titleResourceId);
     }
 
@@ -75,7 +75,7 @@ public class ShareUtils {
     }
 
     /** context needs to be filled only when file is not null */
-    private static Intent createShareIntentInternal(@NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final Uri uri, @Nullable final String receiver) {
+    private static Intent createShareIntentInternal(@NonNull final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final Uri uri, @Nullable final String receiver) {
 
         final Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(mimeType);
@@ -89,8 +89,14 @@ public class ShareUtils {
             intent.putExtra(Intent.EXTRA_EMAIL, new String[]{receiver});
         }
         if (null != uri) {
+            Uri uriToUse = uri;
+            //check if this is a file uri and convert if necessary
+            if ("file".equals(uri.getScheme())) {
+                uriToUse = fileToUri(context, new File(uri.getPath()));
+            }
+
             // Grant temporary read permission to the content URI.
-            intent.putExtra(Intent.EXTRA_STREAM, uri);
+            intent.putExtra(Intent.EXTRA_STREAM, uriToUse);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
         return intent;
@@ -101,11 +107,11 @@ public class ShareUtils {
     }
 
     public static void shareLink(final Context context, final String subject, final String url) {
-        shareInternal(context, getShareLinkIntent(subject, url), R.string.context_share_as_link);
+        shareInternal(context, getShareLinkIntent(context, subject, url), R.string.context_share_as_link);
     }
 
-    public static Intent getShareLinkIntent(final String subject, final String url) {
-        return createShareIntentInternal(TYPE_TEXT, subject, StringUtils.defaultString(url), null, null);
+    public static Intent getShareLinkIntent(final Context context, final String subject, final String url) {
+        return createShareIntentInternal(context, TYPE_TEXT, subject, StringUtils.defaultString(url), null, null);
     }
 
     public static void shareMultipleFiles(final Context context, @NonNull final List<File> files, @StringRes final int titleResourceId) {

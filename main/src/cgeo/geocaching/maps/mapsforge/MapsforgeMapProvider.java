@@ -34,6 +34,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.tilesource.OpenStreetMapMapnik;
@@ -70,8 +71,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         return Holder.INSTANCE;
     }
 
-    public static List<ImmutablePair<String, Uri>> getOfflineMaps() {
-        //TODO
+    public static List<ImmutableTriple<String, Uri, Boolean>> getOfflineMaps() {
         return PublicLocalStorage.get().list(PublicLocalFolder.OFFLINE_MAPS);
 
     }
@@ -332,7 +332,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         MapProviderFactory.deleteOfflineMapSources();
         final Resources resources = CgeoApplication.getInstance().getResources();
         final List<ImmutablePair<String, Uri>> offlineMaps =
-            CollectionStream.of(getOfflineMaps()).filter(mu -> isValidMapFile(mu.right)).toList();
+            CollectionStream.of(getOfflineMaps()).filter(mu -> !mu.right && isValidMapFile(mu.middle)).map(mu -> new ImmutablePair<>(mu.left, mu.middle)).toList();
         if (offlineMaps.size() > 1) {
             registerMapSource(new OfflineMultiMapSource(offlineMaps, this, resources.getString(R.string.map_source_osm_offline_combined)));
         }

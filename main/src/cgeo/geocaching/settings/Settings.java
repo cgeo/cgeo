@@ -1586,13 +1586,13 @@ public class Settings {
     }
 
     /** sets the user-defined uri for a public folder. If null, this means that default shall be used (=hard-named subfolder of base public folder) */
-    public static void setPublicFolderUri(@NonNull final PublicLocalFolder folder, @Nullable final Uri uri) {
+    public static void setPublicLocalFolderUri(@NonNull final PublicLocalFolder folder, @Nullable final Uri uri) {
         putUri(folder.getPrefKeyId(), uri);
     }
 
     /** gets the user-defined uri for a public folder. If null, this means that default shall be used (=hard-named subfolder of base public folder) */
     @Nullable
-    public static Uri getPublicFolderUri(@NonNull final PublicLocalFolder folder) {
+    public static Uri getPublicLocalFolderUri(@NonNull final PublicLocalFolder folder) {
         return getUri(folder.getPrefKeyId());
     }
 
