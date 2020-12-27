@@ -2037,9 +2037,9 @@
     <string name="wizard_outro">Thanks for configuring c:geo.\nHave fun!</string>
     <string name="wizard_permissions_title">Set app permissions</string>
     <string name="wizard_permissions_intro">c:geo needs certain permissions to function correctly. I will explain them in the next steps.\nWithout these permissions you will not be able to use c:geo.</string>
-    <string name="wizard_platforms_title">Configure platforms</string>
+    <string name="wizard_platforms_title">Configure services</string>
     <string name="wizard_platforms_intro">To download caches you need an account for at least one of the geocaching platforms supported by c:geo.\nIn the next step you can optionally create an account for and set-up the connection to geocaching.com.</string>
-    <string name="wizard_platforms_gc_title">Configure geocaching.com</string>
+    <string name="wizard_platforms_others">c:geo supports several other geocaching services like Opencaching-platforms, Extremcaching.com, Geocaching.su, GCVote.com and GeoKrety.org.\nPress the button below to configure those services.</string>
     <string name="wizard_welcome_advanced">Advanced configuration</string>
     <string name="wizard_advanced_offlinemaps_label">Offline maps</string>
     <string name="wizard_advanced_offlinemaps_info">c:geo can download map files for offline usage</string>

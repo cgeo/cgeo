@@ -27,6 +27,12 @@
         style="@style/InstallationWizardTextViewBase"
         android:textSize="22sp" />
 
+    <Button
+        android:id="@+id/wizard_button"
+        android:layout_below="@id/wizard_text"
+        style="@style/InstallationWizardButtonFull"
+        android:visibility="gone" />
+
     <include layout="@layout/install_wizard_footer" />
 
 </RelativeLayout>

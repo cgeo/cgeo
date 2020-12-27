@@ -32,8 +32,8 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private enum WizardStep {
         WIZARD_START,
-        WIZARD_PERMISSIONS, WIZARD_STORAGE, WIZARD_LOCATION,
-        WIZARD_PLATFORMS,
+        WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION,
+        WIZARD_PLATFORMS_GC, WIZARD_PLATFORMS_OTHERS,
         WIZARD_END
     }
     private WizardStep step = WizardStep.WIZARD_START;
@@ -46,6 +46,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     private ImageView logo = null;
     private TextView title = null;
     private TextView text = null;
+    private Button button = null;
     private Button prev = null;
     private Button skip = null;
     private Button next = null;
@@ -65,6 +66,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         bindTitleAndFooter();
         logo = findViewById(R.id.wizard_logo);
         text = findViewById(R.id.wizard_text);
+        button = findViewById(R.id.wizard_button);
         updateDialog();
     }
 
@@ -89,6 +91,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private void updateDialog() {
         logo.setImageResource(R.mipmap.ic_launcher);
+        setButton(0, null);
         switch (step) {
             case WIZARD_START: {
                 title.setText(R.string.wizard_welcome_title);
@@ -102,20 +105,26 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, 0);
                 break;
             }
-            case WIZARD_STORAGE:
+            case WIZARD_PERMISSIONS_STORAGE:
                 title.setText(R.string.wizard_permissions_title);
                 text.setText(R.string.storage_permission_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestStorage, 0);
                 break;
-            case WIZARD_LOCATION:
+            case WIZARD_PERMISSIONS_LOCATION:
                 title.setText(R.string.wizard_permissions_title);
                 text.setText(R.string.location_permission_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestLocation, 0);
                 break;
-            case WIZARD_PLATFORMS:
+            case WIZARD_PLATFORMS_GC:
                 title.setText(R.string.wizard_platforms_title);
                 text.setText(R.string.wizard_platforms_intro);
                 setNavigation(this::gotoPrevious, 0, this::gotoNext, 0, this::authorizeGC, 0);
+                break;
+            case WIZARD_PLATFORMS_OTHERS:
+                title.setText(R.string.wizard_platforms_title);
+                text.setText(R.string.wizard_platforms_others);
+                setButton(R.string.wizard_advanced_services_label, v -> SettingsActivity.openForScreen(R.string.preference_screen_services, this));
+                setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, 0);
                 break;
             case WIZARD_END: {
                 title.setText(R.string.wizard_welcome_title);
@@ -156,6 +165,18 @@ public class InstallWizardActivity extends AppCompatActivity {
         }
     }
 
+    private void setButton(final int labelResId, @Nullable final View.OnClickListener listener) {
+        if (button != null) {
+            if (listener == null) {
+                button.setVisibility(View.GONE);
+            } else {
+                button.setVisibility(View.VISIBLE);
+                button.setText(labelResId);
+                button.setOnClickListener(listener);
+            }
+        }
+    }
+
     private void gotoPrevious() {
         if (step.ordinal() > 0) {
             step = WizardStep.values()[step.ordinal() - 1];
@@ -181,9 +202,9 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private boolean stepCanBeSkipped() {
         return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (hasStoragePermission() && hasLocationPermission())))
-            || (step == WizardStep.WIZARD_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission()))
-            || (step == WizardStep.WIZARD_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission()))
-            || (step == WizardStep.WIZARD_PLATFORMS && hasValidGCCredentials())
+            || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission()))
+            || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission()))
+            || (step == WizardStep.WIZARD_PLATFORMS_GC && hasValidGCCredentials())
             ;
     }
 
