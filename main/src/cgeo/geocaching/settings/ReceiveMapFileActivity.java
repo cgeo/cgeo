@@ -3,6 +3,7 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.storage.extension.InstalledOfflineMaps;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.Log;
@@ -39,6 +40,9 @@ public class ReceiveMapFileActivity extends AbstractActivity {
     private File file = null;
     private String fileinfo = "";
 
+    private String sourceURL = "";
+    private long sourceDate = 0;
+
     private static final String MAP_EXTENSION = ".map";
 
     protected enum CopyStates {
@@ -53,6 +57,8 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         final Intent intent = getIntent();
         uri = intent.getData();
         final String preset = intent.getStringExtra(EXTRA_FILENAME);
+        sourceURL = intent.getStringExtra(MapDownloadUtils.RESULT_CHOSEN_URL);
+        sourceDate = intent.getLongExtra(MapDownloadUtils.RESULT_DATE, 0);
         final AbstractActivity that = this;
 
         MapDownloadUtils.checkMapDirectory(this, false, (path, isWritable) -> {
@@ -174,6 +180,9 @@ public class ReceiveMapFileActivity extends AbstractActivity {
             switch (status) {
                 case SUCCESS:
                     result = String.format(getString(R.string.receivemapfile_success), fileinfo);
+                    if (StringUtils.isNotBlank(sourceURL)) {
+                        InstalledOfflineMaps.add(sourceURL, file.getPath(), fileinfo, sourceDate);
+                    }
                     break;
                 case CANCELLED:
                     result = getString(R.string.receivemapfile_cancelled);
