@@ -1539,4 +1539,5 @@ Nombre de archivo:%2$s</string>
     <string name="map_trail_show">Mostrar el historial de la ruta</string>
     <!-- history track export -->
     <!-- individual route export -->
+    <!-- install wizard -->
 </resources>
