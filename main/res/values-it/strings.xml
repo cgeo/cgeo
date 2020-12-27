@@ -739,6 +739,7 @@
     <string name="init_create_memory_dump">Salva un memory dump della situazione attuale</string>
     <string name="init_memory_dump">Salvataggio memoria</string>
     <string name="init_memory_dumped">Memoria salvata in %s</string>
+    <string name="init_please_wait">Attendere prego…</string>
     <string name="init_hardware_acceleration_title">Rendering grafico con accelerazione hardware</string>
     <string name="init_hardware_acceleration_note">L\'accelerazione hardware esegue il rendering di elementi grafici sullo schermo più velocemente. Tuttavia su alcuni dispositivi il sistema operativo contiene bug e qualche testo potrebbe apparire sfocato (i caratteri in grassetto in particolare). Disattivare l\'accelerazione hardware in questi casi.</string>
     <string name="init_hardware_acceleration">Abilita accelerazione hardware</string>
@@ -1182,6 +1183,7 @@
     <string name="map_gm_autorotation">Rotazione automatica mappa</string>
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
+    <string name="quick_settings_info">Alcune impostazioni della mappa (impostazioni mappa, routing) sono state spostate nella nuova finestra popup \"Impostazioni rapide\".\nPuoi aprire questo popup usando l\'icona nel centro inferiore della mappa.</string>
     <string name="map_show_in_map">Mostra sulla mappa</string>
     <!-- search -->
     <string name="search_bar_hint">Cerca cache</string>
@@ -1823,4 +1825,25 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Esporta percorso individuale</string>
     <string name="export_individualroute_success">Esporta percorso individuale in \"%s\"</string>
+    <!-- install wizard -->
+    <string name="previous">Precedente</string>
+    <string name="skip">Salta</string>
+    <string name="next">Successivo</string>
+    <string name="finish">Termina</string>
+    <string name="advanced">Avanzate</string>
+    <string name="newline">\n</string>
+    <string name="wizard_welcome_title">Benvenuto su c:geo</string>
+    <string name="wizard_intro">Sembra che questa sia la prima volta che c:geo viene utilizzato su questo dispositivo. Posso aiutarti nella configurazione?</string>
+    <string name="wizard_outro">Grazie per aver configurato c:geo.\nBuon divertimento!</string>
+    <string name="wizard_permissions_title">Imposta permessi app</string>
+    <string name="wizard_permissions_intro">c:geo ha bisogno di alcuni permessi per funzionare correttamente. Li spiegherò nei prossimi passi.\nSenza questi permessi non potrai usare c:geo.</string>
+    <string name="wizard_welcome_advanced">Configurazione avanzata</string>
+    <string name="wizard_advanced_offlinemaps_label">Mappe offline</string>
+    <string name="wizard_advanced_offlinemaps_info">c:geo può scaricare i file della mappa per l\'utilizzo offline</string>
+    <string name="wizard_advanced_brouter_label">App di navigazione</string>
+    <string name="wizard_advanced_brouter_info">c:geo può portarti verso gli obiettivi e mostrare le informazioni di navigazione sulla tua mappa installando e configurando un\'app di supporto denominata \"BRouter Offline Navigation\"</string>
+    <string name="wizard_advanced_services_label">Servizi di geocaching</string>
+    <string name="wizard_advanced_services_info">c:geo supporta diversi servizi di geocaching</string>
+    <string name="wizard_advanced_restore_label">Ripristina</string>
+    <string name="wizard_advanced_restore_info">Ripristina impostazioni e dati da un\'installazione precedente</string>
 </resources>
