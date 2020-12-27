@@ -1183,6 +1183,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
+    <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
     <string name="map_show_in_map">Mostrar no mapa</string>
     <!-- search -->
     <string name="search_bar_hint">Pesquisar geocaches</string>
