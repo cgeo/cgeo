@@ -30,6 +30,7 @@ public class MapDownloadUtils {
     public static final int REQUEST_CODE = 47131;
     public static final String RESULT_CHOSEN_URL = "chosenUrl";
     public static final String RESULT_SIZE_INFO = "sizeInfo";
+    public static final String RESULT_DATE = "dateInfo";
 
     private MapDownloadUtils() {
         // utility class
@@ -48,6 +49,7 @@ public class MapDownloadUtils {
             // trigger download manager for downloading the requested file
             final Uri uri = data.getParcelableExtra(RESULT_CHOSEN_URL);
             final String sizeInfo = data.getStringExtra(RESULT_SIZE_INFO);
+            final long date = data.getLongExtra(RESULT_DATE, 0);
 
             if (null != uri) {
                 String temp = uri.getLastPathSegment();
@@ -77,7 +79,7 @@ public class MapDownloadUtils {
                         Log.i("Map download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
                         final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                         if (null != downloadManager) {
-                            PendingDownload.add(downloadManager.enqueue(request), filename);
+                            PendingDownload.add(downloadManager.enqueue(request), filename, uri.toString(), date);
                             ActivityMixin.showShortToast(activity, R.string.download_started);
                         } else {
                             ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);

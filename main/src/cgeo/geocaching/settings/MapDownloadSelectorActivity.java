@@ -90,6 +90,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
                 final Intent intent = new Intent();
                 intent.putExtra(MapDownloadUtils.RESULT_CHOSEN_URL, offlineMap.getUri());
                 intent.putExtra(MapDownloadUtils.RESULT_SIZE_INFO, offlineMap.getSizeInfo());
+                intent.putExtra(MapDownloadUtils.RESULT_DATE, offlineMap.getDateInfo());
                 setResult(RESULT_OK, intent);
                 finish();
             });
@@ -107,7 +108,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             if (offlineMap.getIsDir()) {
                 holder.info.setText("directory");
             } else {
-                holder.info.setText("map file" + Formatter.SEPARATOR + offlineMap.getDateInfo() + Formatter.SEPARATOR + offlineMap.getSizeInfo());
+                holder.info.setText("map file" + Formatter.SEPARATOR + offlineMap.getDateInfoAsString() + Formatter.SEPARATOR + offlineMap.getSizeInfo());
             }
         }
     }
