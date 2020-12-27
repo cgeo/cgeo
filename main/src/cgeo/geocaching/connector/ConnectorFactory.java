@@ -2,6 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
@@ -169,6 +170,17 @@ public final class ConnectorFactory {
             }
         }
         return liveConns.toArray(new ILogin[liveConns.size()]);
+    }
+
+    @NonNull
+    public static IConnector[] getActiveConnectorsWithValidCredentials() {
+        final List<IConnector> credConns = new ArrayList<>();
+        for (final IConnector conn : CONNECTORS) {
+            if (conn instanceof ILogin && conn instanceof ICredentials && conn.isActive() && Settings.getCredentials((ICredentials) conn).isValid()) {
+                credConns.add(conn);
+            }
+        }
+        return credConns.toArray(new IConnector[credConns.size()]);
     }
 
     @NonNull
