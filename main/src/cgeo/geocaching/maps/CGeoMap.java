@@ -53,6 +53,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -604,6 +605,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         prepareFilterBar();
 
         AndroidBeam.disable(activity);
+
+        Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
     }
 
     public void toggleRouteItem(final IWaypoint item) {
@@ -846,7 +849,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private void routingModeChanged(final RoutingMode newValue) {
         Settings.setRoutingMode(newValue);
-        Toast.makeText(activity, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+        if ((null != manualRoute && manualRoute.getNumSegments() > 0) || null != tracks) {
+            Toast.makeText(activity, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+        }
         manualRoute.reloadRoute(overlayPositionAndScale);
         if (null != tracks) {
             try {
