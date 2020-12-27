@@ -1866,4 +1866,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Exportovať individuálnu trasu</string>
     <string name="export_individualroute_success">Exportovať individuálnu trasu do \"%s\"</string>
+    <!-- install wizard -->
 </resources>
