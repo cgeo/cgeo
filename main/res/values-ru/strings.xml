@@ -1748,4 +1748,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Экспорт персонального маршрута</string>
     <string name="export_individualroute_success">Экспортирован индивидуальный маршрут в \"%s\"</string>
+    <!-- install wizard -->
 </resources>
