@@ -691,6 +691,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_circlecolor_summary">Selecciona a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
     <string name="init_circlefillcolor">Cor de preenchimento do círculo</string>
     <string name="init_circlefillcolor_summary">Seleccionar a cor e opacidade para o preenchimento dos círculos</string>
+    <string name="init_accuracycirclecolor">Cor da linha do círculo da precisão</string>
+    <string name="init_accuracycirclecolor_summary">Selecção da cor e opacidade para o círculo da precisão. Este círculo é utilizado para representar a precisão do sinal de localização.</string>
+    <string name="init_accuracycirclefillcolor">Cor do preenchimento do círculo da precisão</string>
+    <string name="init_accuracycirclefillcolor_summary">Selecção da cor e opacidade com que os círculos são preenchidos</string>
     <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
     <string name="init_include_found_status">Incluir o estado \"Encontrado\"</string>
     <string name="init_trackautovisit">Visitar TBs</string>
@@ -1184,6 +1188,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
+    <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
     <string name="map_show_in_map">Mostrar no mapa</string>
     <!-- search -->
     <string name="search_bar_hint">Pesquisar geocaches</string>
@@ -1820,4 +1825,24 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- individual route export -->
     <string name="export_individualroute_title">Exportar rota individual</string>
     <string name="export_individualroute_success">Rota individual exportada para \"%s\"</string>
+    <!-- install wizard -->
+    <string name="previous">Anterior</string>
+    <string name="skip">Ignorar</string>
+    <string name="next">Próximo</string>
+    <string name="finish">Concluído</string>
+    <string name="advanced">Avançadas</string>
+    <string name="newline">\n</string>
+    <string name="wizard_welcome_title">Bem-vindo ao c:geo</string>
+    <string name="wizard_intro">Parece que é a primeira vez que o c:geo é usado neste dispositivo. Devo ajuda-lo a configurá-lo? São apenas alguns passos.</string>
+    <string name="wizard_outro">Obrigado por configurar o c:geo.\nDivirta-se!</string>
+    <string name="wizard_permissions_title">Definir autorizações da aplicação</string>
+    <string name="wizard_permissions_intro">O c:geo precisa de certas permissões para funcionar correctamente. Vou explicá-las nos próximos passos.\nSem essas permissões não poderá usar c:geo.</string>
+    <string name="wizard_welcome_advanced">Configurações avançadas</string>
+    <string name="wizard_advanced_offlinemaps_label">Mapas offline</string>
+    <string name="wizard_advanced_brouter_label">Aplicação de navegação</string>
+    <string name="wizard_advanced_brouter_info">O c:geo pode navegar para um ponto e mostrar informação da rota no seu mapa ao instalar e configurar a aplicação \"BRouter Offline Navigation\"</string>
+    <string name="wizard_advanced_services_label">Serviços Geocaching</string>
+    <string name="wizard_advanced_services_info">O c:geo suporta vários serviços Geocaching</string>
+    <string name="wizard_advanced_restore_label">Restaurar</string>
+    <string name="wizard_advanced_restore_info">Restaurar definições / dados de uma instalação anterior</string>
 </resources>
