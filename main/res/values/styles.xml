@@ -450,6 +450,7 @@
     <!-- splash screen style -->
     <style name="SplashScreenTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splashscreen_background</item>
+        <item name="android:windowActivityTransitions">false</item>
     </style>
 
 </resources>
