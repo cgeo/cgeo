@@ -1800,4 +1800,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Exporter un itinéraire individuel</string>
     <string name="export_individualroute_success">Itinéraire individuel exporté vers \"%s\"</string>
+    <!-- install wizard -->
 </resources>
