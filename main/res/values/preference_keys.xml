@@ -115,6 +115,8 @@
     <string translatable="false" name="pref_mapline_trackwidth">mapline_trackwidth</string>
     <string translatable="false" name="pref_mapline_circlecolor">mapline_circlecolor</string>
     <string translatable="false" name="pref_mapline_circlefillcolor">mapline_circlefillcolor</string>
+    <string translatable="false" name="pref_mapline_accuracycirclecolor">mapline_accuracycirclecolor</string>
+    <string translatable="false" name="pref_mapline_accuracycirclefillcolor">mapline_accuracycirclefillcolor</string>
     <string translatable="false" name="pref_showListsInCacheList">showListsInCacheList</string>
     <string translatable="false" name="pref_compactIconMode">compactIconMode</string>
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>

@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -48,11 +49,11 @@ public class PositionLayer extends Layer {
             accuracyCircle = AndroidGraphicFactory.INSTANCE.createPaint();
             accuracyCircle.setStyle(Style.STROKE);
             accuracyCircle.setStrokeWidth(1.0f);
-            accuracyCircle.setColor(0x66000000);
+            accuracyCircle.setColor(MapLineUtils.getAccuracyCircleColor());
 
             accuracyCircleFill = AndroidGraphicFactory.INSTANCE.createPaint();
             accuracyCircleFill.setStyle(Style.FILL);
-            accuracyCircleFill.setColor(0x08000000);
+            accuracyCircleFill.setColor(MapLineUtils.getAccuracyCircleFillColor());
         }
         final Circle circle = new Circle(location, accuracy, accuracyCircleFill, accuracyCircle);
         circle.setDisplayModel(this.getDisplayModel());

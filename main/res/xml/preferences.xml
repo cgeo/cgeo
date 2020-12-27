@@ -802,6 +802,19 @@
                 android:key="@string/pref_mapline_circlefillcolor"
                 app:defaultColor="@color/default_circlefillcolor"
                 app:showOpaquenessSlider="true" />
+
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_accuracycirclecolor"
+                android:summary="@string/init_accuracycirclecolor_summary"
+                android:key="@string/pref_mapline_accuracycirclecolor"
+                app:defaultColor="@color/default_accuracycirclecolor"
+                app:showOpaquenessSlider="true" />
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_accuracycirclefillcolor"
+                android:summary="@string/init_accuracycirclefillcolor_summary"
+                android:key="@string/pref_mapline_accuracycirclefillcolor"
+                app:defaultColor="@color/default_accuracycirclefillcolor"
+                app:showOpaquenessSlider="true" />
         </PreferenceCategory>
     </PreferenceScreen>
 
