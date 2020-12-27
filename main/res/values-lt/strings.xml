@@ -1833,4 +1833,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Eksportuoti asmeninį maršrutą</string>
     <string name="export_individualroute_success">Asmeninis maršrutas eksportuotas į \"%s\"</string>
+    <!-- install wizard -->
 </resources>
