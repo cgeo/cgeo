@@ -55,6 +55,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
@@ -319,6 +320,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         prepareFilterBar();
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
+
+        Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
     }
 
     private void postZoomToViewport(final Viewport viewport) {

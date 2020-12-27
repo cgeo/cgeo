@@ -20,7 +20,8 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         // title and text must be set when using the basicOneTimeMessage() function
 
         EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter),
-        DATABASE_CONFIRM_OVERWRITE(null, null);
+        DATABASE_CONFIRM_OVERWRITE(null, null),
+        MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info);
 
         public Integer messageTitle;
         public Integer messageText;
