@@ -1807,4 +1807,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Εξαγωγή μεμονωμένης διαδρομής</string>
     <string name="export_individualroute_success">Εξαγωγή μεμονωμένης διαδρομής στο \"%s\"</string>
+    <!-- install wizard -->
 </resources>
