@@ -1804,4 +1804,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Eksporter egendefinert rute</string>
     <string name="export_individualroute_success">Eksportert egendefinert rute til \"%s\"</string>
+    <!-- install wizard -->
 </resources>
