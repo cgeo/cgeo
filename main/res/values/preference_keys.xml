@@ -170,7 +170,6 @@
     <string translatable="false" name="pref_settingsversion">settingsversion</string>
     <string translatable="false" name="pref_trackableaction">trackableaction</string>
     <string translatable="false" name="pref_trackable_inventory_sort">trackableComparator</string>
-    <string translatable="false" name="pref_shareafterexport">shareafterexport</string>
     <string translatable="false" name="pref_includefoundstatus">includefoundstatus</string>
     <string translatable="false" name="pref_cleartrailafterexportstatus">cleartrailafterexportstatus</string>
     <string translatable="false" name="pref_renderthemefile">renderthemefile</string>
