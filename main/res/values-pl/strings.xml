@@ -1324,7 +1324,6 @@
     <string name="export_fieldnotes_creating">Tworzenie notatek…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Plik GPX będzie wyeksportowany do %1$s z obecną datą i czasem jako nazwą pliku.</string>
-    <string name="export_gpx_to">Wyślij wyeksportowany GPX do</string>
     <string name="export_confirm_title">Eksportowanie %1$s</string>
     <string name="export_confirm_message">Ścieżka: %1$s\nNazwa pliku: %2$s</string>
     <string name="export_persnotes">Notatki osobiste</string>
