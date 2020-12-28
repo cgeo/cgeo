@@ -1298,7 +1298,6 @@
     <string name="export_fieldnotes_creating">Lager feltnotater…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX-filen blir eksportert til %1$s med dato og tidspunkt som filnavn.</string>
-    <string name="export_gpx_to">Send eksportert GPX til</string>
     <string name="export_confirm_title">Eksporterer %1$s</string>
     <string name="export_confirm_message">Bane: %1$s\nFilnavn: %2$s</string>
     <string name="export_persnotes">Personlig notat</string>
