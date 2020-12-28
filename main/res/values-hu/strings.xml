@@ -1052,7 +1052,6 @@
     <string name="export_fieldnotes_onlynew">Csak az utolsó export óta</string>
     <string name="export_fieldnotes_creating">Offline logok exportálása…</string>
     <string name="export_gpx_info">A GPX fájl ide lesz exportálva: %1$s a jelenlegi dátummal és időponttal a fájl nevében.</string>
-    <string name="export_gpx_to">Az exportált GPX küldése ide</string>
     <string name="export_confirm_title">%1$s exportálása</string>
     <string name="export_confirm_message">Mappa: %1$s\nFájl: %2$s</string>
     <string name="export_persnotes">Személyes megjegyzések</string>
