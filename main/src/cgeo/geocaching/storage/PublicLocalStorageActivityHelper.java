@@ -83,34 +83,29 @@ public class PublicLocalStorageActivityHelper {
      * @param callback called after user changed the uri. Callback is always called, even if user cancelled or error occured
      */
     public void selectFolderUri(final PublicLocalFolder folder, final Consumer<PublicLocalFolder> callback) {
-
-        if (!PublicLocalFolder.BASE.equals(folder)) {
-            Dialogs.newBuilder(activity)
-                .setTitle(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_title)
-                .setMessage(activity.getString(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_msg, folder.getDefaultLocation().getUserDisplayableName()))
-                .setPositiveButton(R.string.publiclocalstorage_userdefined, (d, p) -> {
-                    d.dismiss();
-                    selectUserFolderUri(folder, callback);
-                })
-                .setNegativeButton(R.string.publiclocalstorage_default, (d, p) -> {
-                    d.dismiss();
-                    PublicLocalStorage.get().setFolderUri(folder, null);
-                    if (callback != null) {
-                        callback.accept(folder);
-                    }
-                })
-                .setNeutralButton(android.R.string.cancel, (d, p) -> {
-                    d.dismiss();
-                    report(false, R.string.publiclocalstorage_folder_selection_aborted, folder.getUserDisplayableName());
-                    if (callback != null) {
-                        callback.accept(folder);
-                    }
-                })
-                .setCancelable(true)
-                .create().show();
-        } else {
-            selectUserFolderUri(folder,  callback);
-        }
+       Dialogs.newBuilder(activity)
+            .setTitle(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_title)
+            .setMessage(activity.getString(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_msg, folder.getDefaultLocation().getUserDisplayableName()))
+            .setPositiveButton(R.string.publiclocalstorage_userdefined, (d, p) -> {
+                d.dismiss();
+                selectUserFolderUri(folder, callback);
+            })
+            .setNegativeButton(R.string.publiclocalstorage_default, (d, p) -> {
+                d.dismiss();
+                PublicLocalStorage.get().setFolderUserDefinedUri(folder, null);
+                if (callback != null) {
+                    callback.accept(folder);
+                }
+            })
+            .setNeutralButton(android.R.string.cancel, (d, p) -> {
+                d.dismiss();
+                report(false, R.string.publiclocalstorage_folder_selection_aborted, folder.getUserDisplayableName());
+                if (callback != null) {
+                    callback.accept(folder);
+                }
+            })
+            .setCancelable(true)
+            .create().show();
     }
 
     private void selectUserFolderUri(final PublicLocalFolder folder, final Consumer<PublicLocalFolder> callback) {
@@ -171,8 +166,14 @@ public class PublicLocalStorageActivityHelper {
                 } else {
                     final int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | (runningIntentData.folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
                     activity.getContentResolver().takePersistableUriPermission(uri, flags);
-                    Log.e("permissions: " + uri.getPath());
-                    PublicLocalStorage.get().setFolderUri(runningIntentData.folder, uri);
+
+                    //Test if access is really working!
+                    if (!PublicLocalStorage.get().performTestReadWriteToLocation("Folder " + runningIntentData.folder.name(), FolderLocation.fromDocumentUri(uri), runningIntentData.folder.needsWrite())) {
+                        report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.getUserDisplayableName());
+                    }
+
+                    Log.iForce("Folder '" + runningIntentData.folder + " was set to: " + uri.getPath());
+                    PublicLocalStorage.get().setFolderUserDefinedUri(runningIntentData.folder, uri);
                     report(false, R.string.publiclocalstorage_folder_selection_success, runningIntentData.folder.getUserDisplayableName());
                 }
                 if (runningIntentData.callback != null) {

@@ -2,7 +2,6 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PublicLocalFolder;
 import cgeo.geocaching.storage.PublicLocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -123,7 +122,7 @@ public class DebugUtils {
                     shareLogfileAsEmail(activity, additionalMessage, result.get());
                 } else {
                     Dialogs.confirmPositiveNegativeNeutral(activity, activity.getString(R.string.about_system_write_logcat),
-                        String.format(activity.getString(R.string.about_system_write_logcat_success), result.get().getPath(), LocalStorage.LOGFILES_DIR_NAME),
+                        String.format(activity.getString(R.string.about_system_write_logcat_success), UriUtils.getFileName(result.get()), PublicLocalFolder.LOGFILES.getLocation().getUserDisplayableName()),
                         activity.getString(android.R.string.ok), null, activity.getString(R.string.about_system_info_send_button),
                         null, null, (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, result.get()));
                 }

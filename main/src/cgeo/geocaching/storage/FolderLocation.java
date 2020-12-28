@@ -1,5 +1,7 @@
 package cgeo.geocaching.storage;
 
+import cgeo.geocaching.utils.UriUtils;
+
 import android.net.Uri;
 import android.os.Environment;
 
@@ -12,6 +14,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
+
+
 
 /**
  * This class represents a concrete definite folder location.
@@ -50,15 +54,17 @@ public class FolderLocation {
     private final FolderType type;
     private final Uri uri;
 
-    private final PublicLocalFolder subfolderBase; //needed for type SUBFOLDER
+    private final PublicLocalFolder subfolderBasePublicFolder; //needed for type SUBFOLDER
+    private final FolderLocation subforderBaseFolderLocation; //needed for type SUBFOLDER
     private final String subfolder; //needed for type SUBFOLDER
 
 
-    private FolderLocation(final FolderType type, final Uri uri, final PublicLocalFolder subfolderBase, final String subfolder) {
+    private FolderLocation(final FolderType type, final Uri uri, final PublicLocalFolder subfolderBasePublicFolder, final FolderLocation subforderBaseFolderLocation, final String subfolder) {
         this.type = type;
         this.uri = uri;
 
-        this.subfolderBase = subfolderBase;
+        this.subfolderBasePublicFolder = subfolderBasePublicFolder;
+        this.subforderBaseFolderLocation = subforderBaseFolderLocation;
         this.subfolder = toFolderName(subfolder);
     }
 
@@ -69,7 +75,7 @@ public class FolderLocation {
 
     public FolderType getBaseType() {
         if (type.equals(FolderType.SUBFOLDER)) {
-            return this.subfolderBase.getLocation().getBaseType();
+            return getSubfolderLocation().getBaseType();
         }
         return type;
     }
@@ -78,7 +84,7 @@ public class FolderLocation {
     @Nullable
     public Uri getUri() {
         if (this.type.equals(FolderType.SUBFOLDER)) {
-            return Uri.withAppendedPath(this.subfolderBase.getLocation().getUri(), this.subfolder);
+            return Uri.withAppendedPath(getSubfolderLocation().getUri(), this.subfolder);
         }
         return this.uri;
     }
@@ -88,7 +94,7 @@ public class FolderLocation {
     public Uri getBaseUri() {
         switch (this.type) {
             case SUBFOLDER:
-                return this.subfolderBase.getLocation().getBaseUri();
+                return getSubfolderLocation().getBaseUri();
             case DOCUMENT:
             case FILE:
             default:
@@ -100,7 +106,7 @@ public class FolderLocation {
         if (!getType().equals(FolderType.SUBFOLDER)) {
             return new ArrayList<>();
         }
-        final List<String > result = this.subfolderBase.getLocation().getSubdirsToBase();
+        final List<String > result = getSubfolderLocation().getSubdirsToBase();
         result.add(subfolder);
         return result;
 
@@ -116,7 +122,7 @@ public class FolderLocation {
         if (file == null) {
             return null;
         }
-        return new FolderLocation(FolderType.FILE, Uri.fromFile(file), null, null);
+        return new FolderLocation(FolderType.FILE, Uri.fromFile(file), null, null, null);
     }
 
     @Nullable
@@ -124,14 +130,21 @@ public class FolderLocation {
         if (uri == null) {
             return null;
         }
-        return new FolderLocation(FolderType.DOCUMENT, uri, null, null);
+        return new FolderLocation(FolderType.DOCUMENT, uri, null, null, null);
+    }
+
+    public static FolderLocation fromSubfolder(final FolderLocation folderLocation, final String subfolder) {
+        if (folderLocation == null) {
+            return null;
+        }
+        return new FolderLocation(FolderType.SUBFOLDER, null, null, folderLocation, subfolder);
     }
 
     public static FolderLocation fromSubfolder(final PublicLocalFolder publicLocalFolder, final String subfolder) {
         if (publicLocalFolder == null) {
             return null;
         }
-        return new FolderLocation(FolderType.SUBFOLDER, null, publicLocalFolder, subfolder);
+        return new FolderLocation(FolderType.SUBFOLDER, null, publicLocalFolder, null, subfolder);
     }
 
     @Override
@@ -140,44 +153,50 @@ public class FolderLocation {
             return false;
         }
 
-        return this.toComparableString(true).equals(((FolderLocation) other).toComparableString(true));
+        return this.toConfig(true).equals(((FolderLocation) other).toConfig(true));
     }
 
     @Override
     public int hashCode() {
-        return this.toComparableString(true).hashCode();
+        return this.toConfig(true).hashCode();
     }
 
-    private String toComparableString(final boolean unifiedUri) {
+    private FolderLocation getSubfolderLocation() {
+        if (this.subfolderBasePublicFolder != null) {
+            return this.subfolderBasePublicFolder.getLocation();
+        }
+        return this.subforderBaseFolderLocation;
+    }
+
+    private String toConfig(final boolean unifiedUri) {
 
         final StringBuilder configString = new StringBuilder(type.toString()).append(CONFIG_SEP);
         switch (type) {
             case SUBFOLDER:
-                configString.append(this.subfolderBase.name()).append(CONFIG_SEP).append(this.subfolder);
+                if (this.subfolderBasePublicFolder != null) {
+                    configString.append(this.subfolderBasePublicFolder.name());
+                } else {
+                    configString.append("FL").append(CONFIG_SEP).append(this.subforderBaseFolderLocation.getUri());
+                }
+                configString.append(CONFIG_SEP).append(this.subfolder);
                 break;
             case FILE:
             case DOCUMENT:
             default:
-                configString.append(uriToComparableString(this.uri, unifiedUri));
+                if (unifiedUri) {
+                    configString.append(UriUtils.toStringDecoded(uri));
+                } else {
+                    configString.append(uri);
+                }
                 break;
         }
         return configString.toString();
     }
 
-    private static String uriToComparableString(final Uri uri, final boolean unifiedUri) {
-        if (uri == null) {
-            return null;
-        }
-        if (!unifiedUri) {
-            return uri.toString();
-        }
-        return uri.toString().replaceAll("%2F", "/");
-    }
-
     @NotNull
     @Override
     public String toString() {
-        return getUserDisplayableName() + "[" + toComparableString(false) + "]";
+        return getUserDisplayableName() + "[" + toConfig(false) + "]";
     }
 
     @NonNull

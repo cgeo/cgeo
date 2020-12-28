@@ -854,6 +854,7 @@
     <string name="publiclocalstorage_selectfolder_dialog_user_or_default_title">User-defined or default?</string>
     <string name="publiclocalstorage_selectfolder_dialog_user_or_default_msg">Do you want to use the default location \'%s\' or select a user-defined folder?</string>
     <string name="publiclocalstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
+    <string name="publiclocalstorage_folder_selection_failed">Selected folder not accessible, aborting selection. Folder is \'%s\'</string>
     <string name="publiclocalstorage_folder_selection_success">Folder set to \'%s\'</string>
     <string name="publiclocalstorage_file_selection_aborted">Aborting file selection</string>
     <string name="publiclocalstorage_file_selection_success">File selected: \'%s\'</string>

@@ -129,7 +129,7 @@ public final class SystemInformation {
         body.append("\nPublic Folders: #").append(PublicLocalFolder.values().length);
         for (PublicLocalFolder folder : PublicLocalFolder.values()) {
             body.append("\n- ").append(folder.toString())
-                .append(" (").append(PublicLocalStorage.get().getFolderSystemInformation(folder)).append(")");
+                .append(" (").append(PublicLocalStorage.get().getFolderInformation(folder)).append(")");
         }
     }
 
@@ -137,7 +137,7 @@ public final class SystemInformation {
         final List<UriPermission> uriPerms = context.getContentResolver().getPersistedUriPermissions();
         body.append("\nPersisted Uri Permissions: #").append(uriPerms.size());
         for (UriPermission uriPerm : uriPerms) {
-            body.append("\n- ").append(PublicLocalStorage.uriPermissionToString(uriPerm));
+            body.append("\n- ").append(UriUtils.uriPermissionToString(uriPerm));
         }
     }
 

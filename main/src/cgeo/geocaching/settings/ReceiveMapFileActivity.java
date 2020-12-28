@@ -125,13 +125,14 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
                 // clean up and refresh available map list
                 if (!cancelled.get()) {
-                     MapsforgeMapProvider.getInstance().updateOfflineMaps(outputUri);
                     status = CopyStates.SUCCESS;
                     try {
                         getContentResolver().delete(uri, null, null);
                     } catch (IllegalArgumentException iae) {
                         Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
                     }
+                    //update offline maps AFTER deleting source file. This handles the very special case when Map Folder = Download Folder
+                    MapsforgeMapProvider.getInstance().updateOfflineMaps(outputUri);
                 } else {
                     PublicLocalStorage.get().delete(outputUri);
                     status = CopyStates.CANCELLED;

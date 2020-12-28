@@ -95,9 +95,9 @@ public class ShareUtils {
         }
         if (null != uri) {
             Uri uriToUse = uri;
-            //check if this is a file uri and convert if necessary
-            if ("file".equals(uri.getScheme())) {
-                uriToUse = fileToUri(context, new File(uri.getPath()));
+            final File uriFile = UriUtils.toFile(uri);
+            if (uriFile != null) {
+                uriToUse = fileToUri(context, uriFile);
             }
 
             // Grant temporary read permission to the content URI.
