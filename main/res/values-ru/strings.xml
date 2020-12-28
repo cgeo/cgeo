@@ -1232,7 +1232,6 @@
     <string name="export_fieldnotes_creating">Создание полевых заметок…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX файл будет экспортирован в %1$s в файл с текущей датой и временем в имени.</string>
-    <string name="export_gpx_to">Отправить полученный GPX в</string>
     <string name="export_confirm_title">Экспорт %1$s</string>
     <string name="export_confirm_message">В: %1$s\nИмя файла: %2$s</string>
     <string name="export_persnotes">Личные заметки</string>
