@@ -1308,7 +1308,6 @@
     <string name="export_fieldnotes_creating">Kuriami Lauko užrašai…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX failas bus eksportuotas į %1$s su dabartine data ir laiku failo pavadinime.</string>
-    <string name="export_gpx_to">Siųsti eksportuotą GPX</string>
     <string name="export_confirm_title">Eksportuojama %1$s</string>
     <string name="export_confirm_message">Maršrutas: %1$s\nFailo vardas: %2$s</string>
     <string name="export_persnotes">Asmeninės pastabos</string>
