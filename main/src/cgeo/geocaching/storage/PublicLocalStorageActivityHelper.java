@@ -160,36 +160,10 @@ public class PublicLocalStorageActivityHelper {
 
         switch (requestCode) {
             case REQUEST_CODE_GRANT_FOLDER_URI_ACCESS:
-                final Uri uri = !resultOk || intent == null ? null : intent.getData();
-                if (uri == null) {
-                    report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.getUserDisplayableName());
-                } else {
-                    final int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | (runningIntentData.folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
-                    activity.getContentResolver().takePersistableUriPermission(uri, flags);
-
-                    //Test if access is really working!
-                    if (!PublicLocalStorage.get().performTestReadWriteToLocation("Folder " + runningIntentData.folder.name(), FolderLocation.fromDocumentUri(uri), runningIntentData.folder.needsWrite())) {
-                        report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.getUserDisplayableName());
-                    }
-
-                    Log.iForce("Folder '" + runningIntentData.folder + " was set to: " + uri.getPath());
-                    PublicLocalStorage.get().setFolderUserDefinedUri(runningIntentData.folder, uri);
-                    report(false, R.string.publiclocalstorage_folder_selection_success, runningIntentData.folder.getUserDisplayableName());
-                }
-                if (runningIntentData.callback != null) {
-                    ((Consumer<PublicLocalFolder>) runningIntentData.callback).accept(runningIntentData.folder);
-                }
+                handleResultGrantFolderUriAccess(intent, resultOk);
                 break;
             case REQUEST_CODE_SELECT_FILE:
-                final Uri fileuri = !resultOk || intent == null ? null : intent.getData();
-                if (fileuri == null) {
-                    report(true, R.string.publiclocalstorage_file_selection_aborted);
-                } else {
-                    report(true, R.string.publiclocalstorage_file_selection_success, fileuri);
-                }
-                if (runningIntentData.callback != null) {
-                    ((Consumer<Uri>) runningIntentData.callback).accept(fileuri);
-                }
+                handleResultSelectFile(intent, resultOk);
                 break;
             default: //for codacy
                 break;
@@ -197,6 +171,40 @@ public class PublicLocalStorageActivityHelper {
 
         runningIntentData = null;
         return true;
+    }
+
+    private void handleResultSelectFile(final Intent intent, final boolean resultOk) {
+        final Uri fileuri = !resultOk || intent == null ? null : intent.getData();
+        if (fileuri == null) {
+            report(true, R.string.publiclocalstorage_file_selection_aborted);
+        } else {
+            report(true, R.string.publiclocalstorage_file_selection_success, fileuri);
+        }
+        if (runningIntentData.callback != null) {
+            ((Consumer<Uri>) runningIntentData.callback).accept(fileuri);
+        }
+    }
+
+    private void handleResultGrantFolderUriAccess(final Intent intent, final boolean resultOk) {
+        final Uri uri = !resultOk || intent == null ? null : intent.getData();
+        if (uri == null) {
+            report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.getUserDisplayableName());
+        } else {
+            final int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | (runningIntentData.folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
+            activity.getContentResolver().takePersistableUriPermission(uri, flags);
+
+            //Test if access is really working!
+            if (!PublicLocalStorage.get().performTestReadWriteToLocation("Folder " + runningIntentData.folder.name(), FolderLocation.fromDocumentUri(uri), runningIntentData.folder.needsWrite())) {
+                report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.getUserDisplayableName());
+            }
+
+            Log.iForce("Folder '" + runningIntentData.folder + " was set to: " + uri.getPath());
+            PublicLocalStorage.get().setFolderUserDefinedUri(runningIntentData.folder, uri);
+            report(false, R.string.publiclocalstorage_folder_selection_success, runningIntentData.folder.getUserDisplayableName());
+        }
+        if (runningIntentData.callback != null) {
+            ((Consumer<PublicLocalFolder>) runningIntentData.callback).accept(runningIntentData.folder);
+        }
     }
 
     private void report(final boolean isWarning, @StringRes final int messageId, final Object ... params) {

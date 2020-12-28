@@ -58,7 +58,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         MapDownloadUtils.checkMapDirectory(this, false, (folder, isWritable) -> {
             if (isWritable) {
                 if (guessFilename(preset)) {
-                    handleMapFile(that);
+                    handleMapFile();
                 }
             } else {
                 finish();
@@ -86,7 +86,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         return true;
     }
 
-    private void handleMapFile(final Activity activity) {
+    private void handleMapFile() {
         //duplicate filenames are handled by PublicLocalStorager automatically
         new CopyTask(this).execute();
     }
