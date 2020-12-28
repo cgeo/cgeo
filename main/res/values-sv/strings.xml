@@ -1270,7 +1270,6 @@
     <string name="export_fieldnotes_creating">Skapar Field Notes…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX filen kommer att exporteras till %1$s med datum och tid i filnamnet.</string>
-    <string name="export_gpx_to">Skicka exporterad GPX till</string>
     <string name="export_confirm_title">Exporterar %1$s</string>
     <string name="export_confirm_message">Till katalog: %1$s\nFilnamn: %2$s</string>
     <string name="export_persnotes">Personliga anteckningar</string>
