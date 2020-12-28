@@ -1216,7 +1216,6 @@
     <string name="export_fieldnotes_creating">현장 기록 생성 중…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX 파일이 현재 날짜, 시간과 함께 %1$s로 저장됩니다.</string>
-    <string name="export_gpx_to">전송된 GPX 보내기 : </string>
     <string name="export_confirm_title">%1$s 내보내는 중</string>
     <string name="export_confirm_message">경로: %1$s\nFile 이름: %2$s</string>
     <string name="export_persnotes">개인 메모</string>
