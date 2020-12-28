@@ -146,14 +146,17 @@ public class InstallWizardActivity extends AppCompatActivity {
                     .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
                     .append(getString(R.string.wizard_status_platform));
                 boolean platformConfigured = false;
+                final StringBuilder platforms = new StringBuilder();
                 for (final IConnector conn : ConnectorFactory.getActiveConnectorsWithValidCredentials()) {
-                    if (!platformConfigured) {
-                        info.append(":\n");
+                    if (platformConfigured) {
+                        platforms.append(", ");
                     }
-                    info.append("- ").append(conn.getName()).append(": ").append(getString(android.R.string.ok)).append("\n");
+                    platforms.append(conn.getName());
                     platformConfigured = true;
                 }
-                if (!platformConfigured) {
+                if (platformConfigured) {
+                    info.append(": ").append(getString(android.R.string.ok)).append("\n(").append(platforms).append(")\n");
+                } else {
                     info.append(": ").append(getString(R.string.status_not_ok)).append("\n");
                 }
                 button1Info.setVisibility(View.VISIBLE);
@@ -288,23 +291,10 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void authorizeGC() {
-        String username = "";
-        String password = "";
-
         final Intent checkIntent = new Intent(this, GCAuthorizationActivity.class);
         final Credentials credentials = GCConnector.getInstance().getCredentials();
-        try {
-            username = credentials.getUserName();
-        } catch (IllegalArgumentException e) {
-            // ignore
-        }
-        try {
-            password = credentials.getPassword();
-        } catch (IllegalArgumentException e) {
-            // ignore
-        }
-        checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, username);
-        checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD, password);
+        checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, credentials.getUsernameRaw());
+        checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD, credentials.getPasswordRaw());
         startActivityForResult(checkIntent, REQUEST_CODE_WIZARD_GC);
     }
 
@@ -330,7 +320,7 @@ public class InstallWizardActivity extends AppCompatActivity {
                 Dialogs.confirm(this, R.string.settings_title_gc, R.string.settings_gc_legal_note, android.R.string.ok, (dialog, which) -> {
                     Settings.setGCConnectorActive(true);
                     gotoNext();
-                }, dialog -> gotoNext());
+                }, dialog -> { });
             }
         } else {
             MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data);

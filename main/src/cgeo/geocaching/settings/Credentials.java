@@ -62,7 +62,7 @@ public class Credentials {
      * @return the username, which may be an empty string
      */
     @NonNull
-    String getUsernameRaw() {
+    public String getUsernameRaw() {
         return StringUtils.defaultIfBlank(username, StringUtils.EMPTY);
     }
 
@@ -85,7 +85,7 @@ public class Credentials {
      * @return the password, which may be an empty string
      */
     @NonNull
-    String getPasswordRaw() {
+    public String getPasswordRaw() {
         return StringUtils.defaultIfBlank(password, StringUtils.EMPTY);
     }
 
