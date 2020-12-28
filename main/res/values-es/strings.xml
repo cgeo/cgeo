@@ -1162,7 +1162,6 @@
     <string name="export_fieldnotes_onlynew">Solo desde la última exportación</string>
     <string name="export_fieldnotes_creating">Creando notas de campo…</string>
     <string name="export_gpx_info">El archivo GPX será exportado a %1$s con la fecha y hora actual como su nombre de archivo.</string>
-    <string name="export_gpx_to">Enviar GPX exportado a</string>
     <string name="export_confirm_title">Exportando %1$s</string>
     <string name="export_confirm_message">Directorio: %1$s\n
 Nombre de archivo:%2$s</string>
