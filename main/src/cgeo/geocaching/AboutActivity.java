@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.maps.routing.Routing;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -206,21 +205,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     }
 
-    class StartingViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
-
-        @BindView(R.id.about_starting_btn_services) protected Button services;
-
-        @Override
-        public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_starting_page, parentView, false);
-            ButterKnife.bind(this, view);
-
-            services.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, AboutActivity.this));
-            return view;
-        }
-
-    }
-
     class VersionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @BindView(R.id.about_version_string) protected TextView version;
@@ -262,7 +246,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     enum Page {
         VERSION(R.string.about_version),
-        STARTING(R.string.about_starting),
         CHANGELOG(R.string.about_changelog),
         SYSTEM(R.string.about_system),
         CONTRIBUTORS(R.string.about_contributors),
@@ -310,8 +293,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         switch (page) {
             case VERSION:
                 return new VersionViewCreator();
-            case STARTING:
-                return new StartingViewCreator();
             case CHANGELOG:
                 return new ChangeLogViewCreator();
             case SYSTEM:
