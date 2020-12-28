@@ -690,6 +690,10 @@
     <string name="init_circlecolor_summary">Selecteer kleur en doorzichtigheid voor de cirkellijn. Cirkels worden gebruikt als visuele weergave voor de minimale radius rond een cache of fysiek waypoint waar geen andere cache of fysiek waypoint is toegestaan. (Heeft betrekking op geocaching.com)</string>
     <string name="init_circlefillcolor">Cirkel opvulkleur</string>
     <string name="init_circlefillcolor_summary">Selecteer kleur en doorzichtigheid voor de cirkels die ingevuld moeten worden</string>
+    <string name="init_accuracycirclecolor">Nauwkeurigheidscirkel lijnkleur</string>
+    <string name="init_accuracycirclecolor_summary">Selecteer kleur en doorzichtigheid voor nauwkeurigheidscirkellijn. Nauwkeurigheidscirkel wordt gebruikt als visuele representatie voor de nauwkeurigheid van locatiesignaal.</string>
+    <string name="init_accuracycirclefillcolor">Nauwkeurigheidscirkel opvulkleur</string>
+    <string name="init_accuracycirclefillcolor_summary">Selecteer kleur en doorzichtigheid voor de nauwkeurigheidscirkels opvulkleur</string>
     <string name="init_share_after_export">Open deel-menu na GPX export</string>
     <string name="init_include_found_status">Neem status \"Gevonden\" mee</string>
     <string name="init_trackautovisit">Trackables bezoeken</string>
@@ -1183,6 +1187,7 @@
     <string name="map_gm_autorotation">Automatische kaartrotatie</string>
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
+    <string name="quick_settings_info">Enkele kaartinstellingen (kaartinstellingen, verbergen, routing) zijn verplaatst naar de nieuwe \"Snelle instellingen\" popup.\nJe kunt deze pop-up openen met behulp van het icoon in het midden onderin de kaart.</string>
     <string name="map_show_in_map">Op kaart tonen</string>
     <!-- search -->
     <string name="search_bar_hint">Zoek naar caches</string>
@@ -1308,7 +1313,6 @@
     <string name="export_fieldnotes_creating">Veld-notities worden gemaakt…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Het GPX bestand word geëxporteerd naar %1$s met huidige datum en tijd als bestandsnaam.</string>
-    <string name="export_gpx_to">Verstuur geëxporteerde GPX naar</string>
     <string name="export_confirm_title">Bezig met exporteren van %1$s</string>
     <string name="export_confirm_message">Naar pad: %1$s\nBestandsnaam: %2$s</string>
     <string name="export_persnotes">Persoonlijke notities</string>
@@ -1825,4 +1829,26 @@
     <string name="export_individualroute_title">Individuele route exporteren</string>
     <string name="export_individualroute_success">Individuele route geëxporteerd naar \"%s\"</string>
     <!-- install wizard -->
+    <string name="previous">Vorige</string>
+    <string name="skip">Overslaan</string>
+    <string name="next">Volgende</string>
+    <string name="finish">Voltooien</string>
+    <string name="advanced">Geavanceerd</string>
+    <string name="wizard_welcome_title">Welkom bij c:geo</string>
+    <string name="wizard_intro">Het lijkt erop dat dit de eerste keer is dat c:geo wordt gebruikt op dit apparaat. Zal ik je helpen met de configuratie? Het is slechts een paar stappen.</string>
+    <string name="wizard_outro">Bedankt voor het configureren van c:geo.\nVeel plezier!</string>
+    <string name="wizard_permissions_title">App-machtigingen instellen</string>
+    <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig om goed te werken. Ze worden uigelegd in de volgende stappen.\nZonder deze permissies kun je c:o niet gebruiken.</string>
+    <string name="wizard_platforms_title">Platformen configureren</string>
+    <string name="wizard_platforms_intro">Om caches te downloaden heb je een account nodig voor ten minste één van de geocaching platforms ondersteund door c:geo.\nIn de volgende stap kan je optioneel een account aanmaken voor en de verbinding instellen met geocaching.com.</string>
+    <string name="wizard_platforms_others">c:geo ondersteunt verschillende andere geocaching diensten, zoals Opencaching-platforms, Extremcaching.com en Geocaching.su.\nDruk op de knop hieronder om die diensten in te stellen.</string>
+    <string name="wizard_welcome_advanced">Geavanceerde configuratie</string>
+    <string name="wizard_advanced_offlinemaps_label">Offline kaarten</string>
+    <string name="wizard_advanced_offlinemaps_info">c:geo kan kaartbestanden downloaden voor offline gebruik</string>
+    <string name="wizard_advanced_brouter_label">Routing app</string>
+    <string name="wizard_advanced_brouter_info">c:geo kan navigeren naar doelen en routing informatie op je kaart weergeven door het installeren en configureren van een metgezel app genaamd \"BRouter Offline Navigation\"</string>
+    <string name="wizard_advanced_services_label">Geocaching diensten</string>
+    <string name="wizard_advanced_services_info">c:geo ondersteunt verschillende geocaching diensten</string>
+    <string name="wizard_advanced_restore_label">Terugzetten</string>
+    <string name="wizard_advanced_restore_info">Instellingen / gegevens terugzetten van een vorige installatie</string>
 </resources>
