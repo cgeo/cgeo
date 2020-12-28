@@ -1324,7 +1324,6 @@
     <string name="export_fieldnotes_creating">Vytváření souboru poznámek z terénu…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX soubor bude exportován do %1$s s názvem souboru podle aktuálního data a času.</string>
-    <string name="export_gpx_to">Odeslat GPX</string>
     <string name="export_confirm_title">Exportovat %1$s</string>
     <string name="export_confirm_message">Umístění: %1$s\nNázev souboru: %2$s</string>
     <string name="export_persnotes">Osobní poznámky</string>
