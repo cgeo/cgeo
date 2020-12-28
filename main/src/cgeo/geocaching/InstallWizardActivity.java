@@ -14,6 +14,7 @@ import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -32,6 +33,9 @@ import androidx.core.content.ContextCompat;
 
 public class InstallWizardActivity extends AppCompatActivity {
 
+    public static final String BUNDLE_RETURNING = "returning";
+    private static final String BUNDLE_STEP = "step";
+
     private enum WizardStep {
         WIZARD_START,
         WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION,
@@ -40,8 +44,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         WIZARD_END
     }
     private WizardStep step = WizardStep.WIZARD_START;
-
-    private static final String BUNDLE_STEP = "step";
+    private boolean returning = false;
 
     private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
 
@@ -66,7 +69,10 @@ public class InstallWizardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.dark);
         if (savedInstanceState != null) {
+            returning = savedInstanceState.getBoolean(BUNDLE_RETURNING);
             step = WizardStep.values()[savedInstanceState.getInt(BUNDLE_STEP)];
+        } else {
+            returning = getIntent().getBooleanExtra(BUNDLE_RETURNING, false);
         }
         setContentView(R.layout.install_wizard);
 
@@ -97,7 +103,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         switch (step) {
             case WIZARD_START: {
                 title.setText(R.string.wizard_welcome_title);
-                text.setText(R.string.wizard_intro);
+                text.setText(returning ? R.string.wizard_intro2 : R.string.wizard_intro);
                 setNavigation(this::finishWizard, R.string.skip, null, 0, this::gotoNext, 0);
                 break;
             }
@@ -136,8 +142,8 @@ public class InstallWizardActivity extends AppCompatActivity {
                 title.setText(R.string.wizard_welcome_title);
                 final StringBuilder info = new StringBuilder();
                 info.append(getString(R.string.wizard_status_title)).append(":\n")
-                    .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                    .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                    .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                    .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
                     .append(getString(R.string.wizard_status_platform));
                 boolean platformConfigured = false;
                 for (final IConnector conn : ConnectorFactory.getActiveConnectorsWithValidCredentials()) {
@@ -153,8 +159,7 @@ public class InstallWizardActivity extends AppCompatActivity {
                 button1Info.setVisibility(View.VISIBLE);
                 button1Info.setText(info);
 
-                final boolean configurationOK = hasStoragePermission() && hasLocationPermission() && platformConfigured;
-                text.setText(configurationOK ? R.string.wizard_outro_ok : R.string.wizard_outro_error);
+                text.setText(isConfigurationOk(this) ? R.string.wizard_outro_ok : R.string.wizard_outro_error);
 
                 setNavigation(this::gotoPrevious, 0, null, 0, this::finishWizard, R.string.finish);
                 break;
@@ -236,37 +241,44 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private boolean stepCanBeSkipped() {
-        return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (hasStoragePermission() && hasLocationPermission())))
-            || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission()))
-            || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission()))
+        return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (hasStoragePermission(this) && hasLocationPermission(this))))
+            || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission(this)))
+            || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission(this)))
             ;
     }
 
     private void finishWizard() {
-        // call MainActivity and finish this Activity
-        final Intent main = new Intent(this, MainActivity.class);
-        main.putExtras(getIntent());
-        startActivity(main);
+        // call MainActivity (if not returning) and finish this Activity
+        if (!returning) {
+            final Intent main = new Intent(this, MainActivity.class);
+            main.putExtras(getIntent());
+            startActivity(main);
+        }
         finish();
     }
 
-    private boolean hasStoragePermission() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+    private static boolean hasStoragePermission(final Context context) {
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
-    private boolean hasLocationPermission() {
-        return (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            || (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+    private static boolean hasLocationPermission(final Context context) {
+        return (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            || (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+    }
+
+    public static boolean isConfigurationOk(final Context context) {
+        final boolean isPlatformConfigured = ConnectorFactory.getActiveConnectorsWithValidCredentials().length > 0;
+        return hasStoragePermission(context) && hasLocationPermission(context) && isPlatformConfigured;
     }
 
     private void requestStorage() {
-        if (!hasStoragePermission()) {
+        if (!hasStoragePermission(this)) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PermissionRequestContext.InstallWizardActivity.getRequestCode());
         }
     }
 
     private void requestLocation() {
-        if (!hasLocationPermission()) {
+        if (!hasLocationPermission(this)) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PermissionRequestContext.InstallWizardActivity.getRequestCode());
         }
     }
@@ -299,6 +311,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBoolean(BUNDLE_RETURNING, returning);
         savedInstanceState.putInt(BUNDLE_STEP, step.ordinal());
     }
 

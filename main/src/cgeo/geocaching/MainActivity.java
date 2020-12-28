@@ -518,6 +518,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
         menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
         return true;
     }
@@ -531,6 +532,10 @@ public class MainActivity extends AbstractActionBarActivity {
             DebugUtils.askUserToReportProblem(this, null);
         } else if (id == R.id.menu_helpers) {
             startActivity(new Intent(this, UsefulAppsActivity.class));
+        } else if (id == R.id.menu_wizard) {
+            final Intent wizard = new Intent(this, InstallWizardActivity.class);
+            wizard.putExtra(InstallWizardActivity.BUNDLE_RETURNING, true);
+            startActivity(wizard);
         } else if (id == R.id.menu_settings) {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
         } else if (id == R.id.menu_backup) {
