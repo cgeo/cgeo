@@ -438,14 +438,6 @@
     <string name="about_license">License</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Help</string>
-    <string name="about_starting">Getting Started</string>
-    <string name="about_starting_head">Getting Started</string>
-    <string name="about_starting_text_basics_head">Geocaching Basics</string>
-    <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo device permissions</string>
-    <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
-    <string name="about_starting_text_first_head">First steps with c:geo</string>
-    <string name="about_starting_text_first_text">In order to use c:geo, you need an account for a geocaching platform of your choice (independent of this app). You have to configure this account in c:geo service settings before you can use c:geo!\n\nYou can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Configure your geocaching platform(s)</string>
     <string name="about_system_include">Please include the following system information when sending a bug report or asking for more information about c:geo:</string>
     <string name="about_system_info_send_button">Send by mail…</string>
