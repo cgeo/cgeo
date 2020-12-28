@@ -2021,12 +2021,14 @@
     <string name="export_individualroute_success">Exported individual route to \"%s\"</string>
 
     <!-- install wizard -->
+    <string name="wizard">Configuration wizard</string>
     <string name="previous">Previous</string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="finish">Finish</string>
     <string name="wizard_welcome_title">Welcome to c:geo</string>
     <string name="wizard_intro">It looks like this is the first time c:geo is used on this device. Shall I help you with configuration? It\'s just a few steps.</string>
+    <string name="wizard_intro2">Welcome back to the configuration wizard. It\'s just a few steps.</string>
     <string name="wizard_outro_ok">Thanks for configuring c:geo.\nHave fun!</string>
     <string name="wizard_outro_error">Incomplete configuration\nNot all parts of c:geo will work as expected!</string>
     <string name="wizard_permissions_title">Set app permissions</string>
