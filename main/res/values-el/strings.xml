@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Ο παίκτης ανέφερε ότι αυτή η κρύπτη πρέπει να αρχειοθετηθεί. Έχει ενημερωθεί ο εθελοντής διαχειριστής για αυτό.</string>
     <string name="log_image_scale_option_noscaling">Χωρίς κλιμάκωση</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">Εικόνα</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
@@ -682,6 +683,10 @@
     <string name="init_circlecolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της κυκλικής γραμμής. Οι κυκλοι χρησιμοποιούνται ως οπτική απεικόνιση της ελάχιστης ακτίνας γύρω από μια κρύπτη ή φυσικό ενδιάμεσο σημείο, οπου μέσα τους δεν επιτρέπεται άλλη κρύπτη ή φυσικό ενδιάμεσο σημείο. (Εφαρμόζεται στο geocaching.com)</string>
     <string name="init_circlefillcolor">Χρώμα γεμίσματος κύκλου</string>
     <string name="init_circlefillcolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια των κύκλων</string>
+    <string name="init_accuracycirclecolor">Χρώμα γραμμής κύκλου ακριβείας</string>
+    <string name="init_accuracycirclecolor_summary">Επιλέξτε χρώμα και αδιαφάνεια για την ακρίβεια γραμμή κύκλου. Ο κύκλος ακρίβειας χρησιμοποιείται ως οπτική αναπαράσταση για την ακρίβεια του σήματος τοποθεσίας.</string>
+    <string name="init_accuracycirclefillcolor">Χρώμα γεμίσματος κύκλου ακρίβειας</string>
+    <string name="init_accuracycirclefillcolor_summary">Επιλέξτε αδιαφάνεια και χρώμα γεμίσματος, των κύκλων ακρίβειας</string>
     <string name="init_share_after_export">Ανοίξτε το μενού κοινής χρήσης μετά από εξαγωγή GPX</string>
     <string name="init_include_found_status">Περιλαμβάνει όσες δηλώσατε ότι βρήκατε</string>
     <string name="init_trackautovisit">Επίσκεψη ανιχνεύσιμων</string>
@@ -731,6 +736,7 @@
     <string name="init_create_memory_dump">Δημιουργήστε αρχείο καταγραφής σφαλμάτων</string>
     <string name="init_memory_dump">Αρχεία σφαλμάτων μνήμης</string>
     <string name="init_memory_dumped">Η καταχώρηση έγινε στην %s</string>
+    <string name="init_please_wait">Παρακαλώ περιμένετε…</string>
     <string name="init_hardware_acceleration_title">Απόδοση με επιτάχυνση του υλικού εξοπλισμού</string>
     <string name="init_hardware_acceleration_note">Η επιτάχυνση του υλικού επιταχύνει την απεικόνιση στην οθόνη. Ωστόσο, σε κάποιες συσκευές, το λειτουργικό σύστημα Android περιέχει σφάλματα και κάποια κείμενα ενδέχεται να εμφανίζονται θολά (κυρίως bold χαρακτήρες). Εάν σας συμβεί αυτό, απενεργοποιήστε την επιτάχυνση υλικού.</string>
     <string name="init_hardware_acceleration">Ενεργοποίηση επιτάχυνσης υλικού</string>
@@ -1173,6 +1179,7 @@
     <string name="map_routing">Δρομολόγηση</string>
     <string name="map_gm_autorotation">Αυτόματη περιστροφή χάρτη</string>
     <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
+    <string name="quick_settings_info">Μερικές ρυθμίσεις χάρτη (Ρυθμίσεις χάρτη, απόκρυψη, δρομολόγηση) έχουν μεταφερθεί στο νέο αναδυόμενο παράθυρο \"Γρήγορες ρυθμίσεις\".\nΜπορείτε να ανοίξετε αυτό το αναδυόμενο παράθυρο χρησιμοποιώντας το εικονίδιο στο κάτω μέρος του χάρτη.</string>
     <string name="map_show_in_map">Εμφάνιση στο χάρτη</string>
     <!-- search -->
     <string name="search_bar_hint">Αναζήτηση κρυπτών</string>
@@ -1298,7 +1305,6 @@
     <string name="export_fieldnotes_creating">Δημιουργία σημειώσεων πεδίου…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Το αρχείο GPX θα εξαθεί στο %1$s με την τρέχουσα ημερομηνία και ώρα ως όνομα αρχείου.</string>
-    <string name="export_gpx_to">Αποστολή εξαγομένων αρχείων GPX στο</string>
     <string name="export_confirm_title">Εξαγωγή %1$s</string>
     <string name="export_confirm_message">Στη Διαδρομή: %1$s\nΌνομα αρείου: %2$s</string>
     <string name="export_persnotes">Προσωπικές σημειώσεις</string>
@@ -1808,4 +1814,25 @@
     <string name="export_individualroute_title">Εξαγωγή μεμονωμένης διαδρομής</string>
     <string name="export_individualroute_success">Εξαγωγή μεμονωμένης διαδρομής στο \"%s\"</string>
     <!-- install wizard -->
+    <string name="previous">Προηγούμενο</string>
+    <string name="skip">Παράλειψη</string>
+    <string name="next">Επόμενο</string>
+    <string name="finish">Ολοκληρώθηκε</string>
+    <string name="advanced">Προχωρημένα</string>
+    <string name="wizard_welcome_title">Καλώς ήλθατε στο c:geo</string>
+    <string name="wizard_intro">Φαίνεται ότι αυτή είναι η πρώτη φορά που το c:geo χρησιμοποιείται σε αυτή τη συσκευή. Nα σας βοηθήσω με τη διαμόρφωση? Είναι μόνο μερικά βήματα.</string>
+    <string name="wizard_outro">Ευχαριστούμε για τη διαμόρφωση του c:geo.\nΚαλή διασκέδαση!</string>
+    <string name="wizard_permissions_title">Ορισμός δικαιωμάτων εφαρμογών</string>
+    <string name="wizard_permissions_intro">Το c:geo χρειάζεται ορισμένα δικαιώματα για να λειτουργήσει σωστά. Θα τα εξηγήσω στα επόμενα βήματα.\nΧωρίς αυτά τα δικαιώματα δεν θα μπορείτε να χρησιμοποιήσετε το c:geo.</string>
+    <string name="wizard_platforms_title">Ρύθμιση πλατφορμών</string>
+    <string name="wizard_platforms_intro">Για να κατεβάσετε κρύπτες χρειάζεστε έναν λογαριασμό για τουλάχιστον μία από τις πλατφόρμες geocaching που υποστηρίζονται από το c:geo.\nΣτο επόμενο βήμα μπορείτε προαιρετικά να δημιουργήσετε ένα λογαριασμό και να ρυθμίσετε τη σύνδεση στο geocaching.com.</string>
+    <string name="wizard_platforms_others">Το c:geo υποστηρίζει πολλές άλλες υπηρεσίες geocaching όπως οι πλατφόρμες Opencaching-platforms, Extremcaching.com και Geocaching.su.\nΠατήστε το παρακάτω κουμπί για να ρυθμίσετε αυτές τις υπηρεσίες.</string>
+    <string name="wizard_welcome_advanced">Προηγμένη διαμόρφωση</string>
+    <string name="wizard_advanced_offlinemaps_label">Χάρτες χωρίς σύνδεση</string>
+    <string name="wizard_advanced_offlinemaps_info">Το c:geo μπορεί να κατεβάσει αρχεία χάρτη για χρήση εκτός σύνδεσης</string>
+    <string name="wizard_advanced_brouter_label">Εφαρμογή δρομολόγησης</string>
+    <string name="wizard_advanced_brouter_info">Το c:geo μπορεί να πλοηγηθεί σε στόχους και να δείξει πληροφορίες δρομολόγησης στο χάρτη σας, εγκαθιστώντας και διαμορφώνοντας μια συνοδευτική εφαρμογή που ονομάζεται \"BRouter Offline Navigation\"</string>
+    <string name="wizard_advanced_services_label">Υπηρεσίες Geocaching</string>
+    <string name="wizard_advanced_services_info">Το c:geo υποστηρίζει διάφορες υπηρεσίες geocaching</string>
+    <string name="wizard_advanced_restore_label">Επαναφορά</string>
 </resources>
