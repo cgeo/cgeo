@@ -290,7 +290,7 @@
     <string name="menu_filter">フィルタ</string>
     <string name="menu_scan_geo">QRコードスキャン</string>
     <string name="menu_pocket_queries">ポケット・クエリ</string>
-    <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playからインストールしますか?</string>
+    <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playストアからインストールしますか?</string>
     <!-- main screen -->
     <string name="live_map_button">地図</string>
     <string name="caches_nearby_button">近く</string>
@@ -1171,6 +1171,7 @@
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
+    <string name="quick_settings_info">いくつか地図の設定(地図上の表示/非表示、ルート検索など)は新しい「クイック設定」に移動しました。\n地図の下部中央の歯車アイコンをタップすると開けます</string>
     <string name="map_show_in_map">地図に表示</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ検索</string>
@@ -1565,7 +1566,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="website_title">Webサイト</string>
     <string name="facebook_link"><a href="">c:geoアプリページ</a></string>
     <string name="market_title">Google Play</string>
-    <string name="market_link"><a href="">Google Playのc:geo</a></string>
+    <string name="market_link"><a href="">Google Playストアのc:geo</a></string>
     <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
     <string name="github_title">課題/バグ管理</string>
     <string name="faq_title">よくある質問</string>
@@ -1669,8 +1670,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- permission handling -->
     <string name="close_app">アプリを閉じる</string>
     <string name="ask_again">次回も確認する</string>
-    <string name="location_permission_request_explanation">現在地の特定とジオキャッシュまでの距離/方向を計算するためにc:geoはデバイスの位置情報にアクセスする必要があります。この権限がないとc:geoをご利用いただけません</string>
-    <string name="storage_permission_request_explanation">オフライン用にジオキャッシュを保存するためにデバイスのストレージまたはSDカードを使用します。 また、ファイルのインポート/エクスポートやオフライン地図の読み込みにも使います。この権限がないとc:geoをご利用いただけません</string>
+    <string name="location_permission_request_explanation">現在地の特定とジオキャッシュまでの距離/方向を計算するためにc:geoはデバイスの位置情報にアクセスする必要があります。この権限がないとc:geoを使用することはできません</string>
+    <string name="storage_permission_request_explanation">オフライン用にジオキャッシュを保存するためにデバイスのストレージまたはSDカードを使用します。 また、ファイルのインポート/エクスポートやオフライン地図の読み込みにも使います。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_needed">この機能はストレージの権限がないと使用できません</string>
     <!-- colors -->
     <string name="color_blue">青</string>
