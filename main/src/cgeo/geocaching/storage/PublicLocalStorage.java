@@ -294,10 +294,8 @@ public class PublicLocalStorage {
         if (testWrite && files.size() < 1) {
             return false;
         }
-        if (testDoc != null && !delete(testDoc)) {
-            return false;
-        }
-        return true;
+
+        return (testDoc == null || delete(testDoc));
     }
 
     /** returns system information for a given folder, mainly for display in log and/or SystemInformation */
