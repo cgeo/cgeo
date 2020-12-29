@@ -409,14 +409,6 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjälp</string>
-    <string name="about_starting">Kom igång</string>
-    <string name="about_starting_head">Kom igång</string>
-    <string name="about_starting_text_basics_head">Geocaching grunderna</string>
-    <string name="about_starting_text_basics_text">Geocaching är ett utomhusspel för att söka och hitta så kallade \"cacher\". Appen kan användas för att spela det här spelet.\n\nDu kan läsa mer om <b>c:geo grunderna</b> i vår användarguide: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo enhetsbehörigheter</string>
-    <string name="about_starting_text_device_text">c:geo behöver vissa behörigheter på din enhet:\n<b>Plats</b>: tillgång till GPS för att lokalisera din position och beräkna avstånd och riktning till geocacher\n<b>Lagring</b>: skriv data till din telefon lagring när du sparar geocacher för användning offline, för import/export av filer och läsning av offline-kartor\n\nUtan dessa behörigheter kommer du inte att kunna använda c:geo.</string>
-    <string name="about_starting_text_first_head">Första stegen med c:geo</string>
-    <string name="about_starting_text_first_text">För att kunna använda c:geo behöver du ett konto för en valfri geocachingplattform (oberoende av denna app). Du måste konfigurera detta konto i tjänst inställningarna för c:geo innan du kan använda c:geo!\n\nDu kan läsa mer om <b>c:geo Första stegen</b> i vår användarguide: https://manual. geo.org/sv/firststeps</string>
     <string name="open_services_page">Konfigurera din(a) geocachingplattform(er)</string>
     <string name="about_system_include">Vänligen inkludera följande systeminformation när du skickar en felrapport eller ber om mer information om c:geo:</string>
     <string name="about_system_info_send_button">Skicka via e-post…</string>
