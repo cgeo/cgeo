@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -91,10 +92,11 @@ public class MapSettingsUtils {
             autotargetCheckbox.setChecked(isAutotargetIndividualRoute);
         }
 
-        Dialogs.newBuilder(activity)
+        final View customTitle = activity.getLayoutInflater().inflate(R.layout.dialog_title_back, null);
+        final AlertDialog dialog = Dialogs.newBuilder(activity)
             .setView(dialogView)
-            .setTitle(R.string.quick_settings)
-            .setOnDismissListener(dialog -> {
+            .setCustomTitle(customTitle)
+            .setOnDismissListener(d -> {
                 for (SettingsCheckboxModel item : settingsElementsCheckboxes) {
                     item.setValue();
                 }
@@ -109,8 +111,10 @@ public class MapSettingsUtils {
                     }
                 }
             })
-            .create()
-            .show();
+            .create();
+        ((TextView) customTitle.findViewById(R.id.dialog_title_title)).setText(R.string.quick_settings);
+        customTitle.findViewById(R.id.dialog_title_back).setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
 
         compactIcon.init();
         routing.init();
