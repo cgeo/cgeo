@@ -412,14 +412,6 @@
     <string name="about_license">Licenza</string>
     <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
     <string name="about_help">Guida</string>
-    <string name="about_starting">Come iniziare</string>
-    <string name="about_starting_head">Guida introduttiva</string>
-    <string name="about_starting_text_basics_head">Nozioni di base sul Geocaching</string>
-    <string name="about_starting_text_basics_text">Il Geocaching è un gioco all\'aperto per cercare e trovare le cosiddette \"cache\". Questa app può essere utilizzata per giocare a questo gioco.\n\nPuoi saperne di più su <b>c:geo Basics</b> nella nostra guida utente: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">Permessi dispositivo per c:geo</string>
-    <string name="about_starting_text_device_text">c:geo ha bisogno di alcune autorizzazioni sul tuo dispositivo:\n<b>Posizione</b>: accesso al GPS per localizzare la tua posizione e calcolare la distanza e la direzione delle cache\n<b>Archivio</b>:  scrittura di dati nella memoria del telefono per il salvataggio di geocache per uso offline, per importare/esportare file e per consultare le mappe offline\n\nSenza queste autorizzazioni non sarai in grado di utilizzare c:geo.</string>
-    <string name="about_starting_text_first_head">I primi passi con c:geo</string>
-    <string name="about_starting_text_first_text">Per utilizzare c:geo, è necessario un account per una piattaforma di Geocaching a tua scelta (indipendente da questa app). Devi configurare questo account nelle impostazioni del servizio c:geo prima di poter utilizzare c:geo!\n\nPuoi saperne di più su <b>c:geo First steps</b> nella nostra guida utente: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Configura la tua piattaforma (o le tue piattaforme) di Geocaching</string>
     <string name="about_system_include">Si prega di includere le seguenti informazioni di sistema quando si invia una segnalazione di bug o per chiedere ulteriori informazioni su c:geo:</string>
     <string name="about_system_info_send_button">Invia per email…</string>
@@ -1829,10 +1821,8 @@
     <string name="skip">Salta</string>
     <string name="next">Successivo</string>
     <string name="finish">Termina</string>
-    <string name="advanced">Avanzate</string>
     <string name="wizard_welcome_title">Benvenuto su c:geo</string>
     <string name="wizard_intro">Sembra che questa sia la prima volta che c:geo viene utilizzato su questo dispositivo. Posso aiutarti nella configurazione?</string>
-    <string name="wizard_outro">Grazie per aver configurato c:geo.\nBuon divertimento!</string>
     <string name="wizard_permissions_title">Imposta permessi app</string>
     <string name="wizard_permissions_intro">c:geo ha bisogno di alcuni permessi per funzionare correttamente. Li spiegherò nei prossimi passi.\nSenza questi permessi non potrai usare c:geo.</string>
     <string name="wizard_welcome_advanced">Configurazione avanzata</string>
@@ -1840,8 +1830,6 @@
     <string name="wizard_advanced_offlinemaps_info">c:geo può scaricare i file della mappa per l\'utilizzo offline</string>
     <string name="wizard_advanced_brouter_label">App di navigazione</string>
     <string name="wizard_advanced_brouter_info">c:geo può portarti verso gli obiettivi e mostrare le informazioni di navigazione sulla tua mappa installando e configurando un\'app di supporto denominata \"BRouter Offline Navigation\"</string>
-    <string name="wizard_advanced_services_label">Servizi di geocaching</string>
-    <string name="wizard_advanced_services_info">c:geo supporta diversi servizi di geocaching</string>
     <string name="wizard_advanced_restore_label">Ripristina</string>
     <string name="wizard_advanced_restore_info">Ripristina impostazioni e dati da un\'installazione precedente</string>
 </resources>
