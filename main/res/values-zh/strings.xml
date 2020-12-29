@@ -290,9 +290,6 @@
     <string name="about_contributors">活动提供商</string>
     <string name="about_license">许可</string>
     <string name="about_help">帮助</string>
-    <string name="about_starting">开始使用</string>
-    <string name="about_starting_head">开始使用</string>
-    <string name="about_starting_text_basics_head">寻宝基础知识</string>
     <string name="about_system_info_send_button">通过邮件发送…</string>
     <string name="about_system_info">c:geo 系统信息</string>
     <string name="about_system_info_send_chooser">发送系统信息</string>
