@@ -412,14 +412,6 @@
     <string name="about_license">Licentie</string>
     <string name="about_apache_license"><a href="">Apache License, Versie 2.0</a></string>
     <string name="about_help">Help</string>
-    <string name="about_starting">Aan de slag</string>
-    <string name="about_starting_head">Aan de slag</string>
-    <string name="about_starting_text_basics_head">Geocaching Basics</string>
-    <string name="about_starting_text_basics_text">Geocaching is een buitenspel om zogenaamde \"caches\" te zoeken. Deze app kan worden gebruikt om dit spel te spelen.\n\nJe kunt meer lezen over <b>c:geo Basics</b> in onze gebruikersgids: https://handleiding.cgeo.org/nl/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo apparaat machtigingen</string>
-    <string name="about_starting_text_device_text">c:geo heeft bepaalde machtigingen nodig op je apparaat:\n<b>Locatie</b>: toegang tot de GPS om je positie te bepalen en afstand en richting te berekenen naar geocaches\n<b>Opslag</b>:  Schrijven van gegevens in je telefoon opslag wanneer je geocaches opslaat voor offline gebruik, voor import/export van bestanden en het lezen van offline kaarten\n\nzonder deze machtigingen kan je c:geo niet gebruiken.</string>
-    <string name="about_starting_text_first_head">Eerste stappen met c:geo</string>
-    <string name="about_starting_text_first_text">Om c:geo te gebruiken, heb je een account nodig voor een geocaching platform van je keuze (onafhankelijk van deze app). Je dient dit account te configureren in de c:geo Diensten instellingen voordat je c:geo kunt gebruiken!\n\nJe kunt meer lezen over <b>c:geo Eerste stappen</b> in onze gebruikersgids: https://handleiding.cgeo.org/nl/eerste stappen</string>
     <string name="open_services_page">Configureer je geocaching platform(en)</string>
     <string name="about_system_include">Voeg volgende systeem informatie toe wanneer je een bug report stuurt of vraagt om meer informatie over c:geo:</string>
     <string name="about_system_info_send_button">Verzenden via mail…</string>
@@ -1833,22 +1825,16 @@
     <string name="skip">Overslaan</string>
     <string name="next">Volgende</string>
     <string name="finish">Voltooien</string>
-    <string name="advanced">Geavanceerd</string>
     <string name="wizard_welcome_title">Welkom bij c:geo</string>
     <string name="wizard_intro">Het lijkt erop dat dit de eerste keer is dat c:geo wordt gebruikt op dit apparaat. Zal ik je helpen met de configuratie? Het is slechts een paar stappen.</string>
-    <string name="wizard_outro">Bedankt voor het configureren van c:geo.\nVeel plezier!</string>
     <string name="wizard_permissions_title">App-machtigingen instellen</string>
     <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig om goed te werken. Ze worden uigelegd in de volgende stappen.\nZonder deze permissies kun je c:o niet gebruiken.</string>
     <string name="wizard_platforms_title">Platformen configureren</string>
-    <string name="wizard_platforms_intro">Om caches te downloaden heb je een account nodig voor ten minste één van de geocaching platforms ondersteund door c:geo.\nIn de volgende stap kan je optioneel een account aanmaken voor en de verbinding instellen met geocaching.com.</string>
-    <string name="wizard_platforms_others">c:geo ondersteunt verschillende andere geocaching diensten, zoals Opencaching-platforms, Extremcaching.com en Geocaching.su.\nDruk op de knop hieronder om die diensten in te stellen.</string>
     <string name="wizard_welcome_advanced">Geavanceerde configuratie</string>
     <string name="wizard_advanced_offlinemaps_label">Offline kaarten</string>
     <string name="wizard_advanced_offlinemaps_info">c:geo kan kaartbestanden downloaden voor offline gebruik</string>
     <string name="wizard_advanced_brouter_label">Routing app</string>
     <string name="wizard_advanced_brouter_info">c:geo kan navigeren naar doelen en routing informatie op je kaart weergeven door het installeren en configureren van een metgezel app genaamd \"BRouter Offline Navigation\"</string>
-    <string name="wizard_advanced_services_label">Geocaching diensten</string>
-    <string name="wizard_advanced_services_info">c:geo ondersteunt verschillende geocaching diensten</string>
     <string name="wizard_advanced_restore_label">Terugzetten</string>
     <string name="wizard_advanced_restore_info">Instellingen / gegevens terugzetten van een vorige installatie</string>
 </resources>
