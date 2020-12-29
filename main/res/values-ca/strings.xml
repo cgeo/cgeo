@@ -412,14 +412,6 @@
     <string name="about_license">Llicència</string>
     <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
     <string name="about_help">Ajuda</string>
-    <string name="about_starting">Primers passos</string>
-    <string name="about_starting_head">Primers passos</string>
-    <string name="about_starting_text_basics_head">Conceptes bàsics sobre geocatxing</string>
-    <string name="about_starting_text_basics_text">Geocatxing és un joc a l’aire lliure per cercar i trobar els anomenats “catxés”. Aquesta aplicació es pot utilitzar per jugar a aquest joc.\n\nPots llegir més sobre <b>c:geo Basics</b> a la nostra guia de l’usuari: https://manual.cgeo.org/ca/basicuse</string>
-    <string name="about_starting_text_device_head">Permisos pel c:geo</string>
-    <string name="about_starting_text_device_text">c:geo necessita certs permisos al vostre dispositiu:\n<b>Ubicació</b>: accés al GPS per localitzar la vostra posició i calcular la distància i la direcció als catxés\n<b>Emmagatzematge</b>: escriure dades al vostre  telèfon quan guardeu els catxés per a un ús fora de línia, per a la importació / exportació de fitxers i els mapes fora de línia\n\nSense aquests permisos, no podreu utilitzar el c:geo.</string>
-    <string name="about_starting_text_first_head">Primers passos amb c:geo</string>
-    <string name="about_starting_text_first_text">Per utilitzar c:geo, necessiteu un compte de geocatxing (independentment d\'aquesta aplicació). Heu de configurar aquest compte a la configuració del servei c:geo abans de poder utilitzar c:geo!\n\nPots llegir més informació sobre &lt;b&gt;c:geo Primers passos&lt;b&gt; a la nostra guia de l’usuari: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Configura les teves plataformes de geocatxing</string>
     <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar per correu…</string>
@@ -1307,7 +1299,6 @@
     <string name="export_fieldnotes_creating">S\'estan creant notes de camp…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">El fitxer GPX s\'exportarà a %1$s amb la data i hora actuals com a nom de fitxer.</string>
-    <string name="export_gpx_to">Envia el GPX exportat a</string>
     <string name="export_confirm_title">Exportant %1$s</string>
     <string name="export_confirm_message">Camí: %1$s\n Nom arxiu: %2$s</string>
     <string name="export_persnotes">Notes personals</string>
@@ -1817,4 +1808,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Exporta una ruta individual</string>
     <string name="export_individualroute_success">S\'ha exportat la ruta individual a \"%s\"</string>
+    <!-- install wizard -->
 </resources>

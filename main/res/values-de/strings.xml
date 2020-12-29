@@ -412,14 +412,6 @@
     <string name="about_license">Lizenz</string>
     <string name="about_apache_license"><a href="">Apache Lizenz, Version 2.0</a></string>
     <string name="about_help">Hilfe</string>
-    <string name="about_starting">Erste Schritte</string>
-    <string name="about_starting_head">Erste Schritte</string>
-    <string name="about_starting_text_basics_head">Geocaching-Grundlagen</string>
-    <string name="about_starting_text_basics_text">Geocaching ist ein Outdoor-Spiel, um so genannte \"Caches\" zu suchen und zu finden. Diese App kann verwendet werden, um dieses Spiel zu spielen.\n\nMehr über <b>c:geo Grundlagen</b> kannst du in unserem Benutzerhandbuch lesen: https://manual.cgeo.org/de/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo Geräteberechtigungen</string>
-    <string name="about_starting_text_device_text">c:geo benötigt bestimmte Berechtigungen auf deinem Gerät:\n<b>Standort</b>: Zugriff auf das GPS, um deine Position zu finden und Entfernung und Richtung zu Geocaches zu berechnen.\n<b>Speicher</b>: Daten in deinen Telefonspeicher schreiben, wenn du Geocaches für Offline-Nutzung speicherst, um Dateien zu im- oder exportieren und Offline-Karten zu lesen.\n\nOhne diese Berechtigungen kannst du c:geo nicht verwenden.</string>
-    <string name="about_starting_text_first_head">Erste Schritte mit c:geo</string>
-    <string name="about_starting_text_first_text">Um c:geo nutzen zu können, benötigst du ein Nutzerkonto einer Geocaching-Plattform deiner Wahl (unabhängig von dieser App). Du musst dieses Konto in den c:geo Service-Einstellungen konfigurieren, bevor du c:geo verwenden kannst!\n\nMehr über <b>Erste Schritte mit c:geo</b> kannst du in unserem Benutzerhandbuch lesen: https://manual.cgeo.org/de/firststeps</string>
     <string name="open_services_page">Konfiguriere deine Geocaching-Platform(en)</string>
     <string name="about_system_include">Bitte die folgende Systeminformation bei jedem Fehlerbericht oder bei Informationsanfragen zu c:geo mitsenden:</string>
     <string name="about_system_info_send_button">Per E-Mail versenden…</string>
@@ -687,7 +679,7 @@
     <string name="init_trackwidth">Breite des individuellen Tracks</string>
     <string name="init_trackwidth_summary">Breite der individuellen Tracklinie einstellen</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
-    <string name="init_circlecolor_summary">Breite und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
+    <string name="init_circlecolor_summary">Farbe und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
     <string name="init_circlefillcolor">Füllfarbe der Kreislinie</string>
     <string name="init_circlefillcolor_summary">Farbe und Deckkraft der Kreisfüllung einstellen</string>
     <string name="init_share_after_export">Weiterleiten nach dem Export</string>
@@ -1183,6 +1175,7 @@
     <string name="map_gm_autorotation">Automatische Kartendrehung</string>
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
+    <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
     <string name="map_show_in_map">In Karte anzeigen</string>
     <!-- search -->
     <string name="search_bar_hint">Suche nach Caches</string>
@@ -1308,7 +1301,6 @@
     <string name="export_fieldnotes_creating">Erstelle Field Notes…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX-Datei wird nach %1$s mit aktuellem Datum und Zeit als Dateiname exportiert.</string>
-    <string name="export_gpx_to">Exportierte GPX-Datei senden an</string>
     <string name="export_confirm_title">Exportiere %1$s</string>
     <string name="export_confirm_message">Pfad: %1$s\nDateiname: %2$s</string>
     <string name="export_persnotes">Persönliche Notizen</string>
@@ -1824,4 +1816,16 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Individuelle Route exportieren</string>
     <string name="export_individualroute_success">Individuelle Route nach \"%s\" exportiert</string>
+    <!-- install wizard -->
+    <string name="previous">Zurück</string>
+    <string name="skip">Überspringen</string>
+    <string name="next">Weiter</string>
+    <string name="finish">Fertig</string>
+    <string name="wizard_welcome_title">Willkommen bei c:geo</string>
+    <string name="wizard_permissions_title">App-Berechtigungen</string>
+    <string name="wizard_welcome_advanced">Erweiterte Konfiguration</string>
+    <string name="wizard_advanced_offlinemaps_label">Offline-Karten</string>
+    <string name="wizard_advanced_brouter_label">Routing-App</string>
+    <string name="wizard_advanced_restore_label">Wiederherstellen</string>
+    <string name="wizard_advanced_restore_info">Einstellungen / Daten einer vorherigen Installation wiederherstellen</string>
 </resources>

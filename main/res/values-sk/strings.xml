@@ -413,14 +413,6 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
     <string name="about_help">Pomoc</string>
-    <string name="about_starting">Začíname</string>
-    <string name="about_starting_head">Začíname</string>
-    <string name="about_starting_text_basics_head">Základy geocachingu</string>
-    <string name="about_starting_text_basics_text">Geocaching je terénna hra na hľadanie a nachádzanie takzvaných „kešiek“. Túto aplikáciu možno využívať na hranie tejto hry.\n\nĎalšie informácie o <b>Základoch c:geo</b> nájdete v našom návode: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">Povolenia c:geo pre zariadenie</string>
-    <string name="about_starting_text_device_text">Aplikácia c:geo vyžaduje určité povolenia na vašom zariadení:\n<b>Poloha</b>: prístup k funkcii GPS na vyhľadanie vašej polohy a výpočet vzdialenosti a smeru ku keškám\n<b>Ukladací priestor</b>: zápis údajov do ukladacieho priestoru telefónu pri ukladaní kešiek na použitie off-line, na import/export súborov a čítanie máp off-line\n\nBez týchto povolení nemôžete aplikáciu c:geo používať.</string>
-    <string name="about_starting_text_first_head">Prvé kroky s c:geo</string>
-    <string name="about_starting_text_first_text">Ak chcete používať c:geo, je potrebné konto na platforme geocachingu podľa vášho výberu (nezávislé od tejto aplikácie). Toto konto je potrebné nakonfigurovať v nastaveniach služby c:geo ešte pred použitím aplikácie c:geo!\n\nĎalšie informácie o <b>Prvých krokoch s c:geo</b> nájdete v našom návode: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Konfigurovať geocachingové platformy</string>
     <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
     <string name="about_system_info_send_button">Poslať e-mailom…</string>
@@ -1324,7 +1316,6 @@
     <string name="export_fieldnotes_creating">Vytváranie poznámok…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Súbor GPX bude exportovaný do %1$s s názvom súboru podľa aktuálneho dátumu a času.</string>
-    <string name="export_gpx_to">Odoslať exportovaný GPX súbor do</string>
     <string name="export_confirm_title">Exportovanie %1$s</string>
     <string name="export_confirm_message">Priečinok: %1$s\nNázov súboru: %2$s</string>
     <string name="export_persnotes">Osobné poznámky</string>
@@ -1866,4 +1857,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Exportovať individuálnu trasu</string>
     <string name="export_individualroute_success">Exportovať individuálnu trasu do \"%s\"</string>
+    <!-- install wizard -->
 </resources>

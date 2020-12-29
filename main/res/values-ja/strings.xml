@@ -290,7 +290,7 @@
     <string name="menu_filter">フィルタ</string>
     <string name="menu_scan_geo">QRコードスキャン</string>
     <string name="menu_pocket_queries">ポケット・クエリ</string>
-    <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playからインストールしますか?</string>
+    <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playストアからインストールしますか?</string>
     <!-- main screen -->
     <string name="live_map_button">地図</string>
     <string name="caches_nearby_button">近く</string>
@@ -411,14 +411,6 @@
     <string name="about_license">ライセンス</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">ヘルプ</string>
-    <string name="about_starting">はじめましょう</string>
-    <string name="about_starting_head">はじめましょう</string>
-    <string name="about_starting_text_basics_head">ジオキャッシングの基本</string>
-    <string name="about_starting_text_basics_text">ジオキャッシングはいわゆる「キャッシュ」を探して見つけるアウトドアゲームです。このアプリでお楽しみいただけます。\n詳細は<b>c:geo Basics(英語)</b> https://manual.cgeo.org/en/basicuse をご覧ください。</string>
-    <string name="about_starting_text_device_head">c:geoアプリの権限</string>
-    <string name="about_starting_text_device_text">c:geoにはお使いのデバイスで特定の権限が必要です。\n<b>位置情報</b>: GPSにアクセスして位置を特定しジオキャッシュの方向と距離を計算します。\n<b>ストレージ</b>: オフライン用にジオキャッシュを保存する時、ファイルのインポート/エクスポートする時、オフラインマップの読み込む時にストレージにデータを読み書きます。\nこれらのアクセス権限がないとc:geoを使用することができません。</string>
-    <string name="about_starting_text_first_head">c:geoの最初のステップ</string>
-    <string name="about_starting_text_first_text">c:geoを使用するにはジオキャッシングサイトのアカウントが必要です。「設定」&gt;「サービス」&gt;「ジオキャッシングサイト」でアカウントを設定してください。\n詳細は<b>First steps with c:geo(英語)</b> https://manual.cgeo.org/en/firststeps をご覧ください</string>
     <string name="open_services_page">ジオキャッシングサイト設定</string>
     <string name="about_system_include">バグ報告や問い合わせの際は以下のシステム情報もお知らせください</string>
     <string name="about_system_info_send_button">メールで送信…</string>
@@ -689,6 +681,10 @@
     <string name="init_circlecolor_summary">0.1マイル円の線色と不透明度の選択。 キャッシュまたはウェイポイントに半径0.1マイルの円を表示します。geocaching.comでは0.1マイル以内にキャッシュまたは物理的なウェイポイントを設置することを禁止しています</string>
     <string name="init_circlefillcolor">0.1マイル円の内側の色</string>
     <string name="init_circlefillcolor_summary">0.1マイル円の内側の色と不透明度の選択</string>
+    <string name="init_accuracycirclecolor">精度円の線色</string>
+    <string name="init_accuracycirclecolor_summary">精度円の線色と不透明度の選択。精度円は位置測位の精度を表しています</string>
+    <string name="init_accuracycirclefillcolor">精度円の内側の色</string>
+    <string name="init_accuracycirclefillcolor_summary">精度円の内側の色と不透明度の選択</string>
     <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
     <string name="init_include_found_status">「発見した」ステータスを含める</string>
     <string name="init_trackautovisit">トラッカブルの「訪れた」設定</string>
@@ -1172,6 +1168,7 @@
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
+    <string name="quick_settings_info">いくつか地図の設定(地図上の表示/非表示、ルート検索など)は新しい「クイック設定」に移動しました。\n地図の下部中央の歯車アイコンをタップすると開けます</string>
     <string name="map_show_in_map">地図に表示</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ検索</string>
@@ -1296,7 +1293,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_fieldnotes_creating">フィールドノートを作成中…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPXファイルは%1$sフォルダに保存され、ファイル名は現在の日時になります</string>
-    <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
     <string name="export_confirm_title">エクスポート: %1$s</string>
     <string name="export_confirm_message">フォルダ: %1$s\nファイル名: %2$s</string>
     <string name="export_persnotes">パーソナルノート</string>
@@ -1566,7 +1562,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="website_title">Webサイト</string>
     <string name="facebook_link"><a href="">c:geoアプリページ</a></string>
     <string name="market_title">Google Play</string>
-    <string name="market_link"><a href="">Google Playのc:geo</a></string>
+    <string name="market_link"><a href="">Google Playストアのc:geo</a></string>
     <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
     <string name="github_title">課題/バグ管理</string>
     <string name="faq_title">よくある質問</string>
@@ -1670,8 +1666,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- permission handling -->
     <string name="close_app">アプリを閉じる</string>
     <string name="ask_again">次回も確認する</string>
-    <string name="location_permission_request_explanation">現在地の特定とジオキャッシュまでの距離/方向を計算するためにc:geoはデバイスの位置情報にアクセスする必要があります。この権限がないとc:geoをご利用いただけません</string>
-    <string name="storage_permission_request_explanation">オフライン用にジオキャッシュを保存するためにデバイスのストレージまたはSDカードを使用します。 また、ファイルのインポート/エクスポートやオフライン地図の読み込みにも使います。この権限がないとc:geoをご利用いただけません</string>
+    <string name="location_permission_request_explanation">現在地の特定とジオキャッシュまでの距離/方向を計算するためにc:geoはデバイスの位置情報にアクセスする必要があります。この権限がないとc:geoを使用することはできません</string>
+    <string name="storage_permission_request_explanation">オフライン用にジオキャッシュを保存するためにデバイスのストレージまたはSDカードを使用します。 また、ファイルのインポート/エクスポートやオフライン地図の読み込みにも使います。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_needed">この機能はストレージの権限がないと使用できません</string>
     <!-- colors -->
     <string name="color_blue">青</string>
@@ -1793,4 +1789,21 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- individual route export -->
     <string name="export_individualroute_title">個別ルートのエクスポート</string>
     <string name="export_individualroute_success">個別ルートを「%s」にエクスポートしました</string>
+    <!-- install wizard -->
+    <string name="previous">戻る</string>
+    <string name="skip">スキップ</string>
+    <string name="next">次へ</string>
+    <string name="finish">終了</string>
+    <string name="wizard_welcome_title">c:geoへようこそ</string>
+    <string name="wizard_intro">このデバイスでc:geoが初めて使用されるようです。設定をお手伝いしましょうか? ほんの数ステップです</string>
+    <string name="wizard_permissions_title">アプリの権限の設定</string>
+    <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です。次のステップで説明します。\nこれらの権限がないとc:geoを使用することはできません</string>
+    <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
+    <string name="wizard_welcome_advanced">詳細設定</string>
+    <string name="wizard_advanced_offlinemaps_label">オフライン地図のダウンロード</string>
+    <string name="wizard_advanced_offlinemaps_info">オフライン用に地図ファイルをダウンロードできます</string>
+    <string name="wizard_advanced_brouter_label">ルーティングアプリ</string>
+    <string name="wizard_advanced_brouter_info">BRouter Offline Navigationをインストールしてセットアップすると(オフラインでも)目的地へナビゲーションしたり地図にルートを表示することができます</string>
+    <string name="wizard_advanced_restore_label">復元</string>
+    <string name="wizard_advanced_restore_info">バックアップからキャッシュ/ウェイポイント/c:geo設定を復元</string>
 </resources>

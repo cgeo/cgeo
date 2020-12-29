@@ -412,14 +412,6 @@
     <string name="about_license">Licentie</string>
     <string name="about_apache_license"><a href="">Apache License, Versie 2.0</a></string>
     <string name="about_help">Help</string>
-    <string name="about_starting">Aan de slag</string>
-    <string name="about_starting_head">Aan de slag</string>
-    <string name="about_starting_text_basics_head">Geocaching Basics</string>
-    <string name="about_starting_text_basics_text">Geocaching is een buitenspel om zogenaamde \"caches\" te zoeken. Deze app kan worden gebruikt om dit spel te spelen.\n\nJe kunt meer lezen over <b>c:geo Basics</b> in onze gebruikersgids: https://handleiding.cgeo.org/nl/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo apparaat machtigingen</string>
-    <string name="about_starting_text_device_text">c:geo heeft bepaalde machtigingen nodig op je apparaat:\n<b>Locatie</b>: toegang tot de GPS om je positie te bepalen en afstand en richting te berekenen naar geocaches\n<b>Opslag</b>:  Schrijven van gegevens in je telefoon opslag wanneer je geocaches opslaat voor offline gebruik, voor import/export van bestanden en het lezen van offline kaarten\n\nzonder deze machtigingen kan je c:geo niet gebruiken.</string>
-    <string name="about_starting_text_first_head">Eerste stappen met c:geo</string>
-    <string name="about_starting_text_first_text">Om c:geo te gebruiken, heb je een account nodig voor een geocaching platform van je keuze (onafhankelijk van deze app). Je dient dit account te configureren in de c:geo Diensten instellingen voordat je c:geo kunt gebruiken!\n\nJe kunt meer lezen over <b>c:geo Eerste stappen</b> in onze gebruikersgids: https://handleiding.cgeo.org/nl/eerste stappen</string>
     <string name="open_services_page">Configureer je geocaching platform(en)</string>
     <string name="about_system_include">Voeg volgende systeem informatie toe wanneer je een bug report stuurt of vraagt om meer informatie over c:geo:</string>
     <string name="about_system_info_send_button">Verzenden via mail…</string>
@@ -690,6 +682,10 @@
     <string name="init_circlecolor_summary">Selecteer kleur en doorzichtigheid voor de cirkellijn. Cirkels worden gebruikt als visuele weergave voor de minimale radius rond een cache of fysiek waypoint waar geen andere cache of fysiek waypoint is toegestaan. (Heeft betrekking op geocaching.com)</string>
     <string name="init_circlefillcolor">Cirkel opvulkleur</string>
     <string name="init_circlefillcolor_summary">Selecteer kleur en doorzichtigheid voor de cirkels die ingevuld moeten worden</string>
+    <string name="init_accuracycirclecolor">Nauwkeurigheidscirkel lijnkleur</string>
+    <string name="init_accuracycirclecolor_summary">Selecteer kleur en doorzichtigheid voor nauwkeurigheidscirkellijn. Nauwkeurigheidscirkel wordt gebruikt als visuele representatie voor de nauwkeurigheid van locatiesignaal.</string>
+    <string name="init_accuracycirclefillcolor">Nauwkeurigheidscirkel opvulkleur</string>
+    <string name="init_accuracycirclefillcolor_summary">Selecteer kleur en doorzichtigheid voor de nauwkeurigheidscirkels opvulkleur</string>
     <string name="init_share_after_export">Open deel-menu na GPX export</string>
     <string name="init_include_found_status">Neem status \"Gevonden\" mee</string>
     <string name="init_trackautovisit">Trackables bezoeken</string>
@@ -1183,6 +1179,7 @@
     <string name="map_gm_autorotation">Automatische kaartrotatie</string>
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
+    <string name="quick_settings_info">Enkele kaartinstellingen (kaartinstellingen, verbergen, routing) zijn verplaatst naar de nieuwe \"Snelle instellingen\" popup.\nJe kunt deze pop-up openen met behulp van het icoon in het midden onderin de kaart.</string>
     <string name="map_show_in_map">Op kaart tonen</string>
     <!-- search -->
     <string name="search_bar_hint">Zoek naar caches</string>
@@ -1308,7 +1305,6 @@
     <string name="export_fieldnotes_creating">Veld-notities worden gemaakt…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Het GPX bestand word geëxporteerd naar %1$s met huidige datum en tijd als bestandsnaam.</string>
-    <string name="export_gpx_to">Verstuur geëxporteerde GPX naar</string>
     <string name="export_confirm_title">Bezig met exporteren van %1$s</string>
     <string name="export_confirm_message">Naar pad: %1$s\nBestandsnaam: %2$s</string>
     <string name="export_persnotes">Persoonlijke notities</string>
@@ -1824,4 +1820,21 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Individuele route exporteren</string>
     <string name="export_individualroute_success">Individuele route geëxporteerd naar \"%s\"</string>
+    <!-- install wizard -->
+    <string name="previous">Vorige</string>
+    <string name="skip">Overslaan</string>
+    <string name="next">Volgende</string>
+    <string name="finish">Voltooien</string>
+    <string name="wizard_welcome_title">Welkom bij c:geo</string>
+    <string name="wizard_intro">Het lijkt erop dat dit de eerste keer is dat c:geo wordt gebruikt op dit apparaat. Zal ik je helpen met de configuratie? Het is slechts een paar stappen.</string>
+    <string name="wizard_permissions_title">App-machtigingen instellen</string>
+    <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig om goed te werken. Ze worden uigelegd in de volgende stappen.\nZonder deze permissies kun je c:o niet gebruiken.</string>
+    <string name="wizard_platforms_title">Platformen configureren</string>
+    <string name="wizard_welcome_advanced">Geavanceerde configuratie</string>
+    <string name="wizard_advanced_offlinemaps_label">Offline kaarten</string>
+    <string name="wizard_advanced_offlinemaps_info">c:geo kan kaartbestanden downloaden voor offline gebruik</string>
+    <string name="wizard_advanced_brouter_label">Routing app</string>
+    <string name="wizard_advanced_brouter_info">c:geo kan navigeren naar doelen en routing informatie op je kaart weergeven door het installeren en configureren van een metgezel app genaamd \"BRouter Offline Navigation\"</string>
+    <string name="wizard_advanced_restore_label">Terugzetten</string>
+    <string name="wizard_advanced_restore_info">Instellingen / gegevens terugzetten van een vorige installatie</string>
 </resources>

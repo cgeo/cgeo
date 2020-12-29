@@ -404,14 +404,6 @@
     <string name="about_license">라이센스</string>
     <string name="about_apache_license"><a href="">Apache 라이센스, 버전 2.0</a></string>
     <string name="about_help">도움말</string>
-    <string name="about_starting">시작하기</string>
-    <string name="about_starting_head">시작하기</string>
-    <string name="about_starting_text_basics_head">지오캐싱 기본</string>
-    <string name="about_starting_text_basics_text">지오캐싱은 \"캐시\"를 찾는 야외 게임입니다. 이 앱을 사용하면 게임을 즐길 수 있습니다.\n\n<b>c:geo 기본</b>에 대해 좀 더 알고 싶으시면 사용자 가이드: https://manual.cgeo.org/en/basicuse 를 참고하세요.</string>
-    <string name="about_starting_text_device_head">c:geo 기기 권한</string>
-    <string name="about_starting_text_device_text">c:geo가 당신의 기기에 권한이 필요합니다.\n<b>위치</b>: GPS에 접근하여 위치를 찾기. 지오캐시에 대한 거리 및 방향을 계산하기\n<b>저장</b>: 오프라인용 지오캐시 저장, 파일의 불러오기/내보내기, 오프라인 지도 읽기 등을 위해 휴대폰 저장 장치에 대한 데이터 쓰기\n\n이러한 권한이 없으면 c:geo를 사용할 수 없습니다.</string>
-    <string name="about_starting_text_first_head">c:geo의 첫번째 단계</string>
-    <string name="about_starting_text_first_text">c:geo를 사용하기 위해서는 원하는 지오캐싱 플랫폼의 계정이 필요합니다.(c:geo와는 관련 없음) 이 계정정보를 c:geo 서비스에 설정해주어야 c:geo를 사용할 수 있습니다!\n\n<b>c:geo 첫번째 단계</b>에 대한 자세한 내용은 사용자 가이드:https://manual.cgeo.org/en/firststeps를 참고하세요.</string>
     <string name="open_services_page">지오캐싱 플랫폼 설정</string>
     <string name="about_system_include">오류 신고나 c:geo에 대한 추가정보 요청시, 다음 시스템 정보를 포함시켜 주세요.</string>
     <string name="about_system_info_send_button">메일로 보내기…</string>
@@ -1216,7 +1208,6 @@
     <string name="export_fieldnotes_creating">현장 기록 생성 중…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX 파일이 현재 날짜, 시간과 함께 %1$s로 저장됩니다.</string>
-    <string name="export_gpx_to">전송된 GPX 보내기 : </string>
     <string name="export_confirm_title">%1$s 내보내는 중</string>
     <string name="export_confirm_message">경로: %1$s\nFile 이름: %2$s</string>
     <string name="export_persnotes">개인 메모</string>
@@ -1676,4 +1667,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">개별 경로 내보내기</string>
     <string name="export_individualroute_success">개인 경로를 \"%s\"(으)로 내보냈습니다.</string>
+    <!-- install wizard -->
 </resources>

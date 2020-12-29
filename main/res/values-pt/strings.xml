@@ -412,18 +412,9 @@
     <string name="about_license">Licença</string>
     <string name="about_apache_license"><a href="">Apache License, Versão 2.0</a></string>
     <string name="about_help">Ajuda</string>
-    <string name="about_starting">Guia de Introdução</string>
-    <string name="about_starting_head">Guia de Introdução</string>
-    <string name="about_starting_text_basics_head">Noções básicas de Geocaching</string>
-    <string name="about_starting_text_basics_text">O Geocaching é um jogo ao ar livre para procurar e encontrar as chamadas \"caches\". Esta aplicação pode ser usada para jogar este jogo.\n\nPode ler mais sobre as <b>Noções básicas do c:geo</b> no nosso manual do utilizador:
-https://manual.cgeo.org/pt/basicuse</string>
-    <string name="about_starting_text_device_head">Permissões do c:geo neste dispositivo</string>
-    <string name="about_starting_text_device_text">O c:geo precisa de determinadas permissões no seu dispositivo:\n<b>Localização</b>: acesso ao GPS para localizar a sua posição e assim permitir o cálculo da distância e da direcção para as geocaches\n<b>Armazenamento</b>: escrita de dados no armazenamento do seu telefone quando guarda geocaches para uso offline, para importar/exportar ficheiros e leitura de mapas offline\n\nSem estas permissões não será capaz de usar o c:geo.</string>
-    <string name="about_starting_text_first_head">Primeiros passos com o c:geo</string>
-    <string name="about_starting_text_first_text">De modo a utilizar o c:geo, precisa de uma conta para uma plataforma de geocaching à sua escolha (externa a esta aplicação). Essa conta tem de ser configurada nas definições do c:geo, na secção \"serviço\", antes de tirar proveito do c:geo!\n\nPode ler mais sobre os <b>Primeiros passos no c:geo</b> no nosso manual do utilizador: https://manual.cgeo.org/pt/firststeps</string>
     <string name="open_services_page">Configuração de serviços de geocaching</string>
     <string name="about_system_include">Por favor inclua as seguintes informações de sistema quando reportar um erro ou pedir mais informações acerca do c:geo:</string>
-    <string name="about_system_info_send_button">Enviar por email…</string>
+    <string name="about_system_info_send_button">Enviar por e-mail…</string>
     <string name="about_system_info">Informação do sistema c:geo</string>
     <string name="about_system_info_send_chooser">Enviar Informação sobre o sistema</string>
     <string name="about_system_write_logcat">Gerar ficheiro de depuração</string>
@@ -556,8 +547,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/individuais</string>
     <string name="init_summary_friends_and_own_logs_wanted">Mostra uma página adicional com os registos dos seus amigos e registos individuais</string>
-    <string name="init_openlastdetailspage">Último separador de detalhes visto</string>
-    <string name="init_summary_openlastdetailspage">Mostra a última página vista ao consultar os detalhes da cache</string>
+    <string name="init_openlastdetailspage">Mem. último separador visto</string>
+    <string name="init_summary_openlastdetailspage">Abre a consulta dos detalhes da cache no último separador visto</string>
     <string name="init_skin">Tema claro</string>
     <string name="init_summary_skin">Utilização do tema claro (requer reinício)</string>
     <string name="init_transparentBackground">Fundo transparente</string>
@@ -585,9 +576,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>
     <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
-    <string name="init_global_wp_extraction_disable">Desactivar a extracção de pontos adicionais</string>
+    <string name="init_global_wp_extraction_disable">Desactivar extracção de pont. adicionais</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
-    <string name="init_customtabs_as_browser">Utilizar exibição de sítios web do Chrome</string>
+    <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
     <string name="init_summary_customtabs_as_browser">Sítios web externos serão exibidos sem sair do c:geo (apenas possível se o Chrome estiver instalado)</string>
     <string name="init_save_log_img">Guardar imagens</string>
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
@@ -691,6 +682,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_circlecolor_summary">Selecciona a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
     <string name="init_circlefillcolor">Cor de preenchimento do círculo</string>
     <string name="init_circlefillcolor_summary">Seleccionar a cor e opacidade para o preenchimento dos círculos</string>
+    <string name="init_accuracycirclecolor">Cor da linha do círculo da precisão</string>
+    <string name="init_accuracycirclecolor_summary">Selecção da cor e opacidade para o círculo da precisão. Este círculo é utilizado para representar a precisão do sinal de localização.</string>
+    <string name="init_accuracycirclefillcolor">Cor do preenchimento do círculo da precisão</string>
+    <string name="init_accuracycirclefillcolor_summary">Selecção da cor e opacidade com que os círculos são preenchidos</string>
     <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
     <string name="init_include_found_status">Incluir o estado \"Encontrado\"</string>
     <string name="init_trackautovisit">Visitar TBs</string>
@@ -823,11 +818,11 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="auth_token_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
     <string name="auth_token_explain_long">O preenchimento das suas credenciais e premir no botão \"autorizar o c:geo\" irá desencadear o processo. Este processo irá ligar a %s e obter o token de autenticação. Nada mais simples. </string>
     <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">O c:geo está agora autorizado a publicar no Twitter.</string>
+    <string name="auth_dialog_completed_twitter">O c:geo agora está autorizado a publicar no Twitter.</string>
     <!-- auth opencaching -->
-    <string name="auth_dialog_completed_oc">O c:geo está agora autorizado a interagir com %s.</string>
+    <string name="auth_dialog_completed_oc">O c:geo agora está autorizado a interagir com %s.</string>
     <!-- auth geokrety -->
-    <string name="auth_dialog_completed_geokrety">O c:geo está agora autorizado a interagir com %s.</string>
+    <string name="auth_dialog_completed_geokrety">O c:geo agora está autorizado a interagir com %s.</string>
     <string name="err_auth_geokrety_bad_password">O seu nome de utilizador/palavra-passe parecem inválidos.</string>
     <string name="err_auth_geokrety_unknown">%1$s retornou: %2$s.</string>
     <!-- cache -->
@@ -1184,6 +1179,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
+    <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
     <string name="map_show_in_map">Mostrar no mapa</string>
     <!-- search -->
     <string name="search_bar_hint">Pesquisar geocaches</string>
@@ -1309,7 +1305,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="export_fieldnotes_creating">A criar as notas de campo…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">O ficheiro GPX vai ser exportado para %1$s com a data e a hora actual como nome de ficheiro.</string>
-    <string name="export_gpx_to">Enviar GPX exportado para</string>
     <string name="export_confirm_title">A exportar %1$s</string>
     <string name="export_confirm_message">Para: %1$s\nNome de ficheiro: %2$s</string>
     <string name="export_persnotes">Notas pessoais</string>
@@ -1644,7 +1639,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_activate_geokrety">Activar</string>
     <string name="init_summary_geokrety">Permite o acesso a trackables de GeoKrety.org</string>
     <string name="init_geokrety_description">Autoriza o c:geo em GeoKrety.org para registo de trackables GeoKrety.</string>
-    <string name="init_geokrety_userid">Id de utilizador: %s</string>
+    <string name="init_geokrety_userid">ID de utilizador: %s</string>
     <string name="trackable_title_log_without_geocode">Código GC não definido</string>
     <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Código GC. É aconselhado a definir um. Quer adiciona-lo agora?</string>
     <string name="do_not_ask_me_again">Não perguntar novamente</string>
@@ -1820,4 +1815,33 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- individual route export -->
     <string name="export_individualroute_title">Exportar rota individual</string>
     <string name="export_individualroute_success">Rota individual exportada para \"%s\"</string>
+    <!-- install wizard -->
+    <string name="wizard">Assistente de configuração</string>
+    <string name="previous">Anterior</string>
+    <string name="skip">Ignorar</string>
+    <string name="next">Próximo</string>
+    <string name="finish">Concluído</string>
+    <string name="wizard_welcome_title">Bem-vindo ao c:geo</string>
+    <string name="wizard_intro">Parece que é a primeira vez que o c:geo é usado neste dispositivo. Devo ajuda-lo a configurá-lo? São apenas alguns passos.</string>
+    <string name="wizard_intro2">Bem-vindo de volta ao assistente de configuração. São apenas alguns passos.</string>
+    <string name="wizard_outro_ok">Obrigado por configurar o c:geo.\nDivirta-se!</string>
+    <string name="wizard_outro_error">Configuração incompleta\nNem todas as partes do c:geo funcionarão como esperado!</string>
+    <string name="wizard_permissions_title">Definir autorizações da aplicação</string>
+    <string name="wizard_permissions_intro">O c:geo precisa de certas permissões para funcionar correctamente. Vou explicá-las nos próximos passos.\nSem essas permissões não poderá usar c:geo.</string>
+    <string name="wizard_platforms_title">Configurar plataformas</string>
+    <string name="wizard_platforms_intro">Para transferir caches, precisa de uma conta de, pelo menos, uma das plataformas de geocaching suportadas pelo c:geo</string>
+    <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; mais</string>
+    <string name="wizard_welcome_advanced">Configurações avançadas</string>
+    <string name="wizard_advanced_offlinemaps_label">Mapas offline</string>
+    <string name="wizard_advanced_offlinemaps_info">O c:geo pode transferir ficheiros de mapas para quando esteja off-line</string>
+    <string name="wizard_advanced_brouter_label">Aplicação de navegação</string>
+    <string name="wizard_advanced_brouter_info">O c:geo pode navegar para um ponto e mostrar informação da rota no seu mapa ao instalar e configurar a aplicação \"BRouter Offline Navigation\"</string>
+    <string name="wizard_advanced_restore_label">Restaurar</string>
+    <string name="wizard_advanced_restore_info">Restaurar definições / dados de uma instalação anterior</string>
+    <string name="status_not_ok">ERRO</string>
+    <string name="wizard_status_title">Estado da configuração</string>
+    <string name="wizard_status_storage_permission">Permissão de armazenamento</string>
+    <string name="wizard_status_location_permission">Permissão de localização</string>
+    <string name="wizard_status_platform">Plataformas de Geocaching</string>
 </resources>

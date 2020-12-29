@@ -411,14 +411,6 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjælp</string>
-    <string name="about_starting">Kom godt i gang</string>
-    <string name="about_starting_head">Kom godt i gang</string>
-    <string name="about_starting_text_basics_head">Grundlæggende om Geocaching</string>
-    <string name="about_starting_text_basics_text">Geocaching er en udendørs aktivitet hvor man søger og finder såkaldte cacher. Denne app kan bruges som hjælpemiddel til Geocaching.\n\nDu kan læse mere om <b>c:geo Basics</b> i vores brugervejledning: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo enhedstilladelser</string>
-    <string name="about_starting_text_device_text">c:geo skal bruge visse tilladelser på din enhed:\n<b>Placering</b>: adgang til GPS-modtager til at bestemme din enheds position og beregne afstand og retning til geocacher\n<b>Lager</b>: skrive data på din telefons lagermedier, når du gemmer geocacher til offlinebrug, for import og eksport af filer og læsning af offline kort\n\nUden disse tilladelser vil c:geo ikke fungere.</string>
-    <string name="about_starting_text_first_head">Kom i gang med c:geo</string>
-    <string name="about_starting_text_first_text">For at bruge c:geo, skal du have en konto på en geocaching-platform, efter eget valg (uafhængigt af denne app). Du skal konfigurere denne konto i c:geo indstillinger, før du kan bruge c:geo!\n\nDu kan læse mere om  at <b>Komme i gang med c:geo</b> i vores brugervejledning: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Konfigurér geocaching platform(e)</string>
     <string name="about_system_include">Vedhæft følgende systemoplysninger når du sender en fejlrapport eller beder om yderligere oplysninger om c:geo:</string>
     <string name="about_system_info_send_button">Send via mail…</string>
@@ -1277,7 +1269,6 @@
     <string name="export_fieldnotes_creating">Opret feltnoter…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX-filen vil blive eksporteret til %1$s med den aktuelle dato og tidspunkt som filnavn.</string>
-    <string name="export_gpx_to">Send eksporteret GPX-fil til</string>
     <string name="export_confirm_title">Eksporterer %1$s</string>
     <string name="export_confirm_message">Sti: %1$s\nFilnavn: %2$s</string>
     <string name="export_persnotes">Egne noter</string>
@@ -1756,4 +1747,5 @@
     <!-- individual route export -->
     <string name="export_individualroute_title">Eksportér individuel rute</string>
     <string name="export_individualroute_success">Individuel rute eksporteret til \"%s\"</string>
+    <!-- install wizard -->
 </resources>

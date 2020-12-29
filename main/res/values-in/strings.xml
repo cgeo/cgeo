@@ -930,7 +930,6 @@
     <string name="export_fieldnotes_onlynew">Hanya semenjak ekspor terakhir</string>
     <string name="export_fieldnotes_creating">Membuat Catatan Lapangan&#8230;</string>
     <string name="export_gpx_info">Berkas GPX akan diekspor ke %1$s dengan tanggal dan waktu saat ini sebagai nama berkasnya.</string>
-    <string name="export_gpx_to">Kirim diekspor ke GPX</string>
     <string name="export_confirm_title">Mengekspor %1$s</string>
     <string name="export_confirm_message">Untuk Path: %1$s\nNama Berkas: %2$s</string>
     <string name="export_persnotes">Catatan pribadi</string>
@@ -1268,4 +1267,5 @@
     <!-- history track -->
     <!-- history track export -->
     <!-- individual route export -->
+    <!-- install wizard -->
 </resources>
