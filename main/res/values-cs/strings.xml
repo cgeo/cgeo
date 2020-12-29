@@ -413,14 +413,6 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
     <string name="about_help">Nápověda</string>
-    <string name="about_starting">Začínáme</string>
-    <string name="about_starting_head">Začínáme</string>
-    <string name="about_starting_text_basics_head">Základy Geocachingu</string>
-    <string name="about_starting_text_basics_text">Geocaching je hra v přírodním terénu, při které hledáte takzvané „kešky“. Tuto aplikaci můžete využívat na hraní této hry.\n\nDalší informace o <b>Základech c:geo</b> najdete v našem návodu: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">oprávnění aplikace c:geo</string>
-    <string name="about_starting_text_device_text">Aplikace c:geo vyžaduje určitá povolení na vašem zařízení:\n<b>Poloha</b>: přístup k funkci GPS na vyhledání vaší polohy a výpočet vzdálenosti a směru ke keškám\n<b>Úložiště</b>: zápis údajů do úložného prostoru zařízení při ukládání kešek pro offline použití, pro import/export souborů a čtení offline map\n\nBez těchto povolení nemůžete aplikaci c:geo používat.</string>
-    <string name="about_starting_text_first_head">První kroky s c:geo</string>
-    <string name="about_starting_text_first_text">Pokud chcete používat c:geo, je potřeba mít založený účet na platformách geocachingu podle vašeho výběru (nezávislé na této aplikaci). Tento účet je potřeba nakonfigurovat v nastavení služby ještě před použitím aplikace c:geo!\n\n Další informace o <b>Prvních krocích v c:geo</b> najdete v našem návodu: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Nastavte si vaše geocachingové platformy</string>
     <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
     <string name="about_system_info_send_button">Odeslat e-mailem…</string>
