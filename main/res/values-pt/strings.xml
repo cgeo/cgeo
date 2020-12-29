@@ -423,7 +423,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="about_starting_text_first_text">De modo a utilizar o c:geo, precisa de uma conta para uma plataforma de geocaching à sua escolha (externa a esta aplicação). Essa conta tem de ser configurada nas definições do c:geo, na secção \"serviço\", antes de tirar proveito do c:geo!\n\nPode ler mais sobre os <b>Primeiros passos no c:geo</b> no nosso manual do utilizador: https://manual.cgeo.org/pt/firststeps</string>
     <string name="open_services_page">Configuração de serviços de geocaching</string>
     <string name="about_system_include">Por favor inclua as seguintes informações de sistema quando reportar um erro ou pedir mais informações acerca do c:geo:</string>
-    <string name="about_system_info_send_button">Enviar por email…</string>
+    <string name="about_system_info_send_button">Enviar por e-mail…</string>
     <string name="about_system_info">Informação do sistema c:geo</string>
     <string name="about_system_info_send_chooser">Enviar Informação sobre o sistema</string>
     <string name="about_system_write_logcat">Gerar ficheiro de depuração</string>
@@ -556,8 +556,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/individuais</string>
     <string name="init_summary_friends_and_own_logs_wanted">Mostra uma página adicional com os registos dos seus amigos e registos individuais</string>
-    <string name="init_openlastdetailspage">Último separador de detalhes visto</string>
-    <string name="init_summary_openlastdetailspage">Mostra a última página vista ao consultar os detalhes da cache</string>
+    <string name="init_openlastdetailspage">Mem. último separador visto</string>
+    <string name="init_summary_openlastdetailspage">Abre a consulta dos detalhes da cache no último separador visto</string>
     <string name="init_skin">Tema claro</string>
     <string name="init_summary_skin">Utilização do tema claro (requer reinício)</string>
     <string name="init_transparentBackground">Fundo transparente</string>
@@ -585,9 +585,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>
     <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
-    <string name="init_global_wp_extraction_disable">Desactivar a extracção de pontos adicionais</string>
+    <string name="init_global_wp_extraction_disable">Desactivar extracção de pont. adicionais</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
-    <string name="init_customtabs_as_browser">Utilizar exibição de sítios web do Chrome</string>
+    <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
     <string name="init_summary_customtabs_as_browser">Sítios web externos serão exibidos sem sair do c:geo (apenas possível se o Chrome estiver instalado)</string>
     <string name="init_save_log_img">Guardar imagens</string>
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
@@ -822,11 +822,11 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="auth_token_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
     <string name="auth_token_explain_long">O preenchimento das suas credenciais e premir no botão \"autorizar o c:geo\" irá desencadear o processo. Este processo irá ligar a %s e obter o token de autenticação. Nada mais simples. </string>
     <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">O c:geo está agora autorizado a publicar no Twitter.</string>
+    <string name="auth_dialog_completed_twitter">O c:geo agora está autorizado a publicar no Twitter.</string>
     <!-- auth opencaching -->
-    <string name="auth_dialog_completed_oc">O c:geo está agora autorizado a interagir com %s.</string>
+    <string name="auth_dialog_completed_oc">O c:geo agora está autorizado a interagir com %s.</string>
     <!-- auth geokrety -->
-    <string name="auth_dialog_completed_geokrety">O c:geo está agora autorizado a interagir com %s.</string>
+    <string name="auth_dialog_completed_geokrety">O c:geo agora está autorizado a interagir com %s.</string>
     <string name="err_auth_geokrety_bad_password">O seu nome de utilizador/palavra-passe parecem inválidos.</string>
     <string name="err_auth_geokrety_unknown">%1$s retornou: %2$s.</string>
     <!-- cache -->
@@ -1644,7 +1644,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_activate_geokrety">Activar</string>
     <string name="init_summary_geokrety">Permite o acesso a trackables de GeoKrety.org</string>
     <string name="init_geokrety_description">Autoriza o c:geo em GeoKrety.org para registo de trackables GeoKrety.</string>
-    <string name="init_geokrety_userid">Id de utilizador: %s</string>
+    <string name="init_geokrety_userid">ID de utilizador: %s</string>
     <string name="trackable_title_log_without_geocode">Código GC não definido</string>
     <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Código GC. É aconselhado a definir um. Quer adiciona-lo agora?</string>
     <string name="do_not_ask_me_again">Não perguntar novamente</string>
