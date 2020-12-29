@@ -95,7 +95,7 @@ public enum PublicLocalFolder {
     }
 
     /** Sets a new user-defined location (or "null" if default shall be used). Should be called ONLY by {@link PublicLocalStorage} */
-    void setUserDefinedLocation(@Nullable final Uri userDefinedUri) {
+    protected void setUserDefinedLocation(@Nullable final Uri userDefinedUri) {
         this.userDefinedLocation = FolderLocation.fromDocumentUri(userDefinedUri);
         Settings.setPublicLocalFolderUri(this, userDefinedUri);
         notifyChanged();

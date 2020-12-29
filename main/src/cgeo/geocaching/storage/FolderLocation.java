@@ -142,12 +142,12 @@ public class FolderLocation {
 
 
     //shall only be used by PublicLocalStorage
-    DocumentFile getCachedDocFile() {
+    protected DocumentFile getCachedDocFile() {
         return this.cachedDocFile;
     }
 
     //shall only be used by PublicLocalStorage
-    void setCachedDocFile(final DocumentFile cacheDocFile) {
+    protected void setCachedDocFile(final DocumentFile cacheDocFile) {
         this.cachedDocFile = cacheDocFile;
     }
 
