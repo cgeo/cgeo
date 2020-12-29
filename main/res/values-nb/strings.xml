@@ -410,14 +410,6 @@
     <string name="about_license">Lisens</string>
     <string name="about_apache_license"><a href="">Apache-lisens, versjon 2.0</a></string>
     <string name="about_help">Hjelp</string>
-    <string name="about_starting">Kom i gang</string>
-    <string name="about_starting_head">Kom i gang</string>
-    <string name="about_starting_text_basics_head">Geocaching intro</string>
-    <string name="about_starting_text_basics_text">Geocaching er et utendørs spill hvor man leter etter såkalte \"cacher\". Denne appen kan brukes i spillet.\n\nDu kan lese mer om <b>c:geo grunnleggende bruk</b> i vår brukerguide: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">c.geo enhetstillatelser</string>
-    <string name="about_starting_text_device_text">c:geo trenger enkelte tillatelser på din enhet for:\n<b>Stedsangivelse</b>: tilgang til GPS-funksjonen for å finne din posisjon og regne ut avstand og retning til geocacher\n<b>Lagring</b>: skrive data til minnet på telefonen når du lagrer geocacher lokalt for bruk uten nettilkobling, for import/eksport av filer og lesing av lokalt lagrede kart\n\nUten disse tillatelsene vil det ikke være mulig å bruke c:geo.</string>
-    <string name="about_starting_text_first_head">Første skritt med c:geo</string>
-    <string name="about_starting_text_first_text">Du trenger en konto på en geocaching-plattform for å bruke c:geo. Du må legge inn denne kontoen i cgeo i Tjenester-innstillingene før du kan bruke c:geo.\n\nDu kan leser mer om <b>First steps with c:geo</b> i vår brukerguide: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Konfigurere geocaching-plattform(er)</string>
     <string name="about_system_include">Inkluder den følgende informasjonen når du sender en feilrapport eller ber om mer informasjon fra c:geo:</string>
     <string name="about_system_info_send_button">Send på e-post…</string>
