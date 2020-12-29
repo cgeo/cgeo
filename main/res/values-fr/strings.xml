@@ -411,14 +411,6 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Aide</string>
-    <string name="about_starting">Premiers pas</string>
-    <string name="about_starting_head">Premiers pas</string>
-    <string name="about_starting_text_basics_head">Bases du Géocaching</string>
-    <string name="about_starting_text_basics_text">Le Géocaching est un jeu de plein air dont l\'objectif est de trouver ce qu\'on appelle des « caches ». Cette application peut être utilisée pour jouer à ce jeu.\n\nVous pouvez obtenir plus d’informations sur les <b>fonctions de base de c:geo</b> dans notre guide utilisateur : https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">Autorisations requises par c:geo</string>
-    <string name="about_starting_text_device_text">c:geo a besoin de certaines permissions sur votre appareil :\n<b>Position</b> : accès au GPS pour localiser votre emplacement et calculer la distance et la direction vers les géocaches\n<b>Stockage</b> :  écrire des données sur le stockage de l\'appareil lorsque vous enregistrez des géocaches pour une utilisation hors-ligne, pour importer/exporter des fichiers et lire des cartes hors-ligne.\n\nSans ces permissions vous ne pourrez pas utiliser c:geo.</string>
-    <string name="about_starting_text_first_head">Premiers pas avec c:geo</string>
-    <string name="about_starting_text_first_text">Pour utiliser c:geo, vous devez posséder un compte sur une plateforme géocaching de votre choix (indépendante de cette application). Vous devez configurer ce compte dans les paramètres c:geo, rubrique \"Services\", avant de pouvoir utiliser c:geo !\n\nVous pouvez obtenir plus d\'informations sur <b>les premiers pas avec c:geo</b> dans notre guide utilisateur : https://manual.cgeo.org/fr/firststeps</string>
     <string name="open_services_page">Configurer votre/vos plateforme(s) de geocaching</string>
     <string name="about_system_include">Merci d\'inclure systématiquement les informations suivantes lorsque vous signalez un problème ou demandez plus d\'information à propos de c:geo:</string>
     <string name="about_system_info_send_button">Envoyer par courriel…</string>
