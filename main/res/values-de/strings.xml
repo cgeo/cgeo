@@ -687,7 +687,7 @@
     <string name="init_trackwidth">Breite des individuellen Tracks</string>
     <string name="init_trackwidth_summary">Breite der individuellen Tracklinie einstellen</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
-    <string name="init_circlecolor_summary">Breite und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
+    <string name="init_circlecolor_summary">Farbe und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
     <string name="init_circlefillcolor">Füllfarbe der Kreislinie</string>
     <string name="init_circlefillcolor_summary">Farbe und Deckkraft der Kreisfüllung einstellen</string>
     <string name="init_share_after_export">Weiterleiten nach dem Export</string>
