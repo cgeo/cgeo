@@ -68,7 +68,7 @@ public class MapLineUtils {
     }
 
     public static int getAccuracyCircleFillColor() {
-        return Settings.getMapLineValue(R.string.pref_mapline_accuracycirclecolor, R.color.default_accuracycirclefillcolor);
+        return Settings.getMapLineValue(R.string.pref_mapline_accuracycirclefillcolor, R.color.default_accuracycirclefillcolor);
     }
 
     // other lines
