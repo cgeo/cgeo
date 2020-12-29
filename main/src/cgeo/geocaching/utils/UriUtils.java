@@ -16,6 +16,20 @@ public final class UriUtils {
         //no instance wanted
     }
 
+    /** Tries to format the given Uri in a user-displayable way */
+    @NonNull
+    public static String toUserDisplayableString(final Uri uri) {
+        if (uri == null) {
+            return "";
+        }
+        final String uriString = uri.getPath();
+        final int idx = uriString.lastIndexOf(":");
+        if (idx >= 0) {
+            return uriString.substring(idx + 1);
+        }
+        return uriString;
+    }
+
     /** Tries to extract the (file) name of a given Uri */
     @NonNull
     public static String getFileName(final Uri uri) {

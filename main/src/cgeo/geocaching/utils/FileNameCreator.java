@@ -13,11 +13,13 @@ public class FileNameCreator {
     public static final String MIME_TYPE_TEXT = "text/plain";
     public static final String MIME_TYPE_BINARY = "application/octet-stream"; //or maybe application/x-binary?
 
-    public static final FileNameCreator DEFAULT = new FileNameCreator(MIME_TYPE_TEXT, "file", "dat");
+    public static final FileNameCreator DEFAULT = new FileNameCreator(null, "file", "dat");
+    public static final FileNameCreator DEFAULT_TEXT = new FileNameCreator(MIME_TYPE_TEXT, "file", "txt");
+    public static final FileNameCreator DEFAULT_BINARY = new FileNameCreator(MIME_TYPE_BINARY, "file", "bin");
 
-    public static final FileNameCreator OFFLINE_MAPS = new FileNameCreator(MIME_TYPE_BINARY, "mapfile", "map");
+    public static final FileNameCreator OFFLINE_MAPS = new FileNameCreator(null, "mapfile", "map");
     public static final FileNameCreator LOGFILE = new FileNameCreator(MIME_TYPE_TEXT, "logcat", "txt");
-    public static final FileNameCreator MEMORY_DUMP = new FileNameCreator(MIME_TYPE_BINARY, "cgeo_dump", "hprof");
+    public static final FileNameCreator MEMORY_DUMP = new FileNameCreator(null, "cgeo_dump", "hprof");
 
     private final AtomicInteger fileNameCounter = new AtomicInteger(1);
 

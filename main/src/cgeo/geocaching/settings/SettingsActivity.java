@@ -415,7 +415,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         for (Integer prefKeyId : prefMap.keySet()) {
             final Preference pref = getPreference(prefKeyId);
             final PublicLocalFolder folder = prefMap.get(prefKeyId);
-            bindSummaryToValue(pref, folder.getUserDisplayableName());
+            bindSummaryToValue(pref, folder.toUserDisplayableString());
             pref.setOnPreferenceClickListener(
                 preference -> {
                     publicLocalStorage.selectFolderUri(folder,
@@ -423,7 +423,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                         for (Integer pkId : prefMap.keySet()) {
                             final Preference p = getPreference(pkId);
                             final PublicLocalFolder f = prefMap.get(pkId);
-                            p.setSummary(f.getUserDisplayableName());
+                            p.setSummary(f.toUserDisplayableString());
                         }
                     });
                     return false;

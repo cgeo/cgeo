@@ -62,7 +62,7 @@ public class PublicLocalStorageActivityHelper {
         //ask/remind user to choose an explicit BASE dir, otherwise the default will be used
         final AlertDialog dialog = Dialogs.newBuilder(activity)
             .setTitle(R.string.publiclocalstorage_grantaccess_dialog_title)
-            .setMessage(HtmlCompat.fromHtml(activity.getString(R.string.publiclocalstorage_grantaccess_dialog_msg_basedir_html, folder.getDefaultLocation().getUserDisplayableName()),
+            .setMessage(HtmlCompat.fromHtml(activity.getString(R.string.publiclocalstorage_grantaccess_dialog_msg_basedir_html, folder.getDefaultLocation().toUserDisplayableString()),
                 HtmlCompat.FROM_HTML_MODE_LEGACY))
             .setPositiveButton(android.R.string.ok, (d, p) -> {
                 d.dismiss();
@@ -85,7 +85,7 @@ public class PublicLocalStorageActivityHelper {
     public void selectFolderUri(final PublicLocalFolder folder, final Consumer<PublicLocalFolder> callback) {
        Dialogs.newBuilder(activity)
             .setTitle(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_title)
-            .setMessage(activity.getString(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_msg, folder.getDefaultLocation().getUserDisplayableName()))
+            .setMessage(activity.getString(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_msg, folder.getDefaultLocation().toUserDisplayableString()))
             .setPositiveButton(R.string.publiclocalstorage_userdefined, (d, p) -> {
                 d.dismiss();
                 selectUserFolderUri(folder, callback);
@@ -99,7 +99,7 @@ public class PublicLocalStorageActivityHelper {
             })
             .setNeutralButton(android.R.string.cancel, (d, p) -> {
                 d.dismiss();
-                report(false, R.string.publiclocalstorage_folder_selection_aborted, folder.getUserDisplayableName());
+                report(false, R.string.publiclocalstorage_folder_selection_aborted, folder.toUserDisplayableString());
                 if (callback != null) {
                     callback.accept(folder);
                 }
@@ -188,19 +188,19 @@ public class PublicLocalStorageActivityHelper {
     private void handleResultGrantFolderUriAccess(final Intent intent, final boolean resultOk) {
         final Uri uri = !resultOk || intent == null ? null : intent.getData();
         if (uri == null) {
-            report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.getUserDisplayableName());
+            report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.toUserDisplayableString());
         } else {
             final int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | (runningIntentData.folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
             activity.getContentResolver().takePersistableUriPermission(uri, flags);
 
             //Test if access is really working!
-            if (!PublicLocalStorage.get().performTestReadWriteToLocation("Folder " + runningIntentData.folder.name(), FolderLocation.fromDocumentUri(uri), runningIntentData.folder.needsWrite())) {
-                report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.getUserDisplayableName());
+            if (!PublicLocalStorage.get().performTestReadWriteToLocation(FolderLocation.fromDocumentUri(uri), runningIntentData.folder.needsWrite())) {
+                report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.toUserDisplayableString());
             }
 
             Log.iForce("Folder '" + runningIntentData.folder + " was set to: " + uri.getPath());
             PublicLocalStorage.get().setFolderUserDefinedUri(runningIntentData.folder, uri);
-            report(false, R.string.publiclocalstorage_folder_selection_success, runningIntentData.folder.getUserDisplayableName());
+            report(false, R.string.publiclocalstorage_folder_selection_success, runningIntentData.folder.toUserDisplayableString());
         }
         if (runningIntentData.callback != null) {
             ((Consumer<PublicLocalFolder>) runningIntentData.callback).accept(runningIntentData.folder);

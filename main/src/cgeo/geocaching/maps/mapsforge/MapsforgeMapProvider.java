@@ -58,6 +58,9 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         registerMapSource(new OsmdeMapSource(this, resources.getString(R.string.map_source_osm_osmde)));
         registerMapSource(new CyclosmMapSource(this, resources.getString(R.string.map_source_osm_cyclosm)));
 
+        //get notified if Offline Maps directory changes
+        PublicLocalFolder.OFFLINE_MAPS.addChangeListener(pf -> updateOfflineMaps());
+
         //initiale offline maps (necessary here in constructor only so that initial setMapSource will succeed)
         updateOfflineMaps();
     }
@@ -138,7 +141,11 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         /** Create new render layer, if mapfile exists */
         @Override
         public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
-            final MapFile mf = createMapFile(this.mapUri);
+            final InputStream mapStream = createMapFileInputStream(this.mapUri);
+            if (mapStream == null) {
+                return null;
+            }
+            final MapFile mf = createMapFile(String.valueOf(this.mapUri), mapStream);
             if (mf != null) {
                 MapProviderFactory.setLanguages(mf.getMapLanguages());
                 return new RendererLayer(tileCache, mf, mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
@@ -218,7 +225,11 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
             final List<MapFile> mapFiles = new ArrayList<>();
             for (ImmutablePair<String, Uri> fileName : mapUris) {
-                final MapFile mf = createMapFile(fileName.right);
+                final InputStream mapStream = createMapFileInputStream(fileName.right);
+                if (mapStream == null) {
+                    continue;
+                }
+                final MapFile mf = createMapFile(String.valueOf(fileName.right), mapStream);
                 if (mf != null) {
                     mapFiles.add(mf);
                 } else {
@@ -263,7 +274,13 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         if (OFFLINE_MAP_ATTRIBUTIONS.containsKey(filePath)) {
             return OFFLINE_MAP_ATTRIBUTIONS.get(filePath);
         }
-        OFFLINE_MAP_ATTRIBUTIONS.put(filePath, readAttributionFromMapFileIfValid(filePath));
+        final InputStream mapStream = createMapFileInputStream(filePath);
+        if (mapStream == null) {
+            //do NOT put this in cache, might be a temporary access problem
+            return null;
+        }
+
+        OFFLINE_MAP_ATTRIBUTIONS.put(filePath, readAttributionFromMapFileIfValid(String.valueOf(filePath), mapStream));
         return OFFLINE_MAP_ATTRIBUTIONS.get(filePath);
     }
 
@@ -277,11 +294,11 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
      * If mapfile is valid, then its attribution is read and returned (or a default attribution value in case attribution is null)
      */
     @Nullable
-    private static String readAttributionFromMapFileIfValid(final Uri mapUri) {
+    private static String readAttributionFromMapFileIfValid(final String mapFileCtx, final InputStream mapStream) {
 
         MapFile mapFile = null;
         try {
-            mapFile = createMapFile(mapUri);
+            mapFile = createMapFile(mapFileCtx, mapStream);
             if (mapFile != null && mapFile.getMapFileInfo() != null && mapFile.getMapFileInfo().fileVersion <= 5) {
                 if (!StringUtils.isBlank(mapFile.getMapFileInfo().comment)) {
                     return mapFile.getMapFileInfo().comment;
@@ -293,24 +310,27 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
                 return OFFLINE_MAP_DEFAULT_ATTRIBUTION;
             }
         }  catch (MapFileException ex) {
-            Log.w(String.format("Exception reading mapfile '%s'", mapUri.toString()), ex);
+            Log.w(String.format("Exception reading mapfile '%s'", mapFileCtx), ex);
         } finally {
             closeMapFileQuietly(mapFile);
         }
         return null;
     }
 
-    private static MapFile createMapFile(final Uri mapUri) {
+    private static InputStream createMapFileInputStream(final Uri mapUri) {
         if (mapUri == null) {
             return null;
         }
+        return PublicLocalStorage.get().openForRead(mapUri);
+    }
 
-        final InputStream fis = PublicLocalStorage.get().openForRead(mapUri);
+    private static MapFile createMapFile(final String mapFileCtx, final InputStream fis) {
+
         if (fis != null) {
             try {
                 return new MapFile((FileInputStream) fis, 0, MapProviderFactory.getLanguage(Settings.getMapLanguage()));
             } catch (MapFileException mfe) {
-                Log.e("Problem opening map file '" + mapUri + "'", mfe);
+                Log.e("Problem opening map file '" + mapFileCtx + "'", mfe);
             }
         }
         return null;

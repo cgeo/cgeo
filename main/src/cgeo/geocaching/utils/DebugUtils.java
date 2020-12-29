@@ -122,7 +122,7 @@ public class DebugUtils {
                     shareLogfileAsEmail(activity, additionalMessage, result.get());
                 } else {
                     Dialogs.confirmPositiveNegativeNeutral(activity, activity.getString(R.string.about_system_write_logcat),
-                        String.format(activity.getString(R.string.about_system_write_logcat_success), UriUtils.getFileName(result.get()), PublicLocalFolder.LOGFILES.getLocation().getUserDisplayableName()),
+                        String.format(activity.getString(R.string.about_system_write_logcat_success), UriUtils.getFileName(result.get()), PublicLocalFolder.LOGFILES.getLocation().toUserDisplayableString()),
                         activity.getString(android.R.string.ok), null, activity.getString(R.string.about_system_info_send_button),
                         null, null, (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, result.get()));
                 }

@@ -1,5 +1,6 @@
 package cgeo.geocaching.storage;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.net.Uri;
@@ -7,6 +8,7 @@ import android.os.Environment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.documentfile.provider.DocumentFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,8 +46,11 @@ public class FolderLocation {
 
     //some base file locations for usage
 
-   /** Root folder for documents (deprecated since API29 but still works somehow) */
-    public static final File DOCUMENTS_FOLDER = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+    /** cGeo's private internal Files directory */
+    public static final FolderLocation CGEO_PRIVATE_FILES = FolderLocation.fromFile(CgeoApplication.getInstance().getApplicationContext().getFilesDir());
+
+    /** Root folder for documents (deprecated since API29 but still works somehow) */
+    public static final FolderLocation DOCUMENTS_FOLDER_DEPRECATED = FolderLocation.fromFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
 
 
     private static final String EMPTY = "---";
@@ -54,18 +59,27 @@ public class FolderLocation {
     private final FolderType type;
     private final Uri uri;
 
-    private final PublicLocalFolder subfolderBasePublicFolder; //needed for type SUBFOLDER
-    private final FolderLocation subforderBaseFolderLocation; //needed for type SUBFOLDER
+    private final PublicLocalFolder parentPublicFolder; //needed for type SUBFOLDER
+    private final FolderLocation parentLocation; //needed for type SUBFOLDER
     private final String subfolder; //needed for type SUBFOLDER
 
+    //Document File corresponding to this FolderLocation. Can be cached here by PublicLocaStorage
+    private  DocumentFile cachedDocFile;
 
-    private FolderLocation(final FolderType type, final Uri uri, final PublicLocalFolder subfolderBasePublicFolder, final FolderLocation subforderBaseFolderLocation, final String subfolder) {
+
+    private FolderLocation(final FolderType type, final Uri uri, final PublicLocalFolder parentPublicFolder, final FolderLocation parentLocation, final String subfolder) {
         this.type = type;
         this.uri = uri;
 
-        this.subfolderBasePublicFolder = subfolderBasePublicFolder;
-        this.subforderBaseFolderLocation = subforderBaseFolderLocation;
+        this.parentPublicFolder = parentPublicFolder;
+        this.parentLocation = parentLocation;
         this.subfolder = toFolderName(subfolder);
+
+        //if this location is based on a publiclocal folder, then we have to invalidate cached docfile on change
+        final PublicLocalFolder rootPublicFolder = getRootPublicFolder();
+        if (rootPublicFolder != null) {
+            rootPublicFolder.addChangeListener(pf -> setCachedDocFile(null));
+        }
     }
 
 
@@ -75,7 +89,7 @@ public class FolderLocation {
 
     public FolderType getBaseType() {
         if (type.equals(FolderType.SUBFOLDER)) {
-            return getSubfolderLocation().getBaseType();
+            return getParentLocation().getBaseType();
         }
         return type;
     }
@@ -84,7 +98,7 @@ public class FolderLocation {
     @Nullable
     public Uri getUri() {
         if (this.type.equals(FolderType.SUBFOLDER)) {
-            return Uri.withAppendedPath(getSubfolderLocation().getUri(), this.subfolder);
+            return Uri.withAppendedPath(getParentLocation().getUri(), this.subfolder);
         }
         return this.uri;
     }
@@ -94,7 +108,7 @@ public class FolderLocation {
     public Uri getBaseUri() {
         switch (this.type) {
             case SUBFOLDER:
-                return getSubfolderLocation().getBaseUri();
+                return getParentLocation().getBaseUri();
             case DOCUMENT:
             case FILE:
             default:
@@ -104,18 +118,43 @@ public class FolderLocation {
 
     public List<String> getSubdirsToBase() {
         if (!getType().equals(FolderType.SUBFOLDER)) {
+            //important: return a newly created list here, NOT Collections.emptyList()! Reason: later we will write to this List
             return new ArrayList<>();
         }
-        final List<String > result = getSubfolderLocation().getSubdirsToBase();
+        final List<String > result = getParentLocation().getSubdirsToBase();
         result.add(subfolder);
         return result;
+    }
 
+    /** If this instance is a subfolder based on a publiclocalfolder, then this publiclocalfolder is returned. Otherwise null is returned */
+    @Nullable
+    public PublicLocalFolder getRootPublicFolder() {
+        if (this.parentPublicFolder != null) {
+            return this.parentPublicFolder;
+        }
+
+        if (this.parentLocation != null) {
+            return this.parentLocation.getRootPublicFolder();
+        }
+
+        return null;
+    }
+
+
+    //shall only be used by PublicLocalStorage
+    DocumentFile getCachedDocFile() {
+        return this.cachedDocFile;
+    }
+
+    //shall only be used by PublicLocalStorage
+    void setCachedDocFile(final DocumentFile cacheDocFile) {
+        this.cachedDocFile = cacheDocFile;
     }
 
     /** Returns a representation of this folder's location fit to show to an end user */
     @NonNull
-    public String getUserDisplayableName() {
-        return getUri() == null ? EMPTY : getUri().getPath();
+    public String toUserDisplayableString() {
+        return getUri() == null ? EMPTY : UriUtils.toUserDisplayableString(getUri());
     }
 
     public static FolderLocation fromFile(final File file) {
@@ -133,14 +172,14 @@ public class FolderLocation {
         return new FolderLocation(FolderType.DOCUMENT, uri, null, null, null);
     }
 
-    public static FolderLocation fromSubfolder(final FolderLocation folderLocation, final String subfolder) {
+    public static FolderLocation fromFolderLocation(final FolderLocation folderLocation, final String subfolder) {
         if (folderLocation == null) {
             return null;
         }
         return new FolderLocation(FolderType.SUBFOLDER, null, null, folderLocation, subfolder);
     }
 
-    public static FolderLocation fromSubfolder(final PublicLocalFolder publicLocalFolder, final String subfolder) {
+    public static FolderLocation fromPublicFolder(final PublicLocalFolder publicLocalFolder, final String subfolder) {
         if (publicLocalFolder == null) {
             return null;
         }
@@ -161,11 +200,11 @@ public class FolderLocation {
         return this.toConfig(true).hashCode();
     }
 
-    private FolderLocation getSubfolderLocation() {
-        if (this.subfolderBasePublicFolder != null) {
-            return this.subfolderBasePublicFolder.getLocation();
+    private FolderLocation getParentLocation() {
+        if (this.parentPublicFolder != null) {
+            return this.parentPublicFolder.getLocation();
         }
-        return this.subforderBaseFolderLocation;
+        return this.parentLocation;
     }
 
     private String toConfig(final boolean unifiedUri) {
@@ -173,10 +212,10 @@ public class FolderLocation {
         final StringBuilder configString = new StringBuilder(type.toString()).append(CONFIG_SEP);
         switch (type) {
             case SUBFOLDER:
-                if (this.subfolderBasePublicFolder != null) {
-                    configString.append(this.subfolderBasePublicFolder.name());
+                if (this.parentPublicFolder != null) {
+                    configString.append(this.parentPublicFolder.name());
                 } else {
-                    configString.append("FL").append(CONFIG_SEP).append(this.subforderBaseFolderLocation.getUri());
+                    configString.append("FL").append(CONFIG_SEP).append(this.parentLocation.getUri());
                 }
                 configString.append(CONFIG_SEP).append(this.subfolder);
                 break;
@@ -196,7 +235,16 @@ public class FolderLocation {
     @NotNull
     @Override
     public String toString() {
-        return getUserDisplayableName() + "[" + toConfig(false) + "]";
+        final StringBuilder sb = new StringBuilder(toUserDisplayableString())
+            .append("[")
+            .append(toConfig(false));
+
+        final PublicLocalFolder rootPublicLocalFolder = getRootPublicFolder();
+        if (rootPublicLocalFolder != null) {
+            sb.append(",based on:").append(rootPublicLocalFolder.name());
+        }
+
+        return sb.append("]").toString();
     }
 
     @NonNull
