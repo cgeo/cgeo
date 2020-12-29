@@ -413,14 +413,6 @@
     <string name="about_license">Licencja</string>
     <string name="about_apache_license"><a href="">Licencja Apache, wersja 2.0</a></string>
     <string name="about_help">Pomoc</string>
-    <string name="about_starting">Wprowadzenie</string>
-    <string name="about_starting_head">Wprowadzenie</string>
-    <string name="about_starting_text_basics_head">Podstawy Geocachingu</string>
-    <string name="about_starting_text_basics_text">Geocaching to gra terenowa, w której wyszukuje się tak zwane „skrzynki” (także „skrytki”, „cache”). Z tej aplikacji można korzystać podczas tej zabawy.\n\nWięcej na ten temat znajdziesz w dziale <b>c:geo Basics</b> w naszyh podręczniku użytkownika: https://manual.cgeo.org/en/basicuse (w języku angielskim)</string>
-    <string name="about_starting_text_device_head">uprawnienia c:geo na urządzeniu</string>
-    <string name="about_starting_text_device_text">c:geo potrzebuje pewnych uprawnień na twoim urządzeniu:\n<b>Lokalizacja</b>: dostęp do GPS, aby zlokalizować swoją pozycję i obliczyć odległość i kierunek do skrzynek\n<b>Pamięć</b>:  zapis danych na pamięć telefonu podczas zapisywania skrzynek do użycia w trybie offline, importu/eksportu plików oraz odczytu map offline\n\nBez tych uprawnień nie będzie można używać c:geo.</string>
-    <string name="about_starting_text_first_head">Pierwsze kroki z c:geo</string>
-    <string name="about_starting_text_first_text">Aby korzystać z c:geo, musisz posiadać konta na wybranych przez siebie platformach geocachingowych (niezależnie od tej aplikacji). Musisz skonfigurować te konta w ustawieniach usługi c:geo, zanim będziesz mógł używać c:geo!\n\nMożesz przeczytać więcej w dziale <b>c:geo First steps</b> w naszym podręczniku użytkownika: https://manual.cgeo.org/en/firststeps (w języku angielskim)</string>
     <string name="open_services_page">Skonfiguruj swoje platformy geocachingowe</string>
     <string name="about_system_include">Proszę załączyć następujące informacje o systemie podczas przesyłania raportu błędu albo podczas prośby o więcej informacji odnośnie c:geo:</string>
     <string name="about_system_info_send_button">Wyślij mailem…</string>
