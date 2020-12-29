@@ -403,14 +403,6 @@
     <string name="about_license">Лицензия</string>
     <string name="about_apache_license"><a href="">Лицензия Apache, Version 2.0</a></string>
     <string name="about_help">Помощь</string>
-    <string name="about_starting">Начало работы</string>
-    <string name="about_starting_head">Начало работы</string>
-    <string name="about_starting_text_basics_head">Основы геокешинга</string>
-    <string name="about_starting_text_basics_text">Geocaching - это игра на открытом воздухе для поиска и поиска так называемых \"тайников\". Это приложение может использоваться для игры.\n\nВы можете прочитать больше об <b>основах c:geo</b> в нашем руководстве пользователя: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">разрешения c:geo</string>
-    <string name="about_starting_text_device_text">c:geo нужны определенные разрешения на вашем устройстве:\n<b>Местоположение</b>: доступ к GPS для определения местоположения и вычисления расстояния и направления у тайников\n<b>Хранилище</b>:  Запись данных в телефоне, когда вы сохраните тайники оффлайн, для импорта/экспорта файлов и чтения оффлайн карт\n\nБез этих прав вы не сможете использовать c:geo.</string>
-    <string name="about_starting_text_first_head">Первые шаги с c:geo</string>
-    <string name="about_starting_text_first_text">Для использования c:geo вам нужна учетная запись для выбранного вами сайта геокешинга (независимо от c:geo). Вам необходимо настроить эту учетную запись в настройках c:geo, прежде чем вы можете использовать приложение!\n\nБолее детальная информация и <b>Первые шаги с c:geo</b> доступны в руководстве пользователя: https://manual.cgeo.org/en/firsteps</string>
     <string name="open_services_page">Настроить сервис(-ы) геокешинга</string>
     <string name="about_system_include">Пожалуйста, включите следующую информацию об устройстве, когда отправляете отчет об ошибке или запрашиваете больше информации про c:geo:</string>
     <string name="about_system_info_send_button">Отправить по email…</string>
