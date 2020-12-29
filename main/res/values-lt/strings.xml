@@ -413,14 +413,6 @@
     <string name="about_license">Licencija</string>
     <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
     <string name="about_help">Pagalba</string>
-    <string name="about_starting">Darbo pradžia</string>
-    <string name="about_starting_head">Darbo pradžia</string>
-    <string name="about_starting_text_basics_head">Geocaching pagrindai</string>
-    <string name="about_starting_text_basics_text">Geocaching yra lauko žaidimas, skirtas ieškoti vadinamųjų \"slėptuvių\". Ši programa gali būti naudojama norint žaisti šį žaidimą.\n\nGalite sužinoti daugiau apie <b>c:geo pagrindus</b> mūsų vartotojo vadove: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo įrenginio leidimai</string>
-    <string name="about_starting_text_device_text">c:geo reikia tam tikrų jūsų įrenginio leidimų:\n<b>Vietovė</b>: prieiga prie GPS, kad būtų galima rasti jūsų padėtį ir apskaičiuoti atstumą bei kryptį į slėptuves.\n<b>Saugykla</b>: įrašykite duomenis savo telefone išsaugant slėptuves naudojimui neprisijungus, failų importui/eksportui ir išsaugotų žemėlapių skaitymui.\n\nBe šių leidimų negalėsite naudoti c:geo.</string>
-    <string name="about_starting_text_first_head">Pirmi žingsniai su c:geo</string>
-    <string name="about_starting_text_first_text">Norint naudoti c:geo, jums reikia jūsų pasirinktos geocaching platformos paskyros (nepriklausomai nuo šios programos). Šią paskyrą turite sukonfigūruoti c:geo paslaugų nustatymuose prieš naudodamiesi c:geo!\n\nDaugiau apie <b>c:geo pirmi žingsniai</b> galite perskaityti mūsų vartotojo vadove: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Konfigūruokite savo geocaching platformą (-as)</string>
     <string name="about_system_include">Pridėkite papildomą sisteminę informaciją, kai siunčiate klaidos pranešimą arba norite gauti daugiau informacijos apie c:geo:</string>
     <string name="about_system_info_send_button">Siųsti paštu…</string>
