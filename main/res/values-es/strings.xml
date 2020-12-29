@@ -400,14 +400,6 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href="">Licencia Apache, Versión 2.0</a></string>
     <string name="about_help">Ayuda</string>
-    <string name="about_starting">Comenzando</string>
-    <string name="about_starting_head">Comenzando</string>
-    <string name="about_starting_text_basics_head">Geocaching Básico</string>
-    <string name="about_starting_text_basics_text">Geocaching es un juego al aire libre en el que se buscan y encuentran lo que se conoce como \"cachés\". Esta aplicación puede ser utilizada para practicar dicho juego.\n\nPuedes leer más sobre <b>Iniciación a c:geo</b> en nuestra guía de usuario: https://manual.cgeo.org/es/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo permisos en dispositivo</string>
-    <string name="about_starting_text_device_text">c:geo necesita de ciertos permisos en tu dispositivo:\n<b>Ubicación</b>: acceso al GPS para localizar tu posición y calcular distancia y dirección a los geocachés\n<b>Almacenamiento</b>: escribir datos en el almacenamiento de tu teléfono cuando guardes geocachés para su uso desconectado, para importar/exportar ficheros y lectura de mapas offline\n\nSin estos permisos no podrás usar c:geo.</string>
-    <string name="about_starting_text_first_head">Primeros pasos con c:geo</string>
-    <string name="about_starting_text_first_text">Para usar c:geo, necesitas una cuenta de una plataforma geocaching de tu elección (independiente de esta aplicación). Debes configurar esta cuenta en la configuración de servicios de c:geo antes de poder usar c:geo!\n\nPuedes leer más sobre <b>c:geo Primeros pasos</b> en nuestra guía de usuario: https://manual.cgeo.org/es/firststeps</string>
     <string name="open_services_page">Configura tu(s) plataforma(s) de geocaching</string>
     <string name="about_system_include">Por favor, incluya la siguiente información del sistema cuando envíe un informe de error o pida más información sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar por correo…</string>
