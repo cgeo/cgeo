@@ -412,14 +412,6 @@
     <string name="about_license">Lisenssi</string>
     <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
     <string name="about_help">Ohjeet</string>
-    <string name="about_starting">Aloitus</string>
-    <string name="about_starting_head">Aloitus</string>
-    <string name="about_starting_text_basics_head">Geokätköilyn perusteet</string>
-    <string name="about_starting_text_basics_text">Geokätköily on ulkona pelattava peli, jossa etsitään niin kutsuttuja \"kätköjä\". Tätä sovellusta voidaan käyttää pelaamaan tätä peliä.\n\nVoit lukea lisää <b>c:geon perusteista</b> käyttöoppaassamme: https://manual.cgeo.org/fi/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo laitteen käyttöoikeudet</string>
-    <string name="about_starting_text_device_text">c:geo tarvitsee tiettyjä käyttölupia puhelimestasi:\n<b>Sijainti</b>: luvan käyttää GPS:ää sijaintisi paikantamiseen ja etäisyyden sekä suunnan geokätköihin laskemiseen\n<b>Tallennustila</b>: kirjoittaa dataa puhelimesi tallennustilaan kun tallennat kätköjä offline-käyttöön, tiedostojen tuomiseen/viemiseen, ja offline-karttojen lukemiseen\n\nIlman näitä lupia et pysty käyttämään c:geota.</string>
-    <string name="about_starting_text_first_head">c:geon käytön aloitus</string>
-    <string name="about_starting_text_first_text">Käyttääksesi c:geota, sinun tulee luoda tili valitsemaasi geokätköilypalveluun (tästä sovelluksesta riippumaton). Sinun tulee määrittää tämä tili c:geon palveluasetuksissa ennenkuin voit käyttää c:geota!\n\nVoit lukea tästä lisää käyttöoppaamme osiossa <b>Käytön aloitus</b>: https://manual.cgeo.org/fi/firststeps</string>
     <string name="open_services_page">Määritä geokätköilypalvelu(t)</string>
     <string name="about_system_include">Liitä mukaan seuraavat järjestelmätiedot lähettäessäsi virheraporttia tai tiedustellessasi lisätietoja c:geosta:</string>
     <string name="about_system_info_send_button">Lähetä sähköpostitse…</string>
