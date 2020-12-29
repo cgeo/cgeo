@@ -390,14 +390,6 @@
     <string name="about_license">Licenc</string>
     <string name="about_apache_license"><a href="">Apache licenc, 2.0 verzió</a></string>
     <string name="about_help">Segítség</string>
-    <string name="about_starting">Bevezető</string>
-    <string name="about_starting_head">Bevezető</string>
-    <string name="about_starting_text_basics_head">A geocaching alapjai</string>
-    <string name="about_starting_text_basics_text">A geocaching egy szabadtéri játék, melynek lényege, hogy úgynevezett \"geoládákat\" találj meg. Ez az app segítségedre lesz ebben a játékban.\n\nA c:geo <b>alapvető használatáról</b> a használati útmutatónkban olvashatsz bővebben: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo alkalmazásengedélyek</string>
-    <string name="about_starting_text_device_text">A c:geo működéséhez szükséges néhány alkalmazásengedély:\n<b>Helyadatok</b>: készüléked GPS-ének használata helyzeted és a ládák irányának, távolságának megállapításához\n<b>Tárhely</b>: adatok tárolása készülékeden ládák mentésekor offline használatra, fájlok importálásakor/exportálásakor és offline térképek olvasásakor\n\nEzen engedélyek nélkül a c:geo nem használható.</string>
-    <string name="about_starting_text_first_head">Első lépések</string>
-    <string name="about_starting_text_first_text">A c:geo használatához fiók létrehozása szükséges az általad választott geocaching platformon (ez az apptól függetlenül történik). Ezt a fiókot kell megadnod a Beállítások/Szolgáltatások menüpontban mielőtt használnád a c:geo-t!\n\nAz <b>első lépésekről</b> a használati útmutatónkban olvashatsz bővebben: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Geocaching platformok beállítása</string>
     <string name="about_system_include">Kérlek, csatold az alábbi rendszeradatokat, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
     <string name="about_system_info_send_button">Küldés e-mailben…</string>
