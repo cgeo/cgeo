@@ -412,14 +412,6 @@
     <string name="about_license">Lisans</string>
     <string name="about_apache_license"><a href=""> Apache Lisansı, Sürüm 2.0 </a></string>
     <string name="about_help">Yardım</string>
-    <string name="about_starting">Başlarken</string>
-    <string name="about_starting_head">Başlarken</string>
-    <string name="about_starting_text_basics_head">Geocaching Temel Kurallar</string>
-    <string name="about_starting_text_basics_text">Geocaching \'\'Cache\'\' olarak adlandırılan kutuların aranıp bulunması aktivitesidir. Bu aplikasyon bu aktiviteyi yapmak için kullanılabilir.\n\nDaha fazlasını kullanıcı rehberimizdeki <b>c:geo Temelleri</b> \'nde bulabilirsiniz</string>
-    <string name="about_starting_text_device_head">c:geo cihaz izinleri</string>
-    <string name="about_starting_text_device_text">c:geo cihazınızda bazı izinlere ihtiyaç duymaktadır:\n<b>Konum</b>: konumunuzu belirlemek, mesafe ve yön hesaplamak için GPS\'e erişim\n<b>Veri hafızası</b>: çevrımdışı kullanım için Geocache kaydettiğinizde içe-dışa veri aktarımı için, çevrımdışı harita kullanımı için\n\nBu izinler verilmeden c:geo\'yu kullanamazsınız.</string>
-    <string name="about_starting_text_first_head">c:geo ile başlangıç</string>
-    <string name="about_starting_text_first_text">c:geo\'yu kullanabilmeniz için Geocaching platformunda bir hesabınızın olması gerekmektedir (Bu aplikasyondan bağımsız olarak) c:geo\'yu kullanmanızdan önce bu hesabınızı c:geo servis ayarlarında yapılandırmanız gerekmektedir.\n\nKullanıcı klavuzumuzda <b>c:geo ile başlangıç</b> bölümünde daha fazla bilgi bulabilirsiniz</string>
     <string name="open_services_page">Geocaching platformlarınızı yapılandırın</string>
     <string name="about_system_include">Bir hata raporu gönderirken ya da c:geo hakkında daha fazla bilgi almak istediğinizde lütfen aşağıdaki sistem bilgilerini de ekleyin:</string>
     <string name="about_system_info_send_button">E-posta ile gönder…</string>
