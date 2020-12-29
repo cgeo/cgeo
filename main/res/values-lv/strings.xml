@@ -403,15 +403,6 @@
     <string name="about_license">Licences</string>
     <string name="about_apache_license"><a href=""> Apache License, Version 2.0</a></string>
     <string name="about_help">Palīdzība</string>
-    <string name="about_starting">Sāksim!</string>
-    <string name="about_starting_head">Sāksim</string>
-    <string name="about_starting_text_basics_head">Geocaching pamati</string>
-    <string name="about_starting_text_basics_text">Geocaching ir tā saukto slēpņu meklēšanas spēle brīvā dabā. Šī aplikācija var tikt izmantota, lai spēlētu šo spēli. \n\nJūs varat izlasīt vairāk par <b>c:geo pamatiem</b> mūsu lietotāja rokasgramatā:
-https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo ierīces atļaujas</string>
-    <string name="about_starting_text_device_text">c:geo aplikācijai ir nepieciešamas noteiktas atļaujas Jūsu ierīcē:\n<b>Atrašanās vieta</b>: pieeja GPS, lai noteiktu Jūsu atrašanās vietu un aprēķinātu attālumu līdz slēpnim un slēpņa virzienu\n<b>Failu sistēma</b>: lai rakstītu datus failu sistēmā, saglabājot slēpņus lietošanai bezsaistē, failu importēšanai/eksportēšanai un bezsaistes karšu lasīšanai\n\nBez šīm atļaujām Jūs nevarēsiet izmantot c:geo aplikāciju.</string>
-    <string name="about_starting_text_first_head">Pirmie soļi ar c:geo</string>
-    <string name="about_starting_text_first_text">Lai lietotu c:geo aplikāciju, Jums ir nepieciešams geocaching platformas (pēc Jūsu izvēles) konts / profils (neatkarīgi no šīs aplikācijas). Pirms aplikācijas lietošanas, Jums ir jāiestata šis konts c:geo aplikācijas iestatījumos!\n\nVairāk informācija par<b>c:geo Pirmajiem soļiem</b> mūsu lietošanas pamācībā: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Iestatiet savu geocaching platformu(as)</string>
     <string name="about_system_include">Lūdzu, iekļaujiet sekojošu informāciju par sistēmu, nosūtot kļūdas ziņojumu vai prasot vairāk informācijas par c:geo:</string>
     <string name="about_system_info_send_button">Nosūtīt pa e-pastu…</string>
