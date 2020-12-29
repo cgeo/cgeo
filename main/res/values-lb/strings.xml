@@ -411,14 +411,6 @@
     <string name="about_license">Lizenz</string>
     <string name="about_apache_license"><a href="">Apache Lizenz, Versioun 2.0</a></string>
     <string name="about_help">Hëllef</string>
-    <string name="about_starting">Éischt Schrëtt</string>
-    <string name="about_starting_head">Éischt Schrëtt</string>
-    <string name="about_starting_text_basics_head">Geocaching Grondlagen</string>
-    <string name="about_starting_text_basics_text">Geocaching ass een Outdoor-Spill, fir sougenannte \"Cachen\" ze sichen an ze fannen. Dës App ka fir dëst Spill benotzt ginn.\n\nMéi Informatiounen iwwer <b>c:geo Basics</b> kannst du an eisem Benotzerhandbuch noliesen: https://manual.cgeo.org/de/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo Berechtegungen fir d\'Gerät</string>
-    <string name="about_starting_text_device_text">c:geo brauch bestëmmte Berechtegungen op dengem Gerät:\n<b>Standuert</b>: Zougrëff op de GPS, fir deng Positioun ze fannen an d\'Entfernung a Richtung zu den Geocachen ze berechnen.\n<b>Späicher</b>: Daten an däin Telefonsspeicher schreiwen, wann du Geocachen fir d\'Offline-Notzung späichers, fir Dateien ze im- oder exportéieren an Offline-Kaarten zu liesen.\n\nOuni dës Berechtegungen kanns du c:geo net benotzen.</string>
-    <string name="about_starting_text_first_head">Éischt Schrëtt mat c:geo</string>
-    <string name="about_starting_text_first_text">Fir c:geo benotzen zu kënnen, brauchs du ee Benotzerkonto op enger Geocaching-Plattform vu denger Wal (onofhängeg vun dëser App). Du muss dëse Konto an de c:geo Service-Astellungen konfiguréieren, éier du c:geo benotzen kanns!\n\nMehr Informatiounen iwwer <b>Éischt Schrëtt mam c:geo</b> kanns du an eisem Benotzerhandbuch liesen: https://manual.cgeo.org/de/firststeps</string>
     <string name="open_services_page">Konfiguréier deng Geocaching-Platform(en)</string>
     <string name="about_system_include">Schéck wgl. folgend Systeminformatiuonen an all Fehlerbericht mat oder bei Informationufroen u c:geo matschécken:</string>
     <string name="about_system_info_send_button">Als E-mail verschécken…</string>
