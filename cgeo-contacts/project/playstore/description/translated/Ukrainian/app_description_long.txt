@@ -1,12 +1,12 @@
-This is a contacts plugin for c:geo, an open source geocaching app. It will only work with the c:geo app installed and allows direct access to your phonebook when clicking on a username in c:geo.
+Це плагін для контактів, для c:geo, програма з відкритим вихідним кодом для геокешингу. Він буде працювати тільки з встановленим додатком c:geo і буде дозволений прямий доступ до вашої телефонної книги при натисканні на ім'я користувача в c:geo.
 
-Usage:
-When you click on a username in c:geo (e.g. in the cache logbook) the menu will contain an item to open the corresponding contact card in your phone contacts. This will allow you to directly call or message the user.
+Використання:
+Коли ви натиснете на ім'я користувача в c:geo (напр. в журналі кешування) меню буде містити елемент, щоб відкрити відповідну картку контакту в Контактах. Це дозволить вам безпосередньо дзвонити або надсилати повідомлення користувача.
 
-Remark:
-The username of the person needs to be stored in the name- or alias-field of your contacts in order for the plugin to match the geocaching username to the contact.
+Зауваження:
+Ім'я користувача людини має зберігатися в назві або псевдонім ваших контактів, щоб плагін відповідав ім'я користувача геокешинга.
 
-Comments in PlayStore can not be answered! If you have problems installing or using c:geo please first have a look at our FAQ: https://faq.cgeo.org
-If there are still problems, contact support via email.
+Коментарі в PlayStore не можуть бути відповіданими! Якщо у вас виникли проблеми встановлення або використання c:geo, будь ласка, спершу перегляньте наші FAQ: https://faq.cgeo.org
+Якщо виникнуть проблеми, зв’яжіться зі службою підтримки по електронній пошті.
 
-If you would like to know why this c:geo plugin needs the permissions requested, please check https://www.cgeo.org/faq.html#plugin-contacts-privacy for an explanation.
+Якщо ви хочете дізнатися, чому цей c:geo плагін потребує дозволів, будь ласка, перегляньте https://www.cgeo.org/faq.html#plugin-contacts-privacy для пояснення.

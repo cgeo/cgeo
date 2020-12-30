@@ -1825,6 +1825,7 @@
     <string name="wizard_intro">Sembra che questa sia la prima volta che c:geo viene utilizzato su questo dispositivo. Posso aiutarti nella configurazione?</string>
     <string name="wizard_permissions_title">Imposta permessi app</string>
     <string name="wizard_permissions_intro">c:geo ha bisogno di alcuni permessi per funzionare correttamente. Li spiegherò nei prossimi passi.\nSenza questi permessi non potrai usare c:geo.</string>
+    <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_welcome_advanced">Configurazione avanzata</string>
     <string name="wizard_advanced_offlinemaps_label">Mappe offline</string>
     <string name="wizard_advanced_offlinemaps_info">c:geo può scaricare i file della mappa per l\'utilizzo offline</string>
@@ -1832,4 +1833,5 @@
     <string name="wizard_advanced_brouter_info">c:geo può portarti verso gli obiettivi e mostrare le informazioni di navigazione sulla tua mappa installando e configurando un\'app di supporto denominata \"BRouter Offline Navigation\"</string>
     <string name="wizard_advanced_restore_label">Ripristina</string>
     <string name="wizard_advanced_restore_info">Ripristina impostazioni e dati da un\'installazione precedente</string>
+    <string name="status_not_ok">ERRORE</string>
 </resources>

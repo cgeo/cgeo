@@ -1,12 +1,12 @@
-This is a contacts plugin for c:geo, an open source geocaching app. It will only work with the c:geo app installed and allows direct access to your phonebook when clicking on a username in c:geo.
+Acesta este un plugin pentru accesarea contactelor telefonului, în cadrul c:geo, o aplicație de geocaching open source. Plugin-ul va funcționa doar cu aplicația c:geo instalată și permite accesul direct la agenda dvs. telefonică atunci când faceți click pe un nume de utilizator din c:geo.
 
-Usage:
-When you click on a username in c:geo (e.g. in the cache logbook) the menu will contain an item to open the corresponding contact card in your phone contacts. This will allow you to directly call or message the user.
+Utilizare:
+Când apeşi pe un nume de utilizator din c:geo (de ex. în jurnalul de geocutie) meniul va conţine un element pentru a deschide contactul corespunzătoare în contactele telefonice. Acest lucru vă va permite să apelați direct sau să trimiteți mesaje utilizatorului.
 
-Remark:
-The username of the person needs to be stored in the name- or alias-field of your contacts in order for the plugin to match the geocaching username to the contact.
+Observație:
+Numele de Utilizator al persoanei trebuie să fie salvat în câmpul "Nume" sau "Alias" din lista dumneavoastră de contacte pentru ca plugin-ul să poată asocia corect utilizatorul de persoana în cauză.
 
-Comments in PlayStore can not be answered! If you have problems installing or using c:geo please first have a look at our FAQ: https://faq.cgeo.org
-If there are still problems, contact support via email.
+Nu putem răspunde comentariilor lăsate în PlayStore! Dacă întâmpinați probleme cu instalarea sau utilizarea aplicației c:geo, vă rugăm ca mai întâi să aruncați o privire pe lista de Întrebări Frecvente: https://faq.cgeo.org
+Dacă încă aveți probleme, contactați prin e-mail Serviciul de Asistență.
 
-If you would like to know why this c:geo plugin needs the permissions requested, please check https://www.cgeo.org/faq.html#plugin-contacts-privacy for an explanation.
+Dacă doriți să aflați de ce acest plugin pentru c:geo necesită permisiunile solicitate, vă rugăm să vizitați https://www.cgeo.org/faq.html#plugin-contacts-privacy și să citiți explicațiile date.

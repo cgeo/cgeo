@@ -1790,15 +1790,22 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_individualroute_title">個別ルートのエクスポート</string>
     <string name="export_individualroute_success">個別ルートを「%s」にエクスポートしました</string>
     <!-- install wizard -->
+    <string name="wizard">設定ウィザード</string>
     <string name="previous">戻る</string>
     <string name="skip">スキップ</string>
     <string name="next">次へ</string>
     <string name="finish">終了</string>
     <string name="wizard_welcome_title">c:geoへようこそ</string>
     <string name="wizard_intro">このデバイスでc:geoが初めて使用されるようです。設定をお手伝いしましょうか? ほんの数ステップです</string>
+    <string name="wizard_intro2">設定ウィザードへようこそ。ほんの数ステップです</string>
+    <string name="wizard_outro_ok">c:geoを設定していただきありがとうございます。\nお楽しみください!</string>
+    <string name="wizard_outro_error">設定が完了していません\nすべての機能が期待どおり動作するわけではありません!</string>
     <string name="wizard_permissions_title">アプリの権限の設定</string>
     <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です。次のステップで説明します。\nこれらの権限がないとc:geoを使用することはできません</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
+    <string name="wizard_platforms_intro">キャッシュ情報をダウンロードするには、c:geoで対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です</string>
+    <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencachingや他のサイト</string>
     <string name="wizard_welcome_advanced">詳細設定</string>
     <string name="wizard_advanced_offlinemaps_label">オフライン地図のダウンロード</string>
     <string name="wizard_advanced_offlinemaps_info">オフライン用に地図ファイルをダウンロードできます</string>
@@ -1806,4 +1813,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_advanced_brouter_info">BRouter Offline Navigationをインストールしてセットアップすると(オフラインでも)目的地へナビゲーションしたり地図にルートを表示することができます</string>
     <string name="wizard_advanced_restore_label">復元</string>
     <string name="wizard_advanced_restore_info">バックアップからキャッシュ/ウェイポイント/c:geo設定を復元</string>
+    <string name="status_not_ok">エラー</string>
+    <string name="wizard_status_title">設定情報</string>
+    <string name="wizard_status_storage_permission">ストレージの権限</string>
+    <string name="wizard_status_location_permission">位置情報の権限</string>
+    <string name="wizard_status_platform">ジオキャッシングサイト</string>
 </resources>
