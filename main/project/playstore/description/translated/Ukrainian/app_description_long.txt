@@ -1,30 +1,30 @@
-c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away.
+c:geo - це повнофункціональна особа, яку завжди готовий до роботи офіційного клієнта для geocaching.com і пропонує базову підтримку інших платформ геокешингу (наприклад, Opencaching). Він не потребує браузеру чи експорту - просто встановіть його та запустіть прямо зараз.
 
-Main features:
-- View caches on a Live Map
-- Use Google Maps or OpenStreetMaps
-- Search for caches by various criteria
-- Log your finds online or offline
-- Store cache information on your device
-- Create and manage waypoints
-- Navigate using compass, map, or other apps
-- Import/Export GPX files
-- Full support for trackables
-- Offline caching functions including offline maps
+Основні характеристики:
+- Перегляд кешів на живій карті
+- Використовувати Google Maps або OpenStreetMaps
+- Пошук кешей за різними критеріями
+- Журнал пошуку в мережі або автономному режимі
+- Зберігати інформацію про кеш на вашому пристрої
+- Створення та керування шляховими точками
+- Навігація за допомогою компаса, карти та інших додатків
+- Імпорт/експорт файлів GPX
+- Повна підтримка для треків
+- Автономний кешування з функцій, включаючи автономні карти
 
-c:geo is a simple to use but powerful geocaching client with a lot of additional features. All you need to get started is an existing account on geocaching.com or another geocaching platform (like Opencaching).
-Find caches using the live map or by using one of the many search functions.
+c:geo - це простий у використанні, але потужний геокешинг клієнт з великою кількістю додаткових функцій. Все, що вам потрібно розпочати, так це існуючий обліковий запис на geocaching.com або іншій платформі геокешингу (як-от Opencaching).
+Знайти кеші за допомогою живої карти або за допомогою однієї з багатьох пошукових функцій.
 
-Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
+Перейдіть до кешу або до точки кешу з вбудованим компасом, карта або передача координат до різних зовнішніх додатків (наприклад Радар, Google Навігація, StreetView, Locus, Navigon, Sygic та багато іншого).
 
-Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want.
-You can manage your stored caches in different lists and can sort and filter them according to your needs.
-Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. when roaming).
-Logs can be posted online or stored offline for later submission or exported via field notes.
+Зберігайте інформацію про кеш на пристрої безпосередньо з geocaching.com, а також через імпорт файлів з GPX, щоб він був доступний коли забажаєте.
+Ви можете керувати збережені кеші в різних списках і сортувати їх за вашими потребами.
+Кеш у сховищі разом з автономними файлами карт або статичними картами можна використовувати для пошуку схованок без підключення до Інтернету (наприклад. під час роумінгу).
+Логи можуть бути розміщені в онлайн або збережені в автономному режимі для пізніх сабмітів або експортованих по полях приміток.
 
-Search and discover trackables, manage your trackable inventory and drop a Trackable while posting a cache log.
+Пошук і виявлення трекувань, управління інвентарем, що відстежується, і викидає трекери, розміщуючи журнал кешу.
 
-If you have problems installing or using c:geo please first have a look at our FAQ (https://faq.cgeo.org) or consult the user guide (https://manual.cgeo.org).
-If there are still problems, contact support via email.
+Якщо у вас виникли проблеми встановлення або використання c:geo, будь ласка, спочатку перегляньте наші FAQ (https://faq.cgeo.org) або зверніться до посібника користувача (https://manual.cgeo.org).
+Якщо виникнуть проблеми, зв’яжіться зі службою підтримки по електронній пошті.
 
-If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org for an explanation.
+Якщо ви хочете дізнатися, чому цей c:geo плагін потребує дозволів, будь ласка, перегляньте https://www.cgeo.org для пояснення.
