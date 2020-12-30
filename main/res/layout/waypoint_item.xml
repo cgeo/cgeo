@@ -84,6 +84,23 @@
         android:maxLines="1" />
 
     <TextView
+        android:id="@+id/calculate_coordinates"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="12dp"
+        android:ellipsize="end"
+        android:focusable="false"
+        android:lines="1"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:textColor="?text_color_headline"
+        android:textSize="14sp"
+        android:visibility="gone"
+        android:text="@string/waypoint_calculate_coordinates"
+        tools:visiblity="visible" />
+
+    <TextView
         android:id="@+id/note"
         android:autoLink="web|map"
         android:layout_width="fill_parent"
