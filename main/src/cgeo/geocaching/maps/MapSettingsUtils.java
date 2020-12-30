@@ -37,7 +37,7 @@ public class MapSettingsUtils {
         // utility class
     }
 
-    public static void showSettingsPopup(final Activity activity, @Nullable final ManualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue) {
+    public static void showSettingsPopup(final Activity activity, @Nullable final ManualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, @DrawableRes final int alternativeButtonResId) {
         colorAccent = activity.getResources().getColor(R.color.colorAccent);
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
@@ -113,7 +113,11 @@ public class MapSettingsUtils {
             })
             .create();
         ((TextView) customTitle.findViewById(R.id.dialog_title_title)).setText(R.string.quick_settings);
-        customTitle.findViewById(R.id.dialog_title_back).setOnClickListener(v -> dialog.dismiss());
+        final ImageView backButton = customTitle.findViewById(R.id.dialog_title_back);
+        if (alternativeButtonResId != 0) {
+            backButton.setImageResource(alternativeButtonResId);
+        }
+        backButton.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
 
         compactIcon.init();
