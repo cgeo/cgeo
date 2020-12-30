@@ -79,6 +79,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources.NotFoundException;
+import android.content.res.TypedArray;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -261,7 +262,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);
 
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, manualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged));
+        // try to retrieve up indicator resId and forward it to popup
+        final TypedArray a = getTheme().obtainStyledAttributes(R.style.cgeo_gmap, new int[] {R.attr.homeAsUpIndicator});
+        final int upResId = a.getResourceId(0, 0);
+        a.recycle();
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, manualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
