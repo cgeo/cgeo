@@ -59,7 +59,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         registerMapSource(new CyclosmMapSource(this, resources.getString(R.string.map_source_osm_cyclosm)));
 
         //get notified if Offline Maps directory changes
-        PublicLocalFolder.OFFLINE_MAPS.addChangeListener(pf -> updateOfflineMaps());
+        PublicLocalFolder.OFFLINE_MAPS.addChangeListener(this, pf -> updateOfflineMaps());
 
         //initiale offline maps (necessary here in constructor only so that initial setMapSource will succeed)
         updateOfflineMaps();

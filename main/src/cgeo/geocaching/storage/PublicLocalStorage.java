@@ -73,10 +73,10 @@ public class PublicLocalStorage {
         public final Uri uri;
         public final boolean isDirectory;
         /** if this is a directory: location of that directory. If this is not a directory: null */
-        public final FolderLocation dirLocation;
+        public final Folder dirLocation;
         public final String mimeType;
 
-        public FileInformation(final String name, final Uri uri, final boolean isDirectory, final FolderLocation dirLocation, final String mimeType) {
+        public FileInformation(final String name, final Uri uri, final boolean isDirectory, final Folder dirLocation, final String mimeType) {
             this.name = name;
             this.uri = uri;
             this.dirLocation = dirLocation;
@@ -101,14 +101,30 @@ public class PublicLocalStorage {
     }
 
     /** checks if folder is available and can be used */
-    public boolean checkFolderAvailability(final PublicLocalFolder folder) {
-        final DocumentFile folderFile = getFolderFile(getAndAdjustFolderLocation(folder));
-        return folderFile != null && folderFile.isDirectory();
+    public boolean checkAvailability(final PublicLocalFolder folder) {
+        final DocumentFile folderFile = getFolderFile(getAndAdjustFolderLocation(folder), folder.needsWrite());
+        return folderFile != null && folderFile.isDirectory() && folderFile.canRead() && (!folder.needsWrite() || folderFile.canWrite());
+    }
+
+    public boolean checkAvailability(final Folder folder, final boolean needsWrite) {
+        return checkAvailability(folder, needsWrite, false);
+    }
+
+    public boolean checkAvailability(final Folder folder, final boolean needsWrite, final boolean testReadWrite) {
+        final DocumentFile folderFile = getFolderFile(folder, needsWrite);
+        final boolean success = folderFile != null && folderFile.isDirectory() && folderFile.canRead() && (!needsWrite || folderFile.canWrite());
+
+        if (success && testReadWrite) {
+            return tryTestReadWriteToFolder(folder, needsWrite);
+        }
+
+        return success;
     }
 
 
 
-        /** Creates a new file in folder and returns its Uri */
+
+    /** Creates a new file in folder and returns its Uri */
     public Uri create(final PublicLocalFolder folder, final String name) {
         return create(folder, FileNameCreator.forName(name));
     }
@@ -119,25 +135,25 @@ public class PublicLocalStorage {
     }
 
     /** Creates a new file in folder and returns its Uri */
-    public Uri create(final FolderLocation folderLocation, final String name) {
-        return create(folderLocation, FileNameCreator.forName(name));
+    public Uri create(final Folder folder, final String name) {
+        return create(folder, FileNameCreator.forName(name));
     }
 
     /** Creates a new file in a folder location and returns its Uri */
-    public Uri create(final FolderLocation folderLocation, final FileNameCreator nameCreator) {
+    public Uri create(final Folder folder, final FileNameCreator nameCreator) {
         final FileNameCreator creator = nameCreator == null ? FileNameCreator.DEFAULT : nameCreator;
         try {
-            final DocumentFile folderFile = getFolderFile(folderLocation);
+            final DocumentFile folderFile = getFolderFile(folder, true);
             if (folderFile == null) {
                 return null;
             }
             final String docName = findNewFilename(folderFile, creator.createName());
-            //Note: do NOT pass on the mimeType. For Files (RawDocumentFile) this will lead to estended API
+            //Do NOT pass a mimeType. It will then be selected based on the file suffix.
             final DocumentFile newFile = folderFile.createFile(null, docName);
             return newFile == null ? null : newFile.getUri();
 
         } catch (Exception ioe) {
-            Log.w("Problem creating new storage file in '" + folderLocation + "'", ioe);
+            Log.w("Problem creating new storage file in '" + folder + "'", ioe);
         }
         return null;
     }
@@ -152,9 +168,8 @@ public class PublicLocalStorage {
         String newPraefix = praefix;
 
         int idx = 1;
-        if (dir.findFile(newPraefix + suffix) != null) {
-            newPraefix = praefix + " (" + idx + ")";
-            idx++;
+        while (dir.findFile(newPraefix + suffix) != null) {
+            newPraefix = praefix + " (" + (idx++) + ")";
         }
 
         return newPraefix + suffix;
@@ -185,15 +200,15 @@ public class PublicLocalStorage {
 
     /** Lists all direct content of given folder location */
     @NonNull
-    public List<FileInformation> list(final FolderLocation folderLocation) {
-        final DocumentFile folderFile = getFolderFile(folderLocation);
+    public List<FileInformation> list(final Folder folder) {
+        final DocumentFile folderFile = getFolderFile(folder, false);
         if (folderFile == null) {
             return Collections.emptyList();
         }
 
         return CollectionStream.of(folderFile.listFiles())
             .map(df -> new FileInformation(df.getName(), df.getUri(), df.isDirectory(),
-                df.isDirectory() ? FolderLocation.fromFolderLocation(folderLocation, df.getName()) : null, df.getType()))
+                df.isDirectory() ? Folder.fromFolder(folder, df.getName()) : null, df.getType()))
             .toList();
     }
 
@@ -207,18 +222,6 @@ public class PublicLocalStorage {
             reportProblem(R.string.publiclocalstorage_err_writing_file_no_permission, se, uri);
         }
         return null;
-    }
-
-    /** Opens a file for reading. Remember to close stream after usage! Returns null if Uri can't be opened for reading. */
-    public InputStream openForRead(final PublicLocalFolder folder, final String name) {
-        final DocumentFile folderFile = getFolderFile(getAndAdjustFolderLocation(folder));
-        if (folderFile == null) {
-            return null;
-        }
-
-        //try a shortcut so we don't have to create so many DocumentFiles...
-        final Uri fileUri = Uri.withAppendedPath(folderFile.getUri(), name);
-        return openForRead(fileUri);
     }
 
     /** Opens an Uri for reading. Remember to close stream after usage! Returns null if Uri can't be opened for reading. */
@@ -239,7 +242,7 @@ public class PublicLocalStorage {
         return copy(Uri.fromFile(file), getAndAdjustFolderLocation(folder), nameCreator, deleteFileOnSuccess);
     }
 
-    public Uri copy(final Uri source, final FolderLocation target, final FileNameCreator newName, final boolean move) {
+    public Uri copy(final Uri source, final Folder target, final FileNameCreator newName, final boolean move) {
 
         boolean success = true;
         Exception failureEx = null;
@@ -292,7 +295,7 @@ public class PublicLocalStorage {
     }
 
     /** returns number of files (left) and number of (sub)dirs (right) currently in folder */
-    public ImmutablePair<Integer, Integer> getFileCounts(final FolderLocation folder) {
+    public ImmutablePair<Integer, Integer> getFileCounts(final Folder folder) {
         final List<Integer> result = new ArrayList<>();
         result.add(0);
         result.add(0);
@@ -308,7 +311,7 @@ public class PublicLocalStorage {
         return new ImmutablePair<>(result.get(0), result.get(1));
     }
 
-    public boolean deleteAll(final FolderLocation folder) {
+    public boolean deleteAll(final Folder folder) {
         return treeWalk(folder, fi -> {
            if (fi.left.isDirectory) {
                if (fi.right) {
@@ -322,20 +325,20 @@ public class PublicLocalStorage {
         });
     }
 
-    public boolean copyAll(final FolderLocation source, final FolderLocation target, final boolean move) {
-        final Stack<FolderLocation> targetStack = new Stack<>();
+    public boolean copyAll(final Folder source, final Folder target, final boolean move) {
+        final Stack<Folder> targetStack = new Stack<>();
         targetStack.push(target);
         return treeWalk(source, fi -> {
             if (fi.left.isDirectory) {
                 if (fi.right) {
-                    targetStack.push(FolderLocation.fromFolderLocation(targetStack.peek(), fi.left.name));
+                    targetStack.push(Folder.fromFolder(targetStack.peek(), fi.left.name));
                     return true;
                 } else {
                     targetStack.pop();
                     return move ? delete(fi.left.uri) : true;
                 }
             } else {
-                return copy(fi.left.uri, targetStack.peek(), FileNameCreator.forName(fi.left.name, fi.left.mimeType), move) != null;
+                return copy(fi.left.uri, targetStack.peek(), FileNameCreator.forName(fi.left.name), move) != null;
             }
         });
     }
@@ -353,7 +356,7 @@ public class PublicLocalStorage {
      *
      * Method returns whether treewalk was aborted
      */
-    private boolean treeWalk(final FolderLocation root, final Predicate<ImmutablePair<FileInformation, Boolean>> callback) {
+    private boolean treeWalk(final Folder root, final Predicate<ImmutablePair<FileInformation, Boolean>> callback) {
         for (FileInformation fi : list(root)) {
             if (!callback.test(new ImmutablePair<>(fi, true))) {
                 return false;
@@ -371,18 +374,18 @@ public class PublicLocalStorage {
     }
 
     /** Tries to read and (optionally) write something to the given folder location, returns whether this was successful or not */
-    public boolean performTestReadWriteToLocation(final FolderLocation folderLocation, final boolean testWrite) {
+    private boolean tryTestReadWriteToFolder(final Folder folder, final boolean testWrite) {
 
         Uri testDoc = null;
         if (testWrite) {
-            testDoc = create(folderLocation, FileNameCreator.DEFAULT);
+            testDoc = create(folder, FileNameCreator.DEFAULT);
             if (testDoc == null) {
                 return false;
             }
         }
 
         //actually, on folder without write permission, we can not do much. Simply list the content...
-        final List<FileInformation> files = list(folderLocation);
+        final List<FileInformation> files = list(folder);
 
         if (testWrite && files.size() < 1) {
             return false;
@@ -397,34 +400,34 @@ public class PublicLocalStorage {
     }
 
     /** returns system information for a given folder location, mainly for display in log and/or SystemInformation */
-    public String getFolderLocationInformation(final FolderLocation folderLocation) {
+    public String getFolderLocationInformation(final Folder folder) {
         try {
 
             //get free space and number of files
             final ImmutablePair<Long, Long> freeSpaceAndNumberOfFiles;
-            switch (folderLocation.getBaseType()) {
+            switch (folder.getBaseType()) {
                 case DOCUMENT:
-                    freeSpaceAndNumberOfFiles = getFreeSpaceAndNoOfFilesForDocumentFolderLocation(folderLocation);
+                    freeSpaceAndNumberOfFiles = getFreeSpaceAndNoOfFilesForDocumentFolderLocation(folder);
                     break;
                 case FILE:
                 default:
-                    freeSpaceAndNumberOfFiles = new ImmutablePair<>(FileUtils.getFreeDiskSpace(new File(folderLocation.getUri().getPath())), -1l);
+                    freeSpaceAndNumberOfFiles = new ImmutablePair<>(FileUtils.getFreeDiskSpace(new File(folder.getUri().getPath())), -1l);
                     break;
             }
             return "Free Space: " + Formatter.formatBytes(freeSpaceAndNumberOfFiles.left) + ", No of files: " + freeSpaceAndNumberOfFiles.right;
         } catch (Exception e) {
-            Log.i("Exception while getting system information for " + folderLocation, e);
+            Log.i("Exception while getting system information for " + folder, e);
             return "Ex(" + e.getClass().getName() + ")" + e.getMessage();
         }
    }
 
 
     /** Returns a pair of longs where left one is free space in bytes and right one is number of files */
-    private ImmutablePair<Long, Long> getFreeSpaceAndNoOfFilesForDocumentFolderLocation(final FolderLocation folderLocation) throws Exception {
+    private ImmutablePair<Long, Long> getFreeSpaceAndNoOfFilesForDocumentFolderLocation(final Folder folder) throws Exception {
 
         final ImmutablePair<Long, Long> emptyResult = new ImmutablePair<>(-1l, -1l);
 
-        final Uri treeUri = folderLocation.getUri();
+        final Uri treeUri = folder.getUri();
         if (treeUri == null) {
             return emptyResult;
         }
@@ -460,17 +463,19 @@ public class PublicLocalStorage {
      * @return file folder, or null if creation/retrieving was not at all possible
      */
     @Nullable
-    private DocumentFile getFolderFile(final FolderLocation folderLocation) {
+    private DocumentFile getFolderFile(final Folder folder, final boolean needsWrite) {
 
-        if (folderLocation == null) {
+        if (folder == null) {
             return null;
         }
 
-        final Uri baseUri = folderLocation.getBaseUri();
-        final DocumentFile baseDir;
-        switch (folderLocation.getBaseType()) {
+        final Uri baseUri = folder.getBaseUri();
+        DocumentFile baseDir = null;
+        switch (folder.getBaseType()) {
             case DOCUMENT:
-                baseDir = DocumentFile.fromTreeUri(context, baseUri);
+                if (checkUriPermissions(baseUri, needsWrite)) {
+                    baseDir = DocumentFile.fromTreeUri(context, baseUri);
+                }
                 break;
             case FILE:
             default:
@@ -478,22 +483,26 @@ public class PublicLocalStorage {
                 break;
         }
 
-        if (baseDir == null || !baseDir.isDirectory()) {
+        if (baseDir == null || !baseDir.isDirectory() || !baseDir.canRead() || (needsWrite && !baseDir.canWrite())) {
             reportProblem(R.string.publiclocalstorage_err_folder_not_a_directory_abort, baseUri);
             return null;
         }
 
-        return getSubdirFolderFile(folderLocation, baseUri, baseDir);
+        return getSubdirFolderFile(folder, baseUri, baseDir);
     }
 
-    private DocumentFile getSubdirFolderFile(final FolderLocation folderLocation, final Uri baseUri, final DocumentFile baseDir) {
+    private DocumentFile getSubdirFolderFile(final Folder folder, final Uri baseUri, final DocumentFile baseDir) {
 
-        final DocumentFile cachedFile = folderLocation.getCachedDocFile();
+        final DocumentFile cachedFile = folder.getCachedDocFile();
         if (cachedFile != null) {
-            return cachedFile;
+            if (cachedFile.isDirectory()) {
+                return cachedFile;
+            }
+            //something is wrong with cached value -> invalidate
+            folder.setCachedDocFile(null);
         }
 
-        final List<String> subfolders = folderLocation.getSubdirsToBase();
+        final List<String> subfolders = folder.getSubdirsToBase();
         DocumentFile dir = baseDir;
         for (String subfolderName : subfolders) {
             DocumentFile child = findByName(dir, subfolderName);
@@ -511,23 +520,23 @@ public class PublicLocalStorage {
             dir = child;
         }
 
-        folderLocation.setCachedDocFile(dir);
+        folder.setCachedDocFile(dir);
         return dir;
     }
 
     /** Gets this folder's current location. Tries to adjust folder location if no permission given. May return null if no permission found */
     @Nullable
-    private FolderLocation getAndAdjustFolderLocation(final PublicLocalFolder folder) {
-        if (!checkFolderPermissions(folder)) {
+    private Folder getAndAdjustFolderLocation(final PublicLocalFolder folder) {
+        if (!checkAvailability(folder.getLocation(), folder.needsWrite())) {
             //if this is a user-selected folder and base dir is ok we initiate a fallback to default folder
-            if (!folder.isUserDefinedLocation() || !checkLocationPermissions(folder.getDefaultLocation(), folder.needsWrite())) {
+            if (!folder.isUserDefinedLocation() || !checkAvailability(folder.getDefaultLocation(), folder.needsWrite())) {
                 return null;
             }
 
             final String folderUserdefined = folder.toUserDisplayableString();
             setFolderUserDefinedUri(folder, null);
             final String folderDefault = folder.toUserDisplayableString();
-            if (!checkFolderPermissions(folder)) {
+            if (!checkAvailability(folder.getLocation(), folder.needsWrite())) {
                 reportProblem(R.string.publiclocalstorage_err_folders_inaccessable_abort, folderUserdefined, folderDefault);
                 return null;
             }
@@ -548,32 +557,6 @@ public class PublicLocalStorage {
         return null;
     }
 
-    private boolean checkFolderPermissions(final PublicLocalFolder folder) {
-        return checkLocationPermissions(folder.getLocation(), folder.needsWrite());
-    }
-
-    private boolean checkLocationPermissions(final FolderLocation folderLocation, final boolean needsWrite) {
-        switch (folderLocation.getBaseType()) {
-            case DOCUMENT:
-                if (folderLocation.getBaseUri() == null) {
-                    //location does not need a permission
-                    return true;
-                }
-                return checkUriPermissions(folderLocation.getBaseUri(), needsWrite);
-            case FILE:
-            default:
-                final Uri fileUri = folderLocation.getUri();
-                if (fileUri == null) {
-                    return false;
-                }
-                final File dir = new File(fileUri.getPath());
-                if (!dir.mkdirs()) {
-                    Log.w("Could not create dir " + dir);
-                }
-                return dir.isDirectory() && dir.canRead() && (!needsWrite || dir.canWrite());
-        }
-
-    }
 
     private boolean checkUriPermissions(final Uri uri, final boolean checkWrite) {
         if (uri == null) {
@@ -616,7 +599,7 @@ public class PublicLocalStorage {
         refreshUriPermissionCache();
     }
 
-    private void refreshUriPermissionCache() {
+    protected void refreshUriPermissionCache() {
         this.uriPermissionCache.clear();
         for (UriPermission uriPerm : context.getContentResolver().getPersistedUriPermissions()) {
             final String key = uriPerm.getUri().toString();

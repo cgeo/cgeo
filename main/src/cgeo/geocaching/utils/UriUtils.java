@@ -22,10 +22,13 @@ public final class UriUtils {
         if (uri == null) {
             return "";
         }
-        final String uriString = uri.getPath();
+        String uriString = uri.getPath();
         final int idx = uriString.lastIndexOf(":");
         if (idx >= 0) {
-            return uriString.substring(idx + 1);
+            uriString = ".../" + uriString.substring(idx + 1);
+        }
+        while (uriString.endsWith("/")) {
+            uriString = uriString.substring(0, uriString.length() - 1);
         }
         return uriString;
     }

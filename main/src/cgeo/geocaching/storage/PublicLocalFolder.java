@@ -3,8 +3,8 @@ package cgeo.geocaching.storage;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import static cgeo.geocaching.storage.FolderLocation.CGEO_PRIVATE_FILES;
-import static cgeo.geocaching.storage.FolderLocation.DOCUMENTS_FOLDER_DEPRECATED;
+import static cgeo.geocaching.storage.Folder.CGEO_PRIVATE_FILES;
+import static cgeo.geocaching.storage.Folder.DOCUMENTS_FOLDER_DEPRECATED;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,10 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Consumer;
 
-import java.lang.ref.WeakReference;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
 
 /**
  * Instances of this class represent an application-relevant folder.
@@ -25,27 +24,27 @@ import java.util.List;
 public enum PublicLocalFolder {
 
     /** Base directory  */
-    BASE (R.string.pref_publicfolder_basedir, FolderLocation.fromFolderLocation(DOCUMENTS_FOLDER_DEPRECATED, "cgeo")),
+    BASE (R.string.pref_publicfolder_basedir, Folder.fromFolder(DOCUMENTS_FOLDER_DEPRECATED, "cgeo")),
 
     /** Offline Maps folder where cgeo looks for offline map files (also the one where c:geo downloads its own offline maps) */
-    OFFLINE_MAPS(R.string.pref_publicfolder_offlinemaps, FolderLocation.fromPublicFolder(BASE, "maps")),
+    OFFLINE_MAPS(R.string.pref_publicfolder_offlinemaps, Folder.fromPublicFolder(BASE, "maps")),
     /** Offline Maps: optional folder for map themes (configured in settings) with user-supplied theme data */
-    OFFLINE_MAP_THEMES(R.string.pref_publicfolder_offlinemapthemes, FolderLocation.fromPublicFolder(BASE, "themes")),
+    OFFLINE_MAP_THEMES(R.string.pref_publicfolder_offlinemapthemes, Folder.fromPublicFolder(BASE, "themes")),
     /** Target folder for written logfiles */
-    LOGFILES(R.string.pref_publicfolder_logfiles, FolderLocation.fromPublicFolder(BASE, "logfiles")),
+    LOGFILES(R.string.pref_publicfolder_logfiles, Folder.fromPublicFolder(BASE, "logfiles")),
 
     /** A Folder to use solely for Unit Test */
-    TEST_FOLDER(R.string.pref_publicfolder_testdir, FolderLocation.fromFolderLocation(CGEO_PRIVATE_FILES,  "unittest"));
+    TEST_FOLDER(R.string.pref_publicfolder_testdir, Folder.fromFolder(CGEO_PRIVATE_FILES,  "unittest"));
 
     @AnyRes
     private final int prefKeyId;
     private final boolean needsWrite;
 
-    private final FolderLocation defaultLocation;
+    private final Folder defaultLocation;
 
-    private FolderLocation userDefinedLocation;
+    private Folder userDefinedLocation;
 
-    private final List<WeakReference<Consumer<PublicLocalFolder>>> changeListeners = new LinkedList<>();
+    private final WeakHashMap<Object, List<Consumer<PublicLocalFolder>>> changeListeners = new WeakHashMap<>();
 
 
     @AnyRes
@@ -53,44 +52,44 @@ public enum PublicLocalFolder {
         return prefKeyId;
     }
 
-    PublicLocalFolder(@AnyRes final int prefKeyId, @NonNull final FolderLocation defaultLocation) {
+    PublicLocalFolder(@AnyRes final int prefKeyId, @NonNull final Folder defaultLocation) {
         this.prefKeyId = prefKeyId;
         this.needsWrite = true;
 
         this.defaultLocation = defaultLocation;
 
         //read current user-defined location from settings.
-        this.userDefinedLocation = FolderLocation.fromDocumentUri(Settings.getPublicLocalFolderUri(this));
+        this.userDefinedLocation = Folder.fromDocumentUri(Settings.getPublicLocalFolderUri(this));
 
         //if this PublicLocalFolder's value is based on another publiclocalfolder, then we have to notify on  indirect change
         final PublicLocalFolder rootPublicFolder = defaultLocation.getRootPublicFolder();
         if (rootPublicFolder != null) {
-            rootPublicFolder.addChangeListener(pf -> notifyChanged());
+            rootPublicFolder.addChangeListener(this, pf -> notifyChanged());
         }
     }
 
-    public void addChangeListener(final Consumer<PublicLocalFolder> listener) {
-        changeListeners.add(new WeakReference<>(listener));
+    public void addChangeListener(final Object lifecycleRef, final Consumer<PublicLocalFolder> listener) {
+        List<Consumer<PublicLocalFolder>> listeners = changeListeners.get(lifecycleRef);
+        if (listeners == null) {
+            listeners = new ArrayList<>();
+            changeListeners.put(lifecycleRef, listeners);
+        }
+        listeners.add(listener);
     }
 
     private void notifyChanged() {
-        final Iterator<WeakReference<Consumer<PublicLocalFolder>>> it = changeListeners.iterator();
-        while (it.hasNext()) {
-            final WeakReference<Consumer<PublicLocalFolder>> listener = it.next();
-            if (listener.get() == null) {
-                //while we're at it, we also cleanup entries where reference got lost
-                it.remove();
-            } else {
-                listener.get().accept(this);
+        for (List<Consumer<PublicLocalFolder>> list : this.changeListeners.values()) {
+            for (Consumer<PublicLocalFolder> listener :list) {
+                listener.accept(this);
             }
         }
     }
 
-    public FolderLocation getLocation() {
+    public Folder getLocation() {
         return this.userDefinedLocation == null ? this.defaultLocation : this.userDefinedLocation;
     }
 
-    public FolderLocation getDefaultLocation() {
+    public Folder getDefaultLocation() {
         return this.defaultLocation;
     }
 
@@ -100,7 +99,7 @@ public enum PublicLocalFolder {
 
     /** Sets a new user-defined location (or "null" if default shall be used). Should be called ONLY by {@link PublicLocalStorage} */
     protected void setUserDefinedLocation(@Nullable final Uri userDefinedUri) {
-        this.userDefinedLocation = FolderLocation.fromDocumentUri(userDefinedUri);
+        this.userDefinedLocation = Folder.fromDocumentUri(userDefinedUri);
         Settings.setPublicLocalFolderUri(this, userDefinedUri);
         notifyChanged();
     }

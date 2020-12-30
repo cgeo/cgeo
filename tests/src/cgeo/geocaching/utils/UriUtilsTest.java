@@ -18,7 +18,7 @@ public class UriUtilsTest {
     @Test
     public void getUserDisplayableUri() {
         assertThat(UriUtils.toUserDisplayableString(Uri.parse(FILE_URI_EXAMPLE))).isEqualTo("/storage/emulated/0/cgeo/test.txt");
-        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE))).isEqualTo("Documents/cgeo/logfiles/logcat_2020-12-28_17-22-20-2.txt");
+        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE))).isEqualTo(".../Documents/cgeo/logfiles/logcat_2020-12-28_17-22-20-2.txt");
         assertThat(UriUtils.toUserDisplayableString(null)).isEqualTo("");
     }
 

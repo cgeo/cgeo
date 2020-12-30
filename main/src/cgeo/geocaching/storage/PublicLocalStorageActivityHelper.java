@@ -54,7 +54,7 @@ public class PublicLocalStorageActivityHelper {
 
         final PublicLocalFolder folder = PublicLocalFolder.BASE;
 
-        if (folder.isUserDefinedLocation() && PublicLocalStorage.get().checkFolderAvailability(folder)) {
+        if (folder.isUserDefinedLocation() && PublicLocalStorage.get().checkAvailability(folder)) {
             //everything is as we want it
             return;
         }
@@ -192,9 +192,10 @@ public class PublicLocalStorageActivityHelper {
         } else {
             final int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | (runningIntentData.folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
             activity.getContentResolver().takePersistableUriPermission(uri, flags);
+            PublicLocalStorage.get().refreshUriPermissionCache();
 
             //Test if access is really working!
-            if (!PublicLocalStorage.get().performTestReadWriteToLocation(FolderLocation.fromDocumentUri(uri), runningIntentData.folder.needsWrite())) {
+            if (!PublicLocalStorage.get().checkAvailability(Folder.fromDocumentUri(uri), runningIntentData.folder.needsWrite(), true)) {
                 report(true, R.string.publiclocalstorage_folder_selection_aborted, runningIntentData.folder.toUserDisplayableString());
             }
 

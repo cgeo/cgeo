@@ -48,6 +48,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.view.View;
@@ -63,10 +64,8 @@ import androidx.annotation.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -404,30 +403,36 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private void initPublicFolders(final PublicLocalFolder[] folders) {
 
-        final Map<Integer, PublicLocalFolder> prefMap = new HashMap<>();
-        for (PublicLocalFolder folder : folders) {
-            final Preference pref = getPreference(folder.getPrefKeyId());
-            if (pref != null) {
-                prefMap.put(folder.getPrefKeyId(), folder);
-            }
+        if (!Settings.isDebug()) {
+            hidePreference(getPreference(PublicLocalFolder.TEST_FOLDER.getPrefKeyId()), R.string.pref_group_localfilesystem);
         }
 
-        for (Integer prefKeyId : prefMap.keySet()) {
-            final Preference pref = getPreference(prefKeyId);
-            final PublicLocalFolder folder = prefMap.get(prefKeyId);
+        for (PublicLocalFolder folder : folders) {
+            final Preference pref = getPreference(folder.getPrefKeyId());
+            if (pref == null) {
+                continue;
+            }
+
             bindSummaryToValue(pref, folder.toUserDisplayableString());
-            pref.setOnPreferenceClickListener(
-                preference -> {
-                    publicLocalStorage.selectFolderUri(folder,
-                        plf -> {
-                        for (Integer pkId : prefMap.keySet()) {
-                            final Preference p = getPreference(pkId);
-                            final PublicLocalFolder f = prefMap.get(pkId);
-                            p.setSummary(f.toUserDisplayableString());
-                        }
-                    });
-                    return false;
-                });
+            pref.setOnPreferenceClickListener(p -> {
+                publicLocalStorage.selectFolderUri(folder, f -> p.setSummary(f.toUserDisplayableString()));
+                return false;
+            });
+            folder.addChangeListener(this, f -> pref.setSummary(f.toUserDisplayableString()));
+        }
+    }
+
+    private void hidePreference(final Preference prefToHide, @AnyRes final int prefGroupId) {
+        if (prefToHide == null) {
+            return;
+        }
+        prefToHide.setEnabled(false);
+        if (prefGroupId != 0) {
+            //Before API26/O there are tricks necessary to get the prefereneGroup
+            final Preference prefGroup = getPreference(prefGroupId);
+            if (prefGroup instanceof PreferenceGroup) {
+                ((PreferenceGroup) prefGroup).removePreference(prefToHide);
+            }
         }
     }
 

@@ -10,13 +10,11 @@ public class FileNameCreatorTest {
 
     @Test
     public void simpleNameCreator() {
-        final FileNameCreator simpleNameCreator = FileNameCreator.forName("myname", "mymimetype");
+        final FileNameCreator simpleNameCreator = FileNameCreator.forName("myname");
         for (int i = 0; i < 5; i++) {
             assertThat(simpleNameCreator.createName()).isEqualTo("myname");
-            assertThat(simpleNameCreator.getMimeType()).isEqualTo("mymimetype");
         }
 
-        assertThat(FileNameCreator.forName("myname2").getMimeType()).isNull();
         assertThat(FileNameCreator.forName("myname2").createName()).isEqualTo("myname2");
     }
 
@@ -31,15 +29,6 @@ public class FileNameCreatorTest {
         }
 
         assertThat(names.size()).isEqualTo(2000);
-
-    }
-
-    @Test
-    public void specialFileNameCreators()  {
-
-        assertThat(FileNameCreator.DEFAULT.getMimeType()).isNull();
-        assertThat(FileNameCreator.DEFAULT_BINARY.getMimeType()).isEqualTo(FileNameCreator.MIME_TYPE_BINARY);
-        assertThat(FileNameCreator.DEFAULT_TEXT.getMimeType()).isEqualTo(FileNameCreator.MIME_TYPE_TEXT);
 
     }
 

@@ -2,6 +2,7 @@ package cgeo.geocaching.storage;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.utils.FileNameCreator;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.net.Uri;
@@ -11,47 +12,79 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class PublicLocalStorageTest extends CGeoTestCase {
 
-    public void setUp() {
+    private Uri testUri = null;
+
+    public void setUp() throws Exception {
+        super.setUp();
+        //save TEST-FOLDER Uri if there is a user-defined one for later restoring
+        if (PublicLocalFolder.TEST_FOLDER.isUserDefinedLocation()) {
+            testUri = PublicLocalFolder.TEST_FOLDER.getLocation().getUri();
+        }
         cleanup();
     }
 
-    public void tearDown() {
+    public void tearDown() throws Exception {
         cleanup();
+        //restore test folder user-defined uri
+        PublicLocalFolder.TEST_FOLDER.setUserDefinedLocation(testUri);
+
+        //call super.teardown AFTER all own cleanup (because this seems to reset all members vars including testUri)
+        super.tearDown();
     }
 
     //a first small test to see how CI handles it
-    public void testSimpleCreateDelete() {
-        final FolderLocation testFolder = getTestFolder();
+    public void testFileSimpleCreateDelete() {
+        performSimpleCreateDelete(getFileTestFolder());
+    }
+
+    public void testDocumentSimpleCreateDelete() {
+        performSimpleCreateDelete(getDocumentTestFolder());
+    }
+
+    private void performSimpleCreateDelete(final Folder testFolder) {
 
         final Uri uri = PublicLocalStorage.get().create(testFolder, FileNameCreator.forName("cgeo-test.txt"));
-        final FolderLocation subfolder = FolderLocation.fromFolderLocation(testFolder, "eins");
-        final FolderLocation subsubfolder = FolderLocation.fromFolderLocation(subfolder, "zwei");
+        //final Folder subfolder = Folder.fromFolderLocation(testFolder, "eins");
+        final Folder subsubfolder = Folder.fromFolder(testFolder, "eins/zwei");
         final Uri uri2 = PublicLocalStorage.get().create(subsubfolder, FileNameCreator.forName("cgeo-test-sub.txt"));
 
         assertThat(PublicLocalStorage.get().delete(uri)).isTrue();
         assertThat(PublicLocalStorage.get().delete(uri2)).isTrue();
     }
 
-    public void testCopyAll() {
-        final FolderLocation sourceFolder = FolderLocation.fromFolderLocation(getTestFolder(), "source");
-        final FolderLocation targetFolder = FolderLocation.fromFolderLocation(getTestFolder(), "target");
+    public void testFileCopyAll() {
+        final Folder sourceFolder = Folder.fromFolder(getFileTestFolder(), "source");
+        final Folder targetFolder = Folder.fromFolder(getFileTestFolder(), "target");
+        performCopyAll(sourceFolder, targetFolder);
+    }
+
+    public void testDocumentCopyAll() {
+        final Folder sourceFolder = Folder.fromFolder(getDocumentTestFolder(), "source");
+        final Folder targetFolder = Folder.fromFolder(getDocumentTestFolder(), "target");
+        performCopyAll(sourceFolder, targetFolder);
+    }
+
+    private void performCopyAll(final Folder sourceFolder, final Folder targetFolder) {
 
         //create something to copy in source Folder
-        final FolderLocation fOne = FolderLocation.fromFolderLocation(sourceFolder, "eins");
-        final FolderLocation fTwo = FolderLocation.fromFolderLocation(sourceFolder, "zwei");
-        final FolderLocation fThree = FolderLocation.fromFolderLocation(sourceFolder, "drei");
-        final FolderLocation fTwoSub = FolderLocation.fromFolderLocation(fTwo, "sub");
+        final Folder fOne = Folder.fromFolder(sourceFolder, "eins");
+        final Folder fTwo = Folder.fromFolder(sourceFolder, "zwei");
+        final Folder fThree = Folder.fromFolder(sourceFolder, "drei");
+        final Folder fTwoSub = Folder.fromFolder(fTwo, "sub");
 
-        final FolderLocation[] sourceFolders = new FolderLocation[] {fOne, fTwo, fThree, fTwoSub};
+        final Folder[] sourceFolders = new Folder[] {fOne, fTwo, fThree, fTwoSub};
 
         for (int i = 0; i < 20 ; i++) {
-            PublicLocalStorage.get().create(sourceFolders[i % sourceFolders.length], FileNameCreator.forName("testfile" + i + ".txt"));
+            assertThat(PublicLocalStorage.get().create(sourceFolders[i % sourceFolders.length], FileNameCreator.forName("testfile" + i + ".txt"))).isNotNull();
         }
         assertThat(PublicLocalStorage.get().getFileCounts(sourceFolder)).isEqualTo(new ImmutablePair<>(20, 4));
         assertThat(PublicLocalStorage.get().getFileCounts(targetFolder)).isEqualTo(new ImmutablePair<>(0, 0));
@@ -73,9 +106,16 @@ public class PublicLocalStorageTest extends CGeoTestCase {
         assertThat(PublicLocalStorage.get().getFileCounts(targetFolder)).isEqualTo(new ImmutablePair<>(40, 4));
     }
 
-    public void testCreateUniqueFilenames() {
+    public void testFileCreateUniqueFilenames() {
+        performCreateUniqueFilenames(getFileTestFolder());
+    }
 
-        final FolderLocation testFolder = getTestFolder();
+    public void testDocumentCreateUniqueFilenames() {
+        performCreateUniqueFilenames(getDocumentTestFolder());
+    }
+
+    private void performCreateUniqueFilenames(final Folder testFolder) {
+
         assertFileDirCount(testFolder, 0, 0);
 
         //create two times with same name
@@ -95,13 +135,19 @@ public class PublicLocalStorageTest extends CGeoTestCase {
         assertThat(UriUtils.getFileName(uriWithSuffix2)).endsWith(".txt");
     }
 
+    public void testFileWriteReadFile() throws IOException {
+        performWriteReadFile(getFileTestFolder());
+    }
+
+    public void testDocumentWriteReadFile() throws IOException {
+        performWriteReadFile(getDocumentTestFolder());
+    }
 
 
-    public void testWriteReadFile() throws IOException {
+    private void performWriteReadFile(final Folder testFolder) throws IOException {
 
         final String testtext = "This is a test text";
 
-        final FolderLocation testFolder = getTestFolder();
         final Uri uri = PublicLocalStorage.get().create(testFolder, "test.txt");
         try (OutputStreamWriter writer = new OutputStreamWriter(PublicLocalStorage.get().openForWrite(uri))) {
             writer.write(testtext);
@@ -118,7 +164,7 @@ public class PublicLocalStorageTest extends CGeoTestCase {
         //initialize
         PublicLocalFolder.TEST_FOLDER.setUserDefinedLocation(null);
         //create Location based on test folder. Several subfolders.
-        final FolderLocation folder = FolderLocation.fromFolderLocation(FolderLocation.fromPublicFolder(PublicLocalFolder.TEST_FOLDER, "one"), "two");
+        final Folder folder = Folder.fromFolder(Folder.fromPublicFolder(PublicLocalFolder.TEST_FOLDER, "one"), "two");
         //ensure that cache is filled
         PublicLocalStorage.get().list(folder);
         assertThat(folder.getCachedDocFile()).isNotNull();
@@ -133,16 +179,58 @@ public class PublicLocalStorageTest extends CGeoTestCase {
         PublicLocalFolder.TEST_FOLDER.setUserDefinedLocation(null);
     }
 
-    private void assertFileDirCount(final FolderLocation folder, final int fileCount, final int dirCount) {
+    public void testFileMimeType() {
+        performMimeType(getFileTestFolder());
+    }
+
+    public void testDocumentMimeType() {
+        performMimeType(getDocumentTestFolder());
+    }
+
+    private void performMimeType(final Folder testLocation) {
+        performMimeTypeTests(testLocation,
+            new String[]{"txt", "jpg", "map"},
+            new String[]{"text/plain", "image/jpeg", "application/octet-stream"});
+    }
+
+    private void performMimeTypeTests(final Folder testLocation, final String[] suffix, final String[] expectedMimeType) {
+        final Map<String, String> mimeTypeMap = new HashMap<>();
+        for (int i = 0; i < suffix.length; i++) {
+            final String filename = "test." + suffix[i];
+            assertThat(PublicLocalStorage.get().create(testLocation, filename)).isNotNull();
+            mimeTypeMap.put(filename, expectedMimeType[i]);
+        }
+        final List<PublicLocalStorage.FileInformation> files = PublicLocalStorage.get().list(testLocation);
+        assertThat(files.size()).isEqualTo(suffix.length);
+        for (PublicLocalStorage.FileInformation fi : files) {
+            assertThat(fi.mimeType).as("For file " + fi.name).isEqualTo(mimeTypeMap.get(fi.name));
+        }
+    }
+
+    private void assertFileDirCount(final Folder folder, final int fileCount, final int dirCount) {
         assertThat(PublicLocalStorage.get().getFileCounts(folder)).as("File counts of Folder " + folder).isEqualTo(new ImmutablePair<>(fileCount, dirCount));
     }
 
-    private static FolderLocation getTestFolder() {
-        return FolderLocation.fromFolderLocation(FolderLocation.CGEO_PRIVATE_FILES, "unittest");
+    private boolean hasValidDocumentTestFolder() {
+        return PublicLocalFolder.TEST_FOLDER.isUserDefinedLocation() && PublicLocalStorage.get().checkAvailability(PublicLocalFolder.TEST_FOLDER.getLocation(), PublicLocalFolder.TEST_FOLDER.needsWrite(), true);
     }
 
-    private static void cleanup() {
-        final FolderLocation folder = getTestFolder();
-        PublicLocalStorage.get().deleteAll(folder);
+    private Folder getFileTestFolder() {
+        return Folder.fromFolder(Folder.CGEO_PRIVATE_FILES, "unittest");
+    }
+
+    private Folder getDocumentTestFolder() {
+        if (!hasValidDocumentTestFolder()) {
+            Log.iForce("Trying to test for DocumentUri fails; unfortunately there is no DocumentUri configured for TEST-FOLDER. Test with file instead");
+            return getFileTestFolder();
+        }
+        return PublicLocalFolder.TEST_FOLDER.getLocation();
+    }
+
+    private void cleanup() {
+        PublicLocalStorage.get().deleteAll(getFileTestFolder());
+        if (hasValidDocumentTestFolder()) {
+            PublicLocalStorage.get().deleteAll(PublicLocalFolder.TEST_FOLDER.getLocation());
+        }
     }
 }

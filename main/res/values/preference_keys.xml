@@ -263,6 +263,7 @@
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
 
     <!-- ids for public folder prefs -->
+    <string translatable="false" name="pref_group_localfilesystem">group_localfilesystem</string>
     <string translatable="false" name="pref_publicfolder_basedir">publicfolder_basedir</string>
     <string translatable="false" name="pref_publicfolder_logfiles">publicfolder_logfiles</string>
     <string translatable="false" name="pref_publicfolder_offlinemaps">publicfolder_offlinemaps</string>

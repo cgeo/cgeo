@@ -1062,10 +1062,13 @@
         android:summary="@string/settings_summary_system" >
 
         <PreferenceCategory android:title="@string/init_local_file_syytem"
-            android:layout="@layout/preference_category" >
+            android:layout="@layout/preference_category" android:key="@string/pref_group_localfilesystem">
             <Preference
                 android:key="@string/pref_publicfolder_basedir"
                 android:title="@string/init_base_directory_description" />
+            <Preference
+                android:key="@string/pref_publicfolder_testdir"
+                android:title="For unit tests only. This preference is only visible in Debug mode and can be ignored" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/init_location"

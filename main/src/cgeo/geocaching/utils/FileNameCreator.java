@@ -10,47 +10,33 @@ import java.util.concurrent.atomic.AtomicInteger;
  * */
 public class FileNameCreator {
 
-    public static final String MIME_TYPE_TEXT = "text/plain";
-    public static final String MIME_TYPE_BINARY = "application/octet-stream"; //or maybe application/x-binary?
+    public static final FileNameCreator DEFAULT = new FileNameCreator("file", "dat");
+    public static final FileNameCreator DEFAULT_TEXT = new FileNameCreator("file", "txt");
+    public static final FileNameCreator DEFAULT_BINARY = new FileNameCreator("file", "bin");
 
-    public static final FileNameCreator DEFAULT = new FileNameCreator(null, "file", "dat");
-    public static final FileNameCreator DEFAULT_TEXT = new FileNameCreator(MIME_TYPE_TEXT, "file", "txt");
-    public static final FileNameCreator DEFAULT_BINARY = new FileNameCreator(MIME_TYPE_BINARY, "file", "bin");
-
-    public static final FileNameCreator OFFLINE_MAPS = new FileNameCreator(null, "mapfile", "map");
-    public static final FileNameCreator LOGFILE = new FileNameCreator(MIME_TYPE_TEXT, "logcat", "txt");
-    public static final FileNameCreator MEMORY_DUMP = new FileNameCreator(null, "cgeo_dump", "hprof");
+    public static final FileNameCreator OFFLINE_MAPS = new FileNameCreator("mapfile", "map");
+    public static final FileNameCreator LOGFILE = new FileNameCreator("logcat", "txt");
+    public static final FileNameCreator MEMORY_DUMP = new FileNameCreator("cgeo_dump", "hprof");
 
     private final AtomicInteger fileNameCounter = new AtomicInteger(1);
 
     private final String fixedName;
-    private final String mimeType;
     private final String praefix;
     private final String suffix;
 
-    private FileNameCreator(final String mimeType, final String praefix, final String suffix) {
-        this(null, mimeType, praefix, suffix);
+    private FileNameCreator(final String praefix, final String suffix) {
+        this(null, praefix, suffix);
     }
 
-    private FileNameCreator(final String fixedName, final String mimeType, final String praefix, final String suffix) {
+    private FileNameCreator(final String fixedName, final String praefix, final String suffix) {
         this.fixedName = fixedName;
-        this.mimeType = mimeType;
         this.praefix = praefix;
         this.suffix = suffix;
     }
 
     /** Creates instance of FileNameCreator which returns a constant name always (non-unique!) */
     public static FileNameCreator forName(final String name) {
-        return new FileNameCreator(name, null, null, null);
-    }
-
-    /** Creates instance of FileNameCreator which returns a constant name always (non-unique!) */
-    public static FileNameCreator forName(final String name, final String mimeType) {
-        return new FileNameCreator(name, mimeType, null, null);
-    }
-
-    public String getMimeType() {
-        return mimeType;
+        return new FileNameCreator(name, null, null);
     }
 
     public String createName() {
