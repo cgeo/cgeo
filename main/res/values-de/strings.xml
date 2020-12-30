@@ -682,6 +682,10 @@
     <string name="init_circlecolor_summary">Farbe und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
     <string name="init_circlefillcolor">Füllfarbe der Kreislinie</string>
     <string name="init_circlefillcolor_summary">Farbe und Deckkraft der Kreisfüllung einstellen</string>
+    <string name="init_accuracycirclecolor">Genauigkeitskreis: Farbe der Linie</string>
+    <string name="init_accuracycirclecolor_summary">Farbe und Deckkraft der Kreislinie einstellen. Ein Genauigkeitskreis visualisiert auf der Karte, wie genau die aktuelle Position ermittelt werden konnte.</string>
+    <string name="init_accuracycirclefillcolor">Genauigkeitskreis: Füllfarbe</string>
+    <string name="init_accuracycirclefillcolor_summary">Farbe und Deckkraft der Kreisfüllung einstellen</string>
     <string name="init_share_after_export">Weiterleiten nach dem Export</string>
     <string name="init_include_found_status">Fundstatus einbeziehen</string>
     <string name="init_trackautovisit">TBs besuchen</string>
@@ -1817,15 +1821,27 @@
     <string name="export_individualroute_title">Individuelle Route exportieren</string>
     <string name="export_individualroute_success">Individuelle Route nach \"%s\" exportiert</string>
     <!-- install wizard -->
+    <string name="wizard">Konfigurations-Assistent</string>
     <string name="previous">Zurück</string>
     <string name="skip">Überspringen</string>
     <string name="next">Weiter</string>
     <string name="finish">Fertig</string>
     <string name="wizard_welcome_title">Willkommen bei c:geo</string>
+    <string name="wizard_intro2">Willkommen zurück zur Konfiguration. Es sind nur ein paar Schritte.</string>
+    <string name="wizard_outro_ok">Danke fürs Konfigurieren von c:geo.\nAuf geht\'s!</string>
     <string name="wizard_permissions_title">App-Berechtigungen</string>
+    <string name="wizard_platforms_title">Plattformen konfigurieren</string>
+    <string name="wizard_platforms_intro">Um Caches herunterzuladen benötigst Du einen Account für mindestens eine von c:geo unterstützte Geocaching-Plattform</string>
+    <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; weitere</string>
     <string name="wizard_welcome_advanced">Erweiterte Konfiguration</string>
     <string name="wizard_advanced_offlinemaps_label">Offline-Karten</string>
+    <string name="wizard_advanced_offlinemaps_info">c:geo kann Karten für die Offline-Verwendung herunterladen</string>
     <string name="wizard_advanced_brouter_label">Routing-App</string>
     <string name="wizard_advanced_restore_label">Wiederherstellen</string>
     <string name="wizard_advanced_restore_info">Einstellungen / Daten einer vorherigen Installation wiederherstellen</string>
+    <string name="status_not_ok">FEHLER</string>
+    <string name="wizard_status_title">Konfigurationsstatus</string>
+    <string name="wizard_status_location_permission">Standort-Berechtigung</string>
+    <string name="wizard_status_platform">Geocaching-Plattformen</string>
 </resources>
