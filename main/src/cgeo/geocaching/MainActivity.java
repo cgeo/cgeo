@@ -183,7 +183,7 @@ public class MainActivity extends AbstractActionBarActivity {
                         connectorInfo.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
 
                         if (offlineFoundsAvailable) {
-                            Dialogs.basicOneTimeMessage((Activity) getContext(), OneTimeDialogs.DialogType.EXPLAIN_OFFLINE_FOUND_COUNTER, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
+                            Dialogs.basicOneTimeMessage((Activity) getContext(), OneTimeDialogs.DialogType.EXPLAIN_OFFLINE_FOUND_COUNTER);
                         }
                     }
                 });
@@ -792,7 +792,10 @@ public class MainActivity extends AbstractActionBarActivity {
             final long checksum = TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
             Settings.setLastChangelogChecksum(checksum);
 
-            if (lastChecksum != 0 && lastChecksum != checksum) {
+            if (lastChecksum == 0) {
+                // initialize oneTimeMessages after fresh install
+                OneTimeDialogs.initializeOnFreshInstall();
+            } else if (lastChecksum != checksum) {
                 // show change log page after update
                 AboutActivity.showChangeLog(this);
             }
