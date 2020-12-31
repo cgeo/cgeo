@@ -189,7 +189,7 @@ public class DataStoreTest extends CGeoTestCase {
         final List<LogEntry> logs = new ArrayList<>();
         logs.add(new LogEntry.Builder().setDate(new Date().getTime() - MILLISECONDS_PER_DAY * 3).setLog("testlog").setLogType(LogType.NOTE).setServiceLogId("pid").build());
         logs.add(new LogEntry.Builder().setDate(new Date().getTime() - MILLISECONDS_PER_DAY * 2).setLog("testlog2").setLogType(LogType.NOTE).build());
-        DataStore.saveLogs(ARTIFICIAL_GEOCODE, logs);
+        DataStore.saveLogs(ARTIFICIAL_GEOCODE, logs, true);
 
         final List<LogEntry> logsLoadeded = DataStore.loadLogs(ARTIFICIAL_GEOCODE);
 

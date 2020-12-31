@@ -797,7 +797,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                         final LogEntry logProblem = logBuilder.setLog(getString(reportProblem.get().textId)).setLogImages(Collections.emptyList()).setLogType(reportProblem.get().logType).build();
                         newLogs.add(0, logProblem);
                     }
-                    DataStore.saveLogs(cache.getGeocode(), newLogs);
+                    DataStore.saveLogs(cache.getGeocode(), newLogs, true);
 
                     // update offline log in DB
                     cache.clearOfflineLog();
