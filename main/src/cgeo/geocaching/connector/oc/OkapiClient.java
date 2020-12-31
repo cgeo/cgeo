@@ -544,7 +544,7 @@ final class OkapiClient {
             cache.setDetailedUpdatedNow();
             // save full detailed caches
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode()));
+            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode()), true);
         } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCache", e);
         }

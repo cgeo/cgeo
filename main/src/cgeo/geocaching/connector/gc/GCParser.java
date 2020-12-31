@@ -420,7 +420,7 @@ public final class GCParser {
         final SearchResult result = new SearchResult(parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
             result.addAndPutInCache(Collections.singletonList(parsed.right));
-            DataStore.saveLogs(parsed.right.getGeocode(), getLogs(parseUserToken(page), Logs.ALL).blockingIterable());
+            DataStore.saveLogs(parsed.right.getGeocode(), getLogs(parseUserToken(page), Logs.ALL).blockingIterable(), true);
         }
         return result;
     }
@@ -1815,7 +1815,7 @@ public final class GCParser {
                     mergeFriendsLogs(logEntries, specialLogEntries);
                     return logEntries;
                 }).cache();
-        mergedLogs.subscribe(logEntries -> DataStore.saveLogs(cache.getGeocode(), logEntries));
+        mergedLogs.subscribe(logEntries -> DataStore.saveLogs(cache.getGeocode(), logEntries, true));
         if (cache.isFound() || cache.isDNF()) {
             ownLogs.subscribe(logEntry -> {
                 if (logEntry.getType().isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.getType() == LogType.DIDNT_FIND_IT)) {

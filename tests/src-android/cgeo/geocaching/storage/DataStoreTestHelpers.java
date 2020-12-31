@@ -51,7 +51,7 @@ public class DataStoreTestHelpers extends CGeoTestCase  {
 
         for (int i = 0; i < ARTIFICAL_GEOCACHES_COUNT; i++) {
             final String geocode = dummyCaches.get(i).getGeocode();
-            DataStore.saveLogs(geocode, createDummyLogsForCache(geocode, 30));
+            DataStore.saveLogs(geocode, createDummyLogsForCache(geocode, 30), true);
         }
     }
 

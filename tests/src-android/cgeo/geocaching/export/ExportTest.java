@@ -44,7 +44,7 @@ public class ExportTest extends CGeoTestCase {
                 .setLog("Smile: \ud83d\ude0a")
                 .build();
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-        DataStore.saveLogs(cache.getGeocode(), Collections.singletonList(log));
+        DataStore.saveLogs(cache.getGeocode(), Collections.singletonList(log), true);
         assertCanExport(cache);
     }
 

@@ -187,7 +187,7 @@ public class SuParser {
         // save full detailed caches
         DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
         if (data.has(CACHE_LATEST_LOGS)) {
-            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) data.path(CACHE_LATEST_LOGS)));
+            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) data.path(CACHE_LATEST_LOGS)), true);
         }
         return cache;
     }
