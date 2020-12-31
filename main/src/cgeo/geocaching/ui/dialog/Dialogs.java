@@ -566,7 +566,7 @@ public final class Dialogs {
      * @param runAfterwards
      *            runnable (may be <tt>null</tt>) will be executed when ok button is clicked
      */
-    public static void internalOneTimeMessage(final Activity context, @Nullable final String title, final String message, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
+    private static void internalOneTimeMessage(@NonNull final Activity context, @Nullable final String title, final String message, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
         final View content = context.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
         final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
         final TextView textView = (TextView) content.findViewById(R.id.message);
@@ -613,11 +613,7 @@ public final class Dialogs {
         if (cancellable) {
             checkbox.setOnClickListener(result -> {
                 final Button button = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
-                if (checkbox.isChecked()) {
-                    button.setEnabled(false);
-                } else {
-                    button.setEnabled(true);
-                }
+                button.setEnabled(!checkbox.isChecked());
             });
         }
     }
@@ -629,15 +625,15 @@ public final class Dialogs {
      * @param context
      *            activity owning the dialog
      * @param dialogType
-     *            for setting title and message of the dialog and for storing the dialog status in DB
-     * @param fallbackStatus
-     *            if no status is stored in the database use DIALOG_SHOW or DIALOG_HIDE as fallback
+     *            sets title and message of the dialog
+     *            used for storing the dialog status in the DB
      */
-    public static void basicOneTimeMessage(final Activity context, final OneTimeDialogs.DialogType dialogType, final OneTimeDialogs.DialogStatus fallbackStatus) {
+    public static void basicOneTimeMessage(@NonNull final Activity context, final OneTimeDialogs.DialogType dialogType) {
 
-        if (OneTimeDialogs.getStatus(dialogType, fallbackStatus) == OneTimeDialogs.DialogStatus.DIALOG_SHOW) {
+        if (OneTimeDialogs.showDialog(dialogType)) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
-            internalOneTimeMessage(context, getString(dialogType.messageTitle), getString(dialogType.messageText), dialogType, Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null);
+            internalOneTimeMessage(context, getString(dialogType.messageTitle), getString(dialogType.messageText), dialogType,
+                Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null);
         }
     }
 
@@ -646,14 +642,12 @@ public final class Dialogs {
      * If "don't shown again" is selected for this dialog, runAfterwards will be executed directly.
      *
      * @param dialogType
-     *            for setting title and message of the dialog and for storing the dialog status in DB
-     * @param fallbackStatus
-     *            if no status is stored in the database use DIALOG_SHOW or DIALOG_HIDE as fallback
+     *            used for storing the dialog status in the DB, title and message defined in the dialogType are ignored
      */
-    public static void advancedOneTimeMessage(final Activity context, final OneTimeDialogs.DialogType dialogType, final OneTimeDialogs.DialogStatus fallbackStatus, final String title, final String message, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, final Runnable runAfterwards) {
-        if (OneTimeDialogs.getStatus(dialogType, fallbackStatus) == OneTimeDialogs.DialogStatus.DIALOG_SHOW) {
+    public static void advancedOneTimeMessage(final Activity context, final OneTimeDialogs.DialogType dialogType, final String title, final String message, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, @Nullable final Runnable runAfterwards) {
+        if (OneTimeDialogs.showDialog(dialogType)) {
             internalOneTimeMessage(context, title, message, dialogType, iconObservable, cancellable, runAfterwards);
-        } else {
+        } else if (runAfterwards != null) {
             runAfterwards.run();
         }
     }
@@ -665,7 +659,7 @@ public final class Dialogs {
      * @param msg
      *            dialog message
      * @param neutralTextButton
- *            Text for the neutral button
+     *            Text for the neutral button
      * @param neutralListener
      *            listener for neutral button
      */

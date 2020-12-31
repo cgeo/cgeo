@@ -609,7 +609,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         AndroidBeam.disable(activity);
 
-        Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
+        Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
     }
 
     public void toggleRouteItem(final IWaypoint item) {
