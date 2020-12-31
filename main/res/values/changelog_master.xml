@@ -17,6 +17,7 @@
 <h4>Other:</h4>
 <ul>
 <li>Change: Unified export dialogs. \"Share\" option can be selected after export now.</li>
+<li>Change: Existing cache logs are kept/merged on importing GPX file / pocket query</li>
 <li>New: Installation wizard (starting automatically on a fresh install)</li>
 </ul>
 
