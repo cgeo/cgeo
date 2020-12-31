@@ -16,22 +16,22 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class OkapiClientTest extends CGeoTestCase {
 
     public static void testGetOCCache() {
-        final String geoCode = "OU0331";
+        final String geoCode = "OC4711";
         Geocache cache = OkapiClient.getCache(geoCode);
         assertThat(cache).as("Cache from OKAPI").isNotNull();
         assert cache != null; // eclipse null analysis
         assertThat(cache.getGeocode()).isEqualTo(geoCode);
-        assertThat(cache.getName()).isEqualTo("Oshkosh Municipal Tank");
+        assertThat(cache.getName()).isEqualTo("Trimm dich fit!");
         assertThat(cache.isDetailed()).isTrue();
         // cache should be stored to DB (to listID 0) when loaded above
         cache = DataStore.loadCache(geoCode, LoadFlags.LOAD_ALL_DB_ONLY);
         assert cache != null;
         assertThat(cache).isNotNull();
         assertThat(cache.getGeocode()).isEqualTo(geoCode);
-        assertThat(cache.getName()).isEqualTo("Oshkosh Municipal Tank");
+        assertThat(cache.getName()).isEqualTo("Trimm dich fit!");
         assertThat(cache.isDetailed()).isTrue();
-        assertThat(cache.getOwnerDisplayName()).isEqualTo("glorkar");
-        assertThat(cache.getOwnerUserId()).isEqualTo("19");
+        assertThat(cache.getOwnerDisplayName()).isEqualTo("Wuhler");
+        assertThat(cache.getOwnerUserId()).isEqualTo("118804");
     }
 
     public static void testOCSearchMustWorkWithoutOAuthAccessTokens() {
