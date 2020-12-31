@@ -1,30 +1,30 @@
-c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away.
+c:geo 是套開源 功能齊全 完整度高的 非官方 geocaching.com 客戶端, 並提供了其他 geocaching平台的基本支援(如 opencaching). 它並不需要瀏覽器或匯出使用 - 只需要安裝好就可以立即使用.
 
-Main features:
-- View caches on a Live Map
-- Use Google Maps or OpenStreetMaps
-- Search for caches by various criteria
-- Log your finds online or offline
-- Store cache information on your device
-- Create and manage waypoints
-- Navigate using compass, map, or other apps
-- Import/Export GPX files
-- Full support for trackables
-- Offline caching functions including offline maps
+主要功能：
+- 在即時地圖上瀏覽 caches.
+- 可使用 Google 地圖 或 OpenStreet地圖
+- 使用多種標的搜尋 caches.
+- 可線上或離線記錄你的發現.
+- 將 cache 資訊儲存在裝置上.
+- 建立及管理航點.
+- 藉由羅盤, 地圖, 或其他apps進行導航
+- 匯入/匯出 GPX 檔
+- 完全支援 trackables
+- 離線 caching 功能 包括離線地圖
 
-c:geo is a simple to use but powerful geocaching client with a lot of additional features. All you need to get started is an existing account on geocaching.com or another geocaching platform (like Opencaching).
-Find caches using the live map or by using one of the many search functions.
+c:geo 是套簡易但強大且擁有許多附加功能的 geocaching 用戶端軟體. 您只需要一個 geocaching.com或其他 geocaching 平台的帳號(如 Opencaching)即可開始使用.
+並利用即時地圖或其他許多的搜尋功能來尋找 caches.
 
-Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
+導航至 caches或其航點可利用內建的羅盤,地圖, 或是將座標導入其他 apps (如, Radar, Google Navigation, StreetView, Locus, Navigon, Sygic 等 apps).
 
-Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want.
-You can manage your stored caches in different lists and can sort and filter them according to your needs.
-Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. when roaming).
-Logs can be posted online or stored offline for later submission or exported via field notes.
+藉由從 geocaching.com 導入或 GPX檔案匯入裝置讓您隨手可得 caches 資訊.
+您可將 caches 存放在不同的清單上並且可以依您的需要過濾, 排序.
+儲存起來的 caches可與離線地圖或固定地圖一起搭配使用在沒有網路連線的情況下尋找 caches (例如 在漫遊時).
+日誌紀錄可以上傳或離線儲存待稍後上傳或輸出筆記.
 
-Search and discover trackables, manage your trackable inventory and drop a Trackable while posting a cache log.
+搜尋 trackables, 在張貼cache log時管理您的 trackable內容物及放置 trackable.
 
-If you have problems installing or using c:geo please first have a look at our FAQ (https://faq.cgeo.org) or consult the user guide (https://manual.cgeo.org).
-If there are still problems, contact support via email.
+如果您在安裝或使用 c:geo上有問題時請先到我們的FAQ網頁(https://faq.cgeo.org)或參考我們的使用者手冊(https://manual.cgeo.org).
+如果以上方式無法解決您的問題, 請以 email聯絡我們.
 
-If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org for an explanation.
+如果您想了解為何 c:geo需要 permissions, 請至 https://www.cgeo.org 參考我們的解釋.
