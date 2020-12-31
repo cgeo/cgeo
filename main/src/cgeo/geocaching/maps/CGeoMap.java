@@ -22,6 +22,7 @@ import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
+import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
 import cgeo.geocaching.maps.google.v2.GooglePositionAndHistory;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -539,7 +540,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
-        final MapProvider mapProvider = Settings.getMapProvider();
+        // hard coded for now to mitigate #9619 - GoogleMaps is the only map type left supported by CGeoMap
+        // final MapProvider mapProvider = Settings.getMapProvider();
+        final MapProvider mapProvider = GoogleMapProvider.getInstance();
         mapItemFactory = mapProvider.getMapItemFactory();
 
         // Get parameters from the intent
