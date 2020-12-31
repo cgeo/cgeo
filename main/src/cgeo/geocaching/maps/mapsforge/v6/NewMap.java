@@ -321,7 +321,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
-        Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
+        Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
     }
 
     private void postZoomToViewport(final Viewport viewport) {

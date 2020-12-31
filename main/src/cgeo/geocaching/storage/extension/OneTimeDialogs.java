@@ -15,23 +15,43 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         this.long2 = copyFrom.getLong2();
     }
 
+    /**
+     * list of all one time dialogs - new dialogs must be defined here
+     */
     public enum DialogType {
         // names must not be changed, as there are database entries depending on it
-        // title and text must be set when using the basicOneTimeMessage() function
+        // title and text must be set when using the Dialogs.basicOneTimeMessage() function
 
-        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter),
-        DATABASE_CONFIRM_OVERWRITE(null, null),
-        MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info);
+        // when an one time dialog gets removed/replaced, keep the old one in the enum anyway, so that we can be sure that the same name isn't used again in the future.
+
+        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter, DefaultBehavior.SHOW_ALWAYS),
+        DATABASE_CONFIRM_OVERWRITE(null, null, DefaultBehavior.SHOW_ALWAYS),
+        MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE);
 
         public Integer messageTitle;
         public Integer messageText;
+        public DefaultBehavior defaultBehavior;
 
-        DialogType(final Integer messageTitle, final Integer messageText) {
+        DialogType(final Integer messageTitle, final Integer messageText, final DefaultBehavior defaultBehavior) {
             this.messageTitle = messageTitle;
             this.messageText = messageText;
+            this.defaultBehavior = defaultBehavior;
         }
     }
 
+    /**
+     * defines, in which situations the one time dialog should be shown by default, until "don't show again" is checked
+     */
+    public enum DefaultBehavior {
+        SHOW_ALWAYS,
+        SHOW_ONLY_AT_FRESH_INSTALL,
+        SHOW_ONLY_AFTER_UPGRADE,
+        SHOW_NEVER
+    }
+
+    /**
+     * possible show states which are stored in the database
+     */
     public enum DialogStatus {
         // values for id must not be changed, as there are database entries depending on it
         NONE(0),
@@ -54,26 +74,50 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         return null;
     }
 
-    public static DialogStatus getStatus(final DialogType dialogType, final DialogStatus defaultStatus) {
-        final DataStore.DBExtension temp = load(type, dialogType.name());
-        if (null == temp) {
-            return defaultStatus;
+    /**
+     * returns whether the one time dialog should be shown
+     */
+    public static boolean showDialog(final DialogType dialogType) {
+        DialogStatus showStatus;
+
+        if (dialogType.defaultBehavior == DefaultBehavior.SHOW_ALWAYS || dialogType.defaultBehavior == DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE) {
+            // on a fresh install, the default show behavior will be overwritten (see initializeOnFreshInstall())
+            showStatus = DialogStatus.DIALOG_SHOW;
+        } else {
+            showStatus = DialogStatus.DIALOG_HIDE;
         }
-        final OneTimeDialogs dialog = new OneTimeDialogs(temp);
-        final DialogStatus status = getStatusById((int) dialog.getLong1());
-        return status == DialogStatus.NONE ? defaultStatus : status;
+
+        final DataStore.DBExtension temp = load(type, dialogType.name());
+        if (null != temp) {
+            final OneTimeDialogs dialog = new OneTimeDialogs(temp);
+            final DialogStatus status = getStatusById((int) dialog.getLong1());
+            if (status != DialogStatus.NONE) {
+                showStatus = status;
+            }
+        }
+
+        return showStatus == DialogStatus.DIALOG_SHOW;
     }
 
+    /**
+     * sets the show state for a specific dialog
+     */
     public static void setStatus(final DialogType dialogType, final DialogStatus status) {
-        removeAll(type, dialogType.name());
-        add(type, dialogType.name(), status.id, 0, "", "");
+        setStatus(dialogType, status, DialogStatus.NONE);
     }
 
+    /**
+     * sets the current show state and the next show state, which will be applied at the next app restart
+     */
     public static void setStatus(final DialogType dialogType, final DialogStatus currentStatus, final DialogStatus nextStatus) {
         removeAll(type, dialogType.name());
         add(type, dialogType.name(), currentStatus.id, nextStatus.id, "", "");
     }
 
+    /**
+     * switches to the next show state
+     * this is called ones after app start, as basicOneTimeMessages are snoozing if "don't show again" was not checked
+     */
     public static void nextStatus() {
 
         for (DialogType key : DialogType.values()) {
@@ -83,9 +127,18 @@ public class OneTimeDialogs extends DataStore.DBExtension {
                 final OneTimeDialogs dialog = new OneTimeDialogs(temp);
 
                 if (getStatusById((int) dialog.getLong2()) != DialogStatus.NONE) {
-                    removeAll(type, key.name());
-                    add(type, key.name(), dialog.getLong2(), 0, "", "");
+                    setStatus(key, getStatusById((int) dialog.getLong2()));
                 }
+            }
+        }
+    }
+
+    public static void initializeOnFreshInstall() {
+        for (DialogType key : DialogType.values()) {
+            if (key.defaultBehavior == DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE) {
+                setStatus(key, DialogStatus.DIALOG_HIDE);
+            } else if (key.defaultBehavior == DefaultBehavior.SHOW_ONLY_AT_FRESH_INSTALL) {
+                setStatus(key, DialogStatus.DIALOG_SHOW);
             }
         }
     }
