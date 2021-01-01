@@ -246,8 +246,6 @@
     <string name="warn_log_text_fill">Please input some text for your log.</string>
     <string name="warn_load_images">c:geo failed to load images.</string>
     <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
-    <string name="warn_nonexistant_mapfile">The selected map file does not exist.\nOffline maps are not available.</string>
-    <string name="warn_rendertheme_missing">Map theme not found.</string>
     <string name="warn_pocket_query_select">No Pocket query selected.</string>
     <string name="warn_no_pocket_query_found">No Pocket query found online.</string>
     <string name="warn_invalid_character">Character must be a LETTER or a DIGIT</string>
@@ -438,7 +436,6 @@
     <string name="about_license">License</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Help</string>
-    <string name="open_services_page">Configure your geocaching platform(s)</string>
     <string name="about_system_include">Please include the following system information when sending a bug report or asking for more information about c:geo:</string>
     <string name="about_system_info_send_button">Send by mail…</string>
     <string name="about_system_info">c:geo system information</string>
@@ -723,7 +720,6 @@
     <string name="init_accuracycirclecolor_summary">Select color and opaqueness for accuracy circle line. Accuracy circle is used as a visual representation for location signal accuracy.</string>
     <string name="init_accuracycirclefillcolor">Accuracy circle fill color</string>
     <string name="init_accuracycirclefillcolor_summary">Select color and opaqueness for the accuracy circles to be filled with</string>
-    <string name="init_share_after_export">Open share menu after GPX export</string>
     <string name="init_include_found_status">Include \"Found\" status</string>
     <string name="init_trackautovisit">Visit TBs</string>
     <string name="init_summary_trackautovisit">Set trackables to \"Visited\" by default</string>
@@ -824,7 +820,6 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="map_source_attribution_dialog_title">Map Attributions</string>
-    <string name="map_source_attribution_legacy_text">Tap for map attribution</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info on send2cgeo</string>
     <string name="init_sendToCgeo_name">Your device name</string>
@@ -1256,7 +1251,6 @@
     <string name="map_map">Map</string>
     <string name="map_live">Live map</string>
     <string name="map_view_map">Map view</string>
-    <string name="map_modes">Map settings</string>
     <string name="map_rotation">Map rotation</string>
     <string name="map_dot_mode">Use compact icons</string>
     <string name="map_show_circles">Show circles</string>
