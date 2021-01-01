@@ -32,6 +32,6 @@ public class FoundNumCounter extends DataStore.DBExtension {
         }
 
         removeAll(type, serviceName);
-        add(type, serviceName, foundNum, 0, "", "");
+        add(type, serviceName, foundNum, 0, 0, 0, "", "", "", "");
     }
 }

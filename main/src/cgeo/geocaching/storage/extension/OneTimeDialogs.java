@@ -108,7 +108,7 @@ public class OneTimeDialogs extends DataStore.DBExtension {
      */
     public static void setStatus(final DialogType dialogType, final DialogStatus currentStatus, final DialogStatus nextStatus) {
         removeAll(type, dialogType.name());
-        add(type, dialogType.name(), currentStatus.id, nextStatus.id, "", "");
+        add(type, dialogType.name(), currentStatus.id, nextStatus.id, 0, 0, "", "", "", "");
     }
 
     /**

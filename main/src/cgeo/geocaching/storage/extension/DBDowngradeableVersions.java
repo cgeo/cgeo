@@ -44,6 +44,6 @@ public class DBDowngradeableVersions extends DataStore.DBExtension {
     public static void save(final SQLiteDatabase db, final Set<Integer> downgradeableVersions) {
         final String dbVersionsAsString = CollectionStream.of(downgradeableVersions).toJoinedString(",");
         removeAll(db, type, KEY);
-        add(db, type, KEY, 0, 0, dbVersionsAsString, "");
+        add(db, type, KEY, 0, 0, 0, 0, dbVersionsAsString, "", "", "");
     }
 }
