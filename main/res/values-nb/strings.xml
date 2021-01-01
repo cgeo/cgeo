@@ -233,8 +233,6 @@
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
     <string name="warn_invalid_mapfile">Den valgte kartfilen er ikke en gyldig mapsforge-kartfil eller har en versjon som ikke støttes.\n(c:geo støtter nå v3 til v5, men for å bruke v3 må \"Old Mapsforge V3\"-innstillingen være valgt.)\n\nOfflinekartet er ikke tilgjengelig.</string>
-    <string name="warn_nonexistant_mapfile">Den valgte kartfilen finnes ikke. \nLokalt lagrede kart er ikke tilgjengelige.</string>
-    <string name="warn_rendertheme_missing">Karttema ikke funnet.</string>
     <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
     <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
@@ -410,7 +408,6 @@
     <string name="about_license">Lisens</string>
     <string name="about_apache_license"><a href="">Apache-lisens, versjon 2.0</a></string>
     <string name="about_help">Hjelp</string>
-    <string name="open_services_page">Konfigurere geocaching-plattform(er)</string>
     <string name="about_system_include">Inkluder den følgende informasjonen når du sender en feilrapport eller ber om mer informasjon fra c:geo:</string>
     <string name="about_system_info_send_button">Send på e-post…</string>
     <string name="about_system_info">Systeminformasjon for c:geo</string>
@@ -680,7 +677,6 @@
     <string name="init_circlecolor_summary">Velg farge og gjennomsiktighet for sirkler. Sirkler er en visuell presentasjon av minimumsradius rundt en cache eller et fysisk veipunkt. Andre cacher eller fysiske veipunkter kan ikke plasseres innenfor denne radiusen. (Gjelder geocaching.com)</string>
     <string name="init_circlefillcolor">Fyllfarge på sirkel</string>
     <string name="init_circlefillcolor_summary">Velg farge og gjennomsiktighet for å fylle sirklene</string>
-    <string name="init_share_after_export">Vis meny for å dele etter eksport av GPX</string>
     <string name="init_include_found_status">Inkluder \"Funnet\"-status</string>
     <string name="init_trackautovisit">Besøkt av reisevenner</string>
     <string name="init_summary_trackautovisit">Sett sporbare automatisk til \"Besøkt\" ved logging av en cache</string>
@@ -778,7 +774,6 @@
     <string name="map_source_osm_offline">Lagret lokalt</string>
     <string name="map_source_osm_offline_combined">Kombinert (Lagret lokalt)</string>
     <string name="map_source_attribution_dialog_title">Kart-rettigheter</string>
-    <string name="map_source_attribution_legacy_text">Trykk for kart-rettigheter</string>
     <string name="init_sendToCgeo">Send til c:geo</string>
     <string name="settings_info_send2cgeo_title">Informasjon om send2cgeo</string>
     <string name="init_sendToCgeo_name">Navn på enheten</string>
@@ -1140,7 +1135,6 @@
     <string name="map_map">Kart</string>
     <string name="map_live">Live-kart</string>
     <string name="map_view_map">Kart</string>
-    <string name="map_modes">Kartinnstillinger</string>
     <string name="map_rotation">Kartrotasjon</string>
     <string name="map_dot_mode">Bruk kompakte ikon</string>
     <string name="map_show_circles">Vis sirkler</string>
