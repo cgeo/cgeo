@@ -226,8 +226,6 @@
     <string name="warn_log_text_fill">Lūdzu, ievadi tekstu savam apmeklējuma ierakstam.</string>
     <string name="warn_load_images">c:geo neizdevās ielādēt attēlus.</string>
     <string name="warn_invalid_mapfile">Atlasītais kartes fails nav derīgs mapsforge kartes fails vai lieto neatbalstītu versiju.\n(c:geo šobrīd atbalsta v3 - v5 / v3 tikai, ja Jūs lietojat \"Old Mapsforge V3\" iestatījumus.)\n\nBezsaistes kartes nav piejamas.</string>
-    <string name="warn_nonexistant_mapfile">Izvēlētais kartes fails nepastāv. \nBezsaistes kartes nav pieejamas.</string>
-    <string name="warn_rendertheme_missing">Kartes tēma nav atrasta.</string>
     <string name="warn_pocket_query_select">Nav atlasīta Slēpņu atlase (PQ).</string>
     <string name="warn_no_pocket_query_found">Tiešsaistē nav atrasta neviena Slēpņu atlase (PQ).</string>
     <string name="warn_invalid_character">Rakstzīmei jābūt BURTAM vai CIPARAM</string>
@@ -403,7 +401,6 @@
     <string name="about_license">Licences</string>
     <string name="about_apache_license"><a href=""> Apache License, Version 2.0</a></string>
     <string name="about_help">Palīdzība</string>
-    <string name="open_services_page">Iestatiet savu geocaching platformu(as)</string>
     <string name="about_system_include">Lūdzu, iekļaujiet sekojošu informāciju par sistēmu, nosūtot kļūdas ziņojumu vai prasot vairāk informācijas par c:geo:</string>
     <string name="about_system_info_send_button">Nosūtīt pa e-pastu…</string>
     <string name="about_system_info">Par c:geo</string>
@@ -613,7 +610,6 @@
     <string name="init_routewidth_summary">Izvēlaties individuāla maršruta līnijas platumu</string>
     <string name="init_circlecolor">Apļa līnijas krāsa</string>
     <string name="init_circlefillcolor">Apļa aizpildījuma krāsa</string>
-    <string name="init_share_after_export">Atvērt koplietošanas izvēlni pēc GPX eksporta</string>
     <string name="init_include_found_status">Pievienot \"Atrasts\" statusu</string>
     <string name="init_trackautovisit">Ceļotāju automātiska atzīmēšana</string>
     <string name="init_summary_trackautovisit">Pēc noklusējuma uzlikt ceļotājam statusu \"Apmeklējis\" (\"VIsited\")</string>
@@ -1044,7 +1040,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_map">Karte</string>
     <string name="map_live">TIešsaistes karte</string>
     <string name="map_view_map">Kartes skats</string>
-    <string name="map_modes">Kartes iestatījumi</string>
     <string name="map_rotation">Kartes rotācija</string>
     <string name="map_dot_mode">Lietot kompakto ikonu skatu</string>
     <string name="map_show_circles">Rādīt riņķus</string>
