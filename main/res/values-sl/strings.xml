@@ -189,8 +189,6 @@
     <string name="warn_search_help_tb">Vnesite kodo sledljivčka, na primer: \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vnesite besedilo zapisa.</string>
     <string name="warn_load_images">c:geo ni uspel naložiti slik.</string>
-    <string name="warn_nonexistant_mapfile">Datoteka z zemljevidi ne obstaja.\nZemljevidi brez povezave niso na voljo.</string>
-    <string name="warn_rendertheme_missing">Tema zemljevidov ni na voljo.</string>
     <string name="warn_pocket_query_select">Noben Pocket Query ni bil izbran.</string>
     <string name="warn_no_pocket_query_found">Noben Pocket Query ni bil najden online.</string>
     <string name="warn_invalid_character">Znak mora biti ČRKA ali ŠTEVILO</string>
@@ -448,7 +446,6 @@
     <string name="init_map_directory_description">Mapa z zemljevidi</string>
     <string name="init_gpx_exportdir">Mapa za izvoz GPX datotek</string>
     <string name="init_gpx_importdir">Mapa za uvoz GPX datotek</string>
-    <string name="init_share_after_export">Po izvozu GPX datotek ponudi menu za deljenje</string>
     <string name="init_trackautovisit">Obisk pri zapisih</string>
     <string name="init_summary_trackautovisit">Pri sledljivčkih vedno uporabi obisk pri zapisih (\"Visited\")</string>
     <string name="init_sigautoinsert">Samodejno vstavi podpis</string>
@@ -736,7 +733,6 @@
     <string name="map_map">Zemljevid</string>
     <string name="map_live">Zemljevid</string>
     <string name="map_view_map">Pogled zemljevida</string>
-    <string name="map_modes">Možnosti</string>
     <string name="map_show_circles">Pokaži kroge</string>
     <string name="map_theme_select">Izberi temo zemljevida</string>
     <string name="map_live_enable">Vklopi podatke v živo</string>
