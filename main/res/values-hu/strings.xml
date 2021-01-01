@@ -219,8 +219,6 @@
     <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez!</string>
     <string name="warn_load_images">Sajnáljuk, a c:geo nem tudta betölteni a képeket.</string>
     <string name="warn_invalid_mapfile">A kiválasztott térképfájl nem felel meg a mapsforge v0.3.0 formátumnak.\nAz offline térképek nem elérhetőék.</string>
-    <string name="warn_nonexistant_mapfile">A kiválasztott térképfájl nem létezik.\nAz offline térképek nem elérhetőék.</string>
-    <string name="warn_rendertheme_missing">Nem található térképstílus</string>
     <string name="warn_pocket_query_select">Nincs pocket lekérdezés kiválasztva.</string>
     <string name="warn_no_pocket_query_found">Online pocket lekérdezés nem található.</string>
     <string name="warn_invalid_character">A karakter BETŰ vagy SZÁMJEGY lehet</string>
@@ -390,7 +388,6 @@
     <string name="about_license">Licenc</string>
     <string name="about_apache_license"><a href="">Apache licenc, 2.0 verzió</a></string>
     <string name="about_help">Segítség</string>
-    <string name="open_services_page">Geocaching platformok beállítása</string>
     <string name="about_system_include">Kérlek, csatold az alábbi rendszeradatokat, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
     <string name="about_system_info_send_button">Küldés e-mailben…</string>
     <string name="about_system_info">c:geo rendszeradatok</string>
@@ -564,7 +561,6 @@
     <string name="init_gpx_importdir">GPX import mappa</string>
     <string name="init_dataDir">Ládaadat mappa beállítása</string>
     <string name="init_dataDir_note">A ládák kiegészítő adatait (spolier képek, logfotók, …) külső tárolón is tarthatod (a készülékedtől függően ez lehet emulált vagy valódi, külső SD kártya is).</string>
-    <string name="init_share_after_export">A megosztás menü megnyitása GPX exportálás után</string>
     <string name="init_include_found_status">\"Megtaláltam\" jelölések exportálása</string>
     <string name="init_trackautovisit">Utazók logolása</string>
     <string name="init_summary_trackautovisit">Utazók automatikus \"Látogatás\" logolása</string>
@@ -931,7 +927,6 @@
     <string name="map_map">Térkép</string>
     <string name="map_live">Élő térkép</string>
     <string name="map_view_map">Térképek</string>
-    <string name="map_modes">Térképmódok</string>
     <string name="map_dot_mode">Kompakt ikonok használata</string>
     <string name="map_show_circles">Ládahatárok be</string>
     <string name="map_theme_select">Térképstílusok</string>
