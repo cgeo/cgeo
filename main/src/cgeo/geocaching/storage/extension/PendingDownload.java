@@ -10,9 +10,7 @@ public class PendingDownload extends DataStore.DBExtension {
     private static final DataStore.DBExtensionType type = DataStore.DBExtensionType.DBEXTENSION_PENDING_DOWNLOAD;
 
     private PendingDownload(final DataStore.DBExtension copyFrom) {
-        this.id = copyFrom.getId();
-        this.key = copyFrom.getKey();
-        this.string1 = copyFrom.getString1();
+        super(copyFrom);
     }
 
     public String getFilename() {

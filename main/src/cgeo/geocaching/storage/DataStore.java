@@ -508,6 +508,18 @@ public class DataStore {
             this.string2 = string2;
         }
 
+        /**
+         * public copy constructor
+         */
+        public DBExtension(final DataStore.DBExtension copyFrom) {
+            this.id = copyFrom.getId();
+            this.key = copyFrom.getKey();
+            this.long1 = copyFrom.getLong1();
+            this.long2 = copyFrom.getLong2();
+            this.string1 = copyFrom.getString1();
+            this.string2 = copyFrom.getString2();
+        }
+
         /** get the first entry for this key */
         @Nullable
         protected static DBExtension load(final DBExtensionType type, @NonNull final String key) {

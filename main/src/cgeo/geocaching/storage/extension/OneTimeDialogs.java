@@ -9,10 +9,7 @@ public class OneTimeDialogs extends DataStore.DBExtension {
     private static final DataStore.DBExtensionType type = DataStore.DBExtensionType.DBEXTENSION_ONE_TIME_DIALOGS;
 
     private OneTimeDialogs(final DataStore.DBExtension copyFrom) {
-        this.id = copyFrom.getId();
-        this.key = copyFrom.getKey();
-        this.long1 = copyFrom.getLong1();
-        this.long2 = copyFrom.getLong2();
+        super(copyFrom);
     }
 
     /**
