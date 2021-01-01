@@ -119,7 +119,6 @@
     <string name="warn_no_connector">没有当前可用的geocaching服务来提供这种类型的搜索</string>
     <string name="warn_search_help_title">需要帮助吗？</string>
     <string name="warn_load_images">读取图片失败。</string>
-    <string name="warn_rendertheme_missing">未找到映射文件</string>
     <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="info_log_post_failed_reason">原因：%s</string>
     <string name="info_waypoint_coordinates_cleared">坐标已清除。</string>
