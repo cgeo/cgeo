@@ -232,8 +232,6 @@
     <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
     <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
     <string name="warn_invalid_mapfile">Den valda kartfilen är inte en giltig mapsforge kartfil eller använder en version som inte stöds.\n(c:geo stöder för närvarande v3 till v5 / v3 endast om du använder \"Old Mapfsforge V3\" inställningen.)\n\nOfflinekartor är inte tillgängliga.</string>
-    <string name="warn_nonexistant_mapfile">Den angivna kartfilen finns inte.\nOffline-kartor kommer inte att vara tillgängliga.</string>
-    <string name="warn_rendertheme_missing">Karttema kunde inte hittas.</string>
     <string name="warn_pocket_query_select">Ingen Pocket query vald.</string>
     <string name="warn_no_pocket_query_found">Ingen Pocket query hittades på nätet.</string>
     <string name="warn_invalid_character">Tecknet måste vara en bokstav eller en siffra</string>
@@ -409,7 +407,6 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjälp</string>
-    <string name="open_services_page">Konfigurera din(a) geocachingplattform(er)</string>
     <string name="about_system_include">Vänligen inkludera följande systeminformation när du skickar en felrapport eller ber om mer information om c:geo:</string>
     <string name="about_system_info_send_button">Skicka via e-post…</string>
     <string name="about_system_info">c:geo systeminformation</string>
@@ -661,7 +658,6 @@
     <string name="init_circlecolor_summary">Välj färg och ogenomskinlighet för cirkellinje. Cirklar används som en visuell representation för den minsta radien runt en cache eller fysisk waypoint, där ingen annan cache eller fysisk waypoint är tillåten. (Applicerbar till geocaching.com)</string>
     <string name="init_circlefillcolor">Färg inuti cirklar</string>
     <string name="init_circlefillcolor_summary">Välj färg och ogenomskinlighet för de cirklar som ska fyllas med</string>
-    <string name="init_share_after_export">Visa meny för att dela efter slutförd exportering</string>
     <string name="init_include_found_status">Inkludera \"Hittad\"-status</string>
     <string name="init_trackautovisit">Trackable</string>
     <string name="init_summary_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
@@ -759,7 +755,6 @@
     <string name="map_source_osm_offline">Frånkopplad</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartattribut</string>
-    <string name="map_source_attribution_legacy_text">Tryck för kartattribut</string>
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
     <string name="settings_info_send2cgeo_title">Info om send2cgeo</string>
     <string name="init_sendToCgeo_name">Namnet på din enhet</string>
@@ -1121,7 +1116,6 @@
     <string name="map_map">Karta</string>
     <string name="map_live">Live karta</string>
     <string name="map_view_map">Karttyp</string>
-    <string name="map_modes">Kartlägen</string>
     <string name="map_rotation">Kartrotering</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
     <string name="map_show_circles">Visa cirklar</string>
