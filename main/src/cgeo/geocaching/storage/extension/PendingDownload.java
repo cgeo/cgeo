@@ -34,7 +34,7 @@ public class PendingDownload extends DataStore.DBExtension {
     public static void add(final long pendingDownload, @NonNull final String filename, @NonNull final String remoteUrl, final long date) {
         final String key = String.valueOf(pendingDownload);
         removeAll(type, key);
-        add(type, key, 0, 0, 0, 0, filename, remoteUrl, "", "");
+        add(type, key, date, 0, 0, 0, filename, remoteUrl, "", "");
     }
 
     public static void remove(final long pendingDownload) {

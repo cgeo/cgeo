@@ -1997,6 +1997,14 @@
     <string name="downloadmap_confirmation">Download map \"%1$s\"?\n\nThis may take quite some time and can lead to significant costs, depending on your network connection.\n\nSize info: %2$s</string>
     <string name="downloadmap_handling">The download itself will be handled by your system\'s download manager in the background. You should see a notification as soon as the download started (which may take a while).</string>
     <string name="button_continue">Continue</string>
+    <string name="downloadmap_onedirup">(one dir up)</string>
+    <string name="downloadmap_checkforupdates_button">Check for updates</string>
+    <string name="downloadmap_available_updates">Available updates</string>
+    <string name="downloadmap_no_updates_found">No map updates found</string>
+    <string name="downloadmap_directory">directory</string>
+    <string name="downloadmap_mapfile">map file</string>
+    <string name="downloadmap_retrieving_directory_data">Retrieving directory data…</string>
+    <string name="downloadmap_checking_for_updates">Checking for updates…</string>
 
     <!-- history track -->
     <string name="map_clear_trailhistory">Clear history track</string>
