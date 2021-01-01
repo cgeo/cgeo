@@ -234,8 +234,6 @@
     <string name="warn_log_text_fill">Lütfen kaydınız için metin girin.</string>
     <string name="warn_load_images">c:geo görüntüleri yükleyemedi.</string>
     <string name="warn_invalid_mapfile">Seçili harita dosyası mapsforge harita dosyası için geçerli değil veya desteklenmeyen bir versiyon kullanıyor.\n(c:geo halen v3-v5 desteklemektedir/ v3 sadece \'\'Eski Mapsforge V3\'\' ayarını seçerseniz kullanılır.)\n\nÇevrimdışı haritalar kullanılabilir değildir.</string>
-    <string name="warn_nonexistant_mapfile">Seçtiğiniz harita dosyası artık yok. \nÇevrimdışı haritalar kullanılabilir değildir.</string>
-    <string name="warn_rendertheme_missing">Harita teması bulunamadı.</string>
     <string name="warn_pocket_query_select">Sorgulama kaydı seçilmedi.</string>
     <string name="warn_no_pocket_query_found">Çevrimiçi sorgulama kaydı bulunamadı.</string>
     <string name="warn_invalid_character">Karakter bir HARF veya RAKAM olmalıdır</string>
@@ -412,7 +410,6 @@
     <string name="about_license">Lisans</string>
     <string name="about_apache_license"><a href=""> Apache Lisansı, Sürüm 2.0 </a></string>
     <string name="about_help">Yardım</string>
-    <string name="open_services_page">Geocaching platformlarınızı yapılandırın</string>
     <string name="about_system_include">Bir hata raporu gönderirken ya da c:geo hakkında daha fazla bilgi almak istediğinizde lütfen aşağıdaki sistem bilgilerini de ekleyin:</string>
     <string name="about_system_info_send_button">E-posta ile gönder…</string>
     <string name="about_system_info">c:geo sistem bilgisi</string>
@@ -674,7 +671,6 @@
     <string name="init_circlecolor_summary">Daire çizgisi için renk ve opaklığı seçin. Daireler, bir Geocache veya fiziksel yol noktası etrafındaki minimum yarıçap için görsel bir temsil olarak kullanılır; burada başka hiçbir Geocache veya fiziksel yol noktası oluşturulamaz. (Geocaching.com için geçerlidir)</string>
     <string name="init_circlefillcolor">Daire dolgu rengi</string>
     <string name="init_circlefillcolor_summary">Doldurulacak dairelerin rengini ve opaklığını seçin</string>
-    <string name="init_share_after_export">GPX Dışa aktarmadan sonra paylaşım menüsünü aç</string>
     <string name="init_include_found_status">Bulunmuşlar dahil</string>
     <string name="init_trackautovisit">TB\'leri Ziyaret Ettir</string>
     <string name="init_summary_trackautovisit">Trackable\'ları varsayılan olarak \'\'Ziyaret Edildi\'\' şeklinde ayarla</string>
@@ -1139,7 +1135,6 @@
     <string name="map_map">Harita</string>
     <string name="map_live">Canlı Harita</string>
     <string name="map_view_map">Harita görünümü</string>
-    <string name="map_modes">Harita ayarları</string>
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
     <string name="map_show_circles">Çemberleri göster</string>
