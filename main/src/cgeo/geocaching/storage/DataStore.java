@@ -574,10 +574,10 @@ public class DataStore {
             try (Cursor cursor = db.query(dbTableExtension,
                     new String[]{"_id", "_key", "long1", "long2", "long3", "long4", "string1", "string2", "string3", "string4"},
                     "_type = ?" + (null == key ? "" : " AND _key LIKE ?"),
-                    null == key ? new String[]{String.valueOf(type)} : new String[]{String.valueOf(type), key},
-                    null, null, "_id", "1")) {
+                    null == key ? new String[]{String.valueOf(type.id)} : new String[]{String.valueOf(type.id), key},
+                    null, null, "_id", null)) {
                 while (cursor.moveToNext()) {
-                    result.add(new DBExtension(cursor.getLong(1), cursor.getString(2), cursor.getLong(3), cursor.getLong(4), cursor.getLong(5), cursor.getLong(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10)));
+                    result.add(new DBExtension(cursor.getLong(0), cursor.getString(1), cursor.getLong(2), cursor.getLong(3), cursor.getLong(4), cursor.getLong(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9)));
                 }
             }
             return result;
