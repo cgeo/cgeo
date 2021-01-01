@@ -31,7 +31,6 @@
     <string translatable="false" name="settings_themes_url">https://manual.cgeo.org/en/offlinemaps</string>
     <string translatable="false" name="settings_send2cgeo_url">https://send2.cgeo.org/</string>
     <string translatable="false" name="settings_facebook_login_url">https://faq.cgeo.org/#facebook-login</string>
-    <string translatable="false" name="manual_firststeps">https://manual.cgeo.org/en/firststeps</string>
 
     <string translatable="false" name="map_attribution_openstreetmap_html"><![CDATA[<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>]]></string>
     <string translatable="false" name="map_attribution_openstreetmapde_html"><![CDATA[© <a href="https://openstreetmap.de/">OpenStreetMap DE</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
