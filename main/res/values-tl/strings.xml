@@ -196,8 +196,6 @@
     <string name="warn_search_help_tb">Ipasok ang code na trackable. Halimbawa \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Mangyaring pakilagay ng iilang teksto para sa iyong log.</string>
     <string name="warn_load_images">ang c:geo ay nabigo sa pag-load ng mga imahe.</string>
-    <string name="warn_nonexistant_mapfile">Ang napiling map file ay hindi umiiral.\nAng mga offline maps ay hindi magagamit.</string>
-    <string name="warn_rendertheme_missing">Ang mapa ng tema ay hindi mahanap.</string>
     <string name="warn_pocket_query_select">Walang napiling Pocket query.</string>
     <string name="warn_no_pocket_query_found">Walang mahanap na Pocket query sa online.</string>
     <string name="warn_invalid_character">Ang karakter ay dapat LETRA O NUMERO</string>
@@ -487,7 +485,6 @@
     <string name="init_gpx_importdir">Ang GPX na import direktoryo</string>
     <string name="init_dataDir">Pumili ng geocahce na datos na direktori</string>
     <string name="init_dataDir_note">Maaari mong piliin pata ma-istor ang dagdag na mga geocaches sa (maninirang, sa log na imahe, &#8230;) saiyong panlabas na imbakan (ang pagtulad o tunay na panlabas na SD kard na nakadepende sa iyong aparato).</string>
-    <string name="init_share_after_export">Buksan sa pagbahagi ang menu pagkatapos ng pag-luluwas sa GPX</string>
     <string name="init_include_found_status">Ang kaugnay ay \"natagpuan\" na estado</string>
     <string name="init_trackautovisit">Bisitahin ang TBs</string>
     <string name="init_summary_trackautovisit">Itakda ang tagatukoy sa \"binisita\" ng default</string>
@@ -830,7 +827,6 @@
     <string name="map_map">Mapa</string>
     <string name="map_live">Ang live na mapa</string>
     <string name="map_view_map">Tingnan ang mapa</string>
-    <string name="map_modes">Ang mga setting ng mapa</string>
     <string name="map_show_circles">Ipakita ang mga bilog</string>
     <string name="map_theme_select">Pumili ng tema na mapa</string>
     <string name="map_live_enable">Paganahin ang live</string>
