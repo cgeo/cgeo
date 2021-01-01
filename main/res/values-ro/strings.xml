@@ -192,8 +192,6 @@
     <string name="warn_search_help_tb">Introdu codul pentru obiectul călător. De exemplu \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Te rog introdu ceva text pentru această însemnare.</string>
     <string name="warn_load_images">c:geo nu a putut încărca imaginile.</string>
-    <string name="warn_nonexistant_mapfile">Fişierul cu harta aleasă nu există.\nHarta salvată nu este disponibilă.</string>
-    <string name="warn_rendertheme_missing">Stilul hărţii nu a fost găsit.</string>
     <string name="warn_pocket_query_select">Nu a fost selectat nici un \"Pocket Query\".</string>
     <string name="warn_no_pocket_query_found">Nu a fost găsit nici un \"Pocket Query\".</string>
     <string name="warn_invalid_character">Trebuie să tastezi numai LITERE sau CIFRE</string>
@@ -478,7 +476,6 @@
     <string name="init_gpx_importdir">Dosar Importuri GPX</string>
     <string name="init_dataDir">Alege dosar geocutii</string>
     <string name="init_dataDir_note">Poţi alege să salvezi informaţii suplimentare despre geocutii (spoilere, imagini din jurnal, …) în spaţiul de stocare extern (SDcard real sau virtual, în funcţie de dispozitivul tău).</string>
-    <string name="init_share_after_export">Afişează meniul \"Distribuie\" după exportul GPX</string>
     <string name="init_include_found_status">Include starea \"Găsită\"</string>
     <string name="init_trackautovisit">TB vizitează</string>
     <string name="init_summary_trackautovisit">Alege ca obiectele călătoare să \"viziteze\" implicit</string>
@@ -821,7 +818,6 @@
     <string name="map_map">Hartă</string>
     <string name="map_live">Hartă</string>
     <string name="map_view_map">Hărţi</string>
-    <string name="map_modes">Opţiuni hărţi</string>
     <string name="map_show_circles">Arată cercurile</string>
     <string name="map_theme_select">Alege un stil pentru hartă</string>
     <string name="map_live_enable">Ia de pe net</string>
