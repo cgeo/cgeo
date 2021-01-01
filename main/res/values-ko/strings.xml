@@ -229,8 +229,6 @@
     <string name="warn_log_text_fill">로그에 내용을 입력해 주세요.</string>
     <string name="warn_load_images">이미지를 불러오지 못했습니다.</string>
     <string name="warn_invalid_mapfile">선택한 맵 파일이 유효한 mapsforge 맵 파일이 아니거나 지원되지 않는 버전을 사용합니다. \n(c:geo는 현재 \"Old Mapfsforge V3\"설정을 사용하는 경우에만 v3 ~ v5/v3을 지원합니다.)\n\n 오프라인 맵을 사용할 수 없습니다.</string>
-    <string name="warn_nonexistant_mapfile">선택한 지도파일이 존재하지 않습니다.\n오프라인 지도를 사용할 수 없습니다.</string>
-    <string name="warn_rendertheme_missing">지도 테마를 찾을 수 없습니다.</string>
     <string name="warn_pocket_query_select">포켓쿼리를 선택하지 않았습니다.</string>
     <string name="warn_no_pocket_query_found">온라인에 포켓쿼리가 없습니다.</string>
     <string name="warn_invalid_character">문자 또는 숫자만 허용됩니다.</string>
@@ -404,7 +402,6 @@
     <string name="about_license">라이센스</string>
     <string name="about_apache_license"><a href="">Apache 라이센스, 버전 2.0</a></string>
     <string name="about_help">도움말</string>
-    <string name="open_services_page">지오캐싱 플랫폼 설정</string>
     <string name="about_system_include">오류 신고나 c:geo에 대한 추가정보 요청시, 다음 시스템 정보를 포함시켜 주세요.</string>
     <string name="about_system_info_send_button">메일로 보내기…</string>
     <string name="about_system_info">c:geo 시스템 정보</string>
@@ -631,7 +628,6 @@
     <string name="init_circlecolor_summary">원형선의 색상과 불투명도를 선택합니다. 원형은 캐시 또는 물리적 지점 주변의 최소 반경에 대한 시각적 표현으로 사용되며 다른 캐시 또는 물리적 지점은 허용되지 않습니다. (geocaching.com에 적용)</string>
     <string name="init_circlefillcolor">원형 내부 색상</string>
     <string name="init_circlefillcolor_summary">채울 원형의 색상 및 불투명도를 선택하십시오.</string>
-    <string name="init_share_after_export">GPX 내보내기 후 공유메뉴 열기</string>
     <string name="init_include_found_status">\"찾음\" 상태 포함</string>
     <string name="init_trackautovisit">TB 방문하기</string>
     <string name="init_summary_trackautovisit">추적아이템을 항상 \"방문\"하도록 합니다.</string>
@@ -1074,7 +1070,6 @@
     <string name="map_map">지도</string>
     <string name="map_live">라이브 지도</string>
     <string name="map_view_map">지도 보기</string>
-    <string name="map_modes">지도 설정</string>
     <string name="map_rotation">지도 회전</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
     <string name="map_show_circles">원 보이기</string>
