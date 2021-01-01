@@ -2,10 +2,12 @@ package cgeo.geocaching.storage;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.utils.FileNameCreator;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.net.Uri;
+
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,15 +15,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class PublicLocalStorageTest extends CGeoTestCase {
 
     private Uri testUri = null;
+
+    private static final boolean FAIL_DOC_TEST_IF_FOLDER_NOT_ACCESSIBLE = false; // CI does not support Document tests unfortunately...
+    private static final boolean KEEP_RESULTS = true;
+
+    //note: must be sorted alphabetically for comparison to work out!
+    private static final String COMPLEX_FOLDER_STRUCTURE = "[\"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": [ \"ccc-aaa.txt\", { \"name\": \"ccc-bbb\", \"files\": [] }, { \"name\": \"ccc-ccc\", \"files\": [ \"ccc-ccc-aaa.txt\", \"ccc-ccc-bbb.txt\" ] }, \"ccc-ddd.txt\" ] }, \"ddd.txt\"]";
+
 
     public void setUp() throws Exception {
         super.setUp();
@@ -29,7 +41,6 @@ public class PublicLocalStorageTest extends CGeoTestCase {
         if (PublicLocalFolder.TEST_FOLDER.isUserDefinedLocation()) {
             testUri = PublicLocalFolder.TEST_FOLDER.getLocation().getUri();
         }
-        cleanup();
     }
 
     public void tearDown() throws Exception {
@@ -43,14 +54,16 @@ public class PublicLocalStorageTest extends CGeoTestCase {
 
     //a first small test to see how CI handles it
     public void testFileSimpleCreateDelete() {
-        performSimpleCreateDelete(getFileTestFolder());
+        performSimpleCreateDelete(Folder.FolderType.FILE);
     }
 
     public void testDocumentSimpleCreateDelete() {
-        performSimpleCreateDelete(getDocumentTestFolder());
+        performSimpleCreateDelete(Folder.FolderType.DOCUMENT);
     }
 
-    private void performSimpleCreateDelete(final Folder testFolder) {
+    private void performSimpleCreateDelete(final Folder.FolderType type) {
+
+        final Folder testFolder = createTestFolder(type, "simpleCreateDelete");
 
         final Uri uri = PublicLocalStorage.get().create(testFolder, FileNameCreator.forName("cgeo-test.txt"));
         //final Folder subfolder = Folder.fromFolderLocation(testFolder, "eins");
@@ -62,59 +75,144 @@ public class PublicLocalStorageTest extends CGeoTestCase {
     }
 
     public void testFileCopyAll() {
-        final Folder sourceFolder = Folder.fromFolder(getFileTestFolder(), "source");
-        final Folder targetFolder = Folder.fromFolder(getFileTestFolder(), "target");
-        performCopyAll(sourceFolder, targetFolder);
+        performCopyAll(Folder.FolderType.FILE, Folder.FolderType.FILE);
     }
 
     public void testDocumentCopyAll() {
-        final Folder sourceFolder = Folder.fromFolder(getDocumentTestFolder(), "source");
-        final Folder targetFolder = Folder.fromFolder(getDocumentTestFolder(), "target");
-        performCopyAll(sourceFolder, targetFolder);
+        performCopyAll(Folder.FolderType.DOCUMENT, Folder.FolderType.DOCUMENT);
     }
 
-    private void performCopyAll(final Folder sourceFolder, final Folder targetFolder) {
+    private void performCopyAll(final Folder.FolderType typeSource, final Folder.FolderType typeTarget) {
+
+        final Folder sourceFolder = Folder.fromFolder(createTestFolder(typeSource, "copyAll"), "source");
+        final Folder targetFolder = Folder.fromFolder(createTestFolder(typeTarget, "copyAll"), "target");
 
         //create something to copy in source Folder
-        final Folder fOne = Folder.fromFolder(sourceFolder, "eins");
-        final Folder fTwo = Folder.fromFolder(sourceFolder, "zwei");
-        final Folder fThree = Folder.fromFolder(sourceFolder, "drei");
-        final Folder fTwoSub = Folder.fromFolder(fTwo, "sub");
-
-        final Folder[] sourceFolders = new Folder[] {fOne, fTwo, fThree, fTwoSub};
-
-        for (int i = 0; i < 20 ; i++) {
-            assertThat(PublicLocalStorage.get().create(sourceFolders[i % sourceFolders.length], FileNameCreator.forName("testfile" + i + ".txt"))).isNotNull();
-        }
-        assertThat(PublicLocalStorage.get().getFileCounts(sourceFolder)).isEqualTo(new ImmutablePair<>(20, 4));
-        assertThat(PublicLocalStorage.get().getFileCounts(targetFolder)).isEqualTo(new ImmutablePair<>(0, 0));
+        createTree(sourceFolder, COMPLEX_FOLDER_STRUCTURE);
 
         //copy
-        PublicLocalStorage.get().copyAll(sourceFolder, targetFolder, false);
-        //after copy, source should be unchanged
-        assertThat(PublicLocalStorage.get().getFileCounts(sourceFolder)).isEqualTo(new ImmutablePair<>(20, 4));
-        //after copy, target should be identical to source
-        assertThat(PublicLocalStorage.get().getFileCounts(targetFolder)).isEqualTo(new ImmutablePair<>(20, 4));
-
+        ImmutableTriple<FolderUtils.CopyResult, Integer, Integer > result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
+        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 7, 3));
+        assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
+        assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
 
         //move
-        PublicLocalStorage.get().copyAll(sourceFolder, targetFolder, true);
+        FolderUtils.get().deleteAll(targetFolder);
+        result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
+        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 7, 3));
+        assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false), "[]");
+        assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
+    }
 
-        //after move, source should be empty
-        assertThat(PublicLocalStorage.get().getFileCounts(sourceFolder)).isEqualTo(new ImmutablePair<>(0, 0));
-        //we expect now the DOUBLE amount of files in target, since PublicLocalStorage never overwrites existing files in create, always created new ones!
-        assertThat(PublicLocalStorage.get().getFileCounts(targetFolder)).isEqualTo(new ImmutablePair<>(40, 4));
+    public void testFileCopyAllSameDir() {
+        performCopyAllSameDir(Folder.FolderType.FILE);
+    }
+
+    public void testDocumentCopyAllSameDir() {
+        performCopyAllSameDir(Folder.FolderType.DOCUMENT);
+    }
+
+
+    private void performCopyAllSameDir(final Folder.FolderType typeSource) {
+
+        final Folder sourceTargetFolder = Folder.fromFolder(createTestFolder(typeSource, "copyAllSameDir"), "sourceTarget");
+
+        createTree(sourceTargetFolder, COMPLEX_FOLDER_STRUCTURE);
+
+        final ImmutableTriple<FolderUtils.CopyResult, Integer, Integer> result = FolderUtils.get().copyAll(sourceTargetFolder, sourceTargetFolder, true);
+        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK_NOTHING_TO_COPY, 0, 0));
+
+        assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceTargetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
+    }
+
+    public void testFileCopyAllTargetInSource() {
+        performCopyAllTargetInSource(Folder.FolderType.FILE);
+    }
+
+    public void testDocumentCopyAllTargetInSource() {
+        performCopyAllTargetInSource(Folder.FolderType.DOCUMENT);
+    }
+
+    private void performCopyAllTargetInSource(final Folder.FolderType typeSource) {
+
+        final Folder sourceFolder = Folder.fromFolder(createTestFolder(typeSource, "copyAllTargetInSource"), "source");
+        createTree(sourceFolder, COMPLEX_FOLDER_STRUCTURE);
+        final Folder targetFolder = Folder.fromFolder(sourceFolder, "ccc/ccc-ccc");
+
+        //copy
+        ImmutableTriple<FolderUtils.CopyResult, Integer, Integer > result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
+        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 7, 3));
+        assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false),
+            "[\"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": " +
+                "[ \"ccc-aaa.txt\", { \"name\": \"ccc-bbb\", \"files\": [] }, { \"name\": \"ccc-ccc\", \"files\": " +
+                    "[ \"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": " +
+                        "[ \"ccc-aaa.txt\", { \"name\": \"ccc-bbb\", \"files\": [] }, { \"name\": \"ccc-ccc\", \"files\": " +
+                            "[\"ccc-ccc-aaa.txt\", \"ccc-ccc-bbb.txt\" ] }, " +
+                        "\"ccc-ddd.txt\" ] " +
+                    "}, \"ccc-ccc-aaa.txt\", \"ccc-ccc-bbb.txt\", \"ddd.txt\" ] " +
+                "}, \"ccc-ddd.txt\" ] " +
+            "}, \"ddd.txt\"]");
+
+        //move
+        FolderUtils.get().deleteAll(sourceFolder);
+        createTree(sourceFolder, COMPLEX_FOLDER_STRUCTURE);
+        result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
+        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 7, 3));
+        assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
+        assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false),
+            "[{\"name\": \"ccc\", \"files\": [ { \"name\": \"ccc-ccc\", \"files\": " +
+                COMPLEX_FOLDER_STRUCTURE + "} ] } ]");
+    }
+
+    public void testFileCopyAllSourceInTarget() {
+        performCopyAllSourceInTarget(Folder.FolderType.FILE);
+    }
+
+    public void testDocumentCopyAllSourceInTarget() {
+        performCopyAllSourceInTarget(Folder.FolderType.DOCUMENT);
+    }
+
+    private void performCopyAllSourceInTarget(final Folder.FolderType typeSource) {
+
+        final Folder targetFolder = Folder.fromFolder(createTestFolder(typeSource, "copyAllSourceInTarget"), "target");
+        createTree(targetFolder, COMPLEX_FOLDER_STRUCTURE);
+        final Folder sourceFolder = Folder.fromFolder(targetFolder, "ccc");
+
+        //copy
+        ImmutableTriple<FolderUtils.CopyResult, Integer, Integer > result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
+        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 4, 2));
+        assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false),
+            "[\"aaa.txt\",\"bbb.txt\",{\"name\":\"ccc\",\"files\":[\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\"]},\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\",\"ddd.txt\"]"
+            );
+
+        //move
+        FolderUtils.get().deleteAll(targetFolder);
+        createTree(targetFolder, COMPLEX_FOLDER_STRUCTURE);
+        result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
+        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 4, 2));
+        assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false),
+            "[\"aaa.txt\",\"bbb.txt\",{\"name\":\"ccc\",\"files\":[" +
+                //"\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\"" +
+                "]},\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\",\"ddd.txt\"]"
+        );
+    }
+
+
+    private void assertEqualsWithoutWhitespaces(final String value, final String expected) {
+        assertThat(value.replaceAll("[\\s]", "")).isEqualTo(expected.replaceAll("[\\s]", ""));
     }
 
     public void testFileCreateUniqueFilenames() {
-        performCreateUniqueFilenames(getFileTestFolder());
+        performCreateUniqueFilenames(Folder.FolderType.FILE);
     }
 
     public void testDocumentCreateUniqueFilenames() {
-        performCreateUniqueFilenames(getDocumentTestFolder());
+        performCreateUniqueFilenames(Folder.FolderType.DOCUMENT);
     }
 
-    private void performCreateUniqueFilenames(final Folder testFolder) {
+    private void performCreateUniqueFilenames(final Folder.FolderType type) {
+
+        final Folder testFolder = createTestFolder(type, "createUniqueFilenames");
 
         assertFileDirCount(testFolder, 0, 0);
 
@@ -136,15 +234,17 @@ public class PublicLocalStorageTest extends CGeoTestCase {
     }
 
     public void testFileWriteReadFile() throws IOException {
-        performWriteReadFile(getFileTestFolder());
+        performWriteReadFile(Folder.FolderType.FILE);
     }
 
     public void testDocumentWriteReadFile() throws IOException {
-        performWriteReadFile(getDocumentTestFolder());
+        performWriteReadFile(Folder.FolderType.DOCUMENT);
     }
 
 
-    private void performWriteReadFile(final Folder testFolder) throws IOException {
+    private void performWriteReadFile(final Folder.FolderType type) throws IOException {
+
+        final Folder testFolder = createTestFolder(type, "createUniqueFilenames");
 
         final String testtext = "This is a test text";
 
@@ -164,7 +264,7 @@ public class PublicLocalStorageTest extends CGeoTestCase {
         //initialize
         PublicLocalFolder.TEST_FOLDER.setUserDefinedLocation(null);
         //create Location based on test folder. Several subfolders.
-        final Folder folder = Folder.fromFolder(Folder.fromPublicFolder(PublicLocalFolder.TEST_FOLDER, "one"), "two");
+        final Folder folder = Folder.fromPublicFolder(PublicLocalFolder.TEST_FOLDER, "changeNotification/one/two");
         //ensure that cache is filled
         PublicLocalStorage.get().list(folder);
         assertThat(folder.getCachedDocFile()).isNotNull();
@@ -180,15 +280,18 @@ public class PublicLocalStorageTest extends CGeoTestCase {
     }
 
     public void testFileMimeType() {
-        performMimeType(getFileTestFolder());
+        performMimeType(Folder.FolderType.FILE);
     }
 
     public void testDocumentMimeType() {
-        performMimeType(getDocumentTestFolder());
+        performMimeType(Folder.FolderType.DOCUMENT);
     }
 
-    private void performMimeType(final Folder testLocation) {
-        performMimeTypeTests(testLocation,
+    private void performMimeType(final Folder.FolderType type) {
+
+        final Folder testFolder = createTestFolder(type, "mimeType");
+
+        performMimeTypeTests(testFolder,
             new String[]{"txt", "jpg", "map"},
             new String[]{"text/plain", "image/jpeg", "application/octet-stream"});
     }
@@ -207,30 +310,89 @@ public class PublicLocalStorageTest extends CGeoTestCase {
         }
     }
 
+    private void createTree(final Folder folder, final String structure) {
+        final JsonNode json = JsonUtils.toNode(structure);
+        if (json == null) {
+            throw new IllegalArgumentException("Invalid Json structure: " + structure);
+        }
+        createTree(folder, json);
+    }
+
+    private void createTree(final Folder folder, final JsonNode node) {
+        final Iterator<JsonNode> it = node.elements();
+        while (it.hasNext()) {
+            final JsonNode n = it.next();
+            if (n.isObject()) {
+                //this is a subfolder
+               final String folderName = n.get("name").asText();
+                final Folder newFolder = Folder.fromFolder(folder, folderName);
+                PublicLocalStorage.get().ensureFolder(newFolder);
+                createTree(newFolder, n.get("files"));
+            } else {
+                //this is a file
+                PublicLocalStorage.get().create(folder, n.textValue());
+            }
+        }
+    }
+
     private void assertFileDirCount(final Folder folder, final int fileCount, final int dirCount) {
-        assertThat(PublicLocalStorage.get().getFileCounts(folder)).as("File counts of Folder " + folder).isEqualTo(new ImmutablePair<>(fileCount, dirCount));
+        assertThat(FolderUtils.get().getFileCounts(folder)).as("File counts of Folder " + folder).isEqualTo(new ImmutablePair<>(fileCount, dirCount));
     }
 
     private boolean hasValidDocumentTestFolder() {
-        return PublicLocalFolder.TEST_FOLDER.isUserDefinedLocation() && PublicLocalStorage.get().checkAvailability(PublicLocalFolder.TEST_FOLDER.getLocation(), PublicLocalFolder.TEST_FOLDER.needsWrite(), true);
+        return PublicLocalFolder.TEST_FOLDER.isUserDefinedLocation() &&
+            PublicLocalStorage.get().checkAvailability(PublicLocalFolder.TEST_FOLDER.getLocation(), PublicLocalFolder.TEST_FOLDER.needsWrite(), true);
     }
 
-    private Folder getFileTestFolder() {
-        return Folder.fromFolder(Folder.CGEO_PRIVATE_FILES, "unittest");
-    }
+    private Folder createTestFolder(final Folder.FolderType type, final String context) {
 
-    private Folder getDocumentTestFolder() {
-        if (!hasValidDocumentTestFolder()) {
-            Log.iForce("Trying to test for DocumentUri fails; unfortunately there is no DocumentUri configured for TEST-FOLDER. Test with file instead");
-            return getFileTestFolder();
+        final Folder testFolder;
+        switch (type) {
+            case FILE:
+                testFolder = Folder.fromFolder(getBaseTestFolder(Folder.FolderType.FILE), "file-" + context);
+                break;
+            case DOCUMENT:
+                if (!hasValidDocumentTestFolder()) {
+                    if (FAIL_DOC_TEST_IF_FOLDER_NOT_ACCESSIBLE) {
+                        throw new IllegalArgumentException("Document Folder not accessible, test fails: " + PublicLocalFolder.TEST_FOLDER.getLocation());
+                    }
+                    Log.iForce("Trying to test for DocumentUri fails; unfortunately there is no DocumentUri configured for TEST-FOLDER. Test with file instead");
+                    testFolder =  Folder.fromFolder(getBaseTestFolder(Folder.FolderType.FILE), "doc-" + context);
+                } else {
+                    testFolder = Folder.fromFolder(getBaseTestFolder(Folder.FolderType.DOCUMENT), context);
+                }
+                break;
+            default:
+                testFolder = null;
         }
-        return PublicLocalFolder.TEST_FOLDER.getLocation();
+
+        if (testFolder != null) {
+            FolderUtils.get().deleteAll(testFolder);
+        }
+        return testFolder;
     }
 
-    private void cleanup() {
-        PublicLocalStorage.get().deleteAll(getFileTestFolder());
+    private Folder getBaseTestFolder(final Folder.FolderType type) {
+        switch (type) {
+            case FILE:
+                return Folder.fromFolder(Folder.CGEO_PRIVATE_FILES, "unittest");
+            case DOCUMENT:
+                if (!hasValidDocumentTestFolder()) {
+                    return Folder.fromFolder(Folder.CGEO_PRIVATE_FILES, "unittest");
+                }
+                return PublicLocalFolder.TEST_FOLDER.getLocation();
+            default:
+                return null;
+        }
+    }
+
+     private void cleanup() {
+        if (KEEP_RESULTS) {
+            return;
+        }
+         FolderUtils.get().deleteAll(getBaseTestFolder(Folder.FolderType.FILE));
         if (hasValidDocumentTestFolder()) {
-            PublicLocalStorage.get().deleteAll(PublicLocalFolder.TEST_FOLDER.getLocation());
+            FolderUtils.get().deleteAll(getBaseTestFolder(Folder.FolderType.DOCUMENT));
         }
     }
 }

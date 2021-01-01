@@ -19,8 +19,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-
-
 /**
  * This class represents a concrete definite folder / directory on disk.
  *
@@ -203,7 +201,7 @@ public class Folder {
         return this.toConfig(true).hashCode();
     }
 
-    private String toConfig(final boolean unifiedUri) {
+    private String toConfig(final boolean forEquals) {
 
         final StringBuilder configString = new StringBuilder(type.toString()).append(CONFIG_SEP);
         switch (type) {
@@ -213,8 +211,8 @@ public class Folder {
             case FILE:
             case DOCUMENT:
             default:
-                if (unifiedUri) {
-                    configString.append(UriUtils.toStringDecoded(uri));
+                if (forEquals) {
+                    configString.append(UriUtils.toCompareString(uri));
                 } else {
                     configString.append(uri);
                 }

@@ -66,12 +66,28 @@ public final class UriUtils {
         return null;
     }
 
-    /** Returns string reporesentation of Uri where encoded characters are decoded. Useful e.g. for comparison of Uris */
-    public static String toStringDecoded(final Uri uri) {
+    /**
+     * Returns a string reporesentation of Uri fit for comparison with other Uris (e.g. to heck for equality).
+     *
+     * This method tweaks the Uri string such that Uris different in string representation but pointing
+     * to same physical folder have a higher chance to match. It does not, however, guarantee that
+     * two Uris pointing to the same physical folder will get same string rep (this is simply not possible to achieve)
+     *
+     * Returned strings may NOT be used to reconstruct an Uri using Uri.parse()!
+
+     */
+    public static String toCompareString(final Uri uri) {
         if (uri == null) {
             return null;
         }
-        return uri.toString().replaceAll("%2F", "/").replaceAll("%3A", ":");
+        //replace encoded characters
+        String uriString = uri.toString().replaceAll("%2F", "/").replaceAll("%3A", ":").trim();
+        // remove trailing /
+        // This is important because: folders returned by Document Intents may have trailing / while persisted Uris for same folder may not!
+        while (uriString.endsWith("/")) {
+            uriString = uriString.substring(0, uriString.length() - 1);
+        }
+        return uriString;
     }
 
     /** toString()-method for {@link UriPermission} */
