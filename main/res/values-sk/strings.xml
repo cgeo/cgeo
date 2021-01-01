@@ -233,8 +233,6 @@
     <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
     <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
     <string name="warn_invalid_mapfile">Vybraný súbor s mapou nie je platný súbor mapy mapsforge, prípadne používa nepodporovanú verziu.\n(Program c:geo v súčasnosti podporuje v3 až v5 (v3 len vtedy, ak používate nastavenie \"Stará Mapfsforge V3\".)\n\nOff-line mapy nie sú k dispozícii.</string>
-    <string name="warn_nonexistant_mapfile">Vybraný mapový súbor neexistuje.\nOffline mapy nie sú dostupné.</string>
-    <string name="warn_rendertheme_missing">Téma mapy nebola nájdená.</string>
     <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>
     <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
     <string name="warn_invalid_character">Znak musí byť PÍSMENO alebo ČÍSLICA</string>
@@ -413,7 +411,6 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
     <string name="about_help">Pomoc</string>
-    <string name="open_services_page">Konfigurovať geocachingové platformy</string>
     <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
     <string name="about_system_info_send_button">Poslať e-mailom…</string>
     <string name="about_system_info">c:geo systémové informácie</string>
@@ -683,7 +680,6 @@
     <string name="init_circlecolor_summary">Vyberte farbu a priehľadnosť čiary kruhu. Kruhy sa používajú ako vizuálna reprezentácia pre minimálny okruh okolo kešky alebo fyzického bodu trasy, v ktorom nie je povolená žiadna ďalšia keška ani fyzický bod trasy. (Platí pre geocaching.com)</string>
     <string name="init_circlefillcolor">Farba výplne kruhu</string>
     <string name="init_circlefillcolor_summary">Vyberte farbu a priehľadnosť vyplnenia kruhu</string>
-    <string name="init_share_after_export">Po exporte GPX otvoriť menu pre zdieľanie</string>
     <string name="init_include_found_status">Zahrnúť stav \"Nájdené\"</string>
     <string name="init_trackautovisit">Návšteva TB</string>
     <string name="init_summary_trackautovisit">Nastaviť trasovateľné predmety (trackables) automaticky na „navštívené“</string>
@@ -781,7 +777,6 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (offline)</string>
     <string name="map_source_attribution_dialog_title">Autori máp</string>
-    <string name="map_source_attribution_legacy_text">Ťuknite pre autora mapy</string>
     <string name="init_sendToCgeo">Poslať do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o send2cgeo</string>
     <string name="init_sendToCgeo_name">Názov vášho zariadenia</string>
@@ -1165,7 +1160,6 @@
     <string name="map_map">Mapa</string>
     <string name="map_live">Aktívna mapa</string>
     <string name="map_view_map">Vybrať mapu</string>
-    <string name="map_modes">Nastavenia mapy</string>
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
     <string name="map_show_circles">Zobraziť kruhy</string>
