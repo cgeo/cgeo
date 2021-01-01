@@ -18,6 +18,9 @@ import javax.annotation.Nullable;
 
 public final class CalendarUtils {
 
+    public static final String PATTERN_YYYYMM = "yyyy-MM";
+    public static final String PATTERN_YYYYMMDD = "yyyy-MM-dd";
+
     private CalendarUtils() {
         // utility class
     }
@@ -86,12 +89,8 @@ public final class CalendarUtils {
      * @return String formatted date
      */
     public static String yearMonth(@Nullable final Date date) {
-        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
-        if (null == date) {
-            return "";
-        } else {
-            return dateFormat.format(date);
-        }
+        final DateFormat dateFormat = new SimpleDateFormat(PATTERN_YYYYMM, Locale.getDefault());
+        return null == date ? "" : dateFormat.format(date);
     }
 
     /**
@@ -100,12 +99,17 @@ public final class CalendarUtils {
      * @return String formatted date
      */
     public static String yearMonth(final long date) {
-        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
-        if (0 == date) {
-            return "";
-        } else {
-            return dateFormat.format(date);
-        }
+        final DateFormat dateFormat = new SimpleDateFormat(PATTERN_YYYYMM, Locale.getDefault());
+        return 0 == date ? "" : dateFormat.format(date);
     }
 
+    /**
+     * returns given date in format yyyy-mm-dd, or empty string if 0 given
+     * @param date Date to be formatted
+     * @return String formatted date
+     */
+    public static String yearMonthDay(final long date) {
+        final SimpleDateFormat pattern = new SimpleDateFormat(PATTERN_YYYYMMDD, Locale.getDefault());
+        return date == 0 ? "" : pattern.format(date);
+    }
 }

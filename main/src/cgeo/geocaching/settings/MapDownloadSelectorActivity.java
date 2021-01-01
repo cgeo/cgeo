@@ -6,9 +6,12 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.storage.extension.InstalledOfflineMaps;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
+import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
@@ -27,6 +30,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -50,7 +54,9 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
 
     @NonNull
     private final List<OfflineMap> maps = new ArrayList<>();
+    private final ArrayList<InstalledOfflineMaps> installedOfflineMaps = InstalledOfflineMaps.availableOfflineMaps();
     private final MapListAdapter adapter = new MapListAdapter(this);
+    protected @BindView(R.id.check_for_updates) Button checkForUpdates;
 
     protected class MapListAdapter extends RecyclerView.Adapter<MapListAdapter.ViewHolder> {
         @NonNull private final MapDownloadSelectorActivity activity;
@@ -82,11 +88,11 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             final ViewHolder viewHolder = new ViewHolder(view);
             viewHolder.retrieve.setOnClickListener(v -> {
                 final OfflineMap offlineMap = activity.getQueries().get(viewHolder.getAdapterPosition());
-                new MapListTask(activity, offlineMap.getUri(), offlineMap.getName()).execute();
+                    new MapListTask(activity, offlineMap.getUri(), offlineMap.getName()).execute();
             });
             viewHolder.download.setOnClickListener(v -> {
-                // return to caller with URL chosen
                 final OfflineMap offlineMap = activity.getQueries().get(viewHolder.getAdapterPosition());
+                // return to caller with URL chosen
                 final Intent intent = new Intent();
                 intent.putExtra(MapDownloadUtils.RESULT_CHOSEN_URL, offlineMap.getUri());
                 intent.putExtra(MapDownloadUtils.RESULT_SIZE_INFO, offlineMap.getSizeInfo());
@@ -106,9 +112,10 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             holder.retrieve.setVisibility(offlineMap.getIsDir() ? View.VISIBLE : View.GONE);
             holder.label.setText(offlineMap.getName());
             if (offlineMap.getIsDir()) {
-                holder.info.setText("directory");
+                holder.info.setText(R.string.downloadmap_directory);
             } else {
-                holder.info.setText("map file" + Formatter.SEPARATOR + offlineMap.getDateInfoAsString() + Formatter.SEPARATOR + offlineMap.getSizeInfo());
+                final String addInfo = offlineMap.getAddInfo();
+                holder.info.setText(getString(R.string.downloadmap_mapfile) + Formatter.SEPARATOR + offlineMap.getDateInfoAsString() + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "") + Formatter.SEPARATOR + offlineMap.getSizeInfo());
             }
         }
     }
@@ -118,7 +125,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         private final String newSelectionTitle;
 
         MapListTask(final Activity activity, final Uri uri, final String newSelectionTitle) {
-            super(activity, newSelectionTitle, "Retrieving directory data...");
+            super(activity, newSelectionTitle, getString(R.string.downloadmap_retrieving_directory_data));
             this.uri = uri;
             this.newSelectionTitle = newSelectionTitle;
             Log.i("starting MapDownloaderTask: " + uri.toString());
@@ -149,7 +156,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
                         final String oneUp = uri.toString();
                         final int endOfPreviousSegment = oneUp.lastIndexOf("/", oneUp.length() - 2); // skip trailing "/"
                         if (endOfPreviousSegment > -1) {
-                            final OfflineMap offlineMap = new OfflineMap("(one dir up)", Uri.parse(oneUp.substring(0, endOfPreviousSegment + 1)), true, "", "");
+                            final OfflineMap offlineMap = new OfflineMap(getString(R.string.downloadmap_onedirup), Uri.parse(oneUp.substring(0, endOfPreviousSegment + 1)), true, "", "");
                             list.add(offlineMap);
                         }
                     }
@@ -178,14 +185,89 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
 
         @Override
         protected void onPostExecuteInternal(final List<OfflineMap> result) {
-            setMaps(result, newSelectionTitle);
+            checkForUpdates.setVisibility(View.VISIBLE);
+            setMaps(result, newSelectionTitle, false);
         }
     }
+
+    private class MapUpdateCheckTask extends AsyncTaskWithProgressText<Void, List<OfflineMap>> {
+        private final ArrayList<InstalledOfflineMaps> installedOfflineMaps;
+        private final String newSelectionTitle;
+
+        MapUpdateCheckTask(final Activity activity, final ArrayList<InstalledOfflineMaps> installedOfflineMaps, final String newSelectionTitle) {
+            super(activity, newSelectionTitle, activity.getString(R.string.downloadmap_checking_for_updates));
+            this.installedOfflineMaps = installedOfflineMaps;
+            this.newSelectionTitle = newSelectionTitle;
+            Log.i("starting MapUpdateCheckTask");
+        }
+
+        @Override
+        protected List<OfflineMap> doInBackgroundInternal(final Void[] none) {
+            final List<OfflineMap> result = new ArrayList<>();
+            result.add(new OfflineMap(getString(R.string.downloadmap_title), MAP_BASE, true, "", ""));
+            for (InstalledOfflineMaps installedOfflineMap : installedOfflineMaps) {
+                final String remoteUrl = installedOfflineMap.getRemoteUrl();
+                final int i = remoteUrl.lastIndexOf("/");
+                if (i != -1) {
+                    final OfflineMap offlineMap = checkForUpdate(remoteUrl.substring(0, i), remoteUrl.substring(i + 1));
+                    if (offlineMap != null && offlineMap.getDateInfo() > installedOfflineMap.getDate()) {
+                        offlineMap.setAddInfo(CalendarUtils.yearMonthDay(installedOfflineMap.getDate()));
+                        result.add(offlineMap);
+                    }
+                }
+            }
+            return result;
+        }
+
+        @Nullable
+        private OfflineMap checkForUpdate(final String remoteUrl, final String remoteFilename) {
+            final Parameters params = new Parameters();
+            String page = "";
+            try {
+                final Response response = Network.getRequest(remoteUrl, params).blockingGet();
+                page = Network.getResponseData(response, true);
+            } catch (final Exception e) {
+                return null;
+            }
+
+            if (StringUtils.isBlank(page)) {
+                Log.e("getMap: No data from server");
+                return null;
+            }
+
+            try {
+                final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_MAP, page);
+                while (matchMap.find()) {
+                    final String filename = matchMap.group(1);
+                    if (filename.equals(remoteFilename)) {
+                        return new OfflineMap(matchMap.group(2), Uri.parse(remoteUrl + "/" + filename), false, matchMap.group(3), matchMap.group(4));
+                    }
+                }
+                return null;
+            } catch (final Exception e) {
+                Log.e("Map update checker: error parsing parsing html page", e);
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecuteInternal(final List<OfflineMap> result) {
+            setMaps(result, newSelectionTitle, result.size() < 2);
+        }
+    }
+
 
     @SuppressLint("MissingSuperCall")
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.mapdownloader_activity);
+
+        checkForUpdates.setVisibility (installedOfflineMaps != null && installedOfflineMaps.size() > 0 ? View.VISIBLE : View.GONE);
+        checkForUpdates.setOnClickListener(v -> {
+            checkForUpdates.setVisibility(View.GONE);
+            new MapUpdateCheckTask(this, installedOfflineMaps, getString(R.string.downloadmap_available_updates)).execute();
+        });
+
         MapDownloadUtils.checkMapDirectory(this, true, (path, isWritable) -> {
             if (isWritable) {
                 final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.mapdownloader_list, true, true);
@@ -201,10 +283,14 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         return maps;
     }
 
-    private synchronized void setMaps(final List<OfflineMap> maps, final String selectionTitle) {
+    private synchronized void setMaps(final List<OfflineMap> maps, @NonNull final String selectionTitle, final boolean noUpdatesFound) {
         this.maps.clear();
         this.maps.addAll(maps);
         adapter.notifyDataSetChanged();
         this.setTitle(selectionTitle);
+        if (noUpdatesFound) {
+            Dialogs.message(this, R.string.downloadmap_no_updates_found);
+            new MapListTask(this, MAP_BASE, "").execute();
+        }
     }
 }

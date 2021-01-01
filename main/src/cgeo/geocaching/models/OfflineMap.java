@@ -1,5 +1,7 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.utils.CalendarUtils;
+
 import android.annotation.SuppressLint;
 import android.net.Uri;
 
@@ -11,13 +13,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class OfflineMap {
 
-    private static final String datePattern = "yyyy-MM-dd";
-
     private final String name;
     private final Uri uri;
     private final boolean isDir;
     private final long dateInfo;
     private final String sizeInfo;
+    private String addInfo;
 
     public OfflineMap(final String name, final Uri uri, final boolean isDir, final String dateISO, final String sizeInfo) {
         // capitalize first letter + every first after a "-"
@@ -32,11 +33,12 @@ public class OfflineMap {
         this.uri = uri;
         this.isDir = isDir;
         this.sizeInfo = sizeInfo;
+        this.addInfo = "";
 
         // parse date info - dateISO has format yyyy-MM-dd
         long result;
         try {
-            @SuppressLint("SimpleDateFormat") final SimpleDateFormat pattern = new SimpleDateFormat(datePattern);
+            @SuppressLint("SimpleDateFormat") final SimpleDateFormat pattern = new SimpleDateFormat(CalendarUtils.PATTERN_YYYYMMDD);
             final Date date = pattern.parse(dateISO);
             result = date != null ? date.getTime() : 0;
         } catch (ParseException | NullPointerException e) {
@@ -58,8 +60,7 @@ public class OfflineMap {
     }
 
     public String getDateInfoAsString() {
-        @SuppressLint("SimpleDateFormat") final SimpleDateFormat pattern = new SimpleDateFormat(datePattern);
-        return pattern.format(dateInfo);
+        return CalendarUtils.yearMonthDay(dateInfo);
     }
 
     public long getDateInfo() {
@@ -70,4 +71,11 @@ public class OfflineMap {
         return sizeInfo;
     }
 
+    public void setAddInfo(final String addInfo) {
+        this.addInfo = addInfo;
+    }
+
+    public String getAddInfo() {
+        return addInfo;
+    }
 }
