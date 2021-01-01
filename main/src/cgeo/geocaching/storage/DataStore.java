@@ -198,7 +198,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 90;
+    private static final int dbVersion = 91;
     public static final int customListIdOffset = 10;
 
     /**
@@ -224,7 +224,8 @@ public class DataStore {
             87, // adds service log id to logging tables
             88, // add timestamp to trail history
             89, // add altitude to trail history
-            90  // add user guid to cg_caches and cg_logs
+            90, // add user guid to cg_caches and cg_logs
+            91  // add fields to cg_extension
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -457,8 +458,12 @@ public class DataStore {
             + "_key VARCHAR(50), "
             + "long1 INTEGER DEFAULT 0, "
             + "long2 INTEGER DEFAULT 0, "
+            + "long3 INTEGER DEFAULT 0, "
+            + "long4 INTEGER DEFAULT 0, "
             + "string1 TEXT, "
-            + "string2 TEXT"
+            + "string2 TEXT,"
+            + "string3 TEXT,"
+            + "string4 TEXT"
             + "); ";
 
     // reminder to myself: when adding a new CREATE TABLE statement:
@@ -489,8 +494,12 @@ public class DataStore {
         protected String key;
         protected long long1;
         protected long long2;
+        protected long long3;
+        protected long long4;
         protected String string1;
         protected String string2;
+        protected String string3;
+        protected String string4;
 
         protected DBExtension() {
             // utility class
@@ -499,13 +508,17 @@ public class DataStore {
         /**
          * internal constructor for database queries
          */
-        protected DBExtension(final long id, final String key, final long long1, final long long2, final String string1, final String string2) {
+        protected DBExtension(final long id, final String key, final long long1, final long long2, final long long3, final long long4, final String string1, final String string2, final String string3, final String string4) {
             this.id = id;
             this.key = key;
             this.long1 = long1;
             this.long2 = long2;
+            this.long3 = long3;
+            this.long4 = long4;
             this.string1 = string1;
             this.string2 = string2;
+            this.string3 = string3;
+            this.string4 = string4;
         }
 
         /**
@@ -516,8 +529,12 @@ public class DataStore {
             this.key = copyFrom.getKey();
             this.long1 = copyFrom.getLong1();
             this.long2 = copyFrom.getLong2();
+            this.long3 = copyFrom.getLong3();
+            this.long4 = copyFrom.getLong4();
             this.string1 = copyFrom.getString1();
             this.string2 = copyFrom.getString2();
+            this.string3 = copyFrom.getString3();
+            this.string4 = copyFrom.getString4();
         }
 
         /** get the first entry for this key */
@@ -533,12 +550,12 @@ public class DataStore {
         protected static DBExtension load(final SQLiteDatabase db, final DBExtensionType type, @NonNull final String key) {
             checkState(type, key, false);
             try (Cursor cursor = db.query(dbTableExtension,
-                    new String[]{"_id", "_key", "long1", "long2", "string1", "string2"},
+                    new String[]{"_id", "_key", "long1", "long2", "long3", "long4", "string1", "string2", "string3", "string4"},
                     "_type = ? AND _key LIKE ?",
                     new String[]{String.valueOf(type.id), key},
                     null, null, "_id", "1")) {
                 if (cursor.moveToNext()) {
-                    return new DBExtension(cursor.getLong(0), cursor.getString(1), cursor.getLong(2), cursor.getLong(3), cursor.getString(4), cursor.getString(5));
+                    return new DBExtension(cursor.getLong(0), cursor.getString(1), cursor.getLong(2), cursor.getLong(3), cursor.getLong(4), cursor.getLong(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9));
                 }
             }
             return null;
@@ -555,43 +572,47 @@ public class DataStore {
             checkState(type, key, true);
             final ArrayList<DBExtension> result = new ArrayList<>();
             try (Cursor cursor = db.query(dbTableExtension,
-                    new String[]{"_id", "_key", "long1", "long2", "string1", "string2"},
+                    new String[]{"_id", "_key", "long1", "long2", "long3", "long4", "string1", "string2", "string3", "string4"},
                     "_type = ?" + (null == key ? "" : " AND _key LIKE ?"),
                     null == key ? new String[]{String.valueOf(type)} : new String[]{String.valueOf(type), key},
                     null, null, "_id", "1")) {
                 while (cursor.moveToNext()) {
-                    result.add(new DBExtension(cursor.getLong(1), cursor.getString(2), cursor.getLong(3), cursor.getLong(4), cursor.getString(5), cursor.getString(6)));
+                    result.add(new DBExtension(cursor.getLong(1), cursor.getString(2), cursor.getLong(3), cursor.getLong(4), cursor.getLong(5), cursor.getLong(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10)));
                 }
             }
             return result;
         }
 
         /**adds a new entry to database */
-        protected static DBExtension add(final DBExtensionType type, final String key, final long long1, final long long2, final String string1, final String string2) {
+        protected static DBExtension add(final DBExtensionType type, final String key, final long long1, final long long2, final long long3, final long long4, final String string1, final String string2, final String string3, final String string4) {
             if (!init(false)) {
                 return null;
             }
-            return add(database, type, key, long1, long2, string1, string2);
+            return add(database, type, key, long1, long2, long3, long4, string1, string2, string3, string4);
         }
 
-        protected static DBExtension add(final SQLiteDatabase db, final DBExtensionType type, final String key, final long long1, final long long2, final String string1, final String string2) {
+        protected static DBExtension add(final SQLiteDatabase db, final DBExtensionType type, final String key, final long long1, final long long2, final long long3, final long long4, final String string1, final String string2, final String string3, final String string4) {
             try {
-                final long id = db.insert(dbTableExtension, null, toValues(type, key, long1, long2, string1, string2));
-                return new DBExtension(id, key, long1, long2, string1, string2);
+                final long id = db.insert(dbTableExtension, null, toValues(type, key, long1, long2, long3, long4, string1, string2, string3, string4));
+                return new DBExtension(id, key, long1, long2, long3, long4, string1, string2, string3, string4);
             } catch (final Exception e) {
                 Log.e("DBExtension.add failed", e);
             }
             return null;
         }
 
-        private static ContentValues toValues(final DBExtensionType type, final String key, final long long1, final long long2, final String string1, final String string2) {
+        private static ContentValues toValues(final DBExtensionType type, final String key, final long long1, final long long2, final long long3, final long long4, final String string1, final String string2, final String string3, final String string4) {
             final ContentValues cv = new ContentValues();
             cv.put("_type", String.valueOf(type.id));
             cv.put("_key", key);
             cv.put("long1", long1);
             cv.put("long2", long2);
+            cv.put("long3", long3);
+            cv.put("long4", long4);
             cv.put("string1", string1);
             cv.put("string2", string2);
+            cv.put("string3", string3);
+            cv.put("string4", string4);
             return cv;
         }
 
@@ -635,12 +656,28 @@ public class DataStore {
             return long2;
         }
 
+        public long getLong3() {
+            return long3;
+        }
+
+        public long getLong4() {
+            return long4;
+        }
+
         public String getString1() {
             return string1;
         }
 
         public String getString2() {
             return string2;
+        }
+
+        public String getString3() {
+            return string3;
+        }
+
+        public String getString4() {
+            return string3;
         }
 
     }
@@ -1432,6 +1469,18 @@ public class DataStore {
                             createColumnIfNotExists(db, dbTableLogs, "author_guid TEXT NOT NULL DEFAULT ''");
                         } catch (final SQLException e) {
                             onUpgradeError(e, 90);
+                        }
+                    }
+
+                    // add field to cg_extension
+                    if (oldVersion < 91) {
+                        try {
+                            createColumnIfNotExists(db, dbTableExtension, "long3 LONG NOT NULL DEFAULT 0");
+                            createColumnIfNotExists(db, dbTableExtension, "long4 LONG NOT NULL DEFAULT 0");
+                            createColumnIfNotExists(db, dbTableExtension, "string3 TEXT NOT NULL DEFAULT ''");
+                            createColumnIfNotExists(db, dbTableExtension, "string4 TEXT NOT NULL DEFAULT ''");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 91);
                         }
                     }
 
