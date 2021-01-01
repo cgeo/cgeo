@@ -233,8 +233,6 @@
     <string name="warn_log_text_fill">Proszę uzupełnij tekst wpisu.</string>
     <string name="warn_load_images">c:geo nie był w stanie załadować obrazów.</string>
     <string name="warn_invalid_mapfile">Wybrany plik mapy nie jest prawidłowym plikiem mapsforge lub używa nieobsługiwanej wersji.\n(c:geo obecnie obsługuje v3 do v5 / v3 tylko jeśli używasz ustawień \"Old Mapfsforge V3\".)\n\nMapy offline nie są dostępne.</string>
-    <string name="warn_nonexistant_mapfile">Wybrany plik z mapą nie istnieje.\nMapy offline są niedostępne.</string>
-    <string name="warn_rendertheme_missing">Nie znaleziono tematu mapy.</string>
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
     <string name="warn_invalid_character">Znak musi być liter lub cyfrą</string>
@@ -413,7 +411,6 @@
     <string name="about_license">Licencja</string>
     <string name="about_apache_license"><a href="">Licencja Apache, wersja 2.0</a></string>
     <string name="about_help">Pomoc</string>
-    <string name="open_services_page">Skonfiguruj swoje platformy geocachingowe</string>
     <string name="about_system_include">Proszę załączyć następujące informacje o systemie podczas przesyłania raportu błędu albo podczas prośby o więcej informacji odnośnie c:geo:</string>
     <string name="about_system_info_send_button">Wyślij mailem…</string>
     <string name="about_system_info">c:geo informacje systemowe</string>
@@ -683,7 +680,6 @@
     <string name="init_circlecolor_summary">Wybierz kolor i nieprzezroczystość dla linii okręgowej. Okręgi są używane jako wizualne przedstawienie minimalnego promienia wokół skrzynki lub fizycznego punktu drogi, gdzie nie jest dozwolona żadna inna skrzynka lub fizyczny punkt drogi. (Dotyczy geocaching.com)</string>
     <string name="init_circlefillcolor">Kolor wypełnienia koła</string>
     <string name="init_circlefillcolor_summary">Wybierz kolor i nieprzezroczystość okręgów, które mają być wypełnione</string>
-    <string name="init_share_after_export">Otwórz menu udostępniania po wyeksportowaniu plików GPX</string>
     <string name="init_include_found_status">Uwzględnij status \"Znalezione\"</string>
     <string name="init_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
     <string name="init_summary_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
@@ -781,7 +777,6 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
     <string name="map_source_attribution_dialog_title">Przypisania mapy</string>
-    <string name="map_source_attribution_legacy_text">Dotknij, aby wyświetlić autorów mapy</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
     <string name="init_sendToCgeo_name">Nazwa urządzenia</string>
@@ -1165,7 +1160,6 @@
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa online</string>
     <string name="map_view_map">Widok mapy</string>
-    <string name="map_modes">Tryb mapy</string>
     <string name="map_rotation">Obrót mapy</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
     <string name="map_show_circles">Pokaż okręgi</string>
