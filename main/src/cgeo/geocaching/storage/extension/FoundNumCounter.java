@@ -10,9 +10,7 @@ public class FoundNumCounter extends DataStore.DBExtension {
     private static final DataStore.DBExtensionType type = DataStore.DBExtensionType.DBEXTENSION_FOUNDNUM;
 
     private FoundNumCounter(final DataStore.DBExtension copyFrom) {
-        this.id = copyFrom.getId();
-        this.key = copyFrom.getKey();
-        this.long1 = copyFrom.getLong1();
+        super(copyFrom);
     }
 
     public long getCounter(final boolean incrementCounter) {
