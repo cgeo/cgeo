@@ -197,8 +197,6 @@
     <string name="warn_search_help_tb">أدخل كود للأمتعة السفر. مثلاً \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">الرجاء إدخال نص لتسجيل زيارتك.</string>
     <string name="warn_load_images">c:geo فشل في تحميل الصورة.</string>
-    <string name="warn_nonexistant_mapfile">ملف الخريطة المحدد غير موجود.\n الخرائط في وضع عدم الاتصال غير متاحة.</string>
-    <string name="warn_rendertheme_missing">لم يتم العثور على ثيم الخريطة.</string>
     <string name="warn_pocket_query_select">لم يتم تحديد أي إستفسارات.</string>
     <string name="warn_no_pocket_query_found">لم يتم العثور على أية استفسارات على الانترنات.</string>
     <string name="warn_invalid_character">الرمز يجب أن يكون حرف أو رقم</string>
@@ -486,7 +484,6 @@
     <string name="init_gpx_importdir">دليل استيراد من GPX</string>
     <string name="init_dataDir">حدد دفتر بيانات العلبة المخبئة</string>
     <string name="init_dataDir_note">قد تختار تخزين بيانات إضافية في العلبة المخبئة (المفشي، ألبوم الصور، &#8230;) في تخزينك الخارجي (تضمينها داخل التخزين أو في بطاقة ذاكرة خارجية اعتماداً على جهازك).</string>
-    <string name="init_share_after_export">افتح قائمة المشاركة بعد التصدير من GPX</string>
     <string name="init_include_found_status">تضمين حالة \"تم العثور عليها\"</string>
     <string name="init_trackautovisit">زيارة TBs</string>
     <string name="init_summary_trackautovisit">تعيين أمتعة السفر ليتم \"زيارتها\" بشكل افتراضي</string>
@@ -823,7 +820,6 @@
     <string name="map_map">خريطة</string>
     <string name="map_live">خريطة على نات</string>
     <string name="map_view_map">عرض الخريطة</string>
-    <string name="map_modes">إعدادات الخريطة</string>
     <string name="map_show_circles">إظهار الدوائر</string>
     <string name="map_theme_select">حدد ثيم الخريطة</string>
     <string name="map_live_enable">تمكين عرض مباشر</string>
