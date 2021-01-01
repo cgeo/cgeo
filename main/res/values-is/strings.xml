@@ -158,7 +158,6 @@
     <string name="warn_search_help_title">Þarftu aðstoð?</string>
     <string name="warn_log_text_fill">Settu inn einhvern texta í færsluna þína.</string>
     <string name="warn_load_images">c:geo gat ekki náð í myndir.</string>
-    <string name="warn_rendertheme_missing">Kortaþema fannst ekki.</string>
     <string name="err_read_pocket_query_list">Villa kom upp við að lesa vasafyrirspurnarlista.</string>
     <string name="info_log_posted">c:geo hefur tekist að setja færsluna inn.</string>
     <string name="info_log_saved">c:geo hefur tekist að vista færsluna.</string>
