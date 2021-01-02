@@ -273,8 +273,15 @@ public final class LocalStorage {
     }
 
     @NonNull
-    public static File getDefaultMapDirectory() {
-        return new File(getExternalPublicCgeoDirectory(), MAP_DIR_NAME);
+    public static String getOrCreateMapDirectory() {
+        String mapDirectory = Settings.getMapFileDirectory();
+        if (mapDirectory == null) {
+            final File file = new File(getExternalPublicCgeoDirectory(), MAP_DIR_NAME);
+            FileUtils.mkdirs(file);
+            mapDirectory = file.getPath();
+            Settings.setMapFileDirectory(mapDirectory);
+        }
+        return mapDirectory;
     }
 
     @NonNull

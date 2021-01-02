@@ -6,7 +6,6 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.storage.extension.InstalledOfflineMaps;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
@@ -16,6 +15,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.OfflineMapUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
@@ -54,7 +54,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
 
     @NonNull
     private final List<OfflineMap> maps = new ArrayList<>();
-    private final ArrayList<InstalledOfflineMaps> installedOfflineMaps = InstalledOfflineMaps.availableOfflineMaps();
+    private final ArrayList<OfflineMapUtils.OfflineMapData> installedOfflineMaps = OfflineMapUtils.availableOfflineMaps();
     private final MapListAdapter adapter = new MapListAdapter(this);
     protected @BindView(R.id.check_for_updates) Button checkForUpdates;
 
@@ -185,16 +185,16 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
 
         @Override
         protected void onPostExecuteInternal(final List<OfflineMap> result) {
-            checkForUpdates.setVisibility(View.VISIBLE);
+            setUpdateButtonVisibility();
             setMaps(result, newSelectionTitle, false);
         }
     }
 
     private class MapUpdateCheckTask extends AsyncTaskWithProgressText<Void, List<OfflineMap>> {
-        private final ArrayList<InstalledOfflineMaps> installedOfflineMaps;
+        private final ArrayList<OfflineMapUtils.OfflineMapData> installedOfflineMaps;
         private final String newSelectionTitle;
 
-        MapUpdateCheckTask(final Activity activity, final ArrayList<InstalledOfflineMaps> installedOfflineMaps, final String newSelectionTitle) {
+        MapUpdateCheckTask(final Activity activity, final ArrayList<OfflineMapUtils.OfflineMapData> installedOfflineMaps, final String newSelectionTitle) {
             super(activity, newSelectionTitle, activity.getString(R.string.downloadmap_checking_for_updates));
             this.installedOfflineMaps = installedOfflineMaps;
             this.newSelectionTitle = newSelectionTitle;
@@ -205,15 +205,11 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         protected List<OfflineMap> doInBackgroundInternal(final Void[] none) {
             final List<OfflineMap> result = new ArrayList<>();
             result.add(new OfflineMap(getString(R.string.downloadmap_title), MAP_BASE, true, "", ""));
-            for (InstalledOfflineMaps installedOfflineMap : installedOfflineMaps) {
-                final String remoteUrl = installedOfflineMap.getRemoteUrl();
-                final int i = remoteUrl.lastIndexOf("/");
-                if (i != -1) {
-                    final OfflineMap offlineMap = checkForUpdate(remoteUrl.substring(0, i), remoteUrl.substring(i + 1));
-                    if (offlineMap != null && offlineMap.getDateInfo() > installedOfflineMap.getDate()) {
-                        offlineMap.setAddInfo(CalendarUtils.yearMonthDay(installedOfflineMap.getDate()));
-                        result.add(offlineMap);
-                    }
+            for (OfflineMapUtils.OfflineMapData installedOfflineMap : installedOfflineMaps) {
+                final OfflineMap offlineMap = checkForUpdate(installedOfflineMap.remotePage, installedOfflineMap.remoteFile);
+                if (offlineMap != null && offlineMap.getDateInfo() > installedOfflineMap.remoteDate) {
+                    offlineMap.setAddInfo(CalendarUtils.yearMonthDay(installedOfflineMap.remoteDate));
+                    result.add(offlineMap);
                 }
             }
             return result;
@@ -262,7 +258,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.mapdownloader_activity);
 
-        checkForUpdates.setVisibility (installedOfflineMaps != null && installedOfflineMaps.size() > 0 ? View.VISIBLE : View.GONE);
+        setUpdateButtonVisibility();
         checkForUpdates.setOnClickListener(v -> {
             checkForUpdates.setVisibility(View.GONE);
             new MapUpdateCheckTask(this, installedOfflineMaps, getString(R.string.downloadmap_available_updates)).execute();
@@ -281,6 +277,10 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
 
     public List<OfflineMap> getQueries() {
         return maps;
+    }
+
+    private void setUpdateButtonVisibility() {
+        checkForUpdates.setVisibility (installedOfflineMaps != null && installedOfflineMaps.size() > 0 ? View.VISIBLE : View.GONE);
     }
 
     private synchronized void setMaps(final List<OfflineMap> maps, @NonNull final String selectionTitle, final boolean noUpdatesFound) {

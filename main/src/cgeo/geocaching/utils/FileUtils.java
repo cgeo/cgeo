@@ -22,7 +22,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
@@ -504,6 +509,27 @@ public final class FileUtils {
             // thrown if the directory isn't pointing to an external storage
         }
         return 0;
+    }
+
+    /**
+     * searches a given directory for files ending with a certain string
+     * @param path path to look in
+     * @param extension extension to be searched for
+     * @return List of found files, may be empty
+     */
+    @NonNull
+    public static List<String> listFiles(final Path path, final String extension) {
+        final List<String> result;
+        try (Stream<Path> walk = Files.walk(path, 1)) {
+            result = walk
+                .filter(p -> Files.isRegularFile(p))
+                .map(p -> p.toString().toLowerCase())
+                .filter(f -> f.endsWith(extension))
+                .collect(Collectors.toList());
+        } catch (IOException e) {
+            return Collections.emptyList();
+        }
+        return result;
     }
 
 }

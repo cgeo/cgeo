@@ -3,12 +3,12 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
-import cgeo.geocaching.storage.extension.InstalledOfflineMaps;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
-import static cgeo.geocaching.utils.FileUtils.getFilenameFromPath;
+import cgeo.geocaching.utils.OfflineMapUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -78,7 +78,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         try {
             String filename = StringUtils.isNotBlank(preset) ? preset : uri.getPath();    // uri.getLastPathSegment doesn't help here, if path is encoded
             if (filename != null) {
-                filename = getFilenameFromPath(filename);
+                filename = FileUtils.getFilenameFromPath(filename);
                 final int posExt = filename.lastIndexOf('.');
                 if (posExt == -1 || !(MAP_EXTENSION.equals(filename.substring(posExt)))) {
                     filename += MAP_EXTENSION;
@@ -88,7 +88,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
             if (file == null) {
                 createRandomlyNamedFile();
             }
-            fileinfo = getFilenameFromPath(file.getPath());
+            fileinfo = FileUtils.getFilenameFromPath(file.getPath());
             if (fileinfo != null) {
                 fileinfo = fileinfo.substring(0, fileinfo.length() - MAP_EXTENSION.length());
             }
@@ -181,7 +181,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                 case SUCCESS:
                     result = String.format(getString(R.string.receivemapfile_success), fileinfo);
                     if (StringUtils.isNotBlank(sourceURL)) {
-                        InstalledOfflineMaps.add(sourceURL, file.getPath(), fileinfo, sourceDate);
+                        OfflineMapUtils.writeInfo(sourceURL, FileUtils.getFilenameFromPath(file.getPath()), OfflineMapUtils.getDisplayName(fileinfo), sourceDate);
                     }
                     break;
                 case CANCELLED:
