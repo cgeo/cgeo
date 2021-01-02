@@ -111,6 +111,15 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         return PATTERN_GEOCODE.matcher(geocode).matches();
     }
 
+    @Override
+    public int getCacheMapMarkerId(final boolean disabled) {
+        if (disabled) {
+            return R.drawable.marker_disabled_oc;
+        }
+        return R.drawable.marker_oc;
+    }
+
+    @Override
     public boolean supportsNamechange() {
         // this connector supports changing the name of a geocache
         return true;

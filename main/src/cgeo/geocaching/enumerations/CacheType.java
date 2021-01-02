@@ -38,7 +38,7 @@ public enum CacheType {
     LOCATIONLESS("locationless", "Locationless (Reverse) Cache", "8f6dd7bc-ff39-4997-bd2e-225a0d2adf9d", R.string.locationless, R.drawable.type_virtual, "12", R.drawable.dot_virtual), // icon missing
 
     // insert other official cache types before USER_DEFINED and UNKNOWN
-    USER_DEFINED("userdefined", "User defined cache", "", R.string.userdefined, R.drawable.type_virtual, "", R.drawable.dot_virtual),
+    USER_DEFINED("userdefined", "User defined cache", "", R.string.userdefined, R.drawable.type_cgeo, "", R.drawable.dot_virtual),
     UNKNOWN("unknown", "unknown", "", R.string.unknown, R.drawable.type_unknown, "", R.drawable.dot_unknown),
     /** No real cache type -> filter */
     ALL("all", "display all caches", "9a79e6ce-3344-409c-bbe9-496530baf758", R.string.all_types, R.drawable.type_unknown, "", R.drawable.dot_unknown);
