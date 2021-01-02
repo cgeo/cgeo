@@ -399,7 +399,7 @@ public class Settings {
     }
 
     private static boolean contains(final int prefKeyId) {
-        return sharedPrefs == null ? false : sharedPrefs.contains(getKey(prefKeyId));
+        return sharedPrefs != null && sharedPrefs.contains(getKey(prefKeyId));
     }
 
     public static boolean hasGCCredentials() {

@@ -158,7 +158,7 @@ public class MapSettingsUtils {
     private static class ButtonController<T> {
         private final View dialogView;
         private final ArrayList<ButtonChoiceModel<T>> buttons;
-        private T originalValue;
+        private final T originalValue;
         private T currentValue;
         private final Action1<T> setValue;
 

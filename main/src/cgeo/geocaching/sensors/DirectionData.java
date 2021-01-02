@@ -33,7 +33,7 @@ public class DirectionData {
 
     //corrected direction/heading based on deviceorientation
     private final float direction;
-    private DeviceOrientation deviceOrientation;
+    private final DeviceOrientation deviceOrientation;
 
     //raw orientation sensor values
     private final Float azimuth;

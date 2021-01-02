@@ -18,7 +18,7 @@ public class DBDowngradeableVersions extends DataStore.DBExtension {
     private static final DataStore.DBExtensionType type = DataStore.DBExtensionType.DBEXTENSION_DOWNGRADEABLE_DBVERSION;
     private static final String KEY = "ALL";
 
-    private Set<Integer> downgradeableVersions = new HashSet<>();
+    private final Set<Integer> downgradeableVersions = new HashSet<>();
 
     private DBDowngradeableVersions(final DataStore.DBExtension copyFrom) {
         try {

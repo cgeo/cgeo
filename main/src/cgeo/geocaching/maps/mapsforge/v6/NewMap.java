@@ -169,7 +169,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private DistanceView distanceView;
     private View mapAttribution;
 
-    private ArrayList<TrailHistoryElement> trailHistory = null;
+    private final ArrayList<TrailHistoryElement> trailHistory = null;
 
     private String targetGeocode = null;
     private Geopoint lastNavTarget = null;

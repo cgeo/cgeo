@@ -13,14 +13,13 @@ import org.mapsforge.map.reader.header.MapFileInfo;
 
 
 public class MultiRendererLayer implements ITileLayer {
-    private final MultiMapDataStore mapDataStore;
     private final TileRendererLayer tileLayer;
     private byte zoomLevelMin = 0;
     private byte zoomLevelMax = 0;
 
 
     public MultiRendererLayer(final TileCache tileCache, final List<MapFile> mapFiles, final IMapViewPosition mapViewPosition, final boolean isTransparent, final boolean renderLabels, final boolean cacheLabels, final GraphicFactory graphicFactory) {
-        this.mapDataStore = new MultiMapDataStore(MultiMapDataStore.DataPolicy.RETURN_ALL);
+        final MultiMapDataStore mapDataStore = new MultiMapDataStore(MultiMapDataStore.DataPolicy.RETURN_ALL);
 
         for (MapFile f : mapFiles) {
             mapDataStore.addMapDataStore(f, false, false);

@@ -106,7 +106,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     private OfflineLogEntry lastSavedState = null;
 
-    private CacheVotingBar cacheVotingBar = new CacheVotingBar();
+    private final CacheVotingBar cacheVotingBar = new CacheVotingBar();
     private final TextSpinner<LogType> logType = new TextSpinner<>();
     private final DateTimeEditor date = new DateTimeEditor();
 

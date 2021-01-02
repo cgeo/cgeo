@@ -8,7 +8,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 public class RouteSegment implements Parcelable {
-    private RouteItem item;
+    private final RouteItem item;
     private float distance;
     private ArrayList<Geopoint> points;
 

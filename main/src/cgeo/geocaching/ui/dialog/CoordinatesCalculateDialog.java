@@ -81,7 +81,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
     public static final String CALC_STATE = "calc_state";
 
-    private ImageButton doneButton;
     private boolean stateSaved = false;
 
     private Geopoint gp;
@@ -376,7 +375,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 cancel.setOnClickListener(new CalculateCancelListener());
                 cancel.setVisibility(View.VISIBLE);
             }
-            doneButton = v.findViewById(R.id.dialog_title_done);
+            final ImageButton doneButton = v.findViewById(R.id.dialog_title_done);
             if (doneButton != null) {
                 doneButton.setOnClickListener(inputDone);
                 doneButton.setVisibility(View.VISIBLE);

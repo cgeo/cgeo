@@ -125,7 +125,7 @@ public class Geocache implements IWaypoint {
     private String location = null;
     private UncertainProperty<Geopoint> coords = new UncertainProperty<>(null);
     private boolean reliableLatLon = false;
-    private PersonalNote personalNote = new PersonalNote();
+    private final PersonalNote personalNote = new PersonalNote();
     /**
      * lazy initialized
      */

@@ -50,7 +50,7 @@ public class ImageActivityHelper {
     private final int requestCodeStorageSelect;
     private final int requestCodeStorageSelectMulti;
 
-    private Map<Integer, IntentContextData> runningIntents = Collections.synchronizedMap(new HashMap<>());
+    private final Map<Integer, IntentContextData> runningIntents = Collections.synchronizedMap(new HashMap<>());
 
     private static class IntentContextData<T> {
         public final Action1<T> callback;

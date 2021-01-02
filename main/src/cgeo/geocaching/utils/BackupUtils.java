@@ -58,7 +58,7 @@ public class BackupUtils extends Activity {
     private static final String TAG_MAP = "map";
     private static final String SETTINGS_FILENAME = "cgeo-settings.xml";
 
-    private Activity activityContext;
+    private final Activity activityContext;
 
     public BackupUtils(final Activity activityContext) {
         this.activityContext = activityContext;
@@ -132,11 +132,7 @@ public class BackupUtils extends Activity {
 
     private void updateRestoreDialog(final Button button, final CheckBox databaseCheckbox, final CheckBox settingsCheckbox, final TextView warningText) {
 
-        if (databaseCheckbox.isChecked() || settingsCheckbox.isChecked()) {
-            button.setEnabled(true);
-        } else {
-            button.setEnabled(false);
-        }
+        button.setEnabled(databaseCheckbox.isChecked() || settingsCheckbox.isChecked());
 
         final int caches = DataStore.getAllCachesCount();
         if (databaseCheckbox.isChecked() && caches > 0) {
@@ -174,13 +170,7 @@ public class BackupUtils extends Activity {
 
             final Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
             button.setEnabled(false);
-            checkbox.setOnClickListener(check -> {
-                if (checkbox.isChecked()) {
-                    button.setEnabled(true);
-                } else {
-                    button.setEnabled(false);
-                }
-            });
+            checkbox.setOnClickListener(check -> button.setEnabled(checkbox.isChecked()));
         }
 
     }

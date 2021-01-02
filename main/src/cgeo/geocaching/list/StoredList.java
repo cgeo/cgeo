@@ -9,7 +9,6 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.View;
@@ -67,13 +66,11 @@ public final class StoredList extends AbstractList {
 
     public static class UserInterface {
         private final WeakReference<Activity> activityRef;
-        private final Application app;
         private final Resources res;
 
         public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
-            app = CgeoApplication.getInstance();
-            res = app.getResources();
+            res = CgeoApplication.getInstance().getResources();
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
