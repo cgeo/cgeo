@@ -25,9 +25,9 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         DATABASE_CONFIRM_OVERWRITE(null, null, DefaultBehavior.SHOW_ALWAYS),
         MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE);
 
-        public Integer messageTitle;
-        public Integer messageText;
-        public DefaultBehavior defaultBehavior;
+        public final Integer messageTitle;
+        public final Integer messageText;
+        public final DefaultBehavior defaultBehavior;
 
         DialogType(final Integer messageTitle, final Integer messageText, final DefaultBehavior defaultBehavior) {
             this.messageTitle = messageTitle;
@@ -55,7 +55,7 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         DIALOG_SHOW(1),
         DIALOG_HIDE (2);
 
-        public int id;
+        public final int id;
 
         DialogStatus(final int id) {
             this.id = id;

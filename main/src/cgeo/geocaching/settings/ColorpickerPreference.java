@@ -133,7 +133,7 @@ public class ColorpickerPreference extends DialogPreference {
                     final int max = 255;
 
                     Dialogs.newBuilder(context)
-                        .setTitle(String.format(context.getString(R.string.number_input_title), String.valueOf(min), String.valueOf(max)))
+                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))
                         .setView(editText)
                         .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
                             int newValue;

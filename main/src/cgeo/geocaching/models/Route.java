@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class Route implements Parcelable {
     private String name = "";
     protected ArrayList<RouteSegment> segments = new ArrayList<>();
-    private boolean routeable;
+    private final boolean routeable;
     protected float distance = 0.0f;
 
     public Route(final boolean routeable) {

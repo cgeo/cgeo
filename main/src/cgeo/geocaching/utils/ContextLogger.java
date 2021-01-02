@@ -62,7 +62,7 @@ public class ContextLogger implements Closeable {
         if (collection == null || !isActive()) {
             return "#-[]";
         }
-        return "#" + collection.size() + "[" + CollectionStream.of(collection).limit(limit).map(c -> mapper.call(c)).toJoinedString(",") + "]";
+        return "#" + collection.size() + "[" + CollectionStream.of(collection).limit(limit).map(mapper).toJoinedString(",") + "]";
     }
 
     public ContextLogger add(final String msg, final Object ... params) {

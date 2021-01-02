@@ -17,7 +17,7 @@ public class FastScrollListener implements AbsListView.OnScrollListener {
     private int mScrollState = 0;
     private int mFlingStartPos = -1;
     private int mLastFirstVisibleItem = -1;
-    private ListView listView;
+    private final ListView listView;
 
     public FastScrollListener(final ListView listView) {
         this.listView = listView;

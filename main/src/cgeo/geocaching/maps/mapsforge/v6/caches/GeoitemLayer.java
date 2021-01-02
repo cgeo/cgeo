@@ -32,7 +32,7 @@ public class GeoitemLayer extends Marker {
     private final TapHandler tapHandler;
     private final double halfXSpan;
     private final double halfYSpan;
-    private GeoitemCircle circle;
+    private final GeoitemCircle circle;
 
     private static final float radius = (float) (528.0 * IConversion.FEET_TO_KILOMETER * 1000.0);
 

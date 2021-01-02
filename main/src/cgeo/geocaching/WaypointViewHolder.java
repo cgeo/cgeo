@@ -19,7 +19,7 @@ public class WaypointViewHolder extends AbstractViewHolder {
     @BindView(R.id.user_note) protected TextView userNoteView;
     @BindView(R.id.wpDefaultNavigation) protected ImageView wpNavView;
 
-    private CoordinatesFormatSwitcher coordinateFormatSwitcher;
+    private final CoordinatesFormatSwitcher coordinateFormatSwitcher;
 
     public WaypointViewHolder(final View rowView) {
         super(rowView);

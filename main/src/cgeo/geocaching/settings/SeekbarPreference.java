@@ -24,7 +24,7 @@ public class SeekbarPreference extends Preference {
     protected int minProgress = 0;
     protected int maxProgress = 100;
     protected int startProgress = 0;
-    protected int defaultValue = 10;
+    protected final int defaultValue = 10;
     protected boolean hasDecimals = false;
     protected String label = "";
     protected Context context = null;

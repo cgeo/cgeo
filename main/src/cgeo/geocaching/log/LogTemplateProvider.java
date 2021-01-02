@@ -162,11 +162,7 @@ public final class LogTemplateProvider {
             public String getValue(final LogContext context) {
 
                 final boolean increment;
-                if (null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN) {
-                    increment = true;
-                } else {
-                    increment = false;
-                }
+                increment = null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN;
 
                 final Geocache cache = context.getCache();
                 if (cache == null) {

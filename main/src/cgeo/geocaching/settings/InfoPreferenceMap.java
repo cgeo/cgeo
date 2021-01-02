@@ -15,7 +15,7 @@ import android.util.AttributeSet;
  */
 public class InfoPreferenceMap extends AbstractInfoPreference {
 
-    private Activity activity;
+    private final Activity activity;
 
     public InfoPreferenceMap(final Context context) {
         this(context, null);

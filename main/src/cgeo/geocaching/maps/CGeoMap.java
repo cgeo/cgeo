@@ -171,7 +171,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
      */
     private SearchResult lastSearchResult = null;
     private Viewport lastViewport = null;
-    private boolean noMapTokenShowed = false;
     // map status data
     private static boolean followMyLocation = true;
     // threads
@@ -585,11 +584,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return;
         }
 
-        // reset status
-        noMapTokenShowed = false;
-
         ActivityMixin.onCreate(activity, true);
-
 
         // set layout
         ActivityMixin.setTheme(activity);

@@ -168,7 +168,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
         @Override
         public boolean isAvailable() {
-            return MapsforgeMapProvider.getInstance().isValidMapFile(mapUri);
+            return isValidMapFile(mapUri);
         }
 
         /** Create new render layer, if mapfile exists */
@@ -242,7 +242,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         public boolean isAvailable() {
             boolean isValid = true;
             for (ImmutablePair<String, Uri> mapUri : mapUris) {
-                isValid &= MapsforgeMapProvider.getInstance().isValidMapFile(mapUri.right);
+                isValid &= isValidMapFile(mapUri.right);
             }
             return isValid;
         }

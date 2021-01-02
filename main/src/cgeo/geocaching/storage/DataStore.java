@@ -127,7 +127,7 @@ public class DataStore {
         DBEXTENSION_DOWNGRADEABLE_DBVERSION(3),
         DBEXTENSION_ONE_TIME_DIALOGS(4);
 
-        public int id;
+        public final int id;
 
         DBExtensionType(final int id) {
             this.id = id;
@@ -677,7 +677,7 @@ public class DataStore {
         }
 
         public String getString4() {
-            return string3;
+            return string4;
         }
 
     }
