@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.models.Geocache;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.provider.CalendarContract;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -111,5 +113,20 @@ public final class CalendarUtils {
     public static String yearMonthDay(final long date) {
         final SimpleDateFormat pattern = new SimpleDateFormat(PATTERN_YYYYMMDD, Locale.getDefault());
         return date == 0 ? "" : pattern.format(date);
+    }
+
+    /**
+     * parses given date to a long
+     * @param date in Format yyyy-mm-dd
+     * @return time value or 0 on error
+     */
+    public static long parseYearMonthDay(final String date) {
+        @SuppressLint("SimpleDateFormat") final SimpleDateFormat pattern = new SimpleDateFormat(CalendarUtils.PATTERN_YYYYMMDD);
+        try {
+            final Date result = pattern.parse(date);
+            return result.getTime();
+        } catch (ParseException e) {
+            return 0;
+        }
     }
 }

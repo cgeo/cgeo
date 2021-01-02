@@ -6,7 +6,6 @@ import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.settings.MapDownloadSelectorActivity;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -103,14 +102,7 @@ public class MapDownloadUtils {
         PermissionHandler.requestStoragePermission(activity, new PermissionGrantedCallback(PermissionRequestContext.ReceiveMapFileActivity) {
             @Override
             protected void execute() {
-                String mapDirectory = Settings.getMapFileDirectory();
-                if (mapDirectory == null) {
-                    final File file = LocalStorage.getDefaultMapDirectory();
-                    FileUtils.mkdirs(file);
-                    mapDirectory = file.getPath();
-                    Settings.setMapFileDirectory(mapDirectory);
-                }
-                final String mapFileDirectory = Settings.getMapFileDirectory();
+                final String mapFileDirectory = LocalStorage.getOrCreateMapDirectory();
                 final boolean canWrite = new File(mapFileDirectory).canWrite();
                 if (canWrite) {
                     callback.run(mapFileDirectory, true);
