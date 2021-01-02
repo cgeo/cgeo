@@ -1,13 +1,21 @@
 package cgeo.geocaching.storage;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.FileNameCreator;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import android.provider.DocumentsContract;
+import android.system.Os;
+import android.system.StructStatVfs;
 
 import androidx.core.util.Predicate;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +27,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 
 /**
  * Collection of higher-level utility functions for Folders.
@@ -43,20 +50,24 @@ public class FolderUtils {
 
 
     /** returns number of files (left) and number of (sub)dirs (right) currently in folder */
-    public ImmutablePair<Integer, Integer> getFileCounts(final Folder folder) {
-        final List<Integer> result = new ArrayList<>();
-        result.add(0);
-        result.add(0);
-        treeWalk(folder, fi -> {
-            if (fi.left.isDirectory && fi.right) {
-                result.set(1, result.get(1) + 1);
-            }
-            if (!fi.left.isDirectory) {
-                result.set(0, result.get(0) + 1);
-            }
-            return true;
-        });
-        return new ImmutablePair<>(result.get(0), result.get(1));
+    public ImmutablePair<Integer, Integer> getFolderInfo(final Folder folder) {
+        try (ContextLogger cLog = new ContextLogger("FolderUtils.getFolderInfo: %s", folder)) {
+
+            final List<Integer> result = new ArrayList<>();
+            result.add(0);
+            result.add(0);
+            treeWalk(folder, fi -> {
+                if (fi.left.isDirectory && fi.right) {
+                    result.set(1, result.get(1) + 1);
+                }
+                if (!fi.left.isDirectory) {
+                    result.set(0, result.get(0) + 1);
+                }
+                return true;
+            });
+            cLog.add("#f:%d, #d:#%d", result.get(0), result.get(1));
+            return new ImmutablePair<>(result.get(0), result.get(1));
+        }
     }
 
     public boolean deleteAll(final Folder folder) {
@@ -206,8 +217,6 @@ public class FolderUtils {
         return new ImmutableTriple<>(success, filesCopied, dirsCopied);
     }
 
-
-
     private boolean copyAllThirdPassDelete(final List<ImmutableTriple<PublicLocalStorage.FileInformation, Folder, Integer>> fileList) {
         boolean success = true;
 
@@ -270,6 +279,62 @@ public class FolderUtils {
         return pretty ? currFolder.toPrettyString() : currFolder.toString();
 
     }
+
+
+    /** returns: left: free space on folder device (in bytes), right: number of files on device (may be -1 if not calculateable) */
+    public ImmutablePair<Long, Long> getDeviceInfo(final Folder folder) {
+        try {
+
+            //get free space and number of files
+            final ImmutablePair<Long, Long> freeSpaceAndNumberOfFiles;
+            switch (folder.getBaseType()) {
+                case DOCUMENT:
+                    freeSpaceAndNumberOfFiles = getDeviceInfoForDocument(folder);
+                    break;
+                case FILE:
+                default:
+                    freeSpaceAndNumberOfFiles = new ImmutablePair<>(FileUtils.getFreeDiskSpace(new File(folder.getUri().getPath())), -1L);
+                    break;
+            }
+            return freeSpaceAndNumberOfFiles;
+        } catch (Exception e) {
+            Log.i("Exception while getting system information for " + folder, e);
+            return new ImmutablePair<>(-1L, -1L);
+        }
+    }
+
+
+    /** Returns a pair of longs where left one is free space in bytes and right one is number of files */
+    private ImmutablePair<Long, Long> getDeviceInfoForDocument(final Folder folder) throws Exception {
+
+        if (CgeoApplication.getInstance() == null) {
+            return new ImmutablePair<>(-1L, -1L);
+        }
+
+        final ImmutablePair<Long, Long> emptyResult = new ImmutablePair<>(-1L, -1L);
+
+        final Uri treeUri = folder.getUri();
+        if (treeUri == null) {
+            return emptyResult;
+        }
+        final Uri docTreeUri = DocumentsContract.buildDocumentUriUsingTree(treeUri, DocumentsContract.getTreeDocumentId(treeUri));
+        if (docTreeUri == null) {
+            return emptyResult;
+        }
+
+        final ParcelFileDescriptor pfd = CgeoApplication.getInstance().getApplicationContext().getContentResolver().openFileDescriptor(docTreeUri, "r");
+        if (pfd == null) {
+            return emptyResult;
+        }
+        final StructStatVfs stats = Os.fstatvfs(pfd.getFileDescriptor());
+        if (stats == null) {
+            return emptyResult;
+        }
+
+        return new ImmutablePair<>(stats.f_bavail * stats.f_bsize, stats.f_files);
+    }
+
+
 
     private boolean treeWalk(final Folder root, final Predicate<ImmutablePair<PublicLocalStorage.FileInformation, Boolean>> callback) {
         return treeWalk(root, false, callback);

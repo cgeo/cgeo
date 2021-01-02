@@ -54,7 +54,7 @@ public class PublicLocalStorageActivityHelper {
 
         final PublicLocalFolder folder = PublicLocalFolder.BASE;
 
-        if (folder.isUserDefinedLocation() && PublicLocalStorage.get().checkAvailability(folder)) {
+        if (folder.getUserDefinedFolder() && PublicLocalStorage.get().checkAndAdjustAvailability(folder)) {
             //everything is as we want it
             return;
         }
@@ -62,7 +62,7 @@ public class PublicLocalStorageActivityHelper {
         //ask/remind user to choose an explicit BASE dir, otherwise the default will be used
         final AlertDialog dialog = Dialogs.newBuilder(activity)
             .setTitle(R.string.publiclocalstorage_grantaccess_dialog_title)
-            .setMessage(HtmlCompat.fromHtml(activity.getString(R.string.publiclocalstorage_grantaccess_dialog_msg_basedir_html, folder.getDefaultLocation().toUserDisplayableString()),
+            .setMessage(HtmlCompat.fromHtml(activity.getString(R.string.publiclocalstorage_grantaccess_dialog_msg_basedir_html, folder.getDefaultFolder().toUserDisplayableString()),
                 HtmlCompat.FROM_HTML_MODE_LEGACY))
             .setPositiveButton(android.R.string.ok, (d, p) -> {
                 d.dismiss();
@@ -85,7 +85,7 @@ public class PublicLocalStorageActivityHelper {
     public void selectFolderUri(final PublicLocalFolder folder, final Consumer<PublicLocalFolder> callback) {
        Dialogs.newBuilder(activity)
             .setTitle(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_title)
-            .setMessage(activity.getString(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_msg, folder.getDefaultLocation().toUserDisplayableString()))
+            .setMessage(activity.getString(R.string.publiclocalstorage_selectfolder_dialog_user_or_default_msg, folder.getDefaultFolder().toUserDisplayableString()))
             .setPositiveButton(R.string.publiclocalstorage_userdefined, (d, p) -> {
                 d.dismiss();
                 selectUserFolderUri(folder, callback);
@@ -114,7 +114,7 @@ public class PublicLocalStorageActivityHelper {
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | (folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         Log.i("Start uri dir: " + folder);
-        final Uri startUri = folder.getLocation().getUri();
+        final Uri startUri = folder.getFolder().getUri();
         if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Field is only supported starting with SDK26
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);

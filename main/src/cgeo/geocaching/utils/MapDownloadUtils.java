@@ -100,7 +100,7 @@ public class MapDownloadUtils {
             @Override
             protected void execute() {
                 final PublicLocalFolder folder = PublicLocalFolder.OFFLINE_MAPS;
-                final boolean mapDirIsReady = PublicLocalStorage.get().checkAvailability(folder);
+                final boolean mapDirIsReady = PublicLocalStorage.get().checkAndAdjustAvailability(folder);
 
                 if (mapDirIsReady) {
                     callback.run(folder, true);

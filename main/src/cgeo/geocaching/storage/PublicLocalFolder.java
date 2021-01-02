@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.storage.Folder.CGEO_PRIVATE_FILES;
 import static cgeo.geocaching.storage.Folder.DOCUMENTS_FOLDER_DEPRECATED;
+import static cgeo.geocaching.storage.Folder.LEGACY_CGEO_PUBLIC_ROOT;
 
 import android.content.Context;
 import android.net.Uri;
@@ -24,7 +25,7 @@ import java.util.WeakHashMap;
 public enum PublicLocalFolder {
 
     /** Base directory  */
-    BASE (R.string.pref_publicfolder_basedir, Folder.fromFolder(DOCUMENTS_FOLDER_DEPRECATED, "cgeo")),
+    BASE (R.string.pref_publicfolder_basedir, LEGACY_CGEO_PUBLIC_ROOT, Folder.fromFolder(DOCUMENTS_FOLDER_DEPRECATED, "cgeo")),
 
     /** Offline Maps folder where cgeo looks for offline map files (also the one where c:geo downloads its own offline maps) */
     OFFLINE_MAPS(R.string.pref_publicfolder_offlinemaps, Folder.fromPublicFolder(BASE, "maps")),
@@ -40,9 +41,8 @@ public enum PublicLocalFolder {
     private final int prefKeyId;
     private final boolean needsWrite;
 
-    private final Folder defaultLocation;
-
-    private Folder userDefinedLocation;
+    private Folder userDefinedFolder;
+    private final Folder defaultFolder;
 
     private final WeakHashMap<Object, List<Consumer<PublicLocalFolder>>> changeListeners = new WeakHashMap<>();
 
@@ -52,23 +52,24 @@ public enum PublicLocalFolder {
         return prefKeyId;
     }
 
-    PublicLocalFolder(@AnyRes final int prefKeyId, @NonNull final Folder defaultLocation) {
+    PublicLocalFolder(@AnyRes final int prefKeyId, @NonNull final Folder ... defaultFolderCandidates) {
         this.prefKeyId = prefKeyId;
         this.needsWrite = true;
 
-        this.defaultLocation = defaultLocation;
+        this.defaultFolder = getAccessibleDefaultFolder(defaultFolderCandidates);
 
         //read current user-defined location from settings.
-        this.userDefinedLocation = Folder.fromDocumentUri(Settings.getPublicLocalFolderUri(this));
+        this.userDefinedFolder = Folder.fromDocumentUri(Settings.getPublicLocalFolderUri(this));
 
         //if this PublicLocalFolder's value is based on another publiclocalfolder, then we have to notify on  indirect change
-        final PublicLocalFolder rootPublicFolder = defaultLocation.getRootPublicFolder();
+        final PublicLocalFolder rootPublicFolder = defaultFolder.getRootPublicFolder();
         if (rootPublicFolder != null) {
-            rootPublicFolder.addChangeListener(this, pf -> notifyChanged());
+            rootPublicFolder.registerChangeListener(this, pf -> notifyChanged());
         }
     }
 
-    public void addChangeListener(final Object lifecycleRef, final Consumer<PublicLocalFolder> listener) {
+    /** registers a listener which is fired each time the actual location of this folder changes */
+    public void registerChangeListener(final Object lifecycleRef, final Consumer<PublicLocalFolder> listener) {
         List<Consumer<PublicLocalFolder>> listeners = changeListeners.get(lifecycleRef);
         if (listeners == null) {
             listeners = new ArrayList<>();
@@ -85,37 +86,49 @@ public enum PublicLocalFolder {
         }
     }
 
-    public Folder getLocation() {
-        return this.userDefinedLocation == null ? this.defaultLocation : this.userDefinedLocation;
+    public Folder getFolder() {
+        return this.userDefinedFolder == null ? this.defaultFolder : this.userDefinedFolder;
     }
 
-    public Folder getDefaultLocation() {
-        return this.defaultLocation;
+    public Folder getDefaultFolder() {
+        return this.defaultFolder;
     }
 
-    public boolean isUserDefinedLocation() {
-        return this.userDefinedLocation != null;
+    public boolean getUserDefinedFolder() {
+        return this.userDefinedFolder != null;
     }
 
     /** Sets a new user-defined location (or "null" if default shall be used). Should be called ONLY by {@link PublicLocalStorage} */
-    protected void setUserDefinedLocation(@Nullable final Uri userDefinedUri) {
-        this.userDefinedLocation = Folder.fromDocumentUri(userDefinedUri);
+    protected void setUserDefinedDocumentUri(@Nullable final Uri userDefinedUri) {
+        this.userDefinedFolder = Folder.fromDocumentUri(userDefinedUri);
         Settings.setPublicLocalFolderUri(this, userDefinedUri);
         notifyChanged();
+    }
+
+    private Folder getAccessibleDefaultFolder(final Folder[] candidates) {
+
+        for (Folder candidate : candidates) {
+            //candidate is ok if it is either directly accessible or based on another public folder (which will become accessible later)
+            if (PublicLocalStorage.get().checkAvailability(candidate, needsWrite()) || candidate.getRootPublicFolder() != null) {
+                return candidate;
+            }
+        }
+
+        return Folder.fromFolder(CGEO_PRIVATE_FILES, "public/" + name());
     }
 
     /** Returns a representation of this folder's location fit to show to an end user */
     @NonNull
     public String toUserDisplayableString() {
-        String result = getLocation().toUserDisplayableString();
+        String result = getFolder().toUserDisplayableString();
 
         result += " (";
         if (CgeoApplication.getInstance() == null) {
             //this codepath is only chosen if no translation is available (e.g. in local unit tests)
-            result += isUserDefinedLocation() ? "User-Defined" : "Default";
+            result += getUserDefinedFolder() ? "User-Defined" : "Default";
         } else {
             final Context ctx = CgeoApplication.getInstance().getApplicationContext();
-            result += isUserDefinedLocation() ? ctx.getString(R.string.publiclocalstorage_userdefined) : ctx.getString(R.string.publiclocalstorage_default);
+            result += getUserDefinedFolder() ? ctx.getString(R.string.publiclocalstorage_userdefined) : ctx.getString(R.string.publiclocalstorage_default);
         }
         result += ")";
         return result;
@@ -127,7 +140,7 @@ public enum PublicLocalFolder {
 
     @Override
     public String toString() {
-        return name() + ": " + toUserDisplayableString() + "[" + getLocation() + "]";
+        return name() + ": " + toUserDisplayableString() + "[" + getFolder() + "]";
     }
 
 }

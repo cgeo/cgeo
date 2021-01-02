@@ -9,7 +9,7 @@ import android.os.Environment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.documentfile.provider.DocumentFile;
+import androidx.core.util.Consumer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -50,6 +50,8 @@ public class Folder {
     /** Root folder for documents (deprecated since API29 but still works somehow) */
     public static final Folder DOCUMENTS_FOLDER_DEPRECATED = Folder.fromFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
 
+    /** Legacy public root folder of c:geo until API29 (will no longer work in API30) */
+    public static final Folder LEGACY_CGEO_PUBLIC_ROOT = Folder.fromFile(new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "cgeo"));
 
     private static final String EMPTY = "---";
     private static final String CONFIG_SEP = "::";
@@ -62,10 +64,6 @@ public class Folder {
     private final List<String> subfolders; //each type may have subfolders
     private final String subfolderString;
 
-    //Document File corresponding to this FolderLocation. Can be cached here by PublicLocaStorage
-    private  DocumentFile cachedDocFile;
-
-
     private Folder(final FolderType type, final Uri uri, final PublicLocalFolder publicFolder, final List<String> subfolders) {
         this.type = type;
         this.uri = uri;
@@ -75,9 +73,14 @@ public class Folder {
         this.subfolders = subfolders == null ? Collections.emptyList() : subfolders;
         this.subfolderString = CollectionStream.of(this.subfolders).toJoinedString("/");
 
-        //if this location is based on a publiclocal folder, then we have to invalidate cached docfile on change
-        if (publicFolder != null) {
-            publicFolder.addChangeListener(this, pf -> setCachedDocFile(null));
+    }
+
+    /** registers a listener which is fired each time the actual location of this folder changes */
+    public void registerChangeListener(final Object lifecycleRef, final Consumer<PublicLocalFolder> listener) {
+
+        //currently, this folders location can only change if it is based on a Public Folder
+        if (getRootPublicFolder() != null) {
+            getRootPublicFolder().registerChangeListener(lifecycleRef, listener);
         }
     }
 
@@ -89,45 +92,38 @@ public class Folder {
     /** Uri associated with this folder */
     @NonNull
     public Uri getUri() {
-        final Uri uri = publicFolder != null ? publicFolder.getLocation().getUri() : this.uri;
+        final Uri uri = publicFolder != null ? publicFolder.getFolder().getUri() : this.uri;
         return Uri.withAppendedPath(uri, this.subfolderString);
     }
 
     /** The base Uri (below all subfolders)) */
     @NonNull
     public Uri getBaseUri() {
-        return publicFolder != null ? publicFolder.getLocation().getBaseUri() : this.uri;
+        return publicFolder != null ? publicFolder.getFolder().getBaseUri() : this.uri;
     }
 
     @NonNull
     public FolderType getBaseType() {
         if (publicFolder != null) {
-            return publicFolder.getLocation().getBaseType();
+            return publicFolder.getFolder().getBaseType();
         }
         return getType();
     }
 
     public List<String> getSubdirsToBase() {
-        final List<String > result = publicFolder != null ? publicFolder.getLocation().getSubdirsToBase() : new ArrayList<>();
+        final List<String > result = publicFolder != null ? publicFolder.getFolder().getSubdirsToBase() : new ArrayList<>();
         result.addAll(subfolders);
         return result;
+    }
+
+    public String getSubdirsToBaseAsString() {
+        return CollectionStream.of(getSubdirsToBase()).toJoinedString("/");
     }
 
     /** If this instance is a subfolder based on a publiclocalfolder, then this publiclocalfolder is returned. Otherwise null is returned */
     @Nullable
     public PublicLocalFolder getRootPublicFolder() {
         return publicFolder;
-    }
-
-
-    //shall only be used by PublicLocalStorage
-    protected DocumentFile getCachedDocFile() {
-        return this.cachedDocFile;
-    }
-
-    //shall only be used by PublicLocalStorage
-    protected void setCachedDocFile(final DocumentFile cacheDocFile) {
-        this.cachedDocFile = cacheDocFile;
     }
 
     /** Returns a representation of this folder's location fit to show to an end user */

@@ -418,7 +418,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 publicLocalStorage.selectFolderUri(folder, f -> p.setSummary(f.toUserDisplayableString()));
                 return false;
             });
-            folder.addChangeListener(this, f -> pref.setSummary(f.toUserDisplayableString()));
+            folder.registerChangeListener(this, f -> pref.setSummary(f.toUserDisplayableString()));
         }
     }
 

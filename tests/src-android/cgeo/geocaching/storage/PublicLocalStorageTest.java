@@ -10,14 +10,15 @@ import android.net.Uri;
 
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -38,15 +39,15 @@ public class PublicLocalStorageTest extends CGeoTestCase {
     public void setUp() throws Exception {
         super.setUp();
         //save TEST-FOLDER Uri if there is a user-defined one for later restoring
-        if (PublicLocalFolder.TEST_FOLDER.isUserDefinedLocation()) {
-            testUri = PublicLocalFolder.TEST_FOLDER.getLocation().getUri();
+        if (PublicLocalFolder.TEST_FOLDER.getUserDefinedFolder()) {
+            testUri = PublicLocalFolder.TEST_FOLDER.getFolder().getUri();
         }
     }
 
     public void tearDown() throws Exception {
         cleanup();
         //restore test folder user-defined uri
-        PublicLocalFolder.TEST_FOLDER.setUserDefinedLocation(testUri);
+        PublicLocalFolder.TEST_FOLDER.setUserDefinedDocumentUri(testUri);
 
         //call super.teardown AFTER all own cleanup (because this seems to reset all members vars including testUri)
         super.tearDown();
@@ -261,22 +262,25 @@ public class PublicLocalStorageTest extends CGeoTestCase {
 
     public void testPublicLocalFolderChangeNotification() {
 
-        //initialize
-        PublicLocalFolder.TEST_FOLDER.setUserDefinedLocation(null);
         //create Location based on test folder. Several subfolders.
-        final Folder folder = Folder.fromPublicFolder(PublicLocalFolder.TEST_FOLDER, "changeNotification/one/two");
-        //ensure that cache is filled
-        PublicLocalStorage.get().list(folder);
-        assertThat(folder.getCachedDocFile()).isNotNull();
+        final Folder folder = Folder.fromPublicFolder(PublicLocalFolder.TEST_FOLDER, "changeNotificatio");
+        final Folder folderOne = Folder.fromFolder(folder, "one");
+        final Folder folderTwo = Folder.fromFolder(folder, "two");
+        final Folder folderNotNotified = Folder.fromPublicFolder(PublicLocalFolder.OFFLINE_MAPS, "changeNotificatio");
 
-        //change PublicLocalFolder
-        PublicLocalFolder.TEST_FOLDER.setUserDefinedLocation(Uri.fromFile(new File("abc")));
+        final Set<String> notificationMessages = new HashSet<>();
 
-        //assert that cache is cleared now
-        assertThat(folder.getCachedDocFile()).isNull();
+        folderOne.registerChangeListener(this, p -> notificationMessages.add("one:" + p.name()));
+        folderTwo.registerChangeListener(this, p -> notificationMessages.add("two:" + p.name()));
+        folderNotNotified.registerChangeListener(this, p -> notificationMessages.add("notnotified:" + p.name()));
 
-        //cleanup
-        PublicLocalFolder.TEST_FOLDER.setUserDefinedLocation(null);
+        //trigger change
+        PublicLocalFolder.TEST_FOLDER.setUserDefinedDocumentUri(null);
+
+        //check
+        assertThat(notificationMessages.size()).isEqualTo(2);
+        assertThat(notificationMessages.contains("one:" + PublicLocalFolder.TEST_FOLDER.name()));
+        assertThat(notificationMessages.contains("two:" + PublicLocalFolder.TEST_FOLDER.name()));
     }
 
     public void testFileMimeType() {
@@ -336,12 +340,12 @@ public class PublicLocalStorageTest extends CGeoTestCase {
     }
 
     private void assertFileDirCount(final Folder folder, final int fileCount, final int dirCount) {
-        assertThat(FolderUtils.get().getFileCounts(folder)).as("File counts of Folder " + folder).isEqualTo(new ImmutablePair<>(fileCount, dirCount));
+        assertThat(FolderUtils.get().getFolderInfo(folder)).as("File counts of Folder " + folder).isEqualTo(new ImmutablePair<>(fileCount, dirCount));
     }
 
     private boolean hasValidDocumentTestFolder() {
-        return PublicLocalFolder.TEST_FOLDER.isUserDefinedLocation() &&
-            PublicLocalStorage.get().checkAvailability(PublicLocalFolder.TEST_FOLDER.getLocation(), PublicLocalFolder.TEST_FOLDER.needsWrite(), true);
+        return PublicLocalFolder.TEST_FOLDER.getUserDefinedFolder() &&
+            PublicLocalStorage.get().checkAvailability(PublicLocalFolder.TEST_FOLDER.getFolder(), PublicLocalFolder.TEST_FOLDER.needsWrite(), true);
     }
 
     private Folder createTestFolder(final Folder.FolderType type, final String context) {
@@ -354,7 +358,7 @@ public class PublicLocalStorageTest extends CGeoTestCase {
             case DOCUMENT:
                 if (!hasValidDocumentTestFolder()) {
                     if (FAIL_DOC_TEST_IF_FOLDER_NOT_ACCESSIBLE) {
-                        throw new IllegalArgumentException("Document Folder not accessible, test fails: " + PublicLocalFolder.TEST_FOLDER.getLocation());
+                        throw new IllegalArgumentException("Document Folder not accessible, test fails: " + PublicLocalFolder.TEST_FOLDER.getFolder());
                     }
                     Log.iForce("Trying to test for DocumentUri fails; unfortunately there is no DocumentUri configured for TEST-FOLDER. Test with file instead");
                     testFolder =  Folder.fromFolder(getBaseTestFolder(Folder.FolderType.FILE), "doc-" + context);
@@ -380,7 +384,7 @@ public class PublicLocalStorageTest extends CGeoTestCase {
                 if (!hasValidDocumentTestFolder()) {
                     return Folder.fromFolder(Folder.CGEO_PRIVATE_FILES, "unittest");
                 }
-                return PublicLocalFolder.TEST_FOLDER.getLocation();
+                return PublicLocalFolder.TEST_FOLDER.getFolder();
             default:
                 return null;
         }

@@ -845,16 +845,14 @@
     <string name="publiclocalstorage_folder_selection_success">Folder set to \'%s\'</string>
     <string name="publiclocalstorage_file_selection_aborted">Aborting file selection</string>
     <string name="publiclocalstorage_file_selection_success">File selected: \'%s\'</string>
-    <string name="publiclocalstorage_err_folders_inaccessable_abort">Folders \'%s\' and default \'%s\' are both inaccessible, aborting access</string>
-    <string name="publiclocalstorage_err_userdefinedfolder_inaccessable_usedefault">Userdefined folder \'%s\' inaccessible, using default \'%s\'</string>
-    <string name="publiclocalstorage_err_folder_not_a_directory_abort">Folder \'%s\' inaccessible or not a directory, aborting access</string>
-    <string name="publiclocalstorage_err_subfolder_not_a_directory_usebase">\'%s\' in folder \'%s\' is not a folder, using base folder instead"</string>
-    <string name="publiclocalstorage_err_subfolder_creation_problem_usebase">Subfolder \'%s\' in folder \'%s\' could not be created, using base folder instead</string>
-    <string name="publiclocalstorage_err_reading_file_does_not_exist">File \'%s\' could not be read, it doesn\'t seem to exist</string>
-    <string name="publiclocalstorage_err_reading_file_no_permission">File \'%s\' could not be read, insufficient permissions</string>
-    <string name="publiclocalstorage_err_writing_file_Io_problem">File \'%s\' could not be written, an IO problem occured</string>
-    <string name="publiclocalstorage_err_writing_file_no_permission">File \'%s\' could not be written, insufficient permissions</string>
-
+    <string name="publiclocalstorage_err_publicfolder_inaccessible_falling_back">Folder %s: \'%s\' is not accessible, falling back to \'%s\'</string>
+    <string name="publiclocalstorage_err_read_failed">File \'%s\' could not be read, see logfile for details</string>
+    <string name="publiclocalstorage_err_write_failed">File \'%s\' could not be written, see logfile for details</string>
+    <string name="publiclocalstorage_err_create_failed">File \'%s\' in \'%s\' could not be created, see logfile for details</string>
+    <string name="publiclocalstorage_err_delete_failed">File \'%s\' could not be deleted, see logfile for details</string>
+    <string name="publiclocalstorage_err_list_failed">Files in Folder \'%s\' could not be listed, see logfile for details</string>
+    <string name="publiclocalstorage_err_ensurefolder_failed">Folder \'%s\' could not be created, see logfile for details</string>
+    <string name="publiclocalstorage_err_copy_failed">File \'%s\' could not be copied/moved to \'%s\' (move=%s), see logfile for details</string>
 
     <!-- auth generic -->
     <string name="auth_authorize">Authorize c:geo</string>

@@ -14,6 +14,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.HwAccel;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PublicLocalFolder;
 import cgeo.geocaching.storage.PublicLocalStorage;
@@ -37,6 +38,7 @@ import java.util.Locale;
 import com.google.android.gms.common.GoogleApiAvailability;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public final class SystemInformation {
 
@@ -128,8 +130,12 @@ public final class SystemInformation {
     private static void appendPublicFolders(@NonNull final StringBuilder body) {
         body.append("\nPublic Folders: #").append(PublicLocalFolder.values().length);
         for (PublicLocalFolder folder : PublicLocalFolder.values()) {
+            final boolean isAvailable = PublicLocalStorage.get().checkAndAdjustAvailability(folder);
+            final ImmutablePair<Integer, Integer> files = FolderUtils.get().getFolderInfo(folder.getFolder());
+            final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
             body.append("\n- ").append(folder.toString())
-                .append(" (").append(PublicLocalStorage.get().getFolderInformation(folder)).append(")");
+                .append(" (Available:").append(isAvailable).append(", Fiies: ").append(files.left).append(", subdirs:").append(files.right)
+                .append(" free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on devivce: ").append(freeSpace.right).append(")");
         }
     }
 
