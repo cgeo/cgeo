@@ -1801,6 +1801,14 @@
     <string name="downloadmap_confirmation">Karte \"%1$s\" herunterladen?\n\nDies kann einige Zeit in Anspruch nehmen und kann, in Abhängigkeit von deiner Netzwerkverbindung, zu erheblichen Kosten führen.\n\nGröße: %2$s</string>
     <string name="downloadmap_handling">Das Herunterladen wird vom Download-Manager deines Systems im Hintergrund durchgeführt. Du solltest zu Beginn des Downloads (könnte eine Weile dauern) eine Benachrichtigung sehen.</string>
     <string name="button_continue">Weiter</string>
+    <string name="downloadmap_onedirup">(eine Ebene höher)</string>
+    <string name="downloadmap_checkforupdates_button">Auf Updates prüfen</string>
+    <string name="downloadmap_available_updates">Verfügbare Updates</string>
+    <string name="downloadmap_no_updates_found">Keine Kartenupdates gefunden</string>
+    <string name="downloadmap_directory">Verzeichnis</string>
+    <string name="downloadmap_mapfile">Karte</string>
+    <string name="downloadmap_retrieving_directory_data">Lese Verzeichnisdaten…</string>
+    <string name="downloadmap_checking_for_updates">Prüfe auf Updates…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
@@ -1821,9 +1829,12 @@
     <string name="next">Weiter</string>
     <string name="finish">Fertig</string>
     <string name="wizard_welcome_title">Willkommen bei c:geo</string>
+    <string name="wizard_intro">c:geo scheint zum ersten Mal auf diesem Gerät verwendet zu werden. Soll ich Dir bei der Konfiguration helfen? Es sind nur ein paar Schritte.</string>
     <string name="wizard_intro2">Willkommen zurück zur Konfiguration. Es sind nur ein paar Schritte.</string>
     <string name="wizard_outro_ok">Danke fürs Konfigurieren von c:geo.\nAuf geht\'s!</string>
+    <string name="wizard_outro_error">Konfiguration unvollständig\nc:geo wird nicht überall wie erwartet funktionieren!</string>
     <string name="wizard_permissions_title">App-Berechtigungen</string>
+    <string name="wizard_permissions_intro">c:geo benötigt einige Berechtigungen, ich werde sie gleich erklären.\nOhne diese Berechtigungen wirst Du c:geo nicht vollständig benutzen können.</string>
     <string name="wizard_platforms_title">Plattformen konfigurieren</string>
     <string name="wizard_platforms_intro">Um Caches herunterzuladen benötigst Du einen Account für mindestens eine von c:geo unterstützte Geocaching-Plattform</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1832,10 +1843,12 @@
     <string name="wizard_advanced_offlinemaps_label">Offline-Karten</string>
     <string name="wizard_advanced_offlinemaps_info">c:geo kann Karten für die Offline-Verwendung herunterladen</string>
     <string name="wizard_advanced_brouter_label">Routing-App</string>
+    <string name="wizard_advanced_brouter_info">c:geo kann zu Zielen navigieren und Routeninformationen auf der Karte anzeigen, wenn Du die App \"BRouter Offline Navigation\" installiert und konfiguriert hast</string>
     <string name="wizard_advanced_restore_label">Wiederherstellen</string>
     <string name="wizard_advanced_restore_info">Einstellungen / Daten einer vorherigen Installation wiederherstellen</string>
     <string name="status_not_ok">FEHLER</string>
     <string name="wizard_status_title">Konfigurationsstatus</string>
+    <string name="wizard_status_storage_permission">Speicher-Berechtigung</string>
     <string name="wizard_status_location_permission">Standort-Berechtigung</string>
     <string name="wizard_status_platform">Geocaching-Plattformen</string>
 </resources>
