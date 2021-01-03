@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/emoji_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/emoji_grid_separator"
+        style="@style/separator_horizontal"
+        android:layout_below="@id/emoji_grid" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/emoji_lru"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emoji_grid_separator"/>
+
+</RelativeLayout>
