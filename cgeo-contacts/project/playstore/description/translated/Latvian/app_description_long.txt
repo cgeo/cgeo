@@ -1,12 +1,12 @@
-This is a contacts plugin for c:geo, an open source geocaching app. It will only work with the c:geo app installed and allows direct access to your phonebook when clicking on a username in c:geo.
+Šis ir kontaktu spraudnis priekš c:geo, open source slēpņošanas aplikācijas. Tā strādās tikai kopā ar uzinstalētu c:geo aplikāciju un dod tiešu piekļuvi taviem kontaktiem, kad uzklikšķini uz lietotājvārda iekš c:geo.
 
-Usage:
-When you click on a username in c:geo (e.g. in the cache logbook) the menu will contain an item to open the corresponding contact card in your phone contacts. This will allow you to directly call or message the user.
+Pielietojums:
+Kad jūs uzspiežat uz lietotājvārda c:geo (piemēram, slēpņa viesu grāmatā) parādīsies izvēlne ar iespēju atvērt atbilstošu kontakta ierakstu no tava telefona kontaktu saraksta. Tas dos tev iespēju uzreiz zvanīt vai rakstīt konkrētajam lietotājam.
 
-Remark:
-The username of the person needs to be stored in the name- or alias-field of your contacts in order for the plugin to match the geocaching username to the contact.
+Piezīme:
+Personas lietotājvārdam ir jābūt saglabātam tavos kontaktos, vārda vai iesaukas ailītē jābūt lietotājvārdam, lai spraudnis spētu sasaistīt personas geocaching lietotājvārdu ar taviem kontaktiem.
 
-Comments in PlayStore can not be answered! If you have problems installing or using c:geo please first have a look at our FAQ: https://faq.cgeo.org
-If there are still problems, contact support via email.
+Uz komentāriem iekš PlayStore nav iespējams atbildēt! Ja rodas problēmas ielādējot vai lietojot c:geo vispirms, lūdzu, apskatiet mūsu FAQ: https://faq.cgeo.org
+Ja joprojām ir problēmas, sazinies ar mūsu atbalsta centru, izmantojot e-pastu.
 
-If you would like to know why this c:geo plugin needs the permissions requested, please check https://www.cgeo.org/faq.html#plugin-contacts-privacy for an explanation.
+Ja vēlies uzzināt, kāpēc šim c:geo spraudnim nepieciešamas pieprasītās atļaujas, lūdzu apskaties skaidrojumus šiet: https://www.cgeo.org/faq.html#plugin-contacts-privacy
