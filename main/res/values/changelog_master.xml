@@ -6,6 +6,8 @@
 
 <h4>Map:</h4>
 <ul>
+<li>Change: Use squared c:geo logo for user-defined caches</li>
+<li>New: Update checker for downloaded offline maps (will work only for new downloads)</li>
 <li>New: Color of location accuracy circle is configurable now</li>
 </ul>
 
