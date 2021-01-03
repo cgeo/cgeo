@@ -126,17 +126,32 @@ public class InstallWizardActivity extends AppCompatActivity {
             case WIZARD_PLATFORMS:
                 title.setText(R.string.wizard_platforms_title);
                 text.setText(R.string.wizard_platforms_intro);
-                setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, 0);
-                setButton(button1, R.string.wizard_platforms_gc, v -> authorizeGC(), button1Info, 0);
-                setButton(button2, R.string.wizard_platforms_others, v -> SettingsActivity.openForScreen(R.string.preference_screen_services, this), button2Info, 0);
+                setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, R.string.skip);
+                setButton(button1, R.string.wizard_platforms_gc, v -> {
+                    setButtonToDone();
+                    authorizeGC();
+                }, button1Info, 0);
+                setButton(button2, R.string.wizard_platforms_others, v -> {
+                    setButtonToDone();
+                    SettingsActivity.openForScreen(R.string.preference_screen_services, this);
+                }, button2Info, 0);
                 break;
             case WIZARD_ADVANCED:
                 title.setText(R.string.wizard_welcome_advanced);
                 text.setVisibility(View.GONE);
-                setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, 0);
-                setButton(button1, R.string.wizard_advanced_offlinemaps_label, v -> startActivityForResult(new Intent(this, MapDownloadSelectorActivity.class), MapDownloadUtils.REQUEST_CODE), button1Info, R.string.wizard_advanced_offlinemaps_info);
-                setButton(button2, R.string.wizard_advanced_brouter_label, v -> ProcessUtils.openMarket(this, getString(R.string.package_brouter)), button2Info, R.string.wizard_advanced_brouter_info);
-                setButton(button3, R.string.wizard_advanced_restore_label, v -> SettingsActivity.openForScreen(R.string.preference_screen_backup, this), button3Info, R.string.wizard_advanced_restore_info);
+                setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, R.string.skip);
+                setButton(button1, R.string.wizard_advanced_offlinemaps_label, v -> {
+                    setButtonToDone();
+                    startActivityForResult(new Intent(this, MapDownloadSelectorActivity.class), MapDownloadUtils.REQUEST_CODE);
+                }, button1Info, R.string.wizard_advanced_offlinemaps_info);
+                setButton(button2, R.string.wizard_advanced_brouter_label, v -> {
+                    setButtonToDone();
+                    ProcessUtils.openMarket(this, getString(R.string.package_brouter));
+                }, button2Info, R.string.wizard_advanced_brouter_info);
+                setButton(button3, R.string.wizard_advanced_restore_label, v -> {
+                    setButtonToDone();
+                    SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
+                }, button3Info, R.string.wizard_advanced_restore_info);
                 break;
             case WIZARD_END: {
                 title.setText(R.string.wizard_welcome_title);
@@ -174,6 +189,10 @@ public class InstallWizardActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    private void setButtonToDone() {
+        next.setText(R.string.done);
     }
 
     private void setNavigation(@Nullable final Runnable listenerPrev, final int prevLabelRes, @Nullable final Runnable listenerSkip, final int skipLabelRes, @Nullable final Runnable listenerNext, final int nextLabelRes) {
