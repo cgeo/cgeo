@@ -294,7 +294,7 @@ public final class MapMarkerUtils {
         return cache.getType().markerId;
     }
 
-    @org.jetbrains.annotations.Nullable
+    @Nullable
     private static Integer getMarkerIdIfLogged(final Geocache cache) {
         if (cache.isFound()) {
             return R.drawable.marker_found;
