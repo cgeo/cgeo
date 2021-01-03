@@ -1786,6 +1786,14 @@
     <string name="downloadmap_confirmation">Να γίνει λήψη του χάρτη \"%1$s\"; \n\nΜπορεί να χρειαστεί αρκετή ώρα και να οδηγήσει σε σημαντικό κόστος, ανάλογα με την σύνδεση δικτύου σας.\n\nΜέγεθος: %2$s</string>
     <string name="downloadmap_handling">Θα γίνει διαχείριση της λήψης στο παρασκήνιο από το πρόγραμμα διαχείρισης λήψεων του συστήματος σας. Πρέπει να δείτε μια ειδοποίηση μόλις ξεκινήσει η λήψη (μπορεί να καθυστερήσει λίγο).</string>
     <string name="button_continue">Συνέχεια</string>
+    <string name="downloadmap_onedirup">(ένα dir up)</string>
+    <string name="downloadmap_checkforupdates_button">Έλεγχος για ενημερώσεις</string>
+    <string name="downloadmap_available_updates">Διαθέσιμες ενημερώσεις</string>
+    <string name="downloadmap_no_updates_found">Δεν βρέθηκαν ενημερώσεις χαρτών</string>
+    <string name="downloadmap_directory">Κατάλογος</string>
+    <string name="downloadmap_mapfile">Αρχείο χάρτη</string>
+    <string name="downloadmap_retrieving_directory_data">Ανάκτηση δεδομένων καταλόγου…</string>
+    <string name="downloadmap_checking_for_updates">Έλεγχος για ενημερώσεις…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
     <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
