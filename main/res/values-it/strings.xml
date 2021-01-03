@@ -679,6 +679,10 @@
     <string name="init_circlecolor_summary">Seleziona colore e opacità per la linea del cerchio. I cerchi sono usati come rappresentazione visiva del raggio minimo, attorno a un cache o waypoint fisico, in cui non è consentita nessun\'altro cache o waypoint fisico. (Si applica a geocaching.com)</string>
     <string name="init_circlefillcolor">Colore di riempimento del cerchio</string>
     <string name="init_circlefillcolor_summary">Seleziona colore e opacità per il riempimento dei cerchi</string>
+    <string name="init_accuracycirclecolor">Colore del cerchio di precisione</string>
+    <string name="init_accuracycirclecolor_summary">Seleziona il colore e l\'opacità per la linea del cerchio di precisione. Il cerchio di precisione è usato come rappresentazione visiva per l\'accuratezza del segnale di posizione.</string>
+    <string name="init_accuracycirclefillcolor">Colore di riempimento del cerchio di precisione</string>
+    <string name="init_accuracycirclefillcolor_summary">Seleziona colore e opacità di riempimento per i cerchi di precisione</string>
     <string name="init_include_found_status">Includi lo stato \"Trovato\"</string>
     <string name="init_trackautovisit">Visita TB</string>
     <string name="init_summary_trackautovisit">Setta i miei oggetti Trackables automaticamente su \"visit\" quando invio log</string>
@@ -1797,6 +1801,14 @@
     <string name="downloadmap_confirmation">Scarica la mappa \"%1$s\"?\n\nQuesto potrebbe richiedere molto tempo e portare a costi significativi, a seconda della tua connessione di rete.\n\nInformazioni sulla dimensione: %2$s</string>
     <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
     <string name="button_continue">Continua</string>
+    <string name="downloadmap_onedirup">(su di una cartella)</string>
+    <string name="downloadmap_checkforupdates_button">Controlla aggiornamenti</string>
+    <string name="downloadmap_available_updates">Aggiornamenti disponibili</string>
+    <string name="downloadmap_no_updates_found">Nessun aggiornamento mappa trovato</string>
+    <string name="downloadmap_directory">Cartella</string>
+    <string name="downloadmap_mapfile">file mappa</string>
+    <string name="downloadmap_retrieving_directory_data">Recupero dati cartella…</string>
+    <string name="downloadmap_checking_for_updates">Controllo aggiornamenti…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
@@ -1811,15 +1823,22 @@
     <string name="export_individualroute_title">Esporta percorso individuale</string>
     <string name="export_individualroute_success">Esporta percorso individuale in \"%s\"</string>
     <!-- install wizard -->
+    <string name="wizard">Assistente di configurazione</string>
     <string name="previous">Precedente</string>
     <string name="skip">Salta</string>
     <string name="next">Successivo</string>
     <string name="finish">Termina</string>
     <string name="wizard_welcome_title">Benvenuto su c:geo</string>
     <string name="wizard_intro">Sembra che questa sia la prima volta che c:geo viene utilizzato su questo dispositivo. Posso aiutarti nella configurazione?</string>
+    <string name="wizard_intro2">Bentornati alla procedura guidata di configurazione. Sono solo pochi passi.</string>
+    <string name="wizard_outro_ok">Grazie per aver configurato c:geo.\nBuon divertimento!</string>
+    <string name="wizard_outro_error">Configurazione incompleta\nNon tutte le sezioni di c:geo funzioneranno come previsto!</string>
     <string name="wizard_permissions_title">Imposta permessi app</string>
     <string name="wizard_permissions_intro">c:geo ha bisogno di alcuni permessi per funzionare correttamente. Li spiegherò nei prossimi passi.\nSenza questi permessi non potrai usare c:geo.</string>
+    <string name="wizard_platforms_title">Configura piattaforme</string>
+    <string name="wizard_platforms_intro">Per scaricare cache è necessario un account per almeno una delle piattaforme di geocaching supportate da c:geo</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; altri</string>
     <string name="wizard_welcome_advanced">Configurazione avanzata</string>
     <string name="wizard_advanced_offlinemaps_label">Mappe offline</string>
     <string name="wizard_advanced_offlinemaps_info">c:geo può scaricare i file della mappa per l\'utilizzo offline</string>
@@ -1828,4 +1847,8 @@
     <string name="wizard_advanced_restore_label">Ripristina</string>
     <string name="wizard_advanced_restore_info">Ripristina impostazioni e dati da un\'installazione precedente</string>
     <string name="status_not_ok">ERRORE</string>
+    <string name="wizard_status_title">Stato della configurazione</string>
+    <string name="wizard_status_storage_permission">Permesso di archiviazione</string>
+    <string name="wizard_status_location_permission">Permesso localizzazione</string>
+    <string name="wizard_status_platform">Piattaforme di geocaching</string>
 </resources>
