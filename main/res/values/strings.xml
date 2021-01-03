@@ -2027,6 +2027,7 @@
     <string name="previous">Previous</string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
+    <string name="done">Done</string>
     <string name="finish">Finish</string>
     <string name="wizard_welcome_title">Welcome to c:geo</string>
     <string name="wizard_intro">Just a few steps are needed to configure c:geo and get you going. Shall I help you with that?</string>
