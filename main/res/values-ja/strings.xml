@@ -234,8 +234,6 @@
     <string name="warn_log_text_fill">ログの本文を入力してください</string>
     <string name="warn_load_images">画像を読み込むことができませんでした</string>
     <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforgeの地図ファイルではないかサポートされていないバージョンです。\n(現在バージョン3から5まで使用できます。バージョン3を利用するには「旧 Mapsforge V3を使用する」設定を有効にする必要があります。)\n\nオフライン地図は利用できません</string>
-    <string name="warn_nonexistant_mapfile">選択した地図ファイルは存在しません。\nオフライン地図は利用できません</string>
-    <string name="warn_rendertheme_missing">地図のテーマファイルが見つかりません</string>
     <string name="warn_pocket_query_select">ポケット・クエリが選択されていません</string>
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
     <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
@@ -411,7 +409,6 @@
     <string name="about_license">ライセンス</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">ヘルプ</string>
-    <string name="open_services_page">ジオキャッシングサイト設定</string>
     <string name="about_system_include">バグ報告や問い合わせの際は以下のシステム情報もお知らせください</string>
     <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geoシステム情報</string>
@@ -685,7 +682,6 @@
     <string name="init_accuracycirclecolor_summary">精度円の線色と不透明度の選択。精度円は位置測位の精度を表しています</string>
     <string name="init_accuracycirclefillcolor">精度円の内側の色</string>
     <string name="init_accuracycirclefillcolor_summary">精度円の内側の色と不透明度の選択</string>
-    <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
     <string name="init_include_found_status">「発見した」ステータスを含める</string>
     <string name="init_trackautovisit">トラッカブルの「訪れた」設定</string>
     <string name="init_summary_trackautovisit">「発見」したログを書く時にトラッカブルを自動的に「訪れた」にする</string>
@@ -784,7 +780,6 @@
     <string name="map_source_osm_offline">オフライン</string>
     <string name="map_source_osm_offline_combined">OSM結合 (オフライン)</string>
     <string name="map_source_attribution_dialog_title">地図の著作権</string>
-    <string name="map_source_attribution_legacy_text">地図の著作権はこちらをタップしてください</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Send2cgeoについて</string>
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
@@ -1142,7 +1137,6 @@
     <string name="map_map">地図</string>
     <string name="map_live">オンライン地図</string>
     <string name="map_view_map">地図の変更</string>
-    <string name="map_modes">表示切替</string>
     <string name="map_rotation">地図の回転</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
     <string name="map_show_circles">0.1マイル円を表示</string>
@@ -1799,21 +1793,21 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_intro">このデバイスでc:geoが初めて使用されるようです。設定をお手伝いしましょうか? ほんの数ステップです</string>
     <string name="wizard_intro2">設定ウィザードへようこそ。ほんの数ステップです</string>
     <string name="wizard_outro_ok">c:geoを設定していただきありがとうございます。\nお楽しみください!</string>
-    <string name="wizard_outro_error">設定が完了していません\nすべての機能が期待どおり動作するわけではありません!</string>
+    <string name="wizard_outro_error">設定が完了していません\nこのままでは、すべての機能が期待どおり動作するわけではありません!</string>
     <string name="wizard_permissions_title">アプリの権限の設定</string>
     <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です。次のステップで説明します。\nこれらの権限がないとc:geoを使用することはできません</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
     <string name="wizard_platforms_intro">キャッシュ情報をダウンロードするには、c:geoで対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencachingや他のサイト</string>
-    <string name="wizard_welcome_advanced">詳細設定</string>
+    <string name="wizard_welcome_advanced">追加設定</string>
     <string name="wizard_advanced_offlinemaps_label">オフライン地図のダウンロード</string>
     <string name="wizard_advanced_offlinemaps_info">オフライン用に地図ファイルをダウンロードできます</string>
     <string name="wizard_advanced_brouter_label">ルーティングアプリ</string>
     <string name="wizard_advanced_brouter_info">BRouter Offline Navigationをインストールしてセットアップすると(オフラインでも)目的地へナビゲーションしたり地図にルートを表示することができます</string>
     <string name="wizard_advanced_restore_label">復元</string>
     <string name="wizard_advanced_restore_info">バックアップからキャッシュ/ウェイポイント/c:geo設定を復元</string>
-    <string name="status_not_ok">エラー</string>
+    <string name="status_not_ok">未完了</string>
     <string name="wizard_status_title">設定情報</string>
     <string name="wizard_status_storage_permission">ストレージの権限</string>
     <string name="wizard_status_location_permission">位置情報の権限</string>

@@ -185,8 +185,6 @@
     <string name="warn_search_help_tb">Pagpasulod ug code para sa trackable. Pananglitan \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Palihug sa pag-input ug pipila ka mga teksto para sa imong log.</string>
     <string name="warn_load_images">c:geo napakyas sa pag-load ug mga larawan.</string>
-    <string name="warn_nonexistant_mapfile">Ang napili nga mapa na papeles kay wala makita.\nOffline na mapa kay dili puwede makuha o magamit.</string>
-    <string name="warn_rendertheme_missing">Ang mapa nga tema kay wala makit-an.</string>
     <string name="warn_pocket_query_select">Walay gipili na bulsa na query.</string>
     <string name="warn_no_pocket_query_found">Walay bulsa na query ang nakita online.</string>
     <string name="warn_invalid_character">Ang karakter kinahanglan nga usa ka LETRA o usa ka NUMERO</string>
@@ -466,7 +464,6 @@
     <string name="init_gpx_importdir">GPX Import nga Direktoryo</string>
     <string name="init_dataDir">Pagpili sa direktoryong data sa Geocache</string>
     <string name="init_dataDir_note">Pwede ka makapili kung asa nimo itago ang mga napun-ang data para sa mga geocache (spoilers, log na mga imahe, …) sa imong panggawas na tagu-anan (na-emulate o tinuod na panggawas na SD kard depende sa imong debays).</string>
-    <string name="init_share_after_export">Ablihan ang ambit nga menu inig human sa GPX eksport</string>
     <string name="init_include_found_status">Apili ang \"Found\" na kahimtang</string>
     <string name="init_trackautovisit">Bisitaha ang TBs</string>
     <string name="init_summary_trackautovisit">I-set and trackables og \"Nibisita\" sa default</string>
@@ -796,7 +793,6 @@
     <string name="map_map">Mapa</string>
     <string name="map_live">Mga mapa nga live</string>
     <string name="map_view_map">View sa mapa</string>
-    <string name="map_modes">Kahimtang sa mapa</string>
     <string name="map_show_circles">Ipakita nag mga bilog</string>
     <string name="map_theme_select">Pagpili ug tema sa mapa</string>
     <string name="map_live_enable">Makahimo nga mag-live</string>

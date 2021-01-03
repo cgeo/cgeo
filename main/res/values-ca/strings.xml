@@ -234,8 +234,6 @@
     <string name="warn_log_text_fill">Introduïu un text per al vostre registre.</string>
     <string name="warn_load_images">El c:geo no ha pogut carregar les imatges.</string>
     <string name="warn_invalid_mapfile">El fitxer de mapa seleccionat no és vàlid o utilitza una versió no compatible.\n(c:geo actualment admet v3 a v5 / v3 només si utilitzeu la configuració \"Old Mapfsforge V3\".)\n\nEls mapes en línia no són disponibles.</string>
-    <string name="warn_nonexistant_mapfile">No existeix el fitxer de mapa seleccionat. \nNo estan disponibles els mapes fora línia.</string>
-    <string name="warn_rendertheme_missing">No s\'ha trobat l\'esquema de colors del mapa.</string>
     <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
     <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
     <string name="warn_invalid_character">El caràcter ha de ser una LLETRA o un DÍGIT</string>
@@ -412,7 +410,6 @@
     <string name="about_license">Llicència</string>
     <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
     <string name="about_help">Ajuda</string>
-    <string name="open_services_page">Configura les teves plataformes de geocatxing</string>
     <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar per correu…</string>
     <string name="about_system_info">Informació del sistema de c:geo</string>
@@ -682,7 +679,6 @@
     <string name="init_circlecolor_summary">Seleccioneu el color i l\'opacitat per a la línia del cercle. Els cercles s\'utilitzen com a representació visual del radi mínim al voltant d\'un catxé o d\'un punt de ruta físic.. (S\'aplica a geocaching.com)</string>
     <string name="init_circlefillcolor">Color de dins del cercle</string>
     <string name="init_circlefillcolor_summary">Seleccioneu el color i l\'opacitat del interior dels cercles</string>
-    <string name="init_share_after_export">Obre el menú per compartir després de l\'exportació a GPX</string>
     <string name="init_include_found_status">Inlcou l\'estat \"Trobat\"</string>
     <string name="init_trackautovisit">Visita TBs</string>
     <string name="init_summary_trackautovisit">Posa per defecte un \"Visitat\" als traçables </string>
@@ -780,7 +776,6 @@
     <string name="map_source_osm_offline">Fora de línia</string>
     <string name="map_source_osm_offline_combined">Combinat (Fora de línia)</string>
     <string name="map_source_attribution_dialog_title">Atribucions del mapa</string>
-    <string name="map_source_attribution_legacy_text">Toqueu per atribuir el mapa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
     <string name="init_sendToCgeo_name">El nom del teu dispositiu</string>
@@ -1148,7 +1143,6 @@
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa en viu</string>
     <string name="map_view_map">Tria el mapa</string>
-    <string name="map_modes">Configuració del mapa</string>
     <string name="map_rotation">Mapa rotatori</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
     <string name="map_show_circles">Mostra els cercles</string>

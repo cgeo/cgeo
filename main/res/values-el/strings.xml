@@ -234,8 +234,6 @@
     <string name="warn_log_text_fill">Παρακαλώ εισάγετε κάποιο κείμενο για το αρχείο καταγραφής.</string>
     <string name="warn_load_images">Απέτυχε η φόρτωση εικόνων στο c:geo.</string>
     <string name="warn_invalid_mapfile">Το επιλεγμένο αρχείο του χάρτη δεν είναι έγκυρο αρχείο mapsforge ή η έκδοση του δεν υποστηρίζεται.\n(Το c:geo μεχρι στιγμής υποστηρίζει τις εκδόσεις v3 έως v5 / η έκδοση v3 υποστηρίζετε εφόσον είναι επιλεγμένη η επιλογή \"Old Mapsforge V3\".)\n\nΟι χάρτες εκτός σύνδεσης δεν είναι διαθέσιμοι.</string>
-    <string name="warn_nonexistant_mapfile">Δεν υπάρχει το αρχείο χάρτη που επιλέξατε.\nΟι χάρτες δεν είναι διαθέσιμοι εκτός σύνδεσης.</string>
-    <string name="warn_rendertheme_missing">Το θέμα δεν βρέθηκε.</string>
     <string name="warn_pocket_query_select">Δεν έχει επιλεγεί καμία Προσωπική Αναζήτηση.</string>
     <string name="warn_no_pocket_query_found">Δεν βρέθηκε καμία Προσωπική Αναζήτηση online.</string>
     <string name="warn_invalid_character">Ο χαρακτήρας πρέπει να είναι ΓΡΑΜΜΑ ή ΑΡΙΘΜΟΣ</string>
@@ -412,7 +410,6 @@
     <string name="about_license">Άδεια χρήσης</string>
     <string name="about_apache_license"><a href="">Άδεια Apache, Έκδοση 2.0</a></string>
     <string name="about_help">Βοήθεια</string>
-    <string name="open_services_page">Ρύθμιση της πλατφόρμας σας του geocaching</string>
     <string name="about_system_include">Παρακαλούμε να συμπεριλάβετε τις ακόλουθες πληροφορίες συστήματος κατά την αποστολή μιας αναφοράς σφάλματος ή όταν ζητάτε περισσότερες πληροφορίες σχετικά με το c:geo:</string>
     <string name="about_system_info_send_button">Αποστολή με e-mail…</string>
     <string name="about_system_info">πληροφορίες συστήματος c:geo</string>
@@ -679,7 +676,6 @@
     <string name="init_accuracycirclecolor_summary">Επιλέξτε χρώμα και αδιαφάνεια για την ακρίβεια γραμμή κύκλου. Ο κύκλος ακρίβειας χρησιμοποιείται ως οπτική αναπαράσταση για την ακρίβεια του σήματος τοποθεσίας.</string>
     <string name="init_accuracycirclefillcolor">Χρώμα γεμίσματος κύκλου ακρίβειας</string>
     <string name="init_accuracycirclefillcolor_summary">Επιλέξτε αδιαφάνεια και χρώμα γεμίσματος, των κύκλων ακρίβειας</string>
-    <string name="init_share_after_export">Ανοίξτε το μενού κοινής χρήσης μετά από εξαγωγή GPX</string>
     <string name="init_include_found_status">Περιλαμβάνει όσες δηλώσατε ότι βρήκατε</string>
     <string name="init_trackautovisit">Επίσκεψη ανιχνεύσιμων</string>
     <string name="init_summary_trackautovisit">Ορίστε προεπιλογή \"επίσκεψη\" στα ανιχνεύσιμα</string>
@@ -778,7 +774,6 @@
     <string name="map_source_osm_offline">Χωρίς σύνδεση</string>
     <string name="map_source_osm_offline_combined">Συνδυασμένο (Εκτός σύνδεσης)</string>
     <string name="map_source_attribution_dialog_title">Χαρακτηριστικά χάρτη</string>
-    <string name="map_source_attribution_legacy_text">Πατήστε για χαρακτηριστικά χάρτη</string>
     <string name="init_sendToCgeo">Αποστολή στο c:geo</string>
     <string name="settings_info_send2cgeo_title">Σχετικά με το send2cgeo</string>
     <string name="init_sendToCgeo_name">Όνομα της συσκευής σας</string>
@@ -1146,7 +1141,6 @@
     <string name="map_map">Χάρτης</string>
     <string name="map_live">Live Χάρτης</string>
     <string name="map_view_map">Προβολή χάρτη</string>
-    <string name="map_modes">Ρυθμίσεις χάρτη</string>
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
     <string name="map_show_circles">Εμφάνιση κύκλων</string>

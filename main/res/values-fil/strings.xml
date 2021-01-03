@@ -189,8 +189,6 @@
     <string name="warn_search_help_tb">Ilagay ang code para sa pagsusubaybay. Halimbawa \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Mangyaring maglagay ng ilang teskto para sa iyong log.</string>
     <string name="warn_load_images">ang c:geo ay nabigo sa pagload ng mga imahe.</string>
-    <string name="warn_nonexistant_mapfile">Ang napiling file ng mapa ay hindi na umiiral\nNaka-offline ang mga mapa ay hindi pwedeng magamit.</string>
-    <string name="warn_rendertheme_missing">Hindi nakita ang tema ng mapa.</string>
     <string name="warn_pocket_query_select">Walang piniling query Pocket.</string>
     <string name="warn_no_pocket_query_found">Walang natagpuang query sa Pocket online.</string>
     <string name="warn_invalid_character">Ang karakter ay dapat letra o numero</string>
@@ -484,7 +482,6 @@
     <string name="init_gpx_importdir">Pag-import ng Direktoryo ng GPX</string>
     <string name="init_dataDir">Pumili ng Direktoryo ng datos sa Geocache</string>
     <string name="init_dataDir_note">Maari kang pumili upang iimbak na karagdagang datos para sa geocaches (spoilers, log images, &#8230;) sa iyong external na lagayan (emulated or real external SD card depende sa iyong aparato).</string>
-    <string name="init_share_after_export">Ipakita ang menu ng pagbabahagi pagkatapos na i-eksport ang GPX</string>
     <string name="init_include_found_status">Isama ang nakitang katayuan</string>
     <string name="init_trackautovisit">Bisitahin ang TBs</string>
     <string name="init_summary_trackautovisit">I-set ang mga pagsusubaybay upang \"Maka-bisita\" ayon sa default</string>
@@ -833,7 +830,6 @@
     <string name="map_map">Ang Mapa</string>
     <string name="map_live">Ang Live na mapa</string>
     <string name="map_view_map">Tanawin ang mapa</string>
-    <string name="map_modes">Ang mga pagtakda sa mga mapa</string>
     <string name="map_show_circles">Ang mga bilog ay ipakita</string>
     <string name="map_theme_select">Ang Piliin ang tema ng mapa</string>
     <string name="map_live_enable">Ang Paganahin ng buhay</string>

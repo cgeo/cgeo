@@ -233,8 +233,6 @@
     <string name="warn_log_text_fill">Merci de saisir un texte pour votre visite.</string>
     <string name="warn_load_images">c:geo n\'a pas pu charger les images.</string>
     <string name="warn_invalid_mapfile">Le fichier de carte sélectionné n\'est pas une carte Mapsforge ou utilise une version non supportée.\n(c:geo supporte actuellement les versions 3 à 5 / version 3 uniquement si le paramètre \"Ancienne version Mapsforge V3\" est utilisé)\n\nLes cartes hors-ligne ne sont pas disponibles.</string>
-    <string name="warn_nonexistant_mapfile">Le fichier de carte spécifié n\'existe pas.\nLes cartes hors ligne ne sont pas disponibles.</string>
-    <string name="warn_rendertheme_missing">Le thème de la carte n\'a pas été trouvé.</string>
     <string name="warn_pocket_query_select">Aucune Pocket Query sélectionnée.</string>
     <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
     <string name="warn_invalid_character">Le caractère doit être une LETTRE ou un CHIFFRE</string>
@@ -411,7 +409,6 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Aide</string>
-    <string name="open_services_page">Configurer votre/vos plateforme(s) de geocaching</string>
     <string name="about_system_include">Merci d\'inclure systématiquement les informations suivantes lorsque vous signalez un problème ou demandez plus d\'information à propos de c:geo:</string>
     <string name="about_system_info_send_button">Envoyer par courriel…</string>
     <string name="about_system_info">Informations système de c:geo</string>
@@ -674,7 +671,6 @@
     <string name="init_circlecolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de cercle. Les cercles sont utilisés comme représentation visuelle pour le rayon minimum autour d\'une cache ou d\'un point de passage physique, où aucune autre cache ou point de passage physique n\'est autorisée. (S\'applique à geocaching.com)</string>
     <string name="init_circlefillcolor">Couleur de l\'intérieur du cercle</string>
     <string name="init_circlefillcolor_summary">Sélectionnez la couleur et l\'opacité de l\'intérieur des cercles</string>
-    <string name="init_share_after_export">Ouvrir le menu de partage après les exports GPX</string>
     <string name="init_include_found_status">Inclure le statut \"Trouvé\"</string>
     <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"A visité\"</string>
     <string name="init_summary_trackautovisit">Par défaut, positionner les objets voyageurs avec le statut \"A visité\"</string>
@@ -772,7 +768,6 @@
     <string name="map_source_osm_offline">hors-ligne</string>
     <string name="map_source_osm_offline_combined">Combiné (Hors-ligne)</string>
     <string name="map_source_attribution_dialog_title">Crédits pour la carte</string>
-    <string name="map_source_attribution_legacy_text">Appuyez pour afficher les crédits de la carte</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
     <string name="settings_info_send2cgeo_title">Informations sur send2cgeo</string>
     <string name="init_sendToCgeo_name">Le nom de votre appareil</string>
@@ -1140,7 +1135,6 @@
     <string name="map_map">Carte</string>
     <string name="map_live">Carte temps réel</string>
     <string name="map_view_map">Afficher carte</string>
-    <string name="map_modes">Paramètres carte</string>
     <string name="map_rotation">Rotation de la carte</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
     <string name="map_show_circles">Afficher les cercles</string>

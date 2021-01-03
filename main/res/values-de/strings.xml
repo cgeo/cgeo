@@ -234,8 +234,6 @@
     <string name="warn_log_text_fill">Bitte Text einfügen.</string>
     <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
     <string name="warn_invalid_mapfile">Die ausgewählte Kartendatei ist keine gültige Mapsforge Kartendatei oder verwendet eine nicht unterstützte Version.\n(c:geo unterstützt derzeit nur v3 bis v5 / v3, wenn Sie die Einstellung \"Alte Mapfsforge V3\" verwenden.)\n\nOffline-Karten sind nicht verfügbar.</string>
-    <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline-Karte ist nicht verfügbar.</string>
-    <string name="warn_rendertheme_missing">Das gewählte Karten-Theme wurde nicht gefunden.</string>
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_invalid_character">Das Zeichen muss ein BUCHSTABE oder eine ZIFFER sein</string>
@@ -412,7 +410,6 @@
     <string name="about_license">Lizenz</string>
     <string name="about_apache_license"><a href="">Apache Lizenz, Version 2.0</a></string>
     <string name="about_help">Hilfe</string>
-    <string name="open_services_page">Konfiguriere deine Geocaching-Platform(en)</string>
     <string name="about_system_include">Bitte die folgende Systeminformation bei jedem Fehlerbericht oder bei Informationsanfragen zu c:geo mitsenden:</string>
     <string name="about_system_info_send_button">Per E-Mail versenden…</string>
     <string name="about_system_info">c:geo Systeminformationen</string>
@@ -622,7 +619,7 @@
     <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
     <string name="init_backup_folder_exists_error">Konnte kein neueres Sicherungsverzeichnis erstellen. Hast du innerhalb der letzten Minute bereits eine Sicherung erstellt?</string>
     <string name="init_backup_no_backup_available">Es ist keine Sicherung verfügbar.</string>
-    <string name="backup_confirm_overwrite">Dadurch wird dein ältestes existierendes Sicherungsverzeichnis vom %s gelöscht. \nMöchten Sie fortfahren?</string>
+    <string name="backup_confirm_overwrite">Dadurch wird Dein ältestes existierendes Sicherungsverzeichnis vom %s gelöscht.\nMöchtest Du fortfahren?</string>
     <string name="restore_confirm_overwrite_database">WARNUNG: Dies wird %s auf deinem Gerät überschreiben!</string>
     <string name="restore_confirm_overwrite_database_and_settings">WARNUNG: Dies wird %s und deine aktuellen Einstellungen auf deinem Gerät überschreiben!</string>
     <string name="restore_confirm_overwrite_settings">WARNUNG: Dies wird deine aktuellen Einstellungen auf deinem Gerät überschreiben!</string>
@@ -686,7 +683,6 @@
     <string name="init_accuracycirclecolor_summary">Farbe und Deckkraft der Kreislinie einstellen. Ein Genauigkeitskreis visualisiert auf der Karte, wie genau die aktuelle Position ermittelt werden konnte.</string>
     <string name="init_accuracycirclefillcolor">Genauigkeitskreis: Füllfarbe</string>
     <string name="init_accuracycirclefillcolor_summary">Farbe und Deckkraft der Kreisfüllung einstellen</string>
-    <string name="init_share_after_export">Weiterleiten nach dem Export</string>
     <string name="init_include_found_status">Fundstatus einbeziehen</string>
     <string name="init_trackautovisit">TBs besuchen</string>
     <string name="init_summary_trackautovisit">Trackables automatisch auf „besucht“ setzen</string>
@@ -785,7 +781,6 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombiniert (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartenlizenzen</string>
-    <string name="map_source_attribution_legacy_text">Tippen für Kartenlizenzen</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info zu send2cgeo</string>
     <string name="init_sendToCgeo_name">Name des Endgerätes</string>
@@ -1153,7 +1148,6 @@
     <string name="map_map">Karte</string>
     <string name="map_live">Live-Karte</string>
     <string name="map_view_map">Karte</string>
-    <string name="map_modes">Karteneinstellungen</string>
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_show_circles">Kreise anzeigen</string>

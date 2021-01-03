@@ -234,8 +234,6 @@
     <string name="warn_log_text_fill">Prego, inserire del testo nel log.</string>
     <string name="warn_load_images">c:geo non riesce a caricare immagini.</string>
     <string name="warn_invalid_mapfile">Il file di mappa selezionato non è un file mappa mapsforge valido o utilizza una versione non supportata.\n(c:geo supporta attualmente dalla v3 alla v5 / v3 solo se si utilizza l\'impostazione \"Old Mapfsforge V3\").\n\nLe mappe offline non sono disponibili.</string>
-    <string name="warn_nonexistant_mapfile">La mappa selezionata non esiste.\nMappa offline non disponibile.</string>
-    <string name="warn_rendertheme_missing">Tema mappa non trovato.</string>
     <string name="warn_pocket_query_select">Nessuna Pocket query selezionata.</string>
     <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
     <string name="warn_invalid_character">Il carattere deve essere una lettera o una cifra</string>
@@ -412,7 +410,6 @@
     <string name="about_license">Licenza</string>
     <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
     <string name="about_help">Guida</string>
-    <string name="open_services_page">Configura la tua piattaforma (o le tue piattaforme) di Geocaching</string>
     <string name="about_system_include">Si prega di includere le seguenti informazioni di sistema quando si invia una segnalazione di bug o per chiedere ulteriori informazioni su c:geo:</string>
     <string name="about_system_info_send_button">Invia per email…</string>
     <string name="about_system_info">informazioni di sistema di c:geo</string>
@@ -682,7 +679,6 @@
     <string name="init_circlecolor_summary">Seleziona colore e opacità per la linea del cerchio. I cerchi sono usati come rappresentazione visiva del raggio minimo, attorno a un cache o waypoint fisico, in cui non è consentita nessun\'altro cache o waypoint fisico. (Si applica a geocaching.com)</string>
     <string name="init_circlefillcolor">Colore di riempimento del cerchio</string>
     <string name="init_circlefillcolor_summary">Seleziona colore e opacità per il riempimento dei cerchi</string>
-    <string name="init_share_after_export">Apri menu condivisione dopo export GPX</string>
     <string name="init_include_found_status">Includi lo stato \"Trovato\"</string>
     <string name="init_trackautovisit">Visita TB</string>
     <string name="init_summary_trackautovisit">Setta i miei oggetti Trackables automaticamente su \"visit\" quando invio log</string>
@@ -781,7 +777,6 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinato (Offline)</string>
     <string name="map_source_attribution_dialog_title">Attribuzioni Mappa</string>
-    <string name="map_source_attribution_legacy_text">Tocca per l\'attribuzione della mappa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informazioni su send2cgeo</string>
     <string name="init_sendToCgeo_name">Nome dispositivo</string>
@@ -1149,7 +1144,6 @@
     <string name="map_map">Mappa</string>
     <string name="map_live">Mappa Live</string>
     <string name="map_view_map">Scegli mappa</string>
-    <string name="map_modes">Modi mappa</string>
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_dot_mode">Usa icone compatte</string>
     <string name="map_show_circles">Mostra area cache</string>

@@ -233,8 +233,6 @@
     <string name="warn_log_text_fill">Indtast tekst til din logbesked.</string>
     <string name="warn_load_images">c:geo kunne ikke indlæse billeder.</string>
     <string name="warn_invalid_mapfile">Den valgte kortfil er ikke en gyldig mapsforge kortfil, eller den bruger en ikke-understøttet version.\n(c:geo understøtter i øjeblikket kun v3 til v5 / v3 hvis du bruger indstillingen \"Old Mapfsforge V3\".\n\nOffline kort er ikke tilgængelige.</string>
-    <string name="warn_nonexistant_mapfile">Den valgte kortfil eksisterer ikke.\nOffline kort vil ikke være tilgængelige.</string>
-    <string name="warn_rendertheme_missing">Korttema ikke fundet.</string>
     <string name="warn_pocket_query_select">Ingen Pocket Query valgt.</string>
     <string name="warn_no_pocket_query_found">Det blev ikke fundet nogen Pocket Query online.</string>
     <string name="warn_invalid_character">Tegn skal være bogstaver eller tal</string>
@@ -411,7 +409,6 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjælp</string>
-    <string name="open_services_page">Konfigurér geocaching platform(e)</string>
     <string name="about_system_include">Vedhæft følgende systemoplysninger når du sender en fejlrapport eller beder om yderligere oplysninger om c:geo:</string>
     <string name="about_system_info_send_button">Send via mail…</string>
     <string name="about_system_info">c:geo systeminformation</string>
@@ -670,7 +667,6 @@
     <string name="init_circlecolor_summary">Vælg farve og uigennemsigtighed for cirklen. Cirkler bruges som en visuel repræsentation for den mindste radius omkring en cache eller fysisk rutepunkt, hvor andre cacher eller fysiske rutepunkter ikke er tilladt. (Gælder for geocaching.com)</string>
     <string name="init_circlefillcolor">Cirkel fyldfarve</string>
     <string name="init_circlefillcolor_summary">Vælg farve og uigennemsigtighed for cirklers fyldfarve</string>
-    <string name="init_share_after_export">Åbn Del-menu efter GPX eksport</string>
     <string name="init_include_found_status">Inkludér \"Fundet\"-status</string>
     <string name="init_trackautovisit">Besøg automatisk Trackable</string>
     <string name="init_summary_trackautovisit">Markér Trackables som \"Besøgt\" som standard</string>
@@ -1134,7 +1130,6 @@
     <string name="map_map">Kort</string>
     <string name="map_live">Live-kort</string>
     <string name="map_view_map">Kort-view</string>
-    <string name="map_modes">Kortindstillinger</string>
     <string name="map_rotation">Kortrotation</string>
     <string name="map_dot_mode">Brug små ikoner</string>
     <string name="map_show_circles">Vis cirkler</string>

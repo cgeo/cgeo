@@ -234,8 +234,6 @@
     <string name="warn_log_text_fill">Prašome įrašyti įrašo tekstą.</string>
     <string name="warn_load_images">c:geo nepavyko įkelti vaizdo failo.</string>
     <string name="warn_invalid_mapfile">Pasirinktas žemėlapis nėra Mapsforge tipo ar palaikomos versijos.\n(c:geo palaiko nuo v3 iki v5 (v3 palaikymą galite įjungti pasirinkę \"Senasis Mapsforge V3\").)\n\nŽemėlapiai neprisijungus neprieinami.</string>
-    <string name="warn_nonexistant_mapfile">Pasirinktas žemėlapio failas neegzistuoja.\nIšsaugoti žemėlapiai yra nepasiekiami.</string>
-    <string name="warn_rendertheme_missing">Nerasta žemėlapio tema.</string>
     <string name="warn_pocket_query_select">Nepasirinktas joks Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nerastas Pocket query internete.</string>
     <string name="warn_invalid_character">Simbolis turi būti raidė arba skaitmuo</string>
@@ -413,7 +411,6 @@
     <string name="about_license">Licencija</string>
     <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
     <string name="about_help">Pagalba</string>
-    <string name="open_services_page">Konfigūruokite savo geocaching platformą (-as)</string>
     <string name="about_system_include">Pridėkite papildomą sisteminę informaciją, kai siunčiate klaidos pranešimą arba norite gauti daugiau informacijos apie c:geo:</string>
     <string name="about_system_info_send_button">Siųsti paštu…</string>
     <string name="about_system_info">c:geo sistemos informacija</string>
@@ -674,7 +671,6 @@
     <string name="init_circlecolor_summary">Pasirinkite apskritimo krašto spalvą ir skaidrumą. Apskritimai naudojami kaip vaizdinis pavaizdavimas, rodantis mažiausią spindulį aplink slėptuvę arba papildomą tašką, kur neleidžiama jokios kitos slėptuvės ar papildomi taškai. (Galioja geocaching.com)</string>
     <string name="init_circlefillcolor">Apskritimo užpildymo spalva</string>
     <string name="init_circlefillcolor_summary">Pasirinkite užpildomų apskritimų spalvą ir skaidrumą</string>
-    <string name="init_share_after_export">Po GPX eksportavimo atidaryti bendrinimo meniu</string>
     <string name="init_include_found_status">Įtraukti \"Rasta\" būseną</string>
     <string name="init_trackautovisit">Apsilankyti su keliauninkais</string>
     <string name="init_summary_trackautovisit">Automatiškai nustatyti keliauninkus kaip \"Apsilankė\"</string>
@@ -1149,7 +1145,6 @@
     <string name="map_map">Išsaugotos slėptuvės</string>
     <string name="map_live">Slėptuvės iš interneto</string>
     <string name="map_view_map">Žemėlapio šaltinis</string>
-    <string name="map_modes">Žemėlapio nustatymai</string>
     <string name="map_rotation">Žemėlapio sukimas</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
     <string name="map_show_circles">Rodyti apskritimus</string>

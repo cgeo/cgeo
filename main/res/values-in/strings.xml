@@ -191,8 +191,6 @@
     <string name="warn_search_help_tb">Masukkan kode yang bisa dilacak. Misalnya \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Tolong masukan beberapa teks untuk log anda.</string>
     <string name="warn_load_images">c: geo gagal memuat gambar.</string>
-    <string name="warn_nonexistant_mapfile">File peta yang dipilih tidak ada.\n Peta offline tidak tersedia.</string>
-    <string name="warn_rendertheme_missing">Tema peta tidak ditemukan.</string>
     <string name="warn_pocket_query_select">Tidak ada permintaan Pocket yang dipilih.</string>
     <string name="warn_no_pocket_query_found">Tidak ada kantong pertanyaan yang ditemukan secara online.</string>
     <string name="warn_invalid_character">Karakter wajib berupa surat atau angka</string>
@@ -477,7 +475,6 @@
     <string name="init_gpx_importdir">Direktori Impor GPX</string>
     <string name="init_dataDir">Pilih direktori data Geocache</string>
     <string name="init_dataDir_note">Anda dapat memilih untuk menyimpan data tambahan untuk geocaches (spoiler, log gambar, &#8230;) pada penyimpanan eksternal anda atau (kartu SD eksternal yang ditiru sebenarnya tergantung pada perangkat anda).</string>
-    <string name="init_share_after_export">Buka menu share setelah ekspor GPX</string>
     <string name="init_include_found_status">Termasuk \"Ditemukan\" status</string>
     <string name="init_trackautovisit">Kunjungi TBs</string>
     <string name="init_summary_trackautovisit">Setel trackables ke \"Visited\" secara default</string>
@@ -817,7 +814,6 @@
     <string name="map_map">Peta</string>
     <string name="map_live">Peta hidup</string>
     <string name="map_view_map">Tampilan peta</string>
-    <string name="map_modes">Pengaturan peta</string>
     <string name="map_show_circles">Tampilkan lingkaran</string>
     <string name="map_theme_select">Pilih tema peta</string>
     <string name="map_live_enable">Aktifkan hidup</string>

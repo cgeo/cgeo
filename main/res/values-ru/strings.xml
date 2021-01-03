@@ -226,8 +226,6 @@
     <string name="warn_log_text_fill">Пожалуйста, введите текст записи.</string>
     <string name="warn_load_images">c:geo не удалось загрузить изображения.</string>
     <string name="warn_invalid_mapfile">Выбранный файл карты не является допустимым файлом mapsforge или использует неподдерживаемую версию.\n(c:geo в данный момент поддерживает v3-v5 / только v3 если вы используете параметр \"Старый Mapfsforge V3\".\n\nОффлайн карты недоступны.</string>
-    <string name="warn_nonexistant_mapfile">Выбранный файл карты не существует.\nОффлайн карты недоступны.</string>
-    <string name="warn_rendertheme_missing">Тема карты не найдена.</string>
     <string name="warn_pocket_query_select">Не выбрана выборка.</string>
     <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
     <string name="warn_invalid_character">Символ должен быть буквой или цифрой</string>
@@ -403,7 +401,6 @@
     <string name="about_license">Лицензия</string>
     <string name="about_apache_license"><a href="">Лицензия Apache, Version 2.0</a></string>
     <string name="about_help">Помощь</string>
-    <string name="open_services_page">Настроить сервис(-ы) геокешинга</string>
     <string name="about_system_include">Пожалуйста, включите следующую информацию об устройстве, когда отправляете отчет об ошибке или запрашиваете больше информации про c:geo:</string>
     <string name="about_system_info_send_button">Отправить по email…</string>
     <string name="about_system_info">Служебная информация c:geo</string>
@@ -629,7 +626,6 @@
     <string name="init_circlecolor_summary">Выберите цвет и степень прозрачности для линии круга. Круги используются в качестве визуального представления минимального радиуса вокруг тайника или физической точки пути, где не разрешается ни кэшировать, ни физическая путевая точка. (Применяется к geocaching.com)</string>
     <string name="init_circlefillcolor">Цвет заливки круга</string>
     <string name="init_circlefillcolor_summary">Выберите цвет и степень прозрачность для заполняемых кругов</string>
-    <string name="init_share_after_export">Открыть меню отправки после экспорта</string>
     <string name="init_include_found_status">Включить \"Найденные\" тайники</string>
     <string name="init_trackautovisit">Отмечать трекаблы</string>
     <string name="init_summary_trackautovisit">Выставлять \"Посетил\" для трекаблов по умолчанию</string>
@@ -1096,7 +1092,6 @@
     <string name="map_map">Карта</string>
     <string name="map_live">Онлайн карта</string>
     <string name="map_view_map">Тип карты</string>
-    <string name="map_modes">Настройки карты</string>
     <string name="map_rotation">Вращение карты</string>
     <string name="map_dot_mode">Маленькие иконки</string>
     <string name="map_show_circles">Показать круги</string>

@@ -234,8 +234,6 @@
     <string name="warn_log_text_fill">Por favor, insira algum texto para o registo.</string>
     <string name="warn_load_images">O c:geo falhou o carregamento de imagens.</string>
     <string name="warn_invalid_mapfile">O ficheiro seleccionado não é um ficheiro cartográfico de mapsforge ou usa uma versão não suportada.\n(O c:geo actualmente suporta as seguintes versões: V3* até V5.)\n*Apenas activando a definição \"Antigo Mapsforge V3\"\n\nOs mapas offline não estão disponíveis.</string>
-    <string name="warn_nonexistant_mapfile">O ficheiro de mapa seleccionado não existe.\nOs mapas offline não estão disponíveis.</string>
-    <string name="warn_rendertheme_missing">Tema de mapa não encontrado.</string>
     <string name="warn_pocket_query_select">Nenhuma Pocket Query seleccionada.</string>
     <string name="warn_no_pocket_query_found">Não foram encontradas Pocket Queries on-line.</string>
     <string name="warn_invalid_character">O carácter deve ser uma LETRA ou um DÍGITO</string>
@@ -412,7 +410,6 @@
     <string name="about_license">Licença</string>
     <string name="about_apache_license"><a href="">Apache License, Versão 2.0</a></string>
     <string name="about_help">Ajuda</string>
-    <string name="open_services_page">Configuração de serviços de geocaching</string>
     <string name="about_system_include">Por favor inclua as seguintes informações de sistema quando reportar um erro ou pedir mais informações acerca do c:geo:</string>
     <string name="about_system_info_send_button">Enviar por e-mail…</string>
     <string name="about_system_info">Informação do sistema c:geo</string>
@@ -686,7 +683,6 @@
     <string name="init_accuracycirclecolor_summary">Selecção da cor e opacidade para o círculo da precisão. Este círculo é utilizado para representar a precisão do sinal de localização.</string>
     <string name="init_accuracycirclefillcolor">Cor do preenchimento do círculo da precisão</string>
     <string name="init_accuracycirclefillcolor_summary">Selecção da cor e opacidade com que os círculos são preenchidos</string>
-    <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
     <string name="init_include_found_status">Incluir o estado \"Encontrado\"</string>
     <string name="init_trackautovisit">Visitar TBs</string>
     <string name="init_summary_trackautovisit">Predefine a acção \"Visitar\" a todos os seus trackables</string>
@@ -785,7 +781,6 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinado (offline)</string>
     <string name="map_source_attribution_dialog_title">Créditos do mapa</string>
-    <string name="map_source_attribution_legacy_text">Toque para atribuição de mapa</string>
     <string name="init_sendToCgeo">Enviar para o c:geo</string>
     <string name="settings_info_send2cgeo_title">Informação sobre send2cgeo</string>
     <string name="init_sendToCgeo_name">Nome do seu dispositivo</string>
@@ -1153,7 +1148,6 @@
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa on-line</string>
     <string name="map_view_map">Vista de mapa</string>
-    <string name="map_modes">Modos de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
     <string name="map_show_circles">Mostrar círculos</string>
