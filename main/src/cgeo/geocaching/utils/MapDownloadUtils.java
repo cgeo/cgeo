@@ -102,7 +102,7 @@ public class MapDownloadUtils {
             @Override
             protected void execute() {
                 final ConfigurableFolder folder = ConfigurableFolder.OFFLINE_MAPS;
-                final boolean mapDirIsReady = FolderStorage.get().checkAndAdjustAvailability(folder);
+                final boolean mapDirIsReady = FolderStorage.get().ensureAndAdjustFolder(folder);
 
                 if (mapDirIsReady) {
                     callback.run(folder, true);

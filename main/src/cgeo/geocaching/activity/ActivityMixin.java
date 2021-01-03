@@ -93,7 +93,7 @@ public final class ActivityMixin {
             toast.show();
         } catch (RuntimeException re) {
             //this can happen e.g. in Unit tests when thread has no called Looper.prepare()
-            Log.w("Could not show toast '" + text + "' to user", re);
+            Log.w("Could not show toast '" + text + "' to user: " + re);
         }
     }
 

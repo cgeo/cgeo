@@ -8,6 +8,7 @@ import static cgeo.geocaching.storage.Folder.DOCUMENTS_FOLDER_DEPRECATED;
 import static cgeo.geocaching.storage.Folder.LEGACY_CGEO_PUBLIC_ROOT;
 
 import android.content.Context;
+import android.net.Uri;
 
 import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
@@ -40,7 +41,7 @@ public enum ConfigurableFolder {
     BACKUP(R.string.pref_configurablefolder_backup, R.string.configurablefolder_backup, Folder.fromConfigurableFolder(BASE, "backup")),
     /** Field Note folder */
     FIELD_NOTES(R.string.pref_configurablefolder_fieldnotes, R.string.configurablefolder_fieldnotes, Folder.fromConfigurableFolder(BASE, "field-notes")),
-    /** (Log) Image folder) */
+    ///** (Log) Image folder) */
     //IMAGES(R.string.pref_configurablefolder_images, R.string.configurablefolder_images, Folder.fromconfigurablefolder(BASE, "images")),
 
     /** A Folder to use solely for Unit Test */
@@ -98,8 +99,14 @@ public enum ConfigurableFolder {
         }
     }
 
+    /** The folder this Configurable Folder currently points to */
     public Folder getFolder() {
         return this.userDefinedFolder == null ? this.defaultFolder : this.userDefinedFolder;
+    }
+
+    /** The (FolderType-specific) Uri this Configurable Folder currently points to */
+    public Uri getUri() {
+        return FolderStorage.get().getUriForFolder(getFolder());
     }
 
     public Folder getDefaultFolder() {
@@ -121,7 +128,7 @@ public enum ConfigurableFolder {
 
         for (Folder candidate : candidates) {
             //candidate is ok if it is either directly accessible or based on another public folder (which will become accessible later)
-            if (candidate != null && (candidate.getRootConfigurableFolder() != null || FolderStorage.get().checkAvailability(candidate, needsWrite()))) {
+            if (candidate != null && (candidate.getRootConfigurableFolder() != null || FolderStorage.get().ensureFolder(candidate, needsWrite()))) {
                 return candidate;
             }
         }

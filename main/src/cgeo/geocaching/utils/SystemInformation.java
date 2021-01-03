@@ -130,7 +130,7 @@ public final class SystemInformation {
     private static void appendPublicFolders(@NonNull final StringBuilder body) {
         body.append("\nPublic Folders: #").append(ConfigurableFolder.values().length);
         for (ConfigurableFolder folder : ConfigurableFolder.values()) {
-            final boolean isAvailable = FolderStorage.get().checkAndAdjustAvailability(folder);
+            final boolean isAvailable = FolderStorage.get().ensureAndAdjustFolder(folder);
             final ImmutablePair<Integer, Integer> files = FolderUtils.get().getFolderInfo(folder.getFolder());
             final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
             body.append("\n- ").append(folder.toString())

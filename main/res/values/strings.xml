@@ -854,7 +854,7 @@
     <string name="folderstorage_err_create_failed">File \'%s\' in \'%s\' could not be created, see logfile for details</string>
     <string name="folderstorage_err_delete_failed">File \'%s\' could not be deleted, see logfile for details</string>
     <string name="folderstorage_err_list_failed">Files in Folder \'%s\' could not be listed, see logfile for details</string>
-    <string name="folderstorage_err_ensurefolder_failed">Folder \'%s\' could not be created, see logfile for details</string>
+    <string name="folderstorage_err_folder_access_failed">Folder \'%s\' could not be accessed, see logfile for details</string>
     <string name="folderstorage_err_copy_failed">File \'%s\' could not be copied/moved to \'%s\' (move=%s), see logfile for details</string>
 
     <!-- COnfigurable Folders -->

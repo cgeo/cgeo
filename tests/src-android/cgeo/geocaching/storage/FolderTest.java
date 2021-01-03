@@ -35,7 +35,7 @@ public class FolderTest extends CGeoTestCase {
         final String docConfig = "DOCUMENT::content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Funittest-doc::";
         final Folder docFolder = Folder.fromConfig(docConfig);
         assertThat(docFolder.getBaseType()).isEqualTo(Folder.FolderType.DOCUMENT);
-        assertThat(docFolder.getUri()).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Funittest-doc"));
+        assertThat(docFolder.getBaseUri()).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Funittest-doc"));
         assertThat(docFolder.getSubdirsToBase()).isEmpty();
     }
 
@@ -43,7 +43,7 @@ public class FolderTest extends CGeoTestCase {
         final Uri docUri = Uri.parse(DOC_URI_EXAMPLE);
         final Folder docFolder = Folder.fromConfig(DOC_URI_EXAMPLE);
         assertThat(docFolder.getBaseType()).isEqualTo(Folder.FolderType.DOCUMENT);
-        assertThat(docFolder.getUri()).isEqualTo(docUri);
+        assertThat(docFolder.getBaseUri()).isEqualTo(docUri);
     }
 
     public void testLegacyFileConfig() {
@@ -52,11 +52,11 @@ public class FolderTest extends CGeoTestCase {
 
         final Folder pureFileFolder = Folder.fromConfig(file.getAbsolutePath());
         assertThat(pureFileFolder.getBaseType()).isEqualTo(Folder.FolderType.FILE);
-        assertThat(new File(pureFileFolder.getUri().getPath())).isEqualTo(file);
+        assertThat(new File(pureFileFolder.getBaseUri().getPath())).isEqualTo(file);
 
         final Folder uriFileFolder = Folder.fromConfig(fileUri.toString());
         assertThat(uriFileFolder.getBaseType()).isEqualTo(Folder.FolderType.FILE);
-        assertThat(new File(pureFileFolder.getUri().getPath())).isEqualTo(file);
+        assertThat(new File(pureFileFolder.getBaseUri().getPath())).isEqualTo(file);
     }
 
     public void testInvalidConfig() {

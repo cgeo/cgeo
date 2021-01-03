@@ -54,7 +54,6 @@ public class Folder {
     /** Legacy public root folder of c:geo until API29 (will no longer work in API30) */
     public static final Folder LEGACY_CGEO_PUBLIC_ROOT = Folder.fromFile(new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "cgeo"));
 
-    private static final String EMPTY = "---";
     private static final String CONFIG_SEP = "::";
 
     private final FolderType type;
@@ -85,24 +84,17 @@ public class Folder {
         }
     }
 
-
     public FolderType getType() {
         return type;
     }
 
-    /** Uri associated with this folder */
-    @NonNull
-    public Uri getUri() {
-        final Uri uri = configurableFolder != null ? configurableFolder.getFolder().getUri() : this.uri;
-        return UriUtils.appendPath(uri, this.subfolderString);
-    }
-
-    /** The base Uri (below all subfolders)) */
+    /** The base Uri (below all subfolders) */
     @NonNull
     public Uri getBaseUri() {
         return configurableFolder != null ? configurableFolder.getFolder().getBaseUri() : this.uri;
     }
 
+    /** The current base type (may never be CONFIGURABLE_FOLDER. This type can change when folder is based on a CONFIGURABLE_FOLDER */
     @NonNull
     public FolderType getBaseType() {
         if (configurableFolder != null) {
@@ -123,10 +115,16 @@ public class Folder {
         return configurableFolder;
     }
 
+//    /** Returns String which is unique for this folder's current location. Can be used e.g. as a cache key */
+//    @NonNull
+//    public String getLocationKey() {
+//        return UriUtils.appendPath(getBaseUri(), CollectionStream.of(getSubdirsToBase()).toJoinedString("/")).toString();
+//    }
+
     /** Returns a representation of this folder's location fit to show to an end user */
     @NonNull
     public String toUserDisplayableString() {
-        return getUri() == null ? EMPTY : UriUtils.toUserDisplayableString(getUri());
+        return UriUtils.toUserDisplayableString(UriUtils.appendPath(getBaseUri(), CollectionStream.of(getSubdirsToBase()).toJoinedString("/")));
     }
 
     @Nullable

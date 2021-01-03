@@ -4,6 +4,7 @@ import android.content.UriPermission;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.File;
 
@@ -35,21 +36,21 @@ public final class UriUtils {
         return uriString;
     }
 
-    /** Tries to extract the (file) name of a given Uri */
-    @NonNull
-    public static String getFileName(final Uri uri) {
+    /** Tries to extract the last path segment name of a given Uri, removing "/" and such */
+    @Nullable
+    public static String getLastPathSegment(final Uri uri) {
         if (uri == null) {
-            return "";
+            return null;
         }
         final String lastPathSegment = uri.getLastPathSegment();
         if (lastPathSegment == null) {
-            return "";
+            return null;
         }
         final String[] tokens = lastPathSegment.split("/");
         if (tokens == null) {
-            return lastPathSegment;
+            return lastPathSegment.trim();
         }
-        return tokens[tokens.length - 1];
+        return tokens[tokens.length - 1] == null ? null : tokens[tokens.length - 1].trim();
     }
 
     /** Returns whether this Uri is a file Uri */

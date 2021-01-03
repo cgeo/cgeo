@@ -30,6 +30,7 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.storage.ConfigurableFolder;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistedDocumentUri;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -40,6 +41,7 @@ import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
@@ -1585,6 +1587,18 @@ public class Settings {
     @Nullable
     public static String getConfigurableFolder(@NonNull final ConfigurableFolder folder) {
         return getString(folder.getPrefKeyId(), getLegacyValueForConfigurableFolder(folder.getPrefKeyId()));
+    }
+
+    /** sets Uri for persisted single documents. Can be set to null */
+    public static void setPersistedDocumentUri(@NonNull final PersistedDocumentUri persistedUri, @Nullable final Uri uri) {
+        putString(persistedUri.getPrefKeyId(), uri == null ? null : uri.toString());
+    }
+
+    /** gets the user-defined uri for a configurable folder. Can be null */
+    @Nullable
+    public static Uri getPersistedDocumentUri(@NonNull final PersistedDocumentUri persistedUri) {
+        final String uriString = getString(persistedUri.getPrefKeyId(), null);
+        return uriString == null ? null : Uri.parse(uriString);
     }
 
     /** For Migration towards Android 11: returns any legacy value which might be stored in old settings for certain folders */

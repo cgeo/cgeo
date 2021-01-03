@@ -108,10 +108,10 @@ public class FolderUtils {
         //the following three-pass-copy/move is very complicated, but it ensures that copying/moving also works when target is a subdir of source or vice versa
         //For every change done here, please make sure that tests in FolderStorageTest are still passing!
 
-        if (!pls.checkAvailability(source, false)) {
+        if (!pls.ensureFolder(source, false)) {
             return new ImmutableTriple<>(CopyResult.SOURCE_NOT_READABLE, 0, 0);
         }
-        if (!pls.checkAvailability(target, true)) {
+        if (!pls.ensureFolder(target, true)) {
             return new ImmutableTriple<>(CopyResult.TARGET_NOT_WRITEABLE, 0, 0);
         }
 
@@ -200,7 +200,7 @@ public class FolderUtils {
         for (ImmutableTriple<FolderStorage.FileInformation, Folder, Integer> file : fileList) {
             if (file.left.isDirectory) {
                 if ((file.right & COPY_FLAG_DIR_BEFORE) > 0) {
-                    if (pls.ensureFolder(file.middle)) {
+                    if (pls.ensureFolder(file.middle, true)) {
                         dirsCopied++;
                     } else {
                         success = false;
@@ -293,7 +293,8 @@ public class FolderUtils {
                     break;
                 case FILE:
                 default:
-                    freeSpaceAndNumberOfFiles = new ImmutablePair<>(FileUtils.getFreeDiskSpace(new File(folder.getUri().getPath())), -1L);
+                    freeSpaceAndNumberOfFiles = new ImmutablePair<>(FileUtils.getFreeDiskSpace(
+                        new File(FolderStorage.get().getUriForFolder(folder).getPath())), -1L);
                     break;
             }
             return freeSpaceAndNumberOfFiles;
@@ -313,7 +314,7 @@ public class FolderUtils {
 
         final ImmutablePair<Long, Long> emptyResult = new ImmutablePair<>(-1L, -1L);
 
-        final Uri treeUri = folder.getUri();
+        final Uri treeUri = FolderStorage.get().getUriForFolder(folder);
         if (treeUri == null) {
             return emptyResult;
         }

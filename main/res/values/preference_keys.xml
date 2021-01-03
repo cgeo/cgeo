@@ -262,7 +262,7 @@
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
 
-    <!-- ids for public folder prefs -->
+    <!-- ids for configurable folder prefs -->
     <string translatable="false" name="pref_group_localfilesystem">group_localfilesystem</string>
     <string translatable="false" name="pref_configurablefolder_basedir">configurablefolder_basedir</string>
     <string translatable="false" name="pref_configurablefolder_logfiles">configurablefolder_logfiles</string>
@@ -272,9 +272,11 @@
     <string translatable="false" name="pref_configurablefolder_backup">configurablefolder_backup</string>
     <string translatable="false" name="pref_configurablefolder_fieldnotes">configurablefolder_fieldnotes</string>
     <string translatable="false" name="pref_configurablefolder_images">configurablefolder_images</string>
-
     <string translatable="false" name="pref_configurablefolder_testdir">configurablefolder_testdir</string>
 
+    <!-- ids for persisted document uri prefs -->
+    <string translatable="false" name="pref_persisteduri_track">persisteduri_track</string>
+    <string translatable="false" name="pref_persisteduri_individual_route">persisteduri_individual_route</string>
 
     <!-- preference values -->
     <string translatable="false" name="pref_maprotation_off">off</string>

@@ -118,15 +118,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         EditUtils.disableSuggestions(edit);
     }
 
-    protected void restartActivity() {
-        final Intent intent = getIntent();
-        overridePendingTransition(0, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(intent);
-    }
-
     @Override
     public void invalidateOptionsMenuCompatible() {
         Log.v(logToken + ".invalidateOptionsMenuCompatible");

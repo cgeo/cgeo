@@ -23,15 +23,15 @@ public class UriUtilsTest {
     }
 
     @Test
-    public void getUriFileName() {
+    public void getLastPathSegment() {
 
         //A typical example of a non-trivial SAF Document Uri as returned by the framework
         //for tjis ecxample. Uri.getLastPathSegment gives you: primary:Documents/cgeo/logfiles/logcat_2020-12-28_17-22-20-2.txt
         final Uri uri = Uri.parse(DOC_URI_EXAMPLE);
-        assertThat(UriUtils.getFileName(uri)).isEqualTo("logcat_2020-12-28_17-22-20-2.txt");
+        assertThat(UriUtils.getLastPathSegment(uri)).isEqualTo("logcat_2020-12-28_17-22-20-2.txt");
 
         //a little stability test
-        assertThat(UriUtils.getFileName(null)).isEqualTo("");
+        assertThat(UriUtils.getLastPathSegment(null)).isNull();
     }
 
     @Test

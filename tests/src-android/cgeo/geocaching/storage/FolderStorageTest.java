@@ -8,8 +8,8 @@ import cgeo.geocaching.utils.UriUtils;
 
 import android.net.Uri;
 
-
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -66,10 +66,10 @@ public class FolderStorageTest extends CGeoTestCase {
 
         final Folder testFolder = createTestFolder(type, "simpleCreateDelete");
 
-        final Uri uri = FolderStorage.get().create(testFolder, FileNameCreator.forName("cgeo-test.txt"));
+        final Uri uri = FolderStorage.get().create(testFolder, "cgeo-test.txt");
         //final Folder subfolder = Folder.fromFolderLocation(testFolder, "eins");
         final Folder subsubfolder = Folder.fromFolder(testFolder, "eins/zwei");
-        final Uri uri2 = FolderStorage.get().create(subsubfolder, FileNameCreator.forName("cgeo-test-sub.txt"));
+        final Uri uri2 = FolderStorage.get().create(subsubfolder, "cgeo-test-sub.txt");
 
         assertThat(FolderStorage.get().delete(uri)).isTrue();
         assertThat(FolderStorage.get().delete(uri2)).isTrue();
@@ -218,20 +218,20 @@ public class FolderStorageTest extends CGeoTestCase {
         assertFileDirCount(testFolder, 0, 0);
 
         //create two times with same name
-        final Uri uri = FolderStorage.get().create(testFolder, FileNameCreator.forName("test"));
-        final Uri uri2 = FolderStorage.get().create(testFolder, FileNameCreator.forName("test"));
+        final Uri uri = FolderStorage.get().create(testFolder, "test");
+        final Uri uri2 = FolderStorage.get().create(testFolder, "test");
 
-        final Uri uriWithSuffix = FolderStorage.get().create(testFolder, FileNameCreator.forName("testwithsuffix.txt"));
-        final Uri uriWithSuffix2 = FolderStorage.get().create(testFolder, FileNameCreator.forName("testwithsuffix.txt"));
+        final Uri uriWithSuffix = FolderStorage.get().create(testFolder, "testwithsuffix.txt");
+        final Uri uriWithSuffix2 = FolderStorage.get().create(testFolder, "testwithsuffix.txt");
 
         assertFileDirCount(testFolder, 4, 0);
 
-        assertThat(UriUtils.getFileName(uri)).isEqualTo("test");
-        assertThat(UriUtils.getFileName(uri)).isNotEqualTo(UriUtils.getFileName(uri2));
+        assertThat(UriUtils.getLastPathSegment(uri)).isEqualTo("test");
+        assertThat(UriUtils.getLastPathSegment(uri)).isNotEqualTo(UriUtils.getLastPathSegment(uri2));
 
-        assertThat(UriUtils.getFileName(uriWithSuffix)).isEqualTo("testwithsuffix.txt");
-        assertThat(UriUtils.getFileName(uriWithSuffix)).isNotEqualTo(UriUtils.getFileName(uriWithSuffix2));
-        assertThat(UriUtils.getFileName(uriWithSuffix2)).endsWith(".txt");
+        assertThat(UriUtils.getLastPathSegment(uriWithSuffix)).isEqualTo("testwithsuffix.txt");
+        assertThat(UriUtils.getLastPathSegment(uriWithSuffix)).isNotEqualTo(UriUtils.getLastPathSegment(uriWithSuffix2));
+        assertThat(UriUtils.getLastPathSegment(uriWithSuffix2)).endsWith(".txt");
     }
 
     public void testFileWriteReadFile() throws IOException {
@@ -250,14 +250,118 @@ public class FolderStorageTest extends CGeoTestCase {
         final String testtext = "This is a test text";
 
         final Uri uri = FolderStorage.get().create(testFolder, "test.txt");
+
+        //write to new file
         try (OutputStreamWriter writer = new OutputStreamWriter(FolderStorage.get().openForWrite(uri))) {
             writer.write(testtext);
         }
-
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(FolderStorage.get().openForRead(uri)))) {
             final String s = reader.readLine();
             assertThat(s).isEqualTo(testtext);
         }
+
+        //append
+        try (OutputStreamWriter writer = new OutputStreamWriter(FolderStorage.get().openForWrite(uri, true))) {
+            writer.write(testtext);
+        }
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(FolderStorage.get().openForRead(uri)))) {
+            final String s = reader.readLine();
+            assertThat(s).isEqualTo(testtext + testtext);
+        }
+
+        //overwrite
+        try (OutputStreamWriter writer = new OutputStreamWriter(FolderStorage.get().openForWrite(uri))) {
+            writer.write(testtext);
+        }
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(FolderStorage.get().openForRead(uri)))) {
+            final String s = reader.readLine();
+            assertThat(s).isEqualTo(testtext);
+        }
+    }
+
+    public void testFileBasicFolderOperations() throws IOException {
+        performBasicFolderOperations(Folder.FolderType.FILE);
+    }
+
+    public void testDocumentBasicFolderOperations() throws IOException {
+        performBasicFolderOperations(Folder.FolderType.DOCUMENT);
+    }
+
+
+    private void performBasicFolderOperations(final Folder.FolderType type) throws IOException {
+
+        final Folder testFolder = createTestFolder(type, "basicFolderOperations");
+
+        List<FolderStorage.FileInformation> list = FolderStorage.get().list(testFolder);
+        assertThat(list).isEmpty();
+
+        //test that some methods fail as expected
+        assertThat(FolderStorage.get().exists(testFolder, "test-nonexisting.txt")).isFalse();
+        assertThat(FolderStorage.get().getFileInfo(testFolder, "test-nonexisting.txt")).isNull();
+        assertThat(FolderStorage.get().delete(Uri.fromFile(new File("/test/test.txt")))).isFalse();
+        assertThat(FolderStorage.get().getName(Uri.fromFile(new File("/test/test.txt")))).isNull();
+        assertThat(FolderStorage.get().exists(testFolder, null)).isFalse();
+        assertThat(FolderStorage.get().getFileInfo(testFolder, null)).isNull();
+        assertThat(FolderStorage.get().delete(null)).isFalse();
+        assertThat(FolderStorage.get().getName(null)).isNull();
+
+        //create a new file
+        final Uri fileUri = FolderStorage.get().create(testFolder, "test.txt");
+        list = FolderStorage.get().list(testFolder);
+        assertThat(list).hasSize(1);
+        assertThat(list.get(0).name).isEqualTo("test.txt");
+
+        //get that file
+        assertThat(FolderStorage.get().getFileInfo(testFolder, "test.txt").name).isEqualTo("test.txt");
+        assertThat(FolderStorage.get().getFileInfo(testFolder, "test.txt").uri).isEqualTo(fileUri);
+        assertThat(FolderStorage.get().exists(testFolder, "test.txt")).isTrue();
+
+        //create file with same name, ask for returning same and check if is is in fact the same
+        final Uri file2Uri = FolderStorage.get().create(testFolder, FileNameCreator.forName("test.txt"), true);
+        assertThat(file2Uri).isEqualTo(fileUri);
+        assertThat(FolderStorage.get().getFileInfo(testFolder, "test.txt").name).isEqualTo("test.txt");
+        assertThat(FolderStorage.get().getFileInfo(testFolder, "test.txt").uri).isEqualTo(fileUri);
+        list = FolderStorage.get().list(testFolder);
+        assertThat(list).hasSize(1);
+        assertThat(list.get(0).name).isEqualTo("test.txt");
+
+        //create fiole with same name, ask for creating it anew
+        final Uri file3Uri = FolderStorage.get().create(testFolder, FileNameCreator.forName("test.txt"), false);
+        final String newName = FolderStorage.get().getName(file3Uri);
+        assertThat(newName).startsWith("test");
+        assertThat(newName).endsWith(".txt");
+
+        assertThat(file3Uri).isNotEqualTo(fileUri);
+        final FolderStorage.FileInformation fileInfo = FolderStorage.get().getFileInfo(testFolder, newName);
+        assertThat(fileInfo.name).isEqualTo(newName);
+        assertThat(fileInfo.uri).isNotEqualTo(fileUri);
+        list = FolderStorage.get().list(testFolder, true);
+        assertThat(list).hasSize(2);
+        final Set<String> names = new HashSet<>();
+        for (FolderStorage.FileInformation fi : list) {
+            names.add(fi.name);
+        }
+        assertThat(names).contains("test.txt", newName);
+
+        //delete the second file
+        assertThat(FolderStorage.get().delete(file3Uri)).isTrue();
+        list = FolderStorage.get().list(testFolder);
+        assertThat(list).hasSize(1);
+        assertThat(list.get(0).name).isEqualTo("test.txt");
+
+        //create a subfolder
+        final Folder subfolder = Folder.fromFolder(testFolder, "subfolder");
+        assertThat(FolderStorage.get().ensureFolder(subfolder, true)).isTrue();
+        list = FolderStorage.get().list(testFolder, true);
+        // "subfolder" is alphabetically before "test.txt"
+        assertThat(list).hasSize(2);
+        assertThat(list.get(0).name).isEqualTo("subfolder");
+        assertThat(list.get(0).isDirectory).isTrue();
+        assertThat(list.get(0).dirLocation).isEqualTo(subfolder);
+        assertThat(FolderStorage.get().getName(list.get(0).uri)).isEqualTo("subfolder");
+        assertThat(list.get(1).name).isEqualTo("test.txt");
+        assertThat(list.get(1).isDirectory).isFalse();
+        assertThat(list.get(1).dirLocation).isNull();
     }
 
     public void testConfigurableFolderChangeNotification() {
@@ -330,7 +434,7 @@ public class FolderStorageTest extends CGeoTestCase {
                 //this is a subfolder
                final String folderName = n.get("name").asText();
                 final Folder newFolder = Folder.fromFolder(folder, folderName);
-                FolderStorage.get().ensureFolder(newFolder);
+                FolderStorage.get().ensureFolder(newFolder, true);
                 createTree(newFolder, n.get("files"));
             } else {
                 //this is a file
@@ -345,7 +449,7 @@ public class FolderStorageTest extends CGeoTestCase {
 
     private boolean hasValidDocumentTestFolder() {
         return ConfigurableFolder.TEST_FOLDER.isUserDefined() &&
-            FolderStorage.get().checkAvailability(ConfigurableFolder.TEST_FOLDER.getFolder(), ConfigurableFolder.TEST_FOLDER.needsWrite(), true);
+            FolderStorage.get().ensureFolder(ConfigurableFolder.TEST_FOLDER.getFolder(), ConfigurableFolder.TEST_FOLDER.needsWrite(), true);
     }
 
     private Folder createTestFolder(final Folder.FolderType type, final String context) {

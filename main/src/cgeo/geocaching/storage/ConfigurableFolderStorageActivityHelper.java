@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,10 +18,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.AnyRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Consumer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
@@ -36,6 +41,8 @@ public class ConfigurableFolderStorageActivityHelper {
     //code must be positive (>0) and <=65535 (restriction of SDK21)
     public static final int REQUEST_CODE_GRANT_FOLDER_URI_ACCESS = 59371; //this is a random number
     public static final int REQUEST_CODE_SELECT_FILE = 59372; //this is a random number
+    public static final int REQUEST_CODE_SELECT_FILE_MULTIPLE = 59373; //this is a random number
+    public static final int REQUEST_CODE_SELECT_FILE_PERSISTED = 59374; //this is a random number
 
     private final Activity activity;
 
@@ -45,18 +52,26 @@ public class ConfigurableFolderStorageActivityHelper {
     private IntentData<?> runningIntentData;
 
     private static class IntentData<T> {
-        public final ConfigurableFolder folder;
-        public final Consumer<T> callback;
-        public final CopyChoice copyChoice;
+        public final Consumer<T> callback; //for all requests
 
-        IntentData(final ConfigurableFolder folder, final Consumer<T> callback) {
-            this(folder, callback, null);
+        public final ConfigurableFolder folder; //for REQUEST_CODE_GRANT_FOLDER_URI_ACCESS
+        public final CopyChoice copyChoice; //for REQUEST_CODE_GRANT_FOLDER_URI_ACCESS
+
+        public final PersistedDocumentUri persistedDocUri; // for REQUEST_CODE_SELECT_FILE_PERSISTED
+
+        IntentData(final ConfigurableFolder folder, final CopyChoice copyChoice, final Consumer<T> callback) {
+            this(folder, copyChoice, null, callback);
         }
 
-        IntentData(final ConfigurableFolder folder, final Consumer<T> callback, final CopyChoice copyChoice) {
+        IntentData(final PersistedDocumentUri persistedDocUri, final Consumer<T> callback) {
+            this(null, null, persistedDocUri, callback);
+        }
+
+        IntentData(final ConfigurableFolder folder, final CopyChoice copyChoice, final PersistedDocumentUri persistedDocUri, final Consumer<T> callback) {
             this.folder = folder;
             this.callback = callback;
             this.copyChoice = copyChoice;
+            this.persistedDocUri = persistedDocUri;
         }
     }
 
@@ -70,7 +85,7 @@ public class ConfigurableFolderStorageActivityHelper {
 
         final ConfigurableFolder folder = ConfigurableFolder.BASE;
 
-        if (folder.isUserDefined() && FolderStorage.get().checkAndAdjustAvailability(folder)) {
+        if (folder.isUserDefined() && FolderStorage.get().ensureAndAdjustFolder(folder)) {
             //everything is as we want it
             return;
         }
@@ -135,23 +150,6 @@ public class ConfigurableFolderStorageActivityHelper {
             .create().show();
     }
 
-    private void selectUserFolderUri(final ConfigurableFolder folder, final CopyChoice copyChoice, final Consumer<ConfigurableFolder> callback) {
-
-        // call for document tree dialog
-        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | (folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-        Log.i("Start uri dir: " + folder);
-        final Uri startUri = folder.getFolder().getUri();
-        if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Field is only supported starting with SDK26
-            intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);
-        }
-
-        runningIntentData = new IntentData<>(folder, callback, copyChoice);
-
-        this.activity.startActivityForResult(intent, REQUEST_CODE_GRANT_FOLDER_URI_ACCESS);
-    }
-
     /**
      * Asks user to select a file for single usage (e.g. to import something into c:geo
      * @param type mime type, used for intent search
@@ -159,23 +157,60 @@ public class ConfigurableFolderStorageActivityHelper {
      * @param callback called when user made selection. If user aborts search, callback is called with value null
      */
     public void selectFile(@Nullable final String type, @Nullable final Uri startUri, final Consumer<Uri> callback) {
+        selectFilesInternal(type, startUri, REQUEST_CODE_SELECT_FILE, null, callback);
+    }
+
+    public void selectMultipleFiles(@Nullable final String type, @Nullable final Uri startUri, final Consumer<List<Uri>> callback) {
+        selectFilesInternal(type, startUri, REQUEST_CODE_SELECT_FILE_MULTIPLE, null, callback);
+    }
+
+    public void selectPersistedUri(@NonNull final PersistedDocumentUri persistedDocUri, final Consumer<Uri> callback) {
+        selectFilesInternal(persistedDocUri.getMimeType(), persistedDocUri.getUri(), REQUEST_CODE_SELECT_FILE_PERSISTED, persistedDocUri, callback);
+    }
+
+    private void selectFilesInternal(@Nullable final String type, @Nullable final Uri startUri, final int requestCode, final PersistedDocumentUri docUri, final Consumer<?> callback) {
         // call for document tree dialog
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType(type == null ? "*/*" : type);
-        if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && UriUtils.isContentUri(startUri)) {
             // Attribute is supported starting SDK26 / O
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);
         }
+        if (requestCode == REQUEST_CODE_SELECT_FILE_MULTIPLE) {
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        }
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION  |
+            (docUri == null ? 0 : Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION));
 
-        runningIntentData = new IntentData<>(null, callback);
+        runningIntentData = new IntentData<>(docUri, callback);
 
-        this.activity.startActivityForResult(intent, REQUEST_CODE_SELECT_FILE);
+        this.activity.startActivityForResult(intent, requestCode);
     }
+
+
+    private void selectUserFolderUri(final ConfigurableFolder folder, final CopyChoice copyChoice, final Consumer<ConfigurableFolder> callback) {
+
+        // call for document tree dialog
+        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | (folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        Log.i("Start uri dir: " + folder);
+        final Uri startUri = folder.getUri();
+        if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Field is only supported starting with SDK26
+            intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);
+        }
+
+        runningIntentData = new IntentData<>(folder, copyChoice, callback);
+
+        this.activity.startActivityForResult(intent, REQUEST_CODE_GRANT_FOLDER_URI_ACCESS);
+    }
+
 
     /** You MUST include in {@link Activity#onActivityResult(int, int, Intent)} of using Activity */
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
-        if (requestCode != REQUEST_CODE_GRANT_FOLDER_URI_ACCESS && requestCode != REQUEST_CODE_SELECT_FILE) {
+        if (requestCode != REQUEST_CODE_GRANT_FOLDER_URI_ACCESS && requestCode != REQUEST_CODE_SELECT_FILE &&
+            requestCode != REQUEST_CODE_SELECT_FILE_MULTIPLE && requestCode != REQUEST_CODE_SELECT_FILE_PERSISTED) {
             return false;
         }
         if (runningIntentData == null) {
@@ -190,7 +225,9 @@ public class ConfigurableFolderStorageActivityHelper {
                 handleResultFolderSelection(intent, resultOk);
                 break;
             case REQUEST_CODE_SELECT_FILE:
-                handleResultSelectFile(intent, resultOk);
+            case REQUEST_CODE_SELECT_FILE_MULTIPLE:
+            case REQUEST_CODE_SELECT_FILE_PERSISTED:
+                handleResultSelectFiles(requestCode, intent, resultOk);
                 break;
             default: //for codacy
                 break;
@@ -200,15 +237,46 @@ public class ConfigurableFolderStorageActivityHelper {
         return true;
     }
 
-    private void handleResultSelectFile(final Intent intent, final boolean resultOk) {
-        final Uri fileuri = !resultOk || intent == null ? null : intent.getData();
-        if (fileuri == null) {
+    private void handleResultSelectFiles(final int requestCode, final Intent intent, final boolean resultOk) {
+        final List<Uri> selectedUris = new ArrayList<>();
+        if (!resultOk || intent == null) {
             report(true, R.string.folderstorage_file_selection_aborted);
         } else {
-            report(true, R.string.folderstorage_file_selection_success, fileuri);
+            //get selected uris from intent
+            if (intent.getData() != null) {
+                selectedUris.add(intent.getData());
+            }
+            if (intent.getClipData() != null) {
+                for (int idx = 0; idx < intent.getClipData().getItemCount(); idx ++) {
+                    final Uri uri = intent.getClipData().getItemAt(idx).getUri();
+                    if (uri != null) {
+                        selectedUris.add(uri);
+                    }
+                }
+            }
+
+            if (selectedUris.isEmpty()) {
+                report(true, R.string.folderstorage_file_selection_aborted);
+            } else {
+                if (runningIntentData.persistedDocUri != null) {
+                    activity.getContentResolver().takePersistableUriPermission(selectedUris.get(0),
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+                    FolderStorage.get().setPersistedDocumentUri(runningIntentData.persistedDocUri, selectedUris.get(0));
+                }
+                report(false, R.string.folderstorage_file_selection_success, selectedUris.get(0));
+            }
         }
+
         if (runningIntentData.callback != null) {
-            ((Consumer<Uri>) runningIntentData.callback).accept(fileuri);
+            switch (requestCode) {
+                case REQUEST_CODE_SELECT_FILE_MULTIPLE:
+                    ((Consumer<List<Uri>>) runningIntentData.callback).accept(selectedUris);
+                    break;
+                default:
+                    ((Consumer<Uri>) runningIntentData.callback).accept(selectedUris.isEmpty() ? null : selectedUris.get(0));
+                    break;
+            }
         }
     }
 
@@ -225,7 +293,7 @@ public class ConfigurableFolderStorageActivityHelper {
 
             //Test if access is really working!
             final Folder target = Folder.fromDocumentUri(uri);
-            if (!FolderStorage.get().checkAvailability(target, runningIntentData.folder.needsWrite(), true)) {
+            if (!FolderStorage.get().ensureFolder(target, runningIntentData.folder.needsWrite(), true)) {
                 finalizeFolderSelection(false, folder, null, callback);
             } else {
                 continueFolderSelectionCopyMove(folder, uri, runningIntentData.copyChoice, callback);
