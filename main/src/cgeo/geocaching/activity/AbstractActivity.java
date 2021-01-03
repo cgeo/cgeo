@@ -9,8 +9,8 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.storage.ConfigurableFolderStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.PublicLocalStorageActivityHelper;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
@@ -54,7 +54,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     private final String logToken = "[" + this.getClass().getName() + "]";
 
-    private PublicLocalStorageActivityHelper publicLocalStorage = null; //lazy initalized
+    private ConfigurableFolderStorageActivityHelper configFolderStorageHelper = null; //lazy initalized
 
     protected AbstractActivity() {
         this(false);
@@ -296,18 +296,18 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         setCacheTitleBar(cache);
     }
 
-    protected PublicLocalStorageActivityHelper getPublicLocalStorage() {
-        if (this.publicLocalStorage == null) {
-            this.publicLocalStorage = new PublicLocalStorageActivityHelper(this);
+    protected ConfigurableFolderStorageActivityHelper getConfigFolderStorageHelper() {
+        if (this.configFolderStorageHelper == null) {
+            this.configFolderStorageHelper = new ConfigurableFolderStorageActivityHelper(this);
         }
-        return this.publicLocalStorage;
+        return this.configFolderStorageHelper;
     }
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (this.publicLocalStorage != null) {
-            this.publicLocalStorage.onActivityResult(requestCode, resultCode, data);
+        if (this.configFolderStorageHelper != null) {
+            this.configFolderStorageHelper.onActivityResult(requestCode, resultCode, data);
         }
     }
 

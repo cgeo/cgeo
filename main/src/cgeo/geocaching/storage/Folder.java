@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,9 +25,9 @@ import org.jetbrains.annotations.NotNull;
  *
  * Folders can have different types as defined by {@link FolderType}.
  * Depending on that type, different attributes are filled and different handling is necessary
- * to interact with actual data in that folder. Those different handlings are implemented by {@link PublicLocalStorage}.
+ * to interact with actual data in that folder. Those different handlings are implemented by {@link FolderStorage}.
  *
- * Instances of this class are immutable. They can be serialized/deserialized to/from a String.
+ * Instances of this class are immutable. They can be serialized/deserialized to/from a String using {@link #toConfig()} and {@link #fromConfig(String)}
  *
  * Instances support the usage in Maps ({@link #equals(Object)} and {@link #hashCode()}). Note however that
  * two FolderLocation instances pointing to the same actual folder on disk but using two different FolderTypes
@@ -40,8 +41,8 @@ public class Folder {
         FILE,
         /** Folder based on Storage Access Frameworks and retrieved by {@link android.content.Intent#ACTION_OPEN_DOCUMENT_TREE} */
         DOCUMENT,
-        /** A Folder based on a PublicLocaFolder */
-        PUBLIC_FOLDER,
+        /** A Folder based on a ConfigurableFolder */
+        CONFIGURABLE_FOLDER,
     }
 
     /** cGeo's private internal Files directory */
@@ -59,16 +60,16 @@ public class Folder {
     private final FolderType type;
     private final Uri uri;
 
-    private final PublicLocalFolder publicFolder; //needed for type PUBLIC_FOLDER
+    private final ConfigurableFolder configurableFolder; //needed for type PUBLIC_FOLDER
 
     private final List<String> subfolders; //each type may have subfolders
     private final String subfolderString;
 
-    private Folder(final FolderType type, final Uri uri, final PublicLocalFolder publicFolder, final List<String> subfolders) {
+    private Folder(final FolderType type, final Uri uri, final ConfigurableFolder configurableFolder, final List<String> subfolders) {
         this.type = type;
         this.uri = uri;
 
-        this.publicFolder = publicFolder;
+        this.configurableFolder = configurableFolder;
 
         this.subfolders = subfolders == null ? Collections.emptyList() : subfolders;
         this.subfolderString = CollectionStream.of(this.subfolders).toJoinedString("/");
@@ -76,11 +77,11 @@ public class Folder {
     }
 
     /** registers a listener which is fired each time the actual location of this folder changes */
-    public void registerChangeListener(final Object lifecycleRef, final Consumer<PublicLocalFolder> listener) {
+    public void registerChangeListener(final Object lifecycleRef, final Consumer<ConfigurableFolder> listener) {
 
         //currently, this folders location can only change if it is based on a Public Folder
-        if (getRootPublicFolder() != null) {
-            getRootPublicFolder().registerChangeListener(lifecycleRef, listener);
+        if (getRootConfigurableFolder() != null) {
+            getRootConfigurableFolder().registerChangeListener(lifecycleRef, listener);
         }
     }
 
@@ -92,38 +93,34 @@ public class Folder {
     /** Uri associated with this folder */
     @NonNull
     public Uri getUri() {
-        final Uri uri = publicFolder != null ? publicFolder.getFolder().getUri() : this.uri;
-        return Uri.withAppendedPath(uri, this.subfolderString);
+        final Uri uri = configurableFolder != null ? configurableFolder.getFolder().getUri() : this.uri;
+        return UriUtils.appendPath(uri, this.subfolderString);
     }
 
     /** The base Uri (below all subfolders)) */
     @NonNull
     public Uri getBaseUri() {
-        return publicFolder != null ? publicFolder.getFolder().getBaseUri() : this.uri;
+        return configurableFolder != null ? configurableFolder.getFolder().getBaseUri() : this.uri;
     }
 
     @NonNull
     public FolderType getBaseType() {
-        if (publicFolder != null) {
-            return publicFolder.getFolder().getBaseType();
+        if (configurableFolder != null) {
+            return configurableFolder.getFolder().getBaseType();
         }
         return getType();
     }
 
     public List<String> getSubdirsToBase() {
-        final List<String > result = publicFolder != null ? publicFolder.getFolder().getSubdirsToBase() : new ArrayList<>();
+        final List<String > result = configurableFolder != null ? configurableFolder.getFolder().getSubdirsToBase() : new ArrayList<>();
         result.addAll(subfolders);
         return result;
     }
 
-    public String getSubdirsToBaseAsString() {
-        return CollectionStream.of(getSubdirsToBase()).toJoinedString("/");
-    }
-
-    /** If this instance is a subfolder based on a publiclocalfolder, then this publiclocalfolder is returned. Otherwise null is returned */
+    /** If this instance is a subfolder based on a configurablefolder, then this configurablefolder is returned. Otherwise null is returned */
     @Nullable
-    public PublicLocalFolder getRootPublicFolder() {
-        return publicFolder;
+    public ConfigurableFolder getRootConfigurableFolder() {
+        return configurableFolder;
     }
 
     /** Returns a representation of this folder's location fit to show to an end user */
@@ -167,20 +164,73 @@ public class Folder {
         }
         final List<String> newSubfolders = new ArrayList<>(folder.subfolders);
         newSubfolders.addAll(toFolderNames(subfolder));
-        return new Folder(folder.type, folder.uri, folder.publicFolder, newSubfolders);
+        return new Folder(folder.type, folder.uri, folder.configurableFolder, newSubfolders);
     }
 
     @Nullable
-    public static Folder fromPublicFolder(final PublicLocalFolder publicLocalFolder) {
-        return fromPublicFolder(publicLocalFolder, null);
-    }
-
-    @Nullable
-    public static Folder fromPublicFolder(final PublicLocalFolder publicLocalFolder, final String subfolder) {
-        if (publicLocalFolder == null) {
+    public static Folder fromConfigurableFolder(final ConfigurableFolder configurableFolder, final String subfolder) {
+        if (configurableFolder == null) {
             return null;
         }
-        return new Folder(FolderType.PUBLIC_FOLDER, null, publicLocalFolder, toFolderNames(subfolder));
+        return new Folder(FolderType.CONFIGURABLE_FOLDER, null, configurableFolder, toFolderNames(subfolder));
+    }
+
+    /** Creates Folder instance from a previously deserialized representation using {@link Folder#toConfig()} */
+    @Nullable
+    public static Folder fromConfig(final String config) {
+        if (config == null) {
+            return null;
+        }
+
+        final Folder result = fromConfigStrict(config);
+        if (result != null) {
+            return result;
+        }
+
+        //try parse as an Uri
+        final Uri uri = Uri.parse(config);
+        if (UriUtils.isFileUri(uri)) {
+            return Folder.fromFile(UriUtils.toFile(uri));
+        }
+        if (UriUtils.isContentUri(uri)) {
+            //we suspect that it is a documentUri in this case
+            return Folder.fromDocumentUri(uri);
+        }
+
+        //try parse as a file path (Note: this might happening for pre-Android11 legacy Settings entries for Offline Map / Theme)
+        if (config.startsWith("/")) {
+            return Folder.fromFile(new File(config));
+        }
+
+        //we did our best, giving up now
+        return null;
+
+    }
+
+    /** porses config strictly according to #toConfig */
+    private static Folder fromConfigStrict(@NonNull final String config) {
+        final String[] tokens = config.split(CONFIG_SEP, -1);
+        if (tokens.length != 3) {
+            return null;
+        }
+        final FolderType type = EnumUtils.getEnum(FolderType.class, tokens[0]);
+        if (type == null) {
+            return null;
+        }
+        switch (type) {
+            case DOCUMENT:
+                return Folder.fromDocumentUri(Uri.parse(tokens[1]), tokens[2]);
+            case FILE:
+                return Folder.fromFile(UriUtils.toFile(Uri.parse(tokens[1])), tokens[2]);
+            case CONFIGURABLE_FOLDER:
+                final ConfigurableFolder configFolder = EnumUtils.getEnum(ConfigurableFolder.class, tokens[1]);
+                if (configFolder == null) {
+                    return null;
+                }
+                return Folder.fromConfigurableFolder(configFolder, tokens[2]);
+            default:
+                return null;
+        }
     }
 
     @Override
@@ -197,12 +247,16 @@ public class Folder {
         return this.toConfig(true).hashCode();
     }
 
+    public String toConfig() {
+        return toConfig(false);
+    }
+
     private String toConfig(final boolean forEquals) {
 
         final StringBuilder configString = new StringBuilder(type.toString()).append(CONFIG_SEP);
         switch (type) {
-            case PUBLIC_FOLDER:
-                configString.append(this.publicFolder.name());
+            case CONFIGURABLE_FOLDER:
+                configString.append(this.configurableFolder.name());
                 break;
             case FILE:
             case DOCUMENT:
@@ -225,9 +279,9 @@ public class Folder {
             .append("[")
             .append(toConfig(false));
 
-        final PublicLocalFolder rootPublicLocalFolder = getRootPublicFolder();
-        if (rootPublicLocalFolder != null) {
-            sb.append(",based on:").append(rootPublicLocalFolder.name());
+        final ConfigurableFolder rootConfigurableFolder = getRootConfigurableFolder();
+        if (rootConfigurableFolder != null) {
+            sb.append(",based on:").append(rootConfigurableFolder.name());
         }
 
         return sb.append("]").toString();

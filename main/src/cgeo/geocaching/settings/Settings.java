@@ -27,9 +27,9 @@ import cgeo.geocaching.sensors.DirectionData;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
+import cgeo.geocaching.storage.ConfigurableFolder;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.storage.PublicLocalFolder;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -40,7 +40,6 @@ import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
@@ -306,18 +305,17 @@ public class Settings {
         return CgeoApplication.getInstance() == null ? -1 : CgeoApplication.getInstance().getResources().getInteger(prefKeyId);
     }
 
-    static String getString(final int prefKeyId, final String defaultValue) {
-        return sharedPrefs == null ? defaultValue : sharedPrefs.getString(getKey(prefKeyId), defaultValue);
+    protected static String getString(final int prefKeyId, final String defaultValue) {
+        return getStringDirect(getKey(prefKeyId), defaultValue);
     }
+
+    private static String getStringDirect(final String prefKey, final String defaultValue) {
+        return sharedPrefs == null ? defaultValue : sharedPrefs.getString(prefKey, defaultValue);
+    }
+
 
     private static List<String> getStringList(final int prefKeyId, final String defaultValue) {
         return Arrays.asList(StringUtils.split(getString(prefKeyId, defaultValue), SEPARATOR_CHAR));
-    }
-
-    @Nullable
-    private static Uri getUri(final int prefKeyId) {
-        final String pref = getString(prefKeyId, null);
-        return StringUtils.isNotBlank(pref) ? Uri.parse(pref) : null;
     }
 
     private static int getInt(final int prefKeyId, final int defaultValue) {
@@ -357,10 +355,6 @@ public class Settings {
 
     private static void putStringList(final int prefKeyId, final Iterable<?> elements) {
         putString(prefKeyId, StringUtils.join(elements, SEPARATOR_CHAR));
-    }
-
-    private static void putUri(@NonNull final int prefKeyId, @Nullable final Uri uri) {
-        putString(prefKeyId, uri == null ? null : uri.toString());
     }
 
     protected static void putBoolean(final int prefKeyId, final boolean value) {
@@ -1582,15 +1576,25 @@ public class Settings {
         return getInt(R.string.pref_backups_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
     }
 
-    /** sets the user-defined uri for a public folder. If null, this means that default shall be used (=hard-named subfolder of base public folder) */
-    public static void setPublicLocalFolderUri(@NonNull final PublicLocalFolder folder, @Nullable final Uri uri) {
-        putUri(folder.getPrefKeyId(), uri);
+    /** sets the user-defined folder-config for a configurable folder. Can be set to null */
+    public static void setConfigurableFolder(@NonNull final ConfigurableFolder folder, @Nullable final String folderString) {
+        putString(folder.getPrefKeyId(), folderString);
     }
 
-    /** gets the user-defined uri for a public folder. If null, this means that default shall be used (=hard-named subfolder of base public folder) */
+    /** gets the user-defined uri for a configurable folder. Can be null */
     @Nullable
-    public static Uri getPublicLocalFolderUri(@NonNull final PublicLocalFolder folder) {
-        return getUri(folder.getPrefKeyId());
+    public static String getConfigurableFolder(@NonNull final ConfigurableFolder folder) {
+        return getString(folder.getPrefKeyId(), getLegacyValueForConfigurableFolder(folder.getPrefKeyId()));
+    }
+
+    /** For Migration towards Android 11: returns any legacy value which might be stored in old settings for certain folders */
+    private static String getLegacyValueForConfigurableFolder(@NonNull final int prefKeyId) {
+        if (prefKeyId == R.string.pref_configurablefolder_offlinemaps) {
+            return getStringDirect("mapDirectory", null);
+        } else if (prefKeyId == R.string.pref_configurablefolder_offlinemapthemes) {
+            return getStringDirect("renderthemepath", null);
+        }
+        return null;
     }
 
     public static boolean getUseCustomTabs() {

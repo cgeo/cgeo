@@ -52,6 +52,23 @@ public class UriUtilsTest {
     }
 
     @Test
+    public void contentAndUris() {
+        assertThat(UriUtils.isContentUri(Uri.parse(DOC_URI_EXAMPLE))).isTrue();
+        assertThat(UriUtils.isContentUri(Uri.parse("/eins/zwei/drei"))).isFalse();
+        assertThat(UriUtils.isContentUri(Uri.parse("http://www.cgeo.org"))).isFalse();
+    }
+
+    @Test
+    public void appendPath() {
+        assertThat(UriUtils.appendPath(Uri.parse(DOC_URI_EXAMPLE), "eins/zwei").toString()).isEqualTo(DOC_URI_EXAMPLE + "/eins/zwei");
+        assertThat(UriUtils.appendPath(Uri.parse(DOC_URI_EXAMPLE), "/eins/zwei/").toString()).isEqualTo(DOC_URI_EXAMPLE + "/eins/zwei");
+        assertThat(UriUtils.appendPath(Uri.parse(DOC_URI_EXAMPLE), "  /eins/zwei  ").toString()).isEqualTo(DOC_URI_EXAMPLE + "/eins/zwei");
+        assertThat(UriUtils.appendPath(Uri.parse(DOC_URI_EXAMPLE), "   ").toString()).isEqualTo(DOC_URI_EXAMPLE);
+        assertThat(UriUtils.appendPath(Uri.parse(DOC_URI_EXAMPLE), null).toString()).isEqualTo(DOC_URI_EXAMPLE);
+        assertThat(UriUtils.appendPath(Uri.parse(DOC_URI_EXAMPLE), "  ///  ").toString()).isEqualTo(DOC_URI_EXAMPLE);
+    }
+
+    @Test
     public void toStringDecoded() {
         assertThat(UriUtils.toCompareString(Uri.parse(DOC_URI_EXAMPLE))).isEqualTo(DOC_URI_EXAMPLE_DECODED);
     }

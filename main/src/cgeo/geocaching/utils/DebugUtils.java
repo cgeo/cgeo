@@ -2,8 +2,8 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.storage.PublicLocalFolder;
-import cgeo.geocaching.storage.PublicLocalStorage;
+import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.FolderStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
@@ -89,7 +89,7 @@ public class DebugUtils {
     private static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo, final boolean forceEmail, final String additionalMessage) {
         final AtomicReference<Uri> result = new AtomicReference(null);
 
-        final File file = PublicLocalStorage.get().createTempFile();
+        final File file = FolderStorage.get().createTempFile();
 
         final String filename = file.getName();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
@@ -107,7 +107,7 @@ public class DebugUtils {
                 Log.iForce("[LogCat]Issuing command: " + builder.command());
                 final int returnCode = builder.start().waitFor();
                 if (returnCode == 0 && file.isFile()) {
-                    final Uri logfileUri = PublicLocalStorage.get().writeFileToFolder(PublicLocalFolder.LOGFILES, FileNameCreator.LOGFILE, file, true);
+                    final Uri logfileUri = FolderStorage.get().writeFileToFolder(ConfigurableFolder.LOGFILES, FileNameCreator.LOGFILE, file, true);
                     result.set(logfileUri);
                 } else {
                     Log.w("Problem creating logfile " + file + " (returnCode=" + returnCode + ", isFile=" + file.isFile() + ")");
@@ -122,7 +122,7 @@ public class DebugUtils {
                     shareLogfileAsEmail(activity, additionalMessage, result.get());
                 } else {
                     Dialogs.confirmPositiveNegativeNeutral(activity, activity.getString(R.string.about_system_write_logcat),
-                        String.format(activity.getString(R.string.about_system_write_logcat_success), UriUtils.getFileName(result.get()), PublicLocalFolder.LOGFILES.getFolder().toUserDisplayableString()),
+                        String.format(activity.getString(R.string.about_system_write_logcat_success), UriUtils.getFileName(result.get()), ConfigurableFolder.LOGFILES.getFolder().toUserDisplayableString()),
                         activity.getString(android.R.string.ok), null, activity.getString(R.string.about_system_info_send_button),
                         null, null, (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, result.get()));
                 }

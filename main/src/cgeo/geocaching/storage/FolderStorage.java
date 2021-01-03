@@ -40,20 +40,24 @@ import org.apache.commons.io.IOUtils;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
- * Central class to interact with locally stored PUBLIC folders.
- * Encapsulates the Android SAF framework.
+ * Central class to interact with locally stored Folders.
  *
- * Note that methods of this class do not ask user for access permissions. This can only be
+ * Encapsulates and unifies access to the Android SAF framework as well as the File framework
+ * (and maybe later also the MediaStore API?)
+ *
+ * Note that methods of this class do not and cannot ask user for access permissions when dealing with SAF This can only be
  * done in context of an Activity (using Intents) and is encapsulated in
- * {@link PublicLocalStorageActivityHelper}.
+ * {@link ConfigurableFolderStorageActivityHelper}.
+ * When dealing with {@link ConfigurableFolder}s, methods of this class will try to fall back to default
+ * accessible folders when a folder is not accessible.
  *
- * Implementation reference(s):
+ * Implementation reference(s) with regards to SAF:
  *  * Android Doku: https://developer.android.com/preview/privacy/storage
  *  * Android Doku on use cases: https://developer.android.com/training/data-storage/use-cases#handle-non-media-files
  *  * Introduction: https://www.androidcentral.com/what-scoped-storage
  *  * Helpers: https://stackoverflow.com/questions/34927748/android-5-0-documentfile-from-tree-uri
  */
-public class PublicLocalStorage {
+public class FolderStorage {
 
     private static final int DOCUMENT_FILE_CACHESIZE = 100;
 
@@ -61,9 +65,9 @@ public class PublicLocalStorage {
     private final DocumentFolderAccessor documentAccessor;
     private final FileFolderAccessor fileAccessor;
 
-    private static final PublicLocalStorage INSTANCE = new PublicLocalStorage();
+    private static final FolderStorage INSTANCE = new FolderStorage();
 
-    public static PublicLocalStorage get() {
+    public static FolderStorage get() {
         return INSTANCE;
     }
 
@@ -100,6 +104,7 @@ public class PublicLocalStorage {
         }
     }
 
+    /** Base class for all folder accessors */
     private abstract static class FolderAccessor {
 
         private final Context context;
@@ -164,6 +169,7 @@ public class PublicLocalStorage {
 
     }
 
+    /** Implementation for File-based folders (= Files with isDirectory = true) */
     private static class FileFolderAccessor extends FolderAccessor {
 
         FileFolderAccessor(@NonNull final Context context) {
@@ -200,8 +206,8 @@ public class PublicLocalStorage {
             }
             return CollectionStream.of(dir.listFiles())
                 .map(f -> new FileInformation(
-                    f.getName(), Uri.withAppendedPath(folder.getUri(),
-                    f.getName()), f.isDirectory(),
+                    f.getName(), UriUtils.appendPath(folder.getUri(), f.getName()),
+                    f.isDirectory(),
                     f.isDirectory() ? Folder.fromFolder(folder, f.getName()) : null, getTypeForName(f.getName()),
                     f.length(), f.lastModified())).toList();
         }
@@ -222,6 +228,7 @@ public class PublicLocalStorage {
 
     }
 
+    /** Implementation for SAF/Document-based folders ( = (Tree)DocumentFiles) */
     private static class DocumentFolderAccessor extends FolderAccessor {
 
         /** cache for Uri permissions */
@@ -435,7 +442,7 @@ public class PublicLocalStorage {
         /** Checks and releases all Uri Permissions which are no longer needed */
         public void releaseOutdatedUriPermissions() {
             final Set<String> usedUris = new HashSet<>();
-            for (PublicLocalFolder folder : PublicLocalFolder.values()) {
+            for (ConfigurableFolder folder : ConfigurableFolder.values()) {
                 if (folder.getFolder().getBaseUri() != null) {
                     usedUris.add(UriUtils.toCompareString(folder.getFolder().getBaseUri()));
                 }
@@ -464,7 +471,7 @@ public class PublicLocalStorage {
         }
     }
 
-    private PublicLocalStorage() {
+    private FolderStorage() {
         this.context = CgeoApplication.getInstance().getApplicationContext();
         this.documentAccessor = new DocumentFolderAccessor(this.context);
         this.fileAccessor = new FileFolderAccessor(this.context);
@@ -472,7 +479,7 @@ public class PublicLocalStorage {
     }
 
     /** checks if folder is available and can be used. If current setting is not available, folder may be adjusted e.g. to default */
-    public boolean checkAndAdjustAvailability(final PublicLocalFolder publicFolder) {
+    public boolean checkAndAdjustAvailability(final ConfigurableFolder publicFolder) {
         final Folder folder = getAndAdjustFolderLocation(publicFolder);
         return checkAvailability(folder, publicFolder.needsWrite(), false);
      }
@@ -501,12 +508,12 @@ public class PublicLocalStorage {
     }
 
     /** Creates a new file in folder and returns its Uri */
-    public Uri create(final PublicLocalFolder folder, final String name) {
+    public Uri create(final ConfigurableFolder folder, final String name) {
         return create(folder, FileNameCreator.forName(name));
     }
 
     /** Creates a new file in folder and returns its Uri */
-    public Uri create(final PublicLocalFolder folder, final FileNameCreator nameCreator) {
+    public Uri create(final ConfigurableFolder folder, final FileNameCreator nameCreator) {
         return create(getAndAdjustFolderLocation(folder), nameCreator);
     }
 
@@ -525,7 +532,7 @@ public class PublicLocalStorage {
         try {
             return getAccessorFor(folder.getBaseType()).create(folder, name);
         } catch (IOException ioe) {
-            reportProblem(R.string.publiclocalstorage_err_create_failed, ioe, name, folder);
+            reportProblem(R.string.folderstorage_err_create_failed, ioe, name, folder);
         }
         return null;
     }
@@ -538,7 +545,7 @@ public class PublicLocalStorage {
         try {
             return getAccessorFor(folder.getBaseType()).ensureFolder(folder);
         } catch (IOException ioe) {
-            reportProblem(R.string.publiclocalstorage_err_ensurefolder_failed, ioe, folder);
+            reportProblem(R.string.folderstorage_err_ensurefolder_failed, ioe, folder);
         }
         return false;
     }
@@ -551,14 +558,14 @@ public class PublicLocalStorage {
         try {
             return getAccessorFor(uri).delete(uri);
         } catch (IOException ioe) {
-            reportProblem(R.string.publiclocalstorage_err_delete_failed, ioe, uri);
+            reportProblem(R.string.folderstorage_err_delete_failed, ioe, uri);
         }
         return false;
     }
 
     /** Lists all direct content of given folder */
     @NonNull
-    public List<FileInformation> list(final PublicLocalFolder folder) {
+    public List<FileInformation> list(final ConfigurableFolder folder) {
         return list(getAndAdjustFolderLocation(folder));
     }
 
@@ -568,12 +575,12 @@ public class PublicLocalStorage {
         if (folder == null) {
             return Collections.emptyList();
         }
-        try (ContextLogger cLog = new ContextLogger("PublicLocalStorage.list: %s", folder)) {
+        try (ContextLogger cLog = new ContextLogger("FolderStorage.list: %s", folder)) {
             final List<FileInformation> result = getAccessorFor(folder).list(folder);
             cLog.add("#" + result.size());
             return result;
         } catch (IOException ioe) {
-            reportProblem(R.string.publiclocalstorage_err_list_failed, ioe, folder);
+            reportProblem(R.string.folderstorage_err_list_failed, ioe, folder);
         }
         return Collections.emptyList();
     }
@@ -583,7 +590,7 @@ public class PublicLocalStorage {
         try {
             return context.getContentResolver().openOutputStream(uri);
         } catch (IOException | SecurityException se) {
-            reportProblem(R.string.publiclocalstorage_err_write_failed, se, uri);
+            reportProblem(R.string.folderstorage_err_write_failed, se, uri);
         }
         return null;
     }
@@ -594,7 +601,7 @@ public class PublicLocalStorage {
         try {
             return this.context.getContentResolver().openInputStream(uri);
         } catch (IOException | SecurityException se) {
-            reportProblem(R.string.publiclocalstorage_err_read_failed, se, uri);
+            reportProblem(R.string.folderstorage_err_read_failed, se, uri);
         }
         return null;
     }
@@ -628,32 +635,33 @@ public class PublicLocalStorage {
         } finally {
             closeQuietly(in, out);
             if (!success) {
-                reportProblem(R.string.publiclocalstorage_err_copy_failed, failureEx, source, target, move);
+                reportProblem(R.string.folderstorage_err_copy_failed, failureEx, source, target, move);
             }
         }
         return outputUri;
     }
 
     /** Write an (internal's) file content to external storage */
-    public Uri writeFileToFolder(final PublicLocalFolder folder, final FileNameCreator nameCreator, final File file, final boolean deleteFileOnSuccess) {
+    public Uri writeFileToFolder(final ConfigurableFolder folder, final FileNameCreator nameCreator, final File file, final boolean deleteFileOnSuccess) {
         return copy(Uri.fromFile(file), getAndAdjustFolderLocation(folder), nameCreator, deleteFileOnSuccess);
     }
 
-    /** Helper method, meant for usage in conjunction with {@link #writeFileToFolder(PublicLocalFolder, FileNameCreator, File, boolean)} */
+    /** Helper method, meant for usage in conjunction with {@link #writeFileToFolder(ConfigurableFolder, FileNameCreator, File, boolean)} */
     public File createTempFile() {
         File outputDir = null;
         try {
             outputDir = context.getCacheDir(); // context being the Activity pointer
             return File.createTempFile("cgeo_tempfile_", ".tmp", outputDir);
         } catch (IOException ie) {
-            reportProblem(R.string.publiclocalstorage_err_create_failed, ie, "temp file", outputDir);
+            reportProblem(R.string.folderstorage_err_create_failed, ie, "temp file", outputDir);
         }
         return null;
     }
 
-    /** Sets a new User-defined Uri for a PublicLocalFolder. Must be a DocumentUri (retrieved via {@link Intent#ACTION_OPEN_DOCUMENT_TREE})! */
-    public void setFolderUserDefinedUri(final PublicLocalFolder folder, final Uri documentUri) {
-        folder.setUserDefinedDocumentUri(documentUri);
+    /** Sets a new User-defined Uri for a ConfigurableFolder. Must be a DocumentUri (retrieved via {@link Intent#ACTION_OPEN_DOCUMENT_TREE})! */
+    public void setUserDefinedFolder(final ConfigurableFolder folder, final Folder userDefinedFolder) {
+        folder.setUserDefinedFolder(userDefinedFolder);
+
         documentAccessor.releaseOutdatedUriPermissions();
     }
 
@@ -686,23 +694,23 @@ public class PublicLocalStorage {
 
     /** Gets this folder's current location. Tries to adjust folder location if no permission given. May return null if no permission found */
     @Nullable
-    private Folder getAndAdjustFolderLocation(final PublicLocalFolder folder) {
+    private Folder getAndAdjustFolderLocation(final ConfigurableFolder folder) {
 
         if (!checkAvailability(folder.getFolder(), folder.needsWrite())) {
             //try out default
             //if this is a user-selected folder and base dir is ok we initiate a fallback to default folder
-            if (!folder.getUserDefinedFolder() || !checkAvailability(folder.getDefaultFolder(), folder.needsWrite())) {
+            if (!folder.isUserDefined() || !checkAvailability(folder.getDefaultFolder(), folder.needsWrite())) {
                 return null;
             }
 
-            final String folderUserdefined = folder.toUserDisplayableString();
-            setFolderUserDefinedUri(folder, null);
-            final String folderDefault = folder.toUserDisplayableString();
+            final String folderUserdefined = folder.toUserDisplayableValue();
+            setUserDefinedFolder(folder, null);
+            final String folderDefault = folder.toUserDisplayableValue();
             if (!checkAvailability(folder.getFolder(), folder.needsWrite())) {
-                reportProblem(R.string.publiclocalstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, null);
+                reportProblem(R.string.folderstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, null);
                 return null;
             }
-            reportProblem(R.string.publiclocalstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, folderDefault);
+            reportProblem(R.string.folderstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, folderDefault);
         }
         return folder.getFolder();
     }
@@ -732,7 +740,7 @@ public class PublicLocalStorage {
 
     private void reportProblem(@StringRes final int messageId, final Exception ex, final Object ... params) {
         final String logMessage = context.getString(messageId, params);
-        Log.w("PublicLocalStorage: " + logMessage, ex);
+        Log.w("FolderStorage: " + logMessage, ex);
 
         //prepare user message
         final Object[] paramsForUser = new Object[params.length];

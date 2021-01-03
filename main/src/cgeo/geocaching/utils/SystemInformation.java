@@ -13,11 +13,11 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.HwAccel;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ConfigurableFolder;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.FolderStorage;
 import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.storage.PublicLocalFolder;
-import cgeo.geocaching.storage.PublicLocalStorage;
 
 import android.Manifest;
 import android.content.Context;
@@ -88,7 +88,7 @@ public final class SystemInformation {
                 .append("\nLast backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
                 .append("\nGPX import path: ").append(Settings.getGpxImportDir())
                 .append("\nGPX export path: ").append(Settings.getGpxExportDir())
-                .append("\nOffline maps path: ").append(PublicLocalFolder.OFFLINE_MAPS)
+                .append("\nOffline maps path: ").append(ConfigurableFolder.OFFLINE_MAPS)
                 .append("\nMap render theme path: ").append(Settings.getCustomRenderThemeFilePath())
                 .append("\nLive map mode: ").append(Settings.isLiveMap())
                 .append("\nGlobal filter: ").append(Settings.getCacheType().pattern)
@@ -128,9 +128,9 @@ public final class SystemInformation {
     }
 
     private static void appendPublicFolders(@NonNull final StringBuilder body) {
-        body.append("\nPublic Folders: #").append(PublicLocalFolder.values().length);
-        for (PublicLocalFolder folder : PublicLocalFolder.values()) {
-            final boolean isAvailable = PublicLocalStorage.get().checkAndAdjustAvailability(folder);
+        body.append("\nPublic Folders: #").append(ConfigurableFolder.values().length);
+        for (ConfigurableFolder folder : ConfigurableFolder.values()) {
+            final boolean isAvailable = FolderStorage.get().checkAndAdjustAvailability(folder);
             final ImmutablePair<Integer, Integer> files = FolderUtils.get().getFolderInfo(folder.getFolder());
             final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
             body.append("\n- ").append(folder.toString())

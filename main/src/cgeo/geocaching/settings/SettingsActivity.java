@@ -20,10 +20,10 @@ import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.ConfigurableFolderStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.storage.PublicLocalFolder;
-import cgeo.geocaching.storage.PublicLocalStorageActivityHelper;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -91,7 +91,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
 
-    private final PublicLocalStorageActivityHelper publicLocalStorage = new PublicLocalStorageActivityHelper(this);
+    private final ConfigurableFolderStorageActivityHelper configFolderStorageHelper = new ConfigurableFolderStorageActivityHelper(this);
 
     /**
      * Enumeration for directory choosers. This is how we can retrieve information about the
@@ -192,7 +192,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         bindGeocachingUserToGCVoteuser();
 
         //PublicFolder initialization
-        initPublicFolders(PublicLocalFolder.values());
+        initPublicFolders(ConfigurableFolder.values());
 
     }
 
@@ -401,24 +401,24 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         defaultNavigationTool2.setEntryValues(values);
     }
 
-    private void initPublicFolders(final PublicLocalFolder[] folders) {
+    private void initPublicFolders(final ConfigurableFolder[] folders) {
 
         if (!Settings.isDebug()) {
-            hidePreference(getPreference(PublicLocalFolder.TEST_FOLDER.getPrefKeyId()), R.string.pref_group_localfilesystem);
+            hidePreference(getPreference(ConfigurableFolder.TEST_FOLDER.getPrefKeyId()), R.string.pref_group_localfilesystem);
         }
 
-        for (PublicLocalFolder folder : folders) {
+        for (ConfigurableFolder folder : folders) {
             final Preference pref = getPreference(folder.getPrefKeyId());
             if (pref == null) {
                 continue;
             }
 
-            bindSummaryToValue(pref, folder.toUserDisplayableString());
+            bindSummaryToValue(pref, folder.toUserDisplayableValue());
             pref.setOnPreferenceClickListener(p -> {
-                publicLocalStorage.selectFolderUri(folder, f -> p.setSummary(f.toUserDisplayableString()));
+                configFolderStorageHelper.selectFolderUri(folder, f -> p.setSummary(f.toUserDisplayableValue()));
                 return false;
             });
-            folder.registerChangeListener(this, f -> pref.setSummary(f.toUserDisplayableString()));
+            folder.registerChangeListener(this, f -> pref.setSummary(f.toUserDisplayableValue()));
         }
     }
 
@@ -777,7 +777,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (publicLocalStorage.onActivityResult(requestCode, resultCode, data)) {
+        if (configFolderStorageHelper.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
 

@@ -12,8 +12,8 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.MultiRendererLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.PublicLocalFolder;
-import cgeo.geocaching.storage.PublicLocalStorage;
+import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.FolderStorage;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 
@@ -59,7 +59,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         registerMapSource(new CyclosmMapSource(this, resources.getString(R.string.map_source_osm_cyclosm)));
 
         //get notified if Offline Maps directory changes
-        PublicLocalFolder.OFFLINE_MAPS.registerChangeListener(this, pf -> updateOfflineMaps());
+        ConfigurableFolder.OFFLINE_MAPS.registerChangeListener(this, pf -> updateOfflineMaps());
 
         //initiale offline maps (necessary here in constructor only so that initial setMapSource will succeed)
         updateOfflineMaps();
@@ -73,8 +73,8 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         return Holder.INSTANCE;
     }
 
-    public static List<PublicLocalStorage.FileInformation> getOfflineMaps() {
-        return PublicLocalStorage.get().list(PublicLocalFolder.OFFLINE_MAPS);
+    public static List<FolderStorage.FileInformation> getOfflineMaps() {
+        return FolderStorage.get().list(ConfigurableFolder.OFFLINE_MAPS);
 
     }
 
@@ -321,7 +321,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         if (mapUri == null) {
             return null;
         }
-        return PublicLocalStorage.get().openForRead(mapUri);
+        return FolderStorage.get().openForRead(mapUri);
     }
 
     private static MapFile createMapFile(final String mapFileCtx, final InputStream fis) {

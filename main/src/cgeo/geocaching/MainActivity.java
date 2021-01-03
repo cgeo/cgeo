@@ -340,9 +340,9 @@ public class MainActivity extends AbstractActionBarActivity {
             Dialogs.message(this, res.getString(R.string.init_low_disk_space), res.getString(R.string.init_low_disk_space_message));
         }
 
-        getPublicLocalStorage().checkBaseFolderAccess();
-
         confirmDebug();
+
+        getConfigFolderStorageHelper().checkBaseFolderAccess();
 
         // infobox "not logged in" with link to service config; display delayed by 10 seconds
         final Handler handler = new Handler();

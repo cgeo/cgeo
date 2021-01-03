@@ -6,8 +6,8 @@ import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.settings.MapDownloadSelectorActivity;
-import cgeo.geocaching.storage.PublicLocalFolder;
-import cgeo.geocaching.storage.PublicLocalStorage;
+import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.FolderStorage;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
@@ -92,15 +92,15 @@ public class MapDownloadUtils {
     }
 
     public interface DirectoryWritable {
-        void run (PublicLocalFolder folder, boolean isAvailable);
+        void run (ConfigurableFolder folder, boolean isAvailable);
     }
 
     public static void checkMapDirectory(final Activity activity, final boolean beforeDownload, final DirectoryWritable callback) {
         PermissionHandler.requestStoragePermission(activity, new PermissionGrantedCallback(PermissionRequestContext.ReceiveMapFileActivity) {
             @Override
             protected void execute() {
-                final PublicLocalFolder folder = PublicLocalFolder.OFFLINE_MAPS;
-                final boolean mapDirIsReady = PublicLocalStorage.get().checkAndAdjustAvailability(folder);
+                final ConfigurableFolder folder = ConfigurableFolder.OFFLINE_MAPS;
+                final boolean mapDirIsReady = FolderStorage.get().checkAndAdjustAvailability(folder);
 
                 if (mapDirIsReady) {
                     callback.run(folder, true);

@@ -25,9 +25,9 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class PublicLocalStorageTest extends CGeoTestCase {
+public class FolderStorageTest extends CGeoTestCase {
 
-    private Uri testUri = null;
+    private String testFolderConfig = null;
 
     private static final boolean FAIL_DOC_TEST_IF_FOLDER_NOT_ACCESSIBLE = false; // CI does not support Document tests unfortunately...
     private static final boolean KEEP_RESULTS = true;
@@ -39,15 +39,15 @@ public class PublicLocalStorageTest extends CGeoTestCase {
     public void setUp() throws Exception {
         super.setUp();
         //save TEST-FOLDER Uri if there is a user-defined one for later restoring
-        if (PublicLocalFolder.TEST_FOLDER.getUserDefinedFolder()) {
-            testUri = PublicLocalFolder.TEST_FOLDER.getFolder().getUri();
+        if (ConfigurableFolder.TEST_FOLDER.isUserDefined()) {
+            testFolderConfig = ConfigurableFolder.TEST_FOLDER.getFolder().toConfig();
         }
     }
 
     public void tearDown() throws Exception {
         cleanup();
         //restore test folder user-defined uri
-        PublicLocalFolder.TEST_FOLDER.setUserDefinedDocumentUri(testUri);
+        ConfigurableFolder.TEST_FOLDER.setUserDefinedFolder(Folder.fromConfig(testFolderConfig));
 
         //call super.teardown AFTER all own cleanup (because this seems to reset all members vars including testUri)
         super.tearDown();
@@ -66,13 +66,13 @@ public class PublicLocalStorageTest extends CGeoTestCase {
 
         final Folder testFolder = createTestFolder(type, "simpleCreateDelete");
 
-        final Uri uri = PublicLocalStorage.get().create(testFolder, FileNameCreator.forName("cgeo-test.txt"));
+        final Uri uri = FolderStorage.get().create(testFolder, FileNameCreator.forName("cgeo-test.txt"));
         //final Folder subfolder = Folder.fromFolderLocation(testFolder, "eins");
         final Folder subsubfolder = Folder.fromFolder(testFolder, "eins/zwei");
-        final Uri uri2 = PublicLocalStorage.get().create(subsubfolder, FileNameCreator.forName("cgeo-test-sub.txt"));
+        final Uri uri2 = FolderStorage.get().create(subsubfolder, FileNameCreator.forName("cgeo-test-sub.txt"));
 
-        assertThat(PublicLocalStorage.get().delete(uri)).isTrue();
-        assertThat(PublicLocalStorage.get().delete(uri2)).isTrue();
+        assertThat(FolderStorage.get().delete(uri)).isTrue();
+        assertThat(FolderStorage.get().delete(uri2)).isTrue();
     }
 
     public void testFileCopyAll() {
@@ -218,11 +218,11 @@ public class PublicLocalStorageTest extends CGeoTestCase {
         assertFileDirCount(testFolder, 0, 0);
 
         //create two times with same name
-        final Uri uri = PublicLocalStorage.get().create(testFolder, FileNameCreator.forName("test"));
-        final Uri uri2 = PublicLocalStorage.get().create(testFolder, FileNameCreator.forName("test"));
+        final Uri uri = FolderStorage.get().create(testFolder, FileNameCreator.forName("test"));
+        final Uri uri2 = FolderStorage.get().create(testFolder, FileNameCreator.forName("test"));
 
-        final Uri uriWithSuffix = PublicLocalStorage.get().create(testFolder, FileNameCreator.forName("testwithsuffix.txt"));
-        final Uri uriWithSuffix2 = PublicLocalStorage.get().create(testFolder, FileNameCreator.forName("testwithsuffix.txt"));
+        final Uri uriWithSuffix = FolderStorage.get().create(testFolder, FileNameCreator.forName("testwithsuffix.txt"));
+        final Uri uriWithSuffix2 = FolderStorage.get().create(testFolder, FileNameCreator.forName("testwithsuffix.txt"));
 
         assertFileDirCount(testFolder, 4, 0);
 
@@ -249,24 +249,24 @@ public class PublicLocalStorageTest extends CGeoTestCase {
 
         final String testtext = "This is a test text";
 
-        final Uri uri = PublicLocalStorage.get().create(testFolder, "test.txt");
-        try (OutputStreamWriter writer = new OutputStreamWriter(PublicLocalStorage.get().openForWrite(uri))) {
+        final Uri uri = FolderStorage.get().create(testFolder, "test.txt");
+        try (OutputStreamWriter writer = new OutputStreamWriter(FolderStorage.get().openForWrite(uri))) {
             writer.write(testtext);
         }
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(PublicLocalStorage.get().openForRead(uri)))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(FolderStorage.get().openForRead(uri)))) {
             final String s = reader.readLine();
             assertThat(s).isEqualTo(testtext);
         }
     }
 
-    public void testPublicLocalFolderChangeNotification() {
+    public void testConfigurableFolderChangeNotification() {
 
         //create Location based on test folder. Several subfolders.
-        final Folder folder = Folder.fromPublicFolder(PublicLocalFolder.TEST_FOLDER, "changeNotificatio");
+        final Folder folder = Folder.fromConfigurableFolder(ConfigurableFolder.TEST_FOLDER, "changeNotificatio");
         final Folder folderOne = Folder.fromFolder(folder, "one");
         final Folder folderTwo = Folder.fromFolder(folder, "two");
-        final Folder folderNotNotified = Folder.fromPublicFolder(PublicLocalFolder.OFFLINE_MAPS, "changeNotificatio");
+        final Folder folderNotNotified = Folder.fromConfigurableFolder(ConfigurableFolder.OFFLINE_MAPS, "changeNotificatio");
 
         final Set<String> notificationMessages = new HashSet<>();
 
@@ -275,12 +275,12 @@ public class PublicLocalStorageTest extends CGeoTestCase {
         folderNotNotified.registerChangeListener(this, p -> notificationMessages.add("notnotified:" + p.name()));
 
         //trigger change
-        PublicLocalFolder.TEST_FOLDER.setUserDefinedDocumentUri(null);
+        ConfigurableFolder.TEST_FOLDER.setUserDefinedFolder(null);
 
         //check
         assertThat(notificationMessages.size()).isEqualTo(2);
-        assertThat(notificationMessages.contains("one:" + PublicLocalFolder.TEST_FOLDER.name()));
-        assertThat(notificationMessages.contains("two:" + PublicLocalFolder.TEST_FOLDER.name()));
+        assertThat(notificationMessages.contains("one:" + ConfigurableFolder.TEST_FOLDER.name()));
+        assertThat(notificationMessages.contains("two:" + ConfigurableFolder.TEST_FOLDER.name()));
     }
 
     public void testFileMimeType() {
@@ -304,12 +304,12 @@ public class PublicLocalStorageTest extends CGeoTestCase {
         final Map<String, String> mimeTypeMap = new HashMap<>();
         for (int i = 0; i < suffix.length; i++) {
             final String filename = "test." + suffix[i];
-            assertThat(PublicLocalStorage.get().create(testLocation, filename)).isNotNull();
+            assertThat(FolderStorage.get().create(testLocation, filename)).isNotNull();
             mimeTypeMap.put(filename, expectedMimeType[i]);
         }
-        final List<PublicLocalStorage.FileInformation> files = PublicLocalStorage.get().list(testLocation);
+        final List<FolderStorage.FileInformation> files = FolderStorage.get().list(testLocation);
         assertThat(files.size()).isEqualTo(suffix.length);
-        for (PublicLocalStorage.FileInformation fi : files) {
+        for (FolderStorage.FileInformation fi : files) {
             assertThat(fi.mimeType).as("For file " + fi.name).isEqualTo(mimeTypeMap.get(fi.name));
         }
     }
@@ -330,11 +330,11 @@ public class PublicLocalStorageTest extends CGeoTestCase {
                 //this is a subfolder
                final String folderName = n.get("name").asText();
                 final Folder newFolder = Folder.fromFolder(folder, folderName);
-                PublicLocalStorage.get().ensureFolder(newFolder);
+                FolderStorage.get().ensureFolder(newFolder);
                 createTree(newFolder, n.get("files"));
             } else {
                 //this is a file
-                PublicLocalStorage.get().create(folder, n.textValue());
+                FolderStorage.get().create(folder, n.textValue());
             }
         }
     }
@@ -344,8 +344,8 @@ public class PublicLocalStorageTest extends CGeoTestCase {
     }
 
     private boolean hasValidDocumentTestFolder() {
-        return PublicLocalFolder.TEST_FOLDER.getUserDefinedFolder() &&
-            PublicLocalStorage.get().checkAvailability(PublicLocalFolder.TEST_FOLDER.getFolder(), PublicLocalFolder.TEST_FOLDER.needsWrite(), true);
+        return ConfigurableFolder.TEST_FOLDER.isUserDefined() &&
+            FolderStorage.get().checkAvailability(ConfigurableFolder.TEST_FOLDER.getFolder(), ConfigurableFolder.TEST_FOLDER.needsWrite(), true);
     }
 
     private Folder createTestFolder(final Folder.FolderType type, final String context) {
@@ -358,7 +358,7 @@ public class PublicLocalStorageTest extends CGeoTestCase {
             case DOCUMENT:
                 if (!hasValidDocumentTestFolder()) {
                     if (FAIL_DOC_TEST_IF_FOLDER_NOT_ACCESSIBLE) {
-                        throw new IllegalArgumentException("Document Folder not accessible, test fails: " + PublicLocalFolder.TEST_FOLDER.getFolder());
+                        throw new IllegalArgumentException("Document Folder not accessible, test fails: " + ConfigurableFolder.TEST_FOLDER.getFolder());
                     }
                     Log.iForce("Trying to test for DocumentUri fails; unfortunately there is no DocumentUri configured for TEST-FOLDER. Test with file instead");
                     testFolder =  Folder.fromFolder(getBaseTestFolder(Folder.FolderType.FILE), "doc-" + context);
@@ -384,7 +384,7 @@ public class PublicLocalStorageTest extends CGeoTestCase {
                 if (!hasValidDocumentTestFolder()) {
                     return Folder.fromFolder(Folder.CGEO_PRIVATE_FILES, "unittest");
                 }
-                return PublicLocalFolder.TEST_FOLDER.getFolder();
+                return ConfigurableFolder.TEST_FOLDER.getFolder();
             default:
                 return null;
         }

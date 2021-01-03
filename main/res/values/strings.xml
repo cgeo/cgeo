@@ -833,26 +833,43 @@
     <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection, or send2cgeo is down.</string>
     <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2cgeo expired. Please register in settings.</string>
 
-    <!-- Public Local Storage -->
-    <string name="publiclocalstorage_userdefined">User-Defined</string>
-    <string name="publiclocalstorage_default">Default</string>
-    <string name="publiclocalstorage_grantaccess_dialog_title">Please grant access to folder</string>
-    <string name="publiclocalstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo needs a local folder to store its public data. Starting with Android 11 / SDK30, permissions to use this folder needs to be explicitely granted by end user.</p><p>Please select or create such a folder on your device (click ok to start). If you upgraded c:geo from a previous version, we advise you to select folder "cgeo" on your device root.</p><p>Until then c:geo tries to use a deprecated API to write files to \'%s\'</p>]]></string>
-    <string name="publiclocalstorage_selectfolder_dialog_user_or_default_title">User-defined or default?</string>
-    <string name="publiclocalstorage_selectfolder_dialog_user_or_default_msg">Do you want to use the default location \'%s\' or select a user-defined folder?</string>
-    <string name="publiclocalstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
-    <string name="publiclocalstorage_folder_selection_failed">Selected folder not accessible, aborting selection. Folder is \'%s\'</string>
-    <string name="publiclocalstorage_folder_selection_success">Folder set to \'%s\'</string>
-    <string name="publiclocalstorage_file_selection_aborted">Aborting file selection</string>
-    <string name="publiclocalstorage_file_selection_success">File selected: \'%s\'</string>
-    <string name="publiclocalstorage_err_publicfolder_inaccessible_falling_back">Folder %s: \'%s\' is not accessible, falling back to \'%s\'</string>
-    <string name="publiclocalstorage_err_read_failed">File \'%s\' could not be read, see logfile for details</string>
-    <string name="publiclocalstorage_err_write_failed">File \'%s\' could not be written, see logfile for details</string>
-    <string name="publiclocalstorage_err_create_failed">File \'%s\' in \'%s\' could not be created, see logfile for details</string>
-    <string name="publiclocalstorage_err_delete_failed">File \'%s\' could not be deleted, see logfile for details</string>
-    <string name="publiclocalstorage_err_list_failed">Files in Folder \'%s\' could not be listed, see logfile for details</string>
-    <string name="publiclocalstorage_err_ensurefolder_failed">Folder \'%s\' could not be created, see logfile for details</string>
-    <string name="publiclocalstorage_err_copy_failed">File \'%s\' could not be copied/moved to \'%s\' (move=%s), see logfile for details</string>
+    <!-- Folder Storage -->
+    <string name="folderstorage_grantaccess_dialog_title">Please grant access to folder</string>
+    <string name="folderstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo needs a local folder to store its public data. Starting with Android 11 / SDK30, permissions to use this folder needs to be explicitely granted by end user.</p><p>Please select or create such a folder on your device (click ok to start). If you upgraded c:geo from a previous version, we advise you to select folder "cgeo" on your device root.</p><p>Until then c:geo tries to use a deprecated API to write files to \'%s\'</p>]]></string>
+    <string name="folderstorage_selectfolder_dialog_title">Change Folder %s</string>
+    <string name="folderstorage_selectfolder_dialog_msg_html"><![CDATA[<p>Folder %s is currently set to \'%s\' and contains %d file(s) and %d subfolder(s).</p><p>Please select whether to use default folder \'%s\' or a user-defined folder. Also, please select whether to copy/move content on change.</p>]]></string>
+    <string name="folderstorage_selectfolder_dialog_choice_nocopy">Do not copy or move item(s)</string>
+    <string name="folderstorage_selectfolder_dialog_choice_copy">Copy items(s)</string>
+    <string name="folderstorage_selectfolder_dialog_choice_move">Move item(s)</string>
+    <string name="folderstorage_selectfolder_dialog_copy_move_finished_title">Folder %s: Copy/Move done</string>
+    <string name="folderstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Copy/Move had result %s. %d file(s) and %d subdirectories were copied/moved.</p><p>Click \'ok\' finalize the directory change.</p>]]></string>
+    <string name="folderstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
+    <string name="folderstorage_folder_selection_failed">Selected folder not accessible, aborting selection. Folder is \'%s\'</string>
+    <string name="folderstorage_folder_selection_success">Folder set to \'%s\'</string>
+    <string name="folderstorage_file_selection_aborted">Aborting file selection</string>
+    <string name="folderstorage_file_selection_success">File selected: \'%s\'</string>
+    <string name="folderstorage_err_publicfolder_inaccessible_falling_back">Folder %s: \'%s\' is not accessible, falling back to \'%s\'</string>
+    <string name="folderstorage_err_read_failed">File \'%s\' could not be read, see logfile for details</string>
+    <string name="folderstorage_err_write_failed">File \'%s\' could not be written, see logfile for details</string>
+    <string name="folderstorage_err_create_failed">File \'%s\' in \'%s\' could not be created, see logfile for details</string>
+    <string name="folderstorage_err_delete_failed">File \'%s\' could not be deleted, see logfile for details</string>
+    <string name="folderstorage_err_list_failed">Files in Folder \'%s\' could not be listed, see logfile for details</string>
+    <string name="folderstorage_err_ensurefolder_failed">Folder \'%s\' could not be created, see logfile for details</string>
+    <string name="folderstorage_err_copy_failed">File \'%s\' could not be copied/moved to \'%s\' (move=%s), see logfile for details</string>
+
+    <!-- COnfigurable Folders -->
+    <string name="configurablefolder_usertype_userdefined">User-Defined</string>
+    <string name="configurablefolder_usertype_default">Default</string>
+
+
+    <string name="configurablefolder_base">base</string>
+    <string name="configurablefolder_offline_maps">offline maps</string>
+    <string name="configurablefolder_offline_maps_themes">offline map themes</string>
+    <string name="configurablefolder_gpx">GPX</string>
+    <string name="configurablefolder_backup">backup</string>
+    <string name="configurablefolder_logfiles">logfiles</string>
+    <string name="configurablefolder_fieldnotes">field notes</string>
+    <string name="configurablefolder_images">log images</string>
 
     <!-- auth generic -->
     <string name="auth_authorize">Authorize c:geo</string>

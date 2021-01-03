@@ -50,7 +50,10 @@
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:largeHeap="true"
-        android:requestLegacyExternalStorage="true"> <!-- TODO SAF: leave 'android:requestLegacyExternalStorage="true"' until done, remove completely when done -->
+        android:requestLegacyExternalStorage="true"
+        >
+        <!-- TODO SAF: leave 'android:requestLegacyExternalStorage="true"' until done, remove completely when done -->
+        <!-- TODO SAF: put 'android:preserveLegacyExternalStorage="true" when using API30 -->
 
         <!-- Samsung Multi-Window support -->
         <uses-library

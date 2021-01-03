@@ -264,12 +264,16 @@
 
     <!-- ids for public folder prefs -->
     <string translatable="false" name="pref_group_localfilesystem">group_localfilesystem</string>
-    <string translatable="false" name="pref_publicfolder_basedir">publicfolder_basedir</string>
-    <string translatable="false" name="pref_publicfolder_logfiles">publicfolder_logfiles</string>
-    <string translatable="false" name="pref_publicfolder_offlinemaps">publicfolder_offlinemaps</string>
-    <string translatable="false" name="pref_publicfolder_offlinemapthemes">publicfolder_offlinemapthemes</string>
+    <string translatable="false" name="pref_configurablefolder_basedir">configurablefolder_basedir</string>
+    <string translatable="false" name="pref_configurablefolder_logfiles">configurablefolder_logfiles</string>
+    <string translatable="false" name="pref_configurablefolder_offlinemaps">configurablefolder_offlinemaps</string>
+    <string translatable="false" name="pref_configurablefolder_offlinemapthemes">configurablefolder_offlinemapthemes</string>
+    <string translatable="false" name="pref_configurablefolder_gpx">configurablefolder_gpx</string>
+    <string translatable="false" name="pref_configurablefolder_backup">configurablefolder_backup</string>
+    <string translatable="false" name="pref_configurablefolder_fieldnotes">configurablefolder_fieldnotes</string>
+    <string translatable="false" name="pref_configurablefolder_images">configurablefolder_images</string>
 
-    <string translatable="false" name="pref_publicfolder_testdir">publicfolder_testdir</string>
+    <string translatable="false" name="pref_configurablefolder_testdir">configurablefolder_testdir</string>
 
 
     <!-- preference values -->
