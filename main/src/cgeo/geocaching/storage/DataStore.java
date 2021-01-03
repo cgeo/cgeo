@@ -125,7 +125,8 @@ public class DataStore {
         DBEXTENSION_PENDING_DOWNLOAD(1),
         DBEXTENSION_FOUNDNUM(2),
         DBEXTENSION_DOWNGRADEABLE_DBVERSION(3),
-        DBEXTENSION_ONE_TIME_DIALOGS(4);
+        DBEXTENSION_ONE_TIME_DIALOGS(4),
+        DBEXTENSION_EMOJILRU(5);
 
         public int id;
 
@@ -185,7 +186,8 @@ public class DataStore {
                     "cg_caches.logPasswordRequired,"      +  // 41
                     "cg_caches.watchlistCount,"           +  // 42
                     "cg_caches.preventWaypointsFromNote," +  // 43
-                    "cg_caches.owner_guid";                  // 44
+                    "cg_caches.owner_guid,"               +  // 44
+                    "cg_caches.emoji";                       // 45
 
     /** The list of fields needed for mapping. */
     private static final String[] WAYPOINT_COLUMNS = { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state" };
@@ -198,7 +200,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 91;
+    private static final int dbVersion = 92;
     public static final int customListIdOffset = 10;
 
     /**
@@ -225,7 +227,8 @@ public class DataStore {
             88, // add timestamp to trail history
             89, // add altitude to trail history
             90, // add user guid to cg_caches and cg_logs
-            91  // add fields to cg_extension
+            91, // add fields to cg_extension
+            92  // add emoji id to cg_caches
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -293,7 +296,8 @@ public class DataStore {
             + "logPasswordRequired INTEGER DEFAULT 0,"
             + "watchlistCount INTEGER DEFAULT -1,"
             + "preventWaypointsFromNote INTEGER DEFAULT 0,"
-            + "owner_guid TEXT NOT NULL DEFAULT ''"
+            + "owner_guid TEXT NOT NULL DEFAULT '',"
+            + "emoji INTEGER DEFAULT 0"
             + "); ";
     private static final String dbCreateLists = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
@@ -1484,6 +1488,15 @@ public class DataStore {
                         }
                     }
 
+                    // add emoji to cg_caches
+                    if (oldVersion < 92) {
+                        try {
+                            createColumnIfNotExists(db, dbTableCaches, "emoji INTEGER DEFAULT 0");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 92);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2009,6 +2022,7 @@ public class DataStore {
         values.put("watchlistCount", cache.getWatchlistCount());
         values.put("preventWaypointsFromNote", cache.isPreventWaypointsFromNote() ? 1 : 0);
         values.put("owner_guid", cache.getOwnerGuid());
+        values.put("emoji", cache.getAssignedEmoji());
 
         init();
 
@@ -2688,6 +2702,7 @@ public class DataStore {
         cache.setWatchlistCount(cursor.getInt(42));
         cache.setPreventWaypointsFromNote(cursor.getInt(43) > 0);
         cache.setOwnerGuid(cursor.getString(44));
+        cache.setAssignedEmoji(cursor.getInt(45));
 
         return cache;
     }

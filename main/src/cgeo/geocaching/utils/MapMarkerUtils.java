@@ -41,6 +41,9 @@ public final class MapMarkerUtils {
     private static Boolean listsRead = false;
 
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
+    private static int markerHeight = 0;
+    private static int markerAvailable = 0;
+    private static int markerFontsize = 0;
 
     private MapMarkerUtils() {
         // Do not instantiate
@@ -80,22 +83,23 @@ public final class MapMarkerUtils {
     public static CacheMarker getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
         final int assignedMarkers = getAssignedMarkers(cache);
         final int hashcode = new HashCodeBuilder()
-                .append(cache.isReliableLatLon())
-                .append(cache.getType().id)
-                .append(cache.isDisabled() || cache.isArchived())
-                .append(cache.getMapMarkerId())
-                .append(cache.isOwner())
-                .append(cache.isFound())
-                .append(cache.isDNF())
-                .append(showUserModifiedCoords(cache))
-                .append(cache.getPersonalNote())
-                .append(cache.isLogOffline())
-                .append(!cache.getLists().isEmpty())
-                .append(cache.getOfflineLogType())
-                .append(showBackground(cacheListType))
-                .append(showFloppyOverlay(cacheListType))
-                .append(assignedMarkers)
-                .toHashCode();
+            .append(cache.getAssignedEmoji())
+            .append(cache.isReliableLatLon())
+            .append(cache.getType().id)
+            .append(cache.isDisabled() || cache.isArchived())
+            .append(cache.getMapMarkerId())
+            .append(cache.isOwner())
+            .append(cache.isFound())
+            .append(cache.isDNF())
+            .append(showUserModifiedCoords(cache))
+            .append(cache.getPersonalNote())
+            .append(cache.isLogOffline())
+            .append(!cache.getLists().isEmpty())
+            .append(cache.getOfflineLogType())
+            .append(showBackground(cacheListType))
+            .append(showFloppyOverlay(cacheListType))
+            .append(assignedMarkers)
+            .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
@@ -216,8 +220,10 @@ public final class MapMarkerUtils {
      */
     @NonNull
     private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final int assignedMarkers) {
+        final int useEmoji = cache.getAssignedEmoji();
+
         // background: disabled or not
-        final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
+        final Drawable marker = Compatibility.getDrawable(res, useEmoji > 0 ? R.drawable.marker_oc : cache.getMapMarkerId());
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
 
         // Show the background circle only on map
@@ -231,7 +237,16 @@ public final class MapMarkerUtils {
         // cache type
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
         final boolean doubleSize = showBigSmileys(cacheListType) && mainMarkerId != cache.getType().markerId;
-        insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, doubleSize));
+        if (useEmoji > 0 && !doubleSize) {
+            if (markerHeight == 0) {
+                markerHeight = DisplayUtils.getDrawableHeight(res, R.drawable.marker_oc);
+                markerAvailable = (int) (markerHeight * 0.6);
+                markerFontsize = DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable);
+            }
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(res, markerHeight, markerAvailable, markerFontsize, useEmoji)));
+        } else {
+            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, doubleSize));
+        }
         // own
         if (cache.isOwner()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_own, VERTICAL.TOP, HORIZONTAL.RIGHT));

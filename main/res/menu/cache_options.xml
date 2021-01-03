@@ -154,4 +154,9 @@
         android:title="@string/clear_goto_history_title"
         android:visible="false">
     </item>
+    <item
+        android:id="@+id/menu_set_cache_icon"
+        android:title="@string/cache_menu_set_cache_icon"
+        android:visible="false">
+    </item>
 </menu>

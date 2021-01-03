@@ -80,6 +80,7 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -668,6 +669,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null && !isUDC);
         menu.findItem(R.id.menu_clear_goto_history).setVisible(cache != null && cache.isGotoHistoryUDC());
+        menu.findItem(R.id.menu_set_cache_icon).setVisible(cache != null && cache.isOffline());
         menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
         menuItemToggleWaypointsFromNote.setVisible(cache != null);
         setMenuPreventWaypointsFromNote(cache != null && cache.isPreventWaypointsFromNote());
@@ -748,12 +750,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             NavigationAppFactory.onMenuItemSelected(item, this, cache);
         } else if (menuItem == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, cache.getCoords());
+        } else if (menuItem == R.id.menu_set_cache_icon) {
+            EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), cache.getType().markerId, this::setCacheIcon);
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
             refreshOnResume = true;
         } else {
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void setCacheIcon(final int newCacheIcon) {
+        cache.setAssignedEmoji(newCacheIcon);
+        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+        Toast.makeText(this, R.string.cache_icon_updated, Toast.LENGTH_SHORT).show();
+        notifyDataSetChanged();
     }
 
     private void ignoreCache() {

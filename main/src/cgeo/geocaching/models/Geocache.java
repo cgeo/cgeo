@@ -108,6 +108,8 @@ public class Geocache implements IWaypoint {
     private String ownerDisplayName = "";
     private String ownerGuid = "";
     private String ownerUserId = "";
+    private int assignedEmoji = 0;
+
     @Nullable
     private Date hidden = null;
     /**
@@ -1254,6 +1256,10 @@ public class Geocache implements IWaypoint {
         this.ownerGuid = ownerGuid;
     }
 
+    public void setAssignedEmoji(final int assignedEmoji) {
+        this.assignedEmoji = assignedEmoji;
+    }
+
     public void setOwnerUserId(final String ownerUserId) {
         this.ownerUserId = ownerUserId;
     }
@@ -2085,5 +2091,9 @@ public class Geocache implements IWaypoint {
     @NonNull
     public Comparator<? super Waypoint> getWaypointComparator() {
         return isGotoHistoryUDC() ? Waypoint.WAYPOINT_ID_COMPARATOR : Waypoint.WAYPOINT_COMPARATOR;
+    }
+
+    public int getAssignedEmoji() {
+        return assignedEmoji;
     }
 }
