@@ -1815,15 +1815,22 @@
     <string name="export_individualroute_title">Individuele route exporteren</string>
     <string name="export_individualroute_success">Individuele route geëxporteerd naar \"%s\"</string>
     <!-- install wizard -->
+    <string name="wizard">Configuratiewizard</string>
     <string name="previous">Vorige</string>
     <string name="skip">Overslaan</string>
     <string name="next">Volgende</string>
     <string name="finish">Voltooien</string>
     <string name="wizard_welcome_title">Welkom bij c:geo</string>
     <string name="wizard_intro">Het lijkt erop dat dit de eerste keer is dat c:geo wordt gebruikt op dit apparaat. Zal ik je helpen met de configuratie? Het is slechts een paar stappen.</string>
+    <string name="wizard_intro2">Welkom terug bij de configuratiewizard. Dit zijn slechts enkele stappen.</string>
+    <string name="wizard_outro_ok">Bedankt voor het configureren van c:geo.\nVeel plezier!</string>
+    <string name="wizard_outro_error">Onvolledige configuratie\nNiet alle delen van c:geo zullen werken zoals verwacht!</string>
     <string name="wizard_permissions_title">App-machtigingen instellen</string>
     <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig om goed te werken. Ze worden uigelegd in de volgende stappen.\nZonder deze permissies kun je c:o niet gebruiken.</string>
     <string name="wizard_platforms_title">Platformen configureren</string>
+    <string name="wizard_platforms_intro">Om caches te downloaden heb je een account nodig voor ten minste één van de geocaching platforms ondersteund door c:geo</string>
+    <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; meer</string>
     <string name="wizard_welcome_advanced">Geavanceerde configuratie</string>
     <string name="wizard_advanced_offlinemaps_label">Offline kaarten</string>
     <string name="wizard_advanced_offlinemaps_info">c:geo kan kaartbestanden downloaden voor offline gebruik</string>
@@ -1831,4 +1838,9 @@
     <string name="wizard_advanced_brouter_info">c:geo kan navigeren naar doelen en routing informatie op je kaart weergeven door het installeren en configureren van een metgezel app genaamd \"BRouter Offline Navigation\"</string>
     <string name="wizard_advanced_restore_label">Terugzetten</string>
     <string name="wizard_advanced_restore_info">Instellingen / gegevens terugzetten van een vorige installatie</string>
+    <string name="status_not_ok">FOUT</string>
+    <string name="wizard_status_title">Configuratie status</string>
+    <string name="wizard_status_storage_permission">Opslag permissie</string>
+    <string name="wizard_status_location_permission">Locatie permissie</string>
+    <string name="wizard_status_platform">Geocaching platformen</string>
 </resources>
