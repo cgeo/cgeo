@@ -60,6 +60,14 @@
     <string name="wp_waypoint">Reference Point</string>
     <string name="wp_original">Original Coordinates</string>
 
+    <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Final</string>
+    <string name="wpnew_stage">Stage</string>
+    <string name="wpnew_pkg">Parking</string>
+    <string name="wpnew_trailhead">Via</string>
+    <string name="wpnew_waypoint">Marker</string>
+    <string name="wpnew_original">Original</string>
+
     <!-- logs -->
     <string name="log_found">Found it</string>
     <string name="log_dnf">Didn\'t find it</string>

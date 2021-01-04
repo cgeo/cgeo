@@ -1645,7 +1645,7 @@ public class Geocache implements IWaypoint {
             if (!StringUtils.isBlank(searchWpName)) {
                 final String wpName = waypoint.getName();
                 final WaypointType wpType = waypoint.getWaypointType();
-                if (searchWpName.equals(wpName) && searchWp.getWaypointType().getL10n().equals(wpType.getL10n())) {
+                if (searchWpName.equals(wpName) && (searchWp.getWaypointType().getNameForNewWaypoint().equals(wpType.getNameForNewWaypoint()) || searchWp.getWaypointType().getL10n().equals(wpType.getL10n()))) {
                     return waypoint;
                 }
             }

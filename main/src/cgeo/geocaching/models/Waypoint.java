@@ -479,7 +479,7 @@ public class Waypoint implements IWaypoint {
             }
         }
         for (final WaypointType wpType : WaypointType.ALL_TYPES) {
-            if (lowerInput.contains(wpType.getL10n().toLowerCase(Locale.getDefault()))) {
+            if (lowerInput.contains(wpType.getNameForNewWaypoint().toLowerCase(Locale.getDefault())) || lowerInput.contains(wpType.getL10n().toLowerCase(Locale.getDefault()))) {
                 return wpType;
             }
         }
@@ -699,17 +699,17 @@ public class Waypoint implements IWaypoint {
             wpNames.add(waypoint.getName());
         }
         // try final and trailhead without index
-        if ((type == WaypointType.FINAL || type == WaypointType.TRAILHEAD) && !wpNames.contains(type.getL10n())) {
-            return type.getL10n();
+        if ((type == WaypointType.FINAL || type == WaypointType.TRAILHEAD) && !wpNames.contains(type.getL10n()) && !wpNames.contains(type.getNameForNewWaypoint())) {
+            return type.getNameForNewWaypoint();
         }
         // for other types add an index by default, which is highest found index + 1
         int max = 0;
         for (int i = 0; i < 30; i++) {
-            if (wpNames.contains(type.getL10n() + " " + i)) {
+            if (wpNames.contains(type.getL10n() + " " + i) || wpNames.contains(type.getNameForNewWaypoint() + " " + i)) {
                 max = i;
             }
         }
-        return type.getL10n() + " " + (max + 1);
+        return type.getNameForNewWaypoint() + " " + (max + 1);
     }
 
     /**
