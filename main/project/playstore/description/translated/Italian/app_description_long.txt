@@ -27,4 +27,4 @@ Cerca e scopri trackables, gestisci il tuo inventario trackable e rilascia un tr
 Se hai problemi ad installare o utilizzare c:geo, consulta le nostre FAQ (https://faq.cgeo.org) o consulta la guida utente (https://manual.cgeo.org).
 Se ci sono ancora problemi, contatta il supporto via email.
 
-Se vuoi sapere perché questo plugin c:geo ha bisogno delle autorizzazioni richieste, visita https://www.cgeo.org/faq.html#plugin-contacts-privacy per una spiegazione.
+Se vuoi sapere perché c:geo ha bisogno dei permessi richiesti, controlla https://www.cgeo.org/faq#permissions per una spiegazione.
