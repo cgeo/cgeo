@@ -3,6 +3,7 @@ package cgeo.geocaching.storage.extension;
 import cgeo.geocaching.R;
 import cgeo.geocaching.storage.DataStore;
 
+import androidx.annotation.StringRes;
 
 public class OneTimeDialogs extends DataStore.DBExtension {
 
@@ -21,20 +22,22 @@ public class OneTimeDialogs extends DataStore.DBExtension {
 
         // when an one time dialog gets removed/replaced, keep the old one in the enum anyway, so that we can be sure that the same name isn't used again in the future.
 
-        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter, DefaultBehavior.SHOW_ALWAYS),
-        DATABASE_CONFIRM_OVERWRITE(null, null, DefaultBehavior.SHOW_ALWAYS),
-        MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE),
-        MAP_LONG_TAP_DISABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_disabled, DefaultBehavior.SHOW_ALWAYS),
-        MAP_LONG_TAP_ENABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_enabled, DefaultBehavior.SHOW_ALWAYS);
+        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter, DefaultBehavior.SHOW_ALWAYS, 0),
+        DATABASE_CONFIRM_OVERWRITE(null, null, DefaultBehavior.SHOW_ALWAYS, 0),
+        MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0),
+        MAP_LONG_TAP_DISABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_disabled, DefaultBehavior.SHOW_ALWAYS, 0),
+        MAP_LONG_TAP_ENABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_enabled, DefaultBehavior.SHOW_ALWAYS, 0);
 
         public final Integer messageTitle;
         public final Integer messageText;
         public final DefaultBehavior defaultBehavior;
+        public final int moreInfoURLResId;
 
-        DialogType(final Integer messageTitle, final Integer messageText, final DefaultBehavior defaultBehavior) {
+        DialogType(final Integer messageTitle, final Integer messageText, final DefaultBehavior defaultBehavior, @StringRes final int moreInfoURLResId) {
             this.messageTitle = messageTitle;
             this.messageText = messageText;
             this.defaultBehavior = defaultBehavior;
+            this.moreInfoURLResId = moreInfoURLResId;
         }
     }
 

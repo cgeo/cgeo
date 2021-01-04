@@ -17,8 +17,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -566,7 +568,7 @@ public final class Dialogs {
      * @param runAfterwards
      *            runnable (may be <tt>null</tt>) will be executed when ok button is clicked
      */
-    private static void internalOneTimeMessage(@NonNull final Activity context, @Nullable final String title, final String message, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
+    private static void internalOneTimeMessage(@NonNull final Activity context, @Nullable final String title, final String message, @Nullable final String moreInfoURL, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
         final View content = context.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
         final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
         final TextView textView = (TextView) content.findViewById(R.id.message);
@@ -594,6 +596,10 @@ public final class Dialogs {
 
         if (title != null) {
             builder.setTitle(title);
+        }
+
+        if (StringUtils.isNotBlank(moreInfoURL)) {
+            builder.setNeutralButton(R.string.more_information, (dialog, which) -> context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(moreInfoURL))));
         }
 
         if (cancellable) {
@@ -632,7 +638,7 @@ public final class Dialogs {
 
         if (OneTimeDialogs.showDialog(dialogType)) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
-            internalOneTimeMessage(context, getString(dialogType.messageTitle), getString(dialogType.messageText), dialogType,
+            internalOneTimeMessage(context, getString(dialogType.messageTitle), getString(dialogType.messageText), dialogType.moreInfoURLResId > 0 ? getString(dialogType.moreInfoURLResId) : null, dialogType,
                 Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null);
         }
     }
@@ -644,9 +650,9 @@ public final class Dialogs {
      * @param dialogType
      *            used for storing the dialog status in the DB, title and message defined in the dialogType are ignored
      */
-    public static void advancedOneTimeMessage(final Activity context, final OneTimeDialogs.DialogType dialogType, final String title, final String message, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, @Nullable final Runnable runAfterwards) {
+    public static void advancedOneTimeMessage(final Activity context, final OneTimeDialogs.DialogType dialogType, final String title, final String message, final String moreInfoURL, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, @Nullable final Runnable runAfterwards) {
         if (OneTimeDialogs.showDialog(dialogType)) {
-            internalOneTimeMessage(context, title, message, dialogType, iconObservable, cancellable, runAfterwards);
+            internalOneTimeMessage(context, title, message, moreInfoURL, dialogType, iconObservable, cancellable, runAfterwards);
         } else if (runAfterwards != null) {
             runAfterwards.run();
         }
