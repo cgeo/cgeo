@@ -603,10 +603,6 @@ public class Settings {
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
     }
 
-    public static boolean isScaleMapsforgeText() {
-        return getBoolean(R.string.pref_mapsforge_scale_text, true);
-    }
-
     public static int getMapRotation() {
         final String prefValue = getString(R.string.pref_mapRotation, "");
         if (prefValue.equals(getKey(R.string.pref_maprotation_off))) {

@@ -582,11 +582,6 @@
             <Preference
                 android:key="@string/pref_renderthemepath"
                 android:title="@string/init_rendertheme_folder" />
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="@string/pref_mapsforge_scale_text"
-                android:summary="@string/settings_summary_scale_map_text"
-                android:title="@string/settings_title_scale_map_text" />
             <ListPreference
                 android:title="@string/settings_title_map_rotation"
                 android:summary="%s"
