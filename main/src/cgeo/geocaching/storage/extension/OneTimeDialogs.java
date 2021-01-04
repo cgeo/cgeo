@@ -23,7 +23,9 @@ public class OneTimeDialogs extends DataStore.DBExtension {
 
         EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter, DefaultBehavior.SHOW_ALWAYS),
         DATABASE_CONFIRM_OVERWRITE(null, null, DefaultBehavior.SHOW_ALWAYS),
-        MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE);
+        MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE),
+        MAP_LONG_TAP_DISABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_disabled, DefaultBehavior.SHOW_ALWAYS),
+        MAP_LONG_TAP_ENABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_enabled, DefaultBehavior.SHOW_ALWAYS);
 
         public final Integer messageTitle;
         public final Integer messageText;
