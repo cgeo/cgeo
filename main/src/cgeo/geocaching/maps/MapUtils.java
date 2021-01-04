@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps;
 
+import android.app.Activity;
+
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -7,6 +9,8 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,4 +66,9 @@ public class MapUtils {
         }
         caches.removeAll(removeList);
     }
+
+    public static void showMapOneTimeMessages(final Activity activity) {
+        Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
+    }
+
 }

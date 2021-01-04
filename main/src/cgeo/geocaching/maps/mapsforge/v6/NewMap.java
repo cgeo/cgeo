@@ -27,6 +27,7 @@ import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.MapState;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
@@ -326,7 +327,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
-        Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
+        MapUtils.showMapOneTimeMessages(this);
     }
 
     private void postZoomToViewport(final Viewport viewport) {
