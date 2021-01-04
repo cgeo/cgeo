@@ -9,13 +9,13 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;
@@ -107,9 +107,7 @@ public final class StoredList extends AbstractList {
             }
 
             final Activity activity = activityRef.get();
-            final AlertDialog.Builder builder = new AlertDialog.Builder(activity,
-                    Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert
-            );
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
             builder.setTitle(res.getString(titleId));
             builder.setMultiChoiceItems(listTitles, selectedItems, new MultiChoiceClickListener(lists, selectedListIds));
             builder.setPositiveButton(android.R.string.ok, new OnOkClickListener(selectedListIds, runAfterwards, listNameMemento));
