@@ -9,4 +9,4 @@ Personens geocacher-navn skal stå i navne- eller alias-feltet i kontaktlisten f
 Vi kan ikke besvare kommentarer i PlayStore! Har du problemer med at installere eller bruge c:geo kan du starte med at kigge i vores FAQ: https://faq.cgeo.org
 Hvis det ikke løser dit problem kan du kontakte support pr. email.
 
-Her kan du læse hvorfor dette c:geo plugin har brug for de tilladelser, der anmodes om: https://www.cgeo.org/faq.html#plugin-contacts-privacy .
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
