@@ -1,7 +1,5 @@
 package cgeo.geocaching.maps;
 
-import android.app.Activity;
-
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -11,6 +9,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
+
+import android.app.Activity;
 
 import java.util.ArrayList;
 import java.util.Collection;

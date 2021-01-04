@@ -27,8 +27,6 @@
     </integer-array>
 
     <string translatable="false" name="settings_gc_legal_note_url">https://www.geocaching.com/account/documents/termsofuse</string>
-    <string translatable="false" name="settings_offline_maps_url">https://manual.cgeo.org/en/offlinemaps</string>
-    <string translatable="false" name="settings_themes_url">https://manual.cgeo.org/en/offlinemaps</string>
     <string translatable="false" name="settings_send2cgeo_url">https://send2.cgeo.org/</string>
     <string translatable="false" name="settings_facebook_login_url">https://faq.cgeo.org/#facebook-login</string>
 
@@ -36,6 +34,10 @@
     <string translatable="false" name="map_attribution_openstreetmapde_html"><![CDATA[© <a href="https://openstreetmap.de/">OpenStreetMap DE</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
     <string translatable="false" name="map_attribution_cyclosm_html"><![CDATA[© <a href="https://www.cyclosm.org/">CyclOSM</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
 
+    <!-- links to manual pages -->
+    <string translatable="false" name="manual_url_settings_offline_maps">https://manual.cgeo.org/en/offlinemaps</string>
+    <string translatable="false" name="manual_url_settings_themes">https://manual.cgeo.org/en/offlinemaps</string>
+    <string translatable="false" name="manual_url_mapbehavior">https://manual.cgeo.org/en/mainmenu/settings#map_behavior</string>
 
     <!-- contributors -->
     <string translatable="false" name="contributors_carnero">carnero</string>
