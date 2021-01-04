@@ -9,4 +9,4 @@
 在Google Play上的評論可能不會被回答。 如果您有安裝或是使用c:geo的問題，請您先參考我們的常見問題：https://faq.cgeo.org
 如果您仍然有問題，請以電子郵件聯絡我們。
 
-如果您想了解為什麼c:geo插件需要要求權限，請參考我們的說明：https://www.cgeo.org/faq.html#plugin-contacts-privacy
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
