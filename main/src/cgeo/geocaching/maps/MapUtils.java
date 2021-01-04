@@ -67,8 +67,10 @@ public class MapUtils {
         caches.removeAll(removeList);
     }
 
+    // one-time messages to be shown for maps
     public static void showMapOneTimeMessages(final Activity activity) {
         Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
+        Dialogs.basicOneTimeMessage(activity, Settings.isLongTapOnMapActivated() ? OneTimeDialogs.DialogType.MAP_LONG_TAP_ENABLED : OneTimeDialogs.DialogType.MAP_LONG_TAP_DISABLED);
     }
 
 }

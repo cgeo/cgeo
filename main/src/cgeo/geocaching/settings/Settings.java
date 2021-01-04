@@ -1095,7 +1095,7 @@ public class Settings {
     }
 
     public static boolean isLongTapOnMapActivated() {
-        return getBoolean(R.string.pref_longTapOnMapActivated, false);
+        return getBoolean(R.string.pref_longTapOnMapActivated, true);
     }
 
     public static boolean isUseTwitter() {
