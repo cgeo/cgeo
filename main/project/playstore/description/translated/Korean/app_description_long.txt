@@ -27,4 +27,4 @@ c:geo는 사용하기 간단하지만 많은 추가 기능이 있는 강력한 �
 c:geo 설치 또는 사용에 문제가있는 경우 먼저 FAQ (https://faq.cgeo.org)를 보거나 사용 설명서 (https://manual.cgeo.org)를 참조하십시오.
 여전히 문제가 있으면 이메일을 통해 지원 부서에 문의하십시오.
 
-c:geo에 요청 된 권한이 필요한 이유를 알고 싶다면 https://www.cgeo.org에서 설명을 확인하십시오.
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.
