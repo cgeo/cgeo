@@ -10,7 +10,7 @@ It does not require a web browser or exports - just download and start right awa
 
 Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/issues) before hacking** on your great new feature.
 It would be bad for you to have implemented something great but we can't include it because it doesn't fit the existing architecture and code.
-You might also want to chat with the developers on channel #cgeo on the freenode IRC network.
+You might also want to chat with the developers on channel [#cgeo](https://webchat.freenode.net/#cgeo) on the freenode IRC network.
 
 ### Starting points for contribution
 
