@@ -907,27 +907,27 @@
     <string name="cache_offline_time_mins_few">a few minutes ago</string>
     <plurals name="cache_offline_about_time_mins">
         <item quantity="zero">about %d minutes ago</item>
-		<item quantity="one">about %d minute ago</item>
+        <item quantity="one">about %d minute ago</item>
         <item quantity="two">about %d minutes ago</item>
         <item quantity="few">about %d minutes ago</item>
         <item quantity="many">about %d minutes ago</item>
-		<item quantity="other">about %d minutes ago</item>
+        <item quantity="other">about %d minutes ago</item>
     </plurals>
     <plurals name="cache_offline_about_time_hours">
         <item quantity="zero">about %d hours ago</item>
-		<item quantity="one">about %d hour ago</item>
+        <item quantity="one">about %d hour ago</item>
         <item quantity="two">about %d hours ago</item>
         <item quantity="few">about %d hours ago</item>
         <item quantity="many">about %d hours ago</item>
-		<item quantity="other">about %d hours ago</item>
+        <item quantity="other">about %d hours ago</item>
     </plurals>
     <plurals name="cache_offline_about_time_days">
         <item quantity="zero">about %d days ago</item>
-		<item quantity="one">about %d day ago</item>
+        <item quantity="one">about %d day ago</item>
         <item quantity="two">about %d days ago</item>
         <item quantity="few">about %d days ago</item>
         <item quantity="many">about %d days ago</item>
-		<item quantity="other">about %d days ago</item>
+        <item quantity="other">about %d days ago</item>
     </plurals>
     <plurals name="cache_offline_about_time_months">
         <item quantity="zero">about %d months ago</item>
@@ -1116,7 +1116,6 @@
     <string name="cache_share_field">Share</string>
     <string name="cache_time_full_hours">o\'clock</string>
     <string name="cache_listed_on">Listed on %s</string>
-
 
 
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
@@ -1314,8 +1313,8 @@
     <string name="search_address_started">Searching for places</string>
     <string name="search_address_result">Found places</string>
     <string name="search_own_caches">Search my caches</string>
-	<string name="search_pocket_title">Pocket Query</string>
-	<string name="search_pocket_loading">Loading a list of Pocket Queries</string>
+    <string name="search_pocket_title">Pocket Query</string>
+    <string name="search_pocket_loading">Loading a list of Pocket Queries</string>
 
     <!-- trackable -->
     <string name="trackable">Trackable</string>
@@ -1353,7 +1352,7 @@
     <string name="geokret_type_coin">Coin</string>
     <string name="geokret_type_post">Mail</string>
 
-	<!-- user -->
+    <!-- user -->
     <string name="user_menu_title">About</string>
     <string name="user_menu_view_hidden">Caches hidden</string>
     <string name="user_menu_view_found">Caches found</string>
@@ -1913,7 +1912,7 @@
     <string name="map_clear_manual_targets">Clear manual targets</string>
     <string name="map_manual_targets_cleared">Manual targets cleared</string>
     <string name="map_clear_individual_route">Clear individual route</string>
-    <string name="map_clear_individual_route_confirm">Do you want to remove all caches/waypoints from your individual route?</string>>
+    <string name="map_clear_individual_route_confirm">Do you want to remove all caches/waypoints from your individual route?</string>
     <string name="map_individual_route_cleared">Individual route cleared</string>
     <string name="save_sorted_route">Save</string>
     <string name="sorted_route_saved">Individual route saved</string>
