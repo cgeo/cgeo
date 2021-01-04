@@ -603,7 +603,7 @@ public final class Dialogs {
         }
 
         if (cancellable) {
-            builder.setNeutralButton(android.R.string.cancel, null);
+            builder.setNegativeButton(android.R.string.cancel, null);
         }
 
         builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
@@ -618,7 +618,7 @@ public final class Dialogs {
 
         if (cancellable) {
             checkbox.setOnClickListener(result -> {
-                final Button button = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+                final Button button = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
                 button.setEnabled(!checkbox.isChecked());
             });
         }
