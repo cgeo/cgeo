@@ -27,4 +27,4 @@ c:geo易用且强大，具有很多额外的功能。 只需要一个geocaching.
 如果你在安装或使用c:geo的过程中遇到了问题，请先看一下我们的FAQ（https://faq.cgeo.org）或者查阅用户指南（https://manual.cgeo.org）。
 如果以上两个都没有解决你的问题，那就通过电子邮件联系支持吧。
 
-如果你想知道c:geo所请求的权限信息，请查看http://www.cgeo.org。
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.
