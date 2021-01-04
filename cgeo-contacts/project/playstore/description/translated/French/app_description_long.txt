@@ -9,4 +9,4 @@ Afin que le plugin puisse associer l'utilisateur géocaching et votre contact, l
 Il n'est pas possible de répondre aux commentaires sur le Play Store ! Si vous rencontrez des problèmes d'installation ou d'utilisation de c:geo, veuillez d'abord consulter notre FAQ sur https://faq.cgeo.org
 Si des problèmes persistent, contactez le support par courriel.
 
-Si vous voulez savoir pourquoi ce plugin c:geo a besoin de certaines permissions, consultez https://www.cgeo.org/faq.html#plugin-contacts-privacy.
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
