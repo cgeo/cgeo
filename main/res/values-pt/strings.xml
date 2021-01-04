@@ -1816,26 +1816,16 @@
     <string name="next">Próximo</string>
     <string name="finish">Concluído</string>
     <string name="wizard_welcome_title">Bem-vindo ao c:geo</string>
-    <string name="wizard_intro">Parece que é a primeira vez que o c:geo é usado neste dispositivo. Devo ajuda-lo a configurá-lo? São apenas alguns passos.</string>
-    <string name="wizard_intro2">Bem-vindo de volta ao assistente de configuração. São apenas alguns passos.</string>
     <string name="wizard_outro_ok">Obrigado por configurar o c:geo.\nDivirta-se!</string>
     <string name="wizard_outro_error">Configuração incompleta\nNem todas as partes do c:geo funcionarão como esperado!</string>
     <string name="wizard_permissions_title">Definir autorizações da aplicação</string>
-    <string name="wizard_permissions_intro">O c:geo precisa de certas permissões para funcionar correctamente. Vou explicá-las nos próximos passos.\nSem essas permissões não poderá usar c:geo.</string>
-    <string name="wizard_platforms_title">Configurar plataformas</string>
-    <string name="wizard_platforms_intro">Para transferir caches, precisa de uma conta de, pelo menos, uma das plataformas de geocaching suportadas pelo c:geo</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
-    <string name="wizard_platforms_others">Opencaching &amp; mais</string>
     <string name="wizard_welcome_advanced">Configurações avançadas</string>
     <string name="wizard_advanced_offlinemaps_label">Mapas offline</string>
-    <string name="wizard_advanced_offlinemaps_info">O c:geo pode transferir ficheiros de mapas para quando esteja off-line</string>
     <string name="wizard_advanced_brouter_label">Aplicação de navegação</string>
-    <string name="wizard_advanced_brouter_info">O c:geo pode navegar para um ponto e mostrar informação da rota no seu mapa ao instalar e configurar a aplicação \"BRouter Offline Navigation\"</string>
     <string name="wizard_advanced_restore_label">Restaurar</string>
-    <string name="wizard_advanced_restore_info">Restaurar definições / dados de uma instalação anterior</string>
     <string name="status_not_ok">ERRO</string>
     <string name="wizard_status_title">Estado da configuração</string>
     <string name="wizard_status_storage_permission">Permissão de armazenamento</string>
     <string name="wizard_status_location_permission">Permissão de localização</string>
-    <string name="wizard_status_platform">Plataformas de Geocaching</string>
 </resources>
