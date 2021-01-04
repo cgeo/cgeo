@@ -604,7 +604,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         builder.setTitle(R.string.map_theme_select);
 
         builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem, (dialog, newItem) -> {
-            if (newItem != selectedItem) {
+            // selected a new item - or: only default available
+            if (newItem != selectedItem || names.size() == 1) {
                 // Adjust index because of <default> selection
                 if (newItem > 0) {
                     Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
