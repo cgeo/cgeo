@@ -190,7 +190,7 @@ public class BackupUtils extends Activity {
 
         final File[] dirs = getDirsToRemove(Settings.allowedBackupsNumber());
         if (dirs != null) {
-            Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, activityContext.getString(R.string.init_backup_backup), activityContext.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs[dirs.length - 1])), true, null, () -> {
+            Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, activityContext.getString(R.string.init_backup_backup), activityContext.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs[dirs.length - 1])), null, true, null, () -> {
                 LocalStorage.deleteFilesOrDirectories(dirs);
                 backupInternal(runAfterwards);
             });
