@@ -27,4 +27,4 @@ Søg og find trackables, styr din trackable-beholdning og læg en trackable samm
 Har du problemer med at installere eller bruge c:geo skal du først kigge i vores FAQ (https://faq.cgeo.org) eller brugervejledningen (https://manual.cgeo.org).
 Hvis du stadig har problemer kan du skrive til vores support på e-mail.
 
-Hvis du gerne vil vide hvorfor c:geo har brug for de tilladelser, der er anmodet om, så læs på https://www.cgeo.org.
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.
