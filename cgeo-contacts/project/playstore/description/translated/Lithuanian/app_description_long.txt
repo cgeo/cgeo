@@ -9,4 +9,4 @@ Vartotojo kontaktas turi būti išsaugotas tokiu pačiu vardu ar slapyvardžiu k
 Deja, tačiau į jūsų komentarus PlayStore programėle atsakyti negalime! Jeigu instaliuojant ar besinaudojant c:geo programėle kiltų kokių nors klausimų, pirmiausia prašome pasitikrinti tarp DUK šioje nuorodoje: https://faq.cgeo.org
 Jeigu nerasite problemos sprendimo, parašykite mums el. paštu.
 
-Jeigu norėtumėte sužinoti, kodėl dėl šio papildinio programėlėje jūs turite sutikti su papildomais leidimais, galite tai išsiaiškinti čia: https://www.cgeo.org/faq.html#plugin-contacts-privacy
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
