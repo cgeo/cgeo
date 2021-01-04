@@ -54,7 +54,6 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -610,7 +609,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         AndroidBeam.disable(activity);
 
-        Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
+        MapUtils.showMapOneTimeMessages(activity);
     }
 
     public void toggleRouteItem(final IWaypoint item) {
