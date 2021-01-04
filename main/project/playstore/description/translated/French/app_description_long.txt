@@ -27,4 +27,4 @@ Cherchez et découvrez des objets voyageurs, gérez les depuis votre inventaire 
 Si vous rencontrez des problèmes d'installation ou d'utilisation de c:geo, veuillez d'abord consulter notre FAQ (https://faq.cgeo.org) ou consulter le guide de l'utilisateur (https://manual.cgeo.org).
 Si des problèmes persistent, contactez le support par courriel.
 
-Si vous souhaitez en savoir plus sur les autorisations requises par c:geo, veuillez consulter https://www.cgeo.org .
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.
