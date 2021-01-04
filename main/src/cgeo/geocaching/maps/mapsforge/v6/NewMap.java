@@ -647,10 +647,12 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 Log.w("Failed to set render theme", e);
                 ActivityMixin.showApplicationToast(getString(R.string.err_rendertheme_file_unreadable));
                 rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+                Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
             } catch (final XmlPullParserException e) {
                 Log.w("render theme invalid", e);
                 ActivityMixin.showApplicationToast(getString(R.string.err_rendertheme_invalid));
                 rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+                Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
             }
         }
         tileCache.purge();
