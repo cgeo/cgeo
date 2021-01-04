@@ -27,4 +27,4 @@ c:geo - це простий у використанні, але потужний
 Якщо у вас виникли проблеми встановлення або використання c:geo, будь ласка, спочатку перегляньте наші FAQ (https://faq.cgeo.org) або зверніться до посібника користувача (https://manual.cgeo.org).
 Якщо виникнуть проблеми, зв’яжіться зі службою підтримки по електронній пошті.
 
-Якщо ви хочете дізнатися, чому цей c:geo плагін потребує дозволів, будь ласка, перегляньте https://www.cgeo.org для пояснення.
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.
