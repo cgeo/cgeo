@@ -32,6 +32,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.R.string;
@@ -223,7 +224,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private void initCacheDetailsPreference() {
         final CheckBoxPreference customTabsPreference = (CheckBoxPreference) getPreference(R.string.pref_customtabs_as_browser);
-        if (!ShareUtils.isChromeLaunchable()) {
+        if (!ProcessUtils.isChromeLaunchable()) {
             customTabsPreference.setEnabled(false);
             customTabsPreference.setChecked(false);
         }

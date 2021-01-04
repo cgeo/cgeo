@@ -4,13 +4,16 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.ShareBroadcastReceiver;
+import cgeo.geocaching.settings.StartWebviewActivity;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import static cgeo.geocaching.utils.ProcessUtils.CHROME_PACKAGE_NAME;
 
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,9 +27,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+
 public class ShareUtils {
 
-    public static final String CHROME_PACKAGE_NAME = "com.android.chrome";
     public static final String TYPE_EMAIL = "message/rfc822";
     public static final String TYPE_TEXT = "text/plain";
 
@@ -136,14 +139,14 @@ public class ShareUtils {
 
     }
 
-    /* Opens a URL in browser, in the registered default application or if activated by the user in the settings with customTabs */
+    /** Opens a URL in browser, in the registered default application or if activated by the user in the settings with customTabs */
     public static void openUrl(final Context context, final String url, final boolean forceIntentChooser) {
         if (StringUtils.isBlank(url)) {
             return;
         }
 
         try {
-            if (Settings.getUseCustomTabs() && isChromeLaunchable()) {
+            if (Settings.getUseCustomTabs() && ProcessUtils.isChromeLaunchable()) {
                 openCustomTab(context, url);
                 return;
             }
@@ -154,6 +157,11 @@ public class ShareUtils {
             if (forceIntentChooser) {
                 final Intent chooser = Intent.createChooser(viewIntent, context.getString(R.string.cache_menu_browser));
                 chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+
+                final Intent customTabs = new Intent(context, StartWebviewActivity.class);
+                customTabs.setData(Uri.parse(url));
+                chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[] {customTabs});
+
                 context.startActivity(chooser);
             } else {
                 context.startActivity(viewIntent);
@@ -165,7 +173,8 @@ public class ShareUtils {
         }
     }
 
-    private static void openCustomTab(final Context context, final String url) {
+    /** Don't call this method, if you don't know whether Chrome is installed */
+    public static void openCustomTab(final Context context, final String url) {
         final CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder()
             .setUrlBarHidingEnabled(true)
             .setShowTitle(true)
@@ -179,9 +188,5 @@ public class ShareUtils {
         // custom tabs API was restricted to chrome as other browsers like firefox may loop back to c:geo (as of September 2020)
         customTabsIntent.intent.setPackage(CHROME_PACKAGE_NAME);
         customTabsIntent.launchUrl(context, Uri.parse(url));
-    }
-
-    public static boolean isChromeLaunchable() {
-        return ProcessUtils.isLaunchable(CHROME_PACKAGE_NAME);
     }
 }

@@ -798,6 +798,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".settings.StartWebviewActivity"
+            android:icon="@mipmap/ic_webview"
+            android:label="@string/settings_open_website">
+        </activity>
+
         <activity
             android:name=".filter.FilterActivity_"
             android:label="@string/caches_filter_title" >
