@@ -17,6 +17,7 @@ import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
+import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -1443,7 +1444,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final Observable<Geocache> allCaches;
         allCaches = Observable.fromIterable(caches);
         final Observable<Geocache> loaded = allCaches.flatMap((Function<Geocache, Observable<Geocache>>) cache -> Observable.create((ObservableOnSubscribe<Geocache>) emitter -> {
-            cache.refreshSynchronous(null, additionalListIds);
+            if (!(Settings.getGCMemberStatus() == GCMemberState.BASIC && cache.isPremiumMembersOnly())) {
+                cache.refreshSynchronous(null, additionalListIds);
+            }
             detailProgress.incrementAndGet();
             handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
             emitter.onComplete();
