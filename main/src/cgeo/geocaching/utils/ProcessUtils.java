@@ -21,6 +21,8 @@ import org.apache.commons.collections4.CollectionUtils;
 
 public final class ProcessUtils {
 
+    public static final String CHROME_PACKAGE_NAME = "com.android.chrome";
+
     private ProcessUtils() {
         // utility class
     }
@@ -31,6 +33,10 @@ public final class ProcessUtils {
      */
     public static boolean isLaunchable(@Nullable final String packageName) {
         return getLaunchIntent(packageName) != null;
+    }
+
+    public static boolean isChromeLaunchable() {
+        return ProcessUtils.isLaunchable(CHROME_PACKAGE_NAME);
     }
 
     /**
