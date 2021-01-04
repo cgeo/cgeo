@@ -9,4 +9,4 @@ Nazwa użytkownika musi być przechowywana w polu imienia Twoich kontaktów, aby
 Komentarze w PlayStore nie mogą być odpowiedzią! Jeśli masz problemy z instalacją lub korzystaniem z c:geo, najpierw zapoznaj się z naszym FAQ: https://faq.cgeo.org
 Jeśli nadal występują problemy, skontaktuj się z pomocą techniczną za pośrednictwem poczty e-mail.
 
-Jeśli chcesz wiedzieć, dlaczego ta wtyczka c:geo potrzebuje żądanych uprawnień, sprawdź https://www.cgeo.org/faq.html#plugin-contacts-privacy w celu uzyskania wyjaśnienia.
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
