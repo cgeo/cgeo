@@ -9,4 +9,4 @@ Käyttäjänimi tulee olla tallennettuna yhteystiedon nimi- tai toinen nimi -ken
 Emme voi vastata Play Kauppaan jätettyihin kommentteihin! Jos sinulla on ongelmia c:geon asentamisessa tai käyttämisessä, tarkistathan FAQ:n ensin (englanniksi): https://faq.cgeo.org
 Jos ongelmia esiintyy edelleen, ota yhteys meihin sähköpostilla.
 
-Jos haluat tietää, miksi tämä c:geon lisäosa tarvitsee pyydettyjä lupia, tarkan selonteon englanniksi löydät osoitteesta https://www.cgeo.org/faq.html#plugin-contacts-privacy.
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
