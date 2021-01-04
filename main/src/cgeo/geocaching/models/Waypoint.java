@@ -11,6 +11,7 @@ import cgeo.geocaching.location.GeopointWrapper;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -704,9 +705,18 @@ public class Waypoint implements IWaypoint {
         }
         // for other types add an index by default, which is highest found index + 1
         int max = 0;
-        for (int i = 0; i < 30; i++) {
-            if (wpNames.contains(type.getL10n() + " " + i) || wpNames.contains(type.getNameForNewWaypoint() + " " + i)) {
-                max = i;
+        final Pattern p = Pattern.compile("[^0-9]*([0-9]*)");
+        for (String wpName : wpNames) {
+            final MatcherWrapper match = new MatcherWrapper(p, wpName);
+            while (match.find()) {
+                try {
+                    final int i = Integer.parseInt(match.group(1));
+                    if (i > max) {
+                        max = i;
+                    }
+                } catch (NumberFormatException e) {
+                    // ignore
+                }
             }
         }
         return type.getNameForNewWaypoint() + " " + (max + 1);
