@@ -9,4 +9,4 @@ Personens brukernavn må være lagret i kontaktens navn- eller alias-felt for at
 Kommentarer i Play Butikk kan ikke besvares! Hvis du har problemer med å installere eller bruke c:geo, vennligst først ta en titt på vår FAQ: https://faq.cgeo.org
 Dersom det fortsatt er problemer, kontakt kundestøtte via e-post.
 
-Dersom du vil vite hvorfor utvidelsen i c:geo trenger forespurte tillatelser, sjekk https://www.cgeo.org/faq.html#plugin-contacts-privacy for forklaring.
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
