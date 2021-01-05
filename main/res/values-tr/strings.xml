@@ -640,8 +640,6 @@
     <string name="settings_info_themes_title">Harita temalarının bilgisi</string>
     <string name="settings_info_themes">c:geo çevrimdışı haritalar için özel temaları destekler. Bunlar, haritanın renk stilini değiştirmek (örn.bir gece görüş haritasına sahip olmak) veya harita içindeki döngü yolları veya yükseklik çizgileri gibi belirli nesneleri vurgulamak için kullanılabilir.</string>
     <string name="init_mapsource_select">Harita kaynağı seçin</string>
-    <string name="settings_title_scale_map_text">Harita metni ölçeği</string>
-    <string name="settings_summary_scale_map_text">Çevrimdışı haritadaki metin etiketlerini aygıt çözünürlüğüne göre ölçeklendirme</string>
     <string name="init_map_directory_description">Çevrimdışı haritalar dizini</string>
     <string name="init_gpx_exportdir">GPX Dışa Aktarım Dizini</string>
     <string name="init_gpx_importdir">GPX İçe Aktarım Dizini</string>
