@@ -50,9 +50,8 @@ android {
         applicationId = "cgeo.geocaching"
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project at https://crowdin.com/project/cgeo
-        // not yet enough translations (~50%): "is","iw"(="he"),"lb","uk","zh","zh-rTW"
-        // activated for testing: "uk"
-        def locales = [ "en","ar","ca","ceb","cs","da","de","el","es","fi","fil","fr","hu","in","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tl","tr","uk" ]
+        // not yet enough translations (~50%): "is","iw"(="he"),"lb","zh-rTW"
+        def locales = [ "en","ar","ca","ceb","cs","da","de","el","es","fi","fil","fr","hu","in","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tl","tr","uk","zh" ]
 
         // needed for in-app language selector
         buildConfigField "String[]", "TRANSLATION_ARRAY", "new String[]{\""+locales.join("\",\"")+"\"}"
