@@ -640,8 +640,6 @@
     <string name="settings_info_themes_title">Informacija apie žemėlapio temas</string>
     <string name="settings_info_themes">c:geo palaiko temas skirtas išsaugotiems žemėlapiams. Jos gali keisti žemėlapio spalvų stilių (pvz. naktinis stilius) arba atkreipti dėmesį į tam tikrus objektus, kaip dviračių takai arba aukščio linijos žemėlapyje.</string>
     <string name="init_mapsource_select">Pasirinkite žemėlapio šaltinį</string>
-    <string name="settings_title_scale_map_text">Teksto dydis žemėlapyje</string>
-    <string name="settings_summary_scale_map_text">Teksto dydis išsaugotame žemėlapyje nustatomas automatiškai pagal įrengino dpi</string>
     <string name="init_map_directory_description">Katalogas su išsaugotais žemėlapiais</string>
     <string name="init_gpx_exportdir">GPX eksportavimo katalogas</string>
     <string name="init_gpx_importdir">GPX importavimo katalogas</string>
