@@ -640,8 +640,6 @@
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
     <string name="settings_info_themes">c:geo prend en charge des thèmes personnalisés pour les cartes en mode hors-ligne. Ils peuvent être utilisés pour modifier le style de couleur de la carte (par exemple avoir une vue de nuit) ou mettre en évidence certains objets comme les pistes cyclables ou les courbes de niveau.</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
-    <string name="settings_title_scale_map_text">Zoom du texte</string>
-    <string name="settings_summary_scale_map_text">Mise à l\'échelle des textes sur la carte hors-ligne en fonction de la résolution de l\'appareil</string>
     <string name="init_map_directory_description">Dossier cartes hors-ligne</string>
     <string name="init_gpx_exportdir">Dossier d\'export GPX</string>
     <string name="init_gpx_importdir">Dossier d\'import GPX</string>
@@ -945,6 +943,7 @@
     <string name="menu_caches">Gérer les caches</string>
     <string name="cache_menu_event">Ajouter à l\'agenda</string>
     <string name="cache_menu_extract_waypoints">Extraire les points de passage</string>
+    <string name="cache_menu_set_cache_icon">Définir l\'icône de la cache</string>
     <string name="cache_menu_details">Détails</string>
     <string name="cache_menu_refresh"> Actualiser</string>
     <string name="cache_menu_share">Partager la cache</string>
