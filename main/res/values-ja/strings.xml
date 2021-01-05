@@ -647,8 +647,6 @@
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
     <string name="settings_info_themes">オフライン地図用のテーマが使用できます。カラースタイル(ナイトビュー用などに)を変更したり、自転車道や等高線など特定のオブジェクトをハイライトすることができます</string>
     <string name="init_mapsource_select">地図の選択</string>
-    <string name="settings_title_scale_map_text">文字の拡大縮小</string>
-    <string name="settings_summary_scale_map_text">デバイスのdpiによってオフライン地図の文字を拡大/縮小</string>
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
     <string name="init_gpx_exportdir">GPXエクスポートフォルダ</string>
     <string name="init_gpx_importdir">GPXインポートフォルダ</string>
