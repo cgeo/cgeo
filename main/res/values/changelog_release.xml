@@ -25,6 +25,7 @@
 <li>New: Allow deleting original waypoint for user-defined caches (effectively allowing changing cache coordinates for UDC)</li>
 <li>Change: Field note encoding: Charset changed to UTF16 LE</li>
 <li>Fix: Skip PM-only caches on storing if logged in as basic member</li>
+<li>Fix: Wrong image size on adding log image from gallery</li>
 </ul>
 
 <h4>Other:</h4>

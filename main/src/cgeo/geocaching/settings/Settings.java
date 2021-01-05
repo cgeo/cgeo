@@ -1343,7 +1343,13 @@ public class Settings {
     }
 
     public static int getLogImageScale() {
-        return getInt(R.string.pref_logImageScale, -1);
+        final int scale = getInt(R.string.pref_logImageScale, -1);
+
+        //accomodate for legacy values which might be stored in preferences from former c:geo versions. See Issue #9655
+        if (scale < 0) {
+            return -1;
+        }
+        return scale < 512 ? 512 : scale;
     }
 
     public static void setLogImageScale(final int scale) {
