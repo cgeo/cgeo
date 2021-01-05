@@ -9,4 +9,4 @@ O nome de utilizador da pessoa precisa estar no campo do nome ou da alcunha dos 
 Os comentários na PlayStore não podem ser respondidos! Se tiver problemas ao instalar ou usar o c:geo, por favor veja primeiro as nossas FAQ: https://faq.cgeo.org
 Se ainda houver problemas, entre em contacto com o suporte via e-mail.
 
-Se quiser saber porque esta extensão do c:geo precisa das permissões solicitadas, por favor verifique em https://www.cgeo.org/faq.html#plugin-contacts-privacy para uma explicação.
+Se gostaria de saber o motivo desta extensão do c:geo precisar das permissões solicitadas, por favor consulte este artigo: https://www.cgeo.org/faq.html#plugin-contacts-privacy
