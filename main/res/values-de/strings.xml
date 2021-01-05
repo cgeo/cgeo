@@ -648,8 +648,6 @@
     <string name="settings_info_themes_title">Info zu Karten-Themes</string>
     <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
-    <string name="settings_title_scale_map_text">Textgröße anpassen</string>
-    <string name="settings_summary_scale_map_text">Textgröße der Bezeichnungen auf der Offline-Karte entsprechend der Bildschirmauflösung anpassen</string>
     <string name="init_map_directory_description">Verzeichnis mit Offline-Karten</string>
     <string name="init_gpx_exportdir">Verzeichnis für GPX-Exporte</string>
     <string name="init_gpx_importdir">Verzeichnis für GPX-Importe</string>
