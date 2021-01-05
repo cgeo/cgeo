@@ -1,7 +1,11 @@
 package cgeo.geocaching.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.FolderStorage;
+
+import android.net.Uri;
+
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 public class LogWriter {
@@ -58,12 +62,17 @@ public class LogWriter {
 
     private void checkLogfile() {
         if (null == logWriter && Log.isDebug()) {
-            final File logfile = FileUtils.getUniqueNamedLogfile(prefix, "txt");
             try {
-                logWriter = new PrintWriter(logfile);
-                log("begin logging to file " + logfile.getPath());
-            } catch (FileNotFoundException e) {
-                // ignore error
+                final Uri logWriterFile = FolderStorage.get().create(ConfigurableFolder.LOGFILES, FileNameCreator.LOGFILE, false);
+                if (logWriterFile == null) {
+                    Log.w("Could not create LogWriter-File");
+                    return;
+                }
+                logWriter = new PrintWriter(new OutputStreamWriter(FolderStorage.get().openForWrite(logWriterFile)));
+                log("begin logging to file " + logWriterFile);
+            } catch (Exception e) {
+                Log.w("Problem while creating LogWrilter", e);
+                // ignore any error
             }
         }
     }

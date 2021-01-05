@@ -98,7 +98,7 @@ public class FolderStorageTest extends CGeoTestCase {
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
 
         //move
-        FolderUtils.get().deleteAll(targetFolder);
+        assertThat(FolderUtils.get().deleteAll(targetFolder)).isTrue();
         result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
         assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 7, 3));
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false), "[]");

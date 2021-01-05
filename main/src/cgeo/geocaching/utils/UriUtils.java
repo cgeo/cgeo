@@ -7,8 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * Utility class prvoding helper methods when dealing with Uris
@@ -92,6 +94,48 @@ public final class UriUtils {
             return uri;
         }
         return Uri.withAppendedPath(uri, pathToAppend);
+    }
+
+    /**
+     * Returns a PSEUDO-Uri based on given Root and appended paths. This can be used e.g. as cache key or for logging.
+     * The returned string is guaranteed to be unique fpr given root uri and paths.
+     *
+     * Note that the returned Uri String CAN'T and SHOULDN'T be used to construct an Uri to retrieve documents etc since it is NOT constructred according to its type.
+     * For example, content:-Uris can't be constructed at all and must be queries via ContentResolver
+     *
+     * @param base baseUri
+     * @param subdirs (sub)directories or file
+     * @param max if >=0 then only up to max subdirs are considered. if < 0 then all subdirs are
+     * @return pseudo-uri-string
+     */
+    @NonNull
+    public static String getPseudoUriString(@Nullable final Uri base, @Nullable final List<String> subdirs, final int max) {
+        final StringBuilder key = new StringBuilder("p-").append(base).append("::");
+        if (subdirs != null) {
+            int cnt = 0;
+            for (String subdir : subdirs) {
+                key.append("/").append(subdir);
+                if (max >= 0 && ++cnt >= max) {
+                    break;
+                }
+            }
+        }
+        return key.toString();
+    }
+
+    @Nullable
+    public static Uri parseUri(final String uri) {
+        if (StringUtils.isBlank(uri)) {
+            return null;
+        }
+        final String uriString = uri.trim();
+
+        //legacy case: file names
+        if (uriString.indexOf(":") < 0 && uriString.length() >= 2 && uriString.startsWith("/") && uriString.charAt(1) != '/') {
+            return Uri.fromFile(new File(uriString));
+        }
+
+        return Uri.parse(uriString);
     }
 
     /**

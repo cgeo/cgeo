@@ -29,14 +29,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -149,26 +150,19 @@ public class FolderStorage {
             return "application/octet-stream";
         }
 
-        protected boolean hasFile(@NonNull final Folder folder, @NonNull final String name) throws IOException {
-            for (FileInformation fi : list(folder)) {
-                if (fi.name.equals(name)) {
-                    return true;
-                }
-            }
-            return false;
-        }
 
-        protected String createUniqueFilename(@NonNull final Folder dir, @NonNull final String docName) throws IOException {
+
+        protected String createUniqueFilename(@NonNull final String requestedName, @NonNull final List<String> existingNames) {
 
             //split in suffix and praefix
-            final int suffIdx = docName.lastIndexOf(".");
-            final String suffix = suffIdx >= 0 ? docName.substring(suffIdx) : "";
-            final String praefix = suffIdx >= 0 ? docName.substring(0, suffIdx) : docName;
+            final int suffIdx = requestedName.lastIndexOf(".");
+            final String suffix = suffIdx >= 0 ? requestedName.substring(suffIdx) : "";
+            final String praefix = suffIdx >= 0 ? requestedName.substring(0, suffIdx) : requestedName;
 
             String newPraefix = praefix;
 
             int idx = 1;
-            while (hasFile(dir, newPraefix + suffix)) {
+            while (existingNames.contains(newPraefix + suffix)) {
                 newPraefix = praefix + " (" + (idx++) + ")";
             }
 
@@ -193,7 +187,7 @@ public class FolderStorage {
             if (dir == null) {
                 return null;
             }
-            final String fileName = createUniqueFilename(folder, name);
+            final String fileName = createUniqueFilename(name, Arrays.asList(dir.list()));
             try {
                 final File newFile = new File(dir, fileName);
                 return newFile.createNewFile() ? Uri.fromFile(newFile) : null;
@@ -265,7 +259,24 @@ public class FolderStorage {
         }
     }
 
-    /** Implementation for SAF/Document-based folders */
+    /**
+     * Implementation for SAF/Document-based folders
+     *
+     * Implementation notes: simply implementing SAF Document access using DocumentFile and related classes
+     * yields simply unacceptable performance, because underneath these classes issue queries on almost every
+     * method (e.g. isDirectory(), getType() and the like...). Therefore the current implementation uses
+     * direct querying against ContentResolver.
+     *
+     * Document Framework does not efficiently (wrt performance) allow to work with subdirectories: Uris can't be build by a certain rule
+     * and only querying of one folder content is possible. In order to efficiently deal with subfolder structures, an LRU
+     * Uri cache was introduced (folderUriCache).
+     * Unfortunately Document Framework does also not allow for efficient check whether a (cached) Uri
+     * is still valid (it is not if e.g. the underlying doc was deleted externally of c:geo), so a two-pass algorithm was implemented
+     * where the cache value is trusted in a first attempt and only refreshed if this triggered an exception.
+     *
+     * It must be noted that despite all effort Document framework is simply very slow esp when compared to File framework.
+     * Reading methods ( e.g. list()) take up to 5ms and writing methods (e.g. create(), delete()) up to 10ms! Found no way around this...
+     */
     private static class DocumentFolderAccessor extends FolderAccessor {
 
         /** cache for Uri permissions */
@@ -279,12 +290,6 @@ public class FolderStorage {
             }
         });
 
-        /** Statistics wrt query times */
-        private AtomicLong queryDirCount = new AtomicLong(0);
-        private AtomicLong queryDirTime = new AtomicLong(0);
-        private AtomicLong queryDocCount = new AtomicLong(0);
-        private AtomicLong queryDocTime = new AtomicLong(0);
-
         DocumentFolderAccessor(@NonNull final Context context) {
             super(context);
             refreshUriPermissionCache();
@@ -292,18 +297,37 @@ public class FolderStorage {
 
         @Override
         public boolean delete(@NonNull final Uri uri) throws IOException {
-            return DocumentsContract.deleteDocument(getContext().getContentResolver(), uri);
+            removeFromUriCache(uri); //very important to prevent IllegalArgumentExceptions due to nonexisting Uris!
+            try {
+                return DocumentsContract.deleteDocument(getContext().getContentResolver(), uri);
+            } catch (IllegalArgumentException iae) {
+                //this happens if uri is invalid, e.g. because document or containing folder was deleted externally to c:geo
+                Log.d("Exception on trying to delete '" + uri + "' (assuming it was invalid): " + iae);
+                return false;
+            }
         }
 
         @Override
         public Uri create(@NonNull final Folder folder, @NonNull final String name) throws IOException {
-            final Uri folderFile = getFolderUri(folder, true, true);
-            if (folderFile == null) {
+            try {
+                return createInternal(folder, name, false);
+            } catch (IllegalArgumentException iae) {
+                //This can happen if the folder uri is illegal, e.g. because the folder was deleted outside c:geo in the meantime and our cache is outdated.
+                //-> cleanup cache and try again
+                return createInternal(folder, name, true);
+            }
+        }
+
+        private Uri createInternal(@NonNull final Folder folder, @NonNull final String name, final boolean validateCache) throws IOException {
+            final Uri folderUri = getFolderUri(folder, true, true, validateCache);
+            if (folderUri == null) {
                 return null;
             }
-            final String docName = createUniqueFilename(folder, name);
-            //Do NOT pass a mimeType. It will then be selected based on the file suffix.
-            return DocumentsContract.createDocument(getContext().getContentResolver(), folderFile, null, docName);
+            final String docName = createUniqueFilename(name, queryDir(folderUri, new String[]{ DocumentsContract.Document.COLUMN_DISPLAY_NAME }, c -> c.getString(0)));
+            try (ContextLogger cLog = new ContextLogger("DocumentFolderAccessor.create %s: %s", folder, name)) {
+                //Do NOT pass a mimeType. It will then be selected based on the file suffix.
+                return DocumentsContract.createDocument(getContext().getContentResolver(), folderUri, null, docName);
+            }
         }
 
         @Override
@@ -320,7 +344,15 @@ public class FolderStorage {
 
         @Override
         public List<FileInformation> list(@NonNull final Folder folder) throws IOException {
-            final Uri dir = getFolderUri(folder, false, false);
+            try {
+                return listInternal(folder, false);
+            } catch (IllegalArgumentException iae) {
+                return listInternal(folder, true);
+            }
+        }
+
+        private List<FileInformation> listInternal(@NonNull final Folder folder, final boolean validateCache) throws IOException {
+            final Uri dir = getFolderUri(folder, false, false, validateCache);
             if (dir == null) {
                 return Collections.emptyList();
             }
@@ -350,12 +382,17 @@ public class FolderStorage {
 
         @Override
         public boolean ensureFolder(@NonNull final Folder folder, final boolean needsWrite) throws IOException {
-            return getFolderUri(folder, needsWrite, true) != null;
+            //we have to validate cache for this one, otherwise outdated entries may lead to a false-positive
+            return getFolderUri(folder, needsWrite, true, true) != null;
         }
 
         @Override
         public Uri getUriForFolder(@NonNull final Folder folder) throws IOException {
-            return getFolderUri(folder, false, false);
+            try {
+                return getFolderUri(folder, false, false, false);
+            } catch (IllegalArgumentException iae) {
+                return getFolderUri(folder, false, false, true);
+            }
         }
 
         @Override
@@ -372,12 +409,12 @@ public class FolderStorage {
          * @param folder folder to get file for
          * @return file folder, or null if creation/retrieving was not at all possible
          */
-        private Uri getFolderUri(final Folder folder, final boolean needsWrite, final boolean createIfNeeded) throws IOException {
+        private Uri getFolderUri(final Folder folder, final boolean needsWrite, final boolean createIfNeeded, final boolean validateCache) throws IOException {
             if (folder == null) {
                 return null;
             }
 
-            try (ContextLogger cLog = new ContextLogger("DocumentFileAccessor.getFolderUri: %s", folder)) {
+            try (ContextLogger cLog = new ContextLogger("DocumentFolderAccessor.getFolderUri: %s", folder)) {
 
                 final Uri treeUri = folder.getBaseUri();
                 if (!checkUriPermissions(treeUri, needsWrite)) {
@@ -385,33 +422,34 @@ public class FolderStorage {
                 }
                 final Uri baseUri = DocumentsContract.buildDocumentUriUsingTree(treeUri, DocumentsContract.getTreeDocumentId(treeUri));
 
-                if (!isDirectory(baseUri, needsWrite)) {
+                if (validateCache && !isValidDirectoryUri(baseUri, needsWrite)) {
                     return null;
                 }
                 cLog.add("got base");
 
-                return getSubdirUri(baseUri, folder.getSubdirsToBase(), needsWrite, createIfNeeded);
+                return getSubdirUri(baseUri, folder.getSubdirsToBase(), needsWrite, createIfNeeded, validateCache);
             }
         }
 
-        private boolean isDirectory(final Uri dirUri, final boolean needsWrite) throws IOException {
-            return queryDoc(dirUri, new String[]{ DocumentsContract.Document.COLUMN_MIME_TYPE, DocumentsContract.Document.COLUMN_FLAGS }, false, c ->
-                DocumentsContract.Document.MIME_TYPE_DIR.equals(c.getString(0)) &&
-                    (!needsWrite || (c.getInt(1) & DocumentsContract.Document.FLAG_DIR_SUPPORTS_CREATE) != 0));
+        private boolean isValidDirectoryUri(final Uri dirUri, final boolean needsWrite) throws IOException {
+            try {
+                return queryDoc(dirUri, new String[]{DocumentsContract.Document.COLUMN_MIME_TYPE, DocumentsContract.Document.COLUMN_FLAGS}, false, c ->
+                    DocumentsContract.Document.MIME_TYPE_DIR.equals(c.getString(0)) &&
+                        (!needsWrite || (c.getInt(1) & DocumentsContract.Document.FLAG_DIR_SUPPORTS_CREATE) != 0));
+            } catch (IllegalArgumentException iae) {
+                //this is thrown if dirUri does not exist
+                return false;
+            }
         }
 
-        private Uri getSubdirUri(@NonNull final Uri baseUri, @NonNull final List<String> subdirs, final boolean needsWrite, final boolean createIfNeeded) throws IOException {
-
-            if (subdirs.isEmpty()) {
-                return baseUri;
-            }
+        private Uri getSubdirUri(@NonNull final Uri baseUri, @NonNull final List<String> subdirs, final boolean needsWrite, final boolean createIfNeeded, final boolean validateCache) throws IOException {
 
             //try to find parent entries in cache
             Uri dir = baseUri;
             int subdirIdx = subdirs.size();
             while (subdirIdx > 0) {
                 final String cacheKey = uriCacheKey(baseUri, subdirs, subdirIdx);
-                final Uri cachedDir = findInUriCache(cacheKey, needsWrite);
+                final Uri cachedDir = findInUriCache(cacheKey, needsWrite, validateCache);
                 if (cachedDir != null) {
                     dir = cachedDir;
                     break;
@@ -468,7 +506,6 @@ public class FolderStorage {
             final Uri childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(dirUri, DocumentsContract.getDocumentId(dirUri));
 
             Cursor c = null;
-            final long startTime = System.currentTimeMillis();
             try {
                 c = resolver.query(childrenUri, columns, null, null, null);
                 while (c.moveToNext()) {
@@ -476,18 +513,12 @@ public class FolderStorage {
                 }
                 return result;
             } catch (IllegalArgumentException iae) {
-                //this is thrown if dirUri does not exist (any more). Handle this gracefully
-                return Collections.emptyList();
+                //this is thrown if dirUri does not exist (any more). Rethrow
+                throw iae;
             } catch (Exception e) {
                 throw new IOException("Failed dir query for '" + dirUri + "' cols [" + CollectionStream.of(columns).toJoinedString(",") + "]", e);
             } finally {
                 closeQuietly(c);
-                final long duration = System.currentTimeMillis() - startTime;
-                final long totalDuration = this.queryDirTime.addAndGet(duration);
-                final long totalCount = this.queryDirCount.addAndGet(1);
-                if (totalCount % 200 == 0) {
-                    Log.iForce("Documents.queryDir Statistics: #" + totalCount + ", total:" + totalDuration + "ms, avg: " + totalDuration / totalCount + "ms");
-                }
             }
 
         }
@@ -496,7 +527,6 @@ public class FolderStorage {
             final ContentResolver resolver = getContext().getContentResolver();
 
             Cursor c = null;
-            final long startTime = System.currentTimeMillis();
             try {
                 c = resolver.query(docUri, columns, null, null, null);
                 if (c.moveToFirst()) {
@@ -505,47 +535,48 @@ public class FolderStorage {
                     return defaultValue;
                 }
             } catch (IllegalArgumentException iae) {
-                //this is thrown if dirUri does not exist (any more). Handle this gracefully
-                return defaultValue;
+                //this is thrown if dirUri does not exist (any more). Rethrow
+                throw iae;
             } catch (Exception e) {
                 throw new IOException("Failed query for '" + docUri + "' cols [" + CollectionStream.of(columns).toJoinedString(",") + "]", e);
             } finally {
                 closeQuietly(c);
-                final long duration = System.currentTimeMillis() - startTime;
-                final long totalDuration = this.queryDocTime.addAndGet(duration);
-                final long totalCount = this.queryDocCount.addAndGet(1);
-                if (totalCount % 200 == 0) {
-                    Log.iForce("Documents.queryDoc Statistics: #" + totalCount + ", total:" + totalDuration + "ms, avg: " + totalDuration / totalCount + "ms");
-                }
             }
         }
 
         private String uriCacheKey(final Uri baseUri, final List<String> subdirs, final int max) {
-            final StringBuilder key = new StringBuilder(baseUri.toString()).append("::");
-            int cnt = 0;
-            for (String subdir : subdirs) {
-                key.append("/").append(subdir);
-                if (max >= 0 && ++cnt >= max) {
-                    break;
-                }
-            }
-            return key.toString();
+            return UriUtils.getPseudoUriString(baseUri, subdirs, max);
         }
 
-        private Uri findInUriCache(final String key, final boolean needsWrite) throws IOException {
-            final Uri cacheEntry = this.folderUriCache.get(key);
-            if (cacheEntry == null) {
-                return null;
+        private Uri findInUriCache(final String key, final boolean needsWrite, final boolean validateCache) throws IOException {
+            synchronized (this.folderUriCache) {
+                final Uri cacheEntry = this.folderUriCache.get(key);
+                if (cacheEntry == null) {
+                    return null;
+                }
+
+                if (validateCache && !isValidDirectoryUri(cacheEntry, needsWrite)) {
+                    this.folderUriCache.remove(key);
+                    return null;
+                }
+                return cacheEntry;
             }
-            if (!isDirectory(cacheEntry, needsWrite)) {
-                this.folderUriCache.remove(key);
-                return null;
-            }
-            return cacheEntry;
         }
 
         private void putToUriCache(final String key, final Uri docUri) {
             this.folderUriCache.put(key, docUri);
+        }
+
+        private void removeFromUriCache(final Uri uri) {
+            final String docUriToString = uri.toString();
+            synchronized (this.folderUriCache) {
+                final Iterator<Map.Entry<String, Uri>> it = this.folderUriCache.entrySet().iterator();
+                while (it.hasNext()) {
+                    if (it.next().getValue().toString().startsWith(docUriToString)) {
+                        it.remove();
+                    }
+                }
+            }
         }
 
         private boolean checkUriPermissions(final Uri uri, final boolean checkWrite) {
@@ -702,11 +733,10 @@ public class FolderStorage {
     /** Lists all direct content of given folder location */
     @NonNull
     public List<FileInformation> list(final Folder folder, final boolean sortByName) {
-
-        if (folder == null) {
-            return Collections.emptyList();
-        }
         try (ContextLogger cLog = new ContextLogger("FolderStorage.list: %s", folder)) {
+            if (folder == null) {
+                return Collections.emptyList();
+            }
             final List<FileInformation> result = getAccessorFor(folder).list(folder);
             cLog.add("#" + result.size());
             if (sortByName) {
@@ -770,6 +800,10 @@ public class FolderStorage {
     }
 
     public OutputStream openForWrite(final Uri uri, final boolean append) {
+        if (uri == null) {
+            return null;
+        }
+
         try {
             //values "wa" (for append) and "rwt" (for overwrite) were tested on SDK21, SDK23, SDk29 and SDK30 using "FolderStorageTest"
             //Note that different values behave differently in different SDKs so be careful before changing them
@@ -780,8 +814,22 @@ public class FolderStorage {
         return null;
     }
 
+    public InputStream openForRead(final Folder folder, final String name) {
+        if (folder == null || name == null) {
+            return null;
+        }
+        final FileInformation fi = getFileInfo(folder, name);
+        if (fi != null) {
+            return openForRead(fi.uri);
+        }
+        return null;
+    }
+
     /** Opens an Uri for reading. Remember to close stream after usage! Returns null if Uri can't be opened for reading. */
     public InputStream openForRead(final Uri uri) {
+        if (uri == null) {
+            return null;
+        }
 
         try {
             return this.context.getContentResolver().openInputStream(uri);
@@ -792,7 +840,6 @@ public class FolderStorage {
     }
 
     public Uri copy(final Uri source, final Folder target, final FileNameCreator newName, final boolean move) {
-
         boolean success = true;
         Exception failureEx = null;
 
@@ -928,20 +975,23 @@ public class FolderStorage {
     }
 
     private void reportProblem(@StringRes final int messageId, final Exception ex, final Object ... params) {
-        final String logMessage = context.getString(messageId, params);
-        Log.w("FolderStorage: " + logMessage, ex);
 
-        //prepare user message
+        //prepare params message
+        final Object[] paramsForLog = new Object[params.length];
         final Object[] paramsForUser = new Object[params.length];
         for (int i = 0; i < params.length; i++) {
             if (params[i] instanceof Folder) {
                 paramsForUser[i] = ((Folder) params[i]).toUserDisplayableString();
+                paramsForLog[i] = params[i] + "(" + getUriForFolder((Folder) params[i]) + ")";
             } else if (params[i] instanceof Uri) {
                 paramsForUser[i] = UriUtils.toUserDisplayableString((Uri) params[i]);
+                paramsForLog[i] = params[i];
             } else {
                 paramsForUser[i] = params[i];
+                paramsForLog[i] = params[i];
             }
         }
+        Log.w("FolderStorage: " + context.getString(messageId, paramsForLog), ex);
         ActivityMixin.showToast(context, context.getString(messageId, paramsForUser));
     }
 

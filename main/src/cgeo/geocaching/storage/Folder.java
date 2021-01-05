@@ -37,11 +37,11 @@ public class Folder {
 
 
     public enum FolderType {
-        /** a 'classic' folder based on a file */
+        /** a 'classic' folder based on a file. Folder locations for this type are immutable */
         FILE,
-        /** Folder based on Storage Access Frameworks and retrieved by {@link android.content.Intent#ACTION_OPEN_DOCUMENT_TREE} */
+        /** Folder based on Storage Access Frameworks and retrieved by {@link android.content.Intent#ACTION_OPEN_DOCUMENT_TREE}. Folder locations for this type are immutable */
         DOCUMENT,
-        /** A Folder based on a ConfigurableFolder */
+        /** (Volatile type) A Folder based on a ConfigurableFolder. Folder locations for this type can change when based folder is reconfigured */
         CONFIGURABLE_FOLDER,
     }
 
@@ -84,17 +84,18 @@ public class Folder {
         }
     }
 
+    /** returns this folder's type. This value is immutable */
     public FolderType getType() {
         return type;
     }
 
-    /** The base Uri (below all subfolders) */
+    /** returns this folder's current BaseUri (below all subfolders). This value is volatile if this folder's type is volatile (e.g. {@link FolderType#CONFIGURABLE_FOLDER}) */
     @NonNull
     public Uri getBaseUri() {
         return configurableFolder != null ? configurableFolder.getFolder().getBaseUri() : this.uri;
     }
 
-    /** The current base type (may never be CONFIGURABLE_FOLDER. This type can change when folder is based on a CONFIGURABLE_FOLDER */
+    /** The current base type, which is always an immutable type (e.g. may never be {@link FolderType#CONFIGURABLE_FOLDER}). Return value is volatile */
     @NonNull
     public FolderType getBaseType() {
         if (configurableFolder != null) {
@@ -103,25 +104,20 @@ public class Folder {
         return getType();
     }
 
+    /** Gets all subdirs down to the base folder's baseUri. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#CONFIGURABLE_FOLDER}) */
     public List<String> getSubdirsToBase() {
         final List<String > result = configurableFolder != null ? configurableFolder.getFolder().getSubdirsToBase() : new ArrayList<>();
         result.addAll(subfolders);
         return result;
     }
 
-    /** If this instance is a subfolder based on a configurablefolder, then this configurablefolder is returned. Otherwise null is returned */
+    /** If this instance is of type {@link FolderType#CONFIGURABLE_FOLDER}, then this configurablefolder is returned. Otherwise null is returned */
     @Nullable
     public ConfigurableFolder getRootConfigurableFolder() {
         return configurableFolder;
     }
 
-//    /** Returns String which is unique for this folder's current location. Can be used e.g. as a cache key */
-//    @NonNull
-//    public String getLocationKey() {
-//        return UriUtils.appendPath(getBaseUri(), CollectionStream.of(getSubdirsToBase()).toJoinedString("/")).toString();
-//    }
-
-    /** Returns a representation of this folder's location fit to show to an end user */
+    /** Returns a representation of this folder's location fit to show to an end user. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#CONFIGURABLE_FOLDER}) */
     @NonNull
     public String toUserDisplayableString() {
         return UriUtils.toUserDisplayableString(UriUtils.appendPath(getBaseUri(), CollectionStream.of(getSubdirsToBase()).toJoinedString("/")));
@@ -173,7 +169,7 @@ public class Folder {
         return new Folder(FolderType.CONFIGURABLE_FOLDER, null, configurableFolder, toFolderNames(subfolder));
     }
 
-    /** Creates Folder instance from a previously deserialized representation using {@link Folder#toConfig()} */
+    /** Creates Folder instance from a previously deserialized representation using {@link Folder#toConfig()}. */
     @Nullable
     public static Folder fromConfig(final String config) {
         if (config == null) {
@@ -186,18 +182,13 @@ public class Folder {
         }
 
         //try parse as an Uri
-        final Uri uri = Uri.parse(config);
+        final Uri uri = UriUtils.parseUri(config);
         if (UriUtils.isFileUri(uri)) {
             return Folder.fromFile(UriUtils.toFile(uri));
         }
         if (UriUtils.isContentUri(uri)) {
             //we suspect that it is a documentUri in this case
             return Folder.fromDocumentUri(uri);
-        }
-
-        //try parse as a file path (Note: this might happening for pre-Android11 legacy Settings entries for Offline Map / Theme)
-        if (config.startsWith("/")) {
-            return Folder.fromFile(new File(config));
         }
 
         //we did our best, giving up now
@@ -245,6 +236,7 @@ public class Folder {
         return this.toConfig(true).hashCode();
     }
 
+    /** returns a config string for this foleer fit for reconstrucvting it using {@link Folder#fromConfig(String)}. This value is ALWAYS immutable even whne folder type is volatile */
     public String toConfig() {
         return toConfig(false);
     }
@@ -266,6 +258,8 @@ public class Folder {
                 }
                 break;
         }
+        //Important: do NOT output getSubdirsToBase() here!
+        //For folders based on other folders with subdirs, this woul lead to false reconstruction with doubled up subfolders
         configString.append(CONFIG_SEP).append(this.subfolderString);
         return configString.toString();
     }
@@ -273,16 +267,14 @@ public class Folder {
     @NotNull
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder(toUserDisplayableString())
-            .append("[")
-            .append(toConfig(false));
-
-        final ConfigurableFolder rootConfigurableFolder = getRootConfigurableFolder();
-        if (rootConfigurableFolder != null) {
-            sb.append(",based on:").append(rootConfigurableFolder.name());
-        }
-
-        return sb.append("]").toString();
+        //We can't print the REAL Uri this Folder points to since this would require a call to FolderStorage
+        return toUserDisplayableString() +
+            "[" +
+            getType() +
+            (getRootConfigurableFolder() == null ? "" : "(" + getRootConfigurableFolder().name() + ")") +
+            "#" + subfolders.size() +
+            ":" + UriUtils.getPseudoUriString(getBaseUri(), getSubdirsToBase(), -1) +
+            "]";
     }
 
     @NonNull

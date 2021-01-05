@@ -34,7 +34,8 @@ public class DebugUtils {
 
     public static void createMemoryDump(@NonNull final Context context) {
         Toast.makeText(context, R.string.init_please_wait, Toast.LENGTH_LONG).show();
-        final File file = FileUtils.getUniqueNamedLogfile("cgeo_dump", "hprof");
+        final File file = FolderStorage.get().createTempFile();
+        //final File file = FileUtils.getUniqueNamedLogfile("cgeo_dump", "hprof");
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 try {
@@ -42,7 +43,9 @@ public class DebugUtils {
                 } catch (IOException e) {
                     Log.e("createMemoryDump", e);
                 }
-                ShareUtils.shareFileOrDismissDialog(context, file, "*/*", R.string.init_memory_dump, context.getString(R.string.init_memory_dumped, file.getAbsolutePath()));
+            final Uri dumpFileUri = FolderStorage.get().writeFileToFolder(ConfigurableFolder.LOGFILES, FileNameCreator.MEMORY_DUMP, file, true);
+
+            ShareUtils.shareOrDismissDialog(context, dumpFileUri, "*/*", R.string.init_memory_dump, context.getString(R.string.init_memory_dumped, UriUtils.toUserDisplayableString(dumpFileUri)));
                 }, 1000);
     }
 
@@ -91,7 +94,6 @@ public class DebugUtils {
 
         final File file = FolderStorage.get().createTempFile();
 
-        final String filename = file.getName();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
                 final ProcessBuilder builder = new ProcessBuilder();

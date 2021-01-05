@@ -18,6 +18,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.FolderStorage;
 import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistedDocumentUri;
 
 import android.Manifest;
 import android.content.Context;
@@ -82,6 +83,7 @@ public final class SystemInformation {
         appendDirectory(body, "\nUser storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\nGeocache data: ", LocalStorage.getGeocacheDataDirectory());
         appendPublicFolders(body);
+        appendPersistedDocumentUris(body);
         appendPersistedUriPermission(body, context);
         appendDatabase(body);
         body
@@ -134,10 +136,19 @@ public final class SystemInformation {
             final ImmutablePair<Integer, Integer> files = FolderUtils.get().getFolderInfo(folder.getFolder());
             final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
             body.append("\n- ").append(folder.toString())
-                .append(" (Available:").append(isAvailable).append(", Fiies: ").append(files.left).append(", subdirs:").append(files.right)
-                .append(" free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on devivce: ").append(freeSpace.right).append(")");
+                .append(" (Uri: " + FolderStorage.get().getUriForFolder(folder.getFolder()))
+                .append(", Available:").append(isAvailable).append(", Fiies: ").append(files.left).append(", subdirs:").append(files.right)
+                .append(", free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on device: ").append(freeSpace.right).append(")");
         }
     }
+
+    private static void appendPersistedDocumentUris(@NonNull final StringBuilder body) {
+        body.append("\nPersistedDocumentUris: #").append(PersistedDocumentUri.values().length);
+        for (PersistedDocumentUri persDocUri : PersistedDocumentUri.values()) {
+            body.append("\n- ").append(persDocUri);
+        }
+    }
+
 
     private static void appendPersistedUriPermission(@NonNull final StringBuilder body, @NonNull  final Context context) {
         final List<UriPermission> uriPerms = context.getContentResolver().getPersistedUriPermissions();

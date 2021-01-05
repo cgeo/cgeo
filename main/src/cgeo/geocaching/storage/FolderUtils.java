@@ -39,7 +39,7 @@ public class FolderUtils {
     private static final int COPY_FLAG_DIR_BEFORE  = 1;
     private static final int COPY_FLAG_DIR_NEEDED_FOR_TARGET = 2;
 
-    private FolderStorage pls = FolderStorage.get();
+    private final FolderStorage pls = FolderStorage.get();
 
     private static final FolderUtils INSTANCE = new FolderUtils();
 
@@ -71,17 +71,20 @@ public class FolderUtils {
     }
 
     public boolean deleteAll(final Folder folder) {
-        return treeWalk(folder, fi -> {
-            if (fi.left.isDirectory) {
-                if (fi.right) {
-                    return true;
+        try (ContextLogger cLog = new ContextLogger("FolderUtils.deleteAll: %s", folder)) {
+
+            return treeWalk(folder, fi -> {
+                if (fi.left.isDirectory) {
+                    if (fi.right) {
+                        return true;
+                    } else {
+                        return pls.delete(fi.left.uri);
+                    }
                 } else {
                     return pls.delete(fi.left.uri);
                 }
-            } else {
-                return pls.delete(fi.left.uri);
-            }
-        });
+            });
+        }
     }
 
     public enum CopyResult {
@@ -105,35 +108,41 @@ public class FolderUtils {
      */
     public ImmutableTriple<CopyResult, Integer, Integer> copyAll(final Folder source, final Folder target, final boolean move) {
 
-        //the following three-pass-copy/move is very complicated, but it ensures that copying/moving also works when target is a subdir of source or vice versa
-        //For every change done here, please make sure that tests in FolderStorageTest are still passing!
+        try (ContextLogger cLog = new ContextLogger("FolderUtils.copyAll: %s -> %s (move=%s)", source, target, move)) {
 
-        if (!pls.ensureFolder(source, false)) {
-            return new ImmutableTriple<>(CopyResult.SOURCE_NOT_READABLE, 0, 0);
-        }
-        if (!pls.ensureFolder(target, true)) {
-            return new ImmutableTriple<>(CopyResult.TARGET_NOT_WRITEABLE, 0, 0);
-        }
+            //the following three-pass-copy/move is very complicated, but it ensures that copying/moving also works when target is a subdir of source or vice versa
+            //For every change done here, please make sure that tests in FolderStorageTest are still passing!
 
-        // -- first Pass: collect Information
-        final List<ImmutableTriple<FolderStorage.FileInformation, Folder, Integer>> fileList = copyAllFirstPassCollectInfo(source, target);
-        if (fileList == null) {
-            return new ImmutableTriple<>(CopyResult.TARGET_NOT_WRITEABLE, 0, 0);
-        } else if (fileList.isEmpty()) {
-            return new ImmutableTriple<>(CopyResult.OK_NOTHING_TO_COPY, 0, 0);
-        }
+            if (!pls.ensureFolder(source, false)) {
+                return new ImmutableTriple<>(CopyResult.SOURCE_NOT_READABLE, 0, 0);
+            }
+            if (!pls.ensureFolder(target, true)) {
+                return new ImmutableTriple<>(CopyResult.TARGET_NOT_WRITEABLE, 0, 0);
+            }
 
-        // -- second Pass: do Copy
-        final ImmutableTriple<Boolean, Integer, Integer> copyResult = copyAllSecondPassCopy(fileList);
-        if (!copyResult.left) {
-            return new ImmutableTriple<>(CopyResult.FAILURE_DURING_COPY, copyResult.middle, copyResult.right);
-        }
+            // -- first Pass: collect Information
+            final List<ImmutableTriple<FolderStorage.FileInformation, Folder, Integer>> fileList = copyAllFirstPassCollectInfo(source, target);
+            if (fileList == null) {
+                return new ImmutableTriple<>(CopyResult.TARGET_NOT_WRITEABLE, 0, 0);
+            } else if (fileList.isEmpty()) {
+                return new ImmutableTriple<>(CopyResult.OK_NOTHING_TO_COPY, 0, 0);
+            }
+            cLog.add("p1:#s", fileList.size());
 
-        if (move && !copyAllThirdPassDelete(fileList)) {
-            return new ImmutableTriple<>(CopyResult.FAILURE_DURING_MOVE, copyResult.middle, copyResult.right);
-        }
+            // -- second Pass: do Copy
+            final ImmutableTriple<Boolean, Integer, Integer> copyResult = copyAllSecondPassCopy(fileList);
+            if (!copyResult.left) {
+                return new ImmutableTriple<>(CopyResult.FAILURE_DURING_COPY, copyResult.middle, copyResult.right);
+            }
+            cLog.add("p2:#%s#%s", copyResult.middle, copyResult.right);
 
-        return new ImmutableTriple<>(CopyResult.OK, copyResult.middle, copyResult.right);
+            if (move && !copyAllThirdPassDelete(fileList)) {
+                return new ImmutableTriple<>(CopyResult.FAILURE_DURING_MOVE, copyResult.middle, copyResult.right);
+            }
+            cLog.add("p3");
+
+            return new ImmutableTriple<>(CopyResult.OK, copyResult.middle, copyResult.right);
+        }
 
     }
 
@@ -174,7 +183,6 @@ public class FolderUtils {
                     return true;
                 }
             } else {
-                Log.iForce("Visited " + fi.left + ", markerfile is: " + targetMarkerFileName);
                 if (fi.left.name.equals(targetMarkerFileName)) {
                     markerFoundInSubdir[0] = true;
                     onTargetNeededPath[0] = 0;
@@ -196,6 +204,7 @@ public class FolderUtils {
         // -- second pass: make all necessary file copies and create necessary target subfolders
         int dirsCopied = 0;
         int filesCopied = 0;
+
         boolean success = true;
         for (ImmutableTriple<FolderStorage.FileInformation, Folder, Integer> file : fileList) {
             if (file.left.isDirectory) {

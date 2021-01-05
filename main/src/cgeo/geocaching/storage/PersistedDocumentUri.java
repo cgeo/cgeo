@@ -33,12 +33,18 @@ public enum PersistedDocumentUri {
     }
 
     public Uri getUri() {
-        return Settings.getPersistedDocumentUri(this);
+        final String uriString = Settings.getPersistedDocumentUri(this);
+        return uriString == null ? null : Uri.parse(Settings.getPersistedDocumentUri(this));
     }
 
     /** Sets a new user-defined location ("null" is allowed). Should be called ONLY by {@link FolderStorage} */
     protected void setPersistedUri(@Nullable final Uri uri) {
-        Settings.setPersistedDocumentUri(this, uri);
+        Settings.setPersistedDocumentUri(this, uri == null ? null : uri.toString());
+    }
+
+    @Override
+    public String toString() {
+        return name() + ": " + getUri();
     }
 
 }

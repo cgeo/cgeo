@@ -168,7 +168,8 @@ public enum ConfigurableFolder {
 
     @Override
     public String toString() {
-        return name() + ": " + toUserDisplayableValue() + "[" + getFolder() + "]";
+        return name() + ": " + toUserDisplayableValue() +
+            "[" + getFolder() + ", default: " + (isUserDefined() ? getDefaultFolder() : "(same)") + "]";
     }
 
 }
