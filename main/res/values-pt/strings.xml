@@ -648,8 +648,6 @@
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
     <string name="settings_info_themes">O c:geo suporta temas personalizados para os mapas off-line. Estes podem ser usados ​​para alterar o estilo de cores do mapa (por exemplo, ter um mapa para visão nocturna) ou para realçar certos objectos, como ciclovias ou linhas da altitude dentro do mapa.</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
-    <string name="settings_title_scale_map_text">Escala do texto no mapa</string>
-    <string name="settings_summary_scale_map_text">Escala do texto das legendas nos mapas offline de acordo com resolução do dispositivo</string>
     <string name="init_map_directory_description">Pasta com mapas offline</string>
     <string name="init_gpx_exportdir">Directório para exportar GPX</string>
     <string name="init_gpx_importdir">Directório para importar GPX</string>
