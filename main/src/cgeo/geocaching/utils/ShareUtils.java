@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
@@ -9,6 +10,7 @@ import static cgeo.geocaching.utils.ProcessUtils.CHROME_PACKAGE_NAME;
 
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -156,6 +158,9 @@ public class ShareUtils {
                 final Intent customTabs = new Intent(context, StartWebviewActivity.class);
                 customTabs.setData(Uri.parse(url));
                 chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[] {customTabs});
+
+                chooser.putExtra(Intent.EXTRA_EXCLUDE_COMPONENTS, new Parcelable[] {new ComponentName(context, CacheDetailActivity.class)});
+
 
                 context.startActivity(chooser);
             } else {
