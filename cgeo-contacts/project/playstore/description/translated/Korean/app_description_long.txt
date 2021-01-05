@@ -9,4 +9,4 @@ c:geo에서 사용자 이름을 클릭하면 (예: 캐시 로그북) 메뉴에�
 구글 플레이 스토어의 댓글에 답변할 수 없습니다! c:geo 설치 또는 사용에 문제가 있는 경우 먼저 FAQ를 참조하십시오 - https://faq.cgeo.org
 여전히 문제가 있으면 이메일을 통해 지원 부서에 문의하십시오.
 
-If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
+이 c:geo 플러그인에 요청 된 권한이 필요한 이유를 알고 싶은 경우 https://www.cgeo.org/faq#plugin-contacts-privacy에서 설명을 확인하십시오.
