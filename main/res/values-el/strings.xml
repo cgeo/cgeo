@@ -641,8 +641,6 @@
     <string name="settings_info_themes_title">Πληροφορίες σχετικά με θέματα χαρτών</string>
     <string name="settings_info_themes">Το c:geo υποστηρίζει προσαρμοσμένα θέματα για χάρτες εκτός σύνδεσης. Αυτά μπορούν να χρησιμοποιηθούν για να αλλάξετε το χρώμα της μορφής του χάρτη (π.χ. να έχετε ένα χάρτη για νυχτερινή θέαση) ή να επισημάνετε ορισμένα αντικείμενα όπως ποδηλατόδρομους ή τις υψομετρικές στον χάρτη.</string>
     <string name="init_mapsource_select">Επιλογή πηγής χάρτη</string>
-    <string name="settings_title_scale_map_text">Υπόμνημα κλίμακας χάρτη</string>
-    <string name="settings_summary_scale_map_text">Υπόμνημα κλίμακας χάρτη εκτός σύνδεσης σύμφωνα με το dpi της συσκευής</string>
     <string name="init_map_directory_description">Κατάλογος χαρτών εκτός σύνδεσης</string>
     <string name="init_gpx_exportdir">Φάκελος εξαγωγής GPX</string>
     <string name="init_gpx_importdir">Φάκελος εισαγωγής GPX</string>
