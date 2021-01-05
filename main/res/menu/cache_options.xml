@@ -56,27 +56,6 @@
         app:showAsAction="ifRoom">
     </item>
     <item
-        android:id="@+id/menu_store_in_list"
-        android:icon="@drawable/ic_menu_save"
-        android:title="@string/cache_offline_store"
-        android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_refresh"
-        android:icon="@drawable/ic_menu_refresh"
-        android:title="@string/cache_offline_refresh"
-        android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_delete"
-        android:icon="@drawable/ic_menu_delete"
-        android:title="@string/cache_offline_drop"
-        android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
         android:id="@+id/menu_delete_userdefined_waypoints"
         android:title="@string/cache_delete_userdefined_waypoints"
         android:visible="false">

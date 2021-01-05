@@ -662,10 +662,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
         menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
-        menu.findItem(R.id.menu_store_in_list).setVisible(cache != null);
-        menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache != null && cache.isOffline() && cache.hasUserdefinedWaypoints());
-        menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null && !isUDC);
         menu.findItem(R.id.menu_clear_goto_history).setVisible(cache != null && cache.isGotoHistoryUDC());
@@ -696,12 +693,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         final int menuItem = item.getItemId();
-        if (menuItem == R.id.menu_delete) {
-            dropCache();
-        } else if (menuItem == R.id.menu_delete_userdefined_waypoints) {
+        if (menuItem == R.id.menu_delete_userdefined_waypoints) {
             dropUserdefinedWaypoints();
-        } else if (menuItem == R.id.menu_store_in_list) {
-            storeCache(false);
         } else if (menuItem == R.id.menu_refresh) {
             refreshCache();
         } else if (menuItem == R.id.menu_gcvote) {

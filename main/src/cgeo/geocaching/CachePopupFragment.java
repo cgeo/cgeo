@@ -153,9 +153,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
         final int menuItem = item.getItemId();
 
-        if (menuItem == R.id.menu_delete) {
-            new DropCacheClickListener().onClick(getView());
-        } else if (menuItem == R.id.menu_tts_toggle) {
+        if (menuItem == R.id.menu_tts_toggle) {
             SpeechService.toggleService(getActivity(), cache.getCoords());
         } else {
             return false;
