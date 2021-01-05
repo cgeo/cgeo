@@ -408,6 +408,7 @@
     <string name="caches_clear_offlinelogs">Clear offline logs</string>
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
+    <string name="caches_set_cache_icon">Set cache icons</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
     <string name="caches_listmarker_none">No marker</string>
@@ -1841,6 +1842,7 @@
         <item quantity="many">Add this cache to favorites (%d remaining)</item>
         <item quantity="other">Add this cache to favorites (%d remaining)</item>
     </plurals>
+    <string name="command_set_cache_icons_progress">Setting cache icons</string>
 
     <string name="pq_download_and_import">Import Pocket query</string>
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>

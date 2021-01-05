@@ -17,6 +17,7 @@ import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
+import cgeo.geocaching.command.SetCacheIconCommand;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -76,6 +77,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -765,6 +767,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             } else { // search and global list (all other than offline and history)
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline);
             }
+            setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
 
             // Manage Lists submenu
             setVisible(menu, R.id.menu_lists, isOffline);
@@ -881,6 +884,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         alert.show();
     }
 
+    private void setCacheIcons(final int newCacheIcon) {
+        new SetCacheIconCommand(this, adapter.getCheckedOrAllCaches(), newCacheIcon) {
+            @Override
+            protected void onFinished() {
+                adapter.setSelectMode(false);
+                refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
+            }
+        }.execute();
+    }
+
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int menuItem = item.getItemId();
@@ -968,7 +981,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             }.execute();
         } else if (menuItem == R.id.menu_set_listmarker) {
-                selectListMarker();
+            selectListMarker();
+        } else if (menuItem == R.id.menu_set_cache_icon) {
+            EmojiUtils.selectEmojiPopup(this, 0, CacheType.TRADITIONAL.markerId, this::setCacheIcons);
         } else {
             return super.onOptionsItemSelected(item);
         }
