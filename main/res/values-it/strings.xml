@@ -648,8 +648,6 @@
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
     <string name="settings_info_themes">c:geo supporta i temi personalizzati per mappe offline. Questi possono essere usati per modificare lo stile di colore della mappa (ad esempio per avere una mappa notturna) o per evidenziare alcuni oggetti come piste ciclabili o linee di altitudine.</string>
     <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
-    <string name="settings_title_scale_map_text">Ridimensiona testo mappa</string>
-    <string name="settings_summary_scale_map_text">Ridimensiona il testo della mappa offline a seconda del DPI del dispositivo</string>
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
     <string name="init_gpx_exportdir">Cartella di export GPX</string>
     <string name="init_gpx_importdir">Cartella di import GPX</string>
