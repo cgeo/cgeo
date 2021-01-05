@@ -648,8 +648,6 @@
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">El c:geo permet personalitzar els mapes fora de línia. Podeu canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per posar de relleu certs objectes com el carril bici o línies de nivell al mapa.</string>
     <string name="init_mapsource_select">Selecciona l\'origen del mapa</string>
-    <string name="settings_title_scale_map_text">Escala el text del mapa</string>
-    <string name="settings_summary_scale_map_text">Escala les etiquetes de text dels mapes fora de línia en concordança amb els punts per polzada (dpi) del teu dispositiu.</string>
     <string name="init_map_directory_description">Directori amb els mapes fora de línia</string>
     <string name="init_gpx_exportdir">Directori per a l\'exportació GPX</string>
     <string name="init_gpx_importdir">Directori per a la importació GPX</string>
