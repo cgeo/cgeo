@@ -554,8 +554,6 @@
     <string name="settings_info_themes_title">Térkép megjelenítési stílusok</string>
     <string name="settings_info_themes">A c:geo támogatja az egyedi térképstílusokat. Ezzel meg lehet változtatni a térkép színeit (pl. éjszakai nézethez), vagy bizonyos objektumokat ki lehet vele emelni, mint pl. kerékpárutakat, szintvonalakat, stb.</string>
     <string name="init_mapsource_select">Térkép választása</string>
-    <string name="settings_title_scale_map_text">Térkép feliratainak betűmérete</string>
-    <string name="settings_summary_scale_map_text">Offline térkép feliratainak méretezése a képernyő felbontása alapján</string>
     <string name="init_map_directory_description">Offline térképek mappája</string>
     <string name="init_gpx_exportdir">GPX export mappa</string>
     <string name="init_gpx_importdir">GPX import mappa</string>
