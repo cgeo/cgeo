@@ -590,8 +590,6 @@
     <string name="settings_info_themes_title">Información sobre temas de mapas</string>
     <string name="settings_info_themes">c:geo permite personalizar los mapas sin conexión. Se puede usar para cambiar el estilo del color del mapa (p. ej. tener un mapa de visión nocturna) o para resatar ciertos objetos como carriles bici o líneas de altitud en el mapa.</string>
     <string name="init_mapsource_select">Elegir proveedor de mapas</string>
-    <string name="settings_title_scale_map_text">Escalar el texto del mapa</string>
-    <string name="settings_summary_scale_map_text">Escala el texto de los mapas sin conexión según los p.p.p. del dispositivo</string>
     <string name="init_map_directory_description">Directorio de mapas sin conexión</string>
     <string name="init_gpx_exportdir">Directorio para exportar GPX</string>
     <string name="init_gpx_importdir">Directorio para importar GPX</string>
