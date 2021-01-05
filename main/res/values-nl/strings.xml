@@ -648,8 +648,6 @@
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
     <string name="settings_info_themes">c:geo ondersteund aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt voor het aanpassen om kleurstijlen van de kaart (bijv. een nachtmodus) of het accentueren van bepaalde objecten zoals fietspaden of hoogtelijnen op de kaart.</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
-    <string name="settings_title_scale_map_text">Tekst op kaart schalen</string>
-    <string name="settings_summary_scale_map_text">Tekst labels op offline kaart schalen n.a.v. DPI apparaat</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
     <string name="init_gpx_exportdir">GPX Export map</string>
     <string name="init_gpx_importdir">GPX Import map</string>
