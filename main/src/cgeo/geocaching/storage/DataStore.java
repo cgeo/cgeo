@@ -3992,6 +3992,27 @@ public class DataStore {
         }
     }
 
+    public static void setCacheIcons(final Collection<Geocache> caches, final int newCacheIcon) {
+        if (caches.isEmpty()) {
+            return;
+        }
+        final SQLiteStatement add = PreparedStatement.SET_CACHE_ICON.getStatement();
+
+        database.beginTransaction();
+        try {
+            for (final Geocache cache : caches) {
+                add.bindLong(1, newCacheIcon);
+                add.bindString(2, cache.getGeocode());
+                add.execute();
+
+                cache.setAssignedEmoji(newCacheIcon);
+            }
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+    }
+
     private static @NonNull String fetchLocation(final Cursor cursor) {
         final String location = cursor.getString(cursor.getColumnIndex("location"));
 
@@ -4193,7 +4214,8 @@ public class DataStore {
         SEQUENCE_SELECT("SELECT seq FROM " + dbTableSequences + " WHERE name = ?"),
         SEQUENCE_UPDATE("UPDATE " + dbTableSequences + " SET seq = ? WHERE name = ?"),
         SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)"),
-        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL");
+        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL"),
+        SET_CACHE_ICON("UPDATE " + dbTableCaches + " SET emoji = ? WHERE geocode = ?");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 
