@@ -475,8 +475,6 @@
     <string name="settings_info_themes_title">Ang impormasyon sa mga tema ng mapa</string>
     <string name="settings_info_themes">sumusuporta ang c:geo sa mga pasdyang tema para sa mga offline na mga mapa. Upang baguhin ang stilo ng kulay ng mapa ang mga ito ay maaring gamitin (hal. upang magkaroon ng nightview na mapa) o]upang i-highlight ang tiyak na mga bagay tulad ng mga cycle path o kaya taas ng mga linya na nasa mapa.</string>
     <string name="init_mapsource_select">Piliin ang pinag mulan ng mapa</string>
-    <string name="settings_title_scale_map_text">Ang iska ng teksto ng mapa</string>
-    <string name="settings_summary_scale_map_text">Ang iskala ng mga label ng teksto sa offline na ayon sa aparato ng dpi</string>
     <string name="init_map_directory_description">Ang direktorya kasama ang offline na mga mapa</string>
     <string name="init_gpx_exportdir">Pag-luwas ng GPX na direktoryo</string>
     <string name="init_gpx_importdir">Pag-import ng Direktoryo ng GPX</string>

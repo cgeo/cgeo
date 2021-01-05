@@ -477,8 +477,6 @@
     <string name="settings_info_themes_title">معلومات عن ثيمات الخريطة</string>
     <string name="settings_info_themes">c:geo يدعم الثيمات المخصصة للخرائط في وضع عدم الاتصال. يمكنك أن تستخدم هذا لتغيير نك تليون الخريطة (مثلا. عرض ليلي للخريطة) أو تسليط الضوء على بعض الأشياء مثل المسارات أو خطوط الطول على الخريطة.</string>
     <string name="init_mapsource_select">اختر مصدر الخريطة</string>
-    <string name="settings_title_scale_map_text">مقياس نص الخريطة</string>
-    <string name="settings_summary_scale_map_text">مقياس نص التسميات على الخريطة في وضع عدم الاتصال وفقاً دقة العرض في جهازك</string>
     <string name="init_map_directory_description">الدليل باستخدام الخرائط في وضع عدم الاتصال</string>
     <string name="init_gpx_exportdir">دليل تصدير من GPX</string>
     <string name="init_gpx_importdir">دليل استيراد من GPX</string>

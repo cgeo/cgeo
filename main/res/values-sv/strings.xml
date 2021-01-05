@@ -627,8 +627,6 @@
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo har stöd för anpassade teman för offline-kartor. Dessa kan användas för färgerna på kartan (t.ex. för nattläge) eller för att tydliggöra vissa objekt såsom cykelvägar eller höjdkurvor.</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
-    <string name="settings_title_scale_map_text">Skala karttext</string>
-    <string name="settings_summary_scale_map_text">Skala textetiketter på offlinekartor mot enhetens upplösning</string>
     <string name="init_map_directory_description">Katalog med offline-kartor</string>
     <string name="init_gpx_exportdir">GPX-exportkatalog</string>
     <string name="init_gpx_importdir">GPX-importkatalog</string>

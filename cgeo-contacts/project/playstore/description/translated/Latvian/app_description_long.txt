@@ -9,4 +9,4 @@ Personas lietotājvārdam ir jābūt saglabātam tavos kontaktos, vārda vai ies
 Uz komentāriem iekš PlayStore nav iespējams atbildēt! Ja rodas problēmas ielādējot vai lietojot c:geo vispirms, lūdzu, apskatiet mūsu FAQ: https://faq.cgeo.org
 Ja joprojām ir problēmas, sazinies ar mūsu atbalsta centru, izmantojot e-pastu.
 
-Ja vēlies uzzināt, kāpēc šim c:geo spraudnim nepieciešamas pieprasītās atļaujas, lūdzu apskaties skaidrojumus šiet: https://www.cgeo.org/faq.html#plugin-contacts-privacy
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy

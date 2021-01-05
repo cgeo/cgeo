@@ -649,8 +649,6 @@
     <string name="settings_info_themes_title">Info o témach mapy</string>
     <string name="settings_info_themes">c:geo podporuje vlastné štýly pre offline mapy. Tieto môžu byť použité na zmenu farebného štýlu mapy (napr. nočná mapa), na zvýraznenie dôležitých objektov (ako sú napr. cyklotrasy) alebo na určenie šírky čiar.</string>
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
-    <string name="settings_title_scale_map_text">Upraviť veľkosť textu</string>
-    <string name="settings_summary_scale_map_text">Veľkosť textu označenia na mape v režime offline podľa dpi zariadenia</string>
     <string name="init_map_directory_description">Priečinok s offline mapami</string>
     <string name="init_gpx_exportdir">Priečinok pre GPX Export</string>
     <string name="init_gpx_importdir">Priečinok pre GPX Import</string>

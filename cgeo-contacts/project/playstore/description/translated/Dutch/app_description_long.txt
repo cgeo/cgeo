@@ -9,4 +9,4 @@ De gebruikersnaam van de persoon moet worden opgeslagen in het veld naam of alia
 Reacties in de PlayStore kunnen niet worden beantwoord! Als je problemen hebt bij het installeren of gebruiken van c:geo, kijk dan eerst naar onze FAQ: https://faq.cgeo.org
 Als er nog steeds problemen zijn, neem dan contact op met support via e-mail.
 
-Als je wil weten waarom deze c:geo plugin de gevraagde machtigingen nodig heeft, kijk dan op https://www.cgeo.org/faq.html#plugin-contacts-privacy voor uitleg.
+Als je wil weten waarom deze c:geo plugin de gevraagde machtigingen nodig heeft, kijk dan op https://www.cgeo.org/faq.html#plugin-contacts-privacy voor uitleg

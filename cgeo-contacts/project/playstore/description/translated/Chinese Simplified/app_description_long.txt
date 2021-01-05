@@ -9,4 +9,4 @@
 PlayStore中的评论是不会有回答的！ 如果你在安装或使用c:geo时遇到了问题，请先看一看我们的FAQ：https://faq.cgeo.org。
 如果以上没有解决你的问题，就通过优点联系支持吧。
 
-如果你想知道为何这个c:geo插件要求了这些权限，请到https://www.cgeo.org/faq.html#plugin-contacts-privacy查看说明。
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy

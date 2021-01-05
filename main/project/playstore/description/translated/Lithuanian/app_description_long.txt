@@ -27,4 +27,4 @@ Ieškoti bei atrasti keliauninkus, tvarkyti jų inventorių bei palikti keliauni
 Jei iškyla bėdų su c:geo diegtimi ar naudojimu, peržvelkite mūsų DUK (https://faq.cgeo.org) ar žinyną (https://manual.cgeo.org).
 Jeigu nepavyksta sutvarkyti bėdų, kreipkitės el. paštu.
 
-Jeigu neaišku, kodėl c:geo reikalingi šie leidimai, peržiūrėkite https://www.cgeo.org
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.

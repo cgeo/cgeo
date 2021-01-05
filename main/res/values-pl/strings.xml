@@ -649,8 +649,6 @@
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
     <string name="settings_info_themes">c:geo wspiera motywy dla map offline. Mogą być używane by zmienić kolorystykę mapy (np. aby uzyskać tryb nocny) lub by zaznaczyć wybrane obiekty jak ścieżki rowerowe lub izolinie.</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
-    <string name="settings_title_scale_map_text">Skaluj tekst na mapie</string>
-    <string name="settings_summary_scale_map_text">Dostosowuje skalę tekstu na mapie offline do dpi urządzenia</string>
     <string name="init_map_directory_description">Katalog z mapami offline</string>
     <string name="init_gpx_exportdir">Katalog do eksportu plików GPX</string>
     <string name="init_gpx_importdir">Katalog do importu plików GPX</string>

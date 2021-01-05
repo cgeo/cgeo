@@ -9,4 +9,4 @@ Damit das Plugin den Benutzernamen zu einem Adressbuch-Eintrag zuordnen kann, mu
 Kommentare im PlayStore können nicht beantwortet werden! Wenn du Probleme bei der Installation oder Nutzung von c:geo hast, lies zuerst unsere FAQ: https://faq.cgeo.org
 Wenn du immer noch Probleme hast, kontaktiere unseren Support per Mail.
 
-Wenn du wissen möchtest, warum dieses c:geo Plugin die angeforderten Berechtigungen benötigt, findest du auf https://www.cgeo.org/faq.html#plugin-contacts-privacy eine Erklärung.
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy

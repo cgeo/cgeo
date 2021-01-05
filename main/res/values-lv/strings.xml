@@ -593,8 +593,6 @@
     <string name="settings_info_themes_title">Informācija par karšu tēmām</string>
     <string name="settings_info_themes">c:geo atbalsta pielāgotu dizainu bezsaistes kartēm. Tos var izmantot, lai mainītu kartes krāsu stilu (piemēram ir nakts redzamības karte) vai izcelt noteiktus objektus, piemēram, velo-ceļus vai augstuma līniju kartē.</string>
     <string name="init_mapsource_select">Izvēlies karti</string>
-    <string name="settings_title_scale_map_text">Mērogot kartes tekstu</string>
-    <string name="settings_summary_scale_map_text">Mērogot tekstu bezsaistes kartēs atbilstoši ierīeces dpi</string>
     <string name="init_map_directory_description">Katalogs ar bezsaistes kartēm</string>
     <string name="init_gpx_exportdir">GPX eksporta direktorija</string>
     <string name="init_gpx_importdir">GPX importa direktorija</string>

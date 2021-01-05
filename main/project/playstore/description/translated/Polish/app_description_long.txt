@@ -27,4 +27,4 @@ Wyszukuj i odkrywaj Trackables, zarządzaj zasobami możliwymi do wyśledzenia i
 Jeśli masz problemy z instalacją lub używaniem c: geo, najpierw zapoznaj się z naszym FAQ (https://faq.cgeo.org) lub zapoznaj się z instrukcją obsługi (https://manual.cgeo.org).
 Jeśli nadal występują problemy, skontaktuj się z pomocą techniczną za pośrednictwem poczty e-mail.
 
-Jeśli chcesz wiedzieć, dlaczego c:geo potrzebuje wymaganych uprawnień, sprawdź https://www.cgeo.org, aby uzyskać wyjaśnienie.
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.

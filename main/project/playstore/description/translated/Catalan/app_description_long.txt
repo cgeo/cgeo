@@ -27,4 +27,4 @@ Cerqueu i descobriu rastrejables, gestioneu el vostre inventari rastrejable i de
 Si teniu problemes per instal·lar o utilitzar c: geo, primer consulteu les nostres FAQ (https://faq.cgeo.org) o consulteu la guia de l'usuari (https://manual.cgeo.org).
 Si encara hi ha problemes, poseu-vos en contacte amb el servei d'assistència per correu electrònic.
 
-Si voleu saber per què aquest  plugin de c: geo necessita els permisos sol·licitats, consulteu https://www.cgeo.org/faq.html#plugin-contacts-privacy per obtenir una explicació.
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.

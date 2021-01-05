@@ -9,4 +9,4 @@ El nombre de usuario de la persona es necesario almacenarlo en el campo del nomb
 ¡Los comentarios en la Play Store no se pueden responder! Si tienes problemas al instalar o usar c:geo por favor primero echa un vistazo a nuestras preguntas frecuentes: https://faq.cgeo.org
 Si todavía hay problemas, póngase en contacto con el servicio de soporte por correo electrónico.
 
-Si quieres saber por qué este plugin c:geo necesita los permisos solicitados, por favor consulta https://www.cgeo.org/faq.html#plugin-contacts-privacy para una explicación.
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy

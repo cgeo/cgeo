@@ -597,8 +597,6 @@
     <string name="settings_info_themes_title">지도 테마에 대한 정보</string>
     <string name="settings_info_themes">c:geo는 오프라인 지도용 테마를 지원합니다. 테마는 지도의 색 스타일을 바꾸거나(예: 야간 모드 지도), 자전거도로나 등고선등을 강조하는데 사용될 수 있습니다.</string>
     <string name="init_mapsource_select">지도 선택</string>
-    <string name="settings_title_scale_map_text">지도의 문자 확대</string>
-    <string name="settings_summary_scale_map_text">기기의 dpi 지원하는 만큼 오프라인 지도의 문자들을 확대합니다.</string>
     <string name="init_map_directory_description">오프라인 지도 폴더</string>
     <string name="init_gpx_exportdir">GPX 내보내기 폴더</string>
     <string name="init_gpx_importdir">GPX를 가져올 폴더</string>

@@ -478,8 +478,6 @@
     <string name="settings_info_themes_title">Impormasyon sa mga tema ng mapa</string>
     <string name="settings_info_themes">ang c:geo ay sumusuporta para sa offline na linya na mga mapa. Ito ay maari mong gamitin sa pagpalit ng kulay ng mapa (hal. para magkaroon ng pagtingin sa gabi sa mapa) o para ma-highlight ang ilang mga bagay gaya ng paikot na daan o mataas na lugar sa mapa.</string>
     <string name="init_mapsource_select">Pumili ng pinagkukunan ng mapa</string>
-    <string name="settings_title_scale_map_text">Ang eskala ng teksto ng mapa</string>
-    <string name="settings_summary_scale_map_text">Eskala ng teksto: Markahan sa offline na mapa ayon sa aparatong dpi</string>
     <string name="init_map_directory_description">Ang direktoryo ng online na mapa</string>
     <string name="init_gpx_exportdir">Ang GPX na iluwas na direktoryo</string>
     <string name="init_gpx_importdir">Ang GPX na import direktoryo</string>

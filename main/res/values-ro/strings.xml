@@ -469,8 +469,6 @@
     <string name="settings_info_themes_title">Despre stilurile hărţilor</string>
     <string name="settings_info_themes">c:geo poate folosi stiluri personalizate pentru hărţile salvate. Acestea pot fi folosite pentru a schimba culorile pe hartă (de ex. afişare nocturnă a hărţii) sau pentru a scoate în evidenţă anumite obiecte precum trasee de bicicletă sau poteci.</string>
     <string name="init_mapsource_select">Alege hărţi din sursa</string>
-    <string name="settings_title_scale_map_text">Redimensionează textul de pe hartă</string>
-    <string name="settings_summary_scale_map_text">Redimensionează textul afişat pe o hartă salvată în funcţie de rezoluţia ecranului</string>
     <string name="init_map_directory_description">Dosar cu hărţi salvate local</string>
     <string name="init_gpx_exportdir">Dosar Exporturi GPX</string>
     <string name="init_gpx_importdir">Dosar Importuri GPX</string>

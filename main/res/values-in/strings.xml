@@ -468,8 +468,6 @@
     <string name="settings_info_themes_title">Info di Peta Tema</string>
     <string name="settings_info_themes">c:geo mendukung tema khusus untuk peta offline. Ini dapat digunakan untuk mengubah gaya warna peta (misalnya memiliki peta pemandangan malam) atau untuk menyorot objek tertentu seperti jalur siklus atau garis ketinggian di dalam peta.</string>
     <string name="init_mapsource_select">Pilih Sumber Peta</string>
-    <string name="settings_title_scale_map_text">Skala Teks Peta</string>
-    <string name="settings_summary_scale_map_text">Skala label teks pada peta offline sesuai dengan perangkat dpi</string>
     <string name="init_map_directory_description">Direktori dengan peta offline</string>
     <string name="init_gpx_exportdir">Direktori Ekspor GPX</string>
     <string name="init_gpx_importdir">Direktori Impor GPX</string>

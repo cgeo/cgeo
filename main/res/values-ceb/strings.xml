@@ -457,8 +457,6 @@
     <string name="settings_info_themes_title">Pahibalo sa mga tema sa mapa</string>
     <string name="settings_info_themes">ang c:geo nag suporta og gawi na mga tema para sa offline na mga mapa. Kani puwede magamit para mailisan and kolor og estilo sa mapa (para adunay nightview nga mapa) o para patugbaw sa mga sigurado na butanga pareha sa subayanan sa sikulo o linya sa gitas-on sulod sa mapa.</string>
     <string name="init_mapsource_select">Pagpili og kakuhaan sa mapa</string>
-    <string name="settings_title_scale_map_text">I-ang-ang ang teksto sa mapa</string>
-    <string name="settings_summary_scale_map_text">I-ang-ang ang mga label nga teksto sa offline nga mapa ayun sa device dpi</string>
     <string name="init_map_directory_description">Direktoryo nga adunay offline nga mga mapa</string>
     <string name="init_gpx_exportdir">GPX Eksport nga Direktoryo</string>
     <string name="init_gpx_importdir">GPX Import nga Direktoryo</string>

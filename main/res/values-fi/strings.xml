@@ -648,8 +648,6 @@
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
     <string name="settings_info_themes">c:geo mahdollistaa offline-karttoihin teemat. Karttojen värimaailmaa voi muokata (voit valita karttaan vaikka yönäkymän) tai voit korostaa tiettyjä kohteita, kuten pyöräteitä tai korkeuskäyriä.</string>
     <string name="init_mapsource_select">Karttalähde</string>
-    <string name="settings_title_scale_map_text">Skaalaa kartan tekstit</string>
-    <string name="settings_summary_scale_map_text">Tekstinimiöt offline-kartalla valitaan laitteen tarkkuuden mukaan</string>
     <string name="init_map_directory_description">Offline-karttojen polku</string>
     <string name="init_gpx_exportdir">GPX:n vientikansio</string>
     <string name="init_gpx_importdir">GPX:n tuontikansio</string>

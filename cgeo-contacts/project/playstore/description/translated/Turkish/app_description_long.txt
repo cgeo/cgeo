@@ -9,4 +9,4 @@ Eklentinin kullanıcı adını kişiyle eşleştirmesi için kişinin kullanıc�
 PlayStore'daki yorumlar cevaplanmayacak! c:geo kurulumunda veya kullanımında sorun yaşıyorsanız, lütfen öncelikle SSS bölümümüze bir göz atın: https://faq.cgeo.org
 Hala sorun varsa, e-posta yoluyla destek ile iletişime geçiniz.
 
-Bu c:geo eklentisinin neden istenen izinlere ihtiyacı olduğunu öğrenmek istiyorsanız, lütfen bir açıklama için https://www.cgeo.org/faq.html#plugin-contacts-privacy adresini kontrol edin.
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy

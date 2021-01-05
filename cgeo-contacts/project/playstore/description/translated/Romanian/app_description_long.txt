@@ -9,4 +9,4 @@ Numele de Utilizator al persoanei trebuie să fie salvat în câmpul "Nume" sau 
 Nu putem răspunde comentariilor lăsate în PlayStore! Dacă întâmpinați probleme cu instalarea sau utilizarea aplicației c:geo, vă rugăm ca mai întâi să aruncați o privire pe lista de Întrebări Frecvente: https://faq.cgeo.org
 Dacă încă aveți probleme, contactați prin e-mail Serviciul de Asistență.
 
-Dacă doriți să aflați de ce acest plugin pentru c:geo necesită permisiunile solicitate, vă rugăm să vizitați https://www.cgeo.org/faq.html#plugin-contacts-privacy și să citiți explicațiile date.
+If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy

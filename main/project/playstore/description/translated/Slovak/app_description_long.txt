@@ -27,4 +27,4 @@ Vyhľadávanie a objavovanie trasovateľných predmetov, spravovanie inventára 
 Ak máte problémy s inštaláciou alebo používaním aplikácie c:geo, najprv sa pozrite na naše najčastejšie otázky (https://faq.cgeo.org) alebo si preštudujte návod na používanie (https://manual.cgeo.org).
 Ak problémy pretrvávajú. obráťte sa e-mailom na podporu.
 
-Ak potrebujete vedieť, prečo aplikácia c:geo vyžaduje požadované povolenia, vysvetlenie nájdete na https://www.cgeo.org.
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.

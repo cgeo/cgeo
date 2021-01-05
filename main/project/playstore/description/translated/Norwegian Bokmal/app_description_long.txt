@@ -27,4 +27,4 @@ Søk og oppdag sporbare, administrer dine sporbare og legg igjen enn sporbar men
 Hvis du har problemer med installasjon eller bruk av c:geo, vennligst ta en titt først på vår FAQ (https://faq.cgeo.org) eller se brukermanualen (https://manual.cgeo.org).
 Hvis du fremdeles har problemer, kontakt support via e-post.
 
-Hvis du vil vite hvorfor c:geo trenger de forespurte tillatelsene, sjekk https://www.cgeo.org for en forklaring.
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.

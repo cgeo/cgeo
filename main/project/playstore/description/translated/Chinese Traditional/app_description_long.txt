@@ -27,4 +27,4 @@ c:geo 是套簡易但強大且擁有許多附加功能的 geocaching 用戶端�
 如果您在安裝或使用 c:geo上有問題時請先到我們的FAQ網頁(https://faq.cgeo.org)或參考我們的使用者手冊(https://manual.cgeo.org).
 如果以上方式無法解決您的問題, 請以 email聯絡我們.
 
-如果您想了解為何 c:geo需要 permissions, 請至 https://www.cgeo.org 參考我們的解釋.
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.

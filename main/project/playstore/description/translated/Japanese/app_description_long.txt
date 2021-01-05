@@ -27,4 +27,4 @@ geocaching.comからキャッシュ情報をデバイスに直接保存するこ
 インストール時や使っていて問題があったら最初にFAQ (https://faq.cgeo.org)(英語)やユーザガイド(https://manual.cgeo.org)(英語)をご覧ください。
 それでも問題が解決しなければサポートにメールで連絡してください(訳者注: 英語、ドイツ語、フランス語かスロベニア語でお願いします)。
 
-c:geoが要求する権限についてはhttps://www.cgeo.orgでご確認ください。
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.

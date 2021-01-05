@@ -27,4 +27,4 @@ Etsi ja kirjaa matkaajia nähdyksi, hallitse omaa matkaajaluetteloa ja pudota ma
 Jos sinulla on ongelmia c:geon asentamisessa tai käyttämisessä, tarkistathan FAQ:n ensin (englanniksi): https://faq.cgeo.org tai tarkista, löytyykö ratkaisu käyttöoppaasta (https://manual.cgeo.org).
 Jos ongelmia esiintyy edelleen, ota yhteys meihin sähköpostilla.
 
-Jos haluat tietää, miksi c:geo tarvitsee pyydettyjä lupia, tarkan selonteon englanniksi löydät osoitteesta https://www.cgeo.org.
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.
