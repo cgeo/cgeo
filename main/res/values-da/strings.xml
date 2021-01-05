@@ -636,8 +636,6 @@
     <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
     <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver.</string>
     <string name="init_mapsource_select">Vælg kortkilde</string>
-    <string name="settings_title_scale_map_text">Tilpas tekst på kort</string>
-    <string name="settings_summary_scale_map_text">Tilpas størrelsen af tekster på offline kort, så de passer til enhedens skærmopløsning,</string>
     <string name="init_map_directory_description">Mappe med offline kort</string>
     <string name="init_gpx_exportdir">GPX eksportmappe</string>
     <string name="init_gpx_importdir">GPX importmappe</string>
