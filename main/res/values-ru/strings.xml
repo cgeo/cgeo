@@ -595,8 +595,6 @@
     <string name="settings_info_themes_title">Информация по темам карт</string>
     <string name="settings_info_themes">c:geo предлагает пользовательские темы для оффлайновых карт. Они могут быть использованы для изменения цветового стиля (например, ночные карты) или для выделения определенных объектов, таких как велосипедные маршруты или линии уровня.</string>
     <string name="init_mapsource_select">Выберите источник карт</string>
-    <string name="settings_title_scale_map_text">Масштабировать текст</string>
-    <string name="settings_summary_scale_map_text">Масштабировать текстовые метки на карте согласно DPI устройства</string>
     <string name="init_map_directory_description">Папка с оффлайновыми картами</string>
     <string name="init_gpx_exportdir">Папка для сохранения GPX</string>
     <string name="init_gpx_importdir">Папка импорта GPX</string>
