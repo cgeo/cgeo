@@ -441,8 +441,6 @@
     <string name="settings_info_themes_title">Teme zemljevidov</string>
     <string name="settings_info_themes">c:geo omogoča prikaz različnih tem zemljevidov brez povezave. Teme so uporabljene za spremembo barvnih shem (npr. temni nočni zemljevid) ali za poudarek objektov, kot na primer kolesarske poti ali plastnice na zemljevidu.</string>
     <string name="init_mapsource_select">Izberi vir zemljevidov</string>
-    <string name="settings_title_scale_map_text">Prilagodi velikost pisave na zemljevidu</string>
-    <string name="settings_summary_scale_map_text">Prilagodi velikost pisave na zemljevidu glede na ločljivost zaslona vaše naprave</string>
     <string name="init_map_directory_description">Mapa z zemljevidi</string>
     <string name="init_gpx_exportdir">Mapa za izvoz GPX datotek</string>
     <string name="init_gpx_importdir">Mapa za uvoz GPX datotek</string>
