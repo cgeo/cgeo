@@ -24,7 +24,7 @@ public class StartWebviewActivity extends AppCompatActivity {
             if (isChromeLaunchable()) {
                 ShareUtils.openCustomTab(this, url);
             } else {
-
+                // We're using "https://example.com" as we only want to query web browsers, not c:geo or other geocaching apps
                 final Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://example.com"));
 
                 final ResolveInfo resolveInfo = getPackageManager().queryIntentActivities(browserIntent, PackageManager.MATCH_DEFAULT_ONLY).get(0);
