@@ -332,6 +332,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         return super.dispatchTouchEvent(ev);
     }
 
+    @Override
     public void setDestinationCoords(final Geopoint destCoords) {
         setDistanceDrawer(destCoords);
     }
@@ -340,6 +341,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
      * needed to provide current coordinates for distanceDrawer
      * called only in GooglePositionAndHistory
      */
+    @Override
     public void setCoordinates(final Location coordinates) {
         if (distanceDrawer != null) {
             distanceDrawer.setCoordinates(coordinates);

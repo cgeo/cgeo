@@ -114,6 +114,7 @@ public abstract class AbstractMap {
     public void setTarget(final Geopoint coords, final String geocode) {
         lastNavTarget = coords;
         mapView.setDestinationCoords(coords);
+        mapView.setCoordinates(overlayPositionAndScale.getCoordinates());
         if (StringUtils.isNotBlank(geocode)) {
             targetGeocode = geocode;
             final Geocache target = getCurrentTargetCache();
