@@ -706,10 +706,10 @@
     <string name="init_routecolor_summary">Select color and opaqueness for individual route line. An individual route is a collection of waypoints and/or caches you selected by long-pressing on the waypoint/cache. (You need to enable the long press function first, see map settings.)</string>
     <string name="init_routewidth">Individual route line width</string>
     <string name="init_routewidth_summary">Select width for individual route line</string>
-    <string name="init_trackcolor">Individual track line color</string>
-    <string name="init_trackcolor_summary">Select color and opaqueness for track line. A track consists of several waypoints and can be loaded via a track GPX file.</string>
-    <string name="init_trackwidth">Individual track line width</string>
-    <string name="init_trackwidth_summary">Select width for individual track line</string>
+    <string name="init_trackcolor">GPX track/route line color</string>
+    <string name="init_trackcolor_summary">Select color and opaqueness for track/route line. A track/route consists of several waypoints and can be loaded via a GPX track/route file.</string>
+    <string name="init_trackwidth">GPX track/route line width</string>
+    <string name="init_trackwidth_summary">Select width for GPX track/route line</string>
     <string name="init_circlecolor">Circle line color</string>
     <string name="init_circlecolor_summary">Select color and opaqueness for circle line. Circles are used as a visual representation for the minimum radius around a cache or physical waypoint, wherein no other cache or physical waypoint is allowed. (Applies to geocaching.com)</string>
     <string name="init_circlefillcolor">Circle fill color</string>
