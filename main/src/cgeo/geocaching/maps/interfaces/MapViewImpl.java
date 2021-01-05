@@ -4,6 +4,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 
 import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 
@@ -44,6 +45,7 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
     int getHeight();
 
     void setDestinationCoords(Geopoint destCoords);
+    void setCoordinates(Location coordinates);
 
     MapProjectionImpl getMapProjection();
 
