@@ -1640,12 +1640,10 @@ public class Geocache implements IWaypoint {
         }
 
         //try to match name if prefix and coords are null
-        for (final Waypoint waypoint : waypoints) {
-            final String searchWpName = searchWp.getName();
-            if (!StringUtils.isBlank(searchWpName)) {
-                final String wpName = waypoint.getName();
-                final WaypointType wpType = waypoint.getWaypointType();
-                if (searchWpName.equals(wpName) && searchWp.getWaypointType().getL10n().equals(wpType.getL10n())) {
+        final String searchWpName = searchWp.getName();
+        if (!StringUtils.isBlank(searchWpName)) {
+            for (final Waypoint waypoint : waypoints) {
+                if (searchWpName.equals(waypoint.getName()) && searchWp.getWaypointType().getL10n().equals(waypoint.getWaypointType().getL10n())) {
                     return waypoint;
                 }
             }
