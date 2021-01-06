@@ -50,6 +50,7 @@
     <string name="wp_trailhead">Ösvény kezdete</string>
     <string name="wp_waypoint">Referencia pont</string>
     <string name="wp_original">Eredeti koordináták</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Megtaláltam</string>
     <string name="log_dnf">Nem találtam meg</string>
