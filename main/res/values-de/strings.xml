@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Ausgangspunkt</string>
     <string name="wp_waypoint">Referenzpunkt</string>
     <string name="wp_original">Ursprüngliche Koordinaten</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Gefunden</string>
     <string name="log_dnf">Nicht gefunden</string>
@@ -669,10 +670,10 @@
     <string name="init_routecolor_summary">Farbe und Deckkraft der individuellen Route einstellen. Eine individuelle Route besteht aus mehreren Wegpunkten und/oder Caches, die Du in der Karte durch einen langen Druck auf den Wegpunkt/Cache ausgewählt hast. (\"Langer Druck\" muss zuvor in den Karteneinstellungen aktiviert worden sein.)</string>
     <string name="init_routewidth">Breite der individuellen Route</string>
     <string name="init_routewidth_summary">Breite für individuelle Routenlinie auswählen</string>
-    <string name="init_trackcolor">Farbe des individuellen Tracks</string>
-    <string name="init_trackcolor_summary">Farbe und Deckkraft für individuelle Tracks einstellen. Ein individueller Track besteht aus mehreren Wegpunkten und kann über eine GPX Trackdatei geladen werden.</string>
-    <string name="init_trackwidth">Breite des individuellen Tracks</string>
-    <string name="init_trackwidth_summary">Breite der individuellen Tracklinie einstellen</string>
+    <string name="init_trackcolor">Linienfarbe für GPX-Track/Route</string>
+    <string name="init_trackcolor_summary">Farbe und Deckkraft für Tracks/Routen einstellen. Ein(e) Track/Route besteht aus mehreren Wegpunkten und kann über eine GPX-Track-/Routen-Datei geladen werden.</string>
+    <string name="init_trackwidth">Linienbreite für GPX-Track/Route</string>
+    <string name="init_trackwidth_summary">Linienbreite für GPX-Track/Route auswählen</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
     <string name="init_circlecolor_summary">Farbe und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
     <string name="init_circlefillcolor">Füllfarbe der Kreislinie</string>
@@ -956,6 +957,8 @@
     <string name="menu_caches">Caches verwalten</string>
     <string name="cache_menu_event">Zum Kalender hinzufügen</string>
     <string name="cache_menu_extract_waypoints">Extrahiere Wegpunkte</string>
+    <string name="cache_menu_set_cache_icon">Cache-Symbol wählen</string>
+    <string name="cache_icon_updated">Cache-Symbol aktualisiert</string>
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Aktualisieren</string>
     <string name="cache_menu_share">Cache teilen</string>
@@ -1043,6 +1046,8 @@
     <string name="internal_goto_targets_description">Dieser Cache speichert deine letzten \"Gehe zu\" Ziele. Er wird automatisch erzeugt, sobald du die \"Gehe zu\" Funktion im Hauptmenü benutzt. Die dort eingegebenen Koordinaten werden in Wegpunkten dieses Caches gespeichert. Wenn du diese Koordinaten nicht mehr brauchst, so kannst du diesen Cache oder einen seiner Wegpunkte sicher löschen. Du kannst den Cache auch in jede andere Liste deiner Wahl verschieben.</string>
     <string name="init_longtap_map">Langes Tippen auf Karte</string>
     <string name="init_summary_longtap_map">Aktiviere langes Tippen auf ein Kartensymbol (erstellt eine individuelle Route) oder auf eine freie Stelle der Karte (erstellt einen benutzerdefinierten Cache)</string>
+    <string name="onetime_info_longtap_disabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches anlegen.\n\nLanges Tippen auf die Karte ist derzeit deaktiviert\n\nDu kannst die Einstellung unter Einstellungen - Karte - Kartenverhalten ändern</string>
+    <string name="onetime_info_longtap_enabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches anlegen.\n\nLanges Tippen auf die Karte ist derzeit aktiviert\n\nDu kannst die Einstellung unter Einstellungen - Karte - Kartenverhalten ändern</string>
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
