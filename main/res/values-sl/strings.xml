@@ -44,6 +44,7 @@
     <string name="wp_trailhead">Začetek poti</string>
     <string name="wp_waypoint">Referenčna točka</string>
     <string name="wp_original">Originalne koordinate</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Najden</string>
     <string name="log_dnf">Ni najden</string>
