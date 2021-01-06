@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Tako pradžia</string>
     <string name="wp_waypoint">Rekomenduojamas taškas</string>
     <string name="wp_original">Originaliosios koordinatės</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Surasta</string>
     <string name="log_dnf">Nerasta</string>
@@ -661,10 +662,6 @@
     <string name="init_routecolor_summary">Pasirinkite asmeninio maršruto linijos spalvą ir skaidrumą. Asmeninis maršrutas yra papildomų taškų ir (arba) slėptuvių rinkinys, kurį pasirinkote ilgai paspaudę papildomą tašką/slėptuvę. (Pirmiausia turite įjungti ilgo paspaudimo funkciją, žr. Žemėlapio nustatymus.)</string>
     <string name="init_routewidth">Asmeninio maršruto linijos plotis</string>
     <string name="init_routewidth_summary">Pasirinkite asmeninio maršruto linijos plotį</string>
-    <string name="init_trackcolor">Asmeninio kelio linijos spalva</string>
-    <string name="init_trackcolor_summary">Pasirinkite asmeninio kelio linijos spalvą ir skaidrumą. Asmeninis kelias susideda iš kelių papildomų taškų ir gali būti įkeltas per GPX kelio failą.</string>
-    <string name="init_trackwidth">Asmeninio kelio linijos plotis</string>
-    <string name="init_trackwidth_summary">Pasirinkite asmeninio kelio linijos plotį</string>
     <string name="init_circlecolor">Apskritimo linijos spalva</string>
     <string name="init_circlecolor_summary">Pasirinkite apskritimo krašto spalvą ir skaidrumą. Apskritimai naudojami kaip vaizdinis pavaizdavimas, rodantis mažiausią spindulį aplink slėptuvę arba papildomą tašką, kur neleidžiama jokios kitos slėptuvės ar papildomi taškai. (Galioja geocaching.com)</string>
     <string name="init_circlefillcolor">Apskritimo užpildymo spalva</string>
