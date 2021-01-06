@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Départ du sentier</string>
     <string name="wp_waypoint">Point de repère</string>
     <string name="wp_original">Coordonnées d\'origine</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Trouvée</string>
     <string name="log_dnf">Non trouvée</string>
@@ -661,10 +662,6 @@
     <string name="init_routecolor_summary">Sélectionnez la couleur et l\'opacité des itinéraires individuels. Un itinéraire individuel est une collection de points de passage et/ou de caches que vous avez sélectionnés en appuyant longuement sur le point de passage/cache. (Vous devez d\'abord activer la fonction d\'appui long, voir les paramètres de la carte.)</string>
     <string name="init_routewidth">Largeur de la ligne d\'itinéraire individuelle</string>
     <string name="init_routewidth_summary">Sélectionnez la largeur pour les itinéraires individuels</string>
-    <string name="init_trackcolor">Couleur de la route individuelle</string>
-    <string name="init_trackcolor_summary">Choisir la couleur et l\'opacité de la route. Une route est composée de plusieurs points de passage et peut être chargée depuis un fichier de trace GPX.</string>
-    <string name="init_trackwidth">Largeur de la ligne d\'itinéraire individuelle</string>
-    <string name="init_trackwidth_summary">Sélectionner la largeur de ligne de l\'itinéraire individuel</string>
     <string name="init_circlecolor">Couleur du trait de cercle</string>
     <string name="init_circlecolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de cercle. Les cercles sont utilisés comme représentation visuelle pour le rayon minimum autour d\'une cache ou d\'un point de passage physique, où aucune autre cache ou point de passage physique n\'est autorisée. (S\'applique à geocaching.com)</string>
     <string name="init_circlefillcolor">Couleur de l\'intérieur du cercle</string>
