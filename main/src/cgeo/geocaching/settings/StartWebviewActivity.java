@@ -1,10 +1,10 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.ProcessUtils.isChromeLaunchable;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,10 +24,7 @@ public class StartWebviewActivity extends AppCompatActivity {
             if (isChromeLaunchable()) {
                 ShareUtils.openCustomTab(this, url);
             } else {
-                // We're using "https://example.com" as we only want to query web browsers, not c:geo or other geocaching apps
-                final Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://example.com"));
-
-                final ResolveInfo resolveInfo = getPackageManager().queryIntentActivities(browserIntent, PackageManager.MATCH_DEFAULT_ONLY).get(0);
+                final ResolveInfo resolveInfo = ProcessUtils.getInstalledBrowsers(this).get(0);
 
                 final Intent launchIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 launchIntent.setPackage(resolveInfo.activityInfo.packageName);

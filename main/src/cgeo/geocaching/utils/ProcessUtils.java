@@ -39,6 +39,14 @@ public final class ProcessUtils {
         return ProcessUtils.isLaunchable(CHROME_PACKAGE_NAME);
     }
 
+    public static List<ResolveInfo> getInstalledBrowsers(final Context context) {
+        // We're using "https://example.com" as we only want to query for web browsers, not c:geo or other apps
+        final Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://example.com"));
+        return context.getPackageManager().queryIntentActivities(browserIntent, PackageManager.MATCH_DEFAULT_ONLY);
+    }
+
+
+
     /**
      * Checks whether a launch intent is available or if the package is just installed
      * This function is relatively costly, so if you know that the package in question has
