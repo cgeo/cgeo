@@ -4013,6 +4013,33 @@ public class DataStore {
         }
     }
 
+    /**
+     * Sets individual cache icons given by HashMap<Geocode, newCacheIcon>.
+     * Missing entries are reset to default value (0).
+     */
+    public static void setCacheIcons(final Collection<Geocache> caches, final HashMap<String, Integer> undo) {
+        if (caches.isEmpty()) {
+            return;
+        }
+        final SQLiteStatement add = PreparedStatement.SET_CACHE_ICON.getStatement();
+
+        database.beginTransaction();
+        try {
+            for (final Geocache cache : caches) {
+                final String geocode = cache.getGeocode();
+                final Integer newCacheIcon = undo.get(geocode);
+                add.bindLong(1, newCacheIcon == null ? 0 : newCacheIcon);
+                add.bindString(2, geocode);
+                add.execute();
+
+                cache.setAssignedEmoji(newCacheIcon == null ? 0 : newCacheIcon);
+            }
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+    }
+
     private static @NonNull String fetchLocation(final Cursor cursor) {
         final String location = cursor.getString(cursor.getColumnIndex("location"));
 
