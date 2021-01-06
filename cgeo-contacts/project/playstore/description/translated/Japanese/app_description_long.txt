@@ -10,4 +10,4 @@ Playストアではコメントに返事が出来ません!
 (訳者注: 現在は可能ですがほぼ返答していないようです) c:geo用アドオンのインストール時や使っていて問題があったら最初にFAQ: https://faq.cgeo.org(英語)をご覧ください。
 それでも問題が解決しなければサポートにメールで連絡ください(訳者注: 英語、ドイツ語、フランス語かスロベニア語でお願いします)。
 
-If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
+c:geo - 連絡先 アドオン が要求する権限については https://www.cgeo.org/faq.html#plugin-contacts-privacy でご確認ください。
