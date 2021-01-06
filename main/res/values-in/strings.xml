@@ -41,6 +41,7 @@
     <string name="wp_trailhead">Jejak kepala</string>
     <string name="wp_waypoint">Titik Acuan</string>
     <string name="wp_original">Koordinat Asli</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Menemukannya</string>
     <string name="log_dnf">Tidak dapat menemukannya</string>
