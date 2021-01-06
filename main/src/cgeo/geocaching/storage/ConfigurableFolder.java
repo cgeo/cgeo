@@ -53,11 +53,12 @@ public enum ConfigurableFolder {
     private final int nameKeyId;
     private final boolean needsWrite;
 
+    private final Folder[] defaultFolderCandidates;
+
     private Folder userDefinedFolder;
-    private final Folder defaultFolder;
+    private Folder defaultFolder;
 
     private final WeakHashMap<Object, List<Consumer<ConfigurableFolder>>> changeListeners = new WeakHashMap<>();
-
 
     @AnyRes
     public int getPrefKeyId() {
@@ -69,7 +70,8 @@ public enum ConfigurableFolder {
         this.nameKeyId = nameKeyId;
         this.needsWrite = true;
 
-        this.defaultFolder = getAccessibleDefaultFolder(defaultFolderCandidates);
+        this.defaultFolderCandidates = defaultFolderCandidates;
+        this.defaultFolder = this.defaultFolderCandidates.length == 0 ? null : this.defaultFolderCandidates[0];
 
         //read current user-defined location from settings.
         this.userDefinedFolder = Folder.fromConfig(Settings.getConfigurableFolder(this));
@@ -124,18 +126,16 @@ public enum ConfigurableFolder {
         notifyChanged();
     }
 
-    private Folder getAccessibleDefaultFolder(final Folder[] candidates) {
-
-        for (Folder candidate : candidates) {
-            //candidate is ok if it is either directly accessible or based on another public folder (which will become accessible later)
-            if (candidate != null && (candidate.getRootConfigurableFolder() != null || FolderStorage.get().ensureFolder(candidate, needsWrite()))) {
-                return candidate;
-            }
-        }
-
-        return Folder.fromFolder(CGEO_PRIVATE_FILES, "public/" + name());
+    /** Sets a new default location (never null!). Should be called ONLY by {@link FolderStorage} */
+    protected void setDefaultFolder(@NonNull final Folder defaultFolder) {
+        this.defaultFolder = defaultFolder;
     }
 
+    protected Folder[] getDefaultCandidates() {
+        return this.defaultFolderCandidates;
+    }
+
+    /** Returns an internationalized ID for this folder (e.g. "GPX" or "Offline Maps"). Does not return the actual value/path (see {@link #toUserDisplayableValue()} for that) */
     @NonNull
     public String toUserDisplayableName() {
         if (this.nameKeyId == 0 || CgeoApplication.getInstance() == null) {

@@ -157,7 +157,6 @@
     <string translatable="false" name="pref_version">version</string>
     <string translatable="false" name="pref_usecompass">usecompass</string>
     <string translatable="false" name="pref_mapfile">mfmapfile</string>
-    <string translatable="false" name="pref_trackfile">trackfile</string>
     <string translatable="false" name="pref_autotarget_individualroute">autotarget_individualroute</string>
     <string translatable="false" name="pref_memberstatus">memberstatus</string>
     <string translatable="false" name="pref_coordinputformat">coordinputformat</string>
@@ -277,7 +276,6 @@
 
     <!-- ids for persisted document uri prefs -->
     <string translatable="false" name="pref_persisteduri_track">persisteduri_track</string>
-    <string translatable="false" name="pref_persisteduri_individual_route">persisteduri_individual_route</string>
 
     <!-- preference values -->
     <string translatable="false" name="pref_maprotation_off">off</string>

@@ -30,7 +30,13 @@ public final class UriUtils {
         String uriString = uri.getPath();
         final int idx = uriString.lastIndexOf(":");
         if (idx >= 0) {
-            uriString = "…/" + uriString.substring(idx + 1);
+            final String uriFirstPart = uriString.substring(0, idx);
+            //"firstpart" this might be something like /tree/primary (points to root) or /tree/home (points to documents)
+            String prepend = "…/";
+            if ("/tree/home".equals(uriFirstPart)) {
+                prepend = prepend + "Documents/";
+            }
+            uriString = prepend + uriString.substring(idx + 1);
         }
         while (uriString.endsWith("/")) {
             uriString = uriString.substring(0, uriString.length() - 1);

@@ -5,19 +5,22 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteSegment;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.FolderStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CalendarUtils;
-import cgeo.geocaching.utils.EnvironmentUtils;
+import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.net.Uri;
 import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
@@ -26,10 +29,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
@@ -41,11 +44,8 @@ public class IndividualRouteExport {
     private String filename;
 
     public IndividualRouteExport(final Activity activity, final Route route) {
-        // quick check for being able to write the GPX file
-        if (!EnvironmentUtils.isExternalStorageAvailable()) {
-            return;
-        }
-        filename = "route_" + CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm-ss"); // extension will be added on clicking "ok" button
+
+        filename = FileNameCreator.INDIVIDUAL_ROUTE_NOSUFFIX.createName(); //will not have a suffix
 
         final InputFilter filter = (source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
@@ -71,7 +71,7 @@ public class IndividualRouteExport {
         resetFilename.setOnClickListener(v -> editFilename.setText(""));
 
         final TextView text = layout.findViewById(R.id.info);
-        text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), filename + FileUtils.GPX_FILE_EXTENSION));
+        text.setText(activity.getString(R.string.export_confirm_message, ConfigurableFolder.GPX.toUserDisplayableValue(), filename + FileUtils.GPX_FILE_EXTENSION));
 
         builder
             .setPositiveButton(R.string.export, (dialog, which) -> {
@@ -85,7 +85,7 @@ public class IndividualRouteExport {
             .show();
     }
 
-    private class Export extends AsyncTaskWithProgress<RouteSegment, File> {
+    private class Export extends AsyncTaskWithProgress<RouteSegment, Uri> {
 
         private static final String PREFIX_GPX = "";
         private static final String NS_GPX = "http://www.topografix.com/GPX/1/1";
@@ -99,17 +99,20 @@ public class IndividualRouteExport {
         }
 
         @Override
-        protected File doInBackgroundInternal(final RouteSegment[] trail) {
-            BufferedWriter writer = null;
-            final File exportFile = new File(LocalStorage.getGpxExportDirectory(), filename);
-
-            try {
-                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(exportFile), StandardCharsets.UTF_8));
-            } catch (IOException e) {
+        protected Uri doInBackgroundInternal(final RouteSegment[] trail) {
+            final Uri uri = FolderStorage.get().create(ConfigurableFolder.GPX, filename);
+            if (uri == null) {
                 return null;
             }
             final XmlSerializer gpx = new KXmlSerializer();
+            Writer writer = null;
             try {
+                final OutputStream os = FolderStorage.get().openForWrite(uri);
+                if (os == null) {
+                    return null;
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
+
                 int countExported = 0;
                 gpx.setOutput(writer);
                 gpx.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
@@ -145,22 +148,21 @@ public class IndividualRouteExport {
                 gpx.endTag(NS_GPX, "rte");
                 gpx.endTag(NS_GPX, "gpx");
             } catch (final IOException e) {
+                Log.w("Could not write route to uri '" + uri + "'", e);
                 // delete partial GPX file on error
-                if (exportFile.exists()) {
-                    FileUtils.deleteIgnoringFailure(exportFile);
-                }
+                FolderStorage.get().delete(uri);
                 return null;
             } finally {
                 IOUtils.closeQuietly(writer);
             }
-            return exportFile;
+            return uri;
         }
 
         @Override
-        protected void onPostExecuteInternal(final File exportFile) {
+        protected void onPostExecuteInternal(final Uri exportUri) {
             if (null != activity) {
-                if (null != exportFile) {
-                    ShareUtils.shareFileOrDismissDialog(activity, exportFile, "application/xml", R.string.export, String.format(activity.getString(R.string.export_individualroute_success), exportFile.toString()));
+                if (null != exportUri) {
+                    ShareUtils.shareOrDismissDialog(activity, exportUri, ShareUtils.TYPE_XML, R.string.export, String.format(activity.getString(R.string.export_individualroute_success), UriUtils.toUserDisplayableString(exportUri)));
                 } else {
                     ActivityMixin.showToast(activity, activity.getString(R.string.export_failed));
                 }

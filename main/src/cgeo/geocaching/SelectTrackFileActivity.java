@@ -1,16 +1,16 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class SelectTrackFileActivity extends AbstractSelectFileActivity {
 
     public SelectTrackFileActivity() {
-        super("gpx", Intents.EXTRA_GPX_FILE, Settings.getTrackFile(), false);
+        super("gpx", Intents.EXTRA_GPX_FILE, null /*Settings.getTrackFile()*/, false);
         setContext(SelectTrackFileActivity.this);
     }
 

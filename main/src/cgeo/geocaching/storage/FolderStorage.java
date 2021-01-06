@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Func1;
+import static cgeo.geocaching.storage.Folder.CGEO_PRIVATE_FILES;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -41,7 +42,9 @@ import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import static org.apache.commons.io.IOUtils.closeQuietly;
+
 
 /**
  * Central class to interact with locally stored Folders.
@@ -638,6 +641,11 @@ public class FolderStorage {
         this.documentAccessor = new DocumentFolderAccessor(this.context);
         this.fileAccessor = new FileFolderAccessor(this.context);
         this.documentAccessor.refreshUriPermissionCache();
+
+        //(re)sets default folders
+        for (ConfigurableFolder folder : ConfigurableFolder.values()) {
+            folder.setDefaultFolder(getAccessibleDefaultFolder(folder.getDefaultCandidates(), folder.needsWrite(), folder.name()));
+        }
     }
 
     /** checks if folder is available and can be used. If current setting is not available, folder may be adjusted e.g. to default */
@@ -970,6 +978,18 @@ public class FolderStorage {
         }
     }
 
+    private Folder getAccessibleDefaultFolder(final Folder[] candidates, final boolean needsWrite, final String fallbackName) {
+
+        for (Folder candidate : candidates) {
+            //candidate is ok if it is either directly accessible or based on another public folder (which will become accessible later)
+            if (candidate != null && (candidate.getRootConfigurableFolder() != null || ensureFolder(candidate, needsWrite))) {
+                return candidate;
+            }
+        }
+
+        return Folder.fromFolder(CGEO_PRIVATE_FILES, "public/" + fallbackName);
+    }
+
     private void reportProblem(@StringRes final int messageId, final Object ... params) {
         reportProblem(messageId, null, params);
     }
@@ -977,12 +997,28 @@ public class FolderStorage {
     private void reportProblem(@StringRes final int messageId, final Exception ex, final Object ... params) {
 
         //prepare params message
+        final ImmutablePair<String, String> messages = constructMessage(messageId, params);
+        Log.w("FolderStorage: " + messages.right, ex);
+        if (context != null) {
+            ActivityMixin.showToast(context, messages.left);
+        }
+    }
+
+    /**
+     * Given a resource id and parameters to fill it, constructs one message fit fpr user display (left) and one for log file (right)
+     * Difference is that the one for the log file will contain more detailled information than that for the end user
+     */
+    public ImmutablePair<String, String> constructMessage(@StringRes final int messageId, final Object ... params) {
+        //prepare params message
         final Object[] paramsForLog = new Object[params.length];
         final Object[] paramsForUser = new Object[params.length];
         for (int i = 0; i < params.length; i++) {
             if (params[i] instanceof Folder) {
                 paramsForUser[i] = ((Folder) params[i]).toUserDisplayableString();
                 paramsForLog[i] = params[i] + "(" + getUriForFolder((Folder) params[i]) + ")";
+            } else if (params[i] instanceof ConfigurableFolder) {
+                paramsForUser[i] = ((ConfigurableFolder) params[i]).toUserDisplayableValue();
+                paramsForLog[i] = params[i] + "(" + getUriForFolder(((ConfigurableFolder) params[i]).getFolder()) + ")";
             } else if (params[i] instanceof Uri) {
                 paramsForUser[i] = UriUtils.toUserDisplayableString((Uri) params[i]);
                 paramsForLog[i] = params[i];
@@ -991,8 +1027,7 @@ public class FolderStorage {
                 paramsForLog[i] = params[i];
             }
         }
-        Log.w("FolderStorage: " + context.getString(messageId, paramsForLog), ex);
-        ActivityMixin.showToast(context, context.getString(messageId, paramsForUser));
+        return new ImmutablePair<>(context.getString(messageId, paramsForUser), context.getString(messageId, paramsForLog));
     }
 
 }

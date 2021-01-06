@@ -32,6 +32,7 @@ public class ShareUtils {
 
     public static final String TYPE_EMAIL = "message/rfc822";
     public static final String TYPE_TEXT = "text/plain";
+    public static final String TYPE_XML = "application/xml";
 
     private ShareUtils() {
         // utility class

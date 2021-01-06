@@ -862,14 +862,14 @@
     <string name="configurablefolder_usertype_default">Default</string>
 
 
-    <string name="configurablefolder_base">base</string>
-    <string name="configurablefolder_offline_maps">offline maps</string>
-    <string name="configurablefolder_offline_maps_themes">offline map themes</string>
+    <string name="configurablefolder_base">Base</string>
+    <string name="configurablefolder_offline_maps">Offline Maps</string>
+    <string name="configurablefolder_offline_maps_themes">Map Themes</string>
     <string name="configurablefolder_gpx">GPX</string>
-    <string name="configurablefolder_backup">backup</string>
-    <string name="configurablefolder_logfiles">logfiles</string>
-    <string name="configurablefolder_fieldnotes">field notes</string>
-    <string name="configurablefolder_images">log images</string>
+    <string name="configurablefolder_backup">Backup</string>
+    <string name="configurablefolder_logfiles">Logfiles</string>
+    <string name="configurablefolder_fieldnotes">Field Notes</string>
+    <string name="configurablefolder_images">Log Images</string>
 
     <!-- auth generic -->
     <string name="auth_authorize">Authorize c:geo</string>

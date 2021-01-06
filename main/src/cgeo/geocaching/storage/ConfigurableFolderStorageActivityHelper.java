@@ -214,27 +214,32 @@ public class ConfigurableFolderStorageActivityHelper {
             return false;
         }
         if (runningIntentData == null) {
-            report(true, R.string.folderstorage_folder_selection_aborted, "unknown");
+            // this is not an error! It might mean that activity was requested by another instance of the Helper (thus usind same requestCodes)
+            // -> signal that result was NOT handled
+            return false;
+        }
+
+        try {
+
+            final boolean resultOk = resultCode == Activity.RESULT_OK && intent != null;
+
+            switch (requestCode) {
+                case REQUEST_CODE_GRANT_FOLDER_URI_ACCESS:
+                    handleResultFolderSelection(intent, resultOk);
+                    break;
+                case REQUEST_CODE_SELECT_FILE:
+                case REQUEST_CODE_SELECT_FILE_MULTIPLE:
+                case REQUEST_CODE_SELECT_FILE_PERSISTED:
+                    handleResultSelectFiles(requestCode, intent, resultOk);
+                    break;
+                default: //for codacy
+                    break;
+            }
             return true;
+        } finally {
+            //Make sure to delete the runningIntentData when the request was handled!
+            runningIntentData = null;
         }
-
-        final boolean resultOk = resultCode == Activity.RESULT_OK && intent != null;
-
-        switch (requestCode) {
-            case REQUEST_CODE_GRANT_FOLDER_URI_ACCESS:
-                handleResultFolderSelection(intent, resultOk);
-                break;
-            case REQUEST_CODE_SELECT_FILE:
-            case REQUEST_CODE_SELECT_FILE_MULTIPLE:
-            case REQUEST_CODE_SELECT_FILE_PERSISTED:
-                handleResultSelectFiles(requestCode, intent, resultOk);
-                break;
-            default: //for codacy
-                break;
-        }
-
-        runningIntentData = null;
-        return true;
     }
 
     private void handleResultSelectFiles(final int requestCode, final Intent intent, final boolean resultOk) {
@@ -333,9 +338,9 @@ public class ConfigurableFolderStorageActivityHelper {
     private void finalizeFolderSelection(final boolean success, final ConfigurableFolder folder, final Uri selectedUri, final Consumer<ConfigurableFolder> callback) {
         if (success) {
             FolderStorage.get().setUserDefinedFolder(folder, Folder.fromDocumentUri(selectedUri));
-            report(false, R.string.folderstorage_folder_selection_success, folder.toUserDisplayableValue());
+            report(false, R.string.folderstorage_folder_selection_success, folder);
         } else {
-            report(true, R.string.folderstorage_folder_selection_aborted, folder.toUserDisplayableValue());
+            report(true, R.string.folderstorage_folder_selection_aborted, folder);
         }
         if (callback != null) {
             callback.accept(folder);
@@ -343,13 +348,9 @@ public class ConfigurableFolderStorageActivityHelper {
     }
 
     private void report(final boolean isWarning, @StringRes final int messageId, final Object ... params) {
-        final String message = activity.getString(messageId, params);
-        if (isWarning) {
-            Log.w("ConfigurableFolderStorageActivityHelper: " + message);
-        } else {
-            Log.i("ConfigurableFolderStorageActivityHelper: " + message);
-        }
-        ActivityMixin.showToast(activity, message);
+        final ImmutablePair<String, String> messages = FolderStorage.get().constructMessage(messageId, params);
+        Log.log(isWarning ? Log.LogLevel.WARN : Log.LogLevel.INFO, messages.right);
+        ActivityMixin.showToast(activity, messages.left);
     }
 
     private Spanned getHtml(@AnyRes final int id, final Object ... params) {

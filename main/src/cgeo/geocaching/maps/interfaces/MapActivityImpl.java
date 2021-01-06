@@ -1,5 +1,8 @@
 package cgeo.geocaching.maps.interfaces;
 
+import cgeo.geocaching.utils.IndividualRouteUtils;
+import cgeo.geocaching.utils.TrackUtils;
+
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -34,6 +37,10 @@ public interface MapActivityImpl {
     boolean superOnPrepareOptionsMenu(Menu menu);
 
     boolean superOnOptionsItemSelected(MenuItem item);
+
+    TrackUtils getTrackUtils();
+
+    IndividualRouteUtils getIndividualRouteUtils();
 
     /**
      * called from the pseudo actionbar layout

@@ -630,14 +630,6 @@ public class Settings {
         putBoolean(R.string.pref_autotarget_individualroute, autotargetIndividualRoute);
     }
 
-    public static String getTrackFile() {
-        return getString(R.string.pref_trackfile, null);
-    }
-
-    public static void setTrackFile(final String filename) {
-        putString(R.string.pref_trackfile, filename);
-    }
-
     public static CoordInputFormatEnum getCoordInputFormat() {
         return CoordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, CoordInputFormatEnum.DEFAULT_INT_VALUE));
     }
@@ -1592,7 +1584,7 @@ public class Settings {
     /** gets the user-defined uri for a configurable folder. Can be null */
     @Nullable
     public static String getPersistedDocumentUri(@NonNull final PersistedDocumentUri persistedUri) {
-        return getString(persistedUri.getPrefKeyId(), null);
+        return getString(persistedUri.getPrefKeyId(), getLegacyValueForPersistedDocumentUri(persistedUri.getPrefKeyId()));
     }
 
     /** For Migration towards Android 11: returns any legacy value which might be stored in old settings for certain folders */
@@ -1601,6 +1593,13 @@ public class Settings {
             return getStringDirect("mapDirectory", null);
         } else if (prefKeyId == R.string.pref_configurablefolder_offlinemapthemes) {
             return getStringDirect("renderthemepath", null);
+        }
+        return null;
+    }
+
+    private static String getLegacyValueForPersistedDocumentUri(@NonNull final int prefKeyId) {
+        if (prefKeyId == R.string.pref_persisteduri_track) {
+            return getStringDirect("pref_trackfile", null);
         }
         return null;
     }

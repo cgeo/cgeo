@@ -11,12 +11,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class FileNameCreator {
 
     public static final FileNameCreator DEFAULT = new FileNameCreator("file", "dat");
-    public static final FileNameCreator DEFAULT_TEXT = new FileNameCreator("file", "txt");
-    public static final FileNameCreator DEFAULT_BINARY = new FileNameCreator("file", "bin");
+//    public static final FileNameCreator DEFAULT_TEXT = new FileNameCreator("file", "txt");
+//    public static final FileNameCreator DEFAULT_BINARY = new FileNameCreator("file", "bin");
 
     public static final FileNameCreator OFFLINE_MAPS = new FileNameCreator("mapfile", "map");
     public static final FileNameCreator LOGFILE = new FileNameCreator("logcat", "txt");
     public static final FileNameCreator MEMORY_DUMP = new FileNameCreator("cgeo_dump", "hprof");
+    public static final FileNameCreator INDIVIDUAL_ROUTE_NOSUFFIX = new FileNameCreator("route", null);
 
     private final AtomicInteger fileNameCounter = new AtomicInteger(1);
 
@@ -48,7 +49,7 @@ public class FileNameCreator {
         return (praefix == null ? "file" : praefix) + "_" +
             CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm-ss") + "-" +
             (fileNameCounter.addAndGet(1))
-            + "." + (suffix == null ? "dat" : suffix);
+            + (suffix == null ? "" : "." + suffix);
 
     }
 

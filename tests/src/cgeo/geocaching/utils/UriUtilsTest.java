@@ -10,7 +10,14 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class UriUtilsTest {
 
+    //Example for folder /cgeo
     private static final String DOC_URI_EXAMPLE = "content://com.android.externalstorage.documents/tree/primary%3ADocuments%2Fcgeo/document/primary%3ADocuments%2Fcgeo%2Flogfiles%2Flogcat_2020-12-28_17-22-20-2.txt";
+    //Example for folder /Documents/cgeo
+    private static final String DOC_URI_EXAMPLE_2 = "content://com.android.externalstorage.documents/tree/home%3Acgeo";
+    //Example for folder /Downloads/cgeo
+    private static final String DOC_URI_EXAMPLE_3 = "content://com.android.externalstorage.documents/tree/primary%3ADownload%2Fcgeo";
+
+
     private static final String DOC_URI_EXAMPLE_DECODED = "content://com.android.externalstorage.documents/tree/primary:Documents/cgeo/document/primary:Documents/cgeo/logfiles/logcat_2020-12-28_17-22-20-2.txt";
 
     private static final String FILE_URI_EXAMPLE = "file:///storage/emulated/0/cgeo/test.txt";
@@ -20,6 +27,9 @@ public class UriUtilsTest {
         assertThat(UriUtils.toUserDisplayableString(Uri.parse(FILE_URI_EXAMPLE))).isEqualTo("/storage/emulated/0/cgeo/test.txt");
         assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE))).isEqualTo("…/Documents/cgeo/logfiles/logcat_2020-12-28_17-22-20-2.txt");
         assertThat(UriUtils.toUserDisplayableString(null)).isEqualTo("");
+
+        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE_2))).isEqualTo("…/Documents/cgeo");
+        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE_3))).isEqualTo("…/Download/cgeo");
     }
 
     @Test

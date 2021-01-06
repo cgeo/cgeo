@@ -11,8 +11,8 @@ import androidx.annotation.Nullable;
 /** Enum listing all single-document-Uris which can be persisted */
 public enum PersistedDocumentUri {
 
-    TRACK(R.string.pref_persisteduri_track, null),
-    INDIVIDUAL_ROUTE(R.string.pref_persisteduri_individual_route, null);
+    TRACK(R.string.pref_persisteduri_track, null);
+    //INDIVIDUAL_ROUTE(R.string.pref_persisteduri_individual_route, null);
 
     @AnyRes
     private final int prefKeyId;
@@ -35,6 +35,10 @@ public enum PersistedDocumentUri {
     public Uri getUri() {
         final String uriString = Settings.getPersistedDocumentUri(this);
         return uriString == null ? null : Uri.parse(Settings.getPersistedDocumentUri(this));
+    }
+
+    public boolean hasValue() {
+        return getUri() != null;
     }
 
     /** Sets a new user-defined location ("null" is allowed). Should be called ONLY by {@link FolderStorage} */
