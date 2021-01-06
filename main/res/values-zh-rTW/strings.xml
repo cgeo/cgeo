@@ -42,6 +42,7 @@
     <string name="wp_trailhead">出发点</string>
     <string name="wp_waypoint">引用点：</string>
     <string name="wp_original">原始坐标</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">发现它</string>
     <string name="log_dnf">没有发现</string>
