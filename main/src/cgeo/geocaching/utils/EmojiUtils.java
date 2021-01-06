@@ -76,7 +76,9 @@ public class EmojiUtils {
         // right button displays current value; clicking simply closes the dialog
         final ImageButton button2 = customTitle.findViewById(R.id.dialog_button2);
         button2.setVisibility(View.VISIBLE);
-        if (currentValue != 0) {
+        if (currentValue == -1) {
+            button2.setImageResource(R.drawable.ic_menu_mark);
+        } else if (currentValue != 0) {
             button2.setImageDrawable(getEmojiDrawable(activity.getResources(), markerHeight, markerAvailable, markerFontsize, currentValue));
         } else if (defaultRes != 0) {
             button2.setImageResource(defaultRes);

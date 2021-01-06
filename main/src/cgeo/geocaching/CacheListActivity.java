@@ -983,7 +983,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_set_listmarker) {
             selectListMarker();
         } else if (menuItem == R.id.menu_set_cache_icon) {
-            EmojiUtils.selectEmojiPopup(this, 0, CacheType.TRADITIONAL.markerId, this::setCacheIcons);
+            EmojiUtils.selectEmojiPopup(this, -1, R.drawable.ic_menu_reset, this::setCacheIcons);
         } else {
             return super.onOptionsItemSelected(item);
         }
