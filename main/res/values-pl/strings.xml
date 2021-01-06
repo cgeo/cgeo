@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Punkt wyjścia</string>
     <string name="wp_waypoint">Punkt nawigacji</string>
     <string name="wp_original">Oryginalne współrzędne</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Znaleziono</string>
     <string name="log_dnf">Nie znaleziono</string>
@@ -147,6 +148,7 @@
     <string name="log_problem_archive_text">Ten geocacher poinformował, że ten cache powinien być archiwizowany. Recenzent został powiadomiony.</string>
     <string name="log_image_scale_option_noscaling">Brak skalowania</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">Zdjęcie</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Przetłumacz na %s</string>
@@ -670,14 +672,14 @@
     <string name="init_routecolor_summary">Wybierz kolor i nieprzezroczystość dla poszczególnych linii trasy. Indywidualna trasa to zbiór punktów trasy i/lub skrytek wybranych przez długie naciśnięcie na waypoint/cache. (Musisz najpierw włączyć funkcję długiego przytrzymania, zobacz ustawienia mapy.)</string>
     <string name="init_routewidth">Pojedyncza szerokość linii</string>
     <string name="init_routewidth_summary">Wybierz szerokość dla pojedynczej linii trasy</string>
-    <string name="init_trackcolor">Kolor linii ścieżki</string>
-    <string name="init_trackcolor_summary">Wybierz kolor i nieprzezroczystość dla linii ścieżki. Ścieżka składa się z kilku punktów nawigacyjnych i może być załadowana za pomocą pliku GPX utworu.</string>
-    <string name="init_trackwidth">Indywidualna szerokość linii ścieżek</string>
-    <string name="init_trackwidth_summary">Wybierz szerokość dla indywidualnej linii ścieżki</string>
     <string name="init_circlecolor">Kolor obrysu koła</string>
     <string name="init_circlecolor_summary">Wybierz kolor i nieprzezroczystość dla linii okręgowej. Okręgi są używane jako wizualne przedstawienie minimalnego promienia wokół skrzynki lub fizycznego punktu drogi, gdzie nie jest dozwolona żadna inna skrzynka lub fizyczny punkt drogi. (Dotyczy geocaching.com)</string>
     <string name="init_circlefillcolor">Kolor wypełnienia koła</string>
     <string name="init_circlefillcolor_summary">Wybierz kolor i nieprzezroczystość okręgów, które mają być wypełnione</string>
+    <string name="init_accuracycirclecolor">Kolor linii okręgu dokładności</string>
+    <string name="init_accuracycirclecolor_summary">Wybierz kolor i poziom przezroczystości dla linii okręgu dokładności. Okręg dokładności jest używany jako wizualna reprezentacja dokładności sygnału lokalizacji.</string>
+    <string name="init_accuracycirclefillcolor">Kolor wypełnienia okręgu dokładności</string>
+    <string name="init_accuracycirclefillcolor_summary">Wybierz kolor i poziom przezroczystości dla wypełniania okręgów dokładności</string>
     <string name="init_include_found_status">Uwzględnij status \"Znalezione\"</string>
     <string name="init_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
     <string name="init_summary_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
@@ -726,6 +728,7 @@
     <string name="init_create_memory_dump">Wykonaj zrzut pamięci</string>
     <string name="init_memory_dump">Zrzut pamięci</string>
     <string name="init_memory_dumped">Pamięć zrzucona do %s</string>
+    <string name="init_please_wait">Proszę czekać…</string>
     <string name="init_hardware_acceleration_title">Sprzętowa akceleracja renderowania</string>
     <string name="init_hardware_acceleration_note">Akceleracja sprzętowa renderuje elementy graficzne szybciej na ekranie. Jednakże na niektórych urządzeniach z systemem Android może powodować błędy i część tekstu może być niewyraźna (zwłaszcza pogrubione znaki). Jeśli tak się stanie, należy wyłączyć akcelerację sprzętową.</string>
     <string name="init_hardware_acceleration">Włącz akcelerację sprzętową</string>
@@ -966,6 +969,8 @@
     <string name="menu_caches">Zarządzaj skrzynkami</string>
     <string name="cache_menu_event">Dodaj do kalendarza</string>
     <string name="cache_menu_extract_waypoints">Wyciągnij punkty orientacyjne</string>
+    <string name="cache_menu_set_cache_icon">Ustaw ikonę skrzynki</string>
+    <string name="cache_icon_updated">Zaktualizowano ikonę skrzynki</string>
     <string name="cache_menu_details">Szczegóły</string>
     <string name="cache_menu_refresh">Odśwież</string>
     <string name="cache_menu_share">Podziel się skrzynką</string>
@@ -1053,6 +1058,8 @@
     <string name="internal_goto_targets_description">Ta skrzynka przechowuje Twoje ostatnie cele \"Idź do\". Jest ona automatycznie tworzona po użyciu funkcji \"Idź do\" w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrzynki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrzynkę lub jej dowolny punkt. Możesz również przenieść pamięć podręczną do dowolnej wybranej przez siebie listy.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
     <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz skrzynkę zdefiniowaną przez użytkownika)</string>
+    <string name="onetime_info_longtap_disabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy i skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie wyłączone.\n\nMożesz to zmienić w Ustawienia - Mapa - Zachowanie mapy</string>
+    <string name="onetime_info_longtap_enabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy i skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie włączone.\n\nMożesz to zmienić w Ustawienia - Mapa - Zachowanie mapy</string>
     <string name="goto_targets_list">Wewnętrzne skrzynki</string>
     <string name="clear_goto_history_title">Wyczyść historię \'Idź do\'</string>
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacyjnych z wyjątkiem pięciu najnowszych</string>
@@ -1183,6 +1190,7 @@
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczną rotację mapy?\n\nMożesz włączyć ją ponownie za pomocą menu rotacji mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
+    <string name="quick_settings_info">Niektóre ustawienia mapy (ustawienia mapy, ukrywanie, nawigacja) zostały przeniesione do nowego okienka „Szybkie ustawienia”.\nMożesz otworzyć to okienko używając ikony w dolnym środku mapy.</string>
     <string name="map_show_in_map">Pokaż na mapie</string>
     <!-- search -->
     <string name="search_bar_hint">Szukaj skrzynek</string>
@@ -1794,6 +1802,8 @@
     <string name="switch_manual">Ręcznie</string>
     <string name="switch_auto">Automatycznie</string>
     <string name="switch_default">(domyślne)</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
     <!-- view settings -->
     <string name="view_settings">Pokaż ustawienia</string>
     <string name="delete_setting">Usuń ustawienie</string>
@@ -1836,6 +1846,14 @@
     <string name="downloadmap_confirmation">Pobrać mapę \"%1$s\"?\n\nMoże to zająć trochę czasu oraz wiązać się ze znacznymi kosztami, w zależności od Twojego połączenia sieciowego.\n\nInformacje o rozmiarze: %2$s</string>
     <string name="downloadmap_handling">Pobieranie będzie obsługiwane w tle przez systemowego menedżera pobierania. Powiadomienie powinno pojawić się zaraz po rozpoczęciu pobieranie (co może chwilę potrwać).</string>
     <string name="button_continue">Kontynuuj</string>
+    <string name="downloadmap_onedirup">(jeden katalog wyżej)</string>
+    <string name="downloadmap_checkforupdates_button">Sprawdź aktualizacje</string>
+    <string name="downloadmap_available_updates">Dostępne aktualizacje</string>
+    <string name="downloadmap_no_updates_found">Nie znaleziono aktualizacji mapy</string>
+    <string name="downloadmap_directory">katalog</string>
+    <string name="downloadmap_mapfile">plik mapy</string>
+    <string name="downloadmap_retrieving_directory_data">Pobieram dane katalogu…</string>
+    <string name="downloadmap_checking_for_updates">Sprawdzam aktualizacje…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
     <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>
@@ -1850,4 +1868,33 @@
     <string name="export_individualroute_title">Eksportuj indywidualną trasę</string>
     <string name="export_individualroute_success">Eksportowano indywidualną trasę do \"%s\"</string>
     <!-- install wizard -->
+    <string name="wizard">Kreator konfiguracji</string>
+    <string name="previous">Poprzedni</string>
+    <string name="skip">Pomiń</string>
+    <string name="next">Następny</string>
+    <string name="done">Zrobione</string>
+    <string name="finish">Zakończ</string>
+    <string name="wizard_welcome_title">Witamy w c:geo</string>
+    <string name="wizard_intro">Wystarczy kilka kroków, aby skonfigurować c: geo i zacząć działać. Mam Ci w tym pomóc?</string>
+    <string name="wizard_intro2">Witamy ponownie w kreatorze konfiguracji. Twoja konfiguracja c: geo nie jest jeszcze zakończona. Czy mogę pomóc Ci ją ukończyć i zacząć? To tylko kilka kroków.</string>
+    <string name="wizard_outro_ok">Dziękujemy za skonfigurowanie c:geo.\nBaw się dobrze!</string>
+    <string name="wizard_outro_error">Niekompletna konfiguracja\nNie wszystkie części c:geo będą działać zgodnie z oczekiwaniami!</string>
+    <string name="wizard_permissions_title">Ustaw uprawnienia aplikacji</string>
+    <string name="wizard_permissions_intro">c: geo do prawidłowego działania wymaga pewnych uprawnień na urządzeniu. \nW dalszych krokach wyjaśnię więcej szczegółów.</string>
+    <string name="wizard_platforms_title">Konfigurowanie usług</string>
+    <string name="wizard_platforms_intro">Aby znaleźć skrytki z c:geo, potrzebujesz konta w usłudze geocaching obsługiwanej przez c:geo. \nWybierz żądaną usługę poniżej, aby zalogować się na istniejące konto lub utworzyć nowe.</string>
+    <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; inne</string>
+    <string name="wizard_welcome_advanced">Konfiguracja zaawansowana</string>
+    <string name="wizard_advanced_offlinemaps_label">Mapy offline</string>
+    <string name="wizard_advanced_offlinemaps_info">Ta strona zawiera pewne zaawansowane funkcje, których użycie jest opcjonalne.\n\nc: geo może pobierać pliki map do użytku offline.</string>
+    <string name="wizard_advanced_brouter_label">Aplikacja do nawigacji</string>
+    <string name="wizard_advanced_brouter_info">Instalując i konfigurując aplikację towarzyszącą o nazwie „BRouter Offline Navigation” c:geo może nawigować do celów i wyświetlać informacje o trasach na mapie.</string>
+    <string name="wizard_advanced_restore_label">Przywróć</string>
+    <string name="wizard_advanced_restore_info">Jeśli masz kopię zapasową poprzedniej instalacji, możesz przywrócić ustawienia i/lub dane skrytek.</string>
+    <string name="status_not_ok">BŁĄD</string>
+    <string name="wizard_status_title">Status konfiguracji</string>
+    <string name="wizard_status_storage_permission">Uprawnienia do przechowywania danych</string>
+    <string name="wizard_status_location_permission">Dostęp do lokalizacji</string>
+    <string name="wizard_status_platform">Usługi Geocaching</string>
 </resources>
