@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Reitin alku</string>
     <string name="wp_waypoint">Viitesijainti</string>
     <string name="wp_original">Alkuperäiset koordinaatit</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Löytyi</string>
     <string name="log_dnf">Ei löytynyt</string>
@@ -669,10 +670,6 @@
     <string name="init_routecolor_summary">Valitse yksittäisen reittiviivan väri ja läpinäkyvyys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
     <string name="init_routewidth">Yksittäisen reittiviivan leveys</string>
     <string name="init_routewidth_summary">Valitse yksittäisen reittiviivan leveys</string>
-    <string name="init_trackcolor">Yksittäisen jälkiviivan väri</string>
-    <string name="init_trackcolor_summary">Valitse rataviivan väri ja läpinäkyvyys. Rata koostuu useista reittipisteistä ja voidaan ladata radan sisältävältä GPX-tiedostosta.</string>
-    <string name="init_trackwidth">Yksittäisen rataviivan leveys</string>
-    <string name="init_trackwidth_summary">Valitse yksittäisen jälkiviivan leveys</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
     <string name="init_circlecolor_summary">Valitse ympyräviivan väri ja läpinäkyvyys. Ympyräviivaa käytetään visuaalisena esityksenä minimialueesta kätkön tai fyysisen reittipisteen ympärillä, jonka sisälle ei voida laittaa toista kätköä tai fyysistä reittipistettä. (Pätee geocaching.com:iin)</string>
     <string name="init_circlefillcolor">Ympyräviivan leveys</string>
