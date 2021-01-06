@@ -413,7 +413,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
             bindSummaryToValue(pref, folder.toUserDisplayableValue());
             pref.setOnPreferenceClickListener(p -> {
-                contentStorageHelper.selectFolderUri(folder, f -> p.setSummary(f.toUserDisplayableValue()));
+                contentStorageHelper.selectPersistableFolder(folder, f -> p.setSummary(f.toUserDisplayableValue()));
                 return false;
             });
             folder.registerChangeListener(this, f -> pref.setSummary(f.toUserDisplayableValue()));

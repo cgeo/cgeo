@@ -65,7 +65,7 @@ public class TrackUtils {
 
     private void startIndividualTrackFileSelector(final Route.UpdateRoute updateTracks) {
 
-        fileSelector.selectPersistedUri(PersistableUri.TRACK, uri -> {
+        fileSelector.selectPersistableUri(PersistableUri.TRACK, uri -> {
             if (uri != null && updateTracks != null) {
                 loadTracks(updateTracks);
             }

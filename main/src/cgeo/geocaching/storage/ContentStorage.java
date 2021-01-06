@@ -18,7 +18,6 @@ import android.content.UriPermission;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.DocumentsContract;
-import android.provider.OpenableColumns;
 import android.webkit.MimeTypeMap;
 
 import androidx.annotation.NonNull;
@@ -26,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -131,14 +131,14 @@ public class ContentStorage {
         public abstract List<FileInformation> list(@NonNull Folder folder) throws IOException;
 
         /** If a file with given name exists in folder, it is returned. Otherwise null is returned */
-        public abstract FileInformation get(@NonNull Folder folder, String name) throws IOException;
+        public abstract FileInformation getFileInfo(@NonNull Folder folder, String name) throws IOException;
 
         /** creates physical folder on device if it is not already there anyway */
         public abstract boolean ensureFolder(@NonNull Folder folder, boolean needsWrite) throws IOException;
 
         public abstract Uri getUriForFolder(@NonNull Folder folder) throws IOException;
 
-        public abstract String getName(@NonNull Uri uri) throws IOException;
+        public abstract FileInformation getFileInfo(@NonNull Uri uri) throws IOException;
 
         //some helpers for subclasses
         protected String getTypeForName(@NonNull final String name) {
@@ -199,7 +199,7 @@ public class ContentStorage {
             }
         }
 
-        public FileInformation get(@NonNull final Folder folder, final String name) {
+        public FileInformation getFileInfo(@NonNull final Folder folder, final String name) {
             final File dir = toFile(folder, false);
             if (dir == null) {
                 return null;
@@ -235,11 +235,12 @@ public class ContentStorage {
         }
 
         /** Must return null if file does not yet exist */
-        public String getName(@NonNull final Uri uri) {
-            if (new File(uri.getPath()).exists()) {
-                return UriUtils.getLastPathSegment(uri);
+        public FileInformation getFileInfo(@NonNull final Uri uri) {
+            final File file = new File(uri.getPath());
+            if (!file.exists()) {
+                return null;
             }
-            return null;
+            return fileToInformation(Folder.fromFile(file.getParentFile()), file);
         }
 
         private Uri folderToUri(final Folder folder) {
@@ -281,6 +282,15 @@ public class ContentStorage {
      * Reading methods ( e.g. list()) take up to 5ms and writing methods (e.g. create(), delete()) up to 10ms! Found no way around this...
      */
     private static class DocumentFolderAccessor extends FolderAccessor {
+
+        private static final String[] FILE_INFO_COLUMNS = new String[] {
+            DocumentsContract.Document.COLUMN_DOCUMENT_ID,
+            DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+            DocumentsContract.Document.COLUMN_MIME_TYPE,
+            DocumentsContract.Document.COLUMN_LAST_MODIFIED,
+            DocumentsContract.Document.COLUMN_SIZE
+        };
+
 
         /** cache for Uri permissions */
         private final Map<String, UriPermission> uriPermissionCache = new HashMap<>();
@@ -334,7 +344,7 @@ public class ContentStorage {
         }
 
         @Override
-        public FileInformation get(@NonNull final Folder folder, final String name) throws IOException {
+        public FileInformation getFileInfo(@NonNull final Folder folder, final String name) throws IOException {
 
             //this is very slow...
             for (FileInformation fi : list(folder)) {
@@ -369,18 +379,22 @@ public class ContentStorage {
                 DocumentsContract.Document.COLUMN_LAST_MODIFIED,
                 DocumentsContract.Document.COLUMN_SIZE,
 
-            }, c -> {
-                final String documentId = c.getString(0);
-                final String name = c.getString(1);
-                final String mimeType = c.getString(2);
-                final long lastMod = c.getLong(3);
-                final long size = c.getLong(4);
+            }, c -> fileInfoFromCursor(c, null, dir, folder));
+        }
 
-                final boolean isDir = DocumentsContract.Document.MIME_TYPE_DIR.equals(mimeType);
-                final Uri uri = DocumentsContract.buildDocumentUriUsingTree(dir, documentId);
+        /** retrieves a FileInformation object from the current cursor row retrieved by using {@Link } columns */
+        private static FileInformation fileInfoFromCursor(final Cursor c, final Uri docUri, final Uri parentDirUri, final Folder parentFolder) {
+            final String documentId = c.getString(0);
+            final String name = c.getString(1);
+            final String mimeType = c.getString(2);
+            final long lastMod = c.getLong(3);
+            final long size = c.getLong(4);
 
-                return new FileInformation(name, uri, isDir, isDir ? Folder.fromFolder(folder, name) : null, mimeType, size, lastMod);
-            });
+            final boolean isDir = DocumentsContract.Document.MIME_TYPE_DIR.equals(mimeType);
+            final Uri uri = docUri != null ? docUri :
+                (parentDirUri != null ? DocumentsContract.buildDocumentUriUsingTree(parentDirUri, documentId) : null);
+
+            return new FileInformation(name, uri, isDir, isDir && parentFolder != null ? Folder.fromFolder(parentFolder, name) : null, mimeType, size, lastMod);
         }
 
         @Override
@@ -399,8 +413,19 @@ public class ContentStorage {
         }
 
         @Override
-        public String getName(@NonNull final Uri uri) throws IOException {
-            return queryDoc(uri, new String[]{OpenableColumns.DISPLAY_NAME}, null, c -> c.getString(0));
+        public FileInformation getFileInfo(@NonNull final Uri uri) throws IOException {
+            //In case this uri points to a directory: it is not possible to get the folder for a directory just from its Uri unfortunately!
+            return getFileInfo(uri, null);
+        }
+
+        private FileInformation getFileInfo(@NonNull final Uri uri, final Folder folder) throws IOException {
+            try {
+                return queryDoc(uri, FILE_INFO_COLUMNS, null,
+                    c -> fileInfoFromCursor(c, uri, null, folder));
+            } catch (IllegalArgumentException iae) {
+                //this means that the uri does not exist. Return null
+                return null;
+            }
         }
 
         /**
@@ -767,7 +792,7 @@ public class ContentStorage {
             return null;
         }
         try {
-            return getAccessorFor(folder).get(folder, name);
+            return getAccessorFor(folder).getFileInfo(folder, name);
         } catch (IOException ioe) {
             reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, folder);
         }
@@ -789,12 +814,23 @@ public class ContentStorage {
 
     /** Helper method to get the display name for a Uri. Returns null if Uri does not exist. */
     public String getName(final Uri uri) {
+        final FileInformation fi = getFileInfo(uri);
+        return fi == null ? null : fi.name;
+    }
+
+    /**
+     * Helper method to get the File Information for a Uri. Returns null if Uri does not exist.
+     *
+     * Note carefully: in case this Uri is not a File-Uri and points to a directory, the Folder field of the returned object is NOT FILLED
+     * Unfortunately it is not possible to retrieve this info from an Uri alone.
+     * */
+    public FileInformation getFileInfo(final Uri uri) {
         if (uri == null) {
             return null;
         }
 
         try {
-            return getAccessorFor(uri).getName(uri);
+            return getAccessorFor(uri).getFileInfo(uri);
         } catch (IOException ioe) {
             reportProblem(R.string.contentstorage_err_read_failed, ioe, uri);
         }
@@ -888,14 +924,46 @@ public class ContentStorage {
 
     /** Helper method, meant for usage in conjunction with {@link #writeFileToFolder(PersistableFolder, FileNameCreator, File, boolean)} */
     public File createTempFile() {
+        return createTempFile(null);
+    }
+
+    public File createTempFile(final String fileName) {
         File outputDir = null;
         try {
             outputDir = context.getCacheDir(); // context being the Activity pointer
-            return File.createTempFile("cgeo_tempfile_", ".tmp", outputDir);
+            if (fileName == null) {
+                return File.createTempFile("cgeo_tempfile_", ".tmp", outputDir);
+            }
+            final File tempFile = new File(outputDir, fileName);
+            return tempFile.createNewFile() ? tempFile : null;
         } catch (IOException ie) {
-            reportProblem(R.string.contentstorage_err_create_failed, ie, "temp file", outputDir);
+            reportProblem(R.string.contentstorage_err_create_failed, ie, fileName, outputDir);
         }
         return null;
+    }
+
+    /** Writes the content of given Uri to a (temporary!) File */
+    public File writeUriToTempFile(final Uri uri, final String fileName) {
+        File file = null;
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = openForRead(uri);
+            if (is == null) {
+                return null;
+            }
+            file = createTempFile(fileName);
+            os = new FileOutputStream(file);
+            IOUtils.copy(is, os);
+        } catch (IOException ie) {
+            reportProblem(R.string.contentstorage_err_copy_failed, ie, uri, file, false);
+            if (file != null && !file.delete()) {
+                Log.i("File could not be deleted: " + file);
+            }
+        } finally {
+            closeQuietly(is, os);
+        }
+        return file;
     }
 
 

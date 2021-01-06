@@ -239,6 +239,10 @@ public class Settings {
             Log.i("Moving field-notes");
             FileUtils.move(LocalStorage.getLegacyFieldNotesDirectory(), LocalStorage.getFieldNotesDirectory());
 
+            Log.i("Moving gpx ex- and import dirs");
+            FileUtils.move(LocalStorage.getLegacyGpxDirectory(), LocalStorage.getDefaultGpxDirectory());
+
+
             Log.i("Moving local spoilers");
             FileUtils.move(LocalStorage.getLegacyLocalSpoilersDirectory(), LocalStorage.getLocalSpoilersDirectory());
 
@@ -1577,7 +1581,9 @@ public class Settings {
         } else if (prefKeyId == R.string.pref_persistablefolder_offlinemapthemes) {
             return getStringDirect("renderthemepath", null);
         } else if (prefKeyId == R.string.pref_persistablefolder_gpx) {
-            return getStringDirect("pref_gpxImportDir", getStringDirect("pref_gpxExportDir", null));
+            return getStringDirect("pref_gpxImportDir",
+                getStringDirect("pref_gpxExportDir",
+                    LocalStorage.getDefaultGpxDirectory().getPath()));
         }
         return null;
     }

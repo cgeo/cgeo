@@ -48,7 +48,7 @@ public class FileNameCreator {
         }
 
         //create new unique filename
-        return (praefix == null ? "file" : praefix) + "_" +
+        return (praefix == null ? "" : praefix + "_") +
             CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm-ss") + "-" +
             (fileNameCounter.addAndGet(1))
             + (suffix == null ? "" : "." + suffix);
