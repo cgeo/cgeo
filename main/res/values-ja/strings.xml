@@ -53,6 +53,7 @@
     <string name="wp_trailhead">出発地点</string>
     <string name="wp_waypoint">参考地点</string>
     <string name="wp_original">オリジナル座標</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">発見</string>
     <string name="log_dnf">未発見</string>
@@ -668,10 +669,6 @@
     <string name="init_routecolor_summary">個別ルートの色と不透明度を選択。個別ルートはウェイポイント/キャッシュをロングタップで選択して作成したルートです(「地図の動作」でロングタップを有効にする必要があります)</string>
     <string name="init_routewidth">個別ルートの線幅</string>
     <string name="init_routewidth_summary">個別ルートの線幅を選択</string>
-    <string name="init_trackcolor">トラックの色</string>
-    <string name="init_trackcolor_summary">トラックの色と不透明度の選択。トラックはトラックポイントの集まりで、GPXトラックファイルから読み込めます</string>
-    <string name="init_trackwidth">トラックの線幅</string>
-    <string name="init_trackwidth_summary">トラックの色と不透明度の選択</string>
     <string name="init_circlecolor">0.1マイル円の線色</string>
     <string name="init_circlecolor_summary">0.1マイル円の線色と不透明度の選択。 キャッシュまたはウェイポイントに半径0.1マイルの円を表示します。geocaching.comでは0.1マイル以内にキャッシュまたは物理的なウェイポイントを設置することを禁止しています</string>
     <string name="init_circlefillcolor">0.1マイル円の内側の色</string>
