@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Ten geocacher poinformował, że ten cache powinien być archiwizowany. Recenzent został powiadomiony.</string>
     <string name="log_image_scale_option_noscaling">Brak skalowania</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">Zdjęcie</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Przetłumacz na %s</string>
@@ -1199,6 +1200,7 @@
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczną rotację mapy?\n\nMożesz włączyć ją ponownie za pomocą menu rotacji mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
+    <string name="quick_settings_info">Niektóre ustawienia mapy (ustawienia mapy, ukrywanie, nawigacja) zostały przeniesione do nowego okienka „Szybkie ustawienia”.\nMożesz otworzyć to okienko używając ikony w dolnym środku mapy.</string>
     <string name="map_show_in_map">Pokaż na mapie</string>
     <!-- search -->
     <string name="search_bar_hint">Szukaj skrzynek</string>
@@ -1811,6 +1813,8 @@
     <string name="switch_manual">Ręcznie</string>
     <string name="switch_auto">Automatycznie</string>
     <string name="switch_default">(domyślne)</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
     <!-- view settings -->
     <string name="view_settings">Pokaż ustawienia</string>
     <string name="delete_setting">Usuń ustawienie</string>

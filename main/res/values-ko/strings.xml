@@ -89,9 +89,11 @@
     <string name="log_tb_archived">영구보관됨</string>
     <string name="log_save">오프라인 저장</string>
     <string name="log_saving">로그 발송중…</string>
+    <string name="log_saving_and_uploading">로그 및 사진 올리는 중…</string>
     <string name="log_posting_log">로그 올리는 중…</string>
     <string name="log_posting_twitter">트위터에 올리는 중…</string>
     <string name="log_posting_vote">캐시 투표 게시 중…</string>
+    <string name="log_posting_image">사진 올리는 중…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
     <string name="log_clear">지우기</string>
     <string name="log_post_not_possible">데이터 다운로드 진행 중…\n몇초 후 다시 시도해 보거나, 인터넷 연결상태를 확인 해 보세요.</string>
@@ -145,6 +147,7 @@
     <string name="log_problem_archive_text">이 지오캐셔가 이 캐시는 영구보관해야 한다고 신고했습니다. 커뮤니티 자원봉자자가 통지했습니다.</string>
     <string name="log_image_scale_option_noscaling">스케일링 없음</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">이미지</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s로 번역하기</string>
@@ -153,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">확인</string>
     <string name="err_parse">로그 페이지 분석에 실패했습니다</string>
+    <string name="err_captcha">캡차가 필요합니다. 지침은 <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>을 참조하세요.</string>
     <string name="err_server">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_ec">Extremcaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_su">Geocaching.su에 접속할 수 없습니다. 해당 웹사이트가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
@@ -214,6 +218,7 @@
     <string name="err_parse_lat_lon">경위도를 해석할 수 없습니다.</string>
     <string name="err_rendertheme_file_unreadable">선택한 렌더링 테마를 로드할 수 없습니다. 내장 테마로 복귀합니다.</string>
     <string name="err_rendertheme_invalid">선택한 렌더링 테마를 이 mapforge 버전에 사용할 수 없습니다. 내장 테마로 복귀합니다.</string>
+    <string name="err_invalid_filename_char">문자 \'%c\'는 허용되지 않음</string>
     <string name="warn_save_nothing">저장할 것이 없습니다.</string>
     <string name="warn_no_cache_coord">해당 좌표에 캐시가 없습니다.</string>
     <string name="warn_no_coordinates">좌표가 없습니다.</string>
@@ -251,6 +256,7 @@
     <string name="info_stored_image">새로운 사진 저장 위치 :</string>
     <string name="info_cache_saved">캐시가 기기에 저장되었습니다.</string>
     <string name="warn_calculator_state_save">계산기 상태를 유지하려면 웨이포인트를 저장해야 합니다.</string>
+    <string name="feature_info_offline_counter">오프라인에 저장된 로그가있는 캐시가 아직 온라인에 기록되지 않았을 수 있습니다. 편의를 위해 이러한 로그 수는 c:geo 메인 페이지의 바닥 글에서 발견 된 캐시 수 뒤에 \"+x\"로 표시됩니다. \n\n또한 이러한 \"x\"로그는 로그 서명에 사용할 수있는 \"숫자\"템플릿에 추가됩니다. \n\n이 카운터 확장이 마음에 들지 않으면 \"설정\" &gt; \"로깅\"에서 비활성화하거나 대신 \"숫자 (오프라인 로그 제외)\"템플릿을 사용할 수 있습니다. \n\n남아있는 오프라인 로그를 쉽게 찾으려면 \"기록\"목록으로 이동하여 \"개인 데이터 포함\" &gt; \"오프라인 로그 사용\" 필터링하십시오.</string>
     <string name="err_trackable_log_not_anonymous">c:geo에서 익명으로 %1$s를 로그할 수 없습니다. 설정을 열어 %2$s 의 계정정보를 입력하시겠습니까?</string>
     <string name="err_trackable_no_preference_activity">죄송합니다만, 적절한 해당 서비스 설정화면이 없습니다.</string>
     <string name="confirm_unsaved_changes_title">저장되지 않은 변경사항</string>
@@ -259,6 +265,7 @@
     <string name="warn_log_load_additional_data">c:geo에서 로그 추가정보(추적아이템/호감점수)를 불러오지 못했습니다.</string>
     <string name="more_information">자세한 정보 보기</string>
     <string name="undo">실행취소</string>
+    <string name="dont_show_again">다시 표시하지 않음</string>
     <string name="warn_gm_not_available">구글 지도를 사용할 수 없습니다.</string>
     <string name="switch_to_mf">구글 프레이 서비스가 오래되었습니다. 대신 Mapsforge 지도 제공자로 전환 하시겠습니까?</string>
     <string name="switched_to_mf">기본 지도가 Mapsforge 지도 제공자로 전환되었습니다. 지금지도를 다시 시작하세요.</string>
@@ -438,6 +445,7 @@
     <string name="contribution_documentation">설명서</string>
     <string name="contribution_projectleader">오픈 소스 프로젝트 리더</string>
     <string name="contribution_graphics">그래픽</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>시스템 정보 및 c:geo 로그 파일이 포함 된 이메일을 통해보고하여 c:geo 문제를 해결하도록 도와주세요. 또한 메일에 자세한 오류 설명을 포함하십시오. 다른 연락처 옵션은 <i>c:geo 정보</i>에서 찾을 수 있습니다.</p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">설정 열기?</string>
     <string name="settings_title_services">서비스</string>
@@ -469,6 +477,7 @@
     <string name="settings_title_navigation">길찾기</string>
     <string name="settings_summary_navigation">원하는 길찾기 방법 및 외부 길찾기 앱 선택하기</string>
     <string name="settings_title_system">시스템</string>
+    <string name="settings_summary_system">시스템 특정 설정 및 디버깅 옵션.</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
     <string name="settings_category_browser">브라우저</string>
     <string name="settings_category_geocaching_platform">지오캐싱 플랫폼</string>
@@ -538,6 +547,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">로그 작성</string>
     <string name="init_signature_template_size">크기</string>
+    <string name="init_signature_template_type">유형</string>
     <string name="init_ratingwanted">GCvote 평점</string>
     <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
     <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
@@ -550,6 +560,9 @@
     <string name="init_summary_transparentBackground">투명한 배경 사용 (다시 시작해야 함)</string>
     <string name="init_address">주소 보기</string>
     <string name="init_summary_address">주 화면에 좌표 대신 주소를 표시합니다.</string>
+    <string name="init_select_language">언어 선택</string>
+    <string name="init_use_default_language">기본 언어 사용</string>
+    <string name="init_category_exclude">캐시 제외</string>
     <string name="init_exclude">자신의 캐시와 찾은 캐시 제외</string>
     <string name="init_summary_exclude">자신이 숨긴 캐시와 이미 찾은 캐시를 제외합니다.</string>
     <string name="init_showwaypoints">웨이포인트 보기</string>
@@ -579,10 +592,13 @@
     <string name="init_livelist">방향 보이기</string>
     <string name="init_summary_livelist">목록에서 캐시의 방향을 표시합니다.</string>
     <!-- backup / restore -->
+    <string name="init_backup_title">백업 생성하기</string>
     <string name="init_backup">백업 캐시 / 웨이포인트</string>
     <string name="init_backup_backup">백업하기</string>
     <string name="init_backup_running">캐시 데이터베이스의 백업본 생성중…</string>
     <string name="init_backup_restore">복원하기</string>
+    <string name="init_restore_restored">복원이 완료되었습니다</string>
+    <string name="init_backup_start_restore">복원 시작</string>
     <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
     <string name="init_backup_failed">c:geo 데이터베이스 백업이 실패했습니다.</string>
     <string name="init_backup_unnecessary">데이터베이스가 없습니다. 백업이 불필요합니다.</string>
@@ -892,6 +908,7 @@
     <string name="cache_menu_map_ext">기타 외부 앱</string>
     <string name="cache_menu_streetview">스트리트 뷰</string>
     <string name="cache_menu_browser">브라우저에서 열기</string>
+    <string name="cache_menu_open_with">다른 프로그램으로 열기…</string>
     <string name="cache_menu_visit">로그하기</string>
     <string name="cache_menu_visit_offline">빠른 오프라인 로그</string>
     <string name="cache_menu_spoilers">스포일러 사진</string>
@@ -911,6 +928,7 @@
     <string name="cache_menu_checker">Geochecker 열기</string>
     <string name="cache_menu_challenge_checker">도전 확인프로그램 찾기</string>
     <string name="cache_menu_ignore">캐시 제외시키기</string>
+    <string name="cache_log_menu_title">%1$s 중 %2$s 로그</string>
     <string name="ignore_confirm_title">조심하세요</string>
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
@@ -946,6 +964,7 @@
     <string name="cache_terrain">지형등급</string>
     <string name="cache_rating">평점</string>
     <string name="cache_own_rating">당신의 평가</string>
+    <string name="cache_rating_of_new">%1$.1f 중 %2$d</string>
     <string name="cache_favorite">호감점수</string>
     <string name="cache_owner">소유주</string>
     <string name="cache_hidden">숨긴 날짜</string>
@@ -973,6 +992,7 @@
     <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
     <string name="cache_chirpwolf_start">이 캐시에 대한 처프 데이터를 읽으려면 Chirp Wolf를 엽니다.</string>
     <string name="cache_chirpwolf_install">처프 데이터를 읽을 수 있도록 Chirp Wolf 설치하십시오</string>
+    <string name="context_share_as_text">텍스트 공유</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="internal_cache_default_name">사용자 정의 캐시 #%1$d</string>
     <string name="internal_cache_default_description">이것은 사용자 정의 캐시입니다</string>
