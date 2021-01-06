@@ -2,8 +2,8 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.storage.ConfigurableFolder;
-import cgeo.geocaching.storage.FolderStorage;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
@@ -34,7 +34,7 @@ public class DebugUtils {
 
     public static void createMemoryDump(@NonNull final Context context) {
         Toast.makeText(context, R.string.init_please_wait, Toast.LENGTH_LONG).show();
-        final File file = FolderStorage.get().createTempFile();
+        final File file = ContentStorage.get().createTempFile();
         //final File file = FileUtils.getUniqueNamedLogfile("cgeo_dump", "hprof");
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
@@ -43,7 +43,7 @@ public class DebugUtils {
                 } catch (IOException e) {
                     Log.e("createMemoryDump", e);
                 }
-            final Uri dumpFileUri = FolderStorage.get().writeFileToFolder(ConfigurableFolder.LOGFILES, FileNameCreator.MEMORY_DUMP, file, true);
+            final Uri dumpFileUri = ContentStorage.get().writeFileToFolder(PersistableFolder.LOGFILES, FileNameCreator.MEMORY_DUMP, file, true);
 
             ShareUtils.shareOrDismissDialog(context, dumpFileUri, "*/*", R.string.init_memory_dump, context.getString(R.string.init_memory_dumped, UriUtils.toUserDisplayableString(dumpFileUri)));
                 }, 1000);
@@ -92,7 +92,7 @@ public class DebugUtils {
     private static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo, final boolean forceEmail, final String additionalMessage) {
         final AtomicReference<Uri> result = new AtomicReference(null);
 
-        final File file = FolderStorage.get().createTempFile();
+        final File file = ContentStorage.get().createTempFile();
 
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
@@ -109,7 +109,7 @@ public class DebugUtils {
                 Log.iForce("[LogCat]Issuing command: " + builder.command());
                 final int returnCode = builder.start().waitFor();
                 if (returnCode == 0 && file.isFile()) {
-                    final Uri logfileUri = FolderStorage.get().writeFileToFolder(ConfigurableFolder.LOGFILES, FileNameCreator.LOGFILE, file, true);
+                    final Uri logfileUri = ContentStorage.get().writeFileToFolder(PersistableFolder.LOGFILES, FileNameCreator.LOGFILE, file, true);
                     result.set(logfileUri);
                 } else {
                     Log.w("Problem creating logfile " + file + " (returnCode=" + returnCode + ", isFile=" + file.isFile() + ")");
@@ -124,7 +124,7 @@ public class DebugUtils {
                     shareLogfileAsEmail(activity, additionalMessage, result.get());
                 } else {
                     Dialogs.confirmPositiveNegativeNeutral(activity, activity.getString(R.string.about_system_write_logcat),
-                        String.format(activity.getString(R.string.about_system_write_logcat_success), UriUtils.getLastPathSegment(result.get()), ConfigurableFolder.LOGFILES.getFolder().toUserDisplayableString()),
+                        String.format(activity.getString(R.string.about_system_write_logcat_success), UriUtils.getLastPathSegment(result.get()), PersistableFolder.LOGFILES.getFolder().toUserDisplayableString()),
                         activity.getString(android.R.string.ok), null, activity.getString(R.string.about_system_info_send_button),
                         null, null, (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, result.get()));
                 }

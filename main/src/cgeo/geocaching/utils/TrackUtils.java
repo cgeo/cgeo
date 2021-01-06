@@ -4,9 +4,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.files.GPXTrackOrRouteImporter;
 import cgeo.geocaching.models.Route;
-import cgeo.geocaching.storage.ConfigurableFolderStorageActivityHelper;
-import cgeo.geocaching.storage.FolderStorage;
-import cgeo.geocaching.storage.PersistedDocumentUri;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.ContentStorageActivityHelper;
+import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
@@ -19,11 +19,11 @@ public class TrackUtils {
 
     private final Activity activity;
 
-    private final ConfigurableFolderStorageActivityHelper fileSelector;
+    private final ContentStorageActivityHelper fileSelector;
 
     public TrackUtils(final Activity activity) {
         this.activity = activity;
-        this.fileSelector = new ConfigurableFolderStorageActivityHelper(activity);
+        this.fileSelector = new ContentStorageActivityHelper(activity);
     }
 
     /**
@@ -31,7 +31,7 @@ public class TrackUtils {
      * @param menu menu to be configured
      */
     public void onPrepareOptionsMenu(final Menu menu) {
-        final boolean trackfileSet = PersistedDocumentUri.TRACK.hasValue();
+        final boolean trackfileSet = PersistableUri.TRACK.hasValue();
         menu.findItem(R.id.menu_center_on_track).setVisible(trackfileSet);
         menu.findItem(R.id.menu_unload_track).setVisible(trackfileSet);
     }
@@ -51,7 +51,7 @@ public class TrackUtils {
                     startIndividualTrackFileSelector(updateTracks));
             }
         } else if (id == R.id.menu_unload_track) {
-            FolderStorage.get().setPersistedDocumentUri(PersistedDocumentUri.TRACK, null);
+            ContentStorage.get().setPersistedDocumentUri(PersistableUri.TRACK, null);
             updateTracks.updateRoute(null);
         } else if (id == R.id.menu_center_on_track) {
             if (null != tracks) {
@@ -65,7 +65,7 @@ public class TrackUtils {
 
     private void startIndividualTrackFileSelector(final Route.UpdateRoute updateTracks) {
 
-        fileSelector.selectPersistedUri(PersistedDocumentUri.TRACK, uri -> {
+        fileSelector.selectPersistedUri(PersistableUri.TRACK, uri -> {
             if (uri != null && updateTracks != null) {
                 loadTracks(updateTracks);
             }
@@ -84,9 +84,9 @@ public class TrackUtils {
     }
 
     public void loadTracks(final Route.UpdateRoute updateRoute) {
-        final Uri uri = PersistedDocumentUri.TRACK.getUri();
+        final Uri uri = PersistableUri.TRACK.getUri();
         if (null != uri) {
-            GPXTrackOrRouteImporter.doImport(activity, PersistedDocumentUri.TRACK.getUri(), updateRoute);
+            GPXTrackOrRouteImporter.doImport(activity, PersistableUri.TRACK.getUri(), updateRoute);
         }
         ActivityMixin.invalidateOptionsMenu(activity);
     }

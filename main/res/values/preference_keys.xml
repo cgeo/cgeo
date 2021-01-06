@@ -121,8 +121,6 @@
     <string translatable="false" name="pref_compactIconMode">compactIconMode</string>
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>
     <string translatable="false" name="pref_defaultNavigationTool2">defaultNavigationTool2</string>
-    <string translatable="false" name="pref_gpxExportDir">gpxExportDir</string>
-    <string translatable="false" name="pref_gpxImportDir">gpxImportDir</string>
     <string translatable="false" name="pref_dataDir">pref_dataDir</string>
     <string translatable="false" name="pref_fakekey_dataDir">pref_fakekey_dataDir</string>
     <string translatable="false" name="pref_loaddirectionimg">loaddirectionimg</string>
@@ -262,20 +260,20 @@
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
 
-    <!-- ids for configurable folder prefs -->
+    <!-- ids for persistable folder prefs -->
     <string translatable="false" name="pref_group_localfilesystem">group_localfilesystem</string>
-    <string translatable="false" name="pref_configurablefolder_basedir">configurablefolder_basedir</string>
-    <string translatable="false" name="pref_configurablefolder_logfiles">configurablefolder_logfiles</string>
-    <string translatable="false" name="pref_configurablefolder_offlinemaps">configurablefolder_offlinemaps</string>
-    <string translatable="false" name="pref_configurablefolder_offlinemapthemes">configurablefolder_offlinemapthemes</string>
-    <string translatable="false" name="pref_configurablefolder_gpx">configurablefolder_gpx</string>
-    <string translatable="false" name="pref_configurablefolder_backup">configurablefolder_backup</string>
-    <string translatable="false" name="pref_configurablefolder_fieldnotes">configurablefolder_fieldnotes</string>
-    <string translatable="false" name="pref_configurablefolder_images">configurablefolder_images</string>
-    <string translatable="false" name="pref_configurablefolder_testdir">configurablefolder_testdir</string>
+    <string translatable="false" name="pref_persistablefolder_basedir">persistablefolder_basedir</string>
+    <string translatable="false" name="pref_persistablefolder_logfiles">persistablefolder_logfiles</string>
+    <string translatable="false" name="pref_persistablefolder_offlinemaps">persistablefolder_offlinemaps</string>
+    <string translatable="false" name="pref_persistablefolder_offlinemapthemes">persistablefolder_offlinemapthemes</string>
+    <string translatable="false" name="pref_persistablefolder_gpx">persistablefolder_gpx</string>
+    <string translatable="false" name="pref_persistablefolder_backup">persistablefolder_backup</string>
+    <string translatable="false" name="pref_persistablefolder_fieldnotes">persistablefolder_fieldnotes</string>
+    <string translatable="false" name="pref_persistablefolder_images">persistablefolder_images</string>
+    <string translatable="false" name="pref_persistablefolder_testdir">persistablefolder_testdir</string>
 
-    <!-- ids for persisted document uri prefs -->
-    <string translatable="false" name="pref_persisteduri_track">persisteduri_track</string>
+    <!-- ids for persistable uri prefs -->
+    <string translatable="false" name="pref_persistableuri_track">persistableuri_track</string>
 
     <!-- preference values -->
     <string translatable="false" name="pref_maprotation_off">off</string>

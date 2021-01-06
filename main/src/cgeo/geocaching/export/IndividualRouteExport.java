@@ -5,8 +5,8 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteSegment;
-import cgeo.geocaching.storage.ConfigurableFolder;
-import cgeo.geocaching.storage.FolderStorage;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -71,7 +71,7 @@ public class IndividualRouteExport {
         resetFilename.setOnClickListener(v -> editFilename.setText(""));
 
         final TextView text = layout.findViewById(R.id.info);
-        text.setText(activity.getString(R.string.export_confirm_message, ConfigurableFolder.GPX.toUserDisplayableValue(), filename + FileUtils.GPX_FILE_EXTENSION));
+        text.setText(activity.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), filename + FileUtils.GPX_FILE_EXTENSION));
 
         builder
             .setPositiveButton(R.string.export, (dialog, which) -> {
@@ -100,14 +100,14 @@ public class IndividualRouteExport {
 
         @Override
         protected Uri doInBackgroundInternal(final RouteSegment[] trail) {
-            final Uri uri = FolderStorage.get().create(ConfigurableFolder.GPX, filename);
+            final Uri uri = ContentStorage.get().create(PersistableFolder.GPX, filename);
             if (uri == null) {
                 return null;
             }
             final XmlSerializer gpx = new KXmlSerializer();
             Writer writer = null;
             try {
-                final OutputStream os = FolderStorage.get().openForWrite(uri);
+                final OutputStream os = ContentStorage.get().openForWrite(uri);
                 if (os == null) {
                     return null;
                 }
@@ -150,7 +150,7 @@ public class IndividualRouteExport {
             } catch (final IOException e) {
                 Log.w("Could not write route to uri '" + uri + "'", e);
                 // delete partial GPX file on error
-                FolderStorage.get().delete(uri);
+                ContentStorage.get().delete(uri);
                 return null;
             } finally {
                 IOUtils.closeQuietly(writer);

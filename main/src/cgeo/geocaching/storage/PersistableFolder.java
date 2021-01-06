@@ -20,32 +20,32 @@ import java.util.List;
 import java.util.WeakHashMap;
 
 /**
- * Instances of this class represent an application-relevant folder.
+ * Instances of this enum represent applicaton folders whose state is persisted.
  */
-public enum ConfigurableFolder {
+public enum PersistableFolder {
 
     /** Base directory  */
-    BASE (R.string.pref_configurablefolder_basedir, R.string.configurablefolder_base, LEGACY_CGEO_PUBLIC_ROOT, Folder.fromFolder(DOCUMENTS_FOLDER_DEPRECATED, "cgeo")),
+    BASE (R.string.pref_persistablefolder_basedir, R.string.persistablefolder_base, LEGACY_CGEO_PUBLIC_ROOT, Folder.fromFolder(DOCUMENTS_FOLDER_DEPRECATED, "cgeo")),
 
     /** Offline Maps folder where cgeo looks for offline map files (also the one where c:geo downloads its own offline maps) */
     //legacy setting: "mapDirectory", a pure file path is stored
-    OFFLINE_MAPS(R.string.pref_configurablefolder_offlinemaps, R.string.configurablefolder_offline_maps, Folder.fromConfigurableFolder(BASE, "maps")),
+    OFFLINE_MAPS(R.string.pref_persistablefolder_offlinemaps, R.string.persistablefolder_offline_maps, Folder.fromPersistableFolder(BASE, "maps")),
     /** Offline Maps: optional folder for map themes (configured in settings) with user-supplied theme data */
     //legacy setting: "renderthemepath", a pure file path is stored
-    OFFLINE_MAP_THEMES(R.string.pref_configurablefolder_offlinemapthemes, R.string.configurablefolder_offline_maps_themes, Folder.fromConfigurableFolder(BASE, "themes")),
+    OFFLINE_MAP_THEMES(R.string.pref_persistablefolder_offlinemapthemes, R.string.persistablefolder_offline_maps_themes, Folder.fromPersistableFolder(BASE, "themes")),
     /** Target folder for written logfiles */
-    LOGFILES(R.string.pref_configurablefolder_logfiles, R.string.configurablefolder_logfiles, Folder.fromConfigurableFolder(BASE, "logfiles")),
+    LOGFILES(R.string.pref_persistablefolder_logfiles, R.string.persistablefolder_logfiles, Folder.fromPersistableFolder(BASE, "logfiles")),
     /** GPX Files */
-    GPX(R.string.pref_configurablefolder_gpx, R.string.configurablefolder_gpx, Folder.fromConfigurableFolder(BASE, "gpx")),
+    GPX(R.string.pref_persistablefolder_gpx, R.string.persistablefolder_gpx, Folder.fromPersistableFolder(BASE, "gpx")),
     /** Backup storage folder */
-    BACKUP(R.string.pref_configurablefolder_backup, R.string.configurablefolder_backup, Folder.fromConfigurableFolder(BASE, "backup")),
+    BACKUP(R.string.pref_persistablefolder_backup, R.string.persistablefolder_backup, Folder.fromPersistableFolder(BASE, "backup")),
     /** Field Note folder */
-    FIELD_NOTES(R.string.pref_configurablefolder_fieldnotes, R.string.configurablefolder_fieldnotes, Folder.fromConfigurableFolder(BASE, "field-notes")),
+    FIELD_NOTES(R.string.pref_persistablefolder_fieldnotes, R.string.persistablefolder_fieldnotes, Folder.fromPersistableFolder(BASE, "field-notes")),
     ///** (Log) Image folder) */
-    //IMAGES(R.string.pref_configurablefolder_images, R.string.configurablefolder_images, Folder.fromconfigurablefolder(BASE, "images")),
+    //IMAGES(R.string.pref_persistablefolder_images, R.string.persistablefolder_images, Folder.fromPersistableFolder(BASE, "images")),
 
     /** A Folder to use solely for Unit Test */
-    TEST_FOLDER(R.string.pref_configurablefolder_testdir, 0, Folder.fromFolder(CGEO_PRIVATE_FILES,  "unittest"));
+    TEST_FOLDER(R.string.pref_persistablefolder_testdir, 0, Folder.fromFolder(CGEO_PRIVATE_FILES,  "unittest"));
 
     @AnyRes
     private final int prefKeyId;
@@ -58,14 +58,14 @@ public enum ConfigurableFolder {
     private Folder userDefinedFolder;
     private Folder defaultFolder;
 
-    private final WeakHashMap<Object, List<Consumer<ConfigurableFolder>>> changeListeners = new WeakHashMap<>();
+    private final WeakHashMap<Object, List<Consumer<PersistableFolder>>> changeListeners = new WeakHashMap<>();
 
     @AnyRes
     public int getPrefKeyId() {
         return prefKeyId;
     }
 
-    ConfigurableFolder(@AnyRes final int prefKeyId, @AnyRes final int nameKeyId, @NonNull final Folder ... defaultFolderCandidates) {
+    PersistableFolder(@AnyRes final int prefKeyId, @AnyRes final int nameKeyId, @NonNull final Folder ... defaultFolderCandidates) {
         this.prefKeyId = prefKeyId;
         this.nameKeyId = nameKeyId;
         this.needsWrite = true;
@@ -74,18 +74,18 @@ public enum ConfigurableFolder {
         this.defaultFolder = this.defaultFolderCandidates.length == 0 ? null : this.defaultFolderCandidates[0];
 
         //read current user-defined location from settings.
-        this.userDefinedFolder = Folder.fromConfig(Settings.getConfigurableFolder(this));
+        this.userDefinedFolder = Folder.fromConfig(Settings.getPersistableFolder(this));
 
-        //if this ConfigurableFolder's value is based on another ConfigurableFolder, then we have to notify on  indirect change
-        final ConfigurableFolder rootconfigurablefolder = defaultFolder.getRootConfigurableFolder();
-        if (rootconfigurablefolder != null) {
-            rootconfigurablefolder.registerChangeListener(this, pf -> notifyChanged());
+        //if this PersistableFolder's value is based on another PersistableFolder, then we have to notify on  indirect change
+        final PersistableFolder rootPersistableFolder = defaultFolder.getRootPersistableFolder();
+        if (rootPersistableFolder != null) {
+            rootPersistableFolder.registerChangeListener(this, pf -> notifyChanged());
         }
     }
 
     /** registers a listener which is fired each time the actual location of this folder changes */
-    public void registerChangeListener(final Object lifecycleRef, final Consumer<ConfigurableFolder> listener) {
-        List<Consumer<ConfigurableFolder>> listeners = changeListeners.get(lifecycleRef);
+    public void registerChangeListener(final Object lifecycleRef, final Consumer<PersistableFolder> listener) {
+        List<Consumer<PersistableFolder>> listeners = changeListeners.get(lifecycleRef);
         if (listeners == null) {
             listeners = new ArrayList<>();
             changeListeners.put(lifecycleRef, listeners);
@@ -94,21 +94,21 @@ public enum ConfigurableFolder {
     }
 
     private void notifyChanged() {
-        for (List<Consumer<ConfigurableFolder>> list : this.changeListeners.values()) {
-            for (Consumer<ConfigurableFolder> listener :list) {
+        for (List<Consumer<PersistableFolder>> list : this.changeListeners.values()) {
+            for (Consumer<PersistableFolder> listener :list) {
                 listener.accept(this);
             }
         }
     }
 
-    /** The folder this Configurable Folder currently points to */
+    /** The folder this {@link PersistableFolder} currently points to */
     public Folder getFolder() {
         return this.userDefinedFolder == null ? this.defaultFolder : this.userDefinedFolder;
     }
 
-    /** The (FolderType-specific) Uri this Configurable Folder currently points to */
+    /** The (FolderType-specific) Uri this {@link PersistableFolder} currently points to */
     public Uri getUri() {
-        return FolderStorage.get().getUriForFolder(getFolder());
+        return ContentStorage.get().getUriForFolder(getFolder());
     }
 
     public Folder getDefaultFolder() {
@@ -119,14 +119,14 @@ public enum ConfigurableFolder {
         return this.userDefinedFolder != null;
     }
 
-    /** Sets a new user-defined location (or "null" if default shall be used). Should be called ONLY by {@link FolderStorage} */
+    /** Sets a new user-defined location (or "null" if default shall be used). Should be called ONLY by {@link ContentStorage} */
     protected void setUserDefinedFolder(@Nullable final Folder userDefinedFolder) {
         this.userDefinedFolder = userDefinedFolder;
-        Settings.setConfigurableFolder(this, userDefinedFolder == null ? null : userDefinedFolder.toConfig());
+        Settings.setPersistableFolder(this, userDefinedFolder == null ? null : userDefinedFolder.toConfig());
         notifyChanged();
     }
 
-    /** Sets a new default location (never null!). Should be called ONLY by {@link FolderStorage} */
+    /** Sets a new default location (never null!). Should be called ONLY by {@link ContentStorage} */
     protected void setDefaultFolder(@NonNull final Folder defaultFolder) {
         this.defaultFolder = defaultFolder;
     }
@@ -156,7 +156,7 @@ public enum ConfigurableFolder {
             result += isUserDefined() ? "User-Defined" : "Default";
         } else {
             final Context ctx = CgeoApplication.getInstance().getApplicationContext();
-            result += isUserDefined() ? ctx.getString(R.string.configurablefolder_usertype_userdefined) : ctx.getString(R.string.configurablefolder_usertype_default);
+            result += isUserDefined() ? ctx.getString(R.string.persistablefolder_usertype_userdefined) : ctx.getString(R.string.persistablefolder_usertype_default);
         }
         result += ")";
         return result;

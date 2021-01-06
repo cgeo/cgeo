@@ -39,7 +39,7 @@ public class FolderUtils {
     private static final int COPY_FLAG_DIR_BEFORE  = 1;
     private static final int COPY_FLAG_DIR_NEEDED_FOR_TARGET = 2;
 
-    private final FolderStorage pls = FolderStorage.get();
+    private final ContentStorage pls = ContentStorage.get();
 
     private static final FolderUtils INSTANCE = new FolderUtils();
 
@@ -111,7 +111,7 @@ public class FolderUtils {
         try (ContextLogger cLog = new ContextLogger("FolderUtils.copyAll: %s -> %s (move=%s)", source, target, move)) {
 
             //the following three-pass-copy/move is very complicated, but it ensures that copying/moving also works when target is a subdir of source or vice versa
-            //For every change done here, please make sure that tests in FolderStorageTest are still passing!
+            //For every change done here, please make sure that tests in ContentStorageTest are still passing!
 
             if (!pls.ensureFolder(source, false)) {
                 return new ImmutableTriple<>(CopyResult.SOURCE_NOT_READABLE, 0, 0);
@@ -121,7 +121,7 @@ public class FolderUtils {
             }
 
             // -- first Pass: collect Information
-            final List<ImmutableTriple<FolderStorage.FileInformation, Folder, Integer>> fileList = copyAllFirstPassCollectInfo(source, target);
+            final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList = copyAllFirstPassCollectInfo(source, target);
             if (fileList == null) {
                 return new ImmutableTriple<>(CopyResult.TARGET_NOT_WRITEABLE, 0, 0);
             } else if (fileList.isEmpty()) {
@@ -148,7 +148,7 @@ public class FolderUtils {
 
     /** copyAll First Pass: collect all files to copy, create target folder for each file, mark source folders to keep on move (if target is in source) */
     @Nullable
-    private List<ImmutableTriple<FolderStorage.FileInformation, Folder, Integer>> copyAllFirstPassCollectInfo(final Folder source, final Folder target) {
+    private List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> copyAllFirstPassCollectInfo(final Folder source, final Folder target) {
 
         //We create a "marker file" in the target folder so we recognize it in tree.
         // That way we can find out whether source=target or target is in source or source is in target
@@ -162,7 +162,7 @@ public class FolderUtils {
         final int[] onTargetNeededPath = { -1 }; //helper counter to flag forlders needed for target
         final boolean[] markerFoundInSubdir = { false, false }; //helper flags to flag forlders needed for target
         //triplet of each entry will contain: source file, target folder for that file, flags as above
-        final List<ImmutableTriple<FolderStorage.FileInformation, Folder, Integer>> listToCopy = new ArrayList<>();
+        final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> listToCopy = new ArrayList<>();
         final Stack<Folder> targetFolderStack = new Stack<>();
         targetFolderStack.push(target);
         treeWalk(source, fi -> {
@@ -200,13 +200,13 @@ public class FolderUtils {
     }
 
     @NotNull
-    private ImmutableTriple<Boolean, Integer, Integer> copyAllSecondPassCopy(final List<ImmutableTriple<FolderStorage.FileInformation, Folder, Integer>> fileList) {
+    private ImmutableTriple<Boolean, Integer, Integer> copyAllSecondPassCopy(final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList) {
         // -- second pass: make all necessary file copies and create necessary target subfolders
         int dirsCopied = 0;
         int filesCopied = 0;
 
         boolean success = true;
-        for (ImmutableTriple<FolderStorage.FileInformation, Folder, Integer> file : fileList) {
+        for (ImmutableTriple<ContentStorage.FileInformation, Folder, Integer> file : fileList) {
             if (file.left.isDirectory) {
                 if ((file.right & COPY_FLAG_DIR_BEFORE) > 0) {
                     if (pls.ensureFolder(file.middle, true)) {
@@ -226,11 +226,11 @@ public class FolderUtils {
         return new ImmutableTriple<>(success, filesCopied, dirsCopied);
     }
 
-    private boolean copyAllThirdPassDelete(final List<ImmutableTriple<FolderStorage.FileInformation, Folder, Integer>> fileList) {
+    private boolean copyAllThirdPassDelete(final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList) {
         boolean success = true;
 
         // -- third pass (only for move): delete all source files (leave out folders still needed for target)
-        for (ImmutableTriple<FolderStorage.FileInformation, Folder, Integer> file : fileList) {
+        for (ImmutableTriple<ContentStorage.FileInformation, Folder, Integer> file : fileList) {
             if (file.left.isDirectory) {
                 if (file.right == 0 && !pls.delete(file.left.uri)) {
                     success = false;
@@ -303,7 +303,7 @@ public class FolderUtils {
                 case FILE:
                 default:
                     freeSpaceAndNumberOfFiles = new ImmutablePair<>(FileUtils.getFreeDiskSpace(
-                        new File(FolderStorage.get().getUriForFolder(folder).getPath())), -1L);
+                        new File(ContentStorage.get().getUriForFolder(folder).getPath())), -1L);
                     break;
             }
             return freeSpaceAndNumberOfFiles;
@@ -323,7 +323,7 @@ public class FolderUtils {
 
         final ImmutablePair<Long, Long> emptyResult = new ImmutablePair<>(-1L, -1L);
 
-        final Uri treeUri = FolderStorage.get().getUriForFolder(folder);
+        final Uri treeUri = ContentStorage.get().getUriForFolder(folder);
         if (treeUri == null) {
             return emptyResult;
         }
@@ -346,16 +346,16 @@ public class FolderUtils {
 
 
 
-    private boolean treeWalk(final Folder root, final Predicate<ImmutablePair<FolderStorage.FileInformation, Boolean>> callback) {
+    private boolean treeWalk(final Folder root, final Predicate<ImmutablePair<ContentStorage.FileInformation, Boolean>> callback) {
         return treeWalk(root, false, callback);
     }
 
-    private boolean treeWalk(final Folder root, final boolean ordered, final Predicate<ImmutablePair<FolderStorage.FileInformation, Boolean>> callback) {
-        final List<FolderStorage.FileInformation> files = pls.list(root);
+    private boolean treeWalk(final Folder root, final boolean ordered, final Predicate<ImmutablePair<ContentStorage.FileInformation, Boolean>> callback) {
+        final List<ContentStorage.FileInformation> files = pls.list(root);
         if (ordered) {
             Collections.sort(files, (o1, o2) -> o1.name.compareTo(o2.name));
         }
-        for (FolderStorage.FileInformation fi : files) {
+        for (ContentStorage.FileInformation fi : files) {
             if (!callback.test(new ImmutablePair<>(fi, true))) {
                 return false;
             }

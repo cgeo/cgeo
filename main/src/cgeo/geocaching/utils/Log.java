@@ -1,8 +1,8 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.ConfigurableFolder;
-import cgeo.geocaching.storage.FolderStorage;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -48,8 +48,8 @@ public final class Log {
         try {
             String logfileFolder = "(unknown, no cgeo app)";
             if (CgeoApplication.getInstance() != null) {
-                propFile = FolderStorage.get().openForRead(ConfigurableFolder.LOGFILES.getFolder(), LOGPROPERTY_FILENAME);
-                logfileFolder = String.valueOf(ConfigurableFolder.LOGFILES.getFolder());
+                propFile = ContentStorage.get().openForRead(PersistableFolder.LOGFILES.getFolder(), LOGPROPERTY_FILENAME);
+                logfileFolder = String.valueOf(PersistableFolder.LOGFILES.getFolder());
             }
             if (propFile == null) {
                 adjustSettings();

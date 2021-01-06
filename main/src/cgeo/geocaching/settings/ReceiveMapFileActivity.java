@@ -3,8 +3,8 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
-import cgeo.geocaching.storage.ConfigurableFolder;
-import cgeo.geocaching.storage.FolderStorage;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.FileNameCreator;
@@ -93,7 +93,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
     }
 
     private void handleMapFile() {
-        //duplicate filenames are handled by FolderStorage automatically
+        //duplicate filenames are handled by ContentStorage automatically
         new CopyTask(this).execute();
     }
 
@@ -119,8 +119,8 @@ public class ReceiveMapFileActivity extends AbstractActivity {
             try {
                 inputStream = getContentResolver().openInputStream(uri);
                 // copy file
-                final Uri outputUri = FolderStorage.get().create(ConfigurableFolder.OFFLINE_MAPS, filename);
-                outputStream = FolderStorage.get().openForWrite(outputUri);
+                final Uri outputUri = ContentStorage.get().create(PersistableFolder.OFFLINE_MAPS, filename);
+                outputStream = ContentStorage.get().openForWrite(outputUri);
                 final byte[] buffer = new byte[32 << 10];
                 int length = 0;
                 while (!cancelled.get() && (length = inputStream.read(buffer)) > 0) {
@@ -140,7 +140,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     //update offline maps AFTER deleting source file. This handles the very special case when Map Folder = Download Folder
                     MapsforgeMapProvider.getInstance().updateOfflineMaps(outputUri);
                 } else {
-                    FolderStorage.get().delete(outputUri);
+                    ContentStorage.get().delete(outputUri);
                     status = CopyStates.CANCELLED;
                 }
             } catch (FileNotFoundException e) {
@@ -170,7 +170,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     result = getString(R.string.receivemapfile_cancelled);
                     break;
                 case IO_EXCEPTION:
-                    result = String.format(getString(R.string.receivemapfile_error_io_exception), ConfigurableFolder.OFFLINE_MAPS);
+                    result = String.format(getString(R.string.receivemapfile_error_io_exception), PersistableFolder.OFFLINE_MAPS);
                     break;
                 case FILENOTFOUND_EXCEPTION:
                     result = getString(R.string.receivemapfile_error_filenotfound_exception);

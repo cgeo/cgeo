@@ -20,10 +20,10 @@ import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.storage.ConfigurableFolder;
-import cgeo.geocaching.storage.ConfigurableFolderStorageActivityHelper;
+import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -92,7 +92,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
 
-    private final ConfigurableFolderStorageActivityHelper configFolderStorageHelper = new ConfigurableFolderStorageActivityHelper(this);
+    private final ContentStorageActivityHelper contentStorageHelper = new ContentStorageActivityHelper(this);
 
     /**
      * Enumeration for directory choosers. This is how we can retrieve information about the
@@ -100,10 +100,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
      * the result code.
      */
     private enum DirChooserType {
-        GPX_IMPORT_DIR(1, R.string.pref_gpxImportDir,
-                LocalStorage.getGpxImportDirectory().getPath(), false),
-        GPX_EXPORT_DIR(2, R.string.pref_gpxExportDir,
-                LocalStorage.getGpxExportDirectory().getPath(), true),
+
         THEMES_DIR(3, R.string.pref_renderthemepath, "", false),
         BACKUP_DIR(4, R.string.pref_fakekey_preference_restore_dirselect,
                        LocalStorage.getBackupRootDirectory().getPath() + "/", false);
@@ -182,7 +179,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         for (final int k : new int[] {
                 R.string.pref_pass_vote, R.string.pref_signature,
                 R.string.pref_mapsource, R.string.pref_renderthemepath,
-                R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
+                //R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_fakekey_dataDir,
                 R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
@@ -193,7 +190,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         bindGeocachingUserToGCVoteuser();
 
         //PublicFolder initialization
-        initPublicFolders(ConfigurableFolder.values());
+        initPublicFolders(PersistableFolder.values());
 
     }
 
@@ -402,13 +399,13 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         defaultNavigationTool2.setEntryValues(values);
     }
 
-    private void initPublicFolders(final ConfigurableFolder[] folders) {
+    private void initPublicFolders(final PersistableFolder[] folders) {
 
         if (!Settings.isDebug()) {
-            hidePreference(getPreference(ConfigurableFolder.TEST_FOLDER.getPrefKeyId()), R.string.pref_group_localfilesystem);
+            hidePreference(getPreference(PersistableFolder.TEST_FOLDER.getPrefKeyId()), R.string.pref_group_localfilesystem);
         }
 
-        for (ConfigurableFolder folder : folders) {
+        for (PersistableFolder folder : folders) {
             final Preference pref = getPreference(folder.getPrefKeyId());
             if (pref == null) {
                 continue;
@@ -416,7 +413,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
             bindSummaryToValue(pref, folder.toUserDisplayableValue());
             pref.setOnPreferenceClickListener(p -> {
-                configFolderStorageHelper.selectFolderUri(folder, f -> p.setSummary(f.toUserDisplayableValue()));
+                contentStorageHelper.selectFolderUri(folder, f -> p.setSummary(f.toUserDisplayableValue()));
                 return false;
             });
             folder.registerChangeListener(this, f -> pref.setSummary(f.toUserDisplayableValue()));
@@ -778,7 +775,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (configFolderStorageHelper.onActivityResult(requestCode, resultCode, data)) {
+        if (contentStorageHelper.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
 

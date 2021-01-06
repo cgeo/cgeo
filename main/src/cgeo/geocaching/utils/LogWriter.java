@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.storage.ConfigurableFolder;
-import cgeo.geocaching.storage.FolderStorage;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 
 import android.net.Uri;
 
@@ -63,12 +63,12 @@ public class LogWriter {
     private void checkLogfile() {
         if (null == logWriter && Log.isDebug()) {
             try {
-                final Uri logWriterFile = FolderStorage.get().create(ConfigurableFolder.LOGFILES, FileNameCreator.LOGFILE, false);
+                final Uri logWriterFile = ContentStorage.get().create(PersistableFolder.LOGFILES, FileNameCreator.LOGFILE, false);
                 if (logWriterFile == null) {
                     Log.w("Could not create LogWriter-File");
                     return;
                 }
-                logWriter = new PrintWriter(new OutputStreamWriter(FolderStorage.get().openForWrite(logWriterFile)));
+                logWriter = new PrintWriter(new OutputStreamWriter(ContentStorage.get().openForWrite(logWriterFile)));
                 log("begin logging to file " + logWriterFile);
             } catch (Exception e) {
                 Log.w("Problem while creating LogWrilter", e);

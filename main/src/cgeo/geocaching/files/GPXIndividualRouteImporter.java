@@ -2,8 +2,8 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.FolderStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -45,7 +45,7 @@ public class GPXIndividualRouteImporter {
     private static int doInBackground(final Uri uri) {
         BufferedInputStream stream = null;
         try {
-            final InputStream is = FolderStorage.get().openForRead(uri);
+            final InputStream is = ContentStorage.get().openForRead(uri);
             if (is == null) {
                 return 0;
             }

@@ -2,8 +2,8 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Route;
-import cgeo.geocaching.storage.FolderStorage;
-import cgeo.geocaching.storage.PersistedDocumentUri;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -48,7 +48,7 @@ public class GPXTrackOrRouteImporter {
         }, () -> {
             if (!success.get()) {
                 Toast.makeText(context, R.string.load_track_error, Toast.LENGTH_SHORT).show();
-                FolderStorage.get().setPersistedDocumentUri(PersistedDocumentUri.TRACK, null);
+                ContentStorage.get().setPersistedDocumentUri(PersistableUri.TRACK, null);
                 callback.updateRoute(null);
             }
         });
@@ -79,7 +79,7 @@ public class GPXTrackOrRouteImporter {
     private static Route parse(@NonNull final AbstractTrackOrRouteParser.RouteParse parser, @NonNull final Uri uri) throws IOException {
         BufferedInputStream stream = null;
         try {
-            stream = new BufferedInputStream(FolderStorage.get().openForRead(uri));
+            stream = new BufferedInputStream(ContentStorage.get().openForRead(uri));
             if (stream == null) {
                 return null;
             }

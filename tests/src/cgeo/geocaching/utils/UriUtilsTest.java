@@ -17,6 +17,8 @@ public class UriUtilsTest {
     //Example for folder /Downloads/cgeo
     private static final String DOC_URI_EXAMPLE_3 = "content://com.android.externalstorage.documents/tree/primary%3ADownload%2Fcgeo";
 
+    //complicated example for a document in /Documents/cgeo/gpx
+    private static final String DOC_URI_COMPLICATED = "content://com.android.externalstorage.documents/tree/home%3Acgeo/document/home%3Acgeo%2Fgpx%2Froute_2021-01-06_17-14-08-4.gpx";
 
     private static final String DOC_URI_EXAMPLE_DECODED = "content://com.android.externalstorage.documents/tree/primary:Documents/cgeo/document/primary:Documents/cgeo/logfiles/logcat_2020-12-28_17-22-20-2.txt";
 
@@ -28,8 +30,9 @@ public class UriUtilsTest {
         assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE))).isEqualTo("…/Documents/cgeo/logfiles/logcat_2020-12-28_17-22-20-2.txt");
         assertThat(UriUtils.toUserDisplayableString(null)).isEqualTo("");
 
-        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE_2))).isEqualTo("…/Documents/cgeo");
+        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE_2))).isEqualTo("…/[Documents]/cgeo");
         assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE_3))).isEqualTo("…/Download/cgeo");
+        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_COMPLICATED))).isEqualTo("…/[Documents]/cgeo/gpx/route_2021-01-06_17-14-08-4.gpx");
     }
 
     @Test

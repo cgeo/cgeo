@@ -9,7 +9,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
-import cgeo.geocaching.storage.ConfigurableFolderStorageActivityHelper;
+import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -54,7 +54,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     private final String logToken = "[" + this.getClass().getName() + "]";
 
-    private ConfigurableFolderStorageActivityHelper configFolderStorageHelper = null; //lazy initalized
+    private ContentStorageActivityHelper contentStorageHelper = null; //lazy initalized
 
     protected AbstractActivity() {
         this(false);
@@ -287,18 +287,18 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         setCacheTitleBar(cache);
     }
 
-    protected ConfigurableFolderStorageActivityHelper getConfigFolderStorageHelper() {
-        if (this.configFolderStorageHelper == null) {
-            this.configFolderStorageHelper = new ConfigurableFolderStorageActivityHelper(this);
+    protected ContentStorageActivityHelper getContentStorageHelper() {
+        if (this.contentStorageHelper == null) {
+            this.contentStorageHelper = new ContentStorageActivityHelper(this);
         }
-        return this.configFolderStorageHelper;
+        return this.contentStorageHelper;
     }
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (this.configFolderStorageHelper != null) {
-            this.configFolderStorageHelper.onActivityResult(requestCode, resultCode, data);
+        if (this.contentStorageHelper != null) {
+            this.contentStorageHelper.onActivityResult(requestCode, resultCode, data);
         }
     }
 

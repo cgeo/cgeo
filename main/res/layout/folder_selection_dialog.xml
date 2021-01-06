@@ -41,59 +41,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="@string/folderstorage_selectfolder_dialog_choice_nocopy" />
+                    android:text="@string/contentstorage_selectfolder_dialog_choice_nocopy" />
 
                 <RadioButton
                     android:id="@+id/copymove_copy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="@string/folderstorage_selectfolder_dialog_choice_copy" />
+                    android:text="@string/contentstorage_selectfolder_dialog_choice_copy" />
 
                 <RadioButton
                     android:id="@+id/copymove_move"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="@string/folderstorage_selectfolder_dialog_choice_move" />
+                    android:text="@string/contentstorage_selectfolder_dialog_choice_move" />
             </RadioGroup>
 
 
         </LinearLayout>
     </ScrollView>
-<!--
-    <RelativeLayout
-        android:id="@+id/buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@android:string/cancel"
-        android:layout_alignParentLeft="true"
-        style="@style/button"
-        />
-
-    <Button
-        android:id="@+id/usedefault"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/configurablefolder_usertype_default"
-        android:layout_toLeftOf="@+id/userdefined"
-        android:paddingRight="10dip"
-        style="@style/button"
-       />
-
-    <Button
-        android:id="@+id/userdefined"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/configurablefolder_usertype_userdefined"
-        android:layout_alignParentRight="true"
-        style="@style/button"/>
-    </RelativeLayout>
--->
 </LinearLayout>

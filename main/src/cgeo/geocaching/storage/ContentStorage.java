@@ -54,8 +54,8 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
  *
  * Note that methods of this class do not and cannot ask user for access permissions when dealing with SAF This can only be
  * done in context of an Activity (using Intents) and is encapsulated in
- * {@link ConfigurableFolderStorageActivityHelper}.
- * When dealing with {@link ConfigurableFolder}s, methods of this class will try to fall back to default
+ * {@link ContentStorageActivityHelper}.
+ * When dealing with {@link PersistableFolder}s, methods of this class will try to fall back to default
  * accessible folders when a folder is not accessible.
  *
  * Implementation reference(s) with regards to SAF:
@@ -64,7 +64,7 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
  *  * Introduction: https://www.androidcentral.com/what-scoped-storage
  *  * Helpers: https://stackoverflow.com/questions/34927748/android-5-0-documentfile-from-tree-uri
  */
-public class FolderStorage {
+public class ContentStorage {
 
     private static final int DOCUMENT_FILE_CACHESIZE = 100;
 
@@ -72,9 +72,9 @@ public class FolderStorage {
     private final DocumentFolderAccessor documentAccessor;
     private final FileFolderAccessor fileAccessor;
 
-    private static final FolderStorage INSTANCE = new FolderStorage();
+    private static final ContentStorage INSTANCE = new ContentStorage();
 
-    public static FolderStorage get() {
+    public static ContentStorage get() {
         return INSTANCE;
     }
 
@@ -602,12 +602,12 @@ public class FolderStorage {
         /** Checks and releases all Uri Permissions which are no longer needed */
         public void releaseOutdatedUriPermissions() {
             final Set<String> usedUris = new HashSet<>();
-            for (ConfigurableFolder folder : ConfigurableFolder.values()) {
+            for (PersistableFolder folder : PersistableFolder.values()) {
                 if (folder.getFolder().getBaseUri() != null) {
                     usedUris.add(UriUtils.toCompareString(folder.getFolder().getBaseUri()));
                 }
             }
-            for (PersistedDocumentUri persistedUri : PersistedDocumentUri.values()) {
+            for (PersistableUri persistedUri : PersistableUri.values()) {
                 if (persistedUri.getUri() != null) {
                     usedUris.add(UriUtils.toCompareString(persistedUri.getUri()));
                 }
@@ -636,20 +636,20 @@ public class FolderStorage {
         }
     }
 
-    private FolderStorage() {
+    private ContentStorage() {
         this.context = CgeoApplication.getInstance().getApplicationContext();
         this.documentAccessor = new DocumentFolderAccessor(this.context);
         this.fileAccessor = new FileFolderAccessor(this.context);
         this.documentAccessor.refreshUriPermissionCache();
 
         //(re)sets default folders
-        for (ConfigurableFolder folder : ConfigurableFolder.values()) {
+        for (PersistableFolder folder : PersistableFolder.values()) {
             folder.setDefaultFolder(getAccessibleDefaultFolder(folder.getDefaultCandidates(), folder.needsWrite(), folder.name()));
         }
     }
 
     /** checks if folder is available and can be used. If current setting is not available, folder may be adjusted e.g. to default */
-    public boolean ensureAndAdjustFolder(final ConfigurableFolder publicFolder) {
+    public boolean ensureAndAdjustFolder(final PersistableFolder publicFolder) {
         final Folder folder = getAndAdjustFolder(publicFolder);
         return ensureFolder(folder, publicFolder.needsWrite(), false);
      }
@@ -678,12 +678,12 @@ public class FolderStorage {
     }
 
     /** Creates a new file in folder and returns its Uri */
-    public Uri create(final ConfigurableFolder folder, final String name) {
+    public Uri create(final PersistableFolder folder, final String name) {
         return create(folder, FileNameCreator.forName(name), false);
     }
 
     /** Creates a new file in folder and returns its Uri */
-    public Uri create(final ConfigurableFolder folder, final FileNameCreator nameCreator, final boolean onlyIfNotExisting) {
+    public Uri create(final PersistableFolder folder, final FileNameCreator nameCreator, final boolean onlyIfNotExisting) {
         return create(getAndAdjustFolder(folder), nameCreator, onlyIfNotExisting);
     }
 
@@ -709,7 +709,7 @@ public class FolderStorage {
         try {
             return getAccessorFor(folder.getBaseType()).create(folder, name);
         } catch (IOException ioe) {
-            reportProblem(R.string.folderstorage_err_create_failed, ioe, name, folder);
+            reportProblem(R.string.contentstorage_err_create_failed, ioe, name, folder);
         }
         return null;
     }
@@ -721,14 +721,14 @@ public class FolderStorage {
         try {
             return getAccessorFor(uri).delete(uri);
         } catch (IOException ioe) {
-            reportProblem(R.string.folderstorage_err_delete_failed, ioe, uri);
+            reportProblem(R.string.contentstorage_err_delete_failed, ioe, uri);
         }
         return false;
     }
 
     /** Lists all direct content of given folder */
     @NonNull
-    public List<FileInformation> list(final ConfigurableFolder folder) {
+    public List<FileInformation> list(final PersistableFolder folder) {
         return list(getAndAdjustFolder(folder));
     }
 
@@ -741,7 +741,7 @@ public class FolderStorage {
     /** Lists all direct content of given folder location */
     @NonNull
     public List<FileInformation> list(final Folder folder, final boolean sortByName) {
-        try (ContextLogger cLog = new ContextLogger("FolderStorage.list: %s", folder)) {
+        try (ContextLogger cLog = new ContextLogger("ContentStorage.list: %s", folder)) {
             if (folder == null) {
                 return Collections.emptyList();
             }
@@ -752,7 +752,7 @@ public class FolderStorage {
             }
             return result;
         } catch (IOException ioe) {
-            reportProblem(R.string.folderstorage_err_list_failed, ioe, folder);
+            reportProblem(R.string.contentstorage_err_list_failed, ioe, folder);
         }
         return Collections.emptyList();
     }
@@ -769,7 +769,7 @@ public class FolderStorage {
         try {
             return getAccessorFor(folder).get(folder, name);
         } catch (IOException ioe) {
-            reportProblem(R.string.folderstorage_err_folder_access_failed, ioe, folder);
+            reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, folder);
         }
         return null;
     }
@@ -782,7 +782,7 @@ public class FolderStorage {
         try {
             return getAccessorFor(folder).getUriForFolder(folder);
         } catch (IOException ioe) {
-            reportProblem(R.string.folderstorage_err_folder_access_failed, ioe, folder);
+            reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, folder);
         }
         return null;
     }
@@ -796,7 +796,7 @@ public class FolderStorage {
         try {
             return getAccessorFor(uri).getName(uri);
         } catch (IOException ioe) {
-            reportProblem(R.string.folderstorage_err_read_failed, ioe, uri);
+            reportProblem(R.string.contentstorage_err_read_failed, ioe, uri);
         }
         return null;
     }
@@ -813,11 +813,11 @@ public class FolderStorage {
         }
 
         try {
-            //values "wa" (for append) and "rwt" (for overwrite) were tested on SDK21, SDK23, SDk29 and SDK30 using "FolderStorageTest"
+            //values "wa" (for append) and "rwt" (for overwrite) were tested on SDK21, SDK23, SDk29 and SDK30 using "ContentStorageTest"
             //Note that different values behave differently in different SDKs so be careful before changing them
             return context.getContentResolver().openOutputStream(uri, append ? "wa" : "rwt");
         } catch (IOException | SecurityException se) {
-            reportProblem(R.string.folderstorage_err_write_failed, se, uri);
+            reportProblem(R.string.contentstorage_err_write_failed, se, uri);
         }
         return null;
     }
@@ -842,7 +842,7 @@ public class FolderStorage {
         try {
             return this.context.getContentResolver().openInputStream(uri);
         } catch (IOException | SecurityException se) {
-            reportProblem(R.string.folderstorage_err_read_failed, se, uri);
+            reportProblem(R.string.contentstorage_err_read_failed, se, uri);
         }
         return null;
     }
@@ -875,37 +875,37 @@ public class FolderStorage {
         } finally {
             closeQuietly(in, out);
             if (!success) {
-                reportProblem(R.string.folderstorage_err_copy_failed, failureEx, source, target, move);
+                reportProblem(R.string.contentstorage_err_copy_failed, failureEx, source, target, move);
             }
         }
         return outputUri;
     }
 
     /** Write an (internal's) file content to external storage */
-    public Uri writeFileToFolder(final ConfigurableFolder folder, final FileNameCreator nameCreator, final File file, final boolean deleteFileOnSuccess) {
+    public Uri writeFileToFolder(final PersistableFolder folder, final FileNameCreator nameCreator, final File file, final boolean deleteFileOnSuccess) {
         return copy(Uri.fromFile(file), getAndAdjustFolder(folder), nameCreator, deleteFileOnSuccess);
     }
 
-    /** Helper method, meant for usage in conjunction with {@link #writeFileToFolder(ConfigurableFolder, FileNameCreator, File, boolean)} */
+    /** Helper method, meant for usage in conjunction with {@link #writeFileToFolder(PersistableFolder, FileNameCreator, File, boolean)} */
     public File createTempFile() {
         File outputDir = null;
         try {
             outputDir = context.getCacheDir(); // context being the Activity pointer
             return File.createTempFile("cgeo_tempfile_", ".tmp", outputDir);
         } catch (IOException ie) {
-            reportProblem(R.string.folderstorage_err_create_failed, ie, "temp file", outputDir);
+            reportProblem(R.string.contentstorage_err_create_failed, ie, "temp file", outputDir);
         }
         return null;
     }
 
 
-    /** Sets a new User-defined Uri for a ConfigurableFolder. Must be a DocumentUri (retrieved via {@link Intent#ACTION_OPEN_DOCUMENT_TREE})! */
-    public void setUserDefinedFolder(final ConfigurableFolder folder, final Folder userDefinedFolder) {
+    /** Sets a new User-defined Folder for a {@link PersistableFolder}. */
+    public void setUserDefinedFolder(final PersistableFolder folder, final Folder userDefinedFolder) {
         folder.setUserDefinedFolder(userDefinedFolder);
         documentAccessor.releaseOutdatedUriPermissions();
     }
 
-    public void setPersistedDocumentUri(final PersistedDocumentUri persistedDocUi, final Uri uri) {
+    public void setPersistedDocumentUri(final PersistableUri persistedDocUi, final Uri uri) {
         persistedDocUi.setPersistedUri(uri);
         documentAccessor.releaseOutdatedUriPermissions();
     }
@@ -939,7 +939,7 @@ public class FolderStorage {
 
     /** Gets this folder's current location. Tries to adjust folder location if no permission given. May return null if no permission found */
     @Nullable
-    private Folder getAndAdjustFolder(final ConfigurableFolder folder) {
+    private Folder getAndAdjustFolder(final PersistableFolder folder) {
 
         if (!ensureFolder(folder.getFolder(), folder.needsWrite())) {
             //try out default
@@ -952,10 +952,10 @@ public class FolderStorage {
             setUserDefinedFolder(folder, null);
             final String folderDefault = folder.toUserDisplayableValue();
             if (!ensureFolder(folder.getFolder(), folder.needsWrite())) {
-                reportProblem(R.string.folderstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, null);
+                reportProblem(R.string.contentstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, null);
                 return null;
             }
-            reportProblem(R.string.folderstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, folderDefault);
+            reportProblem(R.string.contentstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, folderDefault);
         }
         return folder.getFolder();
     }
@@ -982,7 +982,7 @@ public class FolderStorage {
 
         for (Folder candidate : candidates) {
             //candidate is ok if it is either directly accessible or based on another public folder (which will become accessible later)
-            if (candidate != null && (candidate.getRootConfigurableFolder() != null || ensureFolder(candidate, needsWrite))) {
+            if (candidate != null && (candidate.getRootPersistableFolder() != null || ensureFolder(candidate, needsWrite))) {
                 return candidate;
             }
         }
@@ -998,7 +998,7 @@ public class FolderStorage {
 
         //prepare params message
         final ImmutablePair<String, String> messages = constructMessage(messageId, params);
-        Log.w("FolderStorage: " + messages.right, ex);
+        Log.w("ContentStorage: " + messages.right, ex);
         if (context != null) {
             ActivityMixin.showToast(context, messages.left);
         }
@@ -1016,9 +1016,9 @@ public class FolderStorage {
             if (params[i] instanceof Folder) {
                 paramsForUser[i] = ((Folder) params[i]).toUserDisplayableString();
                 paramsForLog[i] = params[i] + "(" + getUriForFolder((Folder) params[i]) + ")";
-            } else if (params[i] instanceof ConfigurableFolder) {
-                paramsForUser[i] = ((ConfigurableFolder) params[i]).toUserDisplayableValue();
-                paramsForLog[i] = params[i] + "(" + getUriForFolder(((ConfigurableFolder) params[i]).getFolder()) + ")";
+            } else if (params[i] instanceof PersistableFolder) {
+                paramsForUser[i] = ((PersistableFolder) params[i]).toUserDisplayableValue();
+                paramsForLog[i] = params[i] + "(" + getUriForFolder(((PersistableFolder) params[i]).getFolder()) + ")";
             } else if (params[i] instanceof Uri) {
                 paramsForUser[i] = UriUtils.toUserDisplayableString((Uri) params[i]);
                 paramsForLog[i] = params[i];

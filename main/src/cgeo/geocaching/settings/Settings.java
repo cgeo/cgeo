@@ -27,10 +27,10 @@ import cgeo.geocaching.sensors.DirectionData;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
-import cgeo.geocaching.storage.ConfigurableFolder;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.storage.PersistedDocumentUri;
+import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -229,10 +229,6 @@ public class Settings {
             e.putString(getKey(R.string.pref_defaultNavigationTool), String.valueOf(dnt1));
             e.putString(getKey(R.string.pref_defaultNavigationTool2), String.valueOf(dnt2));
 
-            // defaults for gpx directories
-            e.putString(getKey(R.string.pref_gpxImportDir), LocalStorage.getDefaultGpxDirectory().getPath());
-            e.putString(getKey(R.string.pref_gpxExportDir), LocalStorage.getDefaultGpxDirectory().getPath());
-
             e.putInt(getKey(R.string.pref_settingsversion), 2); // mark migrated
             e.apply();
         }
@@ -242,15 +238,6 @@ public class Settings {
 
             Log.i("Moving field-notes");
             FileUtils.move(LocalStorage.getLegacyFieldNotesDirectory(), LocalStorage.getFieldNotesDirectory());
-
-            Log.i("Moving gpx ex- and import dirs");
-            if (getGpxExportDir().equals(LocalStorage.getLegacyGpxDirectory().getPath())) {
-                e.putString(getKey(R.string.pref_gpxExportDir), LocalStorage.getDefaultGpxDirectory().getPath());
-            }
-            if (getGpxImportDir().equals(LocalStorage.getLegacyGpxDirectory().getPath())) {
-                e.putString(getKey(R.string.pref_gpxImportDir), LocalStorage.getDefaultGpxDirectory().getPath());
-            }
-            FileUtils.move(LocalStorage.getLegacyGpxDirectory(), LocalStorage.getDefaultGpxDirectory());
 
             Log.i("Moving local spoilers");
             FileUtils.move(LocalStorage.getLegacyLocalSpoilersDirectory(), LocalStorage.getLocalSpoilersDirectory());
@@ -1178,16 +1165,6 @@ public class Settings {
         putBoolean(R.string.pref_dbonsdcard, dbOnSDCard);
     }
 
-    public static String getGpxExportDir() {
-        return getString(R.string.pref_gpxExportDir,
-                LocalStorage.getDefaultGpxDirectory().getPath());
-    }
-
-    public static String getGpxImportDir() {
-        return getString(R.string.pref_gpxImportDir,
-                LocalStorage.getDefaultGpxDirectory().getPath());
-    }
-
     public static String getExternalPrivateCgeoDirectory() {
         return getString(R.string.pref_dataDir, null);
     }
@@ -1571,40 +1548,42 @@ public class Settings {
         return getInt(R.string.pref_backups_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
     }
 
-    /** sets the user-defined folder-config for a configurable folder. Can be set to null */
-    public static void setConfigurableFolder(@NonNull final ConfigurableFolder folder, @Nullable final String folderString) {
+    /** sets the user-defined folder-config for a persistable folder. Can be set to null */
+    public static void setPersistableFolder(@NonNull final PersistableFolder folder, @Nullable final String folderString) {
         putString(folder.getPrefKeyId(), folderString);
     }
 
-    /** gets the user-defined uri for a configurable folder. Can be null */
+    /** gets the user-defined uri for a persistable folder. Can be null */
     @Nullable
-    public static String getConfigurableFolder(@NonNull final ConfigurableFolder folder) {
-        return getString(folder.getPrefKeyId(), getLegacyValueForConfigurableFolder(folder.getPrefKeyId()));
+    public static String getPersistableFolder(@NonNull final PersistableFolder folder) {
+        return getString(folder.getPrefKeyId(), getLegacyValueForPersistableFolder(folder.getPrefKeyId()));
     }
 
-    /** sets Uri for persisted single documents. Can be set to null */
-    public static void setPersistedDocumentUri(@NonNull final PersistedDocumentUri persistedUri, @Nullable final String uri) {
+    /** sets Uri for persistable uris. Can be set to null */
+    public static void setPersistableUri(@NonNull final PersistableUri persistedUri, @Nullable final String uri) {
         putString(persistedUri.getPrefKeyId(), uri);
     }
 
-    /** gets the user-defined uri for a configurable folder. Can be null */
+    /** gets the persisted uri for a persistable uris. Can be null */
     @Nullable
-    public static String getPersistedDocumentUri(@NonNull final PersistedDocumentUri persistedUri) {
-        return getString(persistedUri.getPrefKeyId(), getLegacyValueForPersistedDocumentUri(persistedUri.getPrefKeyId()));
+    public static String getPersistableUri(@NonNull final PersistableUri persistedUri) {
+        return getString(persistedUri.getPrefKeyId(), getLegacyValueForPersistableUri(persistedUri.getPrefKeyId()));
     }
 
     /** For Migration towards Android 11: returns any legacy value which might be stored in old settings for certain folders */
-    private static String getLegacyValueForConfigurableFolder(@NonNull final int prefKeyId) {
-        if (prefKeyId == R.string.pref_configurablefolder_offlinemaps) {
+    private static String getLegacyValueForPersistableFolder(@NonNull final int prefKeyId) {
+        if (prefKeyId == R.string.pref_persistablefolder_offlinemaps) {
             return getStringDirect("mapDirectory", null);
-        } else if (prefKeyId == R.string.pref_configurablefolder_offlinemapthemes) {
+        } else if (prefKeyId == R.string.pref_persistablefolder_offlinemapthemes) {
             return getStringDirect("renderthemepath", null);
+        } else if (prefKeyId == R.string.pref_persistablefolder_gpx) {
+            return getStringDirect("pref_gpxImportDir", getStringDirect("pref_gpxExportDir", null));
         }
         return null;
     }
 
-    private static String getLegacyValueForPersistedDocumentUri(@NonNull final int prefKeyId) {
-        if (prefKeyId == R.string.pref_persisteduri_track) {
+    private static String getLegacyValueForPersistableUri(@NonNull final int prefKeyId) {
+        if (prefKeyId == R.string.pref_persistableuri_track) {
             return getStringDirect("pref_trackfile", null);
         }
         return null;

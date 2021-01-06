@@ -17,7 +17,9 @@ public class FileNameCreator {
     public static final FileNameCreator OFFLINE_MAPS = new FileNameCreator("mapfile", "map");
     public static final FileNameCreator LOGFILE = new FileNameCreator("logcat", "txt");
     public static final FileNameCreator MEMORY_DUMP = new FileNameCreator("cgeo_dump", "hprof");
+    public static final FileNameCreator GPX_EXPORT = new FileNameCreator("export", "gpx");
     public static final FileNameCreator INDIVIDUAL_ROUTE_NOSUFFIX = new FileNameCreator("route", null);
+    public static final FileNameCreator TRAIL_HISTORY = new FileNameCreator("trail", "gpx");
 
     private final AtomicInteger fileNameCounter = new AtomicInteger(1);
 

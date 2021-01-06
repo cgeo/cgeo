@@ -1,8 +1,7 @@
 package cgeo.geocaching.utils;
 
-
-import cgeo.geocaching.storage.ConfigurableFolder;
-import cgeo.geocaching.storage.FolderStorage;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 
 import android.net.Uri;
 
@@ -48,8 +47,8 @@ public class OfflineMapUtils {
     }
 
     public static void writeInfo(@NonNull final String remoteUrl, @NonNull final String localFilename, @NonNull final String displayName, final long date) {
-        final Uri infoFile = FolderStorage.get().create(ConfigurableFolder.OFFLINE_MAPS, localFilename + INFOFILE_SUFFIX);
-        try (OutputStream output = FolderStorage.get().openForWrite(infoFile)) {
+        final Uri infoFile = ContentStorage.get().create(PersistableFolder.OFFLINE_MAPS, localFilename + INFOFILE_SUFFIX);
+        try (OutputStream output = ContentStorage.get().openForWrite(infoFile)) {
             final int i = remoteUrl.lastIndexOf("/");
             final String remotePage = i != -1 ? remoteUrl.substring(0, i) : remoteUrl;
             final String remoteFile = i != -1 ? remoteUrl.substring(i + 1) : localFilename;
@@ -74,13 +73,13 @@ public class OfflineMapUtils {
     public static ArrayList<OfflineMapData> availableOfflineMaps() {
         final ArrayList<OfflineMapData> result = new ArrayList<>();
 
-        final List<FolderStorage.FileInformation> mapDirContent = FolderStorage.get().list(ConfigurableFolder.OFFLINE_MAPS);
+        final List<ContentStorage.FileInformation> mapDirContent = ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS);
         final Map<String, Uri> mapDirMap = new HashMap<>();
-        for (FolderStorage.FileInformation fi : mapDirContent) {
+        for (ContentStorage.FileInformation fi : mapDirContent) {
             mapDirMap.put(fi.name, fi.uri);
         }
 
-        for (FolderStorage.FileInformation fi : mapDirContent) {
+        for (ContentStorage.FileInformation fi : mapDirContent) {
             final String filename = fi.name;
             if (!filename.endsWith(INFOFILE_SUFFIX)) {
                 continue;

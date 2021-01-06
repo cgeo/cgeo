@@ -342,7 +342,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         confirmDebug();
 
-        getConfigFolderStorageHelper().checkBaseFolderAccess();
+        getContentStorageHelper().checkBaseFolderAccess();
 
         // infobox "not logged in" with link to service config; display delayed by 10 seconds
         final Handler handler = new Handler();

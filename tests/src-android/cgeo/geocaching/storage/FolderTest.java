@@ -27,7 +27,7 @@ public class FolderTest extends CGeoTestCase {
 
     public void testToFromConfigs() {
         toFromConfig(Folder.fromDocumentUri(Uri.parse(DOC_URI_EXAMPLE), "/eins/zwei"));
-        toFromConfig(Folder.fromConfigurableFolder(ConfigurableFolder.TEST_FOLDER, "/eins/zwei"));
+        toFromConfig(Folder.fromPersistableFolder(PersistableFolder.TEST_FOLDER, "/eins/zwei"));
         toFromConfig(Folder.fromFile(new File("/nonexisting"), "/eins/zwei"));
     }
 

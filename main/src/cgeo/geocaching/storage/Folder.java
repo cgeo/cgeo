@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * Folders can have different types as defined by {@link FolderType}.
  * Depending on that type, different attributes are filled and different handling is necessary
- * to interact with actual data in that folder. Those different handlings are implemented by {@link FolderStorage}.
+ * to interact with actual data in that folder. Those different handlings are implemented by {@link ContentStorage}.
  *
  * Instances of this class are immutable. They can be serialized/deserialized to/from a String using {@link #toConfig()} and {@link #fromConfig(String)}
  *
@@ -41,8 +41,8 @@ public class Folder {
         FILE,
         /** Folder based on Storage Access Frameworks and retrieved by {@link android.content.Intent#ACTION_OPEN_DOCUMENT_TREE}. Folder locations for this type are immutable */
         DOCUMENT,
-        /** (Volatile type) A Folder based on a ConfigurableFolder. Folder locations for this type can change when based folder is reconfigured */
-        CONFIGURABLE_FOLDER,
+        /** (Volatile type) A Folder based on a PersistableFolder. Folder locations for this type can change when based folder is reconfigured */
+        PERSISTABLE_FOLDER,
     }
 
     /** cGeo's private internal Files directory */
@@ -59,16 +59,16 @@ public class Folder {
     private final FolderType type;
     private final Uri uri;
 
-    private final ConfigurableFolder configurableFolder; //needed for type PUBLIC_FOLDER
+    private final PersistableFolder persistableFolder; //needed for type PUBLIC_FOLDER
 
     private final List<String> subfolders; //each type may have subfolders
     private final String subfolderString;
 
-    private Folder(final FolderType type, final Uri uri, final ConfigurableFolder configurableFolder, final List<String> subfolders) {
+    private Folder(final FolderType type, final Uri uri, final PersistableFolder persistableFolder, final List<String> subfolders) {
         this.type = type;
         this.uri = uri;
 
-        this.configurableFolder = configurableFolder;
+        this.persistableFolder = persistableFolder;
 
         this.subfolders = subfolders == null ? Collections.emptyList() : subfolders;
         this.subfolderString = CollectionStream.of(this.subfolders).toJoinedString("/");
@@ -76,11 +76,11 @@ public class Folder {
     }
 
     /** registers a listener which is fired each time the actual location of this folder changes */
-    public void registerChangeListener(final Object lifecycleRef, final Consumer<ConfigurableFolder> listener) {
+    public void registerChangeListener(final Object lifecycleRef, final Consumer<PersistableFolder> listener) {
 
         //currently, this folders location can only change if it is based on a Public Folder
-        if (getRootConfigurableFolder() != null) {
-            getRootConfigurableFolder().registerChangeListener(lifecycleRef, listener);
+        if (getRootPersistableFolder() != null) {
+            getRootPersistableFolder().registerChangeListener(lifecycleRef, listener);
         }
     }
 
@@ -89,35 +89,41 @@ public class Folder {
         return type;
     }
 
-    /** returns this folder's current BaseUri (below all subfolders). This value is volatile if this folder's type is volatile (e.g. {@link FolderType#CONFIGURABLE_FOLDER}) */
-    @NonNull
-    public Uri getBaseUri() {
-        return configurableFolder != null ? configurableFolder.getFolder().getBaseUri() : this.uri;
+    /** returns current Uri for this folder. This value is volatile and retrieved from {@link ContentStorage} */
+    @Nullable
+    public Uri getUri() {
+        return ContentStorage.get().getUriForFolder(this);
     }
 
-    /** The current base type, which is always an immutable type (e.g. may never be {@link FolderType#CONFIGURABLE_FOLDER}). Return value is volatile */
+    /** returns this folder's current BaseUri (below all subfolders). This value is volatile if this folder's type is volatile (e.g. {@link FolderType#PERSISTABLE_FOLDER}) */
+    @NonNull
+    public Uri getBaseUri() {
+        return persistableFolder != null ? persistableFolder.getFolder().getBaseUri() : this.uri;
+    }
+
+    /** The current base type, which is always an immutable type (e.g. may never be {@link FolderType#PERSISTABLE_FOLDER}). Return value is volatile */
     @NonNull
     public FolderType getBaseType() {
-        if (configurableFolder != null) {
-            return configurableFolder.getFolder().getBaseType();
+        if (persistableFolder != null) {
+            return persistableFolder.getFolder().getBaseType();
         }
         return getType();
     }
 
-    /** Gets all subdirs down to the base folder's baseUri. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#CONFIGURABLE_FOLDER}) */
+    /** Gets all subdirs down to the base folder's baseUri. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#PERSISTABLE_FOLDER}) */
     public List<String> getSubdirsToBase() {
-        final List<String > result = configurableFolder != null ? configurableFolder.getFolder().getSubdirsToBase() : new ArrayList<>();
+        final List<String > result = persistableFolder != null ? persistableFolder.getFolder().getSubdirsToBase() : new ArrayList<>();
         result.addAll(subfolders);
         return result;
     }
 
-    /** If this instance is of type {@link FolderType#CONFIGURABLE_FOLDER}, then this configurablefolder is returned. Otherwise null is returned */
+    /** If this instance is of type {@link FolderType#PERSISTABLE_FOLDER}, then the base {@link PersistableFolder} is returned. Otherwise null is returned */
     @Nullable
-    public ConfigurableFolder getRootConfigurableFolder() {
-        return configurableFolder;
+    public PersistableFolder getRootPersistableFolder() {
+        return persistableFolder;
     }
 
-    /** Returns a representation of this folder's location fit to show to an end user. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#CONFIGURABLE_FOLDER}) */
+    /** Returns a representation of this folder's location fit to show to an end user. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#PERSISTABLE_FOLDER}) */
     @NonNull
     public String toUserDisplayableString() {
         return UriUtils.toUserDisplayableString(UriUtils.appendPath(getBaseUri(), CollectionStream.of(getSubdirsToBase()).toJoinedString("/")));
@@ -158,15 +164,15 @@ public class Folder {
         }
         final List<String> newSubfolders = new ArrayList<>(folder.subfolders);
         newSubfolders.addAll(toFolderNames(subfolder));
-        return new Folder(folder.type, folder.uri, folder.configurableFolder, newSubfolders);
+        return new Folder(folder.type, folder.uri, folder.persistableFolder, newSubfolders);
     }
 
     @Nullable
-    public static Folder fromConfigurableFolder(final ConfigurableFolder configurableFolder, final String subfolder) {
-        if (configurableFolder == null) {
+    public static Folder fromPersistableFolder(final PersistableFolder persistableFolder, final String subfolder) {
+        if (persistableFolder == null) {
             return null;
         }
-        return new Folder(FolderType.CONFIGURABLE_FOLDER, null, configurableFolder, toFolderNames(subfolder));
+        return new Folder(FolderType.PERSISTABLE_FOLDER, null, persistableFolder, toFolderNames(subfolder));
     }
 
     /** Creates Folder instance from a previously deserialized representation using {@link Folder#toConfig()}. */
@@ -211,12 +217,12 @@ public class Folder {
                 return Folder.fromDocumentUri(Uri.parse(tokens[1]), tokens[2]);
             case FILE:
                 return Folder.fromFile(UriUtils.toFile(Uri.parse(tokens[1])), tokens[2]);
-            case CONFIGURABLE_FOLDER:
-                final ConfigurableFolder configFolder = EnumUtils.getEnum(ConfigurableFolder.class, tokens[1]);
+            case PERSISTABLE_FOLDER:
+                final PersistableFolder configFolder = EnumUtils.getEnum(PersistableFolder.class, tokens[1]);
                 if (configFolder == null) {
                     return null;
                 }
-                return Folder.fromConfigurableFolder(configFolder, tokens[2]);
+                return Folder.fromPersistableFolder(configFolder, tokens[2]);
             default:
                 return null;
         }
@@ -245,8 +251,8 @@ public class Folder {
 
         final StringBuilder configString = new StringBuilder(type.toString()).append(CONFIG_SEP);
         switch (type) {
-            case CONFIGURABLE_FOLDER:
-                configString.append(this.configurableFolder.name());
+            case PERSISTABLE_FOLDER:
+                configString.append(this.persistableFolder.name());
                 break;
             case FILE:
             case DOCUMENT:
@@ -267,11 +273,11 @@ public class Folder {
     @NotNull
     @Override
     public String toString() {
-        //We can't print the REAL Uri this Folder points to since this would require a call to FolderStorage
+        //We can't print the REAL Uri this Folder points to since this would require a call to ContentStorage
         return toUserDisplayableString() +
             "[" +
             getType() +
-            (getRootConfigurableFolder() == null ? "" : "(" + getRootConfigurableFolder().name() + ")") +
+            (getRootPersistableFolder() == null ? "" : "(" + getRootPersistableFolder().name() + ")") +
             "#" + subfolders.size() +
             ":" + UriUtils.getPseudoUriString(getBaseUri(), getSubdirsToBase(), -1) +
             "]";

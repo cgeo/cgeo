@@ -9,8 +9,8 @@ import cgeo.geocaching.maps.routing.RouteSortActivity;
 import cgeo.geocaching.models.ManualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.ConfigurableFolder;
-import cgeo.geocaching.storage.ConfigurableFolderStorageActivityHelper;
+import cgeo.geocaching.storage.ContentStorageActivityHelper;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action2;
 
@@ -24,11 +24,11 @@ public class IndividualRouteUtils {
 
     private final Activity activity;
 
-    private final ConfigurableFolderStorageActivityHelper fileSelector;
+    private final ContentStorageActivityHelper fileSelector;
 
     public IndividualRouteUtils(final Activity activity) {
         this.activity = activity;
-        this.fileSelector = new ConfigurableFolderStorageActivityHelper(activity);
+        this.fileSelector = new ContentStorageActivityHelper(activity);
     }
 
     /**
@@ -89,7 +89,7 @@ public class IndividualRouteUtils {
 
     private void startIndividualRouteFileSelector(final Runnable reloadIndividualRoute) {
 
-        fileSelector.selectFile(null, ConfigurableFolder.GPX.getUri(), uri -> {
+        fileSelector.selectFile(null, PersistableFolder.GPX.getUri(), uri -> {
             if (uri != null) {
                 GPXIndividualRouteImporter.doImport(activity, uri);
                 reloadIndividualRoute.run();

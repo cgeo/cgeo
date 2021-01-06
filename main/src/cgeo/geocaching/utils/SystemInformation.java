@@ -13,12 +13,12 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.HwAccel;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.FolderStorage;
 import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.storage.PersistedDocumentUri;
+import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.storage.PersistableUri;
 
 import android.Manifest;
 import android.content.Context;
@@ -88,9 +88,6 @@ public final class SystemInformation {
         appendDatabase(body);
         body
                 .append("\nLast backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
-                .append("\nGPX import path: ").append(Settings.getGpxImportDir())
-                .append("\nGPX export path: ").append(Settings.getGpxExportDir())
-                .append("\nOffline maps path: ").append(ConfigurableFolder.OFFLINE_MAPS)
                 .append("\nMap render theme path: ").append(Settings.getCustomRenderThemeFilePath())
                 .append("\nLive map mode: ").append(Settings.isLiveMap())
                 .append("\nGlobal filter: ").append(Settings.getCacheType().pattern)
@@ -130,21 +127,21 @@ public final class SystemInformation {
     }
 
     private static void appendPublicFolders(@NonNull final StringBuilder body) {
-        body.append("\nPublic Folders: #").append(ConfigurableFolder.values().length);
-        for (ConfigurableFolder folder : ConfigurableFolder.values()) {
-            final boolean isAvailable = FolderStorage.get().ensureAndAdjustFolder(folder);
+        body.append("\nPublic Folders: #").append(PersistableFolder.values().length);
+        for (PersistableFolder folder : PersistableFolder.values()) {
+            final boolean isAvailable = ContentStorage.get().ensureAndAdjustFolder(folder);
             final ImmutablePair<Integer, Integer> files = FolderUtils.get().getFolderInfo(folder.getFolder());
             final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
             body.append("\n- ").append(folder.toString())
-                .append(" (Uri: " + FolderStorage.get().getUriForFolder(folder.getFolder()))
+                .append(" (Uri: ").append(ContentStorage.get().getUriForFolder(folder.getFolder()))
                 .append(", Available:").append(isAvailable).append(", Fiies: ").append(files.left).append(", subdirs:").append(files.right)
                 .append(", free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on device: ").append(freeSpace.right).append(")");
         }
     }
 
     private static void appendPersistedDocumentUris(@NonNull final StringBuilder body) {
-        body.append("\nPersistedDocumentUris: #").append(PersistedDocumentUri.values().length);
-        for (PersistedDocumentUri persDocUri : PersistedDocumentUri.values()) {
+        body.append("\nPersistedDocumentUris: #").append(PersistableUri.values().length);
+        for (PersistableUri persDocUri : PersistableUri.values()) {
             body.append("\n- ").append(persDocUri);
         }
     }

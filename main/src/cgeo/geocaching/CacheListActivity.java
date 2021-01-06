@@ -66,9 +66,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.SortActionProvider;
-import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.FolderStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -1278,10 +1278,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void importGpx() {
-        getConfigFolderStorageHelper().selectMultipleFiles(null, ConfigurableFolder.GPX.getUri(), uris -> {
+        getContentStorageHelper().selectMultipleFiles(null, PersistableFolder.GPX.getUri(), uris -> {
             final GPXImporter importer = new GPXImporter(this, listId, importGpxAttachementFinishedHandler);
             for (Uri uri : uris) {
-                importer.importGPX(uri, null, FolderStorage.get().getName(uri));
+                importer.importGPX(uri, null, ContentStorage.get().getName(uri));
             }
         });
     }

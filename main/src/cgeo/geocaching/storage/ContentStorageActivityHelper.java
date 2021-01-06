@@ -35,7 +35,7 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
  * into the {@link Activity#onActivityResult(int, int, Intent)} method of the using application!
  * TODO: once Activity ResultAPI is available -> refactor! Watch #9349
  */
-public class ConfigurableFolderStorageActivityHelper {
+public class ContentStorageActivityHelper {
 
     //use a globally unique request code to mix-in with Activity.onActivityResult. (This will no longer be neccessary with Activity Result API)
     //code must be positive (>0) and <=65535 (restriction of SDK21)
@@ -54,20 +54,20 @@ public class ConfigurableFolderStorageActivityHelper {
     private static class IntentData<T> {
         public final Consumer<T> callback; //for all requests
 
-        public final ConfigurableFolder folder; //for REQUEST_CODE_GRANT_FOLDER_URI_ACCESS
+        public final PersistableFolder folder; //for REQUEST_CODE_GRANT_FOLDER_URI_ACCESS
         public final CopyChoice copyChoice; //for REQUEST_CODE_GRANT_FOLDER_URI_ACCESS
 
-        public final PersistedDocumentUri persistedDocUri; // for REQUEST_CODE_SELECT_FILE_PERSISTED
+        public final PersistableUri persistedDocUri; // for REQUEST_CODE_SELECT_FILE_PERSISTED
 
-        IntentData(final ConfigurableFolder folder, final CopyChoice copyChoice, final Consumer<T> callback) {
+        IntentData(final PersistableFolder folder, final CopyChoice copyChoice, final Consumer<T> callback) {
             this(folder, copyChoice, null, callback);
         }
 
-        IntentData(final PersistedDocumentUri persistedDocUri, final Consumer<T> callback) {
+        IntentData(final PersistableUri persistedDocUri, final Consumer<T> callback) {
             this(null, null, persistedDocUri, callback);
         }
 
-        IntentData(final ConfigurableFolder folder, final CopyChoice copyChoice, final PersistedDocumentUri persistedDocUri, final Consumer<T> callback) {
+        IntentData(final PersistableFolder folder, final CopyChoice copyChoice, final PersistableUri persistedDocUri, final Consumer<T> callback) {
             this.folder = folder;
             this.callback = callback;
             this.copyChoice = copyChoice;
@@ -75,7 +75,7 @@ public class ConfigurableFolderStorageActivityHelper {
         }
     }
 
-    public ConfigurableFolderStorageActivityHelper(final Activity activity) {
+    public ContentStorageActivityHelper(final Activity activity) {
         this.activity = activity;
     }
 
@@ -83,25 +83,23 @@ public class ConfigurableFolderStorageActivityHelper {
      */
     public void checkBaseFolderAccess() {
 
-        final ConfigurableFolder folder = ConfigurableFolder.BASE;
+        final PersistableFolder folder = PersistableFolder.BASE;
 
-        if (folder.isUserDefined() && FolderStorage.get().ensureAndAdjustFolder(folder)) {
+        if (folder.isUserDefined() && ContentStorage.get().ensureAndAdjustFolder(folder)) {
             //everything is as we want it
             return;
         }
 
         //ask/remind user to choose an explicit BASE dir, otherwise the default will be used
         final AlertDialog dialog = Dialogs.newBuilder(activity)
-            .setTitle(R.string.folderstorage_grantaccess_dialog_title)
-            .setMessage(HtmlCompat.fromHtml(activity.getString(R.string.folderstorage_grantaccess_dialog_msg_basedir_html, folder.getDefaultFolder().toUserDisplayableString()),
+            .setTitle(R.string.contentstorage_grantaccess_dialog_title)
+            .setMessage(HtmlCompat.fromHtml(activity.getString(R.string.contentstorage_grantaccess_dialog_msg_basedir_html, folder.getDefaultFolder().toUserDisplayableString()),
                 HtmlCompat.FROM_HTML_MODE_LEGACY))
             .setPositiveButton(android.R.string.ok, (d, p) -> {
                 d.dismiss();
                 selectFolderUri(folder, null);
             })
-            .setNegativeButton(android.R.string.cancel, (d, p) -> {
-                d.dismiss();
-            })
+            .setNegativeButton(android.R.string.cancel, (d, p) -> d.dismiss())
             .create();
         dialog.show();
         Dialogs.makeLinksClickable(dialog);
@@ -113,14 +111,14 @@ public class ConfigurableFolderStorageActivityHelper {
      * @param folder folder to request a new place from user
      * @param callback called after user changed the uri. Callback is always called, even if user cancelled or error occured
      */
-    public void selectFolderUri(final ConfigurableFolder folder, final Consumer<ConfigurableFolder> callback) {
+    public void selectFolderUri(final PersistableFolder folder, final Consumer<PersistableFolder> callback) {
 
         final ImmutablePair<Integer, Integer> fileInfo = FolderUtils.get().getFolderInfo(folder.getFolder());
 
         final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
         final View dialogView = LayoutInflater.from(dialog.getContext()).inflate(R.layout.folder_selection_dialog, null);
 
-        final CharSequence message = getHtml(R.string.folderstorage_selectfolder_dialog_msg_html, folder.toUserDisplayableName(), folder.toUserDisplayableValue(),
+        final CharSequence message = getHtml(R.string.contentstorage_selectfolder_dialog_msg_html, folder.toUserDisplayableName(), folder.toUserDisplayableValue(),
             fileInfo.left, fileInfo.right, folder.getDefaultFolder().toUserDisplayableString());
 
         //init dialog
@@ -133,12 +131,12 @@ public class ConfigurableFolderStorageActivityHelper {
 
         dialog
             .setView(dialogView)
-            .setTitle(activity.getString(R.string.folderstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
-            .setPositiveButton(R.string.configurablefolder_usertype_userdefined, (d, p) -> {
+            .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
+            .setPositiveButton(R.string.persistablefolder_usertype_userdefined, (d, p) -> {
                 d.dismiss();
                 selectUserFolderUri(folder, copyChoice[0], callback);
                 })
-            .setNegativeButton(R.string.configurablefolder_usertype_default, (d, p) -> {
+            .setNegativeButton(R.string.persistablefolder_usertype_default, (d, p) -> {
                 d.dismiss();
                 continueFolderSelectionCopyMove(folder, null, copyChoice[0], callback);
             })
@@ -164,11 +162,11 @@ public class ConfigurableFolderStorageActivityHelper {
         selectFilesInternal(type, startUri, REQUEST_CODE_SELECT_FILE_MULTIPLE, null, callback);
     }
 
-    public void selectPersistedUri(@NonNull final PersistedDocumentUri persistedDocUri, final Consumer<Uri> callback) {
+    public void selectPersistedUri(@NonNull final PersistableUri persistedDocUri, final Consumer<Uri> callback) {
         selectFilesInternal(persistedDocUri.getMimeType(), persistedDocUri.getUri(), REQUEST_CODE_SELECT_FILE_PERSISTED, persistedDocUri, callback);
     }
 
-    private void selectFilesInternal(@Nullable final String type, @Nullable final Uri startUri, final int requestCode, final PersistedDocumentUri docUri, final Consumer<?> callback) {
+    private void selectFilesInternal(@Nullable final String type, @Nullable final Uri startUri, final int requestCode, final PersistableUri docUri, final Consumer<?> callback) {
         // call for document tree dialog
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -189,7 +187,7 @@ public class ConfigurableFolderStorageActivityHelper {
     }
 
 
-    private void selectUserFolderUri(final ConfigurableFolder folder, final CopyChoice copyChoice, final Consumer<ConfigurableFolder> callback) {
+    private void selectUserFolderUri(final PersistableFolder folder, final CopyChoice copyChoice, final Consumer<PersistableFolder> callback) {
 
         // call for document tree dialog
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
@@ -245,7 +243,7 @@ public class ConfigurableFolderStorageActivityHelper {
     private void handleResultSelectFiles(final int requestCode, final Intent intent, final boolean resultOk) {
         final List<Uri> selectedUris = new ArrayList<>();
         if (!resultOk || intent == null) {
-            report(true, R.string.folderstorage_file_selection_aborted);
+            report(true, R.string.contentstorage_file_selection_aborted);
         } else {
             //get selected uris from intent
             if (intent.getData() != null) {
@@ -261,15 +259,15 @@ public class ConfigurableFolderStorageActivityHelper {
             }
 
             if (selectedUris.isEmpty()) {
-                report(true, R.string.folderstorage_file_selection_aborted);
+                report(true, R.string.contentstorage_file_selection_aborted);
             } else {
                 if (runningIntentData.persistedDocUri != null) {
                     activity.getContentResolver().takePersistableUriPermission(selectedUris.get(0),
                         Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
-                    FolderStorage.get().setPersistedDocumentUri(runningIntentData.persistedDocUri, selectedUris.get(0));
+                    ContentStorage.get().setPersistedDocumentUri(runningIntentData.persistedDocUri, selectedUris.get(0));
                 }
-                report(false, R.string.folderstorage_file_selection_success, selectedUris.get(0));
+                report(false, R.string.contentstorage_file_selection_success, selectedUris.get(0));
             }
         }
 
@@ -287,18 +285,18 @@ public class ConfigurableFolderStorageActivityHelper {
 
     private void handleResultFolderSelection(final Intent intent, final boolean resultOk) {
         final Uri uri = !resultOk || intent == null ? null : intent.getData();
-        final ConfigurableFolder folder = runningIntentData.folder;
-        final Consumer<ConfigurableFolder> callback = (Consumer<ConfigurableFolder>) runningIntentData.callback;
+        final PersistableFolder folder = runningIntentData.folder;
+        final Consumer<PersistableFolder> callback = (Consumer<PersistableFolder>) runningIntentData.callback;
         if (uri == null) {
             finalizeFolderSelection(false, folder, null, callback);
         } else {
             final int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | (runningIntentData.folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
             activity.getContentResolver().takePersistableUriPermission(uri, flags);
-            FolderStorage.get().refreshUriPermissionCache();
+            ContentStorage.get().refreshUriPermissionCache();
 
             //Test if access is really working!
             final Folder target = Folder.fromDocumentUri(uri);
-            if (!FolderStorage.get().ensureFolder(target, runningIntentData.folder.needsWrite(), true)) {
+            if (!ContentStorage.get().ensureFolder(target, runningIntentData.folder.needsWrite(), true)) {
                 finalizeFolderSelection(false, folder, null, callback);
             } else {
                 continueFolderSelectionCopyMove(folder, uri, runningIntentData.copyChoice, callback);
@@ -306,7 +304,7 @@ public class ConfigurableFolderStorageActivityHelper {
         }
     }
 
-    private void continueFolderSelectionCopyMove(final ConfigurableFolder folder, final Uri targetUri, final CopyChoice copyChoice, final Consumer<ConfigurableFolder> callback) {
+    private void continueFolderSelectionCopyMove(final PersistableFolder folder, final Uri targetUri, final CopyChoice copyChoice, final Consumer<PersistableFolder> callback) {
         final Folder before = folder.getFolder();
         final ImmutablePair<Integer, Integer> folderInfo = FolderUtils.get().getFolderInfo(before);
         if (copyChoice.equals(CopyChoice.DO_NOTHING) || new ImmutablePair<>(0, 0).equals(folderInfo)) {
@@ -319,8 +317,8 @@ public class ConfigurableFolderStorageActivityHelper {
             final ImmutableTriple<FolderUtils.CopyResult, Integer, Integer> copyResult = FolderUtils.get().copyAll(folder.getFolder(), target, copyChoice.equals(CopyChoice.MOVE));
             //display result
             Dialogs.newBuilder(activity)
-                .setTitle(activity.getString(R.string.folderstorage_selectfolder_dialog_copy_move_finished_title, folder.toUserDisplayableName()))
-                .setMessage(getHtml(R.string.folderstorage_selectfolder_dialog_copy_move_finished_msg_html,
+                .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_copy_move_finished_title, folder.toUserDisplayableName()))
+                .setMessage(getHtml(R.string.contentstorage_selectfolder_dialog_copy_move_finished_msg_html,
                     copyResult.left, copyResult.middle, copyResult.right))
                 .setPositiveButton(android.R.string.ok, (dd, pp) -> {
                     dd.dismiss();
@@ -335,12 +333,12 @@ public class ConfigurableFolderStorageActivityHelper {
     }
 
 
-    private void finalizeFolderSelection(final boolean success, final ConfigurableFolder folder, final Uri selectedUri, final Consumer<ConfigurableFolder> callback) {
+    private void finalizeFolderSelection(final boolean success, final PersistableFolder folder, final Uri selectedUri, final Consumer<PersistableFolder> callback) {
         if (success) {
-            FolderStorage.get().setUserDefinedFolder(folder, Folder.fromDocumentUri(selectedUri));
-            report(false, R.string.folderstorage_folder_selection_success, folder);
+            ContentStorage.get().setUserDefinedFolder(folder, Folder.fromDocumentUri(selectedUri));
+            report(false, R.string.contentstorage_folder_selection_success, folder);
         } else {
-            report(true, R.string.folderstorage_folder_selection_aborted, folder);
+            report(true, R.string.contentstorage_folder_selection_aborted, folder);
         }
         if (callback != null) {
             callback.accept(folder);
@@ -348,7 +346,7 @@ public class ConfigurableFolderStorageActivityHelper {
     }
 
     private void report(final boolean isWarning, @StringRes final int messageId, final Object ... params) {
-        final ImmutablePair<String, String> messages = FolderStorage.get().constructMessage(messageId, params);
+        final ImmutablePair<String, String> messages = ContentStorage.get().constructMessage(messageId, params);
         Log.log(isWarning ? Log.LogLevel.WARN : Log.LogLevel.INFO, messages.right);
         ActivityMixin.showToast(activity, messages.left);
     }

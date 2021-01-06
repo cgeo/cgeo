@@ -9,9 +9,9 @@ import androidx.annotation.AnyRes;
 import androidx.annotation.Nullable;
 
 /** Enum listing all single-document-Uris which can be persisted */
-public enum PersistedDocumentUri {
+public enum PersistableUri {
 
-    TRACK(R.string.pref_persisteduri_track, null);
+    TRACK(R.string.pref_persistableuri_track, null);
     //INDIVIDUAL_ROUTE(R.string.pref_persisteduri_individual_route, null);
 
     @AnyRes
@@ -19,7 +19,7 @@ public enum PersistedDocumentUri {
     private final String mimeType;
 
 
-    PersistedDocumentUri(@AnyRes final int prefKeyId, final String mimeType) {
+    PersistableUri(@AnyRes final int prefKeyId, final String mimeType) {
         this.prefKeyId = prefKeyId;
         this.mimeType = mimeType;
     }
@@ -33,17 +33,17 @@ public enum PersistedDocumentUri {
     }
 
     public Uri getUri() {
-        final String uriString = Settings.getPersistedDocumentUri(this);
-        return uriString == null ? null : Uri.parse(Settings.getPersistedDocumentUri(this));
+        final String uriString = Settings.getPersistableUri(this);
+        return uriString == null ? null : Uri.parse(Settings.getPersistableUri(this));
     }
 
     public boolean hasValue() {
         return getUri() != null;
     }
 
-    /** Sets a new user-defined location ("null" is allowed). Should be called ONLY by {@link FolderStorage} */
+    /** Sets a new user-defined location ("null" is allowed). Should be called ONLY by {@link ContentStorage} */
     protected void setPersistedUri(@Nullable final Uri uri) {
-        Settings.setPersistedDocumentUri(this, uri == null ? null : uri.toString());
+        Settings.setPersistableUri(this, uri == null ? null : uri.toString());
     }
 
     @Override
