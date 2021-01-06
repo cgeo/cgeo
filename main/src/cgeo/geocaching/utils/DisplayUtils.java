@@ -11,6 +11,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.view.WindowManager;
 
 import androidx.annotation.DrawableRes;
@@ -52,9 +53,10 @@ public class DisplayUtils {
      * @param resToFitIn - resource to check
      * @return actual height
      */
-    public static int getDrawableHeight(final Resources res, @DrawableRes final int resToFitIn) {
+    public static Pair<Integer, Integer> getDrawableDimensions(final Resources res, @DrawableRes final int resToFitIn) {
         final Bitmap calc = BitmapFactory.decodeResource(res, resToFitIn);
-        return calc.getHeight();
+        return new Pair<>(calc.getWidth(), calc.getHeight());
+
     }
 
     /**

@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +39,8 @@ public class EmojiUtils {
         final EmojiViewAdapter lruAdapter;
 
         // calc sizes
-        final int markerHeight = DisplayUtils.getDrawableHeight(activity.getResources(), R.drawable.marker_oc);
-        final int markerAvailable = (int) (markerHeight * 0.6);
+        final Pair<Integer, Integer> markerDimensions = DisplayUtils.getDrawableDimensions(activity.getResources(), R.drawable.marker_oc);
+        final int markerAvailable = (int) (markerDimensions.second * 0.6);
         final int markerFontsize = DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable);
 
         // data to populate the emoji selector with
@@ -79,7 +80,7 @@ public class EmojiUtils {
         if (currentValue == -1) {
             button2.setImageResource(R.drawable.ic_menu_mark);
         } else if (currentValue != 0) {
-            button2.setImageDrawable(getEmojiDrawable(activity.getResources(), markerHeight, markerAvailable, markerFontsize, currentValue));
+            button2.setImageDrawable(getEmojiDrawable(activity.getResources(), markerDimensions, markerAvailable, markerFontsize, currentValue));
         } else if (defaultRes != 0) {
             button2.setImageResource(defaultRes);
         }
@@ -152,20 +153,20 @@ public class EmojiUtils {
     /**
      * builds a drawable the size of a marker with a given text
      * @param res - the resources to use
-     * @param bitmapSize - actual size of the bitmap to place the text in
+     * @param bitmapDimensions - actual size (width/height) of the bitmap to place the text in
      * @param availableSize - available size
      * @param fontsize - fontsize to use
      * @param emoji codepoint of the emoji to display
      * @return drawable bitmap with text on it
      */
-    public static BitmapDrawable getEmojiDrawable(final Resources res, final int bitmapSize, final int availableSize, final int fontsize, final int emoji) {
+    public static BitmapDrawable getEmojiDrawable(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int fontsize, final int emoji) {
         final String text = new String(Character.toChars(emoji));
         final TextPaint tPaint = new TextPaint();
         tPaint.setTextSize(fontsize);
-        final Bitmap bm = Bitmap.createBitmap(bitmapSize, bitmapSize, Bitmap.Config.ARGB_8888);
+        final Bitmap bm = Bitmap.createBitmap(bitmapDimensions.first, bitmapDimensions.second, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bm);
         final StaticLayout lsLayout = new StaticLayout(text, tPaint, availableSize, Layout.Alignment.ALIGN_CENTER, 1, 0, false);
-        final int deltaTopLeft = (int) (0.3 * (bitmapSize - availableSize));
+        final int deltaTopLeft = (int) (0.4 * (bitmapDimensions.first - availableSize));
         canvas.translate(deltaTopLeft, deltaTopLeft + (int) ((availableSize - lsLayout.getHeight()) / 2));
         lsLayout.draw(canvas);
         canvas.save();

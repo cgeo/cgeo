@@ -21,6 +21,7 @@ import cgeo.geocaching.utils.builders.InsetsBuilder;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.util.Pair;
 import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
@@ -41,7 +42,7 @@ public final class MapMarkerUtils {
     private static Boolean listsRead = false;
 
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
-    private static int markerHeight = 0;
+    private static Pair<Integer, Integer> markerDimensions = null;
     private static int markerAvailable = 0;
     private static int markerFontsize = 0;
 
@@ -238,12 +239,12 @@ public final class MapMarkerUtils {
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
         final boolean doubleSize = showBigSmileys(cacheListType) && mainMarkerId != cache.getType().markerId;
         if (useEmoji > 0 && !doubleSize) {
-            if (markerHeight == 0) {
-                markerHeight = DisplayUtils.getDrawableHeight(res, R.drawable.marker_oc);
-                markerAvailable = (int) (markerHeight * 0.6);
+            if (markerDimensions == null) {
+                markerDimensions = DisplayUtils.getDrawableDimensions(res, R.drawable.marker_oc);
+                markerAvailable = (int) (markerDimensions.first * 0.6);
                 markerFontsize = DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable);
             }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(res, markerHeight, markerAvailable, markerFontsize, useEmoji)));
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(res, markerDimensions, markerAvailable, markerFontsize, useEmoji)));
         } else {
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, doubleSize));
         }
@@ -274,7 +275,6 @@ public final class MapMarkerUtils {
         if (markerId > 0) {
             insetsBuilder.withInset(new InsetBuilder(ListMarker.getResDrawable(markerId), VERTICAL.CENTER, HORIZONTAL.LEFT));
         }
-
         markerId = (assignedMarkers >> ListMarker.MAX_BITS_PER_MARKER) & ListMarker.BITMASK;
         if (markerId > 0) {
             insetsBuilder.withInset(new InsetBuilder(ListMarker.getResDrawable(markerId), VERTICAL.CENTER, HORIZONTAL.RIGHT));
