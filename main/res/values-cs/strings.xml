@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Rozcestník</string>
     <string name="wp_waypoint">Referenční bod</string>
     <string name="wp_original">Původní souřadnice</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Nález</string>
     <string name="log_dnf">Nenalezeno</string>
@@ -670,10 +671,6 @@
     <string name="init_routecolor_summary">Vyberte barvu a neprůhlednost čáry pro individuální trasy. Individuální trasa je soubor trasových bodů a / nebo kešek, které jste vybrali dlouhým přidržením trasových bodů / kešky. (Nejprve musíte povolit funkci dlouhého přidržení, viz nastavení mapy.)</string>
     <string name="init_routewidth">Šířka čáry individuální trasy</string>
     <string name="init_routewidth_summary">Vyberte šířku čáry pro individuální trasy</string>
-    <string name="init_trackcolor">Individuální barva trasy</string>
-    <string name="init_trackcolor_summary">Vyberte barvu a neprůhlednost čáry pro trasy. Trasa se skládá z několika trasových bodů a lze ji načíst pomocí souboru GPX s trasou.</string>
-    <string name="init_trackwidth">Individuální šířka trasy</string>
-    <string name="init_trackwidth_summary">Vyberte šířku čáry pro individuální trasy</string>
     <string name="init_circlecolor">Barva obrysu kruhu</string>
     <string name="init_circlecolor_summary">Vyberte barvu a neprůhlednost kruhu. Kruhy se používají jako vizuální znázornění pro minimálního okruh kolem kešky nebo fyzického trasového bodu, v němž nejsou povoleny žádná jiné kešky nebo fyzické trasové body. (Platí pro geocaching.com)</string>
     <string name="init_circlefillcolor">Barva výplně kruhu</string>
