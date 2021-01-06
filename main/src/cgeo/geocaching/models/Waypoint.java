@@ -480,7 +480,14 @@ public class Waypoint implements IWaypoint {
             }
         }
         for (final WaypointType wpType : WaypointType.ALL_TYPES) {
-            if (lowerInput.contains(wpType.getNameForNewWaypoint().toLowerCase(Locale.getDefault())) || lowerInput.contains(wpType.getL10n().toLowerCase(Locale.getDefault()))) {
+            // check the old, longer waypoint names first (to not interfere with the shortened versions)
+            if (lowerInput.contains(wpType.getL10n().toLowerCase(Locale.getDefault()))) {
+                return wpType;
+            }
+        }
+        for (final WaypointType wpType : WaypointType.ALL_TYPES) {
+            // then check the new, shortened versions
+            if (lowerInput.contains(wpType.getNameForNewWaypoint().toLowerCase(Locale.getDefault()))) {
                 return wpType;
             }
         }
