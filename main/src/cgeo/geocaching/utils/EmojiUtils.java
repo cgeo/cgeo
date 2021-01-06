@@ -90,7 +90,10 @@ public class EmojiUtils {
             final ImageButton button1 = customTitle.findViewById(R.id.dialog_button1);
             button1.setVisibility(View.VISIBLE);
             button1.setImageResource(defaultRes);
-            button1.setOnClickListener(v -> setNewCacheIcon.call(0));
+            button1.setOnClickListener(v -> {
+                setNewCacheIcon.call(0);
+                dialog.dismiss();
+            });
         }
 
         dialog.show();
