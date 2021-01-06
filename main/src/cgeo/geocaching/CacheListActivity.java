@@ -885,6 +885,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void setCacheIcons(final int newCacheIcon) {
+        if (newCacheIcon == 0) {
+            Dialogs.confirm(this, R.string.caches_reset_cache_icons_title, R.string.caches_reset_cache_icons, android.R.string.ok, (d, v) -> setCacheIconsHelper(0));
+        } else {
+            setCacheIconsHelper(newCacheIcon);
+        }
+    }
+
+    private void setCacheIconsHelper(final int newCacheIcon) {
         new SetCacheIconCommand(this, adapter.getCheckedOrAllCaches(), newCacheIcon) {
             @Override
             protected void onFinished() {
