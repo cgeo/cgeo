@@ -1843,6 +1843,14 @@
         <item quantity="other">Add this cache to favorites (%d remaining)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Setting cache icons</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="zero">Set %d cache icons</item>
+        <item quantity="one">Set %d cache icon</item>
+        <item quantity="two">Set %d cache icons</item>
+        <item quantity="few">Set %d cache icons</item>
+        <item quantity="many">Set %d cache icons</item>
+        <item quantity="other">Set %d cache icons</item>
+    </plurals>
 
     <string name="pq_download_and_import">Import Pocket query</string>
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
