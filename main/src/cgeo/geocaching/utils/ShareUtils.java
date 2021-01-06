@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
@@ -10,9 +11,13 @@ import static cgeo.geocaching.utils.ProcessUtils.CHROME_PACKAGE_NAME;
 
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
@@ -25,6 +30,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -159,8 +165,27 @@ public class ShareUtils {
                 chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
 
                 final Intent customTabs = new Intent(context, StartWebviewActivity.class);
+
+                final List<ResolveInfo> alreadyExistingShareIntents = context.getPackageManager().queryIntentActivities(viewIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                final List<Intent> additionalTargetedShareIntents = new ArrayList<>();
                 customTabs.setData(Uri.parse(url));
-                chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[] {customTabs});
+                additionalTargetedShareIntents.add(customTabs);
+
+                // on some devices, only c:geo is returned as possible share target, if it is set as default.
+                // Therefore we need to query the installed browsers and check, whether it is already listed in the intent chooser.
+                for (ResolveInfo resolveInfo : ProcessUtils.getInstalledBrowsers(context)) {
+                    if (IterableUtils.find(alreadyExistingShareIntents,
+                        info -> resolveInfo.activityInfo.packageName.equals(info.activityInfo.packageName)) == null) {
+                        final Intent targetedShare = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        targetedShare.setPackage(resolveInfo.activityInfo.packageName);
+                        additionalTargetedShareIntents.add(targetedShare);
+                    }
+                }
+
+                chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, additionalTargetedShareIntents.toArray(new Parcelable[]{}));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    chooser.putExtra(Intent.EXTRA_EXCLUDE_COMPONENTS, new Parcelable[] {new ComponentName(context, CacheDetailActivity.class)});
+                }
 
                 context.startActivity(chooser);
             } else {
