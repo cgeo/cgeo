@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Stistart</string>
     <string name="wp_waypoint">Referansepunkt</string>
     <string name="wp_original">Opprinnelige koordinater</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Funnet</string>
     <string name="log_dnf">Ikke funnet</string>
@@ -667,10 +668,6 @@
     <string name="init_routecolor_summary">Velg farge og gjennomsiktighet for individuell rutelinje. En individuell rute er en samling av veipunkter og/eller cacher du har valgt, ved å trykke lenge på veipunkt/cache. (Du må aktivere langt trykk-funksjonen først, se kartinnstillinger.)</string>
     <string name="init_routewidth">Bredde på individuell rutelinje</string>
     <string name="init_routewidth_summary">Velg bredde for individuell rutelinje</string>
-    <string name="init_trackcolor">Farge for individuell sporlinje</string>
-    <string name="init_trackcolor_summary">Velg farge og gjennomsiktighet for sporlinje. Et spor består av flere veipunkter og kan lastes inn via en GPX-fil.</string>
-    <string name="init_trackwidth">Bredde på individuelle sporlinjer</string>
-    <string name="init_trackwidth_summary">Velg bredde for individuell sporlinje</string>
     <string name="init_circlecolor">Farge på sirkellinje</string>
     <string name="init_circlecolor_summary">Velg farge og gjennomsiktighet for sirkler. Sirkler er en visuell presentasjon av minimumsradius rundt en cache eller et fysisk veipunkt. Andre cacher eller fysiske veipunkter kan ikke plasseres innenfor denne radiusen. (Gjelder geocaching.com)</string>
     <string name="init_circlefillcolor">Fyllfarge på sirkel</string>
@@ -1788,4 +1785,6 @@
     <string name="export_individualroute_title">Eksporter egendefinert rute</string>
     <string name="export_individualroute_success">Eksportert egendefinert rute til \"%s\"</string>
     <!-- install wizard -->
+    <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="status_not_ok">FEIL</string>
 </resources>
