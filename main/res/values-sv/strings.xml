@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Stigstart</string>
     <string name="wp_waypoint">Referensplats</string>
     <string name="wp_original">Ursprungliga koordinater</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Hittad</string>
     <string name="log_dnf">Hittade inte</string>
@@ -648,10 +649,6 @@
     <string name="init_routecolor_summary">Välj färg och ogenomskinlighet för individuell ruttlinje. En enskild rutt är en samling av waypoints och/eller cacher du valt genom att långtrycka på waypoint/cache. (Du måste aktivera funktionen för långtryck först, se kartinställningar.)</string>
     <string name="init_routewidth">Individuell ruttlinje bredd</string>
     <string name="init_routewidth_summary">Välj bredd för individuell ruttlinje</string>
-    <string name="init_trackcolor">Individuell spårlinjefärg</string>
-    <string name="init_trackcolor_summary">Välj färg och ogenomskinlighet för spårlinje. Ett spår består av flera waypoints och kan laddas via en spår GPX-fil.</string>
-    <string name="init_trackwidth">Individuell spårlinje bredd</string>
-    <string name="init_trackwidth_summary">Välj bredd för individuell spårlinje</string>
     <string name="init_circlecolor">Färg på linje runt cirklar</string>
     <string name="init_circlecolor_summary">Välj färg och ogenomskinlighet för cirkellinje. Cirklar används som en visuell representation för den minsta radien runt en cache eller fysisk waypoint, där ingen annan cache eller fysisk waypoint är tillåten. (Applicerbar till geocaching.com)</string>
     <string name="init_circlefillcolor">Färg inuti cirklar</string>
