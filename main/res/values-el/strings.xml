@@ -446,6 +446,8 @@
     <string name="contribution_documentation">τεκμηρίωση</string>
     <string name="contribution_projectleader">επικεφαλής έργου ανοικτού κώδικα</string>
     <string name="contribution_graphics">γραφικά</string>
+    <string name="debug_user_error_report_title">Αναφορά προβλήματος</string>
+    <string name="debug_user_error_errortext">Ένα αναπάντεχο σφάλμα συνέβη, το οποίο θα θέλαμε να μας το γνωστοποιήσετε:</string>
     <string name="debug_user_error_explain_options_html"><![CDATA[<p>Βοηθήστε μαςνα βελτιώσουμε το c:geo με την αποστολή email περλαμβάνοντας πληροφορίες για το συστημα σας και την καταγραφή του προβλήματος. Για αλλες επιλογές επαφής δειτε στο <i>Σχετικά με το c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Άνοιγμα ρυθμίσεων;</string>
@@ -478,6 +480,7 @@
     <string name="settings_title_navigation">Πλοήγηση</string>
     <string name="settings_summary_navigation">Επιλέξτε επιθυμητή μέθοδο πλοήγησης και εξωτερικές εφαρμογές πλοήγησης.</string>
     <string name="settings_title_system">Σύστημα</string>
+    <string name="settings_summary_system">Ρυθμίσεις συστήματος και επιλογές αποσφαλμάτωσης.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
     <string name="settings_category_browser">Πρόγραμμα περιήγησης</string>
     <string name="settings_category_geocaching_platform">Πλατφόρμα Geocaching</string>
@@ -563,6 +566,7 @@
     <string name="init_select_language">Επιλέξτε γλώσσα</string>
     <string name="init_summary_select_language">Επιλλέξτε γλώσσα στην εφαρμογή (Χρειάζεται επανεκκίνηση)\n</string>
     <string name="init_use_default_language">Χρήση προεπιλεγμένης Γλώσσας</string>
+    <string name="init_category_exclude">Εξαίρεση κρυπτών</string>
     <string name="init_exclude">Εξαίρεση των δικών σας και όσων έχετε βρει</string>
     <string name="init_summary_exclude">Εξαίρεση των δικών σας κρυπτών ή όσων έχετε βρει</string>
     <string name="init_showwaypoints">Προβολή σημείων αναφοράς</string>
@@ -582,6 +586,8 @@
     <string name="init_summary_archived">Εξαίρεση των αρχειοθετημένων κρυπτών</string>
     <string name="init_global_wp_extraction_disable">Απενεργοποίηση εξαγωγής των σημείων ενδιαφέροντος</string>
     <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης</string>
+    <string name="init_customtabs_as_browser">Χρήση του Chrome webview</string>
+    <string name="init_summary_customtabs_as_browser">Η προβολή των εξωτερικών ιστοσελίδων θα γίνεται χωρίς έξοδο από το c:geo (αυτό είναι δυνατόν μόνο εάν είναι εγκατεστημένο το Chrome)</string>
     <string name="init_save_log_img">Αποθήκευση εικόνων</string>
     <string name="init_summary_save_log_img">Αποθήκευση εικόνων από αρχεία καταγραφής</string>
     <string name="init_units">Αγγλοσαξονικές Μονάδες</string>
@@ -624,6 +630,7 @@
     <string name="init_backup_unnecessary">Η βάση δεδομένων είναι κενή, δεν χρειάζονται αντίγραφα ασφαλείας.</string>
     <string name="init_backup_folder_exists_error">Δεν μπορεί να δημιουργηθεί νέος φάκελος αποθήκευσης αντιγραφών ασφαλείας. Έχετε δημιουργήσει ήδη ένα αντίγραφό ασφαλείας το τελευταίο λεπτό;</string>
     <string name="init_backup_no_backup_available">Δεν υπάρχουν διαθέσιμα αντίγραφα ασφαλείας.</string>
+    <string name="backup_confirm_overwrite">Αυτό θα διαγράψει τον παλιότερο φάκελο αντίγραφου ασφαλείας από %s. \nΘέλετε να συνεχίσετε;</string>
     <string name="restore_confirm_overwrite_database">ΠΡΟΣΟΧΗ: Αυτό θα επανεγράψει το %s της συσκευή σας!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ΠΡΟΣΟΧΗ: Αυτό θα επανεγγράψει το %s και τις τρέχουσες ρυθμίσεις της συσκευή σας!</string>
     <string name="restore_confirm_overwrite_settings">ΠΡΟΣΟΧΗ: Αυτό θα επανεγγράψει τις τρέχουσες ρυθμίσεις της συσκευής σας!</string>
@@ -1174,6 +1181,7 @@
     <string name="map_routing">Δρομολόγηση</string>
     <string name="map_gm_autorotation">Αυτόματη περιστροφή χάρτη</string>
     <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
+    <string name="quick_settings">Γρήγορες ρυθμίσεις</string>
     <string name="quick_settings_info">Μερικές ρυθμίσεις χάρτη (Ρυθμίσεις χάρτη, απόκρυψη, δρομολόγηση) έχουν μεταφερθεί στο νέο αναδυόμενο παράθυρο \"Γρήγορες ρυθμίσεις\".\nΜπορείτε να ανοίξετε αυτό το αναδυόμενο παράθυρο χρησιμοποιώντας το εικονίδιο στο κάτω μέρος του χάρτη.</string>
     <string name="map_show_in_map">Εμφάνιση στο χάρτη</string>
     <!-- search -->
@@ -1720,6 +1728,9 @@
     <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
     <string name="map_autotarget_individual_route">Να τεθεί αυτομάτως σαν στόχος</string>
+    <string name="map_disable_autotarget_individual_route">Απενεργοποιημένο \"Αυτόματος ορισμός ως στόχου\"</string>
+    <string name="map_clear_manual_targets">Εκκαθάριση χειροκίνητων στόχων</string>
+    <string name="map_manual_targets_cleared">Έγινε εκκαθάριση των χειροκίνητων στόχων</string>
     <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
     <string name="map_clear_individual_route_confirm">Θέλετε να απομακρύνετε όλες τις κρύπτες/ενδιάμεσα σημεία από την μεμονωμένη διαδρομή;</string>
     <string name="map_individual_route_cleared">Έγινε εκκαθάριση της μεμονωμένης διαδρομής</string>
