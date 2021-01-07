@@ -94,6 +94,12 @@ public interface IConnector {
     boolean supportsNamechange();
 
     /**
+     * enable/disable changing the description of a cache
+     *
+     */
+    boolean supportsDescriptionchange();
+
+    /**
      * Get host name of the connector server for dynamic loading of data.
      *
      */
