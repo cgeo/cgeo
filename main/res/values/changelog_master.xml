@@ -14,8 +14,9 @@
 <h4>Cache details:</h4>
 <ul>
 <li>New: Caches can have individual cache icons (also available as batch processing in cache lists)</li>
+<li>New: Allow edition of description for user-defined caches</li>
 <li>Change: New user-defined waypoints will get shorter names</li>
-<li>Change: Numbering of new user-defined waypoints will use a cache-wide number (instead of per-type numbering)</li>
+<li>Change: Numbering of new user-defined waypoints will use a cache-wide number (instead of per-type numbering) and will include waypoints of type trailhead</li>
 </ul>
 
 <h4>Other:</h4>
