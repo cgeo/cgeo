@@ -59,7 +59,6 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         final String preset = intent.getStringExtra(EXTRA_FILENAME);
         sourceURL = intent.getStringExtra(MapDownloadUtils.RESULT_CHOSEN_URL);
         sourceDate = intent.getLongExtra(MapDownloadUtils.RESULT_DATE, 0);
-        final AbstractActivity that = this;
 
         MapDownloadUtils.checkMapDirectory(this, false, (folder, isWritable) -> {
             if (isWritable) {

@@ -844,8 +844,8 @@
     <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2cgeo expired. Please register in settings.</string>
 
     <!-- Content Storage -->
-    <string name="contentstorage_grantaccess_dialog_title">Please grant access to folder</string>
-    <string name="contentstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo needs a local folder to store its public data. Starting with Android 11 / SDK30, permissions to use this folder needs to be explicitely granted by end user.</p><p>Please select or create such a folder on your device (click ok to start). If you upgraded c:geo from a previous version, we advise you to select folder "cgeo" on your device root.</p><p>Until then c:geo tries to use a deprecated API to write files to \'%s\'</p>]]></string>
+    <string name="contentstorage_grantaccess_dialog_title">Grant access for data storage</string>
+    <string name="contentstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo needs a local folder to store data like GPX files, backups and field notes. Latest with Android 11 the permission to use this folder needs to be explicitely granted by the user. Therefore c:geo from now on uses this new method to store your data.</p><p>In the following dialog, please select or create such a folder on your device. If you upgraded c:geo from a previous version, select the existing folder "cgeo" on root level of your device storage.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_title">Change Folder %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_html"><![CDATA[<p>Folder %s is currently set to \'%s\' and contains %d file(s) and %d subfolder(s).</p><p>Please select whether to use default folder \'%s\' or a user-defined folder. Also, please select whether to copy/move content on change.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Do not copy or move item(s)</string>
@@ -868,7 +868,7 @@
     <string name="contentstorage_err_copy_failed">File \'%s\' could not be copied/moved to \'%s\' (move=%s), see logfile for details</string>
 
     <!-- Persistable Folders -->
-    <string name="persistablefolder_usertype_userdefined">User-Defined</string>
+    <string name="persistablefolder_usertype_userdefined">User-defined</string>
     <string name="persistablefolder_usertype_default">Default</string>
 
 

@@ -11,8 +11,11 @@ import android.net.Uri;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -21,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -35,6 +39,56 @@ public class ContentStorageTest extends CGeoTestCase {
     //note: must be sorted alphabetically for comparison to work out!
     private static final String COMPLEX_FOLDER_STRUCTURE = "[\"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": [ \"ccc-aaa.txt\", { \"name\": \"ccc-bbb\", \"files\": [] }, { \"name\": \"ccc-ccc\", \"files\": [ \"ccc-ccc-aaa.txt\", \"ccc-ccc-bbb.txt\" ] }, \"ccc-ddd.txt\" ] }, \"ddd.txt\"]";
 
+    public void testSimpleExample() throws IOException {
+
+        //This is a simple example for usage of contentstore
+
+        //List the content of the LOGFILES directory, write for each file its name, size and whether it is a directory
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.LOGFILES);
+        for (ContentStorage.FileInformation file : files) {
+            Log.i("  File: " + file.name + ", size: " + file.size + ", isDir: " + file.isDirectory);
+        }
+
+        //Create a new subfolder with name "my-unittest-subfolder" in LOGFILES
+        final Folder mysubfolder = Folder.fromPersistableFolder(PersistableFolder.LOGFILES, "my-unittest-subfolder");
+        ContentStorage.get().ensureFolder(mysubfolder, true);
+
+        //Create a new file in this subfolder
+        final Uri myNewFile = ContentStorage.get().create(mysubfolder, "myNewFile.txt"); //in prod code: check for null!
+
+        //write something to that new File
+        Writer writer = null;
+        try {
+            final OutputStream os = ContentStorage.get().openForWrite(myNewFile); //in prod code: check for null!
+            writer = new OutputStreamWriter(os, "UTF-8");
+            writer.write("This is a test");
+
+        } finally {
+            IOUtils.closeQuietly(writer);
+        }
+
+        //read the same file out again
+        BufferedReader reader = null;
+        try {
+            final InputStream is = ContentStorage.get().openForRead(myNewFile); //in prod code: check for null!
+            reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            final String line = reader.readLine();
+            assertThat(line).isEqualTo("This is a test");
+
+        } finally {
+            IOUtils.closeQuietly(reader);
+        }
+
+        //delete the created file
+        ContentStorage.get().delete(myNewFile);
+
+        //delete the created folder
+        ContentStorage.get().delete(mysubfolder.getUri());
+
+        //check out the other functions of ContentStorage
+        //More complex operations (e.g. copyAll, deleteAll) can be found in class FolderUtils.
+
+    }
 
     public void setUp() throws Exception {
         super.setUp();

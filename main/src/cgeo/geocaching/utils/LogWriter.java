@@ -10,10 +10,8 @@ import java.io.PrintWriter;
 
 public class LogWriter {
     private PrintWriter logWriter = null;
-    private final String prefix;
 
     public LogWriter(final String prefix) {
-        this.prefix = prefix;
         checkLogfile();
     }
 
