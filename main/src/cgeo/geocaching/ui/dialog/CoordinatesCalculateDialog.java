@@ -4,6 +4,11 @@ import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.calculator.ButtonData;
+import cgeo.geocaching.calculator.CalculationUtils;
+import cgeo.geocaching.calculator.CaseCheck;
+import cgeo.geocaching.calculator.CoordinatesCalculateUtils;
+import cgeo.geocaching.calculator.VariableData;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.CalcState;
@@ -12,7 +17,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CalculateButton;
 import cgeo.geocaching.ui.CalculatorVariable;
 import cgeo.geocaching.ui.EditButton;
-import cgeo.geocaching.utils.CalculationUtils;
 import static cgeo.geocaching.R.id.PlainFormat;
 import static cgeo.geocaching.R.id.coordTable;
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
@@ -94,7 +98,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     /** List of freeVariables to be displayed in the calculator */
     private List<CalculatorVariable> freeVariables;
     /** List of previously assigned variables that have since been removed */
-    private List<CalculatorVariable.VariableData> variableBank;
+    private List<VariableData> variableBank;
 
     private Spinner spinner;
 
@@ -132,30 +136,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private List<View> secButtons;
     private List<CalculateButton> pointLowButtons;
     private List<TextView> lastUnits;
-
-    /**
-     * Class used for checking that a value is with in a given range.
-     * This is used to check for upper-case an lower-case letters.
-     */
-    private static class CaseCheck {
-        final boolean useUpper;
-
-        CaseCheck(final boolean upper) {
-            useUpper = upper;
-        }
-
-        boolean check(final char ch) {
-
-            boolean returnValue = Character.isLetterOrDigit(ch);
-            if (useUpper) {
-                returnValue &= Character.isUpperCase(ch);
-            } else {
-                returnValue &= Character.isLowerCase(ch);
-            }
-
-            return returnValue;
-        }
-    }
 
     @Override
     public void onClickCompleteCallback() {
@@ -711,7 +691,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
     private void loadCalcState() {
         setCoordFormat(savedState.format);
-        final List<CalculateButton.ButtonData> buttons = savedState.buttons;
+        final List<ButtonData> buttons = savedState.buttons;
 
         bLatHem.setText(String.valueOf(savedState.latHemisphere));
         bLonHem.setText(String.valueOf(savedState.lonHemisphere));
@@ -727,7 +707,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             throw new AssertionError("Number of ButtonData objects differ from the number of Buttons");
         }
 
-        for (final CalculatorVariable.VariableData equ : savedState.equations) {
+        for (final VariableData equ : savedState.equations) {
             equations.add(new CalculatorVariable(getContext(),
                     equ,
                     getString(R.string.equation_hint),
@@ -736,7 +716,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             );
         }
 
-        for (final CalculatorVariable.VariableData var : savedState.freeVariables) {
+        for (final VariableData var : savedState.freeVariables) {
             freeVariables.add(new CalculatorVariable(getContext(),
                     var,
                     getString(R.string.free_variable_hint),
@@ -753,10 +733,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private CalcState getCurrentState() {
-        final List<CalculateButton.ButtonData> butData = new ArrayList<>(coordButtons.size());
-        final List<CalculatorVariable.VariableData> equData = new ArrayList<>(equations.size());
-        final List<CalculatorVariable.VariableData> freeVarData = new ArrayList<>(freeVariables.size());
-        final List<CalculatorVariable.VariableData> varBankData = new ArrayList<>(variableBank);
+        final List<ButtonData> butData = new ArrayList<>(coordButtons.size());
+        final List<VariableData> equData = new ArrayList<>(equations.size());
+        final List<VariableData> freeVarData = new ArrayList<>(freeVariables.size());
+        final List<VariableData> varBankData = new ArrayList<>(variableBank);
 
         final char latHem;
         final char lonHem;
@@ -995,7 +975,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         for (final EditButton button : buttons) {
             // Remove inactive and blank digits from result
             if (button.getVisibility() == View.VISIBLE) {
-                if (button.getLabel() == CalculateButton.ButtonData.BLANK) {
+                if (button.getLabel() == ButtonData.BLANK) {
                     returnValue = returnValue.concat(PLACE_HOLDER);
                 } else {
                     returnValue = returnValue.concat(String.valueOf(button.getLabel()));
@@ -1222,43 +1202,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     /**
-     * Find if a variable exists in the supplied list with the given name
-     *
-     * @param name name to search for
-     * @param list list of variables
-     * @return first occurrence of the variable if it can found, 'null' otherwise
-     */
-    private CalculatorVariable getVariable(final char name, final List<CalculatorVariable> list, final boolean remove) {
-        for (final CalculatorVariable equ : list) {
-            if (equ.getName() == name) {
-                if (remove) {
-                    list.remove(equ);
-                }
-                return equ;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Find if variable data exists in the supplied list with the given name
-     *
-     * @param name name to search for
-     * @return first occurrence of the data if it can found, 'null' otherwise
-     */
-    private CalculatorVariable.VariableData findAndRemoveData(final char name, final List<CalculatorVariable.VariableData> list) {
-        for (final CalculatorVariable.VariableData var : list) {
-            if (var.getName() == name) {
-                list.remove(var);
-                return var;
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * Create a list of variables in the order provided by the 'variableNames' string
      *
      * The purpose of this method is to create a list of all the variables needed to satisfy all the characters the supplied 'names' and no more.
@@ -1271,7 +1214,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * @param hintText text to be used as a hint when new variables are created
      * @return full list of variables in the appropriate order
      */
-    private List<CalculatorVariable> sortVariables(final List<CalculatorVariable> variables,
+     private List<CalculatorVariable> sortVariables(final List<CalculatorVariable> variables,
                                                    final String variableNames,
                                                    final CaseCheck theCase,
                                                    final String hintText,
@@ -1279,22 +1222,12 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                                                    final InputFilter[] filters) {
         final List<CalculatorVariable> returnList = new ArrayList<>();
 
-        final char[] sortedVariables = variableNames.toCharArray();
-        Arrays.sort(sortedVariables);
-
-        for (final char ch : sortedVariables) {
-            if (theCase.check(ch)) {
-                if (getVariable(ch, returnList, false) != null) {
-                    continue;
-                }
-
-                CalculatorVariable thisEquation = getVariable(ch, variables, true);
-                if (thisEquation == null) {
-                    CalculatorVariable.VariableData data = findAndRemoveData(ch, variableBank);
-
-                    if (data == null) {
-                        data = new CalculatorVariable.VariableData(ch);
-                    }
+        List<VariableData> varDataList = new ArrayList<>(variables.size());
+        for (CalculatorVariable calcVar: variables
+             ) {
+            varDataList.add(calcVar.getData());
+        }
+        varDataList = CoordinatesCalculateUtils.sortVariables(varDataList, variableBank, variableNames, theCase);
 
                     thisEquation = new CalculatorVariable(getContext(),
                             data,
@@ -1303,13 +1236,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                             filters);
                 }
 
-                returnList.add(thisEquation);
-            }
-        }
+        for (VariableData data : varDataList) {
+            final CalculatorVariable thisEquation = new CalculatorVariable(getContext(),
+                data,
+                hintText,
+                textWatcher);
 
-        // Add all the left over equations to the variable bank.
-        for (final CalculatorVariable var : variables) {
-            variableBank.add(var.getData());
+            returnList.add(thisEquation);
         }
 
         return returnList;

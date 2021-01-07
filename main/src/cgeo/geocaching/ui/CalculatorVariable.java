@@ -1,10 +1,9 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.calculator.CalculationUtils;
+import cgeo.geocaching.calculator.VariableData;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.CalculationUtils;
-import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
-import static cgeo.geocaching.models.CalcState.ERROR_STRING;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,11 +21,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.gridlayout.widget.GridLayout;
 
-import java.io.Serializable;
 import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Class used to display a variable with an equation, such as: X = a^2 = b^2
@@ -48,46 +43,6 @@ public class CalculatorVariable extends LinearLayout {
     /** indicates if recomputation needs to be done */
     private boolean cacheDirty;
 
-    /**
-     * Data used to capture the state of this Variable such that it can be restored again later
-     */
-    public static class VariableData implements Serializable, JSONAble {
-        private static final long serialVersionUID = -5181457941802605249L;
-        private final char name;
-        /** Note, we have to use a String rather than an Editable as Editable's can't be serialized */
-        private String expression;
-
-        public VariableData(final char name) {
-            this.name = name;
-            expression = "";
-        }
-
-        private VariableData(final JSONObject json) {
-            name = (char) json.optInt("name", ERROR_CHAR);
-            expression = json.optString("expression", ERROR_STRING);
-        }
-
-        public char getName() {
-            return name;
-        }
-
-        @Override
-        public JSONObject toJSON() throws JSONException {
-            final JSONObject returnValue = new JSONObject();
-
-            returnValue.put("name", name);
-            returnValue.put("expression", expression);
-
-            return returnValue;
-        }
-    }
-
-    public static class VariableDataFactory implements JSONAbleFactory<VariableData> {
-        @Override
-        public VariableData fromJSON(final JSONObject json) {
-            return new VariableData(json);
-        }
-    }
 
     @SuppressLint("SetTextI18n")
     public CalculatorVariable(final Context context, final VariableData variableData, final String hintText, final TextWatcher textWatcher, final InputFilter[] filter) {
@@ -104,14 +59,14 @@ public class CalculatorVariable extends LinearLayout {
         name.setGravity(Gravity.RIGHT);
         name.setTextSize(22);
         name.setTypeface(name.getTypeface(), Typeface.BOLD);
-        name.setText(variableData.name + " = ");
+        name.setText(variableData.getName() + " = ");
 
         expression = new EditText(context);
         expression.setLayoutParams(new LinearLayout.LayoutParams(0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         expression.setMaxLines(Integer.MAX_VALUE);
         expression.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         expression.setHint(hintText);
-        expression.setText(variableData.expression);
+        expression.setText(variableData.getExpression());
 
         // Note two 'TextWatchers' are added.  An internal one to update the Variable itself
         // and another external watcher to propagate the changes more widely.
@@ -173,7 +128,7 @@ public class CalculatorVariable extends LinearLayout {
     private String getCachedString() {
         final String returnValue;
 
-        if (variableData.expression == null || variableData.expression.length() == 0) {
+        if (variableData.getExpression() == null || variableData.getExpression().length() == 0) {
             returnValue = getContext().getString(R.string.empty_equation_result);
         } else if (Double.isNaN(getCachedValue())) {
             returnValue = getContext().getString(R.string.equation_error_result);
@@ -206,11 +161,11 @@ public class CalculatorVariable extends LinearLayout {
     }
 
     public char getName() {
-        return variableData.name;
+        return variableData.getName();
     }
 
     public String getExpression() {
-        return variableData.expression;
+        return variableData.getExpression();
     }
 
     public int getExpressionId() {

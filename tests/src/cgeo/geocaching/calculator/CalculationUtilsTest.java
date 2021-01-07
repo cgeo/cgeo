@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.calculator;
 
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
