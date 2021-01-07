@@ -4,10 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--
+    <LinearLayout
+        android:id="@+id/emoji_groups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+    -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/emoji_groups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/emoji_group_separator"
+        style="@style/separator_horizontal"
+        android:layout_below="@id/emoji_groups" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/emoji_grid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emoji_group_separator"/>
 
     <View
         android:id="@+id/emoji_grid_separator"
