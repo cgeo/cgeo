@@ -1182,6 +1182,7 @@
     <string name="map_gm_autorotation">Kartan automaattinen kääntö</string>
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <string name="quick_settings">Pika-asetukset</string>
+    <string name="quick_settings_info">Jotkut kartta-asetukset (Kartanasetukset, piilota, reititys) on siirretty uuteen \"Pika-asetuset\"-ikkunaan\nVoit avata tämän ikkunan käyttämällä painiketta, joka sijaitsee karttanäkymän alareunassa keskellä.</string>
     <string name="map_show_in_map">Näytä kartalla</string>
     <!-- search -->
     <string name="search_bar_hint">Etsi kätköjä</string>
