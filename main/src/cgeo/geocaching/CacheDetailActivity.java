@@ -661,6 +661,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
+        menu.findItem(R.id.menu_tts_toggle).setVisible(cache != null && !cache.isGotoHistoryUDC());
         menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
         menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache != null && cache.isOffline() && cache.hasUserdefinedWaypoints());
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
@@ -668,9 +669,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_clear_goto_history).setVisible(cache != null && cache.isGotoHistoryUDC());
         menu.findItem(R.id.menu_set_cache_icon).setVisible(cache != null && cache.isOffline());
         menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
-        menuItemToggleWaypointsFromNote.setVisible(cache != null);
         setMenuPreventWaypointsFromNote(cache != null && cache.isPreventWaypointsFromNote());
-        menu.findItem(R.id.menu_toggleWaypointsFromNote).setTitle(cache != null && cache.isPreventWaypointsFromNote() ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote).setVisible(cache != null);
+        menuItemToggleWaypointsFromNote.setVisible(cache != null && !cache.isGotoHistoryUDC());
         menu.findItem(R.id.menu_export).setVisible(cache != null);
         if (cache != null) {
             if (connector instanceof IgnoreCapability) {
@@ -680,7 +680,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
             }
             if (connector instanceof IVotingCapability) {
-                menu.findItem(R.id.menu_gcvote).setVisible(((IVotingCapability) connector).supportsVoting(cache));
+                final MenuItem menuItemGCVote = menu.findItem(R.id.menu_gcvote);
+                menuItemGCVote.setVisible(((IVotingCapability) connector).supportsVoting(cache));
+                menuItemGCVote.setEnabled(Settings.isRatingWanted() && Settings.isGCVoteLoginValid());
             }
         }
         return super.onPrepareOptionsMenu(menu);
