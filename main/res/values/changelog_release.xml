@@ -39,6 +39,7 @@
 <li>New: Added Ukrainian translation</li>
 <li>New: Automatically insert support email address if sending logfile</li>
 <li>Fix: Open about activity on click at c:geo\'s logo</li>
+<li>Fix: Crash in \"go to history\" when editing personal note</li>
 <li>Fixed several theming issues</li>
 </ul>
 </div>]]></Data>
