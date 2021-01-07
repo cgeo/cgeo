@@ -706,13 +706,13 @@ public class Waypoint implements IWaypoint {
         for (final Waypoint waypoint : cache.getWaypoints()) {
             wpNames.add(waypoint.getName());
         }
-        // try final and trailhead without index
-        if ((type == WaypointType.FINAL || type == WaypointType.TRAILHEAD) && !wpNames.contains(type.getL10n()) && !wpNames.contains(type.getNameForNewWaypoint())) {
+        // try final without index
+        if ((type == WaypointType.FINAL) && !wpNames.contains(type.getL10n()) && !wpNames.contains(type.getNameForNewWaypoint())) {
             return type.getNameForNewWaypoint();
         }
         // for other types add an index by default, which is highest found index + 1
         int max = 0;
-        final Pattern p = Pattern.compile("[^0-9]*([0-9]*)");
+        final Pattern p = Pattern.compile("[^0-9]*([0-9]+)");
         for (String wpName : wpNames) {
             final MatcherWrapper match = new MatcherWrapper(p, wpName);
             while (match.find()) {
