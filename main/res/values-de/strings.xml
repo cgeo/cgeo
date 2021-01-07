@@ -377,6 +377,9 @@
     <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
     <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
+    <string name="caches_set_cache_icon">Cache-Symbole wählen</string>
+    <string name="caches_reset_cache_icons_title">Cache-Symbole zurücksetzen</string>
+    <string name="caches_reset_cache_icons">Möchtest du die Cache-Symbole für alle ausgewählten Caches zurücksetzen?</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
     <string name="caches_listmarker_none">Keine Markierung</string>
@@ -1665,6 +1668,11 @@
     <plurals name="fav_points_remaining">
         <item quantity="one">Füge den Cache zu Favoriten hinzu (%d verfügbar)</item>
         <item quantity="other">Füge den Cache zu Favoriten hinzu (%d verfügbar)</item>
+    </plurals>
+    <string name="command_set_cache_icons_progress">Speichere Cache-Symbole</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">%d Cache-Symbol gespeichert</item>
+        <item quantity="other">%d Cache-Symbole gespeichert</item>
     </plurals>
     <string name="pq_download_and_import">Pocket-Query importieren</string>
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
