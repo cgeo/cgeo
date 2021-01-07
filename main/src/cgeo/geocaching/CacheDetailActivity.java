@@ -118,6 +118,7 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
@@ -132,6 +133,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -1600,8 +1602,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // long description
-            if (StringUtils.isNotBlank(cache.getDescription())) {
-                loadLongDescription();
+            if (StringUtils.isNotBlank(cache.getDescription()) || cache.supportsDescriptionchange()) {
+                loadLongDescription(parentView);
             }
 
             // cache personal note
@@ -1718,11 +1720,42 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }));
         }
 
-        private void loadLongDescription() {
+        private void loadLongDescription(final ViewGroup parentView) {
             loadingView.setVisibility(View.VISIBLE);
 
             final String longDescription = cache.getDescription();
             loadDescription(longDescription, descView, loadingView);
+
+            if (cache.supportsDescriptionchange()) {
+                descView.setOnClickListener(v -> {
+                    final Context context = parentView.getContext();
+                    final EditText editText = new EditText(context);
+                    editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                    editText.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
+                    editText.setSingleLine(false);
+                    editText.setLines(5);
+                    editText.setMaxLines(10);
+                    editText.setVerticalScrollBarEnabled(true);
+                    editText.setMovementMethod(ScrollingMovementMethod.getInstance());
+                    editText.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
+                    editText.setText(cache.getDescription());
+                    Dialogs.moveCursorToEnd(editText);
+
+                    Dialogs.newBuilder(context)
+                        .setTitle(R.string.cache_description_set)
+                        .setView(editText)
+                        .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
+                            descView.setText(editText.getText().toString());
+                            cache.setDescription(editText.getText().toString());
+                            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                            Toast.makeText(context, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
+                        })
+                        .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
+                        .show()
+                    ;
+                });
+            }
+
         }
 
         private void warnPersonalNoteExceedsLimit() {

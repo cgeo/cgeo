@@ -773,6 +773,10 @@ public class Geocache implements IWaypoint {
         return getConnector().supportsNamechange();
     }
 
+    public boolean supportsDescriptionchange() {
+        return getConnector().supportsDescriptionchange();
+    }
+
     private String getShareSubject() {
         final StringBuilder subject = new StringBuilder("Geocache ");
         subject.append(geocode);

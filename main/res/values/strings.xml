@@ -1088,6 +1088,8 @@
     <string name="cache_name">Name</string>
     <string name="cache_name_set">Set cachename</string>
     <string name="cache_name_updated">Cachename updated</string>
+    <string name="cache_description_set">Set cache description</string>
+    <string name="cache_description_updated">Cache description updated</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Size</string>
     <string name="cache_distance">Distance</string>

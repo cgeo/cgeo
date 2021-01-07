@@ -93,7 +93,13 @@ public abstract class AbstractConnector implements IConnector {
         return new NoLoggingManager();
     }
 
+    @Override
     public boolean supportsNamechange() {
+        return false;
+    }
+
+    @Override
+    public boolean supportsDescriptionchange() {
         return false;
     }
 
