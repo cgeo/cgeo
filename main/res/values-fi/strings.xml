@@ -54,6 +54,12 @@
     <string name="wp_waypoint">Viitesijainti</string>
     <string name="wp_original">Alkuperäiset koordinaatit</string>
     <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Lopullinen</string>
+    <string name="wpnew_stage">Vaihe</string>
+    <string name="wpnew_pkg">Pysäköinti</string>
+    <string name="wpnew_trailhead">Kautta</string>
+    <string name="wpnew_waypoint">Merkki</string>
+    <string name="wpnew_original">Alkuperäinen</string>
     <!-- logs -->
     <string name="log_found">Löytyi</string>
     <string name="log_dnf">Ei löytynyt</string>
@@ -377,6 +383,7 @@
     <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
     <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
     <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
+    <string name="caches_set_cache_icon">Aseta kätkön kuvakkeet</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
     <string name="caches_set_listmarker">Aseta listan merkki</string>
     <string name="caches_listmarker_none">Ei merkkiä</string>
@@ -670,10 +677,18 @@
     <string name="init_routecolor_summary">Valitse yksittäisen reittiviivan väri ja läpinäkyvyys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
     <string name="init_routewidth">Yksittäisen reittiviivan leveys</string>
     <string name="init_routewidth_summary">Valitse yksittäisen reittiviivan leveys</string>
+    <string name="init_trackcolor">GPX-reitin viivan väri</string>
+    <string name="init_trackcolor_summary">Valitse reitin väri ja läpinäkyvyys. Reitti voidaan ladata GPX-reittitiedostosta ja koostuu useista reittipisteistä.</string>
+    <string name="init_trackwidth">GPX-reitin viivan leveys</string>
+    <string name="init_trackwidth_summary">Valitse GPX-reitin viivan leveys</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
     <string name="init_circlecolor_summary">Valitse ympyräviivan väri ja läpinäkyvyys. Ympyräviivaa käytetään visuaalisena esityksenä minimialueesta kätkön tai fyysisen reittipisteen ympärillä, jonka sisälle ei voida laittaa toista kätköä tai fyysistä reittipistettä. (Pätee geocaching.com:iin)</string>
     <string name="init_circlefillcolor">Ympyräviivan leveys</string>
     <string name="init_circlefillcolor_summary">Valitse väri ja läpinäkyvyys, jolla ympyräviiva täytetään</string>
+    <string name="init_accuracycirclecolor">Tarkkuusympyrän viivan väri</string>
+    <string name="init_accuracycirclecolor_summary">Valitse tarkkuusympyrän viivan väri ja läpinäkyvyys. Tarkkuusympyrää käytetään sijaintisi signaalin tarkkuuden näyttämiseksi.</string>
+    <string name="init_accuracycirclefillcolor">Tarkkuusympyrän täyttöväri</string>
+    <string name="init_accuracycirclefillcolor_summary">Valitse väri ja läpinäkyvyys, jolla tarkkuusympyrä täytetään</string>
     <string name="init_include_found_status">Sisällytä \"Löydetty\" status</string>
     <string name="init_trackautovisit">Reissaajien vierailu</string>
     <string name="init_summary_trackautovisit">Reissaajat vierailevat automaattisesti</string>
@@ -949,6 +964,8 @@
     <string name="menu_caches">Hallitse kätköjä</string>
     <string name="cache_menu_event">Lisää kalenteriin</string>
     <string name="cache_menu_extract_waypoints">Poimi reittipisteet</string>
+    <string name="cache_menu_set_cache_icon">Aseta kätkökuvake</string>
+    <string name="cache_icon_updated">Kätkökuvake päivitetty</string>
     <string name="cache_menu_details">Tarkat tiedot</string>
     <string name="cache_menu_refresh">Päivitä</string>
     <string name="cache_menu_share">Jaa kätkö</string>
@@ -1036,6 +1053,8 @@
     <string name="internal_goto_targets_description">Tämä kätkö tallentaa viimeisimmät \"Siirry\" sijainnit. Se luodaan automaattisesti kun käytät \"Siirry\"-toimintoa päävalikossa. Kyseiseen toimintoon syötetyt koordinaatit tallennetaan tämän kätkön reittipisteiksi. Jos et enää tarvitse kyseisiä koordinaatteja, voit turvallisesti poistaa tämän kätkön tai sen reittipisteitä. Voit myös siirtää tämän kätkön mihin tahansa haluamaasi listalle.</string>
     <string name="init_longtap_map">Kartan pitkä painallus</string>
     <string name="init_summary_longtap_map">Aktivoi pitkä painallus kartan kuvakkeen (luo yksittäinen reitti) tai kartan vapaalla alueella (luo käyttäjän määrittämä kätkö)</string>
+    <string name="onetime_info_longtap_disabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä pois päältä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset - Kartta - Kartan käyttäytyminen</string>
+    <string name="onetime_info_longtap_enabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä päällä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset - Kartta - Kartan käyttäytyminen</string>
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>
@@ -1164,6 +1183,7 @@
     <string name="map_gm_autorotation">Kartan automaattinen kääntö</string>
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <string name="quick_settings">Pika-asetukset</string>
+    <string name="quick_settings_info">Jotkut kartta-asetukset (Kartanasetukset, piilota, reititys) on siirretty uuteen \"Pika-asetuset\"-ikkunaan\nVoit avata tämän ikkunan käyttämällä painiketta, joka sijaitsee karttanäkymän alareunassa keskellä.</string>
     <string name="map_show_in_map">Näytä kartalla</string>
     <!-- search -->
     <string name="search_bar_hint">Etsi kätköjä</string>
@@ -1653,6 +1673,11 @@
         <item quantity="one">Lisää kätkö suosikkeihin (%d jäljellä)</item>
         <item quantity="other">Lisää kätkö suosikkeihin (%d jäljellä)</item>
     </plurals>
+    <string name="command_set_cache_icons_progress">Asetetaan kätkökuvakkeita</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">Aseta %d kätkökuvake</item>
+        <item quantity="other">Aseta %d kätkökuvakkeet</item>
+    </plurals>
     <string name="pq_download_and_import">Tuo Pocket Query</string>
     <string name="caches_refresh_all_warning">Tämä toiminto voi johtaa korkeaan verkkoyhteyden käyttöön. Haluatko todellakin päivittää kaikki kätköt?</string>
     <string name="list_list_headline">Listat:</string>
@@ -1791,6 +1816,14 @@
     <string name="downloadmap_confirmation">Ladataanko kartta \"%1$s\"?\n\nTämä voi viedä jonkin aikaa ja voi johtaa merkittäviin kustannuksiin, verkkoyhteydestäsi riippuen.\n\nKokotieto: %2$s</string>
     <string name="downloadmap_handling">Itse lataus käsitellään taustalla järjestelmäsi latauksenhallinnan kautta. Sinun pitäisi nähdä ilmoitus heti kun lataus alkaa (tämä voi viedä jonkin aikaa).</string>
     <string name="button_continue">Jatka</string>
+    <string name="downloadmap_onedirup">(yksi hakemisto ylös)</string>
+    <string name="downloadmap_checkforupdates_button">Tarkista päivitykset</string>
+    <string name="downloadmap_available_updates">Saatavilla olevat päivitykset</string>
+    <string name="downloadmap_no_updates_found">Karttapäivityksiä ei löytynyt</string>
+    <string name="downloadmap_directory">hakemisto</string>
+    <string name="downloadmap_mapfile">karttatiedosto</string>
+    <string name="downloadmap_retrieving_directory_data">Haetaan hakemiston tietoja…</string>
+    <string name="downloadmap_checking_for_updates">Tarkistetaan päivityksiä…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
@@ -1805,4 +1838,33 @@
     <string name="export_individualroute_title">Vie yksittäinen reitti</string>
     <string name="export_individualroute_success">Viety yksittäinen reitti kohteeseen \"%s\"</string>
     <!-- install wizard -->
+    <string name="wizard">Automaattinen määritys</string>
+    <string name="previous">Edellinen</string>
+    <string name="skip">Ohita</string>
+    <string name="next">Seuraava</string>
+    <string name="done">Valmis</string>
+    <string name="finish">Valmis</string>
+    <string name="wizard_welcome_title">Tervetuloa c:geoon</string>
+    <string name="wizard_intro">Tarvitset vain muutaman vaiheen c:geon määritykseen ja olet valmis lähtemään. Haluatko apua sen kanssa?</string>
+    <string name="wizard_intro2">Tervetuloa takaisin määritystoimintoon. c:geon määrityksesi ei ole vielä valmis, haluaisitko, että auttaisin sinua saattamaan sen loppuun ja pääset kätköilemään? Siinä menee vain muutama vaihe.</string>
+    <string name="wizard_outro_ok">Kiitos c:geon määrittämisestä.\nPidä hauskaa!</string>
+    <string name="wizard_outro_error">Määritystä ei ole suoritettu!\nKaikki c:geon osat eivät toimi odotetulla tavalla!</string>
+    <string name="wizard_permissions_title">Aseta sovelluksen käyttöluvat</string>
+    <string name="wizard_permissions_intro">c:geo tarvitsee tietyt käyttöoikeudet laitteellesi toimiakseen oikein.\nSelitän lisää yksityiskohtia seuraavissa vaiheissa.</string>
+    <string name="wizard_platforms_title">Määritä palvelut</string>
+    <string name="wizard_platforms_intro">Löytääksesi geokätköjä c:geon avulla, tarvitset tilin c:geon tukemaa geokätköilypalvelua varten.\nValitse haluamasi palvelu alta, jotta voit kirjautua sisään olemassa olevalla tililläsi tai luoda uuden tilin.</string>
+    <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; muut</string>
+    <string name="wizard_welcome_advanced">Edistyneet määritysasetukset</string>
+    <string name="wizard_advanced_offlinemaps_label">Offline-kartat</string>
+    <string name="wizard_advanced_offlinemaps_info">Tällä sivulla on joitakin lisätoimintoja, joiden käyttö on valinnaista.\n\nc:geo voi ladata karttatiedostoja offline-käyttöön.</string>
+    <string name="wizard_advanced_brouter_label">Reitityssovellus</string>
+    <string name="wizard_advanced_brouter_info">Asentamalla ja määrittämällä kumppanisovelluksen nimeltä \"BRouter Offline Navigation\", c:geo voi navigoida kohteisiin ja näyttää reititystietoja kartallasi.</string>
+    <string name="wizard_advanced_restore_label">Palauta</string>
+    <string name="wizard_advanced_restore_info">Jos sinulla on varmuuskopio aiemmasta asennuksesta, voit palauttaa asetukset ja/tai geokätkötiedot.</string>
+    <string name="status_not_ok">VIRHE</string>
+    <string name="wizard_status_title">Määrityksen tila</string>
+    <string name="wizard_status_storage_permission">Tallennustilan käyttöoikeus</string>
+    <string name="wizard_status_location_permission">Sijainnin käyttöoikeus</string>
+    <string name="wizard_status_platform">Geokätköilypalvelut</string>
 </resources>
