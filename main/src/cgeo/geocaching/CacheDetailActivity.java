@@ -681,7 +681,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
             }
             if (connector instanceof IVotingCapability) {
-                menu.findItem(R.id.menu_gcvote).setVisible(((IVotingCapability) connector).supportsVoting(cache));
+                final MenuItem menuItemGCVote = menu.findItem(R.id.menu_gcvote);
+                menuItemGCVote.setVisible(((IVotingCapability) connector).supportsVoting(cache));
+                menuItemGCVote.setEnabled(Settings.isRatingWanted() && Settings.isGCVoteLoginValid());
             }
         }
         return super.onPrepareOptionsMenu(menu);
