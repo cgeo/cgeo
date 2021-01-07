@@ -660,6 +660,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
+        menu.findItem(R.id.menu_tts_toggle).setVisible(cache != null && !cache.isGotoHistoryUDC());
         menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
         menu.findItem(R.id.menu_store_in_list).setVisible(cache != null);
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
@@ -669,9 +670,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null && !isUDC);
         menu.findItem(R.id.menu_clear_goto_history).setVisible(cache != null && cache.isGotoHistoryUDC());
         menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
-        menuItemToggleWaypointsFromNote.setVisible(cache != null);
         setMenuPreventWaypointsFromNote(cache != null && cache.isPreventWaypointsFromNote());
-        menu.findItem(R.id.menu_toggleWaypointsFromNote).setTitle(cache != null && cache.isPreventWaypointsFromNote() ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote).setVisible(cache != null);
+        menuItemToggleWaypointsFromNote.setVisible(cache != null && !cache.isGotoHistoryUDC());
         menu.findItem(R.id.menu_export).setVisible(cache != null);
         if (cache != null) {
             if (connector instanceof IgnoreCapability) {
