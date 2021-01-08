@@ -227,6 +227,152 @@ public class WaypointParserTest {
 
     }
 
+    /**
+     * Waypoint with formula and variables should be created
+     */
+    @Test
+    public void testParseWaypointWithNameAndDescriptionAndFormula() {
+        final String note = "@WPName X (FORMULA-PLAIN) | N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp = iterator.next();
+        assertWaypoint(wp, "WPName", null, WaypointType.PUZZLE, "this is the description");
+        final String calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNotNull();
+        final CalcState calcState = CalcState.fromJSON(calcStateJson);
+        assertThat(calcState.plainLat).isEqualTo("N 45° A.B(C+D)'");
+        assertThat(calcState.plainLon).isEqualTo("E 9° (A-B).(2*D)EF'");
+        assertThat(calcState.equations).hasSize(6);
+        assertThat(calcState.freeVariables).hasSize(2);
+    }
+
+    /**
+     * 2 Waypoints with formula and variables should be created
+     */
+    @Test
+    public void testParseTwoWaypointsWithNameAndDescriptionAndFormula() {
+        final String note = "@WPName 1 X (FORMULA-PLAIN) | N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| \"this is the description\"\n\"this shall NOT be part of the note\"\n" +
+            "@WPName 2 X (FORMULA-PLAIN) | N 45° C.A(D+B)  E 9° (D-C).(2*A)EF |A = a+b|B=|a=2|b=| this is the description for the second point";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(2)
+        ;
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        Waypoint wp = iterator.next();
+        assertWaypoint(wp, "WPName 1", null, WaypointType.PUZZLE, "this is the description");
+        String calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNotNull();
+        CalcState calcState = CalcState.fromJSON(calcStateJson);
+        assertThat(calcState.plainLat).isEqualTo("N 45° A.B(C+D)'");
+        assertThat(calcState.plainLon).isEqualTo("E 9° (A-B).(2*D)EF'");
+        assertThat(calcState.equations).hasSize(6);
+        assertThat(calcState.freeVariables).hasSize(2);
+
+        wp = iterator.next();
+        assertWaypoint(wp, "WPName 2", null, WaypointType.PUZZLE, "this is the description for the second point");
+        calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNotNull();
+        calcState = CalcState.fromJSON(calcStateJson);
+        assertThat(calcState.plainLat).isEqualTo("N 45° C.A(D+B)'");
+        assertThat(calcState.plainLon).isEqualTo("E 9° (D-C).(2*A)EF'");
+        assertThat(calcState.equations).hasSize(6);
+        assertThat(calcState.freeVariables).hasSize(2);
+    }
+
+    /**
+     * between formula and variables should be a separator
+     * with (NO-COORD) formula should not be parsed and goes there in the user note
+     */
+    @Test
+    public void testParseFormulaWithoutSeparator() {
+        final String note = "@WPName 1 X (FORMULA-PLAIN) | N 45° A.B(C+D)  E 9° (A-B).(2*D)EF A = a+b|B=|a=2|b=| \"this is the description\"";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(1)
+        ;
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp = iterator.next();
+        assertWaypoint(wp, "WPName 1", null, WaypointType.PUZZLE, "this is the description");
+        final String calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNotNull();
+        final CalcState calcState = CalcState.fromJSON(calcStateJson);
+        assertThat(calcState.plainLat).isEqualTo("N 45° A.B(C+D)'");
+        assertThat(calcState.plainLon).isEqualTo("E 9° (A-B).(2*D)EF'");
+        assertThat(calcState.equations).hasSize(6);
+        assertThat(calcState.freeVariables).hasSize(0);
+    }
+
+    /**
+     * formula should be only parsed with the right key-word.
+     *  with (NO-COORD) formula should not be parsed and goes there in the user note
+     */
+    @Test
+    public void testParseWaypointWithNameAndDescriptionAndFormulaNoCoord() {
+        final String note = "@WPName X (NO-COORD) | N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp = iterator.next();
+        assertWaypoint(wp, "WPName", null, WaypointType.PUZZLE, "| N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description");
+        final String calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNull();
+    }
+
+    /**
+     * no waypoint will be created, if formula and wrong keyword.
+     * Then the normal parsing takes places -> no valid coords if not (NO-COORDS) -> no waypoint created
+     */
+    @Test
+    public void testParseWaypointWithNameAndDescriptionAndFormulaWrongFormulaFormat() {
+        final String note = "@WPName X (FORMULA_PLAIN) | N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(0);
+    }
+
+    /**
+     * waypoint will be created, if valid coordinates and wrong keyword.
+     * Then the normal parsing takes places -> valid coords -> waypoint created
+     */
+    @Test
+    public void testParseWaypointWithNameAndDescriptionAndWrongFormulaFormat() {
+        final String note = "@WPName X (FORMULA_PLAIN) | N 45° 48.123  E 9° 01.456 this is the description\n\"this shall NOT be part of the note\"";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp = iterator.next();
+        final Geopoint gp = new Geopoint("N 45° 48.123  E 9° 01.456");
+        assertWaypoint(wp, "WPName X |", gp, WaypointType.WAYPOINT, "this is the description");
+        final String calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNull();
+    }
+
+    @Test
+    public void testWaypointParseStabilityFormula() {
+        final WaypointParser waypointParser = new WaypointParser("Praefix");
+        //try to parse texts with empty input which should not lead to errors or waypoints
+        assertThat(waypointParser.parseWaypoints("")).isEmpty();
+        assertThat(waypointParser.parseWaypoints("@ ")).isEmpty();
+
+        final String formulaTypeStr = " (FORMULA-PLAIN) ";
+        final String formulaStr = " N 45° A.B(C+D) E 9°(A-B).(2*D)EF ";
+
+        parseAndAssertFirstWaypoint("@final (f)" + formulaTypeStr + formulaStr + "|A=a+b|B=2|C=3|D=208|a=3|b=40| this is the description", "final", WaypointType.FINAL, "this is the description");
+
+        //parse formulas for waypoints which might lead to unexpected fillings (and NEVER to exceptions...)
+        parseAndAssertFirstWaypoint("@" + formulaTypeStr, "Praefix 1", WaypointType.WAYPOINT, "");
+        parseAndAssertFirstWaypoint("@final (f)" + formulaTypeStr + "this is the description", "final", WaypointType.FINAL, "this is the description");
+        parseAndAssertFirstWaypoint("@puzzle (s)" + formulaTypeStr + "|A = 1|", "puzzle", WaypointType.STAGE, "|A = 1|");
+        parseAndAssertFirstWaypoint("@parking (p)" + formulaTypeStr + formulaStr + "|A= this is the description", "parking", WaypointType.PARKING, "A= this is the description");
+
+        // unsupported operator used
+        parseAndAssertFirstWaypoint("@stage 1 (s)" + formulaTypeStr + "N 45° A.B(C+D!) E 9°(A-B).(2*D)EF" + " \\n this is the description", "stage 1", WaypointType.STAGE, "N 45° A.B(C+D!) E 9°(A-B).(2*D)EF \\n this is the description");
+    }
+
     private static String toParseableWpString(final Geopoint gp) {
         return gp.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW);
 

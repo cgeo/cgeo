@@ -1,16 +1,21 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.calculator.CoordinatesCalculateUtils;
+import cgeo.geocaching.calculator.FormulaParser;
+import cgeo.geocaching.calculator.VariableData;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.GeopointWrapper;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -33,6 +38,7 @@ public class WaypointParser {
     private static final String PARSING_COORD_EMPTY = "(NO-COORD)";
     private static final String BACKUP_TAG_OPEN = "{c:geo-start}";
     private static final String BACKUP_TAG_CLOSE = "{c:geo-end}";
+    private static final String PARSING_COORD_FORMULA_PLAIN = "(FORMULA-PLAIN)";
 
     private Collection<Waypoint> waypoints;
     private final String namePrefix;
@@ -73,29 +79,42 @@ public class WaypointParser {
     }
 
     private void parseWaypointsFromString(final String text) {
-        final Collection<GeopointWrapper> matches = GeopointParser.parseAll(text);
-        for (final GeopointWrapper match : matches) {
-            final Waypoint wp = parseSingleWaypoint(match, count);
-            if (wp != null) {
-                waypoints.add(wp);
-                count++;
-            }
-        }
+        // search waypoints with coordinates
+        parseWaypointsWithCoords(text);
 
         // search waypoints with empty coordinates
-        int idxCoord = text.indexOf(PARSING_COORD_EMPTY);
-        while (idxCoord >= 0) {
-            final GeopointWrapper match = new GeopointWrapper(null, idxCoord, PARSING_COORD_EMPTY.length(), text);
-            final Waypoint wp = parseSingleWaypoint(match, count);
+        parseWaypointsWithSpecificCoords(text, PARSING_COORD_EMPTY, null);
+
+        // search waypoints with formula
+        parseWaypointsWithSpecificCoords(text, PARSING_COORD_FORMULA_PLAIN, Settings.CoordInputFormatEnum.Plain);
+    }
+
+    private void parseWaypointsWithCoords(final String text) {
+        final Collection<GeopointWrapper> matches = GeopointParser.parseAll(text);
+        for (final GeopointWrapper match : matches) {
+            final Waypoint wp = parseSingleWaypoint(match, null);
             if (wp != null) {
                 waypoints.add(wp);
                 count++;
             }
-            idxCoord = text.indexOf(PARSING_COORD_EMPTY, idxCoord + PARSING_COORD_EMPTY.length());
         }
     }
 
-    public Waypoint parseSingleWaypoint(final GeopointWrapper match, final int count) {
+    private void parseWaypointsWithSpecificCoords(final String text, final String parsingCoord, final Settings.CoordInputFormatEnum coordFormat) {
+        int idxWaypoint = text.indexOf(parsingCoord);
+
+        while (idxWaypoint >= 0) {
+            final GeopointWrapper match = new GeopointWrapper(null, idxWaypoint, parsingCoord.length(), text);
+            final Waypoint wp = parseSingleWaypoint(match, coordFormat);
+            if (wp != null) {
+                waypoints.add(wp);
+                count++;
+            }
+            idxWaypoint = text.indexOf(parsingCoord, idxWaypoint + parsingCoord.length());
+        }
+    }
+
+    private Waypoint parseSingleWaypoint(final GeopointWrapper match, final Settings.CoordInputFormatEnum coordFormat) {
         final Geopoint point = match.getGeopoint();
         final Integer start = match.getStart();
         final Integer end = match.getEnd();
@@ -120,7 +139,16 @@ public class WaypointParser {
         waypoint.setCoords(point);
         waypoint.setPrefix(prefix);
 
-        final String afterCoords = TextUtils.getTextAfterIndexUntil(text, end - 1, null);
+        String afterCoords = TextUtils.getTextAfterIndexUntil(text, end - 1, null);
+
+        if (null != coordFormat) {
+            // try to get a formula
+            final ImmutablePair<String, String> coordFormula = parseFormula(afterCoords, FormulaParser.WPC_DELIM, coordFormat);
+            if (null != coordFormula) {
+                waypoint.setCalcStateJson(coordFormula.left);
+                afterCoords = coordFormula.right;
+            }
+        }
 
         //try to get a user note
         final String userNote = parseUserNote(afterCoords, 0);
@@ -234,6 +262,53 @@ public class WaypointParser {
         return WaypointType.WAYPOINT;
     }
 
+    private ImmutablePair<String, String> parseFormula(final String text, final char delimiter, final Settings.CoordInputFormatEnum formulaFormat) {
+        try {
+            final FormulaParser formulaParser = new FormulaParser(formulaFormat);
+            final ImmutablePair<String, String> parsedFullCoordinates = formulaParser.parse(text);
+            if (null != parsedFullCoordinates) {
+                final String latText = parsedFullCoordinates.left;
+                final String lonText = parsedFullCoordinates.right;
+
+                String formulaString = text.trim();
+                // remove lat and lon
+                if (formulaString.startsWith("" + delimiter)) {
+                    formulaString = TextUtils.replaceFirst(formulaString, "", "" + delimiter, "");
+                }
+                formulaString = TextUtils.replaceFirst(formulaString, "", "" + delimiter, "");
+
+                final List<String> formulaList = TextUtils.getAll(formulaString, delimiter, true);
+
+                if (0 <= formulaList.size()) {
+                    final Iterator<String> formulaIter = formulaList.iterator();
+                    final List<VariableData> variables = new ArrayList<>();
+                    while (formulaIter.hasNext()) {
+                        final String varText = formulaIter.next().trim();
+                        if (varText.startsWith("" + PARSING_USERNOTE_DELIM)) {
+                            break;
+                        }
+                        formulaString = TextUtils.replaceFirst(formulaString, "", "" + delimiter, "");
+                        final List<String> equations = TextUtils.getAll(varText, '=', true);
+                        if (1 <= equations.size()) {
+                            final Iterator<String> equationsIter = equations.iterator();
+                            final String varName = equationsIter.next().trim();
+                            if (1 == varName.length()) {
+                                final String varExpression = equationsIter.hasNext() ? equationsIter.next() : "";
+                                variables.add(new VariableData(varName.charAt(0), varExpression));
+                            }
+                        }
+                    }
+
+                    return new ImmutablePair<>(CoordinatesCalculateUtils.createCalcState(latText, lonText, variables).toJSON().toString(), formulaString);
+                }
+            }
+        } catch (final FormulaParser.ParseException ignored) {
+            // no formula
+        }
+
+        return null;
+    }
+
     public static String removeParseableWaypointsFromText(final String text) {
         return TextUtils.replaceAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE, "").trim();
     }
@@ -316,7 +391,12 @@ public class WaypointParser {
             .append(PARSING_TYPE_CLOSE).append(" ");
         //coordinate
         if (wp.getCoords() == null) {
-            sb.append(PARSING_COORD_EMPTY);
+            final String calcStateJson = wp.getCalcStateJson();
+            if (null != calcStateJson) {
+                sb.append(getParseableFormula(wp));
+            } else {
+                sb.append(PARSING_COORD_EMPTY);
+            }
         } else {
             sb.append(wp.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW));
         }
@@ -332,6 +412,43 @@ public class WaypointParser {
             sb.append(TextUtils.createDelimitedValue(userNote, PARSING_USERNOTE_DELIM, PARSING_USERNOTE_ESCAPE));
         }
 
+        return sb.toString();
+    }
+
+    public static String getParseableFormula(final Waypoint wp) {
+        return getPlainFormula(wp);
+    }
+
+    private static String getPlainFormula(final Waypoint wp) {
+        final StringBuilder sb = new StringBuilder();
+
+        final String calcStateJson = wp.getCalcStateJson();
+        final String plainFormula = exportPlainFormula(calcStateJson, FormulaParser.WPC_DELIM);
+        if (null != plainFormula) {
+            sb.append(PARSING_COORD_FORMULA_PLAIN);
+            sb.append(plainFormula + "\n");
+            sb.append(FormulaParser.WPC_DELIM);
+        }
+        return sb.toString();
+    }
+
+    private static String exportPlainFormula(final String calcStateJson, final char delimiter) {
+        final StringBuilder sb = new StringBuilder();
+
+        if (null != calcStateJson) {
+            final CalcState calcState = CalcState.fromJSON(calcStateJson);
+            if (calcState.format == Settings.CoordInputFormatEnum.Plain) {
+                sb.append(calcState.plainLat + delimiter + calcState.plainLon + "\n");
+                for (VariableData equ : calcState.equations) {
+                    sb.append(delimiter + equ.getName() + " = " + equ.getExpression());
+                }
+                sb.append("\n");
+                for (VariableData var : calcState.freeVariables) {
+                    sb.append(delimiter + var.getName() + " = " + var.getExpression());
+                }
+                sb.append("\n");
+            }
+        }
         return sb.toString();
     }
 }

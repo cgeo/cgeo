@@ -15,6 +15,8 @@ public final class CalculationUtils {
     private int ch;
     private final String expression;
 
+    public static final String VALID_OPERATOR_PATTERN = "+\\-*/%^*";
+
     public CalculationUtils(final String expression) {
         this.expression = expression;
     }

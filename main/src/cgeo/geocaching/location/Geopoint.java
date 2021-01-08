@@ -21,6 +21,12 @@ import org.apache.commons.lang3.StringUtils;
  * Abstraction of geographic point. This class is immutable.
  */
 public final class Geopoint implements ICoordinates, Parcelable {
+
+    public enum LatLon {
+        LAT,
+        LON
+    }
+
     /**
      * Reusable default object
      */
@@ -291,9 +297,9 @@ public final class Geopoint implements ICoordinates, Parcelable {
             resource = R.string.err_parse_lat_lon;
         }
 
-        public ParseException(final String msg, final GeopointParser.LatLon faulty) {
+        public ParseException(final String msg, final Geopoint.LatLon faulty) {
             super(msg);
-            resource = faulty == GeopointParser.LatLon.LAT ? R.string.err_parse_lat : R.string.err_parse_lon;
+            resource = faulty == Geopoint.LatLon.LAT ? R.string.err_parse_lat : R.string.err_parse_lon;
         }
     }
 

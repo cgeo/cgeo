@@ -398,6 +398,14 @@ public final class TextUtils {
         return getTokenSearchPattern(startToken, endToken).matcher(text).replaceAll(replacement);
     }
 
+    @NonNull
+    public static String replaceFirst(final String text, final String startToken, final String endToken, final String replacement) {
+        if (text == null) {
+            return "";
+        }
+        return getTokenSearchPattern(startToken, endToken).matcher(text).replaceFirst(replacement);
+    }
+
     /**
      * Gets all text occurences starting with 'startToken' and ending with 'endToken'.
      * it is assured that for same parameters, matches are always the same as in {@link #replaceAll(String, String, String, String)}.
@@ -417,6 +425,29 @@ public final class TextUtils {
         while (m.find()) {
             result.add(m.group(1));
         }
+        return result;
+    }
+
+    @NonNull
+    public static List<String> getAll(final String text, final char delimiter, final  Boolean ignoreEmpty) {
+        final List<String> result = new ArrayList<>();
+
+        String matchText = text;
+
+        List<String> textMatches = TextUtils.getAll(matchText, "", "" + delimiter);
+        while (1 == textMatches.size()) {
+            final String matchedText = textMatches.iterator().next();
+            if (!StringUtils.isBlank(matchedText) || ignoreEmpty) {
+                result.add(matchedText);
+            }
+            matchText = TextUtils.replaceFirst(matchText, "", "" + delimiter, "");
+            textMatches = TextUtils.getAll(matchText, "", "" + delimiter);
+        }
+
+        if (!StringUtils.isBlank(matchText) || ignoreEmpty) {
+            result.add(matchText);
+        }
+
         return result;
     }
 

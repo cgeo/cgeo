@@ -52,7 +52,7 @@ public class GeopointParser {
          * @return a wrapper with the parsed coordinates and the length of the match, or null if parsing failed
          */
         @Nullable
-        abstract GeopointWrapper parse(@NonNull String text);
+        public abstract GeopointWrapper parse(@NonNull String text);
 
         /**
          * Parses latitude or longitude out of the given string.
@@ -64,7 +64,7 @@ public class GeopointParser {
          * @return a wrapper with the parsed latitude/longitude and the length of the match, or null if parsing failed
          */
         @Nullable
-        abstract ResultWrapper parse(@NonNull String text, @NonNull LatLon latlon);
+        public abstract ResultWrapper parse(@NonNull String text, @NonNull Geopoint.LatLon latlon);
     }
 
     /**
@@ -95,7 +95,7 @@ public class GeopointParser {
          * @return the latitude/longitude in decimal degrees, or null if creation failed
          */
         @Nullable
-        Double createCoordinate(@NonNull final String signGroup, @NonNull final String degreesGroup, @NonNull final String minutesGroup, @NonNull final String secondsGroup) {
+        protected Double createCoordinate(@NonNull final String signGroup, @NonNull final String degreesGroup, @NonNull final String minutesGroup, @NonNull final String secondsGroup) {
             try {
                 final double seconds = Double.parseDouble(StringUtils.defaultIfEmpty(secondsGroup, "0"));
                 if (seconds >= 60.0) {
@@ -122,7 +122,7 @@ public class GeopointParser {
          *
          * @return true if the given coordinate does not represent a zero.
          */
-        boolean isNotZero(@Nullable final Double coordinate) {
+        protected boolean isNotZero(@Nullable final Double coordinate) {
             return coordinate == null || Double.doubleToRawLongBits(coordinate) != 0L;
         }
 
@@ -152,7 +152,7 @@ public class GeopointParser {
          */
         @Override
         @Nullable
-        final GeopointWrapper parse(@NonNull final String text) {
+        public final GeopointWrapper parse(@NonNull final String text) {
             final MatcherWrapper matcher = new MatcherWrapper(latLonPattern, text);
             if (matcher.find()) {
                 final int groupCount = matcher.groupCount();
@@ -175,12 +175,12 @@ public class GeopointParser {
         }
 
         /**
-         * @see AbstractParser#parse(String, LatLon)
+         * @see AbstractParser#parse(String, Geopoint.LatLon)
          */
         @Override
         @Nullable
-        final ResultWrapper parse(@NonNull final String text, @NonNull final LatLon latlon) {
-            final MatcherWrapper matcher = new MatcherWrapper(latlon == LatLon.LAT ? latPattern : lonPattern, text);
+        public final ResultWrapper parse(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
+            final MatcherWrapper matcher = new MatcherWrapper(latlon == Geopoint.LatLon.LAT ? latPattern : lonPattern, text);
             if (matcher.find()) {
                 final Double res = parseGroups(matcher, 1, matcher.groupCount());
                 if (res != null) {
@@ -199,7 +199,7 @@ public class GeopointParser {
          * @return parsed latitude/longitude, or null if parsing failed
          */
         @Nullable
-        abstract Double parse(@NonNull List<String> groups);
+        public abstract Double parse(@NonNull List<String> groups);
     }
 
     /**
@@ -225,7 +225,7 @@ public class GeopointParser {
          */
         @Override
         @Nullable
-        Double parse(@NonNull final List<String> groups) {
+        public Double parse(@NonNull final List<String> groups) {
             final String group1 = groups.get(0);
             final String group2 = groups.get(1);
             final Double result = createCoordinate(group1, group2, "", "");
@@ -260,7 +260,7 @@ public class GeopointParser {
          */
         @Override
         @Nullable
-        Double parse(@NonNull final List<String> groups) {
+        public Double parse(@NonNull final List<String> groups) {
             final String group1 = groups.get(0);
             final String group2 = groups.get(1);
             final String group3 = groups.get(2);
@@ -297,7 +297,7 @@ public class GeopointParser {
          */
         @Override
         @Nullable
-        Double parse(@NonNull final List<String> groups) {
+        public Double parse(@NonNull final List<String> groups) {
             final String group1 = groups.get(0);
             final String group2 = groups.get(1);
             final String group3 = groups.get(2);
@@ -336,7 +336,7 @@ public class GeopointParser {
          */
         @Override
         @Nullable
-        Double parse(@NonNull final List<String> groups) {
+        public Double parse(@NonNull final List<String> groups) {
             final String group1 = groups.get(0);
             final String group2 = groups.get(1);
             final String group3 = groups.get(2);
@@ -374,7 +374,7 @@ public class GeopointParser {
          */
         @Override
         @Nullable
-        Double parse(@NonNull final List<String> groups) {
+        public Double parse(@NonNull final List<String> groups) {
             final String group1 = groups.get(0);
             final String group2 = groups.get(1);
             final String group3 = groups.get(2);
@@ -412,7 +412,7 @@ public class GeopointParser {
          */
         @Override
         @Nullable
-        Double parse(@NonNull final List<String> groups) {
+        public Double parse(@NonNull final List<String> groups) {
             final String group1 = groups.get(0);
             return createCoordinate("", group1, "", "");
         }
@@ -437,7 +437,7 @@ public class GeopointParser {
          */
         @Override
         @Nullable
-        Double parse(@NonNull final List<String> groups) {
+        public Double parse(@NonNull final List<String> groups) {
             final String group1 = groups.get(0);
             return createCoordinate("", group1, "", "");
         }
@@ -452,7 +452,7 @@ public class GeopointParser {
          */
         @Override
         @Nullable
-        GeopointWrapper parse(@NonNull final String text) {
+        public GeopointWrapper parse(@NonNull final String text) {
             final MatcherWrapper matcher = new MatcherWrapper(UTMPoint.PATTERN_UTM, text);
             if (matcher.find()) {
                 try {
@@ -466,18 +466,13 @@ public class GeopointParser {
         }
 
         /**
-         * @see AbstractParser#parse(String, LatLon)
+         * @see AbstractParser#parse(String, Geopoint.LatLon)
          */
         @Override
         @Nullable
-        ResultWrapper parse(@NonNull final String text, @NonNull final LatLon latlon) {
+        public ResultWrapper parse(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
             return null;
         }
-    }
-
-    enum LatLon {
-        LAT,
-        LON
     }
 
     /**
@@ -532,7 +527,7 @@ public class GeopointParser {
      * @return a wrapper with the best latitude/longitude and the length of the match, or null if parsing failed
      */
     @Nullable
-    private static ResultWrapper parseHelper(@NonNull final String text, @NonNull final LatLon latlon) {
+    private static ResultWrapper parseHelper(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
         final Set<String> inputs = getParseInputs(text.trim());
         for (final AbstractParser parser : parsers) {
             for (final String input : inputs) {
@@ -644,13 +639,13 @@ public class GeopointParser {
      */
     public static double parseLatitude(@Nullable final String text) {
         if (text != null) {
-            final ResultWrapper wrapper = parseHelper(text, LatLon.LAT);
+            final ResultWrapper wrapper = parseHelper(text, Geopoint.LatLon.LAT);
             if (wrapper != null) {
                 return wrapper.result;
             }
         }
 
-        throw new Geopoint.ParseException("Cannot parse latitude", LatLon.LAT);
+        throw new Geopoint.ParseException("Cannot parse latitude", Geopoint.LatLon.LAT);
     }
 
     /**
@@ -667,12 +662,12 @@ public class GeopointParser {
      */
     public static double parseLongitude(@Nullable final String text) {
         if (text != null) {
-            final ResultWrapper wrapper = parseHelper(text, LatLon.LON);
+            final ResultWrapper wrapper = parseHelper(text, Geopoint.LatLon.LON);
             if (wrapper != null) {
                 return wrapper.result;
             }
         }
 
-        throw new Geopoint.ParseException("Cannot parse longitude", LatLon.LON);
+        throw new Geopoint.ParseException("Cannot parse longitude", Geopoint.LatLon.LON);
     }
 }
