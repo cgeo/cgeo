@@ -417,7 +417,7 @@
     <string name="about_starting">Wprowadzenie</string>
     <string name="about_starting_head">Wprowadzenie</string>
     <string name="about_starting_text_basics_head">Podstawy Geocachingu</string>
-    <string name="about_starting_text_basics_text">Geocaching to gra terenowa, w której wyszukuje się tak zwane „skrzynki” (także „skrytki”, „cache”). Z tej aplikacji można korzystać podczas tej zabawy.\n\nWięcej na ten temat znajdziesz w dziale <b>c:geo Basics</b> w naszyh podręczniku użytkownika: https://manual.cgeo.org/en/basicuse (w języku angielskim)</string>
+    <string name="about_starting_text_basics_text">Geocaching to gra terenowa, w której wyszukuje się tak zwane „skrzynki” (także „skrytki”, „cache”). Z tej aplikacji można korzystać podczas tej zabawy.\n\nWięcej na ten temat znajdziesz w dziale <b>c:geo Basics</b> w naszym podręczniku użytkownika: https://manual.cgeo.org/en/basicuse (w języku angielskim)</string>
     <string name="about_starting_text_device_head">uprawnienia c:geo na urządzeniu</string>
     <string name="about_starting_text_device_text">c:geo potrzebuje pewnych uprawnień na twoim urządzeniu:\n<b>Lokalizacja</b>: dostęp do GPS, aby zlokalizować swoją pozycję i obliczyć odległość i kierunek do skrzynek\n<b>Pamięć</b>:  zapis danych na pamięć telefonu podczas zapisywania skrzynek do użycia w trybie offline, importu/eksportu plików oraz odczytu map offline\n\nBez tych uprawnień nie będzie można używać c:geo.</string>
     <string name="about_starting_text_first_head">Pierwsze kroki z c:geo</string>
@@ -685,7 +685,7 @@
     <string name="init_routewidth">Pojedyncza szerokość linii</string>
     <string name="init_routewidth_summary">Wybierz szerokość dla pojedynczej linii trasy</string>
     <string name="init_trackcolor">Kolor linii ścieżki</string>
-    <string name="init_trackcolor_summary">Wybierz kolor i nieprzezroczystość dla linii ścieżki. Ścieżka składa się z kilku punktów nawigacyjnych i może być załadowana za pomocą pliku GPX utworu.</string>
+    <string name="init_trackcolor_summary">Wybierz kolor i nieprzezroczystość dla linii ścieżki. Ścieżka składa się z kilku punktów nawigacyjnych i może być załadowana za pomocą pliku GPX.</string>
     <string name="init_trackwidth">Indywidualna szerokość linii ścieżek</string>
     <string name="init_trackwidth_summary">Wybierz szerokość dla indywidualnej linii ścieżki</string>
     <string name="init_circlecolor">Kolor obrysu koła</string>
