@@ -26,7 +26,8 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         DATABASE_CONFIRM_OVERWRITE(null, null, DefaultBehavior.SHOW_ALWAYS, 0),
         MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0),
         MAP_LONG_TAP_DISABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_disabled, DefaultBehavior.SHOW_ALWAYS, R.string.manual_url_mapbehavior),
-        MAP_LONG_TAP_ENABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_enabled, DefaultBehavior.SHOW_ALWAYS, R.string.manual_url_mapbehavior);
+        MAP_LONG_TAP_ENABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_enabled, DefaultBehavior.SHOW_ALWAYS, R.string.manual_url_mapbehavior),
+        MISSING_UNICODE_CHARACTERS(R.string.onetime_missing_unicode_title, R.string.onetime_missing_unicode_info, DefaultBehavior.SHOW_ALWAYS, 0);
 
         public final Integer messageTitle;
         public final Integer messageText;
