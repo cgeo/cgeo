@@ -1003,6 +1003,8 @@
     <string name="cache_name">Name</string>
     <string name="cache_name_set">Cachename festlegen</string>
     <string name="cache_name_updated">Cachename aktualisiert</string>
+    <string name="cache_description_set">Cachebeschreibung bearbeiten</string>
+    <string name="cache_description_updated">Cachebeschreibung aktualisiert</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Größe</string>
     <string name="cache_distance">Entfernung</string>
