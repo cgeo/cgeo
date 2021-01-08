@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.storage.extension.EmojiLRU;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -11,7 +12,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -30,14 +34,15 @@ import androidx.recyclerview.widget.RecyclerView;
 public class EmojiUtils {
 
     // list of emojis supported by the EmojiPopup
-    // should be supported by the Android API level we have set as minimum (currently API 21 = Android 5)
+    // should ideally be supported by the Android API level we have set as minimum (currently API 21 = Android 5),
+    // but starting with API 23 (Android 6) the app automatically filters out characters not supported by their fonts
     // for a list of supported Unicode standards by API level see https://developer.android.com/guide/topics/resources/internationalization
     // for characters by Unicode version see https://unicode.org/emoji/charts-5.0/full-emoji-list.html (v5.0)
 
     private static final EmojiSet[] symbols = {
         // category symbols
         new EmojiSet(0x2764, new int[]{
-            /* hearts */        0x2764, 0x1f499, 0x1f49a, 0x1f49b, 0x1f49c, 0x1f9e1, 0x1f49c, 0x1f5a4,
+            /* hearts */        0x2764, 0x1f499, 0x1f49a, 0x1f49b, 0x1f49c, 0x1f9e1, 0x1f5a4,
             /* events */        0x1f383, 0x1f380,
             /* office */        0x1f4c6,
             /* warning */       0x26d4, 0x1f6d1, 0x2622,
@@ -47,7 +52,7 @@ public class EmojiUtils {
             /* flags */         0x1f3c1, 0x1f6a9, 0x1f3f4, 0x1f3f3
         }),
         // category places
-        new EmojiSet(0x1f5fa, new int[]{
+        new EmojiSet(0x1f30d, new int[]{
             /* globe */         0x1f30d, 0x1f30e, 0x1f30f,
             /* geographic */    0x1f3d4, 0x1f3d6, 0x1f3dc, 0x1f3dd, 0x1f3de,
             /* buildings */     0x1f3e0, 0x1f3e2, 0x1f3da, 0x1f3e5, 0x1f3f0, 0x16cf,
@@ -57,7 +62,7 @@ public class EmojiUtils {
             /* transp.-sign */  0x267f, 0x1f6bb
         }),
         // category food
-        new EmojiSet(0x1f968, new int[]{
+        new EmojiSet(0x2615, new int[]{
             /* fruits */        0x1f34a, 0x1f34b, 0x1f34d, 0x1f34e, 0x1f34f, 0x1f95d, 0x1f336, 0x1f344,
             /* other */         0x1f968, 0x1f354, 0x1f355,
             /* drink */         0x1f964, 0x2615, 0x1f37a
@@ -74,13 +79,17 @@ public class EmojiUtils {
         }),
 
     };
+    private static boolean fontIsChecked = false;
+    private static final Boolean lockGuard = false;
 
     private static class EmojiSet {
         public int tabSymbol;
+        public int remaining;
         public int[] symbols;
 
         EmojiSet(final int tabSymbol, final int[] symbols) {
             this.tabSymbol = tabSymbol;
+            this.remaining = symbols.length;
             this.symbols = symbols;
         }
     }
@@ -91,15 +100,35 @@ public class EmojiUtils {
 
     public static void selectEmojiPopup(final Activity activity, final int currentValue, @DrawableRes final int defaultRes, final Action1<Integer> setNewCacheIcon) {
 
-        final EmojiViewAdapter groupsAdapter;
-        final EmojiViewAdapter gridAdapter;
-        final EmojiViewAdapter lruAdapter;
-
         // calc sizes
         final Pair<Integer, Integer> markerDimensions = DisplayUtils.getDrawableDimensions(activity.getResources(), R.drawable.ic_menu_filter);
         final int markerAvailable = (int) (markerDimensions.second * 0.6);
         final int markerFontsize = DisplayUtils.calculateMaxFontsize(35, 10, 150, markerAvailable);
 
+        // check EmojiSet for characters not supported on this device
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            synchronized (lockGuard) {
+                if (!fontIsChecked) {
+                    final Paint checker = new TextPaint();
+                    checker.setTypeface(Typeface.DEFAULT);
+                    for (EmojiSet symbol : symbols) {
+                        int iPosNeu = 0;
+                        for (int i = 0; i < symbol.symbols.length; i++) {
+                            if (i != iPosNeu) {
+                                symbol.symbols[iPosNeu] = symbol.symbols[i];
+                            }
+                            if (checker.hasGlyph(new String(Character.toChars(symbol.symbols[i])))) {
+                                iPosNeu++;
+                            }
+                        }
+                        symbol.remaining = iPosNeu;
+                    }
+                    fontIsChecked = true;
+                }
+            }
+        }
+
+        // create dialog
         final View dialogView = activity.getLayoutInflater().inflate(R.layout.emojiselector, null);
         final View customTitle = activity.getLayoutInflater().inflate(R.layout.dialog_title_button_button, null);
         final AlertDialog dialog = Dialogs.newBuilder(activity)
@@ -110,7 +139,7 @@ public class EmojiUtils {
         final int maxCols = DisplayUtils.calculateNoOfColumns(activity, 60);
         final RecyclerView emojiGridView = dialogView.findViewById(R.id.emoji_grid);
         emojiGridView.setLayoutManager(new GridLayoutManager(activity, maxCols));
-        gridAdapter = new EmojiViewAdapter(activity, symbols[0].symbols, currentValue, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
+        final EmojiViewAdapter gridAdapter = new EmojiViewAdapter(activity, symbols[0].symbols, symbols[0].remaining, currentValue, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
         emojiGridView.setAdapter(gridAdapter);
 
         final RecyclerView emojiGroupView = dialogView.findViewById(R.id.emoji_groups);
@@ -119,10 +148,10 @@ public class EmojiUtils {
         for (int i = 0; i < symbols.length; i++) {
             emojiGroups[i] = symbols[i].tabSymbol;
         }
-        groupsAdapter = new EmojiViewAdapter(activity, emojiGroups, symbols[0].tabSymbol, true, newgroup -> {
+        final EmojiViewAdapter groupsAdapter = new EmojiViewAdapter(activity, emojiGroups, emojiGroups.length, symbols[0].tabSymbol, true, newgroup -> {
             for (EmojiSet symbol : symbols) {
                 if (symbol.tabSymbol == newgroup) {
-                    gridAdapter.setData(symbol.symbols);
+                    gridAdapter.setData(symbol.symbols, symbol.remaining);
                 }
             }
         });
@@ -131,7 +160,7 @@ public class EmojiUtils {
         final RecyclerView emojiLruView = dialogView.findViewById(R.id.emoji_lru);
         emojiLruView.setLayoutManager(new GridLayoutManager(activity, maxCols));
         final int[] lru = EmojiLRU.getLRU();
-        lruAdapter = new EmojiViewAdapter(activity, lru, 0, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
+        final EmojiViewAdapter lruAdapter = new EmojiViewAdapter(activity, lru, lru.length, 0, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
         emojiLruView.setAdapter(lruAdapter);
 
         ((TextView) customTitle.findViewById(R.id.dialog_title_title)).setText(R.string.cache_menu_set_cache_icon);
@@ -160,6 +189,10 @@ public class EmojiUtils {
         }
 
         dialog.show();
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MISSING_UNICODE_CHARACTERS);
+        }
     }
 
     private static void onItemSelected(final AlertDialog dialog, final Action1<Integer> callback, final int selectedValue) {
@@ -171,21 +204,23 @@ public class EmojiUtils {
     private static class EmojiViewAdapter extends RecyclerView.Adapter<EmojiViewAdapter.ViewHolder> {
 
         private int[] data;
+        private int remaining;
         private final LayoutInflater inflater;
         private final Action1<Integer> callback;
         private int currentValue = 0;
         private final boolean highlightCurrent;
 
-        EmojiViewAdapter(final Context context, final int[] data, final int currentValue, final boolean hightlightCurrent, final Action1<Integer> callback) {
+        EmojiViewAdapter(final Context context, final int[] data, final int remaining, final int currentValue, final boolean hightlightCurrent, final Action1<Integer> callback) {
             this.inflater = LayoutInflater.from(context);
-            this.setData(data);
+            this.setData(data, remaining);
             this.currentValue = currentValue;
             this.highlightCurrent = hightlightCurrent;
             this.callback = callback;
         }
 
-        public void setData(final int[] data) {
+        public void setData(final int[] data, final int remaining) {
             this.data = data;
+            this.remaining = remaining;
             notifyDataSetChanged();
         }
 
@@ -213,7 +248,7 @@ public class EmojiUtils {
 
         @Override
         public int getItemCount() {
-            return data.length;
+            return remaining;
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
