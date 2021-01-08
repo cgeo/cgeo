@@ -1009,6 +1009,8 @@
     <string name="cache_name">Όνομα</string>
     <string name="cache_name_set">Τέθηκε όνομα κρύπτης</string>
     <string name="cache_name_updated">Το όνομα κρύπτης άλλαξε</string>
+    <string name="cache_description_set">Περιγραφή κρύπτης</string>
+    <string name="cache_description_updated">Η περιγραφή της κρύπτης ενημερώθηκε</string>
     <string name="cache_type">Τύπος</string>
     <string name="cache_size">Μέγεθος</string>
     <string name="cache_distance">Απόσταση</string>
