@@ -119,12 +119,12 @@
                 android:title="@string/map_trail_show">
             </item>
             <item
-                android:id="@+id/menu_export_trailhistory"
-                android:title="@string/export_trailhistory_title">
-            </item>
-            <item
                 android:id="@+id/menu_trail_hide"
                 android:title="@string/map_trail_hide">
+            </item>
+            <item
+                android:id="@+id/menu_export_trailhistory"
+                android:title="@string/export_trailhistory_title">
             </item>
             <item
                 android:id="@+id/menu_clear_trailhistory"
