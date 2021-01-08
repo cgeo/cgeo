@@ -9,6 +9,7 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.WaypointUserNoteCombiner;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
@@ -273,7 +274,8 @@ public final class GpxSerializer {
 
         final String waypointTypeGpx = wp.getWaypointType().gpx;
         // combine note and user note with SEPARATOR "\n--\n"
-        final String waypointNote = wp.getCombinedNoteAndUserNote();
+        final WaypointUserNoteCombiner wpCombiner = new  WaypointUserNoteCombiner(wp);
+        final String waypointNote = wpCombiner.getCombinedNoteAndUserNote();
         XmlUtils.multipleTexts(gpx, NS_GPX, "name", wp.getGpxId(), "cmt", waypointNote, "desc", wp.getName(), "sym", waypointTypeGpx, "type", "Waypoint|" + waypointTypeGpx);
 
         // add parent reference the GSAK-way

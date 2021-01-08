@@ -34,9 +34,6 @@ public class Waypoint implements IWaypoint {
     private static final String WP_PREFIX_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int ORDER_UNDEFINED = -2;
 
-    private static final String SEPARATOR = "\n--\n";
-    private static final Pattern PATTERN_SEPARATOR_SPLIT = Pattern.compile("\\s*" + SEPARATOR + "\\s*");
-
     private int id = -1;
     private String geocode = "geocode";
     private WaypointType waypointType = WaypointType.WAYPOINT;
@@ -784,68 +781,6 @@ public class Waypoint implements IWaypoint {
             }
         }
         return -1;
-    }
-
-    /**
-     * Combine note and user note. Separated with Separator "\n--\n"
-     *
-     * @return string with combined note
-     */
-    public final String getCombinedNoteAndUserNote() {
-        final String userNote = getUserNote();
-        if (isUserDefined()) {
-            return userNote;
-        } else {
-            final StringBuilder newNote = new StringBuilder(getNote());
-            if (StringUtils.isNotEmpty(userNote)) {
-                newNote.append(SEPARATOR);
-                newNote.append(userNote);
-            }
-            return newNote.toString();
-        }
-    }
-
-    /**
-     * Split up given string into note and user note (separated with \n--\n).
-     * For userDefined waypoints only userNote is set.
-     *
-     * @param combinedNote note to split up
-     */
-    public void updateNoteAndUserNote(final String combinedNote) {
-        if (combinedNote != null) {
-            String fixedCombinedNote = combinedNote;
-            // \n was removed via validate
-            if (combinedNote.startsWith("--\n")) {
-                fixedCombinedNote = "\n" + combinedNote;
-            }
-
-            if (isUserDefined()) {
-                setUserNote(fixedCombinedNote);
-            } else {
-                setNoteAndUserNoteFromCombinedNote(fixedCombinedNote);
-            }
-        }
-    }
-
-    /**
-     * Split up given string into note and user note (separated with \n--\n).
-     *
-     * @param combinedNote note to split up
-     */
-    private void setNoteAndUserNoteFromCombinedNote(final String combinedNote) {
-        if (combinedNote != null) {
-            String newNote = combinedNote;
-            String newUserNote = "";
-            if (!StringUtils.isEmpty(combinedNote)) {
-                final String[] token = PATTERN_SEPARATOR_SPLIT.split(combinedNote, 2);
-                if (token.length > 1) {
-                    newNote = token[0].trim();
-                    newUserNote = token[1].trim();
-                }
-            }
-            setNote(newNote);
-            setUserNote(newUserNote);
-        }
     }
 
     public boolean belongsToUserDefinedCache() {

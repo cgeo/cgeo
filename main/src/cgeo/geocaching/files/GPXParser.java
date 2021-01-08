@@ -23,6 +23,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.WaypointUserNoteCombiner;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.HtmlUtils;
@@ -315,7 +316,8 @@ abstract class GPXParser extends FileParser {
                         }
                         waypoint.setCoords(cache.getCoords());
 
-                        waypoint.updateNoteAndUserNote(cache.getDescription());
+                        final WaypointUserNoteCombiner wpCombiner = new WaypointUserNoteCombiner(waypoint);
+                        wpCombiner.updateNoteAndUserNote(cache.getDescription());
 
                         waypoint.setVisited(wptVisited);
                         final List<Waypoint> mergedWayPoints = new ArrayList<>(cacheForWaypoint.getWaypoints());
