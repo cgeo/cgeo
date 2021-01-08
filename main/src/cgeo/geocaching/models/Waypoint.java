@@ -5,14 +5,10 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.location.GeopointParser;
-import cgeo.geocaching.location.GeopointWrapper;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +18,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -30,7 +25,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class Waypoint implements IWaypoint {
 
@@ -39,19 +33,6 @@ public class Waypoint implements IWaypoint {
 
     private static final String WP_PREFIX_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int ORDER_UNDEFINED = -2;
-
-    //Constants for waypoint parsing
-    private static final String PARSING_NAME_PRAEFIX = "@";
-    private static final char PARSING_USERNOTE_DELIM = '"';
-    private static final char PARSING_USERNOTE_ESCAPE = '\\';
-    private static final String PARSING_USERNOTE_CONTINUED = "...";
-    private static final String PARSING_PREFIX_OPEN = "[";
-    private static final String PARSING_PREFIX_CLOSE = "]";
-    private static final String PARSING_TYPE_OPEN = "(";
-    private static final String PARSING_TYPE_CLOSE = ")";
-    private static final String PARSING_COORD_EMPTY = "(NO-COORD)";
-    private static final String BACKUP_TAG_OPEN = "{c:geo-start}";
-    private static final String BACKUP_TAG_CLOSE = "{c:geo-end}";
 
     private static final String SEPARATOR = "\n--\n";
     private static final Pattern PATTERN_SEPARATOR_SPLIT = Pattern.compile("\\s*" + SEPARATOR + "\\s*");
@@ -166,6 +147,48 @@ public class Waypoint implements IWaypoint {
                 newPoints.add(oldWaypoint);
             }
         }
+    }
+
+    public boolean mergeFromParsedText(final Waypoint parsedWaypoint, final String parsePraefix) {
+        boolean changed = false;
+
+        final String waypointTypeName = getWaypointType().getL10n().toLowerCase(Locale.getDefault());
+
+        if (this.isUserDefined()) {
+            //type
+            if (this.getWaypointType() == WaypointType.WAYPOINT &&
+                parsedWaypoint.getWaypointType() != WaypointType.WAYPOINT) {
+                changed = true;
+                waypointType = parsedWaypoint.getWaypointType();
+            }
+            //name: change when existing waypoint has a "default name"
+            if (startsWithAnyLower(getName(), parsePraefix, waypointTypeName) &
+                !startsWithAnyLower(parsedWaypoint.getName(), parsePraefix, waypointTypeName)) {
+                this.setName(parsedWaypoint.getName());
+                changed = true;
+            }
+        }
+        //coordinate
+        if (getCoords() == null && parsedWaypoint.getCoords() != null) {
+            setCoords(parsedWaypoint.getCoords());
+            changed = true;
+        }
+        //user note
+        if (StringUtils.isBlank(this.getUserNote()) && !StringUtils.isBlank(parsedWaypoint.getUserNote())) {
+            this.setUserNote(parsedWaypoint.getUserNote());
+            changed = true;
+        }
+        return changed;
+    }
+
+    private static boolean startsWithAnyLower(final String text, final String... compare) {
+        final String textLower = text.toLowerCase(Locale.getDefault());
+        for (String s : compare) {
+            if (textLower.startsWith(s.toLowerCase(Locale.getDefault()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isUserDefined() {
@@ -295,15 +318,6 @@ public class Waypoint implements IWaypoint {
 
     public boolean isVisited() {
         return visited;
-    }
-
-    public int getStaticMapsHashcode() {
-        long hash = 0;
-        if (coords != null) {
-            hash = coords.hashCode();
-        }
-        hash ^= waypointType.markerId;
-        return (int) hash;
     }
 
     /**

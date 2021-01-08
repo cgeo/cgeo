@@ -44,6 +44,7 @@ import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.WaypointParser;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
@@ -356,19 +357,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         // Load Generic Trackables
         if (StringUtils.isNotBlank(geocode)) {
             AndroidRxUtils.bindActivity(this,
-            // Obtain the active connectors and load trackables in parallel.
-                    Observable.fromIterable(ConnectorFactory.getGenericTrackablesConnectors()).flatMap((Function<TrackableConnector, Observable<Trackable>>) trackableConnector -> {
-                        processedBrands.add(trackableConnector.getBrand());
-                        return Observable.defer(() -> Observable.fromIterable(trackableConnector.searchTrackables(geocode))).subscribeOn(AndroidRxUtils.networkScheduler);
-                    }).toList()).subscribe(trackables -> {
-                        // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
-                        // Store trackables.
-                        genericTrackables.addAll(trackables);
-                        if (!trackables.isEmpty()) {
-                            // Update the UI if any trackables were found.
-                            notifyDataSetChanged();
-                        }
-                    });
+                // Obtain the active connectors and load trackables in parallel.
+                Observable.fromIterable(ConnectorFactory.getGenericTrackablesConnectors()).flatMap((Function<TrackableConnector, Observable<Trackable>>) trackableConnector -> {
+                    processedBrands.add(trackableConnector.getBrand());
+                    return Observable.defer(() -> Observable.fromIterable(trackableConnector.searchTrackables(geocode))).subscribeOn(AndroidRxUtils.networkScheduler);
+                }).toList()).subscribe(trackables -> {
+                // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
+                // Store trackables.
+                genericTrackables.addAll(trackables);
+                if (!trackables.isEmpty()) {
+                    // Update the UI if any trackables were found.
+                    notifyDataSetChanged();
+                }
+            });
         }
 
         locationUpdater = new CacheDetailsGeoDirHandler(this);
@@ -2612,7 +2613,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     public void removeWaypointsFromPersonalNote(final Geocache cache) {
         final String note = cache.getPersonalNote() == null ? "" : cache.getPersonalNote();
-        final String newNote = Waypoint.removeParseableWaypointsFromText(note);
+        final String newNote = WaypointParser.removeParseableWaypointsFromText(note);
         if (newNote != null) {
             setNewPersonalNote(newNote);
         }
@@ -2637,11 +2638,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         //if given maxSize is obviously bogus, then make length unlimited
         final int maxSize = maxPersonalNotesChars == 0 ? -1 : maxPersonalNotesChars;
 
-        final String newNote = Waypoint.putParseableWaypointsInText(note, userModifiedWaypoints, maxSize);
+        final String newNote = WaypointParser.putParseableWaypointsInText(note, userModifiedWaypoints, maxSize);
 
         if (newNote != null) {
             setNewPersonalNote(newNote);
-            final String newNoteNonShorted = Waypoint.putParseableWaypointsInText(note, userModifiedWaypoints, -1);
+            final String newNoteNonShorted = WaypointParser.putParseableWaypointsInText(note, userModifiedWaypoints, -1);
             if (newNoteNonShorted.length() > newNote.length()) {
                 showShortToast(getString(R.string.cache_personal_note_storewaypoints_success_limited, maxSize));
             } else {
