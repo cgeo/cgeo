@@ -156,7 +156,7 @@ public abstract class AbstractCachesOverlay {
                     continue;
                 }
 
-                if (cache.getCoords() == null) {
+                if (cache.getCoords() == null || !cache.getCoords().isValid()) {
                     continue;
                 }
                 if (removeCodes.contains(cache.getGeocode())) {
@@ -377,7 +377,7 @@ public abstract class AbstractCachesOverlay {
 
     private static GeoitemLayer getWaypointItem(final Waypoint waypoint, final TapHandler tapHandler, final boolean isDotMode) {
         final Geopoint target = waypoint.getCoords();
-        if (target != null) {
+        if (target != null && target.isValid()) {
             Bitmap marker = null;
             if (isDotMode) {
                 marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.createWaypointDotMarker(CgeoApplication.getInstance().getResources(), waypoint));

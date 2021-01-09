@@ -1468,13 +1468,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 final boolean forceCompactIconMode = CompactIconModeUtils.forceCompactIconMode(cachesCnt);
                 if (mapOptions.mapMode == MapMode.SINGLE || cachesCnt < Settings.getWayPointsThreshold()) {
                     for (final Waypoint waypoint : waypointsToDisplay) {
-                        if (waypoint != null && waypoint.getCoords() != null) {
+                        if (waypoint != null && waypoint.getCoords() != null && waypoint.getCoords().isValid()) {
                             itemsToDisplay.add(getWaypointItem(waypoint, forceCompactIconMode));
                         }
                     }
                 }
                 for (final Geocache cache : cachesToDisplay) {
-                    if (cache != null && cache.getCoords() != null) {
+                    if (cache != null && cache.getCoords() != null && cache.getCoords().isValid()) {
                         itemsToDisplay.add(getCacheItem(cache, forceCompactIconMode));
                     }
                 }
@@ -1492,6 +1492,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     private void displayPoint(final Geopoint coords) {
+        if (!coords.isValid()) {
+            return;
+        }
         final Waypoint waypoint = new Waypoint("some place", mapOptions.waypointType != null ? mapOptions.waypointType : WaypointType.WAYPOINT, false);
         waypoint.setCoords(coords);
 
@@ -1619,7 +1622,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     // center map to desired location
     private void centerMap(final Geopoint coords) {
-        if (coords == null) {
+        if (coords == null || !coords.isValid()) {
             return;
         }
 
