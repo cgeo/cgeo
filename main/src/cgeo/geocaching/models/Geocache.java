@@ -361,6 +361,14 @@ public class Geocache implements IWaypoint {
             reliableLatLon = other.reliableLatLon;
         }
 
+        if (!preventWaypointsFromNote) {
+            preventWaypointsFromNote = other.preventWaypointsFromNote;
+        }
+
+        if (assignedEmoji == 0) {
+            assignedEmoji = other.assignedEmoji;
+        }
+
         this.eventTimeMinutes = null; // will be recalculated if/when necessary
         return isEqualTo(other);
     }
