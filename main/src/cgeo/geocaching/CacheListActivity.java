@@ -145,8 +145,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final int MAX_LIST_ITEMS = 1000;
     private static final int REFRESH_WARNING_THRESHOLD = 100;
 
-    //private static final int REQUEST_CODE_IMPORT_GPX = 1;
-    //private static final int REQUEST_CODE_RESTART = 2;
     private static final int REQUEST_CODE_IMPORT_PQ = 3;
 
     private static final String STATE_FILTER = "currentFilter";

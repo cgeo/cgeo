@@ -35,7 +35,6 @@ public class DebugUtils {
     public static void createMemoryDump(@NonNull final Context context) {
         Toast.makeText(context, R.string.init_please_wait, Toast.LENGTH_LONG).show();
         final File file = ContentStorage.get().createTempFile();
-        //final File file = FileUtils.getUniqueNamedLogfile("cgeo_dump", "hprof");
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 try {
