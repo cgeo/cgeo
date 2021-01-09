@@ -224,7 +224,7 @@ public final class MapMarkerUtils {
         final int useEmoji = cache.getAssignedEmoji();
 
         // background: disabled or not
-        final Drawable marker = Compatibility.getDrawable(res, useEmoji > 0 ? R.drawable.marker_oc : cache.getMapMarkerId());
+        final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
 
         // Show the background circle only on map
