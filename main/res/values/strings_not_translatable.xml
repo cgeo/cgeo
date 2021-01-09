@@ -223,4 +223,7 @@
 
     <!-- map server urls -->
     <string translatable="false" name="mapserver_osm_v5">https://ftp-stud.hs-esslingen.de/pub/Mirrors/download.mapsforge.org/maps/v5/</string>
+
+    <!-- c:geo mail subject for problem reports -->
+    <string translatable="false" name="mailsubject_problem_report">c:geo problem report</string>
 </resources>
