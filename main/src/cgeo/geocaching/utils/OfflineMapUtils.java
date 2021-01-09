@@ -68,8 +68,8 @@ public class OfflineMapUtils {
         final ArrayList<OfflineMapData> result = new ArrayList<>();
         final String mapDir = LocalStorage.getOrCreateMapDirectory();
 
-        for (String filename : FileUtils.listFiles(new File(mapDir).toPath(), INFOFILE_SUFFIX)) {
-            try (InputStream input = new FileInputStream(new File(filename))) {
+        for (File file : FileUtils.listFiles(mapDir, INFOFILE_SUFFIX)) {
+            try (InputStream input = new FileInputStream(file)) {
                 final OfflineMapData offlineMapData = new OfflineMapData();
                 final Properties prop = new Properties();
                 prop.load(input);
@@ -87,7 +87,7 @@ public class OfflineMapUtils {
                     }
                 }
             } catch (IOException | NumberFormatException e) {
-                Log.d("Offline map property file error for " + filename + ": " + e.getMessage());
+                Log.d("Offline map property file error for " + file.toString() + ": " + e.getMessage());
             }
         }
         return result;

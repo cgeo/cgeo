@@ -22,12 +22,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
@@ -512,22 +508,21 @@ public final class FileUtils {
     }
 
     /**
-     * searches a given directory for files ending with a certain string
-     * @param path path to look in
-     * @param extension extension to be searched for
+     * searches a given directory for readable files ending with a certain string
+     * @param dir - directory to look in
+     * @param extension - extension to be searched for
      * @return List of found files, may be empty
      */
     @NonNull
-    public static List<String> listFiles(final Path path, final String extension) {
-        final List<String> result;
-        try (Stream<Path> walk = Files.walk(path, 1)) {
-            result = walk
-                .filter(p -> Files.isRegularFile(p))
-                .map(p -> p.toString().toLowerCase())
-                .filter(f -> f.endsWith(extension))
-                .collect(Collectors.toList());
-        } catch (IOException e) {
-            return Collections.emptyList();
+    public static List<File> listFiles(final String dir, final String extension) {
+        final List<File> result = new ArrayList<>();
+        final File[] files = new File(dir).listFiles();
+        if (files != null && files.length > 0) {
+            for (File file : files) {
+                if (file.isFile() && file.getPath().endsWith(extension) && file.canRead()) {
+                    result.add(file);
+                }
+            }
         }
         return result;
     }
