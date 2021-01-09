@@ -54,6 +54,12 @@
     <string name="wp_waypoint">Referenční bod</string>
     <string name="wp_original">Původní souřadnice</string>
     <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Finále</string>
+    <string name="wpnew_stage">Stage</string>
+    <string name="wpnew_pkg">Parkoviště</string>
+    <string name="wpnew_trailhead">Přes</string>
+    <string name="wpnew_waypoint">Značka</string>
+    <string name="wpnew_original">Původní</string>
     <!-- logs -->
     <string name="log_found">Nález</string>
     <string name="log_dnf">Nenalezeno</string>
@@ -148,6 +154,7 @@
     <string name="log_problem_archive_text">Tento hráč oznámil, že keška by měla být archivována. Reviewer byl informován.</string>
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Přeložit do %s</string>
@@ -378,10 +385,15 @@
     <string name="caches_clear_offlinelogs">Smazat offline logy</string>
     <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
     <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
+    <string name="caches_set_cache_icon">Nastavit ikony kešky</string>
+    <string name="caches_reset_cache_icons_title">Obnovit ikony kešek</string>
+    <string name="caches_reset_cache_icons">Chcete obnovit ikony kešek pro všechny vybrané kešky?</string>
     <string name="caches_make_list_unique">Vytvořit seznam jedinečných</string>
     <string name="caches_set_listmarker">Nastavit značku seznamu</string>
     <string name="caches_listmarker_none">Bez značky</string>
     <string name="caches_listmarker_selected">(vybrané)</string>
+    <string name="onetime_missing_unicode_title">Vyberte emotikon</string>
+    <string name="onetime_missing_unicode_info">Vaše verze Androidu nepodporuje automatickou detekci podporovaných ikon - některé znaky mohou chybět</string>
     <!-- caches lists -->
     <string name="menu_lists">Spravovat seznamy</string>
     <string name="list_menu_create">Vytvořit nový seznam</string>
@@ -496,20 +508,20 @@
     <string name="init_summary_oc_pl">Načíst kešky z opencaching.pl</string>
     <string name="init_oc_pl_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby opencaching.pl.</string>
     <string name="settings_activate_oc_nl">Aktivovat</string>
-    <string name="init_summary_oc_nl">Načíst keše z opencaching.nl</string>
-    <string name="init_oc_nl_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.nl.</string>
+    <string name="init_summary_oc_nl">Načíst kešky z opencaching.nl</string>
+    <string name="init_oc_nl_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby opencaching.nl.</string>
     <string name="settings_activate_oc_us">Aktivovat</string>
-    <string name="init_summary_oc_us">Načíst keše z opencaching.us</string>
-    <string name="init_oc_us_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.us.</string>
+    <string name="init_summary_oc_us">Načíst kešky z opencaching.us</string>
+    <string name="init_oc_us_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby opencaching.us.</string>
     <string name="settings_activate_oc_ro">Aktivovat</string>
-    <string name="init_summary_oc_ro">Načíst keše z opencaching.ro</string>
-    <string name="init_oc_ro_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.ro.</string>
+    <string name="init_summary_oc_ro">Načíst kešky z opencaching.ro</string>
+    <string name="init_oc_ro_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby opencaching.ro.</string>
     <string name="settings_activate_oc_uk">Aktivovat</string>
     <string name="init_summary_oc_uk">Načíst kešky z opencache.uk</string>
     <string name="init_oc_uk_description">Autorizovat c:geo s opencache.uk pro vyhledávání kešek a přístup/filtrování nalezených kešek.</string>
-    <string name="init_summary_su">Načíst keše z geocaching.su</string>
+    <string name="init_summary_su">Načíst kešky z geocaching.su</string>
     <string name="settings_activate_su">Aktivovat</string>
-    <string name="init_gcvote_password_description">Pokud chceš hodnotit keše, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
+    <string name="init_gcvote_password_description">Pokud chceš hodnotit kešky, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
     <string name="err_vote_send_rating">Chyba při odesílání hodnocení.</string>
     <string name="vote_sent">Hlasování úspěšně odesláno</string>
     <string name="settings_activate_twitter">Povolit</string>
@@ -543,7 +555,7 @@
     <string name="init_signature_template_size">Velikost</string>
     <string name="init_signature_template_type">Typ</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
-    <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCVote.com</string>
+    <string name="init_summary_ratingwanted">Načítat hodnocení kešek z GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
     <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -559,24 +571,24 @@
     <string name="init_use_default_language">Použít výchozí jazyk</string>
     <string name="init_category_exclude">Vyloučit kešky</string>
     <string name="init_exclude">Nezobrazovat vlastní a nalezené keše</string>
-    <string name="init_summary_exclude">Nezobrazovat mé vlastní a nalezené keše</string>
+    <string name="init_summary_exclude">Nezobrazovat mé vlastní a nalezené kešky</string>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
-    <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich trasové body.</string>
+    <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
     <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
-    <string name="init_zoomincludingwaypoints_description">Při zobrazení jedné keše: Měl by být zoom upraven tak, aby zahrnoval všechny její trasové body?</string>
+    <string name="init_zoomincludingwaypoints_description">Při zobrazení jedné kešky: Měl by být zoom upraven tak, aby zahrnoval všechny její trasové body?</string>
     <string name="init_brouterThreshold">Vypočítat trasu</string>
     <string name="init_brouterThreshold_description">Maximální vzdálenost do které pomocná aplikace brouter (pokud je nainstalovaná) vypočítá trasu.</string>
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Pokud je směrování aktivní: Kromě vypočítané délky trasy zobrazí přímou vzdálenost.</string>
-    <string name="init_bigSmileysOnMap">Velké ikony pro zalogované keše</string>
-    <string name="init_summary_bigSmileysOnMap">Je-li povoleno, budou se na mapě namísto ikon podle typu zalogované keše zobrazovat velké emotikony (vyžaduje restart).</string>
+    <string name="init_bigSmileysOnMap">Velké ikony pro zalogované kešky</string>
+    <string name="init_summary_bigSmileysOnMap">Je-li povoleno, budou se na mapě namísto ikon podle typu zalogované kešky zobrazovat velké emotikony (vyžaduje restart).</string>
     <string name="init_disabled">Nezobrazovat deaktivované keše</string>
-    <string name="init_summary_disabled">Nezobrazovat deaktivované keše</string>
+    <string name="init_summary_disabled">Nezobrazovat deaktivované kešky</string>
     <string name="init_archived">Vyloučit archivované</string>
-    <string name="init_summary_archived">Vyloučit archivované keše</string>
+    <string name="init_summary_archived">Vyloučit archivované kešky</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
-    <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek keše. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou keše</string>
+    <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky</string>
     <string name="init_customtabs_as_browser">Použít Chrome webview</string>
     <string name="init_summary_customtabs_as_browser">Externí webové stránky budou zobrazeny bez opuštění c:geo (pouze pokud je nainstalován Chrome)</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
@@ -586,14 +598,14 @@
     <string name="init_log_offline">Povolit offline logování</string>
     <string name="init_summary_log_offline">Povolit offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat logy na server)</string>
     <string name="init_choose_list">Ptát se na seznam</string>
-    <string name="init_summary_choose_list">Ptát se na seznam pro uložení keše</string>
+    <string name="init_summary_choose_list">Ptát se na seznam pro uložení kešky</string>
     <string name="init_listdisplay">Další seznamy</string>
     <string name="init_summary_listdisplay">Zobrazit v seznamu kešek přítomnost kešek v dalších seznamech</string>
     <string name="init_livelist">Zobrazovat směr</string>
-    <string name="init_summary_livelist">Zobrazovat směr v seznamu keší</string>
+    <string name="init_summary_livelist">Zobrazovat směr v seznamu kešek</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvořit zálohu</string>
-    <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat keše, trasové body &amp; nastavení, ale žádné obrázky keší. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
+    <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat kešky, trasové body &amp; nastavení, ale žádné obrázky kešek. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
     <string name="init_restore_title">Obnovit zálohu</string>
     <string name="init_backup_caches">kešky a trasové body</string>
     <string name="init_backup_program_settings">nastavení programu</string>
@@ -604,7 +616,7 @@
     <string name="init_backup_finished">Zálohování dokončeno</string>
     <string name="init_backup_backup_failed">Zálohování se nezdařilo</string>
     <string name="init_backup_now">Spustit zálohování</string>
-    <string name="init_backup_running">Vytváření zálohy databáze keší…</string>
+    <string name="init_backup_running">Vytváření zálohy databáze kešek…</string>
     <string name="init_backup_restore">Obnovit</string>
     <string name="init_restore_restored">Obnova dokončena</string>
     <string name="init_backup_start_restore">Spustit obnovení</string>
@@ -629,7 +641,7 @@
     <string name="init_restore_success">Obnova dokončena.</string>
     <string name="init_restore_failed_dbrecreated">Obnova se nezdařila: Záložní soubor je poškozen, databáze musela být znovu vytvořena.</string>
     <string name="init_restore_failed">Obnova selhala.</string>
-    <string name="init_restore_running">Obnovování databáze keší…</string>
+    <string name="init_restore_running">Obnovování databáze kešek…</string>
     <string name="init_restore_confirm">Databáze je prázdná, chceš ji obnovit ze zálohy?</string>
     <string name="init_backup_last">Dostupná záloha z</string>
     <string name="init_backup_unavailable">není k dispozici</string>
@@ -653,7 +665,7 @@
     <string name="init_map_directory_description">Složka s offline mapami</string>
     <string name="init_gpx_exportdir">Složka pro GPX export</string>
     <string name="init_gpx_importdir">Složka pro GPX import</string>
-    <string name="init_dataDir">Vyber adresář dat keší</string>
+    <string name="init_dataDir">Vyber adresář dat kešek</string>
     <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro kešky (nápovědy, obrázky, …) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
     <string name="init_maptrail">Zobrazit historii trasy</string>
     <string name="init_maptrail_length">Max. délka historie trasy</string>
@@ -671,10 +683,18 @@
     <string name="init_routecolor_summary">Vyberte barvu a neprůhlednost čáry pro individuální trasy. Individuální trasa je soubor trasových bodů a / nebo kešek, které jste vybrali dlouhým přidržením trasových bodů / kešky. (Nejprve musíte povolit funkci dlouhého přidržení, viz nastavení mapy.)</string>
     <string name="init_routewidth">Šířka čáry individuální trasy</string>
     <string name="init_routewidth_summary">Vyberte šířku čáry pro individuální trasy</string>
+    <string name="init_trackcolor">Barva čáry GPX stopy/trasy</string>
+    <string name="init_trackcolor_summary">Vyberte barvu a neprůhlednost čáry stopy/trasy. Stopa/trasa se skládá z několika trasových bodů a lze ji načíst pomocí GPX souboru.</string>
+    <string name="init_trackwidth">Šířka čáry GPX stopy/trasy</string>
+    <string name="init_trackwidth_summary">Vyberte šířku čáry pro GPX stopy/trasy</string>
     <string name="init_circlecolor">Barva obrysu kruhu</string>
     <string name="init_circlecolor_summary">Vyberte barvu a neprůhlednost kruhu. Kruhy se používají jako vizuální znázornění pro minimálního okruh kolem kešky nebo fyzického trasového bodu, v němž nejsou povoleny žádná jiné kešky nebo fyzické trasové body. (Platí pro geocaching.com)</string>
     <string name="init_circlefillcolor">Barva výplně kruhu</string>
     <string name="init_circlefillcolor_summary">Vyberte barvu a neprůhlednost, kterou mají být kruhy vyplněny</string>
+    <string name="init_accuracycirclecolor">Barva čáry kruhu přesnosti</string>
+    <string name="init_accuracycirclecolor_summary">Vyberte barvu a neprůhlednost kruhové čáry přesnosti. Kruh přesnosti se používá jako vizuální znázornění přesnosti lokálního signálu.</string>
+    <string name="init_accuracycirclefillcolor">Barva výplně kruhu přesnosti</string>
+    <string name="init_accuracycirclefillcolor_summary">Vyberte barvu a neprůhlednost pro vyplnění kruhů přesnosti</string>
     <string name="init_include_found_status">Zahrnout stav „nalezeno“</string>
     <string name="init_trackautovisit">Nastavit TB na „Navštíveno“</string>
     <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na „Navštíveno“ jako výchozí</string>
@@ -687,8 +707,8 @@
     <string name="init_secondary_navigation_tool">Sekundární navigace</string>
     <string name="init_default_navigation_tool_description">Zde můžeš vybrat preferovaný navigační nástroj.</string>
     <string name="init_default_navigation_tool_select">Vyber nástroj</string>
-    <string name="init_default_navigation_tool_2_description">Zde můžeš vybrat druhý preferovaný navigační nástroj. Ten se aktivuje dlouhým klepnutím na navigační ikonu vedle názvu keše.</string>
-    <string name="init_navigation_menu_description">Zde můžeš zvolit, které z dostupných metod navigace budou zobrazovány v navigačním menu keše nebo trasového bodu. Nedostupné nástroje nejsou na tomto zařízení nainstalovány.</string>
+    <string name="init_default_navigation_tool_2_description">Zde můžeš vybrat druhý preferovaný navigační nástroj. Ten se aktivuje dlouhým klepnutím na navigační ikonu vedle názvu kešky.</string>
+    <string name="init_navigation_menu_description">Zde můžeš zvolit, které z dostupných metod navigace budou zobrazovány v navigačním menu kešky nebo trasového bodu. Nedostupné nástroje nejsou na tomto zařízení nainstalovány.</string>
     <string name="init_debug_title">Ladící informace</string>
     <string name="init_debug_note">c:geo umí generovat mnoho ladících informací. Aktivace tohoto nastavení se dotkne stability c:geo a doporučuje se pouze tehdy, jste-li požádáni o poslání záznamu vývojářům. Prosím nechte toto nastavení vypnuté při normálním používání c:geo!</string>
     <string name="init_debug">Aktivovat ladící protokolování</string>
@@ -699,17 +719,17 @@
     <string name="init_dbmove_running">Přesouvání databáze</string>
     <string name="init_dbmove_success">Databáze úspěšně přesunuta.</string>
     <string name="init_dbmove_failed">Přesun databáze selhal</string>
-    <string name="init_datadirmove_datadirmove">Přesouvání adresáře dat keší</string>
-    <string name="init_datadirmove_running">Přesouvání adresáře dat keší</string>
-    <string name="init_datadirmove_success">Adresář dat keší byl úspěšně přesunut.</string>
-    <string name="init_datadirmove_failed">Přesun adresáře dat keší se částečně nebo zcela nezdařil. Porovnej ručně starý a nový adresář a v případě potřeby přesuň data ručně.</string>
+    <string name="init_datadirmove_datadirmove">Přesouvání adresáře dat kešek</string>
+    <string name="init_datadirmove_running">Přesouvání adresáře dat kešek</string>
+    <string name="init_datadirmove_success">Adresář dat kešek byl úspěšně přesunut.</string>
+    <string name="init_datadirmove_failed">Přesun adresáře dat kešek se částečně nebo zcela nezdařil. Porovnej ručně starý a nový adresář a v případě potřeby přesuň data ručně.</string>
     <string name="init_plain_logs">Zobrazovat logy bez barev</string>
     <string name="init_summary_plain_logs">Zobrazovat logy bez barev</string>
     <string name="init_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
     <string name="init_summary_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
     <string name="init_rendertheme_folder">Složka se styly map</string>
     <string name="init_maintenance">Údržba</string>
-    <string name="init_maintenance_directories_note">c:geo ukládá obrázky, obrázky z logů a další soubory vázané ke keši v samostatném adresáři. V některých případech (jako import/export databáze) může tento adresář obsahovat staré soubory, které se zde dají smazat.</string>
+    <string name="init_maintenance_directories_note">c:geo ukládá obrázky, obrázky z logů a další soubory vázané ke kešce v samostatném adresáři. V některých případech (jako import/export databáze) může tento adresář obsahovat staré soubory, které se zde dají smazat.</string>
     <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
     <string name="init_location">Geolokace</string>
     <string name="init_location_note">Na zařízeních s nainstalovanými Službami Google Play může c:geo automaticky vybírat nejvhodnější metodu pro určování polohy. Nebude však možné používat externí Bluetooth GPS přijímač.</string>
@@ -723,6 +743,7 @@
     <string name="init_create_memory_dump">Vytvořit výpis paměti</string>
     <string name="init_memory_dump">Výpis stavu paměti</string>
     <string name="init_memory_dumped">Paměť vypsána do %s</string>
+    <string name="init_please_wait">Čekejte prosím…</string>
     <string name="init_hardware_acceleration_title">Hardwarově akcelerované vykreslování</string>
     <string name="init_hardware_acceleration_note">S hardwarovou akcelerací se uživatelské rozhraní vykreslí rychleji. Operační systém Android však na některých zařízeních obsahuje chyby a některé části textu mohou být rozmazané (zejména tučné znaky). Pokud zaznamenáváš potíže, vypni hardwarovou akceleraci.</string>
     <string name="init_hardware_acceleration">Povolit hardwarovou akceleraci</string>
@@ -748,7 +769,7 @@
     <string name="feature_search_geocode">Hledat podle geokódu</string>
     <string name="feature_search_owner">Hledat podle vlastníka</string>
     <string name="feature_search_finder">Hledat podle nálezce</string>
-    <string name="feature_favorite">Přidání keše do oblíbených</string>
+    <string name="feature_favorite">Přidání kešky do oblíbených</string>
     <string name="feature_voting">Hlasování pro kešky</string>
     <string name="init_maplines_title">Přizpůsobení čar na mapě</string>
     <!-- proximity notification -->
@@ -780,8 +801,8 @@
     <string name="init_sendToCgeo_registering">Registrace tvého zařízení pro funkci Poslat do send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Registrace úspěšně dokončena. PIN kód je %d. Použij ho na stránce c:geo pro přidání zařízení do tvého prohlížeče.</string>
     <string name="init_sendToCgeo_register_fail">Registrace selhala.</string>
-    <string name="sendToCgeo_download_fail">c:geo selhalo při stahování keší. Nefunguje internetové připojení nebo je služba send2cgeo vypnutá.</string>
-    <string name="sendToCgeo_no_registration">c:geo selhalo při stahování keší. Registrace pro send2cgeo vypršela. Prosím, registruj se znova v nastavení.</string>
+    <string name="sendToCgeo_download_fail">c:geo selhalo při stahování kešek. Nefunguje internetové připojení nebo je služba send2cgeo vypnutá.</string>
+    <string name="sendToCgeo_no_registration">c:geo selhalo při stahování kešek. Registrace pro send2cgeo vypršela. Prosím, registruj se znova v nastavení.</string>
     <!-- auth generic -->
     <string name="auth_authorize">Autorizovat c:geo</string>
     <string name="auth_check">Zkontrolovat pověření</string>
@@ -963,6 +984,8 @@
     <string name="menu_caches">Spravovat kešky</string>
     <string name="cache_menu_event">Přidat do kalendáře</string>
     <string name="cache_menu_extract_waypoints">Extrahovat trasové body</string>
+    <string name="cache_menu_set_cache_icon">Natavit ikonu kešky</string>
+    <string name="cache_icon_updated">Ikona kešky aktualizována</string>
     <string name="cache_menu_details">Detaily</string>
     <string name="cache_menu_refresh">Aktualizovat</string>
     <string name="cache_menu_share">Sdílet kešku</string>
@@ -977,7 +1000,7 @@
     <string name="cache_log_menu_decrypt">Dešifrovat/Zašifrovat</string>
     <string name="cache_log_menu_title">Log %1$s z %2$s</string>
     <string name="ignore_confirm_title">Buď opatrný</string>
-    <string name="ignore_confirm_message">Ignorace keše znamená, že tato keš nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak keš znovu zobrazit je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
+    <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_stored">Uloženo</string>
     <string name="cache_status_offline_log">Připravený log</string>
@@ -1004,6 +1027,8 @@
     <string name="cache_name">Název</string>
     <string name="cache_name_set">Nastavit název kešky</string>
     <string name="cache_name_updated">Název kešky byl aktualizován</string>
+    <string name="cache_description_set">Nastavit popis kešky</string>
+    <string name="cache_description_updated">Popis kešky aktualizován</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Velikost</string>
     <string name="cache_distance">Vzdálenost</string>
@@ -1099,7 +1124,7 @@
     <string name="individual_route_file_select_title">Vybrat soubor s individuální trasou</string>
     <!-- import -->
     <string name="web_import_title">Import z send2cgeo</string>
-    <string name="web_import_waiting">Čekání na nové keše ze send2cgeo…</string>
+    <string name="web_import_waiting">Čekání na nové kešky ze send2cgeo…</string>
     <string name="web_downloading">Stahování</string>
     <string name="web_downloaded">Staženo</string>
     <!-- popup -->
@@ -1131,16 +1156,16 @@
     <string name="waypoint_loading">Načítání trasového bodu…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Neměnit souřadnice kešky</string>
     <string name="waypoint_set_as_cache_coords">Nastavit jako souřadnice kešky v c:geo</string>
-    <string name="waypoint_save_and_modify_on_website">Nastavit jako souřadnice keše v c:geo a na webu</string>
+    <string name="waypoint_save_and_modify_on_website">Nastavit jako souřadnice kešky v c:geo a na webu</string>
     <string name="waypoint_reset_cache_coords">Obnovit původní souřadnice kešky</string>
-    <string name="waypoint_coordinates_has_been_reset_on_website">Souřadnice keše byly obnoveny na webu.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Souřadnice keše se obnovují na webu.</string>
+    <string name="waypoint_coordinates_has_been_reset_on_website">Souřadnice kešky byly obnoveny na webu.</string>
+    <string name="waypoint_coordinates_being_reset_on_website">Souřadnice kešky se obnovují na webu…</string>
     <string name="waypoint_reset">Obnovení</string>
     <string name="waypoint_localy_reset_cache_coords">Obnovit souřadnice keše v zařízení</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Obnovit původní souřadnice v c:geo a na webu</string>
-    <string name="waypoint_coordinates_couldnt_be_modified_on_website">Souřadnice keše nemohou být na webu změněny.</string>
+    <string name="waypoint_coordinates_couldnt_be_modified_on_website">Souřadnice kešky nemohou být na webu změněny.</string>
     <string name="waypoint_coordinates_upload_error">Při nahrávání souřadnic na web se vyskytla chyba.</string>
-    <string name="waypoint_coordinates_has_been_modified_on_website">Souřadnice keše na webu byly změněny na %s.</string>
+    <string name="waypoint_coordinates_has_been_modified_on_website">Souřadnice kešky na webu byly změněny na %s.</string>
     <string name="waypoint_done">Hotovo</string>
     <string name="waypoint_duplicate">Duplikovat trasový bod</string>
     <string name="waypoint_toclipboard">Kopírovat trasový bod do schránky</string>
@@ -1180,10 +1205,11 @@
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
+    <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, trasy) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
     <string name="map_show_in_map">Zobrazit na mapě</string>
     <!-- search -->
     <string name="search_bar_hint">Hledaní kešek</string>
-    <string name="search_bar_desc">Keše (GC-kód, klíčové slovo), sledovatelné předměty (TB-kód)</string>
+    <string name="search_bar_desc">Kešky (GC-kód, klíčové slovo), sledovatelné předměty (TB-kód)</string>
     <string name="search_coordinates">Souřadnice</string>
     <string name="search_coordinates_button">Hledat podle souřadnic</string>
     <string name="search_address">Adresa</string>
@@ -1245,8 +1271,8 @@
     <string name="geokret_type_post">Pošta</string>
     <!-- user -->
     <string name="user_menu_title">O</string>
-    <string name="user_menu_view_hidden">Skryté keše</string>
-    <string name="user_menu_view_found">Nalezené keše</string>
+    <string name="user_menu_view_hidden">Skryté kešky</string>
+    <string name="user_menu_view_found">Nalezené kešky</string>
     <string name="user_menu_open_browser">Otevřít profil v prohlížeči</string>
     <string name="user_menu_send_message">Odeslat zprávu</string>
     <string name="user_menu_send_email">Poslat e-mail</string>
@@ -1278,18 +1304,18 @@
     <string name="helper_sendtocgeo_title">Poslat do c:geo</string>
     <string name="helper_contacts_title">c:geo – Kontakty (doplněk)</string>
     <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
-    <string name="helper_sendtocgeo_description">Poslat do c:geo je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
-    <string name="helper_locus_description">Outdoorová navigace pro telefon či tablet. Prohlížení offline topo map, záznam trasy, lov geokeší, hlasová navigace a mnohem více.</string>
+    <string name="helper_sendtocgeo_description">Poslat do c:geo je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání kešky do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
+    <string name="helper_locus_description">Outdoorová navigace pro telefon či tablet. Prohlížení offline topo map, záznam trasy, lov kešek, hlasová navigace a mnohem více.</string>
     <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
     <string name="helper_bluetoothgps_description">Umožňuje použít externí GPS přijímač pro přesnější lokalizaci a možná tak i ušetřit nějakou energii.</string>
     <string name="helper_gps_locker_description">GPS Locker udržuje GPS signál aktivní při přepínání aplikací a při vypnutí obrazovky vašeho zařízení.</string>
     <string name="helper_barcode_description">Jsou zde skripty Greasemonkey a stránky, které ti umožní zobrazit geokód jako čárový kód. S touto aplikací může c:geo přečíst daný geokód přímo z tvého displeje.</string>
     <string name="helper_pocketquery_description">Umožňuje snadné vytváření a stažení PQ podle současné pozice nebo bodu na mapě. Vyžaduje Premium účet na Geocaching.com.</string>
     <string name="helper_google_translate_title">Překladač Google</string>
-    <string name="helper_google_translate_description">Pokud si v aplikaci Překladač Google stáhneš překladový balíček, můžeš jednoduše překládat popisy keší v c:geu dlouhým podržením textu (a to bez připojení k Internetu).</string>
-    <string name="helper_where_you_go_description">WhereYouGo umožňuje hledání keší typu Wherigo. S touto aplikací může c:geo automaticky stahovat údaje potřebné pro hru.</string>
+    <string name="helper_google_translate_description">Pokud si v aplikaci Překladač Google stáhneš překladový balíček, můžeš jednoduše překládat popisy kešek v c:geo dlouhým podržením textu (a to bez připojení k Internetu).</string>
+    <string name="helper_where_you_go_description">WhereYouGo umožňuje hledání kešek typu Wherigo. S touto aplikací může c:geo automaticky stahovat údaje potřebné pro hru.</string>
     <string name="helper_brouter_title">BRouter offline navigace</string>
-    <string name="helper_brouter_description">Aplikace BRouter poskytuje offline navigaci. Je-li nainstalována a jsou-li nezbytné soubory stažené, c:geo automaticky zobrazí cestu ke keši na interní mapě.</string>
+    <string name="helper_brouter_description">Aplikace BRouter poskytuje offline navigaci. Je-li nainstalována a jsou-li nezbytné soubory stažené, c:geo automaticky zobrazí cestu ke kešce na interní mapě.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf vám umožňuje číst data z ANT+/Garmin chirp tagů, což je potřeba pro ANT+/chirp kešky.</string>
     <!-- export -->
     <string name="export">Export</string>
@@ -1390,8 +1416,8 @@
     <string name="attribute_teamwork_no">Týmová práce není třeba</string>
     <string name="attribute_landf_yes">Výprava ztráty a nálezy</string>
     <string name="attribute_landf_no">Žádná výprava ztráty a nálezy</string>
-    <string name="attribute_partnership_yes">Partnerská keš</string>
-    <string name="attribute_partnership_no">Není partnerská keš</string>
+    <string name="attribute_partnership_yes">Partnerská keška</string>
+    <string name="attribute_partnership_no">Není partnerská keška</string>
     <string name="attribute_fee_yes">Vstupní nebo parkovací poplatky</string>
     <string name="attribute_fee_no">Bez vstupních nebo parkovacích poplatků</string>
     <string name="attribute_rappelling_yes">Lezecká výstroj nutná</string>
@@ -1518,8 +1544,8 @@
     <string name="attribute_kids_2_no">Neber své děti</string>
     <string name="attribute_historic_site_yes">Historické místo</string>
     <string name="attribute_historic_site_no">Žádné historické místo</string>
-    <string name="attribute_magnetic_yes">Magnetická keš</string>
-    <string name="attribute_magnetic_no">Nemagnetická keš</string>
+    <string name="attribute_magnetic_yes">Magnetická keška</string>
+    <string name="attribute_magnetic_no">Nemagnetická keška</string>
     <string name="attribute_usb_cache_yes">Dead drop USB keška</string>
     <string name="attribute_usb_cache_no">Žádná Dead drop USB keška</string>
     <string name="attribute_shovel_yes">Můžeš potřebovat lopatu</string>
@@ -1536,12 +1562,12 @@
     <string name="attribute_safari_cache_no">Není reverzní keškou</string>
     <string name="attribute_quick_cache_yes">Rychlá keška</string>
     <string name="attribute_quick_cache_no">Není to rychlá keška</string>
-    <string name="attribute_wherigo_yes">Wherigo keš</string>
-    <string name="attribute_wherigo_no">Není to Wherigo keš</string>
+    <string name="attribute_wherigo_yes">Wherigo keška</string>
+    <string name="attribute_wherigo_no">Není to Wherigo keška</string>
     <string name="attribute_audio_cache_yes">Popis obsahuje zvukový soubor</string>
     <string name="attribute_audio_cache_no">Popis neobsahuje zvukový soubor</string>
-    <string name="attribute_geohotel_yes">GeoHotelová keš</string>
-    <string name="attribute_geohotel_no">Není to GeoHotelová keš</string>
+    <string name="attribute_geohotel_yes">GeoHotelová keška</string>
+    <string name="attribute_geohotel_no">Není to GeoHotelová keška</string>
     <string name="attribute_survey_marker_yes">Poblíž měřičské značky</string>
     <string name="attribute_survey_marker_no">Není v blízkosti měřičské značky</string>
     <string name="attribute_offset_cache_yes">Offset keška</string>
@@ -1578,7 +1604,7 @@
     <string name="facebook_link"><a href="">stránka c:geo</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo na Google Play</a></string>
-    <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
+    <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ kešku?</string>
     <string name="github_title">Sledování chyb</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
@@ -1684,12 +1710,19 @@
     </plurals>
     <string name="command_rename_list_result">Seznam přejmenován</string>
     <string name="command_delete_list_result">Seznam odstraněn</string>
-    <string name="command_unique_list_result">Keše smazány z ostatních seznamů</string>
+    <string name="command_unique_list_result">Kešky smazány z ostatních seznamů</string>
     <plurals name="fav_points_remaining">
-        <item quantity="one">Přidat tuto keš do oblíbených (zbývá %d)</item>
-        <item quantity="few">Přidat tuto keš do oblíbených (zbývá %d)</item>
-        <item quantity="many">Přidat tyto keše do oblíbených (zbývá %d)</item>
-        <item quantity="other">Přidat tuto keš do oblíbených (zbývá %d)</item>
+        <item quantity="one">Přidat tuto kešku do oblíbených (zbývá %d)</item>
+        <item quantity="few">Přidat tuto kešku do oblíbených (zbývá %d)</item>
+        <item quantity="many">Přidat tyto kešky do oblíbených (zbývá %d)</item>
+        <item quantity="other">Přidat tuto kešku do oblíbených (zbývá %d)</item>
+    </plurals>
+    <string name="command_set_cache_icons_progress">Nastavují se ikony kešky</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">Nastavit %d ikonu kešky</item>
+        <item quantity="few">Nastavit %d ikony kešek</item>
+        <item quantity="many">Nastavit %d ikon kešek</item>
+        <item quantity="other">Nastavit %d ikon kešek</item>
     </plurals>
     <string name="pq_download_and_import">Importovat Pocket Query</string>
     <string name="caches_refresh_all_warning">Tato akce může vést k vysokému zatížení sítě. Opravdu chceš provést hromadnou aktualizaci všech kešek?</string>
@@ -1704,7 +1737,7 @@
     <!-- calendar adder -->
     <string name="event_fail">Přidat událost do kalendáře se nepodařilo</string>
     <string name="init_low_disk_space">V úložišti dochází volné místo</string>
-    <string name="init_low_disk_space_message">V adresáři dat keší dochází volné místo. To může způsobit nesprávné fungování aplikace c:geo. Uvolni nějaké místo.</string>
+    <string name="init_low_disk_space_message">V adresáři dat kešek dochází volné místo. To může způsobit nesprávné fungování aplikace c:geo. Uvolni nějaké místo.</string>
     <string name="init_confirm_debug">c:geo běží v režimu ladění!</string>
     <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chceš režim ladění vypnout?</string>
     <string name="err_select_logimage_upload_size">Obrázek je příliš velký. Prosím, vyber menší.</string>
@@ -1714,8 +1747,8 @@
     <!-- permission handling -->
     <string name="close_app">Zavřít aplikaci</string>
     <string name="ask_again">Zeptat se znova</string>
-    <string name="location_permission_request_explanation">c:geo potřebuje přístup k GPS na vašem zařízení, aby určilo vaší polohu a vypočítalo vzdálenost a směr ke keším. Nelze ho používat bez tohoto oprávnění.</string>
-    <string name="storage_permission_request_explanation">c:geo zapíše data do úložiště vašeho telefonu nebo na SD kartu jakmile uložíte keše pro použití offline. c:geo bude dále používat úložiště k importu a exportu souborů a čtení offline map. Nelze ho používat bez tohoto oprávnění.</string>
+    <string name="location_permission_request_explanation">c:geo potřebuje přístup k GPS na vašem zařízení, aby určilo vaší polohu a vypočítalo vzdálenost a směr ke keškám. Nelze ho používat bez tohoto oprávnění.</string>
+    <string name="storage_permission_request_explanation">c:geo zapíše data do úložiště vašeho telefonu nebo na SD kartu jakmile uložíte kešky pro použití offline. c:geo bude dále používat úložiště k importu a exportu souborů a čtení offline map. Nelze ho používat bez tohoto oprávnění.</string>
     <string name="storage_permission_needed">Tato funkce není možná bez povolení přístupu k úložišti.</string>
     <!-- colors -->
     <string name="color_blue">Modrá</string>
@@ -1752,7 +1785,7 @@
     <string name="map_clear_manual_targets">Vymazat ruční cíle</string>
     <string name="map_manual_targets_cleared">Ruční cíle vymazány</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
-    <string name="map_clear_individual_route_confirm">Chcete odstranit všechny keše/trasové body z vaší individuální trasy?</string>
+    <string name="map_clear_individual_route_confirm">Chcete odstranit všechny kešky/trasové body z vaší individuální trasy?</string>
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
     <string name="save_sorted_route">Uložit</string>
     <string name="sorted_route_saved">Individuální trasa uložena</string>
@@ -1791,6 +1824,8 @@
     <string name="switch_manual">Ručně</string>
     <string name="switch_auto">Automatický</string>
     <string name="switch_default">(výchozí)</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
     <!-- view settings -->
     <string name="view_settings">Zobrazit nastavení</string>
     <string name="delete_setting">Odstranit nastavení</string>
@@ -1833,6 +1868,14 @@
     <string name="downloadmap_confirmation">Stáhnout mapu \"%1$s\"?\n\nMůže to chvíli trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.\n\nInformace o velikosti: %2$s</string>
     <string name="downloadmap_handling">Samotné stahování bude zpracováno na pozadí správcem stahování vašeho systému. Měli byste vidět oznámení, jakmile stahování začne (to může chvíli trvat).</string>
     <string name="button_continue">Pokračovat</string>
+    <string name="downloadmap_onedirup">(nadřazená složka)</string>
+    <string name="downloadmap_checkforupdates_button">Vyhledat aktualizace</string>
+    <string name="downloadmap_available_updates">Dostupné aktualizace</string>
+    <string name="downloadmap_no_updates_found">Nebyly nalezeny žádné aktualizace map</string>
+    <string name="downloadmap_directory">adresář</string>
+    <string name="downloadmap_mapfile">Mapový soubor</string>
+    <string name="downloadmap_retrieving_directory_data">Načítání dat adresáře…</string>
+    <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
@@ -1847,4 +1890,33 @@
     <string name="export_individualroute_title">Exportovat individuální trasu</string>
     <string name="export_individualroute_success">Individuální trasa exportována do \"%s\"</string>
     <!-- install wizard -->
+    <string name="wizard">Průvodce konfigurací</string>
+    <string name="previous">Předchozí</string>
+    <string name="skip">Přeskočit</string>
+    <string name="next">Další</string>
+    <string name="done">Hotovo</string>
+    <string name="finish">Dokončit</string>
+    <string name="wizard_welcome_title">Vítejte v c:geo</string>
+    <string name="wizard_intro">Pro nastavení c:geo je potřeba jen pár kroků. Měl bych vám s tím pomoci?</string>
+    <string name="wizard_intro2">Vítejte zpět v průvodci nastavení. Nastavení aplikace c:geo ještě není dokončeno. Chcete s tím pomoci, abyste mohli jít dál? Je to jen pár kroků.</string>
+    <string name="wizard_outro_ok">Děkujeme za konfiguraci c:geo.\nPříjemnou zábavu!</string>
+    <string name="wizard_outro_error">Nedokončená konfigurace\nNěkteré části c:geo nebudou pracovat podle očekávání!</string>
+    <string name="wizard_permissions_title">Nastavit oprávnění aplikace</string>
+    <string name="wizard_permissions_intro">Aplikace c:geo vyžaduje na správné fungování několik povolení na vašem zařízení.\nV dalších krocích vám je vysvětlíme.</string>
+    <string name="wizard_platforms_title">Konfigurace služeb</string>
+    <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
+    <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching a další</string>
+    <string name="wizard_welcome_advanced">Pokročilá nastavení</string>
+    <string name="wizard_advanced_offlinemaps_label">Offline mapy</string>
+    <string name="wizard_advanced_offlinemaps_info">Tato stránka poskytuje některé pokročilé funkce, které jsou pouze volitelné.\n\nc:geo může stáhnout mapové soubory pro offline použití.</string>
+    <string name="wizard_advanced_brouter_label">Navigační aplikace</string>
+    <string name="wizard_advanced_brouter_info">Instalací a nastavením doprovodné aplikace \"BRouter Offline Navigation\" může c:geo navigovat do cíle a zobrazit informace o navigaci na vaší mapě.</string>
+    <string name="wizard_advanced_restore_label">Obnovit</string>
+    <string name="wizard_advanced_restore_info">Pokud máte zálohu předchozí instalace, můžete obnovit nastavení a/nebo data kešek.</string>
+    <string name="status_not_ok">CHYBA</string>
+    <string name="wizard_status_title">Stav nastavení</string>
+    <string name="wizard_status_storage_permission">Povolení k úložišti</string>
+    <string name="wizard_status_location_permission">Povolení k poloze</string>
+    <string name="wizard_status_platform">Geocachingové služby</string>
 </resources>
