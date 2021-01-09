@@ -61,7 +61,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
         final Set<Waypoint> waypoints = filterWaypoints(baseGeoCodes, showStored, checkOwnership);
 
         for (final Waypoint waypoint : waypoints) {
-            if (waypoint == null || waypoint.getCoords() == null) {
+            if (waypoint == null || waypoint.getCoords() == null || !waypoint.getCoords().isValid()) {
                 continue;
             }
             if (removeCodes.contains(waypoint.getGpxId())) {
