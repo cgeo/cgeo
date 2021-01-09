@@ -2,6 +2,7 @@ package cgeo.geocaching.calculator;
 
 import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,9 @@ import java.util.List;
  * 'FreeVariables' are used to represent 'Variables' that appear in the 'expression' of an equation
  *                 As in "X = a^2 + b^2".  In this example 'a' and 'b' are both 'freeVariables'.
  *                 All 'freeVariables' must have a lower-case name.
+ *
+ * variables in the 'Bank' are unused variables, for which equations already exists. e.g. once defined and removed by user,
+ *                 but equation will be saved, if user will use the variable once again.
  */
 public final class CoordinatesCalculateUtils {
 
@@ -27,26 +31,39 @@ public final class CoordinatesCalculateUtils {
         // Do not instantiate
     }
 
-    public static List<VariableData> sortVariables(final List<VariableData> variables,
-                                                   final List<VariableData> varBank,
-                                                   final String variableNames,
-                                                   final CaseCheck theCase) {
+    /**
+     * Updates the list of currently used VariableData, creates new VariableData if necessary,
+     * moves VariableData to the bank, if necessary
+     * @param variables already defined VariableData and used
+     * @param variablesBank already defined VariableData, but not used
+     * @param variableNames names of currently used VariableData
+     * @param upperCase sorting for upper-case variable
+     * @return list of currently used VariableData
+     */
+    public static List<VariableData> updateVariablesList(final List<VariableData> variables,
+                                                         final List<VariableData> variablesBank,
+                                                         final String variableNames,
+                                                         final Boolean upperCase) {
         final List<VariableData> returnList = new ArrayList<>();
 
         final char[] sortedVariables = variableNames.toCharArray();
         Arrays.sort(sortedVariables);
 
         for (final char ch : sortedVariables) {
-            if (theCase.check(ch)) {
-                if (getVariable(ch, returnList, false) != null) {
+            if (TextUtils.isLetterOrDigit(ch, upperCase)) {
+                // already handled?
+                if (findVariableData(ch, returnList) != null) {
                     continue;
                 }
 
-                VariableData thisEquation = getVariable(ch, variables, true);
+                // equation for this variable?
+                VariableData thisEquation = findAndRemoveVariableData(ch, variables);
                 if (thisEquation == null) {
-                    thisEquation = findAndRemoveData(ch, varBank);
+                    // saved equation for this variable?
+                    thisEquation = findAndRemoveVariableData(ch, variablesBank);
 
                     if (thisEquation == null) {
+                        // create new equation
                         thisEquation = new VariableData(ch);
                     }
                 }
@@ -57,9 +74,10 @@ public final class CoordinatesCalculateUtils {
 
         // Add all the left over equations to the variable bank.
         for (final VariableData var : variables) {
-            varBank.add(var);
+            variablesBank.add(var);
         }
 
+        // currently used equations
         return returnList;
     }
 
@@ -98,7 +116,7 @@ public final class CoordinatesCalculateUtils {
         }
 
         List<VariableData> equData = new ArrayList<>();
-        equData = CoordinatesCalculateUtils.sortVariables(equData, variableDataList, coordinateChars, new CaseCheck(true));
+        equData = CoordinatesCalculateUtils.updateVariablesList(equData, variableDataList, coordinateChars, true);
 
         String equationStrings = "";
         for (final VariableData equ : equData) {
@@ -107,7 +125,7 @@ public final class CoordinatesCalculateUtils {
 
         // replace the old free variables list with a newly created ones.
         List<VariableData> freeVarData = new ArrayList<>();
-        freeVarData = CoordinatesCalculateUtils.sortVariables(freeVarData, variableDataList, equationStrings, new CaseCheck(false));
+        freeVarData = CoordinatesCalculateUtils.updateVariablesList(freeVarData, variableDataList, equationStrings, false);
 
         final List<ButtonData> butData = new ArrayList<>();
 
@@ -131,12 +149,9 @@ public final class CoordinatesCalculateUtils {
      * @param list list of variables
      * @return first occurrence of the variable if it can found, 'null' otherwise
      */
-    private static VariableData getVariable(final char name, final List<VariableData> list, final boolean remove) {
+    private static VariableData findVariableData(final char name, final List<VariableData> list) {
         for (final VariableData equ : list) {
             if (equ.getName() == name) {
-                if (remove) {
-                    list.remove(equ);
-                }
                 return equ;
             }
         }
@@ -145,12 +160,13 @@ public final class CoordinatesCalculateUtils {
     }
 
     /**
-     * Find if variable data exists in the supplied list with the given name
+     * Find if variable data exists in the supplied list with the given name and removes it from the list
      *
      * @param name name to search for
+     * @param list list of variables, variable will be removed from that list
      * @return first occurrence of the data if it can found, 'null' otherwise
      */
-    private static VariableData findAndRemoveData(final char name, final List<VariableData> list) {
+    private static VariableData findAndRemoveVariableData(final char name, final List<VariableData> list) {
         for (final VariableData var : list) {
             if (var.getName() == name) {
                 list.remove(var);

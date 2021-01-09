@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -143,7 +142,7 @@ public class WaypointParser {
 
         if (null != coordFormat) {
             // try to get a formula
-            final ImmutablePair<String, String> coordFormula = parseFormula(afterCoords, FormulaParser.WPC_DELIM, coordFormat);
+            final ImmutablePair<String, String> coordFormula = parseFormula(afterCoords, coordFormat);
             if (null != coordFormula) {
                 waypoint.setCalcStateJson(coordFormula.left);
                 afterCoords = coordFormula.right;
@@ -262,7 +261,7 @@ public class WaypointParser {
         return WaypointType.WAYPOINT;
     }
 
-    private ImmutablePair<String, String> parseFormula(final String text, final char delimiter, final Settings.CoordInputFormatEnum formulaFormat) {
+    private ImmutablePair<String, String> parseFormula(final String text, final Settings.CoordInputFormatEnum formulaFormat) {
         try {
             final FormulaParser formulaParser = new FormulaParser(formulaFormat);
             final ImmutablePair<String, String> parsedFullCoordinates = formulaParser.parse(text);
@@ -272,28 +271,27 @@ public class WaypointParser {
 
                 String formulaString = text.trim();
                 // remove lat and lon
-                if (formulaString.startsWith("" + delimiter)) {
-                    formulaString = TextUtils.replaceFirst(formulaString, "", "" + delimiter, "");
+                if (formulaString.startsWith(FormulaParser.WPC_DELIM_STRING)) {
+                    formulaString = TextUtils.replaceFirst(formulaString, "", "" + FormulaParser.WPC_DELIM, "");
                 }
-                formulaString = TextUtils.replaceFirst(formulaString, "", "" + delimiter, "");
+                formulaString = TextUtils.replaceFirst(formulaString, "", "" + FormulaParser.WPC_DELIM, "");
 
-                final List<String> formulaList = TextUtils.getAll(formulaString, delimiter, true);
+                final String[] formulaList = formulaString.split(FormulaParser.WPC_DELIM_PATTERN_STRING);
 
-                if (0 <= formulaList.size()) {
-                    final Iterator<String> formulaIter = formulaList.iterator();
+                if (0 <= formulaList.length) {
                     final List<VariableData> variables = new ArrayList<>();
-                    while (formulaIter.hasNext()) {
-                        final String varText = formulaIter.next().trim();
+                    for (final String formulaPart : formulaList
+                         ) {
+                        final String varText = formulaPart.trim();
                         if (varText.startsWith("" + PARSING_USERNOTE_DELIM)) {
                             break;
                         }
-                        formulaString = TextUtils.replaceFirst(formulaString, "", "" + delimiter, "");
-                        final List<String> equations = TextUtils.getAll(varText, '=', true);
-                        if (1 <= equations.size()) {
-                            final Iterator<String> equationsIter = equations.iterator();
-                            final String varName = equationsIter.next().trim();
+                        formulaString = TextUtils.replaceFirst(formulaString, "", "" + FormulaParser.WPC_DELIM, "");
+                        final String[] equations = varText.split("=", -1);
+                        if (1 <= equations.length) {
+                            final String varName = equations[0].trim();
                             if (1 == varName.length()) {
-                                final String varExpression = equationsIter.hasNext() ? equationsIter.next() : "";
+                                final String varExpression = 2 <= equations.length ? equations[1] : "";
                                 variables.add(new VariableData(varName.charAt(0), varExpression));
                             }
                         }
@@ -423,7 +421,7 @@ public class WaypointParser {
         final StringBuilder sb = new StringBuilder();
 
         final String calcStateJson = wp.getCalcStateJson();
-        final String plainFormula = exportPlainFormula(calcStateJson, FormulaParser.WPC_DELIM);
+        final String plainFormula = exportPlainFormula(calcStateJson);
         if (null != plainFormula) {
             sb.append(PARSING_COORD_FORMULA_PLAIN);
             sb.append(plainFormula + "\n");
@@ -432,19 +430,19 @@ public class WaypointParser {
         return sb.toString();
     }
 
-    private static String exportPlainFormula(final String calcStateJson, final char delimiter) {
+    private static String exportPlainFormula(final String calcStateJson) {
         final StringBuilder sb = new StringBuilder();
 
         if (null != calcStateJson) {
             final CalcState calcState = CalcState.fromJSON(calcStateJson);
             if (calcState.format == Settings.CoordInputFormatEnum.Plain) {
-                sb.append(calcState.plainLat + delimiter + calcState.plainLon + "\n");
+                sb.append(calcState.plainLat + FormulaParser.WPC_DELIM + calcState.plainLon + "\n");
                 for (VariableData equ : calcState.equations) {
-                    sb.append(delimiter + equ.getName() + " = " + equ.getExpression());
+                    sb.append(FormulaParser.WPC_DELIM + equ.getName() + " = " + equ.getExpression());
                 }
                 sb.append("\n");
                 for (VariableData var : calcState.freeVariables) {
-                    sb.append(delimiter + var.getName() + " = " + var.getExpression());
+                    sb.append(FormulaParser.WPC_DELIM + var.getName() + " = " + var.getExpression());
                 }
                 sb.append("\n");
             }

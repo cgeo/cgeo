@@ -20,10 +20,15 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * Parse coordinates with formulas.
+ * For plain-format the keyword (FORMULA-PLAIN) has to be used. Use '|' to separate the variables and the user note.
+ * example:
+ * @name (x) (FORMULA-PLAIN) N48 AB.(C*D/2) E 9 (C-D).(A+B) |A=a+b|a=5| user note
  */
 public final class FormulaParser {
 
     public  static final char WPC_DELIM = '|';
+    public  static final String WPC_DELIM_STRING = "|";
+    public  static final String WPC_DELIM_PATTERN_STRING = "\\|";
 
     private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(\\d), (\\d{2,})");
     private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. (\\d{2,})");
@@ -224,7 +229,6 @@ public final class FormulaParser {
             final String group2 = groups.get(1).trim();
             final String group3 = groups.get(2).trim();
 
-            // Handle empty degrees part (see #4620)
             final String strippedGroup2 = StringUtils.stripEnd(group2, "°").trim();
 
             final String result = group1 + " " + strippedGroup2 + "° " + group3 + "'";

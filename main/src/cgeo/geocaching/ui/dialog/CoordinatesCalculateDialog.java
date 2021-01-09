@@ -6,7 +6,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.calculator.ButtonData;
 import cgeo.geocaching.calculator.CalculationUtils;
-import cgeo.geocaching.calculator.CaseCheck;
 import cgeo.geocaching.calculator.CoordinatesCalculateUtils;
 import cgeo.geocaching.calculator.VariableData;
 import cgeo.geocaching.location.Geopoint;
@@ -1210,13 +1209,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      *
      * @param variables List of variables as they currently are.
      * @param variableNames String containing all the names for which variables are required
-     * @param theCase case for which variables are to be created (ie. Uppercase or Lowercase)
+     * @param useUpper case for which variables are to be created (ie. Uppercase or Lowercase)
      * @param hintText text to be used as a hint when new variables are created
      * @return full list of variables in the appropriate order
      */
      private List<CalculatorVariable> sortVariables(final List<CalculatorVariable> variables,
                                                    final String variableNames,
-                                                   final CaseCheck theCase,
+                                                   final boolean useUpper,
                                                    final String hintText,
                                                    final TextWatcher textWatcher,
                                                    final InputFilter[] filters) {
@@ -1227,7 +1226,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
              ) {
             varDataList.add(calcVar.getData());
         }
-        varDataList = CoordinatesCalculateUtils.sortVariables(varDataList, variableBank, variableNames, theCase);
+        varDataList = CoordinatesCalculateUtils.updateVariablesList(varDataList, variableBank, variableNames, useUpper);
 
                     thisEquation = new CalculatorVariable(getContext(),
                             data,
@@ -1285,7 +1284,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         equations = sortVariables(
                 equations,
                 coordinateChars,
-                new CaseCheck(true),
+                true,
                 getString(R.string.equation_hint),
                 new EquationWatcher(),
                 new InputFilter[] {new EquationFilter()});
@@ -1307,7 +1306,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         freeVariables = sortVariables(
                 freeVariables,
                 equationStrings,
-                new CaseCheck(false),
+                false,
                 getString(R.string.free_variable_hint),
                 new VariableWatcher(),
                 new InputFilter[] {new VariableFilter()});

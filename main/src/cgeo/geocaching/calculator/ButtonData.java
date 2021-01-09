@@ -2,15 +2,13 @@ package cgeo.geocaching.calculator;
 
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
 
-import java.io.Serializable;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Data used to capture the state of this particular button such that it can be restored again later
  */
-public final class ButtonData implements Serializable, JSONAble {
+public final class ButtonData implements JSONAble {
 
     /** The three states the button can be put into */
     public enum ValueType {

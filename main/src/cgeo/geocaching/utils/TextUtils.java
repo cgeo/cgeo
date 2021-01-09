@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -428,29 +429,6 @@ public final class TextUtils {
         return result;
     }
 
-    @NonNull
-    public static List<String> getAll(final String text, final char delimiter, final  Boolean ignoreEmpty) {
-        final List<String> result = new ArrayList<>();
-
-        String matchText = text;
-
-        List<String> textMatches = TextUtils.getAll(matchText, "", "" + delimiter);
-        while (1 == textMatches.size()) {
-            final String matchedText = textMatches.iterator().next();
-            if (!StringUtils.isBlank(matchedText) || ignoreEmpty) {
-                result.add(matchedText);
-            }
-            matchText = TextUtils.replaceFirst(matchText, "", "" + delimiter, "");
-            textMatches = TextUtils.getAll(matchText, "", "" + delimiter);
-        }
-
-        if (!StringUtils.isBlank(matchText) || ignoreEmpty) {
-            result.add(matchText);
-        }
-
-        return result;
-    }
-
     /**
      * Shortens a given text to a maximum given number of characters. In case the text is too long it
      * is shortened according to a given begin-end-distribution-value. Deleted text part is marked with '...'
@@ -476,7 +454,17 @@ public final class TextUtils {
         final int charsAtEnd = maxLength - separator.length() - charsAtBegin;
 
         return text.substring(0, charsAtBegin) + separator + text.substring(text.length() - charsAtEnd);
+    }
 
+    public static boolean isLetterOrDigit(final char ch, final boolean useUpper) {
+        boolean returnValue = CharUtils.isAsciiAlphanumeric(ch);
+        if (useUpper) {
+            returnValue &= CharUtils.isAsciiAlphaUpper(ch);
+        } else {
+            returnValue &= CharUtils.isAsciiAlphaLower(ch);
+        }
+
+        return returnValue;
     }
 
     private static Pattern getTokenSearchPattern(final String startToken, final String endToken) {

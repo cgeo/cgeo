@@ -282,6 +282,27 @@ public class WaypointParserTest {
     }
 
     /**
+     * Waypoint with formula and variables should be created
+     */
+    @Test
+    public void testParseWaypointWithoutNameAndDescriptionAndFormula() {
+        final String note = "(FORMULA-PLAIN) | N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp = iterator.next();
+        assertWaypoint(wp, "Prefix 1", null, WaypointType.WAYPOINT, "this is the description");
+        final String calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNotNull();
+        final CalcState calcState = CalcState.fromJSON(calcStateJson);
+        assertThat(calcState.plainLat).isEqualTo("N 45° A.B(C+D)'");
+        assertThat(calcState.plainLon).isEqualTo("E 9° (A-B).(2*D)EF'");
+        assertThat(calcState.equations).hasSize(6);
+        assertThat(calcState.freeVariables).hasSize(2);
+    }
+
+    /**
      * between formula and variables should be a separator
      * with (NO-COORD) formula should not be parsed and goes there in the user note
      */

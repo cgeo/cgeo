@@ -6,8 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 
 public class WaypointUserNoteCombiner {
 
-    private static final String SEPARATOR = "\n--\n";
-    private static final Pattern PATTERN_SEPARATOR_SPLIT = Pattern.compile("\\s*" + SEPARATOR + "\\s*");
+    private static final String SEPARATOR = "--";
+    private static final String LF_SEPARATOR_LF = "\n" + SEPARATOR + "\n";
+    private static final Pattern PATTERN_SEPARATOR_SPLIT = Pattern.compile("\\s*" + LF_SEPARATOR_LF + "\\s*");
 
     private Waypoint waypoint;
 
@@ -31,7 +32,7 @@ public class WaypointUserNoteCombiner {
         } else {
             final StringBuilder newNote = new StringBuilder(this.waypoint.getNote());
             if (StringUtils.isNotEmpty(userNote)) {
-                newNote.append(SEPARATOR);
+                newNote.append(LF_SEPARATOR_LF);
                 newNote.append(userNote);
             }
             return newNote.toString();
@@ -48,7 +49,7 @@ public class WaypointUserNoteCombiner {
         if (combinedNote != null) {
             String fixedCombinedNote = combinedNote;
             // \n was removed via validate
-            if (combinedNote.startsWith("--\n")) {
+            if (combinedNote.startsWith (SEPARATOR + "\n")) {
                 fixedCombinedNote = "\n" + combinedNote;
             }
 
