@@ -27,4 +27,4 @@ Vyhledávání a objevování trasovatelných předmětů, spravování inventá
 Pokud máte problémy s instalací anebo používáním aplikace c:geo, nejprve se prosím podívejte na nejčastější otázky (https://faq.cgeo.org), nebo si projděte návod na používání https://manual.cgeo.org).
 Pokud problémy přetrvávají, kontaktujte e-mailem naší podporu.
 
-If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.
+Pokud chcete vědět, proč c:geo potřebuje požadovaná oprávnění, podívejte se prosím na stránky https://www.cgeo.org/faq#permissions kde najdete vysvětlení.

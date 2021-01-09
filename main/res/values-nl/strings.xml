@@ -53,6 +53,13 @@
     <string name="wp_trailhead">Trailhead</string>
     <string name="wp_waypoint">Referentie punt</string>
     <string name="wp_original">Originele coördinaten</string>
+    <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Eindbestemming</string>
+    <string name="wpnew_stage">Tussenpunt</string>
+    <string name="wpnew_pkg">Parkeerplaats</string>
+    <string name="wpnew_trailhead">Via</string>
+    <string name="wpnew_waypoint">Markeerpunt</string>
+    <string name="wpnew_original">Oorspronkelijk</string>
     <!-- logs -->
     <string name="log_found">Gevonden</string>
     <string name="log_dnf">Niet gevonden</string>
@@ -376,6 +383,9 @@
     <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
     <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
     <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
+    <string name="caches_set_cache_icon">Cachepictogrammen instellen</string>
+    <string name="caches_reset_cache_icons_title">Cache pictogrammen terugzetten</string>
+    <string name="caches_reset_cache_icons">Wil je de cachepictogrammen terugzetten voor alle geselecteerde caches?</string>
     <string name="caches_make_list_unique">Lijst uniek maken</string>
     <string name="caches_set_listmarker">Zet lijst marker</string>
     <string name="caches_listmarker_none">Geen marker</string>
@@ -669,10 +679,10 @@
     <string name="init_routecolor_summary">Selecteer kleur en doorzichtigheid voor de individuele route lijn. Een individuele route is een collectie van waypoints en/of caches die je hebt geselecteerd door lang op het waypoint te drukken. (Je dient de lang drukken-functie eerst in te schakelen, zie de kaartinstellingen.)</string>
     <string name="init_routewidth">Individuele routelijnbreedte</string>
     <string name="init_routewidth_summary">Selecteer breedte voor individuele routelijn</string>
-    <string name="init_trackcolor">Individuele spoorlijnkleur</string>
-    <string name="init_trackcolor_summary">Selecteer kleur en doorzichtigheid voor spoorlijn. Een track bestaat uit verschillende waypoints en kan worden geladen via een spoor GPX bestand.</string>
-    <string name="init_trackwidth">Individuele spoorlijnbreedte</string>
-    <string name="init_trackwidth_summary">Selecteer breedte voor individuele spoorlijn</string>
+    <string name="init_trackcolor">GPX spoor/route lijnkleur</string>
+    <string name="init_trackcolor_summary">Selecteer kleur en ondoorzichtigheid voor spoor/route lijn. Een spoor/route bestaat uit verschillende waypoints en kan worden geladen via een GPX spoor/route bestand.</string>
+    <string name="init_trackwidth">GPX spoor/route lijnbreedte</string>
+    <string name="init_trackwidth_summary">Selecteer breedte voor GPX spoor/route lijn</string>
     <string name="init_circlecolor">Cirkel lijnkleur</string>
     <string name="init_circlecolor_summary">Selecteer kleur en doorzichtigheid voor de cirkellijn. Cirkels worden gebruikt als visuele weergave voor de minimale radius rond een cache of fysiek waypoint waar geen andere cache of fysiek waypoint is toegestaan. (Heeft betrekking op geocaching.com)</string>
     <string name="init_circlefillcolor">Cirkel opvulkleur</string>
@@ -999,6 +1009,8 @@
     <string name="cache_name">Naam</string>
     <string name="cache_name_set">Cachenaam instellen</string>
     <string name="cache_name_updated">Cachenaam bijgewerkt</string>
+    <string name="cache_description_set">Stel cache-omschrijving in</string>
+    <string name="cache_description_updated">Cache-omschrijving bijgewerkt</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Grootte</string>
     <string name="cache_distance">Afstand</string>
@@ -1045,8 +1057,6 @@
     <string name="internal_goto_targets_description">Deze cache slaat je recente \"Ga naar\" doelen op. Deze wordt automatisch aangemaakt zodra je de \"ga naar\" functie in het hoofdmenu hebt gebruikt. De ingevoerde coördinaten zullen worden opgeslagen als waypoints van deze cache. Als je deze coördinaten niet meer nodig hebt, kan je deze cache of eventuele waypoints veilig verwijderen. Je kunt ook de cache verplaatsen naar elke andere lijst van jouw keuze.</string>
     <string name="init_longtap_map">Lang drukken op kaart</string>
     <string name="init_summary_longtap_map">Activeer lang tikken op kaart-pictogram (maak een individuele route) of op vrije ruimte op de kaart (maak een gebruiker gedefinieerde cache)</string>
-    <string name="onetime_info_longtap_disabled">Door lang te tikken op kaart kan je afzonderlijke routes en door de gebruiker gedefinieerde caches maken.\n\nLange tik op de kaart is momenteel uitgeschakeld.\n\nJe kunt dit wijzigen in Instellingen - Kaart - Kaart gedrag</string>
-    <string name="onetime_info_longtap_enabled">Door lang te tikken op kaart kan je afzonderlijke routes en door de gebruiker gedefinieerde caches maken.\n\nLange tik op de kaart is momenteel uitgeschakeld.\n\nJe kunt dit wijzigen in Instellingen - Kaart - Kaart gedrag</string>
     <string name="goto_targets_list">Gebruiker gedefinieerde caches</string>
     <string name="clear_goto_history_title">Spoor geschiedenis wissen</string>
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
@@ -1664,6 +1674,11 @@
     <plurals name="fav_points_remaining">
         <item quantity="one">Deze cache toevoegen aan favorieten (%d resterend)</item>
         <item quantity="other">Deze cache toevoegen aan favorieten (%d resterend)</item>
+    </plurals>
+    <string name="command_set_cache_icons_progress">Cache pictogrammen aan het instellen</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">Cache pictogram %d instellen</item>
+        <item quantity="other">Cache pictogrammen %d instellen</item>
     </plurals>
     <string name="pq_download_and_import">Importeer Pocket query</string>
     <string name="caches_refresh_all_warning">Deze actie kan leiden tot veel netwerkverkeer. Weet je zeker dat je alle caches wil verversen?</string>

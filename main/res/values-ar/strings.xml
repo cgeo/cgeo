@@ -46,6 +46,7 @@
     <string name="wp_trailhead">القافلة</string>
     <string name="wp_waypoint">النقطة المرجعية</string>
     <string name="wp_original">الإحداثيات الأصلية</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">معثور عليه</string>
     <string name="log_dnf">لم يتم العثور عليه</string>

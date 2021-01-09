@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Inici del camí</string>
     <string name="wp_waypoint">Punt de referència</string>
     <string name="wp_original">Coordenades originals</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Trobat</string>
     <string name="log_dnf">No trobat</string>
@@ -669,10 +670,6 @@
     <string name="init_routecolor_summary">Seleccioneu el color i l\'opacitat per a la línia de ruta individual. Una ruta individual és una col·lecció de waypoints i / o catxés que heu seleccionat prement llargament al punt de ruta / catxé. (Primer heu d’habilitar la funció de pulsació llarga, consulteu la configuració del mapa.)</string>
     <string name="init_routewidth">Amplada de línia de ruta individual</string>
     <string name="init_routewidth_summary">Seleccioneu l\'amplada de la línia de ruta individual</string>
-    <string name="init_trackcolor">Color de línia del track individual</string>
-    <string name="init_trackcolor_summary">Seleccioneu color i opacitat per a la línia del track. Un track consta de diversos waypoints i es pot carregar mitjançant un fitxer GPX .</string>
-    <string name="init_trackwidth">Amplada de línia del track individual</string>
-    <string name="init_trackwidth_summary">Seleccioneu l\'amplada per a una línia de track individual</string>
     <string name="init_circlecolor">Color de la línia del cercle</string>
     <string name="init_circlecolor_summary">Seleccioneu el color i l\'opacitat per a la línia del cercle. Els cercles s\'utilitzen com a representació visual del radi mínim al voltant d\'un catxé o d\'un punt de ruta físic.. (S\'aplica a geocaching.com)</string>
     <string name="init_circlefillcolor">Color de dins del cercle</string>

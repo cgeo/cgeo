@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Partenza percorso</string>
     <string name="wp_waypoint">Punto di riferimento</string>
     <string name="wp_original">Coordinate originali</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Trovato</string>
     <string name="log_dnf">Non trovato (DNF)</string>
@@ -669,10 +670,6 @@
     <string name="init_routecolor_summary">Seleziona colore e opacità della linea di percorso individuale. Un percorso individuale è un insieme di waypoint e/o cache selezionati premendo a lungo sul waypoint/cache. (È necessario abilitare prima la funzione di pressione prolungata, vedere le impostazioni della mappa.)</string>
     <string name="init_routewidth">Spessore della linea di percorso individuale</string>
     <string name="init_routewidth_summary">Seleziona la larghezza della linea di percorso individuale</string>
-    <string name="init_trackcolor">Colore della linea di traccia individuale</string>
-    <string name="init_trackcolor_summary">Seleziona colore e opacità della linea della traccia. Una traccia è composta da diversi waypoint e può essere caricata tramite un file GPX.</string>
-    <string name="init_trackwidth">Spessore della linea di traccia individuale</string>
-    <string name="init_trackwidth_summary">Seleziona la larghezza della linea di percorso individuale</string>
     <string name="init_circlecolor">Colore del cerchio</string>
     <string name="init_circlecolor_summary">Seleziona colore e opacità per la linea del cerchio. I cerchi sono usati come rappresentazione visiva del raggio minimo, attorno a un cache o waypoint fisico, in cui non è consentita nessun\'altro cache o waypoint fisico. (Si applica a geocaching.com)</string>
     <string name="init_circlefillcolor">Colore di riempimento del cerchio</string>

@@ -37,6 +37,7 @@
     <string name="wp_pkg">Parkinganan nga Lugar</string>
     <string name="wp_waypoint">Ang punto sa reperensya</string>
     <string name="wp_original">Ang mga coordinate nga orihinal</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Nakit-an kana</string>
     <string name="log_dnf">Wala kana nakit-an</string>

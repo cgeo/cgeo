@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Trail Başlangıcı</string>
     <string name="wp_waypoint">Referans Noktası</string>
     <string name="wp_original">Orijinal Koordinatlar</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Buldum</string>
     <string name="log_dnf">Bulamadım</string>
@@ -661,10 +662,6 @@
     <string name="init_routecolor_summary">Her bir güzergah hattı için renk ve opaklığı seçin. Bağımsız bir rota, yol noktasına/Geocache\'e uzun basarak seçtiğiniz bir yol noktasının ve/veya Geocache\'in mesafesidir. (Önce uzun basma işlevini etkinleştirmeniz gerekir, harita ayarlarına bakın.)</string>
     <string name="init_routewidth">Bireysel güzergah hattı genişliği</string>
     <string name="init_routewidth_summary">Bireysel güzergah hattı için genişlik seçin</string>
-    <string name="init_trackcolor">Bireysel yol çizgisi rengi</string>
-    <string name="init_trackcolor_summary">İz çizgisi için renk ve opaklığı seçin. Bir iz, birkaç ara noktadan oluşur ve bir GPX güzergah dosyası aracılığıyla yüklenebilir.</string>
-    <string name="init_trackwidth">Bireysel yol çizgisi genişliği</string>
-    <string name="init_trackwidth_summary">Ayrı izleme hattı için genişlik seçin</string>
     <string name="init_circlecolor">Çember kenar rengi</string>
     <string name="init_circlecolor_summary">Daire çizgisi için renk ve opaklığı seçin. Daireler, bir Geocache veya fiziksel yol noktası etrafındaki minimum yarıçap için görsel bir temsil olarak kullanılır; burada başka hiçbir Geocache veya fiziksel yol noktası oluşturulamaz. (Geocaching.com için geçerlidir)</string>
     <string name="init_circlefillcolor">Daire dolgu rengi</string>

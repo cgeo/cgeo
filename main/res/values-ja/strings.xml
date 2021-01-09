@@ -53,6 +53,11 @@
     <string name="wp_trailhead">出発地点</string>
     <string name="wp_waypoint">参考地点</string>
     <string name="wp_original">オリジナル座標</string>
+    <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">最終目的地</string>
+    <string name="wpnew_pkg">駐車場</string>
+    <string name="wpnew_trailhead">経由地</string>
+    <string name="wpnew_waypoint">マーカー</string>
     <!-- logs -->
     <string name="log_found">発見</string>
     <string name="log_dnf">未発見</string>
@@ -375,10 +380,15 @@
     <string name="caches_clear_offlinelogs">すべてのオフラインログを削除</string>
     <string name="caches_clear_offlinelogs_message">オフラインログを削除しますか?</string>
     <string name="caches_clear_offlinelogs_progress">すべてのオフラインログを削除中</string>
+    <string name="caches_set_cache_icon">キャッシュアイコン設定</string>
+    <string name="caches_reset_cache_icons_title">キャッシュアイコンのリセット</string>
+    <string name="caches_reset_cache_icons">選択したすべてのキャッシュアイコンをデフォルトに戻しますか?</string>
     <string name="caches_make_list_unique">重複キャッシュを削除</string>
     <string name="caches_set_listmarker">リストマーカーを設定</string>
     <string name="caches_listmarker_none">マーカーなし</string>
     <string name="caches_listmarker_selected">(選択済み)</string>
+    <string name="onetime_missing_unicode_title">絵文字の選択</string>
+    <string name="onetime_missing_unicode_info">お使いのAndroidバージョンは、アイコンの自動検出をサポートしていません。一部の文字が欠落している可能性があります</string>
     <!-- caches lists -->
     <string name="menu_lists">リストを管理</string>
     <string name="list_menu_create">新しいリストを作成</string>
@@ -668,10 +678,10 @@
     <string name="init_routecolor_summary">個別ルートの色と不透明度を選択。個別ルートはウェイポイント/キャッシュをロングタップで選択して作成したルートです(「地図の動作」でロングタップを有効にする必要があります)</string>
     <string name="init_routewidth">個別ルートの線幅</string>
     <string name="init_routewidth_summary">個別ルートの線幅を選択</string>
-    <string name="init_trackcolor">トラックの色</string>
-    <string name="init_trackcolor_summary">トラックの色と不透明度の選択。トラックはトラックポイントの集まりで、GPXトラックファイルから読み込めます</string>
-    <string name="init_trackwidth">トラックの線幅</string>
-    <string name="init_trackwidth_summary">トラックの色と不透明度の選択</string>
+    <string name="init_trackcolor">GPXトラック/ルートの色</string>
+    <string name="init_trackcolor_summary">トラック/ルートの色と不透明度の選択。トラック/ルートはトラックポイントの集まりで、GPXトラック/ルートファイルから読み込めます</string>
+    <string name="init_trackwidth">GPXトラック/ルートの線幅</string>
+    <string name="init_trackwidth_summary">GPXトラック/ルートの線幅の選択</string>
     <string name="init_circlecolor">0.1マイル円の線色</string>
     <string name="init_circlecolor_summary">0.1マイル円の線色と不透明度の選択。 キャッシュまたはウェイポイントに半径0.1マイルの円を表示します。geocaching.comでは0.1マイル以内にキャッシュまたは物理的なウェイポイントを設置することを禁止しています</string>
     <string name="init_circlefillcolor">0.1マイル円の内側の色</string>
@@ -947,6 +957,8 @@
     <string name="menu_caches">キャッシュを管理</string>
     <string name="cache_menu_event">カレンダーに登録</string>
     <string name="cache_menu_extract_waypoints">ウェイポイントを抽出</string>
+    <string name="cache_menu_set_cache_icon">キャッシュアイコン設定</string>
+    <string name="cache_icon_updated">キャッシュアイコンを変更しました</string>
     <string name="cache_menu_details">詳細</string>
     <string name="cache_menu_refresh">更新</string>
     <string name="cache_menu_share">キャッシュを共有</string>
@@ -988,6 +1000,8 @@
     <string name="cache_name">キャッシュ名</string>
     <string name="cache_name_set">キャッシュ名を設定</string>
     <string name="cache_name_updated">キャッシュ名を更新しました</string>
+    <string name="cache_description_set">キャッシュの説明を入力</string>
+    <string name="cache_description_updated">キャッシュの説明が更新されました</string>
     <string name="cache_type">タイプ</string>
     <string name="cache_size">サイズ</string>
     <string name="cache_distance">距離</string>
@@ -1638,6 +1652,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <plurals name="fav_points_remaining">
         <item quantity="other">このキャッシュをお気に入りに追加 (残り%d)</item>
     </plurals>
+    <string name="command_set_cache_icons_progress">キャッシュアイコン設定</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="other">%dキャッシュのアイコンを設定しました</item>
+    </plurals>
     <string name="pq_download_and_import">ポケット・クエリのインポート</string>
     <string name="caches_refresh_all_warning">この操作はネットワーク通信量が大きくなる可能性があります。すべてのキャッシュを一括更新してもよろしいですか?</string>
     <string name="list_list_headline">リスト:</string>
@@ -1768,6 +1786,14 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_confirmation">地図ファイル「%1$s」をダウンロードしますか?\n\nネットワーク接続によっては長時間かかり通信料が高額になる場合があります。\n\nファイルサイズ:%2$s</string>
     <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
     <string name="button_continue">続ける</string>
+    <string name="downloadmap_onedirup">(上位フォルダ)</string>
+    <string name="downloadmap_checkforupdates_button">更新を確認</string>
+    <string name="downloadmap_available_updates">更新できる地図ファイルがあります</string>
+    <string name="downloadmap_no_updates_found">地図ファイルは最新です</string>
+    <string name="downloadmap_directory">フォルダ</string>
+    <string name="downloadmap_mapfile">地図ファイル</string>
+    <string name="downloadmap_retrieving_directory_data">フォルダ情報を取得中…</string>
+    <string name="downloadmap_checking_for_updates">更新を確認中…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
     <string name="map_trailhistory_cleared">軌跡を削除しました</string>
@@ -1786,18 +1812,29 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="previous">戻る</string>
     <string name="skip">スキップ</string>
     <string name="next">次へ</string>
+    <string name="done">完了</string>
     <string name="finish">終了</string>
     <string name="wizard_welcome_title">c:geoへようこそ</string>
+    <string name="wizard_intro">c:geoを使うにはいくつか設定する必要があります。お手伝いしましょうか?</string>
+    <string name="wizard_intro2">設定ウィザードへようこそ。c:geoの設定はまだ完了していません。お手伝いしましょうか? ほんの数ステップです</string>
     <string name="wizard_outro_ok">c:geoを設定していただきありがとうございます。\nお楽しみください!</string>
     <string name="wizard_outro_error">設定が完了していません\nこのままでは、すべての機能が期待どおり動作するわけではありません!</string>
     <string name="wizard_permissions_title">アプリの権限の設定</string>
+    <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です\n次のステップで説明します</string>
+    <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
+    <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です\nお持ちのアカウントでログインするかアカウント作成してください</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencachingや他のサイト</string>
     <string name="wizard_welcome_advanced">追加設定</string>
     <string name="wizard_advanced_offlinemaps_label">オフライン地図のダウンロード</string>
+    <string name="wizard_advanced_offlinemaps_info">ここでは追加の設定ができます\n\nオフラインで使うために地図ファイルをダウンロードできます</string>
     <string name="wizard_advanced_brouter_label">ルーティングアプリ</string>
+    <string name="wizard_advanced_brouter_info">BRouter Offline Navigationをインストールしてセットアップすると(オフラインでも)目的地へナビゲーションしたり地図にルートを表示することができます</string>
     <string name="wizard_advanced_restore_label">復元</string>
+    <string name="wizard_advanced_restore_info">バックアップからc:geo設定やキャッシュ情報を復元できます</string>
     <string name="status_not_ok">未完了</string>
     <string name="wizard_status_title">設定情報</string>
     <string name="wizard_status_storage_permission">ストレージの権限</string>
     <string name="wizard_status_location_permission">位置情報の権限</string>
+    <string name="wizard_status_platform">ジオキャッシングサイト</string>
 </resources>

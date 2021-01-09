@@ -45,6 +45,7 @@
     <string name="wp_trailhead">התחלת המסלול</string>
     <string name="wp_waypoint">נקודת ייחוס</string>
     <string name="wp_original">נקודות ציון מקוריות</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">מצאתי</string>
     <string name="log_dnf">לא מצאתי</string>

@@ -53,6 +53,13 @@
     <string name="wp_trailhead">Ausgangspunkt</string>
     <string name="wp_waypoint">Referenzpunkt</string>
     <string name="wp_original">Ursprüngliche Koordinaten</string>
+    <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Finale</string>
+    <string name="wpnew_stage">Stage</string>
+    <string name="wpnew_pkg">Parken</string>
+    <string name="wpnew_trailhead">Via</string>
+    <string name="wpnew_waypoint">Marker</string>
+    <string name="wpnew_original">Original</string>
     <!-- logs -->
     <string name="log_found">Gefunden</string>
     <string name="log_dnf">Nicht gefunden</string>
@@ -376,6 +383,9 @@
     <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
     <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
+    <string name="caches_set_cache_icon">Cache-Symbole wählen</string>
+    <string name="caches_reset_cache_icons_title">Cache-Symbole zurücksetzen</string>
+    <string name="caches_reset_cache_icons">Möchtest du die Cache-Symbole für alle ausgewählten Caches zurücksetzen?</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
     <string name="caches_listmarker_none">Keine Markierung</string>
@@ -669,10 +679,10 @@
     <string name="init_routecolor_summary">Farbe und Deckkraft der individuellen Route einstellen. Eine individuelle Route besteht aus mehreren Wegpunkten und/oder Caches, die Du in der Karte durch einen langen Druck auf den Wegpunkt/Cache ausgewählt hast. (\"Langer Druck\" muss zuvor in den Karteneinstellungen aktiviert worden sein.)</string>
     <string name="init_routewidth">Breite der individuellen Route</string>
     <string name="init_routewidth_summary">Breite für individuelle Routenlinie auswählen</string>
-    <string name="init_trackcolor">Farbe des individuellen Tracks</string>
-    <string name="init_trackcolor_summary">Farbe und Deckkraft für individuelle Tracks einstellen. Ein individueller Track besteht aus mehreren Wegpunkten und kann über eine GPX Trackdatei geladen werden.</string>
-    <string name="init_trackwidth">Breite des individuellen Tracks</string>
-    <string name="init_trackwidth_summary">Breite der individuellen Tracklinie einstellen</string>
+    <string name="init_trackcolor">Linienfarbe für GPX-Track/Route</string>
+    <string name="init_trackcolor_summary">Farbe und Deckkraft für Tracks/Routen einstellen. Ein(e) Track/Route besteht aus mehreren Wegpunkten und kann über eine GPX-Track-/Routen-Datei geladen werden.</string>
+    <string name="init_trackwidth">Linienbreite für GPX-Track/Route</string>
+    <string name="init_trackwidth_summary">Linienbreite für GPX-Track/Route auswählen</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
     <string name="init_circlecolor_summary">Farbe und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
     <string name="init_circlefillcolor">Füllfarbe der Kreislinie</string>
@@ -956,6 +966,8 @@
     <string name="menu_caches">Caches verwalten</string>
     <string name="cache_menu_event">Zum Kalender hinzufügen</string>
     <string name="cache_menu_extract_waypoints">Extrahiere Wegpunkte</string>
+    <string name="cache_menu_set_cache_icon">Cache-Symbol wählen</string>
+    <string name="cache_icon_updated">Cache-Symbol aktualisiert</string>
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Aktualisieren</string>
     <string name="cache_menu_share">Cache teilen</string>
@@ -997,6 +1009,8 @@
     <string name="cache_name">Name</string>
     <string name="cache_name_set">Cachename festlegen</string>
     <string name="cache_name_updated">Cachename aktualisiert</string>
+    <string name="cache_description_set">Cachebeschreibung bearbeiten</string>
+    <string name="cache_description_updated">Cachebeschreibung aktualisiert</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Größe</string>
     <string name="cache_distance">Entfernung</string>
@@ -1660,6 +1674,11 @@
     <plurals name="fav_points_remaining">
         <item quantity="one">Füge den Cache zu Favoriten hinzu (%d verfügbar)</item>
         <item quantity="other">Füge den Cache zu Favoriten hinzu (%d verfügbar)</item>
+    </plurals>
+    <string name="command_set_cache_icons_progress">Speichere Cache-Symbole</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">%d Cache-Symbol gespeichert</item>
+        <item quantity="other">%d Cache-Symbole gespeichert</item>
     </plurals>
     <string name="pq_download_and_import">Pocket-Query importieren</string>
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>

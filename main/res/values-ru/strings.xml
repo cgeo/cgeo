@@ -53,6 +53,7 @@
     <string name="wp_trailhead">Начало тропы</string>
     <string name="wp_waypoint">Контрольная точка</string>
     <string name="wp_original">Оригинальные координаты</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Найден</string>
     <string name="log_dnf">Не найден</string>
@@ -616,10 +617,6 @@
     <string name="init_routecolor_summary">Выбор цвета и степень прозрачности для личных линий маршрута. Личный маршрут - это набор путевых точек и/или тайников, выбранных длительным нажатием на путевой точке/тайником. (Функция долгого нажатия сначала должна быть включена, см. настройки карты.)</string>
     <string name="init_routewidth">Ширина личной линии маршрута</string>
     <string name="init_routewidth_summary">Выберите ширину личной линии маршрута</string>
-    <string name="init_trackcolor">Цвет личной линии трека</string>
-    <string name="init_trackcolor_summary">Выберите цвет и степень прозрачность линии трека. Трек состоит из нескольких путевых точек и может быть загружен через файл GPX.</string>
-    <string name="init_trackwidth">Ширина линии личного трека</string>
-    <string name="init_trackwidth_summary">Выберите ширину личной линии трека</string>
     <string name="init_circlecolor">Цвет линии круга</string>
     <string name="init_circlecolor_summary">Выберите цвет и степень прозрачности для линии круга. Круги используются в качестве визуального представления минимального радиуса вокруг тайника или физической точки пути, где не разрешается ни кэшировать, ни физическая путевая точка. (Применяется к geocaching.com)</string>
     <string name="init_circlefillcolor">Цвет заливки круга</string>

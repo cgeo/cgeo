@@ -43,6 +43,7 @@
     <string name="wp_trailhead">Început de traseu</string>
     <string name="wp_waypoint">Punct de referinţă</string>
     <string name="wp_original">Coordonatele originale</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Am gasit-o</string>
     <string name="log_dnf">Nu am găsit-o</string>

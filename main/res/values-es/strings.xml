@@ -52,6 +52,7 @@
     <string name="wp_trailhead">Sendero</string>
     <string name="wp_waypoint">Punto de referencia</string>
     <string name="wp_original">Coordenadas originales</string>
+    <!-- waypoints short names for new waypoints -->
     <!-- logs -->
     <string name="log_found">Encontrado</string>
     <string name="log_dnf">No encontrado</string>
@@ -605,9 +606,6 @@
     <string name="init_directionwidth_summary">Seleccionar ancho para la línea de dirección</string>
     <string name="init_routecolor">Color de línea de ruta individual</string>
     <string name="init_routecolor_summary">Seleccione el color y la opacidad para una línea de ruta individual. Una ruta individual es una colección de waypoints y/o cachés que seleccionó al mantener pulsado el waypoint /caché. (Primero debe activar la función de pulsación larga, vea la configuración del mapa.)</string>
-    <string name="init_trackcolor">Color de ruta individual</string>
-    <string name="init_trackcolor_summary">Seleccione el color y la opacidad de la línea de la pista. Una pista consiste en varios waypoints y puede ser cargada mediante un fichero GPX de pista.</string>
-    <string name="init_trackwidth">Ancho de línea de la ruta individual</string>
     <string name="init_circlecolor">Color de línea de círculo</string>
     <string name="init_circlecolor_summary">Seleccione el color y la opacidad de la línea circular. Los circuitos se utilizan como una representación visual para el radio mínimo alrededor de un cache o waypoint físico, en cuyo interior no se permite ningún otro caché o waypoint físico. (Aplica a geocaching.com)</string>
     <string name="init_circlefillcolor">Color de relleno de círculo</string>
