@@ -27,7 +27,7 @@
         android:id="@+id/menu_wizard"
         android:icon="@drawable/ic_menu_preferences"
         android:title="@string/wizard"
-        app:showAsAction="ifRoom">
+        app:showAsAction="never">
     </item>
     <item
         android:id="@+id/menu_settings"
