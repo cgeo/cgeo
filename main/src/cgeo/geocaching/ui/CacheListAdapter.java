@@ -303,7 +303,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     public void forceSort() {
-        if (CollectionUtils.isEmpty(list) || selectMode) {
+        if (CollectionUtils.isEmpty(list)) {
             return;
         }
 
@@ -331,9 +331,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     private void updateSortByDistance() {
         if (CollectionUtils.isEmpty(list)) {
-            return;
-        }
-        if (selectMode) {
             return;
         }
         if ((System.currentTimeMillis() - lastSort) <= PAUSE_BETWEEN_LIST_SORT) {
