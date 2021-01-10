@@ -1,0 +1,28 @@
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: "/"
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gradle
+    directory: "/cgeo-contacts"
+    schedule:
+      interval: daily
+  ignore:
+    # Ignore some updates to the apache 'commons-io' package
+    # commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
+    - dependency-name: "commons-io"
+
+  - package-ecosystem: gradle
+    directory: "/main"
+    schedule:
+      interval: daily
+      # Ignore some updates to the apache 'commons-io' package
+      # commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
+      - dependency-name: "commons-io"
+
+  - package-ecosystem: gradle
+    directory: "/mapswithme-api"
+    schedule:
+      interval: daily
