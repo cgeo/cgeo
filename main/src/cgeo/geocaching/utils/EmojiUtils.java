@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -26,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -37,6 +39,20 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class EmojiUtils {
 
+    // internal consts for calculated circles
+    private static final int COLOR_VALUES = 3;  // supported # of different values per RGB
+    private static final int COLOR_SPREAD = 127;
+    private static final int COLOR_OFFSET = 0;
+    private static final int OPACITY_VALUES = 5;
+    private static final int OPACITY_SPREAD = 51;
+    private static final int CUSTOM_SET_SIZE_PER_OPACITY = COLOR_VALUES * COLOR_VALUES * COLOR_VALUES;
+    private static final int CUSTOM_SET_SIZE = CUSTOM_SET_SIZE_PER_OPACITY * OPACITY_VALUES;
+
+    // Unicode custom glyph area needed/supported by this class
+    private static final int CUSTOM_ICONS_START = 0xe000;
+    private static final int CUSTOM_ICONS_END = CUSTOM_ICONS_START + CUSTOM_SET_SIZE - 1; // max. possible value by Unicode definition: 0xf8ff;
+    private static final int CUSTOM_ICONS_START_CIRCLES = CUSTOM_ICONS_START;
+
     // list of emojis supported by the EmojiPopup
     // should ideally be supported by the Android API level we have set as minimum (currently API 21 = Android 5),
     // but starting with API 23 (Android 6) the app automatically filters out characters not supported by their fonts
@@ -47,7 +63,6 @@ public class EmojiUtils {
         // category symbols
         new EmojiSet(0x2764, new int[]{
             /* hearts */        0x2764, 0x1f9e1, 0x1f49b, 0x1f49a, 0x1f499, 0x1f49c, 0x1f90e, 0x1f5a4, 0x1f90d,
-            /* geometric */     0x1f534, 0x1f7e0, 0x1f7e1, 0x1f7e2, 0x1f535, 0x1f7e3, 0x1f7e4, 0x26ab, 0x26aa,
             /* geometric */     0x1f7e5, 0x1f7e7, 0x1f7e8, 0x1f7e9, 0x1f7e6, 0x1f7ea, 0x1f7eb, 0x2b1b, 0x2b1c,
             /* geometric */     0x1f536, 0x1f537,
             /* events */        0x1f383, 0x1f380,
@@ -57,6 +72,8 @@ public class EmojiUtils {
             /* other-symbol */  0x2b55, 0x2705, 0x2611, 0x2714, 0x2716, 0x2795, 0x2796, 0x274c, 0x274e, 0x2733, 0x2734, 0x2747, 0x203c, 0x2049, 0x2753, 0x2757,
             /* flags */         0x1f3c1, 0x1f6a9, 0x1f3f4, 0x1f3f3
         }),
+        // category custom symbols - will be filled dynamically below; has to be at position CUSTOM_GLYPHS_ID within EmojiSet[]
+        new EmojiSet(CUSTOM_ICONS_START_CIRCLES + 18 + CUSTOM_SET_SIZE_PER_OPACITY, new int[CUSTOM_SET_SIZE_PER_OPACITY]),    // "18" to pick red circle instead of black
         // category places
         new EmojiSet(0x1f30d, new int[]{
             /* globe */         0x1f30d, 0x1f30e, 0x1f30f,
@@ -88,8 +105,9 @@ public class EmojiUtils {
             /* smileys */       0x1f600, 0x1f60d, 0x1f641, 0x1f621, 0x1f47b,
             /* people */        0x1f466, 0x1f467, 0x1f468, 0x1f469, 0x1f474, 0x1f475
         }),
-
     };
+    private static final int CUSTOM_GLYPHS_ID = 1;
+
     private static boolean fontIsChecked = false;
     private static final Boolean lockGuard = false;
     private static final SparseArray<CacheMarker> emojiCache = new SparseArray<>();
@@ -112,10 +130,14 @@ public class EmojiUtils {
 
     public static void selectEmojiPopup(final Activity activity, final int currentValue, @DrawableRes final int defaultRes, final Action1<Integer> setNewCacheIcon) {
 
-        // calc sizes
-        final Pair<Integer, Integer> markerDimensions = DisplayUtils.getDrawableDimensions(activity.getResources(), R.drawable.ic_menu_filter);
-        final int markerAvailable = (int) (markerDimensions.second * 0.6);
-        final int markerFontsize = DisplayUtils.calculateMaxFontsize(35, 10, 150, markerAvailable);
+        // calc sizes for markers
+        final Pair<Integer, Integer> markerDimensionsTemp = DisplayUtils.getDrawableDimensions(activity.getResources(), R.drawable.ic_menu_filter);
+        final int markerAvailable = (int) (markerDimensionsTemp.second * 0.6);
+        final Pair<Integer, Integer> markerDimensions = new Pair(markerAvailable, markerAvailable);
+        final EmojiPaint paint = new EmojiPaint(activity.getResources(), markerDimensions, markerAvailable, DisplayUtils.calculateMaxFontsize(35, 10, 150, markerAvailable));
+
+        // fill dynamic EmojiSet
+        prefillCustomCircles(0);
 
         // check EmojiSet for characters not supported on this device
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -129,7 +151,7 @@ public class EmojiUtils {
                             if (i != iPosNeu) {
                                 symbol.symbols[iPosNeu] = symbol.symbols[i];
                             }
-                            if (checker.hasGlyph(new String(Character.toChars(symbol.symbols[i])))) {
+                            if ((symbol.symbols[i] >= CUSTOM_ICONS_START && symbol.symbols[i] <= CUSTOM_ICONS_END) || checker.hasGlyph(new String(Character.toChars(symbol.symbols[i])))) {
                                 iPosNeu++;
                             }
                         }
@@ -151,8 +173,22 @@ public class EmojiUtils {
         final int maxCols = DisplayUtils.calculateNoOfColumns(activity, 60);
         final RecyclerView emojiGridView = dialogView.findViewById(R.id.emoji_grid);
         emojiGridView.setLayoutManager(new GridLayoutManager(activity, maxCols));
-        final EmojiViewAdapter gridAdapter = new EmojiViewAdapter(activity, symbols[0].symbols, symbols[0].remaining, currentValue, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
+        final EmojiViewAdapter gridAdapter = new EmojiViewAdapter(activity, paint, symbols[0].symbols, symbols[0].remaining, currentValue, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
         emojiGridView.setAdapter(gridAdapter);
+
+        final RecyclerView emojiOpacityView = dialogView.findViewById(R.id.emoji_opacity);
+        emojiOpacityView.setLayoutManager(new GridLayoutManager(activity, OPACITY_VALUES));
+        final int[] emojiOpacities = new int[OPACITY_VALUES];
+        emojiOpacities[0] = CUSTOM_ICONS_START_CIRCLES + 18;
+        for (int i = 1; i < OPACITY_VALUES; i++) {
+            emojiOpacities[i] = emojiOpacities[i - 1] + CUSTOM_SET_SIZE_PER_OPACITY;
+        }
+        final EmojiViewAdapter opacityAdapter = new EmojiViewAdapter(activity, paint, emojiOpacities, emojiOpacities.length, emojiOpacities[0], true, newgroup -> {
+            final int newOpacity = (newgroup - CUSTOM_ICONS_START_CIRCLES) / CUSTOM_SET_SIZE_PER_OPACITY;
+            prefillCustomCircles(newOpacity);
+            gridAdapter.notifyDataSetChanged();
+        });
+        emojiOpacityView.setAdapter(opacityAdapter);
 
         final RecyclerView emojiGroupView = dialogView.findViewById(R.id.emoji_groups);
         emojiGroupView.setLayoutManager(new GridLayoutManager(activity, symbols.length));
@@ -160,11 +196,14 @@ public class EmojiUtils {
         for (int i = 0; i < symbols.length; i++) {
             emojiGroups[i] = symbols[i].tabSymbol;
         }
-        final EmojiViewAdapter groupsAdapter = new EmojiViewAdapter(activity, emojiGroups, emojiGroups.length, symbols[0].tabSymbol, true, newgroup -> {
-            for (EmojiSet symbol : symbols) {
-                if (symbol.tabSymbol == newgroup) {
-                    gridAdapter.setData(symbol.symbols, symbol.remaining);
+        final EmojiViewAdapter groupsAdapter = new EmojiViewAdapter(activity, paint, emojiGroups, emojiGroups.length, symbols[0].tabSymbol, true, newgroup -> {
+            int newGroupId = 0;
+            for (int i = 0; i < symbols.length; i++) {
+                if (symbols[i].tabSymbol == newgroup) {
+                    gridAdapter.setData(symbols[i].symbols, symbols[i].remaining);
+                    newGroupId = i;
                 }
+                emojiOpacityView.setVisibility(newGroupId == CUSTOM_GLYPHS_ID ? View.VISIBLE : View.GONE);
             }
         });
         emojiGroupView.setAdapter(groupsAdapter);
@@ -172,7 +211,7 @@ public class EmojiUtils {
         final RecyclerView emojiLruView = dialogView.findViewById(R.id.emoji_lru);
         emojiLruView.setLayoutManager(new GridLayoutManager(activity, maxCols));
         final int[] lru = EmojiLRU.getLRU();
-        final EmojiViewAdapter lruAdapter = new EmojiViewAdapter(activity, lru, lru.length, 0, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
+        final EmojiViewAdapter lruAdapter = new EmojiViewAdapter(activity, paint, lru, lru.length, 0, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
         emojiLruView.setAdapter(lruAdapter);
 
         ((TextView) customTitle.findViewById(R.id.dialog_title_title)).setText(R.string.cache_menu_set_cache_icon);
@@ -183,7 +222,7 @@ public class EmojiUtils {
         if (currentValue == -1) {
             button2.setImageResource(R.drawable.ic_menu_mark);
         } else if (currentValue != 0) {
-            button2.setImageDrawable(getEmojiDrawable(activity.getResources(), markerDimensions, markerAvailable, markerFontsize, currentValue));
+            button2.setImageDrawable(getEmojiDrawable(paint, currentValue));
         } else if (defaultRes != 0) {
             button2.setImageResource(defaultRes);
         }
@@ -213,17 +252,25 @@ public class EmojiUtils {
         callback.call(selectedValue);
     }
 
+    private static void prefillCustomCircles(final int opacity) {
+        for (int i = 0; i < CUSTOM_SET_SIZE_PER_OPACITY; i++) {
+            symbols[CUSTOM_GLYPHS_ID].symbols[i] = CUSTOM_ICONS_START_CIRCLES + i + opacity * CUSTOM_SET_SIZE_PER_OPACITY;
+        }
+    }
+
     private static class EmojiViewAdapter extends RecyclerView.Adapter<EmojiViewAdapter.ViewHolder> {
 
         private int[] data;
         private int remaining;
         private final LayoutInflater inflater;
         private final Action1<Integer> callback;
+        private final EmojiPaint paint;
         private int currentValue = 0;
         private final boolean highlightCurrent;
 
-        EmojiViewAdapter(final Context context, final int[] data, final int remaining, final int currentValue, final boolean hightlightCurrent, final Action1<Integer> callback) {
+        EmojiViewAdapter(final Context context, final EmojiPaint paint, final int[] data, final int remaining, final int currentValue, final boolean hightlightCurrent, final Action1<Integer> callback) {
             this.inflater = LayoutInflater.from(context);
+            this.paint = paint;
             this.setData(data, remaining);
             this.currentValue = currentValue;
             this.highlightCurrent = hightlightCurrent;
@@ -245,7 +292,15 @@ public class EmojiUtils {
 
         @Override
         public void onBindViewHolder(@NonNull final EmojiViewAdapter.ViewHolder holder, final int position) {
-            holder.tv.setText(new String(Character.toChars(data[position])));
+            if (data[position] >= CUSTOM_ICONS_START && data[position] <= CUSTOM_ICONS_END) {
+                holder.iv.setImageDrawable(EmojiUtils.getEmojiDrawable(paint, data[position]));
+                holder.iv.setVisibility(View.VISIBLE);
+                holder.tv.setVisibility(View.GONE);
+            } else {
+                holder.tv.setText(new String(Character.toChars(data[position])));
+                holder.iv.setVisibility(View.GONE);
+                holder.tv.setVisibility(View.VISIBLE);
+            }
             if (highlightCurrent) {
                 holder.sep.setVisibility(currentValue == data[position] ? View.VISIBLE : View.INVISIBLE);
             }
@@ -265,11 +320,13 @@ public class EmojiUtils {
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             protected TextView tv;
+            protected ImageView iv;
             protected View sep;
 
             ViewHolder(final View itemView) {
                 super(itemView);
                 tv = itemView.findViewById(R.id.info_text);
+                iv = itemView.findViewById(R.id.info_drawable);
                 sep = itemView.findViewById(R.id.separator);
             }
         }
@@ -278,55 +335,86 @@ public class EmojiUtils {
 
     /**
      * builds a drawable the size of a marker with a given text
-     * @param res - the resources to use
-     * @param bitmapDimensions - actual size (width/height) of the bitmap to place the text in
-     * @param availableSize - available size
-     * @param fontsize - fontsize to use
+     * @param paint - paint data structure for Emojis
      * @param emoji codepoint of the emoji to display
      * @return drawable bitmap with text on it
      */
     @NonNull
-    private static BitmapDrawable getEmojiDrawableHelper(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int fontsize, final int emoji) {
-        final String text = new String(Character.toChars(emoji));
-        final TextPaint tPaint = new TextPaint();
-        tPaint.setTextSize(fontsize);
-        final Bitmap bm = Bitmap.createBitmap(bitmapDimensions.first, bitmapDimensions.second, Bitmap.Config.ARGB_8888);
+    private static BitmapDrawable getEmojiDrawableHelper(final EmojiPaint paint, final int emoji) {
+        final Bitmap bm = Bitmap.createBitmap(paint.bitmapDimensions.first, paint.bitmapDimensions.second, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bm);
-        final StaticLayout lsLayout = new StaticLayout(text, tPaint, availableSize, Layout.Alignment.ALIGN_CENTER, 1, 0, false);
-        final int deltaTopLeft = (int) (0.4 * (bitmapDimensions.first - availableSize));
-        canvas.translate(deltaTopLeft, deltaTopLeft + (int) ((availableSize - lsLayout.getHeight()) / 2));
-        lsLayout.draw(canvas);
-        canvas.save();
-        canvas.restore();
-        return new BitmapDrawable(res, bm);
+        final int deltaTopLeft = (int) (0.4 * (paint.bitmapDimensions.first - paint.availableSize));
+        if (emoji >= CUSTOM_ICONS_START && emoji <= CUSTOM_ICONS_END) {
+            final int radius = paint.availableSize / 2;
+            final Paint cPaint = new Paint();
+
+            // calculate circle details
+            final int v = emoji - CUSTOM_ICONS_START_CIRCLES;
+            final int aIndex = v / (COLOR_VALUES * COLOR_VALUES * COLOR_VALUES);
+            final int rIndex = (v / (COLOR_VALUES * COLOR_VALUES)) % COLOR_VALUES;
+            final int gIndex = (v / COLOR_VALUES) % COLOR_VALUES;
+            final int bIndex = v % COLOR_VALUES;
+
+            final int color = Color.argb(
+                255 - (aIndex * OPACITY_SPREAD),
+                COLOR_OFFSET + rIndex * COLOR_SPREAD,
+                COLOR_OFFSET + gIndex * COLOR_SPREAD,
+                COLOR_OFFSET + bIndex * COLOR_SPREAD);
+            cPaint.setColor(color);
+            cPaint.setStyle(Paint.Style.FILL);
+            canvas.drawCircle(deltaTopLeft + radius, deltaTopLeft + radius, radius, cPaint);
+        } else {
+            final String text = new String(Character.toChars(emoji));
+            final TextPaint tPaint = new TextPaint();
+            tPaint.setTextSize(paint.fontsize);
+            final StaticLayout lsLayout = new StaticLayout(text, tPaint, paint.availableSize, Layout.Alignment.ALIGN_CENTER, 1, 0, false);
+            canvas.translate(deltaTopLeft, deltaTopLeft + (int) ((paint.availableSize - lsLayout.getHeight()) / 2));
+            lsLayout.draw(canvas);
+            canvas.save();
+            canvas.restore();
+        }
+        return new BitmapDrawable(paint.res, bm);
     }
 
     /**
      * get a drawable the size of a marker with a given text (either from cache or freshly built)
-     * @param res - the resources to use
-     * @param bitmapDimensions - actual size (width/height) of the bitmap to place the text in
-     * @param availableSize - available size
-     * @param fontsize - fontsize to use
+     * @param paint - paint data structure for Emojis
      * @param emoji codepoint of the emoji to display
      * @return drawable bitmap with text on it
      */
     @NonNull
-    public static BitmapDrawable getEmojiDrawable(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int fontsize, final int emoji) {
+    public static BitmapDrawable getEmojiDrawable(final EmojiPaint paint, final int emoji) {
         final int hashcode = new HashCodeBuilder()
-            .append(bitmapDimensions.first)
-            .append(availableSize)
-            .append(fontsize)
+            .append(paint.bitmapDimensions.first)
+            .append(paint.availableSize)
+            .append(paint.fontsize)
             .append(emoji)
             .toHashCode();
 
         synchronized (emojiCache) {
             CacheMarker marker = emojiCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, getEmojiDrawableHelper(res, bitmapDimensions, availableSize, fontsize, emoji));
+                marker = new CacheMarker(hashcode, getEmojiDrawableHelper(paint, emoji));
                 emojiCache.put(hashcode, marker);
             }
             return (BitmapDrawable) marker.getDrawable();
         }
     }
 
+    /**
+     * configuration for getEmojiDrawable
+     */
+    public static class EmojiPaint {
+        public final Resources res;
+        public final Pair<Integer, Integer> bitmapDimensions;
+        public final int availableSize;
+        public final int fontsize;
+
+        EmojiPaint(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int fontsize) {
+            this.res = res;
+            this.bitmapDimensions = bitmapDimensions;
+            this.availableSize = availableSize;
+            this.fontsize = fontsize;
+        }
+    }
 }

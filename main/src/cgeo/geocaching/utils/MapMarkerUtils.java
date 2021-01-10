@@ -42,9 +42,7 @@ public final class MapMarkerUtils {
     private static Boolean listsRead = false;
 
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
-    private static Pair<Integer, Integer> markerDimensions = null;
-    private static int markerAvailable = 0;
-    private static int markerFontsize = 0;
+    private static EmojiUtils.EmojiPaint cPaint = null;
 
     private MapMarkerUtils() {
         // Do not instantiate
@@ -239,12 +237,12 @@ public final class MapMarkerUtils {
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
         final boolean doubleSize = showBigSmileys(cacheListType) && mainMarkerId != cache.getType().markerId;
         if (useEmoji > 0 && !doubleSize) {
-            if (markerDimensions == null) {
-                markerDimensions = DisplayUtils.getDrawableDimensions(res, R.drawable.marker_oc);
-                markerAvailable = (int) (markerDimensions.first * 0.6);
-                markerFontsize = DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable);
+            if (cPaint == null) {
+                final Pair<Integer, Integer> markerDimensions = DisplayUtils.getDrawableDimensions(res, R.drawable.marker_oc);
+                final int markerAvailable = (int) (markerDimensions.first * 0.6);
+                cPaint = new EmojiUtils.EmojiPaint(res, markerDimensions, markerAvailable, DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
             }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(res, markerDimensions, markerAvailable, markerFontsize, useEmoji)));
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji)));
         } else {
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, doubleSize));
         }
