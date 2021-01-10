@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.storage.extension.EmojiLRU;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -20,6 +21,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.Pair;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class EmojiUtils {
 
@@ -88,6 +92,7 @@ public class EmojiUtils {
     };
     private static boolean fontIsChecked = false;
     private static final Boolean lockGuard = false;
+    private static final SparseArray<CacheMarker> emojiCache = new SparseArray<>();
 
     private static class EmojiSet {
         public int tabSymbol;
@@ -280,7 +285,8 @@ public class EmojiUtils {
      * @param emoji codepoint of the emoji to display
      * @return drawable bitmap with text on it
      */
-    public static BitmapDrawable getEmojiDrawable(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int fontsize, final int emoji) {
+    @NonNull
+    private static BitmapDrawable getEmojiDrawableHelper(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int fontsize, final int emoji) {
         final String text = new String(Character.toChars(emoji));
         final TextPaint tPaint = new TextPaint();
         tPaint.setTextSize(fontsize);
@@ -294,4 +300,33 @@ public class EmojiUtils {
         canvas.restore();
         return new BitmapDrawable(res, bm);
     }
+
+    /**
+     * get a drawable the size of a marker with a given text (either from cache or freshly built)
+     * @param res - the resources to use
+     * @param bitmapDimensions - actual size (width/height) of the bitmap to place the text in
+     * @param availableSize - available size
+     * @param fontsize - fontsize to use
+     * @param emoji codepoint of the emoji to display
+     * @return drawable bitmap with text on it
+     */
+    @NonNull
+    public static BitmapDrawable getEmojiDrawable(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int fontsize, final int emoji) {
+        final int hashcode = new HashCodeBuilder()
+            .append(bitmapDimensions.first)
+            .append(availableSize)
+            .append(fontsize)
+            .append(emoji)
+            .toHashCode();
+
+        synchronized (emojiCache) {
+            CacheMarker marker = emojiCache.get(hashcode);
+            if (marker == null) {
+                marker = new CacheMarker(hashcode, getEmojiDrawableHelper(res, bitmapDimensions, availableSize, fontsize, emoji));
+                emojiCache.put(hashcode, marker);
+            }
+            return (BitmapDrawable) marker.getDrawable();
+        }
+    }
+
 }
