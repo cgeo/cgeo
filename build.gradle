@@ -15,7 +15,7 @@ buildscript {
 
         // monitor our application method limit
         //noinspection GradleDependency - see https://github.com/cgeo/cgeo/issues/9208
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:1.0.3'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:2.0.0'
 
         // ribbonizer for easier distinction of non-release builds
         classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
