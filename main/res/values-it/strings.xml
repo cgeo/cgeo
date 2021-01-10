@@ -54,6 +54,12 @@
     <string name="wp_waypoint">Punto di riferimento</string>
     <string name="wp_original">Coordinate originali</string>
     <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Finale</string>
+    <string name="wpnew_stage">Fase</string>
+    <string name="wpnew_pkg">Parcheggio</string>
+    <string name="wpnew_trailhead">Via</string>
+    <string name="wpnew_waypoint">Marcatore</string>
+    <string name="wpnew_original">Originale</string>
     <!-- logs -->
     <string name="log_found">Trovato</string>
     <string name="log_dnf">Non trovato (DNF)</string>
@@ -377,10 +383,15 @@
     <string name="caches_clear_offlinelogs">Cancella i log offline</string>
     <string name="caches_clear_offlinelogs_message">Vuoi cancellare tutti i log offline?</string>
     <string name="caches_clear_offlinelogs_progress">Cancellazione logs offline</string>
+    <string name="caches_set_cache_icon">Imposta icone cache</string>
+    <string name="caches_reset_cache_icons_title">Reimposta icone cache</string>
+    <string name="caches_reset_cache_icons">Vuoi reimpostare le icone per tutti i cache selezionati?</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
     <string name="caches_set_listmarker">Imposta marcatore di lista</string>
     <string name="caches_listmarker_none">Nessun marcatore</string>
     <string name="caches_listmarker_selected">(selezionato)</string>
+    <string name="onetime_missing_unicode_title">Seleziona emoji</string>
+    <string name="onetime_missing_unicode_info">La tua versione Android non supporta il rilevamento automatico delle icone supportate - alcuni simboli potrebbero mancare</string>
     <!-- caches lists -->
     <string name="menu_lists">Gestisci liste</string>
     <string name="list_menu_create">Crea nuova lista</string>
@@ -670,6 +681,10 @@
     <string name="init_routecolor_summary">Seleziona colore e opacità della linea di percorso individuale. Un percorso individuale è un insieme di waypoint e/o cache selezionati premendo a lungo sul waypoint/cache. (È necessario abilitare prima la funzione di pressione prolungata, vedere le impostazioni della mappa.)</string>
     <string name="init_routewidth">Spessore della linea di percorso individuale</string>
     <string name="init_routewidth_summary">Seleziona la larghezza della linea di percorso individuale</string>
+    <string name="init_trackcolor">Colore linea traccia/percorso GPX</string>
+    <string name="init_trackcolor_summary">Seleziona il colore e l\'opacità per la linea traccia/percorso. Una traccia/percorso è costituita da diversi waypoint e può essere caricato tramite un file traccia/percorso GPX.</string>
+    <string name="init_trackwidth">Spessore linea traccia/percorso GPX</string>
+    <string name="init_trackwidth_summary">Seleziona la larghezza per la linea di traccia/percorso GPX</string>
     <string name="init_circlecolor">Colore del cerchio</string>
     <string name="init_circlecolor_summary">Seleziona colore e opacità per la linea del cerchio. I cerchi sono usati come rappresentazione visiva del raggio minimo, attorno a un cache o waypoint fisico, in cui non è consentita nessun\'altro cache o waypoint fisico. (Si applica a geocaching.com)</string>
     <string name="init_circlefillcolor">Colore di riempimento del cerchio</string>
@@ -953,6 +968,8 @@
     <string name="menu_caches">Gestisci i cache</string>
     <string name="cache_menu_event">Aggiungi al calendario</string>
     <string name="cache_menu_extract_waypoints">Estrazione dei waypoint</string>
+    <string name="cache_menu_set_cache_icon">Imposta icona cache</string>
+    <string name="cache_icon_updated">Icona cache aggiornata</string>
     <string name="cache_menu_details">Dettagli</string>
     <string name="cache_menu_refresh">Aggiorna</string>
     <string name="cache_menu_share">Condividi cache</string>
@@ -994,6 +1011,8 @@
     <string name="cache_name">Nome</string>
     <string name="cache_name_set">Imposta cachename</string>
     <string name="cache_name_updated">Cachename aggiornato</string>
+    <string name="cache_description_set">Imposta descrizione cache</string>
+    <string name="cache_description_updated">Descrizione cache aggiornata</string>
     <string name="cache_type">Tipo</string>
     <string name="cache_size">Dimensione</string>
     <string name="cache_distance">Distanza</string>
@@ -1040,6 +1059,8 @@
     <string name="internal_goto_targets_description">Questo cache memorizza i tuoi recenti obiettivi \"Vai a\" e viene creato automaticamente una volta che usi la funzione \"Vai a\" nel menu principale. Le coordinate inserite saranno immagazzinate nei waypoint di questo cache. Se non hai più bisogno di queste coordinate puoi eliminare in sicurezza questo cache o uno dei sui waypoint. Puoi anche spostare il cache in qualsiasi altra lista di tua scelta.</string>
     <string name="init_longtap_map">Tocco lungo sulla mappa</string>
     <string name="init_summary_longtap_map">Attiva tocco prolungato sull\'icona mappa (crea un percorso individuale) o sullo spazio libero sulla mappa (crea un cache definito dall\'utente)</string>
+    <string name="onetime_info_longtap_disabled">Toccando a lungo sulla mappa è possibile creare percorsi individuali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente disabilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
+    <string name="onetime_info_longtap_enabled">Toccando a lungo sulla mappa è possibile creare percorsi individuali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente abilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
     <string name="goto_targets_list">Cache definiti dall\'utente</string>
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
@@ -1658,6 +1679,11 @@
         <item quantity="one">Aggiungi questo cache ai preferiti (%d restanti)</item>
         <item quantity="other">Aggiungi questo cache ai preferiti (%d restanti)</item>
     </plurals>
+    <string name="command_set_cache_icons_progress">Imposta icone cache</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">%d icona cache impostata</item>
+        <item quantity="other">%d icone cache impostate</item>
+    </plurals>
     <string name="pq_download_and_import">Importa una Pocket query</string>
     <string name="caches_refresh_all_warning">Questa azione può causare elevato traffico di rete. Sei sicuro di voler aggiornare tutti i cache?</string>
     <string name="list_list_headline">Liste:</string>
@@ -1823,7 +1849,7 @@
     <string name="skip">Salta</string>
     <string name="next">Successivo</string>
     <string name="done">Fatto</string>
-    <string name="finish">Termina</string>
+    <string name="finish">Fine</string>
     <string name="wizard_welcome_title">Benvenuto su c:geo</string>
     <string name="wizard_intro">Solo pochi passi sono necessari per configurare c:geo. Posso aiutarti a farlo?</string>
     <string name="wizard_intro2">Bentornato alla procedura guidata di configurazione. La tua configurazione c:geo non è ancora finita. Posso aiutarti a completarla? Sono solo pochi passi.</string>
