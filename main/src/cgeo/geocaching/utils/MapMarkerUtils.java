@@ -240,7 +240,7 @@ public final class MapMarkerUtils {
             if (cPaint == null) {
                 final Pair<Integer, Integer> markerDimensions = DisplayUtils.getDrawableDimensions(res, R.drawable.marker_oc);
                 final int markerAvailable = (int) (markerDimensions.first * 0.6);
-                cPaint = new EmojiUtils.EmojiPaint(res, markerDimensions, markerAvailable, DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
+                cPaint = new EmojiUtils.EmojiPaint(res, markerDimensions, markerAvailable, (int) (markerDimensions.second * 0.05), DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
             }
             insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji)));
         } else {
