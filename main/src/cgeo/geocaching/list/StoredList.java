@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -29,7 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public final class StoredList extends AbstractList {
     private static final int TEMPORARY_LIST_ID = 0;
-    public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", ListMarker.NO_MARKER.markerId, 0); // Never displayed
+    public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", EmojiUtils.NO_EMOJI, 0); // Never displayed
     public static final int STANDARD_LIST_ID = 1;
     public final int markerId;
     private final int count; // this value is only valid as long as the list is not changed by other database operations
@@ -211,7 +212,7 @@ public final class StoredList extends AbstractList {
                     return;
                 }
                 final int newId = DataStore.createList(listName);
-                new StoredList(newId, listName, ListMarker.NO_MARKER.markerId, 0);
+                new StoredList(newId, listName, EmojiUtils.NO_EMOJI, 0);
 
                 if (newId >= DataStore.customListIdOffset) {
                     runAfterwards.call(newId);
@@ -229,7 +230,7 @@ public final class StoredList extends AbstractList {
                     return;
                 }
                 final int newId = DataStore.createList(listName);
-                new StoredList(newId, listName, ListMarker.NO_MARKER.markerId, 0);
+                new StoredList(newId, listName, EmojiUtils.NO_EMOJI, 0);
 
                 if (newId >= DataStore.customListIdOffset) {
                     selectedLists.remove(PseudoList.NEW_LIST.id);

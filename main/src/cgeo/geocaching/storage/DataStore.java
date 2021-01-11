@@ -16,7 +16,6 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.AbstractList;
-import cgeo.geocaching.list.ListMarker;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
@@ -42,6 +41,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
@@ -200,7 +200,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 92;
+    private static final int dbVersion = 93;
     public static final int customListIdOffset = 10;
 
     /**
@@ -228,7 +228,8 @@ public class DataStore {
             89, // add altitude to trail history
             90, // add user guid to cg_caches and cg_logs
             91, // add fields to cg_extension
-            92  // add emoji id to cg_caches
+            92, // add emoji id to cg_caches
+            93  // add emoji id to cg_lists
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -304,7 +305,8 @@ public class DataStore {
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "title TEXT NOT NULL, "
             + "updated LONG NOT NULL,"
-            + "marker INTEGER NOT NULL"
+            + "marker INTEGER NOT NULL,"        // unused from v93 on
+            + "emoji INTEGER DEFAULT 0"
             + "); ";
     private static final String dbCreateCachesLists = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableCachesLists + " ("
@@ -1494,6 +1496,23 @@ public class DataStore {
                             createColumnIfNotExists(db, dbTableCaches, "emoji INTEGER DEFAULT 0");
                         } catch (final SQLException e) {
                             onUpgradeError(e, 92);
+                        }
+                    }
+
+                    // add emoji to cg_lists
+                    if (oldVersion < 93) {
+                        try {
+                            createColumnIfNotExists(db, dbTableLists, "emoji INTEGER DEFAULT 0");
+                            // migrate marker values
+                            db.execSQL("UPDATE " + dbTableLists + " SET emoji = " + 0xe01e + " WHERE marker=1");    // green
+                            db.execSQL("UPDATE " + dbTableLists + " SET emoji = " + 0xe030 + " WHERE marker=2");    // orange
+                            db.execSQL("UPDATE " + dbTableLists + " SET emoji = " + 0xe01d + " WHERE marker=3");    // blue
+                            db.execSQL("UPDATE " + dbTableLists + " SET emoji = " + 0xe024 + " WHERE marker=4");    // red
+                            db.execSQL("UPDATE " + dbTableLists + " SET emoji = " + 0xe020 + " WHERE marker=5");    // turquoise
+                            db.execSQL("UPDATE " + dbTableLists + " SET emoji = " + 0xe043 + " WHERE marker=6");    // black
+                            // do not remove old field "marker" to keep db structure backward-compatible
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 93);
                         }
                     }
 
@@ -3649,10 +3668,10 @@ public class DataStore {
 
         final Resources res = CgeoApplication.getInstance().getResources();
         final List<StoredList> lists = new ArrayList<>();
-        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), ListMarker.NO_MARKER.markerId, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
+        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
 
         try {
-            final String query = "SELECT l._id AS _id, l.title AS title, l.marker AS marker, COUNT(c.geocode) AS count" +
+            final String query = "SELECT l._id AS _id, l.title AS title, l.emoji AS emoji, COUNT(c.geocode) AS count" +
                     " FROM " + dbTableLists + " l LEFT OUTER JOIN " + dbTableCachesLists + " c" +
                     " ON l._id + " + customListIdOffset + " = c.list_id" +
                     " GROUP BY l._id" +
@@ -3669,11 +3688,11 @@ public class DataStore {
     private static List<StoredList> getListsFromCursor(final Cursor cursor) {
         final int indexId = cursor.getColumnIndex("_id");
         final int indexTitle = cursor.getColumnIndex("title");
-        final int indexMarker = cursor.getColumnIndex("marker");
+        final int indexEmoji = cursor.getColumnIndex("emoji");
         final int indexCount = cursor.getColumnIndex("count");
         return cursorToColl(cursor, new ArrayList<>(), cursor1 -> {
             final int count = indexCount != -1 ? cursor1.getInt(indexCount) : 0;
-            return new StoredList(cursor1.getInt(indexId) + customListIdOffset, cursor1.getString(indexTitle), cursor1.getInt(indexMarker), count);
+            return new StoredList(cursor1.getInt(indexId) + customListIdOffset, cursor1.getString(indexTitle), cursor1.getInt(indexEmoji), count);
         });
     }
 
@@ -3683,7 +3702,7 @@ public class DataStore {
         if (id >= customListIdOffset) {
             final Cursor cursor = database.query(
                     dbTableLists,
-                    new String[]{"_id", "title", "marker"},
+                    new String[]{"_id", "title", "emoji"},
                     "_id = ? ",
                     new String[] { String.valueOf(id - customListIdOffset) },
                     null,
@@ -3697,11 +3716,11 @@ public class DataStore {
 
         final Resources res = CgeoApplication.getInstance().getResources();
         if (id == PseudoList.ALL_LIST.id) {
-            return new StoredList(PseudoList.ALL_LIST.id, res.getString(R.string.list_all_lists), ListMarker.NO_MARKER.markerId, getAllCachesCount());
+            return new StoredList(PseudoList.ALL_LIST.id, res.getString(R.string.list_all_lists), EmojiUtils.NO_EMOJI, getAllCachesCount());
         }
 
         // fall back to standard list in case of invalid list id
-        return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), ListMarker.NO_MARKER.markerId, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
+        return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
     }
 
     public static int getAllCachesCount() {
@@ -3737,6 +3756,7 @@ public class DataStore {
             values.put("title", name);
             values.put("updated", System.currentTimeMillis());
             values.put("marker", 0);
+            values.put("emoji", 0);
 
             id = (int) database.insert(dbTableLists, null, values);
             database.setTransactionSuccessful();
@@ -3815,10 +3835,10 @@ public class DataStore {
 
     /**
      * @param listId   List to change
-     * @param markerId Id of new marker
+     * @param useEmoji Id of new emoji
      * @return Number of lists changed
      */
-    public static int setListMarker(final int listId, final int markerId) {
+    public static int setListEmoji(final int listId, final int useEmoji) {
         if (listId == StoredList.STANDARD_LIST_ID) {
             return 0;
         }
@@ -3829,7 +3849,7 @@ public class DataStore {
         int count = 0;
         try {
             final ContentValues values = new ContentValues();
-            values.put("marker", markerId);
+            values.put("emoji", useEmoji);
             values.put("updated", System.currentTimeMillis());
 
             count = database.update(dbTableLists, values, "_id = " + (listId - customListIdOffset), null);

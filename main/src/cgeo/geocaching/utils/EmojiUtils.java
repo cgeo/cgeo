@@ -39,6 +39,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class EmojiUtils {
 
+    public static final int NO_EMOJI = 0;
+
     // internal consts for calculated circles
     private static final int COLOR_VALUES = 3;  // supported # of different values per RGB
     private static final int COLOR_SPREAD = 127;
@@ -214,7 +216,7 @@ public class EmojiUtils {
         final EmojiViewAdapter lruAdapter = new EmojiViewAdapter(activity, paint, lru, lru.length, 0, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
         emojiLruView.setAdapter(lruAdapter);
 
-        ((TextView) customTitle.findViewById(R.id.dialog_title_title)).setText(R.string.cache_menu_set_cache_icon);
+        ((TextView) customTitle.findViewById(R.id.dialog_title_title)).setText(R.string.select_icon);
 
         // right button displays current value; clicking simply closes the dialog
         final ImageButton button2 = customTitle.findViewById(R.id.dialog_button2);
@@ -229,10 +231,10 @@ public class EmojiUtils {
         button2.setOnClickListener(v -> dialog.dismiss());
 
         // left button displays default value (if different from current value)
-        if (currentValue != 0 && defaultRes != 0) {
+        if (currentValue != 0 && defaultRes != currentValue) {
             final ImageButton button1 = customTitle.findViewById(R.id.dialog_button1);
             button1.setVisibility(View.VISIBLE);
-            button1.setImageResource(defaultRes);
+            button1.setImageResource(defaultRes == 0 ? R.drawable.ic_menu_reset : defaultRes);
             button1.setOnClickListener(v -> {
                 setNewCacheIcon.call(0);
                 dialog.dismiss();

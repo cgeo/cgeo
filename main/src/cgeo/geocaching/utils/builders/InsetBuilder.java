@@ -34,6 +34,12 @@ public class InsetBuilder {
         this.drawable = drawable;
     }
 
+    public InsetBuilder(final Drawable drawable, final VERTICAL vPos, final HORIZONTAL hPos) {
+        this.drawable = drawable;
+        this.vPos = vPos;
+        this.hPos = hPos;
+    }
+
     public InsetBuilder(final int id, final VERTICAL vPos, final HORIZONTAL hPos, final boolean doubleSize) {
         this.id = id;
         this.vPos = vPos;
