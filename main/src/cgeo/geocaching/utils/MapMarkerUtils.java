@@ -5,7 +5,6 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.list.ListMarker;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.maps.CacheMarker;
@@ -42,7 +41,8 @@ public final class MapMarkerUtils {
     private static Boolean listsRead = false;
 
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
-    private static EmojiUtils.EmojiPaint cPaint = null;
+    private static EmojiUtils.EmojiPaint cPaint = null; // cache icons
+    private static EmojiUtils.EmojiPaint lPaint = null; // list markers
 
     private MapMarkerUtils() {
         // Do not instantiate
@@ -80,7 +80,7 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static CacheMarker getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
-        final int assignedMarkers = getAssignedMarkers(cache);
+        final ArrayList<Integer> assignedMarkers = getAssignedMarkers(cache);
         final int hashcode = new HashCodeBuilder()
             .append(cache.getAssignedEmoji())
             .append(cache.isReliableLatLon())
@@ -125,7 +125,7 @@ public final class MapMarkerUtils {
     public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint) {
         final WaypointType waypointType = waypoint.getWaypointType();
         final String id = null == waypointType ? WaypointType.WAYPOINT.id : waypointType.id;
-        int assignedMarkers = 0;
+        ArrayList<Integer> assignedMarkers = new ArrayList<>();
         final String geocode = waypoint.getGeocode();
         if (StringUtils.isNotBlank(geocode)) {
             final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
@@ -160,7 +160,7 @@ public final class MapMarkerUtils {
      *          a drawable representing the current waypoint status
      */
     @NonNull
-    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final int assignedMarkers) {
+    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers) {
         final WaypointType waypointType = waypoint.getWaypointType();
 
 
@@ -168,20 +168,30 @@ public final class MapMarkerUtils {
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(marker));
 
-        int markerId = null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId;
+        final int markerId = null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId;
         insetsBuilder.withInset(new InsetBuilder(markerId, VERTICAL.CENTER, HORIZONTAL.CENTER));
-        // assigned lists with markers
-        markerId = assignedMarkers & ListMarker.BITMASK;
-        if (markerId > 0) {
-            insetsBuilder.withInset(new InsetBuilder(ListMarker.getResDrawable(markerId), VERTICAL.CENTER, HORIZONTAL.LEFT));
-        }
 
-        markerId = (assignedMarkers >> ListMarker.MAX_BITS_PER_MARKER) & ListMarker.BITMASK;
-        if (markerId > 0) {
-            insetsBuilder.withInset(new InsetBuilder(ListMarker.getResDrawable(markerId), VERTICAL.CENTER, HORIZONTAL.RIGHT));
-        }
+        addListMarkers(res, insetsBuilder, assignedMarkers);
 
         return buildLayerDrawable(insetsBuilder, 2, 2);
+    }
+
+    /**
+     * adds list markers to drawable given by insetsBuilder
+     */
+    private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers) {
+        if (assignedMarkers.size() > 0) {
+            if (lPaint == null) {
+                final Pair<Integer, Integer> temp = DisplayUtils.getDrawableDimensions(res, R.drawable.dot_black);
+                final Pair<Integer, Integer> markerDimensions = new Pair<>((int) (temp.first * 1.2), (int) (temp.second * 1.2));
+                final int markerAvailable = markerDimensions.first;
+                lPaint = new EmojiUtils.EmojiPaint(res, markerDimensions, markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
+            }
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(0)), VERTICAL.CENTER, HORIZONTAL.LEFT));
+            if (assignedMarkers.size() > 1) {
+                insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(1)), VERTICAL.CENTER, HORIZONTAL.RIGHT));
+            }
+        }
     }
 
     /**
@@ -218,7 +228,8 @@ public final class MapMarkerUtils {
      * @return a drawable representing the current cache status
      */
     @NonNull
-    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final int assignedMarkers) {
+    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final ArrayList<Integer> assignedMarkers) {
         final int useEmoji = cache.getAssignedEmoji();
 
         // background: disabled or not
@@ -268,15 +279,8 @@ public final class MapMarkerUtils {
         if (cache.getPersonalNote() != null) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_personalnote, VERTICAL.BOTTOM, HORIZONTAL.LEFT));
         }
-        // assigned lists with markers
-        int markerId = assignedMarkers & ListMarker.BITMASK;
-        if (markerId > 0) {
-            insetsBuilder.withInset(new InsetBuilder(ListMarker.getResDrawable(markerId), VERTICAL.CENTER, HORIZONTAL.LEFT));
-        }
-        markerId = (assignedMarkers >> ListMarker.MAX_BITS_PER_MARKER) & ListMarker.BITMASK;
-        if (markerId > 0) {
-            insetsBuilder.withInset(new InsetBuilder(ListMarker.getResDrawable(markerId), VERTICAL.CENTER, HORIZONTAL.RIGHT));
-        }
+        // list markers
+        addListMarkers(res, insetsBuilder, assignedMarkers);
 
         return buildLayerDrawable(insetsBuilder, 11, 10);
     }
@@ -399,7 +403,7 @@ public final class MapMarkerUtils {
             list2marker.clear();
             final List<StoredList> lists = DataStore.getLists();
             for (final StoredList temp : lists) {
-                if (temp.markerId != ListMarker.NO_MARKER.markerId) {
+                if (temp.markerId != EmojiUtils.NO_EMOJI) {
                     list2marker.put(temp.id, temp.markerId);
                 }
             }
@@ -411,25 +415,18 @@ public final class MapMarkerUtils {
         listsRead = false;
     }
 
-    private static int getAssignedMarkers (final Geocache cache) {
+    private static ArrayList<Integer> getAssignedMarkers (final Geocache cache) {
         readLists();
 
-        int value = 0;
-        byte counter = 0; // how many markers are already assigned?
+        final ArrayList<Integer> result = new ArrayList<>();
         final Set<Integer> lists = cache.getLists();
         for (final Integer list : lists) {
             final Integer markerId = list2marker.get(list);
             if (markerId != null) {
-                if (counter == 0) {
-                    value = markerId;
-                    counter++;
-                } else if (counter == 1) {
-                    value |= markerId << ListMarker.MAX_BITS_PER_MARKER;
-                    counter++;
-                } // maximum of two markers allowed
+                result.add(markerId);
             }
         }
-        return value;
+        return result;
     }
 
 }

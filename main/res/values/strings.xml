@@ -413,9 +413,7 @@
     <string name="caches_reset_cache_icons">Do you want to reset the cache icons for all selected caches?</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_selected">(selected)</string>
-    <string name="onetime_missing_unicode_title">Select emoji</string>
+    <string name="select_icon">Select icon</string>
     <string name="onetime_missing_unicode_info">Your Android version does not support automatic detection of icons supported - some characters may be missing</string>
 
     <!-- caches lists -->

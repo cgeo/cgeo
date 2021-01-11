@@ -34,7 +34,6 @@ import cgeo.geocaching.files.GpxFileListActivity;
 import cgeo.geocaching.filter.FilterActivity;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.list.AbstractList;
-import cgeo.geocaching.list.ListMarker;
 import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
@@ -101,14 +100,10 @@ import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -122,7 +117,6 @@ import androidx.loader.content.Loader;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -172,7 +166,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final AtomicInteger detailProgress = new AtomicInteger(0);
     private long detailProgressTime = 0L;
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
-    private int markerId = ListMarker.NO_MARKER.markerId;
+    private int markerId = EmojiUtils.NO_EMOJI;
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
@@ -830,58 +824,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private class ListMarkerAdapter extends ArrayAdapter<ListMarker> {
-
-        private final ArrayList<ListMarker> items;
-        private final Context context;
-
-        ListMarkerAdapter(final Context context, final int viewResId, final ArrayList<ListMarker> items) {
-            super(context, viewResId, items);
-            this.items = items;
-            this.context = context;
-        }
-
-        @SuppressLint("SetTextI18n")
-        private void setLabel(final TextView tv, final String label, final boolean selected) {
-            tv.setText(label + (selected ? " " + getString(R.string.caches_listmarker_selected) : ""));
-        }
-
-        public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-            View v = convertView;
-
-            if (v == null) {
-                v = LayoutInflater.from(getContext()).inflate(R.layout.cachelist_listmarker_item, null);
-            }
-            final ListMarker item = items.get(position);
-            if (item != null) {
-                final ImageView iv = (ImageView) v.findViewById(R.id.listmarker_item_marker);
-                final TextView tv = (TextView) v.findViewById(R.id.listmarker_item_text);
-                if (item.markerId == ListMarker.NO_MARKER.markerId) {
-                    iv.setImageBitmap(null);
-                    setLabel(tv, context.getString(R.string.caches_listmarker_none), item.markerId == markerId);
-                } else {
-                    iv.setImageResource(item.resDrawable);
-                    setLabel(tv, getString(item.resLabel), item.markerId == markerId);
-                }
-            }
-            return v;
-        }
-    }
-
-    private void selectListMarker() {
-        final ArrayList<ListMarker> items = new ArrayList<>(Arrays.asList(ListMarker.values()));
-        final ListMarkerAdapter adapter2 = new ListMarkerAdapter(this, R.layout.cachelist_listmarker_item,  items);
-        final AlertDialog.Builder builder = Dialogs.newBuilder(this);
-        builder.setTitle(R.string.caches_set_listmarker);
-        builder.setAdapter(adapter2, (dialog, itemSelected) -> {
-            final ListMarker selectedItem = adapter2.getItem(itemSelected);
-            DataStore.setListMarker(listId, selectedItem.markerId);
-            markerId = selectedItem.markerId;
-            MapMarkerUtils.resetLists();
-            adapter.notifyDataSetChanged();
-        });
-        final AlertDialog alert = builder.create();
-        alert.show();
+    private void setListMarker(final int newListMarker) {
+        DataStore.setListEmoji(listId, newListMarker);
+        markerId = newListMarker;
+        MapMarkerUtils.resetLists();
+        adapter.notifyDataSetChanged();
     }
 
     private void setCacheIcons(final int newCacheIcon) {
@@ -989,7 +936,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             }.execute();
         } else if (menuItem == R.id.menu_set_listmarker) {
-            selectListMarker();
+            EmojiUtils.selectEmojiPopup(this, markerId, 0, this::setListMarker);
         } else if (menuItem == R.id.menu_set_cache_icon) {
             EmojiUtils.selectEmojiPopup(this, -1, R.drawable.ic_menu_reset, this::setCacheIcons);
         } else {
@@ -1601,7 +1548,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (id == PseudoList.ALL_LIST.id) {
                 listId = id;
                 title = res.getString(R.string.list_all_lists);
-                markerId = ListMarker.NO_MARKER.markerId;
+                markerId = EmojiUtils.NO_EMOJI;
             } else {
                 final StoredList list = DataStore.getList(id);
                 listId = list.id;
@@ -1879,11 +1826,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 if (listId == PseudoList.ALL_LIST.id) {
                     title = res.getString(R.string.list_all_lists);
-                    markerId = ListMarker.NO_MARKER.markerId;
+                    markerId = EmojiUtils.NO_EMOJI;
                 } else if (listId <= StoredList.TEMPORARY_LIST.id) {
                     listId = StoredList.STANDARD_LIST_ID;
                     title = res.getString(R.string.stored_caches_button);
-                    markerId = ListMarker.NO_MARKER.markerId;
+                    markerId = EmojiUtils.NO_EMOJI;
                 } else {
                     final StoredList list = DataStore.getList(listId);
                     // list.id may be different if listId was not valid
@@ -1901,22 +1848,22 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case HISTORY:
                 title = res.getString(R.string.caches_history);
                 listId = PseudoList.HISTORY_LIST.id;
-                markerId = ListMarker.NO_MARKER.markerId;
+                markerId = EmojiUtils.NO_EMOJI;
                 loader = new HistoryGeocacheListLoader(this, coords);
                 break;
             case NEAREST:
                 title = res.getString(R.string.caches_nearby);
-                markerId = ListMarker.NO_MARKER.markerId;
+                markerId = EmojiUtils.NO_EMOJI;
                 loader = new CoordsGeocacheListLoader(this, coords);
                 break;
             case COORDINATE:
                 title = coords.toString();
-                markerId = ListMarker.NO_MARKER.markerId;
+                markerId = EmojiUtils.NO_EMOJI;
                 loader = new CoordsGeocacheListLoader(this, coords);
                 break;
             case KEYWORD:
                 final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
-                markerId = ListMarker.NO_MARKER.markerId;
+                markerId = EmojiUtils.NO_EMOJI;
                 title = listNameMemento.rememberTerm(keyword);
                 if (keyword != null) {
                     loader = new KeywordGeocacheListLoader(this, keyword);
@@ -1929,13 +1876,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 } else {
                     title = coords.toString();
                 }
-                markerId = ListMarker.NO_MARKER.markerId;
+                markerId = EmojiUtils.NO_EMOJI;
                 loader = new CoordsGeocacheListLoader(this, coords);
                 break;
             case FINDER:
                 final String username = extras.getString(Intents.EXTRA_USERNAME);
                 title = listNameMemento.rememberTerm(username);
-                markerId = ListMarker.NO_MARKER.markerId;
+                markerId = EmojiUtils.NO_EMOJI;
                 if (username != null) {
                     loader = new FinderGeocacheListLoader(this, username);
                 }
@@ -1943,14 +1890,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case OWNER:
                 final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
                 title = listNameMemento.rememberTerm(ownerName);
-                markerId = ListMarker.NO_MARKER.markerId;
+                markerId = EmojiUtils.NO_EMOJI;
                 if (ownerName != null) {
                     loader = new OwnerGeocacheListLoader(this, ownerName);
                 }
                 break;
             case MAP:
                 title = res.getString(R.string.map_map);
-                markerId = ListMarker.NO_MARKER.markerId;
+                markerId = EmojiUtils.NO_EMOJI;
                 search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                 replaceCacheListFromSearch();
                 loadCachesHandler.sendMessage(Message.obtain());
@@ -1962,7 +1909,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case POCKET:
                 final String guid = extras.getString(Intents.EXTRA_POCKET_GUID);
                 title = listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
-                markerId = ListMarker.NO_MARKER.markerId;
+                markerId = EmojiUtils.NO_EMOJI;
                 loader = new PocketGeocacheListLoader(this, guid);
                 break;
         }
