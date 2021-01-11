@@ -57,8 +57,7 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
         assertThat(trackables.get(1).getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=46465");
     }
 
-    public void testSearchTrackable() throws Exception {
-        return; // temporarily deactivate test until geokrety.org is back
+/*    public void testSearchTrackable() throws Exception {
         final Trackable geokret = GeokretyConnector.searchTrackable("GKB580");
         assertThat(geokret).isNotNull();
         assert geokret != null;
@@ -71,9 +70,9 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
         assertThat(geokret.getSpottedName()).isEqualTo("OX5BRQK");
         assertThat(geokret.getSpottedType()).isEqualTo(Trackable.SPOTTED_CACHE);
     }
-
-    public void testSearchTrackables() throws Exception {
-        return; // temporarily deactivate test until geokrety.org is back
+*/
+// temporarily deactivate test until geokrety.org is back
+/*    public void testSearchTrackables() throws Exception {
         // here it is assumed that:
         // * cache OX5BRQK contains these 2 objects only...
         // * objects never been moved
@@ -82,7 +81,7 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
         assertThat(trackables).hasSize(2);
         assertThat(trackables).extracting("name").containsOnly("c:geo One", "c:geo Two");
     }
-
+*/
     public void testGetIconBrand() throws Exception {
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables).hasSize(2);
