@@ -132,9 +132,9 @@ public class EmojiUtils {
 
         // calc sizes for markers
         final Pair<Integer, Integer> markerDimensionsTemp = DisplayUtils.getDrawableDimensions(activity.getResources(), R.drawable.ic_menu_filter);
-        final int markerAvailable = (int) (markerDimensionsTemp.second * 0.6);
-        final Pair<Integer, Integer> markerDimensions = new Pair(markerAvailable, markerAvailable);
-        final EmojiPaint paint = new EmojiPaint(activity.getResources(), markerDimensions, markerAvailable, DisplayUtils.calculateMaxFontsize(35, 10, 150, markerAvailable));
+        final int markerAvailable = (int) (markerDimensionsTemp.first * 0.5);
+        final Pair<Integer, Integer> markerDimensions = new Pair<>(markerAvailable, markerAvailable);
+        final EmojiPaint paint = new EmojiPaint(activity.getResources(), markerDimensions, markerAvailable, 0, DisplayUtils.calculateMaxFontsize(35, 10, 150, markerAvailable));
 
         // fill dynamic EmojiSet
         prefillCustomCircles(0);
@@ -343,7 +343,6 @@ public class EmojiUtils {
     private static BitmapDrawable getEmojiDrawableHelper(final EmojiPaint paint, final int emoji) {
         final Bitmap bm = Bitmap.createBitmap(paint.bitmapDimensions.first, paint.bitmapDimensions.second, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bm);
-        final int deltaTopLeft = (int) (0.4 * (paint.bitmapDimensions.first - paint.availableSize));
         if (emoji >= CUSTOM_ICONS_START && emoji <= CUSTOM_ICONS_END) {
             final int radius = paint.availableSize / 2;
             final Paint cPaint = new Paint();
@@ -362,13 +361,13 @@ public class EmojiUtils {
                 COLOR_OFFSET + bIndex * COLOR_SPREAD);
             cPaint.setColor(color);
             cPaint.setStyle(Paint.Style.FILL);
-            canvas.drawCircle(deltaTopLeft + radius, deltaTopLeft + radius, radius, cPaint);
+            canvas.drawCircle((int) (paint.bitmapDimensions.first / 2), (int) (paint.bitmapDimensions.second / 2) - paint.offsetTop, radius, cPaint);
         } else {
             final String text = new String(Character.toChars(emoji));
             final TextPaint tPaint = new TextPaint();
             tPaint.setTextSize(paint.fontsize);
             final StaticLayout lsLayout = new StaticLayout(text, tPaint, paint.availableSize, Layout.Alignment.ALIGN_CENTER, 1, 0, false);
-            canvas.translate(deltaTopLeft, deltaTopLeft + (int) ((paint.availableSize - lsLayout.getHeight()) / 2));
+            canvas.translate((int) ((paint.bitmapDimensions.first - lsLayout.getWidth()) / 2), (int) ((paint.bitmapDimensions.second - lsLayout.getHeight()) / 2) - paint.offsetTop);
             lsLayout.draw(canvas);
             canvas.save();
             canvas.restore();
@@ -408,12 +407,14 @@ public class EmojiUtils {
         public final Resources res;
         public final Pair<Integer, Integer> bitmapDimensions;
         public final int availableSize;
+        public final int offsetTop;
         public final int fontsize;
 
-        EmojiPaint(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int fontsize) {
+        EmojiPaint(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int offsetTop, final int fontsize) {
             this.res = res;
             this.bitmapDimensions = bitmapDimensions;
             this.availableSize = availableSize;
+            this.offsetTop = offsetTop;
             this.fontsize = fontsize;
         }
     }
