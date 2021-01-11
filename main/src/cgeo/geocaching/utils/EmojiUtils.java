@@ -55,6 +55,9 @@ public class EmojiUtils {
     private static final int CUSTOM_ICONS_END = CUSTOM_ICONS_START + CUSTOM_SET_SIZE - 1; // max. possible value by Unicode definition: 0xf8ff;
     private static final int CUSTOM_ICONS_START_CIRCLES = CUSTOM_ICONS_START;
 
+    // Select emoji variation for unicode characters, see https://emojipedia.org/variation-selector-16/
+    private static final int VariationSelectorEmoji = 0xfe0f;
+
     // list of emojis supported by the EmojiPopup
     // should ideally be supported by the Android API level we have set as minimum (currently API 21 = Android 5),
     // but starting with API 23 (Android 6) the app automatically filters out characters not supported by their fonts
@@ -299,7 +302,7 @@ public class EmojiUtils {
                 holder.iv.setVisibility(View.VISIBLE);
                 holder.tv.setVisibility(View.GONE);
             } else {
-                holder.tv.setText(new String(Character.toChars(data[position])));
+                holder.tv.setText(getEmojiAsString(data[position]));
                 holder.iv.setVisibility(View.GONE);
                 holder.tv.setVisibility(View.VISIBLE);
             }
@@ -336,6 +339,15 @@ public class EmojiUtils {
     }
 
     /**
+     * get emoji string from codepoint
+     * @param emoji codepoint of the emoji to display
+     * @return string emoji with protection from rendering as black-and-white glyphs
+     */
+    public static String getEmojiAsString(final int emoji) {
+        return new String(Character.toChars(emoji)) + new String(Character.toChars(VariationSelectorEmoji));
+    }
+
+    /**
      * builds a drawable the size of a marker with a given text
      * @param paint - paint data structure for Emojis
      * @param emoji codepoint of the emoji to display
@@ -365,7 +377,7 @@ public class EmojiUtils {
             cPaint.setStyle(Paint.Style.FILL);
             canvas.drawCircle((int) (paint.bitmapDimensions.first / 2), (int) (paint.bitmapDimensions.second / 2) - paint.offsetTop, radius, cPaint);
         } else {
-            final String text = new String(Character.toChars(emoji));
+            final String text = getEmojiAsString(emoji);
             final TextPaint tPaint = new TextPaint();
             tPaint.setTextSize(paint.fontsize);
             final StaticLayout lsLayout = new StaticLayout(text, tPaint, paint.availableSize, Layout.Alignment.ALIGN_CENTER, 1, 0, false);
