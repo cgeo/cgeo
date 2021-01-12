@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -219,7 +218,7 @@ public class ContentStorageActivityHelper {
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType(type == null ? "*/*" : type);
-        if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && UriUtils.isContentUri(startUri)) {
+        if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Attribute is supported starting SDK26 / O
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);
         }

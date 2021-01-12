@@ -113,6 +113,7 @@ public class Settings {
     static {
         migrateSettings();
         Log.setDebug(getBoolean(R.string.pref_debug, false));
+
     }
 
     /**
@@ -131,7 +132,7 @@ public class Settings {
             return;
         }
 
-        final int latestPreferencesVersion = 4;
+        final int latestPreferencesVersion = 5;
         final int currentVersion = getInt(R.string.pref_settingsversion, 0);
 
         // No need to migrate if we are up to date.
@@ -287,6 +288,11 @@ public class Settings {
             e.putInt(getKey(R.string.pref_settingsversion), 4); // mark migrated
             e.apply();
         }
+
+        if (currentVersion < 5) {
+            migratePersistableFolderAndUri();
+            putInt(R.string.pref_settingsversion, 5);
+        }
     }
 
     private static String getKey(final int prefKeyId) {
@@ -337,11 +343,15 @@ public class Settings {
     }
 
     protected static void putString(final int prefKeyId, final String value) {
+        putStringDirect(getKey(prefKeyId), value);
+    }
+
+    private static void putStringDirect(final String prefKey, final String value) {
         if (sharedPrefs == null) {
             return;
         }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.putString(getKey(prefKeyId), value);
+        edit.putString(prefKey, value);
         edit.apply();
     }
 
@@ -386,11 +396,15 @@ public class Settings {
     }
 
     private static void remove(final int prefKeyId) {
+        removeDirect(getKey(prefKeyId));
+    }
+
+    private static void removeDirect(final String key) {
         if (sharedPrefs == null) {
             return;
         }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.remove(getKey(prefKeyId));
+        edit.remove(key);
         edit.apply();
     }
 
@@ -1560,7 +1574,7 @@ public class Settings {
     /** gets the user-defined uri for a persistable folder. Can be null */
     @Nullable
     public static String getPersistableFolder(@NonNull final PersistableFolder folder) {
-        return getString(folder.getPrefKeyId(), getLegacyValueForPersistableFolder(folder.getPrefKeyId()));
+        return getString(folder.getPrefKeyId(), null);
     }
 
     /** sets Uri for persistable uris. Can be set to null */
@@ -1571,28 +1585,29 @@ public class Settings {
     /** gets the persisted uri for a persistable uris. Can be null */
     @Nullable
     public static String getPersistableUri(@NonNull final PersistableUri persistedUri) {
-        return getString(persistedUri.getPrefKeyId(), getLegacyValueForPersistableUri(persistedUri.getPrefKeyId()));
+        return getString(persistedUri.getPrefKeyId(), null);
     }
 
     /** For Migration towards Android 11: returns any legacy value which might be stored in old settings for certain folders */
-    private static String getLegacyValueForPersistableFolder(@NonNull final int prefKeyId) {
-        if (prefKeyId == R.string.pref_persistablefolder_offlinemaps) {
-            return getStringDirect("mapDirectory", null);
-        } else if (prefKeyId == R.string.pref_persistablefolder_offlinemapthemes) {
-            return getStringDirect("renderthemepath", null);
-        } else if (prefKeyId == R.string.pref_persistablefolder_gpx) {
-            return getStringDirect("pref_gpxImportDir",
-                getStringDirect("pref_gpxExportDir",
-                    LocalStorage.getDefaultGpxDirectory().getPath()));
-        }
-        return null;
+    private static void migratePersistableFolderAndUri() {
+        migrateLegacyValue(R.string.pref_persistablefolder_offlinemaps, "mapDirectory");
+        migrateLegacyValue(R.string.pref_persistablefolder_offlinemapthemes, "renderthemepath");
+        migrateLegacyValue(R.string.pref_persistablefolder_gpx, "gpxExportDir", "gpxImportDir");
+        migrateLegacyValue(R.string.pref_persistableuri_track, "pref_trackfile");
     }
 
-    private static String getLegacyValueForPersistableUri(@NonNull final int prefKeyId) {
-        if (prefKeyId == R.string.pref_persistableuri_track) {
-            return getStringDirect("pref_trackfile", null);
+    private static void migrateLegacyValue(@NonNull final int prefKeyId, final String ... candidates) {
+        boolean found = false;
+        for (String candidate : candidates) {
+            final String value = getStringDirect(candidate, null);
+            if (value != null) {
+                if (!found) {
+                    putString(prefKeyId, value);
+                }
+                removeDirect(candidate);
+                found = true;
+            }
         }
-        return null;
     }
 
     public static boolean getUseCustomTabs() {

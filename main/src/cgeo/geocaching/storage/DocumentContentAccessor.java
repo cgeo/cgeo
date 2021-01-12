@@ -107,7 +107,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         final String docName = createUniqueFilename(name, queryDir(folderUri, new String[]{ DocumentsContract.Document.COLUMN_DISPLAY_NAME }, c -> c.getString(0)));
         try (ContextLogger cLog = new ContextLogger("DocumentFolderAccessor.create %s: %s", folder, name)) {
             //Do NOT pass a mimeType. It will then be selected based on the file suffix.
-            //Use an empty string for mimeType; null triggers an exception in API21 and API30 (funnily enough: noz in API29)
+            //Use an empty string for mimeType; null triggers an exception in API21. Tested also in API23, API29, API30
             return DocumentsContract.createDocument(getContext().getContentResolver(), folderUri, "", docName);
         }
     }
