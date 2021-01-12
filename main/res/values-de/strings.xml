@@ -55,10 +55,10 @@
     <string name="wp_original">Ursprüngliche Koordinaten</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Finale</string>
-    <string name="wpnew_stage">Stage</string>
+    <string name="wpnew_stage">Station</string>
     <string name="wpnew_pkg">Parken</string>
     <string name="wpnew_trailhead">Via</string>
-    <string name="wpnew_waypoint">Marker</string>
+    <string name="wpnew_waypoint">Markierung</string>
     <string name="wpnew_original">Original</string>
     <!-- logs -->
     <string name="log_found">Gefunden</string>
@@ -390,6 +390,8 @@
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
     <string name="caches_listmarker_none">Keine Markierung</string>
     <string name="caches_listmarker_selected">(ausgewählt)</string>
+    <string name="onetime_missing_unicode_title">Emoji wählen</string>
+    <string name="onetime_missing_unicode_info">Deine Android-Version unterstützt keine automatische Erkennung unterstützter Icons - einige Zeichen könnten nicht angezeigt werden</string>
     <!-- caches lists -->
     <string name="menu_lists">Listen verwalten</string>
     <string name="list_menu_create">Neue Liste</string>
@@ -1057,6 +1059,8 @@
     <string name="internal_goto_targets_description">Dieser Cache speichert deine letzten \"Gehe zu\" Ziele. Er wird automatisch erzeugt, sobald du die \"Gehe zu\" Funktion im Hauptmenü benutzt. Die dort eingegebenen Koordinaten werden in Wegpunkten dieses Caches gespeichert. Wenn du diese Koordinaten nicht mehr brauchst, so kannst du diesen Cache oder einen seiner Wegpunkte sicher löschen. Du kannst den Cache auch in jede andere Liste deiner Wahl verschieben.</string>
     <string name="init_longtap_map">Langes Tippen auf Karte</string>
     <string name="init_summary_longtap_map">Aktiviere langes Tippen auf ein Kartensymbol (erstellt eine individuelle Route) oder auf eine freie Stelle der Karte (erstellt einen benutzerdefinierten Cache)</string>
+    <string name="onetime_info_longtap_disabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches anlegen.\n\nLanges Tippen auf die Karte ist derzeit deaktiviert\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
+    <string name="onetime_info_longtap_enabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches anlegen.\n\nLanges Tippen auf die Karte ist derzeit aktiviert.\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
