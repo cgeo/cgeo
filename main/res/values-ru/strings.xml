@@ -370,8 +370,6 @@
     <string name="caches_clear_offlinelogs_progress">Очистка сохраненных записей</string>
     <string name="caches_make_list_unique">Удалить эти тайники из других списков</string>
     <string name="caches_set_listmarker">Установить маркер списка</string>
-    <string name="caches_listmarker_none">Нет маркера</string>
-    <string name="caches_listmarker_selected">(выбрано)</string>
     <!-- caches lists -->
     <string name="menu_lists">Управление списками</string>
     <string name="list_menu_create">Создать новый список</string>
