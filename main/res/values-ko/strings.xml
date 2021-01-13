@@ -378,8 +378,6 @@
     <string name="caches_clear_offlinelogs_progress">오프라인 로그 삭제중</string>
     <string name="caches_make_list_unique">고유 목록 만들기</string>
     <string name="caches_set_listmarker">목록 표시 설정</string>
-    <string name="caches_listmarker_none">표시 없음</string>
-    <string name="caches_listmarker_selected">(선택됨)</string>
     <!-- caches lists -->
     <string name="menu_lists">목록 관리</string>
     <string name="list_menu_create">새 목록 만들기</string>
