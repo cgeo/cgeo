@@ -388,8 +388,7 @@
     <string name="caches_reset_cache_icons">Θέλετε να επαναφέρετε τα εικονίδια των κρυπτών για ΟΛΕΣ τις επιλεγμένες κρύπτες;</string>
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
     <string name="caches_set_listmarker">Ορίστε τον δείκτη της λίστας</string>
-    <string name="caches_listmarker_none">Χωρείς δείκτη</string>
-    <string name="caches_listmarker_selected">(επιλεγμένες)</string>
+    <string name="select_icon">Επιλέξτε εικονίδιο</string>
     <!-- caches lists -->
     <string name="menu_lists">Διαχείριση λιστών</string>
     <string name="list_menu_create">Δημιουργία νέας λίστας</string>
