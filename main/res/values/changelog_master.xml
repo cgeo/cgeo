@@ -19,6 +19,12 @@
 <li>Change: Numbering of new user-defined waypoints will use a cache-wide number (instead of per-type numbering) and will include waypoints of type trailhead</li>
 </ul>
 
+<h4>Cache lists:</h4>
+<ul>
+<li>Fix: Allow sorting when in selection mode</li>
+<li>Change: List markers can have individual icons (same es for single caches)</li>
+</ul>
+
 <h4>Other:</h4>
 <ul>
 <li>Change: Unified export dialogs. \"Share\" option can be selected after export now.</li>
