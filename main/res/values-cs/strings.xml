@@ -390,9 +390,7 @@
     <string name="caches_reset_cache_icons">Chcete obnovit ikony kešek pro všechny vybrané kešky?</string>
     <string name="caches_make_list_unique">Vytvořit seznam jedinečných</string>
     <string name="caches_set_listmarker">Nastavit značku seznamu</string>
-    <string name="caches_listmarker_none">Bez značky</string>
-    <string name="caches_listmarker_selected">(vybrané)</string>
-    <string name="onetime_missing_unicode_title">Vyberte emotikon</string>
+    <string name="select_icon">Vybrat ikonu</string>
     <string name="onetime_missing_unicode_info">Vaše verze Androidu nepodporuje automatickou detekci podporovaných ikon - některé znaky mohou chybět</string>
     <!-- caches lists -->
     <string name="menu_lists">Spravovat seznamy</string>
