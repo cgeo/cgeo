@@ -357,8 +357,6 @@
     <string name="caches_clear_offlinelogs_progress">Offline logok törlése folyamatban</string>
     <string name="caches_make_list_unique">Törlés más listákról</string>
     <string name="caches_set_listmarker">Lista jelző beállítása</string>
-    <string name="caches_listmarker_none">Nincs jelző</string>
-    <string name="caches_listmarker_selected">(kijelölt)</string>
     <!-- caches lists -->
     <string name="menu_lists">Listák kezelése</string>
     <string name="list_menu_create">Lista létrehozása</string>
