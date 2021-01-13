@@ -388,9 +388,7 @@
     <string name="caches_reset_cache_icons">Wil je de cachepictogrammen terugzetten voor alle geselecteerde caches?</string>
     <string name="caches_make_list_unique">Lijst uniek maken</string>
     <string name="caches_set_listmarker">Zet lijst marker</string>
-    <string name="caches_listmarker_none">Geen marker</string>
-    <string name="caches_listmarker_selected">(geselecteerd)</string>
-    <string name="onetime_missing_unicode_title">Selecteer emoji</string>
+    <string name="select_icon">Pictogram selecteren</string>
     <string name="onetime_missing_unicode_info">Je Android versie ondersteunt geen automatische detectie van ondersteunde pictogrammen - sommige tekens kunnen ontbreken</string>
     <!-- caches lists -->
     <string name="menu_lists">Lijsten beheren</string>
