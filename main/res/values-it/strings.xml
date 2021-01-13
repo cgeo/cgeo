@@ -388,9 +388,6 @@
     <string name="caches_reset_cache_icons">Vuoi reimpostare le icone per tutti i cache selezionati?</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
     <string name="caches_set_listmarker">Imposta marcatore di lista</string>
-    <string name="caches_listmarker_none">Nessun marcatore</string>
-    <string name="caches_listmarker_selected">(selezionato)</string>
-    <string name="onetime_missing_unicode_title">Seleziona emoji</string>
     <string name="onetime_missing_unicode_info">La tua versione Android non supporta il rilevamento automatico delle icone supportate - alcuni simboli potrebbero mancare</string>
     <!-- caches lists -->
     <string name="menu_lists">Gestisci liste</string>
