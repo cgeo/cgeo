@@ -380,8 +380,6 @@
     <string name="caches_clear_offlinelogs_progress">Išvalomi išsaugoti įrašai</string>
     <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
     <string name="caches_set_listmarker">Nustatyti sąrašo žymeklį</string>
-    <string name="caches_listmarker_none">Be žymeklio</string>
-    <string name="caches_listmarker_selected">(pasirinkta)</string>
     <!-- caches lists -->
     <string name="menu_lists">Tvarkyti sąrašus</string>
     <string name="list_menu_create">Sukurti naują sąrašą</string>
