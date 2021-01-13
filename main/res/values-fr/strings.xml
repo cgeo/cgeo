@@ -378,8 +378,6 @@
     <string name="caches_clear_offlinelogs_progress">Suppression des visites hors-ligne</string>
     <string name="caches_make_list_unique">Rendre la liste unique</string>
     <string name="caches_set_listmarker">Définir le marqueur de liste</string>
-    <string name="caches_listmarker_none">Aucun marqueur</string>
-    <string name="caches_listmarker_selected">(sélectionné)</string>
     <!-- caches lists -->
     <string name="menu_lists">Gérer les listes</string>
     <string name="list_menu_create">Nouvelle liste</string>
