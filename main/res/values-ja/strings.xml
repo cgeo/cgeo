@@ -385,9 +385,6 @@
     <string name="caches_reset_cache_icons">選択したすべてのキャッシュアイコンをデフォルトに戻しますか?</string>
     <string name="caches_make_list_unique">重複キャッシュを削除</string>
     <string name="caches_set_listmarker">リストマーカーを設定</string>
-    <string name="caches_listmarker_none">マーカーなし</string>
-    <string name="caches_listmarker_selected">(選択済み)</string>
-    <string name="onetime_missing_unicode_title">絵文字の選択</string>
     <string name="onetime_missing_unicode_info">お使いのAndroidバージョンは、アイコンの自動検出をサポートしていません。一部の文字が欠落している可能性があります</string>
     <!-- caches lists -->
     <string name="menu_lists">リストを管理</string>
