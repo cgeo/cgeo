@@ -130,11 +130,9 @@ public class GoogleMapObjectsQueue {
             final long time = System.currentTimeMillis();
             MapObjectOptions options;
             while ((options = requestedToAdd.poll()) != null) {
-                if (!drawObjects.containsKey(options)) {
-                    final Object drawn = options.addToGoogleMap(googleMap);
-                    drawnBy.put(drawn, options);
-                    drawObjects.put(options, drawn);
-                }
+                final Object drawn = options.addToGoogleMap(googleMap);
+                drawnBy.put(drawn, options);
+                drawObjects.put(options, drawn);
                 if (System.currentTimeMillis() - time >= TIME_MAX) {
                     // removing and adding markers are time costly operations and we dont want to block UI thread
                     runOnUIThread(this);
