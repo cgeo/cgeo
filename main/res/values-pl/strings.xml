@@ -381,8 +381,6 @@
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
-    <string name="caches_listmarker_none">Brak znacznika</string>
-    <string name="caches_listmarker_selected">(wybrane)</string>
     <!-- caches lists -->
     <string name="menu_lists">Zarządzaj listami</string>
     <string name="list_menu_create">Utwórz nową listę</string>
