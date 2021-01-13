@@ -13,22 +13,24 @@
 
 <h4>Cache details:</h4>
 <ul>
-<li>New: Caches can have individual cache icons (also available as batch processing in cache lists)</li>
-<li>New: Allow edition of description for user-defined caches</li>
+<li>New: Allow edit of description for user-defined caches</li>
 <li>Change: New user-defined waypoints will get shorter names</li>
 <li>Change: Numbering of new user-defined waypoints will use a cache-wide number (instead of per-type numbering) and will include waypoints of type trailhead</li>
 </ul>
 
-<h4>Cache lists:</h4>
+<h4>Custom symbols:</h4>
 <ul>
-<li>Fix: Allow sorting when in selection mode</li>
-<li>Change: List markers can have individual icons (same es for single caches)</li>
+<li>New: Custom symbol selector offering several emojis and geometric figures</li>
+<li>New / change: Custom symbols can be used for cache icons (large) and/or list markers (small)</li>
+<li>Assign cache markers from cache detail menu or from Cache list ➜ Manage caches ➜ Set cache icons</li>
+<li>Assign list markers the same way as today, using Cache list ➜ Manage lists ➜ Set list marker</li>
 </ul>
 
 <h4>Other:</h4>
 <ul>
 <li>Change: Unified export dialogs. \"Share\" option can be selected after export now.</li>
 <li>Change: Existing cache logs are kept/merged on importing GPX file / pocket query</li>
+<li>Fix: Allow sorting when in selection mode</li>
 <li>New: Installation wizard (starting automatically on a fresh install)</li>
 </ul>
 
