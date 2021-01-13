@@ -54,6 +54,12 @@
     <string name="wp_waypoint">Ponto de referência</string>
     <string name="wp_original">Coordenadas originais</string>
     <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Final</string>
+    <string name="wpnew_stage">Etapa</string>
+    <string name="wpnew_pkg">Estacionamento</string>
+    <string name="wpnew_trailhead">Via</string>
+    <string name="wpnew_waypoint">Marcador</string>
+    <string name="wpnew_original">Original</string>
     <!-- logs -->
     <string name="log_found">Encontrada</string>
     <string name="log_dnf">Não encontrada</string>
@@ -377,10 +383,12 @@
     <string name="caches_clear_offlinelogs">Limpar registos offline</string>
     <string name="caches_clear_offlinelogs_message">Quer apagar os registos offline?</string>
     <string name="caches_clear_offlinelogs_progress">A limpar os registos offline</string>
+    <string name="caches_set_cache_icon">Definir ícones de geocaches</string>
+    <string name="caches_reset_cache_icons_title">Repor ícones de geocaches</string>
+    <string name="caches_reset_cache_icons">Deseja redefinir ícones de geocaches para todas as geocaches seleccionadas?</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
     <string name="caches_set_listmarker">Definir marcador de lista</string>
-    <string name="caches_listmarker_none">Sem marcador</string>
-    <string name="caches_listmarker_selected">(seleccionado)</string>
+    <string name="onetime_missing_unicode_info">A sua versão do Android não suporta a detecção automática de ícones suportados - alguns caracteres podem estar em falta</string>
     <!-- caches lists -->
     <string name="menu_lists">Gerir listas</string>
     <string name="list_menu_create">Criar nova lista</string>
@@ -554,7 +562,7 @@
     <string name="init_address">Mostrar endereço</string>
     <string name="init_summary_address">Mostra um endereço em vez das coordenadas no ecrã principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
-    <string name="init_summary_select_language">Seleccionar o idioma da aplicação (requer reinicialização)\n</string>
+    <string name="init_summary_select_language">Selecciona o idioma da aplicação (requer reinício)\n</string>
     <string name="init_use_default_language">Utilizar idioma predefinido</string>
     <string name="init_category_exclude">Excluir caches</string>
     <string name="init_exclude">Excluir Encontradas e Minhas</string>
@@ -562,7 +570,7 @@
     <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
-    <string name="init_zoomincludingwaypoints_description">Ao mostrar apenas uma cache no mapa: Deve o zoom ser ajustado para que inclua todos os seus pontos adicionais?</string>
+    <string name="init_zoomincludingwaypoints_description">Ao visualizar o mapa a partir de uma cache (função \"mostrar no mapa\"): O zoom do mapa deve ser ajustado para incluir todos os pontos adicionais dessa cache?</string>
     <string name="init_brouterThreshold">Calcular rota</string>
     <string name="init_brouterThreshold_description">A distância máxima até que uma aplicação auxiliar de ajuda (se instalada) calculará uma rota.</string>
     <string name="init_brouterShowBothDistances">Mostrar distância em linha recta</string>
@@ -607,7 +615,7 @@
     <string name="init_backup_restore">Restaurar</string>
     <string name="init_restore_restored">Restauro concluído</string>
     <string name="init_backup_start_restore">Iniciar restauro</string>
-    <string name="init_backup_restore_different_backup">Restaurar uma cópia de segurança diferente</string>
+    <string name="init_backup_restore_different_backup">Restaurar uma cópia de seg. diferente</string>
     <string name="init_backup_backup_history">Histórico de cópias de segurança</string>
     <string name="init_backup_history_length_title">Nº máximo de cópias de segurança guardadas</string>
     <string name="init_backup_history_length_summary">Decida quantas cópias de segurança devem ser mantidas. Quando o limite for atingido, as mais antigas serão apagadas automaticamente.</string>
@@ -670,6 +678,10 @@
     <string name="init_routecolor_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (Primeiro precisa de activar a função de \"toque sem soltar\", veja as configurações do mapa.)</string>
     <string name="init_routewidth">Largura da linha do percurso individual</string>
     <string name="init_routewidth_summary">Seleccionar a largura para a linha de rota individual</string>
+    <string name="init_trackcolor">Cor da linha do trajecto/rota GPX</string>
+    <string name="init_trackcolor_summary">Selecção da cor e opacidade para a linha de percurso/rota. Um(a) percurso/rota é constituído(a) por vários pontos adicionais e pode ser carregado(a) através de um ficheiro GPX de percurso/rota.</string>
+    <string name="init_trackwidth">Largura da linha do percurso/rota GPX</string>
+    <string name="init_trackwidth_summary">Seleccione a largura para a linha do percurso/rota GPX</string>
     <string name="init_circlecolor">Cor da linha do círculo</string>
     <string name="init_circlecolor_summary">Selecciona a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
     <string name="init_circlefillcolor">Cor de preenchimento do círculo</string>
@@ -953,6 +965,8 @@
     <string name="menu_caches">Gerir caches</string>
     <string name="cache_menu_event">Adicionar ao calendário</string>
     <string name="cache_menu_extract_waypoints">Extrair pontos adicionais</string>
+    <string name="cache_menu_set_cache_icon">Definir ícone da cache</string>
+    <string name="cache_icon_updated">Ícone da cache actualizado</string>
     <string name="cache_menu_details">Detalhes</string>
     <string name="cache_menu_refresh">Actualizar</string>
     <string name="cache_menu_share">Partilhar cache</string>
@@ -994,6 +1008,8 @@
     <string name="cache_name">Nome</string>
     <string name="cache_name_set">Definir o nome da cache</string>
     <string name="cache_name_updated">Nome da cache actualizado</string>
+    <string name="cache_description_set">Definir descrição da cache</string>
+    <string name="cache_description_updated">Descrição da cache actualizada</string>
     <string name="cache_type">Tipo</string>
     <string name="cache_size">Tamanho</string>
     <string name="cache_distance">Distância</string>
@@ -1040,6 +1056,8 @@
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache definida pelo utilizador)</string>
+    <string name="onetime_info_longtap_disabled">Com um toque longo no mapa, pode criar rotas individuais e caches definidos pelo utilizador.\n\nO toque longo no mapa está desactivado neste momento.\n\nPode alterar isso em Configurações → Mapa → Comportamento do mapa</string>
+    <string name="onetime_info_longtap_enabled">Com um toque longo no mapa, pode criar rotas individuais e caches definidas pelo utilizador.\n\nO toque longo no mapa está activado neste momento.\n\nPode alterar isso em Configurações - Mapa - Comportamento do mapa</string>
     <string name="goto_targets_list">Caches definidas pelo utilizador</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
@@ -1658,6 +1676,11 @@
         <item quantity="one">Adicionar esta cache aos favoritos (%d restante)</item>
         <item quantity="other">Adicionar esta cache aos favoritos (%d restantes)</item>
     </plurals>
+    <string name="command_set_cache_icons_progress">A configurar ícones da cache</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">Definir %d ícone da cache</item>
+        <item quantity="other">Definir %d ícones da cache</item>
+    </plurals>
     <string name="pq_download_and_import">Importar Pocket Query</string>
     <string name="caches_refresh_all_warning">Esta acção pode originar um consumo de dados elevado. Tem a certeza que deseja actualizar todas as caches?</string>
     <string name="list_list_headline">Listas:</string>
@@ -1791,6 +1814,14 @@
     <string name="downloadmap_confirmation">Transferir o mapa \"%1$s\"?\n\nIsso pode levar algum tempo e pode resultar num custo significativo, dependendo da sua ligação à rede.\n\nInformação de tamanho: %2$s</string>
     <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
     <string name="button_continue">Continuar</string>
+    <string name="downloadmap_onedirup">(um directório para cima)</string>
+    <string name="downloadmap_checkforupdates_button">Verificar se há actualizações</string>
+    <string name="downloadmap_available_updates">Actualizações disponíveis</string>
+    <string name="downloadmap_no_updates_found">Nenhuma actualização de mapa encontrada</string>
+    <string name="downloadmap_directory">Directório</string>
+    <string name="downloadmap_mapfile">Ficheiro de mapa</string>
+    <string name="downloadmap_retrieving_directory_data">A obter dados do directório…</string>
+    <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
@@ -1809,18 +1840,29 @@
     <string name="previous">Anterior</string>
     <string name="skip">Ignorar</string>
     <string name="next">Próximo</string>
+    <string name="done">Concluído</string>
     <string name="finish">Concluído</string>
     <string name="wizard_welcome_title">Bem-vindo ao c:geo</string>
+    <string name="wizard_intro">São necessários apenas alguns passos para configurar o c:geo e começar a usar. Posso ajudar?</string>
+    <string name="wizard_intro2">Bem-vindo de volta ao assistente de configuração. A instalação do seu c:geo ainda não está terminada, poderei ajudar a completá-la? São apenas alguns passos.</string>
     <string name="wizard_outro_ok">Obrigado por configurar o c:geo.\nDivirta-se!</string>
     <string name="wizard_outro_error">Configuração incompleta\nNem todas as partes do c:geo funcionarão como esperado!</string>
     <string name="wizard_permissions_title">Definir autorizações da aplicação</string>
+    <string name="wizard_permissions_intro">O c:geo precisa de certas permissões no seu dispositivo para funcionar correctamente.\nVou explicar mais detalhes nos próximos passos.</string>
+    <string name="wizard_platforms_title">Configurar serviços</string>
+    <string name="wizard_platforms_intro">Para encontrar geocaches com o c:geo, precisa de uma conta num serviço de geocaching suportado pelo c:geo.\nSeleccione abaixo o serviço pretendido, seja para iniciar a sessão com a sua conta ou para criar uma nova conta.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; outros</string>
     <string name="wizard_welcome_advanced">Configurações avançadas</string>
     <string name="wizard_advanced_offlinemaps_label">Mapas offline</string>
+    <string name="wizard_advanced_offlinemaps_info">Esta página fornece algumas funções avançadas, que são de uso opcional.\n\nO c:geo pode descarregar ficheiros de mapa para usar sem estar ligado à Internet.</string>
     <string name="wizard_advanced_brouter_label">Aplicação de navegação</string>
+    <string name="wizard_advanced_brouter_info">Ao instalar e configurar a aplicação associada chamada \"BRouter Offline Navigation\", o c:geo pode navegar até um destino e exibir informações de direcção no seu mapa.</string>
     <string name="wizard_advanced_restore_label">Restaurar</string>
+    <string name="wizard_advanced_restore_info">Se tiver uma cópia de segurança de uma instalação anterior, pode restaurar configurações e/ou dados de geocaches.</string>
     <string name="status_not_ok">ERRO</string>
     <string name="wizard_status_title">Estado da configuração</string>
     <string name="wizard_status_storage_permission">Permissão de armazenamento</string>
     <string name="wizard_status_location_permission">Permissão de localização</string>
+    <string name="wizard_status_platform">Serviços de geocaching</string>
 </resources>
