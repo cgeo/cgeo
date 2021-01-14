@@ -2,6 +2,13 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
+<h1>Next bugfix release:</h1>
+
+<h4>Map:</h4>
+<ul>
+<li>Fix: Caches vanishing from the map</li>
+</ul>
+
 <h1>2021.01.10:</h1>
 
 <h4>Map:</h4>
