@@ -565,7 +565,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_address">Mostrar endereço</string>
     <string name="init_summary_address">Mostra um endereço em vez das coordenadas no ecrã principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
-    <string name="init_summary_select_language">Seleccionar o idioma da aplicação (requer reinicialização)\n</string>
+    <string name="init_summary_select_language">Selecciona o idioma da aplicação (requer reinício)\n</string>
     <string name="init_use_default_language">Utilizar idioma predefinido</string>
     <string name="init_category_exclude">Excluir caches</string>
     <string name="init_exclude">Excluir Encontradas e Minhas</string>
@@ -573,7 +573,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
-    <string name="init_zoomincludingwaypoints_description">Ao mostrar apenas uma cache no mapa: Deve o zoom ser ajustado para que inclua todos os seus pontos adicionais?</string>
+    <string name="init_zoomincludingwaypoints_description">Ao visualizar o mapa a partir de uma cache (função \"mostrar no mapa\"): O zoom do mapa deve ser ajustado para incluir todos os pontos adicionais dessa cache?</string>
     <string name="init_brouterThreshold">Calcular rota</string>
     <string name="init_brouterThreshold_description">A distância máxima até que uma aplicação auxiliar de ajuda (se instalada) calculará uma rota.</string>
     <string name="init_brouterShowBothDistances">Mostrar distância em linha recta</string>
@@ -618,7 +618,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_backup_restore">Restaurar</string>
     <string name="init_restore_restored">Restauro concluído</string>
     <string name="init_backup_start_restore">Iniciar restauro</string>
-    <string name="init_backup_restore_different_backup">Restaurar uma cópia de segurança diferente</string>
+    <string name="init_backup_restore_different_backup">Restaurar uma cópia de seg. diferente</string>
     <string name="init_backup_backup_history">Histórico de cópias de segurança</string>
     <string name="init_backup_history_length_title">Nº máximo de cópias de segurança guardadas</string>
     <string name="init_backup_history_length_summary">Decida quantas cópias de segurança devem ser mantidas. Quando o limite for atingido, as mais antigas serão apagadas automaticamente.</string>
