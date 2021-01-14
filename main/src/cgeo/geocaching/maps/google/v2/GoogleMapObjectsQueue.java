@@ -12,6 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.Polyline;
 
@@ -130,9 +131,12 @@ public class GoogleMapObjectsQueue {
             final long time = System.currentTimeMillis();
             MapObjectOptions options;
             while ((options = requestedToAdd.poll()) != null) {
-                final Object drawn = options.addToGoogleMap(googleMap);
-                drawnBy.put(drawn, options);
-                drawObjects.put(options, drawn);
+                // avoid redrawing exactly the same accuracy circle, as sometimes consecutive identical circles remain on the map
+                if (!(options.options instanceof CircleOptions) || ((CircleOptions) options.options).getZIndex() != GooglePositionAndHistory.ZINDEX_POSITION_ACCURACY_CIRCLE || !drawObjects.containsKey(options)) {
+                    final Object drawn = options.addToGoogleMap(googleMap);
+                    drawnBy.put(drawn, options);
+                    drawObjects.put(options, drawn);
+                }
                 if (System.currentTimeMillis() - time >= TIME_MAX) {
                     // removing and adding markers are time costly operations and we dont want to block UI thread
                     runOnUIThread(this);
