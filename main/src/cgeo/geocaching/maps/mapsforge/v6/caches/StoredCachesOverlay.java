@@ -67,12 +67,12 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
                 if (moved) {
 
                     previousZoom = zoomNow;
+                    previousViewport = viewportNow;
                     overlay.load();
                     overlay.refreshed();
                 } else if (!previousViewport.equals(viewportNow)) {
                     overlay.updateTitle();
                 }
-                previousViewport = viewportNow;
             } catch (final Exception e) {
                 Log.w("StoredCachesOverlay.startLoadtimer.start", e);
             }
