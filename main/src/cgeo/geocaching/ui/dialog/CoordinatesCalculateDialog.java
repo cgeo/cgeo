@@ -21,6 +21,7 @@ import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -118,7 +119,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private HorizontalScrollView variablesPanel;
     private View variablesScrollableContent, variableDivider;
     private GridLayout equationGrid, variableGrid;
-    private Button lowerCaseVariables;
 
     private TextView tLatResult, tLonResult;
 
@@ -432,10 +432,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         variableDivider = v.findViewById(R.id.VariableDivider);
         equationGrid = v.findViewById(R.id.EquationTable);
         variableGrid = v.findViewById(R.id.FreeVariableTable);
-        lowerCaseVariables = v.findViewById(R.id.LowerCaseVariables);
-        lowerCaseVariables.setOnClickListener(v1 -> {
-            switchVariablesInEquationsToLowerCase();
-        });
 
         tLatResult = v.findViewById(R.id.latRes);
         tLonResult = v.findViewById(R.id.lonRes);
@@ -497,7 +493,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         ePlainLat.addTextChangedListener(new PlainWatcher());
+        ePlainLat.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+
         ePlainLon.addTextChangedListener(new PlainWatcher());
+        ePlainLon.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
 
         bLatHem.setOnClickListener(new HemisphereClickListener());
         bLonHem.setOnClickListener(new HemisphereClickListener());
@@ -1328,7 +1327,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         // replace the old equation list with a newly created ones
         equations = sortVariables(equations, coordinateChars, new CaseCheck(true), getString(R.string.equation_hint), new EquationWatcher());
         updateGrid(equations, equationGrid, 0);
-        lowerCaseVariables.setVisibility(equations.size() > 0 ? View.VISIBLE : View.GONE);
         resortFreeVariables();
     }
 
@@ -1345,13 +1343,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         // replace the old free variables list with a newly created ones.
         freeVariables = sortVariables(freeVariables, equationStrings, new CaseCheck(false), getString(R.string.free_variable_hint), new VariableWatcher());
         updateGrid(freeVariables, variableGrid, equations.size());
-    }
-
-    private void switchVariablesInEquationsToLowerCase() {
-        for (CalculatorVariable equation : equations) {
-            equation.switchToLowerCase();
-        }
-        resortEquations();
     }
 
     private void resetCalculator() {
