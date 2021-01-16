@@ -388,6 +388,7 @@
     <string name="caches_reset_cache_icons">Deseja redefinir ícones de geocaches para todas as geocaches seleccionadas?</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
     <string name="caches_set_listmarker">Definir marcador de lista</string>
+    <string name="select_icon">Seleccionar ícone</string>
     <string name="onetime_missing_unicode_info">A sua versão do Android não suporta a detecção automática de ícones suportados - alguns caracteres podem estar em falta</string>
     <!-- caches lists -->
     <string name="menu_lists">Gerir listas</string>
