@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -23,7 +24,6 @@ import androidx.gridlayout.widget.GridLayout;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,10 +80,6 @@ public class CalculatorVariable extends LinearLayout {
 
             return returnValue;
         }
-
-        public void switchToLowerCase() {
-            this.expression = this.expression.toLowerCase(Locale.US);
-        }
     }
 
     public static class VariableDataFactory implements JSONAbleFactory<VariableData> {
@@ -94,7 +90,7 @@ public class CalculatorVariable extends LinearLayout {
     }
 
     @SuppressLint("SetTextI18n")
-    public CalculatorVariable(final Context context, final VariableData variableData, final String hintText, final TextWatcher textWatcher) {
+    public CalculatorVariable(final Context context, final VariableData variableData, final String hintText, final TextWatcher textWatcher, final InputFilter[] filter) {
         super(context);
         this.variableData = variableData;
         cacheDirty = true;
@@ -136,10 +132,11 @@ public class CalculatorVariable extends LinearLayout {
             @Override
             public void afterTextChanged(final Editable s) {
                 setCacheDirty();
-                CalculatorVariable.this.variableData.expression = expression.getText().toString();
+                CalculatorVariable.this.variableData.expression = s.toString();
             }
         });
         expression.addTextChangedListener(textWatcher);
+        expression.setFilters(filter);
 
         addView(name);
         addView(expression);
@@ -250,11 +247,5 @@ public class CalculatorVariable extends LinearLayout {
         }
 
         return getCachedValue();
-    }
-
-    public void switchToLowerCase() {
-        variableData.switchToLowerCase();
-        expression.setText(variableData.expression);
-        setCacheDirty();
     }
 }
