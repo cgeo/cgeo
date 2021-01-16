@@ -169,12 +169,12 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public int getCacheMapMarkerId(final boolean disabled) {
+    public int getCacheMapMarkerId(final boolean disabled, final boolean archived) {
         final String icons = Settings.getECIconSet();
         if (StringUtils.equals(icons, "1")) {
-            return disabled ? R.drawable.marker_disabled_other : R.drawable.marker_other;
+            return archived ? R.drawable.marker_archived_other : disabled ? R.drawable.marker_disabled_other : R.drawable.marker_other;
         }
-        return disabled ? R.drawable.marker_disabled_oc : R.drawable.marker_oc;
+        return archived ? R.drawable.marker_archived_oc : disabled ? R.drawable.marker_disabled_oc : R.drawable.marker_oc;
     }
 
     @Override
