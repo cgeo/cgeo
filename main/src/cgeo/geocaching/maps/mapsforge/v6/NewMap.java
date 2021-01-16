@@ -130,7 +130,6 @@ import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
-import org.mapsforge.map.android.input.MapZoomControls;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
@@ -719,9 +718,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         // Exchange layer
         if (newLayer != null) {
-            final MapZoomControls zoomControls = mapView.getMapZoomControls();
-            zoomControls.setZoomLevelMax(newLayer.getZoomLevelMax());
-            zoomControls.setZoomLevelMin(newLayer.getZoomLevelMin());
+            mapView.setZoomLevelMax(newLayer.getZoomLevelMax());
+            mapView.setZoomLevelMin(newLayer.getZoomLevelMin());
 
             final Layers layers = this.mapView.getLayerManager().getLayers();
             int index = 0;
