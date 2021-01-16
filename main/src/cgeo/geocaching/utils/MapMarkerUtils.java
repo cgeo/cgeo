@@ -128,22 +128,28 @@ public final class MapMarkerUtils {
         final String id = null == waypointType ? WaypointType.WAYPOINT.id : waypointType.id;
         ArrayList<Integer> assignedMarkers = new ArrayList<>();
         final String geocode = waypoint.getGeocode();
+        boolean cacheIsDisabled = false;
+        boolean cacheIsArchived = false;
         if (StringUtils.isNotBlank(geocode)) {
             final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (null != cache) {
                 assignedMarkers = getAssignedMarkers(cache);
+                cacheIsDisabled = cache.isDisabled();
+                cacheIsArchived = cache.isArchived();
             }
         }
         final int hashcode = new HashCodeBuilder()
             .append(waypoint.isVisited())
             .append(id)
             .append(assignedMarkers)
+            .append(cacheIsDisabled)
+            .append(cacheIsArchived)
             .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint, assignedMarkers));
+                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint, assignedMarkers, cacheIsDisabled, cacheIsArchived));
                 overlaysCache.put(hashcode, marker);
             }
             return marker;
@@ -161,11 +167,10 @@ public final class MapMarkerUtils {
      *          a drawable representing the current waypoint status
      */
     @NonNull
-    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers) {
+    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers, final boolean cacheIsDisabled, final boolean cacheIsArchived) {
         final WaypointType waypointType = waypoint.getWaypointType();
 
-
-        final Drawable marker = Compatibility.getDrawable(res, !waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
+        final Drawable marker = Compatibility.getDrawable(res, waypoint.isVisited() ? R.drawable.marker_transparent : cacheIsArchived ? R.drawable.marker_archived : cacheIsDisabled ? R.drawable.marker_disabled : R.drawable.marker);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(marker));
 
