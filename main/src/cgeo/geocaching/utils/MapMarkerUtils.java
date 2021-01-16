@@ -91,6 +91,7 @@ public final class MapMarkerUtils {
             .append(cache.isOwner())
             .append(cache.isFound())
             .append(cache.isDNF())
+            .append(cache.hasWillAttendForFutureEvent())
             .append(showUserModifiedCoords(cache))
             .append(cache.getPersonalNote())
             .append(cache.isLogOffline())
@@ -270,8 +271,10 @@ public final class MapMarkerUtils {
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, VERTICAL.TOP, HORIZONTAL.RIGHT));
         }
-        // found
-        if (!showBigSmileys(cacheListType)) {
+        // will attend / found
+        if (cache.hasWillAttendForFutureEvent()) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_calendar, VERTICAL.TOP, HORIZONTAL.LEFT));
+        } else if (!showBigSmileys(cacheListType)) {
             final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
             if (loggedMarkerId != null) {
                 insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, VERTICAL.TOP, HORIZONTAL.LEFT));

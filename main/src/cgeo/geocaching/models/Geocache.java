@@ -461,6 +461,31 @@ public class Geocache implements IWaypoint {
         return cacheType.getValue().isEvent();
     }
 
+    // returns whether the current cache is a future event, for which
+    // the user has logged a "will attend", but no "attended" yet
+    public boolean hasWillAttendForFutureEvent() {
+        if (!isEventCache()) {
+            return false;
+        }
+        final Date eventDate = getHiddenDate();
+        final boolean expired = CalendarUtils.isPastEvent(this);
+        if (eventDate == null || expired) {
+            return false;
+        }
+
+        boolean willAttend = false;
+        final List<LogEntry> logs = getLogs();
+        for (final LogEntry logEntry : logs) {
+            final LogType logType = logEntry.getType();
+            if (logType == LogType.ATTENDED) {
+                return false;
+            } else if (logType == LogType.WILL_ATTEND && logEntry.isOwn()) {
+                willAttend = true;
+            }
+        }
+        return willAttend;
+    }
+
     public void logVisit(final Activity fromActivity) {
         if (!getConnector().canLog(this)) {
             ActivityMixin.showToast(fromActivity, fromActivity.getString(R.string.err_cannot_log_visit));
