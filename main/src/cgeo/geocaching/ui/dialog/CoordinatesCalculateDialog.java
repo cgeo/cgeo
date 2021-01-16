@@ -219,10 +219,12 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
             // Intentionally left empty
         }
+
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
             // Intentionally left empty
         }
+
         @Override
         public void afterTextChanged(final Editable s) {
             stateSaved = false;
@@ -231,15 +233,24 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
     }
 
+    public static class EquationFilter implements InputFilter {
+        @Override
+        public CharSequence filter(final CharSequence charSequence, final int i, final int i1, final Spanned spanned, final int i2, final int i3) {
+            return charSequence.toString().replaceAll("[^0-9a-zA-Z \\-+*/%^()]", "").toLowerCase();
+        }
+    }
+
     private class VariableWatcher implements TextWatcher {
         @Override
         public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
             // Intentionally left empty
         }
+
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
             // Intentionally left empty
         }
+
         @Override
         public void afterTextChanged(final Editable s) {
             stateSaved = false;
@@ -249,6 +260,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             }
 
             updateResult();
+        }
+    }
+
+    public static class VariableFilter implements InputFilter {
+        @Override
+        public CharSequence filter(final CharSequence charSequence, final int i, final int i1, final Spanned spanned, final int i2, final int i3) {
+            return charSequence.toString().replaceAll("[^0-9 \\-+*/%^()]", "");
         }
     }
 
@@ -713,14 +731,18 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             equations.add(new CalculatorVariable(getContext(),
                     equ,
                     getString(R.string.equation_hint),
-                    new EquationWatcher()));
+                    new EquationWatcher(),
+                    new InputFilter[] {new EquationFilter()})
+            );
         }
 
         for (final CalculatorVariable.VariableData var : savedState.freeVariables) {
             freeVariables.add(new CalculatorVariable(getContext(),
                     var,
                     getString(R.string.free_variable_hint),
-                    new VariableWatcher()));
+                    new VariableWatcher(),
+                    new InputFilter[] {new VariableFilter()}));
+
         }
 
         variableBank.addAll(savedState.variableBank);
@@ -1253,7 +1275,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                                                    final String variableNames,
                                                    final CaseCheck theCase,
                                                    final String hintText,
-                                                   final TextWatcher textWatcher) {
+                                                   final TextWatcher textWatcher,
+                                                   final InputFilter[] filters) {
         final List<CalculatorVariable> returnList = new ArrayList<>();
 
         final char[] sortedVariables = variableNames.toCharArray();
@@ -1276,7 +1299,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                     thisEquation = new CalculatorVariable(getContext(),
                             data,
                             hintText,
-                            textWatcher);
+                            textWatcher,
+                            filters);
                 }
 
                 returnList.add(thisEquation);
@@ -1325,7 +1349,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         // replace the old equation list with a newly created ones
-        equations = sortVariables(equations, coordinateChars, new CaseCheck(true), getString(R.string.equation_hint), new EquationWatcher());
+        equations = sortVariables(
+                equations,
+                coordinateChars,
+                new CaseCheck(true),
+                getString(R.string.equation_hint),
+                new EquationWatcher(),
+                new InputFilter[] {new EquationFilter()});
         updateGrid(equations, equationGrid, 0);
         resortFreeVariables();
     }
@@ -1341,7 +1371,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         // replace the old free variables list with a newly created ones.
-        freeVariables = sortVariables(freeVariables, equationStrings, new CaseCheck(false), getString(R.string.free_variable_hint), new VariableWatcher());
+        freeVariables = sortVariables(
+                freeVariables,
+                equationStrings,
+                new CaseCheck(false),
+                getString(R.string.free_variable_hint),
+                new VariableWatcher(),
+                new InputFilter[] {new VariableFilter()});
         updateGrid(freeVariables, variableGrid, equations.size());
     }
 

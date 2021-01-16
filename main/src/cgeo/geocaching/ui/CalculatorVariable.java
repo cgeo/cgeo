@@ -90,7 +90,7 @@ public class CalculatorVariable extends LinearLayout {
     }
 
     @SuppressLint("SetTextI18n")
-    public CalculatorVariable(final Context context, final VariableData variableData, final String hintText, final TextWatcher textWatcher) {
+    public CalculatorVariable(final Context context, final VariableData variableData, final String hintText, final TextWatcher textWatcher, final InputFilter[] filter) {
         super(context);
         this.variableData = variableData;
         cacheDirty = true;
@@ -136,7 +136,7 @@ public class CalculatorVariable extends LinearLayout {
             }
         });
         expression.addTextChangedListener(textWatcher);
-        expression.setFilters((new InputFilter[] {(charSequence, i, i1, spanned, i2, i3) -> charSequence.toString().toLowerCase()}));
+        expression.setFilters(filter);
 
         addView(name);
         addView(expression);
