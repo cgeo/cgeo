@@ -112,11 +112,8 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
     @Override
-    public int getCacheMapMarkerId(final boolean disabled) {
-        if (disabled) {
-            return R.drawable.marker_disabled_oc;
-        }
-        return R.drawable.marker_oc;
+    public int getCacheMapMarkerId(final boolean disabled, final boolean archived) {
+        return archived ? R.drawable.marker_archived_oc : disabled ? R.drawable.marker_disabled_oc : R.drawable.marker_oc;
     }
 
     @Override

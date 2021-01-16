@@ -189,11 +189,8 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public int getCacheMapMarkerId(final boolean disabled) {
-        if (disabled) {
-            return R.drawable.marker_disabled_other;
-        }
-        return R.drawable.marker_other;
+    public int getCacheMapMarkerId(final boolean disabled, final boolean archived) {
+        return archived ? R.drawable.marker_archived_other : disabled ? R.drawable.marker_disabled_other : R.drawable.marker_other;
     }
 
     @Override
