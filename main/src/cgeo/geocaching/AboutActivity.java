@@ -214,6 +214,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @BindView(R.id.support) protected TextView support;
         @BindView(R.id.website) protected TextView website;
         @BindView(R.id.facebook) protected TextView facebook;
+        @BindView(R.id.fangroup) protected TextView fangroup;
         @BindView(R.id.twitter) protected TextView twitter;
         @BindView(R.id.nutshellmanual) protected TextView nutshellmanual;
         @BindView(R.id.market) protected TextView market;
@@ -235,6 +236,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                     "&body=" + Uri.encode(SystemInformation.getSystemInformation(AboutActivity.this)) + "\n");
             setClickListener(website, "https://www.cgeo.org/");
             setClickListener(facebook, "https://www.facebook.com/pages/cgeo/297269860090");
+            setClickListener(fangroup, "https://facebook.com/groups/cgeo.fangruppe");
             setClickListener(twitter, "https://twitter.com/android_gc");
             setClickListener(nutshellmanual, "https://manual.cgeo.org/");
             setClickListener(faq, "https://faq.cgeo.org/");
