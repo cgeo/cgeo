@@ -377,8 +377,6 @@
     <string name="caches_clear_offlinelogs_progress">Fjerner offline-logger</string>
     <string name="caches_make_list_unique">Gjør listen unik</string>
     <string name="caches_set_listmarker">Sett listemarkering</string>
-    <string name="caches_listmarker_none">Ingen markering</string>
-    <string name="caches_listmarker_selected">(valgt)</string>
     <!-- caches lists -->
     <string name="menu_lists">Endre lister</string>
     <string name="list_menu_create">Opprett ny liste</string>
@@ -671,7 +669,7 @@
     <string name="init_circlecolor">Farge på sirkellinje</string>
     <string name="init_circlecolor_summary">Velg farge og gjennomsiktighet for sirkler. Sirkler er en visuell presentasjon av minimumsradius rundt en cache eller et fysisk veipunkt. Andre cacher eller fysiske veipunkter kan ikke plasseres innenfor denne radiusen. (Gjelder geocaching.com)</string>
     <string name="init_circlefillcolor">Fyllfarge på sirkel</string>
-    <string name="init_circlefillcolor_summary">Velg farge og gjennomsiktighet for å fylle sirklene</string>
+    <string name="init_circlefillcolor_summary">Velg fyllfarge og gjennomsiktighet for sirklene</string>
     <string name="init_include_found_status">Inkluder \"Funnet\"-status</string>
     <string name="init_trackautovisit">Besøkt av reisevenner</string>
     <string name="init_summary_trackautovisit">Sett sporbare automatisk til \"Besøkt\" ved logging av en cache</string>

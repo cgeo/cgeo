@@ -381,8 +381,6 @@
     <string name="caches_clear_offlinelogs_progress">Очищення автономних журналів</string>
     <string name="caches_make_list_unique">складати унікальні списки</string>
     <string name="caches_set_listmarker">встановити маркер списку</string>
-    <string name="caches_listmarker_none">відсутність маркера</string>
-    <string name="caches_listmarker_selected">вибраний</string>
     <!-- caches lists -->
     <string name="menu_lists">Керувати списком</string>
     <string name="list_menu_create">Створити новий список</string>

@@ -378,8 +378,6 @@
     <string name="caches_clear_offlinelogs_progress">Offline Logs gi geläscht</string>
     <string name="caches_make_list_unique">All d\'Cachen op eng Lëscht</string>
     <string name="caches_set_listmarker">Lëschtenmarkéierung setzen</string>
-    <string name="caches_listmarker_none">Keng Markéierung</string>
-    <string name="caches_listmarker_selected">(ausgewielt)</string>
     <!-- caches lists -->
     <string name="menu_lists">Lëschten verwalten</string>
     <string name="list_menu_create">Nei Lëscht erstellen</string>

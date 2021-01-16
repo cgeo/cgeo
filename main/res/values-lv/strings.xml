@@ -370,8 +370,6 @@
     <string name="caches_clear_offlinelogs_progress">Bezsaistes pierakstu dzēšana</string>
     <string name="caches_make_list_unique">Atzīmēt sarakstu kā unikālu</string>
     <string name="caches_set_listmarker">Iestatīt saraksta marķieri</string>
-    <string name="caches_listmarker_none">Nav marķiera</string>
-    <string name="caches_listmarker_selected">(izvēlēts)</string>
     <!-- caches lists -->
     <string name="menu_lists">Pārvaldīt sarakstus</string>
     <string name="list_menu_create">Izveidot jaunu sarakstu</string>

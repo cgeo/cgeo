@@ -376,8 +376,6 @@
     <string name="caches_clear_offlinelogs_progress">清除离线服务器</string>
     <string name="caches_make_list_unique">使列表唯一</string>
     <string name="caches_set_listmarker">设置列表标记</string>
-    <string name="caches_listmarker_none">无标记</string>
-    <string name="caches_listmarker_selected">（已选）</string>
     <!-- caches lists -->
     <string name="menu_lists">管理列表</string>
     <string name="list_menu_create">新的列表</string>

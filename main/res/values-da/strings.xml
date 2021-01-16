@@ -378,8 +378,6 @@
     <string name="caches_clear_offlinelogs_progress">Fjerner offline logbeskeder</string>
     <string name="caches_make_list_unique">Fjern cacherne i denne liste fra øvrige lister</string>
     <string name="caches_set_listmarker">Sæt listemarkering</string>
-    <string name="caches_listmarker_none">Ingen markering</string>
-    <string name="caches_listmarker_selected">(valgt)</string>
     <!-- caches lists -->
     <string name="menu_lists">Administrér lister</string>
     <string name="list_menu_create">Opret ny liste</string>

@@ -381,8 +381,6 @@
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
-    <string name="caches_listmarker_none">Brak znacznika</string>
-    <string name="caches_listmarker_selected">(wybrane)</string>
     <!-- caches lists -->
     <string name="menu_lists">Zarządzaj listami</string>
     <string name="list_menu_create">Utwórz nową listę</string>
@@ -1286,7 +1284,7 @@
     <string name="helper_calendar_pastevent_question">Przeszłe wydarzenie. Dodać mimo wszystko?</string>
     <string name="helper_sendtocgeo_title">Wyślij do c:geo</string>
     <string name="helper_contacts_title">c:geo - dodatek Kontakty</string>
-    <string name="helper_contacts_description">Umożliwia Tobie otwarcie kontaktu (z Twojej książki adresowej) bezpośrednio z wpisu do dziennika, więc możesz łatwiej poprosić przyjaciół o pomoc.</string>
+    <string name="helper_contacts_description">Umożliwia otwarcie kontaktu (z Twojej książki adresowej) bezpośrednio z wpisu do dziennika, więc możesz łatwiej poprosić przyjaciół o pomoc.</string>
     <string name="helper_sendtocgeo_description">Wyślij do c:geo jest rozszerzeniem do przeglądarki <strong>na komputer</strong>. Podczas przeglądania Geocaching.com pozwala na wysłanie skrzynek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
     <string name="helper_locus_description">Program do nawigacji w terenie dla Twojego telefonu lub tabletu. Przeglądaj mapy topograficzne offiline, śledź swoją trasę, poluj na skrzynki geocache, używaj nawigacji głosowej i wiele więcej.</string>
     <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
@@ -1859,7 +1857,7 @@
     <string name="map_trail_hide">Ukryj historię ścieżki</string>
     <!-- history track export -->
     <string name="trailhistory">Historyczny tor</string>
-    <string name="export_trailhistory_title">Pokaż historię ścieżki</string>
+    <string name="export_trailhistory_title">Eksportuj historię ścieżki</string>
     <string name="export_trailhistory_success">Eksportowano historię toru do \"%s\"</string>
     <string name="export_trailhistory_clear_after_export">Wyczyść historię po eksporcie</string>
     <!-- individual route export -->

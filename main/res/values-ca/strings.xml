@@ -379,8 +379,6 @@
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
-    <string name="caches_listmarker_none">No marcat</string>
-    <string name="caches_listmarker_selected">(seleccionat)</string>
     <!-- caches lists -->
     <string name="menu_lists">Gestiona llistes</string>
     <string name="list_menu_create">Crea una llista nova</string>

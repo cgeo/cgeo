@@ -380,8 +380,6 @@
     <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
     <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
     <string name="caches_set_listmarker">Nastaviť značku zoznamu</string>
-    <string name="caches_listmarker_none">Bez značky</string>
-    <string name="caches_listmarker_selected">(vybrané)</string>
     <!-- caches lists -->
     <string name="menu_lists">Spravovať zoznamy</string>
     <string name="list_menu_create">Vytvoriť nový zoznam</string>

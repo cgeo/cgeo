@@ -390,9 +390,7 @@
     <string name="caches_reset_cache_icons">Chcete obnovit ikony kešek pro všechny vybrané kešky?</string>
     <string name="caches_make_list_unique">Vytvořit seznam jedinečných</string>
     <string name="caches_set_listmarker">Nastavit značku seznamu</string>
-    <string name="caches_listmarker_none">Bez značky</string>
-    <string name="caches_listmarker_selected">(vybrané)</string>
-    <string name="onetime_missing_unicode_title">Vyberte emotikon</string>
+    <string name="select_icon">Vybrat ikonu</string>
     <string name="onetime_missing_unicode_info">Vaše verze Androidu nepodporuje automatickou detekci podporovaných ikon - některé znaky mohou chybět</string>
     <!-- caches lists -->
     <string name="menu_lists">Spravovat seznamy</string>
@@ -1075,6 +1073,8 @@
     <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
     <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku)</string>
+    <string name="onetime_info_longtap_disabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešky.\n\nDlouhé klepnutí na mapu je momentálně zakázáno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
+    <string name="onetime_info_longtap_enabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešky.\n\nDlouhé klepnutí na mapu je aktuálně povoleno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
     <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>

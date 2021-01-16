@@ -27,4 +27,4 @@ Procure e descubra TBs, faça a gestão do seu inventário de TBs e deixe um TB 
 Se tiver problemas para instalar ou usar o c:geo primeiro veja as nossas FAQ (https://faq.cgeo.org) ou consulte o guia do utilizador (https://manual.cgeo.org).
 Se ainda houver problemas, entre em contacto com o suporte via e-mail.
 
-If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.
+Se quiser saber porque o c:geo precisa das permissões solicitadas, por favor verifique em https://www.cgeo.org/faq#permissions para uma explicação.
