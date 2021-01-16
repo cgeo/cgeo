@@ -10,6 +10,7 @@
 <li>New: Cache icon for archived caches have a reddish background</li>
 <li>New: Update checker for downloaded offline maps (will work only for new downloads)</li>
 <li>New: Color of location accuracy circle is configurable now</li>
+<li>Fix: Prevent exceeding max map zoom on double tap</li>
 </ul>
 
 <h4>Cache details:</h4>
@@ -17,6 +18,7 @@
 <li>New: Allow edit of description for user-defined caches</li>
 <li>Change: New user-defined waypoints will get shorter names</li>
 <li>Change: Numbering of new user-defined waypoints will use a cache-wide number (instead of per-type numbering) and will include waypoints of type trailhead</li>
+<li>New: Auto-adjust case and filter characters for text input in waypoint calculator</li>
 </ul>
 
 <h4>Custom symbols:</h4>
