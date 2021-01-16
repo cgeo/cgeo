@@ -145,26 +145,13 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/faq_title"
-                    android:textColor="?text_color"
-                    android:textSize="14sp" />
+                    style="@style/about_info_title" />
 
                 <TextView
                     android:id="@+id/faq"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:linksClickable="false"
                     android:text="@string/faq_link"
-                    android:textColor="?text_color"
-                    android:textColorLink="?text_color_link"
-                    android:textSize="14sp" />
+                    style="@style/about_info_content" />
             </TableRow>
 
             <TableRow
@@ -173,27 +160,13 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/about_nutshellmanual"
-                    android:textColor="?text_color"
-                    android:textSize="14sp" />
+                    style="@style/about_info_title" />
 
                 <TextView
                     android:id="@+id/nutshellmanual"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:linksClickable="false"
                     android:text="@string/manual_link"
-                    android:textColor="?text_color"
-                    android:textColorLink="?text_color_link"
-                    android:textSize="14sp" />
+                    style="@style/about_info_content" />
             </TableRow>
 
             <TableRow
@@ -202,26 +175,28 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/facebook_title"
-                    android:textColor="?text_color"
-                    android:textSize="14sp" />
+                    style="@style/about_info_title" />
 
                 <TextView
                     android:id="@+id/facebook"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:linksClickable="false"
                     android:text="@string/facebook_link"
-                    android:textColor="?text_color"
-                    android:textColorLink="?text_color_link"
-                    android:textSize="14sp" />
+                    style="@style/about_info_content" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:text="@string/facebook_title"
+                    style="@style/about_info_title" />
+
+                <TextView
+                    android:id="@+id/fangroup"
+                    android:text="@string/fangroup_link"
+                    style="@style/about_info_content" />
             </TableRow>
 
             <TableRow
@@ -230,26 +205,13 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/twitter_title"
-                    android:textColor="?text_color"
-                    android:textSize="14sp" />
+                    style="@style/about_info_title" />
 
                 <TextView
                     android:id="@+id/twitter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:linksClickable="false"
                     android:text="@string/twitter_link"
-                    android:textColor="?text_color"
-                    android:textColorLink="?text_color_link"
-                    android:textSize="14sp" />
+                    style="@style/about_info_content" />
             </TableRow>
 
             <TableRow
@@ -258,26 +220,13 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/support_title"
-                    android:textColor="?text_color"
-                    android:textSize="14sp" />
+                    style="@style/about_info_title" />
 
                 <TextView
                     android:id="@+id/support"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:linksClickable="false"
                     android:text="@string/support_mail"
-                    android:textColor="?text_color"
-                    android:textColorLink="?text_color_link"
-                    android:textSize="14sp" />
+                    style="@style/about_info_content" />
             </TableRow>
 
             <TableRow
@@ -286,26 +235,13 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/website_title"
-                    android:textColor="?text_color"
-                    android:textSize="14sp" />
+                    style="@style/about_info_title" />
 
                 <TextView
                     android:id="@+id/website"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:linksClickable="false"
                     android:text="@string/website_link"
-                    android:textColor="?text_color"
-                    android:textColorLink="?text_color_link"
-                    android:textSize="14sp" />
+                    style="@style/about_info_content" />
             </TableRow>
 
             <TableRow
@@ -314,26 +250,13 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/github_title"
-                    android:textColor="?text_color"
-                    android:textSize="14sp" />
+                    style="@style/about_info_title" />
 
                 <TextView
                     android:id="@+id/github"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:linksClickable="false"
                     android:text="@string/github_link"
-                    android:textColor="?text_color"
-                    android:textColorLink="?text_color_link"
-                    android:textSize="14sp" />
+                    style="@style/about_info_content" />
             </TableRow>
 
             <TableRow
@@ -342,26 +265,13 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/market_title"
-                    android:textColor="?text_color"
-                    android:textSize="14sp" />
+                    style="@style/about_info_title" />
 
                 <TextView
                     android:id="@+id/market"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:linksClickable="false"
                     android:text="@string/market_link"
-                    android:textColor="?text_color"
-                    android:textColorLink="?text_color_link"
-                    android:textSize="14sp" />
+                    style="@style/about_info_content" />
             </TableRow>
         </TableLayout>
     </LinearLayout>

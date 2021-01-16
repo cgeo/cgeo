@@ -1701,6 +1701,7 @@
     <string name="support_title">Support</string>
     <string name="website_title">Website</string>
     <string name="facebook_link"><a href="">c:geo page</a></string>
+    <string name="fangroup_link"><a href="">German user group</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo on Google Play</a></string>
     <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
