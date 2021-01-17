@@ -721,6 +721,14 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             mapView.setZoomLevelMax(newLayer.getZoomLevelMax());
             mapView.setZoomLevelMin(newLayer.getZoomLevelMin());
 
+            // make sure map zoom level is within new zoom level boundaries
+            final int currentZoomLevel = mapView.getMapZoomLevel();
+            if (currentZoomLevel < newLayer.getZoomLevelMin()) {
+                mapView.setMapZoomLevel(newLayer.getZoomLevelMin());
+            } else if (currentZoomLevel > newLayer.getZoomLevelMax()) {
+                mapView.setMapZoomLevel(newLayer.getZoomLevelMax());
+            }
+
             final Layers layers = this.mapView.getLayerManager().getLayers();
             int index = 0;
             if (oldLayer != null) {
