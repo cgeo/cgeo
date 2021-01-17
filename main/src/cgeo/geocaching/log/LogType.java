@@ -28,7 +28,7 @@ public enum LogType {
     UNARCHIVE(12, "12", "Unarchive", "", R.string.log_unarchived, R.drawable.mark_green_more),
     TEMP_DISABLE_LISTING(22, "22", "Temporarily Disable Listing", "Temporarily unavailable", R.string.log_disabled, R.drawable.mark_red_more),
     NEEDS_ARCHIVE(7, "7", "Needs Archived", "", R.string.log_needs_archived, R.drawable.mark_red, R.drawable.marker_archive),
-    WILL_ATTEND(9, "9", "Will Attend", "Will attend", R.string.log_attend),
+    WILL_ATTEND(9, "9", "Will Attend", "Will attend", R.string.log_attend, R.drawable.mark_gray, R.drawable.marker_calendar),
     ATTENDED(10, "10", "Attended", "Attended", R.string.log_attended, R.drawable.mark_green, R.drawable.marker_found_offline),
     RETRIEVED_IT(13, "13", "Retrieved it", "", R.string.log_retrieved, R.drawable.mark_green_more),
     PLACED_IT(14, "14", "placed it", "", R.string.log_placed, R.drawable.mark_green_more),
