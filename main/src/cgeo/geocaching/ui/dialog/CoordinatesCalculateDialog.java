@@ -1219,33 +1219,27 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                                                    final String hintText,
                                                    final TextWatcher textWatcher,
                                                    final InputFilter[] filters) {
-        final List<CalculatorVariable> returnList = new ArrayList<>();
+         final List<CalculatorVariable> returnList = new ArrayList<>();
 
-        List<VariableData> varDataList = new ArrayList<>(variables.size());
-        for (CalculatorVariable calcVar: variables
-             ) {
-            varDataList.add(calcVar.getData());
-        }
-        varDataList = CoordinatesCalculateUtils.updateVariablesList(varDataList, variableBank, variableNames, useUpper);
+         List<VariableData> varDataList = new ArrayList<>(variables.size());
+         for (CalculatorVariable calcVar : variables
+         ) {
+             varDataList.add(calcVar.getData());
+         }
+         varDataList = CoordinatesCalculateUtils.updateVariablesList(varDataList, variableBank, variableNames, useUpper);
 
-                    thisEquation = new CalculatorVariable(getContext(),
-                            data,
-                            hintText,
-                            textWatcher,
-                            filters);
-                }
+         for (VariableData data : varDataList) {
+             final CalculatorVariable thisEquation = new CalculatorVariable(getContext(),
+                 data,
+                 hintText,
+                 textWatcher,
+                 filters);
 
-        for (VariableData data : varDataList) {
-            final CalculatorVariable thisEquation = new CalculatorVariable(getContext(),
-                data,
-                hintText,
-                textWatcher);
+             returnList.add(thisEquation);
+         }
 
-            returnList.add(thisEquation);
-        }
-
-        return returnList;
-    }
+         return returnList;
+     }
 
     /**
      * Re-sort the equations into the order in which they first appear in the 'buttons' or 'plain-text' fields as appropriate

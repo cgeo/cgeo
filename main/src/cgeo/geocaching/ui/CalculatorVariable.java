@@ -87,7 +87,7 @@ public class CalculatorVariable extends LinearLayout {
             @Override
             public void afterTextChanged(final Editable s) {
                 setCacheDirty();
-                CalculatorVariable.this.variableData.expression = s.toString();
+                CalculatorVariable.this.variableData.setExpression(s.toString());
             }
         });
         expression.addTextChangedListener(textWatcher);
