@@ -583,7 +583,7 @@
     <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>
     <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
-    <string name="init_global_wp_extraction_disable">Desactivar extracção de pont. adicionais</string>
+    <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
     <string name="init_summary_customtabs_as_browser">Sítios web externos serão exibidos sem sair do c:geo (apenas possível se o Chrome estiver instalado)</string>
@@ -598,7 +598,7 @@
     <string name="init_listdisplay">Listas adicionais</string>
     <string name="init_summary_listdisplay">Numa lista de caches, mostra o nome de outras listas a que cada cache armazenada esteja associada</string>
     <string name="init_livelist">Mostrar direcção</string>
-    <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
+    <string name="init_summary_livelist">Mostra uma seta com a orientação em azimute das caches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Por favor, note que este recurso pode fazer cópia de segurança de caches, pontos adicionais &amp; configurações, mas sem imagens de cache. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para um local independente.</string>
@@ -661,7 +661,7 @@
     <string name="init_map_directory_description">Pasta com mapas offline</string>
     <string name="init_gpx_exportdir">Directório para exportar GPX</string>
     <string name="init_gpx_importdir">Directório para importar GPX</string>
-    <string name="init_dataDir">Seleccione a pasta de dados das Geocaches</string>
+    <string name="init_dataDir">Seleccionar directório</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de percurso</string>
     <string name="init_maptrail_length">Comprimento máx. do histórico de percurso</string>
@@ -684,7 +684,7 @@
     <string name="init_trackwidth">Largura da linha do percurso/rota GPX</string>
     <string name="init_trackwidth_summary">Seleccione a largura para a linha do percurso/rota GPX</string>
     <string name="init_circlecolor">Cor da linha do círculo</string>
-    <string name="init_circlecolor_summary">Selecciona a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
+    <string name="init_circlecolor_summary">Seleccionar a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
     <string name="init_circlefillcolor">Cor de preenchimento do círculo</string>
     <string name="init_circlefillcolor_summary">Seleccionar a cor e opacidade para o preenchimento dos círculos</string>
     <string name="init_accuracycirclecolor">Cor da linha do círculo da precisão</string>
@@ -1582,6 +1582,7 @@
     <string name="support_title">Suporte</string>
     <string name="website_title">Página Web</string>
     <string name="facebook_link"><a href="">Página do c:geo</a></string>
+    <string name="fangroup_link"><a href="">Grupo de utilizadores alemão</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo no Google Play</a></string>
     <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que regista uma cache?</string>
