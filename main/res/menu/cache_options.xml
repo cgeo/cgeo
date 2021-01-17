@@ -37,39 +37,9 @@
         app:showAsAction="ifRoom">
     </item>
     <item
-        android:id="@+id/menu_calendar"
-        android:icon="@drawable/ic_menu_my_calendar"
-        android:title="@string/cache_menu_event"
-        android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_caches_around"
-        android:icon="@drawable/ic_menu_rotate"
-        android:title="@string/cache_menu_around"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
         android:id="@+id/menu_show_in_browser"
         android:icon="@drawable/ic_menu_info_details"
         android:title="@string/cache_menu_browser"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_delete_userdefined_waypoints"
-        android:title="@string/cache_delete_userdefined_waypoints"
-        android:visible="false">
-    </item>
-    <item
-        android:id="@+id/menu_gcvote"
-        android:title="@string/cache_menu_vote"
-        android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_share"
-        android:icon="@drawable/ic_menu_share"
-        android:title="@string/cache_menu_share"
         app:showAsAction="ifRoom">
     </item>
     <item
@@ -85,23 +55,48 @@
         app:showAsAction="ifRoom">
     </item>
     <item
-        android:id="@+id/menu_ignore"
-        android:title="@string/cache_menu_ignore"
-        android:visible="false"
-        app:showAsAction="ifRoom">
+        android:id="@+id/menu_edit_fieldnote"
+        android:icon="@drawable/ic_menu_rotate"
+        android:title="@string/cache_personal_note"
+        android:visible="false">
     </item>
     <item
-        android:id="@+id/menu_extract_waypoints"
-        android:title="@string/cache_menu_extract_waypoints"
-        app:showAsAction="ifRoom"
-        android:visible="false">
+        android:title="@string/cache_waypoints"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/menu_delete_userdefined_waypoints"
+                android:title="@string/cache_delete_userdefined_waypoints"
+                android:visible="false">
+            </item>
+            <item
+                android:id="@+id/menu_extract_waypoints"
+                android:title="@string/cache_menu_extract_waypoints"
+                app:showAsAction="ifRoom"
+                android:visible="false">
+            </item>
+            <item
+                android:id="@+id/menu_toggleWaypointsFromNote"
+                android:title="@string/cache_menu_preventWaypointsFromNote"
+                app:showAsAction="ifRoom"
+                android:visible="false">
+            </item>
+            <item
+                android:id="@+id/menu_clear_goto_history"
+                android:title="@string/clear_goto_history_title"
+                android:visible="false">
+            </item>
+        </menu>
     </item>
     <item
         android:id="@+id/menu_export"
-        android:title="@string/export"
-        app:showAsAction="never|withText"
-        android:visible="false">
+        android:title="@string/share_export"
+        app:showAsAction="never">
         <menu>
+            <item
+                android:id="@+id/menu_share"
+                android:title="@string/cache_menu_share">
+            </item>
             <item
                 android:id="@+id/menu_export_gpx"
                 android:title="@string/export_gpx">
@@ -110,32 +105,36 @@
                 android:id="@+id/menu_export_fieldnotes"
                 android:title="@string/export_fieldnotes">
             </item>
-            <item
-                android:id="@+id/menu_export_persnotes"
-                android:title="@string/export_persnotes">
-            </item>
         </menu>
     </item>
     <item
-        android:id="@+id/menu_edit_fieldnote"
-        android:icon="@drawable/ic_menu_rotate"
-        android:title="@string/cache_personal_note"
-        android:visible="false">
-    </item>
-    <item
-        android:id="@+id/menu_toggleWaypointsFromNote"
-        android:title="@string/cache_menu_preventWaypointsFromNote"
-        app:showAsAction="ifRoom"
-        android:visible="false">
-    </item>
-    <item
-        android:id="@+id/menu_clear_goto_history"
-        android:title="@string/clear_goto_history_title"
-        android:visible="false">
-    </item>
-    <item
-        android:id="@+id/menu_set_cache_icon"
-        android:title="@string/cache_menu_set_cache_icon"
-        android:visible="false">
+        android:title="@string/cache_advanced"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/menu_calendar"
+                android:title="@string/cache_menu_event"
+                android:visible="false">
+            </item>
+            <item
+                android:id="@+id/menu_caches_around"
+                android:title="@string/cache_menu_around">
+            </item>
+            <item
+                android:id="@+id/menu_gcvote"
+                android:title="@string/cache_menu_vote"
+                android:visible="false">
+            </item>
+            <item
+                android:id="@+id/menu_ignore"
+                android:title="@string/cache_menu_ignore"
+                android:visible="false">
+            </item>
+            <item
+                android:id="@+id/menu_set_cache_icon"
+                android:title="@string/cache_menu_set_cache_icon"
+                android:visible="false">
+            </item>
+        </menu>
     </item>
 </menu>

@@ -977,8 +977,8 @@
     <string name="cache_favpoint_not_on">This cache is not one of your favorites.</string>
     <string name="cache_list_select_last">Last Selection</string>
     <string name="cache_images">Images</string>
+    <string name="cache_advanced">Advanced</string>
     <string name="cache_waypoints">Waypoints</string>
-
     <plurals name="waypoints">
         <item quantity="zero">%d waypoints</item>
         <item quantity="one">%d waypoint</item>
@@ -1413,6 +1413,7 @@
     <string name="helper_chirpwolf_description">Chirp Wolf allows you to read the data from ANT+/Garmin chirp tags, which is needed for ANT+/chirp geocaches.</string>
 
     <!-- export -->
+    <string name="share_export">Share / Export</string>
     <string name="export">Export</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exported to</string>
