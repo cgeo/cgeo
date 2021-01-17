@@ -272,7 +272,7 @@ public final class MapMarkerUtils {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, VERTICAL.TOP, HORIZONTAL.RIGHT));
         }
         // will attend / found
-        if (cache.hasWillAttendForFutureEvent()) {
+        if (cache.hasWillAttendForFutureEvent() && !doubleSize) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_calendar, VERTICAL.TOP, HORIZONTAL.LEFT));
         } else if (!showBigSmileys(cacheListType)) {
             final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
@@ -316,7 +316,6 @@ public final class MapMarkerUtils {
                 return offlineLogType;
             }
         }
-
         return cache.getType().markerId;
     }
 
@@ -331,8 +330,9 @@ public final class MapMarkerUtils {
             // an offline log is more important than a DNF
         } else if (cache.isDNF()) {
             return R.drawable.marker_not_found_offline;
+        } else if (cache.hasWillAttendForFutureEvent()) {
+            return R.drawable.marker_calendar;
         }
-
         return null;
     }
 
