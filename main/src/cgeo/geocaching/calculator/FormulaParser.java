@@ -16,10 +16,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * Parse coordinates with formulas.
+ * Similar to @see GeopointPareser, but there valid coordinates (double) are required, here a formula (string) is required.
+ *
  * For plain-format the keyword (FORMULA-PLAIN) has to be used. Use '|' to separate the variables and the user note.
  * example:
  * @name (x) (FORMULA-PLAIN) N48 AB.(C*D/2) E 9 (C-D).(A+B) |A=a+b|a=5| user note
@@ -72,7 +73,7 @@ public final class FormulaParser {
     /**
      * Abstract parser for coordinate formats.
      */
-    private abstract static class AbstractFormulaParser {
+    private interface AbstractFormulaParser {
         /**
          * Parses coordinates (with formula) out of the given string for a specific coordinate format.
          *
@@ -80,7 +81,7 @@ public final class FormulaParser {
          * @return an pair of strings with parsed formula for latitude and longitude
          */
         @Nullable
-        public abstract ImmutablePair<String, String> parse(@NonNull String text);
+        FormulaWrapper parse(@NonNull String text);
 
         /**
          * Parses latitude or longitude out of the given string.
@@ -92,19 +93,19 @@ public final class FormulaParser {
          * @return a wrapper with the parsed latitude/longitude and the length of the match, or null if parsing failed
          */
         @Nullable
-        public abstract ResultWrapper parse(@NonNull String text, @NonNull Geopoint.LatLon latlon);
+        ResultWrapper parse(@NonNull String text, @NonNull Geopoint.LatLon latlon);
 
         /**
          * Indicates which format is parsed
          * @return coordInputFormat which can be parsed
          */
-        public abstract Settings.CoordInputFormatEnum formulaFormat();
+        Settings.CoordInputFormatEnum formulaFormat();
     }
 
     /**
      * Abstract parser for coordinates that consist of two syntactic parts: latitude and longitude.
      */
-    private abstract static class AbstractLatLonFormulaParser extends AbstractFormulaParser {
+    private abstract static class AbstractLatLonFormulaParser implements AbstractFormulaParser {
         private final Pattern latPattern;
         private final Pattern lonPattern;
         private final Pattern latLonPattern;
@@ -133,7 +134,7 @@ public final class FormulaParser {
                 groups.add(matcher.group(i));
             }
 
-            return parse(groups);
+            return createCoordinate(groups);
         }
 
         /**
@@ -141,7 +142,7 @@ public final class FormulaParser {
          */
         @Override
         @Nullable
-        public final ImmutablePair<String, String> parse(@NonNull final String text) {
+        public final FormulaWrapper parse(@NonNull final String text) {
             final MatcherWrapper matcher = new MatcherWrapper(latLonPattern, text);
             if (matcher.find()) {
                 final int groupCount = matcher.groupCount();
@@ -157,7 +158,7 @@ public final class FormulaParser {
                     return null;
                 }
 
-                return new ImmutablePair<>(lat, lon);
+                return new FormulaWrapper(lat, lon, matcher.start(), matcher.group().length(), text);
             }
 
             return null;
@@ -188,7 +189,7 @@ public final class FormulaParser {
          * @return parsed latitude/longitude, or null if parsing failed
          */
         @Nullable
-        public abstract String parse(@NonNull List<String> groups);
+        public abstract String createCoordinate(@NonNull List<String> groups);
     }
 
 
@@ -198,12 +199,8 @@ public final class FormulaParser {
     private static final class MinDecFormulaParser extends AbstractLatLonFormulaParser {
 
         private static final String COORD_FORMULA_PATTERN_STRING = "[\\[\\]\\(\\){}" + CalculationUtils.VALID_OPERATOR_PATTERN + "A-Za-z\\d]+";
+        //                                                        (    2    )                                      (      3      )
         private static final String STRING_MINDEC = "\\s*(" + COORD_FORMULA_PATTERN_STRING + ")[°\\s]+(" + COORD_FORMULA_PATTERN_STRING + "\\." + COORD_FORMULA_PATTERN_STRING + ")['′\\s]?";
-
-        // private static final String FORMULA_PATTERN_STRING = "\\s*[NS]" + COORD_FORMULA_PATTERN_STRING + "\\s*[EW]" + COORD_FORMULA_PATTERN_STRING ;
-        // private static final Pattern FORMULA_PATTERN = Pattern.compile(FORMULA_PATTERN_STRING);
-
-
 
         //                                           (  1  )    (    2    )    (      3      )
         private static final String STRING_LAT = "([NS]?)" + STRING_MINDEC;
@@ -220,11 +217,11 @@ public final class FormulaParser {
         }
 
         /**
-         * @see AbstractLatLonFormulaParser#parse(List)
+         * @see AbstractLatLonFormulaParser#createCoordinate(List)
          */
         @Override
         @Nullable
-        public String parse(@NonNull final List<String> groups) {
+        public String createCoordinate(@NonNull final List<String> groups) {
             final String group1 = groups.get(0).trim();
             final String group2 = groups.get(1).trim();
             final String group3 = groups.get(2).trim();
@@ -306,23 +303,25 @@ public final class FormulaParser {
      *             if coordinates could not be parsed
      */
     @NonNull
-    public ImmutablePair<String, String> parse(@NonNull final String text) {
+    public FormulaWrapper parse(@NonNull final String text) {
         final Set<String> inputs = getParseInputs(text.trim());
-        ImmutablePair<String, String> foundPair = null;
+        FormulaWrapper best = null;
         for (final AbstractFormulaParser parser : parsers) {
             if (isValidParser(parser)) {
                 for (final String input : inputs) {
-                    final ImmutablePair<String, String> coordinatePair = parser.parse(input);
-                    if (coordinatePair == null) {
+                    final FormulaWrapper formulaWrapper = parser.parse(input);
+                    if (formulaWrapper == null) {
                         continue;
                     }
-                    foundPair = coordinatePair;
+                    if (best == null || formulaWrapper.isBetterThan(best)) {
+                        best = formulaWrapper;
+                    }
                 }
             }
         }
 
-        if (foundPair != null) {
-            return foundPair;
+        if (best != null) {
+            return best;
         }
 
         throw new FormulaParser.ParseException("Cannot parse coordinates with formula");

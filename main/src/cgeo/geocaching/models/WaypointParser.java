@@ -2,6 +2,7 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.calculator.CoordinatesCalculateUtils;
 import cgeo.geocaching.calculator.FormulaParser;
+import cgeo.geocaching.calculator.FormulaWrapper;
 import cgeo.geocaching.calculator.VariableData;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
@@ -264,41 +265,38 @@ public class WaypointParser {
     private ImmutablePair<String, String> parseFormula(final String text, final Settings.CoordInputFormatEnum formulaFormat) {
         try {
             final FormulaParser formulaParser = new FormulaParser(formulaFormat);
-            final ImmutablePair<String, String> parsedFullCoordinates = formulaParser.parse(text);
+            final FormulaWrapper parsedFullCoordinates = formulaParser.parse(text);
             if (null != parsedFullCoordinates) {
-                final String latText = parsedFullCoordinates.left;
-                final String lonText = parsedFullCoordinates.right;
+                final String latText = parsedFullCoordinates.getFormulaLat();
+                final String lonText = parsedFullCoordinates.getFormulaLon();
+                final List<VariableData> variables = new ArrayList<>();
 
-                String formulaString = text.trim();
-                // remove lat and lon
-                if (formulaString.startsWith(FormulaParser.WPC_DELIM_STRING)) {
-                    formulaString = TextUtils.replaceFirst(formulaString, "", "" + FormulaParser.WPC_DELIM, "");
-                }
-                formulaString = TextUtils.replaceFirst(formulaString, "", "" + FormulaParser.WPC_DELIM, "");
+                // all text after the formula
+                String remainingString = parsedFullCoordinates.getText().substring(parsedFullCoordinates.getEnd()).trim();
 
-                final String[] formulaList = formulaString.split(FormulaParser.WPC_DELIM_PATTERN_STRING);
-
-                if (0 <= formulaList.length) {
-                    final List<VariableData> variables = new ArrayList<>();
-                    for (final String formulaPart : formulaList
-                         ) {
-                        final String varText = formulaPart.trim();
-                        if (varText.startsWith("" + PARSING_USERNOTE_DELIM)) {
-                            break;
-                        }
-                        formulaString = TextUtils.replaceFirst(formulaString, "", "" + FormulaParser.WPC_DELIM, "");
-                        final String[] equations = varText.split("=", -1);
-                        if (1 <= equations.length) {
-                            final String varName = equations[0].trim();
-                            if (1 == varName.length()) {
-                                final String varExpression = 2 <= equations.length ? equations[1] : "";
+                final String[] formulaList = remainingString.split(FormulaParser.WPC_DELIM_PATTERN_STRING);
+                for (final String varText : formulaList
+                ) {
+                    boolean removeDelimiter = varText.isEmpty();
+                    final String[] equations = varText.split("=", -1);
+                    if (1 <= equations.length) {
+                        final String varName = equations[0].trim();
+                        if (1 == varName.length()) {
+                            removeDelimiter = true;
+                            final String varExpression = equations[1].trim();
+                            if (!varExpression.isEmpty()) {
                                 variables.add(new VariableData(varName.charAt(0), varExpression));
                             }
                         }
                     }
-
-                    return new ImmutablePair<>(CoordinatesCalculateUtils.createCalcState(latText, lonText, variables).toJSON().toString(), formulaString);
+                    if (removeDelimiter) {
+                        final int idxWpcDelim = remainingString.indexOf(FormulaParser.WPC_DELIM);
+                        remainingString = remainingString.substring(idxWpcDelim + 1);
+                    } else {
+                        break;
+                    }
                 }
+                return new ImmutablePair<>(CoordinatesCalculateUtils.createCalcState(latText, lonText, variables).toJSON().toString(), remainingString);
             }
         } catch (final FormulaParser.ParseException ignored) {
             // no formula
@@ -421,30 +419,24 @@ public class WaypointParser {
         final StringBuilder sb = new StringBuilder();
 
         final String calcStateJson = wp.getCalcStateJson();
-        final String plainFormula = exportPlainFormula(calcStateJson);
-        if (null != plainFormula) {
-            sb.append(PARSING_COORD_FORMULA_PLAIN);
-            sb.append(plainFormula + "\n");
-            sb.append(FormulaParser.WPC_DELIM);
-        }
-        return sb.toString();
-    }
-
-    private static String exportPlainFormula(final String calcStateJson) {
-        final StringBuilder sb = new StringBuilder();
-
         if (null != calcStateJson) {
             final CalcState calcState = CalcState.fromJSON(calcStateJson);
             if (calcState.format == Settings.CoordInputFormatEnum.Plain) {
-                sb.append(calcState.plainLat + FormulaParser.WPC_DELIM + calcState.plainLon + "\n");
+                sb.append(PARSING_COORD_FORMULA_PLAIN + " ");
+                sb.append(calcState.plainLat + " " + calcState.plainLon + " ");
                 for (VariableData equ : calcState.equations) {
-                    sb.append(FormulaParser.WPC_DELIM + equ.getName() + " = " + equ.getExpression());
+                    final String equExpr = equ.getExpression().trim();
+                    if (!equExpr.isEmpty()) {
+                        sb.append("" + FormulaParser.WPC_DELIM + equ.getName() + "=" + equExpr);
+                    }
                 }
-                sb.append("\n");
                 for (VariableData var : calcState.freeVariables) {
-                    sb.append(FormulaParser.WPC_DELIM + var.getName() + " = " + var.getExpression());
+                    final String varExpr = var.getExpression().trim();
+                    if (!varExpr.isEmpty()) {
+                        sb.append("" + FormulaParser.WPC_DELIM + var.getName() + "=" + varExpr);
+                    }
                 }
-                sb.append("\n");
+                sb.append("" + FormulaParser.WPC_DELIM);
             }
         }
         return sb.toString();

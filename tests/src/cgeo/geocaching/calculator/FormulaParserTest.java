@@ -5,7 +5,6 @@ import cgeo.geocaching.models.CalcState;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.Test;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -40,20 +39,20 @@ public class FormulaParserTest {
     public void testParseFullCoordinatesDirections() {
         final FormulaParser formulaParser = new FormulaParser();
 
-        final ImmutablePair<String, String> parsedFullCoordinatesNorthEast = formulaParser.parse("N AB° CD.EFG  E H° IJ.KLM");
+        final FormulaWrapper parsedFullCoordinatesNorthEast = formulaParser.parse("N AB° CD.EFG  E H° IJ.KLM");
         assertThat(parsedFullCoordinatesNorthEast).isNotNull();
 
-        final ImmutablePair<String, String> parsedFullCoordinatesSouthWest = formulaParser.parse("S AB° CD.EFG  W H° IJ.KLM");
+        final FormulaWrapper parsedFullCoordinatesSouthWest = formulaParser.parse("S AB° CD.EFG  W H° IJ.KLM");
         assertThat(parsedFullCoordinatesSouthWest).isNotNull();
     }
 
     @Test
     public void testParseFullCoordinates() {
         final FormulaParser formulaParser = new FormulaParser();
-        final ImmutablePair<String, String> parsedFullCoordinates = formulaParser.parse("N 49° AB.031  E 8° 38.DEF");
+        final FormulaWrapper parsedFullCoordinates = formulaParser.parse("N 49° AB.031  E 8° 38.DEF");
         assertThat(parsedFullCoordinates).isNotNull();
-        final String parsedLatitude = parsedFullCoordinates.left;
-        final String parsedLongitude = parsedFullCoordinates.right;
+        final String parsedLatitude = parsedFullCoordinates.getFormulaLat();
+        final String parsedLongitude = parsedFullCoordinates.getFormulaLon();
         assertThat(parsedLatitude).isNotNull();
         assertThat(parsedLongitude).isNotNull();
 
@@ -66,10 +65,10 @@ public class FormulaParserTest {
     @Test
     public void testParseFullCoordinatesWithFormula() {
         final FormulaParser formulaParser = new FormulaParser();
-        final ImmutablePair<String, String> parsedFullCoordinates = formulaParser.parse("(FORMULA-PLAIN) N  AB° 48.[B+C-A]^2  E (B%C)°  38.(D+F)*2 | a = 2) test");
+        final FormulaWrapper parsedFullCoordinates = formulaParser.parse("(FORMULA-PLAIN) N  AB° 48.[B+C-A]^2  E (B%C)°  38.(D+F)*2 | a = 2) test");
         assertThat(parsedFullCoordinates).isNotNull();
-        final String parsedLatitude = parsedFullCoordinates.left;
-        final String parsedLongitude = parsedFullCoordinates.right;
+        final String parsedLatitude = parsedFullCoordinates.getFormulaLat();
+        final String parsedLongitude = parsedFullCoordinates.getFormulaLon();
         assertThat(parsedLatitude).isNotNull();
         assertThat(parsedLongitude).isNotNull();
 
@@ -82,10 +81,10 @@ public class FormulaParserTest {
     @Test
     public void testParseFullCoordinatesWithIncompleteFormula() {
         final FormulaParser formulaParser = new FormulaParser();
-        final ImmutablePair<String, String> parsedFullCoordinates = formulaParser.parse("(FORMULA-PLAIN) N  AB° 48.B+C-A^2  E (B%C)°  38.(D+F)^2 | a = 2) test");
+        final FormulaWrapper parsedFullCoordinates = formulaParser.parse("(FORMULA-PLAIN) N  AB° 48.B+C-A^2  E (B%C)°  38.(D+F)^2 | a = 2) test");
         assertThat(parsedFullCoordinates).isNotNull();
-        final String parsedLatitude = parsedFullCoordinates.left;
-        final String parsedLongitude = parsedFullCoordinates.right;
+        final String parsedLatitude = parsedFullCoordinates.getFormulaLat();
+        final String parsedLongitude = parsedFullCoordinates.getFormulaLon();
         assertThat(parsedLatitude).isNotNull();
         assertThat(parsedLongitude).isNotNull();
 
