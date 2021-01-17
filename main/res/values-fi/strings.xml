@@ -384,8 +384,12 @@
     <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
     <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
     <string name="caches_set_cache_icon">Aseta kätkön kuvakkeet</string>
+    <string name="caches_reset_cache_icons_title">Nollaa kätkön kuvakkeet</string>
+    <string name="caches_reset_cache_icons">Haluatko nollata kaikkien valittujen kätköjen kuvakkeet?</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
     <string name="caches_set_listmarker">Aseta listan merkki</string>
+    <string name="select_icon">Valitse kuvake</string>
+    <string name="onetime_missing_unicode_info">Android-versiosi ei tue tuettujen kuvakkeiden automaattista tunnistamista - joitakin merkkejä voi puuttua</string>
     <!-- caches lists -->
     <string name="menu_lists">Hallitse listoja</string>
     <string name="list_menu_create">Luo uusi lista</string>
@@ -1005,6 +1009,8 @@
     <string name="cache_name">Nimi</string>
     <string name="cache_name_set">Aseta kätkön nimi</string>
     <string name="cache_name_updated">Kätkön nimi päivitetty</string>
+    <string name="cache_description_set">Aseta kätkön kuvaus</string>
+    <string name="cache_description_updated">Kätkön kuvaus päivitetty</string>
     <string name="cache_type">Tyyppi</string>
     <string name="cache_size">Koko</string>
     <string name="cache_distance">Etäisyys</string>
@@ -1051,6 +1057,8 @@
     <string name="internal_goto_targets_description">Tämä kätkö tallentaa viimeisimmät \"Siirry\" sijainnit. Se luodaan automaattisesti kun käytät \"Siirry\"-toimintoa päävalikossa. Kyseiseen toimintoon syötetyt koordinaatit tallennetaan tämän kätkön reittipisteiksi. Jos et enää tarvitse kyseisiä koordinaatteja, voit turvallisesti poistaa tämän kätkön tai sen reittipisteitä. Voit myös siirtää tämän kätkön mihin tahansa haluamaasi listalle.</string>
     <string name="init_longtap_map">Kartan pitkä painallus</string>
     <string name="init_summary_longtap_map">Aktivoi pitkä painallus kartan kuvakkeen (luo yksittäinen reitti) tai kartan vapaalla alueella (luo käyttäjän määrittämä kätkö)</string>
+    <string name="onetime_info_longtap_disabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä pois päältä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
+    <string name="onetime_info_longtap_enabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä päällä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>
