@@ -904,6 +904,7 @@
     <string name="cache_favpoint_not_on">Deze cache staat niet op jouw favorieten-lijst.</string>
     <string name="cache_list_select_last">Laatste selectie</string>
     <string name="cache_images">Afbeeldingen</string>
+    <string name="cache_advanced">Geavanceerd</string>
     <string name="cache_waypoints">Waypoints</string>
     <plurals name="waypoints">
         <item quantity="one">%d waypoint</item>
@@ -1300,6 +1301,7 @@
     <string name="helper_brouter_description">BRouter biedt off line routering. Als het is geïnstalleerd en de benodigde bestanden gedownload heeft, zal c:geo een route naar de cache automatisch tonen op de interne kaart.</string>
     <string name="helper_chirpwolf_description">Met Chirp Wolf kun je de gegevens lezen van ANT+/Garmin chirp tags, wat nodig is voor ANT+/chirp geocaches.</string>
     <!-- export -->
+    <string name="share_export">Delen / Exporteren</string>
     <string name="export">Exporteren</string>
     <string name="export_progress">Exporteer: %1$s</string>
     <string name="export_exportedto">Geexporteerd naar</string>
