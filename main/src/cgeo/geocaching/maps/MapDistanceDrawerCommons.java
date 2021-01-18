@@ -23,6 +23,7 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.settings.Settings;
 
 import android.view.View;
@@ -70,7 +71,7 @@ public class MapDistanceDrawerCommons {
         this.distance = distance;
         this.realDistance = realDistance;
 
-        final boolean showRealDistance = realDistance != 0.0f && distance != realDistance;
+        final boolean showRealDistance = realDistance != 0.0f && distance != realDistance && Settings.getRoutingMode() != RoutingMode.STRAIGHT;
         bothViewsNeeded = showBothDistances && showRealDistance;
         final int supersize = distance == 0 ? 0 : Settings.getSupersizeDistance() % (bothViewsNeeded ? 3 : 2);
         final String[] values = { "", "", ""};
