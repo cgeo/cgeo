@@ -388,6 +388,7 @@
     <string name="caches_reset_cache_icons">Möchtest du die Cache-Symbole für alle ausgewählten Caches zurücksetzen?</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
+    <string name="select_icon">Symbol wählen</string>
     <string name="onetime_missing_unicode_info">Deine Android-Version unterstützt keine automatische Erkennung unterstützter Icons - einige Zeichen könnten nicht angezeigt werden</string>
     <!-- caches lists -->
     <string name="menu_lists">Listen verwalten</string>
@@ -903,6 +904,7 @@
     <string name="cache_favpoint_not_on">Dieser Cache ist kein Favorit.</string>
     <string name="cache_list_select_last">Letzte Auswahl</string>
     <string name="cache_images">Bilder</string>
+    <string name="cache_advanced">Erweitert</string>
     <string name="cache_waypoints">Wegpunkte</string>
     <plurals name="waypoints">
         <item quantity="one">%d Wegpunkt</item>
@@ -1299,6 +1301,7 @@
     <string name="helper_brouter_description">BRouter ermöglicht offline routing. Wenn es installiert ist und die notwendigen Dateien heruntergeladen wurden, wird c:geo automatisch eine Route zum Cache auf der internen Karte zeigen.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf ermöglicht es, die Daten von ANT+/Garmin Chirp Tags zu lesen, die für ANT+/Chirp Geocaches benötigt werden.</string>
     <!-- export -->
+    <string name="share_export">Teilen / Exportieren</string>
     <string name="export">Exportieren</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exportiert nach</string>
@@ -1581,6 +1584,7 @@
     <string name="support_title">Support</string>
     <string name="website_title">Webseite</string>
     <string name="facebook_link"><a href="">Seite von c:geo</a></string>
+    <string name="fangroup_link"><a href="">Deutsche Anwendergruppe</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo bei Google Play</a></string>
     <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
