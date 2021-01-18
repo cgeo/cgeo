@@ -10,3 +10,7 @@ updates:
       # Ignore some updates to the apache 'commons-io' package
       # commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
       - dependency-name: "commons-io:commons-io"
+      # Ignore some updates to the 'assertj' package
+      # Ignore only new versions for >= 3.x
+      - dependency-name: "org.assertj:assertj-core"
+        versions: ["3.x"]
