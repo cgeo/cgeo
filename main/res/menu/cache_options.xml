@@ -37,10 +37,20 @@
         app:showAsAction="ifRoom">
     </item>
     <item
+        android:id="@+id/menu_caches_around_from_popup"
+        android:title="@string/cache_menu_around"
+        android:visible="false">
+    </item>
+    <item
         android:id="@+id/menu_show_in_browser"
         android:icon="@drawable/ic_menu_info_details"
         android:title="@string/cache_menu_browser"
         app:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/menu_share_from_popup"
+        android:title="@string/cache_menu_share"
+        android:visible="false">
     </item>
     <item
         android:id="@+id/menu_checker"
@@ -61,8 +71,10 @@
         android:visible="false">
     </item>
     <item
+        android:id="@+id/menu_waypoints"
         android:title="@string/cache_waypoints"
-        app:showAsAction="never">
+        app:showAsAction="never"
+        android:visible="false">
         <menu>
             <item
                 android:id="@+id/menu_delete_userdefined_waypoints"
@@ -91,7 +103,8 @@
     <item
         android:id="@+id/menu_export"
         android:title="@string/share_export"
-        app:showAsAction="never">
+        app:showAsAction="never"
+        android:visible="false">
         <menu>
             <item
                 android:id="@+id/menu_share"
@@ -108,8 +121,10 @@
         </menu>
     </item>
     <item
+        android:id="@+id/menu_advanced"
         android:title="@string/cache_advanced"
-        app:showAsAction="never">
+        app:showAsAction="never"
+        android:visible="false">
         <menu>
             <item
                 android:id="@+id/menu_calendar"

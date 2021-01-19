@@ -661,32 +661,42 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         final IConnector connector = null != cache ? ConnectorFactory.getConnector(cache) : null;
         final boolean isUDC = null != connector && connector.equals(InternalConnector.getInstance());
 
-        CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
+        CacheMenuHandler.onPrepareOptionsMenu(menu, cache, false);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
-        menu.findItem(R.id.menu_tts_toggle).setVisible(cache != null && !cache.isGotoHistoryUDC());
-        menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
-        menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache != null && cache.isOffline() && cache.hasUserdefinedWaypoints());
-        menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
-        menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null && !isUDC);
-        menu.findItem(R.id.menu_clear_goto_history).setVisible(cache != null && cache.isGotoHistoryUDC());
-        menu.findItem(R.id.menu_set_cache_icon).setVisible(cache != null && cache.isOffline());
-        menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
-        setMenuPreventWaypointsFromNote(cache != null && cache.isPreventWaypointsFromNote());
-        menuItemToggleWaypointsFromNote.setVisible(cache != null && !cache.isGotoHistoryUDC());
-        menu.findItem(R.id.menu_export).setVisible(cache != null);
         if (cache != null) {
-            if (connector instanceof IgnoreCapability) {
-                menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
-            }
+            // top level menu items
+            menu.findItem(R.id.menu_tts_toggle).setVisible(!cache.isGotoHistoryUDC());
+            menu.findItem(R.id.menu_checker).setVisible(StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
             if (connector instanceof PgcChallengeCheckerCapability) {
                 menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
             }
+            menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
+
+            // submenu waypoints
+            menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache.isOffline() && cache.hasUserdefinedWaypoints());
+            menu.findItem(R.id.menu_extract_waypoints).setVisible(!isUDC);
+            menu.findItem(R.id.menu_clear_goto_history).setVisible(cache.isGotoHistoryUDC());
+            menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
+            setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
+            menuItemToggleWaypointsFromNote.setVisible(!cache.isGotoHistoryUDC());
+            menu.findItem(R.id.menu_waypoints).setVisible(true);
+
+            // submenu share / export
+            menu.findItem(R.id.menu_export).setVisible(true);
+
+            // submenu advanced
             if (connector instanceof IVotingCapability) {
                 final MenuItem menuItemGCVote = menu.findItem(R.id.menu_gcvote);
                 menuItemGCVote.setVisible(((IVotingCapability) connector).supportsVoting(cache));
                 menuItemGCVote.setEnabled(Settings.isRatingWanted() && Settings.isGCVoteLoginValid());
             }
+            if (connector instanceof IgnoreCapability) {
+                menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
+            }
+            menu.findItem(R.id.menu_set_cache_icon).setVisible(cache.isOffline());
+            menu.findItem(R.id.menu_advanced).setVisible(cache.getCoords() != null);
         }
+
         return super.onPrepareOptionsMenu(menu);
     }
 
