@@ -55,9 +55,12 @@ public class PositionLayer extends Layer {
             accuracyCircleFill.setStyle(Style.FILL);
             accuracyCircleFill.setColor(MapLineUtils.getAccuracyCircleFillColor());
         }
-        final Circle circle = new Circle(location, accuracy, accuracyCircleFill, accuracyCircle);
-        circle.setDisplayModel(this.getDisplayModel());
-        circle.draw(boundingBox, zoomLevel, canvas, topLeftPoint);
+
+        if (accuracy >= 0) {
+            final Circle circle = new Circle(location, accuracy, accuracyCircleFill, accuracyCircle);
+            circle.setDisplayModel(this.getDisplayModel());
+            circle.draw(boundingBox, zoomLevel, canvas, topLeftPoint);
+        }
 
         // prepare heading indicator
 
