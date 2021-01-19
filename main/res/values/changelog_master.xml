@@ -7,6 +7,7 @@
 <h4>Map:</h4>
 <ul>
 <li>Change: Use squared c:geo logo for user-defined caches</li>
+<li>Change: Show routed distance only when routing mode is other than \"straight\"</li>
 <li>New: Update checker for downloaded offline maps (will work only for new downloads)</li>
 <li>New: Cache icon for archived caches have a reddish background</li>
 <li>New: Show disabled/archived status also for waypoints</li>
@@ -23,6 +24,7 @@
 <li>Change: Numbering of new user-defined waypoints will use a cache-wide number (instead of per-type numbering) and will include waypoints of type trailhead</li>
 <li>Change: Restructured cache details menu (moved the less frequently used entries into an \"advanced\" submenu etc.)</li>
 <li>New: Auto-adjust case and filter characters for text input in waypoint calculator</li>
+<li>Fix: Incorrect compass rose when turning screen while in upright mode</li>
 </ul>
 
 <h4>Custom symbols:</h4>
