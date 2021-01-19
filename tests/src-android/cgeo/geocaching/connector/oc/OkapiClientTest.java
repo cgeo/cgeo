@@ -19,7 +19,6 @@ public class OkapiClientTest extends CGeoTestCase {
         final String geoCode = "OU0331";
         Geocache cache = OkapiClient.getCache(geoCode);
         assertThat(cache).as("Cache from OKAPI").isNotNull();
-        assert cache != null; // eclipse null analysis
         assertThat(cache.getGeocode()).isEqualTo(geoCode);
         assertThat(cache.getName()).isEqualTo("Oshkosh Municipal Tank");
         assertThat(cache.isDetailed()).isTrue();
@@ -38,7 +37,6 @@ public class OkapiClientTest extends CGeoTestCase {
         final String geoCode = "OC1234";
         final Geocache cache = OkapiClient.getCache(geoCode);
         assertThat(cache).overridingErrorMessage("You must have a valid OKAPI key installed for running this test (but you do not need to set credentials in the app).").isNotNull();
-        assert cache != null; // eclipse null analysis
         assertThat(cache.getName()).isEqualTo("Wupper-Schein");
     }
 
@@ -64,7 +62,6 @@ public class OkapiClientTest extends CGeoTestCase {
         removeCacheCompletely(geoCode);
         final Geocache cache = OkapiClient.getCache(geoCode);
         assertThat(cache).as("Cache from OKAPI").isNotNull();
-        assert cache != null; // eclipse null analysis
         assertThat(cache.getLogCounts().get(LogType.WILL_ATTEND)).isGreaterThan(0);
     }
 
@@ -128,7 +125,6 @@ public class OkapiClientTest extends CGeoTestCase {
             }
         }
         assertThat(logWithImage).isNotNull();
-        assert logWithImage != null; // eclipse null analysis
         assertThat(logWithImage.getLogImages()).isNotEmpty();
     }
 

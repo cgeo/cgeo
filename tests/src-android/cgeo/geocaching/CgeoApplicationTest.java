@@ -64,7 +64,6 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchTrackable() {
         final Trackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
         assertThat(tb).isNotNull();
-        assert tb != null; // eclipse bug
         // fix data
         assertThat(tb.getGuid()).isEqualTo("aefffb86-099f-444f-b132-605436163aa8");
         assertThat(tb.getGeocode()).isEqualTo("TB2J1VZ");

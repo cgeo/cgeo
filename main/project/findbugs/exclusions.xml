@@ -47,7 +47,7 @@
 	    <Class name="~.*Test"/>
 	</Match>
 
-	<!-- To many false positives here. The same issue will also be found by Eclipse locally, so we should be fine. -->
+	<!-- To many false positives here. The same issue will also be found by Android Studio locally, so we should be fine. -->
 	<Match>
 	    <Bug pattern="SF_SWITCH_NO_DEFAULT"/>
 	</Match>

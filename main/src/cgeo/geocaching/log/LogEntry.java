@@ -457,7 +457,6 @@ public class LogEntry implements Parcelable {
      */
     public CharSequence getImageTitles() {
         final List<String> titles = new ArrayList<>(5);
-        assert logImages != null; // make compiler happy
         for (final Image image : logImages) {
             if (StringUtils.isNotBlank(image.getTitle())) {
                 titles.add(HtmlUtils.extractText(image.getTitle()));

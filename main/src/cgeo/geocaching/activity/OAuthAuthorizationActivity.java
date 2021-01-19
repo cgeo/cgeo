@@ -218,7 +218,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
                 int status = STATUS_ERROR;
                 if (StringUtils.isNotBlank(line)) {
-                    assert line != null;
                     final MatcherWrapper paramsMatcher1 = new MatcherWrapper(PARAMS_PATTERN_1, line);
                     if (paramsMatcher1.find()) {
                         oAtoken = paramsMatcher1.group(1);

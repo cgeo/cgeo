@@ -288,7 +288,6 @@ public final class GCParser {
             }
 
             if (StringUtils.isNotBlank(inventoryPre)) {
-                assert inventoryPre != null;
                 final MatcherWrapper matcherTbsInside = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE, inventoryPre);
                 while (matcherTbsInside.find()) {
                     if (matcherTbsInside.group(1) != null &&
@@ -960,7 +959,6 @@ public final class GCParser {
             Log.w("GCParser.searchByAny: No data from server");
             return null;
         }
-        assert page != null;
 
         final String fullUri = uri + "?" + paramsWithF;
         final SearchResult searchResult = parseSearch(fullUri, page);
@@ -1060,7 +1058,6 @@ public final class GCParser {
             Log.w("GCParser.searchTrackable: No data from server");
             return null;
         }
-        assert page != null;
 
         final Trackable trackable = parseTrackable(page, geocode);
         if (trackable == null) {

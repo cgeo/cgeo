@@ -38,7 +38,6 @@ public abstract class AbstractApp implements App {
         if (intent == null) {
             return false;
         }
-        assert intent != null; // eclipse issue
         return ProcessUtils.isIntentAvailable(intent);
     }
 

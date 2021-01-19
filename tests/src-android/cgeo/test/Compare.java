@@ -30,7 +30,6 @@ public abstract class Compare {
         assertThat(actual.getFavoritePoints()).as(cacheStr + "fav points").isGreaterThanOrEqualTo(expected.getFavoritePoints());
         final Date hiddenDate = actual.getHiddenDate();
         assertThat(hiddenDate).isNotNull();
-        assert hiddenDate != null; // silence the eclipse compiler in the next line
         assertThat(hiddenDate).as(cacheStr + " hidden date").isEqualTo(expected.getHiddenDate());
         assertThat(actual.isPremiumMembersOnly()).as(cacheStr + "premium only").isEqualTo(expected.isPremiumMembersOnly());
 

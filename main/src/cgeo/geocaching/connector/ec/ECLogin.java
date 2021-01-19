@@ -66,8 +66,6 @@ public class ECLogin extends AbstractLogin {
             return StatusCode.CONNECTION_FAILED_EC; // no login page
         }
 
-        assert loginData != null;
-
         if (loginData.contains("Wrong username or password")) { // hardcoded in English
             Log.i("Failed to log in Extremcaching.com as " + credentials.getUserName() + " because of wrong username/password");
             return StatusCode.WRONG_LOGIN_DATA; // wrong login
@@ -98,7 +96,6 @@ public class ECLogin extends AbstractLogin {
             Log.e("ECLogin.getLoginStatus: No or empty data given");
             return false;
         }
-        assert data != null;
 
         final Application application = CgeoApplication.getInstance();
         setActualStatus(application.getString(R.string.init_login_popup_ok));

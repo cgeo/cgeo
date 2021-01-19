@@ -248,7 +248,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         } else {
             title = StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache);
         }
-        assert title != null; // help Eclipse null analysis
         setCacheTitleBar(title, type);
     }
 
