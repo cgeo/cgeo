@@ -113,7 +113,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
     protected void showPopup(final View view) {
         final android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(getActivity(), view);
-        CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), popupMenu.getMenu(), cache);
+        CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), popupMenu.getMenu(), cache, true);
         popupMenu.setOnMenuItemClickListener(
                 AbstractDialogFragment.this::onMenuItemClick
         );
@@ -226,14 +226,14 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        CacheMenuHandler.addMenuItems(inflater, menu, cache);
+        CacheMenuHandler.addMenuItems(inflater, menu, cache, false);
 
     }
 
     @Override
     public void onCreateContextMenu(@NonNull final ContextMenu menu, @NonNull final View v, final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), menu, cache);
+        CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), menu, cache, false);
         for (int i = 0; i < menu.size(); i++) {
             final MenuItem m = menu.getItem(i);
             m.setOnMenuItemClickListener(this);
@@ -268,7 +268,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         super.onPrepareOptionsMenu(menu);
 
         try {
-            CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
+            CacheMenuHandler.onPrepareOptionsMenu(menu, cache, false);
             LoggingUI.onPrepareOptionsMenu(menu, cache);
         } catch (final RuntimeException ignored) {
             // nothing

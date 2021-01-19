@@ -60,13 +60,13 @@ public final class CacheMenuHandler extends AbstractUIFactory {
                 return true;
             }
             return false;
-        } else if (menuItem == R.id.menu_caches_around) {
+        } else if (menuItem == R.id.menu_caches_around || menuItem == R.id.menu_caches_around_from_popup) {
             activityInterface.cachesAround();
             return true;
         } else if (menuItem == R.id.menu_show_in_browser) {
             cache.openInBrowser(activity);
             return true;
-        } else if (menuItem == R.id.menu_share) {
+        } else if (menuItem == R.id.menu_share || menuItem == R.id.menu_share_from_popup) {
             cache.shareCache(activity, res);
             return true;
         } else if (menuItem == R.id.menu_calendar) {
@@ -76,31 +76,32 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         return false;
     }
 
-    public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache) {
+    public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache, final boolean fromPopup) {
         if (cache == null) {
             return;
         }
         final boolean hasCoords = cache.getCoords() != null;
+        // top level menu items
         menu.findItem(R.id.menu_default_navigation).setVisible(hasCoords);
+        menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
         menu.findItem(R.id.menu_navigate).setVisible(hasCoords);
-        menu.findItem(R.id.menu_share).setVisible(!InternalConnector.getInstance().canHandle(cache.getGeocode()));
-        menu.findItem(R.id.menu_caches_around).setVisible(hasCoords && cache.supportsCachesAround());
-        menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
         menu.findItem(R.id.menu_log_visit).setVisible(cache.supportsLogging() && !Settings.getLogOffline());
         menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
-
-        menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
-
         // some connectors don't support URL - we don't need "open in browser" for those caches
         menu.findItem(R.id.menu_show_in_browser).setVisible(cache.getUrl() != null);
+        // submenu share / export
+        menu.findItem(fromPopup ? R.id.menu_share_from_popup : R.id.menu_share).setVisible(!InternalConnector.getInstance().canHandle(cache.getGeocode()));
+        // submenu advanced
+        menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
+        menu.findItem(fromPopup ? R.id.menu_caches_around_from_popup : R.id.menu_caches_around).setVisible(hasCoords && cache.supportsCachesAround());
     }
 
-    public static void addMenuItems(final MenuInflater inflater, final Menu menu, final Geocache cache) {
+    public static void addMenuItems(final MenuInflater inflater, final Menu menu, final Geocache cache, final boolean fromPopup) {
         inflater.inflate(R.menu.cache_options, menu);
-        onPrepareOptionsMenu(menu, cache);
+        onPrepareOptionsMenu(menu, cache, fromPopup);
     }
 
     public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {
-        addMenuItems(activity.getMenuInflater(), menu, cache);
+        addMenuItems(activity.getMenuInflater(), menu, cache, false);
     }
 }
