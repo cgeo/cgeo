@@ -1,11 +1,13 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.ManualRoute;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.IndividualRouteUtils;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -83,7 +85,7 @@ public class MapSettingsUtils {
         routingChoices.add(new ButtonChoiceModel<>(R.id.routing_walk, RoutingMode.WALK));
         routingChoices.add(new ButtonChoiceModel<>(R.id.routing_bike, RoutingMode.BIKE));
         routingChoices.add(new ButtonChoiceModel<>(R.id.routing_car, RoutingMode.CAR));
-        final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView, routingChoices, Settings.getRoutingMode(), setRoutingValue);
+        final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView, routingChoices, Routing.isAvailable() ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue);
 
         final CheckBox autotargetCheckbox = dialogView.findViewById(R.id.map_settings_autotarget);
         if (showAutotargetIndividualRoute) {
@@ -122,6 +124,13 @@ public class MapSettingsUtils {
 
         compactIcon.init();
         routing.init();
+
+        if (!Routing.isAvailable()) {
+            routing.setEnabled(false);
+            final TextView brouterTextView = dialogView.findViewById(R.id.brouter_install);
+            brouterTextView.setVisibility(View.VISIBLE);
+            brouterTextView.setOnClickListener(v -> ProcessUtils.openMarket(activity, activity.getString(R.string.package_brouter)));
+        }
     }
 
     private static class SettingsCheckboxModel {
@@ -197,6 +206,12 @@ public class MapSettingsUtils {
         public void setValue() {
             if (!originalValue.equals(currentValue)) {
                 this.setValue.call(currentValue);
+            }
+        }
+
+        public void setEnabled(final boolean enabled) {
+            for (final ButtonChoiceModel<T> button : buttons) {
+                button.button.setEnabled(enabled);
             }
         }
     }
