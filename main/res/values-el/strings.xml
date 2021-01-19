@@ -903,6 +903,7 @@
     <string name="cache_favpoint_not_on">Αυτή η κρύπτη δεν είναι στα αγαπημένα σας.</string>
     <string name="cache_list_select_last">Τελευταία επιλογή</string>
     <string name="cache_images">Εικόνες</string>
+    <string name="cache_advanced">Προχωρημένα</string>
     <string name="cache_waypoints">Σημεία αναφοράς</string>
     <plurals name="waypoints">
         <item quantity="one">%d σημείο διαδρομής</item>
@@ -1299,6 +1300,7 @@
     <string name="helper_brouter_description">Το BRouter παρέχει δρομολόγηση εκτός σύνδεσης. Εάν έχει εγκατασταθεί και έχετε κατεβάσει τα απαραίτητα αρχεία, το c:geo θα εμφανίσει στον χάρτη μια διαδρομή προς την κρύπτη.</string>
     <string name="helper_chirpwolf_description">Το Chirp Wolf σας επιτρέπει να διαβάσετε δεδομένα από ANT+/Garmin chirp ταμπέλες, οι οποιες χρειάζονται για κρύπτες ANT+/chirp.</string>
     <!-- export -->
+    <string name="share_export">Κοινοποίηση / Εξαγωγή</string>
     <string name="export">Εξαγωγή</string>
     <string name="export_progress">Εξαγωγή: %1$s</string>
     <string name="export_exportedto">εξαγωγή σε</string>
