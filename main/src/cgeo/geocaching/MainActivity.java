@@ -610,9 +610,13 @@ public class MainActivity extends AbstractActionBarActivity {
         findByOffline.setOnClickListener(this::cgeoFindByOffline);
         findByOffline.setOnLongClickListener(v -> {
             new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, selectedListId -> {
-                Settings.setLastDisplayedList(selectedListId);
-                CacheListActivity.startActivityOffline(MainActivity.this);
-            }, false, PseudoList.HISTORY_LIST.id);
+                if (selectedListId == PseudoList.HISTORY_LIST.id) {
+                    startActivity(CacheListActivity.getHistoryIntent(this));
+                } else {
+                    Settings.setLastDisplayedList(selectedListId);
+                    CacheListActivity.startActivityOffline(MainActivity.this);
+                }
+            }, false, 0);
             return true;
         });
         findByOffline.setLongClickable(true);
