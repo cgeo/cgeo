@@ -2,7 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
-import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
@@ -14,6 +14,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.content.res.Configuration;
@@ -125,7 +126,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             final View view = getView();
             assert view != null;
             final TextView titleView = view.findViewById(R.id.actionbar_title);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(Compatibility.getDrawable(getResources(), cache.getType().markerId), null, null, null);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable(), null, null, null);
 
             final LinearLayout layout = view.findViewById(R.id.details_list);
             details = new CacheDetailsCreator(getActivity(), layout);
