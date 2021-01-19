@@ -60,7 +60,6 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
     public void testSearchTrackable() throws Exception {
         final Trackable geokret = GeokretyConnector.searchTrackable("GKB580");
         assertThat(geokret).isNotNull();
-        assert geokret != null;
         assertThat(geokret.getBrand()).isEqualTo(TrackableBrand.GEOKRETY);
         assertThat(geokret.getName()).isEqualTo("c:geo One");
         assertThat(geokret.getDetails()).isEqualTo("GeoKret for the c:geo project :)<br />DO NOT MOVE");

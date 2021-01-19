@@ -219,7 +219,6 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(wp.getWaypointType()).isEqualTo(WaypointType.PARKING);
         Geopoint waypointCoords = wp.getCoords();
         assertThat(waypointCoords).isNotNull();
-        assert waypointCoords != null; // eclipse null analysis
         assertEquals(49.317517, waypointCoords.getLatitude(), 0.000001);
         assertEquals(8.545083, waypointCoords.getLongitude(), 0.000001);
 
@@ -232,7 +231,6 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(wp.getWaypointType()).isEqualTo(WaypointType.STAGE);
         waypointCoords = wp.getCoords();
         assertThat(waypointCoords).isNotNull();
-        assert waypointCoords != null; // eclipse null analysis
         assertEquals(49.317500, waypointCoords.getLatitude(), 0.000001);
         assertEquals(8.545100, waypointCoords.getLongitude(), 0.000001);
     }
@@ -403,7 +401,6 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         final List<Geocache> caches = readGPX10(R.raw.tc2012);
         final Geocache mystery = getCache(caches, "U017");
         assertThat(mystery).isNotNull();
-        assert mystery != null;
         assertThat(mystery.getType()).isEqualTo(CacheType.MYSTERY);
     }
 

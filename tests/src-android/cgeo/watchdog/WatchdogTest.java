@@ -66,7 +66,6 @@ public class WatchdogTest extends CGeoTestCase {
 
         final Geocache geocache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
         assertThat(geocache).isNotNull();
-        assert geocache != null; // Eclipse null analysis weakness
         assertThat(geocache.getGeocode()).isEqualTo(geocode);
     }
 

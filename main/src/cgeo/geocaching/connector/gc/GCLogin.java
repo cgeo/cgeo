@@ -189,7 +189,6 @@ public class GCLogin extends AbstractLogin {
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
                 return StatusCode.COMMUNICATION_ERROR; // no login page
             }
-            assert loginData != null;  // Caught above
 
             if (getLoginStatus(loginData)) {
                 if (switchToEnglish(loginData) && retry) {
@@ -287,7 +286,6 @@ public class GCLogin extends AbstractLogin {
             Log.w("Login.checkLogin: No page given");
             return false;
         }
-        assert page != null;
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
@@ -402,7 +400,6 @@ public class GCLogin extends AbstractLogin {
     private static void setHomeLocation() {
         retrieveHomeLocation().subscribe(homeLocationStr -> {
             if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
-                assert homeLocationStr != null;
                 Log.i("Setting home location to " + homeLocationStr);
                 Settings.setHomeLocation(homeLocationStr);
             }

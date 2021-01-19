@@ -62,7 +62,6 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(result.getCount()).isEqualTo(1);
         final Geocache cache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
         assertThat(cache).isNotNull();
-        assert cache != null; // eclipse bug
         assertThat(cache.getName()).isEqualTo(cacheName);
     }
 
@@ -111,7 +110,6 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
                 final SearchResult searchResult = GCParser.parseAndSaveCacheFromText(mockedCache.getData(), null);
                 final Geocache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 assertThat(parsedCache).isNotNull();
-                assert parsedCache != null;  // To keep editors happy
                 assertThat(StringUtils.isNotBlank(mockedCache.getMockedDataUser())).isTrue();
                 // Workaround for issue #3777
                 if (mockedCache.getGeocode().equals("GC3XX5J") && Settings.getUserName().equals("mucek4")) {
@@ -181,7 +179,6 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         final String page = requestHtmlPage(cache.getGeocode(), null, "n");
         final Geocache cache2 = GCParser.parseAndSaveCacheFromText(page, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
         assertThat(cache2).isNotNull();
-        assert cache2 != null; // eclipse bug
         assertThat(cache2.hasUserModifiedCoords()).isTrue();
         assertThat(cache2.getCoords()).isEqualTo(new Geopoint("N51 21.544", "E07 02.566"));
         // delete coordinates
@@ -190,7 +187,6 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         final String page2 = requestHtmlPage(cache.getGeocode(), null, "n");
         final Geocache cache3 = GCParser.parseAndSaveCacheFromText(page2, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
         assertThat(cache3).isNotNull();
-        assert cache3 != null; // eclipse bug
         assertThat(cache3.hasUserModifiedCoords()).isFalse();
     }
 

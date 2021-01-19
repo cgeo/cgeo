@@ -453,7 +453,7 @@ public class Geocache implements IWaypoint {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        assert hidden != null; // Eclipse compiler issue
+        assert hidden != null; // Android Studio compiler issue
         return hidden.compareTo(cal.getTime()) < 0;
     }
 
