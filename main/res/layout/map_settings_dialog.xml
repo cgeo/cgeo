@@ -100,6 +100,16 @@
                 android:layout_below="@id/routing_title"
                 android:layout_toRightOf="@id/routing_bike"
                 android:src="@drawable/routing_car" />
+            <TextView
+                android:id="@+id/brouter_install"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/routing_straight"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:text="@string/map_routing_brouter"
+                android:visibility="gone"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/map_settings_autotarget_container"
