@@ -3,7 +3,6 @@ package cgeo.geocaching.sensors;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -31,7 +30,6 @@ public class RotationProvider {
         // Utility class, not to be instantiated
     }
 
-    @TargetApi(19)
     public static Observable<DirectionData> create(final Context context) {
         final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         final Sensor rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);

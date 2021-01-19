@@ -361,7 +361,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
                 updateDistanceInfo(geo);
 
-                updateNorthHeading(AngleUtils.getDirectionNow(dir.getDirection()));
+                updateNorthHeading(dir);
 
                 updateDeviceHeadingAndOrientation(dir);
 
@@ -374,9 +374,10 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     };
 
-    private void updateNorthHeading(final float northHeading) {
+    private void updateNorthHeading(final DirectionData dir) {
         if (compassView != null) {
-            compassView.updateNorth(northHeading, cacheHeading);
+            compassView.updateNorth(dir.getDeviceOrientation() == DirectionData.DeviceOrientation.UPRIGHT ?
+                dir.getDirection() : AngleUtils.getDirectionNow(dir.getDirection()), cacheHeading);
         }
     }
 
