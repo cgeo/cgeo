@@ -753,6 +753,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                     if (logType.get().isFoundLog()) {
                         cache.setFound(true);
                         cache.setVisitedDate(date.getDate().getTime());
+                    } else if (logType.get() == LogType.DIDNT_FIND_IT) {
+                        cache.setDNF(true);
+                        cache.setVisitedDate(date.getDate().getTime());
                     }
                     DataStore.saveChangedCache(cache);
 
