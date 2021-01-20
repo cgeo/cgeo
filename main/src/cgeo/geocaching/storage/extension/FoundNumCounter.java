@@ -4,7 +4,10 @@ import cgeo.geocaching.storage.DataStore;
 
 import androidx.annotation.Nullable;
 
-
+/**
+ * Offline storage for the connector specific found number counter, mainly used in the NUMBER log template.
+ *
+ */
 public class FoundNumCounter extends DataStore.DBExtension {
 
     private static final DataStore.DBExtensionType type = DataStore.DBExtensionType.DBEXTENSION_FOUNDNUM;
@@ -13,8 +16,8 @@ public class FoundNumCounter extends DataStore.DBExtension {
         super(copyFrom);
     }
 
-    public long getCounter(final boolean incrementCounter) {
-        return incrementCounter ? getLong1() + 1 : getLong1();
+    public int getCounter(final boolean incrementCounter) {
+        return (int) (incrementCounter ? getLong1() + 1 : getLong1());
     }
 
     @Nullable

@@ -168,7 +168,7 @@ public final class LogTemplateProvider {
                 if (cache == null) {
                     return StringUtils.EMPTY;
                 }
-                long counter;
+                int counter;
                 final String onlineNum = getCounter(context, increment);
                 final IConnector connector = ConnectorFactory.getConnector(cache);
 
@@ -179,7 +179,7 @@ public final class LogTemplateProvider {
                     }
                     counter = f.getCounter(increment);
                 } else {
-                    counter = Long.parseLong(onlineNum);
+                    counter = Integer.parseInt(onlineNum);
                 }
                 counter += DataStore.getFoundsOffline(connector.getName());
                 return String.valueOf(counter);
