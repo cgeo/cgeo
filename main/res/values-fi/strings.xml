@@ -904,6 +904,7 @@
     <string name="cache_favpoint_not_on">Tämä kätkö ei ole suosikeissasi.</string>
     <string name="cache_list_select_last">Viimeisin valinta</string>
     <string name="cache_images">Kuvat</string>
+    <string name="cache_advanced">Lisäasetukset</string>
     <string name="cache_waypoints">Reittipisteet</string>
     <plurals name="waypoints">
         <item quantity="one">%d reittipiste</item>
@@ -1184,10 +1185,11 @@
     <string name="map_as_list">Näytä luettelona</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
     <string name="map_routing">Reititys</string>
+    <string name="map_routing_brouter">Reititys on käytettävissä vain <a href="">BRouter</a>in ollessa asennettuna</string>
     <string name="map_gm_autorotation">Kartan automaattinen kääntö</string>
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <string name="quick_settings">Pika-asetukset</string>
-    <string name="quick_settings_info">Jotkut kartta-asetukset (Kartanasetukset, piilota, reititys) on siirretty uuteen \"Pika-asetuset\"-ikkunaan\nVoit avata tämän ikkunan käyttämällä painiketta, joka sijaitsee karttanäkymän alareunassa keskellä.</string>
+    <string name="quick_settings_info">Jotkut kartta-asetukset (Kartan asetukset, piilota, reititys) on siirretty uuteen \"Pika-asetukset\"-ikkunaan\nVoit avata tämän ikkunan käyttämällä painiketta, joka sijaitsee karttanäkymän alareunassa keskellä.</string>
     <string name="map_show_in_map">Näytä kartalla</string>
     <!-- search -->
     <string name="search_bar_hint">Etsi kätköjä</string>
@@ -1300,6 +1302,7 @@
     <string name="helper_brouter_description">BRouter tarjoaa offline-reitityksen. Jos se on asennettuna ja tarvittavat tiedostot ladattuna, c:geo näyttää kartalla reitin kätkölle automaattisesti.</string>
     <string name="helper_chirpwolf_description">Chirp Wolfin avulla voit lukea ANT+/Garmin chirp -tageja, joita tarvitaan ANT+/chirp -geokätköihin.</string>
     <!-- export -->
+    <string name="share_export">Jaa / Vie</string>
     <string name="export">Vienti</string>
     <string name="export_progress">Vienti: %1$s</string>
     <string name="export_exportedto">viety</string>
@@ -1582,6 +1585,7 @@
     <string name="support_title">Tuki</string>
     <string name="website_title">Verkkosivu</string>
     <string name="facebook_link"><a href="">c:geon sivu</a></string>
+    <string name="fangroup_link"><a href="">Saksalainen käyttäjäryhmä</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo Google Play:ssä</a></string>
     <string name="about_twitter">Haluatko, että <b>c:geo</b> julkaisee uuden päivityksen Twitterissä aina kun loggaat kätkön?</string>
