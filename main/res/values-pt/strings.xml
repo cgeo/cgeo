@@ -676,7 +676,7 @@
     <string name="init_directionwidth">Largura da linha de direcção</string>
     <string name="init_directionwidth_summary">Seleccionar a largura para a linha de direcção</string>
     <string name="init_routecolor">Cor da linha do percurso individual</string>
-    <string name="init_routecolor_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (Primeiro precisa de activar a função de \"toque sem soltar\", veja as configurações do mapa.)</string>
+    <string name="init_routecolor_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (Primeiro precisa de activar a função de \"toque sem soltar no mapa\", consulte as definições de mapa.)</string>
     <string name="init_routewidth">Largura da linha do percurso individual</string>
     <string name="init_routewidth_summary">Seleccionar a largura para a linha de rota individual</string>
     <string name="init_trackcolor">Cor da linha do trajecto/rota GPX</string>
@@ -904,6 +904,7 @@
     <string name="cache_favpoint_not_on">Esta geocache não é uma das suas favoritas.</string>
     <string name="cache_list_select_last">Última selecção</string>
     <string name="cache_images">Imagens</string>
+    <string name="cache_advanced">Avançadas</string>
     <string name="cache_waypoints">Pontos adicionais</string>
     <plurals name="waypoints">
         <item quantity="one">%d ponto adicional</item>
@@ -1058,8 +1059,8 @@
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache definida pelo utilizador)</string>
     <string name="onetime_info_longtap_disabled">Com um toque longo no mapa, pode criar rotas individuais e caches definidos pelo utilizador.\n\nO toque longo no mapa está desactivado neste momento.\n\nPode alterar isso em Configurações → Mapa → Comportamento do mapa</string>
-    <string name="onetime_info_longtap_enabled">Com um toque longo no mapa, pode criar rotas individuais e caches definidas pelo utilizador.\n\nO toque longo no mapa está activado neste momento.\n\nPode alterar isso em Configurações - Mapa - Comportamento do mapa</string>
-    <string name="goto_targets_list">Caches definidas pelo utilizador</string>
+    <string name="onetime_info_longtap_enabled">Ao manter premido o toque no mapa, pode criar rotas individuais e caches personalizadas (lista: \"caches internas\").\n\nA função \"toque sem soltar no mapa\" está activa neste momento.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
+    <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
     <!-- coordinate calculator hints -->
@@ -1184,6 +1185,7 @@
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar item</string>
     <string name="map_routing">Rotas</string>
+    <string name="map_routing_brouter">O encaminhamento só está disponível se <a href="">BRouter</a> estiver instalado</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
@@ -1300,6 +1302,7 @@
     <string name="helper_brouter_description">O BRouter fornece cálculo de percursos off-line. Se estiver instalado e tiver os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a geocache no mapa interno.</string>
     <string name="helper_chirpwolf_description">A aplicação Chirp Wolf permite que leia os dados de tags chirp ANT +/Garmin, que será necessária na realização de geocaches ANT+/chirp.</string>
     <!-- export -->
+    <string name="share_export">Partilhar / Exportar</string>
     <string name="export">Exportar</string>
     <string name="export_progress">Exportar: %1$s</string>
     <string name="export_exportedto">exportado para</string>
