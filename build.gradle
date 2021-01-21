@@ -107,7 +107,7 @@ allprojects {
                     }
                 }
                 // new versions of checkstyle use guava 27, which has troublesome dependencies: https://groups.google.com/forum/#!topic/guava-announce/Km82fZG68Sw
-                force 'com.google.guava:guava:26.0-jre'
+                force 'com.google.guava:guava:30.1-jre'
 
                 // force this version because of conflict to our resolutionStrategy from lint-gradle 4.1.2 (referencing 4.1.0-alpha01-6193524)
                 // TODO check after gradle update (gradlew :main:lintBasicDebug)
