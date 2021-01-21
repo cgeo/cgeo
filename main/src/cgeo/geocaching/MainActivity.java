@@ -616,7 +616,7 @@ public class MainActivity extends AbstractActionBarActivity {
                     Settings.setLastDisplayedList(selectedListId);
                     CacheListActivity.startActivityOffline(MainActivity.this);
                 }
-            }, false, 0);
+            }, false, PseudoList.NEW_LIST.id);
             return true;
         });
         findByOffline.setLongClickable(true);
