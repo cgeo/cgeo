@@ -408,7 +408,7 @@
         <item name="android:layout_marginTop">-4dp</item>
     </style>
 
-    <!-- map distance info style -->
+    <!-- map distance info styles -->
     <style name="map_distanceinfo_no_background">
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingLeft">4dp</item>
@@ -423,11 +423,9 @@
         <item name="android:visibility">gone</item>
         <item name="android:maxLines">1</item>
     </style>
-
     <style name="map_distanceinfo" parent="map_distanceinfo_no_background">
         <item name="android:background">@drawable/icon_bcg</item>
     </style>
-
     <style name="map_distanceinfo_supersize" parent="map_distanceinfo">
         <item name="android:layout_marginLeft">-2dp</item>
         <item name="android:textSize">72sp</item>
@@ -436,7 +434,54 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
-    <!-- about c:geo contributors style -->
+    <!-- splash screen style -->
+    <style name="SplashScreenTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splashscreen_background</item>
+        <item name="android:windowActivityTransitions">false</item>
+    </style>
+
+    <!-- authorization styles -->
+    <style name="authorization_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">left|center_vertical</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">?text_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- installation wizard styles -->
+    <style name="InstallationWizardMarginsLR">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+    <style name="InstallationWizardButtonFull" parent="InstallationWizardMarginsLR">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">12dp</item>
+    </style>
+    <style name="InstallationWizardButtonFooter" parent="InstallationWizardMarginsLR">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+    <style name="InstallationWizardTextViewBase" parent="InstallationWizardMarginsLR">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+    <style name="InstallationWizardTextViewAdvanced" parent="InstallationWizardTextViewBase">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- about pages styles -->
     <style name="about_contributors">
         <item name="android:layout_gravity">left</item>
         <item name="android:layout_margin">7dip</item>
@@ -446,47 +491,6 @@
         <item name="android:textColorLink">?text_color_link</item>
         <item name="android:textSize">14sp</item>
     </style>
-
-    <!-- splash screen style -->
-    <style name="SplashScreenTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/splashscreen_background</item>
-        <item name="android:windowActivityTransitions">false</item>
-    </style>
-
-    <!-- installation wizard styles -->
-    <style name="InstallationWizardMarginsLR">
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-    </style>
-
-    <style name="InstallationWizardButtonFull" parent="InstallationWizardMarginsLR">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginTop">12dp</item>
-    </style>
-
-    <style name="InstallationWizardButtonFooter" parent="InstallationWizardMarginsLR">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:padding">12dp</item>
-        <item name="android:layout_marginBottom">12dp</item>
-    </style>
-
-    <style name="InstallationWizardTextViewBase" parent="InstallationWizardMarginsLR">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginTop">16dp</item>
-    </style>
-
-    <style name="InstallationWizardTextViewAdvanced" parent="InstallationWizardTextViewBase">
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <!-- about pages styles -->
     <style name="about_info_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -509,4 +513,5 @@
         <item name="android:paddingLeft">3dip</item>
         <item name="android:textColorLink">?text_color_link</item>
     </style>
+
 </resources>

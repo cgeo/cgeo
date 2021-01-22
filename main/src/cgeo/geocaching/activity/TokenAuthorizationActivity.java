@@ -51,6 +51,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     @BindView(R.id.register) protected Button registerButton;
     @BindView(R.id.auth_1) protected TextView auth1;
     @BindView(R.id.auth_2) protected TextView auth2;
+    @BindView(R.id.auth_3) protected TextView auth3;
     @BindView(R.id.username) protected EditText usernameEditText;
     @BindView(R.id.password) protected EditText passwordEditText;
 
@@ -105,6 +106,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
         auth1.setText(getAuthExplainShort());
         auth2.setText(getAuthExplainLong());
+        auth3.setText(getAuthRegisterExplain());
 
         startButton.setText(getAuthAuthorize());
         startButton.setOnClickListener(new StartListener(this));
@@ -282,6 +284,10 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
     protected String getAuthAuthorize() {
         return res.getString(R.string.auth_authorize);
+    }
+
+    protected String getAuthRegisterExplain() {
+        return res.getString(R.string.auth_register_explain);
     }
 
     protected String getAuthRegister() {

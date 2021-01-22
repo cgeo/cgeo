@@ -14,30 +14,16 @@
 
         <TextView
             android:id="@+id/auth_1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
+            style="@style/authorization_text"
             android:layout_marginBottom="20dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:drawableLeft="@drawable/cgeo"
+            android:drawableLeft="@drawable/cgeo_actionbar_squircle"
             android:drawablePadding="15dip"
-            android:gravity="left|center_vertical"
-            android:textColor="?text_color"
-            android:textSize="14sp"
             tools:text="Auth text 1"/>
 
         <TextView
             android:id="@+id/auth_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
+            style="@style/authorization_text"
             android:layout_marginBottom="5dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:gravity="left|center_vertical"
-            android:textColor="?text_color"
-            android:textSize="14sp"
             tools:text="Auth text 2"/>
 
         <Button
@@ -45,6 +31,17 @@
             style="@style/button_full"
             android:layout_margin="7dip"
             tools:text="start"/>
+
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            style="@style/separator_horizontal" />
+
+        <TextView
+            android:id="@+id/auth_3"
+            style="@style/authorization_text"
+            android:layout_marginBottom="5dip"
+            tools:text="Auth text 3"/>
 
         <Button
             android:id="@+id/register"
