@@ -486,12 +486,12 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <!-- about pages styles -->
     <style name="about_info_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">?text_color</item>
         <item name="android:textSize">14sp</item>
-
     </style>
     <style name="about_info_content" parent="about_info_title">
         <item name="android:layout_marginBottom">5dip</item>
@@ -500,6 +500,13 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:linksClickable">false</item>
+        <item name="android:textColorLink">?text_color_link</item>
+    </style>
+    <style name="about_changes" parent="about_info_title">
+        <item name="android:layout_gravity">left</item>
+        <item name="android:layout_margin">7dip</item>
+        <item name="android:linksClickable">true</item>
+        <item name="android:paddingLeft">3dip</item>
         <item name="android:textColorLink">?text_color_link</item>
     </style>
 </resources>
