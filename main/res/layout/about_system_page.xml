@@ -13,16 +13,12 @@
         android:orientation="vertical" >
 
         <Button android:id="@+id/copy"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/copy_to_clipboard"
-            android:padding="12dp" />
+            style="@style/button_full"
+            android:text="@string/copy_to_clipboard" />
 
         <Button android:id="@+id/share"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_system_info_send_button"
-            android:padding="12dp" />
+            style="@style/button_full"
+            android:text="@string/about_system_info_send_button" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,10 +47,8 @@
             tools:text="long list of system properties"/>
 
         <Button android:id="@+id/logcat"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_system_write_logcat"
-            android:padding="12dp" />
+            style="@style/button_full"
+            android:text="@string/about_system_write_logcat" />
     </LinearLayout>
 
 </ScrollView>

@@ -156,7 +156,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
         @BindView(R.id.changelog_master) protected TextView changeLogMaster;
         @BindView(R.id.changelog_release) protected TextView changeLogRelease;
-        @BindView(R.id.changelog_github) protected TextView changeLogLink;
+        @BindView(R.id.changelog_github) protected Button changeLogLink;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
