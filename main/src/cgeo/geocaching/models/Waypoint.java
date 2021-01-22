@@ -718,7 +718,7 @@ public class Waypoint implements IWaypoint {
             while (match.find()) {
                 try {
                     final int i = Integer.parseInt(match.group(1));
-                    if (i > max) {
+                    if (Math.abs(i) <= 10100 && i > max) {
                         max = i;
                     }
                 } catch (NumberFormatException e) {
