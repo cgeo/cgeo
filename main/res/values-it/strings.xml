@@ -904,6 +904,7 @@
     <string name="cache_favpoint_not_on">Questo cache non è uno dei tuoi favoriti.</string>
     <string name="cache_list_select_last">Ultima selezione</string>
     <string name="cache_images">Immagini</string>
+    <string name="cache_advanced">Avanzate</string>
     <string name="cache_waypoints">Waypoint</string>
     <plurals name="waypoints">
         <item quantity="one">%d Waypoint</item>
@@ -1184,6 +1185,7 @@
     <string name="map_as_list">Mostra lista dei cache</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
     <string name="map_routing">Instradamento</string>
+    <string name="map_routing_brouter">Routing è disponibile solo se <a href="">BRouter</a> è installato</string>
     <string name="map_gm_autorotation">Rotazione automatica mappa</string>
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
@@ -1300,6 +1302,7 @@
     <string name="helper_brouter_description">BRouter fornisce il routing non in linea. Se è installato e ha scaricato i file necessari, c:geo mostrerà automaticamente un percorso per il cache sulla mappa interna.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf consente di leggere i dati dei tag di chirp ANT+/Garmin, che sono necessari per le geocache ANT+/chirp.</string>
     <!-- export -->
+    <string name="share_export">Condividi / Esporta</string>
     <string name="export">Esportazione</string>
     <string name="export_progress">Esporta: %1$s</string>
     <string name="export_exportedto">esportato in</string>
