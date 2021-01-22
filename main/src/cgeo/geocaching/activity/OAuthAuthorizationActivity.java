@@ -62,6 +62,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     @BindView(R.id.register) protected Button registerButton;
     @BindView(R.id.auth_1) protected TextView auth1;
     @BindView(R.id.auth_2) protected TextView auth2;
+    @BindView(R.id.auth_3) protected TextView auth3;
     private ProgressDialog requestTokenDialog = null;
     private ProgressDialog changeTokensDialog = null;
 
@@ -147,6 +148,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
         auth1.setText(getAuthExplainShort());
         auth2.setText(getAuthExplainLong());
+        auth3.setText(getAuthRegisterExplain());
 
         final ImmutablePair<String, String> tempToken = getTempTokens();
         oAtoken = tempToken.left;
@@ -404,6 +406,10 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     private String getAuthAuthorize() {
         return res.getString(R.string.auth_authorize);
+    }
+
+    protected String getAuthRegisterExplain() {
+        return res.getString(R.string.auth_register_explain);
     }
 
     protected String getAuthRegister() {

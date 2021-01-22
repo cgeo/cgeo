@@ -858,7 +858,8 @@
 
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
-    <string name="auth_credentials_explain_long">Filling your credentials and pressing the \"Check authentication\" button will start the process. This process will connect to %s and validate your credentials. That\'s all.</string>
+    <string name="auth_credentials_explain_long">If you already have an account please enter your account credentials for %s below:</string>
+    <string name="auth_register_explain">If you do not yet have an account click below to be directed to the service\'s webpage to create an account. Make sure to use the method with username and password to create an account as c:geo does not support login via Google/Apple/Facebook. After account creation validation of your email address might be needed before you can use the login with c:geo.</string>
 
     <!-- auth token -->
     <string name="auth_token_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>

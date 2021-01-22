@@ -39,6 +39,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     @BindView(R.id.register) protected Button registerButton;
     @BindView(R.id.auth_1) protected TextView auth1;
     @BindView(R.id.auth_2) protected TextView auth2;
+    @BindView(R.id.auth_3) protected TextView auth3;
     @BindView(R.id.username) protected EditText usernameEditText;
     @BindView(R.id.password) protected EditText passwordEditText;
 
@@ -56,6 +57,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
         auth1.setText(getAuthExplainShort());
         auth2.setText(getAuthExplainLong());
+        auth3.setText(getAuthRegisterExplain());
 
         checkButton.setText(getAuthCheck());
         checkButton.setOnClickListener(new CheckListener());
@@ -181,6 +183,10 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
     protected String getAuthCheckAgain() {
         return res.getString(R.string.auth_check_again);
+    }
+
+    protected String getAuthRegisterExplain() {
+        return res.getString(R.string.auth_register_explain);
     }
 
     protected String getAuthRegister() {
