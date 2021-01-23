@@ -796,7 +796,6 @@
     <string name="auth_forget_message">Seràs desconnectat d\'aquest servei. Les teves credencials desades es perdran.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">El següent procés permetrà a <b>c:geo</b> accedir a %s.</string>
-    <string name="auth_credentials_explain_long">Emplena les teves dades, prem el botó \"Comprovar autenticació\" i començarà el procés. Aquest procés es connecta a %s i validarà les teves credencials. Això és tot.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
     <string name="auth_token_explain_long">Emplena la credencial, prem al boto \"autoritzar c:geo\" i començarà el procés. Aquest procés es connecta a %s i recupera la fitxa d\'autenticació.</string>
