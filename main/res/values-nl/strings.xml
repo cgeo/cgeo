@@ -816,7 +816,6 @@
     <string name="auth_forget_message">De verbinding met deze dienst zal worden verbroken. Je opgeslagen referenties zullen verloren gaan.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
-    <string name="auth_credentials_explain_long">Het invullen van je referenties en drukken op de \"Controleer authenticatie\" knop zal het proces starten. Dit proces zal verbinden met %s en je referenties valideren. Dat is alles.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
     <string name="auth_token_explain_long">Het vullen van uw referenties en drukken op de \"c:geo machtigen\" knop zal het proces starten. Dit proces zal verbinden met %s en een authenticatie token ophalen. Dat is alles.</string>
