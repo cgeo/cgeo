@@ -557,7 +557,6 @@
     <string name="auth_forget_message">Madiskonek ka sa kani nga service. Ang imong gi-save na credentials karon kay mawala.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Ang sunod nga proseso kay magtugot sa <b>c:geo</b> nga maka-access %s.</string>
-    <string name="auth_credentials_explain_long">Pagpuno sa imong mga kredensyal ug pagpindut sa \"I-check ang pagpamatuod\" na pindutanan para masugdan ang proseso. Kani nga proseso kay makonek sa %s ug mag validate sa imong mga kredensyal. Mao rana tanan.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ang kani nga proseso kay nagtugot sa <b>c:geo</b> nga maka-access %s.</string>
     <string name="auth_token_explain_long">Pag-file sa imohang kredensyal og pag pindot sa \"awtorisa c:geo\"button mo sugod ang proses. Ang kani nga proseso mo konek sa %s og mo bawi sa mga pamatuod nga token. mao ra ang tanan.</string>
