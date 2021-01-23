@@ -4201,7 +4201,8 @@ public class DataStore {
     public static Set<Waypoint> loadWaypoints(final Viewport viewport, final boolean excludeMine, final boolean excludeDisabled, final boolean excludeArchived, final CacheType type) {
         final StringBuilder where = buildCoordinateWhere(dbTableWaypoints, viewport);
         if (excludeMine) {
-            where.append(" AND ").append(dbTableCaches).append(".found == 0");
+            // found will contain the value -1 if cache was logged as DNF. Therefore we can't check if found == 0
+            where.append(" AND ").append(dbTableCaches).append(".found != 1");
         }
         if (excludeDisabled) {
             where.append(" AND ").append(dbTableCaches).append(".disabled == 0");
