@@ -1588,9 +1588,6 @@
     <string name="github_title">Śledzenie błędów</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Dostępna nowa codzienna wersja.\nKliknij aby zainstalować.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny nowy kandydat na nową wersję.\nKliknij aby zainstalować.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
