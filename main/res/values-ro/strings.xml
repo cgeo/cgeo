@@ -1162,9 +1162,6 @@
     <string name="about_twitter">Ar trebui ca <b>c:geo</b> să publice un statut nou pe Twitter de fiecare dată când scrii o însemnare pentru o geocutie?</string>
     <string name="faq_title">Întrebari frecvente</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">A apărut o versiune nouă.\nApasă aici pentru a instala.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">A apărut o nouă versiune zilnică.\nApasă aici pentru a instala.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">A apărut o un candidat pentru o versiune nouă.\nApasă aici pentru a instala.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Modificările recente de pe geocaching.com fac c:geo nefuncţional.\nLucrăm la asta, revin-o.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modificările recente de pe geocaching.com fac harta nefuncţională.\nLucrăm la asta, revin-o.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Se efectuează lucrări de întreţinere la geocaching.com.\nEste posibil ca în această perioadă să apară diverse probleme.</string>
