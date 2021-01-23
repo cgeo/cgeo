@@ -1548,9 +1548,6 @@
     <string name="github_title">suivi de bugs</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Une nouvelle version de c:geo est disponible.\nAppuyez ici pour l\'installer.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Une nouvelle version de test est disponible.\nAppuyez ici pour l\'installer.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
