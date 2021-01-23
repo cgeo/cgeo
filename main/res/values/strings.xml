@@ -859,7 +859,7 @@
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
     <string name="auth_credentials_explain_long">If you already have an account please enter your account credentials for %s below:</string>
-    <string name="auth_register_explain">If you do not yet have an account click below to be directed to the service\'s webpage to create an account. Make sure to use the method with username and password to create an account as c:geo does not support login via Google/Apple/Facebook. After account creation validation of your email address might be needed before you can use the login with c:geo.</string>
+    <string name="auth_register_explain">If you do not yet have an account tap below to be directed to the service\'s webpage to create an account. Make sure to use the method with username and password to create an account as c:geo does not support login via Google/Apple/Facebook. After account creation validation of your email address might be needed before you can use the login with c:geo.</string>
 
     <!-- auth token -->
     <string name="auth_token_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
@@ -1712,9 +1712,9 @@
     <string name="faq_title">FAQ</string>
 
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">New release available.\nClick to install.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">New nightly build available.\nClick to install.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">New release candidate available.\nClick to install.</string>
+    <string name="status_new_release" tools:ignore="UnusedResources">New release available.\nTap to install.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">New nightly build available.\nTap to install.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">New release candidate available.\nTap to install.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Recent changes on geocaching.com broke c:geo.\nWe are working on it, check again soon.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recent changes on geocaching.com broke the live map feature.\nWe are working on it, check again soon.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is under maintenance.\nYou might run into various issues.</string>
