@@ -788,7 +788,6 @@
     <string name="auth_forget_message">Vous allez être déconnecté du service et vos identifiants sauvegardés seront perdus.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
-    <string name="auth_credentials_explain_long">Renseignez vos identifiants et appuyez sur le bouton \"Vérifier l’authentification\" démarrera le processus. Cette étape se connectera au site %s et validera vos identifiants. C\'est tout.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
     <string name="auth_token_explain_long">Saisissez vos informations d\'identification puis appuyez sur \"Autoriser c:geo\" … nous allons nous connecter à %s avec vos identifiants et récupérer un jeton d\'authentification. C\'est tout.</string>
