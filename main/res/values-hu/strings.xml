@@ -1279,9 +1279,6 @@
     <string name="about_twitter">Akarod, hogy a <b>c:geo</b> új bejegyzést írjon a Twitter-re, amikor megtalálsz egy ládát?</string>
     <string name="faq_title">GYIK</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Új kiadás jelent meg.\nKattints a telepítéshez!</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Új napi frissítés jelent meg.\nKattints a telepítéshez!</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Új kiadás előtti verzió jelent meg.\nKattints a telepítéshez!</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">A c:geo működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Az élő térkép működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">A geocaching.com karbantartás alatt van. \nEsetleg egyéb hiba lépett fel.</string>
