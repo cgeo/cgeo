@@ -816,7 +816,8 @@
     <string name="auth_forget_message">Será desconectado deste serviço. As suas credenciais atualmente guardadas serão perdidas.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
-    <string name="auth_credentials_explain_long">O preenchimento das suas credenciais e premir no botão \"Verificar Autenticação\" irá desencadear o processo. Este processo irá ligar a %s e validar as suas credenciais. Nada mais simples.</string>
+    <string name="auth_credentials_explain_long">Se já possui uma conta, por favor, introduza abaixo as suas credenciais para %s:</string>
+    <string name="auth_register_explain">Se ainda não tem uma conta, toque abaixo para ser direccionado para a página web do serviço para criar uma conta. Certifique-se que usa o método com nome de utilizador e palavra-passe para criar uma conta, porque o c:geo não suporta o início de sessão via Google/Apple/Facebook. Após a criação da conta, pode ser necessária a validação do seu endereço de e-mail para que possa iniciar a sessão com o c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
     <string name="auth_token_explain_long">O preenchimento das suas credenciais e premir no botão \"autorizar o c:geo\" irá desencadear o processo. Este processo irá ligar a %s e obter o token de autenticação. Nada mais simples. </string>
