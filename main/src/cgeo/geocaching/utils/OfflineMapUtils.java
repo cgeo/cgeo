@@ -1,11 +1,13 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,10 +32,8 @@ public class OfflineMapUtils {
     private static final String PROP_LOCALFILE = "local.file";
     private static final String PROP_DISPLAYNAME = "displayname";
 
-    private static final String PROP_VALUE_MAPSFORGE = "1";
-
     public static class OfflineMapData {
-        public int remoteParsetype;         // 1 = Mapsforge.org (FH Esslingen mirror)
+        public int remoteParsetype;         // see OfflineMapType.id
         public String remotePage;           // eg: http://ftp-stud.hs-esslingen.de/pub/Mirrors/download.mapsforge.org/maps/v5/europe/germany/
         public String remoteFile;           // eg: hessen.map
         public long remoteDate;             // 2020-12-10 (as long)
@@ -45,7 +45,7 @@ public class OfflineMapUtils {
         // utility class
     }
 
-    public static void writeInfo(@NonNull final String remoteUrl, @NonNull final String localFilename, @NonNull final String displayName, final long date) {
+    public static void writeInfo(@NonNull final String remoteUrl, @NonNull final String localFilename, @NonNull final String displayName, final long date, final int offlineMapTypeId) {
         final Uri infoFile = ContentStorage.get().create(PersistableFolder.OFFLINE_MAPS, localFilename + INFOFILE_SUFFIX);
         try (OutputStream output = ContentStorage.get().openForWrite(infoFile)) {
             final int i = remoteUrl.lastIndexOf("/");
@@ -53,7 +53,7 @@ public class OfflineMapUtils {
             final String remoteFile = i != -1 ? remoteUrl.substring(i + 1) : localFilename;
 
             final Properties prop = new Properties();
-            prop.setProperty(PROP_PARSETYPE, PROP_VALUE_MAPSFORGE);
+            prop.setProperty(PROP_PARSETYPE, String.valueOf(offlineMapTypeId));
             prop.setProperty(PROP_REMOTEPAGE, remotePage);
             prop.setProperty(PROP_REMOTEFILE, remoteFile);
             prop.setProperty(PROP_REMOTEDATE, CalendarUtils.yearMonthDay(date));
@@ -67,9 +67,9 @@ public class OfflineMapUtils {
     }
 
     /**
-     * returns a list of downloaded offline maps which are still available in the local filesystem
+     * returns a list of downloaded offline maps from requested source which are still available in the local filesystem
      */
-    public static ArrayList<OfflineMapData> availableOfflineMaps() {
+    public static ArrayList<OfflineMapData> availableOfflineMaps(@Nullable final OfflineMap.OfflineMapType filter) {
         final ArrayList<OfflineMapData> result = new ArrayList<>();
 
         final List<ContentStorage.FileInformation> mapDirContent = ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS);
@@ -88,14 +88,16 @@ public class OfflineMapUtils {
                 final Properties prop = new Properties();
                 prop.load(input);
                 offlineMapData.remoteParsetype = Integer.parseInt(prop.getProperty(PROP_PARSETYPE));
-                offlineMapData.remotePage = prop.getProperty(PROP_REMOTEPAGE);
-                offlineMapData.remoteFile = prop.getProperty(PROP_REMOTEFILE);
-                offlineMapData.remoteDate = CalendarUtils.parseYearMonthDay(prop.getProperty(PROP_REMOTEDATE));
-                offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
-                offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
+                if (filter == null || offlineMapData.remoteParsetype == filter.id) {
+                    offlineMapData.remotePage = prop.getProperty(PROP_REMOTEPAGE);
+                    offlineMapData.remoteFile = prop.getProperty(PROP_REMOTEFILE);
+                    offlineMapData.remoteDate = CalendarUtils.parseYearMonthDay(prop.getProperty(PROP_REMOTEDATE));
+                    offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
+                    offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
 
-                if (StringUtils.isNotBlank(offlineMapData.localFile) && mapDirMap.containsKey(offlineMapData.localFile)) {
-                    result.add(offlineMapData);
+                    if (StringUtils.isNotBlank(offlineMapData.localFile) && mapDirMap.containsKey(offlineMapData.localFile)) {
+                        result.add(offlineMapData);
+                    }
                 }
             } catch (IOException | NumberFormatException e) {
                 Log.d("Offline map property file error for " + filename + ": " + e.getMessage());

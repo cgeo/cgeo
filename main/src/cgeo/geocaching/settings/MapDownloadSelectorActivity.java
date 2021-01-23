@@ -1,6 +1,5 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.OfflineMap;
@@ -14,7 +13,6 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
-import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.OfflineMapUtils;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -26,7 +24,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,7 +37,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import okhttp3.Response;
@@ -44,19 +44,15 @@ import org.apache.commons.lang3.StringUtils;
 
 public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
 
-    // entry point for maps dir
-    private static final Uri MAP_BASE = Uri.parse(CgeoApplication.getInstance().getString(R.string.mapserver_osm_v5));
-
-    // for those patterns be careful: consecutive spaces get compressed into one! as compressWhitespace is set to true
-    private static final Pattern PATTERN_MAP = Pattern.compile("alt=\"\\[ \\]\"><\\/td><td><a href=\"(([-a-z]+)\\.map)\">[-a-z]+\\.map<\\/a><\\/td><td align=\"right\">([-0-9]+)[ 0-9:]+<\\/td><td align=\"right\">([ 0-9\\.]+[KMG])<\\/td>");
-    private static final Pattern PATTERN_DIR = Pattern.compile("alt=\"\\[DIR\\]\"><\\/td><td><a href=\"([-a-z]+\\/)");
-    private static final Pattern PATTERN_UP  = Pattern.compile("alt=\"\\[PARENTDIR\\]\"><\\/td><td><a href=\"((\\/[-a-zA-Z0-9\\.]+)+\\/)");
-
     @NonNull
     private final List<OfflineMap> maps = new ArrayList<>();
-    private final ArrayList<OfflineMapUtils.OfflineMapData> installedOfflineMaps = OfflineMapUtils.availableOfflineMaps();
+    private ArrayList<OfflineMapUtils.OfflineMapData> installedOfflineMaps;
     private final MapListAdapter adapter = new MapListAdapter(this);
+    protected @BindView(R.id.downloader_type) Spinner downloaderType;
+    protected @BindView(R.id.downloader_info) TextView downloaderInfo;
     protected @BindView(R.id.check_for_updates) Button checkForUpdates;
+    private AbstractMapDownloader current;
+    private ArrayList<OfflineMap.OfflineMapTypeDescriptor> spinnerData = new ArrayList<>();
 
     protected class MapListAdapter extends RecyclerView.Adapter<MapListAdapter.ViewHolder> {
         @NonNull private final MapDownloadSelectorActivity activity;
@@ -97,10 +93,10 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
                 intent.putExtra(MapDownloadUtils.RESULT_CHOSEN_URL, offlineMap.getUri());
                 intent.putExtra(MapDownloadUtils.RESULT_SIZE_INFO, offlineMap.getSizeInfo());
                 intent.putExtra(MapDownloadUtils.RESULT_DATE, offlineMap.getDateInfo());
+                intent.putExtra(MapDownloadUtils.RESULT_TYPEID, offlineMap.getType().id);
                 setResult(RESULT_OK, intent);
                 finish();
             });
-
             return viewHolder;
         }
 
@@ -115,7 +111,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
                 holder.info.setText(R.string.downloadmap_directory);
             } else {
                 final String addInfo = offlineMap.getAddInfo();
-                holder.info.setText(getString(R.string.downloadmap_mapfile) + Formatter.SEPARATOR + offlineMap.getDateInfoAsString() + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "") + Formatter.SEPARATOR + offlineMap.getSizeInfo());
+                holder.info.setText(getString(R.string.downloadmap_mapfile) + Formatter.SEPARATOR + offlineMap.getDateInfoAsString() + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "") + Formatter.SEPARATOR + offlineMap.getSizeInfo() + Formatter.SEPARATOR + offlineMap.getTypeAsString());
             }
         }
     }
@@ -150,32 +146,8 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             final List<OfflineMap> list = new ArrayList<>();
 
             try {
-                if (!MAP_BASE.equals(uri)) {
-                    final MatcherWrapper matchUp = new MatcherWrapper(PATTERN_UP, page);
-                    if (matchUp.find()) {
-                        final String oneUp = uri.toString();
-                        final int endOfPreviousSegment = oneUp.lastIndexOf("/", oneUp.length() - 2); // skip trailing "/"
-                        if (endOfPreviousSegment > -1) {
-                            final OfflineMap offlineMap = new OfflineMap(getString(R.string.downloadmap_onedirup), Uri.parse(oneUp.substring(0, endOfPreviousSegment + 1)), true, "", "");
-                            list.add(offlineMap);
-                        }
-                    }
-                }
-
-                final MatcherWrapper matchDir = new MatcherWrapper(PATTERN_DIR, page);
-                while (matchDir.find()) {
-                    final OfflineMap offlineMap = new OfflineMap(matchDir.group(1), Uri.parse(uri + matchDir.group(1)), true, "", "");
-                    list.add(offlineMap);
-                }
-
-                final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_MAP, page);
-                while (matchMap.find()) {
-                    final OfflineMap offlineMap = new OfflineMap(matchMap.group(2), Uri.parse(uri + matchMap.group(1)), false, matchMap.group(3), matchMap.group(4));
-                    list.add(offlineMap);
-                }
-
+                current.analyzePage(uri, list, page);
                 Collections.sort(list, (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName()));
-
                 return list;
             } catch (final Exception e) {
                 Log.e("Map downloader: error parsing parsing html page", e);
@@ -204,9 +176,9 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         @Override
         protected List<OfflineMap> doInBackgroundInternal(final Void[] none) {
             final List<OfflineMap> result = new ArrayList<>();
-            result.add(new OfflineMap(getString(R.string.downloadmap_title), MAP_BASE, true, "", ""));
+            result.add(new OfflineMap(getString(R.string.downloadmap_title), current.mapBase, true, "", "", current.offlineMapType));
             for (OfflineMapUtils.OfflineMapData installedOfflineMap : installedOfflineMaps) {
-                final OfflineMap offlineMap = checkForUpdate(installedOfflineMap.remotePage, installedOfflineMap.remoteFile);
+                final OfflineMap offlineMap = checkForUpdate(installedOfflineMap);
                 if (offlineMap != null && offlineMap.getDateInfo() > installedOfflineMap.remoteDate) {
                     offlineMap.setAddInfo(CalendarUtils.yearMonthDay(installedOfflineMap.remoteDate));
                     result.add(offlineMap);
@@ -216,11 +188,17 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         }
 
         @Nullable
-        private OfflineMap checkForUpdate(final String remoteUrl, final String remoteFilename) {
+        private OfflineMap checkForUpdate(final OfflineMapUtils.OfflineMapData offlineMapData) {
+            final AbstractMapDownloader downloader = OfflineMap.OfflineMapType.getInstance(offlineMapData.remoteParsetype);
+            if (downloader == null) {
+                Log.e("Map update checker: Cannot find map downloader of type " + offlineMapData.remoteParsetype + " for file " + offlineMapData.localFile);
+                return null;
+            }
+
             final Parameters params = new Parameters();
             String page = "";
             try {
-                final Response response = Network.getRequest(remoteUrl, params).blockingGet();
+                final Response response = Network.getRequest(offlineMapData.remotePage, params).blockingGet();
                 page = Network.getResponseData(response, true);
             } catch (final Exception e) {
                 return null;
@@ -232,14 +210,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             }
 
             try {
-                final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_MAP, page);
-                while (matchMap.find()) {
-                    final String filename = matchMap.group(1);
-                    if (filename.equals(remoteFilename)) {
-                        return new OfflineMap(matchMap.group(2), Uri.parse(remoteUrl + "/" + filename), false, matchMap.group(3), matchMap.group(4));
-                    }
-                }
-                return null;
+                return downloader.findMap(page, offlineMapData.remotePage, offlineMapData.remoteFile);
             } catch (final Exception e) {
                 Log.e("Map update checker: error parsing parsing html page", e);
                 return null;
@@ -258,6 +229,34 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.mapdownloader_activity);
 
+        spinnerData = OfflineMap.OfflineMapType.getOfflineMapTypes();
+        final ArrayAdapter<OfflineMap.OfflineMapTypeDescriptor> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerData);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        downloaderType.setAdapter(spinnerAdapter);
+        downloaderType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
+                changeSource(position);
+            }
+
+            @Override
+            public void onNothingSelected(final AdapterView<?> parent) {
+                // deliberately left empty
+            }
+        });
+    }
+
+    private void changeSource(final int position) {
+        this.setTitle(R.string.downloadmap_title);
+        maps.clear();
+        adapter.notifyDataSetChanged();
+
+        current = spinnerData.get(position).instance;
+        installedOfflineMaps = OfflineMapUtils.availableOfflineMaps(null);
+
+        downloaderInfo.setVisibility(StringUtils.isNotBlank(current.mapSourceInfo) ? View.VISIBLE : View.GONE);
+        downloaderInfo.setText(current.mapSourceInfo);
+
         setUpdateButtonVisibility();
         checkForUpdates.setOnClickListener(v -> {
             checkForUpdates.setVisibility(View.GONE);
@@ -268,7 +267,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             if (isWritable) {
                 final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.mapdownloader_list, true, true);
                 view.setAdapter(adapter);
-                new MapListTask(this, MAP_BASE, "").execute();
+                new MapListTask(this, current.mapBase, "").execute();
             } else {
                 finish();
             }
@@ -288,9 +287,15 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         this.maps.addAll(maps);
         adapter.notifyDataSetChanged();
         this.setTitle(selectionTitle);
+
+        final boolean showSpinner = !selectionTitle.equals(getString(R.string.downloadmap_available_updates));
+        downloaderType.setVisibility(showSpinner ? View.VISIBLE : View.GONE);
+        downloaderInfo.setVisibility(showSpinner ? View.VISIBLE : View.GONE);
+
         if (noUpdatesFound) {
             Dialogs.message(this, R.string.downloadmap_no_updates_found);
-            new MapListTask(this, MAP_BASE, "").execute();
+            new MapListTask(this, current.mapBase, "").execute();
         }
     }
+
 }

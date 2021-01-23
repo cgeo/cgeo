@@ -62,6 +62,6 @@
         android:layout_below="@id/label"
         android:layout_alignParentLeft="true"
         tools:text="info"
-        android:maxLines="1" />
+        android:maxLines="2" />
 
 </RelativeLayout>

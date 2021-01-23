@@ -25,16 +25,20 @@ public class PendingDownload extends DataStore.DBExtension {
         return getLong1();
     }
 
+    public int getOfflineMapTypeId() {
+        return (int) getLong2();
+    }
+
     @Nullable
     public static PendingDownload load(final long pendingDownload) {
         final DataStore.DBExtension temp = load(type, String.valueOf(pendingDownload));
         return null == temp ? null : new PendingDownload(temp);
     }
 
-    public static void add(final long pendingDownload, @NonNull final String filename, @NonNull final String remoteUrl, final long date) {
+    public static void add(final long pendingDownload, @NonNull final String filename, @NonNull final String remoteUrl, final long date, final int offlineMapTypeId) {
         final String key = String.valueOf(pendingDownload);
         removeAll(type, key);
-        add(type, key, date, 0, 0, 0, filename, remoteUrl, "", "");
+        add(type, key, date, offlineMapTypeId, 0, 0, filename, remoteUrl, "", "");
     }
 
     public static void remove(final long pendingDownload) {
