@@ -760,7 +760,6 @@
     <string name="auth_forget_message">이 서비스 연결이 끊어집니다. 현재 저장된 정보도 사라집니다.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다.</string>
-    <string name="auth_credentials_explain_long">사용자 정보를 입력하고 \"인증 확인\" 버튼을 누르면 시작됩니다. 이 절차를 마치면 %s 에 연결되고, 사용자 정보를 인증받습니다.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다.</string>
     <string name="auth_token_explain_long">사용자 정보를 입력하고 \"c: geo 인증하기\" 버튼을 누르면 시작됩니다. 이 과정에서 %s 에 연결되고, 인증 토큰을 받아오게됩니다. </string>
