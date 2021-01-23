@@ -816,7 +816,6 @@
     <string name="auth_forget_message">Verrai disconnesso da questo servizio. Le tue identificazioni attualmente salvate andranno perse.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Il seguente processo permetterà a <b>c:geo</b> di accedere a %s.</string>
-    <string name="auth_credentials_explain_long">Riempendo le identificazioni e premendo il pulsante \"Controllo autenticazione\" verrà avviato il processo. Questo processo ti connetterà a %s per convalidare le identificazioni. Questo è tutto.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
     <string name="auth_token_explain_long">Completando le credenziali e premendo il pulsante \"autorizza c:geo\" avvierà la connessione a %s per recuperare un token di autenticazione.</string>
