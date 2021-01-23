@@ -1478,9 +1478,6 @@
     <string name="about_twitter">Публиковать новый твит каждый раз, когда вы записываетесь в блокнот?</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Доступна новая версия приложения.\nНажмите, чтобы установить.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Доступна новая ночная сборка.\nНажмите, чтобы установить.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Доступен новый релиз кандидат.\nНажмите, чтобы установить.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com сейчас не работает.\nВозможны различные проблемы.</string>
