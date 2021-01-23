@@ -784,7 +784,6 @@
     <string name="auth_forget_message">Forbindelsen til servicen bliver afbrudt. Dine aktuelle gemte legitimationsoplysninger vil gå tabt.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Den følgende opsætningsguide vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
-    <string name="auth_credentials_explain_long">Ved at udfylde dine legitimationsoplysninger og trykke på \"Kontrollér autentifikation\" starter opsætningen. Under opsætningen vil der blive hentet autentifikationsoplysninger fra %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ved at gennemføre denne opsætning, tillader du at <b>c:geo</b> kan få adgang til %s.</string>
     <string name="auth_token_explain_long">Ved at udfylde dine legitimationsoplysninger og aktivere \"Autorisér c:geo\"-knappen starter opsætningen. Under opsætningen vil der blive hentet et autentifikationsobjekt fra %s.</string>
