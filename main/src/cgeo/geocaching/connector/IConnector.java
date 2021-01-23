@@ -203,10 +203,9 @@ public interface IConnector {
      * on the map.
      *
      * @param disabled
-     *            Whether to return the enabled, disabled or archived marker type
-     *            (precedence is: archived > disabled > regular)
+     *            Whether to return the enabled or disabled marker type
      */
-    int getCacheMapMarkerId(boolean disabled, boolean archived);
+    int getCacheMapMarkerId(boolean disabled);
 
     /**
      * Get the list of <b>potentially</b> possible log types for a cache. Those may still be filtered further during the
