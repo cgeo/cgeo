@@ -5,7 +5,7 @@ Główne funkcje:
 - Używaj Map Google lub OpenStreetMap
 - Wyszukaj skrzynki według różnych kryteriów
 - Zaloguj swoje znaleziska online lub offline
-- Przechowuj informacje o pamięci podręcznej na swoim urządzeniu
+- Przechowuj informacje o skrzynkach na swoim urządzeniu
 - Twórz punkty i zarządzaj nimi
 - Nawiguj używając kompasu, mapy lub innej aplikacji
 - Importuj / eksportuj pliki GPX
