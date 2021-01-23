@@ -703,7 +703,7 @@
     <string name="init_secondary_navigation_tool">Zweitnavigation</string>
     <string name="init_default_navigation_tool_description">Hier kann das bevorzugte Navigationswerkzeug festgelegt werden.</string>
     <string name="init_default_navigation_tool_select">Wähle Werkzeug</string>
-    <string name="init_default_navigation_tool_2_description">Hier kann das zweite bevorzugte Navigationswerkzeug festgelegt werden. Es ist durch langen Klick auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
+    <string name="init_default_navigation_tool_2_description">Hier kann das zweite bevorzugte Navigationswerkzeug festgelegt werden. Es ist durch langes Tippen auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
     <string name="init_navigation_menu_description">Hier kann ausgewählt werden, welche der verfügbaren Navigationswerkzeuge im Navigationsmenü für einen Cache oder Wegpunkt angezeigt werden. Nicht auswählbare Optionen sind auf diesem Gerät nicht installiert.</string>
     <string name="init_debug_title">Fehlersuche</string>
     <string name="init_debug_note">c:geo kann viele Debug-Informationen generieren. Das Aktivieren dieser Einstellung wird die Stabilität von c:geo beeinträchtigen und wird nur empfohlen, um den Entwicklern eine Logdatei zu senden. Bitte Debug-Logging bei der normalen Nutzung von c:geo immer abgeschaltet lassen!</string>
@@ -817,7 +817,7 @@
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
     <string name="auth_credentials_explain_long">Wenn Du bereits ein Konto hast, gib bitte unten Deine Zugangsdaten für %s ein:</string>
-    <string name="auth_register_explain">Wenn Du noch kein Konto hast, klicke unten. Du wirst dann auf die Webseite des Dienstes weitergeleitet und kannst dort ein Konto erstellen. Verwende bitte die Methode mit Benutzername und Passwort, da c:geo keine Anmeldung über Google/Apple/Facebook unterstützt. Nach dem Erstellen des Kontos ist evtl. eine Überprüfung Deiner E-Mail-Adresse erforderlich, bevor Du das Login mit c:geo verwenden kannst.</string>
+    <string name="auth_register_explain">Wenn Du noch kein Konto hast, tippe unten. Du wirst dann auf die Webseite des Dienstes weitergeleitet und kannst dort ein Konto erstellen. Verwende bitte die Methode mit Benutzername und Passwort, da c:geo keine Anmeldung über Google/Apple/Facebook unterstützt. Nach dem Erstellen des Kontos ist evtl. eine Überprüfung Deiner E-Mail-Adresse erforderlich, bevor Du das Login mit c:geo verwenden kannst.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
     <string name="auth_token_explain_long">Nach Eingabe der Anmeldeinformation „Starte Autorisierung“ auswählen, um den Prozess zu starten. Dieser Prozess verbindet mit %s und ruft einen Authentifizierungstoken ab. Das ist alles.</string>
@@ -1593,9 +1593,9 @@
     <string name="github_title">BugTracker</string>
     <string name="faq_title">FAQs</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Neue Version verfügbar.\nKlicken zum Installieren.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Neuer Nightly Build verfügbar.\nKlicken zum Installieren.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Neue Beta-Version verfügbar.\nKlicken zum Installieren.</string>
+    <string name="status_new_release" tools:ignore="UnusedResources">Neue Version verfügbar.\nTippen zum Installieren.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Neuer Nightly Build verfügbar.\nTippen zum Installieren.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Neuer Release Candidate verfügbar.\nTippen zum Installieren.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
