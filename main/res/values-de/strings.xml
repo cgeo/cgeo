@@ -816,7 +816,8 @@
     <string name="auth_forget_message">Du wirst von diesem Dienst abgemeldet. Deine gespeicherten Anmeldedaten werden gelöscht.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
-    <string name="auth_credentials_explain_long">Nach Eingabe der Anmeldeinformation „Authentifizierung überprüfen“ auswählen, um den Prozess zu starten. Dieser Prozess verbindet mit %s und prüft die Anmeldeinformationen. Das ist alles.</string>
+    <string name="auth_credentials_explain_long">Wenn Du bereits ein Konto hast, gib bitte unten Deine Zugangsdaten für %s ein:</string>
+    <string name="auth_register_explain">Wenn Du noch kein Konto hast, klicke unten. Du wirst dann auf die Webseite des Dienstes weitergeleitet und kannst dort ein Konto erstellen. Verwende bitte die Methode mit Benutzername und Passwort, da c:geo keine Anmeldung über Google/Apple/Facebook unterstützt. Nach dem Erstellen des Kontos ist evtl. eine Überprüfung Deiner E-Mail-Adresse erforderlich, bevor Du das Login mit c:geo verwenden kannst.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
     <string name="auth_token_explain_long">Nach Eingabe der Anmeldeinformation „Starte Autorisierung“ auswählen, um den Prozess zu starten. Dieser Prozess verbindet mit %s und ruft einen Authentifizierungstoken ab. Das ist alles.</string>
@@ -1185,6 +1186,7 @@
     <string name="map_as_list">Als Liste anzeigen</string>
     <string name="map_select_multiple_items">Element auswählen</string>
     <string name="map_routing">Routing</string>
+    <string name="map_routing_brouter">Routing ist nur verfügbar, wenn <a href="">BRouter</a> installiert ist</string>
     <string name="map_gm_autorotation">Automatische Kartendrehung</string>
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
