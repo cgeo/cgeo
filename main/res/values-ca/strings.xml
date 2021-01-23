@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Aquest geocatxer va informar que aquest catxé hauria de ser arxivat. Un revisor ha estat avisat.</string>
     <string name="log_image_scale_option_noscaling">Sense escala</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">Imatge</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradueix a %s</string>
@@ -1182,6 +1183,7 @@
     <string name="map_gm_autorotation">Mapa autorotatori</string>
     <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
     <string name="quick_settings">Configuració ràpida</string>
+    <string name="quick_settings_info">Algunes configuracions del mapa (Configuració del mapa, ocultació, encaminament) s\'han mogut a la nova finestra emergent \"Configuració ràpida\".\nPodeu obrir aquesta finestra emergent mitjançant la icona que hi ha al centre de la part inferior del mapa.</string>
     <string name="map_show_in_map">Mostra al mapa</string>
     <!-- search -->
     <string name="search_bar_hint">Cerca de catxés</string>
@@ -1762,6 +1764,8 @@
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automàtic</string>
     <string name="switch_default">(Predeterminat)</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
     <!-- view settings -->
     <string name="view_settings">Mostra la configuració</string>
     <string name="delete_setting">Suprimeix la configuració</string>
