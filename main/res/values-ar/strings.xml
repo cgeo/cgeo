@@ -584,7 +584,6 @@
     <string name="auth_forget_message">ستكون غير متصل من هذه الخدمة. سيتم فقدان بيانات الاعتماد المحفوظة الخاص بك.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">العملية التالية سوف تسمح لـ <b>c:geo</b> بالوصول إلى %s.</string>
-    <string name="auth_credentials_explain_long">ملئ بيانات الاعتماد الخاص بك و الضغط على زر\"تحقق من المصادقة\" بهذا ستبدأ العملية. هذه العملية ستقوم بتوصيلك بـ %s و التحقق من بياناتك الاعتماد الخاصة بك. هذا كل ما في الأمر.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">العملية التالية سوف تسمح لـ <b>c:geo</b> بالوصول إلى %s.</string>
     <string name="auth_token_explain_long">ملئ بياناتك و الضغط على زر \"الترخيص لـ c:geo\" سيبدأ العملية. هذه العملية ستقوم بتوصيلك مع %s و تسترجع رمز المصادقة. هذا كل ما في الأمر.</string>
