@@ -574,7 +574,6 @@
     <string name="auth_forget_message">Anda akan terputus dari layanan ini. Kredensial yang anda simpan saat ini akan hilang.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Proses berikut akan mengizinkan <b>c:geo</b> untuk mengakses %s.</string>
-    <string name="auth_credentials_explain_long">Mengisi kredensial anda dan menekan tombol \"periksa otentikasi\" tombol akan memulai proses. Proses ini akan terhubung ke %s dan memvalidasi kredensial anda. Itu saja.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Proses berikut akan memungkinkan <b>c:geo</b> untuk mengakses %s.</string>
     <string name="auth_token_explain_long">Mengisi kredensial anda dan menekan tombol \"mengesahkan c:geo\" tombol akan memulai proses. Proses ini akan terhubung ke %s dan mengambil token otentikasi. Itu semua.</string>
