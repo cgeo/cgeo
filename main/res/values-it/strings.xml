@@ -1591,9 +1591,6 @@
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Una nuova versione è disponibile.\nClicca per installarla.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
