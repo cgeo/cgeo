@@ -803,7 +803,6 @@
     <string name="auth_forget_message">Zostaniesz rozłączony z tego serwisu. Twoje dane uwierzytelniające zostaną utracone.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Poniższy proces umożliwi <b>c:geo</b> dostęp do %s.</string>
-    <string name="auth_credentials_explain_long">Uzupełnienie danych i naciśnięcie przycisku \"Sprawdź uwierzytelnienie\" rozpocznie proces uwierzytelniający. Aplikacja połączy się z %s i sprawdzi Twoje dane uwierzytelniające. To wszystko.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Następujący proces umożliwi <b>c:geo</b> na dostęp do %s.</string>
     <string name="auth_token_explain_long">Po uzupełnieniu danych użytkownika i naciśnięciu przycisku \"authorize c:geo\" proces uwierzytelnienia zostanie rozpoczęty. Aplikacja połączy się z %s i otrzyma token uwierzytelniający. To wszytko.</string>
