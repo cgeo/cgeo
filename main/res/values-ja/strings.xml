@@ -815,7 +815,6 @@
     <string name="auth_forget_message">このサービスから切断します。保存されているアカウント情報は失われます</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">次の処理で<b>c:geo</b>が%sにアクセスできるようになります</string>
-    <string name="auth_credentials_explain_long">アカウント情報を入力して「認証を確認」ボタンを押すと処理を開始します。%sに接続しアカウント情報を認証します</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">次の処理で<b>c:geo</b>が%sにアクセスできるようになります</string>
     <string name="auth_token_explain_long">アカウント情報を入力して「c:geoを承認」ボタンを押すと処理を開始します。%sに接続して認証トークンを取得します</string>
