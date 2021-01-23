@@ -1512,9 +1512,6 @@
     <string name="about_twitter">Skal <b>c:geo</b> sende status til Twitter hver gang du logger en cache?</string>
     <string name="faq_title">Ofte stillede spørgsmål</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Ny udgave er tilgængelig.\nKlik for at installere.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Nyt nightly build af c:geo er tilgængelig.\nKlik for at installere.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Ny release kandidat af c:geo er tilgængelig.\nKlik for at installere.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer c:geo i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer Live-kortet i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er under vedligeholdelse.\nDu kan opleve uregelmæssigheder.</string>
