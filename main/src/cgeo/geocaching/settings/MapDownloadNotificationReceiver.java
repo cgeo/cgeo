@@ -38,6 +38,7 @@ class MapDownloadNotificationReceiver extends BroadcastReceiver {
                                 copyFileIntent.putExtra(ReceiveMapFileActivity.EXTRA_FILENAME, p.getFilename());
                                 copyFileIntent.putExtra(MapDownloadUtils.RESULT_CHOSEN_URL, p.getRemoteUrl());
                                 copyFileIntent.putExtra(MapDownloadUtils.RESULT_DATE, p.getDate());
+                                copyFileIntent.putExtra(MapDownloadUtils.RESULT_TYPEID, p.getOfflineMapTypeId());
                                 copyFileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(copyFileIntent);
                                 Log.d("download #" + pendingDownload + " successful");

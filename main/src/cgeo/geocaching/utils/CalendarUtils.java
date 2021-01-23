@@ -22,6 +22,7 @@ public final class CalendarUtils {
 
     public static final String PATTERN_YYYYMM = "yyyy-MM";
     public static final String PATTERN_YYYYMMDD = "yyyy-MM-dd";
+    public static final String PATTERN_DDMMMYYYY = "dd-MMM-yyyy";
 
     private CalendarUtils() {
         // utility class
@@ -122,6 +123,21 @@ public final class CalendarUtils {
      */
     public static long parseYearMonthDay(final String date) {
         @SuppressLint("SimpleDateFormat") final SimpleDateFormat pattern = new SimpleDateFormat(CalendarUtils.PATTERN_YYYYMMDD);
+        try {
+            final Date result = pattern.parse(date);
+            return result.getTime();
+        } catch (ParseException e) {
+            return 0;
+        }
+    }
+
+    /**
+     * parses given date to a long
+     * @param date in Format dd-mmm-yyyy with mmm=Jan,Feb,Mar,...
+     * @return time value or 0 on error
+     */
+    public static long parseDayMonthYearUS(final String date) {
+        @SuppressLint("SimpleDateFormat") final SimpleDateFormat pattern = new SimpleDateFormat(CalendarUtils.PATTERN_DDMMMYYYY, Locale.US);
         try {
             final Date result = pattern.parse(date);
             return result.getTime();

@@ -14,6 +14,20 @@
         android:text="@string/downloadmap_checkforupdates_button"
         android:visibility="gone" />
 
+    <Spinner
+        android:id="@+id/downloader_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp" />
+
+    <TextView
+        android:id="@+id/downloader_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mapdownloader_list"
         android:layout_width="fill_parent"

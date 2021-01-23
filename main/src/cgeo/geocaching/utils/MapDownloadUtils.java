@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
@@ -29,6 +30,7 @@ public class MapDownloadUtils {
     public static final String RESULT_CHOSEN_URL = "chosenUrl";
     public static final String RESULT_SIZE_INFO = "sizeInfo";
     public static final String RESULT_DATE = "dateInfo";
+    public static final String RESULT_TYPEID = "typeId";
 
     private MapDownloadUtils() {
         // utility class
@@ -48,6 +50,7 @@ public class MapDownloadUtils {
             final Uri uri = data.getParcelableExtra(RESULT_CHOSEN_URL);
             final String sizeInfo = data.getStringExtra(RESULT_SIZE_INFO);
             final long date = data.getLongExtra(RESULT_DATE, 0);
+            final int type = data.getIntExtra(RESULT_TYPEID, OfflineMap.OfflineMapType.DEFAULT);
 
             if (null != uri) {
                 String temp = uri.getLastPathSegment();
@@ -77,7 +80,7 @@ public class MapDownloadUtils {
                         Log.i("Map download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
                         final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                         if (null != downloadManager) {
-                            PendingDownload.add(downloadManager.enqueue(request), filename, uri.toString(), date);
+                            PendingDownload.add(downloadManager.enqueue(request), filename, uri.toString(), date, type);
                             ActivityMixin.showShortToast(activity, R.string.download_started);
                         } else {
                             ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
