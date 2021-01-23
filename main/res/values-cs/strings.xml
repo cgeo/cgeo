@@ -677,7 +677,7 @@
     <string name="init_trailwidth">Šířka čáry historie trasy</string>
     <string name="init_trailwidth_summary">Vyberte šířku pro čáru historie trasy</string>
     <string name="init_directioncolor">Barva směrové čáry</string>
-    <string name="init_directioncolor_summary">Vyberte barvu a neprůhlednost pro směrovou čáru. Směrová čára zobrazuje přímou čáru k vybranému cíli navigace nebo konkrétní dráhu navigace trasy, pokud je trasování povoleno po instalaci aplikace BRouter.</string>
+    <string name="init_directioncolor_summary">Vyberte barvu a neprůhlednost pro směrovou čáru. Směrová čára zobrazuje přímou čáru k vybranému cíli navigace nebo konkrétní dráhu navigace trasy, pokud je směrování povoleno, po instalaci aplikace BRouter.</string>
     <string name="init_directionwidth">Šířka směrové čáry</string>
     <string name="init_directionwidth_summary">Vyberte šířku pro směrovou čáru</string>
     <string name="init_routecolor">Barva čáry individuální trasy</string>
@@ -1200,7 +1200,7 @@
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
-    <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, trasy) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
+    <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, směrování) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
     <string name="map_show_in_map">Zobrazit na mapě</string>
     <!-- search -->
     <string name="search_bar_hint">Hledaní kešek</string>
