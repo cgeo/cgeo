@@ -1590,9 +1590,6 @@
     <string name="github_title">Εντοπίστης σφαλμάτων</string>
     <string name="faq_title">Συχνές ερωτήσεις</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Νέα έκδοση διαθέσιμη. \nΚάντε κλικ για την εγκατάσταση.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Νέα νυχτερινή έκδοση διαθέσιμη.\nΚάντε κλικ για εγκατάσταση.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Νέα υποψήφια έκδοση διαθέσιμη. \nΚάντε κλικ για την εγκατάσταση.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν το c:geo.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν τον χάρτη πραγματικού χρόνου.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Γίνεται συντήρηση στο geocaching.com.\nΜπορεί να αντιμετωπίσετε διάφορα θέματα.</string>
