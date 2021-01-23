@@ -418,7 +418,7 @@
     <string name="about_starting_text_basics_text">O Geocaching é um jogo ao ar livre para procurar e encontrar as chamadas \"caches\". Esta aplicação pode ser usada para jogar este jogo.\n\nPode ler mais sobre as <b>Noções básicas do c:geo</b> no nosso manual do utilizador:
 https://manual.cgeo.org/pt/basicuse</string>
     <string name="about_starting_text_device_head">Permissões do c:geo neste dispositivo</string>
-    <string name="about_starting_text_device_text">O c:geo precisa de determinadas permissões no seu dispositivo:\n<b>Localização</b>: acesso ao GPS para localizar a sua posição e assim permitir o cálculo da distância e da direcção para as geocaches\n<b>Armazenamento</b>: escrita de dados no armazenamento do seu telefone quando guarda geocaches para uso offline, para importar/exportar ficheiros e leitura de mapas offline\n\nSem estas permissões não será capaz de usar o c:geo.</string>
+    <string name="about_starting_text_device_text">O c:geo precisa de determinadas permissões no seu dispositivo:\n<b>Localização</b>: acesso ao sinal GPS para determinar onde se encontra para, deste modo, calcular a distância e a direcção para as geocaches\n<b>Armazenamento</b>: escrita de dados no armazenamento do seu telefone quando guarda geocaches para uso offline, para importar/exportar ficheiros e leitura de mapas offline\n\nSem estas permissões não poderá usar o c:geo.</string>
     <string name="about_starting_text_first_head">Primeiros passos com o c:geo</string>
     <string name="about_starting_text_first_text">De modo a utilizar o c:geo, precisa de uma conta para uma plataforma de geocaching à sua escolha (externa a esta aplicação). Essa conta tem de ser configurada nas definições do c:geo, na secção \"serviço\", antes de tirar proveito do c:geo!\n\nPode ler mais sobre os <b>Primeiros passos no c:geo</b> no nosso manual do utilizador: https://manual.cgeo.org/pt/firststeps</string>
     <string name="open_services_page">Configuração de serviços de geocaching</string>
@@ -680,7 +680,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_directionwidth">Largura da linha de direcção</string>
     <string name="init_directionwidth_summary">Seleccionar a largura para a linha de direcção</string>
     <string name="init_routecolor">Cor da linha do percurso individual</string>
-    <string name="init_routecolor_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (Primeiro precisa de activar a função de \"toque sem soltar\", veja as configurações do mapa.)</string>
+    <string name="init_routecolor_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (Primeiro precisa de activar a função de \"toque sem soltar no mapa\", consulte as definições de mapa.)</string>
     <string name="init_routewidth">Largura da linha do percurso individual</string>
     <string name="init_routewidth_summary">Seleccionar a largura para a linha de rota individual</string>
     <string name="init_trackcolor">Cor da linha do percurso individual</string>
@@ -1054,7 +1054,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache definida pelo utilizador)</string>
-    <string name="goto_targets_list">Caches definidas pelo utilizador</string>
+    <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
     <!-- coordinate calculator hints -->
