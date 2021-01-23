@@ -582,7 +582,6 @@
     <string name="auth_forget_message">Ikaw kay madiskonek mula sa serbisyo. Ang iyong naka save na mga kredensyal ay mawawala.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Ang sumusunod na proseso ay pumapayag sa <b>c:geo</b> na makapag-akses sa %s.</string>
-    <string name="auth_credentials_explain_long">Pagpuno ng mga kredensyal at pagpindot ng \"pagpapatunay kung tama\" ang pindutan ay magsisimula sa proseso. Itong proseso ay kumokunekta sa %s at i-validate ang iyong mga kredensyals. iyan lang ang lahat.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ang sumusunod na proseso ay pumapayag sa <b>c:geo</b> na makapag-akses sa %s.</string>
     <string name="auth_token_explain_long">Ang pagpuno sa iyong kredensyal at pagpipindot sa pindutang \"awtorisahan ang c:geo\" ay magpapasimula sa proseso. Ang proseso ito ay kumokonekta sa %s at magbabawi sa isang token sa awtentikasyon. Iyon lamang.</string>
