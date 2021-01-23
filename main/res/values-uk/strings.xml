@@ -1525,9 +1525,6 @@
     <string name="github_title">вишукувач</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Доступний новий випуск.\nНатисніть для встановлення.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Доступний новий випуск.\nНатисніть для встановлення.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Доступний новий випуск.\nНатисніть для встановлення.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Останні зміни на geocaching.com зламали c: geo.\nМи працюємо над цим, невдовзі перевірте ще раз.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Останні зміни на geocaching.com зламали c: geo.\nМи працюємо над цим, невдовзі перевірте ще раз.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com перебуває на технічному обслуговуванні.\nВи можете зіткнутися з різними питаннями.</string>
