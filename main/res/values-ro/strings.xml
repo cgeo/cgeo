@@ -574,7 +574,6 @@
     <string name="auth_forget_message">Vei fi deconectat de la acest serviciu. Numele de utilizator şi parola vor fi şterse din aplicaţie.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
-    <string name="auth_credentials_explain_long">Introducând numele de utilizator şi parola şi apăsând butonul \"Verifică autentificarea\" va începe procesul. Acesta se va conecta la %s şi va încerca să valideze datele tale. Asta-i tot.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
     <string name="auth_token_explain_long">Introducând informaţiile tale de autentificare şi apăsând butonul \"autorizează c:geo\" va porni procesul de autorizare. Acesta se va conecta la %s şi va obţine un token de autentificare. Asta e tot.</string>
