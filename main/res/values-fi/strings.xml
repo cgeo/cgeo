@@ -817,7 +817,6 @@
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
     <string name="auth_credentials_explain_long">Jos sinulla on jo olemassa oleva tili palveluun %s, syötä kirjautumistietosi alle:</string>
-    <string name="auth_register_explain">Jos sinulla ei ole vielä tiliä, napauta alta palvelun verkkosivulle luodaksesi sellaisen. Kirjauduthan sisälle käyttäjätunnusta ja salasanaa käyttämällä, c:geo ei vielä tue kirjautumista Googlen, Applen tai Facebookin kautta. Tilin luonnin jälkeen voi olla, että sinun tulee vahvistaa sähköpostisi, ennenkuin voit käyttää tiliäsi kirjautuaksesi sisään c:geoon.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
     <string name="auth_token_explain_long">Täyttämällä tiedot ja painamalla \"Valtuuta c:geo\" painiketta Aloitat tapahtuman. Tämä tapahtuma yhdistää %s ja hakea todennuksen. Siinä kaikki.</string>
@@ -1593,9 +1592,6 @@
     <string name="github_title">Vianjäljitys</string>
     <string name="faq_title">Usein kysytyt kysymykset</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Uusi versio saatavilla.\nKlikkaa asentaaksesi.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Uusi versio saatavilla.\nKlikkaa asentaaksesi.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Uusi ohjelmaversio saatavilla.\nKlikkaa ja asenna.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com:issa rikkoivat c:geon. \n Korjaamme tilannetta, tarkistathan tilanteen pian uudestaan.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com-sivulla hajoittivat livekartta-ominaisuuden.\nAsiaa korjataan, yritä lähiaikoina uudelleen.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
