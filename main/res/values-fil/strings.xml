@@ -1172,9 +1172,6 @@
     <string name="about_twitter">Dapat &lt;b&gt; c: geo &lt;/ b&gt; mag-publish ng isang bagong katayuan sa Twitter tuwing mag-log ka ng cache?</string>
     <string name="faq_title">Mga madalas itanong</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Magagamit na ang bagong release.\n i-klik upang ma-install.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Magagamit na ang bagong binuong gabi.\n i-klik upang ma-install.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Magagamit ang bagong kandidatong release. \nMag-click upang i-install.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ang mga kamakailang pagbabago sa geocaching.com ay sinira ang c: geo.\nKami ay nagsusumikap dito, suriin muli sa lalong madaling panahon.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ang mga kamakailang pagbabago sa geocaching.com sinira ang tampok na live na mapa. \ Nkami ay nagtatrabaho dito, muling suriin muli.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">ang geocaching.com ay nasa ilalim ng pagpapanatili.\n Maaari kang tumakbo sa iba\'t ibang mga isyu.</string>
