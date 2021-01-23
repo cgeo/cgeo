@@ -728,7 +728,6 @@
     <string name="auth_forget_message">Serás desconectado de este servicio. Tus credenciales guardadas actuales se perderán.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
-    <string name="auth_credentials_explain_long">Rellenando tus credenciales y pulsando el botón \"Comprobar autenticación\" comenzará el proceso. Este proceso se conectará a %s y validará tus credenciales. Eso es todo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
     <string name="auth_token_explain_long">Rellenando tus datos y presionando el botón \"autorizar a c:geo\" comenzarará el proceso. Este proceso conectará con %s y obtendrá una autorización. Eso es todo.</string>
