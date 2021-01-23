@@ -775,7 +775,6 @@
     <string name="auth_forget_message">Du kommer att bli frånkopplad från denna tjänst, dina sparade uppgifter kommer att försvinna.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Följande process kommer ge <b>c:geo</b> tillgång till %s.</string>
-    <string name="auth_credentials_explain_long">Genom att fylla i dina uppgifter och trycka på \"Kolla autentisering\" kommer processen att startas. Denna process ansluter till %s och validerar dina uppgifter. Det är allt.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Följande process kommer ge <b>c:geo</b> tillgång till %s.</string>
     <string name="auth_token_explain_long">Genom att fylla i dina uppgifter och trycka på \"tillåta c:geo\" kommer processen att startas. Denna process kommer att ansluta till %s och hämta ett inloggningshandtag. Det är allt.</string>
