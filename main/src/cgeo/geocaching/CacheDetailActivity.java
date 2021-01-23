@@ -2614,12 +2614,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (newNote != null) {
             setNewPersonalNote(newNote);
         }
+        showShortToast(note.equals(newNote) ? R.string.cache_personal_note_removewaypoints_nowaypoints : R.string.cache_personal_note_removedwaypoints);
     }
 
     public void storeWaypointsInPersonalNote(final Geocache cache, final int maxPersonalNotesChars) {
         final String note = cache.getPersonalNote() == null ? "" : cache.getPersonalNote();
 
-        //only uer modified waypoints
+        //only user modified waypoints
         final List<Waypoint> userModifiedWaypoints = new ArrayList<>();
         for (Waypoint w : cache.getWaypoints()) {
             if (w.isUserModified()) {
