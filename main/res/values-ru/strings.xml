@@ -742,7 +742,6 @@
     <string name="auth_forget_message">Вы будете отключены от сервиса. Ваши сохраненные логин и пароль будут потеряны.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
-    <string name="auth_credentials_explain_long">Заполнение данных для входа и нажатие кнопки \"Проверить аутентификацию\" вызовет соединение с %s для проверки ваших данных. Вот и все.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
     <string name="auth_token_explain_long">Заполнить данные для входа и нажмите кнопку \"авторизовать c:geo\". Произойдет соединение с %s для получения токена аутентификации. Вот и все.</string>
