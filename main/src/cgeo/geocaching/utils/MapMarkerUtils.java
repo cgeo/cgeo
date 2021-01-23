@@ -171,12 +171,16 @@ public final class MapMarkerUtils {
     private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers, final boolean cacheIsDisabled, final boolean cacheIsArchived) {
         final WaypointType waypointType = waypoint.getWaypointType();
 
-        final Drawable marker = Compatibility.getDrawable(res, waypoint.isVisited() ? R.drawable.marker_transparent : cacheIsArchived ? R.drawable.marker_archived : cacheIsDisabled ? R.drawable.marker_disabled : R.drawable.marker);
+        final Drawable marker = Compatibility.getDrawable(res, waypoint.isVisited() ? R.drawable.marker_transparent : cacheIsDisabled || cacheIsArchived ? R.drawable.marker_disabled : R.drawable.marker);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(marker));
 
         final int markerId = null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId;
         insetsBuilder.withInset(new InsetBuilder(markerId, VERTICAL.CENTER, HORIZONTAL.CENTER));
+
+        if (cacheIsArchived) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, VERTICAL.CENTER, HORIZONTAL.CENTER, false));
+        }
 
         addListMarkers(res, insetsBuilder, assignedMarkers);
 
@@ -263,6 +267,10 @@ public final class MapMarkerUtils {
             insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji)));
         } else {
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, doubleSize));
+        }
+        // archived
+        if (cache.isArchived()) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, VERTICAL.CENTER, HORIZONTAL.CENTER, false));
         }
         // own
         if (cache.isOwner()) {
