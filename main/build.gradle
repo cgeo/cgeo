@@ -64,6 +64,10 @@ android {
         release
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     buildTypes {
         debug {
             // debug build name contains git commit for better reproduction of bugs

@@ -1,6 +1,11 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.databinding.AboutChangesPageBinding;
+import cgeo.geocaching.databinding.AboutContributorsPageBinding;
+import cgeo.geocaching.databinding.AboutLicensePageBinding;
+import cgeo.geocaching.databinding.AboutSystemPageBinding;
+import cgeo.geocaching.databinding.AboutVersionPageBinding;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -19,7 +24,6 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -33,8 +37,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -46,16 +48,12 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class LicenseViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @BindView(R.id.license) protected TextView licenseLink;
-        @BindView(R.id.license_text) protected TextView licenseText;
-
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_license_page, parentView, false);
-            ButterKnife.bind(this, view);
-            setClickListener(licenseLink, "https://www.apache.org/licenses/LICENSE-2.0.html");
-            licenseText.setText(getRawResourceString(R.raw.license));
-            return view;
+            final AboutLicensePageBinding binding = AboutLicensePageBinding.inflate(getLayoutInflater(), parentView, false);
+            setClickListener(binding.license, "https://www.apache.org/licenses/LICENSE-2.0.html");
+            binding.licenseText.setText(getRawResourceString(R.raw.license));
+            return binding.getRoot();
         }
 
         private String getRawResourceString(@RawRes final int resourceId) {
@@ -78,27 +76,21 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class ContributorsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @BindView(R.id.about_carnerodetails) protected TextView carnerodetails;
-        @BindView(R.id.about_contributors_recent) protected TextView contributors;
-        @BindView(R.id.about_specialthanksdetails) protected TextView specialthanks;
-        @BindView(R.id.about_contributors_others) protected TextView contributorsOthers;
-        @BindView(R.id.about_components) protected TextView components;
-
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_contributors_page, parentView, false);
-            ButterKnife.bind(this, view);
-            setText(contributors, R.string.contributors_recent);
-            setText(contributorsOthers, R.string.contributors_other);
+            final AboutContributorsPageBinding binding = AboutContributorsPageBinding.inflate(getLayoutInflater(), parentView, false);
+
+            setText(binding.aboutContributorsRecent, R.string.contributors_recent);
+            setText(binding.aboutContributorsOthers, R.string.contributors_other);
 
             final AnchorAwareLinkMovementMethod mm = AnchorAwareLinkMovementMethod.getInstance();
-            carnerodetails.setMovementMethod(mm);
-            contributors.setMovementMethod(mm);
-            specialthanks.setMovementMethod(mm);
-            contributorsOthers.setMovementMethod(mm);
-            components.setMovementMethod(mm);
+            binding.aboutCarnerodetails.setMovementMethod(mm);
+            binding.aboutContributorsRecent.setMovementMethod(mm);
+            binding.aboutSpecialthanksdetails.setMovementMethod(mm);
+            binding.aboutContributorsOthers.setMovementMethod(mm);
+            binding.aboutComponents.setMovementMethod(mm);
 
-            return view;
+            return binding.getRoot();
         }
 
         private String checkRoles(final String s, final String roles, final char checkFor, final int infoId) {
@@ -154,95 +146,68 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class ChangeLogViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @BindView(R.id.changelog_master) protected TextView changeLogMaster;
-        @BindView(R.id.changelog_release) protected TextView changeLogRelease;
-        @BindView(R.id.changelog_github) protected Button changeLogLink;
-
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_changes_page, parentView, false);
-            ButterKnife.bind(this, view);
-            changeLogRelease.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+            final AboutChangesPageBinding binding = AboutChangesPageBinding.inflate(getLayoutInflater(), parentView, false);
+            binding.changelogRelease.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             final String changeLogMasterString = getString(R.string.changelog_master);
             if (StringUtils.isBlank(changeLogMasterString)) {
-                changeLogMaster.setVisibility(View.GONE);
+                binding.changelogMaster.setVisibility(View.GONE);
             } else {
-                changeLogMaster.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                binding.changelogMaster.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             }
-            changeLogLink.setOnClickListener(v -> startUrl("https://github.com/cgeo/cgeo/releases"));
+            binding.changelogGithub.setOnClickListener(v -> startUrl("https://github.com/cgeo/cgeo/releases"));
+            binding.changelogMaster.setText(LiUtils.formatHTML(getString(R.string.changelog_master)));
+            binding.changelogRelease.setText(LiUtils.formatHTML(getString(R.string.changelog_release)));
 
-            changeLogMaster.setText(LiUtils.formatHTML(getString(R.string.changelog_master)));
-            changeLogRelease.setText(LiUtils.formatHTML(getString(R.string.changelog_release)));
-
-            return view;
+            return binding.getRoot();
         }
 
     }
 
     class SystemViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @BindView(R.id.system) protected TextView system;
-        @BindView(R.id.copy) protected Button copy;
-        @BindView(R.id.share) protected Button share;
-        @BindView(R.id.logcat) protected Button logcat;
-
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_system_page, parentView, false);
-            ButterKnife.bind(this, view);
+            final AboutSystemPageBinding binding = AboutSystemPageBinding.inflate(getLayoutInflater(), parentView, false);
             final String systemInfo = SystemInformation.getSystemInformation(AboutActivity.this);
-            system.setText(systemInfo);
-            system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            system.setTextIsSelectable(true);
-            copy.setOnClickListener(view1 -> {
+            binding.system.setText(systemInfo);
+            binding.system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+            binding.system.setTextIsSelectable(true);
+            binding.copy.setOnClickListener(view1 -> {
                 ClipboardUtils.copyToClipboard(systemInfo);
                 showShortToast(getString(R.string.clipboard_copy_ok));
             });
-            share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(AboutActivity.this, getString(R.string.about_system_info), systemInfo, null, R.string.about_system_info_send_chooser));
-            logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(AboutActivity.this));
-            return view;
+            binding.share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(AboutActivity.this, getString(R.string.about_system_info), systemInfo, null, R.string.about_system_info_send_chooser));
+            binding.logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(AboutActivity.this));
+            return binding.getRoot();
         }
 
     }
 
     class VersionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @BindView(R.id.about_version_string) protected TextView version;
-        @BindView(R.id.about_special_build) protected TextView specialBuild;
-        @BindView(R.id.donate) protected TextView donateButton;
-
-        @BindView(R.id.support) protected TextView support;
-        @BindView(R.id.website) protected TextView website;
-        @BindView(R.id.facebook) protected TextView facebook;
-        @BindView(R.id.fangroup) protected TextView fangroup;
-        @BindView(R.id.twitter) protected TextView twitter;
-        @BindView(R.id.nutshellmanual) protected TextView nutshellmanual;
-        @BindView(R.id.market) protected TextView market;
-        @BindView(R.id.faq) protected TextView faq;
-        @BindView(R.id.github) protected TextView github;
-
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_version_page, parentView, false);
-            ButterKnife.bind(this, view);
-            version.setText(Version.getVersionName(AboutActivity.this));
-            setClickListener(donateButton, "https://www.cgeo.org");
+            final AboutVersionPageBinding binding = AboutVersionPageBinding.inflate(getLayoutInflater(), parentView, false);
+            binding.aboutVersionString.setText(Version.getVersionName(AboutActivity.this));
+            setClickListener(binding.donate, "https://www.cgeo.org");
             if (StringUtils.isNotEmpty(BuildConfig.SPECIAL_BUILD)) {
-                specialBuild.setText(BuildConfig.SPECIAL_BUILD);
-                specialBuild.setVisibility(View.VISIBLE);
+                binding.aboutSpecialBuild.setText(BuildConfig.SPECIAL_BUILD);
+                binding.aboutSpecialBuild.setVisibility(View.VISIBLE);
             }
 
-            setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
+            setClickListener(binding.support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
                     "&body=" + Uri.encode(SystemInformation.getSystemInformation(AboutActivity.this)) + "\n");
-            setClickListener(website, "https://www.cgeo.org/");
-            setClickListener(facebook, "https://www.facebook.com/pages/cgeo/297269860090");
-            setClickListener(fangroup, "https://facebook.com/groups/cgeo.fangruppe");
-            setClickListener(twitter, "https://twitter.com/android_gc");
-            setClickListener(nutshellmanual, "https://manual.cgeo.org/");
-            setClickListener(faq, "https://faq.cgeo.org/");
-            setClickListener(github, "https://github.com/cgeo/cgeo/issues");
-            market.setOnClickListener(v -> ProcessUtils.openMarket(AboutActivity.this, getPackageName()));
-            return view;
+            setClickListener(binding.website, "https://www.cgeo.org/");
+            setClickListener(binding.facebook, "https://www.facebook.com/pages/cgeo/297269860090");
+            setClickListener(binding.fangroup, "https://facebook.com/groups/cgeo.fangruppe");
+            setClickListener(binding.twitter, "https://twitter.com/android_gc");
+            setClickListener(binding.nutshellmanual, "https://manual.cgeo.org/");
+            setClickListener(binding.faq, "https://faq.cgeo.org/");
+            setClickListener(binding.github, "https://github.com/cgeo/cgeo/issues");
+            binding.market.setOnClickListener(v -> ProcessUtils.openMarket(AboutActivity.this, getPackageName()));
+            return binding.getRoot();
         }
     }
 
