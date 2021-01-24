@@ -200,7 +200,7 @@ public final class GpxSerializer {
             gpx.text("true");
             gpx.endTag(NS_CGEO, "userdefined");
         }
-        if (waypoint.getCoords() == null || waypoint.isOriginalCoordsEmpty()) {
+        if (waypoint.isOriginalCoordsEmpty()) {
             gpx.startTag(NS_CGEO, "originalCoordsEmpty");
             gpx.text("true");
             gpx.endTag(NS_CGEO, "originalCoordsEmpty");

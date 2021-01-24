@@ -209,6 +209,18 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getWaypoints()).hasSize(14);
     }
 
+    public void testWaypointParsingEmptyCoords() {
+        final Geocache cache = parseCache(R.raw.gc366bq);
+        int countEmptyCoords = 0;
+        for (final Waypoint wp : cache.getWaypoints()
+             ) {
+            if (wp.isOriginalCoordsEmpty()) {
+                countEmptyCoords++;
+            }
+        }
+        assertThat(countEmptyCoords).isEqualTo(1);
+    }
+
     public static void testNoteParsingWaypointTypes() {
         final Geocache cache = new Geocache();
         cache.setWaypoints(new ArrayList<>(), false);

@@ -190,6 +190,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
             final int cacheResource = R.raw.gc31j2h;
             final Geocache cache = loadCacheFromResource(cacheResource);
             final Waypoint waypoint = new Waypoint("WP", WaypointType.FINAL, false);
+            waypoint.setOriginalCoordsEmpty(true);
             cache.addOrChangeWaypoint(waypoint, true);
 
             final String gpxFromCache = getGPXFromCache(geocode);
