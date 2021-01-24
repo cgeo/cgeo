@@ -815,6 +815,8 @@
     <string name="auth_forget_message">このサービスから切断します。保存されているアカウント情報は失われます</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">次の処理で<b>c:geo</b>が%sにアクセスできるようになります</string>
+    <string name="auth_credentials_explain_long">すでにアカウントをお持ちの場合は、%sのアカウント情報を入力してください:</string>
+    <string name="auth_register_explain">アカウントをお持ちでない場合は新規登録してください。以下をタップするとサービスのウェブページに移動します。 c:geoはGoogle/Apple/Facebook経由でのログインをサポートしていないため、ユーザー名とパスワードを使用してアカウントを作成してください。 c:geoでログインする前に、アカウントのメールアドレス認証が必要な場合があります</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">次の処理で<b>c:geo</b>が%sにアクセスできるようになります</string>
     <string name="auth_token_explain_long">アカウント情報を入力して「c:geoを承認」ボタンを押すと処理を開始します。%sに接続して認証トークンを取得します</string>
@@ -869,6 +871,8 @@
     <string name="cache_personal_note_edit">編集</string>
     <string name="cache_personal_note_storewaypoints">ウェイポイント追加/更新</string>
     <string name="cache_personal_note_removewaypoints">ウェイポイント削除</string>
+    <string name="cache_personal_note_removedwaypoints">ウェイポイントを削除しました</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">削除するウェイポイントが見つかりません</string>
     <string name="cache_personal_note_storewaypoints_success">パーソナルノートにウェイポイントが追加されました</string>
     <string name="cache_personal_note_storewaypoints_success_limited">ノートにウェイポイントが追加されましたが超過分は削除されました\n(パーソナルノートの最大サイズ:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">ノートのサイズ制限のためウェイポイントが追加されませんでした\n(パーソナルノートの最大サイズ:%1$d)</string>
@@ -1578,6 +1582,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="github_title">課題/バグ管理</string>
     <string name="faq_title">よくある質問</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">新しいバージョンがあります\nタップしてインストールしてください</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">新しいナイトリービルドがあります\nタップしてインストールしてください</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">新しいRCバージョンがあります\nタップしてインストールしてください</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在作業中です。しばらくお待ちください</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在作業中です。しばらくお待ちください</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com はメンテナンス中です。 \nさまざまな問題が発生する可能性があります</string>
