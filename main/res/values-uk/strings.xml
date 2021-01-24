@@ -797,7 +797,6 @@
     <string name="auth_forget_message">Ви будете відключені від цієї служби. Ваші збережені облікові дані будуть втрачені.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Наступний процес дозволить <b> c: geo </b> отримати доступ до %s.</string>
-    <string name="auth_credentials_explain_long">Заповніть свої облікові дані та натисніть кнопку \"Перевірити автентифікацію\" запустить процес. Цей процес під\'єднається до %s та підтвердить ваші облікові дані. Це все.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Наступний процес дозволить <b> c: geo </b> отримати доступ до %s.</string>
     <string name="auth_token_explain_long">Заповніть свої облікові дані та натисніть кнопку \"Перевірити автентифікацію\" запустить процес. Цей процес під\'єднається до %s та підтвердить ваші облікові дані. Це все.</string>
@@ -1526,9 +1525,6 @@
     <string name="github_title">вишукувач</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Доступний новий випуск.\nНатисніть для встановлення.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Доступний новий випуск.\nНатисніть для встановлення.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Доступний новий випуск.\nНатисніть для встановлення.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Останні зміни на geocaching.com зламали c: geo.\nМи працюємо над цим, невдовзі перевірте ще раз.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Останні зміни на geocaching.com зламали c: geo.\nМи працюємо над цим, невдовзі перевірте ще раз.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com перебуває на технічному обслуговуванні.\nВи можете зіткнутися з різними питаннями.</string>

@@ -583,7 +583,7 @@
     <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>
     <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
-    <string name="init_global_wp_extraction_disable">Desactivar extracção de pont. adicionais</string>
+    <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
     <string name="init_summary_customtabs_as_browser">Sítios web externos serão exibidos sem sair do c:geo (apenas possível se o Chrome estiver instalado)</string>
@@ -598,7 +598,7 @@
     <string name="init_listdisplay">Listas adicionais</string>
     <string name="init_summary_listdisplay">Numa lista de caches, mostra o nome de outras listas a que cada cache armazenada esteja associada</string>
     <string name="init_livelist">Mostrar direcção</string>
-    <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
+    <string name="init_summary_livelist">Mostra uma seta com a orientação em azimute das caches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Por favor, note que este recurso pode fazer cópia de segurança de caches, pontos adicionais &amp; configurações, mas sem imagens de cache. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para um local independente.</string>
@@ -661,7 +661,7 @@
     <string name="init_map_directory_description">Pasta com mapas offline</string>
     <string name="init_gpx_exportdir">Directório para exportar GPX</string>
     <string name="init_gpx_importdir">Directório para importar GPX</string>
-    <string name="init_dataDir">Seleccione a pasta de dados das Geocaches</string>
+    <string name="init_dataDir">Seleccionar directório</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de percurso</string>
     <string name="init_maptrail_length">Comprimento máx. do histórico de percurso</string>
@@ -676,7 +676,7 @@
     <string name="init_directionwidth">Largura da linha de direcção</string>
     <string name="init_directionwidth_summary">Seleccionar a largura para a linha de direcção</string>
     <string name="init_routecolor">Cor da linha do percurso individual</string>
-    <string name="init_routecolor_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (Primeiro precisa de activar a função de \"toque sem soltar\", veja as configurações do mapa.)</string>
+    <string name="init_routecolor_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (Primeiro precisa de activar a função de \"toque sem soltar no mapa\", consulte as definições de mapa.)</string>
     <string name="init_routewidth">Largura da linha do percurso individual</string>
     <string name="init_routewidth_summary">Seleccionar a largura para a linha de rota individual</string>
     <string name="init_trackcolor">Cor da linha do trajecto/rota GPX</string>
@@ -684,7 +684,7 @@
     <string name="init_trackwidth">Largura da linha do percurso/rota GPX</string>
     <string name="init_trackwidth_summary">Seleccione a largura para a linha do percurso/rota GPX</string>
     <string name="init_circlecolor">Cor da linha do círculo</string>
-    <string name="init_circlecolor_summary">Selecciona a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
+    <string name="init_circlecolor_summary">Seleccionar a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
     <string name="init_circlefillcolor">Cor de preenchimento do círculo</string>
     <string name="init_circlefillcolor_summary">Seleccionar a cor e opacidade para o preenchimento dos círculos</string>
     <string name="init_accuracycirclecolor">Cor da linha do círculo da precisão</string>
@@ -816,7 +816,7 @@
     <string name="auth_forget_message">Será desconectado deste serviço. As suas credenciais atualmente guardadas serão perdidas.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
-    <string name="auth_credentials_explain_long">O preenchimento das suas credenciais e premir no botão \"Verificar Autenticação\" irá desencadear o processo. Este processo irá ligar a %s e validar as suas credenciais. Nada mais simples.</string>
+    <string name="auth_credentials_explain_long">Se já possui uma conta, por favor, introduza abaixo as suas credenciais para %s:</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
     <string name="auth_token_explain_long">O preenchimento das suas credenciais e premir no botão \"autorizar o c:geo\" irá desencadear o processo. Este processo irá ligar a %s e obter o token de autenticação. Nada mais simples. </string>
@@ -904,6 +904,7 @@
     <string name="cache_favpoint_not_on">Esta geocache não é uma das suas favoritas.</string>
     <string name="cache_list_select_last">Última selecção</string>
     <string name="cache_images">Imagens</string>
+    <string name="cache_advanced">Avançadas</string>
     <string name="cache_waypoints">Pontos adicionais</string>
     <plurals name="waypoints">
         <item quantity="one">%d ponto adicional</item>
@@ -1058,8 +1059,8 @@
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache definida pelo utilizador)</string>
     <string name="onetime_info_longtap_disabled">Com um toque longo no mapa, pode criar rotas individuais e caches definidos pelo utilizador.\n\nO toque longo no mapa está desactivado neste momento.\n\nPode alterar isso em Configurações → Mapa → Comportamento do mapa</string>
-    <string name="onetime_info_longtap_enabled">Com um toque longo no mapa, pode criar rotas individuais e caches definidas pelo utilizador.\n\nO toque longo no mapa está activado neste momento.\n\nPode alterar isso em Configurações - Mapa - Comportamento do mapa</string>
-    <string name="goto_targets_list">Caches definidas pelo utilizador</string>
+    <string name="onetime_info_longtap_enabled">Ao manter premido o toque no mapa, pode criar rotas individuais e caches personalizadas (lista: \"caches internas\").\n\nA função \"toque sem soltar no mapa\" está activa neste momento.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
+    <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
     <!-- coordinate calculator hints -->
@@ -1184,6 +1185,7 @@
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar item</string>
     <string name="map_routing">Rotas</string>
+    <string name="map_routing_brouter">O encaminhamento só está disponível se <a href="">BRouter</a> estiver instalado</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
@@ -1300,6 +1302,7 @@
     <string name="helper_brouter_description">O BRouter fornece cálculo de percursos off-line. Se estiver instalado e tiver os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a geocache no mapa interno.</string>
     <string name="helper_chirpwolf_description">A aplicação Chirp Wolf permite que leia os dados de tags chirp ANT +/Garmin, que será necessária na realização de geocaches ANT+/chirp.</string>
     <!-- export -->
+    <string name="share_export">Partilhar / Exportar</string>
     <string name="export">Exportar</string>
     <string name="export_progress">Exportar: %1$s</string>
     <string name="export_exportedto">exportado para</string>
@@ -1582,15 +1585,13 @@
     <string name="support_title">Suporte</string>
     <string name="website_title">Página Web</string>
     <string name="facebook_link"><a href="">Página do c:geo</a></string>
+    <string name="fangroup_link"><a href="">Grupo de utilizadores alemão</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo no Google Play</a></string>
     <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que regista uma cache?</string>
     <string name="github_title">Rastreador de erros</string>
     <string name="faq_title">Perguntas Frequentes</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Disponível uma nova versão.\nToque para instalar.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Nova \'nightly build\' disponível.\nClique para instalar.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Nova \'release candidate\' disponível .\nClique para instalar.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em \'geocaching.com\' fizeram com que o mapa da vista em tempo real não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>

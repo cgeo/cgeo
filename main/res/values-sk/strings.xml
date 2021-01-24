@@ -797,7 +797,6 @@
     <string name="auth_forget_message">Od tejto služby budete odpojený. Vaše uložené prihlasovacie údaje budú stratené.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Nasledujúci proces povolí <b>c:geo</b> prístup k %s.</string>
-    <string name="auth_credentials_explain_long">Po vyplnení vašich prihlasovacích údajov a stlačení tlačidla \"Kontrola autentifikácie\" sa c: geo pripojí na %s a overí vaše údaje. To je všetko.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Nasledujúci proces povolí <b>c:geo</b> prístup k %s.</string>
     <string name="auth_token_explain_long">Po vyplnení vašich osobných údajov a stlačení tlačidla \"overiť c:geo\" sa c:geo pripojí na %s a obdrží overovací token. To je všetko.</string>
@@ -1580,9 +1579,6 @@
     <string name="github_title">Sledovanie chýb</string>
     <string name="faq_title">Najčastejšie otázky</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Je dostupné nové vydanie.\nKliknite pre inštaláciu.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Je dostupná nová nočná zostava.\nKliknite pre inštaláciu.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Je dostupná nová verzia „release candidate“.\nKliknite pre inštaláciu.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili c:geo.\nPracujeme na tom, skúste onedlho skontrolovať aktualizácie.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Prebieha údržba na Geocaching.com \n Môžu nastať rôzne problémy.</string>

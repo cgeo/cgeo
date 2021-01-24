@@ -695,7 +695,6 @@
     <string name="about_twitter">Á <b>c:geo</b> að setja inn nýja færslu á Twitter í hvert skipti sem þú skráir heimsókn þína?</string>
     <string name="faq_title">Algengar spurningar</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Ný útgáfa fáanleg.\nSmelltu til að setja upp.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Nýlegar breytingar á geocaching.com brutu c:geo.\nVið erum að vinna í því, athugaðu aftur síðar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talandi áttaviti</string>

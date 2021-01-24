@@ -582,7 +582,6 @@
     <string name="auth_forget_message">Ikaw kay madiskonek mula sa serbisyo. Ang iyong naka save na mga kredensyal ay mawawala.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Ang sumusunod na proseso ay pumapayag sa <b>c:geo</b> na makapag-akses sa %s.</string>
-    <string name="auth_credentials_explain_long">Pagpuno ng mga kredensyal at pagpindot ng \"pagpapatunay kung tama\" ang pindutan ay magsisimula sa proseso. Itong proseso ay kumokunekta sa %s at i-validate ang iyong mga kredensyals. iyan lang ang lahat.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ang sumusunod na proseso ay pumapayag sa <b>c:geo</b> na makapag-akses sa %s.</string>
     <string name="auth_token_explain_long">Ang pagpuno sa iyong kredensyal at pagpipindot sa pindutang \"awtorisahan ang c:geo\" ay magpapasimula sa proseso. Ang proseso ito ay kumokonekta sa %s at magbabawi sa isang token sa awtentikasyon. Iyon lamang.</string>
@@ -1173,9 +1172,6 @@
     <string name="about_twitter">Dapat &lt;b&gt; c: geo &lt;/ b&gt; mag-publish ng isang bagong katayuan sa Twitter tuwing mag-log ka ng cache?</string>
     <string name="faq_title">Mga madalas itanong</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Magagamit na ang bagong release.\n i-klik upang ma-install.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Magagamit na ang bagong binuong gabi.\n i-klik upang ma-install.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Magagamit ang bagong kandidatong release. \nMag-click upang i-install.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ang mga kamakailang pagbabago sa geocaching.com ay sinira ang c: geo.\nKami ay nagsusumikap dito, suriin muli sa lalong madaling panahon.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ang mga kamakailang pagbabago sa geocaching.com sinira ang tampok na live na mapa. \ Nkami ay nagtatrabaho dito, muling suriin muli.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">ang geocaching.com ay nasa ilalim ng pagpapanatili.\n Maaari kang tumakbo sa iba\'t ibang mga isyu.</string>

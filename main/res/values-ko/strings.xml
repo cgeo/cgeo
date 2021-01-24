@@ -760,7 +760,6 @@
     <string name="auth_forget_message">이 서비스 연결이 끊어집니다. 현재 저장된 정보도 사라집니다.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다.</string>
-    <string name="auth_credentials_explain_long">사용자 정보를 입력하고 \"인증 확인\" 버튼을 누르면 시작됩니다. 이 절차를 마치면 %s 에 연결되고, 사용자 정보를 인증받습니다.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다.</string>
     <string name="auth_token_explain_long">사용자 정보를 입력하고 \"c: geo 인증하기\" 버튼을 누르면 시작됩니다. 이 과정에서 %s 에 연결되고, 인증 토큰을 받아오게됩니다. </string>
@@ -1464,9 +1463,6 @@
     <string name="about_twitter">로그를 할 떄마다 <b>c:geo</b>에서 트위터로 새로운 상황을 알리겠습니까?</string>
     <string name="faq_title">자주 묻는 질문(FAQ)</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">새로운 버전 사용가능\n클릭하면 설치합니다.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">새로운 버전 사용가능\n클릭하면 설치합니다.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">새로운 버전(후보) 사용가능\n클릭하면 설치합니다.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 c:geo에 문제가 생겼습니다.\n작업중이오니, 조만간 확인해 보세요.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 라이브 지도기능에 문제가 생겼습니다.\n작업중이오니, 잠시 후 확인해 보세요.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com 이 유지보수중입니다.\n여러가지 문제를 만날 수 있습니다.</string>

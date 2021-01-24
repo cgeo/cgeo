@@ -816,7 +816,6 @@
     <string name="auth_forget_message">De verbinding met deze dienst zal worden verbroken. Je opgeslagen referenties zullen verloren gaan.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
-    <string name="auth_credentials_explain_long">Het invullen van je referenties en drukken op de \"Controleer authenticatie\" knop zal het proces starten. Dit proces zal verbinden met %s en je referenties valideren. Dat is alles.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
     <string name="auth_token_explain_long">Het vullen van uw referenties en drukken op de \"c:geo machtigen\" knop zal het proces starten. Dit proces zal verbinden met %s en een authenticatie token ophalen. Dat is alles.</string>
@@ -904,6 +903,7 @@
     <string name="cache_favpoint_not_on">Deze cache staat niet op jouw favorieten-lijst.</string>
     <string name="cache_list_select_last">Laatste selectie</string>
     <string name="cache_images">Afbeeldingen</string>
+    <string name="cache_advanced">Geavanceerd</string>
     <string name="cache_waypoints">Waypoints</string>
     <plurals name="waypoints">
         <item quantity="one">%d waypoint</item>
@@ -1184,6 +1184,7 @@
     <string name="map_as_list">Laat zien als lijst</string>
     <string name="map_select_multiple_items">Selecteer item</string>
     <string name="map_routing">Routering</string>
+    <string name="map_routing_brouter">Routing is alleen beschikbaar als <a href="">BRouter</a> is geïnstalleerd</string>
     <string name="map_gm_autorotation">Automatische kaartrotatie</string>
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
@@ -1300,6 +1301,7 @@
     <string name="helper_brouter_description">BRouter biedt off line routering. Als het is geïnstalleerd en de benodigde bestanden gedownload heeft, zal c:geo een route naar de cache automatisch tonen op de interne kaart.</string>
     <string name="helper_chirpwolf_description">Met Chirp Wolf kun je de gegevens lezen van ANT+/Garmin chirp tags, wat nodig is voor ANT+/chirp geocaches.</string>
     <!-- export -->
+    <string name="share_export">Delen / Exporteren</string>
     <string name="export">Exporteren</string>
     <string name="export_progress">Exporteer: %1$s</string>
     <string name="export_exportedto">Geexporteerd naar</string>
@@ -1582,15 +1584,13 @@
     <string name="support_title">Ondersteuning</string>
     <string name="website_title">Website</string>
     <string name="facebook_link"><a href="">c:geo pagina</a></string>
+    <string name="fangroup_link"><a href="">Duitse gebruikersgroep</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo op Google Play</a></string>
     <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Nieuwe versie beschikbaar.\nTik om te installeren.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Nieuwe nightly-release beschikbaar.\nTik om te installeren.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Nieuwe release-kandidaat beschikbaar.\nTik om te installeren.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat c:geo niet meer (100%) correct werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>

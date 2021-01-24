@@ -674,7 +674,7 @@
     <string name="init_trailwidth">Šířka čáry historie trasy</string>
     <string name="init_trailwidth_summary">Vyberte šířku pro čáru historie trasy</string>
     <string name="init_directioncolor">Barva směrové čáry</string>
-    <string name="init_directioncolor_summary">Vyberte barvu a neprůhlednost pro směrovou čáru. Směrová čára zobrazuje přímou čáru k vybranému cíli navigace nebo konkrétní dráhu navigace trasy, pokud je trasování povoleno po instalaci aplikace BRouter.</string>
+    <string name="init_directioncolor_summary">Vyberte barvu a neprůhlednost pro směrovou čáru. Směrová čára zobrazuje přímou čáru k vybranému cíli navigace nebo konkrétní dráhu navigace trasy, pokud je směrování povoleno, po instalaci aplikace BRouter.</string>
     <string name="init_directionwidth">Šířka směrové čáry</string>
     <string name="init_directionwidth_summary">Vyberte šířku pro směrovou čáru</string>
     <string name="init_routecolor">Barva čáry individuální trasy</string>
@@ -818,7 +818,7 @@
     <string name="auth_forget_message">Budeš odpojen/a od této služby. Tvé aktuálně uložené přihlašovací údaje budou ztraceny.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
-    <string name="auth_credentials_explain_long">Vyplněním přihlašovacích údajů a stisknutím tlačítka „Zkontrolovat pověření“ bude proces zahájen. Poté dojde k navázání spojení s %s a ověření tvých údajů. To je vše.</string>
+    <string name="auth_credentials_explain_long">Pokud již máte účet, zadejte prosím níže své přihlašovací údaje pro %s:</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
     <string name="auth_token_explain_long">Vyplněním přihlašovacích údajů a stisknutím tlačítka „Autorizovat c:geo“ bude proces zahájen. Poté bude navázáno spojení s %s a načten ověřovací token. To je vše.</string>
@@ -918,6 +918,7 @@
     <string name="cache_favpoint_not_on">Tato keška není mezi tvými oblíbenými.</string>
     <string name="cache_list_select_last">Poslední výběr</string>
     <string name="cache_images">Obrázky</string>
+    <string name="cache_advanced">Pokročilé</string>
     <string name="cache_waypoints">Trasové body</string>
     <plurals name="waypoints">
         <item quantity="one">%d bod trasy</item>
@@ -1202,10 +1203,11 @@
     <string name="map_as_list">Zobrazit jako seznam</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
     <string name="map_routing">Směrování</string>
+    <string name="map_routing_brouter">Směrování je dostupné pouze v případě, že je nainstalován <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
-    <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, trasy) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
+    <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, směrování) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
     <string name="map_show_in_map">Zobrazit na mapě</string>
     <!-- search -->
     <string name="search_bar_hint">Hledaní kešek</string>
@@ -1318,6 +1320,7 @@
     <string name="helper_brouter_description">Aplikace BRouter poskytuje offline navigaci. Je-li nainstalována a jsou-li nezbytné soubory stažené, c:geo automaticky zobrazí cestu ke kešce na interní mapě.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf vám umožňuje číst data z ANT+/Garmin chirp tagů, což je potřeba pro ANT+/chirp kešky.</string>
     <!-- export -->
+    <string name="share_export">Sdílet / Exportovat</string>
     <string name="export">Export</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">Exportováno do</string>
@@ -1602,15 +1605,13 @@
     <string name="support_title">Podpora</string>
     <string name="website_title">Webové stránky</string>
     <string name="facebook_link"><a href="">stránka c:geo</a></string>
+    <string name="fangroup_link"><a href="">Německá uživatelská skupina</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo na Google Play</a></string>
     <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ kešku?</string>
     <string name="github_title">Sledování chyb</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Dostupné nové vydání.\nKlepni pro instalaci.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Dostupné nové „noční sestavení“.\nKlepni pro instalaci.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Dostupný nový kandidát na vydání.\nKlepni pro instalaci.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Právě probíhá údržba geocaching.com.\nMohou se vyskytnout různé potíže.</string>

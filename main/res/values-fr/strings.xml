@@ -788,7 +788,6 @@
     <string name="auth_forget_message">Vous allez être déconnecté du service et vos identifiants sauvegardés seront perdus.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
-    <string name="auth_credentials_explain_long">Renseignez vos identifiants et appuyez sur le bouton \"Vérifier l’authentification\" démarrera le processus. Cette étape se connectera au site %s et validera vos identifiants. C\'est tout.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
     <string name="auth_token_explain_long">Saisissez vos informations d\'identification puis appuyez sur \"Autoriser c:geo\" … nous allons nous connecter à %s avec vos identifiants et récupérer un jeton d\'authentification. C\'est tout.</string>
@@ -1549,9 +1548,6 @@
     <string name="github_title">suivi de bugs</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Une nouvelle version de c:geo est disponible.\nAppuyez ici pour l\'installer.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Une nouvelle version de test est disponible.\nAppuyez ici pour l\'installer.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>

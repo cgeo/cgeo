@@ -574,7 +574,6 @@
     <string name="auth_forget_message">Anda akan terputus dari layanan ini. Kredensial yang anda simpan saat ini akan hilang.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Proses berikut akan mengizinkan <b>c:geo</b> untuk mengakses %s.</string>
-    <string name="auth_credentials_explain_long">Mengisi kredensial anda dan menekan tombol \"periksa otentikasi\" tombol akan memulai proses. Proses ini akan terhubung ke %s dan memvalidasi kredensial anda. Itu saja.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Proses berikut akan memungkinkan <b>c:geo</b> untuk mengakses %s.</string>
     <string name="auth_token_explain_long">Mengisi kredensial anda dan menekan tombol \"mengesahkan c:geo\" tombol akan memulai proses. Proses ini akan terhubung ke %s dan mengambil token otentikasi. Itu semua.</string>
@@ -1162,9 +1161,6 @@
     <string name="about_twitter">Harus <b>c:geo</b> mempublikasikan sebuah status baru di Twitter setiap kali anda log cache?</string>
     <string name="faq_title">Tanya jawab</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Rilis baru tersedia.\nklik untuk menginstal.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Rilis baru telat dibuat.\ntekan untuk menginstal.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Kandidat rilis baru tersedia.\nKlik untuk menginstal.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Perubahan terbaru pada geocaching.com pecah c:geo.\nKami bekerja di atasnya, segera periksa kembali.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Perubahan terbaru pada geocaching.com fitur peta hidup pecah.\nKami bekerja di atasnya, segera periksa kembali.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com berada di bawah pemeliharaan.\nanda mungkin mengalami berbagai masalah.</string>

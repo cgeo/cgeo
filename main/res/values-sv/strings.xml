@@ -775,7 +775,6 @@
     <string name="auth_forget_message">Du kommer att bli frånkopplad från denna tjänst, dina sparade uppgifter kommer att försvinna.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Följande process kommer ge <b>c:geo</b> tillgång till %s.</string>
-    <string name="auth_credentials_explain_long">Genom att fylla i dina uppgifter och trycka på \"Kolla autentisering\" kommer processen att startas. Denna process ansluter till %s och validerar dina uppgifter. Det är allt.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Följande process kommer ge <b>c:geo</b> tillgång till %s.</string>
     <string name="auth_token_explain_long">Genom att fylla i dina uppgifter och trycka på \"tillåta c:geo\" kommer processen att startas. Denna process kommer att ansluta till %s och hämta ett inloggningshandtag. Det är allt.</string>
@@ -1515,9 +1514,6 @@
     <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
     <string name="faq_title">Vanliga frågor</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Ny officiell version finns tillgänglig.\nKlicka för att installera.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Nytt nattligt bygge finns tillgängligt.\nKlicka för att installera.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Ny kandidat till officiellt bygge finns tillgängligt.\nKlicka för att installera.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>

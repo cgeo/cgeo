@@ -54,6 +54,12 @@
     <string name="wp_waypoint">Punt de referència</string>
     <string name="wp_original">Coordenades originals</string>
     <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Final</string>
+    <string name="wpnew_stage">Etapa</string>
+    <string name="wpnew_pkg">Aparcament</string>
+    <string name="wpnew_trailhead">Via</string>
+    <string name="wpnew_waypoint">Marcador</string>
+    <string name="wpnew_original">Original</string>
     <!-- logs -->
     <string name="log_found">Trobat</string>
     <string name="log_dnf">No trobat</string>
@@ -148,6 +154,7 @@
     <string name="log_problem_archive_text">Aquest geocatxer va informar que aquest catxé hauria de ser arxivat. Un revisor ha estat avisat.</string>
     <string name="log_image_scale_option_noscaling">Sense escala</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
     <string name="log_image_titleprefix">Imatge</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradueix a %s</string>
@@ -377,8 +384,13 @@
     <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
     <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
+    <string name="caches_set_cache_icon">Definiu les icones dels catxés</string>
+    <string name="caches_reset_cache_icons_title">Restableix les icones de catxés</string>
+    <string name="caches_reset_cache_icons">Voleu restablir les icones de tots els catxés seleccionats?</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
+    <string name="select_icon">Selecciona icona</string>
+    <string name="onetime_missing_unicode_info">La vostra versió d\'Android no admet la detecció automàtica d\'icones compatibles, és possible que faltin alguns caràcters</string>
     <!-- caches lists -->
     <string name="menu_lists">Gestiona llistes</string>
     <string name="list_menu_create">Crea una llista nova</string>
@@ -668,10 +680,18 @@
     <string name="init_routecolor_summary">Seleccioneu el color i l\'opacitat per a la línia de ruta individual. Una ruta individual és una col·lecció de waypoints i / o catxés que heu seleccionat prement llargament al punt de ruta / catxé. (Primer heu d’habilitar la funció de pulsació llarga, consulteu la configuració del mapa.)</string>
     <string name="init_routewidth">Amplada de línia de ruta individual</string>
     <string name="init_routewidth_summary">Seleccioneu l\'amplada de la línia de ruta individual</string>
+    <string name="init_trackcolor">Color de línia del GPX track/ruta</string>
+    <string name="init_trackcolor_summary">Seleccioneu el color i l\'opacitat per a la línia de track/ruta. Una track/ruta consta de diversos punts de ruta i es pot carregar mitjançant un fitxer GPX de track/ruta.</string>
+    <string name="init_trackwidth">Amplada de línia del GPX track/ruta</string>
+    <string name="init_trackwidth_summary">Seleccioneu l\'amplada per a la línia del GPX track/ruta</string>
     <string name="init_circlecolor">Color de la línia del cercle</string>
     <string name="init_circlecolor_summary">Seleccioneu el color i l\'opacitat per a la línia del cercle. Els cercles s\'utilitzen com a representació visual del radi mínim al voltant d\'un catxé o d\'un punt de ruta físic.. (S\'aplica a geocaching.com)</string>
     <string name="init_circlefillcolor">Color de dins del cercle</string>
     <string name="init_circlefillcolor_summary">Seleccioneu el color i l\'opacitat del interior dels cercles</string>
+    <string name="init_accuracycirclecolor">Color de la línia del cercle de precisió</string>
+    <string name="init_accuracycirclecolor_summary">Seleccioneu el color i l\'opacitat de la línia de cercle de precisió. El cercle de precisió s\'utilitza com a representació visual de la precisió del senyal d\'ubicació.</string>
+    <string name="init_accuracycirclefillcolor">Color interior del cercle de precisió</string>
+    <string name="init_accuracycirclefillcolor_summary">Seleccioneu el color i l\'opacitat per als cercles de precisió que voleu omplir</string>
     <string name="init_include_found_status">Inlcou l\'estat \"Trobat\"</string>
     <string name="init_trackautovisit">Visita TBs</string>
     <string name="init_summary_trackautovisit">Posa per defecte un \"Visitat\" als traçables </string>
@@ -720,6 +740,7 @@
     <string name="init_create_memory_dump">Crea un buidat de memòria</string>
     <string name="init_memory_dump">Buidat de memòria</string>
     <string name="init_memory_dumped">S\'ha creat el buidat de memòria al %s</string>
+    <string name="init_please_wait">Espereu…</string>
     <string name="init_hardware_acceleration_title">Renderització amb acceleració per maquinari</string>
     <string name="init_hardware_acceleration_note">L\'acceleració per maquinari renderitza més ràpidament els elements gràfics a la pantalla. Tanmateix, en alguns dispositius Android, el sistema operatiu conté errors i algun text pot aparèixer borrós (caràcters en negreta molt notables). Inhabiliteu l\'acceleració per maquinari si teniu aquest problema.</string>
     <string name="init_hardware_acceleration">Activa l\'acceleració per maquinari</string>
@@ -796,7 +817,6 @@
     <string name="auth_forget_message">Seràs desconnectat d\'aquest servei. Les teves credencials desades es perdran.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">El següent procés permetrà a <b>c:geo</b> accedir a %s.</string>
-    <string name="auth_credentials_explain_long">Emplena les teves dades, prem el botó \"Comprovar autenticació\" i començarà el procés. Aquest procés es connecta a %s i validarà les teves credencials. Això és tot.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
     <string name="auth_token_explain_long">Emplena la credencial, prem al boto \"autoritzar c:geo\" i començarà el procés. Aquest procés es connecta a %s i recupera la fitxa d\'autenticació.</string>
@@ -946,6 +966,8 @@
     <string name="menu_caches">Gestiona geoamagatalls</string>
     <string name="cache_menu_event">Afegeix al calendari</string>
     <string name="cache_menu_extract_waypoints">Extreure els punts de ruta</string>
+    <string name="cache_menu_set_cache_icon">Definiu la icona dels catxés</string>
+    <string name="cache_icon_updated">S\'ha actualitzat la icona de catxé</string>
     <string name="cache_menu_details">Detalls</string>
     <string name="cache_menu_refresh">Actualitza</string>
     <string name="cache_menu_share">Comparteix el catxé</string>
@@ -987,6 +1009,8 @@
     <string name="cache_name">Nom</string>
     <string name="cache_name_set">Definiu el nom del catxé</string>
     <string name="cache_name_updated">S\'ha actualitzat el nom del catxé</string>
+    <string name="cache_description_set">Defineix la descripció del catxé</string>
+    <string name="cache_description_updated">S\'ha actualitzat la descripció del catxé</string>
     <string name="cache_type">Tipus</string>
     <string name="cache_size">Mida</string>
     <string name="cache_distance">Distància</string>
@@ -1033,6 +1057,8 @@
     <string name="internal_goto_targets_description">Aquest catxé emmagatzema els vostres objectius recents \"Vés a\". Es crea automàticament un cop heu utilitzat la funció \"Vés a\" al menú principal. Les coordenades que hi introduïu s’emmagatzemaran en punts de ruta d’aquest catxé. Si ja no necessiteu aquestes coordenades, podeu suprimir amb seguretat aquest catxé o qualsevol dels seus punts de ruta. També podeu moure el catxé a qualsevol altra llista.</string>
     <string name="init_longtap_map">Feu un toc llarg al mapa</string>
     <string name="init_summary_longtap_map">Activeu el toc llarg sobre la icona del mapa (creeu una ruta individual) o sobre un espai del mapa (creeu un catxé definit per l’usuari)</string>
+    <string name="onetime_info_longtap_disabled">Si feu un toc llarg al mapa, podeu crear rutes individuals i catxés definiis per l\'usuari.\n\nEl toc llarg al mapa està desactivat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
+    <string name="onetime_info_longtap_enabled">Fent un toc llarg al mapa podeu crear rutes individuals i catxés definits per l\'usuari.\n\nEl toc llarg al mapa està activat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>
     <string name="clear_goto_history_title">Esborreu l\'historial de destinacions</string>
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
@@ -1161,6 +1187,7 @@
     <string name="map_gm_autorotation">Mapa autorotatori</string>
     <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
     <string name="quick_settings">Configuració ràpida</string>
+    <string name="quick_settings_info">Algunes configuracions del mapa (Configuració del mapa, ocultació, encaminament) s\'han mogut a la nova finestra emergent \"Configuració ràpida\".\nPodeu obrir aquesta finestra emergent mitjançant la icona que hi ha al centre de la part inferior del mapa.</string>
     <string name="map_show_in_map">Mostra al mapa</string>
     <!-- search -->
     <string name="search_bar_hint">Cerca de catxés</string>
@@ -1562,9 +1589,6 @@
     <string name="github_title">Rastrejador d\'errors</string>
     <string name="faq_title">Preguntes freqüents</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Nova versió disponible.\nCliqueu per instal·lar-la.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Nova versió nightly build disponible.\nCliqueu per instal·lar-la.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Nova versió candidate disponible.\nCliqueu per instal·lar-la.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat el c:geo.\nHi estem treballant, torneu-ho a provar aviat.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat la funcionalitat del mapa en viu.\nHi estem treballant, torneu-ho a provar aviat.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">El web de geocaching.com està en manteniment.\nPer aquest motiu podeu tenir alguna dificultat.</string>
@@ -1650,6 +1674,11 @@
     <plurals name="fav_points_remaining">
         <item quantity="one">Afegeix aquest geoamagatall als preferits (%d restants)</item>
         <item quantity="other">Afegeix aquests geoamagatalls als preferits (%d restants)</item>
+    </plurals>
+    <string name="command_set_cache_icons_progress">Configuració d’icones de catxés</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">Definiu %d icona del catxé</item>
+        <item quantity="other">Definiu %d icones dels catxéscatxé</item>
     </plurals>
     <string name="pq_download_and_import">Importa la Pocket query</string>
     <string name="caches_refresh_all_warning">Aquesta acció pot ocasionar un elevat tràfic a la xarxa. Esteu segur de voler actualitzar tots els catxés?</string>
@@ -1740,6 +1769,8 @@
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automàtic</string>
     <string name="switch_default">(Predeterminat)</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
     <!-- view settings -->
     <string name="view_settings">Mostra la configuració</string>
     <string name="delete_setting">Suprimeix la configuració</string>
@@ -1782,6 +1813,14 @@
     <string name="downloadmap_confirmation">Voleu baixar el mapa \"%1$s\"?\n\nAixò pot trigar força temps i pot comportar costos importants, segons la vostra connexió de xarxa.\n\nInformació sobre la mida: %2$s</string>
     <string name="downloadmap_handling">El gestor de descàrregues del vostre sistema gestionarà la descàrrega en segon pla. Hauríeu de veure una notificació tan aviat com hagi començat la baixada (pot trigar una estona).</string>
     <string name="button_continue">Continua</string>
+    <string name="downloadmap_onedirup">(pujar de directori)</string>
+    <string name="downloadmap_checkforupdates_button">Buscar actualitzacions</string>
+    <string name="downloadmap_available_updates">Actualitzacions disponibles</string>
+    <string name="downloadmap_no_updates_found">No s\'ha trobat cap actualització del mapa</string>
+    <string name="downloadmap_directory">directori</string>
+    <string name="downloadmap_mapfile">fitxer de mapa</string>
+    <string name="downloadmap_retrieving_directory_data">S\'estan recuperant les dades del directori…</string>
+    <string name="downloadmap_checking_for_updates">S\'estan cercant actualitzacions…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
     <string name="map_trailhistory_cleared">S\'ha esborrat el traçat</string>
@@ -1796,4 +1835,33 @@
     <string name="export_individualroute_title">Exporta una ruta individual</string>
     <string name="export_individualroute_success">S\'ha exportat la ruta individual a \"%s\"</string>
     <!-- install wizard -->
+    <string name="wizard">Assistent de configuració</string>
+    <string name="previous">Anterior</string>
+    <string name="skip">Ometre</string>
+    <string name="next">Següent</string>
+    <string name="done">Fet</string>
+    <string name="finish">Acabar</string>
+    <string name="wizard_welcome_title">Benvingut a c:geo</string>
+    <string name="wizard_intro">Només cal fer uns quants passos per configurar c: geo i posar-vos en marxa. T\'ajudo?</string>
+    <string name="wizard_intro2">Benvingut de nou a l\'assistent de configuració. La vostra configuració de c: geo encara no està acabada. T\'ajudo a completar-la? Són només uns quants passos.</string>
+    <string name="wizard_outro_ok">Gràcies per configurar c:geo.\nDivertiu-vos!</string>
+    <string name="wizard_outro_error">Configuració incompleta\nNo totes les parts de c: geo funcionaran correctament!.</string>
+    <string name="wizard_permissions_title">Definiu els permisos de l\'app</string>
+    <string name="wizard_permissions_intro">C: geo necessita certs permisos al dispositiu per funcionar correctament.\nExplicaré més detalls en els passos següents.</string>
+    <string name="wizard_platforms_title">Configureu els serveis</string>
+    <string name="wizard_platforms_intro">Per trobar geocatxes amb C: geo, necessiteu un compte  d\'un servei de geocatxing compatible.\nSeleccioneu el servei desitjat a continuació per iniciar la sessió amb el vostre compte existent o creeu un compte nou.</string>
+    <string name="wizard_platforms_gc">Geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; altres</string>
+    <string name="wizard_welcome_advanced">Configuració avançada</string>
+    <string name="wizard_advanced_offlinemaps_label">Mapes fora de línia</string>
+    <string name="wizard_advanced_offlinemaps_info">Aquesta pàgina proporciona algunes funcions avançades que són opcionals .\n\nC: geo pot descarregar fitxers de mapes per fora de línia.</string>
+    <string name="wizard_advanced_brouter_label">App d’encaminament</string>
+    <string name="wizard_advanced_brouter_info">En instal·lar i configurar la aplicació complementària \"BRouter Offline Navigation\", C: geo pot navegar fins als objectius i mostrar informació sobre l\'encaminament al vostre mapa.</string>
+    <string name="wizard_advanced_restore_label">Restaura</string>
+    <string name="wizard_advanced_restore_info">Si teniu una còpia de seguretat d\'una instal·lació anterior, podeu restaurar la configuració i/o les dades dels catxés.</string>
+    <string name="status_not_ok">ERROR</string>
+    <string name="wizard_status_title">Estat de la configuració</string>
+    <string name="wizard_status_storage_permission">Permís d\'emmagatzematge</string>
+    <string name="wizard_status_location_permission">Permís d\'ubicació</string>
+    <string name="wizard_status_platform">Serveis de geocaching</string>
 </resources>

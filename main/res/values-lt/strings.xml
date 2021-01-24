@@ -787,7 +787,6 @@
     <string name="auth_forget_message">Jūs būsite atjungti nuo šios paslaugos. Šiuo metu įrašyti prisijungimo duomenys bus prarasti.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
-    <string name="auth_credentials_explain_long">Užpildžius jūsų asmeninę informaciją ir paspaudus mygtuką \"Patikrinti prisijungimo duomenis\" bus pradėtas procesas. Šis procesas prisijungs prie %s ir patvirtins jūsų kredencialus. Tai viskas.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
     <string name="auth_token_explain_long">Užpildžius jūsų asmeninę informaciją ir paspaudus mygtuką \"Leisti c:geo\" bus pradėtas procesas. Šis procesas prisijungs prie %s ir patvirtins jūsų kredencialus. Tai viskas.</string>
@@ -1558,9 +1557,6 @@
     <string name="about_twitter">Kaskart registruojant slėptuvę <b>c:geo</b> paskelbs nauja statusą Twitter paskyroje.</string>
     <string name="faq_title">DUK</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Galima nauja versija. \nPaspauskite čia ir įdiekite.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Galima nauja naktinė versija.\nPaspauskite čia ir įdiekite.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Galima nauja versija. \nPaspauskite čia ir įdiekite.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino c:geo.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino tiesioginio žemėlapio funkcijas.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tinklapyje vyksta priežiūros darbai.\nJums gali kilti įvairių problemų.</string>

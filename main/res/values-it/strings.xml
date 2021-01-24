@@ -3,9 +3,9 @@
     <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
-    <string name="detail">Dettaglio</string>
+    <string name="detail">Dettagli</string>
     <string name="search">Cerca</string>
-    <string name="helpers">Apps utili</string>
+    <string name="helpers">App utili</string>
     <string name="about">Info c:geo</string>
     <string name="latitude">Latitudine</string>
     <string name="longitude">Longitudine</string>
@@ -388,6 +388,7 @@
     <string name="caches_reset_cache_icons">Vuoi reimpostare le icone per tutti i cache selezionati?</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
     <string name="caches_set_listmarker">Imposta marcatore di lista</string>
+    <string name="select_icon">Seleziona icona</string>
     <string name="onetime_missing_unicode_info">La tua versione Android non supporta il rilevamento automatico delle icone supportate - alcuni simboli potrebbero mancare</string>
     <!-- caches lists -->
     <string name="menu_lists">Gestisci liste</string>
@@ -815,7 +816,6 @@
     <string name="auth_forget_message">Verrai disconnesso da questo servizio. Le tue identificazioni attualmente salvate andranno perse.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Il seguente processo permetterà a <b>c:geo</b> di accedere a %s.</string>
-    <string name="auth_credentials_explain_long">Riempendo le identificazioni e premendo il pulsante \"Controllo autenticazione\" verrà avviato il processo. Questo processo ti connetterà a %s per convalidare le identificazioni. Questo è tutto.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
     <string name="auth_token_explain_long">Completando le credenziali e premendo il pulsante \"autorizza c:geo\" avvierà la connessione a %s per recuperare un token di autenticazione.</string>
@@ -903,6 +903,7 @@
     <string name="cache_favpoint_not_on">Questo cache non è uno dei tuoi favoriti.</string>
     <string name="cache_list_select_last">Ultima selezione</string>
     <string name="cache_images">Immagini</string>
+    <string name="cache_advanced">Avanzate</string>
     <string name="cache_waypoints">Waypoint</string>
     <plurals name="waypoints">
         <item quantity="one">%d Waypoint</item>
@@ -1183,6 +1184,7 @@
     <string name="map_as_list">Mostra lista dei cache</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
     <string name="map_routing">Instradamento</string>
+    <string name="map_routing_brouter">Routing è disponibile solo se <a href="">BRouter</a> è installato</string>
     <string name="map_gm_autorotation">Rotazione automatica mappa</string>
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
@@ -1299,6 +1301,7 @@
     <string name="helper_brouter_description">BRouter fornisce il routing non in linea. Se è installato e ha scaricato i file necessari, c:geo mostrerà automaticamente un percorso per il cache sulla mappa interna.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf consente di leggere i dati dei tag di chirp ANT+/Garmin, che sono necessari per le geocache ANT+/chirp.</string>
     <!-- export -->
+    <string name="share_export">Condividi / Esporta</string>
     <string name="export">Esportazione</string>
     <string name="export_progress">Esporta: %1$s</string>
     <string name="export_exportedto">esportato in</string>
@@ -1581,15 +1584,13 @@
     <string name="support_title">Aiuto</string>
     <string name="website_title">Sito Internet</string>
     <string name="facebook_link"><a href="">pagina c:geo</a></string>
+    <string name="fangroup_link"><a href="">Gruppo di utenti tedesco</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo su Google Play</a></string>
     <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi un cache?</string>
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Una nuova versione è disponibile.\nClicca per installarla.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>

@@ -388,6 +388,7 @@
     <string name="caches_reset_cache_icons">Möchtest du die Cache-Symbole für alle ausgewählten Caches zurücksetzen?</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
+    <string name="select_icon">Symbol wählen</string>
     <string name="onetime_missing_unicode_info">Deine Android-Version unterstützt keine automatische Erkennung unterstützter Icons - einige Zeichen könnten nicht angezeigt werden</string>
     <!-- caches lists -->
     <string name="menu_lists">Listen verwalten</string>
@@ -702,7 +703,7 @@
     <string name="init_secondary_navigation_tool">Zweitnavigation</string>
     <string name="init_default_navigation_tool_description">Hier kann das bevorzugte Navigationswerkzeug festgelegt werden.</string>
     <string name="init_default_navigation_tool_select">Wähle Werkzeug</string>
-    <string name="init_default_navigation_tool_2_description">Hier kann das zweite bevorzugte Navigationswerkzeug festgelegt werden. Es ist durch langen Klick auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
+    <string name="init_default_navigation_tool_2_description">Hier kann das zweite bevorzugte Navigationswerkzeug festgelegt werden. Es ist durch langes Tippen auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
     <string name="init_navigation_menu_description">Hier kann ausgewählt werden, welche der verfügbaren Navigationswerkzeuge im Navigationsmenü für einen Cache oder Wegpunkt angezeigt werden. Nicht auswählbare Optionen sind auf diesem Gerät nicht installiert.</string>
     <string name="init_debug_title">Fehlersuche</string>
     <string name="init_debug_note">c:geo kann viele Debug-Informationen generieren. Das Aktivieren dieser Einstellung wird die Stabilität von c:geo beeinträchtigen und wird nur empfohlen, um den Entwicklern eine Logdatei zu senden. Bitte Debug-Logging bei der normalen Nutzung von c:geo immer abgeschaltet lassen!</string>
@@ -815,7 +816,8 @@
     <string name="auth_forget_message">Du wirst von diesem Dienst abgemeldet. Deine gespeicherten Anmeldedaten werden gelöscht.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
-    <string name="auth_credentials_explain_long">Nach Eingabe der Anmeldeinformation „Authentifizierung überprüfen“ auswählen, um den Prozess zu starten. Dieser Prozess verbindet mit %s und prüft die Anmeldeinformationen. Das ist alles.</string>
+    <string name="auth_credentials_explain_long">Wenn Du bereits ein Konto hast, gib bitte unten Deine Zugangsdaten für %s ein:</string>
+    <string name="auth_register_explain">Wenn Du noch kein Konto hast, tippe unten. Du wirst dann auf die Webseite des Dienstes weitergeleitet und kannst dort ein Konto erstellen. Verwende bitte die Methode mit Benutzername und Passwort, da c:geo keine Anmeldung über Google/Apple/Facebook unterstützt. Nach dem Erstellen des Kontos ist evtl. eine Überprüfung Deiner E-Mail-Adresse erforderlich, bevor Du das Login mit c:geo verwenden kannst.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
     <string name="auth_token_explain_long">Nach Eingabe der Anmeldeinformation „Starte Autorisierung“ auswählen, um den Prozess zu starten. Dieser Prozess verbindet mit %s und ruft einen Authentifizierungstoken ab. Das ist alles.</string>
@@ -903,6 +905,7 @@
     <string name="cache_favpoint_not_on">Dieser Cache ist kein Favorit.</string>
     <string name="cache_list_select_last">Letzte Auswahl</string>
     <string name="cache_images">Bilder</string>
+    <string name="cache_advanced">Erweitert</string>
     <string name="cache_waypoints">Wegpunkte</string>
     <plurals name="waypoints">
         <item quantity="one">%d Wegpunkt</item>
@@ -1183,6 +1186,7 @@
     <string name="map_as_list">Als Liste anzeigen</string>
     <string name="map_select_multiple_items">Element auswählen</string>
     <string name="map_routing">Routing</string>
+    <string name="map_routing_brouter">Routing ist nur verfügbar, wenn <a href="">BRouter</a> installiert ist</string>
     <string name="map_gm_autorotation">Automatische Kartendrehung</string>
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
@@ -1299,6 +1303,7 @@
     <string name="helper_brouter_description">BRouter ermöglicht offline routing. Wenn es installiert ist und die notwendigen Dateien heruntergeladen wurden, wird c:geo automatisch eine Route zum Cache auf der internen Karte zeigen.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf ermöglicht es, die Daten von ANT+/Garmin Chirp Tags zu lesen, die für ANT+/Chirp Geocaches benötigt werden.</string>
     <!-- export -->
+    <string name="share_export">Teilen / Exportieren</string>
     <string name="export">Exportieren</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exportiert nach</string>
@@ -1581,15 +1586,16 @@
     <string name="support_title">Support</string>
     <string name="website_title">Webseite</string>
     <string name="facebook_link"><a href="">Seite von c:geo</a></string>
+    <string name="fangroup_link"><a href="">Deutsche Anwendergruppe</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo bei Google Play</a></string>
     <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
     <string name="github_title">BugTracker</string>
     <string name="faq_title">FAQs</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Neue Version verfügbar.\nKlicken zum Installieren.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Neuer Nightly Build verfügbar.\nKlicken zum Installieren.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Neue Beta-Version verfügbar.\nKlicken zum Installieren.</string>
+    <string name="status_new_release" tools:ignore="UnusedResources">Neue Version verfügbar.\nTippen zum Installieren.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Neuer Nightly Build verfügbar.\nTippen zum Installieren.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Neuer Release Candidate verfügbar.\nTippen zum Installieren.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>

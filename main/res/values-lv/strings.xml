@@ -717,7 +717,6 @@
     <string name="auth_forget_message">Jūs atvienos no šī pakalpojuma. Jūsu pašlaik saglabātie dati tiks zaudēti.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Šis process ļaus <b>c:geo</b> piekļūt %s.</string>
-    <string name="auth_credentials_explain_long">Aizpildot datus un nospiežot \"Autorizēties\" pogu sāksies process, kas savienosies ar %s un pārbaudīs tavus datus. Tas arī viss.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Šis process ļaus piekļūt %s <b>c:geo</b>.</string>
     <string name="auth_token_explain_long">Aizpildot savus pieteikšanās datus un nospiežot \"atļaut c:geo\" pogu, tiks uzsākts process. Tas pieslēgsies %s un iegūs reģistrācijas atļauju. Tas ir viss.</string>
@@ -1407,9 +1406,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="about_twitter">Vai <b>c:geo</b> publicēt jaunu statusu vietnē Twitter pēc katra atrastā slēpņa?</string>
     <string name="faq_title">BUJ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Jauna versija pieejama. \nSpied lai instalētu.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Jauna \"nightly build\" programmas versija.\nNospiest, lai instalētu.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Jauna \"release candidate\" programmas versija.\nNospiest, lai instalētu.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Nesenās izmaiņas geocaching.com lapā \"salauza\" c:geo.\nMēs strādājam lai to salabotu, pārbaudiet pēc brīža.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Dēļ izmaiņām geocaching.com lapā, traucēta tiešsaistes karšu darbība. \nMēs strādājam lai to salabotu, pārbaudiet pēc brīža.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tiek atjaunots. \nYou.Jūs varat saskarties ar dažādām nepilnībām.</string>

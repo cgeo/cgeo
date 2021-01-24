@@ -584,7 +584,6 @@
     <string name="auth_forget_message">Ikaw ay diskonektado mula sa aparatong ito. Ang mga naitabi mong mga kredensiyal sa ksalukuyan ay maaaring mawala.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Ang mga sumusunod na proseso ay pinapayagan ang <b>c:geo</b> sna ma-access ang %s.</string>
-    <string name="auth_credentials_explain_long">Ang pagpuno sa iyong kredensiyal at ang pagpindot sa \"suriin ang pagpapatunay\" na buton ay magsisimula ng magproseso. Ang prosesong ito ay konektado sa %s at patunayan ang iyong mga kredensiyal. Iyon lamang.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ang mga sumusunod na mga proseso ay pinapayagan ang <b>c:geo</b> na ma-access ang %s.</string>
     <string name="auth_token_explain_long">Ang paglalagay ng iyong kredensyal at pagpindot ng button ng \"authorize c:geo\" ang magpapasimula ng proseso. Ang prosesong ito ay mag kokonekta sa %s at babawiin ang authentication token. Iyan lamang.</string>
@@ -1177,9 +1176,6 @@
     <string name="market_link">&lt;a href=\'\"&gt;c:geo sa google play&lt;/a&gt;</string>
     <string name="about_twitter">Dapat ang <b>d:geo</b> ilathala ang bagong katayuan sa twitter bawat oras na iyong pag log ng cahce?</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Ang bagong paglabas ay magagamit.\n i-klik para ma-install.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Ang bagong pag-buo sa gabi ay magagamit.\n i-klik para ma-install.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Ang bagong paglabas ng kandidato ay magagamit.\n i-klik para ma-instol.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ang mga huling pagbabago sa geocaching.com ay sumira sa c:geo.\n tayo ang gagawa para doon, suriin muli sa lalong madaling panahon.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ang mga huling pagbabago sa geocaching.com ay sumira sa buhay na tampok sa mapa.\n tayo ang gagawa nito,suriin muli sa lalong madaling panahon.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">ang geocaching.com ay nasa ilalim ng pagpapanatili.\n tumakbo ka sa ibat-ibang mga isyu.</string>

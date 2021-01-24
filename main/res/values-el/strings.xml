@@ -815,7 +815,6 @@
     <string name="auth_forget_message">Θα αποσυνδεθείτε από την υπηρεσία αυτή. Τα τρέχοντα αποθηκευμένα διαπιστευτήριά σας θα χαθούν.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσει πρόσβαση σε %s.</string>
-    <string name="auth_credentials_explain_long">Συμπληρώνοντας τα στοιχεία σας και πατώντας το κουμπί «Έλεγχος ταυτότητας», θα ξεκινήσει η διαδικασία που θα σας συνδέσει με το %s και θα επικυρώσει τις πιστοποιήσεις σας. Αυτό είναι όλο.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσει πρόσβαση σε %s.</string>
     <string name="auth_token_explain_long">Συμπληρώνοντας τα στοιχεία σας και πατώντας το κουμπί «εξουσιοδοτήστε το c:geo», θα ξεκινήσει η διαδικασία. Με αυτή θα συνδεθείτε με το %s και θα ανακτήσετε έναν κωδικό πιστοποίησης. Αυτό είναι όλο.</string>
@@ -903,6 +902,7 @@
     <string name="cache_favpoint_not_on">Αυτή η κρύπτη δεν είναι στα αγαπημένα σας.</string>
     <string name="cache_list_select_last">Τελευταία επιλογή</string>
     <string name="cache_images">Εικόνες</string>
+    <string name="cache_advanced">Προχωρημένα</string>
     <string name="cache_waypoints">Σημεία αναφοράς</string>
     <plurals name="waypoints">
         <item quantity="one">%d σημείο διαδρομής</item>
@@ -1183,6 +1183,7 @@
     <string name="map_as_list">Προβολή σε λίστα</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
+    <string name="map_routing_brouter">Η δρομολόγηση είναι διαθέσιμη μόνο εάν το <a href="">BRouter</a> είναι εγκατεστημένο</string>
     <string name="map_gm_autorotation">Αυτόματη περιστροφή χάρτη</string>
     <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
     <string name="quick_settings">Γρήγορες ρυθμίσεις</string>
@@ -1299,6 +1300,7 @@
     <string name="helper_brouter_description">Το BRouter παρέχει δρομολόγηση εκτός σύνδεσης. Εάν έχει εγκατασταθεί και έχετε κατεβάσει τα απαραίτητα αρχεία, το c:geo θα εμφανίσει στον χάρτη μια διαδρομή προς την κρύπτη.</string>
     <string name="helper_chirpwolf_description">Το Chirp Wolf σας επιτρέπει να διαβάσετε δεδομένα από ANT+/Garmin chirp ταμπέλες, οι οποιες χρειάζονται για κρύπτες ANT+/chirp.</string>
     <!-- export -->
+    <string name="share_export">Κοινοποίηση / Εξαγωγή</string>
     <string name="export">Εξαγωγή</string>
     <string name="export_progress">Εξαγωγή: %1$s</string>
     <string name="export_exportedto">εξαγωγή σε</string>
@@ -1581,15 +1583,13 @@
     <string name="support_title">Υποστήριξη</string>
     <string name="website_title">Ιστοσελίδα</string>
     <string name="facebook_link"><a href=""> σελίδα c:geo </a></string>
+    <string name="fangroup_link"><a href="">Γερμανική ομάδα χρηστών</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo στο Google Play</a></string>
     <string name="about_twitter">Να δημοσιεύει το<b>c:geo</b> μια νέα κατάσταση στο Twitter κάθε φορά που καταγράφετε μια κρύπτη;</string>
     <string name="github_title">Εντοπίστης σφαλμάτων</string>
     <string name="faq_title">Συχνές ερωτήσεις</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Νέα έκδοση διαθέσιμη. \nΚάντε κλικ για την εγκατάσταση.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Νέα νυχτερινή έκδοση διαθέσιμη.\nΚάντε κλικ για εγκατάσταση.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Νέα υποψήφια έκδοση διαθέσιμη. \nΚάντε κλικ για την εγκατάσταση.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν το c:geo.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν τον χάρτη πραγματικού χρόνου.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Γίνεται συντήρηση στο geocaching.com.\nΜπορεί να αντιμετωπίσετε διάφορα θέματα.</string>
