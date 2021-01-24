@@ -113,8 +113,9 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
         final List<Waypoint> waypointList = cache.getWaypoints();
         assertThat(waypointList).isNotNull();
-        assertThat(waypointList).as("Number of imported waypoints").hasSize(4);
-        assertThat(waypointList.get(3).getCoords()).as("Empty Coordinates").isNull();
+        assertThat(waypointList).as("Number of imported waypoints").hasSize(5);
+        assertThat(waypointList.get(3).getCoords()).as("Not empty coordinates").isNotNull();
+        assertThat(waypointList.get(4).getCoords()).as("Empty coordinates").isNull();
     }
 
     public void testImportGpxWithWaypoints() throws IOException {

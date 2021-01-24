@@ -310,11 +310,9 @@ abstract class GPXParser extends FileParser {
                         // there is no lookup code in gpx file
 
                         if (wptEmptyCoordinates) {
-                            waypoint.setCoords(null);
                             waypoint.setOriginalCoordsEmpty(true);
-                        } else {
-                            waypoint.setCoords(cache.getCoords());
                         }
+                        waypoint.setCoords(cache.getCoords());
 
                         waypoint.updateNoteAndUserNote(cache.getDescription());
 

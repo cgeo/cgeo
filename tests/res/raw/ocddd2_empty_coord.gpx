@@ -131,4 +131,16 @@
         <cgeo:userdefined>true</cgeo:userdefined>
         <cgeo:originalCoordsEmpty>true</cgeo:originalCoordsEmpty>
     </wpt>
+    <wpt lat="0.0" lon="0.0">
+        <name>02</name>
+        <cmt>Ttt</cmt>
+        <desc>Wegpunkt 5</desc>
+        <sym>Question to Answer</sym>
+        <type>Waypoint|Question to Answer</type>
+        <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
+            <gsak:Parent>OCDDD2</gsak:Parent>
+        </gsak:wptExtension>
+        <cgeo:userdefined>true</cgeo:userdefined>
+        <cgeo:originalCoordsEmpty>true</cgeo:originalCoordsEmpty>
+    </wpt>
 </gpx>
