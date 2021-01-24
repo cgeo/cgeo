@@ -234,7 +234,7 @@
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
     <string name="warn_invalid_mapfile">Den valgte kartfilen er ikke en gyldig mapsforge-kartfil eller har en versjon som ikke støttes.\n(c:geo støtter nå v3 til v5, men for å bruke v3 må \"Old Mapsforge V3\"-innstillingen være valgt.)\n\nOfflinekartet er ikke tilgjengelig.</string>
-    <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
+    <string name="warn_pocket_query_select">Ingen utvalgsspørring er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
     <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
     <string name="warn_notloggedin_title">Offline-modus</string>
@@ -287,6 +287,7 @@
     <string name="menu_history">Historikk</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Skann GC-kode</string>
+    <string name="menu_pocket_queries">Utvalgsspørringer</string>
     <string name="menu_scan_description">c:geo kan skanne GC-koder fra QR-koder. Den nødvendige appen er ikke installert. Vil du åpne Google Play for å installere den?</string>
     <!-- main screen -->
     <string name="live_map_button">Live-kart</string>
@@ -1179,6 +1180,7 @@
     <string name="search_address_started">Søker etter steder</string>
     <string name="search_address_result">Fant plasser</string>
     <string name="search_own_caches">Søk egne cacher</string>
+    <string name="search_pocket_title">Utvalgsspørring</string>
     <string name="search_pocket_loading">Laster en liste med Pocket Queries</string>
     <!-- trackable -->
     <string name="trackable">Sporbar (TB eller coin)</string>
