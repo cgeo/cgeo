@@ -122,14 +122,7 @@ allprojects {
  */
 subprojects {
     repositories {
-        // = mavenCentral()
-        maven {
-            url 'https://repo1.maven.org/maven2'
-            // for undobar
-            metadataSources {
-                artifact()
-            }
-        }
+        mavenCentral()
         jcenter()
         // viewpager fork
         maven {

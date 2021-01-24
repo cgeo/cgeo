@@ -506,10 +506,12 @@ android.applicationVariants.all { variant ->
 }
 
 // run device and non device tests together with one task. also fixes the bug that gradle optimizes tests away in repeated runs
-// FIXME: This uses eager task creation API. Found no way to configure a set of dependsOn with the new API.
-tasks.create(name: "testDebug", dependsOn: [ "testBasicDebugUnitTest", "connectedBasicDebugAndroidTest" ]) {
-    group 'cgeo'
+// This uses eager task creation API.
+tasks.create('testDebug') {
+    group 'verification'
     description "Tests the debug build both with device-dependent and device-independent tests."
+
+    dependsOn 'testBasicDebugUnitTest', 'connectedBasicDebugAndroidTest'
 }
 
 /*
@@ -595,6 +597,9 @@ tasks.whenTaskAdded { theTask ->
 apply plugin: 'checkstyle'
 
 tasks.register('checkstyle', Checkstyle) {
+    group 'verification'
+    description 'Check code standard'
+
     configFile file("${project.rootDir}/checkstyle.xml")
     source 'src'
     source '../tests/src'
