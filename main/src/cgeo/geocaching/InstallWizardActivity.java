@@ -3,12 +3,15 @@ package cgeo.geocaching;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.permission.PermissionGrantedCallback;
+import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.GCAuthorizationActivity;
 import cgeo.geocaching.settings.MapDownloadSelectorActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -295,7 +298,13 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private void requestStorage() {
         if (!hasStoragePermission(this)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PermissionRequestContext.InstallWizardActivity.getRequestCode());
+            LocalStorage.resetExternalPublicCgeoDirectory(); // workaround for permission handler callback not being called, see #9850, needs to be investigated further
+            PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.InstallWizardActivity) {
+                @Override
+                protected void execute() {
+                    LocalStorage.resetExternalPublicCgeoDirectory();
+                }
+            });
         }
     }
 
