@@ -816,6 +816,8 @@
     <string name="auth_forget_message">De verbinding met deze dienst zal worden verbroken. Je opgeslagen referenties zullen verloren gaan.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
+    <string name="auth_credentials_explain_long">Als je al een account hebt, voer dan hieronder je accountgegevens in voor %s:</string>
+    <string name="auth_register_explain">Als je nog geen account hebt, tik hieronder om doorgestuurd te worden naar de webpagina van de service om een account aan te maken. Zorg ervoor dat je de methode met gebruikersnaam en wachtwoord gebruikt om een account aan te maken want c:geo ondersteunt geen login via Google/Apple/Facebook. Na het aanmaken van een account kan het valideren van je e-mailadres kunnen nodig zijn voordat je kan inloggen met c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
     <string name="auth_token_explain_long">Het vullen van uw referenties en drukken op de \"c:geo machtigen\" knop zal het proces starten. Dit proces zal verbinden met %s en een authenticatie token ophalen. Dat is alles.</string>
@@ -876,6 +878,8 @@
     <string name="cache_personal_note_edit">Wijzig</string>
     <string name="cache_personal_note_storewaypoints">Waypoints toevoegen/bijwerken</string>
     <string name="cache_personal_note_removewaypoints">Waypoints verwijderen</string>
+    <string name="cache_personal_note_removedwaypoints">Waypoint verwijderd</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Geen waypoints gevonden om te verwijderen</string>
     <string name="cache_personal_note_storewaypoints_success">Waypoints zijn toegevoegd aan persoonlijke notitie</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Waypoints zijn toegevoegd aan notitie, maar moesten worden ingekort (max. persoonlijke notitiegrootte: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Waypoints konden niet worden opgeslagen in notitie vanwege groottelimieten (max. persoonlijke notitiegrotte: %1$d)</string>
@@ -1591,6 +1595,9 @@
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">Nieuwe versie beschikbaar.\nTik om te installeren.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Nieuwe nightly build beschikbaar.\nTik om te installeren.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Nieuwe release-kandidaat beschikbaar.\nTik om te installeren.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat c:geo niet meer (100%) correct werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
