@@ -658,8 +658,6 @@
     <string name="settings_info_themes">Το c:geo υποστηρίζει προσαρμοσμένα θέματα για χάρτες εκτός σύνδεσης. Αυτά μπορούν να χρησιμοποιηθούν για να αλλάξετε το χρώμα της μορφής του χάρτη (π.χ. να έχετε ένα χάρτη για νυχτερινή θέαση) ή να επισημάνετε ορισμένα αντικείμενα όπως ποδηλατόδρομους ή τις υψομετρικές στον χάρτη.</string>
     <string name="init_mapsource_select">Επιλογή πηγής χάρτη</string>
     <string name="init_map_directory_description">Κατάλογος χαρτών εκτός σύνδεσης</string>
-    <string name="init_gpx_exportdir">Φάκελος εξαγωγής GPX</string>
-    <string name="init_gpx_importdir">Φάκελος εισαγωγής GPX</string>
     <string name="init_dataDir">Επιλέξτε φάκελο δεδομένων κρύπτης</string>
     <string name="init_dataDir_note">Μπορείτε να επιλέξετε την αποθήκευση των πρόσθετων δεδομένων των κρυπτών (σπόιλερ, καταγραφές, εικόνες, …) σε εξωτερική συσκευή αποθήκευσης ( πραγματική ή μη εξωτερική κάρτα SD ανάλογα με τη συσκευή σας).</string>
     <string name="init_maptrail">Προβολή ιστορικού ιχνών</string>
@@ -798,6 +796,8 @@
     <string name="init_sendToCgeo_register_fail">Αποτυχία εγγραφής.</string>
     <string name="sendToCgeo_download_fail">Το c:geo απέτυχε να κατεβάσει κρύπτες. Είτε δεν υπάρχει σύνδεση είτε το send2cgeo δεν λειτουργεί.</string>
     <string name="sendToCgeo_no_registration">Το c:geo απέτυχε να κατεβάσει κρύπτες. Η εγγραφή για το send2cgeo έληξε. Παρακαλούμε να εγγραφείτε στις ρυθμίσεις.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">Εξουσιοδοτήστε το c:geo</string>
     <string name="auth_check">Έλεγχος διαπίστευσης</string>
@@ -877,6 +877,8 @@
     <string name="cache_personal_note_edit">Επεξεργασία</string>
     <string name="cache_personal_note_storewaypoints">Προσθήκη/Ενημέρωση Ενδιάμεσων σημείων</string>
     <string name="cache_personal_note_removewaypoints">Αφαίρεση Ενδιάμεσων σημείων</string>
+    <string name="cache_personal_note_removedwaypoints">Τα σημεία αφαιρέθηκαν</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Δεν βρέθηκαν σημεία αναφοράς για αφαίρεση</string>
     <string name="cache_personal_note_storewaypoints_success">Τα σημεία προστέθηκαν στην προσωπική σημείωση</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Τα σημεία προστέθηκαν στη σημείωση, αλλά έπρεπε να συντομευτούν (μέγιστο μέγεθος προσωπικής σημείωσης:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Τα σημεία προστέθηκαν στη σημείωση, αλλά έπρεπε να συντομευτούν (μέγιστο μέγεθος προσωπικής σημείωσης: %1$d)</string>
