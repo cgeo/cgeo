@@ -5,7 +5,7 @@ import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.calculator.ButtonData;
-import cgeo.geocaching.calculator.CalculationUtils;
+import cgeo.geocaching.calculator.CalcStateEvaluator;
 import cgeo.geocaching.calculator.CoordinatesCalculateUtils;
 import cgeo.geocaching.calculator.VariableData;
 import cgeo.geocaching.location.Geopoint;
@@ -80,8 +80,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private static final String SYMBOL_MIN = "'";
     private static final String SYMBOL_SEC = "\"";
     private static final String SYMBOL_POINT = ".";
-    private static final char[] BRACKET_OPENINGS = {'(', '[', '{'};
-    private static final char[] BRACKET_CLOSINGS = {')', ']', '}'};
 
     public static final String CALC_STATE = "calc_state";
 
@@ -863,103 +861,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         return returnValue;
     }
 
-    String evaluateBrackets(final String original) {
-        String returnValue = original;
-        int openIndex;
-        int closeIndex;
-
-        try {
-            for (int bracketIndex = 0; bracketIndex < BRACKET_OPENINGS.length; bracketIndex++) {
-                for (int returnValueIndex = 0; returnValueIndex < returnValue.length(); returnValueIndex++) {
-                    char ch = returnValue.charAt(returnValueIndex);
-
-                    if (ch == BRACKET_OPENINGS[bracketIndex]) {
-                        int nestedBrackerCount = 1;
-                        openIndex = returnValueIndex;
-                        closeIndex = returnValueIndex;
-
-                        while (nestedBrackerCount > 0 && closeIndex < returnValue.length() - 1) {
-                            closeIndex++;
-                            ch = returnValue.charAt(closeIndex);
-
-                            if (ch == BRACKET_OPENINGS[bracketIndex]) {
-                                nestedBrackerCount++;
-                            } else if (ch == BRACKET_CLOSINGS[bracketIndex]) {
-                                nestedBrackerCount--;
-                            }
-                        }
-
-                        if (nestedBrackerCount == 0) {
-                            String result = "";
-
-                            if (closeIndex > openIndex + 1) {
-                                final int resInt = (int) (new CalculationUtils(returnValue.substring(openIndex + 1, closeIndex)).eval());
-                                result = String.valueOf(resInt);
-                            }
-
-                            returnValue = returnValue.substring(0, openIndex) + result + returnValue.substring(closeIndex + 1);
-                        } else {
-                            // Reached end without finding enough closing brackets
-                            throw new IllegalArgumentException("Unmatched opening bracket '" + returnValue.charAt(openIndex) + "' at index " + openIndex + " of \"" + returnValue + "\"/");
-                        }
-                    } else if (ch == BRACKET_CLOSINGS[bracketIndex]) {
-                        // Negative nested bracket count.
-                        throw new IllegalArgumentException("Unmatched closing bracket '" + ch + "' at index " + returnValueIndex + " of \"" + returnValue + "\"/");
-                    }
-                }
-            }
-        } catch (final Exception e) {
-            // section can't be evaluated
-            returnValue = original;
-        }
-
-        return returnValue;
-    }
-
-    /**
-     * Replace 'equation' variables with their computed values: 42° AB.CDE' -> 42° 12.345'
-     *
-     * @param values The string to perform the substitutions on
-     * @return String with the substitutions performed
-     */
-    private String substituteVariables(final String values) {
-        String returnValue = "";
-
-        if (values.length() > 0) {
-            final char first = values.charAt(0);
-            String substitutionString;
-
-            // Trim of the leading hemisphere character if it exists.
-            if (first == 'N' || first == 'S' || first == 'E' || first == 'W') {
-                returnValue = returnValue.concat(String.valueOf(first));
-                substitutionString = values.substring(1);
-            } else {
-                substitutionString = values;
-            }
-
-            // Perform the substitutions on the remainder of the string.
-            for (final CalculatorVariable equ : equations) {
-                substitutionString = substitutionString.replace(String.valueOf(equ.getName()), equ.evaluateString(freeVariables));
-            }
-
-            // If the string contains matching brackets evaluate the enclosed expression (for use in PLANE format)
-            substitutionString = evaluateBrackets(substitutionString);
-
-            // Recombine the hemisphere and substituted string.
-            returnValue = returnValue.concat(substitutionString);
-        }
-
-        // Remove placeholder characters.
-        returnValue = returnValue.replaceAll(PLACE_HOLDER, "");
-
-        // Break up connecting underscores
-        while (returnValue.contains("__")) {
-            returnValue = returnValue.replace("__", "_ _");
-        }
-
-        return returnValue;
-    }
-
     /**
      * Retrieve all the values from the calculation buttons
      *
@@ -1018,6 +919,24 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         return substituteVariables(returnValue);
+    }
+
+    private String substituteVariables(final String variables) {
+
+        final List<VariableData> equationList = new ArrayList<VariableData>(equations.size());
+        for (final CalculatorVariable equ : equations
+        ) {
+            equationList.add(equ.getData());
+        }
+        final List<VariableData> freeVariableList = new ArrayList<VariableData>(freeVariables.size());
+        for (final CalculatorVariable freeVar : freeVariables
+        ) {
+            freeVariableList.add(freeVar.getData());
+        }
+
+        final CalcStateEvaluator evaluator = new CalcStateEvaluator(equationList, freeVariableList, getContext());
+        final String evalResult = evaluator.evaluate(variables);
+        return evalResult;
     }
 
     /**

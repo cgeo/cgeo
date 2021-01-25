@@ -1,5 +1,6 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.calculator.CalcStateEvaluator;
 import cgeo.geocaching.calculator.CoordinatesCalculateUtils;
 import cgeo.geocaching.calculator.FormulaParser;
 import cgeo.geocaching.calculator.FormulaWrapper;
@@ -143,11 +144,17 @@ public class WaypointParser {
 
         if (null != coordFormat) {
             // try to get a formula
-            final ImmutablePair<String, String> coordFormula = parseFormula(afterCoords, coordFormat);
-            if (null != coordFormula) {
-                waypoint.setCalcStateJson(coordFormula.left);
-                afterCoords = coordFormula.right;
+            final ImmutablePair<CalcState, String> coordFormula = parseFormula(afterCoords, coordFormat);
+            final CalcState calcState = coordFormula.left;
+            if (null != calcState) {
+                waypoint.setCalcStateJson(calcState.toJSON().toString());
+                // try to evaluate valid coordinates
+                final CalcStateEvaluator eval = new CalcStateEvaluator(calcState.equations, calcState.freeVariables, null);
+                final Geopoint gp = eval.evaluate(calcState.plainLat, calcState.plainLon);
+                waypoint.setCoords(gp);
             }
+
+            afterCoords = coordFormula.right;
         }
 
         //try to get a user note
@@ -262,7 +269,11 @@ public class WaypointParser {
         return WaypointType.WAYPOINT;
     }
 
-    private ImmutablePair<String, String> parseFormula(final String text, final Settings.CoordInputFormatEnum formulaFormat) {
+    /**
+     * try to parse a name out of given words. If not possible, null is returned
+     */
+    @NotNull
+    private ImmutablePair<CalcState, String> parseFormula(final String text, final Settings.CoordInputFormatEnum formulaFormat) {
         try {
             final FormulaParser formulaParser = new FormulaParser(formulaFormat);
             final FormulaWrapper parsedFullCoordinates = formulaParser.parse(text);
@@ -296,13 +307,15 @@ public class WaypointParser {
                         break;
                     }
                 }
-                return new ImmutablePair<>(CoordinatesCalculateUtils.createCalcState(latText, lonText, variables).toJSON().toString(), remainingString);
+                final CalcState calcState = CoordinatesCalculateUtils.createCalcState(latText, lonText, variables);
+
+                return new ImmutablePair<>(calcState, remainingString);
             }
         } catch (final FormulaParser.ParseException ignored) {
             // no formula
         }
 
-        return null;
+        return new ImmutablePair<>(null, text);
     }
 
     public static String removeParseableWaypointsFromText(final String text) {

@@ -266,6 +266,25 @@ public class WaypointParserTest {
     }
 
     /**
+     * Waypoint with calculated Geopoint should be created
+     */
+    @Test
+    public void testParseWaypointWithFormulaEvaluateCoordinates() {
+        final String note = "@WPName X (FORMULA-PLAIN) N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a*b|B=3|C=8|D=4|E=b-a|F=b/3|a=2|b=9| this is the description\n\"this shall NOT be part of the note\"";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp = iterator.next();
+        assertWaypoint(wp, "WPName", new Geopoint("N 45 18.312", "E 9 15.873"), WaypointType.PUZZLE, "this is the description");
+        final String calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNotNull();
+        final CalcState calcState = CalcState.fromJSON(calcStateJson);
+        assertThat(calcState.plainLat).isEqualTo("N 45° A.B(C+D)'");
+        assertThat(calcState.plainLon).isEqualTo("E 9° (A-B).(2*D)EF'");
+    }
+
+    /**
      * 2 Waypoints with formula and variables should be created
      */
     @Test

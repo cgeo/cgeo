@@ -24,7 +24,9 @@ import java.util.List;
  */
 public final class CoordinatesCalculateUtils {
 
-    /** Flag values used to designate that no AutoChar has been set */
+    /**
+     * Flag values used to designate that no AutoChar has been set
+     */
     public static final char EMPTY_CHAR = '-';
 
     private CoordinatesCalculateUtils() {
@@ -34,10 +36,11 @@ public final class CoordinatesCalculateUtils {
     /**
      * Updates the list of currently used VariableData, creates new VariableData if necessary,
      * moves VariableData to the bank, if necessary
-     * @param variables already defined VariableData and used
+     *
+     * @param variables     already defined VariableData and used
      * @param variablesBank already defined VariableData, but not used
      * @param variableNames names of currently used VariableData
-     * @param upperCase sorting for upper-case variable
+     * @param upperCase     sorting for upper-case variable
      * @return list of currently used VariableData
      */
     public static List<VariableData> updateVariablesList(final List<VariableData> variables,
@@ -81,14 +84,14 @@ public final class CoordinatesCalculateUtils {
         return returnList;
     }
 
-    /** Creates a calc-state out of given lat- and lon-formula and list of variables
+    /**
+     * Creates a calc-state out of given lat- and lon-formula and list of variables
      *
-     * @param latText formula / coordinates for latitude
-     * @param lonText formula / coordinates for longitude
+     * @param latText          formula / coordinates for latitude
+     * @param lonText          formula / coordinates for longitude
      * @param variableDataList list with already known variables / equations for formula
-     *
      * @return calc state.
-     * */
+     */
     public static CalcState createCalcState(final String latText, final String lonText, final List<VariableData> variableDataList) {
 
         String coordinateChars = ""; // All the characters that appear in the coordinate representation.

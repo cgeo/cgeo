@@ -1,7 +1,6 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.calculator.CalculationUtils;
 import cgeo.geocaching.calculator.VariableData;
 import cgeo.geocaching.settings.Settings;
 
@@ -21,8 +20,6 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.gridlayout.widget.GridLayout;
 
-import java.util.List;
-
 /**
  * Class used to display a variable with an equation, such as: X = a^2 = b^2
  */
@@ -37,18 +34,11 @@ public class CalculatorVariable extends LinearLayout {
     /** view to display the expression of the variable */
     private final EditText expression;
 
-    /** cached result of the expression */
-    private double cachedValue;
-
-    /** indicates if recomputation needs to be done */
-    private boolean cacheDirty;
-
 
     @SuppressLint("SetTextI18n")
     public CalculatorVariable(final Context context, final VariableData variableData, final String hintText, final TextWatcher textWatcher, final InputFilter[] filter) {
         super(context);
         this.variableData = variableData;
-        cacheDirty = true;
         setLayoutParams(new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED), GridLayout.spec(GridLayout.UNDEFINED, 1f)));
 
         final int variableSpacingGap = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics());
@@ -108,56 +98,19 @@ public class CalculatorVariable extends LinearLayout {
         return variableData;
     }
 
-    private boolean isCacheDirty() {
-        return cacheDirty;
-    }
-
     public void setCacheDirty() {
-        setCacheDirty(true);
-    }
-
-    private void setCacheDirty(final boolean cacheDirty) {
-        this.cacheDirty = cacheDirty;
-    }
-
-    /**
-     * This is used to display the result in the UI
-     *
-     * @return cached values as a String
-     */
-    private String getCachedString() {
-        final String returnValue;
-
-        if (variableData.getExpression() == null || variableData.getExpression().length() == 0) {
-            returnValue = getContext().getString(R.string.empty_equation_result);
-        } else if (Double.isNaN(getCachedValue())) {
-            returnValue = getContext().getString(R.string.equation_error_result);
-        } else {
-            returnValue = String.valueOf((int) getCachedValue());
-        }
-
-        return returnValue;
-    }
-
-    /**
-     * This is used to compute the value of another variable
-     *
-     * @return cached values as a Double
-     */
-    private double getCachedValue() {
-        return cachedValue;
+        variableData.setCacheDirty(true);
     }
 
     private void setCachedValue(final double cachedValue) {
-        this.cachedValue = cachedValue;
-        setCacheDirty(false);
+        variableData.setCachedValue(cachedValue);
 
         final boolean lightSkin = Settings.isLightSkin();
         final int validColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
         final int invalidColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_hint_light : R.color.text_hint_dark);
 
         // Make the name colour grey if value is invalid
-        name.setTextColor(Double.isNaN(getCachedValue()) ? invalidColour : validColour);
+        name.setTextColor(Double.isNaN(variableData.getCachedValue()) ? invalidColour : validColour);
     }
 
     public char getName() {
@@ -176,31 +129,9 @@ public class CalculatorVariable extends LinearLayout {
         expression.setId(id);
     }
 
-    public String evaluateString(final List<CalculatorVariable> dependantVariables) {
-        if (isCacheDirty()) {
-            evaluateDouble(dependantVariables);
-        }
-
-        return getCachedString();
-    }
-
-    private double evaluateDouble(final List<CalculatorVariable> dependantVariables) {
-        if (isCacheDirty()) {
-            String expression = getExpression();
-
-            if (dependantVariables != null) {
-                for (final CalculatorVariable depVar : dependantVariables) {
-                    expression = expression.replace(String.valueOf(depVar.getName()), "(" + depVar.evaluateDouble(null) + ")");
-                }
-            }
-
-            try {
-                setCachedValue(new CalculationUtils(expression).eval());
-            } catch (final Exception e) {
-                setCachedValue(Double.NaN);
-            }
-        }
-
-        return getCachedValue();
+    public void switchToLowerCase() {
+        variableData.switchToLowerCase();
+        expression.setText(variableData.getExpression());
+        setCacheDirty();
     }
 }
