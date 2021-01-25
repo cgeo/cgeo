@@ -819,6 +819,7 @@
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
     <string name="auth_credentials_explain_long">Pokud již máte účet, zadejte prosím níže své přihlašovací údaje pro %s:</string>
+    <string name="auth_register_explain">Pokud ještě nemáte účet, klikněte níže pro přesměrování na webovou stránku služby pro vytvoření účtu. Ujistěte se, že používáte metodu přihlášení pomocí uživatelského jména a hesla k vytvoření účtu, protože c:geo nepodporuje přihlášení přes Google/Apple/Facebook. Po vytvoření účtu může být nutné ověření Vaší e-mailové adresy, než se budete moci přihlásit v c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
     <string name="auth_token_explain_long">Vyplněním přihlašovacích údajů a stisknutím tlačítka „Autorizovat c:geo“ bude proces zahájen. Poté bude navázáno spojení s %s a načten ověřovací token. To je vše.</string>
@@ -891,6 +892,8 @@
     <string name="cache_personal_note_edit">Upravit</string>
     <string name="cache_personal_note_storewaypoints">Přidat/aktualizovat trasové body</string>
     <string name="cache_personal_note_removewaypoints">Odstranit trasové body</string>
+    <string name="cache_personal_note_removedwaypoints">Trasové body odstraněny</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Nebyly nalezeny žádné trasové body k odstranění</string>
     <string name="cache_personal_note_storewaypoints_success">Do osobní poznámky byly přidány trasové body</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Trasové body byly přidány do poznámky, ale byly zkráceny (max. velikost osobní poznámky: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Trasové body nelze kvůli limitům velikosti uložit (max. velikost osobní poznámky: %1$d)</string>
@@ -1612,6 +1615,9 @@
     <string name="github_title">Sledování chyb</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">K dispozici je nová verze.\nKlepnutím nainstalujete.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">K dispozici je nové noční sestavení.\nKlepnutím nainstalujete.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">K dispozici je nový kandidát na vydání.\nKlepnutím nainstalujete.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Právě probíhá údržba geocaching.com.\nMohou se vyskytnout různé potíže.</string>

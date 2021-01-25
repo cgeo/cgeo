@@ -878,6 +878,8 @@
     <string name="cache_personal_note_edit">Bearbeiten</string>
     <string name="cache_personal_note_storewaypoints">Wegpunkte hinzufügen/aktualisieren</string>
     <string name="cache_personal_note_removewaypoints">Wegpunkte entfernen</string>
+    <string name="cache_personal_note_removedwaypoints">Wegpunkte entfernt</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Keine Wegpunkte zu löschen</string>
     <string name="cache_personal_note_storewaypoints_success">Wegpunkte wurden zur persönlichen Notiz hinzugefügt</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Wegpunkte wurden zur Notiz hinzugefügt, mussten aber gekürzt werden (max. Größe der persönlichen Notiz: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Wegpunkte konnten aufgrund von Größenbeschränkungen (max. Größe der persönlichen Notiz: %1$d) nicht gespeichert werden</string>

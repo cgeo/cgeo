@@ -815,6 +815,8 @@
     <string name="auth_forget_message">Θα αποσυνδεθείτε από την υπηρεσία αυτή. Τα τρέχοντα αποθηκευμένα διαπιστευτήριά σας θα χαθούν.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσει πρόσβαση σε %s.</string>
+    <string name="auth_credentials_explain_long">Αν έχετε ήδη λογαριασμό, παρακαλώ εισάγετε τα διαπιστευτήρια του λογαριασμού σας για %s παρακάτω:</string>
+    <string name="auth_register_explain">Αν δεν έχετε ακόμα λογαριασμό, κάντε κλικ παρακάτω για να κατευθυνθείτε στην ιστοσελίδα της υπηρεσίας και να δημιουργήσετε ένα λογαριασμό. Βεβαιωθείτε ότι χρησιμοποιείτε τη μέθοδο με όνομα χρήστη και κωδικό πρόσβασης για να δημιουργήσετε ένα λογαριασμό καθώς το c:geo δεν υποστηρίζει σύνδεση μέσω Google/Apple/Facebook. Μετά την δημιουργία λογαριασμού μπορεί να χρειαστεί επικύρωση της διεύθυνσης του ηλεκτρονικού σας ταχυδρομείου, πριν μπορέσετε να χρησιμοποιήσετε τη σύνδεση με το c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσει πρόσβαση σε %s.</string>
     <string name="auth_token_explain_long">Συμπληρώνοντας τα στοιχεία σας και πατώντας το κουμπί «εξουσιοδοτήστε το c:geo», θα ξεκινήσει η διαδικασία. Με αυτή θα συνδεθείτε με το %s και θα ανακτήσετε έναν κωδικό πιστοποίησης. Αυτό είναι όλο.</string>
@@ -875,6 +877,8 @@
     <string name="cache_personal_note_edit">Επεξεργασία</string>
     <string name="cache_personal_note_storewaypoints">Προσθήκη/Ενημέρωση Ενδιάμεσων σημείων</string>
     <string name="cache_personal_note_removewaypoints">Αφαίρεση Ενδιάμεσων σημείων</string>
+    <string name="cache_personal_note_removedwaypoints">Τα σημεία αφαιρέθηκαν</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Δεν βρέθηκαν σημεία αναφοράς για αφαίρεση</string>
     <string name="cache_personal_note_storewaypoints_success">Τα σημεία προστέθηκαν στην προσωπική σημείωση</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Τα σημεία προστέθηκαν στη σημείωση, αλλά έπρεπε να συντομευτούν (μέγιστο μέγεθος προσωπικής σημείωσης:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Τα σημεία προστέθηκαν στη σημείωση, αλλά έπρεπε να συντομευτούν (μέγιστο μέγεθος προσωπικής σημείωσης: %1$d)</string>
@@ -1590,6 +1594,9 @@
     <string name="github_title">Εντοπίστης σφαλμάτων</string>
     <string name="faq_title">Συχνές ερωτήσεις</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">Νέα έκδοση διαθέσιμη. \nΚάντε κλικ για την εγκατάσταση.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Νέα νυχτερινή έκδοση διαθέσιμη.\nΚάντε κλικ για εγκατάσταση.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Νέα υποψήφια έκδοση διαθέσιμη. \nΚάντε κλικ για την εγκατάσταση.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν το c:geo.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν τον χάρτη πραγματικού χρόνου.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Γίνεται συντήρηση στο geocaching.com.\nΜπορεί να αντιμετωπίσετε διάφορα θέματα.</string>
