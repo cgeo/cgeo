@@ -3,13 +3,10 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -20,20 +17,14 @@ import android.widget.ImageView;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
-import androidx.core.content.FileProvider;
+import androidx.annotation.Nullable;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -56,14 +47,14 @@ public class ImageActivityHelper {
         public final Action1<T> callback;
         public final boolean callOnFailure;
         public final int maxXY;
-        public final boolean forceCopy;
+        public final boolean preserveOriginal;
         public final Uri uri;
 
-        IntentContextData(final int maxXY, final boolean forceCopy, final boolean callOnFailure, final Action1<T> callback, final Uri uri) {
+        IntentContextData(final int maxXY, final boolean preserveOriginal, final boolean callOnFailure, final Action1<T> callback, final Uri uri) {
             this.callback = callback;
             this.callOnFailure = callOnFailure;
             this.maxXY = maxXY;
-            this.forceCopy = forceCopy;
+            this.preserveOriginal = preserveOriginal;
             this.uri = uri;
         }
 
@@ -104,19 +95,18 @@ public class ImageActivityHelper {
 
     /**
      * lets the user select ONE image from his/her device (calling necessary intents and such).
-     * It will create a local image copy of this image for you if necessary (e.g. when scaling is wanted or selected image is remote)
+     * It will create a c:geo-local image copy of this image.
      * This function wil only work if you call {@link #onActivityResult(int, int, Intent)} in
      * your activity as explained there.
      * @param maxXY if >=0, then image is scaled to the given value (enforces image copy)
-     * @param forcceCopy if true, then an image copy will be enforced even if not strictly necessary
      * @param callOnFailure if true, then callback will be called also on image select failure (with img=null)
      * @param callback called when image select has completed
      */
-    public void getImageFromStorage(final int maxXY, final boolean forcceCopy, final boolean callOnFailure, final Action1<Image> callback) {
+    public void getImageFromStorage(final int maxXY, final boolean callOnFailure, final Action1<Image> callback) {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startIntent(requestCodeStorageSelect, Intent.createChooser(intent, "Select Image"),
-                new IntentContextData(maxXY, forcceCopy, callOnFailure, callback, null));
+                new IntentContextData(maxXY, true, callOnFailure, callback, null));
     }
 
     /**
@@ -125,16 +115,15 @@ public class ImageActivityHelper {
      * This function wil only work if you call {@link #onActivityResult(int, int, Intent)} in
      * your activity as explained there.
      * @param maxXY if >=0, then images are scaled to the given value (enforces image copy)
-     * @param forcceCopy if true, then image copies will be enforced even if not strictly necessary
      * @param callOnFailure if true, then callback will be called also on image select failure (with img=null)
      * @param callback called when image select has completed
      */
-    public void getMultipleImagesFromStorage(final int maxXY, final boolean forcceCopy, final boolean callOnFailure, final Action1<List<Image>> callback) {
+    public void getMultipleImagesFromStorage(final int maxXY, final boolean callOnFailure, final Action1<List<Image>> callback) {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startIntent(requestCodeStorageSelectMulti, Intent.createChooser(intent, "Select Multiple Images"),
-                new IntentContextData(maxXY, forcceCopy, callOnFailure, callback, null));
+                new IntentContextData(maxXY, true, callOnFailure, callback, null));
     }
 
     /**
@@ -143,39 +132,28 @@ public class ImageActivityHelper {
      * This function wil only work if you call {@link #onActivityResult(int, int, Intent)} in
      * your activity as explained there.
      * @param maxXY if >=0, then image is scaled to the given value (enforces image copy)
-     * @param forcceCopy if true, then image copy will be enforced even if not strictly necessary
      * @param callOnFailure if true, then callback will be called also on image shooting failure (with img=null)
      * @param callback called when image select has completed
      */
-    public void getImageFromCamera(final int maxXY, final boolean forcceCopy, final boolean callOnFailure, final Action1<Image> callback) {
-        final File file = ImageUtils.getOutputImageFile();
-        if (file == null) {
-            failIntent(callOnFailure, callback);
-            return;
-        }
+    public void getImageFromCamera(final int maxXY, final boolean callOnFailure, final Action1<Image> callback) {
 
-        final Uri imageUri = Uri.fromFile(file);
-        if (imageUri.equals(Uri.EMPTY) || StringUtils.isBlank(imageUri.toString())) {
+        final Uri imageUri = ImageUtils.createNewImageUri(true);
+        if (imageUri == null || imageUri.equals(Uri.EMPTY) || StringUtils.isBlank(imageUri.toString())) {
             failIntent(callOnFailure, callback);
             return;
         }
 
         // create Intent to take a picture and return control to the calling application
         final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        final Context appContext = context.getApplicationContext();
-        final Uri uri = FileProvider.getUriForFile(
-                appContext,
-                appContext.getString(R.string.file_provider_authority),
-                file);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri); // set the image file name
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri); // set the image uri
 
         // start the image capture Intent
-        startIntent(requestCodeCamera, intent, new IntentContextData(maxXY, forcceCopy, callOnFailure, callback, imageUri));
+        startIntent(requestCodeCamera, intent, new IntentContextData(maxXY, true, callOnFailure, callback, imageUri));
     }
 
     private void onImageFromCameraResult(final IntentContextData intentContextData) {
 
-        final Image img = getImageFromUri(intentContextData.uri, intentContextData.maxXY, intentContextData.forceCopy, false);
+        final Image img = getImageFromUri(intentContextData.uri, intentContextData.maxXY, intentContextData.preserveOriginal, false);
         if (img == null) {
             failIntent(intentContextData);
             return;
@@ -193,16 +171,16 @@ public class ImageActivityHelper {
         final List<Image> result = new ArrayList<>();
 
         if (data.getData() != null) {
-            final Image img = getImageFromUri(data.getData(), intentContextData.maxXY, intentContextData.forceCopy, true);
+            final Image img = getImageFromUri(data.getData(), intentContextData.maxXY, intentContextData.preserveOriginal, true);
             if (img != null) {
                 result.add(img);
-                ActivityMixin.showToast(context, context.getString(R.string.info_stored_image) + '\n' + img.getUrl());
+                ActivityMixin.showToast(context, context.getString(R.string.info_stored_image) + '\n' + ImageUtils.getImageLocationForUserDisplay(img));
             }
         }
 
         if (data.getClipData() != null) {
             for (int idx = 0; idx < data.getClipData().getItemCount(); idx++) {
-                final Image img = getImageFromUri(data.getClipData().getItemAt(idx).getUri(), intentContextData.maxXY, intentContextData.forceCopy, true);
+                final Image img = getImageFromUri(data.getClipData().getItemAt(idx).getUri(), intentContextData.maxXY, intentContextData.preserveOriginal, true);
                 if (img != null) {
                     result.add(img);
                 }
@@ -225,10 +203,6 @@ public class ImageActivityHelper {
         if (image.isEmpty()) {
             return;
         }
-        if (!image.existsLocal()) {
-            Log.i("Image does not exist locally: " + image.getUrl());
-            return;
-        }
         DisplayImageAsyncTask.displayAsync(image, imageView);
     }
 
@@ -249,7 +223,7 @@ public class ImageActivityHelper {
 
         @Override
         protected Bitmap doInBackground(final Void... params) {
-            return ImageUtils.readAndScaleImageToFitDisplay(image.getPath());
+            return ImageUtils.readAndScaleImageToFitDisplay(image.getUri());
         }
 
         @Override
@@ -260,44 +234,14 @@ public class ImageActivityHelper {
     }
 
 
-    private Image getImageFromUri(final Uri imageUri, final int maxXY, final boolean forceCopy, final boolean checkImageContent) {
+    @Nullable
+    private Image getImageFromUri(final Uri imageUri, final int maxXY, final boolean preserveOriginal, final boolean checkImageContent) {
         if (checkImageContent && !checkImageContent(imageUri)) {
             return null;
         }
 
-        Uri localImageUri = imageUri;
-        //boolean localCopyMade = false;
-        if (!FileUtils.isFileUrl(imageUri.toString())) {
-            localImageUri = copyToLocalFile(imageUri);
-            //localCopyMade = true;
-            if (localImageUri == null) {
-                return null;
-            }
-        }
-
-        final ImageUtils.ScaleImageResult scaledImageResult = ImageUtils.readScaleAndWriteImage(localImageUri.getPath(), maxXY, forceCopy, true);
-        return new Image.Builder().setUrl(new File(scaledImageResult.getFilename())).build();
-    }
-
-    private Uri copyToLocalFile(final Uri uri) {
-        //copy image to a local file first
-        InputStream input = null;
-        OutputStream output = null;
-        try {
-            input = context.getContentResolver().openInputStream(uri);
-            final File outputFile = ImageUtils.getOutputImageFile();
-            if (outputFile != null) {
-                output = new FileOutputStream(outputFile);
-                IOUtils.copy(input, output);
-                return Uri.fromFile(outputFile);
-            }
-        } catch (final IOException e) {
-            Log.e("Problems copying uri to local file (" + uri + ")", e);
-        } finally {
-            IOUtils.closeQuietly(input);
-            IOUtils.closeQuietly(output);
-        }
-        return null;
+        final ImageUtils.ScaleImageResult scaledImageResult = ImageUtils.readScaleAndWriteImage(imageUri, maxXY, preserveOriginal);
+        return scaledImageResult == null ? null : new Image.Builder().setUrl(scaledImageResult.imageUri).build();
     }
 
     private boolean checkBasicResults(final int resultCode) {

@@ -34,6 +34,7 @@ import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.ViewUtils;
@@ -44,6 +45,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -63,6 +65,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -775,13 +778,18 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                         publishProgress(res.getString(R.string.log_posting_image));
                         int pos = 0;
                         for (Image img : imageListFragment.getImages()) {
-                            final Image imgToSend = img.buildUpon().setTitle(imageListFragment.getImageTitle(img, pos++)).build();
+                            //uploader can only deal with files, not with content Uris...
+                            final File imageFileForUpload = ImageUtils.copyImageToTemporaryFile(img);
+                            final Image imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(imageListFragment.getImageTitle(img, pos++)).build();
                             imageResult = loggingManager.postLogImage(logResult.getLogId(), imgToSend);
                             final String uploadedImageUrl = imageResult.getImageUri();
                             if (StringUtils.isNotEmpty(uploadedImageUrl)) {
                                 logBuilder.addLogImage(imgToSend.buildUpon()
                                         .setUrl(uploadedImageUrl)
                                         .build());
+                            }
+                            if (!imageFileForUpload.delete()) {
+                                Log.i("Temporary image not deleted: " + imageFileForUpload);
                             }
                         }
                     }

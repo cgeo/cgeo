@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -66,7 +66,7 @@ public class ImageListFragment extends Fragment {
 
     private static final int SELECT_IMAGE = 101;
 
-    private final Set<String> lastSavedStateImagePaths = new HashSet<>();
+    private final Set<Uri> lastSavedStateImagePaths = new HashSet<>();
 
 
     /**
@@ -161,11 +161,11 @@ public class ImageListFragment extends Fragment {
         imageList = new ImageListAdapter(view.findViewById(R.id.image_list));
 
         this.imageAddMultiButton.setOnClickListener(v ->
-            imageHelper.getMultipleImagesFromStorage(getFastImageAutoScale(), true, false, imgs -> {
+            imageHelper.getMultipleImagesFromStorage(getFastImageAutoScale(), false, imgs -> {
                 imageList.addItems(imgs);
             }));
         this.imageAddCameraButton.setOnClickListener(v ->
-            imageHelper.getImageFromCamera(getFastImageAutoScale(), true, false, img -> {
+            imageHelper.getImageFromCamera(getFastImageAutoScale(), false, img -> {
                 imageList.addItem(img);
             }));
     }
@@ -217,21 +217,16 @@ public class ImageListFragment extends Fragment {
         }
 
         private String getImageInfo(final Image image) {
-            final File imgFile = image.getFile();
-            if (imgFile == null) {
-                return "---";
-            }
-            if (!imgFile.exists()) {
-                return ImageUtils.getRelativePathToOutputImageDir(imgFile);
-            }
+
+            final ImmutablePair<String, Long> imageFileInfo = ImageUtils.getImageFileInfos(image);
             int width = 0;
             int height = 0;
-            final ImmutablePair<Integer, Integer> widthHeight = ImageUtils.getImageSize(imgFile);
+            final ImmutablePair<Integer, Integer> widthHeight = ImageUtils.getImageSize(image.getUri());
             if (widthHeight != null) {
                 width = widthHeight.getLeft();
                 height = widthHeight.getRight();
             }
-            return getString(R.string.log_image_info, width, height, imgFile.length() / 1024, ImageUtils.getRelativePathToOutputImageDir(imgFile));
+            return getString(R.string.log_image_info, width, height, imageFileInfo.right / 1024, imageFileInfo.left);
         }
 
         @NonNull
@@ -283,10 +278,10 @@ public class ImageListFragment extends Fragment {
         Log.d("Adjust persistent state from  " + lastSavedStateImagePaths + " to " + images + " (deleteOld=" + deleteOld + ")");
         if (deleteOld) {
             //delete all images on device which are in old state but not in new
-            final Set<String> existingPaths = CollectionStream.of(images).map(img -> img.getPath()).toSet();
-            for (final String oldPath : lastSavedStateImagePaths) {
+            final Set<Uri> existingPaths = CollectionStream.of(images).filter(img -> img.getUri() != null).map(img -> img.getUri()).toSet();
+            for (final Uri oldPath : lastSavedStateImagePaths) {
                 if (!existingPaths.contains(oldPath)) {
-                    final boolean result = new File(oldPath).delete();
+                    final boolean result = ImageUtils.deleteImage(oldPath);
                     Log.d("Deleting image " + oldPath + " (result: " + result + ")");
                 }
             }
@@ -294,8 +289,8 @@ public class ImageListFragment extends Fragment {
         //refill image state
         lastSavedStateImagePaths.clear();
         for (final Image img : images) {
-            if (!img.getPath().isEmpty()) {
-                lastSavedStateImagePaths.add(img.getPath());
+            if (img.getUri() != null) {
+                lastSavedStateImagePaths.add(img.getUri());
             }
         }
     }
