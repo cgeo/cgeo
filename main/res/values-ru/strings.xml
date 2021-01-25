@@ -595,8 +595,6 @@
     <string name="settings_info_themes">c:geo предлагает пользовательские темы для оффлайновых карт. Они могут быть использованы для изменения цветового стиля (например, ночные карты) или для выделения определенных объектов, таких как велосипедные маршруты или линии уровня.</string>
     <string name="init_mapsource_select">Выберите источник карт</string>
     <string name="init_map_directory_description">Папка с оффлайновыми картами</string>
-    <string name="init_gpx_exportdir">Папка для сохранения GPX</string>
-    <string name="init_gpx_importdir">Папка импорта GPX</string>
     <string name="init_dataDir">Выбрать папку данных тайников</string>
     <string name="init_dataDir_note">Вы можете сохранять дополнительные данные тайников (спойлеры, картинки в блокноте и пр.) на внешнем хранилище (виртуальная или настоящая SD-карта, в зависимости от устройства).</string>
     <string name="init_maptrail">Показать историю трека</string>
@@ -725,6 +723,8 @@
     <string name="init_sendToCgeo_register_fail">Регистрация не удалась.</string>
     <string name="sendToCgeo_download_fail">Не удалось загрузить тайники. Нет интернет соединения, или send2cgeo не работает.</string>
     <string name="sendToCgeo_no_registration">Не удалось загрузить тайники. Срок регистрации на send2cgeo истек. Пожалуйста, зарегистрируйтесь в настройках.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">Авторизовать c:geo</string>
     <string name="auth_check">Проверить аутентификацию</string>
