@@ -593,8 +593,6 @@
     <string name="settings_info_themes">c:geo atbalsta pielāgotu dizainu bezsaistes kartēm. Tos var izmantot, lai mainītu kartes krāsu stilu (piemēram ir nakts redzamības karte) vai izcelt noteiktus objektus, piemēram, velo-ceļus vai augstuma līniju kartē.</string>
     <string name="init_mapsource_select">Izvēlies karti</string>
     <string name="init_map_directory_description">Katalogs ar bezsaistes kartēm</string>
-    <string name="init_gpx_exportdir">GPX eksporta direktorija</string>
-    <string name="init_gpx_importdir">GPX importa direktorija</string>
     <string name="init_dataDir">Izvēlies slēpņu datu direktoriju</string>
     <string name="init_dataDir_note">Tu vari izvēlēties uzglabāt slēpņu papildu datus (spoileru bildes, ierakstu attēli, …) ārējā atmiņā (emulēta vai reāla ārējā SD karte, atkarībā no tavas ierīces).</string>
     <string name="init_maptrail">Parādīt pārvietojumu</string>
@@ -701,6 +699,8 @@
     <string name="init_sendToCgeo_register_fail">Reģistrācija neizdevās.</string>
     <string name="sendToCgeo_download_fail">c:geo neizdevās lejupielādēt slēpņus. Nav interneta savienojuma, vai send2cgeo pašlaik nedarbojas.</string>
     <string name="sendToCgeo_no_registration">c:geo neizdevās lejupielādēt slēpņus. Reģistrēšanās noilgums iekš Send2cgeo ir iestajies. Lūdzu reģistrējieties iestatījumos.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">Atļaut c:geo</string>
     <string name="auth_check">Pārbaudi autentifikāciju</string>
