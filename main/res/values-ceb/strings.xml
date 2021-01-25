@@ -459,8 +459,6 @@
     <string name="settings_info_themes">ang c:geo nag suporta og gawi na mga tema para sa offline na mga mapa. Kani puwede magamit para mailisan and kolor og estilo sa mapa (para adunay nightview nga mapa) o para patugbaw sa mga sigurado na butanga pareha sa subayanan sa sikulo o linya sa gitas-on sulod sa mapa.</string>
     <string name="init_mapsource_select">Pagpili og kakuhaan sa mapa</string>
     <string name="init_map_directory_description">Direktoryo nga adunay offline nga mga mapa</string>
-    <string name="init_gpx_exportdir">GPX Eksport nga Direktoryo</string>
-    <string name="init_gpx_importdir">GPX Import nga Direktoryo</string>
     <string name="init_dataDir">Pagpili sa direktoryong data sa Geocache</string>
     <string name="init_dataDir_note">Pwede ka makapili kung asa nimo itago ang mga napun-ang data para sa mga geocache (spoilers, log na mga imahe, …) sa imong panggawas na tagu-anan (na-emulate o tinuod na panggawas na SD kard depende sa imong debays).</string>
     <string name="init_include_found_status">Apili ang \"Found\" na kahimtang</string>
@@ -541,6 +539,8 @@
     <string name="init_sendToCgeo_register_fail">Napakyas ang rehistrasyon.</string>
     <string name="sendToCgeo_download_fail">c:geo napakyas ang pag-dowbload sa caches. Walay koneksyon sa internet, o send2cgeo kay ubos pa.</string>
     <string name="sendToCgeo_no_registration">napakyas ang c:geo sa pag-download sa mga caches. Ang pagparehistro para sa send2cgeo kay natapos. Palihug parehistro sa mga kahimtangan.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">I-awtorisar ang c:geo</string>
     <string name="auth_check">I-check ang pagpamatuod</string>
