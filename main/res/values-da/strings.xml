@@ -636,8 +636,6 @@
     <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver.</string>
     <string name="init_mapsource_select">Vælg kortkilde</string>
     <string name="init_map_directory_description">Mappe med offline kort</string>
-    <string name="init_gpx_exportdir">GPX eksportmappe</string>
-    <string name="init_gpx_importdir">GPX importmappe</string>
     <string name="init_dataDir">Vælg geocache-datamappe</string>
     <string name="init_dataDir_note">Du kan vælge at gemme yderligere data for geocacher (spoilere, logbilleder osv.) i din eksterne hukommelse (emuleret eller ægte SD-kort, afhængig af din enhed).</string>
     <string name="init_maptrail">Vis spor</string>
@@ -767,6 +765,8 @@
     <string name="init_sendToCgeo_register_fail">Registrering mislykkedes.</string>
     <string name="sendToCgeo_download_fail">c:geo kunne ikke indlæse cacher. Der er ingen Internetforbindelse eller send2cgeo-websitet svarer ikke.</string>
     <string name="sendToCgeo_no_registration">c:geo kunne ikke indlæse cacher. Registrering af send2cgeo er udløbet. Registrér venligst under Indstillinger.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">Godkend c:geo</string>
     <string name="auth_check">Kontrollér autentifikation</string>
