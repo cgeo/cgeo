@@ -648,8 +648,6 @@
     <string name="settings_info_themes">c:geo підтримує власні теми для автономних мап. Вони можуть бути використані для зміни кольору стилю карти (наприклад, мати нічну карту) або виділити певні об\'єкти, такі як цикли доріжки або лінії висоти на карті.</string>
     <string name="init_mapsource_select">виберіть джерела карт</string>
     <string name="init_map_directory_description">Каталог з офлайн-картами</string>
-    <string name="init_gpx_exportdir">Тека експорту GPX</string>
-    <string name="init_gpx_importdir">Тека експорту GPX</string>
     <string name="init_dataDir">каталог даних геокешу</string>
     <string name="init_dataDir_note">Ви можете зберегти додаткові дані для схованок (спойлери, зображення журналу, …) на зовнішній накопичувачі (емуляція або дійсна зовнішня SD-карта в залежності від пристрою).</string>
     <string name="init_maptrail">показати історію треку</string>
@@ -780,6 +778,8 @@
     <string name="init_sendToCgeo_register_fail">Не вдалося зареєструватися.</string>
     <string name="sendToCgeo_download_fail">c: geo не вдалося завантажити кеші. Немає підключення до Інтернету, або send2cgeo не працює.</string>
     <string name="sendToCgeo_no_registration">c: geo не вдалося завантажити кеші. Термін реєстрації на send2cgeo закінчився. Будь ласка, зареєструйтесь у налаштуваннях.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">Авторизувати c:geo</string>
     <string name="auth_check">Перевірте автентичність</string>

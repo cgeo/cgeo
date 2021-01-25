@@ -415,6 +415,8 @@
     <!-- proximity notification -->
     <!-- map sources -->
     <string name="init_sendToCgeo_registering">Registering your device for send2cgeo&#8230;</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_dialog_waiting">Waiting for %s&#8230;</string>
     <!-- auth credentials -->

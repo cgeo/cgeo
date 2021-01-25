@@ -471,8 +471,6 @@
     <string name="settings_info_themes">c:geo poate folosi stiluri personalizate pentru hărţile salvate. Acestea pot fi folosite pentru a schimba culorile pe hartă (de ex. afişare nocturnă a hărţii) sau pentru a scoate în evidenţă anumite obiecte precum trasee de bicicletă sau poteci.</string>
     <string name="init_mapsource_select">Alege hărţi din sursa</string>
     <string name="init_map_directory_description">Dosar cu hărţi salvate local</string>
-    <string name="init_gpx_exportdir">Dosar Exporturi GPX</string>
-    <string name="init_gpx_importdir">Dosar Importuri GPX</string>
     <string name="init_dataDir">Alege dosar geocutii</string>
     <string name="init_dataDir_note">Poţi alege să salvezi informaţii suplimentare despre geocutii (spoilere, imagini din jurnal, …) în spaţiul de stocare extern (SDcard real sau virtual, în funcţie de dispozitivul tău).</string>
     <string name="init_include_found_status">Include starea \"Găsită\"</string>
@@ -558,6 +556,8 @@
     <string name="init_sendToCgeo_register_fail">Înregistrare eşuată.</string>
     <string name="sendToCgeo_download_fail">c:geo nu a putut descărca cutiile. Lipsă conexiune internet sau send2cgeo nu funcţionează.</string>
     <string name="sendToCgeo_no_registration">c:geo nu a putut descărca cutiile. Înregistrarea pentru send2cgeo a expirat. Te rog înregistrează la opţiuni.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizează c:geo</string>
     <string name="auth_check">Verifică autentificarea</string>

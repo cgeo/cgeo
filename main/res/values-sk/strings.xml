@@ -649,8 +649,6 @@
     <string name="settings_info_themes">c:geo podporuje vlastné štýly pre offline mapy. Tieto môžu byť použité na zmenu farebného štýlu mapy (napr. nočná mapa), na zvýraznenie dôležitých objektov (ako sú napr. cyklotrasy) alebo na určenie šírky čiar.</string>
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
     <string name="init_map_directory_description">Priečinok s offline mapami</string>
-    <string name="init_gpx_exportdir">Priečinok pre GPX Export</string>
-    <string name="init_gpx_importdir">Priečinok pre GPX Import</string>
     <string name="init_dataDir">Vyberte adresár pre údaje skrýš</string>
     <string name="init_dataDir_note">Môžete zvoliť ukladanie ďalších údajov k skrýšam (spoilery, obrázky z logov…) do externej pamäte (emulovaná alebo skutočná externá SD karta, závisí to od zariadenia).</string>
     <string name="init_maptrail">Zobraziť trasu v histórii</string>
@@ -780,6 +778,8 @@
     <string name="init_sendToCgeo_register_fail">Registrácia zlyhala.</string>
     <string name="sendToCgeo_download_fail">c:geo sa nepodarilo stiahnuť skrýše. Nie je dostupné pripojenie k Internetu alebo send2cgeo nie je funkčné.</string>
     <string name="sendToCgeo_no_registration">c:geo sa nepodarilo stiahnuť skrýše. Registrácia send2cgeo expirovala. Zaregistrujte sa, prosím, v nastaveniach.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizovať c:geo</string>
     <string name="auth_check">Skontrolovať autentifikáciu</string>

@@ -613,8 +613,6 @@
     <string name="settings_info_themes">c:geo는 오프라인 지도용 테마를 지원합니다. 테마는 지도의 색 스타일을 바꾸거나(예: 야간 모드 지도), 자전거도로나 등고선등을 강조하는데 사용될 수 있습니다.</string>
     <string name="init_mapsource_select">지도 선택</string>
     <string name="init_map_directory_description">오프라인 지도 폴더</string>
-    <string name="init_gpx_exportdir">GPX 내보내기 폴더</string>
-    <string name="init_gpx_importdir">GPX를 가져올 폴더</string>
     <string name="init_dataDir">지오캐시 데이터 디렉토리 선택</string>
     <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진…) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
     <string name="init_maptrail">최근 역사 트랙 표시</string>
@@ -743,6 +741,8 @@
     <string name="init_sendToCgeo_register_fail">등록이 실패했습니다.</string>
     <string name="sendToCgeo_download_fail">캐시를 다운로드 하지 못했습니다. 인터넷 연결이 끊어졌거나, send2cgeo 가 문제가 있는 것 같습니다.</string>
     <string name="sendToCgeo_no_registration">캐시를 다운로드 하지 못했습니다. send2cgeo 등록이 만표되었습니다. 설정에서 다시 등록해 주세요.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">c:geo 인증받기</string>
     <string name="auth_check">인증 확인하기</string>

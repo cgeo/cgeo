@@ -659,8 +659,6 @@
     <string name="settings_info_themes">c:geo ondersteund aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt voor het aanpassen om kleurstijlen van de kaart (bijv. een nachtmodus) of het accentueren van bepaalde objecten zoals fietspaden of hoogtelijnen op de kaart.</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
-    <string name="init_gpx_exportdir">GPX Export map</string>
-    <string name="init_gpx_importdir">GPX Import map</string>
     <string name="init_dataDir">Selecteer Geocache gegevensmap</string>
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
     <string name="init_maptrail">Geschiedenisspoor tonen</string>
@@ -799,6 +797,8 @@
     <string name="init_sendToCgeo_register_fail">Registratie is niet gelukt.</string>
     <string name="sendToCgeo_download_fail">Het is c:geo niet gelukt om de caches te downloaden. Geen internetverbinding beschikbaar of send2cgeo is niet bereikbaar.</string>
     <string name="sendToCgeo_no_registration">Het is c:geo niet gelukt om de caches te downloaden. De registratie van send2cgeo is verlopen. Registreer s.v.p. in de instellingen.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">c:geo Autoriseren</string>
     <string name="auth_check">Controleer authenticatie</string>

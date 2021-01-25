@@ -659,8 +659,6 @@
     <string name="settings_info_themes">O c:geo suporta temas personalizados para os mapas off-line. Estes podem ser usados ​​para alterar o estilo de cores do mapa (por exemplo, ter um mapa para visão nocturna) ou para realçar certos objectos, como ciclovias ou linhas da altitude dentro do mapa.</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
     <string name="init_map_directory_description">Pasta com mapas offline</string>
-    <string name="init_gpx_exportdir">Directório para exportar GPX</string>
-    <string name="init_gpx_importdir">Directório para importar GPX</string>
     <string name="init_dataDir">Seleccionar directório</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de percurso</string>
@@ -799,6 +797,8 @@
     <string name="init_sendToCgeo_register_fail">O registo falhou.</string>
     <string name="sendToCgeo_download_fail">O c:geo falhou a transferência das geocaches. Não há ligação à Internet ou o send2cgeo encontra-se fora de serviço.</string>
     <string name="sendToCgeo_no_registration">O c:geo falhou a transferência das geocaches. O registo do send2cgeo expirou. Por favor, faça o registo nas definições.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_check">Verifique a autenticação</string>

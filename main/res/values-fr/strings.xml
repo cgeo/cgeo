@@ -640,8 +640,6 @@
     <string name="settings_info_themes">c:geo prend en charge des thèmes personnalisés pour les cartes en mode hors-ligne. Ils peuvent être utilisés pour modifier le style de couleur de la carte (par exemple avoir une vue de nuit) ou mettre en évidence certains objets comme les pistes cyclables ou les courbes de niveau.</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
     <string name="init_map_directory_description">Dossier cartes hors-ligne</string>
-    <string name="init_gpx_exportdir">Dossier d\'export GPX</string>
-    <string name="init_gpx_importdir">Dossier d\'import GPX</string>
     <string name="init_dataDir">Sélectionnez le dossier de stockage des Geocaches</string>
     <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
     <string name="init_maptrail">Afficher l\'historique du parcours</string>
@@ -771,6 +769,8 @@
     <string name="init_sendToCgeo_register_fail">Échec de l\'enregistrement.</string>
     <string name="sendToCgeo_download_fail">c:geo n\'a pas pu charger les caches. Absence de connexion Internet ou problème avec le site send2cgeo.</string>
     <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'enregistrement sur send2cgeo a expiré. Merci de vous réenregistrer en allant dans les Paramètres.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">autorisation de c:geo</string>
     <string name="auth_check">Vérifier l\'authentification</string>

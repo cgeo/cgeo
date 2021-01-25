@@ -658,8 +658,6 @@
     <string name="settings_info_themes">オフライン地図用のテーマが使用できます。カラースタイル(ナイトビュー用などに)を変更したり、自転車道や等高線など特定のオブジェクトをハイライトすることができます</string>
     <string name="init_mapsource_select">地図の選択</string>
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
-    <string name="init_gpx_exportdir">GPXエクスポートフォルダ</string>
-    <string name="init_gpx_importdir">GPXインポートフォルダ</string>
     <string name="init_dataDir">ジオキャッシュ データフォルダを選択</string>
     <string name="init_dataDir_note">ジオキャッシュ(スポイラー画像、ログの画像など)の追加データを外部ストレージ(お使いのデバイスに応じてエミュレートまたは実際の外部 SD カード)に格納することができます</string>
     <string name="init_maptrail">軌跡を表示</string>
@@ -798,6 +796,8 @@
     <string name="init_sendToCgeo_register_fail">登録に失敗しました</string>
     <string name="sendToCgeo_download_fail">キャッシュ情報がダウンロードできませんでした。インターネットに未接続かSend2cgeoのサーバが停止中です</string>
     <string name="sendToCgeo_no_registration">キャッシュ情報がダウンロードできませんでした。Send2cgeoの有効期限が過ぎました。再登録してください</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">c:geoを認証</string>
     <string name="auth_check">認証を確認</string>
