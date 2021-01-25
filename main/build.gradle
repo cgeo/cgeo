@@ -266,7 +266,7 @@ dependencies {
     implementation 'commons-io:commons-io:2.5'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    def assertJVersion = '2.9.1'
+    def assertJVersion = '3.19.0'
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
 
