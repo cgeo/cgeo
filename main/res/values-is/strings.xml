@@ -403,6 +403,8 @@
     <string name="settings_info_send2cgeo_title">Upplýsingar um að senda til c:geo</string>
     <string name="init_sendToCgeo_name">Nafn tækisins þíns</string>
     <string name="init_sendToCgeo_register">Óska eftir skráningu</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">Samþykkja c:geo</string>
     <string name="auth_again">Byrja upp á nýtt</string>
