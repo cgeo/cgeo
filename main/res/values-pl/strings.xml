@@ -650,8 +650,6 @@
     <string name="settings_info_themes">c:geo wspiera motywy dla map offline. Mogą być używane by zmienić kolorystykę mapy (np. aby uzyskać tryb nocny) lub by zaznaczyć wybrane obiekty jak ścieżki rowerowe lub izolinie.</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_map_directory_description">Katalog z mapami offline</string>
-    <string name="init_gpx_exportdir">Katalog do eksportu plików GPX</string>
-    <string name="init_gpx_importdir">Katalog do importu plików GPX</string>
     <string name="init_dataDir">Wybierz katalog z danymi</string>
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrzynek (spoilers, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
     <string name="init_maptrail">Pokaż historię</string>
@@ -786,6 +784,8 @@
     <string name="init_sendToCgeo_register_fail">Rejestracja nie powiodła się.</string>
     <string name="sendToCgeo_download_fail">c:geo nie może pobrać skrzynek. Brak połączenia z internetem lub narzędzie send2cgeo jest wyłączone.</string>
     <string name="sendToCgeo_no_registration">c:geo nie może pobrać skrzynek. Rejestracja do send2cgeo wygasła. Proszę zarejestrować urządzenie w Ustawieniach.</string>
+    <!-- Content Storage -->
+    <!-- Persistable Folders -->
     <!-- auth generic -->
     <string name="auth_authorize">Autoryzacja c:geo</string>
     <string name="auth_check">Sprawdź uwierzytelnienie</string>
