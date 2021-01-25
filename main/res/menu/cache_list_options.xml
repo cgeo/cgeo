@@ -137,9 +137,6 @@
             <item
                 android:id="@+id/menu_import_web"
                 android:title="@string/web_import_title"/>
-            <item
-                android:id="@+id/menu_import_android"
-                android:title="@string/gpx_import_android"/>
         </menu>
     </item>
     <item

@@ -213,6 +213,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private MapMode mapMode;
 
+    private final TrackUtils trackUtils = new TrackUtils(this);
+    private final IndividualRouteUtils individualRouteUtils = new IndividualRouteUtils(this);
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         ApplicationSettings.setLocale(this);
@@ -325,6 +328,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
+        MapsforgeMapProvider.getInstance().updateOfflineMaps();
+
         MapUtils.showMapOneTimeMessages(this);
     }
 
@@ -380,12 +385,12 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
-            IndividualRouteUtils.onPrepareOptionsMenu(menu, manualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
+            this.individualRouteUtils.onPrepareOptionsMenu(menu, manualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
-            TrackUtils.onPrepareOptionsMenu(menu);
+            this.trackUtils.onPrepareOptionsMenu(menu);
         } catch (final RuntimeException e) {
             Log.e("NewMap.onPrepareOptionsMenu", e);
         }
@@ -436,8 +441,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         } else if (id == R.id.menu_compass) {
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
-            && !TrackUtils.onOptionsItemSelected(this, id, tracks, this::setTracks, this::centerOnPosition)
-            && !IndividualRouteUtils.onOptionsItemSelected(this, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition, this::setTarget)
+            && !this.trackUtils.onOptionsItemSelected(id, tracks, this::setTracks, this::centerOnPosition)
+            && !this.individualRouteUtils.onOptionsItemSelected(id, manualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
             && !MapDownloadUtils.onOptionsItemSelected(this, id)) {
             final String language = MapProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT) {
@@ -781,7 +786,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private void resumeTrack(final boolean preventReloading) {
         if (null == tracks && !preventReloading) {
-            TrackUtils.loadTracks(this, this::setTracks);
+            this.trackUtils.loadTracks(this::setTracks);
         } else if (null != trackLayer) {
             trackLayer.updateRoute(tracks);
         }
@@ -1734,15 +1739,15 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 caches.invalidate(changedGeocodes);
             }
         }
-        TrackUtils.onActivityResult(this, requestCode, resultCode, data, this::setTracks);
-        IndividualRouteUtils.onActivityResult(this, requestCode, resultCode, data, this::reloadIndividualRoute);
+        this.trackUtils.onActivityResult(requestCode, resultCode, data);
+        this.individualRouteUtils.onActivityResult(requestCode, resultCode, data, this::reloadIndividualRoute);
         MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
     private void setTracks(final Route route) {
         tracks = route;
         resumeTrack(null == tracks);
-        TrackUtils.showTrackInfo(this, tracks);
+        this.trackUtils.showTrackInfo(tracks);
     }
 
     private void reloadIndividualRoute() {

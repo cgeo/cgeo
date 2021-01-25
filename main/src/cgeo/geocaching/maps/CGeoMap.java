@@ -204,6 +204,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
     private static final Set<String> dirtyCaches = new HashSet<>();
+    private final TrackUtils trackUtils;
+    private final IndividualRouteUtils individualRouteUtils;
 
     /**
      * if live map is enabled, this is the minimum zoom level, independent of the stored setting
@@ -416,8 +418,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     /* Current source id */
     private int currentSourceId;
 
+
     public CGeoMap(final MapActivityImpl activity) {
         super(activity);
+        this.trackUtils = activity.getTrackUtils();
+        this.individualRouteUtils = activity.getIndividualRouteUtils();
     }
 
     protected void countVisibleCaches() {
@@ -610,6 +615,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         AndroidBeam.disable(activity);
 
         MapUtils.showMapOneTimeMessages(activity);
+
+        MapsforgeMapProvider.getInstance().updateOfflineMaps();
     }
 
     public void toggleRouteItem(final IWaypoint item) {
@@ -661,7 +668,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private void resumeTrack(final boolean preventReloading) {
         if (null == tracks && !preventReloading) {
-            TrackUtils.loadTracks(this.activity, this::setTracks);
+            this.trackUtils.loadTracks(this::setTracks);
         } else if (null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
             ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(tracks);
         }
@@ -775,7 +782,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
-            IndividualRouteUtils.onPrepareOptionsMenu(menu, manualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
+            this.individualRouteUtils.onPrepareOptionsMenu(menu, manualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -826,8 +833,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_compass) {
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
-            && !TrackUtils.onOptionsItemSelected(activity, id, tracks, this::setTracks, this::centerOnPosition)
-            && !IndividualRouteUtils.onOptionsItemSelected(activity, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition, this::setTarget)
+            && !this.trackUtils.onOptionsItemSelected(id, tracks, this::setTracks, this::centerOnPosition)
+            && !this.individualRouteUtils.onOptionsItemSelected(id, manualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
             && !MapDownloadUtils.onOptionsItemSelected(activity, id)) {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {
@@ -879,7 +886,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void setTracks(final Route route) {
         tracks = route;
         resumeTrack(null == tracks);
-        TrackUtils.showTrackInfo(activity, tracks);
+        this.trackUtils.showTrackInfo(tracks);
     }
 
     private void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {

@@ -9,18 +9,21 @@ import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -39,7 +42,6 @@ import java.util.Locale;
  *
  */
 public class FieldNoteExport extends AbstractExport {
-    private static final File exportLocation = LocalStorage.getFieldNotesDirectory();
     private static int fieldNotesCount = 0;
     private final String fileName;
 
@@ -70,7 +72,7 @@ public class FieldNoteExport extends AbstractExport {
         builder.setView(layout);
 
         final TextView text = layout.findViewById(R.id.info);
-        text.setText(activity.getString(R.string.export_confirm_message, exportLocation.getAbsolutePath(), fileName));
+        text.setText(activity.getString(R.string.export_confirm_message, UriUtils.toUserDisplayableString(PersistableFolder.FIELD_NOTES.getUri()), fileName));
 
         final CheckBox uploadOption = layout.findViewById(R.id.upload);
         uploadOption.setChecked(Settings.getFieldNoteExportUpload());
@@ -96,7 +98,7 @@ public class FieldNoteExport extends AbstractExport {
     private class ExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
         private final boolean upload;
         private final boolean onlyNew;
-        private File exportFile;
+        private Uri exportUri;
 
         private static final int STATUS_UPLOAD = -1;
 
@@ -123,9 +125,10 @@ public class FieldNoteExport extends AbstractExport {
             if (fieldNotes == null) {
                 return false;
             }
-            // write to file
-            exportFile = fieldNotes.writeToDirectory(exportLocation, fileName);
-            if (exportFile == null) {
+
+            // write to uri
+            exportUri = fieldNotes.writeToFolder(PersistableFolder.FIELD_NOTES.getFolder(), fileName);
+            if (exportUri == null) {
                 return false;
             }
             fieldNotesCount = fieldNotes.size();
@@ -137,9 +140,15 @@ public class FieldNoteExport extends AbstractExport {
             boolean uploadResult = true;
             if (upload) {
                 publishProgress(STATUS_UPLOAD);
-                for (final IConnector connector : ConnectorFactory.getConnectors()) {
-                    if (connector instanceof FieldNotesCapability) {
-                        uploadResult &= ((FieldNotesCapability) connector).uploadFieldNotes(exportFile);
+                final File tempFile = ContentStorage.get().writeUriToTempFile(exportUri, fileName);
+                if (tempFile != null) {
+                    for (final IConnector connector : ConnectorFactory.getConnectors()) {
+                        if (connector instanceof FieldNotesCapability) {
+                            uploadResult &= ((FieldNotesCapability) connector).uploadFieldNotes(tempFile);
+                        }
+                    }
+                    if (!tempFile.delete()) {
+                        Log.i("Temp file could not be deleted: " + tempFile);
                     }
                 }
             }
@@ -170,10 +179,10 @@ public class FieldNoteExport extends AbstractExport {
         protected void onPostExecuteInternal(final Boolean result) {
             if (activity != null) {
                 final Context nonNullActivity = activity;
-                if (result && exportFile != null) {
+                if (result && exportUri != null) {
                     Settings.setFieldnoteExportDate(System.currentTimeMillis());
 
-                    ShareUtils.shareFileOrDismissDialog(activity, exportFile, "text/plain", R.string.export, getName() + " " + nonNullActivity.getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                    ShareUtils.shareOrDismissDialog(activity, exportUri, "text/plain", R.string.export, getName() + " " + nonNullActivity.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(exportUri));
 
                     if (upload) {
                         ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_fieldnotes_upload_success));
