@@ -873,12 +873,7 @@
     <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
     <string name="cache_menu_allowWaypointExtraction">Zezwalaj na punkty nawigacji z notatki</string>
     <string name="cache_personal_note_edit">Edytuj</string>
-    <string name="cache_personal_note_storewaypoints">Dodaj/aktualizuj punkty drogi</string>
-    <string name="cache_personal_note_removewaypoints">Usuń punkty drogi</string>
     <string name="cache_personal_note_storewaypoints_success">Punkty drogi zostały dodane do notatki osobistej</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Punkty drogi zostały dodane do notatki, ale musiały zostać skrócone (maksymalny rozmiar notatki osobistej: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Punkty drogi nie mogą być przechowywane w notatce ze względu na ograniczenia rozmiaru (maksymalny rozmiar notatki osobistej: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_nowaypoints">Nie znaleziono punktów drogi, które można zapisać</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zapobiegaj ekstrakcji punktów nawigacji</string>
     <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Osobista notatka będzie ucięta po przekroczeniu %d znaków na Geocaching.com.</string>
