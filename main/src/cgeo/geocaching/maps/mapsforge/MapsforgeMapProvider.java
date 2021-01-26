@@ -16,6 +16,7 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OfflineMapUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -352,7 +353,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         final Resources resources = CgeoApplication.getInstance().getResources();
         final List<ImmutablePair<String, Uri>> offlineMaps =
             CollectionStream.of(getOfflineMaps())
-                .filter(fi -> !fi.isDirectory && isValidMapFile(fi.uri))
+                .filter(fi -> !fi.isDirectory && !fi.name.toLowerCase().endsWith(OfflineMapUtils.INFOFILE_SUFFIX) && isValidMapFile(fi.uri))
                 .map(fi -> new ImmutablePair<>(fi.name, fi.uri)).toList();
         if (offlineMaps.size() > 1) {
             registerMapSource(new OfflineMultiMapSource(offlineMaps, this, resources.getString(R.string.map_source_osm_offline_combined)));
