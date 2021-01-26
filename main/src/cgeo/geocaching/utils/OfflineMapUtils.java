@@ -7,8 +7,6 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -84,7 +82,7 @@ public class OfflineMapUtils {
             if (!filename.endsWith(INFOFILE_SUFFIX)) {
                 continue;
             }
-            try (InputStream input = new FileInputStream(new File(filename))) {
+            try (InputStream input = ContentStorage.get().openForRead(PersistableFolder.OFFLINE_MAPS.getFolder(), filename)) {
                 final OfflineMapData offlineMapData = new OfflineMapData();
                 final Properties prop = new Properties();
                 prop.load(input);
