@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -355,6 +356,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             CollectionStream.of(getOfflineMaps())
                 .filter(fi -> !fi.isDirectory && !fi.name.toLowerCase().endsWith(OfflineMapUtils.INFOFILE_SUFFIX) && isValidMapFile(fi.uri))
                 .map(fi -> new ImmutablePair<>(fi.name, fi.uri)).toList();
+        Collections.sort(offlineMaps, (o1, o2) -> o1.left.toUpperCase().compareTo(o2.left.toUpperCase()));
         if (offlineMaps.size() > 1) {
             registerMapSource(new OfflineMultiMapSource(offlineMaps, this, resources.getString(R.string.map_source_osm_offline_combined)));
         }
