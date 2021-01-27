@@ -70,11 +70,19 @@
                 android:layout_marginLeft="6dip"
                 android:text="@string/map_routing" />
             <ImageButton
+                android:id="@+id/routing_off"
+                style="@style/button_small"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/routing_title"
+                android:src="@drawable/routing_off"/>
+            <ImageButton
                 android:id="@+id/routing_straight"
                 style="@style/button_small"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_below="@id/routing_title"
+                android:layout_toRightOf="@id/routing_off"
                 android:src="@drawable/routing_straight"/>
             <ImageButton
                 android:id="@+id/routing_walk"

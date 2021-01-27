@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
  * Mapping of routing modes and {@link BRouterServiceConnection} implementation dependent parameter values.
  */
 public enum RoutingMode {
+    OFF("off"),
     STRAIGHT("straight"),
     WALK("foot"),
     BIKE("bicycle"),

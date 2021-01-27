@@ -55,7 +55,6 @@ public class MapSettingsUtils {
             settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_track, R.drawable.ic_menu_hidetrack, Settings.isHideTrack(), Settings::setHideTrack, true));
         }
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_circles, R.drawable.ic_menu_circle, isShowCircles, Settings::setShowCircles, false));
-        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_direction, R.drawable.ic_menu_goto, Settings.isMapDirection(), Settings::setMapDirection, false));
 
         final View dialogView = activity.getLayoutInflater().inflate(R.layout.map_settings_dialog, null);
 
@@ -80,6 +79,7 @@ public class MapSettingsUtils {
         final ButtonController<Integer> compactIcon = new ButtonController<Integer>(dialogView, compactIconChoices, Settings.getCompactIconMode(), setCompactIconValue);
 
         final ArrayList<ButtonChoiceModel<RoutingMode>> routingChoices = new ArrayList<>();
+        routingChoices.add(new ButtonChoiceModel<>(R.id.routing_off, RoutingMode.OFF));
         routingChoices.add(new ButtonChoiceModel<>(R.id.routing_straight, RoutingMode.STRAIGHT));
         routingChoices.add(new ButtonChoiceModel<>(R.id.routing_walk, RoutingMode.WALK));
         routingChoices.add(new ButtonChoiceModel<>(R.id.routing_bike, RoutingMode.BIKE));
