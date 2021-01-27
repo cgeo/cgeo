@@ -409,7 +409,6 @@
     <string name="about_system_write_logcat_type_standard">Standarta</string>
     <string name="about_system_write_logcat_type_extended">Detalizēts</string>
     <string name="about_system_write_logcat_success">Reģistra fails saglabāts \"%1$s\" \"%2$s\" dir</string>
-    <string name="about_system_write_logcat_empty">Reģistra fails ir tukšs</string>
     <string name="about_system_write_logcat_error">Kļūda rakstot reģistra failu</string>
     <string name="changelog_github">Visu izmaiņu saraksts</string>
     <string name="about_nutshellmanual">Tiešsaistes rokasgrāmata</string>
@@ -943,17 +942,10 @@
     <string name="cc_hint_seconds">sekundes</string>
     <string name="cc_hint_fraction">daļa</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Meklēt failus\n</string>
-    <string name="file_searching_sdcard_in">Noklusējuma mapēs nav atrasts neviens fails: \n%1$s\n\nMeklēt failus: \n visā SD kartē</string>
-    <string name="file_list_no_files">c:geo neatrod atbilstošos failus.</string>
-    <string name="file_searching">Atbilstošu failu meklēšana</string>
-    <string name="file_title_searching">Meklē</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Izvēlēties direktoriju</string>
     <string name="simple_dir_chooser_current_path">Direktorija:</string>
     <string name="simple_dir_chooser_invalid_path">Nederīga direktorija</string>
-    <string name="simple_file_chooser_title">Izvēlieties failu</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ielādē slēpņus no %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ielādē starpposmus no %1$s</string>
@@ -973,13 +965,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="gpx_import_error_parser">Nepareizs faila formāts</string>
     <string name="gpx_import_error_unexpected">Neparedzēta kļūda</string>
     <string name="gpx_import_canceled_with_filename">GPX importēšana no %1$s slēpņiem tikusi atcelta</string>
-    <string name="gpx_import_delete_title">Dzēst failu</string>
-    <string name="gpx_import_delete_message">Vai vēlaties dzēst %s?</string>
     <string name="gpx_import_select_list_title">GPX importēšana uz sarakstu</string>
-    <string name="gpx_import_android">Importēt no Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Atlasiet kartes (map) failu</string>
-    <string name="track_file_select_title">Atlasiet kartes ieraksta failu</string>
     <!-- import -->
     <string name="web_import_title">Importēt no send2cgeo</string>
     <string name="web_import_waiting">Gaida jaunus slēpņus no send2cgeo…</string>
