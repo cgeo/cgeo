@@ -13,7 +13,7 @@ updates:
       # Ignore some updates to the 'assertj' package
       # Ignore only new versions for >= 3.x
       - dependency-name: "org.assertj:assertj-core"
-        versions: ["3.x"]
+        versions: ">= 3.0.0"
       # Ignore updates to the 'guava' package
       # found no way to instead integrate listenablefuture/9999.0-empty-to-avoid-conflict-with-guava
       - dependency-name: "com.google.guava:guava"
