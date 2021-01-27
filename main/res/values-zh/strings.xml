@@ -415,7 +415,6 @@
     <string name="about_system_write_logcat_type_standard">标准</string>
     <string name="about_system_write_logcat_type_extended">扩展的</string>
     <string name="about_system_write_logcat_success">日志文件写入 \"%2$s\" 文件夹中的 \"%1$s\"</string>
-    <string name="about_system_write_logcat_empty">日志文件为空</string>
     <string name="about_system_write_logcat_error">写入日志文件出错</string>
     <string name="changelog_github">全部标签列表</string>
     <string name="about_nutshellmanual">在线手册</string>
@@ -752,10 +751,8 @@
     <string name="cache_found_last_30_days">最近 30 天下载</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
     <!-- simple dir / file chooser -->
     <!-- gpx -->
-    <!-- file selectors -->
     <!-- import -->
     <!-- popup -->
     <!-- waypoint -->
