@@ -654,12 +654,6 @@
     <string name="cache_listed_on">Objavljen na %s</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Iščem datoteke\nv</string>
-    <string name="file_searching_sdcard_in">Nobenih datotek ni v mapi:\n%1$s\n\nIščem datoteke po celotni SD kartici:\n</string>
-    <string name="file_list_no_files">c:geo ni našel primernih datotek.</string>
-    <string name="file_searching">Iskanje primernih datotek</string>
-    <string name="file_title_searching">Iskanje</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Izberi mapo</string>
     <string name="simple_dir_chooser_current_path">Pot:</string>
@@ -675,12 +669,7 @@
     <string name="gpx_import_error_io">Datoteke ni bilo mogoče prebrati</string>
     <string name="gpx_import_error_parser">Datoteka ni v pravem formatu</string>
     <string name="gpx_import_error_unexpected">Neznana napaka</string>
-    <string name="gpx_import_delete_title">Izbriši datoteko</string>
-    <string name="gpx_import_delete_message">Ali želite izbrisati %s?</string>
     <string name="gpx_import_select_list_title">Uvozi GPX datoteko v seznam</string>
-    <string name="gpx_import_android">Uvozi iz Androida</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Izbiranje datoteke z zemljevidi</string>
     <!-- import -->
     <string name="web_import_title">Uvoz iz send2cgeo</string>
     <string name="web_import_waiting">Čakanje na zaklade iz send2cgeo…</string>
