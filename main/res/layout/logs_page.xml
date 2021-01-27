@@ -11,8 +11,9 @@
     android:footerDividersEnabled="false"
     android:headerDividersEnabled="false"
     android:listSelector="?background_color"
+    android:nestedScrollingEnabled="true"
     android:scrollbarStyle="outsideOverlay"
     tools:context=".log.LogsViewCreator"
-    tools:listitem="@layout/logs_item" >
+    tools:listitem="@layout/logs_item">
 
 </ListView>

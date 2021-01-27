@@ -12,7 +12,8 @@
     android:footerDividersEnabled="false"
     android:headerDividersEnabled="false"
     android:listSelector="?background_color"
+    android:nestedScrollingEnabled="true"
     android:scrollbarStyle="outsideOverlay"
-    tools:context=".CacheDetailActivity$WaypointsViewCreator" >
+    tools:context=".CacheDetailActivity$WaypointsViewCreator">
 
 </ListView>
