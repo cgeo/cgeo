@@ -6,11 +6,13 @@ import cgeo.geocaching.utils.Log;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
@@ -62,6 +64,11 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      * The {@link TitlePageIndicator} for this activity.
      */
     private TitlePageIndicator titleIndicator;
+
+    /**
+     * The {@link SwipeRefreshLayout} for this activity. Might be null if page is not refreshable.
+     */
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public interface PageViewCreator {
         /**
@@ -223,6 +230,24 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
         titleIndicator = (TitlePageIndicator) findViewById(R.id.pager_indicator);
         titleIndicator.setViewPager(viewPager);
+
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
+        if (swipeRefreshLayout != null) {
+            final DisplayMetrics outMetrics = new DisplayMetrics ();
+            getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
+
+            final float dpHeight = outMetrics.heightPixels / getResources().getDisplayMetrics().density;
+            final int mDistanceToTriggerSync = (int) (dpHeight * 0.7);
+
+            // initialize and register listener for pull-to-refresh gesture
+            swipeRefreshLayout.setDistanceToTriggerSync(mDistanceToTriggerSync);
+            swipeRefreshLayout.setOnRefreshListener(() -> {
+                    swipeRefreshLayout.setRefreshing(false);
+                    pullToRefreshActionTrigger();
+                }
+            );
+        }
+
         if (pageSelectedListener != null) {
             titleIndicator.setOnPageChangeListener(new OnPageChangeListener() {
                 @Override
@@ -237,7 +262,9 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
                 @Override
                 public void onPageScrollStateChanged(final int state) {
-                    // empty
+                    if (swipeRefreshLayout != null) {
+                        swipeRefreshLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE);
+                    }
                 }
             });
         }
@@ -251,6 +278,13 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
         viewPagerAdapter.notifyDataSetChanged();
         viewPager.setCurrentItem(startPageIndex, false);
+    }
+
+    /**
+     * will be called, when refresh is triggered via the pull-to-refresh gesture
+     */
+    protected void pullToRefreshActionTrigger() {
+        // do nothing by default. Should be overwritten by the activity if page is refreshable
     }
 
     /**

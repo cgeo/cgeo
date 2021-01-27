@@ -142,7 +142,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
@@ -153,6 +152,7 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.core.view.MenuItemCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -1003,6 +1003,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
+    @Override
+    public void pullToRefreshActionTrigger() {
+        refreshCache();
+    }
+
     private void refreshCache() {
         if (progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
@@ -1115,20 +1120,23 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     /**
      * Creator for details-view.
+     *
+     * TODO: Extract inner class to own file for a better overview. Same might apply to all other view creators.
      */
-    public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+    public class DetailsViewCreator extends AbstractCachingPageViewCreator<NestedScrollView> {
         // Reference to the details list and favorite line, so that the helper-method can access them without an additional argument
         private LinearLayout detailsList;
         private ImmutablePair<RelativeLayout, TextView> favoriteLine;
 
         @Override
-        public ScrollView getDispatchedView(final ViewGroup parentView) {
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+        public NestedScrollView getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
                 // something is really wrong
                 return null;
             }
 
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, parentView, false);
+            view = (NestedScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, parentView, false);
 
             detailsList = view.findViewById(R.id.details_list);
             final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
@@ -1589,7 +1597,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      */
     protected ActionMode currentActionMode;
 
-    protected class DescriptionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+    protected class DescriptionViewCreator extends AbstractCachingPageViewCreator<NestedScrollView> {
 
         @BindView(R.id.personalnote) protected TextView personalNoteView;
         @BindView(R.id.description) protected IndexOutOfBoundsAvoidingTextView descView;
@@ -1597,13 +1605,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private int maxPersonalNotesChars = 0;
 
         @Override
-        public ScrollView getDispatchedView(final ViewGroup parentView) {
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+        public NestedScrollView getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
                 // something is really wrong
                 return null;
             }
 
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_description_page, parentView, false);
+            view = (NestedScrollView) getLayoutInflater().inflate(R.layout.cachedetail_description_page, parentView, false);
             ButterKnife.bind(this, view);
 
             // cache short description
@@ -2123,29 +2132,28 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             view = (RecyclerView) getLayoutInflater().inflate(R.layout.cachedetail_inventory_page, parentView, false);
-            final RecyclerView recyclerView = view.findViewById(R.id.list);
 
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
-            RecyclerViewProvider.provideRecyclerView(CacheDetailActivity.this, recyclerView, true, true);
+            RecyclerViewProvider.provideRecyclerView(CacheDetailActivity.this, view, true, true);
             cache.mergeInventory(genericTrackables, processedBrands);
             final TrackableListAdapter adapterTrackables = new TrackableListAdapter(cache.getInventory(), trackable -> TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName(), cache.getGeocode(), trackable.getBrand().getId()));
-            recyclerView.setAdapter(adapterTrackables);
+            view.setAdapter(adapterTrackables);
             cache.mergeInventory(genericTrackables, processedBrands);
 
             return view;
         }
     }
 
-    private class ImagesViewCreator extends AbstractCachingPageViewCreator<View> {
+    private class ImagesViewCreator extends AbstractCachingPageViewCreator<NestedScrollView> {
 
         @Override
-        public View getDispatchedView(final ViewGroup parentView) {
+        public NestedScrollView getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
                 return null; // something is really wrong
             }
 
-            view = getLayoutInflater().inflate(R.layout.cachedetail_images_page, parentView, false);
+            view = (NestedScrollView) getLayoutInflater().inflate(R.layout.cachedetail_images_page, parentView, false);
             if (imagesList == null && isCurrentPage(Page.IMAGES)) {
                 loadCacheImages();
             }
