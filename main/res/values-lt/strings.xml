@@ -419,7 +419,6 @@
     <string name="about_system_write_logcat_type_standard">Įprastas</string>
     <string name="about_system_write_logcat_type_extended">Išplėstas</string>
     <string name="about_system_write_logcat_success">Žurnalas įrašytas į \"%1$s\" failą \"%2$s\" kataloge</string>
-    <string name="about_system_write_logcat_empty">Žurnalas tuščias</string>
     <string name="about_system_write_logcat_error">Klaida rašant į žurnalą</string>
     <string name="changelog_github">Pakeitimų sąrašas</string>
     <string name="about_nutshellmanual">Internetinė instrukcija</string>
@@ -1042,17 +1041,10 @@
     <string name="cc_hint_seconds">sekundės</string>
     <string name="lowercase">mažosios raidės</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Ieškoma failų\n</string>
-    <string name="file_searching_sdcard_in">Numatytame aplanke failų nerasta:\n%1$s\n\nIeškoma failų visoje SD kortelėje:\n</string>
-    <string name="file_list_no_files">c:geo tinkamų failų nerado.</string>
-    <string name="file_searching">Ieškoma tinkamų failų</string>
-    <string name="file_title_searching">Ieškoma</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Pasirinkite katalogą</string>
     <string name="simple_dir_chooser_current_path">Kelias:</string>
     <string name="simple_dir_chooser_invalid_path">Neteisingas kelias</string>
-    <string name="simple_file_chooser_title">Pasirinkite bylą</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Įkeliamos slėptuvės nuo %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Įkeliami papildomi taškai nuo %1$s</string>
@@ -1071,14 +1063,7 @@
     <string name="gpx_import_error_parser">Blogas failo formatas</string>
     <string name="gpx_import_error_unexpected">Netikėta klaida</string>
     <string name="gpx_import_canceled_with_filename">GPX importavimas iš %1$s buvo nutrauktas</string>
-    <string name="gpx_import_delete_title">Ištrinti failą</string>
-    <string name="gpx_import_delete_message">Ar tikrai norite ištrinti %s?</string>
     <string name="gpx_import_select_list_title">Importuoti GPX į sąrašą</string>
-    <string name="gpx_import_android">Importuoti iš Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Pasirinkite žemėlapio failą</string>
-    <string name="track_file_select_title">Pasirinkite asmeninio kelio failą</string>
-    <string name="individual_route_file_select_title">Pasirinkite asmeninį maršrutą</string>
     <!-- import -->
     <string name="web_import_title">Importuoti iš send2cgeo</string>
     <string name="web_import_waiting">Laukiama naujas slėptuvių iš send2cgeo…</string>
@@ -1782,9 +1767,6 @@
     <string name="receivemapfile_error">Klaida gaunant žemėlapio failą</string>
     <string name="receivemapfile_error_io_exception">Nepavyko įrašyti žemėlapio failo, ar turite rašymo teises žemėlapio kataloge (\"%s\")?</string>
     <string name="receivemapfile_error_filenotfound_exception">Failas nerastas, klaida gaunant žemėlapio failą.</string>
-    <string name="receivemapfile_alreadyexists">Failas šiuo pavadinimu jau yra. Perrašyti jį ar išsaugoti failą kitu pavadinimu?</string>
-    <string name="receivemapfile_option_overwrite">Perrašyti</string>
-    <string name="receivemapfile_option_differentname">Kitas pavadinimas</string>
     <string name="receivemapfile_kb_copied">%d kB nukopijuota</string>
     <string name="receivemapfile_cancelled">Žemėlapio perdavimas atšauktas</string>
     <!-- Download map preference and menu entry -->
