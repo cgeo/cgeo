@@ -430,7 +430,6 @@
     <string name="about_system_write_logcat_type_standard">Estàndard</string>
     <string name="about_system_write_logcat_type_extended">Ampliat</string>
     <string name="about_system_write_logcat_success">Fitxer de registre escrit a \"%1$s\" al directori \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">El Fitxer de registre és buit</string>
     <string name="about_system_write_logcat_error">Error en el Fitxer de registre</string>
     <string name="changelog_github">Llista de tots els canvis</string>
     <string name="about_nutshellmanual">Manual en línia</string>
@@ -1069,17 +1068,10 @@
     <string name="cc_hint_fraction">fracció</string>
     <string name="lowercase">minúscula</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">S\'està buscant els fitxers\na</string>
-    <string name="file_searching_sdcard_in">No s\'ha trobat fitxers a les carpetes per defecte:\n%1$s\n\nS\'està buscant els fitxers a tota la targeta SD:\n</string>
-    <string name="file_list_no_files">El c:geo no ha trobat els fitxers apropiats.</string>
-    <string name="file_searching">S\'estan buscant els fitxers coincidents</string>
-    <string name="file_title_searching">Cercant</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Tria directori</string>
     <string name="simple_dir_chooser_current_path">Ruta:</string>
     <string name="simple_dir_chooser_invalid_path">La ruta és invàlida</string>
-    <string name="simple_file_chooser_title">Tria un fitxer</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Carregant catxés de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Carregant fites de %1$s</string>
@@ -1096,14 +1088,7 @@
     <string name="gpx_import_error_parser">Fitxer amb format incorrecte</string>
     <string name="gpx_import_error_unexpected">S\'ha produït un error inesperat</string>
     <string name="gpx_import_canceled_with_filename">S\'ha cancel·lat l\'importació GPX de %1$s</string>
-    <string name="gpx_import_delete_title">Esborra el fitxer</string>
-    <string name="gpx_import_delete_message">Voleu eliminar %s?</string>
     <string name="gpx_import_select_list_title">Importa el GPX a la llista</string>
-    <string name="gpx_import_android">Importa des de l\'Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Selecciona el fitxer del mapa</string>
-    <string name="track_file_select_title">Seleccioneu el fitxer de track</string>
-    <string name="individual_route_file_select_title">Seleccioneu un fitxer de ruta individual</string>
     <!-- import -->
     <string name="web_import_title">Importa des de send2cgeo</string>
     <string name="web_import_waiting">Esperant nous catxés de send2cgeo…</string>
@@ -1796,9 +1781,6 @@
     <string name="receivemapfile_error">Error en rebre el fitxer del mapa</string>
     <string name="receivemapfile_error_io_exception">Error en rebre el fitxer de mapa. Al vostre directori de mapes \"%s\" es pot escriure?</string>
     <string name="receivemapfile_error_filenotfound_exception">No s\'ha trobat el fitxer en rebre el fitxer del mapa.</string>
-    <string name="receivemapfile_alreadyexists">Ja existeix un fitxer amb aquest nom. Voleu sobreescriure el fitxer existent o desar-lo amb un nom diferent?</string>
-    <string name="receivemapfile_option_overwrite">Sobreescriu</string>
-    <string name="receivemapfile_option_differentname">Nom diferent</string>
     <string name="receivemapfile_kb_copied">%d kB copiats</string>
     <string name="receivemapfile_cancelled">S\'ha cancel·lat la transferència de fitxers del mapa</string>
     <!-- Download map preference and menu entry -->
