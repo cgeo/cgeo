@@ -710,12 +710,6 @@
     <string name="cache_listed_on">Ang listahan sa %s</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Nangita ug mga files\nin</string>
-    <string name="file_searching_sdcard_in">Walay mga files ang nakit-an sa naka-default nga mga folder:\n%1$s\n\nPagpangita sa tibouk nga mga files sa SD card:\n</string>
-    <string name="file_list_no_files">ang c:geo walay nakita na angay sa mga files.</string>
-    <string name="file_searching">Pagpangita alang sa kaparehong mga files</string>
-    <string name="file_title_searching">Ang pagpangita sa</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Ang pag-pili ug direktoryo</string>
     <string name="simple_dir_chooser_current_path">Ang dalan:</string>
@@ -732,12 +726,7 @@
     <string name="gpx_import_error_parser">Dili maayu nga file format</string>
     <string name="gpx_import_error_unexpected">Wala damha nga sayup</string>
     <string name="gpx_import_canceled_with_filename">Na kansila ang pag-import sa GPX gikan sa %1$s</string>
-    <string name="gpx_import_delete_title">Tangtangon ang file</string>
-    <string name="gpx_import_delete_message">Gusto nimong tangtangon ang %s?</string>
     <string name="gpx_import_select_list_title">I-import ang GPX padung sa listahan</string>
-    <string name="gpx_import_android">I-import gekan sa Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Pagpili ug file nga Mapa</string>
     <!-- import -->
     <string name="web_import_title">I-Import gekan sa send2cgeo</string>
     <string name="web_import_waiting">Naghuwat sa bag-o nga caches gekan sa send2cgeo…</string>
