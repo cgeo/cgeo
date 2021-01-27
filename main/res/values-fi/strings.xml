@@ -429,7 +429,6 @@
     <string name="about_system_write_logcat_type_standard">Standardi</string>
     <string name="about_system_write_logcat_type_extended">Laajennettu</string>
     <string name="about_system_write_logcat_success">Lokitiedosto kirjoitettiin tiedostoon \"%1$s\" sijaintiin \"%2$s\".</string>
-    <string name="about_system_write_logcat_empty">Lokitiedosto on tyhjä</string>
     <string name="about_system_write_logcat_error">Virhe kirjoitettaessa lokitiedostoa</string>
     <string name="changelog_github">Kaikki muutokset</string>
     <string name="about_nutshellmanual">Online-ohjeet</string>
@@ -1070,17 +1069,10 @@
     <string name="cc_hint_fraction">murto-osa</string>
     <string name="lowercase">pienet kirjaimet</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Etsitään tiedostoja\nkohteesta</string>
-    <string name="file_searching_sdcard_in">Tiedostoja ei löytynyt oletuskansioista:\n%1$s\n\nEtsitään SD-kortilta:\n</string>
-    <string name="file_list_no_files">c:geo ei löytänyt sopivia tiedostoja.</string>
-    <string name="file_searching">Etsitään tiedostoja</string>
-    <string name="file_title_searching">Etsii</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Valitse kansio</string>
     <string name="simple_dir_chooser_current_path">Polku:</string>
     <string name="simple_dir_chooser_invalid_path">Virheellinen polku</string>
-    <string name="simple_file_chooser_title">Valitse tiedosto</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ladataan kätköjä kohteesta %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ladataan reittipisteitä kohteesta %1$s</string>
@@ -1097,14 +1089,7 @@
     <string name="gpx_import_error_parser">Väärä tiedostomuoto</string>
     <string name="gpx_import_error_unexpected">Odottamaton virhe</string>
     <string name="gpx_import_canceled_with_filename">GPX:n tuonti kohteesta %1$s peruttiin</string>
-    <string name="gpx_import_delete_title">Poista tiedosto</string>
-    <string name="gpx_import_delete_message">Haluatko poistaa %s?</string>
     <string name="gpx_import_select_list_title">Tuo GPX luetteloon</string>
-    <string name="gpx_import_android">Tuo Androidista</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Valitse karttatiedosto</string>
-    <string name="track_file_select_title">Valitse jälkitiedosto</string>
-    <string name="individual_route_file_select_title">Valitse yksittäinen reittitiedosto</string>
     <!-- import -->
     <string name="web_import_title">Tuo send2cgeo</string>
     <string name="web_import_waiting">Odotetaan uusia kätköjä send2cgeo…</string>
@@ -1804,9 +1789,6 @@
     <string name="receivemapfile_error">Virhe otettaessa karttatiedostoa vastaan</string>
     <string name="receivemapfile_error_io_exception">I/O-virhe karttatiedostoa vastaanotettaessa. Onko karttahakemistosi \"%s\" kirjoitettavissa?</string>
     <string name="receivemapfile_error_filenotfound_exception">Tiedostoa ei löydy -virhe tapahtui vastaanottaessa karttatiedostoa.</string>
-    <string name="receivemapfile_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
-    <string name="receivemapfile_option_overwrite">Korvaa</string>
-    <string name="receivemapfile_option_differentname">Eri nimi</string>
     <string name="receivemapfile_kb_copied">%d kB kopioitu</string>
     <string name="receivemapfile_cancelled">Karttatiedoston siirto peruttu</string>
     <!-- Download map preference and menu entry -->
