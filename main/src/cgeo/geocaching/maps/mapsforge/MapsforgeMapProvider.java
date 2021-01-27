@@ -17,6 +17,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OfflineMapUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -63,7 +64,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         //get notified if Offline Maps directory changes
         PersistableFolder.OFFLINE_MAPS.registerChangeListener(this, pf -> updateOfflineMaps());
 
-        //initiale offline maps (necessary here in constructor only so that initial setMapSource will succeed)
+        //initialize offline maps (necessary here in constructor only so that initial setMapSource will succeed)
         updateOfflineMaps();
     }
 
@@ -356,7 +357,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             CollectionStream.of(getOfflineMaps())
                 .filter(fi -> !fi.isDirectory && !fi.name.toLowerCase().endsWith(OfflineMapUtils.INFOFILE_SUFFIX) && isValidMapFile(fi.uri))
                 .map(fi -> new ImmutablePair<>(fi.name, fi.uri)).toList();
-        Collections.sort(offlineMaps, (o1, o2) -> o1.left.toUpperCase().compareTo(o2.left.toUpperCase()));
+        Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
         if (offlineMaps.size() > 1) {
             registerMapSource(new OfflineMultiMapSource(offlineMaps, this, resources.getString(R.string.map_source_osm_offline_combined)));
         }
