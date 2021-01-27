@@ -851,7 +851,7 @@
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copy all content</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Move all content</string>
     <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Folder %s: Copy/Move done</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>The copy/move operation had the result: %s. %d file(s) and %d subdirectories were copied/moved.</p><p>Click \'ok\' finalize the directory change.</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>The copy/move operation had the result: %s. %d file(s) and %d subdirectories were copied/moved.</p><p>Tap \'ok\' finalize the directory change.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Folder set to \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Aborting file selection</string>
