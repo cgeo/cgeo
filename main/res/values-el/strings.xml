@@ -428,7 +428,6 @@
     <string name="about_system_write_logcat_type_standard">Τυπικό</string>
     <string name="about_system_write_logcat_type_extended">Εκτεταμένο</string>
     <string name="about_system_write_logcat_success">Το αρχείο καταγραφών έγινε στο \"%1$s\" στον φάκελλο \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Το αρχείο καταγραφών είναι άδειο</string>
     <string name="about_system_write_logcat_error">Σφάλμα εγγραφής αρχείου</string>
     <string name="changelog_github">Λίστα με όλες τις αλλαγές</string>
     <string name="about_nutshellmanual">Online εγχειρίδιο χρήσης</string>
@@ -812,7 +811,6 @@
     <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Φάκελος %s: Έγινε αντιγραφή/μετακίνηση</string>
     <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Η λειτουργία αντιγραφής/κίνησης είχε το αποτέλεσμα: %s. %d αρχείο(α) και %d υποκαταλόγοι αντιγράφηκαν/μετακινήθηκαν.</p><p>Κάντε κλικ στο \'ok\' για οριστική αλλαγή καταλόγου.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Εγκατάλειψη επιλογής φακέλου, ο φάκελος είναι \'%s\'</string>
-    <string name="contentstorage_folder_selection_failed">Ο επιλεγμένος φάκελος δεν είναι προσβάσιμος, επιλογή ματαίωσης. Ο φάκελος είναι \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Ο φάκελος ορίστηκε σε \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Ματαίωση επιλογής αρχείου</string>
     <string name="contentstorage_file_selection_success">Επιλεγμένο αρχείο: \'%s\'</string>
@@ -1101,17 +1099,10 @@
     <string name="cc_hint_fraction">Κλάσμα</string>
     <string name="lowercase">Πεζά</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Γίνεται αναζήτηση αρχείων \n σε</string>
-    <string name="file_searching_sdcard_in">Κανένα αρχείο δεν βρέθηκε στους προεπιλεγμένους φακέλους: \n%1$s\n\n Αναζήτηση στην κάρτα SD για αρχεία:\n</string>
-    <string name="file_list_no_files">Το c:geo δεν βρήκε τα κατάλληλα αρχεία.</string>
-    <string name="file_searching">Γίνεται αναζήτηση αρχείων που ταιριάζουν</string>
-    <string name="file_title_searching">Γίνεται αναζήτηση</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Επιλέξτε φάκελο</string>
     <string name="simple_dir_chooser_current_path">Διαδρομή:</string>
     <string name="simple_dir_chooser_invalid_path">Μη έγκυρη διαδρομή</string>
-    <string name="simple_file_chooser_title">Επιλέξτε αρχείο</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Φόρτωση κρυπτών από %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Φόρτωση σημείων αναφοράς από %1$s</string>
@@ -1128,14 +1119,7 @@
     <string name="gpx_import_error_parser">Λανθασμένη μορφή αρχείου</string>
     <string name="gpx_import_error_unexpected">Απροσδόκητο σφάλμα</string>
     <string name="gpx_import_canceled_with_filename">Η εισαγωγή GPX από %1$s ακυρώθηκε</string>
-    <string name="gpx_import_delete_title">Διαγραφή αρχείου</string>
-    <string name="gpx_import_delete_message">Θέλετε σίγουρα να διαγράψετε το %s;</string>
     <string name="gpx_import_select_list_title">Εισαγωγή GPX στη λίστα</string>
-    <string name="gpx_import_android">Εισαγωγή από Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Επιλογή αρχείου χάρτη</string>
-    <string name="track_file_select_title">Επιλογή αρχείου διαδρομής</string>
-    <string name="individual_route_file_select_title">Επιλέξτε αρχείο μεμονωμένης διαδρομής</string>
     <!-- import -->
     <string name="web_import_title">Εισαγωγή από send2cgeo</string>
     <string name="web_import_waiting">Εν αναμονή καινούριων κρυπτών από το send2cgeo…</string>
@@ -1829,9 +1813,6 @@
     <string name="receivemapfile_error">Σφάλμα κατά την λήψη του αρχείου χάρτη</string>
     <string name="receivemapfile_error_io_exception">Σφάλμα I/O κατά την λήψη του αρχείου χάρτη. Μπορεί να γίνει εγγραφή στην θέση αποθήκευσης του χάρτη \"%s\";</string>
     <string name="receivemapfile_error_filenotfound_exception">Σφάλμα δεν βρέθηκε το αρχείο κατά την λήψη του αρχείου χάρτη.</string>
-    <string name="receivemapfile_alreadyexists">Ένα αρχείο με αυτό το όνομα υπάρχει ήδη. Να γίνει αντικατάσταση του υπάρχοντος αρχείου ή να γίνει αποθήκευση του νέου αρχείου με διαφορετικό όνομα;</string>
-    <string name="receivemapfile_option_overwrite">Αντικατάσταση</string>
-    <string name="receivemapfile_option_differentname">Διαφορετικό όνομα</string>
     <string name="receivemapfile_kb_copied">%d kB αντιγράφησαν</string>
     <string name="receivemapfile_cancelled">Η μεταφορά του αρχείου χάρτη ακυρώθηκε</string>
     <!-- Download map preference and menu entry -->
