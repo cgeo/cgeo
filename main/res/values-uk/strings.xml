@@ -420,7 +420,6 @@
     <string name="about_system_write_logcat_type_standard">Стандарт</string>
     <string name="about_system_write_logcat_type_extended">розширений</string>
     <string name="about_system_write_logcat_success">Лог-файл записано на \"%1$s\" в \"%2$s\" dir</string>
-    <string name="about_system_write_logcat_empty">Файл порожній</string>
     <string name="about_system_write_logcat_error">Помилка записування вмісту</string>
     <string name="changelog_github">Список всіх змін</string>
     <string name="about_nutshellmanual">Онлайн допомога</string>
@@ -1015,17 +1014,10 @@
     <string name="cc_hint_fraction">Дріб</string>
     <string name="lowercase">нижній регістр</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Пошук файлів…\n</string>
-    <string name="file_searching_sdcard_in">Не знайдено файлів у типових папках:\n%1$s\n\nПошук всієї SD-карти у файлах:\n</string>
-    <string name="file_list_no_files">c:geo не знайдено відповідних файлів.</string>
-    <string name="file_searching">Пошук відповідних файлів</string>
-    <string name="file_title_searching">Пошук</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Оберіть каталог</string>
     <string name="simple_dir_chooser_current_path">Шлях:</string>
     <string name="simple_dir_chooser_invalid_path">неправильний шлях</string>
-    <string name="simple_file_chooser_title">Вибрати файл</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Завантаження кешу з %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Завантаження точок з %1$s</string>
@@ -1038,14 +1030,7 @@
     <string name="gpx_import_error_parser">Неправильний формат файлу</string>
     <string name="gpx_import_error_unexpected">Неочікувана помилка</string>
     <string name="gpx_import_canceled_with_filename">Імпорт з GPX з %1$s було скасовано</string>
-    <string name="gpx_import_delete_title">Видалити файл</string>
-    <string name="gpx_import_delete_message">Ви дійсно хочете видалити %s?</string>
     <string name="gpx_import_select_list_title">Імпортувати GPX до списку</string>
-    <string name="gpx_import_android">Import from Android browser</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Вибери файл карти</string>
-    <string name="track_file_select_title">Виберіть файл доріжки</string>
-    <string name="individual_route_file_select_title">Вибрати окремий файл маршруту</string>
     <!-- import -->
     <string name="web_import_title">Імпортувати з send2cgeo</string>
     <string name="web_import_waiting">Очікування нових кешів від send2cgeo…</string>
@@ -1675,9 +1660,6 @@
     <string name="receivemapfile_error">Помилка під час запису у файл</string>
     <string name="receivemapfile_error_io_exception">Помилка вводу/виводу при отриманні файлу карти. Папка \"%s\" доступна для запису?</string>
     <string name="receivemapfile_error_filenotfound_exception">Помилка при отриманні файлу карти.</string>
-    <string name="receivemapfile_alreadyexists">Файл з такою назвою вже існує. Перезаписати наявний файл або зберегти новий файл?</string>
-    <string name="receivemapfile_option_overwrite">Перезаписати</string>
-    <string name="receivemapfile_option_differentname">Інша назва</string>
     <string name="receivemapfile_kb_copied">%d КБ скопійовано</string>
     <string name="receivemapfile_cancelled">Передачу файлів відмінено</string>
     <!-- Download map preference and menu entry -->
