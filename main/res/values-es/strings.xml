@@ -406,7 +406,6 @@
     <string name="about_system_write_logcat_type_standard">Estándar</string>
     <string name="about_system_write_logcat_type_extended">Extendido</string>
     <string name="about_system_write_logcat_success">Archivo de registro escrito en \"%1$s\" en el directorio \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">El archivo de registro está vacío</string>
     <string name="about_system_write_logcat_error">Error al escribir el archivo de registro</string>
     <string name="changelog_github">Lista de todos los cambios</string>
     <string name="about_nutshellmanual">Manual en línea</string>
@@ -931,17 +930,10 @@
     <string name="cc_hint_seconds">segundos</string>
     <string name="cc_hint_fraction">fracción</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Buscando archivos \nen</string>
-    <string name="file_searching_sdcard_in">No se han encontrado archivos en la carpeta por defecto:\n%1$s\n\nBuscando archivos en toda la SD:\n</string>
-    <string name="file_list_no_files">c:geo no ha encontrado archivos apropiados.</string>
-    <string name="file_searching">Buscando archivos coincidentes</string>
-    <string name="file_title_searching">Buscando</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Elegir directorio</string>
     <string name="simple_dir_chooser_current_path">Ruta:</string>
     <string name="simple_dir_chooser_invalid_path">Ruta inválida</string>
-    <string name="simple_file_chooser_title">Elegir archivo</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Cargando cachés desde %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Cargando waypoints desde %1$s</string>
@@ -958,12 +950,7 @@
     <string name="gpx_import_error_parser">Formato de archivo incorrecto</string>
     <string name="gpx_import_error_unexpected">Error inesperado</string>
     <string name="gpx_import_canceled_with_filename">Se canceló importar GPX de %1$s</string>
-    <string name="gpx_import_delete_title">Eliminar el archivo</string>
-    <string name="gpx_import_delete_message">¿Quieres eliminar %s?</string>
     <string name="gpx_import_select_list_title">Importar GPX a la lista</string>
-    <string name="gpx_import_android">Importar desde Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Selecciona un mapa</string>
     <!-- import -->
     <string name="web_import_title">Importar desde send2cgeo</string>
     <string name="web_import_waiting">Esperando nuevos cachés desde send2cgeo…</string>
