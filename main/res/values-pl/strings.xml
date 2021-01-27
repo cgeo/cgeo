@@ -420,7 +420,6 @@
     <string name="about_system_write_logcat_type_standard">Standardowy</string>
     <string name="about_system_write_logcat_type_extended">Rozszerzone</string>
     <string name="about_system_write_logcat_success">Plik logu zapisany do \"%1$s\" w katalogu \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Plik dziennika jest pusty</string>
     <string name="about_system_write_logcat_error">Błąd zapisu pliku logu</string>
     <string name="changelog_github">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
@@ -1060,17 +1059,10 @@
     <string name="cc_hint_fraction">cz. ułamk.</string>
     <string name="lowercase">małe litery</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Szukam plików\nw</string>
-    <string name="file_searching_sdcard_in">Nie znaleziono plików w domyślnych katalogach:\n%1$s\n\nPrzeszukiwanie całej karty SD:\n</string>
-    <string name="file_list_no_files">c:geo nie znalazł odpowiednich plików.</string>
-    <string name="file_searching">Wyszukiwanie pasujących plików</string>
-    <string name="file_title_searching">Szukam</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Wybierz katalog</string>
     <string name="simple_dir_chooser_current_path">Ścieżka:</string>
     <string name="simple_dir_chooser_invalid_path">Nieprawidłowa ścieżka</string>
-    <string name="simple_file_chooser_title">Wybierz plik</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ładowanie skrzynek z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ładowanie punktów orientacyjnych z %1$s</string>
@@ -1089,14 +1081,7 @@
     <string name="gpx_import_error_parser">Zły format pliku</string>
     <string name="gpx_import_error_unexpected">Nieoczekiwany błąd</string>
     <string name="gpx_import_canceled_with_filename">Import GPX z %1$s został anulowany</string>
-    <string name="gpx_import_delete_title">Usuń plik</string>
-    <string name="gpx_import_delete_message">Czy na pewno chcesz usunąć %s?</string>
     <string name="gpx_import_select_list_title">Importuj GPX do listy</string>
-    <string name="gpx_import_android">Import z Androida</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Wybierz plik z mapą</string>
-    <string name="track_file_select_title">Wybierz plik śladu</string>
-    <string name="individual_route_file_select_title">Wybierz indywidualny plik trasy</string>
     <!-- import -->
     <string name="web_import_title">Import z send2cgeo</string>
     <string name="web_import_waiting">Czekam na nowe skrzynki z send2cgeo…</string>
@@ -1816,9 +1801,6 @@
     <string name="receivemapfile_error">Błąd podczas odbierania pliku mapy</string>
     <string name="receivemapfile_error_io_exception">Błąd I/O podczas odbierania pliku mapy. Czy katalog mapy \"%s\" jest zapisywalny?</string>
     <string name="receivemapfile_error_filenotfound_exception">Nie znaleziono pliku podczas odbierania pliku mapy.</string>
-    <string name="receivemapfile_alreadyexists">Plik o tej nazwie już istnieje. Nadpisać istniejący plik lub zapisać nowy plik pod inną nazwą?</string>
-    <string name="receivemapfile_option_overwrite">Nadpisz</string>
-    <string name="receivemapfile_option_differentname">Inna nazwa</string>
     <string name="receivemapfile_kb_copied">skopiowano %d kB</string>
     <string name="receivemapfile_cancelled">Transfer pliku mapy anulowany</string>
     <!-- Download map preference and menu entry -->
