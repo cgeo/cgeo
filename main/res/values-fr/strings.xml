@@ -417,7 +417,6 @@
     <string name="about_system_write_logcat_type_standard">Par défaut</string>
     <string name="about_system_write_logcat_type_extended">Étendu</string>
     <string name="about_system_write_logcat_success">Fichier journal écrit dans le répertoire \"%1$s\" dans \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Le fichier du journal est vide</string>
     <string name="about_system_write_logcat_error">Erreur lors de l\'écriture du fichier journal</string>
     <string name="changelog_github">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
@@ -1035,17 +1034,10 @@
     <string name="cc_hint_fraction">fraction</string>
     <string name="lowercase">minuscules</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Recherche de fichiers\nin</string>
-    <string name="file_searching_sdcard_in">Aucun fichier trouvé dans le répertoire par défaut:\n%1$s\n\nRecherche dans la totalité de la carte SD:\n</string>
-    <string name="file_list_no_files">c:geo n\'a pas trouvé les fichiers nécessaires.</string>
-    <string name="file_searching">Recherche des fichiers nécessaires</string>
-    <string name="file_title_searching">Recherche en cours</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Choisir le dossier</string>
     <string name="simple_dir_chooser_current_path">Chemin :</string>
     <string name="simple_dir_chooser_invalid_path">Chemin d\'accès invalide</string>
-    <string name="simple_file_chooser_title">Sélectionnez un fichier</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Chargement des caches depuis %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Chargement des points de passages depuis %1$s</string>
@@ -1062,14 +1054,7 @@
     <string name="gpx_import_error_parser">Format de fichier incorrect</string>
     <string name="gpx_import_error_unexpected">Erreur inattendue</string>
     <string name="gpx_import_canceled_with_filename">L\'importation GPX de %1$s a été annulée</string>
-    <string name="gpx_import_delete_title">Supprimer le fichier</string>
-    <string name="gpx_import_delete_message">Voulez-vous supprimer %s ?</string>
     <string name="gpx_import_select_list_title">Importer GPX dans la liste</string>
-    <string name="gpx_import_android">Import depuis Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Choisir un fichier carte</string>
-    <string name="track_file_select_title">Sélectionnez un fichier de trace</string>
-    <string name="individual_route_file_select_title">Sélectionner un fichier d\'itinéraire individuel</string>
     <!-- import -->
     <string name="web_import_title">Importer à partir de send2cgeo</string>
     <string name="web_import_waiting">En attente de nouvelles caches envoyées par send2cgeo…</string>
@@ -1748,9 +1733,6 @@
     <string name="receivemapfile_error">Erreur lors de la réception du fichier carte</string>
     <string name="receivemapfile_error_io_exception">Erreur d\'E/S lors de la réception du fichier de carte. Le répertoire de votre carte \"%s\" est-il accessible en écriture ?</string>
     <string name="receivemapfile_error_filenotfound_exception">Fichier introuvable lors de la réception du fichier de carte.</string>
-    <string name="receivemapfile_alreadyexists">Un fichier portant ce nom existe déjà. Écraser le fichier existant ou enregistrer le nouveau fichier sous un autre nom ?</string>
-    <string name="receivemapfile_option_overwrite">Écraser</string>
-    <string name="receivemapfile_option_differentname">Nouveau nom</string>
     <string name="receivemapfile_kb_copied">%d Ko copiés</string>
     <string name="receivemapfile_cancelled">Réception du fichier carte annulée</string>
     <!-- Download map preference and menu entry -->
