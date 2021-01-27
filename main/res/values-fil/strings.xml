@@ -746,12 +746,6 @@
     <string name="cache_listed_on">Ang listahan sa %s</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Paghahanap para sa mga payl\nnasa</string>
-    <string name="file_searching_sdcard_in">Walang natagpuan na mga payl sa mga polder na naka-default:\n%1$s\n\nAng paghahanap sa buong SD kard para sa mga payl na:\n</string>
-    <string name="file_list_no_files">nakahanap ang c:geo ng hindi angkop na mga payl.</string>
-    <string name="file_searching">Paghahanap sa mga payl na nagtutugma</string>
-    <string name="file_title_searching">Ang paghahanap</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Mamili ng direktoriya</string>
     <string name="simple_dir_chooser_current_path">Ang daanan:</string>
@@ -768,12 +762,7 @@
     <string name="gpx_import_error_parser">Ang pormart ng payl ay hindi maayos</string>
     <string name="gpx_import_error_unexpected">Ang hindi akalain na kamalian</string>
     <string name="gpx_import_canceled_with_filename">Ang pag-import mula sa %1$s ay nakansela</string>
-    <string name="gpx_import_delete_title">Ang payl ay alisin</string>
-    <string name="gpx_import_delete_message">Ang %s? ay gusto mo bang alisin?</string>
     <string name="gpx_import_select_list_title">Ang GPX ay i-import sa listahan</string>
-    <string name="gpx_import_android">I-import mula sa Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Pumili ng payl ng mapa</string>
     <!-- import -->
     <string name="web_import_title">I-import mula sa send2cgeo</string>
     <string name="web_import_waiting">Paghihintay para sa bagong mga cache mula sa send2cgeo&#8230;</string>
