@@ -417,7 +417,6 @@
     <string name="about_system_write_logcat_type_standard">Almindelig</string>
     <string name="about_system_write_logcat_type_extended">Udvidet</string>
     <string name="about_system_write_logcat_success">Logfil er skrevet til %1$s\" i \"%2$s\"-mappen</string>
-    <string name="about_system_write_logcat_empty">Logfilen er tom</string>
     <string name="about_system_write_logcat_error">Fejl ved skrivning af logfil</string>
     <string name="changelog_github">Liste over alle ændringer</string>
     <string name="about_nutshellmanual">Online manual</string>
@@ -1029,17 +1028,10 @@
     <string name="cc_hint_fraction">brøkdel</string>
     <string name="lowercase">små bogstaver</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Søger efter filer\ni</string>
-    <string name="file_searching_sdcard_in">Der blev ikke fundet filer i standardmapperne:\n%1$s\n\nSøger på hele SD-kortet efter filer:\n</string>
-    <string name="file_list_no_files">c:geo fandt ingen relevante filer.</string>
-    <string name="file_searching">Søger efter filer, som opfylder kriterierne</string>
-    <string name="file_title_searching">Søger</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Vælg mappe</string>
     <string name="simple_dir_chooser_current_path">Sti:</string>
     <string name="simple_dir_chooser_invalid_path">Ugyldig sti</string>
-    <string name="simple_file_chooser_title">Vælg fil</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Indlæser cacher fra %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Indlæser rutepunkter fra %1$s</string>
@@ -1056,14 +1048,7 @@
     <string name="gpx_import_error_parser">Ugyldigt filformat</string>
     <string name="gpx_import_error_unexpected">Uventet fejl</string>
     <string name="gpx_import_canceled_with_filename">GPX-import fra %1$s blev afbrudt</string>
-    <string name="gpx_import_delete_title">Slet fil</string>
-    <string name="gpx_import_delete_message">Vil du slette %s?</string>
     <string name="gpx_import_select_list_title">Importér GPX til liste</string>
-    <string name="gpx_import_android">Importér fra Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Vælg kortfil</string>
-    <string name="track_file_select_title">Vælg sporfil</string>
-    <string name="individual_route_file_select_title">Vælg individuel rutefil</string>
     <!-- import -->
     <string name="web_import_title">Importér fra send2cgeo</string>
     <string name="web_import_waiting">Venter på nye cacher fra send2cgeo…</string>
@@ -1705,9 +1690,6 @@
     <string name="receivemapfile_error">Fejl under modtagelse af kortfil</string>
     <string name="receivemapfile_error_io_exception">I/O fejl under modtagelse af kortfil. Må du skrive til kortmappen \"%s\"?</string>
     <string name="receivemapfile_error_filenotfound_exception">Fejl: Filen blev ikke fundet under modtagelse af kortfil.</string>
-    <string name="receivemapfile_alreadyexists">En fil med dette navn findes allerede. Overskriv eksisterende fil eller angiv et andet navn?</string>
-    <string name="receivemapfile_option_overwrite">Overskriv</string>
-    <string name="receivemapfile_option_differentname">Andet navn</string>
     <string name="receivemapfile_kb_copied">%d kB kopieret</string>
     <string name="receivemapfile_cancelled">Overførsel af kortfil annulleret</string>
     <!-- Download map preference and menu entry -->
