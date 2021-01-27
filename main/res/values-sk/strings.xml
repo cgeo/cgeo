@@ -419,7 +419,6 @@
     <string name="about_system_write_logcat_type_standard">Štandardný</string>
     <string name="about_system_write_logcat_type_extended">Rozšírený</string>
     <string name="about_system_write_logcat_success">Súbor denníka zapísaný do \"%1$s\" v priečinku \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Súbor denníka je prázdny</string>
     <string name="about_system_write_logcat_error">Chyba pri zapisovaní súboru denníka</string>
     <string name="changelog_github">Zoznam všetkých zmien</string>
     <string name="about_nutshellmanual">Návod na internete</string>
@@ -1057,17 +1056,10 @@
     <string name="cc_hint_fraction">zlomok</string>
     <string name="lowercase">malé písmená</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Vyhľadávanie súborov\nv</string>
-    <string name="file_searching_sdcard_in">Žiadne súbory neboli nájdené v predvolených priečinkoch:\n%1$s\n\nVyhľadávanie súborov na celej SD karte:\n</string>
-    <string name="file_list_no_files">Prepáčte, c:geo sa nepodarilo nájsť žiadne vhodné súbory.</string>
-    <string name="file_searching">Vyhľadávanie zodpovedajúcich súborov</string>
-    <string name="file_title_searching">Vyhľadávanie</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Výber priečinka</string>
     <string name="simple_dir_chooser_current_path">Cesta:</string>
     <string name="simple_dir_chooser_invalid_path">Neplatná cesta</string>
-    <string name="simple_file_chooser_title">Vyberte súbor</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Načítavanie skrýš z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Načítavanie bodov trasy z %1$s</string>
@@ -1086,14 +1078,7 @@
     <string name="gpx_import_error_parser">Nie je v poriadku formát súboru</string>
     <string name="gpx_import_error_unexpected">Neočakávaná chyba</string>
     <string name="gpx_import_canceled_with_filename">Import GPX z %1$s bol zrušený</string>
-    <string name="gpx_import_delete_title">Vymazať súbor</string>
-    <string name="gpx_import_delete_message">Chcete zmazať %s?</string>
     <string name="gpx_import_select_list_title">Importovať GPX do zoznamu</string>
-    <string name="gpx_import_android">Importovať z Androidu</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Výber mapového súboru</string>
-    <string name="track_file_select_title">Vyberte súbor s trasou</string>
-    <string name="individual_route_file_select_title">Vyberte súbor s individuálnou trasou</string>
     <!-- import -->
     <string name="web_import_title">Importovať zo send2cgeo</string>
     <string name="web_import_waiting">Čakanie na nové skrýše zo send2cgeo…</string>
@@ -1810,9 +1795,6 @@
     <string name="receivemapfile_error">Chyba počas získavania mapového súboru</string>
     <string name="receivemapfile_error_io_exception">Chyba vstupu/výstupu počas prijímania mapového súboru. Dá sa zapisovať do priečinka máp \"%s\"?</string>
     <string name="receivemapfile_error_filenotfound_exception">Chyba: súbor sa počas prijímania mapového súboru nenašiel.</string>
-    <string name="receivemapfile_alreadyexists">Súbor s týmto názvom už existuje. Prepísať existujúci súbor alebo uložiť nový súbor s iným názvom?</string>
-    <string name="receivemapfile_option_overwrite">Prepísať</string>
-    <string name="receivemapfile_option_differentname">Premenovať</string>
     <string name="receivemapfile_kb_copied">%d kB skopírovaných</string>
     <string name="receivemapfile_cancelled">Prenos mapového súboru bol zrušený</string>
     <!-- Download map preference and menu entry -->
