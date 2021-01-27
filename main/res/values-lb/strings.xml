@@ -417,7 +417,6 @@
     <string name="about_system_write_logcat_type_standard">Standard</string>
     <string name="about_system_write_logcat_type_extended">Erweidert</string>
     <string name="about_system_write_logcat_success">Logdatei gespäichert ënner \"%1$s\" am Verzeechnis \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Logfile ass eidel</string>
     <string name="about_system_write_logcat_error">Feeler beim Schreiwe vun der Logdatei</string>
     <string name="changelog_github">Lëscht mat allen Ännerungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
@@ -604,10 +603,8 @@
     <!-- days remaining -->
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
     <!-- simple dir / file chooser -->
     <!-- gpx -->
-    <!-- file selectors -->
     <!-- import -->
     <!-- popup -->
     <!-- waypoint -->
