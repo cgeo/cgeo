@@ -730,12 +730,6 @@
     <string name="cache_listed_on">Terdaftar %s</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Mencari berkas\ndi</string>
-    <string name="file_searching_sdcard_in">Tidak ada arsip yang ditemukan dalam folder default:\n%1$s\n\nMencari seluruh arsip untuk kartu SD:\n</string>
-    <string name="file_list_no_files">c:geo menemukan berkas yang tidak sesuai.</string>
-    <string name="file_searching">Mencari berkas yang cocok</string>
-    <string name="file_title_searching">Mencari</string>
     <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Pilih direktori</string>
     <string name="simple_dir_chooser_current_path">Jalan:</string>
@@ -752,12 +746,7 @@
     <string name="gpx_import_error_parser">Format File Buruk</string>
     <string name="gpx_import_error_unexpected">Kesalahan tidak terduga</string>
     <string name="gpx_import_canceled_with_filename">Impor GPX dari %1$s dibatalkan</string>
-    <string name="gpx_import_delete_title">Menghapus berkas</string>
-    <string name="gpx_import_delete_message">Apakah kamu ingin menghapus %s?</string>
     <string name="gpx_import_select_list_title">Impor GPX ke daftar</string>
-    <string name="gpx_import_android">Impor dari Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Berkas peta dipilih</string>
     <!-- import -->
     <string name="web_import_title">Mengirim dari send2cgeo</string>
     <string name="web_import_waiting">Menunggu cache baru dari send2cgeo&#8230;</string>
