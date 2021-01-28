@@ -1146,9 +1146,6 @@
     <string name="map_showc_ownfound">Pokaż własne/znalezione skrzynki</string>
     <string name="map_showc_disabled">Pokaż wyłączone skrzynki</string>
     <string name="map_showc_archived">Pokaż zarchiwizowane skrzynki</string>
-    <string name="map_showwp_original">Pokaż oryginalne punkty nawigacji</string>
-    <string name="map_showwp_parking">Pokaż parkingi z punktów nawigacji</string>
-    <string name="map_showwp_visited">Ukryj odwiedzone punkty nawigacji</string>
     <string name="map_show_track">Pokaż ścieżkę/trasę GPX</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
