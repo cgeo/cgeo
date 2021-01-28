@@ -685,9 +685,7 @@
     <string name="init_circlecolor_summary">Seleccioneu el color i l\'opacitat per a la línia del cercle. Els cercles s\'utilitzen com a representació visual del radi mínim al voltant d\'un catxé o d\'un punt de ruta físic.. (S\'aplica a geocaching.com)</string>
     <string name="init_circlefillcolor">Color de dins del cercle</string>
     <string name="init_circlefillcolor_summary">Seleccioneu el color i l\'opacitat del interior dels cercles</string>
-    <string name="init_accuracycirclecolor">Color de la línia del cercle de precisió</string>
     <string name="init_accuracycirclecolor_summary">Seleccioneu el color i l\'opacitat de la línia de cercle de precisió. El cercle de precisió s\'utilitza com a representació visual de la precisió del senyal d\'ubicació.</string>
-    <string name="init_accuracycirclefillcolor">Color interior del cercle de precisió</string>
     <string name="init_accuracycirclefillcolor_summary">Seleccioneu el color i l\'opacitat per als cercles de precisió que voleu omplir</string>
     <string name="init_include_found_status">Inlcou l\'estat \"Trobat\"</string>
     <string name="init_trackautovisit">Visita TBs</string>
@@ -768,9 +766,7 @@
     <string name="init_maplines_title">Personalització de línies de mapes</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notificació de proximitat</string>
-    <string name="init_proximityNotificationGeneral">Notificació de proximitat al mapa</string>
     <string name="init_summary_proximityNotificationGeneral">Reproduïu una única notificació si algun catxé o punt de ruta visible actualment al mapa està més a prop que la distància o la distància propera. S\'utilitzen diferents tons per a les dues distàncies.</string>
-    <string name="init_proximityNotificationSpecific">Notificació de proximitat específica del punt de ruta.</string>
     <string name="init_summary_proximityNotificationSpecific">Reproduïu una notificació repetida si el catxé o el punt de ruta seleccionats actualment es troben més a prop de la distància o de la distància propera. Funciona si s\'obren detalls de catxé o punt de ruta, si es mostren elements emergents al mapa o si la brúixola està activa. S\'utilitzen diferents tons per a les dues distàncies.</string>
     <string name="far_distance">Distància</string>
     <string name="near_distance">Distància propera</string>
@@ -1784,7 +1780,6 @@
     <string name="receivemapfile_kb_copied">%d kB copiats</string>
     <string name="receivemapfile_cancelled">S\'ha cancel·lat la transferència de fitxers del mapa</string>
     <!-- Download map preference and menu entry -->
-    <string name="downloadmap_title">Descarregar el mapa ús fora de línia</string>
     <string name="downloadmap_info">Trieu la icona \"Desa\" per triar un fitxer de mapa per a la vostra regió.\n\nLa descàrrega s\'executarà en segon pla. Quan la descàrrega s\'hagi completat, el fitxer descarregat es copiarà al directori de mapes de c: geo i s\'establirà com a mapa actual per a c: geo.\n\nLa descàrrega d\'un mapa pot provocar un elevat trànsit a la xarxa.</string>
     <string name="downloadmap_choose">Trieu el mapa</string>
     <string name="downloadmap_filename">S\'està baixant %s</string>
