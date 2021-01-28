@@ -810,7 +810,7 @@
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kompletten Inhalt kopieren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Kompletten Inhalt verschieben</string>
     <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Ordner %s: Kopieren/Verschieben erledigt</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Das Kopieren/Verschieben hatte das Ergebnis: %s. %d Datei(en) und %d Unterordner wurden kopiert/verschoben.</p><p>Klicke auf \'ok\' um die Verzeichnisänderung abzuschließen.</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Das Kopieren/Verschieben hatte das Ergebnis: %s. %d Datei(en) und %d Unterordner wurden kopiert/verschoben.</p><p>Tippe auf \'ok\' um die Verzeichnisänderung abzuschließen.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Ordnerauswahl abgebrochen, der Ordner ist \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Ordner auf \'%s\' gesetzt</string>
     <string name="contentstorage_file_selection_aborted">Dateiauswahl abgebrochen</string>
