@@ -597,10 +597,10 @@
     <string name="init_listdisplay">Listas adicionais</string>
     <string name="init_summary_listdisplay">Numa lista de caches, mostra o nome de outras listas a que cada cache armazenada esteja associada</string>
     <string name="init_livelist">Mostrar direcção</string>
-    <string name="init_summary_livelist">Mostra uma seta com a orientação em azimute das caches numa lista</string>
+    <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola, para as caches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Por favor, note que este recurso pode fazer cópia de segurança de caches, pontos adicionais &amp; configurações, mas sem imagens de cache. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para um local independente.</string>
+    <string name="init_backup_summary">Tenha em atenção que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais &amp; configurações, mas não de imagens em caches. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -617,7 +617,7 @@
     <string name="init_backup_start_restore">Iniciar restauro</string>
     <string name="init_backup_restore_different_backup">Restaurar uma cópia de seg. diferente</string>
     <string name="init_backup_backup_history">Histórico de cópias de segurança</string>
-    <string name="init_backup_history_length_title">Nº máximo de cópias de segurança guardadas</string>
+    <string name="init_backup_history_length_title">Nº máximo cópias de seg. guardadas</string>
     <string name="init_backup_history_length_summary">Decida quantas cópias de segurança devem ser mantidas. Quando o limite for atingido, as mais antigas serão apagadas automaticamente.</string>
     <string name="init_backup_history_length_min">Apenas recentes</string>
     <string name="init_backup_history_length_max">Manter todas</string>
@@ -657,7 +657,10 @@
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
     <string name="settings_info_themes">O c:geo suporta temas personalizados para os mapas off-line. Estes podem ser usados ​​para alterar o estilo de cores do mapa (por exemplo, ter um mapa para visão nocturna) ou para realçar certos objectos, como ciclovias ou linhas da altitude dentro do mapa.</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
+    <string name="init_local_file_system">Sistema de Ficheiros Local</string>
+    <string name="init_base_directory_description">Directório base para dados locais públicos</string>
     <string name="init_map_directory_description">Pasta com mapas offline</string>
+    <string name="init_gpx_importexportdir">Directório GPX</string>
     <string name="init_dataDir">Seleccionar directório</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de percurso</string>
@@ -797,7 +800,42 @@
     <string name="sendToCgeo_download_fail">O c:geo falhou a transferência das geocaches. Não há ligação à Internet ou o send2cgeo encontra-se fora de serviço.</string>
     <string name="sendToCgeo_no_registration">O c:geo falhou a transferência das geocaches. O registo do send2cgeo expirou. Por favor, faça o registo nas definições.</string>
     <!-- Content Storage -->
+    <string name="contentstorage_grantaccess_dialog_title">Conceder acesso para armazenamento de dados</string>
+    <string name="contentstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>O c:geo precisa de uma pasta local para armazenar dados como ficheiros GPX, cópias de segurança e notas de campo. Recentemente com o Android 11, a permissão para usar esta pasta deve ser explicitamente concedida pelo utilizador. Assim, a partir de agora, o c:geo usa este novo método para armazenar os seus dados.</p><p>Na caixa de diálogo a seguir, por favor seleccione ou crie essa pasta no seu dispositivo. Se actualizou o c:geo de uma versão anterior, seleccione a pasta "cgeo" existente no nível de raiz do armazenamento do seu dispositivo.</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_title">Alterar pasta %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>A pasta %s está actualmente definida como \'%s\' e contém %d ficheiro(s) e %d subpasta(s).</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Pode optar por usar a pasta padrão \'%s\' ou seleccionar uma pasta definida pelo utilizador.</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Por favor, seleccione se o c:geo deve copiar/mover o seu conteúdo para a nova pasta:</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Não fazer nada</string>
+    <string name="contentstorage_selectfolder_dialog_choice_copy">Copiar todo o conteúdo</string>
+    <string name="contentstorage_selectfolder_dialog_choice_move">Mover todo o conteúdo</string>
+    <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Pasta %s: Copiar/Mover concluído</string>
+    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>A operação de copiar/mover teve o resultado: %s. %d ficheiro(s) e %d sub-directórios foram copiados/movidos.</p><p>Toque em \'ok\' para finalizar a mudança de directório.</p>]]></string>
+    <string name="contentstorage_folder_selection_aborted">A cancelar selecção de pasta, a pasta é \'%s\'</string>
+    <string name="contentstorage_folder_selection_success">Pasta definida como \'%s\'</string>
+    <string name="contentstorage_file_selection_aborted">A cancelar a selecção de ficheiro</string>
+    <string name="contentstorage_file_selection_success">Ficheiro seleccionado: \'%s\'</string>
+    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">A pasta %s: \'%s\' não está acessível, a voltar para \'%s\'</string>
+    <string name="contentstorage_err_read_failed">O ficheiro \'%s\' não pôde ser lido</string>
+    <string name="contentstorage_err_write_failed">O ficheiro \'%s\' não pôde ser escrito</string>
+    <string name="contentstorage_err_create_failed">O ficheiro \'%s\' em \'%s\' não pôde ser criado</string>
+    <string name="contentstorage_err_delete_failed">O ficheiro \'%s\' não pôde ser eliminado</string>
+    <string name="contentstorage_err_list_failed">Os ficheiros na Pasta \'%s\' não puderam ser listados</string>
+    <string name="contentstorage_err_folder_access_failed">A pasta \'%s\' não pôde ser acedida</string>
+    <string name="contentstorage_err_copy_failed">O ficheiro \'%s\' não pôde ser copiado/movido para \'%s\' (mover =%s)</string>
     <!-- Persistable Folders -->
+    <string name="persistablefolder_usertype_userdefined">Definida pelo utilizador</string>
+    <string name="persistablefolder_usertype_default">Padrão</string>
+    <string name="persistablefolder_legacy">Antiga</string>
+    <string name="persistablefolder_pickfolder">Seleccionar pasta</string>
+    <string name="persistablefolder_usedefault">Usar padrão</string>
+    <string name="persistablefolder_base">Base</string>
+    <string name="persistablefolder_offline_maps">Mapas offline</string>
+    <string name="persistablefolder_offline_maps_themes">Temas de mapa</string>
+    <string name="persistablefolder_gpx">GPX</string>
+    <string name="persistablefolder_backup">Cópia de segurança</string>
+    <string name="persistablefolder_logfiles">Ficheiros de registo</string>
+    <string name="persistablefolder_fieldnotes">Notas de Campo</string>
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_check">Verifique a autenticação</string>
@@ -877,6 +915,8 @@
     <string name="cache_personal_note_edit">Editar</string>
     <string name="cache_personal_note_storewaypoints">Adicionar/Actualizar Pontos adicionais</string>
     <string name="cache_personal_note_removewaypoints">Eliminar Pontos adicionais</string>
+    <string name="cache_personal_note_removedwaypoints">Pontos adicionais removidos</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Não foi encontrado nenhum ponto adicional para remover</string>
     <string name="cache_personal_note_storewaypoints_success">Os Pontos Adicionais foram adicionados à nota pessoal</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Os Pontos Adicionais foram adicionados à nota, mas tiveram que ser encurtados (tamanho máximo da nota pessoal: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Pontos Adicionais não puderam ser armazenados na nota devido aos limites de tamanho (tamanho máximo da nota pessoal: %1$d)</string>
