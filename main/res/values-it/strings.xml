@@ -878,6 +878,8 @@
     <string name="cache_personal_note_edit">Modifica</string>
     <string name="cache_personal_note_storewaypoints">Aggiungi/Aggiorna Waypoints</string>
     <string name="cache_personal_note_removewaypoints">Rimuovi Waypoint</string>
+    <string name="cache_personal_note_removedwaypoints">Waypoints rimossi</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Nessun waypoint trovato da rimuovere</string>
     <string name="cache_personal_note_storewaypoints_success">I waypoint sono stati aggiunti alla nota personale</string>
     <string name="cache_personal_note_storewaypoints_success_limited">I waypoint sono stati aggiunti alla nota ma hanno dovuto essere accorciati (lunghezza massima della nota: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">I waypoint non possono essere memorizzati nella nota a causa dei limiti di dimensione (lunghezza massima della nota: %1$d)</string>

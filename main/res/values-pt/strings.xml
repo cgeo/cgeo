@@ -580,9 +580,9 @@
     <string name="init_bigSmileysOnMap">Grandes ícones nas caches registadas</string>
     <string name="init_summary_bigSmileysOnMap">Se activado, as caches registadas serão mostradas no mapa por grandes emoticons, ao invés dos ícones do tipo de cache (requer reinício).</string>
     <string name="init_disabled">Excluir Desactivadas</string>
-    <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
+    <string name="init_summary_disabled">Exclui as caches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>
-    <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
+    <string name="init_summary_archived">Exclui as caches arquivadas</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
@@ -598,10 +598,10 @@
     <string name="init_listdisplay">Listas adicionais</string>
     <string name="init_summary_listdisplay">Numa lista de caches, mostra o nome de outras listas a que cada cache armazenada esteja associada</string>
     <string name="init_livelist">Mostrar direcção</string>
-    <string name="init_summary_livelist">Mostra uma seta com a orientação em azimute das caches numa lista</string>
+    <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola, para as caches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Por favor, note que este recurso pode fazer cópia de segurança de caches, pontos adicionais &amp; configurações, mas sem imagens de cache. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para um local independente.</string>
+    <string name="init_backup_summary">Tenha em atenção que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais &amp; configurações, mas não de imagens em caches. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -618,7 +618,7 @@
     <string name="init_backup_start_restore">Iniciar restauro</string>
     <string name="init_backup_restore_different_backup">Restaurar uma cópia de seg. diferente</string>
     <string name="init_backup_backup_history">Histórico de cópias de segurança</string>
-    <string name="init_backup_history_length_title">Nº máximo de cópias de segurança guardadas</string>
+    <string name="init_backup_history_length_title">Nº máximo cópias de seg. guardadas</string>
     <string name="init_backup_history_length_summary">Decida quantas cópias de segurança devem ser mantidas. Quando o limite for atingido, as mais antigas serão apagadas automaticamente.</string>
     <string name="init_backup_history_length_min">Apenas recentes</string>
     <string name="init_backup_history_length_max">Manter todas</string>
@@ -878,6 +878,8 @@
     <string name="cache_personal_note_edit">Editar</string>
     <string name="cache_personal_note_storewaypoints">Adicionar/Actualizar Pontos adicionais</string>
     <string name="cache_personal_note_removewaypoints">Eliminar Pontos adicionais</string>
+    <string name="cache_personal_note_removedwaypoints">Pontos adicionais removidos</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Não foi encontrado nenhum ponto adicional para remover</string>
     <string name="cache_personal_note_storewaypoints_success">Os Pontos Adicionais foram adicionados à nota pessoal</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Os Pontos Adicionais foram adicionados à nota, mas tiveram que ser encurtados (tamanho máximo da nota pessoal: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Pontos Adicionais não puderam ser armazenados na nota devido aos limites de tamanho (tamanho máximo da nota pessoal: %1$d)</string>
