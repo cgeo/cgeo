@@ -810,7 +810,6 @@
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copia tutto il contenuto</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Sposta tutto il contenuto</string>
     <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Cartella %s: Copia/Spostamento completato</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>L'operazione copia/spostamento ha avuto il risultato: %s. %d file e %d sottodirectory sono stati copiati/spostati.</p><p>Clic su \'ok\' finalizza la modifica della directory.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Interrotta la selezione della cartella, la cartella è «%s»</string>
     <string name="contentstorage_folder_selection_success">Cartella impostata a \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Interruzione selezione file</string>
