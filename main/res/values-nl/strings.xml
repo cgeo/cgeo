@@ -810,7 +810,6 @@
     <string name="contentstorage_selectfolder_dialog_choice_copy">Alle inhoud kopiëren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Alle inhoud verplaatsen</string>
     <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Map %s: Kopiëren/Verplaatsen klaar</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Het kopiëren/verplaatsen heeft als resultaat: %s. %d bestand(en) en %d submappen werden gekopieerd/verplaatst.</p><p>Klik op \'ok\' om de mapwijziging te voltooien.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Mapselectie afbreken, map is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Map ingesteld op \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Afbreken bestand selectie</string>
