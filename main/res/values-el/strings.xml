@@ -809,7 +809,6 @@
     <string name="contentstorage_selectfolder_dialog_choice_copy">Αντιγραφή όλου του περιεχομένου</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Μετακίνηση περιεχομένου</string>
     <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Φάκελος %s: Έγινε αντιγραφή/μετακίνηση</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Η λειτουργία αντιγραφής/κίνησης είχε το αποτέλεσμα: %s. %d αρχείο(α) και %d υποκαταλόγοι αντιγράφηκαν/μετακινήθηκαν.</p><p>Κάντε κλικ στο \'ok\' για οριστική αλλαγή καταλόγου.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Εγκατάλειψη επιλογής φακέλου, ο φάκελος είναι \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Ο φάκελος ορίστηκε σε \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Ματαίωση επιλογής αρχείου</string>
