@@ -666,6 +666,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (cache != null) {
             // top level menu items
             menu.findItem(R.id.menu_tts_toggle).setVisible(!cache.isGotoHistoryUDC());
+            menu.findItem(R.id.menu_refresh).setVisible(cache.supportsRefresh());
             menu.findItem(R.id.menu_checker).setVisible(StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
             if (connector instanceof PgcChallengeCheckerCapability) {
                 menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
