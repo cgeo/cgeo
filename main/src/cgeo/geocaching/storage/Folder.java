@@ -303,7 +303,7 @@ public class Folder {
         final List<String> result = new ArrayList<>();
         for (String token : names.split("/")) {
             if (!StringUtils.isBlank(token)) {
-                result.add(token.replaceAll("[^a-zA-Z0-9-_.]", "-").trim());
+                result.add(token.trim());
             }
         }
         return result;
