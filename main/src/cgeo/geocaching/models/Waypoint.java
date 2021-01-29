@@ -702,22 +702,40 @@ public class Waypoint implements IWaypoint {
      * @param type type to create a new default name for
      */
     public static String getDefaultWaypointName(final Geocache cache, final WaypointType type) {
-        final ArrayList<String> wpNames = new ArrayList<>();
+        final ArrayList<String> wpNamesLocalNumbering = new ArrayList<>();
+        final ArrayList<String> wpNamesSharedNumbering = new ArrayList<>();
         for (final Waypoint waypoint : cache.getWaypoints()) {
-            wpNames.add(waypoint.getName());
+            if (waypoint.getWaypointType() == WaypointType.FINAL || waypoint.getWaypointType() == WaypointType.PARKING) {
+                wpNamesLocalNumbering.add(waypoint.getName());
+            } else {
+                wpNamesSharedNumbering.add(waypoint.getName());
+            }
         }
-        // try final without index
-        if ((type == WaypointType.FINAL) && !wpNames.contains(type.getL10n()) && !wpNames.contains(type.getNameForNewWaypoint())) {
-            return type.getNameForNewWaypoint();
+
+        // try final and parking without index
+        if (type == WaypointType.FINAL || type == WaypointType.PARKING) {
+            // if it's the only one: don't add a number
+            if (!wpNamesLocalNumbering.contains(type.getL10n()) && !wpNamesLocalNumbering.contains(type.getNameForNewWaypoint())) {
+                return type.getNameForNewWaypoint();
+            }
+            // otherwise count up within its own wp type
+            int max = 1; // start with one, as there as at least one other wp of this type when we are here
+            for (int i = 0; i < 30; i++) {
+                if (wpNamesLocalNumbering.contains(type.getL10n() + " " + i) || wpNamesLocalNumbering.contains(type.getNameForNewWaypoint() + " " + i)) {
+                    max = i;
+                }
+            }
+            return type.getNameForNewWaypoint() + " " + (max + 1);
         }
-        // for other types add an index by default, which is highest found index + 1
+
+        // for other types add an index by default, which is highest found index (across all "shared numbering" types) + 1
         int max = 0;
-        final Pattern p = Pattern.compile("[^0-9]*([0-9]+)");
-        for (String wpName : wpNames) {
+        final Pattern p = Pattern.compile("(^|[-_ ])([0-9]+)([-_ ]|$)");
+        for (String wpName : wpNamesSharedNumbering) {
             final MatcherWrapper match = new MatcherWrapper(p, wpName);
             while (match.find()) {
                 try {
-                    final int i = Integer.parseInt(match.group(1));
+                    final int i = Integer.parseInt(match.group(2));
                     if (Math.abs(i) <= 10100 && i > max) {
                         max = i;
                     }
