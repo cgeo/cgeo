@@ -158,7 +158,7 @@
     <string name="log_image_titleprefix">Imagem</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduzir para %s</string>
-    <string name="translate_to_english">Traduzir para inglês</string>
+    <string name="translate_to_english">Traduzir para Inglês</string>
     <string name="translate_length_warning">A tradução pode falhar se o texto for muito grande.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
