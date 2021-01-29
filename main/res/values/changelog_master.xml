@@ -4,9 +4,14 @@
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
 <h1>Nightly build:</h1>
 
-<h4>Topic:</h4>
+<h4>Cache details:</h4>
 <ul>
-<li></li>
+<li>New: Swipe down to refresh cache details</li>
+</ul>
+
+<h4>Other:</h4>
+<ul>
+<li>New: Set user-defined coords for waypoints on GPX import even when original waypoint has no coords</li>
 </ul>
 
 </div>]]></Data>
