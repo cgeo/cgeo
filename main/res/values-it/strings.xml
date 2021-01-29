@@ -804,7 +804,7 @@
     <string name="contentstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo ha bisogno di una cartella locale per memorizzare dati come file GPX, backup e field notes. Ultimamente con Android 11 il permesso di utilizzare questa cartella deve essere esplicitamente concesso dall'utente. Pertanto c:geo d'ora in poi utilizza questo nuovo metodo per memorizzare i tuoi dati.</p><p>Nella finestra seguente, seleziona o crea una cartella sul tuo dispositivo. Se hai aggiornato c:geo da una versione precedente, seleziona la cartella esistente "cgeo" sul percorso principale nell'archivio del tuo dispositivo.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_title">Cambia cartella %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>La cartella %s è attualmente impostata a \'%s\' e contiene %d file e %d sottocartelle.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Puoi scegliere di utilizzare la cartella predefinita \'%s\' o scegliere una cartella definita dall'utente.</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Puoi scegliere di utilizzare la cartella predefinita \'%s\' o scegliere una cartella definita dall\'utente.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Seleziona se c:geo deve copiare/spostare i tuoi contenuti nella nuova cartella:</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Non fare nulla</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copia tutto il contenuto</string>
