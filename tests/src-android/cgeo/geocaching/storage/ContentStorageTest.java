@@ -129,6 +129,22 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(ContentStorage.get().delete(uri2)).isTrue();
     }
 
+    public void testFileStrangeNames()  {
+        final Folder folder = createTestFolder(Folder.FolderType.FILE, "strangeNames");
+        ContentStorage.get().ensureFolder(folder, true);
+
+        final File dir = new File(folder.getUri().getPath());
+        final File f1 = new File(dir, "a b c");
+        f1.mkdirs();
+
+        FolderUtils.get().getFolderInfo(folder);
+
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(folder);
+
+        assertThat(files).hasSize(1);
+        assertThat(files.get(0).name).isEqualTo("a b c");
+    }
+
     public void testFileCopyAll() {
         performCopyAll(Folder.FolderType.FILE, Folder.FolderType.FILE);
     }
