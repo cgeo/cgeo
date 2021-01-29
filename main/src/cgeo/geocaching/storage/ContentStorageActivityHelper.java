@@ -363,10 +363,6 @@ public class ContentStorageActivityHelper {
                     dd.dismiss();
                     finalizePersistableFolderSelection(true, folder, targetUri, callback);
                  })
-                .setNegativeButton(android.R.string.cancel, (dd, pp) -> {
-                    dd.dismiss();
-                    finalizePersistableFolderSelection(false, folder, targetUri, callback);
-                })
                 .create().show();
         }
     }
