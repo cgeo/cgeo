@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * */
 public class FileNameCreator {
 
-    public static final FileNameCreator DEFAULT = new FileNameCreator("file", "dat");
+    public static final FileNameCreator DEFAULT = new FileNameCreator("file", "txt");
 //    public static final FileNameCreator DEFAULT_TEXT = new FileNameCreator("file", "txt");
 //    public static final FileNameCreator DEFAULT_BINARY = new FileNameCreator("file", "bin");
 

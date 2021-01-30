@@ -470,20 +470,21 @@ public class ContentStorageTest extends CGeoTestCase {
         final Folder testFolder = createTestFolder(type, "mimeType");
 
         performMimeTypeTests(testFolder,
-            new String[]{"txt", "jpg", "map"},
-            new String[]{"text/plain", "image/jpeg", "application/octet-stream"});
+            new String[]{"txt", "jpg", "jpeg", "map", "hprof", "gpx", null},
+            new String[]{"text/plain", "image/jpeg", "image/jpeg", "application/octet-stream", "application/octet-stream", "application/octet-stream", "application/octet-stream" });
     }
 
     private void performMimeTypeTests(final Folder testLocation, final String[] suffix, final String[] expectedMimeType) {
         final Map<String, String> mimeTypeMap = new HashMap<>();
         for (int i = 0; i < suffix.length; i++) {
-            final String filename = "test." + suffix[i];
+            final String filename = "test" + (suffix[i] == null ? "" : "." + suffix[i]);
             assertThat(ContentStorage.get().create(testLocation, filename)).isNotNull();
             mimeTypeMap.put(filename, expectedMimeType[i]);
         }
         final List<ContentStorage.FileInformation> files = ContentStorage.get().list(testLocation);
         assertThat(files.size()).isEqualTo(suffix.length);
         for (ContentStorage.FileInformation fi : files) {
+            assertThat(mimeTypeMap.containsKey(fi.name)).as("Unexpected File " + fi.name).isTrue();
             assertThat(fi.mimeType).as("For file " + fi.name).isEqualTo(mimeTypeMap.get(fi.name));
         }
     }

@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class OfflineMapUtils {
 
+    public static final String MAPFILE_SUFFIX = ".map";
     public static final String INFOFILE_SUFFIX = "-cgeo.txt";
 
     private static final String PROP_PARSETYPE = "remote.parsetype";
