@@ -237,7 +237,8 @@ public final class Routing {
             return result.toArray(new Geopoint[result.size()]);
 
         } catch (final SAXException e) {
-            Log.w("cannot parse brouter output of length " + gpx.length(), e);
+            //Log.w("cannot parse brouter output of length " + gpx.length(), e);
+            Log.w("cannot parse brouter output of length " + gpx.length() + ", gpx=" + gpx, e);
         }
         return null;
     }
