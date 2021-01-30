@@ -800,7 +800,6 @@
     <string name="sendToCgeo_no_registration">Το c:geo απέτυχε να κατεβάσει κρύπτες. Η εγγραφή για το send2cgeo έληξε. Παρακαλούμε να εγγραφείτε στις ρυθμίσεις.</string>
     <!-- Content Storage -->
     <string name="contentstorage_grantaccess_dialog_title">Παραχώρηση πρόσβασης για αποθήκευση δεδομένων</string>
-    <string name="contentstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση δεδομένων όπως αρχεία GPX, αντίγραφα ασφαλείας και σημειώσεις πεδίου. Τελευταία με το Android 11 η άδεια χρήσης αυτού του φακέλου πρέπει να χορηγείται ρητά από το χρήστη. Ως εκ τούτου, το c:geo από τώρα και στο εξής χρησιμοποιεί αυτή τη νέα μέθοδο για να αποθηκεύσει τα δεδομένα σας.</p><p>Στον παρακάτω διάλογο, παρακαλώ επιλέξτε ή δημιουργήστε έναν τέτοιο φάκελο στη συσκευή σας. Αν αναβαθμίσατε το c:geo από μια προηγούμενη έκδοση, επιλέξτε τον υπάρχοντα φάκελο "cgeo" στο ριζικό επίπεδο του χώρου αποθήκευσης της συσκευής σας.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_title">Αλλαγή φακέλου %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>Ο φάκελος %s έχει οριστεί σε \'%s\' και περιέχει %d αρχείο(α) και %d υποφακέλους.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Μπορείτε να επιλέξετε να χρησιμοποιήσετε τον προεπιλεγμένο φάκελο \'%s\' ή να επιλέξετε έναν καθορισμένο από το χρήστη φάκελο.</p>]]></string>
