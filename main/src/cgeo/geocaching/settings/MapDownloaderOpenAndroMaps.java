@@ -19,7 +19,7 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
     private static final Pattern PATTERN_UP = Pattern.compile("<a href=\"(\\.\\.\\/)\">(\\.\\.)\\/<\\/a>"); // 1:relative dir, 2:..
 
     private MapDownloaderOpenAndroMaps() {
-        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_OPENANDROMAPS, R.string.mapserver_oam_v4, R.string.downloadmap_source_openandromaps_name, R.string.downloadmap_source_openandromaps_info);
+        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_OPENANDROMAPS, R.string.mapserver_openandromaps_downloadurl, R.string.mapserver_openandromaps_name, R.string.mapserver_openandromaps_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl);
     }
 
     @Override

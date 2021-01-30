@@ -132,6 +132,7 @@
     · The <a href="http://tango.freedesktop.org/Tango_Desktop_Project">Tango! Desktop Project</a> (Public Domain)\n
     · OpenStreetMap cartography (OSM:Mapnik) © OpenStreetMap contributors. Map tile data <a href="http://www.openstreetmap.org/copyright/en">licensed</a> under Creative Commons 2.0 BY-SA.\n
     · More maps based on OpenStreetMap cartography: © <a href="https://www.openstreetmap.de/">openstreetmap.de</a> and © <a href="https://www.cyclosm.org/">cyclosm.org</a>.\n
+    · Map Downloader supports maps from <a href="https://github.com/mapsforge">Mapsforge</a> and <a href="https://www.openandromaps.org">OpenAndroMaps</a>.\n
 	</string>
 
     <!-- cache details -->
@@ -222,8 +223,15 @@
     <string translatable="false" name="package_locus">menion.android.locus</string>
 
     <!-- map server urls -->
-    <string translatable="false" name="mapserver_osm_v5">https://ftp-stud.hs-esslingen.de/pub/Mirrors/download.mapsforge.org/maps/v5/</string>
-    <string translatable="false" name="mapserver_oam_v4">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/mapsV4/</string>
+    <string translatable="false" name="mapserver_mapsforge_name">Mapsforge</string>
+    <string translatable="false" name="mapserver_mapsforge_downloadurl">https://ftp-stud.hs-esslingen.de/pub/Mirrors/download.mapsforge.org/maps/v5/</string>
+    <string translatable="false" name="mapserver_mapsforge_likeiturl">https://github.com/mapsforge/mapsforge</string>
+    <string translatable="false" name="mapserver_mapsforge_projecturl">https://github.com/mapsforge/mapsforge</string>
+
+    <string translatable="false" name="mapserver_openandromaps_name">OpenAndroMaps</string>
+    <string translatable="false" name="mapserver_openandromaps_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/mapsV4/</string>
+    <string translatable="false" name="mapserver_openandromaps_likeiturl">https://www.openandromaps.org/projektkosten</string>
+    <string translatable="false" name="mapserver_openandromaps_projecturl">https://www.openandromaps.org/</string>
 
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report</string>

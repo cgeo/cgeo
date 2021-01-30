@@ -18,7 +18,7 @@ public class MapDownloaderMapsforge extends AbstractMapDownloader {
     private static final Pattern PATTERN_UP = Pattern.compile("alt=\"\\[PARENTDIR\\]\"><\\/td><td><a href=\"((\\/[-a-zA-Z0-9\\.]+)+\\/)");
 
     private MapDownloaderMapsforge() {
-        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_MAPSFORGE, R.string.mapserver_osm_v5, R.string.downloadmap_source_mapsforge_name, R.string.downloadmap_source_mapsforge_info);
+        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_MAPSFORGE, R.string.mapserver_mapsforge_downloadurl, R.string.mapserver_mapsforge_name, R.string.mapserver_mapsforge_info, R.string.mapserver_mapsforge_projecturl, R.string.mapserver_mapsforge_likeiturl);
     }
 
     @Override

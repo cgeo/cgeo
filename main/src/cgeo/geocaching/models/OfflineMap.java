@@ -107,8 +107,8 @@ public class OfflineMap {
 
         private static void buildOfflineMapTypesList() {
             if (offlineMapTypes.size() == 0) {
-                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_MAPSFORGE, MapDownloaderMapsforge.getInstance(), R.string.downloadmap_source_mapsforge_name));
-                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_OPENANDROMAPS, MapDownloaderOpenAndroMaps.getInstance(), R.string.downloadmap_source_openandromaps_name));
+                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_MAPSFORGE, MapDownloaderMapsforge.getInstance(), R.string.mapserver_mapsforge_name));
+                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_OPENANDROMAPS, MapDownloaderOpenAndroMaps.getInstance(), R.string.mapserver_openandromaps_name));
             }
         }
     }
