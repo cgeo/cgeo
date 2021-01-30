@@ -12,27 +12,37 @@ public class UriUtilsTest {
 
     //Example for folder /cgeo
     private static final String DOC_URI_EXAMPLE = "content://com.android.externalstorage.documents/tree/primary%3ADocuments%2Fcgeo/document/primary%3ADocuments%2Fcgeo%2Flogfiles%2Flogcat_2020-12-28_17-22-20-2.txt";
-    //Example for folder /Documents/cgeo
-    private static final String DOC_URI_EXAMPLE_2 = "content://com.android.externalstorage.documents/tree/home%3Acgeo";
-    //Example for folder /Downloads/cgeo
-    private static final String DOC_URI_EXAMPLE_3 = "content://com.android.externalstorage.documents/tree/primary%3ADownload%2Fcgeo";
-
-    //complicated example for a document in /Documents/cgeo/gpx
-    private static final String DOC_URI_COMPLICATED = "content://com.android.externalstorage.documents/tree/home%3Acgeo/document/home%3Acgeo%2Fgpx%2Froute_2021-01-06_17-14-08-4.gpx";
 
     private static final String DOC_URI_EXAMPLE_DECODED = "content://com.android.externalstorage.documents/tree/primary:Documents/cgeo/document/primary:Documents/cgeo/logfiles/logcat_2020-12-28_17-22-20-2.txt";
 
-    private static final String FILE_URI_EXAMPLE = "file:///storage/emulated/0/cgeo/test.txt";
+    //real-world Uri examples and their wanted display
+    //Each test case has entries "Description", "expected display Uri", "raw Uri
+    public static final String[][] URI_DISPLAY_TESTS = new String[][]{
+        new String[]{"Internal /cgeo", "/cgeo", "content://com.android.externalstorage.documents/tree/primary%3Acgeo"},
+        new String[]{"Internal /cgeo/logfiles", "/cgeo/logfiles", "content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Flogfiles"},
+        new String[]{"Internal file in /cgeo/logfiles", "/cgeo/logfiles/log.txt", "content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Flogfiles%2Flog.txt"},
+        new String[]{"SDCARD /cgeo with known volume id", "TEST-SDCARD/cgeo", "content://com.android.externalstorage.documents/tree/TEST-1111-2222%3Acgeo"},
+        new String[]{"SDCARD /Music/cgeo with unknown volume id", "TEST-UNKNOWNID/Music/cgeo", "content://com.android.externalstorage.documents/tree/TEST-UNKNOWNID%3AMusic%2Fcgeo"},
+        new String[]{"SDCARD /cgeo with unknown volume id", "TEST-UNKNOWNID/cgeo", "content://com.android.externalstorage.documents/tree/TEST-UNKNOWNID%3Acgeo"},
+        new String[]{"Internal /Documents/cgeo (special home handling)", "[Documents]/cgeo", "content://com.android.externalstorage.documents/tree/home%3Acgeo"},
+        new String[]{"Download root (special provider handling)", "Downloads:/downloads", "content://com.android.providers.downloads.documents/tree/downloads"},
+        new String[]{"Download /cgeo (special provider handling)", "Downloads:raw/storage/emulated/0/Download/cgeo", "content://com.android.providers.downloads.documents/tree/raw%3A%2Fstorage%2Femulated%2F0%2FDownload%2Fcgeo"},
+        new String[]{"Download /cgeo (provider handling + numbers)", "Downloads:msd/29", "content://com.android.providers.downloads.documents/tree/msd%3A29"},
+        new String[]{"File", "/storage/emulated/0/cgeo", "file:///storage/emulated/0/cgeo"},
+        new String[]{"A null uri", "---", null},
+        new String[]{"An empty uri", "---", ""},
+        new String[]{"A strange uri", "/strange", "content://////strange"},
+        new String[]{"A public web uri", "http://www.cgeo.org/test", "http://www.cgeo.org/test"},
+    };
 
     @Test
     public void getUserDisplayableUri() {
-        assertThat(UriUtils.toUserDisplayableString(Uri.parse(FILE_URI_EXAMPLE))).isEqualTo("/storage/emulated/0/cgeo/test.txt");
-        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE))).isEqualTo("…/Documents/cgeo/logfiles/logcat_2020-12-28_17-22-20-2.txt");
-        assertThat(UriUtils.toUserDisplayableString(null)).isEqualTo("");
-
-        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE_2))).isEqualTo("…/[Documents]/cgeo");
-        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_EXAMPLE_3))).isEqualTo("…/Download/cgeo");
-        assertThat(UriUtils.toUserDisplayableString(Uri.parse(DOC_URI_COMPLICATED))).isEqualTo("…/[Documents]/cgeo/gpx/route_2021-01-06_17-14-08-4.gpx");
+        int idx = 1;
+        for (String[] uriDisplayTestCase : URI_DISPLAY_TESTS) {
+            final Uri uri = uriDisplayTestCase[2] == null ? null : Uri.parse(uriDisplayTestCase[2]);
+            assertThat(UriUtils.toUserDisplayableString(uri)).as("Test Case " + idx + " of " + URI_DISPLAY_TESTS.length + ": " + uriDisplayTestCase[0]).isEqualTo(uriDisplayTestCase[1]);
+            idx++;
+        }
     }
 
     @Test
