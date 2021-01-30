@@ -801,7 +801,6 @@
     <string name="sendToCgeo_no_registration">Het is c:geo niet gelukt om de caches te downloaden. De registratie van send2cgeo is verlopen. Registreer s.v.p. in de instellingen.</string>
     <!-- Content Storage -->
     <string name="contentstorage_grantaccess_dialog_title">Toegang verlenen voor gegevensopslag</string>
-    <string name="contentstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo heeft een lokale map nodig om gegevens zoals GPX bestanden, back-ups en veldnotities op te slaan. Vanaf Android 11 dient de toestemming om deze map te gebruiken expliciet worden verleend door de gebruiker. Daarom gebruikt c:geo vanaf nu deze nieuwe methode om uw gegevens op te slaan.</p><p>Selecteer of maak zo\'n map op je apparaat in het volgende dialoogvenster. Als je c:geo van een vorige versie bijwerkt, selecteer dan de bestaande map \"cgeo\" op het hoofdniveau van uw apparaat opslag.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_title">Map %s wijzigen</string>
     <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>De map %s is momenteel ingesteld op \'%s\' en bevat %d bestand(en) en %d submap(pen).</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Je kunt ervoor kiezen om de standaard map \'%s\' of een door gebruiker gedefinieerde map te kiezen</p>]]></string>
