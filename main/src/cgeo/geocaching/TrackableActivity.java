@@ -44,7 +44,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -53,6 +52,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.text.HtmlCompat;
+import androidx.core.widget.NestedScrollView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -111,7 +111,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        onCreate(savedInstanceState, R.layout.viewpager_activity);
+        onCreate(savedInstanceState, R.layout.cachedetail_activity);
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.trackable));
@@ -281,6 +281,11 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         return super.onPrepareOptionsMenu(menu);
     }
 
+    @Override
+    public void pullToRefreshActionTrigger() {
+        refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
+    }
+
     public void displayTrackable() {
         if (trackable == null) {
             Dialogs.dismiss(waitDialog);
@@ -409,7 +414,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         return new ImmutablePair<>(pages, 0);
     }
 
-    public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+    public class DetailsViewCreator extends AbstractCachingPageViewCreator<NestedScrollView> {
 
         @BindView(R.id.goal_box) protected LinearLayout goalBox;
         @BindView(R.id.goal) protected TextView goalTextView;
@@ -420,8 +425,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         @BindView(R.id.image) protected LinearLayout imageView;
 
         @Override
-        public ScrollView getDispatchedView(final ViewGroup parentView) {
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.trackable_details_view, parentView, false);
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+        public NestedScrollView getDispatchedView(final ViewGroup parentView) {
+            view = (NestedScrollView) getLayoutInflater().inflate(R.layout.trackable_details_view, parentView, false);
             ButterKnife.bind(this, view);
 
             final CacheDetailsCreator details = new CacheDetailsCreator(TrackableActivity.this, detailsList);
