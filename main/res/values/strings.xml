@@ -2056,10 +2056,8 @@
     <string name="downloadmap_mapfile">map file</string>
     <string name="downloadmap_retrieving_directory_data">Retrieving directory data…</string>
     <string name="downloadmap_checking_for_updates">Checking for updates…</string>
-    <string name="downloadmap_source_mapsforge_name" translatable="false">Mapsforge</string>
-    <string name="downloadmap_source_mapsforge_info">Basic maps, no map themes required</string>
-    <string name="downloadmap_source_openandromaps_name" translatable="false">OpenAndroMaps</string>
-    <string name="downloadmap_source_openandromaps_info">Detailed maps, require map theme "Elevate" to be installed manually</string>
+    <string name="mapserver_mapsforge_info">Basic maps, no map themes required</string>
+    <string name="mapserver_openandromaps_info">Detailed maps, require map theme \"Elevate\"</string>
 
     <!-- history track -->
     <string name="map_clear_trailhistory">Clear history track</string>

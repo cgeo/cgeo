@@ -14,11 +14,29 @@
         android:text="@string/downloadmap_checkforupdates_button"
         android:visibility="gone" />
 
-    <Spinner
-        android:id="@+id/downloader_type"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp" />
+        android:paddingRight="8dip"
+        >
+
+        <Spinner
+            android:id="@+id/downloader_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:layout_toLeftOf="@id/like_it"/>
+
+        <Button
+            android:id="@+id/like_it"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_menu_heart"
+            android:gravity="right|center_vertical"
+            android:layout_alignParentRight="true"
+            android:text="@null"/>
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/downloader_info"

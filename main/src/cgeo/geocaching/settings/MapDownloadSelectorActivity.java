@@ -14,6 +14,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.OfflineMapUtils;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
@@ -51,6 +52,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
     protected @BindView(R.id.downloader_type) Spinner downloaderType;
     protected @BindView(R.id.downloader_info) TextView downloaderInfo;
     protected @BindView(R.id.check_for_updates) Button checkForUpdates;
+    protected @BindView(R.id.like_it) Button likeIt;
     private AbstractMapDownloader current;
     private ArrayList<OfflineMap.OfflineMapTypeDescriptor> spinnerData = new ArrayList<>();
 
@@ -242,6 +244,12 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             @Override
             public void onNothingSelected(final AdapterView<?> parent) {
                 // deliberately left empty
+            }
+        });
+        likeIt.setOnClickListener(v -> ShareUtils.openUrl(this, current.likeItUrl));
+        downloaderInfo.setOnClickListener(v -> {
+            if (StringUtils.isNotBlank(current.projectUrl)) {
+                ShareUtils.openUrl(this, current.projectUrl);
             }
         });
     }

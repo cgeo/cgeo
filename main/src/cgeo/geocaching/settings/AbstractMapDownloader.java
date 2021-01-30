@@ -17,13 +17,20 @@ public abstract class AbstractMapDownloader {
     public Uri mapBase;
     public String mapSourceName;
     public String mapSourceInfo;
+    public String projectUrl;
+    public String likeItUrl;
     public static final String oneDirUp = CgeoApplication.getInstance().getString(R.string.downloadmap_onedirup);
 
-    AbstractMapDownloader(final OfflineMap.OfflineMapType offlineMapType, final @StringRes int mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo) {
+    AbstractMapDownloader(final OfflineMap.OfflineMapType offlineMapType, final @StringRes int mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo, final @StringRes int projectUrl, final @StringRes int likeItUrl) {
         this.offlineMapType = offlineMapType;
         this.mapBase = Uri.parse(CgeoApplication.getInstance().getString(mapBase));
         this.mapSourceName = CgeoApplication.getInstance().getString(mapSourceName);
         this.mapSourceInfo = mapSourceInfo == 0 ? "" : CgeoApplication.getInstance().getString(mapSourceInfo);
+        this.projectUrl = projectUrl == 0 ? "" : CgeoApplication.getInstance().getString(projectUrl);
+        if (projectUrl != 0) {
+            this.mapSourceInfo += (mapSourceInfo != 0 ? "\n" : "") + "(" + this.projectUrl + ")";
+        }
+        this.likeItUrl = likeItUrl == 0 ? "" : CgeoApplication.getInstance().getString(likeItUrl);
     }
 
     // find available maps, dir-up, subdirs
