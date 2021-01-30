@@ -70,6 +70,11 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      */
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    /**
+     * Set if the content is refreshable. Defaults to true if the Activity contains a {@link SwipeRefreshLayout}.
+     */
+    private boolean isRefreshable = true;
+
     public interface PageViewCreator {
         /**
          * Returns a validated view.
@@ -263,7 +268,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
                 @Override
                 public void onPageScrollStateChanged(final int state) {
                     if (swipeRefreshLayout != null) {
-                        swipeRefreshLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE);
+                        swipeRefreshLayout.setEnabled(state == ViewPager.SCROLL_STATE_IDLE && isRefreshable);
                     }
                 }
             });
@@ -285,6 +290,17 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      */
     protected void pullToRefreshActionTrigger() {
         // do nothing by default. Should be overwritten by the activity if page is refreshable
+    }
+
+    /**
+     * set if the pull-to-refresh gesture should be enabled for the displayed content
+     */
+    protected void setIsContentRefreshable(final boolean isRefreshable) {
+        this.isRefreshable = isRefreshable;
+
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setEnabled(isRefreshable);
+        }
     }
 
     /**
