@@ -108,10 +108,10 @@
     <string name="log_add">Adicionar</string>
     <string name="log_repeat">Repetir último registo</string>
     <string name="log_no_rating">Nenhuma classificação</string>
-    <string name="log_stars_1_description">Muito má</string>
-    <string name="log_stars_15_description">Má</string>
-    <string name="log_stars_2_description">Fraca</string>
-    <string name="log_stars_25_description">Pior que a média</string>
+    <string name="log_stars_1_description">Muito fraca</string>
+    <string name="log_stars_15_description">Fraca</string>
+    <string name="log_stars_2_description">Insuficiente</string>
+    <string name="log_stars_25_description">Abaixo da média</string>
     <string name="log_stars_3_description">Média</string>
     <string name="log_stars_35_description">Melhor que a média</string>
     <string name="log_stars_4_description">Boa</string>
@@ -552,7 +552,7 @@
     <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/individuais</string>
-    <string name="init_summary_friends_and_own_logs_wanted">Mostra uma página adicional com os registos dos seus amigos e registos individuais</string>
+    <string name="init_summary_friends_and_own_logs_wanted">Adiciona um separador contendo um logbook dos registos feitos por si e por amigos</string>
     <string name="init_openlastdetailspage">Mem. último separador visto</string>
     <string name="init_summary_openlastdetailspage">Abre a consulta dos detalhes da cache no último separador visto</string>
     <string name="init_skin">Tema claro</string>
@@ -572,7 +572,7 @@
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
     <string name="init_zoomincludingwaypoints_description">Ao visualizar o mapa a partir de uma cache (função \"mostrar no mapa\"): O zoom do mapa deve ser ajustado para incluir todos os pontos adicionais dessa cache?</string>
     <string name="init_brouterThreshold">Calcular rota</string>
-    <string name="init_brouterThreshold_description">A distância máxima até que uma aplicação auxiliar de ajuda (se instalada) calculará uma rota.</string>
+    <string name="init_brouterThreshold_description">Distância máxima até que a aplicação BRouter (se instalada) irá calcular uma rota.</string>
     <string name="init_brouterShowBothDistances">Mostrar distância em linha recta</string>
     <string name="brouter_recalculating">A recalcular a rota em segundo plano…</string>
     <string name="init_summary_brouterShowBothDistances">Se a navegação estiver activa: Mostra a distância em linha recta além do comprimento da rota.</string>
@@ -801,7 +801,6 @@
     <string name="sendToCgeo_no_registration">O c:geo falhou a transferência das geocaches. O registo do send2cgeo expirou. Por favor, faça o registo nas definições.</string>
     <!-- Content Storage -->
     <string name="contentstorage_grantaccess_dialog_title">Conceder acesso para armazenamento de dados</string>
-    <string name="contentstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>O c:geo precisa de uma pasta local para armazenar dados como ficheiros GPX, cópias de segurança e notas de campo. Recentemente com o Android 11, a permissão para usar esta pasta deve ser explicitamente concedida pelo utilizador. Assim, a partir de agora, o c:geo usa este novo método para armazenar os seus dados.</p><p>Na caixa de diálogo a seguir, por favor seleccione ou crie essa pasta no seu dispositivo. Se actualizou o c:geo de uma versão anterior, seleccione a pasta "cgeo" existente no nível de raiz do armazenamento do seu dispositivo.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_title">Alterar pasta %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>A pasta %s está actualmente definida como \'%s\' e contém %d ficheiro(s) e %d subpasta(s).</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Pode optar por usar a pasta padrão \'%s\' ou seleccionar uma pasta definida pelo utilizador.</p>]]></string>
