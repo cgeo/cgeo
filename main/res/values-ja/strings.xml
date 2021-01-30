@@ -800,7 +800,6 @@
     <string name="sendToCgeo_no_registration">キャッシュ情報がダウンロードできませんでした。Send2cgeoの有効期限が過ぎました。再登録してください</string>
     <!-- Content Storage -->
     <string name="contentstorage_grantaccess_dialog_title">データストレージへのアクセス許可</string>
-    <string name="contentstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geoには、GPXファイル、バックアップ、フィールドノートなどのデータを保存するためのローカルフォルダが必要です。 Android 11の最新版では、このフォルダを使用する権限をユーザーが明示的に許可する必要があります。 今後、c:geoはこの新しい方法を使用してデータを保存します。 </p><p>次のダイアログで、デバイス上にそのフォルダを選択または作成してください。 以前のバージョンからc:geoをアップグレードした場合は、デバイスストレージのルートレベルにある既存のフォルダ「cgeo」を選択してください。</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_title">%sフォルダを変更</string>
     <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>%sフォルダ は「%s」に設定されており、%dファイルと%dサブフォルダが含まれています。</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>デフォルトのフォルダ「%s」を使用するか、ユーザー定義のフォルダを選択することができます。</p>]]></string>
