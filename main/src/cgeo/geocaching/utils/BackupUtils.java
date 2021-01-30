@@ -289,7 +289,7 @@ public class BackupUtils extends Activity {
             final SQLiteDatabase backup = SQLiteDatabase.openDatabase(sourceFile.getPath(), null, OPEN_READONLY);
             final int backupDbVersion = backup.getVersion();
             final int expectedDbVersion = DataStore.getExpectedDBVersion();
-            if (!DataStore.versionsAreCompatible(backupDbVersion, expectedDbVersion)) {
+            if (!DataStore.versionsAreCompatible(backup, backupDbVersion, expectedDbVersion)) {
                 Dialogs.message(activityContext, R.string.init_restore_failed, String.format(activityContext.getString(R.string.init_restore_version_error), expectedDbVersion, backupDbVersion));
             } else {
                 final Resources res = activityContext.getResources();
