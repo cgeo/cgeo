@@ -632,7 +632,7 @@
     <string name="init_listdisplay">Additional lists</string>
     <string name="init_summary_listdisplay">Show membership of caches to additional lists in a cache list</string>
     <string name="init_livelist">Show Direction</string>
-    <string name="init_summary_livelist">Show direction of caches in the list</string>
+    <string name="init_summary_livelist">Show an arrow with compass direction for caches in a list</string>
 
     <!-- backup / restore -->
     <string name="init_backup_title">Create Backup</string>
