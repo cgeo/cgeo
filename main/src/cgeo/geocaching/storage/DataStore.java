@@ -205,14 +205,14 @@ public class DataStore {
 
     /**
      * The following constant lists all DBVERSIONS whose changes with the previous version
-     * are DOWNWARD-COMPATIBLE. MOre precisely: if a version x shows up in this list, then this
+     * are DOWNWARD-COMPATIBLE. More precisely: if a version x shows up in this list, then this
      * means that c:geo version written for DB version "x-1" can also work with this database.
      *
      * As a rule-of-thumb, a db version is downward compatible if:
      * * it only adds columns which are nullable or provide default values (so previous c:geo-versions don't fail on insert/update)
      * * it only adds tables which don't necessarily need an entry (because previous c:geo-versions will not write anything in there)
      * * migration from "x-1" to x in {@link DbHelper#onUpgrade(SQLiteDatabase, int, int)} is programmed such that it can handle it if later
-     *    db is "upgraded" again from "x-1" to x (this is usually the case if adding tables/columns will not fail if oject already exists in db)
+     *    db is "upgraded" again from "x-1" to x (this is usually the case if adding tables/columns will not fail if object already exists in db)
      *
      * The following changes usually make a DB change NOT downward compatible
      * * changing name, type or other attributes for a column
@@ -481,8 +481,8 @@ public class DataStore {
         return dbVersion;
     }
 
-    public static boolean versionsAreCompatible(final int oldVersion, final int newVersion) {
-        final Set<Integer> downgradeableVersions = DBDowngradeableVersions.load(database);
+    public static boolean versionsAreCompatible(final SQLiteDatabase databaseToCheck, final int oldVersion, final int newVersion) {
+        final Set<Integer> downgradeableVersions = DBDowngradeableVersions.load(databaseToCheck);
         if (newVersion < oldVersion) {
             for (int version = oldVersion; version > newVersion; version--) {
                 if (!downgradeableVersions.contains(version)) {
