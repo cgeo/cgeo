@@ -85,7 +85,7 @@ public class ContentStorageActivityHelper {
 
         final PersistableFolder folder = PersistableFolder.BASE;
 
-        if (folder.isUserDefined() && ContentStorage.get().ensureAndAdjustFolder(folder)) {
+        if (baseFolderIsSet()) {
             //everything is as we want it
             return;
         }
@@ -103,6 +103,11 @@ public class ContentStorageActivityHelper {
             .create();
         dialog.show();
         Dialogs.makeLinksClickable(dialog);
+    }
+
+    public static boolean baseFolderIsSet() {
+        final PersistableFolder folder = PersistableFolder.BASE;
+        return folder.isUserDefined() && ContentStorage.get().ensureAndAdjustFolder(folder);
     }
 
     /** Asks user to select a folder for single-time-usage (location and permission is not persisted) */
@@ -193,7 +198,7 @@ public class ContentStorageActivityHelper {
             return false;
         }
         if (runningIntentData == null) {
-            // this is not an error! It might mean that activity was requested by another instance of the Helper (thus usind same requestCodes)
+            // this is not an error! It might mean that activity was requested by another instance of the Helper (thus using same requestCodes)
             // -> signal that result was NOT handled
             return false;
         }

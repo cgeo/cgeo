@@ -11,7 +11,9 @@ import cgeo.geocaching.settings.GCAuthorizationActivity;
 import cgeo.geocaching.settings.MapDownloadSelectorActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -41,13 +43,15 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private enum WizardStep {
         WIZARD_START,
-        WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION,
+        WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION, WIZARD_PERMISSIONS_BASEFOLDER,
         WIZARD_PLATFORMS,
         WIZARD_ADVANCED,
         WIZARD_END
     }
+
     private WizardStep step = WizardStep.WIZARD_START;
     private boolean returning = false;
+    private ContentStorageActivityHelper contentStorageActivityHelper = null;
 
     private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
 
@@ -126,6 +130,11 @@ public class InstallWizardActivity extends AppCompatActivity {
                 text.setText(R.string.location_permission_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestLocation, 0);
                 break;
+            case WIZARD_PERMISSIONS_BASEFOLDER:
+                title.setText(R.string.wizard_permissions_title);
+                text.setText(R.string.wizard_basefolder_request_explanation);
+                setNavigation(this::gotoPrevious, 0, null, 0, this::requestBasefolder, 0);
+                break;
             case WIZARD_PLATFORMS:
                 title.setText(R.string.wizard_platforms_title);
                 text.setText(R.string.wizard_platforms_intro);
@@ -162,6 +171,7 @@ public class InstallWizardActivity extends AppCompatActivity {
                 info.append(getString(R.string.wizard_status_title)).append(":\n")
                     .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
                     .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                    .append(getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
                     .append(getString(R.string.wizard_status_platform));
                 boolean platformConfigured = false;
                 final StringBuilder platforms = new StringBuilder();
@@ -269,6 +279,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (hasStoragePermission(this) && hasLocationPermission(this))))
             || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission(this)))
             || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission(this)))
+            || (step == WizardStep.WIZARD_PERMISSIONS_BASEFOLDER && ContentStorageActivityHelper.baseFolderIsSet())
             ;
     }
 
@@ -293,7 +304,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     public static boolean isConfigurationOk(final Context context) {
         final boolean isPlatformConfigured = ConnectorFactory.getActiveConnectorsWithValidCredentials().length > 0;
-        return hasStoragePermission(context) && hasLocationPermission(context) && isPlatformConfigured;
+        return hasStoragePermission(context) && hasLocationPermission(context) && isPlatformConfigured && ContentStorageActivityHelper.baseFolderIsSet();
     }
 
     private void requestStorage() {
@@ -312,6 +323,20 @@ public class InstallWizardActivity extends AppCompatActivity {
         if (!hasLocationPermission(this)) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PermissionRequestContext.InstallWizardActivity.getRequestCode());
         }
+    }
+
+    private void requestBasefolder() {
+        gotoNext(); // callback seems to be called on "cancel" only? So we need to force a gotoNext() here instead of applying it as callback
+        if (!ContentStorageActivityHelper.baseFolderIsSet()) {
+            getContentStorageHelper().selectPersistableFolder(PersistableFolder.BASE, null);
+        }
+    }
+
+    private ContentStorageActivityHelper getContentStorageHelper() {
+        if (contentStorageActivityHelper == null) {
+            contentStorageActivityHelper = new ContentStorageActivityHelper(this);
+        }
+        return contentStorageActivityHelper;
     }
 
     private boolean hasValidGCCredentials() {
@@ -350,7 +375,7 @@ public class InstallWizardActivity extends AppCompatActivity {
                     gotoNext();
                 }, dialog -> { });
             }
-        } else {
+        } else if (contentStorageActivityHelper == null || !contentStorageActivityHelper.onActivityResult(requestCode, resultCode, data)) {
             MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data);
         }
     }
