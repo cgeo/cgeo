@@ -582,4 +582,47 @@ public class WaypointTest {
         assertThat(wp.getNote()).isEmpty();
         assertThat(wp.getUserNote()).isEqualTo("\n--\nuser note");
     }
+
+    @Test
+    public void testGetDefaultWaypointName() {
+        final Geocache cache = new Geocache();
+        // all test cases check numbering across different waypoint types
+
+        // simplest case: number is at the end, add 1
+        cache.addOrChangeWaypoint(new Waypoint("", null, "Test 1", "", "", WaypointType.OWN), false);
+        final String new1 = Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT);
+        assertThat(WaypointType.WAYPOINT.getNameForNewWaypoint() + " 2").isEqualTo(new1);
+
+        // a bit more tricky: number somewhere in the middle
+        cache.addOrChangeWaypoint(new Waypoint("", null, "Test 12 - Error?", "", "", WaypointType.OWN), false);
+        final String new2 = Waypoint.getDefaultWaypointName(cache, WaypointType.OWN);
+        assertThat(WaypointType.OWN.getNameForNewWaypoint() + " 13").isEqualTo(new2);
+
+        // even more tricky: two numbers in the name - should find the higher one
+        cache.addOrChangeWaypoint(new Waypoint("", null, "Test 20 - Error 18?", "", "", WaypointType.TRAILHEAD), false);
+        final String new3 = Waypoint.getDefaultWaypointName(cache, WaypointType.PUZZLE);
+        assertThat(WaypointType.PUZZLE.getNameForNewWaypoint() + " 21").isEqualTo(new3);
+
+        // should not find numbers from GC-codes
+        cache.addOrChangeWaypoint(new Waypoint("", null, "GC123AB", "", "", WaypointType.WAYPOINT), false);
+        final String new4 = Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT);
+        assertThat(WaypointType.WAYPOINT.getNameForNewWaypoint() + " 21").isEqualTo(new4);
+
+        // should not find parts of floats
+        cache.addOrChangeWaypoint(new Waypoint("", null, "Pi 3.1415", "", "", WaypointType.WAYPOINT), false);
+        final String new5 = Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT);
+        assertThat(WaypointType.WAYPOINT.getNameForNewWaypoint() + " 21").isEqualTo(new5);
+
+        // parking waypoints should be named "Parking", "Parking 2" etc.
+        final String new6 = Waypoint.getDefaultWaypointName(cache, WaypointType.PARKING);
+        assertThat(WaypointType.PARKING.getNameForNewWaypoint()).isEqualTo(new6);
+        cache.addOrChangeWaypoint(new Waypoint("", null, new6, "", "", WaypointType.PARKING), false);
+        final String new7 = Waypoint.getDefaultWaypointName(cache, WaypointType.PARKING);
+        assertThat(WaypointType.PARKING.getNameForNewWaypoint() + " 2").isEqualTo(new7);
+
+        // a final waypoint should not be taken into account for other waypoint types
+        cache.addOrChangeWaypoint(new Waypoint("", null, WaypointType.FINAL.getNameForNewWaypoint() + " 27", "", "", WaypointType.FINAL), false);
+        final String new8 = Waypoint.getDefaultWaypointName(cache, WaypointType.PUZZLE);
+        assertThat(WaypointType.PUZZLE.getNameForNewWaypoint() + " 21").isEqualTo(new8);
+    }
 }
