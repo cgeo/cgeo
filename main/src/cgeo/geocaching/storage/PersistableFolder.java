@@ -120,9 +120,9 @@ public enum PersistableFolder {
     }
 
     /** Sets a new user-defined location (or "null" if default shall be used). Should be called ONLY by {@link ContentStorage} */
-    protected void setUserDefinedFolder(@Nullable final Folder userDefinedFolder) {
+    protected void setUserDefinedFolder(@Nullable final Folder userDefinedFolder, final boolean setByUser) {
         this.userDefinedFolder = userDefinedFolder;
-        Settings.setPersistableFolder(this, userDefinedFolder == null ? null : userDefinedFolder.toConfig());
+        Settings.setPersistableFolder(this, userDefinedFolder == null ? null : userDefinedFolder.toConfig(), setByUser);
         notifyChanged();
     }
 

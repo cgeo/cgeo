@@ -402,8 +402,8 @@ public class ContentStorage {
 
 
     /** Sets a new User-defined Folder for a {@link PersistableFolder}. */
-    public void setUserDefinedFolder(final PersistableFolder folder, final Folder userDefinedFolder) {
-        folder.setUserDefinedFolder(userDefinedFolder);
+    public void setUserDefinedFolder(final PersistableFolder folder, final Folder userDefinedFolder, final boolean setByUser) {
+        folder.setUserDefinedFolder(userDefinedFolder, setByUser);
         documentAccessor.releaseOutdatedUriPermissions();
     }
 
@@ -451,7 +451,7 @@ public class ContentStorage {
             }
 
             final String folderUserdefined = folder.toUserDisplayableValue();
-            setUserDefinedFolder(folder, null);
+            setUserDefinedFolder(folder, null, false);
             final String folderDefault = folder.toUserDisplayableValue();
             if (!ensureFolder(folder.getFolder(), folder.needsWrite())) {
                 reportProblem(R.string.contentstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, null);
