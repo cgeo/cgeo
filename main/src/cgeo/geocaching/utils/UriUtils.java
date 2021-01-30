@@ -1,21 +1,38 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
+
+import android.content.Context;
 import android.content.UriPermission;
 import android.net.Uri;
+import android.os.Build;
+import android.os.storage.StorageManager;
+import android.os.storage.StorageVolume;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+
 
 
 /**
  * Utility class prvoding helper methods when dealing with Uris
  */
 public final class UriUtils {
+
+    //constants for a unit test volume entry. VolumeId must be one which does NOT OCCUR in real life!
+    //(volumneIds in real life are typically of form xxxx-xxxx where x are hexadecimal digits e.g. 11F2-3A16)
+    public static final String UNITTEST_VOLUME_ID = "TEST-1111-2222";
+    public static final String UNITTEST_VOLUME_NAME = "TEST-SDCARD";
+
+    private static final Map<String, String> VOLUME_MAP = getVolumeMap();
 
     private UriUtils() {
         //no instance wanted
@@ -25,27 +42,104 @@ public final class UriUtils {
     @NonNull
     public static String toUserDisplayableString(final Uri uri) {
         if (uri == null) {
-            return "";
+            return "---";
         }
-        String uriString = uri.getPath();
-
-        final String[] tokens = uriString.split(":");
-
-        if (tokens.length > 1) {
-            final String uriFirstPart = tokens[0];
-            //"firstpart" this might be something like /tree/primary (points to root) or /tree/home (points to documents)
-            String prepend = "…/";
-            if ("/tree/home".equals(uriFirstPart)) {
-                prepend = prepend + "[Documents]/";
-            }
-           uriString = prepend + tokens[tokens.length - 1];
+        //Handle special File case
+        if (isFileUri(uri)) {
+            return uri.getPath();
         }
+
+        String uriString = uri.getLastPathSegment();
+        if (uriString == null) {
+            return "---";
+        }
+
+        //handle the non-content-case (e.g. web Uris)
+        if (!isContentUri(uri)) {
+            return uri.toString();
+        }
+
+        String volumeId = null;
+        //check if there'sa volume
+        final int idx = uriString.indexOf(":");
+        if (idx >= 0) {
+            volumeId = uriString.substring(0, idx);
+            uriString = uriString.substring(idx + 1);
+        }
+
+        //construct base Uri
+        while (uriString.startsWith("/")) {
+            uriString = uriString.substring(1);
+        }
+        uriString = "/" + uriString;
+
+        //add volumne name if available/feasible
+        if (volumeId != null) {
+           final String volumeName = VOLUME_MAP.get(volumeId);
+           if (volumeName != null) {
+               uriString = volumeName + uriString;
+           } else if (!"primary".equals(volumeId)) {
+               uriString = volumeId + uriString;
+           }
+        }
+
+        //add provider info if available/feasible
+        final String providerId = uri.getAuthority();
+        //default provider would be "com.android.externalstorage.documents", we don't add anything for this one
+        if ("com.android.providers.downloads.documents".equals(providerId)) {
+            uriString = "Downloads:" + uriString;
+        }
+
         while (uriString.endsWith("/")) {
             uriString = uriString.substring(0, uriString.length() - 1);
         }
         return uriString;
     }
 
+    /**
+     * Get a mapping for all current volumes (UUIDs) to their display name.
+     * This might work better or worse depending on Android version and context state. In any case a map object is returned
+     *
+     * Output (if context is available) is most likely a map with
+     * * a null-key for internal storage description
+     * * additional keys for each external storage with its Id as used in 'tree' expression and its name
+     *
+     * Real-world example: SDK29 emulator returns maps with at least the following entries:
+     * * null -> "internal shared storage" (this one is returned by Android Volume Manager. It will not be used for display)
+     * * "16EA-2F02" -> "SDCARD" (that's a typical entry for an SD card as returned by Android Volume Manager)
+     * * "primary" -> null (used for internal storage in Uris. We add the entry to document that "primary" exists but should not be displayed)
+     * * some special volume mappings e.g. for "home" (points to "Document" directory)
+     * * A dummy entry for unit-tests
+     *
+     * In an Uri, the "volume id" is typically written directly behind "/tree". In the following uri
+     * the "volumeId" is "primary" (the most common one, refering to internal storage):
+     * content://com.android.externalstorage.documents/tree/primary%3Acgeo
+     */
+    @NonNull
+    private static Map<String, String> getVolumeMap() {
+        final Map<String, String> volumeMap = new HashMap<>();
+
+        //add a fake volume entry for unit tests. This entry has an uuid which will not be used in real-life
+        volumeMap.put(UNITTEST_VOLUME_ID, UNITTEST_VOLUME_NAME);
+
+        //add special volume ids that we know of
+        volumeMap.put("primary", null); //the most common one where we will NOT put text for
+        volumeMap.put("home", "[Documents]"); //example Uri pointing to /Documents/cgeo: content://com.android.externalstorage.documents/tree/home%3Acgeo
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && CgeoApplication.getInstance() != null) {
+            final Context context = CgeoApplication.getInstance().getApplicationContext();
+            final StorageManager storageManager = ContextCompat.getSystemService(context, StorageManager.class);
+            final List<StorageVolume> storageVolumes = storageManager.getStorageVolumes();
+            for (StorageVolume sv : storageVolumes) {
+                volumeMap.put(sv.getUuid(), sv.getDescription(context));
+            }
+        } else {
+            //at least we create a default entry for the primary drive
+            volumeMap.put(null, "internal shared storage");
+        }
+        return volumeMap;
+    }
+    
     /** Tries to extract the last path segment name of a given Uri, removing "/" and such */
     @Nullable
     public static String getLastPathSegment(final Uri uri) {
