@@ -801,7 +801,6 @@
     <string name="sendToCgeo_no_registration">c:geo konnte die Caches nicht laden. Die Registrierung für send2cgeo ist ungültig. Bitte in den Einstellungen neu registrieren.</string>
     <!-- Content Storage -->
     <string name="contentstorage_grantaccess_dialog_title">Zugriff für Datenspeicherung gewähren</string>
-    <string name="contentstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo benötigt einen lokalen Ordner, um Daten wie GPX-Dateien, Sicherungen und Feldnotizen zu speichern. Spätestens mit Android 11 muss der Benutzer explizit die Berechtigung zur Verwendung dieses Ordners gewähren. Deshalb verwendet c:geo ab sofort diese neue Methode, um deine Daten zu speichern.</p><p>Im folgenden Dialog wählst oder erstellst du einen solchen Ordner auf deinem Gerät. Wenn du c:geo von einer früheren Version aktualisiert hast, wähle den existierenden Ordner "cgeo" auf der untersten Ebene deines Gerätespeichers.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_title">Ordner ändern %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>Der Ordner %s ist derzeit auf \'%s\' gesetzt und enthält %d Datei(en) und %d Unterordner.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Du kannst den Standardordner \'%s\' verwenden oder einen benutzerdefinierten Ordner wählen.</p>]]></string>
