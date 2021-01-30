@@ -370,7 +370,7 @@ public class ContentStorageActivityHelper {
 
     private void finalizePersistableFolderSelection(final boolean success, final PersistableFolder folder, final Uri selectedUri, final Consumer<PersistableFolder> callback) {
         if (success) {
-            ContentStorage.get().setUserDefinedFolder(folder, Folder.fromDocumentUri(selectedUri));
+            ContentStorage.get().setUserDefinedFolder(folder, Folder.fromDocumentUri(selectedUri), true);
             report(false, R.string.contentstorage_folder_selection_success, folder);
         } else {
             report(true, R.string.contentstorage_folder_selection_aborted, folder);

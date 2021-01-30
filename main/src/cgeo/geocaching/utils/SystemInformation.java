@@ -134,7 +134,7 @@ public final class SystemInformation {
             final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
             body.append("\n- ").append(folder.toString())
                 .append(" (Uri: ").append(ContentStorage.get().getUriForFolder(folder.getFolder()))
-                .append(", Available:").append(isAvailable).append(", Fiies: ").append(files.left).append(", subdirs:").append(files.right)
+                .append(", Available:").append(isAvailable).append(", Files: ").append(files.left).append(", subdirs:").append(files.right)
                 .append(", free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on device: ").append(freeSpace.right).append(")");
         }
     }

@@ -64,6 +64,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  */
 public class Settings {
 
+    private static final String LEGACY_UNUSED_MARKER = "unused::";
+
     /**
      * Separator char for preferences with multiple elements.
      */
@@ -287,11 +289,6 @@ public class Settings {
 
             e.putInt(getKey(R.string.pref_settingsversion), 4); // mark migrated
             e.apply();
-        }
-
-        if (currentVersion < 5) {
-            migratePersistableFolderAndUri();
-            putInt(R.string.pref_settingsversion, 5);
         }
     }
 
@@ -1567,47 +1564,60 @@ public class Settings {
     }
 
     /** sets the user-defined folder-config for a persistable folder. Can be set to null */
-    public static void setPersistableFolder(@NonNull final PersistableFolder folder, @Nullable final String folderString) {
+    public static void setPersistableFolder(@NonNull final PersistableFolder folder, @Nullable final String folderString, final boolean setByUser) {
         putString(folder.getPrefKeyId(), folderString);
+        if (setByUser) {
+            handleLegacyValuesOnSet(folder.getPrefKeyId());
+        }
     }
 
     /** gets the user-defined uri for a persistable folder. Can be null */
     @Nullable
     public static String getPersistableFolder(@NonNull final PersistableFolder folder) {
-        return getString(folder.getPrefKeyId(), null);
+        return getString(folder.getPrefKeyId(), getLegacyValue(folder.getPrefKeyId()));
     }
 
     /** sets Uri for persistable uris. Can be set to null */
     public static void setPersistableUri(@NonNull final PersistableUri persistedUri, @Nullable final String uri) {
         putString(persistedUri.getPrefKeyId(), uri);
-    }
+        handleLegacyValuesOnSet(persistedUri.getPrefKeyId());   }
 
     /** gets the persisted uri for a persistable uris. Can be null */
     @Nullable
     public static String getPersistableUri(@NonNull final PersistableUri persistedUri) {
-        return getString(persistedUri.getPrefKeyId(), null);
+        return getString(persistedUri.getPrefKeyId(), getLegacyValue(persistedUri.getPrefKeyId()));
     }
 
-    /** For Migration towards Android 11: returns any legacy value which might be stored in old settings for certain folders */
-    private static void migratePersistableFolderAndUri() {
-        migrateLegacyValue(R.string.pref_persistablefolder_offlinemaps, "mapDirectory");
-        //Do not yet migrate legacy settings for offline themes, they are not migrated to SAF yet
-        //migrateLegacyValue(R.string.pref_persistablefolder_offlinemapthemes, "renderthemepath");
-        migrateLegacyValue(R.string.pref_persistablefolder_gpx, "gpxExportDir", "gpxImportDir");
-        migrateLegacyValue(R.string.pref_persistableuri_track, "pref_trackfile");
-    }
-
-    private static void migrateLegacyValue(@NonNull final int prefKeyId, final String ... candidates) {
-        boolean found = false;
-        for (String candidate : candidates) {
-            final String value = getStringDirect(candidate, null);
-            if (value != null) {
-                if (!found) {
-                    putString(prefKeyId, value);
-                }
-                removeDirect(candidate);
-                found = true;
+    private static String getLegacyValue(final int keyId) {
+        for (String legacyKey : getLegacyPreferenceKeysFor(keyId)) {
+            final String value = getStringDirect(legacyKey, null);
+            if (value != null && !value.startsWith(LEGACY_UNUSED_MARKER)) {
+                return value;
             }
+        }
+        return null;
+    }
+
+    private static void handleLegacyValuesOnSet(final int keyId) {
+        //if a new key is actively set for the first time, its existing legacy values are no longer needed
+        for (String legacyKey : getLegacyPreferenceKeysFor(keyId)) {
+            final String value = getStringDirect(legacyKey, null);
+            if (value != null && !value.startsWith(LEGACY_UNUSED_MARKER)) {
+                putStringDirect(legacyKey, LEGACY_UNUSED_MARKER + value);
+            }
+        }
+    }
+
+    private static String[] getLegacyPreferenceKeysFor(final int keyId) {
+        switch (keyId) {
+            case R.string.pref_persistablefolder_offlinemaps:
+                return new String[]{"mapDirectory"};
+            case R.string.pref_persistablefolder_gpx:
+                return new String[]{"gpxExportDir", "gpxImportDir"};
+            case R.string.pref_persistableuri_track:
+                return new String[]{"pref_trackfile"};
+            default:
+                return new String[0];
         }
     }
 

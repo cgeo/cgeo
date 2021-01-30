@@ -101,7 +101,7 @@ public class ContentStorageTest extends CGeoTestCase {
     public void tearDown() throws Exception {
         cleanup();
         //restore test folder user-defined uri
-        PersistableFolder.TEST_FOLDER.setUserDefinedFolder(Folder.fromConfig(testFolderConfig));
+        PersistableFolder.TEST_FOLDER.setUserDefinedFolder(Folder.fromConfig(testFolderConfig), false);
 
         //call super.teardown AFTER all own cleanup (because this seems to reset all members vars including testUri)
         super.tearDown();
@@ -449,7 +449,7 @@ public class ContentStorageTest extends CGeoTestCase {
         folderNotNotified.registerChangeListener(this, p -> notificationMessages.add("notnotified:" + p.name()));
 
         //trigger change
-        PersistableFolder.TEST_FOLDER.setUserDefinedFolder(null);
+        PersistableFolder.TEST_FOLDER.setUserDefinedFolder(null, false);
 
         //check
         assertThat(notificationMessages.size()).isEqualTo(2);
