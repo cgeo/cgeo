@@ -905,6 +905,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
 
         setCacheTitleBar(cache);
+        setIsContentRefreshable(cache.supportsRefresh());
 
         // reset imagesList so Images view page will be redrawn
         imagesList = null;
