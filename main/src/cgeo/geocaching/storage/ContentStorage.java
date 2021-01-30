@@ -305,6 +305,10 @@ public class ContentStorage {
 
     /** Opens an Uri for reading. Remember to close stream after usage! Returns null if Uri can't be opened for reading. */
     public InputStream openForRead(final Uri uri) {
+        return openForRead(uri, false);
+    }
+
+    public InputStream openForRead(final Uri uri, final boolean suppressWarningOnFailure) {
         if (uri == null) {
             return null;
         }
@@ -312,7 +316,9 @@ public class ContentStorage {
         try {
             return this.context.getContentResolver().openInputStream(uri);
         } catch (IOException | SecurityException se) {
-            reportProblem(R.string.contentstorage_err_read_failed, se, uri);
+            if (!suppressWarningOnFailure) {
+                reportProblem(R.string.contentstorage_err_read_failed, se, uri);
+            }
         }
         return null;
     }
@@ -421,22 +427,28 @@ public class ContentStorage {
     /** Tries to read and (optionally) write something to the given folder location, returns whether this was successful or not */
     private boolean tryTestReadWriteToFolder(final Folder folder, final boolean testWrite) {
 
-        Uri testDoc = null;
-        if (testWrite) {
-            testDoc = create(folder, FileNameCreator.DEFAULT, false);
-            if (testDoc == null) {
+        try {
+            Uri testDoc = null;
+            if (testWrite) {
+                testDoc = create(folder, FileNameCreator.DEFAULT, false);
+                if (testDoc == null) {
+                    return false;
+                }
+            }
+
+            //actually, on folder without write permission, we can not do much. Simply list the content...
+            final List<FileInformation> files = list(folder);
+
+            if (testWrite && files.size() < 1) {
                 return false;
             }
-        }
 
-        //actually, on folder without write permission, we can not do much. Simply list the content...
-        final List<FileInformation> files = list(folder);
-
-        if (testWrite && files.size() < 1) {
+            return testDoc == null || delete(testDoc);
+        } catch (RuntimeException re) {
+            //if something unexpected happens, then we consider this folder non-readable/writeable
+            Log.e("Error on testing read/write of folder " + folder + ", testWrite=" + testWrite, re);
             return false;
         }
-
-        return testDoc == null || delete(testDoc);
     }
 
     /** Gets this folder's current location. Tries to adjust folder location if no permission given. May return null if no permission found */

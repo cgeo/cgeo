@@ -12,7 +12,9 @@ import android.content.Intent;
 import android.content.UriPermission;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.DocumentsContract;
+import android.webkit.MimeTypeMap;
 
 import androidx.annotation.NonNull;
 
@@ -27,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
@@ -106,11 +109,59 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         }
         final String docName = createUniqueFilename(name, queryDir(folderUri, new String[]{ DocumentsContract.Document.COLUMN_DISPLAY_NAME }, c -> c.getString(0)));
         try (ContextLogger cLog = new ContextLogger("DocumentFolderAccessor.create %s: %s", folder, name)) {
-            //Do NOT pass a mimeType. It will then be selected based on the file suffix.
-            //Use an empty string for mimeType; null triggers an exception in API21. Tested also in API23, API29, API30
-            return DocumentsContract.createDocument(getContext().getContentResolver(), folderUri, "", docName);
+            return DocumentsContract.createDocument(getContext().getContentResolver(), folderUri, guessMimeTypeFor(docName), docName);
         }
     }
+
+    /** method tested on SDK21, 23, 29 and 30; both with targetSDK=29 and targetSDk=30 */
+    private String guessMimeTypeFor(final String filename) {
+
+        if (StringUtils.isBlank(filename)) {
+            return "";
+        }
+
+        //Note that when passing a wrong mimeType (not fitting to filename suffix),
+        //then most document providers will append the mimeType's default extension
+        //we want to avoid this from happening
+
+        //Android SDK21/22 replace file suffixes with their defaults from mimeType.
+        //This leads to e.g. "image.jpg" to be renamed to "image.jpeg".
+        //->prevent this by using octet-stream for all files
+        if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return "application/octet-stream";
+        }
+
+        //try guess mimeType from filename suffix;
+        String suffix = filename;
+        final int idx = filename.lastIndexOf(".");
+        if (idx >= 0) {
+            suffix = suffix.substring(idx + 1);
+        }
+        final String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(suffix);
+        if (mime != null) {
+            return mime;
+        }
+
+        //special handling of c:geo special files
+        if ("map".equals(suffix)) {
+            return "application/octet-stream";
+        }
+        if ("gpx".equals(suffix)) {
+            //you might be thinking that here "application/xml" or "text/xml" should be returned
+            //but this is not advisable since it would lead Android to append ".xml" to the filename
+            //(would result in filenames like "export.gpx.xml")
+            return "application/octet-stream";
+        }
+
+
+        //as a last resort, return empty string. This seems to work for most of the document providers and API levels
+        //(tested for standard doc provider in APi levels 21,23, 29 and 30. Null triggers an exception in API21)
+        //Noteable exception: "" will trigger exception with "Download" folder provider when the "Download" folder itself is selected.
+        //In this case, ONLY real mime type will help unfortunately. See issue #9903
+        return "";
+    }
+
+
     @Override
     public ContentStorage.FileInformation getFileInfo(@NonNull final Folder folder, final String name) throws IOException {
 

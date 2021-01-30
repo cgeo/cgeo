@@ -355,7 +355,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         final Resources resources = CgeoApplication.getInstance().getResources();
         final List<ImmutablePair<String, Uri>> offlineMaps =
             CollectionStream.of(getOfflineMaps())
-                .filter(fi -> !fi.isDirectory && !fi.name.toLowerCase().endsWith(OfflineMapUtils.INFOFILE_SUFFIX) && isValidMapFile(fi.uri))
+                .filter(fi -> !fi.isDirectory && fi.name.toLowerCase().endsWith(OfflineMapUtils.MAPFILE_SUFFIX) && isValidMapFile(fi.uri))
                 .map(fi -> new ImmutablePair<>(fi.name, fi.uri)).toList();
         Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
         if (offlineMaps.size() > 1) {
