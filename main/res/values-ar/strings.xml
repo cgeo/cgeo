@@ -458,7 +458,6 @@
     <string name="init_choose_list">اطلب القائمة</string>
     <string name="init_summary_choose_list">اسأل أي قائمة لتخزين المخبآت</string>
     <string name="init_livelist">عرض الاتجاه</string>
-    <string name="init_summary_livelist">عرض اتجاه المخبآت على القائمة</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">النسخ الاحتياطي</string>
     <string name="init_backup_running">إنشاء نسخ إحتياطي لبيانات المخبئ&#8230;</string>
@@ -479,7 +478,6 @@
     <string name="settings_info_themes">c:geo يدعم الثيمات المخصصة للخرائط في وضع عدم الاتصال. يمكنك أن تستخدم هذا لتغيير نك تليون الخريطة (مثلا. عرض ليلي للخريطة) أو تسليط الضوء على بعض الأشياء مثل المسارات أو خطوط الطول على الخريطة.</string>
     <string name="init_mapsource_select">اختر مصدر الخريطة</string>
     <string name="init_map_directory_description">الدليل باستخدام الخرائط في وضع عدم الاتصال</string>
-    <string name="init_dataDir">حدد دفتر بيانات العلبة المخبئة</string>
     <string name="init_dataDir_note">قد تختار تخزين بيانات إضافية في العلبة المخبئة (المفشي، ألبوم الصور، &#8230;) في تخزينك الخارجي (تضمينها داخل التخزين أو في بطاقة ذاكرة خارجية اعتماداً على جهازك).</string>
     <string name="init_include_found_status">تضمين حالة \"تم العثور عليها\"</string>
     <string name="init_trackautovisit">زيارة TBs</string>
