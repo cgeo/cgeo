@@ -572,7 +572,6 @@
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Wanneer een enkele cache wordt getoond: Moet zoom worden aangepast om alle waypoints te bevatten?</string>
     <string name="init_brouterThreshold">Route berekenen</string>
-    <string name="init_brouterThreshold_description">Maximale afstand tot welke BRouter helper app (indien geïnstalleerd) een route zal berekenen.</string>
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
     <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
@@ -597,7 +596,6 @@
     <string name="init_listdisplay">Extra lijsten</string>
     <string name="init_summary_listdisplay">Lidmaatschap van caches aan extra lijsten weergeven in een cachelijst</string>
     <string name="init_livelist">Toon richting</string>
-    <string name="init_summary_livelist">Toon richting tot cache in lijst</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Back-up maken</string>
     <string name="init_backup_summary">Houd er rekening mee dat deze functie een back-up kan maken van caches, waypoints &amp; instellingen, maar niet van cache-afbeeldingen. \nOm de gegevens te kunnen herstellen, zelfs na het verliezen van je telefoon, dienen de back-upbestanden te worden gekopieerd naar een onafhankelijke locatie.</string>
@@ -661,7 +659,6 @@
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
     <string name="init_gpx_importexportdir">GPX map</string>
-    <string name="init_dataDir">Selecteer Geocache gegevensmap</string>
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
     <string name="init_maptrail">Geschiedenisspoor tonen</string>
     <string name="init_maptrail_length">Geschiedenisspoor max. lengte</string>
