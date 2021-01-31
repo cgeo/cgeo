@@ -359,7 +359,6 @@
     <string name="init_summary_units">Nota breskar mælieiningar í staðinn fyrir metrakerfið</string>
     <string name="init_log_offline">Skráning án netsambands</string>
     <string name="init_livelist">Sýna átt</string>
-    <string name="init_summary_livelist">Sýna átt kassanna í listanum</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">Öryggisafrit</string>
     <string name="init_backup_running">Bý til öryggisafrit af gagnagrunninum…</string>
