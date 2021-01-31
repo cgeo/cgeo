@@ -561,7 +561,6 @@
     <string name="init_zoomincludingwaypoints">Масштабування містить маршрутні точки</string>
     <string name="init_zoomincludingwaypoints_description">Якщо натискання на один кеш: чи слід коригувати масштабування, щоб включити всі його шляхові точки?</string>
     <string name="init_brouterThreshold">Розрахувати маршрут</string>
-    <string name="init_brouterThreshold_description">Максимальна відстань, до якої зовнішня програма (якщо встановлена) буде вираховувати маршрут.</string>
     <string name="init_brouterShowBothDistances">Показати пряму відстань</string>
     <string name="brouter_recalculating">Переобчислення маршруту у фоновому режимі…</string>
     <string name="init_summary_brouterShowBothDistances">Якщо маршрут активний: відображення прямої відстані в додаток до розрахункової довжини маршруту.</string>
@@ -586,7 +585,6 @@
     <string name="init_listdisplay">Додаткові списки</string>
     <string name="init_summary_listdisplay">Показати членство в кеші в додаткових списках зі схованки</string>
     <string name="init_livelist">Показати напрямок</string>
-    <string name="init_summary_livelist">Відображати напрямок кешів у списку</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Створити резервну копію</string>
     <string name="init_backup_summary">Зверніть увагу, що ця функція може створювати резервні копії кешів, шляхових точок &amp; налаштувань, але немає схованок. \nДля того, щоб мати можливість відновити дані навіть після втрати телефону, резервні копії файлів слід скопіювати у незалежне місце.</string>
@@ -647,7 +645,6 @@
     <string name="settings_info_themes">c:geo підтримує власні теми для автономних мап. Вони можуть бути використані для зміни кольору стилю карти (наприклад, мати нічну карту) або виділити певні об\'єкти, такі як цикли доріжки або лінії висоти на карті.</string>
     <string name="init_mapsource_select">виберіть джерела карт</string>
     <string name="init_map_directory_description">Каталог з офлайн-картами</string>
-    <string name="init_dataDir">каталог даних геокешу</string>
     <string name="init_dataDir_note">Ви можете зберегти додаткові дані для схованок (спойлери, зображення журналу, …) на зовнішній накопичувачі (емуляція або дійсна зовнішня SD-карта в залежності від пристрою).</string>
     <string name="init_maptrail">показати історію треку</string>
     <string name="init_maptrail_length">Максимальна довжина історії тексту</string>
