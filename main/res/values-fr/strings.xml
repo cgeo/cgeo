@@ -558,7 +558,6 @@
     <string name="init_zoomincludingwaypoints">Le zoom inclut les points de passage</string>
     <string name="init_zoomincludingwaypoints_description">S\'il n\'y a qu\'une seule cache sur la carte : le zoom doit-il être ajusté pour inclure tous ses points de passage ?</string>
     <string name="init_brouterThreshold">Calculer l\'itinéraire</string>
-    <string name="init_brouterThreshold_description">Distance maximale jusqu\'à laquelle l\'application tierce brouter (si installée) calculera un itinéraire.</string>
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
     <string name="brouter_recalculating">Recalcul de l\'itinéraire en arrière-plan…</string>
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
@@ -581,7 +580,6 @@
     <string name="init_listdisplay">Listes supplémentaires</string>
     <string name="init_summary_listdisplay">Afficher l\'adhésion des caches à des listes supplémentaires dans une liste de caches</string>
     <string name="init_livelist">Afficher la direction des caches dans les listes</string>
-    <string name="init_summary_livelist">Afficher la direction des caches dans les listes</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Créer une sauvegarde</string>
     <string name="init_restore_title">Restaurer une sauvegarde</string>
@@ -639,7 +637,6 @@
     <string name="settings_info_themes">c:geo prend en charge des thèmes personnalisés pour les cartes en mode hors-ligne. Ils peuvent être utilisés pour modifier le style de couleur de la carte (par exemple avoir une vue de nuit) ou mettre en évidence certains objets comme les pistes cyclables ou les courbes de niveau.</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
     <string name="init_map_directory_description">Dossier cartes hors-ligne</string>
-    <string name="init_dataDir">Sélectionnez le dossier de stockage des Geocaches</string>
     <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
     <string name="init_maptrail">Afficher l\'historique du parcours</string>
     <string name="init_maptrail_length">Longueur max. de la trace de l\'historique</string>
