@@ -441,10 +441,8 @@
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
     <!-- simple dir / file chooser -->
     <!-- gpx -->
-    <!-- file selectors -->
     <!-- import -->
     <string name="web_import_waiting">Waiting for new caches from send2cgeo&#8230;</string>
     <!-- popup -->
