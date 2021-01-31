@@ -562,7 +562,6 @@
     <string name="init_zoomincludingwaypoints">Priblíženie vrátane bodov trasy</string>
     <string name="init_zoomincludingwaypoints_description">Ak mapujete jednu kešku: má sa priblíženie nastaviť tak, aby mapa obsahovala všetky body trasy kešky?</string>
     <string name="init_brouterThreshold">Vypočítať trasu</string>
-    <string name="init_brouterThreshold_description">Maximálna vzdialenosť, do ktorej pomocná aplikácia (ak je nainštalovaná) vypočíta trasu.</string>
     <string name="init_brouterShowBothDistances">Zobraziť priamu vzdialenosť</string>
     <string name="brouter_recalculating">Trasa sa prepočítava na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Ak je trasovanie aktívne: zobraziť priamu vzdialenosť okrem vypočítanej dĺžky trasy.</string>
@@ -587,7 +586,6 @@
     <string name="init_listdisplay">Zobraziť v zozname kešiek ďalšie zoznamy</string>
     <string name="init_summary_listdisplay">Zobraziť v zozname kešiek členstvo kešiek v ďalších zoznamoch</string>
     <string name="init_livelist">Zobrazovať smer</string>
-    <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvoriť zálohu</string>
     <string name="init_backup_summary">Majte na pamäti, že pomocou tejto funkcie je možné zálohovať kešky, body trasy a nastavenia, ale nie obrázky z kešiek. \nAk chcete mať možnosť obnoviť údaje aj po strate telefónu, súbory so zálohou musia byť skopírované na nezávislé miesto.</string>
@@ -648,7 +646,6 @@
     <string name="settings_info_themes">c:geo podporuje vlastné štýly pre offline mapy. Tieto môžu byť použité na zmenu farebného štýlu mapy (napr. nočná mapa), na zvýraznenie dôležitých objektov (ako sú napr. cyklotrasy) alebo na určenie šírky čiar.</string>
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
     <string name="init_map_directory_description">Priečinok s offline mapami</string>
-    <string name="init_dataDir">Vyberte adresár pre údaje skrýš</string>
     <string name="init_dataDir_note">Môžete zvoliť ukladanie ďalších údajov k skrýšam (spoilery, obrázky z logov…) do externej pamäte (emulovaná alebo skutočná externá SD karta, závisí to od zariadenia).</string>
     <string name="init_maptrail">Zobraziť trasu v histórii</string>
     <string name="init_maptrail_length">Max. dĺžka histórie trasy</string>
