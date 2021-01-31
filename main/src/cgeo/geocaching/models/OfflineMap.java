@@ -2,7 +2,8 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.AbstractMapDownloader;
+import cgeo.geocaching.settings.AbstractDownloader;
+import cgeo.geocaching.settings.MapDownloaderElevate;
 import cgeo.geocaching.settings.MapDownloaderMapsforge;
 import cgeo.geocaching.settings.MapDownloaderOpenAndroMaps;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -77,9 +78,10 @@ public class OfflineMap {
     }
 
     public enum OfflineMapType {
-        // id values must not be changed as they are referenced in the database
+        // id values must not be changed as they are referenced in the database & download companion files
         MAP_DOWNLOAD_TYPE_MAPSFORGE(1),
-        MAP_DOWNLOAD_TYPE_OPENANDROMAPS(2);
+        MAP_DOWNLOAD_TYPE_OPENANDROMAPS(2),
+        MAP_DOWNLOAD_TYPE_ELEVATE(3);
 
         public final int id;
         public static final int DEFAULT = MAP_DOWNLOAD_TYPE_MAPSFORGE.id;
@@ -95,7 +97,7 @@ public class OfflineMap {
         }
 
         @Nullable
-        public static AbstractMapDownloader getInstance(final int typeId) {
+        public static AbstractDownloader getInstance(final int typeId) {
             buildOfflineMapTypesList();
             for (OfflineMapTypeDescriptor descriptor : offlineMapTypes) {
                 if (descriptor.type.id == typeId) {
@@ -109,13 +111,14 @@ public class OfflineMap {
             if (offlineMapTypes.size() == 0) {
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_MAPSFORGE, MapDownloaderMapsforge.getInstance(), R.string.mapserver_mapsforge_name));
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_OPENANDROMAPS, MapDownloaderOpenAndroMaps.getInstance(), R.string.mapserver_openandromaps_name));
+                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_ELEVATE, MapDownloaderElevate.getInstance(), R.string.mapserver_elevate_name));
             }
         }
     }
 
     public static class OfflineMapTypeDescriptor {
         public final OfflineMapType type;
-        public final AbstractMapDownloader instance;
+        public final AbstractDownloader instance;
         public final int name;
 
         @NonNull
@@ -124,7 +127,7 @@ public class OfflineMap {
             return CgeoApplication.getInstance().getString(name);
         }
 
-        OfflineMapTypeDescriptor(final OfflineMapType type, final AbstractMapDownloader instance, final @StringRes int name) {
+        OfflineMapTypeDescriptor(final OfflineMapType type, final AbstractDownloader instance, final @StringRes int name) {
             this.type = type;
             this.instance = instance;
             this.name = name;

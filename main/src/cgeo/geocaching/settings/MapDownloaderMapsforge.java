@@ -2,6 +2,8 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.OfflineMap;
+import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.net.Uri;
@@ -11,14 +13,15 @@ import androidx.annotation.NonNull;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class MapDownloaderMapsforge extends AbstractMapDownloader {
+public class MapDownloaderMapsforge extends AbstractDownloader {
 
     private static final Pattern PATTERN_MAP = Pattern.compile("alt=\"\\[ \\]\"><\\/td><td><a href=\"(([-a-z]+)\\.map)\">[-a-z]+\\.map<\\/a><\\/td><td align=\"right\">([-0-9]+)[ 0-9:]+<\\/td><td align=\"right\">([ 0-9\\.]+[KMG])<\\/td>");
     private static final Pattern PATTERN_DIR = Pattern.compile("alt=\"\\[DIR\\]\"><\\/td><td><a href=\"([-a-z]+\\/)");
     private static final Pattern PATTERN_UP = Pattern.compile("alt=\"\\[PARENTDIR\\]\"><\\/td><td><a href=\"((\\/[-a-zA-Z0-9\\.]+)+\\/)");
 
     private MapDownloaderMapsforge() {
-        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_MAPSFORGE, R.string.mapserver_mapsforge_downloadurl, R.string.mapserver_mapsforge_name, R.string.mapserver_mapsforge_info, R.string.mapserver_mapsforge_projecturl, R.string.mapserver_mapsforge_likeiturl);
+        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_MAPSFORGE, R.string.mapserver_mapsforge_downloadurl, R.string.mapserver_mapsforge_name, R.string.mapserver_mapsforge_info, R.string.mapserver_mapsforge_projecturl, R.string.mapserver_mapsforge_likeiturl, PersistableFolder.OFFLINE_MAPS);
+        this.forceExtension = FileUtils.MAP_FILE_EXTENSION;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class MapDownloaderMapsforge extends AbstractMapDownloader {
     }
 
     @Override
-    protected OfflineMap findMap(final String page, final String remoteUrl, final String remoteFilename) {
+    protected OfflineMap checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_MAP, page);
         while (matchMap.find()) {
             final String filename = matchMap.group(1);

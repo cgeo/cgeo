@@ -233,6 +233,10 @@
     <string translatable="false" name="mapserver_openandromaps_likeiturl">https://www.openandromaps.org/projektkosten</string>
     <string translatable="false" name="mapserver_openandromaps_projecturl">https://www.openandromaps.org/</string>
 
+    <string translatable="false" name="mapserver_elevate_name">Elevate Theme</string>
+    <string translatable="false" name="mapserver_elevate_downloadurl">https://www.openandromaps.org/wp-content/users/tobias/</string>
+    <string translatable="false" name="mapserver_elevate_updatecheckurl">https://www.openandromaps.org/kartenlegende/elevation-hike-theme</string>
+
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report</string>
 </resources>
