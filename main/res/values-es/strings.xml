@@ -405,8 +405,6 @@
     <string name="about_system_write_logcat_type">¿Crear archivo de registro estándar o extendido?\n\nLos archivos de registro estándar estarán bien en la mayoría de los casos de uso.\nUsa archivos de registro extendidos sólo cuando te soliciten hacerlo.</string>
     <string name="about_system_write_logcat_type_standard">Estándar</string>
     <string name="about_system_write_logcat_type_extended">Extendido</string>
-    <string name="about_system_write_logcat_success">Archivo de registro escrito en \"%1$s\" en el directorio \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">El archivo de registro está vacío</string>
     <string name="about_system_write_logcat_error">Error al escribir el archivo de registro</string>
     <string name="changelog_github">Lista de todos los cambios</string>
     <string name="about_nutshellmanual">Manual en línea</string>
@@ -431,7 +429,6 @@
     <string name="settings_title_cachedetails">Detalles del caché</string>
     <string name="settings_summary_cachedetails">Personalizar la visualización de la información de caché.</string>
     <string name="settings_title_offlinedata">Datos sin conexión</string>
-    <string name="settings_summary_offlinedata">Configure los datos que se guardarán para el uso sin conexión, la ubicación de almacenamiento y los directorios de los archivos GPX.</string>
     <string name="settings_title_logging">Registro</string>
     <string name="settings_summary_logging">Configura tu firma y las opciones de registro.</string>
     <string name="settings_title_map">Mapa</string>
@@ -442,12 +439,9 @@
     <string name="settings_title_map_content">Contenido del mapa</string>
     <string name="settings_title_map_behavior">Comportamiento del mapa</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Directorio de datos de los cachés</string>
-    <string name="settings_title_data_dir_usage">Directorio de datos de los cachés (%1$s usado)</string>
     <string name="calculate_dataDir_title">Uso de datos de los cachés</string>
     <string name="calculate_dataDir">Calculando el uso de datos de los cachés en el disco</string>
     <string name="settings_data_dir_item">%1$s (%2$s libre)</string>
-    <string name="confirm_data_dir_move_title">¿Mover el directorio de datos de los cachés?</string>
     <string name="confirm_data_dir_move">Mover los datos de los cachés puede llevar bastante rato, dependiendo de tu dispositivo y la cantidad de datos.</string>
     <string name="settings_title_basicmembers">Opciones para miembros básicos</string>
     <string name="settings_title_navigation">Navegación</string>
@@ -540,7 +534,6 @@
     <string name="init_zoomincludingwaypoints">El zoom incluye waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Si se mapea un solo caché: ¿Debe ajustarse el zoom para incluir todos sus waypoints?</string>
     <string name="init_brouterThreshold">Calcular ruta</string>
-    <string name="init_brouterThreshold_description">Distancia máxima hasta la que la aplicación de ayuda de brouter (si se instala) calculará una ruta.</string>
     <string name="init_brouterShowBothDistances">Mostrar distancia en linea recta</string>
     <string name="brouter_recalculating">Recalculando ruta en segundo plano…</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta está activa: Muestra la distancia recta además de la longitud calculada de la ruta.</string>
@@ -559,7 +552,6 @@
     <string name="init_summary_choose_list">Preguntar en qué lista guardar el caché</string>
     <string name="init_listdisplay">Listas adicionales</string>
     <string name="init_livelist">Mostrar dirección</string>
-    <string name="init_summary_livelist">Mostrar la dirección de los cachés en la lista</string>
     <!-- backup / restore -->
     <string name="init_backup">Hacer copia de seguridad de cachés /waypoints</string>
     <string name="init_backup_backup">Copia de seguridad</string>
@@ -585,12 +577,9 @@
     <string name="settings_readingerror">Error leyendo los ajustes</string>
     <string name="settings_restart">c:geo debe reiniciarse ahora para que la configuración cargada tenga efecto</string>
     <string name="settings_info_offline_maps_title">Mapas sin conexión</string>
-    <string name="settings_info_offline_maps">c:geo permite el uso de mapas sin conexión. Puedes descargar mapas desde Mapsforge o incluso crear los tuyos propios desde los datos de OSM (Open Street Map). Necesitas seleccionar primero el directorio con los mapas sin conexión para poder usarlos.</string>
     <string name="settings_info_themes_title">Información sobre temas de mapas</string>
     <string name="settings_info_themes">c:geo permite personalizar los mapas sin conexión. Se puede usar para cambiar el estilo del color del mapa (p. ej. tener un mapa de visión nocturna) o para resatar ciertos objetos como carriles bici o líneas de altitud en el mapa.</string>
     <string name="init_mapsource_select">Elegir proveedor de mapas</string>
-    <string name="init_map_directory_description">Directorio de mapas sin conexión</string>
-    <string name="init_dataDir">Seleccionar directorio de datos de los cachés</string>
     <string name="init_dataDir_note">Puedes elegir almacenar los datos adicionales de los cachés (spoilers, imágenes de los registros, …) en tu almacenamiento externo (emulado o en una tarjeta SD real externa, dependiendo de tu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de rutas</string>
     <string name="init_summary_maptrail">Cuando se activ (y el GPS está activado) c:geo guarda el historial de tus movimientos como una ruta y lo muestra en el mapa.</string>
@@ -623,23 +612,16 @@
     <string name="init_debug_note">c:geo puede generar una gran cantidad de información de depuración. Activar este ajuste afectará a la estabilidad de c:geo y sólo se recomienda si te han pedido que envíes un registro a los desarrolladores. ¡Por favor mantén el registro de depuración desactivado durante el uso normal de c:geo!</string>
     <string name="init_debug">Activar el registro de depuración</string>
     <string name="init_dbonsdcard_title">Ubicación de la base de datos</string>
-    <string name="init_dbonsdcard_note">Puedes almacenar la base de datos de c:geo tanto internamente en el sistema como en un directorio en tu almacenamiento de usuario. Almacenarla en tu almacenamiento de usuario puede liberar algo de memoria, pero puedes perder un poco de rendimiento y c:geo no funcionará si el sistema de almacenamiento no es accesible o eliminas el archivo de base de datos.</string>
     <string name="init_dbonsdcard">En almacenamiento de usuario</string>
     <string name="init_dbmove_dbmove">Moviendo base de datos</string>
     <string name="init_dbmove_running">Moviendo base de datos</string>
     <string name="init_dbmove_success">Base de datos movida con éxito.</string>
     <string name="init_dbmove_failed">Error al mover la base de datos</string>
-    <string name="init_datadirmove_datadirmove">Moviendo el directorio de datos de los cachés</string>
-    <string name="init_datadirmove_running">Moviendo el directorio de datos de los cachés</string>
-    <string name="init_datadirmove_success">Directorio de datos de los cachés movido con éxito.</string>
-    <string name="init_datadirmove_failed">Error parcial o total al mover el directorio de datos de los cachés. Por favor comprueba el directorio antiguo y el nuevo y mueve los datos manualmente si es necesario.</string>
     <string name="init_plain_logs">Registros sencillos</string>
     <string name="init_summary_plain_logs">Muestra los registros sin usar colores</string>
     <string name="init_use_native_ua">Navegador de Android</string>
     <string name="init_summary_use_native_ua">Identificarse como usuario Android. Resuelve algunos problemas de acceso cuando se usan ciertos proveedores de red.</string>
-    <string name="init_rendertheme_folder">Directorio de temas para mapas</string>
     <string name="init_maintenance">Mantenimiento</string>
-    <string name="init_maintenance_directories_note">c:geo almacena imágenes de cachés y de registros, así como otros archivos relacionados con los cachés en un directorio separado. En algunos casos (como importar/exportar la base de datos) este directorio puede contener archivos obsoletos, que aquí se pueden eliminar.</string>
     <string name="init_maintenance_directories">Eliminar archivos huérfanos</string>
     <string name="init_location">Geolocalización</string>
     <string name="init_location_note">En dispositivos equipados con los servicios Google Play, c:geo puede usar el mejor proveedor de geolocalización de manera automática. Sin embargo, esto impide el uso de un receptor externo de GPS por Bluetooth.</string>
@@ -931,17 +913,9 @@
     <string name="cc_hint_seconds">segundos</string>
     <string name="cc_hint_fraction">fracción</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Buscando archivos \nen</string>
-    <string name="file_searching_sdcard_in">No se han encontrado archivos en la carpeta por defecto:\n%1$s\n\nBuscando archivos en toda la SD:\n</string>
-    <string name="file_list_no_files">c:geo no ha encontrado archivos apropiados.</string>
-    <string name="file_searching">Buscando archivos coincidentes</string>
-    <string name="file_title_searching">Buscando</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Elegir directorio</string>
     <string name="simple_dir_chooser_current_path">Ruta:</string>
     <string name="simple_dir_chooser_invalid_path">Ruta inválida</string>
-    <string name="simple_file_chooser_title">Elegir archivo</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Cargando cachés desde %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Cargando waypoints desde %1$s</string>
@@ -958,12 +932,7 @@
     <string name="gpx_import_error_parser">Formato de archivo incorrecto</string>
     <string name="gpx_import_error_unexpected">Error inesperado</string>
     <string name="gpx_import_canceled_with_filename">Se canceló importar GPX de %1$s</string>
-    <string name="gpx_import_delete_title">Eliminar el archivo</string>
-    <string name="gpx_import_delete_message">¿Quieres eliminar %s?</string>
     <string name="gpx_import_select_list_title">Importar GPX a la lista</string>
-    <string name="gpx_import_android">Importar desde Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Selecciona un mapa</string>
     <!-- import -->
     <string name="web_import_title">Importar desde send2cgeo</string>
     <string name="web_import_waiting">Esperando nuevos cachés desde send2cgeo…</string>
@@ -1483,7 +1452,6 @@ Nombre de archivo:%2$s</string>
     <!-- calendar adder -->
     <string name="event_fail">Error al añadir el evento al calendario</string>
     <string name="init_low_disk_space">Queda poco espacio de almacenamiento</string>
-    <string name="init_low_disk_space_message">El directorio de datos de los cachés se está quedando sin espacio de almacenamiento. Esto puede causar fallos en c:geo. Por favor, libera algo de espacio.</string>
     <string name="init_confirm_debug">¡c:geo se está ejecutando en modo de depuración!</string>
     <string name="list_confirm_debug_message">¡El modo de depuración provoca inestabilidades! ¿Quieres desactivar el modo depuración?</string>
     <string name="err_select_logimage_upload_size">Imagen demasiado grande, por favor selecciona una escala menor.</string>

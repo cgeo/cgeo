@@ -416,8 +416,6 @@
     <string name="about_system_write_logcat_type">Créer un fichier journal standard ou étendu ?\n\nLes fichiers journaux standard seront appropriés pour la plupart des cas d\'utilisation.\nUtiliser les fichiers journaux étendus uniquement lorsque cela est demandé.</string>
     <string name="about_system_write_logcat_type_standard">Par défaut</string>
     <string name="about_system_write_logcat_type_extended">Étendu</string>
-    <string name="about_system_write_logcat_success">Fichier journal écrit dans le répertoire \"%1$s\" dans \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Le fichier du journal est vide</string>
     <string name="about_system_write_logcat_error">Erreur lors de l\'écriture du fichier journal</string>
     <string name="changelog_github">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
@@ -444,7 +442,6 @@
     <string name="settings_title_cachedetails">Détails de la cache</string>
     <string name="settings_summary_cachedetails">Personnaliser l\'affichage des informations de la cache.</string>
     <string name="settings_title_offlinedata">Données hors-ligne</string>
-    <string name="settings_summary_offlinedata">Configurer les données à sauvegarder pour un usage hors ligne, l\'emplacement de stockage et les répertoires pour les fichiers GPX.</string>
     <string name="settings_title_logging">Visites</string>
     <string name="settings_summary_logging">Configurer votre signature et les options des visites.</string>
     <string name="settings_title_map">Carte</string>
@@ -455,12 +452,9 @@
     <string name="settings_title_map_content">Contenu de la carte</string>
     <string name="settings_title_map_behavior">Comportement de la carte</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Dossier de stockage des Geocaches</string>
-    <string name="settings_title_data_dir_usage">Dossier de stockage des Geocaches (actuellement %1$s)</string>
     <string name="calculate_dataDir_title">Espace utilisé par les Geocaches</string>
     <string name="calculate_dataDir">Calcul de l\'espace utilisé pour les données des Geocaches</string>
     <string name="settings_data_dir_item">%1$s (%2$s disponible)</string>
-    <string name="confirm_data_dir_move_title">Déplacer le dossier de données des caches ?</string>
     <string name="confirm_data_dir_move">Le déplacement du dossier de stockage des Geocaches peut être long et varie en fonction de votre appareil et du nombre de caches.</string>
     <string name="settings_title_basicmembers">Options pour les membres non-premium</string>
     <string name="settings_title_navigation">Navigation</string>
@@ -559,7 +553,6 @@
     <string name="init_zoomincludingwaypoints">Le zoom inclut les points de passage</string>
     <string name="init_zoomincludingwaypoints_description">S\'il n\'y a qu\'une seule cache sur la carte : le zoom doit-il être ajusté pour inclure tous ses points de passage ?</string>
     <string name="init_brouterThreshold">Calculer l\'itinéraire</string>
-    <string name="init_brouterThreshold_description">Distance maximale jusqu\'à laquelle l\'application tierce brouter (si installée) calculera un itinéraire.</string>
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
     <string name="brouter_recalculating">Recalcul de l\'itinéraire en arrière-plan…</string>
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
@@ -582,7 +575,6 @@
     <string name="init_listdisplay">Listes supplémentaires</string>
     <string name="init_summary_listdisplay">Afficher l\'adhésion des caches à des listes supplémentaires dans une liste de caches</string>
     <string name="init_livelist">Afficher la direction des caches dans les listes</string>
-    <string name="init_summary_livelist">Afficher la direction des caches dans les listes</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Créer une sauvegarde</string>
     <string name="init_restore_title">Restaurer une sauvegarde</string>
@@ -609,7 +601,6 @@
     <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
     <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
     <string name="init_backup_unnecessary">La base de données est vide, sauvegarde non nécessaire.</string>
-    <string name="init_backup_folder_exists_error">Impossible de créer un nouveau répertoire de sauvegarde. Avez-vous déjà fait une sauvegarde au cours de la dernière minute ?</string>
     <string name="init_backup_no_backup_available">Aucun fichier de sauvegarde n\'est disponible.</string>
     <string name="restore_confirm_overwrite_database">AVERTISSEMENT : Ceci écrasera %s sur votre appareil !</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVERTISSEMENT : Ceci écrasera %s et vos paramètres actuels sur votre appareil!</string>
@@ -635,12 +626,9 @@
     <string name="settings_readingerror">Erreur lors de la lecture des paramètres</string>
     <string name="settings_restart">c:geo doit être redémarré maintenant pour prendre en compte les paramètres chargés</string>
     <string name="settings_info_offline_maps_title">Informations sur les cartes hors-ligne</string>
-    <string name="settings_info_offline_maps">c:geo prend en charge les cartes hors-ligne. Vous pouvez télécharger des cartes depuis Mapsforge ou même créer vos propres cartes à partir des données d\'OSM. Vous devez d\'abord sélectionner le répertoire des cartes en mode hors-ligne pour pouvoir utiliser cette fonctionnalité.</string>
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
     <string name="settings_info_themes">c:geo prend en charge des thèmes personnalisés pour les cartes en mode hors-ligne. Ils peuvent être utilisés pour modifier le style de couleur de la carte (par exemple avoir une vue de nuit) ou mettre en évidence certains objets comme les pistes cyclables ou les courbes de niveau.</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
-    <string name="init_map_directory_description">Dossier cartes hors-ligne</string>
-    <string name="init_dataDir">Sélectionnez le dossier de stockage des Geocaches</string>
     <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
     <string name="init_maptrail">Afficher l\'historique du parcours</string>
     <string name="init_maptrail_length">Longueur max. de la trace de l\'historique</string>
@@ -680,23 +668,16 @@
     <string name="init_debug_note">c:geo peut générer un grand nombre d’informations de débogage. L\'activation de ce paramètre affectera la stabilité de c:geo et n’est recommandé que si vous êtes invité à envoyer un journal aux développeurs. Veuillez garder la journalisation du débogage désactivée lors de l’utilisation normale de c:geo !</string>
     <string name="init_debug">Activer le débogage</string>
     <string name="init_dbonsdcard_title">Emplacement de la base</string>
-    <string name="init_dbonsdcard_note">Vous pouvez enregistrer la base de données de c:geo soit en interne du système soit dans un répertoire de votre stockage utilisateur. Utiliser le stockage utilisateur peut libérer de la mémoire, mais vous pouvez perdre un peu en performance et c:geo ne fonctionnera pas si le stockage n\'est pas accessible ou si vous supprimez le fichier de la base de données.</string>
     <string name="init_dbonsdcard">Sur le stockage utilisateur</string>
     <string name="init_dbmove_dbmove">Déplacement de la base de données</string>
     <string name="init_dbmove_running">Déplacement de la base de données</string>
     <string name="init_dbmove_success">Base de données déplacée</string>
     <string name="init_dbmove_failed">Erreur lors du déplacement de la base de données</string>
-    <string name="init_datadirmove_datadirmove">Déplacement des Geocaches</string>
-    <string name="init_datadirmove_running">Déplacement des Geocaches</string>
-    <string name="init_datadirmove_success">Les Geocaches ont été déplacées avec succès.</string>
-    <string name="init_datadirmove_failed">Des erreurs se sont produites lors du déplacement des Geocaches. Vérifiez l\'ancien et le nouveau dossier de stockage et si besoin déplacez manuellement les éléments.</string>
     <string name="init_plain_logs">Texte brut</string>
     <string name="init_summary_plain_logs">Afficher les visites sans les couleurs</string>
     <string name="init_use_native_ua">Navigateur web Android</string>
     <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles / fournisseurs d\'accès au réseau.</string>
-    <string name="init_rendertheme_folder">Dossier thèmes cartes hors-ligne</string>
     <string name="init_maintenance">Maintenance</string>
-    <string name="init_maintenance_directories_note">c:geo stocke les images et les autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes, qui peuvent être supprimés ici.</string>
     <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
     <string name="init_location">Géolocalisation</string>
     <string name="init_location_note">Sur les appareils équipés des services Google Play, c:geo peut automatiquement utiliser un meilleur fournisseur de données de géolocalisation. Cependant, cela empêche l\'utilisation d\'un appareil GPS externe BlueTooth.</string>
@@ -1035,17 +1016,9 @@
     <string name="cc_hint_fraction">fraction</string>
     <string name="lowercase">minuscules</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Recherche de fichiers\nin</string>
-    <string name="file_searching_sdcard_in">Aucun fichier trouvé dans le répertoire par défaut:\n%1$s\n\nRecherche dans la totalité de la carte SD:\n</string>
-    <string name="file_list_no_files">c:geo n\'a pas trouvé les fichiers nécessaires.</string>
-    <string name="file_searching">Recherche des fichiers nécessaires</string>
-    <string name="file_title_searching">Recherche en cours</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Choisir le dossier</string>
     <string name="simple_dir_chooser_current_path">Chemin :</string>
     <string name="simple_dir_chooser_invalid_path">Chemin d\'accès invalide</string>
-    <string name="simple_file_chooser_title">Sélectionnez un fichier</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Chargement des caches depuis %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Chargement des points de passages depuis %1$s</string>
@@ -1062,14 +1035,7 @@
     <string name="gpx_import_error_parser">Format de fichier incorrect</string>
     <string name="gpx_import_error_unexpected">Erreur inattendue</string>
     <string name="gpx_import_canceled_with_filename">L\'importation GPX de %1$s a été annulée</string>
-    <string name="gpx_import_delete_title">Supprimer le fichier</string>
-    <string name="gpx_import_delete_message">Voulez-vous supprimer %s ?</string>
     <string name="gpx_import_select_list_title">Importer GPX dans la liste</string>
-    <string name="gpx_import_android">Import depuis Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Choisir un fichier carte</string>
-    <string name="track_file_select_title">Sélectionnez un fichier de trace</string>
-    <string name="individual_route_file_select_title">Sélectionner un fichier d\'itinéraire individuel</string>
     <!-- import -->
     <string name="web_import_title">Importer à partir de send2cgeo</string>
     <string name="web_import_waiting">En attente de nouvelles caches envoyées par send2cgeo…</string>
@@ -1645,7 +1611,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Impossible d\'ajouter l\'Événement au calendrier</string>
     <string name="init_low_disk_space">Espace disque faible</string>
-    <string name="init_low_disk_space_message">L\'espace libre pour le répertoire de données est faible. Cela peut provoquer des dysfonctionnements de c:geo. Merci de libérer de l’espace.</string>
     <string name="init_confirm_debug">c:geo s’exécute en mode de débogage !</string>
     <string name="list_confirm_debug_message">Le mode débogage génère de l\'instabilité ! Souhaitez-vous désactiver le mode débogage ?</string>
     <string name="err_select_logimage_upload_size">Image trop grande, merci de sélectionner une résolution inférieure.</string>
@@ -1744,23 +1709,16 @@
     <string name="localfile_cannot_handle">Erreur lors de la lecture du fichier ou c:geo ne peut pas gérer ce type de fichier.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Carte en cours de réception</string>
-    <string name="receivemapfile_success">Fichier carte «%s» reçu avec succès et enregistré dans le dossier des cartes</string>
     <string name="receivemapfile_error">Erreur lors de la réception du fichier carte</string>
-    <string name="receivemapfile_error_io_exception">Erreur d\'E/S lors de la réception du fichier de carte. Le répertoire de votre carte \"%s\" est-il accessible en écriture ?</string>
     <string name="receivemapfile_error_filenotfound_exception">Fichier introuvable lors de la réception du fichier de carte.</string>
-    <string name="receivemapfile_alreadyexists">Un fichier portant ce nom existe déjà. Écraser le fichier existant ou enregistrer le nouveau fichier sous un autre nom ?</string>
-    <string name="receivemapfile_option_overwrite">Écraser</string>
-    <string name="receivemapfile_option_differentname">Nouveau nom</string>
     <string name="receivemapfile_kb_copied">%d Ko copiés</string>
     <string name="receivemapfile_cancelled">Réception du fichier carte annulée</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Télécharger des cartes hors ligne</string>
-    <string name="downloadmap_info">Vous allez être redirigé vers un site de téléchargement de cartes hors ligne simples (sans support de thème).\n\nChoisissez le fichier .map de votre région puis appuyez pour le télécharger.\n\nUne fois le téléchargement terminé, appuyez sur le fichier téléchargé pour l\'utiliser comme carte courante de c:geo</string>
     <string name="downloadmap_choose">Sélectionner la carte</string>
     <string name="downloadmap_filename">Téléchargement de %s</string>
     <string name="downloadmanager_not_available">Impossible de télécharger la carte, le gestionnaire système de téléchargement est indisponible</string>
     <string name="download_started">Téléchargement démarré en arrière plan</string>
-    <string name="downloadmap_target_not_writable">L\'emplacement «%s» n\'est pas accessible en écriture - la carte téléchargée sera stockée dans le dossier de téléchargements de l\'appareil et devra être placée manuellement dans le dossier des cartes.</string>
     <string name="button_continue">Continuer</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Effacer l\'historique du parcours</string>

@@ -419,8 +419,6 @@
     <string name="about_system_write_logcat_type">Створити стандартний чи розширений файл журналу?\n\nСтандартні журнали будуть добре працювати в більшості випадків використання.\nВикористовуйте розширені файли журналів тільки коли запит на це.</string>
     <string name="about_system_write_logcat_type_standard">Стандарт</string>
     <string name="about_system_write_logcat_type_extended">розширений</string>
-    <string name="about_system_write_logcat_success">Лог-файл записано на \"%1$s\" в \"%2$s\" dir</string>
-    <string name="about_system_write_logcat_empty">Файл порожній</string>
     <string name="about_system_write_logcat_error">Помилка записування вмісту</string>
     <string name="changelog_github">Список всіх змін</string>
     <string name="about_nutshellmanual">Онлайн допомога</string>
@@ -446,7 +444,6 @@
     <string name="settings_title_cachedetails">Деталі кешу</string>
     <string name="settings_summary_cachedetails">Налаштувати відображення інформації про кеш.</string>
     <string name="settings_title_offlinedata">офлайн-дані</string>
-    <string name="settings_summary_offlinedata">Налаштуйте збережені дані для автономного використання, місце зберігання та каталоги для GPX файлів.</string>
     <string name="settings_title_logging">вихід із системи</string>
     <string name="settings_summary_logging">Налаштуйте ваш підпис і встановіть параметри логування.</string>
     <string name="settings_title_map">Карта</string>
@@ -457,12 +454,9 @@
     <string name="settings_title_map_content">Зміст мапи</string>
     <string name="settings_title_map_behavior">Поведінка карти</string>
     <string name="settings_title_gpx">ГПХ</string>
-    <string name="settings_title_data_dir">каталог даних геокешу</string>
-    <string name="settings_title_data_dir_usage">Каталог даних схованки ( використовується%1$s)</string>
     <string name="calculate_dataDir_title">Використання даних схованки</string>
     <string name="calculate_dataDir">Обчислення використання даних схованки</string>
     <string name="settings_data_dir_item">%1$s (%2$s вільно)</string>
-    <string name="confirm_data_dir_move_title">Перемістити каталог даних схованки?</string>
     <string name="confirm_data_dir_move">Переміщення даних схованки може зайняти багато часу, в залежності від пристрою та кількості даних.</string>
     <string name="settings_title_basicmembers">Налаштування для основних учасників</string>
     <string name="settings_title_navigation">Навігація</string>
@@ -562,7 +556,6 @@
     <string name="init_zoomincludingwaypoints">Масштабування містить маршрутні точки</string>
     <string name="init_zoomincludingwaypoints_description">Якщо натискання на один кеш: чи слід коригувати масштабування, щоб включити всі його шляхові точки?</string>
     <string name="init_brouterThreshold">Розрахувати маршрут</string>
-    <string name="init_brouterThreshold_description">Максимальна відстань, до якої зовнішня програма (якщо встановлена) буде вираховувати маршрут.</string>
     <string name="init_brouterShowBothDistances">Показати пряму відстань</string>
     <string name="brouter_recalculating">Переобчислення маршруту у фоновому режимі…</string>
     <string name="init_summary_brouterShowBothDistances">Якщо маршрут активний: відображення прямої відстані в додаток до розрахункової довжини маршруту.</string>
@@ -587,7 +580,6 @@
     <string name="init_listdisplay">Додаткові списки</string>
     <string name="init_summary_listdisplay">Показати членство в кеші в додаткових списках зі схованки</string>
     <string name="init_livelist">Показати напрямок</string>
-    <string name="init_summary_livelist">Відображати напрямок кешів у списку</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Створити резервну копію</string>
     <string name="init_backup_summary">Зверніть увагу, що ця функція може створювати резервні копії кешів, шляхових точок &amp; налаштувань, але немає схованок. \nДля того, щоб мати можливість відновити дані навіть після втрати телефону, резервні копії файлів слід скопіювати у незалежне місце.</string>
@@ -616,9 +608,7 @@
     <string name="init_backup_success">c:geo базу даних успішно скопійовано до:</string>
     <string name="init_backup_failed">Резервне копіювання бази даних c:geo не вдалося.</string>
     <string name="init_backup_unnecessary">База даних порожня, резервна копія не потрібна.</string>
-    <string name="init_backup_folder_exists_error">Не вдалося створити каталог для резервної копії. Ви вже зробили резервну копію за останню хвилину?</string>
     <string name="init_backup_no_backup_available">Немає доступного файлу резервної копії.</string>
-    <string name="backup_confirm_overwrite">Це видалить ваш найстаріший існуючий каталог резервних копій із%s.\n Ви хочете продовжити?</string>
     <string name="restore_confirm_overwrite_database">ПОПЕРЕДЖЕННЯ: На пристрої буде перезаписано %s!</string>
     <string name="restore_confirm_overwrite_database_and_settings">УВАГА: Це перезапише %s та поточні налаштування на вашому пристрої!</string>
     <string name="restore_confirm_overwrite_settings">УВАГА: Це перезапише %s та поточні налаштування на вашому пристрої!</string>
@@ -643,12 +633,9 @@
     <string name="settings_readingerror">Помилка читання налаштувань</string>
     <string name="settings_restart">c:geo потрібно зараз перезапустити, щоб принести завантажені налаштування в ефект</string>
     <string name="settings_info_offline_maps_title">Інформація про офлайн-карти</string>
-    <string name="settings_info_offline_maps">c:geo підтримує карти для автономного використання. Ви можете завантажувати карти з Mapsforge або навіть створювати власні карти з даних OSM. Перш за все, потрібно вибрати автономний каталог карт.</string>
     <string name="settings_info_themes_title">Інформація про тему карти</string>
     <string name="settings_info_themes">c:geo підтримує власні теми для автономних мап. Вони можуть бути використані для зміни кольору стилю карти (наприклад, мати нічну карту) або виділити певні об\'єкти, такі як цикли доріжки або лінії висоти на карті.</string>
     <string name="init_mapsource_select">виберіть джерела карт</string>
-    <string name="init_map_directory_description">Каталог з офлайн-картами</string>
-    <string name="init_dataDir">каталог даних геокешу</string>
     <string name="init_dataDir_note">Ви можете зберегти додаткові дані для схованок (спойлери, зображення журналу, …) на зовнішній накопичувачі (емуляція або дійсна зовнішня SD-карта в залежності від пристрою).</string>
     <string name="init_maptrail">показати історію треку</string>
     <string name="init_maptrail_length">Максимальна довжина історії тексту</string>
@@ -688,23 +675,16 @@
     <string name="init_debug_note">c: geo може генерувати багато інформації про налагодження. Активація цього налаштування впливає на стабільність c: geo і рекомендується лише в тому випадку, якщо вам буде запропоновано надіслати журнал розробникам. Будь ласка, залиште журнал налагодження вимкнених під час звичайного використання c: geo!</string>
     <string name="init_debug">активувати журнал налагодження</string>
     <string name="init_dbonsdcard_title">розташування бази даних</string>
-    <string name="init_dbonsdcard_note">Ви можете зберігати базу даних c: geo як внутрішньо, так і в каталозі на вашому сховищі користувачів. Наявність його на сховищі користувача може звільнити трохи пам\'яті, але ви можете втратити трохи продуктивності, і c: geo не буде працювати, якщо сховище недоступне або ви видалите файл бази даних.</string>
     <string name="init_dbonsdcard">на користувацькому сховищі</string>
     <string name="init_dbmove_dbmove">переміщення бази даних</string>
     <string name="init_dbmove_running">переміщення бази даних</string>
     <string name="init_dbmove_success">успішно переміщено базu даних.</string>
     <string name="init_dbmove_failed">Не вдалося перемістити базу даних</string>
-    <string name="init_datadirmove_datadirmove">каталог даних геокешу</string>
-    <string name="init_datadirmove_running">Перемістити каталог даних схованки</string>
-    <string name="init_datadirmove_success">Успішно переміщено каталог даних геокешу.</string>
-    <string name="init_datadirmove_failed">Частково або повністю не вдалося перемістити каталог даних Geocache. Будь ласка, перевірте старі та нові каталоги та перемістіть їх вручну, якщо це необхідно.</string>
     <string name="init_plain_logs">Звичайні журнали</string>
     <string name="init_summary_plain_logs">Відображати записи журналу без кольорів</string>
     <string name="init_use_native_ua">Браузер для Android</string>
     <string name="init_summary_use_native_ua">Ідентифікувати як браузер Android. Вирікає проблеми авторизації при використанні певних мережевих провайдерів.</string>
-    <string name="init_rendertheme_folder">Каталог теми</string>
     <string name="init_maintenance">Технічне обслуговування</string>
-    <string name="init_maintenance_directories_note">c:geo зберігає зображення, журнали та інші файли, пов\'язані з кешем в окремому каталозі. В деяких випадках (як і імпорт/експорт бази даних) у цьому каталозі можуть міститися застарілі файли, які можуть бути видалені тут.</string>
     <string name="init_maintenance_directories">осиротіли файли</string>
     <string name="init_location">геолокація</string>
     <string name="init_location_note">На пристроях, обладнаних Службами Google Play, c: geo може автоматично використовувати кращого постачальника геолокації. Однак це запобігає використанню зовнішнього приймача BlueTooth GPS.</string>
@@ -1015,17 +995,9 @@
     <string name="cc_hint_fraction">Дріб</string>
     <string name="lowercase">нижній регістр</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Пошук файлів…\n</string>
-    <string name="file_searching_sdcard_in">Не знайдено файлів у типових папках:\n%1$s\n\nПошук всієї SD-карти у файлах:\n</string>
-    <string name="file_list_no_files">c:geo не знайдено відповідних файлів.</string>
-    <string name="file_searching">Пошук відповідних файлів</string>
-    <string name="file_title_searching">Пошук</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Оберіть каталог</string>
     <string name="simple_dir_chooser_current_path">Шлях:</string>
     <string name="simple_dir_chooser_invalid_path">неправильний шлях</string>
-    <string name="simple_file_chooser_title">Вибрати файл</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Завантаження кешу з %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Завантаження точок з %1$s</string>
@@ -1038,14 +1010,7 @@
     <string name="gpx_import_error_parser">Неправильний формат файлу</string>
     <string name="gpx_import_error_unexpected">Неочікувана помилка</string>
     <string name="gpx_import_canceled_with_filename">Імпорт з GPX з %1$s було скасовано</string>
-    <string name="gpx_import_delete_title">Видалити файл</string>
-    <string name="gpx_import_delete_message">Ви дійсно хочете видалити %s?</string>
     <string name="gpx_import_select_list_title">Імпортувати GPX до списку</string>
-    <string name="gpx_import_android">Import from Android browser</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Вибери файл карти</string>
-    <string name="track_file_select_title">Виберіть файл доріжки</string>
-    <string name="individual_route_file_select_title">Вибрати окремий файл маршруту</string>
     <!-- import -->
     <string name="web_import_title">Імпортувати з send2cgeo</string>
     <string name="web_import_waiting">Очікування нових кешів від send2cgeo…</string>
@@ -1578,7 +1543,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Не вдалося додати кеш подій до календаря</string>
     <string name="init_low_disk_space">Недостатньо місця на диску</string>
-    <string name="init_low_disk_space_message">На каталозі даних схованки закінчується вільне місце. Це може призвести до несправностей c:geo. Будь ласка, звільніть місце.</string>
     <string name="init_confirm_debug">c:geo запущено у режимі налагодження!</string>
     <string name="list_confirm_debug_message">Режим налагодження викликає нестабільності! Ви хочете вимкнути режим налагодження?</string>
     <string name="err_select_logimage_upload_size">Зображення завелике. Оберіть менші розміри.</string>
@@ -1671,23 +1635,16 @@
     <string name="localfile_cannot_handle">Помилка читання файлу або c:geo не може обробляти цей тип файлу.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Отримання файлу карти</string>
-    <string name="receivemapfile_success">Файл мапи успішно отримано як \"%s\" та збережено до каталогу карт</string>
     <string name="receivemapfile_error">Помилка під час запису у файл</string>
-    <string name="receivemapfile_error_io_exception">Помилка вводу/виводу при отриманні файлу карти. Папка \"%s\" доступна для запису?</string>
     <string name="receivemapfile_error_filenotfound_exception">Помилка при отриманні файлу карти.</string>
-    <string name="receivemapfile_alreadyexists">Файл з такою назвою вже існує. Перезаписати наявний файл або зберегти новий файл?</string>
-    <string name="receivemapfile_option_overwrite">Перезаписати</string>
-    <string name="receivemapfile_option_differentname">Інша назва</string>
     <string name="receivemapfile_kb_copied">%d КБ скопійовано</string>
     <string name="receivemapfile_cancelled">Передачу файлів відмінено</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Завантажити автономну карту</string>
-    <string name="downloadmap_info">Виберіть файл карти для вашого регіону, натиснувши на значок «Зберегти».\n\nЗавантаження буде виконуватися у фоновому режимі. Коли завантаження завершиться, завантажений файл буде скопійований на директорію карти c:geo і встановити поточну карту для c:geo.\n\nБудьте обережні: Завантаження карти може спричинити високий трафік у мережі!</string>
     <string name="downloadmap_choose">Обрати мапу</string>
     <string name="downloadmap_filename">Завантаження %s</string>
     <string name="downloadmanager_not_available">Не вдалося завантажити файл карти, системний менеджер завантажень не доступний</string>
     <string name="download_started">Завантаження розпочалося у фоновому режимі</string>
-    <string name="downloadmap_target_not_writable">Цільова задача \"%sнедоступна для запису - завантажений файл карт буде зберігатися в каталозі системних завантажень і повинен бути переміщений вручну до каталогу мап.</string>
     <string name="downloadmap_allow_metered_network">Дозволити завантаження по мережі через трафік (наприклад, мобільне з\'єднання)</string>
     <string name="downloadmap_confirmation">Завантажити карту %1$s\"?\n\nЦе може зайняти певний час і може призвести до значних витрат, залежно від підключення до мережі. \n\nРозмір інформації:%2$s</string>
     <string name="downloadmap_handling">Сам завантаження буде оброблено менеджером завантаження вашої системи у фоновому режимі. Ви побачите сповіщення, щойно почалося завантаження (що може зайняти деякий час).</string>

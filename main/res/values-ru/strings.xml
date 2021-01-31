@@ -408,8 +408,6 @@
     <string name="about_system_write_logcat_type">Создать обычный или расширенный лог?\n\nСтандартого лога должно быть достаточно в большинстве случаев.\nИспользуйте расширенный лог, только если разработчики вас попросили.</string>
     <string name="about_system_write_logcat_type_standard">Стандартный</string>
     <string name="about_system_write_logcat_type_extended">Расширенный</string>
-    <string name="about_system_write_logcat_success">Лог записан как \"%1$s\" в папке \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Лог пуст</string>
     <string name="about_system_write_logcat_error">Ошибка при записи лога</string>
     <string name="changelog_github">Список всех изменений</string>
     <string name="about_nutshellmanual">Оффлайн руководство</string>
@@ -434,7 +432,6 @@
     <string name="settings_title_cachedetails">Настройки тайников</string>
     <string name="settings_summary_cachedetails">Настройка отображения тайников.</string>
     <string name="settings_title_offlinedata">Сохраненные данные</string>
-    <string name="settings_summary_offlinedata">Настройте сохраненные данные для автономного использования, местоположение хранения и директории для файлов GPX.</string>
     <string name="settings_title_logging">Запись в блокнот</string>
     <string name="settings_summary_logging">Настройка подписи и записей в блокнот.</string>
     <string name="settings_title_map">Карта</string>
@@ -445,12 +442,9 @@
     <string name="settings_title_map_content">Содержания карты</string>
     <string name="settings_title_map_behavior">Поведение карты</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Каталог данных тайников</string>
-    <string name="settings_title_data_dir_usage">Каталог данных тайников (%1$s занято)</string>
     <string name="calculate_dataDir_title">Использование данных тайниками</string>
     <string name="calculate_dataDir">Расчет использования данных тайниками</string>
     <string name="settings_data_dir_item">%1$s (%2$s свободно)</string>
-    <string name="confirm_data_dir_move_title">Переместить папку с данными тайников?</string>
     <string name="confirm_data_dir_move">Перемещение данных тайников может занять долгое время в зависимости от вашего устройства и количества данных.</string>
     <string name="settings_title_basicmembers">Опции для Базовых участников</string>
     <string name="settings_title_navigation">Навигация</string>
@@ -543,7 +537,6 @@
     <string name="init_zoomincludingwaypoints">Увеличение вместе с точками</string>
     <string name="init_zoomincludingwaypoints_description">При показе одиночного тайника масштаб будет таким, чтобы вместить все точки тайника</string>
     <string name="init_brouterThreshold">Вычислить путь</string>
-    <string name="init_brouterThreshold_description">Максимальное расстояние, до которого brouter будет прокладывать маршрут (если установлен).</string>
     <string name="init_brouterShowBothDistances">Показать расстояние по прямой</string>
     <string name="brouter_recalculating">Пересчет маршрута в фоновом режиме…</string>
     <string name="init_summary_brouterShowBothDistances">Если навигация активна: показать прямое расстояние в дополнение к рассчитанной длине маршрута.</string>
@@ -563,7 +556,6 @@
     <string name="init_listdisplay">Дополнительные списки</string>
     <string name="init_summary_listdisplay">Показать принадлежность тайников к другим спискам в списке тайников</string>
     <string name="init_livelist">Показывать направление</string>
-    <string name="init_summary_livelist">Показывать направление на тайник в списке</string>
     <!-- backup / restore -->
     <string name="init_backup">Резервное копирование тайников / точек</string>
     <string name="init_backup_backup">Сохранить</string>
@@ -590,12 +582,9 @@
     <string name="settings_readingerror">Ошибка чтения настроек</string>
     <string name="settings_restart">c:geo необходим перезапуск, чтобы восстановленные настройки активировались</string>
     <string name="settings_info_offline_maps_title">Информация про оффлайновые карты</string>
-    <string name="settings_info_offline_maps">c:geo предлагает карты для оффлайнового использования. Вы можете загрузить карты с Mapsforge или даже создать свои собственные, используя данные OSM. Для работы с оффлайновыми картами, выберите папку с картами.</string>
     <string name="settings_info_themes_title">Информация по темам карт</string>
     <string name="settings_info_themes">c:geo предлагает пользовательские темы для оффлайновых карт. Они могут быть использованы для изменения цветового стиля (например, ночные карты) или для выделения определенных объектов, таких как велосипедные маршруты или линии уровня.</string>
     <string name="init_mapsource_select">Выберите источник карт</string>
-    <string name="init_map_directory_description">Папка с оффлайновыми картами</string>
-    <string name="init_dataDir">Выбрать папку данных тайников</string>
     <string name="init_dataDir_note">Вы можете сохранять дополнительные данные тайников (спойлеры, картинки в блокноте и пр.) на внешнем хранилище (виртуальная или настоящая SD-карта, в зависимости от устройства).</string>
     <string name="init_maptrail">Показать историю трека</string>
     <string name="init_maptrail_length">Максимальная длина истории трека</string>
@@ -635,23 +624,16 @@
     <string name="init_debug_note">c:geo может генерировать много отладочной информации. Активация этой опции повлияет на стабильность c:geo и рекомендуется только если вас просят отправить журнал для разработчиков. Пожалуйста, отключайте опцию во время нормального использования c:geo!</string>
     <string name="init_debug">Писать отладочную инф.</string>
     <string name="init_dbonsdcard_title">Расположение базы данных</string>
-    <string name="init_dbonsdcard_note">Вы можете хранить базу данных c:geo как на внутреннем носителе, так и в папке на пользовательском носителе. Использование SD карты освободит место, но может ухудшить производительность и c:geo не будет работать, если носитель недоступен или файл базы данных удален.</string>
     <string name="init_dbonsdcard">На пользовательском носителе</string>
     <string name="init_dbmove_dbmove">Перемещение базы данных</string>
     <string name="init_dbmove_running">Перемещение базы данных</string>
     <string name="init_dbmove_success">База данных успешно перемещена.</string>
     <string name="init_dbmove_failed">Не удалось переместить базу данных</string>
-    <string name="init_datadirmove_datadirmove">Перемещение папки с данными тайников</string>
-    <string name="init_datadirmove_running">Перемещение папки с данными тайников</string>
-    <string name="init_datadirmove_success">Папка данных тайников успешно перемещена.</string>
-    <string name="init_datadirmove_failed">Перемещение данных тайников частично или полностью не удалось. Пожалуйста, проверьте новую и старую папки и переместите вручную, если необходимо.</string>
     <string name="init_plain_logs">Простые записи</string>
     <string name="init_summary_plain_logs">Отображать записи в блокноте без цветов</string>
     <string name="init_use_native_ua">Android браузер</string>
     <string name="init_summary_use_native_ua">Представляться как браузер. Может решить проблемы входа для некоторых интернет провайдеров.</string>
-    <string name="init_rendertheme_folder">Папка с темами карты</string>
     <string name="init_maintenance">Обслуживание</string>
-    <string name="init_maintenance_directories_note">c:geo сохраняет изображения, записи в блокнотах и другие файлы, относящиеся к тайникам, в отдельную директорию. В некоторых случаях эта папка может содержать устаревшие файлы, которые могут быть удалены.</string>
     <string name="init_maintenance_directories">Удалить устаревшие файлы</string>
     <string name="init_location">Геолокация</string>
     <string name="init_location_note">На устройствах с сервисами Google Play c:geo может автоматически использовать лучший источник местоположения. Однако, это блокирует использование внешнего GPS приемника.</string>
@@ -989,17 +971,9 @@
     <string name="cc_hint_seconds">секунды</string>
     <string name="cc_hint_fraction">дробь</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Поиск в\n</string>
-    <string name="file_searching_sdcard_in">Не найдено файлов в папках\n%1$s\n\nПродолжаю поиск по всей SD карте:\n</string>
-    <string name="file_list_no_files">Не удалось найти подходящих файлов.</string>
-    <string name="file_searching">Поиск подходящих файлов</string>
-    <string name="file_title_searching">Поиск</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Выберите директорию</string>
     <string name="simple_dir_chooser_current_path">Путь:</string>
     <string name="simple_dir_chooser_invalid_path">Недопустимый путь</string>
-    <string name="simple_file_chooser_title">Выберите файл</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Загрузка тайников из %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Загрузка файла точек из %1$s</string>
@@ -1018,14 +992,7 @@
     <string name="gpx_import_error_parser">Неправильный формат файла</string>
     <string name="gpx_import_error_unexpected">Неожиданная ошибка</string>
     <string name="gpx_import_canceled_with_filename">Импорт GPX из %1$s был отменен</string>
-    <string name="gpx_import_delete_title">Удалить файл</string>
-    <string name="gpx_import_delete_message">Вы действительно хотите удалить %s?</string>
     <string name="gpx_import_select_list_title">Импортировать GPX в список</string>
-    <string name="gpx_import_android">Импорт из Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Выберите файл карты</string>
-    <string name="track_file_select_title">Выберите файл трека</string>
-    <string name="individual_route_file_select_title">Выберите файл маршрута</string>
     <!-- import -->
     <string name="web_import_title">Импорт из send2cgeo</string>
     <string name="web_import_waiting">Ожидаем новые тайники с send2cgeo…</string>
@@ -1597,7 +1564,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Не удалось добавить событие в календарь</string>
     <string name="init_low_disk_space">Кончается место для хранения</string>
-    <string name="init_low_disk_space_message">Кончается место для хранения данных тайников. Это может вызвать нестабильную работу c:geo. Пожалуйста, освободите немного места.</string>
     <string name="init_confirm_debug">c:geo запущено в режиме отладки!</string>
     <string name="list_confirm_debug_message">Режим отладки может вызвать нестабильное поведение. Вы действительно хотите активировать режим отладки?</string>
     <string name="err_select_logimage_upload_size">Изображение слишком велико, пожалуйста уменьшите масштаб.</string>
@@ -1695,18 +1661,12 @@
     <string name="localfile_cannot_handle">Ошибка чтения файла или c:geo не может обработать этот тип файла.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Получить файл карты</string>
-    <string name="receivemapfile_success">Файл карты успешно получен как \"%s\" и сохранен в каталог с картами</string>
     <string name="receivemapfile_error">Ошибка при получении файла карты</string>
-    <string name="receivemapfile_error_io_exception">Ошибка ввода/вывода при получении файла карты. Папка карты \"%s\" доступна для записи?</string>
     <string name="receivemapfile_error_filenotfound_exception">Файл не найден: ошибка при получении файла карты.</string>
-    <string name="receivemapfile_alreadyexists">Файл с таким именем уже существует. Перезаписать существующий файл или сохранить новый файл под другим именем?</string>
-    <string name="receivemapfile_option_overwrite">Перезаписать</string>
-    <string name="receivemapfile_option_differentname">Другое имя</string>
     <string name="receivemapfile_kb_copied">%d КБ скопировано</string>
     <string name="receivemapfile_cancelled">Передача файла карты отменена</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Скачать оффлайн-карту</string>
-    <string name="downloadmap_info">Выберите файл с картой для вашего региона, нажав на значок «Сохранить».\n\nЗагрузка будет запущена в фоновом режиме. По завершении загрузки скачанный файл будет скопирован в каталог c:geo и установлен как текущая карта для c:geo.\n\nБудьте осторожны: загрузка карты может использовать много траффика!</string>
     <string name="downloadmap_choose">Выбрать карту</string>
     <string name="downloadmanager_not_available">Файл карты не может быть загружен, менеджер загрузки не доступен</string>
     <string name="download_started">Загрузка началась в фоновом режиме</string>

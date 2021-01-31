@@ -212,12 +212,9 @@
     <string name="settings_title_logging">登陆</string>
     <string name="settings_title_map">地图</string>
     <string name="settings_title_map_content">地图内容</string>
-    <string name="settings_title_data_dir">Geocache 数据目录</string>
-    <string name="settings_title_data_dir_usage">Geocache 数据目录 (%1$s 使用)</string>
     <string name="calculate_dataDir_title">Geocache 数据使用情况</string>
     <string name="calculate_dataDir">计算 Geocache 数据磁盘使用情况</string>
     <string name="settings_data_dir_item">%1$s (%2$s 免费)</string>
-    <string name="confirm_data_dir_move_title">是否移动 geocache 数据目录？</string>
     <string name="confirm_data_dir_move">移动 geocache 数据可能需要很长时间, 具体取决于您的设备和数据量。</string>
     <string name="settings_gc_description">授权 c: geo 与 geocaching.com 搜索缓存。</string>
     <string name="settings_ec_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
@@ -234,14 +231,10 @@
     <string name="init_summary_skin">Use light skin (Restart needed)</string>
     <!-- backup / restore -->
     <string name="init_backup_no_backup_available">没有可用的资源。</string>
-    <string name="init_dataDir">Geocache 数据目录</string>
     <string name="init_dataDir_note">您可以选择在外部存储上存储 geocaches (破坏者、日志图像、…) 的附加数据 (根据您的设备, 模拟或实际的外部 SD 卡)。</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
     <string name="init_debug_note">c: geo 可以生成大量的调试信息。激活此设置将影响 c: geo 的稳定性, 只有在要求您向开发人员发送日志时才建议这样做。请保持调试日志禁用在正常使用 c: geo!</string>
-    <string name="init_dbonsdcard_note">您可以在内部或用户存储的目录中存储 c: 地理信息系统的数据库。将其放在用户存储上可能会释放一些内存, 但可能会丢失一些性能, c: 如果存储不可访问或您删除数据库文件, 则 geo 将无法正常工作。</string>
     <string name="init_dbonsdcard">放在用户存储上</string>
-    <string name="init_datadirmove_datadirmove">是否移动 geocache 数据目录？</string>
-    <string name="init_datadirmove_running">是否移动 geocache 数据目录？</string>
     <!-- proximity notification -->
     <!-- map sources -->
     <!-- Content Storage -->
@@ -261,10 +254,8 @@
     <string name="cache_found_last_30_days">最近 30 天下载</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
     <!-- simple dir / file chooser -->
     <!-- gpx -->
-    <!-- file selectors -->
     <!-- import -->
     <!-- popup -->
     <!-- waypoint -->

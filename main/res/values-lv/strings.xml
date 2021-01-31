@@ -408,8 +408,6 @@
     <string name="about_system_write_logcat_type">Rakstīt stadarta vai detalizētu reģistra failu?\n\nVairākumā gadījumu standarta reģistra fails būs pietiekami detalizēts.\nLietojiet detalizētu reģistra failu tikai gadījumos, kad tas tiek prasīts.</string>
     <string name="about_system_write_logcat_type_standard">Standarta</string>
     <string name="about_system_write_logcat_type_extended">Detalizēts</string>
-    <string name="about_system_write_logcat_success">Reģistra fails saglabāts \"%1$s\" \"%2$s\" dir</string>
-    <string name="about_system_write_logcat_empty">Reģistra fails ir tukšs</string>
     <string name="about_system_write_logcat_error">Kļūda rakstot reģistra failu</string>
     <string name="changelog_github">Visu izmaiņu saraksts</string>
     <string name="about_nutshellmanual">Tiešsaistes rokasgrāmata</string>
@@ -434,7 +432,6 @@
     <string name="settings_title_cachedetails">Slēpņu informācija</string>
     <string name="settings_summary_cachedetails">Pielāgot displeju slēpņa informācijai.</string>
     <string name="settings_title_offlinedata">Bezsaistes dati</string>
-    <string name="settings_summary_offlinedata">Pielāgo datus, kas jāsaglabā lietošanai bezsaistē, GPX failu glabāšanas vietu un direktorijas.</string>
     <string name="settings_title_logging">Pierakstīšanās</string>
     <string name="settings_summary_logging">Konfigurē savu parakstu un iestati reģistrācijas ieraksta opcijas.</string>
     <string name="settings_title_map">Karte</string>
@@ -445,12 +442,9 @@
     <string name="settings_title_map_content">Kartes saturs</string>
     <string name="settings_title_map_behavior">Kartes uzvedība</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Slēpņu datu direktorija</string>
-    <string name="settings_title_data_dir_usage">Slēpņu datu direktorija (%1$s aizņem)</string>
     <string name="calculate_dataDir_title">Slēpņu datu lietojums</string>
     <string name="calculate_dataDir">Aprēķina slēpņu datu apjoma lietojumu</string>
     <string name="settings_data_dir_item">%1$s (%2$s bez maksas)</string>
-    <string name="confirm_data_dir_move_title">Vai pārvietot slēpņu datu direktoriju?</string>
     <string name="confirm_data_dir_move">Slēpņu datu pārvietošana var aizņemt ļoti ilgu laiku, atkarībā no tavas ierīces un datu apjoma.</string>
     <string name="settings_title_basicmembers">Iestatījumi bezmaksas lietotājiem</string>
     <string name="settings_title_navigation">Navigācija</string>
@@ -543,7 +537,6 @@
     <string name="init_zoomincludingwaypoints">Tālummaiņa iekļauj ceļa punktus</string>
     <string name="init_zoomincludingwaypoints_description">Ja kartējat vienu slēpni: vai pietuvinājumu pielāgot tā, lai iekļautu visus starpposmus?</string>
     <string name="init_brouterThreshold">Maršrutēšana</string>
-    <string name="init_brouterThreshold_description">Maksimālais attālums, līdz kuram brouter helper aplikācija (ja tā ir iestatīta) aprēķinās maršrutu.</string>
     <string name="init_brouterShowBothDistances">Rādīt taisnvirziena distanci</string>
     <string name="brouter_recalculating">Pārrēķina maršrutu fonā…</string>
     <string name="init_summary_brouterShowBothDistances">Ja maršruta plānošana ir aktīva: Paplildus aprēķinātajam maršruta garumam, rādīt lineāro attālumu.</string>
@@ -561,7 +554,6 @@
     <string name="init_summary_choose_list">Jautāt, kurā sarakstā saglabāt slēpņus</string>
     <string name="init_listdisplay">Papildu saraksti</string>
     <string name="init_livelist">Rādīt virzienu</string>
-    <string name="init_summary_livelist">Rādīt slēpņu virzienus sarakstā</string>
     <!-- backup / restore -->
     <string name="init_backup">Dublētie slēpņi / starpposmi</string>
     <string name="init_backup_backup">Izveidot rezerves kopiju</string>
@@ -588,12 +580,9 @@
     <string name="settings_readingerror">Kļūda lasot iestatījumus</string>
     <string name="settings_restart">Restartē c:geo, lai lietotu jaunos iestatījumus</string>
     <string name="settings_info_offline_maps_title">Info uz bezsaistes kartēm</string>
-    <string name="settings_info_offline_maps">c:geo atbalsta kartes lietošanai bezsaistē. Tu vari lejupielādēt kartes no Mapsforge vai pat izveidot savas kartes no OSM datiem. Vispirms jāatlasa bezsaistes karšu direktorija, lai iegūtu karti ar bezsaistes atbalstu.</string>
     <string name="settings_info_themes_title">Informācija par karšu tēmām</string>
     <string name="settings_info_themes">c:geo atbalsta pielāgotu dizainu bezsaistes kartēm. Tos var izmantot, lai mainītu kartes krāsu stilu (piemēram ir nakts redzamības karte) vai izcelt noteiktus objektus, piemēram, velo-ceļus vai augstuma līniju kartē.</string>
     <string name="init_mapsource_select">Izvēlies karti</string>
-    <string name="init_map_directory_description">Katalogs ar bezsaistes kartēm</string>
-    <string name="init_dataDir">Izvēlies slēpņu datu direktoriju</string>
     <string name="init_dataDir_note">Tu vari izvēlēties uzglabāt slēpņu papildu datus (spoileru bildes, ierakstu attēli, …) ārējā atmiņā (emulēta vai reāla ārējā SD karte, atkarībā no tavas ierīces).</string>
     <string name="init_maptrail">Parādīt pārvietojumu</string>
     <string name="init_summary_maptrail">Parādīt pārvietojumu kartē</string>
@@ -622,23 +611,16 @@
     <string name="init_debug_note">c:geo var radīt daudz atkļūdošanas informācijas. Šī iestatījuma aktivizēšana ietekmēs c:geo darbības stabilitāti un ir ieteicama tikai tad, ja tev tiek prasīts nosūtīt žurnāla datus izstrādātājiem. Lūdzu, atstāj atkļūdošanas žurnalēšanu izslēgtu normālas c:geo lietošanas gadījumā!</string>
     <string name="init_debug">Aktivizētu atkļūdošanas žurnālu</string>
     <string name="init_dbonsdcard_title">Datu bāzes atrašanās vieta</string>
-    <string name="init_dbonsdcard_note">Jūs varat uzglabāt c:geo datubāzi vai nu sistēmas atmiņā, vai arī direktorijā, kas atrodas lietotāja datu glabātavā. Glabājot to lietotāja datu krātuvē, jūs atbrīvosiet ierīces iekšējo atmiņu, taču varat zaudēt nedaudz ātrdarbības, kā arī c:geo nedarbosies, ja datu krātuve nebūs pieejama vai jūs izdzēsīsiet databāzes failu.</string>
     <string name="init_dbonsdcard">Lietotāja datu krātuvē</string>
     <string name="init_dbmove_dbmove">Tiek pārvietota datu bāze</string>
     <string name="init_dbmove_running">Tiek pārvietota datu bāze</string>
     <string name="init_dbmove_success">Datu bāze ir veiksmīgi pārvietota.</string>
     <string name="init_dbmove_failed">Neizdevās pārvietot datu bāzi</string>
-    <string name="init_datadirmove_datadirmove">Slēpņu datu direktorija pārvietošana</string>
-    <string name="init_datadirmove_running">Pārvieto slēpņu datu direktoriju</string>
-    <string name="init_datadirmove_success">Datu direktorijs veiksmīgi pārvietots.</string>
-    <string name="init_datadirmove_failed">Slēpņu datu direktorija pārvietošana daļēji vai pilnībā neizdevās. Lūdzu, pārbaudiet gan veco, gan jauno direktoriju, un pārvietojiet to manuāli, ja nepieciešams.</string>
     <string name="init_plain_logs">Vienkārši ieraksti</string>
     <string name="init_summary_plain_logs">Attēlot ierakstus bezkrāsainus</string>
     <string name="init_use_native_ua">Android pārlūkprogramma</string>
     <string name="init_summary_use_native_ua">Identificēt kā Android pārlūkprogrammu. Atrisina pieteikšanās problēmas, lietojot noteiktus tīkla pakalpojumu sniedzējus.</string>
-    <string name="init_rendertheme_folder">Karšu tēmu direktorija</string>
     <string name="init_maintenance">Uzturēšana</string>
-    <string name="init_maintenance_directories_note">c:geo saglabā attēlus, apmeklējuma ierakstu attēlus un citus failus, kas saistīti ar slēpni atsevišķā direktorijā. Dažos gadījumos (piemēram, importējot/eksportējot datu bāzi) šajā direktorijā var būt novecojuši faili, kuri šeit var tikt dzēsti.</string>
     <string name="init_maintenance_directories">Dzēst failus, kas palikuši nevajadzīgi (novecojuši)</string>
     <string name="init_location">Ģeolokācija</string>
     <string name="init_location_note">Ierīcēs, kas aprīkoti ar Google Play pakalpojumiem, c:geo automātiski var izmantot labāku ģeolokācijas nodrošinātāju. Tomēr tas neļauj izmantot ārējo BlueTooth GPS uztvērēju.</string>
@@ -943,17 +925,9 @@
     <string name="cc_hint_seconds">sekundes</string>
     <string name="cc_hint_fraction">daļa</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Meklēt failus\n</string>
-    <string name="file_searching_sdcard_in">Noklusējuma mapēs nav atrasts neviens fails: \n%1$s\n\nMeklēt failus: \n visā SD kartē</string>
-    <string name="file_list_no_files">c:geo neatrod atbilstošos failus.</string>
-    <string name="file_searching">Atbilstošu failu meklēšana</string>
-    <string name="file_title_searching">Meklē</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Izvēlēties direktoriju</string>
     <string name="simple_dir_chooser_current_path">Direktorija:</string>
     <string name="simple_dir_chooser_invalid_path">Nederīga direktorija</string>
-    <string name="simple_file_chooser_title">Izvēlieties failu</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ielādē slēpņus no %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ielādē starpposmus no %1$s</string>
@@ -973,13 +947,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="gpx_import_error_parser">Nepareizs faila formāts</string>
     <string name="gpx_import_error_unexpected">Neparedzēta kļūda</string>
     <string name="gpx_import_canceled_with_filename">GPX importēšana no %1$s slēpņiem tikusi atcelta</string>
-    <string name="gpx_import_delete_title">Dzēst failu</string>
-    <string name="gpx_import_delete_message">Vai vēlaties dzēst %s?</string>
     <string name="gpx_import_select_list_title">GPX importēšana uz sarakstu</string>
-    <string name="gpx_import_android">Importēt no Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Atlasiet kartes (map) failu</string>
-    <string name="track_file_select_title">Atlasiet kartes ieraksta failu</string>
     <!-- import -->
     <string name="web_import_title">Importēt no send2cgeo</string>
     <string name="web_import_waiting">Gaida jaunus slēpņus no send2cgeo…</string>
@@ -1508,7 +1476,6 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- calendar adder -->
     <string name="event_fail">Pasākuma slēpni kalendāram pievienot neizdevās</string>
     <string name="init_low_disk_space">Ierīcē sāk pietrūkt atmiņas</string>
-    <string name="init_low_disk_space_message">Slēpņu datu direktorijā sāk pietrūkt atmiņas. Tas var izraisīt c:geo darbības traucējumus. Lūdzu atbrīvo atmiņu.</string>
     <string name="init_confirm_debug">c:geo darbojas atkļūdošanas režīmā!</string>
     <string name="list_confirm_debug_message">Atkļūdošanas režīms var izraisīt nestabilu aplikācijas darbību! Vai vēlies šo režīmu deaktivizēt?</string>
     <string name="err_select_logimage_upload_size">Pārāk liels attēls, lūdzu, izvēlies mazāku izšķirtspēju.</string>

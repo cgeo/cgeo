@@ -419,8 +419,6 @@
     <string name="about_system_write_logcat_type">Utworzyć standardowy lub rozszerzony plik logów?\n\nStandardowe pliki logów będą dobre dla większości przypadków używania.\nUżywaj rozszerzonych plików logów tylko wtedy, gdy zostanie o to poproszony.</string>
     <string name="about_system_write_logcat_type_standard">Standardowy</string>
     <string name="about_system_write_logcat_type_extended">Rozszerzone</string>
-    <string name="about_system_write_logcat_success">Plik logu zapisany do \"%1$s\" w katalogu \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Plik dziennika jest pusty</string>
     <string name="about_system_write_logcat_error">Błąd zapisu pliku logu</string>
     <string name="changelog_github">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
@@ -448,7 +446,6 @@
     <string name="settings_title_cachedetails">Szczegóły skrzynki</string>
     <string name="settings_summary_cachedetails">Ustaw sposób wyświetlania informacji o skrzynce.</string>
     <string name="settings_title_offlinedata">Dane offline</string>
-    <string name="settings_summary_offlinedata">Skonfiguruj dane do zapisywania w trybie offline, lokalizację i katalogi plików GPX.</string>
     <string name="settings_title_logging">Logowanie</string>
     <string name="settings_summary_logging">Skonfiguruj swój podpis i ustaw opcje logowania.</string>
     <string name="settings_title_map">Mapa</string>
@@ -459,12 +456,9 @@
     <string name="settings_title_map_content">Zawartość mapy</string>
     <string name="settings_title_map_behavior">Zachowanie mapy</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Katalog z danymi skrzynek</string>
-    <string name="settings_title_data_dir_usage">Katalog z danymi skrzynek (użyto %1$s)</string>
     <string name="calculate_dataDir_title">Użycie danych</string>
     <string name="calculate_dataDir">Obliczanie użycia dysku</string>
     <string name="settings_data_dir_item">%1$s (%2$s wolne)</string>
-    <string name="confirm_data_dir_move_title">Czy przenieść katalog z danymi?</string>
     <string name="confirm_data_dir_move">Przeniesienie katalogu z danymi może zająć bardzo długo, zależnie od Twojego urządzenia i wielkości danych.</string>
     <string name="settings_title_basicmembers">Opcje dla użytkowników Basic</string>
     <string name="settings_title_navigation">Nawigacja</string>
@@ -564,7 +558,6 @@
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
     <string name="init_zoomincludingwaypoints_description">Podczas mapowania pojedynczej skrzynki: czy powiększenie powinno uwzględniać wszystkie jej punkty nawigacji?</string>
     <string name="init_brouterThreshold">Obliczanie trasy</string>
-    <string name="init_brouterThreshold_description">Maksymalna odległość, do której aplikacja dodatkowa brouter (jeśli jest zainstalowana) obliczy trasę.</string>
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
@@ -589,7 +582,6 @@
     <string name="init_listdisplay">Pokaż dodatkowe listy na liście skrzynek</string>
     <string name="init_summary_listdisplay">Pokaż członkostwo skrytek w dodatkowych listach na liście skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
-    <string name="init_summary_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Utwórz kopię zapasową</string>
     <string name="init_backup_summary">Pamiętaj, że ta funkcja może tworzyć kopię zapasową skrzynek, punktów nawigacyjne i ustawień, ale nie zachowuje obrazów. \nAby móc przywrócić dane nawet po utracie telefonu, pliki kopii zapasowej powinny być kopiowane do niezależnej lokalizacji.</string>
@@ -618,9 +610,7 @@
     <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
     <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
     <string name="init_backup_unnecessary">Baza danych jest pusta, tworzenie kopii zapasowej nie jest potrzebne.</string>
-    <string name="init_backup_folder_exists_error">Nie można utworzyć nowego katalogu kopii zapasowej. Czy wykonałeś już kopię zapasową w ciągu ostatniej minuty?</string>
     <string name="init_backup_no_backup_available">Plik kopii zapasowej nie jest dostępny.</string>
-    <string name="backup_confirm_overwrite">Spowoduje to usunięcie najstarszego istniejącego katalogu kopii zapasowej z %s. \nCzy chcesz kontynuować?</string>
     <string name="restore_confirm_overwrite_database">UWAGA: To nadpisze %s na twoim urządzeniu!</string>
     <string name="restore_confirm_overwrite_database_and_settings">OSTRZEŻENIE: To nadpisze %s i twoje bieżące ustawienia na Twoim urządzeniu!</string>
     <string name="restore_confirm_overwrite_settings">OSTRZEŻENIE: To nadpisze aktualne ustawienia na twoim urządzeniu!</string>
@@ -645,12 +635,9 @@
     <string name="settings_readingerror">Błąd odczytu ustawień</string>
     <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
-    <string name="settings_info_offline_maps">c:geo obsługuje mapy również w trybie offline. Możesz pobrać mapy z Mapsforge lub stworzyć własne z danych OSM. Aby uzyskać wsparcie map w trybie offline trzeba najpierw wybrać katalog w którym są one przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
     <string name="settings_info_themes">c:geo wspiera motywy dla map offline. Mogą być używane by zmienić kolorystykę mapy (np. aby uzyskać tryb nocny) lub by zaznaczyć wybrane obiekty jak ścieżki rowerowe lub izolinie.</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
-    <string name="init_map_directory_description">Katalog z mapami offline</string>
-    <string name="init_dataDir">Wybierz katalog z danymi</string>
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrzynek (spoilers, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
     <string name="init_maptrail">Pokaż historię</string>
     <string name="init_maptrail_length">Maks. długość ścieżki historii</string>
@@ -694,23 +681,16 @@
     <string name="init_debug_note">c:geo może generować wiele informacji związanych z debugowaniem. Aktywacja tego ustawienia będzie mieć wpływ na stabilność c:geo i jest zalecana tylko, jeśli zostanie wyświetlona prośba o wysyłanie logu do programistów. Prosimy o zachowanie tego logowania wyłączonego podczas normalnego korzystania z c:geo!</string>
     <string name="init_debug">Włącz logowanie błędów</string>
     <string name="init_dbonsdcard_title">Położenie bazy danych</string>
-    <string name="init_dbonsdcard_note">Możesz przechowywać bazy danych c:geo na wewnętrznym lub zewnętrznym dysku. Przechowywanie na dysku użytkownika może uwolnić część pamięci, ale możesz stracić część wydajności, a c:geo nie będzie działać, jeśli pamięć nie jest dostępna lub usuniesz plik bazy danych.</string>
     <string name="init_dbonsdcard">Na dysku użytkownika</string>
     <string name="init_dbmove_dbmove">Przenoszę bazę danych</string>
     <string name="init_dbmove_running">Przenoszę bazę danych</string>
     <string name="init_dbmove_success">Baza danych została przeniesiona.</string>
     <string name="init_dbmove_failed">Nie udało się przenieść bazy danych</string>
-    <string name="init_datadirmove_datadirmove">Przenoszenie katalogu danych skrzynek</string>
-    <string name="init_datadirmove_running">Przenoszenie katalogu danych skrzynek</string>
-    <string name="init_datadirmove_success">Pomyślnie przeniesiono katalog danych skrzynek.</string>
-    <string name="init_datadirmove_failed">Przenoszenie katalogu danych skrzynek częściowo lub całkowicie nie powiodło się. Sprawdź stare i nowe katalogi i przenieś ręcznie w razie potrzeby.</string>
     <string name="init_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
     <string name="init_summary_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
     <string name="init_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
     <string name="init_summary_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
-    <string name="init_rendertheme_folder">Katalog z motywami map</string>
     <string name="init_maintenance">Konserwacja</string>
-    <string name="init_maintenance_directories_note">c:geo przechowuje zdjęcia, zdjęcia do logów i inne pliki związane ze skrzynką w oddzielnym katalogu. W niektórych przypadkach (np. import/eksport bazy danych) ten katalog może zawierać nieaktualne pliki, które mogą być usunięte tutaj.</string>
     <string name="init_maintenance_directories">Usuń nieaktualne pliki</string>
     <string name="init_location">Geolokalizacja</string>
     <string name="init_location_note">Na urządzeniach wyposażonych w Usługi Google Play, c:geo może automatycznie używać dokładniejszego źródła geolokalizacji. Jednakże to przeszkadza w użyciu zewnętrznego odbiornika GPS BlueTooth.</string>
@@ -873,12 +853,7 @@
     <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
     <string name="cache_menu_allowWaypointExtraction">Zezwalaj na punkty nawigacji z notatki</string>
     <string name="cache_personal_note_edit">Edytuj</string>
-    <string name="cache_personal_note_storewaypoints">Dodaj/aktualizuj punkty drogi</string>
-    <string name="cache_personal_note_removewaypoints">Usuń punkty drogi</string>
     <string name="cache_personal_note_storewaypoints_success">Punkty drogi zostały dodane do notatki osobistej</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Punkty drogi zostały dodane do notatki, ale musiały zostać skrócone (maksymalny rozmiar notatki osobistej: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Punkty drogi nie mogą być przechowywane w notatce ze względu na ograniczenia rozmiaru (maksymalny rozmiar notatki osobistej: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_nowaypoints">Nie znaleziono punktów drogi, które można zapisać</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zapobiegaj ekstrakcji punktów nawigacji</string>
     <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Osobista notatka będzie ucięta po przekroczeniu %d znaków na Geocaching.com.</string>
@@ -1065,17 +1040,9 @@
     <string name="cc_hint_fraction">cz. ułamk.</string>
     <string name="lowercase">małe litery</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Szukam plików\nw</string>
-    <string name="file_searching_sdcard_in">Nie znaleziono plików w domyślnych katalogach:\n%1$s\n\nPrzeszukiwanie całej karty SD:\n</string>
-    <string name="file_list_no_files">c:geo nie znalazł odpowiednich plików.</string>
-    <string name="file_searching">Wyszukiwanie pasujących plików</string>
-    <string name="file_title_searching">Szukam</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Wybierz katalog</string>
     <string name="simple_dir_chooser_current_path">Ścieżka:</string>
     <string name="simple_dir_chooser_invalid_path">Nieprawidłowa ścieżka</string>
-    <string name="simple_file_chooser_title">Wybierz plik</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ładowanie skrzynek z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ładowanie punktów orientacyjnych z %1$s</string>
@@ -1094,14 +1061,7 @@
     <string name="gpx_import_error_parser">Zły format pliku</string>
     <string name="gpx_import_error_unexpected">Nieoczekiwany błąd</string>
     <string name="gpx_import_canceled_with_filename">Import GPX z %1$s został anulowany</string>
-    <string name="gpx_import_delete_title">Usuń plik</string>
-    <string name="gpx_import_delete_message">Czy na pewno chcesz usunąć %s?</string>
     <string name="gpx_import_select_list_title">Importuj GPX do listy</string>
-    <string name="gpx_import_android">Import z Androida</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Wybierz plik z mapą</string>
-    <string name="track_file_select_title">Wybierz plik śladu</string>
-    <string name="individual_route_file_select_title">Wybierz indywidualny plik trasy</string>
     <!-- import -->
     <string name="web_import_title">Import z send2cgeo</string>
     <string name="web_import_waiting">Czekam na nowe skrzynki z send2cgeo…</string>
@@ -1166,9 +1126,6 @@
     <string name="map_showc_ownfound">Pokaż własne/znalezione skrzynki</string>
     <string name="map_showc_disabled">Pokaż wyłączone skrzynki</string>
     <string name="map_showc_archived">Pokaż zarchiwizowane skrzynki</string>
-    <string name="map_showwp_original">Pokaż oryginalne punkty nawigacji</string>
-    <string name="map_showwp_parking">Pokaż parkingi z punktów nawigacji</string>
-    <string name="map_showwp_visited">Ukryj odwiedzone punkty nawigacji</string>
     <string name="map_show_track">Pokaż ścieżkę/trasę GPX</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
@@ -1707,7 +1664,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Nie udało się dodać wydarzenia do kalendarza</string>
     <string name="init_low_disk_space">Zaczyna brakować miejsca</string>
-    <string name="init_low_disk_space_message">Zaczyna brakować miejsca w katalog z danymi, To może powodować nieprawidłowe działanie c:geo. Zwolnij trochę miejsca.</string>
     <string name="init_confirm_debug">c: geo jest uruchomiony w trybie debugowania!</string>
     <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
     <string name="err_select_logimage_upload_size">Zbyt duże zdjęcie, wybierz mniejszą skalę.</string>
@@ -1817,34 +1773,24 @@
     <string name="localfile_cannot_handle">Błąd odczytu pliku lub c:geo nie może obsłużyć tego typu pliku.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Odbierz plik mapy</string>
-    <string name="receivemapfile_success">Pomyślnie odebrano plik mapy jako \"%s\" i zapisano go w katalogu mapy</string>
     <string name="receivemapfile_error">Błąd podczas odbierania pliku mapy</string>
-    <string name="receivemapfile_error_io_exception">Błąd I/O podczas odbierania pliku mapy. Czy katalog mapy \"%s\" jest zapisywalny?</string>
     <string name="receivemapfile_error_filenotfound_exception">Nie znaleziono pliku podczas odbierania pliku mapy.</string>
-    <string name="receivemapfile_alreadyexists">Plik o tej nazwie już istnieje. Nadpisać istniejący plik lub zapisać nowy plik pod inną nazwą?</string>
-    <string name="receivemapfile_option_overwrite">Nadpisz</string>
-    <string name="receivemapfile_option_differentname">Inna nazwa</string>
     <string name="receivemapfile_kb_copied">skopiowano %d kB</string>
     <string name="receivemapfile_cancelled">Transfer pliku mapy anulowany</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>
-    <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony \"Zapisz\".\n\n Pobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, pobrany plik zostanie skopiowany do katalogu mapy c:geo\'s i ustawiony jako aktualna mapa dla c:geo.\n\n Bądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_choose">Wybierz mapę</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
     <string name="downloadmanager_not_available">Nie można pobrać pliku mapy, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
-    <string name="downloadmap_target_not_writable">Cel \"%s\" nie jest możliwy do zapisania - pobrany plik mapy zostanie zapisany w systemowym katalogu pobranych i musi być przeniesiony ręcznie do katalogu z mapami.</string>
     <string name="downloadmap_allow_metered_network">Zezwalaj na pobieranie przez dowolną sieć (np. połączenie komórkowe)</string>
     <string name="downloadmap_confirmation">Pobrać mapę \"%1$s\"?\n\nMoże to zająć trochę czasu oraz wiązać się ze znacznymi kosztami, w zależności od Twojego połączenia sieciowego.\n\nInformacje o rozmiarze: %2$s</string>
     <string name="downloadmap_handling">Pobieranie będzie obsługiwane w tle przez systemowego menedżera pobierania. Powiadomienie powinno pojawić się zaraz po rozpoczęciu pobieranie (co może chwilę potrwać).</string>
     <string name="button_continue">Kontynuuj</string>
-    <string name="downloadmap_onedirup">(jeden katalog wyżej)</string>
     <string name="downloadmap_checkforupdates_button">Sprawdź aktualizacje</string>
     <string name="downloadmap_available_updates">Dostępne aktualizacje</string>
     <string name="downloadmap_no_updates_found">Nie znaleziono aktualizacji mapy</string>
-    <string name="downloadmap_directory">katalog</string>
     <string name="downloadmap_mapfile">plik mapy</string>
-    <string name="downloadmap_retrieving_directory_data">Pobieram dane katalogu…</string>
     <string name="downloadmap_checking_for_updates">Sprawdzam aktualizacje…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>

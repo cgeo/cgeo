@@ -418,8 +418,6 @@
     <string name="about_system_write_logcat_type">Vytvoriť štandardný alebo rozšírený súbor denníka?\n\nŠtandardné súbory denníka stačia vo väčšine prípadov.\nRozšírené súbory denníka použite, ak sa objaví výzva, aby ste tak urobili.</string>
     <string name="about_system_write_logcat_type_standard">Štandardný</string>
     <string name="about_system_write_logcat_type_extended">Rozšírený</string>
-    <string name="about_system_write_logcat_success">Súbor denníka zapísaný do \"%1$s\" v priečinku \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Súbor denníka je prázdny</string>
     <string name="about_system_write_logcat_error">Chyba pri zapisovaní súboru denníka</string>
     <string name="changelog_github">Zoznam všetkých zmien</string>
     <string name="about_nutshellmanual">Návod na internete</string>
@@ -447,7 +445,6 @@
     <string name="settings_title_cachedetails">Detaily skrýše</string>
     <string name="settings_summary_cachedetails">Nastavte zobrazovanie detailov skrýše.</string>
     <string name="settings_title_offlinedata">Údaje v režime offline</string>
-    <string name="settings_summary_offlinedata">Nakonfigurujte údaje ukladané na použitie offline, miesto uloženia a priečinky pre súbory GPX.</string>
     <string name="settings_title_logging">Zápis logu</string>
     <string name="settings_summary_logging">Nastavte svoj podpis a možnosti logovania.</string>
     <string name="settings_title_map">Mapa</string>
@@ -458,12 +455,9 @@
     <string name="settings_title_map_content">Obsah máp</string>
     <string name="settings_title_map_behavior">Nastavenie správania mapy</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Adresár údajov skrýš</string>
-    <string name="settings_title_data_dir_usage">Adresár údajov skrýš (%1$s využité)</string>
     <string name="calculate_dataDir_title">Využitie údajov skrýš</string>
     <string name="calculate_dataDir">Počíta sa veľkosť údajov skrýš na disku</string>
     <string name="settings_data_dir_item">%1$s (%2$s voľné)</string>
-    <string name="confirm_data_dir_move_title">Presunúť adresár s údajmi skrýš?</string>
     <string name="confirm_data_dir_move">Presúvanie údajov skrýš môže trvať naozaj dlho, závisí to od zariadenia a množstva údajov.</string>
     <string name="settings_title_basicmembers">Možnosti pre bežných členov</string>
     <string name="settings_title_navigation">Navigácia</string>
@@ -563,7 +557,6 @@
     <string name="init_zoomincludingwaypoints">Priblíženie vrátane bodov trasy</string>
     <string name="init_zoomincludingwaypoints_description">Ak mapujete jednu kešku: má sa priblíženie nastaviť tak, aby mapa obsahovala všetky body trasy kešky?</string>
     <string name="init_brouterThreshold">Vypočítať trasu</string>
-    <string name="init_brouterThreshold_description">Maximálna vzdialenosť, do ktorej pomocná aplikácia (ak je nainštalovaná) vypočíta trasu.</string>
     <string name="init_brouterShowBothDistances">Zobraziť priamu vzdialenosť</string>
     <string name="brouter_recalculating">Trasa sa prepočítava na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Ak je trasovanie aktívne: zobraziť priamu vzdialenosť okrem vypočítanej dĺžky trasy.</string>
@@ -588,7 +581,6 @@
     <string name="init_listdisplay">Zobraziť v zozname kešiek ďalšie zoznamy</string>
     <string name="init_summary_listdisplay">Zobraziť v zozname kešiek členstvo kešiek v ďalších zoznamoch</string>
     <string name="init_livelist">Zobrazovať smer</string>
-    <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvoriť zálohu</string>
     <string name="init_backup_summary">Majte na pamäti, že pomocou tejto funkcie je možné zálohovať kešky, body trasy a nastavenia, ale nie obrázky z kešiek. \nAk chcete mať možnosť obnoviť údaje aj po strate telefónu, súbory so zálohou musia byť skopírované na nezávislé miesto.</string>
@@ -617,9 +609,7 @@
     <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
     <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
     <string name="init_backup_unnecessary">Databáza je prázdna, záloha nie je potrebná.</string>
-    <string name="init_backup_folder_exists_error">Nedá sa vytvoriť nový priečinok na zálohy. Vytvorili ste už zálohu za poslednú minútu?</string>
     <string name="init_backup_no_backup_available">Nie je dostupný žiadny súbor so zálohou.</string>
-    <string name="backup_confirm_overwrite">Tým odstránite priečinok s najstaršou existujúcou zálohou zo %s. \nChcete pokračovať?</string>
     <string name="restore_confirm_overwrite_database">UPOZORNENIE: Tým prepíšete %s vo svojom zariadení!</string>
     <string name="restore_confirm_overwrite_database_and_settings">UPOZORNENIE: Tým prepíšete %s a svoje aktuálne nastavenia na zariadení!</string>
     <string name="restore_confirm_overwrite_settings">UPOZORNENIE: Tým prepíšete svoje aktuálne nastavenia na zariadení!</string>
@@ -644,12 +634,9 @@
     <string name="settings_readingerror">Chyba pri čítaní nastavení</string>
     <string name="settings_restart">Aplikácia c:geo sa musí teraz reštartovať, aby sa použili načítané nastavenia</string>
     <string name="settings_info_offline_maps_title">Info o Offline mapách</string>
-    <string name="settings_info_offline_maps">c:geo podporuje mapy pre offline použitie. Môžete si stiahnuť mapy z Mapsforge alebo dokonca vytvoriť vaše vlastné mapy z OSM dát. Ak chcete používať offline mapy, musíte najprv vybrať priečinok pre offline mapy.</string>
     <string name="settings_info_themes_title">Info o témach mapy</string>
     <string name="settings_info_themes">c:geo podporuje vlastné štýly pre offline mapy. Tieto môžu byť použité na zmenu farebného štýlu mapy (napr. nočná mapa), na zvýraznenie dôležitých objektov (ako sú napr. cyklotrasy) alebo na určenie šírky čiar.</string>
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
-    <string name="init_map_directory_description">Priečinok s offline mapami</string>
-    <string name="init_dataDir">Vyberte adresár pre údaje skrýš</string>
     <string name="init_dataDir_note">Môžete zvoliť ukladanie ďalších údajov k skrýšam (spoilery, obrázky z logov…) do externej pamäte (emulovaná alebo skutočná externá SD karta, závisí to od zariadenia).</string>
     <string name="init_maptrail">Zobraziť trasu v histórii</string>
     <string name="init_maptrail_length">Max. dĺžka histórie trasy</string>
@@ -689,23 +676,16 @@
     <string name="init_debug_note">c:geo môže vytvárať množstvo údajov ladenia. Aktivovanie tohto nastavenia bude mať vplyv na stabilitu c:geo a odporúča sa len v prípade, že je potrebné odoslať protokol vývojárom. Počas bežného používania c:geo nechajte zaznamenávanie údajov pre ladenie vypnuté!</string>
     <string name="init_debug">Aktivovať denník ladenia</string>
     <string name="init_dbonsdcard_title">Umiestnenie databázy</string>
-    <string name="init_dbonsdcard_note">Databázu c:geo môžete uložiť buď interne do systému, prípadne do priečinka v používateľskej pamäti. Keď ju budete mať v používateľskej pamäti, môžete ušetriť nejaké miesto, ale výkon sa trochu zníži a c:geo nebude fungovať, ak nebude pamäť k dispozícii, prípadne ak odstránite databázový súbor.</string>
     <string name="init_dbonsdcard">V používateľskej pamäti</string>
     <string name="init_dbmove_dbmove">Presúvanie databázy</string>
     <string name="init_dbmove_running">Prebieha presúvanie databázy</string>
     <string name="init_dbmove_success">Databáza bola úspešne presunutá.</string>
     <string name="init_dbmove_failed">Presun databázy zlyhal.</string>
-    <string name="init_datadirmove_datadirmove">Presúvanie adresára údajov skrýš</string>
-    <string name="init_datadirmove_running">Presúvanie adresára údajov skrýš</string>
-    <string name="init_datadirmove_success">Adresár údajov skrýš úspešne presunutý.</string>
-    <string name="init_datadirmove_failed">Presúvanie adresára údajov skrýš čiastočne alebo úplne neúspešné. Skontrolujte starý a nový priečinok a presuňte ručne, ak to bude potrebné.</string>
     <string name="init_plain_logs">Jednoduché logy</string>
     <string name="init_summary_plain_logs">Zobraziť záznamy logu bez farieb</string>
     <string name="init_use_native_ua">Android prehliadač</string>
     <string name="init_summary_use_native_ua">Ohlásiť sa ako prehliadač Android. Pomôže vyriešiť problémy pri niektorých poskytovateľoch siete.</string>
-    <string name="init_rendertheme_folder">Priečinok s témami máp</string>
     <string name="init_maintenance">Údržba</string>
-    <string name="init_maintenance_directories_note">c:Geo ukladá obrázky, obrázky z logov a ďalšie súbory súvisiace so skrýšou v samostatnom priečinku. V niektorých prípadoch (ako import/export databázy) tento priečinok môže obsahovať neaktuálne súbory, ktoré môžete zmazať tu.</string>
     <string name="init_maintenance_directories">Odstrániť osirelé súbory</string>
     <string name="init_location">Geolokácia</string>
     <string name="init_location_note">Na zariadeniach vybavených službami Google Play môže c:geo automaticky používať lepšiu možnosť geolokácie. Táto možnosť ale zabraňuje používaniu externého bluetooth GPS prijímača. Zároveň, v móde s nízkou spotrebou môže byť zabránené použitiu GPS keď nie je nutná vysoká presnosť zamerania.</string>
@@ -1057,17 +1037,9 @@
     <string name="cc_hint_fraction">zlomok</string>
     <string name="lowercase">malé písmená</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Vyhľadávanie súborov\nv</string>
-    <string name="file_searching_sdcard_in">Žiadne súbory neboli nájdené v predvolených priečinkoch:\n%1$s\n\nVyhľadávanie súborov na celej SD karte:\n</string>
-    <string name="file_list_no_files">Prepáčte, c:geo sa nepodarilo nájsť žiadne vhodné súbory.</string>
-    <string name="file_searching">Vyhľadávanie zodpovedajúcich súborov</string>
-    <string name="file_title_searching">Vyhľadávanie</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Výber priečinka</string>
     <string name="simple_dir_chooser_current_path">Cesta:</string>
     <string name="simple_dir_chooser_invalid_path">Neplatná cesta</string>
-    <string name="simple_file_chooser_title">Vyberte súbor</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Načítavanie skrýš z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Načítavanie bodov trasy z %1$s</string>
@@ -1086,14 +1058,7 @@
     <string name="gpx_import_error_parser">Nie je v poriadku formát súboru</string>
     <string name="gpx_import_error_unexpected">Neočakávaná chyba</string>
     <string name="gpx_import_canceled_with_filename">Import GPX z %1$s bol zrušený</string>
-    <string name="gpx_import_delete_title">Vymazať súbor</string>
-    <string name="gpx_import_delete_message">Chcete zmazať %s?</string>
     <string name="gpx_import_select_list_title">Importovať GPX do zoznamu</string>
-    <string name="gpx_import_android">Importovať z Androidu</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Výber mapového súboru</string>
-    <string name="track_file_select_title">Vyberte súbor s trasou</string>
-    <string name="individual_route_file_select_title">Vyberte súbor s individuálnou trasou</string>
     <!-- import -->
     <string name="web_import_title">Importovať zo send2cgeo</string>
     <string name="web_import_waiting">Čakanie na nové skrýše zo send2cgeo…</string>
@@ -1698,7 +1663,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Nepodarilo sa pridať Event cache do kalendára</string>
     <string name="init_low_disk_space">Málo miesta na ukladanie</string>
-    <string name="init_low_disk_space_message">V adresári údajov skrýš je málo miesta. Môže dôjsť k nesprávnemu fungovaniu c:geo. Uvoľnite nejaké miesto.</string>
     <string name="init_confirm_debug">c:geo je spustené v režime ladenia!</string>
     <string name="list_confirm_debug_message">V režime ladenia dochádza k nestabilnému správaniu aplikácie! Chcete deaktivovať režim ladenia?</string>
     <string name="err_select_logimage_upload_size">Obrázok je príliš veľký, vyberte menší obrázok.</string>
@@ -1806,23 +1770,16 @@
     <string name="localfile_cannot_handle">Chyba počas čítania súboru alebo c:geo nevie pracovať s týmto druhom súboru.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Získať mapový súbor</string>
-    <string name="receivemapfile_success">Mapový súbor bol úspešne získaný ako \"%s\" a uložený do priečinka máp</string>
     <string name="receivemapfile_error">Chyba počas získavania mapového súboru</string>
-    <string name="receivemapfile_error_io_exception">Chyba vstupu/výstupu počas prijímania mapového súboru. Dá sa zapisovať do priečinka máp \"%s\"?</string>
     <string name="receivemapfile_error_filenotfound_exception">Chyba: súbor sa počas prijímania mapového súboru nenašiel.</string>
-    <string name="receivemapfile_alreadyexists">Súbor s týmto názvom už existuje. Prepísať existujúci súbor alebo uložiť nový súbor s iným názvom?</string>
-    <string name="receivemapfile_option_overwrite">Prepísať</string>
-    <string name="receivemapfile_option_differentname">Premenovať</string>
     <string name="receivemapfile_kb_copied">%d kB skopírovaných</string>
     <string name="receivemapfile_cancelled">Prenos mapového súboru bol zrušený</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Prevziať offline mapu</string>
-    <string name="downloadmap_info">Dôjde k presmerovaniu na stránku umožňujúcu stiahnuť základné offline mapy (bez podpory tém).\n\nVyberte súbor .map podľa vášho regiónu a kliknite naň pre jeho stiahnutie.\n\nPo dokončení sťahovania kliknite na stiahnutý súbor pre jeho nastavenie ako aktuálnej mapy v c:geo</string>
     <string name="downloadmap_choose">Zvoľte mapu</string>
     <string name="downloadmap_filename">Preberá sa %s</string>
     <string name="downloadmanager_not_available">Súbor s mapou sa nedá prevziať, systémový správca preberania nie je k dispozícii</string>
     <string name="download_started">Prevzatie spustené na pozadí</string>
-    <string name="downloadmap_target_not_writable">Do cieľového miesta „%s“ sa nedá zapisovať – prevzatý mapový súbor bude uložený do systémového priečinka prevzatých súborov a treba ho ručne presunúť do priečinka máp.</string>
     <string name="downloadmap_allow_metered_network">Povoliť prevzatie cez meranú sieť (napr. mobilné pripojenie)</string>
     <string name="downloadmap_confirmation">Prevziať mapu \"%1$s\"?\n\nMôže to nejakú dobu trvať a môžu byť účtované veľké poplatky v závislosti od sieťového pripojenia.\n\nInformácie o veľkosti: %2$s</string>
     <string name="downloadmap_handling">Samotné prevzatie bude spracované systémovým správcom preberania na pozadí. Keď sa začne preberať, uvidíte upozornenie. Prevzatie môže nejakú dobu trvať.</string>

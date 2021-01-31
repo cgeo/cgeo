@@ -414,7 +414,6 @@
     <string name="settings_title_cachedetails">Ládaadatok</string>
     <string name="settings_summary_cachedetails">A ládák megjelenő adatainak beállítása</string>
     <string name="settings_title_offlinedata">Offline adatok</string>
-    <string name="settings_summary_offlinedata">Egyéb offline adatok tárolásának beállítása</string>
     <string name="settings_title_logging">Logolás</string>
     <string name="settings_summary_logging">Aláírásod és egyéb logolási opciók beállítása</string>
     <string name="settings_title_map">Térkép</string>
@@ -422,12 +421,9 @@
     <string name="settings_title_map_data">Térképek beállításai</string>
     <string name="settings_title_map_content">Térképek részletessége</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Ládaadat mappa</string>
-    <string name="settings_title_data_dir_usage">Ládaadat mappa (%1$s adat)</string>
     <string name="calculate_dataDir_title">Ládaadatok keresése</string>
     <string name="calculate_dataDir">Ládaadatok méretének összegzése</string>
     <string name="settings_data_dir_item">%1$s (%2$s szabad)</string>
-    <string name="confirm_data_dir_move_title">Ládaadatok mozgatása?</string>
     <string name="confirm_data_dir_move">A ládaadatok mozgatása hosszú ideig is eltarthat az adatok mennyiségétől, a készülékedtől függően.</string>
     <string name="settings_title_basicmembers">Normál tagok beállításai</string>
     <string name="settings_title_navigation">Navigáció</string>
@@ -511,7 +507,6 @@
     <string name="init_showwaypoints">Útpontok mutatása élő térképen</string>
     <string name="init_showwaypoint_description">Maximum ennyi útpontot mutasson</string>
     <string name="init_brouterThreshold">Útvonaltervezés</string>
-    <string name="init_brouterThreshold_description">Maximális távolság, ameddig a brouter segítő alkalmazás (ha telepítve van) útvonaltervezést végez.</string>
     <string name="init_brouterShowBothDistances">Légvonalbeli távolság mutatása</string>
     <string name="init_disabled">Letiltott ládák kihagyása</string>
     <string name="init_summary_disabled">Letiltott ládák kihagyása</string>
@@ -524,7 +519,6 @@
     <string name="init_choose_list">Listaválasztás</string>
     <string name="init_summary_choose_list">Listaválasztás ládamentéséhez</string>
     <string name="init_livelist">Ládák irányának jelzése a listán</string>
-    <string name="init_summary_livelist">Ládák irányának jelzése a listán</string>
     <!-- backup / restore -->
     <string name="init_backup">Ládák / útpontok biztonsági mentése</string>
     <string name="init_backup_backup">Biztonsági mentés</string>
@@ -549,12 +543,9 @@
     <string name="settings_readingerror">Hiba a beállítások olvasásakor</string>
     <string name="settings_restart">A c:geo-t most újra kell indítani a betöltött beállítások használatához</string>
     <string name="settings_info_offline_maps_title">Offline térképek adatai</string>
-    <string name="settings_info_offline_maps">A c:geo támogatja a kapcsolat nélküli (offline) térképhasználatot. Térképeket a Mapsforge-ról tölthetsz le, vagy létrehozhatsz saját térképeket is OSM adatokból. A funkció használatához meg kell adnod az offline térképek mappáját.</string>
     <string name="settings_info_themes_title">Térkép megjelenítési stílusok</string>
     <string name="settings_info_themes">A c:geo támogatja az egyedi térképstílusokat. Ezzel meg lehet változtatni a térkép színeit (pl. éjszakai nézethez), vagy bizonyos objektumokat ki lehet vele emelni, mint pl. kerékpárutakat, szintvonalakat, stb.</string>
     <string name="init_mapsource_select">Térkép választása</string>
-    <string name="init_map_directory_description">Offline térképek mappája</string>
-    <string name="init_dataDir">Ládaadat mappa beállítása</string>
     <string name="init_dataDir_note">A ládák kiegészítő adatait (spolier képek, logfotók, …) külső tárolón is tarthatod (a készülékedtől függően ez lehet emulált vagy valódi, külső SD kártya is).</string>
     <string name="init_include_found_status">\"Megtaláltam\" jelölések exportálása</string>
     <string name="init_trackautovisit">Utazók logolása</string>
@@ -572,23 +563,16 @@
     <string name="init_debug_note">A c:geo nagy mennyiségű hibakeresési információt képes generálni, de ennek bekapcsolása hatással lehet a stabil működésére. Ez csak akkor ajánlott, ha a fejlesztők logok küldését kérték. Kérjük, tartsd kikapcsolt állapotban a normal használat során!</string>
     <string name="init_debug">Hibakeresési napló aktiválása</string>
     <string name="init_dbonsdcard_title">Adatbázis helye</string>
-    <string name="init_dbonsdcard_note">A c:geo adatbázisát tarthatod a belső vagy egy saját tárolón is. Saját tároló használatával memóriát szabadíthatsz fel, de ez teljesítményvesztéssel is járhat, továbbá a c:geo nem fog működni, ha a tároló nem elérhető vagy törölted az adatbázisfájlt.</string>
     <string name="init_dbonsdcard">Saját tároló</string>
     <string name="init_dbmove_dbmove">Adatbázis mozgatása</string>
     <string name="init_dbmove_running">Adatbázis mozgatása</string>
     <string name="init_dbmove_success">Az adatbázis mozgatása sikeresen lezajlott</string>
     <string name="init_dbmove_failed">Az adatbázis mozgatása sikertelen</string>
-    <string name="init_datadirmove_datadirmove">Ládaadatok mozgatása</string>
-    <string name="init_datadirmove_running">Ládaadatok mozgatása</string>
-    <string name="init_datadirmove_success">A ládaadatok mozgatása sikeresen befejeződött.</string>
-    <string name="init_datadirmove_failed">A ládaadatok mozgatása részben vagy teljesen sikertelen. Kérjük, ellenőrizd a régi és az új mappákat és saját kezűleg fejezd be a műveletet!</string>
     <string name="init_plain_logs">Log bejegyzések mutatása színek nélkül</string>
     <string name="init_summary_plain_logs">Log bejegyzések mutatása színek nélkül</string>
     <string name="init_use_native_ua">Azonosítás Android böngészőként.</string>
     <string name="init_summary_use_native_ua">Azonosítás Android böngészőként. Ez megoldja a bejelentkezési problémákat bizonyos szolgáltatóknál.</string>
-    <string name="init_rendertheme_folder">Térképstílusok mappája</string>
     <string name="init_maintenance">Karbantartás</string>
-    <string name="init_maintenance_directories_note">A c:geo az egyes ládákhoz képeket, logokat és egyéb fájlokat tárol egy külön mappában. Bizonyos esetekben (pl. adatbázis importja vagy exportja) ez a mappa már felesleges adatokat tartalmazhat, melyek ezzel a funkcióval törölhetőek.</string>
     <string name="init_maintenance_directories">Felesleges fájlok törlése</string>
     <string name="init_location">Helymeghatározás</string>
     <string name="init_location_note">A Google Play-szolgáltatásokat használó készülékeken a c:geo automatikusan egy jobb helymeghatározó technikát használhat. Ez azonban lehetetlenné teszi külső, BlueTooth-os GPS vevő alkalmazását.</string>
@@ -841,14 +825,7 @@
     <string name="internal_cache_default_owner">Te</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Fájlok keresése\nitt</string>
-    <string name="file_searching_sdcard_in">Nem található fájl az alapértelmezett mappában:\n%1$s\n\nFájlok keresése a teljes SD kártyán:\n</string>
-    <string name="file_list_no_files">Sajnáljuk, a c:geo nem talált megfelelő fájlokat.</string>
-    <string name="file_searching">Megfelelő fájlok keresése</string>
-    <string name="file_title_searching">Keresés</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Mappaválasztás</string>
     <string name="simple_dir_chooser_current_path">Útvonal:</string>
     <string name="simple_dir_chooser_invalid_path">Érvénytelen útvonal</string>
     <!-- gpx -->
@@ -863,12 +840,7 @@
     <string name="gpx_import_error_parser">Rossz fájlformátum</string>
     <string name="gpx_import_error_unexpected">Váratlan hiba</string>
     <string name="gpx_import_canceled_with_filename">Importálás %1$s fájlból megszakítva</string>
-    <string name="gpx_import_delete_title">Fájl törlése</string>
-    <string name="gpx_import_delete_message">Szeretnéd törölni ezt: %s?</string>
     <string name="gpx_import_select_list_title">Ládalista betöltése GPX-ből</string>
-    <string name="gpx_import_android">Ládalista betöltése Android-ból</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Térkép fájl kiválasztása</string>
     <!-- import -->
     <string name="web_import_title">Importálás a send2cgeo-ról</string>
     <string name="web_import_waiting">Várakozás új ládákra a send2cgeo-tól…</string>
@@ -1373,7 +1345,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Az esemény hozzáadása a naptárhoz sikertelen.</string>
     <string name="init_low_disk_space">A szabad hely kezd elfogyni</string>
-    <string name="init_low_disk_space_message">A ládaadatok tarolásához szükséges hely kezd elfogyni. Ez a c:geo hibás működését okozhatja. Kérlek, csinálj több szabad helyet!</string>
     <string name="init_confirm_debug">A c:geo hibakeresési módban fut!</string>
     <string name="list_confirm_debug_message">A hibakeresési mód stabilitási problémákat okoz. Kikapcsolod a hibakeresési módot?</string>
     <string name="err_select_logimage_upload_size">Túl nagy a kép. Kérlek, válassz kisebb méretet!</string>

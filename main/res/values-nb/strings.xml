@@ -234,7 +234,7 @@
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
     <string name="warn_invalid_mapfile">Den valgte kartfilen er ikke en gyldig mapsforge-kartfil eller har en versjon som ikke støttes.\n(c:geo støtter nå v3 til v5, men for å bruke v3 må \"Old Mapsforge V3\"-innstillingen være valgt.)\n\nOfflinekartet er ikke tilgjengelig.</string>
-    <string name="warn_pocket_query_select">Ingen utvalgsspørring er valgt.</string>
+    <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
     <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
     <string name="warn_notloggedin_title">Offline-modus</string>
@@ -287,7 +287,6 @@
     <string name="menu_history">Historikk</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Skann GC-kode</string>
-    <string name="menu_pocket_queries">Utvalgsspørringer</string>
     <string name="menu_scan_description">c:geo kan skanne GC-koder fra QR-koder. Den nødvendige appen er ikke installert. Vil du åpne Google Play for å installere den?</string>
     <!-- main screen -->
     <string name="live_map_button">Live-kart</string>
@@ -416,8 +415,6 @@
     <string name="about_system_write_logcat_type">Opprette standard eller utvidet loggfil?\n\nStandard loggfiler vil fungere fint i de fleste tilfeller.\nBruk utvidede loggfiler bare når du blir bedt om å gjøre det.</string>
     <string name="about_system_write_logcat_type_standard">Standard</string>
     <string name="about_system_write_logcat_type_extended">Utvidet</string>
-    <string name="about_system_write_logcat_success">Loggfil skrevet til \"%1$s\" i mappe \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Loggfilen er tom</string>
     <string name="about_system_write_logcat_error">Feil ved skriving av loggfil</string>
     <string name="changelog_github">Liste over alle endringer</string>
     <string name="about_nutshellmanual">Elektronisk håndbok</string>
@@ -445,7 +442,6 @@
     <string name="settings_title_cachedetails">Cache-detaljer</string>
     <string name="settings_summary_cachedetails">Tilpass visningen av cacheinformasjon.</string>
     <string name="settings_title_offlinedata">Offline-data</string>
-    <string name="settings_summary_offlinedata">Konfigurer data som skal lagres for frakoblet bruk, lagringssted og mappe for GPX-filer.</string>
     <string name="settings_title_logging">Logging</string>
     <string name="settings_summary_logging">Endre signatur og loggingsalternativer.</string>
     <string name="settings_title_map">Vis på kartet</string>
@@ -456,12 +452,9 @@
     <string name="settings_title_map_content">Kartinnhold</string>
     <string name="settings_title_map_behavior">Kartatferd</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Mappe for geocache-data</string>
-    <string name="settings_title_data_dir_usage">Mappe for geocache-data (%1$s brukt)</string>
     <string name="calculate_dataDir_title">Lagringsplass brukt på geocache-data</string>
     <string name="calculate_dataDir">Beregner diskforbruket til geocache-data</string>
     <string name="settings_data_dir_item">%1$s (%2$s ledig)</string>
-    <string name="confirm_data_dir_move_title">Flytte mappen med geocache-data?</string>
     <string name="confirm_data_dir_move">Flytting av geocaching-data kan ta lang tid, avhengig av enheten din og mengden data.</string>
     <string name="settings_title_basicmembers">Alternativer for Basic-medlemmer</string>
     <string name="settings_title_navigation">Navigasjon</string>
@@ -561,7 +554,6 @@
     <string name="init_zoomincludingwaypoints">Kartutsnitt inkluderer veipunkter</string>
     <string name="init_zoomincludingwaypoints_description">Ved visning av en enkelt cache: Skal kartutsnittet justeres slik at alle veipunktene blir synlig?</string>
     <string name="init_brouterThreshold">Beregn rute</string>
-    <string name="init_brouterThreshold_description">Maksimal avstand til hvor \"BRouter helper\"-app (hvis den er installert) vil kalkulere rute.</string>
     <string name="init_brouterShowBothDistances">Vis distanse i rett linje</string>
     <string name="brouter_recalculating">Beregner rute i bakgrunnen…</string>
     <string name="init_summary_brouterShowBothDistances">Om routing er aktiv: Vis distanse i rett linje i tillegg til den utregnede rutelengden.</string>
@@ -586,7 +578,6 @@
     <string name="init_listdisplay">Vis ekstra lister i cachelisten</string>
     <string name="init_summary_listdisplay">Vis medlemskap av cacher til ekstra lister i en cache-liste</string>
     <string name="init_livelist">Vis cachers retning i listen</string>
-    <string name="init_summary_livelist">Vis cachers retning i listen</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Opprett sikkerhetskopi</string>
     <string name="init_backup_summary">Vær oppmerksom på at denne funksjonen kan sikkerhetskopiere cacher, veipunkter &amp; innstillinger, men ingen bilder fra cacher. \nFor å kunne gjenopprette dataene selv etter å ha mistet mobilen din, bør sikkerhetskopiene kopieres til en uavhengig plassering.</string>
@@ -615,9 +606,7 @@
     <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
     <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
     <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
-    <string name="init_backup_folder_exists_error">Kunne ikke opprette en ny backup katalog. Har du allerede tatt en sikkerhetskopi det siste minuttet?</string>
     <string name="init_backup_no_backup_available">Det finnes ingen fil med sikkerhetskopi nå.</string>
-    <string name="backup_confirm_overwrite">Dette vil slette din eldste eksisterende backup-mappe fra %s. \nØnsker du å fortsette?</string>
     <string name="restore_confirm_overwrite_database">ADVARSEL: Dette vil overskrive %s på enheten din!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ADVARSEL: Dette vil overskrive %s og dine nåværende innstillinger på enheten!</string>
     <string name="restore_confirm_overwrite_settings">ADVARSEL: Dette vil overskrive gjeldende innstillinger på enheten!</string>
@@ -642,12 +631,9 @@
     <string name="settings_readingerror">Feil ved lesing av innstillinger</string>
     <string name="settings_restart">c:geo må restartes for å bruke de innlastede innstillingene</string>
     <string name="settings_info_offline_maps_title">Info på kart lagret lokalt</string>
-    <string name="settings_info_offline_maps">c:geo støtter kart lagret lokalt. Du kan laste ned kart fra Mapsforge eller opprette egne kart fra OpenStreetMap. Du må velge en mappe hvor kartfilene lagres.</string>
     <string name="settings_info_themes_title">Info om karttemaene</string>
     <string name="settings_info_themes">c:geo støtter tilpassede temaer for offline-kart. Temaene kan brukes for å endre fargene på kartet (f.eks for kart tilpasset nattbruk) eller for å tydeliggjøre visse objekter slik som sykkelveier eller høydekurver.</string>
     <string name="init_mapsource_select">Velg kartkilde</string>
-    <string name="init_map_directory_description">Mappe for lokalt lagrede kart</string>
-    <string name="init_dataDir">Velg mappe for geocache-data</string>
     <string name="init_dataDir_note">Du kan velge å lagre eksterne data for geocacher(spoilere, logbilder o. l.) på din enhets eksterne minne(emulert eller SD-kort, avhengig av din enhet).</string>
     <string name="init_maptrail">Vis spor</string>
     <string name="init_maptrail_length">Historikkspor maks. lengde</string>
@@ -687,23 +673,16 @@
     <string name="init_debug_note">c:geo kan generere masse feilsøkingsinformasjon. Aktivering av denne innstillingen påvirker stabiliteten i c:geo og anbefales bare hvis du blir bedt om å sende en logg til utviklerne. La den være deaktivert under normal bruk av c:geo!</string>
     <string name="init_debug">Aktiver logging av feilsøkingsinformasjon</string>
     <string name="init_dbonsdcard_title">Lagringssted for databasen</string>
-    <string name="init_dbonsdcard_note">Du kan lagre databasen til c:geo enten internt i systemet eller på det åpne lagringsområdet. Hvis du bruker den åpne lagringen kan du spare noe lagringsplass, men du mister litt hastighetsytelse. I tillegg vil c:geo ikke virke hvis lagringen ikke er tilgjengelig eller du fjerner databasefila.</string>
     <string name="init_dbonsdcard">På åpent lagringsområde</string>
     <string name="init_dbmove_dbmove">Flytter databasen</string>
     <string name="init_dbmove_running">Flytter databasen</string>
     <string name="init_dbmove_success">Databasen er nå flyttet.</string>
     <string name="init_dbmove_failed">Mislykket flytting av databasen</string>
-    <string name="init_datadirmove_datadirmove">Flytter mappe for geocache-data</string>
-    <string name="init_datadirmove_running">Flytter mappe for geocache-data</string>
-    <string name="init_datadirmove_success">Mappen for geocache-data er flyttet.</string>
-    <string name="init_datadirmove_failed">Flytting av mappe for geocache-data kunne mislyktes. Du må sjekke gammel og ny mappe og flytte manuelt om nødvendig.</string>
     <string name="init_plain_logs">Ren tekst i logger</string>
     <string name="init_summary_plain_logs">Vis ren tekst i loggene (ikke farger og annen formatering)</string>
     <string name="init_use_native_ua">Android-nettleser</string>
     <string name="init_summary_use_native_ua">Identifiserer som Android-nettleser. Løser innloggingsproblemer som kan oppstå hos enkelte nettverksoperatører.</string>
-    <string name="init_rendertheme_folder">Mappe for karttemaer</string>
     <string name="init_maintenance">Vedlikehold</string>
-    <string name="init_maintenance_directories_note">c:geo lagrer bilder, loggbilder og andre filer knyttet til en cache i en egen mappe. I noen situasjoner (som importering/eksportering av databasen) vil denne mappen inneholde utdaterte filer som kan slettes her.</string>
     <string name="init_maintenance_directories">Slett utdaterte filer</string>
     <string name="init_location">Geolokasjon</string>
     <string name="init_location_note">På enheter utstyrt med Google Play-tjenester, kan c:geo automatisk bruke en bedre geolocation-leverandør. Men dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
@@ -1039,17 +1018,9 @@
     <string name="cc_hint_fraction">desimaler</string>
     <string name="lowercase">små bokstaver</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Søker etter filer i\n</string>
-    <string name="file_searching_sdcard_in">Ingen filer funnet i standardmappene:\n%1$s\n\nSøker på hele SD-kortet etter filer: \n</string>
-    <string name="file_list_no_files">c:geo fant ingen passende filer.</string>
-    <string name="file_searching">Søker etter passende filer</string>
-    <string name="file_title_searching">Søker</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Velg mappe</string>
     <string name="simple_dir_chooser_current_path">Bane:</string>
     <string name="simple_dir_chooser_invalid_path">Ugyldig bane</string>
-    <string name="simple_file_chooser_title">Velg file</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laster cacher fra %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laster veipunkter fra %1$s</string>
@@ -1062,14 +1033,7 @@
     <string name="gpx_import_error_parser">Ugyldig filformat</string>
     <string name="gpx_import_error_unexpected">Uventet feil</string>
     <string name="gpx_import_canceled_with_filename">GPX-importering fra %1$s ble avbrutt</string>
-    <string name="gpx_import_delete_title">Slett fil</string>
-    <string name="gpx_import_delete_message">Vil du slette %s?</string>
     <string name="gpx_import_select_list_title">Importer GPX til liste</string>
-    <string name="gpx_import_android">Importer fra Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Velg kartfil</string>
-    <string name="track_file_select_title">Velg sporfil</string>
-    <string name="individual_route_file_select_title">Velg individuell rutefil</string>
     <!-- import -->
     <string name="web_import_title">Importer fra send2cgeo</string>
     <string name="web_import_waiting">Venter på nye cacher fra send2cgeo…</string>
@@ -1180,7 +1144,6 @@
     <string name="search_address_started">Søker etter steder</string>
     <string name="search_address_result">Fant plasser</string>
     <string name="search_own_caches">Søk egne cacher</string>
-    <string name="search_pocket_title">Utvalgsspørring</string>
     <string name="search_pocket_loading">Laster en liste med Pocket Queries</string>
     <!-- trackable -->
     <string name="trackable">Sporbar (TB eller coin)</string>
@@ -1650,7 +1613,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Klarte ikke legge eventcachen til i kalenderen</string>
     <string name="init_low_disk_space">Lite lagringsplass</string>
-    <string name="init_low_disk_space_message">Geocachedata-mappen begynner å gå tom for lagringsplass. Dette kan føre til feil i c:geo. Du bør frigi lagringsplass.</string>
     <string name="init_confirm_debug">c:geo kjører i feilsøkingsmodus!</string>
     <string name="list_confirm_debug_message">Feilsøkingsmodus vil gjøre c:geo ustabil. Vil du deaktivere feilsøkingsmodusen?</string>
     <string name="err_select_logimage_upload_size">Bildet for stort, Velg et mindre.</string>
@@ -1746,23 +1708,16 @@
     <string name="localfile_cannot_handle">Feil under lesing av fil eller c:geo kan ikke åpne denne filtypen.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Motta kartfil</string>
-    <string name="receivemapfile_success">Kartfil ble mottatt som \"%s\" og lagret til kartmappen</string>
     <string name="receivemapfile_error">Feil under mottak av kartfil</string>
-    <string name="receivemapfile_error_io_exception">I/O feil under mottak av kartfil. Er kartmappen \"%s\" redigerbar?</string>
     <string name="receivemapfile_error_filenotfound_exception">\"Fil ikke funnet\"-feil under henting av kartfil.</string>
-    <string name="receivemapfile_alreadyexists">En fil med dette navnet eksisterer allerede. Vil du overskrive den eksisterende filen eller eller lagre den nye filen under et annet navn?</string>
-    <string name="receivemapfile_option_overwrite">Overskriv</string>
-    <string name="receivemapfile_option_differentname">Annet navn</string>
     <string name="receivemapfile_kb_copied">%d kB kopiert</string>
     <string name="receivemapfile_cancelled">Kartfiloverføring avbrutt</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Last ned offlinekart</string>
-    <string name="downloadmap_info">Velg en kartfil for din region ved å trykke på \"Lagre\"-ikonet.\n\nNedlastning kjøres i bakgrunnen. Når nedlastningen er fullført, blir den nedlastede filen kopiert til c:geos kartmappe og satt som gjeldende kart for c:geo.\n\nVær forsiktig: Nedlastning av et kart kan forårsake høy nettverkstrafikk!</string>
     <string name="downloadmap_choose">Velg kart</string>
     <string name="downloadmap_filename">Laster ned %s</string>
     <string name="downloadmanager_not_available">Kartfil kan ikke lastes ned, systemnedlastingsbehandling er ikke tilgjengelig</string>
     <string name="download_started">Nedlasting startet i bakgrunnen</string>
-    <string name="downloadmap_target_not_writable">Målområdet \"%s\" er ikke skrivbart - nedlastet kartfil vil bli lagret i systemnedlastingsmappen og må flyttes manuelt til kartmappen.</string>
     <string name="downloadmap_allow_metered_network">Tillat nedlasting over nettverk med forbruksmåling (f.eks. mobilnettverk)</string>
     <string name="downloadmap_confirmation">Last ned kart \"%1$s\"?\n\nDet kan ta litt tid og kan gi betydelige kostnader, avhengig av nettverkstilkoblingen.\n\nStørrelse info: %2$s</string>
     <string name="downloadmap_handling">Nedlastningen vil bli håndtert av systemets nedlastningshåndterer i bakgrunnen. Du bør se et varsel så snart nedlastingen har startet (noe som kan ta en stund).</string>
