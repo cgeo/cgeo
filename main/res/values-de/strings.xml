@@ -572,7 +572,7 @@
     <string name="init_zoomincludingwaypoints">Zoom beinhaltet Wegpunkte</string>
     <string name="init_zoomincludingwaypoints_description">Wenn eine Karte für einen einzelnen Cache geöffnet wird: Soll der Zoom so eingestellt werden, dass alle Wegpunkte dargestellt werden?</string>
     <string name="init_brouterThreshold">Routenberechnung</string>
-    <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher Brouter (falls installiert) eine Route berechnet.</string>
+    <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher BRouter (falls installiert) eine Route berechnet.</string>
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
     <string name="init_summary_brouterShowBothDistances">Wenn Wegführung aktiv ist: Zeigt neben der berechneten Routenlänge die Entfernung in Luftlinie an.</string>
@@ -597,7 +597,7 @@
     <string name="init_listdisplay">Zusätzliche Listen</string>
     <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
     <string name="init_livelist">Richtung zum Cache</string>
-    <string name="init_summary_livelist">Richtung zu Caches in der Liste anzeigen</string>
+    <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Sicherung erstellen</string>
     <string name="init_backup_summary">Bitte beachte, dass diese Funktion Caches, Wegpunkte &amp; Einstellungen, aber keine Cachebilder, sichern kann.\nDamit du die Daten auch nach dem Verlust deines Telefons wiederherstellen kannst, sollten die Sicherungsdateien an einen unabhängigen Ort kopiert werden.</string>
@@ -661,7 +661,7 @@
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>
     <string name="init_map_directory_description">Verzeichnis mit Offline-Karten</string>
     <string name="init_gpx_importexportdir">GPX-Verzeichnis</string>
-    <string name="init_dataDir">Geocache-Datenverzeichnis auswählen</string>
+    <string name="init_dataDir">Wähle Datenverzeichnis</string>
     <string name="init_dataDir_note">Sie können den Ablageort für die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf Ihrem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) wählen.</string>
     <string name="init_maptrail">Zeige Positionsverlauf</string>
     <string name="init_maptrail_length">Länge des Positionsverlaufs</string>
@@ -801,6 +801,7 @@
     <string name="sendToCgeo_no_registration">c:geo konnte die Caches nicht laden. Die Registrierung für send2cgeo ist ungültig. Bitte in den Einstellungen neu registrieren.</string>
     <!-- Content Storage -->
     <string name="contentstorage_grantaccess_dialog_title">Zugriff für Datenspeicherung gewähren</string>
+    <string name="contentstorage_grantaccess_dialog_msg_basedir_html">c:geo benötigt einen lokalen Ordner, um Daten wie GPX-Dateien, Sicherungen und Feldnotizen zu speichern. Spätestens mit Android 11 muss der Benutzer explizit die Berechtigung zur Verwendung dieses Ordners gewähren. Deshalb verwendet c:geo ab sofort diese neue Methode, um deine Daten zu speichern.\n\nIm folgenden Dialog wählst oder erstellst du einen solchen Ordner auf deinem Gerät. Wenn du c:geo von einer früheren Version aktualisiert hast, wähle den existierenden Ordner \"cgeo\" auf der untersten Ebene deines Gerätespeichers.</string>
     <string name="contentstorage_selectfolder_dialog_title">Ordner ändern %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>Der Ordner %s ist derzeit auf \'%s\' gesetzt und enthält %d Datei(en) und %d Unterordner.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Du kannst den Standardordner \'%s\' verwenden oder einen benutzerdefinierten Ordner wählen.</p>]]></string>
@@ -825,7 +826,7 @@
     <!-- Persistable Folders -->
     <string name="persistablefolder_usertype_userdefined">Benutzerdefiniert</string>
     <string name="persistablefolder_usertype_default">Standard</string>
-    <string name="persistablefolder_legacy">Vorversion</string>
+    <string name="persistablefolder_legacy">Veraltet</string>
     <string name="persistablefolder_pickfolder">Ordner auswählen</string>
     <string name="persistablefolder_usedefault">Standard verwenden</string>
     <string name="persistablefolder_base">Basis</string>
@@ -1881,6 +1882,7 @@
     <string name="wizard_outro_error">Konfiguration unvollständig\nc:geo wird nicht überall wie erwartet funktionieren!</string>
     <string name="wizard_permissions_title">App-Berechtigungen</string>
     <string name="wizard_permissions_intro">c:geo benötigt bestimmte Berechtigungen auf deinem Gerät, um korrekt zu funktionieren.\nIch werde weitere Details in den nächsten Schritten erklären.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo benötigt einen lokalen Ordner, um Daten wie GPX-Dateien, Sicherungen und Feldnotizen zu speichern. Wähle oder erstelle einen solchen Ordner im nächsten Schritt.\nWenn du c:geo von einer früheren Version aktualisiert hast, wähle den existierenden Ordner \"cgeo\" auf der untersten Ebene deines Gerätespeichers.</string>
     <string name="wizard_platforms_title">Dienste konfigurieren</string>
     <string name="wizard_platforms_intro">Um Geocaches mit c:geo zu finden, benötigst du ein Konto für einen Geocaching-Dienst, der von c:geo unterstützt wird.\nWähle unten den gewünschten Dienst aus, um dich entweder mit deinem bestehenden Konto anzumelden oder ein neues Konto zu erstellen.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1896,5 +1898,6 @@
     <string name="wizard_status_title">Konfigurationsstatus</string>
     <string name="wizard_status_storage_permission">Speicherberechtigung</string>
     <string name="wizard_status_location_permission">Standortberechtigung</string>
+    <string name="wizard_status_basefolder">Basisordner</string>
     <string name="wizard_status_platform">Geocaching-Dienste</string>
 </resources>
