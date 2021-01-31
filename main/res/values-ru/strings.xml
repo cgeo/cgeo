@@ -542,7 +542,6 @@
     <string name="init_zoomincludingwaypoints">Увеличение вместе с точками</string>
     <string name="init_zoomincludingwaypoints_description">При показе одиночного тайника масштаб будет таким, чтобы вместить все точки тайника</string>
     <string name="init_brouterThreshold">Вычислить путь</string>
-    <string name="init_brouterThreshold_description">Максимальное расстояние, до которого brouter будет прокладывать маршрут (если установлен).</string>
     <string name="init_brouterShowBothDistances">Показать расстояние по прямой</string>
     <string name="brouter_recalculating">Пересчет маршрута в фоновом режиме…</string>
     <string name="init_summary_brouterShowBothDistances">Если навигация активна: показать прямое расстояние в дополнение к рассчитанной длине маршрута.</string>
@@ -562,7 +561,6 @@
     <string name="init_listdisplay">Дополнительные списки</string>
     <string name="init_summary_listdisplay">Показать принадлежность тайников к другим спискам в списке тайников</string>
     <string name="init_livelist">Показывать направление</string>
-    <string name="init_summary_livelist">Показывать направление на тайник в списке</string>
     <!-- backup / restore -->
     <string name="init_backup">Резервное копирование тайников / точек</string>
     <string name="init_backup_backup">Сохранить</string>
@@ -594,7 +592,6 @@
     <string name="settings_info_themes">c:geo предлагает пользовательские темы для оффлайновых карт. Они могут быть использованы для изменения цветового стиля (например, ночные карты) или для выделения определенных объектов, таких как велосипедные маршруты или линии уровня.</string>
     <string name="init_mapsource_select">Выберите источник карт</string>
     <string name="init_map_directory_description">Папка с оффлайновыми картами</string>
-    <string name="init_dataDir">Выбрать папку данных тайников</string>
     <string name="init_dataDir_note">Вы можете сохранять дополнительные данные тайников (спойлеры, картинки в блокноте и пр.) на внешнем хранилище (виртуальная или настоящая SD-карта, в зависимости от устройства).</string>
     <string name="init_maptrail">Показать историю трека</string>
     <string name="init_maptrail_length">Максимальная длина истории трека</string>
