@@ -572,7 +572,6 @@
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
     <string name="init_zoomincludingwaypoints_description">Jos yksittäinen kätkö näytetään kartalla, säädetäänkö zoomaus näyttämään kaikki sen reittipisteet?</string>
     <string name="init_brouterThreshold">Laske reitti</string>
-    <string name="init_brouterThreshold_description">Maksimietäisyys, jonka sisällä brouter-apusovellus (jos asennettuna) laskee reitin.</string>
     <string name="init_brouterShowBothDistances">Näytä suora etäisyys</string>
     <string name="brouter_recalculating">Lasketaan reittiä uudelleen taustalla…</string>
     <string name="init_summary_brouterShowBothDistances">Jos reititys on aktiivisena: Näytä suora etäisyys lasketun reitin etäisyyden lisäksi.</string>
@@ -597,7 +596,6 @@
     <string name="init_listdisplay">Toiset listat</string>
     <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
     <string name="init_livelist">Näytä suunta</string>
-    <string name="init_summary_livelist">Suunta kätkölle näytetään listauksessa</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Luo varmuuskopio</string>
     <string name="init_backup_summary">Huomaa, että tämä ominaisuus voi varmuuskopioida kätköjä, reittipisteitä &amp; asetuksia, mutta ei kätköjen kuvia. \nVoidaksesi palauttaa tiedot myös sen jälkeen, kun olet kadottanut puhelimesi, varmuuskopioidut tiedostot tulee kopioida ulkoiseen sijaintiin.</string>
@@ -657,8 +655,10 @@
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
     <string name="settings_info_themes">c:geo mahdollistaa offline-karttoihin teemat. Karttojen värimaailmaa voi muokata (voit valita karttaan vaikka yönäkymän) tai voit korostaa tiettyjä kohteita, kuten pyöräteitä tai korkeuskäyriä.</string>
     <string name="init_mapsource_select">Karttalähde</string>
+    <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
+    <string name="init_base_directory_description">Juurikansio julkiselle paikalliselle datalle</string>
     <string name="init_map_directory_description">Offline-karttojen polku</string>
-    <string name="init_dataDir">Valitse kätködatan kansio</string>
+    <string name="init_gpx_importexportdir">GPX-kansio</string>
     <string name="init_dataDir_note">Voit valita geokätköjen lisätietojen (spoilerit, lokien kuvat, …) tallentamisen ulkoiseen muistiin (emuloitu tai aito ulkoinen SD-kortti, riippuen laitteestasi).</string>
     <string name="init_maptrail">Näytä jälkihistoria</string>
     <string name="init_maptrail_length">Jälkihistorian maksimipituus</string>
@@ -797,7 +797,24 @@
     <string name="sendToCgeo_download_fail">c:geo ei onnistunut lataamaan kätköjä. Ei internet-yhteyttä tai send2cgeo on kaatunut.</string>
     <string name="sendToCgeo_no_registration">c:geo ei onnistunut latamaan kätköjä. Kirjautuminen kohteeseen send2cgeo vanhentunut. Kirjaudu uudelleen asetuksien kautta.</string>
     <!-- Content Storage -->
+    <string name="contentstorage_grantaccess_dialog_title">Myönnä pääsy datan tallennustilaan</string>
+    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Ei toimintoa</string>
+    <string name="contentstorage_selectfolder_dialog_choice_copy">Kopioi kaikki sisältö</string>
+    <string name="contentstorage_selectfolder_dialog_choice_move">Siirrä kaikki sisältö</string>
+    <string name="contentstorage_file_selection_success">Valittu tiedosto: \'%s\'</string>
+    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Kansio %s: \'%s\' ei ole käytettävissä, käytetään \'%s\'</string>
     <!-- Persistable Folders -->
+    <string name="persistablefolder_usertype_userdefined">Käyttäjän määrittämä</string>
+    <string name="persistablefolder_usertype_default">Oletus</string>
+    <string name="persistablefolder_pickfolder">Valitse kansio</string>
+    <string name="persistablefolder_usedefault">Käytä oletusta</string>
+    <string name="persistablefolder_base">Juuri</string>
+    <string name="persistablefolder_offline_maps">Offline-kartat</string>
+    <string name="persistablefolder_offline_maps_themes">Karttateemat</string>
+    <string name="persistablefolder_gpx">GPX</string>
+    <string name="persistablefolder_backup">Varmuuskopiointi</string>
+    <string name="persistablefolder_logfiles">Lokitiedostot</string>
+    <string name="persistablefolder_fieldnotes">Kenttämerkinnät</string>
     <!-- auth generic -->
     <string name="auth_authorize">Valtuuta c:geo</string>
     <string name="auth_check">Tarkista todennus</string>
@@ -876,6 +893,7 @@
     <string name="cache_personal_note_edit">Muokkaa</string>
     <string name="cache_personal_note_storewaypoints">Lisää/Päivitä Reittipisteet</string>
     <string name="cache_personal_note_removewaypoints">Poista Reittipisteet</string>
+    <string name="cache_personal_note_removedwaypoints">Reittipisteet poistettu</string>
     <string name="cache_personal_note_storewaypoints_success">Reittipisteet lisättiin henkilökohtaiseen muistiinpanoon</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Reittipisteet lisättiin muistiinpanoon, mutta niitä piti lyhentää (maksimi henkilökohtainen muistiinpanon koko: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Reittipisteitä ei voitu tallentaa muistiinpanoon kokorajojen vuoksi (maksimi henkilökohtaisen merkinnän koko: %1$d)</string>
@@ -1577,6 +1595,8 @@
     <string name="github_title">Vianjäljitys</string>
     <string name="faq_title">Usein kysytyt kysymykset</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">Uusi versio saatavilla.\nKlikkaa asentaaksesi.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Uusi julkaisuehdokas saatavilla.\nAsenna napauttamalla.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com:issa rikkoivat c:geon. \n Korjaamme tilannetta, tarkistathan tilanteen pian uudestaan.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com-sivulla hajoittivat livekartta-ominaisuuden.\nAsiaa korjataan, yritä lähiaikoina uudelleen.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
