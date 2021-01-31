@@ -852,11 +852,7 @@ public class Settings {
      * whether to show a direction line on the map
      */
     public static boolean isMapDirection() {
-        return getBoolean(R.string.pref_map_direction, true);
-    }
-
-    public static void setMapDirection(final boolean showDirection) {
-        putBoolean(R.string.pref_map_direction, showDirection);
+        return Settings.getRoutingMode() != RoutingMode.OFF;
     }
 
     /**

@@ -207,6 +207,9 @@ public final class Routing {
             return null;
         }
 
+        // TODO: need to check gpx for error message instead of valid XML
+        // W/cgeo: [LayerManager] cannot parse brouter output of length 29, gpx=datafile E5_N45.rd5 not found
+
         return parseGpxTrack(gpx, dest);
     }
 
