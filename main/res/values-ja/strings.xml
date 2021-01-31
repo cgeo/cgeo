@@ -952,6 +952,7 @@
     <string name="cache_menu_map_ext">ほかの外部アプリ</string>
     <string name="cache_menu_streetview">Googleストリートビュー</string>
     <string name="cache_menu_browser">ブラウザで開く</string>
+    <string name="cache_menu_open_with">開く…</string>
     <string name="cache_menu_visit">ログを書く</string>
     <string name="cache_log_too_long">ログが長すぎるために投稿できませんでした。克明なログを書こうとしてくれてありがとう ;-)</string>
     <string name="cache_menu_visit_offline">オフラインログをすぐに書く</string>
