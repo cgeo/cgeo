@@ -542,7 +542,6 @@
     <string name="init_zoomincludingwaypoints">Tālummaiņa iekļauj ceļa punktus</string>
     <string name="init_zoomincludingwaypoints_description">Ja kartējat vienu slēpni: vai pietuvinājumu pielāgot tā, lai iekļautu visus starpposmus?</string>
     <string name="init_brouterThreshold">Maršrutēšana</string>
-    <string name="init_brouterThreshold_description">Maksimālais attālums, līdz kuram brouter helper aplikācija (ja tā ir iestatīta) aprēķinās maršrutu.</string>
     <string name="init_brouterShowBothDistances">Rādīt taisnvirziena distanci</string>
     <string name="brouter_recalculating">Pārrēķina maršrutu fonā…</string>
     <string name="init_summary_brouterShowBothDistances">Ja maršruta plānošana ir aktīva: Paplildus aprēķinātajam maršruta garumam, rādīt lineāro attālumu.</string>
@@ -560,7 +559,6 @@
     <string name="init_summary_choose_list">Jautāt, kurā sarakstā saglabāt slēpņus</string>
     <string name="init_listdisplay">Papildu saraksti</string>
     <string name="init_livelist">Rādīt virzienu</string>
-    <string name="init_summary_livelist">Rādīt slēpņu virzienus sarakstā</string>
     <!-- backup / restore -->
     <string name="init_backup">Dublētie slēpņi / starpposmi</string>
     <string name="init_backup_backup">Izveidot rezerves kopiju</string>
@@ -592,7 +590,6 @@
     <string name="settings_info_themes">c:geo atbalsta pielāgotu dizainu bezsaistes kartēm. Tos var izmantot, lai mainītu kartes krāsu stilu (piemēram ir nakts redzamības karte) vai izcelt noteiktus objektus, piemēram, velo-ceļus vai augstuma līniju kartē.</string>
     <string name="init_mapsource_select">Izvēlies karti</string>
     <string name="init_map_directory_description">Katalogs ar bezsaistes kartēm</string>
-    <string name="init_dataDir">Izvēlies slēpņu datu direktoriju</string>
     <string name="init_dataDir_note">Tu vari izvēlēties uzglabāt slēpņu papildu datus (spoileru bildes, ierakstu attēli, …) ārējā atmiņā (emulēta vai reāla ārējā SD karte, atkarībā no tavas ierīces).</string>
     <string name="init_maptrail">Parādīt pārvietojumu</string>
     <string name="init_summary_maptrail">Parādīt pārvietojumu kartē</string>
