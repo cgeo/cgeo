@@ -423,7 +423,6 @@
     <string name="init_choose_list">Vprašaj za seznam</string>
     <string name="init_summary_choose_list">Pri shranjevanju zaklada za delo brez povezave vprašaj za seznam</string>
     <string name="init_livelist">Pokaži smeri</string>
-    <string name="init_summary_livelist">Pokaži tudi smeri do zakladov v seznamih</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">Ustvari varnostno kopijo</string>
     <string name="init_backup_running">Ustvarjanje varnostne kopije baze…</string>
