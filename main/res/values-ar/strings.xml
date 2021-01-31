@@ -364,12 +364,9 @@
     <string name="settings_summary_map">ظبط خريطة المصدر و إعدادات الخريطة في وضع عدم الاتصال و كل تفاصيل الخريطة.</string>
     <string name="settings_title_map_data">بيانات الخريطة</string>
     <string name="settings_title_map_content">محتوى الخريطة</string>
-    <string name="settings_title_data_dir">دليل بيانات العلبة المخبئة</string>
-    <string name="settings_title_data_dir_usage">دليل بيانات العلبة المخبئة(المستخدمة %1$s)</string>
     <string name="calculate_dataDir_title">استخدام بيانات العلبة المخبئة</string>
     <string name="calculate_dataDir">حساب مساحة استخدام بيانات العلبة المخبئة</string>
     <string name="settings_data_dir_item">%1$s (مجاناً %2$s)</string>
-    <string name="confirm_data_dir_move_title">هل تريد نقل دليل بيانات العلبة المخبئة؟</string>
     <string name="confirm_data_dir_move">نقل بيانات العلبة المخبئة قد يستغرق وقتاً طويلاً، يعتم الأمر على جهازك و كمية البيانات.</string>
     <string name="settings_title_basicmembers">خيارات للاعضاء العاديين</string>
     <string name="settings_title_navigation">الملاحة</string>
@@ -458,7 +455,6 @@
     <string name="init_choose_list">اطلب القائمة</string>
     <string name="init_summary_choose_list">اسأل أي قائمة لتخزين المخبآت</string>
     <string name="init_livelist">عرض الاتجاه</string>
-    <string name="init_summary_livelist">عرض اتجاه المخبآت على القائمة</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">النسخ الاحتياطي</string>
     <string name="init_backup_running">إنشاء نسخ إحتياطي لبيانات المخبئ&#8230;</string>
@@ -474,12 +470,9 @@
     <string name="init_backup_last">نسخ احتياطي متاحة من</string>
     <string name="init_backup_last_no">ليس هناك ملف مع النسخة الاحتياطية.</string>
     <string name="settings_info_offline_maps_title">معلومات على الخرائط في وضع عدم الاتصال</string>
-    <string name="settings_info_offline_maps">c:geo يدعم استخدام الخرائط في وضع عدم الاتصال. يمكنك تحميل الخرائط من Mapsforge أو حتى تنشئ الخرائط الخاصة بك من خلال بيانات OSM. يتوجب عليك أن تختار دليل الخريطة في وضع عدم الاتصال من أجل الحصول على دعم الخريطة في وضع عدم الاتصال.</string>
     <string name="settings_info_themes_title">معلومات عن ثيمات الخريطة</string>
     <string name="settings_info_themes">c:geo يدعم الثيمات المخصصة للخرائط في وضع عدم الاتصال. يمكنك أن تستخدم هذا لتغيير نك تليون الخريطة (مثلا. عرض ليلي للخريطة) أو تسليط الضوء على بعض الأشياء مثل المسارات أو خطوط الطول على الخريطة.</string>
     <string name="init_mapsource_select">اختر مصدر الخريطة</string>
-    <string name="init_map_directory_description">الدليل باستخدام الخرائط في وضع عدم الاتصال</string>
-    <string name="init_dataDir">حدد دفتر بيانات العلبة المخبئة</string>
     <string name="init_dataDir_note">قد تختار تخزين بيانات إضافية في العلبة المخبئة (المفشي، ألبوم الصور، &#8230;) في تخزينك الخارجي (تضمينها داخل التخزين أو في بطاقة ذاكرة خارجية اعتماداً على جهازك).</string>
     <string name="init_include_found_status">تضمين حالة \"تم العثور عليها\"</string>
     <string name="init_trackautovisit">زيارة TBs</string>
@@ -497,23 +490,16 @@
     <string name="init_debug_note">c:geo يمكنه أن ينشئ الكثير من معلومات التصحيح. تفعيل هذا الإعداد سوف يؤثر على استقرار c:geo و ينصح به فقط عندما تتم مطالبتك بإرسال السجل إلى المطورين. الرجاء الإبقاء على تسجيل الدخول إلى \'تصحيح الأخطاء\' معطل أثناء الاستخدام العادي لـ c:geo!</string>
     <string name="init_debug">تنشيط تصحيح تسجيل الزيارات</string>
     <string name="init_dbonsdcard_title">موقع قاعدة البيانات</string>
-    <string name="init_dbonsdcard_note">قد تقوم بتخزين قاعدة بيانات c:geo سوء على النظام الداخلي أو على دليل التخزين الخاص بك. وضعه في تخزين المستخدم قد يحرر مساحة من الذاكرة، لكنك قد تفقد القليل من الفاعلية و لن يعمل c:geo إذا لم يتم الوصول إلى التخزين أو عندما تقوم انت بحذف ملف قاعدة البيانات.</string>
     <string name="init_dbonsdcard">في تخزين المستخدم</string>
     <string name="init_dbmove_dbmove">نقل قاعدة البيانات</string>
     <string name="init_dbmove_running">نقل قاعدة البيانات</string>
     <string name="init_dbmove_success">تم نقل قاعدة البيانات بنجاح.</string>
     <string name="init_dbmove_failed">فشل في نقل قاعدة البيانات</string>
-    <string name="init_datadirmove_datadirmove">نقل دليل بيانات العلبة المخبئة</string>
-    <string name="init_datadirmove_running">نقل دفتر بيانات العلبة المخبئة</string>
-    <string name="init_datadirmove_success">تم بنجاح نقل دليل بيانات العلبة المخبئة.</string>
-    <string name="init_datadirmove_failed">فشل نقل دليل بيانات العلبة المخبئة سوء جزئياً أو كلياً. الرجاء تحديد الدليل القديم و الجديد و نقلهم يدوياً إذا لزم الأمر.</string>
     <string name="init_plain_logs">سجلات بسيطة</string>
     <string name="init_summary_plain_logs">عرض إدخالات السجل بدون ألوان</string>
     <string name="init_use_native_ua">متصفح أندرويد</string>
     <string name="init_summary_use_native_ua">تحديد كمتصفح أندرويد. يحل مشاكل تسجيل الدخول عند استخدام مزودي شبكة معينة.</string>
-    <string name="init_rendertheme_folder">دليل ثيمات الخريطة</string>
     <string name="init_maintenance">الصيانة</string>
-    <string name="init_maintenance_directories_note">صور c:geo المخزنة و صور تسجيل الزيارات و كل الملفات الأخرى المتعلقة بالمخبئ في الدليل المنفصل. في بعض الحالات (مثل استيراد أو تصدير البيانات) هذا الدليل قد يحتوي على ملفات قديمة و التي يمكن حذفها هنا.</string>
     <string name="init_maintenance_directories">حذف الملفات المعزولة</string>
     <string name="init_location">تحديد الموقع الجغرافي</string>
     <string name="init_location_note">على الأجهزة المرتبطة بخدماتGoogle Play، و بذالك c:geo يمكنه تلقائياً استخدام موفر تحديد الموقع الجغرافي. مع ذالك، هذا يمنع استخدام مستقبل GPS عن طريق البلوتوث.</string>
@@ -736,14 +722,7 @@
     <string name="cache_listed_on">تم إدراجه على %s</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">البحث عن الملفات\n في</string>
-    <string name="file_searching_sdcard_in">لم يتم العثور على ملفات في المجلد الافتراضي:\n%1$s\n\nالبحث عن الملفات في كامل بطاقة الذاكرة:\n</string>
-    <string name="file_list_no_files">c:geo لم يعثر على ملفات مناسبة.</string>
-    <string name="file_searching">البحث عن ملفات مطابقة</string>
-    <string name="file_title_searching">البحث</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">اختر الدليل</string>
     <string name="simple_dir_chooser_current_path">المسار:</string>
     <string name="simple_dir_chooser_invalid_path">مسار غير صالح</string>
     <!-- gpx -->
@@ -758,12 +737,7 @@
     <string name="gpx_import_error_parser">صيغة ملف سيئة</string>
     <string name="gpx_import_error_unexpected">خطأ غير متوقع</string>
     <string name="gpx_import_canceled_with_filename">تم إلغاء استيراد GPX من %1$s</string>
-    <string name="gpx_import_delete_title">حذف الملف</string>
-    <string name="gpx_import_delete_message">هل تريد حذف %s؟</string>
     <string name="gpx_import_select_list_title">استيراد GPX إلى القائمة</string>
-    <string name="gpx_import_android">استيراد من الأندرويد</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">حدد ملف الخريطة</string>
     <!-- import -->
     <string name="web_import_title">استيراد من send2cgeo</string>
     <string name="web_import_waiting">في انتظار المخبآت الجديدة من send2cgeo&#8230;</string>
@@ -1216,7 +1190,6 @@
     <!-- calendar adder -->
     <string name="event_fail">فشل في إضافة حدث المخبآت إلى الأجندة</string>
     <string name="init_low_disk_space">تشغيل منخفض على مساحة التخزين</string>
-    <string name="init_low_disk_space_message">دليل بيانات العلبة المخبئة قيد التشغيل على مساحة تخزين منخفضة. هذا قد يسبب أعطال في c:geo. الرجاء التفريغ قليلاً من مساحة التخزين.</string>
     <string name="init_confirm_debug">c:geo قيد التشغيل في وضغ التصحيح!</string>
     <string name="list_confirm_debug_message">وضع التصحيح يسبب عدم الاستقرار! هل تريد إلغاء تنشيط وضع التصحيح؟</string>
     <string name="err_select_logimage_upload_size">الصورة كبيرة جداً، الرجاء تحديد مقاس أصغر.</string>
