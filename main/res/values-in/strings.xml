@@ -357,12 +357,9 @@
     <string name="settings_summary_map">Menetapkan sumber peta, pengaturan peta offline dan rincian peta.</string>
     <string name="settings_title_map_data">Data Peta</string>
     <string name="settings_title_map_content">Konten Peta</string>
-    <string name="settings_title_data_dir">Petunjuk data Geocache</string>
-    <string name="settings_title_data_dir_usage">Petunjuk data Geocache (%1$s digunakan)</string>
     <string name="calculate_dataDir_title">Pemakaian data Geocache</string>
     <string name="calculate_dataDir">Menghitung geocache penggunaan data disk</string>
     <string name="settings_data_dir_item">%1$s (%2$s gratis)</string>
-    <string name="confirm_data_dir_move_title">Pindahkan direktori data geochace?</string>
     <string name="confirm_data_dir_move">Memindahkan data geocache mungkin memerlukan waktu yang sangat lama, tergantung pada perangkat dan jumlah data anda.</string>
     <string name="settings_title_basicmembers">Pilihan untuk Anggota Dasar</string>
     <string name="settings_title_navigation">Navigasi</string>
@@ -449,7 +446,6 @@
     <string name="init_choose_list">Meminta Daftar</string>
     <string name="init_summary_choose_list">Tanyakan daftar mana yang menyimpan cache di dalamnya</string>
     <string name="init_livelist">Menunjukkan Arah</string>
-    <string name="init_summary_livelist">Tampilkan petunjuk dari cache di daftar tersebut</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">Cadangan</string>
     <string name="init_backup_running">Membuat cadangan dari basis data cache&#8230;</string>
@@ -465,12 +461,9 @@
     <string name="init_backup_last">Tersedia data cadangan dari</string>
     <string name="init_backup_last_no">Tidak ada berkas dengan data cadangan.</string>
     <string name="settings_info_offline_maps_title">Info di Peta offline</string>
-    <string name="settings_info_offline_maps">c:geo mendukung peta untuk penggunaan offline. Anda dapat mengunduh peta dari Mapsforge atau bahkan membuat peta sendiri dari data OSM. Anda harus memilih direktori peta offline terlebih dahulu untuk mendapatkan dukungan peta offline.</string>
     <string name="settings_info_themes_title">Info di Peta Tema</string>
     <string name="settings_info_themes">c:geo mendukung tema khusus untuk peta offline. Ini dapat digunakan untuk mengubah gaya warna peta (misalnya memiliki peta pemandangan malam) atau untuk menyorot objek tertentu seperti jalur siklus atau garis ketinggian di dalam peta.</string>
     <string name="init_mapsource_select">Pilih Sumber Peta</string>
-    <string name="init_map_directory_description">Direktori dengan peta offline</string>
-    <string name="init_dataDir">Pilih direktori data Geocache</string>
     <string name="init_dataDir_note">Anda dapat memilih untuk menyimpan data tambahan untuk geocaches (spoiler, log gambar, &#8230;) pada penyimpanan eksternal anda atau (kartu SD eksternal yang ditiru sebenarnya tergantung pada perangkat anda).</string>
     <string name="init_include_found_status">Termasuk \"Ditemukan\" status</string>
     <string name="init_trackautovisit">Kunjungi TBs</string>
@@ -488,23 +481,16 @@
     <string name="init_debug_note">c: geo bisa menghasilkan banyak informasi debugging. Mengaktifkan pengaturan ini akan mempengaruhi stabilitas dari c:geo dan hanya direkomendasikan jika anda diminta untuk mengirim log ke pengembang. Harap simpan pembatalan mencatat selama penggunaan c:geo normal!</string>
     <string name="init_debug">Mengaktifkan debug log</string>
     <string name="init_dbonsdcard_title">Lokasi basis data</string>
-    <string name="init_dbonsdcard_note">Anda bisa menyimpan database c:geo baik secara sistem internal maupun dalam direktori penyimpanan pengguna anda. Setelah itu pada penyimpanan pengguna mungkin dapat membebaskan beberapa memori, namun anda akan kehilangan sedikit kinerja dan c:geo tidak akan berfungsi jika penyimpanan tidak dapat diakses atau anda telah menghapus file database.</string>
     <string name="init_dbonsdcard">Pada penyimpanan pengguna</string>
     <string name="init_dbmove_dbmove">Memindahkan Basisdata</string>
     <string name="init_dbmove_running">Memindahkan basisdata</string>
     <string name="init_dbmove_success">Berhasil memindahkan database.</string>
     <string name="init_dbmove_failed">Gagal memindahkan database</string>
-    <string name="init_datadirmove_datadirmove">Memindahkan direktori data Geocache</string>
-    <string name="init_datadirmove_running">Data Geocache direktori bergerak</string>
-    <string name="init_datadirmove_success">Berhasil memindahkan direktori data Geocache.</string>
-    <string name="init_datadirmove_failed">Gagal memindahkan sebagian atau seluruhnya direktori data geocache. Silahkan periksa direktori lama dan baru dan pindahkan dengan tangan jika perlu.</string>
     <string name="init_plain_logs">Log polos</string>
     <string name="init_summary_plain_logs">Menampilkan entri log tanpa warna</string>
     <string name="init_use_native_ua">Peramban Android</string>
     <string name="init_summary_use_native_ua">Identifikasi sebagai browser Android. Mengatasi masalah login saat menggunakan penyedia jaringan tertentu.</string>
-    <string name="init_rendertheme_folder">Direktori Tema Peta</string>
     <string name="init_maintenance">Pemeliharaan</string>
-    <string name="init_maintenance_directories_note">c:geo menyimpan gambar, gambar log dan arsip lainnya yang berkaitan dengan cache di direktori terpisah. Dalam beberapa kasus (seperti mengimpor/mengekspor database) direktori ini mungkin berisi arsip lama, yang dapat dihapus di sini.</string>
     <string name="init_maintenance_directories">Hapus file yatim piatu</string>
     <string name="init_location">Geolokasi</string>
     <string name="init_location_note">Pada perangkat yang telah dilengkapi dengan Google Play Services, c:geo dapat secara otomatis menggunakan penyedia geolocation secara lebih baik. Namun, hal ini untuk mencegah penggunaan unit penerima GPS BlueTooth eksternal.</string>
@@ -730,14 +716,7 @@
     <string name="cache_listed_on">Terdaftar %s</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Mencari berkas\ndi</string>
-    <string name="file_searching_sdcard_in">Tidak ada arsip yang ditemukan dalam folder default:\n%1$s\n\nMencari seluruh arsip untuk kartu SD:\n</string>
-    <string name="file_list_no_files">c:geo menemukan berkas yang tidak sesuai.</string>
-    <string name="file_searching">Mencari berkas yang cocok</string>
-    <string name="file_title_searching">Mencari</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Pilih direktori</string>
     <string name="simple_dir_chooser_current_path">Jalan:</string>
     <string name="simple_dir_chooser_invalid_path">Jalan yang salah</string>
     <!-- gpx -->
@@ -752,12 +731,7 @@
     <string name="gpx_import_error_parser">Format File Buruk</string>
     <string name="gpx_import_error_unexpected">Kesalahan tidak terduga</string>
     <string name="gpx_import_canceled_with_filename">Impor GPX dari %1$s dibatalkan</string>
-    <string name="gpx_import_delete_title">Menghapus berkas</string>
-    <string name="gpx_import_delete_message">Apakah kamu ingin menghapus %s?</string>
     <string name="gpx_import_select_list_title">Impor GPX ke daftar</string>
-    <string name="gpx_import_android">Impor dari Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Berkas peta dipilih</string>
     <!-- import -->
     <string name="web_import_title">Mengirim dari send2cgeo</string>
     <string name="web_import_waiting">Menunggu cache baru dari send2cgeo&#8230;</string>
@@ -1238,7 +1212,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Gagal untuk menambahkan acara cache ke kalender</string>
     <string name="init_low_disk_space">Ruang penyimpanan tinggal sedikit</string>
-    <string name="init_low_disk_space_message">Direktori data geochace pada ruang penyimpanan hampir habis. Hal ini dapat menyebabkan kerusakan multi fungsi dari c:geo. Silahkan membebaskan beberapa ruang.</string>
     <string name="init_confirm_debug">c:geo berjalan dalam mode debug!</string>
     <string name="list_confirm_debug_message">Mode debug menyebabkan ketidakstabilan! Apakah anda ingin untuk menonaktifkan mode debug?</string>
     <string name="err_select_logimage_upload_size">Gambar terlalu besar, silahkan pilih skala yang lebih kecil.</string>
