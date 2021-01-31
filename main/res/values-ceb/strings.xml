@@ -438,7 +438,6 @@
     <string name="init_choose_list">Pangyo og lista</string>
     <string name="init_summary_choose_list">Pangutan-a kung unsa nga lista ang ibutang sa mga caches sa</string>
     <string name="init_livelist">Ipakita ang Direksyon</string>
-    <string name="init_summary_livelist">Pakit-a sa direksyon sa mga cache sa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">Tabang</string>
     <string name="init_backup_running">Pagbuhat ug tabang para sa cache database…</string>
@@ -459,7 +458,6 @@
     <string name="settings_info_themes">ang c:geo nag suporta og gawi na mga tema para sa offline na mga mapa. Kani puwede magamit para mailisan and kolor og estilo sa mapa (para adunay nightview nga mapa) o para patugbaw sa mga sigurado na butanga pareha sa subayanan sa sikulo o linya sa gitas-on sulod sa mapa.</string>
     <string name="init_mapsource_select">Pagpili og kakuhaan sa mapa</string>
     <string name="init_map_directory_description">Direktoryo nga adunay offline nga mga mapa</string>
-    <string name="init_dataDir">Pagpili sa direktoryong data sa Geocache</string>
     <string name="init_dataDir_note">Pwede ka makapili kung asa nimo itago ang mga napun-ang data para sa mga geocache (spoilers, log na mga imahe, …) sa imong panggawas na tagu-anan (na-emulate o tinuod na panggawas na SD kard depende sa imong debays).</string>
     <string name="init_include_found_status">Apili ang \"Found\" na kahimtang</string>
     <string name="init_trackautovisit">Bisitaha ang TBs</string>
