@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ContentStorageActivityHelper;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +16,8 @@ class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         final Intent intent;
-        if (Settings.getLastChangelogChecksum() == 0) {
-            // new install => run installation wizard
+        if (Settings.getLastChangelogChecksum() == 0 || !ContentStorageActivityHelper.baseFolderIsSet()) {
+            // new install or base folder missing => run installation wizard
             intent = new Intent(this, InstallWizardActivity.class);
         } else {
             // otherwise regular startup
