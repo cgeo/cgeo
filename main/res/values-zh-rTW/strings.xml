@@ -234,7 +234,6 @@
     <string name="init_summary_skin">Use light skin (Restart needed)</string>
     <!-- backup / restore -->
     <string name="init_backup_no_backup_available">没有可用的资源。</string>
-    <string name="init_dataDir">Geocache 数据目录</string>
     <string name="init_dataDir_note">您可以选择在外部存储上存储 geocaches (破坏者、日志图像、…) 的附加数据 (根据您的设备, 模拟或实际的外部 SD 卡)。</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
     <string name="init_debug_note">c: geo 可以生成大量的调试信息。激活此设置将影响 c: geo 的稳定性, 只有在要求您向开发人员发送日志时才建议这样做。请保持调试日志禁用在正常使用 c: geo!</string>
