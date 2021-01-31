@@ -563,7 +563,6 @@
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
     <string name="init_zoomincludingwaypoints_description">Podczas mapowania pojedynczej skrzynki: czy powiększenie powinno uwzględniać wszystkie jej punkty nawigacji?</string>
     <string name="init_brouterThreshold">Obliczanie trasy</string>
-    <string name="init_brouterThreshold_description">Maksymalna odległość, do której aplikacja dodatkowa brouter (jeśli jest zainstalowana) obliczy trasę.</string>
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
@@ -588,7 +587,6 @@
     <string name="init_listdisplay">Pokaż dodatkowe listy na liście skrzynek</string>
     <string name="init_summary_listdisplay">Pokaż członkostwo skrytek w dodatkowych listach na liście skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
-    <string name="init_summary_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Utwórz kopię zapasową</string>
     <string name="init_backup_summary">Pamiętaj, że ta funkcja może tworzyć kopię zapasową skrzynek, punktów nawigacyjne i ustawień, ale nie zachowuje obrazów. \nAby móc przywrócić dane nawet po utracie telefonu, pliki kopii zapasowej powinny być kopiowane do niezależnej lokalizacji.</string>
@@ -649,7 +647,6 @@
     <string name="settings_info_themes">c:geo wspiera motywy dla map offline. Mogą być używane by zmienić kolorystykę mapy (np. aby uzyskać tryb nocny) lub by zaznaczyć wybrane obiekty jak ścieżki rowerowe lub izolinie.</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_map_directory_description">Katalog z mapami offline</string>
-    <string name="init_dataDir">Wybierz katalog z danymi</string>
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrzynek (spoilers, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
     <string name="init_maptrail">Pokaż historię</string>
     <string name="init_maptrail_length">Maks. długość ścieżki historii</string>
