@@ -511,7 +511,6 @@
     <string name="init_showwaypoints">Útpontok mutatása élő térképen</string>
     <string name="init_showwaypoint_description">Maximum ennyi útpontot mutasson</string>
     <string name="init_brouterThreshold">Útvonaltervezés</string>
-    <string name="init_brouterThreshold_description">Maximális távolság, ameddig a brouter segítő alkalmazás (ha telepítve van) útvonaltervezést végez.</string>
     <string name="init_brouterShowBothDistances">Légvonalbeli távolság mutatása</string>
     <string name="init_disabled">Letiltott ládák kihagyása</string>
     <string name="init_summary_disabled">Letiltott ládák kihagyása</string>
@@ -524,7 +523,6 @@
     <string name="init_choose_list">Listaválasztás</string>
     <string name="init_summary_choose_list">Listaválasztás ládamentéséhez</string>
     <string name="init_livelist">Ládák irányának jelzése a listán</string>
-    <string name="init_summary_livelist">Ládák irányának jelzése a listán</string>
     <!-- backup / restore -->
     <string name="init_backup">Ládák / útpontok biztonsági mentése</string>
     <string name="init_backup_backup">Biztonsági mentés</string>
@@ -554,7 +552,6 @@
     <string name="settings_info_themes">A c:geo támogatja az egyedi térképstílusokat. Ezzel meg lehet változtatni a térkép színeit (pl. éjszakai nézethez), vagy bizonyos objektumokat ki lehet vele emelni, mint pl. kerékpárutakat, szintvonalakat, stb.</string>
     <string name="init_mapsource_select">Térkép választása</string>
     <string name="init_map_directory_description">Offline térképek mappája</string>
-    <string name="init_dataDir">Ládaadat mappa beállítása</string>
     <string name="init_dataDir_note">A ládák kiegészítő adatait (spolier képek, logfotók, …) külső tárolón is tarthatod (a készülékedtől függően ez lehet emulált vagy valódi, külső SD kártya is).</string>
     <string name="init_include_found_status">\"Megtaláltam\" jelölések exportálása</string>
     <string name="init_trackautovisit">Utazók logolása</string>
