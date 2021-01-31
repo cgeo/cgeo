@@ -555,7 +555,6 @@
     <string name="init_zoomincludingwaypoints">Medtag alle rutepunkter i zoom</string>
     <string name="init_zoomincludingwaypoints_description">Når kortet viser én cache: Skal kortudsnittet justeres så alle rutepunkter er synlige?</string>
     <string name="init_brouterThreshold">Beregn rute</string>
-    <string name="init_brouterThreshold_description">Maksimal afstand, som kan bruges til ruteberegning i ekstern brouter app.</string>
     <string name="init_brouterShowBothDistances">Vis afstand i lige linje</string>
     <string name="brouter_recalculating">Genberegner ruten i baggrunden…</string>
     <string name="init_summary_brouterShowBothDistances">Hvis navigation er aktiv, vises afstand i lige linje sammen men beregnet rutelængde.</string>
@@ -576,7 +575,6 @@
     <string name="init_listdisplay">Vis yderligere lister i cacheliste</string>
     <string name="init_summary_listdisplay">Vis cachers tilhørsforhold til andre lister i cachelisterne</string>
     <string name="init_livelist">Vis retning til cacher i lister</string>
-    <string name="init_summary_livelist">Vis retning til cacher i lister</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Opret Sikkerhedskopi</string>
     <string name="init_backup_summary">Bemærk venligst, at denne funktion kan sikkerhedskopiere caches, waypoints &amp; indstillinger, men ikke cachebilleder. \nFor at kunne gendanne data hvis du mister din telefon, skal backupfilerne kopieres til en uafhængig placering.</string>
@@ -635,7 +633,6 @@
     <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver.</string>
     <string name="init_mapsource_select">Vælg kortkilde</string>
     <string name="init_map_directory_description">Mappe med offline kort</string>
-    <string name="init_dataDir">Vælg geocache-datamappe</string>
     <string name="init_dataDir_note">Du kan vælge at gemme yderligere data for geocacher (spoilere, logbilleder osv.) i din eksterne hukommelse (emuleret eller ægte SD-kort, afhængig af din enhed).</string>
     <string name="init_maptrail">Vis spor</string>
     <string name="init_maptrail_length">Spor max. længde</string>
