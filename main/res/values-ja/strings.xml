@@ -571,7 +571,6 @@
     <string name="init_zoomincludingwaypoints">ウェイポイントを表示するようにズーム</string>
     <string name="init_zoomincludingwaypoints_description">1つだけキャッシュを表示している場合にすべてのウェイポイントが表示されるようにズーム</string>
     <string name="init_brouterThreshold">ルートを計算</string>
-    <string name="init_brouterThreshold_description">BRouter(インストールされている場合)がルートを計算するまでの最大距離</string>
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
     <string name="brouter_recalculating">バックグラウンドでルートを再計算しています…</string>
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
@@ -596,7 +595,6 @@
     <string name="init_listdisplay">キャッシュリストでリスト名を表示</string>
     <string name="init_summary_listdisplay">キャッシュリスト中にリスト名も表示</string>
     <string name="init_livelist">方向を表示</string>
-    <string name="init_summary_livelist">キャッシュの一覧で方向をアイコン表示</string>
     <!-- backup / restore -->
     <string name="init_backup_title">バックアップの作成</string>
     <string name="init_backup_summary">キャッシュ、ウェイポイント、c:geo設定がバックアップされますがキャッシュ画像は対象外です。\nデバイスを紛失してもデータを復元するためにはバックアップファイルをほかの場所にコピーしておく必要があります</string>
@@ -660,7 +658,6 @@
     <string name="init_base_directory_description">データ保存のベースフォルダ</string>
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
     <string name="init_gpx_importexportdir">GPXフォルダ</string>
-    <string name="init_dataDir">ジオキャッシュ データフォルダを選択</string>
     <string name="init_dataDir_note">ジオキャッシュ(スポイラー画像、ログの画像など)の追加データを外部ストレージ(お使いのデバイスに応じてエミュレートまたは実際の外部 SD カード)に格納することができます</string>
     <string name="init_maptrail">軌跡を表示</string>
     <string name="init_maptrail_length">GPSログの最大ポイント数</string>
