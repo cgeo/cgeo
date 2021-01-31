@@ -455,7 +455,7 @@
     <string name="about_system_write_logcat_type">Create standard or extended logfile?\n\nStandard logfiles will be fine for most use cases.\nUse extended logfiles only when asked to do so.</string>
     <string name="about_system_write_logcat_type_standard">Standard</string>
     <string name="about_system_write_logcat_type_extended">Extended</string>
-    <string name="about_system_write_logcat_success">Logfile written to \"%1$s\" in \"%2$s\" dir</string>
+    <string name="about_system_write_logcat_success">Logfile \"%1$s\" written to folder \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error writing logfile</string>
     <string name="changelog_github">List of all changes</string>
     <string name="about_nutshellmanual">Online manual</string>
@@ -486,7 +486,7 @@
     <string name="settings_title_cachedetails">Cache Details</string>
     <string name="settings_summary_cachedetails">Customize the display of cache information.</string>
     <string name="settings_title_offlinedata">Offline Data</string>
-    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and folders for GPX files.</string>
     <string name="settings_title_logging">Logging</string>
     <string name="settings_summary_logging">Configure your signature and set logging options.</string>
     <string name="settings_title_map">Map</string>
@@ -498,12 +498,12 @@
     <string name="settings_title_map_behavior">Map behavior</string>
     <string name="settings_title_gpx">GPX</string>
 
-    <string name="settings_title_data_dir">Geocache data directory</string>
-    <string name="settings_title_data_dir_usage">Geocache data directory (%1$s used)</string>
+    <string name="settings_title_data_dir">Geocache data folder</string>
+    <string name="settings_title_data_dir_usage">Geocache data folder (%1$s used)</string>
     <string name="calculate_dataDir_title">Geocache data usage</string>
     <string name="calculate_dataDir">Calculating Geocache data disk usage</string>
     <string name="settings_data_dir_item">%1$s (%2$s free)</string>
-    <string name="confirm_data_dir_move_title">Move geocache data directory?</string>
+    <string name="confirm_data_dir_move_title">Move geocache data folder?</string>
     <string name="confirm_data_dir_move">Moving the geocache data might take a really long time, depending on your device and the amount of data.</string>
 
     <string name="settings_title_basicmembers">Options for Basic Members</string>
@@ -662,9 +662,9 @@
     <string name="init_backup_success">c:geo\'s database was successfully copied to:</string>
     <string name="init_backup_failed">Backup of c:geo\'s database failed.</string>
     <string name="init_backup_unnecessary">Database is empty, no backup necessary.</string>
-    <string name="init_backup_folder_exists_error">Couldn\'t create a new backup directory. Have you already made a backup in the last minute?</string>
+    <string name="init_backup_folder_exists_error">Unable to create a new backup folder. Did you already perform a backup in the last minute?</string>
     <string name="init_backup_no_backup_available">There is no backup file available.</string>
-    <string name="backup_confirm_overwrite">This will delete your oldest existing backup directory from %s. \nDo you want to continue?</string>
+    <string name="backup_confirm_overwrite">This will delete your oldest existing backup folder from %s. \nDo you want to continue?</string>
     <string name="restore_confirm_overwrite_database">WARNING: This will overwrite %s on your device!</string>
     <string name="restore_confirm_overwrite_database_and_settings">WARNING: This will overwrite %s and your current settings on your device!</string>
     <string name="restore_confirm_overwrite_settings">WARNING: This will overwrite your current settings on your device!</string>
@@ -691,15 +691,15 @@
     <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
 
     <string name="settings_info_offline_maps_title">Info on Offline Maps</string>
-    <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can download maps from Mapsforge or even create your own maps from OSM data. You need to select the offline map directory first to get offline map support.</string>
+    <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can obtain maps from different providers or even create your own maps (from OSM data). First you have to select the folder in which offline maps are to be stored.</string>
     <string name="settings_info_themes_title">Info on Map Themes</string>
     <string name="settings_info_themes">c:geo supports custom themes for offline maps. These can be used to change the color style of the map (e.g. to have a nightview map) or to highlight certain objects like cycle paths or height lines within the map.</string>
     <string name="init_mapsource_select">Select Map Source</string>
     <string name="init_local_file_system">Local File System</string>
-    <string name="init_base_directory_description">Base Directory for public local data</string>
-    <string name="init_map_directory_description">Directory with offline maps</string>
-    <string name="init_gpx_importexportdir">GPX Directory</string>
-    <string name="init_dataDir">Select data directory</string>
+    <string name="init_base_directory_description">Base folder for public local data</string>
+    <string name="init_map_directory_description">Folder with offline maps</string>
+    <string name="init_gpx_importexportdir">GPX Folder</string>
+    <string name="init_dataDir">Select data folder</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
     <string name="init_maptrail">Show history track</string>
     <string name="init_maptrail_length">History track max. length</string>
@@ -747,23 +747,23 @@
     <string name="init_debug_note">c:geo can generate a lot of debugging information. Activating this setting will affect the stability of c:geo and is only recommended if you are asked to send a log to the developers. Please keep debug logging disabled during normal usage of c:geo!</string>
     <string name="init_debug">Activate debug log</string>
     <string name="init_dbonsdcard_title">Database location</string>
-    <string name="init_dbonsdcard_note">You may store the database of c:geo either system internally or in a directory on your user storage. Having it on the user storage may free some memory, but you may lose a bit of performance and c:geo will not work if the storage is not accessible or you remove the database file.</string>
+    <string name="init_dbonsdcard_note">You may store the database of c:geo either system internally or into a folder on your user storage. We recommend to only activate this option if you need regular manual access to your database file.</string>
     <string name="init_dbonsdcard">On user storage</string>
     <string name="init_dbmove_dbmove">Moving Database</string>
     <string name="init_dbmove_running">Moving Database</string>
     <string name="init_dbmove_success">Successfully moved the database.</string>
     <string name="init_dbmove_failed">Failed to move database</string>
-    <string name="init_datadirmove_datadirmove">Moving Geocache data directory</string>
-    <string name="init_datadirmove_running">Moving Geocache data directory</string>
-    <string name="init_datadirmove_success">Successfully moved Geocache data directory.</string>
-    <string name="init_datadirmove_failed">Moving the Geocache data directory partly or completely failed. Please check old and new directories and move by hand if necessary.</string>
+    <string name="init_datadirmove_datadirmove">Moving Geocache data folder</string>
+    <string name="init_datadirmove_running">Moving Geocache data folder</string>
+    <string name="init_datadirmove_success">Successfully moved Geocache data folder.</string>
+    <string name="init_datadirmove_failed">Moving the Geocache data folder partly or completely failed. Please check old and new folders and move missing data by hand.</string>
     <string name="init_plain_logs">Plain Logs</string>
     <string name="init_summary_plain_logs">Display log entries without colors</string>
     <string name="init_use_native_ua">Android browser</string>
     <string name="init_summary_use_native_ua">Identify as Android browser. Solves login problems when using certain network providers.</string>
-    <string name="init_rendertheme_folder">Map Themes Directory</string>
+    <string name="init_rendertheme_folder">Map Themes Folder</string>
     <string name="init_maintenance">Maintenance</string>
-    <string name="init_maintenance_directories_note">c:geo stores images, log images and other files related to a cache in a separate directory. In some cases (like importing/exporting the database) this directory may contain outdated files, which can be deleted here.</string>
+    <string name="init_maintenance_directories_note">c:geo stores images and other files related to a cache in a dedicated folder. In some cases (e.g. when importing/exporting the database) this folder may contain obsolete files that can be deleted here.</string>
     <string name="init_maintenance_directories">Delete orphaned files</string>
     <string name="init_location">Geolocation</string>
     <string name="init_location_note">On devices equipped with Google Play Services, c:geo can automatically use a better geolocation provider. However, this prevents the use of an external BlueTooth GPS receiver.</string>
@@ -851,7 +851,7 @@
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copy all content</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Move all content</string>
     <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Folder %s: Copy/Move done</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>The copy/move operation had the result: %s. %d file(s) and %d subdirectories were copied/moved.</p><p>Tap \'ok\' finalize the directory change.</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>The copy/move operation had the result: %s. %d file(s) and %d folders were copied/moved.</p><p>Tap \'ok\' finalize the folder change.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Folder set to \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Aborting file selection</string>
@@ -1201,7 +1201,7 @@
     <!-- editor dialog -->
 
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Choose directory</string>
+    <string name="simple_dir_chooser_title">Choose folder</string>
     <string name="simple_dir_chooser_current_path">Path:</string>
     <string name="simple_dir_chooser_invalid_path">Invalid Path</string>
 
@@ -1904,7 +1904,7 @@
     <!-- calendar adder -->
     <string name="event_fail">Failed to add event cache to calendar</string>
     <string name="init_low_disk_space">Running low on storage space</string>
-    <string name="init_low_disk_space_message">The geocache data directory is running low on storage space. This can cause malfunctions of c:geo. Please free up some space.</string>
+    <string name="init_low_disk_space_message">The geocache data folder is running low on storage space. This can cause malfunctions of c:geo. Please free up some space.</string>
     <string name="init_confirm_debug">c:geo is running in debug mode!</string>
     <string name="list_confirm_debug_message">The debug mode causes instabilities! Do you want to deactivate the debug mode?</string>
     <string name="err_select_logimage_upload_size">Image too big, please select a smaller scale.</string>
@@ -2029,32 +2029,32 @@
 
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Receive map file</string>
-    <string name="receivemapfile_success">Map file successfully received as \"%s\" and stored to map directory</string>
+    <string name="receivemapfile_success">Map file successfully received as \"%s\" and stored to the map folder</string>
     <string name="receivemapfile_error">Error while receiving map file</string>
-    <string name="receivemapfile_error_io_exception">I/O error while receiving map file. Is your map directory \"%s\" writable?</string>
+    <string name="receivemapfile_error_io_exception">I/O error while receiving map file. Is your map folder \"%s\" writable?</string>
     <string name="receivemapfile_error_filenotfound_exception">File not found error while receiving map file.</string>
     <string name="receivemapfile_kb_copied">%d kB copied</string>
     <string name="receivemapfile_cancelled">Map file transfer cancelled</string>
 
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Download offline map</string>
-    <string name="downloadmap_info">Choose a map file for your region by tapping the \"Save\" icon.\n\nDownloading will run in the background. When downloading has completed, the downloaded file will be copied to c:geo\'s map directory and set as current map for c:geo.\n\nBe careful: Downloading a map can cause high network traffic!</string>
+    <string name="downloadmap_info">Select a map file for your region by tapping the \"Save\" icon.\n\nThe download is performed in the background. When the transfer is complete, the file is copied to the c:geo map folder and set as the current map.\n\nBe careful: Downloading a map can cause high network traffic!</string>
     <string name="downloadmap_choose">Choose map</string>
     <string name="downloadmap_filename">Downloading %s</string>
     <string name="downloadmanager_not_available">Map file cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
-    <string name="downloadmap_target_not_writable">Target \"%s\" is not writable - downloaded map file will be stored in system download directory and has to be moved manually to the map directory.</string>
+    <string name="downloadmap_target_not_writable">The selected target \"%s\" is not writable - the downloaded map file is saved in the system download folder and must be moved manually to the map folder.</string>
     <string name="downloadmap_allow_metered_network">Allow download over metered network (e.g.: mobile connection)</string>
     <string name="downloadmap_confirmation">Download map \"%1$s\"?\n\nThis may take quite some time and can lead to significant costs, depending on your network connection.\n\nSize info: %2$s</string>
     <string name="downloadmap_handling">The download itself will be handled by your system\'s download manager in the background. You should see a notification as soon as the download started (which may take a while).</string>
     <string name="button_continue">Continue</string>
-    <string name="downloadmap_onedirup">(one dir up)</string>
+    <string name="downloadmap_onedirup">(one level up)</string>
     <string name="downloadmap_checkforupdates_button">Check for updates</string>
     <string name="downloadmap_available_updates">Available updates</string>
     <string name="downloadmap_no_updates_found">No map updates found</string>
-    <string name="downloadmap_directory">directory</string>
+    <string name="downloadmap_directory">folder</string>
     <string name="downloadmap_mapfile">map file</string>
-    <string name="downloadmap_retrieving_directory_data">Retrieving directory data…</string>
+    <string name="downloadmap_retrieving_directory_data">Retrieving folder data…</string>
     <string name="downloadmap_checking_for_updates">Checking for updates…</string>
     <string name="mapserver_mapsforge_info">Basic maps, no map themes required</string>
     <string name="mapserver_openandromaps_info">Detailed maps, require map theme \"Elevate\"</string>
