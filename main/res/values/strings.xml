@@ -841,8 +841,6 @@
     <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2cgeo expired. Please register in settings.</string>
 
     <!-- Content Storage -->
-    <string name="contentstorage_grantaccess_dialog_title">Grant access for data storage</string>
-    <string name="contentstorage_grantaccess_dialog_msg_basedir_html">c:geo needs a local folder to store data like GPX files, backups and field notes. Latest with Android 11 the permission to use this folder needs to be explicitely granted by the user. Therefore c:geo from now on uses this new method to store your data.\n\nIn the following dialog, please select or create such a folder on your device. If you upgraded c:geo from a previous version, select the existing folder "cgeo" on root level of your device storage.</string>
     <string name="contentstorage_selectfolder_dialog_title">Change Folder %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>The folder %s is currently set to \'%s\' and contains %d file(s) and %d subfolder(s).</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>You may choose to use the default folder \'%s\' or pick a user-defined folder.</p>]]></string>
