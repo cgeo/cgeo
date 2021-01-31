@@ -416,8 +416,6 @@
     <string name="about_system_write_logcat_type">표준 또는 확장 로그 파일을 만드시겠습니까?\n\n표준 로그 파일은 대부분의 사용 사례에 적합합니다.\n요청시에만 확장 로그 파일을 사용하십시오.</string>
     <string name="about_system_write_logcat_type_standard">표준</string>
     <string name="about_system_write_logcat_type_extended">확장</string>
-    <string name="about_system_write_logcat_success">\"%2$s\" 디렉토리의 \"%1$s\"에 기록된 로그 파일</string>
-    <string name="about_system_write_logcat_empty">로그 파일이 비어 있습니다</string>
     <string name="about_system_write_logcat_error">로그 파일 쓰기 오류</string>
     <string name="changelog_github">모든 변경 목록</string>
     <string name="about_nutshellmanual">온라인 설명서</string>
@@ -443,7 +441,6 @@
     <string name="settings_title_cachedetails">캐시 상세정보</string>
     <string name="settings_summary_cachedetails">캐시정보 표시 사용자가 지정하기</string>
     <string name="settings_title_offlinedata">오프라인 데이타</string>
-    <string name="settings_summary_offlinedata">오프라인 사용을 위해 저장 될 데이터, GPX 파일의 저장 위치 및 디렉토리를 구성하세요.</string>
     <string name="settings_title_logging">로그하기</string>
     <string name="settings_summary_logging">서명 및 로그 옵션 설정하기</string>
     <string name="settings_title_map">지도</string>
@@ -454,12 +451,9 @@
     <string name="settings_title_map_content">지도 내용</string>
     <string name="settings_title_map_behavior">지도 동작</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">지오캐시 데이터 디렉토리</string>
-    <string name="settings_title_data_dir_usage">지오캐시 데이터 디렉터리 (%1$s 사용)</string>
     <string name="calculate_dataDir_title">지오캐시 데이터 사용</string>
     <string name="calculate_dataDir">지오캐시 데이터 디스크 사용량 계산</string>
     <string name="settings_data_dir_item">%1$s (%2$s 남음)</string>
-    <string name="confirm_data_dir_move_title">지오캐시 데이터 폴터를 이동하시겠습니까?</string>
     <string name="confirm_data_dir_move">장치 및 데이터양에 따라, 지오캐시 데이터를 이동하려면 시간이 많이 걸릴 수 있습니다.</string>
     <string name="settings_title_basicmembers">일반 회원을 위한 선택사항</string>
     <string name="settings_title_navigation">길찾기</string>
@@ -558,7 +552,6 @@
     <string name="init_zoomincludingwaypoints">확대에는 지점이 포함됩니다</string>
     <string name="init_zoomincludingwaypoints_description">단일 캐시를 보는 경우: 모든 지점을 포함하도록 확대를 조정해야합니까?</string>
     <string name="init_brouterThreshold">경로 계산</string>
-    <string name="init_brouterThreshold_description">brouter helper 앱(설치되었을 경우)이 경로를 계산할 수 있는 최대 거리</string>
     <string name="init_brouterShowBothDistances">직선 거리 보기</string>
     <string name="brouter_recalculating">백그라운드에서 경로를 다시 계산하는 중…</string>
     <string name="init_summary_brouterShowBothDistances">라우팅이 활성화 된 경우 : 계산된 경로 길이 외에 직선 거리를 표시합니다.</string>
@@ -578,7 +571,6 @@
     <string name="init_listdisplay">추가 목록</string>
     <string name="init_summary_listdisplay">캐시 목록의 다른 목록에 캐시가 있는지 표시</string>
     <string name="init_livelist">방향 보이기</string>
-    <string name="init_summary_livelist">목록에서 캐시의 방향을 표시합니다.</string>
     <!-- backup / restore -->
     <string name="init_backup_title">백업 생성하기</string>
     <string name="init_backup">백업 캐시 / 웨이포인트</string>
@@ -608,12 +600,9 @@
     <string name="settings_readingerror">설정 읽기 오류</string>
     <string name="settings_restart">로드 된 설정을 적용하려면 c:geo를 다시 시작해야합니다.</string>
     <string name="settings_info_offline_maps_title">오프라인 지도에 대한 정보</string>
-    <string name="settings_info_offline_maps">c:geo 는 오프라인용 지도를 지원합니다. Mapsforge 로부터 지도를 다운받거나, OSM 데이터로부터 지도를 생성할 수도 있습니다. 오프라인 지도를 지원받으려면 먼저 오프라인 지도를 선택하셔야 합니다.</string>
     <string name="settings_info_themes_title">지도 테마에 대한 정보</string>
     <string name="settings_info_themes">c:geo는 오프라인 지도용 테마를 지원합니다. 테마는 지도의 색 스타일을 바꾸거나(예: 야간 모드 지도), 자전거도로나 등고선등을 강조하는데 사용될 수 있습니다.</string>
     <string name="init_mapsource_select">지도 선택</string>
-    <string name="init_map_directory_description">오프라인 지도 폴더</string>
-    <string name="init_dataDir">지오캐시 데이터 디렉토리 선택</string>
     <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진…) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
     <string name="init_maptrail">최근 역사 트랙 표시</string>
     <string name="init_maptrail_length">역사 트랙 최대 길이</string>
@@ -653,23 +642,16 @@
     <string name="init_debug_note">c:geo는 디버깅 정보를 많이 생성할 수 있습니다. 이 설정을 활성화시키면 c:geo 의 안정성에 영향을 미치므로, 개발자에게 로그 전송을 요청 받았을 때만 사용하는 것이 좋습니다. 일반적인 c:geo 사용시에는 디버그 로그를 비활성화시켜 주세요.</string>
     <string name="init_debug">디버그 로그 활성화</string>
     <string name="init_dbonsdcard_title">데이터베이스 위치</string>
-    <string name="init_dbonsdcard_note">c:geo 데이터베이스를 시스템 내부 또는 사용자 저장장치 디렉토리에 저장하실 수 있습니다. 파일 시스템 설정에 따라 다르지만, 사용자 저장장치를 사용하면 내부 메모리의 여유 공간을 확보할 수 있지만, 성능이 약간 떨어지고, 외부 파일시스템에 접근할 수 없거나 데이터베이스파일을 제거할 경우 c:geo 의 작동이 멈출 수 있습니다.</string>
     <string name="init_dbonsdcard">사용자 저장장치에</string>
     <string name="init_dbmove_dbmove">데이터베이스 이동중</string>
     <string name="init_dbmove_running">데이터베이스 이동중</string>
     <string name="init_dbmove_success">데이터베이스를 성공적으로 이동시켰습니다.</string>
     <string name="init_dbmove_failed">데이터베이스를 이동시키지 못했습니다.</string>
-    <string name="init_datadirmove_datadirmove">지오캐시 데이터 디렉토리 이동</string>
-    <string name="init_datadirmove_running">지오캐시 데이터 디렉토리 이동</string>
-    <string name="init_datadirmove_success">지오캐시 데이터 디렉토리를 성공적으로 이동시켰습니다.</string>
-    <string name="init_datadirmove_failed">지오캐시 데이터 디렉토리 이동중 일부 혹은 전부 실패했습니다. 이전 디렉토리와 새 디렉토리를 점검하시어, 필요하다면 직접 이동시켜 주세요.</string>
     <string name="init_plain_logs">간단한 로그</string>
     <string name="init_summary_plain_logs">색이 없이 로그 내용을 표시합니다.</string>
     <string name="init_use_native_ua">안드로이드 브라우저</string>
     <string name="init_summary_use_native_ua">안드로이드 브라우저로 인식하게 합니다. 특정 네트워크를 사용시 로그인 문제를 해결합니다.</string>
-    <string name="init_rendertheme_folder">지도 테마 폴더</string>
     <string name="init_maintenance">유지보수</string>
-    <string name="init_maintenance_directories_note">c:geo는 캐시의 사진이나 기타 파일을 별도의 폴더에 보관합니다. 어떤 경우(데이터베이스를 가져오거나 내보낼 때) 이 폴더에는 쓸모없는 파일이 존재합니다. 여기에서 이런 파일을 삭제합니다.</string>
     <string name="init_maintenance_directories">쓰이지 않는 파일 삭제하기</string>
     <string name="init_location">위치 정보</string>
     <string name="init_location_note">구글플레이 서비스를 장착한 기기의 경우, c:geo는 자동적으로 더 나은 위치정보 제공자를 사용합니다. 하지만, 이렇게 하면 외부 블루투스 GPS 수신기를 사용할 수 없습니다.</string>
@@ -990,17 +972,9 @@
     <string name="cc_hint_seconds">초</string>
     <string name="cc_hint_fraction">분수</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">파일 검색중\n위치 :</string>
-    <string name="file_searching_sdcard_in">기본 폴더에 파일이 없습니다.\n%1$s\n\n전체 SD 카드에서 파일을 검색합니다:\n</string>
-    <string name="file_list_no_files">적절한 파일을 찾지 못했습니다.</string>
-    <string name="file_searching">일치하는 파일 검색중</string>
-    <string name="file_title_searching">검색중</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">폴더 선택</string>
     <string name="simple_dir_chooser_current_path">경로 :</string>
     <string name="simple_dir_chooser_invalid_path">잘못된 경로</string>
-    <string name="simple_file_chooser_title">파일 선택</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s 에서 캐시 불러오는 중</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s 에서 웨이포인트 불러오는 중</string>
@@ -1016,14 +990,7 @@
     <string name="gpx_import_error_parser">파일 포맷 이상</string>
     <string name="gpx_import_error_unexpected">예기치 않은 오류</string>
     <string name="gpx_import_canceled_with_filename">%1$s에서 GPX 가져오기가 취소됨</string>
-    <string name="gpx_import_delete_title">파일 삭제</string>
-    <string name="gpx_import_delete_message">%s을 삭제 하 시겠습니까?</string>
     <string name="gpx_import_select_list_title">GPX를 목록으로 가져오기</string>
-    <string name="gpx_import_android">안드로이드에서 가져오기</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">지도 파일 선택</string>
-    <string name="track_file_select_title">트랙 파일 선택</string>
-    <string name="individual_route_file_select_title">개별 경로 파일 선택</string>
     <!-- import -->
     <string name="web_import_title">send2cgeo에서 가져오기</string>
     <string name="web_import_waiting">send2cgeo에서 새로운 캐시를 기다리는 중…</string>
@@ -1549,7 +1516,6 @@
     <!-- calendar adder -->
     <string name="event_fail">이벤트 캐시를 캘린더에 추가하지 못했습니다.</string>
     <string name="init_low_disk_space">디스크 공간 부족</string>
-    <string name="init_low_disk_space_message">지오캐시 데이터폴더의 공간이 모자랍니다. 이는 c:geo의 오작동을 초래할 수 있습니다. 여유공간을 확보해 주세요.</string>
     <string name="init_confirm_debug">c:geo가 디버그 모드에서 실행됩니다!</string>
     <string name="list_confirm_debug_message">디버그 모드는 불안정해질 수 있습니다. 정상 모드로 돌아가시겠습니까?</string>
     <string name="err_select_logimage_upload_size">이미지가 너무큽니다. 작은 것을 선택해주세요.</string>
@@ -1641,23 +1607,16 @@
     <string name="localfile_cannot_handle">파일 읽기 오류 또는 c:geo가 이 파일 유형을 처리 할 수 없습니다.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">지도 파일 받기</string>
-    <string name="receivemapfile_success">지도 파일이 \"%s\"(으)로 수신되어 지도 디렉토리에 저장되었습니다.</string>
     <string name="receivemapfile_error">지도 파일을 받는 중 오류</string>
-    <string name="receivemapfile_error_io_exception">지도 파일을 받는 중 I/O 오류가 발생했습니다. 지도 디렉토리 \"%s\"에 쓸 수 있습니까?</string>
     <string name="receivemapfile_error_filenotfound_exception">지도 파일을 받는 중 파일을 찾을 수 없음 오류가 발생했습니다.</string>
-    <string name="receivemapfile_alreadyexists">이 이름의 파일이 이미 존재합니다. 기존 파일을 덮어 쓰거나 다른 이름으로 새 파일을 저장 하시겠습니까?</string>
-    <string name="receivemapfile_option_overwrite">덮어쓰기</string>
-    <string name="receivemapfile_option_differentname">다른 이름</string>
     <string name="receivemapfile_kb_copied">%d kB 복사됨</string>
     <string name="receivemapfile_cancelled">지도 파일 전송이 취소되었습니다.</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">오프라인 지도 다운로드</string>
-    <string name="downloadmap_info">\"저장\"아이콘을 눌러 해당 지역의 지도 파일을 선택하십시오.\n\n다운로드는 백그라운드에서 실행됩니다. 다운로드가 완료되면 다운로드 한 파일이 c:geo의 지도 디렉토리에 복사되고 c:geo의 현재 지도로 설정됩니다.\n\n주의: 지도를 다운로드하면 네트워크 트래픽이 높아질 수 있습니다!</string>
     <string name="downloadmap_choose">지도 선택</string>
     <string name="downloadmap_filename">다운로드 중 %s</string>
     <string name="downloadmanager_not_available">지도 파일을 다운로드 할 수 없습니다. 시스템 다운로드 관리자를 사용할 수 없습니다.</string>
     <string name="download_started">백그라운드에서 다운로드 시작합니다.</string>
-    <string name="downloadmap_target_not_writable">대상 \"%s\"에 쓰기가 불가능합니다. 다운로드 된 지도 파일은 시스템 다운로드 디렉토리에 저장되며 수동으로 지도 디렉토리로 이동해야합니다.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">트레일 역사 지우기</string>
     <string name="map_trailhistory_cleared">트레일 역사가 삭제되었습니다.</string>
