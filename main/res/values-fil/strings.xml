@@ -456,7 +456,6 @@
     <string name="init_choose_list">Magtanong para sa listahan</string>
     <string name="init_summary_choose_list">Magtanong kung alin sa listahan inimbak ang mga cache sa</string>
     <string name="init_livelist">Ang pagpapakita ng direksyon</string>
-    <string name="init_summary_livelist">Ipakita ang mga direksyon ng mga cache sa listahan</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">Mag-Backup</string>
     <string name="init_backup_running">Gumawa ng backup para sa cache database&#8230;</string>
@@ -477,7 +476,6 @@
     <string name="settings_info_themes">sumusuporta ang c:geo sa mga pasdyang tema para sa mga offline na mga mapa. Upang baguhin ang stilo ng kulay ng mapa ang mga ito ay maaring gamitin (hal. upang magkaroon ng nightview na mapa) o]upang i-highlight ang tiyak na mga bagay tulad ng mga cycle path o kaya taas ng mga linya na nasa mapa.</string>
     <string name="init_mapsource_select">Piliin ang pinag mulan ng mapa</string>
     <string name="init_map_directory_description">Ang direktorya kasama ang offline na mga mapa</string>
-    <string name="init_dataDir">Pumili ng Direktoryo ng datos sa Geocache</string>
     <string name="init_dataDir_note">Maari kang pumili upang iimbak na karagdagang datos para sa geocaches (spoilers, log images, &#8230;) sa iyong external na lagayan (emulated or real external SD card depende sa iyong aparato).</string>
     <string name="init_include_found_status">Isama ang nakitang katayuan</string>
     <string name="init_trackautovisit">Bisitahin ang TBs</string>
