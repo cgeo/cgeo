@@ -363,12 +363,9 @@
     <string name="settings_title_map_data">Ang Datos ng Mapa</string>
     <string name="settings_title_map_content">Nilalaman ng Mapa</string>
     <string name="settings_title_gpx">Ang GPX</string>
-    <string name="settings_title_data_dir">Direktoryo ng mga datos sa Geocache</string>
-    <string name="settings_title_data_dir_usage">Direktoryo ng mga datos sa Geocache (%1$s nagamit)</string>
     <string name="calculate_dataDir_title">Ang paggamit ng mga datos sa Geocache</string>
     <string name="calculate_dataDir">Pagkalkula ng mga datos na nagamit sa Geocache</string>
     <string name="settings_data_dir_item">%1$s (%2$s libri)</string>
-    <string name="confirm_data_dir_move_title">Ilipat ang direktoryo ng datos sa Geocache?</string>
     <string name="confirm_data_dir_move">Ang paglipat ng datos ng geocache ay maaring tumagal ng mahabang oras, depende ito sa aparato at ang bilang ng datos.</string>
     <string name="settings_title_basicmembers">Pagpipilian sa mga Pangunahin na Miyembro</string>
     <string name="settings_title_navigation">Ang Nabigasyon</string>
@@ -456,7 +453,6 @@
     <string name="init_choose_list">Magtanong para sa listahan</string>
     <string name="init_summary_choose_list">Magtanong kung alin sa listahan inimbak ang mga cache sa</string>
     <string name="init_livelist">Ang pagpapakita ng direksyon</string>
-    <string name="init_summary_livelist">Ipakita ang mga direksyon ng mga cache sa listahan</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">Mag-Backup</string>
     <string name="init_backup_running">Gumawa ng backup para sa cache database&#8230;</string>
@@ -472,12 +468,9 @@
     <string name="init_backup_last">Ang maaring magamit na backup mula sa</string>
     <string name="init_backup_last_no">Walang nabackup na payl.</string>
     <string name="settings_info_offline_maps_title">Ang impormasyon sa offline na mga mapa</string>
-    <string name="settings_info_offline_maps">sinusuportahan ng c:geo ang mga mapa para sa paggamit ng pa offline. Ikaw ay maaaring mag download ng mga mapa mula sa Mapforge o gumawa ng iyong mga sariling mapa mula sa data ng OSM. Ang offline na direktoryo ng mapa ay ang kinakailangan mo na unang piliin para makakuha ng suporta sa offline na mapa.</string>
     <string name="settings_info_themes_title">Ang impormasyon sa mga tema ng mapa</string>
     <string name="settings_info_themes">sumusuporta ang c:geo sa mga pasdyang tema para sa mga offline na mga mapa. Upang baguhin ang stilo ng kulay ng mapa ang mga ito ay maaring gamitin (hal. upang magkaroon ng nightview na mapa) o]upang i-highlight ang tiyak na mga bagay tulad ng mga cycle path o kaya taas ng mga linya na nasa mapa.</string>
     <string name="init_mapsource_select">Piliin ang pinag mulan ng mapa</string>
-    <string name="init_map_directory_description">Ang direktorya kasama ang offline na mga mapa</string>
-    <string name="init_dataDir">Pumili ng Direktoryo ng datos sa Geocache</string>
     <string name="init_dataDir_note">Maari kang pumili upang iimbak na karagdagang datos para sa geocaches (spoilers, log images, &#8230;) sa iyong external na lagayan (emulated or real external SD card depende sa iyong aparato).</string>
     <string name="init_include_found_status">Isama ang nakitang katayuan</string>
     <string name="init_trackautovisit">Bisitahin ang TBs</string>
@@ -495,23 +488,16 @@
     <string name="init_debug_note">c:geo maaring bumuo ng maraming impormasyon ng debugging. Inaktiba ang setting para maka-apekto sa katatagan ng c:geo at ito lang ang inirekomenda kapag tinanong ka para maka pasa ka ng log sa mga developers. Panatilihin ang debug logging na naka-disable habang naka-normal ang paggamit sa c:geo!</string>
     <string name="init_debug">Ang log ng debug ay gawing aktibo</string>
     <string name="init_dbonsdcard_title">Lokasyon ng database</string>
-    <string name="init_dbonsdcard_note">Maari kang mag-imbak ng database sa c:geo alinmang sistema internally o sa direktoryo sa imbakan ng gumagamit. Kapag nasa imbakan ito ng gumagamit ay maaring maka libri ka ng memorya, pero maari kang mawalang ng kunting kaganapan at c:geo ay hindi gagana kapag ang imbakan ay di magamit or inalis ang database file.</string>
     <string name="init_dbonsdcard">Sa imbakan ng gumamit</string>
     <string name="init_dbmove_dbmove">Ang paglipat ng Database</string>
     <string name="init_dbmove_running">Ang paglipat ng Database</string>
     <string name="init_dbmove_success">Ang matagumpay na pag lipat ng database.</string>
     <string name="init_dbmove_failed">Ang paglipat ng database ay bigo</string>
-    <string name="init_datadirmove_datadirmove">Ang paglipat ng datos sa direktoryo ng Geocache</string>
-    <string name="init_datadirmove_running">Ang paglipat ng datos sa direktoryo ng Geocache</string>
-    <string name="init_datadirmove_success">Matagumpay na paglipat sa direktoryo ng mga datos ng Geocache.</string>
-    <string name="init_datadirmove_failed">Paglipat sa direktoryo ng mga datos ng Geocache nang bahagya o ganap na nabigo. Paki suri ang luma at bagong direktoryo at ilipat ng maayus kung kinakailangan.</string>
     <string name="init_plain_logs">Ang maliwanag na mga logs</string>
     <string name="init_summary_plain_logs">Iladlad ang log ng mga entry na walang mga kulay</string>
     <string name="init_use_native_ua">Ang browser ng Android</string>
     <string name="init_summary_use_native_ua">Kilalanin bilang browser ng android. resulbahin ang mga problema sa pag-login kapag gumagamit ng siguradong mga probayder ng network.</string>
-    <string name="init_rendertheme_folder">Ang Direktoryo ng mga Tema ng Mapa</string>
     <string name="init_maintenance">Ang sustento</string>
-    <string name="init_maintenance_directories_note">ang nakaimbak na mga imahe sa c:geo, Ang imahe ng log at ibang mga payl na mayroong kaugnay sa magkahiwalay na direktoryo. Ang ilan sa mga kaso (tulad ng pag-import/pag-eksport) itong direktoryang ito ay nag lalaman ng mga payl na wala na sa tamang petsa, ay maaring inalis nalang dito.</string>
     <string name="init_maintenance_directories">Ang mga luma payl ay alisin</string>
     <string name="init_location">Ang Heyolokasyon</string>
     <string name="init_location_note">Sa mga aparato na may mga Serbisyo ng Google Play,awtomatikong magagamit ng isang mabuting probayder ng geolocation ang c:geo. Gayunpaman, mapipigilan ang paggamit ng panlabas na bluetooth Gps reciever.</string>
@@ -746,14 +732,7 @@
     <string name="cache_listed_on">Ang listahan sa %s</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Paghahanap para sa mga payl\nnasa</string>
-    <string name="file_searching_sdcard_in">Walang natagpuan na mga payl sa mga polder na naka-default:\n%1$s\n\nAng paghahanap sa buong SD kard para sa mga payl na:\n</string>
-    <string name="file_list_no_files">nakahanap ang c:geo ng hindi angkop na mga payl.</string>
-    <string name="file_searching">Paghahanap sa mga payl na nagtutugma</string>
-    <string name="file_title_searching">Ang paghahanap</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Mamili ng direktoriya</string>
     <string name="simple_dir_chooser_current_path">Ang daanan:</string>
     <string name="simple_dir_chooser_invalid_path">Ang imbalidong Daanan</string>
     <!-- gpx -->
@@ -768,12 +747,7 @@
     <string name="gpx_import_error_parser">Ang pormart ng payl ay hindi maayos</string>
     <string name="gpx_import_error_unexpected">Ang hindi akalain na kamalian</string>
     <string name="gpx_import_canceled_with_filename">Ang pag-import mula sa %1$s ay nakansela</string>
-    <string name="gpx_import_delete_title">Ang payl ay alisin</string>
-    <string name="gpx_import_delete_message">Ang %s? ay gusto mo bang alisin?</string>
     <string name="gpx_import_select_list_title">Ang GPX ay i-import sa listahan</string>
-    <string name="gpx_import_android">I-import mula sa Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Pumili ng payl ng mapa</string>
     <!-- import -->
     <string name="web_import_title">I-import mula sa send2cgeo</string>
     <string name="web_import_waiting">Paghihintay para sa bagong mga cache mula sa send2cgeo&#8230;</string>
@@ -1263,7 +1237,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Nabigo sa pagdagdag ng kaganapan sa cache patungo sa kalendaryo</string>
     <string name="init_low_disk_space">May mababang imbakan na lang natitira</string>
-    <string name="init_low_disk_space_message">Ang direktoryo ng datos sa geocache ay bumababa ang espasyo. Ito ay maaring magdudulot ng hindi pag-gana sa c:geo. Paki libri ang espasyo.</string>
     <string name="init_confirm_debug">c:geo ay gumagana sa debug mode!</string>
     <string name="list_confirm_debug_message">Ang debug mode ay magsasanhi ng instabilities! Gusto mo bang e-deactivate ang debug mode?</string>
     <string name="err_select_logimage_upload_size">Ang imahe ay masyadong malaki, pumili ng mas maliit na scale.</string>
