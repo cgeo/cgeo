@@ -573,7 +573,6 @@
     <string name="init_zoomincludingwaypoints">El zoom inclou punts de pas</string>
     <string name="init_zoomincludingwaypoints_description">Si fiqueu al mapa un catxé: s\'ha d\'ajustar el zoom per incloure tots els seus punts de ruta?</string>
     <string name="init_brouterThreshold">Calcula la ruta</string>
-    <string name="init_brouterThreshold_description">Distància màxima fins la qual l\'aplicació  Brouter (si està instal·lada) calculi una ruta.</string>
     <string name="init_brouterShowBothDistances">Mostra la distància en línia recta</string>
     <string name="brouter_recalculating">S\'està recalculant la ruta en segon pla…</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
@@ -598,7 +597,6 @@
     <string name="init_listdisplay">Llistes addicionals</string>
     <string name="init_summary_listdisplay">Mostra la pertinença del catxé a una llista addicionals a la llista de catxés</string>
     <string name="init_livelist">Mostra la direcció</string>
-    <string name="init_summary_livelist">Mostra la direcció dels catxés a la llista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Fer una còpia de seguretat</string>
     <string name="init_backup_summary">Tingueu en compte que aquesta funció permet fer còpies de seguretat de catxés , punts de ruta &amp; configuracions, però sense imatges dels catxés. \n\n Per poder restaurar les dades fins i tot després de perdre el telèfon, els fitxers de còpia de seguretat s\'han de copiar a una ubicació independent.</string>
@@ -659,7 +657,6 @@
     <string name="settings_info_themes">El c:geo permet personalitzar els mapes fora de línia. Podeu canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per posar de relleu certs objectes com el carril bici o línies de nivell al mapa.</string>
     <string name="init_mapsource_select">Selecciona l\'origen del mapa</string>
     <string name="init_map_directory_description">Directori amb els mapes fora de línia</string>
-    <string name="init_dataDir">Selecciona el directori de dades dels geoamatalls</string>
     <string name="init_dataDir_note">Podeu triar emmagatzemar les dades addicionals per als geoamagatalls (pistes, registre d\'imatges, …) en l\'emmagatzematge extern (targeta SD externa emulada o real, en funció del dispositiu).</string>
     <string name="init_maptrail">Mostra el traçat</string>
     <string name="init_maptrail_length">Màxima llargada del traçat</string>
