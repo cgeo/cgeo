@@ -304,7 +304,7 @@ dependencies {
     implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
 
     // Locus Maps integration
-    implementation "com.asamm:locus-api-android:0.9.23"
+    implementation "com.asamm:locus-api-android:0.9.24"
 
     // Mapsforge new version
     def mapsforgeVersion = 'a623be6d9a'
