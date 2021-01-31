@@ -539,7 +539,6 @@
     <string name="init_zoomincludingwaypoints">El zoom incluye waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Si se mapea un solo caché: ¿Debe ajustarse el zoom para incluir todos sus waypoints?</string>
     <string name="init_brouterThreshold">Calcular ruta</string>
-    <string name="init_brouterThreshold_description">Distancia máxima hasta la que la aplicación de ayuda de brouter (si se instala) calculará una ruta.</string>
     <string name="init_brouterShowBothDistances">Mostrar distancia en linea recta</string>
     <string name="brouter_recalculating">Recalculando ruta en segundo plano…</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta está activa: Muestra la distancia recta además de la longitud calculada de la ruta.</string>
@@ -558,7 +557,6 @@
     <string name="init_summary_choose_list">Preguntar en qué lista guardar el caché</string>
     <string name="init_listdisplay">Listas adicionales</string>
     <string name="init_livelist">Mostrar dirección</string>
-    <string name="init_summary_livelist">Mostrar la dirección de los cachés en la lista</string>
     <!-- backup / restore -->
     <string name="init_backup">Hacer copia de seguridad de cachés /waypoints</string>
     <string name="init_backup_backup">Copia de seguridad</string>
@@ -589,7 +587,6 @@
     <string name="settings_info_themes">c:geo permite personalizar los mapas sin conexión. Se puede usar para cambiar el estilo del color del mapa (p. ej. tener un mapa de visión nocturna) o para resatar ciertos objetos como carriles bici o líneas de altitud en el mapa.</string>
     <string name="init_mapsource_select">Elegir proveedor de mapas</string>
     <string name="init_map_directory_description">Directorio de mapas sin conexión</string>
-    <string name="init_dataDir">Seleccionar directorio de datos de los cachés</string>
     <string name="init_dataDir_note">Puedes elegir almacenar los datos adicionales de los cachés (spoilers, imágenes de los registros, …) en tu almacenamiento externo (emulado o en una tarjeta SD real externa, dependiendo de tu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de rutas</string>
     <string name="init_summary_maptrail">Cuando se activ (y el GPS está activado) c:geo guarda el historial de tus movimientos como una ruta y lo muestra en el mapa.</string>
