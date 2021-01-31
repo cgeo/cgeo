@@ -856,14 +856,14 @@
     <string name="contentstorage_folder_selection_success">Folder set to \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Aborting file selection</string>
     <string name="contentstorage_file_selection_success">File selected: \'%s\'</string>
-    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Folder %s: \'%s\' is not accessible, falling back to \'%s\'</string>
+    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Folder %1$s: \'%2$s\' is not accessible, falling back to \'%3$s\'</string>
     <string name="contentstorage_err_read_failed">File \'%s\' could not be read</string>
     <string name="contentstorage_err_write_failed">File \'%s\' could not be written</string>
-    <string name="contentstorage_err_create_failed">File \'%s\' in \'%s\' could not be created</string>
+    <string name="contentstorage_err_create_failed">File \'%1$s\' in \'%2$s\' could not be created</string>
     <string name="contentstorage_err_delete_failed">File \'%s\' could not be deleted</string>
     <string name="contentstorage_err_list_failed">Files in Folder \'%s\' could not be listed</string>
     <string name="contentstorage_err_folder_access_failed">Folder \'%s\' could not be accessed</string>
-    <string name="contentstorage_err_copy_failed">File \'%s\' could not be copied/moved to \'%s\' (move=%s)</string>
+    <string name="contentstorage_err_copy_failed">File \'%1$s\' could not be copied/moved to \'%2$s\' (move=%3$s)</string>
 
     <!-- Persistable Folders -->
     <string name="persistablefolder_usertype_userdefined">User-defined</string>
