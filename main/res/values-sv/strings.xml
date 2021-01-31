@@ -557,7 +557,6 @@
     <string name="init_zoomincludingwaypoints">Zooma inkluderar vägpunkter</string>
     <string name="init_zoomincludingwaypoints_description">Om kartläggning av en enda cache: Bör zoom justeras för att inkludera alla dess vägpunkter?</string>
     <string name="init_brouterThreshold">Beräkna rutt</string>
-    <string name="init_brouterThreshold_description">Maximalt avstånd upp till som brouter helper app (om installerat) beräknar en rutt.</string>
     <string name="init_brouterShowBothDistances">Visa rakt avstånd</string>
     <string name="brouter_recalculating">Beräknar rutt i bakgrunden…</string>
     <string name="init_summary_brouterShowBothDistances">Om rutten är aktiv: Visa den raka sträckan utöver den beräknade ruttlängden.</string>
@@ -579,7 +578,6 @@
     <string name="init_listdisplay">Visa ytterligare listor i cachelistan</string>
     <string name="init_summary_listdisplay">Visa cachernas tillhörighet till andra listor i cachelistan</string>
     <string name="init_livelist">Riktning</string>
-    <string name="init_summary_livelist">Visa riktning till cacher i listan</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Skapa säkerhetskopia</string>
     <string name="init_restore_title">Återställ säkerhetskopia</string>
@@ -626,7 +624,6 @@
     <string name="settings_info_themes">c:geo har stöd för anpassade teman för offline-kartor. Dessa kan användas för färgerna på kartan (t.ex. för nattläge) eller för att tydliggöra vissa objekt såsom cykelvägar eller höjdkurvor.</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="init_map_directory_description">Katalog med offline-kartor</string>
-    <string name="init_dataDir">Välj katalog för geocache-data</string>
     <string name="init_dataDir_note">Du kan välja att lagra ytterligare data för geocacher (spoilers, loggbilder, …) på din externa lagringsenhet (emulerat eller verkligt externt SD-kort beroende på din enhet).</string>
     <string name="init_maptrail">Visa historikspår</string>
     <string name="init_maptrail_length">Historiskt spår max. längd</string>
