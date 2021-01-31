@@ -16,17 +16,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ContentStorageTest extends CGeoTestCase {
@@ -162,18 +163,82 @@ public class ContentStorageTest extends CGeoTestCase {
         createTree(sourceFolder, COMPLEX_FOLDER_STRUCTURE);
 
         //copy
-        ImmutableTriple<FolderUtils.CopyResult, Integer, Integer > result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
-        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 7, 3));
+        FolderUtils.CopyResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
+        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 7, 3);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
 
         //move
         assertThat(FolderUtils.get().deleteAll(targetFolder)).isTrue();
         result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
-        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 7, 3));
+        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 7, 3);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false), "[]");
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
     }
+
+    public void testFileCopyAllAbortAndStatus() {
+        performCopyAllAbortAndStatus(Folder.FolderType.FILE, Folder.FolderType.FILE);
+    }
+
+    public void testDocumentCopyAllAbortAndStatus() {
+        performCopyAllAbortAndStatus(Folder.FolderType.DOCUMENT, Folder.FolderType.DOCUMENT);
+    }
+
+    private void performCopyAllAbortAndStatus(final Folder.FolderType typeSource, final Folder.FolderType typeTarget) {
+
+        final Folder sourceFolder = Folder.fromFolder(createTestFolder(typeSource, "copyAllAbortAndStatus"), "source");
+        final Folder targetFolder = Folder.fromFolder(createTestFolder(typeTarget, "copyAllAbortAndStatus"), "target");
+        final Folder targetFolder2 = Folder.fromFolder(createTestFolder(typeTarget, "copyAllAbortAndStatus"), "target2");
+
+        //create something to copy in source Folder
+        createTree(sourceFolder, COMPLEX_FOLDER_STRUCTURE);
+
+        //copy complete
+        final List<FolderUtils.CopyStatus> copyStatus = new ArrayList<>();
+        final AtomicBoolean cancelFlag = new AtomicBoolean(false);
+        FolderUtils.CopyResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false, cancelFlag, cs -> copyStatus.add(cs));
+        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 7, 3);
+        //expect one initial status (with files/dirs to copy = -1), one status before (with files/dirs copied = 0 but known nr of files/dirs to copy) and then one for each file/dir
+        assertThat(copyStatus).hasSize(2 + 3 + 7);
+        assertThat(copyStatus.get(0).filesInSource).isEqualTo(-1);
+        assertThat(copyStatus.get(0).dirsInSource).isEqualTo(-1);
+        assertThat(copyStatus.get(0).filesCopied + copyStatus.get(0).dirsCopied).isEqualTo(0);
+        int prevSum = 0;
+        for (int i = 1; i < 2 + 3 + 7; i++) {
+            assertThat(copyStatus.get(i).filesInSource).isEqualTo(7);
+            assertThat(copyStatus.get(i).dirsInSource).isEqualTo(3);
+            assertThat(copyStatus.get(i).filesCopied + copyStatus.get(i).dirsCopied).isEqualTo(prevSum);
+            prevSum++;
+        }
+
+        //copy aborted
+        copyStatus.clear();
+        final int abortAfter = 6;
+        result = FolderUtils.get().copyAll(sourceFolder, targetFolder2, false, cancelFlag, cs -> {
+            copyStatus.add(cs);
+            if (copyStatus.size() >= abortAfter) {
+                cancelFlag.set(true);
+            }
+        });
+        assertThat(result.status).isEqualTo(FolderUtils.CopyResultStatus.ABORTED);
+        //expect one initial status (with files/dirs to copy = -1), one status before (with files/dirs copied = 0 but known nr of files/dirs to copy) and then one for each file/dir
+        assertThat(copyStatus).hasSize(abortAfter + 1);
+        assertThat(copyStatus.get(0).filesInSource).isEqualTo(-1);
+        assertThat(copyStatus.get(0).dirsInSource).isEqualTo(-1);
+        assertThat(copyStatus.get(0).filesCopied + copyStatus.get(0).dirsCopied).isEqualTo(0);
+        prevSum = 0;
+        for (int i = 1; i < abortAfter + 1; i++) {
+            assertThat(copyStatus.get(i).filesInSource).isEqualTo(7);
+            assertThat(copyStatus.get(i).dirsInSource).isEqualTo(3);
+            assertThat(copyStatus.get(i).filesCopied + copyStatus.get(i).dirsCopied).isEqualTo(prevSum);
+            prevSum++;
+        }
+        //check that result status of different sources match also when copy was aborted
+        assertThat(copyStatus.get(abortAfter).filesCopied).isEqualTo(result.filesCopied);
+        assertThat(copyStatus.get(abortAfter).dirsCopied).isEqualTo(result.dirsCopied);
+        final ImmutablePair<Integer, Integer> targetInfo = FolderUtils.get().getFolderInfo(targetFolder2);
+        assertThat(targetInfo).isEqualTo(new ImmutablePair<>(result.filesCopied, result.dirsCopied));
+     }
 
     public void testFileCopyAllSameDir() {
         performCopyAllSameDir(Folder.FolderType.FILE);
@@ -190,8 +255,8 @@ public class ContentStorageTest extends CGeoTestCase {
 
         createTree(sourceTargetFolder, COMPLEX_FOLDER_STRUCTURE);
 
-        final ImmutableTriple<FolderUtils.CopyResult, Integer, Integer> result = FolderUtils.get().copyAll(sourceTargetFolder, sourceTargetFolder, true);
-        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK_NOTHING_TO_COPY, 0, 0));
+        final FolderUtils.CopyResult result = FolderUtils.get().copyAll(sourceTargetFolder, sourceTargetFolder, true);
+        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 0, 0);
 
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceTargetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
     }
@@ -211,8 +276,8 @@ public class ContentStorageTest extends CGeoTestCase {
         final Folder targetFolder = Folder.fromFolder(sourceFolder, "ccc/ccc-ccc");
 
         //copy
-        ImmutableTriple<FolderUtils.CopyResult, Integer, Integer > result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
-        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 7, 3));
+        FolderUtils.CopyResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
+        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 7, 3);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false),
             "[\"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": " +
                 "[ \"ccc-aaa.txt\", { \"name\": \"ccc-bbb\", \"files\": [] }, { \"name\": \"ccc-ccc\", \"files\": " +
@@ -228,7 +293,7 @@ public class ContentStorageTest extends CGeoTestCase {
         FolderUtils.get().deleteAll(sourceFolder);
         createTree(sourceFolder, COMPLEX_FOLDER_STRUCTURE);
         result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
-        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 7, 3));
+        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 7, 3);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false),
             "[{\"name\": \"ccc\", \"files\": [ { \"name\": \"ccc-ccc\", \"files\": " +
@@ -250,8 +315,8 @@ public class ContentStorageTest extends CGeoTestCase {
         final Folder sourceFolder = Folder.fromFolder(targetFolder, "ccc");
 
         //copy
-        ImmutableTriple<FolderUtils.CopyResult, Integer, Integer > result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
-        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 4, 2));
+        FolderUtils.CopyResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
+        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 4, 2);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false),
             "[\"aaa.txt\",\"bbb.txt\",{\"name\":\"ccc\",\"files\":[\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\"]},\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\",\"ddd.txt\"]"
             );
@@ -260,7 +325,7 @@ public class ContentStorageTest extends CGeoTestCase {
         FolderUtils.get().deleteAll(targetFolder);
         createTree(targetFolder, COMPLEX_FOLDER_STRUCTURE);
         result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
-        assertThat(result).isEqualTo(new ImmutableTriple<>(FolderUtils.CopyResult.OK, 4, 2));
+        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 4, 2);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false),
             "[\"aaa.txt\",\"bbb.txt\",{\"name\":\"ccc\",\"files\":[" +
                 //"\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\"" +
@@ -512,6 +577,12 @@ public class ContentStorageTest extends CGeoTestCase {
                 ContentStorage.get().create(folder, n.textValue());
             }
         }
+    }
+
+    private void assertCopyResult(final FolderUtils.CopyResult result, final FolderUtils.CopyResultStatus expectedState, final int expectedFileCount, final int expectedDirCount) {
+        assertThat(result.status).isEqualTo(expectedState);
+        assertThat(result.filesCopied).isEqualTo(expectedFileCount);
+        assertThat(result.dirsCopied).isEqualTo(expectedDirCount);
     }
 
     private void assertFileDirCount(final Folder folder, final int fileCount, final int dirCount) {

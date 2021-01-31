@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * Important: this class will oly work if you incorporate {@link #onActivityResult(int, int, Intent)}
@@ -358,12 +357,12 @@ public class ContentStorageActivityHelper {
 
             //perform copy or move
             final Folder target = targetUri == null ? folder.getDefaultFolder() : Folder.fromDocumentUri(targetUri);
-            final ImmutableTriple<FolderUtils.CopyResult, Integer, Integer> copyResult = FolderUtils.get().copyAll(folder.getFolder(), target, copyChoice.equals(CopyChoice.MOVE));
+            final FolderUtils.CopyResult copyResult = FolderUtils.get().copyAll(folder.getFolder(), target, copyChoice.equals(CopyChoice.MOVE));
             //display result
             Dialogs.newBuilder(activity)
                 .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_copy_move_finished_title, folder.toUserDisplayableName()))
                 .setMessage(getHtml(R.string.contentstorage_selectfolder_dialog_copy_move_finished_msg_html,
-                    copyResult.left, copyResult.middle, copyResult.right))
+                    copyResult.status, copyResult.filesCopied, copyResult.dirsCopied))
                 .setPositiveButton(android.R.string.ok, (dd, pp) -> {
                     dd.dismiss();
                     finalizePersistableFolderSelection(true, folder, targetUri, callback);

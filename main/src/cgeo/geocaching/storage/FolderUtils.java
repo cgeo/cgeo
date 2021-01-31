@@ -13,6 +13,7 @@ import android.provider.DocumentsContract;
 import android.system.Os;
 import android.system.StructStatVfs;
 
+import androidx.core.util.Consumer;
 import androidx.core.util.Predicate;
 
 import java.io.File;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -87,11 +89,41 @@ public class FolderUtils {
         }
     }
 
-    public enum CopyResult {
-        OK, OK_NOTHING_TO_COPY, SOURCE_NOT_READABLE, TARGET_NOT_WRITEABLE, FAILURE_DURING_COPY, FAILURE_DURING_MOVE;
+    public enum CopyResultStatus { OK, SOURCE_NOT_READABLE, TARGET_NOT_WRITEABLE, FAILURE, ABORTED }
 
-        public boolean isOk() {
-            return name().startsWith("OK");
+    /** value class holding the result of a completed copy process */
+    public static class CopyResult {
+        public final CopyResultStatus status;
+        public final ContentStorage.FileInformation failedFile;
+        public final int filesCopied;
+        public final int dirsCopied;
+        public final int filesInSource;
+        public final int dirsInSource;
+
+        public CopyResult(final CopyResultStatus status, final ContentStorage.FileInformation failedFile, final int filesCopied, final int dirsCopied, final int filesInSource, final int dirsInSource) {
+            this.status = status;
+            this.failedFile = failedFile;
+            this.filesCopied = filesCopied;
+            this.dirsCopied = dirsCopied;
+            this.filesInSource = filesInSource;
+            this.dirsInSource = dirsInSource;
+        }
+    }
+
+    /** value class holding the current state of a concrete copy process which is currently running */
+    public static class CopyStatus {
+        public final ContentStorage.FileInformation currentFile;
+        public final int filesCopied;
+        public final int dirsCopied;
+        public final int filesInSource;
+        public final int dirsInSource;
+
+        public CopyStatus(final ContentStorage.FileInformation currentFile, final int filesCopied, final int dirsCopied, final int filesInSource, final int dirsInSource) {
+            this.currentFile = currentFile;
+            this.filesCopied = filesCopied;
+            this.dirsCopied = dirsCopied;
+            this.filesInSource = filesInSource;
+            this.dirsInSource = dirsInSource;
         }
     }
 
@@ -104,51 +136,78 @@ public class FolderUtils {
      * @param source source folder with content to copy
      * @param target target folder to copy content to
      * @param move if true, content is MOVED (e.g. sdeleted in source)
-     * @return result of copyAll call. "left" is status, "middle" is number of copied files, "right" is number of copied (sub)folders
+     * @return result of copyAll call.
      */
-    public ImmutableTriple<CopyResult, Integer, Integer> copyAll(final Folder source, final Folder target, final boolean move) {
+    public CopyResult copyAll(final Folder source, final Folder target, final boolean move) {
+        return copyAll(source, target, move, null, null);
+    }
+
+    /**
+     * Copies the content of one folder into another. Source and target folder itself remain untouched.
+     *
+     * Implementation supports handling of case when source and target point to same folder (maybe via different APIs e.g. File vs Document)
+     * as well as when source folder is inside target or vice versa
+     *
+     * @param source source folder with content to copy
+     * @param target target folder to copy content to
+     * @param move if true, content is MOVED (e.g. sdeleted in source)
+     * @param cancelFlag optional. If not null and flag is set to true during copy, then running copy/move process is aborted. Will result in a Copy Result ABORTED to be returned.
+     * @param statusListener optional callback. This is called many times during copying to inform about copy status. May be used e.g. to implement a progress bar.
+     *   status listener is called once initially (with files/dirsToCopy set to -1), then each time when a new file/dir is about to be copied, then one time when copying process is finished
+     *   so when a dir is copied with e.g. 3 dirs and 7 files inside, then the statuslistener is called 2 + 3 + 7 times.
+     * @return result of copyAll call.
+     */
+    public CopyResult copyAll(final Folder source, final Folder target, final boolean move, final AtomicBoolean cancelFlag, final Consumer<CopyStatus> statusListener)  {
 
         try (ContextLogger cLog = new ContextLogger("FolderUtils.copyAll: %s -> %s (move=%s)", source, target, move)) {
 
-            //the following three-pass-copy/move is very complicated, but it ensures that copying/moving also works when target is a subdir of source or vice versa
+            //the following two-pass-copy/move is a bit complicated, but it ensures that copying/moving also works when target is a subdir of source or vice versa
             //For every change done here, please make sure that tests in ContentStorageTest are still passing!
 
             if (!pls.ensureFolder(source, false)) {
-                return new ImmutableTriple<>(CopyResult.SOURCE_NOT_READABLE, 0, 0);
+                return createCopyResult(CopyResultStatus.SOURCE_NOT_READABLE, null, 0, 0, null);
             }
             if (!pls.ensureFolder(target, true)) {
-                return new ImmutableTriple<>(CopyResult.TARGET_NOT_WRITEABLE, 0, 0);
+                return createCopyResult(CopyResultStatus.TARGET_NOT_WRITEABLE, null, 0, 0, null);
             }
 
-            // -- first Pass: collect Information
-            final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList = copyAllFirstPassCollectInfo(source, target);
+            //initial status call
+            sendCopyStatus(statusListener, null, 0, 0, null);
+
+            // -- first Pass:createCopyResult collect Information
+            final ImmutablePair<List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>>, ImmutablePair<Integer, Integer>> copyAllFirstPhaseResult = copyAllFirstPassCollectInfo(source, target, cancelFlag);
+            final ImmutablePair<Integer, Integer> sourceCopyCount = copyAllFirstPhaseResult.right;
+            if (isCancelled(cancelFlag)) {
+                return createCopyResult(CopyResultStatus.ABORTED, null, 0, 0, sourceCopyCount);
+            }
+            final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList = copyAllFirstPhaseResult.left;
             if (fileList == null) {
-                return new ImmutableTriple<>(CopyResult.TARGET_NOT_WRITEABLE, 0, 0);
+                return createCopyResult(CopyResultStatus.TARGET_NOT_WRITEABLE, null, 0, 0, sourceCopyCount);
             } else if (fileList.isEmpty()) {
-                return new ImmutableTriple<>(CopyResult.OK_NOTHING_TO_COPY, 0, 0);
+                return createCopyResult(CopyResultStatus.OK, null, 0, 0, sourceCopyCount);
             }
             cLog.add("p1:#s", fileList.size());
 
-            // -- second Pass: do Copy
-            final ImmutableTriple<Boolean, Integer, Integer> copyResult = copyAllSecondPassCopy(fileList);
-            if (!copyResult.left) {
-                return new ImmutableTriple<>(CopyResult.FAILURE_DURING_COPY, copyResult.middle, copyResult.right);
-            }
+            // -- second Pass: do Copy/move
+            final ImmutableTriple<ContentStorage.FileInformation, Integer, Integer> copyResult = copyAllSecondPassCopyMove(fileList, move, statusListener, cancelFlag, sourceCopyCount);
+
+            //final status call
+            sendCopyStatus(statusListener, null, copyResult.middle, copyResult.right, sourceCopyCount);
+
             cLog.add("p2:#%s#%s", copyResult.middle, copyResult.right);
 
-            if (move && !copyAllThirdPassDelete(fileList)) {
-                return new ImmutableTriple<>(CopyResult.FAILURE_DURING_MOVE, copyResult.middle, copyResult.right);
-            }
-            cLog.add("p3");
-
-            return new ImmutableTriple<>(CopyResult.OK, copyResult.middle, copyResult.right);
+            return createCopyResult(
+                isCancelled(cancelFlag) ? CopyResultStatus.ABORTED : (copyResult.left == null ? CopyResultStatus.OK : CopyResultStatus.FAILURE), copyResult.left, copyResult.middle, copyResult.right, sourceCopyCount);
         }
 
     }
 
-    /** copyAll First Pass: collect all files to copy, create target folder for each file, mark source folders to keep on move (if target is in source) */
+    /**
+     * copyAll First Pass: collect all files to copy, create target folder for each file, mark source folders to keep on move (if target is in source)
+     * returns in left the list of files. Returns in right the files/dirs found in source for copying
+     * */
     @Nullable
-    private List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> copyAllFirstPassCollectInfo(final Folder source, final Folder target) {
+    private ImmutablePair<List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>>, ImmutablePair<Integer, Integer>> copyAllFirstPassCollectInfo(final Folder source, final Folder target, final AtomicBoolean cancelFlag) {
 
         //We create a "marker file" in the target folder so we recognize it in tree.
         // That way we can find out whether source=target or target is in source or source is in target
@@ -159,6 +218,8 @@ public class FolderUtils {
             return null;
         }
 
+        final int[] copyCounts = new int[]{0, 0};
+
         final int[] onTargetNeededPath = { -1 }; //helper counter to flag forlders needed for target
         final boolean[] markerFoundInSubdir = { false, false }; //helper flags to flag forlders needed for target
         //triplet of each entry will contain: source file, target folder for that file, flags as above
@@ -166,8 +227,12 @@ public class FolderUtils {
         final Stack<Folder> targetFolderStack = new Stack<>();
         targetFolderStack.push(target);
         treeWalk(source, fi -> {
+            if (cancelFlag != null && cancelFlag.get()) {
+                return false;
+            }
             if (fi.left.isDirectory) {
                 if (fi.right) {
+                    copyCounts[1]++;
                     targetFolderStack.push(Folder.fromFolder(targetFolderStack.peek(), fi.left.name));
                     listToCopy.add(new ImmutableTriple<>(fi.left, targetFolderStack.peek(), COPY_FLAG_DIR_BEFORE));
                     if (onTargetNeededPath[0] >= 0) {
@@ -187,6 +252,7 @@ public class FolderUtils {
                     markerFoundInSubdir[0] = true;
                     onTargetNeededPath[0] = 0;
                 } else {
+                    copyCounts[0]++;
                     listToCopy.add(new ImmutableTriple<>(fi.left, targetFolderStack.peek(), 0));
                 }
                 return true;
@@ -196,54 +262,67 @@ public class FolderUtils {
         pls.delete(targetMarkerFileUri);
 
         final boolean sourceTargetSameDir = markerFoundInSubdir[0] && !markerFoundInSubdir[1];
-        return sourceTargetSameDir ? Collections.emptyList() : listToCopy;
+        return new ImmutablePair<>(sourceTargetSameDir ? Collections.emptyList() : listToCopy, new ImmutablePair<>(copyCounts[0], copyCounts[1]));
     }
 
     @NotNull
-    private ImmutableTriple<Boolean, Integer, Integer> copyAllSecondPassCopy(final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList) {
+    private ImmutableTriple<ContentStorage.FileInformation, Integer, Integer> copyAllSecondPassCopyMove(
+        final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList, final boolean move, final Consumer<CopyStatus> statusListener, final AtomicBoolean cancelFlag, final ImmutablePair<Integer, Integer> sourceCopyCount) {
+
         // -- second pass: make all necessary file copies and create necessary target subfolders
         int dirsCopied = 0;
         int filesCopied = 0;
 
-        boolean success = true;
+        ContentStorage.FileInformation failedFile = null;
         for (ImmutableTriple<ContentStorage.FileInformation, Folder, Integer> file : fileList) {
+            if (isCancelled(cancelFlag)) {
+                break;
+            }
             if (file.left.isDirectory) {
                 if ((file.right & COPY_FLAG_DIR_BEFORE) > 0) {
+                    sendCopyStatus(statusListener, file.left, filesCopied, dirsCopied, sourceCopyCount);
                     if (pls.ensureFolder(file.middle, true)) {
                         dirsCopied++;
                     } else {
-                        success = false;
+                        failedFile = file.left;
                     }
                 }
+                if (move & file.right == 0 && !pls.delete(file.left.uri)) {
+                    failedFile = file.left;
+                }
             } else {
+                sendCopyStatus(statusListener, file.left, filesCopied, dirsCopied, sourceCopyCount);
                 if (pls.copy(file.left.uri, file.middle, FileNameCreator.forName(file.left.name), false) != null) {
                     filesCopied++;
+                    if (move && !pls.delete(file.left.uri)) {
+                        failedFile = file.left;
+                    }
                 } else {
-                    success = false;
+                    failedFile = file.left;
                 }
             }
-        }
-        return new ImmutableTriple<>(success, filesCopied, dirsCopied);
-    }
-
-    private boolean copyAllThirdPassDelete(final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList) {
-        boolean success = true;
-
-        // -- third pass (only for move): delete all source files (leave out folders still needed for target)
-        for (ImmutableTriple<ContentStorage.FileInformation, Folder, Integer> file : fileList) {
-            if (file.left.isDirectory) {
-                if (file.right == 0 && !pls.delete(file.left.uri)) {
-                    success = false;
-
-                }
-            } else {
-                if (!pls.delete(file.left.uri)) {
-                    success = false;
-                }
+            if (failedFile != null) {
+                break;
             }
         }
-        return success;
+        return new ImmutableTriple<>(failedFile, filesCopied, dirsCopied);
     }
+
+    private boolean isCancelled(final AtomicBoolean cancelFlag) {
+        return cancelFlag != null && cancelFlag.get();
+    }
+
+    private void sendCopyStatus(final Consumer<CopyStatus> statusListener, final ContentStorage.FileInformation fi, final int filesCopied, final int dirsCopied, final ImmutablePair<Integer, Integer> sourceCopyCount) {
+        if (statusListener == null) {
+            return;
+        }
+        statusListener.accept(new CopyStatus(fi, filesCopied, dirsCopied, sourceCopyCount == null ? -1 : sourceCopyCount.left, sourceCopyCount == null ? -1 : sourceCopyCount.right));
+    }
+
+    private CopyResult createCopyResult(final CopyResultStatus status, final ContentStorage.FileInformation failedFile, final int filesCopied, final int dirsCopied, final ImmutablePair<Integer, Integer> sourceCopyCount) {
+        return new CopyResult(status, failedFile, filesCopied, dirsCopied, sourceCopyCount == null ? -1 : sourceCopyCount.left, sourceCopyCount == null ? -1 : sourceCopyCount.right);
+    }
+
 
     /**
      * Generates a string representation of given folder as JSON string
