@@ -51,49 +51,60 @@ public class MapDownloadUtils {
             final String sizeInfo = data.getStringExtra(RESULT_SIZE_INFO);
             final long date = data.getLongExtra(RESULT_DATE, 0);
             final int type = data.getIntExtra(RESULT_TYPEID, OfflineMap.OfflineMapType.DEFAULT);
-
             if (null != uri) {
-                String temp = uri.getLastPathSegment();
-                if (null == temp) {
-                    temp = "default.map";
-                }
-                final String filename = temp;
-
-                final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-                builder.setTitle(R.string.downloadmap_title);
-                final View layout = View.inflate(activity, R.layout.mapdownloader_confirmation, null);
-                builder.setView(layout);
-                final TextView downloadInfo = layout.findViewById(R.id.download_info);
-                downloadInfo.setText(String.format(activity.getString(R.string.downloadmap_confirmation), filename, sizeInfo));
-
-                builder
-                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                        final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
-
-                        final DownloadManager.Request request = new DownloadManager.Request(uri)
-                            .setTitle(filename)
-                            .setDescription(String.format(activity.getString(R.string.downloadmap_filename), filename))
-                            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename)
-                            .setAllowedOverMetered(allowMeteredNetwork)
-                            .setAllowedOverRoaming(allowMeteredNetwork);
-                        Log.i("Map download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
-                        final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
-                        if (null != downloadManager) {
-                            PendingDownload.add(downloadManager.enqueue(request), filename, uri.toString(), date, type);
-                            ActivityMixin.showShortToast(activity, R.string.download_started);
-                        } else {
-                            ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
-                        }
-                        dialog.dismiss();
-                    })
-                    .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
-                    .create()
-                    .show();
+                triggerDownload(activity, type, uri, sizeInfo, date, null);
             }
             return true;
         }
         return false;
+    }
+
+    public static void triggerDownload(final Activity activity, final int type, final Uri uri, final String sizeInfo, final long date, final Runnable callback) {
+        String temp = uri.getLastPathSegment();
+        if (null == temp) {
+            temp = "default.map";
+        }
+        final String filename = temp;
+
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
+        builder.setTitle(R.string.downloadmap_title);
+        final View layout = View.inflate(activity, R.layout.mapdownloader_confirmation, null);
+        builder.setView(layout);
+        final TextView downloadInfo = layout.findViewById(R.id.download_info);
+        downloadInfo.setText(String.format(activity.getString(R.string.downloadmap_confirmation), filename, sizeInfo));
+
+        builder
+            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
+
+                final DownloadManager.Request request = new DownloadManager.Request(uri)
+                    .setTitle(filename)
+                    .setDescription(String.format(activity.getString(R.string.downloadmap_filename), filename))
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename)
+                    .setAllowedOverMetered(allowMeteredNetwork)
+                    .setAllowedOverRoaming(allowMeteredNetwork);
+                Log.i("Map download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
+                final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
+                if (null != downloadManager) {
+                    PendingDownload.add(downloadManager.enqueue(request), filename, uri.toString(), date, type);
+                    ActivityMixin.showShortToast(activity, R.string.download_started);
+                } else {
+                    ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
+                }
+                dialog.dismiss();
+                if (callback != null) {
+                    callback.run();
+                }
+            })
+            .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                dialog.dismiss();
+                if (callback != null) {
+                    callback.run();
+                }
+            })
+            .create()
+            .show();
     }
 
     public interface DirectoryWritable {
