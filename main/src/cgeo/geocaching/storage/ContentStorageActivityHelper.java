@@ -79,31 +79,6 @@ public class ContentStorageActivityHelper {
         this.activity = activity;
     }
 
-    /** Check routine, should be called on c:geo startup to check whether base dir is set as wanted. */
-    public void checkBaseFolderAccess() {
-
-        final PersistableFolder folder = PersistableFolder.BASE;
-
-        if (baseFolderIsSet()) {
-            //everything is as we want it
-            return;
-        }
-
-        //ask/remind user to choose an explicit BASE dir, otherwise the default will be used
-        final AlertDialog dialog = Dialogs.newBuilder(activity)
-            .setTitle(R.string.contentstorage_grantaccess_dialog_title)
-            .setMessage(HtmlCompat.fromHtml(activity.getString(R.string.contentstorage_grantaccess_dialog_msg_basedir_html),
-                HtmlCompat.FROM_HTML_MODE_LEGACY))
-            .setPositiveButton(android.R.string.ok, (d, p) -> {
-                d.dismiss();
-                selectPersistableFolder(folder, null);
-            })
-            .setNegativeButton(android.R.string.cancel, (d, p) -> d.dismiss())
-            .create();
-        dialog.show();
-        Dialogs.makeLinksClickable(dialog);
-    }
-
     public static boolean baseFolderIsSet() {
         final PersistableFolder folder = PersistableFolder.BASE;
         return folder.isUserDefined() && ContentStorage.get().ensureAndAdjustFolder(folder);
