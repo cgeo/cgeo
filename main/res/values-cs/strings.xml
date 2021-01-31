@@ -574,7 +574,7 @@
     <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
     <string name="init_zoomincludingwaypoints_description">Při zobrazení jedné kešky: Měl by být zoom upraven tak, aby zahrnoval všechny její trasové body?</string>
     <string name="init_brouterThreshold">Vypočítat trasu</string>
-    <string name="init_brouterThreshold_description">Maximální vzdálenost do které pomocná aplikace brouter (pokud je nainstalovaná) vypočítá trasu.</string>
+    <string name="init_brouterThreshold_description">Maximální vzdálenost do které pomocná aplikace BRouter (pokud je nainstalovaná) vypočítá trasu.</string>
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Pokud je směrování aktivní: Kromě vypočítané délky trasy zobrazí přímou vzdálenost.</string>
@@ -599,7 +599,7 @@
     <string name="init_listdisplay">Další seznamy</string>
     <string name="init_summary_listdisplay">Zobrazit v seznamu kešek přítomnost kešek v dalších seznamech</string>
     <string name="init_livelist">Zobrazovat směr</string>
-    <string name="init_summary_livelist">Zobrazovat směr v seznamu kešek</string>
+    <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvořit zálohu</string>
     <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat kešky, trasové body &amp; nastavení, ale žádné obrázky kešek. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
@@ -663,7 +663,7 @@
     <string name="init_base_directory_description">Základní adresář pro veřejná místní data</string>
     <string name="init_map_directory_description">Složka s offline mapami</string>
     <string name="init_gpx_importexportdir">Adresář s GPX</string>
-    <string name="init_dataDir">Vyber adresář dat kešek</string>
+    <string name="init_dataDir">Vyberte datový adresář</string>
     <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro kešky (nápovědy, obrázky, …) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
     <string name="init_maptrail">Zobrazit historii trasy</string>
     <string name="init_maptrail_length">Max. délka historie trasy</string>
@@ -803,7 +803,7 @@
     <string name="sendToCgeo_no_registration">c:geo selhalo při stahování kešek. Registrace pro send2cgeo vypršela. Prosím, registruj se znova v nastavení.</string>
     <!-- Content Storage -->
     <string name="contentstorage_grantaccess_dialog_title">Udělit přístup k úložišti dat</string>
-    <string name="contentstorage_grantaccess_dialog_msg_basedir_html">c:geo potřebuje místní složku pro ukládání dat, jako jsou GPX soubory, zálohy a poznámky k polím. Naposledy s Androidem 11 musí být oprávnění k použití této složky výslovně uděleno uživatelem. Proto c:geo od nynějška používá tuto novou metodu pro ukládání vašich dat.\n\nV následujícím dialogovém okně vyberte nebo vytvořte takovou složku na vašem zařízení. Pokud jste aktualizovali c:geo z předchozí verze, vyberte existující složku \"cgeo\" v kořenovém úložišti vašeho zařízení.</string>
+    <string name="contentstorage_grantaccess_dialog_msg_basedir_html">c:geo potřebuje místní složku pro ukládání dat, jako jsou GPX soubory, zálohy a poznámky z terénu. Naposledy s Androidem 11 musí být oprávnění k použití této složky výslovně uděleno uživatelem. Proto c:geo od nynějška používá tuto novou metodu pro ukládání vašich dat.\n\nV následujícím dialogovém okně vyberte nebo vytvořte takovou složku na vašem zařízení. Pokud jste aktualizovali c:geo z předchozí verze, vyberte existující složku \"cgeo\" v kořenovém úložišti vašeho zařízení.</string>
     <string name="contentstorage_selectfolder_dialog_title">Změnit složku %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>Složka %s je v současné době nastavena na \'%s\' a obsahuje %d souborů a %d podsložek.</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Můžete zvolit výchozí složku \'%s\' nebo vybrat uživatelsky definovanou složku.</p>]]></string>
@@ -817,7 +817,27 @@
     <string name="contentstorage_folder_selection_success">Složka nastavena na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Přerušení výběru souboru</string>
     <string name="contentstorage_file_selection_success">Vybraný soubor: \'%s\'</string>
+    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Složka %s: \'%s\' není přístupná, zpět na \'%s\'</string>
+    <string name="contentstorage_err_read_failed">Soubor \'%s\' nelze přečíst</string>
+    <string name="contentstorage_err_write_failed">Soubor \'%s\' nelze zapsat</string>
+    <string name="contentstorage_err_create_failed">Soubor \'%s\' v \'%s\' nelze vytvořit</string>
+    <string name="contentstorage_err_delete_failed">Soubor \'%s\' nelze odstranit</string>
+    <string name="contentstorage_err_list_failed">Soubory ve složce \'%s\' nelze vypsat</string>
+    <string name="contentstorage_err_folder_access_failed">Složka \'%s\' není přístupná</string>
+    <string name="contentstorage_err_copy_failed">Soubor \'%s\' nelze zkopírovat/přesunout do \'%s\' (přesunout =%s)</string>
     <!-- Persistable Folders -->
+    <string name="persistablefolder_usertype_userdefined">Uživatelem definované</string>
+    <string name="persistablefolder_usertype_default">Výchozí</string>
+    <string name="persistablefolder_legacy">Starší</string>
+    <string name="persistablefolder_pickfolder">Vybrat složku</string>
+    <string name="persistablefolder_usedefault">Použít výchozí</string>
+    <string name="persistablefolder_base">Hlavní</string>
+    <string name="persistablefolder_offline_maps">Offline mapy</string>
+    <string name="persistablefolder_offline_maps_themes">Motivy mapy</string>
+    <string name="persistablefolder_gpx">GPX</string>
+    <string name="persistablefolder_backup">Záloha</string>
+    <string name="persistablefolder_logfiles">Soubory protokolů</string>
+    <string name="persistablefolder_fieldnotes">Poznámky z terénu</string>
     <!-- auth generic -->
     <string name="auth_authorize">Autorizovat c:geo</string>
     <string name="auth_check">Zkontrolovat pověření</string>
@@ -1883,6 +1903,8 @@
     <string name="downloadmap_mapfile">Mapový soubor</string>
     <string name="downloadmap_retrieving_directory_data">Načítání dat adresáře…</string>
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
+    <string name="mapserver_mapsforge_info">Základní mapy, nejsou vyžadovány mapové motivy</string>
+    <string name="mapserver_openandromaps_info">Podrobné mapy, vyžadují mapový motiv \"Elevate\"</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
@@ -1910,7 +1932,7 @@
     <string name="wizard_outro_error">Nedokončená konfigurace\nNěkteré části c:geo nebudou pracovat podle očekávání!</string>
     <string name="wizard_permissions_title">Nastavit oprávnění aplikace</string>
     <string name="wizard_permissions_intro">Aplikace c:geo vyžaduje na správné fungování několik povolení na vašem zařízení.\nV dalších krocích vám je vysvětlíme.</string>
-    <string name="wizard_basefolder_request_explanation">c:geo potřebuje místní složku k ukládání dat, jako jsou soubory GPX, zálohy a polní poznámky. V dalším kroku vyberte nebo vytvořte takovou složku.\nPokud jste aktualizovali c:geo z předchozí verze, vyberte existující složku „cgeo“ na interním úložišti vašeho zařízení.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo potřebuje místní složku k ukládání dat, jako jsou soubory GPX, zálohy a poznámky z terénu. V dalším kroku vyberte nebo vytvořte takovou složku.\nPokud jste aktualizovali c:geo z předchozí verze, vyberte existující složku „cgeo“ na interním úložišti vašeho zařízení.</string>
     <string name="wizard_platforms_title">Konfigurace služeb</string>
     <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
