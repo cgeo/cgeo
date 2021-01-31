@@ -360,12 +360,9 @@
     <string name="settings_summary_map">Alege sursele pentru hărţi, setări pentru hărţile salvate local şi alte detalii.</string>
     <string name="settings_title_map_data">Configurare hărţi</string>
     <string name="settings_title_map_content">Informaţii afişate pe hartă</string>
-    <string name="settings_title_data_dir">Dosar geocutii</string>
-    <string name="settings_title_data_dir_usage">Dosar geocutii (utilizat %1$s)</string>
     <string name="calculate_dataDir_title">Spaţiu utilizat de geocutii</string>
     <string name="calculate_dataDir">Se determină spaţiul de stocare utilizat de geocutii</string>
     <string name="settings_data_dir_item">%1$s (%2$s disponibil)</string>
-    <string name="confirm_data_dir_move_title">Vrei să muţi dosarul cu datele geocutiilor?</string>
     <string name="confirm_data_dir_move">Mutarea dosarului cu geocutii ar putea dura un timp mai îndelungat, în funcţie de disăpzitivul tău şi de volumul de informaţii.</string>
     <string name="settings_title_basicmembers">Opţiuni pentru Basic Members</string>
     <string name="settings_title_navigation">Navigare</string>
@@ -451,7 +448,6 @@
     <string name="init_choose_list">Cere listă</string>
     <string name="init_summary_choose_list">Întreabă în care listă vor fi salvate cutiile</string>
     <string name="init_livelist">Arată direcţia</string>
-    <string name="init_summary_livelist">Arată direcţia cutiilor în listă</string>
     <!-- backup / restore -->
     <string name="init_backup_running">Creare salvare de siguranţă a bazei de date cu cutii…</string>
     <string name="init_backup_restore">Restaurează</string>
@@ -466,12 +462,9 @@
     <string name="init_backup_last">Salvare de siguranţă disponibilă de la</string>
     <string name="init_backup_last_no">Nu există nici un fişier cu salvare de siguranţă.</string>
     <string name="settings_info_offline_maps_title">Despre hărţile predefinite</string>
-    <string name="settings_info_offline_maps">c:geo poate afişa hărţi salvate pentru atunci cand nu este disponibilă conexiunea internet. Hărţile pot fi descărcate de la Mapsforge sau poţi să-ţi creezi propriile hărţi pe baza datelor de la OpenStreetMap. Trebuie să alegi un director unde se află hărţile pentru a le folosi.</string>
     <string name="settings_info_themes_title">Despre stilurile hărţilor</string>
     <string name="settings_info_themes">c:geo poate folosi stiluri personalizate pentru hărţile salvate. Acestea pot fi folosite pentru a schimba culorile pe hartă (de ex. afişare nocturnă a hărţii) sau pentru a scoate în evidenţă anumite obiecte precum trasee de bicicletă sau poteci.</string>
     <string name="init_mapsource_select">Alege hărţi din sursa</string>
-    <string name="init_map_directory_description">Dosar cu hărţi salvate local</string>
-    <string name="init_dataDir">Alege dosar geocutii</string>
     <string name="init_dataDir_note">Poţi alege să salvezi informaţii suplimentare despre geocutii (spoilere, imagini din jurnal, …) în spaţiul de stocare extern (SDcard real sau virtual, în funcţie de dispozitivul tău).</string>
     <string name="init_include_found_status">Include starea \"Găsită\"</string>
     <string name="init_trackautovisit">TB vizitează</string>
@@ -489,23 +482,16 @@
     <string name="init_debug_note">c:geo poate genera o mulţime de informaţii de depanare. Activând această setare va afecta stabilitatea lui c:geo şi este recomandată numai dacă vi se cer astfel de informaţii de către dezvoltatori (de exemplu atunci când raportezi o eroare în funcţionare). Te rog să ţii dezactivată această opţiune în timpul utilizării normale a c:geo!</string>
     <string name="init_debug">Activează jurnal de depanare</string>
     <string name="init_dbonsdcard_title">Locaţia bazei de date</string>
-    <string name="init_dbonsdcard_note">Poţi păstra baza de date a c:geo fie în memoria internă, fie într-un dosar în spaţiul de stocare accesibil utilizatorului. Alegând a doua opţiune îţi va elibera din memoria internă, dar va funcţiona cu o performaţă mai redusă, iar c:geo va înceta să mai funcţioneze daca ştergi fişierul bazei de date sau suportul de stocare extern nu este accesibil (de ex. ai scos SDcard-ul).</string>
     <string name="init_dbonsdcard">Spaţiu stocare utilizator</string>
     <string name="init_dbmove_dbmove">Mutare bază de date</string>
     <string name="init_dbmove_running">Mutare bază de date în curs</string>
     <string name="init_dbmove_success">Baza de date a fost mutată.</string>
     <string name="init_dbmove_failed">Mutarea bazei de date a eşuat</string>
-    <string name="init_datadirmove_datadirmove">Mutare dosar cu geocutii</string>
-    <string name="init_datadirmove_running">Mutare dosar geocutii în curs</string>
-    <string name="init_datadirmove_success">A fost mutat dosarul cu geocutii.</string>
-    <string name="init_datadirmove_failed">Mutarea dosarului cu geocutii a eşuat parţial sau total. Te rog verifică atât dosarul vechi cât şi cel nou şi mută fişierele manual, dacă este necesar.</string>
     <string name="init_plain_logs">Însemnări simple</string>
     <string name="init_summary_plain_logs">Afişează însemnările fără culori</string>
     <string name="init_use_native_ua">Browser Android</string>
     <string name="init_summary_use_native_ua">Identifică c:geo ca fiind browser-ul integrat în sistemul Android. Rezolvă unele probleme de autentificare atunci când sunt folosite anumiţi furnizori de internet.</string>
-    <string name="init_rendertheme_folder">Director cu stiluri pentru hărţi</string>
     <string name="init_maintenance">Întreţinere</string>
-    <string name="init_maintenance_directories_note">c:geo salvează imagini, imagini din însemnări şi alte fişiere legate de o geocutie într-un dosar separat. Este posibil ca în unele cazuri (precum import/export al bazei de date) acest dosar să conţină fişiere vechi ce pot fi şterse aici.</string>
     <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
     <string name="init_location">Geolocație</string>
     <string name="init_location_note">Pe dispozitivele echipate cu serviciile Google Play, c:geo poate utiliza automat un furnizor de geolocalizare mai bun. Aceasta însă împiedică folosirea unui receptor GPS extern conectat prin Bluetooth.</string>
@@ -735,14 +721,7 @@
     <string name="cache_listed_on">Publicat pe %s</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Căutare fişiere\nîn</string>
-    <string name="file_searching_sdcard_in">Nu a fost găsit nici un fişier în:\n%1$s\n\nCăutare pe tot cardul după fişiere:\n</string>
-    <string name="file_list_no_files">c:geo nu a găsit fişierele corespunzătoare.</string>
-    <string name="file_searching">Căutare după fişierele potrivite</string>
-    <string name="file_title_searching">Căutare</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Alege director</string>
     <string name="simple_dir_chooser_current_path">Cale:</string>
     <string name="simple_dir_chooser_invalid_path">Cale greşită</string>
     <!-- gpx -->
@@ -757,12 +736,7 @@
     <string name="gpx_import_error_parser">Fişier defect sau format greşit</string>
     <string name="gpx_import_error_unexpected">Eroare neașteptată</string>
     <string name="gpx_import_canceled_with_filename">A fost anulat importul GPX din %1$s</string>
-    <string name="gpx_import_delete_title">Şterge fişier</string>
-    <string name="gpx_import_delete_message">Vrei să ştergi fişierul %s?</string>
     <string name="gpx_import_select_list_title">Importă GPX în listă</string>
-    <string name="gpx_import_android">Importă din Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Format greşit sau fişier defect</string>
     <!-- import -->
     <string name="web_import_title">Importă din send2cgeo</string>
     <string name="web_import_waiting">Aşteaptă geocutii de la send2cgeo…</string>
@@ -1264,7 +1238,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Evenimentul nu a putut fi adăugat la calendar</string>
     <string name="init_low_disk_space">Nu mai este suficient spaţiu de stocare disponibil</string>
-    <string name="init_low_disk_space_message">Nu mai este suficient spaţiu de stocare disponibil pentru geocutii. Aceasta poate împiedica buna funcţionare a c:geo. Te rog eliberează nişte spaţiu de stocare.</string>
     <string name="init_confirm_debug">c:geo funcţionează acum în mod \"depanare\"!</string>
     <string name="list_confirm_debug_message">Modul \"depanare\" poate cauza instabilitate. Vrei să revii la modul normal de funcţionare?</string>
     <string name="err_select_logimage_upload_size">Imaginea este prea mare, te rog alege o rezoluţie mai mică.</string>
