@@ -4,9 +4,14 @@
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
 <h1>Nightly build:</h1>
 
+<h4>Map:</h4>
+<ul>
+<li>New: Added OpenAndroMaps to MapDownloader</li>
+</ul>
+
 <h4>Cache details:</h4>
 <ul>
-<li>New: Swipe down to refresh cache details</li>
+<li>New: Swipe down to refresh cache details and trackable list</li>
 </ul>
 
 <h4>Other:</h4>
