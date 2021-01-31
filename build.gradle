@@ -130,6 +130,10 @@ subprojects {
         }
         // Android Support libraries are now in an online Maven repository
         google()
+        // integrate as last one - for versions by commit ID
+        maven {
+            url 'https://jitpack.io'
+        }
     }
 
     // disable warning of annotation processor about annotation types with no registered processor (like @NonNull)
