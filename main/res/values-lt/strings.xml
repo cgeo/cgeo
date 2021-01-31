@@ -558,7 +558,6 @@
     <string name="init_showwaypoint_description">Jei rodomų slėptuvių mažiau nei nurodytas kiekis, žemėlapyje bus rodomi jų papildomi taškai.</string>
     <string name="init_zoomincludingwaypoints">Priartinimas su papildomais taškais</string>
     <string name="init_brouterThreshold">Apskaičiuoti maršrutą</string>
-    <string name="init_brouterThreshold_description">Maksimalus atstumas, iki kurio BRouter pagalbinė programa (jei įdiegta) apskaičiuoja maršrutą.</string>
     <string name="init_brouterShowBothDistances">Rodyti tiesų atstumą</string>
     <string name="brouter_recalculating">Perskaičiuojamas maršrutas fone...</string>
     <string name="init_summary_brouterShowBothDistances">Jei maršrutas aktyvus: Rodyti tiesų atstumą, be apskaičiuoto maršruto ilgio.</string>
@@ -580,7 +579,6 @@
     <string name="init_listdisplay">Papildomi sąrašai</string>
     <string name="init_summary_listdisplay">Rodyti slėptuvių narių papildomus sąrašus slėptuvės sąraše</string>
     <string name="init_livelist">Rodyti kryptį</string>
-    <string name="init_summary_livelist">Sąraše rodyti kryptį į slėptuvę</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Kurti atsarginę kopiją</string>
     <string name="init_restore_title">Atkurti atsarginę kopiją</string>
@@ -639,7 +637,6 @@
     <string name="settings_info_themes">c:geo palaiko temas skirtas išsaugotiems žemėlapiams. Jos gali keisti žemėlapio spalvų stilių (pvz. naktinis stilius) arba atkreipti dėmesį į tam tikrus objektus, kaip dviračių takai arba aukščio linijos žemėlapyje.</string>
     <string name="init_mapsource_select">Pasirinkite žemėlapio šaltinį</string>
     <string name="init_map_directory_description">Katalogas su išsaugotais žemėlapiais</string>
-    <string name="init_dataDir">Pasirinkite slėptuvių duomenų katalogą</string>
     <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus slėptuvių duomenis (užuominas, įrašų vaizdus, …) išorinėje atmintyje (pseudo ar tikroje išorinėje SD kortelėje, priklausomai nuo jūsų įrenginio).</string>
     <string name="init_maptrail">Rodyti pėdsaką</string>
     <string name="init_maptrail_length">Maksimalus pėdsako ilgis</string>
