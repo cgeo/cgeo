@@ -655,8 +655,8 @@
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
-    <string name="settings_info_themes_title">Info zu Karten-Themes</string>
-    <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
+    <string name="settings_info_themes_title">Info zu Kartendarstellungen</string>
+    <string name="settings_info_themes">c:geo kann eigene Kartendarstellungen für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
     <string name="init_map_directory_description">Verzeichnis mit Offline-Karten</string>
     <string name="init_gpx_exportdir">Verzeichnis für GPX-Exporte</string>
@@ -723,7 +723,7 @@
     <string name="init_summary_plain_logs">Logeinträge ohne Farben anzeigen</string>
     <string name="init_use_native_ua">Android-Browser</string>
     <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Anmeldeprobleme einiger Netzanbieter.</string>
-    <string name="init_rendertheme_folder">Karten-Themes-Verzeichnis</string>
+    <string name="init_rendertheme_folder">Ordner für Kartendarstellungen</string>
     <string name="init_maintenance">Wartung</string>
     <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z. B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
     <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
@@ -1180,8 +1180,8 @@
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_visited">Besuchte Wegpunkte auf der Karte verbergen</string>
-    <string name="map_theme_select">Kartenthema auswählen</string>
-    <string name="map_theme_options">Themen-Optionen</string>
+    <string name="map_theme_select">Kartendarstellung auswählen</string>
+    <string name="map_theme_options">Optionen zur Darstellung</string>
     <string name="map_language">Sprache der Karte</string>
     <string name="map_live_enable">Aktualisierung einschalten</string>
     <string name="map_live_disable">Aktualisierung ausschalten</string>

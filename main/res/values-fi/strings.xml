@@ -877,6 +877,7 @@
     <string name="cache_personal_note_edit">Muokkaa</string>
     <string name="cache_personal_note_storewaypoints">Lisää/Päivitä Reittipisteet</string>
     <string name="cache_personal_note_removewaypoints">Poista Reittipisteet</string>
+    <string name="cache_personal_note_removedwaypoints">Reittipisteet poistettu</string>
     <string name="cache_personal_note_storewaypoints_success">Reittipisteet lisättiin henkilökohtaiseen muistiinpanoon</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Reittipisteet lisättiin muistiinpanoon, mutta niitä piti lyhentää (maksimi henkilökohtainen muistiinpanon koko: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Reittipisteitä ei voitu tallentaa muistiinpanoon kokorajojen vuoksi (maksimi henkilökohtaisen merkinnän koko: %1$d)</string>
@@ -1592,6 +1593,8 @@
     <string name="github_title">Vianjäljitys</string>
     <string name="faq_title">Usein kysytyt kysymykset</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">Uusi versio saatavilla.\nKlikkaa asentaaksesi.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Uusi julkaisuehdokas saatavilla.\nAsenna napauttamalla.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com:issa rikkoivat c:geon. \n Korjaamme tilannetta, tarkistathan tilanteen pian uudestaan.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com-sivulla hajoittivat livekartta-ominaisuuden.\nAsiaa korjataan, yritä lähiaikoina uudelleen.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
