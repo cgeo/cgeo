@@ -245,6 +245,31 @@ public class GeocacheTest extends CGeoTestCase {
         removeCacheCompletely(geocode);
     }
 
+    public static void testUpdateExistingWaypointWithFormulaFromNoteWithSameName() {
+        final Geocache cache = new Geocache();
+        final String geocode = "Test" + System.nanoTime();
+        cache.setGeocode(geocode);
+
+        cache.addOrChangeWaypoint(new Waypoint("", null, "Test 1", "", "", WaypointType.OWN), false);
+        saveFreshCacheToDB(cache);
+
+        final String note = "@Test 1 (O) (FORMULA-PLAIN) N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        cache.setPersonalNote(note);
+        cache.setPreventWaypointsFromNote(false);
+
+        cache.addWaypointsFromNote();
+        final List<Waypoint> waypoints = cache.getWaypoints();
+        assertThat(waypoints.size()).isEqualTo(1);
+        final Waypoint wp = waypoints.iterator().next();
+        final String calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNotNull();
+        assertThat(calcStateJson).contains("N 45° A.B(C+D)");
+        final CalcState calcState = CalcState.fromJSON(calcStateJson);
+        assertThat(calcState).isNotNull();
+
+        removeCacheCompletely(geocode);
+    }
+
     /**
      * Waypoint with empty coordinates exist. Update waypointlist from note.
      * The  waypoint has same name like the existing waypoint, new coordinates and different type.

@@ -165,11 +165,19 @@ public class Waypoint implements IWaypoint {
                 changed = true;
             }
         }
+
+        //calcState
+        if (getCalcStateJson() == null && parsedWaypoint.getCalcStateJson() != null) {
+            setCalcStateJson(parsedWaypoint.getCalcStateJson());
+            changed = true;
+        }
+
         //coordinate
         if (getCoords() == null && parsedWaypoint.getCoords() != null) {
             setCoords(parsedWaypoint.getCoords());
             changed = true;
         }
+
         //user note
         if (StringUtils.isBlank(this.getUserNote()) && !StringUtils.isBlank(parsedWaypoint.getUserNote())) {
             this.setUserNote(parsedWaypoint.getUserNote());
