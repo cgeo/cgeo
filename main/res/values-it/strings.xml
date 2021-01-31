@@ -572,7 +572,6 @@
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
     <string name="init_zoomincludingwaypoints_description">Con mappatura di un singolo cache: lo zoom deve essere regolato per includere tutti i waypoint?</string>
     <string name="init_brouterThreshold">Calcola percorso</string>
-    <string name="init_brouterThreshold_description">Distanza massima fino alla quale l\'helper della app brouter (se installata) calcolerà un percorso.</string>
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
@@ -597,7 +596,6 @@
     <string name="init_listdisplay">Altre liste</string>
     <string name="init_summary_listdisplay">Mostra l\'appartenenza dei cache a liste aggiuntive in un elenco di cache</string>
     <string name="init_livelist">Visualizza direzione</string>
-    <string name="init_summary_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Crea backup</string>
     <string name="init_backup_summary">Si prega di notare che questa funzione può eseguire il backup dei cache, waypoint &amp; impostazioni, ma nessuna immagine cache. \nPer poter ripristinare i dati anche dopo aver perso il telefono, i file di backup devono essere copiati in una posizione indipendente.</string>
@@ -661,7 +659,6 @@
     <string name="init_base_directory_description">Cartella di base per i dati locali pubblici</string>
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
     <string name="init_gpx_importexportdir">Directory GPX</string>
-    <string name="init_dataDir">Seleziona la directory di dati Geocache</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
     <string name="init_maptrail">Mostra traccia cronologia movimenti</string>
     <string name="init_maptrail_length">Lunghezza massima traccia cronologia</string>
