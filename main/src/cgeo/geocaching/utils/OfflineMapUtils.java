@@ -1,13 +1,12 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.models.OfflineMap;
+import cgeo.geocaching.settings.AbstractDownloader;
 import cgeo.geocaching.storage.ContentStorage;
-import cgeo.geocaching.storage.PersistableFolder;
 
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +21,6 @@ import org.apache.commons.lang3.StringUtils;
 
 public class OfflineMapUtils {
 
-    public static final String MAPFILE_SUFFIX = ".map";
     public static final String INFOFILE_SUFFIX = "-cgeo.txt";
 
     private static final String PROP_PARSETYPE = "remote.parsetype";
@@ -46,7 +44,8 @@ public class OfflineMapUtils {
     }
 
     public static void writeInfo(@NonNull final String remoteUrl, @NonNull final String localFilename, @NonNull final String displayName, final long date, final int offlineMapTypeId) {
-        final Uri infoFile = ContentStorage.get().create(PersistableFolder.OFFLINE_MAPS, localFilename + INFOFILE_SUFFIX);
+        final AbstractDownloader downloader = OfflineMap.OfflineMapType.getInstance(offlineMapTypeId);
+        final Uri infoFile = ContentStorage.get().create(downloader.targetFolder, localFilename + INFOFILE_SUFFIX);
         try (OutputStream output = ContentStorage.get().openForWrite(infoFile)) {
             final int i = remoteUrl.lastIndexOf("/");
             final String remotePage = i != -1 ? remoteUrl.substring(0, i) : remoteUrl;
@@ -67,12 +66,24 @@ public class OfflineMapUtils {
     }
 
     /**
+     * returns a list of downloaded offline maps from all sources which are still available in the local filesystem
+     */
+    public static ArrayList<OfflineMapData> availableOfflineMaps() {
+        final ArrayList<OfflineMapData> result = new ArrayList<>();
+        for (OfflineMap.OfflineMapTypeDescriptor type : OfflineMap.OfflineMapType.getOfflineMapTypes()) {
+            result.addAll(availableOfflineMaps(type.type));
+        }
+        return result;
+    }
+
+    /**
      * returns a list of downloaded offline maps from requested source which are still available in the local filesystem
      */
-    public static ArrayList<OfflineMapData> availableOfflineMaps(@Nullable final OfflineMap.OfflineMapType filter) {
+    public static ArrayList<OfflineMapData> availableOfflineMaps(@NonNull final OfflineMap.OfflineMapType filter) {
         final ArrayList<OfflineMapData> result = new ArrayList<>();
+        final AbstractDownloader downloader = OfflineMap.OfflineMapType.getInstance(filter.id);
 
-        final List<ContentStorage.FileInformation> mapDirContent = ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS);
+        final List<ContentStorage.FileInformation> mapDirContent = ContentStorage.get().list(downloader.targetFolder);
         final Map<String, Uri> mapDirMap = new HashMap<>();
         for (ContentStorage.FileInformation fi : mapDirContent) {
             mapDirMap.put(fi.name, fi.uri);
@@ -83,7 +94,7 @@ public class OfflineMapUtils {
             if (!filename.endsWith(INFOFILE_SUFFIX)) {
                 continue;
             }
-            try (InputStream input = ContentStorage.get().openForRead(PersistableFolder.OFFLINE_MAPS.getFolder(), filename)) {
+            try (InputStream input = ContentStorage.get().openForRead(downloader.targetFolder.getFolder(), filename)) {
                 final OfflineMapData offlineMapData = new OfflineMapData();
                 final Properties prop = new Properties();
                 prop.load(input);

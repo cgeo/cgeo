@@ -5,7 +5,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.storage.ContentStorage;
-import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.FileNameCreator;
@@ -47,8 +46,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
     private String sourceURL = "";
     private long sourceDate = 0;
     private int offlineMapTypeId = OfflineMap.OfflineMapType.DEFAULT;
-
-    private static final String MAP_EXTENSION = ".map";
+    private AbstractDownloader downloader;
 
     protected enum CopyStates {
         SUCCESS, CANCELLED, IO_EXCEPTION, FILENOTFOUND_EXCEPTION, UNKNOWN_STATE
@@ -65,6 +63,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         sourceURL = intent.getStringExtra(MapDownloadUtils.RESULT_CHOSEN_URL);
         sourceDate = intent.getLongExtra(MapDownloadUtils.RESULT_DATE, 0);
         offlineMapTypeId = intent.getIntExtra(MapDownloadUtils.RESULT_TYPEID, OfflineMap.OfflineMapType.DEFAULT);
+        downloader = OfflineMap.OfflineMapType.getInstance(offlineMapTypeId);
 
         MapDownloadUtils.checkMapDirectory(this, false, (folder, isWritable) -> {
             if (isWritable) {
@@ -77,7 +76,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     while ((ze = zis.getNextEntry()) != null) {
                         String filename = ze.getName();
                         final int posExt = filename.lastIndexOf('.');
-                        if (posExt != -1 && (MAP_EXTENSION.equals(filename.substring(posExt)))) {
+                        if (posExt != -1 && (StringUtils.equalsIgnoreCase(FileUtils.MAP_FILE_EXTENSION, filename.substring(posExt)))) {
                             final int posInfix = filename.indexOf("_oam.osm.");
                             if (posInfix != -1) {
                                 filename = filename.substring(0, posInfix) + filename.substring(posInfix + 8);
@@ -107,9 +106,11 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         filename = StringUtils.isNotBlank(preset) ? preset : uri.getPath();    // uri.getLastPathSegment doesn't help here, if path is encoded
         if (filename != null) {
             filename = FileUtils.getFilenameFromPath(filename);
-            final int posExt = filename.lastIndexOf('.');
-            if (posExt == -1 || !(MAP_EXTENSION.equals(filename.substring(posExt)))) {
-                filename += MAP_EXTENSION;
+            if (StringUtils.isNotBlank(downloader.forceExtension)) {
+                final int posExt = filename.lastIndexOf('.');
+                if (posExt == -1 || !(StringUtils.equalsIgnoreCase(downloader.forceExtension, filename.substring(posExt)))) {
+                    filename += downloader.forceExtension;
+                }
             }
         }
         if (filename == null) {
@@ -117,7 +118,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         }
         fileinfo = filename;
         if (fileinfo != null) {
-            fileinfo = fileinfo.substring(0, fileinfo.length() - MAP_EXTENSION.length());
+            fileinfo = fileinfo.substring(0, fileinfo.length() - downloader.forceExtension.length());
         }
         return true;
     }
@@ -144,7 +145,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
             Log.d("start receiving map file: " + filename);
             InputStream inputStream = null;
-            final Uri outputUri = ContentStorage.get().create(PersistableFolder.OFFLINE_MAPS, filename);
+            final Uri outputUri = ContentStorage.get().create(downloader.targetFolder, filename);
 
             try {
                 inputStream = new BufferedInputStream(getContentResolver().openInputStream(uri));
@@ -221,7 +222,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     result = getString(R.string.receivemapfile_cancelled);
                     break;
                 case IO_EXCEPTION:
-                    result = String.format(getString(R.string.receivemapfile_error_io_exception), PersistableFolder.OFFLINE_MAPS);
+                    result = String.format(getString(R.string.receivemapfile_error_io_exception), downloader.targetFolder);
                     break;
                 case FILENOTFOUND_EXCEPTION:
                     result = getString(R.string.receivemapfile_error_filenotfound_exception);

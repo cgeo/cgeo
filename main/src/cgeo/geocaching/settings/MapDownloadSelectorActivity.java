@@ -53,7 +53,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
     protected @BindView(R.id.downloader_info) TextView downloaderInfo;
     protected @BindView(R.id.check_for_updates) Button checkForUpdates;
     protected @BindView(R.id.like_it) Button likeIt;
-    private AbstractMapDownloader current;
+    private AbstractDownloader current;
     private ArrayList<OfflineMap.OfflineMapTypeDescriptor> spinnerData = new ArrayList<>();
 
     protected class MapListAdapter extends RecyclerView.Adapter<MapListAdapter.ViewHolder> {
@@ -113,7 +113,12 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
                 holder.info.setText(R.string.downloadmap_directory);
             } else {
                 final String addInfo = offlineMap.getAddInfo();
-                holder.info.setText(getString(R.string.downloadmap_mapfile) + Formatter.SEPARATOR + offlineMap.getDateInfoAsString() + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "") + Formatter.SEPARATOR + offlineMap.getSizeInfo() + Formatter.SEPARATOR + offlineMap.getTypeAsString());
+                final String sizeInfo = offlineMap.getSizeInfo();
+                holder.info.setText(getString(R.string.downloadmap_mapfile)
+                    + Formatter.SEPARATOR + offlineMap.getDateInfoAsString()
+                    + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "")
+                    + (StringUtils.isNotBlank(sizeInfo) ? Formatter.SEPARATOR + offlineMap.getSizeInfo() : "")
+                    + Formatter.SEPARATOR + offlineMap.getTypeAsString());
             }
         }
     }
@@ -191,7 +196,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
 
         @Nullable
         private OfflineMap checkForUpdate(final OfflineMapUtils.OfflineMapData offlineMapData) {
-            final AbstractMapDownloader downloader = OfflineMap.OfflineMapType.getInstance(offlineMapData.remoteParsetype);
+            final AbstractDownloader downloader = OfflineMap.OfflineMapType.getInstance(offlineMapData.remoteParsetype);
             if (downloader == null) {
                 Log.e("Map update checker: Cannot find map downloader of type " + offlineMapData.remoteParsetype + " for file " + offlineMapData.localFile);
                 return null;
@@ -200,7 +205,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             final Parameters params = new Parameters();
             String page = "";
             try {
-                final Response response = Network.getRequest(offlineMapData.remotePage, params).blockingGet();
+                final Response response = Network.getRequest(downloader.getUpdatePageUrl(offlineMapData.remotePage), params).blockingGet();
                 page = Network.getResponseData(response, true);
             } catch (final Exception e) {
                 return null;
@@ -212,7 +217,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             }
 
             try {
-                return downloader.findMap(page, offlineMapData.remotePage, offlineMapData.remoteFile);
+                return downloader.checkUpdateFor(page, offlineMapData.remotePage, offlineMapData.remoteFile);
             } catch (final Exception e) {
                 Log.e("Map update checker: error parsing parsing html page", e);
                 return null;
@@ -260,7 +265,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         adapter.notifyDataSetChanged();
 
         current = spinnerData.get(position).instance;
-        installedOfflineMaps = OfflineMapUtils.availableOfflineMaps(null);
+        installedOfflineMaps = OfflineMapUtils.availableOfflineMaps();
 
         downloaderInfo.setVisibility(StringUtils.isNotBlank(current.mapSourceInfo) ? View.VISIBLE : View.GONE);
         downloaderInfo.setText(current.mapSourceInfo);
