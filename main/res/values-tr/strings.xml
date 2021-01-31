@@ -566,7 +566,6 @@
     <string name="init_zoomincludingwaypoints">Yakınlaştırmada yol noktalarını da göster</string>
     <string name="init_zoomincludingwaypoints_description">Eğer tek bir Geocache haritalanıyorsa: harita yakınlaştırması tüm yol noktalarını da içine almalı mıdır?</string>
     <string name="init_brouterThreshold">Rotayı hesapla</string>
-    <string name="init_brouterThreshold_description">Yönlendirici aplikasyon (brouter, eğer varsa) maksimum mesafeyi hesaplayacak.</string>
     <string name="init_brouterShowBothDistances">Düz mesafeyi göster</string>
     <string name="brouter_recalculating">Rota arka planda yeniden hesaplanıyor…</string>
     <string name="init_summary_brouterShowBothDistances">Routing aktif ise: hesaplanan rota mesafesine ek olarak düz mesafeyi göster.</string>
@@ -589,7 +588,6 @@
     <string name="init_listdisplay">Diğer listeler</string>
     <string name="init_summary_listdisplay">Geocache listesindeki ek listelere Geocache üyeliğini göster</string>
     <string name="init_livelist">Yön göster</string>
-    <string name="init_summary_livelist">Listedeki Geocache\'lerin yönünü göster</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Yedek Oluştur</string>
     <string name="init_backup_summary">Lütfen bu özelliğin Geocache\'leri, yol noktalarını &amp; ayarları yedekleyebileceğini, ancak Geocache görüntülerini yedekleyemeyeceğini unutmayın. \n Telefonunuzu kaybettikten sonra bile verileri geri yükleyebilmek için, yedekleme dosyalarının bağımsız bir konuma kopyalanması gerekir.</string>
@@ -650,7 +648,6 @@
     <string name="settings_info_themes">c:geo çevrimdışı haritalar için özel temaları destekler. Bunlar, haritanın renk stilini değiştirmek (örn.bir gece görüş haritasına sahip olmak) veya harita içindeki döngü yolları veya yükseklik çizgileri gibi belirli nesneleri vurgulamak için kullanılabilir.</string>
     <string name="init_mapsource_select">Harita kaynağı seçin</string>
     <string name="init_map_directory_description">Çevrimdışı haritalar dizini</string>
-    <string name="init_dataDir">Geocache veri dizinini seç</string>
     <string name="init_dataDir_note">Geocache için ek verileri (ipucu görselleri, kayıt görselleri, …) harici deponuzda saklamak isteyebilirsiniz. (Cihazınıza bağlı benzetilmiş veya gerçek harici hafıza kartı).</string>
     <string name="init_maptrail">Geçmiş İz\'i göster</string>
     <string name="init_maptrail_length">İz geçmişi maksimum uzunluğu</string>
