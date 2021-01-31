@@ -449,7 +449,6 @@
     <string name="init_choose_list">Meminta Daftar</string>
     <string name="init_summary_choose_list">Tanyakan daftar mana yang menyimpan cache di dalamnya</string>
     <string name="init_livelist">Menunjukkan Arah</string>
-    <string name="init_summary_livelist">Tampilkan petunjuk dari cache di daftar tersebut</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">Cadangan</string>
     <string name="init_backup_running">Membuat cadangan dari basis data cache&#8230;</string>
@@ -470,7 +469,6 @@
     <string name="settings_info_themes">c:geo mendukung tema khusus untuk peta offline. Ini dapat digunakan untuk mengubah gaya warna peta (misalnya memiliki peta pemandangan malam) atau untuk menyorot objek tertentu seperti jalur siklus atau garis ketinggian di dalam peta.</string>
     <string name="init_mapsource_select">Pilih Sumber Peta</string>
     <string name="init_map_directory_description">Direktori dengan peta offline</string>
-    <string name="init_dataDir">Pilih direktori data Geocache</string>
     <string name="init_dataDir_note">Anda dapat memilih untuk menyimpan data tambahan untuk geocaches (spoiler, log gambar, &#8230;) pada penyimpanan eksternal anda atau (kartu SD eksternal yang ditiru sebenarnya tergantung pada perangkat anda).</string>
     <string name="init_include_found_status">Termasuk \"Ditemukan\" status</string>
     <string name="init_trackautovisit">Kunjungi TBs</string>
