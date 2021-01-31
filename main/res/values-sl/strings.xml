@@ -423,7 +423,6 @@
     <string name="init_choose_list">Vprašaj za seznam</string>
     <string name="init_summary_choose_list">Pri shranjevanju zaklada za delo brez povezave vprašaj za seznam</string>
     <string name="init_livelist">Pokaži smeri</string>
-    <string name="init_summary_livelist">Pokaži tudi smeri do zakladov v seznamih</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">Ustvari varnostno kopijo</string>
     <string name="init_backup_running">Ustvarjanje varnostne kopije baze…</string>
@@ -438,11 +437,9 @@
     <string name="init_backup_last">Varnostna kopija je na voljo iz</string>
     <string name="init_backup_last_no">Varnostna kopija ne obstaja.</string>
     <string name="settings_info_offline_maps_title">Zemljevidi brez povezave</string>
-    <string name="settings_info_offline_maps">c:geo podpira uporabo zemljevidov brez povezave. Zemljevide lahko prenesete iz Mapsforge-ove strani ali si jih naredite sami iz OSM podatkov. Če želite uporabljati zemljevide brez povezave morate najprej izbrati imenik, kjer se zemljevidi nahajajo.</string>
     <string name="settings_info_themes_title">Teme zemljevidov</string>
     <string name="settings_info_themes">c:geo omogoča prikaz različnih tem zemljevidov brez povezave. Teme so uporabljene za spremembo barvnih shem (npr. temni nočni zemljevid) ali za poudarek objektov, kot na primer kolesarske poti ali plastnice na zemljevidu.</string>
     <string name="init_mapsource_select">Izberi vir zemljevidov</string>
-    <string name="init_map_directory_description">Mapa z zemljevidi</string>
     <string name="init_trackautovisit">Obisk pri zapisih</string>
     <string name="init_summary_trackautovisit">Pri sledljivčkih vedno uporabi obisk pri zapisih (\"Visited\")</string>
     <string name="init_sigautoinsert">Samodejno vstavi podpis</string>
@@ -465,9 +462,7 @@
     <string name="init_summary_plain_logs">Ne pokaži barv pri zapisih</string>
     <string name="init_use_native_ua">Android brskalnik</string>
     <string name="init_summary_use_native_ua">c:geo naj se strežniku predstavi kot Android brskalnik. Ta možnost reši problem prijave pri nekaterih ponudnikih omrežja.</string>
-    <string name="init_rendertheme_folder">Mapa s temami zemljevidov</string>
     <string name="init_maintenance">Vzdrževanje</string>
-    <string name="init_maintenance_directories_note">c:geo shranjuje slike in ostale datoteke povezane z zakladom v drugem direktoriju. V nekaterih primerih (kot na primer uvažanje/izvažanje baze) lahko direktorij vsebuje zastarele datoteke, ki jih lahko izbrišete tukaj.</string>
     <string name="init_maintenance_directories">Izbriši osirotišene datoteke</string>
     <string name="init_location">Geolokacija</string>
     <string name="init_location_note">Na napravah, ki so opremljena s storitvijo Google Play lahko c:geo samodejno uporabi najboljšega ponudnika geolokacije. Vendar to preprečuje uporabo zunanjega BlueTooth GPS sprejemnika.</string>
@@ -654,14 +649,7 @@
     <string name="cache_listed_on">Objavljen na %s</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Iščem datoteke\nv</string>
-    <string name="file_searching_sdcard_in">Nobenih datotek ni v mapi:\n%1$s\n\nIščem datoteke po celotni SD kartici:\n</string>
-    <string name="file_list_no_files">c:geo ni našel primernih datotek.</string>
-    <string name="file_searching">Iskanje primernih datotek</string>
-    <string name="file_title_searching">Iskanje</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Izberi mapo</string>
     <string name="simple_dir_chooser_current_path">Pot:</string>
     <string name="simple_dir_chooser_invalid_path">Neveljavna pot</string>
     <!-- gpx -->
@@ -675,12 +663,7 @@
     <string name="gpx_import_error_io">Datoteke ni bilo mogoče prebrati</string>
     <string name="gpx_import_error_parser">Datoteka ni v pravem formatu</string>
     <string name="gpx_import_error_unexpected">Neznana napaka</string>
-    <string name="gpx_import_delete_title">Izbriši datoteko</string>
-    <string name="gpx_import_delete_message">Ali želite izbrisati %s?</string>
     <string name="gpx_import_select_list_title">Uvozi GPX datoteko v seznam</string>
-    <string name="gpx_import_android">Uvozi iz Androida</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Izbiranje datoteke z zemljevidi</string>
     <!-- import -->
     <string name="web_import_title">Uvoz iz send2cgeo</string>
     <string name="web_import_waiting">Čakanje na zaklade iz send2cgeo…</string>
