@@ -108,10 +108,10 @@
     <string name="log_add">Adicionar</string>
     <string name="log_repeat">Repetir último registo</string>
     <string name="log_no_rating">Nenhuma classificação</string>
-    <string name="log_stars_1_description">Muito má</string>
-    <string name="log_stars_15_description">Má</string>
-    <string name="log_stars_2_description">Fraca</string>
-    <string name="log_stars_25_description">Pior que a média</string>
+    <string name="log_stars_1_description">Muito fraca</string>
+    <string name="log_stars_15_description">Fraca</string>
+    <string name="log_stars_2_description">Insuficiente</string>
+    <string name="log_stars_25_description">Abaixo da média</string>
     <string name="log_stars_3_description">Média</string>
     <string name="log_stars_35_description">Melhor que a média</string>
     <string name="log_stars_4_description">Boa</string>
@@ -158,7 +158,7 @@
     <string name="log_image_titleprefix">Imagem</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduzir para %s</string>
-    <string name="translate_to_english">Traduzir para inglês</string>
+    <string name="translate_to_english">Traduzir para Inglês</string>
     <string name="translate_length_warning">A tradução pode falhar se o texto for muito grande.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -428,8 +428,6 @@
     <string name="about_system_write_logcat_type">Criar um ficheiro de depuração padrão ou extendido?\n\nFicheiros de depuração padrão serão os indicados para a maioria dos casos.\nUtilize o modo de depuração extendido apenas quando lhe for solicitado.</string>
     <string name="about_system_write_logcat_type_standard">Padrão</string>
     <string name="about_system_write_logcat_type_extended">Extendido</string>
-    <string name="about_system_write_logcat_success">O ficheiro de depuração para \"%1$s\", encontra-se em \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">O ficheiro de depuração está vazio</string>
     <string name="about_system_write_logcat_error">Erro ao escrever no ficheiro de depuração</string>
     <string name="changelog_github">Lista de todas as alterações</string>
     <string name="about_nutshellmanual">Manual on-line</string>
@@ -457,7 +455,6 @@
     <string name="settings_title_cachedetails">Detalhes da cache</string>
     <string name="settings_summary_cachedetails">Personalizar a exibição de informações da cache.</string>
     <string name="settings_title_offlinedata">Dados armazenados</string>
-    <string name="settings_summary_offlinedata">Configuração da informação a ser guardada para utilização offline, do local de armazenamento e dos directórios para os ficheiros GPX.</string>
     <string name="settings_title_logging">Registos</string>
     <string name="settings_summary_logging">Configurar a sua assinatura e as opções de registo.</string>
     <string name="settings_title_map">Mapa</string>
@@ -468,12 +465,9 @@
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
     <string name="settings_title_map_behavior">Comportamento do mapa</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Pasta de dados de geocache</string>
-    <string name="settings_title_data_dir_usage">Pasta de dados de geocache (%1$s em uso)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
     <string name="calculate_dataDir">A calcular utilização de armazenamento para dados de Geocaches</string>
     <string name="settings_data_dir_item">%1$s (%2$s livres)</string>
-    <string name="confirm_data_dir_move_title">Mover a pasta dos dados de geocaches?</string>
     <string name="confirm_data_dir_move">Mover pasta de dados de geocache pode demorar muito tempo, dependendo do seu dispositivo e volume de dados.</string>
     <string name="settings_title_basicmembers">Opções para Membros Básicos</string>
     <string name="settings_title_navigation">Navegação</string>
@@ -553,7 +547,7 @@
     <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/individuais</string>
-    <string name="init_summary_friends_and_own_logs_wanted">Mostra uma página adicional com os registos dos seus amigos e registos individuais</string>
+    <string name="init_summary_friends_and_own_logs_wanted">Adiciona um separador contendo um logbook dos registos feitos por si e por amigos</string>
     <string name="init_openlastdetailspage">Mem. último separador visto</string>
     <string name="init_summary_openlastdetailspage">Abre a consulta dos detalhes da cache no último separador visto</string>
     <string name="init_skin">Tema claro</string>
@@ -573,16 +567,16 @@
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
     <string name="init_zoomincludingwaypoints_description">Ao visualizar o mapa a partir de uma cache (função \"mostrar no mapa\"): O zoom do mapa deve ser ajustado para incluir todos os pontos adicionais dessa cache?</string>
     <string name="init_brouterThreshold">Calcular rota</string>
-    <string name="init_brouterThreshold_description">A distância máxima até que uma aplicação auxiliar de ajuda (se instalada) calculará uma rota.</string>
+    <string name="init_brouterThreshold_description">Distância máxima até que a aplicação BRouter (se instalada) irá calcular uma rota.</string>
     <string name="init_brouterShowBothDistances">Mostrar distância em linha recta</string>
     <string name="brouter_recalculating">A recalcular a rota em segundo plano…</string>
     <string name="init_summary_brouterShowBothDistances">Se a navegação estiver activa: Mostra a distância em linha recta além do comprimento da rota.</string>
     <string name="init_bigSmileysOnMap">Grandes ícones nas caches registadas</string>
     <string name="init_summary_bigSmileysOnMap">Se activado, as caches registadas serão mostradas no mapa por grandes emoticons, ao invés dos ícones do tipo de cache (requer reinício).</string>
     <string name="init_disabled">Excluir Desactivadas</string>
-    <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
+    <string name="init_summary_disabled">Exclui as caches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>
-    <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
+    <string name="init_summary_archived">Exclui as caches arquivadas</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
@@ -598,10 +592,10 @@
     <string name="init_listdisplay">Listas adicionais</string>
     <string name="init_summary_listdisplay">Numa lista de caches, mostra o nome de outras listas a que cada cache armazenada esteja associada</string>
     <string name="init_livelist">Mostrar direcção</string>
-    <string name="init_summary_livelist">Mostra uma seta com a orientação em azimute das caches numa lista</string>
+    <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Por favor, note que este recurso pode fazer cópia de segurança de caches, pontos adicionais &amp; configurações, mas sem imagens de cache. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para um local independente.</string>
+    <string name="init_backup_summary">Tenha em atenção que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais &amp; configurações, mas não de imagens em caches. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -618,7 +612,7 @@
     <string name="init_backup_start_restore">Iniciar restauro</string>
     <string name="init_backup_restore_different_backup">Restaurar uma cópia de seg. diferente</string>
     <string name="init_backup_backup_history">Histórico de cópias de segurança</string>
-    <string name="init_backup_history_length_title">Nº máximo de cópias de segurança guardadas</string>
+    <string name="init_backup_history_length_title">Nº máximo cópias de seg. guardadas</string>
     <string name="init_backup_history_length_summary">Decida quantas cópias de segurança devem ser mantidas. Quando o limite for atingido, as mais antigas serão apagadas automaticamente.</string>
     <string name="init_backup_history_length_min">Apenas recentes</string>
     <string name="init_backup_history_length_max">Manter todas</string>
@@ -627,9 +621,7 @@
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
     <string name="init_backup_unnecessary">A base de dados está vazia, não é necessária uma cópia de segurança.</string>
-    <string name="init_backup_folder_exists_error">Não foi possível criar um novo directório para as cópias de segurança. Realizou alguma cópia de segurança há menos de 60 segundos?</string>
     <string name="init_backup_no_backup_available">Não existe nenhum ficheiro de cópia de segurança.</string>
-    <string name="backup_confirm_overwrite">Isto irá apagar a pasta de cópia de segurança mais antiga de %s. \nPretende continuar?</string>
     <string name="restore_confirm_overwrite_database">AVISO: Isto irá sobrescrever %s no seu dispositivo!</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVISO: Isto irá sobrescrever %s e as suas configurações actuais no seu dispositivo!</string>
     <string name="restore_confirm_overwrite_settings">AVISO: Isto irá sobrescrever as suas configurações actuais no seu dispositivo!</string>
@@ -654,12 +646,10 @@
     <string name="settings_readingerror">Erro ao ler as definições</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
-    <string name="settings_info_offline_maps">O c:geo permite a utilização de mapas offline. Poderá transferir mapas do Mapsforge ou até criar os seus próprios mapas a partir de ficheiros OSM. Para a funcionalidade de mapas offline estar disponível, primeiro precisa de seleccionar o directório dos mapas offline.</string>
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
     <string name="settings_info_themes">O c:geo suporta temas personalizados para os mapas off-line. Estes podem ser usados ​​para alterar o estilo de cores do mapa (por exemplo, ter um mapa para visão nocturna) ou para realçar certos objectos, como ciclovias ou linhas da altitude dentro do mapa.</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
-    <string name="init_map_directory_description">Pasta com mapas offline</string>
-    <string name="init_dataDir">Seleccionar directório</string>
+    <string name="init_local_file_system">Sistema de Ficheiros Local</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de percurso</string>
     <string name="init_maptrail_length">Comprimento máx. do histórico de percurso</string>
@@ -707,23 +697,16 @@
     <string name="init_debug_note">O c:geo pode gerar um grande volume de informação de depuração. A activação desta definição afectará a estabilidade do c:geo e só é recomendado se for solicitado o envio do registo para os programadores. Por favor, mantenha o registo de depuração desactivado durante o uso normal do c:geo!</string>
     <string name="init_debug">Activar depuração</string>
     <string name="init_dbonsdcard_title">Localização da base de dados</string>
-    <string name="init_dbonsdcard_note">Pode guardar a base de dados da aplicação c:geo na memória interna do sistema ou numa pasta do seu armazenamento pessoal. Guarda-la no seu armazenamento pessoal pode libertar alguma memória, mas pode reduzir um pouco o desempenho tal como o c:geo não funcionará se o armazenamento não estiver acessível ou remover o ficheiro de base de dados.</string>
     <string name="init_dbonsdcard">No armazenamento do utilizador</string>
     <string name="init_dbmove_dbmove">A mover a base de dados</string>
     <string name="init_dbmove_running">A mover a base de dados</string>
     <string name="init_dbmove_success">Base de dados movida com sucesso.</string>
     <string name="init_dbmove_failed">Falha ao mover a base de dados</string>
-    <string name="init_datadirmove_datadirmove">A mover pasta de dados de geocache</string>
-    <string name="init_datadirmove_running">A mover pasta de dados de geocache</string>
-    <string name="init_datadirmove_success">Pasta de dados de geocache movida com sucesso.</string>
-    <string name="init_datadirmove_failed">A mudança do directório dos dados das geocaches falhou parcial ou totalmente. Por favor, verifique o antigo e o novo directório e, se necessário, transfira manualmente os dados em falta.</string>
     <string name="init_plain_logs">Sem cores nos registos</string>
     <string name="init_summary_plain_logs">Mostra os registos sem a sinalização colorida</string>
     <string name="init_use_native_ua">Browser do Android</string>
     <string name="init_summary_use_native_ua">Identificar como um browser Android. Resolve os problemas de início de sessão em alguns fornecedores de Internet.</string>
-    <string name="init_rendertheme_folder">Pasta de Temas de Mapas</string>
     <string name="init_maintenance">Manutenção</string>
-    <string name="init_maintenance_directories_note">O c:geo armazena imagens (ex: provenientes de registos) e outros ficheiros relacionados com uma geocache numa pasta separada. Nalguns casos (como ao importar/exportar a base de dados) esta pasta pode conter ficheiros desactualizados, que podem ser apagados aqui.</string>
     <string name="init_maintenance_directories">Apagar ficheiros obsoletos</string>
     <string name="init_location">Geolocalização</string>
     <string name="init_location_note">Em dispositivos equipados com Serviços do Google Play, o c:geo pode utilizar automaticamente um melhor fornecedor de geolocalização. No entanto, isso impede a utilização de um receptor GPS Bluetooth externo.</string>
@@ -798,7 +781,36 @@
     <string name="sendToCgeo_download_fail">O c:geo falhou a transferência das geocaches. Não há ligação à Internet ou o send2cgeo encontra-se fora de serviço.</string>
     <string name="sendToCgeo_no_registration">O c:geo falhou a transferência das geocaches. O registo do send2cgeo expirou. Por favor, faça o registo nas definições.</string>
     <!-- Content Storage -->
+    <string name="contentstorage_selectfolder_dialog_title">Alterar pasta %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>A pasta %s está actualmente definida como \'%s\' e contém %d ficheiro(s) e %d subpasta(s).</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Pode optar por usar a pasta padrão \'%s\' ou seleccionar uma pasta definida pelo utilizador.</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Por favor, seleccione se o c:geo deve copiar/mover o seu conteúdo para a nova pasta:</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Não fazer nada</string>
+    <string name="contentstorage_selectfolder_dialog_choice_copy">Copiar todo o conteúdo</string>
+    <string name="contentstorage_selectfolder_dialog_choice_move">Mover todo o conteúdo</string>
+    <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Pasta %s: Copiar/Mover concluído</string>
+    <string name="contentstorage_folder_selection_aborted">A cancelar selecção de pasta, a pasta é \'%s\'</string>
+    <string name="contentstorage_folder_selection_success">Pasta definida como \'%s\'</string>
+    <string name="contentstorage_file_selection_aborted">A cancelar a selecção de ficheiro</string>
+    <string name="contentstorage_file_selection_success">Ficheiro seleccionado: \'%s\'</string>
+    <string name="contentstorage_err_read_failed">O ficheiro \'%s\' não pôde ser lido</string>
+    <string name="contentstorage_err_write_failed">O ficheiro \'%s\' não pôde ser escrito</string>
+    <string name="contentstorage_err_delete_failed">O ficheiro \'%s\' não pôde ser eliminado</string>
+    <string name="contentstorage_err_list_failed">Os ficheiros na Pasta \'%s\' não puderam ser listados</string>
+    <string name="contentstorage_err_folder_access_failed">A pasta \'%s\' não pôde ser acedida</string>
     <!-- Persistable Folders -->
+    <string name="persistablefolder_usertype_userdefined">Definida pelo utilizador</string>
+    <string name="persistablefolder_usertype_default">Padrão</string>
+    <string name="persistablefolder_legacy">Antiga</string>
+    <string name="persistablefolder_pickfolder">Seleccionar pasta</string>
+    <string name="persistablefolder_usedefault">Usar padrão</string>
+    <string name="persistablefolder_base">Base</string>
+    <string name="persistablefolder_offline_maps">Mapas offline</string>
+    <string name="persistablefolder_offline_maps_themes">Temas de mapa</string>
+    <string name="persistablefolder_gpx">GPX</string>
+    <string name="persistablefolder_backup">Cópia de segurança</string>
+    <string name="persistablefolder_logfiles">Ficheiros de registo</string>
+    <string name="persistablefolder_fieldnotes">Notas de Campo</string>
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_check">Verifique a autenticação</string>
@@ -878,6 +890,8 @@
     <string name="cache_personal_note_edit">Editar</string>
     <string name="cache_personal_note_storewaypoints">Adicionar/Actualizar Pontos adicionais</string>
     <string name="cache_personal_note_removewaypoints">Eliminar Pontos adicionais</string>
+    <string name="cache_personal_note_removedwaypoints">Pontos adicionais removidos</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Não foi encontrado nenhum ponto adicional para remover</string>
     <string name="cache_personal_note_storewaypoints_success">Os Pontos Adicionais foram adicionados à nota pessoal</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Os Pontos Adicionais foram adicionados à nota, mas tiveram que ser encurtados (tamanho máximo da nota pessoal: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Pontos Adicionais não puderam ser armazenados na nota devido aos limites de tamanho (tamanho máximo da nota pessoal: %1$d)</string>
@@ -1071,17 +1085,9 @@
     <string name="cc_hint_fraction">parcial</string>
     <string name="lowercase">minúsculas</string>
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">A procurar ficheiros\nem</string>
-    <string name="file_searching_sdcard_in">Nenhum ficheiro encontrado nas pastas predefinidas:\n%1$s\n\nA procurar no cartão de memória por ficheiros:\n</string>
-    <string name="file_list_no_files">O c:geo não encontrou ficheiros adequados.</string>
-    <string name="file_searching">A procurar ficheiros correspondentes</string>
-    <string name="file_title_searching">A procurar</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Escolher pasta</string>
     <string name="simple_dir_chooser_current_path">Caminho:</string>
     <string name="simple_dir_chooser_invalid_path">Caminho inválido</string>
-    <string name="simple_file_chooser_title">Escolher ficheiro</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">A carregar caches de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">A carregar pontos adicionais de %1$s</string>
@@ -1098,14 +1104,7 @@
     <string name="gpx_import_error_parser">Formato de ficheiro errado</string>
     <string name="gpx_import_error_unexpected">Erro inesperado</string>
     <string name="gpx_import_canceled_with_filename">A importação GPX de %1$s foi cancelada</string>
-    <string name="gpx_import_delete_title">Eliminar ficheiro</string>
-    <string name="gpx_import_delete_message">Quer eliminar %s?</string>
     <string name="gpx_import_select_list_title">Importar GPX para lista</string>
-    <string name="gpx_import_android">Importar do Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Seleccionar ficheiro de mapa</string>
-    <string name="track_file_select_title">Seleccionar ficheiro de percurso</string>
-    <string name="individual_route_file_select_title">Seleccione o ficheiro de rota individual</string>
     <!-- import -->
     <string name="web_import_title">Importar de send2cgeo</string>
     <string name="web_import_waiting">A aguardar novas caches de send2cgeo…</string>
@@ -1698,7 +1697,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Falha ao adicionar o evento ao calendário</string>
     <string name="init_low_disk_space">A ficar sem espaço de armazenamento</string>
-    <string name="init_low_disk_space_message">A unidade de armazenamento do directório de dados das geocaches está a ficar sem espaço. Isto pode causar anomalias no c:geo. Por favor, liberte algum espaço.</string>
     <string name="init_confirm_debug">O c:geo está a ser executado no modo de depuração!</string>
     <string name="list_confirm_debug_message">O modo de depuração provoca instabilidades! Quer desactivar o modo de depuração?</string>
     <string name="err_select_logimage_upload_size">A imagem é muito grande. Por favor, seleccione uma resolução inferior.</string>
@@ -1799,35 +1797,27 @@
     <string name="localfile_cannot_handle">Erro ao ler o ficheiro ou o c:geo não consegue processar este tipo de ficheiro.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Receber um ficheiro de mapa</string>
-    <string name="receivemapfile_success">O ficheiro de mapa foi recebido com sucesso como \"%s\" e guardado no directório de mapas</string>
     <string name="receivemapfile_error">Erro ao receber ficheiro de mapa</string>
-    <string name="receivemapfile_error_io_exception">Erro ao receber o ficheiro do mapa. O directório do mapa \"%s\" tem permissão de escrita?</string>
     <string name="receivemapfile_error_filenotfound_exception">Erro de ficheiro não encontrado, ao receber o ficheiro de mapa.</string>
-    <string name="receivemapfile_alreadyexists">Já existe um ficheiro com este nome. Substituir o ficheiro existente ou guardar o novo ficheiro sob um nome diferente?</string>
-    <string name="receivemapfile_option_overwrite">Substituir</string>
-    <string name="receivemapfile_option_differentname">Nome diferente</string>
     <string name="receivemapfile_kb_copied">%d kB copiados</string>
     <string name="receivemapfile_cancelled">Transferência do ficheiro de mapa cancelada</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Transferir mapa offline</string>
-    <string name="downloadmap_info">Escolha um ficheiro de mapa para a sua região tocando no ícone \"Guardar\".\n\nA transferência será executada em segundo plano. Quando estiver concluída, o ficheiro transferido será copiado para a pasta de mapas do c:geo e definido como o mapa actual para a c:geo.\n\nCuidado: Transferir um mapa pode originar tráfego de rede elevado!</string>
     <string name="downloadmap_choose">Escolher mapa</string>
     <string name="downloadmap_filename">A transferir %s</string>
     <string name="downloadmanager_not_available">Mapa não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
-    <string name="downloadmap_target_not_writable">O destino \"%s\" não aceita gravação - o mapa transferido será armazenado no directório de transferências do sistema e tem que ser movido manualmente para o directório dos mapas.</string>
     <string name="downloadmap_allow_metered_network">Permitir a transferência através de redes limitadas (por exemplo: ligação móvel)</string>
     <string name="downloadmap_confirmation">Transferir o mapa \"%1$s\"?\n\nIsso pode levar algum tempo e pode resultar num custo significativo, dependendo da sua ligação à rede.\n\nInformação de tamanho: %2$s</string>
     <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
     <string name="button_continue">Continuar</string>
-    <string name="downloadmap_onedirup">(um directório para cima)</string>
     <string name="downloadmap_checkforupdates_button">Verificar se há actualizações</string>
     <string name="downloadmap_available_updates">Actualizações disponíveis</string>
     <string name="downloadmap_no_updates_found">Nenhuma actualização de mapa encontrada</string>
-    <string name="downloadmap_directory">Directório</string>
     <string name="downloadmap_mapfile">Ficheiro de mapa</string>
-    <string name="downloadmap_retrieving_directory_data">A obter dados do directório…</string>
     <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
+    <string name="mapserver_mapsforge_info">Mapas básicos, nenhum tema de mapa necessário</string>
+    <string name="mapserver_openandromaps_info">Mapas detalhados, requer o tema do mapa \"Elevado\"</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
@@ -1855,6 +1845,7 @@
     <string name="wizard_outro_error">Configuração incompleta\nNem todas as partes do c:geo funcionarão como esperado!</string>
     <string name="wizard_permissions_title">Definir autorizações da aplicação</string>
     <string name="wizard_permissions_intro">O c:geo precisa de certas permissões no seu dispositivo para funcionar correctamente.\nVou explicar mais detalhes nos próximos passos.</string>
+    <string name="wizard_basefolder_request_explanation">O c:geo precisa de uma pasta local para armazenar dados, como ficheiros GPX, cópias de segurança e notas de campo. Seleccione ou crie essa pasta no próximo passo.\nSe actualizou o c:geo de uma versão anterior, seleccione a pasta \"cgeo\" existente no nível de raíz do armazenamento do seu dispositivo.</string>
     <string name="wizard_platforms_title">Configurar serviços</string>
     <string name="wizard_platforms_intro">Para encontrar geocaches com o c:geo, precisa de uma conta num serviço de geocaching suportado pelo c:geo.\nSeleccione abaixo o serviço pretendido, seja para iniciar a sessão com a sua conta ou para criar uma nova conta.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1870,5 +1861,6 @@
     <string name="wizard_status_title">Estado da configuração</string>
     <string name="wizard_status_storage_permission">Permissão de armazenamento</string>
     <string name="wizard_status_location_permission">Permissão de localização</string>
+    <string name="wizard_status_basefolder">Pasta base</string>
     <string name="wizard_status_platform">Serviços de geocaching</string>
 </resources>
