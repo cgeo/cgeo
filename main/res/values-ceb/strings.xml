@@ -350,11 +350,8 @@
     <string name="settings_summary_map">Ibutang ang tinubdan sa mapa, mga setting sa offline nga mapa ug mga detalye sa mapa.</string>
     <string name="settings_title_map_data">Datos sa mapa</string>
     <string name="settings_title_map_content">Ang kontento sa mapa</string>
-    <string name="settings_title_data_dir">Direktorya sa data sa geocache</string>
-    <string name="settings_title_data_dir_usage">Direktorya sa data sa geocache (%1$s used)</string>
     <string name="calculate_dataDir_title">Ang ginamit na data sa geocache</string>
     <string name="calculate_dataDir">Pagkalkula sa ginamit nga data disk sa Geocache</string>
-    <string name="confirm_data_dir_move_title">Pagbalhin sa direktorya sa data sa geocache?</string>
     <string name="confirm_data_dir_move">Ang pagpabalhin sa data sa geocache kay maggamit ug taas kaayo na oras, naka-depende sa device nimo ug sa kung pila ang data.</string>
     <string name="settings_title_basicmembers">Pilianan para sa sukaranon na mga miyembro</string>
     <string name="settings_title_navigation">Pag-navigate</string>
@@ -438,7 +435,6 @@
     <string name="init_choose_list">Pangyo og lista</string>
     <string name="init_summary_choose_list">Pangutan-a kung unsa nga lista ang ibutang sa mga caches sa</string>
     <string name="init_livelist">Ipakita ang Direksyon</string>
-    <string name="init_summary_livelist">Pakit-a sa direksyon sa mga cache sa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_backup">Tabang</string>
     <string name="init_backup_running">Pagbuhat ug tabang para sa cache database…</string>
@@ -454,12 +450,9 @@
     <string name="init_backup_last">Anaay tabang gekan</string>
     <string name="init_backup_last_no">Walay file nga adunay tabang.</string>
     <string name="settings_info_offline_maps_title">Impormasyon sa Offline nga mga mapa</string>
-    <string name="settings_info_offline_maps">ang c:geo nag suporta og mga mapa para paggamit offline. Maka download og mga mapa gikan sa Mapsforge o maghimo og imohang kaugalingon nga mga mapa gikan sa OSM data. Dapat pilion og una ang offline na direktoryo sa mapa para makuha ang suporta nga mapa.</string>
     <string name="settings_info_themes_title">Pahibalo sa mga tema sa mapa</string>
     <string name="settings_info_themes">ang c:geo nag suporta og gawi na mga tema para sa offline na mga mapa. Kani puwede magamit para mailisan and kolor og estilo sa mapa (para adunay nightview nga mapa) o para patugbaw sa mga sigurado na butanga pareha sa subayanan sa sikulo o linya sa gitas-on sulod sa mapa.</string>
     <string name="init_mapsource_select">Pagpili og kakuhaan sa mapa</string>
-    <string name="init_map_directory_description">Direktoryo nga adunay offline nga mga mapa</string>
-    <string name="init_dataDir">Pagpili sa direktoryong data sa Geocache</string>
     <string name="init_dataDir_note">Pwede ka makapili kung asa nimo itago ang mga napun-ang data para sa mga geocache (spoilers, log na mga imahe, …) sa imong panggawas na tagu-anan (na-emulate o tinuod na panggawas na SD kard depende sa imong debays).</string>
     <string name="init_include_found_status">Apili ang \"Found\" na kahimtang</string>
     <string name="init_trackautovisit">Bisitaha ang TBs</string>
@@ -477,22 +470,15 @@
     <string name="init_debug_note">c:geo kay pwede makahimo ug daghang impormasyon sa debugging. Pagpabuhi sa setting ani kay maka apekto sa kusog sa c:geo ug pwede rang ma rekomendar kung ikaw ay napangutan-ang maghatag ug usa ka log sa mga tig-develop. Palihog ug pagpa-disable sa debug logging sa panahon sa paggamit sa c:geo!</string>
     <string name="init_debug">I-aktibo and debug log</string>
     <string name="init_dbonsdcard_title">Lokasyon sa database</string>
-    <string name="init_dbonsdcard_note">Pwede nimong matago ang database sa imong c:geo sa bisan-asa kung sa sulod man sa sistema o sa direktoryo sa imong tig-gamit nga hipusanan. Kung naa sya sa taga-gamit nga tagu-anan pwede sya makapahawa ug ubang memorya, pero pwede sad na mawala gamay na pirpormans ug ang c:geo kay di mugana kung ang tagu-anan kay dili pwede maka akses o imong giwala ang file sa database.</string>
     <string name="init_dbonsdcard">Sa tagagamit na imbakan</string>
     <string name="init_dbmove_dbmove">I-isbog and database</string>
     <string name="init_dbmove_running">I-isbog ang database</string>
     <string name="init_dbmove_success">Malamposon ang pag isbog sa database.</string>
     <string name="init_dbmove_failed">Napakyas ang pag isbog sa database</string>
-    <string name="init_datadirmove_datadirmove">Pagbalhin sa direktoryong data sa Geocache</string>
-    <string name="init_datadirmove_running">Pagbalhin sa direktoryong data sa Geocache</string>
-    <string name="init_datadirmove_success">Lampus na pagbalhin sa direktoryong data sa Geocache.</string>
-    <string name="init_datadirmove_failed">Pagbalhin sa direktoryong data sa Geocache kay gamay o kumpletong pakyas. Palihog i-check ang daan o bag-ong mga direktoryo ug paglihok gamit ang kamot kung kinahanglan.</string>
     <string name="init_plain_logs">Yano na logs</string>
     <string name="init_summary_plain_logs">I-balandra and log entri nga walay kolor</string>
     <string name="init_summary_use_native_ua">Ilha isip Android browser. Pagsulbad sa mga problema sa pag-login kon gamiton ang pipila ka mga provider sa network.</string>
-    <string name="init_rendertheme_folder">Directory sa mga Themes sa Mapa</string>
     <string name="init_maintenance">Pag-mintinar</string>
-    <string name="init_maintenance_directories_note">ang c:geo nagtipig og mga imahe, log nga mga imahe ug uban pang mga file nga may kalabutan sa usa ka cache sa usa ka lain nga direktoryo. Sa pipila nga mga kaso (sama sa pag-import/pag-eksport sa database) kini nga direktoryo mahimo nga adunay sulod na nga mga file, nga mahimong matanggal dinhi.</string>
     <string name="init_maintenance_directories">Tangtanga ang mga naulahi nga mga file</string>
     <string name="init_location_note">Sa mga kagamitan nga adunay mga Google Play Services, ang c:geo mahimong gamiton sa usa ka mas maayo nga geolocation provider. Hinoon, kini nagpugong sa paggamit sa usa ka eksternal nga GPS receiver sa GPS.</string>
     <string name="init_location_googleplayservices">Gamita ang Google Play Services</string>
@@ -710,14 +696,7 @@
     <string name="cache_listed_on">Ang listahan sa %s</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
-    <string name="file_searching_in">Nangita ug mga files\nin</string>
-    <string name="file_searching_sdcard_in">Walay mga files ang nakit-an sa naka-default nga mga folder:\n%1$s\n\nPagpangita sa tibouk nga mga files sa SD card:\n</string>
-    <string name="file_list_no_files">ang c:geo walay nakita na angay sa mga files.</string>
-    <string name="file_searching">Pagpangita alang sa kaparehong mga files</string>
-    <string name="file_title_searching">Ang pagpangita sa</string>
     <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Ang pag-pili ug direktoryo</string>
     <string name="simple_dir_chooser_current_path">Ang dalan:</string>
     <string name="simple_dir_chooser_invalid_path">Ang dalan nga sayop</string>
     <!-- gpx -->
@@ -732,12 +711,7 @@
     <string name="gpx_import_error_parser">Dili maayu nga file format</string>
     <string name="gpx_import_error_unexpected">Wala damha nga sayup</string>
     <string name="gpx_import_canceled_with_filename">Na kansila ang pag-import sa GPX gikan sa %1$s</string>
-    <string name="gpx_import_delete_title">Tangtangon ang file</string>
-    <string name="gpx_import_delete_message">Gusto nimong tangtangon ang %s?</string>
     <string name="gpx_import_select_list_title">I-import ang GPX padung sa listahan</string>
-    <string name="gpx_import_android">I-import gekan sa Android</string>
-    <!-- file selectors -->
-    <string name="map_file_select_title">Pagpili ug file nga Mapa</string>
     <!-- import -->
     <string name="web_import_title">I-Import gekan sa send2cgeo</string>
     <string name="web_import_waiting">Naghuwat sa bag-o nga caches gekan sa send2cgeo…</string>
@@ -1223,7 +1197,6 @@
     <!-- calendar adder -->
     <string name="event_fail">Pakyas na pagpuno sa kalihokan na cache adto sa kalendaryo</string>
     <string name="init_low_disk_space">Hinay na pagpadagan sa espasyo sa imbakan</string>
-    <string name="init_low_disk_space_message">Ang direktoryong data sa geocache kay hinay na nagdagan sa espasyo sa imbakan. Pwede ning mahimong rason sa pagkaguba sa c:geo. Palihog pagwala ug gamay na espasyo.</string>
     <string name="init_confirm_debug">ang c:geo kay nagdagan sa debug na pamaagi!</string>
     <string name="list_confirm_debug_message">Ang debug na pamaagi kay maoy hinungdan para ma-instabilities! Ganahan ba ka nga mag-deactivate sa debug na pamaagi?</string>
     <string name="err_select_logimage_upload_size">Dako ra kaayo ang imahe, palihog ug pili sa mas gamay na scale.</string>
