@@ -880,6 +880,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
+        <activity
+            android:name=".settings.MapDownloaderReceiverSchemeMap"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="mf-v4-map" />
+            </intent-filter>
+        </activity>
         <activity android:name=".maps.mapsforge.v6.RenderThemeSettings" />
 
         <!-- fileprovider to be able to share files -->
