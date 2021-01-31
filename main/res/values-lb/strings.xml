@@ -416,8 +416,6 @@
     <string name="about_system_write_logcat_type">Standard- oder erweidert Logdatei erstellen?\n\nStandard-Logdateien ginn an de meeschten Fäll duer.\nBenotz erweitert Logdateien nëmmen, wenn du dofir gefrot gëss.</string>
     <string name="about_system_write_logcat_type_standard">Standard</string>
     <string name="about_system_write_logcat_type_extended">Erweidert</string>
-    <string name="about_system_write_logcat_success">Logdatei gespäichert ënner \"%1$s\" am Verzeechnis \"%2$s\"</string>
-    <string name="about_system_write_logcat_empty">Logfile ass eidel</string>
     <string name="about_system_write_logcat_error">Feeler beim Schreiwe vun der Logdatei</string>
     <string name="changelog_github">Lëscht mat allen Ännerungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
@@ -443,7 +441,6 @@
     <string name="settings_title_cachedetails">Detailer vum Cache</string>
     <string name="settings_summary_cachedetails">D\'Ausgesinn vun den Cache-Informatiounen personaliséieren.</string>
     <string name="settings_title_offlinedata">Offline Daten</string>
-    <string name="settings_summary_offlinedata">D\'Daten déi fir d\'Offline-Notzung gebraucht ginn, d\'Späicherplaz an d\'Verzeechnisser fir d\'GPX-Dateien konfiguréieren.</string>
     <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Astellungen fir d\'Ënnerschrëft an Log-Optiounen.</string>
     <string name="settings_title_map">Kaart</string>
@@ -454,12 +451,9 @@
     <string name="settings_title_map_content">Kaarteninhalt</string>
     <string name="settings_title_map_behavior">Kaartenverhalen</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Geocache Date-Fichier</string>
-    <string name="settings_title_data_dir_usage">Geocache Date-Fichier (%1$s benotzt)</string>
     <string name="calculate_dataDir_title">Geocahce Datebenotzung</string>
     <string name="calculate_dataDir">Geocache Date-Späicherplaatz berechnen</string>
     <string name="settings_data_dir_item">%1$s (%2$s fräi)</string>
-    <string name="confirm_data_dir_move_title">De Geocache Date-Fichier beweegen?</string>
     <string name="confirm_data_dir_move">D\'Geocache Daten ze beweegen kann zimmlech laang daueren, jee no Gerät an dem Montant un Daten.</string>
     <string name="settings_title_basicmembers">Optioune fir net-premium Membere</string>
     <string name="settings_title_navigation">Navigatioun</string>
@@ -554,7 +548,6 @@
     <string name="init_zoomincludingwaypoints">Zoom beinhalt Waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Wann eng Kaart fir een eenzelen Cache opgemaach gëtt: Soll de Zoom esou agestallt ginn, datt all Waypoints ugewisen ginn?</string>
     <string name="init_brouterThreshold">Wee berechnen</string>
-    <string name="init_brouterThreshold_description">Maximal Distanz, bis zu där Brouter (falls installéiert) ee Wee berechent.</string>
     <string name="init_brouterShowBothDistances">Entfernung an der Loftlinn uweisen</string>
     <string name="brouter_recalculating">Wee gëtt am Hannergrond nei berechent…</string>
     <string name="init_summary_brouterShowBothDistances">Wann d\'Navigatioun aktiv ass: D\'Entfernung an der Loftlinn gëtt nieft der Längt vum berechenten Wee ugewisen.</string>
@@ -574,7 +567,6 @@
     <string name="init_listdisplay">Zousätzlech Lëschten</string>
     <string name="init_summary_listdisplay">Affiliatioun vu Cachen a weideren Lëschten uweisen</string>
     <string name="init_livelist">Richtung uweisen</string>
-    <string name="init_summary_livelist">Richtung vun de Cachen an der Lëscht uweisen</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Backup erstellen</string>
     <string name="init_restore_title">Backup restauréieren</string>
@@ -604,10 +596,8 @@
     <!-- days remaining -->
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
-    <!-- file list base -->
     <!-- simple dir / file chooser -->
     <!-- gpx -->
-    <!-- file selectors -->
     <!-- import -->
     <!-- popup -->
     <!-- waypoint -->
