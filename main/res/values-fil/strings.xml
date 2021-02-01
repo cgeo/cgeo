@@ -1202,9 +1202,6 @@
     <string name="trackable_log_without_geocode">Ikaw ay malapit nang magpadala ng isang log na walang Geocode. Hinihinimok ito na magtakda ng isa. Gusto mo bang dagdagan ito ngayon?</string>
     <string name="do_not_ask_me_again">Huwag mo akong tanungin muli</string>
     <string name="geokrety_parsing_failed">Pumalya sa pag-parse sa tugon ng GeoKrety.</string>
-    <string name="settings_map_direction">Ipakita ang direksyon</string>
-    <string name="settings_summary_map_direction">Ipakita ang linya ng direksyon patungo sa target ng nabigasyon</string>
-    <string name="map_direction">Ipakita ang direksyon</string>
     <string name="command_move_caches_progress">Naglilipat ng mga cache patungo sa listahang %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Nailipat na %d cache</item>
