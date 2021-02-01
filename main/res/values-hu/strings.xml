@@ -1309,9 +1309,6 @@
     <string name="trackable_log_without_geocode">Geokód nélkül akarsz logot küldeni. Kérlek, adj meg egyet! Hozzá akarsz adni egyet most?</string>
     <string name="do_not_ask_me_again">Ne kérdezd többet</string>
     <string name="geokrety_parsing_failed">Nem sikerült értelmezni a GeoKrety választ.</string>
-    <string name="settings_map_direction">Irány mutatása</string>
-    <string name="settings_summary_map_direction">Navigációs cél irányvonalának megjelenítse</string>
-    <string name="map_direction">Irány be</string>
     <string name="command_move_caches_progress">Ládák áthelyezése a(z) %1s listára</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d láda áthelyezve</item>
