@@ -206,6 +206,11 @@ public final class Routing {
             Log.i("brouter returned no data");
             return null;
         }
+        
+        if (!gpx.startsWith("<?xml")) {
+            Log.w("brouter returned an error message: " + gpx);
+            return null;
+        }
 
         return parseGpxTrack(gpx, dest);
     }
@@ -237,7 +242,7 @@ public final class Routing {
             return result.toArray(new Geopoint[result.size()]);
 
         } catch (final SAXException e) {
-            Log.w("cannot parse brouter output of length " + gpx.length(), e);
+            Log.w("cannot parse brouter output of length " + gpx.length() + ", gpx=" + gpx, e);
         }
         return null;
     }
