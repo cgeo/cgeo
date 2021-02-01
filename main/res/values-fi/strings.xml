@@ -1637,9 +1637,6 @@
     <string name="trackable_log_without_geocode">Yrität lähettää lokin ilman Geokoodia. On suositeltavaa antaa koodi. Haluatko lisätä sen nyt?</string>
     <string name="do_not_ask_me_again">Älä kysy uudelleen</string>
     <string name="geokrety_parsing_failed">GeoKretyn vastauksen jäsentäminen epäonnistui.</string>
-    <string name="settings_map_direction">Näytä suunta</string>
-    <string name="settings_summary_map_direction">Näytä suuntaviiva navigointikohteelle</string>
-    <string name="map_direction">Näytä suunta</string>
     <string name="command_move_caches_progress">Siirretään kätköjä luetteloon %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d kätkö siirretty</item>
