@@ -1575,9 +1575,6 @@
     <string name="trackable_log_without_geocode">Vous êtes sur le point d\'envoyer une visite sans géocode. Il est fortement recommandé d\'indiquer un géocode. Voulez-vous l\'ajouter maintenant ?</string>
     <string name="do_not_ask_me_again">Ne plus demander</string>
     <string name="geokrety_parsing_failed">Impossible d\'analyser la réponse de GeoKrety.</string>
-    <string name="settings_map_direction">Afficher la direction</string>
-    <string name="settings_summary_map_direction">Trace une ligne droite entre votre position et la destination</string>
-    <string name="map_direction">Afficher la direction</string>
     <string name="command_move_caches_progress">Déplacement des caches vers la liste %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d cache déplacée</item>
