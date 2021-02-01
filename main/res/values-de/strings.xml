@@ -1680,9 +1680,6 @@
     <string name="trackable_log_without_geocode">Du bist gerade dabei, ein Log ohne Geocode zu senden. Es wird empfohlen, immer einen Geocode anzugeben. Möchtest du einen hinzufügen?</string>
     <string name="do_not_ask_me_again">Nicht wieder nachfragen</string>
     <string name="geokrety_parsing_failed">Konnte die Antwort von GeoKrety.org nicht analysieren.</string>
-    <string name="settings_map_direction">Zeige Richtungslinie</string>
-    <string name="settings_summary_map_direction">Zeigt eine Richtungslinie zum Navigationsziel</string>
-    <string name="map_direction">Zeige Richtungslinie</string>
     <string name="command_move_caches_progress">Verschiebe Caches zu Liste %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d Cache verschoben</item>
