@@ -1485,9 +1485,6 @@
     <string name="trackable_log_without_geocode">지오코드 없이 로그를 보낼 예정입니다. 지오코드가 있는게 좋습니다. 추가하시겠습니까?</string>
     <string name="do_not_ask_me_again">다시 묻지 않기</string>
     <string name="geokrety_parsing_failed">GeoKrety 응답을 해석하지 못했습니다.</string>
-    <string name="settings_map_direction">방향 보기</string>
-    <string name="settings_summary_map_direction">찾아가는 대상에 방향선을 표시합니다.</string>
-    <string name="map_direction">방향 보기</string>
     <string name="command_move_caches_progress">목록 %1s로 캐시를 이동 중</string>
     <plurals name="command_move_caches_result">
         <item quantity="other">%d 개의 캐시 이동 완료</item>
