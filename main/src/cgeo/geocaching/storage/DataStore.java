@@ -482,8 +482,8 @@ public class DataStore {
     }
 
     public static boolean versionsAreCompatible(final SQLiteDatabase databaseToCheck, final int oldVersion, final int newVersion) {
-        final Set<Integer> downgradeableVersions = DBDowngradeableVersions.load(databaseToCheck);
         if (newVersion < oldVersion) {
+            final Set<Integer> downgradeableVersions = DBDowngradeableVersions.load(databaseToCheck);
             for (int version = oldVersion; version > newVersion; version--) {
                 if (!downgradeableVersions.contains(version)) {
                     return false;
