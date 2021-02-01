@@ -1595,9 +1595,6 @@
     <string name="trackable_log_without_geocode">Jūs ruošiatės siųsti įrašą be Geo kodo. Reikia nurodyti Geo kodą. Ar norite pridėti jį dabar?</string>
     <string name="do_not_ask_me_again">Neklausti manęs dar kartą</string>
     <string name="geokrety_parsing_failed">Nepavyko išnagrinėti GeoKrety atsakymo.</string>
-    <string name="settings_map_direction">Rodyti kryptį</string>
-    <string name="settings_summary_map_direction">Rodyti krypties linija į tikslą</string>
-    <string name="map_direction">Rodyti kryptį</string>
     <string name="command_move_caches_progress">Perkelti slėptuves į %1s sąrašą</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Perkelta %d slėptuvė</item>
