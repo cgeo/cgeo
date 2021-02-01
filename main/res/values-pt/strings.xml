@@ -1656,9 +1656,6 @@
     <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Código GC. É aconselhado a definir um. Quer adiciona-lo agora?</string>
     <string name="do_not_ask_me_again">Não perguntar novamente</string>
     <string name="geokrety_parsing_failed">Falha ao analisar a resposta de GeoKrety.</string>
-    <string name="settings_map_direction">Mostrar a direcção</string>
-    <string name="settings_summary_map_direction">Mostra uma linha de direcção para o destino de navegação</string>
-    <string name="map_direction">Mostrar a direcção</string>
     <string name="command_move_caches_progress">Movendo as caches para a lista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d cache movida</item>
