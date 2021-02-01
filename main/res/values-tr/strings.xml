@@ -1581,9 +1581,6 @@
     <string name="trackable_log_without_geocode">Geocode\'u olmayan kayıt göndermek üzeresiniz. Bir tane ayarlamanız tavsiye edilir. Şimdi eklemek ister misiniz?</string>
     <string name="do_not_ask_me_again">Bir daha sorma</string>
     <string name="geokrety_parsing_failed">GeoKrety\'nin cevabı çözümlenemedi.</string>
-    <string name="settings_map_direction">Yön göster</string>
-    <string name="settings_summary_map_direction">Navigasyon hedefine yön çizgisi göster</string>
-    <string name="map_direction">Yön göster</string>
     <string name="command_move_caches_progress">Geocache\'ler %1s listesine taşınıyor</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d Geocache taşındı</item>
