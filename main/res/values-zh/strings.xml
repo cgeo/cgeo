@@ -762,8 +762,6 @@
     <string name="confirm_report_problem_title">上报问题</string>
     <string name="confirm_report_problem_message">您要报告 \'%s\'。确定吗？</string>
     <!-- Geokrety -->
-    <string name="settings_map_direction">显示指引</string>
-    <string name="settings_summary_map_direction">显示一条到导航目标的指引线</string>
     <plurals name="command_copy_caches_result">
         <item quantity="other">%d个宝已复制</item>
     </plurals>
