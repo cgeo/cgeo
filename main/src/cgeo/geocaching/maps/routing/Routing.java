@@ -207,8 +207,13 @@ public final class Routing {
             return null;
         }
 
-        // TODO: need to check gpx for error message instead of valid XML
-        // W/cgeo: [LayerManager] cannot parse brouter output of length 29, gpx=datafile E5_N45.rd5 not found
+        // wanted to compare (gpx.substr(0,5) != "<?xml")
+        // but this did not work, most likely because gpx is a Unicode string?
+
+        if (gpx.length() < 200) {
+            Log.w("brouter returned an error message: " + gpx);
+            return null;
+        }
 
         return parseGpxTrack(gpx, dest);
     }

@@ -1835,10 +1835,6 @@
     <string name="do_not_ask_me_again">Do not ask me again</string>
     <string name="geokrety_parsing_failed">Failed to parse GeoKrety response.</string>
 
-    <string name="settings_map_direction">Show direction</string>
-    <string name="settings_summary_map_direction">Show a direction line to the navigation target</string>
-    <string name="map_direction">Show direction</string>
-
     <string name="command_move_caches_progress">Moving caches to list %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="zero">Moved %d caches</item>
