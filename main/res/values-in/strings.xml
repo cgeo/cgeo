@@ -1182,9 +1182,6 @@
     <string name="trackable_log_without_geocode">Anda akan mengirim log tanpa Geocode. Hal ini mendorong untuk menetapkan satu. Apakah anda ingin menambahkan sekarang?</string>
     <string name="do_not_ask_me_again">Jangan tanya saya lagi</string>
     <string name="geokrety_parsing_failed">Gagal mengurai respon GeoKrety.</string>
-    <string name="settings_map_direction">Tunjukkan arah</string>
-    <string name="settings_summary_map_direction">Menunjukkan arah garis ke target navigasi</string>
-    <string name="map_direction">Tunjukkan arah</string>
     <string name="command_move_caches_progress">Memindahkan cache ke daftar %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="other">Dipindahkan %d cache</item>
