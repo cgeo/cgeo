@@ -14,6 +14,7 @@ import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.OfflineMapUtils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -41,7 +44,6 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
     private Uri uri = null;
     private String filename = null;
-    private String fileinfo = "";
 
     private String sourceURL = "";
     private long sourceDate = 0;
@@ -83,7 +85,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                             }
                             // found map file within zip
                             if (guessFilename(filename)) {
-                                new CopyTask(this, true, ze.getName()).execute();
+                                handleMapFile(this,  true, ze.getName());
                                 foundMapInZip = true;
                             }
                         }
@@ -93,7 +95,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                 }
                 // if no ZIP file: continue with copying the file
                 if (!foundMapInZip && guessFilename(preset)) {
-                    new CopyTask(this, false, null).execute();
+                    handleMapFile(this, false, null);
                 }
             } else {
                 finish();
@@ -116,11 +118,62 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         if (filename == null) {
             filename = FileNameCreator.OFFLINE_MAPS.createName();
         }
-        fileinfo = filename;
-        if (fileinfo != null) {
-            fileinfo = fileinfo.substring(0, fileinfo.length() - downloader.forceExtension.length());
-        }
         return true;
+    }
+
+    private void handleMapFile(final Activity activity, final boolean isZipFile, final String nameWithinZip) {
+        // check whether the target file or its companion file already exist
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(downloader.targetFolder.getFolder(), false);
+        Uri companionFileExists = OfflineMapUtils.companionFileExists(files, filename);
+        Uri downloadFileExists = null;
+        for (ContentStorage.FileInformation fi : files) {
+            if (fi.name.equals(filename)) {
+                downloadFileExists = fi.uri;
+                break;
+            }
+        }
+        // a companion file without original file does not make sense => delete
+        if (downloadFileExists == null && companionFileExists != null) {
+            ContentStorage.get().delete(companionFileExists);
+            companionFileExists = null;
+        }
+        final Uri df = downloadFileExists;
+        final Uri cf = companionFileExists;
+
+        if (downloadFileExists != null) {
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
+            final AlertDialog dialog = builder.setTitle(R.string.receivemapfile_intenttitle)
+                .setCancelable(true)
+                .setMessage(R.string.receivemapfile_alreadyexists)
+                .setPositiveButton(R.string.receivemapfile_option_overwrite, (dialog3, button3) -> {
+                    // for overwrite: delete existing files
+                    ContentStorage.get().delete(df);
+                    if (cf != null) {
+                        ContentStorage.get().delete(cf);
+                    }
+                    new CopyTask(this, isZipFile, nameWithinZip).execute();
+                })
+                .setNeutralButton(R.string.receivemapfile_option_differentname, (dialog2, button2) -> {
+                    // when overwriting generate new filename internally and check for collisions with companion file
+                    final List<String> existingFiles = new ArrayList<>();
+                    for (ContentStorage.FileInformation fi : files) {
+                        existingFiles.add(fi.name);
+                    }
+                    filename = FileUtils.createUniqueFilename(filename, existingFiles);
+                    // check for collision with companion file (would be a lone companion file, so delete silently)
+                    final Uri newCompanionFile = OfflineMapUtils.companionFileExists(files, filename);
+                    if (newCompanionFile != null) {
+                        ContentStorage.get().delete(newCompanionFile);
+                    }
+                    new CopyTask(this, isZipFile, nameWithinZip).execute();
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog4, which4) -> activity.finish())
+                .create();
+            dialog.setOwnerActivity(activity);
+            dialog.show();
+        } else {
+            new CopyTask(this, isZipFile, nameWithinZip).execute();
+        }
     }
 
     protected class CopyTask extends AsyncTaskWithProgressText<String, CopyStates> {
@@ -211,6 +264,10 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         @Override
         protected void onPostExecuteInternal(final CopyStates status) {
             final String result;
+            String fileinfo = filename;
+            if (fileinfo != null) {
+                fileinfo = fileinfo.substring(0, fileinfo.length() - downloader.forceExtension.length());
+            }
             switch (status) {
                 case SUCCESS:
                     result = String.format(getString(R.string.receivemapfile_success), fileinfo);

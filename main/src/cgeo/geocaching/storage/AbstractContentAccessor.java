@@ -51,23 +51,4 @@ abstract class AbstractContentAccessor {
         return "application/octet-stream";
     }
 
-
-
-    protected String createUniqueFilename(@NonNull final String requestedName, @NonNull final List<String> existingNames) {
-
-        //split in suffix and praefix
-        final int suffIdx = requestedName.lastIndexOf(".");
-        final String suffix = suffIdx >= 0 ? requestedName.substring(suffIdx) : "";
-        final String praefix = suffIdx >= 0 ? requestedName.substring(0, suffIdx) : requestedName;
-
-        String newPraefix = praefix;
-
-        int idx = 1;
-        while (existingNames.contains(newPraefix + suffix)) {
-            newPraefix = praefix + " (" + (idx++) + ")";
-        }
-
-        return newPraefix + suffix;
-    }
-
 }

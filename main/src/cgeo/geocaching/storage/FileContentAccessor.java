@@ -1,6 +1,7 @@
 package cgeo.geocaching.storage;
 
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.content.Context;
@@ -32,7 +33,7 @@ class FileContentAccessor extends AbstractContentAccessor {
         if (dir == null) {
             return null;
         }
-        final String fileName = createUniqueFilename(name, Arrays.asList(dir.list()));
+        final String fileName = FileUtils.createUniqueFilename(name, Arrays.asList(dir.list()));
         try {
             final File newFile = new File(dir, fileName);
             return newFile.createNewFile() ? Uri.fromFile(newFile) : null;

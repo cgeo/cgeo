@@ -383,6 +383,20 @@ public final class FileUtils {
         throw new IllegalStateException("Unable to generate a non-existing file name");
     }
 
+    public static String createUniqueFilename(@NonNull final String requestedName, @NonNull final List<String> existingNames) {
+        //split in suffix and praefix
+        final int suffIdx = requestedName.lastIndexOf(".");
+        final String suffix = suffIdx >= 0 ? requestedName.substring(suffIdx) : "";
+        final String praefix = suffIdx >= 0 ? requestedName.substring(0, suffIdx) : requestedName;
+
+        String newPraefix = praefix;
+        int idx = 1;
+        while (existingNames.contains(newPraefix + suffix)) {
+            newPraefix = praefix + " (" + (idx++) + ")";
+        }
+        return newPraefix + suffix;
+    }
+
     /**
      * This usage of this method indicates that the return value of File.delete() can safely be ignored.
      */

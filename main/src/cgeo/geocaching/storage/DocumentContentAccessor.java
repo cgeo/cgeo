@@ -2,6 +2,7 @@ package cgeo.geocaching.storage;
 
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Func1;
@@ -107,7 +108,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         if (folderUri == null) {
             return null;
         }
-        final String docName = createUniqueFilename(name, queryDir(folderUri, new String[]{ DocumentsContract.Document.COLUMN_DISPLAY_NAME }, c -> c.getString(0)));
+        final String docName = FileUtils.createUniqueFilename(name, queryDir(folderUri, new String[]{ DocumentsContract.Document.COLUMN_DISPLAY_NAME }, c -> c.getString(0)));
         try (ContextLogger cLog = new ContextLogger("DocumentFolderAccessor.create %s: %s", folder, name)) {
             return DocumentsContract.createDocument(getContext().getContentResolver(), folderUri, guessMimeTypeFor(docName), docName);
         }
