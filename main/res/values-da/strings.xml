@@ -1539,9 +1539,6 @@
     <string name="trackable_log_without_geocode">Du er ved at sende en logbesked uden en geokode. Det anbefales at du inkluderer en geokode. Vil du tilføje en geokode?</string>
     <string name="do_not_ask_me_again">Spørg mig ikke igen</string>
     <string name="geokrety_parsing_failed">Svar fra GeoKrety kunne ikke fortolkes.</string>
-    <string name="settings_map_direction">Vis retning</string>
-    <string name="settings_summary_map_direction">Vis pejlelinie til navigationsmål</string>
-    <string name="map_direction">Vis retning</string>
     <string name="command_move_caches_progress">Flytter cacher til liste %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Flyttede %d cache</item>
