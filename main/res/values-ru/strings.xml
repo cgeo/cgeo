@@ -1518,9 +1518,6 @@
     <string name="trackable_log_without_geocode">Вы собираетесь отправить запись без геокода. Необходимо указать геокод. Добавить его сейчас?</string>
     <string name="do_not_ask_me_again">Больше не спрашивать</string>
     <string name="geokrety_parsing_failed">Не удалось разобрать ответ от GeoKrety.org.</string>
-    <string name="settings_map_direction">Показать направление</string>
-    <string name="settings_summary_map_direction">Показать линию направления к цели навигации</string>
-    <string name="map_direction">Показать направление</string>
     <string name="command_move_caches_progress">Перемещение тайников в список %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Перемещен %d тайник</item>
