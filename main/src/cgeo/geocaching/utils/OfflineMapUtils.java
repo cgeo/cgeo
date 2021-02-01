@@ -117,6 +117,15 @@ public class OfflineMapUtils {
         return result;
     }
 
+    public static Uri companionFileExists(final List<ContentStorage.FileInformation> files, final String filename) {
+        final String lookFor = filename + INFOFILE_SUFFIX;
+        for (ContentStorage.FileInformation fi : files) {
+            if (fi.name.equals(lookFor)) {
+                return fi.uri;
+            }
+        }
+        return null;
+    }
 
     public static String getDisplayName(final String name) {
         // capitalize first letter + every first after a "-"
