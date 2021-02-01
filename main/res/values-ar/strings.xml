@@ -1175,9 +1175,6 @@
     <string name="trackable_log_without_geocode">أنت على وشك إرسال تسجيل الزيارة بدون كود المخبئ. يوصى بتعيينه. هل تريد إضافته الآن؟</string>
     <string name="do_not_ask_me_again">لا تسألني مرة أخرى</string>
     <string name="geokrety_parsing_failed">فشل في تحليل جواب GeoKrety.</string>
-    <string name="settings_map_direction">عرض الاتجاه</string>
-    <string name="settings_summary_map_direction">عرض خط الاتجاه لعمل الملاحة للهدف</string>
-    <string name="map_direction">عرض الاتجاه</string>
     <string name="command_move_caches_progress">نقل المخبآت إلى القائمة %1s</string>
     <string name="command_copy_caches_progress">نسخ المخبآت إلى القائمة %1s</string>
     <string name="command_delete_caches_progress">حذف المخبآت</string>
