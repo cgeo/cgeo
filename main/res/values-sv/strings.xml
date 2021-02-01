@@ -1542,9 +1542,6 @@
     <string name="trackable_log_without_geocode">Du kommer nu att skicka en logg utan en Geocode. Det rekommenderas att ange en. Vill du lägga till det nu?</string>
     <string name="do_not_ask_me_again">Fråga mig inte igen</string>
     <string name="geokrety_parsing_failed">Förstod inte svaret från GeoKrety.</string>
-    <string name="settings_map_direction">Visa riktning</string>
-    <string name="settings_summary_map_direction">Visa en riktningslinje till målet för navigeringen</string>
-    <string name="map_direction">Visa riktning</string>
     <string name="command_move_caches_progress">Flytta cacher till listan %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Flyttade %d cache</item>
