@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -230,8 +231,12 @@ public class ContentStorageActivityHelper {
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION |
             (folder == null || folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) |
             (folder != null ? Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION : 0));
-        final Uri realStartUri = startUri != null ? startUri : (folder != null ? folder.getUri() : null);
+        Uri realStartUri = startUri != null ? startUri : (folder != null ? folder.getUri() : null);
+
         if (realStartUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (UriUtils.isFileUri(realStartUri)) {
+                realStartUri = UriUtils.getPseudoTreeUri(realStartUri);
+            }
             // Field is only supported starting with SDK26
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, realStartUri);
         }

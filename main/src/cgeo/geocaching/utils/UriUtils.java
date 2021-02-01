@@ -32,6 +32,9 @@ public final class UriUtils {
     public static final String UNITTEST_VOLUME_ID = "TEST-1111-2222";
     public static final String UNITTEST_VOLUME_NAME = "TEST-SDCARD";
 
+    public static final String SCHEME_CONTENT = "content";
+    public static final String SCHEME_FILE = "file";
+
     private static final Map<String, String> VOLUME_MAP = getVolumeMap();
 
     private UriUtils() {
@@ -139,7 +142,7 @@ public final class UriUtils {
         }
         return volumeMap;
     }
-    
+
     /** Tries to extract the last path segment name of a given Uri, removing "/" and such */
     @Nullable
     public static String getLastPathSegment(final Uri uri) {
@@ -162,7 +165,7 @@ public final class UriUtils {
         if (uri == null) {
             return false;
         }
-        return "file".equals(uri.getScheme());
+        return SCHEME_FILE.equals(uri.getScheme());
     }
 
     /** Returns whether this Uri is a content Uri */
@@ -170,7 +173,7 @@ public final class UriUtils {
         if (uri == null) {
             return false;
         }
-        return "content".equals(uri.getScheme());
+        return SCHEME_CONTENT.equals(uri.getScheme());
     }
 
     /** if given Uri is a file uri, then the corresponding file is returned. Otherwise null is returned */
@@ -272,4 +275,42 @@ public final class UriUtils {
         return uriPerm.getUri() + " (" + Formatter.formatShortDateTime(uriPerm.getPersistedTime()) +
             "):" + (uriPerm.isReadPermission() ? "R" : "-") + (uriPerm.isWritePermission() ? "W" : "-");
     }
+
+
+    /**
+     * Returns a PSEUDO-Tree-Uri based on the given path. This URI can be used e.g. as EXTRA_INITIAL_URI when requesting access to a folder
+     * The returned URI might be OK but also could simply be bullshit, so non't use this function when the URI must always be valid!
+     *
+     * Note that the returned URI CAN'T and SHOULDN'T be used to access the directory.
+     *
+     * @param legacyDirectory file uri which points to the directory
+     */
+    public static Uri getPseudoTreeUri (final Uri legacyDirectory) {
+
+        // Separate each element of the File path
+        // File format: "/storage/XXXX-XXXX/sub-folder1/sub-folder2..../folder"
+        //  ele[0] = (empty)
+        //  ele[1] = not used (storage name)
+        //  ele[2] = storage number ("XXXX-XXXX" for external removable or "primary" for internal)
+        //  ele[3 to n] = folders
+        final String[] ele = legacyDirectory.getPath().replace("/emulated/0/", "/primary/").split(File.separator);
+
+        // Construct folders strings using SAF format
+        final StringBuilder folders = new StringBuilder();
+        if (ele.length > 3) {
+            folders.append(ele[3]);
+            for (int i = 4; i < ele.length; ++i) {
+                folders.append("%2F").append(ele[i]);
+            }
+        }
+        final String common = ele[2] + "%3A" + folders.toString();
+
+        // Construct TREE Uri
+        return new Uri.Builder()
+            .scheme(SCHEME_CONTENT)
+            .authority("com.android.externalstorage.documents")
+            .encodedPath("/tree/" + common + "/document/" + common)
+            .build();
+    }
+
 }
