@@ -1617,9 +1617,6 @@
     <string name="trackable_log_without_geocode">Chystáte sa odoslať log bez geokódu. Neodporúčame to. Chcete ho teraz pridať?</string>
     <string name="do_not_ask_me_again">Už sa nepýtať</string>
     <string name="geokrety_parsing_failed">Nepodarilo sa analyzovať odpoveď GeoKrety.</string>
-    <string name="settings_map_direction">Zobrazovať smer</string>
-    <string name="settings_summary_map_direction">Zobraziť smerovú čiaru k cieľu navigácie</string>
-    <string name="map_direction">Zobrazovať smer</string>
     <string name="command_move_caches_progress">Presúvanie skrýš do zoznamu %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Presunutá %d skrýša</item>
