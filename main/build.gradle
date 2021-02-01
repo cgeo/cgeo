@@ -307,7 +307,7 @@ dependencies {
     implementation "com.asamm:locus-api-android:0.9.23"
 
     // Mapsforge new version
-    def mapsforgeVersion = 'a623be6d9a'
+    def mapsforgeVersion = '0.15.0'
     implementation "com.github.mapsforge.mapsforge:mapsforge-core:$mapsforgeVersion"
     implementation "com.github.mapsforge.mapsforge:mapsforge-map:$mapsforgeVersion"
     implementation "com.github.mapsforge.mapsforge:mapsforge-map-android:$mapsforgeVersion"
