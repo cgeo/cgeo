@@ -729,8 +729,6 @@
     <string name="trackable_title_log_without_geocode">Geokóði ekki skilgreindur</string>
     <string name="do_not_ask_me_again">Ekki spyrja mig aftur</string>
     <string name="geokrety_parsing_failed">Gat ekki þáttað svarið frá GeoKrety.</string>
-    <string name="settings_map_direction">Sýna átt</string>
-    <string name="map_direction">Sýna átt</string>
     <string name="command_move_caches_progress">Færi kassa í listann %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Færði %d kassa</item>
