@@ -210,7 +210,7 @@ public final class Routing {
         // wanted to compare (gpx.substr(0,5) != "<?xml")
         // but this did not work, most likely because gpx is a Unicode string?
 
-        if (gpx.length() < 200) {
+        if (!gpx.startsWith("<?xml")) {
             Log.w("brouter returned an error message: " + gpx);
             return null;
         }
