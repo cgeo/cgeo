@@ -1198,9 +1198,6 @@
     <string name="trackable_log_without_geocode">Eşti pe cale să trimiţi o însemnare fără Geocod. Te încurajăm să setezi unul. Vrei să adaugi acum?</string>
     <string name="do_not_ask_me_again">Nu mă mai întreba</string>
     <string name="geokrety_parsing_failed">Răspunsul primit de la GeoKrety nu a putut fi interpretat.</string>
-    <string name="settings_map_direction">Arată direcţia</string>
-    <string name="settings_summary_map_direction">Arată o linie directă până la destinaţie</string>
-    <string name="map_direction">Arată direcţia</string>
     <string name="command_move_caches_progress">Mutare geocutii în lista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">O geocutie a fost mutată</item>
