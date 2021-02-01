@@ -1527,9 +1527,6 @@
     <string name="trackable_log_without_geocode">Ви збираєтеся надіслати журнал без Geocode. Він має бути налаштований. Хочете додати його зараз?</string>
     <string name="do_not_ask_me_again">не питайте мене ще раз</string>
     <string name="geokrety_parsing_failed">не питайте мене ще раз.</string>
-    <string name="settings_map_direction">показати напрямок</string>
-    <string name="settings_summary_map_direction">Показувати рядок навігації для напрямку</string>
-    <string name="map_direction">показати напрямок</string>
     <string name="command_move_caches_progress">Переміщення кешів список %1s</string>
     <string name="command_copy_caches_progress">Переміщення кешів список %1s</string>
     <string name="command_delete_caches_progress">Видалити кеш</string>
