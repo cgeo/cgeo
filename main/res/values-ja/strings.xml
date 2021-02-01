@@ -1636,9 +1636,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="trackable_log_without_geocode">ジオコードのないログを投稿しようとしています。それは設定することが奨励されています。今すぐ追加しますか?</string>
     <string name="do_not_ask_me_again">次回から表示しない</string>
     <string name="geokrety_parsing_failed">GeoKretyレスポンスを解析できませんでした</string>
-    <string name="settings_map_direction">方向を表示</string>
-    <string name="settings_summary_map_direction">ナビゲーションの目的地までの方向線を表示</string>
-    <string name="map_direction">方向を表示</string>
     <string name="command_move_caches_progress">リスト:%1sにキャッシュを移動中</string>
     <plurals name="command_move_caches_result">
         <item quantity="other">%d キャッシュを移動しました</item>
