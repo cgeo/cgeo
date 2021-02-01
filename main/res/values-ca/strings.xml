@@ -1611,9 +1611,6 @@
     <string name="trackable_log_without_geocode">Estàs a punt d\'enviar un registre sense un Geocodi. Voleu afegir-lo ara?</string>
     <string name="do_not_ask_me_again">No m\'ho tornis a preguntar</string>
     <string name="geokrety_parsing_failed">Error al processar la resposta de GeoKrety.</string>
-    <string name="settings_map_direction">Mostra la direcció</string>
-    <string name="settings_summary_map_direction">Mostra una línia de direcció a la navegació</string>
-    <string name="map_direction">Mostra la direcció</string>
     <string name="command_move_caches_progress">Movent catxés a la llista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d catxé mogut</item>
