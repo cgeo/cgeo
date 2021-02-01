@@ -1084,6 +1084,7 @@
     <string name="lowercase">kleine letters</string>
     <!-- editor dialog -->
     <!-- simple dir / file chooser -->
+    <string name="simple_dir_chooser_title">Map kiezen</string>
     <string name="simple_dir_chooser_current_path">Pad:</string>
     <string name="simple_dir_chooser_invalid_path">Ongeldig pad</string>
     <!-- gpx -->
@@ -1654,9 +1655,6 @@
     <string name="trackable_log_without_geocode">Je gaat een log zonder Geocode verzenden. Het wordt aanbevolen een Geocode in te stellen. Wil je nu een Geocode toevoegen?</string>
     <string name="do_not_ask_me_again">Vraag mij niet meer</string>
     <string name="geokrety_parsing_failed">Niet gelukt om het GeoKrety antwoord te verwerken.</string>
-    <string name="settings_map_direction">Toon richting</string>
-    <string name="settings_summary_map_direction">Toon een richtingslijn naar het navigatiedoel</string>
-    <string name="map_direction">Toon richting</string>
     <string name="command_move_caches_progress">Caches verplaatsen naar lijst %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d Cache verplaatst</item>
@@ -1817,8 +1815,12 @@
     <string name="downloadmap_checkforupdates_button">Op updates controleren</string>
     <string name="downloadmap_available_updates">Beschikbare updates</string>
     <string name="downloadmap_no_updates_found">Geen kaart updates gevonden</string>
+    <string name="downloadmap_directory">map</string>
     <string name="downloadmap_mapfile">kaart bestand</string>
+    <string name="downloadmap_retrieving_directory_data">Mapgegevens ophalen…</string>
     <string name="downloadmap_checking_for_updates">Controleren op updates…</string>
+    <string name="mapserver_mapsforge_info">Basis kaarten, geen kaart thema\'s nodig</string>
+    <string name="mapserver_openandromaps_info">Gedetailleerde kaarten, vereisen thema \"Elevate\"</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
@@ -1846,6 +1848,7 @@
     <string name="wizard_outro_error">Onvolledige configuratie\nNiet alle delen van c:geo zullen werken zoals verwacht!</string>
     <string name="wizard_permissions_title">App-machtigingen instellen</string>
     <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig op je apparaat om correct te werken.\nIk zal meer details uitleggen in de volgende stappen.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo heeft een lokale map nodig om gegevens zoals GPX-bestanden, back-ups en veldnotities op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.\nAls je c:geo van een vorige versie bijwerkt, selecteer dan de bestaande map \"cgeo\" op het hoofdniveau van uw apparaatopslag.</string>
     <string name="wizard_platforms_title">Services configureren</string>
     <string name="wizard_platforms_intro">Om geocaches met c:geo te vinden heb je een account nodig voor een geocaching service ondersteund door c:geo.\nSelecteer de gewenste service hieronder om in te loggen met je bestaande account of maak een nieuw account aan.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1861,5 +1864,6 @@
     <string name="wizard_status_title">Configuratie status</string>
     <string name="wizard_status_storage_permission">Opslag permissie</string>
     <string name="wizard_status_location_permission">Locatie permissie</string>
+    <string name="wizard_status_basefolder">Basismap</string>
     <string name="wizard_status_platform">Geocaching diensten</string>
 </resources>
