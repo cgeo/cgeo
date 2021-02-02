@@ -16,9 +16,11 @@ class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         final Intent intent;
-        if (Settings.getLastChangelogChecksum() == 0 || !ContentStorageActivityHelper.baseFolderIsSet()) {
+        final boolean firstInstall = Settings.getLastChangelogChecksum() == 0;
+        if (firstInstall || !ContentStorageActivityHelper.baseFolderIsSet()) {
             // new install or base folder missing => run installation wizard
             intent = new Intent(this, InstallWizardActivity.class);
+            intent.putExtra(InstallWizardActivity.BUNDLE_MIGRATION, !firstInstall);
         } else {
             // otherwise regular startup
             intent = new Intent(this, MainActivity.class);

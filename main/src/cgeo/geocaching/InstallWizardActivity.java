@@ -39,6 +39,7 @@ import androidx.core.content.ContextCompat;
 public class InstallWizardActivity extends AppCompatActivity {
 
     public static final String BUNDLE_RETURNING = "returning";
+    public static final String BUNDLE_MIGRATION = "migrationMode";
     private static final String BUNDLE_STEP = "step";
 
     private enum WizardStep {
@@ -51,6 +52,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private WizardStep step = WizardStep.WIZARD_START;
     private boolean returning = false;
+    private boolean migrationMode = false;
     private ContentStorageActivityHelper contentStorageActivityHelper = null;
 
     private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
@@ -78,8 +80,10 @@ public class InstallWizardActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             returning = savedInstanceState.getBoolean(BUNDLE_RETURNING);
             step = WizardStep.values()[savedInstanceState.getInt(BUNDLE_STEP)];
+            migrationMode = savedInstanceState.getBoolean(BUNDLE_MIGRATION);
         } else {
             returning = getIntent().getBooleanExtra(BUNDLE_RETURNING, false);
+            migrationMode = getIntent().getBooleanExtra(BUNDLE_MIGRATION, false);
         }
         setContentView(R.layout.install_wizard);
 
@@ -280,6 +284,8 @@ public class InstallWizardActivity extends AppCompatActivity {
             || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission(this)))
             || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission(this)))
             || (step == WizardStep.WIZARD_PERMISSIONS_BASEFOLDER && ContentStorageActivityHelper.baseFolderIsSet())
+            || (step == WizardStep.WIZARD_PLATFORMS && migrationMode)
+            || (step == WizardStep.WIZARD_ADVANCED && migrationMode)
             ;
     }
 
@@ -326,9 +332,8 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void requestBasefolder() {
-        gotoNext(); // callback seems to be called on "cancel" only? So we need to force a gotoNext() here instead of applying it as callback
         if (!ContentStorageActivityHelper.baseFolderIsSet()) {
-            getContentStorageHelper().selectPersistableFolder(PersistableFolder.BASE, null);
+            getContentStorageHelper().selectPersistableFolder(PersistableFolder.BASE, v -> gotoNext());
         }
     }
 
@@ -356,6 +361,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBoolean(BUNDLE_RETURNING, returning);
         savedInstanceState.putInt(BUNDLE_STEP, step.ordinal());
+        savedInstanceState.putBoolean(BUNDLE_MIGRATION, migrationMode);
     }
 
     @Override
