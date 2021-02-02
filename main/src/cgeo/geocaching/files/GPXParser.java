@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.tc.TerraCachingLogType;
 import cgeo.geocaching.connector.tc.TerraCachingType;
 import cgeo.geocaching.enumerations.CacheAttribute;
@@ -929,10 +930,13 @@ abstract class GPXParser extends FileParser {
     }
 
     private boolean isValidForImport() {
-        if (StringUtils.isBlank(cache.getGeocode())) {
+        final String geocode = cache.getGeocode();
+        if (StringUtils.isBlank(geocode)) {
             return false;
         }
-        if (cache.getCoords() == null) {
+
+        final boolean isInternal = InternalConnector.getInstance().canHandle(geocode);
+        if (cache.getCoords() == null && !isInternal) {
             return false;
         }
         final boolean valid = (type == null && subtype == null && sym == null)
