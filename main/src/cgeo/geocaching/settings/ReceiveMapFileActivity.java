@@ -2,7 +2,6 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -70,7 +69,6 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         MapDownloadUtils.checkMapDirectory(this, false, (folder, isWritable) -> {
             if (isWritable) {
                 boolean foundMapInZip = false;
-                //mapDirectory = Settings.getMapFileDirectory();
                 // test if ZIP file received
                 try (BufferedInputStream bis = new BufferedInputStream(getContentResolver().openInputStream(uri));
                     ZipInputStream zis = new ZipInputStream(bis)) {
@@ -140,7 +138,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         final Uri df = downloadFileExists;
         final Uri cf = companionFileExists;
 
-        if (downloadFileExists != null) {
+        if (df != null) {
             final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
             final AlertDialog dialog = builder.setTitle(R.string.receivemapfile_intenttitle)
                 .setCancelable(true)
@@ -154,13 +152,12 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     new CopyTask(this, isZipFile, nameWithinZip).execute();
                 })
                 .setNeutralButton(R.string.receivemapfile_option_differentname, (dialog2, button2) -> {
-                    // when overwriting generate new filename internally and check for collisions with companion file
+                    // when overwriting generate new filename internally and check for collisions with companion file (would be a lone companion file, so delete silently)
                     final List<String> existingFiles = new ArrayList<>();
                     for (ContentStorage.FileInformation fi : files) {
                         existingFiles.add(fi.name);
                     }
                     filename = FileUtils.createUniqueFilename(filename, existingFiles);
-                    // check for collision with companion file (would be a lone companion file, so delete silently)
                     final Uri newCompanionFile = OfflineMapUtils.companionFileExists(files, filename);
                     if (newCompanionFile != null) {
                         ContentStorage.get().delete(newCompanionFile);
@@ -231,8 +228,8 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                 } catch (IllegalArgumentException iae) {
                     Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
                 }
-                // update offline maps AFTER deleting source file. This handles the very special case when Map Folder = Download Folder
-                MapsforgeMapProvider.getInstance().updateOfflineMaps(outputUri);
+                // finalization AFTER deleting source file. This handles the very special case when Map Folder = Download Folder
+                downloader.onSuccessfulReceive(outputUri);
             } else {
                 ContentStorage.get().delete(outputUri);
                 status = CopyStates.CANCELLED;

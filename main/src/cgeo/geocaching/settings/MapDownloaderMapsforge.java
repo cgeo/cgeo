@@ -2,8 +2,6 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.OfflineMap;
-import cgeo.geocaching.storage.PersistableFolder;
-import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.net.Uri;
@@ -13,15 +11,15 @@ import androidx.annotation.NonNull;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class MapDownloaderMapsforge extends AbstractDownloader {
+public class MapDownloaderMapsforge extends AbstractMapDownloader {
 
     private static final Pattern PATTERN_MAP = Pattern.compile("alt=\"\\[ \\]\"><\\/td><td><a href=\"(([-a-z]+)\\.map)\">[-a-z]+\\.map<\\/a><\\/td><td align=\"right\">([-0-9]+)[ 0-9:]+<\\/td><td align=\"right\">([ 0-9\\.]+[KMG])<\\/td>");
     private static final Pattern PATTERN_DIR = Pattern.compile("alt=\"\\[DIR\\]\"><\\/td><td><a href=\"([-a-z]+\\/)");
     private static final Pattern PATTERN_UP = Pattern.compile("alt=\"\\[PARENTDIR\\]\"><\\/td><td><a href=\"((\\/[-a-zA-Z0-9\\.]+)+\\/)");
+    private static final MapDownloaderMapsforge INSTANCE = new MapDownloaderMapsforge();
 
     private MapDownloaderMapsforge() {
-        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_MAPSFORGE, R.string.mapserver_mapsforge_downloadurl, R.string.mapserver_mapsforge_name, R.string.mapserver_mapsforge_info, R.string.mapserver_mapsforge_projecturl, R.string.mapserver_mapsforge_likeiturl, PersistableFolder.OFFLINE_MAPS);
-        this.forceExtension = FileUtils.MAP_FILE_EXTENSION;
+        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_MAPSFORGE, R.string.mapserver_mapsforge_downloadurl, R.string.mapserver_mapsforge_name, R.string.mapserver_mapsforge_info, R.string.mapserver_mapsforge_projecturl, R.string.mapserver_mapsforge_likeiturl);
     }
 
     @Override
@@ -55,15 +53,7 @@ public class MapDownloaderMapsforge extends AbstractDownloader {
 
     @NonNull
     public static MapDownloaderMapsforge getInstance() {
-        return MapDownloaderMapsforge.Holder.INSTANCE;
-    }
-
-    /**
-     * initialization on demand holder pattern
-     */
-    private static class Holder {
-        @NonNull
-        private static final MapDownloaderMapsforge INSTANCE = new MapDownloaderMapsforge();
+        return INSTANCE;
     }
 }
 
