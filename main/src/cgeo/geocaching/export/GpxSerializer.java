@@ -1,6 +1,7 @@
 package cgeo.geocaching.export;
 
 import cgeo.geocaching.connector.gc.GCUtils;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
@@ -110,14 +111,16 @@ public final class GpxSerializer {
             if (cache == null) {
                 continue;
             }
+
+            final boolean isInternal = InternalConnector.getInstance().canHandle(cache.getGeocode());
             final Geopoint coords = cache.getCoords();
-            if (coords == null) {
+            if (coords == null && !isInternal) {
                 // Export would be invalid without coordinates.
                 continue;
             }
             gpx.startTag(NS_GPX, "wpt");
-            gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
-            gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
+            gpx.attribute("", "lat", Double.toString(coords == null ? 0 : coords.getLatitude()));
+            gpx.attribute("", "lon", Double.toString(coords == null ? 0 : coords.getLongitude()));
 
             final Date hiddenDate = cache.getHiddenDate();
             if (hiddenDate != null) {

@@ -184,6 +184,20 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         assertEqualTags(imported, exported, "groundspeak:date");
     }
 
+    public void testUserDefinedCacheEmpty() throws IOException, ParserException {
+        final String geocode = "ZZ1000";
+        try {
+            final int cacheResource = R.raw.zz1000;
+            final Geocache cache = loadCacheFromResource(cacheResource);
+            assertThat(cache.getCoords()).isNull();
+
+            final String gpxFromCache = getGPXFromCache(geocode);
+            assertThat(gpxFromCache).contains("<wpt lat=\"0.0\" lon=\"0.0\">");
+        } finally {
+            DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
+        }
+    }
+
     public void testWaypointEmpty() throws IOException, ParserException {
         final String geocode = "GC31J2H";
         try {
