@@ -1772,6 +1772,9 @@
     <string name="receivemapfile_intenttitle">Odbierz plik mapy</string>
     <string name="receivemapfile_error">Błąd podczas odbierania pliku mapy</string>
     <string name="receivemapfile_error_filenotfound_exception">Nie znaleziono pliku podczas odbierania pliku mapy.</string>
+    <string name="receivemapfile_alreadyexists">Plik o tej nazwie już istnieje. Nadpisać istniejący plik lub zapisać nowy plik pod inną nazwą?</string>
+    <string name="receivemapfile_option_overwrite">Nadpisz</string>
+    <string name="receivemapfile_option_differentname">Inna nazwa</string>
     <string name="receivemapfile_kb_copied">skopiowano %d kB</string>
     <string name="receivemapfile_cancelled">Transfer pliku mapy anulowany</string>
     <!-- Download map preference and menu entry -->
