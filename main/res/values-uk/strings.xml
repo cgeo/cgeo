@@ -1634,6 +1634,9 @@
     <string name="receivemapfile_intenttitle">Отримання файлу карти</string>
     <string name="receivemapfile_error">Помилка під час запису у файл</string>
     <string name="receivemapfile_error_filenotfound_exception">Помилка при отриманні файлу карти.</string>
+    <string name="receivemapfile_alreadyexists">Файл з такою назвою вже існує. Перезаписати наявний файл або зберегти новий файл?</string>
+    <string name="receivemapfile_option_overwrite">Перезаписати</string>
+    <string name="receivemapfile_option_differentname">Інша назва</string>
     <string name="receivemapfile_kb_copied">%d КБ скопійовано</string>
     <string name="receivemapfile_cancelled">Передачу файлів відмінено</string>
     <!-- Download map preference and menu entry -->
