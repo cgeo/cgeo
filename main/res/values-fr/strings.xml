@@ -1708,6 +1708,9 @@
     <string name="receivemapfile_intenttitle">Carte en cours de réception</string>
     <string name="receivemapfile_error">Erreur lors de la réception du fichier carte</string>
     <string name="receivemapfile_error_filenotfound_exception">Fichier introuvable lors de la réception du fichier de carte.</string>
+    <string name="receivemapfile_alreadyexists">Un fichier portant ce nom existe déjà. Écraser le fichier existant ou enregistrer le nouveau fichier sous un autre nom ?</string>
+    <string name="receivemapfile_option_overwrite">Écraser</string>
+    <string name="receivemapfile_option_differentname">Nouveau nom</string>
     <string name="receivemapfile_kb_copied">%d Ko copiés</string>
     <string name="receivemapfile_cancelled">Réception du fichier carte annulée</string>
     <!-- Download map preference and menu entry -->
