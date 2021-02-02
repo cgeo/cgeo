@@ -48,13 +48,6 @@
         app:showAsAction="ifRoom">
     </item>
     <item
-        android:id="@+id/menu_refresh"
-        android:icon="@drawable/ic_menu_refresh"
-        android:title="@string/cache_offline_refresh"
-        android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
         android:id="@+id/menu_share_from_popup"
         android:title="@string/cache_menu_share"
         android:visible="false">
