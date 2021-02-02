@@ -2,9 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.OfflineMap;
-import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
-import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -15,14 +13,14 @@ import androidx.annotation.NonNull;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class MapDownloaderOpenAndroMaps extends AbstractDownloader {
+public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
     private static final Pattern PATTERN_MAP = Pattern.compile("<a href=\"([A-Za-z0-9_-]+\\.zip)\">([A-Za-z0-9_-]+)\\.zip<\\/a>[ ]*([0-9]{2}-[A-Za-z]{3}-[0-9]{4}) [0-9]{2}:[0-9]{2}[ ]*([0-9]+)"); // 1:file name, 2:display name, 3:date DD-MMM-YYYY, 4:size (bytes)
     private static final Pattern PATTERN_DIR = Pattern.compile("<a href=\"([A-Z-a-z0-9]+\\/)\">([A-Za-z0-9]+)\\/<\\/a>");  // 1:file name, 2:display name
     private static final Pattern PATTERN_UP = Pattern.compile("<a href=\"(\\.\\.\\/)\">(\\.\\.)\\/<\\/a>"); // 1:relative dir, 2:..
+    private static final MapDownloaderOpenAndroMaps INSTANCE = new MapDownloaderOpenAndroMaps();
 
     private MapDownloaderOpenAndroMaps() {
-        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_OPENANDROMAPS, R.string.mapserver_openandromaps_downloadurl, R.string.mapserver_openandromaps_name, R.string.mapserver_openandromaps_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl, PersistableFolder.OFFLINE_MAPS);
-        this.forceExtension = FileUtils.MAP_FILE_EXTENSION;
+        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_OPENANDROMAPS, R.string.mapserver_openandromaps_downloadurl, R.string.mapserver_openandromaps_name, R.string.mapserver_openandromaps_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl);
     }
 
     @Override
@@ -56,14 +54,6 @@ public class MapDownloaderOpenAndroMaps extends AbstractDownloader {
 
     @NonNull
     public static MapDownloaderOpenAndroMaps getInstance() {
-        return MapDownloaderOpenAndroMaps.Holder.INSTANCE;
-    }
-
-    /**
-     * initialization on demand holder pattern
-     */
-    private static class Holder {
-        @NonNull
-        private static final MapDownloaderOpenAndroMaps INSTANCE = new MapDownloaderOpenAndroMaps();
+        return INSTANCE;
     }
 }

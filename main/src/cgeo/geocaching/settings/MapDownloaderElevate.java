@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 public class MapDownloaderElevate extends AbstractDownloader {
 
     private static final Pattern PATTERN_LAST_UPDATED_DATE = Pattern.compile("<a href=\"https:\\/\\/www\\.openandromaps\\.org\\/wp-content\\/users\\/tobias\\/version\\.txt\">[0-9]\\.[0-9]\\.[0-9]<\\/a><\\/strong>, ([0-9]{1,2})\\.([0-9]{1,2})\\.([0-9]{2}) ");
+    private static final MapDownloaderElevate INSTANCE = new MapDownloaderElevate();
 
     private MapDownloaderElevate() {
         super(OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_ELEVATE, R.string.mapserver_elevate_updatecheckurl, R.string.mapserver_elevate_name, R.string.mapserver_elevate_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl, PersistableFolder.OFFLINE_MAP_THEMES);
@@ -53,16 +54,14 @@ public class MapDownloaderElevate extends AbstractDownloader {
         return downloadPageUrl;
     }
 
-    @NonNull
-    public static MapDownloaderElevate getInstance() {
-        return MapDownloaderElevate.Holder.INSTANCE;
+    @Override
+    protected void onSuccessfulReceive(final Uri result) {
+        // @todo: Set downloaded theme as current theme
+        // requires SAF migration of themes to be implemented first
     }
 
-    /**
-     * initialization on demand holder pattern
-     */
-    private static class Holder {
-        @NonNull
-        private static final MapDownloaderElevate INSTANCE = new MapDownloaderElevate();
+    @NonNull
+    public static MapDownloaderElevate getInstance() {
+        return INSTANCE;
     }
 }

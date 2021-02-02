@@ -64,4 +64,9 @@ public abstract class AbstractDownloader {
         }
     }
 
+    // default action to be started after having received and copied the downloaded file successfully
+    protected void onSuccessfulReceive(final Uri result) {
+        // default: nothing to do
+    }
+
 }
