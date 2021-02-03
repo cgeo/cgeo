@@ -6,6 +6,7 @@ import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.MatcherWrapper;
 
+import android.app.Activity;
 import android.net.Uri;
 
 import androidx.annotation.StringRes;
@@ -67,6 +68,12 @@ public abstract class AbstractDownloader {
     // default action to be started after having received and copied the downloaded file successfully
     protected void onSuccessfulReceive(final Uri result) {
         // default: nothing to do
+    }
+
+    // default followup action on UI thread after having received and copied the downloaded file successfully
+    protected void onFollowup(final Activity activity, final Runnable callback) {
+        // default: just continue with callback
+        callback.run();
     }
 
 }
