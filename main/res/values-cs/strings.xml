@@ -1903,6 +1903,7 @@
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
     <string name="mapserver_mapsforge_info">Základní mapy, nejsou vyžadovány mapové motivy</string>
     <string name="mapserver_openandromaps_info">Podrobné mapy, vyžadují mapový motiv \"Elevate\"</string>
+    <string name="mapserver_elevate_info">Detailní motiv mapy</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
