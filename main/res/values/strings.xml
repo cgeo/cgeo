@@ -2053,6 +2053,8 @@
     <string name="downloadmap_mapfile">map file</string>
     <string name="downloadmap_retrieving_directory_data">Retrieving folder data…</string>
     <string name="downloadmap_checking_for_updates">Checking for updates…</string>
+    <string name="downloadmap_install_theme_title">Install theme file</string>
+    <string name="downloadmap_install_theme_info">Your downloaded map requires a special theme file. Do you want to download this as well?</string>
     <string name="mapserver_mapsforge_info">Basic maps, no map themes required</string>
     <string name="mapserver_openandromaps_info">Detailed maps, require map theme \"Elevate\"</string>
     <string name="mapserver_elevate_info">Detailed map theme</string>

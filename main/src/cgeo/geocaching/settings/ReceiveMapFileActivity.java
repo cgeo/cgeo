@@ -285,9 +285,13 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     result = getString(R.string.receivemapfile_error);
                     break;
             }
-            Dialogs.message(context, getString(R.string.receivemapfile_intenttitle), result, getString(android.R.string.ok), (dialog, button) -> finish());
+            Dialogs.message(context, getString(R.string.receivemapfile_intenttitle), result, getString(android.R.string.ok), (dialog, button) -> downloader.onFollowup(activity, ReceiveMapFileActivity.this::doFinish));
         }
 
+    }
+
+    private void doFinish() {
+        finish();
     }
 
 }
