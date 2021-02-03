@@ -821,6 +821,10 @@ public class Settings {
         return getInt(prefKeyId, getKeyInt(defaultValueKeyId));
     }
 
+    public static int getMapOsmThreads() {
+        return getBoolean(R.string.pref_map_osm_multithreaded, false) ? Math.max(1, getInt(R.string.pref_map_osm_threads, Math.min(Runtime.getRuntime().availableProcessors() + 1, 4))) : 1;
+    }
+
     public static int getCompactIconMode() {
         final String prefValue = getString(R.string.pref_compactIconMode, "");
         if (prefValue.equals(getKey(R.string.pref_compacticon_on))) {

@@ -806,6 +806,15 @@
                 app:defaultColor="@color/default_accuracycirclefillcolor"
                 app:showOpaquenessSlider="true" />
         </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/init_map_other"
+            android:layout="@layout/preference_category">
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_map_osm_multithreaded"
+                android:summary="@string/init_summary_map_osm_multithreaded"
+                android:title="@string/init_map_osm_multithreaded" />
+        </PreferenceCategory>
     </PreferenceScreen>
 
     <PreferenceScreen
