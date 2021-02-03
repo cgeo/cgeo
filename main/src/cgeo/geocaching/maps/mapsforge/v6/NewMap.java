@@ -231,6 +231,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         this.sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
+        // Support for multi-threaded map painting
+        Parameters.NUMBER_OF_THREADS = Settings.getMapOsmThreads();
+        Log.i("OSM #threads=" + Parameters.NUMBER_OF_THREADS);
+
         // Use fast parent tile rendering to increase performance when zooming in
         Parameters.PARENT_TILES_RENDERING = Parameters.ParentTilesRendering.SPEED;
 
