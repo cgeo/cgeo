@@ -1901,6 +1901,8 @@
     <string name="downloadmap_mapfile">Mapový soubor</string>
     <string name="downloadmap_retrieving_directory_data">Načítání údajů ze složky…</string>
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
+    <string name="downloadmap_install_theme_title">Nainstalovat soubor motivu</string>
+    <string name="downloadmap_install_theme_info">Stažená mapa vyžaduje speciální soubor motivu. Chcete ho stáhnout?</string>
     <string name="mapserver_mapsforge_info">Základní mapy, nejsou vyžadovány mapové motivy</string>
     <string name="mapserver_openandromaps_info">Podrobné mapy, vyžadují mapový motiv \"Elevate\"</string>
     <string name="mapserver_elevate_info">Detailní motiv mapy</string>
