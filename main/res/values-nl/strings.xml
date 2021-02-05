@@ -801,14 +801,9 @@
     <string name="sendToCgeo_no_registration">Het is c:geo niet gelukt om de caches te downloaden. De registratie van send2cgeo is verlopen. Registreer s.v.p. in de instellingen.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Map %s wijzigen</string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>De map %s is momenteel ingesteld op \'%s\' en bevat %d bestand(en) en %d submap(pen).</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Je kunt ervoor kiezen om de standaard map \'%s\' of een door gebruiker gedefinieerde map te kiezen</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Selecteer of c:geo je inhoud moet kopiëren/verplaatsen naar de nieuwe map:</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Niets doen</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Alle inhoud kopiëren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Alle inhoud verplaatsen</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Map %s: Kopiëren/Verplaatsen klaar</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Het kopiëren/verplaatsen heeft als resultaat: %s. %d bestand(en) en %d mappen werden gekopieerd/verplaatst.</p><p>Tik op \'ok\' om de map wijziging te voltooien.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Mapselectie afbreken, map is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Map ingesteld op \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Afbreken bestand selectie</string>
@@ -834,6 +829,7 @@
     <string name="persistablefolder_backup">Back-up</string>
     <string name="persistablefolder_logfiles">Logbestanden</string>
     <string name="persistablefolder_fieldnotes">Veld notities</string>
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">c:geo Autoriseren</string>
     <string name="auth_check">Controleer authenticatie</string>
@@ -1853,6 +1849,8 @@
     <string name="downloadmap_mapfile">kaart bestand</string>
     <string name="downloadmap_retrieving_directory_data">Mapgegevens ophalen…</string>
     <string name="downloadmap_checking_for_updates">Controleren op updates…</string>
+    <string name="downloadmap_install_theme_title">Themabestand installeren</string>
+    <string name="downloadmap_install_theme_info">Je gedownloade kaart vereist een speciaal themabestand. Wil je deze ook downloaden?</string>
     <string name="mapserver_mapsforge_info">Basis kaarten, geen kaart thema\'s nodig</string>
     <string name="mapserver_openandromaps_info">Gedetailleerde kaarten, vereisen thema \"Elevate\"</string>
     <string name="mapserver_elevate_info">Gedetailleerd kaartthema</string>
@@ -1878,7 +1876,7 @@
     <string name="finish">Voltooien</string>
     <string name="wizard_welcome_title">Welkom bij c:geo</string>
     <string name="wizard_intro">Er zijn maar een paar stappen nodig om c:geo te configureren en je op weg te helpen. Zal ik je daarmee helpen?</string>
-    <string name="wizard_intro2">Welkom terug bij de configuratiewizard. Je c:geo setup is nog niet klaar, zal ik je helpen om het te voltooien en je op weg te helpen? Het is maar een paar stappen.</string>
+    <string name="wizard_intro_returning">Welkom terug bij de configuratiewizard. Je c:geo setup is nog niet klaar, zal ik je helpen om het te voltooien en je op weg te helpen? Het is maar een paar stappen.</string>
     <string name="wizard_outro_ok">Bedankt voor het configureren van c:geo.\nVeel plezier!</string>
     <string name="wizard_outro_error">Onvolledige configuratie\nNiet alle delen van c:geo zullen werken zoals verwacht!</string>
     <string name="wizard_permissions_title">App-machtigingen instellen</string>
