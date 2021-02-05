@@ -760,6 +760,7 @@
     <string name="sendToCgeo_no_registration">c: geo не вдалося завантажити кеші. Термін реєстрації на send2cgeo закінчився. Будь ласка, зареєструйтесь у налаштуваннях.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Авторизувати c:geo</string>
     <string name="auth_check">Перевірте автентичність</string>
@@ -1527,9 +1528,6 @@
     <string name="trackable_log_without_geocode">Ви збираєтеся надіслати журнал без Geocode. Він має бути налаштований. Хочете додати його зараз?</string>
     <string name="do_not_ask_me_again">не питайте мене ще раз</string>
     <string name="geokrety_parsing_failed">не питайте мене ще раз.</string>
-    <string name="settings_map_direction">показати напрямок</string>
-    <string name="settings_summary_map_direction">Показувати рядок навігації для напрямку</string>
-    <string name="map_direction">показати напрямок</string>
     <string name="command_move_caches_progress">Переміщення кешів список %1s</string>
     <string name="command_copy_caches_progress">Переміщення кешів список %1s</string>
     <string name="command_delete_caches_progress">Видалити кеш</string>
@@ -1637,6 +1635,9 @@
     <string name="receivemapfile_intenttitle">Отримання файлу карти</string>
     <string name="receivemapfile_error">Помилка під час запису у файл</string>
     <string name="receivemapfile_error_filenotfound_exception">Помилка при отриманні файлу карти.</string>
+    <string name="receivemapfile_alreadyexists">Файл з такою назвою вже існує. Перезаписати наявний файл або зберегти новий файл?</string>
+    <string name="receivemapfile_option_overwrite">Перезаписати</string>
+    <string name="receivemapfile_option_differentname">Інша назва</string>
     <string name="receivemapfile_kb_copied">%d КБ скопійовано</string>
     <string name="receivemapfile_cancelled">Передачу файлів відмінено</string>
     <!-- Download map preference and menu entry -->

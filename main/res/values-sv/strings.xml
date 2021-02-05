@@ -740,6 +740,7 @@
     <string name="sendToCgeo_no_registration">c:geo misslyckades med att hämta cacher. Registreringen för send2cgeo har upphört att gälla. Vänligen registrera dig på nytt i inställningarna.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Koppla c:geo mot Twitter</string>
     <string name="auth_check">Kolla autentisering</string>
@@ -1542,9 +1543,6 @@
     <string name="trackable_log_without_geocode">Du kommer nu att skicka en logg utan en Geocode. Det rekommenderas att ange en. Vill du lägga till det nu?</string>
     <string name="do_not_ask_me_again">Fråga mig inte igen</string>
     <string name="geokrety_parsing_failed">Förstod inte svaret från GeoKrety.</string>
-    <string name="settings_map_direction">Visa riktning</string>
-    <string name="settings_summary_map_direction">Visa en riktningslinje till målet för navigeringen</string>
-    <string name="map_direction">Visa riktning</string>
     <string name="command_move_caches_progress">Flytta cacher till listan %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Flyttade %d cache</item>
@@ -1674,6 +1672,9 @@
     <string name="receivemapfile_intenttitle">Ta emot kartfil</string>
     <string name="receivemapfile_error">Fel uppstod när kartfilen togs emot</string>
     <string name="receivemapfile_error_filenotfound_exception">Filen hittades inte vid mottagandet av kartfilen.</string>
+    <string name="receivemapfile_alreadyexists">En kartfil med detta namn finns redan. Ska filen skrivas över eller sparas med ett annat namn?</string>
+    <string name="receivemapfile_option_overwrite">Skriv över</string>
+    <string name="receivemapfile_option_differentname">Annat namn</string>
     <string name="receivemapfile_kb_copied">%d kB kopierat</string>
     <string name="receivemapfile_cancelled">Kartöverföring avbruten</string>
     <!-- Download map preference and menu entry -->

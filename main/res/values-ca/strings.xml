@@ -25,7 +25,6 @@
     <string name="webcam">Webcam</string>
     <string name="virtual">Virtual</string>
     <string name="wherigo">Wherigo</string>
-    <string name="communceleb">Trobada</string>
     <string name="ape">Projecte APE</string>
     <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Trobada Geocaching HQ</string>
@@ -776,6 +775,7 @@
     <string name="sendToCgeo_no_registration">S\'ha produït un error descarregant els catxés. El registre a send2cgeo ha caducat. Registreu-vos de nou a la configuració.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Autoritza al c:geo</string>
     <string name="auth_check">Comprova l\'autenticació</string>
@@ -1611,9 +1611,6 @@
     <string name="trackable_log_without_geocode">Estàs a punt d\'enviar un registre sense un Geocodi. Voleu afegir-lo ara?</string>
     <string name="do_not_ask_me_again">No m\'ho tornis a preguntar</string>
     <string name="geokrety_parsing_failed">Error al processar la resposta de GeoKrety.</string>
-    <string name="settings_map_direction">Mostra la direcció</string>
-    <string name="settings_summary_map_direction">Mostra una línia de direcció a la navegació</string>
-    <string name="map_direction">Mostra la direcció</string>
     <string name="command_move_caches_progress">Movent catxés a la llista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d catxé mogut</item>
@@ -1754,6 +1751,9 @@
     <string name="receivemapfile_intenttitle">Rebre un fitxer de mapa</string>
     <string name="receivemapfile_error">Error en rebre el fitxer del mapa</string>
     <string name="receivemapfile_error_filenotfound_exception">No s\'ha trobat el fitxer en rebre el fitxer del mapa.</string>
+    <string name="receivemapfile_alreadyexists">Ja existeix un fitxer amb aquest nom. Voleu sobreescriure el fitxer existent o desar-lo amb un nom diferent?</string>
+    <string name="receivemapfile_option_overwrite">Sobreescriu</string>
+    <string name="receivemapfile_option_differentname">Nom diferent</string>
     <string name="receivemapfile_kb_copied">%d kB copiats</string>
     <string name="receivemapfile_cancelled">S\'ha cancel·lat la transferència de fitxers del mapa</string>
     <!-- Download map preference and menu entry -->
@@ -1792,7 +1792,7 @@
     <string name="finish">Acabar</string>
     <string name="wizard_welcome_title">Benvingut a c:geo</string>
     <string name="wizard_intro">Només cal fer uns quants passos per configurar c: geo i posar-vos en marxa. T\'ajudo?</string>
-    <string name="wizard_intro2">Benvingut de nou a l\'assistent de configuració. La vostra configuració de c: geo encara no està acabada. T\'ajudo a completar-la? Són només uns quants passos.</string>
+    <string name="wizard_intro_returning">Benvingut de nou a l\'assistent de configuració. La vostra configuració de c: geo encara no està acabada. T\'ajudo a completar-la? Són només uns quants passos.</string>
     <string name="wizard_outro_ok">Gràcies per configurar c:geo.\nDivertiu-vos!</string>
     <string name="wizard_outro_error">Configuració incompleta\nNo totes les parts de c: geo funcionaran correctament!.</string>
     <string name="wizard_permissions_title">Definiu els permisos de l\'app</string>

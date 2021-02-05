@@ -707,6 +707,7 @@
     <string name="sendToCgeo_no_registration">Не удалось загрузить тайники. Срок регистрации на send2cgeo истек. Пожалуйста, зарегистрируйтесь в настройках.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Авторизовать c:geo</string>
     <string name="auth_check">Проверить аутентификацию</string>
@@ -1518,9 +1519,6 @@
     <string name="trackable_log_without_geocode">Вы собираетесь отправить запись без геокода. Необходимо указать геокод. Добавить его сейчас?</string>
     <string name="do_not_ask_me_again">Больше не спрашивать</string>
     <string name="geokrety_parsing_failed">Не удалось разобрать ответ от GeoKrety.org.</string>
-    <string name="settings_map_direction">Показать направление</string>
-    <string name="settings_summary_map_direction">Показать линию направления к цели навигации</string>
-    <string name="map_direction">Показать направление</string>
     <string name="command_move_caches_progress">Перемещение тайников в список %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Перемещен %d тайник</item>
@@ -1663,6 +1661,9 @@
     <string name="receivemapfile_intenttitle">Получить файл карты</string>
     <string name="receivemapfile_error">Ошибка при получении файла карты</string>
     <string name="receivemapfile_error_filenotfound_exception">Файл не найден: ошибка при получении файла карты.</string>
+    <string name="receivemapfile_alreadyexists">Файл с таким именем уже существует. Перезаписать существующий файл или сохранить новый файл под другим именем?</string>
+    <string name="receivemapfile_option_overwrite">Перезаписать</string>
+    <string name="receivemapfile_option_differentname">Другое имя</string>
     <string name="receivemapfile_kb_copied">%d КБ скопировано</string>
     <string name="receivemapfile_cancelled">Передача файла карты отменена</string>
     <!-- Download map preference and menu entry -->

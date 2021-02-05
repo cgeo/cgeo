@@ -766,6 +766,7 @@
     <string name="sendToCgeo_no_registration">c:geo nie może pobrać skrzynek. Rejestracja do send2cgeo wygasła. Proszę zarejestrować urządzenie w Ustawieniach.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Autoryzacja c:geo</string>
     <string name="auth_check">Sprawdź uwierzytelnienie</string>
@@ -1618,9 +1619,6 @@
     <string name="trackable_log_without_geocode">Masz zamiar wysłać wpis bez Geokodu, ale nie jest to rekomendowane. Czy chciałbyś go dodać teraz?</string>
     <string name="do_not_ask_me_again">Nie pytaj ponownie</string>
     <string name="geokrety_parsing_failed">Nie udało się odczytać odpowiedzi GeoKrety.</string>
-    <string name="settings_map_direction">Pokazuj kierunek</string>
-    <string name="settings_summary_map_direction">Pokazuj linię kierunku do punktu nawigacyjnego</string>
-    <string name="map_direction">Pokaż kierunek</string>
     <string name="command_move_caches_progress">Przenoszę skrzynki do listy %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Przeniesiono %d skrzynkę</item>
@@ -1775,6 +1773,9 @@
     <string name="receivemapfile_intenttitle">Odbierz plik mapy</string>
     <string name="receivemapfile_error">Błąd podczas odbierania pliku mapy</string>
     <string name="receivemapfile_error_filenotfound_exception">Nie znaleziono pliku podczas odbierania pliku mapy.</string>
+    <string name="receivemapfile_alreadyexists">Plik o tej nazwie już istnieje. Nadpisać istniejący plik lub zapisać nowy plik pod inną nazwą?</string>
+    <string name="receivemapfile_option_overwrite">Nadpisz</string>
+    <string name="receivemapfile_option_differentname">Inna nazwa</string>
     <string name="receivemapfile_kb_copied">skopiowano %d kB</string>
     <string name="receivemapfile_cancelled">Transfer pliku mapy anulowany</string>
     <!-- Download map preference and menu entry -->
@@ -1814,7 +1815,7 @@
     <string name="finish">Zakończ</string>
     <string name="wizard_welcome_title">Witamy w c:geo</string>
     <string name="wizard_intro">Wystarczy kilka kroków, aby skonfigurować c: geo i zacząć działać. Mam Ci w tym pomóc?</string>
-    <string name="wizard_intro2">Witamy ponownie w kreatorze konfiguracji. Twoja konfiguracja c: geo nie jest jeszcze zakończona. Czy mogę pomóc Ci ją ukończyć i zacząć? To tylko kilka kroków.</string>
+    <string name="wizard_intro_returning">Witamy ponownie w kreatorze konfiguracji. Twoja konfiguracja c: geo nie jest jeszcze zakończona. Czy mogę pomóc Ci ją ukończyć i zacząć? To tylko kilka kroków.</string>
     <string name="wizard_outro_ok">Dziękujemy za skonfigurowanie c:geo.\nBaw się dobrze!</string>
     <string name="wizard_outro_error">Niekompletna konfiguracja\nNie wszystkie części c:geo będą działać zgodnie z oczekiwaniami!</string>
     <string name="wizard_permissions_title">Ustaw uprawnienia aplikacji</string>

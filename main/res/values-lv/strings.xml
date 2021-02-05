@@ -683,6 +683,7 @@
     <string name="sendToCgeo_no_registration">c:geo neizdevās lejupielādēt slēpņus. Reģistrēšanās noilgums iekš Send2cgeo ir iestajies. Lūdzu reģistrējieties iestatījumos.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Atļaut c:geo</string>
     <string name="auth_check">Pārbaudi autentifikāciju</string>
@@ -1435,9 +1436,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="trackable_log_without_geocode">Tiks nosūtīts ieraksts bez Geokoda. Ieteicams to ievadīt. Vai pievienot kodu?</string>
     <string name="do_not_ask_me_again">Nevaicāt vairs</string>
     <string name="geokrety_parsing_failed">Neizdevās apstrādāt GeoKrety atbildi.</string>
-    <string name="settings_map_direction">Rādīt virzienu</string>
-    <string name="settings_summary_map_direction">Rādīt virziena līniju uz mērķi</string>
-    <string name="map_direction">Rādīt virzienu</string>
     <string name="command_move_caches_progress">Slēpņu pārvietošana uz sarakstu %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="zero">Pārvietots %d slēpnis</item>

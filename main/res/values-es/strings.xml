@@ -693,6 +693,7 @@
     <string name="sendToCgeo_no_registration">c:geo no ha podido descargar cachés. El registro en send2cgeo ha expirado. Por favor registrate en ajustes.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_check">Comprobar autenticación</string>
@@ -1417,9 +1418,6 @@ Nombre de archivo:%2$s</string>
     <string name="trackable_log_without_geocode">Estás a punto de enviar un registro sin Geocódigo. Recomendamos establecer uno. ¿Quieres añadirlo ahora?</string>
     <string name="do_not_ask_me_again">No preguntar de nuevo</string>
     <string name="geokrety_parsing_failed">Error al procesar la respuesta de GeoKrety.</string>
-    <string name="settings_map_direction">Mostrar dirección</string>
-    <string name="settings_summary_map_direction">Muestra una línea de dirección al objetivo de la navegación</string>
-    <string name="map_direction">Mostrar dirección</string>
     <string name="command_move_caches_progress">Moviendo cachés a la lista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d caché movido</item>

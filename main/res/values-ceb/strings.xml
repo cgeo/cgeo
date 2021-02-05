@@ -527,6 +527,7 @@
     <string name="sendToCgeo_no_registration">napakyas ang c:geo sa pag-download sa mga caches. Ang pagparehistro para sa send2cgeo kay natapos. Palihug parehistro sa mga kahimtangan.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">I-awtorisar ang c:geo</string>
     <string name="auth_check">I-check ang pagpamatuod</string>
@@ -1162,9 +1163,6 @@
     <string name="trackable_log_without_geocode">Ikaw paingon nga na mo padala og log nga walay Geocode. Gidasig na mag plastado og usa. Ganahan ba ka na magpuno karon?</string>
     <string name="do_not_ask_me_again">Ayaw pangutana pag balik</string>
     <string name="geokrety_parsing_failed">Napakyas sa pagtunga sa GeoKrety nga tubag.</string>
-    <string name="settings_map_direction">Ipakita ang direksyon</string>
-    <string name="settings_summary_map_direction">Magpakita og linya sa direksyon adto sa tunong nga nabigasyon</string>
-    <string name="map_direction">Ipakita ang direksyon</string>
     <string name="command_move_caches_progress">I-iswag ang mga caches adto sa lista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Na-iswag %d na mga caches</item>

@@ -756,6 +756,7 @@
     <string name="sendToCgeo_no_registration">c:geo kunne ikke laste ned cacher. Registrering for send2cgeo har utløpt. Registrer deg på nytt i innstillingene.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Godkjenn c:geo</string>
     <string name="auth_check">Kontroller brukernavn/passord</string>
@@ -1577,9 +1578,6 @@
     <string name="trackable_log_without_geocode">Du prøver å sende en logg uten en Geokode. Du oppfordres til å angi en. Vil du legge til en Geokode nå?</string>
     <string name="do_not_ask_me_again">Ikke spør meg igjen</string>
     <string name="geokrety_parsing_failed">Kunne ikke analysere GeoKrety svar.</string>
-    <string name="settings_map_direction">Vis retning</string>
-    <string name="settings_summary_map_direction">Vis retning som en linje mot målet</string>
-    <string name="map_direction">Vis retning</string>
     <string name="command_move_caches_progress">Flytter cacher til listen %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Flyttet %d cache</item>
@@ -1710,6 +1708,9 @@
     <string name="receivemapfile_intenttitle">Motta kartfil</string>
     <string name="receivemapfile_error">Feil under mottak av kartfil</string>
     <string name="receivemapfile_error_filenotfound_exception">\"Fil ikke funnet\"-feil under henting av kartfil.</string>
+    <string name="receivemapfile_alreadyexists">En fil med dette navnet eksisterer allerede. Vil du overskrive den eksisterende filen eller eller lagre den nye filen under et annet navn?</string>
+    <string name="receivemapfile_option_overwrite">Overskriv</string>
+    <string name="receivemapfile_option_differentname">Annet navn</string>
     <string name="receivemapfile_kb_copied">%d kB kopiert</string>
     <string name="receivemapfile_cancelled">Kartfiloverføring avbrutt</string>
     <!-- Download map preference and menu entry -->
