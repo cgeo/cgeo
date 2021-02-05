@@ -795,6 +795,7 @@
     <string name="persistablefolder_backup">Varmuuskopiointi</string>
     <string name="persistablefolder_logfiles">Lokitiedostot</string>
     <string name="persistablefolder_fieldnotes">Kenttämerkinnät</string>
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Valtuuta c:geo</string>
     <string name="auth_check">Tarkista todennus</string>
@@ -1824,7 +1825,7 @@
     <string name="finish">Valmis</string>
     <string name="wizard_welcome_title">Tervetuloa c:geoon</string>
     <string name="wizard_intro">Tarvitset vain muutaman vaiheen c:geon määritykseen ja olet valmis lähtemään. Haluatko apua sen kanssa?</string>
-    <string name="wizard_intro2">Tervetuloa takaisin määritystoimintoon. c:geon määrityksesi ei ole vielä valmis, haluaisitko, että auttaisin sinua saattamaan sen loppuun ja pääset kätköilemään? Siinä menee vain muutama vaihe.</string>
+    <string name="wizard_intro_returning">Tervetuloa takaisin määritystoimintoon. c:geon määrityksesi ei ole vielä valmis, haluaisitko, että auttaisin sinua saattamaan sen loppuun ja pääset kätköilemään? Siinä menee vain muutama vaihe.</string>
     <string name="wizard_outro_ok">Kiitos c:geon määrittämisestä.\nPidä hauskaa!</string>
     <string name="wizard_outro_error">Määritystä ei ole suoritettu!\nKaikki c:geon osat eivät toimi odotetulla tavalla!</string>
     <string name="wizard_permissions_title">Aseta sovelluksen käyttöluvat</string>
