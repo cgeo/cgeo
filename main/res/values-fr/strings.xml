@@ -752,6 +752,7 @@
     <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'enregistrement sur send2cgeo a expiré. Merci de vous réenregistrer en allant dans les Paramètres.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">autorisation de c:geo</string>
     <string name="auth_check">Vérifier l\'authentification</string>
