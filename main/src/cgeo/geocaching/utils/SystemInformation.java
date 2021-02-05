@@ -34,7 +34,6 @@ import androidx.core.content.ContextCompat;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import com.google.android.gms.common.GoogleApiAvailability;
 import org.apache.commons.collections4.CollectionUtils;
@@ -60,52 +59,70 @@ public final class SystemInformation {
         final String hideCaches = (Settings.isExcludeMyCaches() ? "own/found " : "") + (Settings.isExcludeDisabledCaches() ? "disabled " : "") + (Settings.isExcludeArchivedCaches() ? "archived" : "");
         final String hideWaypoints = (Settings.isExcludeWpOriginal() ? "original " : "") + (Settings.isExcludeWpParking() ? "parking " : "") + (Settings.isExcludeWpVisited() ? "visited" : "");
         final StringBuilder body = new StringBuilder("--- System information ---")
-                .append("\nDevice: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
-                .append("\nAndroid version: ").append(VERSION.RELEASE)
-                .append("\nAndroid build: ").append(Build.DISPLAY)
-                .append("\nc:geo version: ").append(Version.getVersionName(context));
+            .append("\nc:geo version: ").append(Version.getVersionName(context)).append("\n")
+
+            .append("\nDevice:")
+            .append("\n-------")
+            .append("\n- Device type: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
+            .append("\n- Android version: ").append(VERSION.RELEASE)
+            .append("\n- Android build: ").append(Build.DISPLAY)
+            .append("\n- Sailfish OS detected: ").append(EnvironmentUtils.isSailfishOs());
         appendGooglePlayServicesVersion(context, body);
-        body
-            .append("\nLow power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
-            .append("\nCompass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
-            .append("\nRotation vector sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
-            .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
-            .append("\nMagnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))
-            .append("\nDirection sensor used: ").append(usedDirectionSensor)
-            .append("\nHide caches: ").append(hideCaches.isEmpty() ? "-" : hideCaches)
-            .append("\nHide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints)
-            .append("\nHW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
+        body.append("\n- HW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
             .append(" (").append(Settings.useHardwareAcceleration() == HwAccel.hwAccelShouldBeEnabled() ? "default state" : "manually changed").append(')')
-            .append("\nSystem language: ").append(Locale.getDefault()).append(" / user-defined language: ").append(Settings.getUserLanguage())
-            .append("\nSystem date format: ").append(Formatter.getShortDateFormat())
-            .append("\nDebug mode active: ").append(Settings.isDebug() ? "yes" : "no");
-        appendDirectory(body, "\nSystem internal c:geo dir: ", LocalStorage.getInternalCgeoDirectory());
-        appendDirectory(body, "\nUser storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
-        appendDirectory(body, "\nGeocache data: ", LocalStorage.getGeocacheDataDirectory());
+
+            .append("\n")
+            .append("\nSensor and location:")
+            .append("\n-------")
+            .append("\n- Low power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
+            .append("\n- Compass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
+            .append("\n- Rotation vector sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
+            .append("\n- Orientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
+            .append("\n- Magnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))
+            .append("\n- Direction sensor used: ").append(usedDirectionSensor)
+
+            .append("\n")
+            .append("\nProgram settings:")
+            .append("\n-------")
+            .append("\n- Hide caches: ").append(hideCaches.isEmpty() ? "-" : hideCaches)
+            .append("\n- Hide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints)
+            .append("\n- Set language: ").append(Settings.getUserLanguage())
+            .append("\n- System date format: ").append(Formatter.getShortDateFormat())
+            .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
+            .append("\n- Live map mode: ").append(Settings.isLiveMap())
+            .append("\n- Global filter: ").append(Settings.getCacheType().pattern)
+            .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
+
+            .append("\n")
+            .append("\nServices:")
+            .append("\n-------");
+        appendConnectors(body);
+        if (GCConnector.getInstance().isActive()) {
+            body.append("\n- Geocaching.com date format: ").append(Settings.getGcCustomDate());
+        }
+        body.append("\n- BRouter connection available: ").append(Routing.isAvailable());
+        appendAddons(body);
+
+        body.append("\n")
+            .append("\nPermissions & paths:")
+            .append("\n-------");
+        appendPermissions(context, body);
+        appendDirectory(body, "\n- System internal c:geo dir: ", LocalStorage.getInternalCgeoDirectory());
+        appendDirectory(body, "\n- User storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
+        appendDirectory(body, "\n- Geocache data: ", LocalStorage.getGeocacheDataDirectory());
         appendPublicFolders(body);
+        body.append("\n- Map render theme path: ").append(Settings.getCustomRenderThemeFilePath());
         appendPersistedDocumentUris(body);
         appendPersistedUriPermission(body, context);
         appendDatabase(body);
-        body
-                .append("\nLast backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
-                .append("\nMap render theme path: ").append(Settings.getCustomRenderThemeFilePath())
-                .append("\nLive map mode: ").append(Settings.isLiveMap())
-                .append("\nGlobal filter: ").append(Settings.getCacheType().pattern)
-                .append("\nSailfish OS detected: ").append(EnvironmentUtils.isSailfishOs());
-        appendPermissions(context, body);
-        appendConnectors(body);
-        if (GCConnector.getInstance().isActive()) {
-            body.append("\nGeocaching.com date format: ").append(Settings.getGcCustomDate());
-        }
-        appendAddons(body);
-        body.append("\nBRouter connection available: ").append(Routing.isAvailable());
+
         body.append("\n--- End of system information ---\n");
         return body.toString();
     }
 
     private static void appendDatabase(@NonNull final StringBuilder body) {
         final File dbFile = DataStore.databasePath();
-        body.append("\nDatabase: ").append(dbFile)
+        body.append("\n- Database: ").append(dbFile)
                 .append(" (").append(Formatter.formatBytes(dbFile.length())).append(") on ")
                 .append(Settings.isDbOnSDCard() ? "user storage" : "system internal storage");
     }
@@ -127,7 +144,7 @@ public final class SystemInformation {
     }
 
     private static void appendPublicFolders(@NonNull final StringBuilder body) {
-        body.append("\nPublic Folders: #").append(PersistableFolder.values().length);
+        body.append("\n- Public Folders: #").append(PersistableFolder.values().length);
         for (PersistableFolder folder : PersistableFolder.values()) {
             final boolean isAvailable = ContentStorage.get().ensureAndAdjustFolder(folder);
             final ImmutablePair<Integer, Integer> files = FolderUtils.get().getFolderInfo(folder.getFolder());
@@ -140,7 +157,7 @@ public final class SystemInformation {
     }
 
     private static void appendPersistedDocumentUris(@NonNull final StringBuilder body) {
-        body.append("\nPersistedDocumentUris: #").append(PersistableUri.values().length);
+        body.append("\n- PersistedDocumentUris: #").append(PersistableUri.values().length);
         for (PersistableUri persDocUri : PersistableUri.values()) {
             body.append("\n- ").append(persDocUri);
         }
@@ -149,7 +166,7 @@ public final class SystemInformation {
 
     private static void appendPersistedUriPermission(@NonNull final StringBuilder body, @NonNull  final Context context) {
         final List<UriPermission> uriPerms = context.getContentResolver().getPersistedUriPermissions();
-        body.append("\nPersisted Uri Permissions: #").append(uriPerms.size());
+        body.append("\n- Persisted Uri Permissions: #").append(uriPerms.size());
         for (UriPermission uriPerm : uriPerms) {
             body.append("\n- ").append(UriUtils.uriPermissionToString(uriPerm));
         }
@@ -172,7 +189,7 @@ public final class SystemInformation {
                 }
             }
         }
-        body.append("\nGeocaching sites enabled:").append(connectorCount > 0 ? connectors : " None");
+        body.append("\n- Geocaching sites enabled:").append(connectorCount > 0 ? connectors : " None");
     }
 
     private static void appendAddons(final StringBuilder body) {
@@ -180,7 +197,7 @@ public final class SystemInformation {
         if (ContactsAddon.isAvailable()) {
             addons.add("contacts");
         }
-        body.append("\nInstalled c:geo plugins: ");
+        body.append("\n- Installed c:geo plugins: ");
         body.append(CollectionUtils.isNotEmpty(addons) ? StringUtils.join(addons, ", ") : " none");
     }
 
@@ -193,13 +210,13 @@ public final class SystemInformation {
     }
 
     private static void appendPermissions(final Context context, final StringBuilder body) {
-        appendPermission(context, body, "Fine location", Manifest.permission.ACCESS_FINE_LOCATION);
-        appendPermission(context, body, "Write external storage", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        appendPermission(context, body, "- Fine location", Manifest.permission.ACCESS_FINE_LOCATION);
+        appendPermission(context, body, "- Write external storage", Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
     private static void appendGooglePlayServicesVersion(final Context context, final StringBuilder body) {
         final boolean googlePlayServicesAvailable = GooglePlayServices.isAvailable();
-        body.append("\nGoogle Play services: ").append(googlePlayServicesAvailable ? (Settings.useGooglePlayServices() ? "enabled" : "disabled") : "unavailable");
+        body.append("\n- Google Play services: ").append(googlePlayServicesAvailable ? (Settings.useGooglePlayServices() ? "enabled" : "disabled") : "unavailable");
         if (googlePlayServicesAvailable) {
             body.append(" - ");
             try {
