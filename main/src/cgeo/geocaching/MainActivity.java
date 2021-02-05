@@ -534,7 +534,7 @@ public class MainActivity extends AbstractActionBarActivity {
             startActivity(new Intent(this, UsefulAppsActivity.class));
         } else if (id == R.id.menu_wizard) {
             final Intent wizard = new Intent(this, InstallWizardActivity.class);
-            wizard.putExtra(InstallWizardActivity.BUNDLE_RETURNING, true);
+            wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id : InstallWizardActivity.WizardMode.WIZARDMODE_RETURNING.id);
             startActivity(wizard);
         } else if (id == R.id.menu_settings) {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);

@@ -145,6 +145,14 @@ public class ContentStorageActivityHelper {
     }
 
     /**
+     * Simplified form of selectPersistableFolder with default values to be used in migration scenarios
+     * (no dialog, select "move" mode)
+     */
+    public void migratePersistableFolder(final PersistableFolder folder, final Consumer<PersistableFolder> callback) {
+        selectFolderInternal(REQUEST_CODE_SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.MOVE, callback);
+    }
+
+    /**
      * Asks user to select a file for single usage (e.g. to import something into c:geo
      * @param type mime type, used for intent search
      * @param startUri hint for intent where to start search
