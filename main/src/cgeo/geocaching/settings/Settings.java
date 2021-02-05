@@ -46,6 +46,7 @@ import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -1619,6 +1620,18 @@ public class Settings {
             default:
                 return new String[0];
         }
+    }
+
+    // checks whether legacy folder needs to be migrated
+    // (legacy value is set and not yet migrated)
+    public static boolean legacyFolderNeedsToBeMigrated(@StringRes final int newPrefKey) {
+        for (String legacyKey : getLegacyPreferenceKeysFor(newPrefKey)) {
+            final String value = getStringDirect(legacyKey, null);
+            if (value != null && !value.startsWith(LEGACY_UNUSED_MARKER)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean getUseCustomTabs() {

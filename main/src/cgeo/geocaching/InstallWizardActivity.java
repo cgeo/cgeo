@@ -38,21 +38,32 @@ import androidx.core.content.ContextCompat;
 
 public class InstallWizardActivity extends AppCompatActivity {
 
-    public static final String BUNDLE_RETURNING = "returning";
-    public static final String BUNDLE_MIGRATION = "migrationMode";
+    public static final String BUNDLE_MODE = "wizardmode";
     private static final String BUNDLE_STEP = "step";
+
+    public enum WizardMode {
+        WIZARDMODE_DEFAULT(0),
+        WIZARDMODE_RETURNING(1),
+        WIZARDMODE_MIGRATION(2);
+
+        public int id;
+
+        WizardMode(final int id) {
+            this.id = id;
+        }
+    }
 
     private enum WizardStep {
         WIZARD_START,
-        WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION, WIZARD_PERMISSIONS_BASEFOLDER,
+        WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION,
+        WIZARD_PERMISSIONS_BASEFOLDER, WIZARD_PERMISSIONS_MAPFOLDER, WIZARD_PERMISSIONS_GPXFOLDER,
         WIZARD_PLATFORMS,
         WIZARD_ADVANCED,
         WIZARD_END
     }
 
+    private WizardMode mode = WizardMode.WIZARDMODE_DEFAULT;
     private WizardStep step = WizardStep.WIZARD_START;
-    private boolean returning = false;
-    private boolean migrationMode = false;
     private ContentStorageActivityHelper contentStorageActivityHelper = null;
 
     private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
@@ -78,12 +89,10 @@ public class InstallWizardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.dark);
         if (savedInstanceState != null) {
-            returning = savedInstanceState.getBoolean(BUNDLE_RETURNING);
             step = WizardStep.values()[savedInstanceState.getInt(BUNDLE_STEP)];
-            migrationMode = savedInstanceState.getBoolean(BUNDLE_MIGRATION);
+            mode = WizardMode.values()[savedInstanceState.getInt(BUNDLE_MODE)];
         } else {
-            returning = getIntent().getBooleanExtra(BUNDLE_RETURNING, false);
-            migrationMode = getIntent().getBooleanExtra(BUNDLE_MIGRATION, false);
+            mode = WizardMode.values()[getIntent().getIntExtra(BUNDLE_MODE, WizardMode.WIZARDMODE_DEFAULT.id)];
         }
         setContentView(R.layout.install_wizard);
 
@@ -113,8 +122,8 @@ public class InstallWizardActivity extends AppCompatActivity {
         setButton(button3, 0, null, button3Info, 0);
         switch (step) {
             case WIZARD_START: {
-                title.setText(R.string.wizard_welcome_title);
-                text.setText(returning ? R.string.wizard_intro2 : R.string.wizard_intro);
+                title.setText(mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_migration_title : R.string.wizard_welcome_title);
+                text.setText(mode == WizardMode.WIZARDMODE_RETURNING ? R.string.wizard_intro_returning : mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_intro_migration : R.string.wizard_intro);
                 setNavigation(this::finishWizard, R.string.skip, null, 0, this::gotoNext, 0);
                 break;
             }
@@ -138,6 +147,16 @@ public class InstallWizardActivity extends AppCompatActivity {
                 title.setText(R.string.wizard_permissions_title);
                 text.setText(R.string.wizard_basefolder_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestBasefolder, 0);
+                break;
+            case WIZARD_PERMISSIONS_MAPFOLDER:
+                title.setText(R.string.wizard_permissions_title);
+                text.setText(R.string.wizard_mapfolder_request_explanation);
+                setNavigation(this::gotoPrevious, 0, null, 0, this::requestMapfolder, 0);
+                break;
+            case WIZARD_PERMISSIONS_GPXFOLDER:
+                title.setText(R.string.wizard_permissions_title);
+                text.setText(R.string.wizard_gpxfolder_request_explanation);
+                setNavigation(this::gotoPrevious, 0, null, 0, this::requestGpxfolder, 0);
                 break;
             case WIZARD_PLATFORMS:
                 title.setText(R.string.wizard_platforms_title);
@@ -284,20 +303,34 @@ public class InstallWizardActivity extends AppCompatActivity {
             || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission(this)))
             || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission(this)))
             || (step == WizardStep.WIZARD_PERMISSIONS_BASEFOLDER && ContentStorageActivityHelper.baseFolderIsSet())
-            || (step == WizardStep.WIZARD_PLATFORMS && migrationMode)
-            || (step == WizardStep.WIZARD_ADVANCED && migrationMode)
+            || (step == WizardStep.WIZARD_PERMISSIONS_MAPFOLDER && !mapFolderNeedsMigration())
+            || (step == WizardStep.WIZARD_PERMISSIONS_GPXFOLDER && !gpxFolderNeedsMigration())
+            || (step == WizardStep.WIZARD_PLATFORMS && mode == WizardMode.WIZARDMODE_MIGRATION)
+            || (step == WizardStep.WIZARD_ADVANCED && mode == WizardMode.WIZARDMODE_MIGRATION)
             ;
     }
 
     private void finishWizard() {
         // call MainActivity (if not returning) and finish this Activity
-        if (!returning) {
+        if (mode != WizardMode.WIZARDMODE_RETURNING) {
             final Intent main = new Intent(this, MainActivity.class);
             main.putExtras(getIntent());
             startActivity(main);
         }
         finish();
     }
+
+    public static boolean isConfigurationOk(final Context context) {
+        final boolean isPlatformConfigured = ConnectorFactory.getActiveConnectorsWithValidCredentials().length > 0;
+        return hasStoragePermission(context) && hasLocationPermission(context) && isPlatformConfigured && ContentStorageActivityHelper.baseFolderIsSet();
+    }
+
+    public static boolean needsFolderMigration() {
+        return mapFolderNeedsMigration() || gpxFolderNeedsMigration();
+    }
+
+    // -------------------------------------------------------------------
+    // old Android permissions related methods
 
     private static boolean hasStoragePermission(final Context context) {
         return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
@@ -306,11 +339,6 @@ public class InstallWizardActivity extends AppCompatActivity {
     private static boolean hasLocationPermission(final Context context) {
         return (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             || (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
-    }
-
-    public static boolean isConfigurationOk(final Context context) {
-        final boolean isPlatformConfigured = ConnectorFactory.getActiveConnectorsWithValidCredentials().length > 0;
-        return hasStoragePermission(context) && hasLocationPermission(context) && isPlatformConfigured && ContentStorageActivityHelper.baseFolderIsSet();
     }
 
     private void requestStorage() {
@@ -331,9 +359,17 @@ public class InstallWizardActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
+        gotoNext();
+    }
+
+    // -------------------------------------------------------------------
+    // Android SAF-based permissions related methods
+
     private void requestBasefolder() {
         if (!ContentStorageActivityHelper.baseFolderIsSet()) {
-            getContentStorageHelper().selectPersistableFolder(PersistableFolder.BASE, v -> gotoNext());
+            getContentStorageHelper().migratePersistableFolder(PersistableFolder.BASE, v -> gotoNext());
         }
     }
 
@@ -343,6 +379,29 @@ public class InstallWizardActivity extends AppCompatActivity {
         }
         return contentStorageActivityHelper;
     }
+
+    private static boolean mapFolderNeedsMigration() {
+        return Settings.legacyFolderNeedsToBeMigrated(R.string.pref_persistablefolder_offlinemaps);
+    }
+
+    private void requestMapfolder() {
+        if (mapFolderNeedsMigration()) {
+            getContentStorageHelper().migratePersistableFolder(PersistableFolder.OFFLINE_MAPS, v -> gotoNext());
+        }
+    }
+
+    private static boolean gpxFolderNeedsMigration() {
+        return Settings.legacyFolderNeedsToBeMigrated(R.string.pref_persistablefolder_gpx);
+    }
+
+    private void requestGpxfolder() {
+        if (gpxFolderNeedsMigration()) {
+            getContentStorageHelper().migratePersistableFolder(PersistableFolder.GPX, v -> gotoNext());
+        }
+    }
+
+    // -------------------------------------------------------------------
+    // services settings
 
     private boolean hasValidGCCredentials() {
         return Settings.getCredentials(GCConnector.getInstance()).isValid();
@@ -356,17 +415,13 @@ public class InstallWizardActivity extends AppCompatActivity {
         startActivityForResult(checkIntent, REQUEST_CODE_WIZARD_GC);
     }
 
+    // -------------------------------------------------------------------
+
     @Override
     public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putBoolean(BUNDLE_RETURNING, returning);
+        savedInstanceState.putInt(BUNDLE_MODE, mode.id);
         savedInstanceState.putInt(BUNDLE_STEP, step.ordinal());
-        savedInstanceState.putBoolean(BUNDLE_MIGRATION, migrationMode);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
-        gotoNext();
     }
 
     @Override
