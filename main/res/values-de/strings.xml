@@ -801,14 +801,9 @@
     <string name="sendToCgeo_no_registration">c:geo konnte die Caches nicht laden. Die Registrierung für send2cgeo ist ungültig. Bitte in den Einstellungen neu registrieren.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Ordner ändern %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>Der Ordner %s ist derzeit auf \'%s\' gesetzt und enthält %d Datei(en) und %d Unterordner.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Du kannst den Standardordner \'%s\' verwenden oder einen benutzerdefinierten Ordner wählen.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Bitte wähle, ob c:geo deine Inhalte in den neuen Ordner kopieren/verschieben soll:</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nichts tun</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kompletten Inhalt kopieren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Kompletten Inhalt verschieben</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Ordner %s: Kopieren/Verschieben erledigt</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Das Kopieren/Verschieben hatte das Ergebnis: %s. %d Datei(en) und %d Ordner wurden kopiert/verschoben.</p><p>Tippe auf \'ok\' um die Ordneränderung abzuschließen.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Ordnerauswahl abgebrochen, der Ordner ist \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Ordner auf \'%s\' gesetzt</string>
     <string name="contentstorage_file_selection_aborted">Dateiauswahl abgebrochen</string>
@@ -834,6 +829,7 @@
     <string name="persistablefolder_backup">Sicherung</string>
     <string name="persistablefolder_logfiles">Logdateien</string>
     <string name="persistablefolder_fieldnotes">Feldnotizen</string>
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">c:geo autorisieren</string>
     <string name="auth_check">Authentifizierung überprüfen</string>
@@ -1877,7 +1873,7 @@
     <string name="finish">Fertig</string>
     <string name="wizard_welcome_title">Willkommen bei c:geo</string>
     <string name="wizard_intro">Nur ein paar Schritte sind nötig, um c:geo zu konfigurieren und loszulegen. Soll ich dir dabei helfen?</string>
-    <string name="wizard_intro2">Willkommen zurück zum Konfigurations-Assistenten. Dein c:geo Setup ist noch nicht fertig, soll ich dir helfen, es abzuschließen und loszulegen? Es sind nur ein paar Schritte.</string>
+    <string name="wizard_intro_returning">Willkommen zurück zum Konfigurations-Assistenten. Dein c:geo Setup ist noch nicht fertig, soll ich dir helfen, es abzuschließen und loszulegen? Es sind nur ein paar Schritte.</string>
     <string name="wizard_outro_ok">Danke fürs Konfigurieren von c:geo.\nAuf geht\'s!</string>
     <string name="wizard_outro_error">Konfiguration unvollständig\nc:geo wird nicht überall wie erwartet funktionieren!</string>
     <string name="wizard_permissions_title">App-Berechtigungen</string>
