@@ -775,6 +775,7 @@
     <string name="sendToCgeo_no_registration">S\'ha produït un error descarregant els catxés. El registre a send2cgeo ha caducat. Registreu-vos de nou a la configuració.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Autoritza al c:geo</string>
     <string name="auth_check">Comprova l\'autenticació</string>
@@ -1791,7 +1792,7 @@
     <string name="finish">Acabar</string>
     <string name="wizard_welcome_title">Benvingut a c:geo</string>
     <string name="wizard_intro">Només cal fer uns quants passos per configurar c: geo i posar-vos en marxa. T\'ajudo?</string>
-    <string name="wizard_intro2">Benvingut de nou a l\'assistent de configuració. La vostra configuració de c: geo encara no està acabada. T\'ajudo a completar-la? Són només uns quants passos.</string>
+    <string name="wizard_intro_returning">Benvingut de nou a l\'assistent de configuració. La vostra configuració de c: geo encara no està acabada. T\'ajudo a completar-la? Són només uns quants passos.</string>
     <string name="wizard_outro_ok">Gràcies per configurar c:geo.\nDivertiu-vos!</string>
     <string name="wizard_outro_error">Configuració incompleta\nNo totes les parts de c: geo funcionaran correctament!.</string>
     <string name="wizard_permissions_title">Definiu els permisos de l\'app</string>
