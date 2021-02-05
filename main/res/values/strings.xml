@@ -845,14 +845,12 @@
 
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Change Folder %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>The folder %s is currently set to \'%s\' and contains %d file(s) and %d subfolder(s).</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>You may choose to use the default folder \'%s\' or pick a user-defined folder.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Please select whether c:geo shall copy/move your content to the new folder:</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">The folder %1$s is currently set to \'%2$s\' and contains %3$s and %4$s.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">You may choose to use the default folder \'%s\' or pick a user-defined folder.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Please select whether c:geo shall copy/move your content to the new folder:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Do nothing</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copy all content</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Move all content</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Folder %s: Copy/Move done</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>The copy/move operation had the result: %s. %d file(s) and %d folders were copied/moved.</p><p>Tap \'ok\' finalize the folder change.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Folder set to \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Aborting file selection</string>
@@ -881,6 +879,32 @@
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">Logfiles</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
+
+    <!-- FolderUtils -->
+    <string name="folder_copy_progressbar_title">Copying content of %1$s to %2$s</string>
+    <string name="folder_copy_progressbar_status_done">Copied %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_move_progressbar_title">Moving content of %1$s to %2$s</string>
+    <string name="folder_move_progressbar_status_done">Moved %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_copy_move_progressbar_status_processed_file">Process %1$s</string>
+
+    <string name="folder_copy_finished_title">Folder content was copied</string>
+    <string name="folder_move_finished_title">Folder content was moved</string>
+    <string name="folder_copy_finished_dialog_message">Content of folder %1$s was copied to %2$s.\n\n%3$s of %4$s and %5$s of %6$s were processed.</string>
+    <string name="folder_move_finished_dialog_message">Content of folder %1$s was moved to %2$s.\n\n%3$s of %4$s and %5$s of %6$s were processed.</string>
+    <string name="folder_copy_move_finished_dialog_message_failure">The operation failed with code %1$s while processing file %2$s.</string>
+    <string name="folder_move_finished_dialog_tap">Tap \'ok\' to finalize the folder change.</string>
+
+    <plurals name="file_count">
+        <item quantity="zero">%1$d files</item>
+        <item quantity="one">%1$d file</item>
+        <item quantity="other">%1$d files</item>
+    </plurals>
+
+    <plurals name="folder_count">
+        <item quantity="zero">%1$d folders</item>
+        <item quantity="one">%1$d folder</item>
+        <item quantity="other">%1$d folders</item>
+    </plurals>
 
     <!-- auth generic -->
     <string name="auth_authorize">Authorize c:geo</string>

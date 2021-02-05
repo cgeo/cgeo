@@ -1,18 +1,25 @@
 package cgeo.geocaching.storage;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.UriUtils;
 
+import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
 import android.system.Os;
 import android.system.StructStatVfs;
 
+import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 import androidx.core.util.Predicate;
 
@@ -140,6 +147,64 @@ public class FolderUtils {
      */
     public CopyResult copyAll(final Folder source, final Folder target, final boolean move) {
         return copyAll(source, target, move, null, null);
+    }
+
+    /**
+     * Like {@link #copyAll(Folder, Folder, boolean)}, but performs the copy process asynchronously
+     * and provides a GUI for it (progress bar and final screen with copy result)
+     * @param activity activity to display copy Gui to
+     * @param source source folder with content to copy
+     * @param target target folder to copy content to
+     * @param move if true, content is MOVED (e.g. sdeleted in source)
+     * @param callback called after copying was done with copy result
+     */
+    public void copyAllAsynchronousWithGui(final Activity activity, final Folder source, final Folder target, final boolean move, final Consumer<CopyResult> callback) {
+        new CopyTask(activity, source, target, move, copyResult ->
+            displayCopyAllDoneDialog(activity, copyResult, source, target, move, callback)
+        ).execute();
+    }
+
+    private void displayCopyAllDoneDialog(final Activity activity, final CopyResult copyResult, final Folder source, final Folder target, final boolean move, final Consumer<CopyResult> callback) {
+        final String message = getCopyAllDoneMessage(activity, copyResult, source, target, move);
+
+        Dialogs.newBuilder(activity)
+            .setTitle(activity.getString(move ? R.string.folder_move_finished_title : R.string.folder_copy_finished_title))
+            .setMessage(message)
+            .setPositiveButton(android.R.string.ok, (dd, pp) -> {
+                dd.dismiss();
+                if (callback != null) {
+                    callback.accept(copyResult);
+                }
+            })
+            .setNegativeButton(android.R.string.cancel, (dd, pp) -> {
+                dd.dismiss();
+                if (callback != null) {
+                    callback.accept(null);
+                }
+            })
+            .create().show();
+    }
+
+    @NotNull
+    private String getCopyAllDoneMessage(final Activity activity, final CopyResult copyResult, final Folder source, final Folder target, final boolean move) {
+
+        final String filesCopied = copyResult.filesCopied < 0 ? "-" : "" + copyResult.filesCopied;
+        final String filesTotal = copyResult.filesInSource < 0 ? "-" : plurals(activity, R.plurals.file_count, copyResult.filesInSource);
+        final String foldersCopied = copyResult.dirsCopied < 0 ? "-" : "" + copyResult.dirsCopied;
+        final String foldersTotal = copyResult.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, copyResult.dirsInSource);
+
+        String message =
+            activity.getString(move ? R.string.folder_move_finished_dialog_message : R.string.folder_copy_finished_dialog_message,
+                source.toUserDisplayableString(), target.toUserDisplayableString(),
+                filesCopied, filesTotal, foldersCopied, foldersTotal);
+
+        if (copyResult.status != CopyResultStatus.OK) {
+            message += "\n\n" + activity.getString(R.string.folder_copy_move_finished_dialog_message_failure, copyResult.status.toString(),
+                copyResult.failedFile == null ? "---" : UriUtils.toUserDisplayableString(copyResult.failedFile.uri));
+        }
+
+        message += "\n\n" + activity.getString(R.string.folder_move_finished_dialog_tap);
+        return message;
     }
 
     /**
@@ -449,5 +514,50 @@ public class FolderUtils {
         }
         return true;
     }
+
+    private static class CopyTask extends AsyncTaskWithProgressText<Void, CopyResult> {
+
+        private final Folder source;
+        private final Folder target;
+        private final boolean doMove;
+        private final Consumer<FolderUtils.CopyResult> callback;
+
+        CopyTask(@NonNull final Activity activity, final Folder source, final Folder target, final boolean doMove, final Consumer<FolderUtils.CopyResult> callback) {
+            super(
+                activity,
+                activity.getString(doMove ? R.string.folder_move_progressbar_title : R.string.folder_copy_progressbar_title, source.toUserDisplayableString(), target.toUserDisplayableString()),
+                "---");
+            this.source = source;
+            this.target = target;
+            this.doMove = doMove;
+            this.callback = callback;
+        }
+
+        @Override
+        protected FolderUtils.CopyResult doInBackgroundInternal(final Void[] params) {
+            return FolderUtils.get().copyAll(source, target, doMove, null, ci -> {
+                final String filesCopied = ci.filesCopied < 0 ? "-" : "" + ci.filesCopied;
+                final String filesTotal = ci.filesInSource < 0 ? "-" : plurals(activity, R.plurals.file_count, ci.filesInSource);
+                final String foldersCopied = ci.dirsCopied < 0 ? "-" : "" + ci.dirsCopied;
+                final String foldersTotal = ci.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, ci.dirsInSource);
+
+                final String statusString = activity.getString(doMove ? R.string.folder_move_progressbar_status_done : R.string.folder_copy_progressbar_status_done, filesCopied, filesTotal, foldersCopied, foldersTotal);
+                final String progressString = activity.getString(R.string.folder_copy_move_progressbar_status_processed_file, ci.currentFile == null || ci.currentFile.name == null ? "" : ci.currentFile.name);
+                publishProgress(statusString + "\n" + progressString);
+            });
+        }
+
+        protected void onPostExecuteInternal(final FolderUtils.CopyResult result) {
+            if (callback != null) {
+                callback.accept(result);
+            }
+        }
+
+    }
+
+    private static String plurals(final Context context, final int id, final int quantity) {
+        return context.getResources().getQuantityString(id, quantity, quantity);
+    }
+
 
 }
