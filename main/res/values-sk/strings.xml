@@ -760,6 +760,7 @@
     <string name="sendToCgeo_no_registration">c:geo sa nepodarilo stiahnuť skrýše. Registrácia send2cgeo expirovala. Zaregistrujte sa, prosím, v nastaveniach.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizovať c:geo</string>
     <string name="auth_check">Skontrolovať autentifikáciu</string>
