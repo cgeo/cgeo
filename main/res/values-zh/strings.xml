@@ -716,6 +716,7 @@
     <!-- map sources -->
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_check">检查身份验证</string>
     <string name="auth_check_again">检查身份验证</string>
