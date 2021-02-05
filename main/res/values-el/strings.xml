@@ -798,14 +798,9 @@
     <string name="sendToCgeo_no_registration">Το c:geo απέτυχε να κατεβάσει κρύπτες. Η εγγραφή για το send2cgeo έληξε. Παρακαλούμε να εγγραφείτε στις ρυθμίσεις.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Αλλαγή φακέλου %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>Ο φάκελος %s έχει οριστεί σε \'%s\' και περιέχει %d αρχείο(α) και %d υποφακέλους.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Μπορείτε να επιλέξετε να χρησιμοποιήσετε τον προεπιλεγμένο φάκελο \'%s\' ή να επιλέξετε έναν καθορισμένο από το χρήστη φάκελο.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Παρακαλώ επιλέξτε αν το c:geo θα αντιγράψει/μετακινήσει το περιεχόμενό σας στο νέο φάκελο:</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Καμία ενέργεια</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Αντιγραφή όλου του περιεχομένου</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Μετακίνηση περιεχομένου</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Φάκελος %s: Έγινε αντιγραφή/μετακίνηση</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Η λειτουργία αντιγραφής/κίνησης είχε το αποτέλεσμα: %s. %d αρχείο(α) και %d υποκαταλόγοι αντιγράφηκαν/μετακινήθηκαν.</p><p>Κάντε κλικ στο \'ok\' για οριστική αλλαγή καταλόγου.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Εγκατάλειψη επιλογής φακέλου, ο φάκελος είναι \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Ο φάκελος ορίστηκε σε \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Ματαίωση επιλογής αρχείου</string>
@@ -821,6 +816,7 @@
     <!-- Persistable Folders -->
     <string name="persistablefolder_usertype_userdefined">Ορισμένο από τον Χρήστη</string>
     <string name="persistablefolder_usertype_default">Προεπιλογή</string>
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Εξουσιοδοτήστε το c:geo</string>
     <string name="auth_check">Έλεγχος διαπίστευσης</string>
@@ -1832,6 +1828,8 @@
     <string name="downloadmap_mapfile">Αρχείο χάρτη</string>
     <string name="downloadmap_retrieving_directory_data">Ανάκτηση δεδομένων φακέλου…</string>
     <string name="downloadmap_checking_for_updates">Έλεγχος για ενημερώσεις…</string>
+    <string name="downloadmap_install_theme_title">Εγκατάσταση αρχείου θέματος</string>
+    <string name="downloadmap_install_theme_info">Ο κατεβασμένος χάρτης σας απαιτεί ένα ειδικό αρχείο θέματος. Θέλετε να το κατεβάσετε επίσης?</string>
     <string name="mapserver_mapsforge_info">Βασικοί χάρτες, δεν απαιτούνται θέματα χάρτη</string>
     <string name="mapserver_openandromaps_info">Λεπτομερείς χάρτες, απαιτούν θέμα χάρτη \"Elevate\"</string>
     <string name="mapserver_elevate_info">Λεπτομερές θέμα χάρτη</string>
@@ -1857,7 +1855,7 @@
     <string name="finish">Ολοκληρώθηκε</string>
     <string name="wizard_welcome_title">Καλώς ήλθατε στο c:geo</string>
     <string name="wizard_intro">Χρειάζονται μόνο μερικά βήματα για να ρυθμίσετε το c:geo ώστε να ξεκινήσετε. Να σας βοηθήσω με αυτό;</string>
-    <string name="wizard_intro2">Καλώς ήρθατε πίσω στον οδηγό ρυθμίσεων. Η ρύθμιση του c:geo δεν έχει ολοκληρωθεί, να σας βοηθήσω να την ολοκληρώσετε ώστε να ξεκινήσετε; Χρειάζονται μόνο λίγα βήματα.</string>
+    <string name="wizard_intro_returning">Καλώς ήρθατε πίσω στον οδηγό ρυθμίσεων. Η ρύθμιση του c:geo δεν έχει ολοκληρωθεί, να σας βοηθήσω να την ολοκληρώσετε ώστε να ξεκινήσετε; Χρειάζονται μόνο λίγα βήματα.</string>
     <string name="wizard_outro_ok">Ευχαριστούμε για τη διαμόρφωση του c:geo.\nΚαλή διασκέδαση!</string>
     <string name="wizard_outro_error">Μη ολοκληρωμένη ρύθμιση παραμέτρων\nΔεν θα λειτουργήσουν όλα τα μέρη του c:geo όπως αναμενόταν!</string>
     <string name="wizard_permissions_title">Ορισμός δικαιωμάτων εφαρμογών</string>
