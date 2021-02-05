@@ -801,14 +801,9 @@
     <string name="sendToCgeo_no_registration">O c:geo falhou a transferência das geocaches. O registo do send2cgeo expirou. Por favor, faça o registo nas definições.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Alterar pasta %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>A pasta %s está actualmente definida como \'%s\' e contém %d ficheiro(s) e %d subpasta(s).</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Pode optar por usar a pasta padrão \'%s\' ou seleccionar uma pasta definida pelo utilizador.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Por favor, seleccione se o c:geo deve copiar/mover o seu conteúdo para a nova pasta:</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Não fazer nada</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copiar todo o conteúdo</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Mover todo o conteúdo</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Pasta %s: Copiar/Mover concluído</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>A operação de copiar/mover teve o resultado: %s. %d ficheiro(s) e %d pastas foram copiadas/movidas.</p><p>Toque em \'ok\' para finalizar a alteração da pasta.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">A cancelar selecção de pasta, a pasta é \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Pasta definida como \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">A cancelar a selecção de ficheiro</string>
@@ -834,6 +829,7 @@
     <string name="persistablefolder_backup">Cópia de segurança</string>
     <string name="persistablefolder_logfiles">Ficheiros de registo</string>
     <string name="persistablefolder_fieldnotes">Notas de Campo</string>
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_check">Verifique a autenticação</string>
@@ -1873,7 +1869,7 @@
     <string name="finish">Concluído</string>
     <string name="wizard_welcome_title">Bem-vindo ao c:geo</string>
     <string name="wizard_intro">São necessários apenas alguns passos para configurar o c:geo e começar a usar. Posso ajudar?</string>
-    <string name="wizard_intro2">Bem-vindo de volta ao assistente de configuração. A instalação do seu c:geo ainda não está terminada, poderei ajudar a completá-la? São apenas alguns passos.</string>
+    <string name="wizard_intro_returning">Bem-vindo de volta ao assistente de configuração. A instalação do seu c:geo ainda não está terminada, poderei ajudar a completá-la? São apenas alguns passos.</string>
     <string name="wizard_outro_ok">Obrigado por configurar o c:geo.\nDivirta-se!</string>
     <string name="wizard_outro_error">Configuração incompleta\nNem todas as partes do c:geo funcionarão como esperado!</string>
     <string name="wizard_permissions_title">Definir autorizações da aplicação</string>
