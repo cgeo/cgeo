@@ -780,13 +780,9 @@
     <string name="sendToCgeo_no_registration">c:geo non riesce a scaricare cache. La registrazione a send2cgeo è scaduta. Si prega di ripeterla nelle impostazioni.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Cambia cartella %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>La cartella %s è attualmente impostata a \'%s\' e contiene %d file e %d sottocartelle.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Puoi scegliere di utilizzare la cartella predefinita \'%s\' o scegliere una cartella definita dall\'utente.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Seleziona se c:geo deve copiare/spostare i tuoi contenuti nella nuova cartella:</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Non fare nulla</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copia tutto il contenuto</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Sposta tutto il contenuto</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Cartella %s: Copia/Spostamento completato</string>
     <string name="contentstorage_folder_selection_aborted">Interrotta la selezione della cartella, la cartella è «%s»</string>
     <string name="contentstorage_folder_selection_success">Cartella impostata a \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Interruzione selezione file</string>
@@ -809,6 +805,7 @@
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">File di log</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizza c:geo</string>
     <string name="auth_check">Verificare l\'autenticazione</string>
@@ -1841,7 +1838,7 @@
     <string name="finish">Fine</string>
     <string name="wizard_welcome_title">Benvenuto su c:geo</string>
     <string name="wizard_intro">Solo pochi passi sono necessari per configurare c:geo. Posso aiutarti a farlo?</string>
-    <string name="wizard_intro2">Bentornato alla procedura guidata di configurazione. La tua configurazione c:geo non è ancora finita. Posso aiutarti a completarla? Sono solo pochi passi.</string>
+    <string name="wizard_intro_returning">Bentornato alla procedura guidata di configurazione. La tua configurazione c:geo non è ancora finita. Posso aiutarti a completarla? Sono solo pochi passi.</string>
     <string name="wizard_outro_ok">Grazie per aver configurato c:geo.\nBuon divertimento!</string>
     <string name="wizard_outro_error">Configurazione incompleta\nNon tutte le sezioni di c:geo funzioneranno come previsto!</string>
     <string name="wizard_permissions_title">Imposta permessi app</string>
