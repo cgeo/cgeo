@@ -4,6 +4,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.databinding.AuthorizationCredentialsActivityBinding;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -19,14 +20,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import butterknife.BindView;
 import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,17 +32,14 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     @NonNull private String connectorUsername = StringUtils.EMPTY;
     @NonNull private String connectorPassword = StringUtils.EMPTY;
 
-    @BindView(R.id.check) protected Button checkButton;
-    @BindView(R.id.register) protected Button registerButton;
-    @BindView(R.id.auth_1) protected TextView auth1;
-    @BindView(R.id.auth_2) protected TextView auth2;
-    @BindView(R.id.auth_3) protected TextView auth3;
-    @BindView(R.id.username) protected EditText usernameEditText;
-    @BindView(R.id.password) protected EditText passwordEditText;
+    private AuthorizationCredentialsActivityBinding binding;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        onCreate(savedInstanceState, R.layout.authorization_credentials_activity);
+        super.onCreate(savedInstanceState);
+        setTheme();
+        binding = AuthorizationCredentialsActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -55,29 +49,29 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
         setTitle(getAuthTitle());
 
-        auth1.setText(getAuthExplainShort());
-        auth2.setText(getAuthExplainLong());
-        auth3.setText(getAuthRegisterExplain());
+        binding.auth1.setText(getAuthExplainShort());
+        binding.auth2.setText(getAuthExplainLong());
+        binding.auth3.setText(getAuthRegisterExplain());
 
-        checkButton.setText(getAuthCheck());
-        checkButton.setOnClickListener(new CheckListener());
+        binding.check.setText(getAuthCheck());
+        binding.check.setOnClickListener(new CheckListener());
         enableCheckButtonIfReady();
 
-        usernameEditText.setText(connectorUsername);
-        passwordEditText.setText(connectorPassword);
+        binding.username.setText(connectorUsername);
+        binding.password.setText(connectorPassword);
         enableCheckButtonIfReady();
 
         if (StringUtils.isEmpty(getCreateAccountUrl())) {
-            registerButton.setVisibility(View.GONE);
+            binding.register.setVisibility(View.GONE);
         } else {
-            registerButton.setText(getAuthRegister());
-            registerButton.setEnabled(true);
-            registerButton.setOnClickListener(new RegisterListener());
+            binding.register.setText(getAuthRegister());
+            binding.register.setEnabled(true);
+            binding.register.setOnClickListener(new RegisterListener());
         }
 
         final EnableStartButtonWatcher enableStartButtonWatcher = new EnableStartButtonWatcher();
-        usernameEditText.addTextChangedListener(enableStartButtonWatcher);
-        passwordEditText.addTextChangedListener(enableStartButtonWatcher);
+        binding.username.addTextChangedListener(enableStartButtonWatcher);
+        binding.password.addTextChangedListener(enableStartButtonWatcher);
     }
 
     @Override
@@ -113,9 +107,9 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
                 Dialogs.message(authorizationActivity, R.string.init_login_popup,
                     res.getString(R.string.init_login_popup_failed_reason, statusCode.getErrorString(res))
                 );
-                checkButton.setText(getAuthCheckAgain());
-                checkButton.setOnClickListener(new CheckListener());
-                checkButton.setEnabled(true);
+                binding.check.setText(getAuthCheckAgain());
+                binding.check.setOnClickListener(new CheckListener());
+                binding.check.setEnabled(true);
             }
         });
     }
@@ -126,12 +120,12 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
         public void onClick(final View view) {
             hideKeyboard();
 
-            checkButton.setEnabled(false);
-            checkButton.setOnTouchListener(null);
-            checkButton.setOnClickListener(null);
+            binding.check.setEnabled(false);
+            binding.check.setOnTouchListener(null);
+            binding.check.setOnClickListener(null);
 
-            final String username = usernameEditText.getText().toString();
-            final String password = passwordEditText.getText().toString();
+            final String username = binding.username.getText().toString();
+            final String password = binding.password.getText().toString();
 
             checkCredentials(username, password);
         }
@@ -199,8 +193,8 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
      *
      */
     protected void enableCheckButtonIfReady() {
-        checkButton.setEnabled(StringUtils.isNotEmpty(usernameEditText.getText()) &&
-                StringUtils.isNotEmpty(passwordEditText.getText()));
+        binding.check.setEnabled(StringUtils.isNotEmpty(binding.username.getText()) &&
+                StringUtils.isNotEmpty(binding.password.getText()));
     }
 
     /**

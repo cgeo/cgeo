@@ -2,6 +2,7 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
+import cgeo.geocaching.databinding.AuthorizationTokenActivityBinding;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -23,14 +24,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import java.util.regex.Pattern;
 
-import butterknife.BindView;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 
@@ -47,17 +45,11 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     @NonNull private String fieldUsername = StringUtils.EMPTY;
     @NonNull private String fieldPassword = StringUtils.EMPTY;
 
-    @BindView(R.id.start) protected Button startButton;
-    @BindView(R.id.register) protected Button registerButton;
-    @BindView(R.id.auth_1) protected TextView auth1;
-    @BindView(R.id.auth_2) protected TextView auth2;
-    @BindView(R.id.auth_3) protected TextView auth3;
-    @BindView(R.id.username) protected EditText usernameEditText;
-    @BindView(R.id.password) protected EditText passwordEditText;
-
     private ProgressDialog requestTokenDialog = null;
 
     protected final Handler requestTokenHandler = new RequestTokenHandler(this);
+
+    private AuthorizationTokenActivityBinding binding;
 
     private static final class RequestTokenHandler extends WeakReferenceHandler<TokenAuthorizationActivity> {
         RequestTokenHandler(final TokenAuthorizationActivity activity) {
@@ -70,7 +62,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
             if (activity != null) {
                 Dialogs.dismiss(activity.requestTokenDialog);
 
-                final Button startButton = activity.startButton;
+                final Button startButton = activity.binding.start;
                 startButton.setOnClickListener(new StartListener(activity));
                 startButton.setEnabled(true);
 
@@ -93,7 +85,10 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        onCreate(savedInstanceState, R.layout.authorization_token_activity);
+        super.onCreate(savedInstanceState);
+        setTheme();
+        binding = AuthorizationTokenActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -104,27 +99,27 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
         setTitle(getAuthTitle());
 
-        auth1.setText(getAuthExplainShort());
-        auth2.setText(getAuthExplainLong());
-        auth3.setText(getAuthRegisterExplain());
+        binding.auth1.setText(getAuthExplainShort());
+        binding.auth2.setText(getAuthExplainLong());
+        binding.auth3.setText(getAuthRegisterExplain());
 
-        startButton.setText(getAuthAuthorize());
-        startButton.setOnClickListener(new StartListener(this));
+        binding.start.setText(getAuthAuthorize());
+        binding.start.setOnClickListener(new StartListener(this));
         enableStartButtonIfReady();
 
         if (StringUtils.isEmpty(getCreateAccountUrl())) {
-            registerButton.setVisibility(View.GONE);
+            binding.register.setVisibility(View.GONE);
         } else {
-            registerButton.setText(getAuthRegister());
-            registerButton.setEnabled(true);
-            registerButton.setOnClickListener(new RegisterListener());
+            binding.register.setText(getAuthRegister());
+            binding.register.setEnabled(true);
+            binding.register.setOnClickListener(new RegisterListener());
         }
 
-        startButton.setText(StringUtils.isBlank(getToken()) ? getAuthStart() : getAuthAgain());
+        binding.start.setText(StringUtils.isBlank(getToken()) ? getAuthStart() : getAuthAgain());
 
         final EnableStartButtonWatcher enableStartButtonWatcher = new EnableStartButtonWatcher();
-        usernameEditText.addTextChangedListener(enableStartButtonWatcher);
-        passwordEditText.addTextChangedListener(enableStartButtonWatcher);
+        binding.username.addTextChangedListener(enableStartButtonWatcher);
+        binding.password.addTextChangedListener(enableStartButtonWatcher);
     }
 
     @Override
@@ -192,13 +187,13 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
                 }
                 activity.requestTokenDialog.show();
 
-                final Button startButton = activity.startButton;
+                final Button startButton = activity.binding.start;
                 startButton.setEnabled(false);
                 startButton.setOnTouchListener(null);
                 startButton.setOnClickListener(null);
 
-                final String username = activity.usernameEditText.getText().toString();
-                final String password = activity.passwordEditText.getText().toString();
+                final String username = activity.binding.username.getText().toString();
+                final String password = activity.binding.password.getText().toString();
 
                 AndroidRxUtils.networkScheduler.scheduleDirect(() -> activity.requestToken(username, password));
             }
@@ -300,8 +295,8 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
      *
      */
     protected void enableStartButtonIfReady() {
-        startButton.setEnabled(StringUtils.isNotEmpty(usernameEditText.getText()) &&
-                StringUtils.isNotEmpty(passwordEditText.getText()));
+        binding.start.setEnabled(StringUtils.isNotEmpty(binding.username.getText()) &&
+                StringUtils.isNotEmpty(binding.password.getText()));
     }
 
     /**
