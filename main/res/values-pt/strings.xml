@@ -1576,8 +1576,8 @@
     <string name="attribute_military_area_no">Não é uma área de treino militar</string>
     <string name="attribute_video_surveil_yes">Área sob vigilância de vídeo</string>
     <string name="attribute_video_surveil_no">Não é uma área sob vigilância de vídeo</string>
-    <string name="attribute_trackables_yes">Adequada para armazenar trackables</string>
-    <string name="attribute_trackables_no">Não é adequada para armazenar trackables</string>
+    <string name="attribute_trackables_yes">Adequada para reter trackables</string>
+    <string name="attribute_trackables_no">Não é adequada para reter trackables</string>
     <string name="attribute_historic_yes">Estrutura abandonada / Ruína</string>
     <string name="attribute_historic_no">Não é uma estrutura abandonada ou ruína</string>
     <string name="attribute_blind_people_yes">Adequa-se a pessoas cegas</string>
