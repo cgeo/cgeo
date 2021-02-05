@@ -554,6 +554,7 @@
     <string name="sendToCgeo_no_registration">c:geo فشل في تحميل المخبآت. انتهت مدة التسجيل في send2cgeo. الرجاء التسجيل في الإعدادات.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">الترخيص لـ c:geo</string>
     <string name="auth_check">تحقق من المصادقة</string>
