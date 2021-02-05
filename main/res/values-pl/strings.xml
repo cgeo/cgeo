@@ -766,6 +766,7 @@
     <string name="sendToCgeo_no_registration">c:geo nie może pobrać skrzynek. Rejestracja do send2cgeo wygasła. Proszę zarejestrować urządzenie w Ustawieniach.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Autoryzacja c:geo</string>
     <string name="auth_check">Sprawdź uwierzytelnienie</string>
@@ -1814,7 +1815,7 @@
     <string name="finish">Zakończ</string>
     <string name="wizard_welcome_title">Witamy w c:geo</string>
     <string name="wizard_intro">Wystarczy kilka kroków, aby skonfigurować c: geo i zacząć działać. Mam Ci w tym pomóc?</string>
-    <string name="wizard_intro2">Witamy ponownie w kreatorze konfiguracji. Twoja konfiguracja c: geo nie jest jeszcze zakończona. Czy mogę pomóc Ci ją ukończyć i zacząć? To tylko kilka kroków.</string>
+    <string name="wizard_intro_returning">Witamy ponownie w kreatorze konfiguracji. Twoja konfiguracja c: geo nie jest jeszcze zakończona. Czy mogę pomóc Ci ją ukończyć i zacząć? To tylko kilka kroków.</string>
     <string name="wizard_outro_ok">Dziękujemy za skonfigurowanie c:geo.\nBaw się dobrze!</string>
     <string name="wizard_outro_error">Niekompletna konfiguracja\nNie wszystkie części c:geo będą działać zgodnie z oczekiwaniami!</string>
     <string name="wizard_permissions_title">Ustaw uprawnienia aplikacji</string>
