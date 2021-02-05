@@ -104,14 +104,16 @@ public class ContentStorageActivityHelper {
         final View dialogView = LayoutInflater.from(dialog.getContext()).inflate(R.layout.folder_selection_dialog, null);
 
         //create the message;
-        final String folderData = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_html_folderdata,
-            folder.toUserDisplayableName(), folder.toUserDisplayableValue(), fileInfo.left, fileInfo.right);
-        final String defaultFolder = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_html_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true));
+        final String fileCount = activity.getResources().getQuantityString(R.plurals.file_count, fileInfo.left, fileInfo.left);
+        final String folderCount = activity.getResources().getQuantityString(R.plurals.folder_count, fileInfo.right, fileInfo.right);
+        final String folderData = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_folderdata,
+            folder.toUserDisplayableName(), folder.toUserDisplayableValue(), fileCount, folderCount);
+        final String defaultFolder = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true));
 
-        final String copyOrMove = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_html_moveorcopy);
+        final String copyOrMove = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_moveorcopy);
 
 
-        final CharSequence message = HtmlCompat.fromHtml(folderData + (folder.isUserDefined() ? defaultFolder : "") + copyOrMove, HtmlCompat.FROM_HTML_MODE_LEGACY);
+        final String message = folderData + (folder.isUserDefined() ? "\n\n" + defaultFolder : "") + "\n\n" + copyOrMove;
 
         //init dialog
         ((TextView) dialogView.findViewById(R.id.message)).setText(message);
@@ -337,20 +339,13 @@ public class ContentStorageActivityHelper {
 
             //perform copy or move
             final Folder target = targetUri == null ? folder.getDefaultFolder() : Folder.fromDocumentUri(targetUri);
-            final FolderUtils.CopyResult copyResult = FolderUtils.get().copyAll(folder.getFolder(), target, copyChoice.equals(CopyChoice.MOVE));
-            //display result
-            Dialogs.newBuilder(activity)
-                .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_copy_move_finished_title, folder.toUserDisplayableName()))
-                .setMessage(getHtml(R.string.contentstorage_selectfolder_dialog_copy_move_finished_msg_html,
-                    copyResult.status, copyResult.filesCopied, copyResult.dirsCopied))
-                .setPositiveButton(android.R.string.ok, (dd, pp) -> {
-                    dd.dismiss();
+            FolderUtils.get().copyAllAsynchronousWithGui(activity, folder.getFolder(), target, copyChoice.equals(CopyChoice.MOVE), copyResult -> {
+                if (copyResult != null) {
                     finalizePersistableFolderSelection(true, folder, targetUri, callback);
-                 })
-                .create().show();
+                }
+            });
         }
     }
-
 
     private void finalizePersistableFolderSelection(final boolean success, final PersistableFolder folder, final Uri selectedUri, final Consumer<PersistableFolder> callback) {
         if (success) {
