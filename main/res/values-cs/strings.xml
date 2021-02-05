@@ -770,6 +770,9 @@
     <string name="feature_favorite">Přidání kešky do oblíbených</string>
     <string name="feature_voting">Hlasování pro kešky</string>
     <string name="init_maplines_title">Přizpůsobení čar na mapě</string>
+    <string name="init_map_other">Jiná</string>
+    <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
+    <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Upozornění na vzdálenost</string>
     <string name="init_proximityNotificationGeneral">Všeobecné upozornění na vzdálenost na mapě</string>
@@ -803,14 +806,9 @@
     <string name="sendToCgeo_no_registration">c:geo selhalo při stahování kešek. Registrace pro send2cgeo vypršela. Prosím, registruj se znova v nastavení.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Změnit složku %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>Složka %s je v současné době nastavena na \'%s\' a obsahuje %d souborů a %d podsložek.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>Můžete zvolit výchozí složku \'%s\' nebo vybrat uživatelsky definovanou složku.</p>]]></string>
-    <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Vyberte, zda c:geo zkopíruje/přesune váš obsah do nové složky:</p>]]></string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nedělat nic</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopírovat veškerý obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Přesunout veškerý obsah</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Složka %s: Kopírování/Přesunutí dokončeno</string>
-    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Kopírování/přesunutí mělo výsledek: %s. %d souborů a %d složek bylo zkopírováno/přesunuto.</p><p>Klepněte na \'ok\' dokončit změnu složky.</p>]]></string>
     <string name="contentstorage_folder_selection_aborted">Přerušení výběru složky, složka je \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Složka nastavena na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Přerušení výběru souboru</string>
@@ -836,6 +834,7 @@
     <string name="persistablefolder_backup">Záloha</string>
     <string name="persistablefolder_logfiles">Soubory protokolů</string>
     <string name="persistablefolder_fieldnotes">Poznámky z terénu</string>
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizovat c:geo</string>
     <string name="auth_check">Zkontrolovat pověření</string>
@@ -1928,7 +1927,7 @@
     <string name="finish">Dokončit</string>
     <string name="wizard_welcome_title">Vítejte v c:geo</string>
     <string name="wizard_intro">Pro nastavení c:geo je potřeba jen pár kroků. Měl bych vám s tím pomoci?</string>
-    <string name="wizard_intro2">Vítejte zpět v průvodci nastavení. Nastavení aplikace c:geo ještě není dokončeno. Chcete s tím pomoci, abyste mohli jít dál? Je to jen pár kroků.</string>
+    <string name="wizard_intro_returning">Vítejte zpět v průvodci nastavení. Nastavení aplikace c:geo ještě není dokončeno. Chcete s tím pomoci, abyste mohli jít dál? Je to jen pár kroků.</string>
     <string name="wizard_outro_ok">Děkujeme za konfiguraci c:geo.\nPříjemnou zábavu!</string>
     <string name="wizard_outro_error">Nedokončená konfigurace\nNěkteré části c:geo nebudou pracovat podle očekávání!</string>
     <string name="wizard_permissions_title">Nastavit oprávnění aplikace</string>
