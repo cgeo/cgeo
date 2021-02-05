@@ -740,6 +740,7 @@
     <string name="sendToCgeo_no_registration">c:geo misslyckades med att hämta cacher. Registreringen för send2cgeo har upphört att gälla. Vänligen registrera dig på nytt i inställningarna.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Koppla c:geo mot Twitter</string>
     <string name="auth_check">Kolla autentisering</string>
