@@ -554,6 +554,7 @@
     <string name="sendToCgeo_no_registration">pumalya sa pagdownload ng mga cache ang c:geo. Ang rehistrasyon para sa send2cgeo ay nag-expire. Mangyaring magparehistro sa mga setting.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
+    <!-- FolderUtils -->
     <!-- auth generic -->
     <string name="auth_authorize">Pahintulutan ang c:geo</string>
     <string name="auth_check">Suriin ang pagpapatunay</string>
