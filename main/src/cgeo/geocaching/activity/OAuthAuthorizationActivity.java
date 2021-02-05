@@ -2,6 +2,7 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
+import cgeo.geocaching.databinding.AuthorizationActivityBinding;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
@@ -23,14 +24,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.regex.Pattern;
 
-import butterknife.BindView;
 import okhttp3.HttpUrl;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
@@ -58,11 +57,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     private String oAtoken = null;
     private String oAtokenSecret = null;
 
-    @BindView(R.id.start) protected Button startButton;
-    @BindView(R.id.register) protected Button registerButton;
-    @BindView(R.id.auth_1) protected TextView auth1;
-    @BindView(R.id.auth_2) protected TextView auth2;
-    @BindView(R.id.auth_3) protected TextView auth3;
     private ProgressDialog requestTokenDialog = null;
     private ProgressDialog changeTokensDialog = null;
 
@@ -70,6 +64,8 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     private final Handler requestTokenHandler = new RequestTokenHandler(this);
     private final Handler changeTokensHandler = new ChangeTokensHandler(this);
+
+    private AuthorizationActivityBinding binding;
 
     private static final class RequestTokenHandler extends WeakReferenceHandler<OAuthAuthorizationActivity> {
 
@@ -86,7 +82,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                     requestTokenDialog.dismiss();
                 }
 
-                final Button startButton = activity.startButton;
+                final Button startButton = activity.binding.start;
                 startButton.setOnClickListener(new StartListener(activity));
                 startButton.setEnabled(true);
 
@@ -122,7 +118,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                     activity.finish();
                 } else {
                     activity.showToast(activity.getErrAuthProcess());
-                    activity.startButton.setText(activity.getAuthStart());
+                    activity.binding.start.setText(activity.getAuthStart());
                 }
             }
         }
@@ -130,7 +126,10 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.authorization_activity);
+        super.onCreate(savedInstanceState);
+        setTheme();
+        binding = AuthorizationActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -146,32 +145,32 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
         setTitle(getAuthTitle());
 
-        auth1.setText(getAuthExplainShort());
-        auth2.setText(getAuthExplainLong());
-        auth3.setText(getAuthRegisterExplain());
+        binding.auth1.setText(getAuthExplainShort());
+        binding.auth2.setText(getAuthExplainLong());
+        binding.auth3.setText(getAuthRegisterExplain());
 
         final ImmutablePair<String, String> tempToken = getTempTokens();
         oAtoken = tempToken.left;
         oAtokenSecret = tempToken.right;
 
-        startButton.setText(getAuthAuthorize());
-        startButton.setEnabled(true);
-        startButton.setOnClickListener(new StartListener(this));
+        binding.start.setText(getAuthAuthorize());
+        binding.start.setEnabled(true);
+        binding.start.setOnClickListener(new StartListener(this));
 
         if (StringUtils.isEmpty(getCreateAccountUrl())) {
-            registerButton.setVisibility(View.GONE);
+            binding.register.setVisibility(View.GONE);
         } else {
-            registerButton.setText(getAuthRegister());
-            registerButton.setEnabled(true);
-            registerButton.setOnClickListener(new RegisterListener());
+            binding.register.setText(getAuthRegister());
+            binding.register.setEnabled(true);
+            binding.register.setOnClickListener(new RegisterListener());
         }
 
         if (StringUtils.isBlank(oAtoken) && StringUtils.isBlank(oAtokenSecret)) {
             // start authorization process
-            startButton.setText(getAuthStart());
+            binding.start.setText(getAuthStart());
         } else {
             // already have temporary tokens, continue from pin
-            startButton.setText(getAuthAgain());
+            binding.start.setText(getAuthAgain());
         }
     }
 
@@ -313,7 +312,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                 }
                 actitity.requestTokenDialog.show();
 
-                final Button startButton = actitity.startButton;
+                final Button startButton = actitity.binding.start;
                 startButton.setEnabled(false);
                 startButton.setOnTouchListener(null);
                 startButton.setOnClickListener(null);
