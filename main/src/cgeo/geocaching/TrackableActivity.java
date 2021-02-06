@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
+import cgeo.geocaching.databinding.TrackableDetailsViewBinding;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogTrackableActivity;
@@ -43,7 +44,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -59,8 +59,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -415,22 +413,14 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     public class DetailsViewCreator extends AbstractCachingPageViewCreator<NestedScrollView> {
-
-        @BindView(R.id.goal_box) protected LinearLayout goalBox;
-        @BindView(R.id.goal) protected TextView goalTextView;
-        @BindView(R.id.details_box) protected LinearLayout detailsBox;
-        @BindView(R.id.details) protected TextView detailsTextView;
-        @BindView(R.id.image_box) protected LinearLayout imageBox;
-        @BindView(R.id.details_list) protected LinearLayout detailsList;
-        @BindView(R.id.image) protected LinearLayout imageView;
-
+        private TrackableDetailsViewBinding binding;
         @Override
         @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
         public NestedScrollView getDispatchedView(final ViewGroup parentView) {
-            view = (NestedScrollView) getLayoutInflater().inflate(R.layout.trackable_details_view, parentView, false);
-            ButterKnife.bind(this, view);
+            binding = TrackableDetailsViewBinding.inflate(getLayoutInflater(), parentView, false);
+            view = binding.getRoot();
 
-            final CacheDetailsCreator details = new CacheDetailsCreator(TrackableActivity.this, detailsList);
+            final CacheDetailsCreator details = new CacheDetailsCreator(TrackableActivity.this, binding.detailsList);
 
             // action bar icon
             if (StringUtils.isNotBlank(trackable.getIconUrl())) {
@@ -560,26 +550,26 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             // trackable goal
             if (StringUtils.isNotBlank(HtmlUtils.extractText(trackable.getGoal()))) {
-                goalBox.setVisibility(View.VISIBLE);
-                goalTextView.setVisibility(View.VISIBLE);
-                goalTextView.setText(HtmlCompat.fromHtml(trackable.getGoal(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(geocode, true, false, goalTextView, false), null), TextView.BufferType.SPANNABLE);
-                goalTextView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                addContextMenu(goalTextView);
+                binding.goalBox.setVisibility(View.VISIBLE);
+                binding.goal.setVisibility(View.VISIBLE);
+                binding.goal.setText(HtmlCompat.fromHtml(trackable.getGoal(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(geocode, true, false, binding.goal, false), null), TextView.BufferType.SPANNABLE);
+                binding.goal.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                addContextMenu(binding.goal);
             }
 
             // trackable details
             if (StringUtils.isNotBlank(HtmlUtils.extractText(trackable.getDetails()))) {
-                detailsBox.setVisibility(View.VISIBLE);
-                detailsTextView.setVisibility(View.VISIBLE);
-                detailsTextView.setText(HtmlCompat.fromHtml(trackable.getDetails(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(geocode, true, false, detailsTextView, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
-                detailsTextView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                addContextMenu(detailsTextView);
+                binding.detailsBox.setVisibility(View.VISIBLE);
+                binding.details.setVisibility(View.VISIBLE);
+                binding.details.setText(HtmlCompat.fromHtml(trackable.getDetails(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(geocode, true, false, binding.details, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+                binding.details.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                addContextMenu(binding.details);
             }
 
             // trackable image
             if (StringUtils.isNotBlank(trackable.getImage())) {
-                imageBox.setVisibility(View.VISIBLE);
-                final ImageView trackableImage = (ImageView) inflater.inflate(R.layout.trackable_image, imageView, false);
+                binding.imageBox.setVisibility(View.VISIBLE);
+                final ImageView trackableImage = (ImageView) inflater.inflate(R.layout.trackable_image, binding.image, false);
 
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
                 trackableImage.setClickable(true);
@@ -587,7 +577,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
                 AndroidRxUtils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(trackableImage::setImageDrawable);
 
-                imageView.addView(trackableImage);
+                binding.image.addView(trackableImage);
             }
             return view;
         }

@@ -2,6 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.databinding.CacheslistItemBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.list.AbstractList;
@@ -33,7 +34,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -51,7 +51,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import butterknife.BindView;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -118,18 +117,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
      *
      */
     public static class ViewHolder extends AbstractViewHolder {
-        @BindView(R.id.checkbox) protected CheckBox checkbox;
-        @BindView(R.id.log_status_mark) protected ImageView logStatusMark;
-        @BindView(R.id.text_icon) protected ImageView textIcon;
-        @BindView(R.id.text) protected TextView text;
-        @BindView(R.id.distance) protected DistanceView distance;
-        @BindView(R.id.favorite) protected TextView favorite;
-        @BindView(R.id.info) protected TextView info;
-        @BindView(R.id.inventory) protected TextView inventory;
-        @BindView(R.id.direction) protected CompassMiniView direction;
-        @BindView(R.id.dirimg) protected ImageView dirImg;
         private CacheListType cacheListType;
         public Geocache cache = null;
+        public CacheslistItemBinding binding;
 
         public ViewHolder(final View view) {
             super(view);
@@ -388,17 +378,17 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     public static void updateViewHolder(final ViewHolder holder, final Geocache cache, final Resources res) {
         if (cache.isFound() && cache.isLogOffline()) {
-            holder.logStatusMark.setImageResource(R.drawable.mark_green_orange);
+            holder.binding.logStatusMark.setImageResource(R.drawable.mark_green_orange);
         } else if (cache.isFound()) {
-            holder.logStatusMark.setImageResource(R.drawable.mark_green_more);
+            holder.binding.logStatusMark.setImageResource(R.drawable.mark_green_more);
         } else if (cache.isLogOffline()) {
-            holder.logStatusMark.setImageResource(R.drawable.mark_orange);
+            holder.binding.logStatusMark.setImageResource(R.drawable.mark_orange);
         } else if (cache.isDNF()) {
-            holder.logStatusMark.setImageResource(R.drawable.mark_red);
+            holder.binding.logStatusMark.setImageResource(R.drawable.mark_red);
         } else {
-            holder.logStatusMark.setImageResource(R.drawable.mark_transparent);
+            holder.binding.logStatusMark.setImageResource(R.drawable.mark_transparent);
         }
-        holder.textIcon.setImageDrawable(MapMarkerUtils.getCacheMarker(res, cache, holder.cacheListType).getDrawable());
+        holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getCacheMarker(res, cache, holder.cacheListType).getDrawable());
     }
 
     @Override
@@ -418,9 +408,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         final ViewHolder holder;
         if (v == null) {
-            v = inflater.inflate(R.layout.cacheslist_item, parent, false);
-
+            final CacheslistItemBinding temp = CacheslistItemBinding.inflate(inflater, parent, false);
+            v = temp.getRoot();
             holder = new ViewHolder(v);
+            holder.binding = temp;
         } else {
             holder = (ViewHolder) v.getTag();
         }
@@ -433,77 +424,77 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         v.setOnLongClickListener(touchListener);
         v.setOnTouchListener(touchListener);
 
-        holder.checkbox.setVisibility(selectMode ? View.VISIBLE : View.GONE);
-        holder.checkbox.setChecked(cache.isStatusChecked());
-        holder.checkbox.setOnClickListener(new SelectionCheckBoxListener(cache));
+        holder.binding.checkbox.setVisibility(selectMode ? View.VISIBLE : View.GONE);
+        holder.binding.checkbox.setChecked(cache.isStatusChecked());
+        holder.binding.checkbox.setOnClickListener(new SelectionCheckBoxListener(cache));
 
-        distances.add(holder.distance);
-        holder.distance.setContent(cache.getCoords());
-        compasses.add(holder.direction);
-        holder.direction.setTargetCoords(cache.getCoords());
+        distances.add(holder.binding.distance);
+        holder.binding.distance.setContent(cache.getCoords());
+        compasses.add(holder.binding.direction);
+        holder.binding.direction.setTargetCoords(cache.getCoords());
 
         if (cache.isDisabled() || cache.isArchived() || CalendarUtils.isPastEvent(cache)) { // strike
-            holder.text.setPaintFlags(holder.text.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.binding.text.setPaintFlags(holder.binding.text.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         } else {
-            holder.text.setPaintFlags(holder.text.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.binding.text.setPaintFlags(holder.binding.text.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         }
         if (cache.isArchived()) { // red color
-            holder.text.setTextColor(ContextCompat.getColor(getContext(), R.color.archived_cache_color));
+            holder.binding.text.setTextColor(ContextCompat.getColor(getContext(), R.color.archived_cache_color));
         } else {
-            holder.text.setTextColor(ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark));
+            holder.binding.text.setTextColor(ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark));
         }
 
-        holder.text.setText(cache.getName(), TextView.BufferType.NORMAL);
+        holder.binding.text.setText(cache.getName(), TextView.BufferType.NORMAL);
         holder.cacheListType = cacheListType;
         updateViewHolder(holder, cache, res);
 
         final int inventorySize = cache.getInventoryItems();
         if (inventorySize > 0) {
-            holder.inventory.setText(String.format(Locale.getDefault(), "%d", inventorySize));
-            holder.inventory.setVisibility(View.VISIBLE);
+            holder.binding.inventory.setText(String.format(Locale.getDefault(), "%d", inventorySize));
+            holder.binding.inventory.setVisibility(View.VISIBLE);
         } else {
-            holder.inventory.setVisibility(View.GONE);
+            holder.binding.inventory.setVisibility(View.GONE);
         }
 
         if (cache.getDistance() != null) {
-            holder.distance.setDistance(cache.getDistance());
+            holder.binding.distance.setDistance(cache.getDistance());
         }
 
         if (cache.getCoords() != null && coords != null) {
-            holder.distance.update(coords);
+            holder.binding.distance.update(coords);
         }
 
         // only show the direction if this is enabled in the settings
         if (isLiveList) {
             if (cache.getCoords() != null) {
-                holder.direction.setVisibility(View.VISIBLE);
-                holder.dirImg.setVisibility(View.GONE);
-                holder.direction.updateAzimuth(azimuth);
+                holder.binding.direction.setVisibility(View.VISIBLE);
+                holder.binding.dirimg.setVisibility(View.GONE);
+                holder.binding.direction.updateAzimuth(azimuth);
                 if (coords != null) {
-                    holder.direction.updateCurrentCoords(coords);
+                    holder.binding.direction.updateCurrentCoords(coords);
                 }
             } else if (cache.getDirection() != null) {
-                holder.direction.setVisibility(View.VISIBLE);
-                holder.dirImg.setVisibility(View.GONE);
-                holder.direction.updateAzimuth(azimuth);
-                holder.direction.updateHeading(cache.getDirection());
+                holder.binding.direction.setVisibility(View.VISIBLE);
+                holder.binding.dirimg.setVisibility(View.GONE);
+                holder.binding.direction.updateAzimuth(azimuth);
+                holder.binding.direction.updateHeading(cache.getDirection());
             } else if (StringUtils.isNotBlank(cache.getDirectionImg())) {
-                holder.dirImg.setVisibility(View.INVISIBLE);
-                holder.direction.setVisibility(View.GONE);
+                holder.binding.dirimg.setVisibility(View.INVISIBLE);
+                holder.binding.direction.setVisibility(View.GONE);
                 DirectionImage.fetchDrawable(cache.getDirectionImg()).observeOn(AndroidSchedulers.mainThread()).subscribe(bitmapDrawable -> {
                     if (cache == holder.cache) {
-                        holder.dirImg.setImageDrawable(bitmapDrawable);
-                        holder.dirImg.setVisibility(View.VISIBLE);
+                        holder.binding.dirimg.setImageDrawable(bitmapDrawable);
+                        holder.binding.dirimg.setVisibility(View.VISIBLE);
                     }
                 });
             } else {
-                holder.dirImg.setVisibility(View.GONE);
-                holder.direction.setVisibility(View.GONE);
+                holder.binding.dirimg.setVisibility(View.GONE);
+                holder.binding.direction.setVisibility(View.GONE);
             }
         }
 
         final int favCount = cache.getFavoritePoints();
-        holder.favorite.setText(Formatter.formatFavCount(favCount));
+        holder.binding.favorite.setText(Formatter.formatFavCount(favCount));
 
         int favoriteBack;
         // set default background, neither vote nor rating may be available
@@ -520,12 +511,12 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         } else if (rating > 0.0) {
             favoriteBack = RATING_BACKGROUND[0];
         }
-        holder.favorite.setBackgroundResource(favoriteBack);
+        holder.binding.favorite.setBackgroundResource(favoriteBack);
 
         if (isHistory() && cache.getVisitedDate() > 0) {
-            holder.info.setText(Formatter.formatCacheInfoHistory(cache));
+            holder.binding.info.setText(Formatter.formatCacheInfoHistory(cache));
         } else {
-            holder.info.setText(Formatter.formatCacheInfoLong(cache));
+            holder.binding.info.setText(Formatter.formatCacheInfoLong(cache));
         }
 
         // optionally show list infos
@@ -538,7 +529,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
                 }
             }
             if (!infos.isEmpty()) {
-                holder.info.append("\n" + StringUtils.join(infos, Formatter.SEPARATOR));
+                holder.binding.info.append("\n" + StringUtils.join(infos, Formatter.SEPARATOR));
             }
         }
 
