@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.databinding.MainActivityBinding;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.helper.UsefulAppsActivity;
@@ -59,8 +60,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -73,8 +72,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.jakewharton.processphoenix.ProcessPhoenix;
@@ -85,20 +82,7 @@ import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
 
 public class MainActivity extends AbstractActionBarActivity {
-    @BindView(R.id.nav_satellites) protected TextView navSatellites;
-    @BindView(R.id.filter_button_title) protected TextView filterTitle;
-    @BindView(R.id.map) protected ImageView findOnMap;
-    @BindView(R.id.search_offline) protected ImageView findByOffline;
-    @BindView(R.id.advanced_button) protected ImageView advanced;
-    @BindView(R.id.any_button) protected ImageView any;
-    @BindView(R.id.filter_button) protected ImageView filter;
-    @BindView(R.id.nearest) protected ImageView nearestView;
-    @BindView(R.id.nav_type) protected TextView navType;
-    @BindView(R.id.nav_accuracy) protected TextView navAccuracy;
-    @BindView(R.id.nav_location) protected TextView navLocation;
-    @BindView(R.id.offline_count) protected TextView countBubble;
-    @BindView(R.id.info_area) protected ListView infoArea;
-    @BindView(R.id.info_notloggedin) protected View notLoggedIn;
+    private MainActivityBinding binding;
 
     /**
      * view of the action bar search
@@ -132,7 +116,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
 
                 // Update UI
-                activity.infoArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
+                activity.binding.infoArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
                     @Override
                     public View getView(final int position, final View convertView, @NonNull final android.view.ViewGroup parent) {
                         TextView rowView = (TextView) convertView;
@@ -212,11 +196,11 @@ public class MainActivity extends AbstractActionBarActivity {
         final ILogin[] activeConnectors = ConnectorFactory.getActiveLiveConnectors();
         for (final IConnector conn : activeConnectors) {
             if (((ILogin) conn).isLoggedIn()) {
-                notLoggedIn.setVisibility(View.INVISIBLE);
+                binding.infoNotloggedin.setVisibility(View.INVISIBLE);
                 return;
             }
         }
-        notLoggedIn.setVisibility(View.VISIBLE);
+        binding.infoNotloggedin.setVisibility(View.VISIBLE);
     }
 
     private static String formatAddress(final Address address) {
@@ -243,9 +227,9 @@ public class MainActivity extends AbstractActionBarActivity {
         @SuppressLint("SetTextI18n")
         public void accept(final Status gnssStatus) {
             if (gnssStatus.gnssEnabled) {
-                navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gnssStatus.satellitesFixed + '/' + gnssStatus.satellitesVisible);
+                binding.navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gnssStatus.satellitesFixed + '/' + gnssStatus.satellitesVisible);
             } else {
-                navSatellites.setText(res.getString(R.string.loc_gps_disabled));
+                binding.navSatellites.setText(res.getString(R.string.loc_gps_disabled));
             }
         }
     };
@@ -294,12 +278,11 @@ public class MainActivity extends AbstractActionBarActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        setContentView(R.layout.main_activity);
+        binding = MainActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         if (!Settings.isTransparentBackground()) {
-            final View mainscreen = findViewById(R.id.mainscreen);
-            mainscreen.setBackgroundColor(getResources().getColor(Settings.isLightSkin() ? R.color.background_light_notice : R.color.background_dark_notice));
+            binding.mainscreen.setBackgroundColor(getResources().getColor(Settings.isLightSkin() ? R.color.background_light_notice : R.color.background_dark_notice));
         }
-        ButterKnife.bind(this);
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             // If we had been open already, start from the last used activity.
@@ -345,7 +328,7 @@ public class MainActivity extends AbstractActionBarActivity {
         // infobox "not logged in" with link to service config; display delayed by 10 seconds
         final Handler handler = new Handler();
         handler.postDelayed(this::checkLoggedIn, 10000);
-        notLoggedIn.setOnClickListener(v -> Dialogs.confirmYesNo(this, R.string.warn_notloggedin_title, R.string.warn_notloggedin_long, (dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
+        binding.infoNotloggedin.setOnClickListener(v -> Dialogs.confirmYesNo(this, R.string.warn_notloggedin_title, R.string.warn_notloggedin_long, (dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
 
         // reactivate dialogs which are set to show later
         OneTimeDialogs.nextStatus();
@@ -593,7 +576,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void setFilterTitle() {
-        filterTitle.setText(Settings.getCacheType().getL10n());
+        binding.filterButtonTitle.setText(Settings.getCacheType().getL10n());
     }
 
     private void init() {
@@ -603,12 +586,12 @@ public class MainActivity extends AbstractActionBarActivity {
 
         initialized = true;
 
-        findOnMap.setClickable(true);
-        findOnMap.setOnClickListener(this::cgeoFindOnMap);
+        binding.map.setClickable(true);
+        binding.map.setOnClickListener(this::cgeoFindOnMap);
 
-        findByOffline.setClickable(true);
-        findByOffline.setOnClickListener(this::cgeoFindByOffline);
-        findByOffline.setOnLongClickListener(v -> {
+        binding.searchOffline.setClickable(true);
+        binding.searchOffline.setOnClickListener(this::cgeoFindByOffline);
+        binding.searchOffline.setOnLongClickListener(v -> {
             new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, selectedListId -> {
                 if (selectedListId == PseudoList.HISTORY_LIST.id) {
                     startActivity(CacheListActivity.getHistoryIntent(this));
@@ -619,17 +602,17 @@ public class MainActivity extends AbstractActionBarActivity {
             }, false, PseudoList.NEW_LIST.id);
             return true;
         });
-        findByOffline.setLongClickable(true);
+        binding.searchOffline.setLongClickable(true);
 
-        advanced.setClickable(true);
-        advanced.setOnClickListener(this::cgeoSearch);
+        binding.advancedButton.setClickable(true);
+        binding.advancedButton.setOnClickListener(this::cgeoSearch);
 
-        any.setClickable(true);
-        any.setOnClickListener(this::cgeoPoint);
+        binding.anyButton.setClickable(true);
+        binding.anyButton.setOnClickListener(this::cgeoPoint);
 
-        filter.setClickable(true);
-        filter.setOnClickListener(v -> selectGlobalTypeFilter());
-        filter.setOnLongClickListener(v -> {
+        binding.filterButton.setClickable(true);
+        binding.filterButton.setOnClickListener(v -> selectGlobalTypeFilter());
+        binding.filterButton.setOnLongClickListener(v -> {
             Settings.setCacheType(CacheType.ALL);
             setFilterTitle();
             return true;
@@ -649,11 +632,11 @@ public class MainActivity extends AbstractActionBarActivity {
     public void updateCacheCounter() {
         AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(countBubbleCnt1 -> {
             if (countBubbleCnt1 == 0) {
-                countBubble.setVisibility(View.GONE);
+                binding.offlineCount.setVisibility(View.GONE);
             } else {
-                countBubble.setText(String.format(Locale.getDefault(), "%d", countBubbleCnt1));
-                countBubble.bringToFront();
-                countBubble.setVisibility(View.VISIBLE);
+                binding.offlineCount.setText(String.format(Locale.getDefault(), "%d", countBubbleCnt1));
+                binding.offlineCount.bringToFront();
+                binding.offlineCount.setVisibility(View.VISIBLE);
             }
         }, throwable -> Log.e("Unable to add bubble count", throwable));
     }
@@ -691,36 +674,36 @@ public class MainActivity extends AbstractActionBarActivity {
         @Override
         @SuppressLint("SetTextI18n")
         public void updateGeoData(final GeoData geo) {
-            if (!nearestView.isClickable()) {
-                nearestView.setFocusable(true);
-                nearestView.setClickable(true);
-                nearestView.setOnClickListener(MainActivity.this::cgeoFindNearest);
-                nearestView.setBackgroundResource(R.drawable.main_nearby);
+            if (!binding.nearest.isClickable()) {
+                binding.nearest.setFocusable(true);
+                binding.nearest.setClickable(true);
+                binding.nearest.setOnClickListener(MainActivity.this::cgeoFindNearest);
+                binding.nearest.setBackgroundResource(R.drawable.main_nearby);
             }
 
-            navType.setText(res.getString(geo.getLocationProvider().resourceId));
+            binding.navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
             if (geo.getAccuracy() >= 0) {
                 final int speed = Math.round(geo.getSpeed()) * 60 * 60 / 1000;
-                navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR + Units.getSpeed(speed));
+                binding.navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR + Units.getSpeed(speed));
             } else {
-                navAccuracy.setText(null);
+                binding.navAccuracy.setText(null);
             }
 
             final Geopoint currentCoords = geo.getCoords();
             if (Settings.isShowAddress()) {
                 if (addCoords == null) {
-                    navLocation.setText(R.string.loc_no_addr);
+                    binding.navLocation.setText(R.string.loc_no_addr);
                 }
                 if (addCoords == null || currentCoords.distanceTo(addCoords) > 0.5) {
                     addCoords = currentCoords;
                     final Single<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(MainActivity::formatAddress).onErrorResumeWith(Single.just(currentCoords.toString()));
                     AndroidRxUtils.bindActivity(MainActivity.this, address)
                             .subscribeOn(AndroidRxUtils.networkScheduler)
-                            .subscribe(address12 -> navLocation.setText(address12));
+                            .subscribe(address12 -> binding.navLocation.setText(address12));
                 }
             } else {
-                navLocation.setText(currentCoords.toString());
+                binding.navLocation.setText(currentCoords.toString());
             }
         }
     }
@@ -730,7 +713,7 @@ public class MainActivity extends AbstractActionBarActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindOnMap(final View v) {
-        findOnMap.setPressed(true);
+        binding.map.setPressed(true);
         startActivity(DefaultMap.getLiveMapIntent(this));
     }
 
@@ -739,7 +722,7 @@ public class MainActivity extends AbstractActionBarActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindNearest(final View v) {
-        nearestView.setPressed(true);
+        binding.nearest.setPressed(true);
         startActivity(CacheListActivity.getNearestIntent(this));
     }
 
@@ -748,7 +731,7 @@ public class MainActivity extends AbstractActionBarActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindByOffline(final View v) {
-        findByOffline.setPressed(true);
+        binding.searchOffline.setPressed(true);
         CacheListActivity.startActivityOffline(this);
     }
 
@@ -757,7 +740,7 @@ public class MainActivity extends AbstractActionBarActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoSearch(final View v) {
-        advanced.setPressed(true);
+        binding.advancedButton.setPressed(true);
         startActivity(new Intent(this, SearchActivity.class));
     }
 
@@ -766,7 +749,7 @@ public class MainActivity extends AbstractActionBarActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoPoint(final View v) {
-        any.setPressed(true);
+        binding.anyButton.setPressed(true);
         InternalConnector.assertHistoryCacheExists(this);
         CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
     }
@@ -776,8 +759,8 @@ public class MainActivity extends AbstractActionBarActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFilter(final View v) {
-        filter.setPressed(true);
-        filter.performClick();
+        binding.filterButton.setPressed(true);
+        binding.filterButton.performClick();
     }
 
     /**
