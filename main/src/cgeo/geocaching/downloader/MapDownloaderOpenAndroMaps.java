@@ -1,4 +1,4 @@
-package cgeo.geocaching.settings;
+package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.OfflineMap;
@@ -7,7 +7,6 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.app.Activity;
@@ -73,7 +72,7 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
         if (!themeFound) {
             Dialogs.confirm(activity, activity.getString(R.string.downloadmap_install_theme_title), activity.getString(R.string.downloadmap_install_theme_info), activity.getString(android.R.string.ok), (d, w) -> {
                 final Uri newUri = Uri.parse(activity.getString(R.string.mapserver_elevate_downloadurl) + ELEVATE_THEME);
-                MapDownloadUtils.triggerDownload(activity, OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_ELEVATE.id, newUri, "", System.currentTimeMillis(), callback);
+                MapDownloaderUtils.triggerDownload(activity, OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_ELEVATE.id, newUri, "", System.currentTimeMillis(), callback);
             }, dialog -> callback.run());
         } else {
             callback.run();

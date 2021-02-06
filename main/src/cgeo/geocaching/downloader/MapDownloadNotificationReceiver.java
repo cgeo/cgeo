@@ -1,9 +1,8 @@
-package cgeo.geocaching.settings;
+package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapDownloadUtils;
 
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
@@ -36,9 +35,9 @@ class MapDownloadNotificationReceiver extends BroadcastReceiver {
                                 final Uri uri = downloadManager.getUriForDownloadedFile(pendingDownload);
                                 copyFileIntent.setData(uri);
                                 copyFileIntent.putExtra(ReceiveMapFileActivity.EXTRA_FILENAME, p.getFilename());
-                                copyFileIntent.putExtra(MapDownloadUtils.RESULT_CHOSEN_URL, p.getRemoteUrl());
-                                copyFileIntent.putExtra(MapDownloadUtils.RESULT_DATE, p.getDate());
-                                copyFileIntent.putExtra(MapDownloadUtils.RESULT_TYPEID, p.getOfflineMapTypeId());
+                                copyFileIntent.putExtra(MapDownloaderUtils.RESULT_CHOSEN_URL, p.getRemoteUrl());
+                                copyFileIntent.putExtra(MapDownloaderUtils.RESULT_DATE, p.getDate());
+                                copyFileIntent.putExtra(MapDownloaderUtils.RESULT_TYPEID, p.getOfflineMapTypeId());
                                 copyFileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(copyFileIntent);
                                 Log.d("download #" + pendingDownload + " successful");

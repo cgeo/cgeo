@@ -1,10 +1,9 @@
-package cgeo.geocaching.settings;
+package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapDownloadUtils;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,7 +24,7 @@ class MapDownloaderReceiverSchemeMapTheme extends AbstractActivity {
         if (host.equals("download.openandromaps.org") && path.startsWith("/themes/") && path.endsWith(".zip")) {
             // no remapping, as they have themes only on their homepage, not on their ftp site
             final Uri newUri = Uri.parse(getString(R.string.mapserver_elevate_downloadurl) + path.substring(8));
-            MapDownloadUtils.triggerDownload(this, OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_ELEVATE.id, newUri, "", System.currentTimeMillis(), this::callback);
+            MapDownloaderUtils.triggerDownload(this, OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_ELEVATE.id, newUri, "", System.currentTimeMillis(), this::callback);
         } else {
             // generic map theme download - not yet supported
             Log.w("MapDownloaderReceiverSchemeMapTheme: Received map theme download intent from unknown source: " + uri.toString());

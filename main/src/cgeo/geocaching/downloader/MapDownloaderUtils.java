@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -6,11 +6,11 @@ import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.settings.MapDownloadSelectorActivity;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,7 +24,7 @@ import android.widget.TextView;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.DOWNLOAD_SERVICE;
 
-public class MapDownloadUtils {
+public class MapDownloaderUtils {
 
     public static final int REQUEST_CODE = 47131;
     public static final String RESULT_CHOSEN_URL = "chosenUrl";
@@ -32,7 +32,7 @@ public class MapDownloadUtils {
     public static final String RESULT_DATE = "dateInfo";
     public static final String RESULT_TYPEID = "typeId";
 
-    private MapDownloadUtils() {
+    private MapDownloaderUtils() {
         // utility class
     }
 

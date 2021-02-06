@@ -1,4 +1,4 @@
-package cgeo.geocaching.settings;
+package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
@@ -9,8 +9,6 @@ import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapDownloadUtils;
-import cgeo.geocaching.utils.OfflineMapUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -61,12 +59,12 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         final Intent intent = getIntent();
         uri = intent.getData();
         final String preset = intent.getStringExtra(EXTRA_FILENAME);
-        sourceURL = intent.getStringExtra(MapDownloadUtils.RESULT_CHOSEN_URL);
-        sourceDate = intent.getLongExtra(MapDownloadUtils.RESULT_DATE, 0);
-        offlineMapTypeId = intent.getIntExtra(MapDownloadUtils.RESULT_TYPEID, OfflineMap.OfflineMapType.DEFAULT);
+        sourceURL = intent.getStringExtra(MapDownloaderUtils.RESULT_CHOSEN_URL);
+        sourceDate = intent.getLongExtra(MapDownloaderUtils.RESULT_DATE, 0);
+        offlineMapTypeId = intent.getIntExtra(MapDownloaderUtils.RESULT_TYPEID, OfflineMap.OfflineMapType.DEFAULT);
         downloader = OfflineMap.OfflineMapType.getInstance(offlineMapTypeId);
 
-        MapDownloadUtils.checkMapDirectory(this, false, (folder, isWritable) -> {
+        MapDownloaderUtils.checkMapDirectory(this, false, (folder, isWritable) -> {
             if (isWritable) {
                 boolean foundMapInZip = false;
                 // test if ZIP file received
@@ -122,7 +120,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
     private void handleMapFile(final Activity activity, final boolean isZipFile, final String nameWithinZip) {
         // check whether the target file or its companion file already exist
         final List<ContentStorage.FileInformation> files = ContentStorage.get().list(downloader.targetFolder.getFolder(), false);
-        Uri companionFileExists = OfflineMapUtils.companionFileExists(files, filename);
+        Uri companionFileExists = CompanionFileUtils.companionFileExists(files, filename);
         Uri downloadFileExists = null;
         for (ContentStorage.FileInformation fi : files) {
             if (fi.name.equals(filename)) {
@@ -158,7 +156,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                         existingFiles.add(fi.name);
                     }
                     filename = FileUtils.createUniqueFilename(filename, existingFiles);
-                    final Uri newCompanionFile = OfflineMapUtils.companionFileExists(files, filename);
+                    final Uri newCompanionFile = CompanionFileUtils.companionFileExists(files, filename);
                     if (newCompanionFile != null) {
                         ContentStorage.get().delete(newCompanionFile);
                     }
@@ -269,7 +267,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                 case SUCCESS:
                     result = String.format(getString(R.string.receivemapfile_success), fileinfo);
                     if (StringUtils.isNotBlank(sourceURL)) {
-                        OfflineMapUtils.writeInfo(sourceURL, filename, OfflineMapUtils.getDisplayName(fileinfo), sourceDate, offlineMapTypeId);
+                        CompanionFileUtils.writeInfo(sourceURL, filename, CompanionFileUtils.getDisplayName(fileinfo), sourceDate, offlineMapTypeId);
                     }
                     break;
                 case CANCELLED:

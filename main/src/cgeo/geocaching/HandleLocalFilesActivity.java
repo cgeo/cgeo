@@ -1,9 +1,9 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.downloader.ReceiveMapFileActivity;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
-import cgeo.geocaching.settings.ReceiveMapFileActivity;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.content.ContentResolver;

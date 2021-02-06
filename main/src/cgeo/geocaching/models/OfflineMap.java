@@ -2,12 +2,12 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.AbstractDownloader;
-import cgeo.geocaching.settings.MapDownloaderElevate;
-import cgeo.geocaching.settings.MapDownloaderMapsforge;
-import cgeo.geocaching.settings.MapDownloaderOpenAndroMaps;
+import cgeo.geocaching.downloader.AbstractDownloader;
+import cgeo.geocaching.downloader.CompanionFileUtils;
+import cgeo.geocaching.downloader.MapDownloaderElevate;
+import cgeo.geocaching.downloader.MapDownloaderMapsforge;
+import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
 import cgeo.geocaching.utils.CalendarUtils;
-import cgeo.geocaching.utils.OfflineMapUtils;
 
 import android.net.Uri;
 
@@ -28,7 +28,7 @@ public class OfflineMap {
     private final OfflineMapType type;
 
     public OfflineMap(final String name, final Uri uri, final boolean isDir, final String dateISO, final String sizeInfo, final OfflineMapType type) {
-        this.name = OfflineMapUtils.getDisplayName(name);
+        this.name = CompanionFileUtils.getDisplayName(name);
         this.uri = uri;
         this.isDir = isDir;
         this.sizeInfo = sizeInfo;
