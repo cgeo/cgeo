@@ -1339,7 +1339,7 @@
     <string name="map_live_disable">Disable live</string>
     <string name="map_as_list">Show as list</string>
     <string name="map_select_multiple_items">Select item</string>
-    <string name="map_routing">Routing</string>
+    <string name="map_routing">Routing (Currently: %s)</string>
     <string name="map_routing_brouter">Routing is only available if <a href="">BRouter</a> is installed</string>
     <string name="map_gm_autorotation">Map auto rotation</string>
     <string name="map_gm_autorotation_disable">Disable map auto rotation?\n\nYou can enable it again using the Map rotation menu</string>
@@ -2026,6 +2026,11 @@
     <string name="switch_default">(default)</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+    <string name="routingmode_straight">Straight</string>
+    <string name="routingmode_walk">Walk</string>
+    <string name="routingmode_bike">Bike</string>
+    <string name="routingmode_car">Car</string>
 
     <!-- view settings -->
     <string name="view_settings">View settings</string>
