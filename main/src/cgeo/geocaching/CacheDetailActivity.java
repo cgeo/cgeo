@@ -24,6 +24,7 @@ import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
+import cgeo.geocaching.databinding.WaypointItemBinding;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -1945,8 +1946,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                     View rowView = convertView;
+                    WaypointItemBinding temp = null;
                     if (rowView == null) {
-                        rowView = getLayoutInflater().inflate(R.layout.waypoint_item, parent, false);
+                        temp = WaypointItemBinding.inflate(getLayoutInflater(), parent, false);
+                        rowView = temp.getRoot();
                         rowView.setClickable(true);
                         rowView.setLongClickable(true);
                         registerForContextMenu(rowView);
@@ -1954,6 +1957,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     WaypointViewHolder holder = (WaypointViewHolder) rowView.getTag();
                     if (holder == null) {
                         holder = new WaypointViewHolder(rowView);
+                        holder.binding = temp;
                     }
 
                     final Waypoint waypoint = getItem(position);
@@ -2008,7 +2012,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         protected void fillViewHolder(final View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
             // coordinates
-            final TextView coordinatesView = holder.coordinatesView;
+            final TextView coordinatesView = holder.binding.coordinates;
             final Geopoint coordinates = wpt.getCoords();
             if (coordinates != null) {
                 holder.setCoordinate(coordinates);
@@ -2019,7 +2023,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // info
             final String waypointInfo = Formatter.formatWaypointInfo(wpt);
-            final TextView infoView = holder.infoView;
+            final TextView infoView = holder.binding.info;
             if (StringUtils.isNotBlank(waypointInfo)) {
                 infoView.setText(waypointInfo);
                 infoView.setVisibility(View.VISIBLE);
@@ -2028,7 +2032,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // title
-            final TextView nameView = holder.nameView;
+            final TextView nameView = holder.binding.name;
             if (StringUtils.isNotBlank(wpt.getName())) {
                 nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
             } else if (coordinates != null) {
@@ -2049,7 +2053,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // note
-            final TextView noteView = holder.noteView;
+            final TextView noteView = holder.binding.note;
             if (StringUtils.isNotBlank(wpt.getNote())) {
                 noteView.setOnClickListener(new DecryptTextClickListener(noteView));
                 noteView.setVisibility(View.VISIBLE);
@@ -2063,7 +2067,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // user note
-            final TextView userNoteView = holder.userNoteView;
+            final TextView userNoteView = holder.binding.userNote;
             if (StringUtils.isNotBlank(wpt.getUserNote()) && !StringUtils.equals(wpt.getNote(), wpt.getUserNote())) {
                 userNoteView.setOnClickListener(new DecryptTextClickListener(userNoteView));
                 userNoteView.setVisibility(View.VISIBLE);
@@ -2072,7 +2076,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 userNoteView.setVisibility(View.GONE);
             }
 
-            final View wpNavView = holder.wpNavView;
+            final View wpNavView = holder.binding.wpDefaultNavigation;
             wpNavView.setOnClickListener(v -> NavigationAppFactory.startDefaultNavigationApplication(1, CacheDetailActivity.this, wpt));
             wpNavView.setOnLongClickListener(v -> {
                 NavigationAppFactory.startDefaultNavigationApplication(2, CacheDetailActivity.this, wpt);

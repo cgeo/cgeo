@@ -127,10 +127,10 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     protected void fillCountOrLocation(final LogViewHolder holder, final LogEntry log) {
         // finds count
         if (log.found == -1) {
-            holder.countOrLocation.setVisibility(View.GONE);
+            holder.binding.countOrLocation.setVisibility(View.GONE);
         } else {
-            holder.countOrLocation.setVisibility(View.VISIBLE);
-            holder.countOrLocation.setText(res.getQuantityString(R.plurals.cache_counts, log.found, log.found));
+            holder.binding.countOrLocation.setVisibility(View.VISIBLE);
+            holder.binding.countOrLocation.setText(res.getQuantityString(R.plurals.cache_counts, log.found, log.found));
         }
     }
 
@@ -138,9 +138,9 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     protected void fillViewHolder(final View convertView, final LogViewHolder holder, final LogEntry log) {
         super.fillViewHolder(convertView, holder, log);
         if (isOfflineLog(log)) {
-            holder.author.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
-            holder.marker.setVisibility(View.VISIBLE);
-            holder.marker.setImageResource(R.drawable.mark_orange);
+            holder.binding.author.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
+            holder.binding.logMark.setVisibility(View.VISIBLE);
+            holder.binding.logMark.setImageResource(R.drawable.mark_orange);
         }
     }
 

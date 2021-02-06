@@ -15,6 +15,8 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
+import cgeo.geocaching.databinding.LogcacheActivityBinding;
+import cgeo.geocaching.databinding.LogcacheTrackableItemBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
@@ -55,11 +57,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,7 +71,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import butterknife.BindView;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.lang3.StringUtils;
@@ -87,18 +83,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private enum SaveMode { NORMAL, FORCE, SKIP }
 
     private final Set<TrackableLog> trackables = new HashSet<>();
-    @BindView(R.id.tweet)
-    protected CheckBox tweetCheck;
-    @BindView(R.id.log_password_box)
-    protected LinearLayout logPasswordBox;
-    @BindView(R.id.log_password)
-    protected EditText logPassword;
-    @BindView(R.id.favorite_check)
-    protected CheckBox favCheck;
-    @BindView(R.id.log)
-    protected EditText logEditText;
-    @BindView(R.id.log_characters_counter)
-    protected TextView logCharactersCounter;
+    protected LogcacheActivityBinding binding;
 
     protected ImageListFragment imageListFragment;
 
@@ -168,11 +153,10 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         }
         reportProblem.setValues(possibleReportProblemTypes);
 
-        final View reportProblemBox = findViewById(R.id.report_problem_box);
         if (possibleReportProblemTypes.size() == 1) {
-            reportProblemBox.setVisibility(View.GONE);
+            binding.reportProblemBox.setVisibility(View.GONE);
         } else {
-            reportProblemBox.setVisibility(View.VISIBLE);
+            binding.reportProblemBox.setVisibility(View.VISIBLE);
         }
     }
 
@@ -200,14 +184,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     private void updateTrackablesList() {
         final TrackableLog[] trackablesArray = getSortedTrackables().toArray(new TrackableLog[trackables.size()]);
-        final ListView inventoryList = findViewById(R.id.inventory);
-        inventoryList.setAdapter(new TrackableLogAdapter(this, R.layout.logcache_trackable_item, trackablesArray));
-        ViewUtils.setListViewHeightBasedOnItems(inventoryList);
+        binding.inventory.setAdapter(new TrackableLogAdapter(this, R.layout.logcache_trackable_item, trackablesArray));
+        ViewUtils.setListViewHeightBasedOnItems(binding.inventory);
 
-        findViewById(R.id.inventory_box).setVisibility(trackables.isEmpty() ? View.GONE : View.VISIBLE);
-
-        final LinearLayout inventoryChangeAllView = findViewById(R.id.inventory_changeall);
-        inventoryChangeAllView.setVisibility(trackables.size() > 1 ? View.VISIBLE : View.GONE);
+        binding.inventoryBox.setVisibility(trackables.isEmpty() ? View.GONE : View.VISIBLE);
+        binding.inventoryChangeall.setVisibility(trackables.size() > 1 ? View.VISIBLE : View.GONE);
 
         trackableActionsChangeAll.setTextDialogTitle(getString(R.string.log_tb_changeall) + " (" + trackables.size() + ")");
     }
@@ -226,17 +207,18 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         onCreate(savedInstanceState, R.layout.logcache_activity);
+        binding = LogcacheActivityBinding.bind(getWindow().getDecorView().findViewById(android.R.id.content));
 
-        date.init(findViewById(R.id.date), null, getSupportFragmentManager());
-        logType.setTextView(findViewById(R.id.type)).setDisplayMapper(LogType::getL10n);
-        reportProblem.setTextView(findViewById(R.id.report_problem))
+        date.init(binding.date, null, getSupportFragmentManager());
+        logType.setTextView(binding.type).setDisplayMapper(LogType::getL10n);
+        reportProblem.setTextView(binding.reportProblem)
                 .setTextDisplayMapper(rp -> rp.getL10n() + " ▼")
                 .setDisplayMapper(ReportProblemType::getL10n);
 
         this.imageListFragment = (ImageListFragment) getSupportFragmentManager().findFragmentById(R.id.imagelist_fragment);
 
         // show remaining characters
-        logEditText.addTextChangedListener(new TextWatcher() {
+        binding.log.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void beforeTextChanged(final CharSequence s, final int st, final int c, final int a) {
@@ -254,12 +236,12 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 final int count = TextUtils.getNormalizedStringLength(editable.toString());
 
                 if (count >= 3000) {
-                    logCharactersCounter.setVisibility(View.VISIBLE);
-                    logCharactersCounter.setText(count + "/" + LOG_MAX_LENGTH);
-                    logCharactersCounter.setTextColor(count > LOG_MAX_LENGTH ? Color.RED : getResources().getColor(Settings.isLightSkin() ? R.color.text_light : R.color.text_dark));
+                    binding.logCharactersCounter.setVisibility(View.VISIBLE);
+                    binding.logCharactersCounter.setText(count + "/" + LOG_MAX_LENGTH);
+                    binding.logCharactersCounter.setTextColor(count > LOG_MAX_LENGTH ? Color.RED : getResources().getColor(Settings.isLightSkin() ? R.color.text_light : R.color.text_dark));
 
                 } else {
-                    logCharactersCounter.setVisibility(View.GONE);
+                    binding.logCharactersCounter.setVisibility(View.GONE);
                 }
             }
 
@@ -268,7 +250,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         });
 
         //init trackable "change all" button
-        trackableActionsChangeAll.setTextView(findViewById(R.id.changebutton))
+        trackableActionsChangeAll.setTextView(binding.changebutton)
                 .setTextDialogTitle(getString(R.string.log_tb_changeall))
                 .setTextDisplayMapper(lt -> getString(R.string.log_tb_changeall))
                 .setDisplayMapper(LogTypeTrackable::getLabel)
@@ -294,7 +276,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         invalidateOptionsMenuCompatible();
         logType.setValues(cache.getPossibleLogTypes());
-        cacheVotingBar.initialize(cache, getWindow().getDecorView().getRootView(), null);
+        cacheVotingBar.initialize(cache, binding.getRoot(), null);
 
         setCacheTitleBar(cache);
         //initializeRatingBar();
@@ -345,8 +327,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     private void setLogText(final String newText) {
-        logEditText.setText(newText == null ? StringUtils.EMPTY : newText);
-        Dialogs.moveCursorToEnd(logEditText);
+        binding.log.setText(newText == null ? StringUtils.EMPTY : newText);
+        Dialogs.moveCursorToEnd(binding.log);
     }
 
     private OfflineLogEntry restorePreviousLogEntry(final Bundle savedInstanceState) {
@@ -367,9 +349,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         setLogText(logEntry.log);
         reportProblem.set(logEntry.reportProblem);
         cacheVotingBar.setRating(logEntry.rating == null ? cache.getMyVote() : logEntry.rating);
-        favCheck.setChecked(logEntry.favorite);
-        tweetCheck.setChecked(logEntry.tweet);
-        logPassword.setText(logEntry.password);
+        binding.favoriteCheck.setChecked(logEntry.favorite);
+        binding.tweet.setChecked(logEntry.tweet);
+        binding.logPassword.setText(logEntry.password);
 
         imageListFragment.setImages(logEntry.logImages);
 
@@ -384,9 +366,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setLog(currentLogText())
                 .setReportProblem(reportProblem.get())
                 .setRating(cacheVotingBar.getRating())
-                .setFavorite(favCheck.isChecked())
-                .setTweet(tweetCheck.isChecked())
-                .setPassword(logPassword.getText().toString());
+                .setFavorite(binding.favoriteCheck.isChecked())
+                .setTweet(binding.tweet.isChecked())
+                .setPassword(binding.logPassword.getText().toString());
         CollectionStream.of(imageListFragment.getImages()).forEach(builder::addLogImage);
         CollectionStream.of(trackables).forEach(t -> builder.addTrackableAction(t.trackCode, t.action));
 
@@ -402,18 +384,18 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager instanceof ILoggingWithFavorites) {
             final int favoritePoints = ((ILoggingWithFavorites) loggingManager).getFavoritePoints();
             if (favoritePoints > 0) {
-                favCheck.setVisibility(View.VISIBLE);
-                favCheck.setText(res.getQuantityString(R.plurals.fav_points_remaining, favoritePoints, favoritePoints));
+                binding.favoriteCheck.setVisibility(View.VISIBLE);
+                binding.favoriteCheck.setText(res.getQuantityString(R.plurals.fav_points_remaining, favoritePoints, favoritePoints));
             }
         } else {
-            favCheck.setVisibility(View.GONE);
+            binding.favoriteCheck.setVisibility(View.GONE);
         }
     }
 
     private void resetValues() {
         setType(cache.getDefaultLogType());
         final Calendar defaultDate = Calendar.getInstance();
-        // it this is an attended event log, use the event date by default instead of the current date
+        // if this is an attended event log, use the event date by default instead of the current date
         if (cache.isEventCache() && CalendarUtils.isPastEvent(cache) && logType.get() == LogType.ATTENDED) {
             defaultDate.setTime(cache.getHiddenDate());
         }
@@ -422,12 +404,14 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         reportProblem.set(ReportProblemType.NO_PROBLEM);
         cacheVotingBar.setRating(cache.getMyVote());
         imageListFragment.clearImages();
-        tweetCheck.setChecked(true);
-        favCheck.setChecked(false);
-        logPassword.setText(StringUtils.EMPTY);
+        binding.tweet.setChecked(true);
+        binding.favoriteCheck.setChecked(false);
+        binding.logPassword.setText(StringUtils.EMPTY);
 
+        /* still needed?
         final EditText logPasswordView = LogCacheActivity.this.findViewById(R.id.log_password);
         logPasswordView.setText(StringUtils.EMPTY);
+        */
 
         //force copy due to #9101
         CollectionStream.of(trackables, true).forEach(tl -> initializeTrackableAction(tl, null));
@@ -475,17 +459,17 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     private void updateTweetBox(final LogType type) {
         if (type == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
-            tweetCheck.setVisibility(View.VISIBLE);
+            binding.tweet.setVisibility(View.VISIBLE);
         } else {
-            tweetCheck.setVisibility(View.GONE);
+            binding.tweet.setVisibility(View.GONE);
         }
     }
 
     private void updateLogPasswordBox(final LogType type) {
         if (type == LogType.FOUND_IT && cache.isLogPasswordRequired()) {
-            logPasswordBox.setVisibility(View.VISIBLE);
+            binding.logPasswordBox.setVisibility(View.VISIBLE);
         } else {
-            logPasswordBox.setVisibility(View.GONE);
+            binding.logPasswordBox.setVisibility(View.GONE);
         }
     }
 
@@ -522,11 +506,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     private String currentLogText() {
-        return logEditText.getText().toString();
+        return binding.log.getText().toString();
     }
 
     private String currentLogPassword() {
-        return logPassword.getText().toString();
+        return binding.logPassword.getText().toString();
     }
 
     @Override
@@ -545,7 +529,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         Log.v("LogCacheActivity.onOptionsItemSelected(" + item.getItemId() + "/" + item.getTitle() + ")");
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_send) {
-            if (TextUtils.getNormalizedStringLength(logEditText.getText().toString()) <= LOG_MAX_LENGTH) {
+            if (TextUtils.getNormalizedStringLength(binding.log.getText().toString()) <= LOG_MAX_LENGTH) {
                 sendLogAndConfirm();
             } else {
                 Toast.makeText(this, R.string.cache_log_too_long, Toast.LENGTH_LONG).show();
@@ -622,15 +606,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     protected static class ViewHolder extends AbstractViewHolder {
-        @BindView(R.id.trackable_image_brand)
-        protected ImageView brandView;
-        @BindView(R.id.trackcode)
-        protected TextView codeView;
-        @BindView(R.id.name)
-        protected TextView nameView;
+        public LogcacheTrackableItemBinding binding;
         private final TextSpinner<LogTypeTrackable> trackableAction = new TextSpinner<>();
-        @BindView(R.id.info)
-        protected View infoView;
 
         public ViewHolder(final View rowView) {
             super(rowView);
@@ -645,23 +622,26 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         @Override
         public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View rowView = convertView;
+            LogcacheTrackableItemBinding temp = null;
             if (rowView == null) {
-                rowView = getLayoutInflater().inflate(R.layout.logcache_trackable_item, parent, false);
+                temp = LogcacheTrackableItemBinding.inflate(getLayoutInflater(), parent, false);
+                rowView = temp.getRoot();
             }
             ViewHolder holder = (ViewHolder) rowView.getTag();
             if (holder == null) {
                 holder = new ViewHolder(rowView);
+                holder.binding = temp;
             }
 
             final TrackableLog trackable = getItem(position);
-            fillViewHolder(holder, trackable, rowView.findViewById(R.id.action));
+            fillViewHolder(holder, trackable, holder.binding.action);
             return rowView;
         }
 
         private void fillViewHolder(final ViewHolder holder, final TrackableLog trackable, final TextView action) {
-            holder.brandView.setImageResource(trackable.brand.getIconResource());
-            holder.codeView.setText(trackable.trackCode);
-            holder.nameView.setText(trackable.name);
+            holder.binding.trackableImageBrand.setImageResource(trackable.brand.getIconResource());
+            holder.binding.trackcode.setText(trackable.trackCode);
+            holder.binding.name.setText(trackable.name);
 
             holder.trackableAction.setTextView(action)
                     .setTextDialogTitle(trackable.name)
@@ -675,7 +655,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                     });
 
 
-            holder.infoView.setOnClickListener(view -> {
+            holder.binding.info.setOnClickListener(view -> {
                 final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
                 final String tbCode = StringUtils.isNotEmpty(trackable.geocode) ? trackable.geocode : trackable.trackCode;
                 trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
@@ -807,7 +787,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                     // update offline log in DB
                     cache.clearOfflineLog();
 
-                    if (logType.get() == LogType.FOUND_IT && tweetCheck.isChecked() && tweetCheck.getVisibility() == View.VISIBLE) {
+                    if (logType.get() == LogType.FOUND_IT && binding.tweet.isChecked() && binding.tweet.getVisibility() == View.VISIBLE) {
                         publishProgress(res.getString(R.string.log_posting_twitter));
                         Twitter.postTweetCache(geocode, logNow);
                     }

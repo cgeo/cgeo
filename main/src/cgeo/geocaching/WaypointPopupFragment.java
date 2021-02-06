@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.databinding.WaypointPopupBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
@@ -17,36 +18,26 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import org.apache.commons.lang3.StringUtils;
 
 public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNotification {
-    @BindView(R.id.actionbar_title) protected TextView actionBarTitle;
-    @BindView(R.id.waypoint_details_list) protected LinearLayout waypointDetailsLayout;
-    @BindView(R.id.toggle_visited) protected CheckBox toggleVisited;
-    @BindView(R.id.edit) protected Button buttonEdit;
-    @BindView(R.id.details_list) protected LinearLayout cacheDetailsLayout;
 
     private int waypointId = 0;
     private Waypoint waypoint = null;
     private TextView waypointDistance = null;
+    private WaypointPopupBinding binding;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.waypoint_popup, container, false);
+        binding = WaypointPopupBinding.inflate(getLayoutInflater(), container, false);
+        final View v = binding.getRoot();
         initCustomActionBar(v);
-        ButterKnife.bind(this, v);
-
         return v;
     }
 
@@ -92,11 +83,11 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             }
 
 
-            actionBarTitle.setCompoundDrawablesWithIntrinsicBounds(Compatibility.getDrawable(getResources(), waypoint.getWaypointType().markerId), null, null, null);
+            binding.actionBar.actionbarTitle.setCompoundDrawablesWithIntrinsicBounds(Compatibility.getDrawable(getResources(), waypoint.getWaypointType().markerId), null, null, null);
 
             //getSupportActionBar().setIcon(getResources().getDrawable(waypoint.getWaypointType().markerId));
 
-            details = new CacheDetailsCreator(getActivity(), waypointDetailsLayout);
+            details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);
 
             //Waypoint geocode
             details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getGeocode().substring(2));
@@ -110,19 +101,19 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
                 details.addHtml(R.string.waypoint_user_note, userNote, waypoint.getGeocode());
             }
 
-            toggleVisited.setChecked(waypoint.isVisited());
-            toggleVisited.setOnClickListener(arg1 -> {
+            binding.toggleVisited.setChecked(waypoint.isVisited());
+            binding.toggleVisited.setOnClickListener(arg1 -> {
                 waypoint.setVisited(!waypoint.isVisited());
                 DataStore.saveWaypoint(waypoint.getId(), waypoint.getGeocode(), waypoint);
                 Toast.makeText(getActivity(), waypoint.isVisited() ? R.string.waypoint_set_visited : R.string.waypoint_unset_visited, Toast.LENGTH_SHORT).show();
             });
 
-            buttonEdit.setOnClickListener(arg0 -> {
+            binding.edit.setOnClickListener(arg0 -> {
                 EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId());
                 getActivity().finish();
             });
 
-            details = new CacheDetailsCreator(getActivity(), cacheDetailsLayout);
+            details = new CacheDetailsCreator(getActivity(), binding.detailsList);
             details.add(R.string.cache_name, cache.getName());
 
             addCacheDetails();
