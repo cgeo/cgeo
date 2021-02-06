@@ -1,6 +1,6 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.R;
+import cgeo.geocaching.databinding.TrackableItemBinding;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.TextUtils;
@@ -9,15 +9,11 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-
-import butterknife.BindView;
 
 public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdapter.ViewHolder> {
 
@@ -29,8 +25,7 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
     @NonNull private final TrackableClickListener trackableClickListener;
 
     protected static final class ViewHolder extends AbstractRecyclerViewHolder {
-        @BindView(R.id.trackable_image_brand) ImageView imageBrand;
-        @BindView(R.id.trackable_name) TextView name;
+        public TrackableItemBinding binding;
 
         ViewHolder(final View view) {
             super(view);
@@ -50,8 +45,9 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trackable_item, parent, false);
-        final ViewHolder viewHolder = new ViewHolder(view);
+        final TrackableItemBinding temp = TrackableItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        final ViewHolder viewHolder = new ViewHolder(temp.getRoot());
+        viewHolder.binding = temp;
         viewHolder.itemView.setOnClickListener(view1 -> trackableClickListener.onTrackableClicked(trackables.get(viewHolder.getAdapterPosition())));
         return viewHolder;
     }
@@ -60,10 +56,10 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Trackable trackable = trackables.get(position);
 
-        holder.imageBrand.setImageResource(trackable.getIconBrand());
-        holder.name.setText(TextUtils.stripHtml(trackable.getName()));
+        holder.binding.trackableImageBrand.setImageResource(trackable.getIconBrand());
+        holder.binding.trackableName.setText(TextUtils.stripHtml(trackable.getName()));
         if (trackable.isMissing()) {
-            holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.binding.trackableName.setPaintFlags(holder.binding.trackableName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
     }
 

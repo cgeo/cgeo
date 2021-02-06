@@ -23,6 +23,7 @@ import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -166,8 +167,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
@@ -1600,10 +1599,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     protected class DescriptionViewCreator extends AbstractCachingPageViewCreator<NestedScrollView> {
 
-        @BindView(R.id.personalnote) protected TextView personalNoteView;
-        @BindView(R.id.description) protected IndexOutOfBoundsAvoidingTextView descView;
-        @BindView(R.id.loading) protected View loadingView;
         private int maxPersonalNotesChars = 0;
+        private CachedetailDescriptionPageBinding binding;
 
         @Override
         @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
@@ -1613,12 +1610,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return null;
             }
 
-            view = (NestedScrollView) getLayoutInflater().inflate(R.layout.cachedetail_description_page, parentView, false);
-            ButterKnife.bind(this, view);
+            binding = CachedetailDescriptionPageBinding.inflate(getLayoutInflater(), parentView, false);
+            view = binding.getRoot();
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                loadDescription(cache.getShortDescription(), descView, null);
+                loadDescription(cache.getShortDescription(), binding.description, null);
             }
 
             // long description
@@ -1627,39 +1624,34 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // cache personal note
-            final View separator = view.findViewById(R.id.personalnote_button_separator);
-            setPersonalNote(personalNoteView, separator, cache.getPersonalNote());
-            personalNoteView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            addContextMenu(personalNoteView);
-            final ImageButton personalNoteEdit = view.findViewById(R.id.edit_personalnote);
-            TooltipCompat.setTooltipText(personalNoteEdit, getString(R.string.cache_personal_note_edit));
-            personalNoteEdit.setOnClickListener(v -> {
+            setPersonalNote(binding.personalnote, binding.personalnoteButtonSeparator, cache.getPersonalNote());
+            binding.personalnote.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+            addContextMenu(binding.personalnote);
+            TooltipCompat.setTooltipText(binding.editPersonalnote, getString(R.string.cache_personal_note_edit));
+            binding.editPersonalnote.setOnClickListener(v -> {
                 ensureSaved();
                 editPersonalNote(cache, CacheDetailActivity.this);
             });
-            personalNoteView.setOnClickListener(v -> {
+            binding.personalnote.setOnClickListener(v -> {
                 ensureSaved();
                 editPersonalNote(cache, CacheDetailActivity.this);
             });
-            final ImageButton storeWaypoints = view.findViewById(R.id.storewaypoints_personalnote);
-            TooltipCompat.setTooltipText(storeWaypoints, getString(R.string.cache_personal_note_storewaypoints));
-            storeWaypoints.setOnClickListener(v -> {
+            TooltipCompat.setTooltipText(binding.storewaypointsPersonalnote, getString(R.string.cache_personal_note_storewaypoints));
+            binding.storewaypointsPersonalnote.setOnClickListener(v -> {
                 ensureSaved();
                 storeWaypointsInPersonalNote(cache, maxPersonalNotesChars);
             });
-            final ImageButton removeWaypoints = view.findViewById(R.id.deleteewaypoints_personalnote);
-            TooltipCompat.setTooltipText(removeWaypoints, getString(R.string.cache_personal_note_removewaypoints));
-            removeWaypoints.setOnClickListener(v -> {
+            TooltipCompat.setTooltipText(binding.deleteewaypointsPersonalnote, getString(R.string.cache_personal_note_removewaypoints));
+            binding.deleteewaypointsPersonalnote.setOnClickListener(v -> {
                 ensureSaved();
                 removeWaypointsFromPersonalNote(cache);
             });
-            final ImageButton personalNoteUpload = view.findViewById(R.id.upload_personalnote);
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
                 maxPersonalNotesChars = connector.getPersonalNoteMaxChars();
-                personalNoteUpload.setVisibility(View.VISIBLE);
-                TooltipCompat.setTooltipText(personalNoteUpload, getString(R.string.cache_personal_note_upload));
-                personalNoteUpload.setOnClickListener(v -> {
+                binding.uploadPersonalnote.setVisibility(View.VISIBLE);
+                TooltipCompat.setTooltipText(binding.uploadPersonalnote, getString(R.string.cache_personal_note_upload));
+                binding.uploadPersonalnote.setOnClickListener(v -> {
                     if (StringUtils.length(cache.getPersonalNote()) > maxPersonalNotesChars) {
                         warnPersonalNoteExceedsLimit();
                     } else {
@@ -1667,56 +1659,52 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     }
                 });
             } else {
-                personalNoteUpload.setVisibility(View.GONE);
+                binding.uploadPersonalnote.setVisibility(View.GONE);
             }
 
             // cache hint and spoiler images
-            final View hintBoxView = view.findViewById(R.id.hint_box);
             if (StringUtils.isNotBlank(cache.getHint()) || CollectionUtils.isNotEmpty(cache.getSpoilers())) {
-                hintBoxView.setVisibility(View.VISIBLE);
+                binding.hintBox.setVisibility(View.VISIBLE);
             } else {
-                hintBoxView.setVisibility(View.GONE);
+                binding.hintBox.setVisibility(View.GONE);
             }
 
-            final TextView hintView = view.findViewById(R.id.hint);
             if (StringUtils.isNotBlank(cache.getHint())) {
                 if (TextUtils.containsHtml(cache.getHint())) {
-                    hintView.setText(HtmlCompat.fromHtml(cache.getHint(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
-                    hintView.setText(CryptUtils.rot13((Spannable) hintView.getText()));
+                    binding.hint.setText(HtmlCompat.fromHtml(cache.getHint(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
+                    binding.hint.setText(CryptUtils.rot13((Spannable) binding.hint.getText()));
                 } else {
-                    hintView.setText(CryptUtils.rot13(cache.getHint()));
+                    binding.hint.setText(CryptUtils.rot13(cache.getHint()));
                 }
-                hintView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                hintView.setVisibility(View.VISIBLE);
-                hintView.setClickable(true);
-                hintView.setOnClickListener(new DecryptTextClickListener(hintView));
-                hintBoxView.setOnClickListener(new DecryptTextClickListener(hintView));
-                hintBoxView.setClickable(true);
-                addContextMenu(hintView);
+                binding.hint.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                binding.hint.setVisibility(View.VISIBLE);
+                binding.hint.setClickable(true);
+                binding.hint.setOnClickListener(new DecryptTextClickListener(binding.hint));
+                binding.hintBox.setOnClickListener(new DecryptTextClickListener(binding.hint));
+                binding.hintBox.setClickable(true);
+                addContextMenu(binding.hint);
             } else {
-                hintView.setVisibility(View.GONE);
-                hintView.setClickable(false);
-                hintView.setOnClickListener(null);
-                hintBoxView.setClickable(false);
-                hintBoxView.setOnClickListener(null);
+                binding.hint.setVisibility(View.GONE);
+                binding.hint.setClickable(false);
+                binding.hint.setOnClickListener(null);
+                binding.hintBox.setClickable(false);
+                binding.hintBox.setOnClickListener(null);
             }
 
-            final TextView spoilerlinkView = view.findViewById(R.id.hint_spoilerlink);
             if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
-                spoilerlinkView.setVisibility(View.VISIBLE);
-                spoilerlinkView.setClickable(true);
-                spoilerlinkView.setOnClickListener(arg0 -> {
+                binding.hintSpoilerlink.setVisibility(View.VISIBLE);
+                binding.hintSpoilerlink.setClickable(true);
+                binding.hintSpoilerlink.setOnClickListener(arg0 -> {
                     if (cache == null || CollectionUtils.isEmpty(cache.getSpoilers())) {
                         showToast(res.getString(R.string.err_detail_no_spoiler));
                         return;
                     }
-
                     ImagesActivity.startActivity(CacheDetailActivity.this, cache.getGeocode(), cache.getSpoilers());
                 });
             } else {
-                spoilerlinkView.setVisibility(View.GONE);
-                spoilerlinkView.setClickable(true);
-                spoilerlinkView.setOnClickListener(null);
+                binding.hintSpoilerlink.setVisibility(View.GONE);
+                binding.hintSpoilerlink.setClickable(true);
+                binding.hintSpoilerlink.setOnClickListener(null);
             }
 
             return view;
@@ -1741,13 +1729,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         private void loadLongDescription(final ViewGroup parentView) {
-            loadingView.setVisibility(View.VISIBLE);
+            binding.loading.setVisibility(View.VISIBLE);
 
             final String longDescription = cache.getDescription();
-            loadDescription(longDescription, descView, loadingView);
+            loadDescription(longDescription, binding.description, binding.loading);
 
             if (cache.supportsDescriptionchange()) {
-                descView.setOnClickListener(v -> {
+                binding.description.setOnClickListener(v -> {
                     final Context context = parentView.getContext();
                     final EditText editText = new EditText(context);
                     editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
@@ -1765,7 +1753,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         .setTitle(R.string.cache_description_set)
                         .setView(editText)
                         .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                            descView.setText(editText.getText().toString());
+                            binding.description.setText(editText.getText().toString());
                             cache.setDescription(editText.getText().toString());
                             DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
                             Toast.makeText(context, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
