@@ -9,8 +9,8 @@
 <h4>Map:</h4>
 <ul>
 <li>Change: Merged \"show direction\" and \"Routing mode\" settings (map quick settings popup)</li>
-<li>New: Added OpenAndroMaps to MapDownloader</li>
-<li>New: Multi-threaded rendering for OpenStreetMap maps (optional)</li>
+<li>New: Added OpenAndroMaps to MapDownloader (for offline map files and map themes)</li>
+<li>New: Multi-threaded rendering for OpenStreetMap maps (optional, default is on)</li>
 </ul>
 
 <h4>Cache details:</h4>
