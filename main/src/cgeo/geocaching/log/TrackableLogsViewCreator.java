@@ -48,11 +48,11 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
     @Override
     protected void fillCountOrLocation(final LogViewHolder holder, final LogEntry log) {
         if (StringUtils.isNotBlank(log.cacheName)) {
-            holder.gcinfo.setText(HtmlCompat.fromHtml(log.cacheName, HtmlCompat.FROM_HTML_MODE_LEGACY));
-            holder.gcinfo.setVisibility(View.VISIBLE);
+            holder.binding.gcinfo.setText(HtmlCompat.fromHtml(log.cacheName, HtmlCompat.FROM_HTML_MODE_LEGACY));
+            holder.binding.gcinfo.setVisibility(View.VISIBLE);
             final String cacheGuid = log.cacheGuid;
             final String cacheName = log.cacheName;
-            holder.gcinfo.setOnClickListener(arg0 -> {
+            holder.binding.gcinfo.setOnClickListener(arg0 -> {
                 if (StringUtils.isNotBlank(cacheGuid)) {
                     CacheDetailActivity.startActivityGuid(activity, cacheGuid, TextUtils.stripHtml(cacheName));
                 } else {
@@ -63,11 +63,11 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
                     }
                 }
             });
-            holder.countOrLocation.setVisibility(View.GONE);
-            holder.gcinfo.setVisibility(View.VISIBLE);
+            holder.binding.countOrLocation.setVisibility(View.GONE);
+            holder.binding.gcinfo.setVisibility(View.VISIBLE);
         } else {
-            holder.countOrLocation.setVisibility(View.GONE);
-            holder.gcinfo.setVisibility(View.GONE);
+            holder.binding.countOrLocation.setVisibility(View.GONE);
+            holder.binding.gcinfo.setVisibility(View.GONE);
         }
     }
 

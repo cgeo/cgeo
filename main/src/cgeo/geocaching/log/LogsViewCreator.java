@@ -3,6 +3,7 @@ package cgeo.geocaching.log;
 import cgeo.geocaching.ImagesActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.databinding.LogsItemBinding;
 import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -57,12 +58,15 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             @NonNull
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 View rowView = convertView;
+                LogsItemBinding temp = null;
                 if (rowView == null) {
-                    rowView = activity.getLayoutInflater().inflate(R.layout.logs_item, parent, false);
+                    temp = LogsItemBinding.inflate(activity.getLayoutInflater(), parent, false);
+                    rowView = temp.getRoot();
                 }
                 LogViewHolder holder = (LogViewHolder) rowView.getTag();
                 if (holder == null) {
                     holder = new LogViewHolder(rowView);
+                    holder.binding = temp;
                 }
                 holder.setPosition(position);
 
@@ -80,51 +84,51 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
 
     protected void fillViewHolder(@SuppressWarnings("unused") final View convertView, final LogViewHolder holder, final LogEntry log) {
         if (log.date > 0) {
-            holder.date.setText(Formatter.formatShortDateVerbally(log.date));
-            holder.date.setVisibility(View.VISIBLE);
+            holder.binding.added.setText(Formatter.formatShortDateVerbally(log.date));
+            holder.binding.added.setVisibility(View.VISIBLE);
         } else {
-            holder.date.setVisibility(View.GONE);
+            holder.binding.added.setVisibility(View.GONE);
         }
 
-        holder.type.setText(log.logType.getL10n());
+        holder.binding.type.setText(log.logType.getL10n());
 
-        holder.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
+        holder.binding.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
 
         fillCountOrLocation(holder, log);
 
         // log text, avoid parsing HTML if not necessary
         if (TextUtils.containsHtml(log.log)) {
             final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-            holder.text.setText(TextUtils.trimSpanned(HtmlCompat.fromHtml(log.getDisplayText(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(getGeocode(), holder.text), unknownTagsHandler)), TextView.BufferType.SPANNABLE);
+            holder.binding.log.setText(TextUtils.trimSpanned(HtmlCompat.fromHtml(log.getDisplayText(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(getGeocode(), holder.binding.log), unknownTagsHandler)), TextView.BufferType.SPANNABLE);
         } else {
-            holder.text.setText(log.log, TextView.BufferType.SPANNABLE);
+            holder.binding.log.setText(log.log, TextView.BufferType.SPANNABLE);
         }
 
         // images
         if (log.hasLogImages()) {
-            holder.images.setText(log.getImageTitles());
-            holder.images.setVisibility(View.VISIBLE);
-            holder.images.setOnClickListener(v -> ImagesActivity.startActivity(activity, getGeocode(), new ArrayList<>(log.logImages)));
+            holder.binding.logImages.setText(log.getImageTitles());
+            holder.binding.logImages.setVisibility(View.VISIBLE);
+            holder.binding.logImages.setOnClickListener(v -> ImagesActivity.startActivity(activity, getGeocode(), new ArrayList<>(log.logImages)));
         } else {
-            holder.images.setVisibility(View.GONE);
+            holder.binding.logImages.setVisibility(View.GONE);
         }
 
         // colored marker
         final int marker = log.logType.markerId;
         if (marker != 0) {
-            holder.marker.setVisibility(View.VISIBLE);
-            holder.marker.setImageResource(marker);
+            holder.binding.logMark.setVisibility(View.VISIBLE);
+            holder.binding.logMark.setImageResource(marker);
         } else {
-            holder.marker.setVisibility(View.GONE);
+            holder.binding.logMark.setVisibility(View.GONE);
         }
 
-        holder.author.setOnClickListener(createUserActionsListener(log));
-        holder.text.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+        holder.binding.author.setOnClickListener(createUserActionsListener(log));
+        holder.binding.log.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
 
         final View.OnClickListener logContextMenuClickListener = createOnLogClickListener(holder, log);
 
-        holder.text.setOnClickListener(logContextMenuClickListener);
-        holder.detailBox.setOnClickListener(logContextMenuClickListener);
+        holder.binding.log.setOnClickListener(logContextMenuClickListener);
+        holder.binding.detailBox.setOnClickListener(logContextMenuClickListener);
     }
 
     protected View.OnClickListener createOnLogClickListener(final LogViewHolder holder, final LogEntry log) {
@@ -136,13 +140,13 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
 
             final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity)
                     .setTitle(title)
-                    .addItem(R.string.cache_log_menu_decrypt, 0, new DecryptTextClickListener(holder.text))
+                    .addItem(R.string.cache_log_menu_decrypt, 0, new DecryptTextClickListener(holder.binding.log))
                     .addItem(activity.getString(R.string.copy_to_clipboard), R.drawable.ic_menu_copy, i -> {
-                        ClipboardUtils.copyToClipboard(holder.text.getText().toString());
+                        ClipboardUtils.copyToClipboard(holder.binding.log.getText().toString());
                         activity.showToast(activity.getString(R.string.clipboard_copy_ok));
                     })
                     .addItem(R.string.context_share_as_text, R.drawable.ic_menu_share, it ->
-                            ShareUtils.sharePlainText(activity, holder.text.getText().toString()))
+                            ShareUtils.sharePlainText(activity, holder.binding.log.getText().toString()))
                     .addItem(activity.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()),
                             R.drawable.ic_menu_translate, it -> TranslationUtils.startActivityTranslate(activity, Locale.getDefault().getLanguage(), HtmlUtils.extractText(log.log)));
             final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
