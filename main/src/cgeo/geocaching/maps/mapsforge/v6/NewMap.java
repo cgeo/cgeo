@@ -15,6 +15,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.downloader.MapDownloaderUtils;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -66,7 +67,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
@@ -444,7 +444,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
             && !this.trackUtils.onOptionsItemSelected(id, tracks, this::setTracks, this::centerOnPosition)
             && !this.individualRouteUtils.onOptionsItemSelected(id, manualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
-            && !MapDownloadUtils.onOptionsItemSelected(this, id)) {
+            && !MapDownloaderUtils.onOptionsItemSelected(this, id)) {
             final String language = MapProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT) {
                 item.setChecked(true);
@@ -1742,7 +1742,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data, this::reloadIndividualRoute);
-        MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data);
+        MapDownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
     private void setTracks(final Route route) {

@@ -10,7 +10,7 @@
     android:paddingLeft="5dip"
     android:paddingRight="5dip"
     android:paddingTop="7dip"
-    tools:context=".settings.MapDownloadSelectorActivity">
+    tools:context=".downloader.MapDownloadSelectorActivity">
 
     <LinearLayout android:id="@+id/buttons"
         android:layout_width="wrap_content"

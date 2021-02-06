@@ -1,4 +1,4 @@
-package cgeo.geocaching.settings;
+package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
@@ -12,8 +12,6 @@ import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapDownloadUtils;
-import cgeo.geocaching.utils.OfflineMapUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -47,7 +45,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
 
     @NonNull
     private final List<OfflineMap> maps = new ArrayList<>();
-    private ArrayList<OfflineMapUtils.OfflineMapData> installedOfflineMaps;
+    private ArrayList<CompanionFileUtils.DownloadedFileData> installedOfflineMaps;
     private final MapListAdapter adapter = new MapListAdapter(this);
     protected @BindView(R.id.downloader_type) Spinner downloaderType;
     protected @BindView(R.id.downloader_info) TextView downloaderInfo;
@@ -92,10 +90,10 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
                 final OfflineMap offlineMap = activity.getQueries().get(viewHolder.getAdapterPosition());
                 // return to caller with URL chosen
                 final Intent intent = new Intent();
-                intent.putExtra(MapDownloadUtils.RESULT_CHOSEN_URL, offlineMap.getUri());
-                intent.putExtra(MapDownloadUtils.RESULT_SIZE_INFO, offlineMap.getSizeInfo());
-                intent.putExtra(MapDownloadUtils.RESULT_DATE, offlineMap.getDateInfo());
-                intent.putExtra(MapDownloadUtils.RESULT_TYPEID, offlineMap.getType().id);
+                intent.putExtra(MapDownloaderUtils.RESULT_CHOSEN_URL, offlineMap.getUri());
+                intent.putExtra(MapDownloaderUtils.RESULT_SIZE_INFO, offlineMap.getSizeInfo());
+                intent.putExtra(MapDownloaderUtils.RESULT_DATE, offlineMap.getDateInfo());
+                intent.putExtra(MapDownloaderUtils.RESULT_TYPEID, offlineMap.getType().id);
                 setResult(RESULT_OK, intent);
                 finish();
             });
@@ -170,10 +168,10 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
     }
 
     private class MapUpdateCheckTask extends AsyncTaskWithProgressText<Void, List<OfflineMap>> {
-        private final ArrayList<OfflineMapUtils.OfflineMapData> installedOfflineMaps;
+        private final ArrayList<CompanionFileUtils.DownloadedFileData> installedOfflineMaps;
         private final String newSelectionTitle;
 
-        MapUpdateCheckTask(final Activity activity, final ArrayList<OfflineMapUtils.OfflineMapData> installedOfflineMaps, final String newSelectionTitle) {
+        MapUpdateCheckTask(final Activity activity, final ArrayList<CompanionFileUtils.DownloadedFileData> installedOfflineMaps, final String newSelectionTitle) {
             super(activity, newSelectionTitle, activity.getString(R.string.downloadmap_checking_for_updates));
             this.installedOfflineMaps = installedOfflineMaps;
             this.newSelectionTitle = newSelectionTitle;
@@ -184,7 +182,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         protected List<OfflineMap> doInBackgroundInternal(final Void[] none) {
             final List<OfflineMap> result = new ArrayList<>();
             result.add(new OfflineMap(getString(R.string.downloadmap_title), current.mapBase, true, "", "", current.offlineMapType));
-            for (OfflineMapUtils.OfflineMapData installedOfflineMap : installedOfflineMaps) {
+            for (CompanionFileUtils.DownloadedFileData installedOfflineMap : installedOfflineMaps) {
                 final OfflineMap offlineMap = checkForUpdate(installedOfflineMap);
                 if (offlineMap != null && offlineMap.getDateInfo() > installedOfflineMap.remoteDate) {
                     offlineMap.setAddInfo(CalendarUtils.yearMonthDay(installedOfflineMap.remoteDate));
@@ -195,7 +193,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         }
 
         @Nullable
-        private OfflineMap checkForUpdate(final OfflineMapUtils.OfflineMapData offlineMapData) {
+        private OfflineMap checkForUpdate(final CompanionFileUtils.DownloadedFileData offlineMapData) {
             final AbstractDownloader downloader = OfflineMap.OfflineMapType.getInstance(offlineMapData.remoteParsetype);
             if (downloader == null) {
                 Log.e("Map update checker: Cannot find map downloader of type " + offlineMapData.remoteParsetype + " for file " + offlineMapData.localFile);
@@ -265,7 +263,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         adapter.notifyDataSetChanged();
 
         current = spinnerData.get(position).instance;
-        installedOfflineMaps = OfflineMapUtils.availableOfflineMaps();
+        installedOfflineMaps = CompanionFileUtils.availableOfflineMaps();
 
         downloaderInfo.setVisibility(StringUtils.isNotBlank(current.mapSourceInfo) ? View.VISIBLE : View.GONE);
         downloaderInfo.setText(current.mapSourceInfo);
@@ -276,7 +274,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             new MapUpdateCheckTask(this, installedOfflineMaps, getString(R.string.downloadmap_available_updates)).execute();
         });
 
-        MapDownloadUtils.checkMapDirectory(this, true, (path, isWritable) -> {
+        MapDownloaderUtils.checkMapDirectory(this, true, (path, isWritable) -> {
             if (isWritable) {
                 final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.mapdownloader_list, true, true);
                 view.setAdapter(adapter);

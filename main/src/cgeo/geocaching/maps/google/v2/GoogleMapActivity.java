@@ -5,6 +5,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
+import cgeo.geocaching.downloader.MapDownloaderUtils;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -12,7 +13,6 @@ import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.IndividualRouteUtils;
-import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
@@ -224,7 +224,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
         }
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data, mapBase::reloadIndividualRoute);
-        MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data);
+        MapDownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override

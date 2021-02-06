@@ -11,6 +11,7 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
+import cgeo.geocaching.downloader.MapDownloaderUtils;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -66,7 +67,6 @@ import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
@@ -835,7 +835,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
             && !this.trackUtils.onOptionsItemSelected(id, tracks, this::setTracks, this::centerOnPosition)
             && !this.individualRouteUtils.onOptionsItemSelected(id, manualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
-            && !MapDownloadUtils.onOptionsItemSelected(activity, id)) {
+            && !MapDownloaderUtils.onOptionsItemSelected(activity, id)) {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {
                 item.setChecked(true);

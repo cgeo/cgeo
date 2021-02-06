@@ -1,4 +1,4 @@
-package cgeo.geocaching.settings;
+package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.OfflineMap;

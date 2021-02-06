@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.su.SuConnector;
+import cgeo.geocaching.downloader.MapDownloaderUtils;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -32,7 +33,6 @@ import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
@@ -778,7 +778,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             return;
         }
 
-        if (MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data)) {
+        if (MapDownloaderUtils.onActivityResult(this, requestCode, resultCode, data)) {
             return;
         }
 
