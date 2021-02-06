@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.view.View;
@@ -73,18 +74,16 @@ public class MapSettingsUtils {
         }
 
         final ArrayList<ButtonChoiceModel<Integer>> compactIconChoices = new ArrayList<>();
-        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF));
-        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO));
-        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON));
-        final ButtonController<Integer> compactIcon = new ButtonController<Integer>(dialogView, compactIconChoices, Settings.getCompactIconMode(), setCompactIconValue);
+        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF, activity.getString(R.string.switch_off)));
+        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO, activity.getString(R.string.switch_auto)));
+        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
+        final ButtonController<Integer> compactIcon = new ButtonController<Integer>(dialogView, null, compactIconChoices, Settings.getCompactIconMode(), setCompactIconValue);
 
         final ArrayList<ButtonChoiceModel<RoutingMode>> routingChoices = new ArrayList<>();
-        routingChoices.add(new ButtonChoiceModel<>(R.id.routing_off, RoutingMode.OFF));
-        routingChoices.add(new ButtonChoiceModel<>(R.id.routing_straight, RoutingMode.STRAIGHT));
-        routingChoices.add(new ButtonChoiceModel<>(R.id.routing_walk, RoutingMode.WALK));
-        routingChoices.add(new ButtonChoiceModel<>(R.id.routing_bike, RoutingMode.BIKE));
-        routingChoices.add(new ButtonChoiceModel<>(R.id.routing_car, RoutingMode.CAR));
-        final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView, routingChoices, Routing.isAvailable() ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue);
+        for (RoutingMode mode : RoutingMode.values()) {
+            routingChoices.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
+        }
+        final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView, dialogView.findViewById(R.id.routing_title), routingChoices, Routing.isAvailable() ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue);
 
         final CheckBox autotargetCheckbox = dialogView.findViewById(R.id.map_settings_autotarget);
         if (showAutotargetIndividualRoute) {
@@ -155,11 +154,13 @@ public class MapSettingsUtils {
     private static class ButtonChoiceModel<T> {
         public final int resButton;
         public final T assignedValue;
+        public final String info;
         public View button = null;
 
-        ButtonChoiceModel(final int resButton, final T assignedValue) {
+        ButtonChoiceModel(final int resButton, final T assignedValue, final String info) {
             this.resButton = resButton;
             this.assignedValue = assignedValue;
+            this.info = info;
         }
     }
 
@@ -169,13 +170,17 @@ public class MapSettingsUtils {
         private final T originalValue;
         private T currentValue;
         private final Action1<T> setValue;
+        private final String titlePreset;
+        private final TextView titleView;
 
-        ButtonController(final View dialogView, final ArrayList<ButtonChoiceModel<T>> buttons, final T currentValue, final Action1<T> setValue) {
+        ButtonController(final View dialogView, @Nullable final TextView titleView, final ArrayList<ButtonChoiceModel<T>> buttons, final T currentValue, final Action1<T> setValue) {
             this.dialogView = dialogView;
             this.buttons = buttons;
             this.originalValue = currentValue;
             this.currentValue = currentValue;
             this.setValue = setValue;
+            this.titlePreset = titleView == null ? "" : titleView.getText().toString();
+            this.titleView = titleView;
         }
 
         public void init() {
@@ -186,10 +191,14 @@ public class MapSettingsUtils {
             update();
         }
 
+        @SuppressLint("SetTextI18n")
         public void update() {
             for (final ButtonChoiceModel<T> button : buttons) {
                 if (currentValue == button.assignedValue) {
                     button.button.setBackgroundColor(colorAccent);
+                    if (titleView != null) {
+                        titleView.setText(String.format(titlePreset, button.info));
+                    }
                 } else {
                     button.button.setBackgroundColor(0x00000000);
                     button.button.setBackgroundResource(Settings.isLightSkin() ? R.drawable.action_button_light : R.drawable.action_button_dark);
