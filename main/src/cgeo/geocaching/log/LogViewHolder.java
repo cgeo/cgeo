@@ -7,10 +7,11 @@ import android.view.View;
 
 public class LogViewHolder extends AbstractViewHolder {
     private int position;
-    public LogsItemBinding binding;
+    protected final LogsItemBinding binding;
 
     public LogViewHolder(final View rowView) {
         super(rowView);
+        binding = LogsItemBinding.bind(rowView);
     }
 
     /**

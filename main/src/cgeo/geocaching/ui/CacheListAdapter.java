@@ -119,10 +119,11 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     public static class ViewHolder extends AbstractViewHolder {
         private CacheListType cacheListType;
         public Geocache cache = null;
-        public CacheslistItemBinding binding;
+        private final CacheslistItemBinding binding;
 
         public ViewHolder(final View view) {
             super(view);
+            binding = CacheslistItemBinding.bind(view);
         }
     }
 
@@ -408,10 +409,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         final ViewHolder holder;
         if (v == null) {
-            final CacheslistItemBinding temp = CacheslistItemBinding.inflate(inflater, parent, false);
-            v = temp.getRoot();
+            v = inflater.inflate(R.layout.cacheslist_item, parent, false);
             holder = new ViewHolder(v);
-            holder.binding = temp;
         } else {
             holder = (ViewHolder) v.getTag();
         }

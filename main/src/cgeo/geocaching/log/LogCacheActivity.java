@@ -611,6 +611,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
         public ViewHolder(final View rowView) {
             super(rowView);
+            binding = LogcacheTrackableItemBinding.bind(rowView);
         }
     }
 
@@ -622,15 +623,12 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         @Override
         public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View rowView = convertView;
-            LogcacheTrackableItemBinding temp = null;
             if (rowView == null) {
-                temp = LogcacheTrackableItemBinding.inflate(getLayoutInflater(), parent, false);
-                rowView = temp.getRoot();
+                rowView = getLayoutInflater().inflate(R.layout.logcache_trackable_item, parent, false);
             }
             ViewHolder holder = (ViewHolder) rowView.getTag();
             if (holder == null) {
                 holder = new ViewHolder(rowView);
-                holder.binding = temp;
             }
 
             final TrackableLog trackable = getItem(position);

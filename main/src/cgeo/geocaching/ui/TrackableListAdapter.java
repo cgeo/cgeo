@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.TrackableItemBinding;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
@@ -25,10 +26,11 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
     @NonNull private final TrackableClickListener trackableClickListener;
 
     protected static final class ViewHolder extends AbstractRecyclerViewHolder {
-        public TrackableItemBinding binding;
+        private final TrackableItemBinding binding;
 
         ViewHolder(final View view) {
             super(view);
+            binding = TrackableItemBinding.bind(view);
         }
     }
 
@@ -45,9 +47,8 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-        final TrackableItemBinding temp = TrackableItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        final ViewHolder viewHolder = new ViewHolder(temp.getRoot());
-        viewHolder.binding = temp;
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trackable_item, parent, false);
+        final ViewHolder viewHolder = new ViewHolder(view);
         viewHolder.itemView.setOnClickListener(view1 -> trackableClickListener.onTrackableClicked(trackables.get(viewHolder.getAdapterPosition())));
         return viewHolder;
     }
