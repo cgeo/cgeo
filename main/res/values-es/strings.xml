@@ -1005,7 +1005,6 @@
     <string name="map_live_disable">Desactivar en vivo</string>
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar elemento</string>
-    <string name="map_routing">Enrutamiento</string>
     <!-- search -->
     <string name="search_bar_hint">Buscar cachés</string>
     <string name="search_bar_desc">Cachés (Código-GC, palabra clave), Rastreables (Código-TB)</string>
