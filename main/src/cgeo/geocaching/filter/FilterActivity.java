@@ -2,14 +2,13 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.databinding.FilterActivityBinding;
 import cgeo.geocaching.filter.FilterRegistry.FactoryEntry;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 import android.widget.SimpleExpandableListAdapter;
 
 import androidx.annotation.NonNull;
@@ -20,8 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -39,14 +36,12 @@ public class FilterActivity extends AbstractActionBarActivity {
     private static final String KEY_FILTER_NAME = "filterName";
     private static final String KEY_FILTER_GROUP_NAME = "filterGroupName";
 
-    @BindView(R.id.filterList) protected ExpandableListView filterList;
-    @BindView(R.id.filters) protected LinearLayout filtersContainer;
+    private FilterActivityBinding binding;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.filter_activity);
-        ButterKnife.bind(this);
-
+        binding = FilterActivityBinding.bind(findViewById(R.id.filter_activity_viewroot));
         createListAdapter();
     }
 
@@ -66,8 +61,8 @@ public class FilterActivity extends AbstractActionBarActivity {
                         new String[] { KEY_FILTER_NAME, "CHILD_NAME" },
                         new int[] { android.R.id.text1 }
                 );
-        filterList.setAdapter(adapter);
-        filterList.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
+        binding.filterList.setAdapter(adapter);
+        binding.filterList.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
             setFilterResult(groupPosition, childPosition);
             return true;
         });
