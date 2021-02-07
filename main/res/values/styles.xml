@@ -432,6 +432,12 @@
         <item name="android:layout_marginBottom">-10dp</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
+    <style name="map_quicksettings_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">6dip</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
 
     <!-- splash screen style -->
     <style name="SplashScreenTheme" parent="Theme.AppCompat.NoActionBar">
