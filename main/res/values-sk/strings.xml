@@ -1139,7 +1139,6 @@
     <string name="map_live_disable">Zakázať aktívnu mapu</string>
     <string name="map_as_list">Zobraziť ako zoznam</string>
     <string name="map_select_multiple_items">Vybrať položku</string>
-    <string name="map_routing">Navigácia</string>
     <string name="map_gm_autorotation">Automatické otáčanie mapy</string>
     <string name="map_gm_autorotation_disable">Vypnúť automatické otáčanie mapy?\n\nMôžete ho znova povoliť pomocou ponuky Otáčanie mapy.</string>
     <string name="quick_settings">Rýchle nastavenia</string>
