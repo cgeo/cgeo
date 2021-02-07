@@ -274,11 +274,6 @@ dependencies {
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
 
-    // ButterKnife view injection, https://github.com/JakeWharton/butterknife
-    def butterKnifeVersion = '10.2.3'
-    implementation "com.jakewharton:butterknife:$butterKnifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
-
     // SpotBugs (successor of FindBugs)
     implementation 'net.jcip:jcip-annotations:1.0'
     implementation 'com.github.spotbugs:spotbugs-annotations:4.2.1'

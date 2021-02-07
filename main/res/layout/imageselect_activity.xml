@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imageselect_activity_viewroot"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"

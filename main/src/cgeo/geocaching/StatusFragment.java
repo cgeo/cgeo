@@ -17,14 +17,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class StatusFragment extends Fragment {
 
     private final CompositeDisposable statusSubscription = new CompositeDisposable();
-    private Unbinder unbinder;
     private StatusBinding binding;
 
     @Override
@@ -32,7 +29,6 @@ public class StatusFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         binding = StatusBinding.inflate(getLayoutInflater(), container, false);
         final ViewGroup statusGroup = binding.getRoot();
-        unbinder = ButterKnife.bind(this, statusGroup);
         statusSubscription.add(AndroidRxUtils.bindFragment(this, StatusUpdater.LATEST_STATUS)
                 .subscribe(status -> {
                     if (status == Status.NO_STATUS) {
@@ -80,7 +76,6 @@ public class StatusFragment extends Fragment {
     public void onDestroyView() {
         statusSubscription.clear();
         super.onDestroyView();
-        unbinder.unbind();
     }
 
 }

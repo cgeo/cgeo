@@ -11,8 +11,6 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import butterknife.ButterKnife;
-
 public final class UsefulAppsActivity extends AbstractActionBarActivity {
 
     private static final HelperApp[] HELPER_APPS = {
@@ -33,8 +31,6 @@ public final class UsefulAppsActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.usefulapps_activity);
-
-        ButterKnife.bind(this);
 
         final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.apps_list, false, false);
         view.setAdapter(new HelperAppAdapter(this, HELPER_APPS, helperApp -> {

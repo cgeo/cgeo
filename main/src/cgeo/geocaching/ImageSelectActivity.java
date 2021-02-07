@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.databinding.ImageselectActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -15,29 +16,16 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
 import java.util.Arrays;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ImageSelectActivity extends AbstractActionBarActivity {
-
-    @BindView(R.id.caption) protected EditText captionView;
-    @BindView(R.id.description) protected EditText descriptionView;
-    @BindView(R.id.camera) protected Button cameraButton;
-    @BindView(R.id.stored) protected Button storedButton;
-    @BindView(R.id.save) protected Button saveButton;
-    @BindView(R.id.delete) protected Button deleteButton;
-    @BindView(R.id.cancel) protected Button clearButton;
-    @BindView(R.id.image_preview) protected ImageView imagePreview;
+    private ImageselectActivityBinding binding;
 
     private final TextSpinner<Integer> imageScale = new TextSpinner<>();
 
@@ -59,7 +47,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         onCreate(savedInstanceState, R.layout.imageselect_activity);
-        ButterKnife.bind(this);
+        binding = ImageselectActivityBinding.bind(findViewById(R.id.imageselect_activity_viewroot));
 
         imageScale.setSpinner(findViewById(R.id.logImageScale))
                 .setDisplayMapper(scaleSize -> scaleSize < 0 ? getResources().getString(R.string.log_image_scale_option_noscaling) : getResources().getString(R.string.log_image_scale_option_entry, scaleSize))
@@ -104,23 +92,23 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             image = Image.NONE;
         }
 
-        cameraButton.setOnClickListener(view -> selectImageFromCamera());
-        storedButton.setOnClickListener(view -> selectImageFromStorage());
+        binding.camera.setOnClickListener(view -> selectImageFromCamera());
+        binding.stored.setOnClickListener(view -> selectImageFromStorage());
 
         if (image.hasTitle()) {
-            captionView.setText(image.getTitle());
-            Dialogs.moveCursorToEnd(captionView);
+            binding.caption.setText(image.getTitle());
+            Dialogs.moveCursorToEnd(binding.caption);
         }
 
         if (image.hasDescription()) {
-            descriptionView.setText(image.getDescription());
-            Dialogs.moveCursorToEnd(captionView);
+            binding.description.setText(image.getDescription());
+            Dialogs.moveCursorToEnd(binding.caption);
         }
 
-        saveButton.setOnClickListener(v -> saveImageInfo(true, false));
-        clearButton.setOnClickListener(v -> saveImageInfo(false, false));
-        deleteButton.setOnClickListener(v -> saveImageInfo(false, true));
-        deleteButton.setVisibility(imageIndex >= 0 ? View.VISIBLE : View.GONE);
+        binding.save.setOnClickListener(v -> saveImageInfo(true, false));
+        binding.cancel.setOnClickListener(v -> saveImageInfo(false, false));
+        binding.delete.setOnClickListener(v -> saveImageInfo(false, true));
+        binding.delete.setVisibility(imageIndex >= 0 ? View.VISIBLE : View.GONE);
 
         loadImagePreview();
     }
@@ -160,7 +148,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                             return;
                         }
 
-                        if (imageCaptionMandatory && StringUtils.isBlank(captionView.getText())) {
+                        if (imageCaptionMandatory && StringUtils.isBlank(binding.caption.getText())) {
                             showToast(res.getString(R.string.err_logimage_caption_required));
                             return;
                         }
@@ -197,8 +185,8 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private void syncEditTexts() {
         image = new Image.Builder()
                 .setUrl(image.uri)
-                .setTitle(captionView.getText().toString())
-                .setDescription(descriptionView.getText().toString())
+                .setTitle(binding.caption.getText().toString())
+                .setDescription(binding.description.getText().toString())
                 .build();
     }
 
@@ -233,6 +221,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
    }
 
     private void loadImagePreview() {
-        ImageActivityHelper.displayImageAsync(image, imagePreview);
+        ImageActivityHelper.displayImageAsync(image, binding.imagePreview);
     }
 }
