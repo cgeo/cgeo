@@ -2,6 +2,7 @@ package cgeo.geocaching.helper;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.databinding.UsefulappsItemBinding;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.content.Context;
@@ -9,8 +10,6 @@ import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
@@ -19,8 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindView;
-
 final class HelperAppAdapter extends RecyclerView.Adapter<HelperAppAdapter.ViewHolder> {
 
     @NonNull private final List<HelperApp> helperApps;
@@ -28,12 +25,11 @@ final class HelperAppAdapter extends RecyclerView.Adapter<HelperAppAdapter.ViewH
     @NonNull private final Context context;
 
     protected static final class ViewHolder extends AbstractRecyclerViewHolder {
-        @BindView(R.id.title) protected TextView title;
-        @BindView(R.id.image) protected ImageView image;
-        @BindView(R.id.description) protected TextView description;
+        private final UsefulappsItemBinding binding;
 
         ViewHolder(final View rowView) {
             super(rowView);
+            binding = UsefulappsItemBinding.bind(rowView);
         }
     }
 
@@ -64,9 +60,9 @@ final class HelperAppAdapter extends RecyclerView.Adapter<HelperAppAdapter.ViewH
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final HelperApp app = helperApps.get(position);
         final Resources resources = context.getResources();
-        holder.title.setText(resources.getString(app.titleId));
-        holder.image.setImageDrawable(Compatibility.getDrawable(resources, app.iconId));
-        holder.description.setText(HtmlCompat.fromHtml(resources.getString(app.descriptionId), HtmlCompat.FROM_HTML_MODE_LEGACY));
+        holder.binding.title.setText(resources.getString(app.titleId));
+        holder.binding.image.setImageDrawable(Compatibility.getDrawable(resources, app.iconId));
+        holder.binding.description.setText(HtmlCompat.fromHtml(resources.getString(app.descriptionId), HtmlCompat.FROM_HTML_MODE_LEGACY));
     }
 
 }

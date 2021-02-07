@@ -2,6 +2,8 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.databinding.MapdownloaderActivityBinding;
+import cgeo.geocaching.databinding.MapdownloaderItemBinding;
 import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -25,9 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.BindView;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 
@@ -47,10 +45,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
     private final List<OfflineMap> maps = new ArrayList<>();
     private ArrayList<CompanionFileUtils.DownloadedFileData> installedOfflineMaps;
     private final MapListAdapter adapter = new MapListAdapter(this);
-    protected @BindView(R.id.downloader_type) Spinner downloaderType;
-    protected @BindView(R.id.downloader_info) TextView downloaderInfo;
-    protected @BindView(R.id.check_for_updates) Button checkForUpdates;
-    protected @BindView(R.id.like_it) Button likeIt;
+    private MapdownloaderActivityBinding binding;
     private AbstractDownloader current;
     private ArrayList<OfflineMap.OfflineMapTypeDescriptor> spinnerData = new ArrayList<>();
 
@@ -58,13 +53,11 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         @NonNull private final MapDownloadSelectorActivity activity;
 
         protected final class ViewHolder extends AbstractRecyclerViewHolder {
-            protected @BindView(R.id.label) TextView label;
-            protected @BindView(R.id.download) Button download;
-            protected @BindView(R.id.retrieve) Button retrieve;
-            protected @BindView(R.id.info) TextView info;
+            private final MapdownloaderItemBinding binding;
 
             ViewHolder(final View view) {
                 super(view);
+                binding = MapdownloaderItemBinding.bind(view);
             }
         }
 
@@ -82,11 +75,11 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mapdownloader_item, parent, false);
             final ViewHolder viewHolder = new ViewHolder(view);
-            viewHolder.retrieve.setOnClickListener(v -> {
+            viewHolder.binding.retrieve.setOnClickListener(v -> {
                 final OfflineMap offlineMap = activity.getQueries().get(viewHolder.getAdapterPosition());
                     new MapListTask(activity, offlineMap.getUri(), offlineMap.getName()).execute();
             });
-            viewHolder.download.setOnClickListener(v -> {
+            viewHolder.binding.download.setOnClickListener(v -> {
                 final OfflineMap offlineMap = activity.getQueries().get(viewHolder.getAdapterPosition());
                 // return to caller with URL chosen
                 final Intent intent = new Intent();
@@ -104,15 +97,15 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             final OfflineMap offlineMap = activity.getQueries().get(position);
-            holder.download.setVisibility(!offlineMap.getIsDir() ? View.VISIBLE : View.GONE);
-            holder.retrieve.setVisibility(offlineMap.getIsDir() ? View.VISIBLE : View.GONE);
-            holder.label.setText(offlineMap.getName());
+            holder.binding.download.setVisibility(!offlineMap.getIsDir() ? View.VISIBLE : View.GONE);
+            holder.binding.retrieve.setVisibility(offlineMap.getIsDir() ? View.VISIBLE : View.GONE);
+            holder.binding.label.setText(offlineMap.getName());
             if (offlineMap.getIsDir()) {
-                holder.info.setText(R.string.downloadmap_directory);
+                holder.binding.info.setText(R.string.downloadmap_directory);
             } else {
                 final String addInfo = offlineMap.getAddInfo();
                 final String sizeInfo = offlineMap.getSizeInfo();
-                holder.info.setText(getString(R.string.downloadmap_mapfile)
+                holder.binding.info.setText(getString(R.string.downloadmap_mapfile)
                     + Formatter.SEPARATOR + offlineMap.getDateInfoAsString()
                     + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "")
                     + (StringUtils.isNotBlank(sizeInfo) ? Formatter.SEPARATOR + offlineMap.getSizeInfo() : "")
@@ -233,12 +226,13 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.mapdownloader_activity);
+        binding = MapdownloaderActivityBinding.bind(findViewById(R.id.mapdownloader_activity_viewroot));
 
         spinnerData = OfflineMap.OfflineMapType.getOfflineMapTypes();
         final ArrayAdapter<OfflineMap.OfflineMapTypeDescriptor> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerData);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        downloaderType.setAdapter(spinnerAdapter);
-        downloaderType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.downloaderType.setAdapter(spinnerAdapter);
+        binding.downloaderType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
                 changeSource(position);
@@ -249,8 +243,8 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
                 // deliberately left empty
             }
         });
-        likeIt.setOnClickListener(v -> ShareUtils.openUrl(this, current.likeItUrl));
-        downloaderInfo.setOnClickListener(v -> {
+        binding.likeIt.setOnClickListener(v -> ShareUtils.openUrl(this, current.likeItUrl));
+        binding.downloaderInfo.setOnClickListener(v -> {
             if (StringUtils.isNotBlank(current.projectUrl)) {
                 ShareUtils.openUrl(this, current.projectUrl);
             }
@@ -265,12 +259,12 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         current = spinnerData.get(position).instance;
         installedOfflineMaps = CompanionFileUtils.availableOfflineMaps();
 
-        downloaderInfo.setVisibility(StringUtils.isNotBlank(current.mapSourceInfo) ? View.VISIBLE : View.GONE);
-        downloaderInfo.setText(current.mapSourceInfo);
+        binding.downloaderInfo.setVisibility(StringUtils.isNotBlank(current.mapSourceInfo) ? View.VISIBLE : View.GONE);
+        binding.downloaderInfo.setText(current.mapSourceInfo);
 
         setUpdateButtonVisibility();
-        checkForUpdates.setOnClickListener(v -> {
-            checkForUpdates.setVisibility(View.GONE);
+        binding.checkForUpdates.setOnClickListener(v -> {
+            binding.checkForUpdates.setVisibility(View.GONE);
             new MapUpdateCheckTask(this, installedOfflineMaps, getString(R.string.downloadmap_available_updates)).execute();
         });
 
@@ -290,7 +284,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
     }
 
     private void setUpdateButtonVisibility() {
-        checkForUpdates.setVisibility (installedOfflineMaps != null && installedOfflineMaps.size() > 0 ? View.VISIBLE : View.GONE);
+        binding.checkForUpdates.setVisibility (installedOfflineMaps != null && installedOfflineMaps.size() > 0 ? View.VISIBLE : View.GONE);
     }
 
     private synchronized void setMaps(final List<OfflineMap> maps, @NonNull final String selectionTitle, final boolean noUpdatesFound) {
@@ -300,8 +294,8 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         this.setTitle(selectionTitle);
 
         final boolean showSpinner = !selectionTitle.equals(getString(R.string.downloadmap_available_updates));
-        downloaderType.setVisibility(showSpinner ? View.VISIBLE : View.GONE);
-        downloaderInfo.setVisibility(showSpinner ? View.VISIBLE : View.GONE);
+        binding.downloaderType.setVisibility(showSpinner ? View.VISIBLE : View.GONE);
+        binding.downloaderInfo.setVisibility(showSpinner ? View.VISIBLE : View.GONE);
 
         if (noUpdatesFound) {
             Dialogs.message(this, R.string.downloadmap_no_updates_found);
