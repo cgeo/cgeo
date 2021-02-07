@@ -4,6 +4,8 @@ import cgeo.geocaching.ImageSelectActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.databinding.ImagelistFragmentBinding;
+import cgeo.geocaching.databinding.ImagelistItemBinding;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
@@ -18,8 +20,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
@@ -33,9 +33,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -48,13 +45,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  * this fragment starts and works with results of intents.
  */
 public class ImageListFragment extends Fragment {
-
-    private Unbinder unbinder;
-
-    @BindView(R.id.image_add_multi)
-    protected View imageAddMultiButton;
-    @BindView(R.id.image_add_camera)
-    protected View imageAddCameraButton;
+    private ImagelistFragmentBinding binding;
 
     private ImageListAdapter imageList;
     private ImageActivityHelper imageHelper;
@@ -151,7 +142,7 @@ public class ImageListFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.imagelist_fragment, container, false);
-        unbinder = ButterKnife.bind(this, view);
+        binding = ImagelistFragmentBinding.bind(view);
         return view;
     }
 
@@ -160,11 +151,11 @@ public class ImageListFragment extends Fragment {
         imageHelper = new ImageActivityHelper(this.getActivity(), 3000);
         imageList = new ImageListAdapter(view.findViewById(R.id.image_list));
 
-        this.imageAddMultiButton.setOnClickListener(v ->
+        this.binding.imageAddMulti.setOnClickListener(v ->
             imageHelper.getMultipleImagesFromStorage(getFastImageAutoScale(), false, imgs -> {
                 imageList.addItems(imgs);
             }));
-        this.imageAddCameraButton.setOnClickListener(v ->
+        this.binding.imageAddCamera.setOnClickListener(v ->
             imageHelper.getImageFromCamera(getFastImageAutoScale(), false, img -> {
                 imageList.addItem(img);
             }));
@@ -173,26 +164,15 @@ public class ImageListFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
 
     protected static class ImageViewHolder extends AbstractRecyclerViewHolder {
-        @BindView(R.id.image_thumbnail)
-        protected ImageView imageThumbnail;
-        @BindView(R.id.image_title)
-        protected TextView imageTitle;
-        @BindView(R.id.image_description)
-        protected TextView imageDescription;
-        @BindView(R.id.image_info)
-        protected TextView imageInfo;
-        @BindView(R.id.image_delete)
-        protected View imageDeleteButton;
-        @BindView(R.id.image_drag)
-        protected View imageDrag;
+        private final ImagelistItemBinding binding;
 
         public ImageViewHolder(final View rowView) {
             super(rowView);
+            binding = ImagelistItemBinding.bind(rowView);
         }
     }
 
@@ -206,14 +186,14 @@ public class ImageListFragment extends Fragment {
         }
 
         private void fillViewHolder(final ImageViewHolder holder, final Image image, final int position) {
-            if (image == null || holder.imageThumbnail == null) {
+            if (image == null || holder.binding.imageThumbnail == null) {
                 return;
             }
-            ImageActivityHelper.displayImageAsync(image, holder.imageThumbnail);
-            holder.imageTitle.setText(getImageTitle(image, position));
-            holder.imageInfo.setText(getImageInfo(image));
-            holder.imageDescription.setText(image.getDescription());
-            holder.imageDescription.setVisibility(!StringUtils.isBlank(image.getDescription()) ? View.VISIBLE : View.GONE);
+            ImageActivityHelper.displayImageAsync(image, holder.binding.imageThumbnail);
+            holder.binding.imageTitle.setText(getImageTitle(image, position));
+            holder.binding.imageInfo.setText(getImageInfo(image));
+            holder.binding.imageDescription.setText(image.getDescription());
+            holder.binding.imageDescription.setVisibility(!StringUtils.isBlank(image.getDescription()) ? View.VISIBLE : View.GONE);
         }
 
         private String getImageInfo(final Image image) {
@@ -235,8 +215,8 @@ public class ImageListFragment extends Fragment {
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.imagelist_item, parent, false);
             final ImageViewHolder viewHolder = new ImageViewHolder(view);
             viewHolder.itemView.setOnClickListener(view1 -> addOrEditImage(viewHolder.getAdapterPosition()));
-            viewHolder.imageDeleteButton.setOnClickListener(v -> removeItem(viewHolder.getAdapterPosition()));
-            registerStartDrag(viewHolder, viewHolder.imageDrag);
+            viewHolder.binding.imageDelete.setOnClickListener(v -> removeItem(viewHolder.getAdapterPosition()));
+            registerStartDrag(viewHolder, viewHolder.binding.imageDrag);
             return viewHolder;
         }
 

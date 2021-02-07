@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.trackable.AbstractTrackableLoggingManager;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
+import cgeo.geocaching.databinding.LogtrackableActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -45,11 +46,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.loader.app.LoaderManager;
@@ -58,21 +55,12 @@ import androidx.loader.content.Loader;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
-
-    @BindView(R.id.type) protected Button typeButton;
-    @BindView(R.id.geocode) protected AutoCompleteTextView geocodeEditText;
-    @BindView(R.id.coordinates) protected Button coordinatesButton;
-    @BindView(R.id.tracking) protected EditText trackingEditText;
-    @BindView(R.id.log) protected EditText logEditText;
-    @BindView(R.id.tweet) protected CheckBox tweetCheck;
-    @BindView(R.id.tweet_box) protected LinearLayout tweetBox;
+    private LogtrackableActivityBinding binding;
 
     private final CompositeDisposable createDisposables = new CompositeDisposable();
 
@@ -138,7 +126,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         onCreate(savedInstanceState, R.layout.logtrackable_activity);
-        ButterKnife.bind(this);
+        binding = LogtrackableActivityBinding.bind(findViewById(R.id.logtrackable_activity_viewroot));
 
         date.init(findViewById(R.id.date), findViewById(R.id.time), getSupportFragmentManager());
 
@@ -244,8 +232,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
         // Display tracking code if we have, and move cursor next
         if (trackingCode != null) {
-            trackingEditText.setText(trackingCode);
-            Dialogs.moveCursorToEnd(trackingEditText);
+            binding.tracking.setText(trackingCode);
+            Dialogs.moveCursorToEnd(binding.tracking);
         }
         init();
 
@@ -259,8 +247,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
     @Override
     protected void requestKeyboardForLogging() {
-        if (StringUtils.isBlank(trackingEditText.getText())) {
-            new Keyboard(this).show(trackingEditText);
+        if (StringUtils.isBlank(binding.tracking.getText())) {
+            new Keyboard(this).show(binding.tracking);
         } else {
             super.requestKeyboardForLogging();
         }
@@ -300,8 +288,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     }
 
     private void init() {
-        registerForContextMenu(typeButton);
-        typeButton.setOnClickListener(this::openContextMenu);
+        registerForContextMenu(binding.type);
+        binding.type.setOnClickListener(this::openContextMenu);
 
         setType(typeSelected);
 
@@ -310,10 +298,10 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
         // Register Coordinates Listener
         if (loggingManager.canLogCoordinates()) {
-            geocodeEditText.setOnFocusChangeListener(new LoadGeocacheListener());
-            geocodeEditText.setText(geocache.getGeocode());
+            binding.geocode.setOnFocusChangeListener(new LoadGeocacheListener());
+            binding.geocode.setText(geocache.getGeocode());
             updateCoordinates(geocache.getCoords());
-            coordinatesButton.setOnClickListener(new CoordinatesListener());
+            binding.coordinates.setOnClickListener(new CoordinatesListener());
         }
 
         initTwitter();
@@ -322,7 +310,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             possibleLogTypesTrackable = Trackable.getPossibleLogTypes();
         }
 
-        disableSuggestions(trackingEditText);
+        disableSuggestions(binding.tracking);
         initGeocodeSuggestions();
     }
 
@@ -330,44 +318,44 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
      * Link the geocodeEditText to the SuggestionsGeocode.
      */
     private void initGeocodeSuggestions() {
-        geocodeEditText.setAdapter(new AutoCompleteAdapter(geocodeEditText.getContext(), layout.simple_dropdown_item_1line, DataStore::getSuggestionsGeocode));
+        binding.geocode.setAdapter(new AutoCompleteAdapter(binding.geocode.getContext(), layout.simple_dropdown_item_1line, DataStore::getSuggestionsGeocode));
     }
 
     public void setType(final LogTypeTrackable type) {
         typeSelected = type;
-        typeButton.setText(typeSelected.getLabel());
+        binding.type.setText(typeSelected.getLabel());
 
         // show/hide Tracking Code Field for note type
         if (typeSelected != LogTypeTrackable.NOTE || loggingManager.isTrackingCodeNeededToPostNote()) {
-            trackingEditText.setVisibility(View.VISIBLE);
+            binding.tracking.setVisibility(View.VISIBLE);
             // Request focus if field is empty
-            if (StringUtils.isBlank(trackingEditText.getText())) {
-                trackingEditText.requestFocus();
+            if (StringUtils.isBlank(binding.tracking.getText())) {
+                binding.tracking.requestFocus();
             }
         } else {
-            trackingEditText.setVisibility(View.GONE);
+            binding.tracking.setVisibility(View.GONE);
         }
 
         // show/hide Coordinate fields as Trackable needs
         if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates()) {
-            geocodeEditText.setVisibility(View.VISIBLE);
-            coordinatesButton.setVisibility(View.VISIBLE);
+            binding.geocode.setVisibility(View.VISIBLE);
+            binding.coordinates.setVisibility(View.VISIBLE);
             // Request focus if field is empty
-            if (StringUtils.isBlank(geocodeEditText.getText())) {
-                geocodeEditText.requestFocus();
+            if (StringUtils.isBlank(binding.geocode.getText())) {
+                binding.geocode.requestFocus();
             }
         } else {
-            geocodeEditText.setVisibility(View.GONE);
-            coordinatesButton.setVisibility(View.GONE);
+            binding.geocode.setVisibility(View.GONE);
+            binding.coordinates.setVisibility(View.GONE);
         }
     }
 
     private void initTwitter() {
-        tweetCheck.setChecked(true);
+        binding.tweet.setChecked(true);
         if (Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
-            tweetBox.setVisibility(View.VISIBLE);
+            binding.tweetBox.setVisibility(View.VISIBLE);
         } else {
-            tweetBox.setVisibility(View.GONE);
+            binding.tweetBox.setVisibility(View.GONE);
         }
     }
 
@@ -377,7 +365,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             return;
         }
         geopoint = geopointIn;
-        coordinatesButton.setText(geopoint.toString());
+        binding.coordinates.setText(geopoint.toString());
         geocache.setCoords(geopoint);
     }
 
@@ -399,10 +387,10 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     private class LoadGeocacheListener implements OnFocusChangeListener {
         @Override
         public void onFocusChange(final View view, final boolean hasFocus) {
-            if (!hasFocus && StringUtils.isNotBlank(geocodeEditText.getText())) {
-                final Geocache tmpGeocache = DataStore.loadCache(geocodeEditText.getText().toString(), LoadFlags.LOAD_CACHE_OR_DB);
+            if (!hasFocus && StringUtils.isNotBlank(binding.geocode.getText())) {
+                final Geocache tmpGeocache = DataStore.loadCache(binding.geocode.getText().toString(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (tmpGeocache == null) {
-                    geocache.setGeocode(geocodeEditText.getText().toString());
+                    geocache.setGeocode(binding.geocode.getText().toString());
                 } else {
                     geocache = tmpGeocache;
                     updateCoordinates(geocache.getCoords());
@@ -430,7 +418,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
                 // Now posting tweet if log is OK
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     addLocalTrackableLog(logMsg);
-                    if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+                    if (binding.tweet.isChecked() && binding.tweetBox.getVisibility() == View.VISIBLE) {
                         // TODO oldLogType as a temp workaround...
                         final LogEntry logNow = new LogEntry.Builder()
                                 .setDate(date.getDate().getTime())
@@ -539,11 +527,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         }
 
         // Check Tracking Code existence
-        if (loggingManager.isTrackingCodeNeededToPostNote() && trackingEditText.getText().toString().isEmpty()) {
+        if (loggingManager.isTrackingCodeNeededToPostNote() && binding.tracking.getText().toString().isEmpty()) {
             showToast(res.getString(R.string.err_log_post_missing_tracking_code));
             return;
         }
-        trackable.setTrackingcode(trackingEditText.getText().toString());
+        trackable.setTrackingcode(binding.tracking.getText().toString());
 
         // Check params for trackables needing coordinates
         if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected) && geopoint == null) {
@@ -554,7 +542,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         // Some Trackable connectors recommend logging with a Geocode.
         // Note: Currently, counter is shared between all connectors recommending Geocode.
         if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates() &&
-                connector.recommendLogWithGeocode() && geocodeEditText.getText().toString().isEmpty() &&
+                connector.recommendLogWithGeocode() && binding.geocode.getText().toString().isEmpty() &&
                 Settings.getLogTrackableWithoutGeocodeShowCount() < MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE) {
             new LogTrackableWithoutGeocodeBuilder().create(this).show();
         } else {
@@ -566,9 +554,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
      * Post Log in Background
      */
     private void postLog() {
-        new Poster(this, res.getString(R.string.log_saving)).execute(logEditText.getText().toString());
+        new Poster(this, res.getString(R.string.log_saving)).execute(binding.log.getText().toString());
         Settings.setTrackableAction(typeSelected.id);
-        Settings.setLastTrackableLog(logEditText.getText().toString());
+        Settings.setLastTrackableLog(binding.log.getText().toString());
     }
 
     @Override

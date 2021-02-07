@@ -4,8 +4,6 @@ import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.view.View;
 
-import butterknife.ButterKnife;
-
 /**
  * Abstract super class for all view holders. It is responsible for the invocation of the view injection code and for
  * the tagging of views.
@@ -16,7 +14,6 @@ import butterknife.ButterKnife;
 public abstract class AbstractViewHolder {
 
     protected AbstractViewHolder(final View view) {
-        ButterKnife.bind(this, view);
         view.setTag(this);
     }
 

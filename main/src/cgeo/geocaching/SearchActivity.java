@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
+import cgeo.geocaching.databinding.SearchActivityBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.search.AutoCompleteAdapter;
@@ -35,33 +36,10 @@ import androidx.annotation.Nullable;
 
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import org.apache.commons.lang3.StringUtils;
 
 public class SearchActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
-
-    @BindView(R.id.buttonLatitude) protected Button buttonLatitude;
-    @BindView(R.id.buttonLongitude) protected Button buttonLongitude;
-    @BindView(R.id.search_coordinates) protected Button buttonSearchCoords;
-
-    @BindView(R.id.address) protected AutoCompleteTextView addressEditText;
-    @BindView(R.id.search_address) protected Button buttonSearchAddress;
-
-    @BindView(R.id.geocode) protected AutoCompleteTextView geocodeEditText;
-    @BindView(R.id.display_geocode) protected Button buttonSearchGeocode;
-
-    @BindView(R.id.keyword) protected AutoCompleteTextView keywordEditText;
-    @BindView(R.id.search_keyword) protected Button buttonSearchKeyword;
-
-    @BindView(R.id.finder) protected AutoCompleteTextView finderNameEditText;
-    @BindView(R.id.search_finder) protected Button buttonSearchFinder;
-
-    @BindView(R.id.owner) protected AutoCompleteTextView ownerNameEditText;
-    @BindView(R.id.search_owner) protected Button buttonSearchOwner;
-
-    @BindView(R.id.trackable) protected AutoCompleteTextView trackableEditText;
-    @BindView(R.id.display_trackable) protected Button buttonSearchTrackable;
+    private SearchActivityBinding binding;
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
 
@@ -102,12 +80,12 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         }
 
         setTheme();
-        setContentView(R.layout.search_activity);
+        binding = SearchActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
 
-        ButterKnife.bind(this);
         init();
     }
 
@@ -188,20 +166,20 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void init() {
-        buttonLatitude.setOnClickListener(v -> updateCoordinates());
-        buttonLongitude.setOnClickListener(v -> updateCoordinates());
+        binding.buttonLatitude.setOnClickListener(v -> updateCoordinates());
+        binding.buttonLongitude.setOnClickListener(v -> updateCoordinates());
 
-        buttonSearchCoords.setOnClickListener(arg0 -> findByCoordsFn());
+        binding.searchCoordinates.setOnClickListener(arg0 -> findByCoordsFn());
 
-        setSearchAction(addressEditText, buttonSearchAddress, this::findByAddressFn, null);
-        setSearchAction(geocodeEditText, buttonSearchGeocode, this::findByGeocodeFn, DataStore::getSuggestionsGeocode);
-        setSearchAction(keywordEditText, buttonSearchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
-        setSearchAction(finderNameEditText, buttonSearchFinder, this::findByFinderFn, DataStore::getSuggestionsFinderName);
-        setSearchAction(ownerNameEditText, buttonSearchOwner, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
-        setSearchAction(trackableEditText, buttonSearchTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
+        setSearchAction(binding.address, binding.searchAddress, this::findByAddressFn, null);
+        setSearchAction(binding.geocode, binding.displayGeocode, this::findByGeocodeFn, DataStore::getSuggestionsGeocode);
+        setSearchAction(binding.keyword, binding.searchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
+        setSearchAction(binding.finder, binding.searchFinder, this::findByFinderFn, DataStore::getSuggestionsFinderName);
+        setSearchAction(binding.owner, binding.searchOwner, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
+        setSearchAction(binding.trackable, binding.displayTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
 
-        geocodeEditText.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
-        trackableEditText.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+        binding.geocode.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+        binding.trackable.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
     }
 
     private static void setSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {
@@ -220,8 +198,8 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
     @Override
     public void updateCoordinates(final Geopoint gp) {
-        buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-        buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+        binding.buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+        binding.buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
     }
 
     @Override
@@ -230,13 +208,13 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByCoordsFn() {
-        final String latText = StringUtils.trim(buttonLatitude.getText().toString());
-        final String lonText = StringUtils.trim(buttonLongitude.getText().toString());
+        final String latText = StringUtils.trim(binding.buttonLatitude.getText().toString());
+        final String lonText = StringUtils.trim(binding.buttonLongitude.getText().toString());
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
             final GeoData geo = Sensors.getInstance().currentGeo();
-            buttonLatitude.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
-            buttonLongitude.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
+            binding.buttonLatitude.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
+            binding.buttonLongitude.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
         } else {
             try {
                 CacheListActivity.startActivityCoordinates(this, new Geopoint(latText, lonText), null);
@@ -248,7 +226,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
     private void findByKeywordFn() {
         // find caches by coordinates
-        final String keyText = StringUtils.trim(keywordEditText.getText().toString());
+        final String keyText = StringUtils.trim(binding.keyword.getText().toString());
 
         if (StringUtils.isBlank(keyText)) {
             Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_keyword);
@@ -259,7 +237,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByAddressFn() {
-        final String addText = StringUtils.trim(addressEditText.getText().toString());
+        final String addText = StringUtils.trim(binding.address.getText().toString());
 
         if (StringUtils.isBlank(addText)) {
             Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_address);
@@ -272,7 +250,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByFinderFn() {
-        final String usernameText = StringUtils.trim(finderNameEditText.getText().toString());
+        final String usernameText = StringUtils.trim(binding.finder.getText().toString());
 
         if (StringUtils.isBlank(usernameText)) {
             Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_user);
@@ -283,7 +261,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByOwnerFn() {
-        findByOwnerFn(ownerNameEditText.getText().toString());
+        findByOwnerFn(binding.owner.getText().toString());
     }
 
     private void findByOwnerFn(final String userName) {
@@ -298,7 +276,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByGeocodeFn() {
-        final String geocodeText = StringUtils.trimToEmpty(geocodeEditText.getText().toString());
+        final String geocodeText = StringUtils.trimToEmpty(binding.geocode.getText().toString());
 
         if (StringUtils.isBlank(geocodeText) || geocodeText.equalsIgnoreCase("GC")) {
             Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_gccode);
@@ -313,7 +291,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findTrackableFn() {
-        final String trackableText = StringUtils.trimToEmpty(trackableEditText.getText().toString());
+        final String trackableText = StringUtils.trimToEmpty(binding.trackable.getText().toString());
 
         if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
             Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_tb);

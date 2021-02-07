@@ -40,7 +40,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.Locale;
 
-import butterknife.ButterKnife;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
@@ -141,10 +140,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         setTheme();
 
         setContentView(resourceLayoutID);
-
-        // create view variables
-        ButterKnife.bind(this);
-
     }
 
     /**
