@@ -170,6 +170,7 @@ public class FolderUtils {
         Dialogs.newBuilder(activity)
             .setTitle(activity.getString(move ? R.string.folder_move_finished_title : R.string.folder_copy_finished_title))
             .setMessage(message)
+            .setCancelable(false)
             .setPositiveButton(android.R.string.ok, (dd, pp) -> {
                 dd.dismiss();
                 if (callback != null) {
@@ -188,19 +189,25 @@ public class FolderUtils {
     @NotNull
     private String getCopyAllDoneMessage(final Activity activity, final CopyResult copyResult, final Folder source, final Folder target, final boolean move) {
 
-        final String filesCopied = copyResult.filesCopied < 0 ? "-" : "" + copyResult.filesCopied;
-        final String filesTotal = copyResult.filesInSource < 0 ? "-" : plurals(activity, R.plurals.file_count, copyResult.filesInSource);
-        final String foldersCopied = copyResult.dirsCopied < 0 ? "-" : "" + copyResult.dirsCopied;
-        final String foldersTotal = copyResult.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, copyResult.dirsInSource);
+        String message;
+        if (copyResult.status == CopyResultStatus.OK && copyResult.filesCopied == 0 && copyResult.dirsCopied == 0) {
+            message = activity.getString(R.string.folder_copy_move_not_necessary_dialog_message, target.toUserDisplayableString());
+        } else {
 
-        String message =
-            activity.getString(move ? R.string.folder_move_finished_dialog_message : R.string.folder_copy_finished_dialog_message,
-                source.toUserDisplayableString(), target.toUserDisplayableString(),
-                filesCopied, filesTotal, foldersCopied, foldersTotal);
+            final String filesCopied = copyResult.filesCopied < 0 ? "-" : "" + copyResult.filesCopied;
+            final String filesTotal = copyResult.filesInSource < 0 ? "-" : plurals(activity, R.plurals.file_count, copyResult.filesInSource);
+            final String foldersCopied = copyResult.dirsCopied < 0 ? "-" : "" + copyResult.dirsCopied;
+            final String foldersTotal = copyResult.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, copyResult.dirsInSource);
 
-        if (copyResult.status != CopyResultStatus.OK) {
-            message += "\n\n" + activity.getString(R.string.folder_copy_move_finished_dialog_message_failure, copyResult.status.toString(),
-                copyResult.failedFile == null ? "---" : UriUtils.toUserDisplayableString(copyResult.failedFile.uri));
+            message =
+                activity.getString(move ? R.string.folder_move_finished_dialog_message : R.string.folder_copy_finished_dialog_message,
+                    source.toUserDisplayableString(), target.toUserDisplayableString(),
+                    filesCopied, filesTotal, foldersCopied, foldersTotal);
+
+            if (copyResult.status != CopyResultStatus.OK) {
+                message += "\n\n" + activity.getString(R.string.folder_copy_move_finished_dialog_message_failure, copyResult.status.toString(),
+                    copyResult.failedFile == null ? "---" : UriUtils.toUserDisplayableString(copyResult.failedFile.uri));
+            }
         }
 
         message += "\n\n" + activity.getString(R.string.folder_move_finished_dialog_tap);

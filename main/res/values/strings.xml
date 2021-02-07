@@ -891,6 +891,7 @@
     <string name="folder_move_finished_title">Folder content was moved</string>
     <string name="folder_copy_finished_dialog_message">Content of folder %1$s was copied to %2$s.\n\n%3$s of %4$s and %5$s of %6$s were processed.</string>
     <string name="folder_move_finished_dialog_message">Content of folder %1$s was moved to %2$s.\n\n%3$s of %4$s and %5$s of %6$s were processed.</string>
+    <string name="folder_copy_move_not_necessary_dialog_message">Folder %1$s can be used without further migration.</string>
     <string name="folder_copy_move_finished_dialog_message_failure">The operation failed with code %1$s while processing file %2$s.</string>
     <string name="folder_move_finished_dialog_tap">Tap \'ok\' to finalize the folder change.</string>
 
