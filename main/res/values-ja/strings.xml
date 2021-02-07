@@ -767,6 +767,9 @@
     <string name="feature_favorite">お気に入りに追加する</string>
     <string name="feature_voting">キャッシュを評価</string>
     <string name="init_maplines_title">地図の線表示の設定</string>
+    <string name="init_map_other">そのほか</string>
+    <string name="init_map_osm_multithreaded">マルチスレッド(OSM)</string>
+    <string name="init_summary_map_osm_multithreaded">OpenStreetMap地図をレンダリングするために複数のスレッドを使用する</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">接近通知</string>
     <string name="init_proximityNotificationGeneral">マップ上の全般的な接近通知</string>
@@ -800,6 +803,9 @@
     <string name="sendToCgeo_no_registration">キャッシュ情報がダウンロードできませんでした。Send2cgeoの有効期限が過ぎました。再登録してください</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">%sフォルダを変更</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">フォルダ%1$sは現在「%2$s」に設定されており、%3$sと%4$sが含まれています。</string>
+    <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">デフォルトのフォルダ「%s」を使用するか、ユーザー定義のフォルダを選択することができます。</string>
+    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">c:geoがあなたのコンテンツを新しいフォルダにコピー/移動するかどうかを選択してください:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">何もしない</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">すべてのファイルをコピー</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">すべてのファイルを移動</string>
@@ -829,6 +835,23 @@
     <string name="persistablefolder_logfiles">ログファイル</string>
     <string name="persistablefolder_fieldnotes">フィールドノート</string>
     <!-- FolderUtils -->
+    <string name="folder_copy_progressbar_title">「%1$s」の内容を「%2$s」にコピーしています</string>
+    <string name="folder_copy_progressbar_status_done">%1$s/%2$sを%3$s/%4$sへコピーしました</string>
+    <string name="folder_move_progressbar_title">「%1$s」の内容を「%2$s」に移動しています</string>
+    <string name="folder_move_progressbar_status_done">%1$s/%2$sを%3$s/%4$sへ移動しました</string>
+    <string name="folder_copy_move_progressbar_status_processed_file">処理中:%1$s</string>
+    <string name="folder_copy_finished_title">フォルダ内容がコピーされました</string>
+    <string name="folder_move_finished_title">フォルダ内容が移動されました</string>
+    <string name="folder_copy_finished_dialog_message">フォルダ「%1$s」の内容が「%2$s」にコピーされました。\n\n%3$s / %4$sと %5$s / %6$sが処理されました。</string>
+    <string name="folder_move_finished_dialog_message">フォルダ「%1$s」の内容が「%2$s」に移動されました。\n\n%3$s / %4$sと %5$s / %6$sが処理されました。</string>
+    <string name="folder_copy_move_finished_dialog_message_failure">ファイル %1$s の処理中にコード %2$sで操作が失敗しました。</string>
+    <string name="folder_move_finished_dialog_tap">「OK」をタップしてフォルダの変更を完了します。</string>
+    <plurals name="file_count">
+        <item quantity="other">%1$dファイル</item>
+    </plurals>
+    <plurals name="folder_count">
+        <item quantity="other">%1$dフォルダ</item>
+    </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">c:geoを認証</string>
     <string name="auth_check">認証を確認</string>
@@ -1194,7 +1217,6 @@
     <string name="map_live_disable">保存済みキャッシュのみ</string>
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
-    <string name="map_routing">ルート検索</string>
     <string name="map_routing_brouter">ルーティングは <a href="">Brouter</a> がインストールされている場合のみ利用できます</string>
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
@@ -1844,13 +1866,17 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="done">完了</string>
     <string name="finish">終了</string>
     <string name="wizard_welcome_title">c:geoへようこそ</string>
+    <string name="wizard_migration_title">c:geoフォルダの移行</string>
     <string name="wizard_intro">c:geoを使うにはいくつか設定する必要があります。お手伝いしましょうか?</string>
     <string name="wizard_intro_returning">設定ウィザードへようこそ。c:geoの設定はまだ完了していません。お手伝いしましょうか? ほんの数ステップです</string>
+    <string name="wizard_intro_migration">Androidのパーミッションシステムの内部的な変更により、特定のc:geoデータフォルダにアクセスする権限が必要です。 このステップを一歩ずつご案内します。</string>
     <string name="wizard_outro_ok">c:geoを設定していただきありがとうございます。\nお楽しみください!</string>
     <string name="wizard_outro_error">設定が完了していません\nこのままでは、すべての機能が期待どおり動作するわけではありません!</string>
     <string name="wizard_permissions_title">アプリの権限の設定</string>
     <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です\n次のステップで説明します</string>
-    <string name="wizard_basefolder_request_explanation">c:geoは、GPXファイル、バックアップ、フィールドノートなどのデータを保存するためのローカルフォルダが必要です。次のステップでそのフォルダを選択または作成してください。\n以前のバージョンからc:geoをアップグレードした場合は、デバイスストレージのルートレベルで既存のフォルダ「cgeo」を選択してください。</string>
+    <string name="wizard_basefolder_request_explanation">c:geoは、GPXファイル、バックアップ、フィールドノートなどのデータを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成してください。\n以前のバージョンからc:geoをアップグレードした場合は、デバイスストレージのルートレベルで既存のフォルダ「cgeo」を選択してください。</string>
+    <string name="wizard_mapfolder_request_explanation">オフライン用の地図ファイルを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
+    <string name="wizard_gpxfolder_request_explanation">GPXファイルを保存(キャッシュやトラックをインポート/エクスポート)するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
     <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です\nお持ちのアカウントでログインするかアカウント作成してください</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
