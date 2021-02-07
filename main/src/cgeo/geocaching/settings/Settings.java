@@ -1650,4 +1650,12 @@ public class Settings {
     public static boolean getUseCustomTabs() {
         return getBoolean(R.string.pref_customtabs_as_browser, false);
     }
+
+    public static int getLocalStorageVersion() {
+        return getInt(R.string.pref_localstorage_version, 0);
+    }
+
+    public static void setLocalStorageVersion(final int newVersion) {
+        putInt(R.string.pref_localstorage_version, newVersion);
+    }
 }

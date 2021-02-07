@@ -3,9 +3,11 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.LocalStorage;
 
 import android.app.Application;
+import android.content.ContentValues;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +18,9 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Base64InputStream;
 import android.widget.TextView;
@@ -35,18 +40,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.atomic.AtomicLong;
-import static java.io.File.separator;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -54,16 +54,17 @@ import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public final class ImageUtils {
+
+    private static final String OFFLINE_LOG_IMAGE_PRAEFIX = "cgeo-image-";
 
     private static final int[] ORIENTATIONS = {
             ExifInterface.ORIENTATION_ROTATE_90,
             ExifInterface.ORIENTATION_ROTATE_180,
             ExifInterface.ORIENTATION_ROTATE_270
     };
-
-    private static final AtomicLong IMG_COUNTER = new AtomicLong(0);
 
     private static final int[] ROTATION = { 90, 180, 270 };
     private static final int MAX_DISPLAY_IMAGE_XY = 800;
@@ -124,23 +125,33 @@ public final class ImageUtils {
     private static BitmapDrawable scaleBitmapTo(@NonNull final Bitmap image, final int maxWidth, final int maxHeight) {
         final Application app = CgeoApplication.getInstance();
         Bitmap result = image;
-        int width = image.getWidth();
-        int height = image.getHeight();
+        final ImmutableTriple<Integer, Integer, Boolean> scaledSize = calculateScaledImageSizes(image.getWidth(), image.getHeight(), maxWidth, maxHeight);
+
+        if (scaledSize.right) {
+            result = Bitmap.createScaledBitmap(image, scaledSize.left, scaledSize.middle, true);
+        }
+
+        final BitmapDrawable resultDrawable = new BitmapDrawable(app.getResources(), result);
+        resultDrawable.setBounds(new Rect(0, 0, scaledSize.left, scaledSize.middle));
+
+        return resultDrawable;
+    }
+
+    public static ImmutableTriple<Integer, Integer, Boolean> calculateScaledImageSizes(final int originalWidth, final int originalHeight, final int maxWidth, final int maxHeight) {
+        int width = originalWidth;
+        int height = originalHeight;
         final int realMaxWidth = maxWidth <= 0 ? width : maxWidth;
         final int realMaxHeight = maxHeight <= 0 ? height : maxHeight;
         final boolean imageTooLarge = width > realMaxWidth || height > realMaxHeight;
 
-        if (imageTooLarge) {
-            final double ratio = Math.min((double) realMaxHeight / (double) height, (double) realMaxWidth / (double) width);
-            width = (int) Math.ceil(width * ratio);
-            height = (int) Math.ceil(height * ratio);
-            result = Bitmap.createScaledBitmap(image, width, height, true);
+        if (!imageTooLarge) {
+            return new ImmutableTriple<>(width, height, false);
         }
 
-        final BitmapDrawable resultDrawable = new BitmapDrawable(app.getResources(), result);
-        resultDrawable.setBounds(new Rect(0, 0, width, height));
-
-        return resultDrawable;
+        final double ratio = Math.min((double) realMaxHeight / (double) height, (double) realMaxWidth / (double) width);
+        width = (int) Math.ceil(width * ratio);
+        height = (int) Math.ceil(height * ratio);
+        return new ImmutableTriple<>(width, height, true);
     }
 
     /**
@@ -166,42 +177,15 @@ public final class ImageUtils {
         }
     }
 
-    public static class ScaleImageResult {
-        public final Uri imageUri;
-        public final int width;
-        public final int height;
-        public final boolean wasCopied;
+    public static File scaleAndCompressImageToTemporaryFile(@NonNull final Uri imageUri, final int maxXY) {
 
-        public ScaleImageResult(final Uri imageUri, final int width, final int height, final boolean wasCopied) {
-            this.imageUri = imageUri;
-            this.width = width;
-            this.height = height;
-            this.wasCopied = wasCopied;
-        }
-    }
-
-    /**
-     * This method will scale down a given image and remove EXIF information. During this process the image might be copied,
-     * so returned Uri might not be same than the one put in.
-     *
-     * @param originalImageUri Image to read
-     * @param maxXY bounds. If <= 0 then no scaling will happen. This might also mean that the image is not copied (depends on preserveOriginal parameter)
-     * @param preserveOriginal if true then a copy will always be made and the original image is not deleted. If false and a copy is made, then the original uri is deleted.
-     * @return scale image result, <tt>null</tt> if something fails
-     */
-    @Nullable
-    public static ScaleImageResult readScaleAndWriteImage(@NonNull final Uri originalImageUri, final int maxXY, final boolean preserveOriginal) {
-
-        if (maxXY <= 0 && !preserveOriginal) {
-            final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStream(originalImageUri));
-            return new ScaleImageResult(originalImageUri, sizeOnlyOptions.outWidth, sizeOnlyOptions.outHeight, false);
-        }
-        final Bitmap image = readDownsampledImage(originalImageUri, maxXY, maxXY);
+        final Bitmap image = readDownsampledImage(imageUri, maxXY, maxXY);
         if (image == null) {
             return null;
         }
 
-        final Uri newImageUri = createNewImageUri(false);
+        final File targetFile = FileUtils.getUniqueNamedFile(new File(LocalStorage.getInternalCgeoDirectory(), "offline_log_image.tmp"));
+        final Uri newImageUri = Uri.fromFile(targetFile);
         if (newImageUri == null) {
             Log.e("ImageUtils.readScaleAndWriteImage: unable to write scaled image");
             return null;
@@ -210,10 +194,7 @@ public final class ImageUtils {
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
         storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, newImageUri);
 
-        if (!preserveOriginal) {
-            deleteImage(originalImageUri);
-        }
-        return new ScaleImageResult(newImageUri, scaledImage.getBitmap().getWidth(), scaledImage.getBitmap().getHeight(), true);
+        return targetFile;
     }
 
     /**
@@ -227,8 +208,10 @@ public final class ImageUtils {
     @Nullable
     private static Bitmap readDownsampledImage(@NonNull final Uri imageUri, final int maxX, final int maxY) {
 
-        final int orientation = getImageOrientation(imageUri);
         final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStream(imageUri));
+        if (sizeOnlyOptions == null) {
+            return null;
+        }
         final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
         final int maxXY = Math.max(maxX <= 0 ? sizeOnlyOptions.outWidth : maxX, maxY <= 0 ? sizeOnlyOptions.outHeight : maxY);
         final int sampleSize = maxXY <= 0 ? 1 : myMaxXY / maxXY;
@@ -236,6 +219,12 @@ public final class ImageUtils {
         if (sampleSize > 1) {
             sampleOptions.inSampleSize = sampleSize;
         }
+
+        return readDownsampledImageInternal(imageUri, sampleOptions);
+    }
+
+    private static Bitmap readDownsampledImageInternal(final Uri imageUri, final BitmapFactory.Options sampleOptions) {
+        final int orientation = getImageOrientation(imageUri);
 
         try (InputStream imageStream = openImageStream(imageUri)) {
             if (imageStream == null) {
@@ -521,115 +510,102 @@ public final class ImageUtils {
         return bitmap;
     }
 
-    public static File copyImageToTemporaryFile(final Image img) {
-        if (img == null || img.getUri() == null) {
-            return null;
-        }
-        final File targetFile = FileUtils.getUniqueNamedFile(new File(LocalStorage.getInternalCgeoDirectory(), "offline_log_image.tmp"));
-        OutputStream os = null;
-        InputStream is = null;
-        try {
-            is = openImageStream(img.getUri());
-            if (is == null) {
-                return null;
-            }
-            os = new FileOutputStream(targetFile);
-            IOUtils.copy(is, os);
-        } catch (IOException ioe) {
-            Log.w("Problem copying img '" + img + "' to '" + targetFile + "'", ioe);
-            return null;
-        } finally {
-            IOUtils.closeQuietly(is, os);
-        }
-        return targetFile;
-    }
-
-
-    // --- SAF: the following methods must be migrated
-
-    /** Create a new Uri for saving an image
-     * */
-    @Nullable
-    public static Uri createNewImageUri(final boolean forShare) {
-
-        //TODO: shall be replaced by SAF storage access later
-
-        // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
-        final File mediaStorageDir = LocalStorage.getLogPictureDirectory();
-        // This location works best if you want the created images to be shared
-        // between applications and persist after your app has been uninstalled.
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists() && !FileUtils.mkdirs(mediaStorageDir)) {
-            Log.e("ImageUtils.getOutputImageFile: cannot create media storage directory");
-            return null;
-        }
-
-        // Create a media file name
-        final String timeStamp = new SimpleDateFormat("yyMMdd-HHmmss", Locale.US).format(new Date());
-        final File newFile = new File(mediaStorageDir.getPath() + separator + (forShare ? "shared-" : "") + "IMG" + IMG_COUNTER.addAndGet(1) + "-" + timeStamp + ".jpg");
-
-        if (forShare) {
-            return FileProvider.getUriForFile(
-                CgeoApplication.getInstance().getApplicationContext(),
-                CgeoApplication.getInstance().getApplicationContext().getString(R.string.file_provider_authority),
-                newFile);
-        }
-
-        return Uri.fromFile(newFile);
-    }
-
-
     @Nullable
     private static InputStream openImageStream(final Uri imageUri) {
-        //TODO: this method must be replaced with a call to SAF framework later
-        try {
-            return CgeoApplication.getInstance().getApplicationContext().getContentResolver().openInputStream(imageUri);
-        } catch (IOException ioe) {
-            Log.w("Could not open inputstream for file " + imageUri, ioe);
-            return null;
-        }
-
+        return ContentStorage.get().openForRead(imageUri);
     }
 
     public static boolean deleteImage(final Uri uri) {
-        if (uri == null) {
-            return false;
+        if (uri != null && !StringUtils.isBlank(uri.toString())) {
+            return ContentStorage.get().delete(uri);
         }
-        if (uri.toString().startsWith("file")) {
-            return new File(uri.getPath()).delete();
-        }
-        //TODO: this method must be replaced with a call to SAF framework later
-        if (uri.toString().startsWith("content")) {
-            return CgeoApplication.getInstance().getApplicationContext().getContentResolver().delete(uri, null, null) > 0;
-        }
-
         return false;
     }
 
-    public static String getImageLocationForUserDisplay(final Image image) {
-        //TODO: this method must be adapted for SAF
-        return image.getUrl();
-    }
-
     /** Returns image name and size in bytes */
-    public static ImmutablePair<String, Long> getImageFileInfos(final Image image) {
-
-        if (image == null) {
-            return new ImmutablePair<>("", 0l);
-        }
-
-        if (image.isLocalFile()) {
-            return new ImmutablePair<>(image.getFile().getName(), image.getFile().length());
-        }
-
-        //TODO: following must be ADAPTED for SAF framework later
-        if (image.getUri() != null && image.getUri().toString().startsWith("file")) {
-            return new ImmutablePair<>(image.getUri().getLastPathSegment(), new File (image.getUri().getPath()).length());
-        }
-
-        return new ImmutablePair<>("", 0l);
+    public static ContentStorage.FileInformation getImageFileInfos(final Image image) {
+        return ContentStorage.get().getFileInfo(image.getUri());
     }
 
+    /**
+     * Creates a new image Uri for a public image.
+     * Just the filename and uri is created, no data is stored.
+     * @param geocode an identifier which will become part of the filename. Might be e.g. the gccode
+     * @return left: created filename, right: uri for the image
+     */
+    public static ImmutablePair<String, Uri> createNewPublicImageUri(final String geocode) {
+
+        final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "x" : geocode);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            final ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.DISPLAY_NAME, imageFileName);
+            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+            values.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
+            return new ImmutablePair<>(imageFileName,
+                CgeoApplication.getInstance().getApplicationContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values));
+        }
+
+        //the following only works until Version Q
+        final File imageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        final File image = new File(imageDir, imageFileName);
+
+        //go through file provider so we can share the Uri with e.g. camera app
+        return new ImmutablePair<>(imageFileName, FileProvider.getUriForFile(
+            CgeoApplication.getInstance().getApplicationContext(),
+            CgeoApplication.getInstance().getApplicationContext().getString(R.string.file_provider_authority),
+            image));
+    }
+
+    /** Create a new image Uri for an offline log image */
+    public static ImmutablePair<String, Uri> createNewOfflineLogImageUri(final String geocode) {
+        final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
+        return new ImmutablePair<>(imageFileName, Uri.fromFile(getFileForOfflineLogImage(imageFileName)));
+    }
+
+    public static void deleteOfflineLogImagesFor(final String geocode, final List<Image> keep) {
+        if (geocode == null) {
+            return;
+        }
+        final Set<String> filenamesToKeep = CollectionStream.of(keep).map(i -> i.getFile().getName()).toSet();
+        final String fileNamePraefix = OFFLINE_LOG_IMAGE_PRAEFIX + geocode;
+        CollectionStream.of(LocalStorage.getOfflineLogImageDir(geocode).listFiles())
+            .filter(f -> f.getName().startsWith(fileNamePraefix) && !filenamesToKeep.contains(f.getName()))
+            .forEach(f -> f.delete());
+    }
+
+    public static boolean deleteOfflineLogImageFile(final Image delete) {
+        final File imageFile = getFileForOfflineLogImage(delete.getFileName());
+        return imageFile.isFile() && imageFile.delete();
+    }
+
+    public static File getFileForOfflineLogImage(final String imageFileName) {
+        //extract geocode
+        String geocode = null;
+        if (imageFileName.startsWith(OFFLINE_LOG_IMAGE_PRAEFIX)) {
+            final int idx = imageFileName.indexOf("-", OFFLINE_LOG_IMAGE_PRAEFIX.length());
+            if (idx >= 0) {
+                geocode = imageFileName.substring(OFFLINE_LOG_IMAGE_PRAEFIX.length(), idx);
+            }
+        }
+        return new File(LocalStorage.getOfflineLogImageDir(geocode), imageFileName);
+    }
+
+    /** adjusts a previously stored offline log image uri to maybe changed realities on the file system */
+    public static Uri adjustOfflineLogImageUri(final Uri imageUri) {
+        if (imageUri == null) {
+            return imageUri;
+        }
+
+        // if image folder was moved, try to find image in actual folder using its name
+        if (UriUtils.isFileUri(imageUri)) {
+            final File imageFileCandidate = new File(imageUri.getPath());
+            if (!imageFileCandidate.isFile()) {
+                return Uri.fromFile(getFileForOfflineLogImage(imageFileCandidate.getName()));
+            }
+        }
+
+        return imageUri;
+    }
 
 }

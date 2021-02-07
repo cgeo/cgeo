@@ -8,14 +8,14 @@ import cgeo.geocaching.databinding.ImagelistFragmentBinding;
 import cgeo.geocaching.databinding.ImagelistItemBinding;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.Log;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,13 +28,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * Fragment displays and maintains an image list where
@@ -51,20 +49,17 @@ public class ImageListFragment extends Fragment {
     private ImageActivityHelper imageHelper;
 
     //following info is used to restrict image selections and for display
-    private CharSequence contextCode;
+    private String geocode;
     private Long maxImageUploadSize;
     private boolean captionMandatory;
 
     private static final int SELECT_IMAGE = 101;
 
-    private final Set<Uri> lastSavedStateImagePaths = new HashSet<>();
-
-
     /**
      * call once to initialize values for image retrieval
      */
-    public void init(final CharSequence contextCode, final Long maxImageUploadSize, final boolean captionMandatory) {
-        this.contextCode = contextCode;
+    public void init(final String contextCode, final Long maxImageUploadSize, final boolean captionMandatory) {
+        this.geocode = contextCode;
         this.maxImageUploadSize = maxImageUploadSize;
         this.captionMandatory = captionMandatory;
     }
@@ -126,15 +121,10 @@ public class ImageListFragment extends Fragment {
     public List<Image> getImages() {
         return imageList.getCurrentList();
     }
-    /** initializes image persistence state to this list. Call after loading list e.g. from database */
-    public void setImagePersistentState(final Collection<Image> images) {
-        adjustImagePersistentStateTo(images, false);
-    }
 
-    /** adjusts image persistent state. Call after storing list e.g. to database.
-     * Note: a call to this method physically DELETED images from device which were in previous state call but not in this one! */
-    public void adjustImagePersistentState(final Collection<Image> images) {
-        adjustImagePersistentStateTo(images, true);
+    /** adjusts image persistent state to what is actually in the list */
+    public void adjustImagePersistentState() {
+        ImageUtils.deleteOfflineLogImagesFor(geocode, getImages());
     }
 
     @Nullable
@@ -152,12 +142,13 @@ public class ImageListFragment extends Fragment {
         imageList = new ImageListAdapter(view.findViewById(R.id.image_list));
 
         this.binding.imageAddMulti.setOnClickListener(v ->
-            imageHelper.getMultipleImagesFromStorage(getFastImageAutoScale(), false, imgs -> {
-                imageList.addItems(imgs);
+            imageHelper.getMultipleImagesFromStorage(geocode, false, imgs -> {
+                final List<Image> imagesToAdd = CollectionStream.of(imgs).map(img -> img.buildUpon().setTargetScale(getFastImageAutoScale()).build()).toList();
+                imageList.addItems(imagesToAdd);
             }));
         this.binding.imageAddCamera.setOnClickListener(v ->
-            imageHelper.getImageFromCamera(getFastImageAutoScale(), false, img -> {
-                imageList.addItem(img);
+            imageHelper.getImageFromCamera(geocode, false, img -> {
+                imageList.addItem(img.buildUpon().setTargetScale(getFastImageAutoScale()).build());
             }));
     }
 
@@ -198,15 +189,29 @@ public class ImageListFragment extends Fragment {
 
         private String getImageInfo(final Image image) {
 
-            final ImmutablePair<String, Long> imageFileInfo = ImageUtils.getImageFileInfos(image);
+            final ContentStorage.FileInformation imageFileInfo = ImageUtils.getImageFileInfos(image);
             int width = 0;
             int height = 0;
+            int scaledWidth = width;
+            int scaledHeight = height;
             final ImmutablePair<Integer, Integer> widthHeight = ImageUtils.getImageSize(image.getUri());
             if (widthHeight != null) {
                 width = widthHeight.getLeft();
                 height = widthHeight.getRight();
+                final ImmutableTriple<Integer, Integer, Boolean> scaledImageSizes = ImageUtils.calculateScaledImageSizes(width, height, image.targetScale, image.targetScale);
+                scaledWidth = scaledImageSizes.left;
+                scaledHeight = scaledImageSizes.middle;
             }
-            return getString(R.string.log_image_info, width, height, imageFileInfo.right / 1024, imageFileInfo.left);
+
+            final long fileSize = imageFileInfo == null ? 0 : imageFileInfo.size;
+            //A rough estimation for the size of the compressed image:
+            // * tenth the size due to compress
+            // * linear scale by pixel size
+            // * round to full KB
+            final long roughCompressedSize = width * height == 0 ? 0 :
+                ((fileSize * (scaledHeight * scaledWidth) / 10 / (width * height)) / 1024) * 1024;
+
+            return getString(R.string.log_image_info, width, height, Formatter.formatBytes(fileSize), scaledWidth, scaledHeight, Formatter.formatBytes(roughCompressedSize));
         }
 
         @NonNull
@@ -239,7 +244,7 @@ public class ImageListFragment extends Fragment {
             selectImageIntent.putExtra(Intents.EXTRA_IMAGE, imageList.getItem(imageIndex));
         }
         selectImageIntent.putExtra(Intents.EXTRA_INDEX, imageIndex);
-        selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, contextCode);
+        selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
         selectImageIntent.putExtra(Intents.EXTRA_IMAGE_CAPTION_MANDATORY, captionMandatory);
 
@@ -247,32 +252,6 @@ public class ImageListFragment extends Fragment {
     }
 
     private int getFastImageAutoScale() {
-        int scale = Settings.getLogImageScale();
-        if (scale <= 0) {
-            scale = 1024;
-        }
-        return scale;
+        return Settings.getLogImageScale();
     }
-
-    private void adjustImagePersistentStateTo(final Collection<Image> images, final boolean deleteOld) {
-        Log.d("Adjust persistent state from  " + lastSavedStateImagePaths + " to " + images + " (deleteOld=" + deleteOld + ")");
-        if (deleteOld) {
-            //delete all images on device which are in old state but not in new
-            final Set<Uri> existingPaths = CollectionStream.of(images).filter(img -> img.getUri() != null).map(img -> img.getUri()).toSet();
-            for (final Uri oldPath : lastSavedStateImagePaths) {
-                if (!existingPaths.contains(oldPath)) {
-                    final boolean result = ImageUtils.deleteImage(oldPath);
-                    Log.d("Deleting image " + oldPath + " (result: " + result + ")");
-                }
-            }
-        }
-        //refill image state
-        lastSavedStateImagePaths.clear();
-        for (final Image img : images) {
-            if (img.getUri() != null) {
-                lastSavedStateImagePaths.add(img.getUri());
-            }
-        }
-    }
-
 }

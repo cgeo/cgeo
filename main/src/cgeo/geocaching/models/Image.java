@@ -29,7 +29,12 @@ public class Image implements Parcelable {
     /**
      * Static empty image, linked to nothing.
      */
-    public static final Image NONE = new Image(Uri.EMPTY, null, null);
+    public static final Image NONE = new Image(Uri.EMPTY, null, null, -1);
+
+    @NonNull public final Uri uri;
+    @Nullable public final String title;
+    public final int targetScale; //for offline log images
+    @Nullable final String description;
 
     /**
      * Helper class for building or manipulating Image references.
@@ -40,6 +45,7 @@ public class Image implements Parcelable {
         @NonNull private Uri uri;
         @Nullable private String title;
         @Nullable private String description;
+        private int targetScale; //needed for offline log images
 
         /**
          * Create a new Image.
@@ -49,6 +55,7 @@ public class Image implements Parcelable {
             uri = Uri.EMPTY;
             title = null;
             description = null;
+            targetScale = -1;
         }
 
         /**
@@ -57,7 +64,7 @@ public class Image implements Parcelable {
          */
         @NonNull
         public Image build() {
-            return new Image(uri, title, description);
+            return new Image(uri, title, description, targetScale);
         }
 
         /**
@@ -129,12 +136,15 @@ public class Image implements Parcelable {
             this.description = description;
             return this;
         }
+
+        /** For Offline Log Images: set wanted scaling factor when sending image to provider. */
+        @NonNull
+        public Builder setTargetScale(final int targetScale) {
+            this.targetScale = targetScale;
+            return this;
+        }
     }
 
-
-    @NonNull public final Uri uri;
-    @Nullable public final String title;
-    @Nullable final String description;
 
     /**
      * Create a new Image from Url.
@@ -146,16 +156,18 @@ public class Image implements Parcelable {
      * @param description
      *          The image description
      */
-    private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description) {
+    private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description, final int targetScale) {
         this.uri = uri;
         this.title = title;
         this.description = description;
+        this.targetScale = targetScale;
     }
 
     private Image(@NonNull final Parcel in) {
         uri = in.readParcelable(Uri.class.getClassLoader());
         title = in.readString();
         description = in.readString();
+        targetScale = in.readInt();
     }
 
     @Override
@@ -168,6 +180,7 @@ public class Image implements Parcelable {
         dest.writeParcelable(uri, 0);
         dest.writeString(title);
         dest.writeString(description);
+        dest.writeInt(targetScale);
     }
 
     public static final Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {
@@ -192,7 +205,8 @@ public class Image implements Parcelable {
         return new Builder()
                 .setUrl(uri)
                 .setTitle(title)
-                .setDescription(description);
+                .setDescription(description)
+                .setTargetScale(targetScale);
     }
 
     /**
@@ -251,6 +265,10 @@ public class Image implements Parcelable {
     @NonNull
     public String getPath() {
         return isLocalFile() ? uri.getPath() : "";
+    }
+
+    public String getFileName() {
+        return  isLocalFile() ? getFile().getName() : "";
     }
 
     /**
@@ -358,7 +376,8 @@ public class Image implements Parcelable {
 
         return uri.equals(image.uri)
                 && StringUtils.equals(title, image.title)
-                && StringUtils.equals(description, image.description);
+                && StringUtils.equals(description, image.description)
+                && targetScale == image.targetScale;
     }
 
     @Override
@@ -368,6 +387,6 @@ public class Image implements Parcelable {
 
     @Override
     public String toString() {
-        return "[Uri:" + uri + "/Title:" + title + "/Desc:" + description + "]";
+        return "[Uri:" + uri + "/Title:" + title + "/Desc:" + description + "/targetScale:" + targetScale + "]";
     }
 }

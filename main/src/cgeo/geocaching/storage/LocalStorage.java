@@ -7,11 +7,14 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Environment;
 
@@ -48,11 +51,14 @@ public final class LocalStorage {
     private static final String LEGACY_CGEO_DIR_NAME = ".cgeo";
     private static final String GEOCACHE_PHOTOS_DIR_NAME = "GeocachePhotos";
     private static final String GEOCACHE_DATA_DIR_NAME = "GeocacheData";
+    private static final String OFFLINE_LOG_IMAGES_DIR_NAME = "OfflineLogImages";
     private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MB in bytes
 
     private static File internalCgeoDirectory;
     private static File externalPrivateCgeoDirectory;
     private static File externalPublicCgeoDirectory;
+
+    private static final int LOCALSTORAGE_VERSION = 1;
 
 
     private LocalStorage() {
@@ -164,6 +170,18 @@ public final class LocalStorage {
     @NonNull
     public static File getGeocacheDataDirectory(@NonNull final String geocode) {
         return new File(getGeocacheDataDirectory(), geocode);
+    }
+
+    /**
+     * Get the internal directory to store offline log images (c:geo-copies) while they are not
+     * sent to the server
+     * @return the offline log images directory
+     */
+    @NonNull
+    public static File getOfflineLogImageDir(final String geocode) {
+        final File dir = new File(getGeocacheDataDirectory(geocode == null ? "shared" : geocode), OFFLINE_LOG_IMAGES_DIR_NAME);
+        dir.mkdirs();
+        return dir;
     }
 
     /**
@@ -326,11 +344,6 @@ public final class LocalStorage {
         return new File(Environment.getExternalStorageDirectory(), GEOCACHE_PHOTOS_DIR_NAME);
     }
 
-    @NonNull
-    public static File getLogPictureDirectory() {
-        return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), CGEO_DIRNAME);
-    }
-
     public static void deleteFilesOrDirectories(final File[] files) {
         if (files == null) {
             return;
@@ -384,6 +397,19 @@ public final class LocalStorage {
         });
     }
 
+    public static void migrateLocalStorage(final Activity activity) {
+        final int currentVersion = Settings.getLocalStorageVersion();
+
+        Log.iForce("LocalStorage: current Version: " + currentVersion + ", expected Version: " + LOCALSTORAGE_VERSION);
+
+        if (currentVersion >= LOCALSTORAGE_VERSION) {
+            //nothing to migrate
+            return;
+        }
+
+        new MigrateTask(activity, currentVersion, LOCALSTORAGE_VERSION).execute();
+    }
+
     public static boolean isRunningLowOnDiskSpace() {
         return FileUtils.getFreeDiskSpace(getExternalPrivateCgeoDirectory()) < LOW_DISKSPACE_THRESHOLD;
     }
@@ -399,4 +425,65 @@ public final class LocalStorage {
             }
         }
     }
+
+    private static class MigrateTask extends AsyncTaskWithProgressText<Void, Integer> {
+
+        private final int currentVersion;
+        private final int finalVersion;
+
+        private int currentMigrateVersion;
+        private String currentMigrateVersionTitle;
+
+        MigrateTask(@NonNull final Activity activity, final int currentVersion, final int finalVersion) {
+            super(
+                activity,
+                activity.getString(R.string.localstorage_migrate_title),
+                "---");
+            this.currentVersion = currentVersion;
+            this.finalVersion = finalVersion;
+        }
+
+        private void setMigratedVersion(final int version, final String currentMigrateVersionTitle) {
+            this.currentMigrateVersion = version;
+            this.currentMigrateVersionTitle = currentMigrateVersionTitle;
+            displayProgress(null);
+        }
+
+        private void displayProgress(final String minorStatus) {
+            publishProgress(
+                activity.getString(R.string.localstorage_migrate_status_major, this.currentMigrateVersion) +
+                    (this.currentMigrateVersionTitle == null ? "" : ": " + currentMigrateVersionTitle) +
+                    (minorStatus == null ? "" : "\n" + minorStatus));
+        }
+
+        @Override
+        protected Integer doInBackgroundInternal(final Void[] params) {
+
+            //move Offline Log Images from legacy directory to GeocacheData directories
+            if (currentVersion < 1) {
+                setMigratedVersion(1, "OfflineLogImages");
+
+                //legacy cgeo offline log images dir
+                final File legacyOfflineLogImagesDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), CGEO_DIRNAME);
+
+                //migrate existing Offline Log Image paths
+                if (legacyOfflineLogImagesDir.isDirectory()) {
+                    for (File offlineImage : legacyOfflineLogImagesDir.listFiles()) {
+                        if (offlineImage.isFile()) {
+                            displayProgress(offlineImage.getName());
+                            FileUtils.copy(offlineImage, ImageUtils.getFileForOfflineLogImage(offlineImage.getName()));
+                        }
+                    }
+                }
+            }
+
+            return 0;
+         }
+
+        protected void onPostExecuteInternal(final Integer result) {
+            Settings.setLocalStorageVersion(finalVersion);
+        }
+
+    }
+
 }

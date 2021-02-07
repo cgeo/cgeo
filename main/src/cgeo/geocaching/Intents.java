@@ -34,7 +34,6 @@ public class Intents {
     public static final String EXTRA_LIST_ID = PREFIX + "list_id";
     public static final String EXTRA_PQ_LIST_IMPORT = PREFIX + "pq_list_import";
     public static final String EXTRA_COORD_DESCRIPTION = PREFIX + "coord_description";
-    public static final String EXTRA_SCALE = PREFIX + "scale";
     public static final String EXTRA_WPT_PAGE_UPDATE = PREFIX + "wpt_page_update";
 
     public static final String EXTRA_WPTTYPE = PREFIX + "wpttype";

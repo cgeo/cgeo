@@ -13,16 +13,18 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ImageUtils;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Arrays;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class ImageSelectActivity extends AbstractActionBarActivity {
     private ImageselectActivityBinding binding;
@@ -35,6 +37,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";
     private static final String SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE = "cgeo.geocaching.saved_state_max_image_upload_size";
     private static final String SAVED_STATE_IMAGE_CAPTION_MANDATORY = "cgeo.geocaching.saved_state_image_caption_mandatory";
+    private static final String SAVED_STATE_GEOCODE = "cgeo.geocaching.saved_state_geocode";
 
     private final ImageActivityHelper imageActivityHelper = new ImageActivityHelper(this, 1);
 
@@ -43,6 +46,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private int imageIndex = -1;
     private long maxImageUploadSize;
     private boolean imageCaptionMandatory;
+    @Nullable private String geocode;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -50,9 +54,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         binding = ImageselectActivityBinding.bind(findViewById(R.id.imageselect_activity_viewroot));
 
         imageScale.setSpinner(findViewById(R.id.logImageScale))
-                .setDisplayMapper(scaleSize -> scaleSize < 0 ? getResources().getString(R.string.log_image_scale_option_noscaling) : getResources().getString(R.string.log_image_scale_option_entry, scaleSize))
                 .setValues(Arrays.asList(ArrayUtils.toObject(getResources().getIntArray(R.array.log_image_scale_values))))
-                .set(Settings.getLogImageScale())
                 .setChangeListener(Settings::setLogImageScale);
 
         // Get parameters from intent and basic cache information from database
@@ -63,6 +65,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             imageIndex = extras.getInt(Intents.EXTRA_INDEX, -1);
             maxImageUploadSize = extras.getLong(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE);
             imageCaptionMandatory = extras.getBoolean(Intents.EXTRA_IMAGE_CAPTION_MANDATORY);
+            geocode = extras.getString(Intents.EXTRA_GEOCODE);
 
             //try to find a good title from what we got
             final String context = extras.getString(Intents.EXTRA_GEOCODE);
@@ -86,11 +89,16 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             imageScale.set(savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE));
             maxImageUploadSize = savedInstanceState.getLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE);
             imageCaptionMandatory = savedInstanceState.getBoolean(SAVED_STATE_IMAGE_CAPTION_MANDATORY);
+            geocode = savedInstanceState.getString(SAVED_STATE_GEOCODE);
         }
 
         if (image == null) {
             image = Image.NONE;
+            imageScale.set(Settings.getLogImageScale());
+        } else {
+            imageScale.set(image.targetScale);
         }
+        updateScaleValueDisplay();
 
         binding.camera.setOnClickListener(view -> selectImageFromCamera());
         binding.stored.setOnClickListener(view -> selectImageFromStorage());
@@ -123,50 +131,24 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         outState.putInt(SAVED_STATE_IMAGE_SCALE, imageScale.get());
         outState.putLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
         outState.putBoolean(SAVED_STATE_IMAGE_CAPTION_MANDATORY, imageCaptionMandatory);
+        outState.putString(SAVED_STATE_GEOCODE, geocode);
     }
 
     public void saveImageInfo(final boolean saveInfo, final boolean deleteImage) {
         if (saveInfo) {
-            new AsyncTask<Void, Void, ImageUtils.ScaleImageResult>() {
-                @Override
-                protected ImageUtils.ScaleImageResult doInBackground(final Void... params) {
-                    final int maxXY = imageScale.get();
-                    if (image.getUri() == null) {
-                        return null;
-                    }
-                    return ImageUtils.readScaleAndWriteImage(image.getUri(), maxXY, false);
-                }
+            //check if save is possible
+            if (imageCaptionMandatory && StringUtils.isBlank(binding.caption.getText())) {
+                showToast(res.getString(R.string.err_logimage_caption_required));
+                return;
+            }
 
-                @Override
-                protected void onPostExecute(final ImageUtils.ScaleImageResult scaleImageResult) {
-                    if (scaleImageResult != null) {
-                        image = new Image.Builder().setUrl(scaleImageResult.imageUri).build();
-
-                        final long imageSize = ImageUtils.getImageFileInfos(image).right;
-                        if (maxImageUploadSize > 0 && imageSize > maxImageUploadSize) {
-                            showToast(res.getString(R.string.err_select_logimage_upload_size));
-                            return;
-                        }
-
-                        if (imageCaptionMandatory && StringUtils.isBlank(binding.caption.getText())) {
-                            showToast(res.getString(R.string.err_logimage_caption_required));
-                            return;
-                        }
-
-                        final Intent intent = new Intent();
-                        syncEditTexts();
-                        intent.putExtra(Intents.EXTRA_IMAGE, image);
-                        intent.putExtra(Intents.EXTRA_INDEX, imageIndex);
-                        intent.putExtra(Intents.EXTRA_SCALE, imageScale.get());
-                        //"originalImage" is now obsolete. But we never delete originalImage (in case log gets not stored)
-                        setResult(RESULT_OK, intent);
-                    } else {
-                        showToast(res.getString(R.string.err_select_logimage_failed));
-                        setResult(RESULT_CANCELED);
-                    }
-                    finish();
-                }
-            }.execute();
+            final Intent intent = new Intent();
+            syncEditTexts();
+            intent.putExtra(Intents.EXTRA_IMAGE, image);
+            intent.putExtra(Intents.EXTRA_INDEX, imageIndex);
+            //"originalImage" is now obsolete. But we never delete originalImage (in case log gets not stored)
+            setResult(RESULT_OK, intent);
+            finish();
         } else if (deleteImage) {
             final Intent intent = new Intent();
             intent.putExtra(Intents.EXTRA_DELETE_FLAG, true);
@@ -186,13 +168,14 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         image = new Image.Builder()
                 .setUrl(image.uri)
                 .setTitle(binding.caption.getText().toString())
+                .setTargetScale(imageScale.get())
                 .setDescription(binding.description.getText().toString())
                 .build();
     }
 
     private void selectImageFromCamera() {
 
-        imageActivityHelper.getImageFromCamera(-1, false, img -> {
+        imageActivityHelper.getImageFromCamera(this.geocode, false, img -> {
             deleteImageFromDeviceIfNotOriginal(image);
             image = img;
             loadImagePreview();
@@ -200,7 +183,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void selectImageFromStorage() {
-        imageActivityHelper.getImageFromStorage(-1, false,  img -> {
+        imageActivityHelper.getImageFromStorage(this.geocode, false,  img -> {
             deleteImageFromDeviceIfNotOriginal(image);
             image = img;
             loadImagePreview();
@@ -222,5 +205,36 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     private void loadImagePreview() {
         ImageActivityHelper.displayImageAsync(image, binding.imagePreview);
+        updateScaleValueDisplay();
+    }
+
+    private void updateScaleValueDisplay() {
+        int width = -1;
+        int height = -1;
+        if (image != null && image.getUri() != null) {
+            final ImmutablePair<Integer, Integer> size = ImageUtils.getImageSize(image.getUri());
+            if (size != null) {
+                width = size.left;
+                height = size.right;
+            }
+        }
+        updateScaleValueDisplayIntern(width, height);
+    }
+
+    private void updateScaleValueDisplayIntern(final int width, final int height) {
+        imageScale.setDisplayMapper(scaleSize -> {
+            if (width < 0 || height < 0) {
+                return scaleSize < 0 ? getResources().getString(R.string.log_image_scale_option_noscaling) :
+                    getResources().getString(R.string.log_image_scale_option_entry_noimage, scaleSize);
+            }
+
+            final ImmutableTriple<Integer, Integer, Boolean> scales = ImageUtils.calculateScaledImageSizes(width, height, scaleSize, scaleSize);
+            String displayValue = getResources().getString(R.string.log_image_scale_option_entry, scales.left, scales.middle);
+            if (scaleSize < 0) {
+                displayValue += " (" + getResources().getString(R.string.log_image_scale_option_noscaling) + ")";
+            }
+            return displayValue;
+        });
+
     }
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * */
 public class FileNameCreator {
 
-    public static final FileNameCreator DEFAULT = new FileNameCreator("file", "txt");
+    public static final FileNameCreator DEFAULT = new FileNameCreator("cgeo-file", "txt");
 //    public static final FileNameCreator DEFAULT_TEXT = new FileNameCreator("file", "txt");
 //    public static final FileNameCreator DEFAULT_BINARY = new FileNameCreator("file", "bin");
 
@@ -20,6 +20,8 @@ public class FileNameCreator {
     public static final FileNameCreator GPX_EXPORT = new FileNameCreator("export", "gpx");
     public static final FileNameCreator INDIVIDUAL_ROUTE_NOSUFFIX = new FileNameCreator("route", null);
     public static final FileNameCreator TRAIL_HISTORY = new FileNameCreator("trail", "gpx");
+
+    public static final FileNameCreator OFFLINE_LOG_IMAGE = new FileNameCreator("cgeo-image-%s", "jpg");
 
     private final AtomicInteger fileNameCounter = new AtomicInteger(1);
 
@@ -42,14 +44,14 @@ public class FileNameCreator {
         return new FileNameCreator(name, null, null);
     }
 
-    public String createName() {
+    public String createName(final Object ... params) {
         if (fixedName != null) {
             return fixedName;
         }
 
         //create new unique filename
-        return (praefix == null ? "" : praefix + "_") +
-            CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm-ss") + "-" +
+        return (praefix == null ? "" : String.format(praefix, params) + "-") +
+            CalendarUtils.formatDateTime("yyyy-MM-dd-HH-mm-ss") + "-" +
             (fileNameCounter.addAndGet(1))
             + (suffix == null ? "" : "." + suffix);
 
