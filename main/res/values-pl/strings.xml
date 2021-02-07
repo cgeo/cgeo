@@ -1139,7 +1139,6 @@
     <string name="map_live_disable">Wyłącz online</string>
     <string name="map_as_list">Pokaż w postaci listy</string>
     <string name="map_select_multiple_items">Wybierz element</string>
-    <string name="map_routing">Nawigacja</string>
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczną rotację mapy?\n\nMożesz włączyć ją ponownie za pomocą menu rotacji mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
