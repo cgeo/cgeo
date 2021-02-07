@@ -1125,7 +1125,6 @@
     <string name="map_live_disable">Slėptuvės netiesiogiai</string>
     <string name="map_as_list">Rodyti kaip sąrašą</string>
     <string name="map_select_multiple_items">Pasirinkite elementą</string>
-    <string name="map_routing">Maršrutizavimas</string>
     <string name="map_gm_autorotation">Žemėlapio autosukimas</string>
     <string name="map_gm_autorotation_disable">Išjungti automatinį žemėlapio pasukimą?\n\nGalėsite jį vėl įjungti per žemėlapio pasukimo meniu</string>
     <string name="quick_settings">Greiti nustatymai</string>
