@@ -793,7 +793,6 @@
     <string name="map_live_disable">Nonaktifkan hidup</string>
     <string name="map_as_list">Tampilkan daftar</string>
     <string name="map_select_multiple_items">Pilih item</string>
-    <string name="map_routing">Rute</string>
     <!-- search -->
     <string name="search_bar_hint">Mencari cache</string>
     <string name="search_bar_desc">Cache (geo kode, kata kunci), Trackables (TB kode)</string>
