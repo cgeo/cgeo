@@ -34,6 +34,7 @@ import androidx.core.content.ContextCompat;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.google.android.gms.common.GoogleApiAvailability;
 import org.apache.commons.collections4.CollectionUtils;
@@ -86,7 +87,7 @@ public final class SystemInformation {
             .append("\n-------")
             .append("\n- Hide caches: ").append(hideCaches.isEmpty() ? "-" : hideCaches)
             .append("\n- Hide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints)
-            .append("\n- Set language: ").append(Settings.getUserLanguage())
+            .append("\n- Set language: ").append(Settings.getUserLanguage().isEmpty() ? Locale.getDefault() + " (system default)" : Settings.getUserLanguage())
             .append("\n- System date format: ").append(Formatter.getShortDateFormat())
             .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
             .append("\n- Live map mode: ").append(Settings.isLiveMap())
