@@ -302,7 +302,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         } else {
             fillViewFromEntry(lastSavedState);
         }
-        imageListFragment.setImagePersistentState(lastSavedState.logImages);
 
         // TODO: Why is it disabled in onCreate?
         // Probably it should be disabled only when there is some explicit issue.
@@ -496,7 +495,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                             cache.logOffline(LogCacheActivity.this, logEntry);
                             Settings.setLastCacheLog(logEntry.log);
                             ccLog.add("log=%s", logEntry.log);
-                            imageListFragment.adjustImagePersistentState(lastSavedState.logImages);
+                            imageListFragment.adjustImagePersistentState();
                             return null;
                         }
                     }
@@ -756,19 +755,34 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                         publishProgress(res.getString(R.string.log_posting_image));
                         int pos = 0;
                         for (Image img : imageListFragment.getImages()) {
-                            //uploader can only deal with files, not with content Uris...
-                            final File imageFileForUpload = ImageUtils.copyImageToTemporaryFile(img);
+
+                            //uploader can only deal with files, not with content Uris. Thus scale/compress into a temporary file
+                            final File imageFileForUpload = ImageUtils.scaleAndCompressImageToTemporaryFile(img.getUri(), img.targetScale);
                             final Image imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(imageListFragment.getImageTitle(img, pos++)).build();
                             imageResult = loggingManager.postLogImage(logResult.getLogId(), imgToSend);
+                            if (!isOkResult(imageResult)) {
+                                break;
+                            }
+
                             final String uploadedImageUrl = imageResult.getImageUri();
                             if (StringUtils.isNotEmpty(uploadedImageUrl)) {
                                 logBuilder.addLogImage(imgToSend.buildUpon()
                                         .setUrl(uploadedImageUrl)
                                         .build());
                             }
+                            //delete temp file for upload
                             if (!imageFileForUpload.delete()) {
                                 Log.i("Temporary image not deleted: " + imageFileForUpload);
                             }
+                        }
+
+                        if (isOkResult(imageResult)) {
+                            //delete all images in list (this will work for legacy images)
+                            for (Image img : imageListFragment.getImages()) {
+                                ImageUtils.deleteImage(img.getUri());
+                            }
+                            imageListFragment.clearImages();
+                            imageListFragment.adjustImagePersistentState();
                         }
                     }
 
@@ -828,8 +842,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                     }
                 }
 
-                // Todo error handling should be better than that
-                if (imageResult != null && imageResult.getPostResult() != StatusCode.NO_ERROR && imageResult.getPostResult() != StatusCode.LOG_SAVED) {
+                // if an image could not be uploaded, use its error as final state
+                if (!isOkResult(imageResult)) {
                     return imageResult.getPostResult();
                 }
                 return logResult.getPostLogResult();
@@ -843,9 +857,19 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             return StatusCode.LOG_POST_ERROR;
         }
 
+        private boolean isOkResult(final ImageResult imageResult) {
+            return imageResult == null || imageResult.getPostResult() == StatusCode.NO_ERROR || imageResult.getPostResult() == StatusCode.LOG_SAVED;
+        }
+
         @Override
         protected void onPostExecuteInternal(final StatusCode status) {
             if (status == StatusCode.NO_ERROR) {
+
+                //reset Gui and all values
+                resetValues();
+                refreshGui();
+                lastSavedState = getEntryFromView();
+
                 showToast(res.getString(R.string.info_log_posted));
                 // Prevent from saving log after it was sent successfully.
                 finish(SaveMode.SKIP);

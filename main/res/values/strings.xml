@@ -163,8 +163,9 @@
     <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
 
     <string name="log_image_scale_option_noscaling">No scaling</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Image</string>
 
 
@@ -809,6 +810,8 @@
     <string name="init_map_other">Other</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Use multiple threads to render OpenStreetMap maps</string>
+    <string name="localstorage_migrate_title">Migration of local files</string>
+    <string name="localstorage_migrate_status_major">Version %1$d</string>
 
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Proximity notification</string>

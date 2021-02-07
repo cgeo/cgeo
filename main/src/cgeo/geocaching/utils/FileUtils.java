@@ -159,6 +159,19 @@ public final class FileUtils {
     }
 
     /**
+     * Copies a file/directory into the targetDirectory.
+     *
+     * @param source
+     *            source file or directory
+     * @param targetDirectory
+     *            target directory
+     * @return success true or false
+     */
+    public static boolean copyTo(final File source, final File targetDirectory) {
+        return copy(source, new File(targetDirectory, source.getName()));
+    }
+
+    /**
      * Get the guessed file extension of an URL. A file extension can contain up-to 4 characters in addition to the dot.
      *
      * @param url

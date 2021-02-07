@@ -43,6 +43,7 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Func1;
@@ -66,6 +67,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.location.Location;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -200,7 +202,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 93;
+    private static final int dbVersion = 94;
     public static final int customListIdOffset = 10;
 
     /**
@@ -229,7 +231,8 @@ public class DataStore {
             90, // add user guid to cg_caches and cg_logs
             91, // add fields to cg_extension
             92, // add emoji id to cg_caches
-            93  // add emoji id to cg_lists
+            93,  // add emoji id to cg_lists
+            94  // add scale to offline log images
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -404,7 +407,8 @@ public class DataStore {
             + "logoffline_id INTEGER NOT NULL, "
             + "url TEXT NOT NULL, "
             + "title TEXT, "
-            + "description TEXT "
+            + "description TEXT, "
+            + "scale INTEGER"
             + "); ";
     private static final String dbCreateLogsOfflineTrackables = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLogsOfflineTrackables + " ("
@@ -1513,6 +1517,16 @@ public class DataStore {
                             // do not remove old field "marker" to keep db structure backward-compatible
                         } catch (final SQLException e) {
                             onUpgradeError(e, 93);
+                        }
+                    }
+
+                    //add scale to offline log image
+                    if (oldVersion < 94) {
+                        try {
+                            createColumnIfNotExists(db, dbTableLogsOfflineImages, "scale INTEGER");
+
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 94);
                         }
                     }
 
@@ -4630,6 +4644,7 @@ public class DataStore {
                         cv.put("url", img.getUrl());
                         cv.put("description", img.getDescription());
                         cv.put("title", img.getTitle());
+                        cv.put("scale", img.targetScale);
                         return cv;
                     }).toList();
                     updateRowset(database, dbTableLogsOfflineImages, images, "logoffline_id = " + offlineLogId, null);
@@ -4706,13 +4721,14 @@ public class DataStore {
 
                 //images
                 final DBQuery queryImages = new DBQuery.Builder().setTable(dbTableLogsOfflineImages)
-                        .setColumns(new String[]{"url", "title", "description"})
+                        .setColumns(new String[]{"url", "title", "description", "scale"})
                         .setWhereClause("logoffline_id = " + logId).build();
                 queryImages.selectRows(database,
                         c -> logBuilder.addLogImage(new Image.Builder()
-                                .setUrl(c.getString(0))
+                                .setUrl(adjustOfflineLogImageUri(c.getString(0)))
                                 .setTitle(c.getString(1))
                                 .setDescription(c.getString(2))
+                                .setTargetScale(c.isNull(3) ? -1 : c.getInt(3))
                                 .build())
                 );
 
@@ -4729,6 +4745,13 @@ public class DataStore {
 
                 return logBuilder.build();
             }
+        }
+
+        private static Uri adjustOfflineLogImageUri(final String imageUri) {
+            if (StringUtils.isBlank(imageUri)) {
+                return Uri.EMPTY;
+            }
+            return ImageUtils.adjustOfflineLogImageUri(Uri.parse(imageUri));
         }
 
         public static boolean remove(final String geocode) {

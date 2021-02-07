@@ -330,6 +330,9 @@ public class MainActivity extends AbstractActionBarActivity {
         handler.postDelayed(this::checkLoggedIn, 10000);
         binding.infoNotloggedin.setOnClickListener(v -> Dialogs.confirmYesNo(this, R.string.warn_notloggedin_title, R.string.warn_notloggedin_long, (dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
 
+        //do file migrations if necessary
+        LocalStorage.migrateLocalStorage(this);
+
         // reactivate dialogs which are set to show later
         OneTimeDialogs.nextStatus();
     }
