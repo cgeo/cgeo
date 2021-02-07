@@ -1125,7 +1125,6 @@
     <string name="map_live_disable">Anlık görüntü kapalı</string>
     <string name="map_as_list">Liste olarak göster</string>
     <string name="map_select_multiple_items">Öğe seç</string>
-    <string name="map_routing">Yönlendirme</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
     <string name="quick_settings">Hızlı ayarlar</string>
     <string name="map_show_in_map">Haritada göster</string>
