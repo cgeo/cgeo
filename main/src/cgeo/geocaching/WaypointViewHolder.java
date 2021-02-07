@@ -8,17 +8,16 @@ import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import android.view.View;
 
 public class WaypointViewHolder extends AbstractViewHolder {
-    public WaypointItemBinding binding;
-    private CoordinatesFormatSwitcher coordinateFormatSwitcher = null;
+    protected final WaypointItemBinding binding;
+    private final CoordinatesFormatSwitcher coordinateFormatSwitcher;
 
     public WaypointViewHolder(final View rowView) {
         super(rowView);
+        binding = WaypointItemBinding.bind(rowView);
+        coordinateFormatSwitcher = new CoordinatesFormatSwitcher().setView(binding.coordinates);
     }
 
     public void setCoordinate(final Geopoint coordinate) {
-        if (this.coordinateFormatSwitcher == null) {
-            this.coordinateFormatSwitcher = new CoordinatesFormatSwitcher().setView(this.binding.coordinates);
-        }
         this.coordinateFormatSwitcher.setCoordinate(coordinate);
     }
 

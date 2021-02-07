@@ -24,7 +24,6 @@ import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
-import cgeo.geocaching.databinding.WaypointItemBinding;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -1946,10 +1945,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                     View rowView = convertView;
-                    WaypointItemBinding temp = null;
                     if (rowView == null) {
-                        temp = WaypointItemBinding.inflate(getLayoutInflater(), parent, false);
-                        rowView = temp.getRoot();
+                        rowView = getLayoutInflater().inflate(R.layout.waypoint_item, parent, false);
                         rowView.setClickable(true);
                         rowView.setLongClickable(true);
                         registerForContextMenu(rowView);
@@ -1957,7 +1954,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     WaypointViewHolder holder = (WaypointViewHolder) rowView.getTag();
                     if (holder == null) {
                         holder = new WaypointViewHolder(rowView);
-                        holder.binding = temp;
                     }
 
                     final Waypoint waypoint = getItem(position);

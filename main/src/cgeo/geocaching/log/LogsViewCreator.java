@@ -3,7 +3,6 @@ package cgeo.geocaching.log;
 import cgeo.geocaching.ImagesActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.databinding.LogsItemBinding;
 import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -58,15 +57,12 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             @NonNull
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 View rowView = convertView;
-                LogsItemBinding temp = null;
                 if (rowView == null) {
-                    temp = LogsItemBinding.inflate(activity.getLayoutInflater(), parent, false);
-                    rowView = temp.getRoot();
+                    rowView = activity.getLayoutInflater().inflate(R.layout.logs_item, parent, false);
                 }
                 LogViewHolder holder = (LogViewHolder) rowView.getTag();
                 if (holder == null) {
                     holder = new LogViewHolder(rowView);
-                    holder.binding = temp;
                 }
                 holder.setPosition(position);
 
