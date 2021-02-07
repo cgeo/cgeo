@@ -797,7 +797,6 @@
     <string name="map_live_disable">Fără internet</string>
     <string name="map_as_list">Arată ca lista</string>
     <string name="map_select_multiple_items">Selectează un element</string>
-    <string name="map_routing">Dirijare</string>
     <!-- search -->
     <string name="search_bar_hint">Caută cutii</string>
     <string name="search_bar_desc">Geocutii (geocod, cuvânt cheie), Obiecte călătoare (cod TB)</string>
