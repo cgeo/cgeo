@@ -1251,7 +1251,7 @@
     <string name="map_live_disable">Zakázat aktivní mapu</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
-    <string name="map_routing">Směrování</string>
+    <string name="map_routing">Směrování (teď: %s)</string>
     <string name="map_routing_brouter">Směrování je dostupné pouze v případě, že je nainstalován <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
@@ -1876,6 +1876,10 @@
     <string name="switch_default">(výchozí)</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
+    <string name="routingmode_straight">Přímé</string>
+    <string name="routingmode_walk">Chůze</string>
+    <string name="routingmode_bike">Kolo</string>
+    <string name="routingmode_car">Auto</string>
     <!-- view settings -->
     <string name="view_settings">Zobrazit nastavení</string>
     <string name="delete_setting">Odstranit nastavení</string>
