@@ -1066,7 +1066,6 @@
     <string name="map_live_disable">Не подгружать тайники</string>
     <string name="map_as_list">Показать списком</string>
     <string name="map_select_multiple_items">Выбрать элемент</string>
-    <string name="map_routing">Навигация</string>
     <string name="map_gm_autorotation">Авто-поворот карты</string>
     <string name="map_gm_autorotation_disable">Отключить автоповорот карты?\n\nВы можете включить его снова с помощью меню поворота карты</string>
     <!-- search -->
