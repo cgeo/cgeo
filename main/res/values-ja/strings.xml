@@ -1217,6 +1217,7 @@
     <string name="map_live_disable">保存済みキャッシュのみ</string>
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
+    <string name="map_routing">ルート検索(現在:%s)</string>
     <string name="map_routing_brouter">ルーティングは <a href="">Brouter</a> がインストールされている場合のみ利用できます</string>
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
@@ -1790,6 +1791,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="switch_default">(デフォルト)</string>
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
+    <string name="routingmode_straight">直線</string>
+    <string name="routingmode_walk">徒歩</string>
+    <string name="routingmode_bike">自転車</string>
+    <string name="routingmode_car">車</string>
     <!-- view settings -->
     <string name="view_settings">設定値を表示</string>
     <string name="delete_setting">設定キーの削除</string>
