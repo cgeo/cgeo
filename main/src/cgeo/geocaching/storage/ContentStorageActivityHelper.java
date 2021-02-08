@@ -82,7 +82,7 @@ public class ContentStorageActivityHelper {
 
     public static boolean baseFolderIsSet() {
         final PersistableFolder folder = PersistableFolder.BASE;
-        return folder.isUserDefined() && ContentStorage.get().ensureAndAdjustFolder(folder);
+        return folder.isUserDefined() && ContentStorage.get().ensureFolder(folder);
     }
 
     /** Asks user to select a folder for single-time-usage (location and permission is not persisted) */

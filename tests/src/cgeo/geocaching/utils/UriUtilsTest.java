@@ -19,6 +19,7 @@ public class UriUtilsTest {
     //Each test case has entries "Description", "expected display Uri", "raw Uri
     public static final String[][] URI_DISPLAY_TESTS = new String[][]{
         new String[]{"Internal /cgeo", "/cgeo", "content://com.android.externalstorage.documents/tree/primary%3Acgeo"},
+        new String[]{"Internal /cgeo/maps", "/cgeo/maps", "content://com.android.externalstorage.documents/tree/primary%3Acgeo/document/primary%3Acgeo%2Fmaps"},
         new String[]{"Internal /cgeo/logfiles", "/cgeo/logfiles", "content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Flogfiles"},
         new String[]{"Internal file in /cgeo/logfiles", "/cgeo/logfiles/log.txt", "content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Flogfiles%2Flog.txt"},
         new String[]{"SDCARD /cgeo with known volume id", "TEST-SDCARD/cgeo", "content://com.android.externalstorage.documents/tree/TEST-1111-2222%3Acgeo"},
