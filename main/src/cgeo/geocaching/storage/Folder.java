@@ -137,7 +137,7 @@ public class Folder {
             result += "[" + (CgeoApplication.getInstance() == null ? "Legacy" :
                 CgeoApplication.getInstance().getApplicationContext().getString(R.string.persistablefolder_legacy)) + "]";
         }
-        result += UriUtils.toUserDisplayableString(UriUtils.appendPath(getBaseUri(), CollectionStream.of(getSubdirsToBase()).toJoinedString("/")));
+        result += UriUtils.toUserDisplayableString(getBaseUri(), getSubdirsToBase());
         return result;
     }
 

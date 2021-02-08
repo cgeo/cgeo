@@ -43,7 +43,20 @@ public final class UriUtils {
 
     /** Tries to format the given Uri in a user-displayable way */
     @NonNull
+    public static String toUserDisplayableString(final Uri uri, final List<String> subfolders) {
+        String uriString = toUserDisplayableString(uri);
+        if (subfolders != null) {
+            for (String subfolder : subfolders) {
+                uriString += "/" + subfolder;
+            }
+        }
+        return uriString;
+    }
+
+    /** Tries to format the given Uri in a user-displayable way */
+    @NonNull
     public static String toUserDisplayableString(final Uri uri) {
+
         if (uri == null) {
             return "---";
         }
@@ -96,6 +109,7 @@ public final class UriUtils {
         while (uriString.endsWith("/")) {
             uriString = uriString.substring(0, uriString.length() - 1);
         }
+
         return uriString;
     }
 
@@ -293,7 +307,7 @@ public final class UriUtils {
         //  ele[1] = not used (storage name)
         //  ele[2] = storage number ("XXXX-XXXX" for external removable or "primary" for internal)
         //  ele[3 to n] = folders
-        final String[] ele = legacyDirectory.getPath().replace("/emulated/0/", "/primary/").split(File.separator);
+        final String[] ele = legacyDirectory.getPath().replace("/emulated/0/", "/primary/").split("/");
 
         // Construct folders strings using SAF format
         final StringBuilder folders = new StringBuilder();

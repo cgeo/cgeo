@@ -116,7 +116,7 @@ public class MapDownloaderUtils {
             @Override
             protected void execute() {
                 final PersistableFolder folder = PersistableFolder.OFFLINE_MAPS;
-                final boolean mapDirIsReady = ContentStorage.get().ensureAndAdjustFolder(folder);
+                final boolean mapDirIsReady = ContentStorage.get().ensureFolder(folder);
 
                 if (mapDirIsReady) {
                     callback.run(folder, true);

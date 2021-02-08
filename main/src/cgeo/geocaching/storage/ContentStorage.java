@@ -103,13 +103,13 @@ public class ContentStorage {
             //(re)sets default folders and ensures that it is definitely accessible
             folder.setDefaultFolder(getAccessibleDefaultFolder(folder.getDefaultCandidates(), folder.needsWrite(), folder.name()));
             //tests user-defined folder (if any) and reset to default if not accessible
-            ensureAndAdjustFolder(folder);
+            ensureFolder(folder);
         }
     }
 
-    /** checks if folder is available and can be used. If current setting is not available, folder may be adjusted e.g. to default */
-    public boolean ensureAndAdjustFolder(final PersistableFolder publicFolder) {
-        final Folder folder = getAndAdjustFolder(publicFolder);
+    /** checks if folder is available and can be used, creates it if need be. */
+    public boolean ensureFolder(final PersistableFolder publicFolder) {
+        final Folder folder = getFolder(publicFolder);
         return ensureFolder(folder, publicFolder.needsWrite(), false);
      }
 
@@ -143,7 +143,7 @@ public class ContentStorage {
 
     /** Creates a new file in folder and returns its Uri */
     public Uri create(final PersistableFolder folder, final FileNameCreator nameCreator, final boolean onlyIfNotExisting) {
-        return create(getAndAdjustFolder(folder), nameCreator, onlyIfNotExisting);
+        return create(getFolder(folder), nameCreator, onlyIfNotExisting);
     }
 
     /** Creates a new file in folder and returns its Uri */
@@ -188,7 +188,7 @@ public class ContentStorage {
     /** Lists all direct content of given folder */
     @NonNull
     public List<FileInformation> list(final PersistableFolder folder) {
-        return list(getAndAdjustFolder(folder));
+        return list(getFolder(folder));
     }
 
     /** Lists all direct content of given folder location */
@@ -359,7 +359,7 @@ public class ContentStorage {
 
     /** Write an (internal's) file content to external storage */
     public Uri writeFileToFolder(final PersistableFolder folder, final FileNameCreator nameCreator, final File file, final boolean deleteFileOnSuccess) {
-        return copy(Uri.fromFile(file), getAndAdjustFolder(folder), nameCreator, deleteFileOnSuccess);
+        return copy(Uri.fromFile(file), getFolder(folder), nameCreator, deleteFileOnSuccess);
     }
 
     /** Helper method, meant for usage in conjunction with {@link #writeFileToFolder(PersistableFolder, FileNameCreator, File, boolean)} */
@@ -451,25 +451,13 @@ public class ContentStorage {
         }
     }
 
-    /** Gets this folder's current location. Tries to adjust folder location if no permission given. May return null if no permission found */
+    /** Gets this folder's current location. If it is not accessible, then null is returned */
     @Nullable
-    private Folder getAndAdjustFolder(final PersistableFolder folder) {
+    private Folder getFolder(final PersistableFolder folder) {
 
         if (!ensureFolder(folder.getFolder(), folder.needsWrite())) {
-            //try out default
-            //if this is a user-selected folder and base dir is ok we initiate a fallback to default folder
-            if (!folder.isUserDefined() || !ensureFolder(folder.getDefaultFolder(), folder.needsWrite())) {
-                return null;
-            }
-
-            final String folderUserdefined = folder.toUserDisplayableValue();
-            setUserDefinedFolder(folder, null, false);
-            final String folderDefault = folder.toUserDisplayableValue();
-            if (!ensureFolder(folder.getFolder(), folder.needsWrite())) {
-                reportProblem(R.string.contentstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, null);
-                return null;
-            }
-            reportProblem(R.string.contentstorage_err_publicfolder_inaccessible_falling_back, folder.name(), folderUserdefined, folderDefault);
+            reportProblem(R.string.contentstorage_err_folder_access_failed, folder);
+            return null;
         }
         return folder.getFolder();
     }

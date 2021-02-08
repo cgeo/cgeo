@@ -148,7 +148,7 @@ public final class SystemInformation {
     private static void appendPublicFolders(@NonNull final StringBuilder body) {
         body.append("\n- Public Folders: #").append(PersistableFolder.values().length);
         for (PersistableFolder folder : PersistableFolder.values()) {
-            final boolean isAvailable = ContentStorage.get().ensureAndAdjustFolder(folder);
+            final boolean isAvailable = ContentStorage.get().ensureFolder(folder);
             final ImmutablePair<Integer, Integer> files = FolderUtils.get().getFolderInfo(folder.getFolder());
             final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
             body.append("\n- ").append(folder.toString())
