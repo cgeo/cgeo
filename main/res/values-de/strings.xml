@@ -428,7 +428,7 @@
     <string name="about_system_write_logcat_type">Standard- oder erweiterte Logdatei erstellen?\n\nStandard-Logdateien sind in den meisten Fällen ausreichend.\nVerwende erweiterte Logdateien nur, wenn du dazu aufgefordert wirst.</string>
     <string name="about_system_write_logcat_type_standard">Standard</string>
     <string name="about_system_write_logcat_type_extended">Erweitert</string>
-    <string name="about_system_write_logcat_success">Logdatei gespeichert unter \"%1$s\" im Verzeichnis \"%2$s\"</string>
+    <string name="about_system_write_logcat_success">Logdatei gespeichert unter \"%1$s\" im Ordner \"%2$s\"</string>
     <string name="about_system_write_logcat_empty">Logdatei ist leer</string>
     <string name="about_system_write_logcat_error">Fehler beim Schreiben der Logdatei</string>
     <string name="changelog_github">Liste aller Änderungen</string>
@@ -457,7 +457,7 @@
     <string name="settings_title_cachedetails">Cache-Details</string>
     <string name="settings_summary_cachedetails">Anpassung der Anzeige von Cache-Informationen.</string>
     <string name="settings_title_offlinedata">Offline-Daten</string>
-    <string name="settings_summary_offlinedata">Konfiguriere die zu speichernden Daten für Offline-Nutzung, den Speicherort und Verzeichnisse für GPX-Dateien.</string>
+    <string name="settings_summary_offlinedata">Konfiguriere die zu speichernden Daten für Offline-Nutzung, den Speicherort und Ordner für GPX-Dateien.</string>
     <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Einstellungen für Signatur und Log-Optionen.</string>
     <string name="settings_title_map">Karte</string>

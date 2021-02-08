@@ -817,6 +817,7 @@
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
     <string name="auth_credentials_explain_long">Jos sinulla on jo olemassa oleva tili palveluun %s, syötä kirjautumistietosi alle:</string>
+    <string name="auth_register_explain">Jos sinulla ei ole vielä tiliä, napauta alta palvelun verkkosivulle luodaksesi sellaisen. Kirjauduthan sisälle käyttäjätunnusta ja salasanaa käyttämällä, c:geo ei vielä tue kirjautumista Googlen, Applen tai Facebookin kautta. Tilin luonnin jälkeen voi olla, että sinun tulee vahvistaa sähköpostisi, ennenkuin voit käyttää tiliäsi kirjautuaksesi sisään c:geoon.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
     <string name="auth_token_explain_long">Täyttämällä tiedot ja painamalla \"Valtuuta c:geo\" painiketta Aloitat tapahtuman. Tämä tapahtuma yhdistää %s ja hakea todennuksen. Siinä kaikki.</string>
@@ -878,6 +879,7 @@
     <string name="cache_personal_note_storewaypoints">Lisää/Päivitä Reittipisteet</string>
     <string name="cache_personal_note_removewaypoints">Poista Reittipisteet</string>
     <string name="cache_personal_note_removedwaypoints">Reittipisteet poistettu</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Poistettavia reittipisteitä ei löytynyt</string>
     <string name="cache_personal_note_storewaypoints_success">Reittipisteet lisättiin henkilökohtaiseen muistiinpanoon</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Reittipisteet lisättiin muistiinpanoon, mutta niitä piti lyhentää (maksimi henkilökohtainen muistiinpanon koko: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Reittipisteitä ei voitu tallentaa muistiinpanoon kokorajojen vuoksi (maksimi henkilökohtaisen merkinnän koko: %1$d)</string>
@@ -1594,6 +1596,7 @@
     <string name="faq_title">Usein kysytyt kysymykset</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Uusi versio saatavilla.\nKlikkaa asentaaksesi.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Uusi nightly-versio saatavilla.\nKlikkaa asentaaksesi.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Uusi julkaisuehdokas saatavilla.\nAsenna napauttamalla.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com:issa rikkoivat c:geon. \n Korjaamme tilannetta, tarkistathan tilanteen pian uudestaan.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com-sivulla hajoittivat livekartta-ominaisuuden.\nAsiaa korjataan, yritä lähiaikoina uudelleen.</string>

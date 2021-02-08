@@ -1170,7 +1170,7 @@
     <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
     <string name="init_summary_hidewp_parking">地図上でウェイポイント(駐車場)を非表示</string>
     <string name="init_summary_hidewp_visited">地図上で訪問したウェイポイントを非表示</string>
-    <string name="map_theme_select">地図のテーマを選択</string>
+    <string name="map_theme_select">地図テーマを選択</string>
     <string name="map_theme_options">テーマのオプション</string>
     <string name="map_language">地図の言語</string>
     <string name="map_live_enable">オンラインで取得</string>
@@ -1777,8 +1777,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="receivemapfile_intenttitle">地図ファイルの保存</string>
     <string name="receivemapfile_success">ファイル名「%s」で地図フォルダに保存されました</string>
     <string name="receivemapfile_error">地図ファイルの受信中にエラーが発生しました</string>
-    <string name="receivemapfile_error_io_exception">地図ファイルの受信中にI/Oエラーが発生しました。地図フォルダ「%s」は書き込み可能ですか?</string>
-    <string name="receivemapfile_error_filenotfound_exception">地図ファイルの受信中にファイルが見つかりませんでした</string>
+    <string name="receivemapfile_error_io_exception">地図ファイルのダウンロード中にI/Oエラーが発生しました。地図フォルダ「%s」は書き込み可能ですか?</string>
+    <string name="receivemapfile_error_filenotfound_exception">地図ファイルのダウンロード中にファイルが見つかりませんでした</string>
     <string name="receivemapfile_alreadyexists">同名ファイルが既にあります。上書きしますか? または別名(連番を付加)で保存しますか?</string>
     <string name="receivemapfile_option_overwrite">上書き保存</string>
     <string name="receivemapfile_option_differentname">別名で保存</string>
