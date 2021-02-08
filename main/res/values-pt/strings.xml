@@ -453,7 +453,7 @@
     <string name="settings_title_services">Serviços</string>
     <string name="settings_summary_services">Configurar a informação da conta de utilizador e o acesso a serviços opcionais.</string>
     <string name="settings_title_appearance">Aparência</string>
-    <string name="settings_summary_appearance">Configurar unidades de distância, idioma e cores da Aplicação.</string>
+    <string name="settings_summary_appearance">Configurar unidades de distância, idioma e cores da aplicação.</string>
     <string name="settings_title_cachedetails">Detalhes da cache</string>
     <string name="settings_summary_cachedetails">Personalizar a exibição de informações da cache.</string>
     <string name="settings_title_offlinedata">Dados armazenados</string>
@@ -606,7 +606,7 @@
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
     <string name="init_backup_logins">Incluir dados da conta</string>
-    <string name="init_backup_logins_summary">Isto irá armazenar as suas credenciais inseridas dentro da cópia de segurança.</string>
+    <string name="init_backup_logins_summary">Isto irá guardar as suas credenciais de início de sessão conjuntamente com a cópia de segurança.</string>
     <string name="init_backup">Backup de caches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_finished">Cópia de segurança concluída</string>
@@ -813,7 +813,7 @@
     <string name="auth_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
     <string name="auth_explain_long">Pressionar o botão \"autorizar c:geo\" vai iniciar o processo. Este processo vai abrir o navegador web com uma página %s. Inicie a sessão nessa página e permita que o <b>c:geo</b> tenha acesso à sua conta. E é tudo.</string>
     <string name="auth_forget_title">Esquecer autorização?</string>
-    <string name="auth_forget_message">Será desconectado deste serviço. As suas credenciais atualmente guardadas serão perdidas.</string>
+    <string name="auth_forget_message">Será desligado deste serviço. As suas credenciais actualmente guardadas serão perdidas.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
     <string name="auth_credentials_explain_long">Se já possui uma conta, por favor, introduza abaixo as suas credenciais para %s:</string>
