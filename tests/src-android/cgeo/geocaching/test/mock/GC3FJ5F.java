@@ -134,7 +134,7 @@ public class GC3FJ5F extends MockedCache {
                 "wheelchair_yes",
                 "food_yes",
                 "hike_med_yes",
-                "winter_yes",
+                "winter_no",
                 "onehour_yes",
                 "kids_yes",
                 "stroller_yes",
