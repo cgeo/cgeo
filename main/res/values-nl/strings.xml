@@ -768,6 +768,9 @@
     <string name="feature_favorite">Cache wordt toegevoegd aan favorieten</string>
     <string name="feature_voting">Stemmen op caches</string>
     <string name="init_maplines_title">Kaartlijn aanpassingen</string>
+    <string name="init_map_other">Anders</string>
+    <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
+    <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Nabijheidsmelding</string>
     <string name="init_proximityNotificationGeneral">Algemene nabijheidsmelding op kaart</string>
@@ -801,6 +804,9 @@
     <string name="sendToCgeo_no_registration">Het is c:geo niet gelukt om de caches te downloaden. De registratie van send2cgeo is verlopen. Registreer s.v.p. in de instellingen.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Map %s wijzigen</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">De map %1$s is momenteel ingesteld op \'%2$s\' en bevat %3$s en %4$s.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Je kunt kiezen voor de standaard map \'%s\' of een door de gebruiker gedefinieerde map kiezen.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Selecteer of c:geo de inhoud zal kopiëren/verplaatsen naar de nieuwe map:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Niets doen</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Alle inhoud kopiëren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Alle inhoud verplaatsen</string>
@@ -830,6 +836,25 @@
     <string name="persistablefolder_logfiles">Logbestanden</string>
     <string name="persistablefolder_fieldnotes">Veld notities</string>
     <!-- FolderUtils -->
+    <string name="folder_copy_progressbar_title">Inhoud kopiëren van %1$s naar %2$s</string>
+    <string name="folder_copy_progressbar_status_done">Gekopieerd %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_move_progressbar_title">Inhoud verplaatsen van %1$s naar %2$s</string>
+    <string name="folder_move_progressbar_status_done">Verplaatst %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_copy_move_progressbar_status_processed_file">Verwerk %1$s</string>
+    <string name="folder_copy_finished_title">Map inhoud is gekopieerd</string>
+    <string name="folder_move_finished_title">Map inhoud is verplaatst</string>
+    <string name="folder_copy_finished_dialog_message">Inhoud van map %1$s is gekopieerd naar %2$s.\n\n%3$s van %4$s en %5$s van %6$s zijn verwerkt.</string>
+    <string name="folder_move_finished_dialog_message">Inhoud van map %1$s is verplaatst naar %2$s.\n\n%3$s van %4$s en %5$s van %6$s zijn verwerkt.</string>
+    <string name="folder_copy_move_finished_dialog_message_failure">De bewerking is mislukt met code %1$s tijdens het verwerken van bestand %2$s.</string>
+    <string name="folder_move_finished_dialog_tap">Tik op \'ok\' om de wijziging van map af te ronden.</string>
+    <plurals name="file_count">
+        <item quantity="one">%1$d bestand</item>
+        <item quantity="other">%1$d bestanden</item>
+    </plurals>
+    <plurals name="folder_count">
+        <item quantity="one">%1$d map</item>
+        <item quantity="other">%1$d mappen</item>
+    </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">c:geo Autoriseren</string>
     <string name="auth_check">Controleer authenticatie</string>
@@ -1204,6 +1229,7 @@
     <string name="map_live_disable">Live uitzetten</string>
     <string name="map_as_list">Laat zien als lijst</string>
     <string name="map_select_multiple_items">Selecteer item</string>
+    <string name="map_routing">Routering (momenteel: %s)</string>
     <string name="map_routing_brouter">Routing is alleen beschikbaar als <a href="">BRouter</a> is geïnstalleerd</string>
     <string name="map_gm_autorotation">Automatische kaartrotatie</string>
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
@@ -1798,6 +1824,10 @@
     <string name="switch_default">(standaard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
+    <string name="routingmode_straight">Recht</string>
+    <string name="routingmode_walk">Lopen</string>
+    <string name="routingmode_bike">Fiets</string>
+    <string name="routingmode_car">Auto</string>
     <!-- view settings -->
     <string name="view_settings">Instellingen bekijken</string>
     <string name="delete_setting">Instelling verwijderen</string>
@@ -1874,13 +1904,17 @@
     <string name="done">Voltooid</string>
     <string name="finish">Voltooien</string>
     <string name="wizard_welcome_title">Welkom bij c:geo</string>
+    <string name="wizard_migration_title">c:geo map migratie</string>
     <string name="wizard_intro">Er zijn maar een paar stappen nodig om c:geo te configureren en je op weg te helpen. Zal ik je daarmee helpen?</string>
     <string name="wizard_intro_returning">Welkom terug bij de configuratiewizard. Je c:geo setup is nog niet klaar, zal ik je helpen om het te voltooien en je op weg te helpen? Het is maar een paar stappen.</string>
+    <string name="wizard_intro_migration">Vanwege interne wijzigingen in het Android-machtigingssysteem moet ik je om machtigingen vragen voor toegang tot bepaalde c:geo-gegevensmappen. Ik zal je hier stap voor stap doorheen leiden.</string>
     <string name="wizard_outro_ok">Bedankt voor het configureren van c:geo.\nVeel plezier!</string>
     <string name="wizard_outro_error">Onvolledige configuratie\nNiet alle delen van c:geo zullen werken zoals verwacht!</string>
     <string name="wizard_permissions_title">App-machtigingen instellen</string>
     <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig op je apparaat om correct te werken.\nIk zal meer details uitleggen in de volgende stappen.</string>
     <string name="wizard_basefolder_request_explanation">c:geo heeft een lokale map nodig om gegevens zoals GPX-bestanden, back-ups en veldnotities op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.\nAls je c:geo van een vorige versie bijwerkt, selecteer dan de bestaande map \"cgeo\" op het hoofdniveau van uw apparaatopslag.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo heeft een lokale map nodig om offline kaartbestanden op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo heeft een lokale map nodig om GPX bestanden op te slaan (bijv. voor het importeren / exporteren van caches of spoor). Selecteer of maak een dergelijke map aan in de volgende stap.</string>
     <string name="wizard_platforms_title">Services configureren</string>
     <string name="wizard_platforms_intro">Om geocaches met c:geo te vinden heb je een account nodig voor een geocaching service ondersteund door c:geo.\nSelecteer de gewenste service hieronder om in te loggen met je bestaande account of maak een nieuw account aan.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
