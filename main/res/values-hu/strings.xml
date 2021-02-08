@@ -904,7 +904,6 @@
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
-    <string name="map_routing">Útvonal</string>
     <!-- search -->
     <string name="search_bar_hint">Ládák keresése</string>
     <string name="search_bar_desc">Ládák (geokód, kulcsszó), utazók (követőkód)</string>

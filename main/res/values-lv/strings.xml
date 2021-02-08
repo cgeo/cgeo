@@ -1017,7 +1017,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_live_disable">Deaktivizēt tiešsaistes darbību</string>
     <string name="map_as_list">Parādīt kā sarakstu</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
-    <string name="map_routing">Maršrutēšana</string>
     <!-- search -->
     <string name="search_bar_hint">Meklēt slēpņus</string>
     <string name="search_bar_desc">Slēpņi (GC kods, atslēgas vārds), Ceļotāji (TB kods)</string>

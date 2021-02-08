@@ -452,7 +452,7 @@
     <string name="settings_title_services">Serviços</string>
     <string name="settings_summary_services">Configurar a informação da conta de utilizador e o acesso a serviços opcionais.</string>
     <string name="settings_title_appearance">Aparência</string>
-    <string name="settings_summary_appearance">Configurar unidades de distância, idioma e cores da Aplicação.</string>
+    <string name="settings_summary_appearance">Configurar unidades de distância, idioma e cores da aplicação.</string>
     <string name="settings_title_cachedetails">Detalhes da cache</string>
     <string name="settings_summary_cachedetails">Personalizar a exibição de informações da cache.</string>
     <string name="settings_title_offlinedata">Dados armazenados</string>
@@ -605,7 +605,7 @@
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
     <string name="init_backup_logins">Incluir dados da conta</string>
-    <string name="init_backup_logins_summary">Isto irá armazenar as suas credenciais inseridas dentro da cópia de segurança.</string>
+    <string name="init_backup_logins_summary">Isto irá guardar as suas credenciais de início de sessão conjuntamente com a cópia de segurança.</string>
     <string name="init_backup">Backup de caches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_finished">Cópia de segurança concluída</string>
@@ -768,6 +768,9 @@
     <string name="feature_favorite">Adicionar a cache aos favoritos</string>
     <string name="feature_voting">Dar votação a caches</string>
     <string name="init_maplines_title">Personalização das linhas do mapa</string>
+    <string name="init_map_other">Outro</string>
+    <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
+    <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notificação de proximidade</string>
     <string name="init_proximityNotificationGeneral">Notificação geral de prox. no mapa</string>
@@ -801,6 +804,9 @@
     <string name="sendToCgeo_no_registration">O c:geo falhou a transferência das geocaches. O registo do send2cgeo expirou. Por favor, faça o registo nas definições.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Alterar pasta %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">A pasta %1$s está actualmente definida como \'%2$s\' e contém %3$s e %4$s.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Pode optar por usar a pasta padrão \'%s\' ou seleccionar uma pasta definida pelo utilizador.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Por favor, seleccione se o c:geo deve copiar/mover o seu conteúdo para a nova pasta:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Não fazer nada</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copiar todo o conteúdo</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Mover todo o conteúdo</string>
@@ -830,6 +836,25 @@
     <string name="persistablefolder_logfiles">Ficheiros de registo</string>
     <string name="persistablefolder_fieldnotes">Notas de Campo</string>
     <!-- FolderUtils -->
+    <string name="folder_copy_progressbar_title">A copiar o conteúdo de %1$s para %2$s</string>
+    <string name="folder_copy_progressbar_status_done">Copiado %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_move_progressbar_title">A mover o conteúdo de %1$s para %2$s</string>
+    <string name="folder_move_progressbar_status_done">Movido %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_copy_move_progressbar_status_processed_file">Processar %1$s</string>
+    <string name="folder_copy_finished_title">O conteúdo da pasta foi copiado</string>
+    <string name="folder_move_finished_title">O conteúdo da pasta foi movido</string>
+    <string name="folder_copy_finished_dialog_message">O conteúdo da pasta %1$s foi copiado para %2$s.\n\n%3$s de %4$s e %5$s de %6$s foram processados.</string>
+    <string name="folder_move_finished_dialog_message">O conteúdo da pasta %1$s foi movido para %2$s.\n\n%3$s de %4$s e %5$s de %6$s foram processados.</string>
+    <string name="folder_copy_move_finished_dialog_message_failure">A operação falhou, com o código %1$s, durante o processamento do ficheiro %2$s.</string>
+    <string name="folder_move_finished_dialog_tap">Toque em \'ok\' para finalizar a alteração da pasta.</string>
+    <plurals name="file_count">
+        <item quantity="one">%1$d ficheiro</item>
+        <item quantity="other">%1$d ficheiros</item>
+    </plurals>
+    <plurals name="folder_count">
+        <item quantity="one">%1$d pasta</item>
+        <item quantity="other">%1$d pastas</item>
+    </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_check">Verifique a autenticação</string>
@@ -844,7 +869,7 @@
     <string name="auth_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
     <string name="auth_explain_long">Pressionar o botão \"autorizar c:geo\" vai iniciar o processo. Este processo vai abrir o navegador web com uma página %s. Inicie a sessão nessa página e permita que o <b>c:geo</b> tenha acesso à sua conta. E é tudo.</string>
     <string name="auth_forget_title">Esquecer autorização?</string>
-    <string name="auth_forget_message">Será desconectado deste serviço. As suas credenciais atualmente guardadas serão perdidas.</string>
+    <string name="auth_forget_message">Será desligado deste serviço. As suas credenciais actualmente guardadas serão perdidas.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
     <string name="auth_credentials_explain_long">Se já possui uma conta, por favor, introduza abaixo as suas credenciais para %s:</string>
@@ -1204,7 +1229,7 @@
     <string name="map_live_disable">Desactivar em tempo real</string>
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar item</string>
-    <string name="map_routing">Rotas</string>
+    <string name="map_routing">Encaminhamento (Actualmente: %s)</string>
     <string name="map_routing_brouter">O encaminhamento só está disponível se <a href="">BRouter</a> estiver instalado</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
@@ -1794,6 +1819,10 @@
     <string name="switch_default">(padrão)</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+    <string name="routingmode_straight">Linha recta</string>
+    <string name="routingmode_walk">Caminhar</string>
+    <string name="routingmode_bike">Bicicleta</string>
+    <string name="routingmode_car">Viatura</string>
     <!-- view settings -->
     <string name="view_settings">Ver definições</string>
     <string name="delete_setting">Excluir configuração</string>
@@ -1844,6 +1873,8 @@
     <string name="downloadmap_mapfile">Ficheiro de mapa</string>
     <string name="downloadmap_retrieving_directory_data">A receber dados da pasta…</string>
     <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
+    <string name="downloadmap_install_theme_title">Instalar ficheiro de tema</string>
+    <string name="downloadmap_install_theme_info">O mapa descarregado requer um ficheiro de tema especial. Também deseja descarregá-lo?</string>
     <string name="mapserver_mapsforge_info">Mapas básicos, nenhum tema de mapa necessário</string>
     <string name="mapserver_openandromaps_info">Mapas detalhados, requer o tema do mapa \"Elevado\"</string>
     <string name="mapserver_elevate_info">Tema de mapa detalhado</string>
@@ -1868,13 +1899,17 @@
     <string name="done">Concluído</string>
     <string name="finish">Concluído</string>
     <string name="wizard_welcome_title">Bem-vindo ao c:geo</string>
+    <string name="wizard_migration_title">Migração da pasta c:geo</string>
     <string name="wizard_intro">São necessários apenas alguns passos para configurar o c:geo e começar a usar. Posso ajudar?</string>
     <string name="wizard_intro_returning">Bem-vindo de volta ao assistente de configuração. A instalação do seu c:geo ainda não está terminada, poderei ajudar a completá-la? São apenas alguns passos.</string>
+    <string name="wizard_intro_migration">Devido a alterações internas no sistema de permissões do Android, preciso pedir-lhe permissões para aceder a certas pastas de dados do c:geo. Vou guiá-lo passo a passo nesse processo.</string>
     <string name="wizard_outro_ok">Obrigado por configurar o c:geo.\nDivirta-se!</string>
     <string name="wizard_outro_error">Configuração incompleta\nNem todas as partes do c:geo funcionarão como esperado!</string>
     <string name="wizard_permissions_title">Definir autorizações da aplicação</string>
     <string name="wizard_permissions_intro">O c:geo precisa de certas permissões no seu dispositivo para funcionar correctamente.\nVou explicar mais detalhes nos próximos passos.</string>
     <string name="wizard_basefolder_request_explanation">O c:geo precisa de uma pasta local para armazenar dados, como ficheiros GPX, cópias de segurança e notas de campo. Seleccione ou crie essa pasta no próximo passo.\nSe actualizou o c:geo de uma versão anterior, seleccione a pasta \"cgeo\" existente no nível de raíz do armazenamento do seu dispositivo.</string>
+    <string name="wizard_mapfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar ficheiros de mapa offline. Seleccione ou crie essa pasta na próxima etapa.</string>
+    <string name="wizard_gpxfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar os ficheiros GPX (como por exemplo importar / exportar caches ou trajectos). Seleccione ou crie essa pasta na próxima etapa.</string>
     <string name="wizard_platforms_title">Configurar serviços</string>
     <string name="wizard_platforms_intro">Para encontrar geocaches com o c:geo, precisa de uma conta num serviço de geocaching suportado pelo c:geo.\nSeleccione abaixo o serviço pretendido, seja para iniciar a sessão com a sua conta ou para criar uma nova conta.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>

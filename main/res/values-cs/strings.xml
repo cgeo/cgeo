@@ -806,6 +806,9 @@
     <string name="sendToCgeo_no_registration">c:geo selhalo při stahování kešek. Registrace pro send2cgeo vypršela. Prosím, registruj se znova v nastavení.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Změnit složku %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Složka %1$s je aktuálně nastavena na \'%2$s\' a obsahuje %3$s a %4$s.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Můžete zvolit výchozí složku \'%s\' nebo vybrat uživatelem definovanou složku.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Vyberte, zda má c:geo zkopírovat/přesunout váš obsah do nové složky:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nedělat nic</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopírovat veškerý obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Přesunout veškerý obsah</string>
@@ -835,6 +838,29 @@
     <string name="persistablefolder_logfiles">Soubory protokolů</string>
     <string name="persistablefolder_fieldnotes">Poznámky z terénu</string>
     <!-- FolderUtils -->
+    <string name="folder_copy_progressbar_title">Kopírování obsahu %1$s do %2$s</string>
+    <string name="folder_copy_progressbar_status_done">Zkopírováno %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_move_progressbar_title">Přesouvání obsahu %1$s do %2$s</string>
+    <string name="folder_move_progressbar_status_done">Přesunuto %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_copy_move_progressbar_status_processed_file">Průběh %1$s</string>
+    <string name="folder_copy_finished_title">Obsah složky byl zkopírován</string>
+    <string name="folder_move_finished_title">Obsah složky byl přesunut</string>
+    <string name="folder_copy_finished_dialog_message">Obsah složky %1$s byl zkopírován do %2$s.\n\n%3$s z %4$s a %5$s z %6$s byly zpracovány.</string>
+    <string name="folder_move_finished_dialog_message">Obsah složky %1$s byl přesunut do %2$s.\n\n%3$s z %4$s a %5$s z %6$s byl zpracován.</string>
+    <string name="folder_copy_move_finished_dialog_message_failure">Operace se nezdařila s kódem %1$s při zpracování souboru %2$s.</string>
+    <string name="folder_move_finished_dialog_tap">Klepnutím na \'ok\' dokončíte změnu složky.</string>
+    <plurals name="file_count">
+        <item quantity="one">%1$d soubor</item>
+        <item quantity="few">%1$d soubory</item>
+        <item quantity="many">%1$d souborů</item>
+        <item quantity="other">%1$d souborů</item>
+    </plurals>
+    <plurals name="folder_count">
+        <item quantity="one">%1$d složka</item>
+        <item quantity="few">%1$d složky</item>
+        <item quantity="many">%1$d složek</item>
+        <item quantity="other">%1$d složek</item>
+    </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">Autorizovat c:geo</string>
     <string name="auth_check">Zkontrolovat pověření</string>
@@ -1225,7 +1251,7 @@
     <string name="map_live_disable">Zakázat aktivní mapu</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
-    <string name="map_routing">Směrování</string>
+    <string name="map_routing">Směrování (teď: %s)</string>
     <string name="map_routing_brouter">Směrování je dostupné pouze v případě, že je nainstalován <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
@@ -1850,6 +1876,10 @@
     <string name="switch_default">(výchozí)</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
+    <string name="routingmode_straight">Přímé</string>
+    <string name="routingmode_walk">Chůze</string>
+    <string name="routingmode_bike">Kolo</string>
+    <string name="routingmode_car">Auto</string>
     <!-- view settings -->
     <string name="view_settings">Zobrazit nastavení</string>
     <string name="delete_setting">Odstranit nastavení</string>
@@ -1926,13 +1956,17 @@
     <string name="done">Hotovo</string>
     <string name="finish">Dokončit</string>
     <string name="wizard_welcome_title">Vítejte v c:geo</string>
+    <string name="wizard_migration_title">Přenos složek c:geo</string>
     <string name="wizard_intro">Pro nastavení c:geo je potřeba jen pár kroků. Měl bych vám s tím pomoci?</string>
     <string name="wizard_intro_returning">Vítejte zpět v průvodci nastavení. Nastavení aplikace c:geo ještě není dokončeno. Chcete s tím pomoci, abyste mohli jít dál? Je to jen pár kroků.</string>
+    <string name="wizard_intro_migration">Kvůli interním změnám v systému oprávnění pro Android vás musíme požádat o povolení pro přístup k určitým složkám s daty aplikace c:geo. Tímto procesem vás provedeme krok za krokem.</string>
     <string name="wizard_outro_ok">Děkujeme za konfiguraci c:geo.\nPříjemnou zábavu!</string>
     <string name="wizard_outro_error">Nedokončená konfigurace\nNěkteré části c:geo nebudou pracovat podle očekávání!</string>
     <string name="wizard_permissions_title">Nastavit oprávnění aplikace</string>
     <string name="wizard_permissions_intro">Aplikace c:geo vyžaduje na správné fungování několik povolení na vašem zařízení.\nV dalších krocích vám je vysvětlíme.</string>
     <string name="wizard_basefolder_request_explanation">c:geo potřebuje místní složku k ukládání dat, jako jsou soubory GPX, zálohy a poznámky z terénu. V dalším kroku vyberte nebo vytvořte takovou složku.\nPokud jste aktualizovali c:geo z předchozí verze, vyberte existující složku „cgeo“ na interním úložišti vašeho zařízení.</string>
+    <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
+    <string name="wizard_gpxfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání GPX souborů, například pro import / export kešek nebo tras. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
     <string name="wizard_platforms_title">Konfigurace služeb</string>
     <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>

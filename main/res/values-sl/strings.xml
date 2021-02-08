@@ -722,7 +722,6 @@
     <string name="map_live_disable">Izklopi podatke v živo</string>
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_select_multiple_items">Izberite element</string>
-    <string name="map_routing">Usmerjanje</string>
     <!-- search -->
     <string name="search_bar_hint">Iskanje zakladov</string>
     <string name="search_bar_desc">Zakladi (geo koda, ključne besede), Sledljivčki (TB koda)</string>

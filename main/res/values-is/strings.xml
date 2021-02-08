@@ -560,7 +560,6 @@
     <string name="map_map">Kort</string>
     <string name="map_theme_select">Velja kortaþema</string>
     <string name="map_select_multiple_items">Velja atriði</string>
-    <string name="map_routing">Vegvísun</string>
     <!-- search -->
     <string name="search_bar_hint">Leita að kössum</string>
     <string name="search_bar_desc">Kassar (geokóði, leitarorð), Ferðalangar (TB kóði)</string>

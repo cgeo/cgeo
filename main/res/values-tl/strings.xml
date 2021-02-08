@@ -806,7 +806,6 @@
     <string name="map_live_disable">Huwag paganahin ang live</string>
     <string name="map_as_list">Ipakita bilang listahan</string>
     <string name="map_select_multiple_items">Pumili ng aytem</string>
-    <string name="map_routing">Direksiyon</string>
     <!-- search -->
     <string name="search_bar_hint">Magsaliksik tungkol sa mga cache</string>
     <string name="search_bar_desc">Ang mga cache na (geo na code, Keyboard), Mga trackable (TB na code)</string>

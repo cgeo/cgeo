@@ -54,6 +54,12 @@
     <string name="wp_waypoint">Punkt nawigacji</string>
     <string name="wp_original">Oryginalne współrzędne</string>
     <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Finał</string>
+    <string name="wpnew_stage">Etap</string>
+    <string name="wpnew_pkg">Parking</string>
+    <string name="wpnew_trailhead">Przez</string>
+    <string name="wpnew_waypoint">Znacznik</string>
+    <string name="wpnew_original">Oryginalne</string>
     <!-- logs -->
     <string name="log_found">Znaleziono</string>
     <string name="log_dnf">Nie znaleziono</string>
@@ -379,8 +385,13 @@
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
+    <string name="caches_set_cache_icon">Ustaw ikony skrytek</string>
+    <string name="caches_reset_cache_icons_title">Zresetuj ikony skrytek</string>
+    <string name="caches_reset_cache_icons">Czy chcesz zresetować ikony skrytek dla wszystkich wybranych skrytek?</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
+    <string name="select_icon">Wybierz ikonę</string>
+    <string name="onetime_missing_unicode_info">Twoja wersja Androida nie obsługuje automatycznego wykrywania obsługiwanych ikon - może brakować niektórych znaków</string>
     <!-- caches lists -->
     <string name="menu_lists">Zarządzaj listami</string>
     <string name="list_menu_create">Utwórz nową listę</string>
@@ -419,6 +430,7 @@
     <string name="about_system_write_logcat_type">Utworzyć standardowy lub rozszerzony plik logów?\n\nStandardowe pliki logów będą dobre dla większości przypadków używania.\nUżywaj rozszerzonych plików logów tylko wtedy, gdy zostanie o to poproszony.</string>
     <string name="about_system_write_logcat_type_standard">Standardowy</string>
     <string name="about_system_write_logcat_type_extended">Rozszerzone</string>
+    <string name="about_system_write_logcat_success">Plik dziennika \"%1$s\" zapisany do folderu \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Błąd zapisu pliku logu</string>
     <string name="changelog_github">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
@@ -446,6 +458,7 @@
     <string name="settings_title_cachedetails">Szczegóły skrzynki</string>
     <string name="settings_summary_cachedetails">Ustaw sposób wyświetlania informacji o skrzynce.</string>
     <string name="settings_title_offlinedata">Dane offline</string>
+    <string name="settings_summary_offlinedata">Skonfiguruj dane do zapisywania w trybie offline, lokalizację i foldery na pliki GPX.</string>
     <string name="settings_title_logging">Logowanie</string>
     <string name="settings_summary_logging">Skonfiguruj swój podpis i ustaw opcje logowania.</string>
     <string name="settings_title_map">Mapa</string>
@@ -456,9 +469,12 @@
     <string name="settings_title_map_content">Zawartość mapy</string>
     <string name="settings_title_map_behavior">Zachowanie mapy</string>
     <string name="settings_title_gpx">GPX</string>
+    <string name="settings_title_data_dir">Folder z danymi skrytek</string>
+    <string name="settings_title_data_dir_usage">Folder z danymi skrytek (użyto %1$s)</string>
     <string name="calculate_dataDir_title">Użycie danych</string>
     <string name="calculate_dataDir">Obliczanie użycia dysku</string>
     <string name="settings_data_dir_item">%1$s (%2$s wolne)</string>
+    <string name="confirm_data_dir_move_title">Przenieść folder z danymi skrytek?</string>
     <string name="confirm_data_dir_move">Przeniesienie katalogu z danymi może zająć bardzo długo, zależnie od Twojego urządzenia i wielkości danych.</string>
     <string name="settings_title_basicmembers">Opcje dla użytkowników Basic</string>
     <string name="settings_title_navigation">Nawigacja</string>
@@ -558,6 +574,7 @@
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
     <string name="init_zoomincludingwaypoints_description">Podczas mapowania pojedynczej skrzynki: czy powiększenie powinno uwzględniać wszystkie jej punkty nawigacji?</string>
     <string name="init_brouterThreshold">Obliczanie trasy</string>
+    <string name="init_brouterThreshold_description">Maksymalna odległość, do której aplikacja dodatkowa BRouter (jeśli jest zainstalowana) obliczy trasę.</string>
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
@@ -582,6 +599,7 @@
     <string name="init_listdisplay">Pokaż dodatkowe listy na liście skrzynek</string>
     <string name="init_summary_listdisplay">Pokaż członkostwo skrytek w dodatkowych listach na liście skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
+    <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Utwórz kopię zapasową</string>
     <string name="init_backup_summary">Pamiętaj, że ta funkcja może tworzyć kopię zapasową skrzynek, punktów nawigacyjne i ustawień, ale nie zachowuje obrazów. \nAby móc przywrócić dane nawet po utracie telefonu, pliki kopii zapasowej powinny być kopiowane do niezależnej lokalizacji.</string>
@@ -610,7 +628,9 @@
     <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
     <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
     <string name="init_backup_unnecessary">Baza danych jest pusta, tworzenie kopii zapasowej nie jest potrzebne.</string>
+    <string name="init_backup_folder_exists_error">Nie można utworzyć nowego folderu kopii zapasowej. Czy wykonałeś już kopię zapasową w ciągu ostatniej minuty?</string>
     <string name="init_backup_no_backup_available">Plik kopii zapasowej nie jest dostępny.</string>
+    <string name="backup_confirm_overwrite">Spowoduje to usunięcie najstarszego istniejącego folderu kopii zapasowej z %s. \nCzy chcesz kontynuować?</string>
     <string name="restore_confirm_overwrite_database">UWAGA: To nadpisze %s na twoim urządzeniu!</string>
     <string name="restore_confirm_overwrite_database_and_settings">OSTRZEŻENIE: To nadpisze %s i twoje bieżące ustawienia na Twoim urządzeniu!</string>
     <string name="restore_confirm_overwrite_settings">OSTRZEŻENIE: To nadpisze aktualne ustawienia na twoim urządzeniu!</string>
@@ -635,9 +655,15 @@
     <string name="settings_readingerror">Błąd odczytu ustawień</string>
     <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
+    <string name="settings_info_offline_maps">c:geo obsługuje mapy do użytku offline. Możesz uzyskać mapy od różnych dostawców lub nawet tworzyć własne mapy (z danych OSM). Najpierw musisz wybrać folder, w którym mapy offline mają być przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
     <string name="settings_info_themes">c:geo wspiera motywy dla map offline. Mogą być używane by zmienić kolorystykę mapy (np. aby uzyskać tryb nocny) lub by zaznaczyć wybrane obiekty jak ścieżki rowerowe lub izolinie.</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
+    <string name="init_local_file_system">Lokalny system plików</string>
+    <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
+    <string name="init_map_directory_description">Folder z mapami offline</string>
+    <string name="init_gpx_importexportdir">Folder z plikami GPX</string>
+    <string name="init_dataDir">Wybierz folder</string>
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrzynek (spoilers, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
     <string name="init_maptrail">Pokaż historię</string>
     <string name="init_maptrail_length">Maks. długość ścieżki historii</string>
@@ -655,6 +681,10 @@
     <string name="init_routecolor_summary">Wybierz kolor i nieprzezroczystość dla poszczególnych linii trasy. Indywidualna trasa to zbiór punktów trasy i/lub skrytek wybranych przez długie naciśnięcie na waypoint/cache. (Musisz najpierw włączyć funkcję długiego przytrzymania, zobacz ustawienia mapy.)</string>
     <string name="init_routewidth">Pojedyncza szerokość linii</string>
     <string name="init_routewidth_summary">Wybierz szerokość dla pojedynczej linii trasy</string>
+    <string name="init_trackcolor">Kolor linii ścieżki/trasy GPX</string>
+    <string name="init_trackcolor_summary">Wybierz kolor i nieprzezroczystość dla linii ścieżki/trasy. Ścieżka/trasa składa się z kilku punktów i można ją załadować za pomocą pliku GPX ścieżki/trasy.</string>
+    <string name="init_trackwidth">Szerokość linii ścieżki/trasy GPX</string>
+    <string name="init_trackwidth_summary">Wybierz szerokość dla linii ścieżki/trasy GPX</string>
     <string name="init_circlecolor">Kolor obrysu koła</string>
     <string name="init_circlecolor_summary">Wybierz kolor i nieprzezroczystość dla linii okręgowej. Okręgi są używane jako wizualne przedstawienie minimalnego promienia wokół skrzynki lub fizycznego punktu drogi, gdzie nie jest dozwolona żadna inna skrzynka lub fizyczny punkt drogi. (Dotyczy geocaching.com)</string>
     <string name="init_circlefillcolor">Kolor wypełnienia koła</string>
@@ -681,16 +711,23 @@
     <string name="init_debug_note">c:geo może generować wiele informacji związanych z debugowaniem. Aktywacja tego ustawienia będzie mieć wpływ na stabilność c:geo i jest zalecana tylko, jeśli zostanie wyświetlona prośba o wysyłanie logu do programistów. Prosimy o zachowanie tego logowania wyłączonego podczas normalnego korzystania z c:geo!</string>
     <string name="init_debug">Włącz logowanie błędów</string>
     <string name="init_dbonsdcard_title">Położenie bazy danych</string>
+    <string name="init_dbonsdcard_note">Możesz przechowywać bazę danych c:geo wewnętrznie lub w folderze na dysku użytkownika. Zalecamy aktywację tej opcji tylko wtedy, gdy potrzebujesz regularnego ręcznego dostępu do pliku bazy danych.</string>
     <string name="init_dbonsdcard">Na dysku użytkownika</string>
     <string name="init_dbmove_dbmove">Przenoszę bazę danych</string>
     <string name="init_dbmove_running">Przenoszę bazę danych</string>
     <string name="init_dbmove_success">Baza danych została przeniesiona.</string>
     <string name="init_dbmove_failed">Nie udało się przenieść bazy danych</string>
+    <string name="init_datadirmove_datadirmove">Przenoszenie folderu z danymi skrytek</string>
+    <string name="init_datadirmove_running">Przenoszenie folderu z danymi skrytek</string>
+    <string name="init_datadirmove_success">Pomyślnie przeniesiono folder z danymi skrytek.</string>
+    <string name="init_datadirmove_failed">Przenoszenie folderu z danymi skrytek częściowo lub całkowicie nie powiodło się. Sprawdź stare i nowe foldery i w razie potrzeby przenieś je ręcznie.</string>
     <string name="init_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
     <string name="init_summary_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
     <string name="init_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
     <string name="init_summary_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
+    <string name="init_rendertheme_folder">Folder z motywami mapy</string>
     <string name="init_maintenance">Konserwacja</string>
+    <string name="init_maintenance_directories_note">c:geo przechowuje zdjęcia i inne pliki związane ze skrytką w oddzielnym folderze. W niektórych przypadkach (np. podczas importu/eksportu bazy danych) ten folder może zawierać nieaktualne pliki, które mogą być usunięte tutaj.</string>
     <string name="init_maintenance_directories">Usuń nieaktualne pliki</string>
     <string name="init_location">Geolokalizacja</string>
     <string name="init_location_note">Na urządzeniach wyposażonych w Usługi Google Play, c:geo może automatycznie używać dokładniejszego źródła geolokalizacji. Jednakże to przeszkadza w użyciu zewnętrznego odbiornika GPS BlueTooth.</string>
@@ -733,6 +770,9 @@
     <string name="feature_favorite">Dodaj skrzynkę do ulubionych</string>
     <string name="feature_voting">Ocenianie skrzynek</string>
     <string name="init_maplines_title">Dostosowanie linii mapy</string>
+    <string name="init_map_other">Inna</string>
+    <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
+    <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Powiadomienie o bliskości</string>
     <string name="init_proximityNotificationGeneral">Ogólnie powiadomienie o bliskości na mapie</string>
@@ -765,8 +805,62 @@
     <string name="sendToCgeo_download_fail">c:geo nie może pobrać skrzynek. Brak połączenia z internetem lub narzędzie send2cgeo jest wyłączone.</string>
     <string name="sendToCgeo_no_registration">c:geo nie może pobrać skrzynek. Rejestracja do send2cgeo wygasła. Proszę zarejestrować urządzenie w Ustawieniach.</string>
     <!-- Content Storage -->
+    <string name="contentstorage_selectfolder_dialog_title">Zmień folder %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Folder %1$s jest ustawiony na \'%2$s\' i zawiera %3$s i %4$s.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Możesz użyć domyślnego folderu \'%s\' lub wybrać folder zdefiniowany przez użytkownika.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Wybierz, czy c:geo ma kopiować/przenosić zawartość do nowego folderu:</string>
+    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nic nie rób</string>
+    <string name="contentstorage_selectfolder_dialog_choice_copy">Kopiuj całą zawartość</string>
+    <string name="contentstorage_selectfolder_dialog_choice_move">Przenieś całą zawartość</string>
+    <string name="contentstorage_folder_selection_aborted">Przerwano wybór folderu, folder \'%s\'</string>
+    <string name="contentstorage_folder_selection_success">Folder ustawiony na \'%s\'</string>
+    <string name="contentstorage_file_selection_aborted">Przerwano wybór pliku</string>
+    <string name="contentstorage_file_selection_success">Wybrany plik: \'%s\'</string>
+    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Folder %1$s: \'%2$s\' jest niedostępny, przywracam \'%3$s\'</string>
+    <string name="contentstorage_err_read_failed">Nie można odczytać pliku \'%s\'</string>
+    <string name="contentstorage_err_write_failed">Nie można zapisać pliku \'%s\'</string>
+    <string name="contentstorage_err_create_failed">Nie można utworzyć pliku \'%1$s\' w \'%2$s\'</string>
+    <string name="contentstorage_err_delete_failed">Nie można usunąć pliku \'%s\'</string>
+    <string name="contentstorage_err_list_failed">Nie można wyświetlić plików w folderze \'%s\'</string>
+    <string name="contentstorage_err_folder_access_failed">Nie można uzyskać dostępu do folderu \'%s\'</string>
+    <string name="contentstorage_err_copy_failed">Plik \'%1$s\' nie mógł zostać skopiowany/przeniesiony do \'%2$s\' (przeniesienie=%3$s)</string>
     <!-- Persistable Folders -->
+    <string name="persistablefolder_usertype_userdefined">Zdefiniowany przez użytkownika</string>
+    <string name="persistablefolder_usertype_default">Domyślny</string>
+    <string name="persistablefolder_legacy">Starsze</string>
+    <string name="persistablefolder_pickfolder">Wybierz folder</string>
+    <string name="persistablefolder_usedefault">Użyj domyślny</string>
+    <string name="persistablefolder_base">Podstawowy</string>
+    <string name="persistablefolder_offline_maps">Mapy offline</string>
+    <string name="persistablefolder_offline_maps_themes">Motywy map</string>
+    <string name="persistablefolder_gpx">GPX</string>
+    <string name="persistablefolder_backup">Kopia zapasowa</string>
+    <string name="persistablefolder_logfiles">Pliki dziennika</string>
+    <string name="persistablefolder_fieldnotes">Notatki polowe</string>
     <!-- FolderUtils -->
+    <string name="folder_copy_progressbar_title">Kopiowanie zawartości %1$s do %2$s</string>
+    <string name="folder_copy_progressbar_status_done">Skopiowano %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_move_progressbar_title">Przenoszenie zawartości %1$s do %2$s</string>
+    <string name="folder_move_progressbar_status_done">Przeniesiono %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_copy_move_progressbar_status_processed_file">Przetwarzanie %1$s</string>
+    <string name="folder_copy_finished_title">Zawartość folderu została skopiowana</string>
+    <string name="folder_move_finished_title">Zawartość folderu została przeniesiona</string>
+    <string name="folder_copy_finished_dialog_message">Zawartość folderu %1$s została skopiowana do %2$s.\n\n%3$s z %4$s i %5$s z %6$s zostały przetworzone.</string>
+    <string name="folder_move_finished_dialog_message">Zawartość folderu %1$s została przeniesiona do %2$s.\n\n%3$s z %4$s i %5$s z %6$s zostały przetworzone.</string>
+    <string name="folder_copy_move_finished_dialog_message_failure">Operacja nie powiodła się z kodem %1$s podczas przetwarzania pliku %2$s.</string>
+    <string name="folder_move_finished_dialog_tap">Dotknij \'ok\', aby zakończyć zmianę folderu.</string>
+    <plurals name="file_count">
+        <item quantity="one">%1$d plik</item>
+        <item quantity="few">%1$d pliki</item>
+        <item quantity="many">%1$d plików</item>
+        <item quantity="other">%1$d plików</item>
+    </plurals>
+    <plurals name="folder_count">
+        <item quantity="one">%1$d folder</item>
+        <item quantity="few">%1$d foldery</item>
+        <item quantity="many">%1$d folderów</item>
+        <item quantity="other">%1$d folderów</item>
+    </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">Autoryzacja c:geo</string>
     <string name="auth_check">Sprawdź uwierzytelnienie</string>
@@ -784,6 +878,8 @@
     <string name="auth_forget_message">Zostaniesz rozłączony z tego serwisu. Twoje dane uwierzytelniające zostaną utracone.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Poniższy proces umożliwi <b>c:geo</b> dostęp do %s.</string>
+    <string name="auth_credentials_explain_long">Jeśli masz już konto, wprowadź poniżej poświadczenia konta dla %s:</string>
+    <string name="auth_register_explain">Jeśli nie masz jeszcze konta, kliknij poniżej, aby przejść do strony internetowej usługi w celu utworzenia konta. Upewnij się, że używasz metody z nazwą użytkownika i hasłem, aby utworzyć konto, ponieważ c:geo nie obsługuje logowania przez Google/Apple/Facebook. Po utworzeniu konta może być konieczne sprawdzenie poprawności adresu e-mail, zanim będzie można użyć logowania za pomocą c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Następujący proces umożliwi <b>c:geo</b> na dostęp do %s.</string>
     <string name="auth_token_explain_long">Po uzupełnieniu danych użytkownika i naciśnięciu przycisku \"authorize c:geo\" proces uwierzytelnienia zostanie rozpoczęty. Aplikacja połączy się z %s i otrzyma token uwierzytelniający. To wszytko.</string>
@@ -854,7 +950,14 @@
     <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
     <string name="cache_menu_allowWaypointExtraction">Zezwalaj na punkty nawigacji z notatki</string>
     <string name="cache_personal_note_edit">Edytuj</string>
+    <string name="cache_personal_note_storewaypoints">Dodaj/aktualizuj punkty nawigacyjne</string>
+    <string name="cache_personal_note_removewaypoints">Usuń punkty nawigacyjne</string>
+    <string name="cache_personal_note_removedwaypoints">Punkty nawigacji usunięte</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Nie znaleziono punktów nawigacji do usunięcia</string>
     <string name="cache_personal_note_storewaypoints_success">Punkty drogi zostały dodane do notatki osobistej</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Punkty nawigacyjne zostały dodane do notatki, ale musiały zostać skrócone (maksymalny rozmiar notatki osobistej: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Punkty nawigacyjne nie mogą być zapisane w notatce ze względu na ograniczenia rozmiaru (maksymalny rozmiar notatki osobistej: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Nie znaleziono punktów nawigacyjnych, które można zapisać</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zapobiegaj ekstrakcji punktów nawigacji</string>
     <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Osobista notatka będzie ucięta po przekroczeniu %d znaków na Geocaching.com.</string>
@@ -878,6 +981,7 @@
     <string name="cache_favpoint_not_on">Ta skrzynka nie jest na Twojej liście ulubionych.</string>
     <string name="cache_list_select_last">Ostatni wybór</string>
     <string name="cache_images">Zdjęcia</string>
+    <string name="cache_advanced">Zaawansowane</string>
     <string name="cache_waypoints">Punkty nawigacji</string>
     <plurals name="waypoints">
         <item quantity="one">1 punkt</item>
@@ -985,6 +1089,8 @@
     <string name="cache_name">Nazwa</string>
     <string name="cache_name_set">Ustaw nazwę skrzynki</string>
     <string name="cache_name_updated">Nazwa skrzynki uaktualniona</string>
+    <string name="cache_description_set">Ustaw opis skrytki</string>
+    <string name="cache_description_updated">Zaktualizowano opis skrytki</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Rozmiar</string>
     <string name="cache_distance">Odległość</string>
@@ -1031,6 +1137,8 @@
     <string name="internal_goto_targets_description">Ta skrzynka przechowuje Twoje ostatnie cele \"Idź do\". Jest ona automatycznie tworzona po użyciu funkcji \"Idź do\" w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrzynki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrzynkę lub jej dowolny punkt. Możesz również przenieść pamięć podręczną do dowolnej wybranej przez siebie listy.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
     <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz skrzynkę zdefiniowaną przez użytkownika)</string>
+    <string name="onetime_info_longtap_disabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy i skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie wyłączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
+    <string name="onetime_info_longtap_enabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy i skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie włączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
     <string name="goto_targets_list">Wewnętrzne skrzynki</string>
     <string name="clear_goto_history_title">Wyczyść historię \'Idź do\'</string>
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacyjnych z wyjątkiem pięciu najnowszych</string>
@@ -1042,6 +1150,7 @@
     <string name="lowercase">małe litery</string>
     <!-- editor dialog -->
     <!-- simple dir / file chooser -->
+    <string name="simple_dir_chooser_title">Wybierz folder</string>
     <string name="simple_dir_chooser_current_path">Ścieżka:</string>
     <string name="simple_dir_chooser_invalid_path">Nieprawidłowa ścieżka</string>
     <!-- gpx -->
@@ -1127,6 +1236,9 @@
     <string name="map_showc_ownfound">Pokaż własne/znalezione skrzynki</string>
     <string name="map_showc_disabled">Pokaż wyłączone skrzynki</string>
     <string name="map_showc_archived">Pokaż zarchiwizowane skrzynki</string>
+    <string name="map_showwp_original">Pokaż oryginalne punkty nawigacyjne</string>
+    <string name="map_showwp_parking">Pokaż parkingi z punktów nawigacyjnych</string>
+    <string name="map_showwp_visited">Ukryj odwiedzone punkty nawigacyjne</string>
     <string name="map_show_track">Pokaż ścieżkę/trasę GPX</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
@@ -1139,7 +1251,8 @@
     <string name="map_live_disable">Wyłącz online</string>
     <string name="map_as_list">Pokaż w postaci listy</string>
     <string name="map_select_multiple_items">Wybierz element</string>
-    <string name="map_routing">Nawigacja</string>
+    <string name="map_routing">Prowadzenie (Obecnie:%s)</string>
+    <string name="map_routing_brouter">Routing jest dostępny tylko wtedy, gdy zainstalowany jest <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczną rotację mapy?\n\nMożesz włączyć ją ponownie za pomocą menu rotacji mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
@@ -1256,6 +1369,7 @@
     <string name="helper_brouter_description">BRouter pozwala na nawigację offline. Jeśli jest zainstalowany i niezbędne pliki zostały pobrane, c:geo automatycznie pokaże trasę do skrzynki na wewnętrznej mapie.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf umożliwia odczyt danych z tagów ANT+/Garmin chirp, które są potrzebne w przypadku skrytek ANT +/chirp.</string>
     <!-- export -->
+    <string name="share_export">Udostępnij / Eksport</string>
     <string name="export">Eksport</string>
     <string name="export_progress">Eksportowanie: %1$s</string>
     <string name="export_exportedto">wyeksportowano do</string>
@@ -1540,12 +1654,16 @@
     <string name="support_title">Pomoc</string>
     <string name="website_title">Adres strony</string>
     <string name="facebook_link"><a href="">c:geo na fb</a></string>
+    <string name="fangroup_link"><a href="">Niemiecka grupa użytkowników</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo w Google Play</a></string>
     <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował nowy status na Twitter za każdym razem kiedy znajdziesz skrzynkę?</string>
     <string name="github_title">Śledzenie błędów</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Dostępna nowa nocna wersja.\nKliknij aby zainstalować.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny kandydat na nową wersję.\nKliknij aby zainstalować.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
@@ -1649,6 +1767,13 @@
         <item quantity="many">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
         <item quantity="other">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
     </plurals>
+    <string name="command_set_cache_icons_progress">Ustawienie ikon skrytek</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">Ustaw %d ikonę skrytki</item>
+        <item quantity="few">Ustaw %d ikony skrytek</item>
+        <item quantity="many">Ustaw %d ikon skrytek</item>
+        <item quantity="other">Ustaw %d ikon skrytek</item>
+    </plurals>
     <string name="pq_download_and_import">Importuj Pocket query</string>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrzynek?</string>
     <string name="list_list_headline">Lista:</string>
@@ -1662,6 +1787,7 @@
     <!-- calendar adder -->
     <string name="event_fail">Nie udało się dodać wydarzenia do kalendarza</string>
     <string name="init_low_disk_space">Zaczyna brakować miejsca</string>
+    <string name="init_low_disk_space_message">Zaczyna brakować miejsca w folderze z danymi skrytek. Może to powodować nieprawidłowe działanie c:geo. Zwolnij trochę miejsca.</string>
     <string name="init_confirm_debug">c: geo jest uruchomiony w trybie debugowania!</string>
     <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
     <string name="err_select_logimage_upload_size">Zbyt duże zdjęcie, wybierz mniejszą skalę.</string>
@@ -1750,6 +1876,10 @@
     <string name="switch_default">(domyślne)</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
+    <string name="routingmode_straight">Prosto</string>
+    <string name="routingmode_walk">Pieszo</string>
+    <string name="routingmode_bike">Rower</string>
+    <string name="routingmode_car">Samochód</string>
     <!-- view settings -->
     <string name="view_settings">Pokaż ustawienia</string>
     <string name="delete_setting">Usuń ustawienie</string>
@@ -1771,7 +1901,9 @@
     <string name="localfile_cannot_handle">Błąd odczytu pliku lub c:geo nie może obsłużyć tego typu pliku.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Odbierz plik mapy</string>
+    <string name="receivemapfile_success">Pomyślnie odebrano plik mapy jako \"%s\" i zapisano go w folderze z mapami</string>
     <string name="receivemapfile_error">Błąd podczas odbierania pliku mapy</string>
+    <string name="receivemapfile_error_io_exception">Błąd I/O podczas odbierania pliku mapy. Czy folder z mapami \"%s\" jest zapisywalny?</string>
     <string name="receivemapfile_error_filenotfound_exception">Nie znaleziono pliku podczas odbierania pliku mapy.</string>
     <string name="receivemapfile_alreadyexists">Plik o tej nazwie już istnieje. Nadpisać istniejący plik lub zapisać nowy plik pod inną nazwą?</string>
     <string name="receivemapfile_option_overwrite">Nadpisz</string>
@@ -1780,19 +1912,29 @@
     <string name="receivemapfile_cancelled">Transfer pliku mapy anulowany</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>
+    <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony \"Zapisz\".\n\n Pobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\n Bądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_choose">Wybierz mapę</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
     <string name="downloadmanager_not_available">Nie można pobrać pliku mapy, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
+    <string name="downloadmap_target_not_writable">Wybrany cel \"%s\" nie jest zapisywalny - pobrany plik mapy został zapisany w systemowym folderze pobierania i musi być przeniesiony ręcznie do folderu z mapami.</string>
     <string name="downloadmap_allow_metered_network">Zezwalaj na pobieranie przez dowolną sieć (np. połączenie komórkowe)</string>
     <string name="downloadmap_confirmation">Pobrać mapę \"%1$s\"?\n\nMoże to zająć trochę czasu oraz wiązać się ze znacznymi kosztami, w zależności od Twojego połączenia sieciowego.\n\nInformacje o rozmiarze: %2$s</string>
     <string name="downloadmap_handling">Pobieranie będzie obsługiwane w tle przez systemowego menedżera pobierania. Powiadomienie powinno pojawić się zaraz po rozpoczęciu pobieranie (co może chwilę potrwać).</string>
     <string name="button_continue">Kontynuuj</string>
+    <string name="downloadmap_onedirup">(jeden poziom w górę)</string>
     <string name="downloadmap_checkforupdates_button">Sprawdź aktualizacje</string>
     <string name="downloadmap_available_updates">Dostępne aktualizacje</string>
     <string name="downloadmap_no_updates_found">Nie znaleziono aktualizacji mapy</string>
+    <string name="downloadmap_directory">folder</string>
     <string name="downloadmap_mapfile">plik mapy</string>
+    <string name="downloadmap_retrieving_directory_data">Pobieranie danych folderu…</string>
     <string name="downloadmap_checking_for_updates">Sprawdzam aktualizacje…</string>
+    <string name="downloadmap_install_theme_title">Zainstaluj plik motywu</string>
+    <string name="downloadmap_install_theme_info">Pobrana mapa wymaga specjalnego pliku motywu. Czy chcesz go również pobrać?</string>
+    <string name="mapserver_mapsforge_info">Podstawowe mapy, motywy mapy nie są wymagane</string>
+    <string name="mapserver_openandromaps_info">Szczegółowe mapy, wymagają motywu mapy \"Elevate\"</string>
+    <string name="mapserver_elevate_info">Szczegółowy motyw mapy</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
     <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>
@@ -1814,12 +1956,17 @@
     <string name="done">Zrobione</string>
     <string name="finish">Zakończ</string>
     <string name="wizard_welcome_title">Witamy w c:geo</string>
+    <string name="wizard_migration_title">migracja folderu c:geo</string>
     <string name="wizard_intro">Wystarczy kilka kroków, aby skonfigurować c: geo i zacząć działać. Mam Ci w tym pomóc?</string>
     <string name="wizard_intro_returning">Witamy ponownie w kreatorze konfiguracji. Twoja konfiguracja c: geo nie jest jeszcze zakończona. Czy mogę pomóc Ci ją ukończyć i zacząć? To tylko kilka kroków.</string>
+    <string name="wizard_intro_migration">Ze względu na wewnętrzne zmiany w systemie uprawnień Androida muszę Cię zapytać o uprawnienia dostępu do niektórych folderów z danymi c:geo. Przeprowadzę Cię przez to krok po kroku.</string>
     <string name="wizard_outro_ok">Dziękujemy za skonfigurowanie c:geo.\nBaw się dobrze!</string>
     <string name="wizard_outro_error">Niekompletna konfiguracja\nNie wszystkie części c:geo będą działać zgodnie z oczekiwaniami!</string>
     <string name="wizard_permissions_title">Ustaw uprawnienia aplikacji</string>
     <string name="wizard_permissions_intro">c: geo do prawidłowego działania wymaga pewnych uprawnień na urządzeniu. \nW dalszych krokach wyjaśnię więcej szczegółów.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania danych takich jak pliki GPX, kopie zapasowe i notatki polowe. Wybierz lub utwórz taki folder w następnym kroku.\nJeśli zaktualizowałeś c:geo z poprzedniej wersji, wybierz istniejący folder \"cgeo\" na głównym poziomie pamięci urządzenia.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo potrzebuje folderu lokalnego do przechowywania plików map offline. Wybierz lub utwórz taki folder w następnym kroku.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania plików GPX, np. dla importowania/eksportowania skrytek lub śladów). Wybierz lub utwórz taki folder w następnym kroku.</string>
     <string name="wizard_platforms_title">Konfigurowanie usług</string>
     <string name="wizard_platforms_intro">Aby znaleźć skrytki z c:geo, potrzebujesz konta w usłudze geocaching obsługiwanej przez c:geo. \nWybierz żądaną usługę poniżej, aby zalogować się na istniejące konto lub utworzyć nowe.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1835,5 +1982,6 @@
     <string name="wizard_status_title">Status konfiguracji</string>
     <string name="wizard_status_storage_permission">Uprawnienia do przechowywania danych</string>
     <string name="wizard_status_location_permission">Dostęp do lokalizacji</string>
+    <string name="wizard_status_basefolder">Folder podstawowy</string>
     <string name="wizard_status_platform">Usługi Geocaching</string>
 </resources>

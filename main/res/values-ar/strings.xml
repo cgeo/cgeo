@@ -799,7 +799,6 @@
     <string name="map_live_disable">تعطيل العرض المباشر</string>
     <string name="map_as_list">عرض كقائمة</string>
     <string name="map_select_multiple_items">حدد العنصر</string>
-    <string name="map_routing">التوجيه</string>
     <!-- search -->
     <string name="search_bar_hint">البحث عن المخبآت</string>
     <string name="search_bar_desc">المخبآت (كود المخبئ، كلمة مفتاحية)، أمتعة السفر (كود TB)</string>
