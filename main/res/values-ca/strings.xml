@@ -25,6 +25,7 @@
     <string name="webcam">Webcam</string>
     <string name="virtual">Virtual</string>
     <string name="wherigo">Wherigo</string>
+    <string name="communceleb">Trobada Celebració</string>
     <string name="ape">Projecte APE</string>
     <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Trobada Geocaching HQ</string>
@@ -687,7 +688,9 @@
     <string name="init_circlecolor_summary">Seleccioneu el color i l\'opacitat per a la línia del cercle. Els cercles s\'utilitzen com a representació visual del radi mínim al voltant d\'un catxé o d\'un punt de ruta físic.. (S\'aplica a geocaching.com)</string>
     <string name="init_circlefillcolor">Color de dins del cercle</string>
     <string name="init_circlefillcolor_summary">Seleccioneu el color i l\'opacitat del interior dels cercles</string>
+    <string name="init_accuracycirclecolor">Color línia del cercle de precisió</string>
     <string name="init_accuracycirclecolor_summary">Seleccioneu el color i l\'opacitat de la línia de cercle de precisió. El cercle de precisió s\'utilitza com a representació visual de la precisió del senyal d\'ubicació.</string>
+    <string name="init_accuracycirclefillcolor">Color interior cercle de precisió</string>
     <string name="init_accuracycirclefillcolor_summary">Seleccioneu el color i l\'opacitat per als cercles de precisió que voleu omplir</string>
     <string name="init_include_found_status">Inlcou l\'estat \"Trobat\"</string>
     <string name="init_trackautovisit">Visita TBs</string>
@@ -768,7 +771,9 @@
     <string name="init_maplines_title">Personalització de línies de mapes</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notificació de proximitat</string>
+    <string name="init_proximityNotificationGeneral">Notificació general de proximitat</string>
     <string name="init_summary_proximityNotificationGeneral">Reproduïu una única notificació si algun catxé o punt de ruta visible actualment al mapa està més a prop que la distància o la distància propera. S\'utilitzen diferents tons per a les dues distàncies.</string>
+    <string name="init_proximityNotificationSpecific">Notificació proximitat específica</string>
     <string name="init_summary_proximityNotificationSpecific">Reproduïu una notificació repetida si el catxé o el punt de ruta seleccionats actualment es troben més a prop de la distància o de la distància propera. Funciona si s\'obren detalls de catxé o punt de ruta, si es mostren elements emergents al mapa o si la brúixola està activa. S\'utilitzen diferents tons per a les dues distàncies.</string>
     <string name="far_distance">Distància</string>
     <string name="near_distance">Distància propera</string>
@@ -812,6 +817,8 @@
     <string name="auth_forget_message">Seràs desconnectat d\'aquest servei. Les teves credencials desades es perdran.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">El següent procés permetrà a <b>c:geo</b> accedir a %s.</string>
+    <string name="auth_credentials_explain_long">Si ja teniu un compte, introduïu les vostres credencials per %s a continuació:</string>
+    <string name="auth_register_explain">Si encara no teniu cap compte, toqueu a continuació per dirigir-vos a la pàgina web del servei per crear un compte. Assegureu-vos d’utilitzar el mètode amb nom d’usuari i contrasenya per crear un compte, ja que c: geo no admet l’inici de sessió mitjançant Google / Apple / Facebook. Després de la creació del compte, pot ser necessària la validació de la vostra adreça de correu electrònic abans de poder utilitzar l\'inici de sessió amb c: geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
     <string name="auth_token_explain_long">Emplena la credencial, prem al boto \"autoritzar c:geo\" i començarà el procés. Aquest procés es connecta a %s i recupera la fitxa d\'autenticació.</string>
@@ -872,6 +879,8 @@
     <string name="cache_personal_note_edit">Edita</string>
     <string name="cache_personal_note_storewaypoints">Afegeix / actualitza punts de ruta</string>
     <string name="cache_personal_note_removewaypoints">Elimina els punts de ruta</string>
+    <string name="cache_personal_note_removedwaypoints">S\'han eliminat els punts de ruta</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">No s\'ha trobat cap punt de ruta per eliminar</string>
     <string name="cache_personal_note_storewaypoints_success">Es van afegir punts de ruta a la nota personal</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Els punts de ruta es van afegir a la nota, però es van haver d’escurçar (mida màxima de la nota personal:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Els punts de ruta no s\'han pogut emmagatzemar a la nota a causa de la mida (mida màxima de la nota personal:%1$d)</string>
@@ -899,6 +908,7 @@
     <string name="cache_favpoint_not_on">Aquest catxé no és un dels vostres preferits.</string>
     <string name="cache_list_select_last">Darrera selecció</string>
     <string name="cache_images">Imatges</string>
+    <string name="cache_advanced">Avançat</string>
     <string name="cache_waypoints">Fites</string>
     <plurals name="waypoints">
         <item quantity="one">%d fita</item>
@@ -1179,6 +1189,7 @@
     <string name="map_as_list">Mostra-ho com una llista</string>
     <string name="map_select_multiple_items">Seleccionar un element</string>
     <string name="map_routing">Encaminant</string>
+    <string name="map_routing_brouter">L\'encaminament només està disponible si hi ha  <a href="">BRouter</a>instal·lat</string>
     <string name="map_gm_autorotation">Mapa autorotatori</string>
     <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
     <string name="quick_settings">Configuració ràpida</string>
@@ -1295,6 +1306,7 @@
     <string name="helper_brouter_description">BRouter proporciona enrutament fora de línia. Si s\'instal·la i té els arxius necessaris descarregats, c:geo automàticament mostrarà una ruta a l\'amagatall al mapa intern.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf us permet llegir les dades de les etiquetes ANT + / Garmin, que són necessàries per a catxés ANT + / chirp.</string>
     <!-- export -->
+    <string name="share_export">Comparteix / Exporta</string>
     <string name="export">Exporta</string>
     <string name="export_progress">Exporta: %1$s</string>
     <string name="export_exportedto">exportat a</string>
@@ -1578,12 +1590,16 @@
     <string name="support_title">Ajut</string>
     <string name="website_title">Lloc web</string>
     <string name="facebook_link"><a href="">Pàgina del c:geo</a></string>
+    <string name="fangroup_link"><a href="">Grup d\'usuaris alemany</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo a Google Play</a></string>
     <string name="about_twitter">Voleu que <b>el c:geo</b>  publiqui un nou estatus al Twitter cada vegada que registreu un catxé?</string>
     <string name="github_title">Rastrejador d\'errors</string>
     <string name="faq_title">Preguntes freqüents</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">Nova versió disponible.\nToca per instal·lar-la.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Hi ha disponible una nova versió nocturna.\nToca per instal·lar-la.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Hi ha disponible una app candidata a nova versió.\nToca per instal·lar.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat el c:geo.\nHi estem treballant, torneu-ho a provar aviat.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat la funcionalitat del mapa en viu.\nHi estem treballant, torneu-ho a provar aviat.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">El web de geocaching.com està en manteniment.\nPer aquest motiu podeu tenir alguna dificultat.</string>
@@ -1797,6 +1813,7 @@
     <string name="receivemapfile_kb_copied">%d kB copiats</string>
     <string name="receivemapfile_cancelled">S\'ha cancel·lat la transferència de fitxers del mapa</string>
     <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Descarregar mapa fora de línia</string>
     <string name="downloadmap_info">Trieu la icona \"Desa\" per triar un fitxer de mapa per a la vostra regió.\n\nLa descàrrega s\'executarà en segon pla. Quan la descàrrega s\'hagi completat, el fitxer descarregat es copiarà al directori de mapes de c: geo i s\'establirà com a mapa actual per a c: geo.\n\nLa descàrrega d\'un mapa pot provocar un elevat trànsit a la xarxa.</string>
     <string name="downloadmap_choose">Trieu el mapa</string>
     <string name="downloadmap_filename">S\'està baixant %s</string>
