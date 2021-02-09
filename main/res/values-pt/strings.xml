@@ -169,7 +169,7 @@
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_gk">Não é possível contactar o sítio \'GeoKrety.org\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_login">Nenhuma informação de início de sessão guardada</string>
-    <string name="err_login_failed_toast">O c:geo não consegue iniciar a sessão. No modo offline, o c:geo funciona com as caches guardadas em \'Armazenadas\'. Verifique as definições de início de sessão ou active a sua ligação à Internet.</string>
+    <string name="err_login_failed_toast">O c:geo não consegue iniciar a sessão. No modo offline, o c:geo funciona com as caches guardadas em \'Armazenadas\'. Verifique as definições de Início de Sessão ou active a sua ligação à Internet.</string>
     <string name="err_unknown">Erro desconhecido. Por favor, consulte <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
     <string name="err_unknown_address">O c:geo não conseguiu mapear a morada para uma localização existente</string>
     <string name="err_comm">Erro de comunicação desconhecido. Por favor, consulte <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
@@ -381,7 +381,7 @@
     <string name="caches_filter_empty">(vazio)</string>
     <string name="caches_removing_from_history">A remover do histórico…</string>
     <string name="caches_clear_offlinelogs">Limpar registos offline</string>
-    <string name="caches_clear_offlinelogs_message">Quer apagar os registos offline?</string>
+    <string name="caches_clear_offlinelogs_message">Deseja limpar os registos offline?</string>
     <string name="caches_clear_offlinelogs_progress">A limpar os registos offline</string>
     <string name="caches_set_cache_icon">Definir ícones de geocaches</string>
     <string name="caches_reset_cache_icons_title">Repor ícones de geocaches</string>
@@ -415,7 +415,7 @@
     <string name="about_changelog">Registo de alterações</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Apoie-nos</string>
-    <string name="about_donation_more">Aceda ao sítio web p/ mais info.</string>
+    <string name="about_donation_more">Visite o website para saber mais</string>
     <string name="about_contributors">Contribuidores</string>
     <string name="about_license">Licença</string>
     <string name="about_apache_license"><a href="">Apache License, Versão 2.0</a></string>
@@ -533,7 +533,7 @@
     <string name="settings_service_active">Activo</string>
     <string name="settings_navigation_disabled">Parece que esta aplicação não está instalada</string>
     <string name="init_signature">Assinatura</string>
-    <string name="init_template_help">Sequências de caracteres como [NAME] serão expandidas mais tarde quando este modelo for usado.</string>
+    <string name="init_template_help">Os espaços reservados, como [NAME], serão preenchidos de acordo com o modelo escolhido.</string>
     <string name="init_signature_template_button">Inserir modelo</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Hora</string>
@@ -591,7 +591,7 @@
     <string name="init_units">Usar Unidades Imperiais</string>
     <string name="init_summary_units">Utiliza as unidades no Sistema Imperial em vez do Sistema Métrico</string>
     <string name="init_log_offline">Registos Offline</string>
-    <string name="init_summary_log_offline">Activa os registos off-line (não será mostrada a vista de registos on-line, não os podendo publicar)</string>
+    <string name="init_summary_log_offline">Activa os registos offline (não será mostrada a vista de registos online, não os podendo publicar)</string>
     <string name="init_choose_list">Pedir a escolha de lista</string>
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
     <string name="init_listdisplay">Listas adicionais</string>
@@ -600,7 +600,7 @@
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Tenha em atenção que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais &amp; configurações, mas não de imagens em caches. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
+    <string name="init_backup_summary">Tenha em atenção que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais e configurações, mas não de imagens em caches. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -790,7 +790,7 @@
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
-    <string name="map_source_osm_offline_combined">Combinado (offline)</string>
+    <string name="map_source_osm_offline_combined">Combinado (Offline)</string>
     <string name="map_source_attribution_dialog_title">Créditos do mapa</string>
     <string name="init_sendToCgeo">Enviar para o c:geo</string>
     <string name="settings_info_send2cgeo_title">Informação sobre send2cgeo</string>
@@ -1005,11 +1005,11 @@
     <string name="cache_menu_navigation_drive_select_target">Cache ou lugar de estacionamento?</string>
     <string name="cache_menu_navigation_walk">Navegação (Caminhar)</string>
     <string name="cache_menu_navigation_transit">Navegação (Transportes)</string>
-    <string name="cache_menu_navigation_bike">Navegação (bicicleta)</string>
+    <string name="cache_menu_navigation_bike">Navegação (Bicicleta)</string>
     <string name="cache_menu_maps_directions">Direcções pelo Google Maps</string>
     <string name="cache_menu_osmand">OsmAnd</string>
-    <string name="cache_menu_sygic_walk">Sygic (caminhar)</string>
-    <string name="cache_menu_sygic_drive">Sygic (conduzir)</string>
+    <string name="cache_menu_sygic_walk">Sygic (Caminhar)</string>
+    <string name="cache_menu_sygic_drive">Sygic (Conduzir)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mostrar no mapa</string>
     <string name="cache_menu_rmaps">Rmaps</string>
@@ -1909,11 +1909,10 @@
     <string name="wizard_permissions_intro">O c:geo precisa de certas permissões no seu dispositivo para funcionar correctamente.\nVou explicar mais detalhes nos próximos passos.</string>
     <string name="wizard_basefolder_request_explanation">O c:geo precisa de uma pasta local para armazenar dados, como ficheiros GPX, cópias de segurança e notas de campo. Seleccione ou crie essa pasta no próximo passo.\nSe actualizou o c:geo de uma versão anterior, seleccione a pasta \"cgeo\" existente no nível de raíz do armazenamento do seu dispositivo.</string>
     <string name="wizard_mapfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar ficheiros de mapa offline. Seleccione ou crie essa pasta na próxima etapa.</string>
-    <string name="wizard_gpxfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar os ficheiros GPX (como por exemplo importar / exportar caches ou trajectos). Seleccione ou crie essa pasta na próxima etapa.</string>
     <string name="wizard_platforms_title">Configurar serviços</string>
     <string name="wizard_platforms_intro">Para encontrar geocaches com o c:geo, precisa de uma conta num serviço de geocaching suportado pelo c:geo.\nSeleccione abaixo o serviço pretendido, seja para iniciar a sessão com a sua conta ou para criar uma nova conta.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
-    <string name="wizard_platforms_others">Opencaching &amp; outros</string>
+    <string name="wizard_platforms_others">Opencaching e outros</string>
     <string name="wizard_welcome_advanced">Configurações avançadas</string>
     <string name="wizard_advanced_offlinemaps_label">Mapas offline</string>
     <string name="wizard_advanced_offlinemaps_info">Esta página fornece algumas funções avançadas, que são de uso opcional.\n\nO c:geo pode descarregar ficheiros de mapa para usar sem estar ligado à Internet.</string>
