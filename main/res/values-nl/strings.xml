@@ -1914,7 +1914,6 @@
     <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig op je apparaat om correct te werken.\nIk zal meer details uitleggen in de volgende stappen.</string>
     <string name="wizard_basefolder_request_explanation">c:geo heeft een lokale map nodig om gegevens zoals GPX-bestanden, back-ups en veldnotities op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.\nAls je c:geo van een vorige versie bijwerkt, selecteer dan de bestaande map \"cgeo\" op het hoofdniveau van uw apparaatopslag.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo heeft een lokale map nodig om offline kaartbestanden op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo heeft een lokale map nodig om GPX bestanden op te slaan (bijv. voor het importeren / exporteren van caches of spoor). Selecteer of maak een dergelijke map aan in de volgende stap.</string>
     <string name="wizard_platforms_title">Services configureren</string>
     <string name="wizard_platforms_intro">Om geocaches met c:geo te vinden heb je een account nodig voor een geocaching service ondersteund door c:geo.\nSelecteer de gewenste service hieronder om in te loggen met je bestaande account of maak een nieuw account aan.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
