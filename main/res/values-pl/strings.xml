@@ -54,6 +54,12 @@
     <string name="wp_waypoint">Punkt nawigacji</string>
     <string name="wp_original">Oryginalne współrzędne</string>
     <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Finał</string>
+    <string name="wpnew_stage">Etap</string>
+    <string name="wpnew_pkg">Parking</string>
+    <string name="wpnew_trailhead">Przez</string>
+    <string name="wpnew_waypoint">Znacznik</string>
+    <string name="wpnew_original">Oryginalne</string>
     <!-- logs -->
     <string name="log_found">Znaleziono</string>
     <string name="log_dnf">Nie znaleziono</string>
@@ -379,8 +385,13 @@
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
+    <string name="caches_set_cache_icon">Ustaw ikony skrytek</string>
+    <string name="caches_reset_cache_icons_title">Zresetuj ikony skrytek</string>
+    <string name="caches_reset_cache_icons">Czy chcesz zresetować ikony skrytek dla wszystkich wybranych skrytek?</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
+    <string name="select_icon">Wybierz ikonę</string>
+    <string name="onetime_missing_unicode_info">Twoja wersja Androida nie obsługuje automatycznego wykrywania obsługiwanych ikon - może brakować niektórych znaków</string>
     <!-- caches lists -->
     <string name="menu_lists">Zarządzaj listami</string>
     <string name="list_menu_create">Utwórz nową listę</string>
@@ -670,6 +681,10 @@
     <string name="init_routecolor_summary">Wybierz kolor i nieprzezroczystość dla poszczególnych linii trasy. Indywidualna trasa to zbiór punktów trasy i/lub skrytek wybranych przez długie naciśnięcie na waypoint/cache. (Musisz najpierw włączyć funkcję długiego przytrzymania, zobacz ustawienia mapy.)</string>
     <string name="init_routewidth">Pojedyncza szerokość linii</string>
     <string name="init_routewidth_summary">Wybierz szerokość dla pojedynczej linii trasy</string>
+    <string name="init_trackcolor">Kolor linii ścieżki/trasy GPX</string>
+    <string name="init_trackcolor_summary">Wybierz kolor i nieprzezroczystość dla linii ścieżki/trasy. Ścieżka/trasa składa się z kilku punktów i można ją załadować za pomocą pliku GPX ścieżki/trasy.</string>
+    <string name="init_trackwidth">Szerokość linii ścieżki/trasy GPX</string>
+    <string name="init_trackwidth_summary">Wybierz szerokość dla linii ścieżki/trasy GPX</string>
     <string name="init_circlecolor">Kolor obrysu koła</string>
     <string name="init_circlecolor_summary">Wybierz kolor i nieprzezroczystość dla linii okręgowej. Okręgi są używane jako wizualne przedstawienie minimalnego promienia wokół skrzynki lub fizycznego punktu drogi, gdzie nie jest dozwolona żadna inna skrzynka lub fizyczny punkt drogi. (Dotyczy geocaching.com)</string>
     <string name="init_circlefillcolor">Kolor wypełnienia koła</string>
@@ -803,6 +818,8 @@
     <string name="auth_forget_message">Zostaniesz rozłączony z tego serwisu. Twoje dane uwierzytelniające zostaną utracone.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Poniższy proces umożliwi <b>c:geo</b> dostęp do %s.</string>
+    <string name="auth_credentials_explain_long">Jeśli masz już konto, wprowadź poniżej poświadczenia konta dla %s:</string>
+    <string name="auth_register_explain">Jeśli nie masz jeszcze konta, kliknij poniżej, aby przejść do strony internetowej usługi w celu utworzenia konta. Upewnij się, że używasz metody z nazwą użytkownika i hasłem, aby utworzyć konto, ponieważ c:geo nie obsługuje logowania przez Google/Apple/Facebook. Po utworzeniu konta może być konieczne sprawdzenie poprawności adresu e-mail, zanim będzie można użyć logowania za pomocą c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Następujący proces umożliwi <b>c:geo</b> na dostęp do %s.</string>
     <string name="auth_token_explain_long">Po uzupełnieniu danych użytkownika i naciśnięciu przycisku \"authorize c:geo\" proces uwierzytelnienia zostanie rozpoczęty. Aplikacja połączy się z %s i otrzyma token uwierzytelniający. To wszytko.</string>
@@ -873,7 +890,14 @@
     <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
     <string name="cache_menu_allowWaypointExtraction">Zezwalaj na punkty nawigacji z notatki</string>
     <string name="cache_personal_note_edit">Edytuj</string>
+    <string name="cache_personal_note_storewaypoints">Dodaj/aktualizuj punkty nawigacyjne</string>
+    <string name="cache_personal_note_removewaypoints">Usuń punkty nawigacyjne</string>
+    <string name="cache_personal_note_removedwaypoints">Punkty nawigacji usunięte</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Nie znaleziono punktów nawigacji do usunięcia</string>
     <string name="cache_personal_note_storewaypoints_success">Punkty drogi zostały dodane do notatki osobistej</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Punkty nawigacyjne zostały dodane do notatki, ale musiały zostać skrócone (maksymalny rozmiar notatki osobistej: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Punkty nawigacyjne nie mogą być zapisane w notatce ze względu na ograniczenia rozmiaru (maksymalny rozmiar notatki osobistej: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Nie znaleziono punktów nawigacyjnych, które można zapisać</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zapobiegaj ekstrakcji punktów nawigacji</string>
     <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Osobista notatka będzie ucięta po przekroczeniu %d znaków na Geocaching.com.</string>
@@ -897,6 +921,7 @@
     <string name="cache_favpoint_not_on">Ta skrzynka nie jest na Twojej liście ulubionych.</string>
     <string name="cache_list_select_last">Ostatni wybór</string>
     <string name="cache_images">Zdjęcia</string>
+    <string name="cache_advanced">Zaawansowane</string>
     <string name="cache_waypoints">Punkty nawigacji</string>
     <plurals name="waypoints">
         <item quantity="one">1 punkt</item>
@@ -1004,6 +1029,8 @@
     <string name="cache_name">Nazwa</string>
     <string name="cache_name_set">Ustaw nazwę skrzynki</string>
     <string name="cache_name_updated">Nazwa skrzynki uaktualniona</string>
+    <string name="cache_description_set">Ustaw opis skrytki</string>
+    <string name="cache_description_updated">Zaktualizowano opis skrytki</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Rozmiar</string>
     <string name="cache_distance">Odległość</string>
@@ -1050,6 +1077,8 @@
     <string name="internal_goto_targets_description">Ta skrzynka przechowuje Twoje ostatnie cele \"Idź do\". Jest ona automatycznie tworzona po użyciu funkcji \"Idź do\" w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrzynki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrzynkę lub jej dowolny punkt. Możesz również przenieść pamięć podręczną do dowolnej wybranej przez siebie listy.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
     <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz skrzynkę zdefiniowaną przez użytkownika)</string>
+    <string name="onetime_info_longtap_disabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy i skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie wyłączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
+    <string name="onetime_info_longtap_enabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy i skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie włączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
     <string name="goto_targets_list">Wewnętrzne skrzynki</string>
     <string name="clear_goto_history_title">Wyczyść historię \'Idź do\'</string>
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacyjnych z wyjątkiem pięciu najnowszych</string>
@@ -1161,6 +1190,9 @@
     <string name="map_showc_ownfound">Pokaż własne/znalezione skrzynki</string>
     <string name="map_showc_disabled">Pokaż wyłączone skrzynki</string>
     <string name="map_showc_archived">Pokaż zarchiwizowane skrzynki</string>
+    <string name="map_showwp_original">Pokaż oryginalne punkty nawigacyjne</string>
+    <string name="map_showwp_parking">Pokaż parkingi z punktów nawigacyjnych</string>
+    <string name="map_showwp_visited">Ukryj odwiedzone punkty nawigacyjne</string>
     <string name="map_show_track">Pokaż ścieżkę/trasę GPX</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
@@ -1174,6 +1206,7 @@
     <string name="map_as_list">Pokaż w postaci listy</string>
     <string name="map_select_multiple_items">Wybierz element</string>
     <string name="map_routing">Nawigacja</string>
+    <string name="map_routing_brouter">Routing jest dostępny tylko wtedy, gdy zainstalowany jest <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczną rotację mapy?\n\nMożesz włączyć ją ponownie za pomocą menu rotacji mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
@@ -1290,6 +1323,7 @@
     <string name="helper_brouter_description">BRouter pozwala na nawigację offline. Jeśli jest zainstalowany i niezbędne pliki zostały pobrane, c:geo automatycznie pokaże trasę do skrzynki na wewnętrznej mapie.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf umożliwia odczyt danych z tagów ANT+/Garmin chirp, które są potrzebne w przypadku skrytek ANT +/chirp.</string>
     <!-- export -->
+    <string name="share_export">Udostępnij / Eksport</string>
     <string name="export">Eksport</string>
     <string name="export_progress">Eksportowanie: %1$s</string>
     <string name="export_exportedto">wyeksportowano do</string>
@@ -1574,12 +1608,16 @@
     <string name="support_title">Pomoc</string>
     <string name="website_title">Adres strony</string>
     <string name="facebook_link"><a href="">c:geo na fb</a></string>
+    <string name="fangroup_link"><a href="">Niemiecka grupa użytkowników</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo w Google Play</a></string>
     <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował nowy status na Twitter za każdym razem kiedy znajdziesz skrzynkę?</string>
     <string name="github_title">Śledzenie błędów</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Dostępna nowa nocna wersja.\nKliknij aby zainstalować.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny kandydat na nową wersję.\nKliknij aby zainstalować.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
@@ -1685,6 +1723,13 @@
         <item quantity="few">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
         <item quantity="many">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
         <item quantity="other">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
+    </plurals>
+    <string name="command_set_cache_icons_progress">Ustawienie ikon skrytek</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">Ustaw %d ikonę skrytki</item>
+        <item quantity="few">Ustaw %d ikony skrytek</item>
+        <item quantity="many">Ustaw %d ikon skrytek</item>
+        <item quantity="other">Ustaw %d ikon skrytek</item>
     </plurals>
     <string name="pq_download_and_import">Importuj Pocket query</string>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrzynek?</string>
