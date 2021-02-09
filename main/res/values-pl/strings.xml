@@ -1966,7 +1966,6 @@
     <string name="wizard_permissions_intro">c: geo do prawidłowego działania wymaga pewnych uprawnień na urządzeniu. \nW dalszych krokach wyjaśnię więcej szczegółów.</string>
     <string name="wizard_basefolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania danych takich jak pliki GPX, kopie zapasowe i notatki polowe. Wybierz lub utwórz taki folder w następnym kroku.\nJeśli zaktualizowałeś c:geo z poprzedniej wersji, wybierz istniejący folder \"cgeo\" na głównym poziomie pamięci urządzenia.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo potrzebuje folderu lokalnego do przechowywania plików map offline. Wybierz lub utwórz taki folder w następnym kroku.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania plików GPX, np. dla importowania/eksportowania skrytek lub śladów). Wybierz lub utwórz taki folder w następnym kroku.</string>
     <string name="wizard_platforms_title">Konfigurowanie usług</string>
     <string name="wizard_platforms_intro">Aby znaleźć skrytki z c:geo, potrzebujesz konta w usłudze geocaching obsługiwanej przez c:geo. \nWybierz żądaną usługę poniżej, aby zalogować się na istniejące konto lub utworzyć nowe.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
