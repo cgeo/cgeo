@@ -1881,7 +1881,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です\n次のステップで説明します</string>
     <string name="wizard_basefolder_request_explanation">c:geoは、GPXファイル、バックアップ、フィールドノートなどのデータを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成してください。\n以前のバージョンからc:geoをアップグレードした場合は、デバイスストレージのルートレベルで既存のフォルダ「cgeo」を選択してください。</string>
     <string name="wizard_mapfolder_request_explanation">オフライン用の地図ファイルを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
-    <string name="wizard_gpxfolder_request_explanation">GPXファイルを保存(キャッシュやトラックをインポート/エクスポート)するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
     <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です\nお持ちのアカウントでログインするかアカウント作成してください</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
