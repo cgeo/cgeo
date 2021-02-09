@@ -1966,7 +1966,6 @@
     <string name="wizard_permissions_intro">Aplikácia c:geo vyžaduje na správne fungovanie niekoľko povolení na vašom zariadení.\nV ďalších krokoch vám ich vysvetlíme.</string>
     <string name="wizard_basefolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie údajov, ako sú napríklad súbory GPX, zálohy a poznámky.V ďalšom kroku vyberte alebo vytvorte takýto priečinok.\nAk ste inovovali aplikáciu c:geo z predchádzajúcej verzie, vyberte existujúci priečinok \"cgeo\" v hlavnom priečinku ukladacieho priestoru zariadenia.</string>
     <string name="wizard_mapfolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie mapových súborov offline. V ďalšom kroku vyberte alebo vytvorte takýto priečinok.</string>
-    <string name="wizard_gpxfolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie súborov GPX, napr. na import/export kešiek alebo trás. V ďalšom kroku vyberte alebo vytvorte takýto priečinok.</string>
     <string name="wizard_platforms_title">Konfigurovať služby</string>
     <string name="wizard_platforms_intro">Na hľadanie kešiek s aplikáciou c\"geo je potrebný účet na geocachingovej službe podporovanej aplikáciou c:geo.\nVyberte dole požadovanú službu, do ktorej sa prihlásite, prípadne si vytvorte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
