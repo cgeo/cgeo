@@ -567,6 +567,7 @@
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
     <string name="init_zoomincludingwaypoints_description">Con mappatura di un singolo cache: lo zoom deve essere regolato per includere tutti i waypoint?</string>
     <string name="init_brouterThreshold">Calcola percorso</string>
+    <string name="init_brouterThreshold_description">Distanza massima fino alla quale l\'app di supporto BRouter (se installata) calcolerà un percorso.</string>
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
@@ -591,6 +592,7 @@
     <string name="init_listdisplay">Altre liste</string>
     <string name="init_summary_listdisplay">Mostra l\'appartenenza dei cache a liste aggiuntive in un elenco di cache</string>
     <string name="init_livelist">Visualizza direzione</string>
+    <string name="init_summary_livelist">Mostra la direzione con la bussola per i cache in un elenco</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Crea backup</string>
     <string name="init_backup_summary">Si prega di notare che questa funzione può eseguire il backup dei cache, waypoint &amp; impostazioni, ma nessuna immagine cache. \nPer poter ripristinare i dati anche dopo aver perso il telefono, i file di backup devono essere copiati in una posizione indipendente.</string>
@@ -780,6 +782,9 @@
     <string name="sendToCgeo_no_registration">c:geo non riesce a scaricare cache. La registrazione a send2cgeo è scaduta. Si prega di ripeterla nelle impostazioni.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Cambia cartella %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">La cartella %1$s è attualmente impostata a \'%2$s\' e contiene %3$s e %4$s.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Puoi scegliere di utilizzare la cartella predefinita \'%s\' o scegliere una cartella definita dall\'utente.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Scegli se c:geo deve copiare/spostare i tuoi contenuti nella nuova cartella:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Non fare nulla</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copia tutto il contenuto</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Sposta tutto il contenuto</string>
@@ -806,6 +811,25 @@
     <string name="persistablefolder_logfiles">File di log</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
     <!-- FolderUtils -->
+    <string name="folder_copy_progressbar_title">Copia del contenuto di %1$s in %2$s</string>
+    <string name="folder_copy_progressbar_status_done">Copiato %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_move_progressbar_title">Spostamento del contenuto di %1$s in %2$s</string>
+    <string name="folder_move_progressbar_status_done">Spostato %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_copy_move_progressbar_status_processed_file">Processo %1$s</string>
+    <string name="folder_copy_finished_title">Contenuto della cartella copiato</string>
+    <string name="folder_move_finished_title">Contenuto della cartella spostato</string>
+    <string name="folder_copy_finished_dialog_message">Il contenuto della cartella %1$s è stato copiato in %2$s.\n\n%3$s di %4$s e %5$s di %6$s sono stati elaborati.</string>
+    <string name="folder_move_finished_dialog_message">Il contenuto della cartella %1$s è stato spostato in %2$s.\n\n%3$s di %4$s e %5$s di %6$s sono stati elaborati.</string>
+    <string name="folder_copy_move_finished_dialog_message_failure">Operazione fallita con il codice %1$s durante l\'elaborazione del file %2$s.</string>
+    <string name="folder_move_finished_dialog_tap">Tocca \'ok\' per ultimare la modifica della cartella.</string>
+    <plurals name="file_count">
+        <item quantity="one">%1$d file</item>
+        <item quantity="other">%1$d file</item>
+    </plurals>
+    <plurals name="folder_count">
+        <item quantity="one">%1$d cartella</item>
+        <item quantity="other">%1$d cartelle</item>
+    </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">Autorizza c:geo</string>
     <string name="auth_check">Verificare l\'autenticazione</string>
@@ -1179,6 +1203,7 @@
     <string name="map_live_disable">Disattiva live</string>
     <string name="map_as_list">Mostra lista dei cache</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
+    <string name="map_routing">Percorso (Attualmente: %s)</string>
     <string name="map_routing_brouter">Routing è disponibile solo se <a href="">BRouter</a> è installato</string>
     <string name="map_gm_autorotation">Rotazione automatica mappa</string>
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
@@ -1772,6 +1797,10 @@
     <string name="switch_default">(predefinito)</string>
     <string name="yes">Sì</string>
     <string name="no">No</string>
+    <string name="routingmode_straight">Dritto</string>
+    <string name="routingmode_walk">A piedi</string>
+    <string name="routingmode_bike">Bici</string>
+    <string name="routingmode_car">Automobile</string>
     <!-- view settings -->
     <string name="view_settings">Impostazioni vista</string>
     <string name="delete_setting">Elimina impostazioni</string>
@@ -1815,6 +1844,11 @@
     <string name="downloadmap_no_updates_found">Nessun aggiornamento mappa trovato</string>
     <string name="downloadmap_mapfile">file mappa</string>
     <string name="downloadmap_checking_for_updates">Controllo aggiornamenti…</string>
+    <string name="downloadmap_install_theme_title">Installa file tema</string>
+    <string name="downloadmap_install_theme_info">La mappa scaricata richiede un file di tema speciale. Vuoi scaricare anche questo?</string>
+    <string name="mapserver_mapsforge_info">Mappe di base, nessun tema mappa richiesto</string>
+    <string name="mapserver_openandromaps_info">Mappe dettagliate, richiedono tema mappa \"Elevate\"</string>
+    <string name="mapserver_elevate_info">Tema mappa dettagliato</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
@@ -1836,12 +1870,17 @@
     <string name="done">Fatto</string>
     <string name="finish">Fine</string>
     <string name="wizard_welcome_title">Benvenuto su c:geo</string>
+    <string name="wizard_migration_title">migrazione cartella c:geo</string>
     <string name="wizard_intro">Solo pochi passi sono necessari per configurare c:geo. Posso aiutarti a farlo?</string>
     <string name="wizard_intro_returning">Bentornato alla procedura guidata di configurazione. La tua configurazione c:geo non è ancora finita. Posso aiutarti a completarla? Sono solo pochi passi.</string>
+    <string name="wizard_intro_migration">A causa di cambiamenti interni nel sistema di autorizzazioni di Android, è necessario chiedere le autorizzazioni per accedere a determinate cartelle di dati c:geo. Ti guiderò passo per passo.</string>
     <string name="wizard_outro_ok">Grazie per aver configurato c:geo.\nBuon divertimento!</string>
     <string name="wizard_outro_error">Configurazione incompleta\nNon tutte le sezioni di c:geo funzioneranno come previsto!</string>
     <string name="wizard_permissions_title">Imposta permessi app</string>
     <string name="wizard_permissions_intro">c:geo ha bisogno di alcuni permessi sul tuo dispositivo per funzionare correttamente.\nTi spiegherò maggiori dettagli nei prossimi passi.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare dati come file GPX, backup e note di campo. Selezionare o creare una tale cartella nel passaggio successivo.\nSe hai aggiornato c:geo da una versione precedente, seleziona la cartella \"cgeo\" esistente al livello principale dell\'archivio del tuo dispositivo.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file di mappa offline. Selezionare o creare una tale cartella nel passaggio successivo.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file GPX (es. per importare / esportare cache o tracce). Selezionare o creare una tale cartella nel passaggio successivo.</string>
     <string name="wizard_platforms_title">Configura servizi</string>
     <string name="wizard_platforms_intro">Per trovare le geocache con c:geo è necessario un account per un servizio di geocaching supportato da c:geo.\nSeleziona il servizio desiderato qui sotto per accedere con il tuo account esistente o creare un nuovo account.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1857,5 +1896,6 @@
     <string name="wizard_status_title">Stato della configurazione</string>
     <string name="wizard_status_storage_permission">Permesso di archiviazione</string>
     <string name="wizard_status_location_permission">Permesso localizzazione</string>
+    <string name="wizard_status_basefolder">Cartella base</string>
     <string name="wizard_status_platform">Servizi di geocaching</string>
 </resources>
