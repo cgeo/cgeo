@@ -1914,7 +1914,6 @@
     <string name="wizard_permissions_intro">c:geo tarvitsee tietyt käyttöoikeudet laitteellesi toimiakseen oikein.\nSelitän lisää yksityiskohtia seuraavissa vaiheissa.</string>
     <string name="wizard_basefolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen tietoja, kuten GPX-tiedostoja, varmuuskopioita ja kenttämerkintöjä. Valitse tai luo tällainen kansio seuraavassa vaiheessa.\nJos olet päivittänyt c:geon edellisestä versiosta, valitse olemassa oleva kansio \"cgeo\" laitteen tallennustilan juuritasolla.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttatiedostoja. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen GPX-tiedostoja, esim. kätköjen sekä reittien tuontiin/vientiin. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
     <string name="wizard_platforms_title">Määritä palvelut</string>
     <string name="wizard_platforms_intro">Löytääksesi geokätköjä c:geon avulla, tarvitset tilin c:geon tukemaa geokätköilypalvelua varten.\nValitse haluamasi palvelu alta, jotta voit kirjautua sisään olemassa olevalla tililläsi tai luoda uuden tilin.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
