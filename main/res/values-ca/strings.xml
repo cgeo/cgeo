@@ -1911,7 +1911,6 @@
     <string name="wizard_permissions_intro">C: geo necessita certs permisos al dispositiu per funcionar correctament.\nExplicaré més detalls en els passos següents.</string>
     <string name="wizard_basefolder_request_explanation">C: geo necessita una carpeta local per emmagatzemar dades com fitxers GPX, còpies de seguretat i notes de camp. Seleccioneu o creeu aquesta carpeta al pas següent.\nSi heu actualitzat C: geo des d\'una versió anterior, seleccioneu la carpeta existent \"cgeo\" al nivell arrel de l\'emmagatzematge del dispositiu.</string>
     <string name="wizard_mapfolder_request_explanation">C: geo necessita una carpeta local per emmagatzemar fitxers de mapes fora de línia. Seleccioneu o creeu aquesta carpeta al pas següent.</string>
-    <string name="wizard_gpxfolder_request_explanation">C: geo necessita una carpeta local per emmagatzemar fitxers GPX  (ex.. per importar / exportar catxés o pistes). Seleccioneu o creeu aquesta carpeta al pas següent.</string>
     <string name="wizard_platforms_title">Configureu els serveis</string>
     <string name="wizard_platforms_intro">Per trobar geocatxes amb C: geo, necessiteu un compte  d\'un servei de geocatxing compatible.\nSeleccioneu el servei desitjat a continuació per iniciar la sessió amb el vostre compte existent o creeu un compte nou.</string>
     <string name="wizard_platforms_gc">Geocaching.com</string>
