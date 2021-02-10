@@ -445,7 +445,7 @@
     <string name="contribution_graphics">グラフィックス</string>
     <string name="debug_user_error_report_title">問題を報告</string>
     <string name="debug_user_error_errortext">予期しない問題が発生しました。報告をお願いします:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。その際はエラーの詳細も含めてください。その他の連絡先などは<i>c:geoについて</i></p>をご覧ください。]]></string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。その際はエラーの詳細も含めてください。その他の連絡先などは「<i>c:geoについて</i>」をご覧ください。</p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
     <string name="settings_title_services">サービス</string>
@@ -1881,6 +1881,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です\n次のステップで説明します</string>
     <string name="wizard_basefolder_request_explanation">c:geoは、GPXファイル、バックアップ、フィールドノートなどのデータを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成してください。\n以前のバージョンからc:geoをアップグレードした場合は、デバイスストレージのルートレベルで既存のフォルダ「cgeo」を選択してください。</string>
     <string name="wizard_mapfolder_request_explanation">オフライン用の地図ファイルを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
+    <string name="wizard_gpxfolder_request_explanation">GPXファイルを保存(キャッシュやトラックをインポート/エクスポート)するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
     <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です\nお持ちのアカウントでログインするかアカウント作成してください</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
