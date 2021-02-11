@@ -1909,6 +1909,7 @@
     <string name="wizard_permissions_intro">O c:geo precisa de certas permissões no seu dispositivo para funcionar correctamente.\nVou explicar mais detalhes nos próximos passos.</string>
     <string name="wizard_basefolder_request_explanation">O c:geo precisa de uma pasta local para armazenar dados, como ficheiros GPX, cópias de segurança e notas de campo. Seleccione ou crie essa pasta no próximo passo.\nSe actualizou o c:geo de uma versão anterior, seleccione a pasta \"cgeo\" existente no nível de raíz do armazenamento do seu dispositivo.</string>
     <string name="wizard_mapfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar ficheiros de mapa offline. Seleccione ou crie essa pasta na próxima etapa.</string>
+    <string name="wizard_gpxfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar os ficheiros GPX (ex: para importar / exportar caches ou trajectos). Seleccione ou crie essa pasta na próxima etapa.</string>
     <string name="wizard_platforms_title">Configurar serviços</string>
     <string name="wizard_platforms_intro">Para encontrar geocaches com o c:geo, precisa de uma conta num serviço de geocaching suportado pelo c:geo.\nSeleccione abaixo o serviço pretendido, seja para iniciar a sessão com a sua conta ou para criar uma nova conta.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
