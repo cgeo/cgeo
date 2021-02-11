@@ -548,7 +548,7 @@ public final class GCParser {
 
             // owner
             cache.setOwnerDisplayName(StringEscapeUtils.unescapeHtml4(TextUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER_DISPLAYNAME, true, cache.getOwnerDisplayName())));
-            cache.setOwnerGuid(TextUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER_GUID, true, cache.getOwnerGuid()));
+            cache.setOwnerGuid(TextUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER_GUID, true, 2, cache.getOwnerGuid(), false));
 
             // hidden
             try {
@@ -1410,10 +1410,11 @@ public final class GCParser {
 
         // trackable owner name
         try {
-            final MatcherWrapper matcherOwner = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_OWNER, page);
-            if (matcherOwner.find()) {
-                trackable.setOwnerGuid(matcherOwner.group(1));
-                trackable.setOwner(matcherOwner.group(2).trim());
+            final MatcherWrapper matcherOwnerNew = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_OWNER, page);
+            if (matcherOwnerNew.find()) {
+                trackable.setOwnerGuid(matcherOwnerNew.group(2));
+                trackable.setOwner(matcherOwnerNew.group(3).trim());
+
             }
         } catch (final RuntimeException e) {
             // failed to parse trackable owner name

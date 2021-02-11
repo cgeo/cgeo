@@ -40,6 +40,7 @@
 <li>Change: Unified export dialogs. \"Share\" option can be selected after export now.</li>
 <li>Change: Existing cache logs are kept/merged on importing GPX file / pocket query</li>
 <li>New: Installation wizard (starting automatically on a fresh install)</li>
+<li>Fix: Fixes for some website changes</li>
 <li>Fix: Allow sorting when in selection mode</li>
 <li>Fix: Fixed some stylings for the about pages</li>
 <li>Fix: Crash on database restore in certain downgrading conditions</li>

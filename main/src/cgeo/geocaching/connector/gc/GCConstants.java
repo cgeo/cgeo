@@ -46,7 +46,7 @@ public final class GCConstants {
     static final Pattern PATTERN_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
     static final Pattern PATTERN_TERRAIN = Pattern.compile("<span id=\"ctl00_ContentBody_Localize[\\d]+\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
     static final Pattern PATTERN_OWNER_USERID = Pattern.compile("seek/nearest\\.aspx\\?u=(.*?)\">.{1,50}?seek/nearest\\.aspx\\?ul=\\1\">");
-    static final Pattern PATTERN_OWNER_GUID = Pattern.compile(Pattern.quote("/profile/?guid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
+    static final Pattern PATTERN_OWNER_GUID = Pattern.compile("\\/p(rofile)?\\/\\?guid=([0-9a-z\\-]+)&");
     static final Pattern PATTERN_FOUND = Pattern.compile("logtypes/48/(" + StringUtils.join(LogType.foundLogTypes(), "|") + ").png\" id=\"ctl00_ContentBody_GeoNav_logTypeImage\"");
     static final Pattern PATTERN_DNF = Pattern.compile("logtypes/48/(" + LogType.DIDNT_FIND_IT.id + ").png\" id=\"ctl00_ContentBody_GeoNav_logTypeImage\"");
     static final Pattern PATTERN_OWNER_DISPLAYNAME = Pattern.compile("<div id=\"ctl00_ContentBody_mcd1\">[^<]+<a href=\"[^\"]+\">([^<]+)</a>");
@@ -98,8 +98,8 @@ public final class GCConstants {
      * trackable name that needs HTML encoding
      */
     static final Pattern PATTERN_TRACKABLE_NAME = Pattern.compile("<span id=\"ctl00_ContentBody_lbHeading\">(.*?)</span>");
-    /** Two groups ! */
-    static final Pattern PATTERN_TRACKABLE_OWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugOwner\"[^>]+href=\"https?://www.geocaching.com/profile/\\?guid=(.*?)\">(.*?)</a>");
+    /** Three groups ! */
+    static final Pattern PATTERN_TRACKABLE_OWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugOwner\"[^>]+href=\"https?://www.geocaching.com/p(rofile)?/\\?guid=(.*?)\">(.*?)</a>");
     static final Pattern PATTERN_TRACKABLE_RELEASES = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugReleaseDate\">([^<]+)<\\/span>[^<]*</dd>");
     static final Pattern PATTERN_TRACKABLE_FOUND_LOG = Pattern.compile("<span id=\"ctl00_ContentBody_InteractionLogTypeText\"[^>]*>(.*?)!</span>");
     static final Pattern PATTERN_TRACKABLE_DISPOSITION_LOG = Pattern.compile("<a id=\"ctl00_ContentBody_InteractionLogLink\"[^>]*href=\"/track/log.aspx\\?LUID=([a-z0-9\\-]+)\">[^0-9]+(.*?)</a>");
