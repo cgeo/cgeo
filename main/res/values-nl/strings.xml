@@ -814,7 +814,6 @@
     <string name="contentstorage_folder_selection_success">Map ingesteld op \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Afbreken bestand selectie</string>
     <string name="contentstorage_file_selection_success">Geselecteerd bestand: \'%s\'</string>
-    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Map %1$s: \'%2$s\' is niet toegankelijk, val terug op \'%3$s \' \'</string>
     <string name="contentstorage_err_read_failed">Bestand \'%s\' kon niet worden gelezen</string>
     <string name="contentstorage_err_write_failed">Bestand \'%s\' kon niet worden geschreven</string>
     <string name="contentstorage_err_create_failed">Bestand \'%1$s\' in \'%2$s\' kon niet worden gemaakt</string>
