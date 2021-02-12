@@ -816,7 +816,6 @@
     <string name="contentstorage_folder_selection_success">Složka nastavena na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Přerušení výběru souboru</string>
     <string name="contentstorage_file_selection_success">Vybraný soubor: \'%s\'</string>
-    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Složka %1$s: \'%2$s\' není přístupná, zpět na \'%3$s\'</string>
     <string name="contentstorage_err_read_failed">Soubor \'%s\' nelze přečíst</string>
     <string name="contentstorage_err_write_failed">Soubor \'%s\' nelze zapsat</string>
     <string name="contentstorage_err_create_failed">Soubor \'%1$s\' v \'%2$s\' nelze vytvořit</string>
