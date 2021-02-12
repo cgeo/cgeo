@@ -815,7 +815,6 @@
     <string name="contentstorage_folder_selection_success">La carpeta s\'ha definit a \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">S’anul·la la selecció de fitxers</string>
     <string name="contentstorage_file_selection_success">Fitxer seleccionat: \'%s\'</string>
-    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">La Carpeta %1$s: \'%2$s\' no és accessible, tornant a \'%3$s\'</string>
     <string name="contentstorage_err_read_failed">No s\'ha pogut llegir el fitxer \'%s\'</string>
     <string name="contentstorage_err_write_failed">No s\'ha pogut escriure el fitxer \'%s\'</string>
     <string name="contentstorage_err_create_failed">No s\'ha pogut crear el fitxer \'%1$s\' a \'%2$s\'</string>
