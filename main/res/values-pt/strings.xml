@@ -153,8 +153,7 @@
     <string name="log_problem_archive_label">A geocache deve ser arquivada</string>
     <string name="log_problem_archive_text">Este geocacher reportou que esta geocache deve ser arquivada. Um revisor voluntário da comunidade foi notificado.</string>
     <string name="log_image_scale_option_noscaling">Não redimensionar</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Imagem</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduzir para %s</string>
@@ -806,7 +805,6 @@
     <string name="contentstorage_selectfolder_dialog_title">Alterar pasta %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">A pasta %1$s está actualmente definida como \'%2$s\' e contém %3$s e %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Pode optar por usar a pasta padrão \'%s\' ou seleccionar uma pasta definida pelo utilizador.</string>
-    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Por favor, seleccione se o c:geo deve copiar/mover o seu conteúdo para a nova pasta:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Não fazer nada</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copiar todo o conteúdo</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Mover todo o conteúdo</string>
@@ -1892,11 +1890,6 @@
     <string name="export_individualroute_success">Rota individual exportada para \"%s\"</string>
     <!-- install wizard -->
     <string name="wizard">Assistente de configuração</string>
-    <string name="previous">Anterior</string>
-    <string name="skip">Ignorar</string>
-    <string name="next">Próximo</string>
-    <string name="done">Concluído</string>
-    <string name="finish">Concluído</string>
     <string name="wizard_welcome_title">Bem-vindo ao c:geo</string>
     <string name="wizard_migration_title">Migração da pasta c:geo</string>
     <string name="wizard_intro">São necessários apenas alguns passos para configurar o c:geo e começar a usar. Posso ajudar?</string>
@@ -1906,7 +1899,6 @@
     <string name="wizard_outro_error">Configuração incompleta\nNem todas as partes do c:geo funcionarão como esperado!</string>
     <string name="wizard_permissions_title">Definir autorizações da aplicação</string>
     <string name="wizard_permissions_intro">O c:geo precisa de certas permissões no seu dispositivo para funcionar correctamente.\nVou explicar mais detalhes nos próximos passos.</string>
-    <string name="wizard_basefolder_request_explanation">O c:geo precisa de uma pasta local para armazenar dados, como ficheiros GPX, cópias de segurança e notas de campo. Seleccione ou crie essa pasta no próximo passo.\nSe actualizou o c:geo de uma versão anterior, seleccione a pasta \"cgeo\" existente no nível de raíz do armazenamento do seu dispositivo.</string>
     <string name="wizard_mapfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar ficheiros de mapa offline. Seleccione ou crie essa pasta na próxima etapa.</string>
     <string name="wizard_gpxfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar os ficheiros GPX (ex: para importar / exportar caches ou trajectos). Seleccione ou crie essa pasta na próxima etapa.</string>
     <string name="wizard_platforms_title">Configurar serviços</string>
@@ -1926,4 +1918,10 @@
     <string name="wizard_status_location_permission">Permissão de localização</string>
     <string name="wizard_status_basefolder">Pasta base</string>
     <string name="wizard_status_platform">Serviços de geocaching</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">Anterior</string>
+    <string name="skip">Ignorar</string>
+    <string name="next">Próximo</string>
+    <string name="done">Concluído</string>
+    <string name="finish">Concluído</string>
 </resources>
