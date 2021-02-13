@@ -152,8 +152,7 @@
     <string name="log_problem_archive_label">Geocache arşivlenmeli</string>
     <string name="log_problem_archive_text">Bu Geocacher kutunun arşivlenmesi gerektiğini bildirdi. Bununla ilgili olarak Gönüllü Denetçi bilgilendirilecek.</string>
     <string name="log_image_scale_option_noscaling">Ölçeklendirme yok</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Resim</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s\'e çevir</string>
@@ -1768,11 +1767,6 @@
     <string name="export_individualroute_title">Özel rotayı dışa aktar</string>
     <!-- install wizard -->
     <string name="wizard">Yapılandırma sihirbazı</string>
-    <string name="previous">Önceki</string>
-    <string name="skip">Geç</string>
-    <string name="next">Sonraki</string>
-    <string name="done">Tamamlandı</string>
-    <string name="finish">Bitir</string>
     <string name="wizard_welcome_title">c:geo\'ya hoşgeldiniz</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_welcome_advanced">Gelişmiş yapılandırma</string>
@@ -1781,4 +1775,10 @@
     <string name="status_not_ok">HATA</string>
     <string name="wizard_status_title">Yapılandırma durumu</string>
     <string name="wizard_status_storage_permission">Bellek izni</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">Önceki</string>
+    <string name="skip">Geç</string>
+    <string name="next">Sonraki</string>
+    <string name="done">Tamamlandı</string>
+    <string name="finish">Bitir</string>
 </resources>
