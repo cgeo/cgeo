@@ -143,7 +143,7 @@
     <string name="log_problem_archive_label">Slēpni vēlams arhivēt</string>
     <string name="log_problem_archive_text">Šis slēpņotājs ziņoja, ka slēpni vēlams arhivēt. Paziņojums nosūtīts brīvprātīgajam recenzentam.</string>
     <string name="log_image_scale_option_noscaling">Bez mēroga</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tulkot uz %s valodu</string>
     <string name="translate_to_english">Tulkot angļu valodā</string>
@@ -1508,4 +1508,5 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- default actions in dialogs -->
 </resources>
