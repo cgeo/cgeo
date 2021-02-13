@@ -433,6 +433,31 @@ public class FolderUtils {
 
     }
 
+    /**
+     * checks whether source and target point to the same folder
+     */
+    public boolean foldersAreEqual(final Folder source, final Folder target) {
+        if (source == null || target == null) {
+            return false;
+        }
+        final String targetMarkerFileName = FileNameCreator.DEFAULT.createName();
+        final Uri targetMarkerFileUri = pls.create(target, targetMarkerFileName);
+        if (targetMarkerFileUri == null) {
+            //this means we can't write to target
+            return false;
+        }
+        try {
+            final List<ContentStorage.FileInformation> files = pls.list(source);
+            for (ContentStorage.FileInformation fi : files) {
+                if (fi.name.equals(targetMarkerFileName)) {
+                    return true;
+                }
+            }
+        } finally {
+            pls.delete(targetMarkerFileUri);
+        }
+        return false;
+    }
 
     /** returns: left: free space on folder device (in bytes), right: number of files on device (may be -1 if not calculateable) */
     public ImmutablePair<Long, Long> getDeviceInfo(final Folder folder) {

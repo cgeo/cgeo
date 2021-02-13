@@ -847,10 +847,11 @@
     <string name="contentstorage_selectfolder_dialog_title">Change Folder %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">The folder %1$s is currently set to \'%2$s\' and contains %3$s and %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">You may choose to use the default folder \'%s\' or pick a user-defined folder.</string>
-    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Please select whether c:geo shall copy/move your content to the new folder:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Do nothing</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copy all content</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Move all content</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">No further action</string>
+    <string name="contentstorage_selectfolder_dialog_choice">You selected a different folder than currently stored. How do you want to proceed?\n\nSelect folder and</string>
     <string name="contentstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Folder set to \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Aborting file selection</string>
@@ -2109,11 +2110,6 @@
 
     <!-- install wizard -->
     <string name="wizard">Configuration wizard</string>
-    <string name="previous">Previous</string>
-    <string name="skip">Skip</string>
-    <string name="next">Next</string>
-    <string name="done">Done</string>
-    <string name="finish">Finish</string>
     <string name="wizard_welcome_title">Welcome to c:geo</string>
     <string name="wizard_migration_title">c:geo folder migration</string>
     <string name="wizard_intro">Just a few steps are needed to configure c:geo and get you going. Shall I help you with that?</string>
@@ -2123,7 +2119,7 @@
     <string name="wizard_outro_error">Incomplete configuration\nNot all parts of c:geo will work as expected!</string>
     <string name="wizard_permissions_title">Set app permissions</string>
     <string name="wizard_permissions_intro">c:geo needs certain permissions on your device to work correctly.\nI will explain more details in the next steps.</string>
-    <string name="wizard_basefolder_request_explanation">c:geo needs a local folder to store data like GPX files, backups and field notes. Select or create such a folder in the next step.\nIf you upgraded c:geo from a previous version, select the existing folder \"cgeo\" on root level of your device storage.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo needs a local base folder to store data like logfiles etc. beneath it. Select or create such a folder in the next step.\nIf you upgraded c:geo from a previous version, select the existing folder \"cgeo\" on root level of your device storage.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo needs a local folder to store offline map files. Select or create such a folder in the next step.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo needs a local folder to store GPX files (e.g. for importing / exporting caches or tracks). Select or create such a folder in the next step.</string>
     <string name="wizard_platforms_title">Configure services</string>
@@ -2143,5 +2139,13 @@
     <string name="wizard_status_location_permission">Location permission</string>
     <string name="wizard_status_basefolder">Base folder</string>
     <string name="wizard_status_platform">Geocaching services</string>
+
+    <!-- default actions in dialogs -->
+    <string name="previous">Previous</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="done">Done</string>
+    <string name="finish">Finish</string>
+    <string name="back">Back</string>
 
 </resources>

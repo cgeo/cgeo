@@ -47,7 +47,7 @@ public class ContentStorageActivityHelper {
 
     private final Activity activity;
 
-    private enum CopyChoice { DO_NOTHING, COPY, MOVE }
+    private enum CopyChoice { ASK_IF_DIFFERENT, GO_BACK, DO_NOTHING, COPY, MOVE }
 
     //stores intermediate data of a running intent by return code. (This will no longer be neccessary with Activity Result API)
     private IntentData<?> runningIntentData;
@@ -100,9 +100,6 @@ public class ContentStorageActivityHelper {
 
         final ImmutablePair<Integer, Integer> fileInfo = FolderUtils.get().getFolderInfo(folder.getFolder());
 
-        final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
-        final View dialogView = LayoutInflater.from(dialog.getContext()).inflate(R.layout.folder_selection_dialog, null);
-
         //create the message;
         final String fileCount = activity.getResources().getQuantityString(R.plurals.file_count, fileInfo.left, fileInfo.left);
         final String folderCount = activity.getResources().getQuantityString(R.plurals.folder_count, fileInfo.right, fileInfo.right);
@@ -110,48 +107,33 @@ public class ContentStorageActivityHelper {
             folder.toUserDisplayableName(), folder.toUserDisplayableValue(), fileCount, folderCount);
         final String defaultFolder = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true));
 
-        final String copyOrMove = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_moveorcopy);
-
-
-        final String message = folderData + (folder.isUserDefined() ? "\n\n" + defaultFolder : "") + "\n\n" + copyOrMove;
-
-        //init dialog
-        ((TextView) dialogView.findViewById(R.id.message)).setText(message);
-        final CopyChoice[] copyChoice = new CopyChoice[]{CopyChoice.DO_NOTHING};
-
-        dialogView.findViewById(R.id.copymove_do_nothing).setOnClickListener(v -> copyChoice[0] = CopyChoice.DO_NOTHING);
-        dialogView.findViewById(R.id.copymove_copy).setOnClickListener(v -> copyChoice[0] = CopyChoice.COPY);
-        dialogView.findViewById(R.id.copymove_move).setOnClickListener(v -> copyChoice[0] = CopyChoice.MOVE);
-
+        final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
         dialog
-            .setView(dialogView)
             .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
+            .setMessage(folderData + (folder.isUserDefined() ? "\n\n" + defaultFolder : ""))
             .setPositiveButton(R.string.persistablefolder_pickfolder, (d, p) -> {
                 d.dismiss();
-                selectFolderInternal(REQUEST_CODE_SELECT_FOLDER_PERSISTED, folder, null, copyChoice[0], callback);
+                selectFolderInternal(REQUEST_CODE_SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT, callback);
                 })
-            .setNeutralButton(android.R.string.cancel, (d, p) -> {
+            .setNegativeButton(android.R.string.cancel, (d, p) -> {
                 d.dismiss();
                 finalizePersistableFolderSelection(false, folder, null, callback);
             });
 
             //only allow default selection if folder is currently NOT at default
             if (folder.isUserDefined()) {
-                  dialog.setNegativeButton(R.string.persistablefolder_usedefault, (d, p) -> {
+                dialog.setNeutralButton(R.string.persistablefolder_usedefault, (d, p) -> {
                     d.dismiss();
-                    continuePersistableFolderSelectionCopyMove(folder, null, copyChoice[0], callback);
+                    continuePersistableFolderSelectionCheckFoldersAreEqual(folder, null, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION, CopyChoice.ASK_IF_DIFFERENT, callback);
                 });
             }
 
-            dialog.create().show();
+        dialog.create().show();
     }
 
-    /**
-     * Simplified form of selectPersistableFolder with default values to be used in migration scenarios
-     * (no dialog, select "move" mode)
-     */
+    /** Simplified form of selectPersistableFolder without initial dialog */
     public void migratePersistableFolder(final PersistableFolder folder, final Consumer<PersistableFolder> callback) {
-        selectFolderInternal(REQUEST_CODE_SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.MOVE, callback);
+        selectFolderInternal(REQUEST_CODE_SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT, callback);
     }
 
     /**
@@ -332,8 +314,48 @@ public class ContentStorageActivityHelper {
             if (!ContentStorage.get().ensureFolder(target, runningIntentData.folder.needsWrite(), true)) {
                 finalizePersistableFolderSelection(false, folder, null, callback);
             } else {
-                continuePersistableFolderSelectionCopyMove(folder, uri, runningIntentData.copyChoice, callback);
+                continuePersistableFolderSelectionCheckFoldersAreEqual(folder, uri, flags, runningIntentData.copyChoice, callback);
             }
+        }
+    }
+
+    /** releases a folder grant */
+    private void releaseGrant(final Uri uri, final int flags) {
+        activity.getContentResolver().releasePersistableUriPermission(uri, flags);
+        ContentStorage.get().refreshUriPermissionCache();
+    }
+
+    private void continuePersistableFolderSelectionCheckFoldersAreEqual(final PersistableFolder folder, final Uri targetUri, final int flags, final CopyChoice copyChoice, final Consumer<PersistableFolder> callback) {
+        final Folder before = folder.getFolder();
+        if (copyChoice == CopyChoice.ASK_IF_DIFFERENT && before != null && !FolderUtils.get().foldersAreEqual(before, Folder.fromDocumentUri(targetUri))) {
+            final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
+            final View dialogView = LayoutInflater.from(dialog.getContext()).inflate(R.layout.folder_selection_dialog, null);
+            ((TextView) dialogView.findViewById(R.id.message)).setText(R.string.contentstorage_selectfolder_dialog_choice);
+            final CopyChoice[] cc = new CopyChoice[]{CopyChoice.MOVE};
+            dialogView.findViewById(R.id.copymove_move).setOnClickListener(v -> cc[0] = CopyChoice.MOVE);
+            dialogView.findViewById(R.id.copymove_copy).setOnClickListener(v -> cc[0] = CopyChoice.COPY);
+            dialogView.findViewById(R.id.copymove_justselect).setOnClickListener(v -> cc[0] = CopyChoice.DO_NOTHING);
+            dialog
+                .setView(dialogView)
+                .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
+                .setPositiveButton(android.R.string.ok, (d, p) -> {
+                    d.dismiss();
+                    continuePersistableFolderSelectionCopyMove(folder, targetUri, cc[0], callback);
+                })
+                .setNegativeButton(android.R.string.cancel, (d, p) -> {
+                    d.dismiss();
+                    releaseGrant(targetUri, flags);
+                    finalizePersistableFolderSelection(false, folder, null, callback);
+                })
+                .setNeutralButton(R.string.back, (d, p) -> {
+                    d.dismiss();
+                    releaseGrant(targetUri, flags);
+                    migratePersistableFolder(folder, callback);
+                })
+                .create()
+                .show();
+        } else {
+            continuePersistableFolderSelectionCopyMove(folder, targetUri, runningIntentData.copyChoice == CopyChoice.ASK_IF_DIFFERENT ? CopyChoice.DO_NOTHING : runningIntentData.copyChoice, callback);
         }
     }
 
