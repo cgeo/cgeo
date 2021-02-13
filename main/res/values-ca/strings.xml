@@ -153,8 +153,7 @@
     <string name="log_problem_archive_label">El catxé ha de ser arxivat</string>
     <string name="log_problem_archive_text">Aquest geocatxer va informar que aquest catxé hauria de ser arxivat. Un revisor ha estat avisat.</string>
     <string name="log_image_scale_option_noscaling">Sense escala</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Imatge</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradueix a %s</string>
@@ -807,7 +806,6 @@
     <string name="contentstorage_selectfolder_dialog_title">Canvia la carpeta%s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">La carpeta %1$s està configurada actualment a \'%2$s\' i conté %3$s i %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Podeu utilitzar la carpeta per defecte \'%s\' o triar una carpeta definida per l\'usuari.</string>
-    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Seleccioneu si C: geo copiarà / mourà el vostre contingut a la nova carpeta:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">No fer res</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copia tot el contingut</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Mou tot el contingut</string>
@@ -1894,11 +1892,6 @@
     <string name="export_individualroute_success">S\'ha exportat la ruta individual a \"%s\"</string>
     <!-- install wizard -->
     <string name="wizard">Assistent de configuració</string>
-    <string name="previous">Anterior</string>
-    <string name="skip">Ometre</string>
-    <string name="next">Següent</string>
-    <string name="done">Fet</string>
-    <string name="finish">Acabar</string>
     <string name="wizard_welcome_title">Benvingut a c:geo</string>
     <string name="wizard_migration_title">Migració de carpetes C:geo</string>
     <string name="wizard_intro">Només cal fer uns quants passos per configurar c: geo i posar-vos en marxa. T\'ajudo?</string>
@@ -1908,7 +1901,6 @@
     <string name="wizard_outro_error">Configuració incompleta\nNo totes les parts de c: geo funcionaran correctament!.</string>
     <string name="wizard_permissions_title">Definiu els permisos de l\'app</string>
     <string name="wizard_permissions_intro">C: geo necessita certs permisos al dispositiu per funcionar correctament.\nExplicaré més detalls en els passos següents.</string>
-    <string name="wizard_basefolder_request_explanation">C: geo necessita una carpeta local per emmagatzemar dades com fitxers GPX, còpies de seguretat i notes de camp. Seleccioneu o creeu aquesta carpeta al pas següent.\nSi heu actualitzat C: geo des d\'una versió anterior, seleccioneu la carpeta existent \"cgeo\" al nivell arrel de l\'emmagatzematge del dispositiu.</string>
     <string name="wizard_mapfolder_request_explanation">C: geo necessita una carpeta local per emmagatzemar fitxers de mapes fora de línia. Seleccioneu o creeu aquesta carpeta al pas següent.</string>
     <string name="wizard_platforms_title">Configureu els serveis</string>
     <string name="wizard_platforms_intro">Per trobar geocatxes amb C: geo, necessiteu un compte  d\'un servei de geocatxing compatible.\nSeleccioneu el servei desitjat a continuació per iniciar la sessió amb el vostre compte existent o creeu un compte nou.</string>
@@ -1927,4 +1919,10 @@
     <string name="wizard_status_location_permission">Permís d\'ubicació</string>
     <string name="wizard_status_basefolder">Carpeta base</string>
     <string name="wizard_status_platform">Serveis de geocaching</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">Anterior</string>
+    <string name="skip">Ometre</string>
+    <string name="next">Següent</string>
+    <string name="done">Fet</string>
+    <string name="finish">Acabar</string>
 </resources>
