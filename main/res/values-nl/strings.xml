@@ -153,8 +153,7 @@
     <string name="log_problem_archive_label">Cache zou moeten worden gearchiveerd</string>
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s</string>
@@ -806,7 +805,6 @@
     <string name="contentstorage_selectfolder_dialog_title">Map %s wijzigen</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">De map %1$s is momenteel ingesteld op \'%2$s\' en bevat %3$s en %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Je kunt kiezen voor de standaard map \'%s\' of een door de gebruiker gedefinieerde map kiezen.</string>
-    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Selecteer of c:geo de inhoud zal kopiëren/verplaatsen naar de nieuwe map:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Niets doen</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Alle inhoud kopiëren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Alle inhoud verplaatsen</string>
@@ -1897,11 +1895,6 @@
     <string name="export_individualroute_success">Individuele route geëxporteerd naar \"%s\"</string>
     <!-- install wizard -->
     <string name="wizard">Configuratiewizard</string>
-    <string name="previous">Vorige</string>
-    <string name="skip">Overslaan</string>
-    <string name="next">Volgende</string>
-    <string name="done">Voltooid</string>
-    <string name="finish">Voltooien</string>
     <string name="wizard_welcome_title">Welkom bij c:geo</string>
     <string name="wizard_migration_title">c:geo map migratie</string>
     <string name="wizard_intro">Er zijn maar een paar stappen nodig om c:geo te configureren en je op weg te helpen. Zal ik je daarmee helpen?</string>
@@ -1911,7 +1904,6 @@
     <string name="wizard_outro_error">Onvolledige configuratie\nNiet alle delen van c:geo zullen werken zoals verwacht!</string>
     <string name="wizard_permissions_title">App-machtigingen instellen</string>
     <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig op je apparaat om correct te werken.\nIk zal meer details uitleggen in de volgende stappen.</string>
-    <string name="wizard_basefolder_request_explanation">c:geo heeft een lokale map nodig om gegevens zoals GPX-bestanden, back-ups en veldnotities op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.\nAls je c:geo van een vorige versie bijwerkt, selecteer dan de bestaande map \"cgeo\" op het hoofdniveau van uw apparaatopslag.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo heeft een lokale map nodig om offline kaartbestanden op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo heeft een lokale map nodig om GPX bestanden op te slaan (bijv. voor het importeren / exporteren van caches of spoor). Selecteer of maak een dergelijke map aan in de volgende stap.</string>
     <string name="wizard_platforms_title">Services configureren</string>
@@ -1931,4 +1923,10 @@
     <string name="wizard_status_location_permission">Locatie permissie</string>
     <string name="wizard_status_basefolder">Basismap</string>
     <string name="wizard_status_platform">Geocaching diensten</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">Vorige</string>
+    <string name="skip">Overslaan</string>
+    <string name="next">Volgende</string>
+    <string name="done">Voltooid</string>
+    <string name="finish">Voltooien</string>
 </resources>
