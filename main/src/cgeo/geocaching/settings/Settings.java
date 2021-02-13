@@ -1564,7 +1564,10 @@ public class Settings {
         return getInt(R.string.pref_backups_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
     }
 
-    /** sets the user-defined folder-config for a persistable folder. Can be set to null */
+    /**
+     * sets the user-defined folder-config for a persistable folder. Can be set to null
+     * should be called by PersistableFolder class only
+     */
     public static void setPersistableFolder(@NonNull final PersistableFolder folder, @Nullable final String folderString, final boolean setByUser) {
         putString(folder.getPrefKeyId(), folderString);
         if (setByUser) {
@@ -1572,18 +1575,27 @@ public class Settings {
         }
     }
 
-    /** gets the user-defined uri for a persistable folder. Can be null */
+    /**
+     * gets the user-defined uri for a persistable folder. Can be null
+     * should be called by PersistableFolder class only
+     */
     @Nullable
     public static String getPersistableFolder(@NonNull final PersistableFolder folder) {
         return getString(folder.getPrefKeyId(), getLegacyValue(folder.getPrefKeyId()));
     }
 
-    /** sets Uri for persistable uris. Can be set to null */
+    /**
+     * sets Uri for persistable uris. Can be set to null
+     * should be called by PersistableUri class only
+     */
     public static void setPersistableUri(@NonNull final PersistableUri persistedUri, @Nullable final String uri) {
         putString(persistedUri.getPrefKeyId(), uri);
         handleLegacyValuesOnSet(persistedUri.getPrefKeyId());   }
 
-    /** gets the persisted uri for a persistable uris. Can be null */
+    /**
+     * gets the persisted uri for a persistable uris. Can be null
+     * should be called by PersistableUri class only
+     */
     @Nullable
     public static String getPersistableUri(@NonNull final PersistableUri persistedUri) {
         return getString(persistedUri.getPrefKeyId(), getLegacyValue(persistedUri.getPrefKeyId()));
@@ -1622,8 +1634,9 @@ public class Settings {
         }
     }
 
-    // checks whether legacy folder needs to be migrated
-    // (legacy value is set and not yet migrated)
+    /** checks whether legacy folder needs to be migrated
+     * (legacy value is set and not yet migrated)
+     **/
     public static boolean legacyFolderNeedsToBeMigrated(@StringRes final int newPrefKey) {
         for (String legacyKey : getLegacyPreferenceKeysFor(newPrefKey)) {
             final String value = getStringDirect(legacyKey, null);

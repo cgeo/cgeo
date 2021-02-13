@@ -98,7 +98,10 @@ public class ContentStorage {
         this.documentAccessor = new DocumentContentAccessor(this.context);
         this.fileAccessor = new FileContentAccessor(this.context);
         this.documentAccessor.refreshUriPermissionCache();
+        reevaluateFolderDefaults();
+    }
 
+    public void reevaluateFolderDefaults() {
         for (PersistableFolder folder : PersistableFolder.values()) {
             //(re)sets default folders and ensures that it is definitely accessible
             folder.setDefaultFolder(getAccessibleDefaultFolder(folder.getDefaultCandidates(), folder.needsWrite(), folder.name()));

@@ -12,6 +12,7 @@ import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.GCAuthorizationActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -369,6 +370,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private void requestBasefolder() {
         if (!ContentStorageActivityHelper.baseFolderIsSet()) {
+            prepareFolderDefaultValues();
             getContentStorageHelper().migratePersistableFolder(PersistableFolder.BASE, v -> gotoNext());
         }
     }
@@ -386,6 +388,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private void requestMapfolder() {
         if (mapFolderNeedsMigration()) {
+            prepareFolderDefaultValues();
             getContentStorageHelper().migratePersistableFolder(PersistableFolder.OFFLINE_MAPS, v -> gotoNext());
         }
     }
@@ -396,8 +399,14 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private void requestGpxfolder() {
         if (gpxFolderNeedsMigration()) {
+            prepareFolderDefaultValues();
             getContentStorageHelper().migratePersistableFolder(PersistableFolder.GPX, v -> gotoNext());
         }
+    }
+
+    private void prepareFolderDefaultValues() {
+        // re-evaluate default folder values, as the public folder may not have been accessible on startup
+        ContentStorage.get().reevaluateFolderDefaults();
     }
 
     // -------------------------------------------------------------------
