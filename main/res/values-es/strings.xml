@@ -142,7 +142,7 @@
     <string name="log_problem_archive_label">El caché debería archivarse</string>
     <string name="log_problem_archive_text">Este geocacher informó de que este caché debería ser archivado. Se ha notificado a un revisor voluntario de la comunidad.</string>
     <string name="log_image_scale_option_noscaling">Sin redimensionar</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traducir al %s</string>
     <string name="translate_to_english">Traducir al inglés</string>
@@ -1481,4 +1481,5 @@ Nombre de archivo:%2$s</string>
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- default actions in dialogs -->
 </resources>
