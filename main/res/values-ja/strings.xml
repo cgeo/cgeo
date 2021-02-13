@@ -153,8 +153,7 @@
     <string name="log_problem_archive_label">要アーカイブ</string>
     <string name="log_problem_archive_text">このジオキャッシャーがキャッシュがアーカイブされるべきと報告しました。コミュニティのボランティアレビューアーに通知されました</string>
     <string name="log_image_scale_option_noscaling">実サイズ</string>
-    <string name="log_image_scale_option_entry">%1$dpx</string>
-    <string name="log_image_info">%1$dx%2$dpx、%3$dKB、%4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$dpx</string>
     <string name="log_image_titleprefix">画像</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%sに翻訳</string>
@@ -805,7 +804,6 @@
     <string name="contentstorage_selectfolder_dialog_title">%sフォルダを変更</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">フォルダ%1$sは現在「%2$s」に設定されており、%3$sと%4$sが含まれています。</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">デフォルトのフォルダ「%s」を使用するか、ユーザー定義のフォルダを選択することができます。</string>
-    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">c:geoがあなたのコンテンツを新しいフォルダにコピー/移動するかどうかを選択してください:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">何もしない</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">すべてのファイルをコピー</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">すべてのファイルを移動</string>
@@ -1864,11 +1862,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_individualroute_success">個別ルートを「%s」にエクスポートしました</string>
     <!-- install wizard -->
     <string name="wizard">設定ウィザード</string>
-    <string name="previous">戻る</string>
-    <string name="skip">スキップ</string>
-    <string name="next">次へ</string>
-    <string name="done">完了</string>
-    <string name="finish">終了</string>
     <string name="wizard_welcome_title">c:geoへようこそ</string>
     <string name="wizard_migration_title">c:geoフォルダの移行</string>
     <string name="wizard_intro">c:geoを使うにはいくつか設定する必要があります。お手伝いしましょうか?</string>
@@ -1878,7 +1871,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_outro_error">設定が完了していません\nこのままでは、すべての機能が期待どおり動作するわけではありません!</string>
     <string name="wizard_permissions_title">アプリの権限の設定</string>
     <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です\n次のステップで説明します</string>
-    <string name="wizard_basefolder_request_explanation">c:geoは、GPXファイル、バックアップ、フィールドノートなどのデータを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成してください。\n以前のバージョンからc:geoをアップグレードした場合は、デバイスストレージのルートレベルで既存のフォルダ「cgeo」を選択してください。</string>
     <string name="wizard_mapfolder_request_explanation">オフライン用の地図ファイルを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
     <string name="wizard_gpxfolder_request_explanation">GPXファイルを保存(キャッシュやトラックをインポート/エクスポート)するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
@@ -1898,4 +1890,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_status_location_permission">位置情報の権限</string>
     <string name="wizard_status_basefolder">ベースフォルダ</string>
     <string name="wizard_status_platform">ジオキャッシングサイト</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">戻る</string>
+    <string name="skip">スキップ</string>
+    <string name="next">次へ</string>
+    <string name="done">完了</string>
+    <string name="finish">終了</string>
 </resources>
