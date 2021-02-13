@@ -147,8 +147,7 @@
     <string name="log_problem_archive_label">Slėptuvė turėtų būti archyvuota</string>
     <string name="log_problem_archive_text">Šis naudotojas pranešė, kad slėptuvė turėtų būti archyvuota. Savanoriui apžvalgininkui buvo pranešta.</string>
     <string name="log_image_scale_option_noscaling">Nekeisti dydžio</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Vaizdas</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Išversti į %s</string>
@@ -1768,4 +1767,5 @@
     <string name="export_individualroute_title">Eksportuoti asmeninį maršrutą</string>
     <string name="export_individualroute_success">Asmeninis maršrutas eksportuotas į \"%s\"</string>
     <!-- install wizard -->
+    <!-- default actions in dialogs -->
 </resources>
