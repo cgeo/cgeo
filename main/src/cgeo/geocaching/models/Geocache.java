@@ -38,9 +38,11 @@ import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.DataStore.StorageLocation;
-import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.Folder;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EventTimeParser;
@@ -60,7 +62,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.text.HtmlCompat;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -1970,17 +1971,13 @@ public class Geocache implements IWaypoint {
     private void addLocalSpoilersTo(final List<Image> spoilers) {
         if (StringUtils.length(geocode) >= 2) {
             final String suffix = StringUtils.right(geocode, 2);
-            final File lastCharDir = new File(LocalStorage.getLocalSpoilersDirectory(), suffix.substring(1));
-            final File secondToLastCharDir = new File(lastCharDir, suffix.substring(0, 1));
-            final File finalDir = new File(secondToLastCharDir, geocode);
-            final File[] files = finalDir.listFiles();
-            if (files != null) {
-                for (final File image : files) {
-                    spoilers.add(new Image.Builder()
-                            .setUrl("file://" + image.getAbsolutePath())
-                            .setTitle(image.getName())
-                            .build());
+            final Folder spoilerFolder = Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
+                suffix.substring(1) + "/" + suffix.substring(0, 1)  + "/" + geocode);
+            for (ContentStorage.FileInformation imageFile : ContentStorage.get().list(spoilerFolder)) {
+                if (imageFile.isDirectory) {
+                    continue;
                 }
+                spoilers.add(new Image.Builder().setUrl(imageFile.uri).setTitle(imageFile.name).build());
             }
         }
     }

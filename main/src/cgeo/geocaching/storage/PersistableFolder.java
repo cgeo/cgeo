@@ -41,8 +41,8 @@ public enum PersistableFolder {
     BACKUP(R.string.pref_persistablefolder_backup, R.string.persistablefolder_backup, Folder.fromPersistableFolder(BASE, "backup")),
     /** Field Note folder */
     FIELD_NOTES(R.string.pref_persistablefolder_fieldnotes, R.string.persistablefolder_fieldnotes, Folder.fromPersistableFolder(BASE, "field-notes")),
-    ///** (Log) Image folder) */
-    //IMAGES(R.string.pref_persistablefolder_images, R.string.persistablefolder_images, Folder.fromPersistableFolder(BASE, "images")),
+    ///** Spoiler Image folder */
+    SPOILER_IMAGES(R.string.pref_persistablefolder_spoilerimages, R.string.persistablefolder_spoilerimages, Folder.fromPersistableFolder(BASE, "GeocachePhotos")),
 
     /** A Folder to use solely for Unit Test */
     TEST_FOLDER(R.string.pref_persistablefolder_testdir, 0, Folder.fromFolder(CGEO_PRIVATE_FILES,  "unittest"));

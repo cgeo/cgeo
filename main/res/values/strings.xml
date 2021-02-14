@@ -882,6 +882,7 @@
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">Logfiles</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
+    <string name="persistablefolder_spoilerimages">Spoiler Images</string>
 
     <!-- FolderUtils -->
     <string name="folder_copy_progressbar_title">Copying content of %1$s to %2$s</string>
