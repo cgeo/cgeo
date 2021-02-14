@@ -153,7 +153,9 @@
     <string name="log_problem_archive_label">Kätkö pitäisi arkistoida</string>
     <string name="log_problem_archive_text">Tämä kätköilijä ilmoitti, että kätkö pitäisi arkistoida. Vapaaehtoiselle kätkötarkastajalle on ilmoitettu.</string>
     <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d pikseliä</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d pikseliä, %3$s\nSkaalattu/pakattu:\n%4$d x %5$d pikseliä, ~%6$s</string>
     <string name="log_image_titleprefix">Kuva</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
@@ -770,6 +772,8 @@
     <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>
+    <string name="localstorage_migrate_title">Paikallisten tiedostojen siirtäminen</string>
+    <string name="localstorage_migrate_status_major">Versio %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Läheisyysilmoitus</string>
     <string name="init_proximityNotificationGeneral">Yleinen läheisyysilmoitus kartalla</string>
@@ -808,6 +812,8 @@
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Ei toimintoa</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopioi kaikki sisältö</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Siirrä kaikki sisältö</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Ei lisätoimia</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Valitsit toisen kansion kuin tällä hetkellä tallennettu. Miten haluat jatkaa?\n\nValitse kansio ja</string>
     <string name="contentstorage_folder_selection_aborted">Kansion valinta keskeytetään, kansio on \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Kansio \'%s\' asetettu</string>
     <string name="contentstorage_file_selection_aborted">Tiedoston valinta keskeytetään</string>
@@ -1904,7 +1910,9 @@
     <string name="wizard_outro_error">Määritystä ei ole suoritettu!\nKaikki c:geon osat eivät toimi odotetulla tavalla!</string>
     <string name="wizard_permissions_title">Aseta sovelluksen käyttöluvat</string>
     <string name="wizard_permissions_intro">c:geo tarvitsee tietyt käyttöoikeudet laitteellesi toimiakseen oikein.\nSelitän lisää yksityiskohtia seuraavissa vaiheissa.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo tarvitsee paikallisen juurikansion tallentaakseen dataa kuten lokitiedostoja ja muuta. Valitse tai luo tällainen kansio seuraavassa vaiheessa.\nJos olet päivittänyt c:geon edellisestä versiosta, valitse olemassa oleva kansio \"cgeo\" laitteen tallennustilan juuritasolla.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttatiedostoja. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen GPX-tiedostoja, esim. kätköjen sekä reittien tuontiin/vientiin. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
     <string name="wizard_platforms_title">Määritä palvelut</string>
     <string name="wizard_platforms_intro">Löytääksesi geokätköjä c:geon avulla, tarvitset tilin c:geon tukemaa geokätköilypalvelua varten.\nValitse haluamasi palvelu alta, jotta voit kirjautua sisään olemassa olevalla tililläsi tai luoda uuden tilin.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1928,4 +1936,5 @@
     <string name="next">Seuraava</string>
     <string name="done">Valmis</string>
     <string name="finish">Valmis</string>
+    <string name="back">Takaisin</string>
 </resources>
