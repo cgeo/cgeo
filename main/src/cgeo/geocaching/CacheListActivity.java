@@ -751,7 +751,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
             if (isOffline || type == CacheListType.HISTORY) { // only offline list
-                setMenuItemLabel(menu, R.id.menu_drop_caches, R.string.caches_remove_selected, R.string.caches_remove_all);
+                final boolean removeFromDevice = removeWillDeleteFromDevice(listId);
+                setMenuItemLabel(menu, R.id.menu_drop_caches,
+                    removeFromDevice ? R.string.caches_remove_selected_completely : R.string.caches_remove_selected,
+                    removeFromDevice ? R.string.caches_remove_all_completely : R.string.caches_remove_all);
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all);
                 setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
                 setMenuItemLabel(menu, R.id.menu_copy_to_list, R.string.caches_copy_selected, R.string.caches_copy_all);
@@ -1412,6 +1415,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
+    public static boolean removeWillDeleteFromDevice(final int listId) {
+        return listId == PseudoList.ALL_LIST.id || listId == PseudoList.HISTORY_LIST.id || listId == StoredList.TEMPORARY_LIST.id;
+    }
+
     private static final class DeleteCachesFromListCommand extends AbstractCachesCommand {
 
         private final LastPositionHelper lastPositionHelper;
@@ -1438,8 +1445,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         }
 
-        private boolean appliesToAllLists() {
-            return listId == PseudoList.ALL_LIST.id || listId == PseudoList.HISTORY_LIST.id || listId == StoredList.TEMPORARY_LIST.id;
+        public boolean appliesToAllLists() {
+            return removeWillDeleteFromDevice(listId);
         }
 
         @Override
