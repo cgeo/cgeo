@@ -57,6 +57,7 @@
     <string name="wpnew_final">Final</string>
     <string name="wpnew_stage">Adım</string>
     <string name="wpnew_pkg">Park alanı</string>
+    <string name="wpnew_waypoint">İşaretçi</string>
     <string name="wpnew_original">Orijinal</string>
     <!-- logs -->
     <string name="log_found">Buldum</string>
@@ -382,9 +383,12 @@
     <string name="caches_clear_offlinelogs_message">Çevrimdışı kayıtları temizlemek istiyor musunuz?</string>
     <string name="caches_clear_offlinelogs_progress">Çevrimdışı kayıtlar temizleniyor</string>
     <string name="caches_set_cache_icon">Geocache simgelerini seç</string>
+    <string name="caches_reset_cache_icons_title">Cache simgelerini sıfırla</string>
+    <string name="caches_reset_cache_icons">Tüm seçilenler için Geocache simgelerini sıfırlamak istiyor musunuz?</string>
     <string name="caches_make_list_unique">Listeyi özgün kıl</string>
     <string name="caches_set_listmarker">İşaretleyici ayarla</string>
     <string name="select_icon">Simge seç</string>
+    <string name="onetime_missing_unicode_info">Android sürümünüz, desteklenen simgelerin otomatik olarak algılanmasını desteklemiyor - bazı karakterler eksik olabilir</string>
     <!-- caches lists -->
     <string name="menu_lists">Listeleri yönet</string>
     <string name="list_menu_create">Yeni liste oluştur</string>
@@ -859,6 +863,7 @@
     <string name="cache_personal_note_edit">Düzenle</string>
     <string name="cache_personal_note_storewaypoints">Yol Noktaları Ekleme/Güncelleme</string>
     <string name="cache_personal_note_removewaypoints">Yol noktalarını kaldır</string>
+    <string name="cache_personal_note_removedwaypoints">Yol noktası kaldırıldı</string>
     <string name="cache_personal_note_storewaypoints_success">Kişisel nokta ara noktalar eklendi</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Yol noktaları notlara eklendi fakat kısaltıldı (max kişisel not boyutu:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Yol noktaları boyut sınırlamalarından dolayı notlarda saklanamaz (max kişisel not boyutu:%1$d)</string>
@@ -950,6 +955,7 @@
     <string name="cache_menu_event">Takvime ekle</string>
     <string name="cache_menu_extract_waypoints">Yol noktalarını çıkart</string>
     <string name="cache_menu_set_cache_icon">Geocache simgesi seç</string>
+    <string name="cache_icon_updated">Cache simgesi güncellendi</string>
     <string name="cache_menu_details">Detaylar</string>
     <string name="cache_menu_refresh">Yenile</string>
     <string name="cache_menu_share">Geocache\'i paylaş</string>
@@ -1239,6 +1245,7 @@
     <string name="compass_title">Pusula</string>
     <string name="use_gps">Sadece GPS kullanıldı</string>
     <string name="destination_select">Varış yeri seç</string>
+    <string name="navigation_direct_navigation">Doğrudan navigasyon</string>
     <string name="osmand_marker_cgeo">c:geo\'dan yer işaretleyicisi</string>
     <string name="device_heading_label">Cihaz:</string>
     <string name="device_orientation">Yönlendirme</string>
@@ -1551,6 +1558,7 @@
     <string name="support_title">Destek</string>
     <string name="website_title">İnternet Sitesi</string>
     <string name="facebook_link"><a href=""> c:geo sayfa</a></string>
+    <string name="fangroup_link"><a href="">Alman kullanıcı grubu</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">Google Play\'de c:geo</a></string>
     <string name="about_twitter"><b>c:geo</b> her Geocache\'e kayıt girişinizde Twitter\'da yeni bir durum paylaşmalı mı?</string>
@@ -1771,4 +1779,5 @@
     <string name="wizard_advanced_restore_label">Geri Yükle</string>
     <string name="status_not_ok">HATA</string>
     <string name="wizard_status_title">Yapılandırma durumu</string>
+    <string name="wizard_status_storage_permission">Bellek izni</string>
 </resources>
