@@ -232,7 +232,7 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseWaypointWithFormulaAndCreateParseableWaypointText() {
-        final String note = "@name (F) (FORMULA-PLAIN) N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final String note = "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
         final WaypointParser waypointParser = new WaypointParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
@@ -241,7 +241,7 @@ public class WaypointParserTest {
 
         final String parseableText = WaypointParser.getParseableText(wp, -1);
         assertThat(parseableText).isEqualTo(
-            "@name (F) (FORMULA-PLAIN) N 45° A.B(C+D)' E 9° (A-B).(2*D)EF' |A=a + b|a=2| \"this is the description\"");
+            "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)' E 9° (A-B).(2*D)EF' |A=a + b|a=2| \"this is the description\"");
     }
 
     /**
@@ -249,7 +249,7 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseWaypointWithFormulaWithNameAndDescription() {
-        final String note = "@WPName X (FORMULA-PLAIN) N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final String note = "@WPName X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + "N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
         final WaypointParser waypointParser = new WaypointParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
@@ -270,7 +270,7 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseWaypointWithFormulaEvaluateCoordinates() {
-        final String note = "@WPName X (FORMULA-PLAIN) N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a*b|B=3|C=8|D=4|E=b-a|F=b/3|a=2|b=9| this is the description\n\"this shall NOT be part of the note\"";
+        final String note = "@WPName X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a*b|B=3|C=8|D=4|E=b-a|F=b/3|a=2|b=9| this is the description\n\"this shall NOT be part of the note\"";
         final WaypointParser waypointParser = new WaypointParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
@@ -289,8 +289,8 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseTwoWaypointsWithFormulaAndNameAndDescription() {
-        final String note = "@WPName 1 X (FORMULA-PLAIN) N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a + b| \"this is the description\"\n\"this shall NOT be part of the note\"\n" +
-            "@WPName 2 X (FORMULA-PLAIN) N 45 C.A(D+B)  E 9 (D-C).(2*A)EF |A = a+b|B=|a=2|b=| \"this is the description for the second point\"";
+        final String note = "@WPName 1 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a + b| \"this is the description\"\n\"this shall NOT be part of the note\"\n" +
+            "@WPName 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45 C.A(D+B)  E 9 (D-C).(2*A)EF |A = a+b|B=|a=2|b=| \"this is the description for the second point\"";
         final WaypointParser waypointParser = new WaypointParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(2);
@@ -321,7 +321,7 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseWaypointWithFormulaPrefix() {
-        final String note = "@[S2]Stage 2 X (FORMULA-PLAIN)  N 45° A.B(C+D)  E 9° (A-B).(2*D)EF \"this is the description\"\n\"this shall NOT be part of the note\"";
+        final String note = "@[S2]Stage 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF \"this is the description\"\n\"this shall NOT be part of the note\"";
         final WaypointParser waypointParser = new WaypointParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
@@ -338,7 +338,7 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseWaypointWithFormulaWithoutDescription() {
-        final String note = "@[S2]Stage 2 X (FORMULA-PLAIN)  N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a + b|B=|a=|b=3|";
+        final String note = "@[S2]Stage 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a + b|B=|a=|b=3|";
         final WaypointParser waypointParser = new WaypointParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
@@ -361,7 +361,7 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseWaypointWithFormulaWithoutName() {
-        final String note = "(FORMULA-PLAIN)  N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b||B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final String note = WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b||B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
         final WaypointParser waypointParser = new WaypointParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
@@ -380,7 +380,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithFormulaStability() {
         //parse formulas for waypoints which might lead to unexpected fillings (and NEVER to exceptions...)
-        final String formulaTypeStr = " (FORMULA-PLAIN) ";
+        final String formulaTypeStr = " " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " ";
         final String formulaStr = " N 45° A.B(C+D) E 9°(A-B).(2*D)EF ";
         final String variableStrWithoutDelim = "A=a+b|B=2|C=3|D=208|a=3|b=40";
         final String variableStrWithDelim = "|" + variableStrWithoutDelim + "|";

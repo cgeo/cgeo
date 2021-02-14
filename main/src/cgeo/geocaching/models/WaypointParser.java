@@ -27,6 +27,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class WaypointParser {
 
+    public static final String PARSING_COORD_FORMULA_PLAIN = "(F-PLAIN)";
+
     //Constants for waypoint parsing
     private static final String PARSING_NAME_PRAEFIX = "@";
     private static final char PARSING_USERNOTE_DELIM = '"';
@@ -39,7 +41,6 @@ public class WaypointParser {
     private static final String PARSING_COORD_EMPTY = "(NO-COORD)";
     private static final String BACKUP_TAG_OPEN = "{c:geo-start}";
     private static final String BACKUP_TAG_CLOSE = "{c:geo-end}";
-    private static final String PARSING_COORD_FORMULA_PLAIN = "(FORMULA-PLAIN)";
 
     private Collection<Waypoint> waypoints;
     private final String namePrefix;

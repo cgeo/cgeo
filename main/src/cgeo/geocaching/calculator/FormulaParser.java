@@ -21,9 +21,9 @@ import org.apache.commons.lang3.StringUtils;
  * Parse coordinates with formulas.
  * Similar to @see GeopointPareser, but there valid coordinates (double) are required, here a formula (string) is required.
  *
- * For plain-format the keyword (FORMULA-PLAIN) has to be used. Use '|' to separate the variables and the user note.
+ * For plain-format the keyword defined in WaypointParser::PARSING_COORD_FORMULA_PLAIN has to be used. Use '|' to separate the variables and the user note.
  * example:
- * @name (x) (FORMULA-PLAIN) N48 AB.(C*D/2) E 9 (C-D).(A+B) |A=a+b|a=5| user note
+ * @name (x) (F-PLAIN) N48 AB.(C*D/2) E 9 (C-D).(A+B) |A=a+b|a=5| user note
  */
 public final class FormulaParser {
 
