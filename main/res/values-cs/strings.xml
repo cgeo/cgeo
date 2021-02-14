@@ -153,7 +153,9 @@
     <string name="log_problem_archive_label">Keška by měla být archivována</string>
     <string name="log_problem_archive_text">Tento hráč oznámil, že keška by měla být archivována. Reviewer byl informován.</string>
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\nZměněná velikost/Komprimované:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Přeložit do %s</string>
@@ -772,6 +774,8 @@
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
+    <string name="localstorage_migrate_title">Přenos místních souborů</string>
+    <string name="localstorage_migrate_status_major">Verze %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Upozornění na vzdálenost</string>
     <string name="init_proximityNotificationGeneral">Všeobecné upozornění na vzdálenost na mapě</string>
@@ -810,6 +814,8 @@
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nedělat nic</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopírovat veškerý obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Přesunout veškerý obsah</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Žádný další krok</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Vybrali jste jinou složku, než je aktuálně uložená. Jak chcete postupovat?\n\nVyberte složku a</string>
     <string name="contentstorage_folder_selection_aborted">Přerušení výběru složky, složka je \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Složka nastavena na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Přerušení výběru souboru</string>
@@ -1956,7 +1962,8 @@
     <string name="wizard_outro_error">Nedokončená konfigurace\nNěkteré části c:geo nebudou pracovat podle očekávání!</string>
     <string name="wizard_permissions_title">Nastavit oprávnění aplikace</string>
     <string name="wizard_permissions_intro">Aplikace c:geo vyžaduje na správné fungování několik povolení na vašem zařízení.\nV dalších krocích vám je vysvětlíme.</string>
-    <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo potřebuje místní základní složku pro ukládání dat, jako jsou protokoly atd. V dalším kroku vyberte nebo vytvořte takovou složku.\nPokud jste aktualizovali c:geo z předchozí verze, vyberte existující složku „cgeo“ na interním úložišti vašeho zařízení.</string>
+    <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
     <string name="wizard_gpxfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání GPX souborů, například pro import / export kešek nebo tras. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
     <string name="wizard_platforms_title">Konfigurace služeb</string>
     <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
@@ -1981,4 +1988,5 @@
     <string name="next">Další</string>
     <string name="done">Hotovo</string>
     <string name="finish">Dokončit</string>
+    <string name="back">Zpět</string>
 </resources>
