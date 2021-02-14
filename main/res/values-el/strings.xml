@@ -153,8 +153,7 @@
     <string name="log_problem_archive_label">Η κρύπτη πρέπει να αρχειοθετηθεί</string>
     <string name="log_problem_archive_text">Ο παίκτης ανέφερε ότι αυτή η κρύπτη πρέπει να αρχειοθετηθεί. Έχει ενημερωθεί ο εθελοντής διαχειριστής για αυτό.</string>
     <string name="log_image_scale_option_noscaling">Χωρίς κλιμάκωση</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Εικόνα</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
@@ -765,6 +764,9 @@
     <string name="feature_favorite">Προσθήκη της κρύπτης στις αγαπημένες</string>
     <string name="feature_voting">Ψηφοφορία κρυπτών</string>
     <string name="init_maplines_title">Προσαρμογή γραμμών χάρτη</string>
+    <string name="init_map_other">Άλλο</string>
+    <string name="init_map_osm_multithreaded">Πολλαπλά Νήματα (OSM)</string>
+    <string name="init_summary_map_osm_multithreaded">Χρήση πολλαπλών νημάτων για την απόδοση χαρτών OpenStreetMap</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Ειδοποιήσεις εγγύτητας</string>
     <string name="init_proximityNotificationGeneral">Γενική ειδοποίηση εγγύτητας στον χάρτη</string>
@@ -798,6 +800,8 @@
     <string name="sendToCgeo_no_registration">Το c:geo απέτυχε να κατεβάσει κρύπτες. Η εγγραφή για το send2cgeo έληξε. Παρακαλούμε να εγγραφείτε στις ρυθμίσεις.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Αλλαγή φακέλου %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Ο φάκελος %1$s έχει οριστεί σε \'%2$s\' και περιέχει %3$s και %4$s.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Μπορείτε να επιλέξετε να χρησιμοποιήσετε τον προεπιλεγμένο φάκελο \'%s\' ή να επιλέξετε ένα φάκελο που έχει οριστεί από το χρήστη.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Καμία ενέργεια</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Αντιγραφή όλου του περιεχομένου</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Μετακίνηση περιεχομένου</string>
@@ -805,7 +809,6 @@
     <string name="contentstorage_folder_selection_success">Ο φάκελος ορίστηκε σε \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Ματαίωση επιλογής αρχείου</string>
     <string name="contentstorage_file_selection_success">Επιλεγμένο αρχείο: \'%s\'</string>
-    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Φάκελος %1$s: \'%2$s\' δεν είναι προσβάσιμος, επιστρέφουμε στον \'%3$s\'</string>
     <string name="contentstorage_err_read_failed">Το αρχείο \'%s\' δεν μπορεί να διαβαστεί</string>
     <string name="contentstorage_err_write_failed">Το αρχείο \'%s\' δεν μπορεί να γραφτεί</string>
     <string name="contentstorage_err_create_failed">Το αρχείο \'%1$s\' στο \'%2$s\' δεν μπορεί να δημιουργηθεί</string>
@@ -817,6 +820,21 @@
     <string name="persistablefolder_usertype_userdefined">Ορισμένο από τον Χρήστη</string>
     <string name="persistablefolder_usertype_default">Προεπιλογή</string>
     <!-- FolderUtils -->
+    <string name="folder_copy_progressbar_title">Αντιγραφή περιεχομένου από %1$s έως %2$s</string>
+    <string name="folder_copy_progressbar_status_done">Αντιγράφηκε %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_move_progressbar_title">Μετακίνηση περιεχομένου από %1$s σε %2$s</string>
+    <string name="folder_move_progressbar_status_done">Μετακινήθηκε %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_copy_move_progressbar_status_processed_file">Διαδικασία %1$s</string>
+    <string name="folder_copy_finished_title">Αντιγράφηκε το περιεχόμενο του φακέλου</string>
+    <string name="folder_move_finished_title">Το περιεχόμενο του φακέλου μετακινήθηκε</string>
+    <string name="folder_copy_finished_dialog_message">Το περιεχόμενο του φακέλου %1$s αντιγράφηκε στο %2$s.\n\n%3$s από %4$s και %5$s από %6$s υποβλήθηκαν σε επεξεργασία.</string>
+    <string name="folder_move_finished_dialog_message">Το περιεχόμενο του φακέλου %1$s μεταφέρθηκε σε %2$s.\n\n%3$s από %4$s και %5$s από %6$s υποβλήθηκαν σε επεξεργασία.</string>
+    <string name="folder_copy_move_finished_dialog_message_failure">Η λειτουργία απέτυχε με τον κωδικό %1$s κατά την επεξεργασία του αρχείου %2$s.</string>
+    <string name="folder_move_finished_dialog_tap">Πατήστε \'ok\' για να οριστικοποιήσετε την αλλαγή φακέλου.</string>
+    <plurals name="file_count">
+        <item quantity="one">%1$d αρχείο</item>
+        <item quantity="other">%1$d αρχεία</item>
+    </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">Εξουσιοδοτήστε το c:geo</string>
     <string name="auth_check">Έλεγχος διαπίστευσης</string>
@@ -1191,6 +1209,7 @@
     <string name="map_live_disable">Απενεργοποίηση live</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
+    <string name="map_routing">Δρομολόγηση (Τρέχουσα: %s)</string>
     <string name="map_routing_brouter">Η δρομολόγηση είναι διαθέσιμη μόνο εάν το <a href="">BRouter</a> είναι εγκατεστημένο</string>
     <string name="map_gm_autorotation">Αυτόματη περιστροφή χάρτη</string>
     <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
@@ -1776,6 +1795,10 @@
     <string name="switch_default">(Προεπιλογή)</string>
     <string name="yes">Ναι</string>
     <string name="no">Όχι</string>
+    <string name="routingmode_straight">Ευθεία</string>
+    <string name="routingmode_walk">Περπάτημα</string>
+    <string name="routingmode_bike">Ποδήλατο</string>
+    <string name="routingmode_car">Αυτοκίνητο</string>
     <!-- view settings -->
     <string name="view_settings">Ρυθμίσεις προβολής</string>
     <string name="delete_setting">Διαγραφή ρύθμισης</string>
@@ -1847,18 +1870,16 @@
     <string name="export_individualroute_success">Εξαγωγή μεμονωμένης διαδρομής στο \"%s\"</string>
     <!-- install wizard -->
     <string name="wizard">Οδηγός ρυθμίσεων</string>
-    <string name="previous">Προηγούμενο</string>
-    <string name="skip">Παράλειψη</string>
-    <string name="next">Επόμενο</string>
-    <string name="done">Ολοκληρώθηκε</string>
-    <string name="finish">Ολοκληρώθηκε</string>
     <string name="wizard_welcome_title">Καλώς ήλθατε στο c:geo</string>
+    <string name="wizard_migration_title">μετεγκατάσταση φακέλου c:geo</string>
     <string name="wizard_intro">Χρειάζονται μόνο μερικά βήματα για να ρυθμίσετε το c:geo ώστε να ξεκινήσετε. Να σας βοηθήσω με αυτό;</string>
     <string name="wizard_intro_returning">Καλώς ήρθατε πίσω στον οδηγό ρυθμίσεων. Η ρύθμιση του c:geo δεν έχει ολοκληρωθεί, να σας βοηθήσω να την ολοκληρώσετε ώστε να ξεκινήσετε; Χρειάζονται μόνο λίγα βήματα.</string>
+    <string name="wizard_intro_migration">Λόγω εσωτερικών αλλαγών στο σύστημα αδειών Android, πρέπει να σας ζητήσω δικαιώματα πρόσβασης σε ορισμένους φακέλους δεδομένων c:geo. Θα σας καθοδηγήσω σε αυτό το βήμα προς βήμα.</string>
     <string name="wizard_outro_ok">Ευχαριστούμε για τη διαμόρφωση του c:geo.\nΚαλή διασκέδαση!</string>
     <string name="wizard_outro_error">Μη ολοκληρωμένη ρύθμιση παραμέτρων\nΔεν θα λειτουργήσουν όλα τα μέρη του c:geo όπως αναμενόταν!</string>
     <string name="wizard_permissions_title">Ορισμός δικαιωμάτων εφαρμογών</string>
     <string name="wizard_permissions_intro">Το c:geo χρειάζεται συγκεκριμένα δικαιώματα στην συσκευή σας για να λειτουργήσει ορθά.\nΘα σας εξηγήσω περισσότερες λεπτομέρειες στα επόμενα βήματα.</string>
+    <string name="wizard_mapfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση αρχείων χαρτών εκτός σύνδεσης. Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.</string>
     <string name="wizard_platforms_title">Ρύθμιση υπηρεσιών</string>
     <string name="wizard_platforms_intro">Για να βρείτε κρύπτες με το c:geo χρειάζεστε ένα λογαριασμό για μια υπηρεσία geocaching που υποστηρίζεται από το c:geo.\nΕπιλέξτε την επιθυμητή υπηρεσία παρακάτω για να συνδεθείτε με τον υπάρχοντα λογαριασμό σας ή να δημιουργήσετε ένα νέο λογαριασμό.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1875,4 +1896,10 @@
     <string name="wizard_status_storage_permission">Άδεια αποθήκευσης</string>
     <string name="wizard_status_location_permission">Άδεια τοποθεσίας</string>
     <string name="wizard_status_platform">Υπηρεσίες Geocaching</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">Προηγούμενο</string>
+    <string name="skip">Παράλειψη</string>
+    <string name="next">Επόμενο</string>
+    <string name="done">Ολοκληρώθηκε</string>
+    <string name="finish">Ολοκληρώθηκε</string>
 </resources>

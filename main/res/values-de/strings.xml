@@ -153,8 +153,7 @@
     <string name="log_problem_archive_label">Cache sollte archiviert werden</string>
     <string name="log_problem_archive_text">Dieser Geocacher hat gemeldet, dass dieser Cache archiviert werden sollte. Ein Reviewer wurde benachrichtigt.</string>
     <string name="log_image_scale_option_noscaling">Keine Skalierung</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Übersetze in %s</string>
@@ -806,7 +805,6 @@
     <string name="contentstorage_selectfolder_dialog_title">Ordner ändern %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">Der Ordner %1$s ist derzeit auf \'%2$s\' gesetzt und enthält %3$s und %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Du kannst den Standardordner \'%s\' verwenden oder einen benutzerdefinierten Ordner wählen.</string>
-    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Bitte wähle, ob c:geo deine Inhalte in den neuen Ordner kopieren/verschieben soll:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nichts tun</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kompletten Inhalt kopieren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Kompletten Inhalt verschieben</string>
@@ -814,7 +812,6 @@
     <string name="contentstorage_folder_selection_success">Ordner auf \'%s\' gesetzt</string>
     <string name="contentstorage_file_selection_aborted">Dateiauswahl abgebrochen</string>
     <string name="contentstorage_file_selection_success">Datei ausgewählt: \'%s\'</string>
-    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Ordner %1$s: \'%2$s\' ist nicht zugreifbar, falle zurück auf \'%3$s\'</string>
     <string name="contentstorage_err_read_failed">Datei \'%s\' konnte nicht gelesen werden</string>
     <string name="contentstorage_err_write_failed">Datei \'%s\' konnte nicht geschrieben werden</string>
     <string name="contentstorage_err_create_failed">Datei \'%1$s\' in \'%2$s\' konnte nicht erstellt werden</string>
@@ -1898,11 +1895,6 @@
     <string name="export_individualroute_success">Individuelle Route nach \"%s\" exportiert</string>
     <!-- install wizard -->
     <string name="wizard">Konfigurations-Assistent</string>
-    <string name="previous">Zurück</string>
-    <string name="skip">Überspringen</string>
-    <string name="next">Weiter</string>
-    <string name="done">Fertig</string>
-    <string name="finish">Fertig</string>
     <string name="wizard_welcome_title">Willkommen bei c:geo</string>
     <string name="wizard_migration_title">c:geo Ordner-Migration</string>
     <string name="wizard_intro">Nur ein paar Schritte sind nötig, um c:geo zu konfigurieren und loszulegen. Soll ich dir dabei helfen?</string>
@@ -1912,7 +1904,6 @@
     <string name="wizard_outro_error">Konfiguration unvollständig\nc:geo wird nicht überall wie erwartet funktionieren!</string>
     <string name="wizard_permissions_title">App-Berechtigungen</string>
     <string name="wizard_permissions_intro">c:geo benötigt bestimmte Berechtigungen auf deinem Gerät, um korrekt zu funktionieren.\nIch werde weitere Details in den nächsten Schritten erklären.</string>
-    <string name="wizard_basefolder_request_explanation">c:geo benötigt einen lokalen Ordner, um Daten wie GPX-Dateien, Sicherungen und Feldnotizen zu speichern. Wähle oder erstelle einen solchen Ordner im nächsten Schritt.\nWenn du c:geo von einer früheren Version aktualisiert hast, wähle den existierenden Ordner \"cgeo\" auf der untersten Ebene deines Gerätespeichers.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo benötigt einen Ordner für Offline-Kartendateien. Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo benötigt einen Ordner für GPX-Dateien (z.B. zum Import / Export von Caches oder Tracks). Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
     <string name="wizard_platforms_title">Dienste konfigurieren</string>
@@ -1932,4 +1923,10 @@
     <string name="wizard_status_location_permission">Standortberechtigung</string>
     <string name="wizard_status_basefolder">Basisordner</string>
     <string name="wizard_status_platform">Geocaching-Dienste</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">Zurück</string>
+    <string name="skip">Überspringen</string>
+    <string name="next">Weiter</string>
+    <string name="done">Fertig</string>
+    <string name="finish">Fertig</string>
 </resources>

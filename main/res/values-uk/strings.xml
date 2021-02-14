@@ -147,8 +147,7 @@
     <string name="log_problem_archive_label">Кеш повинен бути заархівований</string>
     <string name="log_problem_archive_text">Цей геокешер повідомив, що цей геокеш повинен бути заархівований. Повідомлено громадського рецензента-волонтера.</string>
     <string name="log_image_scale_option_noscaling">Відсутність масштабування</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Імідж</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Перекласти на %s</string>
@@ -1664,10 +1663,6 @@
     <string name="export_individualroute_success">Експортовано окремий маршрут до \"%s\"</string>
     <!-- install wizard -->
     <string name="wizard">Майстер налаштувань</string>
-    <string name="previous">Попередній</string>
-    <string name="skip">Пропустити</string>
-    <string name="next">Наступний</string>
-    <string name="finish">Закінчити</string>
     <string name="wizard_welcome_title">Вітаємо в c:geo</string>
     <string name="wizard_outro_ok">Дякуємо за налаштування c:geo.\nРозважайтеся!</string>
     <string name="wizard_outro_error">Неповна конфігурація\nНе всі частини c:geo будуть працювати належним чином!</string>
@@ -1681,4 +1676,9 @@
     <string name="wizard_status_title">Налаштування статусу</string>
     <string name="wizard_status_storage_permission">Дозвіл на зберігання</string>
     <string name="wizard_status_location_permission">Дозвіл на доступ до геоданих</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">Попередній</string>
+    <string name="skip">Пропустити</string>
+    <string name="next">Наступний</string>
+    <string name="finish">Закінчити</string>
 </resources>

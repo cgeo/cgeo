@@ -147,7 +147,7 @@
     <string name="log_problem_archive_label">Cache misst archivéiert ginn</string>
     <string name="log_problem_archive_text">Dëse Geocacher huet gemellt datt dëse Cache archivéiert misst ginn. Ee Reviewer gouf benoriichtegt.</string>
     <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Iwwersetzen op %s</string>
@@ -696,4 +696,5 @@
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- default actions in dialogs -->
 </resources>

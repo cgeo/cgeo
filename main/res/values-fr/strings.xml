@@ -147,7 +147,7 @@
     <string name="log_problem_archive_label">La cache devrait être archivée</string>
     <string name="log_problem_archive_text">Ce géocacheur a signalé que cette géocache doit être archivée. Un examinateur bénévole a été notifié.</string>
     <string name="log_image_scale_option_noscaling">Pas de mise à l\'échelle</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Image</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduire en %s</string>
@@ -1734,4 +1734,6 @@
     <string name="export_individualroute_title">Exporter un itinéraire individuel</string>
     <string name="export_individualroute_success">Itinéraire individuel exporté vers \"%s\"</string>
     <!-- install wizard -->
+    <string name="wizard_gpxfolder_request_explanation">c:geo utilise un dossier sur votre appareil pour stocker les fichiers GPX (par ex. pour importer/exporter des caches ou des traces). Sélectionnez ou créez ce dossier à l\'étape suivante.</string>
+    <!-- default actions in dialogs -->
 </resources>

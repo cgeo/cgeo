@@ -153,8 +153,7 @@
     <string name="log_problem_archive_label">Skrýša by mala byť archivovaná</string>
     <string name="log_problem_archive_text">Tento kešer nahlásil, že keška by mala byť archivovaná. Dobrovoľný reviewer komunity dostal oznámenie.</string>
     <string name="log_image_scale_option_noscaling">Bez zmeny mierky</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Obrázok</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
@@ -808,7 +807,6 @@
     <string name="contentstorage_selectfolder_dialog_title">Zmena priečinka %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">Priečinok %1$s je momentálne nastavený na \'%2$s\' a obsahuje %3$s a %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Môžete zvoliť predvolený priečinok \'%s\', prípadne vybrať používateľom určený priečinok.</string>
-    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Vyberte, či má aplikácia c:geo kopírovať/premiestniť váš obsah do nového priečinka:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nerobiť nič</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopírovať všetok obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Premiestniť všetok obsah</string>
@@ -816,7 +814,6 @@
     <string name="contentstorage_folder_selection_success">Priečinok nastavený na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Prerušenie výberu súboru</string>
     <string name="contentstorage_file_selection_success">Súbor vybraný: \'%s\'</string>
-    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Priečinok %1$s: \'%2$s\' nie je prístupný, vracia sa späť na \'%3$s\'</string>
     <string name="contentstorage_err_read_failed">Súbor \'%s\' sa nedá čítať</string>
     <string name="contentstorage_err_write_failed">Súbor \'%s\' sa nedá zapísať</string>
     <string name="contentstorage_err_create_failed">Súbor \'%1$s\' v \'%2$s\' sa nedá vytvoriť</string>
@@ -1950,11 +1947,6 @@
     <string name="export_individualroute_success">Exportovať individuálnu trasu do \"%s\"</string>
     <!-- install wizard -->
     <string name="wizard">Sprievodca konfiguráciou</string>
-    <string name="previous">Späť</string>
-    <string name="skip">Preskočiť</string>
-    <string name="next">Ďalej</string>
-    <string name="done">Hotovo</string>
-    <string name="finish">Dokončiť</string>
     <string name="wizard_welcome_title">Víta vás c:geo</string>
     <string name="wizard_migration_title">Prenos priečinka c:geo</string>
     <string name="wizard_intro">Len pár krokov treba na konfiguráciu c:geo a môžete ísť. Chcete s tým pomôcť?</string>
@@ -1964,9 +1956,7 @@
     <string name="wizard_outro_error">Neúplná konfigurácia\nNiektoré časti aplikácie c:geo nebudú fungovať podľa očakávania!</string>
     <string name="wizard_permissions_title">Nastaviť oprávnenia aplikácie</string>
     <string name="wizard_permissions_intro">Aplikácia c:geo vyžaduje na správne fungovanie niekoľko povolení na vašom zariadení.\nV ďalších krokoch vám ich vysvetlíme.</string>
-    <string name="wizard_basefolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie údajov, ako sú napríklad súbory GPX, zálohy a poznámky.V ďalšom kroku vyberte alebo vytvorte takýto priečinok.\nAk ste inovovali aplikáciu c:geo z predchádzajúcej verzie, vyberte existujúci priečinok \"cgeo\" v hlavnom priečinku ukladacieho priestoru zariadenia.</string>
     <string name="wizard_mapfolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie mapových súborov offline. V ďalšom kroku vyberte alebo vytvorte takýto priečinok.</string>
-    <string name="wizard_gpxfolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie súborov GPX, napr. na import/export kešiek alebo trás. V ďalšom kroku vyberte alebo vytvorte takýto priečinok.</string>
     <string name="wizard_platforms_title">Konfigurovať služby</string>
     <string name="wizard_platforms_intro">Na hľadanie kešiek s aplikáciou c\"geo je potrebný účet na geocachingovej službe podporovanej aplikáciou c:geo.\nVyberte dole požadovanú službu, do ktorej sa prihlásite, prípadne si vytvorte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1984,4 +1974,10 @@
     <string name="wizard_status_location_permission">Povolenie k polohe</string>
     <string name="wizard_status_basefolder">Hlavný priečinok</string>
     <string name="wizard_status_platform">Geocachingové služby</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">Späť</string>
+    <string name="skip">Preskočiť</string>
+    <string name="next">Ďalej</string>
+    <string name="done">Hotovo</string>
+    <string name="finish">Dokončiť</string>
 </resources>

@@ -147,7 +147,7 @@
     <string name="log_problem_archive_label">Geocache bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Billede</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversæt til %s</string>
@@ -1690,4 +1690,5 @@
     <string name="export_individualroute_title">Eksportér individuel rute</string>
     <string name="export_individualroute_success">Individuel rute eksporteret til \"%s\"</string>
     <!-- install wizard -->
+    <!-- default actions in dialogs -->
 </resources>

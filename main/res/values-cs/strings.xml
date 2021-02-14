@@ -153,8 +153,7 @@
     <string name="log_problem_archive_label">Keška by měla být archivována</string>
     <string name="log_problem_archive_text">Tento hráč oznámil, že keška by měla být archivována. Reviewer byl informován.</string>
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Přeložit do %s</string>
@@ -808,7 +807,6 @@
     <string name="contentstorage_selectfolder_dialog_title">Změnit složku %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">Složka %1$s je aktuálně nastavena na \'%2$s\' a obsahuje %3$s a %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Můžete zvolit výchozí složku \'%s\' nebo vybrat uživatelem definovanou složku.</string>
-    <string name="contentstorage_selectfolder_dialog_msg_moveorcopy">Vyberte, zda má c:geo zkopírovat/přesunout váš obsah do nové složky:</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nedělat nic</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopírovat veškerý obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Přesunout veškerý obsah</string>
@@ -816,7 +814,6 @@
     <string name="contentstorage_folder_selection_success">Složka nastavena na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Přerušení výběru souboru</string>
     <string name="contentstorage_file_selection_success">Vybraný soubor: \'%s\'</string>
-    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Složka %1$s: \'%2$s\' není přístupná, zpět na \'%3$s\'</string>
     <string name="contentstorage_err_read_failed">Soubor \'%s\' nelze přečíst</string>
     <string name="contentstorage_err_write_failed">Soubor \'%s\' nelze zapsat</string>
     <string name="contentstorage_err_create_failed">Soubor \'%1$s\' v \'%2$s\' nelze vytvořit</string>
@@ -1950,11 +1947,6 @@
     <string name="export_individualroute_success">Individuální trasa exportována do \"%s\"</string>
     <!-- install wizard -->
     <string name="wizard">Průvodce konfigurací</string>
-    <string name="previous">Předchozí</string>
-    <string name="skip">Přeskočit</string>
-    <string name="next">Další</string>
-    <string name="done">Hotovo</string>
-    <string name="finish">Dokončit</string>
     <string name="wizard_welcome_title">Vítejte v c:geo</string>
     <string name="wizard_migration_title">Přenos složek c:geo</string>
     <string name="wizard_intro">Pro nastavení c:geo je potřeba jen pár kroků. Měl bych vám s tím pomoci?</string>
@@ -1964,7 +1956,6 @@
     <string name="wizard_outro_error">Nedokončená konfigurace\nNěkteré části c:geo nebudou pracovat podle očekávání!</string>
     <string name="wizard_permissions_title">Nastavit oprávnění aplikace</string>
     <string name="wizard_permissions_intro">Aplikace c:geo vyžaduje na správné fungování několik povolení na vašem zařízení.\nV dalších krocích vám je vysvětlíme.</string>
-    <string name="wizard_basefolder_request_explanation">c:geo potřebuje místní složku k ukládání dat, jako jsou soubory GPX, zálohy a poznámky z terénu. V dalším kroku vyberte nebo vytvořte takovou složku.\nPokud jste aktualizovali c:geo z předchozí verze, vyberte existující složku „cgeo“ na interním úložišti vašeho zařízení.</string>
     <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
     <string name="wizard_gpxfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání GPX souborů, například pro import / export kešek nebo tras. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
     <string name="wizard_platforms_title">Konfigurace služeb</string>
@@ -1984,4 +1975,10 @@
     <string name="wizard_status_location_permission">Povolení k poloze</string>
     <string name="wizard_status_basefolder">Základní složka</string>
     <string name="wizard_status_platform">Geocachingové služby</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">Předchozí</string>
+    <string name="skip">Přeskočit</string>
+    <string name="next">Další</string>
+    <string name="done">Hotovo</string>
+    <string name="finish">Dokončit</string>
 </resources>

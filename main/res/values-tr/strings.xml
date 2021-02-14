@@ -57,6 +57,7 @@
     <string name="wpnew_final">Final</string>
     <string name="wpnew_stage">Adım</string>
     <string name="wpnew_pkg">Park alanı</string>
+    <string name="wpnew_waypoint">İşaretçi</string>
     <string name="wpnew_original">Orijinal</string>
     <!-- logs -->
     <string name="log_found">Buldum</string>
@@ -151,8 +152,7 @@
     <string name="log_problem_archive_label">Geocache arşivlenmeli</string>
     <string name="log_problem_archive_text">Bu Geocacher kutunun arşivlenmesi gerektiğini bildirdi. Bununla ilgili olarak Gönüllü Denetçi bilgilendirilecek.</string>
     <string name="log_image_scale_option_noscaling">Ölçeklendirme yok</string>
-    <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d kB, %4$s</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Resim</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s\'e çevir</string>
@@ -382,9 +382,12 @@
     <string name="caches_clear_offlinelogs_message">Çevrimdışı kayıtları temizlemek istiyor musunuz?</string>
     <string name="caches_clear_offlinelogs_progress">Çevrimdışı kayıtlar temizleniyor</string>
     <string name="caches_set_cache_icon">Geocache simgelerini seç</string>
+    <string name="caches_reset_cache_icons_title">Cache simgelerini sıfırla</string>
+    <string name="caches_reset_cache_icons">Tüm seçilenler için Geocache simgelerini sıfırlamak istiyor musunuz?</string>
     <string name="caches_make_list_unique">Listeyi özgün kıl</string>
     <string name="caches_set_listmarker">İşaretleyici ayarla</string>
     <string name="select_icon">Simge seç</string>
+    <string name="onetime_missing_unicode_info">Android sürümünüz, desteklenen simgelerin otomatik olarak algılanmasını desteklemiyor - bazı karakterler eksik olabilir</string>
     <!-- caches lists -->
     <string name="menu_lists">Listeleri yönet</string>
     <string name="list_menu_create">Yeni liste oluştur</string>
@@ -449,6 +452,7 @@
     <string name="settings_title_cachedetails">Geocache Ayrıntıları</string>
     <string name="settings_summary_cachedetails">Geocache bilgilerinin görüntülenmesini özelleştirin.</string>
     <string name="settings_title_offlinedata">Çevrimdışı Veri</string>
+    <string name="settings_summary_offlinedata">Çevrimdışı kullanım için kaydedilecek verileri, depolama konumunu ve GPX dosyaları için klasörleri yapılandırın.</string>
     <string name="settings_title_logging">Kayıt</string>
     <string name="settings_summary_logging">İmzanızı yapılandırın ve kayıt seçeneklerini ayarlayın.</string>
     <string name="settings_title_map">Harita</string>
@@ -459,9 +463,11 @@
     <string name="settings_title_map_content">Harita içeriği</string>
     <string name="settings_title_map_behavior">Harita davranışı</string>
     <string name="settings_title_gpx">GPX</string>
+    <string name="settings_title_data_dir">Geocache veri klasörü</string>
     <string name="calculate_dataDir_title">Geocache veri kullanımı</string>
     <string name="calculate_dataDir">Geocache disk kullanımı hesaplanıyor</string>
     <string name="settings_data_dir_item">%1$s (%2$s ücretsiz)</string>
+    <string name="confirm_data_dir_move_title">Geocache veri klasörü taşınsın mı?</string>
     <string name="confirm_data_dir_move">Geocache verilerini taşımak, cihaz ve veri büyüklüğünün durumuna göre uzun sürebilir.</string>
     <string name="settings_title_basicmembers">Temel üyeler için seçenekler</string>
     <string name="settings_title_navigation">Navigasyon</string>
@@ -639,6 +645,8 @@
     <string name="settings_info_themes_title">Harita temalarının bilgisi</string>
     <string name="settings_info_themes">c:geo çevrimdışı haritalar için özel temaları destekler. Bunlar, haritanın renk stilini değiştirmek (örn.bir gece görüş haritasına sahip olmak) veya harita içindeki döngü yolları veya yükseklik çizgileri gibi belirli nesneleri vurgulamak için kullanılabilir.</string>
     <string name="init_mapsource_select">Harita kaynağı seçin</string>
+    <string name="init_gpx_importexportdir">GPX Dizini</string>
+    <string name="init_dataDir">Data klasörünü seç</string>
     <string name="init_dataDir_note">Geocache için ek verileri (ipucu görselleri, kayıt görselleri, …) harici deponuzda saklamak isteyebilirsiniz. (Cihazınıza bağlı benzetilmiş veya gerçek harici hafıza kartı).</string>
     <string name="init_maptrail">Geçmiş İz\'i göster</string>
     <string name="init_maptrail_length">İz geçmişi maksimum uzunluğu</string>
@@ -730,6 +738,7 @@
     <string name="feature_favorite">Favorilere Geocache ekleme</string>
     <string name="feature_voting">Geocache\'ler için oylama</string>
     <string name="init_maplines_title">Harita çizgilerinin özelleştirilmesi</string>
+    <string name="init_map_other">Diğer</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Mesafe bildirimi</string>
     <string name="init_proximityNotificationGeneral">Haritada genel mesafe bildirimi</string>
@@ -762,8 +771,36 @@
     <string name="sendToCgeo_download_fail">c:geo, Geocache\'leri indirmekte başarısız oldu. İnternet bağlantısı yok veya send2cgeo çalışmıyor.</string>
     <string name="sendToCgeo_no_registration">c:geo, Geocache\'leri indirmekte başarısız oldu. Send2cgeo için kayıt süresi doldu. Lütfen ayarları kaydedin.</string>
     <!-- Content Storage -->
+    <string name="contentstorage_selectfolder_dialog_title">%s Klasörünü Değiştir</string>
+    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Hiç bir şey yapma</string>
+    <string name="contentstorage_selectfolder_dialog_choice_copy">Tüm içeriği kopyala</string>
+    <string name="contentstorage_selectfolder_dialog_choice_move">Tüm içeriği taşı</string>
+    <string name="contentstorage_folder_selection_success">Klasör \'%s\' olarak ayarlandı</string>
+    <string name="contentstorage_file_selection_success">Seçili dosya: \'%s\'</string>
     <!-- Persistable Folders -->
+    <string name="persistablefolder_usertype_userdefined">Kullanıcı tanımlı</string>
+    <string name="persistablefolder_usertype_default">Varsayılan</string>
+    <string name="persistablefolder_pickfolder">Klasör seç</string>
+    <string name="persistablefolder_usedefault">Varsayılanı kullan</string>
+    <string name="persistablefolder_offline_maps">Çevrimdışı Haritalar</string>
+    <string name="persistablefolder_offline_maps_themes">Harita Temaları</string>
+    <string name="persistablefolder_gpx">GPX</string>
+    <string name="persistablefolder_backup">Yedek</string>
+    <string name="persistablefolder_logfiles">Kayıt dosyası</string>
+    <string name="persistablefolder_fieldnotes">Saha Notları</string>
     <!-- FolderUtils -->
+    <string name="folder_copy_progressbar_title">%1$s\'nın içeriği %2$s\'e kopyalanıyor</string>
+    <string name="folder_copy_progressbar_status_done">Kopyalandı %1$s/%2$s, %3$s/%4$s</string>
+    <string name="folder_move_progressbar_title">%1$s\'nın içeriği %2$s\'e taşınıyor</string>
+    <string name="folder_move_progressbar_status_done">Taşındı %1$s/%2$s, %3$s/%4$s</string>
+    <plurals name="file_count">
+        <item quantity="one">%1$d dosya</item>
+        <item quantity="other">%1$d dosya</item>
+    </plurals>
+    <plurals name="folder_count">
+        <item quantity="one">%1$d klasör</item>
+        <item quantity="other">%1$d klasör</item>
+    </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">c:geo\'yu yetkilendir</string>
     <string name="auth_check">Kimliği doğrulayın</string>
@@ -840,6 +877,7 @@
     <string name="cache_personal_note_edit">Düzenle</string>
     <string name="cache_personal_note_storewaypoints">Yol Noktaları Ekleme/Güncelleme</string>
     <string name="cache_personal_note_removewaypoints">Yol noktalarını kaldır</string>
+    <string name="cache_personal_note_removedwaypoints">Yol noktası kaldırıldı</string>
     <string name="cache_personal_note_storewaypoints_success">Kişisel nokta ara noktalar eklendi</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Yol noktaları notlara eklendi fakat kısaltıldı (max kişisel not boyutu:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Yol noktaları boyut sınırlamalarından dolayı notlarda saklanamaz (max kişisel not boyutu:%1$d)</string>
@@ -931,6 +969,7 @@
     <string name="cache_menu_event">Takvime ekle</string>
     <string name="cache_menu_extract_waypoints">Yol noktalarını çıkart</string>
     <string name="cache_menu_set_cache_icon">Geocache simgesi seç</string>
+    <string name="cache_icon_updated">Cache simgesi güncellendi</string>
     <string name="cache_menu_details">Detaylar</string>
     <string name="cache_menu_refresh">Yenile</string>
     <string name="cache_menu_share">Geocache\'i paylaş</string>
@@ -1029,6 +1068,7 @@
     <string name="lowercase">küçük harf</string>
     <!-- editor dialog -->
     <!-- simple dir / file chooser -->
+    <string name="simple_dir_chooser_title">Klasör seç</string>
     <string name="simple_dir_chooser_current_path">Yol:</string>
     <string name="simple_dir_chooser_invalid_path">Geçersiz Yol</string>
     <!-- gpx -->
@@ -1204,6 +1244,7 @@
     <string name="compass_title">Pusula</string>
     <string name="use_gps">Sadece GPS kullanıldı</string>
     <string name="destination_select">Varış yeri seç</string>
+    <string name="navigation_direct_navigation">Doğrudan navigasyon</string>
     <string name="osmand_marker_cgeo">c:geo\'dan yer işaretleyicisi</string>
     <string name="device_heading_label">Cihaz:</string>
     <string name="device_orientation">Yönlendirme</string>
@@ -1516,6 +1557,7 @@
     <string name="support_title">Destek</string>
     <string name="website_title">İnternet Sitesi</string>
     <string name="facebook_link"><a href=""> c:geo sayfa</a></string>
+    <string name="fangroup_link"><a href="">Alman kullanıcı grubu</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">Google Play\'de c:geo</a></string>
     <string name="about_twitter"><b>c:geo</b> her Geocache\'e kayıt girişinizde Twitter\'da yeni bir durum paylaşmalı mı?</string>
@@ -1679,6 +1721,10 @@
     <string name="switch_default">(varsayılan)</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
+    <string name="routingmode_straight">Düz</string>
+    <string name="routingmode_walk">Yürüme</string>
+    <string name="routingmode_bike">Bisiklet</string>
+    <string name="routingmode_car">Araba</string>
     <!-- view settings -->
     <string name="view_settings">Görünüm ayarları</string>
     <string name="delete_setting">Ayarları sil</string>
@@ -1701,9 +1747,11 @@
     <string name="downloadmap_choose">Harita seç</string>
     <string name="downloadmap_filename">%s İndiriliyor</string>
     <string name="button_continue">Devam et</string>
+    <string name="downloadmap_onedirup">(bir seviye yukarı)</string>
     <string name="downloadmap_checkforupdates_button">Güncellemeleri denetle</string>
     <string name="downloadmap_available_updates">Mevcut güncellemeler</string>
     <string name="downloadmap_no_updates_found">Harita güncellemesi bulunamadı</string>
+    <string name="downloadmap_directory">klasör</string>
     <string name="downloadmap_mapfile">harita dosyası</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geçmiş İz\'i sil</string>
@@ -1719,11 +1767,6 @@
     <string name="export_individualroute_title">Özel rotayı dışa aktar</string>
     <!-- install wizard -->
     <string name="wizard">Yapılandırma sihirbazı</string>
-    <string name="previous">Önceki</string>
-    <string name="skip">Geç</string>
-    <string name="next">Sonraki</string>
-    <string name="done">Tamamlandı</string>
-    <string name="finish">Bitir</string>
     <string name="wizard_welcome_title">c:geo\'ya hoşgeldiniz</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_welcome_advanced">Gelişmiş yapılandırma</string>
@@ -1731,4 +1774,11 @@
     <string name="wizard_advanced_restore_label">Geri Yükle</string>
     <string name="status_not_ok">HATA</string>
     <string name="wizard_status_title">Yapılandırma durumu</string>
+    <string name="wizard_status_storage_permission">Bellek izni</string>
+    <!-- default actions in dialogs -->
+    <string name="previous">Önceki</string>
+    <string name="skip">Geç</string>
+    <string name="next">Sonraki</string>
+    <string name="done">Tamamlandı</string>
+    <string name="finish">Bitir</string>
 </resources>
