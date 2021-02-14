@@ -371,6 +371,8 @@
     <string name="caches_nearby">Nearby</string>
     <string name="caches_remove_all">Remove all</string>
     <string name="caches_remove_selected">Remove selected</string>
+    <string name="caches_remove_all_completely">Delete all from device</string>
+    <string name="caches_remove_selected_completely">Delete selected from device</string>
     <string name="caches_delete_events">Delete past events</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
