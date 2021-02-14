@@ -485,6 +485,12 @@ public class DataStore {
         return dbVersion;
     }
 
+    public static int getActualDBVersion() {
+        init();
+        return database == null ? -1 : database.getVersion();
+
+    }
+
     public static boolean versionsAreCompatible(final SQLiteDatabase databaseToCheck, final int oldVersion, final int newVersion) {
         if (newVersion < oldVersion) {
             final Set<Integer> downgradeableVersions = DBDowngradeableVersions.load(databaseToCheck);
