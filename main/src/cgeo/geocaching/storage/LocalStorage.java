@@ -49,7 +49,6 @@ public final class LocalStorage {
     private static final String GPX_DIR_NAME = "gpx";
     private static final String FIELD_NOTES_DIR_NAME = "field-notes";
     private static final String LEGACY_CGEO_DIR_NAME = ".cgeo";
-    private static final String GEOCACHE_PHOTOS_DIR_NAME = "GeocachePhotos";
     private static final String GEOCACHE_DATA_DIR_NAME = "GeocacheData";
     private static final String OFFLINE_LOG_IMAGES_DIR_NAME = "OfflineLogImages";
     private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MB in bytes
@@ -332,16 +331,6 @@ public final class LocalStorage {
     @NonNull
     public static File getGeocacheDataDirectory() {
         return new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
-    }
-
-    @NonNull
-    public static File getLocalSpoilersDirectory() {
-        return new File(getExternalPublicCgeoDirectory(), GEOCACHE_PHOTOS_DIR_NAME);
-    }
-
-    @NonNull
-    public static File getLegacyLocalSpoilersDirectory() {
-        return new File(Environment.getExternalStorageDirectory(), GEOCACHE_PHOTOS_DIR_NAME);
     }
 
     public static void deleteFilesOrDirectories(final File[] files) {

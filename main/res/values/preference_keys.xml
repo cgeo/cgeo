@@ -270,6 +270,7 @@
     <string translatable="false" name="pref_persistablefolder_gpx">persistablefolder_gpx</string>
     <string translatable="false" name="pref_persistablefolder_backup">persistablefolder_backup</string>
     <string translatable="false" name="pref_persistablefolder_fieldnotes">persistablefolder_fieldnotes</string>
+    <string translatable="false" name="pref_persistablefolder_spoilerimages">persistablefolder_spoilerimages</string>
     <string translatable="false" name="pref_persistablefolder_testdir">persistablefolder_testdir</string>
 
     <!-- ids for persistable uri prefs -->

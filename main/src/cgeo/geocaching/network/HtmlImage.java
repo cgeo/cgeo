@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.DisplayUtils;
@@ -12,6 +13,7 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.ImageUtils.ContainerDrawable;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils.ObservableCache;
+import cgeo.geocaching.utils.UriUtils;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -25,10 +27,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
@@ -207,6 +207,14 @@ public class HtmlImage implements Html.ImageGetter {
         if (FileUtils.isFileUrl(url)) {
             return Observable.defer(() -> {
                 final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
+                return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.empty();
+            }).subscribeOn(AndroidRxUtils.computationScheduler);
+        }
+        // Content Uris are also loaded regardless of their age (needed for spoiler images)
+        final Uri uri = Uri.parse(url);
+        if (UriUtils.isContentUri(uri)) {
+            return Observable.defer(() -> {
+                final Bitmap bitmap = loadCachedImage(uri, true, -1).left;
                 return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.empty();
             }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
@@ -399,42 +407,57 @@ public class HtmlImage implements Html.ImageGetter {
      */
     @NonNull
     private ImmutablePair<Bitmap, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
-        // An image is considered fresh enough if the image exists and one of those conditions is true:
-        //  - forceKeep is true and the image has not been modified in the last 24 hours, to avoid reloading shared images;
-        //    with every refreshed cache;
-        //  - forceKeep is true and userInitiatedRefresh is false, as shared images are unlikely to change at all;
-        //  - userInitiatedRefresh is false and the image has not been modified in the last 24 hours.
-        if (file.exists()) {
-            final boolean recentlyModified = file.lastModified() > (System.currentTimeMillis() - (24 * 60 * 60 * 1000));
-            final boolean freshEnough = (forceKeep && (recentlyModified || !userInitiatedRefresh)) ||
-                    (recentlyModified && !userInitiatedRefresh);
-            if (freshEnough && onlySave) {
-                return ImmutablePair.of((Bitmap) null, true);
-            }
-            final BitmapFactory.Options bfOptions = new BitmapFactory.Options();
-            bfOptions.inTempStorage = new byte[16 * 1024];
-            bfOptions.inPreferredConfig = Bitmap.Config.RGB_565;
-            setSampleSize(file, bfOptions);
-            final Bitmap image = BitmapFactory.decodeFile(file.getPath(), bfOptions);
-            if (image == null) {
-                Log.e("Cannot decode bitmap from " + file.getPath());
-                return ImmutablePair.of((Bitmap) null, false);
-            }
-            return ImmutablePair.of(image, freshEnough);
+        if (file.isFile()) {
+            return loadCachedImage(Uri.fromFile(file), forceKeep, file.lastModified());
         }
         return ImmutablePair.of((Bitmap) null, false);
     }
 
-    private void setSampleSize(final File file, final BitmapFactory.Options bfOptions) {
+    @NonNull
+    private ImmutablePair<Bitmap, Boolean> loadCachedImage(final Uri uri, final boolean forceKeep, final long lastModified) {
+
+    // An image is considered fresh enough if the image exists and one of those conditions is true:
+        //  - forceKeep is true and the image has not been modified in the last 24 hours, to avoid reloading shared images;
+        //    with every refreshed cache;
+        //  - forceKeep is true and userInitiatedRefresh is false, as shared images are unlikely to change at all;
+        //  - userInitiatedRefresh is false and the image has not been modified in the last 24 hours.
+        final boolean recentlyModified = lastModified > 0 && lastModified > (System.currentTimeMillis() - (24 * 60 * 60 * 1000));
+        final boolean freshEnough = (forceKeep && (recentlyModified || !userInitiatedRefresh)) ||
+                (recentlyModified && !userInitiatedRefresh);
+        if (freshEnough && onlySave) {
+            return ImmutablePair.of((Bitmap) null, true);
+        }
+        final BitmapFactory.Options bfOptions = new BitmapFactory.Options();
+        bfOptions.inTempStorage = new byte[16 * 1024];
+        bfOptions.inPreferredConfig = Bitmap.Config.RGB_565;
+        setSampleSize(uri, bfOptions);
+        final InputStream imageStream = ContentStorage.get().openForRead(uri);
+        if (imageStream == null) {
+            Log.i("Cannot open file from " + uri + ", maybe it doesnt exist");
+            return ImmutablePair.of((Bitmap) null, false);
+        }
+        final Bitmap image = BitmapFactory.decodeStream(imageStream, null, bfOptions);
+        if (image == null) {
+            Log.e("Cannot decode bitmap from " + uri);
+            return ImmutablePair.of((Bitmap) null, false);
+        }
+        return ImmutablePair.of(image, freshEnough);
+    }
+
+    private void setSampleSize(final Uri uri, final BitmapFactory.Options bfOptions) {
         //Decode image size only
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
 
-        BufferedInputStream stream = null;
+        InputStream stream = null;
         try {
-            stream = new BufferedInputStream(new FileInputStream(file));
+            stream = ContentStorage.get().openForRead(uri);
+            if (stream == null) {
+                Log.i("Cannot open file from " + uri + ", maybe it doesnt exist");
+                return;
+            }
             BitmapFactory.decodeStream(stream, null, options);
-        } catch (final FileNotFoundException e) {
+        } catch (final Exception e) {
             Log.e("HtmlImage.setSampleSize", e);
         } finally {
             IOUtils.closeQuietly(stream);
