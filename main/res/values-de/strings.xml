@@ -153,7 +153,9 @@
     <string name="log_problem_archive_label">Cache sollte archiviert werden</string>
     <string name="log_problem_archive_text">Dieser Geocacher hat gemeldet, dass dieser Cache archiviert werden sollte. Ein Reviewer wurde benachrichtigt.</string>
     <string name="log_image_scale_option_noscaling">Keine Skalierung</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\nSkaliert/Komprimiert:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Übersetze in %s</string>
@@ -770,6 +772,8 @@
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
+    <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
+    <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Annäherungsbenachrichtigung</string>
     <string name="init_proximityNotificationGeneral">Allgemeine Benachrichtigung auf der Karte</string>
@@ -808,6 +812,8 @@
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nichts tun</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kompletten Inhalt kopieren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Kompletten Inhalt verschieben</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Keine weitere Aktion</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Du hast einen anderen als den aktuellen Ordner gewählt. Wie möchtest du weitermachen?\n\nOrdner auswählen und</string>
     <string name="contentstorage_folder_selection_aborted">Ordnerauswahl abgebrochen, der Ordner ist \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Ordner auf \'%s\' gesetzt</string>
     <string name="contentstorage_file_selection_aborted">Dateiauswahl abgebrochen</string>
