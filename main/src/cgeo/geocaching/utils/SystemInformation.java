@@ -110,13 +110,14 @@ public final class SystemInformation {
             .append("\n-------");
         appendPermissions(context, body);
         appendDirectory(body, "\n- System internal c:geo dir: ", LocalStorage.getInternalCgeoDirectory());
-        appendDirectory(body, "\n- User storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
+        appendDirectory(body, "\n- Legacy User storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\n- Geocache data: ", LocalStorage.getGeocacheDataDirectory());
         appendPublicFolders(body);
         body.append("\n- Map render theme path: ").append(Settings.getCustomRenderThemeFilePath());
         appendPersistedDocumentUris(body);
         appendPersistedUriPermission(body, context);
         appendDatabase(body);
+        appendSettings(body);
 
         body.append("\n--- End of system information ---\n");
         return body.toString();
@@ -125,12 +126,19 @@ public final class SystemInformation {
     private static void appendDatabase(@NonNull final StringBuilder body) {
         final File dbFile = DataStore.databasePath();
         body.append("\n- Database: ").append(dbFile)
-                .append(" (").append(Formatter.formatBytes(dbFile.length())).append(") on ")
+                .append(" (").append(versionInfoToString(DataStore.getActualDBVersion(), DataStore.getExpectedDBVersion()))
+                .append(", Size:").append(Formatter.formatBytes(dbFile.length())).append(") on ")
                 .append(Settings.isDbOnSDCard() ? "user storage" : "system internal storage");
     }
 
+    private static void appendSettings(@NonNull final StringBuilder body) {
+        body.append("\n -Settings: ").append(versionInfoToString(Settings.getActualVersion(), Settings.getExpectedVersion()))
+            .append(", Count:").append(Settings.getPreferencesCount());
+    }
+
     private static void appendDirectory(@NonNull final StringBuilder body, @NonNull final String label, @NonNull final File directory) {
-        body.append(label).append(directory).append(" (").append(Formatter.formatBytes(FileUtils.getFreeDiskSpace(directory))).append(" free)");
+        body.append(label).append(directory).append(" (").append(Formatter.formatBytes(FileUtils.getFreeDiskSpace(directory))).append(" free)")
+            .append(" ").append(versionInfoToString(LocalStorage.getCurrentVersion(), LocalStorage.getExpectedVersion()));
         try {
             if (directory.getAbsolutePath().startsWith(LocalStorage.getInternalCgeoDirectory().getAbsolutePath())) {
                 body.append(" internal");
@@ -138,6 +146,13 @@ public final class SystemInformation {
                 body.append(" external removable");
             } else {
                 body.append(" external non-removable");
+            }
+            if (directory.isDirectory()) {
+                body.append(" isDir(").append(directory.list().length).append(" entries)");
+            } else if (directory.isFile()) {
+                body.append(" isFile");
+            } else {
+                body.append(" notExisting");
             }
         } catch (final IllegalArgumentException ignored) {
             // thrown if the directory isn't pointing to an external storage
@@ -227,5 +242,10 @@ public final class SystemInformation {
                 body.append("unretrievable version (").append(e.getMessage()).append(')');
             }
         }
+    }
+
+    private static String versionInfoToString(final int actualVersion, final int expectedVersion) {
+        return "v" + actualVersion +
+            (actualVersion == expectedVersion ? "" : "[Expected v" + expectedVersion + "]");
     }
 }

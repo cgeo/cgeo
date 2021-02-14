@@ -129,14 +129,22 @@ public class Settings {
         throw new InstantiationError();
     }
 
+    public static int getActualVersion() {
+        return getInt(R.string.pref_settingsversion, 0);
+    }
+
+    public static int getExpectedVersion() {
+        return 5;
+    }
+
     private static void migrateSettings() {
         //NO migration in NO_APP_MODE
         if (NO_APPLICATION_MODE) {
             return;
         }
 
-        final int latestPreferencesVersion = 5;
-        final int currentVersion = getInt(R.string.pref_settingsversion, 0);
+        final int latestPreferencesVersion = getExpectedVersion();
+        final int currentVersion = getActualVersion();
 
         // No need to migrate if we are up to date.
         if (currentVersion == latestPreferencesVersion) {
@@ -291,6 +299,13 @@ public class Settings {
             e.putInt(getKey(R.string.pref_settingsversion), 4); // mark migrated
             e.apply();
         }
+
+        if (currentVersion < 5) {
+            // non-used version which spilled into the nightlies. Just mark as migrated
+            final Editor e = sharedPrefs.edit();
+            e.putInt(getKey(R.string.pref_settingsversion), 5);
+            e.apply();
+        }
     }
 
     private static String getKey(final int prefKeyId) {
@@ -316,6 +331,10 @@ public class Settings {
 
     private static int getInt(final int prefKeyId, final int defaultValue) {
         return sharedPrefs == null ? defaultValue : sharedPrefs.getInt(getKey(prefKeyId), defaultValue);
+    }
+
+    public static int getPreferencesCount() {
+        return sharedPrefs.getAll().size();
     }
 
     // workaround for int prefs, originally saved as string

@@ -397,6 +397,14 @@ public final class LocalStorage {
         });
     }
 
+    public static int getCurrentVersion() {
+        return Settings.getLocalStorageVersion();
+    }
+
+    public static int getExpectedVersion() {
+        return LOCALSTORAGE_VERSION;
+    }
+
     public static void migrateLocalStorage(final Activity activity) {
         final int currentVersion = Settings.getLocalStorageVersion();
 
