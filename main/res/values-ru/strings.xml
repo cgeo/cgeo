@@ -226,7 +226,6 @@
     <string name="warn_search_help_tb">Введите код трекабла. Например, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Пожалуйста, введите текст записи.</string>
     <string name="warn_load_images">c:geo не удалось загрузить изображения.</string>
-    <string name="warn_invalid_mapfile">Выбранный файл карты не является допустимым файлом mapsforge или использует неподдерживаемую версию.\n(c:geo в данный момент поддерживает v3-v5 / только v3 если вы используете параметр \"Старый Mapfsforge V3\".\n\nОффлайн карты недоступны.</string>
     <string name="warn_pocket_query_select">Не выбрана выборка.</string>
     <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
     <string name="warn_invalid_character">Символ должен быть буквой или цифрой</string>
