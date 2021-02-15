@@ -240,7 +240,6 @@
     <string name="warn_search_help_tb">Inserisci il codice del trackable. Per esempio \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Prego, inserire del testo nel log.</string>
     <string name="warn_load_images">c:geo non riesce a caricare immagini.</string>
-    <string name="warn_invalid_mapfile">Il file di mappa selezionato non è un file mappa mapsforge valido o utilizza una versione non supportata.\n(c:geo supporta attualmente dalla v3 alla v5 / v3 solo se si utilizza l\'impostazione \"Old Mapfsforge V3\").\n\nLe mappe offline non sono disponibili.</string>
     <string name="warn_pocket_query_select">Nessuna Pocket query selezionata.</string>
     <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
     <string name="warn_invalid_character">Il carattere deve essere una lettera o una cifra</string>
