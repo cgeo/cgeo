@@ -233,7 +233,6 @@
     <string name="warn_search_help_tb">추적아이템 코드를 입력하세요. 예 : \"TB29QMZ\"</string>
     <string name="warn_log_text_fill">로그에 내용을 입력해 주세요.</string>
     <string name="warn_load_images">이미지를 불러오지 못했습니다.</string>
-    <string name="warn_invalid_mapfile">선택한 맵 파일이 유효한 mapsforge 맵 파일이 아니거나 지원되지 않는 버전을 사용합니다. \n(c:geo는 현재 \"Old Mapfsforge V3\"설정을 사용하는 경우에만 v3 ~ v5/v3을 지원합니다.)\n\n 오프라인 맵을 사용할 수 없습니다.</string>
     <string name="warn_pocket_query_select">포켓쿼리를 선택하지 않았습니다.</string>
     <string name="warn_no_pocket_query_found">온라인에 포켓쿼리가 없습니다.</string>
     <string name="warn_invalid_character">문자 또는 숫자만 허용됩니다.</string>
