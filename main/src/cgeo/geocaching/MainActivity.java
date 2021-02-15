@@ -649,7 +649,6 @@ public class MainActivity extends AbstractActionBarActivity {
 
         if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown) {
 
-            backupUtils.moveBackupIntoNewFolderStructureIfNeeded();
             if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
 
                 restoreMessageShown = true;

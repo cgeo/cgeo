@@ -101,9 +101,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
      */
     private enum DirChooserType {
 
-        THEMES_DIR(3, R.string.pref_renderthemepath, "", false),
-        BACKUP_DIR(4, R.string.pref_fakekey_preference_restore_dirselect,
-                       LocalStorage.getBackupRootDirectory().getPath() + "/", false);
+        THEMES_DIR(3, R.string.pref_renderthemepath, "", false);
+
         public final int requestCode;
         public final int keyId;
         public final String defaultValue;
@@ -501,6 +500,12 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             return true;
         });
 
+        final Preference restoreFromDir = getPreference(R.string.pref_fakekey_preference_restore_dirselect);
+        restoreFromDir.setOnPreferenceClickListener(preference -> {
+            backupUtils.selectBackupDirIntent(contentStorageHelper);
+            return true;
+        });
+
         final CheckBoxPreference loginData = (CheckBoxPreference) getPreference(R.string.pref_backup_logins);
         loginData.setOnPreferenceClickListener(preference -> {
             if (Settings.getBackupLoginData()) {
@@ -510,7 +515,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             return true;
         });
 
-        backupUtils.moveBackupIntoNewFolderStructureIfNeeded();
         onPreferenceChange(getPreference(R.string.pref_fakekey_preference_restore), "");
 
         final BackupSeekbarPreference keepOld = (BackupSeekbarPreference) getPreference(R.string.pref_backups_backup_history_length);
@@ -783,11 +787,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         }
 
         if (resultCode != RESULT_OK) {
-            return;
-        }
-
-        if (requestCode == DirChooserType.BACKUP_DIR.requestCode) {
-            backupUtils.restore(new File(data.getData().getPath()));
             return;
         }
 

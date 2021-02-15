@@ -674,7 +674,8 @@
     <string name="restore_information">Please select what you want to restore:</string>
     <string name="init_restore_success">Restoration completed.</string>
     <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
-    <string name="init_restore_failed">Restoration failed.</string>
+    <string name="init_restore_db_failed">Restoration of the database has failed.</string>
+    <string name="init_restore_settings_failed">Restoration of program settings has failed.</string>
     <string name="init_restore_running">Restoring cache database…</string>
     <string name="init_restore_confirm">Database is empty. Do you want to restore the database backup?</string>
     <string name="init_backup_last">Available backup from</string>

@@ -42,6 +42,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -71,6 +72,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -111,9 +113,17 @@ public class DataStore {
     public static final String DB_FILE_NAME_BACKUP = "cgeo.sqlite";
     public static final String DB_FILE_CORRUPTED_EXTENSION = ".corrupted";
 
-    public static final int RESTORE_SUCCESSFUL = 1;
-    public static final int RESTORE_FAILED_GENERAL = 2;
-    public static final int RESTORE_FAILED_DBRECREATED = 3;
+    public enum DBRestoreResult {
+        RESTORE_SUCCESSFUL(R.string.init_restore_success),
+        RESTORE_FAILED_GENERAL(R.string.init_restore_db_failed),
+        RESTORE_FAILED_DBRECREATED(R.string.init_restore_failed_dbrecreated);
+
+        public final @StringRes int res;
+
+        DBRestoreResult(final int res) {
+            this.res = res;
+        }
+    }
 
     public enum StorageLocation {
         HEAP,
@@ -764,9 +774,9 @@ public class DataStore {
      */
     private static String recreateDatabase(final DbHelper dbHelper) {
         final File dbPath = databasePath();
-        final File corruptedPath = new File(LocalStorage.getBackupRootDirectory(), dbPath.getName() + DB_FILE_CORRUPTED_EXTENSION);
-        if (FileUtils.copy(dbPath, corruptedPath)) {
-            Log.i("DataStore.init: renamed " + dbPath + " into " + corruptedPath);
+        final Uri uri = ContentStorage.get().writeFileToFolder(PersistableFolder.BACKUP, FileNameCreator.forName(dbPath.getName() + DB_FILE_CORRUPTED_EXTENSION), dbPath, false);
+        if (uri != null) {
+            Log.i("DataStore.init: renamed " + dbPath + " into " + uri.getPath());
         } else {
             Log.e("DataStore.init: unable to move corrupted database");
         }
@@ -791,33 +801,18 @@ public class DataStore {
         database = null;
     }
 
-    @NonNull
-    public static File getBackupFileInternal(final File backupDir, final boolean checkDeprecated) {
-        final File currentBackupFile = new File(backupDir, DB_FILE_NAME_BACKUP);
-        if (!currentBackupFile.exists() && checkDeprecated) {
-            final File deprecatedBackupFile = new File(LocalStorage.getLegacyExternalCgeoDirectory(), DB_FILE_NAME_BACKUP);
-            if (deprecatedBackupFile.exists()) {
-                return deprecatedBackupFile;
-            }
-        }
-        return currentBackupFile;
-    }
+    public static Uri backupDatabaseInternal(final Folder backupDir) {
 
-    public static File backupDatabaseInternal(final File backupDir) {
-        final long timestamp = System.currentTimeMillis();
-        final File target = getBackupFileInternal(backupDir, false);
         closeDb();
-        final boolean backupDone = FileUtils.copy(databasePath(), target);
+        final Uri uri = ContentStorage.get().copy(Uri.fromFile(databasePath()), backupDir, FileNameCreator.forName(DB_FILE_NAME_BACKUP), false);
         init();
 
-        if (!backupDone) {
-            Log.e("Database could not be copied to " + target);
+        if (uri == null) {
+            Log.e("Database could not be copied to " + backupDir.toUserDisplayableString());
             return null;
         }
-
-        Log.i("Database was copied to " + target);
-        target.setLastModified(timestamp);
-        return target;
+        Log.i("Database was copied to " + backupDir.toUserDisplayableString());
+        return uri;
     }
 
     /**
@@ -870,23 +865,35 @@ public class DataStore {
         return databasePath(Settings.isDbOnSDCard());
     }
 
-    public static int restoreDatabaseInternal(final File backupDir) {
-        final File sourceFile = getBackupFileInternal(backupDir, true);
-        closeDb();
-        int result = FileUtils.copy(sourceFile, databasePath()) ? RESTORE_SUCCESSFUL : RESTORE_FAILED_GENERAL;
-        init();
-        if (newlyCreatedDatabase) {
-            result = RESTORE_FAILED_DBRECREATED;
-            Log.e("restored DB seems to be corrupt, needed to recreate database from scratch");
-        }
+    public static String restoreDatabaseInternal(final Context context, final Uri databaseUri) {
 
-        if (result == RESTORE_SUCCESSFUL) {
-            Log.i("Database successfully restored from " + sourceFile.getPath());
-        } else {
-            Log.e("Could not restore database from " + sourceFile.getPath());
+        final File tmpFile = ContentStorage.get().writeUriToTempFile(databaseUri, "backup_db.tmp");
+        DBRestoreResult result = DBRestoreResult.RESTORE_FAILED_GENERAL;
+        try {
+            final SQLiteDatabase backup = SQLiteDatabase.openDatabase(tmpFile.getPath(), null, SQLiteDatabase.OPEN_READONLY);
+            final int backupDbVersion = backup.getVersion();
+            final int expectedDbVersion = DataStore.getExpectedDBVersion();
+            if (!DataStore.versionsAreCompatible(backup, backupDbVersion, expectedDbVersion)) {
+                return String.format(context.getString(R.string.init_restore_version_error), expectedDbVersion, backupDbVersion);
+            }
+            closeDb();
+            result = FileUtils.copy(tmpFile, databasePath()) ? DBRestoreResult.RESTORE_SUCCESSFUL : DBRestoreResult.RESTORE_FAILED_GENERAL;
+            init();
+            if (newlyCreatedDatabase) {
+                result = DBRestoreResult.RESTORE_FAILED_DBRECREATED;
+                Log.e("restored DB seems to be corrupt, needed to recreate database from scratch");
+            }
+            if (result == DBRestoreResult.RESTORE_SUCCESSFUL) {
+                Log.i("Database successfully restored from " + tmpFile.getPath());
+            } else {
+                Log.e("Could not restore database from " + tmpFile.getPath());
+            }
+        } catch (SQLiteException e) {
+            Log.e("error while restoring database: ", e);
+        } finally {
+            tmpFile.delete();
         }
-
-        return result;
+        return context.getString(result.res);
     }
 
     private static class DBContext extends ContextWrapper {
