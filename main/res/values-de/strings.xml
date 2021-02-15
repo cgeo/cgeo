@@ -240,7 +240,7 @@
     <string name="warn_search_help_tb">Code des Trackables eingeben, z. B. „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Bitte Text einfügen.</string>
     <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
-    <string name="warn_invalid_mapfile">Die ausgewählte Kartendatei ist keine gültige Mapsforge Kartendatei oder verwendet eine nicht unterstützte Version.\n(c:geo unterstützt derzeit nur v3 bis v5 / v3, wenn Sie die Einstellung \"Alte Mapfsforge V3\" verwenden.)\n\nOffline-Karten sind nicht verfügbar.</string>
+    <string name="warn_invalid_mapfile">Die ausgewählte Kartendatei ist keine gültige Mapsforge Kartendatei oder verwendet eine nicht unterstützte Version.\n(c:geo unterstützt derzeit nur v3 bis v5)\n\nOffline-Karten sind nicht verfügbar.</string>
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_invalid_character">Das Zeichen muss ein BUCHSTABE oder eine ZIFFER sein</string>
@@ -347,7 +347,7 @@
     <string name="caches_remove_selected">Ausgewählte löschen</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
-    <string name="caches_upload_modifiedcoords_warning">Möchten Sie modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
+    <string name="caches_upload_modifiedcoords_warning">Möchtest du modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
     <string name="caches_upload_allcoords_dialogtitle">WARNUNG - Alle Koordinaten hochladen</string>
     <string name="caches_upload_allcoords_warning">Dies wird alle existierenden Koordinaten auf dem Server für alle (bzw. die ausgewählten) Caches deiner Liste durch die aktuellen Listing-Koordinaten in c:geo ersetzen! Dies sollte nur in speziellen Fällen verwendet werden, z.B. wenn du eine GPX-Datei mit korrigierten Koordinaten als Listing-Koordinaten importiert hast. Dies kann nicht rückgängig gemacht werden und du solltest diese Funktion nur verwenden, wenn du weißt, was du tust. In normalen Fällen solltest du stattdessen die Funktion \"Geänderte Koordinaten hochladen\" verwenden.</string>
@@ -474,7 +474,7 @@
     <string name="calculate_dataDir">Berechne Speicherbedarf für Geocache-Daten</string>
     <string name="settings_data_dir_item">%1$s (%2$s frei)</string>
     <string name="confirm_data_dir_move_title">Geocache-Datenverzeichnis verschieben?</string>
-    <string name="confirm_data_dir_move">Das Verschieben der Geocache-Daten könnte eine sehr lange Zeit dauern, abhängig von Ihrem Gerät und der Datenmenge.</string>
+    <string name="confirm_data_dir_move">Das Verschieben der Geocache-Daten könnte eine sehr lange Zeit dauern, abhängig von deinem Gerät und der Datenmenge.</string>
     <string name="settings_title_basicmembers">Optionen für Basis-Mitglieder</string>
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Wähle die Standardnavigation und externe Navigations-Apps.</string>
@@ -808,11 +808,11 @@
     <string name="auth_register">Nutzerkonto erstellen</string>
     <string name="auth_connected">Verbunden</string>
     <string name="auth_unconnected">Noch nicht verbunden</string>
-    <string name="auth_connected_as">Verbunden als %s.\nDrücken Sie kurz, um die Autorisierungsdaten von c:geo zu aktualisieren oder lang um sie zu löschen.</string>
+    <string name="auth_connected_as">Verbunden als %s.\nTippe kurz, um die Autorisierungsdaten von c:geo zu aktualisieren oder lang um sie zu löschen.</string>
     <string name="auth_dialog_waiting">Warte auf %s…</string>
     <string name="auth_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
     <string name="auth_explain_long">„Starte Autorisierung“ öffnet die Webseite von %s. Bitte dort anmelden und <b>c:geo</b> Zugriff auf den Account erlauben. Das ist alles.</string>
-    <string name="auth_forget_title">Authorisierung entfernen?</string>
+    <string name="auth_forget_title">Autorisierung entfernen?</string>
     <string name="auth_forget_message">Du wirst von diesem Dienst abgemeldet. Deine gespeicherten Anmeldedaten werden gelöscht.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
