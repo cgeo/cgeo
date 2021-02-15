@@ -170,6 +170,7 @@ public class FolderUtils {
         Dialogs.newBuilder(activity)
             .setTitle(activity.getString(move ? R.string.folder_move_finished_title : R.string.folder_copy_finished_title))
             .setMessage(message)
+            .setCancelable(false)
             .setPositiveButton(android.R.string.ok, (dd, pp) -> {
                 dd.dismiss();
                 if (callback != null) {
