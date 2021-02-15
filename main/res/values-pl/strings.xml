@@ -239,7 +239,6 @@
     <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Proszę uzupełnij tekst wpisu.</string>
     <string name="warn_load_images">c:geo nie był w stanie załadować obrazów.</string>
-    <string name="warn_invalid_mapfile">Wybrany plik mapy nie jest prawidłowym plikiem mapsforge lub używa nieobsługiwanej wersji.\n(c:geo obecnie obsługuje v3 do v5 / v3 tylko jeśli używasz ustawień \"Old Mapfsforge V3\".)\n\nMapy offline nie są dostępne.</string>
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
     <string name="warn_invalid_character">Znak musi być liter lub cyfrą</string>
