@@ -1435,8 +1435,8 @@ public final class GCParser {
 
             final MatcherWrapper matcherSpottedUser = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER, page);
             if (matcherSpottedUser.find()) {
-                trackable.setSpottedGuid(matcherSpottedUser.group(1));
-                trackable.setSpottedName(matcherSpottedUser.group(2).trim());
+                trackable.setSpottedGuid(matcherSpottedUser.group(2));
+                trackable.setSpottedName(matcherSpottedUser.group(3).trim());
                 trackable.setSpottedType(Trackable.SPOTTED_USER);
             }
 
