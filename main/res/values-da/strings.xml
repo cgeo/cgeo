@@ -233,7 +233,6 @@
     <string name="warn_search_help_tb">Indtast koden på en Trackable. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Indtast tekst til din logbesked.</string>
     <string name="warn_load_images">c:geo kunne ikke indlæse billeder.</string>
-    <string name="warn_invalid_mapfile">Den valgte kortfil er ikke en gyldig mapsforge kortfil, eller den bruger en ikke-understøttet version.\n(c:geo understøtter i øjeblikket kun v3 til v5 / v3 hvis du bruger indstillingen \"Old Mapfsforge V3\".\n\nOffline kort er ikke tilgængelige.</string>
     <string name="warn_pocket_query_select">Ingen Pocket Query valgt.</string>
     <string name="warn_no_pocket_query_found">Det blev ikke fundet nogen Pocket Query online.</string>
     <string name="warn_invalid_character">Tegn skal være bogstaver eller tal</string>
