@@ -153,7 +153,9 @@
     <string name="log_problem_archive_label">Cache zou moeten worden gearchiveerd</string>
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\nGeschaald/gecomprimeerd:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s</string>
@@ -239,7 +241,6 @@
     <string name="warn_search_help_tb">Voer de trackable code in. Bijvoorbeeld \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Voer s.v.p. een logtekst in.</string>
     <string name="warn_load_images">Sorry, c:geo kon de afbeeldingen niet laden.</string>
-    <string name="warn_invalid_mapfile">Het geselecteerde kaartbestand is geen geldig mapsforge-bestand of gebruikt een niet-ondersteunde versie.\n(c:geo ondersteunt momenteel alleen v3 tot v5 / v3 als u de instelling \"Oude Mapfsforge V3\" gebruikt).\n\nOffline kaarten zijn niet beschikbaar.</string>
     <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
     <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
     <string name="warn_invalid_character">Teken moet een LETTER of een CIJFER zijn</string>
@@ -770,6 +771,8 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
+    <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
+    <string name="localstorage_migrate_status_major">Versie %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Nabijheidsmelding</string>
     <string name="init_proximityNotificationGeneral">Algemene nabijheidsmelding op kaart</string>
@@ -808,6 +811,8 @@
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Niets doen</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Alle inhoud kopiëren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Alle inhoud verplaatsen</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Geen verdere actie</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Je hebt een andere map geselecteerd dan momenteel is opgeslagen. Hoe wil je doorgaan?\n\nSelecteer map en</string>
     <string name="contentstorage_folder_selection_aborted">Mapselectie afbreken, map is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Map ingesteld op \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Afbreken bestand selectie</string>
@@ -1929,4 +1934,5 @@
     <string name="next">Volgende</string>
     <string name="done">Voltooid</string>
     <string name="finish">Voltooien</string>
+    <string name="back">Terug</string>
 </resources>
