@@ -240,7 +240,6 @@
     <string name="warn_search_help_tb">Voer de trackable code in. Bijvoorbeeld \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Voer s.v.p. een logtekst in.</string>
     <string name="warn_load_images">Sorry, c:geo kon de afbeeldingen niet laden.</string>
-    <string name="warn_invalid_mapfile">Het geselecteerde kaartbestand is geen geldig mapsforge-bestand of gebruikt een niet-ondersteunde versie.\n(c:geo ondersteunt momenteel alleen v3 tot v5 / v3 als u de instelling \"Oude Mapfsforge V3\" gebruikt).\n\nOffline kaarten zijn niet beschikbaar.</string>
     <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
     <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
     <string name="warn_invalid_character">Teken moet een LETTER of een CIJFER zijn</string>
