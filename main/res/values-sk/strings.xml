@@ -239,7 +239,6 @@
     <string name="warn_search_help_tb">Zadajte kód trasovateľného predmetu. Napríklad „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
     <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
-    <string name="warn_invalid_mapfile">Vybraný súbor s mapou nie je platný súbor mapy mapsforge, prípadne používa nepodporovanú verziu.\n(Program c:geo v súčasnosti podporuje v3 až v5 (v3 len vtedy, ak používate nastavenie \"Stará Mapfsforge V3\".)\n\nOff-line mapy nie sú k dispozícii.</string>
     <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>
     <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
     <string name="warn_invalid_character">Znak musí byť PÍSMENO alebo ČÍSLICA</string>
