@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">Syötä reissaajan koodi. Esimerkiksi \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Ole hyvä ja syötä jotain tekstiä lokiisi.</string>
     <string name="warn_load_images">c:geo epäonnistui kuvien latauksessa.</string>
-    <string name="warn_invalid_mapfile">Valittu karttatiedosto ei ole kelvollinen karttatiedosto tai käyttää ei-tuettua versiota.\n(c:geo tukee tällä hetkellä versioita v3 - v5, vain v3 versiota jos käytät \"Vanha Mapsforge V3\" asetusta.)\n\nOfflinekartat eivät ole käytettävissä.</string>
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
     <string name="warn_invalid_character">Merkin täytyy olla kirjain tai numero</string>
@@ -1910,7 +1909,6 @@
     <string name="wizard_outro_error">Määritystä ei ole suoritettu!\nKaikki c:geon osat eivät toimi odotetulla tavalla!</string>
     <string name="wizard_permissions_title">Aseta sovelluksen käyttöluvat</string>
     <string name="wizard_permissions_intro">c:geo tarvitsee tietyt käyttöoikeudet laitteellesi toimiakseen oikein.\nSelitän lisää yksityiskohtia seuraavissa vaiheissa.</string>
-    <string name="wizard_basefolder_request_explanation">c:geo tarvitsee paikallisen juurikansion tallentaakseen dataa kuten lokitiedostoja ja muuta. Valitse tai luo tällainen kansio seuraavassa vaiheessa.\nJos olet päivittänyt c:geon edellisestä versiosta, valitse olemassa oleva kansio \"cgeo\" laitteen tallennustilan juuritasolla.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttatiedostoja. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen GPX-tiedostoja, esim. kätköjen sekä reittien tuontiin/vientiin. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
     <string name="wizard_platforms_title">Määritä palvelut</string>
