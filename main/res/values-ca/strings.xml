@@ -240,7 +240,6 @@
     <string name="warn_search_help_tb">Introduïu el codi d\'un traçable. Per exemple, \"LPAYKV\".</string>
     <string name="warn_log_text_fill">Introduïu un text per al vostre registre.</string>
     <string name="warn_load_images">El c:geo no ha pogut carregar les imatges.</string>
-    <string name="warn_invalid_mapfile">El fitxer de mapa seleccionat no és vàlid o utilitza una versió no compatible.\n(c:geo actualment admet v3 a v5 / v3 només si utilitzeu la configuració \"Old Mapfsforge V3\".)\n\nEls mapes en línia no són disponibles.</string>
     <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
     <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
     <string name="warn_invalid_character">El caràcter ha de ser una LLETRA o un DÍGIT</string>
