@@ -291,7 +291,7 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.13.1'
 
     // Junit only needed for local unit tests
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
 
     // Leak Canary, memory leak detection
     def leakCanaryVersion = '2.6'
