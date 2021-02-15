@@ -233,7 +233,6 @@
     <string name="warn_search_help_tb">Введіть код для відстеження. Наприклад, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Будь ласка, введіть текст для вашого журналу.</string>
     <string name="warn_load_images">Не вдалося завантажити зображення.</string>
-    <string name="warn_invalid_mapfile">Вибраний файл мапи не є допустимим файлом мапи або використовує непідтримувану версію.\n(c:geo наразі підтримує параметри v3 до v5 / v3 лише якщо ви використовуєте параметр \"Old Mapfsforge V3\".\n\nАвтономні карти недоступні.</string>
     <string name="warn_pocket_query_select">Кишеньковий запит не вибрано.</string>
     <string name="warn_no_pocket_query_found">Немає Pocket-запиту онлайн.</string>
     <string name="warn_invalid_character">Символ повинен бути LETTER або DIGIT</string>
