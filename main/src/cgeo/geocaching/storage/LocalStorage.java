@@ -10,7 +10,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -19,7 +18,6 @@ import android.app.ProgressDialog;
 import android.os.Environment;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.os.EnvironmentCompat;
 
@@ -311,19 +309,8 @@ public final class LocalStorage {
         return new File(Environment.getExternalStorageDirectory(), LEGACY_CGEO_DIR_NAME);
     }
 
-    @Nullable
-    public static File getNewBackupDirectory(final long timestamp) {
-        final File newFolder = new File(getBackupRootDirectory(), Formatter.formatDateForFilename(timestamp));
-
-        if (newFolder.exists()) {
-            return null; // We don't want to overwrite a existing backup
-        }
-
-        FileUtils.mkdirs(newFolder);
-        return newFolder;
-    }
-
     @NonNull
+    @Deprecated // Use PersistableFolder.Backup instead
     public static File getBackupRootDirectory() {
         return new File(getExternalPublicCgeoDirectory(), BACKUP_DIR_NAME);
     }
@@ -331,29 +318,6 @@ public final class LocalStorage {
     @NonNull
     public static File getGeocacheDataDirectory() {
         return new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
-    }
-
-    public static void deleteFilesOrDirectories(final File[] files) {
-        if (files == null) {
-            return;
-        }
-        for (File file : files) {
-            deleteRecursive(file);
-        }
-    }
-
-    private static void deleteRecursive(final File fileOrDirectory) {
-        try {
-            if (fileOrDirectory.isDirectory()) {
-                for (File child : fileOrDirectory.listFiles()) {
-                    deleteRecursive(child);
-                }
-            }
-            fileOrDirectory.delete();
-        } catch (Exception e) {
-            Log.w("Couldn't delete " + fileOrDirectory, e);
-        }
-
     }
 
     public static void changeExternalPrivateCgeoDir(final SettingsActivity fromActivity, final String newExtDir) {

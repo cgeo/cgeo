@@ -95,7 +95,7 @@ public final class Formatter {
     }
 
     /**
-     * Generate a numeric date string with date format "yyyy-MM-dd"
+     * Generate a numeric date string with date format "yyyy-MM-dd HH-mm"
      *
      * @param date
      *            milliseconds since the epoch

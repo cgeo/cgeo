@@ -47,11 +47,6 @@ public class ShareUtils {
     /**
      * Standard message box + additional share button for file sharing
      */
-    @Deprecated
-    public static void shareFileOrDismissDialog(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int title, final String msg) {
-        shareOrDismissDialog(context, fileToUri(context, file), mimeType, title, msg);
-    }
-
     public static void shareOrDismissDialog(final Context context, @NonNull final Uri uri, @NonNull final String mimeType, @StringRes final int title, final String msg) {
         Dialogs.messageNeutral(context, context.getString(title), msg, R.string.cache_share_field,
             (dialog, which) -> {
@@ -67,11 +62,6 @@ public class ShareUtils {
     private static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final Uri uri, @StringRes final int titleResourceId, final String receiver) {
         final String usedReceiver = receiver == null ? context.getString(R.string.support_mail) : receiver;
         final Intent intent = createShareIntentInternal(context, TYPE_EMAIL, subject, body, uri, usedReceiver);
-        shareInternal(context, intent, titleResourceId);
-    }
-
-    private static void shareInternal(final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final File file, @StringRes final int titleResourceId) {
-        final Intent intent = createShareIntentInternal(context, mimeType, subject, body, fileToUri(context, file), null);
         shareInternal(context, intent, titleResourceId);
     }
 
@@ -122,7 +112,8 @@ public class ShareUtils {
     }
 
     public static void sharePlainText(final Context context, final String text) {
-        shareInternal(context, TYPE_TEXT, null, text, null, R.string.context_share_as_text);
+        final Intent intent = createShareIntentInternal(context, TYPE_TEXT, null, text, null, null);
+        shareInternal(context, intent, R.string.context_share_as_text);
     }
 
     public static void shareLink(final Context context, final String subject, final String url) {
@@ -133,20 +124,13 @@ public class ShareUtils {
         return createShareIntentInternal(context, TYPE_TEXT, subject, StringUtils.defaultString(url), null, null);
     }
 
-    public static void shareMultipleFiles(final Context context, @NonNull final List<File> files, @StringRes final int titleResourceId) {
-        final ArrayList<Uri> uris = new ArrayList<>();
-
+    public static void shareMultipleFiles(final Context context, @NonNull final ArrayList<Uri> uris, @StringRes final int titleResourceId) {
         try {
-            for (File file : files) {
-                uris.add(FileProvider.getUriForFile(context, context.getString(R.string.file_provider_authority), file));
-            }
-
             final Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
             shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
             shareIntent.setType("*/*");
             shareInternal(context, shareIntent, titleResourceId);
-
         } catch (Exception e) {
             Log.e("error on sharing", e);
         }
