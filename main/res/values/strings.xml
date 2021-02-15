@@ -717,7 +717,7 @@
     <string name="init_directionwidth">Direction line width</string>
     <string name="init_directionwidth_summary">Select width for direction line</string>
     <string name="init_routecolor">Individual route line color</string>
-    <string name="init_routecolor_summary">Select color and opaqueness for individual route line. An individual route is a collection of waypoints and/or caches you selected by long-pressing on the waypoint/cache. (You need to enable the long press function first, see map settings.)</string>
+    <string name="init_routecolor_summary">Select color and opaqueness for individual route line. An individual route is a collection of waypoints and/or caches you selected by long-tapping on the waypoint/cache. (You need to enable the long tap function first, see map settings.)</string>
     <string name="init_routewidth">Individual route line width</string>
     <string name="init_routewidth_summary">Select width for individual route line</string>
     <string name="init_trackcolor">GPX track/route line color</string>
@@ -744,7 +744,7 @@
     <string name="init_secondary_navigation_tool">Secondary Navigation</string>
     <string name="init_default_navigation_tool_description">Here you can select your preferred navigation tool.</string>
     <string name="init_default_navigation_tool_select">Select tool</string>
-    <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. Activate it by long pressing the navigation icon next to the title of the cache.</string>
+    <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. Activate it by long tapping the navigation icon next to the title of the cache.</string>
     <string name="init_navigation_menu_description">Here you can select which of the available navigation methods will be shown in the navigation menu for a cache or waypoint. Disabled tools are not installed on this device.</string>
     <string name="init_debug_title">Debug information</string>
     <string name="init_debug_note">c:geo can generate a lot of debugging information. Activating this setting will affect the stability of c:geo and is only recommended if you are asked to send a log to the developers. Please keep debug logging disabled during normal usage of c:geo!</string>
@@ -921,10 +921,10 @@
     <string name="auth_register">Create an account</string>
     <string name="auth_connected">Connected</string>
     <string name="auth_unconnected">Not connected yet</string>
-    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
+    <string name="auth_connected_as">Connected as %s.\nTap here to update or long tap to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">Waiting for %s…</string>
     <string name="auth_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
-    <string name="auth_explain_long">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Log in on this page and allow <b>c:geo</b> to access your account. That\'s all.</string>
+    <string name="auth_explain_long">Tapping the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Log in on this page and allow <b>c:geo</b> to access your account. That\'s all.</string>
     <string name="auth_forget_title">Forget authorization?</string>
     <string name="auth_forget_message">You\'ll be disconnected from this service. Your currently saved credentials will be lost.</string>
 
@@ -935,7 +935,7 @@
 
     <!-- auth token -->
     <string name="auth_token_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
-    <string name="auth_token_explain_long">Filling your credential and pressing the \"authorize c:geo\" button will start the process. This process will connect to %s and retrieve an authentication token. That\'s all.</string>
+    <string name="auth_token_explain_long">Filling your credential and tapping the \"authorize c:geo\" button will start the process. This process will connect to %s and retrieve an authentication token. That\'s all.</string>
 
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo is now authorized to post on Twitter.</string>
