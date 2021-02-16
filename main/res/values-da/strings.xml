@@ -638,7 +638,6 @@
     <string name="init_directionwidth">Bredde på kurslinje</string>
     <string name="init_directionwidth_summary">Bredde på kurslinje</string>
     <string name="init_routecolor">Farve på individuel sporlinje</string>
-    <string name="init_routecolor_summary">Vælg farve og uigennemsigtighed for den enkelte rute. En individuel rute er en samling af rutepunkter og/eller cacher, du har valgt ved at trykke længe på rutepunkt/cache. (Du skal først aktivere den lange tryk-funktion, se kortindstillingerne.)</string>
     <string name="init_routewidth">Bredde på individuel sporlinje</string>
     <string name="init_routewidth_summary">Vælge linjebredde for individuel rute</string>
     <string name="init_circlecolor">Cirkel linjefarve</string>
@@ -657,7 +656,6 @@
     <string name="init_secondary_navigation_tool">Sekundær navigation</string>
     <string name="init_default_navigation_tool_description">Her kan du vælge din foretrukne navigationsmetode.</string>
     <string name="init_default_navigation_tool_select">Vælg metode</string>
-    <string name="init_default_navigation_tool_2_description">Her kan du vælge din sekundære navigationsmetode. Aktivér den ved at holde på navigationssymbolet det vises i cachens titel.</string>
     <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et rutepunkt. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
     <string name="init_debug_title">Fejlfindingsoplysninger</string>
     <string name="init_debug_note">c:geo kan indsamle en mængde fejlfindingsoplysninger. Aktivering af denne indstilling vil påvirke stabiliteten af c:geo og kan kun anbefales, hvis du bliver bedt om at sende en fejlfindingslog til udviklerne. Denne indstilling bør være deaktiveret under normal brug af c:geo!</string>
@@ -757,17 +755,14 @@
     <string name="auth_register">Opret en konto</string>
     <string name="auth_connected">Forbundet</string>
     <string name="auth_unconnected">Ikke forbundet endnu</string>
-    <string name="auth_connected_as">Forbundet som %s.\nTryk her for at opdatere eller hold for at fjerne autoriseringen fra c:geo.</string>
     <string name="auth_dialog_waiting">Venter på %s…</string>
     <string name="auth_explain_short">Den følgende proces vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
-    <string name="auth_explain_long">Når du trykker på \"Godkend c:geo\" vil du starten en godkendelsesprocedure. En browser vil blive åbnet med en %s-side, som du skal logge ind på for at godkende at <b>c:geo</b> kan tilgå din konto.</string>
     <string name="auth_forget_title">Glem autorisering?</string>
     <string name="auth_forget_message">Forbindelsen til servicen bliver afbrudt. Dine aktuelle gemte legitimationsoplysninger vil gå tabt.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Den følgende opsætningsguide vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ved at gennemføre denne opsætning, tillader du at <b>c:geo</b> kan få adgang til %s.</string>
-    <string name="auth_token_explain_long">Ved at udfylde dine legitimationsoplysninger og aktivere \"Autorisér c:geo\"-knappen starter opsætningen. Under opsætningen vil der blive hentet et autentifikationsobjekt fra %s.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo er nu godkendt til at lave opslag på Twitter.</string>
     <!-- auth opencaching -->
