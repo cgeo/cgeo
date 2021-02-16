@@ -660,7 +660,6 @@
     <string name="init_directionwidth">Yön çizgisi genişliği</string>
     <string name="init_directionwidth_summary">Yön çizgisi için genişlik seçin</string>
     <string name="init_routecolor">Bireysel güzergah çizgisi rengi</string>
-    <string name="init_routecolor_summary">Her bir güzergah hattı için renk ve opaklığı seçin. Bağımsız bir rota, yol noktasına/Geocache\'e uzun basarak seçtiğiniz bir yol noktasının ve/veya Geocache\'in mesafesidir. (Önce uzun basma işlevini etkinleştirmeniz gerekir, harita ayarlarına bakın.)</string>
     <string name="init_routewidth">Bireysel güzergah hattı genişliği</string>
     <string name="init_routewidth_summary">Bireysel güzergah hattı için genişlik seçin</string>
     <string name="init_circlecolor">Çember kenar rengi</string>
@@ -679,7 +678,6 @@
     <string name="init_secondary_navigation_tool">İkincil Navigasyon</string>
     <string name="init_default_navigation_tool_description">Burada tercih ettiğiniz navigasyon aracını seçebilirsiniz.</string>
     <string name="init_default_navigation_tool_select">Aracı seçin</string>
-    <string name="init_default_navigation_tool_2_description">Burada ikinci tercih edilen navigasyon aracını seçebilirsiniz. Geocache başlığının yanındaki navigasyon simgesine uzun süre basarak etkinleştirin.</string>
     <string name="init_navigation_menu_description">Burada kullanılabilir navigasyon yöntemlerinden hangisinin, bir Geocache veya yol noktası için, navigasyon menüsünde gösterilmesini istediğinizi seçebilirsiniz. Devre dışı bırakılmış araçlar bu araçta yüklü değildir.</string>
     <string name="init_debug_title">Hata ayıklama bilgileri</string>
     <string name="init_debug_note">c:geo çok fazla ayıklama bilgisi oluşturabilir. Bu ayarı aktif etmek c:geo\'nun dengesini etkileyebilir ve sadece geliştiricilere kayıt göndermeniz istenirse kullanılması önerilir. c:geo normal şekilde kullanılırken lütfen ayıklama günlüğünü devre dışı tutun!</string>
@@ -809,17 +807,14 @@
     <string name="auth_register">Hesap oluştur</string>
     <string name="auth_connected">Bağlandı</string>
     <string name="auth_unconnected">Henüz bağlantı gerçekleşmedi</string>
-    <string name="auth_connected_as">%s olarak bağlanıldı.Güncelleme için \nburaya basın veya c:geo\'da yetkilendirmeyi kaldırmak için uzun basın.</string>
     <string name="auth_dialog_waiting">%s için bekleniyor…</string>
     <string name="auth_explain_short">Sıradaki işlem, <b>c:geo</b>\'nin %s\'e erişmesine izin verecektir.</string>
-    <string name="auth_explain_long">\"c:geo\'yu yetkilendir\" düğmesine basmak işlemi başlatacaktır. Bu işlem %s\'de bir sayfa açacaktır. Bu sayfada oturum açın ve <b>c:geo</b> hesabınıza erişmesine izin verin. Bu kadar.</string>
     <string name="auth_forget_title">Yetkilendirme unutulsun mu?</string>
     <string name="auth_forget_message">Bu servisle bağlantınız kesilecek. Şu anda kaydettiğiniz kimlik bilgileri kaybolacaktır.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Sıradaki işlem, <b>c:geo </b> \'nin %s\'e erişmesine izin verecektir.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Sıradaki işlem, <b>c:geo </b> \'nin %s\'e erişmesine izin verecektir.</string>
-    <string name="auth_token_explain_long">Kimlik bilgilerinizi doldurup \"c: geo\'yu yetkilendir\" düğmesine basmak işlemi başlatacaktır. Bu işlem %s\'ye bağlanacak ve bir kimlik doğrulama belirteci alacaktır. Bu kadar.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo şimdi Twitter\'da yayın yapmaya yetkili.</string>
     <!-- auth opencaching -->
