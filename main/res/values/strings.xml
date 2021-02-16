@@ -2124,6 +2124,7 @@
     <string name="wizard_outro_error">Incomplete configuration\nNot all parts of c:geo will work as expected!</string>
     <string name="wizard_permissions_title">Set app permissions</string>
     <string name="wizard_permissions_intro">c:geo needs certain permissions on your device to work correctly.\nI will explain more details in the next steps.</string>
+    <string name="wizard_permissions_folder_title">Set folder: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo needs a local folder to store data like GPX files, backups, field notes and logfiles. As per default those files are stored in folders beneath a so called "base folder". Select or create such a folder in the next step.\n\nIf you upgraded c:geo from a previous version, select the existing folder \"cgeo\" on root level of your device storage.\nHint: You may need to unhide your device\'s internal storage first in the file selector being displayed next.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo needs a local folder to store offline map files. Select or create such a folder in the next step.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo needs a local folder to store GPX files (e.g. for importing / exporting caches or tracks). Select or create such a folder in the next step.</string>

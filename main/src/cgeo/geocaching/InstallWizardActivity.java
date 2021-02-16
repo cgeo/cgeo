@@ -145,17 +145,17 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestLocation, 0);
                 break;
             case WIZARD_PERMISSIONS_BASEFOLDER:
-                title.setText(R.string.wizard_permissions_title);
+                setFolderTitle(PersistableFolder.BASE);
                 text.setText(R.string.wizard_basefolder_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestBasefolder, 0);
                 break;
             case WIZARD_PERMISSIONS_MAPFOLDER:
-                title.setText(R.string.wizard_permissions_title);
+                setFolderTitle(PersistableFolder.OFFLINE_MAPS);
                 text.setText(R.string.wizard_mapfolder_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestMapfolder, 0);
                 break;
             case WIZARD_PERMISSIONS_GPXFOLDER:
-                title.setText(R.string.wizard_permissions_title);
+                setFolderTitle(PersistableFolder.GPX);
                 text.setText(R.string.wizard_gpxfolder_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestGpxfolder, 0);
                 break;
@@ -367,6 +367,10 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     // -------------------------------------------------------------------
     // Android SAF-based permissions related methods
+
+    private void setFolderTitle(final PersistableFolder folder) {
+        title.setText(String.format(getString(R.string.wizard_permissions_folder_title), getString(folder.getNameKeyId())));
+    }
 
     private void requestBasefolder() {
         if (!ContentStorageActivityHelper.baseFolderIsSet()) {
