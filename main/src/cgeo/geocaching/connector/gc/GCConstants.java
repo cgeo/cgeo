@@ -106,8 +106,8 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_ORIGIN = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugOrigin\">([^<]+)<\\/span>[^<]*</dd>");
     /** Two groups ! */
     static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">In ([^<]+)</a>");
-    /** Two groups ! */
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDUSER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">In the hands of ([^<]+).</a>");
+    /** Three groups ! */
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDUSER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" href=\"[^\"]*/p(rofile)?/\\?guid=([a-z0-9\\-]+)\">In the hands of ([^<]+).</a>");
     static final Pattern PATTERN_TRACKABLE_SPOTTEDUNKNOWN = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">Unknown Location[^<]*</a>");
     static final Pattern PATTERN_TRACKABLE_SPOTTEDOWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">In the hands of the owner[^<]*</a>");
     static final Pattern PATTERN_TRACKABLE_GOAL = Pattern.compile("<div id=\"TrackableGoal\">[^<]*<p>(.*?)</p>[^<]*</div>", Pattern.DOTALL);

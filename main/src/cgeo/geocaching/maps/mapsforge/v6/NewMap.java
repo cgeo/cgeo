@@ -16,6 +16,7 @@ import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.downloader.MapDownloaderUtils;
+import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -67,6 +68,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
@@ -1491,18 +1493,26 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                     final GeoitemRef item = getItem(position);
                     tv.setText(item.getName());
 
-                    //Put the image on the TextView
-                    tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
+                    final StringBuilder text = new StringBuilder(item.getItemCode());
+                    final String geocode = item.getGeocode();
+                    if (StringUtils.isNotEmpty(geocode)) {
+                        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                        if (cache != null && item.getType() == CoordinatesType.CACHE) {
+                            tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, CacheListType.MAP).getDrawable(), null, null, null);
+                        } else {
+                            tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
+                            if (item.getType() == CoordinatesType.WAYPOINT) {
+                                text.append(Formatter.SEPARATOR).append(geocode);
+                                if (cache != null) {
+                                    text.append(Formatter.SEPARATOR).append(cache.getName());
+                                }
+                            }
+                        }
+                    } else {
+                        tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
+                    }
 
                     final TextView infoView = (TextView) view.findViewById(R.id.info);
-                    final StringBuilder text = new StringBuilder(item.getItemCode());
-                    if (item.getType() == CoordinatesType.WAYPOINT && StringUtils.isNotEmpty(item.getGeocode())) {
-                        text.append(Formatter.SEPARATOR).append(item.getGeocode());
-                        final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                        if (cache != null) {
-                            text.append(Formatter.SEPARATOR).append(cache.getName());
-                        }
-                    }
                     infoView.setText(text.toString());
 
                     return view;

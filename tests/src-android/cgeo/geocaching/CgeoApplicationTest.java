@@ -102,6 +102,36 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
+     * Test log and spotted states for {@link GCParser#searchTrackable(String, String, String)}
+     * Other parameters are not fully covered in this test case, as we already have {@link CgeoApplicationTest#testSearchTrackable()}
+     */
+    @MediumTest
+    public static void testSearchTrackableSpottedLogState() {
+        final Trackable tb = GCParser.searchTrackable("TB4BPQK", null, null);
+        assertThat(tb).isNotNull();
+        // some very basic constant data
+        assertThat(tb.getGuid()).isEqualTo("6d634cc3-f156-4b74-a4b8-823304683765");
+        assertThat(tb.getName()).isEqualTo("Alberta travel nord to south");
+        assertThat(tb.getGeocode()).isEqualTo("TB4BPQK");
+
+        assertThat(tb.getOwner()).isEqualTo("Die Eybacher");
+        assertThat(tb.getOwnerGuid()).isEqualTo("5888ea6c-413b-4b60-959d-d3d729ad642b");
+
+        // Following data can potentially change over time. However, is's very unlikely as the trackable is lost since years
+        assertThat(tb.getSpottedType()).isEqualTo(Trackable.SPOTTED_USER);
+        assertThat(tb.getSpottedGuid()).isEqualTo("83858f68-ba77-4342-ad89-83aebcf37f86");
+        assertThat(tb.getSpottedName()).isEqualTo("cachertimsi");
+
+        final LogEntry lastLog = tb.getLogs().get(0);
+        assertThat(lastLog.author).isEqualTo("cachertimsi");
+        assertThat(lastLog.date).isEqualTo(new GregorianCalendar(2013, 11 - 1, 5).getTimeInMillis());
+        assertThat(lastLog.getType()).isEqualTo(LogType.RETRIEVED_IT);
+        assertThat(lastLog.cacheName).isEqualTo("TB / Coin Hotel Fehmarn");
+        assertThat(lastLog.cacheGuid).isEqualTo("e93eeddd-a3f0-4bf1-a056-6acc1c5dff1f");
+        assertThat(lastLog.log).isEqualTo("Das tb Hotel war sehr schön");
+    }
+
+    /**
      * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
      */
     @MediumTest

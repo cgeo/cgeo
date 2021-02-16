@@ -2,6 +2,16 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
+<h1>2021.xx.xx:</h1>
+
+<h4>Fixes:</h4>
+<ul>
+<li>Fix: Adapt to website change for \"spotted by\" trackables</li>
+<li>Fix: Show actual cache marker in OSM map multi-marker popup</li>
+</ul>
+
+
+
 <h1>2021.02.14:</h1>
 
 <h4>Map:</h4>

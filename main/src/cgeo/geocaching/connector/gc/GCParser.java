@@ -1410,10 +1410,10 @@ public final class GCParser {
 
         // trackable owner name
         try {
-            final MatcherWrapper matcherOwnerNew = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_OWNER, page);
-            if (matcherOwnerNew.find()) {
-                trackable.setOwnerGuid(matcherOwnerNew.group(2));
-                trackable.setOwner(matcherOwnerNew.group(3).trim());
+            final MatcherWrapper matcherOwner = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_OWNER, page);
+            if (matcherOwner.find()) {
+                trackable.setOwnerGuid(matcherOwner.group(2));
+                trackable.setOwner(matcherOwner.group(3).trim());
 
             }
         } catch (final RuntimeException e) {
@@ -1435,8 +1435,8 @@ public final class GCParser {
 
             final MatcherWrapper matcherSpottedUser = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER, page);
             if (matcherSpottedUser.find()) {
-                trackable.setSpottedGuid(matcherSpottedUser.group(1));
-                trackable.setSpottedName(matcherSpottedUser.group(2).trim());
+                trackable.setSpottedGuid(matcherSpottedUser.group(2));
+                trackable.setSpottedName(matcherSpottedUser.group(3).trim());
                 trackable.setSpottedType(Trackable.SPOTTED_USER);
             }
 
