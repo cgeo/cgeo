@@ -464,7 +464,6 @@
     <string name="init_secondary_navigation_tool">Ikaduha na nabigasyon</string>
     <string name="init_default_navigation_tool_description">Dinhi maka pili ka og imong ganahan na galamiton para nabigasyon.</string>
     <string name="init_default_navigation_tool_select">Pagpili og galamiton</string>
-    <string name="init_default_navigation_tool_2_description">Dinhi makapili ka sa imohang ika duha na ganahan na gamit para nabigasyon. I-aktibo kini sa pag pislit og dugay ang nabigasyon na imahen sunod sa titulo sa cache.</string>
     <string name="init_navigation_menu_description">Dinhi maka pili ka kung unsa ang puwede na mga pamaagi sa nabigasyon and makita sa menu sa nabigasyon para sa cache o waypoint. Ang walay gamit na mga hiramenta wala na install sa kini nga device.</string>
     <string name="init_debug_title">I-debug and impormasyon</string>
     <string name="init_debug_note">c:geo kay pwede makahimo ug daghang impormasyon sa debugging. Pagpabuhi sa setting ani kay maka apekto sa kusog sa c:geo ug pwede rang ma rekomendar kung ikaw ay napangutan-ang maghatag ug usa ka log sa mga tig-develop. Palihog ug pagpa-disable sa debug logging sa panahon sa paggamit sa c:geo!</string>
@@ -539,14 +538,12 @@
     <string name="auth_unconnected">Wala pa nakakonekta</string>
     <string name="auth_dialog_waiting">Gahuwat para %s…</string>
     <string name="auth_explain_short">Ang kani nga proseso kay nagtugot <b>c:geo</b> maka-access %s.</string>
-    <string name="auth_explain_long">Inig pindot sa \"awtorisa c:geo\" button magsugod na ang proseso. Ang kani nga proseso kay mag abli sa web browser nga adunay %s panid. Pagsulod sa kani nga panid og mo tugot kini <b>c:geo</b> nga maka akses sa imong account.</string>
     <string name="auth_forget_title">Nakalimot sa pagpamatuod?</string>
     <string name="auth_forget_message">Madiskonek ka sa kani nga service. Ang imong gi-save na credentials karon kay mawala.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Ang sunod nga proseso kay magtugot sa <b>c:geo</b> nga maka-access %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ang kani nga proseso kay nagtugot sa <b>c:geo</b> nga maka-access %s.</string>
-    <string name="auth_token_explain_long">Pag-file sa imohang kredensyal og pag pindot sa \"awtorisa c:geo\"button mo sugod ang proses. Ang kani nga proseso mo konek sa %s og mo bawi sa mga pamatuod nga token. mao ra ang tanan.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">ang c:geo kay ge awtorisar nga maka-post sa Twitter.</string>
     <!-- auth opencaching -->
