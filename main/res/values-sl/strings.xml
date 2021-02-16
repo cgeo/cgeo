@@ -449,7 +449,6 @@
     <string name="init_secondary_navigation_tool">Sekundarna navigacija</string>
     <string name="init_default_navigation_tool_description">Tukaj lahko nastavite privzeto aplikacijo za navigacijo do zaklada.</string>
     <string name="init_default_navigation_tool_select">Izberi aplikacijo</string>
-    <string name="init_default_navigation_tool_2_description">Tukaj lahko izberete sekundarno aplikacijo za navigacijo. Aktivirate jo lahko z dolgim klikom na ikono za navigacijo pri opisu zaklada.</string>
     <string name="init_navigation_menu_description">Tukaj lahko izberete, katera navigacijska orodja bodo na voljo v navigacijskem meniju za zaklade ali dodatne točke. Onemogočena navigacijska orodja niso nameščena na vaši napravi.</string>
     <string name="init_debug_title">Informacije za razhroščevanje</string>
     <string name="init_debug">Poročilo za razhroščevanje</string>
@@ -520,7 +519,6 @@
     <string name="auth_register">Ustvari račun</string>
     <string name="auth_dialog_waiting">Čakam na %s…</string>
     <string name="auth_explain_short">Naslednji postopek bo omogočil <b>c:geo</b>tu dostop do %s.</string>
-    <string name="auth_explain_long">S pritiskom na gumb \"poveži c:geo\" se bo začel postopek. Postopek bo najprej odprl spletno stran %s. Prijavite se na to spletno stran in dovolite <b>c:geo</b>tu dostop do vašega računa. To je vse.</string>
     <!-- auth credentials -->
     <!-- auth token -->
     <!-- auth Twitter -->
