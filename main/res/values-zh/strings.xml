@@ -645,7 +645,6 @@
     <string name="init_directionwidth">指引线宽度</string>
     <string name="init_directionwidth_summary">为指引线选择宽度</string>
     <string name="init_routecolor">单个路线线条颜色</string>
-    <string name="init_routecolor_summary">选择单个路线的颜色和不透明度。单个路线是由您在航点 / 藏点上长按所选择的航点和藏点集和。(您需要先启用长按功能，请查看地图设置。)</string>
     <string name="init_routewidth">单个路线线条宽度</string>
     <string name="init_routewidth_summary">选择单个路线的宽度</string>
     <string name="init_circlecolor">圆环线颜色</string>
@@ -664,7 +663,6 @@
     <string name="init_secondary_navigation_tool">次要导航</string>
     <string name="init_default_navigation_tool_description">您可以在此选择您首选的导航工具。</string>
     <string name="init_default_navigation_tool_select">选择工具</string>
-    <string name="init_default_navigation_tool_2_description">您可以在此选择您的第二个导航工具。长按藏点标题旁边的导航图标以激活它。</string>
     <string name="init_navigation_menu_description">这里您可以为藏点或航点选择在导航菜单中显示哪些可用的导航方法。 此设备上没有安装被禁用的工具。</string>
     <string name="init_debug_title">调试信息</string>
     <string name="init_debug_note">c: geo 可以生成大量的调试信息。激活此设置将影响 c: geo 的稳定性, 只有在要求您向开发人员发送日志时才建议这样做。请保持调试日志禁用在正常使用 c: geo!</string>
