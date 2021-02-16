@@ -484,7 +484,6 @@
     <string name="init_secondary_navigation_tool">الملاحة الثانوية</string>
     <string name="init_default_navigation_tool_description">هنا يمكنك اختيار أداة الملاحة المفضلة.</string>
     <string name="init_default_navigation_tool_select">اختر الأداة</string>
-    <string name="init_default_navigation_tool_2_description">هنا يمكنك اختيار أداة الملاحة الثانوية المفضلة لديك. تنشيطها بالضغط مطولاً على أيقونة الملاحة المقابلة لعنوان المخبئ.</string>
     <string name="init_navigation_menu_description">هنا يمكنك اختيار أي طريقة ملاحة متاحة ستظهر في قائمة ملاحة المخبئ أو إحدثيات الطريق. الأدوات المعطلة غير مثبتة على الجهاز.</string>
     <string name="init_debug_title">معلومات التصحيح</string>
     <string name="init_debug_note">c:geo يمكنه أن ينشئ الكثير من معلومات التصحيح. تفعيل هذا الإعداد سوف يؤثر على استقرار c:geo و ينصح به فقط عندما تتم مطالبتك بإرسال السجل إلى المطورين. الرجاء الإبقاء على تسجيل الدخول إلى \'تصحيح الأخطاء\' معطل أثناء الاستخدام العادي لـ c:geo!</string>
@@ -566,14 +565,12 @@
     <string name="auth_unconnected">غير متصل بعد</string>
     <string name="auth_dialog_waiting">في انتظار %s&#8230;</string>
     <string name="auth_explain_short">العملية التالية سوف تسمح لـ <b>c:geo</b> بالوصول إلى %s.</string>
-    <string name="auth_explain_long">الضغط على زر \"الترخيص لـ c:geo\" سيبدأ العملية. ستفتح هذه العملية متصفح ويب باستخدام صفحة %s. قم بتسجيل الدخول إلى هذه الصفحة و اسمح لـ <b>c:geo</b> بالوصول إلى حسابك. هذا كل ما في الأمر.</string>
     <string name="auth_forget_title">نسيان المصادقة؟</string>
     <string name="auth_forget_message">ستكون غير متصل من هذه الخدمة. سيتم فقدان بيانات الاعتماد المحفوظة الخاص بك.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">العملية التالية سوف تسمح لـ <b>c:geo</b> بالوصول إلى %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">العملية التالية سوف تسمح لـ <b>c:geo</b> بالوصول إلى %s.</string>
-    <string name="auth_token_explain_long">ملئ بياناتك و الضغط على زر \"الترخيص لـ c:geo\" سيبدأ العملية. هذه العملية ستقوم بتوصيلك مع %s و تسترجع رمز المصادقة. هذا كل ما في الأمر.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo الآن مرخص له بالنشر على التويتر.</string>
     <!-- auth opencaching -->
