@@ -476,7 +476,6 @@
     <string name="init_secondary_navigation_tool">Metoda de navigare secundară</string>
     <string name="init_default_navigation_tool_description">Aici poţi alege metoda de navigare preferată.</string>
     <string name="init_default_navigation_tool_select">Unealtă de selecţie</string>
-    <string name="init_default_navigation_tool_2_description">Aici poţi alege metoda de navigare secundară. Aceasta se poate activa apăsând prelungit pe icoana de navigare alături de numele cutiei.</string>
     <string name="init_navigation_menu_description">Aici poţi alege care dintre metodele de navigare vor fi afişate în meniul de navigaţie pentru cutii si puncte. Uneltele inactive nu sunt instalate pe acest dispozitiv.</string>
     <string name="init_debug_title">Informaţii pentru depanare</string>
     <string name="init_debug_note">c:geo poate genera o mulţime de informaţii de depanare. Activând această setare va afecta stabilitatea lui c:geo şi este recomandată numai dacă vi se cer astfel de informaţii de către dezvoltatori (de exemplu atunci când raportezi o eroare în funcţionare). Te rog să ţii dezactivată această opţiune în timpul utilizării normale a c:geo!</string>
@@ -556,14 +555,12 @@
     <string name="auth_unconnected">Încă neconectat</string>
     <string name="auth_dialog_waiting">Aştept după %s…</string>
     <string name="auth_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
-    <string name="auth_explain_long">Apăsând \"Autorizează c:geo\" va începe procedura. Această procedură va deschide în browser pagina %s. Autentifică-te pe această pagină şi confirmă permisiunea pentru ca <b>c:geo</b> să aibe acces la contul tău. Aceasta este totul.</string>
     <string name="auth_forget_title">Renunţă la autorizare?</string>
     <string name="auth_forget_message">Vei fi deconectat de la acest serviciu. Numele de utilizator şi parola vor fi şterse din aplicaţie.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
-    <string name="auth_token_explain_long">Introducând informaţiile tale de autentificare şi apăsând butonul \"autorizează c:geo\" va porni procesul de autorizare. Acesta se va conecta la %s şi va obţine un token de autentificare. Asta e tot.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo este acum autorizat să posteze pe Twitter.</string>
     <!-- auth opencaching -->
