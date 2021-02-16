@@ -673,7 +673,6 @@
     <string name="init_directionwidth">ナビルートの線幅</string>
     <string name="init_directionwidth_summary">ナビルートの線幅の選択</string>
     <string name="init_routecolor">個別ルートの色</string>
-    <string name="init_routecolor_summary">個別ルートの色と不透明度を選択。個別ルートはウェイポイント/キャッシュをロングタップで選択して作成したルートです(「地図の動作」でロングタップを有効にする必要があります)</string>
     <string name="init_routewidth">個別ルートの線幅</string>
     <string name="init_routewidth_summary">個別ルートの線幅を選択</string>
     <string name="init_trackcolor">GPXトラック/ルートの色</string>
@@ -700,7 +699,6 @@
     <string name="init_secondary_navigation_tool">2番目のナビゲーション</string>
     <string name="init_default_navigation_tool_description">お好きなナビツールを選択できます</string>
     <string name="init_default_navigation_tool_select">ナビツールの選択</string>
-    <string name="init_default_navigation_tool_2_description">2番目にお好きなナビツールを選択できます。キャッシュ情報のタイトルの右隣にあるナビアイコンをロングタップすると起動できます</string>
     <string name="init_navigation_menu_description">キャッシュまたはウェイポイントのナビゲーションメニューに表示するナビゲーション方法を選択できます。未インストールのツールは選択できません</string>
     <string name="init_debug_title">デバッグ情報</string>
     <string name="init_debug_note">c:geoは多くのデバッグ情報を作成することができます。この設定を有効にするとc:geoの安定性に影響を与えます。開発者にログを送信するよう求められた場合のみお勧めします。通常時は無効にして下さい!</string>
@@ -857,10 +855,8 @@
     <string name="auth_register">アカウントを作成</string>
     <string name="auth_connected">接続しました</string>
     <string name="auth_unconnected">まだ接続されていません</string>
-    <string name="auth_connected_as">%sとして接続しました\nここをタップして更新するかロングタップしてc:geoから認証データを削除できます</string>
     <string name="auth_dialog_waiting">%sからの返答を待っています…</string>
     <string name="auth_explain_short">次の処理で<b>c:geo</b>が%sへのアクセスをできるようになります</string>
-    <string name="auth_explain_long">「c:geoを認証」ボタンを押すとWebブラウザで%sが開きます。Webサイトにログインし<b>c:geo</b>のアクセスを許可してください</string>
     <string name="auth_forget_title">認証を削除しますか?</string>
     <string name="auth_forget_message">このサービスから切断します。保存されているアカウント情報は失われます</string>
     <!-- auth credentials -->
@@ -869,7 +865,6 @@
     <string name="auth_register_explain">アカウントをお持ちでない場合は新規登録してください。以下をタップするとサービスのウェブページに移動します。 c:geoはGoogle/Apple/Facebook経由でのログインをサポートしていないため、ユーザー名とパスワードを使用してアカウントを作成してください。 c:geoでログインする前に、アカウントのメールアドレス認証が必要な場合があります</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">次の処理で<b>c:geo</b>が%sにアクセスできるようになります</string>
-    <string name="auth_token_explain_long">アカウント情報を入力して「c:geoを承認」ボタンを押すと処理を開始します。%sに接続して認証トークンを取得します</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geoはTwitterにポストするための認証を受けました</string>
     <!-- auth opencaching -->
