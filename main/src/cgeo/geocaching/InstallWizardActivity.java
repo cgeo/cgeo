@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.databinding.InstallWizardBinding;
 import cgeo.geocaching.downloader.MapDownloadSelectorActivity;
 import cgeo.geocaching.downloader.MapDownloaderUtils;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
@@ -95,22 +96,23 @@ public class InstallWizardActivity extends AppCompatActivity {
         } else {
             mode = WizardMode.values()[getIntent().getIntExtra(BUNDLE_MODE, WizardMode.WIZARDMODE_DEFAULT.id)];
         }
-        setContentView(R.layout.install_wizard);
+        final InstallWizardBinding binding = InstallWizardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        logo = findViewById(R.id.wizard_logo);
-        title = findViewById(R.id.wizard_title);
-        text = findViewById(R.id.wizard_text);
+        logo = binding.wizardLogo;
+        title = binding.wizardTitle;
+        text = binding.wizardText;
 
-        button1Info = findViewById(R.id.wizard_button1_info);
-        button1 = findViewById(R.id.wizard_button1);
-        button2Info = findViewById(R.id.wizard_button2_info);
-        button2 = findViewById(R.id.wizard_button2);
-        button3Info = findViewById(R.id.wizard_button3_info);
-        button3 = findViewById(R.id.wizard_button3);
+        button1Info = binding.wizardButton1Info;
+        button1 = binding.wizardButton1;
+        button2Info = binding.wizardButton2Info;
+        button2 = binding.wizardButton2;
+        button3Info = binding.wizardButton3Info;
+        button3 = binding.wizardButton3;
 
-        prev = findViewById(R.id.wizard_prev);
-        skip = findViewById(R.id.wizard_skip);
-        next = findViewById(R.id.wizard_next);
+        prev = binding.wizardPrev;
+        skip = binding.wizardSkip;
+        next = binding.wizardNext;
 
         updateDialog();
     }
