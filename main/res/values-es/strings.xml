@@ -589,7 +589,6 @@
     <string name="init_directionwidth">Ancho de línea de dirección</string>
     <string name="init_directionwidth_summary">Seleccionar ancho para la línea de dirección</string>
     <string name="init_routecolor">Color de línea de ruta individual</string>
-    <string name="init_routecolor_summary">Seleccione el color y la opacidad para una línea de ruta individual. Una ruta individual es una colección de waypoints y/o cachés que seleccionó al mantener pulsado el waypoint /caché. (Primero debe activar la función de pulsación larga, vea la configuración del mapa.)</string>
     <string name="init_circlecolor">Color de línea de círculo</string>
     <string name="init_circlecolor_summary">Seleccione el color y la opacidad de la línea circular. Los circuitos se utilizan como una representación visual para el radio mínimo alrededor de un cache o waypoint físico, en cuyo interior no se permite ningún otro caché o waypoint físico. (Aplica a geocaching.com)</string>
     <string name="init_circlefillcolor">Color de relleno de círculo</string>
@@ -605,7 +604,6 @@
     <string name="init_secondary_navigation_tool">Navegación secundaria</string>
     <string name="init_default_navigation_tool_description">Aquí puedes seleccionar tu herramienta de navegación preferida.</string>
     <string name="init_default_navigation_tool_select">Seleccionar herramienta</string>
-    <string name="init_default_navigation_tool_2_description">Aquí puedes seleccionar tu segunda herramienta de navegación. Actívala presionando unos segundos el icono de navegación al lado del título del caché.</string>
     <string name="init_navigation_menu_description">Aquí puedes seleccionar qué métodos de navegación de los disponibles serán mostrados en el menú de navegación de un caché o waypoint. Las herramientas deshabilitadas no están instaladas en este dispositivo.</string>
     <string name="init_debug_title">Información de depuración</string>
     <string name="init_debug_note">c:geo puede generar una gran cantidad de información de depuración. Activar este ajuste afectará a la estabilidad de c:geo y sólo se recomienda si te han pedido que envíes un registro a los desarrolladores. ¡Por favor mantén el registro de depuración desactivado durante el uso normal de c:geo!</string>
@@ -702,17 +700,14 @@
     <string name="auth_register">Crear una cuenta</string>
     <string name="auth_connected">Conectado</string>
     <string name="auth_unconnected">Aún no conectado</string>
-    <string name="auth_connected_as">Conectado como %s.\nPresione aquí para actualizar o mantenga pulsado para eliminar los datos de autorización de c:geo.</string>
     <string name="auth_dialog_waiting">Esperando a %s…</string>
     <string name="auth_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
-    <string name="auth_explain_long">Presionando el botón \"Autorizar c:geo\" comenzará el proceso. Este proceso abrirá el navegador web con una página %s. Registrate en esta página y permite a <b>c:geo</b> acceder a tu cuenta. Eso es todo.</string>
     <string name="auth_forget_title">¿Olvidar la autorización?</string>
     <string name="auth_forget_message">Serás desconectado de este servicio. Tus credenciales guardadas actuales se perderán.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
-    <string name="auth_token_explain_long">Rellenando tus datos y presionando el botón \"autorizar a c:geo\" comenzarará el proceso. Este proceso conectará con %s y obtendrá una autorización. Eso es todo.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo está autorizado ahora a publicar en Twitter.</string>
     <!-- auth opencaching -->
