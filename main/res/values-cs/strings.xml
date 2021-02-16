@@ -678,7 +678,6 @@
     <string name="init_directionwidth">Šířka směrové čáry</string>
     <string name="init_directionwidth_summary">Vyberte šířku pro směrovou čáru</string>
     <string name="init_routecolor">Barva čáry individuální trasy</string>
-    <string name="init_routecolor_summary">Vyberte barvu a neprůhlednost čáry pro individuální trasy. Individuální trasa je soubor trasových bodů a / nebo kešek, které jste vybrali dlouhým přidržením trasových bodů / kešky. (Nejprve musíte povolit funkci dlouhého přidržení, viz nastavení mapy.)</string>
     <string name="init_routewidth">Šířka čáry individuální trasy</string>
     <string name="init_routewidth_summary">Vyberte šířku čáry pro individuální trasy</string>
     <string name="init_trackcolor">Barva čáry GPX stopy/trasy</string>
@@ -705,7 +704,6 @@
     <string name="init_secondary_navigation_tool">Sekundární navigace</string>
     <string name="init_default_navigation_tool_description">Zde můžeš vybrat preferovaný navigační nástroj.</string>
     <string name="init_default_navigation_tool_select">Vyber nástroj</string>
-    <string name="init_default_navigation_tool_2_description">Zde můžeš vybrat druhý preferovaný navigační nástroj. Ten se aktivuje dlouhým klepnutím na navigační ikonu vedle názvu kešky.</string>
     <string name="init_navigation_menu_description">Zde můžeš zvolit, které z dostupných metod navigace budou zobrazovány v navigačním menu kešky nebo trasového bodu. Nedostupné nástroje nejsou na tomto zařízení nainstalovány.</string>
     <string name="init_debug_title">Ladící informace</string>
     <string name="init_debug_note">c:geo umí generovat mnoho ladících informací. Aktivace tohoto nastavení se dotkne stability c:geo a doporučuje se pouze tehdy, jste-li požádáni o poslání záznamu vývojářům. Prosím nechte toto nastavení vypnuté při normálním používání c:geo!</string>
@@ -872,10 +870,8 @@
     <string name="auth_register">Vytvořit účet</string>
     <string name="auth_connected">Připojeno</string>
     <string name="auth_unconnected">Zatím nepřipojeno</string>
-    <string name="auth_connected_as">Připojeno jako %s.\nKlepněte zde pro aktualizaci nebo dlouhým stiskem odeberte autorizační data z aplikace c:geo.</string>
     <string name="auth_dialog_waiting">Čekání na %s…</string>
     <string name="auth_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
-    <string name="auth_explain_long">Stisknutím tlačítka „Autorizovat c:geo“ bude proces zahájen. Tento proces otevře webový prohlížeč se stránkou %s. Na této stránce se přihlaš a povol <b>c:geu</b> přistupovat k tvému účtu. To je vše.</string>
     <string name="auth_forget_title">Zapomenout pověření?</string>
     <string name="auth_forget_message">Budeš odpojen/a od této služby. Tvé aktuálně uložené přihlašovací údaje budou ztraceny.</string>
     <!-- auth credentials -->
@@ -884,7 +880,6 @@
     <string name="auth_register_explain">Pokud ještě nemáte účet, klikněte níže pro přesměrování na webovou stránku služby pro vytvoření účtu. Ujistěte se, že používáte metodu přihlášení pomocí uživatelského jména a hesla k vytvoření účtu, protože c:geo nepodporuje přihlášení přes Google/Apple/Facebook. Po vytvoření účtu může být nutné ověření Vaší e-mailové adresy, než se budete moci přihlásit v c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
-    <string name="auth_token_explain_long">Vyplněním přihlašovacích údajů a stisknutím tlačítka „Autorizovat c:geo“ bude proces zahájen. Poté bude navázáno spojení s %s a načten ověřovací token. To je vše.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo nyní může posílat zprávy na Tvůj Twitter.</string>
     <!-- auth opencaching -->
