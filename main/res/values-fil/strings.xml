@@ -482,7 +482,6 @@
     <string name="init_secondary_navigation_tool">Pangalawang Nabigasyon</string>
     <string name="init_default_navigation_tool_description">Maaring mong piliin dito ang ginusto mong gamit sa nabigasyon.</string>
     <string name="init_default_navigation_tool_select">Ang pagpili ng gamit</string>
-    <string name="init_default_navigation_tool_2_description">Dito mo magagawang piliin ang iyong pangalawang ginustong gamit sa nabigasyon. Ito ay gawing aktibo sa pamamagitan ng pag pindut ng matagal sa imahe ng nabigasyon sunod sa titolo ng cache.</string>
     <string name="init_navigation_menu_description">Dito mo pwedeng piliin ang mga pwede mong magamit na paraan sa nabigasyon na makikita mo sa menu ng nabigasyon para sa cache o kaya waypoint. Ang mga kagamitan para i-disable ay hindi naka-install sa aparatong ito.</string>
     <string name="init_debug_title">Pag-debug ng impormasyon</string>
     <string name="init_debug_note">c:geo maaring bumuo ng maraming impormasyon ng debugging. Inaktiba ang setting para maka-apekto sa katatagan ng c:geo at ito lang ang inirekomenda kapag tinanong ka para maka pasa ka ng log sa mga developers. Panatilihin ang debug logging na naka-disable habang naka-normal ang paggamit sa c:geo!</string>
@@ -564,14 +563,12 @@
     <string name="auth_unconnected">Hindi pa nakakonek</string>
     <string name="auth_dialog_waiting">Ang paghihintay para sa %s&#8230;</string>
     <string name="auth_explain_short">Ang sumusunod na proseso ay nagpapahintulot sa <b>c:geo</b> na makapag-akses sa %s.</string>
-    <string name="auth_explain_long">Ang pagpipindut sa pindutang \"awtorisahan ang c:geo\" ay nagsimula ng proseso. Ang prosesong ito ay magbubukas ng isang browser sa web na %s na pahina. Mag-log in sa pahinang ito at payagang ang <b>c:geo</b> na makapag-akses sa iyong akwant. Iyon lang.</string>
     <string name="auth_forget_title">Kalimotan ang awtorisasyon?</string>
     <string name="auth_forget_message">Ikaw kay madiskonek mula sa serbisyo. Ang iyong naka save na mga kredensyal ay mawawala.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Ang sumusunod na proseso ay pumapayag sa <b>c:geo</b> na makapag-akses sa %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ang sumusunod na proseso ay pumapayag sa <b>c:geo</b> na makapag-akses sa %s.</string>
-    <string name="auth_token_explain_long">Ang pagpuno sa iyong kredensyal at pagpipindot sa pindutang \"awtorisahan ang c:geo\" ay magpapasimula sa proseso. Ang proseso ito ay kumokonekta sa %s at magbabawi sa isang token sa awtentikasyon. Iyon lamang.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">inawtorisahan maka pag post sa twitter ang c:geo.</string>
     <!-- auth opencaching -->
