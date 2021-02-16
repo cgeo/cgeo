@@ -556,7 +556,6 @@
     <string name="init_secondary_navigation_tool">Másodlagos navigáció</string>
     <string name="init_default_navigation_tool_description">Itt választhatod ki az elsődleges navigációs eszközödet.</string>
     <string name="init_default_navigation_tool_select">Eszköz kiválasztása</string>
-    <string name="init_default_navigation_tool_2_description">Itt választhatod ki a másodlagos navigációs eszközödet. A láda neve melletti navigációs ikon hosszabb megnyomásával aktiválhatod.</string>
     <string name="init_navigation_menu_description">Itt adhatod meg, hogy mely navigációs lehetőségek jelenjenek meg egy láda vagy útpont számára a navigációs menüben. A letiltott alkalmazások nincsenek telepítve.</string>
     <string name="init_debug_title">Hibakeresési információ</string>
     <string name="init_debug_note">A c:geo nagy mennyiségű hibakeresési információt képes generálni, de ennek bekapcsolása hatással lehet a stabil működésére. Ez csak akkor ajánlott, ha a fejlesztők logok küldését kérték. Kérjük, tartsd kikapcsolt állapotban a normal használat során!</string>
@@ -640,14 +639,12 @@
     <string name="auth_unconnected">Nem vagy bejelentkezve</string>
     <string name="auth_dialog_waiting">Várakozás a(z) %s válaszára…</string>
     <string name="auth_explain_short">Itt engedélyeztetheted a <b>c:geo</b> hozzáférését a(z) %s adataihoz.</string>
-    <string name="auth_explain_long">A \"Hitelesítés\" gomb megnyomása után a böngészőben megnyílik a(z) %s oldala. Jelentkezz be ezen az oldalon, és engedélyezd a <b>c:geo</b> hozzáférését a fiókodhoz!</string>
     <string name="auth_forget_title">Hitelesítés törlése</string>
     <string name="auth_forget_message">Kijelentkezel a szolgáltatótól. A mentett bejelentkezési adataid elvesznek.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Itt engedélyeztetheted a <b>c:geo</b> hozzáférését a(z) %s adataihoz.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Itt engedélyeztetheted a <b>c:geo</b> hozzáférését a(z) %s adataihoz.</string>
-    <string name="auth_token_explain_long">A bejelentkezési adataid megadása, majd a \"c:geo engedélyezése\" gomb megnyomása után bejelentkezünk a(z) %s oldalra és lekérjük a hitelesítési tokent.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">Twitter: A c:geo engedélyt kapott bejegyzések küldésére.</string>
     <!-- auth opencaching -->
