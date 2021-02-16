@@ -630,7 +630,6 @@
     <string name="init_directionwidth">Bredd på riktningsspår</string>
     <string name="init_directionwidth_summary">Välj bredd för riktlinje</string>
     <string name="init_routecolor">Färg på individuell ruttlinje</string>
-    <string name="init_routecolor_summary">Välj färg och ogenomskinlighet för individuell ruttlinje. En enskild rutt är en samling av waypoints och/eller cacher du valt genom att långtrycka på waypoint/cache. (Du måste aktivera funktionen för långtryck först, se kartinställningar.)</string>
     <string name="init_routewidth">Individuell ruttlinje bredd</string>
     <string name="init_routewidth_summary">Välj bredd för individuell ruttlinje</string>
     <string name="init_circlecolor">Färg på linje runt cirklar</string>
@@ -649,7 +648,6 @@
     <string name="init_secondary_navigation_tool">Sekundär navigering</string>
     <string name="init_default_navigation_tool_description">Här kan du välja ditt förvalda navigeringsprogram.</string>
     <string name="init_default_navigation_tool_select">Välj program</string>
-    <string name="init_default_navigation_tool_2_description">Här kan du välja ditt andra förvalda navigeringsprogram. Det kan aktiveras genom att klicka länge på navigationsikonen i listen överst i en cachebeskrivning.</string>
     <string name="init_navigation_menu_description">Här kan du välja program som ska visas navigeringsmenyn i en cache eller punkt. Program som är gråa är inte installerade på enheten.</string>
     <string name="init_debug_title">Felsöka information</string>
     <string name="init_debug_note">c:geo kan generera mycket debug-information. Den här inställningen påverkar c:geos stabilitet och är endast rekommenderad att aktivera ifall en utvecklare vill att du ska skicka en log. Vänligen ha debug-loggning avstängd under normal användning av c:geo!</string>
@@ -749,17 +747,14 @@
     <string name="auth_register">Skapa ett konto</string>
     <string name="auth_connected">Ansluten</string>
     <string name="auth_unconnected">Inte ansluten ännu</string>
-    <string name="auth_connected_as">Ansluten som %s.\nTryck här för att uppdatera eller långtryck för att ta bort behörighetsdata från c:geo.</string>
     <string name="auth_dialog_waiting">Väntar på %s…</string>
     <string name="auth_explain_short">Följande process kommer att tillåta <b>c:geo</b> att få tillgång till %s.</string>
-    <string name="auth_explain_long">Genom att trycka på knappen \"tillåt c:geo\" kommer processen att startas. Denna process kommer att öppna en webbläsare med %s sida. Logga in på den här sidan och låt <b>c:geo</b> komma åt ditt konto. Det är allt.</string>
     <string name="auth_forget_title">Glöm autentisering?</string>
     <string name="auth_forget_message">Du kommer att bli frånkopplad från denna tjänst, dina sparade uppgifter kommer att försvinna.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Följande process kommer ge <b>c:geo</b> tillgång till %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Följande process kommer ge <b>c:geo</b> tillgång till %s.</string>
-    <string name="auth_token_explain_long">Genom att fylla i dina uppgifter och trycka på \"tillåta c:geo\" kommer processen att startas. Denna process kommer att ansluta till %s och hämta ett inloggningshandtag. Det är allt.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo är nu godkänd att posta på Twitter.</string>
     <!-- auth opencaching -->
