@@ -13,6 +13,7 @@ import android.net.Uri;
 import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
@@ -63,6 +64,11 @@ public enum PersistableFolder {
     @AnyRes
     public int getPrefKeyId() {
         return prefKeyId;
+    }
+
+    @StringRes
+    public int getNameKeyId() {
+        return nameKeyId;
     }
 
     PersistableFolder(@AnyRes final int prefKeyId, @AnyRes final int nameKeyId, @NonNull final Folder ... defaultFolderCandidates) {
