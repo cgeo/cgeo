@@ -676,7 +676,6 @@
     <string name="init_directionwidth">Szerokość linii kierunku</string>
     <string name="init_directionwidth_summary">Wybierz szerokość dla linii kierunku</string>
     <string name="init_routecolor">Indywidualny kolor linii trasy</string>
-    <string name="init_routecolor_summary">Wybierz kolor i nieprzezroczystość dla poszczególnych linii trasy. Indywidualna trasa to zbiór punktów trasy i/lub skrytek wybranych przez długie naciśnięcie na waypoint/cache. (Musisz najpierw włączyć funkcję długiego przytrzymania, zobacz ustawienia mapy.)</string>
     <string name="init_routewidth">Pojedyncza szerokość linii</string>
     <string name="init_routewidth_summary">Wybierz szerokość dla pojedynczej linii trasy</string>
     <string name="init_trackcolor">Kolor linii ścieżki/trasy GPX</string>
@@ -703,7 +702,6 @@
     <string name="init_secondary_navigation_tool">Nawigacja pomocnicza</string>
     <string name="init_default_navigation_tool_description">Tutaj możesz wybrać preferowane narzędzie nawigacji.</string>
     <string name="init_default_navigation_tool_select">Wybierz narzędzie</string>
-    <string name="init_default_navigation_tool_2_description">Tutaj możesz wybrać drugie preferowane narzędzie nawigacji. Jest aktywowane przez długie kliknięcie ikony nawigacji obok nazwy skrzynki.</string>
     <string name="init_navigation_menu_description">Możesz tu wybrać jakie dostępne metody nawigacji będą widoczne w menu nawigacji. Pozycje wyłączone nie są zainstalowane na urządzeniu.</string>
     <string name="init_debug_title">Informacja o błędach</string>
     <string name="init_debug_note">c:geo może generować wiele informacji związanych z debugowaniem. Aktywacja tego ustawienia będzie mieć wpływ na stabilność c:geo i jest zalecana tylko, jeśli zostanie wyświetlona prośba o wysyłanie logu do programistów. Prosimy o zachowanie tego logowania wyłączonego podczas normalnego korzystania z c:geo!</string>
@@ -866,10 +864,8 @@
     <string name="auth_register">Utwórz konto</string>
     <string name="auth_connected">Połączono</string>
     <string name="auth_unconnected">Jeszcze nie połączono</string>
-    <string name="auth_connected_as">Połączony jako %s.\nNaciśnij tutaj, aby zaktualizować lub przytrzymaj, aby usunąć dane autoryzacyjne z c:geo.</string>
     <string name="auth_dialog_waiting">Czekanie na %s…</string>
     <string name="auth_explain_short">Wybrany proces pozwoli na dostęp <b>c:geo</b> do %s.</string>
-    <string name="auth_explain_long">Naciśnięcie \"autoryzuj c:geo\" rozpocznie proces autoryzacji. Zostanie otwarte okno przeglądarki ze stroną %s. Zaloguj się na tej stronie i zezwól <b>c:geo</b> na dostęp do konta.</string>
     <string name="auth_forget_title">Zapomnij uwierzytelnienie?</string>
     <string name="auth_forget_message">Zostaniesz rozłączony z tego serwisu. Twoje dane uwierzytelniające zostaną utracone.</string>
     <!-- auth credentials -->
@@ -878,7 +874,6 @@
     <string name="auth_register_explain">Jeśli nie masz jeszcze konta, kliknij poniżej, aby przejść do strony internetowej usługi w celu utworzenia konta. Upewnij się, że używasz metody z nazwą użytkownika i hasłem, aby utworzyć konto, ponieważ c:geo nie obsługuje logowania przez Google/Apple/Facebook. Po utworzeniu konta może być konieczne sprawdzenie poprawności adresu e-mail, zanim będzie można użyć logowania za pomocą c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Następujący proces umożliwi <b>c:geo</b> na dostęp do %s.</string>
-    <string name="auth_token_explain_long">Po uzupełnieniu danych użytkownika i naciśnięciu przycisku \"authorize c:geo\" proces uwierzytelnienia zostanie rozpoczęty. Aplikacja połączy się z %s i otrzyma token uwierzytelniający. To wszytko.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo jest teraz autoryzowane do zamieszczania postów na Twitterze.</string>
     <!-- auth opencaching -->
