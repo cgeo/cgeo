@@ -676,7 +676,6 @@
     <string name="init_directionwidth">Suuntaviivan leveys</string>
     <string name="init_directionwidth_summary">Valitse suuntaviivan leveys</string>
     <string name="init_routecolor">Yksittäisen reittiviivan väri</string>
-    <string name="init_routecolor_summary">Valitse yksittäisen reittiviivan väri ja läpinäkyvyys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
     <string name="init_routewidth">Yksittäisen reittiviivan leveys</string>
     <string name="init_routewidth_summary">Valitse yksittäisen reittiviivan leveys</string>
     <string name="init_trackcolor">GPX-reitin viivan väri</string>
@@ -703,7 +702,6 @@
     <string name="init_secondary_navigation_tool">Toissijainen navigointi</string>
     <string name="init_default_navigation_tool_description">Tästä voit valita ensisijaisen navigointitavan.</string>
     <string name="init_default_navigation_tool_select">Valitse työkalu</string>
-    <string name="init_default_navigation_tool_2_description">Tästä voi valita toissijaisen navigointitavan. Aktivoidaksesi sen paina navigointi-ikonia kätkön nimen vieressä pitkään.</string>
     <string name="init_navigation_menu_description">Tästä voit valita mitkä käytettävissä olevista navigointitavoista näytetään kätkön/reittipisteen navigointivalikossa. Valitsemattomia ei tulla asentamaan laitteeseesi.</string>
     <string name="init_debug_title">Virheenjäljitystiedot</string>
     <string name="init_debug_note">c:geo voi tuottaa runsaasti vianmääritystietoja. Tämän asetuksen aktivointi voi vaikuttaa c:geon vakauteen ja se on suositeltavaa tehdä ainoastaan mikäli sinua on pyydetty lähettämään loki kehittäjille. Pidä vianjäljitysloki pois päältä c:geon normaalin käytön aikana!</string>
@@ -866,10 +864,8 @@
     <string name="auth_register">Luo käyttäjätili</string>
     <string name="auth_connected">Yhdistetty</string>
     <string name="auth_unconnected">Ei vielä yhdistetty</string>
-    <string name="auth_connected_as">Yhdistetty nimellä %s. \nPaina tästä päivittääksesi tai poistaaksesi valtuutuksen c:geosta.</string>
     <string name="auth_dialog_waiting">Odotetaan %s…</string>
     <string name="auth_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
-    <string name="auth_explain_long">Painamalla \"Valtuuta c:geo\"-painiketta Aloitat tapahtuman. Tämä tapahtuma Avaa %s sivun web-selaimessa. Kirjaudu sisään tällä sivulla ja anna <b>c:geo</b> lupa käyttää tiliäsi. Siinä kaikki.</string>
     <string name="auth_forget_title">Unohda kirjautumistiedot?</string>
     <string name="auth_forget_message">Yhteytesi katkaistaan tästä palvelusta. Tällä hetkellä tallennettuna olevat kirjautumistietosi menetetään.</string>
     <!-- auth credentials -->
@@ -878,7 +874,6 @@
     <string name="auth_register_explain">Jos sinulla ei ole vielä tiliä, napauta alta palvelun verkkosivulle luodaksesi sellaisen. Kirjauduthan sisälle käyttäjätunnusta ja salasanaa käyttämällä, c:geo ei vielä tue kirjautumista Googlen, Applen tai Facebookin kautta. Tilin luonnin jälkeen voi olla, että sinun tulee vahvistaa sähköpostisi, ennenkuin voit käyttää tiliäsi kirjautuaksesi sisään c:geoon.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
-    <string name="auth_token_explain_long">Täyttämällä tiedot ja painamalla \"Valtuuta c:geo\" painiketta Aloitat tapahtuman. Tämä tapahtuma yhdistää %s ja hakea todennuksen. Siinä kaikki.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo on nyt valtuutettu julkaisemaan Twitterissä.</string>
     <!-- auth opencaching -->
