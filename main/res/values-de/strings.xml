@@ -679,7 +679,7 @@
     <string name="init_directionwidth">Breite der Richtungslinie</string>
     <string name="init_directionwidth_summary">Breite der Navigationslinie einstellen</string>
     <string name="init_routecolor">Farbe der individuellen Route</string>
-    <string name="init_routecolor_summary">Farbe und Deckkraft der individuellen Route einstellen. Eine individuelle Route besteht aus mehreren Wegpunkten und/oder Caches, die Du in der Karte durch einen langen Druck auf den Wegpunkt/Cache ausgewählt hast. (\"Langer Druck\" muss zuvor in den Karteneinstellungen aktiviert worden sein.)</string>
+    <string name="init_routecolor_summary">Farbe und Deckkraft der individuellen Route einstellen. Eine individuelle Route besteht aus mehreren Wegpunkten und/oder Caches, die du in der Karte durch einen langes Tippen auf den Wegpunkt/Cache ausgewählt hast. (\"Langes Tippen\" muss zuvor in den Karteneinstellungen aktiviert worden sein.)</string>
     <string name="init_routewidth">Breite der individuellen Route</string>
     <string name="init_routewidth_summary">Breite für individuelle Routenlinie auswählen</string>
     <string name="init_trackcolor">Linienfarbe für GPX-Track/Route</string>
