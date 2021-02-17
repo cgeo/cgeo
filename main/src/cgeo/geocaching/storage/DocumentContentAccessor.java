@@ -434,7 +434,9 @@ class DocumentContentAccessor extends AbstractContentAccessor {
 
         final UriPermission perm = this.uriPermissionCache.get(UriUtils.toCompareString(uri));
         if (perm == null) {
-            return false;
+            // This happens when we use temporary folder uris (they have no entry in persistent permission cache).
+            // Return true in this case
+            return true;
         }
 
         return perm.isReadPermission() && (!checkWrite || perm.isWritePermission());
