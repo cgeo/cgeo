@@ -1956,6 +1956,7 @@
     <string name="wizard_outro_error">Nedokončená konfigurace\nNěkteré části c:geo nebudou pracovat podle očekávání!</string>
     <string name="wizard_permissions_title">Nastavit oprávnění aplikace</string>
     <string name="wizard_permissions_intro">Aplikace c:geo vyžaduje na správné fungování několik povolení na vašem zařízení.\nV dalších krocích vám je vysvětlíme.</string>
+    <string name="wizard_permissions_folder_title">Nastavit složku: %s</string>
     <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
     <string name="wizard_gpxfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání GPX souborů, například pro import / export kešek nebo tras. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
     <string name="wizard_platforms_title">Konfigurace služeb</string>
