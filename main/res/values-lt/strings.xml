@@ -233,7 +233,6 @@
     <string name="warn_search_help_tb">Įveskite keliauninko kodą. Pvz. \"TB5303E\".</string>
     <string name="warn_log_text_fill">Prašome įrašyti įrašo tekstą.</string>
     <string name="warn_load_images">c:geo nepavyko įkelti vaizdo failo.</string>
-    <string name="warn_invalid_mapfile">Pasirinktas žemėlapis nėra Mapsforge tipo ar palaikomos versijos.\n(c:geo palaiko nuo v3 iki v5 (v3 palaikymą galite įjungti pasirinkę \"Senasis Mapsforge V3\").)\n\nŽemėlapiai neprisijungus neprieinami.</string>
     <string name="warn_pocket_query_select">Nepasirinktas joks Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nerastas Pocket query internete.</string>
     <string name="warn_invalid_character">Simbolis turi būti raidė arba skaitmuo</string>
@@ -642,7 +641,6 @@
     <string name="init_directionwidth">Krypties linijos plotis</string>
     <string name="init_directionwidth_summary">Pasirinkite krypties linijos plotį</string>
     <string name="init_routecolor">Asmeninio maršruto linijos spalva</string>
-    <string name="init_routecolor_summary">Pasirinkite asmeninio maršruto linijos spalvą ir skaidrumą. Asmeninis maršrutas yra papildomų taškų ir (arba) slėptuvių rinkinys, kurį pasirinkote ilgai paspaudę papildomą tašką/slėptuvę. (Pirmiausia turite įjungti ilgo paspaudimo funkciją, žr. Žemėlapio nustatymus.)</string>
     <string name="init_routewidth">Asmeninio maršruto linijos plotis</string>
     <string name="init_routewidth_summary">Pasirinkite asmeninio maršruto linijos plotį</string>
     <string name="init_circlecolor">Apskritimo linijos spalva</string>
@@ -661,7 +659,6 @@
     <string name="init_secondary_navigation_tool">Antrinė navigacija</string>
     <string name="init_default_navigation_tool_description">Čia galite pasirinkti jūsų pageidaujamą navigacijos įrankį.</string>
     <string name="init_default_navigation_tool_select">Pasirinkite įrankį</string>
-    <string name="init_default_navigation_tool_2_description">Čia galite pasirinkti savo antrą pageidaujamą navigacijos įrankį. Aktyvinkite jį ilgai paspausdami navigacijos piktogramą šalia slėptuvės pavadinimo.</string>
     <string name="init_navigation_menu_description">Čia galite pasirinkti, kuris iš navigacinių metodų bus rodomas slėptuvės arba papildomo taško navigacijos meniu. Išjungti įrankiai yra neįdiegti šiame įrenginyje.</string>
     <string name="init_debug_title">Derinimo informacija</string>
     <string name="init_debug_note">c:geo gali generuoti daug derinimo informacijos. Įgalinus šį nustatymą gali pablogėti c:geo stabilumas; tai daryti rekomenduojama tik tuomet, jei c:geo kūrėjai paprašė jūsų atsiųsti jiems programėlės veiklos žurnalą. Normaliomis programėlės naudojimo aplinkybėmis prašome neįgalinti šio nustatymo!</string>
@@ -760,17 +757,14 @@
     <string name="auth_register">Sukurti paskyrą</string>
     <string name="auth_connected">Prisijungta</string>
     <string name="auth_unconnected">Dar nesate prisijungę</string>
-    <string name="auth_connected_as">Prisijungta kaip %s.\nSpauskite čia norėdami atnaujinti arba ilgai spauskite norėdami pašalinti prisijungimo duomenis iš c:geo.</string>
     <string name="auth_dialog_waiting">Laukiama %s…</string>
     <string name="auth_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
-    <string name="auth_explain_long">Registracija bus pradėta paspaudus mygtuką \"Pradėti registraciją\". Šis procesas naršyklėje atvers %s puslapį. Prisijunkite prie savo paskyros ir leiskite <b>c:geo</b> ja naudotis.</string>
     <string name="auth_forget_title">Pamiršote prisijungimo duomenis?</string>
     <string name="auth_forget_message">Jūs būsite atjungti nuo šios paslaugos. Šiuo metu įrašyti prisijungimo duomenys bus prarasti.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
-    <string name="auth_token_explain_long">Užpildžius jūsų asmeninę informaciją ir paspaudus mygtuką \"Leisti c:geo\" bus pradėtas procesas. Šis procesas prisijungs prie %s ir patvirtins jūsų kredencialus. Tai viskas.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo priregistruota ir jai leidžiama rašyti Twitter paskyroje.</string>
     <!-- auth opencaching -->

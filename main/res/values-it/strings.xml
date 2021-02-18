@@ -153,7 +153,9 @@
     <string name="log_problem_archive_label">Questo cache dovrebbe essere archiviato</string>
     <string name="log_problem_archive_text">Questo geocacher ha segnalato che il cache dovrebbe essere archiviato. Un recensore volontario della community ha ricevuto una notifica.</string>
     <string name="log_image_scale_option_noscaling">Nessun ridimensionamento</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\nRidotto/Compresso:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Immagine</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduci in %s</string>
@@ -239,7 +241,7 @@
     <string name="warn_search_help_tb">Inserisci il codice del trackable. Per esempio \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Prego, inserire del testo nel log.</string>
     <string name="warn_load_images">c:geo non riesce a caricare immagini.</string>
-    <string name="warn_invalid_mapfile">Il file di mappa selezionato non è un file mappa mapsforge valido o utilizza una versione non supportata.\n(c:geo supporta attualmente dalla v3 alla v5 / v3 solo se si utilizza l\'impostazione \"Old Mapfsforge V3\").\n\nLe mappe offline non sono disponibili.</string>
+    <string name="warn_invalid_mapfile">Il file di mappa selezionato non è un file mappa mapsforge valido o utilizza una versione non supportata.\n(c:geo supporta attualmente dalla v3 alla v5).\n\nLe mappe offline non sono disponibili.</string>
     <string name="warn_pocket_query_select">Nessuna Pocket query selezionata.</string>
     <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
     <string name="warn_invalid_character">Il carattere deve essere una lettera o una cifra</string>
@@ -344,6 +346,8 @@
     <string name="caches_nearby">Qui vicino</string>
     <string name="caches_remove_all">Elimina tutti</string>
     <string name="caches_remove_selected">Elimina selezionati</string>
+    <string name="caches_remove_all_completely">Elimina tutto dal dispositivo</string>
+    <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
     <string name="caches_upload_modifiedcoords_warning">Vuoi caricare le coordinate modificate per tutte le cache (selezionate) e sovrascrivere le coordinate esistenti sul server? Questo non può essere annullato.</string>
@@ -427,6 +431,7 @@
     <string name="about_system_write_logcat_type">Crea file di log standard o esteso?\n\nI file di log standard vanno bene per la maggior parte dei casi.\nUtilizzare i log estesi solo quando viene chiesto di farlo (ad esempio per una richiesta di diagnostica).</string>
     <string name="about_system_write_logcat_type_standard">Standard</string>
     <string name="about_system_write_logcat_type_extended">Esteso</string>
+    <string name="about_system_write_logcat_success">File di registro \"%1$s\" scritto nella cartella \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Errore durante la scrittura del file di log</string>
     <string name="changelog_github">Elenco di tutte le modifiche</string>
     <string name="about_nutshellmanual">Manuale online</string>
@@ -454,6 +459,7 @@
     <string name="settings_title_cachedetails">Dettagli cache</string>
     <string name="settings_summary_cachedetails">Personalizzazione dell\'aspetto delle informazioni del cache.</string>
     <string name="settings_title_offlinedata">Dati offline</string>
+    <string name="settings_summary_offlinedata">Configurare i dati da salvare per l\'uso fuori rete (offline), la posizione di archiviazione e le cartelle per i file GPX.</string>
     <string name="settings_title_logging">Registro Log</string>
     <string name="settings_summary_logging">Configura la tua firma e imposta le opzioni di logging.</string>
     <string name="settings_title_map">Mappa</string>
@@ -464,9 +470,12 @@
     <string name="settings_title_map_content">Contenuto Mappa</string>
     <string name="settings_title_map_behavior">Comportamento mappa</string>
     <string name="settings_title_gpx">GPX</string>
+    <string name="settings_title_data_dir">Cartella dati geocache</string>
+    <string name="settings_title_data_dir_usage">Cartella dati geocache (%1$s utilizzata)</string>
     <string name="calculate_dataDir_title">Dati Geocache usati</string>
     <string name="calculate_dataDir">Calcola lo spazio disco usato dai Geocache</string>
     <string name="settings_data_dir_item">%1$s (%2$s liberi)</string>
+    <string name="confirm_data_dir_move_title">Spostare la cartella dati geocache?</string>
     <string name="confirm_data_dir_move">Lo spostamento dei dati geocache potrebbe richiedere molto tempo, a seconda del dispositivo e la quantità di dati.</string>
     <string name="settings_title_basicmembers">Opzioni per i membri di base (non Premium)</string>
     <string name="settings_title_navigation">Navigazione</string>
@@ -620,7 +629,9 @@
     <string name="init_backup_success">Il database di c:geo è stato salvato con successo nel file: </string>
     <string name="init_backup_failed">Backup del database di c:geo fallito.</string>
     <string name="init_backup_unnecessary">Il database è vuoto, il backup non è necessario.</string>
+    <string name="init_backup_folder_exists_error">Impossibile creare una nuova cartella di backup. Hai già eseguito un backup nell\'ultimo minuto?</string>
     <string name="init_backup_no_backup_available">Non c\'è nessun file di backup disponibile.</string>
+    <string name="backup_confirm_overwrite">Questo eliminerà la cartella di backup esistente più vecchia da %s. \nVuoi continuare?</string>
     <string name="restore_confirm_overwrite_database">ATTENZIONE: Questo sovrascriverà %s sul tuo dispositivo!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ATTENZIONE: Questo sovrascriverà %s e le impostazioni correnti sul tuo dispositivo!</string>
     <string name="restore_confirm_overwrite_settings">ATTENZIONE: Questo sovrascriverà le impostazioni correnti sul tuo dispositivo!</string>
@@ -645,10 +656,15 @@
     <string name="settings_readingerror">Errore di lettura impostazioni</string>
     <string name="settings_restart">c:geo deve essere riavviato ora per rendere effettive le impostazioni caricate</string>
     <string name="settings_info_offline_maps_title">Informazioni su mappe Offline</string>
+    <string name="settings_info_offline_maps">c:geo supporta le mappe per l\'uso offline. È possibile ottenere mappe da diversi fornitori o anche creare le proprie mappe (da dati OSM). In primo luogo è necessario selezionare la cartella in cui le mappe offline devono essere memorizzate.</string>
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
     <string name="settings_info_themes">c:geo supporta i temi personalizzati per mappe offline. Questi possono essere usati per modificare lo stile di colore della mappa (ad esempio per avere una mappa notturna) o per evidenziare alcuni oggetti come piste ciclabili o linee di altitudine.</string>
     <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
     <string name="init_local_file_system">File System Locale</string>
+    <string name="init_base_directory_description">Cartella base per i dati locali pubblici</string>
+    <string name="init_map_directory_description">Cartella con le mappe offline</string>
+    <string name="init_gpx_importexportdir">Cartella GPX</string>
+    <string name="init_dataDir">Seleziona cartella dati</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
     <string name="init_maptrail">Mostra traccia cronologia movimenti</string>
     <string name="init_maptrail_length">Lunghezza massima traccia cronologia</string>
@@ -663,7 +679,6 @@
     <string name="init_directionwidth">Spessore linea di direzione</string>
     <string name="init_directionwidth_summary">Seleziona la larghezza della linea di direzione</string>
     <string name="init_routecolor">Colore linea percorso individuale</string>
-    <string name="init_routecolor_summary">Seleziona colore e opacità della linea di percorso individuale. Un percorso individuale è un insieme di waypoint e/o cache selezionati premendo a lungo sul waypoint/cache. (È necessario abilitare prima la funzione di pressione prolungata, vedere le impostazioni della mappa.)</string>
     <string name="init_routewidth">Spessore della linea di percorso individuale</string>
     <string name="init_routewidth_summary">Seleziona la larghezza della linea di percorso individuale</string>
     <string name="init_trackcolor">Colore linea traccia/percorso GPX</string>
@@ -690,22 +705,28 @@
     <string name="init_secondary_navigation_tool">Navigazione secondaria</string>
     <string name="init_default_navigation_tool_description">Qui puoi scegliere il tuo strumento di navigazione preferito. Sarà attivato cliccando l\'icona di navigazione vicino al titolo del cache.</string>
     <string name="init_default_navigation_tool_select">Scegli navigatore</string>
-    <string name="init_default_navigation_tool_2_description">Qui puoi scegliere il tuo secondo navigatore preferito. Sarà attivato tenendo premuto l\'icona di navigazione vicino al titolo del cache.</string>
     <string name="init_navigation_menu_description">Qui è possibile selezionare quale dei metodi disponibili di navigazione sarà visualizzato nel menu di navigazione per un cache o un waypoint. Gli strumenti non installati su questo dispositivo sono disabilitati.</string>
     <string name="init_debug_title">Informazioni di Debug</string>
     <string name="init_debug_note">c:geo può generare molte informazioni di debug. Attivando questa impostazione pregiudica la stabilità di c:geo ed è consigliata solo se vi viene chiesto di inviare un log agli sviluppatori. Si prega di tenere la registrazione di debug disabilitata durante l\'uso normale di c:geo!</string>
     <string name="init_debug">Attiva informazioni di debug</string>
     <string name="init_dbonsdcard_title">Posizione Database</string>
+    <string name="init_dbonsdcard_note">È possibile memorizzare il database di c:geo internamente oppure in una cartella utente. Ti consigliamo di attivare questa opzione solo se hai bisogno di accedere manualmente al file di database.</string>
     <string name="init_dbonsdcard">Sullo spazio utente</string>
     <string name="init_dbmove_dbmove">Spostamento Database</string>
     <string name="init_dbmove_running">Spostamento Database</string>
     <string name="init_dbmove_success">Database spostato con successo.</string>
     <string name="init_dbmove_failed">Spostamento fallito</string>
+    <string name="init_datadirmove_datadirmove">Spostamento cartella dati Geocache</string>
+    <string name="init_datadirmove_running">Spostamento in corso cartella dati Geocache</string>
+    <string name="init_datadirmove_success">Cartella dati Geocache spostata con successo.</string>
+    <string name="init_datadirmove_failed">Spostamento parziale o totale della cartella dati Geocache non riuscito. Controllare le vecchie e le nuove cartelle e spostare manualmente i dati mancanti.</string>
     <string name="init_plain_logs">LOG semplificati</string>
     <string name="init_summary_plain_logs">Visualizza i LOG senza colori</string>
     <string name="init_use_native_ua">Browser Android</string>
     <string name="init_summary_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
+    <string name="init_rendertheme_folder">Cartella Temi Mappa</string>
     <string name="init_maintenance">Manutenzione</string>
+    <string name="init_maintenance_directories_note">c:geo memorizza immagini e altri file relativi a un cache in una cartella dedicata. In alcuni casi (ad es. quando importa/esporta il database) questa cartella può contenere file obsoleti che possono essere cancellati qui.</string>
     <string name="init_maintenance_directories">Elimina file orfani</string>
     <string name="init_location">Geolocalizzazione</string>
     <string name="init_location_note">Su dispositivi con servizi Google Play, c:geo può utilizzare automaticamente un fornitore migliore di geolocalizzazione. Tuttavia, questo impedisce l\'uso di un ricevitore GPS BlueTooth esterno.</string>
@@ -748,6 +769,11 @@
     <string name="feature_favorite">Aggiunta del cache ai preferiti</string>
     <string name="feature_voting">Votazione per i cache</string>
     <string name="init_maplines_title">Personalizzazione delle linee della mappa</string>
+    <string name="init_map_other">Altro</string>
+    <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
+    <string name="init_summary_map_osm_multithreaded">Usa threads multipli (multi processore o multi core) per disegnare le mappe di OpenStreetMap</string>
+    <string name="localstorage_migrate_title">Migrazione dei file locali</string>
+    <string name="localstorage_migrate_status_major">Versione %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notifica di prossimità</string>
     <string name="init_proximityNotificationGeneral">Notifica generale di prossimità sulla mappa</string>
@@ -786,15 +812,19 @@
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Non fare nulla</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copia tutto il contenuto</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Sposta tutto il contenuto</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Nessun\'altra azione</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Hai selezionato una cartella diversa da quella attualmente memorizzata. Come vuoi procedere?\n\nSeleziona la cartella e</string>
     <string name="contentstorage_folder_selection_aborted">Interrotta la selezione della cartella, la cartella è «%s»</string>
     <string name="contentstorage_folder_selection_success">Cartella impostata a \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Interruzione selezione file</string>
     <string name="contentstorage_file_selection_success">File selezionato: \'%s\'</string>
     <string name="contentstorage_err_read_failed">Il file \'%s\' non può essere letto</string>
     <string name="contentstorage_err_write_failed">Il file \'%s\' non può essere scritto</string>
+    <string name="contentstorage_err_create_failed">Il file \'%1$s\' in \'%2$s\' non può essere creato</string>
     <string name="contentstorage_err_delete_failed">Il file \'%s\' non può essere eliminato</string>
     <string name="contentstorage_err_list_failed">I file nella cartella «%s» non possono essere elencati</string>
     <string name="contentstorage_err_folder_access_failed">Impossibile accedere alla cartella \'%s\'</string>
+    <string name="contentstorage_err_copy_failed">Il file \'%1$s\' non può essere copiato/spostato in \'%2$s\' (sposta=%3$s)</string>
     <!-- Persistable Folders -->
     <string name="persistablefolder_usertype_userdefined">Definito dall\'utente</string>
     <string name="persistablefolder_usertype_default">Predefinito</string>
@@ -808,6 +838,7 @@
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">File di log</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
+    <string name="persistablefolder_spoilerimages">Immagini Spoiler</string>
     <!-- FolderUtils -->
     <string name="folder_copy_progressbar_title">Copia del contenuto di %1$s in %2$s</string>
     <string name="folder_copy_progressbar_status_done">Copiato %1$s/%2$s, %3$s/%4$s</string>
@@ -837,10 +868,8 @@
     <string name="auth_register">Crea un account</string>
     <string name="auth_connected">Connesso</string>
     <string name="auth_unconnected">Non ancora connesso</string>
-    <string name="auth_connected_as">Collegato come %s.\nPremi qui per aggiornare o premi a lungo per rimuovere i dati di autorizzazione da c:geo.</string>
     <string name="auth_dialog_waiting">In attesa di %s…</string>
     <string name="auth_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
-    <string name="auth_explain_long">Premendo il pulsante \"autorizza c:geo\" avrà inizio il processo. Verrà aperto un browser web con la pagina %s. Effettuare login alla pagina e lasciare che <b>c:geo</b> acceda al tuo account.</string>
     <string name="auth_forget_title">Hai dimenticato l\'autorizzazione?</string>
     <string name="auth_forget_message">Verrai disconnesso da questo servizio. Le tue identificazioni attualmente salvate andranno perse.</string>
     <!-- auth credentials -->
@@ -849,7 +878,6 @@
     <string name="auth_register_explain">Se non hai ancora un account tocca qui sotto per essere indirizzato alla pagina web del servizio per creare un account. Assicurati di utilizzare il metodo con nuovo nome utente e password per creare un account perché c:geo non supporta l\'accesso tramite utenti collegati Google/Apple/Facebook. Dopo la creazione dell\'account potrebbe essere necessario una convalida del tuo indirizzo email, prima di poter utilizzare il login con c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
-    <string name="auth_token_explain_long">Completando le credenziali e premendo il pulsante \"autorizza c:geo\" avvierà la connessione a %s per recuperare un token di autenticazione.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo è ora autorizzato a postare su Twitter.</string>
     <!-- auth opencaching -->
@@ -1103,6 +1131,7 @@
     <string name="lowercase">minuscolo</string>
     <!-- editor dialog -->
     <!-- simple dir / file chooser -->
+    <string name="simple_dir_chooser_title">Scegli cartella</string>
     <string name="simple_dir_chooser_current_path">Percorso:</string>
     <string name="simple_dir_chooser_invalid_path">Percorso non valido</string>
     <!-- gpx -->
@@ -1711,6 +1740,7 @@
     <!-- calendar adder -->
     <string name="event_fail">Impossibile aggiungere l\'evento al calendario</string>
     <string name="init_low_disk_space">Sto esaurendo lo spazio su disco</string>
+    <string name="init_low_disk_space_message">La cartella dati geocache sta esaurendo lo spazio di archiviazione. Questo può causare malfunzionamenti di c:geo. Liberare un po\' di spazio.</string>
     <string name="init_confirm_debug">c:geo è in esecuzione in modalità di debug!</string>
     <string name="list_confirm_debug_message">La modalità di debug può causare instabilità! Vuoi tornare alla modalità normale?</string>
     <string name="err_select_logimage_upload_size">Immagine troppo grande, si prega di selezionare una scala inferiore.</string>
@@ -1820,7 +1850,9 @@
     <string name="localfile_cannot_handle">Errore nella lettura del file o c:geo non può gestire questo tipo di file.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Ricevi file mappa</string>
+    <string name="receivemapfile_success">File mappa ricevuto con successo come \"%s\" e memorizzato nella cartella mappa</string>
     <string name="receivemapfile_error">Errore durante la ricezione del file mappa</string>
+    <string name="receivemapfile_error_io_exception">Errore I/O durante la ricezione del file mappa. La cartella mappa \"%s\" è scrivibile?</string>
     <string name="receivemapfile_error_filenotfound_exception">Errore di file non trovato durante la ricezione del file mappa.</string>
     <string name="receivemapfile_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
     <string name="receivemapfile_option_overwrite">Sovrascrivere</string>
@@ -1829,18 +1861,23 @@
     <string name="receivemapfile_cancelled">Trasferimento file mappa annullato</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
+    <string name="downloadmap_info">Seleziona un file mappa per la tua regione toccando l\'icona \"Salva\".\n\nIl download viene eseguito in background. Quando il trasferimento è completato, il file viene copiato nella cartella della mappa c:geo e impostato come mappa corrente.\n\nAttenzione: il download di una mappa può consumare una grande quantità di dati internet!</string>
     <string name="downloadmap_choose">Scegli mappa</string>
     <string name="downloadmap_filename">Scaricamento di %s</string>
     <string name="downloadmanager_not_available">Impossibile scaricare il file mappa, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
+    <string name="downloadmap_target_not_writable">L\'obiettivo selezionato \"%s\" non è scrivibile - il file di mappa scaricato viene salvato nella cartella di download di sistema e deve essere spostato manualmente nella cartella mappa.</string>
     <string name="downloadmap_allow_metered_network">Consenti il download tramite rete a consumo (ad esempio: connessione mobile)</string>
     <string name="downloadmap_confirmation">Scarica la mappa \"%1$s\"?\n\nQuesto potrebbe richiedere molto tempo e portare a costi significativi, a seconda della tua connessione di rete.\n\nInformazioni sulla dimensione: %2$s</string>
     <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
     <string name="button_continue">Continua</string>
+    <string name="downloadmap_onedirup">(un livello superiore)</string>
     <string name="downloadmap_checkforupdates_button">Controlla aggiornamenti</string>
     <string name="downloadmap_available_updates">Aggiornamenti disponibili</string>
     <string name="downloadmap_no_updates_found">Nessun aggiornamento mappa trovato</string>
+    <string name="downloadmap_directory">cartella</string>
     <string name="downloadmap_mapfile">file mappa</string>
+    <string name="downloadmap_retrieving_directory_data">Recupero dati cartella…</string>
     <string name="downloadmap_checking_for_updates">Controllo aggiornamenti…</string>
     <string name="downloadmap_install_theme_title">Installa file tema</string>
     <string name="downloadmap_install_theme_info">La mappa scaricata richiede un file di tema speciale. Vuoi scaricare anche questo?</string>
@@ -1871,6 +1908,7 @@
     <string name="wizard_outro_error">Configurazione incompleta\nNon tutte le sezioni di c:geo funzioneranno come previsto!</string>
     <string name="wizard_permissions_title">Imposta permessi app</string>
     <string name="wizard_permissions_intro">c:geo ha bisogno di alcuni permessi sul tuo dispositivo per funzionare correttamente.\nTi spiegherò maggiori dettagli nei prossimi passi.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare dati come file GPX, backup, note di campo e file di log. Come per impostazione predefinita, questi file sono memorizzati sotto una cosiddetta \"cartella di base\". Selezionare o creare questa cartella nel passaggio successivo.\n\nSe hai aggiornato c:geo da una versione precedente, seleziona la cartella esistente \"cgeo\" sul livello principale dell\'archivio del tuo dispositivo.\nSuggerimento: potrebbe essere necessario, come prima cosa, mostrare la memoria interna del dispositivo nel selettore dei file che verrà visualizzato successivamente.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file di mappa offline. Selezionare o creare una tale cartella nel passaggio successivo.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file GPX (es. per importare / esportare cache o tracce). Selezionare o creare una tale cartella nel passaggio successivo.</string>
     <string name="wizard_platforms_title">Configura servizi</string>
@@ -1896,4 +1934,5 @@
     <string name="next">Successivo</string>
     <string name="done">Fatto</string>
     <string name="finish">Fine</string>
+    <string name="back">Indietro</string>
 </resources>

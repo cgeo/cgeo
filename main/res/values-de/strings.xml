@@ -153,7 +153,9 @@
     <string name="log_problem_archive_label">Cache sollte archiviert werden</string>
     <string name="log_problem_archive_text">Dieser Geocacher hat gemeldet, dass dieser Cache archiviert werden sollte. Ein Reviewer wurde benachrichtigt.</string>
     <string name="log_image_scale_option_noscaling">Keine Skalierung</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\nSkaliert/Komprimiert:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Übersetze in %s</string>
@@ -239,7 +241,7 @@
     <string name="warn_search_help_tb">Code des Trackables eingeben, z. B. „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Bitte Text einfügen.</string>
     <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
-    <string name="warn_invalid_mapfile">Die ausgewählte Kartendatei ist keine gültige Mapsforge Kartendatei oder verwendet eine nicht unterstützte Version.\n(c:geo unterstützt derzeit nur v3 bis v5 / v3, wenn Sie die Einstellung \"Alte Mapfsforge V3\" verwenden.)\n\nOffline-Karten sind nicht verfügbar.</string>
+    <string name="warn_invalid_mapfile">Die ausgewählte Kartendatei ist keine gültige Mapsforge Kartendatei oder verwendet eine nicht unterstützte Version.\n(c:geo unterstützt derzeit nur v3 bis v5)\n\nOffline-Karten sind nicht verfügbar.</string>
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_invalid_character">Das Zeichen muss ein BUCHSTABE oder eine ZIFFER sein</string>
@@ -344,9 +346,11 @@
     <string name="caches_nearby">In der Nähe</string>
     <string name="caches_remove_all">Alle löschen</string>
     <string name="caches_remove_selected">Ausgewählte löschen</string>
+    <string name="caches_remove_all_completely">Alle vom Gerät löschen</string>
+    <string name="caches_remove_selected_completely">Ausgewählte vom Gerät löschen</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
-    <string name="caches_upload_modifiedcoords_warning">Möchten Sie modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
+    <string name="caches_upload_modifiedcoords_warning">Möchtest du modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
     <string name="caches_upload_allcoords_dialogtitle">WARNUNG - Alle Koordinaten hochladen</string>
     <string name="caches_upload_allcoords_warning">Dies wird alle existierenden Koordinaten auf dem Server für alle (bzw. die ausgewählten) Caches deiner Liste durch die aktuellen Listing-Koordinaten in c:geo ersetzen! Dies sollte nur in speziellen Fällen verwendet werden, z.B. wenn du eine GPX-Datei mit korrigierten Koordinaten als Listing-Koordinaten importiert hast. Dies kann nicht rückgängig gemacht werden und du solltest diese Funktion nur verwenden, wenn du weißt, was du tust. In normalen Fällen solltest du stattdessen die Funktion \"Geänderte Koordinaten hochladen\" verwenden.</string>
@@ -472,7 +476,7 @@
     <string name="calculate_dataDir">Berechne Speicherbedarf für Geocache-Daten</string>
     <string name="settings_data_dir_item">%1$s (%2$s frei)</string>
     <string name="confirm_data_dir_move_title">Geocache-Datenordner verschieben?</string>
-    <string name="confirm_data_dir_move">Das Verschieben der Geocache-Daten könnte eine sehr lange Zeit dauern, abhängig von Ihrem Gerät und der Datenmenge.</string>
+    <string name="confirm_data_dir_move">Das Verschieben der Geocache-Daten könnte eine sehr lange Zeit dauern, abhängig von deinem Gerät und der Datenmenge.</string>
     <string name="settings_title_basicmembers">Optionen für Basis-Mitglieder</string>
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Wähle die Standardnavigation und externe Navigations-Apps.</string>
@@ -675,7 +679,7 @@
     <string name="init_directionwidth">Breite der Richtungslinie</string>
     <string name="init_directionwidth_summary">Breite der Navigationslinie einstellen</string>
     <string name="init_routecolor">Farbe der individuellen Route</string>
-    <string name="init_routecolor_summary">Farbe und Deckkraft der individuellen Route einstellen. Eine individuelle Route besteht aus mehreren Wegpunkten und/oder Caches, die Du in der Karte durch einen langen Druck auf den Wegpunkt/Cache ausgewählt hast. (\"Langer Druck\" muss zuvor in den Karteneinstellungen aktiviert worden sein.)</string>
+    <string name="init_routecolor_summary">Farbe und Deckkraft der individuellen Route einstellen. Eine individuelle Route besteht aus mehreren Wegpunkten und/oder Caches, die du in der Karte durch einen langes Tippen auf den Wegpunkt/Cache ausgewählt hast. (\"Langes Tippen\" muss zuvor in den Karteneinstellungen aktiviert worden sein.)</string>
     <string name="init_routewidth">Breite der individuellen Route</string>
     <string name="init_routewidth_summary">Breite für individuelle Routenlinie auswählen</string>
     <string name="init_trackcolor">Linienfarbe für GPX-Track/Route</string>
@@ -770,6 +774,8 @@
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
+    <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
+    <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Annäherungsbenachrichtigung</string>
     <string name="init_proximityNotificationGeneral">Allgemeine Benachrichtigung auf der Karte</string>
@@ -808,6 +814,8 @@
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nichts tun</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kompletten Inhalt kopieren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Kompletten Inhalt verschieben</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Keine weitere Aktion</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Du hast einen anderen als den aktuellen Ordner gewählt. Wie möchtest du weitermachen?\n\nOrdner auswählen und</string>
     <string name="contentstorage_folder_selection_aborted">Ordnerauswahl abgebrochen, der Ordner ist \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Ordner auf \'%s\' gesetzt</string>
     <string name="contentstorage_file_selection_aborted">Dateiauswahl abgebrochen</string>
@@ -832,6 +840,7 @@
     <string name="persistablefolder_backup">Sicherung</string>
     <string name="persistablefolder_logfiles">Logdateien</string>
     <string name="persistablefolder_fieldnotes">Feldnotizen</string>
+    <string name="persistablefolder_spoilerimages">Hinweisbilder</string>
     <!-- FolderUtils -->
     <string name="folder_copy_progressbar_title">Kopiere Inhalt von %1$s nach %2$s</string>
     <string name="folder_copy_progressbar_status_done">%1$s/%2$s, %3$s/%4$s kopiert</string>
@@ -861,11 +870,11 @@
     <string name="auth_register">Nutzerkonto erstellen</string>
     <string name="auth_connected">Verbunden</string>
     <string name="auth_unconnected">Noch nicht verbunden</string>
-    <string name="auth_connected_as">Verbunden als %s.\nDrücken Sie kurz, um die Autorisierungsdaten von c:geo zu aktualisieren oder lang um sie zu löschen.</string>
+    <string name="auth_connected_as">Verbunden als %s.\nTippe kurz, um die Autorisierungsdaten von c:geo zu aktualisieren oder lang um sie zu löschen.</string>
     <string name="auth_dialog_waiting">Warte auf %s…</string>
     <string name="auth_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
     <string name="auth_explain_long">„Starte Autorisierung“ öffnet die Webseite von %s. Bitte dort anmelden und <b>c:geo</b> Zugriff auf den Account erlauben. Das ist alles.</string>
-    <string name="auth_forget_title">Authorisierung entfernen?</string>
+    <string name="auth_forget_title">Autorisierung entfernen?</string>
     <string name="auth_forget_message">Du wirst von diesem Dienst abgemeldet. Deine gespeicherten Anmeldedaten werden gelöscht.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
@@ -1904,6 +1913,8 @@
     <string name="wizard_outro_error">Konfiguration unvollständig\nc:geo wird nicht überall wie erwartet funktionieren!</string>
     <string name="wizard_permissions_title">App-Berechtigungen</string>
     <string name="wizard_permissions_intro">c:geo benötigt bestimmte Berechtigungen auf deinem Gerät, um korrekt zu funktionieren.\nIch werde weitere Details in den nächsten Schritten erklären.</string>
+    <string name="wizard_permissions_folder_title">Ordner festlegen: %s</string>
+    <string name="wizard_basefolder_request_explanation">c:geo benötigt einen lokalen Ordner, um Daten wie GPX-Dateien, Backups, Feldnotizen und Logdateien zu speichern. Standardmäßig werden diese Dateien in Ordnern unterhalb eines sog. \"Basisordners\" gespeichert. Wähle oder erstelle einen solchen Ordner im nächsten Schritt.\n\nWenn du c:geo von einer früheren Version aktualisiert hast, wähle den existierenden Ordner \"cgeo\" auf der Grundebene deines Gerätespeichers aus.\nHinweis: Möglicherweise musst du die Anzeige des internen Speichers deines Gerätes zuerst in der Dateiauswahl, die gleich angezeigt wird, aktivieren.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo benötigt einen Ordner für Offline-Kartendateien. Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo benötigt einen Ordner für GPX-Dateien (z.B. zum Import / Export von Caches oder Tracks). Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
     <string name="wizard_platforms_title">Dienste konfigurieren</string>
@@ -1929,4 +1940,5 @@
     <string name="next">Weiter</string>
     <string name="done">Fertig</string>
     <string name="finish">Fertig</string>
+    <string name="back">Zurück</string>
 </resources>

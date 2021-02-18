@@ -233,7 +233,6 @@
     <string name="warn_search_help_tb">Angi koden til en sporbar. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
-    <string name="warn_invalid_mapfile">Den valgte kartfilen er ikke en gyldig mapsforge-kartfil eller har en versjon som ikke støttes.\n(c:geo støtter nå v3 til v5, men for å bruke v3 må \"Old Mapsforge V3\"-innstillingen være valgt.)\n\nOfflinekartet er ikke tilgjengelig.</string>
     <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
     <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
@@ -648,7 +647,6 @@
     <string name="init_directionwidth">Bredde på retningslinje</string>
     <string name="init_directionwidth_summary">Velg bredde for retningslinjen</string>
     <string name="init_routecolor">Farge for individuell rutelinje</string>
-    <string name="init_routecolor_summary">Velg farge og gjennomsiktighet for individuell rutelinje. En individuell rute er en samling av veipunkter og/eller cacher du har valgt, ved å trykke lenge på veipunkt/cache. (Du må aktivere langt trykk-funksjonen først, se kartinnstillinger.)</string>
     <string name="init_routewidth">Bredde på individuell rutelinje</string>
     <string name="init_routewidth_summary">Velg bredde for individuell rutelinje</string>
     <string name="init_circlecolor">Farge på sirkellinje</string>
@@ -667,7 +665,6 @@
     <string name="init_secondary_navigation_tool">Sekundær navigasjon</string>
     <string name="init_default_navigation_tool_description">Her kan du velge ditt primære navigasjonsverktøy.</string>
     <string name="init_default_navigation_tool_select">Velg verktøy</string>
-    <string name="init_default_navigation_tool_2_description">Her kan du velge ditt andre foretrukne navigasjonsverktøy. Aktiver det ved å trykke lenge på navigasjonsikonet ved siden av tittelen på cachen.</string>
     <string name="init_navigation_menu_description">Her kan du velge hvilke av de tilgjengelige navigasjonsmetodene som vises i navigasjonsmenyen for en cache eller veipunkt. Deaktiverte verktøy er ikke installert på denne enheten.</string>
     <string name="init_debug_title">Feilsøkingsinformasjon</string>
     <string name="init_debug_note">c:geo kan generere masse feilsøkingsinformasjon. Aktivering av denne innstillingen påvirker stabiliteten i c:geo og anbefales bare hvis du blir bedt om å sende en logg til utviklerne. La den være deaktivert under normal bruk av c:geo!</string>
@@ -766,17 +763,14 @@
     <string name="auth_register">Opprett en konto</string>
     <string name="auth_connected">Tilkoblet</string>
     <string name="auth_unconnected">Ikke tilkoblet ennå</string>
-    <string name="auth_connected_as">Koblet til som %s.\nTrykk her for å oppdatere eller langt trykk for å fjerne innloggingsinformasjon fra c:geo.</string>
     <string name="auth_dialog_waiting">Venter på %s…</string>
     <string name="auth_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>
-    <string name="auth_explain_long">Når du trykker på knappen \"Godkjenn c:geo\" starter prosessen. Nettleseren åpner siden til %s. Logg inn på denne siden og tillat at <b>c:geo</b> får tilgang til din brukerkonto. Så enkelt er det!</string>
     <string name="auth_forget_title">Glemt brukernavn?</string>
     <string name="auth_forget_message">Du vil bli koblet fra denne tjenesten. Lagrede innloggingsdetaljer går tapt.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Dette vil gi <b>c:geo</b> tilgang til %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>
-    <string name="auth_token_explain_long">Du starter prosessen ved å fylle inn brukernavn og passord og trykke \"Godkjenne c:geo\". Denne prosessen vil koble til %s og hente et token for godkjenning. Verre er det ikke.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo har nå fått godkjenning til å kvitre på Twitter.</string>
     <!-- auth opencaching -->

@@ -233,7 +233,6 @@
     <string name="warn_search_help_tb">Veuillez entrer le code de l\'objet voyageur. Par exemple \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Merci de saisir un texte pour votre visite.</string>
     <string name="warn_load_images">c:geo n\'a pas pu charger les images.</string>
-    <string name="warn_invalid_mapfile">Le fichier de carte sélectionné n\'est pas une carte Mapsforge ou utilise une version non supportée.\n(c:geo supporte actuellement les versions 3 à 5 / version 3 uniquement si le paramètre \"Ancienne version Mapsforge V3\" est utilisé)\n\nLes cartes hors-ligne ne sont pas disponibles.</string>
     <string name="warn_pocket_query_select">Aucune Pocket Query sélectionnée.</string>
     <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
     <string name="warn_invalid_character">Le caractère doit être une LETTRE ou un CHIFFRE</string>
@@ -643,7 +642,6 @@
     <string name="init_directionwidth">Largeur du trait de direction</string>
     <string name="init_directionwidth_summary">Sélectionner la largeur de la ligne de suivi du parcours</string>
     <string name="init_routecolor">Couleur de la ligne de route individuelle</string>
-    <string name="init_routecolor_summary">Sélectionnez la couleur et l\'opacité des itinéraires individuels. Un itinéraire individuel est une collection de points de passage et/ou de caches que vous avez sélectionnés en appuyant longuement sur le point de passage/cache. (Vous devez d\'abord activer la fonction d\'appui long, voir les paramètres de la carte.)</string>
     <string name="init_routewidth">Largeur de la ligne d\'itinéraire individuelle</string>
     <string name="init_routewidth_summary">Sélectionnez la largeur pour les itinéraires individuels</string>
     <string name="init_circlecolor">Couleur du trait de cercle</string>
@@ -662,7 +660,6 @@
     <string name="init_secondary_navigation_tool">Navigation secondaire</string>
     <string name="init_default_navigation_tool_description">Vous pouvez choisir ici l\'outil de navigation à utiliser par défaut.</string>
     <string name="init_default_navigation_tool_select">Sélectionner l\'outil</string>
-    <string name="init_default_navigation_tool_2_description">Vous pouvez choisir ici votre deuxième outil de navigation préféré. Il sera activé par un appui long sur l\'icône de navigation situé près du nom de la cache.</string>
     <string name="init_navigation_menu_description">Vous pouvez choisir ici les méthodes de navigation qui seront actives dans le menu de navigation d\'une géocache ou d\'un point de passage. Les outils non sélectionnables ne sont pas installés sur cet appareil.</string>
     <string name="init_debug_title">Déverminage</string>
     <string name="init_debug_note">c:geo peut générer un grand nombre d’informations de débogage. L\'activation de ce paramètre affectera la stabilité de c:geo et n’est recommandé que si vous êtes invité à envoyer un journal aux développeurs. Veuillez garder la journalisation du débogage désactivée lors de l’utilisation normale de c:geo !</string>
@@ -762,17 +759,14 @@
     <string name="auth_register">Créer un compte</string>
     <string name="auth_connected">Connecté</string>
     <string name="auth_unconnected">Pas encore connecté</string>
-    <string name="auth_connected_as">Connecté en tant que \' %s\'.\nAppuyez ici pour mettre à jour ou appuyer longuement pour supprimer les données d\'autorisation de c:geo.</string>
     <string name="auth_dialog_waiting">En attente de %s…</string>
     <string name="auth_explain_short">Le processus suivant autorisera <b>c:geo</b> à accéder à %s.</string>
-    <string name="auth_explain_long">L\'appui sur \"Autoriser c:geo\" lancera le processus (la page web %s sera ouverte dans un navigateur, après avoir renseigné les informations d\'authentification, <b>c:geo</b> sera autorisé à accéder à votre compte).</string>
     <string name="auth_forget_title">Oublier l\'autorisation ?</string>
     <string name="auth_forget_message">Vous allez être déconnecté du service et vos identifiants sauvegardés seront perdus.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
-    <string name="auth_token_explain_long">Saisissez vos informations d\'identification puis appuyez sur \"Autoriser c:geo\" … nous allons nous connecter à %s avec vos identifiants et récupérer un jeton d\'authentification. C\'est tout.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
     <!-- auth opencaching -->

@@ -240,7 +240,6 @@
     <string name="warn_search_help_tb">Introduïu el codi d\'un traçable. Per exemple, \"LPAYKV\".</string>
     <string name="warn_log_text_fill">Introduïu un text per al vostre registre.</string>
     <string name="warn_load_images">El c:geo no ha pogut carregar les imatges.</string>
-    <string name="warn_invalid_mapfile">El fitxer de mapa seleccionat no és vàlid o utilitza una versió no compatible.\n(c:geo actualment admet v3 a v5 / v3 només si utilitzeu la configuració \"Old Mapfsforge V3\".)\n\nEls mapes en línia no són disponibles.</string>
     <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
     <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
     <string name="warn_invalid_character">El caràcter ha de ser una LLETRA o un DÍGIT</string>
@@ -676,7 +675,6 @@
     <string name="init_directionwidth">Amplada de la línia de direcció</string>
     <string name="init_directionwidth_summary">Seleccioneu l\'amplada de la línia de direcció</string>
     <string name="init_routecolor">Color de línia de ruta individual</string>
-    <string name="init_routecolor_summary">Seleccioneu el color i l\'opacitat per a la línia de ruta individual. Una ruta individual és una col·lecció de waypoints i / o catxés que heu seleccionat prement llargament al punt de ruta / catxé. (Primer heu d’habilitar la funció de pulsació llarga, consulteu la configuració del mapa.)</string>
     <string name="init_routewidth">Amplada de línia de ruta individual</string>
     <string name="init_routewidth_summary">Seleccioneu l\'amplada de la línia de ruta individual</string>
     <string name="init_trackcolor">Color de línia del GPX track/ruta</string>
@@ -703,7 +701,6 @@
     <string name="init_secondary_navigation_tool">Navegació secundària</string>
     <string name="init_default_navigation_tool_description">Aquí pots seleccionar la teva eina de navegació preferida.</string>
     <string name="init_default_navigation_tool_select">Selecciona una eina</string>
-    <string name="init_default_navigation_tool_2_description">Aquí podeu seleccionar la segona eina de navegació preferida. Serà activada prement de manera continuada la icona de navegació al costat el nom del catxé.</string>
     <string name="init_navigation_menu_description">Aquí podeu seleccionar els mètodes de navegació disponibles que es mostraran en el menú de navegació d\'un catxé o fita. Les eines desactivades no estan instal·lades en aquest dispositiu.</string>
     <string name="init_debug_title">Informació de depuració</string>
     <string name="init_debug_note">El c:geo pot generar una gran quantitat d\'informació de depuració. Activar aquesta opció afectarà l\'estabilitat del c:geo i es recomana només si se us demana enviar un registre als desenvolupadors. Si us plau mantingueu el registre de depuració inhabilitat durant l\'ús normal del c:geo!</string>
@@ -862,10 +859,8 @@
     <string name="auth_register">Crear un compte</string>
     <string name="auth_connected">Connectat</string>
     <string name="auth_unconnected">Encara no s\'ha connectat</string>
-    <string name="auth_connected_as">Connectat com a %s.\nPrem aquí per actualitzar o premeu llargament per eliminar les dades d\'autorització de c:geo.</string>
     <string name="auth_dialog_waiting">Esperant %s…</string>
     <string name="auth_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
-    <string name="auth_explain_long">Prement el botó \"Autoritza al c:geo\"  s\'iniciarà el procés. Aquest procés obrirà el navegador web amb una pàgina %s. Registreu-vos a aquesta pàgina i permeteu al <b>c:geo</b> a accedir al vostre compte.</string>
     <string name="auth_forget_title">Oblidar l\'autorització?</string>
     <string name="auth_forget_message">Seràs desconnectat d\'aquest servei. Les teves credencials desades es perdran.</string>
     <!-- auth credentials -->
@@ -874,7 +869,6 @@
     <string name="auth_register_explain">Si encara no teniu cap compte, toqueu a continuació per dirigir-vos a la pàgina web del servei per crear un compte. Assegureu-vos d’utilitzar el mètode amb nom d’usuari i contrasenya per crear un compte, ja que c: geo no admet l’inici de sessió mitjançant Google / Apple / Facebook. Després de la creació del compte, pot ser necessària la validació de la vostra adreça de correu electrònic abans de poder utilitzar l\'inici de sessió amb c: geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
-    <string name="auth_token_explain_long">Emplena la credencial, prem al boto \"autoritzar c:geo\" i començarà el procés. Aquest procés es connecta a %s i recupera la fitxa d\'autenticació.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">El c:geo ara està autoritzat a publicar al Twitter.</string>
     <!-- auth opencaching -->

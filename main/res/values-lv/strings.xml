@@ -226,7 +226,6 @@
     <string name="warn_search_help_tb">Ievadiet ceļotāja kodu, lai reģistrētu atradumu. Piemēram, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Lūdzu, ievadi tekstu savam apmeklējuma ierakstam.</string>
     <string name="warn_load_images">c:geo neizdevās ielādēt attēlus.</string>
-    <string name="warn_invalid_mapfile">Atlasītais kartes fails nav derīgs mapsforge kartes fails vai lieto neatbalstītu versiju.\n(c:geo šobrīd atbalsta v3 - v5 / v3 tikai, ja Jūs lietojat \"Old Mapsforge V3\" iestatījumus.)\n\nBezsaistes kartes nav piejamas.</string>
     <string name="warn_pocket_query_select">Nav atlasīta Slēpņu atlase (PQ).</string>
     <string name="warn_no_pocket_query_found">Tiešsaistē nav atrasta neviena Slēpņu atlase (PQ).</string>
     <string name="warn_invalid_character">Rakstzīmei jābūt BURTAM vai CIPARAM</string>
@@ -605,7 +604,6 @@
     <string name="init_secondary_navigation_tool">Sekundārā navigācija</string>
     <string name="init_default_navigation_tool_description">Šeit tu vari izvēlēties primāro navigācijas rīku.</string>
     <string name="init_default_navigation_tool_select">Izvēlies rīku</string>
-    <string name="init_default_navigation_tool_2_description">Šeit var izvēlēties sekundāro navigācijas rīku. Aktivizē to ilgi turot nospiestu navigācijas ikonu blakus slēpņa nosaukumam.</string>
     <string name="init_navigation_menu_description">Šeit vari atlasīt, kuras pieejamās navigācijas metodes tiks parādītas navigācijas izvēlnē slēpnim vai Starpposmam. Neaktīvie rīki nav instalēti šajā ierīcē.</string>
     <string name="init_debug_title">Atkļūdošanas informācija</string>
     <string name="init_debug_note">c:geo var radīt daudz atkļūdošanas informācijas. Šī iestatījuma aktivizēšana ietekmēs c:geo darbības stabilitāti un ir ieteicama tikai tad, ja tev tiek prasīts nosūtīt žurnāla datus izstrādātājiem. Lūdzu, atstāj atkļūdošanas žurnalēšanu izslēgtu normālas c:geo lietošanas gadījumā!</string>
@@ -695,14 +693,12 @@
     <string name="auth_unconnected">Pagaidām nav savienots</string>
     <string name="auth_dialog_waiting">Gaida uz %s…</string>
     <string name="auth_explain_short">Šis process ļaus piekļūt %s <b>c:geo</b>.</string>
-    <string name="auth_explain_long">Nospiežot pogu \"atļaut c:geo\" tiks sākts process. Šis process atvērs ar %s lappusi web pārlūkprogrammā. Piesakies šajā lapā un ļauj <b>c:geo</b>, piekļūt savam kontam. Tas ir viss.</string>
     <string name="auth_forget_title">Aizmirsi autorizācijas datus?</string>
     <string name="auth_forget_message">Jūs atvienos no šī pakalpojuma. Jūsu pašlaik saglabātie dati tiks zaudēti.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Šis process ļaus <b>c:geo</b> piekļūt %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Šis process ļaus piekļūt %s <b>c:geo</b>.</string>
-    <string name="auth_token_explain_long">Aizpildot savus pieteikšanās datus un nospiežot \"atļaut c:geo\" pogu, tiks uzsākts process. Tas pieslēgsies %s un iegūs reģistrācijas atļauju. Tas ir viss.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo tagad ir atļauja ziņot Twitter\'ī.</string>
     <!-- auth opencaching -->

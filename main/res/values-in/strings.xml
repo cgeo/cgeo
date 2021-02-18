@@ -475,7 +475,6 @@
     <string name="init_secondary_navigation_tool">Navigasi Kedua</string>
     <string name="init_default_navigation_tool_description">Di sini anda dapat memilih alat navigasi pilihan anda.</string>
     <string name="init_default_navigation_tool_select">Pilih alat</string>
-    <string name="init_default_navigation_tool_2_description">Di sini anda dapat memilih alat navigasi pilihan kedua anda. Aktifkan dengan menekan lama ikon navigasi di sebelah judul cache.</string>
     <string name="init_navigation_menu_description">Di sini anda dapat memilih dari metode navigasi yang tersedia akan ditampilkan di menu navigasi untuk cache atau waypoint. Alat-alat yang tidak diaktifkan tidak bisa diinstal pada perangkat ini.</string>
     <string name="init_debug_title">Informasi debug</string>
     <string name="init_debug_note">c: geo bisa menghasilkan banyak informasi debugging. Mengaktifkan pengaturan ini akan mempengaruhi stabilitas dari c:geo dan hanya direkomendasikan jika anda diminta untuk mengirim log ke pengembang. Harap simpan pembatalan mencatat selama penggunaan c:geo normal!</string>
@@ -556,14 +555,12 @@
     <string name="auth_unconnected">Belum terhubung</string>
     <string name="auth_dialog_waiting">Menunggu %s&#8230;</string>
     <string name="auth_explain_short">Proses berikut akan mengizinkan <b>c:geo</b> untuk mengakses %s.</string>
-    <string name="auth_explain_long">Menekan tombol \"mengizinkan c:geo\" akan memulai proses. Proses ini akan membuka sebuah peramban web dengan sebuah %s halaman. Masuk pada halaman ini dan izinkan <b>c:geo</b> untuk mengakses akun anda. Itu saja.</string>
     <string name="auth_forget_title">Lupa otorisasi?</string>
     <string name="auth_forget_message">Anda akan terputus dari layanan ini. Kredensial yang anda simpan saat ini akan hilang.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Proses berikut akan mengizinkan <b>c:geo</b> untuk mengakses %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Proses berikut akan memungkinkan <b>c:geo</b> untuk mengakses %s.</string>
-    <string name="auth_token_explain_long">Mengisi kredensial anda dan menekan tombol \"mengesahkan c:geo\" tombol akan memulai proses. Proses ini akan terhubung ke %s dan mengambil token otentikasi. Itu semua.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo sekarang resmi untuk posting di twitter.</string>
     <!-- auth opencaching -->

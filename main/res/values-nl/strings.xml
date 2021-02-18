@@ -153,7 +153,9 @@
     <string name="log_problem_archive_label">Cache zou moeten worden gearchiveerd</string>
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\nGeschaald/gecomprimeerd:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s</string>
@@ -239,7 +241,7 @@
     <string name="warn_search_help_tb">Voer de trackable code in. Bijvoorbeeld \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Voer s.v.p. een logtekst in.</string>
     <string name="warn_load_images">Sorry, c:geo kon de afbeeldingen niet laden.</string>
-    <string name="warn_invalid_mapfile">Het geselecteerde kaartbestand is geen geldig mapsforge-bestand of gebruikt een niet-ondersteunde versie.\n(c:geo ondersteunt momenteel alleen v3 tot v5 / v3 als u de instelling \"Oude Mapfsforge V3\" gebruikt).\n\nOffline kaarten zijn niet beschikbaar.</string>
+    <string name="warn_invalid_mapfile">Het geselecteerde kaartbestand is geen geldig mapsforge-bestand of gebruikt een niet-ondersteunde versie.\n(c:geo ondersteunt momenteel alleen v3 tot v5 / v3)\n\nOffline kaarten zijn niet beschikbaar.</string>
     <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
     <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
     <string name="warn_invalid_character">Teken moet een LETTER of een CIJFER zijn</string>
@@ -344,6 +346,8 @@
     <string name="caches_nearby">Nabij</string>
     <string name="caches_remove_all">Verwijder alles</string>
     <string name="caches_remove_selected">Selectie verwijderen</string>
+    <string name="caches_remove_all_completely">Alles verwijderen van apparaat</string>
+    <string name="caches_remove_selected_completely">Verwijder geselecteerden van apparaat</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
     <string name="caches_upload_modifiedcoords_warning">Wil je aangepaste coördinaten uploaden voor alle (geselecteerde) caches en de bestaande coördinaten op de server overschrijven? Dit kan niet ongedaan worden gemaakt.</string>
@@ -675,7 +679,6 @@
     <string name="init_directionwidth">Richting lijndikte</string>
     <string name="init_directionwidth_summary">Selecteer breedte voor richting lijn</string>
     <string name="init_routecolor">Individuele route lijnkleur</string>
-    <string name="init_routecolor_summary">Selecteer kleur en doorzichtigheid voor de individuele route lijn. Een individuele route is een collectie van waypoints en/of caches die je hebt geselecteerd door lang op het waypoint te drukken. (Je dient de lang drukken-functie eerst in te schakelen, zie de kaartinstellingen.)</string>
     <string name="init_routewidth">Individuele routelijnbreedte</string>
     <string name="init_routewidth_summary">Selecteer breedte voor individuele routelijn</string>
     <string name="init_trackcolor">GPX spoor/route lijnkleur</string>
@@ -702,7 +705,6 @@
     <string name="init_secondary_navigation_tool">Secondaire navigatie</string>
     <string name="init_default_navigation_tool_description">Hier kan je de navigatie-tool van jouw voorkeur instellen.</string>
     <string name="init_default_navigation_tool_select">Selecteer tool</string>
-    <string name="init_default_navigation_tool_2_description">Hier kan je de tweede navigatie-tool van jouw voorkeur instellen. Je kan deze activeren door lang op de navigatie-icoon naast de titel van de cache te klikken.</string>
     <string name="init_navigation_menu_description">Here kun je selecteren welke beschikbare navigatie methodes getoond worden in het navigatie menu voor een cache of waypoint. Uitgeschakelde tools zijn niet geïnstalleerd op uw apparaat.</string>
     <string name="init_debug_title">Foutopsporings informatie</string>
     <string name="init_debug_note">c:geo kan een heleboel debug informatie genereren. Het activeren van deze instelling is van invloed op de stabiliteit van c:geo en wordt alleen aanbevolen als je wordt gevraagd een logboek naar de ontwikkelaars te sturen. Houd de logboekregistratie voor foutopsporing uitgeschakeld tijdens normaal gebruik van c:geo!</string>
@@ -770,6 +772,8 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
+    <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
+    <string name="localstorage_migrate_status_major">Versie %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Nabijheidsmelding</string>
     <string name="init_proximityNotificationGeneral">Algemene nabijheidsmelding op kaart</string>
@@ -808,6 +812,8 @@
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Niets doen</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Alle inhoud kopiëren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Alle inhoud verplaatsen</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Geen verdere actie</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Je hebt een andere map geselecteerd dan momenteel is opgeslagen. Hoe wil je doorgaan?\n\nSelecteer map en</string>
     <string name="contentstorage_folder_selection_aborted">Mapselectie afbreken, map is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Map ingesteld op \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Afbreken bestand selectie</string>
@@ -832,6 +838,7 @@
     <string name="persistablefolder_backup">Back-up</string>
     <string name="persistablefolder_logfiles">Logbestanden</string>
     <string name="persistablefolder_fieldnotes">Veld notities</string>
+    <string name="persistablefolder_spoilerimages">Spoiler afbeeldingen</string>
     <!-- FolderUtils -->
     <string name="folder_copy_progressbar_title">Inhoud kopiëren van %1$s naar %2$s</string>
     <string name="folder_copy_progressbar_status_done">Gekopieerd %1$s/%2$s, %3$s/%4$s</string>
@@ -861,10 +868,8 @@
     <string name="auth_register">Account aanmaken</string>
     <string name="auth_connected">Verbonden</string>
     <string name="auth_unconnected">Nog niet verbonden</string>
-    <string name="auth_connected_as">Verbonden als %s.\nDruk hier om te updaten of druk lang om autorisatiegegevens van c:geo te verwijderen.</string>
     <string name="auth_dialog_waiting">Wachten op %s…</string>
     <string name="auth_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
-    <string name="auth_explain_long">Druk op de knop \"Autoriseer c:geo\" om het proces te starten. Dit proces zal een webbrowser met een pagina voor %s. Log in op deze pagina om <b>c:geo</b> toegang te geven tot je account. Dat is alles.</string>
     <string name="auth_forget_title">Autorisatie vergeten?</string>
     <string name="auth_forget_message">De verbinding met deze dienst zal worden verbroken. Je opgeslagen referenties zullen verloren gaan.</string>
     <!-- auth credentials -->
@@ -873,7 +878,6 @@
     <string name="auth_register_explain">Als je nog geen account hebt, tik hieronder om doorgestuurd te worden naar de webpagina van de service om een account aan te maken. Zorg ervoor dat je de methode met gebruikersnaam en wachtwoord gebruikt om een account aan te maken want c:geo ondersteunt geen login via Google/Apple/Facebook. Na het aanmaken van een account kan het valideren van je e-mailadres kunnen nodig zijn voordat je kan inloggen met c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
-    <string name="auth_token_explain_long">Het vullen van uw referenties en drukken op de \"c:geo machtigen\" knop zal het proces starten. Dit proces zal verbinden met %s en een authenticatie token ophalen. Dat is alles.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo is nu gekoppeld met Twitter.</string>
     <!-- auth opencaching -->
@@ -1904,6 +1908,7 @@
     <string name="wizard_outro_error">Onvolledige configuratie\nNiet alle delen van c:geo zullen werken zoals verwacht!</string>
     <string name="wizard_permissions_title">App-machtigingen instellen</string>
     <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig op je apparaat om correct te werken.\nIk zal meer details uitleggen in de volgende stappen.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo heeft een lokale map nodig om gegevens zoals GPX bestanden, back-ups, Field Notes en logbestanden op te slaan. Standaard worden deze bestanden opgeslagen in mappen onder de zogenaamde \"basismap\". Selecteer of creëer een dergelijke map in de volgende stap.\n\nAls je c:geo van een vorige versie bijwerkt, selecteer dan de bestaande map \"cgeo\" op hoofdniveau van je apparaatopslag.\nTip: Je kunt de interne opslag van je apparaat eerst zichtbaar maken in de bestandsselectie die hierna wordt weergegeven.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo heeft een lokale map nodig om offline kaartbestanden op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo heeft een lokale map nodig om GPX bestanden op te slaan (bijv. voor het importeren / exporteren van caches of spoor). Selecteer of maak een dergelijke map aan in de volgende stap.</string>
     <string name="wizard_platforms_title">Services configureren</string>
@@ -1929,4 +1934,5 @@
     <string name="next">Volgende</string>
     <string name="done">Voltooid</string>
     <string name="finish">Voltooien</string>
+    <string name="back">Terug</string>
 </resources>

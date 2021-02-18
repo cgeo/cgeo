@@ -153,7 +153,9 @@
     <string name="log_problem_archive_label">Keška by měla být archivována</string>
     <string name="log_problem_archive_text">Tento hráč oznámil, že keška by měla být archivována. Reviewer byl informován.</string>
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\nZměněná velikost/Komprimované:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Přeložit do %s</string>
@@ -239,7 +241,6 @@
     <string name="warn_search_help_tb">Zadej kód sledovatelného předmětu. Například „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, napiš nějaký text do logu.</string>
     <string name="warn_load_images">c:geo nedokázalo načíst obrázky.</string>
-    <string name="warn_invalid_mapfile">Vybraný mapový soubor není platný mapový soubor Mapsforge, případně používá nepodporovanou verzi.\n(Aplikace c:geo v současnosti podporuje verzi 3 až 5 / verzi 3 jen v případě, že používáte nastavení \"Stará Mapfsforge V3\".)\n\nOff-line mapy nejsou k dispozici.</string>
     <string name="warn_pocket_query_select">Nevybrána žádná Pocket Query.</string>
     <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
     <string name="warn_invalid_character">Znak musí být písmeno nebo číslice</string>
@@ -677,7 +678,6 @@
     <string name="init_directionwidth">Šířka směrové čáry</string>
     <string name="init_directionwidth_summary">Vyberte šířku pro směrovou čáru</string>
     <string name="init_routecolor">Barva čáry individuální trasy</string>
-    <string name="init_routecolor_summary">Vyberte barvu a neprůhlednost čáry pro individuální trasy. Individuální trasa je soubor trasových bodů a / nebo kešek, které jste vybrali dlouhým přidržením trasových bodů / kešky. (Nejprve musíte povolit funkci dlouhého přidržení, viz nastavení mapy.)</string>
     <string name="init_routewidth">Šířka čáry individuální trasy</string>
     <string name="init_routewidth_summary">Vyberte šířku čáry pro individuální trasy</string>
     <string name="init_trackcolor">Barva čáry GPX stopy/trasy</string>
@@ -704,7 +704,6 @@
     <string name="init_secondary_navigation_tool">Sekundární navigace</string>
     <string name="init_default_navigation_tool_description">Zde můžeš vybrat preferovaný navigační nástroj.</string>
     <string name="init_default_navigation_tool_select">Vyber nástroj</string>
-    <string name="init_default_navigation_tool_2_description">Zde můžeš vybrat druhý preferovaný navigační nástroj. Ten se aktivuje dlouhým klepnutím na navigační ikonu vedle názvu kešky.</string>
     <string name="init_navigation_menu_description">Zde můžeš zvolit, které z dostupných metod navigace budou zobrazovány v navigačním menu kešky nebo trasového bodu. Nedostupné nástroje nejsou na tomto zařízení nainstalovány.</string>
     <string name="init_debug_title">Ladící informace</string>
     <string name="init_debug_note">c:geo umí generovat mnoho ladících informací. Aktivace tohoto nastavení se dotkne stability c:geo a doporučuje se pouze tehdy, jste-li požádáni o poslání záznamu vývojářům. Prosím nechte toto nastavení vypnuté při normálním používání c:geo!</string>
@@ -772,6 +771,8 @@
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
+    <string name="localstorage_migrate_title">Přenos místních souborů</string>
+    <string name="localstorage_migrate_status_major">Verze %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Upozornění na vzdálenost</string>
     <string name="init_proximityNotificationGeneral">Všeobecné upozornění na vzdálenost na mapě</string>
@@ -810,6 +811,8 @@
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nedělat nic</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopírovat veškerý obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Přesunout veškerý obsah</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Žádný další krok</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Vybrali jste jinou složku, než je aktuálně uložená. Jak chcete postupovat?\n\nVyberte složku a</string>
     <string name="contentstorage_folder_selection_aborted">Přerušení výběru složky, složka je \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Složka nastavena na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Přerušení výběru souboru</string>
@@ -867,10 +870,8 @@
     <string name="auth_register">Vytvořit účet</string>
     <string name="auth_connected">Připojeno</string>
     <string name="auth_unconnected">Zatím nepřipojeno</string>
-    <string name="auth_connected_as">Připojeno jako %s.\nKlepněte zde pro aktualizaci nebo dlouhým stiskem odeberte autorizační data z aplikace c:geo.</string>
     <string name="auth_dialog_waiting">Čekání na %s…</string>
     <string name="auth_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
-    <string name="auth_explain_long">Stisknutím tlačítka „Autorizovat c:geo“ bude proces zahájen. Tento proces otevře webový prohlížeč se stránkou %s. Na této stránce se přihlaš a povol <b>c:geu</b> přistupovat k tvému účtu. To je vše.</string>
     <string name="auth_forget_title">Zapomenout pověření?</string>
     <string name="auth_forget_message">Budeš odpojen/a od této služby. Tvé aktuálně uložené přihlašovací údaje budou ztraceny.</string>
     <!-- auth credentials -->
@@ -879,7 +880,6 @@
     <string name="auth_register_explain">Pokud ještě nemáte účet, klikněte níže pro přesměrování na webovou stránku služby pro vytvoření účtu. Ujistěte se, že používáte metodu přihlášení pomocí uživatelského jména a hesla k vytvoření účtu, protože c:geo nepodporuje přihlášení přes Google/Apple/Facebook. Po vytvoření účtu může být nutné ověření Vaší e-mailové adresy, než se budete moci přihlásit v c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
-    <string name="auth_token_explain_long">Vyplněním přihlašovacích údajů a stisknutím tlačítka „Autorizovat c:geo“ bude proces zahájen. Poté bude navázáno spojení s %s a načten ověřovací token. To je vše.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo nyní může posílat zprávy na Tvůj Twitter.</string>
     <!-- auth opencaching -->
@@ -1956,7 +1956,8 @@
     <string name="wizard_outro_error">Nedokončená konfigurace\nNěkteré části c:geo nebudou pracovat podle očekávání!</string>
     <string name="wizard_permissions_title">Nastavit oprávnění aplikace</string>
     <string name="wizard_permissions_intro">Aplikace c:geo vyžaduje na správné fungování několik povolení na vašem zařízení.\nV dalších krocích vám je vysvětlíme.</string>
-    <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
+    <string name="wizard_permissions_folder_title">Nastavit složku: %s</string>
+    <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
     <string name="wizard_gpxfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání GPX souborů, například pro import / export kešek nebo tras. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
     <string name="wizard_platforms_title">Konfigurace služeb</string>
     <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
@@ -1981,4 +1982,5 @@
     <string name="next">Další</string>
     <string name="done">Hotovo</string>
     <string name="finish">Dokončit</string>
+    <string name="back">Zpět</string>
 </resources>

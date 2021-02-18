@@ -233,7 +233,6 @@
     <string name="warn_search_help_tb">Введіть код для відстеження. Наприклад, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Будь ласка, введіть текст для вашого журналу.</string>
     <string name="warn_load_images">Не вдалося завантажити зображення.</string>
-    <string name="warn_invalid_mapfile">Вибраний файл мапи не є допустимим файлом мапи або використовує непідтримувану версію.\n(c:geo наразі підтримує параметри v3 до v5 / v3 лише якщо ви використовуєте параметр \"Old Mapfsforge V3\".\n\nАвтономні карти недоступні.</string>
     <string name="warn_pocket_query_select">Кишеньковий запит не вибрано.</string>
     <string name="warn_no_pocket_query_found">Немає Pocket-запиту онлайн.</string>
     <string name="warn_invalid_character">Символ повинен бути LETTER або DIGIT</string>
@@ -649,7 +648,6 @@
     <string name="init_directionwidth">Ширина лінії напрямку</string>
     <string name="init_directionwidth_summary">Обрати ширину для напрямку</string>
     <string name="init_routecolor">Колір окремої лінії маршруту</string>
-    <string name="init_routecolor_summary">Виберіть колір та непрозорість для окремої лінії маршруту. Індивідуальний маршрут - це сукупність шляхових точок та / або кеш-пам’яті, які ви обрали тривалим натисканням на путь / кеш. (Спочатку потрібно ввімкнути функцію тривалого натискання, див. Налаштування карти.)</string>
     <string name="init_routewidth">Ширина окремої лінії маршруту</string>
     <string name="init_routewidth_summary">Виберіть ширину для окремої лінії маршруту</string>
     <string name="init_circlecolor">коло лінії кола</string>
@@ -668,7 +666,6 @@
     <string name="init_secondary_navigation_tool">вторинна навігація</string>
     <string name="init_default_navigation_tool_description">Тут ви можете вибрати бажаний інструмент навігації.</string>
     <string name="init_default_navigation_tool_select">виберіть інструмент</string>
-    <string name="init_default_navigation_tool_2_description">Тут ви можете вибрати другий бажаний інструмент навігації. Активуйте його, довго натискаючи піктограму навігації поруч із заголовком кешу.</string>
     <string name="init_navigation_menu_description">Тут ви можете вибрати, який із доступних методів навігації відображатиметься в навігаційному меню для кешу або маршрутної точки. На цьому пристрої не встановлені відключені інструменти.</string>
     <string name="init_debug_title">інформація про налагодження</string>
     <string name="init_debug_note">c: geo може генерувати багато інформації про налагодження. Активація цього налаштування впливає на стабільність c: geo і рекомендується лише в тому випадку, якщо вам буде запропоновано надіслати журнал розробникам. Будь ласка, залиште журнал налагодження вимкнених під час звичайного використання c: geo!</string>
@@ -769,17 +766,14 @@
     <string name="auth_register">створити рахунок</string>
     <string name="auth_connected">З’єднано</string>
     <string name="auth_unconnected">Ще не підключенo</string>
-    <string name="auth_connected_as">Під’єднано як %s.\nНатисніть тут, щоб оновити або довго натиснути тут, щоб видалити дані авторизації з c:geo.</string>
     <string name="auth_dialog_waiting">Очікування на %s…</string>
     <string name="auth_explain_short">Наступний процес дозволить <b> c: geo </b> отримати доступ до %s.</string>
-    <string name="auth_explain_long">Натиснувши кнопку \"авторизувати c:geo\" запустить процес. Цей процес відкриє веб-браузер за допомогою сторінки %s Увійдіть на цю сторінку та дозвольте <b>c:geo</b> отримати доступ до облікового запису. Ось і все.</string>
     <string name="auth_forget_title">Забули авторизацію?</string>
     <string name="auth_forget_message">Ви будете відключені від цієї служби. Ваші збережені облікові дані будуть втрачені.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Наступний процес дозволить <b> c: geo </b> отримати доступ до %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Наступний процес дозволить <b> c: geo </b> отримати доступ до %s.</string>
-    <string name="auth_token_explain_long">Заповніть свої облікові дані та натисніть кнопку \"Перевірити автентифікацію\" запустить процес. Цей процес під\'єднається до %s та підтвердить ваші облікові дані. Це все.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo тепер авторизований для публікації у Twitter.</string>
     <!-- auth opencaching -->
