@@ -66,6 +66,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private WizardMode mode = WizardMode.WIZARDMODE_DEFAULT;
     private WizardStep step = WizardStep.WIZARD_START;
+    private boolean forceSkipButton = false;
     private ContentStorageActivityHelper contentStorageActivityHelper = null;
 
     private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
@@ -149,17 +150,17 @@ public class InstallWizardActivity extends AppCompatActivity {
             case WIZARD_PERMISSIONS_BASEFOLDER:
                 setFolderTitle(PersistableFolder.BASE);
                 text.setText(R.string.wizard_basefolder_request_explanation);
-                setNavigation(this::gotoPrevious, 0, null, 0, this::requestBasefolder, 0);
+                setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestBasefolder, 0);
                 break;
             case WIZARD_PERMISSIONS_MAPFOLDER:
                 setFolderTitle(PersistableFolder.OFFLINE_MAPS);
                 text.setText(R.string.wizard_mapfolder_request_explanation);
-                setNavigation(this::gotoPrevious, 0, null, 0, this::requestMapfolder, 0);
+                setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestMapfolder, 0);
                 break;
             case WIZARD_PERMISSIONS_GPXFOLDER:
                 setFolderTitle(PersistableFolder.GPX);
                 text.setText(R.string.wizard_gpxfolder_request_explanation);
-                setNavigation(this::gotoPrevious, 0, null, 0, this::requestGpxfolder, 0);
+                setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestGpxfolder, 0);
                 break;
             case WIZARD_PLATFORMS:
                 title.setText(R.string.wizard_platforms_title);
@@ -375,9 +376,10 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void requestBasefolder() {
+        forceSkipButton = false;
         if (!ContentStorageActivityHelper.baseFolderIsSet()) {
             prepareFolderDefaultValues();
-            getContentStorageHelper().migratePersistableFolder(PersistableFolder.BASE, v -> gotoNext());
+            getContentStorageHelper().migratePersistableFolder(PersistableFolder.BASE, folder -> onReturnFromFolderMigration(ContentStorageActivityHelper.baseFolderIsSet()));
         }
     }
 
@@ -388,14 +390,24 @@ public class InstallWizardActivity extends AppCompatActivity {
         return contentStorageActivityHelper;
     }
 
+    private void onReturnFromFolderMigration(final boolean resultOk) {
+        if (resultOk) {
+            gotoNext();
+        } else {
+            forceSkipButton = true;
+            updateDialog();
+        }
+    }
+
     private static boolean mapFolderNeedsMigration() {
         return Settings.legacyFolderNeedsToBeMigrated(R.string.pref_persistablefolder_offlinemaps);
     }
 
     private void requestMapfolder() {
+        forceSkipButton = false;
         if (mapFolderNeedsMigration()) {
             prepareFolderDefaultValues();
-            getContentStorageHelper().migratePersistableFolder(PersistableFolder.OFFLINE_MAPS, v -> gotoNext());
+            getContentStorageHelper().migratePersistableFolder(PersistableFolder.OFFLINE_MAPS, v -> onReturnFromFolderMigration(!mapFolderNeedsMigration()));
         }
     }
 
@@ -404,9 +416,10 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void requestGpxfolder() {
+        forceSkipButton = false;
         if (gpxFolderNeedsMigration()) {
             prepareFolderDefaultValues();
-            getContentStorageHelper().migratePersistableFolder(PersistableFolder.GPX, v -> gotoNext());
+            getContentStorageHelper().migratePersistableFolder(PersistableFolder.GPX, v -> onReturnFromFolderMigration(!gpxFolderNeedsMigration()));
         }
     }
 
