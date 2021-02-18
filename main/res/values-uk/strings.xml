@@ -613,7 +613,6 @@
     <string name="restore_information">Виберіть, що потрібно відновити:</string>
     <string name="init_restore_success">реставрація завершена.</string>
     <string name="init_restore_failed_dbrecreated">Помилка відновлення: пошкоджено файл резервної копії, треба було відновити базу даних.</string>
-    <string name="init_restore_failed">Не вдалося відновити.</string>
     <string name="init_restore_running">Відновлення бази даних…</string>
     <string name="init_restore_confirm">База даних порожня. Бажаєте відновити базу даних?</string>
     <string name="init_backup_last">Доступні резервні копії</string>
