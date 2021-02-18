@@ -607,7 +607,6 @@
     <string name="restore_information">Veuillez sélectionner ce que vous voulez restaurer :</string>
     <string name="init_restore_success">Restauration terminée.</string>
     <string name="init_restore_failed_dbrecreated">Échec de la restauration : fichier de sauvegarde corrompu, la base de données a dû être recréée.</string>
-    <string name="init_restore_failed">Échec de la restauration.</string>
     <string name="init_restore_running">Restauration de la base de données des caches…</string>
     <string name="init_restore_confirm">La base de données est vide. Voulez-vous restaurer la copie de sauvegarde ?</string>
     <string name="init_backup_last">Sauvegarde disponible depuis</string>
