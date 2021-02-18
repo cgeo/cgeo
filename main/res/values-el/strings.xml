@@ -153,7 +153,9 @@
     <string name="log_problem_archive_label">Η κρύπτη πρέπει να αρχειοθετηθεί</string>
     <string name="log_problem_archive_text">Ο παίκτης ανέφερε ότι αυτή η κρύπτη πρέπει να αρχειοθετηθεί. Έχει ενημερωθεί ο εθελοντής διαχειριστής για αυτό.</string>
     <string name="log_image_scale_option_noscaling">Χωρίς κλιμάκωση</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Εικόνα</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
@@ -239,6 +241,7 @@
     <string name="warn_search_help_tb">Εισαγάγετε τον κωδικό του ανιχνεύσιμου. Για παράδειγμα, «TB29QMZ».</string>
     <string name="warn_log_text_fill">Παρακαλώ εισάγετε κάποιο κείμενο για το αρχείο καταγραφής.</string>
     <string name="warn_load_images">Απέτυχε η φόρτωση εικόνων στο c:geo.</string>
+    <string name="warn_invalid_mapfile">Το επιλεγμένο αρχείο του χάρτη δεν είναι έγκυρο αρχείο mapsforge ή η έκδοση του δεν υποστηρίζεται.\n(Το c:geo μεχρι στιγμής υποστηρίζει τις εκδόσεις v3 έως v5 \n\nΟι χάρτες εκτός σύνδεσης δεν είναι διαθέσιμοι.</string>
     <string name="warn_pocket_query_select">Δεν έχει επιλεγεί καμία Προσωπική Αναζήτηση.</string>
     <string name="warn_no_pocket_query_found">Δεν βρέθηκε καμία Προσωπική Αναζήτηση online.</string>
     <string name="warn_invalid_character">Ο χαρακτήρας πρέπει να είναι ΓΡΑΜΜΑ ή ΑΡΙΘΜΟΣ</string>
@@ -630,7 +633,6 @@
     <string name="restore_information">Παρακαλώ επιλέξτε τι θέλετε να επαναφέρετε:</string>
     <string name="init_restore_success">Η επαναφορά ολοκληρώθηκε.</string>
     <string name="init_restore_failed_dbrecreated">Αποτυχία επαναφοράς: κατεστραμμένο αρχείο αντιγράφου, υποχρεωτική επαναδημιουργία της βάσης δεδομένων.</string>
-    <string name="init_restore_failed">Η επαναφορά απέτυχε.</string>
     <string name="init_restore_running">Επαναφορά βάσης δεδομένων κρυπτών…</string>
     <string name="init_restore_confirm">Η βάση δεδομένων είναι κενή. Θέλετε να επαναφέρετε τα αντίγραφα ασφαλείας της βάσης δεδομένων;</string>
     <string name="init_backup_last">Διαθέσιμα αντίγραφα ασφαλείας από</string>
@@ -671,6 +673,7 @@
     <string name="init_directionwidth">Πλάτος γραμμής κίνησης</string>
     <string name="init_directionwidth_summary">Επιλέξτε το πλάτος για την γραμμή κατεύθυνσης</string>
     <string name="init_routecolor">Χρώμα γραμμής ξεχωριστής διαδρομής</string>
+    <string name="init_routecolor_summary">Επιλέξτε χρώμα και αδιαφάνεια για την γραμμή της ξεχωριστής διαδρομής. Μια ξεχωριστή διαδρομή είναι μια συλλογή από ενδιάμεσα σημεία και/ή κρύπτες που εσείς επιλέξατε πατώντας παρατεταμένα πάνω στο ενδιάμεσο σημείο/κρύπτη. (Αρχικά πρέπει να ενεργοποιήσετε την δυνατότητα παρατεταμένου πατήματος, δείτε στις ρυθμίσεις χάρτη.)</string>
     <string name="init_routewidth">Πλάτος γραμμής ξεχωριστής διαδρομής</string>
     <string name="init_routewidth_summary">Επιλέξτε το πλάτος γραμμής της ξεχωριστής διαδρομής</string>
     <string name="init_trackcolor">Χρώμα γραμμής κομματιού/διαδρομής GPX</string>
@@ -697,6 +700,7 @@
     <string name="init_secondary_navigation_tool">Δευτερεύουσα πλοήγηση</string>
     <string name="init_default_navigation_tool_description">Εδώ μπορείτε να επιλέξετε το εργαλείο περιήγησης που προτιμάτε.</string>
     <string name="init_default_navigation_tool_select">Επιλέξτε το εργαλείο</string>
+    <string name="init_default_navigation_tool_2_description">Εδώ μπορείτε να επιλέξετε το δεύτερο εργαλείο περιήγησης που προτιμάτε. Ενεργοποιήστε πατώντας το εικονίδιο πλοήγησης δίπλα στον τίτλο της κρύπτης.</string>
     <string name="init_navigation_menu_description">Εδώ μπορείτε να επιλέξετε ποια από τις διαθέσιμες μεθόδους πλοήγησης θα εμφανιστεί στο μενού πλοήγησης για μια κρύπτη ή σημείο διαδρομής. Τα μη ενεργά εργαλεία δεν είναι εγκατεστημένα σε αυτήν τη συσκευή.</string>
     <string name="init_debug_title">Πληροφορίες εντοπισμού σφαλμάτων</string>
     <string name="init_debug_note">Το c:geo μπορεί να δημιουργήσει πολλές πληροφορίες εντοπισμού σφαλμάτων. Η ενεργοποίηση αυτής της ρύθμισης θα επηρεάσει τη σταθερότητα του c:geo και συνιστάται μόνο αν σας ζητηθεί να στείλετε ένα αρχείο καταγραφής για τους προγραμματιστές. Παρακαλώ κρατήστε την καταγραφή εντοπισμού σφαλμάτων απενεργοποιημένη κατά τη διάρκεια της κανονικής χρήσης του c:geo!</string>
@@ -764,6 +768,8 @@
     <string name="init_map_other">Άλλο</string>
     <string name="init_map_osm_multithreaded">Πολλαπλά Νήματα (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Χρήση πολλαπλών νημάτων για την απόδοση χαρτών OpenStreetMap</string>
+    <string name="localstorage_migrate_title">Μετανάστευση τοπικών αρχείων</string>
+    <string name="localstorage_migrate_status_major">Έκδοση %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Ειδοποιήσεις εγγύτητας</string>
     <string name="init_proximityNotificationGeneral">Γενική ειδοποίηση εγγύτητας στον χάρτη</string>
@@ -802,6 +808,8 @@
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Καμία ενέργεια</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Αντιγραφή όλου του περιεχομένου</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Μετακίνηση περιεχομένου</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Καμία άλλη ενέργεια</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Επιλέξατε ένα διαφορετικό φάκελο από αυτό που αποθηκεύτηκε. Πώς θέλετε να συνεχίσετε?\n\nΕπιλέξτε φάκελο και</string>
     <string name="contentstorage_folder_selection_aborted">Εγκατάλειψη επιλογής φακέλου, ο φάκελος είναι \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Ο φάκελος ορίστηκε σε \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Ματαίωση επιλογής αρχείου</string>
@@ -816,6 +824,7 @@
     <!-- Persistable Folders -->
     <string name="persistablefolder_usertype_userdefined">Ορισμένο από τον Χρήστη</string>
     <string name="persistablefolder_usertype_default">Προεπιλογή</string>
+    <string name="persistablefolder_spoilerimages">Εικόνες spoiler</string>
     <!-- FolderUtils -->
     <string name="folder_copy_progressbar_title">Αντιγραφή περιεχομένου από %1$s έως %2$s</string>
     <string name="folder_copy_progressbar_status_done">Αντιγράφηκε %1$s/%2$s, %3$s/%4$s</string>
@@ -841,8 +850,10 @@
     <string name="auth_register">Δημιουργία λογαριασμού</string>
     <string name="auth_connected">Σε σύνδεση</string>
     <string name="auth_unconnected">Δεν έχει συνδεθεί ακόμα</string>
+    <string name="auth_connected_as">Συνδεδεμένο σαν %s.\nΠιεστε εδώ για να αναβαθμίσετε ή πιέστε παρατεταμένα για να αφαιρέσετε την έγκριση σύνδεσης για το c:geo.</string>
     <string name="auth_dialog_waiting">Αναμονή για %s…</string>
     <string name="auth_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσετε πρόσβαση σε %s.</string>
+    <string name="auth_explain_long">Πατώντας το κουμπί «εξουσιοδοτήστε το c:geo», θα ξεκινήσει η διαδικασία. Αυτή η διαδικασία θα ανοίξει ένα πρόγραμμα περιήγησης με μια σελίδα %s. Συνδεθείτε στη σελίδα αυτή και επιτρέψτε στο <b>c:geo</b> να αποκτήσει πρόσβαση στο λογαριασμό σας. Αυτό είναι όλο.</string>
     <string name="auth_forget_title">Εγκαταλείπετε τη διαπίστευση;</string>
     <string name="auth_forget_message">Θα αποσυνδεθείτε από την υπηρεσία αυτή. Τα τρέχοντα αποθηκευμένα διαπιστευτήριά σας θα χαθούν.</string>
     <!-- auth credentials -->
@@ -851,6 +862,7 @@
     <string name="auth_register_explain">Αν δεν έχετε ακόμα λογαριασμό, κάντε κλικ παρακάτω για να κατευθυνθείτε στην ιστοσελίδα της υπηρεσίας και να δημιουργήσετε ένα λογαριασμό. Βεβαιωθείτε ότι χρησιμοποιείτε τη μέθοδο με όνομα χρήστη και κωδικό πρόσβασης για να δημιουργήσετε ένα λογαριασμό καθώς το c:geo δεν υποστηρίζει σύνδεση μέσω Google/Apple/Facebook. Μετά την δημιουργία λογαριασμού μπορεί να χρειαστεί επικύρωση της διεύθυνσης του ηλεκτρονικού σας ταχυδρομείου, πριν μπορέσετε να χρησιμοποιήσετε τη σύνδεση με το c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσει πρόσβαση σε %s.</string>
+    <string name="auth_token_explain_long">Συμπληρώνοντας τα στοιχεία σας και πατώντας το κουμπί «εξουσιοδοτήστε το c:geo», θα ξεκινήσει η διαδικασία. Με αυτή θα συνδεθείτε με το %s και θα ανακτήσετε έναν κωδικό πιστοποίησης. Αυτό είναι όλο.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">Το c:geo είναι τώρα εξουσιοδοτημένο να δημοσιεύει στο Twitter.</string>
     <!-- auth opencaching -->
@@ -1873,7 +1885,10 @@
     <string name="wizard_outro_error">Μη ολοκληρωμένη ρύθμιση παραμέτρων\nΔεν θα λειτουργήσουν όλα τα μέρη του c:geo όπως αναμενόταν!</string>
     <string name="wizard_permissions_title">Ορισμός δικαιωμάτων εφαρμογών</string>
     <string name="wizard_permissions_intro">Το c:geo χρειάζεται συγκεκριμένα δικαιώματα στην συσκευή σας για να λειτουργήσει ορθά.\nΘα σας εξηγήσω περισσότερες λεπτομέρειες στα επόμενα βήματα.</string>
+    <string name="wizard_permissions_folder_title">Ορισμός φακέλου: %s</string>
+    <string name="wizard_basefolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση δεδομένων όπως αρχεία GPX, αντίγραφα ασφαλείας, σημειώσεις πεδίου και αρχεία καταγραφής. Σύμφωνα με προεπιλογή, αυτά τα αρχεία αποθηκεύονται σε φακέλους κάτω από έναν αποκαλούμενο \"βασικό φάκελο\". Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.\n\nΕάν αναβαθμίσατε το c:geo από μια προηγούμενη έκδοση, επιλέξτε τον υπάρχοντα φάκελο \"cgeo\" στο ριζικό επίπεδο του χώρου αποθήκευσης της συσκευής σας.\nΥπόδειξη: Ίσως χρειαστεί να αποκρύψετε πρώτα τον εσωτερικό αποθηκευτικό χώρο της συσκευής σας στον επιλογέα αρχείων που θα εμφανιστεί στη συνέχεια.</string>
     <string name="wizard_mapfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση αρχείων χαρτών εκτός σύνδεσης. Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.</string>
+    <string name="wizard_gpxfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση αρχείων GPX π. χ. για την εισαγωγή / εξαγωγή κρυπτών ή κομματιών). Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.</string>
     <string name="wizard_platforms_title">Ρύθμιση υπηρεσιών</string>
     <string name="wizard_platforms_intro">Για να βρείτε κρύπτες με το c:geo χρειάζεστε ένα λογαριασμό για μια υπηρεσία geocaching που υποστηρίζεται από το c:geo.\nΕπιλέξτε την επιθυμητή υπηρεσία παρακάτω για να συνδεθείτε με τον υπάρχοντα λογαριασμό σας ή να δημιουργήσετε ένα νέο λογαριασμό.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1896,4 +1911,5 @@
     <string name="next">Επόμενο</string>
     <string name="done">Ολοκληρώθηκε</string>
     <string name="finish">Ολοκληρώθηκε</string>
+    <string name="back">Πίσω</string>
 </resources>
