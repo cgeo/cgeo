@@ -562,7 +562,6 @@
     <string name="init_backup_no_backup_available">No hay ningún archivo de copia de seguridad disponible.</string>
     <string name="init_restore_success">Restauración completa.</string>
     <string name="init_restore_failed_dbrecreated">Restauración fallida: Copia de seguridad corrupta, base de datos tenía que ser recreada.</string>
-    <string name="init_restore_failed">Restauración errónea.</string>
     <string name="init_restore_running">Restaurando la base de datos de cachés…</string>
     <string name="init_restore_confirm">La base de datos está vacia. ¿Desea restaurar la copia de seguridad de la base de datos?</string>
     <string name="init_backup_last">Copia guardada el</string>
