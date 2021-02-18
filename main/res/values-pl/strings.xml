@@ -635,7 +635,6 @@
     <string name="restore_information">Wybierz co chcesz przywrócić:</string>
     <string name="init_restore_success">Odzyskiwanie zakończone.</string>
     <string name="init_restore_failed_dbrecreated">Przywracanie nie powiodło się. Plik kopii zapasowej został uszkodzony. Baza danych musiała zostać ponownie utworzona.</string>
-    <string name="init_restore_failed">Odzyskiwanie nie powiodło się.</string>
     <string name="init_restore_running">Odzyskiwanie bazy skrzynek…</string>
     <string name="init_restore_confirm">Baza danych jest pusta. Czy na pewno chcesz odzyskać bazę danych z kopii zapasowej?</string>
     <string name="init_backup_last">Kopia dostępna od</string>
