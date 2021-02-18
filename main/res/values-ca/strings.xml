@@ -634,7 +634,6 @@
     <string name="restore_information">Seleccioneu què voleu restaurar:</string>
     <string name="init_restore_success">La restauració s\'ha completat.</string>
     <string name="init_restore_failed_dbrecreated">La restauració ha fallat: El fitxer de còpia de seguretat està malmès i s\'ha hagut de recrear la base de dades.</string>
-    <string name="init_restore_failed">Ha fallat la restauració.</string>
     <string name="init_restore_running">S\'està restaurant la base de dades dels catxés…</string>
     <string name="init_restore_confirm">La base de dades és buida. Voleu restaurar la còpia de seguretat?</string>
     <string name="init_backup_last">Està disponible la còpia de seguretat del</string>
