@@ -226,7 +226,6 @@
     <string name="warn_search_help_tb">Ievadiet ceļotāja kodu, lai reģistrētu atradumu. Piemēram, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Lūdzu, ievadi tekstu savam apmeklējuma ierakstam.</string>
     <string name="warn_load_images">c:geo neizdevās ielādēt attēlus.</string>
-    <string name="warn_invalid_mapfile">Atlasītais kartes fails nav derīgs mapsforge kartes fails vai lieto neatbalstītu versiju.\n(c:geo šobrīd atbalsta v3 - v5 / v3 tikai, ja Jūs lietojat \"Old Mapsforge V3\" iestatījumus.)\n\nBezsaistes kartes nav piejamas.</string>
     <string name="warn_pocket_query_select">Nav atlasīta Slēpņu atlase (PQ).</string>
     <string name="warn_no_pocket_query_found">Tiešsaistē nav atrasta neviena Slēpņu atlase (PQ).</string>
     <string name="warn_invalid_character">Rakstzīmei jābūt BURTAM vai CIPARAM</string>
