@@ -632,7 +632,6 @@
     <string name="restore_information">復元するものを選択してください</string>
     <string name="init_restore_success">キャッシュのデータベースは正常に復元されました</string>
     <string name="init_restore_failed_dbrecreated">復元に失敗しました: バックアップファイルが破損しています。データベースを再作成する必要がありました</string>
-    <string name="init_restore_failed">復元できませんでした</string>
     <string name="init_restore_running">キャッシュのデータベースを復元中…</string>
     <string name="init_restore_confirm">データベースは空です。バックアップから復元しますか?</string>
     <string name="init_backup_last">バックアップ日時:</string>
