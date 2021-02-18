@@ -638,7 +638,6 @@
     <string name="restore_information">Bitte wähle, was du wiederherstellen möchtest:</string>
     <string name="init_restore_success">Wiederherstellung abgeschlossen.</string>
     <string name="init_restore_failed_dbrecreated">Wiederherstellung fehlgeschlagen: Sicherungsdatei ist beschädigt, Datenbank musste neu erstellt werden.</string>
-    <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
     <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
     <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
     <string name="init_backup_last">Sicherung verfügbar vom</string>
