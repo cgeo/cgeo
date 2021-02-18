@@ -612,7 +612,6 @@
     <string name="restore_information">Vennligst velg hva du vil gjenopprette:</string>
     <string name="init_restore_success">Gjenoppretting fullført.</string>
     <string name="init_restore_failed_dbrecreated">Gjenoppretting feilet. Sikkerhetskopien er skadet og databasen ble satt opp på nytt.</string>
-    <string name="init_restore_failed">Gjenoppretting mislyktes.</string>
     <string name="init_restore_running">Gjenoppretter databasen…</string>
     <string name="init_restore_confirm">Databasen er tom. Vil du gjenopprette sikkerhetskopien av databasen?</string>
     <string name="init_backup_last">Tilgjengelig sikkerhetskopi fra</string>
