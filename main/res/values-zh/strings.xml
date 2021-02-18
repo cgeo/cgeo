@@ -610,7 +610,6 @@
     <string name="restore_information">请选择您想要恢复的内容：</string>
     <string name="init_restore_success">恢复完成。</string>
     <string name="init_restore_failed_dbrecreated">恢复失败：备份文件损坏，数据库必须重建。</string>
-    <string name="init_restore_failed">恢复失败</string>
     <string name="init_restore_running">正在恢复藏点数据库…</string>
     <string name="init_restore_confirm">数据库为空。您想要恢复数据库备份吗？</string>
     <string name="init_backup_last">可用备份自</string>
