@@ -240,6 +240,7 @@
     <string name="warn_search_help_tb">Εισαγάγετε τον κωδικό του ανιχνεύσιμου. Για παράδειγμα, «TB29QMZ».</string>
     <string name="warn_log_text_fill">Παρακαλώ εισάγετε κάποιο κείμενο για το αρχείο καταγραφής.</string>
     <string name="warn_load_images">Απέτυχε η φόρτωση εικόνων στο c:geo.</string>
+    <string name="warn_invalid_mapfile">Το επιλεγμένο αρχείο του χάρτη δεν είναι έγκυρο αρχείο mapsforge ή η έκδοση του δεν υποστηρίζεται.\n(Το c:geo μεχρι στιγμής υποστηρίζει τις εκδόσεις v3 έως v5 \n\nΟι χάρτες εκτός σύνδεσης δεν είναι διαθέσιμοι.</string>
     <string name="warn_pocket_query_select">Δεν έχει επιλεγεί καμία Προσωπική Αναζήτηση.</string>
     <string name="warn_no_pocket_query_found">Δεν βρέθηκε καμία Προσωπική Αναζήτηση online.</string>
     <string name="warn_invalid_character">Ο χαρακτήρας πρέπει να είναι ΓΡΑΜΜΑ ή ΑΡΙΘΜΟΣ</string>
