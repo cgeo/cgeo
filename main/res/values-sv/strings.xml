@@ -595,7 +595,6 @@
     <string name="init_backup_no_backup_available">Ingen backup-fil tillgänglig.</string>
     <string name="init_restore_success">Återställning klar.</string>
     <string name="init_restore_failed_dbrecreated">Återställning misslyckades: Backup fil skadad, databasen måste återskapas.</string>
-    <string name="init_restore_failed">Återställningen misslyckades.</string>
     <string name="init_restore_running">Återställer databasen med cacher…</string>
     <string name="init_restore_confirm">Databasen är tom. Vill du återställa med säkerhetskopian du gjort tidigare?</string>
     <string name="init_backup_last">Tillgänglig kopia från</string>
