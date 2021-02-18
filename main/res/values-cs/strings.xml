@@ -637,7 +637,8 @@
     <string name="restore_information">Vyberte prosím, co chcete obnovit:</string>
     <string name="init_restore_success">Obnova dokončena.</string>
     <string name="init_restore_failed_dbrecreated">Obnova se nezdařila: Záložní soubor je poškozen, databáze musela být znovu vytvořena.</string>
-    <string name="init_restore_failed">Obnova selhala.</string>
+    <string name="init_restore_db_failed">Obnovení databáze se nezdařilo.</string>
+    <string name="init_restore_settings_failed">Obnovení nastavení programu se nezdařilo.</string>
     <string name="init_restore_running">Obnovování databáze kešek…</string>
     <string name="init_restore_confirm">Databáze je prázdná, chceš ji obnovit ze zálohy?</string>
     <string name="init_backup_last">Dostupná záloha z</string>
