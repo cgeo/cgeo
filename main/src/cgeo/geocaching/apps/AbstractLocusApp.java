@@ -3,6 +3,7 @@ package cgeo.geocaching.apps;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -35,6 +36,7 @@ import locus.api.android.utils.LocusUtils;
 import locus.api.android.utils.exceptions.RequiredVersionMissingException;
 import locus.api.objects.extra.Location;
 import locus.api.objects.geoData.Point;
+import locus.api.objects.geocaching.GeocachingAttribute;
 import locus.api.objects.geocaching.GeocachingData;
 import locus.api.objects.geocaching.GeocachingWaypoint;
 import org.apache.commons.collections4.CollectionUtils;
@@ -179,6 +181,10 @@ public abstract class AbstractLocusApp extends AbstractApp {
         final int container = toLocusSize(cache.getSize());
         if (container != NO_LOCUS_ID) {
             gcData.setContainer(container);
+        }
+        final ArrayList<GeocachingAttribute> attributes = toLocusAttributes(cache.getAttributes());
+        if (!attributes.isEmpty()) {
+            gcData.setAttributes(attributes);
         }
 
         gcData.setAvailable(!cache.isDisabled());
@@ -369,5 +375,54 @@ public abstract class AbstractLocusApp extends AbstractApp {
             default:
                 return null;
         }
+    }
+
+    @Nullable
+    private static ArrayList<GeocachingAttribute> toLocusAttributes(final List<String> attributes) {
+        final ArrayList<GeocachingAttribute> loAttributes = new ArrayList<>();
+
+        for (String attribute:attributes) {
+            String rawAttribute = CacheAttribute.trimAttributeName(attribute);
+            if (rawAttribute.equals("")) {
+                continue;
+            }
+            // translate to locus names
+            switch (rawAttribute) {
+                case "dangerousanimals":
+                    rawAttribute = "snakes";
+                    break;
+                case "s_tool":
+                    rawAttribute = "s-tool";
+                    break;
+                case "abandonedbuilding":
+                    rawAttribute = "AbandonedBuilding";
+                    break;
+                case "touristok":
+                    rawAttribute = "touristOK";
+                    break;
+                case "bonuscache":
+                    rawAttribute = "bonus";
+                    break;
+                case "powertrail":
+                    rawAttribute = "power";
+                    break;
+                case "challengecache":
+                    rawAttribute = "challenge";
+                    break;
+                case "hqsolutionchecker":
+                    rawAttribute = "checker";
+                    break;
+                default:
+                    // do nothing
+                    break;
+            }
+            final String attributeUrl = "/" + rawAttribute + (CacheAttribute.isEnabled(attribute) ? "-yes." : "-no.");
+            final GeocachingAttribute ga = new GeocachingAttribute(attributeUrl);
+            // e.g. OC attributes - skip
+            if (ga != null) {
+                loAttributes.add(ga);
+            }
+        }
+        return loAttributes;
     }
 }
