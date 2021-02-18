@@ -431,7 +431,6 @@
     <string name="init_backup_failed">Varnostne kopije ni bilo mogoče ustvariti.</string>
     <string name="init_backup_unnecessary">Baza je prazna. Varnostna kopija ni potrebna.</string>
     <string name="init_restore_success">Obnovitev iz varnostne kopije je uspela.</string>
-    <string name="init_restore_failed">Obnovitev ni uspela.</string>
     <string name="init_restore_running">Obnavljam bazo podatkov iz varnostne kopije…</string>
     <string name="init_restore_confirm">Baza podatkov je prazna, ali ji želite obnoviti iz varnostne kopije?</string>
     <string name="init_backup_last">Varnostna kopija je na voljo iz</string>
