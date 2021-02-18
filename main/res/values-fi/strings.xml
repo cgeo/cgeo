@@ -635,7 +635,6 @@
     <string name="restore_information">Valitse mitä haluat palauttaa:</string>
     <string name="init_restore_success">Palautus valmis.</string>
     <string name="init_restore_failed_dbrecreated">Palautus epäonnistui: Varmuuskopio korruptoitunut, tietokanta piti luoda tyhjästä.</string>
-    <string name="init_restore_failed">Palautus epäonnistui.</string>
     <string name="init_restore_running">Palautetaan kätkötietokantaa…</string>
     <string name="init_restore_confirm">Tietokanta on tyhjä. Haluatko palauttaa varmuuskopion?</string>
     <string name="init_backup_last">Varmuuskopio ajalta:</string>
