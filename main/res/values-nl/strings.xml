@@ -638,6 +638,8 @@
     <string name="restore_information">Selecteer wat je wil herstellen:</string>
     <string name="init_restore_success">Herstellen is gelukt.</string>
     <string name="init_restore_failed_dbrecreated">Herstellen mislukt: het back-upbestand is beschadigd, de database moest worden hersteld.</string>
+    <string name="init_restore_db_failed">Herstellen van de database is mislukt.</string>
+    <string name="init_restore_settings_failed">Herstellen van programma-instellingen is mislukt.</string>
     <string name="init_restore_running">Herstellen van de cache database…</string>
     <string name="init_restore_confirm">De database is leeg, wil je een database-backup herstellen?</string>
     <string name="init_backup_last">Backup beschikbaar van</string>
