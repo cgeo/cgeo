@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.InstallWizardActivity;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.BackupSeekbarPreference;
@@ -165,7 +166,7 @@ public class BackupUtils extends Activity {
                     resultString += activityContext.getString(R.string.init_restore_settings_failed);
                 }
             }
-            if (restartNeeded) {
+            if (restartNeeded && !(activityContext instanceof InstallWizardActivity)) {
                 Dialogs.confirmYesNo(activityContext, R.string.init_restore_restored, resultString + activityContext.getString(R.string.settings_restart), (dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
             } else {
                 Dialogs.message(activityContext, R.string.init_restore_restored, resultString);
