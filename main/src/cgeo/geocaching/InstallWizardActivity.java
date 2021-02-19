@@ -15,9 +15,11 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import android.Manifest;
@@ -189,7 +191,13 @@ public class InstallWizardActivity extends AppCompatActivity {
                 }, button2Info, R.string.wizard_advanced_brouter_info);
                 setButton(button3, R.string.wizard_advanced_restore_label, v -> {
                     setButtonToDone();
-                    SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
+                    DataStore.resetNewlyCreatedDatabase();
+                    final BackupUtils backupUtils = new BackupUtils(this);
+                    if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
+                        backupUtils.restore(BackupUtils.newestBackupFolder());
+                    } else {
+                        backupUtils.selectBackupDirIntent(getContentStorageHelper());
+                    }
                 }, button3Info, R.string.wizard_advanced_restore_info);
                 break;
             case WIZARD_END: {
