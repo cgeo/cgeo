@@ -58,7 +58,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
 
-public class BackupUtils extends Activity {
+public class BackupUtils {
     private static final String ATTRIBUTE_NAME = "name";
     private static final String ATTRIBUTE_VALUE = "value";
     private static final String TAG_MAP = "map";
@@ -74,6 +74,7 @@ public class BackupUtils extends Activity {
     /* Public methods containing question dialogs, etc */
 
     public void selectBackupDirIntent (final ContentStorageActivityHelper contentStorageHelper) {
+        Toast.makeText(activityContext, R.string.init_backup_restore_different_backup_explanation, Toast.LENGTH_LONG).show();
         contentStorageHelper.selectFolder(PersistableFolder.BACKUP.getUri(), this::restore);
     }
 
@@ -246,7 +247,7 @@ public class BackupUtils extends Activity {
             final InputStream file = ContentStorage.get().openForRead(getSettingsFile(backupDir).uri);
 
             // open shared prefs for writing
-            final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
+            final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), Context.MODE_PRIVATE);
             final SharedPreferences.Editor editor = prefs.edit();
 
             // parse xml
@@ -351,7 +352,7 @@ public class BackupUtils extends Activity {
     }
 
     private boolean createSettingsBackupInternal(final Folder backupDir, final Boolean fullBackup) {
-        final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
+        final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), Context.MODE_PRIVATE);
         final Map<String, ?> keys = prefs.getAll();
         final HashSet<String> ignoreKeys = new HashSet<>();
 
