@@ -638,6 +638,8 @@
     <string name="restore_information">Por favor, seleccione o que pretende restaurar:</string>
     <string name="init_restore_success">Restauro concluído.</string>
     <string name="init_restore_failed_dbrecreated">Falha no restauro: ficheiro de cópia de segurança corrompido, a base de dados teve de ser recriada.</string>
+    <string name="init_restore_db_failed">A recuperação da base de dados falhou.</string>
+    <string name="init_restore_settings_failed">A reposição das definições do programa falhou.</string>
     <string name="init_restore_running">A restaurar a base de dados de caches…</string>
     <string name="init_restore_confirm">A base de dados está vazia. Quer restaurar a cópia de segurança da base de dados?</string>
     <string name="init_backup_last">Disponível cópia de segurança de</string>
