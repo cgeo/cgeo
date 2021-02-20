@@ -171,32 +171,18 @@
         <item name="compass">1</item>
     </style>
 
-
-    <style name="cgeo.Translucent.Light" parent="light">
+    <style name="popup_light" parent="light">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
     </style>
 
-
-    <style name="cgeo.Translucent" parent="dark">
+    <style name="popup_dark" parent="dark">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
-
-    </style>
-
-    <style name="cgeo_popup" parent="cgeo.Translucent.Light">
-        <item name="android:windowNoTitle">true</item>
-        <item name="colorAccent">@color/colorAccent</item>
-     </style>
-
-    <style name="popup_dark" parent="cgeo.Translucent">
-    </style>
-
-    <style name="popup_light" parent="cgeo_popup">
     </style>
 
     <style name="settings" parent="@android:style/Theme.DeviceDefault">
