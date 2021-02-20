@@ -251,7 +251,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         this.mapAttribution = findViewById(R.id.map_attribution);
 
         // try to retrieve up indicator resId and forward it to popup
-        final TypedArray a = getTheme().obtainStyledAttributes(R.style.cgeo_gmap, new int[] {R.attr.homeAsUpIndicator});
+        final TypedArray a = getTheme().obtainStyledAttributes(R.style.cgeo, new int[] {R.attr.homeAsUpIndicator});
         final int upResId = a.getResourceId(0, 0);
         a.recycle();
         findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, manualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId));

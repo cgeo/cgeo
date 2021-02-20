@@ -8,8 +8,9 @@ import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 
-import android.app.Activity;
 import android.content.res.Resources;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public final class GoogleMapProvider extends AbstractMapProvider {
 
@@ -40,7 +41,7 @@ public final class GoogleMapProvider extends AbstractMapProvider {
     }
 
     @Override
-    public Class<? extends Activity> getMapClass() {
+    public Class<? extends AppCompatActivity> getMapClass() {
         return GoogleMapActivity.class;
     }
 
