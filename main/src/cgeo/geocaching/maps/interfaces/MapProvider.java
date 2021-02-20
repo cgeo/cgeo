@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Defines functions of a factory class to get implementation specific objects
@@ -10,7 +10,7 @@ public interface MapProvider {
 
     boolean isSameActivity(MapSource source1, MapSource source2);
 
-    Class<? extends Activity> getMapClass();
+    Class<? extends AppCompatActivity> getMapClass();
 
     int getMapViewId();
 

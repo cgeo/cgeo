@@ -19,13 +19,13 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -87,7 +87,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     @Override
-    public Class<? extends Activity> getMapClass() {
+    public Class<? extends AppCompatActivity> getMapClass() {
         mapItemFactory = new MapsforgeMapItemFactory();
         return NewMap.class;
     }

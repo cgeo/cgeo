@@ -14,7 +14,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.DataStore;
 
-import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,6 +21,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -47,7 +47,7 @@ public abstract class AbstractMap {
         return mapActivity.getResources();
     }
 
-    public Activity getActivity() {
+    public AppCompatActivity getActivity() {
         return mapActivity.getActivity();
     }
 

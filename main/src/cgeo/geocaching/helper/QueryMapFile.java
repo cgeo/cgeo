@@ -3,17 +3,18 @@ package cgeo.geocaching.helper;
 import cgeo.geocaching.R;
 import cgeo.geocaching.storage.PersistableFolder;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * Helper activity for WhereYouGo to request the current mf map dir
  * Only returns if there is a map file set or forceAndFeedback=true
  */
-public class QueryMapFile extends Activity {
+public class QueryMapFile extends AppCompatActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -19,7 +19,6 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,10 +28,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class GoogleMapActivity extends Activity implements MapActivityImpl, FilteredActivity {
+public class GoogleMapActivity extends AppCompatActivity implements MapActivityImpl, FilteredActivity {
 
 
     private final AbstractMap mapBase;
@@ -45,11 +45,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     }
 
     public void setTheme(final int resid) {
-        if (Settings.isLightSkin()) {
-            super.setTheme(R.style.cgeo_gmap_light);
-        } else {
-            super.setTheme(R.style.cgeo_gmap);
-        }
+        super.setTheme(Settings.isLightSkin() ? R.style.light : R.style.dark);
     }
 
     public TrackUtils getTrackUtils() {
@@ -61,7 +57,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     }
 
     @Override
-    public Activity getActivity() {
+    public AppCompatActivity getActivity() {
         return this;
     }
 
