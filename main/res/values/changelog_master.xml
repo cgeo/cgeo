@@ -23,6 +23,7 @@
 <h4>Other:</h4>
 <ul>
 <li>New: Set user-defined coords for waypoints on GPX import even when original waypoint has no coords</li>
+<li>New: Add support for cache attributes in locus connector</li>
 </ul>
 
 </div>]]></Data>
