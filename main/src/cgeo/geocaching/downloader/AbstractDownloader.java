@@ -14,6 +14,8 @@ import androidx.annotation.StringRes;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 public abstract class AbstractDownloader {
     public OfflineMap.OfflineMapType offlineMapType;
     public Uri mapBase;
@@ -62,6 +64,25 @@ public abstract class AbstractDownloader {
                     list.add(offlineMap);
                 }
             }
+        }
+    }
+
+    // do any cleanup on filename?
+    protected String toVisibleFilename(final String filename) {
+        return filename;
+    }
+
+    // infix a certain string into the filename?
+    protected String toInfixedString(final String filename, final String infix) {
+        if (StringUtils.isNotBlank(infix)) {
+            if (StringUtils.isNotBlank(forceExtension)) {
+                final int extPos = filename.indexOf(forceExtension);
+                return extPos == -1 ? filename + infix : filename.substring(0, extPos) + infix + forceExtension;
+            } else {
+                return filename + infix;
+            }
+        } else {
+            return filename;
         }
     }
 

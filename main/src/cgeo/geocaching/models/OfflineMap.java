@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.AbstractDownloader;
 import cgeo.geocaching.downloader.CompanionFileUtils;
 import cgeo.geocaching.downloader.MapDownloaderElevate;
+import cgeo.geocaching.downloader.MapDownloaderFreizeitkarte;
 import cgeo.geocaching.downloader.MapDownloaderMapsforge;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -81,7 +82,8 @@ public class OfflineMap {
         // id values must not be changed as they are referenced in the database & download companion files
         MAP_DOWNLOAD_TYPE_MAPSFORGE(1),
         MAP_DOWNLOAD_TYPE_OPENANDROMAPS(2),
-        MAP_DOWNLOAD_TYPE_ELEVATE(3);
+        MAP_DOWNLOAD_TYPE_ELEVATE(3),
+        MAP_DOWNLOAD_TYPE_FREIZEITKARTE(4);
 
         public final int id;
         public static final int DEFAULT = MAP_DOWNLOAD_TYPE_MAPSFORGE.id;
@@ -112,6 +114,7 @@ public class OfflineMap {
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_MAPSFORGE, MapDownloaderMapsforge.getInstance(), R.string.mapserver_mapsforge_name));
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_OPENANDROMAPS, MapDownloaderOpenAndroMaps.getInstance(), R.string.mapserver_openandromaps_name));
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_ELEVATE, MapDownloaderElevate.getInstance(), R.string.mapserver_elevate_name));
+                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_FREIZEITKARTE, MapDownloaderFreizeitkarte.getInstance(), R.string.mapserver_freizeitkarte_name));
             }
         }
     }

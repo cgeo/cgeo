@@ -75,10 +75,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                         String filename = ze.getName();
                         final int posExt = filename.lastIndexOf('.');
                         if (posExt != -1 && (StringUtils.equalsIgnoreCase(FileUtils.MAP_FILE_EXTENSION, filename.substring(posExt)))) {
-                            final int posInfix = filename.indexOf("_oam.osm.");
-                            if (posInfix != -1) {
-                                filename = filename.substring(0, posInfix) + filename.substring(posInfix + 8);
-                            }
+                            filename = downloader.toVisibleFilename(filename);
                             // found map file within zip
                             if (guessFilename(filename)) {
                                 handleMapFile(this,  true, ze.getName());
