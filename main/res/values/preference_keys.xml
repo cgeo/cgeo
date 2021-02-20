@@ -133,6 +133,7 @@
     <string translatable="false" name="pref_debug">debug</string>
     <string translatable="false" name="pref_force_orientation_sensor">forceOrientationSensort</string>
     <string translatable="false" name="pref_longTapOnMapActivated">pref_longTapCreateUDC</string>
+    <string translatable="false" name="pref_pqShowDownloadableOnly">pqShowDownloadableOnly</string>
     <!-- preferences used internally -->
     <string translatable="false" name="pref_temp_twitter_token_secret">temp-token-secret</string>
     <string translatable="false" name="pref_temp_twitter_token_public">temp-token-public</string>
