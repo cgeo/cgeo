@@ -888,13 +888,16 @@
     <string name="persistablefolder_fieldnotes">Field Notes</string>
     <string name="persistablefolder_spoilerimages">Spoiler Images</string>
 
-    <!-- FolderUtils -->
-    <string name="folder_copy_progressbar_title">Copying content of %1$s to %2$s</string>
-    <string name="folder_copy_progressbar_status_done">Copied %1$s/%2$s, %3$s/%4$s</string>
-    <string name="folder_move_progressbar_title">Moving content of %1$s to %2$s</string>
-    <string name="folder_move_progressbar_status_done">Moved %1$s/%2$s, %3$s/%4$s</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Process %1$s</string>
+    <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s done</string>
+    <string name="folder_process_status_currentfile">Process %1$s</string>
 
+    <!-- FolderUtils: synchronize -->
+    <string name="folder_synchronize_to_internal_progressbar_title">Synchronize content of %1$s to internal storage</string>
+
+    <!-- FolderUtils: copy/move -->
+    <string name="folder_copy_progressbar_title">Copying content of %1$s to %2$s</string>
+    <string name="folder_move_progressbar_title">Moving content of %1$s to %2$s</string>
     <string name="folder_copy_finished_title">Folder content was copied</string>
     <string name="folder_move_finished_title">Folder content was moved</string>
     <string name="folder_copy_finished_dialog_message">Content of folder %1$s was copied to %2$s.\n\n%3$s of %4$s and %5$s of %6$s were processed.</string>
