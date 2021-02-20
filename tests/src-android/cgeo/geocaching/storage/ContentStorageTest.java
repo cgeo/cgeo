@@ -1,6 +1,7 @@
 package cgeo.geocaching.storage;
 
 import cgeo.CGeoTestCase;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -10,6 +11,7 @@ import android.net.Uri;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,11 +19,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -163,15 +167,15 @@ public class ContentStorageTest extends CGeoTestCase {
         createTree(sourceFolder, COMPLEX_FOLDER_STRUCTURE);
 
         //copy
-        FolderUtils.CopyResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
-        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 7, 3);
+        FolderUtils.FolderProcessResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
+        assertCopyResult(result, FolderUtils.ProcessResult.OK, 7, 3);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
 
         //move
         assertThat(FolderUtils.get().deleteAll(targetFolder)).isTrue();
         result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
-        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 7, 3);
+        assertCopyResult(result, FolderUtils.ProcessResult.OK, 7, 3);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false), "[]");
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
     }
@@ -194,50 +198,50 @@ public class ContentStorageTest extends CGeoTestCase {
         createTree(sourceFolder, COMPLEX_FOLDER_STRUCTURE);
 
         //copy complete
-        final List<FolderUtils.CopyStatus> copyStatus = new ArrayList<>();
+        final List<FolderUtils.FolderProcessStatus> folderProcessStatuses = new ArrayList<>();
         final AtomicBoolean cancelFlag = new AtomicBoolean(false);
-        FolderUtils.CopyResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false, cancelFlag, cs -> copyStatus.add(cs));
-        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 7, 3);
+        FolderUtils.FolderProcessResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false, cancelFlag, cs -> folderProcessStatuses.add(cs));
+        assertCopyResult(result, FolderUtils.ProcessResult.OK, 7, 3);
         //expect one initial status (with files/dirs to copy = -1), one status before (with files/dirs copied = 0 but known nr of files/dirs to copy) and then one for each file/dir
-        assertThat(copyStatus).hasSize(2 + 3 + 7);
-        assertThat(copyStatus.get(0).filesInSource).isEqualTo(-1);
-        assertThat(copyStatus.get(0).dirsInSource).isEqualTo(-1);
-        assertThat(copyStatus.get(0).filesCopied + copyStatus.get(0).dirsCopied).isEqualTo(0);
+        assertThat(folderProcessStatuses).hasSize(2 + 3 + 7);
+        assertThat(folderProcessStatuses.get(0).filesInSource).isEqualTo(-1);
+        assertThat(folderProcessStatuses.get(0).dirsInSource).isEqualTo(-1);
+        assertThat(folderProcessStatuses.get(0).filesProcessed + folderProcessStatuses.get(0).dirsProcessed).isEqualTo(0);
         int prevSum = 0;
         for (int i = 1; i < 2 + 3 + 7; i++) {
-            assertThat(copyStatus.get(i).filesInSource).isEqualTo(7);
-            assertThat(copyStatus.get(i).dirsInSource).isEqualTo(3);
-            assertThat(copyStatus.get(i).filesCopied + copyStatus.get(i).dirsCopied).isEqualTo(prevSum);
+            assertThat(folderProcessStatuses.get(i).filesInSource).isEqualTo(7);
+            assertThat(folderProcessStatuses.get(i).dirsInSource).isEqualTo(3);
+            assertThat(folderProcessStatuses.get(i).filesProcessed + folderProcessStatuses.get(i).dirsProcessed).isEqualTo(prevSum);
             prevSum++;
         }
 
         //copy aborted
-        copyStatus.clear();
+        folderProcessStatuses.clear();
         final int abortAfter = 6;
         result = FolderUtils.get().copyAll(sourceFolder, targetFolder2, false, cancelFlag, cs -> {
-            copyStatus.add(cs);
-            if (copyStatus.size() >= abortAfter) {
+            folderProcessStatuses.add(cs);
+            if (folderProcessStatuses.size() >= abortAfter) {
                 cancelFlag.set(true);
             }
         });
-        assertThat(result.status).isEqualTo(FolderUtils.CopyResultStatus.ABORTED);
+        assertThat(result.result).isEqualTo(FolderUtils.ProcessResult.ABORTED);
         //expect one initial status (with files/dirs to copy = -1), one status before (with files/dirs copied = 0 but known nr of files/dirs to copy) and then one for each file/dir
-        assertThat(copyStatus).hasSize(abortAfter + 1);
-        assertThat(copyStatus.get(0).filesInSource).isEqualTo(-1);
-        assertThat(copyStatus.get(0).dirsInSource).isEqualTo(-1);
-        assertThat(copyStatus.get(0).filesCopied + copyStatus.get(0).dirsCopied).isEqualTo(0);
+        assertThat(folderProcessStatuses).hasSize(abortAfter + 1);
+        assertThat(folderProcessStatuses.get(0).filesInSource).isEqualTo(-1);
+        assertThat(folderProcessStatuses.get(0).dirsInSource).isEqualTo(-1);
+        assertThat(folderProcessStatuses.get(0).filesProcessed + folderProcessStatuses.get(0).dirsProcessed).isEqualTo(0);
         prevSum = 0;
         for (int i = 1; i < abortAfter + 1; i++) {
-            assertThat(copyStatus.get(i).filesInSource).isEqualTo(7);
-            assertThat(copyStatus.get(i).dirsInSource).isEqualTo(3);
-            assertThat(copyStatus.get(i).filesCopied + copyStatus.get(i).dirsCopied).isEqualTo(prevSum);
+            assertThat(folderProcessStatuses.get(i).filesInSource).isEqualTo(7);
+            assertThat(folderProcessStatuses.get(i).dirsInSource).isEqualTo(3);
+            assertThat(folderProcessStatuses.get(i).filesProcessed + folderProcessStatuses.get(i).dirsProcessed).isEqualTo(prevSum);
             prevSum++;
         }
         //check that result status of different sources match also when copy was aborted
-        assertThat(copyStatus.get(abortAfter).filesCopied).isEqualTo(result.filesCopied);
-        assertThat(copyStatus.get(abortAfter).dirsCopied).isEqualTo(result.dirsCopied);
+        assertThat(folderProcessStatuses.get(abortAfter).filesProcessed).isEqualTo(result.filesProcessed);
+        assertThat(folderProcessStatuses.get(abortAfter).dirsProcessed).isEqualTo(result.dirsProcessed);
         final ImmutablePair<Integer, Integer> targetInfo = FolderUtils.get().getFolderInfo(targetFolder2);
-        assertThat(targetInfo).isEqualTo(new ImmutablePair<>(result.filesCopied, result.dirsCopied));
+        assertThat(targetInfo).isEqualTo(new ImmutablePair<>(result.filesProcessed, result.dirsProcessed));
      }
 
     public void testFileCopyAllSameDir() {
@@ -255,8 +259,8 @@ public class ContentStorageTest extends CGeoTestCase {
 
         createTree(sourceTargetFolder, COMPLEX_FOLDER_STRUCTURE);
 
-        final FolderUtils.CopyResult result = FolderUtils.get().copyAll(sourceTargetFolder, sourceTargetFolder, true);
-        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 0, 0);
+        final FolderUtils.FolderProcessResult result = FolderUtils.get().copyAll(sourceTargetFolder, sourceTargetFolder, true);
+        assertCopyResult(result, FolderUtils.ProcessResult.OK, 0, 0);
 
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceTargetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
     }
@@ -276,8 +280,8 @@ public class ContentStorageTest extends CGeoTestCase {
         final Folder targetFolder = Folder.fromFolder(sourceFolder, "ccc/ccc-ccc");
 
         //copy
-        FolderUtils.CopyResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
-        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 7, 3);
+        FolderUtils.FolderProcessResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
+        assertCopyResult(result, FolderUtils.ProcessResult.OK, 7, 3);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false),
             "[\"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": " +
                 "[ \"ccc-aaa.txt\", { \"name\": \"ccc-bbb\", \"files\": [] }, { \"name\": \"ccc-ccc\", \"files\": " +
@@ -293,7 +297,7 @@ public class ContentStorageTest extends CGeoTestCase {
         FolderUtils.get().deleteAll(sourceFolder);
         createTree(sourceFolder, COMPLEX_FOLDER_STRUCTURE);
         result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
-        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 7, 3);
+        assertCopyResult(result, FolderUtils.ProcessResult.OK, 7, 3);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false),
             "[{\"name\": \"ccc\", \"files\": [ { \"name\": \"ccc-ccc\", \"files\": " +
@@ -315,8 +319,8 @@ public class ContentStorageTest extends CGeoTestCase {
         final Folder sourceFolder = Folder.fromFolder(targetFolder, "ccc");
 
         //copy
-        FolderUtils.CopyResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
-        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 4, 2);
+        FolderUtils.FolderProcessResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
+        assertCopyResult(result, FolderUtils.ProcessResult.OK, 4, 2);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false),
             "[\"aaa.txt\",\"bbb.txt\",{\"name\":\"ccc\",\"files\":[\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\"]},\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\",\"ddd.txt\"]"
             );
@@ -325,13 +329,146 @@ public class ContentStorageTest extends CGeoTestCase {
         FolderUtils.get().deleteAll(targetFolder);
         createTree(targetFolder, COMPLEX_FOLDER_STRUCTURE);
         result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
-        assertCopyResult(result, FolderUtils.CopyResultStatus.OK, 4, 2);
+        assertCopyResult(result, FolderUtils.ProcessResult.OK, 4, 2);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false),
             "[\"aaa.txt\",\"bbb.txt\",{\"name\":\"ccc\",\"files\":[" +
                 //"\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\"" +
                 "]},\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\",\"ddd.txt\"]"
         );
     }
+
+    public void testFileGetAllFiles() {
+        performGetAllFiles(Folder.FolderType.FILE);
+    }
+
+    public void testDocumentGetAllFiles() {
+        performGetAllFiles(Folder.FolderType.DOCUMENT);
+    }
+
+    private void performGetAllFiles(final Folder.FolderType typeSource) {
+
+        final Folder testFolder = createTestFolder(typeSource, "getAllFiles");
+        createTree(testFolder, COMPLEX_FOLDER_STRUCTURE);
+
+        final List<ImmutablePair<ContentStorage.FileInformation, String>> allFiles = FolderUtils.get().getAllFiles(testFolder);
+        Collections.sort(allFiles, (e1, e2) -> e1.right.compareTo(e2.right));
+
+        assertThat(allFiles).hasSize(10); //7 files, 3 dirs
+        assertFileInfo(allFiles.get(0), "aaa.txt", false, "/aaa.txt");
+        assertFileInfo(allFiles.get(1), "bbb.txt", false, "/bbb.txt");
+        assertFileInfo(allFiles.get(2), "ccc", true, "/ccc");
+        assertFileInfo(allFiles.get(3), "ccc-aaa.txt", false, "/ccc/ccc-aaa.txt");
+        assertFileInfo(allFiles.get(4), "ccc-bbb", true, "/ccc/ccc-bbb");
+        assertFileInfo(allFiles.get(5), "ccc-ccc", true, "/ccc/ccc-ccc");
+        assertFileInfo(allFiles.get(6), "ccc-ccc-aaa.txt", false, "/ccc/ccc-ccc/ccc-ccc-aaa.txt");
+        assertFileInfo(allFiles.get(7), "ccc-ccc-bbb.txt", false, "/ccc/ccc-ccc/ccc-ccc-bbb.txt");
+        assertFileInfo(allFiles.get(8), "ccc-ddd.txt", false, "/ccc/ccc-ddd.txt");
+        assertFileInfo(allFiles.get(9), "ddd.txt", false, "/ddd.txt");
+    }
+
+    private void assertFileInfo(final ImmutablePair<ContentStorage.FileInformation, String> entry, final String fileName, final boolean isDir, final String path) {
+        assertThat(entry.left.name).isEqualTo(fileName);
+        assertThat(entry.left.isDirectory).isEqualTo(isDir);
+        assertThat(entry.right).isEqualTo(path);
+    }
+
+    public void testFileSynchronizeFolder() throws IOException {
+        performSynchronizeFolder(Folder.FolderType.FILE);
+    }
+
+    public void testDocumentSynchronizeFolder() throws IOException {
+        performSynchronizeFolder(Folder.FolderType.DOCUMENT);
+    }
+
+    private void performSynchronizeFolder(final Folder.FolderType typeSource) throws IOException {
+
+        final String folderSyncInfoFilename = FolderUtils.FOLDER_SYNC_INFO_FILENAME;
+
+        final Folder sourceFolder = Folder.fromFolder(createTestFolder(typeSource, "synchronizeFolder"), "source");
+        final Folder targetFolder = Folder.fromFolder(createTestFolder(Folder.FolderType.FILE, "synchronizeFolder"), "target-" + typeSource);
+        ContentStorage.get().ensureFolder(targetFolder, true);
+        final File targetFolderFile = new File(targetFolder.getUri().getPath());
+        createTree(sourceFolder, COMPLEX_FOLDER_STRUCTURE, "sync");
+        final List<ImmutablePair<ContentStorage.FileInformation, String>> sourceFiles = FolderUtils.get().getAllFiles(sourceFolder);
+        Collections.sort(sourceFiles, (e1, e2) -> e1.right.compareTo(e2.right));
+
+        //create some random files in target folder (which should be removed by sync)
+        new File(targetFolderFile, "eee.txt").createNewFile();
+        new File(targetFolderFile, "ccc").mkdirs();
+        new File(targetFolderFile, "ccc/eee.txt").createNewFile();
+
+        //create a file in target and mark it as "already synced" (by creating a fake entry in sync file properties)
+        //->this file shall NOT get overridden in following sync
+        final String fileSimName = "/ccc/ccc-ddd.txt";
+        final String fileSimContent = "this is test content which should NOT get overridden by sync";
+        final ContentStorage.FileInformation sourceSimSyncedInfo = sourceFiles.get(8).left;
+        final File fileSimDir = new File(targetFolderFile, "ccc");
+        fileSimDir.mkdirs();
+        final Properties p = new Properties();
+        p.setProperty("ccc-ddd.txt", sourceSimSyncedInfo.lastModified + "-" + sourceSimSyncedInfo.size);
+        p.store(new FileOutputStream(new File(fileSimDir, folderSyncInfoFilename)), "test");
+        writeToUri(Uri.fromFile(new File(fileSimDir, "ccc-ddd.txt")), fileSimContent);
+
+        FolderUtils.get().synchronizeFolder(sourceFolder, targetFolderFile, null);
+
+        //check if source and target files are identical
+        final List<ImmutablePair<ContentStorage.FileInformation, String>> targetFiles = FolderUtils.get().getAllFiles(targetFolder);
+        Collections.sort(targetFiles, (e1, e2) -> e1.right.compareTo(e2.right));
+        final List<ImmutablePair<ContentStorage.FileInformation, String>> targetFilesWithoutSyncFiles = CollectionStream.of(targetFiles)
+            .filter(e -> !e.right.endsWith("/" + folderSyncInfoFilename)).toList();
+
+        assertThat(targetFilesWithoutSyncFiles).hasSize(sourceFiles.size());
+        for (int i = 0; i < sourceFiles.size(); i++) {
+            assertThat(targetFilesWithoutSyncFiles.get(i).right).isEqualTo(sourceFiles.get(i).right);
+            assertThat(targetFilesWithoutSyncFiles.get(i).left.name).isEqualTo(sourceFiles.get(i).left.name);
+
+            if (sourceFiles.get(i).right.equals(fileSimName)) {
+                assertThat(readFromUri(targetFilesWithoutSyncFiles.get(i).left.uri)).isEqualTo(fileSimContent);
+            } else if (!targetFilesWithoutSyncFiles.get(i).left.isDirectory) {
+                assertThat(targetFilesWithoutSyncFiles.get(i).left.size).isEqualTo(sourceFiles.get(i).left.size);
+                assertThat(readFromUri(targetFilesWithoutSyncFiles.get(i).left.uri)).isEqualTo(readFromUri(sourceFiles.get(i).left.uri));
+            }
+        }
+
+        //check if written synchronization info files contain expected content
+        final List<ImmutablePair<ContentStorage.FileInformation, String>> targetSyncFiles = CollectionStream.of(targetFiles)
+            .filter(e -> e.right.endsWith("/" + folderSyncInfoFilename)).toList();
+        assertThat(targetSyncFiles).hasSize(3); //root dir, "ccc" dir and "/ccc/ccc-ccc". (/ccc/ccc-bbb is empty and has no sync info file)
+
+        assertPropertyContent(targetSyncFiles.get(0), folderSyncInfoFilename, "/",
+            "aaa.txt", getFileSyncToken(sourceFiles.get(0).left),
+                "bbb.txt", getFileSyncToken(sourceFiles.get(1).left),
+                "ddd.txt", getFileSyncToken(sourceFiles.get(9).left));
+        assertPropertyContent(targetSyncFiles.get(1), folderSyncInfoFilename, "/ccc/",
+            "ccc-aaa.txt", getFileSyncToken(sourceFiles.get(3).left),
+            "ccc-ddd.txt", getFileSyncToken(sourceFiles.get(8).left));
+        assertPropertyContent(targetSyncFiles.get(2), folderSyncInfoFilename, "/ccc/ccc-ccc/",
+            "ccc-ccc-aaa.txt", getFileSyncToken(sourceFiles.get(6).left),
+            "ccc-ccc-bbb.txt", getFileSyncToken(sourceFiles.get(7).left));
+
+    }
+
+    private static String getFileSyncToken(final ContentStorage.FileInformation fi) {
+        return fi.lastModified + "-" + fi.size;
+    }
+
+    private void assertPropertyContent(final ImmutablePair<ContentStorage.FileInformation, String> propFile, final String name, final String path, final String ... entries) {
+        assertThat(propFile.left.name).isEqualTo(name);
+        assertThat(propFile.right).isEqualTo(path + name);
+
+        try {
+            final Properties p = new Properties();
+            p.load(ContentStorage.get().openForRead(propFile.left.uri));
+            assertThat(p.size()).isEqualTo(entries.length / 2);
+            for (int i = 0; i < entries.length; i += 2) {
+                assertThat(p.getProperty(entries[i])).isEqualTo(entries[i + 1]);
+            }
+        } catch (IOException ioe) {
+            throw new IllegalArgumentException("Could not read prop file " + propFile, ioe);
+        }
+
+    }
+
 
 
     private void assertEqualsWithoutWhitespaces(final String value, final String expected) {
@@ -555,14 +692,18 @@ public class ContentStorageTest extends CGeoTestCase {
     }
 
     private void createTree(final Folder folder, final String structure) {
+        createTree(folder, structure, null);
+    }
+
+    private void createTree(final Folder folder, final String structure, final String content) {
         final JsonNode json = JsonUtils.toNode(structure);
         if (json == null) {
             throw new IllegalArgumentException("Invalid Json structure: " + structure);
         }
-        createTree(folder, json);
+        createTree(folder, json, content);
     }
 
-    private void createTree(final Folder folder, final JsonNode node) {
+    private void createTree(final Folder folder, final JsonNode node, final String content) {
         final Iterator<JsonNode> it = node.elements();
         while (it.hasNext()) {
             final JsonNode n = it.next();
@@ -571,18 +712,38 @@ public class ContentStorageTest extends CGeoTestCase {
                final String folderName = n.get("name").asText();
                 final Folder newFolder = Folder.fromFolder(folder, folderName);
                 ContentStorage.get().ensureFolder(newFolder, true);
-                createTree(newFolder, n.get("files"));
+                createTree(newFolder, n.get("files"), content);
             } else {
                 //this is a file
-                ContentStorage.get().create(folder, n.textValue());
+                final Uri uri = ContentStorage.get().create(folder, n.textValue());
+                if (content != null) {
+                    writeToUri(uri, content + "-" + n.textValue());
+                }
             }
         }
     }
 
-    private void assertCopyResult(final FolderUtils.CopyResult result, final FolderUtils.CopyResultStatus expectedState, final int expectedFileCount, final int expectedDirCount) {
-        assertThat(result.status).isEqualTo(expectedState);
-        assertThat(result.filesCopied).isEqualTo(expectedFileCount);
-        assertThat(result.dirsCopied).isEqualTo(expectedDirCount);
+    private void writeToUri(final Uri uri, final String text) {
+        try {
+            IOUtils.write(text, ContentStorage.get().openForWrite(uri), "UTF-8");
+        } catch (IOException ioe) {
+            throw new IllegalArgumentException("Could not write to " + uri, ioe);
+        }
+    }
+
+
+    private String readFromUri(final Uri uri)  {
+        try {
+            return IOUtils.readLines(ContentStorage.get().openForRead(uri), "UTF-8").get(0);
+        } catch (IOException ioe) {
+            throw new IllegalArgumentException("Could not read from " + uri, ioe);
+        }
+    }
+
+    private void assertCopyResult(final FolderUtils.FolderProcessResult result, final FolderUtils.ProcessResult expectedState, final int expectedFileCount, final int expectedDirCount) {
+        assertThat(result.result).isEqualTo(expectedState);
+        assertThat(result.filesProcessed).isEqualTo(expectedFileCount);
+        assertThat(result.dirsProcessed).isEqualTo(expectedDirCount);
     }
 
     private void assertFileDirCount(final Folder folder, final int fileCount, final int dirCount) {
