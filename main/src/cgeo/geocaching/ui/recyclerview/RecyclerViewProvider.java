@@ -5,10 +5,9 @@ import android.app.Activity;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 public final class RecyclerViewProvider {
 
@@ -24,10 +23,11 @@ public final class RecyclerViewProvider {
 
     private static void configureView(final Activity context, final RecyclerView view, final boolean fixedSize, final boolean showDivider) {
         view.setHasFixedSize(fixedSize);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        view.setLayoutManager(layoutManager);
         if (showDivider) {
-            view.addItemDecoration(new HorizontalDividerItemDecoration.Builder(context).build());
+            view.addItemDecoration(new DividerItemDecoration(context, layoutManager.getOrientation()));
         }
-        view.setLayoutManager(new LinearLayoutManager(context));
         view.setItemAnimator(new DefaultItemAnimator());
     }
 
