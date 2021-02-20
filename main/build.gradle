@@ -360,8 +360,6 @@ dependencies {
 
     // Support Library RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    // we don't want to implement decorators on our own
-    implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
 
     // Support Annotations. use same version for the main app and the test app
     def annotationVersion = '1.1.0'
