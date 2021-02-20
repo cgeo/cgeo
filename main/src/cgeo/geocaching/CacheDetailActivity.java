@@ -2250,6 +2250,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         clickedItemText = Formatter.formatHiddenDate(cache);
                         buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_event), true);
                         menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
+                    } else if (viewId == R.id.coordinates) {
+                        clickedItemText = ((TextView) view1).getText();
+                        clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
+                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_coordinates), true);
                     } else {
                         return false;
                     }
