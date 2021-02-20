@@ -619,6 +619,7 @@
     <string name="init_restore_restored">Terugzetten voltooid</string>
     <string name="init_backup_start_restore">Terugzetten starten</string>
     <string name="init_backup_restore_different_backup">Een andere back-up terugzetten</string>
+    <string name="init_backup_restore_different_backup_explanation">Selecteer de map met de back-up die je wil terugzetten</string>
     <string name="init_backup_backup_history">Back-up geschiedenis</string>
     <string name="init_backup_history_length_title">Max aantal opgeslagen back-ups</string>
     <string name="init_backup_history_length_summary">Beslis hoeveel back-ups moeten worden bewaard. Wanneer de limiet wordt bereikt, worden de oudste automatisch verwijderd.</string>
