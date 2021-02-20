@@ -58,6 +58,12 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
     }
 
     @Override
+    protected String toVisibleFilename(final String filename) {
+        final int posInfix = filename.indexOf("_oam.osm.");
+        return toInfixedString(posInfix == -1 ? filename : filename.substring(0, posInfix) + filename.substring(posInfix + 8), " (OAM)");
+    }
+
+    @Override
     protected void onFollowup(final Activity activity, final Runnable callback) {
         // check whether Elevate.zip exists in theme folder and ask whether user wants to download it as well, if it does not exist yet
         boolean themeFound = false;

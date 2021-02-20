@@ -237,6 +237,11 @@
     <string translatable="false" name="mapserver_elevate_downloadurl">https://www.openandromaps.org/wp-content/users/tobias/</string>
     <string translatable="false" name="mapserver_elevate_updatecheckurl">https://www.openandromaps.org/kartenlegende/elevation-hike-theme</string>
 
+    <string translatable="false" name="mapserver_freizeitkarte_name">Freizeitkarte</string>
+    <string translatable="false" name="mapserver_freizeitkarte_downloadurl">http://repository.freizeitkarte-osm.de/repository_freizeitkarte_android.xml</string>
+    <string translatable="false" name="mapserver_freizeitkarte_likeiturl">https://www.freizeitkarte-osm.de/android/de/impressum.html</string>
+    <string translatable="false" name="mapserver_freizeitkarte_projecturl">https://www.freizeitkarte-osm.de/android/en/</string>
+
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report</string>
 </resources>
