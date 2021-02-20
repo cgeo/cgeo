@@ -37,11 +37,13 @@ import cgeo.geocaching.utils.ShareUtils;
 
 import android.R.string;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -50,15 +52,18 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 
 import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -107,6 +112,35 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
+    }
+
+    // set up toolbar for settings' main screen
+    @Override
+    protected void onPostCreate(final Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        addToolbar((LinearLayout) findViewById(android.R.id.list).getParent().getParent().getParent(), getString(R.string.settings_titlebar), v -> finish());
+    }
+
+    // set up toolbar for nested preference screen
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean onPreferenceTreeClick(final PreferenceScreen preferenceScreen, final Preference preference) {
+        super.onPreferenceTreeClick(preferenceScreen, preference);
+
+        // If the user has clicked on a preference screen, set up toolbar
+        if (preference instanceof PreferenceScreen) {
+            final Dialog dialog = ((PreferenceScreen) preference).getDialog();
+            final View temp = (View) dialog.findViewById(android.R.id.list).getParent();
+            addToolbar((LinearLayout) (Build.VERSION.SDK_INT < Build.VERSION_CODES.N ? temp : temp.getParent()), preference.getTitle(), v -> dialog.dismiss());
+        }
+        return false;
+    }
+
+    private void addToolbar(final LinearLayout root, final CharSequence title, final View.OnClickListener onClickListener) {
+        final Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.settings_toolbar, root, false);
+        root.addView(bar, 0); // insert at top
+        bar.setTitle(title);
+        bar.setNavigationOnClickListener(onClickListener);
     }
 
     private void openInitialScreen(final int initialScreen) {
@@ -162,7 +196,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         //PublicFolder initialization
         initPublicFolders(PersistableFolder.values());
-
     }
 
     /**
