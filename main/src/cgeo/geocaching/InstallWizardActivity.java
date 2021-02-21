@@ -130,7 +130,7 @@ public class InstallWizardActivity extends AppCompatActivity {
             case WIZARD_START: {
                 title.setText(mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_migration_title : R.string.wizard_welcome_title);
                 text.setText(mode == WizardMode.WIZARDMODE_RETURNING ? R.string.wizard_intro_returning : mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_intro_migration : R.string.wizard_intro);
-                setNavigation(this::finishWizard, R.string.skip, null, 0, this::gotoNext, 0);
+                setNavigation(this::skipWizard, R.string.wizard_not_now, null, 0, this::gotoNext, 0);
                 break;
             }
             case WIZARD_PERMISSIONS: {
@@ -326,6 +326,10 @@ public class InstallWizardActivity extends AppCompatActivity {
             || (step == WizardStep.WIZARD_PLATFORMS && mode == WizardMode.WIZARDMODE_MIGRATION)
             || (step == WizardStep.WIZARD_ADVANCED && mode == WizardMode.WIZARDMODE_MIGRATION)
             ;
+    }
+
+    private void skipWizard() {
+        Dialogs.confirmPositiveNegativeNeutral(this, getString(R.string.wizard), getString(R.string.wizard_skip_wizard_warning), getString(android.R.string.ok), getString(R.string.back), "", (dialog, which) -> finishWizard(), (dialog, which) -> updateDialog(), null);
     }
 
     private void finishWizard() {

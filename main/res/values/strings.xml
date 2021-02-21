@@ -2153,6 +2153,8 @@
     <string name="wizard_status_location_permission">Location permission</string>
     <string name="wizard_status_basefolder">Base folder</string>
     <string name="wizard_status_platform">Geocaching services</string>
+    <string name="wizard_not_now">Not now</string>
+    <string name="wizard_skip_wizard_warning">c:geo might not work as expected until configuration is completed. Depending on the missing configuration c:geo might not be able to read/store data like offline maps, geocaches, logfiles etc.\n\nWhenever you feel ready to finalize setup, either choose \"Configuration wizard\" in main menu or restart c:geo.</string>
 
     <!-- default actions in dialogs -->
     <string name="previous">Previous</string>
