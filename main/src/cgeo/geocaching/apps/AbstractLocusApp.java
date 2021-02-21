@@ -179,10 +179,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         if (cache.getTerrain() > 0) {
             gcData.setTerrain(cache.getTerrain());
         }
-        final int container = toLocusSize(cache.getSize());
-        if (container != NO_LOCUS_ID) {
-            gcData.setContainer(container);
-        }
+        gcData.setContainer(toLocusSize(cache.getSize()));
         final ArrayList<GeocachingAttribute> attributes = toLocusAttributes(cache.getAttributes());
         if (!attributes.isEmpty()) {
             gcData.setAttributes(attributes);
@@ -328,7 +325,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
     }
 
-    private static int toLocusSize(final CacheSize cs) {
+    @VisibleForTesting
+    @SuppressWarnings("DuplicateBranchesInSwitch")
+    static int toLocusSize(final CacheSize cs) {
         switch (cs) {
             case NANO:
                 return GeocachingData.CACHE_SIZE_MICRO; // used by OC only
@@ -344,11 +343,15 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 return GeocachingData.CACHE_SIZE_HUGE; // used by OC only
             case NOT_CHOSEN:
                 return GeocachingData.CACHE_SIZE_NOT_CHOSEN;
+            case VIRTUAL:
+                return GeocachingData.CACHE_SIZE_OTHER;
             case OTHER:
                 return GeocachingData.CACHE_SIZE_OTHER;
-            default:
-                return NO_LOCUS_ID;
+            case UNKNOWN:
+                return GeocachingData.CACHE_SIZE_NOT_CHOSEN;
         }
+        // unknown cache size
+        return GeocachingData.CACHE_SIZE_NOT_CHOSEN;
     }
 
     @NonNull

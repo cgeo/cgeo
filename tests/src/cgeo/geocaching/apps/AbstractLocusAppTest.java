@@ -1,11 +1,13 @@
 package cgeo.geocaching.apps;
 
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import locus.api.objects.geocaching.GeocachingAttribute;
+import locus.api.objects.geocaching.GeocachingData;
 import locus.api.objects.geocaching.GeocachingWaypoint;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -13,21 +15,49 @@ import static org.junit.Assert.assertEquals;
 public class AbstractLocusAppTest {
 
     @Test
-    public void testToLocusWaypoint() {
+    // should detect new CacheSize
+    public void testToLocusSizeCount() {
 
-        // should detect new WaypointType
+        assertEquals(10, CacheSize.values().length);
+    }
+
+    @Test
+    public void testToLocusSizeOk() {
+
+        final HashMap<CacheSize, Integer> testSizeList = new HashMap<>();
+        testSizeList.put(CacheSize.NANO, GeocachingData.CACHE_SIZE_MICRO);
+        testSizeList.put(CacheSize.VIRTUAL, GeocachingData.CACHE_SIZE_OTHER);
+        testSizeList.put(CacheSize.UNKNOWN, GeocachingData.CACHE_SIZE_NOT_CHOSEN);
+
+        final ArrayList<CacheSize> testCgeoSizes = new ArrayList<>(testSizeList.keySet());
+        final ArrayList<Integer> testLoSizes = new ArrayList<>(testSizeList.values());
+
+        for (int i = 0; i < testCgeoSizes.size(); i++) {
+            final long loSize = AbstractLocusApp.toLocusSize(testCgeoSizes.get(i));
+            assertEquals(testLoSizes.get(i).longValue(), loSize);
+        }
+    }
+
+    @Test
+    // should detect new WaypointType
+    public void testToLocusWaypointCount() {
+
         assertEquals(8, WaypointType.values().length);
+    }
 
-        final HashMap<WaypointType, String> testWaypoinList = new HashMap<>();
-        testWaypoinList.put(WaypointType.FINAL, GeocachingWaypoint.CACHE_WAYPOINT_TYPE_FINAL);
-        testWaypoinList.put(WaypointType.ORIGINAL, GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE);
+    @Test
+    public void testToLocusWaypointOk() {
 
-        final ArrayList<WaypointType> testCgeoWpts = new ArrayList<>(testWaypoinList.keySet());
-        final ArrayList<String> testLoWapts = new ArrayList<>(testWaypoinList.values());
+        final HashMap<WaypointType, String> testWaypointList = new HashMap<>();
+        testWaypointList.put(WaypointType.FINAL, GeocachingWaypoint.CACHE_WAYPOINT_TYPE_FINAL);
+        testWaypointList.put(WaypointType.ORIGINAL, GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE);
+
+        final ArrayList<WaypointType> testCgeoWpts = new ArrayList<>(testWaypointList.keySet());
+        final ArrayList<String> testLoWapts = new ArrayList<>(testWaypointList.values());
 
         for (int i = 0; i < testCgeoWpts.size(); i++) {
             final String loWaypoint = AbstractLocusApp.toLocusWaypoint(testCgeoWpts.get(i));
-            assertEquals(loWaypoint, testLoWapts.get(i));
+            assertEquals(testLoWapts.get(i), loWaypoint);
         }
     }
 
@@ -53,7 +83,7 @@ public class AbstractLocusAppTest {
         assertEquals(testAttributes.size(), gaTests.size());
 
         for (int i = 0; i < gaTests.size(); i++) {
-            assertEquals(gaTests.get(i).getId(), testAttributesValues.get(i).longValue());
+            assertEquals(testAttributesValues.get(i).longValue(), gaTests.get(i).getId());
         }
     }
 
