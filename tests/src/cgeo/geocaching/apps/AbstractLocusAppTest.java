@@ -1,13 +1,35 @@
 package cgeo.geocaching.apps;
 
+import cgeo.geocaching.enumerations.WaypointType;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import locus.api.objects.geocaching.GeocachingAttribute;
+import locus.api.objects.geocaching.GeocachingWaypoint;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class AbstractLocusAppTest {
+
+    @Test
+    public void testToLocusWaypoint() {
+
+        // should detect new WaypointType
+        assertEquals(8, WaypointType.values().length);
+
+        final HashMap<WaypointType, String> testWaypoinList = new HashMap<>();
+        testWaypoinList.put(WaypointType.FINAL, GeocachingWaypoint.CACHE_WAYPOINT_TYPE_FINAL);
+        testWaypoinList.put(WaypointType.ORIGINAL, GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE);
+
+        final ArrayList<WaypointType> testCgeoWpts = new ArrayList<>(testWaypoinList.keySet());
+        final ArrayList<String> testLoWapts = new ArrayList<>(testWaypoinList.values());
+
+        for (int i = 0; i < testCgeoWpts.size(); i++) {
+            final String loWaypoint = AbstractLocusApp.toLocusWaypoint(testCgeoWpts.get(i));
+            assertEquals(loWaypoint, testLoWapts.get(i));
+        }
+    }
 
     @Test
     // positive
