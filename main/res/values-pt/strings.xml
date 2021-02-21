@@ -702,9 +702,9 @@
     <string name="init_default_navigation_tool">Navegação principal</string>
     <string name="init_secondary_navigation_tool">Navegação secundária</string>
     <string name="init_default_navigation_tool_description">Aqui pode seleccionar o instrumento de navegação preferido.</string>
-    <string name="init_default_navigation_tool_select">Escolher navegador</string>
+    <string name="init_default_navigation_tool_select">Escolher instrumento</string>
     <string name="init_default_navigation_tool_2_description">Aqui pode seleccionar o seu segundo instrumento de navegação preferido. Accione-o ao tocar sem soltar no ícone de navegação ao lado do título da cache.</string>
-    <string name="init_navigation_menu_description">Aqui pode seleccionar quais dos modos de navegação disponíveis serão mostrados no menu de navegação para uma geocache ou um ponto adicional. As opções a cinzento não estão instaladas neste dispositivo.</string>
+    <string name="init_navigation_menu_description">Aqui pode seleccionar, de entre os modos de navegação disponíveis, quais serão mostrados no menu de navegação para uma cache ou um ponto adicional. As opções a cinzento não estão instaladas neste dispositivo.</string>
     <string name="init_debug_title">Informação de depuração</string>
     <string name="init_debug_note">O c:geo pode gerar um grande volume de informação de depuração. A activação desta definição afectará a estabilidade do c:geo e só é recomendado se for solicitado o envio do registo para os programadores. Por favor, mantenha o registo de depuração desactivado durante o uso normal do c:geo!</string>
     <string name="init_debug">Activar depuração</string>

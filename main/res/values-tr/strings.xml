@@ -674,6 +674,7 @@
     <string name="init_routecolor_summary">Her bir güzergah hattı için renk ve opaklığı seçin. Bağımsız bir rota, yol noktasına/Geocache\'e uzun basarak seçtiğiniz bir yol noktasının ve/veya Geocache\'in mesafesidir. (Önce uzun basma işlevini etkinleştirmeniz gerekir, harita ayarlarına bakın.)</string>
     <string name="init_routewidth">Bireysel güzergah hattı genişliği</string>
     <string name="init_routewidth_summary">Bireysel güzergah hattı için genişlik seçin</string>
+    <string name="init_trackwidth_summary">GPX iz/rota çizgisi için kalınlık seçin</string>
     <string name="init_circlecolor">Çember kenar rengi</string>
     <string name="init_circlecolor_summary">Daire çizgisi için renk ve opaklığı seçin. Daireler, bir Geocache veya fiziksel yol noktası etrafındaki minimum yarıçap için görsel bir temsil olarak kullanılır; burada başka hiçbir Geocache veya fiziksel yol noktası oluşturulamaz. (Geocaching.com için geçerlidir)</string>
     <string name="init_circlefillcolor">Daire dolgu rengi</string>
@@ -863,6 +864,7 @@
     <string name="cache_personal_note_storewaypoints">Yol Noktaları Ekleme/Güncelleme</string>
     <string name="cache_personal_note_removewaypoints">Yol noktalarını kaldır</string>
     <string name="cache_personal_note_removedwaypoints">Yol noktası kaldırıldı</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Kaldırılacak yol noktası bulunamadı</string>
     <string name="cache_personal_note_storewaypoints_success">Kişisel nokta ara noktalar eklendi</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Yol noktaları notlara eklendi fakat kısaltıldı (max kişisel not boyutu:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Yol noktaları boyut sınırlamalarından dolayı notlarda saklanamaz (max kişisel not boyutu:%1$d)</string>
@@ -996,6 +998,8 @@
     <string name="cache_name">İsim</string>
     <string name="cache_name_set">Cache ismi ayarla</string>
     <string name="cache_name_updated">Cache ismi güncellendi</string>
+    <string name="cache_description_set">Geocache açıklamasını ayarla</string>
+    <string name="cache_description_updated">Geocache açıklaması güncellendi</string>
     <string name="cache_type">Tür</string>
     <string name="cache_size">Boyut</string>
     <string name="cache_distance">Mesafe</string>
@@ -1148,6 +1152,7 @@
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
     <string name="map_show_circles">Çemberleri göster</string>
+    <string name="map_showc_ownfound">Geocache\'lerimi/bulduklarımı göster</string>
     <string name="map_showc_disabled">Devre dışı Geocache\'leri göster</string>
     <string name="map_showc_archived">Arşivlenmiş Geocache\'leri göster</string>
     <string name="map_showwp_original">Orijinal yol noktalarını göster</string>
@@ -1551,6 +1556,7 @@
     <string name="attribute_trackables_yes">TB barındırmak için müsait</string>
     <string name="attribute_trackables_no">TB barındıramaz</string>
     <string name="attribute_historic_yes">Terkedilmiş yapı/harabe</string>
+    <string name="attribute_historic_no">Terkedilmiş yapı/harabe yok</string>
     <!-- next things -->
     <string name="quote">Geocaching\'i kolaylaştırmak ve kullanıcıların rahatlığı için.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1564,6 +1570,7 @@
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">Sıkça Sorulan Sorular</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">Yeni sürüm mevcut.\nYüklemek için tıklayın.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com üzerindeki son değişikler c:geo bozdu.\n Üstünde çalışıyoruz, sonra tekrar deneyin.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com üzerindeki son değişikler canlı harita özelliğini bozdu.\n Üstünde çalışıyoruz, sonra tekrar deneyin.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com bakımda.\n Çeşitli sorunlarla karşılaşabilirsiniz.</string>
@@ -1648,6 +1655,7 @@
         <item quantity="one">Bu Geocache\'i favorilerilere ekle (kalan %d)</item>
         <item quantity="other">Bu Geocache\'leri favorilerilere ekle (kalan %d)</item>
     </plurals>
+    <string name="command_set_cache_icons_progress">Geocache simgesi ayarı</string>
     <string name="pq_download_and_import">Sorgulama kaydı içe aktar</string>
     <string name="caches_refresh_all_warning">Bu seçim yüksek ağ yoğunluğuna neden olabilir. Tüm Geocache\'leri toplu yenilemek istediğinizden emin misiniz?</string>
     <string name="list_list_headline">Listeler:</string>
@@ -1696,21 +1704,34 @@
     <string name="individual_route">Özel rota</string>
     <string name="individual_route_added">rotaya eklendi</string>
     <string name="individual_route_removed">rotadan çıkartıldı</string>
+    <string name="individual_route_error_single_waypoint_mode">Tek yol noktası modunda mevcut değil</string>
     <string name="map_sort_individual_route">Özel rotayı sırala</string>
     <string name="map_export_individual_route">Özel rotayı dışa aktar</string>
     <string name="map_load_individual_route">Özel rotayı yükle</string>
     <string name="map_load_individual_route_confirm">Mevcut rotanın üzerine yazılsın mı?</string>
     <string name="map_autotarget_individual_route">Hedef olarak otomatik ayarla</string>
     <string name="map_disable_autotarget_individual_route">Devre dışı \'\'Hedef olarak otomatik ayarla\'\'</string>
+    <string name="map_clear_manual_targets">Elle girilen hedefleri temizle</string>
     <string name="map_clear_individual_route">Özel rotayı temizle</string>
     <string name="map_individual_route_cleared">Özel rota temizlendi</string>
     <string name="save_sorted_route">Kaydet</string>
     <string name="sorted_route_saved">Özel rota kaydedildi</string>
     <string name="load_individual_route_error">Özel rota yüklenirken hata oluştu</string>
     <string name="route_item_not_yet_loaded">Rota henüz yüklenmedi</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Rota %d rota noktasıyla yüklendi</item>
+        <item quantity="other">Rota %d rota noktasıyla yüklendi</item>
+    </plurals>
     <string name="center_on_route">Rotaya göre ortala</string>
     <!-- individual track -->
     <string name="individual_track">GPX yol/rota</string>
+    <string name="map_load_track_wait">İz/rota arkaplanda yükleniyor…</string>
+    <string name="map_load_track_confirm">Mevcut iz/rota üzerine yazılsın mı?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">İz/rota yüklendi (%d iz noktası)</item>
+        <item quantity="other">İz/rota yüklendi (%d iz noktası)</item>
+    </plurals>
+    <string name="center_on_track">İze/rotaya göre ortala</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1733,6 +1754,9 @@
     <string name="add_setting">Ayar ekle</string>
     <string name="add_setting_preference_name">İsim tercihi</string>
     <string name="add_setting_preference_type">Tür tercihi</string>
+    <string name="add_setting_missing_name">Bir görünüm ismi seçmeniz gerekmektedir</string>
+    <string name="add_setting_missing_type">Bir görünüm türü seçmeniz gerekmektedir</string>
+    <string name="add_setting_already_exists">Bu isimle bir görünüm zaten mevcut</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_title">Yerel bir dosyayı aç</string>
     <!-- ReceiveMapFileActivity -->
@@ -1746,12 +1770,15 @@
     <string name="downloadmap_title">Çevrimdışı harita indir</string>
     <string name="downloadmap_choose">Harita seç</string>
     <string name="downloadmap_filename">%s İndiriliyor</string>
+    <string name="download_started">İndirme arka planda başladı</string>
     <string name="button_continue">Devam et</string>
     <string name="downloadmap_checkforupdates_button">Güncellemeleri denetle</string>
     <string name="downloadmap_available_updates">Mevcut güncellemeler</string>
     <string name="downloadmap_no_updates_found">Harita güncellemesi bulunamadı</string>
     <string name="downloadmap_directory">dizin</string>
     <string name="downloadmap_mapfile">harita dosyası</string>
+    <string name="downloadmap_retrieving_directory_data">Dizin verisi alınıyor…</string>
+    <string name="downloadmap_checking_for_updates">Güncellemeler denetleniyor…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geçmiş İz\'i sil</string>
     <string name="map_trailhistory_cleared">Geçmiş İz\'i silindi</string>
@@ -1764,6 +1791,7 @@
     <string name="export_trailhistory_clear_after_export">Dışa aktarımdan sonra iz geçmişini temizle</string>
     <!-- individual route export -->
     <string name="export_individualroute_title">Özel rotayı dışa aktar</string>
+    <string name="export_individualroute_success">Özel rota \'\'%s\'\' dışa aktarıldı</string>
     <!-- install wizard -->
     <string name="wizard">Yapılandırma sihirbazı</string>
     <string name="previous">Önceki</string>
@@ -1772,6 +1800,8 @@
     <string name="done">Tamamlandı</string>
     <string name="finish">Bitir</string>
     <string name="wizard_welcome_title">c:geo\'ya hoşgeldiniz</string>
+    <string name="wizard_outro_ok">c:geo\'yu yüklediğiniz için teşekkürler.\nBol eğlenceler!</string>
+    <string name="wizard_permissions_title">Uygulama izinlerini ayarla</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_welcome_advanced">Gelişmiş yapılandırma</string>
     <string name="wizard_advanced_offlinemaps_label">Çevrimdışı haritalar</string>
@@ -1779,4 +1809,6 @@
     <string name="status_not_ok">HATA</string>
     <string name="wizard_status_title">Yapılandırma durumu</string>
     <string name="wizard_status_storage_permission">Bellek izni</string>
+    <string name="wizard_status_location_permission">Konum izni</string>
+    <string name="wizard_status_platform">Geocaching servisleri</string>
 </resources>
