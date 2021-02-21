@@ -604,7 +604,6 @@
     <string name="restore_information">Vælg hvad du vil gendanne:</string>
     <string name="init_restore_success">Gendannelse fuldført.</string>
     <string name="init_restore_failed_dbrecreated">Gendannelse mislykkedes: Der er fejl i backupfilen og databasen blev i stedet genskabt.</string>
-    <string name="init_restore_failed">Gendannelse fejlede.</string>
     <string name="init_restore_running">Gendanner cache-database…</string>
     <string name="init_restore_confirm">Databasen er tom. Vil du gendanne databasen fra backup?</string>
     <string name="init_backup_last">Dato for sidste backup</string>

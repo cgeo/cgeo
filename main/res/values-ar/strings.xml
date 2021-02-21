@@ -464,7 +464,6 @@
     <string name="init_backup_unnecessary">البيانات فارغة، ليس ضروري عمل نسخ احتياطي.</string>
     <string name="init_backup_no_backup_available">لا يتوفر ملف النسخ الاحتياطي.</string>
     <string name="init_restore_success">اكتملت الاستعادة.</string>
-    <string name="init_restore_failed">فشل في الاستعادة.</string>
     <string name="init_restore_running">استعادة بيانات المخبئ&#8230;</string>
     <string name="init_restore_confirm">البيانات فارغة. هل تريد استعادة النسخ الاحتياطية للبيانات؟</string>
     <string name="init_backup_last">نسخ احتياطي متاحة من</string>

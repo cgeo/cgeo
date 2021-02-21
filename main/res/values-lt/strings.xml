@@ -606,7 +606,6 @@
     <string name="restore_information">Pasirinkite, ką norite atkurti:</string>
     <string name="init_restore_success">Atkūrimas baigtas.</string>
     <string name="init_restore_failed_dbrecreated">Nepavyko atkurti: atsarginė kopija pažeista, duomenų bazė perkurta.</string>
-    <string name="init_restore_failed">Atkurti nepavyko.</string>
     <string name="init_restore_running">Atkuriama slėptuvių duomenų bazė…</string>
     <string name="init_restore_confirm">Duomenų bazė tuščia. Ar norite atkurti duomenų bazę iš atsarginės kopijos?</string>
     <string name="init_backup_last">Galima atkurti nuo</string>

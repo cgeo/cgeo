@@ -638,7 +638,6 @@
     <string name="restore_information">Seleziona cosa vuoi ripristinare:</string>
     <string name="init_restore_success">Ripristino completato.</string>
     <string name="init_restore_failed_dbrecreated">Ripristino fallito: file di backup danneggiato, il database deve essere ricreato.</string>
-    <string name="init_restore_failed">Ripristino fallito.</string>
     <string name="init_restore_running">Ripristino del database dei cache…</string>
     <string name="init_restore_confirm">Il database è vuoto. Vuoi ripristinare il backup?</string>
     <string name="init_backup_last">Disponibile Backup di </string>

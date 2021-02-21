@@ -566,7 +566,6 @@
     <string name="init_backup_no_backup_available">Отсутствует файл резервной копии.</string>
     <string name="init_restore_success">Восстановление завершено.</string>
     <string name="init_restore_failed_dbrecreated">Ошибка при восстановлении: файл резервной копии поврежден, база данных должна была быть пересоздана.</string>
-    <string name="init_restore_failed">Восстановление не удалось.</string>
     <string name="init_restore_running">Восстановление базы данных тайников…</string>
     <string name="init_restore_confirm">База данных пуста. Вы хотите восстановить базу данных из резервной копии?</string>
     <string name="init_backup_last">Доступна резервная копия от</string>

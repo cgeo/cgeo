@@ -619,6 +619,7 @@
     <string name="init_restore_restored">Wiederherstellung abgeschlossen</string>
     <string name="init_backup_start_restore">Wiederherstellung starten</string>
     <string name="init_backup_restore_different_backup">Eine andere Sicherung wiederherstellen</string>
+    <string name="init_backup_restore_different_backup_explanation">Bitte wähle den Ordner aus, der die Sicherung enthält, die du wiederherstellen möchtest</string>
     <string name="init_backup_backup_history">Sicherungshistorie</string>
     <string name="init_backup_history_length_title">Maximal gespeicherte Sicherungen</string>
     <string name="init_backup_history_length_summary">Entscheide, wie viele Sicherungen behalten werden sollen. Wenn das Limit erreicht ist, werden die ältesten Sicherungen automatisch gelöscht.</string>
@@ -638,7 +639,8 @@
     <string name="restore_information">Bitte wähle, was du wiederherstellen möchtest:</string>
     <string name="init_restore_success">Wiederherstellung abgeschlossen.</string>
     <string name="init_restore_failed_dbrecreated">Wiederherstellung fehlgeschlagen: Sicherungsdatei ist beschädigt, Datenbank musste neu erstellt werden.</string>
-    <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
+    <string name="init_restore_db_failed">Wiederherstellen der Datenbank fehlgeschlagen.</string>
+    <string name="init_restore_settings_failed">Wiederherstellen der Programmeinstellungen ist fehlgeschlagen.</string>
     <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
     <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
     <string name="init_backup_last">Sicherung verfügbar vom</string>

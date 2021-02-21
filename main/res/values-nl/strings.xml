@@ -619,6 +619,7 @@
     <string name="init_restore_restored">Terugzetten voltooid</string>
     <string name="init_backup_start_restore">Terugzetten starten</string>
     <string name="init_backup_restore_different_backup">Een andere back-up terugzetten</string>
+    <string name="init_backup_restore_different_backup_explanation">Selecteer de map met de back-up die je wil terugzetten</string>
     <string name="init_backup_backup_history">Back-up geschiedenis</string>
     <string name="init_backup_history_length_title">Max aantal opgeslagen back-ups</string>
     <string name="init_backup_history_length_summary">Beslis hoeveel back-ups moeten worden bewaard. Wanneer de limiet wordt bereikt, worden de oudste automatisch verwijderd.</string>
@@ -638,7 +639,8 @@
     <string name="restore_information">Selecteer wat je wil herstellen:</string>
     <string name="init_restore_success">Herstellen is gelukt.</string>
     <string name="init_restore_failed_dbrecreated">Herstellen mislukt: het back-upbestand is beschadigd, de database moest worden hersteld.</string>
-    <string name="init_restore_failed">Herstellen is niet gelukt.</string>
+    <string name="init_restore_db_failed">Herstellen van de database is mislukt.</string>
+    <string name="init_restore_settings_failed">Herstellen van programma-instellingen is mislukt.</string>
     <string name="init_restore_running">Herstellen van de cache database…</string>
     <string name="init_restore_confirm">De database is leeg, wil je een database-backup herstellen?</string>
     <string name="init_backup_last">Backup beschikbaar van</string>
@@ -679,6 +681,7 @@
     <string name="init_directionwidth">Richting lijndikte</string>
     <string name="init_directionwidth_summary">Selecteer breedte voor richting lijn</string>
     <string name="init_routecolor">Individuele route lijnkleur</string>
+    <string name="init_routecolor_summary">Selecteer kleur en doorzichtigheid voor de individuele route lijn. Een individuele route is een collectie van waypoints en/of caches die je hebt geselecteerd door lang op het waypoint te drukken. (Je dient de lang drukken-functie eerst in te schakelen, zie de kaartinstellingen.)</string>
     <string name="init_routewidth">Individuele routelijnbreedte</string>
     <string name="init_routewidth_summary">Selecteer breedte voor individuele routelijn</string>
     <string name="init_trackcolor">GPX spoor/route lijnkleur</string>
@@ -705,6 +708,7 @@
     <string name="init_secondary_navigation_tool">Secondaire navigatie</string>
     <string name="init_default_navigation_tool_description">Hier kan je de navigatie-tool van jouw voorkeur instellen.</string>
     <string name="init_default_navigation_tool_select">Selecteer tool</string>
+    <string name="init_default_navigation_tool_2_description">Hier kan je de tweede navigatie-tool van jouw voorkeur instellen. Je kan deze activeren door lang op de navigatie-icoon naast de titel van de cache te klikken.</string>
     <string name="init_navigation_menu_description">Here kun je selecteren welke beschikbare navigatie methodes getoond worden in het navigatie menu voor een cache of waypoint. Uitgeschakelde tools zijn niet geïnstalleerd op uw apparaat.</string>
     <string name="init_debug_title">Foutopsporings informatie</string>
     <string name="init_debug_note">c:geo kan een heleboel debug informatie genereren. Het activeren van deze instelling is van invloed op de stabiliteit van c:geo en wordt alleen aanbevolen als je wordt gevraagd een logboek naar de ontwikkelaars te sturen. Houd de logboekregistratie voor foutopsporing uitgeschakeld tijdens normaal gebruik van c:geo!</string>
@@ -868,8 +872,10 @@
     <string name="auth_register">Account aanmaken</string>
     <string name="auth_connected">Verbonden</string>
     <string name="auth_unconnected">Nog niet verbonden</string>
+    <string name="auth_connected_as">Verbonden als %s.\nDruk hier om te updaten of druk lang om de autorisatiegegevens van c:geo te verwijderen.</string>
     <string name="auth_dialog_waiting">Wachten op %s…</string>
     <string name="auth_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
+    <string name="auth_explain_long">Druk op de knop \"Autoriseer c:geo\" om het proces te starten. Dit proces zal een webbrowser openen met een %s pagina. Log in op deze pagina om <b>c:geo</b> toegang te geven tot je account. Dat is alles.</string>
     <string name="auth_forget_title">Autorisatie vergeten?</string>
     <string name="auth_forget_message">De verbinding met deze dienst zal worden verbroken. Je opgeslagen referenties zullen verloren gaan.</string>
     <!-- auth credentials -->
@@ -878,6 +884,7 @@
     <string name="auth_register_explain">Als je nog geen account hebt, tik hieronder om doorgestuurd te worden naar de webpagina van de service om een account aan te maken. Zorg ervoor dat je de methode met gebruikersnaam en wachtwoord gebruikt om een account aan te maken want c:geo ondersteunt geen login via Google/Apple/Facebook. Na het aanmaken van een account kan het valideren van je e-mailadres kunnen nodig zijn voordat je kan inloggen met c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
+    <string name="auth_token_explain_long">Het invullen van je inloggegevens en het tikken op de knop \"Autoriseren c:geo\" zal het proces starten. Dit proces maakt verbinding met %s en haalt een authenticatietoken op. Dat is alles.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo is nu gekoppeld met Twitter.</string>
     <!-- auth opencaching -->
@@ -1908,6 +1915,7 @@
     <string name="wizard_outro_error">Onvolledige configuratie\nNiet alle delen van c:geo zullen werken zoals verwacht!</string>
     <string name="wizard_permissions_title">App-machtigingen instellen</string>
     <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig op je apparaat om correct te werken.\nIk zal meer details uitleggen in de volgende stappen.</string>
+    <string name="wizard_permissions_folder_title">Map instellen: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo heeft een lokale map nodig om gegevens zoals GPX bestanden, back-ups, Field Notes en logbestanden op te slaan. Standaard worden deze bestanden opgeslagen in mappen onder de zogenaamde \"basismap\". Selecteer of creëer een dergelijke map in de volgende stap.\n\nAls je c:geo van een vorige versie bijwerkt, selecteer dan de bestaande map \"cgeo\" op hoofdniveau van je apparaatopslag.\nTip: Je kunt de interne opslag van je apparaat eerst zichtbaar maken in de bestandsselectie die hierna wordt weergegeven.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo heeft een lokale map nodig om offline kaartbestanden op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo heeft een lokale map nodig om GPX bestanden op te slaan (bijv. voor het importeren / exporteren van caches of spoor). Selecteer of maak een dergelijke map aan in de volgende stap.</string>

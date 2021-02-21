@@ -635,7 +635,6 @@
     <string name="restore_information">Vyberte, čo chcete obnoviť:</string>
     <string name="init_restore_success">Úspešne obnovené.</string>
     <string name="init_restore_failed_dbrecreated">Nepodarilo sa obnoviť: súbor so zálohou je poškodený, databáza sa nedá znova vytvoriť.</string>
-    <string name="init_restore_failed">Obnova zlyhala.</string>
     <string name="init_restore_running">Obnovovanie databázy skrýš…</string>
     <string name="init_restore_confirm">Databáza je prázdna. Chcete ju obnoviť zo zálohy?</string>
     <string name="init_backup_last">Dostupná záloha z</string>

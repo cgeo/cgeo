@@ -618,6 +618,7 @@
     <string name="init_restore_restored">Obnova dokončena</string>
     <string name="init_backup_start_restore">Spustit obnovení</string>
     <string name="init_backup_restore_different_backup">Obnovit odlišnou zálohu</string>
+    <string name="init_backup_restore_different_backup_explanation">Vyberte složku obsahující zálohu, kterou si přejete obnovit</string>
     <string name="init_backup_backup_history">Historie záloh</string>
     <string name="init_backup_history_length_title">Maximální počet uložených záloh</string>
     <string name="init_backup_history_length_summary">Rozhodněte, kolik záloh by mělo být zachováno. Když je dosaženo limitu, ty nejstarší budou automaticky odstraněny.</string>
@@ -637,7 +638,8 @@
     <string name="restore_information">Vyberte prosím, co chcete obnovit:</string>
     <string name="init_restore_success">Obnova dokončena.</string>
     <string name="init_restore_failed_dbrecreated">Obnova se nezdařila: Záložní soubor je poškozen, databáze musela být znovu vytvořena.</string>
-    <string name="init_restore_failed">Obnova selhala.</string>
+    <string name="init_restore_db_failed">Obnovení databáze se nezdařilo.</string>
+    <string name="init_restore_settings_failed">Obnovení nastavení programu se nezdařilo.</string>
     <string name="init_restore_running">Obnovování databáze kešek…</string>
     <string name="init_restore_confirm">Databáze je prázdná, chceš ji obnovit ze zálohy?</string>
     <string name="init_backup_last">Dostupná záloha z</string>
