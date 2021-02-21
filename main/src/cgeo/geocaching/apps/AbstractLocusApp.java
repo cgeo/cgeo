@@ -211,12 +211,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 gcWpt.setCode(waypoint.getLookup());
                 gcWpt.setName(waypoint.getName());
                 gcWpt.setDesc(waypoint.getNote());
-                gcWpt.setType(GeocachingWaypoint.CACHE_WAYPOINT_TYPE_PARKING);
-
-                final String locusWpId = toLocusWaypoint(waypoint.getWaypointType());
-                if (locusWpId != null) {
-                    gcWpt.setType(locusWpId);
-                }
+                gcWpt.setType(toLocusWaypoint(waypoint.getWaypointType()));
 
                 final Geopoint waypointCoords = waypoint.getCoords();
                 if (waypointCoords != null) {
@@ -356,8 +351,10 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
     }
 
-    @Nullable
-    private static String toLocusWaypoint(final WaypointType wt) {
+    @NonNull
+    @VisibleForTesting
+    @SuppressWarnings("DuplicateBranchesInSwitch")
+    static String toLocusWaypoint(final WaypointType wt) {
         switch (wt) {
             case FINAL:
                 return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_FINAL;
@@ -373,9 +370,11 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_TRAILHEAD;
             case WAYPOINT:
                 return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE;
-            default:
-                return null;
+            case ORIGINAL:
+                return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE;
         }
+        // unknown waypoint type
+        return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE;
     }
 
     @NonNull
