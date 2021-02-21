@@ -18,6 +18,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
@@ -377,8 +378,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
     }
 
-    @Nullable
-    private static ArrayList<GeocachingAttribute> toLocusAttributes(final List<String> attributes) {
+    @NonNull
+    @VisibleForTesting
+    static ArrayList<GeocachingAttribute> toLocusAttributes(final List<String> attributes) {
         final ArrayList<GeocachingAttribute> loAttributes = new ArrayList<>();
 
         for (String attribute:attributes) {
@@ -388,6 +390,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
             }
             // translate to locus names
             switch (rawAttribute) {
+                case "uv":
+                    rawAttribute = "UV";
+                    break;
                 case "dangerousanimals":
                     rawAttribute = "snakes";
                     break;
@@ -419,7 +424,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
             final String attributeUrl = "/" + rawAttribute + (CacheAttribute.isEnabled(attribute) ? "-yes." : "-no.");
             final GeocachingAttribute ga = new GeocachingAttribute(attributeUrl);
             // e.g. OC attributes - skip
-            if (ga != null) {
+            if (ga.getId() > 0) {
                 loAttributes.add(ga);
             }
         }
