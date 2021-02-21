@@ -1,6 +1,7 @@
 package cgeo.geocaching.apps;
 
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 
 import java.util.ArrayList;
@@ -13,6 +14,31 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class AbstractLocusAppTest {
+
+    @Test
+    // should detect new CacheSize
+    public void testToLocusTypeCount() {
+
+        assertEquals(22, CacheType.values().length);
+    }
+
+    @Test
+    public void testToLocusTypeOk() {
+
+        final HashMap<CacheType, Integer> testTypeList = new HashMap<>();
+        testTypeList.put(CacheType.TRADITIONAL, GeocachingData.CACHE_TYPE_TRADITIONAL);
+        testTypeList.put(CacheType.VIRTUAL, GeocachingData.CACHE_TYPE_VIRTUAL);
+        testTypeList.put(CacheType.USER_DEFINED, GeocachingData.CACHE_TYPE_UNDEFINED);
+        testTypeList.put(CacheType.UNKNOWN, GeocachingData.CACHE_TYPE_UNDEFINED);
+
+        final ArrayList<CacheType> testCgeoTypes = new ArrayList<>(testTypeList.keySet());
+        final ArrayList<Integer> testLoTypes = new ArrayList<>(testTypeList.values());
+
+        for (int i = 0; i < testCgeoTypes.size(); i++) {
+            final long loSize = AbstractLocusApp.toLocusType(testCgeoTypes.get(i));
+            assertEquals(testLoTypes.get(i).longValue(), loSize);
+        }
+    }
 
     @Test
     // should detect new CacheSize

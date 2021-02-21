@@ -50,7 +50,6 @@ import org.apache.commons.collections4.CollectionUtils;
  */
 public abstract class AbstractLocusApp extends AbstractApp {
 
-    private static final int NO_LOCUS_ID = -1;
     /**
      * Locus Version
      */
@@ -192,10 +191,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         if (hiddenDate != null) {
             gcData.setDateHidden(hiddenDate.getTime());
         }
-        final int type = toLocusType(cache.getType());
-        if (type != NO_LOCUS_ID) {
-            gcData.setType(type);
-        }
+        gcData.setType(toLocusType(cache.getType()));
         gcData.setFound(cache.isFound());
 
         if (withWaypoints && cache.hasWaypoints()) {
@@ -268,7 +264,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
     }
 
     // https://github.com/asamm/locus-api/blob/master/locus-api-core/src/main/java/locus/api/objects/geocaching/GeocachingData.kt
-    private static int toLocusType(final CacheType ct) {
+    @VisibleForTesting
+    static int toLocusType(final CacheType ct) {
         switch (ct) {
             case TRADITIONAL:
                 return GeocachingData.CACHE_TYPE_TRADITIONAL;
@@ -320,9 +317,14 @@ public abstract class AbstractLocusApp extends AbstractApp {
 // Lab cache, not published over API from Locus (state: locus-api-android:0.9.21)
 //            case LAB_CACHE:
 //                return GeocachingData.CACHE_TYPE_LAB_CACHE;
-            default:
-                return NO_LOCUS_ID;
+            // special map types to CACHE_TYPE_UNDEFINED
+            case USER_DEFINED:
+            case UNKNOWN:
+            case ALL:
+                return GeocachingData.CACHE_TYPE_UNDEFINED;
         }
+        // special and unknown cache type
+        return GeocachingData.CACHE_TYPE_UNDEFINED;
     }
 
     @VisibleForTesting
