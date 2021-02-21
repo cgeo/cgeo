@@ -34,7 +34,6 @@ import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.FileUtils.FileSelector;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 
@@ -1259,48 +1258,14 @@ public class Settings {
         putInt(R.string.pref_trackableaction, trackableAction);
     }
 
-    private static String getCustomRenderThemeBaseFolder() {
-        return getString(R.string.pref_renderthemepath, "");
-    }
-
-    public static String getCustomRenderThemeFilePath() {
+    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
+    public static String getSelectedMapRenderTheme() {
         return getString(R.string.pref_renderthemefile, "");
     }
 
-    public static void setCustomRenderThemeFile(final String customRenderThemeFile) {
+    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
+    public static void setSelectedMapRenderTheme(final String customRenderThemeFile) {
         putString(R.string.pref_renderthemefile, customRenderThemeFile);
-    }
-
-    public static File[] getMapThemeFiles() {
-        final File directory = new File(getCustomRenderThemeBaseFolder());
-        final List<File> result = new ArrayList<>();
-        FileUtils.listDir(result, directory, new ExtensionsBasedFileSelector(new String[] { "xml" }), null);
-
-        return result.toArray(new File[result.size()]);
-    }
-
-    private static class ExtensionsBasedFileSelector implements FileSelector {
-        private final String[] extensions;
-
-        ExtensionsBasedFileSelector(final String[] extensions) {
-            this.extensions = extensions;
-        }
-
-        @Override
-        public boolean isSelected(final File file) {
-            final String filename = file.getName();
-            for (final String ext : extensions) {
-                if (StringUtils.endsWithIgnoreCase(filename, ext)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public boolean shouldEnd() {
-            return false;
-        }
     }
 
     /**

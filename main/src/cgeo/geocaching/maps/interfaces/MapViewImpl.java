@@ -77,16 +77,6 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
 
     Viewport getViewport();
 
-    /**
-     * Indicates if the current map view supports different themes
-     * for map rendering
-     *
-     * @return true - supports custom themes, false - does not support custom themes
-     */
-    boolean hasMapThemes();
-
-    void setMapTheme();
-
     void onMapReady(MapReadyCallback callback);
 
     void updateItems(Collection<T> itemsPre);

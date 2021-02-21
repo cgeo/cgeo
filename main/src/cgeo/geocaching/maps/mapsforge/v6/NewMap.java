@@ -79,7 +79,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources.NotFoundException;
 import android.content.res.TypedArray;
 import android.location.Location;
@@ -87,7 +86,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -109,8 +107,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Supplier;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -135,20 +131,11 @@ import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
-import org.mapsforge.map.layer.renderer.TileRendererLayer;
-import org.mapsforge.map.model.DisplayModel;
 import org.mapsforge.map.model.common.Observer;
-import org.mapsforge.map.rendertheme.ExternalRenderTheme;
-import org.mapsforge.map.rendertheme.InternalRenderTheme;
-import org.mapsforge.map.rendertheme.XmlRenderTheme;
-import org.mapsforge.map.rendertheme.XmlRenderThemeMenuCallback;
-import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
-import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
-import org.mapsforge.map.rendertheme.rule.RenderThemeHandler;
-import org.xmlpull.v1.XmlPullParserException;
 
 @SuppressLint("ClickableViewAccessibility")
-public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeMenuCallback, SharedPreferences.OnSharedPreferenceChangeListener, Observer {
+@SuppressWarnings("PMD.ExcessiveClassLength") // This is definitely a valid issue, but can't be refactored in one step
+public class NewMap extends AbstractActionBarActivity implements Observer {
 
     private static final String ROUTING_SERVICE_KEY = "NewMap";
 
@@ -164,8 +151,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private CachesBundle caches;
     private final MapHandlers mapHandlers = new MapHandlers(new TapHandler(this), new DisplayHandler(this), new ShowProgressHandler(this));
 
-    private XmlRenderThemeStyleMenu styleMenu;
-    private SharedPreferences sharedPreferences;
+    private RenderThemeHelper renderThemeHelper = null; //must be initialized in onCreate();
 
     private DistanceView distanceView;
     private View mapAttribution;
@@ -179,8 +165,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private ProgressDialog waitDialog;
     private LoadDetails loadDetailsThread;
     private ProgressBar spinner;
-
-    private String themeSettingsPref = "";
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     /**
@@ -230,8 +214,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        this.sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+        this.renderThemeHelper = new RenderThemeHelper(this);
 
         // Support for multi-threaded map painting
         Parameters.NUMBER_OF_THREADS = Settings.getMapOsmThreads();
@@ -384,7 +367,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!caches.isDownloading() && new SearchResult(visibleCacheGeocodes).hasUnsavedCaches());
 
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes());
-            menu.findItem(R.id.menu_theme_options).setVisible(styleMenu != null);
+            menu.findItem(R.id.menu_theme_options).setVisible(tileLayerHasThemes() && this.renderThemeHelper.themeOptionsAvailable());
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
@@ -429,14 +412,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
         } else if (id == R.id.menu_theme_mode) {
-            selectMapTheme();
+            this.renderThemeHelper.selectMapTheme(this.tileLayer, this.tileCache);
         } else if (id == R.id.menu_theme_options) {
-            final Intent intent = new Intent(this, RenderThemeSettings.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-            if (styleMenu != null) {
-                intent.putExtra(RenderThemeSettings.RENDERTHEME_MENU, styleMenu);
-            }
-            startActivity(intent);
+            this.renderThemeHelper.selectMapThemeOptions();
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
         } else if (id == R.id.menu_hint) {
@@ -583,89 +561,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         // do nothing, the filter bar only shows the global filter
     }
 
-    private void selectMapTheme() {
-
-        final File[] themeFiles = Settings.getMapThemeFiles();
-
-        String currentTheme = StringUtils.EMPTY;
-        final String currentThemePath = Settings.getCustomRenderThemeFilePath();
-        if (StringUtils.isNotEmpty(currentThemePath)) {
-            final File currentThemeFile = new File(currentThemePath);
-            currentTheme = currentThemeFile.getName();
-        }
-
-        final List<String> names = new ArrayList<>();
-        names.add(res.getString(R.string.switch_default));
-        int currentItem = 0;
-        for (final File file : themeFiles) {
-            if (currentTheme.equalsIgnoreCase(file.getName())) {
-                currentItem = names.size();
-            }
-            names.add(file.getName());
-        }
-
-        final int selectedItem = currentItem;
-
-        final AlertDialog.Builder builder = Dialogs.newBuilder(this);
-
-        builder.setTitle(R.string.map_theme_select);
-
-        builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem, (dialog, newItem) -> {
-            // selected a new item - or: only default available
-            if (newItem != selectedItem || names.size() == 1) {
-                // Adjust index because of <default> selection
-                if (newItem > 0) {
-                    Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
-                } else {
-                    Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
-                }
-                setMapTheme();
-            }
-            dialog.cancel();
-        });
-
-        builder.show();
-    }
-
-    protected void setMapTheme() {
-
-        if (tileLayer == null || tileLayer.getTileLayer() == null) {
-            return;
-        }
-
-        if (!tileLayer.hasThemes()) {
-            tileLayer.getTileLayer().requestRedraw();
-            return;
-        }
-
-        final TileRendererLayer rendererLayer = (TileRendererLayer) tileLayer.getTileLayer();
-
-        final String themePath = Settings.getCustomRenderThemeFilePath();
-
-        if (StringUtils.isEmpty(themePath)) {
-            rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
-        } else {
-            try {
-                final XmlRenderTheme xmlRenderTheme = new ExternalRenderTheme(new File(themePath), this);
-                // Validate the theme file
-                RenderThemeHandler.getRenderTheme(AndroidGraphicFactory.INSTANCE, new DisplayModel(), xmlRenderTheme);
-                rendererLayer.setXmlRenderTheme(xmlRenderTheme);
-            } catch (final IOException e) {
-                Log.w("Failed to set render theme", e);
-                ActivityMixin.showApplicationToast(getString(R.string.err_rendertheme_file_unreadable));
-                rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
-                Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
-            } catch (final XmlPullParserException e) {
-                Log.w("render theme invalid", e);
-                ActivityMixin.showApplicationToast(getString(R.string.err_rendertheme_invalid));
-                rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
-                Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
-            }
-        }
-        tileCache.purge();
-        rendererLayer.requestRedraw();
-    }
-
     private void changeMapSource(@NonNull final MapSource newSource) {
         final MapSource oldSource = Settings.getMapSource();
         final boolean restartRequired = !MapProviderFactory.isSameActivity(oldSource, newSource);
@@ -744,7 +639,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             }
             layers.add(index, newLayer.getTileLayer());
             this.tileLayer = newLayer;
-            this.setMapTheme();
+            this.renderThemeHelper.reapplyMapTheme(this.tileLayer, this.tileCache);
             this.tileLayer.onResume();
         } else {
             this.tileLayer = null;
@@ -985,7 +880,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     @Override
     protected void onDestroy() {
         Log.d("NewMap: onDestroy");
-        this.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+        if (this.renderThemeHelper != null) {
+            this.renderThemeHelper.onDestroy();
+            this.renderThemeHelper = null;
+        }
         this.tileCache.destroy();
         this.mapView.getModel().mapViewPosition.destroy();
         this.mapView.destroy();
@@ -1056,36 +954,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             EditWaypointActivity.startActivityAddWaypoint(this, cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
         } else if (Settings.isLongTapOnMapActivated()) {
             InternalConnector.interactiveCreateCache(this, new Geopoint(tapLatLong.latitude, tapLatLong.longitude), InternalConnector.UDC_LIST);
-        }
-    }
-
-    @Override
-    public Set<String> getCategories(final XmlRenderThemeStyleMenu style) {
-        styleMenu = style;
-        themeSettingsPref = style.getId();
-        final String id = this.sharedPreferences.getString(styleMenu.getId(), styleMenu.getDefaultValue());
-
-        final XmlRenderThemeStyleLayer baseLayer = styleMenu.getLayer(id);
-        if (baseLayer == null) {
-            Log.w("Invalid style " + id);
-            return null;
-        }
-        final Set<String> result = baseLayer.getCategories();
-
-        // add the categories from overlays that are enabled
-        for (final XmlRenderThemeStyleLayer overlay : baseLayer.getOverlays()) {
-            if (this.sharedPreferences.getBoolean(overlay.getId(), overlay.isEnabled())) {
-                result.addAll(overlay.getCategories());
-            }
-        }
-
-        return result;
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String s) {
-        if (StringUtils.equals(s, themeSettingsPref)) {
-            AndroidUtil.restartActivity(this);
         }
     }
 

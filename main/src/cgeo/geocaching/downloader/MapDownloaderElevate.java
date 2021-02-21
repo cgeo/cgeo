@@ -2,9 +2,11 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.UriUtils;
 
 import android.net.Uri;
 
@@ -56,8 +58,12 @@ public class MapDownloaderElevate extends AbstractDownloader {
 
     @Override
     protected void onSuccessfulReceive(final Uri result) {
-        // @todo: Set downloaded theme as current theme
-        // requires SAF migration of themes to be implemented first
+
+        //resync
+        RenderThemeHelper.resynchronizeMapThemeFolder(null);
+
+        //set map theme
+        RenderThemeHelper.setSelectedMapThemeDirect(UriUtils.getLastPathSegment(result));
     }
 
     @NonNull

@@ -736,10 +736,6 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name=".files.SimpleDirChooser"
-            android:label="@string/simple_dir_chooser_title" >
-        </activity>
-        <activity
             android:name=".ImageSelectActivity"
             android:label="@string/log_image" >
         </activity>

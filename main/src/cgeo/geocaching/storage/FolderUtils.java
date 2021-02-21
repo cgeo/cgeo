@@ -190,20 +190,30 @@ public class FolderUtils {
 
         final Map<String, Properties> targetSyncProps = getTargetFolderSyncProperties(target, targetList);
 
-        int filesSynced = 0;
-        int dirsSynced = 0;
+        int filesProcessed = 0;
+        int filesModified = 0;
+        int dirsProcessed = 0;
+        int dirsModified = 0;
         for (ImmutablePair<ContentStorage.FileInformation, String> sourceFile : sourceList) {
-            sendCopyStatus(statusListener, sourceFile.left, filesSynced, dirsSynced, sourceInfo);
+            sendCopyStatus(statusListener, sourceFile.left, filesProcessed, dirsProcessed, sourceInfo);
             if (sourceFile.left.isDirectory) {
-                new File(target, sourceFile.right).mkdirs();
-                dirsSynced++;
+                final File dir = new File(target, sourceFile.right);
+                if (!dir.isDirectory()) {
+                    dir.mkdirs();
+                    dirsModified++;
+                }
+                dirsProcessed++;
             } else {
                 targetFilesToDelete.remove(sourceFile.right);
 
-                if (!synchronizeSingleFileInternal(sourceFile, target, targetSyncPropsToUpdate, targetSyncProps)) {
-                    return createCopyResult(ProcessResult.FAILURE, sourceFile.left, filesSynced, dirsSynced, sourceInfo);
+                final Boolean fileSyncResult = synchronizeSingleFileInternal(sourceFile, target, targetSyncPropsToUpdate, targetSyncProps);
+                if (fileSyncResult == null) {
+                    return createFolderProcessResult(ProcessResult.FAILURE, sourceFile.left, filesModified, dirsModified, sourceInfo);
                 }
-                filesSynced++;
+                if (fileSyncResult) {
+                    filesModified++;
+                }
+                filesProcessed++;
             }
         }
 
@@ -214,7 +224,7 @@ public class FolderUtils {
                 os = new FileOutputStream(new File(target, targetSyncPropToUpdate + "/" + FOLDER_SYNC_INFO_FILENAME));
                 targetSyncProps.get(targetSyncPropToUpdate).store(os, "c:geo sync information");
             } catch (IOException ioe) {
-                return createCopyResult(ProcessResult.FAILURE, null, filesSynced, dirsSynced, sourceInfo);
+                return createFolderProcessResult(ProcessResult.FAILURE, null, filesModified, dirsModified, sourceInfo);
             } finally {
                 IOUtils.closeQuietly(os);
             }
@@ -224,13 +234,15 @@ public class FolderUtils {
         boolean deleteSuccess = true;
         for (String targetFileToDelete : targetFilesToDelete) {
             deleteSuccess &= new File(target, targetFileToDelete).delete();
+            filesModified++;
         }
-        sendCopyStatus(statusListener, null, filesSynced, dirsSynced, sourceInfo);
+        sendCopyStatus(statusListener, null, filesProcessed, dirsProcessed, sourceInfo);
 
-        return createCopyResult(deleteSuccess ? ProcessResult.OK : ProcessResult.FAILURE, null, filesSynced, dirsSynced, sourceInfo);
+        return createFolderProcessResult(deleteSuccess ? ProcessResult.OK : ProcessResult.FAILURE, null, filesModified, dirsModified, sourceInfo);
     }
 
-    private boolean synchronizeSingleFileInternal(final ImmutablePair<ContentStorage.FileInformation, String> sourceFile, final File targetRootDir,
+    /** returns null in case of failre, true if file needed copy (and was copied), false if file didn't need copy) */
+    private Boolean synchronizeSingleFileInternal(final ImmutablePair<ContentStorage.FileInformation, String> sourceFile, final File targetRootDir,
                                                   final Set<String> targetSyncPropsToUpdate, final Map<String, Properties> targetSyncProps) {
         final String dirPath = getParentPath(sourceFile.right);
         Properties dirProps = targetSyncProps.get(dirPath);
@@ -243,16 +255,16 @@ public class FolderUtils {
         if (needsSync) {
             final File targetFile = new File(targetRootDir, sourceFile.right);
             if (targetFile.exists() && !targetFile.delete()) {
-                return false;
+                return null;
             }
             final Uri targetUri = ContentStorage.get().copy(sourceFile.left.uri, Folder.fromFile(targetFile.getParentFile()), FileNameCreator.forName(targetFile.getName()), false);
             if (targetUri == null) {
-                return false;
+                return null;
             }
             dirProps.setProperty(sourceFile.left.name, getFileSyncToken(sourceFile.left));
             targetSyncPropsToUpdate.add(dirPath);
         }
-        return true;
+        return needsSync;
     }
 
     private Map<String, Properties> getTargetFolderSyncProperties(final File target, final List<ImmutablePair<ContentStorage.FileInformation, String>> targetList) {
@@ -285,20 +297,24 @@ public class FolderUtils {
 
     public enum ProcessResult { OK, SOURCE_NOT_READABLE, TARGET_NOT_WRITEABLE, FAILURE, ABORTED }
 
-    /** value class holding the result of a completed folder process */
+    /**
+     * value class holding the result of a completed folder process
+     * Note that "filesModified/dirsModified" in this class should denote how much files/dirs were actually in need of processing (not the files/dirs which were looked upon)
+     * This meaning contrasts with "filesProcessed/dirsProcessed" in the FolderProcessStatus class.
+     * */
     public static class FolderProcessResult {
         public final ProcessResult result;
         public final ContentStorage.FileInformation failedFile;
-        public final int filesProcessed;
-        public final int dirsProcessed;
+        public final int filesModified;
+        public final int dirsModified;
         public final int filesInSource;
         public final int dirsInSource;
 
-        public FolderProcessResult(final ProcessResult result, final ContentStorage.FileInformation failedFile, final int filesProcessed, final int dirsProcessed, final int filesInSource, final int dirsInSource) {
+        public FolderProcessResult(final ProcessResult result, final ContentStorage.FileInformation failedFile, final int filesModified, final int dirsModified, final int filesInSource, final int dirsInSource) {
             this.result = result;
             this.failedFile = failedFile;
-            this.filesProcessed = filesProcessed;
-            this.dirsProcessed = dirsProcessed;
+            this.filesModified = filesModified;
+            this.dirsModified = dirsModified;
             this.filesInSource = filesInSource;
             this.dirsInSource = dirsInSource;
         }
@@ -379,9 +395,9 @@ public class FolderUtils {
     @NotNull
     private String getCopyAllDoneMessage(final Activity activity, final FolderProcessResult folderProcessResult, final Folder source, final Folder target, final boolean move) {
 
-        final String filesCopied = folderProcessResult.filesProcessed < 0 ? "-" : "" + folderProcessResult.filesProcessed;
+        final String filesCopied = folderProcessResult.filesModified < 0 ? "-" : "" + folderProcessResult.filesModified;
         final String filesTotal = folderProcessResult.filesInSource < 0 ? "-" : plurals(activity, R.plurals.file_count, folderProcessResult.filesInSource);
-        final String foldersCopied = folderProcessResult.dirsProcessed < 0 ? "-" : "" + folderProcessResult.dirsProcessed;
+        final String foldersCopied = folderProcessResult.dirsModified < 0 ? "-" : "" + folderProcessResult.dirsModified;
         final String foldersTotal = folderProcessResult.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, folderProcessResult.dirsInSource);
 
         String message =
@@ -421,10 +437,10 @@ public class FolderUtils {
             //For every change done here, please make sure that tests in ContentStorageTest are still passing!
 
             if (!pls.ensureFolder(source, false)) {
-                return createCopyResult(ProcessResult.SOURCE_NOT_READABLE, null, 0, 0, null);
+                return createFolderProcessResult(ProcessResult.SOURCE_NOT_READABLE, null, 0, 0, null);
             }
             if (!pls.ensureFolder(target, true)) {
-                return createCopyResult(ProcessResult.TARGET_NOT_WRITEABLE, null, 0, 0, null);
+                return createFolderProcessResult(ProcessResult.TARGET_NOT_WRITEABLE, null, 0, 0, null);
             }
 
             //initial status call
@@ -434,13 +450,13 @@ public class FolderUtils {
             final ImmutablePair<List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>>, ImmutablePair<Integer, Integer>> copyAllFirstPhaseResult = copyAllFirstPassCollectInfo(source, target, cancelFlag);
             final ImmutablePair<Integer, Integer> sourceCopyCount = copyAllFirstPhaseResult.right;
             if (isCancelled(cancelFlag)) {
-                return createCopyResult(ProcessResult.ABORTED, null, 0, 0, sourceCopyCount);
+                return createFolderProcessResult(ProcessResult.ABORTED, null, 0, 0, sourceCopyCount);
             }
             final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList = copyAllFirstPhaseResult.left;
             if (fileList == null) {
-                return createCopyResult(ProcessResult.TARGET_NOT_WRITEABLE, null, 0, 0, sourceCopyCount);
+                return createFolderProcessResult(ProcessResult.TARGET_NOT_WRITEABLE, null, 0, 0, sourceCopyCount);
             } else if (fileList.isEmpty()) {
-                return createCopyResult(ProcessResult.OK, null, 0, 0, sourceCopyCount);
+                return createFolderProcessResult(ProcessResult.OK, null, 0, 0, sourceCopyCount);
             }
             cLog.add("p1:#s", fileList.size());
 
@@ -452,7 +468,7 @@ public class FolderUtils {
 
             cLog.add("p2:#%s#%s", copyResult.middle, copyResult.right);
 
-            return createCopyResult(
+            return createFolderProcessResult(
                 isCancelled(cancelFlag) ? ProcessResult.ABORTED : (copyResult.left == null ? ProcessResult.OK : ProcessResult.FAILURE), copyResult.left, copyResult.middle, copyResult.right, sourceCopyCount);
         }
 
@@ -575,7 +591,7 @@ public class FolderUtils {
         statusListener.accept(new FolderProcessStatus(fi, filesCopied, dirsCopied, sourceCopyCount == null ? -1 : sourceCopyCount.left, sourceCopyCount == null ? -1 : sourceCopyCount.right));
     }
 
-    private FolderProcessResult createCopyResult(final ProcessResult status, final ContentStorage.FileInformation failedFile, final int filesCopied, final int dirsCopied, final ImmutablePair<Integer, Integer> sourceCopyCount) {
+    private FolderProcessResult createFolderProcessResult(final ProcessResult status, final ContentStorage.FileInformation failedFile, final int filesCopied, final int dirsCopied, final ImmutablePair<Integer, Integer> sourceCopyCount) {
         return new FolderProcessResult(status, failedFile, filesCopied, dirsCopied, sourceCopyCount == null ? -1 : sourceCopyCount.left, sourceCopyCount == null ? -1 : sourceCopyCount.right);
     }
 

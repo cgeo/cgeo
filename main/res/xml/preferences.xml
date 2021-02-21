@@ -580,7 +580,7 @@
                 app:url="@string/manual_url_settings_themes"
                 app:urlButton="@string/settings_goto_url_button" />
             <Preference
-                android:key="@string/pref_renderthemepath"
+                android:key="@string/pref_persistablefolder_offlinemapthemes"
                 android:title="@string/init_rendertheme_folder" />
             <ListPreference
                 android:title="@string/settings_title_map_rotation"

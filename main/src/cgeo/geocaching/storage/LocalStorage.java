@@ -41,15 +41,19 @@ public final class LocalStorage {
     public static final Pattern GEOCACHE_FILE_PATTERN = Pattern.compile("^(GC|TB|TC|CC|LC|EC|GK|MV|TR|VI|MS|EV|CT|GE|GA|WM|O)[A-Z0-9]{2,7}$");
 
     private static final String FILE_SYSTEM_TABLE_PATH = "/system/etc/vold.fstab";
-    private static final String CGEO_DIRNAME = "cgeo";
     private static final String DATABASES_DIRNAME = "databases";
-    private static final String BACKUP_DIR_NAME = "backup";
-    private static final String GPX_DIR_NAME = "gpx";
-    private static final String FIELD_NOTES_DIR_NAME = "field-notes";
-    private static final String LEGACY_CGEO_DIR_NAME = ".cgeo";
     private static final String GEOCACHE_DATA_DIR_NAME = "GeocacheData";
     private static final String OFFLINE_LOG_IMAGES_DIR_NAME = "OfflineLogImages";
+    private static final String MAP_THEME_INTERNAL_DIR_NAME = "MapThemeData";
     private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MB in bytes
+
+    //Legacy directory names which should NO LONGER BE OF USE
+    private static final String CGEO_DIRNAME = "cgeo"; //legacy
+    private static final String BACKUP_DIR_NAME = "backup"; //legacy
+    private static final String GPX_DIR_NAME = "gpx"; //legacy
+    private static final String FIELD_NOTES_DIR_NAME = "field-notes"; //legacy
+    private static final String LEGACY_CGEO_DIR_NAME = ".cgeo";  // double legacy
+
 
     private static File internalCgeoDirectory;
     private static File externalPrivateCgeoDirectory;
@@ -177,6 +181,13 @@ public final class LocalStorage {
     @NonNull
     public static File getOfflineLogImageDir(final String geocode) {
         final File dir = new File(getGeocacheDataDirectory(geocode == null ? "shared" : geocode), OFFLINE_LOG_IMAGES_DIR_NAME);
+        dir.mkdirs();
+        return dir;
+    }
+
+    @NonNull
+    public static File getMapThemeInternalDir() {
+        final File dir = new File(getGeocacheDataDirectory("shared"), MAP_THEME_INTERNAL_DIR_NAME);
         dir.mkdirs();
         return dir;
     }
