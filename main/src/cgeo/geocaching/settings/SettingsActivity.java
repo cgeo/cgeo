@@ -2,7 +2,6 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
@@ -12,10 +11,10 @@ import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.downloader.MapDownloaderUtils;
-import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
+import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.OrientationProvider;
@@ -43,7 +42,6 @@ import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -71,7 +69,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
-import org.openintents.intents.FileManagerIntents;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -93,28 +90,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
 
     private final ContentStorageActivityHelper contentStorageHelper = new ContentStorageActivityHelper(this);
-
-    /**
-     * Enumeration for directory choosers. This is how we can retrieve information about the
-     * directory and preference key in onActivityResult() easily just by knowing
-     * the result code.
-     */
-    private enum DirChooserType {
-
-        THEMES_DIR(3, R.string.pref_renderthemepath, "", false);
-
-        public final int requestCode;
-        public final int keyId;
-        public final String defaultValue;
-        public final boolean writeMode;
-
-        DirChooserType(final int requestCode, final int keyId, final String defaultValue, final boolean writeMode) {
-            this.requestCode = requestCode;
-            this.keyId = keyId;
-            this.defaultValue = defaultValue;
-            this.writeMode = writeMode;
-        }
-    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -159,7 +134,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private void initPreferences() {
         initMapSourcePreference();
         initExtCgeoDirPreference();
-        initDirChoosers();
         initDefaultNavigationPreferences();
         initBackupButtons();
         initDbLocationPreference();
@@ -177,7 +151,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         for (final int k : new int[] {
                 R.string.pref_pass_vote, R.string.pref_signature,
-                R.string.pref_mapsource, R.string.pref_renderthemepath,
                 R.string.pref_fakekey_dataDir,
                 R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
@@ -411,7 +384,12 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
             bindSummaryToValue(pref, folder.toUserDisplayableValue());
             pref.setOnPreferenceClickListener(p -> {
-                contentStorageHelper.selectPersistableFolder(folder, f -> p.setSummary(f.toUserDisplayableValue()));
+                contentStorageHelper.selectPersistableFolder(folder, f -> {
+                    p.setSummary(f.toUserDisplayableValue());
+                    if (PersistableFolder.OFFLINE_MAP_THEMES.equals(f)) {
+                        RenderThemeHelper.resynchronizeMapThemeFolder(this);
+                    }
+                });
                 return false;
             });
             folder.registerChangeListener(this, f -> pref.setSummary(f.toUserDisplayableValue()));
@@ -429,60 +407,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             if (prefGroup instanceof PreferenceGroup) {
                 ((PreferenceGroup) prefGroup).removePreference(prefToHide);
             }
-        }
-    }
-
-    private void initDirChoosers() {
-        for (final DirChooserType dct : DirChooserType.values()) {
-
-            getPreference(dct.keyId).setOnPreferenceClickListener(
-                    preference -> {
-                        startDirChooser(dct);
-                        return false;
-                    });
-        }
-    }
-
-    /**
-     * Fire up a directory chooser on click on the preference.
-     *
-     * The result can be processed using {@link android.app.Activity#onActivityResult}.
-     *
-     * @param dct
-     *            type of directory to be selected
-     */
-    private void startDirChooser(final DirChooserType dct) {
-
-        final String startDirectory = Settings.getString(dct.keyId, dct.defaultValue);
-
-        try {
-            final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
-            if (StringUtils.isNotBlank(startDirectory)) {
-                dirChooser.setData(Uri.fromFile(new File(startDirectory)));
-            }
-            dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,
-                    getString(R.string.simple_dir_chooser_title));
-            dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
-                    getString(string.ok));
-            startActivityForResult(dirChooser, dct.requestCode);
-        } catch (final RuntimeException ignored) {
-            // OI file manager not available
-            final Intent dirChooser = new Intent(this, SimpleDirChooser.class);
-            dirChooser.putExtra(Intents.EXTRA_START_DIR, startDirectory);
-            dirChooser.putExtra(SimpleDirChooser.EXTRA_CHOOSE_FOR_WRITING, dct.writeMode);
-            startActivityForResult(dirChooser, dct.requestCode);
-        }
-    }
-
-    private void setChosenDirectory(final DirChooserType dct, final Intent data) {
-        final String directory = new File(data.getData().getPath()).getAbsolutePath();
-        if (StringUtils.isNotBlank(directory)) {
-            final Preference p = getPreference(dct.keyId);
-            if (p == null) {
-                return;
-            }
-            Settings.putString(dct.keyId, directory);
-            p.setSummary(directory);
         }
     }
 
@@ -788,13 +712,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         if (resultCode != RESULT_OK) {
             return;
-        }
-
-        for (final DirChooserType dct : DirChooserType.values()) {
-            if (requestCode == dct.requestCode) {
-                setChosenDirectory(dct, data);
-                return;
-            }
         }
 
         switch (requestCode) {

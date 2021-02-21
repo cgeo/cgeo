@@ -16,6 +16,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.DefaultMap;
+import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
@@ -332,6 +333,9 @@ public class MainActivity extends AbstractActionBarActivity {
 
         //do file migrations if necessary
         LocalStorage.migrateLocalStorage(this);
+
+        //sync map Theme folder
+        RenderThemeHelper.resynchronizeMapThemeFolder(this);
 
         // reactivate dialogs which are set to show later
         OneTimeDialogs.nextStatus();

@@ -113,7 +113,7 @@ public final class SystemInformation {
         appendDirectory(body, "\n- Legacy User storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\n- Geocache data: ", LocalStorage.getGeocacheDataDirectory());
         appendPublicFolders(body);
-        body.append("\n- Map render theme path: ").append(Settings.getCustomRenderThemeFilePath());
+        body.append("\n- Map render theme path: ").append(Settings.getSelectedMapRenderTheme());
         appendPersistedDocumentUris(body);
         appendPersistedUriPermission(body, context);
         appendDatabase(body);

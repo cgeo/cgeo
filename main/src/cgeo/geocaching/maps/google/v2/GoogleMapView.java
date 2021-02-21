@@ -421,17 +421,6 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     @Override
-    public boolean hasMapThemes() {
-        // Not supported
-        return false;
-    }
-
-    @Override
-    public void setMapTheme() {
-        // Not supported
-    }
-
-    @Override
     public void onMapReady(final MapReadyCallback callback) {
         if (callback == null) {
             return;

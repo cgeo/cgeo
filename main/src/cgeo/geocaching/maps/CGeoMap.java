@@ -56,7 +56,6 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.WeakReferenceHandler;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -73,7 +72,6 @@ import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
@@ -99,7 +97,6 @@ import android.widget.ViewSwitcher.ViewFactory;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -778,7 +775,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(getUnsavedGeocodes(geocodesInViewport)));
 
-            menu.findItem(R.id.menu_theme_mode).setVisible(mapView.hasMapThemes());
+            menu.findItem(R.id.menu_theme_mode).setVisible(false); // Always false, this is only used for Google Maps
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
@@ -825,7 +822,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
         } else if (id == R.id.menu_theme_mode) {
-            selectMapTheme();
+            //this will never happen, Google does not support mapsforge themes -> do nothing
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
         } else if (id == R.id.menu_hint) {
@@ -958,51 +955,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             cache.showHintToast(getActivity());
         }
     }
-
-    private void selectMapTheme() {
-
-        final File[] themeFiles = Settings.getMapThemeFiles();
-
-        String currentTheme = StringUtils.EMPTY;
-        final String currentThemePath = Settings.getCustomRenderThemeFilePath();
-        if (StringUtils.isNotEmpty(currentThemePath)) {
-            final File currentThemeFile = new File(currentThemePath);
-            currentTheme = currentThemeFile.getName();
-        }
-
-        final List<String> names = new ArrayList<>();
-        names.add(res.getString(R.string.switch_default));
-        int currentItem = 0;
-        for (final File file : themeFiles) {
-            if (currentTheme.equalsIgnoreCase(file.getName())) {
-                currentItem = names.size();
-            }
-            names.add(file.getName());
-        }
-
-        final int selectedItem = currentItem;
-
-        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-
-        builder.setTitle(R.string.map_theme_select);
-
-        builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem,
-                (dialog, newItem) -> {
-                    if (newItem != selectedItem) {
-                        // Adjust index because of <default> selection
-                        if (newItem > 0) {
-                            Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
-                        } else {
-                            Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
-                        }
-                        mapView.setMapTheme();
-                    }
-                    dialog.cancel();
-                });
-
-        builder.show();
-    }
-
     /**
      * @return a non-null Set of geocodes corresponding to the caches that are shown on screen.
      */

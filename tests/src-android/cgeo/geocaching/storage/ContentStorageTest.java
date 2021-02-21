@@ -238,10 +238,10 @@ public class ContentStorageTest extends CGeoTestCase {
             prevSum++;
         }
         //check that result status of different sources match also when copy was aborted
-        assertThat(folderProcessStatuses.get(abortAfter).filesProcessed).isEqualTo(result.filesProcessed);
-        assertThat(folderProcessStatuses.get(abortAfter).dirsProcessed).isEqualTo(result.dirsProcessed);
+        assertThat(folderProcessStatuses.get(abortAfter).filesProcessed).isEqualTo(result.filesModified);
+        assertThat(folderProcessStatuses.get(abortAfter).dirsProcessed).isEqualTo(result.dirsModified);
         final ImmutablePair<Integer, Integer> targetInfo = FolderUtils.get().getFolderInfo(targetFolder2);
-        assertThat(targetInfo).isEqualTo(new ImmutablePair<>(result.filesProcessed, result.dirsProcessed));
+        assertThat(targetInfo).isEqualTo(new ImmutablePair<>(result.filesModified, result.dirsModified));
      }
 
     public void testFileCopyAllSameDir() {
@@ -742,8 +742,8 @@ public class ContentStorageTest extends CGeoTestCase {
 
     private void assertCopyResult(final FolderUtils.FolderProcessResult result, final FolderUtils.ProcessResult expectedState, final int expectedFileCount, final int expectedDirCount) {
         assertThat(result.result).isEqualTo(expectedState);
-        assertThat(result.filesProcessed).isEqualTo(expectedFileCount);
-        assertThat(result.dirsProcessed).isEqualTo(expectedDirCount);
+        assertThat(result.filesModified).isEqualTo(expectedFileCount);
+        assertThat(result.dirsModified).isEqualTo(expectedDirCount);
     }
 
     private void assertFileDirCount(final Folder folder, final int fileCount, final int dirCount) {
