@@ -163,16 +163,16 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
-    <string name="err_captcha">Captcha necessário. Por favor, consulte as <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para obter instruções.</string>
+    <string name="err_captcha">Captcha necessário. Por favor, consulte a nossa <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para obter instruções.</string>
     <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_gk">Não é possível contactar o sítio \'GeoKrety.org\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_login">Nenhuma informação de início de sessão guardada</string>
     <string name="err_login_failed_toast">O c:geo não consegue iniciar a sessão. No modo offline, o c:geo funciona com as caches guardadas em \'Armazenadas\'. Verifique as definições de Início de Sessão ou active a sua ligação à Internet.</string>
-    <string name="err_unknown">Erro desconhecido. Por favor, consulte <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
+    <string name="err_unknown">Erro desconhecido. Por favor, consulte a nossa <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
     <string name="err_unknown_address">O c:geo não conseguiu mapear a morada para uma localização existente</string>
-    <string name="err_comm">Erro de comunicação desconhecido. Por favor, consulte <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
+    <string name="err_comm">Erro de comunicação desconhecido. Por favor, consulte a nossa <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
     <string name="err_missing_auth">Não foi definido utilizador e/ou palavra-passe</string>
     <string name="err_wrong">Utilizador e/ou palavra-passe incorretos</string>
     <string name="err_maintenance">O sítio \'geocaching.com\' está indisponível para manutenção. No modo offline, o c:geo funciona com as geocaches guardadas em \'Armazenadas\'.</string>
@@ -601,7 +601,7 @@
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola, para as caches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Tenha em atenção que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais e configurações, mas não de imagens em caches. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
+    <string name="init_backup_summary">Tenha em atenção que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais e configurações, mas não de imagens em caches.\nPara que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -1291,12 +1291,12 @@
     <string name="helper_sendtocgeo_title">Enviar para o c:geo</string>
     <string name="helper_contacts_title">c:geo - contactos (extensão)</string>
     <string name="helper_contacts_description">Permite-lhe que aceda directamente a um contacto (da sua lista de contactos), a partir de um registo feito numa geocache. Assim será mais fácil pedir ajuda aos seus amigos.</string>
-    <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Quando aceder a geocaching.com, poderá enviar as geocaches directamente para o seu smartphone com o clique de um botão no navegador.</string>
+    <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Quando aceder a \'geocaching.com\' poderá, com o clique de um botão, enviar geocaches directamente para o seu smartphone.</string>
     <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
     <string name="helper_gpsstatus_description">Pode usar o radar desta aplicação em conjunto com o c:geo. Também disponibiliza uma série de outras informações relacionadas com o GPS.</string>
     <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
     <string name="helper_gps_locker_description">GPS Locker mantém o sinal de GPS activo quando alterna entre aplicações e quando o ecrã do seu dispositivo está desligado.</string>
-    <string name="helper_barcode_description">Existem scripts Greasemonkey e sítios web que permitem mostrar códigos GC num código de barras. Com esta aplicação o c:geo consegue ler, por exemplo, um código de barras directamente do ecrã do seu computador.</string>
+    <string name="helper_barcode_description">Existem scripts Greasemonkey e sítios web que permitem mostrar códigos GC num código de barras. Com esta aplicação o c:geo consegue ler esses códigos GC directamente do ecrã do seu computador.</string>
     <string name="helper_pocketquery_description">Permite a fácil criação e transferência de Pocket Query, baseado na sua posição actual ou num ponto seleccionado no mapa. Requer uma conta Premium em \'Geocaching.com\'.</string>
     <string name="helper_google_translate_title">Google Tradutor</string>
     <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das geocaches no c:geo, ao tocar sem soltar sobre o texto da descrição da cache (mesmo sem uma ligação à Internet).</string>
@@ -1601,8 +1601,8 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em \'geocaching.com\' fizeram com que o mapa da vista em tempo real não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a usar uma versão antiga do Android. Esta versão do c:geo não é compatível com o seu dispositivo e pode falhar, ou comportar-se inesperadamente!\nToque nesta mensagem para obter mais informações.</string>
-    <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, devido ao sítio Web ou a outras alterações técnicas. Por favor, leia as nossas FAQ para saber como actualizar.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a usar uma versão antiga do Android. Esta versão do c:geo não é compatível com o seu dispositivo e pode falhar ou ter um comportamento inesperado!\nToque nesta mensagem para obter mais informações.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, fruto de alterações num sítio web ououtros motivos técnicos. Por favor, leia a nossa <a href="https://www.cgeo.org/faq#legacy">FAQ</a> para saber como actualizar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bússola com voz</string>
     <string name="tts_toggle">Ligar/desligar a fala</string>
