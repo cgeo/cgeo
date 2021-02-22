@@ -532,7 +532,6 @@
     <string name="settings_service_active">Aktif</string>
     <string name="settings_navigation_disabled">Bu uygulama yüklü değil gibi görünüyor</string>
     <string name="init_signature">İmza</string>
-    <string name="init_template_help">Yer tutucu dizeleri, [NAME] bu şablon kullanıldıktan sonra genişletilecektir.</string>
     <string name="init_signature_template_button">Şablon Ekle</string>
     <string name="init_signature_template_date">Tarih</string>
     <string name="init_signature_template_time">Saat</string>
@@ -803,11 +802,11 @@
     <string name="persistablefolder_logfiles">Kayıt dosyası</string>
     <string name="persistablefolder_fieldnotes">Saha Notları</string>
     <string name="persistablefolder_spoilerimages">İpucu Görselleri</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">%1$s\'nın içeriği %2$s\'e kopyalanıyor</string>
-    <string name="folder_copy_progressbar_status_done">Kopyalandı %1$s/%2$s, %3$s/%4$s</string>
     <string name="folder_move_progressbar_title">%1$s\'nın içeriği %2$s\'e taşınıyor</string>
-    <string name="folder_move_progressbar_status_done">Taşındı %1$s/%2$s, %3$s/%4$s</string>
     <string name="folder_move_finished_dialog_tap">Klasör değişikliklerini sonlandırmak için tıklayın: \'OK\'</string>
     <plurals name="file_count">
         <item quantity="one">%1$d dosya</item>
@@ -1165,12 +1164,6 @@
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
     <string name="map_show_circles">Çemberleri göster</string>
-    <string name="map_showc_ownfound">Geocache\'lerimi/bulduklarımı göster</string>
-    <string name="map_showc_disabled">Devre dışı Geocache\'leri göster</string>
-    <string name="map_showc_archived">Arşivlenmiş Geocache\'leri göster</string>
-    <string name="map_showwp_original">Orijinal yol noktalarını göster</string>
-    <string name="map_showwp_parking">Otopark yol noktalarını göster</string>
-    <string name="map_showwp_visited">Ziyaret edilmiş yol noktalarını göster</string>
     <string name="init_hidewp">Yol noktalarını gizle</string>
     <string name="init_summary_hidewp_original">Haritadaki orijinal yol noktalarını gizle</string>
     <string name="init_summary_hidewp_parking">Haritadaki park alanlarını gizle</string>
@@ -1184,9 +1177,7 @@
     <string name="map_select_multiple_items">Öğe seç</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
     <string name="quick_settings">Hızlı ayarlar</string>
-    <string name="map_show_in_map">Haritada göster</string>
     <!-- search -->
-    <string name="search_bar_hint">Geocache\'leri ara</string>
     <string name="search_bar_desc">Geocache\'ler (geocode, anahtar kelime), Trackable (TB kodu)</string>
     <string name="search_coordinates">Koordinatlar</string>
     <string name="search_coordinates_button">Koordinatlara göre ara</string>
