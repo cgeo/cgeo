@@ -533,7 +533,6 @@
     <string name="settings_service_active">Ενεργή</string>
     <string name="settings_navigation_disabled">Αυτή η εφαρμογή δεν είναι εγκατεστημένη</string>
     <string name="init_signature">Υπογραφή</string>
-    <string name="init_template_help">Το σύμβολο κράτησης θέσης με αγκύλες, όπως [ΟΝΟΜΑ] θα επεκταθεί αργότερα όταν χρησιμοποιειθει αυτό το πεδίο.</string>
     <string name="init_signature_template_button">Εισαγωγή προτύπου</string>
     <string name="init_signature_template_date">Ημερομηνία</string>
     <string name="init_signature_template_time">Ώρα</string>
@@ -825,12 +824,11 @@
     <string name="persistablefolder_usertype_userdefined">Ορισμένο από τον Χρήστη</string>
     <string name="persistablefolder_usertype_default">Προεπιλογή</string>
     <string name="persistablefolder_spoilerimages">Εικόνες spoiler</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Αντιγραφή περιεχομένου από %1$s έως %2$s</string>
-    <string name="folder_copy_progressbar_status_done">Αντιγράφηκε %1$s/%2$s, %3$s/%4$s</string>
     <string name="folder_move_progressbar_title">Μετακίνηση περιεχομένου από %1$s σε %2$s</string>
-    <string name="folder_move_progressbar_status_done">Μετακινήθηκε %1$s/%2$s, %3$s/%4$s</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Διαδικασία %1$s</string>
     <string name="folder_copy_finished_title">Αντιγράφηκε το περιεχόμενο του φακέλου</string>
     <string name="folder_move_finished_title">Το περιεχόμενο του φακέλου μετακινήθηκε</string>
     <string name="folder_copy_finished_dialog_message">Το περιεχόμενο του φακέλου %1$s αντιγράφηκε στο %2$s.\n\n%3$s από %4$s και %5$s από %6$s υποβλήθηκαν σε επεξεργασία.</string>
@@ -1197,12 +1195,6 @@
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
     <string name="map_show_circles">Εμφάνιση κύκλων</string>
-    <string name="map_showc_ownfound">Εμφάνιση των δικών μου κρυπτών και των ευρέσεών μου</string>
-    <string name="map_showc_disabled">Εμφάνιση απενεργοποιημένων κρυπτών</string>
-    <string name="map_showc_archived">Εμφάνιση αρχειοθετημένων κρυπτών</string>
-    <string name="map_showwp_original">Εμφάνιση αρχικών ενδιάμεσων σταθμών</string>
-    <string name="map_showwp_parking">Εμφάνιση ενδιάμεσων σταθμών στάθμευσης</string>
-    <string name="map_showwp_visited">Εμφάνιση ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
     <string name="map_show_track">Εμφάνιση GPX διαδρομής</string>
     <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
     <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
@@ -1221,9 +1213,7 @@
     <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
     <string name="quick_settings">Γρήγορες ρυθμίσεις</string>
     <string name="quick_settings_info">Μερικές ρυθμίσεις χάρτη (Ρυθμίσεις χάρτη, απόκρυψη, δρομολόγηση) έχουν μεταφερθεί στο νέο αναδυόμενο παράθυρο \"Γρήγορες ρυθμίσεις\".\nΜπορείτε να ανοίξετε αυτό το αναδυόμενο παράθυρο χρησιμοποιώντας το εικονίδιο στο κάτω μέρος του χάρτη.</string>
-    <string name="map_show_in_map">Εμφάνιση στο χάρτη</string>
     <!-- search -->
-    <string name="search_bar_hint">Αναζήτηση κρυπτών</string>
     <string name="search_bar_desc">Κρύπτες (γεωκωδικός, λέξη-κλειδί), Ανιχνεύσιμα (Κωδικός TB)</string>
     <string name="search_coordinates">Συντεταγμένες</string>
     <string name="search_coordinates_button">Αναζήτηση με συντεταγμένες</string>
