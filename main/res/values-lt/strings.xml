@@ -514,7 +514,6 @@
     <string name="settings_service_active">Aktyvuota</string>
     <string name="settings_navigation_disabled">Panašu, kad ši programa nėra įdiegta</string>
     <string name="init_signature">Parašas</string>
-    <string name="init_template_help">Tokie kodai kaip [NAME] bus vėliau išskleidžiami, kai juos panaudosite įrašuose.</string>
     <string name="init_signature_template_button">Įterpti šabloną</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Laikas</string>
@@ -746,7 +745,9 @@
     <string name="sendToCgeo_no_registration">c:geo nepavyko atsisiųsti slėptuvių. send2cgeo registracijos galiojimo laikas pasibaigė. Prašome registruotis Nustatymuose.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Leisti c:geo prisijungti</string>
     <string name="auth_check">Patikrinti prisijungimo duomenis</string>
@@ -1099,12 +1100,6 @@
     <string name="map_rotation">Žemėlapio sukimas</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
     <string name="map_show_circles">Rodyti apskritimus</string>
-    <string name="map_showc_ownfound">Rodyti savo/rastas slėptuves</string>
-    <string name="map_showc_disabled">Rodyti išjungtas slėptuves</string>
-    <string name="map_showc_archived">Rodyti archyvuotas slėptuves</string>
-    <string name="map_showwp_original">Rodyti originalius taškus</string>
-    <string name="map_showwp_parking">Rodyti parkingo taškus</string>
-    <string name="map_showwp_visited">Rodyti aplankytus taškus</string>
     <string name="map_show_track">Rodyti GPX asmeninį kelią/maršrutą</string>
     <string name="init_hidewp">Slėpti papildomus taškus</string>
     <string name="init_summary_hidewp_original">Slėpti originalius papildomus taškus žemėlapyje</string>
@@ -1120,9 +1115,7 @@
     <string name="map_gm_autorotation">Žemėlapio autosukimas</string>
     <string name="map_gm_autorotation_disable">Išjungti automatinį žemėlapio pasukimą?\n\nGalėsite jį vėl įjungti per žemėlapio pasukimo meniu</string>
     <string name="quick_settings">Greiti nustatymai</string>
-    <string name="map_show_in_map">Rodyti žemėlapyje</string>
     <!-- search -->
-    <string name="search_bar_hint">Ieškoti</string>
     <string name="search_bar_desc">Slėptuvės (geo kodas, raktažodis), Keliauninkai (TB kodas)</string>
     <string name="search_coordinates">Koordinatės</string>
     <string name="search_coordinates_button">Paieška pagal koordinates</string>
