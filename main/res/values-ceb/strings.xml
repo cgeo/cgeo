@@ -401,7 +401,6 @@
     <string name="settings_service_active">Pag-aktibo</string>
     <string name="settings_navigation_disabled">Ang kini nga app kay dili daw ma-instalar</string>
     <string name="init_signature">Pirma</string>
-    <string name="init_template_help">Ang mga string sa placeholder nga sama sa [NAME] mahimong gipalapad sa ulahi sa diha kini gigamit.</string>
     <string name="init_signature_template_button">Pagsal-ot og Template</string>
     <string name="init_signature_template_date">Pitsa</string>
     <string name="init_signature_template_time">Oras</string>
@@ -525,7 +524,9 @@
     <string name="sendToCgeo_no_registration">napakyas ang c:geo sa pag-download sa mga caches. Ang pagparehistro para sa send2cgeo kay natapos. Palihug parehistro sa mga kahimtangan.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">I-awtorisar ang c:geo</string>
     <string name="auth_check">I-check ang pagpamatuod</string>
@@ -768,7 +769,6 @@
     <string name="map_as_list">Ipakita ang ingulon na lista</string>
     <string name="map_select_multiple_items">Pagselek ug aytem</string>
     <!-- search -->
-    <string name="search_bar_hint">Pangitaa para sa mga cache</string>
     <string name="search_bar_desc">Mga cache (geo code, keyword), Trackable (TB code)</string>
     <string name="search_coordinates">Mga koordinate</string>
     <string name="search_coordinates_button">Pangitaa sa pamaagi na koordinate</string>
