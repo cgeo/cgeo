@@ -413,7 +413,6 @@
     <string name="settings_service_active">Activ</string>
     <string name="settings_navigation_disabled">Această aplicaţie pare să nu fie instalată</string>
     <string name="init_signature">Semnătură</string>
-    <string name="init_template_help">Denumirile delimitate precum [NAME] vor fi înlocuite ulterior atunci când acest şablon va fi folosit.</string>
     <string name="init_signature_template_button">Introdu şablon</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Ora</string>
@@ -542,7 +541,9 @@
     <string name="sendToCgeo_no_registration">c:geo nu a putut descărca cutiile. Înregistrarea pentru send2cgeo a expirat. Te rog înregistrează la opţiuni.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizează c:geo</string>
     <string name="auth_check">Verifică autentificarea</string>
@@ -794,7 +795,6 @@
     <string name="map_as_list">Arată ca lista</string>
     <string name="map_select_multiple_items">Selectează un element</string>
     <!-- search -->
-    <string name="search_bar_hint">Caută cutii</string>
     <string name="search_bar_desc">Geocutii (geocod, cuvânt cheie), Obiecte călătoare (cod TB)</string>
     <string name="search_coordinates">Coordonate</string>
     <string name="search_coordinates_button">Caută după coordonate</string>
