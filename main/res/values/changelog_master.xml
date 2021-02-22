@@ -19,12 +19,14 @@
 <li>Change: Renamed menu entries to distinguish between "remove cache(s) from this list" and "delete cache(s) from device", depending on currently selected list - no change in behavior</li>
 <li>Change: Scale offline log images on upload only</li>
 <li>New: Swipe down to refresh cache details and trackable list</li>
+<li>New: Long-click on waypoint coordinates to copy them to clipboard</li>
 </ul>
 
 <h4>Other:</h4>
 <ul>
 <li>New: Set user-defined coords for waypoints on GPX import even when original waypoint has no coords</li>
 <li>New: Add support for cache attributes in locus connector</li>
+<li>New: Export and import UDC with empty coordinates</li>
 </ul>
 
 </div>]]></Data>
