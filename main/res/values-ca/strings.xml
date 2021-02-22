@@ -532,7 +532,6 @@
     <string name="settings_service_active">Actiu</string>
     <string name="settings_navigation_disabled">Aquesta aplicació no s\'ha instal·lat.</string>
     <string name="init_signature">Signatura</string>
-    <string name="init_template_help">Les cadenes de marcadors de posició com [NAME] s\'expandiran més tard quan feu servir aquesta plantilla.</string>
     <string name="init_signature_template_button">Insereix una plantilla</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Hora</string>
@@ -829,12 +828,11 @@
     <string name="persistablefolder_backup">Còpia de seguretat</string>
     <string name="persistablefolder_logfiles">Arxius de registre</string>
     <string name="persistablefolder_fieldnotes">Notes de camp</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">S\'està copiant el contingut de %1$s a %2$s</string>
-    <string name="folder_copy_progressbar_status_done">S\'han copiat %1$s/%2$s, %3$s/%4$s</string>
     <string name="folder_move_progressbar_title">S\'està movent el contingut de %1$s a %2$s</string>
-    <string name="folder_move_progressbar_status_done">S\'ha mogut %1$s/%2$s, %3$s/%4$s</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Procés %1$s</string>
     <string name="folder_copy_finished_title">S\'ha copiat el contingut de la carpeta</string>
     <string name="folder_move_finished_title">El contingut de la carpeta s\'ha mogut</string>
     <string name="folder_copy_finished_dialog_message">El contingut de la carpeta %1$s s\'ha copiat a %2$s.\n\nS\'han processat %3$s de %4$s i %5$s de %6$s.</string>
@@ -1202,12 +1200,6 @@
     <string name="map_rotation">Mapa rotatori</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
     <string name="map_show_circles">Mostra els cercles</string>
-    <string name="map_showc_ownfound">Mostra catxes pròpies / trobades</string>
-    <string name="map_showc_disabled">Mostra catxes desactivats</string>
-    <string name="map_showc_archived">Mostra catxes arxivats</string>
-    <string name="map_showwp_original">Mostra punt ruta originals</string>
-    <string name="map_showwp_parking">Mostra punts ruta parking</string>
-    <string name="map_showwp_visited">Mostra punts ruta visitats</string>
     <string name="map_show_track">Mostra GPX track/ruta</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
     <string name="init_summary_hidewp_original">Amaga els punts de ruta originals del mapa</string>
@@ -1226,9 +1218,7 @@
     <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
     <string name="quick_settings">Configuració ràpida</string>
     <string name="quick_settings_info">Algunes configuracions del mapa (Configuració del mapa, ocultació, encaminament) s\'han mogut a la nova finestra emergent \"Configuració ràpida\".\nPodeu obrir aquesta finestra emergent mitjançant la icona que hi ha al centre de la part inferior del mapa.</string>
-    <string name="map_show_in_map">Mostra al mapa</string>
     <!-- search -->
-    <string name="search_bar_hint">Cerca de catxés</string>
     <string name="search_bar_desc">Catxés (codi del catxé, paraula clau), Traçables (codi TB)</string>
     <string name="search_coordinates">Coordenades</string>
     <string name="search_coordinates_button">Cerca per coordenades</string>
