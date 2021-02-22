@@ -533,7 +533,6 @@
     <string name="settings_service_active">Aktívne</string>
     <string name="settings_navigation_disabled">Táto aplikácia zrejme nie je nainštalovaná</string>
     <string name="init_signature">Podpis</string>
-    <string name="init_template_help">Zástupný znak reťazca ako [NAME] sa realizuje neskôr, keď použijete túto šablónu.</string>
     <string name="init_signature_template_button">Vložiť šablónu</string>
     <string name="init_signature_template_date">Dátum</string>
     <string name="init_signature_template_time">Čas</string>
@@ -830,12 +829,11 @@
     <string name="persistablefolder_backup">Záloha</string>
     <string name="persistablefolder_logfiles">Súbory denníkov</string>
     <string name="persistablefolder_fieldnotes">Poznámky</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopíruje sa obsah %1$s do %2$s</string>
-    <string name="folder_copy_progressbar_status_done">Skopírované %1$s/%2$s, %3$s/%4$s</string>
     <string name="folder_move_progressbar_title">Presúva sa obsah %1$s do %2$s</string>
-    <string name="folder_move_progressbar_status_done">Presunuté %1$s/%2$s, %3$s/%4$s</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Spracovávanie %1$s</string>
     <string name="folder_copy_finished_title">Obsah priečinka bol skopírovaný</string>
     <string name="folder_move_finished_title">Obsah priečinka bol presunutý</string>
     <string name="folder_copy_finished_dialog_message">Obsah priečinka %1$s bol skopírovaný do %2$s\n\n%3$s z %4$s a %5$s z %6$s bolo spracované.</string>
@@ -1223,12 +1221,6 @@
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
     <string name="map_show_circles">Zobraziť kruhy</string>
-    <string name="map_showc_ownfound">Zobraziť vlastné/nájdené kešky</string>
-    <string name="map_showc_disabled">Zobraziť vypnuté kešky</string>
-    <string name="map_showc_archived">Zobraziť archivované kešky</string>
-    <string name="map_showwp_original">Zobraziť pôvodné body trasy</string>
-    <string name="map_showwp_parking">Zobraziť parkoviská</string>
-    <string name="map_showwp_visited">Zobraziť navštívené body trasy</string>
     <string name="map_show_track">Zobraziť GPX stopu/trasu</string>
     <string name="init_hidewp">Skryť body trasy</string>
     <string name="init_summary_hidewp_original">Skryť pôvodné body trasy na mape</string>
@@ -1247,9 +1239,7 @@
     <string name="map_gm_autorotation_disable">Vypnúť automatické otáčanie mapy?\n\nMôžete ho znova povoliť pomocou ponuky Otáčanie mapy.</string>
     <string name="quick_settings">Rýchle nastavenia</string>
     <string name="quick_settings_info">Niektoré nastavenia mapy (nastavenie mapy, skrytie, trasy) boli presunuté do nového kontextového okna \"Rýchle nastavenia\"\nToto kontextové okno môžete otvoriť pomocou ikony na mape dole v strede.</string>
-    <string name="map_show_in_map">Zobraziť v mape</string>
     <!-- search -->
-    <string name="search_bar_hint">Hľadanie skrýš</string>
     <string name="search_bar_desc">Skrýše (geokód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
     <string name="search_coordinates">Súradnice</string>
     <string name="search_coordinates_button">Hľadať podľa súradníc</string>
