@@ -503,7 +503,6 @@
     <string name="settings_service_active">Aktīvs</string>
     <string name="settings_navigation_disabled">Šo aplikāciju, šķiet, nevar uzinstalēt</string>
     <string name="init_signature">Paraksts</string>
-    <string name="init_template_help">Iestarpinājumi, piemēram, [NAME] tiks paplašināts vēlāk lietojot šo sagatavi.</string>
     <string name="init_signature_template_button">Ievietot sagatavi</string>
     <string name="init_signature_template_date">Datums</string>
     <string name="init_signature_template_time">Laiks</string>
@@ -680,7 +679,9 @@
     <string name="sendToCgeo_no_registration">c:geo neizdevās lejupielādēt slēpņus. Reģistrēšanās noilgums iekš Send2cgeo ir iestajies. Lūdzu reģistrējieties iestatījumos.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Atļaut c:geo</string>
     <string name="auth_check">Pārbaudi autentifikāciju</string>
@@ -1013,7 +1014,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_as_list">Parādīt kā sarakstu</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
     <!-- search -->
-    <string name="search_bar_hint">Meklēt slēpņus</string>
     <string name="search_bar_desc">Slēpņi (GC kods, atslēgas vārds), Ceļotāji (TB kods)</string>
     <string name="search_coordinates">Koordinātas</string>
     <string name="search_coordinates_button">Meklēt pēc koordinātām</string>
