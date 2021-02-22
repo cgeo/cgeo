@@ -240,6 +240,7 @@
     <string name="warn_search_help_tb">Zadej kód sledovatelného předmětu. Například „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, napiš nějaký text do logu.</string>
     <string name="warn_load_images">c:geo nedokázalo načíst obrázky.</string>
+    <string name="warn_invalid_mapfile">Vybraný mapový soubor není platný mapový soubor Mapsforge, případně používá nepodporovanou verzi.\n(Aplikace c:geo v současnosti podporuje verzi 3 až 5)\n\nOff-line mapy nejsou k dispozici.</string>
     <string name="warn_pocket_query_select">Nevybrána žádná Pocket Query.</string>
     <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
     <string name="warn_invalid_character">Znak musí být písmeno nebo číslice</string>
