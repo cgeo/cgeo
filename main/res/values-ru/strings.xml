@@ -503,7 +503,6 @@
     <string name="settings_service_active">Активен</string>
     <string name="settings_navigation_disabled">Это приложение не установлено</string>
     <string name="init_signature">Подпись</string>
-    <string name="init_template_help">Такие строки как [NAME] будут заменены на актуальные значения при использовании шаблона.</string>
     <string name="init_signature_template_button">Вставить шаблон</string>
     <string name="init_signature_template_date">Дата</string>
     <string name="init_signature_template_time">Время</string>
@@ -703,7 +702,9 @@
     <string name="sendToCgeo_no_registration">Не удалось загрузить тайники. Срок регистрации на send2cgeo истек. Пожалуйста, зарегистрируйтесь в настройках.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Авторизовать c:geo</string>
     <string name="auth_check">Проверить аутентификацию</string>
@@ -1062,7 +1063,6 @@
     <string name="map_gm_autorotation">Авто-поворот карты</string>
     <string name="map_gm_autorotation_disable">Отключить автоповорот карты?\n\nВы можете включить его снова с помощью меню поворота карты</string>
     <!-- search -->
-    <string name="search_bar_hint">Поиск тайников</string>
     <string name="search_bar_desc">Тайники (геокод, название), код трекабла</string>
     <string name="search_coordinates">Координаты</string>
     <string name="search_coordinates_button">Поиск по координатам</string>
