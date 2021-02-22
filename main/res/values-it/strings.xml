@@ -536,7 +536,6 @@
     <string name="settings_service_active">Attiva</string>
     <string name="settings_navigation_disabled">Questa applicazione non sembra essere installata</string>
     <string name="init_signature">Firma</string>
-    <string name="init_template_help">Stringhe segnaposto come [NAME] saranno espanse più tardi, quando verrà utilizzato questo modello.</string>
     <string name="init_signature_template_button">Stringhe speciali</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Ora</string>
@@ -843,12 +842,11 @@
     <string name="persistablefolder_logfiles">File di log</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
     <string name="persistablefolder_spoilerimages">Immagini Spoiler</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Copia del contenuto di %1$s in %2$s</string>
-    <string name="folder_copy_progressbar_status_done">Copiato %1$s/%2$s, %3$s/%4$s</string>
     <string name="folder_move_progressbar_title">Spostamento del contenuto di %1$s in %2$s</string>
-    <string name="folder_move_progressbar_status_done">Spostato %1$s/%2$s, %3$s/%4$s</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Processo %1$s</string>
     <string name="folder_copy_finished_title">Contenuto della cartella copiato</string>
     <string name="folder_move_finished_title">Contenuto della cartella spostato</string>
     <string name="folder_copy_finished_dialog_message">Il contenuto della cartella %1$s è stato copiato in %2$s.\n\n%3$s di %4$s e %5$s di %6$s sono stati elaborati.</string>
@@ -1219,12 +1217,6 @@
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_dot_mode">Usa icone compatte</string>
     <string name="map_show_circles">Mostra area cache</string>
-    <string name="map_showc_ownfound">Visualizza cache tuoi o che hai trovato</string>
-    <string name="map_showc_disabled">Mostra cache disabilitati</string>
-    <string name="map_showc_archived">Mostra cache archiviati</string>
-    <string name="map_showwp_original">Mostra waypoint originali</string>
-    <string name="map_showwp_parking">Mostra waypoint dei parcheggi</string>
-    <string name="map_showwp_visited">Mostra waypoint visitati</string>
     <string name="map_show_track">Mostra traccia/percorso GPX</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
     <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
@@ -1243,9 +1235,7 @@
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
     <string name="quick_settings_info">Alcune impostazioni della mappa (impostazioni mappa, routing) sono state spostate nella nuova finestra popup \"Impostazioni rapide\".\nPuoi aprire questo popup usando l\'icona nel centro inferiore della mappa.</string>
-    <string name="map_show_in_map">Mostra sulla mappa</string>
     <!-- search -->
-    <string name="search_bar_hint">Cerca cache</string>
     <string name="search_bar_desc">Cache (geo code, parole chiave), oggetti Trackables (TB-code)</string>
     <string name="search_coordinates">Coordinate</string>
     <string name="search_coordinates_button">Cerca per coordinate</string>
