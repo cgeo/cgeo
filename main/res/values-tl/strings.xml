@@ -421,7 +421,6 @@
     <string name="settings_service_active">Gawing aktibo</string>
     <string name="settings_navigation_disabled">Ang app na ito ay mukhang hindi na-install</string>
     <string name="init_signature">Pirma</string>
-    <string name="init_template_help">Ang mga string ng placeholder tulad ng [NAME] ay mapalawak mamaya kung kailan ginamit ang template na ito.</string>
     <string name="init_signature_template_button">Magsingit ng template</string>
     <string name="init_signature_template_date">Petsa</string>
     <string name="init_signature_template_time">Oras</string>
@@ -552,7 +551,9 @@
     <string name="sendToCgeo_no_registration">pumalya sa pagdownload ng mga cache ang c:geo. Ang rehistrasyon para sa send2cgeo ay nag-expire. Mangyaring magparehistro sa mga setting.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Pahintulutan ang c:geo</string>
     <string name="auth_check">Suriin ang pagpapatunay</string>
@@ -803,7 +804,6 @@
     <string name="map_as_list">Ipakita bilang listahan</string>
     <string name="map_select_multiple_items">Pumili ng aytem</string>
     <!-- search -->
-    <string name="search_bar_hint">Magsaliksik tungkol sa mga cache</string>
     <string name="search_bar_desc">Ang mga cache na (geo na code, Keyboard), Mga trackable (TB na code)</string>
     <string name="search_coordinates">Ang mga koordinado</string>
     <string name="search_coordinates_button">Maghanap sa pamamagitan ng mga koordinado</string>
