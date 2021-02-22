@@ -530,7 +530,6 @@
     <string name="settings_service_active">有効</string>
     <string name="settings_navigation_disabled">未インストール</string>
     <string name="init_signature">署名</string>
-    <string name="init_template_help">テンプレート機能で[NAME]などのプレースホルダーは実際の文字や数字などに置換されます</string>
     <string name="init_signature_template_button">テンプレートを挿入</string>
     <string name="init_signature_template_date">日付</string>
     <string name="init_signature_template_time">時刻</string>
@@ -827,12 +826,11 @@
     <string name="persistablefolder_backup">バックアップ</string>
     <string name="persistablefolder_logfiles">ログファイル</string>
     <string name="persistablefolder_fieldnotes">フィールドノート</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">「%1$s」の内容を「%2$s」にコピーしています</string>
-    <string name="folder_copy_progressbar_status_done">%1$s/%2$sを%3$s/%4$sへコピーしました</string>
     <string name="folder_move_progressbar_title">「%1$s」の内容を「%2$s」に移動しています</string>
-    <string name="folder_move_progressbar_status_done">%1$s/%2$sを%3$s/%4$sへ移動しました</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">処理中:%1$s</string>
     <string name="folder_copy_finished_title">フォルダ内容がコピーされました</string>
     <string name="folder_move_finished_title">フォルダ内容が移動されました</string>
     <string name="folder_copy_finished_dialog_message">フォルダ「%1$s」の内容が「%2$s」にコピーされました。\n\n%3$s / %4$sと %5$s / %6$sが処理されました。</string>
@@ -1189,12 +1187,6 @@
     <string name="map_rotation">地図の回転</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
     <string name="map_show_circles">0.1マイル円を表示</string>
-    <string name="map_showc_ownfound">所有/発見したキャッシュを表示</string>
-    <string name="map_showc_disabled">一時停止中キャッシュを表示</string>
-    <string name="map_showc_archived">アーカイブ済みキャッシュを表示</string>
-    <string name="map_showwp_original">ウェイポイント(オリジナル)を表示</string>
-    <string name="map_showwp_parking">ウェイポイント(駐車場)を表示</string>
-    <string name="map_showwp_visited">ウェイポイント(訪問済み)を表示</string>
     <string name="map_show_track">GPXトラック/ルートを表示</string>
     <string name="init_hidewp">ウェイポイントを隠す</string>
     <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
@@ -1213,9 +1205,7 @@
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
     <string name="quick_settings_info">いくつか地図の設定(地図上の表示/非表示、ルート検索など)は新しい「クイック設定」に移動しました。\n地図の下部中央の歯車アイコンをタップすると開けます</string>
-    <string name="map_show_in_map">地図に表示</string>
     <!-- search -->
-    <string name="search_bar_hint">キャッシュ検索</string>
     <string name="search_bar_desc">キャッシュ(GCコード,キーワード), トラッカブル(TBコード)</string>
     <string name="search_coordinates">座標</string>
     <string name="search_coordinates_button">座標で検索</string>
