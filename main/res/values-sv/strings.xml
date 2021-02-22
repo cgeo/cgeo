@@ -513,7 +513,6 @@
     <string name="settings_service_active">Aktiv</string>
     <string name="settings_navigation_disabled">Appen verkar inte vara installerad</string>
     <string name="init_signature">Signatur</string>
-    <string name="init_template_help">Markörer som [NAME] kommer att utvidgas senare när mallen används.</string>
     <string name="init_signature_template_button">Infoga makro</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tid</string>
@@ -736,7 +735,9 @@
     <string name="sendToCgeo_no_registration">c:geo misslyckades med att hämta cacher. Registreringen för send2cgeo har upphört att gälla. Vänligen registrera dig på nytt i inställningarna.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Koppla c:geo mot Twitter</string>
     <string name="auth_check">Kolla autentisering</string>
@@ -1086,7 +1087,6 @@
     <string name="map_gm_autorotation">Rotera kartan automatiskt</string>
     <string name="map_gm_autorotation_disable">Inaktivera automatisk kartrotation?\n\nDu kan aktivera det igen med hjälp av menyn</string>
     <!-- search -->
-    <string name="search_bar_hint">Sök cache/TB</string>
     <string name="search_bar_desc">Cache (GC-kod, nyckelord), Trackable (TB-kod)</string>
     <string name="search_coordinates">Koordinater</string>
     <string name="search_coordinates_button">Sök med koordinater</string>
