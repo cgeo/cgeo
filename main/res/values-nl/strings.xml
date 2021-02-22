@@ -536,7 +536,7 @@
     <string name="settings_service_active">Actief</string>
     <string name="settings_navigation_disabled">Deze app lijkt niet geïnstalleerd te zijn</string>
     <string name="init_signature">Handtekening</string>
-    <string name="init_template_help">Samenvoeg velden zoals [NAME] worden later ingevuld bij gebruik van deze sjabloon.</string>
+    <string name="init_template_help">Sjabloonvelden - zoals [NAME] - worden gevuld met de betreffende tekst wanneer het sjabloon wordt gebruikt.</string>
     <string name="init_signature_template_button">Voeg template toe</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tijd</string>
@@ -843,12 +843,11 @@
     <string name="persistablefolder_logfiles">Logbestanden</string>
     <string name="persistablefolder_fieldnotes">Veld notities</string>
     <string name="persistablefolder_spoilerimages">Spoiler afbeeldingen</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Inhoud kopiëren van %1$s naar %2$s</string>
-    <string name="folder_copy_progressbar_status_done">Gekopieerd %1$s/%2$s, %3$s/%4$s</string>
     <string name="folder_move_progressbar_title">Inhoud verplaatsen van %1$s naar %2$s</string>
-    <string name="folder_move_progressbar_status_done">Verplaatst %1$s/%2$s, %3$s/%4$s</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Verwerk %1$s</string>
     <string name="folder_copy_finished_title">Map inhoud is gekopieerd</string>
     <string name="folder_move_finished_title">Map inhoud is verplaatst</string>
     <string name="folder_copy_finished_dialog_message">Inhoud van map %1$s is gekopieerd naar %2$s.\n\n%3$s van %4$s en %5$s van %6$s zijn verwerkt.</string>
@@ -1219,12 +1218,12 @@
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
     <string name="map_show_circles">Toon cirkels</string>
-    <string name="map_showc_ownfound">Eigen/gevonden caches tonen</string>
-    <string name="map_showc_disabled">Uitgeschakelde caches tonen</string>
-    <string name="map_showc_archived">Gearchiveerde caches tonen</string>
-    <string name="map_showwp_original">Originele waypoints tonen</string>
-    <string name="map_showwp_parking">Parkeer waypoints tonen</string>
-    <string name="map_showwp_visited">Bezochte waypoints tonen</string>
+    <string name="map_showc_ownfound">Eigen/gevonden caches</string>
+    <string name="map_showc_disabled">Uitgeschakelde caches</string>
+    <string name="map_showc_archived">Gearchiveerde caches</string>
+    <string name="map_showwp_original">Originele waypoints</string>
+    <string name="map_showwp_parking">Parkeer waypoints</string>
+    <string name="map_showwp_visited">Bezochte waypoints</string>
     <string name="map_show_track">GPX spoor/route tonen</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
@@ -1243,9 +1242,9 @@
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
     <string name="quick_settings_info">Enkele kaartinstellingen (kaartinstellingen, verbergen, routing) zijn verplaatst naar de nieuwe \"Snelle instellingen\" popup.\nJe kunt deze pop-up openen met behulp van het icoon in het midden onderin de kaart.</string>
-    <string name="map_show_in_map">Op kaart tonen</string>
+    <string name="map_show_in_map">Toon op kaart:</string>
     <!-- search -->
-    <string name="search_bar_hint">Zoek naar caches</string>
+    <string name="search_bar_hint">Caches/trackables zoeken</string>
     <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
     <string name="search_coordinates">Coördinaten</string>
     <string name="search_coordinates_button">Zoeken op coördinaten</string>
