@@ -26,6 +26,7 @@ import org.xml.sax.SAXException;
 
 public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
 
+    private static final String[] THEME_FILES = {"freizeitkarte-v5.zip", "fzk-outdoor-contrast-v5.zip", "fzk-outdoor-soft-v5.zip"};
     private static final MapDownloaderFreizeitkarte INSTANCE = new MapDownloaderFreizeitkarte();
 
     private MapDownloaderFreizeitkarte() {
@@ -97,9 +98,8 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
 
     @Override
     protected void onFollowup(final Activity activity, final Runnable callback) {
-        // @todo: check whether one of the theme files exist in theme folder and ask whether user wants to download it as well, if it does not exist yet
-        // FZK theme downloading needs to be implemented first
-        callback.run();
+        // check whether a FZK theme exists in theme folder and ask whether user wants to download it as well, if it does not exist yet
+        findOrDownload(activity, THEME_FILES, activity.getString(R.string.mapserver_freizeitkarte_themes_downloadurl), OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_FREIZEITKARTE_THEMES, callback);
     }
 
     @NonNull
