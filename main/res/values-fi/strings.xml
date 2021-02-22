@@ -533,7 +533,6 @@
     <string name="settings_service_active">Aktiivinen</string>
     <string name="settings_navigation_disabled">Tämä ohjelma ei näyttäisi olevan asennettu</string>
     <string name="init_signature">Allekirjoitus</string>
-    <string name="init_template_help">Muuttujat kuten [NAME] laajennetaan kun tätä mallia käytetään.</string>
     <string name="init_signature_template_button">Lisää malli</string>
     <string name="init_signature_template_date">Päivämäärä</string>
     <string name="init_signature_template_time">Aika</string>
@@ -834,12 +833,11 @@
     <string name="persistablefolder_backup">Varmuuskopiointi</string>
     <string name="persistablefolder_logfiles">Lokitiedostot</string>
     <string name="persistablefolder_fieldnotes">Kenttämerkinnät</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopioidaan kohteen %1$s sisältö kohteeseen %2$s</string>
-    <string name="folder_copy_progressbar_status_done">Kopioitu %1$s/%2$s, %3$s/%4$s</string>
     <string name="folder_move_progressbar_title">Siirretään kohteen %1$s sisältö kohteeseen %2$s</string>
-    <string name="folder_move_progressbar_status_done">Siirretty %1$s/%2$s, %3$s/%4$s</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Eteneminen %1$s</string>
     <string name="folder_copy_finished_title">Kansion sisältö kopioitu</string>
     <string name="folder_move_finished_title">Kansion sisältö siirretty</string>
     <string name="folder_copy_finished_dialog_message">Kansion %1$s sisältö kopioitiin kohteeseen %2$s.\n\n%3$s / %4$s ja %5$s / %6$s prosessoitiin.</string>
@@ -1207,12 +1205,6 @@
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
     <string name="map_show_circles">Näytä ympyrät</string>
-    <string name="map_showc_ownfound">Näytä omat/löydetyt kätköt</string>
-    <string name="map_showc_disabled">Näytä hyllytetyt kätköt</string>
-    <string name="map_showc_archived">Näytä arkistoidut kätköt</string>
-    <string name="map_showwp_original">Näytä alkuperäiset reittipisteet</string>
-    <string name="map_showwp_parking">Näytä pysäköintipisteet</string>
-    <string name="map_showwp_visited">Näytä vieraillut reittipisteet</string>
     <string name="map_show_track">Näytä GPX-rata/reitti</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
@@ -1231,9 +1223,7 @@
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <string name="quick_settings">Pika-asetukset</string>
     <string name="quick_settings_info">Jotkut kartta-asetukset (Kartan asetukset, piilota, reititys) on siirretty uuteen \"Pika-asetukset\"-ikkunaan\nVoit avata tämän ikkunan käyttämällä painiketta, joka sijaitsee karttanäkymän alareunassa keskellä.</string>
-    <string name="map_show_in_map">Näytä kartalla</string>
     <!-- search -->
-    <string name="search_bar_hint">Etsi kätköjä</string>
     <string name="search_bar_desc">Kätköt (GC-koodi, avainsana), reissaajat (TB-koodi)</string>
     <string name="search_coordinates">Koordinaatit</string>
     <string name="search_coordinates_button">Hae koordinaattien avulla</string>
