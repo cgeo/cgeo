@@ -536,7 +536,7 @@
     <string name="settings_service_active">Aktiv</string>
     <string name="settings_navigation_disabled">Diese App scheint nicht installiert zu sein</string>
     <string name="init_signature">Signatur</string>
-    <string name="init_template_help">Platzhalter-Zeichenfolgen wie [NAME] werden später erweitert, wenn diese Vorlage verwendet wird.</string>
+    <string name="init_template_help">Platzhalter - wie [NAME] - werden mit dem entsprechenden Text gefüllt, wenn die Vorlage genutzt wird.</string>
     <string name="init_signature_template_button">Platzhalter einfügen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Zeit</string>
@@ -843,12 +843,11 @@
     <string name="persistablefolder_logfiles">Logdateien</string>
     <string name="persistablefolder_fieldnotes">Feldnotizen</string>
     <string name="persistablefolder_spoilerimages">Hinweisbilder</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopiere Inhalt von %1$s nach %2$s</string>
-    <string name="folder_copy_progressbar_status_done">%1$s/%2$s, %3$s/%4$s kopiert</string>
     <string name="folder_move_progressbar_title">Verschiebe Inhalt von %1$s nach %2$s</string>
-    <string name="folder_move_progressbar_status_done">%1$s/%2$s, %3$s/%4$s verschoben</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Verarbeite %1$s</string>
     <string name="folder_copy_finished_title">Ordnerinhalte wurden kopiert</string>
     <string name="folder_move_finished_title">Ordnerinhalte wurden verschoben</string>
     <string name="folder_copy_finished_dialog_message">Inhalt des Ordners %1$s wurde nach %2$s kopiert.\n\n%3$s von %4$s und %5$s von %6$s wurden verarbeitet.</string>
@@ -1219,12 +1218,12 @@
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_show_circles">Kreise anzeigen</string>
-    <string name="map_showc_ownfound">Eigene/gefundene Caches anzeigen</string>
-    <string name="map_showc_disabled">Deaktivierte Caches anzeigen</string>
-    <string name="map_showc_archived">Archivierte Caches anzeigen</string>
-    <string name="map_showwp_original">Originale Wegpunkte anzeigen</string>
-    <string name="map_showwp_parking">Parkplatz-Wegpunkte anzeigen</string>
-    <string name="map_showwp_visited">Besuchte Wegpunkte anzeigen</string>
+    <string name="map_showc_ownfound">Eigene/gefundene Caches</string>
+    <string name="map_showc_disabled">Deaktivierte Caches</string>
+    <string name="map_showc_archived">Archivierte Caches</string>
+    <string name="map_showwp_original">Originale Wegpunkte</string>
+    <string name="map_showwp_parking">Park-Wegpunkte</string>
+    <string name="map_showwp_visited">Besuchte Wegpunkte</string>
     <string name="map_show_track">GPX Track/Route anzeigen</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
@@ -1243,9 +1242,9 @@
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
     <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
-    <string name="map_show_in_map">In Karte anzeigen</string>
+    <string name="map_show_in_map">Zeige auf Karte:</string>
     <!-- search -->
-    <string name="search_bar_hint">Suche nach Caches</string>
+    <string name="search_bar_hint">Caches/Trackables suchen</string>
     <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
     <string name="search_coordinates">Koordinaten</string>
     <string name="search_coordinates_button">Suche mit Koordinaten</string>
