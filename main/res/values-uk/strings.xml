@@ -515,7 +515,6 @@
     <string name="settings_service_active">активний</string>
     <string name="settings_navigation_disabled">Здається, цей додаток не встановлено</string>
     <string name="init_signature">підпис</string>
-    <string name="init_template_help">Рядки заповнювача, такі [NAME] будуть розширені пізніше, коли використовується цей шаблон.</string>
     <string name="init_signature_template_button">вставити шаблон</string>
     <string name="init_signature_template_date">дата</string>
     <string name="init_signature_template_time">Час</string>
@@ -755,7 +754,9 @@
     <string name="sendToCgeo_no_registration">c: geo не вдалося завантажити кеші. Термін реєстрації на send2cgeo закінчився. Будь ласка, зареєструйтесь у налаштуваннях.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Авторизувати c:geo</string>
     <string name="auth_check">Перевірте автентичність</string>
@@ -1065,12 +1066,6 @@
     <string name="map_rotation">Обертання мапи</string>
     <string name="map_dot_mode">Використовуйте компактні значки</string>
     <string name="map_show_circles">Показати кола</string>
-    <string name="map_showc_ownfound">Показати власні / знайдені кеші</string>
-    <string name="map_showc_disabled">Показати відключені кеші</string>
-    <string name="map_showc_archived">Показати заархівовані кеші</string>
-    <string name="map_showwp_original">Показати оригінальні точки</string>
-    <string name="map_showwp_parking">Показати оригінальні точки</string>
-    <string name="map_showwp_visited">Показати оригінальні точки</string>
     <string name="map_show_track">Відображення маршруту GPX</string>
     <string name="init_hidewp">сховати шляхові точки</string>
     <string name="init_summary_hidewp_original">Сховати оригінальні маршрутні точки на карті</string>
@@ -1086,9 +1081,7 @@
     <string name="map_gm_autorotation">маршрутизація</string>
     <string name="map_gm_autorotation_disable">Відключити автоповорот карти?\n\nМожете знову включити її в меню обертання карти</string>
     <string name="quick_settings">Швидкі налаштування</string>
-    <string name="map_show_in_map">Показати на мапі</string>
     <!-- search -->
-    <string name="search_bar_hint">Пошук кешу</string>
     <string name="search_bar_desc">Кеші (гео-код, ключове слово), трекбежі (TB код)</string>
     <string name="search_coordinates">Координати</string>
     <string name="search_coordinates_button">Пошук за координатами</string>
