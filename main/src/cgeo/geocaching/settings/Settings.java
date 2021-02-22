@@ -1624,8 +1624,10 @@ public class Settings {
         }
     }
 
-    /** checks whether legacy folder needs to be migrated
+    /**
+     * checks whether legacy folder needs to be migrated
      * (legacy value is set and not yet migrated)
+     * (used by the installation / migration wizard)
      **/
     public static boolean legacyFolderNeedsToBeMigrated(@StringRes final int newPrefKey) {
         for (String legacyKey : getLegacyPreferenceKeysFor(newPrefKey)) {
