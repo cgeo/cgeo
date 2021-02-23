@@ -1609,6 +1609,8 @@ public class Settings {
                 return new String[]{"gpxExportDir", "gpxImportDir"};
             case R.string.pref_persistableuri_track:
                 return new String[]{"pref_trackfile"};
+            case R.string.pref_persistablefolder_offlinemapthemes:
+                return new String[]{"renderthemepath"};
             default:
                 return new String[0];
         }
