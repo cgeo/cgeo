@@ -1886,6 +1886,7 @@
     <string name="switch_default">(výchozí)</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
+    <string name="show_all">Zobrazit vše</string>
     <string name="routingmode_straight">Přímé</string>
     <string name="routingmode_walk">Chůze</string>
     <string name="routingmode_bike">Kolo</string>
