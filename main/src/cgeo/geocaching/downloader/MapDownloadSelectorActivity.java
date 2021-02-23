@@ -7,6 +7,7 @@ import cgeo.geocaching.databinding.MapdownloaderItemBinding;
 import cgeo.geocaching.models.OfflineMap;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
@@ -232,6 +233,13 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         final ArrayAdapter<OfflineMap.OfflineMapTypeDescriptor> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerData);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.downloaderType.setAdapter(spinnerAdapter);
+
+        final OfflineMap.OfflineMapTypeDescriptor descriptor = OfflineMap.OfflineMapType.fromTypeId(Settings.getMapDownloaderSource());
+        if (descriptor != null) {
+            final int spinnerPosition = spinnerAdapter.getPosition(descriptor);
+            binding.downloaderType.setSelection(spinnerPosition);
+        }
+
         binding.downloaderType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
@@ -277,6 +285,8 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
                 finish();
             }
         });
+
+        Settings.setMapDownloaderSource(current.offlineMapType.id);
     }
 
     public List<OfflineMap> getQueries() {

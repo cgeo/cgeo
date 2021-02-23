@@ -4,11 +4,11 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.AbstractDownloader;
 import cgeo.geocaching.downloader.CompanionFileUtils;
-import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarte;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarteThemes;
 import cgeo.geocaching.downloader.MapDownloaderMapsforge;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
+import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
 import cgeo.geocaching.utils.CalendarUtils;
 
 import android.net.Uri;
@@ -119,6 +119,16 @@ public class OfflineMap {
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_FREIZEITKARTE, MapDownloaderFreizeitkarte.getInstance(), R.string.mapserver_freizeitkarte_name));
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_FREIZEITKARTE_THEMES, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name));
             }
+        }
+
+        public static OfflineMapTypeDescriptor fromTypeId(final int id) {
+            buildOfflineMapTypesList();
+            for (OfflineMapTypeDescriptor descriptor : offlineMapTypes) {
+                if (descriptor.type.id == id) {
+                    return descriptor;
+                }
+            }
+            return null;
         }
     }
 
