@@ -8,6 +8,7 @@
 <ul>
 <li>Fix: Adapt to website change for \"spotted by\" trackables</li>
 <li>Fix: Show actual cache marker in OSM map multi-marker popup</li>
+<li>Fix: Prevent adding duplicate images when using Google Photos</li>
 </ul>
 
 
