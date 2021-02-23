@@ -30,7 +30,7 @@ public class MapDownloaderFreizeitkarteThemes extends AbstractDownloader {
     private static final MapDownloaderFreizeitkarteThemes INSTANCE = new MapDownloaderFreizeitkarteThemes();
 
     private MapDownloaderFreizeitkarteThemes() {
-        super(OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_FREIZEITKARTE_THEMES, R.string.mapserver_freizeitkarte_downloadurl, R.string.mapserver_freizeitkarte_themes_name, R.string.mapserver_freizeitkarte_info, R.string.mapserver_freizeitkarte_projecturl, R.string.mapserver_freizeitkarte_likeiturl, PersistableFolder.OFFLINE_MAP_THEMES);
+        super(OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_FREIZEITKARTE_THEMES, R.string.mapserver_freizeitkarte_downloadurl, R.string.mapserver_freizeitkarte_themes_name, R.string.mapserver_freizeitkarte_themes_info, R.string.mapserver_freizeitkarte_projecturl, R.string.mapserver_freizeitkarte_likeiturl, PersistableFolder.OFFLINE_MAP_THEMES);
         this.forceExtension = ".zip";
     }
 

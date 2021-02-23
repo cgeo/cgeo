@@ -28,7 +28,6 @@ abstract class AbstractMapDownloader extends AbstractDownloader {
         MapsforgeMapProvider.getInstance().updateOfflineMaps(result);
     }
 
-
     // check if any of the given file exists in the given path
     // if none exists: confirm to & download first
     protected void findOrDownload(final Activity activity, final String[] filenames, final String baseUrl, final OfflineMap.OfflineMapType offlineMapType, final Runnable callback) {

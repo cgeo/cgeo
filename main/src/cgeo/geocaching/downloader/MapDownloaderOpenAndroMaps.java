@@ -63,7 +63,7 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
     @Override
     protected void onFollowup(final Activity activity, final Runnable callback) {
         // check whether Elevate.zip exists in theme folder and ask whether user wants to download it as well, if it does not exist yet
-        findOrDownload(activity, THEME_FILES, activity.getString(R.string.mapserver_elevate_downloadurl), OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_ELEVATE, callback);
+        findOrDownload(activity, THEME_FILES, activity.getString(R.string.mapserver_openandromaps_themes_downloadurl), OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_OPENANDROMAPS_THEMES, callback);
     }
 
     @NonNull
