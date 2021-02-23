@@ -27,6 +27,7 @@
 <li>New: Set user-defined coords for waypoints on GPX import even when original waypoint has no coords</li>
 <li>New: Add support for cache attributes in locus connector</li>
 <li>New: Export and import UDC with empty coordinates</li>
+<li>New: Add toggle to pocket query list on mainscreen to display all/downloadable pocket queries only</li>
 </ul>
 
 </div>]]></Data>
