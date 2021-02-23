@@ -844,7 +844,10 @@
     <string name="persistablefolder_fieldnotes">Veld notities</string>
     <string name="persistablefolder_spoilerimages">Spoiler afbeeldingen</string>
     <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s voltooid</string>
+    <string name="folder_process_status_currentfile">%1$s verwerken</string>
     <!-- FolderUtils: synchronize -->
+    <string name="folder_synchronize_to_internal_progressbar_title">Synchroniseer inhoud van %1$s naar interne opslag</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Inhoud kopiëren van %1$s naar %2$s</string>
     <string name="folder_move_progressbar_title">Inhoud verplaatsen van %1$s naar %2$s</string>
@@ -1890,6 +1893,7 @@
     <string name="mapserver_mapsforge_info">Basis kaarten, geen kaart thema\'s nodig</string>
     <string name="mapserver_openandromaps_info">Gedetailleerde kaarten, vereisen thema \"Elevate\"</string>
     <string name="mapserver_elevate_info">Gedetailleerd kaartthema</string>
+    <string name="mapserver_freizeitkarte_info">Gedetailleerde kaarten, vereisen een van de \"freizeitkarte\" kaartthema\'s.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
