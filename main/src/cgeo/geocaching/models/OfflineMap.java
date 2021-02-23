@@ -4,7 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.AbstractDownloader;
 import cgeo.geocaching.downloader.CompanionFileUtils;
-import cgeo.geocaching.downloader.MapDownloaderElevate;
+import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarte;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarteThemes;
 import cgeo.geocaching.downloader.MapDownloaderMapsforge;
@@ -83,7 +83,7 @@ public class OfflineMap {
         // id values must not be changed as they are referenced in the database & download companion files
         MAP_DOWNLOAD_TYPE_MAPSFORGE(1),
         MAP_DOWNLOAD_TYPE_OPENANDROMAPS(2),
-        MAP_DOWNLOAD_TYPE_ELEVATE(3),
+        MAP_DOWNLOAD_TYPE_OPENANDROMAPS_THEMES(3),
         MAP_DOWNLOAD_TYPE_FREIZEITKARTE(4),
         MAP_DOWNLOAD_TYPE_FREIZEITKARTE_THEMES(5);
 
@@ -115,7 +115,7 @@ public class OfflineMap {
             if (offlineMapTypes.size() == 0) {
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_MAPSFORGE, MapDownloaderMapsforge.getInstance(), R.string.mapserver_mapsforge_name));
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_OPENANDROMAPS, MapDownloaderOpenAndroMaps.getInstance(), R.string.mapserver_openandromaps_name));
-                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_ELEVATE, MapDownloaderElevate.getInstance(), R.string.mapserver_elevate_name));
+                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_OPENANDROMAPS_THEMES, MapDownloaderOpenAndroMapsThemes.getInstance(), R.string.mapserver_openandromaps_themes_name));
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_FREIZEITKARTE, MapDownloaderFreizeitkarte.getInstance(), R.string.mapserver_freizeitkarte_name));
                 offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_FREIZEITKARTE_THEMES, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name));
             }

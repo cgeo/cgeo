@@ -233,9 +233,9 @@
     <string translatable="false" name="mapserver_openandromaps_likeiturl">https://www.openandromaps.org/projektkosten</string>
     <string translatable="false" name="mapserver_openandromaps_projecturl">https://www.openandromaps.org/</string>
 
-    <string translatable="false" name="mapserver_elevate_name">OpenAndroMaps Theme</string>
-    <string translatable="false" name="mapserver_elevate_downloadurl">https://www.openandromaps.org/wp-content/users/tobias/</string>
-    <string translatable="false" name="mapserver_elevate_updatecheckurl">https://www.openandromaps.org/kartenlegende/elevation-hike-theme</string>
+    <string translatable="false" name="mapserver_openandromaps_themes_name">OpenAndroMaps Theme</string>
+    <string translatable="false" name="mapserver_openandromaps_themes_downloadurl">https://www.openandromaps.org/wp-content/users/tobias/</string>
+    <string translatable="false" name="mapserver_openandromaps_themes_updatecheckurl">https://www.openandromaps.org/kartenlegende/elevation-hike-theme</string>
 
     <string translatable="false" name="mapserver_freizeitkarte_name">Freizeitkarte</string>
     <string translatable="false" name="mapserver_freizeitkarte_downloadurl">http://repository.freizeitkarte-osm.de/repository_freizeitkarte_android.xml</string>

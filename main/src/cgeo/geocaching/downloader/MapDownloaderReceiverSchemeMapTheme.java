@@ -23,8 +23,8 @@ class MapDownloaderReceiverSchemeMapTheme extends AbstractActivity {
         // check for OpenAndroMaps
         if (host.equals("download.openandromaps.org") && path.startsWith("/themes/") && path.endsWith(".zip")) {
             // no remapping, as they have themes only on their homepage, not on their ftp site
-            final Uri newUri = Uri.parse(getString(R.string.mapserver_elevate_downloadurl) + path.substring(8));
-            MapDownloaderUtils.triggerDownload(this, OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_ELEVATE.id, newUri, "", System.currentTimeMillis(), this::callback);
+            final Uri newUri = Uri.parse(getString(R.string.mapserver_openandromaps_themes_downloadurl) + path.substring(8));
+            MapDownloaderUtils.triggerDownload(this, OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_OPENANDROMAPS_THEMES.id, newUri, "", System.currentTimeMillis(), this::callback);
         } else {
             // generic map theme download - not yet supported
             Log.w("MapDownloaderReceiverSchemeMapTheme: Received map theme download intent from unknown source: " + uri.toString());

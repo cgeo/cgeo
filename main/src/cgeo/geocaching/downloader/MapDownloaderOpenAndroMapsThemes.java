@@ -15,19 +15,19 @@ import androidx.annotation.NonNull;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class MapDownloaderElevate extends AbstractDownloader {
+public class MapDownloaderOpenAndroMapsThemes extends AbstractDownloader {
 
     private static final Pattern PATTERN_LAST_UPDATED_DATE = Pattern.compile("<a href=\"https:\\/\\/www\\.openandromaps\\.org\\/wp-content\\/users\\/tobias\\/version\\.txt\">[0-9]\\.[0-9]\\.[0-9]<\\/a><\\/strong>, ([0-9]{1,2})\\.([0-9]{1,2})\\.([0-9]{2}) ");
-    private static final MapDownloaderElevate INSTANCE = new MapDownloaderElevate();
+    private static final MapDownloaderOpenAndroMapsThemes INSTANCE = new MapDownloaderOpenAndroMapsThemes();
 
-    private MapDownloaderElevate() {
-        super(OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_ELEVATE, R.string.mapserver_elevate_updatecheckurl, R.string.mapserver_elevate_name, R.string.mapserver_elevate_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl, PersistableFolder.OFFLINE_MAP_THEMES);
+    private MapDownloaderOpenAndroMapsThemes() {
+        super(OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_OPENANDROMAPS_THEMES, R.string.mapserver_openandromaps_themes_updatecheckurl, R.string.mapserver_openandromaps_themes_name, R.string.mapserver_openandromaps_themes_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl, PersistableFolder.OFFLINE_MAP_THEMES);
         this.forceExtension = ".zip";
     }
 
     @Override
     protected void analyzePage(final Uri uri, final List<OfflineMap> list, final String page) {
-        final OfflineMap file = checkUpdateFor(page, CgeoApplication.getInstance().getString(R.string.mapserver_elevate_downloadurl), "Elevate.zip");
+        final OfflineMap file = checkUpdateFor(page, CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl), "Elevate.zip");
         if (file != null) {
             list.add(file);
         }
@@ -38,7 +38,7 @@ public class MapDownloaderElevate extends AbstractDownloader {
         final MatcherWrapper matchDate = new MatcherWrapper(PATTERN_LAST_UPDATED_DATE, page);
         if (matchDate.find()) {
             final String date = "20" + matchDate.group(3) + "-" + matchDate.group(2) + "-" + matchDate.group(1);
-            return new OfflineMap("Elevate", Uri.parse(CgeoApplication.getInstance().getString(R.string.mapserver_elevate_downloadurl) + "Elevate.zip"), false, date, "", offlineMapType);
+            return new OfflineMap("Elevate", Uri.parse(CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl) + "Elevate.zip"), false, date, "", offlineMapType);
         }
         return null;
     }
@@ -47,8 +47,8 @@ public class MapDownloaderElevate extends AbstractDownloader {
     @Override
     protected String getUpdatePageUrl(final String downloadPageUrl) {
         final String compare = downloadPageUrl.endsWith("/") ? downloadPageUrl : downloadPageUrl + "/";
-        final String downloadUrl = CgeoApplication.getInstance().getString(R.string.mapserver_elevate_downloadurl);
-        final String updateUrl = CgeoApplication.getInstance().getString(R.string.mapserver_elevate_updatecheckurl);
+        final String downloadUrl = CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl);
+        final String updateUrl = CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_updatecheckurl);
         if (compare.startsWith(downloadUrl)) {
             final String result = updateUrl + compare.substring(downloadUrl.length());
             return result.endsWith("/") ? result : result + "/";
@@ -67,7 +67,7 @@ public class MapDownloaderElevate extends AbstractDownloader {
     }
 
     @NonNull
-    public static MapDownloaderElevate getInstance() {
+    public static MapDownloaderOpenAndroMapsThemes getInstance() {
         return INSTANCE;
     }
 }
