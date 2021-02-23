@@ -844,7 +844,10 @@
     <string name="persistablefolder_fieldnotes">Feldnotizen</string>
     <string name="persistablefolder_spoilerimages">Hinweisbilder</string>
     <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fertig</string>
+    <string name="folder_process_status_currentfile">Prozess %1$s</string>
     <!-- FolderUtils: synchronize -->
+    <string name="folder_synchronize_to_internal_progressbar_title">Inhalt von %1$s mit dem internen Speicher synchronisieren</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopiere Inhalt von %1$s nach %2$s</string>
     <string name="folder_move_progressbar_title">Verschiebe Inhalt von %1$s nach %2$s</string>
@@ -1831,6 +1834,7 @@
     <string name="switch_default">(Standard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
+    <string name="show_all">Alle zeigen</string>
     <string name="routingmode_straight">Direkt</string>
     <string name="routingmode_walk">Gehen</string>
     <string name="routingmode_bike">Fahrrad</string>
@@ -1890,6 +1894,7 @@
     <string name="mapserver_mapsforge_info">Basiskarten, keine Darstellungsdatei erforderlich</string>
     <string name="mapserver_openandromaps_info">Detaillierte Karten, erfordern Kartendarstellung \"Elevate\"</string>
     <string name="mapserver_elevate_info">Detaillierte Kartendarstellung</string>
+    <string name="mapserver_freizeitkarte_info">Detaillierte Karten, benötigen eines der \"Freizeitkarte\"-Kartenthemen.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
