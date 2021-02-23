@@ -168,6 +168,11 @@ public enum PersistableFolder {
         return result;
     }
 
+    /** Returns whether this persistable folder currently points to a legacy (=FILE-based) folder */
+    public boolean isLegacy() {
+        return getFolder().getBaseType() == Folder.FolderType.FILE;
+    }
+
     public boolean needsWrite() {
         return needsWrite;
     }

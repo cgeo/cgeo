@@ -87,7 +87,6 @@
     <string translatable="false" name="pref_mapsource">mapsource</string>
     <string translatable="false" name="pref_maplanguage">maplanguage</string>
     <string translatable="false" name="pref_mapRotation">mapRotation</string>
-    <string translatable="false" name="pref_renderthemepath">renderthemepath</string>
     <string translatable="false" name="pref_showwaypointsthreshold">waypointsthreshold</string>
     <string translatable="false" name="pref_zoomincludingwaypoints">zoomincludingwaypoints</string>
     <string translatable="false" name="pref_brouterDistanceThreshold">brouterDistanceThreshold</string>
