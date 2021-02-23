@@ -191,8 +191,10 @@ public class ImageActivityHelper {
         }
 
         final List<Image> result = new ArrayList<>();
+        Uri singleUri = null;
 
         if (data.getData() != null) {
+            singleUri = data.getData();
             final Image img = getImageFromUri(data.getData(), intentContextData.maxXY, intentContextData.forceCopy, true);
             if (img != null) {
                 result.add(img);
@@ -202,9 +204,14 @@ public class ImageActivityHelper {
 
         if (data.getClipData() != null) {
             for (int idx = 0; idx < data.getClipData().getItemCount(); idx++) {
-                final Image img = getImageFromUri(data.getClipData().getItemAt(idx).getUri(), intentContextData.maxXY, intentContextData.forceCopy, true);
-                if (img != null) {
-                    result.add(img);
+                final Uri uri = data.getClipData().getItemAt(idx).getUri();
+                // compare with "singleUri" to prevent duplicate image adding
+                // (in some cases on multiselect, "getData()" is filled with first entry of "getClipData()" e.g. when Google Photos is used)
+                if (uri != null && !uri.equals(singleUri)) {
+                    final Image img = getImageFromUri(uri, intentContextData.maxXY, intentContextData.forceCopy, true);
+                    if (img != null) {
+                        result.add(img);
+                    }
                 }
             }
         }
