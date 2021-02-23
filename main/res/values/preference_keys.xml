@@ -155,6 +155,7 @@
     <string translatable="false" name="pref_version">version</string>
     <string translatable="false" name="pref_usecompass">usecompass</string>
     <string translatable="false" name="pref_mapfile">mfmapfile</string>
+    <string translatable="false" name="pref_mapdownloader_source">mapdownloader_source</string>
     <string translatable="false" name="pref_autotarget_individualroute">autotarget_individualroute</string>
     <string translatable="false" name="pref_memberstatus">memberstatus</string>
     <string translatable="false" name="pref_coordinputformat">coordinputformat</string>
