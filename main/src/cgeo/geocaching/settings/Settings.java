@@ -489,6 +489,10 @@ public class Settings {
         return getBoolean(R.string.pref_connectorECActive, false);
     }
 
+    public static boolean isLCConnectorActive() {
+        return getBoolean(R.string.pref_connectorLCActive, false);
+    }
+
     public static boolean isSUConnectorActive() {
         return getBoolean(R.string.pref_connectorSUActive, false);
     }
