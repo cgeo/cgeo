@@ -96,7 +96,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
         }
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
-        final Geocache cache = LCApi.searchByGeoCode(geocode);
+        final Geocache cache = LCApi.searchByGUID(guid);
 
         return cache != null ? new SearchResult(cache) : null;
     }
@@ -240,6 +240,6 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public String getCreateAccountUrl() {
-        return "https://extremcaching.com/component/comprofiler/registers";
+        return "https://www.geocaching.com/account/join";
     }
 }

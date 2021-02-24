@@ -24,7 +24,6 @@ import cgeo.geocaching.utils.Log;
 
 public class LCLogin extends AbstractLogin {
 
-    private String sessionId = null;
     private Boolean fake_login = true;
 
     private LCLogin() {
@@ -110,9 +109,7 @@ public class LCLogin extends AbstractLogin {
             try {
                 final JsonNode json = JsonUtils.reader.readTree(data);
 
-                final String sid = json.get("sid").asText();
-                if (!StringUtils.isBlank(sid)) {
-                    sessionId = sid;
+                if (fake_login) {
                     setActualLoginStatus(true);
                     setActualUserName(json.get("username").asText());
                     setActualCachesFound(json.get("found").asInt());
@@ -135,15 +132,6 @@ public class LCLogin extends AbstractLogin {
 
     @Override
     protected void resetLoginStatus() {
-        sessionId = null;
         setActualLoginStatus(false);
     }
-
-    public String getSessionId() {
-        if (!StringUtils.isBlank(sessionId) || login() == StatusCode.NO_ERROR) {
-            return sessionId;
-        }
-        return StringUtils.EMPTY;
-    }
-
 }
