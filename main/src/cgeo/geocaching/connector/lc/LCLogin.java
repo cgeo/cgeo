@@ -24,7 +24,7 @@ import cgeo.geocaching.utils.Log;
 
 public class LCLogin extends AbstractLogin {
 
-    private Boolean fake_login = true;
+    private Boolean fakeLogin = true;
 
     private LCLogin() {
         // singleton
@@ -61,7 +61,7 @@ public class LCLogin extends AbstractLogin {
 
         String loginData = "";
 
-        if (fake_login) {
+        if (fakeLogin) {
             loginData = "faking a good login"; // TODO real login disabled by baiti
         } else {
             loginData = Network.getResponseData(Network.postRequest("https://", params));
@@ -109,7 +109,7 @@ public class LCLogin extends AbstractLogin {
             try {
                 final JsonNode json = JsonUtils.reader.readTree(data);
 
-                if (fake_login) {
+                if (fakeLogin) {
                     setActualLoginStatus(true);
                     setActualUserName(json.get("username").asText());
                     setActualCachesFound(json.get("found").asInt());
