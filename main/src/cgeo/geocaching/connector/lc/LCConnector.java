@@ -100,6 +100,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
 
         return cache != null ? new SearchResult(cache) : null;
     }
+
     @Override
     @NonNull
     public SearchResult searchByViewport(@NonNull final Viewport viewport) {

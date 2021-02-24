@@ -30,6 +30,7 @@ public enum StatusCode {
     MAINTENANCE(R.string.err_maintenance),
     LOG_POST_ERROR(R.string.err_log_post_failed),
     LOG_POST_ERROR_EC(R.string.err_log_post_failed_ec),
+    LOG_POST_ERROR_LC(R.string.err_log_post_failed_lc),
     LOG_POST_ERROR_GK(R.string.err_log_post_failed_gk),
     NO_LOG_TEXT(R.string.warn_log_text_fill),
     NOT_LOGGED_IN(R.string.init_login_popup_failed),

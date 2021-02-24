@@ -61,7 +61,8 @@ public class LCLogin extends AbstractLogin {
 
         final Parameters params = new Parameters("user", credentials.getUserName(), "pass", credentials.getPassword());
 
-        String loginData = "";
+        //final String loginData = Network.getResponseData(Network.postRequest("https://", params));
+        final String loginData = "faking a good login"; // TODO baiti
 
         if (fakeLogin) {
             loginData = "faking a good login"; // TODO real login disabled by baiti
