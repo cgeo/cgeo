@@ -219,7 +219,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(this);
         setWebsite(R.string.pref_fakekey_ec_website, ECConnector.getInstance().getHost());
-        getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isLCConnectorActive()));
+        getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isECConnectorActive()));
 
         getPreference(R.string.pref_connectorLCActive).setOnPreferenceChangeListener(this);
         setWebsite(R.string.pref_fakekey_lc_website, LCConnector.getInstance().getHost());
