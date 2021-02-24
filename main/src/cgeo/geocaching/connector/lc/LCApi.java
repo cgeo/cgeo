@@ -101,6 +101,7 @@ final class LCApi {
         params.add("longitude", String.valueOf(center.getLongitude()));
         try {
             final Response response = apiRequest("GCSearch", params).blockingGet();
+            Log.e(response.toString());
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
