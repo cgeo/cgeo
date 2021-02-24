@@ -844,7 +844,10 @@
     <string name="persistablefolder_fieldnotes">Notas de Campo</string>
     <string name="persistablefolder_spoilerimages">Imagens spoiler</string>
     <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s concluídos</string>
+    <string name="folder_process_status_currentfile">A processar %1$s</string>
     <!-- FolderUtils: synchronize -->
+    <string name="folder_synchronize_to_internal_progressbar_title">Sincronizar conteúdo de %1$s para o armazenamento interno</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">A copiar o conteúdo de %1$s para %2$s</string>
     <string name="folder_move_progressbar_title">A mover o conteúdo de %1$s para %2$s</string>
@@ -1826,6 +1829,7 @@
     <string name="switch_default">(padrão)</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+    <string name="show_all">Mostrar tudo</string>
     <string name="routingmode_straight">Linha recta</string>
     <string name="routingmode_walk">Caminhar</string>
     <string name="routingmode_bike">Bicicleta</string>
@@ -1885,6 +1889,7 @@
     <string name="mapserver_mapsforge_info">Mapas básicos, nenhum tema de mapa necessário</string>
     <string name="mapserver_openandromaps_info">Mapas detalhados, requer o tema do mapa \"Elevado\"</string>
     <string name="mapserver_elevate_info">Tema de mapa detalhado</string>
+    <string name="mapserver_freizeitkarte_info">Mapas detalhados, exigem um dos temas de mapa \"freizeitkarte\".</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
@@ -1912,6 +1917,7 @@
     <string name="wizard_permissions_folder_title">Definir pasta: %s</string>
     <string name="wizard_basefolder_request_explanation">O c:geo precisa de uma pasta local para guardar dados como ficheiros GPX, cópias de segurança, notas pessoais e ficheiros de registo. Por predefinição, esses ficheiros são guardados em sub-pastas da chamada \"pasta base\". Seleccione ou crie essa pasta na próxima etapa.\n\nSe tiver actualizado o c:geo de uma versão anterior, seleccione a pasta existente \"cgeo\" no nível de raíz do armazenamento do dispositivo.\nDica: Poderá ter, em primeiro lugar, de retirar a ocultação do armazenamento interno do seu dispositivo no ecrã de selecção de ficheiro que aparecerá a seguir.</string>
     <string name="wizard_mapfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar ficheiros de mapa offline. Seleccione ou crie essa pasta na próxima etapa.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar os ficheiros de temas para os mapas offline. Seleccione ou crie essa pasta na próxima etapa.</string>
     <string name="wizard_gpxfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar os ficheiros GPX (ex: para importar / exportar caches ou percursos). Seleccione ou crie essa pasta na próxima etapa.</string>
     <string name="wizard_platforms_title">Configurar serviços</string>
     <string name="wizard_platforms_intro">Para encontrar geocaches com o c:geo, precisa de uma conta num serviço de geocaching suportado pelo c:geo.\nSeleccione abaixo o serviço pretendido, seja para iniciar a sessão com a sua conta ou para criar uma nova conta.</string>
@@ -1930,6 +1936,8 @@
     <string name="wizard_status_location_permission">Permissão de localização</string>
     <string name="wizard_status_basefolder">Pasta base</string>
     <string name="wizard_status_platform">Serviços de geocaching</string>
+    <string name="wizard_not_now">Agora não</string>
+    <string name="wizard_skip_wizard_warning">O c:geo pode não funcionar como esperado até que a configuração esteja concluída. Dependendo das configurações em falta, o c:geo pode não ser capaz de ler/armazenar dados como mapas offline, geocaches, ficheiros de registos, etc...\n\nQuando achar que é o momento para finalizar a configuração, pode fazê-lo escolhendo a opção \"Assistente de configuração\" no menu principal ou reiniciando o c:geo.</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ignorar</string>
