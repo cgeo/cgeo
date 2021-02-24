@@ -96,7 +96,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
         }
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
-        final Geocache cache = LCApi.searchByGUID(guid);
+        final Geocache cache = LCApi.searchByGeocode(guid);
 
         return cache != null ? new SearchResult(cache) : null;
     }
