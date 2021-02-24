@@ -14,6 +14,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
@@ -24,6 +25,7 @@ import cgeo.geocaching.utils.Log;
 public class LCLogin extends AbstractLogin {
 
     private String sessionId = null;
+    private Boolean fake_login = true;
 
     private LCLogin() {
         // singleton
@@ -58,9 +60,13 @@ public class LCLogin extends AbstractLogin {
 
         final Parameters params = new Parameters("user", credentials.getUserName(), "pass", credentials.getPassword());
 
-        //final String loginData = Network.getResponseData(Network.postRequest("https://", params));
-        final String loginData = "faking a good login"; // TODO baiti
+        String loginData = "";
 
+        if (fake_login) {
+            loginData = "faking a good login"; // TODO real login disabled by baiti
+        } else {
+            loginData = Network.getResponseData(Network.postRequest("https://", params));
+        }
         if (StringUtils.isBlank(loginData)) {
             Log.e("LCLogin.login: Failed to retrieve login data");
             return StatusCode.CONNECTION_FAILED_LC; // no login page
@@ -119,9 +125,12 @@ public class LCLogin extends AbstractLogin {
 
             setActualStatus(application.getString(R.string.init_login_popup_failed));
             return false;
+        } else { // TODO Debug Path
+            setActualLoginStatus(true);
+            setActualUserName("JoeDante");
+            setActualCachesFound(0);
+            return true;
         }
-        return true; // TODO remove after debug
-
     }
 
     @Override
