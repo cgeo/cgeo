@@ -7,12 +7,15 @@ import cgeo.geocaching.maps.routing.Routing;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 import com.google.android.gms.maps.model.LatLng;
 
 public class Route implements Parcelable {
     private String name = "";
+    @NonNull
     protected ArrayList<RouteSegment> segments = new ArrayList<>();
     private final boolean routeable;
     protected float distance = 0.0f;
@@ -34,54 +37,41 @@ public class Route implements Parcelable {
     }
 
     public void add(final RouteSegment segment) {
-        if (null == segments) {
-            segments = new ArrayList<>();
-        }
         segments.add(segment);
     }
 
     public int getNumSegments() {
-        return null == segments ? 0 : segments.size();
+        return segments.size();
     }
 
     public int getNumPoints() {
         int numPoints = 0;
-        if (null != segments) {
-            for (RouteSegment segment : segments) {
-                numPoints += segment.getSize();
-            }
+        for (RouteSegment segment : segments) {
+            numPoints += segment.getSize();
         }
         return numPoints;
     }
 
     public ArrayList<Geopoint> getAllPoints() {
         final ArrayList<Geopoint> points = new ArrayList<>();
-        if (null != segments) {
-            for (RouteSegment segment : segments) {
-                points.addAll(segment.getPoints());
-            }
+        for (RouteSegment segment : segments) {
+            points.addAll(segment.getPoints());
         }
         return points;
     }
 
     public ArrayList<LatLng> getAllPointsLatLng() {
         final ArrayList<LatLng> points = new ArrayList<>();
-        if (null != segments) {
-            for (RouteSegment segment : segments) {
-                for (Geopoint point : segment.getPoints()) {
-                    points.add(new LatLng(point.getLatitude(), point.getLongitude()));
-                }
+        for (RouteSegment segment : segments) {
+            for (Geopoint point : segment.getPoints()) {
+                points.add(new LatLng(point.getLatitude(), point.getLongitude()));
             }
         }
         return points;
     }
 
     public RouteSegment[] getSegments() {
-        if (null != segments) {
-            return segments.toArray(new RouteSegment[0]);
-        } else {
-            return null;
-        }
+        return segments.toArray(new RouteSegment[0]);
     }
 
     public float getDistance() {
@@ -89,7 +79,7 @@ public class Route implements Parcelable {
     }
 
     public void setCenter(final CenterOnPosition centerOnPosition) {
-        if (null != segments && segments.size() > 0) {
+        if (segments.size() > 0) {
             final ArrayList<Geopoint> points0 = segments.get(0).getPoints();
             if (points0.size() > 0) {
                 final Geopoint first = points0.get(0);
@@ -134,18 +124,16 @@ public class Route implements Parcelable {
     }
 
     protected void calculateNavigationRoute(final int pos) {
-        if (routeable && segments != null && pos < segments.size()) {
+        if (routeable && pos < segments.size()) {
             final RouteSegment segment = segments.get(pos);
             distance -= segment.getDistance();
-            if (routeable) {
-                // clear info for current segment
-                segment.resetPoints();
-                // calculate route for segment between current point and its predecessor
-                if (pos > 0) {
-                    final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint());
-                    for (Geopoint geopoint : temp) {
-                        segment.addPoint(geopoint);
-                    }
+            // clear info for current segment
+            segment.resetPoints();
+            // calculate route for segment between current point and its predecessor
+            if (pos > 0) {
+                final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint());
+                for (Geopoint geopoint : temp) {
+                    segment.addPoint(geopoint);
                 }
             }
             distance += segment.calculateDistance();
@@ -168,9 +156,12 @@ public class Route implements Parcelable {
 
     };
 
-    protected Route(final Parcel parcel) {
+    protected Route(@NonNull final Parcel parcel) {
         name = parcel.readString();
         segments = parcel.readArrayList(RouteSegment.class.getClassLoader());
+        if (segments == null) {
+            segments = new ArrayList<>();
+        }
         routeable = parcel.readInt() != 0;
         distance = parcel.readFloat();
     }
