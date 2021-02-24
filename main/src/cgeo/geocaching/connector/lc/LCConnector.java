@@ -35,13 +35,13 @@ import cgeo.geocaching.utils.DisposableHandler;
 public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin, ICredentials {
 
     @NonNull
-    private static final String CACHE_URL = "https://extremcaching.com/index.php/output-2/";
+    private static final String CACHE_URL = "https://labs-api.geocaching.com/Api/Adventures/GetAdventureBasicInfo?id=";
 
     /**
      * Pattern for LC codes
      */
     @NonNull
-    private static final Pattern PATTERN_LC_CODE = Pattern.compile("LC[0-9]+", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_LC_CODE = Pattern.compile("LC[0-9a-zA-Z]+", Pattern.CASE_INSENSITIVE);
 
     @NonNull
     private final LCLogin lcLogin = LCLogin.getInstance();

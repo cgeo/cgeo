@@ -41,7 +41,7 @@ import okhttp3.Response;
 final class LCApi {
 
     @NonNull
-    private static final String API_HOST = "https://extremcaching.com/exports/";
+    private static final String API_HOST = "https://labs.geocaching.com/Api/Adventures/";
 
     @NonNull
     private static final LCLogin lcLogin = LCLogin.getInstance();
@@ -61,9 +61,9 @@ final class LCApi {
     static Geocache searchByGeoCode(final String geocode) {
         final Parameters params = new Parameters("id", getIdFromGeocode(geocode));
         try {
-            final Response response = apiRequest("gpx.php", params).blockingGet();
+            final Response response = apiRequest("GCSearch", params).blockingGet();
 
-            final Collection<Geocache> caches = importCachesFromGPXResponse(response);
+            final Collection<Geocache> caches = importCachesFromJSON(response);
             if (CollectionUtils.isNotEmpty(caches)) {
                 return caches.iterator().next();
             }
@@ -95,12 +95,13 @@ final class LCApi {
 
     @NonNull
     static Collection<Geocache> searchByCenter(final Geopoint center) {
-        final Parameters params = new Parameters("fnc", "center");
-        params.add("distance", "20");
-        params.add("lat", String.valueOf(center.getLatitude()));
-        params.add("lon", String.valueOf(center.getLongitude()));
+        final Parameters params = new Parameters("skip", "0");
+        params.add("take", "100");
+        params.add("radiusMeters", "2000");
+        params.add("latitude", String.valueOf(center.getLatitude()));
+        params.add("longitude", String.valueOf(center.getLongitude()));
         try {
-            final Response response = apiRequest(params).blockingGet();
+            final Response response = apiRequest("GCSearch", params).blockingGet();
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
@@ -168,18 +169,6 @@ final class LCApi {
             }
             return Single.just(response1);
         });
-    }
-
-    @NonNull
-    private static Collection<Geocache> importCachesFromGPXResponse(final Response response) {
-        try {
-            return new GPX10Parser(StoredList.TEMPORARY_LIST.id).parse(response.body().byteStream(), null);
-        } catch (final Exception e) {
-            Log.e("Error importing gpx from extremcaching.com", e);
-            return Collections.emptyList();
-        } finally {
-            response.close();
-        }
     }
 
     @NonNull

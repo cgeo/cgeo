@@ -11,7 +11,7 @@ public class LCAuthorizationActivity extends AbstractCredentialsAuthorizationAct
 
     @Override
     protected String getCreateAccountUrl() {
-        return ECConnector.getInstance().getCreateAccountUrl();
+        return LCConnector.getInstance().getCreateAccountUrl();
     }
 
     @Override
