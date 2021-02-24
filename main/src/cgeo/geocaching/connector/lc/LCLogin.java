@@ -60,25 +60,26 @@ public class LCLogin extends AbstractLogin {
 
         final Parameters params = new Parameters("user", credentials.getUserName(), "pass", credentials.getPassword());
 
-        final String loginData = Network.getResponseData(Network.postRequest("https://extremcaching.com/exports/apilogin.php", params));
+        //final String loginData = Network.getResponseData(Network.postRequest("https://", params));
+        final String loginData = "faking a good login"; // TODO baiti
 
         if (StringUtils.isBlank(loginData)) {
             Log.e("LCLogin.login: Failed to retrieve login data");
-            return StatusCode.CONNECTION_FAILED_EC; // no login page
+            return StatusCode.CONNECTION_FAILED_LC; // no login page
         }
 
         if (loginData.contains("Wrong username or password")) { // hardcoded in English
-            Log.i("Failed to log in Extremcaching.com as " + credentials.getUserName() + " because of wrong username/password");
+            Log.i("Failed to log in labs.geocaching.com as " + credentials.getUserName() + " because of wrong username/password");
             return StatusCode.WRONG_LOGIN_DATA; // wrong login
         }
 
         if (getLoginStatus(loginData)) {
-            Log.i("Successfully logged in Extremcaching.com as " + credentials.getUserName());
+            Log.i("Successfully logged in labs.geocaching.com as " + credentials.getUserName());
 
             return StatusCode.NO_ERROR; // logged in
         }
 
-        Log.i("Failed to log in Extremcaching.com as " + credentials.getUserName() + " for some unknown reason");
+        Log.i("Failed to log in labs.geocaching.com as " + credentials.getUserName() + " for some unknown reason");
         if (retry) {
             return login(false, credentials);
         }
@@ -101,24 +102,28 @@ public class LCLogin extends AbstractLogin {
         final Application application = CgeoApplication.getInstance();
         setActualStatus(application.getString(R.string.init_login_popup_ok));
 
-        try {
-            final JsonNode json = JsonUtils.reader.readTree(data);
+        if (false) { // TODO only for debug
+            try {
+                final JsonNode json = JsonUtils.reader.readTree(data);
 
-            final String sid = json.get("sid").asText();
-            if (!StringUtils.isBlank(sid)) {
-                sessionId = sid;
-                setActualLoginStatus(true);
-                setActualUserName(json.get("username").asText());
-                setActualCachesFound(json.get("found").asInt());
-                return true;
+                final String sid = json.get("sid").asText();
+                if (!StringUtils.isBlank(sid)) {
+                    sessionId = sid;
+                    setActualLoginStatus(true);
+                    setActualUserName(json.get("username").asText());
+                    setActualCachesFound(json.get("found").asInt());
+                    return true;
+                }
+                resetLoginStatus();
+            } catch (IOException | NullPointerException e) {
+                Log.e("LCLogin.getLoginStatus", e);
             }
-            resetLoginStatus();
-        } catch (IOException | NullPointerException e) {
-            Log.e("LCLogin.getLoginStatus", e);
-        }
 
-        setActualStatus(application.getString(R.string.init_login_popup_failed));
-        return false;
+            setActualStatus(application.getString(R.string.init_login_popup_failed));
+            return false;
+        }
+        return true; // TODO remove after debug
+
     }
 
     @Override

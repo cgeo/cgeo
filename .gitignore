@@ -48,5 +48,5 @@ main/gradle.properties
 captures/
 
 main/usage.txt
-main/tags
-tags
+# added by baiti to ignore vim's ctag files
+tags*
