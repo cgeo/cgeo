@@ -323,6 +323,49 @@
                         app:connector="SU" />
                 </PreferenceCategory>
             </PreferenceScreen>
+
+            <PreferenceScreen
+                android:key="@string/preference_screen_lc"
+                android:title="@string/settings_title_lc" >
+
+                <PreferenceCategory android:title="@string/settings_settings"
+                    android:layout="@layout/preference_category" >
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:key="@string/pref_connectorLCActive"
+                        android:title="@string/settings_activate_lc" />
+                    <cgeo.geocaching.settings.TextPreference
+                        android:dependency="@string/pref_connectorLCActive"
+                        android:layout="@layout/text_preference"
+                        android:text="@string/settings_lc_description" />
+                    <cgeo.geocaching.settings.CredentialsPreference
+                        android:dependency="@string/pref_connectorLCActive"
+                        android:summary="@string/auth_unconnected"
+                        android:key="@string/pref_fakekey_lc_authorization" />
+                </PreferenceCategory>
+
+                <PreferenceCategory android:title="@string/settings_title_appearance"
+                    android:layout="@layout/preference_category" >
+                    <ListPreference
+                        android:defaultValue="1"
+                        android:dependency="@string/pref_connectorLCActive"
+                        android:dialogTitle="@string/init_lc_icons"
+                        android:entries="@array/LCIcons"
+                        android:entryValues="@array/LCIconsValues"
+                        android:key="@string/pref_lc_icons"
+                        android:title="@string/init_lc_icons" />
+                </PreferenceCategory>
+
+                <PreferenceCategory android:title="@string/settings_information"
+                    android:layout="@layout/preference_category" >
+                    <Preference
+                        android:key="@string/pref_fakekey_lc_website"
+                        android:title="@string/settings_open_website" />
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="LC" />
+                </PreferenceCategory>
+            </PreferenceScreen>
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/settings_category_geocaching_additionals"
