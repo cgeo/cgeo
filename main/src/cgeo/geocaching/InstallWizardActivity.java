@@ -60,7 +60,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     private enum WizardStep {
         WIZARD_START,
         WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION,
-        WIZARD_PERMISSIONS_BASEFOLDER, WIZARD_PERMISSIONS_MAPFOLDER, WIZARD_PERMISSIONS_GPXFOLDER,
+        WIZARD_PERMISSIONS_BASEFOLDER, WIZARD_PERMISSIONS_MAPFOLDER, WIZARD_PERMISSIONS_MAPTHEMEFOLDER, WIZARD_PERMISSIONS_GPXFOLDER,
         WIZARD_PLATFORMS,
         WIZARD_ADVANCED,
         WIZARD_END
@@ -130,7 +130,7 @@ public class InstallWizardActivity extends AppCompatActivity {
             case WIZARD_START: {
                 title.setText(mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_migration_title : R.string.wizard_welcome_title);
                 text.setText(mode == WizardMode.WIZARDMODE_RETURNING ? R.string.wizard_intro_returning : mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_intro_migration : R.string.wizard_intro);
-                setNavigation(this::finishWizard, R.string.skip, null, 0, this::gotoNext, 0);
+                setNavigation(this::skipWizard, R.string.wizard_not_now, null, 0, this::gotoNext, 0);
                 break;
             }
             case WIZARD_PERMISSIONS: {
@@ -158,6 +158,11 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setFolderTitle(PersistableFolder.OFFLINE_MAPS);
                 text.setText(R.string.wizard_mapfolder_request_explanation);
                 setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestMapfolder, 0);
+                break;
+            case WIZARD_PERMISSIONS_MAPTHEMEFOLDER:
+                setFolderTitle(PersistableFolder.OFFLINE_MAP_THEMES);
+                text.setText(R.string.wizard_mapthemesfolder_request_explanation);
+                setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestMapthemefolder, 0);
                 break;
             case WIZARD_PERMISSIONS_GPXFOLDER:
                 setFolderTitle(PersistableFolder.GPX);
@@ -316,10 +321,15 @@ public class InstallWizardActivity extends AppCompatActivity {
             || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission(this)))
             || (step == WizardStep.WIZARD_PERMISSIONS_BASEFOLDER && ContentStorageActivityHelper.baseFolderIsSet())
             || (step == WizardStep.WIZARD_PERMISSIONS_MAPFOLDER && !mapFolderNeedsMigration())
+            || (step == WizardStep.WIZARD_PERMISSIONS_MAPTHEMEFOLDER && !mapThemeFolderNeedsMigration())
             || (step == WizardStep.WIZARD_PERMISSIONS_GPXFOLDER && !gpxFolderNeedsMigration())
             || (step == WizardStep.WIZARD_PLATFORMS && mode == WizardMode.WIZARDMODE_MIGRATION)
             || (step == WizardStep.WIZARD_ADVANCED && mode == WizardMode.WIZARDMODE_MIGRATION)
             ;
+    }
+
+    private void skipWizard() {
+        Dialogs.confirmPositiveNegativeNeutral(this, getString(R.string.wizard), getString(R.string.wizard_skip_wizard_warning), getString(android.R.string.ok), getString(R.string.back), "", (dialog, which) -> finishWizard(), (dialog, which) -> updateDialog(), null);
     }
 
     private void finishWizard() {
@@ -338,7 +348,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     public static boolean needsFolderMigration() {
-        return mapFolderNeedsMigration() || gpxFolderNeedsMigration();
+        return mapFolderNeedsMigration() || mapThemeFolderNeedsMigration() || gpxFolderNeedsMigration();
     }
 
     // -------------------------------------------------------------------
@@ -416,6 +426,18 @@ public class InstallWizardActivity extends AppCompatActivity {
         if (mapFolderNeedsMigration()) {
             prepareFolderDefaultValues();
             getContentStorageHelper().migratePersistableFolder(PersistableFolder.OFFLINE_MAPS, v -> onReturnFromFolderMigration(!mapFolderNeedsMigration()));
+        }
+    }
+
+    private static boolean mapThemeFolderNeedsMigration() {
+        return Settings.legacyFolderNeedsToBeMigrated(R.string.pref_persistablefolder_offlinemapthemes);
+    }
+
+    private void requestMapthemefolder() {
+        forceSkipButton = false;
+        if (mapThemeFolderNeedsMigration()) {
+            prepareFolderDefaultValues();
+            getContentStorageHelper().migratePersistableFolder(PersistableFolder.OFFLINE_MAP_THEMES, v -> onReturnFromFolderMigration(!mapThemeFolderNeedsMigration()));
         }
     }
 

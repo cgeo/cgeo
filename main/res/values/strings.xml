@@ -2037,6 +2037,7 @@
     <string name="switch_default">(default)</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="show_all">Show all</string>
 
     <string name="routingmode_straight">Straight</string>
     <string name="routingmode_walk">Walk</string>
@@ -2133,6 +2134,7 @@
     <string name="wizard_permissions_folder_title">Set folder: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo needs a local folder to store data like GPX files, backups, field notes and logfiles. As per default those files are stored in folders beneath a so called "base folder". Select or create such a folder in the next step.\n\nIf you upgraded c:geo from a previous version, select the existing folder \"cgeo\" on root level of your device storage.\nHint: You may need to unhide your device\'s internal storage first in the file selector being displayed next.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo needs a local folder to store offline map files. Select or create such a folder in the next step.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo needs a local folder to store theme files for offline maps. Select or create such a folder in the next step.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo needs a local folder to store GPX files (e.g. for importing / exporting caches or tracks). Select or create such a folder in the next step.</string>
     <string name="wizard_platforms_title">Configure services</string>
     <string name="wizard_platforms_intro">To find geocaches with c:geo you need an account for a geocaching service supported by c:geo.\nSelect the desired service below to either login with your existing account or create a new account.</string>
@@ -2151,6 +2153,8 @@
     <string name="wizard_status_location_permission">Location permission</string>
     <string name="wizard_status_basefolder">Base folder</string>
     <string name="wizard_status_platform">Geocaching services</string>
+    <string name="wizard_not_now">Not now</string>
+    <string name="wizard_skip_wizard_warning">c:geo might not work as expected until configuration is completed. Depending on the missing configuration c:geo might not be able to read/store data like offline maps, geocaches, logfiles etc.\n\nWhenever you feel ready to finalize setup, either choose \"Configuration wizard\" in main menu or restart c:geo.</string>
 
     <!-- default actions in dialogs -->
     <string name="previous">Previous</string>

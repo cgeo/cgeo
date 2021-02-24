@@ -964,6 +964,14 @@ public class Settings {
         return getInt(R.string.pref_maplanguage, MAP_LANGUAGE_DEFAULT);
     }
 
+    public static void setPqShowDownloadableOnly(final boolean showDownloadableOnly) {
+        putBoolean(R.string.pref_pqShowDownloadableOnly, showDownloadableOnly);
+    }
+
+    public static boolean getPqShowDownloadableOnly() {
+        return getBoolean(R.string.pref_pqShowDownloadableOnly, false);
+    }
+
     public static void setAnyCoordinates(final Geopoint coords) {
         if (coords != null) {
             putFloat(R.string.pref_anylatitude, (float) coords.getLatitude());
@@ -1609,13 +1617,17 @@ public class Settings {
                 return new String[]{"gpxExportDir", "gpxImportDir"};
             case R.string.pref_persistableuri_track:
                 return new String[]{"pref_trackfile"};
+            case R.string.pref_persistablefolder_offlinemapthemes:
+                return new String[]{"renderthemepath"};
             default:
                 return new String[0];
         }
     }
 
-    /** checks whether legacy folder needs to be migrated
+    /**
+     * checks whether legacy folder needs to be migrated
      * (legacy value is set and not yet migrated)
+     * (used by the installation / migration wizard)
      **/
     public static boolean legacyFolderNeedsToBeMigrated(@StringRes final int newPrefKey) {
         for (String legacyKey : getLegacyPreferenceKeysFor(newPrefKey)) {
