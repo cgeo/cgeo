@@ -485,7 +485,7 @@ public class Settings {
         putBoolean(R.string.pref_connectorGCActive, value);
     }
 
-    public static boolean isECConnectorActive() {
+    public static boolean isLCConnectorActive() {
         return getBoolean(R.string.pref_connectorECActive, false);
     }
 
@@ -1416,6 +1416,10 @@ public class Settings {
 
     public static String getECIconSet() {
         return getString(R.string.pref_ec_icons, "1");
+    }
+
+    public static String getLCIconSet() {
+        return getString(R.string.pref_lc_icons, "1");
     }
 
     /* Store last checksum of changelog for changelog display */
