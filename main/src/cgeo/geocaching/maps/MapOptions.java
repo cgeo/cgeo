@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
@@ -20,8 +21,10 @@ public class MapOptions {
     public final MapMode mapMode;
     public boolean isLiveEnabled;
     public boolean isStoredEnabled;
+    @Nullable
     public SearchResult searchResult;
     public String geocode;
+    @Nullable
     public Geopoint coords;
     public WaypointType waypointType;
     public MapState mapState;
@@ -51,7 +54,7 @@ public class MapOptions {
         }
     }
 
-    public MapOptions(final SearchResult search, final String title) {
+    public MapOptions(@NonNull final SearchResult search, final String title) {
         this.searchResult = search;
         this.title = title;
         this.mapMode = MapMode.LIST;
@@ -64,7 +67,7 @@ public class MapOptions {
         isLiveEnabled = Settings.isLiveMap();
     }
 
-    public MapOptions(final Geopoint coords) {
+    public MapOptions(@NonNull final Geopoint coords) {
         mapMode = MapMode.LIVE;
         this.coords = coords;
         this.waypointType = WaypointType.WAYPOINT;
@@ -72,7 +75,7 @@ public class MapOptions {
         isLiveEnabled = Settings.isLiveMap();
     }
 
-    public MapOptions(final Geopoint coords, final WaypointType type, final String title) {
+    public MapOptions(@NonNull final Geopoint coords, final WaypointType type, final String title) {
         this.coords = coords;
         this.waypointType = type;
         this.title = title;
