@@ -10,7 +10,6 @@ import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.content.Intent;
