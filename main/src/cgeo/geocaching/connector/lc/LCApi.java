@@ -55,8 +55,9 @@ final class LCApi {
     }
 
     @Nullable
-    static Geocache searchByGeoCode(final String geocode) {
-        final Parameters params = new Parameters("id", getIdFromGeocode(geocode));
+    static Geocache searchByGUID(final String guid) {
+        Log.e(guid);
+        final Parameters params = new Parameters("id", guid);
         try {
             final Response response = apiRequest("GetAdventureBasicInfo", params).blockingGet();
 
@@ -81,7 +82,6 @@ final class LCApi {
         params.add("longitude", String.valueOf(center.getLongitude()));
         try {
             final Response response = apiRequest("GCSearch", params).blockingGet();
-            Log.e(response.toString());
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
@@ -94,7 +94,6 @@ final class LCApi {
         params.add("type", logType.type);
         params.add("log", log);
         params.add("date", LOG_DATE_FORMAT.format(date.getTime()));
-        params.add("sid", lcLogin.getSessionId());
 
         final String uri = API_HOST + "log.php";
         try {
@@ -125,16 +124,11 @@ final class LCApi {
 
     @NonNull
     private static Single<Response> apiRequest(final String uri, final Parameters params) {
-        return apiRequest(uri, params, true); // TODO forced to true do skip additional parameters: cgeo and sid
+        return apiRequest(uri, params, false);
     }
 
     @NonNull
     private static Single<Response> apiRequest(final String uri, final Parameters params, final boolean isRetry) {
-        // add session and cgeo marker on every request
-        if (!isRetry) {
-            params.add("cgeo", "1");
-            params.add("sid", lcLogin.getSessionId());
-        }
 
         final Single<Response> response = Network.getRequest(API_HOST + uri, params);
 
@@ -156,7 +150,7 @@ final class LCApi {
             }
             final List<Geocache> caches = new ArrayList<>(json.size());
             for (final JsonNode node : json) {
-                Log.e(node.toPrettyString());
+                //Log.e(node.toPrettyString());
                 final Geocache cache = parseCache(node);
                 if (cache != null) {
                     caches.add(cache);
@@ -173,16 +167,19 @@ final class LCApi {
     private static Geocache parseCache(final JsonNode response) {
         try {
             final Geocache cache = new Geocache();
-            JsonNode l = response.at("/location");
-            Log.e(l.get("latitude").asText());
+            JsonNode location = response.at("/location");
+            String firebaseDynamicLink = response.get("firebaseDynamicLink").asText();
+            String[] segments = firebaseDynamicLink.split("/");
+            String id = segments[segments.length-1];
             cache.setReliableLatLon(true);
-            cache.setGeocode("LC" + response.get("id").asText());
+            cache.setGeocode("LC" + id);
+            cache.setGuid(response.get("id").asText());
             cache.setName(response.get("title").asText());
-            cache.setCoords(new Geopoint(l.get("latitude").asText(), l.get("longitude").asText()));
-            cache.setType(getCacheType("Traditional"));
+            cache.setCoords(new Geopoint(location.get("latitude").asText(), location.get("longitude").asText()));
+            cache.setType(getCacheType("Lab"));
             cache.setDifficulty((float) 1);
             cache.setTerrain((float) 1);
-            cache.setSize(CacheSize.getById("small"));
+            cache.setSize(CacheSize.getById("virtual"));
             cache.setFound(false);
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
@@ -205,6 +202,9 @@ final class LCApi {
         }
         if (cacheType.equalsIgnoreCase("Mystery")) {
             return CacheType.MYSTERY;
+        }
+        if (cacheType.equalsIgnoreCase("Lab")) {
+            return CacheType.USER_DEFINED;
         }
         return CacheType.UNKNOWN;
     }
