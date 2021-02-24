@@ -38,7 +38,7 @@ import okhttp3.Response;
 final class LCApi {
 
     @NonNull
-    private static final String API_HOST = "https://labs.geocaching.com/Api/Adventures/";
+    private static final String API_HOST = "https://labs-api.geocaching.com/Api/Adventures/";
 
     @NonNull
     private static final LCLogin lcLogin = LCLogin.getInstance();
@@ -58,7 +58,7 @@ final class LCApi {
     static Geocache searchByGeoCode(final String geocode) {
         final Parameters params = new Parameters("id", getIdFromGeocode(geocode));
         try {
-            final Response response = apiRequest("GCSearch", params).blockingGet();
+            final Response response = apiRequest("GetAdventureBasicInfo", params).blockingGet();
 
             final Collection<Geocache> caches = importCachesFromJSON(response);
             if (CollectionUtils.isNotEmpty(caches)) {
@@ -74,11 +74,14 @@ final class LCApi {
     static Collection<Geocache> searchByCenter(final Geopoint center) {
         final Parameters params = new Parameters("skip", "0");
         params.add("take", "100");
-        params.add("radiusMeters", "2000");
+        params.add("excludeOwned", "false");
+        params.add("excludeCompleted", "false");
+        params.add("radiusMeters", "10000");
         params.add("latitude", String.valueOf(center.getLatitude()));
         params.add("longitude", String.valueOf(center.getLongitude()));
         try {
             final Response response = apiRequest("GCSearch", params).blockingGet();
+            Log.e(response.toString());
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
@@ -119,14 +122,10 @@ final class LCApi {
         return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
-    @NonNull
-    private static Single<Response> apiRequest(final Parameters params) {
-        return apiRequest("api.php", params);
-    }
 
     @NonNull
     private static Single<Response> apiRequest(final String uri, final Parameters params) {
-        return apiRequest(uri, params, false);
+        return apiRequest(uri, params, true); // TODO forced to true do skip additional parameters: cgeo and sid
     }
 
     @NonNull
@@ -157,6 +156,7 @@ final class LCApi {
             }
             final List<Geocache> caches = new ArrayList<>(json.size());
             for (final JsonNode node : json) {
+                Log.e(node.toPrettyString());
                 final Geocache cache = parseCache(node);
                 if (cache != null) {
                     caches.add(cache);
@@ -173,15 +173,17 @@ final class LCApi {
     private static Geocache parseCache(final JsonNode response) {
         try {
             final Geocache cache = new Geocache();
+            JsonNode l = response.at("/location");
+            Log.e(l.get("latitude").asText());
             cache.setReliableLatLon(true);
-            cache.setGeocode("LC" + response.get("cache_id").asText());
+            cache.setGeocode("LC" + response.get("id").asText());
             cache.setName(response.get("title").asText());
-            cache.setCoords(new Geopoint(response.get("lat").asText(), response.get("lon").asText()));
-            cache.setType(getCacheType(response.get("type").asText()));
-            cache.setDifficulty((float) response.get("difficulty").asDouble());
-            cache.setTerrain((float) response.get("terrain").asDouble());
-            cache.setSize(CacheSize.getById(response.get("size").asText()));
-            cache.setFound(response.get("found").asInt() == 1);
+            cache.setCoords(new Geopoint(l.get("latitude").asText(), l.get("longitude").asText()));
+            cache.setType(getCacheType("Traditional"));
+            cache.setDifficulty((float) 1);
+            cache.setTerrain((float) 1);
+            cache.setSize(CacheSize.getById("small"));
+            cache.setFound(false);
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
