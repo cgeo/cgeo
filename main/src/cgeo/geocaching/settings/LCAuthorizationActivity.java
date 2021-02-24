@@ -1,8 +1,6 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.connector.ec.ECConnector;
-import cgeo.geocaching.connector.ec.ECLogin;
 import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.connector.lc.LCLogin;
 import cgeo.geocaching.enumerations.StatusCode;
