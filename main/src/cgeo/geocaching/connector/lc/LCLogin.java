@@ -18,9 +18,9 @@ import androidx.annotation.Nullable;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import java.io.IOException;
-
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.IOException;
 
 public class LCLogin extends AbstractLogin {
 
