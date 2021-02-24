@@ -241,6 +241,7 @@
     <string name="warn_search_help_tb">Syötä reissaajan koodi. Esimerkiksi \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Ole hyvä ja syötä jotain tekstiä lokiisi.</string>
     <string name="warn_load_images">c:geo epäonnistui kuvien latauksessa.</string>
+    <string name="warn_invalid_mapfile">Valittu karttatiedosto ei ole kelvollinen karttatiedosto tai käyttää ei-tuettua versiota.\n(c:geo tukee tällä hetkellä versioita v3 - v5)\n\nOfflinekartat eivät ole käytettävissä.</string>
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
     <string name="warn_invalid_character">Merkin täytyy olla kirjain tai numero</string>
@@ -345,6 +346,8 @@
     <string name="caches_nearby">Lähistöllä</string>
     <string name="caches_remove_all">Poista kaikki</string>
     <string name="caches_remove_selected">Poista valitut</string>
+    <string name="caches_remove_all_completely">Poista kaikki laitteesta</string>
+    <string name="caches_remove_selected_completely">Poista valittu laitteesta</string>
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
     <string name="caches_upload_modifiedcoords">Lähetä muutetut koordinaatit</string>
     <string name="caches_upload_modifiedcoords_warning">Haluatko lähettää muokatut koordinaatit kaikille (valituille) kätköille ja tallentaa ne palvelimella olevien koordinaattien päälle? Toimintoa ei voi peruuttaa.</string>
@@ -533,6 +536,7 @@
     <string name="settings_service_active">Aktiivinen</string>
     <string name="settings_navigation_disabled">Tämä ohjelma ei näyttäisi olevan asennettu</string>
     <string name="init_signature">Allekirjoitus</string>
+    <string name="init_template_help">Paikanpitäjämerkit - kuten [NAME] - täytetään määritetyllä tekstillä, kun mallia käytetään.</string>
     <string name="init_signature_template_button">Lisää malli</string>
     <string name="init_signature_template_date">Päivämäärä</string>
     <string name="init_signature_template_time">Aika</string>
@@ -615,6 +619,7 @@
     <string name="init_restore_restored">Palautus valmis</string>
     <string name="init_backup_start_restore">Aloita palautus</string>
     <string name="init_backup_restore_different_backup">Palauta toinen varmuuskopio</string>
+    <string name="init_backup_restore_different_backup_explanation">Valitse kansio, joka sisältää varmuuskopion jonka haluat palauttaa</string>
     <string name="init_backup_backup_history">Varmuuskopioi historia</string>
     <string name="init_backup_history_length_title">Varmuuskopioiden maksimimäärä</string>
     <string name="init_backup_history_length_summary">Päätä, kuinka monta varmuuskopiota säilytetään. Kun raja on saavutettu, vanhimmat poistetaan automaattisesti.</string>
@@ -634,6 +639,8 @@
     <string name="restore_information">Valitse mitä haluat palauttaa:</string>
     <string name="init_restore_success">Palautus valmis.</string>
     <string name="init_restore_failed_dbrecreated">Palautus epäonnistui: Varmuuskopio korruptoitunut, tietokanta piti luoda tyhjästä.</string>
+    <string name="init_restore_db_failed">Tietokannan palauttaminen epäonnistui.</string>
+    <string name="init_restore_settings_failed">Ohjelman asetusten palauttaminen epäonnistui.</string>
     <string name="init_restore_running">Palautetaan kätkötietokantaa…</string>
     <string name="init_restore_confirm">Tietokanta on tyhjä. Haluatko palauttaa varmuuskopion?</string>
     <string name="init_backup_last">Varmuuskopio ajalta:</string>
@@ -674,6 +681,7 @@
     <string name="init_directionwidth">Suuntaviivan leveys</string>
     <string name="init_directionwidth_summary">Valitse suuntaviivan leveys</string>
     <string name="init_routecolor">Yksittäisen reittiviivan väri</string>
+    <string name="init_routecolor_summary">Valitse yksittäisen reittiviivan väri ja läpinäkyvyys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
     <string name="init_routewidth">Yksittäisen reittiviivan leveys</string>
     <string name="init_routewidth_summary">Valitse yksittäisen reittiviivan leveys</string>
     <string name="init_trackcolor">GPX-reitin viivan väri</string>
@@ -700,6 +708,7 @@
     <string name="init_secondary_navigation_tool">Toissijainen navigointi</string>
     <string name="init_default_navigation_tool_description">Tästä voit valita ensisijaisen navigointitavan.</string>
     <string name="init_default_navigation_tool_select">Valitse työkalu</string>
+    <string name="init_default_navigation_tool_2_description">Tästä voi valita toissijaisen navigointitavan. Aktivoidaksesi sen paina navigointi-ikonia kätkön nimen vieressä pitkään.</string>
     <string name="init_navigation_menu_description">Tästä voit valita mitkä käytettävissä olevista navigointitavoista näytetään kätkön/reittipisteen navigointivalikossa. Valitsemattomia ei tulla asentamaan laitteeseesi.</string>
     <string name="init_debug_title">Virheenjäljitystiedot</string>
     <string name="init_debug_note">c:geo voi tuottaa runsaasti vianmääritystietoja. Tämän asetuksen aktivointi voi vaikuttaa c:geon vakauteen ja se on suositeltavaa tehdä ainoastaan mikäli sinua on pyydetty lähettämään loki kehittäjille. Pidä vianjäljitysloki pois päältä c:geon normaalin käytön aikana!</string>
@@ -833,8 +842,12 @@
     <string name="persistablefolder_backup">Varmuuskopiointi</string>
     <string name="persistablefolder_logfiles">Lokitiedostot</string>
     <string name="persistablefolder_fieldnotes">Kenttämerkinnät</string>
+    <string name="persistablefolder_spoilerimages">Spoiler-kuvat</string>
     <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s valmiina</string>
+    <string name="folder_process_status_currentfile">Eteneminen %1$s</string>
     <!-- FolderUtils: synchronize -->
+    <string name="folder_synchronize_to_internal_progressbar_title">Synkronoi %1$s:n sisältö sisäiseen tallennustilaan</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopioidaan kohteen %1$s sisältö kohteeseen %2$s</string>
     <string name="folder_move_progressbar_title">Siirretään kohteen %1$s sisältö kohteeseen %2$s</string>
@@ -861,8 +874,10 @@
     <string name="auth_register">Luo käyttäjätili</string>
     <string name="auth_connected">Yhdistetty</string>
     <string name="auth_unconnected">Ei vielä yhdistetty</string>
+    <string name="auth_connected_as">Yhdistetty nimellä %s. \nPaina tästä päivittääksesi tai poistaaksesi valtuutuksen c:geosta.</string>
     <string name="auth_dialog_waiting">Odotetaan %s…</string>
     <string name="auth_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
+    <string name="auth_explain_long">Painamalla \"Valtuuta c:geo\"-painiketta Aloitat tapahtuman. Tämä tapahtuma Avaa %s sivun web-selaimessa. Kirjaudu sisään tällä sivulla ja anna <b>c:geo</b> lupa käyttää tiliäsi. Siinä kaikki.</string>
     <string name="auth_forget_title">Unohda kirjautumistiedot?</string>
     <string name="auth_forget_message">Yhteytesi katkaistaan tästä palvelusta. Tällä hetkellä tallennettuna olevat kirjautumistietosi menetetään.</string>
     <!-- auth credentials -->
@@ -871,6 +886,7 @@
     <string name="auth_register_explain">Jos sinulla ei ole vielä tiliä, napauta alta palvelun verkkosivulle luodaksesi sellaisen. Kirjauduthan sisälle käyttäjätunnusta ja salasanaa käyttämällä, c:geo ei vielä tue kirjautumista Googlen, Applen tai Facebookin kautta. Tilin luonnin jälkeen voi olla, että sinun tulee vahvistaa sähköpostisi, ennenkuin voit käyttää tiliäsi kirjautuaksesi sisään c:geoon.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
+    <string name="auth_token_explain_long">Täyttämällä tiedot ja painamalla \"Valtuuta c:geo\" painiketta Aloitat tapahtuman. Tämä tapahtuma yhdistää %s ja hakea todennuksen. Siinä kaikki.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo on nyt valtuutettu julkaisemaan Twitterissä.</string>
     <!-- auth opencaching -->
@@ -1205,6 +1221,12 @@
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
     <string name="map_show_circles">Näytä ympyrät</string>
+    <string name="map_showc_ownfound">Omat/löydetyt kätköt</string>
+    <string name="map_showc_disabled">Hyllytetyt kätköt</string>
+    <string name="map_showc_archived">Arkistoidut kätköt</string>
+    <string name="map_showwp_original">Alkuperäiset reittipisteet</string>
+    <string name="map_showwp_parking">Parkkipaikka-reittipisteet</string>
+    <string name="map_showwp_visited">Vieraillut reittipisteet</string>
     <string name="map_show_track">Näytä GPX-rata/reitti</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
@@ -1223,7 +1245,9 @@
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <string name="quick_settings">Pika-asetukset</string>
     <string name="quick_settings_info">Jotkut kartta-asetukset (Kartan asetukset, piilota, reititys) on siirretty uuteen \"Pika-asetukset\"-ikkunaan\nVoit avata tämän ikkunan käyttämällä painiketta, joka sijaitsee karttanäkymän alareunassa keskellä.</string>
+    <string name="map_show_in_map">Näytä kartalla:</string>
     <!-- search -->
+    <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
     <string name="search_bar_desc">Kätköt (GC-koodi, avainsana), reissaajat (TB-koodi)</string>
     <string name="search_coordinates">Koordinaatit</string>
     <string name="search_coordinates_button">Hae koordinaattien avulla</string>
@@ -1810,6 +1834,7 @@
     <string name="switch_default">(oletus)</string>
     <string name="yes">Kyllä</string>
     <string name="no">Ei</string>
+    <string name="show_all">Näytä kaikki</string>
     <string name="routingmode_straight">Suora</string>
     <string name="routingmode_walk">Kävely</string>
     <string name="routingmode_bike">Pyöräily</string>
@@ -1869,6 +1894,7 @@
     <string name="mapserver_mapsforge_info">Peruskartat, karttateemoja ei tarvita</string>
     <string name="mapserver_openandromaps_info">Yksityiskohtaiset kartat, \"Elevate\"-karttateema vaaditaan</string>
     <string name="mapserver_elevate_info">Yksityiskohtainen kartan teema</string>
+    <string name="mapserver_freizeitkarte_info">Yksityiskohtaiset kartat, vaativat yhden \"freizeitkarte\" kartan teemoista.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
@@ -1893,7 +1919,10 @@
     <string name="wizard_outro_error">Määritystä ei ole suoritettu!\nKaikki c:geon osat eivät toimi odotetulla tavalla!</string>
     <string name="wizard_permissions_title">Aseta sovelluksen käyttöluvat</string>
     <string name="wizard_permissions_intro">c:geo tarvitsee tietyt käyttöoikeudet laitteellesi toimiakseen oikein.\nSelitän lisää yksityiskohtia seuraavissa vaiheissa.</string>
+    <string name="wizard_permissions_folder_title">Aseta kansio: %s</string>
+    <string name="wizard_basefolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen tietoja kuten GPX-tiedostoja, varmuuskopioita, kenttämerkintöjä ja lokitiedostoja. Oletusarvoisesti nämä tiedostot tallennetaan kansioihin, jotka sijaitsevat \"juurikansiossa\". Valitse tai luo tällainen kansio seuraavassa vaiheessa.\n\nJos olet päivittänyt c:geon edellisestä versiosta, valitse olemassa oleva kansio \"cgeo\" laitteen tallennustilan juuritasolla.\nVihje: Saatat joutua poistamaan piilotuksen laitteesi sisäisestä tallennustilasta kun tiedostovalitsin näytetään seuraavaksi.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttatiedostoja. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttojen teematiedostot. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen GPX-tiedostoja, esim. kätköjen sekä reittien tuontiin/vientiin. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
     <string name="wizard_platforms_title">Määritä palvelut</string>
     <string name="wizard_platforms_intro">Löytääksesi geokätköjä c:geon avulla, tarvitset tilin c:geon tukemaa geokätköilypalvelua varten.\nValitse haluamasi palvelu alta, jotta voit kirjautua sisään olemassa olevalla tililläsi tai luoda uuden tilin.</string>
@@ -1912,6 +1941,8 @@
     <string name="wizard_status_location_permission">Sijainnin käyttöoikeus</string>
     <string name="wizard_status_basefolder">Juurikansio</string>
     <string name="wizard_status_platform">Geokätköilypalvelut</string>
+    <string name="wizard_not_now">Ei nyt</string>
+    <string name="wizard_skip_wizard_warning">c:geo ei ehkä toimi odotetusti ennen kuin määritys on valmis. Riippuen puuttuvista asetuksista c:geo ei ehkä pysty lukemaan tai tallentamaan tietoja, kuten offline-karttoja, geokätköjä, lokitiedostoja jne.\n\nKun olet valmis viimeistelemään määrityksen, valitse \"Configuration wizard\" päävalikosta tai käynnistä c:geo.</string>
     <!-- default actions in dialogs -->
     <string name="previous">Edellinen</string>
     <string name="skip">Ohita</string>
