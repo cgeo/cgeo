@@ -132,7 +132,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isActive() {
-        return Settings.isLCConnectorActive();
+        return Settings.isECConnectorActive();
     }
 
     @Override

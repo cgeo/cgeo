@@ -485,7 +485,7 @@ public class Settings {
         putBoolean(R.string.pref_connectorGCActive, value);
     }
 
-    public static boolean isLCConnectorActive() {
+    public static boolean isECConnectorActive() {
         return getBoolean(R.string.pref_connectorECActive, false);
     }
 
