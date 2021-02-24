@@ -60,6 +60,7 @@ final class LCApi {
             return null;
         }
     }
+
     @NonNull
     static Collection<Geocache> searchByBBox(final Viewport viewport) {
 
@@ -88,6 +89,7 @@ final class LCApi {
             return Collections.emptyList();
         }
     }
+
     @NonNull
     static Collection<Geocache> searchByCenter(final Geopoint center) {
         final Parameters params = new Parameters("skip", "0");
