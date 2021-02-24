@@ -1,11 +1,5 @@
 package cgeo.geocaching.connector.lc;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.util.Calendar;
-import java.util.List;
-
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
@@ -16,6 +10,12 @@ import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.Calendar;
+import java.util.List;
 
 class LCLoggingManager extends AbstractLoggingManager {
 
