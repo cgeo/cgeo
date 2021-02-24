@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.fasterxml.jackson.databind.JsonNode;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,6 +30,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
@@ -167,10 +167,10 @@ final class LCApi {
     private static Geocache parseCache(final JsonNode response) {
         try {
             final Geocache cache = new Geocache();
-            JsonNode location = response.at("/location");
-            String firebaseDynamicLink = response.get("firebaseDynamicLink").asText();
-            String[] segments = firebaseDynamicLink.split("/");
-            String id = segments[segments.length-1];
+            final JsonNode location = response.at("/location");
+            final String firebaseDynamicLink = response.get("firebaseDynamicLink").asText();
+            final String[] segments = firebaseDynamicLink.split("/");
+            final String id = segments[segments.length - 1];
             cache.setReliableLatLon(true);
             cache.setGeocode("LC" + id);
             cache.setGuid(response.get("id").asText());
