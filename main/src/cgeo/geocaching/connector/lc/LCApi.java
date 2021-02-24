@@ -44,7 +44,7 @@ final class LCApi {
     private static final String API_HOST = "https://extremcaching.com/exports/";
 
     @NonNull
-    private static final LCLogin ecLogin = LCLogin.getInstance();
+    private static final LCLogin lcLogin = LCLogin.getInstance();
 
     @NonNull
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
@@ -54,7 +54,7 @@ final class LCApi {
     }
 
     static String getIdFromGeocode(final String geocode) {
-        return StringUtils.removeStartIgnoreCase(geocode, "EC");
+        return StringUtils.removeStartIgnoreCase(geocode, "LC");
     }
 
     @Nullable
@@ -113,13 +113,13 @@ final class LCApi {
         params.add("type", logType.type);
         params.add("log", log);
         params.add("date", LOG_DATE_FORMAT.format(date.getTime()));
-        params.add("sid", ecLogin.getSessionId());
+        params.add("sid", lcLogin.getSessionId());
 
         final String uri = API_HOST + "log.php";
         try {
             final Response response = Network.postRequest(uri, params).blockingGet();
 
-            if (response.code() == 403 && ecLogin.login() == StatusCode.NO_ERROR) {
+            if (response.code() == 403 && lcLogin.login() == StatusCode.NO_ERROR) {
                 apiRequest(uri, params, true);
             }
             if (response.code() != 200) {
@@ -129,7 +129,7 @@ final class LCApi {
             final String data = Network.getResponseData(response, false);
             if (!StringUtils.isBlank(data) && StringUtils.contains(data, "success")) {
                 if (logType.isFoundLog()) {
-                    ecLogin.increaseActualCachesFound();
+                    lcLogin.increaseActualCachesFound();
                 }
                 final String uid = StringUtils.remove(data, "success:");
                 return new LogResult(StatusCode.NO_ERROR, uid);
@@ -156,14 +156,14 @@ final class LCApi {
         // add session and cgeo marker on every request
         if (!isRetry) {
             params.add("cgeo", "1");
-            params.add("sid", ecLogin.getSessionId());
+            params.add("sid", lcLogin.getSessionId());
         }
 
         final Single<Response> response = Network.getRequest(API_HOST + uri, params);
 
         // retry at most one time
         return response.flatMap((Function<Response, Single<Response>>) response1 -> {
-            if (!isRetry && response1.code() == 403 && ecLogin.login() == StatusCode.NO_ERROR) {
+            if (!isRetry && response1.code() == 403 && lcLogin.login() == StatusCode.NO_ERROR) {
                 return apiRequest(uri, params, true);
             }
             return Single.just(response1);
@@ -208,7 +208,7 @@ final class LCApi {
         try {
             final Geocache cache = new Geocache();
             cache.setReliableLatLon(true);
-            cache.setGeocode("EC" + response.get("cache_id").asText());
+            cache.setGeocode("LC" + response.get("cache_id").asText());
             cache.setName(response.get("title").asText());
             cache.setCoords(new Geopoint(response.get("lat").asText(), response.get("lon").asText()));
             cache.setType(getCacheType(response.get("type").asText()));
@@ -219,7 +219,7 @@ final class LCApi {
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
-            Log.e("ECApi.parseCache", e);
+            Log.e("LCApi.parseCache", e);
             return null;
         }
     }
