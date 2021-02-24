@@ -5,17 +5,22 @@ import cgeo.geocaching.location.Geopoint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 
 public class RouteSegment implements Parcelable {
+    @NonNull
     private final RouteItem item;
     private float distance;
+    @NonNull
     private ArrayList<Geopoint> points;
 
-    public RouteSegment(final RouteItem item, final ArrayList<Geopoint> points) {
+    public RouteSegment(@NonNull final RouteItem item, @Nullable final ArrayList<Geopoint> points) {
         this.item = item;
         distance = 0.0f;
-        this.points = points;
+        this.points = points != null ? points : new ArrayList<>();
     }
 
     public float calculateDistance() {
@@ -30,6 +35,7 @@ public class RouteSegment implements Parcelable {
         return distance;
     }
 
+    @NonNull
     public RouteItem getItem() {
         return item;
     }
@@ -39,11 +45,10 @@ public class RouteSegment implements Parcelable {
     }
 
     public ArrayList<Geopoint> getPoints() {
-        if (null == points || points.size() == 0) {
-            this.points = new ArrayList<>();
+        if (points.size() == 0) {
             final Geopoint point = item.getPoint();
             if (null != point) {
-                this.points.add(point);
+                points.add(point);
             }
         }
         return points;
@@ -86,7 +91,7 @@ public class RouteSegment implements Parcelable {
 
     };
 
-    private RouteSegment(final Parcel parcel) {
+    private RouteSegment(@NonNull final Parcel parcel) {
         item = parcel.readParcelable(RouteItem.class.getClassLoader());
         distance = parcel.readFloat();
         points = parcel.readArrayList(Geopoint.class.getClassLoader());
@@ -103,5 +108,4 @@ public class RouteSegment implements Parcelable {
         dest.writeFloat(distance);
         dest.writeList(points);
     }
-
 }
