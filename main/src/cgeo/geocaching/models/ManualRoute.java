@@ -26,6 +26,7 @@ public class ManualRoute extends Route implements Parcelable {
     }
 
     private boolean loadingRoute = false;
+    @Nullable
     private SetTarget setTarget = null;
 
     public ManualRoute(@Nullable final SetTarget setTarget) {
@@ -41,7 +42,7 @@ public class ManualRoute extends Route implements Parcelable {
         void setTarget(@Nullable Geopoint geopoint, String geocode);
     }
 
-    public void toggleItem(final Context context, final RouteItem item, final UpdateManualRoute routeUpdater) {
+    public void toggleItem(final Context context, final RouteItem item, @Nullable final UpdateManualRoute routeUpdater) {
         if (loadingRoute) {
             return;
         }
@@ -62,7 +63,7 @@ public class ManualRoute extends Route implements Parcelable {
         AndroidRxUtils.andThenOnUi(Schedulers.io(), this::loadRouteInternal, () -> updateRoute(updateRoute));
     }
 
-    public void updateRoute(final UpdateManualRoute routeUpdater) {
+    public void updateRoute(@Nullable final UpdateManualRoute routeUpdater) {
         if (loadingRoute) {
             return;
         }
@@ -102,16 +103,14 @@ public class ManualRoute extends Route implements Parcelable {
     }
 
     private synchronized void saveRoute() {
-        if (segments != null) {
-            Schedulers.io().scheduleDirect(() -> DataStore.saveIndividualRoute(this));
-        }
+        Schedulers.io().scheduleDirect(() -> DataStore.saveIndividualRoute(this));
     }
     private void clearRouteInternal(final UpdateManualRoute routeUpdater, final boolean deleteInDatabase) {
         distance = 0.0f;
         if (deleteInDatabase) {
             Schedulers.io().scheduleDirect(DataStore::clearIndividualRoute);
         }
-        segments = null;
+        segments = new ArrayList<>();
         if (null != routeUpdater) {
             routeUpdater.updateManualRoute(this);
         }
@@ -122,9 +121,6 @@ public class ManualRoute extends Route implements Parcelable {
      * @return ToggleItemState
      */
     private ToggleItemState toggleItemInternal(final RouteItem item) {
-        if (segments == null) {
-            segments = new ArrayList<>();
-        }
         final int pos = pos(item);
         if (pos == -1) {
             final RouteSegment segment = new RouteSegment(item, null);
@@ -147,7 +143,7 @@ public class ManualRoute extends Route implements Parcelable {
     }
 
     private int pos(final RouteItem item) {
-        if (segments == null || segments.size() == 0) {
+        if (segments.size() == 0) {
             return -1;
         }
         final String identifier = item.getIdentifier();
