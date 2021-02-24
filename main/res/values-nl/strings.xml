@@ -1834,6 +1834,7 @@
     <string name="switch_default">(standaard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
+    <string name="show_all">Alles weergeven</string>
     <string name="routingmode_straight">Recht</string>
     <string name="routingmode_walk">Lopen</string>
     <string name="routingmode_bike">Fiets</string>
@@ -1921,6 +1922,7 @@
     <string name="wizard_permissions_folder_title">Map instellen: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo heeft een lokale map nodig om gegevens zoals GPX bestanden, back-ups, Field Notes en logbestanden op te slaan. Standaard worden deze bestanden opgeslagen in mappen onder de zogenaamde \"basismap\". Selecteer of creëer een dergelijke map in de volgende stap.\n\nAls je c:geo van een vorige versie bijwerkt, selecteer dan de bestaande map \"cgeo\" op hoofdniveau van je apparaatopslag.\nTip: Je kunt de interne opslag van je apparaat eerst zichtbaar maken in de bestandsselectie die hierna wordt weergegeven.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo heeft een lokale map nodig om offline kaartbestanden op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo heeft een lokale map nodig om themabestanden op te slaan voor offline kaarten. Selecteer of maak een dergelijke map aan in de volgende stap.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo heeft een lokale map nodig om GPX bestanden op te slaan (bijv. voor het importeren / exporteren van caches of spoor). Selecteer of maak een dergelijke map aan in de volgende stap.</string>
     <string name="wizard_platforms_title">Services configureren</string>
     <string name="wizard_platforms_intro">Om geocaches met c:geo te vinden heb je een account nodig voor een geocaching service ondersteund door c:geo.\nSelecteer de gewenste service hieronder om in te loggen met je bestaande account of maak een nieuw account aan.</string>
@@ -1939,6 +1941,8 @@
     <string name="wizard_status_location_permission">Locatie permissie</string>
     <string name="wizard_status_basefolder">Basismap</string>
     <string name="wizard_status_platform">Geocaching diensten</string>
+    <string name="wizard_not_now">Niet nu</string>
+    <string name="wizard_skip_wizard_warning">c:geo werkt mogelijk niet zoals verwacht totdat de configuratie is voltooid. Afhankelijk van de ontbrekende configuratie kan c:geo mogelijk niet in staat zijn om gegevens te lezen/opslaan zoals offline kaarten, geocaches, logbestanden etc.\n\nWanneer je de installatie wilt voltooien, kies dan \"Configuratiewizard\" in het hoofdmenu of herstart c:geo.</string>
     <!-- default actions in dialogs -->
     <string name="previous">Vorige</string>
     <string name="skip">Overslaan</string>
