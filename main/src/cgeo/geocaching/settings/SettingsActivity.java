@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.downloader.MapDownloaderUtils;
 import cgeo.geocaching.gcvote.GCVote;
@@ -218,7 +219,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(this);
         setWebsite(R.string.pref_fakekey_ec_website, ECConnector.getInstance().getHost());
-        getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isECConnectorActive()));
+        getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isLCConnectorActive()));
 
         getPreference(R.string.pref_connectorSUActive).setOnPreferenceChangeListener(this);
         setWebsite(R.string.pref_fakekey_su_website, SuConnector.getInstance().getHost());
@@ -618,6 +619,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 setAuthTitle(prefKeyId, ECConnector.getInstance());
                 setConnectedUsernameTitle(prefKeyId, ECConnector.getInstance());
                 break;
+            case R.string.pref_fakekey_lc_authorization:
+                setAuthTitle(prefKeyId, LCConnector.getInstance());
+                setConnectedUsernameTitle(prefKeyId, LCConnector.getInstance());
+                break;
             case R.string.pref_fakekey_su_authorization:
                 setSuAuthTitle();
                 setConnectedTitle(prefKeyId, Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret));
@@ -743,6 +748,11 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 setAuthTitle(requestCode, ECConnector.getInstance());
                 setConnectedUsernameTitle(requestCode, ECConnector.getInstance());
                 redrawScreen(R.string.preference_screen_ec);
+                break;
+            case R.string.pref_fakekey_lc_authorization:
+                setAuthTitle(requestCode, LCConnector.getInstance());
+                setConnectedUsernameTitle(requestCode, LCConnector.getInstance());
+                redrawScreen(R.string.preference_screen_lc);
                 break;
             case R.string.pref_fakekey_gcvote_authorization:
                 setAuthTitle(requestCode, GCVote.getInstance());

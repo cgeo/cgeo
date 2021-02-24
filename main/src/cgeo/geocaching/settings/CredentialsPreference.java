@@ -6,9 +6,11 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +35,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
     private enum CredentialActivityMapping {
         GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCConnector.getInstance()),
         EXTREMCACHING(R.string.pref_fakekey_ec_authorization, ECAuthorizationActivity.class, ECConnector.getInstance()),
+        LABCACHING(R.string.pref_fakekey_lc_authorization, LCAuthorizationActivity.class, LCConnector.getInstance()),
         GCVOTE(R.string.pref_fakekey_gcvote_authorization, GCVoteAuthorizationActivity.class, GCVote.getInstance());
 
         public final int prefKeyId;

@@ -48,3 +48,5 @@ main/gradle.properties
 captures/
 
 main/usage.txt
+main/tags
+tags
