@@ -1,18 +1,5 @@
 package cgeo.geocaching.connector.lc;
 
-import android.app.Activity;
-import android.os.Handler;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
@@ -29,6 +16,19 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.DisposableHandler;
+
+import android.app.Activity;
+import android.os.Handler;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ILogin, ICredentials {
 
