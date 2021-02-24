@@ -74,26 +74,6 @@ final class LCApi {
     }
 
     @NonNull
-    static Collection<Geocache> searchByBBox(final Viewport viewport) {
-
-        if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
-            return Collections.emptyList();
-        }
-
-        final Parameters params = new Parameters("fnc", "bbox");
-        params.add("lat1", String.valueOf(viewport.getLatitudeMin()));
-        params.add("lat2", String.valueOf(viewport.getLatitudeMax()));
-        params.add("lon1", String.valueOf(viewport.getLongitudeMin()));
-        params.add("lon2", String.valueOf(viewport.getLongitudeMax()));
-        try {
-            final Response response = apiRequest(params).blockingGet();
-            return importCachesFromJSON(response);
-        } catch (final Exception ignored) {
-            return Collections.emptyList();
-        }
-    }
-
-    @NonNull
     static Collection<Geocache> searchByCenter(final Geopoint center) {
         final Parameters params = new Parameters("skip", "0");
         params.add("take", "100");
