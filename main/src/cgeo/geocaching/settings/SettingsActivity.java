@@ -820,6 +820,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 || isPreference(preference, R.string.pref_connectorOCUKActive)
                 || isPreference(preference, R.string.pref_connectorGCActive)
                 || isPreference(preference, R.string.pref_connectorECActive)
+                || isPreference(preference, R.string.pref_connectorLCActive)
                 || isPreference(preference, R.string.pref_connectorSUActive)) {
             // update summary
             final boolean boolVal = (Boolean) value;
@@ -831,6 +832,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_gc)).setSummary(summary);
             } else if (isPreference(preference, R.string.pref_connectorECActive)) {
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
+            } else if (isPreference(preference, R.string.pref_connectorLCActive)) {
+                preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_lc)).setSummary(summary);
             } else if (isPreference(preference, R.string.pref_connectorSUActive)) {
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_su)).setSummary(summary);
             }
