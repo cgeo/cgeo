@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
+
 public final class DefaultMap {
 
     private DefaultMap() {
@@ -27,6 +29,7 @@ public final class DefaultMap {
         return getLiveMapIntent(fromActivity, getDefaultMapClass());
     }
 
+    @SuppressWarnings("unused")
     public static Intent getLiveMapIntent(final Activity fromActivity, final Geopoint coords) {
         return new MapOptions(coords).newIntent(fromActivity, getDefaultMapClass());
     }
@@ -51,12 +54,11 @@ public final class DefaultMap {
         startActivityGeoCode(fromActivity, getDefaultMapClass(), geocode);
     }
 
-    public static void startActivitySearch(final Activity fromActivity, final Class<?> cls, final SearchResult search, final String title) {
+    public static void startActivitySearch(final Activity fromActivity, final Class<?> cls, @NonNull final SearchResult search, final String title) {
         new MapOptions(search, title).startIntent(fromActivity, cls);
     }
 
-    public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title) {
+    public static void startActivitySearch(final Activity fromActivity, @NonNull final SearchResult search, final String title) {
         startActivitySearch(fromActivity, getDefaultMapClass(), search, title);
     }
-
 }
