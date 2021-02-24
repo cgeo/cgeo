@@ -1,4 +1,4 @@
 /**
- * <a href="https://extremcaching.com">Extremcaching</a> implementation.
+ * <a https://labs.geocaching.com/">Geocaching Adventure Lab</a> implementation.
  */
 package cgeo.geocaching.connector.lc;
