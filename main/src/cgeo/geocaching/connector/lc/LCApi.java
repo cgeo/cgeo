@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,6 +13,9 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.CacheSize;

@@ -6,12 +6,12 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
