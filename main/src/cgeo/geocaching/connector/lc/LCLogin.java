@@ -105,7 +105,12 @@ public class LCLogin extends AbstractLogin {
         final Application application = CgeoApplication.getInstance();
         setActualStatus(application.getString(R.string.init_login_popup_ok));
 
-        if (false) { // TODO only for debug
+        if (fakeLogin) { // TODO only for debug
+            setActualLoginStatus(true);
+            setActualUserName("JoeDante");
+            setActualCachesFound(0);
+            return true;
+        } else { // TODO Debug Path
             try {
                 final JsonNode json = JsonUtils.reader.readTree(data);
 
@@ -119,14 +124,8 @@ public class LCLogin extends AbstractLogin {
             } catch (IOException | NullPointerException e) {
                 Log.e("LCLogin.getLoginStatus", e);
             }
-
             setActualStatus(application.getString(R.string.init_login_popup_failed));
             return false;
-        } else { // TODO Debug Path
-            setActualLoginStatus(true);
-            setActualUserName("JoeDante");
-            setActualCachesFound(0);
-            return true;
         }
     }
 
