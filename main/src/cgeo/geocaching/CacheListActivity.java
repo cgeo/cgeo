@@ -197,7 +197,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final CacheListActivity activity = getReference();
             if (activity == null) {
                 return;
@@ -455,7 +455,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final CacheListActivity activity = getReference();
             if (activity != null) {
                 activity.refreshCurrentList();
@@ -803,7 +803,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private boolean containsOfflineLogs() {
         for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
-            if (cache.isLogOffline()) {
+            if (cache.hasLogOffline()) {
                 return true;
             }
         }
@@ -960,6 +960,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return true;
     }
 
+    @NonNull
     private SearchResult getFilteredSearch() {
         return new SearchResult(Geocache.getGeocodes(adapter.getFilteredList()));
     }
@@ -1107,7 +1108,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final Geocache cache = adapterInfo != null ? getCacheFromAdapter(adapterInfo) : null;
 
         // just in case the list got resorted while we are executing this code
-        if (cache == null || adapterInfo == null) {
+        if (cache == null) {
             return true;
         }
 
@@ -1272,7 +1273,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         } else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
-            setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]));
+            if (filterIndex != null) {
+                setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]));
+            }
         }
 
         if (type == CacheListType.OFFLINE) {
@@ -1642,6 +1645,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      * @param username the username to check
      * @return <tt>true</tt> if the username is not blank, <tt>false</tt> otherwise
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private static boolean checkNonBlankUsername(final Context context, final String username) {
         if (StringUtils.isBlank(username)) {
             ActivityMixin.showToast(context, R.string.warn_no_username);
@@ -1781,6 +1785,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     // Loaders
 
+    // returning null value is handled in onCreate
+    @SuppressWarnings("NullableProblems")
+    @Nullable
     @Override
     public Loader<SearchResult> onCreateLoader(final int type, final Bundle extras) {
         if (type >= CacheListLoaderType.values().length) {
