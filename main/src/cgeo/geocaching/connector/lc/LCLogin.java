@@ -1,13 +1,5 @@
 package cgeo.geocaching.connector.lc;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import org.apache.commons.lang3.StringUtils;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
@@ -19,7 +11,16 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.io.IOException;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class LCLogin extends AbstractLogin {
 
