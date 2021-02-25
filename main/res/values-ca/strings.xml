@@ -873,8 +873,6 @@
     <string name="cache_log_images_title">Imatges del registre</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Nota personal</string>
-    <string name="cache_menu_preventWaypointsFromNote">Eviteu que els punts de ruta des de notes</string>
-    <string name="cache_menu_allowWaypointExtraction">Permetre els punts de ruta des de la nota</string>
     <string name="cache_personal_note_edit">Edita</string>
     <string name="cache_personal_note_storewaypoints">Afegeix / actualitza punts de ruta</string>
     <string name="cache_personal_note_removewaypoints">Elimina els punts de ruta</string>
