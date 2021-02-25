@@ -802,7 +802,7 @@
     <string name="settings_ec_icons_other">Own style</string>
     <string name="settings_ec_icons_oc">Like OC</string>
     <string name="settings_lc_icons_other">Own style</string>
-    <string name="settings_lc_icons_oc">Like LC</string>
+    <string name="settings_lc_icons">Like GC</string>
     <string name="settings_features">Supported Features</string>
     <string name="feature_personal_notes">Personal note</string>
     <string name="feature_online_logging">Online logging</string>
