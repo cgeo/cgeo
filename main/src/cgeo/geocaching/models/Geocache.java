@@ -103,6 +103,7 @@ public class Geocache implements IWaypoint {
     @NonNull
     private String geocode = "";
     private String cacheId = "";
+    private String cacheUUID = "";
     private String guid = "";
     private UncertainProperty<CacheType> cacheType = new UncertainProperty<>(CacheType.UNKNOWN, Tile.ZOOMLEVEL_MIN - 1);
     private String name = "";
@@ -273,6 +274,9 @@ public class Geocache implements IWaypoint {
         if (StringUtils.isBlank(cacheId)) {
             cacheId = other.cacheId;
         }
+        if (StringUtils.isBlank(cacheUUID)) {
+            cacheUUID = other.cacheUUID;
+        }
         if (StringUtils.isBlank(guid)) {
             guid = other.guid;
         }
@@ -423,6 +427,7 @@ public class Geocache implements IWaypoint {
                 StringUtils.equalsIgnoreCase(guid, other.guid) &&
                 StringUtils.equalsIgnoreCase(getHint(), other.getHint()) &&
                 StringUtils.equalsIgnoreCase(cacheId, other.cacheId) &&
+                StringUtils.equalsIgnoreCase(cacheUUID, other.cacheUUID) &&
                 Objects.equals(direction, other.direction) &&
                 Objects.equals(distance, other.distance) &&
                 rating == other.rating &&
@@ -436,6 +441,10 @@ public class Geocache implements IWaypoint {
                 Objects.equals(logCounts, other.logCounts) &&
                 Objects.equals(hasLogOffline, other.hasLogOffline) &&
                 finalDefined == other.finalDefined;
+    }
+
+    public boolean hasUUID() {
+        return !StringUtils.isBlank(cacheUUID);
     }
 
     public boolean hasTrackables() {
@@ -1274,8 +1283,16 @@ public class Geocache implements IWaypoint {
         this.geocode = StringUtils.upperCase(geocode);
     }
 
+    public void setGeocodeCaseSensitive(@NonNull final String geocode) {
+        this.geocode = geocode;
+    }
+
     public void setCacheId(final String cacheId) {
         this.cacheId = cacheId;
+    }
+
+    public void setCacheUUID(final String cacheUUID) {
+        this.cacheUUID = cacheUUID;
     }
 
     public void setGuid(final String guid) {
