@@ -103,7 +103,7 @@ public class LCLogin extends AbstractLogin {
             return false;
         }
 
-        final Credentials credentials = Settings.getCredentials(LCConnector.getInstance());
+        final Credentials credentials = getCredentials(LCConnector.getInstance());
         final Application application = CgeoApplication.getInstance();
         setActualStatus(application.getString(R.string.init_login_popup_ok));
 
