@@ -347,10 +347,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         final String realGeocode = geocode;
         final String realGuid = guid;
-        Log.e("realGuid:" + guid);
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
-            //search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, false, loadCacheHandler);
-            search = Geocache.searchByGeocode(realGeocode, realGuid, false, loadCacheHandler);
+            search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, false, loadCacheHandler);
             loadCacheHandler.sendMessage(Message.obtain());
         });
 

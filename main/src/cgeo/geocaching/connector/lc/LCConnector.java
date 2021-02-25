@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -40,7 +41,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ILogin, ICredentials {
+public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin, ICredentials {
 
     @NonNull
     private static final String CACHE_URL = "https://adventurelab.page.link/";
@@ -111,6 +112,13 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
         final Geocache cache = LCApi.searchByGeocode(guid);
 
         return cache != null ? new SearchResult(cache) : null;
+    }
+    @Override
+    @NonNull
+    public SearchResult searchByViewport(@NonNull final Viewport viewport) {
+        final Collection<Geocache> caches = LCApi.searchByBBox(viewport);
+        final SearchResult searchResult = new SearchResult(caches);
+        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
     }
 
     @Override
