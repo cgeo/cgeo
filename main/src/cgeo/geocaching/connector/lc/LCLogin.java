@@ -7,9 +7,9 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.settings.Settings.getCredentials;
 
 import android.app.Application;
 
@@ -21,7 +21,8 @@ import java.io.IOException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.StringUtils;
 
-import static cgeo.geocaching.settings.Settings.getCredentials;
+
+
 
 public class LCLogin extends AbstractLogin {
 
