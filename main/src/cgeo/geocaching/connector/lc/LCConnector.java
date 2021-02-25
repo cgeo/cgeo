@@ -25,6 +25,7 @@ import androidx.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.regex.Pattern;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin, ICredentials {
