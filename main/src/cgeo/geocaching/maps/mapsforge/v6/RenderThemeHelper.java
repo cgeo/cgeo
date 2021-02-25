@@ -317,20 +317,26 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
         cachedZipProvider = null;
         cachedZipProviderFilename = null;
 
-        for (File candidate : LocalStorage.getMapThemeInternalDir().listFiles()) {
-            if (candidate.getName().endsWith(".xml")) {
-                availableThemes.add(candidate.getName());
-            }
-            if (candidate.getName().endsWith(".zip")) {
+        addAvailableThemes(LocalStorage.getMapThemeInternalDir(), availableThemes, "");
+        availableThemesInitialized = true;
+    }
+
+    private static void addAvailableThemes(final File dir, final List<String> themes, final String prefix) {
+
+        for (File candidate : dir.listFiles()) {
+            if (candidate.isDirectory()) {
+                addAvailableThemes(candidate, themes, prefix + candidate.getName() + "/");
+            } else if (candidate.getName().endsWith(".xml")) {
+                themes.add(prefix + candidate.getName());
+            } else if (candidate.getName().endsWith(".zip")) {
                 try {
-                    availableThemes.addAll(CollectionStream.of(
-                        getXmlThemesIn(new ZipInputStream(new FileInputStream(candidate)))).map(t -> candidate.getName() + ZIP_THEME_SEPARATOR + t).toList());
+                    themes.addAll(CollectionStream.of(
+                        getXmlThemesIn(new ZipInputStream(new FileInputStream(candidate)))).map(t -> prefix + candidate.getName() + ZIP_THEME_SEPARATOR + t).toList());
                 } catch (IOException ioe) {
                     Log.w("Map Theme ZIP '" + candidate + "' could not be read", ioe);
                 }
             }
         }
-        availableThemesInitialized = true;
     }
 
     private static boolean isZipTheme(final String theme) {
