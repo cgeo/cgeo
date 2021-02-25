@@ -16,15 +16,16 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import java.io.IOException;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
+import static cgeo.geocaching.settings.Settings.getCredentials;
 
 public class LCLogin extends AbstractLogin {
 
-    private Boolean fakeLogin = true;
+    private final Boolean fakeLogin = true;
 
     private LCLogin() {
         // singleton
@@ -43,7 +44,7 @@ public class LCLogin extends AbstractLogin {
     @Override
     @NonNull
     protected StatusCode login(final boolean retry) {
-        return login(retry, Settings.getCredentials(LCConnector.getInstance()));
+        return login(retry, getCredentials(LCConnector.getInstance()));
     }
 
     @Override
@@ -102,12 +103,13 @@ public class LCLogin extends AbstractLogin {
             return false;
         }
 
+        final Credentials credentials = Settings.getCredentials(LCConnector.getInstance());
         final Application application = CgeoApplication.getInstance();
         setActualStatus(application.getString(R.string.init_login_popup_ok));
 
         if (fakeLogin) { // TODO only for debug
             setActualLoginStatus(true);
-            setActualUserName("JoeDante");
+            setActualUserName(credentials.getUserName());
             setActualCachesFound(0);
             return true;
         } else { // TODO Debug Path

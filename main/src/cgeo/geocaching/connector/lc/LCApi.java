@@ -1,34 +1,28 @@
 package cgeo.geocaching.connector.lc;
 
-import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import com.fasterxml.jackson.databind.JsonNode;
-
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.collections4.CollectionUtils;
@@ -43,9 +37,6 @@ final class LCApi {
     @NonNull
     private static final LCLogin lcLogin = LCLogin.getInstance();
 
-    @NonNull
-    private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
-
     private LCApi() {
         // utility class with static methods
     }
@@ -56,7 +47,6 @@ final class LCApi {
 
     @Nullable
     static Geocache searchByGUID(final String guid) {
-        Log.e(guid);
         final Parameters params = new Parameters("id", guid);
         try {
             final Response response = apiRequest("GetAdventureBasicInfo", params).blockingGet();
@@ -70,7 +60,34 @@ final class LCApi {
             return null;
         }
     }
+    @NonNull
+    static Collection<Geocache> searchByBBox(final Viewport viewport) {
 
+        if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
+            return Collections.emptyList();
+        }
+
+        final double latcenter = (viewport.getLatitudeMax()  + viewport.getLatitudeMin())  / 2;
+        final double loncenter = (viewport.getLongitudeMax() + viewport.getLongitudeMin()) / 2;
+        final String latitude  = Double.toString(latcenter);
+        final String longitude = Double.toString(loncenter);
+
+        final Parameters params = new Parameters("skip", "0");
+        params.add("take", "100");
+        params.add("excludeOwned", "false");
+        params.add("excludeCompleted", "false");
+        params.add("radiusMeters", "10000");
+        params.add("latitude", latitude);
+        params.add("longitude", longitude);
+
+        try {
+            final Response response = apiRequest("GCSearch",params).blockingGet();
+            //Log.e(response.toString());
+            return importCachesFromJSON(response);
+        } catch (final Exception ignored) {
+            return Collections.emptyList();
+        }
+    }
     @NonNull
     static Collection<Geocache> searchByCenter(final Geopoint center) {
         final Parameters params = new Parameters("skip", "0");
@@ -87,40 +104,6 @@ final class LCApi {
             return Collections.emptyList();
         }
     }
-
-    @NonNull
-    static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log) {
-        final Parameters params = new Parameters("cache_id", cache.getGeocode());
-        params.add("type", logType.type);
-        params.add("log", log);
-        params.add("date", LOG_DATE_FORMAT.format(date.getTime()));
-
-        final String uri = API_HOST + "log.php";
-        try {
-            final Response response = Network.postRequest(uri, params).blockingGet();
-
-            if (response.code() == 403 && lcLogin.login() == StatusCode.NO_ERROR) {
-                apiRequest(uri, params, true);
-            }
-            if (response.code() != 200) {
-                return new LogResult(StatusCode.LOG_POST_ERROR, "");
-            }
-
-            final String data = Network.getResponseData(response, false);
-            if (!StringUtils.isBlank(data) && StringUtils.contains(data, "success")) {
-                if (logType.isFoundLog()) {
-                    lcLogin.increaseActualCachesFound();
-                }
-                final String uid = StringUtils.remove(data, "success:");
-                return new LogResult(StatusCode.NO_ERROR, uid);
-            }
-        } catch (final Exception ignored) {
-            // Response is already logged
-        }
-
-        return new LogResult(StatusCode.LOG_POST_ERROR, "");
-    }
-
 
     @NonNull
     private static Single<Response> apiRequest(final String uri, final Parameters params) {
@@ -172,8 +155,8 @@ final class LCApi {
             final String[] segments = firebaseDynamicLink.split("/");
             final String id = segments[segments.length - 1];
             cache.setReliableLatLon(true);
-            cache.setGeocode("LC" + id);
-            cache.setGuid(response.get("id").asText());
+            cache.setGeocodeCaseSensitive("LC" + id);
+            cache.setCacheUUID(response.get("id").asText());
             cache.setName(response.get("title").asText());
             cache.setCoords(new Geopoint(location.get("latitude").asText(), location.get("longitude").asText()));
             cache.setType(getCacheType("Lab"));
