@@ -81,7 +81,7 @@ final class LCApi {
         params.add("longitude", longitude);
 
         try {
-            final Response response = apiRequest("GCSearch",params).blockingGet();
+            final Response response = apiRequest("GCSearch", params).blockingGet();
             //Log.e(response.toString());
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
