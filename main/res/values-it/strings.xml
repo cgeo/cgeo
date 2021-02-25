@@ -536,6 +536,7 @@
     <string name="settings_service_active">Attiva</string>
     <string name="settings_navigation_disabled">Questa applicazione non sembra essere installata</string>
     <string name="init_signature">Firma</string>
+    <string name="init_template_help">Le stringhe segnaposto - come [NAME] - sono riempite con il testo designato quando viene utilizzato il modello.</string>
     <string name="init_signature_template_button">Stringhe speciali</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Ora</string>
@@ -843,7 +844,10 @@
     <string name="persistablefolder_fieldnotes">Field Notes</string>
     <string name="persistablefolder_spoilerimages">Immagini Spoiler</string>
     <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fatto</string>
+    <string name="folder_process_status_currentfile">Processo %1$s</string>
     <!-- FolderUtils: synchronize -->
+    <string name="folder_synchronize_to_internal_progressbar_title">Sincronizza il contenuto di %1$s nella memoria interna</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Copia del contenuto di %1$s in %2$s</string>
     <string name="folder_move_progressbar_title">Spostamento del contenuto di %1$s in %2$s</string>
@@ -1217,6 +1221,12 @@
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_dot_mode">Usa icone compatte</string>
     <string name="map_show_circles">Mostra area cache</string>
+    <string name="map_showc_ownfound">Cache tuoi / trovati</string>
+    <string name="map_showc_disabled">Cache disabilitati</string>
+    <string name="map_showc_archived">Cache archiviati</string>
+    <string name="map_showwp_original">Waypoint originali</string>
+    <string name="map_showwp_parking">Waypoint del parcheggio</string>
+    <string name="map_showwp_visited">Waypoint visitati</string>
     <string name="map_show_track">Mostra traccia/percorso GPX</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
     <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
@@ -1235,7 +1245,9 @@
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
     <string name="quick_settings_info">Alcune impostazioni della mappa (impostazioni mappa, routing) sono state spostate nella nuova finestra popup \"Impostazioni rapide\".\nPuoi aprire questo popup usando l\'icona nel centro inferiore della mappa.</string>
+    <string name="map_show_in_map">Mostra sulla mappa:</string>
     <!-- search -->
+    <string name="search_bar_hint">Cerca caches/trackables</string>
     <string name="search_bar_desc">Cache (geo code, parole chiave), oggetti Trackables (TB-code)</string>
     <string name="search_coordinates">Coordinate</string>
     <string name="search_coordinates_button">Cerca per coordinate</string>
@@ -1822,6 +1834,7 @@
     <string name="switch_default">(predefinito)</string>
     <string name="yes">Sì</string>
     <string name="no">No</string>
+    <string name="show_all">Mostra tutto</string>
     <string name="routingmode_straight">Dritto</string>
     <string name="routingmode_walk">A piedi</string>
     <string name="routingmode_bike">Bici</string>
@@ -1881,6 +1894,7 @@
     <string name="mapserver_mapsforge_info">Mappe di base, nessun tema mappa richiesto</string>
     <string name="mapserver_openandromaps_info">Mappe dettagliate, richiedono tema mappa \"Elevate\"</string>
     <string name="mapserver_elevate_info">Tema mappa dettagliato</string>
+    <string name="mapserver_freizeitkarte_info">Mappe dettagliate, richiedono uno dei temi della mappa \"freizeitkarte\".</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
@@ -1908,6 +1922,7 @@
     <string name="wizard_permissions_folder_title">Imposta cartella: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare dati come file GPX, backup, note di campo e file di log. Come per impostazione predefinita, questi file sono memorizzati sotto una cosiddetta \"cartella di base\". Selezionare o creare questa cartella nel passaggio successivo.\n\nSe hai aggiornato c:geo da una versione precedente, seleziona la cartella esistente \"cgeo\" sul livello principale dell\'archivio del tuo dispositivo.\nSuggerimento: potrebbe essere necessario, come prima cosa, mostrare la memoria interna del dispositivo nel selettore dei file che verrà visualizzato successivamente.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file di mappa offline. Selezionare o creare una tale cartella nel passaggio successivo.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file dei temi di mappa offline. Selezionare o creare tale cartella nel passaggio successivo.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file GPX (es. per importare / esportare cache o tracce). Selezionare o creare una tale cartella nel passaggio successivo.</string>
     <string name="wizard_platforms_title">Configura servizi</string>
     <string name="wizard_platforms_intro">Per trovare le geocache con c:geo è necessario un account per un servizio di geocaching supportato da c:geo.\nSeleziona il servizio desiderato qui sotto per accedere con il tuo account esistente o creare un nuovo account.</string>
@@ -1926,6 +1941,8 @@
     <string name="wizard_status_location_permission">Permesso localizzazione</string>
     <string name="wizard_status_basefolder">Cartella base</string>
     <string name="wizard_status_platform">Servizi di geocaching</string>
+    <string name="wizard_not_now">Non ora</string>
+    <string name="wizard_skip_wizard_warning">c:geo potrebbe non funzionare come previsto senza il completamento della configurazione. A seconda della configurazione mancante c:geo potrebbe non essere in grado di leggere / memorizzare dati come mappe offline, geocache, file di log, ecc.\n\nQuando ti senti pronto a completare la configurazione, scegli \"Configuration wizard\" nel menu principale o riavvia c:geo.</string>
     <!-- default actions in dialogs -->
     <string name="previous">Precedente</string>
     <string name="skip">Salta</string>
