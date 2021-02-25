@@ -1922,6 +1922,7 @@
     <string name="wizard_permissions_folder_title">Ordner festlegen: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo benötigt einen lokalen Ordner, um Daten wie GPX-Dateien, Backups, Feldnotizen und Logdateien zu speichern. Standardmäßig werden diese Dateien in Ordnern unterhalb eines sog. \"Basisordners\" gespeichert. Wähle oder erstelle einen solchen Ordner im nächsten Schritt.\n\nWenn du c:geo von einer früheren Version aktualisiert hast, wähle den existierenden Ordner \"cgeo\" auf der Grundebene deines Gerätespeichers aus.\nHinweis: Möglicherweise musst du die Anzeige des internen Speichers deines Gerätes zuerst in der Dateiauswahl, die gleich angezeigt wird, aktivieren.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo benötigt einen Ordner für Offline-Kartendateien. Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo benötigt einen Ordner um Darstellungen für Offlinekarten zu speichern. Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo benötigt einen Ordner für GPX-Dateien (z.B. zum Import / Export von Caches oder Tracks). Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
     <string name="wizard_platforms_title">Dienste konfigurieren</string>
     <string name="wizard_platforms_intro">Um Geocaches mit c:geo zu finden, benötigst du ein Konto für einen Geocaching-Dienst, der von c:geo unterstützt wird.\nWähle unten den gewünschten Dienst aus, um dich entweder mit deinem bestehenden Konto anzumelden oder ein neues Konto zu erstellen.</string>
@@ -1940,6 +1941,8 @@
     <string name="wizard_status_location_permission">Standortberechtigung</string>
     <string name="wizard_status_basefolder">Basisordner</string>
     <string name="wizard_status_platform">Geocaching-Dienste</string>
+    <string name="wizard_not_now">Jetzt nicht</string>
+    <string name="wizard_skip_wizard_warning">c:geo funktioniert möglicherweise nicht wie erwartet, bis die Konfiguration abgeschlossen ist. Abhängig von der fehlenden Konfiguration ist c:geo möglicherweise nicht in der Lage, Daten wie Offline-Karten, Geocaches, Logdateien usw. zu lesen/zu speichern.\n\nWann immer du bereit bist, das Setup abzuschließen, wähle entweder \"Konfigurations-Assistent\" im Hauptmenü oder starte c:geo neu.</string>
     <!-- default actions in dialogs -->
     <string name="previous">Zurück</string>
     <string name="skip">Überspringen</string>
