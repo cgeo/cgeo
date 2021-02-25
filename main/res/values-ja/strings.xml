@@ -153,7 +153,9 @@
     <string name="log_problem_archive_label">要アーカイブ</string>
     <string name="log_problem_archive_text">このジオキャッシャーがキャッシュがアーカイブされるべきと報告しました。コミュニティのボランティアレビューアーに通知されました</string>
     <string name="log_image_scale_option_noscaling">実サイズ</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
     <string name="log_image_scale_option_entry_noimage">%1$dpx</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\n縮小/圧縮:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">画像</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%sに翻訳</string>
@@ -239,6 +241,7 @@
     <string name="warn_search_help_tb">トラッカブルのコード(多くはTBかTCで始まります)を入力してください。例:「TB29QMZ」</string>
     <string name="warn_log_text_fill">ログの本文を入力してください</string>
     <string name="warn_load_images">画像を読み込むことができませんでした</string>
+    <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforgeの地図ファイルではないかサポートされていないバージョンです。\n(現在バージョン3から5まで使用できます)\n\nオフライン地図は利用できません</string>
     <string name="warn_pocket_query_select">ポケット・クエリが選択されていません</string>
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
     <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
@@ -342,6 +345,8 @@
     <string name="caches_nearby">現在地の近く</string>
     <string name="caches_remove_all">すべての項目を削除</string>
     <string name="caches_remove_selected">選択した項目を削除</string>
+    <string name="caches_remove_all_completely">デバイスからすべてのキャッシュを削除</string>
+    <string name="caches_remove_selected_completely">デバイスから選択したキャッシュを削除</string>
     <string name="caches_delete_events">過去のイベントを削除</string>
     <string name="caches_upload_modifiedcoords">修正された座標をアップロード</string>
     <string name="caches_upload_modifiedcoords_warning">すべての(選択した)キャッシュの修正された座標をアップロードしますか? サーバー上の座標は上書きしされ、元に戻すことはできません</string>
@@ -530,6 +535,7 @@
     <string name="settings_service_active">有効</string>
     <string name="settings_navigation_disabled">未インストール</string>
     <string name="init_signature">署名</string>
+    <string name="init_template_help">[NAME] のようなプレースホルダは、テンプレート機能で指定された文字列に置換されます。</string>
     <string name="init_signature_template_button">テンプレートを挿入</string>
     <string name="init_signature_template_date">日付</string>
     <string name="init_signature_template_time">時刻</string>
@@ -612,6 +618,7 @@
     <string name="init_restore_restored">正常に復元されました</string>
     <string name="init_backup_start_restore">復元する</string>
     <string name="init_backup_restore_different_backup">ほかのバックアップから復元する</string>
+    <string name="init_backup_restore_different_backup_explanation">復元したいバックアップを含むフォルダを選択してください</string>
     <string name="init_backup_backup_history">バックアップ履歴</string>
     <string name="init_backup_history_length_title">バックアップの最大数</string>
     <string name="init_backup_history_length_summary">保存したいバックアップの最大数(世代数)。最大数に達すると古いバックアップは自動的に削除されます</string>
@@ -631,6 +638,8 @@
     <string name="restore_information">復元するものを選択してください</string>
     <string name="init_restore_success">キャッシュのデータベースは正常に復元されました</string>
     <string name="init_restore_failed_dbrecreated">復元に失敗しました: バックアップファイルが破損しています。データベースを再作成する必要がありました</string>
+    <string name="init_restore_db_failed">データベースの復元に失敗しました。</string>
+    <string name="init_restore_settings_failed">プログラム設定の復元に失敗しました。</string>
     <string name="init_restore_running">キャッシュのデータベースを復元中…</string>
     <string name="init_restore_confirm">データベースは空です。バックアップから復元しますか?</string>
     <string name="init_backup_last">バックアップ日時:</string>
@@ -667,24 +676,25 @@
     <string name="init_trailwidth">軌跡の線幅</string>
     <string name="init_trailwidth_summary">軌跡の線幅を選択</string>
     <string name="init_directioncolor">ナビルートの色</string>
-    <string name="init_directioncolor_summary">ナビルートの色と不透明度の選択。ナビルートは目的地までの直線か、ナビゲーションのルート(BRouterアプリがインストールされてルート検索が有効の場合)です</string>
+    <string name="init_directioncolor_summary">ナビルートの色と不透明度を選択。ナビルートは目的地までの直線か、ナビゲーションのルート(BRouterアプリがインストールされてルート検索が有効の場合)です</string>
     <string name="init_directionwidth">ナビルートの線幅</string>
-    <string name="init_directionwidth_summary">ナビルートの線幅の選択</string>
+    <string name="init_directionwidth_summary">ナビルートの線幅を選択</string>
     <string name="init_routecolor">個別ルートの色</string>
+    <string name="init_routecolor_summary">個別ルートの色と不透明度を選択。個別ルートはウェイポイント/キャッシュをロングタップで選択して作成したルートです(「地図の動作」でロングタップを有効にする必要があります)</string>
     <string name="init_routewidth">個別ルートの線幅</string>
     <string name="init_routewidth_summary">個別ルートの線幅を選択</string>
     <string name="init_trackcolor">GPXトラック/ルートの色</string>
-    <string name="init_trackcolor_summary">トラック/ルートの色と不透明度の選択。トラック/ルートはトラックポイントの集まりで、GPXトラック/ルートファイルから読み込めます</string>
+    <string name="init_trackcolor_summary">トラック/ルートの色と不透明度を選択。トラック/ルートはトラックポイントの集まりで、GPXトラック/ルートファイルから読み込めます</string>
     <string name="init_trackwidth">GPXトラック/ルートの線幅</string>
-    <string name="init_trackwidth_summary">GPXトラック/ルートの線幅の選択</string>
+    <string name="init_trackwidth_summary">GPXトラック/ルートの線幅を選択</string>
     <string name="init_circlecolor">0.1マイル円の線色</string>
-    <string name="init_circlecolor_summary">0.1マイル円の線色と不透明度の選択。 キャッシュまたはウェイポイントに半径0.1マイルの円を表示します。geocaching.comでは0.1マイル以内にキャッシュまたは物理的なウェイポイントを設置することを禁止しています</string>
+    <string name="init_circlecolor_summary">0.1マイル円の線色と不透明度を選択。 キャッシュまたはウェイポイントに半径0.1マイルの円を表示します。geocaching.comでは0.1マイル以内にキャッシュまたは物理的なウェイポイントを設置することを禁止しています</string>
     <string name="init_circlefillcolor">0.1マイル円の内側の色</string>
-    <string name="init_circlefillcolor_summary">0.1マイル円の内側の色と不透明度の選択</string>
+    <string name="init_circlefillcolor_summary">0.1マイル円の内側の色と不透明度を選択</string>
     <string name="init_accuracycirclecolor">精度円の線色</string>
-    <string name="init_accuracycirclecolor_summary">精度円の線色と不透明度の選択。精度円は位置測位の精度を表しています</string>
+    <string name="init_accuracycirclecolor_summary">精度円の線色と不透明度を選択。精度円は位置測位の精度を表しています</string>
     <string name="init_accuracycirclefillcolor">精度円の内側の色</string>
-    <string name="init_accuracycirclefillcolor_summary">精度円の内側の色と不透明度の選択</string>
+    <string name="init_accuracycirclefillcolor_summary">精度円の内側の色と不透明度を選択</string>
     <string name="init_include_found_status">「発見した」ステータスを含める</string>
     <string name="init_trackautovisit">トラッカブルの「訪れた」設定</string>
     <string name="init_summary_trackautovisit">「発見」したログを書く時にトラッカブルを自動的に「訪れた」にする</string>
@@ -697,6 +707,7 @@
     <string name="init_secondary_navigation_tool">2番目のナビゲーション</string>
     <string name="init_default_navigation_tool_description">お好きなナビツールを選択できます</string>
     <string name="init_default_navigation_tool_select">ナビツールの選択</string>
+    <string name="init_default_navigation_tool_2_description">2番目にお好きなナビツールを選択できます。キャッシュ情報のタイトルの右隣にあるナビアイコンをロングタップすると起動できます</string>
     <string name="init_navigation_menu_description">キャッシュまたはウェイポイントのナビゲーションメニューに表示するナビゲーション方法を選択できます。未インストールのツールは選択できません</string>
     <string name="init_debug_title">デバッグ情報</string>
     <string name="init_debug_note">c:geoは多くのデバッグ情報を作成することができます。この設定を有効にするとc:geoの安定性に影響を与えます。開発者にログを送信するよう求められた場合のみお勧めします。通常時は無効にして下さい!</string>
@@ -763,7 +774,9 @@
     <string name="init_maplines_title">地図の線表示の設定</string>
     <string name="init_map_other">そのほか</string>
     <string name="init_map_osm_multithreaded">マルチスレッド(OSM)</string>
-    <string name="init_summary_map_osm_multithreaded">OpenStreetMap地図をレンダリングするために複数のスレッドを使用する</string>
+    <string name="init_summary_map_osm_multithreaded">OpenStreetMap地図をレンダリングするためにマルチスレッドを使用する</string>
+    <string name="localstorage_migrate_title">ローカルファイルの移行</string>
+    <string name="localstorage_migrate_status_major">バージョン %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">接近通知</string>
     <string name="init_proximityNotificationGeneral">マップ上の全般的な接近通知</string>
@@ -797,7 +810,7 @@
     <string name="sendToCgeo_no_registration">キャッシュ情報がダウンロードできませんでした。Send2cgeoの有効期限が過ぎました。再登録してください</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">%sフォルダを変更</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">フォルダ%1$sは現在「%2$s」に設定されており、%3$sと%4$sが含まれています。</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">%1$sフォルダは現在「%2$s」に設定されており、%3$sと%4$sが含まれています。</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">デフォルトのフォルダ「%s」を使用するか、ユーザー定義のフォルダを選択することができます。</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">何もしない</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">すべてのファイルをコピー</string>
@@ -826,8 +839,12 @@
     <string name="persistablefolder_backup">バックアップ</string>
     <string name="persistablefolder_logfiles">ログファイル</string>
     <string name="persistablefolder_fieldnotes">フィールドノート</string>
+    <string name="persistablefolder_spoilerimages">スポイラー画像</string>
     <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s、%3$s/%4$s 完了</string>
+    <string name="folder_process_status_currentfile">処理中:%1$s</string>
     <!-- FolderUtils: synchronize -->
+    <string name="folder_synchronize_to_internal_progressbar_title">%1$s のコンテンツを内部ストレージに同期</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">「%1$s」の内容を「%2$s」にコピーしています</string>
     <string name="folder_move_progressbar_title">「%1$s」の内容を「%2$s」に移動しています</string>
@@ -852,8 +869,10 @@
     <string name="auth_register">アカウントを作成</string>
     <string name="auth_connected">接続しました</string>
     <string name="auth_unconnected">まだ接続されていません</string>
+    <string name="auth_connected_as">%sとして接続しました\nここをタップして更新するか、ロングタップしてc:geoから認証データを削除できます</string>
     <string name="auth_dialog_waiting">%sからの返答を待っています…</string>
     <string name="auth_explain_short">次の処理で<b>c:geo</b>が%sへのアクセスをできるようになります</string>
+    <string name="auth_explain_long">「c:geoを認証」ボタンをタップすると、Webブラウザで%sが開きます。Webサイトにログインし<b>c:geo</b>のアクセスを許可してください</string>
     <string name="auth_forget_title">認証を削除しますか?</string>
     <string name="auth_forget_message">このサービスから切断します。保存されているアカウント情報は失われます</string>
     <!-- auth credentials -->
@@ -862,6 +881,7 @@
     <string name="auth_register_explain">アカウントをお持ちでない場合は新規登録してください。以下をタップするとサービスのウェブページに移動します。 c:geoはGoogle/Apple/Facebook経由でのログインをサポートしていないため、ユーザー名とパスワードを使用してアカウントを作成してください。 c:geoでログインする前に、アカウントのメールアドレス認証が必要な場合があります</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">次の処理で<b>c:geo</b>が%sにアクセスできるようになります</string>
+    <string name="auth_token_explain_long">アカウント情報を入力して「c:geoを承認」ボタンをタップすると、%sに接続して認証トークンを取得します</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geoはTwitterにポストするための認証を受けました</string>
     <!-- auth opencaching -->
@@ -1187,6 +1207,12 @@
     <string name="map_rotation">地図の回転</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
     <string name="map_show_circles">0.1マイル円を表示</string>
+    <string name="map_showc_ownfound">所有/発見したキャッシュ</string>
+    <string name="map_showc_disabled">一時停止中キャッシュ</string>
+    <string name="map_showc_archived">アーカイブ済みのキャッシュ</string>
+    <string name="map_showwp_original">ウェイポイント(オリジナル)</string>
+    <string name="map_showwp_parking">ウェイポイント(駐車場)</string>
+    <string name="map_showwp_visited">ウェイポイント(訪問済み)</string>
     <string name="map_show_track">GPXトラック/ルートを表示</string>
     <string name="init_hidewp">ウェイポイントを隠す</string>
     <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
@@ -1205,7 +1231,9 @@
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
     <string name="quick_settings_info">いくつか地図の設定(地図上の表示/非表示、ルート検索など)は新しい「クイック設定」に移動しました。\n地図の下部中央の歯車アイコンをタップすると開けます</string>
+    <string name="map_show_in_map">地図に表示:</string>
     <!-- search -->
+    <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_desc">キャッシュ(GCコード,キーワード), トラッカブル(TBコード)</string>
     <string name="search_coordinates">座標</string>
     <string name="search_coordinates_button">座標で検索</string>
@@ -1771,6 +1799,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="switch_default">(デフォルト)</string>
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
+    <string name="show_all">すべて表示</string>
     <string name="routingmode_straight">直線</string>
     <string name="routingmode_walk">徒歩</string>
     <string name="routingmode_bike">自転車</string>
@@ -1830,6 +1859,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="mapserver_mapsforge_info">基本地図(地図テーマは必要ありません)</string>
     <string name="mapserver_openandromaps_info">詳細地図(地図テーマ\"Elevate\"が必要です)</string>
     <string name="mapserver_elevate_info">詳細地図テーマ</string>
+    <string name="mapserver_freizeitkarte_info">詳細な地図は「freizeitkartte」のテーマが必要です。</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
     <string name="map_trailhistory_cleared">軌跡を削除しました</string>
@@ -1854,7 +1884,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_outro_error">設定が完了していません\nこのままでは、すべての機能が期待どおり動作するわけではありません!</string>
     <string name="wizard_permissions_title">アプリの権限の設定</string>
     <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です\n次のステップで説明します</string>
+    <string name="wizard_permissions_folder_title">フォルダの設定: %s</string>
+    <string name="wizard_basefolder_request_explanation">GPXファイル、バックアップ、フィールドノート、ログファイルなどを保存するためにローカルフォルダが必要です。デフォルトでは「ベースフォルダ」下の各フォルダにそれぞれ保存されます。次のステップでそのフォルダを選択または作成します。\n\n以前のバージョンからアップグレードされる場合はデバイスストレージのルートにある「cgeo」フォルダを選択してください。\nヒント:次のファイルセレクタで最初にデバイスの「内部ストレージを表示」する必要があるかもしれません。</string>
     <string name="wizard_mapfolder_request_explanation">オフライン用の地図ファイルを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
+    <string name="wizard_mapthemesfolder_request_explanation">オフライン地図のテーマファイルを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
     <string name="wizard_gpxfolder_request_explanation">GPXファイルを保存(キャッシュやトラックをインポート/エクスポート)するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
     <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です\nお持ちのアカウントでログインするかアカウント作成してください</string>
@@ -1873,10 +1906,13 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_status_location_permission">位置情報の権限</string>
     <string name="wizard_status_basefolder">ベースフォルダ</string>
     <string name="wizard_status_platform">ジオキャッシングサイト</string>
+    <string name="wizard_not_now">今はしない</string>
+    <string name="wizard_skip_wizard_warning">設定が完了するまでc:geoは期待通りに動作しない可能性があります。 未設定の項目によっては、オフライン地図、ジオキャッシュ、ログファイルなどのデータを読み込み/保存ができない場合があります。\n\nセットアップを再開するには、メインメニューで「設定ウィザード」を選択するか、c:geoを再起動してください。</string>
     <!-- default actions in dialogs -->
     <string name="previous">戻る</string>
     <string name="skip">スキップ</string>
     <string name="next">次へ</string>
     <string name="done">完了</string>
     <string name="finish">終了</string>
+    <string name="back">戻る</string>
 </resources>
