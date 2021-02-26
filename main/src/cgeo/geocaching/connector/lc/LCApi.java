@@ -46,8 +46,8 @@ final class LCApi {
     }
 
     @Nullable
-    static Geocache searchByGUID(final String guid) {
-        final Parameters params = new Parameters("id", guid);
+    static Geocache searchByGeocode(final String geocode) {
+        final Parameters params = new Parameters("id", geocode);
         try {
             final Response response = apiRequest("GetAdventureBasicInfo", params).blockingGet();
 
@@ -156,7 +156,7 @@ final class LCApi {
             final String id = segments[segments.length - 1];
             cache.setReliableLatLon(true);
             cache.setGeocodeCaseSensitive("LC" + id);
-            cache.setCacheUUID(response.get("id").asText());
+            cache.setCacheId(response.get("id").asText());
             cache.setName(response.get("title").asText());
             cache.setCoords(new Geopoint(location.get("latitude").asText(), location.get("longitude").asText()));
             cache.setType(getCacheType("Lab"));
