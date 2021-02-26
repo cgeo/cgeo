@@ -72,11 +72,11 @@ public class CompassActivity extends AbstractActionBarActivity {
         binding = CompassActivityBinding.bind(getWindow().getDecorView().findViewById(android.R.id.content));
 
         deviceOrientationMode
-            .setValues(Arrays.asList(new DirectionData.DeviceOrientation[]{DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT}))
+            .setValues(Arrays.asList(DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT))
             .setDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
             .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
             .setTextClickThrough(true)
-            .setChangeListener(d -> Settings.setDeviceOrientationMode(d));
+            .setChangeListener(Settings::setDeviceOrientationMode);
 
         reconfigureGui();
 
@@ -262,7 +262,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         setTarget(cache.getCoords(), Formatter.formatCacheInfoShort(cache));
     }
 
-    private void setDestCoords(final Geopoint coords) {
+    private void setDestCoords(@Nullable final Geopoint coords) {
         dstCoords = coords;
         if (null != proximityNotification) {
             proximityNotification.setReferencePoint(coords);
@@ -285,7 +285,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void updateDistanceInfo(final GeoData geo) {
+    private void updateDistanceInfo(@NonNull final GeoData geo) {
         if (dstCoords == null) {
             return;
         }
@@ -313,7 +313,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     @SuppressLint("SetTextI18n")
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoDirData(@NonNull final GeoData geo, final DirectionData dir) {
+        public void updateGeoDirData(@NonNull final GeoData geo, @NonNull final DirectionData dir) {
             try {
                 binding.navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
@@ -332,9 +332,7 @@ public class CompassActivity extends AbstractActionBarActivity {
                 for (int i = 1; i < altitudeReadings.length; i++) {
                     averageAltitude += altitudeReadings[i];
                 }
-                if (altitudeReadings.length > 0) {
-                    averageAltitude /= (double) altitudeReadings.length;
-                }
+                averageAltitude /= altitudeReadings.length;
                 binding.navLocation.setText(geo.getCoords().toString() + Formatter.SEPARATOR + Units.getDistanceFromMeters((float) averageAltitude));
 
                 updateDistanceInfo(geo);
@@ -352,7 +350,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     };
 
-    private void updateNorthHeading(final DirectionData dir) {
+    private void updateNorthHeading(@NonNull final DirectionData dir) {
         if (binding.rose != null) {
             binding.rose.updateNorth(dir.getDeviceOrientation() == DirectionData.DeviceOrientation.UPRIGHT ?
                 dir.getDirection() : AngleUtils.getDirectionNow(dir.getDirection()), cacheHeading);
@@ -360,7 +358,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void updateDeviceHeadingAndOrientation(final DirectionData dir) {
+    private void updateDeviceHeadingAndOrientation(@NonNull final DirectionData dir) {
 
         if (dir.hasOrientation()) {
             binding.deviceOrientationAzimuth.setText(formatDecimalFloat(dir.getAzimuth()) + "° /");
