@@ -1914,7 +1914,6 @@
     <string name="downloadmap_install_theme_info">Pobrana mapa wymaga specjalnego pliku motywu. Czy chcesz go również pobrać?</string>
     <string name="mapserver_mapsforge_info">Podstawowe mapy, motywy mapy nie są wymagane</string>
     <string name="mapserver_openandromaps_info">Szczegółowe mapy, wymagają motywu mapy \"Elevate\"</string>
-    <string name="mapserver_elevate_info">Szczegółowy motyw mapy</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
     <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>
