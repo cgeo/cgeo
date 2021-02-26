@@ -1893,7 +1893,6 @@
     <string name="downloadmap_install_theme_info">Je gedownloade kaart vereist een speciaal themabestand. Wil je deze ook downloaden?</string>
     <string name="mapserver_mapsforge_info">Basis kaarten, geen kaart thema\'s nodig</string>
     <string name="mapserver_openandromaps_info">Gedetailleerde kaarten, vereisen thema \"Elevate\"</string>
-    <string name="mapserver_elevate_info">Gedetailleerd kaartthema</string>
     <string name="mapserver_freizeitkarte_info">Gedetailleerde kaarten, vereisen een van de \"freizeitkarte\" kaartthema\'s.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
