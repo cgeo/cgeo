@@ -270,11 +270,11 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
             selectedTheme = StringUtils.EMPTY;
             for (String avTheme : availableThemes) {
                 //might be a legacy value. Try to find a matching theme ending with stored value
-                if (selectedTheme.endsWith("/" + avTheme)) {
+                if (themeCandidate.endsWith("/" + avTheme)) {
                     selectedTheme = avTheme;
                 }
-                //might be an incomplete ZIP value (only ZIp name without a selected inside theme). Then use first found value
-                if (avTheme.startsWith(selectedTheme + ZIP_THEME_SEPARATOR)) {
+                //might be an incomplete ZIP value (only Zip name without a selected inside theme). Then use first found value
+                if (avTheme.startsWith(themeCandidate + ZIP_THEME_SEPARATOR)) {
                     selectedTheme = avTheme;
                 }
             }
