@@ -346,6 +346,8 @@
     <string name="caches_nearby">Σε κοντινή απόσταση</string>
     <string name="caches_remove_all">Διαγραφή όλων</string>
     <string name="caches_remove_selected">Διαγραφή επιλεγμένων</string>
+    <string name="caches_remove_all_completely">Διαγραφή όλων από τη συσκευή</string>
+    <string name="caches_remove_selected_completely">Διαγραφή επιλεγμένων από τη συσκευή</string>
     <string name="caches_delete_events">Διαγραφή πρηγούμενων εκδηλώσεων</string>
     <string name="caches_upload_modifiedcoords">Μεταφόρτωση τροποποιημένων συντεταγμένων</string>
     <string name="caches_upload_modifiedcoords_warning">Θέλετε να ανεβάσετε τροποποιημένες συντεταγμένες για όλες τις (επιλεγμένες) κρύπτες και να αντικαταστήσετε τις υπάρχουσες συντεταγμένες στον server; Αυτό δεν μπορεί να αναιρεθεί.</string>
@@ -533,6 +535,7 @@
     <string name="settings_service_active">Ενεργή</string>
     <string name="settings_navigation_disabled">Αυτή η εφαρμογή δεν είναι εγκατεστημένη</string>
     <string name="init_signature">Υπογραφή</string>
+    <string name="init_template_help">Οι τοποθετούμενες συμβολοσειρές - όπως [NAME] - συμπληρώνονται με το καθορισμένο κείμενο όταν χρησιμοποιείται το πρότυπο.</string>
     <string name="init_signature_template_button">Εισαγωγή προτύπου</string>
     <string name="init_signature_template_date">Ημερομηνία</string>
     <string name="init_signature_template_time">Ώρα</string>
@@ -613,6 +616,7 @@
     <string name="init_restore_restored">Η επαναφορά ολοκληρώθηκε</string>
     <string name="init_backup_start_restore">Έναρξη επαναφοράς</string>
     <string name="init_backup_restore_different_backup">Επαναφορά διαφορετικού αρχείου ασφαλείας</string>
+    <string name="init_backup_restore_different_backup_explanation">Παρακαλώ επιλέξτε το φάκελο που περιέχει το αντίγραφο ασφαλείας που θέλετε να επαναφέρετε</string>
     <string name="init_backup_backup_history">Ιστορικό Αντιγράφων Ασφαλείας</string>
     <string name="init_backup_history_length_title">Μέγιστος αριθμός αποθηκευμένων αντιγράφων ασφαλείας</string>
     <string name="init_backup_history_length_summary">Αποφασίστε πόσα αντίγραφα ασφαλείας θα τηρηθούν. Όταν φτάσετε το όριο, το παλιότερο αρχείο θα διαγραφεί αυτόματα.</string>
@@ -632,6 +636,8 @@
     <string name="restore_information">Παρακαλώ επιλέξτε τι θέλετε να επαναφέρετε:</string>
     <string name="init_restore_success">Η επαναφορά ολοκληρώθηκε.</string>
     <string name="init_restore_failed_dbrecreated">Αποτυχία επαναφοράς: κατεστραμμένο αρχείο αντιγράφου, υποχρεωτική επαναδημιουργία της βάσης δεδομένων.</string>
+    <string name="init_restore_db_failed">Η αποκατάσταση της βάσης δεδομένων απέτυχε.</string>
+    <string name="init_restore_settings_failed">Η επαναφορά των ρυθμίσεων του προγράμματος απέτυχε.</string>
     <string name="init_restore_running">Επαναφορά βάσης δεδομένων κρυπτών…</string>
     <string name="init_restore_confirm">Η βάση δεδομένων είναι κενή. Θέλετε να επαναφέρετε τα αντίγραφα ασφαλείας της βάσης δεδομένων;</string>
     <string name="init_backup_last">Διαθέσιμα αντίγραφα ασφαλείας από</string>
@@ -825,7 +831,10 @@
     <string name="persistablefolder_usertype_default">Προεπιλογή</string>
     <string name="persistablefolder_spoilerimages">Εικόνες spoiler</string>
     <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s ολοκληρώθηκαν</string>
+    <string name="folder_process_status_currentfile">Διαδικασία %1$s</string>
     <!-- FolderUtils: synchronize -->
+    <string name="folder_synchronize_to_internal_progressbar_title">Συγχρονισμός περιεχομένου του %1$s στον εσωτερικό αποθηκευτικό χώρο</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Αντιγραφή περιεχομένου από %1$s έως %2$s</string>
     <string name="folder_move_progressbar_title">Μετακίνηση περιεχομένου από %1$s σε %2$s</string>
@@ -1195,6 +1204,12 @@
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
     <string name="map_show_circles">Εμφάνιση κύκλων</string>
+    <string name="map_showc_ownfound">Ιδιόκτητες κρύπτες/ευρέσεις</string>
+    <string name="map_showc_disabled">Απενεργοποιημένες κρύπτες</string>
+    <string name="map_showc_archived">Αρχειοθετημένες κρύπτες</string>
+    <string name="map_showwp_original">Αρχικά ενδιάμεσα σημεία</string>
+    <string name="map_showwp_parking">Σημεία στάθμευσης</string>
+    <string name="map_showwp_visited">Ενδιάμεσα σημεία που έχει γίνει επίσκεψη</string>
     <string name="map_show_track">Εμφάνιση GPX διαδρομής</string>
     <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
     <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
@@ -1213,7 +1228,9 @@
     <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
     <string name="quick_settings">Γρήγορες ρυθμίσεις</string>
     <string name="quick_settings_info">Μερικές ρυθμίσεις χάρτη (Ρυθμίσεις χάρτη, απόκρυψη, δρομολόγηση) έχουν μεταφερθεί στο νέο αναδυόμενο παράθυρο \"Γρήγορες ρυθμίσεις\".\nΜπορείτε να ανοίξετε αυτό το αναδυόμενο παράθυρο χρησιμοποιώντας το εικονίδιο στο κάτω μέρος του χάρτη.</string>
+    <string name="map_show_in_map">Προβολή στο χάρτη:</string>
     <!-- search -->
+    <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
     <string name="search_bar_desc">Κρύπτες (γεωκωδικός, λέξη-κλειδί), Ανιχνεύσιμα (Κωδικός TB)</string>
     <string name="search_coordinates">Συντεταγμένες</string>
     <string name="search_coordinates_button">Αναζήτηση με συντεταγμένες</string>
@@ -1791,6 +1808,7 @@
     <string name="switch_default">(Προεπιλογή)</string>
     <string name="yes">Ναι</string>
     <string name="no">Όχι</string>
+    <string name="show_all">Εμφάνιση όλων</string>
     <string name="routingmode_straight">Ευθεία</string>
     <string name="routingmode_walk">Περπάτημα</string>
     <string name="routingmode_bike">Ποδήλατο</string>
@@ -1850,7 +1868,7 @@
     <string name="downloadmap_install_theme_info">Ο κατεβασμένος χάρτης σας απαιτεί ένα ειδικό αρχείο θέματος. Θέλετε να το κατεβάσετε επίσης?</string>
     <string name="mapserver_mapsforge_info">Βασικοί χάρτες, δεν απαιτούνται θέματα χάρτη</string>
     <string name="mapserver_openandromaps_info">Λεπτομερείς χάρτες, απαιτούν θέμα χάρτη \"Elevate\"</string>
-    <string name="mapserver_elevate_info">Λεπτομερές θέμα χάρτη</string>
+    <string name="mapserver_freizeitkarte_info">Λεπτομερείς χάρτες, απαιτούν ένα από τα θέματα χάρτη \"freizeitkarte\".</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
     <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
@@ -1878,6 +1896,7 @@
     <string name="wizard_permissions_folder_title">Ορισμός φακέλου: %s</string>
     <string name="wizard_basefolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση δεδομένων όπως αρχεία GPX, αντίγραφα ασφαλείας, σημειώσεις πεδίου και αρχεία καταγραφής. Σύμφωνα με προεπιλογή, αυτά τα αρχεία αποθηκεύονται σε φακέλους κάτω από έναν αποκαλούμενο \"βασικό φάκελο\". Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.\n\nΕάν αναβαθμίσατε το c:geo από μια προηγούμενη έκδοση, επιλέξτε τον υπάρχοντα φάκελο \"cgeo\" στο ριζικό επίπεδο του χώρου αποθήκευσης της συσκευής σας.\nΥπόδειξη: Ίσως χρειαστεί να αποκρύψετε πρώτα τον εσωτερικό αποθηκευτικό χώρο της συσκευής σας στον επιλογέα αρχείων που θα εμφανιστεί στη συνέχεια.</string>
     <string name="wizard_mapfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση αρχείων χαρτών εκτός σύνδεσης. Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση θεμάτων χαρτών εκτός σύνδεσης. Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.</string>
     <string name="wizard_gpxfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση αρχείων GPX π. χ. για την εισαγωγή / εξαγωγή κρυπτών ή κομματιών). Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.</string>
     <string name="wizard_platforms_title">Ρύθμιση υπηρεσιών</string>
     <string name="wizard_platforms_intro">Για να βρείτε κρύπτες με το c:geo χρειάζεστε ένα λογαριασμό για μια υπηρεσία geocaching που υποστηρίζεται από το c:geo.\nΕπιλέξτε την επιθυμητή υπηρεσία παρακάτω για να συνδεθείτε με τον υπάρχοντα λογαριασμό σας ή να δημιουργήσετε ένα νέο λογαριασμό.</string>
@@ -1895,6 +1914,8 @@
     <string name="wizard_status_storage_permission">Άδεια αποθήκευσης</string>
     <string name="wizard_status_location_permission">Άδεια τοποθεσίας</string>
     <string name="wizard_status_platform">Υπηρεσίες Geocaching</string>
+    <string name="wizard_not_now">Όχι τώρα</string>
+    <string name="wizard_skip_wizard_warning">το c:geo μπορεί να μην λειτουργήσει όπως αναμένεται μέχρι να ολοκληρωθούν οι ρυθμίσεις. Ανάλογα με τη ρύθμιση c:geo που λείπει μπορεί να μην είναι σε θέση να διαβάσει/αποθηκεύσει δεδομένα όπως χάρτες εκτός σύνδεσης, geocaches, αρχεία καταγραφής κλπ.\n\nΌποτε αισθάνεστε έτοιμοι να ολοκληρώσετε τις ρυθμίσεις, είτε επιλέξτε \"Οδηγός διαμόρφωσης\" στο κύριο μενού είτε επανεκκινήστε το c:geo.</string>
     <!-- default actions in dialogs -->
     <string name="previous">Προηγούμενο</string>
     <string name="skip">Παράλειψη</string>
