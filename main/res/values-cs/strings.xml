@@ -1945,8 +1945,9 @@
     <string name="downloadmap_install_theme_info">Stažená mapa vyžaduje speciální soubor motivu. Chcete ho stáhnout?</string>
     <string name="mapserver_mapsforge_info">Základní mapy, nejsou vyžadovány mapové motivy</string>
     <string name="mapserver_openandromaps_info">Podrobné mapy, vyžadují mapový motiv \"Elevate\"</string>
-    <string name="mapserver_elevate_info">Detailní motiv mapy</string>
+    <string name="mapserver_openandromaps_themes_info">Podrobný motiv mapy, vytvořený pro mapy „OpenAndroMaps“</string>
     <string name="mapserver_freizeitkarte_info">Podrobné mapy vyžadují jedno z témat map „freizeitkarte“.</string>
+    <string name="mapserver_freizeitkarte_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Freizeitkarte“</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
@@ -1974,6 +1975,7 @@
     <string name="wizard_permissions_folder_title">Nastavit složku: %s</string>
     <string name="wizard_basefolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání dat, jako jsou například soubory GPX, zálohy, poznámky a protokoly. Standardně jsou tyto soubory ukládány do složky pod tzv. \"základní složku\". V dalším kroku vyberte anebo vytvořte takovou složku.\n\n Pokud jste aplikaci c:geo aktualizovali z předchozí verze, vyberte existující složku „c:geo“ v hlavním adresáři v úložišti vašeho zařízení. \nTip: Možná budete muset nejprve odkrýt interní úložiště zařízení ve volbě souborů, které se poté zobrazí.</string>
     <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání souborů s motivy pro offline mapy. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
     <string name="wizard_gpxfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání GPX souborů, například pro import / export kešek nebo tras. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
     <string name="wizard_platforms_title">Konfigurace služeb</string>
     <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
@@ -1992,6 +1994,8 @@
     <string name="wizard_status_location_permission">Povolení k poloze</string>
     <string name="wizard_status_basefolder">Základní složka</string>
     <string name="wizard_status_platform">Geocachingové služby</string>
+    <string name="wizard_not_now">Nyní ne</string>
+    <string name="wizard_skip_wizard_warning">c:geo nemusí fungovat podle očekávání, dokud nebude dokončena konfigurace. V závislosti na chybějící konfiguraci nemusí být c:geo schopen číst/ukládat data jako jsou offline mapy, kešky, poznámky atd.\n\nKdykoli se budete cítit připraveni dokončit nastavení, zvolte v hlavní nabídce „Průvodce konfigurací“ nebo c:geo restartujte.</string>
     <!-- default actions in dialogs -->
     <string name="previous">Předchozí</string>
     <string name="skip">Přeskočit</string>
