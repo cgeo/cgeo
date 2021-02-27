@@ -367,6 +367,14 @@ public final class Formatter {
         return String.format(Locale.getDefault(), "%.1f %sB", bytes / Math.pow(1024, exp), pre);
     }
 
+    public static String formatDuration(final long milliseconds) {
+        //currently only used for millisecond/second range, could be expanded to longer ranges later
+        if (milliseconds > 1000) {
+            return (milliseconds / 1000) + "." + (milliseconds % 1000) + "s";
+        }
+        return milliseconds + "ms";
+    }
+
     public static List<CharSequence> truncateCommonSubdir(@NonNull final List<CharSequence> directories) {
         if (directories.size() < 2) {
             return directories;

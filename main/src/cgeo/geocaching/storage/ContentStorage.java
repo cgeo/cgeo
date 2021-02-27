@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.FileNameCreator;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 import static cgeo.geocaching.storage.Folder.CGEO_PRIVATE_FILES;
@@ -502,37 +503,10 @@ public class ContentStorage {
     private void reportProblem(@StringRes final int messageId, final Exception ex, final Object ... params) {
 
         //prepare params message
-        final ImmutablePair<String, String> messages = constructMessage(messageId, params);
+        final ImmutablePair<String, String> messages = LocalizationUtils.getMultiPurposeString(messageId, "ContentStorage", params);
         Log.w("ContentStorage: " + messages.right, ex);
         if (context != null) {
             ActivityMixin.showToast(context, messages.left);
         }
     }
-
-    /**
-     * Given a resource id and parameters to fill it, constructs one message fit fpr user display (left) and one for log file (right)
-     * Difference is that the one for the log file will contain more detailled information than that for the end user
-     */
-    public ImmutablePair<String, String> constructMessage(@StringRes final int messageId, final Object ... params) {
-        //prepare params message
-        final Object[] paramsForLog = new Object[params.length];
-        final Object[] paramsForUser = new Object[params.length];
-        for (int i = 0; i < params.length; i++) {
-            if (params[i] instanceof Folder) {
-                paramsForUser[i] = ((Folder) params[i]).toUserDisplayableString();
-                paramsForLog[i] = params[i] + "(" + getUriForFolder((Folder) params[i]) + ")";
-            } else if (params[i] instanceof PersistableFolder) {
-                paramsForUser[i] = ((PersistableFolder) params[i]).toUserDisplayableValue();
-                paramsForLog[i] = params[i] + "(" + getUriForFolder(((PersistableFolder) params[i]).getFolder()) + ")";
-            } else if (params[i] instanceof Uri) {
-                paramsForUser[i] = UriUtils.toUserDisplayableString((Uri) params[i]);
-                paramsForLog[i] = params[i];
-            } else {
-                paramsForUser[i] = params[i];
-                paramsForLog[i] = params[i];
-            }
-        }
-        return new ImmutablePair<>(context.getString(messageId, paramsForUser), context.getString(messageId, paramsForLog));
-    }
-
 }

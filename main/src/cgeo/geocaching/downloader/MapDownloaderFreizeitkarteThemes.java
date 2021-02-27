@@ -92,7 +92,7 @@ public class MapDownloaderFreizeitkarteThemes extends AbstractDownloader {
     @Override
     protected void onSuccessfulReceive(final Uri result) {
         //resync
-        RenderThemeHelper.resynchronizeMapThemeFolder(null);
+        RenderThemeHelper.resynchronizeMapThemeFolder();
         //set map theme
         RenderThemeHelper.setSelectedMapThemeDirect(UriUtils.getLastPathSegment(result));
     }

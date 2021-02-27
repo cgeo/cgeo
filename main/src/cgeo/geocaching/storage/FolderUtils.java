@@ -148,7 +148,7 @@ public class FolderUtils {
         FolderProcessTask.process(
             activity,
             activity.getString(R.string.folder_synchronize_to_internal_progressbar_title, source.toUserDisplayableString()),
-            ci -> synchronizeFolder(source, target, ci),
+            ci -> synchronizeFolder(source, target, null, ci),
             callback
         );
     }
@@ -170,10 +170,11 @@ public class FolderUtils {
      *
      * @param source source for synchronization
      * @param target target for synchronization
+     * @param cancelFlag optional. If not null and flag is set to true during sync, then running process is aborted. Will result in a Result ABORTED to be returned.*
      * @param statusListener callback for status information, useable to implement GUI progress bar. See {@link #copyAll(Folder, Folder, boolean)} for details.
      * @return result of synchroioozation attempt
      */
-    public FolderProcessResult synchronizeFolder(final Folder source, final File target, final Consumer<FolderProcessStatus> statusListener) {
+    public FolderProcessResult synchronizeFolder(final Folder source, final File target, final AtomicBoolean cancelFlag, final Consumer<FolderProcessStatus> statusListener) {
 
         sendCopyStatus(statusListener, null, 0, 0, null);
 
@@ -190,55 +191,84 @@ public class FolderUtils {
 
         final Map<String, Properties> targetSyncProps = getTargetFolderSyncProperties(target, targetList);
 
-        int filesProcessed = 0;
-        int filesModified = 0;
-        int dirsProcessed = 0;
-        int dirsModified = 0;
-        for (ImmutablePair<ContentStorage.FileInformation, String> sourceFile : sourceList) {
-            sendCopyStatus(statusListener, sourceFile.left, filesProcessed, dirsProcessed, sourceInfo);
-            if (sourceFile.left.isDirectory) {
-                final File dir = new File(target, sourceFile.right);
-                if (!dir.isDirectory()) {
-                    dir.mkdirs();
-                    dirsModified++;
-                }
-                dirsProcessed++;
-            } else {
-                targetFilesToDelete.remove(sourceFile.right);
-
-                final Boolean fileSyncResult = synchronizeSingleFileInternal(sourceFile, target, targetSyncPropsToUpdate, targetSyncProps);
-                if (fileSyncResult == null) {
-                    return createFolderProcessResult(ProcessResult.FAILURE, sourceFile.left, filesModified, dirsModified, sourceInfo);
-                }
-                if (fileSyncResult) {
-                    filesModified++;
-                }
-                filesProcessed++;
-            }
+        //Array stores values for: filesProcessed, filesModified, dirsProcessed, dirsModified
+        final int[] processStates = new int[]{ 0, 0, 0, 0};
+        final ContentStorage.FileInformation failedFile = synchronizeFolderProcessAllFiles(target, cancelFlag, statusListener, sourceInfo, sourceList, targetFilesToDelete, targetSyncPropsToUpdate, targetSyncProps, processStates);
+        if (failedFile != null) {
+            return createFolderProcessResult(ProcessResult.FAILURE, failedFile, processStates[1], processStates[3], sourceInfo);
         }
 
         //create/update directory sync files
-        for (String targetSyncPropToUpdate : targetSyncPropsToUpdate) {
-            OutputStream os = null;
-            try {
-                os = new FileOutputStream(new File(target, targetSyncPropToUpdate + "/" + FOLDER_SYNC_INFO_FILENAME));
-                targetSyncProps.get(targetSyncPropToUpdate).store(os, "c:geo sync information");
-            } catch (IOException ioe) {
-                return createFolderProcessResult(ProcessResult.FAILURE, null, filesModified, dirsModified, sourceInfo);
-            } finally {
-                IOUtils.closeQuietly(os);
-            }
+        try {
+            synchronizeFolderUpdateSyncFiles(target, cancelFlag, targetSyncPropsToUpdate, targetSyncProps);
+        } catch (IOException ioe) {
+            return createFolderProcessResult(ProcessResult.FAILURE, null, processStates[1], processStates[3], sourceInfo);
+        }
+
+        if (isCancelled(cancelFlag)) {
+            return createFolderProcessResult(ProcessResult.ABORTED, null, 0, 0, sourceInfo);
         }
 
         //delete leftover target files (no longer synced)
         boolean deleteSuccess = true;
         for (String targetFileToDelete : targetFilesToDelete) {
             deleteSuccess &= new File(target, targetFileToDelete).delete();
-            filesModified++;
+            processStates[1]++;
         }
-        sendCopyStatus(statusListener, null, filesProcessed, dirsProcessed, sourceInfo);
+        sendCopyStatus(statusListener, null, processStates[0], processStates[2], sourceInfo);
 
-        return createFolderProcessResult(deleteSuccess ? ProcessResult.OK : ProcessResult.FAILURE, null, filesModified, dirsModified, sourceInfo);
+        return createFolderProcessResult(deleteSuccess ? ProcessResult.OK : ProcessResult.FAILURE, null, processStates[1], processStates[3], sourceInfo);
+    }
+
+    @Nullable
+    private ContentStorage.FileInformation synchronizeFolderProcessAllFiles(
+        final File target, final AtomicBoolean cancelFlag,
+        final Consumer<FolderProcessStatus> statusListener, final ImmutablePair<Integer, Integer> sourceInfo,
+        final List<ImmutablePair<ContentStorage.FileInformation, String>> sourceList, final Set<String> targetFilesToDelete,
+        final Set<String> targetSyncPropsToUpdate, final Map<String, Properties> targetSyncProps, final int[] processStates) {
+
+        for (ImmutablePair<ContentStorage.FileInformation, String> sourceFile : sourceList) {
+            sendCopyStatus(statusListener, sourceFile.left, processStates[0], processStates[2], sourceInfo);
+            if (isCancelled(cancelFlag)) {
+                break;
+            }
+            if (sourceFile.left.isDirectory) {
+                final File dir = new File(target, sourceFile.right);
+                if (!dir.isDirectory()) {
+                    dir.mkdirs();
+                    processStates[3]++;
+                }
+                processStates[2]++;
+            } else {
+                targetFilesToDelete.remove(sourceFile.right);
+
+                final Boolean fileSyncResult = synchronizeSingleFileInternal(sourceFile, target, targetSyncPropsToUpdate, targetSyncProps);
+                if (fileSyncResult == null) {
+                    return sourceFile.left;
+                }
+                if (fileSyncResult) {
+                    processStates[1]++;
+                }
+                processStates[0]++;
+            }
+        }
+        return null;
+    }
+
+    private void synchronizeFolderUpdateSyncFiles(final File target, final AtomicBoolean cancelFlag, final Set<String> targetSyncPropsToUpdate, final Map<String, Properties> targetSyncProps) throws IOException {
+        //create/update directory sync files
+        for (String targetSyncPropToUpdate : targetSyncPropsToUpdate) {
+            if (isCancelled(cancelFlag)) {
+                break;
+            }
+            OutputStream os = null;
+            try {
+                os = new FileOutputStream(new File(target, targetSyncPropToUpdate + "/" + FOLDER_SYNC_INFO_FILENAME));
+                targetSyncProps.get(targetSyncPropToUpdate).store(os, "c:geo sync information");
+            } finally {
+                IOUtils.closeQuietly(os);
+            }
+        }
     }
 
     /** returns null in case of failre, true if file needed copy (and was copied), false if file didn't need copy) */
