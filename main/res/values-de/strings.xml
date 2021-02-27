@@ -1942,6 +1942,7 @@
     <string name="wizard_status_platform">Geocaching-Dienste</string>
     <string name="wizard_not_now">Jetzt nicht</string>
     <string name="wizard_skip_wizard_warning">c:geo funktioniert möglicherweise nicht wie erwartet, bis die Konfiguration abgeschlossen ist. Abhängig von der fehlenden Konfiguration ist c:geo möglicherweise nicht in der Lage, Daten wie Offline-Karten, Geocaches, Logdateien usw. zu lesen/zu speichern.\n\nWann immer du bereit bist, das Setup abzuschließen, wähle entweder \"Konfigurations-Assistent\" im Hauptmenü oder starte c:geo neu.</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Zurück</string>
     <string name="skip">Überspringen</string>
