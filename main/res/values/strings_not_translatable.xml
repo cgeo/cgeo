@@ -248,7 +248,7 @@
     <string translatable="false" name="package_barcode_scanner">com.google.zxing.client.android</string>
     <string translatable="false" name="package_locus">menion.android.locus</string>
 
-    <!-- map server urls -->
+    <!-- map server & other download urls -->
     <string translatable="false" name="mapserver_mapsforge_name">Mapsforge</string>
     <string translatable="false" name="mapserver_mapsforge_downloadurl">https://ftp-stud.hs-esslingen.de/pub/Mirrors/download.mapsforge.org/maps/v5/</string>
     <string translatable="false" name="mapserver_mapsforge_likeiturl">https://github.com/mapsforge/mapsforge</string>
@@ -270,6 +270,10 @@
 
     <string translatable="false" name="mapserver_freizeitkarte_themes_name">Freizeitkarte Themes</string>
     <string translatable="false" name="mapserver_freizeitkarte_themes_downloadurl">http://download.freizeitkarte-osm.de/android/2012/</string>
+
+    <string translatable="false" name="brouter_name">BRouter</string>
+    <string translatable="false" name="brouter_downloadurl">http://brouter.de/brouter/segments4/</string>
+    <string translatable="false" name="brouter_projecturl">https://www.brouter.de/brouter/</string>
 
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report</string>

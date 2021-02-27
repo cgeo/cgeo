@@ -1078,6 +1078,10 @@ public class Settings {
         return getBoolean(R.string.pref_brouterShowBothDistances, false);
     }
 
+    public static boolean isBrouterAutoTileDownloads() {
+        return getBoolean(R.string.pref_brouterAutoTileDownloads, false);
+    }
+
     public static boolean isBigSmileysEnabled() {
         return getBoolean(R.string.pref_bigSmileysOnMap, false);
     }

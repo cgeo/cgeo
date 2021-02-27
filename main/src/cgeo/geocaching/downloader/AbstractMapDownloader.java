@@ -43,9 +43,9 @@ abstract class AbstractMapDownloader extends AbstractDownloader {
         }
 
         if (!anyFileFound) {
-                Dialogs.confirm(activity, activity.getString(R.string.downloadmap_install_theme_title), activity.getString(R.string.downloadmap_install_theme_info), activity.getString(android.R.string.ok), (d, w) -> {
+            Dialogs.confirm(activity, activity.getString(R.string.downloadmap_install_theme_title), activity.getString(R.string.downloadmap_install_theme_info), activity.getString(android.R.string.ok), (d, w) -> {
                 final Uri newUri = Uri.parse(baseUrl + filenames[0]);
-                MapDownloaderUtils.triggerDownload(activity, offlineMapType.id, newUri, "", System.currentTimeMillis(), callback);
+                MapDownloaderUtils.triggerDownload(activity, R.string.download_title, offlineMapType.id, newUri, "", "", System.currentTimeMillis(), callback);
             }, dialog -> callback.run());
         } else {
             callback.run();
