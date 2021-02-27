@@ -1956,6 +1956,7 @@
     <string name="wizard_status_location_permission">Povolenie k polohe</string>
     <string name="wizard_status_basefolder">Hlavný priečinok</string>
     <string name="wizard_status_platform">Geocachingové služby</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Späť</string>
     <string name="skip">Preskočiť</string>
