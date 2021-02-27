@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.DownloadConfirmationActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 
@@ -217,7 +218,7 @@ public final class Routing {
         }
 
         // missing routing data?
-        if (gpx.startsWith("datafile ") && gpx.endsWith(" not found") && Settings.isBrouterAutoTileDownloads()) {
+        if (gpx.startsWith("datafile ") && gpx.endsWith(" not found") && Settings.isBrouterAutoTileDownloads() && !PersistableFolder.BROUTER_TILES.isLegacy()) {
             synchronized (requestedTileFiles) {
                 String filename = gpx.substring(9);
                 final int pos = filename.indexOf(" ");
@@ -231,7 +232,7 @@ public final class Routing {
                         break;
                     }
                 }
-                Log.e("routing: missing file " + filename + ", alreadyRequested=" + alreadyRequested);
+                Log.i("routing: missing file " + filename + ", alreadyRequested=" + alreadyRequested);
                 if (!alreadyRequested) {
                     requestedTileFiles.add(filename);
                     final Intent intent = new Intent(getContext(), DownloadConfirmationActivity.class);
