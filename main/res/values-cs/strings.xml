@@ -1996,6 +1996,7 @@
     <string name="wizard_status_platform">Geocachingové služby</string>
     <string name="wizard_not_now">Nyní ne</string>
     <string name="wizard_skip_wizard_warning">c:geo nemusí fungovat podle očekávání, dokud nebude dokončena konfigurace. V závislosti na chybějící konfiguraci nemusí být c:geo schopen číst/ukládat data jako jsou offline mapy, kešky, poznámky atd.\n\nKdykoli se budete cítit připraveni dokončit nastavení, zvolte v hlavní nabídce „Průvodce konfigurací“ nebo c:geo restartujte.</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Předchozí</string>
     <string name="skip">Přeskočit</string>
