@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.capability.ISearchByNextPage;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.ec.ECConnector;
+import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.connector.ga.GeocachingAustraliaConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.ge.GeopeitusConnector;
@@ -59,6 +60,7 @@ public final class ConnectorFactory {
     @NonNull private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.<IConnector> asList(
             GCConnector.getInstance(),
             ECConnector.getInstance(),
+            LCConnector.getInstance(),
             new OCDEConnector(),
             new OCCZConnector(),
             new OCApiLiveConnector("opencache.uk", "opencache.uk", false, "OK", "CC BY-NC-SA 2.5",
