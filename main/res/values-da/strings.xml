@@ -1683,5 +1683,6 @@
     <string name="export_individualroute_title">Eksportér individuel rute</string>
     <string name="export_individualroute_success">Individuel rute eksporteret til \"%s\"</string>
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>
