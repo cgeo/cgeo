@@ -13,7 +13,7 @@
  * - Android internal Download manager gets triggered for download of a
  *   specific file,
  *   temporary info for this process is stored as PendingDownload
- * - Download manager calls MapDownloadNotificationReceiver with result
+ * - Download manager calls DownloadNotificationReceiver with result
  * - this deletes the PendingDownload and triggers ReceiveMapFileActivity
  * - here copying the file to its final destination (unzipping along the
  *   way, if needed) and handling of companion file is done

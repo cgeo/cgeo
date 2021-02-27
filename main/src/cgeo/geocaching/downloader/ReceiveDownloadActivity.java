@@ -117,7 +117,7 @@ public class ReceiveDownloadActivity extends AbstractActivity {
     private void handleMapFile(final Activity activity, final boolean isZipFile, final String nameWithinZip) {
         // check whether the target file or its companion file already exist
         final List<ContentStorage.FileInformation> files = ContentStorage.get().list(downloader.targetFolder.getFolder(), false);
-        Uri companionFileExists = CompanionFileUtils.companionFileExists(files, filename);
+        Uri companionFileExists = downloader.useCompanionFiles ? CompanionFileUtils.companionFileExists(files, filename) : null;
         Uri downloadFileExists = null;
         for (ContentStorage.FileInformation fi : files) {
             if (fi.name.equals(filename)) {
@@ -273,7 +273,7 @@ public class ReceiveDownloadActivity extends AbstractActivity {
             switch (status) {
                 case SUCCESS:
                     result = String.format(getString(R.string.receivedownload_success), fileinfo);
-                    if (StringUtils.isNotBlank(sourceURL)) {
+                    if (downloader.useCompanionFiles && StringUtils.isNotBlank(sourceURL)) {
                         CompanionFileUtils.writeInfo(sourceURL, filename, CompanionFileUtils.getDisplayName(fileinfo), sourceDate, offlineMapTypeId);
                     }
                     break;
