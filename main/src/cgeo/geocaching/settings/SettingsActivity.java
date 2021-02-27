@@ -536,6 +536,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initMapPreferences() {
+        getPreference(R.string.preference_category_offlinerouting).setEnabled(ProcessUtils.isInstalled(getString(R.string.package_brouter)));
         getPreference(R.string.pref_bigSmileysOnMap).setOnPreferenceChangeListener((preference, newValue) -> {
             setResult(RESTART_NEEDED);
             return true;

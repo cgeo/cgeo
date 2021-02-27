@@ -249,9 +249,6 @@
         </activity>
         <activity android:name=".settings.ViewSettingsActivity" />
         <activity
-            android:name=".downloader.ReceiveMapFileActivity">
-        </activity>
-        <activity
             android:name=".HandleLocalFilesActivity"
             android:exported="true"
             android:label="@string/localfile_intenttitle">
@@ -874,9 +871,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
+        <activity android:name=".downloader.DownloadConfirmationActivity" android:exported="false" />
+        <activity android:name=".downloader.ReceiveMapFileActivity" />
         <activity
             android:name="cgeo.geocaching.downloader.MapDownloadSelectorActivity"
-            android:label="@string/downloadmap_title"
+            android:label="@string/download_title"
             android:parentActivityName="cgeo.geocaching.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

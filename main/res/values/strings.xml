@@ -488,6 +488,8 @@
     <string name="settings_title_map">Map</string>
     <string name="settings_summary_map">Set map source, offline map settings and map details.</string>
     <string name="settings_title_map_data">Map Data</string>
+    <string name="settings_title_offline_routing">Offline routing</string>
+    <string name="settings_summary_offline_routing">Offline routing is available if helper app \"BRouter\" is installed and configured.</string>
     <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Map Content</string>
@@ -602,6 +604,8 @@
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which the BRouter helper app (if installed) will calculate a route.</string>
     <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_brouterAutoTileDownloads">Automatic download</string>
+    <string name="init_brouterAutoTileDownloads_description">Automatically offer to download missing routing tile data</string>
     <string name="brouter_recalculating">Recalculating route in background…</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_useInternalRouting">Use internal routing</string>
@@ -697,6 +701,8 @@
     <string name="init_local_file_system">Local File System</string>
     <string name="init_base_directory_description">Base folder for public local data</string>
     <string name="init_map_directory_description">Folder with offline maps</string>
+    <string name="init_brouter_directory_description">Folder with BRouter routing data</string>
+    <string name="init_brouter_directory_additionalinfo">(Default folder is something like \'/brouter/segments4\')</string>
     <string name="init_gpx_importexportdir">GPX Folder</string>
     <string name="init_dataDir">Select data folder</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
@@ -2059,14 +2065,15 @@
 
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Download offline map</string>
+    <string name="download_title">Download file</string>
     <string name="downloadmap_info">Select a map file for your region by tapping the \"Save\" icon.\n\nThe download is performed in the background. When the transfer is complete, the file is copied to the c:geo map folder and set as the current map.\n\nBe careful: Downloading a map can cause high network traffic!</string>
     <string name="downloadmap_choose">Choose map</string>
     <string name="downloadmap_filename">Downloading %s</string>
-    <string name="downloadmanager_not_available">Map file cannot be downloaded, system download manager not available</string>
+    <string name="downloadmanager_not_available">File cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
     <string name="downloadmap_target_not_writable">The selected target \"%s\" is not writable - the downloaded map file is saved in the system download folder and must be moved manually to the map folder.</string>
     <string name="downloadmap_allow_metered_network">Allow download over metered network (e.g.: mobile connection)</string>
-    <string name="downloadmap_confirmation">Download map \"%1$s\"?\n\nThis may take quite some time and can lead to significant costs, depending on your network connection.\n\nSize info: %2$s</string>
+    <string name="download_confirmation">%1$sDownload file \"%2$s\"?\n\nThis may take quite some time and can lead to significant costs, depending on your network connection.%3$s</string>
     <string name="downloadmap_handling">The download itself will be handled by your system\'s download manager in the background. You should see a notification as soon as the download started (which may take a while).</string>
     <string name="button_continue">Continue</string>
     <string name="downloadmap_onedirup">(one level up)</string>
@@ -2079,11 +2086,14 @@
     <string name="downloadmap_checking_for_updates">Checking for updates…</string>
     <string name="downloadmap_install_theme_title">Install theme file</string>
     <string name="downloadmap_install_theme_info">Your downloaded map requires a special theme file. Do you want to download this as well?</string>
+    <string name="downloadtile_title">Missing routing data</string>
+    <string name="downloadtile_info">c:geo cannot calculate the requested route as there is some routing data file missing. Do you want to download missing routing data?</string>
     <string name="mapserver_mapsforge_info">Basic maps, no map themes required</string>
     <string name="mapserver_openandromaps_info">Detailed maps, require map theme \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Detailed map theme, built for \"OpenAndroMaps\" maps</string>
     <string name="mapserver_freizeitkarte_info">Detailed maps, require one of the \"freizeitkarte\" map themes.</string>
     <string name="mapserver_freizeitkarte_themes_info">Detailed map theme, built for \"Freizeitkarte\" maps</string>
+    <string name="brouter_info">Offline routing service</string>
 
     <!-- history track -->
     <string name="map_clear_trailhistory">Clear history track</string>

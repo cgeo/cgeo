@@ -218,14 +218,14 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                 IOUtils.closeQuietly(inputStream);
             }
 
-            // clean up and refresh available map list
+            // clean up
             if (!cancelled.get()) {
                 try {
                     getContentResolver().delete(uri, null, null);
                 } catch (IllegalArgumentException iae) {
                     Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
                 }
-                // finalization AFTER deleting source file. This handles the very special case when Map Folder = Download Folder
+                // finalization AFTER deleting source file. This handles the very special case when target folder = Download folder
                 downloader.onSuccessfulReceive(outputUri);
             } else {
                 ContentStorage.get().delete(outputUri);

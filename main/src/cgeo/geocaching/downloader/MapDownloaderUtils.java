@@ -24,6 +24,10 @@ import android.widget.TextView;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.DOWNLOAD_SERVICE;
 
+import androidx.annotation.StringRes;
+
+import org.apache.commons.lang3.StringUtils;
+
 public class MapDownloaderUtils {
 
     public static final int REQUEST_CODE = 47131;
@@ -52,14 +56,14 @@ public class MapDownloaderUtils {
             final long date = data.getLongExtra(RESULT_DATE, 0);
             final int type = data.getIntExtra(RESULT_TYPEID, OfflineMap.OfflineMapType.DEFAULT);
             if (null != uri) {
-                triggerDownload(activity, type, uri, sizeInfo, date, null);
+                triggerDownload(activity, R.string.downloadmap_title, type, uri, "", sizeInfo, date, null);
             }
             return true;
         }
         return false;
     }
 
-    public static void triggerDownload(final Activity activity, final int type, final Uri uri, final String sizeInfo, final long date, final Runnable callback) {
+    public static void triggerDownload(final Activity activity, @StringRes final int title, final int type, final Uri uri, final String additionalInfo, final String sizeInfo, final long date, final Runnable callback) {
         String temp = uri.getLastPathSegment();
         if (null == temp) {
             temp = "default.map";
@@ -67,11 +71,11 @@ public class MapDownloaderUtils {
         final String filename = temp;
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        builder.setTitle(R.string.downloadmap_title);
+        builder.setTitle(title);
         final View layout = View.inflate(activity, R.layout.mapdownloader_confirmation, null);
         builder.setView(layout);
         final TextView downloadInfo = layout.findViewById(R.id.download_info);
-        downloadInfo.setText(String.format(activity.getString(R.string.downloadmap_confirmation), filename, sizeInfo));
+        downloadInfo.setText(String.format(activity.getString(R.string.download_confirmation), StringUtils.isNotBlank(additionalInfo) ? additionalInfo + "\n\n" : "", filename, StringUtils.isNotBlank(sizeInfo) ? "\n\n" + sizeInfo : ""));
 
         builder
             .setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -84,7 +88,7 @@ public class MapDownloaderUtils {
                     .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename)
                     .setAllowedOverMetered(allowMeteredNetwork)
                     .setAllowedOverRoaming(allowMeteredNetwork);
-                Log.i("Map download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
+                Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
                 final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                 if (null != downloadManager) {
                     PendingDownload.add(downloadManager.enqueue(request), filename, uri.toString(), date, type);

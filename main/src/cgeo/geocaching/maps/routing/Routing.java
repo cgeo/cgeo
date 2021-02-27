@@ -1,9 +1,12 @@
 package cgeo.geocaching.maps.routing;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+import cgeo.geocaching.downloader.DownloadConfirmationActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -14,6 +17,7 @@ import android.util.Xml;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -34,6 +38,7 @@ public final class Routing {
     private static int connectCount = 0;
 
     private static final Map<String, Runnable> REGISTERED_CALLBACKS = new HashMap<>();
+    private static final ArrayList<String> requestedTileFiles = new ArrayList<>();
 
     private static final Runnable SERVICE_CONNECTED_CALLBACK = () -> {
         synchronized (Routing.class) {
@@ -211,6 +216,33 @@ public final class Routing {
             return null;
         }
 
+        // missing routing data?
+        if (gpx.startsWith("datafile ") && gpx.endsWith(" not found") && Settings.isBrouterAutoTileDownloads()) {
+            synchronized (requestedTileFiles) {
+                String filename = gpx.substring(9);
+                final int pos = filename.indexOf(" ");
+                if (pos != -1) {
+                    filename = filename.substring(0, pos);
+                }
+                boolean alreadyRequested = false;
+                for (String f : requestedTileFiles) {
+                    if (filename.equals(f)) {
+                        alreadyRequested = true;
+                        break;
+                    }
+                }
+                Log.e("routing: missing file " + filename + ", alreadyRequested=" + alreadyRequested);
+                if (!alreadyRequested) {
+                    requestedTileFiles.add(filename);
+                    final Intent intent = new Intent(getContext(), DownloadConfirmationActivity.class);
+                    intent.putExtra(DownloadConfirmationActivity.BUNDLE_FILENAME, filename);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+            }
+        }
+
+        // other error
         if (!gpx.startsWith("<?xml")) {
             Log.w("brouter returned an error message: " + gpx);
             return null;
@@ -258,5 +290,13 @@ public final class Routing {
 
     public static boolean isAvailable() {
         return brouter != null;
+    }
+
+    public static boolean isInstalled() {
+        return ProcessUtils.isInstalled(getPackageName());
+    }
+
+    public static String getPackageName() {
+        return getContext().getString(R.string.package_brouter);
     }
 }

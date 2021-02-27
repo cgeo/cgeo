@@ -24,7 +24,7 @@ class MapDownloaderReceiverSchemeMap extends AbstractActivity {
         if (host.equals("download.openandromaps.org") && path.startsWith("/mapsV4/") && path.endsWith(".zip")) {
             // remap Uri to their ftp server
             final Uri newUri = Uri.parse(getString(R.string.mapserver_openandromaps_downloadurl) + path.substring(8));
-            MapDownloaderUtils.triggerDownload(this, OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_OPENANDROMAPS.id, newUri, "", System.currentTimeMillis(), this::callback);
+            MapDownloaderUtils.triggerDownload(this, R.string.downloadmap_title, OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_OPENANDROMAPS.id, newUri, "", "", System.currentTimeMillis(), this::callback);
         } else {
             // generic map download
             Log.w("MapDownloaderReceiverSchemeMap: Received map download intent from unknown source: " + uri.toString());

@@ -596,6 +596,40 @@
                 android:entryValues="@array/maprotationValues" />
         </PreferenceCategory>
 
+        <PreferenceCategory android:title="@string/settings_title_offline_routing" android:summary="@string/settings_summary_offline_routing"
+            android:layout="@layout/preference_category"
+            android:key="@string/preference_category_offlinerouting">
+            <Preference
+                android:selectable="false"
+                android:summary="@string/init_brouterThreshold_description"
+                android:title="@string/init_brouterThreshold" />
+            <cgeo.geocaching.settings.ProximityPreference
+                android:key="@string/pref_brouterDistanceThreshold"
+                app:min="1"
+                app:max="@integer/brouter_threshold_max"
+                android:defaultValue="@integer/brouter_threshold_default"
+                app:highRes="false" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_brouterShowBothDistances"
+                android:summary="@string/init_summary_brouterShowBothDistances"
+                android:title="@string/init_brouterShowBothDistances" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_brouterAutoTileDownloads"
+                android:summary="@string/init_brouterAutoTileDownloads_description"
+                android:title="@string/init_brouterAutoTileDownloads" />
+
+            <Preference
+                android:key="@string/pref_persistablefolder_routingtiles"
+                android:title="@string/init_brouter_directory_description" />
+            <Preference
+                android:selectable="false"
+                android:summary="@string/init_brouter_directory_additionalinfo" />
+        </PreferenceCategory>
+
         <PreferenceCategory android:title="@string/settings_title_waypoints"
             android:layout="@layout/preference_category" >
             <Preference
@@ -642,21 +676,6 @@
                 app:min="100"
                 app:max="@integer/historytrack_length_max"
                 android:defaultValue="@integer/historytrack_length_default" />
-            <Preference
-                android:selectable="false"
-                android:summary="@string/init_brouterThreshold_description"
-                android:title="@string/init_brouterThreshold" />
-            <cgeo.geocaching.settings.ProximityPreference
-                android:key="@string/pref_brouterDistanceThreshold"
-                app:min="1"
-                app:max="@integer/brouter_threshold_max"
-                android:defaultValue="@integer/brouter_threshold_default"
-                app:highRes="false" />
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="@string/pref_brouterShowBothDistances"
-                android:summary="@string/init_summary_brouterShowBothDistances"
-                android:title="@string/init_brouterShowBothDistances" />
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_useInternalRouting"
