@@ -1899,6 +1899,7 @@
     <string name="wizard_status_location_permission">Permís d\'ubicació</string>
     <string name="wizard_status_basefolder">Carpeta base</string>
     <string name="wizard_status_platform">Serveis de geocaching</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ometre</string>
