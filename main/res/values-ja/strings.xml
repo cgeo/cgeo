@@ -1907,6 +1907,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_status_platform">ジオキャッシングサイト</string>
     <string name="wizard_not_now">今はしない</string>
     <string name="wizard_skip_wizard_warning">設定が完了するまでc:geoは期待通りに動作しない可能性があります。 未設定の項目によっては、オフライン地図、ジオキャッシュ、ログファイルなどのデータを読み込み/保存ができない場合があります。\n\nセットアップを再開するには、メインメニューで「設定ウィザード」を選択するか、c:geoを再起動してください。</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">戻る</string>
     <string name="skip">スキップ</string>
