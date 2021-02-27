@@ -1,6 +1,6 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.models.OfflineMap;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
@@ -45,7 +45,7 @@ public class CompanionFileUtils {
     }
 
     public static void writeInfo(@NonNull final String remoteUrl, @NonNull final String localFilename, @NonNull final String displayName, final long date, final int offlineMapTypeId) {
-        final AbstractDownloader downloader = OfflineMap.OfflineMapType.getInstance(offlineMapTypeId);
+        final AbstractDownloader downloader = Download.DownloadType.getInstance(offlineMapTypeId);
         final Uri infoFile = ContentStorage.get().create(downloader.targetFolder, localFilename + INFOFILE_SUFFIX);
         try (OutputStream output = ContentStorage.get().openForWrite(infoFile)) {
             final int i = remoteUrl.lastIndexOf("/");
@@ -71,7 +71,7 @@ public class CompanionFileUtils {
      */
     public static ArrayList<DownloadedFileData> availableOfflineMaps() {
         final ArrayList<DownloadedFileData> result = new ArrayList<>();
-        for (OfflineMap.OfflineMapTypeDescriptor type : OfflineMap.OfflineMapType.getOfflineMapTypes()) {
+        for (Download.DownloadTypeDescriptor type : Download.DownloadType.getOfflineMapTypes()) {
             result.addAll(availableOfflineMaps(type.type));
         }
         return result;
@@ -80,9 +80,9 @@ public class CompanionFileUtils {
     /**
      * returns a list of downloaded offline maps from requested source which are still available in the local filesystem
      */
-    public static ArrayList<DownloadedFileData> availableOfflineMaps(@NonNull final OfflineMap.OfflineMapType filter) {
+    public static ArrayList<DownloadedFileData> availableOfflineMaps(@NonNull final Download.DownloadType filter) {
         final ArrayList<DownloadedFileData> result = new ArrayList<>();
-        final AbstractDownloader downloader = OfflineMap.OfflineMapType.getInstance(filter.id);
+        final AbstractDownloader downloader = Download.DownloadType.getInstance(filter.id);
 
         final List<ContentStorage.FileInformation> mapDirContent = ContentStorage.get().list(downloader.targetFolder);
         final Map<String, Uri> mapDirMap = new HashMap<>();

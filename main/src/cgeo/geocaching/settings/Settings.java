@@ -21,7 +21,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
-import cgeo.geocaching.models.OfflineMap;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.DirectionData;
@@ -970,7 +970,7 @@ public class Settings {
     }
 
     public static int getMapDownloaderSource() {
-        return getInt(R.string.pref_mapdownloader_source, OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_MAPSFORGE.id);
+        return getInt(R.string.pref_mapdownloader_source, Download.DownloadType.DOWNLOADTYPE_MAP_MAPSFORGE.id);
     }
 
     public static void setPqShowDownloadableOnly(final boolean showDownloadableOnly) {

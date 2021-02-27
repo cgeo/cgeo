@@ -3,7 +3,7 @@ package cgeo.geocaching.downloader;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
-import cgeo.geocaching.models.OfflineMap;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
@@ -30,7 +30,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
     private static final MapDownloaderFreizeitkarte INSTANCE = new MapDownloaderFreizeitkarte();
 
     private MapDownloaderFreizeitkarte() {
-        super (OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_FREIZEITKARTE, R.string.mapserver_freizeitkarte_downloadurl, R.string.mapserver_freizeitkarte_name, R.string.mapserver_freizeitkarte_info, R.string.mapserver_freizeitkarte_projecturl, R.string.mapserver_freizeitkarte_likeiturl);
+        super (Download.DownloadType.DOWNLOADTYPE_MAP_FREIZEITKARTE, R.string.mapserver_freizeitkarte_downloadurl, R.string.mapserver_freizeitkarte_name, R.string.mapserver_freizeitkarte_info, R.string.mapserver_freizeitkarte_projecturl, R.string.mapserver_freizeitkarte_likeiturl);
     }
 
     private static class FZKParser {
@@ -40,7 +40,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
         private String description;
         private String dateInfo;
 
-        private void parse(@NonNull final String page, final List<OfflineMap> result, final OfflineMap.OfflineMapType offlineMapType) {
+        private void parse(@NonNull final String page, final List<Download> result, final Download.DownloadType offlineMapType) {
             final RootElement root = new RootElement("", "Freizeitkarte");
             final Element map = root.getChild("", "Map");
             map.setStartElementListener(attr -> {
@@ -55,7 +55,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
             map.getChild("", "MapsforgeDateOfCreation").setEndTextElementListener(body -> dateInfo = body);
             map.setEndElementListener(() -> {
                 if (StringUtils.isNotBlank(url) && StringUtils.isNotBlank(dateInfo)) {
-                    result.add(new OfflineMap(description, Uri.parse(url), false, dateInfo.substring(0, 10), Formatter.formatBytes(size), offlineMapType));
+                    result.add(new Download(description, Uri.parse(url), false, dateInfo.substring(0, 10), Formatter.formatBytes(size), offlineMapType));
                 }
             });
 
@@ -69,15 +69,15 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
     }
 
     @Override
-    protected void analyzePage(final Uri uri, final List<OfflineMap> list, final String page) {
+    protected void analyzePage(final Uri uri, final List<Download> list, final String page) {
         new FZKParser().parse(page, list, offlineMapType);
     }
 
     @Override
-    protected OfflineMap checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
-        final List<OfflineMap> list = new ArrayList<>();
+    protected Download checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
+        final List<Download> list = new ArrayList<>();
         new FZKParser().parse(page, list, offlineMapType);
-        for (OfflineMap map : list) {
+        for (Download map : list) {
             if (map.getUri().getLastPathSegment().equals(remoteFilename)) {
                 return map;
             }
@@ -99,7 +99,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
     @Override
     protected void onFollowup(final Activity activity, final Runnable callback) {
         // check whether a FZK theme exists in theme folder and ask whether user wants to download it as well, if it does not exist yet
-        findOrDownload(activity, THEME_FILES, activity.getString(R.string.mapserver_freizeitkarte_themes_downloadurl), OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_FREIZEITKARTE_THEMES, callback);
+        findOrDownload(activity, THEME_FILES, activity.getString(R.string.mapserver_freizeitkarte_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_FREIZEITKARTE, callback);
     }
 
     @NonNull

@@ -4,8 +4,8 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.databinding.InstallWizardBinding;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.downloader.MapDownloadSelectorActivity;
-import cgeo.geocaching.downloader.MapDownloaderUtils;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
@@ -188,7 +188,7 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, R.string.skip);
                 setButton(button1, R.string.wizard_advanced_offlinemaps_label, v -> {
                     setButtonToDone();
-                    startActivityForResult(new Intent(this, MapDownloadSelectorActivity.class), MapDownloaderUtils.REQUEST_CODE);
+                    startActivityForResult(new Intent(this, MapDownloadSelectorActivity.class), DownloaderUtils.REQUEST_CODE);
                 }, button1Info, R.string.wizard_advanced_offlinemaps_info);
                 setButton(button2, R.string.wizard_advanced_brouter_label, v -> {
                     setButtonToDone();
@@ -495,7 +495,7 @@ public class InstallWizardActivity extends AppCompatActivity {
                 }, dialog -> { });
             }
         } else if (contentStorageActivityHelper == null || !contentStorageActivityHelper.onActivityResult(requestCode, resultCode, data)) {
-            MapDownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
+            DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
         }
     }
 }

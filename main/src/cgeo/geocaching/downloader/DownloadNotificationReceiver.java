@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 
-class MapDownloadNotificationReceiver extends BroadcastReceiver {
+class DownloadNotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
@@ -31,13 +31,13 @@ class MapDownloadNotificationReceiver extends BroadcastReceiver {
                         switch (status) {
                             case DownloadManager.STATUS_SUCCESSFUL:
                                 PendingDownload.remove(pendingDownload);
-                                final Intent copyFileIntent = new Intent(context, ReceiveMapFileActivity.class);
+                                final Intent copyFileIntent = new Intent(context, ReceiveDownloadActivity.class);
                                 final Uri uri = downloadManager.getUriForDownloadedFile(pendingDownload);
                                 copyFileIntent.setData(uri);
-                                copyFileIntent.putExtra(ReceiveMapFileActivity.EXTRA_FILENAME, p.getFilename());
-                                copyFileIntent.putExtra(MapDownloaderUtils.RESULT_CHOSEN_URL, p.getRemoteUrl());
-                                copyFileIntent.putExtra(MapDownloaderUtils.RESULT_DATE, p.getDate());
-                                copyFileIntent.putExtra(MapDownloaderUtils.RESULT_TYPEID, p.getOfflineMapTypeId());
+                                copyFileIntent.putExtra(ReceiveDownloadActivity.EXTRA_FILENAME, p.getFilename());
+                                copyFileIntent.putExtra(DownloaderUtils.RESULT_CHOSEN_URL, p.getRemoteUrl());
+                                copyFileIntent.putExtra(DownloaderUtils.RESULT_DATE, p.getDate());
+                                copyFileIntent.putExtra(DownloaderUtils.RESULT_TYPEID, p.getOfflineMapTypeId());
                                 copyFileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(copyFileIntent);
                                 Log.d("download #" + pendingDownload + " successful");

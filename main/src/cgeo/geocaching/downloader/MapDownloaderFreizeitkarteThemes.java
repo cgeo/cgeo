@@ -4,7 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
-import cgeo.geocaching.models.OfflineMap;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
@@ -30,7 +30,7 @@ public class MapDownloaderFreizeitkarteThemes extends AbstractDownloader {
     private static final MapDownloaderFreizeitkarteThemes INSTANCE = new MapDownloaderFreizeitkarteThemes();
 
     private MapDownloaderFreizeitkarteThemes() {
-        super(OfflineMap.OfflineMapType.MAP_DOWNLOAD_TYPE_FREIZEITKARTE_THEMES, R.string.mapserver_freizeitkarte_downloadurl, R.string.mapserver_freizeitkarte_themes_name, R.string.mapserver_freizeitkarte_themes_info, R.string.mapserver_freizeitkarte_projecturl, R.string.mapserver_freizeitkarte_likeiturl, PersistableFolder.OFFLINE_MAP_THEMES);
+        super(Download.DownloadType.DOWNLOADTYPE_THEME_FREIZEITKARTE, R.string.mapserver_freizeitkarte_downloadurl, R.string.mapserver_freizeitkarte_themes_name, R.string.mapserver_freizeitkarte_themes_info, R.string.mapserver_freizeitkarte_projecturl, R.string.mapserver_freizeitkarte_likeiturl, PersistableFolder.OFFLINE_MAP_THEMES);
         this.forceExtension = ".zip";
     }
 
@@ -40,7 +40,7 @@ public class MapDownloaderFreizeitkarteThemes extends AbstractDownloader {
         private long size;
         private String description;
 
-        private void parse(@NonNull final String page, final List<OfflineMap> result, final OfflineMap.OfflineMapType offlineMapType) {
+        private void parse(@NonNull final String page, final List<Download> result, final Download.DownloadType offlineMapType) {
             final RootElement root = new RootElement("", "Freizeitkarte");
             final Element theme = root.getChild("", "Theme");
             theme.setStartElementListener(attr -> {
@@ -53,7 +53,7 @@ public class MapDownloaderFreizeitkarteThemes extends AbstractDownloader {
             theme.getChild("", "DescriptionEnglish").setEndTextElementListener(body -> description = body);
             theme.setEndElementListener(() -> {
                 if (StringUtils.isNotBlank(url)) {
-                    result.add(new OfflineMap(description, Uri.parse(url), false, "", Formatter.formatBytes(size), offlineMapType));
+                    result.add(new Download(description, Uri.parse(url), false, "", Formatter.formatBytes(size), offlineMapType));
                 }
             });
 
@@ -67,15 +67,15 @@ public class MapDownloaderFreizeitkarteThemes extends AbstractDownloader {
     }
 
     @Override
-    protected void analyzePage(final Uri uri, final List<OfflineMap> list, final String page) {
+    protected void analyzePage(final Uri uri, final List<Download> list, final String page) {
         new FZKParser().parse(page, list, offlineMapType);
     }
 
     @Override
-    protected OfflineMap checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
-        final List<OfflineMap> list = new ArrayList<>();
+    protected Download checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
+        final List<Download> list = new ArrayList<>();
         new FZKParser().parse(page, list, offlineMapType);
-        for (OfflineMap map : list) {
+        for (Download map : list) {
             if (map.getUri().getLastPathSegment().equals(remoteFilename)) {
                 return map;
             }

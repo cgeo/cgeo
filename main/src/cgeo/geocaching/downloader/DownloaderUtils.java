@@ -2,7 +2,7 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.models.OfflineMap;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
@@ -28,7 +28,7 @@ import androidx.annotation.StringRes;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class MapDownloaderUtils {
+public class DownloaderUtils {
 
     public static final int REQUEST_CODE = 47131;
     public static final String RESULT_CHOSEN_URL = "chosenUrl";
@@ -36,7 +36,7 @@ public class MapDownloaderUtils {
     public static final String RESULT_DATE = "dateInfo";
     public static final String RESULT_TYPEID = "typeId";
 
-    private MapDownloaderUtils() {
+    private DownloaderUtils() {
         // utility class
     }
 
@@ -54,7 +54,7 @@ public class MapDownloaderUtils {
             final Uri uri = data.getParcelableExtra(RESULT_CHOSEN_URL);
             final String sizeInfo = data.getStringExtra(RESULT_SIZE_INFO);
             final long date = data.getLongExtra(RESULT_DATE, 0);
-            final int type = data.getIntExtra(RESULT_TYPEID, OfflineMap.OfflineMapType.DEFAULT);
+            final int type = data.getIntExtra(RESULT_TYPEID, Download.DownloadType.DEFAULT);
             if (null != uri) {
                 triggerDownload(activity, R.string.downloadmap_title, type, uri, "", sizeInfo, date, null);
             }
@@ -115,20 +115,19 @@ public class MapDownloaderUtils {
         void run (PersistableFolder folder, boolean isAvailable);
     }
 
-    public static void checkMapDirectory(final Activity activity, final boolean beforeDownload, final DirectoryWritable callback) {
+    public static void checkTargetDirectory(final Activity activity, final PersistableFolder folder, final boolean beforeDownload, final DirectoryWritable callback) {
         PermissionHandler.requestStoragePermission(activity, new PermissionGrantedCallback(PermissionRequestContext.ReceiveMapFileActivity) {
             @Override
             protected void execute() {
-                final PersistableFolder folder = PersistableFolder.OFFLINE_MAPS;
                 final boolean mapDirIsReady = ContentStorage.get().ensureFolder(folder);
 
                 if (mapDirIsReady) {
                     callback.run(folder, true);
                 } else if (beforeDownload) {
-                    Dialogs.confirm(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), folder), activity.getString(R.string.button_continue),
+                    Dialogs.confirm(activity, activity.getString(R.string.download_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), folder), activity.getString(R.string.button_continue),
                             (dialog, which) -> callback.run(folder, true), dialog -> callback.run(folder, false));
                 } else {
-                    Dialogs.message(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), folder), activity.getString(android.R.string.ok), (dialog, which) -> callback.run(folder, false));
+                    Dialogs.message(activity, activity.getString(R.string.download_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), folder), activity.getString(android.R.string.ok), (dialog, which) -> callback.run(folder, false));
                 }
             }
         });

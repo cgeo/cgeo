@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.downloader.ReceiveMapFileActivity;
+import cgeo.geocaching.downloader.ReceiveDownloadActivity;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -33,7 +33,7 @@ public class HandleLocalFilesActivity extends AbstractActivity {
                 finished = true;
                 break;
             case MAP:
-                continueWith(ReceiveMapFileActivity.class, intent);
+                continueWith(ReceiveDownloadActivity.class, intent);
                 finished = true;
                 break;
             default:

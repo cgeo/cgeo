@@ -5,7 +5,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
-import cgeo.geocaching.downloader.MapDownloaderUtils;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -230,7 +230,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
         }
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data, mapBase::reloadIndividualRoute);
-        MapDownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
+        DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override
