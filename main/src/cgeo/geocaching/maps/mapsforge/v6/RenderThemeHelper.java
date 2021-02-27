@@ -25,15 +25,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.core.util.IOUtils;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.cache.TileCache;
@@ -331,7 +327,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
             } else if (candidate.getName().endsWith(".zip")) {
                 try {
                     themes.addAll(CollectionStream.of(
-                        getXmlThemesIn(new ZipInputStream(new FileInputStream(candidate)))).map(t -> prefix + candidate.getName() + ZIP_THEME_SEPARATOR + t).toList());
+                        ZipXmlThemeResourceProvider.scanXmlThemes(new ZipInputStream(new FileInputStream(candidate)))).map(t -> prefix + candidate.getName() + ZIP_THEME_SEPARATOR + t).toList());
                 } catch (IOException ioe) {
                     Log.w("Map Theme ZIP '" + candidate + "' could not be read", ioe);
                 }
@@ -342,34 +338,5 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
     private static boolean isZipTheme(final String theme) {
         return theme != null && theme.contains(ZIP_THEME_SEPARATOR);
     }
-
-    //TODO: the following method should become part of mapsforge ZipXmlThemeResourceProvider
-    private static List<String> getXmlThemesIn(final ZipInputStream zipInputStream) throws IOException {
-        if (zipInputStream == null) {
-            return Collections.emptyList();
-        }
-        final List<String> xmlThemes = new ArrayList<>();
-
-        try {
-            ZipEntry zipEntry;
-            while ((zipEntry = zipInputStream.getNextEntry()) != null) {
-                if (zipEntry.isDirectory()) {
-                    continue;
-                }
-                String fileName = zipEntry.getName();
-                if (fileName.startsWith("/")) {
-                    fileName = fileName.substring(1);
-                }
-                if (fileName.toLowerCase(Locale.ROOT).endsWith(".xml")) {
-                    xmlThemes.add(fileName);
-                }
-            }
-        } finally {
-            IOUtils.closeQuietly(zipInputStream);
-        }
-        return xmlThemes;
-    }
-
-
 }
 
