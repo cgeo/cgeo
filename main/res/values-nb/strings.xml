@@ -1724,5 +1724,6 @@
     <!-- install wizard -->
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="status_not_ok">FEIL</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>
