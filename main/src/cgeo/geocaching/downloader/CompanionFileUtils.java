@@ -46,23 +46,25 @@ public class CompanionFileUtils {
 
     public static void writeInfo(@NonNull final String remoteUrl, @NonNull final String localFilename, @NonNull final String displayName, final long date, final int offlineMapTypeId) {
         final AbstractDownloader downloader = Download.DownloadType.getInstance(offlineMapTypeId);
-        final Uri infoFile = ContentStorage.get().create(downloader.targetFolder, localFilename + INFOFILE_SUFFIX);
-        try (OutputStream output = ContentStorage.get().openForWrite(infoFile)) {
-            final int i = remoteUrl.lastIndexOf("/");
-            final String remotePage = i != -1 ? remoteUrl.substring(0, i) : remoteUrl;
-            final String remoteFile = i != -1 ? remoteUrl.substring(i + 1) : localFilename;
+        if (downloader.useCompanionFiles) {
+            final Uri infoFile = ContentStorage.get().create(downloader.targetFolder, localFilename + INFOFILE_SUFFIX);
+            try (OutputStream output = ContentStorage.get().openForWrite(infoFile)) {
+                final int i = remoteUrl.lastIndexOf("/");
+                final String remotePage = i != -1 ? remoteUrl.substring(0, i) : remoteUrl;
+                final String remoteFile = i != -1 ? remoteUrl.substring(i + 1) : localFilename;
 
-            final Properties prop = new Properties();
-            prop.setProperty(PROP_PARSETYPE, String.valueOf(offlineMapTypeId));
-            prop.setProperty(PROP_REMOTEPAGE, remotePage);
-            prop.setProperty(PROP_REMOTEFILE, remoteFile);
-            prop.setProperty(PROP_REMOTEDATE, CalendarUtils.yearMonthDay(date));
-            prop.setProperty(PROP_LOCALFILE, localFilename);
-            prop.setProperty(PROP_DISPLAYNAME, displayName);
+                final Properties prop = new Properties();
+                prop.setProperty(PROP_PARSETYPE, String.valueOf(offlineMapTypeId));
+                prop.setProperty(PROP_REMOTEPAGE, remotePage);
+                prop.setProperty(PROP_REMOTEFILE, remoteFile);
+                prop.setProperty(PROP_REMOTEDATE, CalendarUtils.yearMonthDay(date));
+                prop.setProperty(PROP_LOCALFILE, localFilename);
+                prop.setProperty(PROP_DISPLAYNAME, displayName);
 
-            prop.store(output, null);
-        } catch (IOException io) {
-            // ignore
+                prop.store(output, null);
+            } catch (IOException io) {
+                // ignore
+            }
         }
     }
 
@@ -78,41 +80,56 @@ public class CompanionFileUtils {
     }
 
     /**
-     * returns a list of downloaded offline maps from requested source which are still available in the local filesystem
+     * returns a list of downloaded offline files from requested source which are still available in the local filesystem
      */
     public static ArrayList<DownloadedFileData> availableOfflineMaps(@NonNull final Download.DownloadType filter) {
         final ArrayList<DownloadedFileData> result = new ArrayList<>();
         final AbstractDownloader downloader = Download.DownloadType.getInstance(filter.id);
 
-        final List<ContentStorage.FileInformation> mapDirContent = ContentStorage.get().list(downloader.targetFolder);
-        final Map<String, Uri> mapDirMap = new HashMap<>();
-        for (ContentStorage.FileInformation fi : mapDirContent) {
-            mapDirMap.put(fi.name, fi.uri);
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(downloader.targetFolder);
+        final Map<String, Uri> filesMap = new HashMap<>();
+        for (ContentStorage.FileInformation fi : files) {
+            filesMap.put(fi.name, fi.uri);
         }
 
-        for (ContentStorage.FileInformation fi : mapDirContent) {
-            final String filename = fi.name;
-            if (!filename.endsWith(INFOFILE_SUFFIX)) {
-                continue;
-            }
-            try (InputStream input = ContentStorage.get().openForRead(downloader.targetFolder.getFolder(), filename)) {
-                final DownloadedFileData offlineMapData = new DownloadedFileData();
-                final Properties prop = new Properties();
-                prop.load(input);
-                offlineMapData.remoteParsetype = Integer.parseInt(prop.getProperty(PROP_PARSETYPE));
-                if (filter == null || offlineMapData.remoteParsetype == filter.id) {
-                    offlineMapData.remotePage = prop.getProperty(PROP_REMOTEPAGE);
-                    offlineMapData.remoteFile = prop.getProperty(PROP_REMOTEFILE);
-                    offlineMapData.remoteDate = CalendarUtils.parseYearMonthDay(prop.getProperty(PROP_REMOTEDATE));
-                    offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
-                    offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
-
-                    if (StringUtils.isNotBlank(offlineMapData.localFile) && mapDirMap.containsKey(offlineMapData.localFile)) {
-                        result.add(offlineMapData);
-                    }
+        if (downloader.useCompanionFiles) {
+            for (ContentStorage.FileInformation fi : files) {
+                final String filename = fi.name;
+                if (!filename.endsWith(INFOFILE_SUFFIX)) {
+                    continue;
                 }
-            } catch (IOException | NumberFormatException e) {
-                Log.d("Offline map property file error for " + filename + ": " + e.getMessage());
+                try (InputStream input = ContentStorage.get().openForRead(downloader.targetFolder.getFolder(), filename)) {
+                    final DownloadedFileData offlineMapData = new DownloadedFileData();
+                    final Properties prop = new Properties();
+                    prop.load(input);
+                    offlineMapData.remoteParsetype = Integer.parseInt(prop.getProperty(PROP_PARSETYPE));
+                    if (offlineMapData.remoteParsetype == filter.id) {
+                        offlineMapData.remotePage = prop.getProperty(PROP_REMOTEPAGE);
+                        offlineMapData.remoteFile = prop.getProperty(PROP_REMOTEFILE);
+                        offlineMapData.remoteDate = CalendarUtils.parseYearMonthDay(prop.getProperty(PROP_REMOTEDATE));
+                        offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
+                        offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
+
+                        if (StringUtils.isNotBlank(offlineMapData.localFile) && filesMap.containsKey(offlineMapData.localFile)) {
+                            result.add(offlineMapData);
+                        }
+                    }
+                } catch (IOException | NumberFormatException e) {
+                    Log.d("Offline map property file error for " + filename + ": " + e.getMessage());
+                }
+            }
+        } else {
+            for (ContentStorage.FileInformation fi : files) {
+                if (!fi.name.endsWith(INFOFILE_SUFFIX)) {
+                    final DownloadedFileData download = new DownloadedFileData();
+                    download.remoteParsetype = filter.id;
+                    download.remoteDate = fi.lastModified;
+                    download.remoteFile = fi.name;
+                    download.localFile = fi.name;
+                    download.displayName = fi.name;
+                    // some properties remain unset when not using companion files (remotePage), others are guesses only (remoteFile, remoteParseType)
+                    result.add(download);
+                }
             }
         }
         return result;

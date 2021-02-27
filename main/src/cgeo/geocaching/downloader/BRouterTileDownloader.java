@@ -25,6 +25,7 @@ public class BRouterTileDownloader extends AbstractDownloader {
     private BRouterTileDownloader() {
         super(Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.brouter_downloadurl, R.string.brouter_name, R.string.brouter_info, R.string.brouter_projecturl, 0, PersistableFolder.ROUTING_TILES);
         overwrite = true; // silently overwrite already existing files
+        useCompanionFiles = false; // use single uri, and no companion files
     }
 
     @Override

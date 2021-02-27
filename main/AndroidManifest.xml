@@ -915,7 +915,7 @@
         </provider>
 
         <!-- Receiver for downloaded (map) files -->
-        <receiver android:name=".downloader.MapDownloadNotificationReceiver">
+        <receiver android:name=".downloader.DownloadNotificationReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
