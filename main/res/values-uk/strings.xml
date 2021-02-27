@@ -1662,6 +1662,7 @@
     <string name="wizard_status_title">Налаштування статусу</string>
     <string name="wizard_status_storage_permission">Дозвіл на зберігання</string>
     <string name="wizard_status_location_permission">Дозвіл на доступ до геоданих</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Попередній</string>
     <string name="skip">Пропустити</string>
