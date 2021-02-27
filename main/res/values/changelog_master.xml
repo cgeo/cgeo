@@ -12,6 +12,7 @@
 <li>New: Added OpenAndroMaps to map downloader (for offline map files and map themes). Alternatively you can also use the \"Install others\" links on openandromaps.org website</li>
 <li>New: Added Freizeitkarte to map downloader (for offline map files and map themes)</li>
 <li>New: Multi-threaded rendering for OpenStreetMap maps (optional, default is on)</li>
+<li>New: Support for zipped theme files - you do not have to unzip map theme files any longer, just put the zip file into your theme folder</li>
 </ul>
 
 <h4>Cache details:</h4>
