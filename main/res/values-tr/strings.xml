@@ -1812,6 +1812,7 @@
     <string name="wizard_status_storage_permission">Bellek izni</string>
     <string name="wizard_status_location_permission">Konum izni</string>
     <string name="wizard_status_platform">Geocaching servisleri</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Önceki</string>
     <string name="skip">Geç</string>
