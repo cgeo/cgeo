@@ -250,10 +250,10 @@ public class FolderUtils {
             dirProps = new Properties();
             targetSyncProps.put(dirPath, dirProps);
         }
-        final boolean needsSync = !getFileSyncToken(sourceFile.left).equals(dirProps.getProperty(sourceFile.left.name));
+        final File targetFile = new File(targetRootDir, sourceFile.right);
+        final boolean needsSync = !targetFile.exists() || !getFileSyncToken(sourceFile.left).equals(dirProps.getProperty(sourceFile.left.name));
 
         if (needsSync) {
-            final File targetFile = new File(targetRootDir, sourceFile.right);
             if (targetFile.exists() && !targetFile.delete()) {
                 return null;
             }
