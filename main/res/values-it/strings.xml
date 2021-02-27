@@ -1893,7 +1893,9 @@
     <string name="downloadmap_install_theme_info">La mappa scaricata richiede un file di tema speciale. Vuoi scaricare anche questo?</string>
     <string name="mapserver_mapsforge_info">Mappe di base, nessun tema mappa richiesto</string>
     <string name="mapserver_openandromaps_info">Mappe dettagliate, richiedono tema mappa \"Elevate\"</string>
+    <string name="mapserver_openandromaps_themes_info">Tema mappa dettagliato, creato per le mappe \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mappe dettagliate, richiedono uno dei temi della mappa \"freizeitkarte\".</string>
+    <string name="mapserver_freizeitkarte_themes_info">Tema mappa dettagliato, creato per le mappe \"Freizeitkarte\"</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
@@ -1942,6 +1944,7 @@
     <string name="wizard_status_platform">Servizi di geocaching</string>
     <string name="wizard_not_now">Non ora</string>
     <string name="wizard_skip_wizard_warning">c:geo potrebbe non funzionare come previsto senza il completamento della configurazione. A seconda della configurazione mancante c:geo potrebbe non essere in grado di leggere / memorizzare dati come mappe offline, geocache, file di log, ecc.\n\nQuando ti senti pronto a completare la configurazione, scegli \"Configuration wizard\" nel menu principale o riavvia c:geo.</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Precedente</string>
     <string name="skip">Salta</string>
