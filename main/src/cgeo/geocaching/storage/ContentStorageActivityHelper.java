@@ -3,6 +3,7 @@ package cgeo.geocaching.storage;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 
@@ -12,16 +13,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.DocumentsContract;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.core.text.HtmlCompat;
 import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
@@ -390,13 +388,9 @@ public class ContentStorageActivityHelper {
     }
 
     private void report(final boolean isWarning, @StringRes final int messageId, final Object ... params) {
-        final ImmutablePair<String, String> messages = ContentStorage.get().constructMessage(messageId, params);
+        final ImmutablePair<String, String> messages = LocalizationUtils.getMultiPurposeString(messageId, "CSActivityHelper", params);
         Log.log(isWarning ? Log.LogLevel.WARN : Log.LogLevel.INFO, messages.right);
         ActivityMixin.showToast(activity, messages.left);
-    }
-
-    private Spanned getHtml(@AnyRes final int id, final Object ... params) {
-        return HtmlCompat.fromHtml(activity.getString(id, params), HtmlCompat.FROM_HTML_MODE_LEGACY);
     }
 
 }

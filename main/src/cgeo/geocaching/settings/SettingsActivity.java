@@ -387,7 +387,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 contentStorageHelper.selectPersistableFolder(folder, f -> {
                     p.setSummary(f.toUserDisplayableValue());
                     if (PersistableFolder.OFFLINE_MAP_THEMES.equals(f)) {
-                        RenderThemeHelper.resynchronizeMapThemeFolder(this);
+                        RenderThemeHelper.resynchronizeMapThemeFolder();
                     }
                 });
                 return false;

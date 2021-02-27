@@ -409,7 +409,7 @@ public class ContentStorageTest extends CGeoTestCase {
         p.store(new FileOutputStream(new File(fileSimDir, folderSyncInfoFilename)), "test");
         writeToUri(Uri.fromFile(new File(fileSimDir, "ccc-ddd.txt")), fileSimContent);
 
-        FolderUtils.get().synchronizeFolder(sourceFolder, targetFolderFile, null);
+        FolderUtils.get().synchronizeFolder(sourceFolder, targetFolderFile, null, null);
 
         //check if source and target files are identical
         final List<ImmutablePair<ContentStorage.FileInformation, String>> targetFiles = FolderUtils.get().getAllFiles(targetFolder);

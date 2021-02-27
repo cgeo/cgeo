@@ -335,7 +335,7 @@ public class MainActivity extends AbstractActionBarActivity {
         LocalStorage.migrateLocalStorage(this);
 
         //sync map Theme folder
-        RenderThemeHelper.resynchronizeMapThemeFolder(this);
+        RenderThemeHelper.resynchronizeMapThemeFolder();
 
         // reactivate dialogs which are set to show later
         OneTimeDialogs.nextStatus();
