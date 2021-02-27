@@ -26,6 +26,7 @@ public abstract class AbstractDownloader {
     public PersistableFolder targetFolder;
     public static final String oneDirUp = CgeoApplication.getInstance().getString(R.string.downloadmap_onedirup);
     public String forceExtension = "";
+    public boolean overwrite = false; // silently overwrite existing files?
 
     AbstractDownloader(final Download.DownloadType offlineMapType, final @StringRes int mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo, final @StringRes int projectUrl, final @StringRes int likeItUrl, final PersistableFolder targetFolder) {
         this.offlineMapType = offlineMapType;

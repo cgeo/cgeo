@@ -134,35 +134,43 @@ public class ReceiveDownloadActivity extends AbstractActivity {
         final Uri cf = companionFileExists;
 
         if (df != null) {
-            final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-            final AlertDialog dialog = builder.setTitle(R.string.receivedownload_intenttitle)
-                .setCancelable(true)
-                .setMessage(R.string.receivedownload_alreadyexists)
-                .setPositiveButton(R.string.receivedownload_option_overwrite, (dialog3, button3) -> {
-                    // for overwrite: delete existing files
-                    ContentStorage.get().delete(df);
-                    if (cf != null) {
-                        ContentStorage.get().delete(cf);
-                    }
-                    new CopyTask(this, isZipFile, nameWithinZip).execute();
-                })
-                .setNeutralButton(R.string.receivedownload_option_differentname, (dialog2, button2) -> {
-                    // when overwriting generate new filename internally and check for collisions with companion file (would be a lone companion file, so delete silently)
-                    final List<String> existingFiles = new ArrayList<>();
-                    for (ContentStorage.FileInformation fi : files) {
-                        existingFiles.add(fi.name);
-                    }
-                    filename = FileUtils.createUniqueFilename(filename, existingFiles);
-                    final Uri newCompanionFile = CompanionFileUtils.companionFileExists(files, filename);
-                    if (newCompanionFile != null) {
-                        ContentStorage.get().delete(newCompanionFile);
-                    }
-                    new CopyTask(this, isZipFile, nameWithinZip).execute();
-                })
-                .setNegativeButton(android.R.string.cancel, (dialog4, which4) -> activity.finish())
-                .create();
-            dialog.setOwnerActivity(activity);
-            dialog.show();
+            if (downloader.overwrite) {
+                ContentStorage.get().delete(df);
+                if (cf != null) {
+                    ContentStorage.get().delete(cf);
+                }
+                new CopyTask(this, isZipFile, nameWithinZip).execute();
+            } else {
+                final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
+                final AlertDialog dialog = builder.setTitle(R.string.receivedownload_intenttitle)
+                    .setCancelable(true)
+                    .setMessage(R.string.receivedownload_alreadyexists)
+                    .setPositiveButton(R.string.receivedownload_option_overwrite, (dialog3, button3) -> {
+                        // for overwrite: delete existing files
+                        ContentStorage.get().delete(df);
+                        if (cf != null) {
+                            ContentStorage.get().delete(cf);
+                        }
+                        new CopyTask(this, isZipFile, nameWithinZip).execute();
+                    })
+                    .setNeutralButton(R.string.receivedownload_option_differentname, (dialog2, button2) -> {
+                        // when overwriting generate new filename internally and check for collisions with companion file (would be a lone companion file, so delete silently)
+                        final List<String> existingFiles = new ArrayList<>();
+                        for (ContentStorage.FileInformation fi : files) {
+                            existingFiles.add(fi.name);
+                        }
+                        filename = FileUtils.createUniqueFilename(filename, existingFiles);
+                        final Uri newCompanionFile = CompanionFileUtils.companionFileExists(files, filename);
+                        if (newCompanionFile != null) {
+                            ContentStorage.get().delete(newCompanionFile);
+                        }
+                        new CopyTask(this, isZipFile, nameWithinZip).execute();
+                    })
+                    .setNegativeButton(android.R.string.cancel, (dialog4, which4) -> activity.finish())
+                    .create();
+                dialog.setOwnerActivity(activity);
+                dialog.show();
+            }
         } else {
             new CopyTask(this, isZipFile, nameWithinZip).execute();
         }
