@@ -1868,7 +1868,9 @@
     <string name="downloadmap_install_theme_info">Ο κατεβασμένος χάρτης σας απαιτεί ένα ειδικό αρχείο θέματος. Θέλετε να το κατεβάσετε επίσης?</string>
     <string name="mapserver_mapsforge_info">Βασικοί χάρτες, δεν απαιτούνται θέματα χάρτη</string>
     <string name="mapserver_openandromaps_info">Λεπτομερείς χάρτες, απαιτούν θέμα χάρτη \"Elevate\"</string>
+    <string name="mapserver_openandromaps_themes_info">Αναλυτικό θέμα χάρτη, χτισμένο για \"OpenAndroMaps\" χάρτες</string>
     <string name="mapserver_freizeitkarte_info">Λεπτομερείς χάρτες, απαιτούν ένα από τα θέματα χάρτη \"freizeitkarte\".</string>
+    <string name="mapserver_freizeitkarte_themes_info">Λεπτομερές θέμα χάρτη, χτισμένο για χάρτες \"Freizeitkarte\"</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
     <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
@@ -1916,6 +1918,7 @@
     <string name="wizard_status_platform">Υπηρεσίες Geocaching</string>
     <string name="wizard_not_now">Όχι τώρα</string>
     <string name="wizard_skip_wizard_warning">το c:geo μπορεί να μην λειτουργήσει όπως αναμένεται μέχρι να ολοκληρωθούν οι ρυθμίσεις. Ανάλογα με τη ρύθμιση c:geo που λείπει μπορεί να μην είναι σε θέση να διαβάσει/αποθηκεύσει δεδομένα όπως χάρτες εκτός σύνδεσης, geocaches, αρχεία καταγραφής κλπ.\n\nΌποτε αισθάνεστε έτοιμοι να ολοκληρώσετε τις ρυθμίσεις, είτε επιλέξτε \"Οδηγός διαμόρφωσης\" στο κύριο μενού είτε επανεκκινήστε το c:geo.</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Προηγούμενο</string>
     <string name="skip">Παράλειψη</string>
