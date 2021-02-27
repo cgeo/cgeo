@@ -2,7 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.MapDownloadSelectorActivity;
-import static cgeo.geocaching.downloader.MapDownloaderUtils.REQUEST_CODE;
+import static cgeo.geocaching.downloader.DownloaderUtils.REQUEST_CODE;
 
 import android.app.Activity;
 import android.content.Context;

@@ -2,7 +2,7 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.models.OfflineMap;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
@@ -35,7 +35,7 @@ import org.apache.commons.lang3.StringUtils;
  * If no map directory is set currently, default map directory is used, created if needed, and saved as map directory in preferences.
  * If the map file already exists under that name in the map directory, you have the option to either overwrite it or save it under a randomly generated name.
  */
-public class ReceiveMapFileActivity extends AbstractActivity {
+public class ReceiveDownloadActivity extends AbstractActivity {
 
     public static final String EXTRA_FILENAME = "filename";
 
@@ -44,7 +44,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
     private String sourceURL = "";
     private long sourceDate = 0;
-    private int offlineMapTypeId = OfflineMap.OfflineMapType.DEFAULT;
+    private int offlineMapTypeId = Download.DownloadType.DEFAULT;
     private AbstractDownloader downloader;
 
     protected enum CopyStates {
@@ -59,12 +59,12 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         final Intent intent = getIntent();
         uri = intent.getData();
         final String preset = intent.getStringExtra(EXTRA_FILENAME);
-        sourceURL = intent.getStringExtra(MapDownloaderUtils.RESULT_CHOSEN_URL);
-        sourceDate = intent.getLongExtra(MapDownloaderUtils.RESULT_DATE, 0);
-        offlineMapTypeId = intent.getIntExtra(MapDownloaderUtils.RESULT_TYPEID, OfflineMap.OfflineMapType.DEFAULT);
-        downloader = OfflineMap.OfflineMapType.getInstance(offlineMapTypeId);
+        sourceURL = intent.getStringExtra(DownloaderUtils.RESULT_CHOSEN_URL);
+        sourceDate = intent.getLongExtra(DownloaderUtils.RESULT_DATE, 0);
+        offlineMapTypeId = intent.getIntExtra(DownloaderUtils.RESULT_TYPEID, Download.DownloadType.DEFAULT);
+        downloader = Download.DownloadType.getInstance(offlineMapTypeId);
 
-        MapDownloaderUtils.checkMapDirectory(this, false, (folder, isWritable) -> {
+        DownloaderUtils.checkTargetDirectory(this, downloader.targetFolder, false, (folder, isWritable) -> {
             if (isWritable) {
                 boolean foundMapInZip = false;
                 // test if ZIP file received
@@ -135,10 +135,10 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
         if (df != null) {
             final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-            final AlertDialog dialog = builder.setTitle(R.string.receivemapfile_intenttitle)
+            final AlertDialog dialog = builder.setTitle(R.string.receivedownload_intenttitle)
                 .setCancelable(true)
-                .setMessage(R.string.receivemapfile_alreadyexists)
-                .setPositiveButton(R.string.receivemapfile_option_overwrite, (dialog3, button3) -> {
+                .setMessage(R.string.receivedownload_alreadyexists)
+                .setPositiveButton(R.string.receivedownload_option_overwrite, (dialog3, button3) -> {
                     // for overwrite: delete existing files
                     ContentStorage.get().delete(df);
                     if (cf != null) {
@@ -146,7 +146,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     }
                     new CopyTask(this, isZipFile, nameWithinZip).execute();
                 })
-                .setNeutralButton(R.string.receivemapfile_option_differentname, (dialog2, button2) -> {
+                .setNeutralButton(R.string.receivedownload_option_differentname, (dialog2, button2) -> {
                     // when overwriting generate new filename internally and check for collisions with companion file (would be a lone companion file, so delete silently)
                     final List<String> existingFiles = new ArrayList<>();
                     for (ContentStorage.FileInformation fi : files) {
@@ -170,14 +170,14 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
     protected class CopyTask extends AsyncTaskWithProgressText<String, CopyStates> {
         private long bytesCopied = 0;
-        private final String progressFormat = getString(R.string.receivemapfile_kb_copied);
+        private final String progressFormat = getString(R.string.receivedownload_kb_copied);
         private final AtomicBoolean cancelled = new AtomicBoolean(false);
         private final Activity context;
         private final boolean isZipFile;
         private final String nameWithinZip;
 
         CopyTask(final Activity activity, final boolean isZipFile, final String nameWithinZip) {
-            super(activity, activity.getString(R.string.receivemapfile_intenttitle), "");
+            super(activity, activity.getString(R.string.receivedownload_intenttitle), "");
             setOnCancelListener((dialog, which) -> cancelled.set(true));
             context = activity;
             this.isZipFile = isZipFile;
@@ -264,25 +264,25 @@ public class ReceiveMapFileActivity extends AbstractActivity {
             }
             switch (status) {
                 case SUCCESS:
-                    result = String.format(getString(R.string.receivemapfile_success), fileinfo);
+                    result = String.format(getString(R.string.receivedownload_success), fileinfo);
                     if (StringUtils.isNotBlank(sourceURL)) {
                         CompanionFileUtils.writeInfo(sourceURL, filename, CompanionFileUtils.getDisplayName(fileinfo), sourceDate, offlineMapTypeId);
                     }
                     break;
                 case CANCELLED:
-                    result = getString(R.string.receivemapfile_cancelled);
+                    result = getString(R.string.receivedownload_cancelled);
                     break;
                 case IO_EXCEPTION:
-                    result = String.format(getString(R.string.receivemapfile_error_io_exception), downloader.targetFolder);
+                    result = String.format(getString(R.string.receivedownload_error_io_exception), downloader.targetFolder);
                     break;
                 case FILENOTFOUND_EXCEPTION:
-                    result = getString(R.string.receivemapfile_error_filenotfound_exception);
+                    result = getString(R.string.receivedownload_error_filenotfound_exception);
                     break;
                 default:
-                    result = getString(R.string.receivemapfile_error);
+                    result = getString(R.string.receivedownload_error);
                     break;
             }
-            Dialogs.message(context, getString(R.string.receivemapfile_intenttitle), result, getString(android.R.string.ok), (dialog, button) -> downloader.onFollowup(activity, ReceiveMapFileActivity.this::doFinish));
+            Dialogs.message(context, getString(R.string.receivedownload_intenttitle), result, getString(android.R.string.ok), (dialog, button) -> downloader.onFollowup(activity, ReceiveDownloadActivity.this::doFinish));
         }
 
     }

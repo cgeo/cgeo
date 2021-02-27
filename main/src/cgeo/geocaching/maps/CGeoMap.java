@@ -11,7 +11,7 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
-import cgeo.geocaching.downloader.MapDownloaderUtils;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -832,7 +832,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
             && !this.trackUtils.onOptionsItemSelected(id, tracks, this::setTracks, this::centerOnPosition)
             && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
-            && !MapDownloaderUtils.onOptionsItemSelected(activity, id)) {
+            && !DownloaderUtils.onOptionsItemSelected(activity, id)) {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {
                 item.setChecked(true);

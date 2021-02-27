@@ -2,7 +2,7 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.models.OfflineMap;
+import cgeo.geocaching.models.Download;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +19,7 @@ public class DownloadConfirmationActivity extends AbstractActivity {
         final Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             final Uri uri = Uri.parse(getString(R.string.brouter_downloadurl) + bundle.getString(BUNDLE_FILENAME));
-            MapDownloaderUtils.triggerDownload(this, R.string.downloadtile_title, OfflineMap.OfflineMapType.DOWNLOAD_TYPE_BROUTER_TILES.id, uri, getString(R.string.downloadtile_info), "", System.currentTimeMillis(), this::finish);
+            DownloaderUtils.triggerDownload(this, R.string.downloadtile_title, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES.id, uri, getString(R.string.downloadtile_info), "", System.currentTimeMillis(), this::finish);
         }
     }
 

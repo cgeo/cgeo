@@ -20,7 +20,7 @@ import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
 
-public class OfflineMap {
+public class Download {
 
     private final String name;
     private final Uri uri;
@@ -28,9 +28,9 @@ public class OfflineMap {
     private final long dateInfo;
     private final String sizeInfo;
     private String addInfo;
-    private final OfflineMapType type;
+    private final DownloadType type;
 
-    public OfflineMap(final String name, final Uri uri, final boolean isDir, final String dateISO, final String sizeInfo, final OfflineMapType type) {
+    public Download(final String name, final Uri uri, final boolean isDir, final String dateISO, final String sizeInfo, final DownloadType type) {
         this.name = CompanionFileUtils.getDisplayName(name);
         this.uri = uri;
         this.isDir = isDir;
@@ -72,42 +72,42 @@ public class OfflineMap {
         return addInfo;
     }
 
-    public OfflineMapType getType() {
+    public DownloadType getType() {
         return type;
     }
 
     public String getTypeAsString() {
-        return OfflineMapType.getInstance(type.id).mapSourceName;
+        return DownloadType.getInstance(type.id).mapSourceName;
     }
 
-    public enum OfflineMapType {
+    public enum DownloadType {
         // id values must not be changed as they are referenced in the database & download companion files
-        MAP_DOWNLOAD_TYPE_MAPSFORGE(1),
-        MAP_DOWNLOAD_TYPE_OPENANDROMAPS(2),
-        MAP_DOWNLOAD_TYPE_OPENANDROMAPS_THEMES(3),
-        MAP_DOWNLOAD_TYPE_FREIZEITKARTE(4),
-        MAP_DOWNLOAD_TYPE_FREIZEITKARTE_THEMES(5),
+        DOWNLOADTYPE_MAP_MAPSFORGE(1),
+        DOWNLOADTYPE_MAP_OPENANDROMAPS(2),
+        DOWNLOADTYPE_THEME_OPENANDROMAPS(3),
+        DOWNLOADTYPE_MAP_FREIZEITKARTE(4),
+        DOWNLOADTYPE_THEME_FREIZEITKARTE(5),
 
-        DOWNLOAD_TYPE_BROUTER_TILES(90);
+        DOWNLOADTYPE_BROUTER_TILES(90);
 
         public final int id;
-        public static final int DEFAULT = MAP_DOWNLOAD_TYPE_MAPSFORGE.id;
-        private static final ArrayList<OfflineMapTypeDescriptor> offlineMapTypes = new ArrayList<>();
-        private static final ArrayList<OfflineMapTypeDescriptor> downloadTypes = new ArrayList<>();
+        public static final int DEFAULT = DOWNLOADTYPE_MAP_MAPSFORGE.id;
+        private static final ArrayList<DownloadTypeDescriptor> offlineMapTypes = new ArrayList<>();
+        private static final ArrayList<DownloadTypeDescriptor> downloadTypes = new ArrayList<>();
 
-        OfflineMapType(final int id) {
+        DownloadType(final int id) {
             this.id = id;
         }
 
-        public static ArrayList<OfflineMapTypeDescriptor> getOfflineMapTypes() {
-            buildOfflineMapTypesList();
+        public static ArrayList<DownloadTypeDescriptor> getOfflineMapTypes() {
+            buildTypelist();
             return offlineMapTypes;
         }
 
         @Nullable
         public static AbstractDownloader getInstance(final int typeId) {
-            buildOfflineMapTypesList();
-            for (OfflineMapTypeDescriptor descriptor : downloadTypes) {
+            buildTypelist();
+            for (DownloadTypeDescriptor descriptor : downloadTypes) {
                 if (descriptor.type.id == typeId) {
                     return descriptor.instance;
                 }
@@ -115,24 +115,24 @@ public class OfflineMap {
             return null;
         }
 
-        private static void buildOfflineMapTypesList() {
+        private static void buildTypelist() {
             if (offlineMapTypes.size() == 0) {
                 // only those entries which should be visible in the offline maps download selector
-                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_MAPSFORGE, MapDownloaderMapsforge.getInstance(), R.string.mapserver_mapsforge_name));
-                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_OPENANDROMAPS, MapDownloaderOpenAndroMaps.getInstance(), R.string.mapserver_openandromaps_name));
-                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_OPENANDROMAPS_THEMES, MapDownloaderOpenAndroMapsThemes.getInstance(), R.string.mapserver_openandromaps_themes_name));
-                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_FREIZEITKARTE, MapDownloaderFreizeitkarte.getInstance(), R.string.mapserver_freizeitkarte_name));
-                offlineMapTypes.add(new OfflineMapTypeDescriptor(MAP_DOWNLOAD_TYPE_FREIZEITKARTE_THEMES, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name));
+                offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_MAPSFORGE, MapDownloaderMapsforge.getInstance(), R.string.mapserver_mapsforge_name));
+                offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_OPENANDROMAPS, MapDownloaderOpenAndroMaps.getInstance(), R.string.mapserver_openandromaps_name));
+                offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_OPENANDROMAPS, MapDownloaderOpenAndroMapsThemes.getInstance(), R.string.mapserver_openandromaps_themes_name));
+                offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_FREIZEITKARTE, MapDownloaderFreizeitkarte.getInstance(), R.string.mapserver_freizeitkarte_name));
+                offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_FREIZEITKARTE, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name));
 
                 // all other download types
                 downloadTypes.addAll(offlineMapTypes);
-                downloadTypes.add(new OfflineMapTypeDescriptor(DOWNLOAD_TYPE_BROUTER_TILES, BRouterTileDownloader.getInstance(), R.string.brouter_name));
+                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_BROUTER_TILES, BRouterTileDownloader.getInstance(), R.string.brouter_name));
             }
         }
 
-        public static OfflineMapTypeDescriptor fromTypeId(final int id) {
-            buildOfflineMapTypesList();
-            for (OfflineMapTypeDescriptor descriptor : downloadTypes) {
+        public static DownloadTypeDescriptor fromTypeId(final int id) {
+            buildTypelist();
+            for (DownloadTypeDescriptor descriptor : downloadTypes) {
                 if (descriptor.type.id == id) {
                     return descriptor;
                 }
@@ -141,8 +141,8 @@ public class OfflineMap {
         }
     }
 
-    public static class OfflineMapTypeDescriptor {
-        public final OfflineMapType type;
+    public static class DownloadTypeDescriptor {
+        public final DownloadType type;
         public final AbstractDownloader instance;
         public final int name;
 
@@ -152,7 +152,7 @@ public class OfflineMap {
             return CgeoApplication.getInstance().getString(name);
         }
 
-        OfflineMapTypeDescriptor(final OfflineMapType type, final AbstractDownloader instance, final @StringRes int name) {
+        DownloadTypeDescriptor(final DownloadType type, final AbstractDownloader instance, final @StringRes int name) {
             this.type = type;
             this.instance = instance;
             this.name = name;

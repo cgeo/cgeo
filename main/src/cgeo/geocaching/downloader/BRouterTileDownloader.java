@@ -1,7 +1,7 @@
 package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.OfflineMap;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -23,25 +23,25 @@ public class BRouterTileDownloader extends AbstractDownloader {
     private static final BRouterTileDownloader INSTANCE = new BRouterTileDownloader();
 
     private BRouterTileDownloader() {
-        super(OfflineMap.OfflineMapType.DOWNLOAD_TYPE_BROUTER_TILES, R.string.brouter_downloadurl, R.string.brouter_name, R.string.brouter_info, R.string.brouter_projecturl, 0, PersistableFolder.ROUTING_TILES);
+        super(Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.brouter_downloadurl, R.string.brouter_name, R.string.brouter_info, R.string.brouter_projecturl, 0, PersistableFolder.ROUTING_TILES);
     }
 
     @Override
-    protected void analyzePage(final Uri uri, final List<OfflineMap> list, final String page) {
+    protected void analyzePage(final Uri uri, final List<Download> list, final String page) {
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_TILE, page);
         while (matchMap.find()) {
-            final OfflineMap offlineMap = new OfflineMap(matchMap.group(1), Uri.parse(uri + matchMap.group(1)), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType);
+            final Download offlineMap = new Download(matchMap.group(1), Uri.parse(uri + matchMap.group(1)), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType);
             list.add(offlineMap);
         }
     }
 
     @Override
-    protected OfflineMap checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
+    protected Download checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_TILE, page);
         while (matchMap.find()) {
             final String filename = matchMap.group(1);
             if (filename.equals(remoteFilename)) {
-                return new OfflineMap(filename, Uri.parse(remoteUrl + "/" + filename), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType);
+                return new Download(filename, Uri.parse(remoteUrl + "/" + filename), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType);
             }
         }
         return null;

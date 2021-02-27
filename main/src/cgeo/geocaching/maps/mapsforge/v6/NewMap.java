@@ -15,7 +15,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
-import cgeo.geocaching.downloader.MapDownloaderUtils;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
@@ -425,7 +425,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
             && !this.trackUtils.onOptionsItemSelected(id, tracks, this::setTracks, this::centerOnPosition)
             && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
-            && !MapDownloaderUtils.onOptionsItemSelected(this, id)) {
+            && !DownloaderUtils.onOptionsItemSelected(this, id)) {
             final String language = MapProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT) {
                 item.setChecked(true);
@@ -1624,7 +1624,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         }
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data, this::reloadIndividualRoute);
-        MapDownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
+        DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
     private void setTracks(final Route route) {

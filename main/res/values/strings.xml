@@ -605,7 +605,7 @@
     <string name="init_brouterThreshold_description">Maximum distance up to which the BRouter helper app (if installed) will calculate a route.</string>
     <string name="init_brouterShowBothDistances">Show straight distance</string>
     <string name="init_brouterAutoTileDownloads">Automatic download</string>
-    <string name="init_brouterAutoTileDownloads_description">Automatically offer to download missing routing tile data</string>
+    <string name="init_brouterAutoTileDownloads_description">Automatically offer to download missing routing tile data. BRouter data folder needs to be set in both c:geo and BRouter for this option to work.</string>
     <string name="brouter_recalculating">Recalculating route in background…</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_useInternalRouting">Use internal routing</string>
@@ -702,7 +702,7 @@
     <string name="init_base_directory_description">Base folder for public local data</string>
     <string name="init_map_directory_description">Folder with offline maps</string>
     <string name="init_brouter_directory_description">Folder with BRouter routing data</string>
-    <string name="init_brouter_directory_additionalinfo">(Default folder is something like \'/brouter/segments4\')</string>
+    <string name="init_brouter_directory_additionalinfo">(Default folder is something like \'/brouter/segments4\'. BRouter needs to be configured to use the same folder, see \'storageconfiguration.txt\' in BRouter\'s \'segments4\' folder.)</string>
     <string name="init_gpx_importexportdir">GPX Folder</string>
     <string name="init_dataDir">Select data folder</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
@@ -2051,17 +2051,17 @@
     <string name="localfile_title">Open a local file</string>
     <string name="localfile_cannot_handle">Error reading file or c:geo cannot handle this file type.</string>
 
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Receive map file</string>
-    <string name="receivemapfile_success">Map file successfully received as \"%s\" and stored to the map folder</string>
-    <string name="receivemapfile_error">Error while receiving map file</string>
-    <string name="receivemapfile_error_io_exception">I/O error while receiving map file. Is your map folder \"%s\" writable?</string>
-    <string name="receivemapfile_error_filenotfound_exception">File not found error while receiving map file.</string>
-    <string name="receivemapfile_alreadyexists">A file with this name already exists. Overwrite existing file or save new file under a different name?</string>
-    <string name="receivemapfile_option_overwrite">Overwrite</string>
-    <string name="receivemapfile_option_differentname">Different name</string>
-    <string name="receivemapfile_kb_copied">%d kB copied</string>
-    <string name="receivemapfile_cancelled">Map file transfer cancelled</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Receive file</string>
+    <string name="receivedownload_success">File successfully stored as \"%s\"</string>
+    <string name="receivedownload_error">Error while receiving file</string>
+    <string name="receivedownload_error_io_exception">I/O error while receiving file. Is your folder \"%s\" writable?</string>
+    <string name="receivedownload_error_filenotfound_exception">File not found error while receiving file.</string>
+    <string name="receivedownload_alreadyexists">A file with this name already exists. Overwrite existing file or save new file under a different name?</string>
+    <string name="receivedownload_option_overwrite">Overwrite</string>
+    <string name="receivedownload_option_differentname">Different name</string>
+    <string name="receivedownload_kb_copied">%d kB copied</string>
+    <string name="receivedownload_cancelled">File transfer cancelled</string>
 
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Download offline map</string>
@@ -2149,7 +2149,6 @@
 
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s folder synchronization finished after %2$s, %3$d of %4$s needed synchronization</string>
-
 
     <!-- default actions in dialogs -->
     <string name="previous">Previous</string>
