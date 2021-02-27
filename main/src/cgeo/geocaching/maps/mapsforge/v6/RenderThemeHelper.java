@@ -11,6 +11,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,6 +19,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
@@ -25,11 +27,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.cache.TileCache;
@@ -62,7 +67,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
     private static final int ZIP_RESOURCE_READ_LIMIT = 1024 * 1024; // 1 MB
 
     private static boolean availableThemesInitialized = false;
-    private static final List<String> availableThemes = new ArrayList<>();
+    private static final List<ImmutablePair<String, String>> availableThemes = new ArrayList<>();
 
     //the last used Zip Resource Provider is cached.
     private static String cachedZipProviderFilename = null;
@@ -102,7 +107,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
             rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
         } else {
             try {
-                XmlRenderTheme xmlRenderTheme = null;
+                final XmlRenderTheme xmlRenderTheme;
                 if (!isZipTheme(selectedTheme)) {
                     //xml file theme
                     xmlRenderTheme = new ExternalRenderTheme(new File(LocalStorage.getMapThemeInternalDir(), selectedTheme), this);
@@ -116,7 +121,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                         cachedZipProvider = new ZipXmlThemeResourceProvider(new ZipInputStream(new FileInputStream(new File(LocalStorage.getMapThemeInternalDir(), tokens[0]))), ZIP_RESOURCE_READ_LIMIT);
                         cachedZipProviderFilename = tokens[0];
                     }
-                    xmlRenderTheme = new ZipRenderTheme(tokens[1], cachedZipProvider);
+                    xmlRenderTheme = new ZipRenderTheme(tokens[1], cachedZipProvider, this);
                 }
                 // Validate the theme file
                 org.mapsforge.map.rendertheme.rule.RenderThemeHandler.getRenderTheme(AndroidGraphicFactory.INSTANCE, new DisplayModel(), xmlRenderTheme);
@@ -147,29 +152,34 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
 
     public void selectMapTheme(final ITileLayer tileLayer, final TileCache tileCache) {
 
-        final String currentTheme = Settings.getSelectedMapRenderTheme();
+        final String currentThemeId = Settings.getSelectedMapRenderTheme();
+        final boolean debugMode = Settings.isDebug();
 
 
         final List<String> names = new ArrayList<>();
         names.add(getString(R.string.switch_default));
         int currentItem = 0;
         int idx = 1;
-        for (final String theme : availableThemes) {
-            names.add(theme); //this would be the place to do some user-display-magic if wanted
-            if (StringUtils.equals(currentTheme, theme)) {
+        for (final ImmutablePair<String, String> themePair : availableThemes) {
+            names.add(themePair.right + (debugMode ? " (" + themePair.left + ")" : ""));
+            if (StringUtils.equals(currentThemeId, themePair.left)) {
                 currentItem = idx;
             }
             idx++;
         }
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
+        String title = activity.getString(R.string.map_theme_select);
+        if (debugMode) {
+            title = title + " (debug mode)";
+        }
 
-        builder.setTitle(R.string.map_theme_select);
+        builder.setTitle(title);
 
         builder.setSingleChoiceItems(names.toArray(new String[0]), currentItem, (dialog, newItem) -> {
             // Adjust index because of <default> selection
             if (newItem > 0) {
-                Settings.setSelectedMapRenderTheme(availableThemes.get(newItem - 1));
+                Settings.setSelectedMapRenderTheme(availableThemes.get(newItem - 1).left);
             } else {
                 Settings.setSelectedMapRenderTheme(StringUtils.EMPTY);
             }
@@ -258,25 +268,37 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
      * @param namTheme theme to set
      * @param theme really set (might be corrected if given value is not correct/incomplete)
      */
-    public static String setSelectedMapThemeDirect(final String themeCandidate) {
+    public static String setSelectedMapThemeDirect(final String themeIdCandidate) {
 
         //try to apply stored value
-        String selectedTheme = themeCandidate;
-        if (!availableThemes.contains(selectedTheme)) {
-            selectedTheme = StringUtils.EMPTY;
-            for (String avTheme : availableThemes) {
+        String selectedThemeId = StringUtils.EMPTY;
+        //search for exact match first
+        for (ImmutablePair<String, String> avThemePair : availableThemes) {
+            if (avThemePair.left.equals(themeIdCandidate)) {
+                selectedThemeId = avThemePair.left;
+                break;
+            }
+        }
+
+        //if no exact match found, check special cases
+        if (StringUtils.isBlank(selectedThemeId)) {
+            for (ImmutablePair<String, String> avThemePair : availableThemes) {
+                final String avThemeId = avThemePair.left;
+
                 //might be a legacy value. Try to find a matching theme ending with stored value
-                if (themeCandidate.endsWith("/" + avTheme)) {
-                    selectedTheme = avTheme;
+                if (themeIdCandidate.endsWith("/" + avThemeId)) {
+                    selectedThemeId = avThemeId;
+                    break;
                 }
                 //might be an incomplete ZIP value (only Zip name without a selected inside theme). Then use first found value
-                if (avTheme.startsWith(themeCandidate + ZIP_THEME_SEPARATOR)) {
-                    selectedTheme = avTheme;
+                if (avThemeId.startsWith(themeIdCandidate + ZIP_THEME_SEPARATOR)) {
+                    selectedThemeId = avThemeId;
+                    break;
                 }
             }
         }
-        Settings.setSelectedMapRenderTheme(selectedTheme);
-        return selectedTheme;
+        Settings.setSelectedMapRenderTheme(selectedThemeId);
+        return selectedThemeId;
     }
 
     /**
@@ -298,7 +320,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                 guiDisplayActivity,
                 PersistableFolder.OFFLINE_MAP_THEMES.getFolder(),
                 LocalStorage.getMapThemeInternalDir(),
-                result -> checkSynchronizeResult(result));
+                RenderThemeHelper::checkSynchronizeResult);
         }
     }
 
@@ -314,20 +336,28 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
         cachedZipProviderFilename = null;
 
         addAvailableThemes(LocalStorage.getMapThemeInternalDir(), availableThemes, "");
+        Collections.sort(availableThemes, (t1, t2) -> TextUtils.COLLATOR.compare(t1.right, t2.right));
+
         availableThemesInitialized = true;
     }
 
-    private static void addAvailableThemes(final File dir, final List<String> themes, final String prefix) {
+    private static void addAvailableThemes(@NonNull final File dir, final List<ImmutablePair<String, String>> themes, final String prefix) {
 
-        for (File candidate : dir.listFiles()) {
+        for (File candidate : Objects.requireNonNull(dir.listFiles())) {
             if (candidate.isDirectory()) {
                 addAvailableThemes(candidate, themes, prefix + candidate.getName() + "/");
             } else if (candidate.getName().endsWith(".xml")) {
-                themes.add(prefix + candidate.getName());
+                final String themeId = prefix + candidate.getName();
+                themes.add(new ImmutablePair<>(themeId, toUserDisplayableName(candidate, null)));
             } else if (candidate.getName().endsWith(".zip")) {
                 try {
                     themes.addAll(CollectionStream.of(
-                        ZipXmlThemeResourceProvider.scanXmlThemes(new ZipInputStream(new FileInputStream(candidate)))).map(t -> prefix + candidate.getName() + ZIP_THEME_SEPARATOR + t).toList());
+                        ZipXmlThemeResourceProvider.scanXmlThemes(new ZipInputStream(new FileInputStream(candidate))))
+                        .map(t -> {
+                            final String themeId = prefix + candidate.getName() + ZIP_THEME_SEPARATOR + t;
+                            return new ImmutablePair<>(themeId, toUserDisplayableName(candidate, t));
+                        })
+                        .toList());
                 } catch (IOException ioe) {
                     Log.w("Map Theme ZIP '" + candidate + "' could not be read", ioe);
                 }
@@ -335,8 +365,23 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
         }
     }
 
-    private static boolean isZipTheme(final String theme) {
-        return theme != null && theme.contains(ZIP_THEME_SEPARATOR);
+    /**
+     * Calculates a xml theme name fit for user display (in dropdown etc)
+     * @param file theme file name
+     * @param zipPath if theme file is a ZIP, then this contains the zip-internal path to the xml. Otherwise null
+     * @return user display theme name
+     */
+    private static String toUserDisplayableName(final File file, final String zipPath) {
+        String userDisplay = StringUtils.removeEnd(file.getName(), ".xml");
+        if (zipPath != null) {
+            final int idx = zipPath.lastIndexOf("/");
+            userDisplay = userDisplay + "/" + StringUtils.removeEnd(idx < 0 ? zipPath : zipPath.substring(idx + 1), ".xml");
+        }
+        return userDisplay;
+    }
+
+    private static boolean isZipTheme(final String themeId) {
+        return themeId != null && themeId.contains(ZIP_THEME_SEPARATOR);
     }
 }
 
