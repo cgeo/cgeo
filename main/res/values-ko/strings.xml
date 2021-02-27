@@ -1623,5 +1623,6 @@
     <string name="export_individualroute_title">개별 경로 내보내기</string>
     <string name="export_individualroute_success">개인 경로를 \"%s\"(으)로 내보냈습니다.</string>
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>
