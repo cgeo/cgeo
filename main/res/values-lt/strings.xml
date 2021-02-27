@@ -1753,5 +1753,6 @@
     <string name="export_individualroute_title">Eksportuoti asmeninį maršrutą</string>
     <string name="export_individualroute_success">Asmeninis maršrutas eksportuotas į \"%s\"</string>
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>
