@@ -1945,6 +1945,7 @@
     <string name="wizard_not_now">Non ora</string>
     <string name="wizard_skip_wizard_warning">c:geo potrebbe non funzionare come previsto senza il completamento della configurazione. A seconda della configurazione mancante c:geo potrebbe non essere in grado di leggere / memorizzare dati come mappe offline, geocache, file di log, ecc.\n\nQuando ti senti pronto a completare la configurazione, scegli \"Configuration wizard\" nel menu principale o riavvia c:geo.</string>
     <!-- Map Theme helper -->
+    <string name="mapthemes_foldersync_finished_toast">Sincronizzazione della cartella %1$s terminata dopo %2$s, %3$d su %4$s richiedenti sincronizzazione</string>
     <!-- default actions in dialogs -->
     <string name="previous">Precedente</string>
     <string name="skip">Salta</string>
