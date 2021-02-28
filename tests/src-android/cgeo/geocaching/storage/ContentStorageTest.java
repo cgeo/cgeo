@@ -634,6 +634,11 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(list.get(1).name).isEqualTo("test.txt");
         assertThat(list.get(1).isDirectory).isFalse();
         assertThat(list.get(1).dirLocation).isNull();
+
+        //create a file in the subfolder
+        ContentStorage.get().create(subfolder, "subfolder-test.txt");
+        assertThat(ContentStorage.get().getFileInfo(subfolder, "subfolder-test.txt").name).isEqualTo("subfolder-test.txt");
+        assertThat(ContentStorage.get().getFileInfo(testFolder, "subfolder/subfolder-test.txt").name).isEqualTo("subfolder-test.txt");
     }
 
     public void testPersistableFolderChangeNotification() {

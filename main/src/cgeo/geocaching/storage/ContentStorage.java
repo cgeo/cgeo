@@ -224,15 +224,45 @@ public class ContentStorage {
         return getFileInfo(folder, name) != null;
     }
 
+    /** Retrieves file information for a file in a folder. See {@link #getParentFolderAndFileInfo(Folder, String)}  for details. */
     @Nullable
-    public FileInformation getFileInfo(final Folder folder, final String name) {
-        if (folder == null || StringUtils.isBlank(name)) {
+    public FileInformation getFileInfo(final Folder rootFolder, final String subfolderAndName) {
+        final ImmutablePair<FileInformation, Folder> info = getParentFolderAndFileInfo(rootFolder, subfolderAndName);
+        return info == null ? null : info.left;
+    }
+
+    /**
+     * Returns information for a file denoted by a rootFolder and a file name.
+     * This file name may be a simple file name (e.g. "myfile.txt"), but it may also include a
+     * subfolder structure (e.g. "subfolder/deepersubfolder/myfile.txt").
+     *
+     * @param rootFolder root Folder
+     * @param subfolderAndName file name to get information for, optionally with a subfolder structure before it
+     * @return information about file (left) and direct parent folder of this file (right)
+     */
+    public ImmutablePair<FileInformation, Folder> getParentFolderAndFileInfo(final Folder rootFolder, final String subfolderAndName) {
+
+        if (rootFolder == null || StringUtils.isBlank(subfolderAndName)) {
             return null;
         }
+
+        //find parent folder of file
+        final Folder parentFolder;
+        final String fileName;
+        final int idx = subfolderAndName.lastIndexOf("/");
+        if (idx < 0) {
+            parentFolder = rootFolder;
+            fileName = subfolderAndName;
+        } else {
+            parentFolder = Folder.fromFolder(rootFolder, subfolderAndName.substring(0, idx));
+            fileName = subfolderAndName.substring(idx + 1);
+        }
+
         try {
-            return getAccessorFor(folder).getFileInfo(folder, name);
+            final FileInformation fileInfo = getAccessorFor(parentFolder).getFileInfo(parentFolder, fileName);
+            return new ImmutablePair<>(fileInfo, parentFolder);
         } catch (IOException ioe) {
-            reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, folder);
+            reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, rootFolder);
         }
         return null;
     }
@@ -296,11 +326,17 @@ public class ContentStorage {
         return null;
     }
 
-    public InputStream openForRead(final Folder folder, final String name) {
-        if (folder == null || name == null) {
+    /**
+     * Opens a file for read identified relatively to a root Folder and its name.
+     * Name may contain optionally a subfolder structure, see {@link #getParentFolderAndFileInfo(Folder, String)} for details.
+     * Remember to close stream after usage! Returns null if Uri can't be opened for reading.
+     */
+    @Nullable
+    public InputStream openForRead(final Folder folder, final String subfolderAndName) {
+        if (folder == null || subfolderAndName == null) {
             return null;
         }
-        final FileInformation fi = getFileInfo(folder, name);
+        final FileInformation fi = getFileInfo(folder, subfolderAndName);
         if (fi != null) {
             return openForRead(fi.uri);
         }
@@ -308,10 +344,15 @@ public class ContentStorage {
     }
 
     /** Opens an Uri for reading. Remember to close stream after usage! Returns null if Uri can't be opened for reading. */
+    @Nullable
     public InputStream openForRead(final Uri uri) {
         return openForRead(uri, false);
     }
 
+    /**
+     * Opens an Uri for reading. Remember to close stream after usage! Returns null if Uri can't be opened for reading.
+     * @param suppressWarningOnFailure if true then failure to open will NOT result in a toast to user
+     */
     public InputStream openForRead(final Uri uri, final boolean suppressWarningOnFailure) {
         if (uri == null) {
             return null;
