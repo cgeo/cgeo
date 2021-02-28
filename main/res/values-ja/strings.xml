@@ -815,6 +815,8 @@
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">何もしない</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">すべてのファイルをコピー</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">すべてのファイルを移動</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">なにもしない</string>
+    <string name="contentstorage_selectfolder_dialog_choice">現在保存されているフォルダとは異なるフォルダを選択しました。どうしますか?\n\nフォルダを選択し、</string>
     <string name="contentstorage_folder_selection_aborted">フォルダの選択を中止しました。フォルダは「%s」です</string>
     <string name="contentstorage_folder_selection_success">フォルダを「%s」に設定しました</string>
     <string name="contentstorage_file_selection_aborted">ファイル選択を中止しました</string>
@@ -1339,7 +1341,7 @@
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます</string>
     <string name="helper_where_you_go_description">WhereYouGoでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
-    <string name="helper_brouter_description">BRouterはオフラインのルート検索を提供します。インストール済みで必要なファイルがダウンロードされている場合はc:geoで内部の地図にキャッシュへのルートを自動的に表示します</string>
+    <string name="helper_brouter_description">BRouterはオフラインのルート検索エンジンです。インストール後に必要なファイルをダウンロードするなどセットアップが必要です。c:geoで地図にキャッシュなどへのルートを表示できるようになります。</string>
     <string name="helper_chirpwolf_description">Chirp Wolfを使用するとANT+/Garmin chirp(ジオキャッシュ ビーコン)からデータを読み取ることができます。Garmin chirpを含むジオキャッシュには必要です</string>
     <!-- export -->
     <string name="share_export">共有/エクスポート</string>
@@ -1858,7 +1860,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_install_theme_info">ダウンロードした地図には特別なテーマファイルが必要です。これもダウンロードしますか?</string>
     <string name="mapserver_mapsforge_info">基本地図(地図テーマは必要ありません)</string>
     <string name="mapserver_openandromaps_info">詳細地図(地図テーマ\"Elevate\"が必要です)</string>
-    <string name="mapserver_freizeitkarte_info">詳細な地図は「freizeitkartte」に対応したテーマが必要です。</string>
+    <string name="mapserver_openandromaps_themes_info">「OpenAndroMaps」用の詳細な地図テーマ</string>
+    <string name="mapserver_freizeitkarte_info">詳細な地図は「Freizeitkartte」用の地図テーマが必要です。</string>
+    <string name="mapserver_freizeitkarte_themes_info">「Freizeitkarte」用の詳細な地図テーマ</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
     <string name="map_trailhistory_cleared">軌跡を削除しました</string>
@@ -1908,6 +1912,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_not_now">今はしない</string>
     <string name="wizard_skip_wizard_warning">設定が完了するまでc:geoは期待通りに動作しない可能性があります。 未設定の項目によっては、オフライン地図、ジオキャッシュ、ログファイルなどのデータを読み込み/保存ができない場合があります。\n\nセットアップを再開するには、メインメニューで「設定ウィザード」を選択するか、c:geoを再起動してください。</string>
     <!-- Map Theme helper -->
+    <string name="mapthemes_foldersync_finished_toast">%1$sフォルダの同期が%2$sで完了しました。%3$d/%4$sが同期されました</string>
     <!-- default actions in dialogs -->
     <string name="previous">戻る</string>
     <string name="skip">スキップ</string>
