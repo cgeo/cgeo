@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.helper.UsefulAppsActivity;
@@ -17,6 +18,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
@@ -30,6 +32,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -340,6 +343,8 @@ public class MainActivity extends AbstractActionBarActivity {
 
         // reactivate dialogs which are set to show later
         OneTimeDialogs.nextStatus();
+
+        checkForRoutingTileUpdates();
     }
 
     @Override
@@ -417,6 +422,22 @@ public class MainActivity extends AbstractActionBarActivity {
                     updateUserInfoHandler.sendEmptyMessage(-1);
                 });
             }
+        }
+    }
+
+    private void checkForRoutingTileUpdates() {
+        if (Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy()) {
+            final long now = System.currentTimeMillis() / 1000;
+            final int interval = Settings.getBrouterAutoTileDownloadsInterval();
+            if ((Settings.getBrouterAutoTileDownloadsLastCheckInS() + (interval * 24 * 60 * 60)) <= now) {
+                DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, this::returnFromTileUpdateCheck);
+            }
+        }
+    }
+
+    private void returnFromTileUpdateCheck(final boolean updateCheckAllowed) {
+        if (updateCheckAllowed) {
+            Settings.setBrouterAutoTileDownloadsLastCheckInS(System.currentTimeMillis() / 1000);
         }
     }
 

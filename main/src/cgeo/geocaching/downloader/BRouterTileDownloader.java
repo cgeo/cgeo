@@ -26,6 +26,7 @@ public class BRouterTileDownloader extends AbstractDownloader {
         super(Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.brouter_downloadurl, R.string.brouter_name, R.string.brouter_info, R.string.brouter_projecturl, 0, PersistableFolder.ROUTING_TILES);
         overwrite = true; // silently overwrite already existing files
         useCompanionFiles = false; // use single uri, and no companion files
+        forceExtension = ".rd5";
     }
 
     @Override
@@ -43,10 +44,16 @@ public class BRouterTileDownloader extends AbstractDownloader {
         while (matchMap.find()) {
             final String filename = matchMap.group(1);
             if (filename.equals(remoteFilename)) {
-                return new Download(filename, Uri.parse(remoteUrl + "/" + filename), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType);
+                return new Download(filename, Uri.parse(mapBase + filename), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType);
             }
         }
         return null;
+    }
+
+    // BRouter uses a single download page, need to map here to its fixed address
+    @Override
+    protected String getUpdatePageUrl(final String downloadPageUrl) {
+        return mapBase.toString();
     }
 
     @NonNull

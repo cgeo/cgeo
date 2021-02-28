@@ -703,6 +703,8 @@
     <string name="init_map_directory_description">Folder with offline maps</string>
     <string name="init_brouter_directory_description">Folder with BRouter routing data</string>
     <string name="init_brouter_directory_additionalinfo">(Default folder is something like \'/brouter/segments4\'. BRouter needs to be configured to use the same folder, see \'storageconfiguration.txt\' in BRouter\'s \'segments4\' folder.)</string>
+    <string name="init_brouter_updateinterval_title">Update interval</string>
+    <string name="init_brouter_updateinterval_description">Reminds you every x days for an update check</string>
     <string name="init_gpx_importexportdir">GPX Folder</string>
     <string name="init_dataDir">Select data folder</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
@@ -2073,7 +2075,9 @@
     <string name="download_started">Downloading started in background</string>
     <string name="downloadmap_target_not_writable">The selected target \"%s\" is not writable - the downloaded map file is saved in the system download folder and must be moved manually to the map folder.</string>
     <string name="downloadmap_allow_metered_network">Allow download over metered network (e.g.: mobile connection)</string>
-    <string name="download_confirmation">%1$sDownload file \"%2$s\"?\n\nThis may take quite some time and can lead to significant costs, depending on your network connection.%3$s</string>
+    <string name="download_confirmation">%1$sDownload file \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Updates found for:\n%1$s\n\nDo you want to update?%2$s</string>
+    <string name="download_warning">This may take quite some time and can lead to significant costs, depending on your network connection.</string>
     <string name="downloadmap_handling">The download itself will be handled by your system\'s download manager in the background. You should see a notification as soon as the download started (which may take a while).</string>
     <string name="button_continue">Continue</string>
     <string name="downloadmap_onedirup">(one level up)</string>
@@ -2088,6 +2092,9 @@
     <string name="downloadmap_install_theme_info">Your downloaded map requires a special theme file. Do you want to download this as well?</string>
     <string name="downloadtile_title">Missing routing data</string>
     <string name="downloadtile_info">c:geo cannot calculate the requested route as there is some routing data file missing. Do you want to download missing routing data?</string>
+    <string name="tileupdate_info">Do you want to check for updates of downloaded routing data files?</string>
+    <string name="no_updates_found">No updates found</string>
+    <string name="updates_check">Updates check</string>
     <string name="mapserver_mapsforge_info">Basic maps, no map themes required</string>
     <string name="mapserver_openandromaps_info">Detailed maps, require map theme \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Detailed map theme, built for \"OpenAndroMaps\" maps</string>

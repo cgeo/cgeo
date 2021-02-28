@@ -1082,6 +1082,18 @@ public class Settings {
         return getBoolean(R.string.pref_brouterAutoTileDownloads, false);
     }
 
+    public static int getBrouterAutoTileDownloadsInterval() {
+        return getInt(R.string.pref_brouterAutoTileDownloadsInterval, 30);
+    }
+
+    public static long getBrouterAutoTileDownloadsLastCheckInS() {
+        return getLong(R.string.pref_brouterAutoTileDownloadsLastCheck, 0);
+    }
+
+    public static void setBrouterAutoTileDownloadsLastCheckInS(final long lastCheck) {
+        putLong(R.string.pref_brouterAutoTileDownloadsLastCheck, lastCheck);
+    }
+
     public static boolean isBigSmileysEnabled() {
         return getBoolean(R.string.pref_bigSmileysOnMap, false);
     }
