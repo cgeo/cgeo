@@ -1722,5 +1722,6 @@
     <!-- install wizard -->
     <string name="wizard_gpxfolder_request_explanation">c:geo utilise un dossier sur votre appareil pour stocker les fichiers GPX (par ex. pour importer/exporter des caches ou des traces). Sélectionnez ou créez ce dossier à l\'étape suivante.</string>
     <!-- Map Theme helper -->
+    <string name="mapthemes_foldersync_finished_toast">Synchronisation du dossier %1$s terminée après %2$s, %3$d sur %4$s nécessitaient une synchro</string>
     <!-- default actions in dialogs -->
 </resources>
