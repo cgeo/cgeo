@@ -120,7 +120,7 @@ public class CompanionFileUtils {
             }
         } else {
             for (ContentStorage.FileInformation fi : files) {
-                if (!fi.name.endsWith(INFOFILE_SUFFIX)) {
+                if (!fi.name.endsWith(INFOFILE_SUFFIX) && fi.name.endsWith(downloader.forceExtension)) {
                     final DownloadedFileData download = new DownloadedFileData();
                     download.remoteParsetype = filter.id;
                     download.remoteDate = fi.lastModified;

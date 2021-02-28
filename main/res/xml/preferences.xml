@@ -624,10 +624,25 @@
 
             <Preference
                 android:key="@string/pref_persistablefolder_routingtiles"
-                android:title="@string/init_brouter_directory_description" />
+                android:title="@string/init_brouter_directory_description"
+                android:dependency="@string/pref_brouterAutoTileDownloads" />
             <Preference
                 android:selectable="false"
-                android:summary="@string/init_brouter_directory_additionalinfo" />
+                android:summary="@string/init_brouter_directory_additionalinfo"
+                android:dependency="@string/pref_brouterAutoTileDownloads" />
+
+            <Preference
+                android:selectable="false"
+                android:summary="@string/init_brouter_updateinterval_description"
+                android:title="@string/init_brouter_updateinterval_title"
+                android:dependency="@string/pref_brouterAutoTileDownloads" />
+            <cgeo.geocaching.settings.SeekbarPreference
+                android:key="@string/pref_brouterAutoTileDownloadsInterval"
+                app:min="0"
+                app:max="@integer/brouter_updateinterval_max"
+                android:defaultValue="@integer/brouter_updateinterval_default"
+                android:dependency="@string/pref_brouterAutoTileDownloads" />
+
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/settings_title_waypoints"
