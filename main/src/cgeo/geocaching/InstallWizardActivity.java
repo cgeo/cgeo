@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.databinding.InstallWizardBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.downloader.MapDownloadSelectorActivity;
+import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
@@ -36,6 +37,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -60,7 +62,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     private enum WizardStep {
         WIZARD_START,
         WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION,
-        WIZARD_PERMISSIONS_BASEFOLDER, WIZARD_PERMISSIONS_MAPFOLDER, WIZARD_PERMISSIONS_MAPTHEMEFOLDER, WIZARD_PERMISSIONS_GPXFOLDER,
+        WIZARD_PERMISSIONS_BASEFOLDER, WIZARD_PERMISSIONS_MAPFOLDER, WIZARD_PERMISSIONS_MAPTHEMEFOLDER, WIZARD_PERMISSIONS_GPXFOLDER, WIZARD_PERMISSIONS_BROUTERTILESFOLDER,
         WIZARD_PLATFORMS,
         WIZARD_ADVANCED,
         WIZARD_END
@@ -150,24 +152,24 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestLocation, 0);
                 break;
             case WIZARD_PERMISSIONS_BASEFOLDER:
-                setFolderTitle(PersistableFolder.BASE);
-                text.setText(R.string.wizard_basefolder_request_explanation);
+                setFolderInfo(PersistableFolder.BASE, R.string.wizard_basefolder_request_explanation, false);
                 setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestBasefolder, 0);
                 break;
             case WIZARD_PERMISSIONS_MAPFOLDER:
-                setFolderTitle(PersistableFolder.OFFLINE_MAPS);
-                text.setText(R.string.wizard_mapfolder_request_explanation);
+                setFolderInfo(PersistableFolder.OFFLINE_MAPS, R.string.wizard_mapfolder_request_explanation, true);
                 setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestMapfolder, 0);
                 break;
             case WIZARD_PERMISSIONS_MAPTHEMEFOLDER:
-                setFolderTitle(PersistableFolder.OFFLINE_MAP_THEMES);
-                text.setText(R.string.wizard_mapthemesfolder_request_explanation);
+                setFolderInfo(PersistableFolder.OFFLINE_MAP_THEMES, R.string.wizard_mapthemesfolder_request_explanation, true);
                 setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestMapthemefolder, 0);
                 break;
             case WIZARD_PERMISSIONS_GPXFOLDER:
-                setFolderTitle(PersistableFolder.GPX);
-                text.setText(R.string.wizard_gpxfolder_request_explanation);
+                setFolderInfo(PersistableFolder.GPX, R.string.wizard_gpxfolder_request_explanation, true);
                 setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestGpxfolder, 0);
+                break;
+            case WIZARD_PERMISSIONS_BROUTERTILESFOLDER:
+                setFolderInfo(PersistableFolder.BROUTER_TILES, R.string.wizard_broutertilesfolder_request_explanation, true);
+                setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestBroutertilesfolder, 0);
                 break;
             case WIZARD_PLATFORMS:
                 title.setText(R.string.wizard_platforms_title);
@@ -323,6 +325,7 @@ public class InstallWizardActivity extends AppCompatActivity {
             || (step == WizardStep.WIZARD_PERMISSIONS_MAPFOLDER && !mapFolderNeedsMigration())
             || (step == WizardStep.WIZARD_PERMISSIONS_MAPTHEMEFOLDER && !mapThemeFolderNeedsMigration())
             || (step == WizardStep.WIZARD_PERMISSIONS_GPXFOLDER && !gpxFolderNeedsMigration())
+            || (step == WizardStep.WIZARD_PERMISSIONS_BROUTERTILESFOLDER && !broutertilesFolderNeedsMigration())
             || (step == WizardStep.WIZARD_PLATFORMS && mode == WizardMode.WIZARDMODE_MIGRATION)
             || (step == WizardStep.WIZARD_ADVANCED && mode == WizardMode.WIZARDMODE_MIGRATION)
             ;
@@ -348,7 +351,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     public static boolean needsFolderMigration() {
-        return mapFolderNeedsMigration() || mapThemeFolderNeedsMigration() || gpxFolderNeedsMigration();
+        return mapFolderNeedsMigration() || mapThemeFolderNeedsMigration() || gpxFolderNeedsMigration() || broutertilesFolderNeedsMigration();
     }
 
     // -------------------------------------------------------------------
@@ -389,8 +392,10 @@ public class InstallWizardActivity extends AppCompatActivity {
     // -------------------------------------------------------------------
     // Android SAF-based permissions related methods
 
-    private void setFolderTitle(final PersistableFolder folder) {
+    private void setFolderInfo(final PersistableFolder folder, @StringRes final int info, final boolean addSelectOrCreateInfo) {
         title.setText(String.format(getString(R.string.wizard_permissions_folder_title), getString(folder.getNameKeyId())));
+        final String temp = getString(info) + (addSelectOrCreateInfo ? " " + getString(R.string.wizard_select_or_create) : "");
+        text.setText(temp);
     }
 
     private void requestBasefolder() {
@@ -450,6 +455,18 @@ public class InstallWizardActivity extends AppCompatActivity {
         if (gpxFolderNeedsMigration()) {
             prepareFolderDefaultValues();
             getContentStorageHelper().migratePersistableFolder(PersistableFolder.GPX, v -> onReturnFromFolderMigration(!gpxFolderNeedsMigration()));
+        }
+    }
+
+    private static boolean broutertilesFolderNeedsMigration() {
+        return Settings.isBrouterAutoTileDownloads() && PersistableFolder.BROUTER_TILES.isLegacy() && Routing.isInstalled();
+    }
+
+    private void requestBroutertilesfolder() {
+        forceSkipButton = false;
+        if (broutertilesFolderNeedsMigration()) {
+            prepareFolderDefaultValues();
+            getContentStorageHelper().migratePersistableFolder(PersistableFolder.BROUTER_TILES, v -> onReturnFromFolderMigration(!broutertilesFolderNeedsMigration()));
         }
     }
 
