@@ -598,17 +598,17 @@
     <string name="init_choose_list">Pedir a escolha de lista</string>
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
     <string name="init_listdisplay">Listas adicionais</string>
-    <string name="init_summary_listdisplay">Numa lista de caches, mostra o nome de outras listas a que cada cache armazenada esteja associada</string>
+    <string name="init_summary_listdisplay">Ao aceder a uma lista de caches armazenadas, é mostrado o nome de outras listas das quais essas caches possam estar associadas</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Tenha em atenção que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais e configurações, mas não de imagens em caches.\nPara que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
+    <string name="init_backup_summary">Tenha em consideração que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais e configurações, mas não de imagens em caches.\nPara que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
-    <string name="init_backup_logins">Incluir dados da conta</string>
-    <string name="init_backup_logins_summary">Isto irá guardar as suas credenciais de início de sessão conjuntamente com a cópia de segurança.</string>
+    <string name="init_backup_logins">Incluir dados de contas</string>
+    <string name="init_backup_logins_summary">Com esta função seleccionada, as suas credenciais de início de sessão são guardadas nas cópias de segurança que efectuar.</string>
     <string name="init_backup">Backup de caches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_finished">Cópia de segurança concluída</string>
@@ -649,8 +649,8 @@
     <string name="init_restore_version_error">Formato inesperado - não é possível restaurar a base de dados.\n\nVersão esperada é %1$d,\na cópia de segurança tem a versão %2$d</string>
     <string name="settings_title_backup">Cópia de Seg. / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
-    <string name="init_backup_settings_logins">Cópia de seg. dos dados da conta</string>
-    <string name="init_backup_settings_backup_full_confirm">Deseja guardar dados sensíveis relacionados com a conta? Estes poderão ser lidos por outras aplicações.</string>
+    <string name="init_backup_settings_logins">Cópia de segurança dos dados de contas</string>
+    <string name="init_backup_settings_backup_full_confirm">Pretende guardar informações sensíveis associadas às contas? Estas informações poderão ser lidas por outras aplicações.</string>
     <string name="settings_savingerror">Erro ao guardar definições</string>
     <string name="settings_saved">Definições gravadas com sucesso para:</string>
     <string name="backup_saved">A cópia de seg. foi guardada em:</string>
@@ -858,11 +858,11 @@
     <string name="folder_copy_move_finished_dialog_message_failure">A operação falhou, com o código %1$s, durante o processamento do ficheiro %2$s.</string>
     <string name="folder_move_finished_dialog_tap">Toque em \'ok\' para finalizar a alteração da pasta.</string>
     <plurals name="file_count">
-        <item quantity="one">%1$d ficheiro</item>
+        <item quantity="one">%1$d ficheiro(s)</item>
         <item quantity="other">%1$d ficheiros</item>
     </plurals>
     <plurals name="folder_count">
-        <item quantity="one">%1$d pasta</item>
+        <item quantity="one">%1$d pasta(s)</item>
         <item quantity="other">%1$d pastas</item>
     </plurals>
     <!-- auth generic -->
@@ -1888,7 +1888,9 @@
     <string name="downloadmap_install_theme_info">O mapa descarregado requer um ficheiro de tema especial. Também deseja descarregá-lo?</string>
     <string name="mapserver_mapsforge_info">Mapas básicos, nenhum tema de mapa necessário</string>
     <string name="mapserver_openandromaps_info">Mapas detalhados, requer o tema do mapa \"Elevado\"</string>
+    <string name="mapserver_openandromaps_themes_info">Tema de mapa detalhado, feito para mapas \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mapas detalhados, exigem um dos temas de mapa \"freizeitkarte\".</string>
+    <string name="mapserver_freizeitkarte_themes_info">Tema de mapa detalhado, feito para mapas \"Freizeitkarte\"</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
@@ -1938,6 +1940,7 @@
     <string name="wizard_not_now">Agora não</string>
     <string name="wizard_skip_wizard_warning">O c:geo pode não funcionar como esperado até que a configuração esteja concluída. Dependendo das configurações em falta, o c:geo pode não ser capaz de ler/armazenar dados como mapas offline, geocaches, ficheiros de registos, etc...\n\nQuando achar que é o momento para finalizar a configuração, pode fazê-lo escolhendo a opção \"Assistente de configuração\" no menu principal ou reiniciando o c:geo.</string>
     <!-- Map Theme helper -->
+    <string name="mapthemes_foldersync_finished_toast">A sincronização de pasta %1$s terminada após %2$s, %3$d de %4$s a precisar de sincronização</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ignorar</string>
