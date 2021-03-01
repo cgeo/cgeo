@@ -43,6 +43,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.rendertheme.ContentRenderTheme;
+import org.mapsforge.map.android.rendertheme.ContentResolverResourceProvider;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
@@ -182,7 +183,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                 } else {
                     xmlRenderTheme = new ContentRenderTheme(getContentResolver(), fileFolder.left.uri, this);
                     xmlRenderTheme.setResourceProvider(new ContentResolverResourceProvider(getContentResolver(),
-                        ContentStorage.get().getUriForFolder(fileFolder.right)));
+                        ContentStorage.get().getUriForFolder(fileFolder.right), true));
                 }
             }
         } else {
