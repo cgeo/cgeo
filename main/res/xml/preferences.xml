@@ -628,7 +628,7 @@
                 android:dependency="@string/pref_brouterAutoTileDownloads" />
             <Preference
                 android:selectable="false"
-                android:summary="@string/init_brouter_directory_additionalinfo"
+                android:key="@string/pref_fakekey_brouterTilesFolderInfo"
                 android:dependency="@string/pref_brouterAutoTileDownloads" />
 
             <Preference

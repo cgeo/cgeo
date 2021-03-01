@@ -702,7 +702,7 @@
     <string name="init_base_directory_description">Base folder for public local data</string>
     <string name="init_map_directory_description">Folder with offline maps</string>
     <string name="init_brouter_directory_description">Folder with BRouter routing data</string>
-    <string name="init_brouter_directory_additionalinfo">(Default folder is something like \'/brouter/segments4\'. BRouter needs to be configured to use the same folder, see \'storageconfiguration.txt\' in BRouter\'s \'segments4\' folder.)</string>
+    <string name="init_brouter_directory_additionalinfo">(Default folder is something like \'%1$s\'. BRouter needs to be configured to use the same folder, see our online manual for details, especially when using Android 11 or higher.)</string>
     <string name="init_brouter_updateinterval_title">Update interval</string>
     <string name="init_brouter_updateinterval_description">Reminds you every x days for an update check</string>
     <string name="init_gpx_importexportdir">GPX Folder</string>

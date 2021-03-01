@@ -168,7 +168,7 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestGpxfolder, 0);
                 break;
             case WIZARD_PERMISSIONS_BROUTERTILESFOLDER:
-                setFolderInfo(PersistableFolder.BROUTER_TILES, R.string.wizard_broutertilesfolder_request_explanation, true);
+                setFolderInfo(PersistableFolder.ROUTING_TILES, R.string.wizard_broutertilesfolder_request_explanation, true);
                 setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestBroutertilesfolder, 0);
                 break;
             case WIZARD_PLATFORMS:
@@ -459,14 +459,14 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private static boolean broutertilesFolderNeedsMigration() {
-        return Settings.isBrouterAutoTileDownloads() && PersistableFolder.BROUTER_TILES.isLegacy() && Routing.isInstalled();
+        return Settings.isBrouterAutoTileDownloads() && PersistableFolder.ROUTING_TILES.isLegacy() && Routing.isInstalled();
     }
 
     private void requestBroutertilesfolder() {
         forceSkipButton = false;
         if (broutertilesFolderNeedsMigration()) {
             prepareFolderDefaultValues();
-            getContentStorageHelper().migratePersistableFolder(PersistableFolder.BROUTER_TILES, v -> onReturnFromFolderMigration(!broutertilesFolderNeedsMigration()));
+            getContentStorageHelper().migratePersistableFolder(PersistableFolder.ROUTING_TILES, v -> onReturnFromFolderMigration(!broutertilesFolderNeedsMigration()));
         }
     }
 
