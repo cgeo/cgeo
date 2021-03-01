@@ -59,7 +59,7 @@ public final class LocalStorage {
     private static File externalPrivateCgeoDirectory;
     private static File externalPublicCgeoDirectory;
 
-    private static final int LOCALSTORAGE_VERSION = 1;
+    private static final int LOCALSTORAGE_VERSION = 2;
 
 
     private LocalStorage() {
@@ -187,7 +187,7 @@ public final class LocalStorage {
 
     @NonNull
     public static File getMapThemeInternalDir() {
-        final File dir = new File(getGeocacheDataDirectory("shared"), MAP_THEME_INTERNAL_DIR_NAME);
+        final File dir =  new File(getInternalCgeoDirectory(), MAP_THEME_INTERNAL_DIR_NAME);
         dir.mkdirs();
         return dir;
     }
@@ -447,6 +447,12 @@ public final class LocalStorage {
                         }
                     }
                 }
+            }
+
+            //delete theme files from outdated internal theme file dir
+            if (currentVersion < 2) {
+                setMigratedVersion(2, "InternalThemeDirMigration");
+                FileUtils.deleteDirectory(new File(getGeocacheDataDirectory("shared"), MAP_THEME_INTERNAL_DIR_NAME));
             }
 
             return 0;

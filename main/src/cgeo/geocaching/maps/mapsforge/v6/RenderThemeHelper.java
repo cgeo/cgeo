@@ -178,7 +178,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
             } else {
                 final ImmutablePair<ContentStorage.FileInformation, Folder> fileFolder =
                     ContentStorage.get().getParentFolderAndFileInfo(PersistableFolder.OFFLINE_MAP_THEMES.getFolder(), themeIdTokens[0]);
-                if (fileFolder == null) {
+                if (fileFolder == null || fileFolder.left == null) {
                     xmlRenderTheme = null;
                 } else {
                     xmlRenderTheme = new ContentRenderTheme(getContentResolver(), fileFolder.left.uri, this);
