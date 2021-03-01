@@ -238,7 +238,8 @@ public class ContentStorage {
      *
      * @param rootFolder root Folder
      * @param subfolderAndName file name to get information for, optionally with a subfolder structure before it
-     * @return information about file (left) and direct parent folder of this file (right)
+     * @return information about file (left) and direct parent folder of this file (right).
+     *    Note that file (left) might be null although its parent folder (right) is not null - e.g. if folder does exist, but not the file within it
      */
     public ImmutablePair<FileInformation, Folder> getParentFolderAndFileInfo(final Folder rootFolder, final String subfolderAndName) {
 
