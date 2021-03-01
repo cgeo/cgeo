@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.contacts.ContactsAddon;
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -102,7 +103,7 @@ public final class SystemInformation {
         if (GCConnector.getInstance().isActive()) {
             body.append("\n- Geocaching.com date format: ").append(Settings.getGcCustomDate());
         }
-        body.append("\n- BRouter connection available: ").append(Routing.isAvailable());
+        body.append("\n- BRouter installed: ").append(ProcessUtils.isInstalled(context.getString(R.string.package_brouter))).append(" / connection available: ").append(Routing.isAvailable());
         appendAddons(body);
 
         body.append("\n")
