@@ -1893,7 +1893,9 @@
     <string name="downloadmap_install_theme_info">Je gedownloade kaart vereist een speciaal themabestand. Wil je deze ook downloaden?</string>
     <string name="mapserver_mapsforge_info">Basis kaarten, geen kaart thema\'s nodig</string>
     <string name="mapserver_openandromaps_info">Gedetailleerde kaarten, vereisen thema \"Elevate\"</string>
+    <string name="mapserver_openandromaps_themes_info">Gedetailleerde kaart thema, gebouwd voor \"OpenAndroMaps\" kaarten</string>
     <string name="mapserver_freizeitkarte_info">Gedetailleerde kaarten, vereisen een van de \"freizeitkarte\" kaartthema\'s.</string>
+    <string name="mapserver_freizeitkarte_themes_info">Gedetailleerde kaart thema, gebouwd voor \"Freizeitkarte\" kaarten</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
@@ -1943,6 +1945,7 @@
     <string name="wizard_not_now">Niet nu</string>
     <string name="wizard_skip_wizard_warning">c:geo werkt mogelijk niet zoals verwacht totdat de configuratie is voltooid. Afhankelijk van de ontbrekende configuratie kan c:geo mogelijk niet in staat zijn om gegevens te lezen/opslaan zoals offline kaarten, geocaches, logbestanden etc.\n\nWanneer je de installatie wilt voltooien, kies dan \"Configuratiewizard\" in het hoofdmenu of herstart c:geo.</string>
     <!-- Map Theme helper -->
+    <string name="mapthemes_foldersync_finished_toast">%1$s mapsynchronisatie voltooid na %2$s, %3$d van de %4$s behoefden synchronisatie</string>
     <!-- default actions in dialogs -->
     <string name="previous">Vorige</string>
     <string name="skip">Overslaan</string>
