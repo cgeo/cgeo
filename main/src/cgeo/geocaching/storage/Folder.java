@@ -56,7 +56,8 @@ public class Folder {
     public static final Folder LEGACY_CGEO_PUBLIC_ROOT = Folder.fromFile(new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "cgeo"));
 
     /** Legacy public BRouter tile data folder until API29 (will no longer work in API30) */
-    public static final Folder LEGACY_BROUTER_TILES = Folder.fromFile(new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "brouter/segments4"));
+    public static final String BROUTER_TILES_SUBPATH = "Android/data/btools.routingapp/files/brouter/segments4";
+    public static final Folder LEGACY_BROUTER_TILES = Folder.fromFile(new File(Environment.getExternalStorageDirectory().getAbsolutePath(), BROUTER_TILES_SUBPATH));
 
     private static final String CONFIG_SEP = "::";
 

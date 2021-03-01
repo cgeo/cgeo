@@ -96,6 +96,7 @@
     <string translatable="false" name="pref_brouterAutoTileDownloads">brouterAutoTileDownloads</string>
     <string translatable="false" name="pref_brouterAutoTileDownloadsInterval">brouterAutoTileDownloadsInterval</string>
     <string translatable="false" name="pref_brouterAutoTileDownloadsLastCheck">brouterAutoTileDownloadsLastCheck</string>
+    <string translatable="false" name="pref_fakekey_brouterTilesFolderInfo">fakekey_brouterTilesFolderInfo</string>
     <string translatable="false" name="pref_bigSmileysOnMap">pref_bigSmileysOnMap</string>
     <string translatable="false" name="pref_proximityNotificationGeneral">pref_proximityNotificationGeneral</string>
     <string translatable="false" name="pref_proximityNotificationSpecific">pref_proximityNotificationSpecific</string>
