@@ -387,7 +387,6 @@
     <string name="init_authorization_credential_password">Geslo</string>
     <string name="settings_service_active">Aktivno</string>
     <string name="init_signature">Podpis</string>
-    <string name="init_template_help">Spremenljivke kot na primer [NAME] bodo razširjene kasneje.</string>
     <string name="init_signature_template_button">Vnesi predlogo</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Ura</string>
@@ -510,7 +509,9 @@
     <string name="sendToCgeo_no_registration">c:geo ni uspel prenesti zakladov. Registracija s send2cgeo je potekla. Prosimo ponovno registrirajte napravo v nastavitvah.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Poveži c:geo s Twitterjem</string>
     <string name="auth_start">Začni z avtorizacijo</string>
@@ -720,7 +721,6 @@
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_select_multiple_items">Izberite element</string>
     <!-- search -->
-    <string name="search_bar_hint">Iskanje zakladov</string>
     <string name="search_bar_desc">Zakladi (geo koda, ključne besede), Sledljivčki (TB koda)</string>
     <string name="search_coordinates">Koordinate</string>
     <string name="search_coordinates_button">Iskanje po koordinatah</string>
@@ -1121,5 +1121,6 @@
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>

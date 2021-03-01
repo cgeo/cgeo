@@ -500,7 +500,6 @@
     <string name="settings_service_active">Activo</string>
     <string name="settings_navigation_disabled">Esta app no se encuentra instalada</string>
     <string name="init_signature">Firma</string>
-    <string name="init_template_help">Cadenas de comandos como [NAME] se expanderán más tarde cuando se usen estas plantillas.</string>
     <string name="init_signature_template_button">Insertar plantilla</string>
     <string name="init_signature_template_date">Fecha</string>
     <string name="init_signature_template_time">Hora</string>
@@ -689,7 +688,9 @@
     <string name="sendToCgeo_no_registration">c:geo no ha podido descargar cachés. El registro en send2cgeo ha expirado. Por favor registrate en ajustes.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_check">Comprobar autenticación</string>
@@ -999,7 +1000,6 @@
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar elemento</string>
     <!-- search -->
-    <string name="search_bar_hint">Buscar cachés</string>
     <string name="search_bar_desc">Cachés (Código-GC, palabra clave), Rastreables (Código-TB)</string>
     <string name="search_coordinates">Coordenadas</string>
     <string name="search_coordinates_button">Buscar por coordenadas</string>
@@ -1474,5 +1474,6 @@ Nombre de archivo:%2$s</string>
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>

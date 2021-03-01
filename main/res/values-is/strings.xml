@@ -333,7 +333,6 @@
     <string name="init_authorization_credential_password">Lykilorð</string>
     <string name="settings_navigation_disabled">Það lítur út fyrir að þetta app sé ekki uppsett</string>
     <string name="init_signature">Undirskrift</string>
-    <string name="init_template_help">Staðgengilstextar eins og [NAME] munu breytast þegar þetta sniðmát er notað.</string>
     <string name="init_signature_template_button">Setja inn sniðmát</string>
     <string name="init_signature_template_date">Dagsetning</string>
     <string name="init_signature_template_time">Tími</string>
@@ -403,7 +402,9 @@
     <string name="init_sendToCgeo_register">Óska eftir skráningu</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Samþykkja c:geo</string>
     <string name="auth_again">Byrja upp á nýtt</string>
@@ -560,7 +561,6 @@
     <string name="map_theme_select">Velja kortaþema</string>
     <string name="map_select_multiple_items">Velja atriði</string>
     <!-- search -->
-    <string name="search_bar_hint">Leita að kössum</string>
     <string name="search_bar_desc">Kassar (geokóði, leitarorð), Ferðalangar (TB kóði)</string>
     <string name="search_coordinates_button">Leita eftir hnitum</string>
     <string name="search_address">Heimilisfang</string>
@@ -771,5 +771,6 @@
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>

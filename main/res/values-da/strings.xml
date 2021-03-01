@@ -512,7 +512,6 @@
     <string name="settings_service_active">Aktiv</string>
     <string name="settings_navigation_disabled">Denne app er muligvis ikke installeret</string>
     <string name="init_signature">Signatur</string>
-    <string name="init_template_help">Pladsholdere, som for eksempel [NAME], vil blive erstattet når skabelonen bliver anvendt.</string>
     <string name="init_signature_template_button">Indsæt skabelon</string>
     <string name="init_signature_template_date">Dato</string>
     <string name="init_signature_template_time">Tidspunkt</string>
@@ -744,7 +743,9 @@
     <string name="sendToCgeo_no_registration">c:geo kunne ikke indlæse cacher. Registrering af send2cgeo er udløbet. Registrér venligst under Indstillinger.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Godkend c:geo</string>
     <string name="auth_check">Kontrollér autentifikation</string>
@@ -1099,7 +1100,6 @@
     <string name="map_gm_autorotation">Auto-rotér kort</string>
     <string name="map_gm_autorotation_disable">Deaktivér auto-rotation?\n\nAuto-rotation kan aktiveres igen ved hjælp af menupunktet Kortrotation</string>
     <!-- search -->
-    <string name="search_bar_hint">Søg efter cacher</string>
     <string name="search_bar_desc">Cacher (geokode, nøgleord), Trackables (TB-kode)</string>
     <string name="search_coordinates">Koordinater</string>
     <string name="search_coordinates_button">Søg fra koordinater</string>
@@ -1683,5 +1683,6 @@
     <string name="export_individualroute_title">Eksportér individuel rute</string>
     <string name="export_individualroute_success">Individuel rute eksporteret til \"%s\"</string>
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>

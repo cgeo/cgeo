@@ -411,7 +411,6 @@
     <string name="settings_service_active">Aktif</string>
     <string name="settings_navigation_disabled">Aplikasi ini sepertinya tidak bisa dipasang</string>
     <string name="init_signature">Tanda tangan</string>
-    <string name="init_template_help">Placeholder string seperti [NAME] akan diperluas kemudian ketika pola ini digunakan.</string>
     <string name="init_signature_template_button">Memasukkan Template</string>
     <string name="init_signature_template_date">Tanggal</string>
     <string name="init_signature_template_time">Waktu</string>
@@ -542,7 +541,9 @@
     <string name="sendToCgeo_no_registration">c:geo gagal untuk mendownload cache. Pendaftaran untuk send2cgeo berakhir. Silakan mendaftar di pengaturan.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Mengizinkan c:geo</string>
     <string name="auth_check">Periksa otentikasi</string>
@@ -790,7 +791,6 @@
     <string name="map_as_list">Tampilkan daftar</string>
     <string name="map_select_multiple_items">Pilih item</string>
     <!-- search -->
-    <string name="search_bar_hint">Mencari cache</string>
     <string name="search_bar_desc">Cache (geo kode, kata kunci), Trackables (TB kode)</string>
     <string name="search_coordinates">Koordinat</string>
     <string name="search_coordinates_button">Cari berdasarkan koordinat</string>
@@ -1225,5 +1225,6 @@
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>

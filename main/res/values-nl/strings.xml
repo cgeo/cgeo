@@ -536,7 +536,7 @@
     <string name="settings_service_active">Actief</string>
     <string name="settings_navigation_disabled">Deze app lijkt niet geïnstalleerd te zijn</string>
     <string name="init_signature">Handtekening</string>
-    <string name="init_template_help">Samenvoeg velden zoals [NAME] worden later ingevuld bij gebruik van deze sjabloon.</string>
+    <string name="init_template_help">Sjabloonvelden - zoals [NAME] - worden gevuld met de betreffende tekst wanneer het sjabloon wordt gebruikt.</string>
     <string name="init_signature_template_button">Voeg template toe</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tijd</string>
@@ -843,12 +843,14 @@
     <string name="persistablefolder_logfiles">Logbestanden</string>
     <string name="persistablefolder_fieldnotes">Veld notities</string>
     <string name="persistablefolder_spoilerimages">Spoiler afbeeldingen</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s voltooid</string>
+    <string name="folder_process_status_currentfile">%1$s verwerken</string>
+    <!-- FolderUtils: synchronize -->
+    <string name="folder_synchronize_to_internal_progressbar_title">Synchroniseer inhoud van %1$s naar interne opslag</string>
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Inhoud kopiëren van %1$s naar %2$s</string>
-    <string name="folder_copy_progressbar_status_done">Gekopieerd %1$s/%2$s, %3$s/%4$s</string>
     <string name="folder_move_progressbar_title">Inhoud verplaatsen van %1$s naar %2$s</string>
-    <string name="folder_move_progressbar_status_done">Verplaatst %1$s/%2$s, %3$s/%4$s</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Verwerk %1$s</string>
     <string name="folder_copy_finished_title">Map inhoud is gekopieerd</string>
     <string name="folder_move_finished_title">Map inhoud is verplaatst</string>
     <string name="folder_copy_finished_dialog_message">Inhoud van map %1$s is gekopieerd naar %2$s.\n\n%3$s van %4$s en %5$s van %6$s zijn verwerkt.</string>
@@ -1219,12 +1221,12 @@
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
     <string name="map_show_circles">Toon cirkels</string>
-    <string name="map_showc_ownfound">Eigen/gevonden caches tonen</string>
-    <string name="map_showc_disabled">Uitgeschakelde caches tonen</string>
-    <string name="map_showc_archived">Gearchiveerde caches tonen</string>
-    <string name="map_showwp_original">Originele waypoints tonen</string>
-    <string name="map_showwp_parking">Parkeer waypoints tonen</string>
-    <string name="map_showwp_visited">Bezochte waypoints tonen</string>
+    <string name="map_showc_ownfound">Eigen/gevonden caches</string>
+    <string name="map_showc_disabled">Uitgeschakelde caches</string>
+    <string name="map_showc_archived">Gearchiveerde caches</string>
+    <string name="map_showwp_original">Originele waypoints</string>
+    <string name="map_showwp_parking">Parkeer waypoints</string>
+    <string name="map_showwp_visited">Bezochte waypoints</string>
     <string name="map_show_track">GPX spoor/route tonen</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
@@ -1243,9 +1245,9 @@
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
     <string name="quick_settings_info">Enkele kaartinstellingen (kaartinstellingen, verbergen, routing) zijn verplaatst naar de nieuwe \"Snelle instellingen\" popup.\nJe kunt deze pop-up openen met behulp van het icoon in het midden onderin de kaart.</string>
-    <string name="map_show_in_map">Op kaart tonen</string>
+    <string name="map_show_in_map">Toon op kaart:</string>
     <!-- search -->
-    <string name="search_bar_hint">Zoek naar caches</string>
+    <string name="search_bar_hint">Caches/trackables zoeken</string>
     <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
     <string name="search_coordinates">Coördinaten</string>
     <string name="search_coordinates_button">Zoeken op coördinaten</string>
@@ -1832,6 +1834,7 @@
     <string name="switch_default">(standaard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
+    <string name="show_all">Alles weergeven</string>
     <string name="routingmode_straight">Recht</string>
     <string name="routingmode_walk">Lopen</string>
     <string name="routingmode_bike">Fiets</string>
@@ -1890,7 +1893,7 @@
     <string name="downloadmap_install_theme_info">Je gedownloade kaart vereist een speciaal themabestand. Wil je deze ook downloaden?</string>
     <string name="mapserver_mapsforge_info">Basis kaarten, geen kaart thema\'s nodig</string>
     <string name="mapserver_openandromaps_info">Gedetailleerde kaarten, vereisen thema \"Elevate\"</string>
-    <string name="mapserver_elevate_info">Gedetailleerd kaartthema</string>
+    <string name="mapserver_freizeitkarte_info">Gedetailleerde kaarten, vereisen een van de \"freizeitkarte\" kaartthema\'s.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
@@ -1918,6 +1921,7 @@
     <string name="wizard_permissions_folder_title">Map instellen: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo heeft een lokale map nodig om gegevens zoals GPX bestanden, back-ups, Field Notes en logbestanden op te slaan. Standaard worden deze bestanden opgeslagen in mappen onder de zogenaamde \"basismap\". Selecteer of creëer een dergelijke map in de volgende stap.\n\nAls je c:geo van een vorige versie bijwerkt, selecteer dan de bestaande map \"cgeo\" op hoofdniveau van je apparaatopslag.\nTip: Je kunt de interne opslag van je apparaat eerst zichtbaar maken in de bestandsselectie die hierna wordt weergegeven.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo heeft een lokale map nodig om offline kaartbestanden op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo heeft een lokale map nodig om themabestanden op te slaan voor offline kaarten. Selecteer of maak een dergelijke map aan in de volgende stap.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo heeft een lokale map nodig om GPX bestanden op te slaan (bijv. voor het importeren / exporteren van caches of spoor). Selecteer of maak een dergelijke map aan in de volgende stap.</string>
     <string name="wizard_platforms_title">Services configureren</string>
     <string name="wizard_platforms_intro">Om geocaches met c:geo te vinden heb je een account nodig voor een geocaching service ondersteund door c:geo.\nSelecteer de gewenste service hieronder om in te loggen met je bestaande account of maak een nieuw account aan.</string>
@@ -1936,6 +1940,9 @@
     <string name="wizard_status_location_permission">Locatie permissie</string>
     <string name="wizard_status_basefolder">Basismap</string>
     <string name="wizard_status_platform">Geocaching diensten</string>
+    <string name="wizard_not_now">Niet nu</string>
+    <string name="wizard_skip_wizard_warning">c:geo werkt mogelijk niet zoals verwacht totdat de configuratie is voltooid. Afhankelijk van de ontbrekende configuratie kan c:geo mogelijk niet in staat zijn om gegevens te lezen/opslaan zoals offline kaarten, geocaches, logbestanden etc.\n\nWanneer je de installatie wilt voltooien, kies dan \"Configuratiewizard\" in het hoofdmenu of herstart c:geo.</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Vorige</string>
     <string name="skip">Overslaan</string>

@@ -533,7 +533,6 @@
     <string name="settings_service_active">Aktywna</string>
     <string name="settings_navigation_disabled">Wygląda, że ta aplikacja nie jest zainstalowana</string>
     <string name="init_signature">Podpis</string>
-    <string name="init_template_help">Tagi jak np. [NAZWA] będą używane w przyszłości.</string>
     <string name="init_signature_template_button">Wstaw szablon</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Czas</string>
@@ -830,12 +829,11 @@
     <string name="persistablefolder_backup">Kopia zapasowa</string>
     <string name="persistablefolder_logfiles">Pliki dziennika</string>
     <string name="persistablefolder_fieldnotes">Notatki polowe</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopiowanie zawartości %1$s do %2$s</string>
-    <string name="folder_copy_progressbar_status_done">Skopiowano %1$s/%2$s, %3$s/%4$s</string>
     <string name="folder_move_progressbar_title">Przenoszenie zawartości %1$s do %2$s</string>
-    <string name="folder_move_progressbar_status_done">Przeniesiono %1$s/%2$s, %3$s/%4$s</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Przetwarzanie %1$s</string>
     <string name="folder_copy_finished_title">Zawartość folderu została skopiowana</string>
     <string name="folder_move_finished_title">Zawartość folderu została przeniesiona</string>
     <string name="folder_copy_finished_dialog_message">Zawartość folderu %1$s została skopiowana do %2$s.\n\n%3$s z %4$s i %5$s z %6$s zostały przetworzone.</string>
@@ -1223,12 +1221,6 @@
     <string name="map_rotation">Obrót mapy</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
     <string name="map_show_circles">Pokaż okręgi</string>
-    <string name="map_showc_ownfound">Pokaż własne/znalezione skrzynki</string>
-    <string name="map_showc_disabled">Pokaż wyłączone skrzynki</string>
-    <string name="map_showc_archived">Pokaż zarchiwizowane skrzynki</string>
-    <string name="map_showwp_original">Pokaż oryginalne punkty nawigacyjne</string>
-    <string name="map_showwp_parking">Pokaż parkingi z punktów nawigacyjnych</string>
-    <string name="map_showwp_visited">Ukryj odwiedzone punkty nawigacyjne</string>
     <string name="map_show_track">Pokaż ścieżkę/trasę GPX</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
@@ -1247,9 +1239,7 @@
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczną rotację mapy?\n\nMożesz włączyć ją ponownie za pomocą menu rotacji mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
     <string name="quick_settings_info">Niektóre ustawienia mapy (ustawienia mapy, ukrywanie, nawigacja) zostały przeniesione do nowego okienka „Szybkie ustawienia”.\nMożesz otworzyć to okienko używając ikony w dolnym środku mapy.</string>
-    <string name="map_show_in_map">Pokaż na mapie</string>
     <!-- search -->
-    <string name="search_bar_hint">Szukaj skrzynek</string>
     <string name="search_bar_desc">Skrzynki (GC-kod, słowo kluczowe), przedmioty podróżne (TB-kod)</string>
     <string name="search_coordinates">Współrzędne</string>
     <string name="search_coordinates_button">Szukaj według współrzędnych</string>
@@ -1924,7 +1914,6 @@
     <string name="downloadmap_install_theme_info">Pobrana mapa wymaga specjalnego pliku motywu. Czy chcesz go również pobrać?</string>
     <string name="mapserver_mapsforge_info">Podstawowe mapy, motywy mapy nie są wymagane</string>
     <string name="mapserver_openandromaps_info">Szczegółowe mapy, wymagają motywu mapy \"Elevate\"</string>
-    <string name="mapserver_elevate_info">Szczegółowy motyw mapy</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
     <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>
@@ -1967,6 +1956,7 @@
     <string name="wizard_status_location_permission">Dostęp do lokalizacji</string>
     <string name="wizard_status_basefolder">Folder podstawowy</string>
     <string name="wizard_status_platform">Usługi Geocaching</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Poprzedni</string>
     <string name="skip">Pomiń</string>

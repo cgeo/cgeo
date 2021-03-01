@@ -512,7 +512,6 @@
     <string name="settings_service_active">激活</string>
     <string name="settings_navigation_disabled">这个应用似乎没有被安装</string>
     <string name="init_signature">签名</string>
-    <string name="init_template_help">类似 [NAME] 的占位符字符串将在使用此模板后被扩展。</string>
     <string name="init_signature_template_button">插入模板</string>
     <string name="init_signature_template_date">日期</string>
     <string name="init_signature_template_time">时间</string>
@@ -711,7 +710,9 @@
     <!-- map sources -->
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_check">检查身份验证</string>
     <string name="auth_check_again">检查身份验证</string>
@@ -781,5 +782,6 @@
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>

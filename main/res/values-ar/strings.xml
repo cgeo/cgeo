@@ -419,7 +419,6 @@
     <string name="settings_service_active">مفعل</string>
     <string name="settings_navigation_disabled">يبدو أن هذا التطبيق غير مثبت</string>
     <string name="init_signature">التوقيع</string>
-    <string name="init_template_help">الكلمات التي تأخذ مكان كبير مثل [NAME] سيتم توسيعها فيما بعد عندما يتم استخدام هذا القالب.</string>
     <string name="init_signature_template_button">إدراج قالب</string>
     <string name="init_signature_template_date">التاريخ</string>
     <string name="init_signature_template_time">الوقت</string>
@@ -552,7 +551,9 @@
     <string name="sendToCgeo_no_registration">c:geo فشل في تحميل المخبآت. انتهت مدة التسجيل في send2cgeo. الرجاء التسجيل في الإعدادات.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">الترخيص لـ c:geo</string>
     <string name="auth_check">تحقق من المصادقة</string>
@@ -796,7 +797,6 @@
     <string name="map_as_list">عرض كقائمة</string>
     <string name="map_select_multiple_items">حدد العنصر</string>
     <!-- search -->
-    <string name="search_bar_hint">البحث عن المخبآت</string>
     <string name="search_bar_desc">المخبآت (كود المخبئ، كلمة مفتاحية)، أمتعة السفر (كود TB)</string>
     <string name="search_coordinates">الإحداثيات</string>
     <string name="search_coordinates_button">البحث بواسطة الإحدثيات</string>
@@ -1203,5 +1203,6 @@
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>

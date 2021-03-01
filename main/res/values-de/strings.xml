@@ -536,7 +536,7 @@
     <string name="settings_service_active">Aktiv</string>
     <string name="settings_navigation_disabled">Diese App scheint nicht installiert zu sein</string>
     <string name="init_signature">Signatur</string>
-    <string name="init_template_help">Platzhalter-Zeichenfolgen wie [NAME] werden später erweitert, wenn diese Vorlage verwendet wird.</string>
+    <string name="init_template_help">Platzhalter - wie [NAME] - werden mit dem entsprechenden Text gefüllt, wenn die Vorlage genutzt wird.</string>
     <string name="init_signature_template_button">Platzhalter einfügen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Zeit</string>
@@ -843,12 +843,14 @@
     <string name="persistablefolder_logfiles">Logdateien</string>
     <string name="persistablefolder_fieldnotes">Feldnotizen</string>
     <string name="persistablefolder_spoilerimages">Hinweisbilder</string>
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fertig</string>
+    <string name="folder_process_status_currentfile">Prozess %1$s</string>
+    <!-- FolderUtils: synchronize -->
+    <string name="folder_synchronize_to_internal_progressbar_title">Inhalt von %1$s mit dem internen Speicher synchronisieren</string>
+    <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopiere Inhalt von %1$s nach %2$s</string>
-    <string name="folder_copy_progressbar_status_done">%1$s/%2$s, %3$s/%4$s kopiert</string>
     <string name="folder_move_progressbar_title">Verschiebe Inhalt von %1$s nach %2$s</string>
-    <string name="folder_move_progressbar_status_done">%1$s/%2$s, %3$s/%4$s verschoben</string>
-    <string name="folder_copy_move_progressbar_status_processed_file">Verarbeite %1$s</string>
     <string name="folder_copy_finished_title">Ordnerinhalte wurden kopiert</string>
     <string name="folder_move_finished_title">Ordnerinhalte wurden verschoben</string>
     <string name="folder_copy_finished_dialog_message">Inhalt des Ordners %1$s wurde nach %2$s kopiert.\n\n%3$s von %4$s und %5$s von %6$s wurden verarbeitet.</string>
@@ -1219,12 +1221,12 @@
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_show_circles">Kreise anzeigen</string>
-    <string name="map_showc_ownfound">Eigene/gefundene Caches anzeigen</string>
-    <string name="map_showc_disabled">Deaktivierte Caches anzeigen</string>
-    <string name="map_showc_archived">Archivierte Caches anzeigen</string>
-    <string name="map_showwp_original">Originale Wegpunkte anzeigen</string>
-    <string name="map_showwp_parking">Parkplatz-Wegpunkte anzeigen</string>
-    <string name="map_showwp_visited">Besuchte Wegpunkte anzeigen</string>
+    <string name="map_showc_ownfound">Eigene/gefundene Caches</string>
+    <string name="map_showc_disabled">Deaktivierte Caches</string>
+    <string name="map_showc_archived">Archivierte Caches</string>
+    <string name="map_showwp_original">Originale Wegpunkte</string>
+    <string name="map_showwp_parking">Park-Wegpunkte</string>
+    <string name="map_showwp_visited">Besuchte Wegpunkte</string>
     <string name="map_show_track">GPX Track/Route anzeigen</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
@@ -1243,9 +1245,9 @@
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
     <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
-    <string name="map_show_in_map">In Karte anzeigen</string>
+    <string name="map_show_in_map">Zeige auf Karte:</string>
     <!-- search -->
-    <string name="search_bar_hint">Suche nach Caches</string>
+    <string name="search_bar_hint">Caches/Trackables suchen</string>
     <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
     <string name="search_coordinates">Koordinaten</string>
     <string name="search_coordinates_button">Suche mit Koordinaten</string>
@@ -1832,6 +1834,7 @@
     <string name="switch_default">(Standard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
+    <string name="show_all">Alle zeigen</string>
     <string name="routingmode_straight">Direkt</string>
     <string name="routingmode_walk">Gehen</string>
     <string name="routingmode_bike">Fahrrad</string>
@@ -1890,7 +1893,7 @@
     <string name="downloadmap_install_theme_info">Die heruntergeladene Karte erfordert eine spezielle Datei zur Kartendarstellung. Möchtest Du diese auch herunterladen?</string>
     <string name="mapserver_mapsforge_info">Basiskarten, keine Darstellungsdatei erforderlich</string>
     <string name="mapserver_openandromaps_info">Detaillierte Karten, erfordern Kartendarstellung \"Elevate\"</string>
-    <string name="mapserver_elevate_info">Detaillierte Kartendarstellung</string>
+    <string name="mapserver_freizeitkarte_info">Detaillierte Karten, benötigen eines der \"Freizeitkarte\"-Kartenthemen.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
@@ -1918,6 +1921,7 @@
     <string name="wizard_permissions_folder_title">Ordner festlegen: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo benötigt einen lokalen Ordner, um Daten wie GPX-Dateien, Backups, Feldnotizen und Logdateien zu speichern. Standardmäßig werden diese Dateien in Ordnern unterhalb eines sog. \"Basisordners\" gespeichert. Wähle oder erstelle einen solchen Ordner im nächsten Schritt.\n\nWenn du c:geo von einer früheren Version aktualisiert hast, wähle den existierenden Ordner \"cgeo\" auf der Grundebene deines Gerätespeichers aus.\nHinweis: Möglicherweise musst du die Anzeige des internen Speichers deines Gerätes zuerst in der Dateiauswahl, die gleich angezeigt wird, aktivieren.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo benötigt einen Ordner für Offline-Kartendateien. Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo benötigt einen Ordner um Darstellungen für Offlinekarten zu speichern. Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo benötigt einen Ordner für GPX-Dateien (z.B. zum Import / Export von Caches oder Tracks). Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
     <string name="wizard_platforms_title">Dienste konfigurieren</string>
     <string name="wizard_platforms_intro">Um Geocaches mit c:geo zu finden, benötigst du ein Konto für einen Geocaching-Dienst, der von c:geo unterstützt wird.\nWähle unten den gewünschten Dienst aus, um dich entweder mit deinem bestehenden Konto anzumelden oder ein neues Konto zu erstellen.</string>
@@ -1936,6 +1940,9 @@
     <string name="wizard_status_location_permission">Standortberechtigung</string>
     <string name="wizard_status_basefolder">Basisordner</string>
     <string name="wizard_status_platform">Geocaching-Dienste</string>
+    <string name="wizard_not_now">Jetzt nicht</string>
+    <string name="wizard_skip_wizard_warning">c:geo funktioniert möglicherweise nicht wie erwartet, bis die Konfiguration abgeschlossen ist. Abhängig von der fehlenden Konfiguration ist c:geo möglicherweise nicht in der Lage, Daten wie Offline-Karten, Geocaches, Logdateien usw. zu lesen/zu speichern.\n\nWann immer du bereit bist, das Setup abzuschließen, wähle entweder \"Konfigurations-Assistent\" im Hauptmenü oder starte c:geo neu.</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Zurück</string>
     <string name="skip">Überspringen</string>

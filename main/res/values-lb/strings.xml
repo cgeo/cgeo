@@ -512,7 +512,6 @@
     <string name="settings_service_active">Aktiv</string>
     <string name="settings_navigation_disabled">Dës App schéngt net installéiert ze sinn</string>
     <string name="init_signature">Ënnerschrëft</string>
-    <string name="init_template_help">Plazhalter wéi [NAME] gi spéider erweidert, wann dës Virlag benotzt gëtt.</string>
     <string name="init_signature_template_button">Virlag afügen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Zäit</string>
@@ -585,7 +584,9 @@
     <!-- map sources -->
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <!-- auth credentials -->
     <!-- auth token -->
@@ -695,5 +696,6 @@
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>

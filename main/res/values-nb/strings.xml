@@ -514,7 +514,6 @@
     <string name="settings_service_active">Aktiv</string>
     <string name="settings_navigation_disabled">Denne app synes ikke å være installert</string>
     <string name="init_signature">Signatur</string>
-    <string name="init_template_help">Autotekst, slik som [NAME], vil bli erstattet med navnet på cachen når denne malen blir brukt i en logg.</string>
     <string name="init_signature_template_button">Sett inn autotekst</string>
     <string name="init_signature_template_date">Dato</string>
     <string name="init_signature_template_time">Tid</string>
@@ -752,7 +751,9 @@
     <string name="sendToCgeo_no_registration">c:geo kunne ikke laste ned cacher. Registrering for send2cgeo har utløpt. Registrer deg på nytt i innstillingene.</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Godkjenn c:geo</string>
     <string name="auth_check">Kontroller brukernavn/passord</string>
@@ -1089,12 +1090,6 @@
     <string name="map_rotation">Kartrotasjon</string>
     <string name="map_dot_mode">Bruk kompakte ikon</string>
     <string name="map_show_circles">Vis sirkler</string>
-    <string name="map_showc_ownfound">Vis egne og funnede cacher</string>
-    <string name="map_showc_disabled">Vis deaktiverte cacher</string>
-    <string name="map_showc_archived">Vis arkiverte cacher</string>
-    <string name="map_showwp_original">Vis opprinnelige veipunkter</string>
-    <string name="map_showwp_parking">Vis parkeringsveipunkter</string>
-    <string name="map_showwp_visited">Vis besøkte veipunkter</string>
     <string name="map_show_track">Vis GPX spor/rute</string>
     <string name="init_hidewp">Skjul veipunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale veipunkter på kartet</string>
@@ -1110,9 +1105,7 @@
     <string name="map_gm_autorotation">Automatisk rotering av kart</string>
     <string name="map_gm_autorotation_disable">Deaktivere kartrotasjon?\n\nDu kan aktivere det på nytt i menyen for kartrotasjon</string>
     <string name="quick_settings">Hurtiginnstillinger</string>
-    <string name="map_show_in_map">Vis på kartet</string>
     <!-- search -->
-    <string name="search_bar_hint">Søk etter cacher</string>
     <string name="search_bar_desc">Cacher (GC-kode, nøkkelord). Sporbare (TB-kode)</string>
     <string name="search_coordinates">Koordinater</string>
     <string name="search_coordinates_button">Søk med koordinater</string>
@@ -1731,5 +1724,6 @@
     <!-- install wizard -->
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="status_not_ok">FEIL</string>
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>

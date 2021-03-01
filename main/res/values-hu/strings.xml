@@ -478,7 +478,6 @@
     <string name="settings_service_active">Aktív</string>
     <string name="settings_navigation_disabled">Ez az alkalmazás nincs telepítve.</string>
     <string name="init_signature">Aláírás</string>
-    <string name="init_template_help">A helyőrzők (pl. [NAME]) tartalma csak később, a sablon használatakor válik láthatóvá.</string>
     <string name="init_signature_template_button">Sablon beillesztése</string>
     <string name="init_signature_template_date">Dátum</string>
     <string name="init_signature_template_time">Idő</string>
@@ -626,7 +625,9 @@
     <string name="sendToCgeo_no_registration">A c:geo nem tudta letölteni a ládákat. A send2cgeo regisztrációd lejárt. Kérlek, regisztrálj a beállításoknál!</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
-    <!-- FolderUtils -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: synchronize -->
+    <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">A c:geo hitelesítése</string>
     <string name="auth_check">Hitelesítés ellenőrzése</string>
@@ -900,7 +901,6 @@
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
     <!-- search -->
-    <string name="search_bar_hint">Ládák keresése</string>
     <string name="search_bar_desc">Ládák (geokód, kulcsszó), utazók (követőkód)</string>
     <string name="search_coordinates">Koordináták</string>
     <string name="search_coordinates_button">Keresés koordinátákkal</string>
@@ -1371,5 +1371,6 @@
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
+    <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
 </resources>
