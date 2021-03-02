@@ -425,6 +425,13 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getCoords()).isEqualTo(new Geopoint("51.223033", "6.027767"));
     }
 
+    public void testGsakGuidV110() throws IOException, ParserException {
+        final List<Geocache> caches = readGPX11(R.raw.gc3t1xg_gsak_110);
+        assertThat(caches).hasSize(1);
+        final Geocache cache = caches.get(0);
+        assertThat(cache.getGuid()).isEqualTo("9946f030-a514-46d8-a050-a60e92fd2e1a");
+    }
+
     public void testGsakDNF() throws IOException, ParserException {
         final Geocache cache = getFirstCache(R.raw.gc3t1xg_gsak_dnf);
         assertThat(cache.isFound()).isFalse();

@@ -13,4 +13,20 @@ public class GPX10Parser extends GPXParser {
         return waypoint;
     }
 
+    @Override
+    protected void registerUrlAndUrlName(final Element element) {
+        element.getChild(namespace, "url").setEndTextElementListener(body -> {
+            setUrl(body);
+        });
+        element.getChild(namespace, "urlname").setEndTextElementListener(body -> {
+            setUrlName(body);
+        });
+    }
+
+    @Override
+    protected void registerScriptUrl(final Element element) {
+        element.getChild(namespace, "url").setEndTextElementListener(body -> {
+            scriptUrl = body;
+        });
+    }
 }

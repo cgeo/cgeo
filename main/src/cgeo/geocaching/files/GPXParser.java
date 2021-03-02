@@ -79,35 +79,35 @@ abstract class GPXParser extends FileParser {
      * supported groundspeak extensions of the GPX format
      */
     private static final String[] GROUNDSPEAK_NAMESPACE = {
-            "http://www.groundspeak.com/cache/1/1", // PQ 1.1
-            "http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
-            "http://www.groundspeak.com/cache/1/0", // PQ 1.0
+        "http://www.groundspeak.com/cache/1/1", // PQ 1.1
+        "http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
+        "http://www.groundspeak.com/cache/1/0", // PQ 1.0
     };
 
     /**
      * supported GSAK extension of the GPX format
      */
     private static final String[] GSAK_NS = {
-            "http://www.gsak.net/xmlv1/1",
-            "http://www.gsak.net/xmlv1/2",
-            "http://www.gsak.net/xmlv1/3",
-            "http://www.gsak.net/xmlv1/4",
-            "http://www.gsak.net/xmlv1/5",
-            "http://www.gsak.net/xmlv1/6"
+        "http://www.gsak.net/xmlv1/1",
+        "http://www.gsak.net/xmlv1/2",
+        "http://www.gsak.net/xmlv1/3",
+        "http://www.gsak.net/xmlv1/4",
+        "http://www.gsak.net/xmlv1/5",
+        "http://www.gsak.net/xmlv1/6"
     };
 
     /**
      * c:geo extensions of the gpx format
      */
     private static final String[] CGEO_NS = {
-            "http://www.cgeo.org/wptext/1/0"
+        "http://www.cgeo.org/wptext/1/0"
     };
 
     /**
      * opencaching extensions of the gpx format
      */
     private static final String[] OPENCACHING_NS = {
-            "https://github.com/opencaching/gpx-extension-v1"
+        "https://github.com/opencaching/gpx-extension-v1"
     };
 
     private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
@@ -208,7 +208,7 @@ abstract class GPXParser extends FileParser {
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
 
-        root.getChild(namespace, "url").setEndTextElementListener(body -> scriptUrl = body);
+        registerScriptUrl(root);
 
         root.getChild(namespace, "creator").setEndTextElementListener(body -> scriptUrl = body);
 
@@ -221,7 +221,7 @@ abstract class GPXParser extends FileParser {
                     // latitude and longitude are required attributes, but we export them (0/0) for waypoints without coordinates
                     if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
                         final Geopoint latLon = new Geopoint(Double.parseDouble(latitude),
-                                Double.parseDouble(longitude));
+                            Double.parseDouble(longitude));
                         final Geopoint pt0 = new Geopoint(0, 0);
                         if (!latLon.equals(pt0)) {
                             cache.setCoords(latLon);
@@ -400,30 +400,10 @@ abstract class GPXParser extends FileParser {
             }
         });
 
-        // waypoint.url
-        waypoint.getChild(namespace, "url").setEndTextElementListener(url -> {
-            final MatcherWrapper matcher = new MatcherWrapper(PATTERN_GUID, url);
-            if (matcher.matches()) {
-                final String guid = matcher.group(1);
-                if (StringUtils.isNotBlank(guid)) {
-                    cache.setGuid(guid);
-                }
-            }
-            final MatcherWrapper matcherCode = new MatcherWrapper(PATTERN_URL_GEOCODE, url);
-            if (matcherCode.matches()) {
-                final String geocode = matcherCode.group(1);
-                cache.setGeocode(geocode);
-            }
-        });
+        // waypoint.url and waypoint.urlname (name for waymarks)
+        registerUrlAndUrlName(waypoint);
 
-        // waypoint.urlname (name for waymarks)
-        waypoint.getChild(namespace, "urlname").setEndTextElementListener(urlName -> {
-            if (cache.getName().equals(cache.getGeocode()) && StringUtils.startsWith(cache.getGeocode(), "WM")) {
-                cache.setName(StringUtils.trim(urlName));
-            }
-        });
-
-        // for GPX 1.0, cache info comes from waypoint node (so called private children,
+        // for GPX 1.0, cache info comes from waypoint node (so called private children)
         // for GPX 1.1 from extensions node
         final Element cacheParent = getCacheParent(waypoint);
 
@@ -643,7 +623,6 @@ abstract class GPXParser extends FileParser {
 
     /**
      * Add listeners for GSAK extensions
-     *
      */
     private void registerGsakExtensions(final Element cacheParent) {
         for (final String gsakNamespace : GSAK_NS) {
@@ -717,7 +696,6 @@ abstract class GPXParser extends FileParser {
 
     /**
      * Add listeners for TerraCaching extensions
-     *
      */
     private void registerTerraCachingExtensions(final Element cacheParent) {
         final String terraNamespace = "http://www.TerraCaching.com/GPX/1/0";
@@ -768,7 +746,7 @@ abstract class GPXParser extends FileParser {
         });
 
         terraLog.setEndElementListener(() -> {
-                final LogEntry log = logBuilder.build();
+            final LogEntry log = logBuilder.build();
             if (log.getType() != LogType.UNKNOWN) {
                 if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
                     final IConnector connector = ConnectorFactory.getConnector(cache);
@@ -818,7 +796,6 @@ abstract class GPXParser extends FileParser {
 
     /**
      * Add listeners for c:geo extensions
-     *
      */
     private void registerCgeoExtensions(final Element cacheParent) {
         for (final String cgeoNamespace : CGEO_NS) {
@@ -839,7 +816,6 @@ abstract class GPXParser extends FileParser {
 
     /**
      * Add listeners for opencaching extensions
-     *
      */
     private void registerOpenCachingExtensions(final Element cacheParent) {
         for (final String namespace : OPENCACHING_NS) {
@@ -866,8 +842,7 @@ abstract class GPXParser extends FileParser {
      * Overwrite this method in a GPX parser sub class to modify the {@link Geocache}, after it has been fully parsed
      * from the GPX file and before it gets stored.
      *
-     * @param cache
-     *            currently imported cache
+     * @param cache currently imported cache
      */
     protected void afterParsing(final Geocache cache) {
         if ("GC_WayPoint1".equals(cache.getShortDescription())) {
@@ -878,9 +853,12 @@ abstract class GPXParser extends FileParser {
     /**
      * GPX 1.0 and 1.1 use different XML elements to put the cache into, therefore needs to be overwritten in the
      * version specific subclasses
-     *
      */
     protected abstract Element getCacheParent(Element waypoint);
+
+    protected abstract void registerUrlAndUrlName(Element waypoint);
+
+    protected abstract void registerScriptUrl(Element element);
 
     protected static String validate(final String input) {
         if ("nil".equalsIgnoreCase(input)) {
@@ -982,10 +960,10 @@ abstract class GPXParser extends FileParser {
             return false;
         }
         final boolean valid = (type == null && subtype == null && sym == null)
-                || StringUtils.contains(type, "geocache")
-                || StringUtils.contains(sym, "geocache")
-                || StringUtils.containsIgnoreCase(sym, "waymark")
-                || (StringUtils.containsIgnoreCase(sym, "terracache") && !terraChildWaypoint);
+            || StringUtils.contains(type, "geocache")
+            || StringUtils.contains(sym, "geocache")
+            || StringUtils.containsIgnoreCase(sym, "waymark")
+            || (StringUtils.containsIgnoreCase(sym, "terracache") && !terraChildWaypoint);
         if ("GC_WayPoint1".equals(cache.getShortDescription())) {
             terraChildWaypoint = true;
         }
@@ -1007,5 +985,34 @@ abstract class GPXParser extends FileParser {
             }
         }
         return cacheForWaypoint;
+    }
+
+    protected void setUrl(final String url) {
+        // try to find guid somewhere else
+        if (StringUtils.isBlank(cache.getGuid()) && url != null) {
+            final MatcherWrapper matcherGuid = new MatcherWrapper(PATTERN_GUID, url);
+            if (matcherGuid.matches()) {
+                final String guid = matcherGuid.group(1);
+                if (StringUtils.isNotBlank(guid)) {
+                    cache.setGuid(guid);
+                }
+            }
+        }
+
+        // try to find geocode somewhere else
+        if (StringUtils.isBlank(cache.getGeocode()) && url != null) {
+            final MatcherWrapper matcherCode = new MatcherWrapper(PATTERN_URL_GEOCODE, url);
+            if (matcherCode.matches()) {
+                final String geocode = matcherCode.group(1);
+                cache.setGeocode(geocode);
+            }
+        }    }
+
+    protected void setUrlName(final String urlName) {
+        if (StringUtils.isNotBlank(urlName) && StringUtils.startsWith(cache.getGeocode(), "WM")) {
+            if (cache.getName().equals(cache.getGeocode())) {
+                cache.setName(StringUtils.trim(urlName));
+            }
+        }
     }
 }
