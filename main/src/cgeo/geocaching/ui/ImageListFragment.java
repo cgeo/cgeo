@@ -28,6 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -54,6 +55,10 @@ public class ImageListFragment extends Fragment {
     private boolean captionMandatory;
 
     private static final int SELECT_IMAGE = 101;
+
+    private static final String SAVED_STATE_IMAGELIST = "cgeo.geocaching.saved_state_imagelist";
+    private static final String SAVED_STATE_IMAGEHELPER = "cgeo.geocaching.saved_state_imagehelper";
+
 
     /**
      * call once to initialize values for image retrieval
@@ -137,19 +142,30 @@ public class ImageListFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
-        imageHelper = new ImageActivityHelper(this.getActivity(), 3000);
+    public void onViewCreated(final View view, @Nullable final Bundle savedState) {
+
+        imageHelper = new ImageActivityHelper(this.getActivity(), (r, imgs) -> {
+            final List<Image> imagesToAdd = CollectionStream.of(imgs).map(img -> img.buildUpon().setTargetScale(getFastImageAutoScale()).build()).toList();
+            imageList.addItems(imagesToAdd);
+        });
         imageList = new ImageListAdapter(view.findViewById(R.id.image_list));
 
         this.binding.imageAddMulti.setOnClickListener(v ->
-            imageHelper.getMultipleImagesFromStorage(geocode, false, imgs -> {
-                final List<Image> imagesToAdd = CollectionStream.of(imgs).map(img -> img.buildUpon().setTargetScale(getFastImageAutoScale()).build()).toList();
-                imageList.addItems(imagesToAdd);
-            }));
+            imageHelper.getMultipleImagesFromStorage(geocode, false));
         this.binding.imageAddCamera.setOnClickListener(v ->
-            imageHelper.getImageFromCamera(geocode, false, img -> {
-                imageList.addItem(img.buildUpon().setTargetScale(getFastImageAutoScale()).build());
-            }));
+            imageHelper.getImageFromCamera(geocode, false));
+
+        if (savedState != null) {
+            imageList.submitList(savedState.getParcelableArrayList(SAVED_STATE_IMAGELIST));
+            imageHelper.setState(savedState.getBundle(SAVED_STATE_IMAGEHELPER));
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(SAVED_STATE_IMAGELIST, new ArrayList<>(imageList.getCurrentList()));
+        outState.putBundle(SAVED_STATE_IMAGEHELPER, imageHelper.getState());
     }
 
     @Override
