@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.log.AbstractLoggingActivity;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Trackable;
 
@@ -58,6 +59,12 @@ public interface TrackableConnector {
      */
     @NonNull
     String getUrl(@NonNull Trackable trackable);
+
+    /**
+     * Get the browser URL for the given LogEntry. May return null if no url available or identifiable.
+     */
+    @Nullable
+    String getLogUrl(@NonNull LogEntry logEntry);
 
     /**
      * Tell if the trackable has logging capabilities.

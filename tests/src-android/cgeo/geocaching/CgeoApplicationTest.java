@@ -128,6 +128,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         assertThat(lastLog.getType()).isEqualTo(LogType.RETRIEVED_IT);
         assertThat(lastLog.cacheName).isEqualTo("TB / Coin Hotel Fehmarn");
         assertThat(lastLog.cacheGuid).isEqualTo("e93eeddd-a3f0-4bf1-a056-6acc1c5dff1f");
+        assertThat(lastLog.serviceLogId).isEqualTo("817608e9-850d-428a-9318-442a14b7b631");
         assertThat(lastLog.log).isEqualTo("Das tb Hotel war sehr schön");
     }
 

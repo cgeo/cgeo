@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.log.AbstractLoggingActivity;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Trackable;
 
@@ -61,6 +62,12 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
         throw new IllegalStateException("this trackable does not have a corresponding URL");
+    }
+
+    @Override
+    @Nullable
+    public String getLogUrl(@NonNull final LogEntry logEntry) {
+        return null; //by default, Connector does not support log urls
     }
 
     @Override

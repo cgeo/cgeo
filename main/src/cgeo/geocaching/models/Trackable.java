@@ -373,6 +373,17 @@ public class Trackable implements ILogable {
         return "???";
     }
 
+    public boolean canShareLog(final LogEntry logEntry) {
+        return !StringUtils.isBlank(getServiceSpecificLogUrl(logEntry));
+    }
+
+    public String getServiceSpecificLogUrl(final LogEntry logEntry) {
+        if (logEntry == null) {
+            return null;
+        }
+        return getConnector().getLogUrl(logEntry);
+    }
+
     public boolean isLoggable() {
         return getConnector().isLoggable() && !locked;
     }
