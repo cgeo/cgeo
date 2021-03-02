@@ -1536,7 +1536,8 @@ public final class GCParser {
              * 5. Cache-GUID
              * 6. <ignored> (strike-through property for ancient caches)
              * 7. Cache-name
-             * 8. Log text
+             * 8. Log-ID
+             * 9. Log text
              */
             while (matcherLogs.find()) {
                 long date = 0;
@@ -1550,7 +1551,8 @@ public final class GCParser {
                         .setAuthorGuid(matcherLogs.group(3))
                         .setDate(date)
                         .setLogType(LogType.getByIconName(matcherLogs.group(1)))
-                        .setLog(matcherLogs.group(8).trim());
+                        .setServiceLogId(matcherLogs.group(8))
+                        .setLog(matcherLogs.group(9).trim());
 
                 if (matcherLogs.group(5) != null && matcherLogs.group(7) != null) {
                     logDoneBuilder.setCacheGuid(matcherLogs.group(5));

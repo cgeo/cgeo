@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.log.AbstractLoggingActivity;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -47,6 +48,14 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
         return getHostUrl() + "//track/details.aspx?tracker=" + trackable.getGeocode();
+    }
+
+    @Override
+    public String getLogUrl(@NonNull final LogEntry logEntry) {
+        if (!StringUtils.isBlank(logEntry.serviceLogId)) {
+            return "https://www.geocaching.com/track/log.aspx?LUID=" + logEntry.serviceLogId;
+        }
+        return null;
     }
 
     static String getTravelbugViewstates(final String guid) {

@@ -1,10 +1,13 @@
 package cgeo.geocaching.log;
 
 import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.R;
 import cgeo.geocaching.TrackableActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.ui.UserClickListener;
+import cgeo.geocaching.ui.dialog.ContextMenuDialog;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.view.View;
@@ -79,6 +82,15 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
     @Override
     protected View.OnClickListener createUserActionsListener(final LogEntry log) {
         return UserClickListener.forUser(trackable, StringEscapeUtils.unescapeHtml4(log.author), log.authorGuid);
+    }
+
+    @Override
+    protected ContextMenuDialog extendContextMenu(final ContextMenuDialog ctxMenu, final LogEntry log) {
+        if (trackable.canShareLog(log)) {
+            ctxMenu.addItem(trackableActivity.getString(R.string.cache_menu_browser),
+                R.drawable.ic_menu_info_details, it -> ShareUtils.openUrl(trackableActivity, trackable.getServiceSpecificLogUrl(log)));
+        }
+        return ctxMenu;
     }
 
 }

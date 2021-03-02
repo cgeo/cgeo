@@ -11,6 +11,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +44,7 @@ public class LogEntry implements Parcelable {
     /** Log id */
     public final int id;
     /** service-specific log id (only filled if log was loaded from a service) */
-    public final String serviceLogId;
+    @Nullable public final String serviceLogId;
     /** The {@link LogType} */
     @NonNull public final LogType logType;
     /** The author */
