@@ -106,14 +106,15 @@ public class ContentStorage {
         for (PersistableFolder folder : PersistableFolder.values()) {
             //(re)sets default folders and ensures that it is definitely accessible
             folder.setDefaultFolder(getAccessibleDefaultFolder(folder.getDefaultCandidates(), folder.needsWrite(), folder.name()));
-            //tests user-defined folder (if any) and reset to default if not accessible
-            ensureFolder(folder);
         }
     }
 
     /** checks if folder is available and can be used, creates it if need be. */
     public boolean ensureFolder(final PersistableFolder publicFolder) {
         final Folder folder = getFolder(publicFolder);
+        if (folder == null) {
+            return false;
+        }
         return ensureFolder(folder, publicFolder.needsWrite(), false);
      }
 
@@ -257,6 +258,10 @@ public class ContentStorage {
         } else {
             parentFolder = Folder.fromFolder(rootFolder, subfolderAndName.substring(0, idx));
             fileName = subfolderAndName.substring(idx + 1);
+        }
+
+        if (parentFolder == null) {
+            return null;
         }
 
         try {
