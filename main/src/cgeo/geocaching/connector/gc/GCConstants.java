@@ -15,18 +15,13 @@ import org.apache.commons.lang3.StringUtils;
  * For further information about patterns have a look at
  * http://download.oracle.com/javase/1.4.2/docs/api/java/util/regex/Pattern.html
  */
+@SuppressWarnings("RegExpRedundantEscape")
 public final class GCConstants {
 
     static final String GC_URL = "https://www.geocaching.com/";
     private static final String GC_TILE_URL = "https://tiles.geocaching.com/";
-    /** Live Map */
-    @NonNull static final String URL_LIVE_MAP = GC_URL + "map/default.aspx";
     /** Live Map pop-up */
     @NonNull static final String URL_LIVE_MAP_DETAILS = GC_TILE_URL + "map.details";
-    /** Caches in a tile */
-    @NonNull static final String URL_MAP_INFO = GC_TILE_URL + "map.info";
-    /** Tile itself */
-    @NonNull static final String URL_MAP_TILE = GC_TILE_URL + "map.png";
     /** Format used by geocaching.com when user is not logged in. */
     public static final String DEFAULT_GC_DATE = "MM/dd/yyyy";
 
