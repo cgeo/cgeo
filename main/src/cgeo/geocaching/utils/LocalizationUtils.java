@@ -64,13 +64,14 @@ public final class LocalizationUtils {
         //prepare params message
         final Object[] paramsForLog = new Object[params.length];
         final Object[] paramsForUser = new Object[params.length];
+        //Note that ContentStorage.get() can actually be null here in case there was an error in initialization of Log!
         for (int i = 0; i < params.length; i++) {
             if (params[i] instanceof Folder) {
                 paramsForUser[i] = ((Folder) params[i]).toUserDisplayableString();
-                paramsForLog[i] = params[i] + "(" + ContentStorage.get().getUriForFolder((Folder) params[i]) + ")";
+                paramsForLog[i] = params[i] + "(" + ContentStorage.get() == null ? null : ContentStorage.get().getUriForFolder((Folder) params[i]) + ")";
             } else if (params[i] instanceof PersistableFolder) {
                 paramsForUser[i] = ((PersistableFolder) params[i]).toUserDisplayableValue();
-                paramsForLog[i] = params[i] + "(" + ContentStorage.get().getUriForFolder(((PersistableFolder) params[i]).getFolder()) + ")";
+                paramsForLog[i] = params[i] + "(" + ContentStorage.get() == null ? null : ContentStorage.get().getUriForFolder(((PersistableFolder) params[i]).getFolder()) + ")";
             } else if (params[i] instanceof Uri) {
                 paramsForUser[i] = UriUtils.toUserDisplayableString((Uri) params[i]);
                 paramsForLog[i] = params[i];

@@ -61,10 +61,11 @@ public final class Log {
                 setProperties(logProps);
             }
         } catch (Exception ex) {
+            //whatever happens in Log initializer, it is NOT allowed to make Log unusable!
             android.util.Log.e(TAG, "[Log] Failed to set up Logging", ex);
         } finally {
-                IOUtils.closeQuietly(propFile);
-            }
+            IOUtils.closeQuietly(propFile);
+        }
     }
 
     private Log() {
@@ -102,7 +103,7 @@ public final class Log {
             }
             if (logProps.containsKey(PROP_CALLERINFO_MAXDEPTH)) {
                 try {
-                    addCallerInfoMaxDepth = Integer.valueOf(logProps.getProperty(PROP_CALLERINFO_MAXDEPTH));
+                    addCallerInfoMaxDepth = Integer.parseInt(logProps.getProperty(PROP_CALLERINFO_MAXDEPTH));
                 } catch (NumberFormatException nfe) {
                     //no valid maxDepth in prop file, ignore this
                 }

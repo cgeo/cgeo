@@ -464,7 +464,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
         public static MapThemeFolderSyncTask createAndExecute(final Folder source, final File target, final Consumer<FolderUtils.FolderProcessResult> callback) {
             final MapThemeFolderSyncTask task = new MapThemeFolderSyncTask(source, target, callback);
             task.execute();
-
+            Log.i("[MapThemeFolderSync] start synchronization " + source + " -> " + target);
             return task;
         }
 
@@ -480,6 +480,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                 if (taskIsDone) {
                     return false;
                 }
+                Log.i("[MapThemeFolderSync] REstart synchronization " + source + " -> " + target);
                 cancelFlag.set(true);
                 requestRedo = true;
                 startTime = System.currentTimeMillis();
@@ -505,6 +506,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
 
         @Override
         protected void onPostExecute(final FolderUtils.FolderProcessResult result) {
+            Log.i("[MapThemeFolderSync] Finished synchronization ");
             //show toast only if something actually happened
             if (result.filesModified > 0) {
                 showToast(R.string.mapthemes_foldersync_finished_toast,
@@ -515,6 +517,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
             if (callback != null) {
                 callback.accept(result);
             }
+            Log.i("[MapThemeFolderSync] Finished synchronization callback");
         }
 
         private static void showToast(final int resId, final Object ... params) {
