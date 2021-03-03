@@ -1,4 +1,4 @@
-package cgeo.geocaching.cgeo.geocaching.maps;
+package cgeo.geocaching.maps;
 
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
@@ -8,17 +8,19 @@ import android.net.Uri;
 import java.io.File;
 import java.io.IOException;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class MapsforgeMapProviderTest extends TestCase {
+public class MapsforgeMapProviderTest {
 
-    public static void testInValidMapFileCheck() {
+    @Test
+    public void testInValidMapFileCheck() {
         assertThat(MapsforgeMapProvider.isValidMapFile(null)).isFalse();
         assertThat(MapsforgeMapProvider.getInstance().getAttributionFor(null)).isNotBlank();
     }
 
-    public static void testOfflineMaps() throws IOException {
+    @Test
+    public void testOfflineMaps() throws IOException {
         final File tempFile = File.createTempFile("pre", ".tmp");
         final File tempFile2 = File.createTempFile("pre", ".tmp");
         final Uri fakeUri = Uri.fromFile(tempFile);
