@@ -5,13 +5,16 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Action2;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,10 +25,9 @@ import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -39,35 +41,77 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  */
 public class ImageActivityHelper {
 
+    //use a globally unique request code to mix-in with Activity.onActivityResult. (This will no longer be neccessary with Activity Result API)
+    //code must be positive (>0) and <=65535 (restriction of SDK21)
+    public static final int REQUEST_CODE_CAMERA = 58221; //this is a random number
+    public static final int REQUEST_CODE_STORAGE_SELECT = 59372;
+    public static final int REQUEST_CODE_STORAGE_SELECT_MULTI = 59373;
+
     private final Activity context;
+    private final Action2<Integer, List<Image>> callbackHandler;
 
-    private final int requestCodeCamera;
-    private final int requestCodeStorageSelect;
-    private final int requestCodeStorageSelectMulti;
+    private final Bundle runningIntents = new Bundle();
 
-    private final Map<Integer, IntentContextData> runningIntents = Collections.synchronizedMap(new HashMap<>());
-
-    private static class IntentContextData<T> {
-        public final Action1<T> callback;
-        public final boolean callOnFailure;
+    private static class IntentContextData implements Parcelable {
+        public int requestCode;
         public final String fileid;
         public final Uri uri;
+        public final boolean callOnFailure;
 
-        IntentContextData(final String fileid, final boolean callOnFailure, final Action1<T> callback, final Uri uri) {
-            this.callback = callback;
-            this.callOnFailure = callOnFailure;
+        IntentContextData(final int requestCode, final String fileid, final Uri uri, final boolean callOnFailure) {
+            this.requestCode = requestCode;
             this.fileid = fileid;
             this.uri = uri;
+            this.callOnFailure = callOnFailure;
         }
 
+        protected IntentContextData(final Parcel in) {
+            requestCode = in.readInt();
+            fileid = in.readString();
+            uri = in.readParcelable(Uri.class.getClassLoader());
+            callOnFailure = in.readByte() > 0;
+        }
+
+        public static final Creator<IntentContextData> CREATOR = new Creator<IntentContextData>() {
+            @Override
+            public IntentContextData createFromParcel(final Parcel in) {
+                return new IntentContextData(in);
+            }
+
+            @Override
+            public IntentContextData[] newArray(final int size) {
+                return new IntentContextData[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(final Parcel dest, final int flags) {
+            dest.writeInt(requestCode);
+            dest.writeString(fileid);
+            dest.writeParcelable(uri, flags);
+            dest.writeByte((byte) (callOnFailure ? 1 : 0));
+        }
     }
 
-    public ImageActivityHelper(final Activity activity, final int requestCodeStart) {
+    public ImageActivityHelper(final Activity activity, final Action2<Integer, List<Image>> callbackHandler) {
         this.context = activity;
+        this.callbackHandler = callbackHandler;
+    }
 
-        this.requestCodeCamera = requestCodeStart;
-        this.requestCodeStorageSelect = requestCodeStart + 1;
-        this.requestCodeStorageSelectMulti = requestCodeStart + 2;
+    public void setState(final Bundle bundle) {
+        if (bundle != null) {
+            runningIntents.clear();
+            runningIntents.putAll(bundle);
+        }
+    }
+
+    public Bundle getState() {
+        return runningIntents;
     }
 
     /**
@@ -75,7 +119,9 @@ public class ImageActivityHelper {
      * call this method inside it. If it returns true then the activity result has been consumed.
      */
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        final IntentContextData storedData = runningIntents.remove(requestCode);
+        final IntentContextData storedData = runningIntents.getParcelable("" + requestCode);
+        runningIntents.remove("" + requestCode);
+
         if (storedData == null) {
             return false;
         }
@@ -84,12 +130,16 @@ public class ImageActivityHelper {
             return true;
         }
 
-        if (requestCode == requestCodeCamera) {
-            onImageFromCameraResult(storedData);
-        } else if (requestCode == requestCodeStorageSelect) {
-            onImageFromStorageResult(storedData, data, false);
-        } else if (requestCode == requestCodeStorageSelectMulti) {
-            onImageFromStorageResult(storedData, data, true);
+        switch (requestCode) {
+            case REQUEST_CODE_CAMERA:
+                onImageFromCameraResult(storedData);
+                break;
+            case REQUEST_CODE_STORAGE_SELECT:
+            case REQUEST_CODE_STORAGE_SELECT_MULTI:
+                onImageFromStorageResult(storedData, data);
+                break;
+            default:
+                break;
         }
         return true;
 
@@ -102,13 +152,12 @@ public class ImageActivityHelper {
      * your activity as explained there.
      * @param fileid an id which will be part of resulting image name (e.g. a cache code)
      * @param callOnFailure if true, then callback will be called also on image select failure (with img=null)
-     * @param callback called when image select has completed
      */
-    public void getImageFromStorage(final String fileid, final boolean callOnFailure, final Action1<Image> callback) {
+    public void getImageFromStorage(final String fileid, final boolean callOnFailure) {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startIntent(requestCodeStorageSelect, Intent.createChooser(intent, "Select Image"),
-                new IntentContextData(fileid, callOnFailure, callback, null));
+        startIntent(Intent.createChooser(intent, "Select Image"),
+                new IntentContextData(REQUEST_CODE_STORAGE_SELECT, fileid, null, callOnFailure));
     }
 
     /**
@@ -117,15 +166,14 @@ public class ImageActivityHelper {
      * This function wil only work if you call {@link #onActivityResult(int, int, Intent)} in
      * your activity as explained there.
      * @param fileid an id which will be part of resulting image name (e.g. a cache code)
-     *      * @param callOnFailure if true, then callback will be called also on image select failure (with img=null)
-     * @param callback called when image select has completed
+     * @param callOnFailure if true, then callback will be called also on image select failure (with img=null)
      */
-    public void getMultipleImagesFromStorage(final String fileid, final boolean callOnFailure, final Action1<List<Image>> callback) {
+    public void getMultipleImagesFromStorage(final String fileid, final boolean callOnFailure) {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startIntent(requestCodeStorageSelectMulti, Intent.createChooser(intent, "Select Multiple Images"),
-                new IntentContextData(fileid, callOnFailure, callback, null));
+        startIntent(Intent.createChooser(intent, "Select Multiple Images"),
+                new IntentContextData(REQUEST_CODE_STORAGE_SELECT_MULTI, fileid, null, callOnFailure));
     }
 
     /**
@@ -136,14 +184,13 @@ public class ImageActivityHelper {
      * your activity as explained there.
      * @param fileid an id which will be part of resulting image name (e.g. a cache code)
      * @param callOnFailure if true, then callback will be called also on image shooting failure (with img=null)
-     * @param callback called when image select has completed
      */
-    public void getImageFromCamera(final String fileid, final boolean callOnFailure, final Action1<Image> callback) {
+    public void getImageFromCamera(final String fileid, final boolean callOnFailure) {
 
         final ImmutablePair<String, Uri> newImageData = ImageUtils.createNewPublicImageUri(fileid);
         final Uri imageUri = newImageData.right;
         if (imageUri == null || imageUri.equals(Uri.EMPTY) || StringUtils.isBlank(imageUri.toString())) {
-            failIntent(callOnFailure, callback);
+            failIntent(REQUEST_CODE_CAMERA, callOnFailure);
             return;
         }
 
@@ -152,7 +199,7 @@ public class ImageActivityHelper {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri); // set the image uri
 
         // start the image capture Intent
-        startIntent(requestCodeCamera, intent, new IntentContextData(fileid, callOnFailure, callback, imageUri));
+        startIntent(intent, new IntentContextData(REQUEST_CODE_CAMERA, fileid, imageUri, callOnFailure));
     }
 
     private void onImageFromCameraResult(final IntentContextData intentContextData) {
@@ -162,10 +209,10 @@ public class ImageActivityHelper {
             failIntent(intentContextData);
             return;
         }
-        intentContextData.callback.call(img);
+        call(intentContextData, img);
     }
 
-    private void onImageFromStorageResult(final IntentContextData intentContextData, final Intent data, final boolean multi) {
+    private void onImageFromStorageResult(final IntentContextData intentContextData, final Intent data) {
 
         if (data == null) {
             failIntent(intentContextData);
@@ -199,10 +246,8 @@ public class ImageActivityHelper {
 
         if (result.isEmpty()) {
             failIntent(intentContextData);
-        } else if (multi) {
-            intentContextData.callback.call(result);
         } else {
-            intentContextData.callback.call(result.get(0));
+            call(intentContextData, result);
         }
     }
 
@@ -295,20 +340,30 @@ public class ImageActivityHelper {
         return true;
     }
 
-    private void startIntent(final int requestCode, final Intent intent, final IntentContextData intentContextData) {
-        context.startActivityForResult(intent, requestCode);
-        runningIntents.put(requestCode, intentContextData);
+    private void startIntent(final Intent intent, final IntentContextData intentContextData) {
+        context.startActivityForResult(intent, intentContextData.requestCode);
+        runningIntents.putParcelable("" + intentContextData.requestCode, intentContextData);
+    }
+
+    private void call(final IntentContextData intentContextData, final Image img) {
+        call(intentContextData, img == null ? null : Arrays.asList(img));
+    }
+
+    private void call(final IntentContextData intentContextData, final List<Image> imgs) {
+        if (this.callbackHandler != null) {
+            this.callbackHandler.call(intentContextData.requestCode, imgs == null ? Collections.emptyList() : imgs);
+        }
     }
 
     private void failIntent(final IntentContextData intentContextData) {
-        failIntent(intentContextData.callOnFailure, intentContextData.callback);
+        failIntent(intentContextData.requestCode, intentContextData.callOnFailure);
     }
 
-    private void failIntent(final boolean callOnFailure, final Action1<?> callback) {
-         ActivityMixin.showToast(context, R.string.err_acquire_image_failed);
+    private void failIntent(final int requestCode, final boolean callOnFailure) {
+        ActivityMixin.showToast(context, R.string.err_acquire_image_failed);
 
-        if (callOnFailure && callback != null) {
-            callback.call(null);
+        if (callOnFailure && this.callbackHandler != null) {
+            this.callbackHandler.call(requestCode, null);
         }
     }
 }

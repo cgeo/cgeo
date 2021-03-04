@@ -38,8 +38,9 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private static final String SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE = "cgeo.geocaching.saved_state_max_image_upload_size";
     private static final String SAVED_STATE_IMAGE_CAPTION_MANDATORY = "cgeo.geocaching.saved_state_image_caption_mandatory";
     private static final String SAVED_STATE_GEOCODE = "cgeo.geocaching.saved_state_geocode";
+    private static final String SAVED_STATE_IMAGEHELPER = "cgeo.geocaching.saved_state_imagehelper";
 
-    private final ImageActivityHelper imageActivityHelper = new ImageActivityHelper(this, 1);
+
 
     private Image originalImage;
     private Image image;
@@ -47,6 +48,12 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private long maxImageUploadSize;
     private boolean imageCaptionMandatory;
     @Nullable private String geocode;
+
+    private final ImageActivityHelper imageActivityHelper = new ImageActivityHelper(this, (rc, imgs) -> {
+        deleteImageFromDeviceIfNotOriginal(image);
+        image = imgs.isEmpty() ? null : imgs.get(0);
+        loadImagePreview();
+    });
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -90,6 +97,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             maxImageUploadSize = savedInstanceState.getLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE);
             imageCaptionMandatory = savedInstanceState.getBoolean(SAVED_STATE_IMAGE_CAPTION_MANDATORY);
             geocode = savedInstanceState.getString(SAVED_STATE_GEOCODE);
+            imageActivityHelper.setState(savedInstanceState.getBundle(SAVED_STATE_IMAGEHELPER));
         }
 
         if (image == null) {
@@ -132,6 +140,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         outState.putLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
         outState.putBoolean(SAVED_STATE_IMAGE_CAPTION_MANDATORY, imageCaptionMandatory);
         outState.putString(SAVED_STATE_GEOCODE, geocode);
+        outState.putBundle(SAVED_STATE_IMAGEHELPER, imageActivityHelper.getState());
     }
 
     public void saveImageInfo(final boolean saveInfo, final boolean deleteImage) {
@@ -174,20 +183,11 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void selectImageFromCamera() {
-
-        imageActivityHelper.getImageFromCamera(this.geocode, false, img -> {
-            deleteImageFromDeviceIfNotOriginal(image);
-            image = img;
-            loadImagePreview();
-        });
+        imageActivityHelper.getImageFromCamera(this.geocode, false);
     }
 
     private void selectImageFromStorage() {
-        imageActivityHelper.getImageFromStorage(this.geocode, false,  img -> {
-            deleteImageFromDeviceIfNotOriginal(image);
-            image = img;
-            loadImagePreview();
-        });
+        imageActivityHelper.getImageFromStorage(this.geocode, false);
     }
 
     private boolean deleteImageFromDeviceIfNotOriginal(final Image img) {
