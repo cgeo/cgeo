@@ -1893,7 +1893,9 @@
     <string name="downloadmap_install_theme_info">Die heruntergeladene Karte erfordert eine spezielle Datei zur Kartendarstellung. Möchtest Du diese auch herunterladen?</string>
     <string name="mapserver_mapsforge_info">Basiskarten, keine Darstellungsdatei erforderlich</string>
     <string name="mapserver_openandromaps_info">Detaillierte Karten, erfordern Kartendarstellung \"Elevate\"</string>
+    <string name="mapserver_openandromaps_themes_info">Detaillierte Kartendarstellung, passend für \"OpenAndroMaps\"-Karten</string>
     <string name="mapserver_freizeitkarte_info">Detaillierte Karten, benötigen eines der \"Freizeitkarte\"-Kartenthemen.</string>
+    <string name="mapserver_freizeitkarte_themes_info">Detaillierte Kartendarstellung, passend für \"Freizeitkarte\"-Karten</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
@@ -1943,6 +1945,7 @@
     <string name="wizard_not_now">Jetzt nicht</string>
     <string name="wizard_skip_wizard_warning">c:geo funktioniert möglicherweise nicht wie erwartet, bis die Konfiguration abgeschlossen ist. Abhängig von der fehlenden Konfiguration ist c:geo möglicherweise nicht in der Lage, Daten wie Offline-Karten, Geocaches, Logdateien usw. zu lesen/zu speichern.\n\nWann immer du bereit bist, das Setup abzuschließen, wähle entweder \"Konfigurations-Assistent\" im Hauptmenü oder starte c:geo neu.</string>
     <!-- Map Theme helper -->
+    <string name="mapthemes_foldersync_finished_toast">%1$s Ordnerabgleich beendet nach %2$s, %3$d von %4$s benötigten Abgleich</string>
     <!-- default actions in dialogs -->
     <string name="previous">Zurück</string>
     <string name="skip">Überspringen</string>

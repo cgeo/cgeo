@@ -676,7 +676,7 @@
     <string name="init_trailwidth">軌跡の線幅</string>
     <string name="init_trailwidth_summary">軌跡の線幅を選択</string>
     <string name="init_directioncolor">ナビルートの色</string>
-    <string name="init_directioncolor_summary">ナビルートの色と不透明度を選択。ナビルートは目的地までの直線か、ナビゲーションのルート(BRouterアプリがインストールされてルート検索が有効の場合)です</string>
+    <string name="init_directioncolor_summary">ナビルートの色と不透明度を選択。ナビルートは目的地までの直線か、ナビゲーションのルート(BRouterアプリがインストール済みでルート検索が有効の場合)です</string>
     <string name="init_directionwidth">ナビルートの線幅</string>
     <string name="init_directionwidth_summary">ナビルートの線幅を選択</string>
     <string name="init_routecolor">個別ルートの色</string>
@@ -1208,7 +1208,7 @@
     <string name="map_view_map">地図の変更</string>
     <string name="map_rotation">地図の回転</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
-    <string name="map_show_circles">0.1マイル円を表示</string>
+    <string name="map_show_circles">0.1マイル円</string>
     <string name="map_showc_ownfound">所有/発見したキャッシュ</string>
     <string name="map_showc_disabled">一時停止中キャッシュ</string>
     <string name="map_showc_archived">アーカイブ済みのキャッシュ</string>
@@ -1888,12 +1888,12 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_permissions_title">アプリの権限の設定</string>
     <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です\n次のステップで説明します</string>
     <string name="wizard_permissions_folder_title">フォルダの設定: %s</string>
-    <string name="wizard_basefolder_request_explanation">GPXファイル、バックアップ、フィールドノート、ログファイルなどを保存するためにローカルフォルダが必要です。デフォルトでは「ベースフォルダ」下の各フォルダにそれぞれ保存されます。次のステップでそのフォルダを選択または作成します。\n\n以前のバージョンからアップグレードされる場合はデバイスストレージのルートにある「cgeo」フォルダを選択してください。\nヒント:次のファイルセレクタで最初にデバイスの「内部ストレージを表示」する必要があるかもしれません。</string>
+    <string name="wizard_basefolder_request_explanation">GPXファイル、バックアップ、フィールドノート、ログファイルなどを保存するためにローカルフォルダが必要です。デフォルトでは「ベースフォルダ」下の各フォルダにそれぞれ保存されます。次のステップでそのフォルダを選択または作成します。\n\n以前のバージョンからアップグレードされる場合はデバイスストレージのルートにある「cgeo」フォルダを選択してください。\nヒント:次のファイルセレクタで最初にデバイスの「内部ストレージを表示」にする必要があるかもしれません。</string>
     <string name="wizard_mapfolder_request_explanation">オフライン用の地図ファイルを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
     <string name="wizard_mapthemesfolder_request_explanation">オフライン地図のテーマファイルを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
     <string name="wizard_gpxfolder_request_explanation">GPXファイルを保存(キャッシュやトラックをインポート/エクスポート)するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
-    <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です\nお持ちのアカウントでログインするかアカウント作成してください</string>
+    <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です。\nお持ちのアカウントでログインするかアカウント作成してください</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencachingや他のサイト</string>
     <string name="wizard_welcome_advanced">追加設定</string>
