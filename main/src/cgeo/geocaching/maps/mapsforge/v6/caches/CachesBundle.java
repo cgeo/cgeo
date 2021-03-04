@@ -11,6 +11,8 @@ import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -282,6 +284,7 @@ public class CachesBundle {
         }
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isDownloading() {
         return liveOverlay != null && liveOverlay.isDownloading();
     }
@@ -322,9 +325,9 @@ public class CachesBundle {
         }
     }
 
-    public WaypointDistanceInfo getClosestDistanceInM(final Geopoint coord) {
+    public WaypointDistanceInfo getClosestDistanceInM(@NonNull final Geopoint coord) {
         WaypointDistanceInfo info = new WaypointDistanceInfo("", 50000000);
-        WaypointDistanceInfo temp = info;
+        WaypointDistanceInfo temp;
         if (baseOverlay != null) {
             temp = baseOverlay.getClosestDistanceInM(coord);
             if (temp.meters > 0 && temp.meters < info.meters) {
