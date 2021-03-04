@@ -7,6 +7,8 @@ import cgeo.geocaching.utils.MapLineUtils;
 
 import android.location.Location;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 
 import org.mapsforge.core.graphics.Canvas;
@@ -30,7 +32,7 @@ public class HistoryLayer extends Layer {
     private Location coordinates;
     private Paint historyLine;
 
-    public HistoryLayer(final ArrayList<TrailHistoryElement> locationHistory) {
+    public HistoryLayer(@Nullable final ArrayList<TrailHistoryElement> locationHistory) {
         super();
         if (locationHistory != null) {
             positionHistory.setHistory(locationHistory);
@@ -104,5 +106,4 @@ public class HistoryLayer extends Layer {
     public Location getCoordinates() {
         return coordinates;
     }
-
 }
