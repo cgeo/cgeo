@@ -38,6 +38,8 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.Iterator;
@@ -56,6 +58,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private OnMapDragListener onDragListener;
     private final GoogleMapController mapController = new GoogleMapController();
     private GoogleMap googleMap;
+    @Nullable
     private MapReadyCallback mapReadyCallback;
 
     private LatLng viewCenter;
@@ -221,6 +224,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         return mapController;
     }
 
+    @Nullable
     @Override
     public GeoPointImpl getMapViewCenter() {
         if (viewCenter == null) {
@@ -245,6 +249,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         return (int) (Math.abs(visibleRegion.latLngBounds.northeast.longitude - visibleRegion.latLngBounds.southwest.longitude) * 1e6);
     }
 
+    @Nullable
     @Override
     public Viewport getViewport() {
         if (visibleRegion == null) {
@@ -258,6 +263,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         // do nothing, there are no overlays to be cleared
     }
 
+    @Nullable
     @Override
     public MapProjectionImpl getMapProjection() {
         if (googleMap == null) {
@@ -348,6 +354,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         }
     }
 
+    @Nullable
     public Geopoint getDestinationCoords() {
         if (distanceDrawer != null) {
             return distanceDrawer.getDestinationCoords();
@@ -452,6 +459,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         this.distanceDrawer = new DistanceDrawer(root, destCoords, Settings.isBrouterShowBothDistances());
     }
 
+    @Nullable
     public GoogleCacheOverlayItem closest(final Geopoint geopoint) {
         if (cacheItems == null) {
             return null;

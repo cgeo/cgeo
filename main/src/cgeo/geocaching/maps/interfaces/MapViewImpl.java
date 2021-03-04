@@ -8,7 +8,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Collection;
 
@@ -63,7 +63,7 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
      * @param overlay
      *            Overlay to repaint or null if the mapview has changed
      */
-    void repaintRequired(GeneralOverlay overlay);
+    void repaintRequired(@Nullable GeneralOverlay overlay);
 
     void setOnDragListener(OnMapDragListener onDragListener);
 
@@ -97,6 +97,6 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
     void onResume();
     void onPause();
     void onDestroy();
-    void onSaveInstanceState(@NonNull Bundle b);
+    void onSaveInstanceState(Bundle b);
     void onLowMemory();
 }
