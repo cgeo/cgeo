@@ -60,18 +60,20 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
 
                 // check if map moved or zoomed
                 //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                final boolean moved = overlay.isInvalidated() || previousViewport == null || zoomNow != previousZoom ||
-                        mapMoved(previousViewport, viewportNow);
+                if (viewportNow != null) {
+                    final boolean moved = overlay.isInvalidated() || previousViewport == null || zoomNow != previousZoom ||
+                            mapMoved(previousViewport, viewportNow);
 
-                // save new values
-                if (moved) {
+                    // save new values
+                    if (moved) {
 
-                    previousZoom = zoomNow;
-                    previousViewport = viewportNow;
-                    overlay.load();
-                    overlay.refreshed();
-                } else if (!previousViewport.equals(viewportNow)) {
-                    overlay.updateTitle();
+                        previousZoom = zoomNow;
+                        previousViewport = viewportNow;
+                        overlay.load();
+                        overlay.refreshed();
+                    } else if (!previousViewport.equals(viewportNow)) {
+                        overlay.updateTitle();
+                    }
                 }
             } catch (final Exception e) {
                 Log.w("StoredCachesOverlay.startLoadtimer.start", e);
@@ -83,15 +85,17 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
         try {
             showProgress();
 
-            final SearchResult searchResult = new SearchResult(DataStore.loadCachedInViewport(getViewport().resize(1.2), Settings.getCacheType()));
+            final Viewport viewport = getViewport();
+            if (viewport != null) {
+                final SearchResult searchResult = new SearchResult(DataStore.loadCachedInViewport(viewport.resize(1.2), Settings.getCacheType()));
 
-            final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+                final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
 
-            MapUtils.filter(cachesFromSearchResult);
+                MapUtils.filter(cachesFromSearchResult);
 
-            // render
-            update(cachesFromSearchResult);
-
+                // render
+                update(cachesFromSearchResult);
+            }
         } finally {
             hideProgress();
         }

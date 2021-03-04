@@ -71,24 +71,26 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
                 // check if map moved or zoomed
                 //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                final boolean moved = overlay.isInvalidated() || previousCycleViewport == null || zoomNow != previousZoom ||
+                if (viewportNow != null) {
+                    final boolean moved = overlay.isInvalidated() || previousCycleViewport == null || zoomNow != previousZoom ||
                         previousMoveViewport == null || mapMoved(previousMoveViewport, viewportNow);
 
-                // save new values
-                if (moved) {
-                    final long currentTime = System.currentTimeMillis();
+                    // save new values
+                    if (moved) {
+                        final long currentTime = System.currentTimeMillis();
 
-                    if (1000 < (currentTime - lastMovedTimestamp)) {
-                        overlay.downloading = true;
-                        previousZoom = zoomNow;
-                        overlay.download();
-                        previousMoveViewport = viewportNow;
-                        lastMovedTimestamp = System.currentTimeMillis();
+                        if (1000 < (currentTime - lastMovedTimestamp)) {
+                            overlay.downloading = true;
+                            previousZoom = zoomNow;
+                            overlay.download();
+                            previousMoveViewport = viewportNow;
+                            lastMovedTimestamp = System.currentTimeMillis();
+                        }
+                    } else if (!previousCycleViewport.equals(viewportNow)) {
+                        overlay.updateTitle();
                     }
-                } else if (!previousCycleViewport.equals(viewportNow)) {
-                    overlay.updateTitle();
+                    previousCycleViewport = viewportNow;
                 }
-                previousCycleViewport = viewportNow;
             } catch (final Exception e) {
                 Log.w("LiveCachesOverlay.startLoadtimer.start", e);
             } finally {
@@ -102,29 +104,31 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         try {
             showProgress();
 
-            final boolean useLastSearchResult = null != lastSearchResult && null != lastViewport && lastViewport.includes(getViewport());
-            final Viewport newViewport = getViewport().resize(3.0);
-            final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport);
+            final Viewport viewport = getViewport();
+            if (viewport != null) {
+                final boolean useLastSearchResult = null != lastSearchResult && null != lastViewport && lastViewport.includes(viewport);
+                final Viewport newViewport = viewport.resize(3.0);
+                final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport);
 
-            final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            MapUtils.filter(result);
-            // update the caches
-            // first remove filtered out
-            final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
-            Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
-            DataStore.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.CACHE));
+                final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                MapUtils.filter(result);
+                // update the caches
+                // first remove filtered out
+                final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
+                Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
+                DataStore.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.CACHE));
 
-            Log.d(String.format(Locale.ENGLISH, "Live caches found: %d", result.size()));
+                Log.d(String.format(Locale.ENGLISH, "Live caches found: %d", result.size()));
 
-            //render
-            update(result);
+                //render
+                update(result);
 
-            lastSearchResult = searchResult;
-            if (null == lastViewport || !useLastSearchResult || (!result.isEmpty() && lastSearchResult.getCount() > 400)) {
-                lastViewport = containingGCliveCaches(result);
+                lastSearchResult = searchResult;
+                if (null == lastViewport || !useLastSearchResult || (!result.isEmpty() && lastSearchResult.getCount() > 400)) {
+                    lastViewport = containingGCliveCaches(result);
+                }
+                Log.d("searchByViewport: cached=" + useLastSearchResult + ", results=" + lastSearchResult.getCount() + ", viewport=" + lastViewport);
             }
-            Log.d("searchByViewport: cached=" + useLastSearchResult + ", results=" + lastSearchResult.getCount() + ", viewport=" + lastViewport);
-
         } finally {
             hideProgress();
         }

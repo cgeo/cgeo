@@ -15,6 +15,9 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.HashSet;
@@ -39,10 +42,10 @@ public abstract class AbstractCachesOverlay {
     private final GeoitemLayers layerList = new GeoitemLayers();
     private final MapHandlers mapHandlers;
     private boolean invalidated = true;
-    private boolean showCircles = false;
+    private boolean showCircles;
     private final WeakReference<NewMap> mapRef;
 
-    public AbstractCachesOverlay(final NewMap map, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+    protected AbstractCachesOverlay(final NewMap map, final int overlayId, final Set<GeoEntry> geoEntries, @NonNull final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
         this.overlayId = overlayId;
         this.geoEntries = geoEntries;
         this.bundleRef = new WeakReference<>(bundle);
@@ -84,6 +87,7 @@ public abstract class AbstractCachesOverlay {
         return layerList.getCacheCount();
     }
 
+    @SuppressWarnings("unused")
     protected int getAllVisibleCachesCount() {
         final CachesBundle bundle = bundleRef.get();
         if (bundle == null) {
@@ -119,21 +123,23 @@ public abstract class AbstractCachesOverlay {
         synchronized (this.bundleRef.get().getMapView()) {
             showCircles = Settings.isShowCircles();
             final Layers layers = getLayers();
-            final int circleIndex = layers.indexOf(circleLayer) + 1;
-            for (final GeoitemLayer layer : layerList) {
-                final Layer circle = layer.getCircle();
-                if (circle != null) {
-                    if (showCircles) {
-                        layers.add(circleIndex, circle);
-                    } else {
-                        layers.remove(circle);
+            if (layers != null) {
+                final int circleIndex = layers.indexOf(circleLayer) + 1;
+                for (final GeoitemLayer layer : layerList) {
+                    final Layer circle = layer.getCircle();
+                    if (circle != null) {
+                        if (showCircles) {
+                            layers.add(circleIndex, circle);
+                        } else {
+                            layers.remove(circle);
+                        }
                     }
                 }
             }
         }
     }
 
-    protected void update(final Set<Geocache> cachesToDisplay) {
+    protected void update(@NonNull final Set<Geocache> cachesToDisplay) {
 
         final Collection<String> removeCodes = getGeocodes();
         final Collection<String> newCodes = new HashSet<>();
@@ -141,28 +147,26 @@ public abstract class AbstractCachesOverlay {
         if (!cachesToDisplay.isEmpty()) {
             final NewMap map = mapRef.get();
             final boolean lastCompactIconMode = null != map && map.getLastCompactIconMode();
-            final boolean newCompactIconMode = null != map && map.checkCompactIconMode(overlayId, getViewport().count(cachesToDisplay));
+            final Viewport viewport = getViewport();
+            if (viewport != null) {
+                final boolean newCompactIconMode = null != map && map.checkCompactIconMode(overlayId, viewport.count(cachesToDisplay));
 
-            if (lastCompactIconMode != newCompactIconMode) {
-                // remove all codes from this layer and restart
-                syncLayers(removeCodes, newCodes);
-                update(cachesToDisplay);
-                return;
-            }
-
-            for (final Geocache cache : cachesToDisplay) {
-
-                if (cache == null) {
-                    continue;
+                if (lastCompactIconMode != newCompactIconMode) {
+                    // remove all codes from this layer and restart
+                    syncLayers(removeCodes, newCodes);
+                    update(cachesToDisplay);
+                    return;
                 }
 
-                if (cache.getCoords() == null || !cache.getCoords().isValid()) {
-                    continue;
-                }
-                if (removeCodes.contains(cache.getGeocode())) {
-                    removeCodes.remove(cache.getGeocode());
-                } else if (addItem(cache, newCompactIconMode)) {
-                    newCodes.add(cache.getGeocode());
+                for (final Geocache cache : cachesToDisplay) {
+                    if (cache == null || cache.getCoords() == null || !cache.getCoords().isValid()) {
+                        continue;
+                    }
+                    if (removeCodes.contains(cache.getGeocode())) {
+                        removeCodes.remove(cache.getGeocode());
+                    } else if (addItem(cache, newCompactIconMode)) {
+                        newCodes.add(cache.getGeocode());
+                    }
                 }
             }
         }
@@ -177,7 +181,7 @@ public abstract class AbstractCachesOverlay {
         repaint();
     }
 
-    protected final boolean addItem(final Geocache cache, final boolean isDotMode) {
+    protected final boolean addItem(@NonNull final Geocache cache, final boolean isDotMode) {
         final GeoEntry entry = new GeoEntry(cache.getGeocode(), overlayId);
         if (geoEntries.add(entry)) {
             layerList.add(getCacheItem(cache, this.mapHandlers.getTapHandler(), isDotMode));
@@ -192,7 +196,7 @@ public abstract class AbstractCachesOverlay {
         return false;
     }
 
-    protected final boolean addItem(final Waypoint waypoint, final boolean isDotMode) {
+    protected final boolean addItem(@NonNull final Waypoint waypoint, final boolean isDotMode) {
         final GeoEntry entry = new GeoEntry(waypoint.getGpxId(), overlayId);
         final GeoitemLayer waypointItem = getWaypointItem(waypoint, this.mapHandlers.getTapHandler(), isDotMode);
         if (waypointItem != null && geoEntries.add(entry)) {
@@ -237,6 +241,7 @@ public abstract class AbstractCachesOverlay {
         return layerList.getCacheGeocodes();
     }
 
+    @Nullable
     protected Viewport getViewport() {
         final CachesBundle bundle = this.bundleRef.get();
         if (bundle == null) {
@@ -295,7 +300,7 @@ public abstract class AbstractCachesOverlay {
         Log.d(String.format(Locale.ENGLISH, "Layers for id %d cleared, remaining geoEntries: %d", overlayId, geoEntries.size()));
     }
 
-    protected void syncLayers(final Collection<String> removeCodes, final Collection<String> newCodes) {
+    protected void syncLayers(@NonNull final Collection<String> removeCodes, @NonNull final Collection<String> newCodes) {
 
         // check if there is something to do
         if (removeCodes.isEmpty() && newCodes.isEmpty()) {
@@ -348,6 +353,7 @@ public abstract class AbstractCachesOverlay {
         }
     }
 
+    @Nullable
     private Layers getLayers() {
         final CachesBundle bundle = this.bundleRef.get();
         if (bundle == null) {
@@ -360,13 +366,13 @@ public abstract class AbstractCachesOverlay {
         return layerManager.getLayers();
     }
 
-    static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {
+    static boolean mapMoved(@NonNull final Viewport referenceViewport, @NonNull final Viewport newViewport) {
         return Math.abs(newViewport.getLatitudeSpan() - referenceViewport.getLatitudeSpan()) > 50e-6 || Math.abs(newViewport.getLongitudeSpan() - referenceViewport.getLongitudeSpan()) > 50e-6 || Math.abs(newViewport.center.getLatitude() - referenceViewport.center.getLatitude()) > referenceViewport.getLatitudeSpan() / 4 || Math.abs(newViewport.center.getLongitude() - referenceViewport.center.getLongitude()) > referenceViewport.getLongitudeSpan() / 4;
     }
 
-    private static GeoitemLayer getCacheItem(final Geocache cache, final TapHandler tapHandler, final boolean isDotMode) {
+    private static GeoitemLayer getCacheItem(@NonNull final Geocache cache, final TapHandler tapHandler, final boolean isDotMode) {
         final Geopoint target = cache.getCoords();
-        Bitmap marker = null;
+        final Bitmap marker;
         if (isDotMode) {
             marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.createCacheDotMarker(CgeoApplication.getInstance().getResources(), cache));
         } else {
@@ -375,10 +381,11 @@ public abstract class AbstractCachesOverlay {
         return new GeoitemLayer(cache.getGeoitemRef(), cache.applyDistanceRule(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
     }
 
-    private static GeoitemLayer getWaypointItem(final Waypoint waypoint, final TapHandler tapHandler, final boolean isDotMode) {
+    @Nullable
+    private static GeoitemLayer getWaypointItem(@NonNull final Waypoint waypoint, final TapHandler tapHandler, final boolean isDotMode) {
         final Geopoint target = waypoint.getCoords();
         if (target != null && target.isValid()) {
-            Bitmap marker = null;
+            final Bitmap marker;
             if (isDotMode) {
                 marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.createWaypointDotMarker(CgeoApplication.getInstance().getResources(), waypoint));
             } else {
@@ -390,22 +397,28 @@ public abstract class AbstractCachesOverlay {
         return null;
     }
 
-    public WaypointDistanceInfo getClosestDistanceInM(final Geopoint coord) {
+    public WaypointDistanceInfo getClosestDistanceInM(@NonNull final Geopoint coord) {
         int minDistance = 50000000;
         String name = "";
         final Set<Geocache> caches = DataStore.loadCaches(getCacheGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
         for (final Geocache cache : caches) {
-            final int distance = (int) (1000f * cache.getCoords().distanceTo(coord));
-            if (distance > 0 && distance < minDistance) {
-                minDistance = distance;
-                name = cache.getGeocode() + " " + cache.getName();
+            final Geopoint cacheCoord = cache.getCoords();
+            if (cacheCoord != null) {
+                final int distance = (int) (1000f * cacheCoord.distanceTo(coord));
+                if (distance > 0 && distance < minDistance) {
+                    minDistance = distance;
+                    name = cache.getGeocode() + " " + cache.getName();
+                }
             }
             final List<Waypoint> waypoints = cache.getWaypoints();
             for (final Waypoint waypoint : waypoints) {
-                final int wpDistance = (int) (1000f * waypoint.getCoords().distanceTo(coord));
-                if (wpDistance > 0 && wpDistance < minDistance) {
-                    minDistance = wpDistance;
-                    name = waypoint.getName() + " (" + waypoint.getWaypointType().gpx + ")";
+                final Geopoint wpCoord = waypoint.getCoords();
+                if (wpCoord != null) {
+                    final int wpDistance = (int) (1000f * wpCoord.distanceTo(coord));
+                    if (wpDistance > 0 && wpDistance < minDistance) {
+                        minDistance = wpDistance;
+                        name = waypoint.getName() + " (" + waypoint.getWaypointType().gpx + ")";
+                    }
                 }
             }
         }
