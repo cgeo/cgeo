@@ -4,12 +4,21 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 
+import android.net.Uri;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public final class Log {
 
@@ -27,6 +36,10 @@ public final class Log {
     public static final String PROP_CALLERINFO_MAXDEPTH = "logging.callerinfomaxdepth";
     /** Whether to throw an exception when an error is logged. Value should be true or false */
     public static final String PROP_THROW_ON_ERROR_LOG = "logging.throwonerror";
+    /** Logfile to log to */
+    public static final String PROP_LOGFILE = "logging.logfile";
+
+    private static final DateFormat LOGFILE_ENTRY_FORMAT = new SimpleDateFormat("yy-MM-dd HH:mm:ss.SSS", Locale.US);
 
     /**
      * If the debug flag is set then minimum log level is debug AND an exception is thrown on error logging
@@ -38,6 +51,7 @@ public final class Log {
     private static boolean logThrowExceptionOnError = false;
     private static LogLevel minLogAddCallerInfo = LogLevel.NONE;
     private static int addCallerInfoMaxDepth = 4;
+    private static PrintWriter logFileWriter = null;
 
     private static final boolean[] SETTING_DO_LOGGING = new boolean[LogLevel.values().length];
     private static boolean settingThrowExceptionOnError = true;
@@ -109,8 +123,23 @@ public final class Log {
                 }
             }
             logThrowExceptionOnError = "true".equalsIgnoreCase(logProps.getProperty(PROP_THROW_ON_ERROR_LOG));
+            if (logProps.containsKey(PROP_LOGFILE)) {
+                final String logfileNamePraefix = logProps.getProperty(PROP_LOGFILE).trim();
+                if (!StringUtils.isBlank(logfileNamePraefix)) {
+                    final String logFileName = FileNameCreator.LOGFILE_SELF_WRITTEN.createName(logfileNamePraefix);
+                    Uri logFileUri = null;
+                    try {
+                        logFileUri = ContentStorage.get().create(PersistableFolder.LOGFILES.getFolder(), logFileName);
+                        final OutputStream logFileStream = ContentStorage.get().openForWrite(logFileUri);
+                        logFileWriter = new PrintWriter(Objects.requireNonNull(logFileStream));
+                        android.util.Log.i(TAG, "[Log] opened logfile '" + logFileName + "' at '" + logFileUri + "'");
+                    } catch (Exception ioe) {
+                        //could not open logfile
+                        android.util.Log.e(TAG, "[Log] Failed to open '" + logFileName + "' at '" + logFileUri + "'", ioe);
+                    }
+                }
+            }
             adjustSettings();
-
         }
     }
 
@@ -153,25 +182,41 @@ public final class Log {
 
     public static void v(final String msg) {
         if (SETTING_DO_LOGGING[LogLevel.VERBOSE.ordinal()]) {
-            android.util.Log.v(TAG, adjustMessage(msg, LogLevel.VERBOSE));
+            final String message = adjustMessage(msg, LogLevel.VERBOSE);
+            android.util.Log.v(TAG, message);
+            if (logFileWriter != null) {
+                logToFile("V", message, null);
+            }
         }
     }
 
     public static void v(final String msg, final Throwable t) {
         if (SETTING_DO_LOGGING[LogLevel.VERBOSE.ordinal()]) {
-            android.util.Log.v(TAG, adjustMessage(msg, LogLevel.VERBOSE), t);
+            final String message = adjustMessage(msg, LogLevel.VERBOSE);
+            android.util.Log.v(TAG, message, t);
+            if (logFileWriter != null) {
+                logToFile("V", message, t);
+            }
         }
     }
 
     public static void d(final String msg) {
         if (SETTING_DO_LOGGING[LogLevel.DEBUG.ordinal()]) {
-            android.util.Log.d(TAG, adjustMessage(msg, LogLevel.DEBUG));
+            final String message = adjustMessage(msg, LogLevel.DEBUG);
+            android.util.Log.d(TAG, message);
+            if (logFileWriter != null) {
+                logToFile("D", message, null);
+            }
         }
     }
 
     public static void d(final String msg, final Throwable t) {
         if (SETTING_DO_LOGGING[LogLevel.DEBUG.ordinal()]) {
-            android.util.Log.d(TAG, adjustMessage(msg, LogLevel.DEBUG), t);
+            final String message = adjustMessage(msg, LogLevel.DEBUG);
+            android.util.Log.d(TAG, message, t);
+            if (logFileWriter != null) {
+                logToFile("D", message, t);
+            }
         }
     }
 
@@ -206,36 +251,60 @@ public final class Log {
      * regardless of the log level set, so use with care!
      */
     public static void iForce(final String msg) {
-        android.util.Log.i(TAG, adjustMessage(msg, LogLevel.INFO));
+        final String message = adjustMessage(msg, LogLevel.INFO);
+        android.util.Log.i(TAG, message);
+        if (logFileWriter != null) {
+            logToFile("I", message, null);
+        }
     }
 
     public static void i(final String msg) {
         if (SETTING_DO_LOGGING[LogLevel.INFO.ordinal()]) {
-            android.util.Log.i(TAG, adjustMessage(msg, LogLevel.INFO));
+            final String message = adjustMessage(msg, LogLevel.INFO);
+            android.util.Log.i(TAG, message);
+            if (logFileWriter != null) {
+                logToFile("I", message, null);
+            }
         }
     }
 
     public static void i(final String msg, final Throwable t) {
         if (SETTING_DO_LOGGING[LogLevel.INFO.ordinal()]) {
-            android.util.Log.i(TAG, adjustMessage(msg, LogLevel.INFO), t);
+            final String message = adjustMessage(msg, LogLevel.INFO);
+            android.util.Log.i(TAG, message, t);
+            if (logFileWriter != null) {
+                logToFile("I", message, t);
+            }
         }
     }
 
     public static void w(final String msg) {
         if (SETTING_DO_LOGGING[LogLevel.WARN.ordinal()]) {
-            android.util.Log.w(TAG, adjustMessage(msg, LogLevel.WARN));
+            final String message = adjustMessage(msg, LogLevel.WARN);
+            android.util.Log.w(TAG, message);
+            if (logFileWriter != null) {
+                logToFile("W", message, null);
+            }
         }
     }
 
     public static void w(final String msg, final Throwable t) {
         if (SETTING_DO_LOGGING[LogLevel.WARN.ordinal()]) {
-            android.util.Log.w(TAG, adjustMessage(msg, LogLevel.WARN), t);
+            final String message = adjustMessage(msg, LogLevel.WARN);
+            android.util.Log.w(TAG, message, t);
+            if (logFileWriter != null) {
+                logToFile("W", message, t);
+            }
         }
     }
 
     public static void e(final String msg) {
         if (SETTING_DO_LOGGING[LogLevel.ERROR.ordinal()]) {
-            android.util.Log.e(TAG, adjustMessage(msg, LogLevel.ERROR));
+            final String message = adjustMessage(msg, LogLevel.ERROR);
+            android.util.Log.e(TAG, message);
+            if (logFileWriter != null) {
+                logToFile("E", message, null);
+            }
             if (settingThrowExceptionOnError) {
                 throw new RuntimeException("Aborting on Log.e()");
             }
@@ -244,7 +313,11 @@ public final class Log {
 
     public static void e(final String msg, final Throwable t) {
         if (SETTING_DO_LOGGING[LogLevel.ERROR.ordinal()]) {
-            android.util.Log.e(TAG, adjustMessage(msg, LogLevel.ERROR), t);
+            final String message = adjustMessage(msg, LogLevel.ERROR);
+            android.util.Log.e(TAG, message, t);
+            if (logFileWriter != null) {
+                logToFile("E", message, t);
+            }
             if (settingThrowExceptionOnError) {
                 if (t instanceof RuntimeException) {
                     throw (RuntimeException) t;
@@ -284,6 +357,17 @@ public final class Log {
             shortClassName = shortClassName.substring(idx + 1);
         }
         return shortClassName + "." + st.getMethodName() + ":" + st.getLineNumber();
+    }
+
+    private static void logToFile(final String level, final String message, final Throwable t) {
+        if (logFileWriter != null) {
+
+            logFileWriter.write(LOGFILE_ENTRY_FORMAT.format(new Date()) + " (" + level + ") " + message + "\n");
+            if (t != null) {
+                t.printStackTrace(logFileWriter);
+            }
+            logFileWriter.flush();
+        }
     }
 
 }
