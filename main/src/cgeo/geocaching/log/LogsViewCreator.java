@@ -128,11 +128,9 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
     }
 
     protected View.OnClickListener createOnLogClickListener(final LogViewHolder holder, final LogEntry log) {
-        final String serviceSpecificLogId = getServiceSpecificLogId(log);
         return v -> {
-            final String logIdPlusSpace = StringUtils.isBlank(serviceSpecificLogId) ? "" : (serviceSpecificLogId + " ");
             final String author = StringEscapeUtils.unescapeHtml4(log.author);
-            final String title = activity.getString(R.string.cache_log_menu_title, logIdPlusSpace, author);
+            final String title = activity.getString(R.string.cache_log_menu_popup_title, author);
 
             final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity)
                     .setTitle(title)
@@ -159,10 +157,6 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
     /** for subclasses to overwrite and add own entries */
     protected ContextMenuDialog extendContextMenu(final ContextMenuDialog ctxMenu, final LogEntry log) {
         return ctxMenu;
-    }
-
-    protected String getServiceSpecificLogId(final LogEntry log) {
-        return log.serviceLogId;
     }
 
     protected abstract View.OnClickListener createUserActionsListener(LogEntry log);
