@@ -64,7 +64,7 @@ public class LogTemplateProviderTest extends TestCase {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC45GGA");
         final LogContext context = new LogContext(cache, new LogEntry.Builder().setLogType(LogType.FOUND_IT).build());
-        final String template = "[NUMBER]";
+        final String template = "[ONLINENUM]";
         final String withIncrement = LogTemplateProvider.applyTemplates(template, context);
         final String withoutIncrement = LogTemplateProvider.applyTemplatesNoIncrement(template, context);
 
