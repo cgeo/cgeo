@@ -109,11 +109,6 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     }
 
     @Override
-    protected String getServiceSpecificLogId(final LogEntry log) {
-        return getCache().getServiceSpecificLogId(log);
-    }
-
-    @Override
     protected View.OnClickListener createOnLogClickListener(final LogViewHolder holder, final LogEntry log) {
         if (isOfflineLog(log)) {
             return new EditOfflineLogListener(getCache(), cacheDetailActivity);
