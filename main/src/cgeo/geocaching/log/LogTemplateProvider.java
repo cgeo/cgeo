@@ -376,6 +376,6 @@ public final class LogTemplateProvider {
     }
 
     public static String applyTemplatesNoIncrement(@NonNull final String signature, final LogContext context) {
-        return applyTemplates(signature.replace("[NUMBER]", "[NUMBER$NOINC]"), context);
+        return applyTemplates(signature.replace("[NUMBER]", "[NUMBER$NOINC]").replace("[ONLINENUM]", "[NUMBER$NOINC]"), context);
     }
 }
