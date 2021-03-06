@@ -4,7 +4,12 @@
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
 <h1>Nightly build:</h1>
 
-*** TODO: Need some introductionary text about the SAF change ***
+<h2>
+We had to do extensive changes to the way c:geo gets access to your file system (e.g. for storing data, reading offline maps) to be prepared for requirements on new Android versions.
+After upgrading to this c:geo version a wizard will guide you through the needed changes. Please follow these steps carefully!
+<br>
+Refer to <a href="https://faq.cgeo.org/#SAF">this FAQ entry</a> for more information.
+</h2>
 
 <h4>Map:</h4>
 <ul>
