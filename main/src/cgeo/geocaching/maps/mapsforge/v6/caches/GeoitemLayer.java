@@ -36,19 +36,11 @@ public class GeoitemLayer extends Marker {
 
     private static final float radius = (float) (528.0 * IConversion.FEET_TO_KILOMETER * 1000.0);
 
-    private static final Paint strokePaint;
-    private static final Paint fillPaint;
+    private static Paint strokePaint;
+    private static Paint fillPaint;
 
     static {
-        strokePaint = AndroidGraphicFactory.INSTANCE.createPaint();
-        strokePaint.setStrokeWidth(2.0f);
-        strokePaint.setDashPathEffect(new float[] { 3, 2 });
-        strokePaint.setColor(MapLineUtils.getCircleColor());
-        strokePaint.setStyle(Style.STROKE);
-
-        fillPaint = AndroidGraphicFactory.INSTANCE.createPaint();
-        fillPaint.setColor(MapLineUtils.getCircleFillColor());
-        fillPaint.setStyle(Style.FILL);
+        resetColors();
     }
 
     public GeoitemLayer(final GeoitemRef item, final boolean hasCircle, final TapHandler tapHandler, final LatLong latLong, final Bitmap bitmap, final int horizontalOffset, final int verticalOffset) {
@@ -64,6 +56,18 @@ public class GeoitemLayer extends Marker {
         } else {
             circle = null;
         }
+    }
+
+    public static void resetColors() {
+        strokePaint = AndroidGraphicFactory.INSTANCE.createPaint();
+        strokePaint.setStrokeWidth(2.0f);
+        strokePaint.setDashPathEffect(new float[] { 3, 2 });
+        strokePaint.setColor(MapLineUtils.getCircleColor());
+        strokePaint.setStyle(Style.STROKE);
+
+        fillPaint = AndroidGraphicFactory.INSTANCE.createPaint();
+        fillPaint.setColor(MapLineUtils.getCircleFillColor());
+        fillPaint.setStyle(Style.FILL);
     }
 
     public GeoitemRef getItem() {
