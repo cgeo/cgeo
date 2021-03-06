@@ -174,7 +174,28 @@ public final class GpxSerializer {
 
     private void writeGsakExtensions(@NonNull final Geocache cache) throws IOException {
         gpx.startTag(NS_GSAK, "wptExtension");
-        XmlUtils.multipleTexts(gpx, NS_GSAK, "Watch", gpxBoolean(cache.isOnWatchlist()), "IsPremium", gpxBoolean(cache.isPremiumMembersOnly()), "FavPoints", Integer.toString(cache.getFavoritePoints()), "GcNote", StringUtils.trimToEmpty(cache.getPersonalNote()));
+        XmlUtils.multipleTexts(gpx, NS_GSAK, "Watch", gpxBoolean(cache.isOnWatchlist()), "IsPremium", gpxBoolean(cache.isPremiumMembersOnly()), "FavPoints", Integer.toString(cache.getFavoritePoints()),
+            "GcNote", StringUtils.trimToEmpty(cache.getPersonalNote()));
+
+        if (Settings.getIncludeFoundStatus()) {
+            final long visited = cache.getVisitedDate();
+            if (cache.isFound()) {
+                if (0 != visited) {
+                    gpx.startTag(NS_GSAK, "UserFound");
+                    gpx.text(dateFormatZ.format(new Date(visited)));
+                    gpx.endTag(NS_GSAK, "UserFound");
+                }
+            } else if (cache.isDNF()) {
+                gpx.startTag(NS_GSAK, "DNF");
+                gpx.text(gpxBoolean(cache.isDNF()));
+                gpx.endTag(NS_GSAK, "DNF");
+                if (0 != visited) {
+                    gpx.startTag(NS_GSAK, "DNFDate");
+                    gpx.text(dateFormatZ.format(new Date(visited)));
+                    gpx.endTag(NS_GSAK, "DNFDate");
+                }
+            }
+        }
         gpx.endTag(NS_GSAK, "wptExtension");
     }
 

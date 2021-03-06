@@ -64,6 +64,7 @@ import org.xml.sax.SAXException;
 abstract class GPXParser extends FileParser {
 
     private static final SynchronizedDateFormat formatSimple = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US); // 2010-04-20T07:00:00
+    private static final SynchronizedDateFormat formatSimpleNoTime = new SynchronizedDateFormat("yyyy-MM-dd", Locale.US); // 2010-04-20
     private static final SynchronizedDateFormat formatSimpleZ = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
     private static final SynchronizedDateFormat formatTimezone = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US); // 2010-04-20T01:01:03-04:00
 
@@ -191,7 +192,10 @@ abstract class GPXParser extends FileParser {
             final String removeColon = input.substring(0, input.length() - 3) + input.substring(input.length() - 2);
             return formatTimezone.parse(removeColon);
         }
-        return formatSimple.parse(input);
+        if (input.contains("T")) {
+            return formatSimple.parse(input);
+        }
+        return formatSimpleNoTime.parse(input);
     }
 
     @Override
@@ -392,6 +396,7 @@ abstract class GPXParser extends FileParser {
             sym = body.toLowerCase(Locale.US);
             if (sym.contains("geocache") && sym.contains("found")) {
                 cache.setFound(true);
+                cache.setDNF(false);
             }
         });
 
@@ -678,6 +683,31 @@ abstract class GPXParser extends FileParser {
             gsak.getChild(gsakNamespace, "Code").setEndTextElementListener(geocode -> {
                 if (StringUtils.isNotBlank(geocode)) {
                     cache.setGeocode(StringUtils.trim(geocode));
+                }
+            });
+
+            gsak.getChild(gsakNamespace, "DNF").setEndTextElementListener(dnfState -> {
+                if (!cache.isFound()) {
+                    cache.setDNF(Boolean.parseBoolean(dnfState));
+                }
+            });
+            gsak.getChild(gsakNamespace, "DNFDate").setEndTextElementListener(dnfDate -> {
+                if (0 == cache.getVisitedDate()) {
+                    try {
+                        cache.setVisitedDate(parseDate(dnfDate).getTime());
+                    } catch (final Exception e) {
+                        Log.w("Failed to parse visited date 'gsak:DNFDate'", e);
+                    }
+                }
+            });
+
+            gsak.getChild(gsakNamespace, "UserFound").setEndTextElementListener(foundDate -> {
+                if (0 == cache.getVisitedDate()) {
+                    try {
+                        cache.setVisitedDate(parseDate(foundDate).getTime());
+                    } catch (final Exception e) {
+                        Log.w("Failed to parse visited date 'gsak:UserFound'", e);
+                    }
                 }
             });
 

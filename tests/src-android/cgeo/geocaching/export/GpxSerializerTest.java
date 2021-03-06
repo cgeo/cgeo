@@ -20,6 +20,7 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.io.IOUtils;
@@ -215,6 +216,30 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         }
     }
 
+    public void testDNFState() throws IOException, ParserException {
+        final String geocode = "GC3T1XG";
+        try {
+            final int cacheResource = R.raw.gc3t1xg_gsak_dnf;
+
+            final Geocache cache = loadCacheFromResource(cacheResource);
+            assertThat(cache.isDNF()).isTrue();
+
+            final String gpxString = getGPXFromCache(geocode);
+            assertTagValue(gpxString, "gsak:DNF", "true");
+            assertTagValue(gpxString, "gsak:DNFDate", "2021-03-20T00:00:00Z");
+
+
+            cache.setDNF(false);
+            DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
+
+            final String gpxNotDnfString = getGPXFromCache(geocode);
+            assertThat(gpxNotDnfString).doesNotContain("gsak:DNF");
+        } finally {
+            DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
+        }
+    }
+
+
     @NonNull
     private static String extractWaypoint(final String gpx) {
         return StringUtils.substringBetween(gpx, "<wpt", "</wpt>");
@@ -227,4 +252,10 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         assertThat(importedContent).isEqualTo(exportedContent);
     }
 
+    private static void assertTagValue(final String gpx, final String tag, final String tagValue) {
+        final String[] gpxContent = StringUtils.substringsBetween(gpx, "<" + tag + ">", "</" + tag + ">");
+        assertThat(gpxContent).isNotEmpty();
+        assertThat(gpxContent).hasSize(1);
+        assertThat(gpxContent[0]).isEqualTo(tagValue);
+    }
 }
