@@ -72,7 +72,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
             final ArrayList<IWaypoint> targets = new ArrayList<>();
             targets.add(cache);
             for (final Waypoint waypoint : cache.getWaypoints()) {
-                if (waypoint.getWaypointType() == WaypointType.PARKING && !cache.getCoords().equals(waypoint.getCoords())) {
+                if ((waypoint.getWaypointType() == WaypointType.PARKING || waypoint.getWaypointType() == WaypointType.FINAL) && !cache.getCoords().equals(waypoint.getCoords())) {
                     targets.add(waypoint);
                 }
             }
