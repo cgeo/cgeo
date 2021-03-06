@@ -35,6 +35,7 @@ import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle;
+import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemLayer;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.maps.mapsforge.v6.layers.HistoryLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
@@ -746,6 +747,9 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
             }
         });
         this.mapView.getLayerManager().getLayers().add(this.navigationLayer);
+
+        // GeoitemLayer
+        GeoitemLayer.resetColors();
 
         // TapHandler
         final TapHandlerLayer tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler());
