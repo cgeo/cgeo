@@ -1012,7 +1012,6 @@
     <string name="cache_dialog_favorite_remove_message">A retirar geocache da lista de favoritas…</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_navigation_drive">Navegação (Conduzir)</string>
-    <string name="cache_menu_navigation_drive_select_target">Cache ou lugar de estacionamento?</string>
     <string name="cache_menu_navigation_walk">Navegação (Caminhar)</string>
     <string name="cache_menu_navigation_transit">Navegação (Transportes)</string>
     <string name="cache_menu_navigation_bike">Navegação (Bicicleta)</string>
