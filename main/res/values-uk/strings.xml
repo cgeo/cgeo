@@ -868,7 +868,6 @@
     <string name="cache_dialog_favorite_remove_message">Видалення кеш-пам\'яті зі списку спостереження…</string>
     <string name="cache_menu_navigate">Навігація</string>
     <string name="cache_menu_navigation_drive">Навігація (водіння)</string>
-    <string name="cache_menu_navigation_drive_select_target">Кеш або місце для парковки?</string>
     <string name="cache_menu_navigation_walk">Навігація (ходьба)</string>
     <string name="cache_menu_navigation_transit">Навігація (транзитна)</string>
     <string name="cache_menu_navigation_bike">Навігація (велосипед)</string>
