@@ -854,7 +854,6 @@
     <string name="cache_dialog_favorite_remove_message">Удаляем рекомендацию…</string>
     <string name="cache_menu_navigate">Навигация</string>
     <string name="cache_menu_navigation_drive">Навигация (за рулем)</string>
-    <string name="cache_menu_navigation_drive_select_target">Тайник или парковка?</string>
     <string name="cache_menu_navigation_walk">Навигация (пешком)</string>
     <string name="cache_menu_navigation_transit">Навигация (общественный транспорт)</string>
     <string name="cache_menu_navigation_bike">Навигация (велосипед)</string>
