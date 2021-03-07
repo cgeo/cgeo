@@ -1010,7 +1010,6 @@
     <string name="cache_dialog_favorite_remove_message">Odstraňovanie skrýše z obľúbených…</string>
     <string name="cache_menu_navigate">Navigovať</string>
     <string name="cache_menu_navigation_drive">Navigácia (auto)</string>
-    <string name="cache_menu_navigation_drive_select_target">Skrýša alebo parkovacie miesto?</string>
     <string name="cache_menu_navigation_walk">Navigácia (pešo)</string>
     <string name="cache_menu_navigation_transit">Navigácia (Tranzit)</string>
     <string name="cache_menu_navigation_bike">Navigácia (bicykel)</string>
