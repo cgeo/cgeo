@@ -671,7 +671,7 @@
     <string name="init_trailwidth">軌跡の線幅</string>
     <string name="init_trailwidth_summary">軌跡の線幅を選択</string>
     <string name="init_directioncolor">ナビルートの色</string>
-    <string name="init_directioncolor_summary">ナビルートの色と不透明度を選択。ナビルートは目的地までの直線か、ナビゲーションのルート(BRouterアプリがインストールされてルート検索が有効の場合)です</string>
+    <string name="init_directioncolor_summary">ナビルートの色と不透明度を選択。ナビルートは目的地までの直線か、ナビゲーションのルート(BRouterアプリがインストール済みでルート検索が有効の場合)です</string>
     <string name="init_directionwidth">ナビルートの線幅</string>
     <string name="init_directionwidth_summary">ナビルートの線幅を選択</string>
     <string name="init_routecolor">個別ルートの色</string>
@@ -1158,7 +1158,7 @@
     <string name="map_view_map">地図の変更</string>
     <string name="map_rotation">地図の回転</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
-    <string name="map_show_circles">0.1マイル円を表示</string>
+    <string name="map_show_circles">0.1マイル円</string>
     <string name="map_showc_ownfound">所有/発見したキャッシュを表示</string>
     <string name="map_showc_disabled">一時停止中キャッシュを表示</string>
     <string name="map_showc_archived">アーカイブ済みキャッシュを表示</string>
@@ -1291,7 +1291,7 @@
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます</string>
     <string name="helper_where_you_go_description">WhereYouGoでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
-    <string name="helper_brouter_description">BRouterはオフラインのルート検索を提供します。インストール済みで必要なファイルがダウンロードされている場合はc:geoで内部の地図にキャッシュへのルートを自動的に表示します</string>
+    <string name="helper_brouter_description">BRouterはオフラインのルート検索エンジンです。インストール後に必要なファイルをダウンロードするなどセットアップが必要です。c:geoで地図にキャッシュなどへのルートを表示できるようになります。</string>
     <string name="helper_chirpwolf_description">Chirp Wolfを使用するとANT+/Garmin chirp(ジオキャッシュ ビーコン)からデータを読み取ることができます。Garmin chirpを含むジオキャッシュには必要です</string>
     <!-- export -->
     <string name="share_export">共有/エクスポート</string>
@@ -1832,7 +1832,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_permissions_title">アプリの権限の設定</string>
     <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です\n次のステップで説明します</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
-    <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です\nお持ちのアカウントでログインするかアカウント作成してください</string>
+    <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です。\nお持ちのアカウントでログインするかアカウント作成してください</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencachingや他のサイト</string>
     <string name="wizard_welcome_advanced">追加設定</string>
