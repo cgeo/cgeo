@@ -640,7 +640,6 @@
     <string name="cache_dialog_favorite_remove_message">Menghapus cache dari favorit anda&#8230;</string>
     <string name="cache_menu_navigate">Navigasi</string>
     <string name="cache_menu_navigation_drive">Navigasi (Mengemudi)</string>
-    <string name="cache_menu_navigation_drive_select_target">Cache atau tempat parkir?</string>
     <string name="cache_menu_navigation_walk">Navigasi (Berjalan)</string>
     <string name="cache_menu_navigation_transit">Navigasi (Transit)</string>
     <string name="cache_menu_navigation_bike">Navigasi (Sepeda)</string>
