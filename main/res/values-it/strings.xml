@@ -1012,7 +1012,6 @@
     <string name="cache_dialog_favorite_remove_message">Rimozione cache dai tuoi preferiti…</string>
     <string name="cache_menu_navigate">Naviga</string>
     <string name="cache_menu_navigation_drive">Naviga (in auto)</string>
-    <string name="cache_menu_navigation_drive_select_target">Cache o parcheggio?</string>
     <string name="cache_menu_navigation_walk">Naviga (a piedi)</string>
     <string name="cache_menu_navigation_transit">Navigazione (trasporti pubblici)</string>
     <string name="cache_menu_navigation_bike">Naviga (in moto)</string>
