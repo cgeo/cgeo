@@ -999,7 +999,6 @@
     <string name="cache_dialog_favorite_remove_message">Geocache favorilerinizden çıkartılıyor…</string>
     <string name="cache_menu_navigate">Navigasyon</string>
     <string name="cache_menu_navigation_drive">Navigasyon (Arabayla)</string>
-    <string name="cache_menu_navigation_drive_select_target">Geocache mi park alanı mı?</string>
     <string name="cache_menu_navigation_walk">Navigasyon (Yürüyerek)</string>
     <string name="cache_menu_navigation_transit">Navigasyon (Araçla)</string>
     <string name="cache_menu_navigation_bike">Navigasyon (Bisikletle)</string>
