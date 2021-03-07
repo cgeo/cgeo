@@ -817,7 +817,6 @@
     <string name="cache_dialog_favorite_remove_message">Borrando el caché de tus favoritos…</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_navigation_drive">Navegación (Coche)</string>
-    <string name="cache_menu_navigation_drive_select_target">¿Al caché o al lugar de aparcamiento?</string>
     <string name="cache_menu_navigation_walk">Navegación (A Pie)</string>
     <string name="cache_menu_navigation_transit">Navegación (Trans. público)</string>
     <string name="cache_menu_navigation_bike">Navegación (Bici)</string>
