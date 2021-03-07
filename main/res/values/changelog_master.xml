@@ -37,6 +37,7 @@ Refer to <a href="https://faq.cgeo.org/#SAF">this FAQ entry</a> for more informa
 <li>New: Add support for cache attributes in locus connector</li>
 <li>New: Export and import UDC with empty coordinates</li>
 <li>New: Add toggle to pocket query list on mainscreen to display all/downloadable pocket queries only</li>
+<li>Fix: Minor bug fixes for the numbers template, when used by the Twitter plug-in</li>
 </ul>
 
 </div>]]></Data>
