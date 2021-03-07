@@ -1012,7 +1012,6 @@
     <string name="cache_dialog_favorite_remove_message">Verwijder cache van je favorieten…</string>
     <string name="cache_menu_navigate">Navigeer</string>
     <string name="cache_menu_navigation_drive">Navigeer (rijden)</string>
-    <string name="cache_menu_navigation_drive_select_target">Cache of parkeerplaats?</string>
     <string name="cache_menu_navigation_walk">Navigeer (lopen)</string>
     <string name="cache_menu_navigation_transit">Navigatie (Onderweg)</string>
     <string name="cache_menu_navigation_bike">Navigeer (fiets)</string>
