@@ -816,7 +816,6 @@
     <string name="cache_dialog_favorite_remove_message">Noņemt slēpni no saviem favorītiem…</string>
     <string name="cache_menu_navigate">Navigēt</string>
     <string name="cache_menu_navigation_drive">Navigēt (Ar automašīnu)</string>
-    <string name="cache_menu_navigation_drive_select_target">Slēpnis vai stāvvieta?</string>
     <string name="cache_menu_navigation_walk">Navigēt (Ar kājām)</string>
     <string name="cache_menu_navigation_transit">Navigācija (Ar sabiedrisko)</string>
     <string name="cache_menu_navigation_bike">Navigēt (Ar velosipēdu)</string>
