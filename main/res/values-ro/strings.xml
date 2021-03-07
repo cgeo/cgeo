@@ -647,7 +647,6 @@
     <string name="cache_dialog_favorite_remove_message">Ştergere geocutie din lista celor favorite…</string>
     <string name="cache_menu_navigate">Navighează</string>
     <string name="cache_menu_navigation_drive">Navigare (auto)</string>
-    <string name="cache_menu_navigation_drive_select_target">Geocutie sau parcare?</string>
     <string name="cache_menu_navigation_walk">Navigare (pe jos)</string>
     <string name="cache_menu_navigation_transit">Navigare (tranzit)</string>
     <string name="cache_menu_navigation_bike">Navigare (bicicletă)</string>
