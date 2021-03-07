@@ -850,7 +850,6 @@
     <string name="cache_dialog_favorite_remove_message">호감캐시에서 삭제중…</string>
     <string name="cache_menu_navigate">길찾기</string>
     <string name="cache_menu_navigation_drive">길찾기(자동차)</string>
-    <string name="cache_menu_navigation_drive_select_target">캐시 또는 주차장?</string>
     <string name="cache_menu_navigation_walk">길찾기(도보)</string>
     <string name="cache_menu_navigation_transit">길찾기(대중교통)</string>
     <string name="cache_menu_navigation_bike">길찾기(자전거)</string>
