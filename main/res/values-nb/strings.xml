@@ -893,7 +893,6 @@
     <string name="cache_dialog_favorite_remove_message">Fjerner cachen fra dine favoritter…</string>
     <string name="cache_menu_navigate">Navigér</string>
     <string name="cache_menu_navigation_drive">Navigasjon (kjøring)</string>
-    <string name="cache_menu_navigation_drive_select_target">Cache eller parkeringsplass?</string>
     <string name="cache_menu_navigation_walk">Navigasjon (gående)</string>
     <string name="cache_menu_navigation_transit">Navigasjon (Kollektivtransport)</string>
     <string name="cache_menu_navigation_bike">Navigasjon (sykkel)</string>
