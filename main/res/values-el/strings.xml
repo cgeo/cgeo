@@ -995,7 +995,6 @@
     <string name="cache_dialog_favorite_remove_message">Αφαιρεί την κρύπτη από τις αγαπημένες σας…</string>
     <string name="cache_menu_navigate">Πλοήγηση</string>
     <string name="cache_menu_navigation_drive">Πλοήγηση (Οδήγηση)</string>
-    <string name="cache_menu_navigation_drive_select_target">Κρύπτη ή χώρος στάθμευσης;</string>
     <string name="cache_menu_navigation_walk">Πλοήγηση (Περπάτημα)</string>
     <string name="cache_menu_navigation_transit">Πλοήγηση (Συγκοινωνία)</string>
     <string name="cache_menu_navigation_bike">Πλοήγηση (με ποδήλατο)</string>
