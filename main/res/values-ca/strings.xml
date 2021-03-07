@@ -989,7 +989,6 @@
     <string name="cache_dialog_favorite_remove_message">S\'esta eliminant el catxé dels preferits…</string>
     <string name="cache_menu_navigate">Navega</string>
     <string name="cache_menu_navigation_drive">Navegació (conduint)</string>
-    <string name="cache_menu_navigation_drive_select_target">Catxé o plaça d\'aparcament?</string>
     <string name="cache_menu_navigation_walk">Navegació (caminant)</string>
     <string name="cache_menu_navigation_transit">Navegació (trànsit)</string>
     <string name="cache_menu_navigation_bike">Navegació (bicicleta)</string>
