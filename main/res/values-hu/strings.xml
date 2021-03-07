@@ -737,7 +737,6 @@
     <string name="cache_dialog_favorite_remove_message">Láda törlése a kedvencek közül…</string>
     <string name="cache_menu_navigate">Navigáció</string>
     <string name="cache_menu_navigation_drive">Autós navigáció</string>
-    <string name="cache_menu_navigation_drive_select_target">Láda vagy parkolóhely?</string>
     <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
     <string name="cache_menu_navigation_transit">Tömegközlekedési navigáció</string>
     <string name="cache_menu_navigation_bike">Biciklis navigáció</string>
