@@ -643,7 +643,6 @@
     <string name="cache_dialog_favorite_remove_message">إزالة المخبئ من المفضلات الخاصة بك&#8230;</string>
     <string name="cache_menu_navigate">الملاحة</string>
     <string name="cache_menu_navigation_drive">الملاحة (القيادة)</string>
-    <string name="cache_menu_navigation_drive_select_target">المخبئ أو مكان المكوث؟</string>
     <string name="cache_menu_navigation_walk">الملاحة ( المشي)</string>
     <string name="cache_menu_navigation_transit">الملاحة (العبور)</string>
     <string name="cache_menu_navigation_bike">الملاحة (قيادة الدراجة)</string>
