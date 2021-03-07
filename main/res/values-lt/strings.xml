@@ -900,7 +900,6 @@
     <string name="cache_dialog_favorite_remove_message">Slėptuvė šalinama iš Jūsų mėgiamų slėptuvių sąrašo…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_navigation_drive">Navigacija (važiuoti)</string>
-    <string name="cache_menu_navigation_drive_select_target">Slėptuvė ar automobilių stovėjimo vieta?</string>
     <string name="cache_menu_navigation_walk">Navigacija (pėsčiomis)</string>
     <string name="cache_menu_navigation_transit">Navigacija (keleiviniu transportu)</string>
     <string name="cache_menu_navigation_bike">Navigacija (dviračiu)</string>
