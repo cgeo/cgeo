@@ -653,7 +653,6 @@
     <string name="cache_dialog_favorite_remove_message">Ang pagtatanggal ng cache mula sa iyong mga paborito&#8230;</string>
     <string name="cache_menu_navigate">Ang nabigasyon</string>
     <string name="cache_menu_navigation_drive">Nabigasyon habang (Nagmamaneho)</string>
-    <string name="cache_menu_navigation_drive_select_target">Cache o ang lugar na paradahan?</string>
     <string name="cache_menu_navigation_walk">Ang Nabigasyon (Naglalakad)</string>
     <string name="cache_menu_navigation_transit">Nabigasyon sa (Pagpapadala)</string>
     <string name="cache_menu_navigation_bike">Nabigasyon sa (Pagbibisekleta)</string>
