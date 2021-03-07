@@ -13,7 +13,7 @@ import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.gc.GCUtils;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.gc.UncertainProperty;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -232,7 +232,7 @@ public class Geocache implements IWaypoint {
             if (StringUtils.isBlank(getShortDescription())) {
                 shortdesc = other.getShortDescription();
             }
-            if (attributes.isEmpty() && other.attributes != null) {
+            if (attributes.isEmpty()) {
                 attributes.addAll(other.attributes);
             }
         }
@@ -477,7 +477,7 @@ public class Geocache implements IWaypoint {
         boolean willAttend = false;
         final List<LogEntry> logs = getLogs();
         for (final LogEntry logEntry : logs) {
-            final LogType logType = logEntry.getType();
+            final LogType logType = logEntry.logType;
             if (logType == LogType.ATTENDED) {
                 return false;
             } else if (logType == LogType.WILL_ATTEND && logEntry.isOwn()) {
@@ -772,7 +772,7 @@ public class Geocache implements IWaypoint {
         // For some connectors ID can be calculated out of geocode
         if (StringUtils.isBlank(cacheId)) {
             if (getConnector() instanceof GCConnector) {
-                return String.valueOf(GCConstants.gccodeToGCId(geocode));
+                return String.valueOf(GCUtils.gcLikeCodeToGcLikeId(geocode));
             }
             if (getConnector() instanceof SuConnector) {
                 return SuConnector.geocodeToId(geocode);
@@ -820,7 +820,7 @@ public class Geocache implements IWaypoint {
         return subject.toString();
     }
 
-    public void shareCache(@NonNull final Activity fromActivity, final Resources res) {
+    public void shareCache(@NonNull final Activity fromActivity) {
         ShareUtils.shareLink(fromActivity, getShareSubject(), getUrl());
     }
 
@@ -1404,6 +1404,7 @@ public class Geocache implements IWaypoint {
     /**
      * @return the storageLocation
      */
+    @SuppressWarnings("unused")
     public EnumSet<StorageLocation> getStorageLocation() {
         return storageLocation;
     }
@@ -1590,6 +1591,7 @@ public class Geocache implements IWaypoint {
      *            the id of the waypoint to look for
      * @return waypoint or {@code null}
      */
+    @SuppressWarnings("unused")
     public Waypoint getWaypointById(final int id) {
         for (final Waypoint waypoint : waypoints) {
             if (waypoint.getId() == id) {
@@ -1797,7 +1799,7 @@ public class Geocache implements IWaypoint {
         storeCache(null, geocode, combinedListIds, true, handler);
     }
 
-    public static void storeCache(final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final DisposableHandler handler) {
+    public static void storeCache(@Nullable final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final DisposableHandler handler) {
         try {
             final Geocache cache;
             // get cache details, they may not yet be complete
@@ -1854,7 +1856,7 @@ public class Geocache implements IWaypoint {
             if (Settings.isStoreLogImages()) {
                 for (final LogEntry log : cache.getLogs()) {
                     if (log.hasLogImages()) {
-                        for (final Image oneLogImg : log.getLogImages()) {
+                        for (final Image oneLogImg : log.logImages) {
                             imgGetter.getDrawable(oneLogImg.getUrl());
                         }
                     }
@@ -1938,7 +1940,7 @@ public class Geocache implements IWaypoint {
         final List<Image> result = new LinkedList<>(getSpoilers());
         addLocalSpoilersTo(result);
         for (final LogEntry log : getLogs()) {
-            result.addAll(log.getLogImages());
+            result.addAll(log.logImages);
         }
         ImageUtils.addImagesFromHtml(result, geocode, getShortDescription(), getDescription());
         return result;
@@ -1995,7 +1997,7 @@ public class Geocache implements IWaypoint {
      */
     public boolean hasOwnLog(final LogType logType) {
         for (final LogEntry logEntry : getLogs()) {
-            if (logEntry.getType() == logType && logEntry.isOwn()) {
+            if (logEntry.logType == logType && logEntry.isOwn()) {
                 return true;
             }
         }

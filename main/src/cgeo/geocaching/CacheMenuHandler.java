@@ -38,7 +38,6 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         void showNavigationMenu();
 
         void cachesAround();
-
     }
 
     public static boolean onMenuItemSelected(final MenuItem item, @NonNull final CacheMenuHandler.ActivityInterface activityInterface, final Geocache cache) {
@@ -47,6 +46,9 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             activity = (Activity) activityInterface;
         } else {
             activity = ((Fragment) activityInterface).getActivity();
+        }
+        if (activity == null) {
+            return false;
         }
 
         final int menuItem = item.getItemId();
@@ -67,7 +69,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             cache.openInBrowser(activity);
             return true;
         } else if (menuItem == R.id.menu_share || menuItem == R.id.menu_share_from_popup) {
-            cache.shareCache(activity, res);
+            cache.shareCache(activity);
             return true;
         } else if (menuItem == R.id.menu_calendar) {
             CalendarAdder.addToCalendar(activity, cache);
