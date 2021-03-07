@@ -1002,7 +1002,6 @@
     <string name="cache_dialog_favorite_remove_message">お気に入りから削除中…</string>
     <string name="cache_menu_navigate">ナビゲーション</string>
     <string name="cache_menu_navigation_drive">ナビゲーション(自動車)</string>
-    <string name="cache_menu_navigation_drive_select_target">キャッシュ/駐車場?</string>
     <string name="cache_menu_navigation_walk">ナビゲーション(徒歩)</string>
     <string name="cache_menu_navigation_transit">ナビゲーション(トランジット)</string>
     <string name="cache_menu_navigation_bike">ナビゲーション(自転車)</string>
