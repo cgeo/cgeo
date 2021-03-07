@@ -652,7 +652,6 @@
     <string name="cache_dialog_favorite_remove_message">Tinatanggal ang cache mula sa iyong mga paborito&#8230;</string>
     <string name="cache_menu_navigate">Mag-navigate</string>
     <string name="cache_menu_navigation_drive">Nabigasyon (Pagmamaneho)</string>
-    <string name="cache_menu_navigation_drive_select_target">Ang cache o ang lugar paradahan?</string>
     <string name="cache_menu_navigation_walk">Nabigasyon (Paglalakad)</string>
     <string name="cache_menu_navigation_transit">Nabigasyon (Paglipat)</string>
     <string name="cache_menu_navigation_bike">Nabigasyon (Pagbibisiklita)</string>
