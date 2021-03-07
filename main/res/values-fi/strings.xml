@@ -1012,7 +1012,6 @@
     <string name="cache_dialog_favorite_remove_message">Poista kätkö suosikeistasi…</string>
     <string name="cache_menu_navigate">Navigoi</string>
     <string name="cache_menu_navigation_drive">Navigointi (ajo)</string>
-    <string name="cache_menu_navigation_drive_select_target">Kätkö vai pysäköintialue?</string>
     <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
     <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
     <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
