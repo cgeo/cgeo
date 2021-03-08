@@ -1047,7 +1047,6 @@
     <string name="cache_menu_challenge_checker">Szukaj Challenge-Checker</string>
     <string name="cache_menu_ignore">Ignoruj skrzynkę</string>
     <string name="cache_log_menu_decrypt">Odszyfruj/Szyfruj</string>
-    <string name="cache_log_menu_title">Wpis %1$s z %2$s</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
