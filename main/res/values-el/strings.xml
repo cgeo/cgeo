@@ -995,6 +995,7 @@
     <string name="cache_dialog_favorite_remove_message">Αφαιρεί την κρύπτη από τις αγαπημένες σας…</string>
     <string name="cache_menu_navigate">Πλοήγηση</string>
     <string name="cache_menu_navigation_drive">Πλοήγηση (Οδήγηση)</string>
+    <string name="cache_menu_navigation_drive_select_target">Επίλεξε στόχο</string>
     <string name="cache_menu_navigation_walk">Πλοήγηση (Περπάτημα)</string>
     <string name="cache_menu_navigation_transit">Πλοήγηση (Συγκοινωνία)</string>
     <string name="cache_menu_navigation_bike">Πλοήγηση (με ποδήλατο)</string>
@@ -1032,7 +1033,6 @@
     <string name="cache_menu_challenge_checker">Αναζήτηση στον έλεγχο δοκιμασίας</string>
     <string name="cache_menu_ignore">Παράβλεψη κρύπτης</string>
     <string name="cache_log_menu_decrypt">Αποκρυπτογράφιση/Κρυπτογράφιση</string>
-    <string name="cache_log_menu_title">Καταγραφή %1$s από %2$s</string>
     <string name="ignore_confirm_title">Προσοχή</string>
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
