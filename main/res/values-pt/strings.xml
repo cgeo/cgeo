@@ -1049,7 +1049,6 @@
     <string name="cache_menu_challenge_checker">Procurar verificador de Challenge</string>
     <string name="cache_menu_ignore">Ignorar a cache</string>
     <string name="cache_log_menu_decrypt">Decifrar/Cifrar</string>
-    <string name="cache_log_menu_title">Registo %1$s de %2$s</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
