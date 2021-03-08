@@ -934,7 +934,6 @@
     <string name="cache_menu_challenge_checker">Ieškoti iššukio tikrintuvo</string>
     <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
     <string name="cache_log_menu_decrypt">Iššifruoti/Užšifruoti</string>
-    <string name="cache_log_menu_title">Įrašas %1$s iš %2$s</string>
     <string name="ignore_confirm_title">Būk atsargus</string>
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
     <string name="cache_status">Būsena</string>
