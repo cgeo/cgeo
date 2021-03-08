@@ -1012,6 +1012,7 @@
     <string name="cache_dialog_favorite_remove_message">Verwijder cache van je favorieten…</string>
     <string name="cache_menu_navigate">Navigeer</string>
     <string name="cache_menu_navigation_drive">Navigeer (rijden)</string>
+    <string name="cache_menu_navigation_drive_select_target">Selecteer doel</string>
     <string name="cache_menu_navigation_walk">Navigeer (lopen)</string>
     <string name="cache_menu_navigation_transit">Navigatie (Onderweg)</string>
     <string name="cache_menu_navigation_bike">Navigeer (fiets)</string>
@@ -1049,7 +1050,6 @@
     <string name="cache_menu_challenge_checker">Zoek challenge checker</string>
     <string name="cache_menu_ignore">Negeer cache</string>
     <string name="cache_log_menu_decrypt">Decoderen/Versleutelen</string>
-    <string name="cache_log_menu_title">Log %1$s van %2$s</string>
     <string name="ignore_confirm_title">Wees voorzichtig</string>
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
