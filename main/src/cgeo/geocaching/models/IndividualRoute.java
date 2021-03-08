@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class ManualRoute extends Route implements Parcelable {
+public class IndividualRoute extends Route implements Parcelable {
 
     private enum ToggleItemState {
         ADDED,
@@ -28,20 +28,20 @@ public class ManualRoute extends Route implements Parcelable {
     private boolean loadingRoute = false;
     private SetTarget setTarget = null;
 
-    public ManualRoute(@Nullable final SetTarget setTarget) {
+    public IndividualRoute(@Nullable final SetTarget setTarget) {
         super(true);
         this.setTarget = setTarget;
     }
 
-    public interface UpdateManualRoute {
-        void updateManualRoute(Route route);
+    public interface UpdateIndividualRoute {
+        void updateIndividualRoute(Route route);
     }
 
     public interface SetTarget {
         void setTarget(@Nullable Geopoint geopoint, String geocode);
     }
 
-    public void toggleItem(final Context context, final RouteItem item, final UpdateManualRoute routeUpdater) {
+    public void toggleItem(final Context context, final RouteItem item, final UpdateIndividualRoute routeUpdater) {
         if (loadingRoute) {
             return;
         }
@@ -57,22 +57,22 @@ public class ManualRoute extends Route implements Parcelable {
         saveRoute();
     }
 
-    public void reloadRoute(final UpdateManualRoute updateRoute) {
+    public void reloadRoute(final UpdateIndividualRoute updateRoute) {
         clearRouteInternal(updateRoute, false);
         AndroidRxUtils.andThenOnUi(Schedulers.io(), this::loadRouteInternal, () -> updateRoute(updateRoute));
     }
 
-    public void updateRoute(final UpdateManualRoute routeUpdater) {
+    public void updateRoute(final UpdateIndividualRoute routeUpdater) {
         if (loadingRoute) {
             return;
         }
         if (null != routeUpdater) {
-            routeUpdater.updateManualRoute(this);
+            routeUpdater.updateIndividualRoute(this);
             triggerTargetUpdate(false);
         }
     }
 
-    public void clearRoute(final UpdateManualRoute routeUpdater) {
+    public void clearRoute(final UpdateIndividualRoute routeUpdater) {
         clearRouteInternal(routeUpdater, true);
     }
 
@@ -106,14 +106,14 @@ public class ManualRoute extends Route implements Parcelable {
             Schedulers.io().scheduleDirect(() -> DataStore.saveIndividualRoute(this));
         }
     }
-    private void clearRouteInternal(final UpdateManualRoute routeUpdater, final boolean deleteInDatabase) {
+    private void clearRouteInternal(final UpdateIndividualRoute routeUpdater, final boolean deleteInDatabase) {
         distance = 0.0f;
         if (deleteInDatabase) {
             Schedulers.io().scheduleDirect(DataStore::clearIndividualRoute);
         }
         segments = null;
         if (null != routeUpdater) {
-            routeUpdater.updateManualRoute(this);
+            routeUpdater.updateIndividualRoute(this);
         }
     }
 
@@ -161,21 +161,21 @@ public class ManualRoute extends Route implements Parcelable {
 
     // Parcelable methods
 
-    public static final Creator<ManualRoute> CREATOR = new Creator<ManualRoute>() {
+    public static final Creator<IndividualRoute> CREATOR = new Creator<IndividualRoute>() {
 
         @Override
-        public ManualRoute createFromParcel(final Parcel source) {
-            return new ManualRoute(source);
+        public IndividualRoute createFromParcel(final Parcel source) {
+            return new IndividualRoute(source);
         }
 
         @Override
-        public ManualRoute[] newArray(final int size) {
-            return new ManualRoute[size];
+        public IndividualRoute[] newArray(final int size) {
+            return new IndividualRoute[size];
         }
 
     };
 
-    protected ManualRoute(final Parcel parcel) {
+    protected IndividualRoute(final Parcel parcel) {
         super(parcel);
     }
 

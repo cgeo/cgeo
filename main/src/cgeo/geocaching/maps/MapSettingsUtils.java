@@ -3,7 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
-import cgeo.geocaching.models.ManualRoute;
+import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -39,7 +39,7 @@ public class MapSettingsUtils {
         // utility class
     }
 
-    public static void showSettingsPopup(final Activity activity, @Nullable final ManualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, @DrawableRes final int alternativeButtonResId) {
+    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, @DrawableRes final int alternativeButtonResId) {
         colorAccent = activity.getResources().getColor(R.color.colorAccent);
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();

@@ -7,7 +7,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.routing.Routing;
-import cgeo.geocaching.models.ManualRoute;
+import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
@@ -34,7 +34,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class GooglePositionAndHistory implements PositionAndHistory, Route.UpdateRoute, ManualRoute.UpdateManualRoute {
+public class GooglePositionAndHistory implements PositionAndHistory, Route.UpdateRoute, IndividualRoute.UpdateIndividualRoute {
 
     public static final float ZINDEX_DIRECTION_LINE = 5;
     public static final float ZINDEX_POSITION = 10;
@@ -160,7 +160,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
     }
 
     @Override
-    public void updateManualRoute(final Route route) {
+    public void updateIndividualRoute(final Route route) {
         this.route = route.getAllPointsLatLng();
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(route.getDistance());
