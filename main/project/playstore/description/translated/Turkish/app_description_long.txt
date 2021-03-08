@@ -1,7 +1,7 @@
-c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). Bir web tarayıcısı veya dışa aktarım gerektirmez - sadece kurun ve hemen başlayın.
+c:geo açık kaynak kodlu, çok çeşitli özelliklere sahip, çalışmaya her zaman hazır, geocaching.com için resmi olmayan bir programdır ve diğer geocaching platformlarına (Opencaching gibi) temel destek sunar. Bir web tarayıcısı veya dışa aktarım gerektirmez - sadece kurun ve hemen başlayın.
 
 Temel özellikler:
--Cache'leri cankı haritada görüntüleyin
+-Cache'leri canlı haritada görüntüleyin
 -Google Haritaları veya OpenStreetMaps kullanın
 -Değişik kriterlere göre cache'leri arayın
 -Bulmalarınızı çevrimiçi veya çevrimdışı kaydedin
@@ -12,10 +12,10 @@ Temel özellikler:
 - Trackablelar için tam destek
 -Çevrimdışı haritaları da içeren çevrimdışı özellikler
 
-Birçok ek özellikleriyle beraber c:geo basit ama güçlü bir Geocaching sağlayıcısıdır. All you need to get started is an existing account on geocaching.com or another geocaching platform (like Opencaching).
+Birçok ek özellikleriyle beraber c:geo basit ama güçlü bir Geocaching sağlayıcısıdır. Başlamak için tek ihtiyacınız olan şey geocaching.com veya başka geocaching platformunda (Opencaching gibi) bir hesabınızın olmasıdır.
 Canlı haritayı kullanarak ya da arama özelliklerinden birini kullanarak cache'leri bulun.
 
-Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
+Kutuya veya yol noktasına haritayla, dahili pusula özelliğiyle veya koordinatları harici uygulamalardan birine aktararak(örn. Radar, Google Haritalar, StreetView, Locus, Navigon, Sygic ve daha fazlası) gidiniz.
 
 Kutu bilgilerini doğrudan geocaching.com adresinden ve istediğiniz zaman kullanabilmeniz için GPX dosyasını içe aktarım yoluyla cihazınızda depolayın.
 Depolanmış kutularınızı farklı listelerde yönetebilir, ihtiyaçlarınıza göre sıralayabilir ve filtreleyebilirsiniz.
