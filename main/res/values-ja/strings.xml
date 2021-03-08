@@ -1039,7 +1039,6 @@
     <string name="cache_menu_challenge_checker">チャレンジチェッカーを検索</string>
     <string name="cache_menu_ignore">キャッシュを無視</string>
     <string name="cache_log_menu_decrypt">暗号化/復号化</string>
-    <string name="cache_log_menu_title">%2$s %1$sのログ</string>
     <string name="ignore_confirm_title">ご注意ください</string>
     <string name="ignore_confirm_message">キャッシュを無視にするとgeocaching.com からデータを読み込んでも表示されないことになります。Webサイト上から無視を解除しないとキャッシュを参照することができません</string>
     <string name="cache_status">状態</string>
