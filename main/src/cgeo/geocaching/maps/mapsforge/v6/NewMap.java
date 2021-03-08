@@ -47,7 +47,7 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.TrackLayer;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.ManualRoute;
+import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
@@ -176,7 +176,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
     private CheckBox myLocSwitch;
     private MapOptions mapOptions;
     private TargetView targetView;
-    private ManualRoute manualRoute = null;
+    private IndividualRoute individualRoute = null;
     private Route tracks = null;
 
     private static boolean followMyLocation = true;
@@ -231,10 +231,10 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         if (savedInstanceState != null) {
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
-            manualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
+            individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
-            manualRoute = null;
+            individualRoute = null;
             followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
@@ -255,7 +255,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         final TypedArray a = getTheme().obtainStyledAttributes(R.style.cgeo_gmap, new int[] {R.attr.homeAsUpIndicator});
         final int upResId = a.getResourceId(0, 0);
         a.recycle();
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, manualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId));
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -372,7 +372,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
-            this.individualRouteUtils.onPrepareOptionsMenu(menu, manualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
+            this.individualRouteUtils.onPrepareOptionsMenu(menu, individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -424,7 +424,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
             && !this.trackUtils.onOptionsItemSelected(id, tracks, this::setTracks, this::centerOnPosition)
-            && !this.individualRouteUtils.onOptionsItemSelected(id, manualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
+            && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
             && !MapDownloaderUtils.onOptionsItemSelected(this, id)) {
             final String language = MapProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT) {
@@ -458,10 +458,10 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
 
     private void routingModeChanged(final RoutingMode newValue) {
         Settings.setRoutingMode(newValue);
-        if ((null != manualRoute && manualRoute.getNumSegments() > 0) || null != tracks) {
+        if ((null != individualRoute && individualRoute.getNumSegments() > 0) || null != tracks) {
             Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
         }
-        manualRoute.reloadRoute(routeLayer);
+        individualRoute.reloadRoute(routeLayer);
         if (null != tracks) {
             try {
                 AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
@@ -487,7 +487,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
     }
 
     private void clearIndividualRoute() {
-        manualRoute.clearRoute(routeLayer);
+        individualRoute.clearRoute(routeLayer);
         distanceView.showRouteDistance();
         ActivityMixin.invalidateOptionsMenu(this);
         showToast(res.getString(R.string.map_individual_route_cleared));
@@ -675,11 +675,11 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
     }
 
     private void resumeRoute(final boolean force) {
-        if (null == manualRoute || force) {
-            manualRoute = new ManualRoute(this::setTarget);
-            manualRoute.reloadRoute(routeLayer);
+        if (null == individualRoute || force) {
+            individualRoute = new IndividualRoute(this::setTarget);
+            individualRoute.reloadRoute(routeLayer);
         } else {
-            manualRoute.updateRoute(routeLayer);
+            individualRoute.updateRoute(routeLayer);
         }
     }
 
@@ -911,8 +911,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         if (proximityNotification != null) {
             outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
         }
-        if (manualRoute != null) {
-            outState.putParcelable(BUNDLE_ROUTE, manualRoute);
+        if (individualRoute != null) {
+            outState.putParcelable(BUNDLE_ROUTE, individualRoute);
         }
     }
 
@@ -1460,10 +1460,10 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         if (item == null || StringUtils.isEmpty(item.getGeocode())) {
             return;
         }
-        if (manualRoute == null) {
-            manualRoute = new ManualRoute(this::setTarget);
+        if (individualRoute == null) {
+            individualRoute = new IndividualRoute(this::setTarget);
         }
-        manualRoute.toggleItem(this, new RouteItem(item), routeLayer);
+        individualRoute.toggleItem(this, new RouteItem(item), routeLayer);
         distanceView.showRouteDistance();
         ActivityMixin.invalidateOptionsMenu(this);
     }
@@ -1635,7 +1635,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
 
     private void reloadIndividualRoute() {
         if (null != routeLayer) {
-            manualRoute.reloadRoute(routeLayer);
+            individualRoute.reloadRoute(routeLayer);
         } else {
             // try again in 0.25 second
             new Handler(Looper.getMainLooper()).postDelayed(this::reloadIndividualRoute, 250);

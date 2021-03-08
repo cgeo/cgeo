@@ -6,7 +6,7 @@ import cgeo.geocaching.export.IndividualRouteExport;
 import cgeo.geocaching.files.GPXIndividualRouteImporter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
-import cgeo.geocaching.models.ManualRoute;
+import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
@@ -36,7 +36,7 @@ public class IndividualRouteUtils {
      *
      * @param menu menu to be configured
      */
-    public void onPrepareOptionsMenu(final Menu menu, final ManualRoute route, final boolean targetIsSet) {
+    public void onPrepareOptionsMenu(final Menu menu, final IndividualRoute route, final boolean targetIsSet) {
         final boolean isVisible = route != null && route.getNumSegments() > 0;
         menu.findItem(R.id.menu_sort_individual_route).setVisible(isVisible);
         menu.findItem(R.id.menu_center_on_route).setVisible(isVisible);
@@ -53,7 +53,7 @@ public class IndividualRouteUtils {
      * @param id       menu entry id
      * @return true, if selected menu entry is individual route related and consumed / false else
      */
-    public boolean onOptionsItemSelected(final int id, final ManualRoute route, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute, final Route.CenterOnPosition centerOnPosition, final Action2<Geopoint, String> setTarget) {
+    public boolean onOptionsItemSelected(final int id, final IndividualRoute route, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute, final Route.CenterOnPosition centerOnPosition, final Action2<Geopoint, String> setTarget) {
         if (id == R.id.menu_load_individual_route) {
             if (null == route || route.getNumSegments() == 0) {
                 startIndividualRouteFileSelector(reloadIndividualRoute);
@@ -108,7 +108,7 @@ public class IndividualRouteUtils {
         return false;
     }
 
-    public static void setAutotargetIndividualRoute(final Activity activity, final ManualRoute route, final boolean newValue) {
+    public static void setAutotargetIndividualRoute(final Activity activity, final IndividualRoute route, final boolean newValue) {
         Settings.setAutotargetIndividualRoute(newValue);
         route.triggerTargetUpdate(!Settings.isAutotargetIndividualRoute());
         ActivityMixin.invalidateOptionsMenu(activity);
