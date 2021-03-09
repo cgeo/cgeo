@@ -57,7 +57,8 @@
     <string name="wpnew_final">Final</string>
     <string name="wpnew_stage">Adım</string>
     <string name="wpnew_pkg">Park alanı</string>
-    <string name="wpnew_waypoint">İşaretçi</string>
+    <string name="wpnew_trailhead">Via</string>
+    <string name="wpnew_waypoint">Mevcut konum</string>
     <string name="wpnew_original">Orijinal</string>
     <!-- logs -->
     <string name="log_found">Buldum</string>
@@ -379,7 +380,7 @@
     <string name="caches_filter_multi_listing">Farklı durumdaki çoklu listeleme</string>
     <string name="caches_filter_own_waypoint">Kullanıcı tanımlı ara noktalar ile</string>
     <string name="caches_filter_missing_gcvote">Bulunan Geocache\'ler için oy verilmedi</string>
-    <string name="caches_filter_lists">Bir listeye eklendi</string>
+    <string name="caches_filter_lists">Bir listeye eklenmişler</string>
     <string name="caches_filter_empty">(boş)</string>
     <string name="caches_removing_from_history">Geçmişten kaldırılıyor…</string>
     <string name="caches_clear_offlinelogs">Çevrimdışı kayıtları temizle</string>
@@ -436,7 +437,7 @@
     <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
     <string name="about_contributors_carnerodetails">C:geo\'nun kurucusu</string>
     <string name="about_contributors_recent">Güncel katkıda bulunanlar</string>
-    <string name="about_contributors_specialthanks">Katkılarından dolayı özel teşekkürler</string>
+    <string name="about_contributors_specialthanks">Katkılarından dolayı teşekkürler</string>
     <string name="about_contributors_specialthanksdetails">· <a href="https://crowdin.net/project/cgeo">Crowdin.net</a> üzerinden çevirilere katkıda bulunanlara!\n· tüm sorunları çözenlere\n· ve tüm diğer destekçilerimize.\n</string>
     <string name="about_contributors_other">Diğer katkıda bulunanlar</string>
     <string name="about_components">Bileşenler</string>
@@ -491,7 +492,7 @@
     <string name="settings_activate_gc">Etkinleştir</string>
     <string name="settings_activate_ec">Etkinleştir</string>
     <string name="settings_gc_legal_note">Geocaching.com hizmetini kullanmak için Groundspeak kullanım şartlarını kabul edin.</string>
-    <string name="settings_info_facebook_login_title">Facebook veya Google kullanarak giriş yapın</string>
+    <string name="settings_info_facebook_login_title">Facebook/Google ile giriş yapın</string>
     <string name="settings_info_facebook_login">Facebook veya Google hesabınızla geocaching.com\'a c:geo girişi yapamazsınız. Ancak basit bir çözüm var…</string>
     <string name="settings_authorize">c:geo\'yu yetkilendir</string>
     <string name="settings_reauthorize">Yetkilendirmeyi güncelle veya kaldır</string>
@@ -567,17 +568,18 @@
     <string name="init_summary_select_language">Uygulama dilini seçiniz (yeniden başlatma gerekli)\n</string>
     <string name="init_use_default_language">Varsayılan dili kullan</string>
     <string name="init_category_exclude">Geocache\'leri hariç tut</string>
-    <string name="init_exclude">Sahibi Olduklarımı ve Bulduklarımı Dahil Etme</string>
+    <string name="init_exclude">Cache\'lerimi ve Bulduklarımı Dahil Etme</string>
     <string name="init_summary_exclude">Sahibi olduklarımı ve bulduklarımı dahil etme</string>
     <string name="init_showwaypoints">Yol Noktalarını Göster</string>
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
     <string name="init_zoomincludingwaypoints">Yakınlaştırmada yol noktalarını da göster</string>
     <string name="init_zoomincludingwaypoints_description">Eğer tek bir Geocache haritalanıyorsa: harita yakınlaştırması tüm yol noktalarını da içine almalı mıdır?</string>
     <string name="init_brouterThreshold">Rotayı hesapla</string>
+    <string name="init_brouterThreshold_description">BRouter yardımcı uygulaması (eğer yüklendiyse) maksimum mesafeyi hesaplayacak.</string>
     <string name="init_brouterShowBothDistances">Düz mesafeyi göster</string>
     <string name="brouter_recalculating">Rota arka planda yeniden hesaplanıyor…</string>
     <string name="init_summary_brouterShowBothDistances">Routing aktif ise: hesaplanan rota mesafesine ek olarak düz mesafeyi göster.</string>
-    <string name="init_bigSmileysOnMap">Kayıt girilmiş Geocache\'ler için büyük simgeler</string>
+    <string name="init_bigSmileysOnMap">Geocache\'ler için büyük simgeler</string>
     <string name="init_summary_bigSmileysOnMap">Eğer etkinleştirilirse, haritada kayıt girilmiş cacheler için kutu tipi ikon yerine büyük ifadeler gösterilecek (yeniden başlatma gerekir).</string>
     <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
     <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
@@ -690,6 +692,10 @@
     <string name="init_circlecolor_summary">Daire çizgisi için renk ve opaklığı seçin. Daireler, bir Geocache veya fiziksel yol noktası etrafındaki minimum yarıçap için görsel bir temsil olarak kullanılır; burada başka hiçbir Geocache veya fiziksel yol noktası oluşturulamaz. (Geocaching.com için geçerlidir)</string>
     <string name="init_circlefillcolor">Daire dolgu rengi</string>
     <string name="init_circlefillcolor_summary">Doldurulacak dairelerin rengini ve opaklığını seçin</string>
+    <string name="init_accuracycirclecolor">Sinyal çemberi çizgisi rengi</string>
+    <string name="init_accuracycirclecolor_summary">Sinyal doğruluk çemberi çizgisi için renk ve opaklığı seçin. Doğruluk çemberi, konum sinyalinin doğruluğunun görsel gösterimidir.</string>
+    <string name="init_accuracycirclefillcolor">Sinyal çemberi dolgusu rengi</string>
+    <string name="init_accuracycirclefillcolor_summary">Sinyal doğruluk çemberinin doldurulacağı rengi ve opaklığını seçin</string>
     <string name="init_include_found_status">Bulunmuşlar dahil</string>
     <string name="init_trackautovisit">TB\'leri Ziyaret Ettir</string>
     <string name="init_summary_trackautovisit">Trackable\'ları varsayılan olarak \'\'Ziyaret Edildi\'\' şeklinde ayarla</string>
@@ -757,7 +763,7 @@
     <string name="feature_online_logging">Çevrimiçi kayıt</string>
     <string name="feature_log_images">Görselleri kaydınıza ekleyin</string>
     <string name="feature_watch_list">Takip listesi</string>
-    <string name="feature_own_coordinates">Değiştirilmiş koordinatların depolanması</string>
+    <string name="feature_own_coordinates">Değiştirilen koordinatların saklanması</string>
     <string name="feature_search_keyword">Anahtar kelime ile ara</string>
     <string name="feature_search_live_map">Canlı harita</string>
     <string name="feature_search_center">Konuma göre ara</string>
@@ -826,8 +832,10 @@
     <!-- Persistable Folders -->
     <string name="persistablefolder_usertype_userdefined">Kullanıcı tanımlı</string>
     <string name="persistablefolder_usertype_default">Varsayılan</string>
+    <string name="persistablefolder_legacy">Geleneksel</string>
     <string name="persistablefolder_pickfolder">Klasör seç</string>
     <string name="persistablefolder_usedefault">Varsayılanı kullan</string>
+    <string name="persistablefolder_base">Temel</string>
     <string name="persistablefolder_offline_maps">Çevrimdışı Haritalar</string>
     <string name="persistablefolder_offline_maps_themes">Harita Temaları</string>
     <string name="persistablefolder_gpx">GPX</string>
@@ -837,6 +845,7 @@
     <string name="persistablefolder_spoilerimages">İpucu Görselleri</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s tamamlandı</string>
+    <string name="folder_process_status_currentfile">%1$s işlemi</string>
     <!-- FolderUtils: synchronize -->
     <string name="folder_synchronize_to_internal_progressbar_title">%1$s içindekileri dahili depolamaya senkronize et</string>
     <!-- FolderUtils: copy/move -->
@@ -1041,6 +1050,7 @@
     <string name="cache_menu_challenge_checker">Challenge Denetleyicisi ara</string>
     <string name="cache_menu_ignore">Geocache\'i yoksay</string>
     <string name="cache_log_menu_decrypt">Şifresini Çöz/Şifrele</string>
+    <string name="cache_log_menu_popup_title">%s\'un kaydı</string>
     <string name="ignore_confirm_title">Dikkatli ol</string>
     <string name="ignore_confirm_message">Bir Geocache yok sayılırsa, geocaching.com\'tan veri yüklerken bir daha asla görüntülenmeyecektir. Sadece web sitesinde yok sayılmayı iptal ederek bu Geocache\'i tekrar görebilirsiniz.</string>
     <string name="cache_status">Durum</string>
@@ -1506,8 +1516,8 @@
     <string name="attribute_fuel_no">Yakıt yakınında değil</string>
     <string name="attribute_food_yes">Yiyecek yakınında</string>
     <string name="attribute_food_no">Yiyecek yakınında değil</string>
-    <string name="attribute_oc_only_yes">Sadece Opencaching üzerinden kayıtedilebilir</string>
-    <string name="attribute_oc_only_no">Loglanamaz, sadece Opencaching üzerinden loglanabilir</string>
+    <string name="attribute_oc_only_yes">Sadece Opencaching üzerinden kaydedilebilir</string>
+    <string name="attribute_oc_only_no">Sadece Opencaching üzerinden kaydedilebilir değil</string>
     <string name="attribute_link_only_yes">Yalnızca başka bir Geocaching portalına köprü oluştur</string>
     <string name="attribute_link_only_no">Sadece başka Geocaching portalına köprü değil</string>
     <string name="attribute_letterbox_yes">Letterbox (mühür gerekli)</string>
@@ -1538,7 +1548,7 @@
     <string name="attribute_overnight_no">Konaklama gerekli değil</string>
     <string name="attribute_specific_times_yes">Sadece belirli zamanlarda ulaşılabilir</string>
     <string name="attribute_specific_times_no">Sadece belirli zamanlarda ulaşılabilir değil</string>
-    <string name="attribute_day_yes">sadece gündüz</string>
+    <string name="attribute_day_yes">Sadece gündüz</string>
     <string name="attribute_day_no">Sadece gündüz değil</string>
     <string name="attribute_tide_yes">Gelgit</string>
     <string name="attribute_tide_no">Gelgit yok</string>
@@ -1622,6 +1632,8 @@
     <string name="attribute_trackables_no">TB barındıramaz</string>
     <string name="attribute_historic_yes">Terkedilmiş yapı/harabe</string>
     <string name="attribute_historic_no">Terkedilmiş yapı/harabe yok</string>
+    <string name="attribute_blind_people_yes">Görme engelli için uygun değil</string>
+    <string name="attribute_blind_people_no">Görme engelli için uygun</string>
     <!-- next things -->
     <string name="quote">Geocaching\'i kolaylaştırmak ve kullanıcıların rahatlığı için.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1885,7 +1897,7 @@
     <string name="mapserver_freizeitkarte_info">Detaylı haritalar, \"Freizeitkarte\" harita temalarından birini gerektirir.</string>
     <string name="mapserver_freizeitkarte_themes_info">Detaylı harita teması, \"Freizeitkarte\" haritaları için yapılmıştır</string>
     <!-- history track -->
-    <string name="map_clear_trailhistory">Geçmiş İz\'i sil</string>
+    <string name="map_clear_trailhistory">İz geçmişini sil</string>
     <string name="map_trailhistory_cleared">Geçmiş İz\'i silindi</string>
     <string name="map_trail_show">Geçmiş İz\'i göster</string>
     <string name="map_trail_hide">İz geçmişini sakla</string>
@@ -1933,6 +1945,7 @@
     <string name="wizard_not_now">Henüz değil</string>
     <string name="wizard_skip_wizard_warning">c:geo, yapılandırma tamamlanana kadar beklendiği gibi çalışmayabilir. Hangi ayarın yapılandırılmamış olduğuna bağlı olarak, c:geo çevrim dışı haritalar, geocache\'ler, kayıt dosyaları vb. verilerinizi okuyamayabilir/depolayamayabilir.\n\nKurulumu bitirmeye hazır olduğunuzda, ana menüdeki \"Yapılandırma sihirbazı\"na girebilir veya c:geo\'yu yeniden başlatabilirsiniz.</string>
     <!-- Map Theme helper -->
+    <string name="mapthemes_foldersync_finished_toast">%1$s klasörü senkronizasyonu %2$s sonrasında tamamlandı, %3$d/%4$s kadarı senkronizasyon gerektiriyor</string>
     <!-- default actions in dialogs -->
     <string name="previous">Önceki</string>
     <string name="skip">Geç</string>
