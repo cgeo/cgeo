@@ -52,6 +52,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -75,14 +76,14 @@ public class BackupUtils {
 
     public void selectBackupDirIntent (final ContentStorageActivityHelper contentStorageHelper) {
         Toast.makeText(activityContext, R.string.init_backup_restore_different_backup_explanation, Toast.LENGTH_LONG).show();
-        contentStorageHelper.selectFolder(PersistableFolder.BACKUP.getUri(), this::restore);
+        contentStorageHelper.selectFolder(PersistableFolder.BACKUP.getUri(), f -> restore(f, contentStorageHelper));
     }
 
     /**
      * Show restore dialog
      */
     @SuppressLint("SetTextI18n")
-    public void restore(final Folder backupDir) {
+    public void restore(final Folder backupDir, final ContentStorageActivityHelper contentStorageActivityHelper) {
 
         if (backupDir == null) {
             return;
@@ -120,7 +121,7 @@ public class BackupUtils {
                 .setView(content)
                 .setPositiveButton(activityContext.getString(android.R.string.yes), (alertDialog, id) -> {
                     alertDialog.dismiss();
-                    restoreInternal(backupDir, databaseCheckbox.isChecked(), settingsCheckbox.isChecked());
+                    restoreInternal(activityContext, contentStorageActivityHelper, backupDir, databaseCheckbox.isChecked(), settingsCheckbox.isChecked());
                 })
                 .setNegativeButton(activityContext.getString(android.R.string.no), (alertDialog, id) -> {
                     alertDialog.cancel();
@@ -153,24 +154,35 @@ public class BackupUtils {
         }
     }
 
-    public void restoreInternal(final Folder backupDir, final boolean database, final boolean settings) {
+    public void restoreInternal(final Activity activityContext, final ContentStorageActivityHelper contentStorageActivityHelper, final Folder backupDir, final boolean database, final boolean settings) {
         final Consumer<String> consumer = resultString -> {
+
+            // build a list of folders currently set
+            final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues = new ArrayList<>();
+            for (PersistableFolder folder : PersistableFolder.values()) {
+                final String value = Settings.getPersistableFolderRaw(folder);
+                if (value != null) {
+                    currentFolderValues.add(new ImmutableTriple<>(folder, activityContext.getString(folder.getPrefKeyId()), value));
+                }
+            }
 
             boolean restartNeeded = false;
             if (settings) {
                 if (!resultString.isEmpty()) {
                     resultString += "\n\n";
                 }
-                restartNeeded = restoreSettingsInternal(backupDir);
+                restartNeeded = restoreSettingsInternal(backupDir, currentFolderValues);
 
                 if (!restartNeeded) {
                     resultString += activityContext.getString(R.string.init_restore_settings_failed);
                 }
             }
-            if (restartNeeded && !(activityContext instanceof InstallWizardActivity)) {
-                Dialogs.confirmYesNo(activityContext, R.string.init_restore_restored, resultString + activityContext.getString(R.string.settings_restart), (dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
+
+            // check if folder settings changed and request grants, if necessary
+            if (currentFolderValues.size() > 0) {
+                regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, restartNeeded, resultString);
             } else {
-                Dialogs.message(activityContext, R.string.init_restore_restored, resultString);
+                finishRestoreInternal(activityContext, restartNeeded, resultString);
             }
         };
 
@@ -178,6 +190,36 @@ public class BackupUtils {
             restoreDatabaseInternal(backupDir, consumer);
         } else {
             consumer.accept("");
+        }
+    }
+
+    private void regrantAccess(final Activity activityContext, final ContentStorageActivityHelper contentStorageActivityHelper, final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues, final boolean restartNeeded, final String resultString) {
+        if (currentFolderValues.size() > 0) {
+            final ImmutableTriple<PersistableFolder, String, String> current = currentFolderValues.get(0);
+            final Folder folderToBeRestored = Folder.fromConfig(current.right);
+
+            Dialogs.confirm(activityContext,
+                activityContext.getString(R.string.init_backup_settings_restore),
+                String.format(activityContext.getString(R.string.settings_folder_changed), activityContext.getString(currentFolderValues.get(0).left.getNameKeyId()), folderToBeRestored.toUserDisplayableString(), activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok)),
+                activityContext.getString(android.R.string.ok),
+                (d, v) -> {
+                    contentStorageActivityHelper.restorePersistableFolder(current.left, current.left.getUriForFolder(folderToBeRestored), v2 -> {
+                        currentFolderValues.remove(0);
+                        regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, restartNeeded, resultString);
+                    });
+                },
+                d2 -> finishRestoreInternal(activityContext, restartNeeded, resultString));
+        } else {
+            finishRestoreInternal(activityContext, restartNeeded, resultString);
+        }
+    }
+
+    private void finishRestoreInternal(final Activity activityContext, final boolean restartNeeded, final String resultString) {
+        // finish restore settings
+        if (restartNeeded && !(activityContext instanceof InstallWizardActivity)) {
+            Dialogs.confirmYesNo(activityContext, R.string.init_restore_restored, resultString + activityContext.getString(R.string.settings_restart), (dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
+        } else {
+            Dialogs.message(activityContext, R.string.init_restore_restored, resultString);
         }
     }
 
@@ -241,7 +283,7 @@ public class BackupUtils {
      */
 
     // returns true on success
-    private boolean restoreSettingsInternal(final Folder backupDir) {
+    private boolean restoreSettingsInternal(final Folder backupDir, final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues) {
         try {
             // open file
             final InputStream file = ContentStorage.get().openForRead(getSettingsFile(backupDir).uri);
@@ -292,7 +334,24 @@ public class BackupUtils {
                         if (parser.getName().equals(TAG_MAP)) {
                             inTag = false;
                         } else if (SettingsUtils.getType(parser.getName()) == type) {
-                            SettingsUtils.putValue(editor, type, key, value);
+                            boolean handled = false;
+                            if (type == TYPE_STRING) {
+                                // check if persistable folder settings differ
+                                for (int i = 0; i < currentFolderValues.size(); i++) {
+                                    final ImmutableTriple<PersistableFolder, String, String> current = currentFolderValues.get(i);
+                                    if (current.middle.equals(key)) {
+                                        if (!current.right.equals(value)) {
+                                            currentFolderValues.add(new ImmutableTriple<>(current.left, current.middle, value));
+                                        }
+                                        currentFolderValues.remove(i);
+                                        handled = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!handled) {
+                                SettingsUtils.putValue(editor, type, key, value);
+                            }
                             type = TYPE_UNKNOWN;
                         } else {
                             throw new XmlPullParserException("invalid structure: unexpected closing tag " + parser.getName());

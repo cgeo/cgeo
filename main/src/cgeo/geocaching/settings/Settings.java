@@ -1592,6 +1592,15 @@ public class Settings {
     }
 
     /**
+     * gets current setting for a persistable folder or null if unset
+     * should be called by BackupUtils.restoreInternal only
+     */
+    @Nullable
+    public static String getPersistableFolderRaw(@NonNull final PersistableFolder folder) {
+        return getString(folder.getPrefKeyId(), null);
+    }
+
+    /**
      * sets Uri for persistable uris. Can be set to null
      * should be called by PersistableUri class only
      */

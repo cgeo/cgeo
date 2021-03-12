@@ -117,6 +117,10 @@ public enum PersistableFolder {
         return ContentStorage.get().getUriForFolder(getFolder());
     }
 
+    public Uri getUriForFolder(final Folder folder) {
+        return ContentStorage.get().getUriForFolder(folder);
+    }
+
     public Folder getDefaultFolder() {
         return this.defaultFolder;
     }
