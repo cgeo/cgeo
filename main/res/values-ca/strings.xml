@@ -241,6 +241,7 @@
     <string name="warn_search_help_tb">Introduïu el codi d\'un traçable. Per exemple, \"LPAYKV\".</string>
     <string name="warn_log_text_fill">Introduïu un text per al vostre registre.</string>
     <string name="warn_load_images">El c:geo no ha pogut carregar les imatges.</string>
+    <string name="warn_invalid_mapfile">El fitxer de mapa seleccionat no és un fitxer de mapa mapsforge vàlid o utilitza una versió no compatible.\n(C:geo  actualment  admet de v3 a v5)\n\nEls mapes fora de línia no estan disponibles.</string>
     <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
     <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
     <string name="warn_invalid_character">El caràcter ha de ser una LLETRA o un DÍGIT</string>
@@ -873,6 +874,8 @@
     <string name="cache_log_images_title">Imatges del registre</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Nota personal</string>
+    <string name="cache_menu_preventWaypointsFromNote">Eviteu punts de ruta de les notes</string>
+    <string name="cache_menu_allowWaypointExtraction">Permetre punts de ruta de la nota</string>
     <string name="cache_personal_note_edit">Edita</string>
     <string name="cache_personal_note_storewaypoints">Afegeix / actualitza punts de ruta</string>
     <string name="cache_personal_note_removewaypoints">Elimina els punts de ruta</string>
