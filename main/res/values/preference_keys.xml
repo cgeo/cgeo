@@ -171,6 +171,7 @@
     <string translatable="false" name="pref_includefoundstatus">includefoundstatus</string>
     <string translatable="false" name="pref_cleartrailafterexportstatus">cleartrailafterexportstatus</string>
     <string translatable="false" name="pref_renderthemefile">renderthemefile</string>
+    <string translatable="false" name="pref_renderthemefolder_synctolocal">renderthemefolder_synctolocal</string>
     <string translatable="false" name="pref_logImageScale">logImageScale</string>
     <string translatable="false" name="pref_ocde_tokensecret">ocde_tokensecret</string>
     <string translatable="false" name="pref_ocde_tokenpublic">ocde_tokenpublic</string>

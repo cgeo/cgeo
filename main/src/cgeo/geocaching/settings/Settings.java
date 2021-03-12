@@ -1285,6 +1285,16 @@ public class Settings {
         putString(R.string.pref_renderthemefile, customRenderThemeFile);
     }
 
+    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
+    public static boolean getSyncMapRenderThemeFolder() {
+        return getBoolean(R.string.pref_renderthemefolder_synctolocal, false);
+    }
+
+    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
+    public static void setSyncMapRenderThemeFolder(final boolean syncMapRenderThemeFolder) {
+        putBoolean(R.string.pref_renderthemefolder_synctolocal, syncMapRenderThemeFolder);
+    }
+
     /**
      * @return true if plain text log wanted
      */

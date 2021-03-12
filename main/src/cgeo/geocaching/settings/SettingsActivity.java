@@ -387,7 +387,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 contentStorageHelper.selectPersistableFolder(folder, f -> {
                     p.setSummary(f.toUserDisplayableValue());
                     if (PersistableFolder.OFFLINE_MAP_THEMES.equals(f)) {
-                        RenderThemeHelper.resynchronizeMapThemeFolder();
+                        RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
                     }
                 });
                 return false;
@@ -540,6 +540,11 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             setResult(RESTART_NEEDED);
             return true;
         });
+
+        getPreference(R.string.pref_renderthemefolder_synctolocal).setOnPreferenceChangeListener((preference, newValue) ->
+            RenderThemeHelper.changeSyncSetting(this, (newValue instanceof Boolean) ? ((Boolean) newValue).booleanValue() : false, changedValue -> {
+                ((CheckBoxPreference) getPreference(R.string.pref_renderthemefolder_synctolocal)).setChecked(changedValue);
+        }));
     }
 
     private void initGeoDirPreferences() {

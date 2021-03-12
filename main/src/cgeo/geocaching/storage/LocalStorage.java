@@ -186,7 +186,7 @@ public final class LocalStorage {
     }
 
     @NonNull
-    public static File getMapThemeInternalDir() {
+    public static File getMapThemeInternalSyncDir() {
         final File dir =  new File(getInternalCgeoDirectory(), MAP_THEME_INTERNAL_DIR_NAME);
         dir.mkdirs();
         return dir;

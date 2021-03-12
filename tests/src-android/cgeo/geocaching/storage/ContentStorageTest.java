@@ -240,8 +240,8 @@ public class ContentStorageTest extends CGeoTestCase {
         //check that result status of different sources match also when copy was aborted
         assertThat(folderProcessStatuses.get(abortAfter).filesProcessed).isEqualTo(result.filesModified);
         assertThat(folderProcessStatuses.get(abortAfter).dirsProcessed).isEqualTo(result.dirsModified);
-        final ImmutablePair<Integer, Integer> targetInfo = FolderUtils.get().getFolderInfo(targetFolder2);
-        assertThat(targetInfo).isEqualTo(new ImmutablePair<>(result.filesModified, result.dirsModified));
+
+        assertFileDirCount(targetFolder2, result.filesModified, result.dirsModified);
      }
 
     public void testFileCopyAllSameDir() {
@@ -392,6 +392,9 @@ public class ContentStorageTest extends CGeoTestCase {
         final List<ImmutablePair<ContentStorage.FileInformation, String>> sourceFiles = FolderUtils.get().getAllFiles(sourceFolder);
         Collections.sort(sourceFiles, (e1, e2) -> e1.right.compareTo(e2.right));
 
+        //create an additional file in source which should NOT be synced due to filter
+        assertThat(ContentStorage.get().create(sourceFolder, "dontsync.txt")).isNotNull();
+
         //create some random files in target folder (which should be removed by sync)
         new File(targetFolderFile, "eee.txt").createNewFile();
         new File(targetFolderFile, "ccc").mkdirs();
@@ -409,7 +412,7 @@ public class ContentStorageTest extends CGeoTestCase {
         p.store(new FileOutputStream(new File(fileSimDir, folderSyncInfoFilename)), "test");
         writeToUri(Uri.fromFile(new File(fileSimDir, "ccc-ddd.txt")), fileSimContent);
 
-        FolderUtils.get().synchronizeFolder(sourceFolder, targetFolderFile, null, null);
+        FolderUtils.get().synchronizeFolder(sourceFolder, targetFolderFile, fi -> !fi.name.equals("dontsync.txt"), null, null);
 
         //check if source and target files are identical
         final List<ImmutablePair<ContentStorage.FileInformation, String>> targetFiles = FolderUtils.get().getAllFiles(targetFolder);
@@ -752,7 +755,9 @@ public class ContentStorageTest extends CGeoTestCase {
     }
 
     private void assertFileDirCount(final Folder folder, final int fileCount, final int dirCount) {
-        assertThat(FolderUtils.get().getFolderInfo(folder)).as("File counts of Folder " + folder).isEqualTo(new ImmutablePair<>(fileCount, dirCount));
+        final FolderUtils.FolderInfo folderInfo = FolderUtils.get().getFolderInfo(folder);
+        assertThat(folderInfo.fileCount).as("File counts of Folder " + folder).isEqualTo(fileCount);
+        assertThat(folderInfo.dirCount).as("Dir counts of Folder " + folder).isEqualTo(dirCount);
     }
 
     private boolean hasValidDocumentTestFolder() {
