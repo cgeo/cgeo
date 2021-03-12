@@ -392,6 +392,7 @@
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
     <string name="caches_set_listmarker">Ορίστε τον δείκτη της λίστας</string>
     <string name="select_icon">Επιλέξτε εικονίδιο</string>
+    <string name="onetime_missing_unicode_info">Η έκδοση Android σας δεν υποστηρίζει την αυτόματη ανίχνευση εικονιδίων που υποστηρίζονται - ορισμένοι χαρακτήρες μπορεί να λείπουν</string>
     <!-- caches lists -->
     <string name="menu_lists">Διαχείριση λιστών</string>
     <string name="list_menu_create">Δημιουργία νέας λίστας</string>
@@ -574,6 +575,7 @@
     <string name="init_zoomincludingwaypoints">Το επίπεδο εστίασης περιλαμβάνει τα waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Εάν προβάλλεται μια κρύπτη: Να γίνει ρύθμιση του επιπέδου μεγέθυνσης ώστε να περιλαμβάνονται όλα τα πρόσθετα σημεία;</string>
     <string name="init_brouterThreshold">Υπολογισμός διαδρομής</string>
+    <string name="init_brouterThreshold_description">Η μέγιστη απόσταση που η βοηθητική εφαρμογή BRouter (αν είναι εγκατεστημένη) θα υπολογίσει σε μια διαδρομή.</string>
     <string name="init_brouterShowBothDistances">Εμφάνιση ευθείας απόστασης</string>
     <string name="brouter_recalculating">Επανυπολογισμός διαδρομής στο παρασκήνιο…</string>
     <string name="init_summary_brouterShowBothDistances">Αν η δρομολόγηση είναι ενεργή: Εμφάνιση ευθείας απόστασης επιπλέον του υπολογισμένου μήκους διαδρομής.</string>
@@ -598,6 +600,7 @@
     <string name="init_listdisplay">Πρόσθετες λίστες</string>
     <string name="init_summary_listdisplay">Εμφάνιση ιδιότητας μέλους των κρυπτών και σε άλλες λίστες, σε μια λίστα κρυπτών</string>
     <string name="init_livelist">Εμφάνιση κατεύθυνσης</string>
+    <string name="init_summary_livelist">Εμφάνιση βέλους με κατεύθυνση πυξίδας για κρύπτες σε μια λίστα</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Δημιουργία αντιγράφου ασφαλείας</string>
     <string name="init_backup_summary">Παρακαλώ λάβετε υπ\' όψιν σας ότι το χαρακτηριστικό αυτό μπορεί να δημιουργήσει αντίγραφα ασφαλείας των κρυπτών, των ενδιάμεσων σημείων &amp; των ρυθμίσεων, αλλά όχι των φωτογραφιών των κρυπτών. \nΓια να μπορέσετε να επαναφέρετε τα δεδομένα σας ακόμα και εάν χάσετε το τηλέφωνο σας, το αρχεία του αντιγράφου ασφαλείας πρέπει να είναι αποθηκευμένα σε μια ανεξάρτητη τοποθεσία.</string>
@@ -829,6 +832,16 @@
     <!-- Persistable Folders -->
     <string name="persistablefolder_usertype_userdefined">Ορισμένο από τον Χρήστη</string>
     <string name="persistablefolder_usertype_default">Προεπιλογή</string>
+    <string name="persistablefolder_legacy">Παλαιού τύπου</string>
+    <string name="persistablefolder_pickfolder">Επιλέξτε φάκελο</string>
+    <string name="persistablefolder_usedefault">Χρήση προεπιλογής</string>
+    <string name="persistablefolder_base">Βάση</string>
+    <string name="persistablefolder_offline_maps">Χάρτες χωρίς σύνδεση</string>
+    <string name="persistablefolder_offline_maps_themes">Θέματα Χάρτη</string>
+    <string name="persistablefolder_gpx">GPX</string>
+    <string name="persistablefolder_backup">Αντίγραφα ασφαλείας</string>
+    <string name="persistablefolder_logfiles">Αρχεία καταγραφής</string>
+    <string name="persistablefolder_fieldnotes">Σημειώσεις πεδίου</string>
     <string name="persistablefolder_spoilerimages">Εικόνες spoiler</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s ολοκληρώθηκαν</string>
@@ -847,6 +860,10 @@
     <plurals name="file_count">
         <item quantity="one">%1$d αρχείο</item>
         <item quantity="other">%1$d αρχεία</item>
+    </plurals>
+    <plurals name="folder_count">
+        <item quantity="one">%1$d φάκελος</item>
+        <item quantity="other">%1$d φάκελοι</item>
     </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">Εξουσιοδοτήστε το c:geo</string>
@@ -1717,6 +1734,10 @@
         <item quantity="other">Προσθήκη αυτής της κρύπτης στις αγαπημένες (απομένουν %d)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Ορισμός εικονιδίου κρύπτης</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">Ορισμός %d εικονιδίου κρύπτης</item>
+        <item quantity="other">Ορισμός %d εικονιδίων κρύπτης</item>
+    </plurals>
     <string name="pq_download_and_import">Εισαγωγή προσωποποιημένης αναζήτησης</string>
     <string name="caches_refresh_all_warning">Αυτή η ενέργεια ενδέχεται να προκαλέσει μεγάλη κυκλοφορία δικτύου. Είναι βέβαιοι ότι θέλετε να ανανεώσετε μαζικά όλες τις κρύπτες;</string>
     <string name="list_list_headline">Λίστες:</string>
@@ -1915,6 +1936,7 @@
     <string name="wizard_status_title">Κατάσταση διαμόρφωσης</string>
     <string name="wizard_status_storage_permission">Άδεια αποθήκευσης</string>
     <string name="wizard_status_location_permission">Άδεια τοποθεσίας</string>
+    <string name="wizard_status_basefolder">ΒασικόςΦάκελος</string>
     <string name="wizard_status_platform">Υπηρεσίες Geocaching</string>
     <string name="wizard_not_now">Όχι τώρα</string>
     <string name="wizard_skip_wizard_warning">το c:geo μπορεί να μην λειτουργήσει όπως αναμένεται μέχρι να ολοκληρωθούν οι ρυθμίσεις. Ανάλογα με τη ρύθμιση c:geo που λείπει μπορεί να μην είναι σε θέση να διαβάσει/αποθηκεύσει δεδομένα όπως χάρτες εκτός σύνδεσης, geocaches, αρχεία καταγραφής κλπ.\n\nΌποτε αισθάνεστε έτοιμοι να ολοκληρώσετε τις ρυθμίσεις, είτε επιλέξτε \"Οδηγός διαμόρφωσης\" στο κύριο μενού είτε επανεκκινήστε το c:geo.</string>
