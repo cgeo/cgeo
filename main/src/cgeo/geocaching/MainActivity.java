@@ -663,7 +663,7 @@ public class MainActivity extends AbstractActionBarActivity {
                         .setPositiveButton(getString(android.R.string.yes), (dialog, id) -> {
                             dialog.dismiss();
                             DataStore.resetNewlyCreatedDatabase();
-                            backupUtils.restore(BackupUtils.newestBackupFolder());
+                            backupUtils.restore(BackupUtils.newestBackupFolder(), getContentStorageHelper());
                         })
                         .setNegativeButton(getString(android.R.string.no), (dialog, id) -> {
                             dialog.cancel();

@@ -28,7 +28,7 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
- * Important: this class will oly work if you incorporate {@link #onActivityResult(int, int, Intent)}
+ * Important: this class will only work if you incorporate {@link #onActivityResult(int, int, Intent)}
  * into the {@link Activity#onActivityResult(int, int, Intent)} method of the using application!
  * TODO: once Activity ResultAPI is available -> refactor! Watch #9349
  */
@@ -132,6 +132,11 @@ public class ContentStorageActivityHelper {
     /** Simplified form of selectPersistableFolder without initial dialog */
     public void migratePersistableFolder(final PersistableFolder folder, final Consumer<PersistableFolder> callback) {
         selectFolderInternal(REQUEST_CODE_SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT, callback);
+    }
+
+    /** Simplified form of selectPersistableFolder used on settings' restore */
+    public void restorePersistableFolder(final PersistableFolder folder, final Uri newUri, final Consumer<PersistableFolder> callback) {
+        selectFolderInternal(REQUEST_CODE_SELECT_FOLDER_PERSISTED, folder, newUri, CopyChoice.ASK_IF_DIFFERENT, callback);
     }
 
     /**

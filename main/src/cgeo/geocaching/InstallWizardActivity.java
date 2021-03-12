@@ -199,7 +199,7 @@ public class InstallWizardActivity extends AppCompatActivity {
                     DataStore.resetNewlyCreatedDatabase();
                     final BackupUtils backupUtils = new BackupUtils(this);
                     if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
-                        backupUtils.restore(BackupUtils.newestBackupFolder());
+                        backupUtils.restore(BackupUtils.newestBackupFolder(), getContentStorageHelper());
                     } else {
                         backupUtils.selectBackupDirIntent(getContentStorageHelper());
                     }

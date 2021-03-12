@@ -420,7 +420,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         final Preference restore = getPreference(R.string.pref_fakekey_preference_restore);
         restore.setOnPreferenceClickListener(preference -> {
-            backupUtils.restore(BackupUtils.newestBackupFolder());
+            backupUtils.restore(BackupUtils.newestBackupFolder(), contentStorageHelper);
             return true;
         });
 
