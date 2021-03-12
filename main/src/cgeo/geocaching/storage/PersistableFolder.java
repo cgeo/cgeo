@@ -33,7 +33,7 @@ public enum PersistableFolder {
     OFFLINE_MAPS(R.string.pref_persistablefolder_offlinemaps, R.string.persistablefolder_offline_maps, Folder.fromPersistableFolder(BASE, "maps")),
     /** Offline Maps: optional folder for map themes (configured in settings) with user-supplied theme data */
     //legacy setting: "renderthemepath", a pure file path is stored
-    OFFLINE_MAP_THEMES(R.string.pref_persistablefolder_offlinemapthemes, R.string.persistablefolder_offline_maps_themes, Folder.fromPersistableFolder(BASE, "themes")),
+    OFFLINE_MAP_THEMES(R.string.pref_persistablefolder_offlinemapthemes, R.string.persistablefolder_offline_maps_themes, Folder.fromPersistableFolder(OFFLINE_MAPS, "_themes")),
     /** Target folder for written logfiles */
     LOGFILES(R.string.pref_persistablefolder_logfiles, R.string.persistablefolder_logfiles, Folder.fromPersistableFolder(BASE, "logfiles")),
     /** GPX Files */
