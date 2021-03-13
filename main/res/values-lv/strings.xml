@@ -599,7 +599,6 @@
     <string name="settings_restart">Restartē c:geo, lai lietotu jaunos iestatījumus</string>
     <string name="settings_info_offline_maps_title">Info uz bezsaistes kartēm</string>
     <string name="settings_info_themes_title">Informācija par karšu tēmām</string>
-    <string name="settings_info_themes">c:geo atbalsta pielāgotu dizainu bezsaistes kartēm. Tos var izmantot, lai mainītu kartes krāsu stilu (piemēram ir nakts redzamības karte) vai izcelt noteiktus objektus, piemēram, velo-ceļus vai augstuma līniju kartē.</string>
     <string name="init_mapsource_select">Izvēlies karti</string>
     <string name="init_dataDir_note">Tu vari izvēlēties uzglabāt slēpņu papildu datus (spoileru bildes, ierakstu attēli, …) ārējā atmiņā (emulēta vai reāla ārējā SD karte, atkarībā no tavas ierīces).</string>
     <string name="init_maptrail">Parādīt pārvietojumu</string>
