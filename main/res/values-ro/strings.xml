@@ -791,7 +791,7 @@
     <string name="map_live_enable">Ia de pe net</string>
     <string name="map_live_disable">Fără internet</string>
     <string name="map_as_list">Arată ca lista</string>
-    <string name="map_select_multiple_items">Selectează un element</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Selectează un element</string>
     <!-- search -->
     <string name="search_bar_desc">Geocutii (geocod, cuvânt cheie), Obiecte călătoare (cod TB)</string>
     <string name="search_coordinates">Coordonate</string>
