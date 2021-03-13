@@ -460,7 +460,6 @@
     <string name="init_backup_last_no">Tidak ada berkas dengan data cadangan.</string>
     <string name="settings_info_offline_maps_title">Info di Peta offline</string>
     <string name="settings_info_themes_title">Info di Peta Tema</string>
-    <string name="settings_info_themes">c:geo mendukung tema khusus untuk peta offline. Ini dapat digunakan untuk mengubah gaya warna peta (misalnya memiliki peta pemandangan malam) atau untuk menyorot objek tertentu seperti jalur siklus atau garis ketinggian di dalam peta.</string>
     <string name="init_mapsource_select">Pilih Sumber Peta</string>
     <string name="init_dataDir_note">Anda dapat memilih untuk menyimpan data tambahan untuk geocaches (spoiler, log gambar, &#8230;) pada penyimpanan eksternal anda atau (kartu SD eksternal yang ditiru sebenarnya tergantung pada perangkat anda).</string>
     <string name="init_include_found_status">Termasuk \"Ditemukan\" status</string>
