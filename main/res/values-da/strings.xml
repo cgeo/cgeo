@@ -54,6 +54,12 @@
     <string name="wp_waypoint">Referencepunkt</string>
     <string name="wp_original">Oprindelige koordinater</string>
     <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_final">Sidste trin</string>
+    <string name="wpnew_stage">Trin</string>
+    <string name="wpnew_pkg">Parkering</string>
+    <string name="wpnew_trailhead">Via</string>
+    <string name="wpnew_waypoint">Markør</string>
+    <string name="wpnew_original">Oprindeligt</string>
     <!-- logs -->
     <string name="log_found">Fundet</string>
     <string name="log_dnf">Ikke fundet</string>
@@ -430,6 +436,9 @@
     <string name="contribution_documentation">dokumentation</string>
     <string name="contribution_projectleader">open source projektleder</string>
     <string name="contribution_graphics">grafik</string>
+    <string name="debug_user_error_report_title">Rapportér et problem</string>
+    <string name="debug_user_error_errortext">Der er opstået et uventet problem, som vi vil bede dig om at rapportere til os:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Hjælp os med at løse fejl i c:geo ved at indberette dem. Send en e-mail med system-informationer og logfilen fra c:geo. Skriv også en detaljeret fejlbeskrivelse i mailen. Andre kontakt-måder findes under <i>Om c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Åbn indstillinger?</string>
     <string name="settings_title_services">Tjenester</string>
@@ -540,7 +549,9 @@
     <string name="init_address">Vis adresse på hovedskærm</string>
     <string name="init_summary_address">Vis adresse på hovedskærm</string>
     <string name="init_select_language">Vælg sprog</string>
+    <string name="init_summary_select_language">Vælg sproget i appen (kræver genstart)\n</string>
     <string name="init_use_default_language">Brug standardsprog</string>
+    <string name="init_category_exclude">Udelad caches</string>
     <string name="init_exclude">Udelad egne og fundne cacher</string>
     <string name="init_summary_exclude">Udelad egne og fundne cacher</string>
     <string name="init_showwaypoints">Vis rutepunkter</string>
@@ -551,6 +562,8 @@
     <string name="init_brouterShowBothDistances">Vis afstand i lige linje</string>
     <string name="brouter_recalculating">Genberegner ruten i baggrunden…</string>
     <string name="init_summary_brouterShowBothDistances">Hvis navigation er aktiv, vises afstand i lige linje sammen men beregnet rutelængde.</string>
+    <string name="init_bigSmileysOnMap">Vis smileys for loggede cacher</string>
+    <string name="init_summary_bigSmileysOnMap">Hvis aktiveret vil loggede caches blive vist på kortet med smileys i stedet for cache-ikonet (kræver genstart).</string>
     <string name="init_disabled">Udelad deaktiverede cacher</string>
     <string name="init_summary_disabled">Udelad deaktiverede cacher</string>
     <string name="init_archived">Udelad arkiverede</string>
@@ -615,6 +628,7 @@
     <string name="init_backup_settings_backup_full_confirm">Ønsker du at gemme følsomme kontoindstillinger? Disse data kan være tilgængelige for andre apps.</string>
     <string name="settings_savingerror">Fejl under lagring af indstillinger</string>
     <string name="settings_saved">Indstillingerne blev gemt til:</string>
+    <string name="backup_saved">Backup blev gemt til:</string>
     <string name="init_backup_settings_restore">Gendan opsætning</string>
     <string name="settings_readingerror">Fejl ved indlæsning af indstillinger</string>
     <string name="settings_restart">c:geo skal genstartes før at de indlæste indstillinger tager effekt</string>
@@ -638,6 +652,7 @@
     <string name="init_routecolor">Farve på individuel sporlinje</string>
     <string name="init_routewidth">Bredde på individuel sporlinje</string>
     <string name="init_routewidth_summary">Vælge linjebredde for individuel rute</string>
+    <string name="init_trackcolor">GPX spor/rute linje farve</string>
     <string name="init_circlecolor">Cirkel linjefarve</string>
     <string name="init_circlecolor_summary">Vælg farve og uigennemsigtighed for cirklen. Cirkler bruges som en visuel repræsentation for den mindste radius omkring en cache eller fysisk rutepunkt, hvor andre cacher eller fysiske rutepunkter ikke er tilladt. (Gælder for geocaching.com)</string>
     <string name="init_circlefillcolor">Cirkel fyldfarve</string>
@@ -682,6 +697,7 @@
     <string name="init_create_memory_dump">Gem hukommelsesdump</string>
     <string name="init_memory_dump">Hukommelsesdump</string>
     <string name="init_memory_dumped">Hukommelse dumpet til %s</string>
+    <string name="init_please_wait">Vent venligst…</string>
     <string name="init_hardware_acceleration_title">Hardwareaccelereret grafik</string>
     <string name="init_hardware_acceleration_note">Med hardwareaccelereret grafik bliver grafiske elementer tegnet hurtigere på skærmen. Dog kan nogle enheders Android-styresystem indeholde fejl, som bevirker at tekster kan fremstå sløret (især fed skrift).  Du kan deaktivere hardwareaccelereret grafik, hvis du oplever dette problem.</string>
     <string name="init_hardware_acceleration">Aktivér hardwareaccelereret grafik</string>
@@ -948,6 +964,8 @@
     <string name="cache_name">Navn</string>
     <string name="cache_name_set">Angiv cachenavn</string>
     <string name="cache_name_updated">Cachenavn opdateret</string>
+    <string name="cache_description_set">Angiv cache beskrivelse</string>
+    <string name="cache_description_updated">Cache beskrivelse opdateret</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Størrelse</string>
     <string name="cache_distance">Afstand</string>
@@ -1095,8 +1113,10 @@
     <string name="map_live_disable">Deaktivér live</string>
     <string name="map_as_list">Vis som liste</string>
     <string name="map_select_multiple_items">Vælg element</string>
+    <string name="map_routing_brouter">Vejvisning er kun tilgængelig hvis <a href="">BRouter</a> er installeret</string>
     <string name="map_gm_autorotation">Auto-rotér kort</string>
     <string name="map_gm_autorotation_disable">Deaktivér auto-rotation?\n\nAuto-rotation kan aktiveres igen ved hjælp af menupunktet Kortrotation</string>
+    <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
     <!-- search -->
     <string name="search_bar_desc">Cacher (geokode, nøgleord), Trackables (TB-kode)</string>
     <string name="search_coordinates">Koordinater</string>
@@ -1108,8 +1128,10 @@
     <string name="search_kw">Nøgleord</string>
     <string name="search_kw_prefill">Nøgleord</string>
     <string name="search_kw_button">Søg efter nøgleord</string>
+    <string name="search_fbu">Fundet af</string>
     <string name="search_fbu_prefill">Brugernavn</string>
     <string name="search_fbu_button">Søg brugernavn</string>
+    <string name="search_hbu">Udlagt af</string>
     <string name="search_hbu_prefill">Ejer</string>
     <string name="search_hbu_button">Søg ejer</string>
     <string name="search_tb">Trackable</string>
@@ -1458,6 +1480,17 @@
     <string name="attribute_challengecache_no">Ikke challengecache</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com løsningstjekker</string>
     <string name="attribute_hqsolutionchecker_no">Ingen Geocaching.com løsningstjekker</string>
+    <string name="attribute_handicaching_yes">Bedømt på Handicaching.com</string>
+    <string name="attribute_handicaching_no">Ikke bedømt på Handicaching.com</string>
+    <string name="attribute_munzee_yes">Indeholder en Munzee</string>
+    <string name="attribute_munzee_no">Indeholder ikke en Munzee</string>
+    <string name="attribute_ads_yes">Indeholder reklamer</string>
+    <string name="attribute_ads_no">Indeholder inkke reklamer</string>
+    <string name="attribute_military_area_yes">Militært øvelsesområde</string>
+    <string name="attribute_military_area_no">Ikke militært uddannelsesområde</string>
+    <string name="attribute_video_surveil_yes">Området er videoovervåget</string>
+    <string name="attribute_video_surveil_no">Området er ikke videoovervåget</string>
+    <string name="attribute_trackables_yes">Egnet til at indeholde trackables</string>
     <!-- next things -->
     <string name="quote">Gør geocaching nemmere, gør brugere mere dovne.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1639,6 +1672,8 @@
     <string name="switch_manual">Manuelt</string>
     <string name="switch_auto">Automatisk</string>
     <string name="switch_default">(standard)</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nej</string>
     <!-- view settings -->
     <string name="view_settings">Se indstillinger</string>
     <string name="delete_setting">Slet indstilling</string>
@@ -1648,6 +1683,9 @@
     <string name="edit_setting_error_invalid_data">Ugyldig indtastning \"%s\". Indstillingens værdi er ikke ændret.</string>
     <string name="activate_editmode_title">Aktivér redigeringstilstand</string>
     <string name="activate_editmode_warning">Her skal du træde forsigtigt!\n\nÆndringer direkte i indstillingerne kan forhindre programmet i at fungere eller starte, så vær forsigtig!\n\nEr du sikker på, at du vil fortsætte på egen risiko?</string>
+    <string name="add_setting">Tilføj indstilling</string>
+    <string name="add_setting_missing_type">Du skal vælge en præferencetype</string>
+    <string name="add_setting_already_exists">Der findes allerede en præference med dette navn</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">Intern filhåndtering</string>
     <string name="localfile_title">Åbn en lokal fil</string>
@@ -1667,6 +1705,15 @@
     <string name="downloadmap_filename">Henter %s</string>
     <string name="downloadmanager_not_available">Kortfil kan ikke downloades, systemets download-håndtering er ikke tilgængelig</string>
     <string name="download_started">Download kører i baggrunden</string>
+    <string name="downloadmap_allow_metered_network">Tillad download via forbrugsbaseret netværk (f.eks. mobilforbindelse)</string>
+    <string name="downloadmap_confirmation">Download kort \"%1$s\"?\n\nDette kan tage lang tid og kan føre til betydelige omkostninger, afhængigt af din netværksforbindelse eller telefon abonnement.\n\nStørrelsesinfo: %2$s</string>
+    <string name="downloadmap_handling">Selve downloaden vil blive håndteret af dit systems download manager i baggrunden. Du bør se en meddelelse, så snart download startet (som kan tage et stykke tid).</string>
+    <string name="button_continue">Fortsæt</string>
+    <string name="downloadmap_checkforupdates_button">Søg efter opdateringer</string>
+    <string name="downloadmap_available_updates">Tilgængelige opdateringer</string>
+    <string name="downloadmap_no_updates_found">Ingen nye kort opdateringer fundet</string>
+    <string name="downloadmap_mapfile">Kortfil</string>
+    <string name="downloadmap_checking_for_updates">Søger efter kort opdateringer...</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Slet tidligere spor</string>
     <string name="map_trailhistory_cleared">Tidligere spor slettet</string>
@@ -1681,6 +1728,35 @@
     <string name="export_individualroute_title">Eksportér individuel rute</string>
     <string name="export_individualroute_success">Individuel rute eksporteret til \"%s\"</string>
     <!-- install wizard -->
+    <string name="wizard">Konfigurationsguide</string>
+    <string name="wizard_welcome_title">Velkommen til c:geo</string>
+    <string name="wizard_intro">Et par enkelte skridt er nødvendige for at konfigurere c:geo og få dig i gang. Skal jeg hjælpe dig med det?</string>
+    <string name="wizard_intro_returning">Velkommen tilbage til konfigurationsguiden. Din c:geo opsætning er endnu ikke færdig, skal jeg hjælpe dig med at fuldføre opsætningen og få dig i gang? Det er blot et par enkle trin.</string>
+    <string name="wizard_outro_ok">Tak for at konfigurere c:geo.\nHåber du får det sjovt!</string>
+    <string name="wizard_outro_error">Ufuldstændig konfiguration\nIkke alle dele af c:geo vil fungere som forventet!</string>
+    <string name="wizard_permissions_title">Sæt APP tilladelser</string>
+    <string name="wizard_permissions_intro">c:geo har brug for visse APP tilladelser på din enhed for at fungere korrekt.\nJeg vil forklare flere detaljer i de næste trin.</string>
+    <string name="wizard_platforms_title">Konfigurér tjenester</string>
+    <string name="wizard_platforms_intro">For at finde geocaches med c:geo har du brug for en konto til en geocaching service understøttet af c:geo.\nVælg den ønskede tjeneste nedenfor, for enten at logge ind med din eksisterende konto eller oprette en ny konto.</string>
+    <string name="wizard_platforms_gc">Geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; andre</string>
+    <string name="wizard_welcome_advanced">Avanceret konfiguration</string>
+    <string name="wizard_advanced_offlinemaps_label">Offlinekort</string>
+    <string name="wizard_advanced_offlinemaps_info">Denne side indeholder nogle avancerede funktioner, som er valgfri at bruge.\n\nc:geo kan downloade kortfiler til offline brug.</string>
+    <string name="wizard_advanced_brouter_label">Routings app</string>
+    <string name="wizard_advanced_brouter_info">Ved at installere og konfigurere en følges-app med navnet \"BRouter Offline Navigation\" kan c:geo navigere til målet og vise routing infos på dit kort.</string>
+    <string name="wizard_advanced_restore_label">Genskab</string>
+    <string name="wizard_advanced_restore_info">Hvis du har en sikkerhedskopi af en tidligere installation, kan du gendanne indstillinger og/eller geocache-data.</string>
+    <string name="status_not_ok">FEJL</string>
+    <string name="wizard_status_title">Konfigurations status</string>
+    <string name="wizard_status_storage_permission">Adgang til lagerplads</string>
+    <string name="wizard_status_location_permission">Placeringstilladelse</string>
+    <string name="wizard_status_platform">Geocaching tjenester</string>
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
+    <string name="previous">Forrige</string>
+    <string name="skip">Spring over</string>
+    <string name="next">Næste</string>
+    <string name="done">Færdig</string>
+    <string name="finish">Afslut</string>
 </resources>
