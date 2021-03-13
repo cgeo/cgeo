@@ -1,7 +1,7 @@
-오픈 소스 지오캐싱 앱인 c:geo의 연락처 플러그인입니다. c:geo 앱이 설치된 상태에서만 작동하며 c:geo에서 사용자 이름을 클릭하면 전화 번호부에 직접 액세스 할 수 있습니다.
+This is a contacts plugin for c:geo, an open source geocaching app. It will only work with the c:geo app installed and allows direct access to your phonebook when clicking on a username in c:geo.
 
 사용량:
-c:geo에서 사용자 이름을 클릭하면 (예: 캐시 로그북) 메뉴에는 전화기 연락처에서 해당 연락처 카드를 여는 항목이 포함됩니다. 이러면 사용자에게 직접 전화를 전화하거나 메시지를 보낼 수 있습니다.
+When you click on a username in c:geo (e.g. c:geo에서 사용자 이름을 클릭하면 (예: 캐시 로그북) 메뉴에는 전화기 연락처에서 해당 연락처 카드를 여는 항목이 포함됩니다. 이러면 사용자에게 직접 전화를 전화하거나 메시지를 보낼 수 있습니다.
 
 비고:
 플러그인이 지오캐싱 사용자 이름을 연락처와 일치 시키려면 사용자의 지오캐싱 사용자 이름을 연락처의 이름 또는 별칭 필드에 저장해야합니다.
