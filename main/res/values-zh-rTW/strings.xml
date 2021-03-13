@@ -1130,7 +1130,7 @@
     <string name="map_live_enable">開啟即時資訊</string>
     <string name="map_live_disable">關閉即時資訊</string>
     <string name="map_as_list">以清單的形式顯示</string>
-    <string name="map_select_multiple_items">選取項目</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">選取項目</string>
     <string name="map_gm_autorotation">自動旋轉地圖</string>
     <string name="quick_settings">快速設定</string>
     <string name="map_show_in_map">在地圖上顯示</string>
