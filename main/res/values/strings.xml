@@ -254,7 +254,6 @@
     <string name="warn_search_help_tb">Enter the code for a trackable. For example \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Please input some text for your log.</string>
     <string name="warn_load_images">c:geo failed to load images.</string>
-    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5)\n\nOffline maps are not available.</string>
     <string name="warn_pocket_query_select">No Pocket query selected.</string>
     <string name="warn_no_pocket_query_found">No Pocket query found online.</string>
     <string name="warn_invalid_character">Character must be a LETTER or a DIGIT</string>
@@ -272,7 +271,6 @@
     <string name="info_waypoint_coordinates_cleared">Coordinates cleared.</string>
     <string name="info_log_type_changed">Type of log has been changed!</string>
     <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
-    <string name="info_stored_image">New image saved to:</string>
     <string name="info_cache_saved">The cache has been stored locally</string>
     <string name="warn_calculator_state_save">Be sure to save waypoint if you want to keep the calculator state.</string>
     <string name="feature_info_offline_counter">You have some caches with an offline saved log, which might not yet be logged online. For your comfort the count of these logs is displayed as \"+ x\" behind your number of found caches in the footer at c:geo\'s main page. \n\nMoreover these \"x\" logs will be added to the \"NUMBER\" template you might use in your log signature. \n\nIf you don\'t like this counter extension, you can disable it under \"Settings\" > \"Logging\" and/or use the \"NUMBER (without offline logs)\" template instead. \n\nTo easily find remaining offline logs, go to the list \"History\" and filter for \"With personal data\" > \"With offline log\".</string>
@@ -855,7 +853,6 @@
     <string name="contentstorage_selectfolder_dialog_title">Change Folder %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">The folder %1$s is currently set to \'%2$s\', contains %3$s and %4$s and has a total size of %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">You may choose to use the default folder \'%s\' or pick a user-defined folder.</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Do nothing</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copy all content</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Move all content</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">No further action</string>
@@ -893,9 +890,6 @@
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s done</string>
     <string name="folder_process_status_currentfile">Process %1$s</string>
 
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Synchronize content of %1$s to internal storage</string>
-
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Copying content of %1$s to %2$s</string>
     <string name="folder_move_progressbar_title">Moving content of %1$s to %2$s</string>
@@ -909,12 +903,18 @@
     <plurals name="file_count">
         <item quantity="zero">%1$d files</item>
         <item quantity="one">%1$d file</item>
+        <item quantity="two">%1$d files</item>
+        <item quantity="few">%1$d files</item>
+        <item quantity="many">%1$d files</item>
         <item quantity="other">%1$d files</item>
     </plurals>
 
     <plurals name="folder_count">
         <item quantity="zero">%1$d folders</item>
         <item quantity="one">%1$d folder</item>
+        <item quantity="two">%1$d folders</item>
+        <item quantity="few">%1$d folders</item>
+        <item quantity="many">%1$d folders</item>
         <item quantity="other">%1$d folders</item>
     </plurals>
 
@@ -1233,14 +1233,6 @@
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
     <string name="cc_hint_fraction">fraction</string>
-    <string name="lowercase">lower-case</string>
-
-    <!-- editor dialog -->
-
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Choose folder</string>
-    <string name="simple_dir_chooser_current_path">Path:</string>
-    <string name="simple_dir_chooser_invalid_path">Invalid Path</string>
 
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Loading caches from %1$s</string>
@@ -1839,7 +1831,7 @@
 
     <plurals name="days_ago">
         <item quantity="zero">%d days ago</item>
-        <item quantity="one">yesterday</item>
+        <item quantity="one">%d day ago</item>
         <item quantity="two">%d days ago</item>
         <item quantity="few">%d days ago</item>
         <item quantity="many">%d days ago</item>
@@ -1944,7 +1936,6 @@
     <string name="init_low_disk_space_message">The geocache data folder is running low on storage space. This can cause malfunctions of c:geo. Please free up some space.</string>
     <string name="init_confirm_debug">c:geo is running in debug mode!</string>
     <string name="list_confirm_debug_message">The debug mode causes instabilities! Do you want to deactivate the debug mode?</string>
-    <string name="err_select_logimage_upload_size">Image too big, please select a smaller scale.</string>
     <string name="err_logimage_caption_required">A caption is required for the image</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
@@ -1957,19 +1948,13 @@
     <string name="storage_permission_needed">This function is not possible without storage permission.</string>
 
     <!-- colors -->
-    <string name="color_blue">Blue</string>
-    <string name="color_green">Green</string>
-    <string name="color_orange">Orange</string>
-    <string name="color_red">Red</string>
-    <string name="color_turquoise">Turquoise</string>
-    <string name="color_black">Black</string>
     <string name="preference_colorpicker_select_color_scheme">Select color scheme</string>
     <string name="preference_colorpicker_select_color">Select color</string>
     <string name="preference_colorpicker_select_opaqueness">Select opaqueness</string>
     <string name="reset_to_default">Default</string>
 
     <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
+    <string name="number_input_title">Enter a value between %1$d and %2$d</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
     <string name="number_input_err_format">Invalid number format</string>
