@@ -1184,7 +1184,7 @@
     <string name="map_live_enable">Aktivera live</string>
     <string name="map_live_disable">Inaktivera live</string>
     <string name="map_as_list">Visa som lista</string>
-    <string name="map_select_multiple_items">Välj objekt</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Välj objekt</string>
     <string name="map_routing">Rutt (för tillfället: %s)</string>
     <string name="map_routing_brouter">Routning är endast tillgänglig om <a href="">BRouter</a> är installerat</string>
     <string name="map_gm_autorotation">Rotera kartan automatiskt</string>
