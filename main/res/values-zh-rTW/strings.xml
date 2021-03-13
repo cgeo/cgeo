@@ -651,7 +651,6 @@
     <string name="settings_info_offline_maps_title">離線地圖的資訊</string>
     <string name="settings_info_offline_maps">c:geo支援離線地圖。你使用不同提供者的地圖或是自行建立的地圖。您必須先選擇離線地圖的資料夾\'。</string>
     <string name="settings_info_themes_title">地圖外觀資訊</string>
-    <string name="settings_info_themes">c:geo支援自定的離線地圖外觀。這可以改變地圖顏色或等高線等。</string>
     <string name="init_mapsource_select">選取地圖來源</string>
     <string name="init_local_file_system">本機檔案系統</string>
     <string name="init_base_directory_description">公開的本地資料檔案夾</string>
@@ -761,13 +760,11 @@
     <string name="sendToCgeo_no_registration">無法下載cache。send2cgeo註冊過期，請重新註冊。</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">改變資料夾%s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">這個資料夾%1$s正設定到%2$s和%3$s與%4$s。</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">你可以使用預設資料夾%s或是選擇一個自訂資料夾。</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">不執行任何操作</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">複製所有內容</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">移動所有的內容</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">無未來的動作</string>
-    <string name="contentstorage_selectfolder_dialog_choice">你選擇了另一個資料夾，不是現在儲存資料的資料夾。你想要怎麼做? 選料夾</string>
     <string name="contentstorage_folder_selection_aborted">停止選擇資料夾，資料夾是%s。</string>
     <string name="contentstorage_folder_selection_success">資料夾設定到%s。</string>
     <string name="contentstorage_file_selection_aborted">停止選擇檔案</string>
