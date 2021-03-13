@@ -662,7 +662,6 @@
     <string name="settings_info_offline_maps_title">Info o Offline mapách</string>
     <string name="settings_info_offline_maps">Aplikácia c:geo podporuje mapy na použitie offline. Mapy môžete získať od rozličných poskytovateľov, prípadne môžete dokonca vytvoriť vlastné mapy (z údajov OSM). Najprv je potrebné vybrať priečinok, do ktorého sa budú mapy offline ukladať.</string>
     <string name="settings_info_themes_title">Info o témach mapy</string>
-    <string name="settings_info_themes">c:geo podporuje vlastné štýly pre offline mapy. Tieto môžu byť použité na zmenu farebného štýlu mapy (napr. nočná mapa), na zvýraznenie dôležitých objektov (ako sú napr. cyklotrasy) alebo na určenie šírky čiar.</string>
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
     <string name="init_local_file_system">Lokálne systémové súbory</string>
     <string name="init_base_directory_description">Základný priečinok na verejné lokálne údaje</string>
@@ -813,13 +812,11 @@
     <string name="sendToCgeo_no_registration">c:geo sa nepodarilo stiahnuť skrýše. Registrácia send2cgeo expirovala. Zaregistrujte sa, prosím, v nastaveniach.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Zmena priečinka %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Priečinok %1$s je momentálne nastavený na \'%2$s\' a obsahuje %3$s a %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Môžete zvoliť predvolený priečinok \'%s\', prípadne vybrať používateľom určený priečinok.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nerobiť nič</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopírovať všetok obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Premiestniť všetok obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Žiadny ďalší úkon</string>
-    <string name="contentstorage_selectfolder_dialog_choice">Vybrali ste odlišný priečinok, než je momentálne uložené. Ako chcete pokračovať?\n\nVyberte priečinok a</string>
     <string name="contentstorage_folder_selection_aborted">Prerušenie výberu priečinka, priečinok je \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Priečinok nastavený na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Prerušenie výberu súboru</string>
