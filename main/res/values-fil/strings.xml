@@ -467,7 +467,6 @@
     <string name="init_backup_last_no">Walang nabackup na payl.</string>
     <string name="settings_info_offline_maps_title">Ang impormasyon sa offline na mga mapa</string>
     <string name="settings_info_themes_title">Ang impormasyon sa mga tema ng mapa</string>
-    <string name="settings_info_themes">sumusuporta ang c:geo sa mga pasdyang tema para sa mga offline na mga mapa. Upang baguhin ang stilo ng kulay ng mapa ang mga ito ay maaring gamitin (hal. upang magkaroon ng nightview na mapa) o]upang i-highlight ang tiyak na mga bagay tulad ng mga cycle path o kaya taas ng mga linya na nasa mapa.</string>
     <string name="init_mapsource_select">Piliin ang pinag mulan ng mapa</string>
     <string name="init_dataDir_note">Maari kang pumili upang iimbak na karagdagang datos para sa geocaches (spoilers, log images, &#8230;) sa iyong external na lagayan (emulated or real external SD card depende sa iyong aparato).</string>
     <string name="init_include_found_status">Isama ang nakitang katayuan</string>
@@ -653,7 +652,6 @@
     <string name="cache_dialog_favorite_remove_message">Ang pagtatanggal ng cache mula sa iyong mga paborito&#8230;</string>
     <string name="cache_menu_navigate">Ang nabigasyon</string>
     <string name="cache_menu_navigation_drive">Nabigasyon habang (Nagmamaneho)</string>
-    <string name="cache_menu_navigation_drive_select_target">Cache o ang lugar na paradahan?</string>
     <string name="cache_menu_navigation_walk">Ang Nabigasyon (Naglalakad)</string>
     <string name="cache_menu_navigation_transit">Nabigasyon sa (Pagpapadala)</string>
     <string name="cache_menu_navigation_bike">Nabigasyon sa (Pagbibisekleta)</string>

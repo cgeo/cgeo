@@ -469,7 +469,6 @@
     <string name="init_backup_last_no">ليس هناك ملف مع النسخة الاحتياطية.</string>
     <string name="settings_info_offline_maps_title">معلومات على الخرائط في وضع عدم الاتصال</string>
     <string name="settings_info_themes_title">معلومات عن ثيمات الخريطة</string>
-    <string name="settings_info_themes">c:geo يدعم الثيمات المخصصة للخرائط في وضع عدم الاتصال. يمكنك أن تستخدم هذا لتغيير نك تليون الخريطة (مثلا. عرض ليلي للخريطة) أو تسليط الضوء على بعض الأشياء مثل المسارات أو خطوط الطول على الخريطة.</string>
     <string name="init_mapsource_select">اختر مصدر الخريطة</string>
     <string name="init_dataDir_note">قد تختار تخزين بيانات إضافية في العلبة المخبئة (المفشي، ألبوم الصور، &#8230;) في تخزينك الخارجي (تضمينها داخل التخزين أو في بطاقة ذاكرة خارجية اعتماداً على جهازك).</string>
     <string name="init_include_found_status">تضمين حالة \"تم العثور عليها\"</string>
@@ -643,7 +642,6 @@
     <string name="cache_dialog_favorite_remove_message">إزالة المخبئ من المفضلات الخاصة بك&#8230;</string>
     <string name="cache_menu_navigate">الملاحة</string>
     <string name="cache_menu_navigation_drive">الملاحة (القيادة)</string>
-    <string name="cache_menu_navigation_drive_select_target">المخبئ أو مكان المكوث؟</string>
     <string name="cache_menu_navigation_walk">الملاحة ( المشي)</string>
     <string name="cache_menu_navigation_transit">الملاحة (العبور)</string>
     <string name="cache_menu_navigation_bike">الملاحة (قيادة الدراجة)</string>

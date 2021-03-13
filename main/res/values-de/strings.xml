@@ -224,8 +224,8 @@
     <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
     <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
     <string name="err_parse_lat_lon">c:geo konnte den Breiten- oder Längengrad nicht verarbeiten.</string>
-    <string name="err_rendertheme_file_unreadable">Konnte die gewählte Kartendarstellung nicht laden. Verwende den Standard.</string>
-    <string name="err_rendertheme_invalid">Die gewählte Kartendarstellung ist nicht für diese mapsforge-Version gültig. Verwende den Standard.</string>
+    <string name="err_rendertheme_file_unreadable">Konnte das gewählte Kartendesign nicht laden. Standarddesign wird verwendet.</string>
+    <string name="err_rendertheme_invalid">Das gewählte Kartendesign ist nicht für diese Mapsforge-Version geeignet. Standarddesign wird verwendet.</string>
     <string name="err_invalid_filename_char">Zeichen \'%c\' nicht erlaubt</string>
     <string name="warn_save_nothing">Es gibt nichts zum Speichern.</string>
     <string name="warn_no_cache_coord">Es gibt hier keinen Cache mit Koordinaten.</string>
@@ -659,15 +659,15 @@
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo unterstützt Karten für Offline-Nutzung. Du kannst Karten von verschiedenen Anbietern beziehen oder sogar eigene Karten erstellen (aus OSM-Daten). Du musst zuerst den Ordner auswählen, in dem Offline-Karten gespeichert werden sollen.</string>
-    <string name="settings_info_themes_title">Info zu Kartendarstellungen</string>
-    <string name="settings_info_themes">c:geo kann eigene Kartendarstellungen für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
+    <string name="settings_info_themes_title">Info zu Kartendesigns</string>
+    <string name="settings_info_themes">c:geo unterstützt benutzerdefinierte Designs für Offline-Karten. Diese können verwendet werden, um den Farbstil der Karte zu ändern (z. B. um eine Nachtsicht zu haben) oder um bestimmte Objekte wie Radwege oder Höhenlinien innerhalb der Karte hervorzuheben.\n\nDie Verwendung von nicht gezippten Kartendesigns könnte die Startgeschwindigkeit der Karte verringern. In diesem Fall kann der Designordner optional mit einem app-internen lokalen Ordner synchronisiert werden, um einen schnelleren Zugriff zu ermöglichen (auf Kosten von etwas Speicherplatz).</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
     <string name="init_local_file_system">Lokales Dateisystem</string>
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>
     <string name="init_map_directory_description">Ordner mit Offline-Karten</string>
     <string name="init_gpx_importexportdir">GPX-Ordner</string>
     <string name="init_dataDir">Datenordner wählen</string>
-    <string name="init_dataDir_note">Sie können den Ablageort für die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf Ihrem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) wählen.</string>
+    <string name="init_dataDir_note">Du kannst auswählen, ob du die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf deinem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) speichern möchtest.</string>
     <string name="init_maptrail">Zeige Positionsverlauf</string>
     <string name="init_maptrail_length">Länge des Positionsverlaufs</string>
     <string name="init_maptrail_length_summary">Lege die maximale Länge des Positionsverlaufs fest (erzwungen bei jedem Start von c:geo). Standardwert ist 700 Punkte - je nach verfügbarem Speicher anpassen.</string>
@@ -728,7 +728,7 @@
     <string name="init_summary_plain_logs">Logeinträge ohne Farben anzeigen</string>
     <string name="init_use_native_ua">Android-Browser</string>
     <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Anmeldeprobleme einiger Netzanbieter.</string>
-    <string name="init_rendertheme_folder">Ordner für Kartendarstellungen</string>
+    <string name="init_rendertheme_folder">Ordner für Kartendesigns</string>
     <string name="init_maintenance">Wartung</string>
     <string name="init_maintenance_directories_note">c:geo speichert Bilder und weitere Dateien zu einem Cache in einem separaten Ordner. In manchen Fällen (z. B. bei Sichern und Wiederherstellen der Datenbank) kann dieser Ordner unnötige Daten enthalten, die hier gelöscht werden können.</string>
     <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
@@ -811,13 +811,13 @@
     <string name="sendToCgeo_no_registration">c:geo konnte die Caches nicht laden. Die Registrierung für send2cgeo ist ungültig. Bitte in den Einstellungen neu registrieren.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Ordner ändern %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Der Ordner %1$s ist derzeit auf \'%2$s\' gesetzt und enthält %3$s und %4$s.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Der Ordner %1$s ist derzeit auf \'%2$s\' gesetzt, enthält %3$s und %4$s und hat eine Gesamtgröße von %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Du kannst den Standardordner \'%s\' verwenden oder einen benutzerdefinierten Ordner wählen.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nichts tun</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kompletten Inhalt kopieren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Kompletten Inhalt verschieben</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Keine weitere Aktion</string>
-    <string name="contentstorage_selectfolder_dialog_choice">Du hast einen anderen als den aktuellen Ordner gewählt. Wie möchtest du weitermachen?\n\nOrdner auswählen und</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Du hast einen anderen Ordner gewählt als den aktuell verwendeten. Der aktuelle Ordner enthält %1$s, %2$s und hat eine Größe von %3$s. Wie möchtest du fortfahren?\n\nOrdner auswählen und</string>
     <string name="contentstorage_folder_selection_aborted">Ordnerauswahl abgebrochen, der Ordner ist \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Ordner auf \'%s\' gesetzt</string>
     <string name="contentstorage_file_selection_aborted">Dateiauswahl abgebrochen</string>
@@ -837,7 +837,7 @@
     <string name="persistablefolder_usedefault">Standard verwenden</string>
     <string name="persistablefolder_base">Basis</string>
     <string name="persistablefolder_offline_maps">Offline-Karten</string>
-    <string name="persistablefolder_offline_maps_themes">Kartendarstellungen</string>
+    <string name="persistablefolder_offline_maps_themes">Kartendesigns</string>
     <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Sicherung</string>
     <string name="persistablefolder_logfiles">Logdateien</string>
@@ -856,7 +856,7 @@
     <string name="folder_copy_finished_dialog_message">Inhalt des Ordners %1$s wurde nach %2$s kopiert.\n\n%3$s von %4$s und %5$s von %6$s wurden verarbeitet.</string>
     <string name="folder_move_finished_dialog_message">Inhalt des Ordners %1$s wurde nach %2$s verschoben.\n\n%3$s von %4$s und %5$s von %6$s wurden verarbeitet.</string>
     <string name="folder_copy_move_finished_dialog_message_failure">Der Vorgang ist mit dem Code %1$s während der Verarbeitung der Datei %2$s fehlgeschlagen.</string>
-    <string name="folder_move_finished_dialog_tap">Tippen Sie auf \'OK\', um die Ordneränderung abzuschließen.</string>
+    <string name="folder_move_finished_dialog_tap">Tippe auf \'OK\', um die Ordneränderung abzuschließen.</string>
     <plurals name="file_count">
         <item quantity="one">%1$d Datei</item>
         <item quantity="other">%1$d Dateien</item>
@@ -1012,7 +1012,7 @@
     <string name="cache_dialog_favorite_remove_message">Entferne den Cache von deinen Favoriten…</string>
     <string name="cache_menu_navigate">Navigieren</string>
     <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
-    <string name="cache_menu_navigation_drive_select_target">Cache oder Parkplatz?</string>
+    <string name="cache_menu_navigation_drive_select_target">Ziel wählen</string>
     <string name="cache_menu_navigation_walk">Navigation (Gehen)</string>
     <string name="cache_menu_navigation_transit">Navigation (ÖPNV)</string>
     <string name="cache_menu_navigation_bike">Navigation (Fahrrad)</string>
@@ -1050,7 +1050,7 @@
     <string name="cache_menu_challenge_checker">Suche Challenge-Checker</string>
     <string name="cache_menu_ignore">Cache ignorieren</string>
     <string name="cache_log_menu_decrypt">Ver- / Entschlüsseln</string>
-    <string name="cache_log_menu_title">Log %1$s von %2$s</string>
+    <string name="cache_log_menu_popup_title">Log von %s</string>
     <string name="ignore_confirm_title">Sei vorsichtig</string>
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
@@ -1228,12 +1228,16 @@
     <string name="map_showwp_parking">Park-Wegpunkte</string>
     <string name="map_showwp_visited">Besuchte Wegpunkte</string>
     <string name="map_show_track">GPX Track/Route anzeigen</string>
+    <string name="init_renderthemefolder_synctolocal">Designs mit app-internem Ordner synchronisieren</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Diese Option kann das Öffnen der Karte auf Kosten von etwas Gerätespeicher beschleunigen.</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisierung des Designordners einschalten</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Dies wird den Inhalt des Ordners für Kartendesigns dauerhaft in einem app-internen Ordner synchronisieren, um den Dateizugriff zu beschleunigen.\n\nDein Kartenordner \'%s\' hat derzeit %s, %s und eine Größe von %s.\n\nMöchtest du die Ordnersynchronisierung aktivieren?</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_visited">Besuchte Wegpunkte auf der Karte verbergen</string>
-    <string name="map_theme_select">Kartendarstellung auswählen</string>
-    <string name="map_theme_options">Optionen zur Darstellung</string>
+    <string name="map_theme_select">Kartendesign wählen</string>
+    <string name="map_theme_options">Design-Optionen</string>
     <string name="map_language">Sprache der Karte</string>
     <string name="map_live_enable">Aktualisierung einschalten</string>
     <string name="map_live_disable">Aktualisierung ausschalten</string>
@@ -1870,7 +1874,7 @@
     <string name="receivemapfile_kb_copied">%d kB kopiert</string>
     <string name="receivemapfile_cancelled">Kartendatei-Empfang abgebrochen</string>
     <!-- Download map preference and menu entry -->
-    <string name="downloadmap_title">Offlinekarte herunterladen</string>
+    <string name="downloadmap_title">Offline-Karte herunterladen</string>
     <string name="downloadmap_info">Wähle eine Kartendatei für Deine Region aus, indem Du auf das \"Speichern\"-Symbol tippst.\n\nDer Download läuft im Hintergrund. Wenn der Download abgeschlossen ist, wird die heruntergeladene Datei in den Kartenordner von c:geo kopiert und als aktuelle Karte für c:geo gesetzt.\n\nVorsicht: Das Herunterladen einer Karte kann zu hohem Netzwerkverkehr führen!</string>
     <string name="downloadmap_choose">Karte wählen</string>
     <string name="downloadmap_filename">Lade %s</string>
@@ -1889,13 +1893,13 @@
     <string name="downloadmap_mapfile">Karte</string>
     <string name="downloadmap_retrieving_directory_data">Empfange Ordnerdaten…</string>
     <string name="downloadmap_checking_for_updates">Prüfe auf Updates…</string>
-    <string name="downloadmap_install_theme_title">Installiere Datei für Kartendarstellung</string>
-    <string name="downloadmap_install_theme_info">Die heruntergeladene Karte erfordert eine spezielle Datei zur Kartendarstellung. Möchtest Du diese auch herunterladen?</string>
-    <string name="mapserver_mapsforge_info">Basiskarten, keine Darstellungsdatei erforderlich</string>
-    <string name="mapserver_openandromaps_info">Detaillierte Karten, erfordern Kartendarstellung \"Elevate\"</string>
-    <string name="mapserver_openandromaps_themes_info">Detaillierte Kartendarstellung, passend für \"OpenAndroMaps\"-Karten</string>
-    <string name="mapserver_freizeitkarte_info">Detaillierte Karten, benötigen eines der \"Freizeitkarte\"-Kartenthemen.</string>
-    <string name="mapserver_freizeitkarte_themes_info">Detaillierte Kartendarstellung, passend für \"Freizeitkarte\"-Karten</string>
+    <string name="downloadmap_install_theme_title">Design installieren</string>
+    <string name="downloadmap_install_theme_info">Die heruntergeladene Karte erfordert eine spezielles Kartendesign. Möchtest du dieses auch herunterladen?</string>
+    <string name="mapserver_mapsforge_info">Basiskarten, keine Kartendesigns erforderlich</string>
+    <string name="mapserver_openandromaps_info">Detaillierte Karten, erfordern Kartendesign \"Elevate\"</string>
+    <string name="mapserver_openandromaps_themes_info">Detailliertes Kartendesign, passend für \"OpenAndroMaps\"-Karten</string>
+    <string name="mapserver_freizeitkarte_info">Detaillierte Karten, benötigen eines der \"Freizeitkarte\"-Designs.</string>
+    <string name="mapserver_freizeitkarte_themes_info">Detailliertes Kartendesign, passend für \"Freizeitkarte\"-Karten</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
@@ -1923,7 +1927,7 @@
     <string name="wizard_permissions_folder_title">Ordner festlegen: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo benötigt einen lokalen Ordner, um Daten wie GPX-Dateien, Backups, Feldnotizen und Logdateien zu speichern. Standardmäßig werden diese Dateien in Ordnern unterhalb eines sog. \"Basisordners\" gespeichert. Wähle oder erstelle einen solchen Ordner im nächsten Schritt.\n\nWenn du c:geo von einer früheren Version aktualisiert hast, wähle den existierenden Ordner \"cgeo\" auf der Grundebene deines Gerätespeichers aus.\nHinweis: Möglicherweise musst du die Anzeige des internen Speichers deines Gerätes zuerst in der Dateiauswahl, die gleich angezeigt wird, aktivieren.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo benötigt einen Ordner für Offline-Kartendateien. Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo benötigt einen Ordner um Darstellungen für Offlinekarten zu speichern. Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo benötigt einen Ordner um Designs für Offline-Karten zu speichern. Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo benötigt einen Ordner für GPX-Dateien (z.B. zum Import / Export von Caches oder Tracks). Wähle im nächsten Schritt den Ordner aus oder erstelle ihn.</string>
     <string name="wizard_platforms_title">Dienste konfigurieren</string>
     <string name="wizard_platforms_intro">Um Geocaches mit c:geo zu finden, benötigst du ein Konto für einen Geocaching-Dienst, der von c:geo unterstützt wird.\nWähle unten den gewünschten Dienst aus, um dich entweder mit deinem bestehenden Konto anzumelden oder ein neues Konto zu erstellen.</string>

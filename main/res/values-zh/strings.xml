@@ -627,7 +627,6 @@
     <string name="settings_restart">需要重新启动 c:geo 才能使加载的设置生效</string>
     <string name="settings_info_offline_maps_title">离线地图信息</string>
     <string name="settings_info_themes_title">地图主题信息</string>
-    <string name="settings_info_themes">c:geo 支持离线地图的自定义主题。这些主题可以用来改变地图的颜色风格 (例如绘制夜视图) 或突出显示某些对象，例如地图中的自行车路径或等高线。</string>
     <string name="init_mapsource_select">选择地图来源</string>
     <string name="init_dataDir_note">您可以选择在外部存储上存储 geocaches (破坏者、日志图像、…) 的附加数据 (根据您的设备, 模拟或实际的外部 SD 卡)。</string>
     <string name="init_maptrail">显示历史轨迹</string>

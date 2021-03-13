@@ -436,7 +436,6 @@
     <string name="init_backup_last_no">Varnostna kopija ne obstaja.</string>
     <string name="settings_info_offline_maps_title">Zemljevidi brez povezave</string>
     <string name="settings_info_themes_title">Teme zemljevidov</string>
-    <string name="settings_info_themes">c:geo omogoča prikaz različnih tem zemljevidov brez povezave. Teme so uporabljene za spremembo barvnih shem (npr. temni nočni zemljevid) ali za poudarek objektov, kot na primer kolesarske poti ali plastnice na zemljevidu.</string>
     <string name="init_mapsource_select">Izberi vir zemljevidov</string>
     <string name="init_trackautovisit">Obisk pri zapisih</string>
     <string name="init_summary_trackautovisit">Pri sledljivčkih vedno uporabi obisk pri zapisih (\"Visited\")</string>
@@ -583,7 +582,6 @@
     <string name="cache_dialog_favorite_remove_message">Odstranjevanje zaklada s spiska priljubljenih…</string>
     <string name="cache_menu_navigate">Navigiraj</string>
     <string name="cache_menu_navigation_drive">Navigiraj - vožnja</string>
-    <string name="cache_menu_navigation_drive_select_target">Zaklad ali parkirno mesto?</string>
     <string name="cache_menu_navigation_walk">Navigiraj - hoja</string>
     <string name="cache_menu_navigation_bike">Navigiraj - kolo</string>
     <string name="cache_menu_maps_directions">Google Maps usmerjanje</string>

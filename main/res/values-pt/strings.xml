@@ -660,7 +660,6 @@
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
     <string name="settings_info_offline_maps">O c:geo suporta mapas para uso offline. Pode obter mapas de diferentes fornecedores ou até mesmo criar os seus próprios mapas (de dados OSM). Em primeiro lugar, seleccione a pasta na qual os mapas offline serão guardados.</string>
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
-    <string name="settings_info_themes">O c:geo suporta temas personalizados para os mapas off-line. Estes podem ser usados ​​para alterar o estilo de cores do mapa (por exemplo, ter um mapa para visão nocturna) ou para realçar certos objectos, como ciclovias ou linhas da altitude dentro do mapa.</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
     <string name="init_local_file_system">Sistema de Ficheiros Local</string>
     <string name="init_base_directory_description">Pasta base para dados locais públicos</string>
@@ -811,13 +810,11 @@
     <string name="sendToCgeo_no_registration">O c:geo falhou a transferência das geocaches. O registo do send2cgeo expirou. Por favor, faça o registo nas definições.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Alterar pasta %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">A pasta %1$s está actualmente definida como \'%2$s\' e contém %3$s e %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Pode optar por usar a pasta padrão \'%s\' ou seleccionar uma pasta definida pelo utilizador.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Não fazer nada</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copiar todo o conteúdo</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Mover todo o conteúdo</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Nenhuma acção adicional</string>
-    <string name="contentstorage_selectfolder_dialog_choice">Seleccionou uma pasta diferente da que é utilizada actualmente para armazenamento. De que forma pretende avançar?\n\nSeleccionar a pasta e</string>
     <string name="contentstorage_folder_selection_aborted">A cancelar selecção de pasta, a pasta é \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Pasta definida como \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">A cancelar a selecção de ficheiro</string>
@@ -1012,7 +1009,7 @@
     <string name="cache_dialog_favorite_remove_message">A retirar geocache da lista de favoritas…</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_navigation_drive">Navegação (Conduzir)</string>
-    <string name="cache_menu_navigation_drive_select_target">Cache ou lugar de estacionamento?</string>
+    <string name="cache_menu_navigation_drive_select_target">Seleccionar destino</string>
     <string name="cache_menu_navigation_walk">Navegação (Caminhar)</string>
     <string name="cache_menu_navigation_transit">Navegação (Transportes)</string>
     <string name="cache_menu_navigation_bike">Navegação (Bicicleta)</string>
@@ -1050,7 +1047,7 @@
     <string name="cache_menu_challenge_checker">Procurar verificador de Challenge</string>
     <string name="cache_menu_ignore">Ignorar a cache</string>
     <string name="cache_log_menu_decrypt">Decifrar/Cifrar</string>
-    <string name="cache_log_menu_title">Registo %1$s de %2$s</string>
+    <string name="cache_log_menu_popup_title">Registo de %s</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>

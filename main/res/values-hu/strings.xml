@@ -541,7 +541,6 @@
     <string name="settings_restart">A c:geo-t most újra kell indítani a betöltött beállítások használatához</string>
     <string name="settings_info_offline_maps_title">Offline térképek adatai</string>
     <string name="settings_info_themes_title">Térkép megjelenítési stílusok</string>
-    <string name="settings_info_themes">A c:geo támogatja az egyedi térképstílusokat. Ezzel meg lehet változtatni a térkép színeit (pl. éjszakai nézethez), vagy bizonyos objektumokat ki lehet vele emelni, mint pl. kerékpárutakat, szintvonalakat, stb.</string>
     <string name="init_mapsource_select">Térkép választása</string>
     <string name="init_dataDir_note">A ládák kiegészítő adatait (spolier képek, logfotók, …) külső tárolón is tarthatod (a készülékedtől függően ez lehet emulált vagy valódi, külső SD kártya is).</string>
     <string name="init_include_found_status">\"Megtaláltam\" jelölések exportálása</string>
@@ -737,7 +736,6 @@
     <string name="cache_dialog_favorite_remove_message">Láda törlése a kedvencek közül…</string>
     <string name="cache_menu_navigate">Navigáció</string>
     <string name="cache_menu_navigation_drive">Autós navigáció</string>
-    <string name="cache_menu_navigation_drive_select_target">Láda vagy parkolóhely?</string>
     <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
     <string name="cache_menu_navigation_transit">Tömegközlekedési navigáció</string>
     <string name="cache_menu_navigation_bike">Biciklis navigáció</string>

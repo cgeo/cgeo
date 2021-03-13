@@ -90,9 +90,11 @@
     <string name="log_tb_archived">Arhivēts</string>
     <string name="log_save">Saglabāt bezsaistes režīmā</string>
     <string name="log_saving">Ieraksta nosūtīšana…</string>
+    <string name="log_saving_and_uploading">Publicē ierakstu un augšupielādē attēlu…</string>
     <string name="log_posting_log">Publicē ierakstu…</string>
     <string name="log_posting_twitter">Publicē tvītu…</string>
     <string name="log_posting_vote">Publicē slēpņa balsojumu…</string>
+    <string name="log_posting_image">Publicē attēlu…</string>
     <string name="log_posting_generic_trackable">Publicē %1$s %2$d/%3$d</string>
     <string name="log_clear">Notīrīt</string>
     <string name="log_post_not_possible">Datu lejupielādēšana ir procesā…\nLūdzu mēģini vēlreiz pēc dažām sekundēm vai pārbaudi interneta savienojumu.</string>
@@ -117,9 +119,11 @@
     <string name="log_yesterday">Vakar</string>
     <string name="log_smilies">Smaidiņi</string>
     <string name="log_image">Attēls</string>
+    <string name="log_images">Attēli</string>
     <string name="log_image_attach">Pievienot attēlu</string>
     <string name="log_image_stored">Esošo</string>
     <string name="log_image_camera">Jaunu</string>
+    <string name="log_image_delete">Dzēst</string>
     <string name="log_image_caption">Nosaukums</string>
     <string name="log_image_description">Apraksts</string>
     <string name="log_image_scale">Izšķirtspēja</string>
@@ -144,6 +148,7 @@
     <string name="log_problem_archive_text">Šis slēpņotājs ziņoja, ka slēpni vēlams arhivēt. Paziņojums nosūtīts brīvprātīgajam recenzentam.</string>
     <string name="log_image_scale_option_noscaling">Bez mēroga</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_titleprefix">Attēls</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tulkot uz %s valodu</string>
     <string name="translate_to_english">Tulkot angļu valodā</string>
@@ -151,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kļūda autorizācijas lapas apstrādē</string>
+    <string name="err_captcha">Nepieciešama Captcha autentifikācija. Lūdzu dodieties uz mūsu <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pēc palīdzības.</string>
     <string name="err_server">Nevar sazināties ar Geocaching.com. Vietne šobrīd var nedarboties vai arī tavs interneta savienojums nedarbojas.</string>
     <string name="err_server_ec">Nevar sazināties ar Extremcaching.com. Vietne šobrīd var nedarboties vai arī tavs interneta savienojums nedarbojas.</string>
     <string name="err_server_su">Nav iespējams savienoties ar Geocaching.su. Iespējams mājaslapa vai Jūsu interneta savienojums nestrādā.</string>
@@ -212,6 +218,7 @@
     <string name="err_parse_lat_lon">c:geo nevar apstrādāt platuma vai garuma  grādus.</string>
     <string name="err_rendertheme_file_unreadable">Nevarēja ielādēt izvēlēto izskatu. Atgriežos pie oriģinālā (iebūvētā).</string>
     <string name="err_rendertheme_invalid">Izvēlētais kartes izskats neder šai mapsforge versijai. Atgriežos pie oriģinālā (iebūvētā).</string>
+    <string name="err_invalid_filename_char">Simbols \'%c\' nav atļauts</string>
     <string name="warn_save_nothing">Šeit nekā nav ko saglabāt.</string>
     <string name="warn_no_cache_coord">Te nav slēpņu ar koordinātām.</string>
     <string name="warn_no_coordinates">Nav dotas koordinātas.</string>
@@ -253,6 +260,8 @@
     <string name="err_request_popup_info">c:Geo neizdevās iegūt slēpņa informāciju.</string>
     <string name="warn_log_load_additional_data">c:geo nevarēja ielādēt papildu datus (ceļotāji/favorītpunkti) ieraksta veikšanai.</string>
     <string name="more_information">Vairāk informācijas</string>
+    <string name="undo">Atcelt</string>
+    <string name="dont_show_again">Vairs nerādīt</string>
     <string name="warn_gm_not_available">Google Maps nav pieejams.</string>
     <string name="switch_to_mf">Tava Google Play Service versija ir novecojusi. Vai vēlies tā vietā pārslēgties uz Mapsforge karšu sniedzēju?</string>
     <string name="switched_to_mf">Noklusējuma kartes pārslēgtas uz Mapsforge. Tagad pārstartējiet savu karti.</string>
@@ -422,6 +431,9 @@
     <string name="contribution_documentation">Dokumentācija</string>
     <string name="contribution_projectleader">\"atvērtā pirmkoda\" (open source) projekta līderis</string>
     <string name="contribution_graphics">grafika</string>
+    <string name="debug_user_error_report_title">Ziņot par problēmu</string>
+    <string name="debug_user_error_errortext">Notikusi neparedzēta kļūda, par kuru mēs vēlamies, lai Tu ziņotu:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Palīdzi mums labot c:geo kļūdas, ziņojot par tām epastā, iekļaijot sistēmas informāciju un c:geo log dokumentu. Lūdzu vēstulē iekļaujiet arī detalizētu kļūdas aprakstu. Citas komunikācijas iespējas var atrast <i>Par c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Atvērt uzstādījumus?</string>
     <string name="settings_title_services">Servisi</string>
@@ -509,6 +521,7 @@
     <string name="init_signature_template_datetime">Datums &amp; laiks</string>
     <string name="init_signature_template_user">Lietotājs</string>
     <string name="init_signature_template_number">Numurs</string>
+    <string name="init_signature_template_number_legacy">Skaits (izlaist bezsaistes pierakstus)</string>
     <string name="init_signature_template_owner">Īpašnieks</string>
     <string name="init_signature_template_name">Vārds</string>
     <string name="init_signature_template_difficulty">Sarežģītība</string>
@@ -516,6 +529,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Ieraksta teksts</string>
     <string name="init_signature_template_size">Izmērs</string>
+    <string name="init_signature_template_type">Pēc tipa</string>
     <string name="init_ratingwanted">GCvote reitings</string>
     <string name="init_summary_ratingwanted">Ielādēt slēpņu novērtējumus no GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Rādīt draugu / savus</string>
@@ -528,6 +542,10 @@
     <string name="init_summary_transparentBackground">Lietot caurspīdīgu fonu (nepieciešama restartācija)</string>
     <string name="init_address">Rādīt adresi</string>
     <string name="init_summary_address">Rādīt adresi, nevis koordinātes galvenajā ekrānā</string>
+    <string name="init_select_language">Izvēlieties valodu</string>
+    <string name="init_summary_select_language">Izvēlēties aplikācijas valodu (nepieciešama restartēšana)\n</string>
+    <string name="init_use_default_language">Lietot noklusējuma valodu</string>
+    <string name="init_category_exclude">Izņemt slēpņus</string>
     <string name="init_exclude">Nerādīt savus un atrastos</string>
     <string name="init_summary_exclude">Nerādīt tev piederošus vai jau atrastos slēpņus</string>
     <string name="init_showwaypoints">Rādīt starpposmus</string>
@@ -538,10 +556,13 @@
     <string name="init_brouterShowBothDistances">Rādīt taisnvirziena distanci</string>
     <string name="brouter_recalculating">Pārrēķina maršrutu fonā…</string>
     <string name="init_summary_brouterShowBothDistances">Ja maršruta plānošana ir aktīva: Paplildus aprēķinātajam maršruta garumam, rādīt lineāro attālumu.</string>
+    <string name="init_bigSmileysOnMap">Lielas ikonas atrastiem slēpņiem</string>
+    <string name="init_summary_bigSmileysOnMap">Ja tās tiek aktivizētas, kartē atrastajiem slēpņiem parādīsies lielās emocijzīmes slēpņu veidu ikonu vietā (nepieciešama restartēšana).</string>
     <string name="init_disabled">Izlaist atspējotos</string>
     <string name="init_summary_disabled">Izlaist atspējotos slēpņus</string>
     <string name="init_archived">Izslēgt arhivētos</string>
     <string name="init_summary_archived">Izslēgt arhivētos slēpņus</string>
+    <string name="init_global_wp_extraction_disable">Atslēgt starpposmu izvilkšanu</string>
     <string name="init_save_log_img">Saglabāt attēlus</string>
     <string name="init_summary_save_log_img">Saglabāt attēlus no ierakstiem</string>
     <string name="init_units">Izmantot imperiālo sistēmu</string>
@@ -578,7 +599,6 @@
     <string name="settings_restart">Restartē c:geo, lai lietotu jaunos iestatījumus</string>
     <string name="settings_info_offline_maps_title">Info uz bezsaistes kartēm</string>
     <string name="settings_info_themes_title">Informācija par karšu tēmām</string>
-    <string name="settings_info_themes">c:geo atbalsta pielāgotu dizainu bezsaistes kartēm. Tos var izmantot, lai mainītu kartes krāsu stilu (piemēram ir nakts redzamības karte) vai izcelt noteiktus objektus, piemēram, velo-ceļus vai augstuma līniju kartē.</string>
     <string name="init_mapsource_select">Izvēlies karti</string>
     <string name="init_dataDir_note">Tu vari izvēlēties uzglabāt slēpņu papildu datus (spoileru bildes, ierakstu attēli, …) ārējā atmiņā (emulēta vai reāla ārējā SD karte, atkarībā no tavas ierīces).</string>
     <string name="init_maptrail">Parādīt pārvietojumu</string>
@@ -767,6 +787,7 @@
     <string name="cache_personal_note_upload_cancelled">Personiskās piezīmes ielāde atcelta</string>
     <string name="cache_description">Apraksts</string>
     <string name="cache_description_table_note">Apraksts satur tabulas formatējumu, kuru, iespējams, vajadzēs apskatīt %s, lai redzētu pareizi.</string>
+    <string name="cache_area_description">Apvidus apraksts</string>
     <string name="cache_cache_description">Slēpņa Apraksts</string>
     <string name="cache_virtual_description">Virtuāls Jautājums</string>
     <string name="cache_box_description">Konteinera Saturs</string>
@@ -816,7 +837,6 @@
     <string name="cache_dialog_favorite_remove_message">Noņemt slēpni no saviem favorītiem…</string>
     <string name="cache_menu_navigate">Navigēt</string>
     <string name="cache_menu_navigation_drive">Navigēt (Ar automašīnu)</string>
-    <string name="cache_menu_navigation_drive_select_target">Slēpnis vai stāvvieta?</string>
     <string name="cache_menu_navigation_walk">Navigēt (Ar kājām)</string>
     <string name="cache_menu_navigation_transit">Navigācija (Ar sabiedrisko)</string>
     <string name="cache_menu_navigation_bike">Navigēt (Ar velosipēdu)</string>
@@ -972,6 +992,8 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_note">Piezīme</string>
     <string name="waypoint_user_note">Lietotāja piezīme</string>
     <string name="waypoint_visited">Apmeklēts</string>
+    <string name="waypoint_set_visited">Atzīmēt starpposmu kā apmeklētu</string>
+    <string name="waypoint_unset_visited">Atzīmēt starpposmu kā neapmeklētu</string>
     <string name="waypoint_save">Saglabāt</string>
     <string name="waypoint_cancel_edit">Atcelt</string>
     <string name="waypoint_loading">Notiek starpposma ielāde…</string>

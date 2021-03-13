@@ -623,7 +623,6 @@
     <string name="settings_restart">c:geo reikia iš naujo paleisti, kad įkelti parametrai pradėtų veikti</string>
     <string name="settings_info_offline_maps_title">Informacija apie išsaugotus žemėlapius</string>
     <string name="settings_info_themes_title">Informacija apie žemėlapio temas</string>
-    <string name="settings_info_themes">c:geo palaiko temas skirtas išsaugotiems žemėlapiams. Jos gali keisti žemėlapio spalvų stilių (pvz. naktinis stilius) arba atkreipti dėmesį į tam tikrus objektus, kaip dviračių takai arba aukščio linijos žemėlapyje.</string>
     <string name="init_mapsource_select">Pasirinkite žemėlapio šaltinį</string>
     <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus slėptuvių duomenis (užuominas, įrašų vaizdus, …) išorinėje atmintyje (pseudo ar tikroje išorinėje SD kortelėje, priklausomai nuo jūsų įrenginio).</string>
     <string name="init_maptrail">Rodyti pėdsaką</string>
@@ -900,7 +899,6 @@
     <string name="cache_dialog_favorite_remove_message">Slėptuvė šalinama iš Jūsų mėgiamų slėptuvių sąrašo…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_navigation_drive">Navigacija (važiuoti)</string>
-    <string name="cache_menu_navigation_drive_select_target">Slėptuvė ar automobilių stovėjimo vieta?</string>
     <string name="cache_menu_navigation_walk">Navigacija (pėsčiomis)</string>
     <string name="cache_menu_navigation_transit">Navigacija (keleiviniu transportu)</string>
     <string name="cache_menu_navigation_bike">Navigacija (dviračiu)</string>
@@ -935,7 +933,6 @@
     <string name="cache_menu_challenge_checker">Ieškoti iššukio tikrintuvo</string>
     <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
     <string name="cache_log_menu_decrypt">Iššifruoti/Užšifruoti</string>
-    <string name="cache_log_menu_title">Įrašas %1$s iš %2$s</string>
     <string name="ignore_confirm_title">Būk atsargus</string>
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
     <string name="cache_status">Būsena</string>

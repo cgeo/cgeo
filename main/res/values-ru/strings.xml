@@ -580,7 +580,6 @@
     <string name="settings_restart">c:geo необходим перезапуск, чтобы восстановленные настройки активировались</string>
     <string name="settings_info_offline_maps_title">Информация про оффлайновые карты</string>
     <string name="settings_info_themes_title">Информация по темам карт</string>
-    <string name="settings_info_themes">c:geo предлагает пользовательские темы для оффлайновых карт. Они могут быть использованы для изменения цветового стиля (например, ночные карты) или для выделения определенных объектов, таких как велосипедные маршруты или линии уровня.</string>
     <string name="init_mapsource_select">Выберите источник карт</string>
     <string name="init_dataDir_note">Вы можете сохранять дополнительные данные тайников (спойлеры, картинки в блокноте и пр.) на внешнем хранилище (виртуальная или настоящая SD-карта, в зависимости от устройства).</string>
     <string name="init_maptrail">Показать историю трека</string>
@@ -854,7 +853,6 @@
     <string name="cache_dialog_favorite_remove_message">Удаляем рекомендацию…</string>
     <string name="cache_menu_navigate">Навигация</string>
     <string name="cache_menu_navigation_drive">Навигация (за рулем)</string>
-    <string name="cache_menu_navigation_drive_select_target">Тайник или парковка?</string>
     <string name="cache_menu_navigation_walk">Навигация (пешком)</string>
     <string name="cache_menu_navigation_transit">Навигация (общественный транспорт)</string>
     <string name="cache_menu_navigation_bike">Навигация (велосипед)</string>

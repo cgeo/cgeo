@@ -449,7 +449,6 @@
     <string name="init_backup_last_no">Walay file nga adunay tabang.</string>
     <string name="settings_info_offline_maps_title">Impormasyon sa Offline nga mga mapa</string>
     <string name="settings_info_themes_title">Pahibalo sa mga tema sa mapa</string>
-    <string name="settings_info_themes">ang c:geo nag suporta og gawi na mga tema para sa offline na mga mapa. Kani puwede magamit para mailisan and kolor og estilo sa mapa (para adunay nightview nga mapa) o para patugbaw sa mga sigurado na butanga pareha sa subayanan sa sikulo o linya sa gitas-on sulod sa mapa.</string>
     <string name="init_mapsource_select">Pagpili og kakuhaan sa mapa</string>
     <string name="init_dataDir_note">Pwede ka makapili kung asa nimo itago ang mga napun-ang data para sa mga geocache (spoilers, log na mga imahe, …) sa imong panggawas na tagu-anan (na-emulate o tinuod na panggawas na SD kard depende sa imong debays).</string>
     <string name="init_include_found_status">Apili ang \"Found\" na kahimtang</string>
@@ -621,7 +620,6 @@
     <string name="cache_dialog_favorite_remove_message">Pagtangtang sa cache gikan sa imong mga paborito…</string>
     <string name="cache_menu_navigate">Pag-navigate</string>
     <string name="cache_menu_navigation_drive">Nabigasyon (Pagmaneho)</string>
-    <string name="cache_menu_navigation_drive_select_target">Cache o parkingan na lugar?</string>
     <string name="cache_menu_navigation_walk">Nabigasyon (Paglakaw)</string>
     <string name="cache_menu_navigation_transit">Nabigasyon (Transit)</string>
     <string name="cache_menu_navigation_bike">Nabigasyon (Bike)</string>

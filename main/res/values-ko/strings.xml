@@ -597,7 +597,6 @@
     <string name="settings_restart">로드 된 설정을 적용하려면 c:geo를 다시 시작해야합니다.</string>
     <string name="settings_info_offline_maps_title">오프라인 지도에 대한 정보</string>
     <string name="settings_info_themes_title">지도 테마에 대한 정보</string>
-    <string name="settings_info_themes">c:geo는 오프라인 지도용 테마를 지원합니다. 테마는 지도의 색 스타일을 바꾸거나(예: 야간 모드 지도), 자전거도로나 등고선등을 강조하는데 사용될 수 있습니다.</string>
     <string name="init_mapsource_select">지도 선택</string>
     <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진…) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
     <string name="init_maptrail">최근 역사 트랙 표시</string>
@@ -850,7 +849,6 @@
     <string name="cache_dialog_favorite_remove_message">호감캐시에서 삭제중…</string>
     <string name="cache_menu_navigate">길찾기</string>
     <string name="cache_menu_navigation_drive">길찾기(자동차)</string>
-    <string name="cache_menu_navigation_drive_select_target">캐시 또는 주차장?</string>
     <string name="cache_menu_navigation_walk">길찾기(도보)</string>
     <string name="cache_menu_navigation_transit">길찾기(대중교통)</string>
     <string name="cache_menu_navigation_bike">길찾기(자전거)</string>
@@ -884,7 +882,6 @@
     <string name="cache_menu_checker">Geochecker 열기</string>
     <string name="cache_menu_challenge_checker">도전 확인프로그램 찾기</string>
     <string name="cache_menu_ignore">캐시 제외시키기</string>
-    <string name="cache_log_menu_title">%1$s 중 %2$s 로그</string>
     <string name="ignore_confirm_title">조심하세요</string>
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
