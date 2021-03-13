@@ -660,7 +660,6 @@
     <string name="settings_info_offline_maps_title">Çevrimdışı haritaların bilgisi</string>
     <string name="settings_info_offline_maps">c:geo\'da çevrimdışı harita kullanabilirsiniz. Haritaları diğer kaynaklardan elde edebilir veya kendi haritalarınızı yaratabilirsiniz (OSM verilerinden). Öncelikle, çevrim dışı haritaların depolanacağı klasörü seçmelisiniz.</string>
     <string name="settings_info_themes_title">Harita temalarının bilgisi</string>
-    <string name="settings_info_themes">c:geo çevrimdışı haritalar için özel temaları destekler. Bunlar, haritanın renk stilini değiştirmek (örn.bir gece görüş haritasına sahip olmak) veya harita içindeki döngü yolları veya yükseklik çizgileri gibi belirli nesneleri vurgulamak için kullanılabilir.</string>
     <string name="init_mapsource_select">Harita kaynağı seçin</string>
     <string name="init_local_file_system">Yerel Dosya Sistemi</string>
     <string name="init_base_directory_description">Ortak yerel veriler için temel klasör</string>
@@ -811,13 +810,11 @@
     <string name="sendToCgeo_no_registration">c:geo, Geocache\'leri indirmekte başarısız oldu. Send2cgeo için kayıt süresi doldu. Lütfen ayarları kaydedin.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">%s Klasörünü Değiştir</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">%1$s klasörü şu an \'%2$s\' özelliğine ayarlı ve %3$s ve %4$s içeriyor.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Varsayılan klasörü \'%s\' veya kullanıcı tanımlı başka bir klasörü kullanmayı seçebilirsiniz.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Hiç bir şey yapma</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Tüm içeriği kopyala</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Tüm içeriği taşı</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Başka işlem yok</string>
-    <string name="contentstorage_selectfolder_dialog_choice">Şu anda saklanan klasörden farklı bir klasör seçtiniz. Nasıl devam etmek istersiniz?\n\nKlasör seç ve</string>
     <string name="contentstorage_folder_selection_aborted">Dosya seçimi iptal ediliyor, dosya \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Klasör \'%s\' olarak ayarlandı</string>
     <string name="contentstorage_file_selection_aborted">Dosya seçimi iptal ediliyor</string>
