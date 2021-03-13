@@ -575,7 +575,6 @@
     <string name="settings_restart">c:geo debe reiniciarse ahora para que la configuración cargada tenga efecto</string>
     <string name="settings_info_offline_maps_title">Mapas sin conexión</string>
     <string name="settings_info_themes_title">Información sobre temas de mapas</string>
-    <string name="settings_info_themes">c:geo permite personalizar los mapas sin conexión. Se puede usar para cambiar el estilo del color del mapa (p. ej. tener un mapa de visión nocturna) o para resatar ciertos objetos como carriles bici o líneas de altitud en el mapa.</string>
     <string name="init_mapsource_select">Elegir proveedor de mapas</string>
     <string name="init_dataDir_note">Puedes elegir almacenar los datos adicionales de los cachés (spoilers, imágenes de los registros, …) en tu almacenamiento externo (emulado o en una tarjeta SD real externa, dependiendo de tu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de rutas</string>
