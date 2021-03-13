@@ -662,7 +662,6 @@
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
     <string name="settings_info_offline_maps">c:geo obsługuje mapy do użytku offline. Możesz uzyskać mapy od różnych dostawców lub nawet tworzyć własne mapy (z danych OSM). Najpierw musisz wybrać folder, w którym mapy offline mają być przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
-    <string name="settings_info_themes">c:geo wspiera motywy dla map offline. Mogą być używane by zmienić kolorystykę mapy (np. aby uzyskać tryb nocny) lub by zaznaczyć wybrane obiekty jak ścieżki rowerowe lub izolinie.</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
@@ -813,13 +812,11 @@
     <string name="sendToCgeo_no_registration">c:geo nie może pobrać skrzynek. Rejestracja do send2cgeo wygasła. Proszę zarejestrować urządzenie w Ustawieniach.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Zmień folder %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Folder %1$s jest ustawiony na \'%2$s\' i zawiera %3$s i %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Możesz użyć domyślnego folderu \'%s\' lub wybrać folder zdefiniowany przez użytkownika.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nic nie rób</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopiuj całą zawartość</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Przenieś całą zawartość</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Bez dalszych działań</string>
-    <string name="contentstorage_selectfolder_dialog_choice">Wybrałeś inny folder niż obecnie przechowywany. Jak chcesz kontynuować?\n\nWybierz folder i</string>
     <string name="contentstorage_folder_selection_aborted">Przerwano wybór folderu, folder \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Folder ustawiony na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Przerwano wybór pliku</string>
