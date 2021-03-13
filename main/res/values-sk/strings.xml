@@ -1256,7 +1256,7 @@
     <string name="map_live_enable">Povoliť aktívnu mapu</string>
     <string name="map_live_disable">Zakázať aktívnu mapu</string>
     <string name="map_as_list">Zobraziť ako zoznam</string>
-    <string name="map_select_multiple_items">Vybrať položku</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Vybrať položku</string>
     <string name="map_routing">Trasa (Momentálne: %s)</string>
     <string name="map_routing_brouter">Trasovanie je k dispozícii len vtedy, ak je nainštalovaná aplikácia <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatické otáčanie mapy</string>
