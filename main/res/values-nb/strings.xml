@@ -645,7 +645,6 @@
     <string name="settings_restart">c:geo må restartes for å bruke de innlastede innstillingene</string>
     <string name="settings_info_offline_maps_title">Info på kart lagret lokalt</string>
     <string name="settings_info_themes_title">Info om karttemaene</string>
-    <string name="settings_info_themes">c:geo støtter tilpassede temaer for offline-kart. Temaene kan brukes for å endre fargene på kartet (f.eks for kart tilpasset nattbruk) eller for å tydeliggjøre visse objekter slik som sykkelveier eller høydekurver.</string>
     <string name="init_mapsource_select">Velg kartkilde</string>
     <string name="init_local_file_system">Lokalt filsystem</string>
     <string name="init_map_directory_description">Mappe for offline-kart</string>
