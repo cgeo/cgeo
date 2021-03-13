@@ -24,8 +24,7 @@ Logs können direkt online übertragen oder offline gespeichert werden um sie sp
 
 Suche Trackables und verwalte dein Trackables-Inventar direkt beim Schreiben eines Cache-Logs.
 
-Wenn du Probleme bei der Installation oder Nutzung von c:geo hast, lies zuerst unsere FAQ
-(https://faq.cgeo.org) oder schau in unser Benutzerhandbuch (https://manual.cgeo.org).
+Wenn du Probleme bei der Installation oder Nutzung von c:geo hast, lies zuerst unsere FAQ (https://faq.cgeo.org) oder schau in unser Benutzerhandbuch (https://manual.cgeo.org).
 Wenn du weiterhin Probleme hast, kontaktiere unseren Support per Mail.
 
 Wenn du wissen möchtest, warum c:geo die angeforderten Berechtigungen benötigt, findest du auf https://www.cgeo.org/faq#permissions eine Erklärung.
