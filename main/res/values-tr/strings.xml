@@ -1235,7 +1235,7 @@
     <string name="map_live_enable">Anlık görüntü açık</string>
     <string name="map_live_disable">Anlık görüntü kapalı</string>
     <string name="map_as_list">Liste olarak göster</string>
-    <string name="map_select_multiple_items">Öğe seç</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Öğe seç</string>
     <string name="map_routing">Rotalama (Şu an: %s)</string>
     <string name="map_routing_brouter">Rotalama sadece <a href="">BRouter</a> yüklenmişse kullanılabilir</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
