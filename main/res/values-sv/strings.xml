@@ -642,7 +642,6 @@
     <string name="settings_info_offline_maps_title">Info om Offline-kartor</string>
     <string name="settings_info_offline_maps">c:geo stöder kartor för offline-användning. Du kan få kartor från olika leverantörer eller till och med skapa egna kartor (från OSM-data). Först måste du välja den mapp där offline-kartor ska lagras.</string>
     <string name="settings_info_themes_title">Info om kartteman</string>
-    <string name="settings_info_themes">c:geo har stöd för anpassade teman för offline-kartor. Dessa kan användas för färgerna på kartan (t.ex. för nattläge) eller för att tydliggöra vissa objekt såsom cykelvägar eller höjdkurvor.</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="init_local_file_system">Lokalt filsystem</string>
     <string name="init_base_directory_description">Basmapp för offentlig lokal data</string>
@@ -796,7 +795,6 @@
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopiera allt innehåll</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Flytta allt innehåll</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Ingen ytterligare åtgärd</string>
-    <string name="contentstorage_selectfolder_dialog_choice">Du har valt en annan mapp än den som lagrats just nu. Hur vill du fortsätta?\n\nVälj mapp och</string>
     <string name="contentstorage_folder_selection_aborted">Avbryter val av mapp, mappen är \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Mappen satt till \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Avbryter filval</string>
