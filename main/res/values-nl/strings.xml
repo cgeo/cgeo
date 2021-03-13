@@ -660,7 +660,6 @@
     <string name="settings_info_offline_maps_title">Info over offline kaarten</string>
     <string name="settings_info_offline_maps">c:geo ondersteunt kaarten voor offline gebruik. Je kunt kaarten verkrijgen van verschillende providers of zelfs je eigen kaarten maken (van OSM gegevens). Eerst dien je de map te selecteren waarin offline kaarten moeten worden opgeslagen.</string>
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
-    <string name="settings_info_themes">c:geo ondersteund aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt voor het aanpassen om kleurstijlen van de kaart (bijv. een nachtmodus) of het accentueren van bepaalde objecten zoals fietspaden of hoogtelijnen op de kaart.</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="init_local_file_system">Lokaal bestandssysteem</string>
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
@@ -811,13 +810,11 @@
     <string name="sendToCgeo_no_registration">Het is c:geo niet gelukt om de caches te downloaden. De registratie van send2cgeo is verlopen. Registreer s.v.p. in de instellingen.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Map %s wijzigen</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">De map %1$s is momenteel ingesteld op \'%2$s\' en bevat %3$s en %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Je kunt kiezen voor de standaard map \'%s\' of een door de gebruiker gedefinieerde map kiezen.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Niets doen</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Alle inhoud kopiëren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Alle inhoud verplaatsen</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Geen verdere actie</string>
-    <string name="contentstorage_selectfolder_dialog_choice">Je hebt een andere map geselecteerd dan momenteel is opgeslagen. Hoe wil je doorgaan?\n\nSelecteer map en</string>
     <string name="contentstorage_folder_selection_aborted">Mapselectie afbreken, map is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Map ingesteld op \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Afbreken bestand selectie</string>
