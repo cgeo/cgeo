@@ -1,4 +1,4 @@
-To jest wtyczka kontaktów dla c:geo, otwartoźródłowej aplikacji geocaching. Działa tylko z zainstalowaną aplikacją c:geo i pozwala na bezpośredni dostęp do Twojej książki telefonicznej po kliknięciu na nazwę użytkownika w c:geo.
+To jest wtyczka kontaktów dla c:geo, otwartoźródłowej aplikacji geocachingowej. Działa tylko z zainstalowaną aplikacją c:geo i pozwala na bezpośredni dostęp do Twojej książki telefonicznej po kliknięciu na nazwę użytkownika w c:geo.
 
 Sposób użycia:
 Po kliknięciu nazwy użytkownika w c:geo (np. w logbooku skrzynki) menu będzie zawierało element umożliwiający otwarcie karty odpowiedniego kontaktu w książce telefonicznej Twojego telefonu. Pozwoli to na bezpośrednie zadzwonienie lub wysłanie wiadomości do użytkownika.
