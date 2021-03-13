@@ -438,7 +438,7 @@
     <string name="contribution_graphics">grafik</string>
     <string name="debug_user_error_report_title">Rapportér et problem</string>
     <string name="debug_user_error_errortext">Der er opstået et uventet problem, som vi vil bede dig om at rapportere til os:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Hjælp os med at løse fejl i c:geo ved at indberette dem. Send en e-mail med system-informationer og logfilen fra c:geo. Skriv også en detaljeret fejlbeskrivelse i mailen. Andre kontakt-måder findes under <i>Om c:geo</i></p>]]></string>
+    <string name="debug_user_error_explain_options">Hjælp os med at løse fejl i c:geo ved at indberette dem. Send en e-mail med system-informationer og logfilen fra c:geo. Skriv også en detaljeret fejlbeskrivelse i mailen. Andre kontakt-måder findes under \'Om c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Åbn indstillinger?</string>
     <string name="settings_title_services">Tjenester</string>

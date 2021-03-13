@@ -451,7 +451,7 @@
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Nahlásenie problému</string>
     <string name="debug_user_error_errortext">Vyskytol sa nečakaný problém a radi by sme vás požiadali, aby ste nám ho nahlásili:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Pomôžte nám s opravou problémov aplikácie c:geo pomocou e-mailu s informáciami o systéme a súborom denníka z aplikácie c:geo. Do vášho e-mailu vložte aj podrobný popis chyby, prosím. Ďalšie možnosti kontaktu nájdete v časti <i>O aplikácii c:geo</i></p>]]></string>
+    <string name="debug_user_error_explain_options">Pomôžte nám s opravou problémov aplikácie c:geo pomocou e-mailu s informáciami o systéme a súborom denníka z aplikácie c:geo. Do vášho e-mailu vložte aj podrobný popis chyby, prosím. Ďalšie možnosti kontaktu nájdete v časti \'O aplikácii c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otvoriť nastavenia?</string>
     <string name="settings_title_services">Služby</string>

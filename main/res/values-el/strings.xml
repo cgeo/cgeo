@@ -449,7 +449,7 @@
     <string name="contribution_graphics">γραφικά</string>
     <string name="debug_user_error_report_title">Αναφορά προβλήματος</string>
     <string name="debug_user_error_errortext">Ένα αναπάντεχο σφάλμα συνέβη, το οποίο θα θέλαμε να μας το γνωστοποιήσετε:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Βοηθήστε μαςνα βελτιώσουμε το c:geo με την αποστολή email περλαμβάνοντας πληροφορίες για το συστημα σας και την καταγραφή του προβλήματος. Για αλλες επιλογές επαφής δειτε στο <i>Σχετικά με το c:geo</i></p>]]></string>
+    <string name="debug_user_error_explain_options">Βοηθήστε μαςνα βελτιώσουμε το c:geo με την αποστολή email περλαμβάνοντας πληροφορίες για το συστημα σας και την καταγραφή του προβλήματος. Για αλλες επιλογές επαφής δειτε στο \'Σχετικά με το c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Άνοιγμα ρυθμίσεων;</string>
     <string name="settings_title_services">Υπηρεσίες</string>
@@ -1869,7 +1869,7 @@
     <string name="receivemapfile_cancelled">Η μεταφορά του αρχείου χάρτη ακυρώθηκε</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Λήψη χαρτών εκτός σύνδεσης</string>
-    <string name="downloadmap_info">Επιλέξτε ένα αρχείο χάρτη για την περιοχή σας πατώντας το εικονίδιο \"Αποθήκευση\".\n\n 
+    <string name="downloadmap_info">Επιλέξτε ένα αρχείο χάρτη για την περιοχή σας πατώντας το εικονίδιο \"Αποθήκευση\".\n\n
 Η λήψη θα εκτελεστεί στο παρασκήνιο. Όταν ολοκληρωθεί, το αρχείο θα αντιγραφεί στον κατάλογο χαρτών του c: geo και θα οριστεί ως τρέχων χάρτης. \n\nΠροσοχή: Η λήψη ενός χάρτη μπορεί να προκαλέσει υψηλή κίνηση στο δίκτυο!</string>
     <string name="downloadmap_choose">Επιλέξτε χάρτη</string>
     <string name="downloadmap_filename">Γίνεται λήψη του %s</string>

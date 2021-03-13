@@ -449,7 +449,7 @@
     <string name="contribution_graphics">grafiikat</string>
     <string name="debug_user_error_report_title">Ilmoita ongelmasta</string>
     <string name="debug_user_error_errortext">Tapahtui odottamaton virhe, ja haluaisimme pyytää sinua raportoimaan siitä meille:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Auta meitä korjaamaan c:geon ongelmia raportoimalla ne sähköpostin kautta. Raportti sisältää järjestelmätietoja sekä c:geon lokitiedoston. Lisääthän sähköpostiin myös yksityiskohtaisen virheselosteen. Muita yhteydenottotapoja löydät kohdasta <i>Tietoja c:geosta</i></p>]]></string>
+    <string name="debug_user_error_explain_options">Auta meitä korjaamaan c:geon ongelmia raportoimalla ne sähköpostin kautta. Raportti sisältää järjestelmätietoja sekä c:geon lokitiedoston. Lisääthän sähköpostiin myös yksityiskohtaisen virheselosteen. Muita yhteydenottotapoja löydät kohdasta \'Tietoja c:geosta\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>
