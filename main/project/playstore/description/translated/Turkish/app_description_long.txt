@@ -15,7 +15,7 @@ Temel özellikler:
 Birçok ek özellikleriyle beraber c:geo basit ama güçlü bir Geocaching sağlayıcısıdır. Başlamak için tek ihtiyacınız olan şey geocaching.com veya başka geocaching platformunda (Opencaching gibi) bir hesabınızın olmasıdır.
 Canlı haritayı kullanarak ya da arama özelliklerinden birini kullanarak cache'leri bulun.
 
-Kutuya veya yol noktasına haritayla, dahili pusula özelliğiyle veya koordinatları harici uygulamalardan birine aktararak(örn. Radar, Google Haritalar, StreetView, Locus, Navigon, Sygic ve daha fazlası) gidiniz.
+Kutuya veya yol noktasına haritayla, dahili pusula özelliğiyle veya koordinatları harici uygulamalardan birine aktararak(örn.
 
 Kutu bilgilerini doğrudan geocaching.com adresinden ve istediğiniz zaman kullanabilmeniz için GPX dosyasını içe aktarım yoluyla cihazınızda depolayın.
 Depolanmış kutularınızı farklı listelerde yönetebilir, ihtiyaçlarınıza göre sıralayabilir ve filtreleyebilirsiniz.
