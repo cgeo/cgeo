@@ -634,7 +634,6 @@
     <string name="settings_restart">c:geo skal genstartes før at de indlæste indstillinger tager effekt</string>
     <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
     <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
-    <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver.</string>
     <string name="init_mapsource_select">Vælg kortkilde</string>
     <string name="init_dataDir_note">Du kan vælge at gemme yderligere data for geocacher (spoilere, logbilleder osv.) i din eksterne hukommelse (emuleret eller ægte SD-kort, afhængig af din enhed).</string>
     <string name="init_maptrail">Vis spor</string>
