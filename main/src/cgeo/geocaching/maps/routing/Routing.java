@@ -200,13 +200,13 @@ public final class Routing {
         params.putDoubleArray("lons", new double[]{start.getLongitude(), dest.getLongitude()});
         params.putString("v", Settings.getRoutingMode().parameterValue);
 
-        final String gpx = brouter.getTrackFromParams(params);
+        final String gpx = brouter == null ? null : brouter.getTrackFromParams(params);
 
         if (gpx == null) {
             Log.i("brouter returned no data");
             return null;
         }
-        
+
         if (!gpx.startsWith("<?xml")) {
             Log.w("brouter returned an error message: " + gpx);
             return null;
