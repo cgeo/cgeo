@@ -657,6 +657,7 @@
     <string name="init_backup_settings_restore">Einstellungen wiederherstellen</string>
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
+    <string name="settings_folder_changed">Einstellung für Ordner \"%1$s\" wurde auf \"%2$s\" geändert.\n\nTippe auf \"%3$s\", um die aktuelle Einstellung für diesen Ordner zu behalten.\n\nTippe auf \"%4$s\", um den alten Ordner festzulegen. In diesem Fall wirst du aufgefordert, c:geo Zugriff auf diesen Ordner zu geben.</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo unterstützt Karten für Offline-Nutzung. Du kannst Karten von verschiedenen Anbietern beziehen oder sogar eigene Karten erstellen (aus OSM-Daten). Du musst zuerst den Ordner auswählen, in dem Offline-Karten gespeichert werden sollen.</string>
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
