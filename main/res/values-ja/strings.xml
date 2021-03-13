@@ -659,7 +659,6 @@
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図をサポートしています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
-    <string name="settings_info_themes">オフライン地図用のテーマが使用できます。カラースタイル(ナイトビュー用などに)を変更したり、自転車道や等高線など特定のオブジェクトをハイライトすることができます</string>
     <string name="init_mapsource_select">地図の選択</string>
     <string name="init_local_file_system">ローカルファイルシステム</string>
     <string name="init_base_directory_description">データ保存のベースフォルダ</string>
@@ -810,13 +809,11 @@
     <string name="sendToCgeo_no_registration">キャッシュ情報がダウンロードできませんでした。Send2cgeoの有効期限が過ぎました。再登録してください</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">%sフォルダを変更</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">%1$sフォルダは現在「%2$s」に設定されており、%3$sと%4$sが含まれています。</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">デフォルトのフォルダ「%s」を使用するか、ユーザー定義のフォルダを選択することができます。</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">何もしない</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">すべてのファイルをコピー</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">すべてのファイルを移動</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">なにもしない</string>
-    <string name="contentstorage_selectfolder_dialog_choice">現在保存されているフォルダとは異なるフォルダを選択しました。どうしますか?\n\nフォルダを選択し、</string>
     <string name="contentstorage_folder_selection_aborted">フォルダの選択を中止しました。フォルダは「%s」です</string>
     <string name="contentstorage_folder_selection_success">フォルダを「%s」に設定しました</string>
     <string name="contentstorage_file_selection_aborted">ファイル選択を中止しました</string>
