@@ -1260,7 +1260,7 @@
     <string name="attribute_hike_short_no">不是短程健行</string>
     <string name="attribute_hike_med_yes">中程健行 (1~10 公里)</string>
     <string name="attribute_hike_med_no">不是中程健行</string>
-    <string name="attribute_hike_long_yes">長程健行 (>10 公里)</string>
+    <string name="attribute_hike_long_yes">長程健行 (&gt;10 公里)</string>
     <string name="attribute_hike_long_no">不是長程健行</string>
     <string name="attribute_seasonal_yes">季節限定</string>
     <string name="attribute_seasonal_no">無季節限定</string>
