@@ -2,6 +2,7 @@ package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -13,16 +14,18 @@ public class OfflineGeocacheListLoader extends AbstractSearchLoader {
 
     private final int listId;
     private final Geopoint searchCenter;
+    private final IGeocacheFilter filter;
 
-    public OfflineGeocacheListLoader(final Activity activity, final Geopoint searchCenter, final int listId) {
+    public OfflineGeocacheListLoader(final Activity activity, final Geopoint searchCenter, final int listId, final IGeocacheFilter filter) {
         super(activity);
         this.searchCenter = searchCenter;
         this.listId = listId;
+        this.filter = filter;
     }
 
     @Override
     public SearchResult runSearch() {
-        return DataStore.getBatchOfStoredCaches(searchCenter, Settings.getCacheType(), listId);
+        return DataStore.getBatchOfStoredCaches(searchCenter, Settings.getCacheType(), listId, filter);
     }
 
     /**

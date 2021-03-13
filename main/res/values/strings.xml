@@ -388,6 +388,7 @@
     <string name="caches_copy_all">Copy all</string>
     <string name="caches_map_locus_export">Export to Locus</string>
     <string name="caches_filter">Filter</string>
+    <string name="caches_filter_menuitem">New Cache Filter (Experimental)</string>
     <string name="caches_filter_title">Filter by</string>
     <string name="caches_filter_size">Size</string>
     <string name="caches_filter_type">Type</string>

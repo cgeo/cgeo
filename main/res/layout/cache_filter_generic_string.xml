@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/advancedfilter_generic_string"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".filters.gui.GeocacheFilterActivity">
+
+    <Spinner
+        android:id="@+id/select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:id="@+id/text"
+        style="@style/edittext_full"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/select"
+        android:layout_alignParentRight="true"
+        android:minLines="1"/>
+
+    <CheckBox
+        android:id="@+id/match_case"
+        android:text="Match Case"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

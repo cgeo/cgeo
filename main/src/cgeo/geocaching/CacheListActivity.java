@@ -32,6 +32,9 @@ import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterActivity;
 import cgeo.geocaching.filter.IFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterUtils;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
@@ -117,6 +120,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import java.lang.ref.WeakReference;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -167,6 +171,21 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private long detailProgressTime = 0L;
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
     private int markerId = EmojiUtils.NO_EMOJI;
+
+    /**
+     * Action bar spinner adapter. {@code null} for list types that don't allow switching (search results, ...).
+     */
+    CacheListSpinnerAdapter mCacheListSpinnerAdapter;
+
+    /**
+     * remember current filter when switching between lists, so it can be re-applied afterwards
+     */
+    private IFilter currentFilter = null;
+    private String currentCacheFilterConfig = null;
+    private boolean currentInverseSort = false;
+
+    private SortActionProvider sortProvider;
+
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
@@ -503,6 +522,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         setTitle(title);
 
+        currentCacheFilterConfig = Settings.getCacheFilterConfig();
+
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
             // Restore value of members from saved state
@@ -552,19 +573,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putInt(STATE_MARKER_ID, markerId);
         savedInstanceState.putBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER, contentStorageActivityHelper.getState());
     }
-
-    /**
-     * Action bar spinner adapter. {@code null} for list types that don't allow switching (search results, ...).
-     */
-    CacheListSpinnerAdapter mCacheListSpinnerAdapter;
-
-    /**
-     * remember current filter when switching between lists, so it can be re-applied afterwards
-     */
-    private IFilter currentFilter = null;
-    private boolean currentInverseSort = false;
-
-    private SortActionProvider sortProvider;
 
     private void initActionBarSpinner() {
         mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
@@ -650,7 +658,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && (listId >= StoredList.STANDARD_LIST_ID || listId == PseudoList.ALL_LIST.id) && search != null) {
-            final SearchResult newSearch = DataStore.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
+            final SearchResult newSearch = DataStore.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId, getCurrentFilter());
             if (newSearch.getTotalCountGC() != search.getTotalCountGC()) {
                 refreshCurrentList();
             }
@@ -891,6 +899,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_filter) {
             showFilterMenu(null);
+        } else if (menuItem == R.id.menu_cache_filter) {
+            showGeocacheFilterMenu();
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
@@ -1003,6 +1013,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else {
             FilterActivity.selectFilter(this);
         }
+    }
+
+    public void showGeocacheFilterMenu() {
+        GeocacheFilterActivity.selectFilter(this, currentCacheFilterConfig, adapter.getFilteredList(), true);
     }
 
     private void setComparator(final CacheComparator comparator) {
@@ -1169,9 +1183,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return adapter.findCacheByGeocode(contextMenuGeocode);
     }
 
-    private void setFilter(final IFilter filter) {
+    private void setFilter(final IFilter filter, final String cacheFilterConfig) {
         currentFilter = filter;
-        adapter.setFilter(filter);
+
+        currentCacheFilterConfig = cacheFilterConfig;
+
+        adapter.setFilter(currentFilter, currentCacheFilterConfig);
         prepareFilterBar();
         updateTitle();
         invalidateOptionsMenuCompatible();
@@ -1192,7 +1209,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         adapter = new CacheListAdapter(this, cacheList, type);
         adapter.setStoredLists(Settings.showListsInCacheList() ? StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id) : null);
-        adapter.setFilter(currentFilter);
+        adapter.setFilter(currentFilter, currentCacheFilterConfig);
 
         if (listFooter == null) {
             listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, listView, false);
@@ -1289,7 +1306,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         } else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
-            setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]));
+            setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]), currentCacheFilterConfig);
+        } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+            currentCacheFilterConfig = data.getStringExtra(GeocacheFilterActivity.EXTRA_FILTER_RESULT);
+            Settings.setCacheFilterConfig(currentCacheFilterConfig);
+            setFilter(currentFilter, currentCacheFilterConfig);
         }
 
         if (type == CacheListType.OFFLINE) {
@@ -1831,7 +1852,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     markerId = list.markerId;
                 }
 
-                loader = new OfflineGeocacheListLoader(this, coords, listId);
+                loader = new OfflineGeocacheListLoader(this, coords, listId, getCurrentFilter());
 
                 break;
             case HISTORY:
@@ -1978,7 +1999,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (adapter.isFiltered()) {
             result.append(adapter.getCount()).append('/');
         }
-        result.append(getCacheNumberString(getResources(), search.getCount()));
+        result.append(getCacheNumberString(getResources(), type == CacheListType.OFFLINE ? search.getTotalCountGC() : search.getCount()));
         return result.toString();
     }
 
@@ -1990,5 +2011,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         NO_ACTION,
         /** Check if the list is empty and prompt for deletion */
         CHECK_IF_EMPTY
+    }
+
+    public IGeocacheFilter getCurrentFilter() {
+        if (currentCacheFilterConfig == null) {
+            return null;
+        }
+        try {
+            return GeocacheFilterUtils.createFilter(currentCacheFilterConfig);
+        } catch (ParseException pe) {
+            Log.w("Could not parse filter", pe);
+            return null;
+        }
     }
 }

@@ -15,6 +15,7 @@ import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
@@ -3339,52 +3340,78 @@ public class DataStore {
      * @return a non-null set of geocodes
      */
     @NonNull
-    private static Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final CacheType cacheType, final int listId) {
+    private static Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final CacheType cacheType, final int listId, final IGeocacheFilter filter) {
         if (cacheType == null) {
             throw new IllegalArgumentException("cacheType must not be null");
         }
 
+
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "DataStore.loadBatchOfStoredGeocodes(coords=%s, type=%s, list=%d)",
                 String.valueOf(coords), String.valueOf(cacheType), listId)) {
-            final StringBuilder selection = new StringBuilder();
 
-            String[] selectionArgs = null;
+            final SqlBuilder sqlBuilder = new SqlBuilder(dbTableCaches, new String[]{"geocode"});
+
+            sqlBuilder.addWhere("geocode IN (SELECT geocode FROM " + dbTableCachesLists + " WHERE list_id " +
+                (listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID) + ")");
+
             if (cacheType != CacheType.ALL) {
-                selection.append(" type = ? AND");
-                selectionArgs = new String[] { String.valueOf(cacheType.id) };
+                sqlBuilder.addWhere("type = '" + cacheType.id + "'");
             }
-
-            selection.append(" geocode IN (SELECT geocode FROM ");
-            selection.append(dbTableCachesLists);
-            selection.append(" WHERE list_id ");
-            selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
-            selection.append(')');
-
-            cLog.add("Sel:" + selection);
-
+            if (filter != null) {
+                filter.addToSql(sqlBuilder);
+                Log.w("SQL: [" + sqlBuilder.getSql() + "]");
+            }
             if (coords != null) {
-                return queryToColl(dbTableCaches,
-                        new String[]{"geocode", "(ABS(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
-                                ") + ABS(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) AS dif"},
-                        selection.toString(),
-                        selectionArgs,
-                        "dif",
-                        null,
-                        new HashSet<>(),
-                        GET_STRING_0);
+                sqlBuilder.addOrder(getCoordDiffExpression(coords));
             }
-            return queryToColl(dbTableCaches,
-                    new String[] { "geocode" },
-                    selection.toString(),
-                    selectionArgs,
-                    "geocode",
-                    null,
-                    new HashSet<>(),
-                    GET_STRING_0);
+            cLog.add("Sel:" + sqlBuilder.getSql());
+
+            return cursorToColl(database.rawQuery(sqlBuilder.getSql(), null), new HashSet<>(), GET_STRING_0);
+
+//            final StringBuilder selection = new StringBuilder();
+//
+//            String[] selectionArgs = null;
+//            if (cacheType != CacheType.ALL) {
+//                selection.append(" type = ? AND");
+//                selectionArgs = new String[] { String.valueOf(cacheType.id) };
+//            }
+//
+//            selection.append(" geocode IN (SELECT geocode FROM ");
+//            selection.append(dbTableCachesLists);
+//            selection.append(" WHERE list_id ");
+//            selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
+//            selection.append(')');
+
+//            cLog.add("Sel:" + selection);
+//
+//            if (coords != null) {
+//                return queryToColl(dbTableCaches,
+//                        new String[]{"geocode", "(ABS(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
+//                                ") + ABS(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) AS dif"},
+//                        selection.toString(),
+//                        selectionArgs,
+//                        "dif",
+//                        null,
+//                        new HashSet<>(),
+//                        GET_STRING_0);
+//            }
+//            return queryToColl(dbTableCaches,
+//                    new String[] { "geocode" },
+//                    selection.toString(),
+//                    selectionArgs,
+//                    "geocode",
+//                    null,
+//                    new HashSet<>(),
+//                    GET_STRING_0);
         } catch (final Exception e) {
             Log.e("DataStore.loadBatchOfStoredGeocodes", e);
             return Collections.emptySet();
         }
+    }
+
+    private static String getCoordDiffExpression(@NonNull final Geopoint coords) {
+        return "(ABS(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
+            ") + ABS(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + "))";
     }
 
     @NonNull
@@ -4383,7 +4410,12 @@ public class DataStore {
 
     @NonNull
     public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId) {
-        final Set<String> geocodes = loadBatchOfStoredGeocodes(coords, cacheType, listId);
+        return getBatchOfStoredCaches(coords, cacheType, listId, null);
+    }
+
+    @NonNull
+    public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId, final IGeocacheFilter filter) {
+        final Set<String> geocodes = loadBatchOfStoredGeocodes(coords, cacheType, listId, filter);
         return new SearchResult(geocodes, getAllStoredCachesCount(cacheType, listId));
     }
 

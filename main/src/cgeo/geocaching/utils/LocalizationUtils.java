@@ -45,6 +45,9 @@ public final class LocalizationUtils {
         if (APPLICATION_CONTEXT == null) {
             return "(NoCtx)" + (fallback == null ? "" : fallback) + "[" + StringUtils.join(params, ";") + "]";
         }
+        if (resId == 0) {
+            return String.format(fallback, params);
+        }
         return APPLICATION_CONTEXT.getString(resId, params);
     }
 

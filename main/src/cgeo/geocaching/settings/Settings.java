@@ -1752,4 +1752,13 @@ public class Settings {
     public static void setLocalStorageVersion(final int newVersion) {
         putInt(R.string.pref_localstorage_version, newVersion);
     }
+
+    public static String getCacheFilterConfig() {
+        return getString(R.string.pref_cache_filter_config, null);
+    }
+
+    public static void setCacheFilterConfig(final String config) {
+        putString(R.string.pref_cache_filter_config, config);
+    }
+
 }
