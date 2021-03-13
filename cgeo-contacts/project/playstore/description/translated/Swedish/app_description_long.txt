@@ -9,4 +9,4 @@ Användarnamnet på personen måste finnas i namn- eller alias-fältet för dina
 Kommentarer i PlayStore kan inte besvaras! Om du har problem med att installera eller använda c:geo, ta först en titt på vår FAQ: https://faq.cgeo.org
 Om du fortfarande har problem, kontakta vår support via e-post.
 
-If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
+Om du vill veta varför denna c:geo plugin behöver de behörigheter som begärs, läs denna artikel: https://www.cgeo.org/faq#plugin-contacts-privacy
