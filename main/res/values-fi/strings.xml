@@ -660,7 +660,6 @@
     <string name="settings_info_offline_maps_title">Offline-karttojen tiedot</string>
     <string name="settings_info_offline_maps">c:geo tukee offline-käyttöön tarkoitettuja karttoja. Voit hankkia karttoja eri tarjoajilta tai jopa luoda omia karttoja (OSM-data). Sinun on ensin valittava kansio johon offline-kartat on tallennettava.</string>
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
-    <string name="settings_info_themes">c:geo mahdollistaa offline-karttoihin teemat. Karttojen värimaailmaa voi muokata (voit valita karttaan vaikka yönäkymän) tai voit korostaa tiettyjä kohteita, kuten pyöräteitä tai korkeuskäyriä.</string>
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
     <string name="init_base_directory_description">Juurikansio julkiselle paikalliselle datalle</string>
@@ -811,13 +810,11 @@
     <string name="sendToCgeo_no_registration">c:geo ei onnistunut latamaan kätköjä. Kirjautuminen kohteeseen send2cgeo vanhentunut. Kirjaudu uudelleen asetuksien kautta.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Vaihda kansio %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Kansio %1$s on tällä hetkellä asetettu \'%2$s\' ja sisältää %3$s ja %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Voit halutessasi käyttää oletuskansiota \'%s\' tai valita käyttäjän määrittämän kansion.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Ei toimintoa</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopioi kaikki sisältö</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Siirrä kaikki sisältö</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Ei lisätoimia</string>
-    <string name="contentstorage_selectfolder_dialog_choice">Valitsit toisen kansion kuin tällä hetkellä tallennettu. Miten haluat jatkaa?\n\nValitse kansio ja</string>
     <string name="contentstorage_folder_selection_aborted">Kansion valinta keskeytetään, kansio on \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Kansio \'%s\' asetettu</string>
     <string name="contentstorage_file_selection_aborted">Tiedoston valinta keskeytetään</string>
