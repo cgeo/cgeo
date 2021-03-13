@@ -560,7 +560,7 @@
     <string name="init_brouterThreshold">Apskaičiuoti maršrutą</string>
     <string name="init_brouterThreshold_description">Maksimalus atstumas, iki kurio BRouter pagalbinė programa (jei įdiegta) apskaičiuoja maršrutą.</string>
     <string name="init_brouterShowBothDistances">Rodyti tiesų atstumą</string>
-    <string name="brouter_recalculating">Perskaičiuojamas maršrutas fone...</string>
+    <string name="brouter_recalculating">Perskaičiuojamas maršrutas fone…</string>
     <string name="init_summary_brouterShowBothDistances">Jei maršrutas aktyvus: Rodyti tiesų atstumą, be apskaičiuoto maršruto ilgio.</string>
     <string name="init_bigSmileysOnMap">Didelės užregistruotų slėptuvių piktogramos</string>
     <string name="init_disabled">Atmesti išjungtas</string>
