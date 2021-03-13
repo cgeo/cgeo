@@ -1235,7 +1235,7 @@
     <string name="map_live_enable">Activar em tempo real</string>
     <string name="map_live_disable">Desactivar em tempo real</string>
     <string name="map_as_list">Mostrar como lista</string>
-    <string name="map_select_multiple_items">Seleccionar item</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Seleccionar item</string>
     <string name="map_routing">Encaminhamento (Actualmente: %s)</string>
     <string name="map_routing_brouter">O encaminhamento só está disponível se <a href="">BRouter</a> estiver instalado</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
