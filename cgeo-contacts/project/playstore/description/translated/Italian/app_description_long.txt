@@ -1,4 +1,4 @@
-Questo è un plugin di contatti per c:geo, un'app di geocaching open source. Funziona solo con l'app c:geo installata e consente l'accesso diretto alla tua rubrica quando si clicca su un nome utente in c:geo.
+Questo è un plugin per gestire i contatti in c:geo, un'app di geocaching open source. Funziona solo con l'app c:geo installata e consente l'accesso diretto alla tua rubrica quando si clicca su un nome utente in c:geo.
 
 Utilizzo:
 Quando clicchi su un nome utente in c:geo (ad es. nel logbook della cache, il menu conterrà una voce per aprire la corrispondente scheda nei contatti del tuo telefono. Questo ti permetterà di chiamare direttamente o inviare messaggi all'utente.

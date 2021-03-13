@@ -389,6 +389,7 @@
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
     <string name="caches_set_listmarker">Ορίστε τον δείκτη της λίστας</string>
     <string name="select_icon">Επιλέξτε εικονίδιο</string>
+    <string name="onetime_missing_unicode_info">Η έκδοση Android σας δεν υποστηρίζει την αυτόματη ανίχνευση εικονιδίων που υποστηρίζονται - ορισμένοι χαρακτήρες μπορεί να λείπουν</string>
     <!-- caches lists -->
     <string name="menu_lists">Διαχείριση λιστών</string>
     <string name="list_menu_create">Δημιουργία νέας λίστας</string>
@@ -1684,6 +1685,10 @@
         <item quantity="other">Προσθήκη αυτής της κρύπτης στις αγαπημένες (απομένουν %d)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Ορισμός εικονιδίου κρύπτης</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">Ορισμός %d εικονιδίου κρύπτης</item>
+        <item quantity="other">Ορισμός %d εικονιδίων κρύπτης</item>
+    </plurals>
     <string name="pq_download_and_import">Εισαγωγή προσωποποιημένης αναζήτησης</string>
     <string name="caches_refresh_all_warning">Αυτή η ενέργεια ενδέχεται να προκαλέσει μεγάλη κυκλοφορία δικτύου. Είναι βέβαιοι ότι θέλετε να ανανεώσετε μαζικά όλες τις κρύπτες;</string>
     <string name="list_list_headline">Λίστες:</string>

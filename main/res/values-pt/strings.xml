@@ -596,17 +596,17 @@
     <string name="init_choose_list">Pedir a escolha de lista</string>
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
     <string name="init_listdisplay">Listas adicionais</string>
-    <string name="init_summary_listdisplay">Numa lista de caches, mostra o nome de outras listas a que cada cache armazenada esteja associada</string>
+    <string name="init_summary_listdisplay">Ao aceder a uma lista de caches armazenadas, é mostrado o nome de outras listas das quais essas caches possam estar associadas</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola, para as caches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Tenha em atenção que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais e configurações, mas não de imagens em caches.\nPara que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
+    <string name="init_backup_summary">Tenha em consideração que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais e configurações, mas não de imagens em caches.\nPara que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
-    <string name="init_backup_logins">Incluir dados da conta</string>
-    <string name="init_backup_logins_summary">Isto irá guardar as suas credenciais de início de sessão conjuntamente com a cópia de segurança.</string>
+    <string name="init_backup_logins">Incluir dados de contas</string>
+    <string name="init_backup_logins_summary">Com esta função seleccionada, as suas credenciais de início de sessão são guardadas nas cópias de segurança que efectuar.</string>
     <string name="init_backup">Backup de caches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_finished">Cópia de segurança concluída</string>
@@ -645,8 +645,8 @@
     <string name="init_restore_version_error">Formato inesperado - não é possível restaurar a base de dados.\n\nVersão esperada é %1$d,\na cópia de segurança tem a versão %2$d</string>
     <string name="settings_title_backup">Cópia de Seg. / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
-    <string name="init_backup_settings_logins">Cópia de seg. dos dados da conta</string>
-    <string name="init_backup_settings_backup_full_confirm">Deseja guardar dados sensíveis relacionados com a conta? Estes poderão ser lidos por outras aplicações.</string>
+    <string name="init_backup_settings_logins">Cópia de segurança dos dados de contas</string>
+    <string name="init_backup_settings_backup_full_confirm">Pretende guardar informações sensíveis associadas às contas? Estas informações poderão ser lidas por outras aplicações.</string>
     <string name="settings_savingerror">Erro ao guardar definições</string>
     <string name="settings_saved">Definições gravadas com sucesso para:</string>
     <string name="backup_saved">A cópia de seg. foi guardada em:</string>

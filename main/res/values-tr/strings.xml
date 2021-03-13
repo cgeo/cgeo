@@ -57,7 +57,8 @@
     <string name="wpnew_final">Final</string>
     <string name="wpnew_stage">Adım</string>
     <string name="wpnew_pkg">Park alanı</string>
-    <string name="wpnew_waypoint">İşaretçi</string>
+    <string name="wpnew_trailhead">Via</string>
+    <string name="wpnew_waypoint">Mevcut konum</string>
     <string name="wpnew_original">Orijinal</string>
     <!-- logs -->
     <string name="log_found">Buldum</string>
@@ -89,13 +90,13 @@
     <string name="log_tb_drop">Bırakıldı</string>
     <string name="log_tb_sortby">Trackable\'ları sırala</string>
     <string name="log_tb_changeall">Hepsini Değiştir</string>
-    <string name="log_tb_grabbed">Bir yerlerden alındı</string>
+    <string name="log_tb_grabbed">Herhangi bir Yerden Alındı</string>
     <string name="log_tb_note">Not</string>
     <string name="log_tb_discovered">Keşfedildi</string>
     <string name="log_tb_archived">Arşivlendi</string>
     <string name="log_save">Çevrimdışı kaydet</string>
     <string name="log_saving">Kayıt gönderiliyor…</string>
-    <string name="log_saving_and_uploading">Günlük yayınlanıyor ve resimler yükleniyor…</string>
+    <string name="log_saving_and_uploading">Kaydınız yayınlanıyor ve resimler yükleniyor…</string>
     <string name="log_posting_log">Kayıt gönderiliyor…</string>
     <string name="log_posting_twitter">Tweet gönderiliyor…</string>
     <string name="log_posting_vote">Cache puanı gönderiliyor…</string>
@@ -239,6 +240,7 @@
     <string name="warn_search_help_tb">Trackable için kodu girin. Örneğin; \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Lütfen kaydınız için metin girin.</string>
     <string name="warn_load_images">c:geo görüntüleri yükleyemedi.</string>
+    <string name="warn_invalid_mapfile">Seçili harita dosyası geçerli bir mapsforge harita dosyası değil veya desteklenmeyen bir sürüm kullanıyor.\n(c:geo şu anlık v3\'ten v5\'e kadar destekliyor)\n\nÇevrim dışı haritalar kullanılabilir değil.</string>
     <string name="warn_pocket_query_select">Sorgulama kaydı seçilmedi.</string>
     <string name="warn_no_pocket_query_found">Çevrimiçi sorgulama kaydı bulunamadı.</string>
     <string name="warn_invalid_character">Karakter bir HARF veya RAKAM olmalıdır</string>
@@ -375,7 +377,7 @@
     <string name="caches_filter_multi_listing">Farklı durumdaki çoklu listeleme</string>
     <string name="caches_filter_own_waypoint">Kullanıcı tanımlı ara noktalar ile</string>
     <string name="caches_filter_missing_gcvote">Bulunan Geocache\'ler için oy verilmedi</string>
-    <string name="caches_filter_lists">Bir listeye eklendi</string>
+    <string name="caches_filter_lists">Bir listeye eklenmişler</string>
     <string name="caches_filter_empty">(boş)</string>
     <string name="caches_removing_from_history">Geçmişten kaldırılıyor…</string>
     <string name="caches_clear_offlinelogs">Çevrimdışı kayıtları temizle</string>
@@ -423,17 +425,17 @@
     <string name="about_system_info">c:geo sistem bilgisi</string>
     <string name="about_system_info_send_chooser">Sistem bilgisini gönder</string>
     <string name="about_system_write_logcat">Kayıt dosyası oluştur</string>
-    <string name="about_system_write_logcat_type">Standart veya genişletilmiş günlük dosyası oluşturulsun mu? \n\n Standart günlük dosyaları çoğu kullanım durumu için uygundur. \n Genişletilmiş günlük dosyalarını yalnızca istendiğinde kullanın.</string>
+    <string name="about_system_write_logcat_type">Standart veya genişletilmiş kayıt dosyası oluşturulsun mu? \n\n Standart kayıt dosyaları çoğu kullanım durumu için uygundur. \n Genişletilmiş kayıt dosyalarını yalnızca istendiğinde kullanın.</string>
     <string name="about_system_write_logcat_type_standard">Standart</string>
     <string name="about_system_write_logcat_type_extended">Genişletilmiş</string>
-    <string name="about_system_write_logcat_success">Günlük Dosyası \"%2$s\" dizinindeki \"%1$s\" klasörüne yazıldı</string>
+    <string name="about_system_write_logcat_success">Kayıt dosyası \"%2$s\" dizinindeki \"%1$s\" klasörüne yazıldı</string>
     <string name="about_system_write_logcat_empty">Kayıt dosyası boş</string>
-    <string name="about_system_write_logcat_error">Günlük dosyasına yazılırken hata oluştu</string>
+    <string name="about_system_write_logcat_error">Kayıt dosyasına yazılırken hata oluştu</string>
     <string name="changelog_github">Tüm değişiklikler listesi</string>
     <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
     <string name="about_contributors_carnerodetails">C:geo\'nun kurucusu</string>
     <string name="about_contributors_recent">Güncel katkıda bulunanlar</string>
-    <string name="about_contributors_specialthanks">Katkılarından dolayı özel teşekkürler</string>
+    <string name="about_contributors_specialthanks">Katkılarından dolayı teşekkürler</string>
     <string name="about_contributors_specialthanksdetails">· <a href="https://crowdin.net/project/cgeo">Crowdin.net</a> üzerinden çevirilere katkıda bulunanlara!\n· tüm sorunları çözenlere\n· ve tüm diğer destekçilerimize.\n</string>
     <string name="about_contributors_other">Diğer katkıda bulunanlar</string>
     <string name="about_components">Bileşenler</string>
@@ -444,6 +446,7 @@
     <string name="contribution_projectleader">Açık kaynak proje lideri</string>
     <string name="contribution_graphics">grafik</string>
     <string name="debug_user_error_report_title">Bir sorun bildir</string>
+    <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
     <string name="debug_user_error_explain_options_html"><![CDATA[<p>Karşılaştığınız c:geo hatalarını düzeltmemiz için sistem bilgilerinizi ve c:geo logfile dosyasını da dahil ederek eposta yoluyla bildirebilirsiniz. Lütfen epostanızda sorunun ayrıntılarını da belirtmeyi unutmayın. Diğer iletişim seçeneklerini <i> c:geo hakkında</i> üzerinde bulabilirsiniz.</p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ayarları aç?</string>
@@ -487,7 +490,7 @@
     <string name="settings_activate_gc">Etkinleştir</string>
     <string name="settings_activate_ec">Etkinleştir</string>
     <string name="settings_gc_legal_note">Geocaching.com hizmetini kullanmak için Groundspeak kullanım şartlarını kabul edin.</string>
-    <string name="settings_info_facebook_login_title">Facebook veya Google kullanarak giriş yapın</string>
+    <string name="settings_info_facebook_login_title">Facebook/Google ile giriş yapın</string>
     <string name="settings_info_facebook_login">Facebook veya Google hesabınızla geocaching.com\'a c:geo girişi yapamazsınız. Ancak basit bir çözüm var…</string>
     <string name="settings_authorize">c:geo\'yu yetkilendir</string>
     <string name="settings_reauthorize">Yetkilendirmeyi güncelle veya kaldır</string>
@@ -538,7 +541,7 @@
     <string name="init_signature_template_datetime">Tarih &amp; Saat</string>
     <string name="init_signature_template_user">Kullanıcı</string>
     <string name="init_signature_template_number">Bulma sırası</string>
-    <string name="init_signature_template_number_legacy">Numara (çevrimdışı günlükleri dikkate almayın)</string>
+    <string name="init_signature_template_number_legacy">Sayı (çevrimdışı kayıtları dikkate alma)</string>
     <string name="init_signature_template_owner">Sahibi</string>
     <string name="init_signature_template_name">İsim</string>
     <string name="init_signature_template_difficulty">Zorluk</string>
@@ -563,7 +566,7 @@
     <string name="init_summary_select_language">Uygulama dilini seçiniz (yeniden başlatma gerekli)\n</string>
     <string name="init_use_default_language">Varsayılan dili kullan</string>
     <string name="init_category_exclude">Geocache\'leri hariç tut</string>
-    <string name="init_exclude">Sahibi Olduklarımı ve Bulduklarımı Dahil Etme</string>
+    <string name="init_exclude">Cache\'lerimi ve Bulduklarımı Dahil Etme</string>
     <string name="init_summary_exclude">Sahibi olduklarımı ve bulduklarımı dahil etme</string>
     <string name="init_showwaypoints">Yol Noktalarını Göster</string>
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
@@ -574,7 +577,8 @@
     <string name="init_brouterShowBothDistances">Düz mesafeyi göster</string>
     <string name="brouter_recalculating">Rota arka planda yeniden hesaplanıyor…</string>
     <string name="init_summary_brouterShowBothDistances">Routing aktif ise: hesaplanan rota mesafesine ek olarak düz mesafeyi göster.</string>
-    <string name="init_bigSmileysOnMap">Kayıt girilmiş Geocache\'ler için büyük simgeler</string>
+    <string name="init_bigSmileysOnMap">Geocache\'ler için büyük simgeler</string>
+    <string name="init_summary_bigSmileysOnMap">Eğer etkinleştirilirse, haritada kayıt girilmiş cacheler için kutu tipi ikon yerine büyük ifadeler gösterilecek (yeniden başlatma gerekir).</string>
     <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
     <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
     <string name="init_archived">Arşivlenmişleri Dahil Etme</string>
@@ -582,6 +586,7 @@
     <string name="init_global_wp_extraction_disable">Ara nokta çıkarmayı devre dışı bırak</string>
     <string name="init_summary_global_wp_extraction_disable">Kişisel Geocache notlarından yol noktası çıkarmayı genel olarak devre dışı bırakın. Belirli Geocache\'ler için kişisel notlarınız altındaki onay kutusu devre dışı bırakılarak yine de etkinleştirilebilir</string>
     <string name="init_customtabs_as_browser">Chrome web görüntüsünü kullan</string>
+    <string name="init_summary_customtabs_as_browser">Harici siteler c:geo\'dan ayrılmadan gösterilecek (sadece Chrome yüklenmişse çalışır)</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
     <string name="init_summary_save_log_img">Kayıtlardan Resimleri Kaydet</string>
     <string name="init_units">İngiliz Ölçü Birimlerini Kullan</string>
@@ -674,17 +679,24 @@
     <string name="init_routecolor_summary">Her bir güzergah hattı için renk ve opaklığı seçin. Bağımsız bir rota, yol noktasına/Geocache\'e uzun basarak seçtiğiniz bir yol noktasının ve/veya Geocache\'in mesafesidir. (Önce uzun basma işlevini etkinleştirmeniz gerekir, harita ayarlarına bakın.)</string>
     <string name="init_routewidth">Bireysel güzergah hattı genişliği</string>
     <string name="init_routewidth_summary">Bireysel güzergah hattı için genişlik seçin</string>
+    <string name="init_trackcolor">GPX yol/rota çizgisi rengi</string>
+    <string name="init_trackcolor_summary">Yol/rota için renk ve opaklığı seçin. Yol/rota, birkaç yol noktasından oluşur ve GPX yol/rota dosyasıyla yüklenebilir.</string>
+    <string name="init_trackwidth">GPX yol/rota çizgisi genişliği</string>
     <string name="init_trackwidth_summary">GPX iz/rota çizgisi için kalınlık seçin</string>
     <string name="init_circlecolor">Çember kenar rengi</string>
     <string name="init_circlecolor_summary">Daire çizgisi için renk ve opaklığı seçin. Daireler, bir Geocache veya fiziksel yol noktası etrafındaki minimum yarıçap için görsel bir temsil olarak kullanılır; burada başka hiçbir Geocache veya fiziksel yol noktası oluşturulamaz. (Geocaching.com için geçerlidir)</string>
     <string name="init_circlefillcolor">Daire dolgu rengi</string>
     <string name="init_circlefillcolor_summary">Doldurulacak dairelerin rengini ve opaklığını seçin</string>
+    <string name="init_accuracycirclecolor">Sinyal çemberi çizgisi rengi</string>
+    <string name="init_accuracycirclecolor_summary">Sinyal doğruluk çemberi çizgisi için renk ve opaklığı seçin. Doğruluk çemberi, konum sinyalinin doğruluğunun görsel gösterimidir.</string>
+    <string name="init_accuracycirclefillcolor">Sinyal çemberi dolgusu rengi</string>
+    <string name="init_accuracycirclefillcolor_summary">Sinyal doğruluk çemberinin doldurulacağı rengi ve opaklığını seçin</string>
     <string name="init_include_found_status">Bulunmuşlar dahil</string>
     <string name="init_trackautovisit">TB\'leri Ziyaret Ettir</string>
     <string name="init_summary_trackautovisit">Trackable\'ları varsayılan olarak \'\'Ziyaret Edildi\'\' şeklinde ayarla</string>
     <string name="init_sigautoinsert">Otomatik olarak ekle</string>
     <string name="init_offlinelogs_homescreen">Çevrimdışı kayıtları göster</string>
-    <string name="init_summary_offlinelogs_homescreen">Henüz gönderilmemiş günlükleriniz varsa, ana ekranda çevrimiçi bulma sayınızın yanında bir çevrimdışı günlük sayacı (ör. \"+ 1\") gösterilecektir.</string>
+    <string name="init_summary_offlinelogs_homescreen">Henüz gönderilmemiş kayıt varsa, ana ekranda çevrimiçi bulma sayınızın yanında bir çevrimdışı kayıt sayacı (ör. \"+ 1\") gösterilecektir.</string>
     <string name="init_loaddirectionimg">Yön görüntüsü</string>
     <string name="init_summary_loaddirectionimg">Gerekirse yön oku görüntüsünü indir (sadece Temel Üyeler için gereklidir)</string>
     <string name="init_default_navigation_tool">Varsayılan Navigasyon</string>
@@ -746,7 +758,7 @@
     <string name="feature_online_logging">Çevrimiçi kayıt</string>
     <string name="feature_log_images">Görselleri kaydınıza ekleyin</string>
     <string name="feature_watch_list">Takip listesi</string>
-    <string name="feature_own_coordinates">Değiştirilmiş koordinatların depolanması</string>
+    <string name="feature_own_coordinates">Değiştirilen koordinatların saklanması</string>
     <string name="feature_search_keyword">Anahtar kelime ile ara</string>
     <string name="feature_search_live_map">Canlı harita</string>
     <string name="feature_search_center">Konuma göre ara</string>
@@ -804,6 +816,8 @@
     <string name="auth_forget_message">Bu servisle bağlantınız kesilecek. Şu anda kaydettiğiniz kimlik bilgileri kaybolacaktır.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Sıradaki işlem, <b>c:geo </b> \'nin %s\'e erişmesine izin verecektir.</string>
+    <string name="auth_credentials_explain_long">Eğer hesabınız varsa, lütfen hesap bilgilerinizi %s için aşağıya girin:</string>
+    <string name="auth_register_explain">Eğer henüz bir hesabınız yoksa, hizmetin sayfasına yönlendirilip hesap oluşturmak için aşağıya tıklayın. c:geo, Google/Apple/Facebook ile giriş yapmayı desteklemediği için kullanıcı adı ve şifreyle hesap oluşturma yöntemini kullanmalısınız. Hesabınızı oluşturduktan sonra, c:geo\'ya giriş yapmadan önce e-posta adresinizi onaylamanız gerekmektedir.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Sıradaki işlem, <b>c:geo </b> \'nin %s\'e erişmesine izin verecektir.</string>
     <string name="auth_token_explain_long">Kimlik bilgilerinizi doldurup \"c: geo\'yu yetkilendir\" düğmesine basmak işlemi başlatacaktır. Bu işlem %s\'ye bağlanacak ve bir kimlik doğrulama belirteci alacaktır. Bu kadar.</string>
@@ -829,6 +843,7 @@
     <string name="cache_offline_refresh">Yenile</string>
     <string name="cache_offline_drop">Sil</string>
     <string name="cache_delete_userdefined_waypoints">Kullanıcı tanımlı ara noktaları kaldır</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Bu kutunun tüm kullanıcı tanımlı yol noktalarını kaldırmak istiyor musunuz?\\n\nYol noktaları hemen silinecek, geri alınamayacak.</string>
     <string name="cache_delete_userdefined_waypoints_note">Not: \"Nottan ara noktalar\" etkinleştirildi. Kişisel notunuzda c:geo tarafından tanınan koordinatlarınız varsa, ara noktalar onlar için otomatik olarak yeniden oluşturulacaktır. Kişisel not düzenleme iletişim kutusunda bunu devre dışı bırakabilirsiniz.</string>
     <string name="cache_delete_userdefined_waypoints_success">Kullanıcı tanımlı ara noktalar silindi</string>
     <string name="cache_offline_store">Kaydet</string>
@@ -1046,6 +1061,8 @@
     <string name="internal_goto_targets_description">Bu Geocache, son \"Git\" hedeflerinizi kaydeder. Ana menüdeki \"Git\" işlevini kullandığınızda otomatik olarak oluşturulur. Oraya girilen koordinatlar bu Geocache\'in ara noktalarında saklanacaktır. Bu koordinatlara artık ihtiyacınız yoksa, bu Geocache\'i veya ara noktalarından herhangi birini güvenle silebilirsiniz. Ayrıca, Geocache\'i istediğiniz başka bir listeye taşıyabilirsiniz.</string>
     <string name="init_longtap_map">Haritaya uzun basın</string>
     <string name="init_summary_longtap_map">Harita simgesine uzun dokunuşu etkinleştirin (bireysel bir rota oluşturun) veya boş harita alanında (kullanıcı tanımlı Geocache oluşturun)</string>
+    <string name="onetime_info_longtap_disabled">Haritaya uzun süre basarak özel rotalar ve kullanıcı tanımlı cache\'ler oluşturabilirsiniz.\n\nHaritaya uzun süre basmak şu an için devre dışı.\n\nBunu Ayarlar → Harita → Harita davranışından değiştirebilirsiniz</string>
+    <string name="onetime_info_longtap_enabled">Haritaya uzun süre basarak özel rotalar ve kullanıcı tanımlı cache\'ler oluşturabilirsiniz.\n\nHaritaya uzun süre basmak şu an için etkin.\n\nBunu Ayarlar → Harita → Harita davranışından değiştirebilirsiniz</string>
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
@@ -1158,6 +1175,7 @@
     <string name="map_showwp_original">Orijinal yol noktalarını göster</string>
     <string name="map_showwp_parking">Otopark yol noktalarını göster</string>
     <string name="map_showwp_visited">Ziyaret edilmiş yol noktalarını göster</string>
+    <string name="map_show_track">GPX yol/rotayı göster</string>
     <string name="init_hidewp">Yol noktalarını gizle</string>
     <string name="init_summary_hidewp_original">Haritadaki orijinal yol noktalarını gizle</string>
     <string name="init_summary_hidewp_parking">Haritadaki park alanlarını gizle</string>
@@ -1170,8 +1188,11 @@
     <string name="map_as_list">Liste olarak göster</string>
     <string name="map_select_multiple_items">Öğe seç</string>
     <string name="map_routing">Yönlendirme</string>
+    <string name="map_routing_brouter">Rotalama sadece <a href="">BRouter</a> yüklenmişse kullanılabilir</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
+    <string name="map_gm_autorotation_disable">Otomatik harita döndürmesini devre dışı bırakılsın mı?\n\nHarita döndürme menüsünü kullanarak tekrardan etkinleştirebilirsiniz</string>
     <string name="quick_settings">Hızlı ayarlar</string>
+    <string name="quick_settings_info">Bazı harita ayarları (Harita ayarları, gizleme, rotalama) yeni \"Hızlı ayarlar\" penceresine taşındı.\nBu pencereyi haritanın en alt ortasındaki ikonu kullanarak açabilirsiniz.</string>
     <string name="map_show_in_map">Haritada göster</string>
     <!-- search -->
     <string name="search_bar_hint">Geocache\'leri ara</string>
@@ -1248,6 +1269,7 @@
     <string name="navigation">Navigasyon</string>
     <string name="compass_title">Pusula</string>
     <string name="use_gps">Sadece GPS kullanıldı</string>
+    <string name="use_compass">Kullanılan tüm sensörler</string>
     <string name="destination_select">Varış yeri seç</string>
     <string name="navigation_direct_navigation">Doğrudan navigasyon</string>
     <string name="osmand_marker_cgeo">c:geo\'dan yer işaretleyicisi</string>
@@ -1281,6 +1303,7 @@
     <string name="helper_where_you_go_description">WhereYouGo Wherigo türündeki Geocache\'leri bulmanızı sağlar. c:geo otomatik olarak kartuşların bu uygulama üzerinden indirilmesini tetikler.</string>
     <string name="helper_brouter_title">BRouter çevrimdışı navigasyon</string>
     <string name="helper_brouter_description">BRouter çevrimdışı rotalama sağlar. Kurulup, gerekli dosyalar indirilmişse, c:geo dahili harita üzerinde otomatik olarak Geocache\'e bir rota gösterir.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf etiketlerden veri okur, ANT+/Garmin chirp etiketli kutuları bulmanız için gereklidir.</string>
     <!-- export -->
     <string name="share_export">Paylaş / Dışa aktar</string>
     <string name="export">Dışa aktar</string>
@@ -1347,7 +1370,7 @@
     <string name="attribute_available_no">7/24 ulaşılabilir değil</string>
     <string name="attribute_night_yes">Gece bulunması tavsiye edilir</string>
     <string name="attribute_night_no">Gece bulunması tavsiye edilmez</string>
-    <string name="attribute_winter_yes">Kışın ulaşılabilir</string>
+    <string name="attribute_winter_yes">Sadece kışın ulaşılabilir</string>
     <string name="attribute_winter_no">Kış aylarında ulaşılamaz</string>
     <string name="attribute_stealth_yes">Gizlilik gerekli</string>
     <string name="attribute_stealth_no">Gizlilik gerekli değil</string>
@@ -1441,8 +1464,8 @@
     <string name="attribute_fuel_no">Yakıt yakınında değil</string>
     <string name="attribute_food_yes">Yiyecek yakınında</string>
     <string name="attribute_food_no">Yiyecek yakınında değil</string>
-    <string name="attribute_oc_only_yes">Sadece Opencaching üzerinden kayıtedilebilir</string>
-    <string name="attribute_oc_only_no">Loglanamaz, sadece Opencaching üzerinden loglanabilir</string>
+    <string name="attribute_oc_only_yes">Sadece Opencaching üzerinden kaydedilebilir</string>
+    <string name="attribute_oc_only_no">Sadece Opencaching üzerinden kaydedilebilir değil</string>
     <string name="attribute_link_only_yes">Yalnızca başka bir Geocaching portalına köprü oluştur</string>
     <string name="attribute_link_only_no">Sadece başka Geocaching portalına köprü değil</string>
     <string name="attribute_letterbox_yes">Letterbox (mühür gerekli)</string>
@@ -1473,7 +1496,7 @@
     <string name="attribute_overnight_no">Konaklama gerekli değil</string>
     <string name="attribute_specific_times_yes">Sadece belirli zamanlarda ulaşılabilir</string>
     <string name="attribute_specific_times_no">Sadece belirli zamanlarda ulaşılabilir değil</string>
-    <string name="attribute_day_yes">sadece gündüz</string>
+    <string name="attribute_day_yes">Sadece gündüz</string>
     <string name="attribute_day_no">Sadece gündüz değil</string>
     <string name="attribute_tide_yes">Gelgit</string>
     <string name="attribute_tide_no">Gelgit yok</string>
@@ -1557,6 +1580,8 @@
     <string name="attribute_trackables_no">TB barındıramaz</string>
     <string name="attribute_historic_yes">Terkedilmiş yapı/harabe</string>
     <string name="attribute_historic_no">Terkedilmiş yapı/harabe yok</string>
+    <string name="attribute_blind_people_yes">Görme engelli için uygun değil</string>
+    <string name="attribute_blind_people_no">Görme engelli için uygun</string>
     <!-- next things -->
     <string name="quote">Geocaching\'i kolaylaştırmak ve kullanıcıların rahatlığı için.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1571,9 +1596,13 @@
     <string name="faq_title">Sıkça Sorulan Sorular</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Yeni sürüm mevcut.\nYüklemek için tıklayın.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Yeni sürüm mevcut.\nKurmak için tıklayın.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Yeni sürüm adayı mevcut.\nKurmak için tıklayın.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com üzerindeki son değişikler c:geo bozdu.\n Üstünde çalışıyoruz, sonra tekrar deneyin.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com üzerindeki son değişikler canlı harita özelliğini bozdu.\n Üstünde çalışıyoruz, sonra tekrar deneyin.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com bakımda.\n Çeşitli sorunlarla karşılaşabilirsiniz.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Android için eski bir sürüm kullanıyorsunuz. c:geo\'nun bu sürümü cihazınızla artık uyumlu değil ve çalışmayabilir veya beklenmedik bir şekilde çalışabilir!\nDaha fazla bilgi için bu mesaja tıklayın.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">c:geo\'nun 1 yıldan daha eski bir sürümünü kullanıyorsunuz. Bazı özellikler internet sitesi ve bazı teknik değişiklikler yüzünden çalışmayabilir. Nasıl yükselteceğinizi SSS\'den okuyabilirsiniz.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Konuşan pusula</string>
     <string name="tts_toggle">Konuşmaya başla</string>
@@ -1656,6 +1685,10 @@
         <item quantity="other">Bu Geocache\'leri favorilerilere ekle (kalan %d)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Geocache simgesi ayarı</string>
+    <plurals name="command_set_cache_icons_result">
+        <item quantity="one">%d cache simgesini ayarla</item>
+        <item quantity="other">%d cache simgelerini ayarla</item>
+    </plurals>
     <string name="pq_download_and_import">Sorgulama kaydı içe aktar</string>
     <string name="caches_refresh_all_warning">Bu seçim yüksek ağ yoğunluğuna neden olabilir. Tüm Geocache\'leri toplu yenilemek istediğinizden emin misiniz?</string>
     <string name="list_list_headline">Listeler:</string>
@@ -1704,6 +1737,7 @@
     <string name="individual_route">Özel rota</string>
     <string name="individual_route_added">rotaya eklendi</string>
     <string name="individual_route_removed">rotadan çıkartıldı</string>
+    <string name="individual_route_error_toggling_waypoint">ara nokta değiştirilirken hata oluştu</string>
     <string name="individual_route_error_single_waypoint_mode">Tek yol noktası modunda mevcut değil</string>
     <string name="map_sort_individual_route">Özel rotayı sırala</string>
     <string name="map_export_individual_route">Özel rotayı dışa aktar</string>
@@ -1712,7 +1746,9 @@
     <string name="map_autotarget_individual_route">Hedef olarak otomatik ayarla</string>
     <string name="map_disable_autotarget_individual_route">Devre dışı \'\'Hedef olarak otomatik ayarla\'\'</string>
     <string name="map_clear_manual_targets">Elle girilen hedefleri temizle</string>
+    <string name="map_manual_targets_cleared">Elle seçilmiş hedefler temizlendi</string>
     <string name="map_clear_individual_route">Özel rotayı temizle</string>
+    <string name="map_clear_individual_route_confirm">Özel rotanızdan tüm cache/yol noktalarını kaldırmak istediğinize emin misiniz?</string>
     <string name="map_individual_route_cleared">Özel rota temizlendi</string>
     <string name="save_sorted_route">Kaydet</string>
     <string name="sorted_route_saved">Özel rota kaydedildi</string>
@@ -1725,12 +1761,15 @@
     <string name="center_on_route">Rotaya göre ortala</string>
     <!-- individual track -->
     <string name="individual_track">GPX yol/rota</string>
+    <string name="map_load_track">GPX\'ten yol/rota yükle</string>
     <string name="map_load_track_wait">İz/rota arkaplanda yükleniyor…</string>
     <string name="map_load_track_confirm">Mevcut iz/rota üzerine yazılsın mı?</string>
     <plurals name="load_track_success">
         <item quantity="one">İz/rota yüklendi (%d iz noktası)</item>
         <item quantity="other">İz/rota yüklendi (%d iz noktası)</item>
     </plurals>
+    <string name="load_track_error">Yol/rota yüklenirken hata oluştu</string>
+    <string name="map_unload_track">Yol/rota boşa alındı</string>
     <string name="center_on_track">İze/rotaya göre ortala</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
@@ -1749,8 +1788,12 @@
     <!-- view settings -->
     <string name="view_settings">Görünüm ayarları</string>
     <string name="delete_setting">Ayarları sil</string>
+    <string name="delete_setting_warning">\"%s\" anahtarını ayarlardan silmek istiyor musunuz?\n\nBu işlem geri alınamaz.</string>
     <string name="edit_setting">\'\'%s\'\' ayarlarını düzenle</string>
+    <string name="edit_setting_error_unknown_type">Bilinmeyen ayar türü - düzenleme desteklenmiyor</string>
+    <string name="edit_setting_error_invalid_data">Yanlış veri \"%s\" girildi. Ayarın değeri değişmedi.</string>
     <string name="activate_editmode_title">Düzenleme modunu aktive et</string>
+    <string name="activate_editmode_warning">Tehlikeli bir yere giriyorsunuz!\n\nBu ayarları değiştirmek direkt olarak c:geo\'yu bozabilir ya da programın açılmasını engelleyebilir, bu yüzden dikkatli olun!\n\nRiski üzerinize alarak devam etmek istiyor musunuz?</string>
     <string name="add_setting">Ayar ekle</string>
     <string name="add_setting_preference_name">İsim tercihi</string>
     <string name="add_setting_preference_type">Tür tercihi</string>
@@ -1758,20 +1801,33 @@
     <string name="add_setting_missing_type">Bir görünüm türü seçmeniz gerekmektedir</string>
     <string name="add_setting_already_exists">Bu isimle bir görünüm zaten mevcut</string>
     <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geo Yerel dosya işleyicisi</string>
     <string name="localfile_title">Yerel bir dosyayı aç</string>
+    <string name="localfile_cannot_handle">Dosyayı okurken hata oluştu ya da c:geo bu dosya türünü işleyemiyor.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Harita dosyasını al</string>
+    <string name="receivemapfile_success">Harita dosyası başarıyla \"%s\" olarak alındı ve harita dizinine depolandı</string>
     <string name="receivemapfile_error">Harita dosyası alınırken hata oluştu</string>
+    <string name="receivemapfile_error_io_exception">Harita dosyasını alırken G/Ç hatası alındı. Harita dizininiz \"%s\" için yazılma yetkisi var mı?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Dosya bulunamadı. Harita dosyasını alınırken hata oluştu.</string>
+    <string name="receivemapfile_alreadyexists">Bu isimle bir dosya zaten var. Var olan dosyanın üzerine mi yazılsın yoksa farklı bir adla yeni bir dosya olarak mı kaydedilsin?</string>
     <string name="receivemapfile_option_overwrite">Üzerine yaz</string>
     <string name="receivemapfile_option_differentname">Farklı isim</string>
     <string name="receivemapfile_kb_copied">%d kB kopyalandı</string>
     <string name="receivemapfile_cancelled">Harita dosyası aktarımı iptal edildi</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Çevrimdışı harita indir</string>
+    <string name="downloadmap_info">\"Kaydet\" düğmesine basarak bölgeniz için harita dosyası seçin.\n\nİndirme arka planda çalışacak. İndirme tamamlandığında, indirilmiş dosya c:geo\'nun harita dizinine kopyalanacak ve c:geo için mevcut harita olarak ayarlanacak.\n\nDikkat edin: Bir harita indirmek daha fazla ağ trafiğine sebep olur!</string>
     <string name="downloadmap_choose">Harita seç</string>
     <string name="downloadmap_filename">%s İndiriliyor</string>
+    <string name="downloadmanager_not_available">Harita dosyası indirilemiyor, sistem indirme indirme yöneticisi mevcut değil</string>
     <string name="download_started">İndirme arka planda başladı</string>
+    <string name="downloadmap_target_not_writable">Hedef dizin \"%s\" yazılabilir değil - indirilmiş harita dosyası sistem indirme dizininde depolanacak ve harita dizinine elle taşınması gerekecek.</string>
+    <string name="downloadmap_allow_metered_network">Kotalı ağ üzerinden indirmeye izin ver (örn: mobil veri)</string>
+    <string name="downloadmap_confirmation">\"%1$s\" haritası indirilsin mi?\n\nAğ bağlantınıza bağlı olarak uzun sürebilir ve tarifenize belirli ücretler yansıyabilir.\n\nBoyut bilgisi: %2$s</string>
+    <string name="downloadmap_handling">İndirme, sisteminizin indirme yöneticisiyle arka planda çalışacaktır. İndirme başladığında bildirim göreceksiniz (biraz sürebilir).</string>
     <string name="button_continue">Devam et</string>
+    <string name="downloadmap_onedirup">(bir dizin yukarı)</string>
     <string name="downloadmap_checkforupdates_button">Güncellemeleri denetle</string>
     <string name="downloadmap_available_updates">Mevcut güncellemeler</string>
     <string name="downloadmap_no_updates_found">Harita güncellemesi bulunamadı</string>
@@ -1780,7 +1836,7 @@
     <string name="downloadmap_retrieving_directory_data">Dizin verisi alınıyor…</string>
     <string name="downloadmap_checking_for_updates">Güncellemeler denetleniyor…</string>
     <!-- history track -->
-    <string name="map_clear_trailhistory">Geçmiş İz\'i sil</string>
+    <string name="map_clear_trailhistory">İz geçmişini sil</string>
     <string name="map_trailhistory_cleared">Geçmiş İz\'i silindi</string>
     <string name="map_trail_show">Geçmiş İz\'i göster</string>
     <string name="map_trail_hide">İz geçmişini sakla</string>
@@ -1800,12 +1856,23 @@
     <string name="done">Tamamlandı</string>
     <string name="finish">Bitir</string>
     <string name="wizard_welcome_title">c:geo\'ya hoşgeldiniz</string>
+    <string name="wizard_intro">c:geo\'yu ayarlaman ve devam edebilmen için birkaç adım gerekiyor. Size bu konuda yardımcı olabilir miyim?</string>
+    <string name="wizard_intro2">Ayarlama sihirbazına yeniden hoş geldiniz. c:geo kurulumunuz henüz bitmedi, kurulumu tamamlamanıza ve devam etmenize yardımcı olabilir miyim? Sadece birkaç adım sürecek.</string>
     <string name="wizard_outro_ok">c:geo\'yu yüklediğiniz için teşekkürler.\nBol eğlenceler!</string>
+    <string name="wizard_outro_error">Ayarlar tamamlanmadı\nc:geo\'nun bazı kısımları beklendiği gibi çalışmayacak!</string>
     <string name="wizard_permissions_title">Uygulama izinlerini ayarla</string>
+    <string name="wizard_permissions_intro">c:geo\'nun düzgün çalışabilmesi için cihazınızdaki belirli izinlere ihtiyacı vardır.\nDaha fazla detayı ilerideki adımlarda açıklayacağım.</string>
+    <string name="wizard_platforms_title">Hizmetleri yapılandır</string>
+    <string name="wizard_platforms_intro">c:geo ile Geocache\'leri bulmak için c:geo tarafından desteklenen bir Geocaching hizmetinden hesabınızın olması gerekiyor.\nTercih ettiğiniz hizmeti var olan hesabınızla giriş yaparak veya yeni bir hesap oluşturak seçebilirsiniz.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; diğerleri</string>
     <string name="wizard_welcome_advanced">Gelişmiş yapılandırma</string>
     <string name="wizard_advanced_offlinemaps_label">Çevrimdışı haritalar</string>
+    <string name="wizard_advanced_offlinemaps_info">Bu sayfa, kullanılması isteğe bağlı bazı gelişmiş ayarları içerir.\n\nc:geo, harita dosyalarını çevrim dışı kullanım için indirebilir.</string>
+    <string name="wizard_advanced_brouter_label">Rotalama uygulaması</string>
+    <string name="wizard_advanced_brouter_info">\"BRouter Offline Navigation\" adındaki tamamlayıcı uygulamayı yükleyerek ve ayarlayarak c:geo, hedeflere gidebilir ve haritanızdaki rota bilgilerini gösterebilir.</string>
     <string name="wizard_advanced_restore_label">Geri Yükle</string>
+    <string name="wizard_advanced_restore_info">Eğer daha önceki kurulumdan kalan bir yedeğiniz varsa, ayarlarınızı ve/veya geocache verilerinizi yenileyebilirsiniz.</string>
     <string name="status_not_ok">HATA</string>
     <string name="wizard_status_title">Yapılandırma durumu</string>
     <string name="wizard_status_storage_permission">Bellek izni</string>

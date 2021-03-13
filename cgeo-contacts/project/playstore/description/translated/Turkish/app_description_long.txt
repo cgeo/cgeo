@@ -1,7 +1,7 @@
 Bu, açık kaynaklı bir geocaching uygulaması olan c:geo için bir rehber eklentisidir. Yalnızca c:geo uygulaması yüklüyken çalışır ve c:geo'da bir kullanıcı adına tıkladığınızda telefon defterinize doğrudan erişime izin verir.
 
 Kullanım:
-c:geo'da bir kullanıcı adına tıkladığınızda (ör. önbellek kayıt defterinde) menü, telefon rehberinizdeki ilgili kişi kartını açmak için bir öğe içerecektir. Bu, kullanıcıyı doğrudan aramanıza veya mesaj göndermenize olanak tanır.
+c:geo'da bir kullanıcı adına tıkladığınızda (ör. cache kayıt defterinde) menü, telefon rehberinizdeki ilgili kişi kartını açmak için bir öğe içerecektir. Bu, kullanıcıyı doğrudan aramanıza veya mesaj göndermenize olanak tanır.
 
 Açıklama:
 Eklentinin kullanıcı adını kişiyle eşleştirmesi için kişinin kullanıcı adının kişilerinizin adı veya takma adı alanında saklanması gerekir.
@@ -9,4 +9,4 @@ Eklentinin kullanıcı adını kişiyle eşleştirmesi için kişinin kullanıc�
 PlayStore'daki yorumlar cevaplanmayacak! c:geo kurulumunda veya kullanımında sorun yaşıyorsanız, lütfen öncelikle SSS bölümümüze bir göz atın: https://faq.cgeo.org
 Hala sorun varsa, e-posta yoluyla destek ile iletişime geçiniz.
 
-If you would like to know why this c:geo plugin needs the permissions requested, please read this article: https://www.cgeo.org/faq#plugin-contacts-privacy
+Bu c:geo eklentisinin neden istenen izinlere ihtiyacı olduğunu öğrenmek istiyorsanız, lütfen bu makaleyi okuyun: https://www.cgeo.org/faq#plugin-contacts-privacy
