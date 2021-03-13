@@ -223,8 +223,8 @@
     <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
     <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
     <string name="err_parse_lat_lon">c:geo konnte den Breiten- oder Längengrad nicht verarbeiten.</string>
-    <string name="err_rendertheme_file_unreadable">Konnte die gewählte Kartendarstellung nicht laden. Verwende den Standard.</string>
-    <string name="err_rendertheme_invalid">Die gewählte Kartendarstellung ist nicht für diese mapsforge-Version gültig. Verwende den Standard.</string>
+    <string name="err_rendertheme_file_unreadable">Konnte das gewählte Kartendesign nicht laden. Standarddesign wird verwendet.</string>
+    <string name="err_rendertheme_invalid">Das gewählte Kartendesign ist nicht für diese Mapsforge-Version geeignet. Standarddesign wird verwendet.</string>
     <string name="err_invalid_filename_char">Zeichen \'%c\' nicht erlaubt</string>
     <string name="warn_save_nothing">Es gibt nichts zum Speichern.</string>
     <string name="warn_no_cache_coord">Es gibt hier keinen Cache mit Koordinaten.</string>
@@ -655,14 +655,14 @@
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
-    <string name="settings_info_themes_title">Info zu Kartendarstellungen</string>
-    <string name="settings_info_themes">c:geo kann eigene Kartendarstellungen für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
+    <string name="settings_info_themes_title">Info zu Kartendesigns</string>
+    <string name="settings_info_themes">c:geo kann individuelle Designs für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
     <string name="init_map_directory_description">Verzeichnis mit Offline-Karten</string>
     <string name="init_gpx_exportdir">Verzeichnis für GPX-Exporte</string>
     <string name="init_gpx_importdir">Verzeichnis für GPX-Importe</string>
     <string name="init_dataDir">Geocache-Datenverzeichnis auswählen</string>
-    <string name="init_dataDir_note">Sie können den Ablageort für die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf Ihrem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) wählen.</string>
+    <string name="init_dataDir_note">Du kannst auswählen, ob du die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf deinem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) speichern möchtest.</string>
     <string name="init_maptrail">Zeige Positionsverlauf</string>
     <string name="init_maptrail_length">Länge des Positionsverlaufs</string>
     <string name="init_maptrail_length_summary">Lege die maximale Länge des Positionsverlaufs fest (erzwungen bei jedem Start von c:geo). Standardwert ist 700 Punkte - je nach verfügbarem Speicher anpassen.</string>
@@ -723,7 +723,7 @@
     <string name="init_summary_plain_logs">Logeinträge ohne Farben anzeigen</string>
     <string name="init_use_native_ua">Android-Browser</string>
     <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Anmeldeprobleme einiger Netzanbieter.</string>
-    <string name="init_rendertheme_folder">Ordner für Kartendarstellungen</string>
+    <string name="init_rendertheme_folder">Ordner für Kartendesigns</string>
     <string name="init_maintenance">Wartung</string>
     <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z. B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
     <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
@@ -1180,8 +1180,8 @@
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_visited">Besuchte Wegpunkte auf der Karte verbergen</string>
-    <string name="map_theme_select">Kartendarstellung auswählen</string>
-    <string name="map_theme_options">Optionen zur Darstellung</string>
+    <string name="map_theme_select">Kartendesign wählen</string>
+    <string name="map_theme_options">Design-Optionen</string>
     <string name="map_language">Sprache der Karte</string>
     <string name="map_live_enable">Aktualisierung einschalten</string>
     <string name="map_live_disable">Aktualisierung ausschalten</string>
@@ -1816,7 +1816,7 @@
     <string name="receivemapfile_kb_copied">%d kB kopiert</string>
     <string name="receivemapfile_cancelled">Kartendatei-Empfang abgebrochen</string>
     <!-- Download map preference and menu entry -->
-    <string name="downloadmap_title">Offlinekarte herunterladen</string>
+    <string name="downloadmap_title">Offline-Karte herunterladen</string>
     <string name="downloadmap_info">Wähle eine Kartendatei für Deine Region aus, indem Du auf das \"Speichern\"-Symbol tippst.\n\nDer Download läuft im Hintergrund. Wenn der Download abgeschlossen ist, wird die heruntergeladene Datei in das Kartenverzeichnis von c:geo kopiert und als aktuelle Karte für c:geo gesetzt.\n\nVorsicht: Das Herunterladen einer Karte kann zu hohem Netzwerkverkehr führen!</string>
     <string name="downloadmap_choose">Karte wählen</string>
     <string name="downloadmap_filename">Lade %s</string>
