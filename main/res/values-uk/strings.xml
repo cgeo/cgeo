@@ -620,7 +620,7 @@
     <string name="backup_confirm_overwrite">Це видалить ваш найстаріший існуючий каталог резервних копій із%s.\n Ви хочете продовжити?</string>
     <string name="restore_confirm_overwrite_database">ПОПЕРЕДЖЕННЯ: На пристрої буде перезаписано %s!</string>
     <string name="restore_confirm_overwrite_database_and_settings">УВАГА: Це перезапише %s та поточні налаштування на вашому пристрої!</string>
-    <string name="restore_confirm_overwrite_settings">УВАГА: Це перезапише %s та поточні налаштування на вашому пристрої!</string>
+    <string name="restore_confirm_overwrite_settings">УВАГА: Це перезапише поточні налаштування на вашому пристрої!</string>
     <string name="restore_information">Виберіть, що потрібно відновити:</string>
     <string name="init_restore_success">реставрація завершена.</string>
     <string name="init_restore_failed_dbrecreated">Помилка відновлення: пошкоджено файл резервної копії, треба було відновити базу даних.</string>

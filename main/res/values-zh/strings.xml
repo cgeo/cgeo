@@ -91,9 +91,9 @@
     <string name="log_save">离线保存</string>
     <string name="log_saving">正在发送日志…</string>
     <string name="log_saving_and_uploading">正在发布日志并上传图片…</string>
-    <string name="log_posting_log">正在发布日志...</string>
+    <string name="log_posting_log">正在发布日志…</string>
     <string name="log_posting_twitter">正在发布推文…</string>
-    <string name="log_posting_vote">正在发布cache投票...</string>
+    <string name="log_posting_vote">正在发布cache投票…</string>
     <string name="log_posting_image">正在发布图片…</string>
     <string name="log_posting_generic_trackable">张贴 %1$s %2$d/%3$d</string>
     <string name="log_clear">清除</string>
