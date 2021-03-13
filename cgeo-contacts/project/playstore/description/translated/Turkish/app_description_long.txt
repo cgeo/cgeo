@@ -1,4 +1,4 @@
-Bu, açık kaynaklı bir geocaching uygulaması olan c:geo için bir rehber eklentisidir. Yalnızca c:geo uygulaması yüklüyken çalışır ve c:geo'da bir kullanıcı adına tıkladığınızda telefon defterinize doğrudan erişime izin verir.
+Yalnızca c:geo uygulaması yüklüyken çalışır ve c:geo'da bir kullanıcı adına tıkladığınızda telefon defterinize doğrudan erişime izin verir.
 
 Kullanım:
 c:geo'da bir kullanıcı adına tıkladığınızda (ör. cache kayıt defterinde) menü, telefon rehberinizdeki ilgili kişi kartını açmak için bir öğe içerecektir. Bu, kullanıcıyı doğrudan aramanıza veya mesaj göndermenize olanak tanır.
