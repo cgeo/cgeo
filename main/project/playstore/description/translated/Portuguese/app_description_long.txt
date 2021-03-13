@@ -19,7 +19,7 @@ Navegue até uma cache ou a um ponto adicional de uma cache com a funcionalidade
 
 Armazene as informações da cache no seu dispositivo directamente de geocaching.com, bem como através da importação de ficheiros GPX para que estejam disponíveis sempre que desejar.
 Pode gerir as suas caches armazenados em diferentes listas e pode ordená-las e filtrá-las de acordo com suas necessidades.
-Caches armazenadas, juntamente com ficheiros de mapas offline ou mapas estáticos, podem ser usados para encontrar caches sem uma ligação à internet (por exemplo, quando em roaming).
+Caches armazenadas, juntamente com ficheiros de mapas offline ou mapas estáticos, podem ser usados para encontrar caches sem uma ligação à internet (por exemplo, quando em roaming). quando em roaming).
 Os registos podem ser submetidos online ou armazenados offline para posterior submissão, ou exportados através de notas de campo.
 
 Procure e descubra TBs, faça a gestão do seu inventário de TBs e deixe um TB quando submete um registo de cache.
