@@ -436,7 +436,6 @@
     <string name="init_backup_last_no">Varnostna kopija ne obstaja.</string>
     <string name="settings_info_offline_maps_title">Zemljevidi brez povezave</string>
     <string name="settings_info_themes_title">Teme zemljevidov</string>
-    <string name="settings_info_themes">c:geo omogoča prikaz različnih tem zemljevidov brez povezave. Teme so uporabljene za spremembo barvnih shem (npr. temni nočni zemljevid) ali za poudarek objektov, kot na primer kolesarske poti ali plastnice na zemljevidu.</string>
     <string name="init_mapsource_select">Izberi vir zemljevidov</string>
     <string name="init_trackautovisit">Obisk pri zapisih</string>
     <string name="init_summary_trackautovisit">Pri sledljivčkih vedno uporabi obisk pri zapisih (\"Visited\")</string>
