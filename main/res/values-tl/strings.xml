@@ -470,7 +470,6 @@
     <string name="init_backup_last_no">Walang file na may backup.</string>
     <string name="settings_info_offline_maps_title">Impormasyon sa offline na mga mapa</string>
     <string name="settings_info_themes_title">Impormasyon sa mga tema ng mapa</string>
-    <string name="settings_info_themes">ang c:geo ay sumusuporta para sa offline na linya na mga mapa. Ito ay maari mong gamitin sa pagpalit ng kulay ng mapa (hal. para magkaroon ng pagtingin sa gabi sa mapa) o para ma-highlight ang ilang mga bagay gaya ng paikot na daan o mataas na lugar sa mapa.</string>
     <string name="init_mapsource_select">Pumili ng pinagkukunan ng mapa</string>
     <string name="init_dataDir_note">Maaari mong piliin pata ma-istor ang dagdag na mga geocaches sa (maninirang, sa log na imahe, &#8230;) saiyong panlabas na imbakan (ang pagtulad o tunay na panlabas na SD kard na nakadepende sa iyong aparato).</string>
     <string name="init_include_found_status">Ang kaugnay ay \"natagpuan\" na estado</string>
