@@ -27,4 +27,4 @@ Sök upp och registrera trackables, hantera din trackable-samling och lämna av 
 Om du har problem att installera eller använda c:geo så titta gärna i vår FAQ med vanliga frågor och svar (https://faq.cgeo.org) eller läs användarmanualen (https://manual.cgeo.org).
 Om du fortfarande har problem så kontakta vår support via e-post.
 
-If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.
+Om du vill veta varför c:geo behöver de behörigheter som begärs, vänligen kontrollera https://www.cgeo.org/faq#permissions för en förklaring.
