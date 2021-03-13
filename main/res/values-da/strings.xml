@@ -1712,7 +1712,7 @@
     <string name="downloadmap_available_updates">Tilgængelige opdateringer</string>
     <string name="downloadmap_no_updates_found">Ingen nye kort opdateringer fundet</string>
     <string name="downloadmap_mapfile">Kortfil</string>
-    <string name="downloadmap_checking_for_updates">Søger efter kort opdateringer...</string>
+    <string name="downloadmap_checking_for_updates">Søger efter kort opdateringer…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Slet tidligere spor</string>
     <string name="map_trailhistory_cleared">Tidligere spor slettet</string>

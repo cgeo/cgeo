@@ -262,7 +262,7 @@
     <string name="info_stored_image">Neues Foto gespeichert nach:</string>
     <string name="info_cache_saved">Der Cache wurde gespeichert</string>
     <string name="warn_calculator_state_save">Vergiss nicht den Wegpunkt zu speichern um den Stand der Berechnung zu behalten.</string>
-    <string name="feature_info_offline_counter">Du hast einige Caches mit Offline-Logs, die evtl. noch nicht hochgeladen wurden. Daher wird als Erinnerung ein Zähler (z.B. \"+ 1\") auf dem Hauptbildschirm angezeigt.\n\nAußerdem werden diese \"x\" Logs zur \"NUMMER\"-Vorlage addiert, die du evtl. in deiner Signatur nutzt.\n\nFalls dir der Zähler nicht gefällt, kannst du ihn unter \"Einstellungen\" &gt; \"Loggen\" deaktivieren und/oder stattdessen die \"NUMMER (ohne Offline-Logs)\"-Vorlage nutzen.\n\nUm ausstehende Logs schnell und einfach zu finden, öffne die Liste \"Verlauf\" und filtere nach \"Mit eigenen Informationen\" > \"Mit Offline-Log\".</string>
+    <string name="feature_info_offline_counter">Du hast einige Caches mit Offline-Logs, die evtl. noch nicht hochgeladen wurden. Daher wird als Erinnerung ein Zähler (z.B. \"+ 1\") auf dem Hauptbildschirm angezeigt.\n\nAußerdem werden diese \"x\" Logs zur \"NUMMER\"-Vorlage addiert, die du evtl. in deiner Signatur nutzt.\n\nFalls dir der Zähler nicht gefällt, kannst du ihn unter \"Einstellungen\" &gt; \"Loggen\" deaktivieren und/oder stattdessen die \"NUMMER (ohne Offline-Logs)\"-Vorlage nutzen.\n\nUm ausstehende Logs schnell und einfach zu finden, öffne die Liste \"Verlauf\" und filtere nach \"Mit eigenen Informationen\" &gt; \"Mit Offline-Log\".</string>
     <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen, um deine Anmeldeinformation für %2$s einzugeben?</string>
     <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
     <string name="confirm_unsaved_changes_title">Ungesicherte Änderungen</string>
@@ -657,6 +657,7 @@
     <string name="init_backup_settings_restore">Einstellungen wiederherstellen</string>
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
+    <string name="settings_folder_changed">Einstellung für Ordner \"%1$s\" wurde auf \"%2$s\" geändert.\n\nTippe auf \"%3$s\", um die aktuelle Einstellung für diesen Ordner zu behalten.\n\nTippe auf \"%4$s\", um den alten Ordner festzulegen. In diesem Fall wirst du aufgefordert, c:geo Zugriff auf diesen Ordner zu geben.</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo unterstützt Karten für Offline-Nutzung. Du kannst Karten von verschiedenen Anbietern beziehen oder sogar eigene Karten erstellen (aus OSM-Daten). Du musst zuerst den Ordner auswählen, in dem Offline-Karten gespeichert werden sollen.</string>
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
@@ -773,7 +774,7 @@
     <string name="feature_favorite">Cache zu Favoriten hinzufügen</string>
     <string name="feature_voting">Cache bewerten</string>
     <string name="init_maplines_title">Anpassung der Kartenlinien</string>
-    <string name="init_map_other">Sonstiges</string>
+    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>

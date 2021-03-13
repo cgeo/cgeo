@@ -772,7 +772,7 @@
     <string name="feature_favorite">Adicionar a cache aos favoritos</string>
     <string name="feature_voting">Dar votação a caches</string>
     <string name="init_maplines_title">Personalização das linhas do mapa</string>
-    <string name="init_map_other">Outro</string>
+    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
@@ -1935,7 +1935,7 @@
     <string name="wizard_status_basefolder">Pasta base</string>
     <string name="wizard_status_platform">Serviços de geocaching</string>
     <string name="wizard_not_now">Agora não</string>
-    <string name="wizard_skip_wizard_warning">O c:geo pode não funcionar como esperado até que a configuração esteja concluída. Dependendo das configurações em falta, o c:geo pode não ser capaz de ler/armazenar dados como mapas offline, geocaches, ficheiros de registos, etc...\n\nQuando achar que é o momento para finalizar a configuração, pode fazê-lo escolhendo a opção \"Assistente de configuração\" no menu principal ou reiniciando o c:geo.</string>
+    <string name="wizard_skip_wizard_warning">O c:geo pode não funcionar como esperado até que a configuração esteja concluída. Dependendo das configurações em falta, o c:geo pode não ser capaz de ler/armazenar dados como mapas offline, geocaches, ficheiros de registos, etc\n\nQuando achar que é o momento para finalizar a configuração, pode fazê-lo escolhendo a opção \"Assistente de configuração\" no menu principal ou reiniciando o c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">A sincronização de pasta %1$s terminada após %2$s, %3$d de %4$s a precisar de sincronização</string>
     <!-- default actions in dialogs -->

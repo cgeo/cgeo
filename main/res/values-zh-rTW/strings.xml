@@ -483,7 +483,7 @@
     <string name="settings_category_geocaching_additionals">未來的服務與軟體plug-in</string>
     <string name="settings_category_social">社群媒體</string>
     <string name="settings_category_logging_other">其他的登入選項</string>
-    <string name="settings_goto_url_button">更多...</string>
+    <string name="settings_goto_url_button">更多…</string>
     <string name="settings_activate_gc">啟動</string>
     <string name="settings_activate_ec">啟動</string>
     <string name="settings_gc_legal_note">當你使用geocaching.com的服務時，就同意Groundspeak 的使用條款</string>
@@ -707,7 +707,7 @@
     <string name="init_force_orientation_sensor_title">方向感測器</string>
     <string name="init_force_orientation_sensor_note">在一些裝置上，感測器錯誤將會造成不對的方向資訊。在這樣的狀況下，使用備用感測器可以得到較好的結果。</string>
     <string name="init_force_orientation_sensor">強制使用方向感測器。</string>
-    <string name="init_please_wait">請稍候...</string>
+    <string name="init_please_wait">請稍候…</string>
     <string name="init_hardware_acceleration_title">硬體加速渲染</string>
     <string name="init_hardware_acceleration_note">硬體加速渲染元件會比螢幕還快。在部分的Andriond裝置上，文字顯示發生錯誤。當有這樣的情況時，請關閉硬體加速。</string>
     <string name="init_hardware_acceleration">啟用硬體加速</string>
@@ -735,7 +735,7 @@
     <string name="feature_favorite">把寶加入我的最愛</string>
     <string name="feature_voting">對cache來投票</string>
     <string name="init_maplines_title">客製化地圖的線條。</string>
-    <string name="init_map_other">其它</string>
+    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">其它</string>
     <string name="init_map_osm_multithreaded">多執行緒 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">使用多執行緒來渲染OSM</string>
     <string name="localstorage_migrate_status_major">版本%1$d</string>
@@ -909,7 +909,7 @@
     <string name="cache_dialog_loading_details_status_details">流程細節</string>
     <string name="cache_dialog_loading_details_status_spoilers">載入提示圖片</string>
     <string name="cache_dialog_loading_details_status_logs">讀取日誌</string>
-    <string name="cache_dialog_loading_details_status_waypoints">處理航點...</string>
+    <string name="cache_dialog_loading_details_status_waypoints">處理航點</string>
     <string name="cache_dialog_loading_details_status_gcvote">載入 GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">藏寶資料</string>
     <string name="cache_dialog_offline_save_title">離線</string>
@@ -1294,7 +1294,7 @@
     <string name="attribute_hike_short_no">不是短程健行</string>
     <string name="attribute_hike_med_yes">中程健行 (1~10 公里)</string>
     <string name="attribute_hike_med_no">不是中程健行</string>
-    <string name="attribute_hike_long_yes">長程健行 (>10 公里)</string>
+    <string name="attribute_hike_long_yes">長程健行 (&gt;10 公里)</string>
     <string name="attribute_hike_long_no">不是長程健行</string>
     <string name="attribute_seasonal_yes">季節限定</string>
     <string name="attribute_seasonal_no">無季節限定</string>
@@ -1488,7 +1488,7 @@
     <plurals name="command_delete_caches_result">
         <item quantity="other">刪除%d cache</item>
     </plurals>
-    <string name="command_rename_list_result">重新命名清單...</string>
+    <string name="command_rename_list_result">重新命名清單</string>
     <string name="command_delete_list_result">已刪除的列表</string>
     <string name="command_set_cache_icons_progress">設定cache圖示</string>
     <plurals name="command_set_cache_icons_result">
@@ -1568,7 +1568,7 @@
     <string name="button_continue">繼續</string>
     <string name="downloadmap_directory">資料夾</string>
     <string name="downloadmap_mapfile">地圖檔案</string>
-    <string name="downloadmap_install_theme_title">安裝主題檔...</string>
+    <string name="downloadmap_install_theme_title">安裝主題檔</string>
     <string name="mapserver_openandromaps_themes_info">這是為了OpenAndroMaps所建立的詳細地圖主題</string>
     <string name="mapserver_freizeitkarte_themes_info">這是為了Freizeitkarte所建立的詳細地圖主題</string>
     <!-- history track -->
