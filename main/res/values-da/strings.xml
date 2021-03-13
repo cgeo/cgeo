@@ -1111,7 +1111,7 @@
     <string name="map_live_enable">Aktivér live</string>
     <string name="map_live_disable">Deaktivér live</string>
     <string name="map_as_list">Vis som liste</string>
-    <string name="map_select_multiple_items">Vælg element</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Vælg element</string>
     <string name="map_routing_brouter">Vejvisning er kun tilgængelig hvis <a href="">BRouter</a> er installeret</string>
     <string name="map_gm_autorotation">Auto-rotér kort</string>
     <string name="map_gm_autorotation_disable">Deaktivér auto-rotation?\n\nAuto-rotation kan aktiveres igen ved hjælp af menupunktet Kortrotation</string>
