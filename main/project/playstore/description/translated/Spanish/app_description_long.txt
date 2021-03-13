@@ -15,7 +15,7 @@ Características principales:
 c:geo es un cliente de geocaching sencillo de usar pero potente con muchas características adicionales. Todo lo que necesitas para empezar es una cuenta existente en geocaching.com u otra plataforma de geocaching (como Opencaching).
 Encuentra cachés usando el mapa en vivo o usando una de las muchas funciones de búsqueda.
 
-Navega hacia un caché o un waypoint de un caché con la función incorporada de la brújula, el mapa o entregar las coordenadas a varias aplicaciones externas (p. e. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic y muchos más).
+Navega hacia un caché o un waypoint de un caché con la función incorporada de la brújula, el mapa o entregar las coordenadas a varias aplicaciones externas (p.
 
 Almacena información de caché en tu dispositivo directamente desde geocaching.com así como a través de la importación de archivos GPX para tenerla disponible cuando quieras.
 Puedes administrar tus cachés almacenados en diferentes listas y ordenarlos y filtrarlos de acuerdo a tus necesidades.
