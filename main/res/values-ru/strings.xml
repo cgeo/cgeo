@@ -424,6 +424,7 @@
     <string name="contribution_documentation">документация</string>
     <string name="contribution_projectleader">лидер проекта</string>
     <string name="contribution_graphics">графика</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Помогите нам исправить проблемы c:geo, сообщив об этом по электронной почте (не забудьте добавить системную информацию и логи c:geo). Пожалуйста, также укажите подробное описание ошибки в вашем сообщении. Другие параметры контактов можно найти в <i>О c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Открыть настройки?</string>
     <string name="settings_title_services">Сервисы</string>
@@ -455,6 +456,7 @@
     <string name="settings_title_navigation">Навигация</string>
     <string name="settings_summary_navigation">Выберите предпочитаемые способы навигации и внешние приложения-навигаторы.</string>
     <string name="settings_title_system">Система</string>
+    <string name="settings_summary_system">Системные настройки и отладочные опции.</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
     <string name="settings_category_browser">Браузер</string>
     <string name="settings_category_geocaching_platform">Сервис геокешинга</string>
@@ -535,6 +537,10 @@
     <string name="init_summary_transparentBackground">Использовать прозрачный фон (требуется перезапуск)</string>
     <string name="init_address">Показывать адрес</string>
     <string name="init_summary_address">Показывать адрес вместо координат на главном экране</string>
+    <string name="init_select_language">Выбрать язык</string>
+    <string name="init_summary_select_language">Выберите язык приложения (требуется перезапуск)\n</string>
+    <string name="init_use_default_language">Использовать язык по умолчанию</string>
+    <string name="init_category_exclude">Исключить тайники</string>
     <string name="init_exclude">Скрыть свои и найденные</string>
     <string name="init_summary_exclude">Исключить ваши собственные и найденные вами тайники</string>
     <string name="init_showwaypoints">Показ путевых точек</string>
@@ -564,6 +570,8 @@
     <string name="init_livelist">Показывать направление</string>
     <string name="init_summary_livelist">Показывать направление на тайник в списке</string>
     <!-- backup / restore -->
+    <string name="init_backup_title">Создать резервную копию</string>
+    <string name="init_restore_title">Восстановить резервную копию</string>
     <string name="init_backup">Резервное копирование тайников / точек</string>
     <string name="init_backup_backup">Сохранить</string>
     <string name="init_backup_running">Создание резервной копии…</string>
@@ -572,12 +580,15 @@
     <string name="init_backup_failed">Резервное копирование не удалось.</string>
     <string name="init_backup_unnecessary">База данных пуста, резервное копирование не нужно.</string>
     <string name="init_backup_no_backup_available">Отсутствует файл резервной копии.</string>
+    <string name="restore_confirm_overwrite_database">ВНИМАНИЕ: Это перезапишет %s на вашем устройстве!</string>
+    <string name="restore_confirm_overwrite_database_and_settings">ВНИМАНИЕ: Это перезапишет %s и ваши текущие настройки на вашем устройстве!</string>
     <string name="init_restore_success">Восстановление завершено.</string>
     <string name="init_restore_failed_dbrecreated">Ошибка при восстановлении: файл резервной копии поврежден, база данных должна была быть пересоздана.</string>
     <string name="init_restore_failed">Восстановление не удалось.</string>
     <string name="init_restore_running">Восстановление базы данных тайников…</string>
     <string name="init_restore_confirm">База данных пуста. Вы хотите восстановить базу данных из резервной копии?</string>
     <string name="init_backup_last">Доступна резервная копия от</string>
+    <string name="init_backup_unavailable">недоступно</string>
     <string name="init_backup_last_no">Отсутствует файл с резервной копией.</string>
     <string name="init_restore_version_error">Неожиданный формат - невозможно восстановить базу данных.\n\nОжидаемая версия %1$d,\nрезервная копия имеет версию %2$d</string>
     <string name="settings_title_backup">Резервная копия / восстановление</string>
@@ -666,6 +677,7 @@
     <string name="init_create_memory_dump">Создать дамп памяти</string>
     <string name="init_memory_dump">Дамп памяти</string>
     <string name="init_memory_dumped">Состояние памяти сохранено в %s</string>
+    <string name="init_please_wait">Пожалуйста, подождите…</string>
     <string name="init_hardware_acceleration_title">Аппаратное ускорение рендеринга</string>
     <string name="init_hardware_acceleration_note">Аппаратное ускорение ускоряет отрисовку графических элементов. Однако, на некоторых Android устройствах операционная система содержит ошибки, и текст может стать размытым (особенно жирным шрифтом). Отключите аппаратное ускорение, если это случится.</string>
     <string name="init_hardware_acceleration">Аппаратное ускорение</string>
@@ -809,6 +821,7 @@
     <string name="cache_personal_note_edit">Редактировать</string>
     <string name="cache_personal_note_storewaypoints">Добавить/Обновить путевые точки</string>
     <string name="cache_personal_note_removewaypoints">Удалить путевые точки</string>
+    <string name="cache_personal_note_removedwaypoints">Путевые точки удалены</string>
     <string name="cache_personal_note_storewaypoints_success">Путевые точки были добавлены в личную заметку</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Путевые точки были добавлены к заметке, но их нужно было сократить (максимальный размер персональной заметки: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Путевые точки не могут быть сохранены в заметке из-за ограничений размера (максимальный размер персональной заметки: %1$d)</string>
@@ -836,6 +849,7 @@
     <string name="cache_favpoint_not_on">Вы не оставляли своей рекомендации.</string>
     <string name="cache_list_select_last">Посл. выбор</string>
     <string name="cache_images">Изображения</string>
+    <string name="cache_advanced">Продвинутые</string>
     <string name="cache_waypoints">Путевые точки</string>
     <plurals name="waypoints">
         <item quantity="one">%d путевая точка</item>
@@ -890,6 +904,7 @@
     <string name="cache_menu_map_ext">Другие внешние приложения</string>
     <string name="cache_menu_streetview">Просмотр улиц</string>
     <string name="cache_menu_browser">Открыть в браузере</string>
+    <string name="cache_menu_open_with">Открыть с помощью…</string>
     <string name="cache_menu_visit">Записаться</string>
     <string name="cache_menu_visit_offline">Быстрая оффлайн запись</string>
     <string name="cache_menu_spoilers">Фото в спойлере</string>
@@ -898,6 +913,8 @@
     <string name="menu_caches">Управление тайниками</string>
     <string name="cache_menu_event">Добавить в календарь</string>
     <string name="cache_menu_extract_waypoints">Извлечь точки</string>
+    <string name="cache_menu_set_cache_icon">Установить иконку тайника</string>
+    <string name="cache_icon_updated">Иконка тайника обновлена</string>
     <string name="cache_menu_details">Детали</string>
     <string name="cache_menu_refresh">Обновить</string>
     <string name="cache_menu_share">Поделиться</string>
@@ -909,6 +926,7 @@
     <string name="cache_menu_checker">Открыть Geochecker</string>
     <string name="cache_menu_challenge_checker">Поиск проверки испытания</string>
     <string name="cache_menu_ignore">Игнорировать тайник</string>
+    <string name="cache_log_menu_decrypt">Расшифровать/Зашифровать</string>
     <string name="ignore_confirm_title">Внимание</string>
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
@@ -937,6 +955,7 @@
     <string name="cache_name">Название</string>
     <string name="cache_name_set">Задать имя тайника</string>
     <string name="cache_name_updated">Имя тайника обновлено</string>
+    <string name="cache_description_updated">Описание тайника обновлено</string>
     <string name="cache_type">Тип</string>
     <string name="cache_size">Размер</string>
     <string name="cache_distance">Расстояние</string>
@@ -971,6 +990,7 @@
     <string name="cache_whereyougo_install">Установить WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_chirpwolf_start">Откройте Chirp Wolf, чтобы прочитать chirp данные этого тайника</string>
     <string name="cache_chirpwolf_install">Установите Chirp Wolf, чтобы иметь возможность читать chirp-данные</string>
+    <string name="context_share_as_text">Поделиться текстом</string>
     <string name="create_internal_cache">Создать пользовательский тайник</string>
     <string name="internal_cache_default_name">Пользовательский тайник #%1$d</string>
     <string name="internal_cache_default_description">Это пользовательский тайник</string>
@@ -1112,8 +1132,10 @@
     <string name="search_kw">Ключевые слова</string>
     <string name="search_kw_prefill">Ключевое слово</string>
     <string name="search_kw_button">Искать по ключевым словам</string>
+    <string name="search_fbu">Найден</string>
     <string name="search_fbu_prefill">Имя пользователя</string>
     <string name="search_fbu_button">Поиск по пользователю</string>
+    <string name="search_hbu">Создан</string>
     <string name="search_hbu_prefill">Создатель</string>
     <string name="search_hbu_button">Поиск по создателю</string>
     <string name="search_tb">Трекабл</string>
@@ -1164,6 +1186,7 @@
     <string name="user_menu_view_found">Найденные тайники</string>
     <string name="user_menu_open_browser">Открыть профиль в браузере</string>
     <string name="user_menu_send_message">Отправить сообщение</string>
+    <string name="user_menu_send_email">Отправить e-mail</string>
     <string name="user_menu_open_contact">Открыть контакт</string>
     <string name="user_unknown">Неизвестный пользователь</string>
     <!-- navigation -->
@@ -1172,7 +1195,14 @@
     <string name="use_gps">Только GPS</string>
     <string name="destination_select">Выберите пункт назначения</string>
     <string name="osmand_marker_cgeo">Маркер из c:geo</string>
+    <string name="device_heading_label">Устройство:</string>
+    <string name="device_orientation">Ориентация</string>
+    <string name="device_orientation_label">Ориентация:</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Неизвестно</string>
+    <string name="do_auto">Авто</string>
+    <string name="do_flat">Ландшафтная</string>
+    <string name="do_upright">Портретная</string>
     <!-- license -->
     <string name="license">Лицензия</string>
     <string name="license_show">Показать лицензию</string>
@@ -1197,6 +1227,7 @@
     <string name="helper_brouter_description">BRouter предоставляет оффлайновую навигацию. Если он установлен и загружены необходимые файлы, с:geo автоматически покажет маршрут к тайнику на внутренней карте.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf позволяет вам читать данные из ANT+/Garmin chirp тегов, что необходимо для ANT+/chirp тайников.</string>
     <!-- export -->
+    <string name="share_export">Поделиться / Экспорт</string>
     <string name="export">Экспорт</string>
     <string name="export_progress">Экспорт: %1$s</string>
     <string name="export_exportedto">экспортировано в</string>
@@ -1225,6 +1256,7 @@
     <string name="export_modifiedcoords_success">Загрузка завершена</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Загрузка завершена: %1$d неудачно / %2$d ok</string>
     <string name="export_modifiedcoords_error">Загрузка не удалась</string>
+    <string name="filename_without_extension">Имя файла (без расширения)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Можно с собаками</string>
     <string name="attribute_dogs_no">Нельзя с собаками</string>
@@ -1477,6 +1509,7 @@
     <string name="about_twitter">Публиковать новый твит каждый раз, когда вы записываетесь в блокнот?</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">Доступна новая версия.\nНажмите, чтобы установить.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com сейчас не работает.\nВозможны различные проблемы.</string>
@@ -1679,6 +1712,8 @@
     <string name="switch_manual">Вручную</string>
     <string name="switch_auto">Авто</string>
     <string name="switch_default">(по умолчанию)</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
     <!-- view settings -->
     <string name="view_settings">Настройки просмотра</string>
     <string name="delete_setting">Удалить настройку</string>
@@ -1723,4 +1758,5 @@
     <string name="export_individualroute_title">Экспорт персонального маршрута</string>
     <string name="export_individualroute_success">Экспортирован индивидуальный маршрут в \"%s\"</string>
     <!-- install wizard -->
+    <string name="wizard_welcome_title">Добро пожаловать в c:geo</string>
 </resources>
