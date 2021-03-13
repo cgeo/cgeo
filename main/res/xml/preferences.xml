@@ -582,6 +582,11 @@
             <Preference
                 android:key="@string/pref_persistablefolder_offlinemapthemes"
                 android:title="@string/init_rendertheme_folder" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_renderthemefolder_synctolocal"
+                android:summary="@string/init_summary_renderthemefolder_synctolocal"
+                android:title="@string/init_renderthemefolder_synctolocal" />
             <ListPreference
                 android:title="@string/settings_title_map_rotation"
                 android:summary="%s"

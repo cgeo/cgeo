@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
@@ -35,6 +36,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 import java.util.Stack;
@@ -71,6 +73,11 @@ public class FolderUtils {
 
 
     public List<ImmutablePair<ContentStorage.FileInformation, String>> getAllFiles(final Folder folder) {
+        return getAllFiles(folder, null);
+    }
+
+    public List<ImmutablePair<ContentStorage.FileInformation, String>> getAllFiles(final Folder folder, final Predicate<ContentStorage.FileInformation> filter) {
+
         final List<ImmutablePair<ContentStorage.FileInformation, String>> result = new ArrayList<>();
         try (ContextLogger cLog = new ContextLogger("FolderUtils.getAllFiles: %s", folder)) {
             final Stack<String> paths = new Stack<>();
@@ -79,13 +86,15 @@ public class FolderUtils {
                 if (fi.left.isDirectory) {
                     if (fi.right) {
                         final String dirPath = paths.peek() + fi.left.name;
-                        result.add(new ImmutablePair<>(fi.left, dirPath));
+                        if (filter == null || filter.test(fi.left)) {
+                            result.add(new ImmutablePair<>(fi.left, dirPath));
+                        }
                         paths.add(dirPath + "/");
                     } else {
                         paths.pop();
                     }
                 }
-                if (!fi.left.isDirectory) {
+                if (!fi.left.isDirectory && (filter == null || filter.test(fi.left))) {
                     result.add(new ImmutablePair<>(fi.left, paths.peek() + fi.left.name));
                 }
                 return true;
@@ -95,25 +104,64 @@ public class FolderUtils {
         }
     }
 
+    public static class FolderInfo {
 
-    /** returns number of files (left) and number of (sub)dirs (right) currently in folder */
-    public ImmutablePair<Integer, Integer> getFolderInfo(final Folder folder) {
+        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0,  0l);
+
+        public final int fileCount;
+        public final int dirCount;
+        public final long totalFileSize;
+
+        public FolderInfo(final int fileCount, final int dirCount, final long totalFileSize) {
+            this.fileCount = fileCount;
+            this.dirCount = dirCount;
+            this.totalFileSize = totalFileSize;
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            final FolderInfo that = (FolderInfo) o;
+            return fileCount == that.fileCount &&
+                dirCount == that.dirCount &&
+                totalFileSize == that.totalFileSize;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(fileCount, dirCount, totalFileSize);
+        }
+
+        @Override
+        public String toString() {
+            return "Files:" + fileCount + ", dirs:" + dirCount + ", totalFileSize:" + Formatter.formatBytes(totalFileSize);
+        }
+    }
+
+
+    /** returns folder informations with regards to files/dirs currently in folder */
+    public FolderInfo getFolderInfo(final Folder folder) {
         try (ContextLogger cLog = new ContextLogger("FolderUtils.getFolderInfo: %s", folder)) {
 
-            final List<Integer> result = new ArrayList<>();
-            result.add(0);
-            result.add(0);
+            final int[] counts = new int[]{0, 0 };
+            final long[] size = new long[]{0 };
             treeWalk(folder, fi -> {
                 if (fi.left.isDirectory && fi.right) {
-                    result.set(1, result.get(1) + 1);
+                    counts[1]++;
                 }
                 if (!fi.left.isDirectory) {
-                    result.set(0, result.get(0) + 1);
+                    counts[0]++;
+                    size[0] += fi.left.size;
                 }
                 return true;
             });
-            cLog.add("#f:%d, #d:#%d", result.get(0), result.get(1));
-            return new ImmutablePair<>(result.get(0), result.get(1));
+            cLog.add("#f:%d, #d:#%d, size:%d", counts[0], counts[1], size[0]);
+            return new FolderInfo(counts[0], counts[1], size[0]);
         }
     }
 
@@ -135,26 +183,6 @@ public class FolderUtils {
     }
 
     /**
-     * Embeds a call to {@link #synchronizeFolder(Folder, File, Consumer)} within a GUI.
-     *
-     * Provides a progress bar informing the user about synchronization progress. GUI usage will be
-     * blocked until synchronization is done.
-     * @param activity activity to create progress bar upon
-     * @param source source for synchronization
-     * @param target target for synchronization
-     * @param callback optional callback, called when sync process has finished.
-     */
-    public void synchronizeFolderAsynchronousWithGui(final Activity activity, final Folder source, final File target, final Consumer<FolderProcessResult> callback) {
-        FolderProcessTask.process(
-            activity,
-            activity.getString(R.string.folder_synchronize_to_internal_progressbar_title, source.toUserDisplayableString()),
-            ci -> synchronizeFolder(source, target, null, ci),
-            callback
-        );
-    }
-
-
-    /**
      * Synchronizes the content of a given folder to a File folder.
      *
      * Methods attempts to create a copy of source folder into target folder with as few actual copy approaches as possible.
@@ -174,14 +202,15 @@ public class FolderUtils {
      * @param statusListener callback for status information, useable to implement GUI progress bar. See {@link #copyAll(Folder, Folder, boolean)} for details.
      * @return result of synchroioozation attempt
      */
-    public FolderProcessResult synchronizeFolder(final Folder source, final File target, final AtomicBoolean cancelFlag, final Consumer<FolderProcessStatus> statusListener) {
+    public FolderProcessResult synchronizeFolder(final Folder source, final File target, final Predicate<ContentStorage.FileInformation> sourceFilter, final AtomicBoolean cancelFlag, final Consumer<FolderProcessStatus> statusListener) {
 
         sendCopyStatus(statusListener, null, 0, 0, null);
 
-        final ImmutablePair<Integer, Integer> sourceInfo = getFolderInfo(source);
+        final FolderInfo sourceFolderInfo = getFolderInfo(source);
+        final ImmutablePair<Integer, Integer> sourceInfo = new ImmutablePair<>(sourceFolderInfo.fileCount, sourceFolderInfo.dirCount);
         sendCopyStatus(statusListener, null, 0, 0, sourceInfo);
 
-        final List<ImmutablePair<ContentStorage.FileInformation, String>> sourceList = getAllFiles(source);
+        final List<ImmutablePair<ContentStorage.FileInformation, String>> sourceList = getAllFiles(source, sourceFilter);
         final List<ImmutablePair<ContentStorage.FileInformation, String>> targetList = getAllFiles(Folder.fromFile(target));
 
         final Set<String> targetFilesToDelete = CollectionStream.of(targetList)

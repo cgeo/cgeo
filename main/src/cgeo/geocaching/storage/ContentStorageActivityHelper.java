@@ -3,6 +3,7 @@ package cgeo.geocaching.storage;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * Important: this class will oly work if you incorporate {@link #onActivityResult(int, int, Intent)}
@@ -96,13 +98,11 @@ public class ContentStorageActivityHelper {
      */
     public void selectPersistableFolder(final PersistableFolder folder, final Consumer<PersistableFolder> callback) {
 
-        final ImmutablePair<Integer, Integer> fileInfo = FolderUtils.get().getFolderInfo(folder.getFolder());
+        final ImmutableTriple<String, String, String> folderInfo = getInternationalizedFolderInfoStrings(folder.getFolder());
 
         //create the message;
-        final String fileCount = activity.getResources().getQuantityString(R.plurals.file_count, fileInfo.left, fileInfo.left);
-        final String folderCount = activity.getResources().getQuantityString(R.plurals.folder_count, fileInfo.right, fileInfo.right);
         final String folderData = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_folderdata,
-            folder.toUserDisplayableName(), folder.toUserDisplayableValue(), fileCount, folderCount);
+            folder.toUserDisplayableName(), folder.toUserDisplayableValue(), folderInfo.left, folderInfo.middle, folderInfo.right);
         final String defaultFolder = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true));
 
         final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
@@ -319,16 +319,21 @@ public class ContentStorageActivityHelper {
 
     /** releases a folder grant */
     private void releaseGrant(final Uri uri, final int flags) {
-        activity.getContentResolver().releasePersistableUriPermission(uri, flags);
+        if (uri != null) {
+            activity.getContentResolver().releasePersistableUriPermission(uri, flags);
+        }
         ContentStorage.get().refreshUriPermissionCache();
     }
 
     private void continuePersistableFolderSelectionCheckFoldersAreEqual(final PersistableFolder folder, final Uri targetUri, final int flags, final CopyChoice copyChoice, final Consumer<PersistableFolder> callback) {
         final Folder before = folder.getFolder();
         if (copyChoice == CopyChoice.ASK_IF_DIFFERENT && before != null && !FolderUtils.get().foldersAreEqual(before, Folder.fromDocumentUri(targetUri))) {
+
+            final ImmutableTriple<String, String, String> folderInfo = getInternationalizedFolderInfoStrings(before);
+
             final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
             final View dialogView = LayoutInflater.from(dialog.getContext()).inflate(R.layout.folder_selection_dialog, null);
-            ((TextView) dialogView.findViewById(R.id.message)).setText(R.string.contentstorage_selectfolder_dialog_choice);
+            ((TextView) dialogView.findViewById(R.id.message)).setText(LocalizationUtils.getString(R.string.contentstorage_selectfolder_dialog_choice, folderInfo.left, folderInfo.middle, folderInfo.right));
             final CopyChoice[] cc = new CopyChoice[]{CopyChoice.MOVE};
             dialogView.findViewById(R.id.copymove_move).setOnClickListener(v -> cc[0] = CopyChoice.MOVE);
             dialogView.findViewById(R.id.copymove_copy).setOnClickListener(v -> cc[0] = CopyChoice.COPY);
@@ -359,8 +364,7 @@ public class ContentStorageActivityHelper {
 
     private void continuePersistableFolderSelectionCopyMove(final PersistableFolder folder, final Uri targetUri, final CopyChoice copyChoice, final Consumer<PersistableFolder> callback) {
         final Folder before = folder.getFolder();
-        final ImmutablePair<Integer, Integer> folderInfo = FolderUtils.get().getFolderInfo(before);
-        if (copyChoice.equals(CopyChoice.DO_NOTHING) || new ImmutablePair<>(0, 0).equals(folderInfo)) {
+        if (copyChoice.equals(CopyChoice.DO_NOTHING) || FolderUtils.FolderInfo.EMPTY_FOLDER.equals(FolderUtils.get().getFolderInfo(before))) {
             //nothing to copy/move
             finalizePersistableFolderSelection(true, folder, targetUri, callback);
         } else {
@@ -391,6 +395,18 @@ public class ContentStorageActivityHelper {
         final ImmutablePair<String, String> messages = LocalizationUtils.getMultiPurposeString(messageId, "CSActivityHelper", params);
         Log.log(isWarning ? Log.LogLevel.WARN : Log.LogLevel.INFO, messages.right);
         ActivityMixin.showToast(activity, messages.left);
+    }
+
+    /** returns for a folder internationalized strings for file count (left), dir count (middle) and total file size (right) */
+    private static ImmutableTriple<String, String, String> getInternationalizedFolderInfoStrings(final Folder folder) {
+        final FolderUtils.FolderInfo folderInfo = FolderUtils.get().getFolderInfo(folder);
+
+        //create the message;
+        final String fileCount = LocalizationUtils.getPlural(R.plurals.file_count, folderInfo.fileCount);
+        final String folderCount = LocalizationUtils.getPlural(R.plurals.folder_count, folderInfo.dirCount);
+        final String folderSize = Formatter.formatBytes(folderInfo.totalFileSize);
+
+        return new ImmutableTriple<>(fileCount, folderCount, folderSize);
     }
 
 }

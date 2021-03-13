@@ -60,7 +60,7 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractDownloader {
     protected void onSuccessfulReceive(final Uri result) {
 
         //resync
-        RenderThemeHelper.resynchronizeMapThemeFolder();
+        RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
 
         //set map theme
         RenderThemeHelper.setSelectedMapThemeDirect(UriUtils.getLastPathSegment(result));

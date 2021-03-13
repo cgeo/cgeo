@@ -698,7 +698,7 @@
     <string name="settings_info_offline_maps_title">Info on Offline Maps</string>
     <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can obtain maps from different providers or even create your own maps (from OSM data). First you have to select the folder in which offline maps are to be stored.</string>
     <string name="settings_info_themes_title">Info on Map Themes</string>
-    <string name="settings_info_themes">c:geo supports custom themes for offline maps. These can be used to change the color style of the map (e.g. to have a nightview map) or to highlight certain objects like cycle paths or height lines within the map.</string>
+    <string name="settings_info_themes">c:geo supports custom themes for offline maps. These can be used to change the color style of the map (e.g. to have a nightview map) or to highlight certain objects like cycle paths or height lines within the map.\n\nWorking with non-zipped map themes might decrease map viewer opening performance. In this case, the theme folder may optionally be synchronized to an app-private local folder for faster access (at the cost of some storage space).</string>
     <string name="init_mapsource_select">Select Map Source</string>
     <string name="init_local_file_system">Local File System</string>
     <string name="init_base_directory_description">Base folder for public local data</string>
@@ -852,13 +852,13 @@
 
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Change Folder %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">The folder %1$s is currently set to \'%2$s\' and contains %3$s and %4$s.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">The folder %1$s is currently set to \'%2$s\', contains %3$s and %4$s and has a total size of %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">You may choose to use the default folder \'%s\' or pick a user-defined folder.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Do nothing</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copy all content</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Move all content</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">No further action</string>
-    <string name="contentstorage_selectfolder_dialog_choice">You selected a different folder than currently stored. How do you want to proceed?\n\nSelect folder and</string>
+    <string name="contentstorage_selectfolder_dialog_choice">You selected a different folder than currently stored. The current folder contains %1$s, %2$s and has a size of %3$s. How do you want to proceed?\n\nSelect folder and</string>
     <string name="contentstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Folder set to \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Aborting file selection</string>
@@ -1339,6 +1339,10 @@
     <string name="map_showwp_parking">Parking waypoints</string>
     <string name="map_showwp_visited">Visited waypoints</string>
     <string name="map_show_track">Show GPX track/route</string>
+    <string name="init_renderthemefolder_synctolocal">Synchronize themes to app-private folder</string>
+    <string name="init_summary_renderthemefolder_synctolocal">This option may improve map viewer opening performance at the cost of some device storage space.</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_title">Turn on theme folder synchronization</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">This will permanently synchronize the content of the Map Theme folder into an app-private folder for faster file access.\n\nYour map Theme Folder \'%s\' has currently %s, %s and a size of %s.\n\nDo you want to turn on folder synchronization?</string>
     <string name="init_hidewp">Hide waypoints</string>
     <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
     <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>

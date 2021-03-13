@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
@@ -113,6 +114,7 @@ public final class SystemInformation {
         appendDirectory(body, "\n- System internal c:geo dir: ", LocalStorage.getInternalCgeoDirectory());
         appendDirectory(body, "\n- Legacy User storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\n- Geocache data: ", LocalStorage.getGeocacheDataDirectory());
+        appendDirectory(body, "\n- Internal theme sync (is turned " + (RenderThemeHelper.isThemeSynchronizationActive() ? "ON" : "off") + "): ", LocalStorage.getMapThemeInternalSyncDir());
         appendPublicFolders(body);
         body.append("\n- Map render theme path: ").append(Settings.getSelectedMapRenderTheme());
         appendPersistedDocumentUris(body);
@@ -165,11 +167,11 @@ public final class SystemInformation {
         body.append("\n- Public Folders: #").append(PersistableFolder.values().length);
         for (PersistableFolder folder : PersistableFolder.values()) {
             final boolean isAvailable = ContentStorage.get().ensureFolder(folder);
-            final ImmutablePair<Integer, Integer> files = FolderUtils.get().getFolderInfo(folder.getFolder());
+            final FolderUtils.FolderInfo folderInfo = FolderUtils.get().getFolderInfo(folder.getFolder());
             final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
             body.append("\n- ").append(folder.toString())
                 .append(" (Uri: ").append(ContentStorage.get().getUriForFolder(folder.getFolder()))
-                .append(", Available:").append(isAvailable).append(", Files: ").append(files.left).append(", subdirs:").append(files.right)
+                .append(", Av:").append(isAvailable).append(", ").append(folderInfo)
                 .append(", free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on device: ").append(freeSpace.right).append(")");
         }
     }
