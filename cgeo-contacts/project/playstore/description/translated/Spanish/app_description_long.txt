@@ -1,7 +1,7 @@
-Este es un plugin de contactos para c:geo, una aplicación de geocaching de código abierto. Sólo funcionará con la aplicación c:geo instalada y permite acceso directo a tu guía telefónica cuando hagas clic en un nombre de usuario en c:geo.
+Sólo funcionará con la aplicación c:geo instalada y permite acceso directo a tu guía telefónica cuando hagas clic en un nombre de usuario en c:geo.
 
 Utilización:
-Cuando haces click en un nombre de usuario en c:geo (p.ej. en el libro de registro del cache) el menú contendrá un elemento para abrir la tarjeta de contaco correspondiente en tus contactos de teléfono. Esto te permitirá llamar o mandar un mensaje directamente al usuario.
+Cuando haces click en un nombre de usuario en c:geo (p.ej. en el libro de registro del cache) el menú contendrá un elemento para abrir la tarjeta de contaco correspondiente en tus contactos de teléfono. Esto te permitirá llamar o mandar un mensaje directamente al usuario. Esto te permitirá llamar o mandar un mensaje directamente al usuario.
 
 Observaciones:
 El nombre de usuario de la persona es necesario almacenarlo en el campo del nombre (o alias) de tus contactos para que el plugin pueda cotejar el nombre de usuario de Geocaching con el contacto.
