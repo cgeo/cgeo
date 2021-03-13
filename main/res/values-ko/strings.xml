@@ -429,7 +429,7 @@
     <string name="contribution_documentation">설명서</string>
     <string name="contribution_projectleader">오픈 소스 프로젝트 리더</string>
     <string name="contribution_graphics">그래픽</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>시스템 정보 및 c:geo 로그 파일이 포함 된 이메일을 통해보고하여 c:geo 문제를 해결하도록 도와주세요. 또한 메일에 자세한 오류 설명을 포함하십시오. 다른 연락처 옵션은 <i>c:geo 정보</i>에서 찾을 수 있습니다.</p>]]></string>
+    <string name="debug_user_error_explain_options">시스템 정보 및 c:geo 로그 파일이 포함 된 이메일을 통해보고하여 c:geo 문제를 해결하도록 도와주세요. 또한 메일에 자세한 오류 설명을 포함하십시오. 다른 연락처 옵션은 \'c:geo 정보\'에서 찾을 수 있습니다.</string>
     <!-- settings -->
     <string name="settings_title_open_settings">설정 열기?</string>
     <string name="settings_title_services">서비스</string>

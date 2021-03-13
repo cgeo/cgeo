@@ -430,7 +430,7 @@
     <string name="contribution_documentation">Dokumentatioun</string>
     <string name="contribution_projectleader">Open Source Projektmanager</string>
     <string name="contribution_graphics">Grafik</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Hëllef eis Problemer am c:geo ze behiewen, andems du dës per E-Mail zesummen mat dengen Systeminformatiounen an enger c:geo Logdatei mells. Wgl. schéck an der E-Mail och eng detailléiert Feelerbeschreiwung. Aner Kontaktméiglechkeeten fënns du bei <i>Iwwer c:geo</i></p>]]></string>
+    <string name="debug_user_error_explain_options">Hëllef eis Problemer am c:geo ze behiewen, andems du dës per E-Mail zesummen mat dengen Systeminformatiounen an enger c:geo Logdatei mells. Wgl. schéck an der E-Mail och eng detailléiert Feelerbeschreiwung. Aner Kontaktméiglechkeeten fënns du bei \'Iwwer c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Astellungen opmaachen?</string>
     <string name="settings_title_services">Servicer</string>

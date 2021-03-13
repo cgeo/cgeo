@@ -450,7 +450,7 @@
     <string name="contribution_graphics">Gràfics</string>
     <string name="debug_user_error_report_title">Informar d\'un problema</string>
     <string name="debug_user_error_errortext">S\'ha produït un problema inesperat que us sol·licitaríem que ens comuniqueu:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Ajudeu-nos a solucionar problemes de c: geo , Aviseu per correu electrònic amb la informació del sistema i el fitxer de registre c: geo. Incloeu al vostre correu també una descripció detallada de l’error Es poden trobar altres opcions de contacte a <i>Quant a c: geo</i></p>]]></string>
+    <string name="debug_user_error_explain_options">Ajudeu-nos a solucionar problemes de c: geo , Aviseu per correu electrònic amb la informació del sistema i el fitxer de registre c: geo. Incloeu al vostre correu també una descripció detallada de l’error Es poden trobar altres opcions de contacte a \'Quant a c: geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Obrir la configuració?</string>
     <string name="settings_title_services">Serveis</string>

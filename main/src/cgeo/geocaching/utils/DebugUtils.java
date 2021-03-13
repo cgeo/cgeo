@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.text.HtmlCompat;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,18 +48,18 @@ public class DebugUtils {
     }
 
     public static void askUserToReportProblem(@NonNull final Activity context, @Nullable final String errorMsg) {
-        final StringBuilder htmlMessage = new StringBuilder();
+        final StringBuilder message = new StringBuilder();
         if (errorMsg != null) {
-            htmlMessage.append("<p>").append(context.getString(R.string.debug_user_error_errortext)).append("</p><p><i>")
-                .append(errorMsg).append("</i></p>");
+            message.append(context.getString(R.string.debug_user_error_errortext)).append("\n[")
+                .append(errorMsg).append("]\n\n");
             Log.w("User was asked to report problem: " + errorMsg);
         }
-        htmlMessage.append(context.getString(R.string.debug_user_error_explain_options_html));
+        message.append(context.getString(R.string.debug_user_error_explain_options));
 
         Dialogs.confirmPositiveNegativeNeutral(
             context,
             context.getString(R.string.debug_user_error_report_title),
-            HtmlCompat.fromHtml(htmlMessage.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY),
+            message.toString(),
             context.getString(R.string.about_system_info_send_button),
             null,
             context.getString(android.R.string.cancel),

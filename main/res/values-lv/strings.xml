@@ -433,7 +433,7 @@
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Ziņot par problēmu</string>
     <string name="debug_user_error_errortext">Notikusi neparedzēta kļūda, par kuru mēs vēlamies, lai Tu ziņotu:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Palīdzi mums labot c:geo kļūdas, ziņojot par tām epastā, iekļaijot sistēmas informāciju un c:geo log dokumentu. Lūdzu vēstulē iekļaujiet arī detalizētu kļūdas aprakstu. Citas komunikācijas iespējas var atrast <i>Par c:geo</i></p>]]></string>
+    <string name="debug_user_error_explain_options">Palīdzi mums labot c:geo kļūdas, ziņojot par tām epastā, iekļaijot sistēmas informāciju un c:geo log dokumentu. Lūdzu vēstulē iekļaujiet arī detalizētu kļūdas aprakstu. Citas komunikācijas iespējas var atrast \'Par c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Atvērt uzstādījumus?</string>
     <string name="settings_title_services">Servisi</string>

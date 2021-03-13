@@ -449,7 +449,7 @@
     <string name="contribution_graphics">grafik</string>
     <string name="debug_user_error_report_title">Sorun bildir</string>
     <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Karşılaştığınız c:geo hatalarını düzeltmemiz için sistem bilgilerinizi ve c:geo logfile dosyasını da dahil ederek eposta yoluyla bildirebilirsiniz. Lütfen epostanızda sorunun ayrıntılarını da belirtmeyi unutmayın. Diğer iletişim seçeneklerini <i> c:geo hakkında</i> üzerinde bulabilirsiniz.</p>]]></string>
+    <string name="debug_user_error_explain_options">Karşılaştığınız c:geo hatalarını düzeltmemiz için sistem bilgilerinizi ve c:geo logfile dosyasını da dahil ederek eposta yoluyla bildirebilirsiniz. Lütfen epostanızda sorunun ayrıntılarını da belirtmeyi unutmayın. Diğer iletişim seçeneklerini \' c:geo hakkında\' üzerinde bulabilirsiniz.</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ayarları aç?</string>
     <string name="settings_title_services">Servisler</string>
