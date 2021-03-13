@@ -9,5 +9,4 @@
 在Google Play上的評論可能不會被回答。 如果您有安裝或是使用c:geo的問題，請您先參考我們的常見問題：https://faq.cgeo.org
 如果您仍然有問題，請以電子郵件聯絡我們。
 
-請讀下面連結的文章去瞭解c:geo需要那些手機系統權限。
 https://www.cgeo.org/faq#plugin-contacts-privacy
