@@ -662,7 +662,6 @@
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy můžete získat od různých poskytovatelů nebo dokonce vytvořit si mapy vlastní (z dat OSM). Nejprve musíte vybrat složku, do které mají být offline mapy uloženy.</string>
     <string name="settings_info_themes_title">Info o stylech mapy</string>
-    <string name="settings_info_themes">c:geo podporuje vlastní styly pro offline mapy. Ty mohou být použity pro změnu barevného stylu mapy (např. noční mapa), pro zvýraznění důležitých objektů (jako jsou např. cykloztezky) nebo pro určení šířky čar.</string>
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="init_local_file_system">Místní souborový systém</string>
     <string name="init_base_directory_description">Základní složka pro veřejná místní data</string>
@@ -813,13 +812,11 @@
     <string name="sendToCgeo_no_registration">c:geo selhalo při stahování kešek. Registrace pro send2cgeo vypršela. Prosím, registruj se znova v nastavení.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Změnit složku %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Složka %1$s je aktuálně nastavena na \'%2$s\' a obsahuje %3$s a %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Můžete zvolit výchozí složku \'%s\' nebo vybrat uživatelem definovanou složku.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nedělat nic</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopírovat veškerý obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Přesunout veškerý obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Žádný další krok</string>
-    <string name="contentstorage_selectfolder_dialog_choice">Vybrali jste jinou složku, než je aktuálně uložená. Jak chcete postupovat?\n\nVyberte složku a</string>
     <string name="contentstorage_folder_selection_aborted">Přerušení výběru složky, složka je \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Složka nastavena na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Přerušení výběru souboru</string>
