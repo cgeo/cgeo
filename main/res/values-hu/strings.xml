@@ -897,7 +897,7 @@
     <string name="map_live_enable">Élő mód</string>
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
-    <string name="map_select_multiple_items">Elem kiválasztása</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Elem kiválasztása</string>
     <!-- search -->
     <string name="search_bar_desc">Ládák (geokód, kulcsszó), utazók (követőkód)</string>
     <string name="search_coordinates">Koordináták</string>
