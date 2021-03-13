@@ -541,7 +541,6 @@
     <string name="settings_restart">A c:geo-t most újra kell indítani a betöltött beállítások használatához</string>
     <string name="settings_info_offline_maps_title">Offline térképek adatai</string>
     <string name="settings_info_themes_title">Térkép megjelenítési stílusok</string>
-    <string name="settings_info_themes">A c:geo támogatja az egyedi térképstílusokat. Ezzel meg lehet változtatni a térkép színeit (pl. éjszakai nézethez), vagy bizonyos objektumokat ki lehet vele emelni, mint pl. kerékpárutakat, szintvonalakat, stb.</string>
     <string name="init_mapsource_select">Térkép választása</string>
     <string name="init_dataDir_note">A ládák kiegészítő adatait (spolier képek, logfotók, …) külső tárolón is tarthatod (a készülékedtől függően ez lehet emulált vagy valódi, külső SD kártya is).</string>
     <string name="init_include_found_status">\"Megtaláltam\" jelölések exportálása</string>
