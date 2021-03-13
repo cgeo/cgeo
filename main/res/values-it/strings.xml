@@ -660,7 +660,6 @@
     <string name="settings_info_offline_maps_title">Informazioni su mappe Offline</string>
     <string name="settings_info_offline_maps">c:geo supporta le mappe per l\'uso offline. È possibile ottenere mappe da diversi fornitori o anche creare le proprie mappe (da dati OSM). In primo luogo è necessario selezionare la cartella in cui le mappe offline devono essere memorizzate.</string>
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
-    <string name="settings_info_themes">c:geo supporta i temi personalizzati per mappe offline. Questi possono essere usati per modificare lo stile di colore della mappa (ad esempio per avere una mappa notturna) o per evidenziare alcuni oggetti come piste ciclabili o linee di altitudine.</string>
     <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
     <string name="init_local_file_system">File System Locale</string>
     <string name="init_base_directory_description">Cartella base per i dati locali pubblici</string>
@@ -811,13 +810,11 @@
     <string name="sendToCgeo_no_registration">c:geo non riesce a scaricare cache. La registrazione a send2cgeo è scaduta. Si prega di ripeterla nelle impostazioni.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Cambia cartella %s</string>
-    <string name="contentstorage_selectfolder_dialog_msg_folderdata">La cartella %1$s è attualmente impostata a \'%2$s\' e contiene %3$s e %4$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Puoi scegliere di utilizzare la cartella predefinita \'%s\' o scegliere una cartella definita dall\'utente.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Non fare nulla</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copia tutto il contenuto</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Sposta tutto il contenuto</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Nessun\'altra azione</string>
-    <string name="contentstorage_selectfolder_dialog_choice">Hai selezionato una cartella diversa da quella attualmente memorizzata. Come vuoi procedere?\n\nSeleziona la cartella e</string>
     <string name="contentstorage_folder_selection_aborted">Interrotta la selezione della cartella, la cartella è «%s»</string>
     <string name="contentstorage_folder_selection_success">Cartella impostata a \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Interruzione selezione file</string>
