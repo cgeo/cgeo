@@ -1183,7 +1183,7 @@
     <string name="map_live_enable">Activer Temps réel</string>
     <string name="map_live_disable">Désactiver Temps réel</string>
     <string name="map_as_list">Lister les caches</string>
-    <string name="map_select_multiple_items">Sélectionner l\'élément</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Sélectionner l\'élément</string>
     <string name="map_routing">Routage (Actuellement : %s)</string>
     <string name="map_routing_brouter">La navigation nécessite que <a href="">BRouter</a> soit installé</string>
     <string name="map_gm_autorotation">Rotation automatique de la carte</string>
