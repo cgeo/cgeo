@@ -630,7 +630,6 @@
     <string name="settings_restart">c:geo потрібно зараз перезапустити, щоб принести завантажені налаштування в ефект</string>
     <string name="settings_info_offline_maps_title">Інформація про офлайн-карти</string>
     <string name="settings_info_themes_title">Інформація про тему карти</string>
-    <string name="settings_info_themes">c:geo підтримує власні теми для автономних мап. Вони можуть бути використані для зміни кольору стилю карти (наприклад, мати нічну карту) або виділити певні об\'єкти, такі як цикли доріжки або лінії висоти на карті.</string>
     <string name="init_mapsource_select">виберіть джерела карт</string>
     <string name="init_dataDir_note">Ви можете зберегти додаткові дані для схованок (спойлери, зображення журналу, …) на зовнішній накопичувачі (емуляція або дійсна зовнішня SD-карта в залежності від пристрою).</string>
     <string name="init_maptrail">показати історію треку</string>
