@@ -446,7 +446,7 @@
     <string name="contribution_graphics">graphiques</string>
     <string name="debug_user_error_report_title">Signaler un problème</string>
     <string name="debug_user_error_errortext">Une erreur est survenue, merci de nous la signaler :</string>
-    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Aidez-nous à résoudre les problèmes de c:geo en nous les signalant par courrier électronique, avec les informations sur le système et le fichier journal de c:geo inclus. Veuillez également inclure une description détaillée de l\'erreur dans votre courrier. Vous trouverez d\'autres possibilités de contact à l\'adresse suivante : <i>A propos de c:geo</i></p>]]></string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Aidez-nous à résoudre les problèmes de c:geo en nous les signalant par courrier électronique, avec les informations sur le système et le fichier journal de c:geo inclus. Veuillez également inclure une description détaillée de l'erreur dans votre courrier. Vous trouverez d'autres possibilités de contact à l'adresse suivante : <i>A propos de c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ouvrir les paramètres ?</string>
     <string name="settings_title_services">Services</string>
