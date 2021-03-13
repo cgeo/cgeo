@@ -1768,7 +1768,7 @@
     <string name="downloadmap_directory">Mappe</string>
     <string name="downloadmap_mapfile">Kortfil</string>
     <string name="downloadmap_retrieving_directory_data">Henter mappedata…</string>
-    <string name="downloadmap_checking_for_updates">Søger efter kort opdateringer...</string>
+    <string name="downloadmap_checking_for_updates">Søger efter kort opdateringer…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Slet tidligere spor</string>
     <string name="map_trailhistory_cleared">Tidligere spor slettet</string>
