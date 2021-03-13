@@ -765,7 +765,7 @@
     <string name="map_theme_select">Pagpili ug tema sa mapa</string>
     <string name="map_live_enable">Makahimo nga mag-live</string>
     <string name="map_as_list">Ipakita ang ingulon na lista</string>
-    <string name="map_select_multiple_items">Pagselek ug aytem</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Pagselek ug aytem</string>
     <!-- search -->
     <string name="search_bar_desc">Mga cache (geo code, keyword), Trackable (TB code)</string>
     <string name="search_coordinates">Mga koordinate</string>
