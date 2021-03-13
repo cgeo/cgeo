@@ -1222,7 +1222,7 @@
     <string name="map_live_enable">オンラインで取得</string>
     <string name="map_live_disable">保存済みキャッシュのみ</string>
     <string name="map_as_list">リスト表示</string>
-    <string name="map_select_multiple_items">アイテムを選択</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">アイテムを選択</string>
     <string name="map_routing">ルート検索(現在:%s)</string>
     <string name="map_routing_brouter">ルーティングは <a href="">Brouter</a> がインストールされている場合のみ利用できます</string>
     <string name="map_gm_autorotation">地図の自動回転</string>
