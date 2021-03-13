@@ -19,7 +19,7 @@ c:geo 是套簡易但強大且擁有許多附加功能的 geocaching 用戶端�
 
 藉由從 geocaching.com 導入或 GPX檔案匯入裝置讓您隨手可得 caches 資訊.
 您可將 caches 存放在不同的清單上並且可以依您的需要過濾, 排序.
-儲存起來的 caches可與離線地圖或固定地圖一起搭配使用在沒有網路連線的情況下尋找 caches (例如 在漫遊時).
+儲存起來的 caches可與離線地圖或固定地圖一起搭配使用在沒有網路連線的情況下尋找 caches (例如 在漫遊時). (例如 在漫遊時).
 日誌紀錄可以上傳或離線儲存待稍後上傳或輸出筆記.
 
 搜尋 trackables, 在張貼cache log時管理您的 trackable內容物及放置 trackable.
