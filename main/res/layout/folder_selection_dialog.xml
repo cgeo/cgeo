@@ -28,11 +28,18 @@
             android:layout_height="match_parent">
 
             <RadioButton
-                android:id="@+id/copymove_move"
+                android:id="@+id/copymove_justselect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:checked="true"
+                android:text="@string/contentstorage_selectfolder_dialog_choice_justselect" />
+
+            <RadioButton
+                android:id="@+id/copymove_move"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
                 android:text="@string/contentstorage_selectfolder_dialog_choice_move" />
 
             <RadioButton
@@ -42,12 +49,6 @@
                 android:textSize="18sp"
                 android:text="@string/contentstorage_selectfolder_dialog_choice_copy" />
 
-            <RadioButton
-                android:id="@+id/copymove_justselect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="@string/contentstorage_selectfolder_dialog_choice_justselect" />
         </RadioGroup>
 
 
