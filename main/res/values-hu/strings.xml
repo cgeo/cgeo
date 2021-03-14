@@ -653,7 +653,15 @@
     <string name="err_auth_geokrety_bad_password">A felhasználóneved/jelszavad helytelennek tűnik.</string>
     <string name="err_auth_geokrety_unknown">%1$s visszatérési értéke: %2$s.</string>
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">%1$d láda</item>
+        <item quantity="other">%1$d láda</item>
+    </plurals>
     <!-- days remaining -->
+    <plurals name="days_remaining">
+        <item quantity="one">%1$d nap maradt</item>
+        <item quantity="other">%1$d nap maradt</item>
+    </plurals>
     <string name="last_day_available">utolsó nap</string>
     <string name="cache_offline_refresh">Frissítés</string>
     <string name="cache_offline_drop">Törlés</string>
@@ -708,6 +716,10 @@
     <string name="cache_list_select_last">Utolsó választás</string>
     <string name="cache_images">Képek</string>
     <string name="cache_waypoints">Útpontok</string>
+    <plurals name="waypoints">
+        <item quantity="one">%d útpont</item>
+        <item quantity="other">%d útpont</item>
+    </plurals>
     <string name="cache_waypoints_add">Útpont hozzáadása</string>
     <string name="cache_hint">Segítség</string>
     <string name="cache_hint_not_available">Nincs segítség megadva</string>
@@ -897,7 +909,7 @@
     <string name="map_live_enable">Élő mód</string>
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Elem kiválasztása</string>
+    <string name="map_select_multiple_items">Elem kiválasztása</string>
     <!-- search -->
     <string name="search_bar_desc">Ládák (geokód, kulcsszó), utazók (követőkód)</string>
     <string name="search_coordinates">Koordináták</string>
