@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">Voer de trackable code in. Bijvoorbeeld \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Voer s.v.p. een logtekst in.</string>
     <string name="warn_load_images">Sorry, c:geo kon de afbeeldingen niet laden.</string>
-    <string name="warn_invalid_mapfile">Het geselecteerde kaartbestand is geen geldig mapsforge-bestand of gebruikt een niet-ondersteunde versie.\n(c:geo ondersteunt momenteel alleen v3 tot v5 / v3)\n\nOffline kaarten zijn niet beschikbaar.</string>
     <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
     <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
     <string name="warn_invalid_character">Teken moet een LETTER of een CIJFER zijn</string>
@@ -259,7 +258,6 @@
     <string name="info_waypoint_coordinates_cleared">Coördinaten gewist.</string>
     <string name="info_log_type_changed">Type log is gewijzigd!</string>
     <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>
-    <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
     <string name="info_cache_saved">De cache is lokaal opgeslagen</string>
     <string name="warn_calculator_state_save">Zorg dat je een waypoint opslaat als je de staat van de rekenmachine wil behouden.</string>
     <string name="feature_info_offline_counter">Je hebt enkele caches met een offline opgeslagen log, die mogelijk nog niet online gelogd zijn. Voor het gemak wordt de hoeveelheid van deze logs weergegeven als \"+ x\" achter het aantal gevonden caches onderin c:geo\'s hoofdpagina. \n\nDeze \"x\" logs worden toegevoegd aan de \"NUMBER\" template die je zou kunnen gebruiken in je log handtekening. \n\nAls deze teller-extensie je niet bevalt, kan je deze uitschakelen onder \"Instellingen\" &gt; \"Logging\" en/of in plaats daarvan het \"NUMBER (zonder offline logs)\"-sjabloon gebruiken. \n\nOm gemakkelijk de resterende offline logs te vinden, ga naar de lijst \"Geschiedenis\" en filter op \"Met persoonlijke gegevens\" &gt; \"Met offline log\".</string>
@@ -811,7 +809,6 @@
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Map %s wijzigen</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Je kunt kiezen voor de standaard map \'%s\' of een door de gebruiker gedefinieerde map kiezen.</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Niets doen</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Alle inhoud kopiëren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Alle inhoud verplaatsen</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Geen verdere actie</string>
@@ -843,8 +840,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s voltooid</string>
     <string name="folder_process_status_currentfile">%1$s verwerken</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Synchroniseer inhoud van %1$s naar interne opslag</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Inhoud kopiëren van %1$s naar %2$s</string>
     <string name="folder_move_progressbar_title">Inhoud verplaatsen van %1$s naar %2$s</string>
@@ -1134,12 +1129,6 @@
     <string name="cc_hint_minutes">minuten</string>
     <string name="cc_hint_seconds">seconden</string>
     <string name="cc_hint_fraction">fractie</string>
-    <string name="lowercase">kleine letters</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Map kiezen</string>
-    <string name="simple_dir_chooser_current_path">Pad:</string>
-    <string name="simple_dir_chooser_invalid_path">Ongeldig pad</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laden van caches uit %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laden van waypoints uit %1$s</string>
@@ -1683,7 +1672,7 @@
     <!-- various -->
     <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
     <plurals name="days_ago">
-        <item quantity="one">Gisteren</item>
+        <item quantity="one">%d dag geleden</item>
         <item quantity="other">%d dagen geleden</item>
     </plurals>
     <plurals name="favorite_points">
@@ -1749,7 +1738,6 @@
     <string name="init_low_disk_space_message">De geocache-gegevensmap heeft nog maar weinig schijfruimte. Dit kan leiden tot storingen van c:geo. Gelieve ruimte vrij te maken.</string>
     <string name="init_confirm_debug">c:geo wordt uitgevoerd in de foutopsporingsmodus!</string>
     <string name="list_confirm_debug_message">De debug-modus zorgt voor instabiliteit! Wil je de debug-modus uitschakelen?</string>
-    <string name="err_select_logimage_upload_size">Afbeelding te groot, selecteer een kleinere schaal.</string>
     <string name="err_logimage_caption_required">Een bijschrift is vereist voor de afbeelding</string>
     <string name="waypoint_latitude_null">N/Z --° --.---</string>
     <string name="waypoint_longitude_null">O/W --° --.---</string>
@@ -1760,18 +1748,12 @@
     <string name="storage_permission_request_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart zodra je geocaches voor offline gebruik opslaat. Bovendien zal c:geo je telefoon opslag gebruiken voor het importeren en exporteren van bestanden en het lezen van offline kaarten. Het kan niet worden gebruikt zonder deze toestemming.</string>
     <string name="storage_permission_needed">Deze functie is niet mogelijk zonder opslagpermissie.</string>
     <!-- colors -->
-    <string name="color_blue">Blauw</string>
-    <string name="color_green">Groen</string>
-    <string name="color_orange">Oranje</string>
-    <string name="color_red">Rood</string>
-    <string name="color_turquoise">Turquoise</string>
-    <string name="color_black">Zwart</string>
     <string name="preference_colorpicker_select_color_scheme">Kleurschema selecteren</string>
     <string name="preference_colorpicker_select_color">Kleur selecteren</string>
     <string name="preference_colorpicker_select_opaqueness">Selecteer doorzichtigheid</string>
     <string name="reset_to_default">Standaard</string>
     <!-- number input -->
-    <string name="number_input_title">Voer een waarde in tussen %1$s en %2$s</string>
+    <string name="number_input_title">Voer een waarde in tussen %1$d en %2$d</string>
     <string name="number_input_err_boundarymin">Ingevoerde waarde is te klein - herstel naar minimale waarde</string>
     <string name="number_input_err_boundarymax">De ingevoerde waarde is te groot - herstel naar maximale waarde</string>
     <string name="number_input_err_format">Ongeldig numeriek formaat</string>
