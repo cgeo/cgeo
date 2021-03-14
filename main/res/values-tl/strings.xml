@@ -596,6 +596,10 @@
     <string name="err_auth_geokrety_bad_password">Ang iyong username/password ay mukhang hindi wasto.</string>
     <string name="err_auth_geokrety_unknown">Ang %1$s ay bumalik sa: %2$s.</string>
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">%1$d cache</item>
+        <item quantity="other">mga %1$d cache</item>
+    </plurals>
     <!-- days remaining -->
     <string name="last_day_available">huling araw available</string>
     <string name="cache_offline_refresh">I-refresh</string>
