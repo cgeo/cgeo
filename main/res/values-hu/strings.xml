@@ -1348,7 +1348,7 @@
     <string name="storage_permission_needed">Ezt a műveletet nem lehet végre hajtani tárhely engedély nélkül.</string>
     <!-- colors -->
     <!-- number input -->
-    <string name="number_input_title">Adj meg egy értéket %1$d és %2$d között</string>
+    <string name="number_input_title">Adj meg egy értéket %1$s és %2$s között</string>
     <string name="number_input_err_boundarymax">A megadott érték túl nagy - állítsd vissza a megengedett maximális értékre</string>
     <string name="number_input_err_format">Érvénytelen számformátum</string>
     <!-- text notification channel infos & proximity notification title -->
