@@ -1748,7 +1748,7 @@
     <string name="preference_colorpicker_select_opaqueness">Valitse läpinäkyvyys</string>
     <string name="reset_to_default">Oletus</string>
     <!-- number input -->
-    <string name="number_input_title">Syötä arvo välillä %1$d ja %2$d</string>
+    <string name="number_input_title">Syötä arvo välillä %1$s ja %2$s</string>
     <string name="number_input_err_boundarymin">Syötetty arvo liian pieni - asetettu minimiarvoksi</string>
     <string name="number_input_err_boundarymax">Syötetty arvo liian iso - asetettu maksimiarvoksi</string>
     <string name="number_input_err_format">Väärä numeromuoto</string>
