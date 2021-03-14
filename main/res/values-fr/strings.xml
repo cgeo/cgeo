@@ -446,7 +446,7 @@
     <string name="contribution_graphics">graphiques</string>
     <string name="debug_user_error_report_title">Signaler un problème</string>
     <string name="debug_user_error_errortext">Une erreur est survenue, merci de nous la signaler :</string>
-    <string name="debug_user_error_explain_options">Aidez-nous à résoudre les problèmes de c:geo en nous les signalant par courrier électronique, avec les informations sur le système et le fichier journal de c:geo inclus. Veuillez également inclure une description détaillée de l\'erreur dans votre courrier. Vous trouverez d\'autres possibilités de contact à l\'adresse suivante \'A propos de c:geo\'</string>
+    <string name="debug_user_error_explain_options">Aidez-nous à résoudre les problèmes de c:geo en nous les signalant par courrier électronique. Veuillez fournir les informations systèmes, le fichier journal de c:geo ainsi qu\'une description détaillée de l\'erreur. D\'autres possibilités de contact se trouvent dans \'A propos de c:geo\'.</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ouvrir les paramètres ?</string>
     <string name="settings_title_services">Services</string>
@@ -754,7 +754,7 @@
     <string name="feature_favorite">Ajout de la cache à vos favoris</string>
     <string name="feature_voting">Évaluer les caches</string>
     <string name="init_maplines_title">Personnalisation des traits de la carte</string>
-    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">Autre</string>
+    <string name="init_map_other">Autre</string>
     <string name="localstorage_migrate_title">Déplacement des fichiers locaux</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1183,7 +1183,7 @@
     <string name="map_live_enable">Activer Temps réel</string>
     <string name="map_live_disable">Désactiver Temps réel</string>
     <string name="map_as_list">Lister les caches</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Sélectionner l\'élément</string>
+    <string name="map_select_multiple_items">Sélectionner l\'élément</string>
     <string name="map_routing">Routage (Actuellement : %s)</string>
     <string name="map_routing_brouter">La navigation nécessite que <a href="">BRouter</a> soit installé</string>
     <string name="map_gm_autorotation">Rotation automatique de la carte</string>
