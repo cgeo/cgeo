@@ -1696,7 +1696,7 @@
     <string name="preference_colorpicker_select_opaqueness">Sélectionner l\'opacité</string>
     <string name="reset_to_default">Par défaut</string>
     <!-- number input -->
-    <string name="number_input_title">Saisissez une valeur entre %1$d et %2$d</string>
+    <string name="number_input_title">Saisissez une valeur entre %1$s et %2$s</string>
     <string name="number_input_err_boundarymin">La valeur saisie est trop faible - réinitialisée à la valeur minimale</string>
     <string name="number_input_err_boundarymax">La valeur saisie est trop grande - réinitialisée à la valeur maximale</string>
     <string name="number_input_err_format">Format de nombre non valide</string>
