@@ -154,7 +154,7 @@
     <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
     <string name="log_image_scale_option_noscaling">原圖，不縮圖。</string>
     <string name="log_image_scale_option_entry">%1$d x %2$d 像素</string>
-    <string name="log_image_scale_option_entry_noimage">%1 像素</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d 像素</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">照片</string>
     <!-- translation -->
@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">輸入旅行蟲/地理錢幣的追蹤號碼。例如GCVCAZ。</string>
     <string name="warn_log_text_fill">請對日誌輸入一些文字</string>
     <string name="warn_load_images">读取图片失败。</string>
-    <string name="warn_invalid_mapfile">選擇的地圖檔案不是標準的mapsfirge地圖檔或是不支援的版本。</string>
     <string name="warn_pocket_query_select">沒有選擇攜帶需求</string>
     <string name="warn_no_pocket_query_found">在線上找不到Pocket query。</string>
     <string name="warn_invalid_character">字符必须是字母或数字</string>
@@ -259,7 +258,6 @@
     <string name="info_waypoint_coordinates_cleared">坐标已清除。</string>
     <string name="info_log_type_changed">日誌的種類已經改變</string>
     <string name="info_select_logimage_cancelled">選擇檔案或擷取圖片已經取消</string>
-    <string name="info_stored_image">新照片儲存到:</string>
     <string name="info_cache_saved">這個地理藏寶已經存儲到本地裝置</string>
     <string name="warn_calculator_state_save">如果你想保持计算器状态, 一定要保存航点。</string>
     <string name="feature_info_offline_counter">您有一些擁有離線日誌的cache，這些cache可能尚未在官網登錄。為了顯示您的打寶數，這些離線日誌的計數在c：geo會顯示為“ + x”。 \ n \ n此外，這些“ x”日誌將添加到您可能在日誌簽名中使用的“ NUMBER”模板中。 \ n \ n如果您不喜歡此計數器擴展名，則可以在“設置”＆gt;下將其禁用“記錄”和/或使用“ NUMBER（無脫機日誌）”模板。 \ n \ n要輕鬆查找剩餘的脫機日誌，請轉到“歷史記錄”列表，然後過濾“帶有個人數據”＆gt; “使用脫機日誌”。</string>
@@ -761,7 +759,6 @@
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">改變資料夾%s</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">你可以使用預設資料夾%s或是選擇一個自訂資料夾。</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">不執行任何操作</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">複製所有內容</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">移動所有的內容</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">無未來的動作</string>
@@ -792,7 +789,6 @@
     <string name="persistablefolder_spoilerimages">提示圖片</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_currentfile">進度：%1$s</string>
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">複製內容%1$s到%2$s</string>
     <string name="folder_move_progressbar_title">移動內容%1$s到%2$s</string>
@@ -817,11 +813,10 @@
     <string name="auth_unconnected">尚未连接</string>
     <string name="auth_dialog_waiting">等待 %s</string>
     <string name="auth_explain_short">接下來的過程將允許<b>c:geo</b>去存取%s</string>
-    <string name="auth_explain_long">長按“授權c：geo”按鈕將啟動此過程。此過程將打開一個有％s頁的瀏覽器。登錄並允許&lt;b&gt; c：geo &lt;/ b&gt;存取您的帳戶。</string>
     <string name="auth_forget_title">忘記授權?</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <string name="auth_token_explain_long">輸入您的憑證並按“授權c：geo”按鈕將開始該過程。此過程將連接到％s並驗證您的身份。</string>
+    <string name="auth_token_explain_long">輸入您的憑證並按“授權c：geo”按鈕將開始該過程。此過程將連接到%s並驗證您的身份。</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo正被授權在推特發表。</string>
     <!-- auth opencaching -->
@@ -869,7 +864,6 @@
     <string name="cache_personal_note_removedwaypoints">航點已刪除。</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">沒有可移除的航點</string>
     <string name="cache_personal_note_storewaypoints_success">航點增加到個人筆記\'</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">航點可以增加到個人筆記，但必須刪減。</string>
     <string name="cache_personal_note_preventWaypointsExtraction">關閉輸出航點</string>
     <string name="cache_personal_note_limit">個人註解的限制</string>
     <string name="cache_personal_note_upload">上傳</string>
@@ -1023,7 +1017,7 @@
     <string name="context_share_as_link">分享連結</string>
     <string name="create_internal_cache">建立玩家自訂cache</string>
     <string name="create_internal_cache_short">新的cache</string>
-    <string name="internal_cache_default_name">玩家自訂的寶藏</string>
+    <string name="internal_cache_default_name">玩家自訂的寶藏 #%1$d</string>
     <string name="internal_cache_default_description">這是玩家自訂cache</string>
     <string name="internal_cache_default_owner">您</string>
     <string name="internal_goto_targets_title">來去目標</string>
@@ -1035,12 +1029,6 @@
     <string name="cc_hint_degrees">角度</string>
     <string name="cc_hint_minutes">分鐘</string>
     <string name="cc_hint_seconds">秒</string>
-    <string name="lowercase">小寫</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">選擇資料夾</string>
-    <string name="simple_dir_chooser_current_path">路徑：</string>
-    <string name="simple_dir_chooser_invalid_path">無效的路徑</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">從%1$s載入藏寶</string>
     <string name="gpx_import_loading_waypoints_with_filename">從%1$s載入航點</string>
@@ -1098,7 +1086,6 @@
     <string name="waypoint_reset_local_and_remote_cache_coords">在c:geo和網站重置</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">網站上不支援更改座標</string>
     <string name="waypoint_coordinates_upload_error">發生錯誤，網站上更改座標</string>
-    <string name="waypoint_coordinates_has_been_modified_on_website">網站上更改座標完成</string>
     <string name="waypoint_done">已完成</string>
     <string name="waypoint_duplicate">複製航點</string>
     <string name="waypoint_toclipboard">複製航點到剪貼簿</string>
@@ -1464,9 +1451,6 @@
     <string name="tts_oclock">%s小時</string>
     <!-- various -->
     <string name="clipboard_copy_ok">複製到剪貼簿</string>
-    <plurals name="days_ago">
-        <item quantity="other">昨天</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo捷徑</string>
     <string name="create_shortcut">建立捷徑</string>
@@ -1504,18 +1488,12 @@
     <string name="close_app">關閉app</string>
     <string name="ask_again">下次詢問我</string>
     <!-- colors -->
-    <string name="color_blue">藍色</string>
-    <string name="color_green">綠​​色</string>
-    <string name="color_orange">橘色</string>
-    <string name="color_red">紅色</string>
-    <string name="color_turquoise">青綠色</string>
-    <string name="color_black">黑色</string>
     <string name="preference_colorpicker_select_color_scheme">選擇顏色圖案</string>
     <string name="preference_colorpicker_select_color">選擇顏色</string>
     <string name="preference_colorpicker_select_opaqueness">選取不透明的</string>
     <string name="reset_to_default">預設</string>
     <!-- number input -->
-    <string name="number_input_title">輸入一個在%1$s到%2$s之間的數字</string>
+    <string name="number_input_title">輸入一個在%1$d到%2$d之間的數字</string>
     <string name="number_input_err_boundarymin">輸入的數字太小-設定到預設的最小值</string>
     <string name="number_input_err_boundarymax">輸入的數字太大-設定到預設的最大值</string>
     <!-- text notification channel infos & proximity notification title -->
