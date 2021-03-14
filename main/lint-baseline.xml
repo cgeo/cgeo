@@ -1,0 +1,1570 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="5" by="lint 4.1.2">
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/AboutActivity.java"
+            line="230"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/address/AddressListActivity.java"
+            line="30"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/CacheDetailActivity.java"
+            line="240"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/CompassActivity.java"
+            line="70"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/EditWaypointActivity.java"
+            line="200"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/filter/FilterActivity.java"
+            line="42"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    protected void onCreate(final Bundle icicle) {"
+        errorLine2="                   ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/maps/google/v2/GoogleMapActivity.java"
+            line="69"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onDestroy`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    protected void onDestroy() {"
+        errorLine2="                   ~~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/maps/google/v2/GoogleMapActivity.java"
+            line="84"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onPause`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    protected void onPause() {"
+        errorLine2="                   ~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/maps/google/v2/GoogleMapActivity.java"
+            line="89"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onResume`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    protected void onResume() {"
+        errorLine2="                   ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/maps/google/v2/GoogleMapActivity.java"
+            line="94"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onStart`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    protected void onStart() {"
+        errorLine2="                   ~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/maps/google/v2/GoogleMapActivity.java"
+            line="114"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onStop`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    protected void onStop() {"
+        errorLine2="                   ~~~~~~">
+        <location
+            file="src/cgeo/geocaching/maps/google/v2/GoogleMapActivity.java"
+            line="125"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/ImageSelectActivity.java"
+            line="59"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/log/LogCacheActivity.java"
+            line="208"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/log/LogTrackableActivity.java"
+            line="127"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/connector/gc/PocketQueryListActivity.java"
+            line="38"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/TrackableActivity.java"
+            line="111"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        severity="Error"
+        message="Overriding method should call `super.onCreate`"
+        category="Correctness"
+        priority="9"
+        summary="Missing Super Call"
+        explanation="Some methods, such as `View#onDetachedFromWindow`, require that you also call the super implementation as part of your method."
+        errorLine1="    public void onCreate(final Bundle savedInstanceState) {"
+        errorLine2="                ~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/helper/UsefulAppsActivity.java"
+            line="32"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="StringFormatInvalid"
+        severity="Error"
+        message="Format string &apos;`cache_personal_note_storewaypoints_success_limited`&apos; is not a valid format string so it should not be passed to `String.format`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Invalid format string"
+        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
+        errorLine1="                showShortToast(getString(R.string.cache_personal_note_storewaypoints_success_limited, maxSize));"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/CacheDetailActivity.java"
+            line="2645"
+            column="32"/>
+        <location
+            file="res/values-zh-rTW/strings.xml"
+            line="872"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatInvalid"
+        severity="Error"
+        message="Format string &apos;`waypoint_coordinates_has_been_modified_on_website`&apos; is not a valid format string so it should not be passed to `String.format`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Invalid format string"
+        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
+        errorLine1="                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_has_been_modified_on_website, coords));"
+        errorLine2="                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/EditWaypointActivity.java"
+            line="611"
+            column="56"/>
+        <location
+            file="res/values-zh-rTW/strings.xml"
+            line="1101"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatInvalid"
+        severity="Error"
+        message="Format string &apos;`log_image_scale_option_entry_noimage`&apos; is not a valid format string so it should not be passed to `String.format`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Invalid format string"
+        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
+        errorLine1="                    getResources().getString(R.string.log_image_scale_option_entry_noimage, scaleSize);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/ImageSelectActivity.java"
+            line="228"
+            column="21"/>
+        <location
+            file="res/values-zh-rTW/strings.xml"
+            line="157"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatInvalid"
+        severity="Error"
+        message="Format string &apos;`internal_cache_default_name`&apos; is not a valid format string so it should not be passed to `String.format`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Invalid format string"
+        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
+        errorLine1="            cache.setName(name == null ? String.format(context.getString(R.string.internal_cache_default_name), id) : name);"
+        errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/connector/internal/InternalConnector.java"
+            line="188"
+            column="42"/>
+        <location
+            file="res/values-zh-rTW/strings.xml"
+            line="1026"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatInvalid"
+        severity="Error"
+        message="Format string &apos;`auth_explain_long`&apos; is not a valid format string so it should not be passed to `String.format`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Invalid format string"
+        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
+        errorLine1="        return res.getString(R.string.auth_explain_long, getAuthTitle());"
+        errorLine2="               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/activity/OAuthAuthorizationActivity.java"
+            line="403"
+            column="16"/>
+        <location
+            file="res/values-zh-rTW/strings.xml"
+            line="820"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatInvalid"
+        severity="Error"
+        message="Format string &apos;`auth_token_explain_long`&apos; is not a valid format string so it should not be passed to `String.format`"
+        category="Correctness:Messages"
+        priority="9"
+        summary="Invalid format string"
+        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
+        errorLine1="        return res.getString(R.string.auth_token_explain_long, getAuthTitle());"
+        errorLine2="               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/cgeo/geocaching/activity/TokenAuthorizationActivity.java"
+            line="277"
+            column="16"/>
+        <location
+            file="res/values-zh-rTW/strings.xml"
+            line="824"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-ca/strings.xml"
+            line="1776"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-cs/strings.xml"
+            line="1821"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-da/strings.xml"
+            line="1622"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-de/strings.xml"
+            line="1782"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-el/strings.xml"
+            line="1781"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-fi/strings.xml"
+            line="1773"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-fr/strings.xml"
+            line="1719"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-hu/strings.xml"
+            line="1356"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-it/strings.xml"
+            line="1772"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-ja/strings.xml"
+            line="1747"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-ko/strings.xml"
+            line="1529"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-lb/strings.xml"
+            line="677"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-lt/strings.xml"
+            line="1647"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-nb/strings.xml"
+            line="1717"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-nl/strings.xml"
+            line="1774"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-pl/strings.xml"
+            line="1822"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-pt/strings.xml"
+            line="1774"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-ru/strings.xml"
+            line="1731"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-sk/strings.xml"
+            line="1821"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-sv/strings.xml"
+            line="1717"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-tr/strings.xml"
+            line="1774"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-uk/strings.xml"
+            line="1549"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values-zh-rTW/strings.xml"
+            line="1518"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="97"/>
+        <location
+            file="res/values/strings.xml"
+            line="1972"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-ca/strings.xml"
+            line="1776"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-cs/strings.xml"
+            line="1821"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-da/strings.xml"
+            line="1622"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-de/strings.xml"
+            line="1782"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-el/strings.xml"
+            line="1781"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-fi/strings.xml"
+            line="1773"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-fr/strings.xml"
+            line="1719"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-hu/strings.xml"
+            line="1356"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-it/strings.xml"
+            line="1772"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-ja/strings.xml"
+            line="1747"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-ko/strings.xml"
+            line="1529"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-lb/strings.xml"
+            line="677"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-lt/strings.xml"
+            line="1647"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-nb/strings.xml"
+            line="1717"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-nl/strings.xml"
+            line="1774"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-pl/strings.xml"
+            line="1822"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-pt/strings.xml"
+            line="1774"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-ru/strings.xml"
+            line="1731"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-sk/strings.xml"
+            line="1821"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-sv/strings.xml"
+            line="1717"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-tr/strings.xml"
+            line="1774"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-uk/strings.xml"
+            line="1549"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values-zh-rTW/strings.xml"
+            line="1518"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatMatches"
+        severity="Error"
+        message="Suspicious argument type for formatting argument #2 in `number_input_title`: conversion is `s`, received `int` (argument #3 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
+        category="Correctness:Messages"
+        priority="9"
+        summary="`String.format` string doesn&apos;t match the XML format string"
+        explanation="This lint check ensures the following:&#xA;(1) If there are multiple translations of the format string, then all translations use the same type for the same numbered arguments&#xA;(2) The usage of the format string in Java is consistent with the format string, meaning that the parameter types passed to String.format matches those in the format string."
+        errorLine1="                        .setTitle(String.format(context.getString(R.string.number_input_title), min, max))"
+        errorLine2="                                                                                                     ~~~">
+        <location
+            file="src/cgeo/geocaching/settings/ColorpickerPreference.java"
+            line="136"
+            column="102"/>
+        <location
+            file="res/values/strings.xml"
+            line="1972"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;one&quot;>í gær&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-is/strings.xml"
+            line="714"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;zero&apos;` matches more than one specific number in this locale (0, 10~20, 30, 40, 50, 60, 100, 1000, 10000, 100000, 1000000, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;zero&quot;>atlikusi viena diena&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-lv/strings.xml"
+            line="738"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;one&quot;>atlikusi viena diena&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-lv/strings.xml"
+            line="739"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;one&quot;>Viena slėptuvė&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-lt/strings.xml"
+            line="777"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;one&quot;>liko viena diena&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-lt/strings.xml"
+            line="784"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;one&quot;>1 Starpposms&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-lv/strings.xml"
+            line="805"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;one&quot;>Viena piezīme veiksmīgi augšupielādēta&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-lv/strings.xml"
+            line="1151"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (0~3, 5, 7, 8, 10~13, 15, 17, 18, 20, 21, 100, 1000, 10000, 100000, 1000000, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;one&quot;>kahapon&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-tl/strings.xml"
+            line="1180"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;one&quot;>Sėkmingai nusiųsta viena pastaba&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-lt/strings.xml"
+            line="1243"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;one&quot;>vakar&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-lv/strings.xml"
+            line="1430"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ImpliedQuantity"
+        severity="Error"
+        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
+        category="Correctness:Messages"
+        priority="5"
+        summary="Implied Quantities"
+        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
+        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
+        errorLine1="        &lt;item quantity=&quot;one&quot;>ontem&lt;/item>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-pt/strings.xml"
+            line="1686"
+            column="9"/>
+    </issue>
+
+</issues>

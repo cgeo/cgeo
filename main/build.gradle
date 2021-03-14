@@ -153,11 +153,18 @@ android {
     }
 
     lintOptions {
-        // generally we accept lint errors when building
-        abortOnError false
+        // we do not accept lint errors when building...
+        abortOnError true
+        // ...but errors in following baseline are ignored (gracefully migrate to zero-lint-error-code)
+        baseline file("lint-baseline.xml")
+
+        // warnings shall not lead to failing build
+        warningsAsErrors false
 
         // abort release builds in case of FATAL errors
         checkReleaseBuilds true
+
+        absolutePaths false
 
         // ExtraTranslation - old translation will be deleted by the next crowdin import
         disable 'ExtraTranslation'
