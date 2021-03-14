@@ -659,9 +659,11 @@
     <string name="init_backup_settings_restore">Przywróć ustawienia</string>
     <string name="settings_readingerror">Błąd odczytu ustawień</string>
     <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
+    <string name="settings_folder_changed">Ustawienie folderu \"%1$s\" zmieniło się na \"%2$s\".\n\nDotknij \"%3$s\", aby zachować bieżące ustawienia tego folderu.\n\nDotknij \"%4$s\", aby ustawić stary folder. W takim przypadku zostaniesz poproszony o ponowne przyznanie dostępu do tego folderu.</string>
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
     <string name="settings_info_offline_maps">c:geo obsługuje mapy do użytku offline. Możesz uzyskać mapy od różnych dostawców lub nawet tworzyć własne mapy (z danych OSM). Najpierw musisz wybrać folder, w którym mapy offline mają być przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
+    <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
@@ -774,7 +776,7 @@
     <string name="feature_favorite">Dodaj skrzynkę do ulubionych</string>
     <string name="feature_voting">Ocenianie skrzynek</string>
     <string name="init_maplines_title">Dostosowanie linii mapy</string>
-    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">Inna</string>
+    <string name="init_map_other">Inna</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
@@ -812,11 +814,13 @@
     <string name="sendToCgeo_no_registration">c:geo nie może pobrać skrzynek. Rejestracja do send2cgeo wygasła. Proszę zarejestrować urządzenie w Ustawieniach.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Zmień folder %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Folder %1$s jest ustawiony na \'%2$s\', zawiera %3$s i %4$s i ma całkowity rozmiar %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Możesz użyć domyślnego folderu \'%s\' lub wybrać folder zdefiniowany przez użytkownika.</string>
     <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nic nie rób</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopiuj całą zawartość</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Przenieś całą zawartość</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Bez dalszych działań</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Wybrałeś inny folder niż aktualnie przechowywany. Bieżący folder zawiera %1$s, %2$s i ma rozmiar %3$s. Jak chcesz kontynuować?\n\nWybierz folder i</string>
     <string name="contentstorage_folder_selection_aborted">Przerwano wybór folderu, folder \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Folder ustawiony na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Przerwano wybór pliku</string>
@@ -1247,6 +1251,9 @@
     <string name="map_showwp_parking">Parkingi z punktów nawigacyjnych</string>
     <string name="map_showwp_visited">Odwiedzone punkty nawigacyjne</string>
     <string name="map_show_track">Pokaż ścieżkę/trasę GPX</string>
+    <string name="init_renderthemefolder_synctolocal">Synchronizuj motywy do folderu prywatnego aplikacji</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Ta opcja może poprawić wydajność przeglądarki map kosztem przestrzeni dyskowej urządzenia.</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_title">Włącz synchronizację folderu z motywami</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
     <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>
@@ -1257,7 +1264,7 @@
     <string name="map_live_enable">Włącz online</string>
     <string name="map_live_disable">Wyłącz online</string>
     <string name="map_as_list">Pokaż w postaci listy</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Wybierz element</string>
+    <string name="map_select_multiple_items">Wybierz element</string>
     <string name="map_routing">Prowadzenie (Obecnie:%s)</string>
     <string name="map_routing_brouter">Routing jest dostępny tylko wtedy, gdy zainstalowany jest <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
