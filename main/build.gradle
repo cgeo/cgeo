@@ -154,7 +154,8 @@ android {
 
     lintOptions {
         // generally we accept lint errors when building
-        abortOnError false
+        // setting to true for testing, related to #10155, #8029
+        abortOnError true
 
         // abort release builds in case of FATAL errors
         checkReleaseBuilds true
