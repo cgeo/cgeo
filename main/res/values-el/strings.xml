@@ -1757,7 +1757,7 @@
     <string name="preference_colorpicker_select_opaqueness">Επιλογή ποσοστού αδιαφάνειας</string>
     <string name="reset_to_default">Προεπιλογή</string>
     <!-- number input -->
-    <string name="number_input_title">Δώστε τιμή ανάμεσα %1$d και %2$d</string>
+    <string name="number_input_title">Δώστε τιμή ανάμεσα %1$s και %2$s</string>
     <string name="number_input_err_boundarymin">Δώσατε πολύ μικρή - Δώστε την ελάχιστη</string>
     <string name="number_input_err_boundarymax">Δώσατε πολύ μεγάλη - Μειώστε στην Μέγιστη επιτρεπτή</string>
     <string name="number_input_err_format">Λάθος μορφή αριθμών</string>
