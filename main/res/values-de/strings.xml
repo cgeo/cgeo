@@ -1761,7 +1761,7 @@
     <string name="preference_colorpicker_select_opaqueness">Deckkraft auswählen</string>
     <string name="reset_to_default">Standardwert</string>
     <!-- number input -->
-    <string name="number_input_title">Gib einen Wert zwischen %1$d und %2$d ein</string>
+    <string name="number_input_title">Gib einen Wert zwischen %1$s und %2$s ein</string>
     <string name="number_input_err_boundarymin">Der eingegebene Wert ist zu klein - auf den minimalen Wert zurückgesetzt</string>
     <string name="number_input_err_boundarymax">Der eingegebene Wert ist zu groß - auf den maximalen Wert zurückgesetzt</string>
     <string name="number_input_err_format">Ungültiges Zahlenformat</string>
