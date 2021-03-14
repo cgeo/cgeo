@@ -1182,7 +1182,6 @@
     <string name="init_renderthemefolder_synctolocal">Синхронизировать темы в защищенную папку приложения</string>
     <string name="init_summary_renderthemefolder_synctolocal">Эта опция может улучшить производительность открытия карты за счет свободного места на вашем устройстве.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Включить синхронизацию папок темы</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Эта опция постоянно синхронизирует содержимое папки Map Theme в защищенную папку приложения для более быстрого доступа к файлам.\n\nПапка с темами кары \'%1$s\' имеет в настоящее время %2$s, %3$s и занимает %4$s.\n\nВключить синхронизацию папок?</string>
     <string name="init_hidewp">Скрыть точки</string>
     <string name="init_summary_hidewp_original">Скрыть оригинальные точки на карте</string>
     <string name="init_summary_hidewp_parking">Скрыть точки парковки на карте</string>
@@ -1193,7 +1192,7 @@
     <string name="map_live_enable">Подгружать тайники \"на лету\"</string>
     <string name="map_live_disable">Не подгружать тайники</string>
     <string name="map_as_list">Показать списком</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Выбрать элемент</string>
+    <string name="map_select_multiple_items">Выбрать элемент</string>
     <string name="map_gm_autorotation">Авто-поворот карты</string>
     <string name="map_gm_autorotation_disable">Отключить автоповорот карты?\n\nВы можете включить его снова с помощью меню поворота карты</string>
     <string name="quick_settings">Быстрые настройки</string>
