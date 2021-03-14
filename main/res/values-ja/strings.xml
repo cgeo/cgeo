@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">トラッカブルのコード(多くはTBかTCで始まります)を入力してください。例:「TB29QMZ」</string>
     <string name="warn_log_text_fill">ログの本文を入力してください</string>
     <string name="warn_load_images">画像を読み込むことができませんでした</string>
-    <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforgeの地図ファイルではないかサポートされていないバージョンです。\n(現在バージョン3から5まで使用できます)\n\nオフライン地図は利用できません</string>
     <string name="warn_pocket_query_select">ポケット・クエリが選択されていません</string>
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
     <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
@@ -259,7 +258,6 @@
     <string name="info_waypoint_coordinates_cleared">座標を削除しました</string>
     <string name="info_log_type_changed">ログのタイプを変更しました</string>
     <string name="info_select_logimage_cancelled">画像の選択または撮影がキャンセルされました</string>
-    <string name="info_stored_image">新規画像ファイルの保存場所:</string>
     <string name="info_cache_saved">キャッシュはローカルディスクに保存されました</string>
     <string name="warn_calculator_state_save">計算した状態を保持したい場合はウェイポイントを保存してください</string>
     <string name="feature_info_offline_counter">オフラインで書いたログがありますがまだ投稿されていません。未投稿オフラインログ数はc:geoメインページ下部に+ xと表示されます。\n\nまた、ログの署名に使用する「キャッシュ数」[NUMBER]テンプレートにも含まれます。 \n\nお好みでなかったら「設定」&gt;「ログ」で表示を変えられます。また「キャッシュ数(オフラインログ除く)」[ONLINENUM]をお使いください。\n\n残っているオフラインログを確認するには「履歴」(メインページ右上の時計マーク)のフィルタ(ロートのマーク)で「個人データ」&gt;「オフラインログあり」を選択してください</string>
@@ -659,6 +657,7 @@
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図をサポートしています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
+    <string name="settings_info_themes">オフライン地図用のテーマが使用できます。カラースタイルを変更したり(例えば夜間用表示)、自転車道や等高線などを強調表示するために使われます。\n\nzip圧縮されてるテーマファイルでは表示が遅くなる時があります。そのような場合にはテーマフォルダをアプリ専用フォルダと同期してアクセス速度を早くすることもできます(少しストレージ使用量が増えますが)。</string>
     <string name="init_mapsource_select">地図の選択</string>
     <string name="init_local_file_system">ローカルファイルシステム</string>
     <string name="init_base_directory_description">データ保存のベースフォルダ</string>
@@ -809,11 +808,12 @@
     <string name="sendToCgeo_no_registration">キャッシュ情報がダウンロードできませんでした。Send2cgeoの有効期限が過ぎました。再登録してください</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">%sフォルダを変更</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">%1$sフォルダは現在「%2$s」に設定されます。%3$sと%4$sが含まれており、合計サイズは%5$sです。</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">デフォルトのフォルダ「%s」を使用するか、ユーザー定義のフォルダを選択することができます。</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">何もしない</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">すべてのファイルをコピー</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">すべてのファイルを移動</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">なにもしない</string>
+    <string name="contentstorage_selectfolder_dialog_choice">現在使用してるフォルダと違うフォルダです。現在のフォルダは%1$sと%2$sが含まれており、合計サイズは%3$sです。どうしますか?\n\n選択したフォルダに</string>
     <string name="contentstorage_folder_selection_aborted">フォルダの選択を中止しました。フォルダは「%s」です</string>
     <string name="contentstorage_folder_selection_success">フォルダを「%s」に設定しました</string>
     <string name="contentstorage_file_selection_aborted">ファイル選択を中止しました</string>
@@ -842,8 +842,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s、%3$s/%4$s 完了</string>
     <string name="folder_process_status_currentfile">処理中:%1$s</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">%1$s のコンテンツを内部ストレージに同期</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">「%1$s」の内容を「%2$s」にコピーしています</string>
     <string name="folder_move_progressbar_title">「%1$s」の内容を「%2$s」に移動しています</string>
@@ -1122,12 +1120,6 @@
     <string name="cc_hint_minutes">分</string>
     <string name="cc_hint_seconds">秒</string>
     <string name="cc_hint_fraction">小数部</string>
-    <string name="lowercase">小文字化</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">フォルダを選択</string>
-    <string name="simple_dir_chooser_current_path">パス:</string>
-    <string name="simple_dir_chooser_invalid_path">無効なパス</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$sからキャッシュを読み込み中</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$sからウェイポイントを読み込み中</string>
@@ -1212,6 +1204,10 @@
     <string name="map_showwp_parking">ウェイポイント(駐車場)</string>
     <string name="map_showwp_visited">ウェイポイント(訪問済み)</string>
     <string name="map_show_track">GPXトラック/ルートを表示</string>
+    <string name="init_renderthemefolder_synctolocal">地図テーマをアプリ専用フォルダに同期</string>
+    <string name="init_summary_renderthemefolder_synctolocal">少しストレージを使用しますが地図表示の速度が改善するかもしれません</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_title">地図テーマフォルダの同期</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">地図テーマフォルダをアプリ専用フォルダに常に同期します。ファイルのアクセス速度が向上します。\n\n地図テーマフォルダは現在「%1$s」に設定されます。%2$sと%3$sが含まれており、合計サイズは%4$sです。\n\nフォルダを同期しますか?</string>
     <string name="init_hidewp">ウェイポイントを隠す</string>
     <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
     <string name="init_summary_hidewp_parking">地図上でウェイポイント(駐車場)を非表示</string>
@@ -1663,9 +1659,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="tts_oclock">%s時</string>
     <!-- various -->
     <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
-    <plurals name="days_ago">
-        <item quantity="other">%d日前</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="other">お気に入り %s </item>
     </plurals>
@@ -1722,7 +1715,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="init_low_disk_space_message">ジオキャッシュ データフォルダのストレージ容量が不足しています。c:geoが誤動作する可能性があります。空き容量を増やしてください</string>
     <string name="init_confirm_debug">c:geoをデバッグモードで実行しています!</string>
     <string name="list_confirm_debug_message">デバッグモードは不安定の原因になります! デバッグモードを無効にしますか?</string>
-    <string name="err_select_logimage_upload_size">画像が大きすぎます。小さい画像を選択してください</string>
     <string name="err_logimage_caption_required">画像にキャプションが必要です</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
@@ -1733,18 +1725,12 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="storage_permission_request_explanation">オフライン用にジオキャッシュを保存するためにデバイスのストレージまたはSDカードを使用します。 また、ファイルのインポート/エクスポートやオフライン地図の読み込みにも使います。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_needed">この機能はストレージの権限がないと使用できません</string>
     <!-- colors -->
-    <string name="color_blue">青</string>
-    <string name="color_green">緑</string>
-    <string name="color_orange">オレンジ</string>
-    <string name="color_red">赤</string>
-    <string name="color_turquoise">水色</string>
-    <string name="color_black">黒</string>
     <string name="preference_colorpicker_select_color_scheme">配色の選択</string>
     <string name="preference_colorpicker_select_color">色の選択</string>
     <string name="preference_colorpicker_select_opaqueness">不透明度の選択</string>
     <string name="reset_to_default">デフォルト</string>
     <!-- number input -->
-    <string name="number_input_title">%1$s と %2$s の間で数値を入力してください</string>
+    <string name="number_input_title">%1$d と %2$d の間で数値を入力してください</string>
     <string name="number_input_err_boundarymin">入力した数値が小さすぎます: 最小値にリセットします</string>
     <string name="number_input_err_boundarymax">入力した数値が大きすぎます: 最大値にリセットします</string>
     <string name="number_input_err_format">数値の書式が正しくありません</string>
