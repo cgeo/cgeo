@@ -483,6 +483,7 @@
     <string name="init_gpx_importdir">دليل استيراد من GPX</string>
     <string name="init_dataDir">حدد دفتر بيانات العلبة المخبئة</string>
     <string name="init_dataDir_note">قد تختار تخزين بيانات إضافية في العلبة المخبئة (المفشي، ألبوم الصور، &#8230;) في تخزينك الخارجي (تضمينها داخل التخزين أو في بطاقة ذاكرة خارجية اعتماداً على جهازك).</string>
+    <string name="init_summary_maptrail">عند التفعيل (و GPS قيد التشغيل) c:geo يحفظ سجل حركاتك كمسار ويعرضها على الخريطة.</string>
     <string name="init_include_found_status">تضمين حالة \"تم العثور عليها\"</string>
     <string name="init_trackautovisit">زيارة TBs</string>
     <string name="init_summary_trackautovisit">تعيين أمتعة السفر ليتم \"زيارتها\" بشكل افتراضي</string>

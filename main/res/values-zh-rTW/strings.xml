@@ -944,7 +944,7 @@
     <string name="cache_terrain">地形</string>
     <string name="cache_rating">評分</string>
     <string name="cache_own_rating">你的評分</string>
-    <string name="cache_rating_of_new">%2$d 的 %1$d</string>
+    <string name="cache_rating_of_new">%2$d 的 %1$.1f</string>
     <string name="cache_favorite">加入最愛</string>
     <string name="cache_owner">寶主</string>
     <string name="cache_hidden">已隱藏</string>

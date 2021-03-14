@@ -586,6 +586,11 @@
     <string name="err_auth_geokrety_bad_password">Numele de utilizator/parola incorect.</string>
     <string name="err_auth_geokrety_unknown">%1$s a răspuns: %2$s.</string>
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">%1$d geocutie</item>
+        <item quantity="few">%1$d geocutii</item>
+        <item quantity="other">%1$d geocutii</item>
+    </plurals>
     <!-- days remaining -->
     <string name="last_day_available">ultima zi disponibilă</string>
     <string name="cache_offline_refresh">Împrospătează</string>
@@ -633,6 +638,11 @@
     <string name="cache_list_select_last">Ultima selecţie</string>
     <string name="cache_images">Imagini</string>
     <string name="cache_waypoints">Puncte</string>
+    <plurals name="waypoints">
+        <item quantity="one">%d Punct</item>
+        <item quantity="few">%d Puncte</item>
+        <item quantity="other">%d Puncte</item>
+    </plurals>
     <string name="cache_waypoints_add">Adaugă punct</string>
     <string name="cache_hint">Indiciu</string>
     <string name="cache_hint_not_available">Fără indiciu</string>
@@ -928,6 +938,11 @@
     <string name="export_confirm_message">Cale: %1$s\nNume fişier: %2$s</string>
     <string name="export_persnotes">Note personale</string>
     <string name="export_persnotes_uploading">Se încarcă nota personală %1$d</string>
+    <plurals name="export_persnotes_upload_success">
+        <item quantity="one">%1$d notă personală încarcată cu succes</item>
+        <item quantity="few">%1$d note personale încarcate cu succes</item>
+        <item quantity="other">%1$d note personale încarcate cu succes</item>
+    </plurals>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Permis cu câini</string>
     <string name="attribute_dogs_no">Interzis cu câini</string>

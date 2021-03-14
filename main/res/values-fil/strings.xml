@@ -594,6 +594,10 @@
     <string name="err_auth_geokrety_bad_password">Parehong imbalido ang iyong username/password.</string>
     <string name="err_auth_geokrety_unknown">Ang %1$s na naibalik: %2$s.</string>
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">%1$d isang cache</item>
+        <item quantity="other">%1$d mga cache</item>
+    </plurals>
     <!-- days remaining -->
     <string name="last_day_available">magagamit sa huling araw</string>
     <string name="cache_offline_refresh">Mag-refresh</string>
