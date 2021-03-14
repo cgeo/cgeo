@@ -212,7 +212,6 @@
     <string name="info_waypoint_coordinates_cleared">تم مسح الإحداثيات.</string>
     <string name="info_log_type_changed">تم تغيير نوع سجل الزيارة!</string>
     <string name="info_select_logimage_cancelled">تم إلغاء تحديد الصورة أو التقاطها.</string>
-    <string name="info_stored_image">تم حفظ صورة جديدة إلى:</string>
     <string name="info_cache_saved">تم تخزين المخبئ محلياً</string>
     <string name="warn_calculator_state_save">تأكد من حفظ إحداثية إذا كنت تريد الحفاظ على العداد.</string>
     <string name="err_trackable_log_not_anonymous">تسجل دخول %1$s من c:geo لا يمكن أن يتم بصفة مجهول, هل تريد فتح الغعدادات لملئ بيانات الاعتماد الخاصة بك من %2$s؟</string>
@@ -552,7 +551,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">الترخيص لـ c:geo</string>
@@ -718,10 +716,6 @@
     <string name="cache_time_full_hours">ساعة</string>
     <string name="cache_listed_on">تم إدراجه على %s</string>
     <!-- coordinate calculator hints -->
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">المسار:</string>
-    <string name="simple_dir_chooser_invalid_path">مسار غير صالح</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">تحميل المخبآت من %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">تحميل الإحدثيات من %1$s</string>
@@ -1184,7 +1178,6 @@
     <string name="init_low_disk_space">تشغيل منخفض على مساحة التخزين</string>
     <string name="init_confirm_debug">c:geo قيد التشغيل في وضغ التصحيح!</string>
     <string name="list_confirm_debug_message">وضع التصحيح يسبب عدم الاستقرار! هل تريد إلغاء تنشيط وضع التصحيح؟</string>
-    <string name="err_select_logimage_upload_size">الصورة كبيرة جداً، الرجاء تحديد مقاس أصغر.</string>
     <string name="err_logimage_caption_required">مطلوب تسمية توضيحية للصورة</string>
     <!-- permission handling -->
     <!-- colors -->

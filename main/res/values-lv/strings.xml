@@ -250,7 +250,6 @@
     <string name="info_waypoint_coordinates_cleared">Koordinātas nodzēstas.</string>
     <string name="info_log_type_changed">Pieraksta tips tika mainīts!</string>
     <string name="info_select_logimage_cancelled">Attēla atlase vai uzņemšana tika atcelta.</string>
-    <string name="info_stored_image">Jauns attēls tika saglabāts:</string>
     <string name="info_cache_saved">Slēpnis ir saglabāts tavā ierīcē bezsaistē</string>
     <string name="warn_calculator_state_save">Ja vēlies saglabāt kalkulatora stāvokli, noteikti saglabā starpposmu.</string>
     <string name="err_trackable_log_not_anonymous">Nevar pieteikties %1$s no c:geo anonīmi. Vai vēlies atvērt uzstādījumus, lai ievadītu akreditācijas datus no %2$s?</string>
@@ -700,7 +699,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Atļaut c:geo</string>
@@ -941,10 +939,6 @@
     <string name="cc_hint_minutes">minūtes</string>
     <string name="cc_hint_seconds">sekundes</string>
     <string name="cc_hint_fraction">daļa</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">Direktorija:</string>
-    <string name="simple_dir_chooser_invalid_path">Nederīga direktorija</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ielādē slēpņus no %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ielādē starpposmus no %1$s</string>
@@ -1425,11 +1419,6 @@ importēti %1$d slēpņi no %2$s</item>
     </plurals>
     <!-- various -->
     <string name="clipboard_copy_ok">Iekopēts starpliktuvē</string>
-    <plurals name="days_ago">
-        <item quantity="zero">%d tikko</item>
-        <item quantity="one">vakar</item>
-        <item quantity="other">pirms %d dienām</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="zero">%s izlases</item>
         <item quantity="one">%s izlases</item>
@@ -1492,7 +1481,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="init_low_disk_space">Ierīcē sāk pietrūkt atmiņas</string>
     <string name="init_confirm_debug">c:geo darbojas atkļūdošanas režīmā!</string>
     <string name="list_confirm_debug_message">Atkļūdošanas režīms var izraisīt nestabilu aplikācijas darbību! Vai vēlies šo režīmu deaktivizēt?</string>
-    <string name="err_select_logimage_upload_size">Pārāk liels attēls, lūdzu, izvēlies mazāku izšķirtspēju.</string>
     <string name="err_logimage_caption_required">Attēlam ir nepieciešams pievienot parakstu</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
@@ -1500,12 +1488,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="close_app">Aizvērt lietotni</string>
     <string name="ask_again">Jautāt vēlreiz</string>
     <!-- colors -->
-    <string name="color_blue">Zils</string>
-    <string name="color_green">Zaļš</string>
-    <string name="color_orange">Oranžs</string>
-    <string name="color_red">Sarkans</string>
-    <string name="color_turquoise">Tirkīzs</string>
-    <string name="color_black">Melns</string>
     <string name="preference_colorpicker_select_color_scheme">Izvēlies krāsu shēmu</string>
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->

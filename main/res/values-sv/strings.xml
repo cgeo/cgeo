@@ -240,7 +240,6 @@
     <string name="warn_search_help_tb">Ange koden för en trackable. Tex \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
     <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
-    <string name="warn_invalid_mapfile">Den valda kartfilen är inte en giltig mapsforge-kartfil eller använder en version som inte stöds.\n(c:geo stöder för närvarande v3 till v5)\n\nOfflinekartor är inte tillgängliga.</string>
     <string name="warn_pocket_query_select">Ingen Pocket query vald.</string>
     <string name="warn_no_pocket_query_found">Ingen Pocket query hittades på nätet.</string>
     <string name="warn_invalid_character">Tecknet måste vara en bokstav eller en siffra</string>
@@ -258,7 +257,6 @@
     <string name="info_waypoint_coordinates_cleared">Koordinater rensade.</string>
     <string name="info_log_type_changed">Typen av logg har ändrats!</string>
     <string name="info_select_logimage_cancelled">Val av bild avbröts.</string>
-    <string name="info_stored_image">Ny bild sparad som:</string>
     <string name="info_cache_saved">Cachen har lagrats lokalt</string>
     <string name="warn_calculator_state_save">Glöm inte att spara punkten om du vill behålla kalkylatorläget.</string>
     <string name="err_trackable_log_not_anonymous">Loggning av %1$s från c:geo kan inte göras anonymt. Vill du öppna inställningarna för att fylla i din inloggningsinformation från %2$s?</string>
@@ -791,7 +789,6 @@
     <string name="sendToCgeo_no_registration">c:geo misslyckades med att hämta cacher. Registreringen för send2cgeo har upphört att gälla. Vänligen registrera dig på nytt i inställningarna.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Byt mapp %s</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Gör ingenting</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopiera allt innehåll</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Flytta allt innehåll</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Ingen ytterligare åtgärd</string>
@@ -814,8 +811,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s gjort</string>
     <string name="folder_process_status_currentfile">Bearbeta %1$s</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Synkronisera innehåll av %1$s till intern lagring</string>
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Koppla c:geo mot Twitter</string>
@@ -1083,12 +1078,6 @@
     <string name="cc_hint_minutes">minuter</string>
     <string name="cc_hint_seconds">sekunder</string>
     <string name="cc_hint_fraction">bråk</string>
-    <string name="lowercase">gemener</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Välj mapp</string>
-    <string name="simple_dir_chooser_current_path">Sökväg:</string>
-    <string name="simple_dir_chooser_invalid_path">Ogiltig sökväg</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laddar cacher från %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laddar waypoints från %1$s</string>
@@ -1625,10 +1614,6 @@
     <string name="tts_oclock">Klockan %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopierat till urklipp</string>
-    <plurals name="days_ago">
-        <item quantity="one">igår</item>
-        <item quantity="other">%d dagar sedan</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favorit</item>
         <item quantity="other">%s favoriter</item>
@@ -1692,7 +1677,6 @@
     <string name="init_low_disk_space_message">Katalogen för geocachedata håller på att få slut på utrymme. Detta kan orsaka problem med c:geo. Vänligen försök frigöra lite utrymme.</string>
     <string name="init_confirm_debug">c:geo körs i debugläge!</string>
     <string name="list_confirm_debug_message">Debug-läge kan orsaka instabilitet! Vill du återgå till normalläge?</string>
-    <string name="err_select_logimage_upload_size">Bilden är för stor, vänligen välj en mindre skala.</string>
     <string name="err_logimage_caption_required">En text krävs till bilden</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
@@ -1703,12 +1687,6 @@
     <string name="storage_permission_request_explanation">c:geo kommer att skriva data på din telefonlagring eller SD-kortet så snart du sparar geocacher för användning offline. Vidare kommer c:geo att använda din telefonlagring för import och export av filer och läsning av offlinekartor. Det kan inte användas utan detta tillstånd.</string>
     <string name="storage_permission_needed">Denna funktion är inte möjlig utan lagringsbehörighet.</string>
     <!-- colors -->
-    <string name="color_blue">Blå</string>
-    <string name="color_green">Grön</string>
-    <string name="color_orange">Orange</string>
-    <string name="color_red">Röd</string>
-    <string name="color_turquoise">Turkos</string>
-    <string name="color_black">Svart</string>
     <string name="preference_colorpicker_select_color_scheme">Välj färgschema</string>
     <string name="preference_colorpicker_select_color">Välj färg</string>
     <string name="preference_colorpicker_select_opaqueness">Välj ogenomskinlighet</string>

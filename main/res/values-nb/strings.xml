@@ -256,7 +256,6 @@
     <string name="info_waypoint_coordinates_cleared">Koordinater fjernet.</string>
     <string name="info_log_type_changed">Logg-typen har blitt forandret!</string>
     <string name="info_select_logimage_cancelled">Valg av bilde ble avbrutt.</string>
-    <string name="info_stored_image">Nytt bilde lagret til:</string>
     <string name="info_cache_saved">Cachen er nå lagret lokalt</string>
     <string name="warn_calculator_state_save">Husk å lagre veipunkt hvis du vil beholde utregningen.</string>
     <string name="feature_info_offline_counter">Du har noen cacher med en offline lagret logg, som ennå ikke er logget på nettet. For å hjelpe deg vises antallet av disse loggene som \"+ x\" bak antallet funnede cacher i bunnteksten på c:geos hovedside. \n\nVidere vil disse \"x\"-loggene bli lagt til i malen \"NUMBER\" som du eventuelt vil benytte i loggsignaturen. \n\nHvis du ikke liker denne tellerutvidelsen, kan du deaktivere den under \"Innstillinger\" &gt; \"Logging\" og/eller bruke malen \"NUMMER (uten offline logger)\" i stedet for. \n\nFor å enkelt finne gjenværende offline-logger, Gå til listen \"Historikk\" og filtrer ut \"Med personlige data\" &gt; \"Med offline logg\".</string>
@@ -785,7 +784,6 @@
     <string name="sendToCgeo_no_registration">c:geo kunne ikke laste ned cacher. Registrering for send2cgeo har utløpt. Registrer deg på nytt i innstillingene.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Endre mappe %s</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Ikke gjør noe</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopier alt innhold</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Flytt alt innhold</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Ingen ytterligere tiltak</string>
@@ -805,7 +803,6 @@
     <string name="persistablefolder_fieldnotes">Feltnotater</string>
     <string name="persistablefolder_spoilerimages">Spoiler-bilder</string>
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_finished_title">Mappeinnhold ble kopiert</string>
     <plurals name="file_count">
@@ -1080,12 +1077,6 @@
     <string name="cc_hint_minutes">minutter</string>
     <string name="cc_hint_seconds">sekunder</string>
     <string name="cc_hint_fraction">desimaler</string>
-    <string name="lowercase">små bokstaver</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Velg mappe</string>
-    <string name="simple_dir_chooser_current_path">Bane:</string>
-    <string name="simple_dir_chooser_invalid_path">Ugyldig bane</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laster cacher fra %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laster veipunkter fra %1$s</string>
@@ -1626,10 +1617,6 @@
     <string name="tts_oclock">klokken %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopiert til utklippstavlen</string>
-    <plurals name="days_ago">
-        <item quantity="one">i går</item>
-        <item quantity="other">%d dager siden</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favoritt</item>
         <item quantity="other">%s favoritter</item>
@@ -1692,7 +1679,6 @@
     <string name="init_low_disk_space">Lite lagringsplass</string>
     <string name="init_confirm_debug">c:geo kjører i feilsøkingsmodus!</string>
     <string name="list_confirm_debug_message">Feilsøkingsmodus vil gjøre c:geo ustabil. Vil du deaktivere feilsøkingsmodusen?</string>
-    <string name="err_select_logimage_upload_size">Bildet for stort, Velg et mindre.</string>
     <string name="err_logimage_caption_required">Du må skrive inn tittel på bildet</string>
     <string name="waypoint_latitude_null">N/S--°--.---</string>
     <string name="waypoint_longitude_null">Ø/V--°--.---</string>
@@ -1703,12 +1689,6 @@
     <string name="storage_permission_request_explanation">c:geo skriver data til internt lagringsområde eller SD-kort når du lagrer geocacher for offline bruk. Videre bruker c:geo lagringsområdet til importering og eksportering av filer og for å lese offline-kart. Appen kan ikke brukes uten denne tilgangen.</string>
     <string name="storage_permission_needed">Denne funksjonen er ikke tilgjengelig uten lagringstilatelse.</string>
     <!-- colors -->
-    <string name="color_blue">Blå</string>
-    <string name="color_green">Grønn</string>
-    <string name="color_orange">Oransje</string>
-    <string name="color_red">Rød</string>
-    <string name="color_turquoise">Turkis</string>
-    <string name="color_black">Svart</string>
     <string name="preference_colorpicker_select_color_scheme">Velg fargeoppsett</string>
     <string name="preference_colorpicker_select_color">Velg farge</string>
     <string name="preference_colorpicker_select_opaqueness">Velg gjennomsiktighet</string>

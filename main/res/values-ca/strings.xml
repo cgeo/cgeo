@@ -242,7 +242,6 @@
     <string name="warn_search_help_tb">Introduïu el codi d\'un traçable. Per exemple, \"LPAYKV\".</string>
     <string name="warn_log_text_fill">Introduïu un text per al vostre registre.</string>
     <string name="warn_load_images">El c:geo no ha pogut carregar les imatges.</string>
-    <string name="warn_invalid_mapfile">El fitxer de mapa seleccionat no és un fitxer de mapa mapsforge vàlid o utilitza una versió no compatible.\n(C:geo  actualment  admet de v3 a v5)\n\nEls mapes fora de línia no estan disponibles.</string>
     <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
     <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
     <string name="warn_invalid_character">El caràcter ha de ser una LLETRA o un DÍGIT</string>
@@ -260,7 +259,6 @@
     <string name="info_waypoint_coordinates_cleared">S\'ha eliminat les coordenades.</string>
     <string name="info_log_type_changed">El tipus de registre ha estat canviat.</string>
     <string name="info_select_logimage_cancelled">La selecció d\'imatge o captura s\'ha cancel·lat.</string>
-    <string name="info_stored_image">La nova imatge s\'ha desat a:</string>
     <string name="info_cache_saved">El catxé ha estat desat localment</string>
     <string name="warn_calculator_state_save">Assegura\'t de desar el punt de ruta si vols mantenir l\'estat de la calculadora.</string>
     <string name="feature_info_offline_counter">Teniu catxés amb un registre desat fora de línia, que potser encara no s\'han registrat en línia. Per a la vostra comoditat, el recompte d\'aquests registres es mostra com a \"+ x\" darrere del nombre de catxés trobats al peu de pàgina  principal de c: geo. \n\nA més, aquests registres \"x\" s\'afegiran a la plantilla \"Número\" que podeu utilitzar a la signatura del registre. \n\nSi no us agrada aquesta extensió de comptador, podeu desactivar-la a \"Configuració\"&gt;\"Registre\" i / o utilitzar la plantilla \"Númerto (sense registres fora de línia)\". \n\nPer trobar fàcilment els registres sense connexió restants, aneu a la llista \"Historial\" i filtreu per \"Amb dades personals\" &gt;\"Amb registre sense connexió\".</string>
@@ -812,7 +810,6 @@
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Canvia la carpeta%s</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Podeu utilitzar la carpeta per defecte \'%s\' o triar una carpeta definida per l\'usuari.</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">No fer res</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copia tot el contingut</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Mou tot el contingut</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">No hi ha cap altra acció</string>
@@ -844,8 +841,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fet</string>
     <string name="folder_process_status_currentfile">Procés %1$s</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Sincronitzeu el contingut de %1$s amb l\'emmagatzematge intern</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">S\'està copiant el contingut de %1$s a %2$s</string>
     <string name="folder_move_progressbar_title">S\'està movent el contingut de %1$s a %2$s</string>
@@ -1135,12 +1130,6 @@
     <string name="cc_hint_minutes">minuts</string>
     <string name="cc_hint_seconds">segons</string>
     <string name="cc_hint_fraction">fracció</string>
-    <string name="lowercase">minúscula</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Trieu la carpeta</string>
-    <string name="simple_dir_chooser_current_path">Ruta:</string>
-    <string name="simple_dir_chooser_invalid_path">La ruta és invàlida</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Carregant catxés de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Carregant fites de %1$s</string>
@@ -1684,10 +1673,6 @@
     <string name="tts_oclock">%s en punt</string>
     <!-- various -->
     <string name="clipboard_copy_ok">S\'ha copiat al portapapers</string>
-    <plurals name="days_ago">
-        <item quantity="one">ahir</item>
-        <item quantity="other">fa %d dies</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s preferit</item>
         <item quantity="other">%s preferits</item>
@@ -1751,7 +1736,6 @@
     <string name="init_low_disk_space_message">La carpeta de dades de Geocatxés s’està quedant amb poca memòria. Això pot provocar un mal funcionament de C: geo. Allibereu una mica d’espai.</string>
     <string name="init_confirm_debug">c:Geo s\'està executant en mode de depuració!</string>
     <string name="list_confirm_debug_message">El mode de depuració provoca inestabilitat! Voleu desactivar el mode de depuració?</string>
-    <string name="err_select_logimage_upload_size">Imatge massa gran, si us plau seleccioneu una escala més petita.</string>
     <string name="err_logimage_caption_required">Cal un títol per a la imatge</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>
@@ -1762,12 +1746,6 @@
     <string name="storage_permission_request_explanation">c:geo escriurà dades al vostre telèfon o a la targeta SD tan bon punt guardeu els catxés per a un ús fora de línia. A més, c:geo utilitzarà l’emmagatzematge del vostre telèfon per a la importació i exportació d’arxius i lectura de mapes fora de línia. No es pot utilitzar sense aquest permís.</string>
     <string name="storage_permission_needed">Aquesta funció no és possible sense el permís d\'emmagatzematge.</string>
     <!-- colors -->
-    <string name="color_blue">Blau</string>
-    <string name="color_green">Verd</string>
-    <string name="color_orange">Taronja</string>
-    <string name="color_red">Vermell</string>
-    <string name="color_turquoise">Turquesa</string>
-    <string name="color_black">Negre</string>
     <string name="preference_colorpicker_select_color_scheme">Seleccioneu l\'esquema de color</string>
     <string name="preference_colorpicker_select_color">Seleccioneu el color</string>
     <string name="preference_colorpicker_select_opaqueness">Seleccioneu opacitat</string>

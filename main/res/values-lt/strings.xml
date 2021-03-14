@@ -250,7 +250,6 @@
     <string name="info_waypoint_coordinates_cleared">Koordinatės išvalytos.</string>
     <string name="info_log_type_changed">Įrašo tipas buvo pakeistas!</string>
     <string name="info_select_logimage_cancelled">Vaizdo failo pasirinkimas ar fotografavimas buvo atšauktas.</string>
-    <string name="info_stored_image">Naujas vaizdo failas įrašytas į:</string>
     <string name="info_cache_saved">Slėptuvė buvo išsaugota įrenginyje</string>
     <string name="warn_calculator_state_save">Nepamirškite išsaugokite kelio tašką, jei norite išsaugoti skaičiuoklės būseną.</string>
     <string name="err_trackable_log_not_anonymous">Anonimiškai užregistruoti %1$s per c:geo negalima. Ar norite atidaryti nustatymus ir užpildyti savo duomenis iš %2$s?</string>
@@ -745,7 +744,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Leisti c:geo prisijungti</string>
@@ -1012,11 +1010,6 @@
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
     <string name="cc_hint_seconds">sekundės</string>
-    <string name="lowercase">mažosios raidės</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">Kelias:</string>
-    <string name="simple_dir_chooser_invalid_path">Neteisingas kelias</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Įkeliamos slėptuvės nuo %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Įkeliami papildomi taškai nuo %1$s</string>
@@ -1547,12 +1540,6 @@
     <string name="tts_oclock">%s valandos</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Nukopijuota į mainų sritį</string>
-    <plurals name="days_ago">
-        <item quantity="one">%d dieną atgal</item>
-        <item quantity="few">%d dienas atgal</item>
-        <item quantity="many">%d dienų atgal</item>
-        <item quantity="other">%d dienų atgal</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s mėgiama</item>
         <item quantity="few">%s mėgiamos</item>
@@ -1622,7 +1609,6 @@
     <string name="init_low_disk_space">Mažai talpyklos vietos</string>
     <string name="init_confirm_debug">c:geo veikia derinimo režimu!</string>
     <string name="list_confirm_debug_message">Derinimo režimas sukelia nestabilumų! Ar norite jį išjungti?</string>
-    <string name="err_select_logimage_upload_size">Vaizdo failas per didelis, prašome pasirinkti mažesnius išmatavimus.</string>
     <string name="err_logimage_caption_required">Vaizdui reikalinga antraštė</string>
     <string name="waypoint_latitude_null">Š/P --° --.---</string>
     <string name="waypoint_longitude_null">R/V --° --.---</string>
@@ -1633,12 +1619,6 @@
     <string name="storage_permission_request_explanation">c:geo įrašys duomenis į jūsų telefono atmintį ar SD kortelę, kai tik išsaugosite slėptuves naudojimui neprisijungus. Be to, c:geo naudos jūsų telefono saugyklą failų importui ir eksportui bei išsaugotų žemėlapių skaitymui. Ji negali būti naudojama be šio leidimo.</string>
     <string name="storage_permission_needed">Ši funkcija neįmanoma be saugyklos leidimo.</string>
     <!-- colors -->
-    <string name="color_blue">Mėlyna</string>
-    <string name="color_green">Žalia</string>
-    <string name="color_orange">Oranžinė</string>
-    <string name="color_red">Raudona</string>
-    <string name="color_turquoise">Turkis</string>
-    <string name="color_black">Juoda</string>
     <string name="preference_colorpicker_select_color_scheme">Rinktis spalvų schemą</string>
     <string name="preference_colorpicker_select_color">Pasirinkti spalvą</string>
     <string name="preference_colorpicker_select_opaqueness">Pasirinkite skaidrumą</string>

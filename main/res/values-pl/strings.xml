@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Proszę uzupełnij tekst wpisu.</string>
     <string name="warn_load_images">c:geo nie był w stanie załadować obrazów.</string>
-    <string name="warn_invalid_mapfile">Wybrany plik mapy nie jest prawidłowym plikiem mapsforge lub używa nieobsługiwanej wersji.\n(c:geo obecnie obsługuje v3 do v5)\n\nMapy offline nie są dostępne.</string>
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
     <string name="warn_invalid_character">Znak musi być liter lub cyfrą</string>
@@ -259,7 +258,6 @@
     <string name="info_waypoint_coordinates_cleared">Współrzędne wyczyszczone.</string>
     <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
     <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
-    <string name="info_stored_image">Nowy obraz zapisany w:</string>
     <string name="info_cache_saved">Skrzynka jest przechowywana lokalnie</string>
     <string name="warn_calculator_state_save">Pamiętaj aby zapisać punkt orientacyjny jeśli chcesz zachować stan kalkulatora.</string>
     <string name="feature_info_offline_counter">Masz kilka skrytek z zapisanym logiem offline, które mogą nie być jeszcze zalogowane online. Dla Twojego komfortu liczba wpisów jest wyświetlana jako \"+ x\" za liczbą znalezionych skrytek w stopce na stronie głównej c:geo. \n\nPonadto te \"x\" logi zostaną dodane do szablonu \"NUMBER\", którego możesz użyć w Twoim podpisze logu. \n\nJeśli nie lubisz tego rozszerzenia licznika, możesz wyłączyć go w sekcji \"Ustawienia\" &gt; \"Logowanie\" i/lub zamiast tego użyć szablonu \"NUMBER (bez logów offline). \n\nAby łatwo znaleźć pozostałe logi offline, przejdź do listy \"Historia\" i filtruj \"Z danymi osobowymi\" &gt; \"Z logiem offline\".</string>
@@ -816,7 +814,6 @@
     <string name="contentstorage_selectfolder_dialog_title">Zmień folder %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">Folder %1$s jest ustawiony na \'%2$s\', zawiera %3$s i %4$s i ma całkowity rozmiar %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Możesz użyć domyślnego folderu \'%s\' lub wybrać folder zdefiniowany przez użytkownika.</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nic nie rób</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopiuj całą zawartość</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Przenieś całą zawartość</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Bez dalszych działań</string>
@@ -849,8 +846,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s wykonano</string>
     <string name="folder_process_status_currentfile">Przetwarzanie %1$s</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Synchronizuj zawartość %1$s do pamięci wewnętrznej</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopiowanie zawartości %1$s do %2$s</string>
     <string name="folder_move_progressbar_title">Przenoszenie zawartości %1$s do %2$s</string>
@@ -1158,12 +1153,6 @@
     <string name="cc_hint_minutes">minut(y)</string>
     <string name="cc_hint_seconds">sekund(y)</string>
     <string name="cc_hint_fraction">cz. ułamk.</string>
-    <string name="lowercase">małe litery</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Wybierz folder</string>
-    <string name="simple_dir_chooser_current_path">Ścieżka:</string>
-    <string name="simple_dir_chooser_invalid_path">Nieprawidłowa ścieżka</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ładowanie skrzynek z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ładowanie punktów orientacyjnych z %1$s</string>
@@ -1254,6 +1243,7 @@
     <string name="init_renderthemefolder_synctolocal">Synchronizuj motywy do folderu prywatnego aplikacji</string>
     <string name="init_summary_renderthemefolder_synctolocal">Ta opcja może poprawić wydajność przeglądarki map kosztem przestrzeni dyskowej urządzenia.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Włącz synchronizację folderu z motywami</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Spowoduje to ciągłą synchronizację zawartości folderu z motywami map z folderem prywatnym aplikacji dla szybszego dostępu do plików.\n\nTwój folder z motywami map \'%1$s\' ma obecnie %2$s, %3$s i rozmiar %4$s.\n\nCzy chcesz włączyć synchronizację folderów?</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
     <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>
@@ -1721,12 +1711,6 @@
     <string name="tts_oclock">%s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Skopiowano do schowka</string>
-    <plurals name="days_ago">
-        <item quantity="one">wczoraj</item>
-        <item quantity="few">%d dni temu</item>
-        <item quantity="many">%d dni temu</item>
-        <item quantity="other">%d dni temu</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s ulubiony</item>
         <item quantity="few">%s ulubione</item>
@@ -1804,7 +1788,6 @@
     <string name="init_low_disk_space_message">Zaczyna brakować miejsca w folderze z danymi skrytek. Może to powodować nieprawidłowe działanie c:geo. Zwolnij trochę miejsca.</string>
     <string name="init_confirm_debug">c: geo jest uruchomiony w trybie debugowania!</string>
     <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
-    <string name="err_select_logimage_upload_size">Zbyt duże zdjęcie, wybierz mniejszą skalę.</string>
     <string name="err_logimage_caption_required">Podpis jest wymagany dla obrazu</string>
     <string name="waypoint_latitude_null">N/S--°--.---</string>
     <string name="waypoint_longitude_null">E/W--°--.---</string>
@@ -1815,12 +1798,6 @@
     <string name="storage_permission_request_explanation">c:geo będzie zapisywał dane w pamięci telefonu lub na karcie SD, gdy wybierzesz zapis skrzynek do użycia w trybie offline. Ponadto c:geo będzie używać pamięci telefonu do importowania i eksportowania plików oraz czytania map offline. Wszystkie te działania nie są możliwe bez udzielenia tego zezwolenia.</string>
     <string name="storage_permission_needed">Ta funkcja nie jest możliwa bez uprawnień do przechowywania.</string>
     <!-- colors -->
-    <string name="color_blue">Niebieski</string>
-    <string name="color_green">Zielony</string>
-    <string name="color_orange">Pomarańczowy</string>
-    <string name="color_red">Czerwony</string>
-    <string name="color_turquoise">Turkusowy</string>
-    <string name="color_black">Czarny</string>
     <string name="preference_colorpicker_select_color_scheme">Wybierz schemat kolorów</string>
     <string name="preference_colorpicker_select_color">Wybierz kolor</string>
     <string name="preference_colorpicker_select_opaqueness">Wybierz nieprzezroczystość</string>

@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">Trackable için kodu girin. Örneğin; \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Lütfen kaydınız için metin girin.</string>
     <string name="warn_load_images">c:geo görüntüleri yükleyemedi.</string>
-    <string name="warn_invalid_mapfile">Seçili harita dosyası geçerli bir mapsforge harita dosyası değil veya desteklenmeyen bir sürüm kullanıyor.\n(c:geo şu anlık v3\'ten v5\'e kadar destekliyor)\n\nÇevrim dışı haritalar kullanılabilir değil.</string>
     <string name="warn_pocket_query_select">Sorgulama kaydı seçilmedi.</string>
     <string name="warn_no_pocket_query_found">Çevrimiçi sorgulama kaydı bulunamadı.</string>
     <string name="warn_invalid_character">Karakter bir HARF veya RAKAM olmalıdır</string>
@@ -259,7 +258,6 @@
     <string name="info_waypoint_coordinates_cleared">Koordinatlar silindi.</string>
     <string name="info_log_type_changed">Kaydın türü değiştirildi!</string>
     <string name="info_select_logimage_cancelled">Görüntü seçimi veya çekimi iptal edildi.</string>
-    <string name="info_stored_image">Yeni görsel kaydedildi:</string>
     <string name="info_cache_saved">Geocache yerel olarak kaydedildi</string>
     <string name="warn_calculator_state_save">Hesaplama durumunu korumak isterseniz, Yol Noktasını kaydettiğinizden emin olun.</string>
     <string name="feature_info_offline_counter">Çevrimdışı kayıt girilmiş Geocacheleriniz ve bunlar henüz çevrimiçi olarak kaydedilmemiş olabilir. BU kayıtların sayısı, c: geo\'nun ana sayfasındaki altbilgide bulunan Geocache sayınızın arkasında \"+ x\" olarak görüntülenir. \n \n Ayrıca bu \"x\" kayıtlar, kayıt imzanızda kullanabileceğiniz \"SAYI\" şablonuna eklenecektir. \n \n Bu sayaç uzantısını beğenmezseniz, \"Ayarlar\" &gt; \"Kayıt\" altından devre dışı bırakabilir ve/veya bunun yerine \"SAYI (çevrimdışı kayıtlar olmadan)\" şablonunu kullanabilirsiniz. \n \n Kalan çevrimdışı kayıtları kolayca bulmak için \"Geçmiş\" listesine gidin ve \"Kişisel verilerle\" &gt;\"Çevrimdışı kayıtlar\" için filtre uygulayın.</string>
@@ -811,7 +809,6 @@
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">%s Klasörünü Değiştir</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Varsayılan klasörü \'%s\' veya kullanıcı tanımlı başka bir klasörü kullanmayı seçebilirsiniz.</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Hiç bir şey yapma</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Tüm içeriği kopyala</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Tüm içeriği taşı</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Başka işlem yok</string>
@@ -843,8 +840,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s tamamlandı</string>
     <string name="folder_process_status_currentfile">%1$s işlemi</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">%1$s içindekileri dahili depolamaya senkronize et</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">%1$s\'nın içeriği %2$s\'e kopyalanıyor</string>
     <string name="folder_move_progressbar_title">%1$s\'nın içeriği %2$s\'e taşınıyor</string>
@@ -1134,12 +1129,6 @@
     <string name="cc_hint_minutes">dakika</string>
     <string name="cc_hint_seconds">saniye</string>
     <string name="cc_hint_fraction">küsürat</string>
-    <string name="lowercase">küçük harf</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Klasör seç</string>
-    <string name="simple_dir_chooser_current_path">Yol:</string>
-    <string name="simple_dir_chooser_invalid_path">Geçersiz Yol</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Geocache\'ler %1$s\'den yükleniyor</string>
     <string name="gpx_import_loading_waypoints_with_filename">Yol noktaları %1$s\'den yükleniyor</string>
@@ -1682,10 +1671,6 @@
     <string name="tts_oclock">saat %s yönü</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Panoya kopyalandı</string>
-    <plurals name="days_ago">
-        <item quantity="one">dün</item>
-        <item quantity="other">%d gün önce</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favori</item>
         <item quantity="other">%s favori</item>
@@ -1749,7 +1734,6 @@
     <string name="init_low_disk_space_message">Geocache veri klasörünün depolama alanı yetersiz. Bu c:geo\'nun hata vermesine neden olabilir. Lütfen biraz yer açın.</string>
     <string name="init_confirm_debug">c:geo hata ayıklama modunda çalışıyor!</string>
     <string name="list_confirm_debug_message">Hata ayıklama modu dengesizliklere sebep oluyor! Bu modu devre dışı bırakmak ister misiniz?</string>
-    <string name="err_select_logimage_upload_size">Görsel çok büyük, lütfen daha küçük bir boyut seçiniz.</string>
     <string name="err_logimage_caption_required">Resim için bir başlık gerekli</string>
     <string name="waypoint_latitude_null">K/G --° --.---</string>
     <string name="waypoint_longitude_null">D/B --° --.---</string>
@@ -1760,12 +1744,6 @@
     <string name="storage_permission_request_explanation">Çevrimdışı kullanmak üzere Geocache\'leri kayıt ettiğinizde c:geo telefonunuzun hafızasına veya SD kartınıza veri kaydedecektir. Ek olarak c:geo içe-dışa veri aktarımı için, çevrımdışı harita kullanımı için cihaz hafızanızı kullanacaktır. İzinsiz çalıştırılamaz.</string>
     <string name="storage_permission_needed">Depolama izni olmaksızın bu özellik kullanılamıyor.</string>
     <!-- colors -->
-    <string name="color_blue">Mavi</string>
-    <string name="color_green">Yeşil</string>
-    <string name="color_orange">Turuncu</string>
-    <string name="color_red">Kırmızı</string>
-    <string name="color_turquoise">Turkuaz</string>
-    <string name="color_black">Siyah</string>
     <string name="preference_colorpicker_select_color_scheme">Renk şemasını seç</string>
     <string name="preference_colorpicker_select_color">Renk seç</string>
     <string name="preference_colorpicker_select_opaqueness">Saydamlığı ayarla</string>

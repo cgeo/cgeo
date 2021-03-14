@@ -214,7 +214,6 @@
     <string name="info_waypoint_coordinates_cleared">קואורדינטות נמחקו.</string>
     <string name="info_log_type_changed">סוג הלוג השתנה!</string>
     <string name="info_select_logimage_cancelled">בחירת תמונה או לכידה בוטלה.</string>
-    <string name="info_stored_image">תמונה חדשה נשמרה ב:</string>
     <string name="info_cache_saved">המטמון אוחסן באופן מקומי</string>
     <string name="warn_calculator_state_save">הקפד לשמור את נקודת הציון אם ברצונך לשמור על מצב מחשבון.</string>
     <string name="err_trackable_log_not_anonymous">לא ניתן לבצע ביקור %1$s מc:geo באופן אנונימי. האם ברצונך לפתוח את ההגדרות כדי למלא את הפרטים שלך מ %2$s?</string>
@@ -418,7 +417,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_dialog_waiting">Waiting for %s&#8230;</string>
@@ -443,8 +441,6 @@
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
     <!-- coordinate calculator hints -->
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
     <!-- gpx -->
     <!-- import -->
     <string name="web_import_waiting">Waiting for new caches from send2cgeo&#8230;</string>

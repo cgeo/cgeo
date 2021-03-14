@@ -203,7 +203,6 @@
     <string name="info_log_cleared">Zapis je izbrisan.</string>
     <string name="info_log_type_changed">Tip zapisa je spremenjen.</string>
     <string name="info_select_logimage_cancelled">Izbira slike je bila preklicana.</string>
-    <string name="info_stored_image">Slika je bila shranjena v:</string>
     <string name="info_cache_saved">Zaklad je bil shranjen lokalno</string>
     <string name="err_trackable_no_preference_activity">Žal, ni mogoče najti ustrezne nastavitve zaslona.</string>
     <string name="confirm_unsaved_changes_title">Spremembe niso shranjene</string>
@@ -509,7 +508,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Poveži c:geo s Twitterjem</string>
@@ -645,10 +643,6 @@
     <string name="cache_time_full_hours">h</string>
     <string name="cache_listed_on">Objavljen na %s</string>
     <!-- coordinate calculator hints -->
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">Pot:</string>
-    <string name="simple_dir_chooser_invalid_path">Neveljavna pot</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Nalaganje zakladov iz %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Nalaganje dodatnih točk iz %1$s</string>
@@ -1076,12 +1070,6 @@
     </plurals>
     <!-- various -->
     <string name="clipboard_copy_ok">Skopirano v odložišče</string>
-    <plurals name="days_ago">
-        <item quantity="one">Pred %d dnevom</item>
-        <item quantity="two">Pred %d dnevoma</item>
-        <item quantity="few">Pred %d dnevi</item>
-        <item quantity="other">Pred %d dnevi</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favorit</item>
         <item quantity="two">%s favorita</item>

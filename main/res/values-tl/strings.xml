@@ -211,7 +211,6 @@
     <string name="info_waypoint_coordinates_cleared">Ang pagka-koordinado ay malinaw.</string>
     <string name="info_log_type_changed">Ang uri ng log ay nabago na!</string>
     <string name="info_select_logimage_cancelled">Kinansela ang pagpili o pagkuha ng larawan.</string>
-    <string name="info_stored_image">Ang bagong imahe ay nai-save sa:</string>
     <string name="info_cache_saved">Ang cache ay naka-imbak sa lokal</string>
     <string name="warn_calculator_state_save">Siguraduhing nai-save ang waypoint kapag gusto mong panatilihin ang estado ng calculator.</string>
     <string name="err_trackable_log_not_anonymous">Ang pagsulat sa %1$s mula sa c:geo ay hindi maisasagawa ang pag kilala. Gusto mo bang buksan ang pagkakasaayos para ilagay sa iyong mga kresensyal mula sa %2$s?</string>
@@ -551,7 +550,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Pahintulutan ang c:geo</string>
@@ -728,10 +726,6 @@
     <string name="cache_time_full_hours">alas</string>
     <string name="cache_listed_on">Nailista sa %s</string>
     <!-- coordinate calculator hints -->
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">Daan:</string>
-    <string name="simple_dir_chooser_invalid_path">Hindi wastong daan</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ang nag-loloading na mga caches sa %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ang pag-loading a mga waypoints mula sa %1$s</string>
@@ -1180,10 +1174,6 @@
     <string name="tts_oclock">%s na alas</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kinopya sa klipbord</string>
-    <plurals name="days_ago">
-        <item quantity="one">kahapon</item>
-        <item quantity="other">%d araw na nakalipas</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s paborito</item>
         <item quantity="other">%s mga paborito</item>
@@ -1238,7 +1228,6 @@
     <string name="init_low_disk_space">Mabagal ang pagtakbo sa imbakan na espasyo</string>
     <string name="init_confirm_debug">ang c:geo ay tumatakbo sa debug na mode!</string>
     <string name="list_confirm_debug_message">Ang debug na mode ay nagdudulot ng kawalang tatag! Gusto mo bang i-deaktibo ang iyong debug na mode?</string>
-    <string name="err_select_logimage_upload_size">Ang imahe ay sobrang laki, maaaring pilii ang maliit na iskala.</string>
     <string name="err_logimage_caption_required">Ang kapsiyon ay kailangan para sa imahe</string>
     <!-- permission handling -->
     <!-- colors -->

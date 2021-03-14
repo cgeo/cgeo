@@ -167,7 +167,6 @@
     <string name="info_log_post_retry">Reyna aftur</string>
     <string name="info_log_post_save">Vista utan netsambands</string>
     <string name="info_log_cleared">Færsla var hreinsuð.</string>
-    <string name="info_stored_image">Ný mynd vistuð í:</string>
     <string name="confirm_unsaved_changes_title">Óvistaðar breytingar</string>
     <string name="confirm_discard_wp_changes">Henda óvistuðum breytingum á vörðum?</string>
     <!-- location service -->
@@ -403,7 +402,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Samþykkja c:geo</string>
@@ -524,8 +522,6 @@
     <string name="cache_image_open_browser">Opna í vafra</string>
     <string name="cache_share_field">Deila</string>
     <!-- coordinate calculator hints -->
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Hleð kössum úr %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Hleð vegpunktum úr %1$s</string>
@@ -718,10 +714,6 @@
     </plurals>
     <!-- various -->
     <string name="clipboard_copy_ok">Afritað á klemmuspjaldið</string>
-    <plurals name="days_ago">
-        <item quantity="one">í gær</item>
-        <item quantity="other">%d dagar síðan</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s uppáhalds</item>
         <item quantity="other">%s uppáhalds</item>

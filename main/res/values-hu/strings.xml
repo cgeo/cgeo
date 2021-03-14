@@ -236,7 +236,6 @@
     <string name="info_waypoint_coordinates_cleared">Koordináták törölve.</string>
     <string name="info_log_type_changed">A bejegyzés típusa módosítva!</string>
     <string name="info_select_logimage_cancelled">A kép kiválasztása vagy készítése meg lett szakítva.</string>
-    <string name="info_stored_image">Új kép mentési helyének megadása:</string>
     <string name="info_cache_saved">Láda adati letöltve</string>
     <string name="warn_calculator_state_save">Mentsd el az útpontot, ha meg akarod tartani a számológép aktuális állapotát!</string>
     <string name="err_trackable_log_not_anonymous">%1$s logolása a c:geo-ból nem végezhető el névtelenül. Meg akarod nyitni a beállításokat, hogy kitöltsd a %2$s-ra vonatkozó adatokat?</string>
@@ -625,7 +624,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">A c:geo hitelesítése</string>
@@ -831,10 +829,6 @@
     <string name="cache_listed_on">Listázva a %s-on is</string>
     <string name="internal_cache_default_owner">Te</string>
     <!-- coordinate calculator hints -->
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">Útvonal:</string>
-    <string name="simple_dir_chooser_invalid_path">Érvénytelen útvonal</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s: ládák betöltése</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s: útpontok betöltése</string>
@@ -1288,10 +1282,6 @@
     <string name="tts_oclock">%s órakor</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kimásolva a vágólapra</string>
-    <plurals name="days_ago">
-        <item quantity="one">tegnap</item>
-        <item quantity="other">%d nappal ezelőtt</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s kedvenc pont</item>
         <item quantity="other">%s kedvenc pont</item>
@@ -1349,7 +1339,6 @@
     <string name="init_low_disk_space">A szabad hely kezd elfogyni</string>
     <string name="init_confirm_debug">A c:geo hibakeresési módban fut!</string>
     <string name="list_confirm_debug_message">A hibakeresési mód stabilitási problémákat okoz. Kikapcsolod a hibakeresési módot?</string>
-    <string name="err_select_logimage_upload_size">Túl nagy a kép. Kérlek, válassz kisebb méretet!</string>
     <string name="err_logimage_caption_required">Képfelirat megadása szükséges</string>
     <!-- permission handling -->
     <string name="close_app">App bezárása</string>
@@ -1358,12 +1347,6 @@
     <string name="storage_permission_request_explanation">A c:geo adatokat tárol készülékeden vagy SD kártyádon, ha ládákat mentesz el offline használatra. Továbbá használja készüléked tárhelyét fájlok importálásakor/exportálásakor, valamint offline térképek olvasásakor. Ez az engedély nélkül nem lehetséges.</string>
     <string name="storage_permission_needed">Ezt a műveletet nem lehet végre hajtani tárhely engedély nélkül.</string>
     <!-- colors -->
-    <string name="color_blue">Kék</string>
-    <string name="color_green">Zöld</string>
-    <string name="color_orange">Narancssárga</string>
-    <string name="color_red">Piros</string>
-    <string name="color_turquoise">Türkizkék</string>
-    <string name="color_black">Fekete</string>
     <!-- number input -->
     <string name="number_input_title">Adj meg egy értéket %1$s és %2$s között</string>
     <string name="number_input_err_boundarymax">A megadott érték túl nagy - állítsd vissza a megengedett maximális értékre</string>

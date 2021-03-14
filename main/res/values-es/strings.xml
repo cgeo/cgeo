@@ -242,7 +242,6 @@
     <string name="info_waypoint_coordinates_cleared">Coordenadas borradas.</string>
     <string name="info_log_type_changed">¡El tipo de registro ha sido cambiado!</string>
     <string name="info_select_logimage_cancelled">La selección de imagen  o captura ha sido cancelada.</string>
-    <string name="info_stored_image">Nueva imagen guardada en:</string>
     <string name="info_cache_saved">El caché se ha guardado en el disco local</string>
     <string name="warn_calculator_state_save">Asegúrate de guardar el waypoint si quieres conservar el estado de la calculadora.</string>
     <string name="err_trackable_log_not_anonymous">No puedes registrar %1$s desde c:geo de manera anónima. ¿Quieres abrir los ajustes para rellenar tu identificación desde %2$s?</string>
@@ -688,7 +687,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
@@ -905,10 +903,6 @@
     <string name="cc_hint_minutes">minutos</string>
     <string name="cc_hint_seconds">segundos</string>
     <string name="cc_hint_fraction">fracción</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">Ruta:</string>
-    <string name="simple_dir_chooser_invalid_path">Ruta inválida</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Cargando cachés desde %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Cargando waypoints desde %1$s</string>
@@ -1382,10 +1376,6 @@ Nombre de archivo:%2$s</string>
     <string name="tts_oclock">%s en punto</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado al portapapeles</string>
-    <plurals name="days_ago">
-        <item quantity="one">ayer</item>
-        <item quantity="other">hace %d días</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favorito</item>
         <item quantity="other">%s favoritos</item>
@@ -1442,7 +1432,6 @@ Nombre de archivo:%2$s</string>
     <string name="init_low_disk_space">Queda poco espacio de almacenamiento</string>
     <string name="init_confirm_debug">¡c:geo se está ejecutando en modo de depuración!</string>
     <string name="list_confirm_debug_message">¡El modo de depuración provoca inestabilidades! ¿Quieres desactivar el modo depuración?</string>
-    <string name="err_select_logimage_upload_size">Imagen demasiado grande, por favor selecciona una escala menor.</string>
     <string name="err_logimage_caption_required">Se necesita un título para la imagen</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>

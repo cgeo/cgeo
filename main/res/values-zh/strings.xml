@@ -250,7 +250,6 @@
     <string name="info_waypoint_coordinates_cleared">坐标已清除。</string>
     <string name="info_log_type_changed">日志类型已更改！</string>
     <string name="info_select_logimage_cancelled">图像选择或捕获已取消。</string>
-    <string name="info_stored_image">新图片保存到：</string>
     <string name="info_cache_saved">已存储藏点到本地</string>
     <string name="warn_calculator_state_save">如果你想保持计算器状态, 一定要保存航点。</string>
     <string name="feature_info_offline_counter">您有一些藏点含有离线保存的日志，这些日志可能尚未在线记录。 为了方便，这些日志的计数在 c:geo 主页面的页脚显示为找到的藏点数量后面的 \"+x\" 。 \n\n此外，这些 “x” 日志将被添加到您可能在日志签名中使用的 “NUMBER” 模板。 \n\n如果您不喜欢此计数扩展， 您可以在“设置” &gt; “登录”下禁用它，和 / 或使用 “NUMBER (无离线日志)” 模板。 \n\n为了轻松找到剩余的离线日志， 请转到列表 \"历史\" 并筛选 \"带个人数据\" &gt; \"带离线日志\"。</string>
@@ -710,7 +709,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_check">检查身份验证</string>
@@ -727,8 +725,6 @@
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
     <string name="cache_found_last_30_days">最近 30 天下载</string>
     <!-- coordinate calculator hints -->
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
     <!-- gpx -->
     <!-- import -->
     <!-- popup -->
