@@ -1751,7 +1751,7 @@
     <string name="preference_colorpicker_select_opaqueness">Seleccioneu opacitat</string>
     <string name="reset_to_default">Per defecte</string>
     <!-- number input -->
-    <string name="number_input_title">Entra un valor entre %1$d i %2$d</string>
+    <string name="number_input_title">Entra un valor entre %1$s i %2$s</string>
     <string name="number_input_err_boundarymin">El valor introduït és massa petit: restableix el valor mínim</string>
     <string name="number_input_err_boundarymax">El valor introduït és massa gran: restableix el valor màxim</string>
     <string name="number_input_err_format">Format de número incorrecte</string>
