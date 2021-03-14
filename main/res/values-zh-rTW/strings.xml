@@ -1493,7 +1493,7 @@
     <string name="preference_colorpicker_select_opaqueness">選取不透明的</string>
     <string name="reset_to_default">預設</string>
     <!-- number input -->
-    <string name="number_input_title">輸入一個在%1$d到%2$d之間的數字</string>
+    <string name="number_input_title">輸入一個在%1$s到%2$s之間的數字</string>
     <string name="number_input_err_boundarymin">輸入的數字太小-設定到預設的最小值</string>
     <string name="number_input_err_boundarymax">輸入的數字太大-設定到預設的最大值</string>
     <!-- text notification channel infos & proximity notification title -->
