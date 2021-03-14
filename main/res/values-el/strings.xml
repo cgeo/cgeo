@@ -774,7 +774,7 @@
     <string name="feature_favorite">Προσθήκη της κρύπτης στις αγαπημένες</string>
     <string name="feature_voting">Ψηφοφορία κρυπτών</string>
     <string name="init_maplines_title">Προσαρμογή γραμμών χάρτη</string>
-    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">Άλλο</string>
+    <string name="init_map_other">Άλλο</string>
     <string name="init_map_osm_multithreaded">Πολλαπλά Νήματα (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Χρήση πολλαπλών νημάτων για την απόδοση χαρτών OpenStreetMap</string>
     <string name="localstorage_migrate_title">Μετανάστευση τοπικών αρχείων</string>
@@ -1242,7 +1242,7 @@
     <string name="map_live_enable">Ενεργοποίηση live</string>
     <string name="map_live_disable">Απενεργοποίηση live</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Επιλογή στοιχείου</string>
+    <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση (Τρέχουσα: %s)</string>
     <string name="map_routing_brouter">Η δρομολόγηση είναι διαθέσιμη μόνο εάν το <a href="">BRouter</a> είναι εγκατεστημένο</string>
     <string name="map_gm_autorotation">Αυτόματη περιστροφή χάρτη</string>
