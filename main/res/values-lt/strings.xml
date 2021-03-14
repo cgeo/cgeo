@@ -1624,7 +1624,7 @@
     <string name="preference_colorpicker_select_opaqueness">Pasirinkite skaidrumą</string>
     <string name="reset_to_default">Numatyta</string>
     <!-- number input -->
-    <string name="number_input_title">Įvesti vertę nuo %1$d iki %2$d</string>
+    <string name="number_input_title">Įvesti vertę nuo %1$s iki %2$s</string>
     <string name="number_input_err_boundarymin">Įvesta vertė per maža - atstatykite į minimalią vertę</string>
     <string name="number_input_err_boundarymax">Įvesta vertė per didelė - atstatykite į maksimalią vertę</string>
     <string name="number_input_err_format">Neteisingas skaičiaus formatas</string>
