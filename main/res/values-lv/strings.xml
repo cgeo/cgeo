@@ -1034,7 +1034,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_live_enable">Atļaut tiešsaistē</string>
     <string name="map_live_disable">Deaktivizēt tiešsaistes darbību</string>
     <string name="map_as_list">Parādīt kā sarakstu</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Izvēlēties lietu</string>
+    <string name="map_select_multiple_items">Izvēlēties lietu</string>
     <!-- search -->
     <string name="search_bar_desc">Slēpņi (GC kods, atslēgas vārds), Ceļotāji (TB kods)</string>
     <string name="search_coordinates">Koordinātas</string>

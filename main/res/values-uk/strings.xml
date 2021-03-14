@@ -1074,7 +1074,7 @@
     <string name="map_live_enable">включити в прямому ефірі</string>
     <string name="map_live_disable">неповне життя</string>
     <string name="map_as_list">показати як список</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">виберіть елемент</string>
+    <string name="map_select_multiple_items">виберіть елемент</string>
     <string name="map_gm_autorotation">маршрутизація</string>
     <string name="map_gm_autorotation_disable">Відключити автоповорот карти?\n\nМожете знову включити її в меню обертання карти</string>
     <string name="quick_settings">Швидкі налаштування</string>

@@ -772,7 +772,7 @@
     <string name="feature_favorite">Kätköjen lisäys suosikkeihin</string>
     <string name="feature_voting">Kätköjen arvostelu</string>
     <string name="init_maplines_title">Kartan viivojen muokkaus</string>
-    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">Muu</string>
+    <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>
     <string name="localstorage_migrate_title">Paikallisten tiedostojen siirtäminen</string>
@@ -1234,7 +1234,7 @@
     <string name="map_live_enable">Aktivoi Live</string>
     <string name="map_live_disable">Poista live</string>
     <string name="map_as_list">Näytä luettelona</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Valitse kohde</string>
+    <string name="map_select_multiple_items">Valitse kohde</string>
     <string name="map_routing">Reititys (Nykyinen: %s)</string>
     <string name="map_routing_brouter">Reititys on käytettävissä vain <a href="">BRouter</a>in ollessa asennettuna</string>
     <string name="map_gm_autorotation">Kartan automaattinen kääntö</string>

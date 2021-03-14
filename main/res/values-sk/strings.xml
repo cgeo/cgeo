@@ -774,7 +774,7 @@
     <string name="feature_favorite">Pridanie skrýše medzi obľúbené</string>
     <string name="feature_voting">Hlasovanie pre kešky</string>
     <string name="init_maplines_title">Prispôsobenie čiar na mape</string>
-    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">Iná</string>
+    <string name="init_map_other">Iná</string>
     <string name="init_map_osm_multithreaded">Viacvláknová (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použiť viaceré vlákna na vykreslenie máp OpenStreetMap</string>
     <string name="localstorage_migrate_title">Prenos lokálnych súborov</string>
@@ -1256,7 +1256,7 @@
     <string name="map_live_enable">Povoliť aktívnu mapu</string>
     <string name="map_live_disable">Zakázať aktívnu mapu</string>
     <string name="map_as_list">Zobraziť ako zoznam</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Vybrať položku</string>
+    <string name="map_select_multiple_items">Vybrať položku</string>
     <string name="map_routing">Trasa (Momentálne: %s)</string>
     <string name="map_routing_brouter">Trasovanie je k dispozícii len vtedy, ak je nainštalovaná aplikácia <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatické otáčanie mapy</string>

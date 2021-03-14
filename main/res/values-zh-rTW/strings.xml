@@ -735,7 +735,7 @@
     <string name="feature_favorite">把寶加入我的最愛</string>
     <string name="feature_voting">對cache來投票</string>
     <string name="init_maplines_title">客製化地圖的線條。</string>
-    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">其它</string>
+    <string name="init_map_other">其它</string>
     <string name="init_map_osm_multithreaded">多執行緒 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">使用多執行緒來渲染OSM</string>
     <string name="localstorage_migrate_status_major">版本%1$d</string>
@@ -993,7 +993,7 @@
     <string name="cache_terrain">地形</string>
     <string name="cache_rating">評分</string>
     <string name="cache_own_rating">你的評分</string>
-    <string name="cache_rating_of_new">%2$d 的 %1$d</string>
+    <string name="cache_rating_of_new">%2$d 的 %1$.1f</string>
     <string name="cache_favorite">加入最愛</string>
     <string name="cache_owner">寶主</string>
     <string name="cache_hidden">已隱藏</string>
@@ -1130,7 +1130,7 @@
     <string name="map_live_enable">開啟即時資訊</string>
     <string name="map_live_disable">關閉即時資訊</string>
     <string name="map_as_list">以清單的形式顯示</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">選取項目</string>
+    <string name="map_select_multiple_items">選取項目</string>
     <string name="map_gm_autorotation">自動旋轉地圖</string>
     <string name="quick_settings">快速設定</string>
     <string name="map_show_in_map">在地圖上顯示</string>

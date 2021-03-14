@@ -774,7 +774,7 @@
     <string name="feature_favorite">Přidání kešky do oblíbených</string>
     <string name="feature_voting">Hlasování pro kešky</string>
     <string name="init_maplines_title">Přizpůsobení čar na mapě</string>
-    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">Jiná</string>
+    <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
     <string name="localstorage_migrate_title">Přenos místních souborů</string>
@@ -1256,7 +1256,7 @@
     <string name="map_live_enable">Povolit aktivní mapu</string>
     <string name="map_live_disable">Zakázat aktivní mapu</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Vybrat položku</string>
+    <string name="map_select_multiple_items">Vybrat položku</string>
     <string name="map_routing">Směrování (teď: %s)</string>
     <string name="map_routing_brouter">Směrování je dostupné pouze v případě, že je nainstalován <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>

@@ -420,7 +420,15 @@
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo má núna eiga samskipti við %s.</string>
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">%1$d kassi</item>
+        <item quantity="other">%1$d kassar</item>
+    </plurals>
     <!-- days remaining -->
+    <plurals name="days_remaining">
+        <item quantity="one">%1$d dagur eftir</item>
+        <item quantity="other">%1$d dagar eftir</item>
+    </plurals>
     <string name="last_day_available">fáanlegt í síðasta lagi í dag</string>
     <string name="cache_offline_refresh">Endurhlaða</string>
     <string name="cache_offline_store">Vista</string>
@@ -559,7 +567,7 @@
     <!-- map -->
     <string name="map_map">Kort</string>
     <string name="map_theme_select">Velja kortaþema</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Velja atriði</string>
+    <string name="map_select_multiple_items">Velja atriði</string>
     <!-- search -->
     <string name="search_bar_desc">Kassar (geokóði, leitarorð), Ferðalangar (TB kóði)</string>
     <string name="search_coordinates_button">Leita eftir hnitum</string>

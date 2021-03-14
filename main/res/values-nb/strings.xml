@@ -748,7 +748,7 @@
     <string name="feature_favorite">Legger cachen til dine favoritter</string>
     <string name="feature_voting">Avstemming for cacher</string>
     <string name="init_maplines_title">Tilpassing av kartlinjer</string>
-    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">Andre</string>
+    <string name="init_map_other">Andre</string>
     <string name="init_map_osm_multithreaded">Flertrådet (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Bruk flere prosessortråder for å gjengi OpenStreetMap kart</string>
     <string name="localstorage_migrate_status_major">Versjon %1$d</string>
@@ -1180,7 +1180,7 @@
     <string name="map_live_enable">Aktiver live</string>
     <string name="map_live_disable">Deaktiver live</string>
     <string name="map_as_list">Vis som liste</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Velg objekt</string>
+    <string name="map_select_multiple_items">Velg objekt</string>
     <string name="map_routing_brouter">Ruting er kun tilgjengelig hvis <a href="">BRouter</a> er installert</string>
     <string name="map_gm_autorotation">Automatisk rotering av kart</string>
     <string name="map_gm_autorotation_disable">Deaktivere kartrotasjon?\n\nDu kan aktivere det på nytt i menyen for kartrotasjon</string>

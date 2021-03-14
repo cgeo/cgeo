@@ -471,6 +471,7 @@
     <string name="settings_info_themes_title">معلومات عن ثيمات الخريطة</string>
     <string name="init_mapsource_select">اختر مصدر الخريطة</string>
     <string name="init_dataDir_note">قد تختار تخزين بيانات إضافية في العلبة المخبئة (المفشي، ألبوم الصور، &#8230;) في تخزينك الخارجي (تضمينها داخل التخزين أو في بطاقة ذاكرة خارجية اعتماداً على جهازك).</string>
+    <string name="init_summary_maptrail">عند التفعيل (و GPS قيد التشغيل) c:geo يحفظ سجل حركاتك كمسار ويعرضها على الخريطة.</string>
     <string name="init_include_found_status">تضمين حالة \"تم العثور عليها\"</string>
     <string name="init_trackautovisit">زيارة TBs</string>
     <string name="init_summary_trackautovisit">تعيين أمتعة السفر ليتم \"زيارتها\" بشكل افتراضي</string>
@@ -793,7 +794,7 @@
     <string name="map_live_enable">تمكين عرض مباشر</string>
     <string name="map_live_disable">تعطيل العرض المباشر</string>
     <string name="map_as_list">عرض كقائمة</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">حدد العنصر</string>
+    <string name="map_select_multiple_items">حدد العنصر</string>
     <!-- search -->
     <string name="search_bar_desc">المخبآت (كود المخبئ، كلمة مفتاحية)، أمتعة السفر (كود TB)</string>
     <string name="search_coordinates">الإحداثيات</string>

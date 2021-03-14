@@ -787,7 +787,7 @@
     <string name="map_live_enable">Aktifkan hidup</string>
     <string name="map_live_disable">Nonaktifkan hidup</string>
     <string name="map_as_list">Tampilkan daftar</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Pilih item</string>
+    <string name="map_select_multiple_items">Pilih item</string>
     <!-- search -->
     <string name="search_bar_desc">Cache (geo kode, kata kunci), Trackables (TB kode)</string>
     <string name="search_coordinates">Koordinat</string>
