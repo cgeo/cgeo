@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">Syötä reissaajan koodi. Esimerkiksi \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Ole hyvä ja syötä jotain tekstiä lokiisi.</string>
     <string name="warn_load_images">c:geo epäonnistui kuvien latauksessa.</string>
-    <string name="warn_invalid_mapfile">Valittu karttatiedosto ei ole kelvollinen karttatiedosto tai käyttää ei-tuettua versiota.\n(c:geo tukee tällä hetkellä versioita v3 - v5)\n\nOfflinekartat eivät ole käytettävissä.</string>
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
     <string name="warn_invalid_character">Merkin täytyy olla kirjain tai numero</string>
@@ -259,7 +258,6 @@
     <string name="info_waypoint_coordinates_cleared">Koordinaatit poistettu.</string>
     <string name="info_log_type_changed">Lokityyppi on muuttunut!</string>
     <string name="info_select_logimage_cancelled">Kuvan valinta tai kaappaus peruutettiin.</string>
-    <string name="info_stored_image">Uusi kuva tallennettu paikkaan:</string>
     <string name="info_cache_saved">Kätkö tallennettu paikallisesti</string>
     <string name="warn_calculator_state_save">Muista tallentaa reittipiste jos haluat säilyttää laskimen tilan.</string>
     <string name="feature_info_offline_counter">Sinulla on kätköjä, joissa on offline-tilassa tallennettu loki, joita ei ole vielä mahdollisesti lähetetty. Näiden määrä näytetään kätevästi aloitusnäytön alaosassa löytämiesi kätköjen määrän jälkeen muodossa \"+ x\". \n\nLisäksi \"x\" lokia lisätään \"NUMBER\"-mallineeseen jota saatat käyttää lokisi allekirjoituksessa. \n\nJos et tykkää tästä laskimen lisäyksestä, voit kytkeä sen pois päältä kohdassa \"Asetukset\" &gt; \"Kirjaus\" ja/tai käyttää sen sijaan mallinetta \"NUMBER (without offline logs)\". \n\nLöytääksesi jäljellä olevat offline-tilassa olevat kirjaukset, mene \"Historia\"-listaan ja käytä suodatinta \"Omia tietoja\" &gt; \"Offline-lokeja\".</string>
@@ -811,7 +809,6 @@
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Vaihda kansio %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Voit halutessasi käyttää oletuskansiota \'%s\' tai valita käyttäjän määrittämän kansion.</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Ei toimintoa</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopioi kaikki sisältö</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Siirrä kaikki sisältö</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Ei lisätoimia</string>
@@ -843,8 +840,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s valmiina</string>
     <string name="folder_process_status_currentfile">Eteneminen %1$s</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Synkronoi %1$s:n sisältö sisäiseen tallennustilaan</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopioidaan kohteen %1$s sisältö kohteeseen %2$s</string>
     <string name="folder_move_progressbar_title">Siirretään kohteen %1$s sisältö kohteeseen %2$s</string>
@@ -1133,12 +1128,6 @@
     <string name="cc_hint_minutes">minuuttia</string>
     <string name="cc_hint_seconds">sekuntia</string>
     <string name="cc_hint_fraction">murto-osa</string>
-    <string name="lowercase">pienet kirjaimet</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Valitse kansio</string>
-    <string name="simple_dir_chooser_current_path">Polku:</string>
-    <string name="simple_dir_chooser_invalid_path">Virheellinen polku</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ladataan kätköjä kohteesta %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ladataan reittipisteitä kohteesta %1$s</string>
@@ -1681,10 +1670,6 @@
     <string name="tts_oclock">kello %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopioitu leikepöydälle</string>
-    <plurals name="days_ago">
-        <item quantity="one">eilen</item>
-        <item quantity="other">%d päivää sitten</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s suosikki</item>
         <item quantity="other">%s suosikkia</item>
@@ -1748,7 +1733,6 @@
     <string name="init_low_disk_space_message">Geokätkötietojen kansio on vähäisessä tallennustilassa. Tämä voi aiheuttaa c:geon toimintahäiriöitä. Vapauta tilaa lisää.</string>
     <string name="init_confirm_debug">c:geo on vianmääritystilassa!</string>
     <string name="list_confirm_debug_message">Vianmääritystila aiheuttaa epävakautta! Haluatko poistaa sen käytöstä?</string>
-    <string name="err_select_logimage_upload_size">Kuva on liian iso, ole hyvä ja valitse pienempi resoluutio.</string>
     <string name="err_logimage_caption_required">Kuvateksti on pakollinen</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
@@ -1759,18 +1743,12 @@
     <string name="storage_permission_request_explanation">c:geo kirjoittaa tietoja puhelimesi tallennustilaan tai SD-kortille kun tallennat geokätköjä offline-käyttöön. Lisäksi c:geo käyttää puhelimesi tallennustilaa tiedostojen tuomiseen ja viemiseen sekä offline-karttojen lukemiseen. Sitä ei voida käyttää ilman tätä lupaa.</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
     <!-- colors -->
-    <string name="color_blue">Sininen</string>
-    <string name="color_green">Vihreä</string>
-    <string name="color_orange">Oranssi</string>
-    <string name="color_red">Punainen</string>
-    <string name="color_turquoise">Turkoosi</string>
-    <string name="color_black">Musta</string>
     <string name="preference_colorpicker_select_color_scheme">Valitse väriteema</string>
     <string name="preference_colorpicker_select_color">Valitse väri</string>
     <string name="preference_colorpicker_select_opaqueness">Valitse läpinäkyvyys</string>
     <string name="reset_to_default">Oletus</string>
     <!-- number input -->
-    <string name="number_input_title">Syötä arvo välillä %1$s ja %2$s</string>
+    <string name="number_input_title">Syötä arvo välillä %1$d ja %2$d</string>
     <string name="number_input_err_boundarymin">Syötetty arvo liian pieni - asetettu minimiarvoksi</string>
     <string name="number_input_err_boundarymax">Syötetty arvo liian iso - asetettu maksimiarvoksi</string>
     <string name="number_input_err_format">Väärä numeromuoto</string>
