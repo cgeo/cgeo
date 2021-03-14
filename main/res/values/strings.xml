@@ -1954,7 +1954,7 @@
     <string name="reset_to_default">Default</string>
 
     <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$d and %2$d</string>
+    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
     <string name="number_input_err_format">Invalid number format</string>
