@@ -250,7 +250,6 @@
     <string name="info_waypoint_coordinates_cleared">Координати вийшли.</string>
     <string name="info_log_type_changed">Тип журналу змінено!</string>
     <string name="info_select_logimage_cancelled">Вибір зображення або захоплення скасовано.</string>
-    <string name="info_stored_image">Нове зображення збережено:</string>
     <string name="info_cache_saved">Кеш зберігається локально</string>
     <string name="warn_calculator_state_save">Не забудьте зберегти шляхову точку, якщо ви хочете зберегти стан калькулятора.</string>
     <string name="feature_info_offline_counter">У вас є деякі кеші з збереженим в автономному режимі, який ще не може увійти в систему. Для вашого комфорту кількість цих журналів буде відображатися як \"+ х\" за вашою кількістю знайдених схованок в футері в c:geo головній сторінці. \n\nЩе один з цих логів \"x\" буде додано до шаблону \"NUMBER\", який ви можете використовувати в ваших підписах журналу. \n\nЯкщо вам не подобається це розширення лічильника, ви можете вимкнути його в розділі \"Налаштування\" &gt; \"Логування\" та/або використовувати шаблон \"NUMBER (без автономних журналів\". \n\nДля полегшення пошуку автономних журналів, перейдіть до списку \"Історія\" і фільтруйте для \"З персональними даними\" &gt; \"Оффлайн журнал\".</string>
@@ -754,7 +753,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Авторизувати c:geo</string>
@@ -984,11 +982,6 @@
     <string name="cc_hint_minutes">хвилини</string>
     <string name="cc_hint_seconds">секунди</string>
     <string name="cc_hint_fraction">Дріб</string>
-    <string name="lowercase">нижній регістр</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">Шлях:</string>
-    <string name="simple_dir_chooser_invalid_path">неправильний шлях</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Завантаження кешу з %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Завантаження точок з %1$s</string>
@@ -1524,7 +1517,6 @@
     <string name="init_low_disk_space">Недостатньо місця на диску</string>
     <string name="init_confirm_debug">c:geo запущено у режимі налагодження!</string>
     <string name="list_confirm_debug_message">Режим налагодження викликає нестабільності! Ви хочете вимкнути режим налагодження?</string>
-    <string name="err_select_logimage_upload_size">Зображення завелике. Оберіть менші розміри.</string>
     <string name="err_logimage_caption_required">Заголовок необхідний для зображення</string>
     <string name="waypoint_latitude_null">Н/С --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
@@ -1535,18 +1527,12 @@
     <string name="storage_permission_request_explanation">c:geo випише дані на накопичувачі телефону або SD-карту, як тільки Ви збережете геокеші для використання в автономному режимі. Додатково:geo буде використовувати ваш телефон для імпорту та експорту файлів та читання автономних карт. Не можна використовувати без цього дозволу.</string>
     <string name="storage_permission_needed">Ця функція неможлива без дозволу на зберігання.</string>
     <!-- colors -->
-    <string name="color_blue">Синій</string>
-    <string name="color_green">Зелений</string>
-    <string name="color_orange">Помаранчевий</string>
-    <string name="color_red">Червоний</string>
-    <string name="color_turquoise">Бірюзовий</string>
-    <string name="color_black">Чорний</string>
     <string name="preference_colorpicker_select_color_scheme">Виберіть колірну схему</string>
     <string name="preference_colorpicker_select_color">Вибрати колір</string>
     <string name="preference_colorpicker_select_opaqueness">Вибрати непрозорість</string>
     <string name="reset_to_default">за замовчуванням</string>
     <!-- number input -->
-    <string name="number_input_title">Виберіть час між %1$s та %2$s</string>
+    <string name="number_input_title">Виберіть час між %1$d та %2$d</string>
     <string name="number_input_err_boundarymin">Введене значення занадто мале - скинути до мінімального значення</string>
     <string name="number_input_err_boundarymax">Введене значення занадто мале - скинути до мінімального значення</string>
     <string name="number_input_err_format">Неприпустимий час формат</string>
