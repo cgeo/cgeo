@@ -257,7 +257,6 @@
     <string name="info_waypoint_coordinates_cleared">Coordonnées effacées.</string>
     <string name="info_log_type_changed">Le type de visite a été modifié !</string>
     <string name="info_select_logimage_cancelled">La sélection ou l\'acquisition de l\'image a été annulée.</string>
-    <string name="info_stored_image">Nouvelle image sauvée dans :</string>
     <string name="info_cache_saved">La cache a été enregistrée en local</string>
     <string name="warn_calculator_state_save">Veillez à enregistrer le point de passage si vous souhaitez conserver l\'état du calculateur.</string>
     <string name="feature_info_offline_counter">Vous avez des visites de caches enregistrées hors-ligne qui pourraient ne pas avoir été envoyées. Pour votre confort, le nombre de ces visites s\'affiche comme \"+ x\" après le nombre de caches trouvées en bas de la page d\'accueil de c:geo. \n\nDe plus, ces \"x\" visites seront ajoutées au modèle \"Nombre de visites\" que vous pouvez utiliser comme signature de vos logs. \n\nSi vous n\'aimez pas cet affichage, vous pouvez le désactiver sous \"Paramètres\" &gt; \"Visites\" et/ou utiliser le modèle \"Nombre de visites (sans les visites hors-ligne)\". \n\nPour trouver facilement les visites hors-ligne non envoyées, allez dans \"Historique\" et activez le filtre \"Avec des données personnelles\" &gt; \"Avec visite hors-ligne\".</string>
@@ -801,8 +800,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s réalisé</string>
     <string name="folder_process_status_currentfile">Traitement de : %1$s</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Synchroniser le contenu de %1$s dans le stockage interne</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Copie du contenu de %1$s vers %2$s</string>
     <string name="folder_move_progressbar_title">Déplacement du contenu de %1$s vers %2$s</string>
@@ -1082,12 +1079,6 @@
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">secondes</string>
     <string name="cc_hint_fraction">fraction</string>
-    <string name="lowercase">minuscules</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Sélectionnez un dossier</string>
-    <string name="simple_dir_chooser_current_path">Chemin :</string>
-    <string name="simple_dir_chooser_invalid_path">Chemin d\'accès invalide</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Chargement des caches depuis %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Chargement des points de passages depuis %1$s</string>
@@ -1628,10 +1619,6 @@
     <string name="tts_oclock">%s heures</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
-    <plurals name="days_ago">
-        <item quantity="one">il y a %d jour</item>
-        <item quantity="other">il y a %d jours</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favori</item>
         <item quantity="other">%s favoris</item>
@@ -1694,7 +1681,6 @@
     <string name="init_low_disk_space">Espace disque faible</string>
     <string name="init_confirm_debug">c:geo s’exécute en mode de débogage !</string>
     <string name="list_confirm_debug_message">Le mode débogage génère de l\'instabilité ! Souhaitez-vous désactiver le mode débogage ?</string>
-    <string name="err_select_logimage_upload_size">Image trop grande, merci de sélectionner une résolution inférieure.</string>
     <string name="err_logimage_caption_required">Une légende est requise pour l’image</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>
@@ -1705,18 +1691,12 @@
     <string name="storage_permission_request_explanation">c:geo écrira des données sur votre carte SD ou votre téléphone dès que vous sauvegarderez des géocaches pour une utilisation hors-ligne. En outre c:geo utilisera le stockage de votre téléphone pour importer et exporter des fichiers et lire des cartes hors-ligne. Il ne peut être utilisé sans cette autorisation.</string>
     <string name="storage_permission_needed">Cette fonction n\'est disponible qu\'après avoir autorisé l\'accès au stockage.</string>
     <!-- colors -->
-    <string name="color_blue">Bleu</string>
-    <string name="color_green">Vert</string>
-    <string name="color_orange">Orange</string>
-    <string name="color_red">Rouge</string>
-    <string name="color_turquoise">Turquoise</string>
-    <string name="color_black">Noir</string>
     <string name="preference_colorpicker_select_color_scheme">Sélectionner le thème des couleurs</string>
     <string name="preference_colorpicker_select_color">Sélectionner la couleur</string>
     <string name="preference_colorpicker_select_opaqueness">Sélectionner l\'opacité</string>
     <string name="reset_to_default">Par défaut</string>
     <!-- number input -->
-    <string name="number_input_title">Saisissez une valeur entre %1$s et %2$s</string>
+    <string name="number_input_title">Saisissez une valeur entre %1$d et %2$d</string>
     <string name="number_input_err_boundarymin">La valeur saisie est trop faible - réinitialisée à la valeur minimale</string>
     <string name="number_input_err_boundarymax">La valeur saisie est trop grande - réinitialisée à la valeur maximale</string>
     <string name="number_input_err_format">Format de nombre non valide</string>
