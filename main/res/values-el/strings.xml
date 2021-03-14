@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">Εισαγάγετε τον κωδικό του ανιχνεύσιμου. Για παράδειγμα, «TB29QMZ».</string>
     <string name="warn_log_text_fill">Παρακαλώ εισάγετε κάποιο κείμενο για το αρχείο καταγραφής.</string>
     <string name="warn_load_images">Απέτυχε η φόρτωση εικόνων στο c:geo.</string>
-    <string name="warn_invalid_mapfile">Το επιλεγμένο αρχείο του χάρτη δεν είναι έγκυρο αρχείο mapsforge ή η έκδοση του δεν υποστηρίζεται.\n(Το c:geo μεχρι στιγμής υποστηρίζει τις εκδόσεις v3 έως v5 \n\nΟι χάρτες εκτός σύνδεσης δεν είναι διαθέσιμοι.</string>
     <string name="warn_pocket_query_select">Δεν έχει επιλεγεί καμία Προσωπική Αναζήτηση.</string>
     <string name="warn_no_pocket_query_found">Δεν βρέθηκε καμία Προσωπική Αναζήτηση online.</string>
     <string name="warn_invalid_character">Ο χαρακτήρας πρέπει να είναι ΓΡΑΜΜΑ ή ΑΡΙΘΜΟΣ</string>
@@ -259,7 +258,6 @@
     <string name="info_waypoint_coordinates_cleared">Οι συντεταγμένες εκκαθαρίστηκαν.</string>
     <string name="info_log_type_changed">Ο τύπος του αρχείου καταγραφής έχει αλλάξει!</string>
     <string name="info_select_logimage_cancelled">Ακυρώθηκε η επιλογή/απαθανάτιση εικόνας.</string>
-    <string name="info_stored_image">Η νέα εικόνα αποθηκεύτηκε στο:</string>
     <string name="info_cache_saved">Η κρύπτη έχει αποθηκευτεί τοπικά</string>
     <string name="warn_calculator_state_save">Βεβαιωθείτε ότι θα αποθηκεύσετε το σημείο διαδρομής, εάν θέλετε να παραμείνετε στη φάση υπολογισμού.</string>
     <string name="feature_info_offline_counter">Έχετε μερικές κρύπτες με ένα αποθηκευμένο \'\'αρχείο καταγραφής εκτός σύνδεσης\'\', το οποίο δεν ανέβηκε λόγω μη σύνδεσης στο διαδίκτυο. Για περισσότερη άνεση, ο αριθμός αυτών των αρχείων καταγράφεται ως \"+ x\" πίσω από τον αριθμό των αποθηκευμένων κρυπτών, στο υποσέλιδο, στην κύρια σελίδα του c: geo.\n\nΕπιπλέον, αυτά τα αρχεία καταγραφής \"x\" θα προστεθούν στο πρότυπο \"ΑΡΙΘΜΟΣ\" που μπορεί να χρησιμοποιήσετε στην υπογραφή σας.\n\nΑν δεν σας αρέσει αυτή η επέκταση μετρητή, μπορείτε να την απενεργοποιήσετε στην ενότητα \"Ρυθμίσεις\" &gt;\"Καταγραφή\" ή / και να χρησιμοποιήσετε το πρότυπο \"ΑΡΙΘΜΟΣ (χωρίς αρχεία καταγραφής εκτός σύνδεσης)\".\n\nΓια να βρείτε εύκολα τα υπόλοιπα \"Με αρχεία καταγραφής εκτός σύνδεσης\", μεταβείτε στη λίστα \"Ιστορικό\" και φιλτράρετε για \"Με προσωπικά δεδομένα\" &gt;\"Με αρχείο καταγραφής εκτός σύνδεσης\".</string>
@@ -814,7 +812,6 @@
     <string name="contentstorage_selectfolder_dialog_title">Αλλαγή φακέλου %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">Ο φάκελος %1$s έχει οριστεί σε \'%2$s\', περιέχει %3$s και %4$s και έχει συνολικό μέγεθος %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Μπορείτε να επιλέξετε να χρησιμοποιήσετε τον προεπιλεγμένο φάκελο \'%s\' ή να επιλέξετε ένα φάκελο που έχει οριστεί από το χρήστη.</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Καμία ενέργεια</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Αντιγραφή όλου του περιεχομένου</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Μετακίνηση περιεχομένου</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Καμία άλλη ενέργεια</string>
@@ -847,8 +844,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s ολοκληρώθηκαν</string>
     <string name="folder_process_status_currentfile">Διαδικασία %1$s</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Συγχρονισμός περιεχομένου του %1$s στον εσωτερικό αποθηκευτικό χώρο</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Αντιγραφή περιεχομένου από %1$s έως %2$s</string>
     <string name="folder_move_progressbar_title">Μετακίνηση περιεχομένου από %1$s σε %2$s</string>
@@ -1138,12 +1133,6 @@
     <string name="cc_hint_minutes">Λεπτά</string>
     <string name="cc_hint_seconds">Δευτερόλεπτα</string>
     <string name="cc_hint_fraction">Κλάσμα</string>
-    <string name="lowercase">Πεζά</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Επιλέξτε φάκελο</string>
-    <string name="simple_dir_chooser_current_path">Διαδρομή:</string>
-    <string name="simple_dir_chooser_invalid_path">Μη έγκυρη διαδρομή</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Φόρτωση κρυπτών από %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Φόρτωση σημείων αναφοράς από %1$s</string>
@@ -1232,6 +1221,7 @@
     <string name="init_renderthemefolder_synctolocal">Συγχρονισμός θεμάτων σε ιδιωτικό φάκελο εφαρμογών</string>
     <string name="init_summary_renderthemefolder_synctolocal">Αυτή η επιλογή μπορεί να βελτιώσει την απόδοση ανοίγματος του προβολέα χαρτών με κόστος κάποιο χώρο αποθήκευσης συσκευών.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ενεργοποίηση συγχρονισμού φακέλου θεμάτων</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Αυτή η ενέργεια θα συγχρονίσει μόνιμα το περιεχόμενο του φακέλου του Θέματος Χάρτη με τον εσωτερικό φάκελο της εφαρμογής για ταχύτερη προσπέλαση.\n\nΟ φάκελος του Θέματος Χάρτη \'%1$s\' έχει προς το παρόν %2$s, %3$s και μέγεθος %4$s. \n\n Θέλετε να συνεχίσετε με τον συγχρονισμό;</string>
     <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
     <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
     <string name="init_summary_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης από τον χάρτη</string>
@@ -1689,10 +1679,6 @@
     <string name="tts_oclock">%s η ώρα</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Αντιγραφή στο πρόχειρο</string>
-    <plurals name="days_ago">
-        <item quantity="one">χθες</item>
-        <item quantity="other">πριν %d μέρες</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s αγαπημένο</item>
         <item quantity="other">%s αγαπημένα</item>
@@ -1756,7 +1742,6 @@
     <string name="init_low_disk_space_message">Ο κατάλογος με τα δεδομένα κρυπτών δεν έχει πολύ χώρο αποθήκευσης. Αυτό μπορεί να προκαλέσει δυσλειτουργίες του c:geo. Παρακαλούμε να ελευθερώσετε κάποιο χώρο.</string>
     <string name="init_confirm_debug">Το c:geo εκτελείται σε λειτουργία εντοπισμού σφαλμάτων!</string>
     <string name="list_confirm_debug_message">Η λειτουργία εντοπισμού σφαλμάτων προκαλεί αστάθεια! Θέλετε να απενεργοποιήσετε την κατάσταση λειτουργίας εντοπισμού σφαλμάτων;</string>
-    <string name="err_select_logimage_upload_size">Εικόνα πάρα πολύ μεγάλη, παρακαλώ επιλέξτε μια σε μικρότερη κλίμακα.</string>
     <string name="err_logimage_caption_required">Απαιτείται λεζάντα για την εικόνα</string>
     <string name="waypoint_latitude_null">Β/Ν--°--.---</string>
     <string name="waypoint_longitude_null">Α/Δ--°--.---</string>
@@ -1767,18 +1752,12 @@
     <string name="storage_permission_request_explanation">Το c:geo θα αποθηκεύσει δεδομένα στη μνήμη του τηλεφώνου σας ή στην κάρτα SD καθώς αποθηκεύετε κρύπτες για χρήση εκτός σύνδεσης. Επιπλέον το c:geo θα χρησιμοποιήσει τη μνήμη του τηλεφώνου σας για την εισαγωγή και εξαγωγή αρχείων και χαρτών εκτός σύνδεσης. Η χρήση του δεν είναι δυνατή χωρίς αυτήν την άδεια.</string>
     <string name="storage_permission_needed">Μη επιτρεπτή λειτουργία χωρίς άδεια αποθήκευσης.</string>
     <!-- colors -->
-    <string name="color_blue">Μπλέ</string>
-    <string name="color_green">Πράσινο</string>
-    <string name="color_orange">Πορτοκαλί</string>
-    <string name="color_red">Κόκκινο</string>
-    <string name="color_turquoise">Τυρκουάζ</string>
-    <string name="color_black">Μαύρο</string>
     <string name="preference_colorpicker_select_color_scheme">Επιλογή συνδυασμού χρωμάτων</string>
     <string name="preference_colorpicker_select_color">Επιλέξτε χρώμα</string>
     <string name="preference_colorpicker_select_opaqueness">Επιλογή ποσοστού αδιαφάνειας</string>
     <string name="reset_to_default">Προεπιλογή</string>
     <!-- number input -->
-    <string name="number_input_title">Δώστε τιμή ανάμεσα %1$s και %2$s</string>
+    <string name="number_input_title">Δώστε τιμή ανάμεσα %1$d και %2$d</string>
     <string name="number_input_err_boundarymin">Δώσατε πολύ μικρή - Δώστε την ελάχιστη</string>
     <string name="number_input_err_boundarymax">Δώσατε πολύ μεγάλη - Μειώστε στην Μέγιστη επιτρεπτή</string>
     <string name="number_input_err_format">Λάθος μορφή αριθμών</string>
