@@ -996,7 +996,7 @@
     <string name="map_live_enable">Activar en vivo</string>
     <string name="map_live_disable">Desactivar en vivo</string>
     <string name="map_as_list">Mostrar como lista</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Seleccionar elemento</string>
+    <string name="map_select_multiple_items">Seleccionar elemento</string>
     <!-- search -->
     <string name="search_bar_desc">Cachés (Código-GC, palabra clave), Rastreables (Código-TB)</string>
     <string name="search_coordinates">Coordenadas</string>
