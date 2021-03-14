@@ -660,7 +660,7 @@
     <!-- colors -->
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Tipp e Wärt tëscht %1$d a %2$d an</string>
+    <string name="number_input_title">Tipp e Wärt tëscht %1$s a %2$s an</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
     <string name="save_sorted_route">Späicheren</string>
