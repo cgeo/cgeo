@@ -1794,7 +1794,7 @@
     <string name="preference_colorpicker_select_opaqueness">Zvolit neprůhlednost</string>
     <string name="reset_to_default">Výchozí</string>
     <!-- number input -->
-    <string name="number_input_title">Zadejte hodnotu od %1$d do %2$d</string>
+    <string name="number_input_title">Zadejte hodnotu od %1$s do %2$s</string>
     <string name="number_input_err_boundarymin">Zadaná hodnota je příliš malá – obnoveno na min. hodnotu</string>
     <string name="number_input_err_boundarymax">Zadaná hodnota je příliš velká – obnoveno na max. hodnotu</string>
     <string name="number_input_err_format">Neplatný formát čísla</string>
