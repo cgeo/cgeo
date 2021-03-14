@@ -545,6 +545,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Текст записи</string>
     <string name="init_signature_template_size">Размер</string>
+    <string name="init_signature_template_type">Тип</string>
     <string name="init_ratingwanted">Рейтинг GCvote</string>
     <string name="init_summary_ratingwanted">Загружать рейтинг тайника с GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Свои записи и записи друзей</string>
@@ -771,6 +772,7 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Оффлайн</string>
     <string name="map_source_osm_offline_combined">Совмещенные (оффлайн)</string>
+    <string name="map_source_attribution_dialog_title">Источник</string>
     <string name="init_sendToCgeo">Отправить в c:geo</string>
     <string name="settings_info_send2cgeo_title">Подробная информация о send2cgeo</string>
     <string name="init_sendToCgeo_name">Название вашего устройства</string>
@@ -828,7 +830,10 @@
     <string name="last_day_available">остался один день</string>
     <string name="cache_offline_refresh">Обновить</string>
     <string name="cache_offline_drop">Удалить</string>
+    <string name="cache_delete_userdefined_waypoints">Удалить пользовательские точки</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Удалить все пользовательские точки из этого тайника?\n\nТочки будут удалены безвозвратно!</string>
     <string name="cache_delete_userdefined_waypoints_note">Примечание: У вас включено создание точек из заметок. Если в вашей заметке есть координаты, то точки будут созданы для них автоматически. Это можно отключить в диалоговом окне редактирования заметок.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Пользовательские точки удалены</string>
     <string name="cache_offline_store">Сохранить</string>
     <string name="cache_offline_stored">Сохранено на устройстве</string>
     <string name="cache_offline_not_ready">Недоступно оффлайн</string>
@@ -870,6 +875,7 @@
     <string name="cache_personal_note_storewaypoints">Добавить/Обновить путевые точки</string>
     <string name="cache_personal_note_removewaypoints">Удалить путевые точки</string>
     <string name="cache_personal_note_removedwaypoints">Путевые точки удалены</string>
+    <string name="cache_personal_note_removewaypoints_nowaypoints">Нет точек для удаления</string>
     <string name="cache_personal_note_storewaypoints_success">Путевые точки были добавлены в личную заметку</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Путевые точки были добавлены к заметке, но их нужно было сократить (максимальный размер персональной заметки: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Путевые точки не могут быть сохранены в заметке из-за ограничений размера (максимальный размер персональной заметки: %1$d)</string>
@@ -1565,9 +1571,12 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo на Google Play</a></string>
     <string name="about_twitter">Публиковать новый твит каждый раз, когда вы записываетесь в блокнот?</string>
+    <string name="github_title">Сообщения об ошибках</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Доступна новая версия.\nНажмите, чтобы установить.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Доступна новая ночная сборка.\nНажмите, чтобы установить.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Доступен новый релиз кандидат.\nНажмите, чтобы установить.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com сейчас не работает.\nВозможны различные проблемы.</string>
@@ -1674,6 +1683,7 @@
         <item quantity="many">Рекомендовать тайники (%d осталось)</item>
         <item quantity="other">Рекомендовать тайники (%d осталось)</item>
     </plurals>
+    <string name="command_set_cache_icons_progress">Установка иконок тайника</string>
     <string name="pq_download_and_import">Импортировать выборку</string>
     <string name="caches_refresh_all_warning">Это действие может привести к большому количеству трафика. Вы точно хотите обновить все тайники?</string>
     <string name="list_list_headline">Списки:</string>
@@ -1802,6 +1812,7 @@
     <string name="downloadmap_choose">Выбрать карту</string>
     <string name="downloadmanager_not_available">Файл карты не может быть загружен, менеджер загрузки не доступен</string>
     <string name="download_started">Загрузка началась в фоновом режиме</string>
+    <string name="button_continue">Продолжить</string>
     <string name="downloadmap_available_updates">Доступные обновления</string>
     <string name="downloadmap_mapfile">файл карты</string>
     <!-- history track -->
@@ -1818,7 +1829,15 @@
     <string name="export_individualroute_title">Экспорт персонального маршрута</string>
     <string name="export_individualroute_success">Экспортирован индивидуальный маршрут в \"%s\"</string>
     <!-- install wizard -->
+    <string name="previous">Назад</string>
+    <string name="skip">Пропустить</string>
+    <string name="next">Дальше</string>
+    <string name="done">Готово</string>
+    <string name="finish">Завершить</string>
     <string name="wizard_welcome_title">Добро пожаловать в c:geo</string>
     <string name="wizard_advanced_offlinemaps_label">Оффлайновые карты</string>
+    <string name="wizard_advanced_restore_label">Восстановить</string>
     <string name="wizard_advanced_restore_info">Если у вас есть резервная копия от предыдущей установки, вы можете восстановить настройки и/или тексты тайников.</string>
+    <string name="status_not_ok">ОШИБКА</string>
+    <string name="wizard_status_platform">Геокешинг-сервисы</string>
 </resources>

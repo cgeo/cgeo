@@ -768,11 +768,10 @@
 請按此處進行更新，或長按以從c：geo中刪除授資料。</string>
     <string name="auth_dialog_waiting">等待 %s</string>
     <string name="auth_explain_short">接下來的過程將允許<b>c:geo</b>去存取%s</string>
-    <string name="auth_explain_long">按下“授權c：geo”按鈕將啟動該過程。此過程將打開一個有％s頁的瀏覽器。登錄並允許&lt;b&gt; c：geo &lt;/ b&gt;訪問您的帳戶。</string>
     <string name="auth_forget_title">忘記授權?</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <string name="auth_token_explain_long">輸入您的憑證並按“授權c：geo”按鈕將開始該過程。此過程將連接到％s並驗證您的身份。</string>
+    <string name="auth_token_explain_long">輸入您的憑證並按“授權c：geo”按鈕將開始該過程。此過程將連接到%s並驗證您的身份。</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo正被授權在推特發表。</string>
     <!-- auth opencaching -->
@@ -820,7 +819,6 @@
     <string name="cache_personal_note_removedwaypoints">航點已刪除。</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">沒有可移除的航點</string>
     <string name="cache_personal_note_storewaypoints_success">航點增加到個人筆記\'</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">航點可以增加到個人筆記，但必須刪減。</string>
     <string name="cache_personal_note_preventWaypointsExtraction">關閉輸出航點</string>
     <string name="cache_personal_note_limit">個人註解的限制</string>
     <string name="cache_personal_note_upload">上傳</string>
@@ -974,7 +972,7 @@
     <string name="context_share_as_link">分享連結</string>
     <string name="create_internal_cache">建立玩家自訂cache</string>
     <string name="create_internal_cache_short">新的cache</string>
-    <string name="internal_cache_default_name">玩家自訂的寶藏</string>
+    <string name="internal_cache_default_name">玩家自訂的寶藏 #%1$d</string>
     <string name="internal_cache_default_description">這是玩家自訂cache</string>
     <string name="internal_cache_default_owner">您</string>
     <string name="internal_goto_targets_title">來去目標</string>
@@ -1063,7 +1061,6 @@
     <string name="waypoint_reset_local_and_remote_cache_coords">在c:geo和網站重置</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">網站上不支援更改座標</string>
     <string name="waypoint_coordinates_upload_error">發生錯誤，網站上更改座標</string>
-    <string name="waypoint_coordinates_has_been_modified_on_website">網站上更改座標完成</string>
     <string name="waypoint_done">已完成</string>
     <string name="waypoint_duplicate">複製航點</string>
     <string name="waypoint_toclipboard">複製航點到剪貼簿</string>

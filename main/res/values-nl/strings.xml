@@ -1633,10 +1633,6 @@
     <string name="tts_oclock">%s uur</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
-    <plurals name="days_ago">
-        <item quantity="one">Gisteren</item>
-        <item quantity="other">%d dagen geleden</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favoriet</item>
         <item quantity="other">%s favorieten</item>
