@@ -1730,7 +1730,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="preference_colorpicker_select_opaqueness">不透明度の選択</string>
     <string name="reset_to_default">デフォルト</string>
     <!-- number input -->
-    <string name="number_input_title">%1$d と %2$d の間で数値を入力してください</string>
+    <string name="number_input_title">%1$s と %2$s の間で数値を入力してください</string>
     <string name="number_input_err_boundarymin">入力した数値が小さすぎます: 最小値にリセットします</string>
     <string name="number_input_err_boundarymax">入力した数値が大きすぎます: 最大値にリセットします</string>
     <string name="number_input_err_format">数値の書式が正しくありません</string>
