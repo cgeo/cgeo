@@ -250,7 +250,6 @@
     <string name="info_waypoint_coordinates_cleared">좌표가 지워졌습니다.</string>
     <string name="info_log_type_changed">로그 유형이 변경되었습니다!</string>
     <string name="info_select_logimage_cancelled">사진 선택 또는 캡처가 취소되었습니다.</string>
-    <string name="info_stored_image">새로운 사진 저장 위치 :</string>
     <string name="info_cache_saved">캐시가 기기에 저장되었습니다.</string>
     <string name="warn_calculator_state_save">계산기 상태를 유지하려면 웨이포인트를 저장해야 합니다.</string>
     <string name="feature_info_offline_counter">오프라인에 저장된 로그가있는 캐시가 아직 온라인에 기록되지 않았을 수 있습니다. 편의를 위해 이러한 로그 수는 c:geo 메인 페이지의 바닥 글에서 발견 된 캐시 수 뒤에 \"+x\"로 표시됩니다. \n\n또한 이러한 \"x\"로그는 로그 서명에 사용할 수있는 \"숫자\"템플릿에 추가됩니다. \n\n이 카운터 확장이 마음에 들지 않으면 \"설정\" &gt; \"로깅\"에서 비활성화하거나 대신 \"숫자 (오프라인 로그 제외)\"템플릿을 사용할 수 있습니다. \n\n남아있는 오프라인 로그를 쉽게 찾으려면 \"기록\"목록으로 이동하여 \"개인 데이터 포함\" &gt; \"오프라인 로그 사용\" 필터링하십시오.</string>
@@ -719,7 +718,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">c:geo 인증받기</string>
@@ -962,10 +960,6 @@
     <string name="cc_hint_minutes">분</string>
     <string name="cc_hint_seconds">초</string>
     <string name="cc_hint_fraction">분수</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">경로 :</string>
-    <string name="simple_dir_chooser_invalid_path">잘못된 경로</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s 에서 캐시 불러오는 중</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s 에서 웨이포인트 불러오는 중</string>
@@ -1450,9 +1444,6 @@
     <string name="tts_oclock">%s 시</string>
     <!-- various -->
     <string name="clipboard_copy_ok">클립보드에 복사됨</string>
-    <plurals name="days_ago">
-        <item quantity="other">%d일 전</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="other">%s 호감점수</item>
     </plurals>
@@ -1504,7 +1495,6 @@
     <string name="init_low_disk_space">디스크 공간 부족</string>
     <string name="init_confirm_debug">c:geo가 디버그 모드에서 실행됩니다!</string>
     <string name="list_confirm_debug_message">디버그 모드는 불안정해질 수 있습니다. 정상 모드로 돌아가시겠습니까?</string>
-    <string name="err_select_logimage_upload_size">이미지가 너무큽니다. 작은 것을 선택해주세요.</string>
     <string name="err_logimage_caption_required">영상에 설명이 필요합니다.</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
@@ -1515,18 +1505,12 @@
     <string name="storage_permission_request_explanation">c:geo는 오프라인용으로 지오캐시를 저장할 때, 데이터를 휴대폰 저장장치 혹은 SD 카드에 데이터를 기록합니다. 또한 c:geo는 파일을 불러오거나 내보낼때, 지도를 읽어들일 때에도 휴대폰 저장장치를 사용합니다. 이러한 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
     <string name="storage_permission_needed">저장 권한이 없으면이 기능을 사용할 수 없습니다.</string>
     <!-- colors -->
-    <string name="color_blue">파란색</string>
-    <string name="color_green">녹색</string>
-    <string name="color_orange">주황색</string>
-    <string name="color_red">빨간색</string>
-    <string name="color_turquoise">청록색</string>
-    <string name="color_black">검은색</string>
     <string name="preference_colorpicker_select_color_scheme">색 구성표 선택</string>
     <string name="preference_colorpicker_select_color">색상 선택</string>
     <string name="preference_colorpicker_select_opaqueness">불투명체 선택</string>
     <string name="reset_to_default">기본 설정</string>
     <!-- number input -->
-    <string name="number_input_title">%1$s에서 %2$s 사이의 값을 입력하세요</string>
+    <string name="number_input_title">%1$d에서 %2$d 사이의 값을 입력하세요</string>
     <string name="number_input_err_boundarymin">입력한 값이 너무 작습니다-최소값으로 재설정</string>
     <string name="number_input_err_boundarymax">입력한 값이 너무 큽니다-최대 값으로 재설정</string>
     <string name="number_input_err_format">올바르지 않은 숫자 형식</string>
