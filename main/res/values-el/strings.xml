@@ -1242,7 +1242,7 @@
     <string name="map_live_enable">Ενεργοποίηση live</string>
     <string name="map_live_disable">Απενεργοποίηση live</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
-    <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση (Τρέχουσα: %s)</string>
     <string name="map_routing_brouter">Η δρομολόγηση είναι διαθέσιμη μόνο εάν το <a href="">BRouter</a> είναι εγκατεστημένο</string>
     <string name="map_gm_autorotation">Αυτόματη περιστροφή χάρτη</string>

@@ -1236,7 +1236,7 @@
     <string name="map_live_enable">Activa en viu</string>
     <string name="map_live_disable">Desactiva en viu</string>
     <string name="map_as_list">Mostra-ho com una llista</string>
-    <string name="map_select_multiple_items">Seleccionar un element</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Seleccionar un element</string>
     <string name="map_routing">Encaminament (actualment: %s)</string>
     <string name="map_routing_brouter">L\'encaminament només està disponible si hi ha  <a href="">BRouter</a>instal·lat</string>
     <string name="map_gm_autorotation">Mapa autorotatori</string>

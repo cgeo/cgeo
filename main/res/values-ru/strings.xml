@@ -1193,7 +1193,7 @@
     <string name="map_live_enable">Подгружать тайники \"на лету\"</string>
     <string name="map_live_disable">Не подгружать тайники</string>
     <string name="map_as_list">Показать списком</string>
-    <string name="map_select_multiple_items">Выбрать элемент</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Выбрать элемент</string>
     <string name="map_gm_autorotation">Авто-поворот карты</string>
     <string name="map_gm_autorotation_disable">Отключить автоповорот карты?\n\nВы можете включить его снова с помощью меню поворота карты</string>
     <string name="quick_settings">Быстрые настройки</string>

@@ -1108,7 +1108,7 @@
     <string name="map_live_enable">Slėptuvės tiesiogiai</string>
     <string name="map_live_disable">Slėptuvės netiesiogiai</string>
     <string name="map_as_list">Rodyti kaip sąrašą</string>
-    <string name="map_select_multiple_items">Pasirinkite elementą</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Pasirinkite elementą</string>
     <string name="map_gm_autorotation">Žemėlapio autosukimas</string>
     <string name="map_gm_autorotation_disable">Išjungti automatinį žemėlapio pasukimą?\n\nGalėsite jį vėl įjungti per žemėlapio pasukimo meniu</string>
     <string name="quick_settings">Greiti nustatymai</string>

@@ -1243,7 +1243,7 @@
     <string name="map_live_enable">Aktualisierung einschalten</string>
     <string name="map_live_disable">Aktualisierung ausschalten</string>
     <string name="map_as_list">Als Liste anzeigen</string>
-    <string name="map_select_multiple_items">Element auswählen</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Element auswählen</string>
     <string name="map_routing">Routing (Aktuell: %s)</string>
     <string name="map_routing_brouter">Routing ist nur verfügbar, wenn <a href="">BRouter</a> installiert ist</string>
     <string name="map_gm_autorotation">Automatische Kartendrehung</string>

@@ -1235,7 +1235,7 @@
     <string name="map_live_enable">Live aanzetten</string>
     <string name="map_live_disable">Live uitzetten</string>
     <string name="map_as_list">Laat zien als lijst</string>
-    <string name="map_select_multiple_items">Selecteer item</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Selecteer item</string>
     <string name="map_routing">Routering (momenteel: %s)</string>
     <string name="map_routing_brouter">Routing is alleen beschikbaar als <a href="">BRouter</a> is geïnstalleerd</string>
     <string name="map_gm_autorotation">Automatische kaartrotatie</string>

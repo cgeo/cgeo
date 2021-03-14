@@ -1257,7 +1257,7 @@
     <string name="map_live_enable">Włącz online</string>
     <string name="map_live_disable">Wyłącz online</string>
     <string name="map_as_list">Pokaż w postaci listy</string>
-    <string name="map_select_multiple_items">Wybierz element</string>
+    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Wybierz element</string>
     <string name="map_routing">Prowadzenie (Obecnie:%s)</string>
     <string name="map_routing_brouter">Routing jest dostępny tylko wtedy, gdy zainstalowany jest <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
