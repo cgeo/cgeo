@@ -1747,7 +1747,7 @@
     <string name="preference_colorpicker_select_opaqueness">Seleziona opacità</string>
     <string name="reset_to_default">Predefinito</string>
     <!-- number input -->
-    <string name="number_input_title">Inserisci un valore tra %1$d e %2$d</string>
+    <string name="number_input_title">Inserisci un valore tra %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">Valore inserito è troppo piccolo - resettato al valore minimo</string>
     <string name="number_input_err_boundarymax">Il valore inserito è troppo grande - resettato al valore massimo</string>
     <string name="number_input_err_format">Formato del numero non valido</string>
