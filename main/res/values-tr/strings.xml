@@ -1749,7 +1749,7 @@
     <string name="preference_colorpicker_select_opaqueness">Saydamlığı ayarla</string>
     <string name="reset_to_default">Varsayılan</string>
     <!-- number input -->
-    <string name="number_input_title">%1$d ve %2$d arasında bir değer girin</string>
+    <string name="number_input_title">%1$s ve %2$s arasında bir değer girin</string>
     <string name="number_input_err_boundarymin">Girilen rakam çok küçük-en küçük rakama ayarla</string>
     <string name="number_input_err_boundarymax">Girilen rakam çok büyük-en büyük rakama ayarla</string>
     <string name="number_input_err_format">Geçersiz sayı biçimi</string>
