@@ -1601,7 +1601,7 @@
     <string name="preference_colorpicker_select_opaqueness">Vælg uigennemsigtighed</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Indtast en værdi mellem %1$d og %2$d</string>
+    <string name="number_input_title">Indtast en værdi mellem %1$s og %2$s</string>
     <string name="number_input_err_boundarymin">Den indtastede værdi er for lav og er blevet erstattet af minimumsværdien</string>
     <string name="number_input_err_boundarymax">Den indtastede værdi er for høj og er blevet erstattet af maximumsværdien</string>
     <string name="number_input_err_format">Ugyldigt talformat</string>
