@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">Introduza o código do trackable. Por exemplo \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Por favor, insira algum texto para o registo.</string>
     <string name="warn_load_images">O c:geo falhou o carregamento de imagens.</string>
-    <string name="warn_invalid_mapfile">O ficheiro de mapa seleccionado não é um ficheiro de mapa \"mapsforge\" válido ou usa uma versão que não é suportada.\n(O c:geo actualmente suporta as versões v3 até v5)\n\nMapas offline estão indisponíveis.</string>
     <string name="warn_pocket_query_select">Nenhuma Pocket Query seleccionada.</string>
     <string name="warn_no_pocket_query_found">Não foram encontradas Pocket Queries on-line.</string>
     <string name="warn_invalid_character">O carácter deve ser uma LETRA ou um DÍGITO</string>
@@ -259,7 +258,6 @@
     <string name="info_waypoint_coordinates_cleared">Coordenadas limpas.</string>
     <string name="info_log_type_changed">O tipo de registo seleccionado foi alterado!</string>
     <string name="info_select_logimage_cancelled">Foi cancelada a selecção ou captura de imagem.</string>
-    <string name="info_stored_image">Nova imagem guardada em:</string>
     <string name="info_cache_saved">A cache foi armazenada localmente</string>
     <string name="warn_calculator_state_save">Assegure a gravação do ponto adicional caso pretenda manter os parâmetros da calculadora.</string>
     <string name="feature_info_offline_counter">Tem algumas caches com um registo offline gravado, que podem ainda não ter sido registadas online. Para seu conforto, a contagem desses registos é exibida como \"+ x\" a seguir ao seu número de caches encontradas, no rodapé na página principal do c:geo. \n\nAlém disso, caso utilize o modelo \"Número\" na composição da sua assinatura de registo, estes \"x\" número de registos serão-lhe acrescentados. \n\nSe não gosta desta extensão do contador, pode desactiva-la em \"Definições\" &gt; \"Registos\" e/ou usar em alternativa o modelo \"Número (sem registos offline)\". \n\nPara encontrar facilmente os registos offline pendentes, aceda à lista \"Histórico\" e filtre por \"Com informação pessoal\" &gt; \"Com registo offline\".</string>
@@ -657,9 +655,11 @@
     <string name="init_backup_settings_restore">Restaurar definições</string>
     <string name="settings_readingerror">Erro ao ler as definições</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
+    <string name="settings_folder_changed">A definição para a pasta \"%1$s\" mudou para \"%2$s\".\n\nToque em \"%3$s\" para manter a configuração actual para esta pasta.\n\nToque em \"%4$s\" para definir a pasta antiga. Nesse caso, será solicitado que autorize o acesso a essa pasta para o c:geo.</string>
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
     <string name="settings_info_offline_maps">O c:geo suporta mapas para uso offline. Pode obter mapas de diferentes fornecedores ou até mesmo criar os seus próprios mapas (de dados OSM). Em primeiro lugar, seleccione a pasta na qual os mapas offline serão guardados.</string>
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
+    <string name="settings_info_themes">O c:geo suporta temas personalizados para mapas offline. Estes podem ser utilizados para alterar o estilo de cor do mapa (por exemplo, para ter um mapa de visão nocturna) ou para destacar certos objectos, como caminhos de bicicleta ou linhas de relevo dentro do mapa.\n\nTrabalhar com temas de mapa não-comprimidos pode diminuir o desempenho da abertura do mapa. Neste caso, a pasta de temas pode opcionalmente ser sincronizada com uma pasta local da aplicação privada, para acesso mais rápido (à custa de algum espaço de armazenamento).</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
     <string name="init_local_file_system">Sistema de Ficheiros Local</string>
     <string name="init_base_directory_description">Pasta base para dados locais públicos</string>
@@ -810,11 +810,12 @@
     <string name="sendToCgeo_no_registration">O c:geo falhou a transferência das geocaches. O registo do send2cgeo expirou. Por favor, faça o registo nas definições.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Alterar pasta %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">A pasta %1$s está definida como \'%2$s\', contém %3$s e %4$s e tem um tamanho total de %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Pode optar por usar a pasta padrão \'%s\' ou seleccionar uma pasta definida pelo utilizador.</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Não fazer nada</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copiar todo o conteúdo</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Mover todo o conteúdo</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Nenhuma acção adicional</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Seleccionou uma pasta diferente da que está armazenada. A pasta actual contém %1$s, %2$s e tem um tamanho de %3$s. Como deseja prosseguir?\n\nSeleccione a pasta e</string>
     <string name="contentstorage_folder_selection_aborted">A cancelar selecção de pasta, a pasta é \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Pasta definida como \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">A cancelar a selecção de ficheiro</string>
@@ -843,8 +844,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s concluídos</string>
     <string name="folder_process_status_currentfile">A processar %1$s</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Sincronizar conteúdo de %1$s para o armazenamento interno</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">A copiar o conteúdo de %1$s para %2$s</string>
     <string name="folder_move_progressbar_title">A mover o conteúdo de %1$s para %2$s</string>
@@ -1134,12 +1133,6 @@
     <string name="cc_hint_minutes">minutos</string>
     <string name="cc_hint_seconds">segundos</string>
     <string name="cc_hint_fraction">parcial</string>
-    <string name="lowercase">minúsculas</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Escolher pasta</string>
-    <string name="simple_dir_chooser_current_path">Caminho:</string>
-    <string name="simple_dir_chooser_invalid_path">Caminho inválido</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">A carregar caches de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">A carregar pontos adicionais de %1$s</string>
@@ -1225,6 +1218,9 @@
     <string name="map_showwp_parking">Pontos de estacionamento</string>
     <string name="map_showwp_visited">Pont. adicionais visitados</string>
     <string name="map_show_track">Mostrar percurso/rota GPX</string>
+    <string name="init_renderthemefolder_synctolocal">Sincronizar temas com uma pasta da aplicação privada</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Esta opção pode melhorar o desempenho na abertura do visualizador de mapas, à custa de algum espaço de armazenamento no dispositivo.</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronização da pasta de temas</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
@@ -1682,10 +1678,6 @@
     <string name="tts_oclock">%s horas</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado para a área de transferência</string>
-    <plurals name="days_ago">
-        <item quantity="one">ontem</item>
-        <item quantity="other">há %d dias</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favorito</item>
         <item quantity="other">%s favoritos</item>
@@ -1749,7 +1741,6 @@
     <string name="init_low_disk_space_message">A pasta de dados de geocaches está com pouco espaço de armazenamento. Isso pode causar problemas no c:geo. Por favor, liberte algum espaço.</string>
     <string name="init_confirm_debug">O c:geo está a ser executado no modo de depuração!</string>
     <string name="list_confirm_debug_message">O modo de depuração provoca instabilidades! Quer desactivar o modo de depuração?</string>
-    <string name="err_select_logimage_upload_size">A imagem é muito grande. Por favor, seleccione uma resolução inferior.</string>
     <string name="err_logimage_caption_required">É necessária uma legenda para a imagem</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>
@@ -1760,18 +1751,12 @@
     <string name="storage_permission_request_explanation">O c:geo irá escrever dados no armazenamento interno ou cartão SD assim que guardar geocaches para uso off-line. Além disso, o c:geo usará o armazenamento interno para importar/exportar ficheiros e para a leitura de mapas off-line. A mesma não pode ser usada sem esta permissão.</string>
     <string name="storage_permission_needed">Esta função não é possível sem permissão de armazenamento.</string>
     <!-- colors -->
-    <string name="color_blue">Azul</string>
-    <string name="color_green">Verde</string>
-    <string name="color_orange">Laranja</string>
-    <string name="color_red">Vermelho</string>
-    <string name="color_turquoise">Turquesa</string>
-    <string name="color_black">Preto</string>
     <string name="preference_colorpicker_select_color_scheme">Seleccione o esquema de cores</string>
     <string name="preference_colorpicker_select_color">Seleccionar cor</string>
     <string name="preference_colorpicker_select_opaqueness">Seleccionar opacidade</string>
     <string name="reset_to_default">Predefinição</string>
     <!-- number input -->
-    <string name="number_input_title">Introduza um valor entre %1$s e %2$s</string>
+    <string name="number_input_title">Introduza um valor entre %1$d e %2$d</string>
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
     <string name="number_input_err_boundarymax">O valor introduzido é demasiado grande - redefinido para o valor máximo</string>
     <string name="number_input_err_format">Formato de número inválido</string>
