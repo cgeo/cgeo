@@ -250,7 +250,6 @@
     <string name="info_waypoint_coordinates_cleared">Koordinaten si geläscht.</string>
     <string name="info_log_type_changed">Den Typ vu Log huet geännert!</string>
     <string name="info_select_logimage_cancelled">D\'Auswal vu Biller oder d\'Opnam gouf annuléiert.</string>
-    <string name="info_stored_image">Neit Bild gespäichert ënner:</string>
     <string name="info_cache_saved">De Cache gouf lokal gespäichert</string>
     <string name="warn_calculator_state_save">Vergiess net de Waypoint ze späicheren fir d\'Berechnung ze halen.</string>
     <string name="feature_info_offline_counter">Du hues e puer Cachen mat Offline-Logs, déi eventuell nach net eropgelued goufen. Dofir gëtt als Erënnerung ee Compteur (z.B. \"+ 1\") um Startmenü ugewisen.\n\nAusserdeem ginn dës \"x\" Logs der \"NUMMER\"-Virlag dobäigezielt, déi du eventuell. an denger Signatur benotz.\n\nFalls dir de Compteur net gefält, kanns du en ënner \"Astellungen\" &gt; \"Loggen\" desaktivéieren an/oder amplaz d\'\"NUMMER (ouni Offline-Logs)\"-Virlag benotzen.\n\nFir Logs schnell an einfach ze fannen déi nach ausstinn, maach d\'Lëscht \"Historique\" op a filter no \"Mat eegenen Informatiounen\" &gt; \"Mat Offline-Log\".</string>
@@ -585,7 +584,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <!-- auth credentials -->
@@ -596,8 +594,6 @@
     <!-- cache -->
     <!-- days remaining -->
     <!-- coordinate calculator hints -->
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
     <!-- gpx -->
     <!-- import -->
     <!-- popup -->
@@ -640,10 +636,6 @@
         <item quantity="other">%s Fouss</item>
     </plurals>
     <!-- various -->
-    <plurals name="days_ago">
-        <item quantity="one">Gëschter</item>
-        <item quantity="other">viru %d Deeg</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s Favoritt</item>
         <item quantity="other">%s Favoritten</item>
@@ -666,15 +658,9 @@
     <string name="storage_permission_request_explanation">c:geo wäert Daten op de Späicher vum Handy oder der SD Kaart späichere soubal\'s du Geocache späichers fir offline ze benotzen. Ausserdeem wäert c:geo de Späicher fir den Import, Export an dem Liese vun Offline Kaarte benotzen. Se kann net ouni des Erlabnis benotzt ginn.</string>
     <string name="storage_permission_needed">Des Funktioun ass ouni d\'Zougangsberechtegung op de Späicher net méiglech.</string>
     <!-- colors -->
-    <string name="color_blue">Blo</string>
-    <string name="color_green">Gréng</string>
-    <string name="color_orange">Orange</string>
-    <string name="color_red">Rout</string>
-    <string name="color_turquoise">Turquoise</string>
-    <string name="color_black">Schwaarz</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Tipp e Wärt tëscht %1$s a %2$s an</string>
+    <string name="number_input_title">Tipp e Wärt tëscht %1$d a %2$d an</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
     <string name="save_sorted_route">Späicheren</string>
