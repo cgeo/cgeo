@@ -339,10 +339,10 @@ public class ContentStorageActivityHelper {
             final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
             final View dialogView = LayoutInflater.from(dialog.getContext()).inflate(R.layout.folder_selection_dialog, null);
             ((TextView) dialogView.findViewById(R.id.message)).setText(LocalizationUtils.getString(R.string.contentstorage_selectfolder_dialog_choice, folderInfo.left, folderInfo.middle, folderInfo.right));
-            final CopyChoice[] cc = new CopyChoice[]{CopyChoice.MOVE};
+            final CopyChoice[] cc = new CopyChoice[]{CopyChoice.DO_NOTHING};
+            dialogView.findViewById(R.id.copymove_justselect).setOnClickListener(v -> cc[0] = CopyChoice.DO_NOTHING);
             dialogView.findViewById(R.id.copymove_move).setOnClickListener(v -> cc[0] = CopyChoice.MOVE);
             dialogView.findViewById(R.id.copymove_copy).setOnClickListener(v -> cc[0] = CopyChoice.COPY);
-            dialogView.findViewById(R.id.copymove_justselect).setOnClickListener(v -> cc[0] = CopyChoice.DO_NOTHING);
             dialog
                 .setView(dialogView)
                 .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
