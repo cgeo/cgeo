@@ -256,7 +256,6 @@
     <string name="info_waypoint_coordinates_cleared">Position nulstillet</string>
     <string name="info_log_type_changed">Typen af logbeskeden blev ændret!</string>
     <string name="info_select_logimage_cancelled">Valg af billede eller foto blev afbrudt.</string>
-    <string name="info_stored_image">Nyt billede gemt til:</string>
     <string name="info_cache_saved">Cachen blev gemt lokalt</string>
     <string name="warn_calculator_state_save">Husk at gemme rutepunkt, hvis du vil beholde lommeregnerens tilstand.</string>
     <string name="feature_info_offline_counter">Du har offline logs på telefonen/tabletten, som muligvis ikke er overført til Geocaching.com. Disse logs er vist som \"+ x\" forneden på c:geo hovedskærmen.\n\nDisse logs bliver også talt med i \"NUMBER\"-feltet, som du kan bruge i din log-signatur.\n\nHvis du ikke vil have disse logs markeret, kan du slå det fra under \"Indstillinger\" &gt; \"Logning\", og du kan bruge \"Antal fund (uden offline logs)\"-feltet.\n\nDu kan finde disse offline logs ved at gå i listen \"Historik\" og filtrere efter \"Med personlige data\" &gt; \"med offline log\".</string>
@@ -759,7 +758,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Godkend c:geo</string>
@@ -1018,11 +1016,6 @@
     <string name="cc_hint_minutes">minutter</string>
     <string name="cc_hint_seconds">sekunder</string>
     <string name="cc_hint_fraction">brøkdel</string>
-    <string name="lowercase">små bogstaver</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">Sti:</string>
-    <string name="simple_dir_chooser_invalid_path">Ugyldig sti</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Indlæser cacher fra %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Indlæser rutepunkter fra %1$s</string>
@@ -1536,10 +1529,6 @@
     <string name="tts_oclock">klokken %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopieret til udklipsholder</string>
-    <plurals name="days_ago">
-        <item quantity="one">i går</item>
-        <item quantity="other">for %d dage siden</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favorit</item>
         <item quantity="other">%s favoritter</item>
@@ -1597,7 +1586,6 @@
     <string name="init_low_disk_space">Datalageret er næsten fyldt</string>
     <string name="init_confirm_debug">c:geo kører i fejlfindingstilstand!</string>
     <string name="list_confirm_debug_message">Fejlfindingstilstand kan forårsage ustabilitet! Ønsker du at deaktivere fejlfindingstilstand?</string>
-    <string name="err_select_logimage_upload_size">Billedfilen er for stor. Vælg en lavere billedopløsning.</string>
     <string name="err_logimage_caption_required">Der skal indtastes en billedtekst til billedet</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">Ø/V --° --.---</string>
@@ -1608,18 +1596,12 @@
     <string name="storage_permission_request_explanation">c:geo vil skrive data til din telefons lager eller SD-kort, så snart du gemmer geocacher til offlinebrug. Desuden vil c:geo bruge din telefons lagerplads til import og eksport af filer og læsning af offline kort. c:geo kan ikke fungere uden denne tilladelse.</string>
     <string name="storage_permission_needed">Den funktion kan ikke bruges uden lagringstilladelse.</string>
     <!-- colors -->
-    <string name="color_blue">Blå</string>
-    <string name="color_green">Grøn</string>
-    <string name="color_orange">Orange</string>
-    <string name="color_red">Rød</string>
-    <string name="color_turquoise">Turkis</string>
-    <string name="color_black">Sort</string>
     <string name="preference_colorpicker_select_color_scheme">Vælg farveskema</string>
     <string name="preference_colorpicker_select_color">Vælg farve</string>
     <string name="preference_colorpicker_select_opaqueness">Vælg uigennemsigtighed</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Indtast en værdi mellem %1$s og %2$s</string>
+    <string name="number_input_title">Indtast en værdi mellem %1$d og %2$d</string>
     <string name="number_input_err_boundarymin">Den indtastede værdi er for lav og er blevet erstattet af minimumsværdien</string>
     <string name="number_input_err_boundarymax">Den indtastede værdi er for høj og er blevet erstattet af maximumsværdien</string>
     <string name="number_input_err_format">Ugyldigt talformat</string>
