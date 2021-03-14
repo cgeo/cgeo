@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cutie</string>
     <string name="detail">Detalii</string>
@@ -19,14 +20,20 @@
     <string name="event">Eveniment</string>
     <string name="mega">Mega-eveniment</string>
     <string name="giga">Giga-Eveniment</string>
+    <string name="earth">EarthCache</string>
     <string name="cito">Eveniment \"Caută Cutie Curăţă Gunoiul\" (CITO)</string>
     <string name="webcam">Cameră web</string>
     <string name="virtual">Locaţie virtuală</string>
     <string name="wherigo">Wherigo</string>
+    <string name="communceleb">Eveniment de Celebrare a Comunității</string>
     <string name="ape">Cutie din Proiectul APE</string>
+    <string name="gchq">Sediul Central Geocaching</string>
     <string name="gps">Expoziţie \"Aventuri cu GPS\"</string>
+    <string name="locationless">Cache fără localizare (Inversat)</string>
+    <string name="userdefined">Cache definit de utilizator</string>
     <string name="unknown">Tip necunoscut</string>
     <!-- cache sizes -->
+    <string name="cache_size_micro">Micro</string>
     <string name="cache_size_small">Mică</string>
     <string name="cache_size_regular">Normală</string>
     <string name="cache_size_large">Mare</string>
@@ -34,6 +41,7 @@
     <string name="cache_size_virtual">Virtuală</string>
     <string name="cache_size_notchosen">Nespecificată</string>
     <string name="cache_size_unknown">Necunoscută</string>
+    <string name="cache_size_nano">Nano</string>
     <string name="cache_size_very_large">Foarte mare</string>
     <!-- waypoints -->
     <string name="wp_final">Locaţia Finală</string>
@@ -80,8 +88,11 @@
     <string name="log_tb_archived">Arhivată</string>
     <string name="log_save">Salvează local</string>
     <string name="log_saving">Trimitere jurnal…</string>
+    <string name="log_saving_and_uploading">Publicare jurnal și încărcare imagini…</string>
     <string name="log_posting_log">Se publică însemnarea…</string>
     <string name="log_posting_twitter">Se publică tweet…</string>
+    <string name="log_posting_vote">Publicarea votului…</string>
+    <string name="log_posting_image">Publicare imagini…</string>
     <string name="log_posting_generic_trackable">Postare %1$s %2$d/%3$d</string>
     <string name="log_clear">Şterge</string>
     <string name="log_post_not_possible">Descărcare în curs…\nTe rog încearcă din nou peste câteva secunde sau verifică-ţi conexiunea la internet.</string>
@@ -104,30 +115,53 @@
     <string name="log_announcement">Anunţ</string>
     <string name="log_today">Azi</string>
     <string name="log_yesterday">Ieri</string>
+    <string name="log_smilies">Emoticoane</string>
     <string name="log_image">Imagine</string>
+    <string name="log_images">Imagini</string>
     <string name="log_image_attach">Ataşează imagine</string>
     <string name="log_image_stored">Existentă</string>
     <string name="log_image_camera">Nouă</string>
+    <string name="log_image_delete">Ștergeți</string>
     <string name="log_image_caption">Titlu</string>
     <string name="log_image_description">Descriere</string>
     <string name="log_image_scale">Mărire</string>
     <string name="log_password_title">Parolă:</string>
+    <string name="log_report_problem">Raportează problema:</string>
     <string name="log_hint_log_password">Introdu parola pentru jurnal</string>
     <string name="log_oc_team_comment">Comentariu din partea echipei OC</string>
     <string name="log_your_saved_log">Însemnare salvată</string>
     <string name="log_empty_logbook">Jurnalul acestei geocutii este gol.</string>
+    <string name="log_problem_none">Nicio problemă</string>
+    <string name="log_problem_needs_maintenance_label">Necesită mentenanță</string>
+    <string name="log_problem_needs_maintenance_text">Acest geocacher a raportat că există o problemă cu acest cache.</string>
+    <string name="log_problem_log_full_label">Jurnalul este plin</string>
+    <string name="log_problem_log_full_text">Acest geocacher a raportat că jurnalul este plin.</string>
+    <string name="log_problem_damaged_label">Recipientul este deteriorat</string>
+    <string name="log_problem_damaged_text">Acest geocacher a raportat că recipientul este deteriorat.</string>
+    <string name="log_problem_missing_label">Cache-ul ar putea lipsi</string>
+    <string name="log_problem_missing_text">Acest geocacher a raportat că geocutia ar putea lipsi.</string>
+    <string name="log_problem_other_label">Altele</string>
+    <string name="log_problem_other_text">Acest geocacher a raportat că există o problemă cu acest cache.</string>
+    <string name="log_problem_archive_label">Cache-ul trebuie arhivat</string>
+    <string name="log_problem_archive_text">Acest geocacher a raportat că această geocutie ar trebui arhivată. Un examinator din comunitatea de voluntari a fost notificat.</string>
+    <string name="log_image_scale_option_noscaling">Fără redimensionare</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_titleprefix">Imagine</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradu în limba %s</string>
     <string name="translate_to_english">Tradu în limba engleză</string>
     <string name="translate_length_warning">Traducerea poate fi incompletă în cazul unui text mare.</string>
     <!-- errors, warnings, info toasts -->
+    <string name="err_none">OK</string>
     <string name="err_parse">Pagina de autentificare nu a putut fi parcursă</string>
     <string name="err_server">Geocaching.com nu poate fi contactat. Probabil că site-ul sau conexiunea la internet nu funcţionează.</string>
     <string name="err_server_ec">Extremcaching.com nu poate fi contactat. Probabil că site-ul sau conexiunea la internet nu funcţionează.</string>
     <string name="err_server_gk">GeoKrety.org nu poate fi contactat. Conexiunea la internet nu funcţionează sau site-ul s-ar putea să fie indisponibil momentan.</string>
     <string name="err_login">Nu există informaţii de autorizare</string>
     <string name="err_login_failed_toast">c:geo nu se poate conecta. c:geo va funcţiona deconectat cu cutiile salvate local. Verifică informaţiile de autentificare sau activează conexiunea la internet.</string>
+    <string name="err_unknown">Eroare necunoscută. Vă rugăm să consultați <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pentru îndrumare.</string>
     <string name="err_unknown_address">c:geo nu a putut găsi coordonate pentru această adresă</string>
+    <string name="err_comm">Eroare de comunicare necunoscută. Vă rugăm să consultați secțiunea de <a href="https://www.cgeo.org/faq#login-failed">Întrebări Frecvente</a> pentru îndrumare.</string>
     <string name="err_missing_auth">Lipsă nume utilizator şi/sau parolă</string>
     <string name="err_wrong">Nume utilizator sau parolă greşită</string>
     <string name="err_maintenance">Geocaching.com este oprit temporar pentru lucrări de întreţinere. c:geo funcţionează deconectat cu cutiile stocate local.</string>
@@ -143,6 +177,7 @@
     <string name="err_detail_cache_find_any">c:geo nu poate găsi nici o cutie.</string>
     <string name="err_detail_no_spoiler">c:geo nu a găsit imagini pentru această geocutie.</string>
     <string name="err_detail_still_working">Încă se procesează o altă comandă.</string>
+    <string name="err_detail_premium_log_found">Acest cache este disponibil doar membrilor premium ai geocaching.com. Prin urmare, informațiile despre cache nu pot fi afișate.\n\nCu toate acestea, dacă ați găsit deja acest cache, puteți scrie un jurnal aici.</string>
     <string name="err_watchlist_still_managing">Încă lucrez la lista obiectelor urmărite.</string>
     <string name="err_watchlist_failed">Modificarea listei de cutii urmărite a eşuat.</string>
     <string name="err_application_no">c:geo nu a găsit nici o aplicaţie adecvată.</string>
@@ -179,6 +214,7 @@
     <string name="err_parse_lat_lon">c:geo nu înţelege latitudinea sau longitudinea.</string>
     <string name="err_rendertheme_file_unreadable">Tema de afişare aleasă nu a putut fi încărcată. Revenire la tema implicită.</string>
     <string name="err_rendertheme_invalid">Tema de afişare aleasă nu este valabilă pentru această versiune de mapsforge. Revenire la tema implicită.</string>
+    <string name="err_invalid_filename_char">Caracterul \'%c\' nu este permis</string>
     <string name="warn_save_nothing">Nimic de salvat.</string>
     <string name="warn_no_cache_coord">Nu există cutii cu coordonate.</string>
     <string name="warn_no_coordinates">Coordonatele nu a fost specificate.</string>
@@ -196,6 +232,8 @@
     <string name="warn_pocket_query_select">Nu a fost selectat nici un \"Pocket Query\".</string>
     <string name="warn_no_pocket_query_found">Nu a fost găsit nici un \"Pocket Query\".</string>
     <string name="warn_invalid_character">Trebuie să tastezi numai LITERE sau CIFRE</string>
+    <string name="warn_notloggedin_title">Mod Neconectat (Offline)</string>
+    <string name="warn_notloggedin_short">Nu ești logat. Harta live va arăta doar geocutiile stocate local.</string>
     <string name="err_read_pocket_query_list">Eroare la citirea listei \"Pocket query\".</string>
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
     <string name="info_log_saved">c:geo a salvat însemnarea.</string>
@@ -207,7 +245,6 @@
     <string name="info_waypoint_coordinates_cleared">Coordonate anulate.</string>
     <string name="info_log_type_changed">Tipul însemnării a fost schimbat!</string>
     <string name="info_select_logimage_cancelled">Selecţia sau captura de imagine a fost anulată.</string>
-    <string name="info_stored_image">Imaginea a fost salvată aici:</string>
     <string name="info_cache_saved">Geocutia a fost salvată local</string>
     <string name="warn_calculator_state_save">Asigură-te că ai salvat punctul dacă vrei să păstrezi stearea în care se află calculatorul de coordonate.</string>
     <string name="err_trackable_log_not_anonymous">Prin intermediul c:geo nu se poate publica anonim însemnarea %1$s. Vrei să mergi la setări şi să-ţi configurezi contul la %2$s?</string>
@@ -309,6 +346,7 @@
     <string name="caches_filter_own_rating">Cu votul tău</string>
     <string name="caches_filter_multi_listing">Afişare multiplă cu statut diferit</string>
     <string name="caches_filter_missing_gcvote">Geocutii găsite, fără votul tău</string>
+    <string name="caches_filter_empty">(gol)</string>
     <string name="caches_removing_from_history">Şterge din istoric…</string>
     <string name="caches_clear_offlinelogs">Şterge însemnări stocate local</string>
     <string name="caches_clear_offlinelogs_message">Vrei să ştergi însemnările stocate local?</string>
@@ -463,6 +501,7 @@
     <string name="settings_info_themes_title">Despre stilurile hărţilor</string>
     <string name="init_mapsource_select">Alege hărţi din sursa</string>
     <string name="init_dataDir_note">Poţi alege să salvezi informaţii suplimentare despre geocutii (spoilere, imagini din jurnal, …) în spaţiul de stocare extern (SDcard real sau virtual, în funcţie de dispozitivul tău).</string>
+    <string name="init_maptrail">Arată traseul parcus</string>
     <string name="init_include_found_status">Include starea \"Găsită\"</string>
     <string name="init_trackautovisit">TB vizitează</string>
     <string name="init_summary_trackautovisit">Alege ca obiectele călătoare să \"viziteze\" implicit</string>
@@ -541,7 +580,6 @@
     <!-- Content Storage -->
     <!-- Persistable Folders -->
     <!-- FolderUtils: async processing -->
-    <!-- FolderUtils: synchronize -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
     <string name="auth_authorize">Autorizează c:geo</string>
@@ -726,10 +764,6 @@
     <string name="cache_time_full_hours">ora</string>
     <string name="cache_listed_on">Publicat pe %s</string>
     <!-- coordinate calculator hints -->
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_current_path">Cale:</string>
-    <string name="simple_dir_chooser_invalid_path">Cale greşită</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Se încarcă geocutiile din %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Se încarcă punctele din %1$s</string>
@@ -1181,11 +1215,6 @@
     <string name="tts_oclock">ora %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiat în memoria temporară</string>
-    <plurals name="days_ago">
-        <item quantity="one">ieri</item>
-        <item quantity="few">acum %d zile</item>
-        <item quantity="other">acum %d zile</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favorită</item>
         <item quantity="few">%s favorite</item>
@@ -1246,7 +1275,6 @@
     <string name="init_low_disk_space">Nu mai este suficient spaţiu de stocare disponibil</string>
     <string name="init_confirm_debug">c:geo funcţionează acum în mod \"depanare\"!</string>
     <string name="list_confirm_debug_message">Modul \"depanare\" poate cauza instabilitate. Vrei să revii la modul normal de funcţionare?</string>
-    <string name="err_select_logimage_upload_size">Imaginea este prea mare, te rog alege o rezoluţie mai mică.</string>
     <string name="err_logimage_caption_required">Trebuie introdusă o scurtă descriere pentru această imagine</string>
     <!-- permission handling -->
     <!-- colors -->
@@ -1262,6 +1290,7 @@
     <!-- ReceiveMapFileActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
+    <string name="map_trail_show">Arată traseu</string>
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
