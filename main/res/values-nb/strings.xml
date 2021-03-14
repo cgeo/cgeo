@@ -1694,7 +1694,7 @@
     <string name="preference_colorpicker_select_opaqueness">Velg gjennomsiktighet</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Skriv inn en verdi mellom %1$d og %2$d</string>
+    <string name="number_input_title">Skriv inn en verdi mellom %1$s og %2$s</string>
     <string name="number_input_err_boundarymin">Verdien er for lav - settes til minimumsverdien</string>
     <string name="number_input_err_boundarymax">Verdien er for stor - settes til maksimalverdien</string>
     <string name="number_input_err_format">Feil tallformat</string>
