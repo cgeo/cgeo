@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">Zadajte kód trasovateľného predmetu. Napríklad „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
     <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
-    <string name="warn_invalid_mapfile">Vybraný súbor s mapou nie je platný súbor mapy mapsforge, prípadne používa nepodporovanú verziu.\n(Program c:geo v súčasnosti podporuje v3 až v5)\n\nOff-line mapy nie sú k dispozícii.</string>
     <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>
     <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
     <string name="warn_invalid_character">Znak musí byť PÍSMENO alebo ČÍSLICA</string>
@@ -259,7 +258,6 @@
     <string name="info_waypoint_coordinates_cleared">Súradnice vymazané.</string>
     <string name="info_log_type_changed">Typ logu bol zmenený!</string>
     <string name="info_select_logimage_cancelled">Výber obrázka alebo fotenie bolo zrušené.</string>
-    <string name="info_stored_image">Nový obrázok uložený do:</string>
     <string name="info_cache_saved">Skrýša bola uložená v zariadení</string>
     <string name="warn_calculator_state_save">Nezabudnite uložiť bod trasy, ak chcete zachovať stav kalkulačky.</string>
     <string name="feature_info_offline_counter">Máte nejaké kešky s logom uloženým offline, ktoré ešte asi neboli zalogované online. Pre vašu informáciu sa počet týchto logov zobrazuje ako \"+ x\" za počtom nájdených kešiek naspodku hlavnej stránky c:geo. \n\nOkrem toho sa tento počet logov \"x\" pridáva do šablóny \"POČET\", ktorú môžete používať v podpise logu. \n\nAk nechcete toto rozšírenie počítadla, môžete ho deaktivovať v ponuke \"Nastavenie\" &gt; \"Logovanie\" a(alebo použiť namiesto toho šablónu \"POČET (bez offline logov)\". \n\nAk chcete ľahko nájsť zostávajúce offline logy, prejdite do zoznamu \"História\" a filtrujte na \"S osobnými údajmi\" &gt; \"S offline logom\".</string>
@@ -659,9 +657,11 @@
     <string name="init_backup_settings_restore">Obnoviť nastavenia</string>
     <string name="settings_readingerror">Chyba pri čítaní nastavení</string>
     <string name="settings_restart">Aplikácia c:geo sa musí teraz reštartovať, aby sa použili načítané nastavenia</string>
+    <string name="settings_folder_changed">Nastavenie pre priečinok \"%1$s\" sa zmenilo na \"%2$s\".\n\nŤuknutím na \"%3$s\" zachováte aktuálne nastavenie pre tento priečinok.\n\nŤuknutím na \"%4$s\" nastavíte starý priečinok. V takom prípade sa objaví výzva, aby ste aplikácii c:geo znova udelili prístup k danému priečinku.</string>
     <string name="settings_info_offline_maps_title">Info o Offline mapách</string>
     <string name="settings_info_offline_maps">Aplikácia c:geo podporuje mapy na použitie offline. Mapy môžete získať od rozličných poskytovateľov, prípadne môžete dokonca vytvoriť vlastné mapy (z údajov OSM). Najprv je potrebné vybrať priečinok, do ktorého sa budú mapy offline ukladať.</string>
     <string name="settings_info_themes_title">Info o témach mapy</string>
+    <string name="settings_info_themes">Aplikácia c:geo podporuje vlastné t=my pre offline mapy. Tie sa dajú použiť na zmenu štýlu farieb mapy (napr. môžete mať nočnú mapu), prípadne na zvýraznenie určitých objektov, ako sú napríklad cyklotrasy alebo vrstevnice na mape.\n\nPráca s nezbalenými mapovými témami môže znížiť výkon otvárania prezerača. V takom prípade môže byť priečinok s témou voliteľne synchronizovaný do lokálneho súkromného priečinka aplikácie pre rýchlejší prístup (na úkor nejakého miesta v ukladacom priestore).</string>
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
     <string name="init_local_file_system">Lokálne systémové súbory</string>
     <string name="init_base_directory_description">Základný priečinok na verejné lokálne údaje</string>
@@ -812,11 +812,12 @@
     <string name="sendToCgeo_no_registration">c:geo sa nepodarilo stiahnuť skrýše. Registrácia send2cgeo expirovala. Zaregistrujte sa, prosím, v nastaveniach.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Zmena priečinka %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Priečinok %1$s je momentálne nastavený na \'%2$s\', obsahuje %3$s a %4$s a má celkovú veľkosť %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Môžete zvoliť predvolený priečinok \'%s\', prípadne vybrať používateľom určený priečinok.</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nerobiť nič</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopírovať všetok obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Premiestniť všetok obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Žiadny ďalší úkon</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Zvolili ste iný priečinok, než je práve uložené. Aktuálny priečinok obsahuje %1$s, %2$s a má celkovú veľkosť %3$s. Ako chcete pokračovať?\n\nVyberte priečinok a</string>
     <string name="contentstorage_folder_selection_aborted">Prerušenie výberu priečinka, priečinok je \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Priečinok nastavený na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Prerušenie výberu súboru</string>
@@ -845,8 +846,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s hotovo</string>
     <string name="folder_process_status_currentfile">Spracovávanie %1$s</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Synchronizácia obsahu %1$s do interného ukladacieho priestoru</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopíruje sa obsah %1$s do %2$s</string>
     <string name="folder_move_progressbar_title">Presúva sa obsah %1$s do %2$s</string>
@@ -1153,12 +1152,6 @@
     <string name="cc_hint_minutes">minúty</string>
     <string name="cc_hint_seconds">sekundy</string>
     <string name="cc_hint_fraction">zlomok</string>
-    <string name="lowercase">malé písmená</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Vyberte priečinok</string>
-    <string name="simple_dir_chooser_current_path">Cesta:</string>
-    <string name="simple_dir_chooser_invalid_path">Neplatná cesta</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Načítavanie skrýš z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Načítavanie bodov trasy z %1$s</string>
@@ -1246,6 +1239,10 @@
     <string name="map_showwp_parking">Parkoviská</string>
     <string name="map_showwp_visited">Navštívené body trasy</string>
     <string name="map_show_track">Zobraziť GPX stopu/trasu</string>
+    <string name="init_renderthemefolder_synctolocal">Synchronizovať témy do súkromného priečinka aplikácie</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Táto možnosť môže vylepšiť výkon otvárania prezerača na úkor nejakého obsadeného miesta v ukladacom priestore.</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnúť synchronizáciu priečinka s témou</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Tým natrvalo synchronizujete obsah priečinka Map Theme do súkromného priečinka aplikácie pre rýchlejší prístup k súborom.\n\nVáš priečinok s mapovou témou \'%1$s\' má momentálne %2$s, %3$s a veľkosť %4$s.\n\nChcete zapnúť synchronizáciu priečinka?</string>
     <string name="init_hidewp">Skryť body trasy</string>
     <string name="init_summary_hidewp_original">Skryť pôvodné body trasy na mape</string>
     <string name="init_summary_hidewp_parking">Skryť parkoviská na mape</string>
@@ -1713,12 +1710,6 @@
     <string name="tts_oclock">%s hodín</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Skopírované do schránky</string>
-    <plurals name="days_ago">
-        <item quantity="one">včera</item>
-        <item quantity="few">pred %d dňami</item>
-        <item quantity="many">pred %d dňami</item>
-        <item quantity="other">pred %d dňami</item>
-    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s obľúbené</item>
         <item quantity="few">%s obľúbené</item>
@@ -1796,7 +1787,6 @@
     <string name="init_low_disk_space_message">V priečinku s údajmi o keškách je málo miesta. Môže dôjsť k nesprávnemu fungovaniu aplikácie c:geo. Uvoľnite nejaké miesto.</string>
     <string name="init_confirm_debug">c:geo je spustené v režime ladenia!</string>
     <string name="list_confirm_debug_message">V režime ladenia dochádza k nestabilnému správaniu aplikácie! Chcete deaktivovať režim ladenia?</string>
-    <string name="err_select_logimage_upload_size">Obrázok je príliš veľký, vyberte menší obrázok.</string>
     <string name="err_logimage_caption_required">Obrázok musí mať popis</string>
     <string name="waypoint_latitude_null">S/J --° --.---</string>
     <string name="waypoint_longitude_null">V/Z --° --.---</string>
@@ -1807,18 +1797,12 @@
     <string name="storage_permission_request_explanation">c:geo zapisuje údaje do ukladacieho priestoru v telefóne alebo na karte SD pri ukladaní kešiek pre použitie off-line. Okrem toho c:geo používa ukladací priestor telefónu na import a export súborov a čítanie máp off-line. Nedá sa používať bez tohto povolenia.</string>
     <string name="storage_permission_needed">Táto funkcia nie je možná bez povolenia k ukladaciemu priestoru.</string>
     <!-- colors -->
-    <string name="color_blue">Modrá</string>
-    <string name="color_green">Zelená</string>
-    <string name="color_orange">Oranžová</string>
-    <string name="color_red">Červená</string>
-    <string name="color_turquoise">Tyrkysová</string>
-    <string name="color_black">Čierna</string>
     <string name="preference_colorpicker_select_color_scheme">Vyberte farebnú schému</string>
     <string name="preference_colorpicker_select_color">Vyberte farbu</string>
     <string name="preference_colorpicker_select_opaqueness">Vyberte priehľadnosť</string>
     <string name="reset_to_default">Predvolené</string>
     <!-- number input -->
-    <string name="number_input_title">Zadajte hodnotu od %1$s do %2$s</string>
+    <string name="number_input_title">Zadajte hodnotu od %1$d do %2$d</string>
     <string name="number_input_err_boundarymin">Zadaná hodnota je príliš malá – obnovené na min. hodnotu</string>
     <string name="number_input_err_boundarymax">Zadaná hodnota je príliš veľká – obnovené na max. hodnotu.</string>
     <string name="number_input_err_format">Neplatný formát čísla</string>
