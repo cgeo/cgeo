@@ -241,7 +241,6 @@
     <string name="warn_search_help_tb">Code des Trackables eingeben, z. B. „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Bitte Text einfügen.</string>
     <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
-    <string name="warn_invalid_mapfile">Die ausgewählte Kartendatei ist keine gültige Mapsforge Kartendatei oder verwendet eine nicht unterstützte Version.\n(c:geo unterstützt derzeit nur v3 bis v5)\n\nOffline-Karten sind nicht verfügbar.</string>
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_invalid_character">Das Zeichen muss ein BUCHSTABE oder eine ZIFFER sein</string>
@@ -259,7 +258,6 @@
     <string name="info_waypoint_coordinates_cleared">Koordinaten gelöscht.</string>
     <string name="info_log_type_changed">Logtyp wurde verändert!</string>
     <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
-    <string name="info_stored_image">Neues Foto gespeichert nach:</string>
     <string name="info_cache_saved">Der Cache wurde gespeichert</string>
     <string name="warn_calculator_state_save">Vergiss nicht den Wegpunkt zu speichern um den Stand der Berechnung zu behalten.</string>
     <string name="feature_info_offline_counter">Du hast einige Caches mit Offline-Logs, die evtl. noch nicht hochgeladen wurden. Daher wird als Erinnerung ein Zähler (z.B. \"+ 1\") auf dem Hauptbildschirm angezeigt.\n\nAußerdem werden diese \"x\" Logs zur \"NUMMER\"-Vorlage addiert, die du evtl. in deiner Signatur nutzt.\n\nFalls dir der Zähler nicht gefällt, kannst du ihn unter \"Einstellungen\" &gt; \"Loggen\" deaktivieren und/oder stattdessen die \"NUMMER (ohne Offline-Logs)\"-Vorlage nutzen.\n\nUm ausstehende Logs schnell und einfach zu finden, öffne die Liste \"Verlauf\" und filtere nach \"Mit eigenen Informationen\" &gt; \"Mit Offline-Log\".</string>
@@ -814,7 +812,6 @@
     <string name="contentstorage_selectfolder_dialog_title">Ordner ändern %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">Der Ordner %1$s ist derzeit auf \'%2$s\' gesetzt, enthält %3$s und %4$s und hat eine Gesamtgröße von %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Du kannst den Standardordner \'%s\' verwenden oder einen benutzerdefinierten Ordner wählen.</string>
-    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Nichts tun</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kompletten Inhalt kopieren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Kompletten Inhalt verschieben</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Keine weitere Aktion</string>
@@ -847,8 +844,6 @@
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fertig</string>
     <string name="folder_process_status_currentfile">Prozess %1$s</string>
-    <!-- FolderUtils: synchronize -->
-    <string name="folder_synchronize_to_internal_progressbar_title">Inhalt von %1$s mit dem internen Speicher synchronisieren</string>
     <!-- FolderUtils: copy/move -->
     <string name="folder_copy_progressbar_title">Kopiere Inhalt von %1$s nach %2$s</string>
     <string name="folder_move_progressbar_title">Verschiebe Inhalt von %1$s nach %2$s</string>
@@ -1138,12 +1133,6 @@
     <string name="cc_hint_minutes">Minuten</string>
     <string name="cc_hint_seconds">Sekunden</string>
     <string name="cc_hint_fraction">Bruchteil</string>
-    <string name="lowercase">Kleinbuchstaben</string>
-    <!-- editor dialog -->
-    <!-- simple dir / file chooser -->
-    <string name="simple_dir_chooser_title">Ordner wählen</string>
-    <string name="simple_dir_chooser_current_path">Pfad:</string>
-    <string name="simple_dir_chooser_invalid_path">Ungültiger Pfad</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Lade Caches aus GPX-Datei %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Lade Wegpunkte aus GPX-Datei %1$s</string>
@@ -1691,7 +1680,7 @@
     <!-- various -->
     <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
     <plurals name="days_ago">
-        <item quantity="one">gestern</item>
+        <item quantity="one">vor %d Tag</item>
         <item quantity="other">vor %d Tagen</item>
     </plurals>
     <plurals name="favorite_points">
@@ -1757,7 +1746,6 @@
     <string name="init_low_disk_space_message">Der Geocache-Datenordner hat wenig Speicherplatz. Dies kann Fehlfunktionen in c:geo verursachen. Bitte Speicherplatz freimachen.</string>
     <string name="init_confirm_debug">c:geo arbeitet im Debug-Modus!</string>
     <string name="list_confirm_debug_message">Der Debug-Modus verursacht Instabilität! Debug-Modus beenden?</string>
-    <string name="err_select_logimage_upload_size">Das Bild ist zu groß, bitte wähle eine kleinere Größe.</string>
     <string name="err_logimage_caption_required">Ein Bildtitel ist erforderlich</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
@@ -1768,18 +1756,12 @@
     <string name="storage_permission_request_explanation">c:geo wird Daten in Telefonspeicher oder SD-Karte schreiben, sobald du Geocaches für Offline-Nutzung speicherst. Außerdem wird c:geo deinen Telefonspeicher für den Import und Export von Dateien und das Lesen von Offline-Karten verwenden. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
     <string name="storage_permission_needed">Diese Funktion ist ohne Speicherberechtigung nicht möglich.</string>
     <!-- colors -->
-    <string name="color_blue">Blau</string>
-    <string name="color_green">Grün</string>
-    <string name="color_orange">Orange</string>
-    <string name="color_red">Rot</string>
-    <string name="color_turquoise">Türkis</string>
-    <string name="color_black">Schwarz</string>
     <string name="preference_colorpicker_select_color_scheme">Farbschema auswählen</string>
     <string name="preference_colorpicker_select_color">Farbe auswählen</string>
     <string name="preference_colorpicker_select_opaqueness">Deckkraft auswählen</string>
     <string name="reset_to_default">Standardwert</string>
     <!-- number input -->
-    <string name="number_input_title">Gib einen Wert zwischen %1$s und %2$s ein</string>
+    <string name="number_input_title">Gib einen Wert zwischen %1$d und %2$d ein</string>
     <string name="number_input_err_boundarymin">Der eingegebene Wert ist zu klein - auf den minimalen Wert zurückgesetzt</string>
     <string name="number_input_err_boundarymax">Der eingegebene Wert ist zu groß - auf den maximalen Wert zurückgesetzt</string>
     <string name="number_input_err_format">Ungültiges Zahlenformat</string>
