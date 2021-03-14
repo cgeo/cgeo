@@ -579,6 +579,10 @@
     <string name="err_auth_geokrety_bad_password">Ang iyong username/password ay mukhang hindi wasto.</string>
     <string name="err_auth_geokrety_unknown">Ang %1$s ay bumalik sa: %2$s.</string>
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">%1$d cache</item>
+        <item quantity="other">mga %1$d cache</item>
+    </plurals>
     <!-- days remaining -->
     <string name="last_day_available">huling araw available</string>
     <string name="cache_offline_refresh">I-refresh</string>
@@ -800,7 +804,7 @@
     <string name="map_live_enable">Paganahin ang live</string>
     <string name="map_live_disable">Huwag paganahin ang live</string>
     <string name="map_as_list">Ipakita bilang listahan</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Pumili ng aytem</string>
+    <string name="map_select_multiple_items">Pumili ng aytem</string>
     <!-- search -->
     <string name="search_bar_desc">Ang mga cache na (geo na code, Keyboard), Mga trackable (TB na code)</string>
     <string name="search_coordinates">Ang mga koordinado</string>
