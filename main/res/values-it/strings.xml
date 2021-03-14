@@ -772,7 +772,7 @@
     <string name="feature_favorite">Aggiunta del cache ai preferiti</string>
     <string name="feature_voting">Votazione per i cache</string>
     <string name="init_maplines_title">Personalizzazione delle linee della mappa</string>
-    <string name="init_map_other" comment="init_map_other&#10;Heading of chapter for various other map settings in c:geo Menu - Settings - Map">Altro</string>
+    <string name="init_map_other">Altro</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usa threads multipli (multi processore o multi core) per disegnare le mappe di OpenStreetMap</string>
     <string name="localstorage_migrate_title">Migrazione dei file locali</string>
@@ -1233,7 +1233,7 @@
     <string name="map_live_enable">Attiva live</string>
     <string name="map_live_disable">Disattiva live</string>
     <string name="map_as_list">Mostra lista dei cache</string>
-    <string name="map_select_multiple_items" comment="map_select_multiple_items&#10;This is shown as a heading for a dialog when you tap on the map at a position where several caches/waypoints overlap, to allow selection of the desired cache/waypoint">Seleziona elemento</string>
+    <string name="map_select_multiple_items">Seleziona elemento</string>
     <string name="map_routing">Percorso (Attualmente: %s)</string>
     <string name="map_routing_brouter">Routing è disponibile solo se <a href="">BRouter</a> è installato</string>
     <string name="map_gm_autorotation">Rotazione automatica mappa</string>
