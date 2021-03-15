@@ -290,126 +290,6 @@
     </issue>
 
     <issue
-        id="StringFormatInvalid"
-        severity="Error"
-        message="Format string &apos;`cache_personal_note_storewaypoints_success_limited`&apos; is not a valid format string so it should not be passed to `String.format`"
-        category="Correctness:Messages"
-        priority="9"
-        summary="Invalid format string"
-        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
-        errorLine1="                showShortToast(getString(R.string.cache_personal_note_storewaypoints_success_limited, maxSize));"
-        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/cgeo/geocaching/CacheDetailActivity.java"
-            line="2645"
-            column="32"/>
-        <location
-            file="res/values-zh-rTW/strings.xml"
-            line="872"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="StringFormatInvalid"
-        severity="Error"
-        message="Format string &apos;`waypoint_coordinates_has_been_modified_on_website`&apos; is not a valid format string so it should not be passed to `String.format`"
-        category="Correctness:Messages"
-        priority="9"
-        summary="Invalid format string"
-        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
-        errorLine1="                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_has_been_modified_on_website, coords));"
-        errorLine2="                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/cgeo/geocaching/EditWaypointActivity.java"
-            line="611"
-            column="56"/>
-        <location
-            file="res/values-zh-rTW/strings.xml"
-            line="1101"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="StringFormatInvalid"
-        severity="Error"
-        message="Format string &apos;`log_image_scale_option_entry_noimage`&apos; is not a valid format string so it should not be passed to `String.format`"
-        category="Correctness:Messages"
-        priority="9"
-        summary="Invalid format string"
-        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
-        errorLine1="                    getResources().getString(R.string.log_image_scale_option_entry_noimage, scaleSize);"
-        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/cgeo/geocaching/ImageSelectActivity.java"
-            line="228"
-            column="21"/>
-        <location
-            file="res/values-zh-rTW/strings.xml"
-            line="157"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="StringFormatInvalid"
-        severity="Error"
-        message="Format string &apos;`internal_cache_default_name`&apos; is not a valid format string so it should not be passed to `String.format`"
-        category="Correctness:Messages"
-        priority="9"
-        summary="Invalid format string"
-        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
-        errorLine1="            cache.setName(name == null ? String.format(context.getString(R.string.internal_cache_default_name), id) : name);"
-        errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/cgeo/geocaching/connector/internal/InternalConnector.java"
-            line="188"
-            column="42"/>
-        <location
-            file="res/values-zh-rTW/strings.xml"
-            line="1026"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="StringFormatInvalid"
-        severity="Error"
-        message="Format string &apos;`auth_explain_long`&apos; is not a valid format string so it should not be passed to `String.format`"
-        category="Correctness:Messages"
-        priority="9"
-        summary="Invalid format string"
-        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
-        errorLine1="        return res.getString(R.string.auth_explain_long, getAuthTitle());"
-        errorLine2="               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/cgeo/geocaching/activity/OAuthAuthorizationActivity.java"
-            line="403"
-            column="16"/>
-        <location
-            file="res/values-zh-rTW/strings.xml"
-            line="820"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="StringFormatInvalid"
-        severity="Error"
-        message="Format string &apos;`auth_token_explain_long`&apos; is not a valid format string so it should not be passed to `String.format`"
-        category="Correctness:Messages"
-        priority="9"
-        summary="Invalid format string"
-        explanation="If a string contains a &apos;%&apos; character, then the string may be a formatting string which will be passed to `String.format` from Java code to replace each &apos;%&apos; occurrence with specific values.&#xA;&#xA;This lint warning checks for two related problems:&#xA;(1) Formatting strings that are invalid, meaning that `String.format` will throw exceptions at runtime when attempting to use the format string.&#xA;(2) Strings containing &apos;%&apos; that are not formatting strings getting passed to a `String.format` call. In this case the &apos;%&apos; will need to be escaped as &apos;%%&apos;.&#xA;&#xA;NOTE: Not all Strings which look like formatting strings are intended for use by `String.format`; for example, they may contain date formats intended for `android.text.format.Time#format()`. Lint cannot always figure out that a String is a date format, so you may get false warnings in those scenarios. See the suppress help topic for information on how to suppress errors in that case."
-        errorLine1="        return res.getString(R.string.auth_token_explain_long, getAuthTitle());"
-        errorLine2="               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/cgeo/geocaching/activity/TokenAuthorizationActivity.java"
-            line="277"
-            column="16"/>
-        <location
-            file="res/values-zh-rTW/strings.xml"
-            line="824"
-            column="5"/>
-    </issue>
-
-    <issue
         id="StringFormatMatches"
         severity="Error"
         message="Suspicious argument type for formatting argument #1 in `number_input_title`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, &apos;o&apos; or `x`?)"
@@ -425,7 +305,7 @@
             column="97"/>
         <location
             file="res/values-ca/strings.xml"
-            line="1776"
+            line="1754"
             column="5"/>
     </issue>
 
@@ -445,7 +325,7 @@
             column="97"/>
         <location
             file="res/values-cs/strings.xml"
-            line="1821"
+            line="1797"
             column="5"/>
     </issue>
 
@@ -465,7 +345,7 @@
             column="97"/>
         <location
             file="res/values-da/strings.xml"
-            line="1622"
+            line="1604"
             column="5"/>
     </issue>
 
@@ -485,7 +365,7 @@
             column="97"/>
         <location
             file="res/values-de/strings.xml"
-            line="1782"
+            line="1764"
             column="5"/>
     </issue>
 
@@ -505,7 +385,7 @@
             column="97"/>
         <location
             file="res/values-el/strings.xml"
-            line="1781"
+            line="1760"
             column="5"/>
     </issue>
 
@@ -525,7 +405,7 @@
             column="97"/>
         <location
             file="res/values-fi/strings.xml"
-            line="1773"
+            line="1751"
             column="5"/>
     </issue>
 
@@ -545,7 +425,7 @@
             column="97"/>
         <location
             file="res/values-fr/strings.xml"
-            line="1719"
+            line="1699"
             column="5"/>
     </issue>
 
@@ -565,7 +445,7 @@
             column="97"/>
         <location
             file="res/values-hu/strings.xml"
-            line="1356"
+            line="1351"
             column="5"/>
     </issue>
 
@@ -585,7 +465,7 @@
             column="97"/>
         <location
             file="res/values-it/strings.xml"
-            line="1772"
+            line="1750"
             column="5"/>
     </issue>
 
@@ -605,7 +485,7 @@
             column="97"/>
         <location
             file="res/values-ja/strings.xml"
-            line="1747"
+            line="1733"
             column="5"/>
     </issue>
 
@@ -625,7 +505,7 @@
             column="97"/>
         <location
             file="res/values-ko/strings.xml"
-            line="1529"
+            line="1513"
             column="5"/>
     </issue>
 
@@ -645,7 +525,7 @@
             column="97"/>
         <location
             file="res/values-lb/strings.xml"
-            line="677"
+            line="663"
             column="5"/>
     </issue>
 
@@ -665,7 +545,7 @@
             column="97"/>
         <location
             file="res/values-lt/strings.xml"
-            line="1647"
+            line="1627"
             column="5"/>
     </issue>
 
@@ -685,7 +565,7 @@
             column="97"/>
         <location
             file="res/values-nb/strings.xml"
-            line="1717"
+            line="1697"
             column="5"/>
     </issue>
 
@@ -705,7 +585,7 @@
             column="97"/>
         <location
             file="res/values-nl/strings.xml"
-            line="1774"
+            line="1756"
             column="5"/>
     </issue>
 
@@ -725,7 +605,7 @@
             column="97"/>
         <location
             file="res/values-pl/strings.xml"
-            line="1822"
+            line="1806"
             column="5"/>
     </issue>
 
@@ -745,7 +625,7 @@
             column="97"/>
         <location
             file="res/values-pt/strings.xml"
-            line="1774"
+            line="1759"
             column="5"/>
     </issue>
 
@@ -765,7 +645,7 @@
             column="97"/>
         <location
             file="res/values-ru/strings.xml"
-            line="1731"
+            line="1741"
             column="5"/>
     </issue>
 
@@ -785,7 +665,7 @@
             column="97"/>
         <location
             file="res/values-sk/strings.xml"
-            line="1821"
+            line="1805"
             column="5"/>
     </issue>
 
@@ -805,7 +685,7 @@
             column="97"/>
         <location
             file="res/values-sv/strings.xml"
-            line="1717"
+            line="1695"
             column="5"/>
     </issue>
 
@@ -825,7 +705,7 @@
             column="97"/>
         <location
             file="res/values-tr/strings.xml"
-            line="1774"
+            line="1752"
             column="5"/>
     </issue>
 
@@ -845,7 +725,7 @@
             column="97"/>
         <location
             file="res/values-uk/strings.xml"
-            line="1549"
+            line="1535"
             column="5"/>
     </issue>
 
@@ -865,7 +745,7 @@
             column="97"/>
         <location
             file="res/values-zh-rTW/strings.xml"
-            line="1518"
+            line="1496"
             column="5"/>
     </issue>
 
@@ -885,7 +765,7 @@
             column="97"/>
         <location
             file="res/values/strings.xml"
-            line="1972"
+            line="1957"
             column="5"/>
     </issue>
 
@@ -905,7 +785,7 @@
             column="102"/>
         <location
             file="res/values-ca/strings.xml"
-            line="1776"
+            line="1754"
             column="5"/>
     </issue>
 
@@ -925,7 +805,7 @@
             column="102"/>
         <location
             file="res/values-cs/strings.xml"
-            line="1821"
+            line="1797"
             column="5"/>
     </issue>
 
@@ -945,7 +825,7 @@
             column="102"/>
         <location
             file="res/values-da/strings.xml"
-            line="1622"
+            line="1604"
             column="5"/>
     </issue>
 
@@ -965,7 +845,7 @@
             column="102"/>
         <location
             file="res/values-de/strings.xml"
-            line="1782"
+            line="1764"
             column="5"/>
     </issue>
 
@@ -985,7 +865,7 @@
             column="102"/>
         <location
             file="res/values-el/strings.xml"
-            line="1781"
+            line="1760"
             column="5"/>
     </issue>
 
@@ -1005,7 +885,7 @@
             column="102"/>
         <location
             file="res/values-fi/strings.xml"
-            line="1773"
+            line="1751"
             column="5"/>
     </issue>
 
@@ -1025,7 +905,7 @@
             column="102"/>
         <location
             file="res/values-fr/strings.xml"
-            line="1719"
+            line="1699"
             column="5"/>
     </issue>
 
@@ -1045,7 +925,7 @@
             column="102"/>
         <location
             file="res/values-hu/strings.xml"
-            line="1356"
+            line="1351"
             column="5"/>
     </issue>
 
@@ -1065,7 +945,7 @@
             column="102"/>
         <location
             file="res/values-it/strings.xml"
-            line="1772"
+            line="1750"
             column="5"/>
     </issue>
 
@@ -1085,7 +965,7 @@
             column="102"/>
         <location
             file="res/values-ja/strings.xml"
-            line="1747"
+            line="1733"
             column="5"/>
     </issue>
 
@@ -1105,7 +985,7 @@
             column="102"/>
         <location
             file="res/values-ko/strings.xml"
-            line="1529"
+            line="1513"
             column="5"/>
     </issue>
 
@@ -1125,7 +1005,7 @@
             column="102"/>
         <location
             file="res/values-lb/strings.xml"
-            line="677"
+            line="663"
             column="5"/>
     </issue>
 
@@ -1145,7 +1025,7 @@
             column="102"/>
         <location
             file="res/values-lt/strings.xml"
-            line="1647"
+            line="1627"
             column="5"/>
     </issue>
 
@@ -1165,7 +1045,7 @@
             column="102"/>
         <location
             file="res/values-nb/strings.xml"
-            line="1717"
+            line="1697"
             column="5"/>
     </issue>
 
@@ -1185,7 +1065,7 @@
             column="102"/>
         <location
             file="res/values-nl/strings.xml"
-            line="1774"
+            line="1756"
             column="5"/>
     </issue>
 
@@ -1205,7 +1085,7 @@
             column="102"/>
         <location
             file="res/values-pl/strings.xml"
-            line="1822"
+            line="1806"
             column="5"/>
     </issue>
 
@@ -1225,7 +1105,7 @@
             column="102"/>
         <location
             file="res/values-pt/strings.xml"
-            line="1774"
+            line="1759"
             column="5"/>
     </issue>
 
@@ -1245,7 +1125,7 @@
             column="102"/>
         <location
             file="res/values-ru/strings.xml"
-            line="1731"
+            line="1741"
             column="5"/>
     </issue>
 
@@ -1265,7 +1145,7 @@
             column="102"/>
         <location
             file="res/values-sk/strings.xml"
-            line="1821"
+            line="1805"
             column="5"/>
     </issue>
 
@@ -1285,7 +1165,7 @@
             column="102"/>
         <location
             file="res/values-sv/strings.xml"
-            line="1717"
+            line="1695"
             column="5"/>
     </issue>
 
@@ -1305,7 +1185,7 @@
             column="102"/>
         <location
             file="res/values-tr/strings.xml"
-            line="1774"
+            line="1752"
             column="5"/>
     </issue>
 
@@ -1325,7 +1205,7 @@
             column="102"/>
         <location
             file="res/values-uk/strings.xml"
-            line="1549"
+            line="1535"
             column="5"/>
     </issue>
 
@@ -1345,7 +1225,7 @@
             column="102"/>
         <location
             file="res/values-zh-rTW/strings.xml"
-            line="1518"
+            line="1496"
             column="5"/>
     </issue>
 
@@ -1365,26 +1245,8 @@
             column="102"/>
         <location
             file="res/values/strings.xml"
-            line="1972"
+            line="1957"
             column="5"/>
-    </issue>
-
-    <issue
-        id="ImpliedQuantity"
-        severity="Error"
-        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
-        category="Correctness:Messages"
-        priority="5"
-        summary="Implied Quantities"
-        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
-        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
-        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
-        errorLine1="        &lt;item quantity=&quot;one&quot;>í gær&lt;/item>"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/values-is/strings.xml"
-            line="714"
-            column="9"/>
     </issue>
 
     <issue
@@ -1401,7 +1263,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-lv/strings.xml"
-            line="738"
+            line="736"
             column="9"/>
     </issue>
 
@@ -1419,7 +1281,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-lv/strings.xml"
-            line="739"
+            line="737"
             column="9"/>
     </issue>
 
@@ -1437,7 +1299,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-lt/strings.xml"
-            line="777"
+            line="775"
             column="9"/>
     </issue>
 
@@ -1455,7 +1317,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-lt/strings.xml"
-            line="784"
+            line="782"
             column="9"/>
     </issue>
 
@@ -1473,7 +1335,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-lv/strings.xml"
-            line="805"
+            line="803"
             column="9"/>
     </issue>
 
@@ -1491,25 +1353,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-lv/strings.xml"
-            line="1151"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="ImpliedQuantity"
-        severity="Error"
-        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (0~3, 5, 7, 8, 10~13, 15, 17, 18, 20, 21, 100, 1000, 10000, 100000, 1000000, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
-        category="Correctness:Messages"
-        priority="5"
-        summary="Implied Quantities"
-        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
-        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
-        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
-        errorLine1="        &lt;item quantity=&quot;one&quot;>kahapon&lt;/item>"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/values-tl/strings.xml"
-            line="1180"
+            line="1145"
             column="9"/>
     </issue>
 
@@ -1527,44 +1371,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-lt/strings.xml"
-            line="1243"
+            line="1236"
             column="9"/>
     </issue>
-
-    <issue
-        id="ImpliedQuantity"
-        severity="Error"
-        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
-        category="Correctness:Messages"
-        priority="5"
-        summary="Implied Quantities"
-        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
-        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
-        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
-        errorLine1="        &lt;item quantity=&quot;one&quot;>vakar&lt;/item>"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/values-lv/strings.xml"
-            line="1430"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="ImpliedQuantity"
-        severity="Error"
-        message="The quantity `&apos;one&apos;` matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as `%d`). This is usually an internationalization error. See full issue explanation for more."
-        category="Correctness:Messages"
-        priority="5"
-        summary="Implied Quantities"
-        explanation="Plural strings should generally include a `%s` or `%d` formatting argument. In locales like English, the `one` quantity only applies to a single value, 1, but that&apos;s not true everywhere. For example, in Slovene, the `one` quantity will apply to 1, 101, 201, 301, and so on. Similarly, there are locales where multiple values match the `zero` and `two` quantities.&#xA;&#xA;In these locales, it is usually an error to have a message which does not include a formatting argument (such as &apos;%d&apos;), since it will not be clear from the grammar what quantity the quantity string is describing."
-        url="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
-        urls="https://developer.android.com/guide/topics/resources/string-resource.html#Plurals"
-        errorLine1="        &lt;item quantity=&quot;one&quot;>ontem&lt;/item>"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/values-pt/strings.xml"
-            line="1686"
-            column="9"/>
-    </issue>
-
 </issues>
