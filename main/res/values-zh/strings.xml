@@ -54,6 +54,10 @@
     <string name="wp_waypoint">引用点：</string>
     <string name="wp_original">原始坐标</string>
     <!-- waypoints short names for new waypoints -->
+    <string name="wpnew_stage">阶段</string>
+    <string name="wpnew_pkg">停车场</string>
+    <string name="wpnew_waypoint">标记</string>
+    <string name="wpnew_original">原始坐标</string>
     <!-- logs -->
     <string name="log_found">发现它</string>
     <string name="log_dnf">没有发现</string>
@@ -373,8 +377,12 @@
     <string name="caches_clear_offlinelogs">清除离线服务器</string>
     <string name="caches_clear_offlinelogs_message">您想要清除离线日志吗？</string>
     <string name="caches_clear_offlinelogs_progress">清除离线服务器</string>
+    <string name="caches_set_cache_icon">设置藏点图标</string>
+    <string name="caches_reset_cache_icons_title">重置藏点图标</string>
+    <string name="caches_reset_cache_icons">您想要重置所有选定藏点的图标吗？</string>
     <string name="caches_make_list_unique">使列表唯一</string>
     <string name="caches_set_listmarker">设置列表标记</string>
+    <string name="onetime_missing_unicode_info">您的 Android 版本不支持自动检测支持的图标 - 某些字符可能不存在</string>
     <!-- caches lists -->
     <string name="menu_lists">管理列表</string>
     <string name="list_menu_create">新的列表</string>
@@ -664,10 +672,18 @@
     <string name="init_routecolor_summary">选择单个路线的颜色和不透明度。单个路线是由您在航点 / 藏点上长按所选择的航点和藏点集和。(您需要先启用长按功能，请查看地图设置。)</string>
     <string name="init_routewidth">单个路线线条宽度</string>
     <string name="init_routewidth_summary">选择单个路线的宽度</string>
+    <string name="init_trackcolor">GPX 航迹/航线线条颜色</string>
+    <string name="init_trackcolor_summary">选择航迹/航线的颜色和不透明度。航线/航线由一些航点组成，可以通过加载 GPX 航迹/航线文件得到。</string>
+    <string name="init_trackwidth">GPX 航迹/航线的线条宽度</string>
+    <string name="init_trackwidth_summary">选择 GPX 航迹/航线线条的宽度</string>
     <string name="init_circlecolor">圆环线颜色</string>
     <string name="init_circlecolor_summary">选择圆环线的颜色和不透明度。圆环是被用作藏点或实际航点周围最小半径的视觉表现形式。圆环里不允许其它藏点或实际航点存在。(适用于 geocaching.com)</string>
     <string name="init_circlefillcolor">圆环填充颜色</string>
     <string name="init_circlefillcolor_summary">选择要填充的圆环的颜色和不透明度</string>
+    <string name="init_accuracycirclecolor">精度圆环线条的颜色</string>
+    <string name="init_accuracycirclecolor_summary">选择精度圆环线条的颜色和不透明度。精度圆环是定位信号精度的视觉表现形式。</string>
+    <string name="init_accuracycirclefillcolor">精度圆环填充颜色</string>
+    <string name="init_accuracycirclefillcolor_summary">选择填充精度圆环的颜色和不透明度</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
     <string name="init_trackautovisit">访问可追踪物</string>
     <string name="init_summary_trackautovisit">默认情况下将可追踪物设置为 “已访问”</string>
@@ -733,7 +749,17 @@
     <string name="feature_online_logging">在线记录日志</string>
     <string name="feature_log_images">将图像添加到日志</string>
     <string name="feature_watch_list">关注列表</string>
+    <string name="feature_own_coordinates">存储修改过的坐标</string>
+    <string name="feature_search_keyword">按关键字搜索</string>
+    <string name="feature_search_live_map">实时地图</string>
+    <string name="feature_search_center">按位置搜索</string>
+    <string name="feature_search_geocode">通过地理编码搜索</string>
+    <string name="feature_search_owner">按所有者搜索</string>
+    <string name="feature_search_finder">按寻找者搜索</string>
+    <string name="feature_favorite">添加藏点到收藏夹</string>
+    <string name="feature_voting">给藏点投票</string>
     <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">接近时通知</string>
     <!-- map sources -->
     <!-- auth generic -->
     <string name="auth_check">检查身份验证</string>
@@ -749,6 +775,7 @@
     <!-- days remaining -->
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
     <string name="cache_found_last_30_days">最近 30 天下载</string>
+    <string name="cache_geocode">地理编码</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
     <!-- file list base -->
@@ -767,6 +794,7 @@
     <!-- device orientation types -->
     <!-- license -->
     <!-- helpers -->
+    <string name="helper_barcode_description">有 Greasemonkey 脚本和网站可以将地理编码显示为条形码。通过这个应用，c:geo 可以直接从您的电脑屏幕上读取这些地理编码。</string>
     <!-- export -->
     <string name="export_modifiedcoords">更改后的坐标</string>
     <string name="export_modifiedcoords_uploading">%1$d已上传</string>
@@ -783,6 +811,8 @@
     <string name="confirm_report_problem_title">上报问题</string>
     <string name="confirm_report_problem_message">您要报告 \'%s\'。确定吗？</string>
     <!-- Geokrety -->
+    <string name="trackable_title_log_without_geocode">未设置地理编码</string>
+    <string name="trackable_log_without_geocode">你将要发送一个没有地理编码的日志。我们鼓励你设置一个。你想现在添加吗？</string>
     <string name="settings_map_direction">显示指引</string>
     <string name="settings_summary_map_direction">显示一条到导航目标的指引线</string>
     <plurals name="command_copy_caches_result">
