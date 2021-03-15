@@ -648,6 +648,7 @@
     <string name="init_backup_settings_restore">Restaurer les paramètres</string>
     <string name="settings_readingerror">Erreur lors de la lecture des paramètres</string>
     <string name="settings_restart">c:geo doit être redémarré maintenant pour prendre en compte les paramètres chargés</string>
+    <string name="settings_folder_changed">Le paramétrage du dossier \"%1$s\" a été modifié pour \"%2$s\".\n\nAppuyez sur \"%3$s\" pour conserver le paramétrage actuel .\n\nAppuyez sur \"%4$s\" pour paramétrer l\'ancien dossier. Dans ce cas, vous devrez à nouveau autoriser c:geo à accéder au dossier.</string>
     <string name="settings_info_offline_maps_title">Informations sur les cartes hors-ligne</string>
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
@@ -789,6 +790,7 @@
     <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'enregistrement sur send2cgeo a expiré. Merci de vous réenregistrer en allant dans les Paramètres.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Modifier le dossier %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Le dossier %1$s est actuellement paramétré à \'%2$s\', contient %3$s et %4$s et fait une taille totale de %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copier tout le contenu</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Déplacer tout le contenu</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Aucune autre action</string>
@@ -1619,6 +1621,10 @@
     <string name="tts_oclock">%s heures</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
+    <plurals name="days_ago">
+        <item quantity="one">il y a %d jour</item>
+        <item quantity="other">il y a %d jours</item>
+    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favori</item>
         <item quantity="other">%s favoris</item>
