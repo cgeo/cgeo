@@ -1602,7 +1602,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em \'geocaching.com\' fizeram com que o mapa da vista em tempo real não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a usar uma versão antiga do Android. Esta versão do c:geo não é compatível com o seu dispositivo e pode falhar ou ter um comportamento inesperado!\nToque nesta mensagem para obter mais informações.</string>
-    <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, fruto de alterações num sítio web ououtros motivos técnicos. Por favor, leia a nossa <a href="https://www.cgeo.org/faq#legacy">FAQ</a> para saber como actualizar.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão do c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, fruto de alterações num sítio web ou outros motivos técnicos. Por favor, leia a nossa \'FAQ\' para saber como actualizar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bússola com voz</string>
     <string name="tts_toggle">Ligar/desligar a fala</string>
