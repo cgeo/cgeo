@@ -1028,6 +1028,7 @@
     <string name="cache_dialog_favorite_remove_message">Odstraňovanie skrýše z obľúbených…</string>
     <string name="cache_menu_navigate">Navigovať</string>
     <string name="cache_menu_navigation_drive">Navigácia (auto)</string>
+    <string name="cache_menu_navigation_drive_select_target">Vybrať cieľ</string>
     <string name="cache_menu_navigation_walk">Navigácia (pešo)</string>
     <string name="cache_menu_navigation_transit">Navigácia (Tranzit)</string>
     <string name="cache_menu_navigation_bike">Navigácia (bicykel)</string>
@@ -1710,6 +1711,12 @@
     <string name="tts_oclock">%s hodín</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Skopírované do schránky</string>
+    <plurals name="days_ago">
+        <item quantity="one">pred %d dňom</item>
+        <item quantity="few">pred %d dňami</item>
+        <item quantity="many">pred %d dňami</item>
+        <item quantity="other">pred %d dňami</item>
+    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s obľúbené</item>
         <item quantity="few">%s obľúbené</item>
