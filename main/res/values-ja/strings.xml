@@ -657,7 +657,7 @@
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図をサポートしています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
-    <string name="settings_info_themes">オフライン地図用のテーマが使用できます。カラースタイルを変更したり(例えば夜間用表示)、自転車道や等高線などを強調表示するために使われます。\n\nzip圧縮されてるテーマファイルでは表示が遅くなる時があります。そのような場合にはテーマフォルダをアプリ専用フォルダと同期してアクセス速度を早くすることもできます(少しストレージ使用量が増えますが)。</string>
+    <string name="settings_info_themes">オフライン地図用のテーマが使用できます。カラースタイルを変更したり(例えば夜間用表示)、自転車道や等高線などを強調表示するために使われます。\n\nzip圧縮されてないテーマファイルでは表示が遅くなる時があります。そのような場合にはテーマフォルダをアプリ専用フォルダと同期してアクセス速度を早くすることもできます(少しストレージ使用量が増えますが)。</string>
     <string name="init_mapsource_select">地図の選択</string>
     <string name="init_local_file_system">ローカルファイルシステム</string>
     <string name="init_base_directory_description">データ保存のベースフォルダ</string>
@@ -1659,6 +1659,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="tts_oclock">%s時</string>
     <!-- various -->
     <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
+    <plurals name="days_ago">
+        <item quantity="other">%d日前</item>
+    </plurals>
     <plurals name="favorite_points">
         <item quantity="other">お気に入り %s </item>
     </plurals>
