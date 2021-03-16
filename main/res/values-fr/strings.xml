@@ -240,6 +240,7 @@
     <string name="warn_search_help_tb">Veuillez entrer le code de l\'objet voyageur. Par exemple \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Merci de saisir un texte pour votre visite.</string>
     <string name="warn_load_images">c:geo n\'a pas pu charger les images.</string>
+    <string name="warn_invalid_mapfile">Le fichier de carte sélectionné n\'est pas un fichier mapsforge valide ou utilise une version non prise en charge.\n(c:geo supporte actuellement les versions 3 à 5)\n\nLes cartes hors-ligne ne sont pas disponibles.</string>
     <string name="warn_pocket_query_select">Aucune Pocket Query sélectionnée.</string>
     <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
     <string name="warn_invalid_character">Le caractère doit être une LETTRE ou un CHIFFRE</string>
@@ -816,6 +817,7 @@
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
     <string name="auth_credentials_explain_long">Si vous possédez un compte, veuillez saisir vos identifiants pour %s ci-dessous :</string>
+    <string name="auth_register_explain">Si vous n\'avez pas encore de compte appuyez ci-dessous pour être dirigé vers la page Web du service pour créer un compte. Assurez-vous d\'utiliser la méthode avec un nom d\'utilisateur et un mot de passe pour créer un compte car c:geo ne prend pas en charge la connexion via Google/Apple/Facebook. Après la création du compte, la validation de votre adresse de messagerie peut être nécessaire avant que vous puissiez utiliser la connexion avec c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
     <string name="auth_token_explain_long">Saisissez vos informations d\'identification puis appuyez sur \"Autoriser c:geo\" … nous allons nous connecter à %s avec vos identifiants et récupérer un jeton d\'authentification. C\'est tout.</string>
@@ -1059,6 +1061,8 @@
     <string name="internal_goto_targets_description">Cette cache enregistre vos cibles récentes \"Aller à\". Elle est automatiquement créée à la première utilisation de la fonction \"Aller à\" du menu principal. Les coordonnées entrées ici seront stockées dans les points de passage de cette cache. Dès que vous n\'avez plus besoin de ces coordonnées, vous pouvez supprimer sans risque cette cache ou n\'importe lequel de ses points de passage. Vous pouvez également déplacer la cache dans n\'importe quelle autre liste de votre choix.</string>
     <string name="init_longtap_map">Appui long sur la carte</string>
     <string name="init_summary_longtap_map">Activer un appui long sur une icône de la carte (pour créer un itinéraire personnel) ou sur un emplacement libre de la carte (pour créer une cache personnelle à l\'utilisateur)</string>
+    <string name="onetime_info_longtap_disabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement désactivé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
+    <string name="onetime_info_longtap_enabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement activé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
     <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hormis les cinq plus récents</string>
@@ -1188,6 +1192,7 @@
     <string name="map_gm_autorotation">Rotation automatique de la carte</string>
     <string name="map_gm_autorotation_disable">Désactiver la rotation automatique de la carte ?\n\nVous pourrez l\'activer à nouveau depuis le menu Rotation de la carte</string>
     <string name="quick_settings">Paramètres rapides</string>
+    <string name="quick_settings_info">Certains paramètres de la carte (paramètres de carte, masquage, guidage) ont été déplacés dans la nouvelle fenêtre surgissante \"Réglages rapides\".\nVous pouvez ouvrir cette fenêtre en utilisant l\'icône centrée au bas de la carte.</string>
     <string name="map_show_in_map">Afficher sur la carte</string>
     <!-- search -->
     <string name="search_bar_hint">Recherche globale</string>
@@ -1583,6 +1588,7 @@
     <string name="support_title">Assistance</string>
     <string name="website_title">Site web</string>
     <string name="facebook_link"><a href="">Page de c:geo</a></string>
+    <string name="fangroup_link"><a href="">Groupe d\'utilisateurs allemand</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo sur Google Play</a></string>
     <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
@@ -1819,11 +1825,13 @@
     <string name="downloadmap_confirmation">Télécharger la carte \"%1$s\" ?\n\nCela peut prendre un certain temps et peut entraîner des coûts significatifs, selon votre connexion réseau.\n\nInformations sur la taille : %2$s</string>
     <string name="downloadmap_handling">Le téléchargement lui-même sera géré par le gestionnaire de téléchargement de votre système en arrière-plan. Vous devriez voir une notification dès que le téléchargement a commencé (ce qui peut prendre un certain temps).</string>
     <string name="button_continue">Continuer</string>
+    <string name="downloadmap_onedirup">(un répertoire vers le haut)</string>
     <string name="downloadmap_checkforupdates_button">Vérifier les mises à jour</string>
     <string name="downloadmap_available_updates">Mises à jour disponibles</string>
     <string name="downloadmap_no_updates_found">Vos cartes sont à jour</string>
     <string name="downloadmap_directory">dossier</string>
     <string name="downloadmap_mapfile">fichier de carte</string>
+    <string name="downloadmap_retrieving_directory_data">Récupération des données du répertoire…</string>
     <string name="downloadmap_checking_for_updates">Vérification des mises à jour…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Effacer l\'historique du parcours</string>
@@ -1846,13 +1854,26 @@
     <string name="done">Terminé</string>
     <string name="finish">Terminer</string>
     <string name="wizard_welcome_title">Bienvenue dans c:geo</string>
+    <string name="wizard_intro">Seulement quelques étapes sont nécessaires pour configurer c:geo avant de vous laisser sortir. Puis-je vous assister ?</string>
+    <string name="wizard_intro2">Bon retour dans l\'assistant de configuration. Votre configuration de c:geo n\'est pas encore terminée, puis-je vous aider à la terminer et à vous lancer ? Cela ne prend que quelques étapes.</string>
     <string name="wizard_outro_ok">Merci d\'avoir paramétré c:geo.\nAmusez-vous bien !</string>
+    <string name="wizard_outro_error">Configuration incomplète\nCertaines parties de c:geo ne fonctionneront pas comme prévu !</string>
     <string name="wizard_permissions_title">Autoriser l\'application</string>
+    <string name="wizard_permissions_intro">c:geo a besoin de certaines autorisations sur votre appareil pour fonctionner correctement.\nJe vous donnerai plus de détails lors des prochaines étapes.</string>
     <string name="wizard_platforms_title">Paramétrer les services</string>
+    <string name="wizard_platforms_intro">Pour trouver des géocaches avec c:geo, vous avez besoin d\'un compte pour un service de géocaching supporté par c:geo.\nSélectionnez le service souhaité ci-dessous pour vous connecter avec votre compte existant ou créer un nouveau compte.</string>
+    <string name="wizard_platforms_gc">geocaching.com</string>
+    <string name="wizard_platforms_others">Opencaching &amp; autres</string>
     <string name="wizard_welcome_advanced">Paramètres avancés</string>
     <string name="wizard_advanced_offlinemaps_label">Cartes hors ligne</string>
+    <string name="wizard_advanced_offlinemaps_info">Cette page fournit des fonctions avancées, qu\'il n\'est pas obligatoire d\'utiliser.\n\nc:geo peut télécharger des fichiers cartographiques pour une utilisation hors-ligne.</string>
     <string name="wizard_advanced_brouter_label">Application de navigation</string>
+    <string name="wizard_advanced_brouter_info">En installant et configurant une application compagnon nommée \"BRouter Offline Navigation\" c:geo peut naviguer jusqu\'à des objectifs et afficher des informations d\'itinéraire sur votre carte.</string>
     <string name="wizard_advanced_restore_label">Restaurer</string>
+    <string name="wizard_advanced_restore_info">Si vous avez une sauvegarde d\'une installation précédente, vous pouvez restaurer les paramètres et/ou les données des géocaches.</string>
     <string name="status_not_ok">ERREUR</string>
+    <string name="wizard_status_title">État de la configuration</string>
+    <string name="wizard_status_storage_permission">Autorisation d\'accès au stockage</string>
+    <string name="wizard_status_location_permission">Autorisation de localisation</string>
     <string name="wizard_status_platform">Services de Geocaching</string>
 </resources>
