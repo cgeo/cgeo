@@ -12,7 +12,7 @@
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Ayarları</string>
     <!-- caches -->
-    <string name="all_types">Tüm Geocache türleri</string>
+    <string name="all_types">Tüm Geocache Türleri</string>
     <string name="traditional">Geleneksel Geocache</string>
     <string name="multi">Çoklu Cache</string>
     <string name="mystery">Gizemli Geocache</string>
@@ -260,7 +260,7 @@
     <string name="info_select_logimage_cancelled">Görüntü seçimi veya çekimi iptal edildi.</string>
     <string name="info_cache_saved">Geocache yerel olarak kaydedildi</string>
     <string name="warn_calculator_state_save">Hesaplama durumunu korumak isterseniz, Yol Noktasını kaydettiğinizden emin olun.</string>
-    <string name="feature_info_offline_counter">Çevrimdışı kayıt girilmiş Geocacheleriniz ve bunlar henüz çevrimiçi olarak kaydedilmemiş olabilir. BU kayıtların sayısı, c: geo\'nun ana sayfasındaki altbilgide bulunan Geocache sayınızın arkasında \"+ x\" olarak görüntülenir. \n \n Ayrıca bu \"x\" kayıtlar, kayıt imzanızda kullanabileceğiniz \"SAYI\" şablonuna eklenecektir. \n \n Bu sayaç uzantısını beğenmezseniz, \"Ayarlar\" &gt; \"Kayıt\" altından devre dışı bırakabilir ve/veya bunun yerine \"SAYI (çevrimdışı kayıtlar olmadan)\" şablonunu kullanabilirsiniz. \n \n Kalan çevrimdışı kayıtları kolayca bulmak için \"Geçmiş\" listesine gidin ve \"Kişisel verilerle\" &gt;\"Çevrimdışı kayıtlar\" için filtre uygulayın.</string>
+    <string name="feature_info_offline_counter">Çevrimdışı kayıt girilmiş Geocache\'leriniz henüz çevrimiçi olarak kaydedilmemiş olabilir. Bu kayıtların sayısı, c: geo\'nun ana sayfasındaki alt bilgide bulunan Geocache sayınızın arkasında \"+ x\" olarak görüntülenir. \n\nAyrıca bu \"x\" kayıtlar, kayıt imzanızda kullanabileceğiniz \"SAYI\" şablonuna eklenecektir. \n\nBu sayaç uzantısını beğenmezseniz, \"Ayarlar\" &gt; \"Kayıt\" altından devre dışı bırakabilir ve/veya bunun yerine \"SAYI (çevrimdışı kayıtlar olmadan)\" şablonunu kullanabilirsiniz. \n\nKalan çevrimdışı kayıtları kolayca bulmak için \"Geçmiş\" listesine gidin ve \"Kişisel verilerle\" &gt;\"Çevrimdışı kayıtlar\" için filtre uygulayın.</string>
     <string name="err_trackable_log_not_anonymous">%1$s\'u c:geo\'ya kaydetme işlemi, anonim olarak yapılamıyor. %2$s\'den kimlik bilgilerinizi doldurmak için ayarları açmayı istiyor musunuz?</string>
     <string name="err_trackable_no_preference_activity">Üzgünüz, uygun bir tercih ekranı bulamıyoruz.</string>
     <string name="confirm_unsaved_changes_title">Kaydedilmemiş değişiklikler</string>
@@ -657,7 +657,7 @@
     <string name="settings_restart">Yüklenen ayarların etkin kılınması için c:geo\'nun yeniden başlatılması gerekiyor</string>
     <string name="settings_folder_changed">\'\'%1$s\'\' klasörü için ayarları \'\'%2$s\'\' olarak değiştirildi.\n\nMevcut ayarları tutmak için \'\'%3$s\'\' basın.\n\nEski klasörü seçmek için _\'\'%4$s\'\'_ basın. Bu durumda bu dosyaya ulaşabilmeniz için yeniden c:geo izni sorulacaktır.</string>
     <string name="settings_info_offline_maps_title">Çevrimdışı haritaların bilgisi</string>
-    <string name="settings_info_offline_maps">c:geo\'da çevrimdışı harita kullanabilirsiniz. Haritaları diğer kaynaklardan elde edebilir veya kendi haritalarınızı yaratabilirsiniz (OSM verilerinden). Öncelikle, çevrim dışı haritaların depolanacağı klasörü seçmelisiniz.</string>
+    <string name="settings_info_offline_maps">c:geo\'da çevrimdışı harita kullanabilirsiniz. Haritaları diğer kaynaklardan elde edebilir veya kendi haritalarınızı yaratabilirsiniz (OSM verilerinden). Öncelikle, çevrimdışı haritaların depolanacağı klasörü seçmelisiniz.</string>
     <string name="settings_info_themes_title">Harita temalarının bilgisi</string>
     <string name="settings_info_themes">c:geo, çevrimdışı haritalar için özel temaları destekler. Bunlar harita renk stillerini değiştirmek (ör. gece görünüm haritası oluşturmak) veya döngü rotalar, izohips eğrileri gibi belirli objeleri vurgulamak için kullanılabilir.\n\nZiplenmemiş harita temalarıyla çalışmak harita görüntüleyicisi açılış performansını azaltabilir. Bu durumda tema dosyası daha hızlı ulaşım için güvenli dosyaya senkronize edilebilir (bir miktar depolama alanı kullanılarak).</string>
     <string name="init_mapsource_select">Harita kaynağı seçin</string>
@@ -1753,7 +1753,7 @@
     <string name="close_app">Aplikasyonu kapat</string>
     <string name="ask_again">Bana yine sor</string>
     <string name="location_permission_request_explanation">c:geo konumunuzu belirlemek, mesafe ve yön hesaplamak için cihazınızındaki GPS\'e erişim sağlamalıdır. İzinsiz çalıştırılamaz.</string>
-    <string name="storage_permission_request_explanation">Çevrimdışı kullanmak üzere Geocache\'leri kayıt ettiğinizde c:geo telefonunuzun hafızasına veya SD kartınıza veri kaydedecektir. Ek olarak c:geo içe-dışa veri aktarımı için, çevrımdışı harita kullanımı için cihaz hafızanızı kullanacaktır. İzinsiz çalıştırılamaz.</string>
+    <string name="storage_permission_request_explanation">Çevrimdışı kullanmak üzere Geocache\'leri kayıt ettiğinizde c:geo telefonunuzun hafızasına veya SD kartınıza veri kaydedecektir. Ek olarak c:geo içe-dışa veri aktarımı için, çevrimdışı harita kullanımı için cihaz hafızanızı kullanacaktır. İzinsiz çalıştırılamaz.</string>
     <string name="storage_permission_needed">Depolama izni olmaksızın bu özellik kullanılamıyor.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Renk şemasını seç</string>
