@@ -656,9 +656,11 @@
     <string name="init_backup_settings_restore">Restablir la configuració</string>
     <string name="settings_readingerror">S\'ha produït un error en llegir la configuració</string>
     <string name="settings_restart">c:geo s\'ha de reiniciar  per fer efectiva la nova configuració</string>
+    <string name="settings_folder_changed">La configuració de la carpeta \"%1$s\" ha canviat a \"%2$s\".\n\nToca \"%3$s\" per mantenir la configuració actual d\'aquesta carpeta.\n\nToca \"%4$s\" per establir la carpeta antiga. En aquest cas, se us demanarà que concediu accés C:geo a aquesta carpeta.</string>
     <string name="settings_info_offline_maps_title">Informació als mapes fora línia</string>
     <string name="settings_info_offline_maps">C:geo admet mapes per a ús fora de línia. Podeu obtenir mapes de diferents proveïdors o fins i tot crear els vostres propis mapes (a partir de dades OSM). Primer heu de seleccionar la carpeta on es desaran els mapes fora de línia.</string>
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
+    <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="init_mapsource_select">Selecciona l\'origen del mapa</string>
     <string name="init_local_file_system">Sistema de fitxers local</string>
     <string name="init_base_directory_description">Carpeta base per a dades locals públiques</string>
@@ -809,10 +811,12 @@
     <string name="sendToCgeo_no_registration">S\'ha produït un error descarregant els catxés. El registre a send2cgeo ha caducat. Registreu-vos de nou a la configuració.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Canvia la carpeta%s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">La carpeta %1$s està configurada actualment a \'%2$s\', conté %3$s i %4$s i té una mida total de %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Podeu utilitzar la carpeta per defecte \'%s\' o triar una carpeta definida per l\'usuari.</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copia tot el contingut</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Mou tot el contingut</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">No hi ha cap altra acció</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Heu seleccionat una carpeta diferent de la que s’emmagatzema actualment. La carpeta actual conté %1$s, %2$s i té una mida de %3$s. Com voleu continuar? \n\nSeleccioneu la carpeta i</string>
     <string name="contentstorage_folder_selection_aborted">S\'està anul·lant la selecció de carpeta, la carpeta és  \'%s\'</string>
     <string name="contentstorage_folder_selection_success">La carpeta s\'ha definit a \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">S’anul·la la selecció de fitxers</string>
@@ -1215,6 +1219,10 @@
     <string name="map_showwp_parking">Punts ruta parking</string>
     <string name="map_showwp_visited">Punts ruta visitats</string>
     <string name="map_show_track">Mostra GPX track/ruta</string>
+    <string name="init_renderthemefolder_synctolocal">Sincronitzeu temes amb la carpeta privada de l\'aplicació</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Aquesta opció pot millorar el rendiment d\'obertura del visor de mapes a costa del espai d\'emmagatzematge del dispositiu.</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_title">Activeu la sincronització de carpetes de temes</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Això sincronitzarà permanentment el contingut de la carpeta del tema del mapa amb una carpeta privada de l’aplicació per accedir més ràpidament als fitxers.\n\nLa carpeta del tema del mapa \'%1$s\' té actualment %2$s, %3$s i té una mida de %4$s.\n\nVoleu activar la sincronització de carpetes?</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
     <string name="init_summary_hidewp_original">Amaga els punts de ruta originals del mapa</string>
     <string name="init_summary_hidewp_parking">Amaga els punts d\'aparcament al mapa</string>
@@ -1673,6 +1681,10 @@
     <string name="tts_oclock">%s en punt</string>
     <!-- various -->
     <string name="clipboard_copy_ok">S\'ha copiat al portapapers</string>
+    <plurals name="days_ago">
+        <item quantity="one">fa %d dia</item>
+        <item quantity="other">fa %d dies</item>
+    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s preferit</item>
         <item quantity="other">%s preferits</item>
