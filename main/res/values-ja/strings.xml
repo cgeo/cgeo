@@ -813,7 +813,7 @@
     <string name="contentstorage_selectfolder_dialog_choice_copy">すべてのファイルをコピー</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">すべてのファイルを移動</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">なにもしない</string>
-    <string name="contentstorage_selectfolder_dialog_choice">現在使用してるフォルダと違うフォルダです。現在のフォルダは%1$sと%2$sが含まれており、合計サイズは%3$sです。どうしますか?\n\n選択したフォルダに</string>
+    <string name="contentstorage_selectfolder_dialog_choice">現在設定されてるフォルダと違うフォルダが選択されました。現在のフォルダは%1$sと%2$sが含まれており、合計サイズは%3$sです。どうしますか?\n\n選択したフォルダに</string>
     <string name="contentstorage_folder_selection_aborted">フォルダの選択を中止しました。フォルダは「%s」です</string>
     <string name="contentstorage_folder_selection_success">フォルダを「%s」に設定しました</string>
     <string name="contentstorage_file_selection_aborted">ファイル選択を中止しました</string>
