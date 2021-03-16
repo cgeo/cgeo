@@ -1221,6 +1221,7 @@
     <string name="init_renderthemefolder_synctolocal">Sincronizar temas com uma pasta da aplicação privada</string>
     <string name="init_summary_renderthemefolder_synctolocal">Esta opção pode melhorar o desempenho na abertura do visualizador de mapas, à custa de algum espaço de armazenamento no dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronização da pasta de temas</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Isto irá sincronizar permanentemente o conteúdo da pasta Temas de Mapa com uma pasta da aplicação privada, para acesso mais rápido aos ficheiros.\n\nA sua Pasta de Temas \'%1$s\' tem actualmente %2$s, %3$s e um tamanho de %4$s.\n\nDeseja activar a sincronização de pastas?</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
@@ -1647,7 +1648,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em \'geocaching.com\' fizeram com que o mapa da vista em tempo real não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a usar uma versão antiga do Android. Esta versão do c:geo não é compatível com o seu dispositivo e pode falhar ou ter um comportamento inesperado!\nToque nesta mensagem para obter mais informações.</string>
-    <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, fruto de alterações num sítio web ououtros motivos técnicos. Por favor, leia a nossa <a href="https://www.cgeo.org/faq#legacy">FAQ</a> para saber como actualizar.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão do c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, fruto de alterações num sítio web ou outros motivos técnicos. Por favor, leia a nossa \'FAQ\' para saber como actualizar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bússola com voz</string>
     <string name="tts_toggle">Ligar/desligar a fala</string>
@@ -1678,6 +1679,10 @@
     <string name="tts_oclock">%s horas</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado para a área de transferência</string>
+    <plurals name="days_ago">
+        <item quantity="one">Há %d dia</item>
+        <item quantity="other">Há %d dias</item>
+    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favorito</item>
         <item quantity="other">%s favoritos</item>

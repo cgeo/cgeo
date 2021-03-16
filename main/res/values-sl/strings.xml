@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Zaklad</string>
     <string name="detail">Podrobnosti</string>
@@ -15,6 +16,7 @@
     <string name="traditional">Tradicionalni zakladi</string>
     <string name="multi">Multi zakladi</string>
     <string name="mystery">Mystery zakladi</string>
+    <string name="letterbox">Hibridni letterbox</string>
     <string name="event">Srečanja</string>
     <string name="mega">Mega-srečanja</string>
     <string name="giga">Giga-srečanja</string>
@@ -24,7 +26,9 @@
     <string name="virtual">Virtualni zakladi</string>
     <string name="wherigo">Wherigo zakladi</string>
     <string name="ape">Project APE zaklad</string>
+    <string name="gchq">Geocaching HQ</string>
     <string name="gps">Razstava GPS Adventures</string>
+    <string name="locationless">Zaklad brez lokacije (obratni zaklad)</string>
     <string name="unknown">Neznan tip zaklada</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">mikro</string>
@@ -35,6 +39,7 @@
     <string name="cache_size_virtual">virtualni</string>
     <string name="cache_size_notchosen">ni izbrano</string>
     <string name="cache_size_unknown">neznano</string>
+    <string name="cache_size_nano">Nano</string>
     <string name="cache_size_very_large">Zelo velik</string>
     <!-- waypoints -->
     <string name="wp_final">Končna lokacija</string>
@@ -113,21 +118,34 @@
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skaliranje</string>
     <string name="log_password_title">Geslo zapisa:</string>
+    <string name="log_report_problem">Prijavi težavo:</string>
     <string name="log_hint_log_password">Vnesite geslo zapisa</string>
     <string name="log_oc_team_comment">Komentar ekipe OC</string>
     <string name="log_your_saved_log">Shranjen zapis</string>
     <string name="log_empty_logbook">Dnevnik zaklada je prazen.</string>
+    <string name="log_problem_none">Ni težav</string>
+    <string name="log_problem_needs_maintenance_label">Potrebuje vzdrževanje</string>
+    <string name="log_problem_log_full_label">Dnevnik zaklada je poln</string>
+    <string name="log_problem_damaged_label">Vsebnik zaklada je poškodovan</string>
+    <string name="log_problem_missing_label">Možno je, da je zaklad pogrešan</string>
+    <string name="log_problem_other_label">Drugo</string>
+    <string name="log_problem_archive_label">Zaklad naj se arhivira</string>
+    <string name="log_image_scale_option_noscaling">Brez povečave</string>
+    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Prevedi v: %s</string>
     <string name="translate_to_english">Prevedi v: angleščino</string>
     <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
     <!-- errors, warnings, info toasts -->
+    <string name="err_none">V redu</string>
     <string name="err_parse">Razčlenjevanje prijavne strani ni uspelo</string>
     <string name="err_server">Ni bilo mogoče vzpostaviti povezave z Geocaching.com. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
     <string name="err_server_ec">Povezava z Extremcaching.com ni uspela. Lahko vam povezava ne deluje ali pa je stran nedosegljiva.</string>
+    <string name="err_server_su">Ni bilo mogoče vzpostaviti povezave z Geocaching.su. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
     <string name="err_server_gk">Ne morem se povezati na GeoKrety.org. Spletna stran je lahko nedosegljiva ali pa ne deluje internetna povezava.</string>
     <string name="err_login">Prijavni podatki niso shranjeni</string>
     <string name="err_login_failed_toast">c:geo se ne more prijaviti. c:geo lahko deluje v načinu brez povezave s shranjenimi zakladi. Preverite vaše prijavne podatke in internetno povezavo.</string>
+    <string name="err_unknown">Neznana napaka. Več informacij poišči na povezavi <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>.</string>
     <string name="err_missing_auth">Uporabniško ime in geslo še nista nastavljena</string>
     <string name="err_wrong">Napačno uporabniško ime in/ali geslo</string>
     <string name="err_maintenance">Geocaching.com trenutno ni na voljo zaradi vzdrževanja. c:geo lahko deluje brez povezave s shranjenimi zakladi.</string>
@@ -206,6 +224,8 @@
     <string name="info_cache_saved">Zaklad je bil shranjen lokalno</string>
     <string name="err_trackable_no_preference_activity">Žal, ni mogoče najti ustrezne nastavitve zaslona.</string>
     <string name="confirm_unsaved_changes_title">Spremembe niso shranjene</string>
+    <string name="more_information">Več informacij</string>
+    <string name="warn_gm_not_available">Google Zemljevidi niso na voljo.</string>
     <!-- location service -->
     <string name="loc_last">Zadnja znana lokacija</string>
     <string name="loc_net">Omrežje</string>
@@ -222,6 +242,7 @@
     <string name="menu_helpers">Dodatni programi</string>
     <string name="menu_settings">Nastavitve</string>
     <string name="menu_history">Zgodovina</string>
+    <string name="menu_filter">Filtriraj</string>
     <string name="menu_scan_geo">Skeniraj geo-kodo</string>
     <string name="menu_pocket_queries">Zbirke Pocket Query</string>
     <string name="menu_scan_description">c:geo lahko skenira GC kodo, ki je izpisana kot QR koda. Za to potrebujete aplikacijo, ki ni nameščena. Ali jo želite odpreti v Google Play in jo namestiti?</string>
@@ -284,6 +305,7 @@
     <string name="caches_copy_selected">Kopiraj izbrane</string>
     <string name="caches_copy_all">Kopiraj vse</string>
     <string name="caches_map_locus_export">Izvozi v Locus</string>
+    <string name="caches_filter">Filtriraj</string>
     <string name="caches_filter_title">Filtriraj po</string>
     <string name="caches_filter_size">Velikosti</string>
     <string name="caches_filter_type">Tipu</string>
@@ -303,7 +325,9 @@
     <string name="caches_clear_offlinelogs">Izbriši shranjene zapise</string>
     <string name="caches_clear_offlinelogs_message">Ali želite izbrisati zapise brez povezave?</string>
     <string name="caches_clear_offlinelogs_progress">Izbris shranjenih zapisov</string>
+    <string name="caches_set_listmarker">Določi oznako seznama</string>
     <!-- caches lists -->
+    <string name="menu_lists">Uredi sezname</string>
     <string name="list_menu_create">Ustvari nov seznam</string>
     <string name="list_menu_drop">Izbriši trenutni seznam</string>
     <string name="list_menu_rename">Preimenuj trenutni seznam</string>
@@ -326,11 +350,23 @@
     <string name="about_version">Različica</string>
     <string name="about_changelog">Zadnje spremembe</string>
     <string name="about_system">Sistem</string>
+    <string name="about_donate">Podprite nas</string>
+    <string name="about_donation_more">Za več informacij obišči spletno stran</string>
     <string name="about_contributors">Avtorji</string>
     <string name="about_license">Licenca</string>
+    <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Pomoč</string>
     <string name="about_system_info_send_button">Pošlji sporočilo…</string>
+    <string name="about_system_write_logcat">Ustvari dnevnik napak</string>
+    <string name="about_system_write_logcat_error">Napaka pri pisanju zapisa</string>
     <string name="changelog_github">Seznam vseh sprememb</string>
+    <string name="about_nutshellmanual">Spletni priročnik</string>
+    <string name="about_contributors_specialthanks">Posebne zahvale</string>
+    <string name="contribution_code">Koda</string>
+    <string name="contribution_tester">Preizkuševalec</string>
+    <string name="contribution_support">Podpora</string>
+    <string name="contribution_documentation">Dokumentacija</string>
+    <string name="contribution_graphics">Grafika</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Odprem nastavitve?</string>
     <string name="settings_title_services">Storitve</string>
@@ -341,8 +377,11 @@
     <string name="settings_title_offlinedata">Podatki brez povezave</string>
     <string name="settings_title_logging">Zapisovanje</string>
     <string name="settings_title_map">Zemljevid</string>
+    <string name="settings_summary_map">Nastavi izvorno mapo za zemljevide brez povezave.</string>
     <string name="settings_title_map_data">Podatki zemljevida</string>
     <string name="settings_title_map_content">Vsebina zemljevida</string>
+    <string name="settings_title_map_behavior">Nastavitve zemljevida</string>
+    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_basicmembers">Možnosti za Basic Member</string>
     <string name="settings_title_navigation">Navigacija</string>
     <string name="settings_summary_navigation">Izberi želeno metodo navigacije in izberi zunanje aplikacije.</string>
@@ -436,6 +475,7 @@
     <string name="settings_info_offline_maps_title">Zemljevidi brez povezave</string>
     <string name="settings_info_themes_title">Teme zemljevidov</string>
     <string name="init_mapsource_select">Izberi vir zemljevidov</string>
+    <string name="init_maptrail">Pokaži sled</string>
     <string name="init_trackautovisit">Obisk pri zapisih</string>
     <string name="init_summary_trackautovisit">Pri sledljivčkih vedno uporabi obisk pri zapisih (\"Visited\")</string>
     <string name="init_sigautoinsert">Samodejno vstavi podpis</string>
@@ -524,6 +564,12 @@
     <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
     <!-- auth geokrety -->
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">%1$d zaklad</item>
+        <item quantity="two">%1$d zaklada</item>
+        <item quantity="few">%1$d zakladi</item>
+        <item quantity="other">%1$d zakladov</item>
+    </plurals>
     <!-- days remaining -->
     <string name="cache_offline_refresh">Osveži</string>
     <string name="cache_offline_store">Shrani</string>
@@ -551,6 +597,12 @@
     <string name="cache_favpoint_not_on">Zaklad ni na vašem spisku priljubljenih.</string>
     <string name="cache_images">Slike</string>
     <string name="cache_waypoints">Dodatne točke</string>
+    <plurals name="waypoints">
+        <item quantity="one">%d dodatna točka</item>
+        <item quantity="two">%d dodatni točki</item>
+        <item quantity="few">%d dodatne točke</item>
+        <item quantity="other">%d dodatnih točk</item>
+    </plurals>
     <string name="cache_waypoints_add">Dodaj točko</string>
     <string name="cache_hint">Namig</string>
     <string name="cache_logs">Dnevnik zapisov</string>
@@ -1104,6 +1156,7 @@
     <!-- ReceiveMapFileActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
+    <string name="map_trail_show">Pokaži sled</string>
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->

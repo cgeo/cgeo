@@ -657,9 +657,11 @@
     <string name="init_backup_settings_restore">Obnovit nastavení</string>
     <string name="settings_readingerror">Chyba při čtení nastavení</string>
     <string name="settings_restart">Aplikace c:geo se musí nyní restartovat, aby se použili načtená nastavení</string>
+    <string name="settings_folder_changed">Nastavení pro složku \"%1$s\" se změnilo na \"%2$s\".\n\nKnlepnutím na \"%3$s\" zachováte aktuální nastavení pro tuto složku.\n\nKlepnutím na \"%4$s\" nastavíte starou složku. V takovém případě se objeví výzva, aby jste aplikaci c:geo znovu udělili přístup k dané složce.</string>
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy můžete získat od různých poskytovatelů nebo dokonce vytvořit si mapy vlastní (z dat OSM). Nejprve musíte vybrat složku, do které mají být offline mapy uloženy.</string>
     <string name="settings_info_themes_title">Info o stylech mapy</string>
+    <string name="settings_info_themes">c: geo podporuje vlastní motivy pro offline mapy. Lze je použít ke změně barevného stylu mapy (např. můžete mít k dispozici noční mapu) nebo ke zvýraznění určitých objektů, jako jsou cyklostezky nebo vrstevnice na mapě.\n\nPráce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče. V takovém případě může být složka s motivy volitelně synchronizována do místního soukromého úložiště aplikace pro rychlejší přístup (na úkor nějakého místa v úložném prostoru).</string>
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="init_local_file_system">Místní souborový systém</string>
     <string name="init_base_directory_description">Základní složka pro veřejná místní data</string>
@@ -810,10 +812,12 @@
     <string name="sendToCgeo_no_registration">c:geo selhalo při stahování kešek. Registrace pro send2cgeo vypršela. Prosím, registruj se znova v nastavení.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Změnit složku %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Složka %1$s je aktuálně nastavena na \'%2$s\', obsahuje %3$s a %4$s a její celková velikost je %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Můžete zvolit výchozí složku \'%s\' nebo vybrat uživatelem definovanou složku.</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopírovat veškerý obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Přesunout veškerý obsah</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Žádný další krok</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Vybrali jste jinou složku, než je aktuálně uložena. Aktuální složka obsahuje %1$s, %2$s a její velikost je %3$s. Jak chcete pokračovat?\n\nVyberte složku a</string>
     <string name="contentstorage_folder_selection_aborted">Přerušení výběru složky, složka je \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Složka nastavena na \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Přerušení výběru souboru</string>
@@ -1062,6 +1066,7 @@
     <string name="cache_menu_challenge_checker">Hledat ověření výzvy</string>
     <string name="cache_menu_ignore">Ignorovat kešku</string>
     <string name="cache_log_menu_decrypt">Dešifrovat/Zašifrovat</string>
+    <string name="cache_log_menu_popup_title">Log z %s</string>
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
@@ -1235,6 +1240,10 @@
     <string name="map_showwp_parking">Parkovací místa</string>
     <string name="map_showwp_visited">Navštívené trasové body</string>
     <string name="map_show_track">Zobrazit GPX stopu/trasu</string>
+    <string name="init_renderthemefolder_synctolocal">Synchronizovat motivy do soukromé složky aplikace</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Tato možnost může zlepšit výkon prohlížeče map za cenu obsazení části místa v úložišti zařízení.</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnout synchronizaci složky s motivy</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Tímto trvale synchronizujete obsah složky Map Theme do soukromé složky aplikace pro rychlejší přístup k souborům.\n\nVaše složka s mapovými motivy \'%1$s\' má momentálně %2$s, %3$s a velikost %4$s.\n\nChcete zapnout synchronizaci složek?</string>
     <string name="init_hidewp">Skrýt trasové body</string>
     <string name="init_summary_hidewp_original">Skrýt původní trasové body na mapě</string>
     <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
@@ -1702,6 +1711,12 @@
     <string name="tts_oclock">%s hodin</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Zkopírováno do schránky</string>
+    <plurals name="days_ago">
+        <item quantity="one">před %d dnem</item>
+        <item quantity="few">před %d dny</item>
+        <item quantity="many">před %d dny</item>
+        <item quantity="other">před %d dny</item>
+    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s oblíbená</item>
         <item quantity="few">%s oblíbené</item>

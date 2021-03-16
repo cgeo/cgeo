@@ -1711,6 +1711,12 @@
     <string name="tts_oclock">%s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Skopiowano do schowka</string>
+    <plurals name="days_ago">
+        <item quantity="one">%d dzień temu</item>
+        <item quantity="few">%d dni temu</item>
+        <item quantity="many">%d dni temu</item>
+        <item quantity="other">%d dni temu</item>
+    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s ulubiony</item>
         <item quantity="few">%s ulubione</item>

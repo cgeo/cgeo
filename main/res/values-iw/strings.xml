@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">מטמון</string>
     <string name="detail">פירוט</string>
@@ -19,12 +20,15 @@
     <string name="event">מטמון אירוע</string>
     <string name="mega">מטמון מגה-אירוע</string>
     <string name="giga">מטמון ג\'יגה-אירוע</string>
+    <string name="earth">מטמון ארץ</string>
     <string name="cito">מטמון אירוע Cache In Trash Out</string>
     <string name="webcam">מטמון מצלמת רשת</string>
     <string name="virtual">מטמון וירטואלי</string>
     <string name="wherigo">מטמון Whereigo</string>
+    <string name="communceleb">ארוע חגיגת הקהילה</string>
     <string name="ape">מטמון Project APE</string>
     <string name="gps">תערוכת הרפתקאות GPS</string>
+    <string name="userdefined">מטמון מוגדר אישית</string>
     <string name="unknown">סוג לא ידוע</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">מיקרו</string>
@@ -203,6 +207,7 @@
     <string name="warn_pocket_query_select">לא נבחר Pocket Query.</string>
     <string name="warn_no_pocket_query_found">לא נמצא pocket query ברשת.</string>
     <string name="warn_invalid_character">התו חייב להיות אות או ספרה</string>
+    <string name="warn_notloggedin_title">מצב לא מקוון</string>
     <string name="err_read_pocket_query_list">שגיאה בקריאת רשימת Pocket Query.</string>
     <string name="info_log_posted">c:geo פרסם לוג זה בהצלחה.</string>
     <string name="info_log_saved">c:geo שמר לוג זה בהצלחה.</string>
@@ -220,12 +225,15 @@
     <string name="err_trackable_no_preference_activity">מצטערים, לא נמצא מסך העדפות מתאים.</string>
     <string name="confirm_unsaved_changes_title">שינויים שלא נשמרו</string>
     <string name="confirm_discard_wp_changes">למחוק שינויי קואורדינטות שלא נשמרו?</string>
+    <string name="more_information">עוד מידע</string>
+    <string name="warn_gm_not_available">מפות גוגל לא זמינות.</string>
     <!-- location service -->
     <string name="loc_last">מיקום אחרון ידוע</string>
     <string name="loc_net">רשת</string>
     <string name="loc_fused">משולב</string>
     <string name="loc_low_power">צריכת חשמל נמוכה</string>
     <string name="loc_home">נקודות ציון של בית</string>
+    <string name="loc_sat">לווינים</string>
     <string name="loc_trying">מנסה לאתר</string>
     <string name="loc_no_addr">כתובת לא ידועה</string>
     <string name="loc_gps_disabled">GPS לא זמין</string>
@@ -234,6 +242,7 @@
     <string name="menu_about">אודות c:geo</string>
     <string name="menu_helpers">תוכניות שירות</string>
     <string name="menu_settings">הגדרות</string>
+    <string name="menu_backup">גיבוי / שחזור</string>
     <string name="menu_history">היסטוריה</string>
     <string name="menu_filter">מסנן</string>
     <string name="menu_scan_geo">סריקת geocode</string>
@@ -290,10 +299,12 @@
     <string name="caches_remove_all">הסר הכל</string>
     <string name="caches_remove_selected">הסר פריטים שנבחרו</string>
     <string name="caches_delete_events">מחק אירועי עבר</string>
+    <string name="caches_upload_modifiedcoords">העלאת נקודות ציון מעודכנות</string>
     <string name="caches_refresh_selected">רענן את המטמונים שנבחרו</string>
     <string name="caches_refresh_all">רענן הכל</string>
     <string name="caches_move_selected">העבר פריטים שנבחרו</string>
     <string name="caches_move_all">העבר הכל</string>
+    <string name="caches_copy_selected">העתק בחירה</string>
     <string name="caches_copy_all">העתק הכל</string>
     <string name="caches_map_locus_export">יצא לLocus</string>
     <string name="caches_filter">מיין</string>
@@ -312,6 +323,7 @@
     <string name="caches_filter_personal_data">עם נתונים אישיים</string>
     <string name="caches_filter_rating">עם דירוג</string>
     <string name="caches_filter_own_rating">עם דירוג משלי</string>
+    <string name="caches_filter_empty">(ריק)</string>
     <string name="caches_removing_from_history">הסרה מההיסטוריה&#8230;</string>
     <string name="caches_clear_offlinelogs">מחק לוגים לא מקוונים</string>
     <string name="caches_clear_offlinelogs_message">האם ברצונך לנקות לוגים לא-מקוונים?</string>
@@ -372,6 +384,7 @@
     <string name="settings_activate_gc">הפעל</string>
     <string name="settings_activate_ec">הפעל</string>
     <string name="settings_gc_legal_note">עם השימוש בשירותי geocaching.com, אתה מסכים לתנאי השימוש של Groundspeak.</string>
+    <string name="settings_info_facebook_login_title">התחברות באמצעות פייסבוק או גוגל</string>
     <string name="settings_authorize">בצע הרשאה לc:geo</string>
     <string name="settings_activate_oc">הפעל</string>
     <string name="init_oc_de_description">בצע הרשאה בc:geo עבור opencaching.de על מנת לחפש מטמונים ולראות את המטמונים שמצאת.</string>
@@ -413,6 +426,9 @@
     <string name="feature_own_coordinates">אחסון נקודות ציון מעודכנות</string>
     <!-- proximity notification -->
     <!-- map sources -->
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="init_sendToCgeo_registering">Registering your device for send2cgeo&#8230;</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->
@@ -440,6 +456,8 @@
     <string name="cache_coordinates">נקודות ציון</string>
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
+    <string name="init_longtap_map">לחיצה ארוכה על המפה</string>
+    <string name="clear_goto_history">פעולה זו תמחק את כל נקודות הציון פרט לחמש האחרונות</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
@@ -450,6 +468,7 @@
     <string name="waypoint_cache_coordinates">נקודות ציון של המטמון</string>
     <string name="waypoint_my_coordinates">נקוודת הציון שלי</string>
     <string name="waypoint_copy_coordinates">העתק נקודות ציון</string>
+    <string name="waypoint_added">נקודת ציון נוספה</string>
     <string name="waypoint_loading">Loading waypoint&#8230;</string>
     <string name="waypoint_do_not_touch_cache_coordinates">אין שינוי לנקודות ציון של המטמון</string>
     <string name="waypoint_set_as_cache_coords">הגדר כנקודות ציון של מטמון בc:geo</string>
@@ -467,6 +486,8 @@
     <string name="waypoint_coordinate_formats_plain">פשוט</string>
     <!-- visit -->
     <!-- map -->
+    <string name="map_gm_autorotation">סיבוב מפה אוטומטי</string>
+    <string name="map_gm_autorotation_disable">לבטל סיבוב מפה אוטומטי?\n\nניתן להפעיל זאת שוב באמצעות תפריט סיבוב מפה</string>
     <!-- search -->
     <string name="search_coordinates">נקודות ציון</string>
     <string name="search_coordinates_button">חיפוש לפי נקודות ציון</string>
@@ -497,6 +518,11 @@
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
     <!-- individual track -->
+    <string name="individual_track">מסלול GPX</string>
+    <string name="map_load_track">לטעון מסלול מ-GPX</string>
+    <string name="map_load_track_wait">טוען מסלול ברקע…</string>
+    <string name="map_load_track_confirm">להחליף מסלול קיים?</string>
+    <string name="load_track_error">שגיאה בטעינת מסלול</string>
     <!-- distance units -->
     <!-- switch settings -->
     <!-- view settings -->

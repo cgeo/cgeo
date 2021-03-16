@@ -1004,6 +1004,7 @@
     <string name="cache_dialog_favorite_remove_message">Poista kätkö suosikeistasi…</string>
     <string name="cache_menu_navigate">Navigoi</string>
     <string name="cache_menu_navigation_drive">Navigointi (ajo)</string>
+    <string name="cache_menu_navigation_drive_select_target">Valitse kohde</string>
     <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
     <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
     <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
@@ -1213,6 +1214,10 @@
     <string name="map_showwp_parking">Parkkipaikka-reittipisteet</string>
     <string name="map_showwp_visited">Vieraillut reittipisteet</string>
     <string name="map_show_track">Näytä GPX-rata/reitti</string>
+    <string name="init_renderthemefolder_synctolocal">Synkronoi teemat sovelluksen omaan kansioon</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Tämä valinta voi parantaa karttanäkymän avaamisen suorituskykyä, laitteen tallennustilan kustannuksella.</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_title">Ota teemakansion synkronointi käyttöön</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Tämä synkronoi karttateemakansion sisällön pysyvästi sovelluksen yksityiseen kansioon, nopeamman pääsyn takaamiseksi.\n\nKarttateematiedostokansiolla \'%1$s\' on tällä hetkellä %2$s, %3$s ja on %4$s:n kokoinen.\n\nHaluatko kytkeä kansion synkronoinnin päälle?</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
     <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>
@@ -1670,6 +1675,10 @@
     <string name="tts_oclock">kello %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopioitu leikepöydälle</string>
+    <plurals name="days_ago">
+        <item quantity="one">%d päivä sitten</item>
+        <item quantity="other">%d päivää sitten</item>
+    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s suosikki</item>
         <item quantity="other">%s suosikkia</item>
@@ -1867,7 +1876,9 @@
     <string name="downloadmap_install_theme_info">Ladattu kartta vaatii erityisen teematiedoston. Haluatko ladata tämän samalla?</string>
     <string name="mapserver_mapsforge_info">Peruskartat, karttateemoja ei tarvita</string>
     <string name="mapserver_openandromaps_info">Yksityiskohtaiset kartat, \"Elevate\"-karttateema vaaditaan</string>
+    <string name="mapserver_openandromaps_themes_info">Yksityiskohtainen karttateema, rakennettu \"OpenAndroMaps\" karttoja varten</string>
     <string name="mapserver_freizeitkarte_info">Yksityiskohtaiset kartat, vaativat yhden \"freizeitkarte\" kartan teemoista.</string>
+    <string name="mapserver_freizeitkarte_themes_info">Yksityiskohtainen karttateema, rakennettu \"Freizeitkarte\" karttoja varten</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
@@ -1917,6 +1928,7 @@
     <string name="wizard_not_now">Ei nyt</string>
     <string name="wizard_skip_wizard_warning">c:geo ei ehkä toimi odotetusti ennen kuin määritys on valmis. Riippuen puuttuvista asetuksista c:geo ei ehkä pysty lukemaan tai tallentamaan tietoja, kuten offline-karttoja, geokätköjä, lokitiedostoja jne.\n\nKun olet valmis viimeistelemään määrityksen, valitse \"Configuration wizard\" päävalikosta tai käynnistä c:geo.</string>
     <!-- Map Theme helper -->
+    <string name="mapthemes_foldersync_finished_toast">%1$s kansion synkronointi päättyi %2$s jälkeen, %3$d %4$s :sta tarvitusta synkronoinnista</string>
     <!-- default actions in dialogs -->
     <string name="previous">Edellinen</string>
     <string name="skip">Ohita</string>

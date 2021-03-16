@@ -655,9 +655,11 @@
     <string name="init_backup_settings_restore">Instellingen terugzetten</string>
     <string name="settings_readingerror">Fout bij het lezen van de instellingen</string>
     <string name="settings_restart">c:geo dient nu opnieuw gestart te worden om de geladen instellingen uit te voeren</string>
+    <string name="settings_folder_changed">Instelling voor map \"%1$s\" is veranderd in \"%2$s\".\n\nTik \"%3$s\" om de huidige instelling voor deze map te behouden.\n\nTik op \"%4$s\" om de oude map in te stellen. In dat geval wordt je opnieuw gevraagd c:geo toegang te geven tot die map.</string>
     <string name="settings_info_offline_maps_title">Info over offline kaarten</string>
     <string name="settings_info_offline_maps">c:geo ondersteunt kaarten voor offline gebruik. Je kunt kaarten verkrijgen van verschillende providers of zelfs je eigen kaarten maken (van OSM gegevens). Eerst dien je de map te selecteren waarin offline kaarten moeten worden opgeslagen.</string>
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
+    <string name="settings_info_themes">c:geo ondersteunt aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt om de kleurstijl van de kaart te wijzigen (bijv. om een nachtzicht-kaart te hebben) of om bepaalde objecten te markeren, zoals fietspaden of hoogte-lijnen op de kaart.\n\nWerken met niet-ge-zipte kaartthema\'s kan de openingsprestaties van de kaart verminderen. In dit geval kan de themamap optioneel worden gesynchroniseerd met een app-private lokale map voor snellere toegang (ten koste van enige opslagruimte).</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="init_local_file_system">Lokaal bestandssysteem</string>
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
@@ -808,10 +810,12 @@
     <string name="sendToCgeo_no_registration">Het is c:geo niet gelukt om de caches te downloaden. De registratie van send2cgeo is verlopen. Registreer s.v.p. in de instellingen.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Map %s wijzigen</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">De map %1$s is momenteel ingesteld op \'%2$s\', bevat %3$s en %4$s en heeft een totale grootte van %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Je kunt kiezen voor de standaard map \'%s\' of een door de gebruiker gedefinieerde map kiezen.</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Alle inhoud kopiëren</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Alle inhoud verplaatsen</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Geen verdere actie</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Je hebt een andere map geselecteerd dan momenteel is opgeslagen. De huidige map bevat %1$s, %2$s en heeft een grootte van %3$s. Hoe wil je doorgaan?\n\nSelecteer map en</string>
     <string name="contentstorage_folder_selection_aborted">Mapselectie afbreken, map is \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Map ingesteld op \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Afbreken bestand selectie</string>
@@ -1214,6 +1218,10 @@
     <string name="map_showwp_parking">Parkeer waypoints</string>
     <string name="map_showwp_visited">Bezochte waypoints</string>
     <string name="map_show_track">GPX spoor/route tonen</string>
+    <string name="init_renderthemefolder_synctolocal">Thema\'s synchroniseren met app-private map</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Deze optie kan de prestaties van de kaartviewer bij het openen verbeteren ten koste van de opslagruimte van sommige apparaten.</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisatie van themamappen inschakelen</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Dit zal de inhoud van de kaart Thema Map permanent synchroniseren in een app-private map voor snellere bestandstoegang.\n\nDe thema map \'%1$s\' heeft op dit moment %2$s, %3$s en een grootte van %4$s.\n\nWil je de synchronisatie van mappen inschakelen?</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
