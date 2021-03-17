@@ -30,6 +30,7 @@
     <string name="gchq">Oficina Central de Geocaching</string>
     <string name="gchqceleb">Celebración de la Oficina Central de Geocaching</string>
     <string name="gps">Exhibición de cachés GPS</string>
+    <string name="block">Fiesta del cuartel general de Geocaching</string>
     <string name="locationless">Caché sin ubicación (invertido)</string>
     <string name="userdefined">Caché definido por el usuario</string>
     <string name="unknown">De tipo desconocido</string>
@@ -92,6 +93,7 @@
     <string name="log_posting_log">Enviando registro…</string>
     <string name="log_posting_twitter">Publicando tweet…</string>
     <string name="log_posting_vote">Publicando el voto del caché…</string>
+    <string name="log_posting_image">Publicando imágenes…</string>
     <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpiar</string>
     <string name="log_post_not_possible">Descarga de datos en curso…\nPor favor, inténtalo de nuevo en unos segundos o comprueba tu conexión a internet.</string>
@@ -116,9 +118,11 @@
     <string name="log_yesterday">Ayer</string>
     <string name="log_smilies">Emoticonos</string>
     <string name="log_image">Imagen</string>
+    <string name="log_images">Imágenes</string>
     <string name="log_image_attach">Adjuntar imagen</string>
     <string name="log_image_stored">Galería</string>
     <string name="log_image_camera">Tomar foto</string>
+    <string name="log_image_delete">Borrar</string>
     <string name="log_image_caption">Título</string>
     <string name="log_image_description">Descripción</string>
     <string name="log_image_scale">Redimensionamiento</string>
@@ -143,6 +147,7 @@
     <string name="log_problem_archive_text">Este geocacher informó de que este caché debería ser archivado. Se ha notificado a un revisor voluntario de la comunidad.</string>
     <string name="log_image_scale_option_noscaling">Sin redimensionar</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
+    <string name="log_image_titleprefix">Imagen</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traducir al %s</string>
     <string name="translate_to_english">Traducir al inglés</string>
@@ -251,6 +256,8 @@
     <string name="err_request_popup_info">c:geo no ha podido obtener la información emergente del caché.</string>
     <string name="warn_log_load_additional_data">c:geo no ha podido cargar datos adicionales (rastreables/puntos favoritos) para el registro.</string>
     <string name="more_information">Más información</string>
+    <string name="undo">Deshacer</string>
+    <string name="dont_show_again">No mostrar de nuevo</string>
     <string name="warn_gm_not_available">Google Maps no está disponible.</string>
     <string name="switch_to_mf">Tu servicio de Google Play está desactualizado. ¿Quieres cambiar al proveedor de mapas de Mapsforge en su lugar?</string>
     <string name="switched_to_mf">El mapa por defecto cambió al proveedor de mapas de Mapsforge. Reinicia el mapa ahora.</string>
@@ -505,6 +512,7 @@
     <string name="init_signature_template_datetime">Fecha &amp; hora</string>
     <string name="init_signature_template_user">Usuario</string>
     <string name="init_signature_template_number">Número</string>
+    <string name="init_signature_template_number_legacy">Número (ignorar registros sin conexión)</string>
     <string name="init_signature_template_owner">Propietario</string>
     <string name="init_signature_template_name">Nombre</string>
     <string name="init_signature_template_difficulty">Dificultad</string>
@@ -512,6 +520,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Texto de registro</string>
     <string name="init_signature_template_size">Tamaño</string>
+    <string name="init_signature_template_type">Tipo</string>
     <string name="init_ratingwanted">Puntuación de GCvote</string>
     <string name="init_summary_ratingwanted">Cargar la puntuación del cache desde GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar amigos / propios</string>
@@ -550,10 +559,16 @@
     <string name="init_listdisplay">Listas adicionales</string>
     <string name="init_livelist">Mostrar dirección</string>
     <!-- backup / restore -->
+    <string name="init_backup_title">Crear copia de seguridad</string>
+    <string name="init_restore_title">Restaurar copia de seguridad</string>
+    <string name="init_backup_program_settings">preferencias del programa</string>
+    <string name="init_backup_logins">Incluir datos de la cuenta</string>
     <string name="init_backup">Hacer copia de seguridad de cachés /waypoints</string>
     <string name="init_backup_backup">Copia de seguridad</string>
     <string name="init_backup_running">Creando copia de seguridad de la base de datos de cachés…</string>
     <string name="init_backup_restore">Restaurar</string>
+    <string name="init_backup_history_length_max">Mantener Todo</string>
+    <string name="init_user_confirmation">Sé lo que estoy haciendo</string>
     <string name="init_backup_success">La base de datos de c:geo se ha copiado a:</string>
     <string name="init_backup_failed">Ha fallado la copia de seguridad.</string>
     <string name="init_backup_unnecessary">La base de datos está vacía, no es necesaria una copia de seguridad.</string>
@@ -563,6 +578,7 @@
     <string name="init_restore_running">Restaurando la base de datos de cachés…</string>
     <string name="init_restore_confirm">La base de datos está vacia. ¿Desea restaurar la copia de seguridad de la base de datos?</string>
     <string name="init_backup_last">Copia guardada el</string>
+    <string name="init_backup_unavailable">no disponible</string>
     <string name="init_backup_last_no">No hay ninguna copia de seguridad.</string>
     <string name="settings_title_backup">Copia de seguridad / Restauración</string>
     <string name="settings_summary_backup">Realizar copia de seguridad y restauración de los datos de caché/waypoint y de los ajustes del programa.</string>
@@ -654,6 +670,7 @@
     <string name="feature_search_owner">Búsqueda por dueño</string>
     <string name="feature_search_finder">Buscar por quien lo ha encontrado</string>
     <string name="feature_favorite">Añadiendo caché a favoritos</string>
+    <string name="feature_voting">Votando por cachés</string>
     <string name="init_maplines_title">Personalización de líneas de mapa</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notificación de proximidad</string>
@@ -818,9 +835,12 @@
     <string name="cache_menu_navigation_transit">Navegación (Trans. público)</string>
     <string name="cache_menu_navigation_bike">Navegación (Bici)</string>
     <string name="cache_menu_maps_directions">Direcciones de Google Maps</string>
+    <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (A pie)</string>
     <string name="cache_menu_sygic_drive">Sygic (Coche)</string>
+    <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Ver en mapa</string>
+    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Otras apps externas</string>
     <string name="cache_menu_browser">Abrir navegador</string>
     <string name="cache_menu_visit">Registrar visita</string>
@@ -893,6 +913,8 @@
     <string name="cache_share_field">Compartir</string>
     <string name="cache_time_full_hours">en punto</string>
     <string name="cache_listed_on">Listado en %s</string>
+    <string name="context_share_as_text">Compartir texto</string>
+    <string name="context_share_as_link">Compartir enlace</string>
     <string name="create_internal_cache">Crear caché definido por el usuario</string>
     <string name="internal_cache_default_name">Caché definido por el usuario #%1$d</string>
     <string name="internal_cache_default_description">Este es un caché definido por el usuario</string>
@@ -1041,6 +1063,7 @@
     <string name="trackable_not_activated">Rastreable no activado</string>
     <string name="trackable_travelbug">Travel bug</string>
     <string name="trackable_status">Estado</string>
+    <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradicional</string>
     <string name="geokret_type_book_or_media">Libro o medio electrónicos</string>
     <string name="geokret_type_human">Humano</string>
@@ -1060,7 +1083,10 @@
     <string name="use_gps">Usar sólo GPS</string>
     <string name="destination_select">Seleccionar destino</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
+    <string name="device_orientation">Orientación</string>
+    <string name="device_orientation_label">Orientación:</string>
     <!-- device orientation types -->
+    <string name="do_auto">Automático</string>
     <!-- license -->
     <string name="license">Licencia</string>
     <string name="license_show">Mostrar licencia</string>
@@ -1095,6 +1121,7 @@
     <string name="export_fieldnotes_upload_success">Subido con éxito a geocaching.com</string>
     <string name="export_fieldnotes_onlynew">Solo desde la última exportación</string>
     <string name="export_fieldnotes_creating">Creando notas de campo…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">El archivo GPX será exportado a %1$s con la fecha y hora actual como su nombre de archivo.</string>
     <string name="export_confirm_title">Exportando %1$s</string>
     <string name="export_confirm_message">Directorio: %1$s\n
@@ -1340,6 +1367,7 @@ Nombre de archivo:%2$s</string>
     <string name="support_title">Soporte técnico</string>
     <string name="website_title">Sitio Web</string>
     <string name="facebook_link"><a href="">Página de c:geo</a></string>
+    <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo en Google Play</a></string>
     <string name="about_twitter">¿Debe <b>c:geo</b> publicar el nuevo estado en Twitter cuando registras un caché?</string>
     <string name="faq_title">Preguntas frecuentes</string>
@@ -1450,10 +1478,16 @@ Nombre de archivo:%2$s</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
+    <string name="switch_off">apagado</string>
+    <string name="switch_manual">Manual</string>
+    <string name="switch_auto">Automático</string>
     <!-- view settings -->
+    <string name="view_settings">Ver configuraciones</string>
+    <string name="delete_setting_warning">¿Eliminar clave \"%s\" de la configuración?\n\n Esta operación no se puede deshacer.</string>
     <!-- HandleLocalFilesActivity -->
     <!-- ReceiveMapFileActivity -->
     <!-- Download map preference and menu entry -->
+    <string name="downloadmap_filename">Descargando %s</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Borrar historial de ruta</string>
     <string name="map_trailhistory_cleared">historial de ruta borrado</string>
