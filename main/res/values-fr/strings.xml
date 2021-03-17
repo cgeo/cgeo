@@ -839,6 +839,7 @@
     <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Sauvegarde</string>
     <string name="persistablefolder_logfiles">Fichiers journaux</string>
+    <string name="persistablefolder_fieldnotes">Notes de terrain</string>
     <string name="persistablefolder_spoilerimages">Images indices</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s réalisé</string>
