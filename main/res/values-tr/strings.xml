@@ -445,7 +445,7 @@
     <string name="contribution_documentation">belgeler</string>
     <string name="contribution_projectleader">Açık kaynak proje lideri</string>
     <string name="contribution_graphics">grafik</string>
-    <string name="debug_user_error_report_title">Sorun bildir</string>
+    <string name="debug_user_error_report_title">Bir sorun bildir</string>
     <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
     <string name="debug_user_error_explain_options">Karşılaştığınız c:geo hatalarını düzeltmemiz için sistem bilgilerinizi ve c:geo logfile dosyasını da dahil ederek eposta yoluyla bildirebilirsiniz. Lütfen epostanızda sorunun ayrıntılarını da belirtmeyi unutmayın. Diğer iletişim seçeneklerini \' c:geo hakkında\' üzerinde bulabilirsiniz.</string>
     <!-- settings -->
