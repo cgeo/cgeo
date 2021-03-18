@@ -181,7 +181,7 @@
     <string name="err_unvalidated_account">Deverá primeiro validar a sua conta no sítio web \'geocaching.com\'.</string>
     <string name="err_unpublished">A geocache solicitada não está publicada.</string>
     <string name="err_cache_not_found">Não foi possível localizar a cache solicitada.</string>
-    <string name="err_premium_only">Esta geocache está disponível apenas para os Membros Premium do Geocaching.com.</string>
+    <string name="err_premium_only">Esta cache apenas está disponível para os membros premium do geocaching.com.</string>
     <string name="err_detail_open">O c:geo não consegue abrir os detalhes da geocache.</string>
     <string name="err_detail_cache">O c:geo não consegue mostrar a geocache pretendida. É mesmo uma geocache?</string>
     <string name="err_detail_cache_find">O c:geo não encontra a geocache</string>
@@ -189,7 +189,7 @@
     <string name="err_detail_cache_find_any">O c:geo não encontra qualquer geocache.</string>
     <string name="err_detail_no_spoiler">O c:geo não encontrou imagens spoiler para esta cache.</string>
     <string name="err_detail_still_working">Ainda se encontra a trabalhar noutra tarefa.</string>
-    <string name="err_detail_premium_log_found">Esta cache apenas está disponível a membros premium do geocaching.com. Por conseguinte, a informação da cache não pode ser mostrada.\n\nNo entanto, se já tiver encontrado esta cache, pode registá-la aqui.</string>
+    <string name="err_detail_premium_log_found">Esta cache apenas está disponível para os membros premium do geocaching.com. Por conseguinte, a informação da cache não pode ser mostrada.\n\nNo entanto, se já tiver encontrado esta cache, pode registá-la aqui.</string>
     <string name="err_watchlist_still_managing">Ainda se encontra a gerir a sua lista de observação.</string>
     <string name="err_watchlist_failed">A alteração da sua lista de observação falhou.</string>
     <string name="err_application_no">O c:geo não encontra nenhuma aplicação compatível.</string>
@@ -1506,8 +1506,8 @@
     <string name="attribute_camping_no">Sem acampamento disponível</string>
     <string name="attribute_stroller_yes">Acessível a carrinhos de bebé</string>
     <string name="attribute_stroller_no">Não acessível a carrinhos de bebé</string>
-    <string name="attribute_fuel_yes">Abastecimento de combustível por perto</string>
-    <string name="attribute_fuel_no">Sem abastecimento de combustível por perto</string>
+    <string name="attribute_fuel_yes">Posto de combustível por perto</string>
+    <string name="attribute_fuel_no">Sem postos de combustível por perto</string>
     <string name="attribute_food_yes">Comida por perto</string>
     <string name="attribute_food_no">Sem comida por perto</string>
     <string name="attribute_oc_only_yes">Só dá para registar em Opencaching</string>
