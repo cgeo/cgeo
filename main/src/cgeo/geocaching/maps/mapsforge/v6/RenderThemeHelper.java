@@ -189,11 +189,17 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
             //always cache the last used ZipResourceProvider. Check if current one can be reused, if not then reload
             synchronized (cachedZipMutex) {
                 if (cachedZipProvider == null || !themeIdTokens[0].equals(cachedZipProviderFilename)) {
-                    //reload
-                    cachedZipProvider = new ZipXmlThemeResourceProvider(new ZipInputStream(ContentStorage.get().openForRead(theme.fileInfo.uri)), ZIP_RESOURCE_READ_LIMIT);
-                    cachedZipProviderFilename = themeIdTokens[0];
+                    try {
+                        //reload
+                        cachedZipProvider = new ZipXmlThemeResourceProvider(new ZipInputStream(ContentStorage.get().openForRead(theme.fileInfo.uri)), ZIP_RESOURCE_READ_LIMIT);
+                        cachedZipProviderFilename = themeIdTokens[0];
+                    } catch (Exception ex) {
+                        Log.w("Problem loading ZIP Theme '" + theme.fileInfo.uri + "'", ex);
+                        cachedZipProvider = null;
+                        cachedZipProviderFilename = null;
+                    }
                 }
-                xmlRenderTheme = new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
+                xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
             }
         }
         return xmlRenderTheme;
@@ -412,6 +418,8 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                     }
                 } catch (IOException ioe) {
                     Log.w("Map Theme ZIP '" + candidate + "' could not be read", ioe);
+                } catch (Exception e) {
+                    Log.w("Problem opening map Theme ZIP '" + candidate + "'", e);
                 }
             }
         }
