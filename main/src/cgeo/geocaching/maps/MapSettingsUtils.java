@@ -124,7 +124,6 @@ public class MapSettingsUtils {
         routing.init();
 
         if (!Routing.isAvailable()) {
-            routing.setEnabled(false);
             final TextView brouterTextView = dialogView.findViewById(R.id.brouter_install);
             brouterTextView.setVisibility(View.VISIBLE);
             brouterTextView.setOnClickListener(v -> ProcessUtils.openMarket(activity, activity.getString(R.string.package_brouter)));
