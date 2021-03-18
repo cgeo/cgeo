@@ -80,8 +80,13 @@ public class MapSettingsUtils {
         final ButtonController<Integer> compactIcon = new ButtonController<Integer>(dialogView, null, compactIconChoices, Settings.getCompactIconMode(), setCompactIconValue);
 
         final ArrayList<ButtonChoiceModel<RoutingMode>> routingChoices = new ArrayList<>();
-        for (RoutingMode mode : RoutingMode.values()) {
-            routingChoices.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
+        if (Routing.isAvailable()) {
+            for (RoutingMode mode : RoutingMode.values()) {
+                routingChoices.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
+            }
+        } else {
+            routingChoices.add(new ButtonChoiceModel<>(RoutingMode.OFF.buttonResId, RoutingMode.OFF, activity.getString(RoutingMode.OFF.infoResId)));
+            routingChoices.add(new ButtonChoiceModel<>(RoutingMode.STRAIGHT.buttonResId, RoutingMode.STRAIGHT, activity.getString(RoutingMode.STRAIGHT.infoResId)));
         }
         final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView, dialogView.findViewById(R.id.routing_title), routingChoices, Routing.isAvailable() ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue);
 

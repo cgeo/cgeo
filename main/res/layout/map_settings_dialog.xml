@@ -90,7 +90,8 @@
                 android:layout_height="40dp"
                 android:layout_below="@id/routing_title"
                 android:layout_toRightOf="@id/routing_straight"
-                android:src="@drawable/routing_walk" />
+                android:src="@drawable/routing_walk"
+                android:visibility="gone" />
             <ImageButton
                 android:id="@+id/routing_bike"
                 style="@style/button_small"
@@ -98,7 +99,8 @@
                 android:layout_height="40dp"
                 android:layout_below="@id/routing_title"
                 android:layout_toRightOf="@id/routing_walk"
-                android:src="@drawable/routing_bike" />
+                android:src="@drawable/routing_bike"
+                android:visibility="gone" />
             <ImageButton
                 android:id="@+id/routing_car"
                 style="@style/button_small"
@@ -106,7 +108,8 @@
                 android:layout_height="40dp"
                 android:layout_below="@id/routing_title"
                 android:layout_toRightOf="@id/routing_bike"
-                android:src="@drawable/routing_car" />
+                android:src="@drawable/routing_car"
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/brouter_install"
                 android:layout_width="match_parent"
