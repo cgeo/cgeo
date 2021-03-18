@@ -23,9 +23,12 @@ public class DistanceDrawer {
     }
 
     public void setCoordinates(final Location location) {
-        final Geopoint currentCoords = new Geopoint(location);
-        distance = null != destinationCoords ? currentCoords.distanceTo(destinationCoords) : 0.0f;
-    }
+        if (destinationCoords == null || location == null) {
+            distance = 0.0f;
+        } else {
+            distance = new Geopoint(location).distanceTo(destinationCoords);
+        }
+     }
 
     public Geopoint getDestinationCoords() {
         return destinationCoords;
