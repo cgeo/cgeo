@@ -83,7 +83,7 @@ public class MapSettingsUtils {
         for (RoutingMode mode : RoutingMode.values()) {
             routingChoices.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
         }
-        final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView, dialogView.findViewById(R.id.routing_title), routingChoices, Routing.isAvailable() ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue);
+        final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView, dialogView.findViewById(R.id.routing_title), routingChoices, Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue);
 
         final CheckBox autotargetCheckbox = dialogView.findViewById(R.id.map_settings_autotarget);
         if (showAutotargetIndividualRoute) {
@@ -124,7 +124,13 @@ public class MapSettingsUtils {
         routing.init();
 
         if (!Routing.isAvailable()) {
-            routing.setEnabled(false);
+            for (final ButtonChoiceModel<RoutingMode> button : routing.buttons) {
+                if (!(button.assignedValue == RoutingMode.OFF || button.assignedValue == RoutingMode.STRAIGHT)) {
+                    button.button.setEnabled(false);
+                    button.button.setAlpha(.3f);
+                }
+            }
+
             final TextView brouterTextView = dialogView.findViewById(R.id.brouter_install);
             brouterTextView.setVisibility(View.VISIBLE);
             brouterTextView.setOnClickListener(v -> ProcessUtils.openMarket(activity, activity.getString(R.string.package_brouter)));
@@ -214,12 +220,6 @@ public class MapSettingsUtils {
         public void setValue() {
             if (!originalValue.equals(currentValue)) {
                 this.setValue.call(currentValue);
-            }
-        }
-
-        public void setEnabled(final boolean enabled) {
-            for (final ButtonChoiceModel<T> button : buttons) {
-                button.button.setEnabled(enabled);
             }
         }
     }
