@@ -39,6 +39,7 @@ import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 
@@ -788,6 +789,8 @@ public class MainActivity extends AbstractActionBarActivity {
             if (lastChecksum == 0) {
                 // initialize oneTimeMessages after fresh install
                 OneTimeDialogs.initializeOnFreshInstall();
+                // initialize useInternalRouting setting depending on whether BRouter app is installed or not
+                Settings.setUseInternalRouting(!ProcessUtils.isInstalled(getString(R.string.package_brouter)));
             } else if (lastChecksum != checksum) {
                 // show change log page after update
                 AboutActivity.showChangeLog(this);
