@@ -95,8 +95,10 @@ public final class SystemInformation {
             .append("\n- Live map mode: ").append(Settings.isLiveMap())
             .append("\n- Global filter: ").append(Settings.getCacheType().pattern)
             .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
-            .append("\n- Routing mode: ").append(context.getString(Settings.getRoutingMode().infoResId))
+            .append("\n- Routing mode: ").append(context.getString(Settings.getRoutingMode().infoResId));
+        appendSettings(body);
 
+        body
             .append("\n")
             .append("\nServices:")
             .append("\n-------");
@@ -120,7 +122,6 @@ public final class SystemInformation {
         appendPersistedDocumentUris(body);
         appendPersistedUriPermission(body, context);
         appendDatabase(body);
-        appendSettings(body);
 
         body.append("\n--- End of system information ---\n");
         return body.toString();
