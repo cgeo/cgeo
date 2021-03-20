@@ -659,6 +659,11 @@
                 android:title="@string/init_brouterShowBothDistances" />
             <CheckBoxPreference
                 android:defaultValue="false"
+                android:key="@string/pref_useInternalRouting"
+                android:summary="@string/init_summary_useInternalRouting"
+                android:title="@string/init_useInternalRouting" />
+            <CheckBoxPreference
+                android:defaultValue="false"
                 android:key="@string/pref_bigSmileysOnMap"
                 android:summary="@string/init_summary_bigSmileysOnMap"
                 android:title="@string/init_bigSmileysOnMap" />

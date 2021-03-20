@@ -91,6 +91,7 @@
     <string translatable="false" name="pref_zoomincludingwaypoints">zoomincludingwaypoints</string>
     <string translatable="false" name="pref_brouterDistanceThreshold">brouterDistanceThreshold</string>
     <string translatable="false" name="pref_brouterShowBothDistances">pref_brouterShowBothDistances</string>
+    <string translatable="false" name="pref_useInternalRouting">useInternalRouting</string>
     <string translatable="false" name="pref_bigSmileysOnMap">pref_bigSmileysOnMap</string>
     <string translatable="false" name="pref_proximityNotificationGeneral">pref_proximityNotificationGeneral</string>
     <string translatable="false" name="pref_proximityNotificationSpecific">pref_proximityNotificationSpecific</string>
