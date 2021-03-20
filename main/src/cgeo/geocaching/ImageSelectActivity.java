@@ -145,11 +145,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     public void saveImageInfo(final boolean saveInfo, final boolean deleteImage) {
         if (saveInfo) {
-            //check if save is possible
-            if (imageCaptionMandatory && StringUtils.isBlank(binding.caption.getText())) {
-                showToast(res.getString(R.string.err_logimage_caption_required));
-                return;
-            }
 
             final Intent intent = new Intent();
             syncEditTexts();
