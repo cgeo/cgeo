@@ -1563,6 +1563,14 @@ public class Settings {
         return RoutingMode.fromString(getString(R.string.pref_map_routing, "foot"));
     }
 
+    public static void setUseInternalRouting(final boolean useInternalRouting) {
+        putBoolean(R.string.pref_useInternalRouting, useInternalRouting);
+    }
+
+    public static boolean useInternalRouting() {
+        return getBoolean(R.string.pref_useInternalRouting, false);
+    }
+
     public static boolean getBackupLoginData() {
         return getBoolean(R.string.pref_backup_logins, false);
     }
