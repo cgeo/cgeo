@@ -99,7 +99,11 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         } catch (IllegalArgumentException iae) {
             //This can happen if the folder uri is illegal, e.g. because the folder was deleted outside c:geo in the meantime and our cache is outdated.
             //-> cleanup cache and try again
-            return createInternal(folder, name, true);
+            try {
+                return createInternal(folder, name, true);
+            } catch (IllegalArgumentException iae2) {
+                return null;
+            }
         }
     }
 
@@ -180,7 +184,11 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         try {
             return listInternal(folder, false);
         } catch (IllegalArgumentException iae) {
-            return listInternal(folder, true);
+            try {
+                return listInternal(folder, true);
+            } catch (IllegalArgumentException iae2) {
+                return Collections.emptyList();
+            }
         }
     }
 
@@ -228,7 +236,11 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         try {
             return getFolderUri(folder, false, false, false);
         } catch (IllegalArgumentException iae) {
-            return getFolderUri(folder, false, false, true);
+            try {
+                return getFolderUri(folder, false, false, true);
+            } catch (IllegalArgumentException iae2) {
+                return null;
+            }
         }
     }
 
@@ -243,7 +255,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
             return queryDoc(uri, FILE_INFO_COLUMNS, null,
                 c -> fileInfoFromCursor(c, uri, null, folder));
         } catch (IllegalArgumentException iae) {
-            //this means that the uri does not exist. Return null
+            //this means that the uri does not exist or is not accessible. Return null
             return null;
         }
     }
@@ -363,6 +375,9 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         } catch (IllegalArgumentException iae) {
             //this is thrown if dirUri does not exist (any more). Rethrow
             throw iae;
+        } catch (SecurityException se) {
+            //tis is thrown if dirUri has no permission any more
+            throw new IllegalArgumentException("No permission", se);
         } catch (Exception e) {
             throw new IOException("Failed dir query for '" + dirUri + "' cols [" + CollectionStream.of(columns).toJoinedString(",") + "]", e);
         } finally {
@@ -385,6 +400,9 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         } catch (IllegalArgumentException iae) {
             //this is thrown if dirUri does not exist (any more). Rethrow
             throw iae;
+        } catch (SecurityException se) {
+            //this is thrown if dirUri has no permission any more
+            throw new IllegalArgumentException("No permission", se);
         } catch (Exception e) {
             throw new IOException("Failed query for '" + docUri + "' cols [" + CollectionStream.of(columns).toJoinedString(",") + "]", e);
         } finally {
