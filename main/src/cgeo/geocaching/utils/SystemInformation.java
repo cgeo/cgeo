@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.playservices.GooglePlayServices;
@@ -95,8 +96,9 @@ public final class SystemInformation {
             .append("\n- Live map mode: ").append(Settings.isLiveMap())
             .append("\n- Global filter: ").append(Settings.getCacheType().pattern)
             .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
-            .append("\n- Routing mode: ").append(context.getString(Settings.getRoutingMode().infoResId))
-
+            .append("\n- Routing mode: ").append(context.getString(Settings.getRoutingMode().infoResId));
+            appendMapSourceInformation(body, context);
+            body
             .append("\n")
             .append("\nServices:")
             .append("\n-------");
@@ -181,6 +183,19 @@ public final class SystemInformation {
         for (PersistableUri persDocUri : PersistableUri.values()) {
             body.append("\n- ").append(persDocUri);
         }
+    }
+
+    private static void appendMapSourceInformation(@NonNull final StringBuilder body, @NonNull final Context ctx) {
+        body.append("\n- Map: ");
+        final MapSource source = Settings.getMapSource();
+        if (source == null) {
+            body.append("none");
+            return;
+        }
+        final ImmutablePair<String, Boolean> mapAtts = source.calculateMapAttribution(ctx);
+        body.append(source.getName()).append("\n  - Id: ").append(source.getId())
+            .append("\n  - Atts: ").append(mapAtts == null ? "none" : mapAtts.left)
+            .append("\n  - Theme: ").append(Settings.getSelectedMapRenderTheme());
     }
 
 
