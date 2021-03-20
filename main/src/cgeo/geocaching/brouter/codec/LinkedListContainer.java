@@ -18,7 +18,7 @@ public class LinkedListContainer {
      * @param nlists        the number of lists
      * @param defaultbuffer an optional data array for re-use (gets replaced if too small)
      */
-    public LinkedListContainer(int nlists, int[] defaultbuffer) {
+    public LinkedListContainer(final int nlists, final int[] defaultbuffer) {
         ia = defaultbuffer == null ? new int[nlists * 4] : defaultbuffer;
         startpointer = new int[nlists];
     }
@@ -29,7 +29,7 @@ public class LinkedListContainer {
      * @param listNr the list to add the data to
      * @param data   the data value
      */
-    public void addDataElement(int listNr, int data) {
+    public void addDataElement(final int listNr, final int data) {
         if (size + 2 > ia.length) {
             resize();
         }
@@ -44,7 +44,7 @@ public class LinkedListContainer {
      * @param listNr the list to initialize
      * @return the number of entries in that list
      */
-    public int initList(int listNr) {
+    public int initList(final int listNr) {
         int cnt = 0;
         int lp = listpointer = startpointer[listNr];
         while (lp != 0) {
@@ -65,13 +65,13 @@ public class LinkedListContainer {
         if (listpointer == 0) {
             throw new IllegalArgumentException("no more element!");
         }
-        int data = ia[listpointer];
+        final int data = ia[listpointer];
         listpointer = ia[listpointer - 1];
         return data;
     }
 
     private void resize() {
-        int[] ia2 = new int[2 * ia.length];
+        final int[] ia2 = new int[2 * ia.length];
         System.arraycopy(ia, 0, ia2, 0, ia.length);
         ia = ia2;
     }

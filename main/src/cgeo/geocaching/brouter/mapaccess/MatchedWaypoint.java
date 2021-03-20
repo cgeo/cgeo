@@ -19,8 +19,8 @@ public final class MatchedWaypoint {
 
     public boolean hasUpdate;
 
-    public static MatchedWaypoint readFromStream(DataInput dis) throws IOException {
-        MatchedWaypoint mwp = new MatchedWaypoint();
+    public static MatchedWaypoint readFromStream(final DataInput dis) throws IOException {
+        final MatchedWaypoint mwp = new MatchedWaypoint();
         mwp.node1 = new OsmNode();
         mwp.node2 = new OsmNode();
         mwp.crosspoint = new OsmNode();
@@ -38,7 +38,7 @@ public final class MatchedWaypoint {
         return mwp;
     }
 
-    public void writeToStream(DataOutput dos) throws IOException {
+    public void writeToStream(final DataOutput dos) throws IOException {
         dos.writeInt(node1.ilat);
         dos.writeInt(node1.ilon);
         dos.writeInt(node2.ilat);

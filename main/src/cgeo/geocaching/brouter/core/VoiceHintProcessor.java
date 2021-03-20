@@ -12,16 +12,16 @@ public final class VoiceHintProcessor {
     private final double catchingRange; // range to catch angles and merge turns
     private final boolean explicitRoundabouts;
 
-    public VoiceHintProcessor(double catchingRange, boolean explicitRoundabouts) {
+    public VoiceHintProcessor(final double catchingRange, final boolean explicitRoundabouts) {
         this.catchingRange = catchingRange;
         this.explicitRoundabouts = explicitRoundabouts;
     }
 
-    private float sumNonConsumedWithinCatchingRange(List<VoiceHint> inputs, int offset) {
+    private float sumNonConsumedWithinCatchingRange(final List<VoiceHint> inputs, int offset) {
         double distance = 0.;
         float angle = 0.f;
         while (offset >= 0 && distance < catchingRange) {
-            VoiceHint input = inputs.get(offset--);
+            final VoiceHint input = inputs.get(offset--);
             if (input.turnAngleConsumed) {
                 break;
             }
@@ -50,23 +50,23 @@ public final class VoiceHintProcessor {
      * @param inputs tracknodes, un reverse order
      * @return voice hints, in forward order
      */
-    public List<VoiceHint> process(List<VoiceHint> inputs) {
-        List<VoiceHint> results = new ArrayList<VoiceHint>();
+    public List<VoiceHint> process(final List<VoiceHint> inputs) {
+        final List<VoiceHint> results = new ArrayList<VoiceHint>();
         double distance = 0.;
         float roundAboutTurnAngle = 0.f; // sums up angles in roundabout
 
         int roundaboutExit = 0;
 
         for (int hintIdx = 0; hintIdx < inputs.size(); hintIdx++) {
-            VoiceHint input = inputs.get(hintIdx);
+            final VoiceHint input = inputs.get(hintIdx);
 
-            float turnAngle = input.goodWay.turnangle;
+            final float turnAngle = input.goodWay.turnangle;
             distance += input.goodWay.linkdist;
-            int currentPrio = input.goodWay.getPrio();
-            int oldPrio = input.oldWay.getPrio();
-            int minPrio = Math.min(oldPrio, currentPrio);
+            final int currentPrio = input.goodWay.getPrio();
+            final int oldPrio = input.oldWay.getPrio();
+            final int minPrio = Math.min(oldPrio, currentPrio);
 
-            boolean isLink2Highway = input.oldWay.isLinktType() && !input.goodWay.isLinktType();
+            final boolean isLink2Highway = input.oldWay.isLinktType() && !input.goodWay.isLinktType();
 
             if (input.oldWay.isRoundabout()) {
                 roundAboutTurnAngle += sumNonConsumedWithinCatchingRange(inputs, hintIdx);
@@ -103,10 +103,10 @@ public final class VoiceHintProcessor {
 
             if (input.badWays != null) {
                 for (MessageData badWay : input.badWays) {
-                    int badPrio = badWay.getPrio();
-                    float badTurn = badWay.turnangle;
+                    final int badPrio = badWay.getPrio();
+                    final float badTurn = badWay.turnangle;
 
-                    boolean isHighway2Link = !input.oldWay.isLinktType() && badWay.isLinktType();
+                    final boolean isHighway2Link = !input.oldWay.isLinktType() && badWay.isLinktType();
 
                     if (badPrio > maxPrioAll && !isHighway2Link) {
                         maxPrioAll = badPrio;
@@ -140,21 +140,21 @@ public final class VoiceHintProcessor {
                 }
             }
 
-            boolean hasSomethingMoreStraight = Math.abs(turnAngle) - minAbsAngeRaw > 20.;
+            final boolean hasSomethingMoreStraight = Math.abs(turnAngle) - minAbsAngeRaw > 20.;
 
             // unconditional triggers are all junctions with
             // - higher detour prios than the minimum route prio (except link->highway junctions)
             // - or candidate detours with higher prio then the route exit leg
-            boolean unconditionalTrigger = hasSomethingMoreStraight || (maxPrioAll > minPrio && !isLink2Highway) || (maxPrioCandidates > currentPrio);
+            final boolean unconditionalTrigger = hasSomethingMoreStraight || (maxPrioAll > minPrio && !isLink2Highway) || (maxPrioCandidates > currentPrio);
 
             // conditional triggers (=real turning angle required) are junctions
             // with candidate detours equal in priority than the route exit leg
-            boolean conditionalTrigger = maxPrioCandidates >= minPrio;
+            final boolean conditionalTrigger = maxPrioCandidates >= minPrio;
 
             if (unconditionalTrigger || conditionalTrigger) {
                 input.angle = turnAngle;
                 input.calcCommand();
-                boolean isStraight = input.cmd == VoiceHint.C;
+                final boolean isStraight = input.cmd == VoiceHint.C;
                 input.needsRealTurn = (!unconditionalTrigger) && isStraight;
 
                 // check for KR/KL
@@ -178,7 +178,7 @@ public final class VoiceHintProcessor {
         // go through the hint list again in reverse order (=travel direction)
         // and filter out non-signficant hints and hints too close to it's predecessor
 
-        List<VoiceHint> results2 = new ArrayList<VoiceHint>();
+        final List<VoiceHint> results2 = new ArrayList<VoiceHint>();
         int i = results.size();
         while (i > 0) {
             VoiceHint hint = results.get(--i);
@@ -189,13 +189,12 @@ public final class VoiceHintProcessor {
                 double dist = hint.distanceToNext;
                 // sum up other hints within the catching range (e.g. 40m)
                 while (dist < catchingRange && i > 0) {
-                    VoiceHint h2 = results.get(i - 1);
+                    final VoiceHint h2 = results.get(i - 1);
                     dist = h2.distanceToNext;
                     hint.distanceToNext += dist;
                     hint.angle += h2.angle;
                     i--;
-                    if (h2.isRoundabout()) // if we hit a roundabout, use that as the trigger
-                    {
+                    if (h2.isRoundabout()) { // if we hit a roundabout, use that as the trigger
                         h2.angle = hint.angle;
                         hint = h2;
                         break;

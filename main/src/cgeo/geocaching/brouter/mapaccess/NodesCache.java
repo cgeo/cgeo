@@ -5,27 +5,25 @@
  */
 package cgeo.geocaching.brouter.mapaccess;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-
 import cgeo.geocaching.brouter.codec.DataBuffers;
 import cgeo.geocaching.brouter.codec.MicroCache;
 import cgeo.geocaching.brouter.codec.WaypointMatcher;
 import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
 public final class NodesCache {
     public OsmNodesMap nodesMap;
     public WaypointMatcher waypointMatcher;
-    public boolean first_file_access_failed = false;
-    public String first_file_access_name;
+    public boolean firstFileAccessFailed = false;
+    public String firstFileAccessName;
     private final File segmentDir;
-    private File secondarySegmentsDir = null;
     private final BExpressionContextWay expCtxWay;
     private final int lookupVersion;
     private final int lookupMinorVersion;
-    private final boolean forceSecondaryData;
     private String currentFileName;
     private final HashMap<String, PhysicalFile> fileCache;
     private final DataBuffers dataBuffers;
@@ -44,7 +42,7 @@ public final class NodesCache {
 
     private final boolean directWeaving = !Boolean.getBoolean("disableDirectWeaving");
 
-    public NodesCache(String segmentDir, BExpressionContextWay ctxWay, boolean forceSecondaryData, long maxmem, NodesCache oldCache, boolean detailed) {
+    public NodesCache(final String segmentDir, final BExpressionContextWay ctxWay, final long maxmem, final NodesCache oldCache, final boolean detailed) {
         this.maxmemtiles = maxmem / 8;
         this.segmentDir = new File(segmentDir);
         this.nodesMap = new OsmNodesMap();
@@ -52,30 +50,30 @@ public final class NodesCache {
         this.expCtxWay = ctxWay;
         this.lookupVersion = ctxWay.meta.lookupVersion;
         this.lookupMinorVersion = ctxWay.meta.lookupMinorVersion;
-        this.forceSecondaryData = forceSecondaryData;
         this.detailed = detailed;
 
         if (ctxWay != null) {
             ctxWay.setDecodeForbidden(detailed);
         }
 
-        first_file_access_failed = false;
-        first_file_access_name = null;
+        firstFileAccessFailed = false;
+        firstFileAccessName = null;
 
-        if (!this.segmentDir.isDirectory())
+        if (!this.segmentDir.isDirectory()) {
             throw new RuntimeException("segment directory " + segmentDir + " does not exist");
+        }
 
         if (oldCache != null) {
             fileCache = oldCache.fileCache;
             dataBuffers = oldCache.dataBuffers;
-            secondarySegmentsDir = oldCache.secondarySegmentsDir;
 
             // re-use old, virgin caches (if same detail-mode)
             if (oldCache.detailed == detailed) {
                 fileRows = oldCache.fileRows;
                 for (OsmFile[] fileRow : fileRows) {
-                    if (fileRow == null)
+                    if (fileRow == null) {
                         continue;
+                    }
                     for (OsmFile osmf : fileRow) {
                         cacheSum += osmf.setGhostState();
                     }
@@ -87,7 +85,6 @@ public final class NodesCache {
             fileCache = new HashMap<String, PhysicalFile>(4);
             fileRows = new OsmFile[180][];
             dataBuffers = new DataBuffers();
-            secondarySegmentsDir = StorageConfigHelper.getSecondarySegmentDir(segmentDir);
         }
         ghostSum = cacheSum;
     }
@@ -96,10 +93,11 @@ public final class NodesCache {
         return "collecting=" + garbageCollectionEnabled + " noGhosts=" + ghostCleaningDone + " cacheSum=" + cacheSum + " cacheSumClean=" + cacheSumClean + " ghostSum=" + ghostSum + " ghostWakeup=" + ghostWakeup;
     }
 
-    public void clean(boolean all) {
+    public void clean(final boolean all) {
         for (OsmFile[] fileRow : fileRows) {
-            if (fileRow == null)
+            if (fileRow == null) {
                 continue;
+            }
             for (OsmFile osmf : fileRow) {
                 osmf.clean(all);
             }
@@ -114,7 +112,7 @@ public final class NodesCache {
         }
 
         for (int i = 0; i < fileRows.length; i++) {
-            OsmFile[] fileRow = fileRows[i];
+            final OsmFile[] fileRow = fileRows[i];
             if (fileRow == null) {
                 continue;
             }
@@ -136,18 +134,18 @@ public final class NodesCache {
         }
     }
 
-    public int loadSegmentFor(int ilon, int ilat) {
-        MicroCache mc = getSegmentFor(ilon, ilat);
+    public int loadSegmentFor(final int ilon, final int ilat) {
+        final MicroCache mc = getSegmentFor(ilon, ilat);
         return mc == null ? 0 : mc.getSize();
     }
 
-    public MicroCache getSegmentFor(int ilon, int ilat) {
+    public MicroCache getSegmentFor(final int ilon, final int ilat) {
         try {
-            int lonDegree = ilon / 1000000;
-            int latDegree = ilat / 1000000;
+            final int lonDegree = ilon / 1000000;
+            final int latDegree = ilat / 1000000;
             OsmFile osmf = null;
-            OsmFile[] fileRow = fileRows[latDegree];
-            int ndegrees = fileRow == null ? 0 : fileRow.length;
+            final OsmFile[] fileRow = fileRows[latDegree];
+            final int ndegrees = fileRow == null ? 0 : fileRow.length;
             for (int i = 0; i < ndegrees; i++) {
                 if (fileRow[i].lonDegree == lonDegree) {
                     osmf = fileRow[i];
@@ -156,7 +154,7 @@ public final class NodesCache {
             }
             if (osmf == null) {
                 osmf = fileForSegment(lonDegree, latDegree);
-                OsmFile[] newFileRow = new OsmFile[ndegrees + 1];
+                final OsmFile[] newFileRow = new OsmFile[ndegrees + 1];
                 for (int i = 0; i < ndegrees; i++) {
                     newFileRow[i] = fileRow[i];
                 }
@@ -194,11 +192,12 @@ public final class NodesCache {
      *
      * @return true if successfull, false if node is still hollow
      */
-    public boolean obtainNonHollowNode(OsmNode node) {
-        if (!node.isHollow())
+    public boolean obtainNonHollowNode(final OsmNode node) {
+        if (!node.isHollow()) {
             return true;
+        }
 
-        MicroCache segment = getSegmentFor(node.ilon, node.ilat);
+        final MicroCache segment = getSegmentFor(node.ilon, node.ilat);
         if (segment == null) {
             return false;
         }
@@ -206,13 +205,12 @@ public final class NodesCache {
             return true; // direct weaving...
         }
 
-        long id = node.getIdFromPos();
+        final long id = node.getIdFromPos();
         if (segment.getAndClear(id)) {
             node.parseNodeBody(segment, nodesMap, expCtxWay);
         }
 
-        if (garbageCollectionEnabled) // garbage collection
-        {
+        if (garbageCollectionEnabled) { // garbage collection
             cacheSum -= segment.collect(segment.getSize() >> 1); // threshold = 1/2 of size is deleted
         }
 
@@ -223,7 +221,7 @@ public final class NodesCache {
     /**
      * make sure all link targets of the given node are non-hollow
      */
-    public void expandHollowLinkTargets(OsmNode n) {
+    public void expandHollowLinkTargets(final OsmNode n) {
         for (OsmLink link = n.firstlink; link != null; link = link.getNext(n)) {
             obtainNonHollowNode(link.getTarget(n));
         }
@@ -232,7 +230,7 @@ public final class NodesCache {
     /**
      * make sure all link targets of the given node are non-hollow
      */
-    public boolean hasHollowLinkTargets(OsmNode n) {
+    public boolean hasHollowLinkTargets(final OsmNode n) {
         for (OsmLink link = n.firstlink; link != null; link = link.getNext(n)) {
             if (link.getTarget(n).isHollow()) {
                 return true;
@@ -251,9 +249,9 @@ public final class NodesCache {
      * @param id the id of the node to load
      * @return the fully expanded node for id, or null if it was not found
      */
-    public OsmNode getStartNode(long id) {
+    public OsmNode getStartNode(final long id) {
         // initialize the start-node
-        OsmNode n = new OsmNode(id);
+        final OsmNode n = new OsmNode(id);
         n.setHollow();
         nodesMap.put(n);
         if (!obtainNonHollowNode(n)) {
@@ -263,10 +261,10 @@ public final class NodesCache {
         return n;
     }
 
-    public OsmNode getGraphNode(OsmNode template) {
-        OsmNode graphNode = new OsmNode(template.ilon, template.ilat);
+    public OsmNode getGraphNode(final OsmNode template) {
+        final OsmNode graphNode = new OsmNode(template.ilon, template.ilat);
         graphNode.setHollow();
-        OsmNode existing = nodesMap.put(graphNode);
+        final OsmNode existing = nodesMap.put(graphNode);
         if (existing == null) {
             return graphNode;
         }
@@ -274,14 +272,14 @@ public final class NodesCache {
         return existing;
     }
 
-    public void matchWaypointsToNodes(List<MatchedWaypoint> unmatchedWaypoints, double maxDistance, OsmNodePairSet islandNodePairs) {
+    public void matchWaypointsToNodes(final List<MatchedWaypoint> unmatchedWaypoints, final double maxDistance, final OsmNodePairSet islandNodePairs) {
         waypointMatcher = new WaypointMatcherImpl(unmatchedWaypoints, 250., islandNodePairs);
         for (MatchedWaypoint mwp : unmatchedWaypoints) {
             preloadPosition(mwp.waypoint);
         }
 
-        if (first_file_access_failed) {
-            throw new IllegalArgumentException("datafile " + first_file_access_name + " not found");
+        if (firstFileAccessFailed) {
+            throw new IllegalArgumentException("datafile " + firstFileAccessName + " not found");
         }
         for (MatchedWaypoint mwp : unmatchedWaypoints) {
             if (mwp.crosspoint == null) {
@@ -290,49 +288,42 @@ public final class NodesCache {
         }
     }
 
-    private void preloadPosition(OsmNode n) {
-        int d = 12500;
-        first_file_access_failed = false;
-        first_file_access_name = null;
+    private void preloadPosition(final OsmNode n) {
+        final int d = 12500;
+        firstFileAccessFailed = false;
+        firstFileAccessName = null;
         loadSegmentFor(n.ilon, n.ilat);
-        if (first_file_access_failed) {
-            throw new IllegalArgumentException("datafile " + first_file_access_name + " not found");
+        if (firstFileAccessFailed) {
+            throw new IllegalArgumentException("datafile " + firstFileAccessName + " not found");
         }
-        for (int idxLat = -1; idxLat <= 1; idxLat++)
+        for (int idxLat = -1; idxLat <= 1; idxLat++) {
             for (int idxLon = -1; idxLon <= 1; idxLon++) {
                 if (idxLon != 0 || idxLat != 0) {
                     loadSegmentFor(n.ilon + d * idxLon, n.ilat + d * idxLat);
                 }
             }
+        }
     }
 
-    private OsmFile fileForSegment(int lonDegree, int latDegree) throws Exception {
-        int lonMod5 = lonDegree % 5;
-        int latMod5 = latDegree % 5;
+    private OsmFile fileForSegment(final int lonDegree, final int latDegree) throws Exception {
+        final int lonMod5 = lonDegree % 5;
+        final int latMod5 = latDegree % 5;
 
-        int lon = lonDegree - 180 - lonMod5;
-        String slon = lon < 0 ? "W" + (-lon) : "E" + lon;
-        int lat = latDegree - 90 - latMod5;
+        final int lon = lonDegree - 180 - lonMod5;
+        final String slon = lon < 0 ? "W" + (-lon) : "E" + lon;
+        final int lat = latDegree - 90 - latMod5;
 
-        String slat = lat < 0 ? "S" + (-lat) : "N" + lat;
-        String filenameBase = slon + "_" + slat;
+        final String slat = lat < 0 ? "S" + (-lat) : "N" + lat;
+        final String filenameBase = slon + "_" + slat;
 
         currentFileName = filenameBase + ".rd5";
 
         PhysicalFile ra = null;
         if (!fileCache.containsKey(filenameBase)) {
             File f = null;
-            if (!forceSecondaryData) {
-                File primary = new File(segmentDir, filenameBase + ".rd5");
-                if (primary.exists()) {
-                    f = primary;
-                }
-            }
-            if (f == null) {
-                File secondary = new File(secondarySegmentsDir, filenameBase + ".rd5");
-                if (secondary.exists()) {
-                    f = secondary;
-                }
+            final File primary = new File(segmentDir, filenameBase + ".rd5");
+            if (primary.exists()) {
+                f = primary;
             }
             if (f != null) {
                 currentFileName = f.getName();
@@ -341,11 +332,11 @@ public final class NodesCache {
             fileCache.put(filenameBase, ra);
         }
         ra = fileCache.get(filenameBase);
-        OsmFile osmf = new OsmFile(ra, lonDegree, latDegree, dataBuffers);
+        final OsmFile osmf = new OsmFile(ra, lonDegree, latDegree, dataBuffers);
 
-        if (first_file_access_name == null) {
-            first_file_access_name = currentFileName;
-            first_file_access_failed = osmf.filename == null;
+        if (firstFileAccessName == null) {
+            firstFileAccessName = currentFileName;
+            firstFileAccessFailed = osmf.filename == null;
         }
 
         return osmf;
@@ -354,8 +345,9 @@ public final class NodesCache {
     public void close() {
         for (PhysicalFile f : fileCache.values()) {
             try {
-                if (f != null)
+                if (f != null) {
                     f.ra.close();
+                }
             } catch (IOException ioe) {
                 // ignore
             }

@@ -17,7 +17,7 @@ public final class TurnRestriction {
 
     public TurnRestriction next;
 
-    public static boolean isTurnForbidden(TurnRestriction first, int fromLon, int fromLat, int toLon, int toLat, boolean bikeMode, boolean carMode) {
+    public static boolean isTurnForbidden(final TurnRestriction first, final int fromLon, final int fromLat, final int toLon, final int toLat, final boolean bikeMode, final boolean carMode) {
         boolean hasAnyPositive = false;
         boolean hasPositive = false;
         boolean hasNegative = false;

@@ -5,20 +5,19 @@
  */
 package cgeo.geocaching.brouter.core;
 
-import java.util.Map;
-
 import cgeo.geocaching.brouter.expressions.BExpressionContextNode;
 import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
 
+import java.util.Map;
 
 final class KinematicModel extends OsmPathModel {
     public double turnAngleDecayTime;
-    public double f_roll;
-    public double f_air;
-    public double f_recup;
-    public double p_standby;
-    public double outside_temp;
-    public double recup_efficiency;
+    public double fRoll;
+    public double fAir;
+    public double fRecup;
+    public double pStandby;
+    public double outsideTemp;
+    public double recupEfficiency;
     public double totalweight;
     public double vmax;
     public double leftWaySpeed;
@@ -46,7 +45,7 @@ final class KinematicModel extends OsmPathModel {
     }
 
     @Override
-    public void init(BExpressionContextWay expctxWay, BExpressionContextNode expctxNode, Map<String, String> extraParams) {
+    public void init(final BExpressionContextWay expctxWay, final BExpressionContextNode expctxNode, final Map<String, String> extraParams) {
         if (!initDone) {
             ctxWay = expctxWay;
             ctxNode = expctxNode;
@@ -60,27 +59,27 @@ final class KinematicModel extends OsmPathModel {
         params = extraParams;
 
         turnAngleDecayTime = getParam("turnAngleDecayTime", 5.f);
-        f_roll = getParam("f_roll", 232.f);
-        f_air = getParam("f_air", 0.4f);
-        f_recup = getParam("f_recup", 400.f);
-        p_standby = getParam("p_standby", 250.f);
-        outside_temp = getParam("outside_temp", 20.f);
-        recup_efficiency = getParam("recup_efficiency", 0.7f);
+        fRoll = getParam("f_roll", 232.f);
+        fAir = getParam("f_air", 0.4f);
+        fRecup = getParam("f_recup", 400.f);
+        pStandby = getParam("p_standby", 250.f);
+        outsideTemp = getParam("outside_temp", 20.f);
+        recupEfficiency = getParam("recup_efficiency", 0.7f);
         totalweight = getParam("totalweight", 1640.f);
         vmax = getParam("vmax", 80.f) / 3.6;
         leftWaySpeed = getParam("leftWaySpeed", 12.f) / 3.6;
         rightWaySpeed = getParam("rightWaySpeed", 12.f) / 3.6;
 
-        pw = 2. * f_air * vmax * vmax * vmax - p_standby;
-        cost0 = (pw + p_standby) / vmax + f_roll + f_air * vmax * vmax;
+        pw = 2. * fAir * vmax * vmax * vmax - pStandby;
+        cost0 = (pw + pStandby) / vmax + fRoll + fAir * vmax * vmax;
     }
 
-    protected float getParam(String name, float defaultValue) {
-        String sval = params == null ? null : params.get(name);
+    protected float getParam(final String name, final float defaultValue) {
+        final String sval = params == null ? null : params.get(name);
         if (sval != null) {
             return Float.parseFloat(sval);
         }
-        float v = ctxWay.getVariableValue(name, defaultValue);
+        final float v = ctxWay.getVariableValue(name, defaultValue);
         if (params != null) {
             params.put(name, "" + v);
         }
@@ -108,28 +107,28 @@ final class KinematicModel extends OsmPathModel {
      */
     public double getEffectiveSpeedLimit() {
         // performance related inline coding
-        double minspeed = getWayMinspeed();
-        double espeed = minspeed > vmax ? minspeed : vmax;
-        double maxspeed = getWayMaxspeed();
-        return maxspeed < espeed ? maxspeed : espeed;
+        final double minspeed = getWayMinspeed();
+        final double espeed = Math.max(minspeed, vmax);
+        final double maxspeed = getWayMaxspeed();
+        return Math.min(maxspeed, espeed);
     }
 
     /**
      * get the breaking speed for current balance-power (pw) and effective speed limit (vl)
      */
-    public double getBreakingSpeed(double vl) {
+    public double getBreakingSpeed(final double vl) {
         if (vl == lastEffectiveLimit) {
             return lastBreakingSpeed;
         }
 
         double v = vl * 0.8;
-        double pw2 = pw + p_standby;
-        double e = recup_efficiency;
-        double x0 = pw2 / vl + f_air * e * vl * vl + (1. - e) * f_roll;
+        final double pw2 = pw + pStandby;
+        final double e = recupEfficiency;
+        final double x0 = pw2 / vl + fAir * e * vl * vl + (1. - e) * fRoll;
         for (int i = 0; i < 5; i++) {
-            double v2 = v * v;
-            double x = pw2 / v + f_air * e * v2 - x0;
-            double dx = 2. * e * f_air * v - pw2 / v2;
+            final double v2 = v * v;
+            final double x = pw2 / v + fAir * e * v2 - x0;
+            final double dx = 2. * e * fAir * v - pw2 / v2;
             v -= x / dx;
         }
         lastEffectiveLimit = vl;

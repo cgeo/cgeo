@@ -10,44 +10,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VoiceHint {
-    static final int C = 1; // continue (go straight)
-    static final int TL = 2; // turn left
-    static final int TSLL = 3; // turn slightly left
-    static final int TSHL = 4; // turn sharply left
-    static final int TR = 5; // turn right
-    static final int TSLR = 6; // turn slightly right
-    static final int TSHR = 7; // turn sharply right
-    static final int KL = 8; // keep left
-    static final int KR = 9; // keep right
-    static final int TU = 10; // U-turn
-    static final int TRU = 11; // Right U-turn
-    static final int OFFR = 12; // Off route
-    static final int RNDB = 13; // Roundabout
-    static final int RNLB = 14; // Roundabout left
+    public static final int C = 1; // continue (go straight)
+    public static final int TL = 2; // turn left
+    public static final int TSLL = 3; // turn slightly left
+    public static final int TSHL = 4; // turn sharply left
+    public static final int TR = 5; // turn right
+    public static final int TSLR = 6; // turn slightly right
+    public static final int TSHR = 7; // turn sharply right
+    public static final int KL = 8; // keep left
+    public static final int KR = 9; // keep right
+    public static final int TU = 10; // U-turn
+    public static final int TRU = 11; // Right U-turn
+    public static final int OFFR = 12; // Off route
+    public static final int RNDB = 13; // Roundabout
+    public static final int RNLB = 14; // Roundabout left
 
-    int ilon;
-    int ilat;
-    short selev;
-    int cmd;
-    MessageData oldWay;
-    MessageData goodWay;
-    List<MessageData> badWays;
-    double distanceToNext;
-    int indexInTrack;
-    float angle;
-    boolean turnAngleConsumed;
-    boolean needsRealTurn;
-    int roundaboutExit;
+    public int ilon;
+    public int ilat;
+    public short selev;
+    public int cmd;
+    public MessageData oldWay;
+    public MessageData goodWay;
+    public List<MessageData> badWays;
+    public double distanceToNext;
+    public int indexInTrack;
+    public float angle;
+    public boolean turnAngleConsumed;
+    public boolean needsRealTurn;
+    public int roundaboutExit;
 
     public float getTime() {
         return oldWay == null ? 0.f : oldWay.time;
     }
 
-    boolean isRoundabout() {
+    public boolean isRoundabout() {
         return roundaboutExit != 0;
     }
 
-    public void addBadWay(MessageData badWay) {
+    public void addBadWay(final MessageData badWay) {
         if (badWay == null) {
             return;
         }
@@ -272,18 +272,15 @@ public class VoiceHint {
                 cmd = TL;
             }
         } else if (cmdAngle < -21.) {
-            if (cmd != KR) // don't overwrite KR with TSLL
-            {
+            if (cmd != KR) { // don't overwrite KR with TSLL
                 cmd = TSLL;
             }
         } else if (cmdAngle < 21.) {
-            if (cmd != KR && cmd != KL) // don't overwrite KL/KR hints!
-            {
+            if (cmd != KR && cmd != KL) { // don't overwrite KL/KR hints!
                 cmd = C;
             }
         } else if (cmdAngle < 45.) {
-            if (cmd != KL) // don't overwrite KL with TSLR
-            {
+            if (cmd != KL) { // don't overwrite KL with TSLR
                 cmd = TSLR;
             }
         } else if (cmdAngle < 135.) {
@@ -303,8 +300,8 @@ public class VoiceHint {
     }
 
     public String formatGeometry() {
-        float oldPrio = oldWay == null ? 0.f : oldWay.priorityclassifier;
-        StringBuilder sb = new StringBuilder(30);
+        final float oldPrio = oldWay == null ? 0.f : oldWay.priorityclassifier;
+        final StringBuilder sb = new StringBuilder(30);
         sb.append(' ').append((int) oldPrio);
         appendTurnGeometry(sb, goodWay);
         if (badWays != null) {
@@ -316,8 +313,8 @@ public class VoiceHint {
         return sb.toString();
     }
 
-    private void appendTurnGeometry(StringBuilder sb, MessageData msg) {
-        sb.append("(").append((int) (msg.turnangle + 0.5)).append(")").append((int) (msg.priorityclassifier));
+    private void appendTurnGeometry(final StringBuilder sb, final MessageData msg) {
+        sb.append("(").append((int) (msg.turnangle + 0.5)).append(")").append(msg.priorityclassifier);
     }
 
 }

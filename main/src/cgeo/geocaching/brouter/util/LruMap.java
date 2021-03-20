@@ -15,14 +15,14 @@ public final class LruMap {
 
     private final LruMapNode[] binArray;
 
-    public LruMap(int bins, int size) {
+    public LruMap(final int bins, final int size) {
         hashbins = bins;
         maxsize = size;
         binArray = new LruMapNode[hashbins];
     }
 
-    public LruMapNode get(LruMapNode key) {
-        int bin = (key.hash & 0xfffffff) % hashbins;
+    public LruMapNode get(final LruMapNode key) {
+        final int bin = (key.hash & 0xfffffff) % hashbins;
 
         LruMapNode e = binArray[bin];
         while (e != null) {
@@ -35,9 +35,9 @@ public final class LruMap {
     }
 
     // put e to the mru end of the queue
-    public void touch(LruMapNode e) {
-        LruMapNode n = e.next;
-        LruMapNode p = e.previous;
+    public void touch(final LruMapNode e) {
+        final LruMapNode n = e.next;
+        final LruMapNode p = e.previous;
 
         if (n == null) {
             return; // already at mru
@@ -61,13 +61,13 @@ public final class LruMap {
         }
         size--;
         // unlink the lru from it's bin-queue
-        int bin = (lru.hashCode() & 0xfffffff) % hashbins;
+        final int bin = (lru.hashCode() & 0xfffffff) % hashbins;
         LruMapNode e = binArray[bin];
         if (e == lru) {
             binArray[bin] = lru.nextInBin;
         } else {
             while (e != null) {
-                LruMapNode prev = e;
+                final LruMapNode prev = e;
                 e = e.nextInBin;
                 if (e == lru) {
                     prev.nextInBin = lru.nextInBin;
@@ -76,14 +76,14 @@ public final class LruMap {
             }
         }
 
-        LruMapNode res = lru;
+        final LruMapNode res = lru;
         lru = lru.next;
         lru.previous = null;
         return res;
     }
 
-    public void put(LruMapNode val) {
-        int bin = (val.hashCode() & 0xfffffff) % hashbins;
+    public void put(final LruMapNode val) {
+        final int bin = (val.hashCode() & 0xfffffff) % hashbins;
         val.nextInBin = binArray[bin];
         binArray[bin] = val;
 

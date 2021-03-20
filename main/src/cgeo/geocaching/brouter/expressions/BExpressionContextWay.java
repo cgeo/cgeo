@@ -13,7 +13,7 @@ public final class BExpressionContextWay extends BExpressionContext implements T
         {"costfactor", "turncost", "uphillcostfactor", "downhillcostfactor", "initialcost", "nodeaccessgranted", "initialclassifier", "trafficsourcedensity", "istrafficbackbone", "priorityclassifier", "classifiermask", "maxspeed"};
     private boolean decodeForbidden = true;
 
-    public BExpressionContextWay(BExpressionMetaData meta) {
+    public BExpressionContextWay(final BExpressionMetaData meta) {
         super("way", meta);
     }
 
@@ -22,7 +22,7 @@ public final class BExpressionContextWay extends BExpressionContext implements T
      *
      * @param hashSize size of hashmap for result caching
      */
-    public BExpressionContextWay(int hashSize, BExpressionMetaData meta) {
+    public BExpressionContextWay(final int hashSize, final BExpressionMetaData meta) {
         super("way", hashSize, meta);
     }
 
@@ -79,12 +79,12 @@ public final class BExpressionContextWay extends BExpressionContext implements T
     }
 
     @Override
-    public int accessType(byte[] description) {
+    public int accessType(final byte[] description) {
         evaluate(false, description);
         float minCostFactor = getCostfactor();
         if (minCostFactor >= 9999.f) {
             setInverseVars();
-            float reverseCostFactor = getCostfactor();
+            final float reverseCostFactor = getCostfactor();
             if (reverseCostFactor < minCostFactor) {
                 minCostFactor = reverseCostFactor;
             }
@@ -93,7 +93,7 @@ public final class BExpressionContextWay extends BExpressionContext implements T
     }
 
     @Override
-    public void setDecodeForbidden(boolean decodeForbidden) {
+    public void setDecodeForbidden(final boolean decodeForbidden) {
         this.decodeForbidden = decodeForbidden;
     }
 }

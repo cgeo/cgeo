@@ -5,12 +5,17 @@ package cgeo.geocaching.brouter.util;
  *
  * @author ab
  */
-public class FastMath {
+public class FastMathUtils {
+
+    private FastMathUtils() {
+        // utility class
+    }
+
     /**
      * Approximation to Math.exp for small negative arguments
      */
     public static double exp(double e) {
-        double x = e;
+        final double x = e;
         double f = 1.;
         while (e < -1.) {
             e += 1.;

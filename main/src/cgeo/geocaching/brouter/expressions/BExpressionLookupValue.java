@@ -12,10 +12,10 @@ package cgeo.geocaching.brouter.expressions;
 import java.util.ArrayList;
 
 final class BExpressionLookupValue {
-    String value;
-    ArrayList<String> aliases;
+    public String value;
+    public ArrayList<String> aliases;
 
-    public BExpressionLookupValue(String value) {
+    BExpressionLookupValue(final String value) {
         this.value = value;
     }
 
@@ -24,33 +24,36 @@ final class BExpressionLookupValue {
         return value;
     }
 
-    public void addAlias(String alias) {
-        if (aliases == null)
+    public void addAlias(final String alias) {
+        if (aliases == null) {
             aliases = new ArrayList<String>();
+        }
         aliases.add(alias);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (o instanceof String) {
-            String v = (String) o;
+            final String v = (String) o;
             return value.equals(v);
         }
         if (o instanceof BExpressionLookupValue) {
-            BExpressionLookupValue v = (BExpressionLookupValue) o;
+            final BExpressionLookupValue v = (BExpressionLookupValue) o;
 
             return value.equals(v.value);
         }
         return false;
     }
 
-    public boolean matches(String s) {
-        if (value.equals(s))
+    public boolean matches(final String s) {
+        if (value.equals(s)) {
             return true;
+        }
         if (aliases != null) {
             for (String alias : aliases) {
-                if (alias.equals(s))
+                if (alias.equals(s)) {
                     return true;
+                }
             }
         }
         return false;

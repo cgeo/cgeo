@@ -6,7 +6,7 @@
 package cgeo.geocaching.brouter.core;
 
 import cgeo.geocaching.brouter.mapaccess.OsmNode;
-import cgeo.geocaching.brouter.util.CheapRuler;
+import cgeo.geocaching.brouter.util.CheapRulerHelper;
 
 public class OsmNodeNamed extends OsmNode {
     public String name;
@@ -17,17 +17,17 @@ public class OsmNodeNamed extends OsmNode {
     public OsmNodeNamed() {
     }
 
-    public OsmNodeNamed(OsmNode n) {
+    public OsmNodeNamed(final OsmNode n) {
         super(n.ilon, n.ilat);
     }
 
-    public static OsmNodeNamed decodeNogo(String s) {
-        OsmNodeNamed n = new OsmNodeNamed();
-        int idx1 = s.indexOf(',');
+    public static OsmNodeNamed decodeNogo(final String s) {
+        final OsmNodeNamed n = new OsmNodeNamed();
+        final int idx1 = s.indexOf(',');
         n.ilon = Integer.parseInt(s.substring(0, idx1));
-        int idx2 = s.indexOf(',', idx1 + 1);
+        final int idx2 = s.indexOf(',', idx1 + 1);
         n.ilat = Integer.parseInt(s.substring(idx1 + 1, idx2));
-        int idx3 = s.indexOf(',', idx2 + 1);
+        final int idx3 = s.indexOf(',', idx2 + 1);
         if (idx3 == -1) {
             n.name = s.substring(idx2 + 1);
             n.nogoWeight = Double.NaN;
@@ -48,11 +48,11 @@ public class OsmNodeNamed extends OsmNode {
         }
     }
 
-    public double distanceWithinRadius(int lon1, int lat1, int lon2, int lat2, double totalSegmentLength) {
-        double[] lonlat2m = CheapRuler.getLonLatToMeterScales((lat1 + lat2) >> 1);
+    public double distanceWithinRadius(int lon1, int lat1, int lon2, int lat2, final double totalSegmentLength) {
+        final double[] lonlat2m = CheapRulerHelper.getLonLatToMeterScales((lat1 + lat2) >> 1);
 
-        boolean isFirstPointWithinCircle = CheapRuler.distance(lon1, lat1, ilon, ilat) < radius;
-        boolean isLastPointWithinCircle = CheapRuler.distance(lon2, lat2, ilon, ilat) < radius;
+        boolean isFirstPointWithinCircle = CheapRulerHelper.distance(lon1, lat1, ilon, ilat) < radius;
+        boolean isLastPointWithinCircle = CheapRulerHelper.distance(lon2, lat2, ilon, ilat) < radius;
         // First point is within the circle
         if (isFirstPointWithinCircle) {
             // Last point is within the circle
@@ -76,14 +76,14 @@ public class OsmNodeNamed extends OsmNode {
         }
         // Distance between the initial point and projection of center of
         // the circle on the current segment.
-        double initialToProject = (
+        final double initialToProject = (
             (lon2 - lon1) * (ilon - lon1) * lonlat2m[0] * lonlat2m[0]
                 + (lat2 - lat1) * (ilat - lat1) * lonlat2m[1] * lonlat2m[1]
         ) / totalSegmentLength;
         // Distance between the initial point and the center of the circle.
-        double initialToCenter = CheapRuler.distance(ilon, ilat, lon1, lat1);
+        final double initialToCenter = CheapRulerHelper.distance(ilon, ilat, lon1, lat1);
         // Half length of the segment within the circle
-        double halfDistanceWithin = Math.sqrt(
+        final double halfDistanceWithin = Math.sqrt(
             radius * radius - (
                 initialToCenter * initialToCenter -
                     initialToProject * initialToProject

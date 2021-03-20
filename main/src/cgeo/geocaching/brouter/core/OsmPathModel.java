@@ -5,11 +5,10 @@
  */
 package cgeo.geocaching.brouter.core;
 
-import java.util.Map;
-
 import cgeo.geocaching.brouter.expressions.BExpressionContextNode;
 import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
 
+import java.util.Map;
 
 abstract class OsmPathModel {
     public abstract OsmPrePath createPrePath();

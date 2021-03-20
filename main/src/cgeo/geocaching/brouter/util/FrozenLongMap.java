@@ -16,7 +16,7 @@ public class FrozenLongMap<V> extends CompactLongMap<V> {
     private int size = 0;
     private int p2size; // next power of 2 of size
 
-    public FrozenLongMap(CompactLongMap<V> map) {
+    public FrozenLongMap(final CompactLongMap<V> map) {
         size = map.size();
 
         faid = new long[size];
@@ -25,26 +25,27 @@ public class FrozenLongMap<V> extends CompactLongMap<V> {
         map.moveToFrozenArrays(faid, flv);
 
         p2size = 0x40000000;
-        while (p2size > size)
+        while (p2size > size) {
             p2size >>= 1;
+        }
     }
 
     @Override
-    public boolean put(long id, V value) {
+    public boolean put(final long id, final V value) {
         try {
-            value_in = value;
+            valueIn = value;
             if (contains(id, true)) {
                 return true;
             }
             throw new RuntimeException("cannot only put on existing key in FrozenLongIntMap");
         } finally {
-            value_in = null;
-            value_out = null;
+            valueIn = null;
+            valueOut = null;
         }
     }
 
     @Override
-    public void fastPut(long id, V value) {
+    public void fastPut(final long id, final V value) {
         throw new RuntimeException("cannot put on FrozenLongIntMap");
     }
 
@@ -61,25 +62,25 @@ public class FrozenLongMap<V> extends CompactLongMap<V> {
      * @return true if "id" is contained in this set.
      */
     @Override
-    protected boolean contains(long id, boolean doPut) {
+    protected boolean contains(final long id, final boolean doPut) {
         if (size == 0) {
             return false;
         }
-        long[] a = faid;
+        final long[] a = faid;
         int offset = p2size;
         int n = 0;
 
         while (offset > 0) {
-            int nn = n + offset;
+            final int nn = n + offset;
             if (nn < size && a[nn] <= id) {
                 n = nn;
             }
             offset >>= 1;
         }
         if (a[n] == id) {
-            value_out = flv.get(n);
+            valueOut = flv.get(n);
             if (doPut) {
-                flv.set(n, value_in);
+                flv.set(n, valueIn);
             }
             return true;
         }
@@ -90,16 +91,16 @@ public class FrozenLongMap<V> extends CompactLongMap<V> {
      * @return the value for "id", or null if key unknown
      */
     @Override
-    public V get(long id) {
+    public V get(final long id) {
         if (size == 0) {
             return null;
         }
-        long[] a = faid;
+        final long[] a = faid;
         int offset = p2size;
         int n = 0;
 
         while (offset > 0) {
-            int nn = n + offset;
+            final int nn = n + offset;
             if (nn < size && a[nn] <= id) {
                 n = nn;
             }

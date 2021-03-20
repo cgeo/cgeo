@@ -14,7 +14,7 @@ public abstract class OsmPrePath {
     protected OsmNode targetNode;
     protected OsmLink link;
 
-    public void init(OsmPath origin, OsmLink link, RoutingContext rc) {
+    public void init(final OsmPath origin, final OsmLink link, final RoutingContext rc) {
         this.link = link;
         this.sourceNode = origin.getTargetNode();
         this.targetNode = link.getTarget(sourceNode);

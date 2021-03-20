@@ -1,9 +1,9 @@
 package cgeo.geocaching.brouter.mapaccess;
 
-import java.util.List;
-
 import cgeo.geocaching.brouter.codec.WaypointMatcher;
-import cgeo.geocaching.brouter.util.CheapRuler;
+import cgeo.geocaching.brouter.util.CheapRulerHelper;
+
+import java.util.List;
 
 /**
  * the WaypointMatcher is feeded by the decoder with geoemtries of ways that are
@@ -24,7 +24,7 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
     private int lonLast;
     private int latLast;
 
-    public WaypointMatcherImpl(List<MatchedWaypoint> waypoints, double maxDistance, OsmNodePairSet islandPairs) {
+    public WaypointMatcherImpl(final List<MatchedWaypoint> waypoints, final double maxDistance, final OsmNodePairSet islandPairs) {
         this.waypoints = waypoints;
         this.islandPairs = islandPairs;
         for (MatchedWaypoint mwp : waypoints) {
@@ -32,29 +32,30 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
         }
     }
 
-    private void checkSegment(int lon1, int lat1, int lon2, int lat2) {
+    private void checkSegment(final int lon1, final int lat1, final int lon2, final int lat2) {
         // todo: bounding-box pre-filter
 
-        double[] lonlat2m = CheapRuler.getLonLatToMeterScales((lat1 + lat2) >> 1);
-        double dlon2m = lonlat2m[0];
-        double dlat2m = lonlat2m[1];
+        final double[] lonlat2m = CheapRulerHelper.getLonLatToMeterScales((lat1 + lat2) >> 1);
+        final double dlon2m = lonlat2m[0];
+        final double dlat2m = lonlat2m[1];
 
-        double dx = (lon2 - lon1) * dlon2m;
-        double dy = (lat2 - lat1) * dlat2m;
-        double d = Math.sqrt(dy * dy + dx * dx);
+        final double dx = (lon2 - lon1) * dlon2m;
+        final double dy = (lat2 - lat1) * dlat2m;
+        final double d = Math.sqrt(dy * dy + dx * dx);
 
-        if (d == 0.)
+        if (d == 0.) {
             return;
+        }
 
         for (MatchedWaypoint mwp : waypoints) {
-            OsmNode wp = mwp.waypoint;
+            final OsmNode wp = mwp.waypoint;
 
-            double x1 = (lon1 - wp.ilon) * dlon2m;
-            double y1 = (lat1 - wp.ilat) * dlat2m;
-            double x2 = (lon2 - wp.ilon) * dlon2m;
-            double y2 = (lat2 - wp.ilat) * dlat2m;
-            double r12 = x1 * x1 + y1 * y1;
-            double r22 = x2 * x2 + y2 * y2;
+            final double x1 = (lon1 - wp.ilon) * dlon2m;
+            final double y1 = (lat1 - wp.ilat) * dlat2m;
+            final double x2 = (lon2 - wp.ilon) * dlon2m;
+            final double y2 = (lat2 - wp.ilat) * dlat2m;
+            final double r12 = x1 * x1 + y1 * y1;
+            final double r22 = x2 * x2 + y2 * y2;
             double radius = Math.abs(r12 < r22 ? y1 * dx - x1 * dy : y2 * dx - x2 * dy) / d;
 
             if (radius < mwp.radius) {
@@ -67,20 +68,22 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
                 }
                 if (s2 > 0.) {
                     radius = Math.sqrt(s1 < s2 ? r12 : r22);
-                    if (radius > mwp.radius)
+                    if (radius > mwp.radius) {
                         continue;
+                    }
                 }
                 // new match for that waypoint
                 mwp.radius = radius; // shortest distance to way
                 mwp.hasUpdate = true;
                 anyUpdate = true;
                 // calculate crosspoint
-                if (mwp.crosspoint == null)
+                if (mwp.crosspoint == null) {
                     mwp.crosspoint = new OsmNode();
+                }
                 if (s2 < 0.) {
-                    double wayfraction = -s2 / (d * d);
-                    double xm = x2 - wayfraction * dx;
-                    double ym = y2 - wayfraction * dy;
+                    final double wayfraction = -s2 / (d * d);
+                    final double xm = x2 - wayfraction * dx;
+                    final double ym = y2 - wayfraction * dy;
                     mwp.crosspoint.ilon = (int) (xm / dlon2m + wp.ilon);
                     mwp.crosspoint.ilat = (int) (ym / dlat2m + wp.ilat);
                 } else if (s1 > s2) {
@@ -95,16 +98,18 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
     }
 
     @Override
-    public boolean start(int ilonStart, int ilatStart, int ilonTarget, int ilatTarget) {
+    public boolean start(final int ilonStart, final int ilatStart, final int ilonTarget, final int ilatTarget) {
         if (islandPairs.size() > 0) {
-            long n1 = ((long) ilonStart) << 32 | ilatStart;
-            long n2 = ((long) ilonTarget) << 32 | ilatTarget;
+            final long n1 = ((long) ilonStart) << 32 | ilatStart;
+            final long n2 = ((long) ilonTarget) << 32 | ilatTarget;
             if (islandPairs.hasPair(n1, n2)) {
                 return false;
             }
         }
-        lonLast = lonStart = ilonStart;
-        latLast = latStart = ilatStart;
+        lonStart = ilonStart;
+        lonLast = lonStart;
+        latStart = ilatStart;
+        latLast = latStart;
         lonTarget = ilonTarget;
         latTarget = ilatTarget;
         anyUpdate = false;
@@ -112,7 +117,7 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
     }
 
     @Override
-    public void transferNode(int ilon, int ilat) {
+    public void transferNode(final int ilon, final int ilat) {
         checkSegment(lonLast, latLast, ilon, ilat);
         lonLast = ilon;
         latLast = ilat;

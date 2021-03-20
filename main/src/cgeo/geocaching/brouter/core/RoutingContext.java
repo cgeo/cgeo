@@ -5,12 +5,6 @@
  */
 package cgeo.geocaching.brouter.core;
 
-import java.io.DataOutput;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.brouter.expressions.BExpressionContext;
 import cgeo.geocaching.brouter.expressions.BExpressionContextNode;
@@ -18,7 +12,13 @@ import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
 import cgeo.geocaching.brouter.mapaccess.GeometryDecoder;
 import cgeo.geocaching.brouter.mapaccess.OsmLink;
 import cgeo.geocaching.brouter.util.CheapAngleMeter;
-import cgeo.geocaching.brouter.util.CheapRuler;
+import cgeo.geocaching.brouter.util.CheapRulerHelper;
+
+import java.io.DataOutput;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public final class RoutingContext {
     public int alternativeIdx = 0;
@@ -39,7 +39,6 @@ public final class RoutingContext {
     public boolean footMode;
     public boolean considerTurnRestrictions;
     public boolean processUnusedTags;
-    public boolean forceSecondaryData;
     public double pass1coefficient;
     public double pass2coefficient;
     public int elevationpenaltybuffer;
@@ -84,22 +83,23 @@ public final class RoutingContext {
     // Speed computation model (for bikes)
     public double totalMass;
     public double maxSpeed;
-    public double S_C_x;
-    public double defaultC_r;
+    public double sCX;
+    public double defaultCR;
     public double bikerPower;
     public OsmPathModel pm;
     private List<OsmNodeNamed> keepnogopoints = null;
     private OsmNodeNamed pendingEndpoint = null;
 
-    public static void prepareNogoPoints(List<OsmNodeNamed> nogos) {
+    public static void prepareNogoPoints(final List<OsmNodeNamed> nogos) {
         for (OsmNodeNamed nogo : nogos) {
             if (nogo instanceof OsmNogoPolygon) {
                 continue;
             }
             String s = nogo.name;
-            int idx = s.indexOf(' ');
-            if (idx > 0)
+            final int idx = s.indexOf(' ');
+            if (idx > 0) {
                 s = s.substring(0, idx);
+            }
             int ir = 20; // default radius
             if (s.length() > 4) {
                 try {
@@ -111,11 +111,11 @@ public final class RoutingContext {
         }
     }
 
-    public void setAlternativeIdx(int idx) {
+    public void setAlternativeIdx(final int idx) {
         alternativeIdx = idx;
     }
 
-    public int getAlternativeIdx(int min, int max) {
+    public int getAlternativeIdx(final int min, final int max) {
         return alternativeIdx < min ? min : (alternativeIdx > max ? max : alternativeIdx);
     }
 
@@ -131,12 +131,12 @@ public final class RoutingContext {
         return name;
     }
 
-    private void setModel(String className) {
+    private void setModel(final String className) {
         if (className == null) {
             pm = new StdModel();
         } else {
             try {
-                Class clazz = Class.forName(className);
+                final Class clazz = Class.forName(className);
                 pm = (OsmPathModel) clazz.newInstance();
             } catch (Exception e) {
                 throw new RuntimeException("Cannot create path-model: " + e);
@@ -160,18 +160,20 @@ public final class RoutingContext {
     }
 
     public void readGlobalConfig() {
-        BExpressionContext expctxGlobal = expctxWay; // just one of them...
+        final BExpressionContext expctxGlobal = expctxWay; // just one of them...
 
-        setModel(expctxGlobal._modelClass);
+        setModel(expctxGlobal.modelClass);
 
         downhillcostdiv = (int) expctxGlobal.getVariableValue("downhillcost", 0.f);
         downhillcutoff = (int) (expctxGlobal.getVariableValue("downhillcutoff", 0.f) * 10000);
         uphillcostdiv = (int) expctxGlobal.getVariableValue("uphillcost", 0.f);
         uphillcutoff = (int) (expctxGlobal.getVariableValue("uphillcutoff", 0.f) * 10000);
-        if (downhillcostdiv != 0)
+        if (downhillcostdiv != 0) {
             downhillcostdiv = 1000000 / downhillcostdiv;
-        if (uphillcostdiv != 0)
+        }
+        if (uphillcostdiv != 0) {
             uphillcostdiv = 1000000 / uphillcostdiv;
+        }
         carMode = 0.f != expctxGlobal.getVariableValue("validForCars", 0.f);
         bikeMode = 0.f != expctxGlobal.getVariableValue("validForBikes", 0.f);
         footMode = 0.f != expctxGlobal.getVariableValue("validForFoot", 0.f);
@@ -182,7 +184,7 @@ public final class RoutingContext {
         // process tags not used in the profile (to have them in the data-tab)
         processUnusedTags = 0.f != expctxGlobal.getVariableValue("processUnusedTags", 0.f);
 
-        forceSecondaryData = 0.f != expctxGlobal.getVariableValue("forceSecondaryData", 0.f);
+        // forceSecondaryData = 0.f != expctxGlobal.getVariableValue( "forceSecondaryData", 0.f );
         pass1coefficient = expctxGlobal.getVariableValue("pass1coefficient", 1.5f);
         pass2coefficient = expctxGlobal.getVariableValue("pass2coefficient", 0.f);
         elevationpenaltybuffer = (int) (expctxGlobal.getVariableValue("elevationpenaltybuffer", 5.f) * 1000000);
@@ -209,9 +211,8 @@ public final class RoutingContext {
         showspeed = 0.f != expctxGlobal.getVariableValue("showspeed", 0.f);
         inverseRouting = 0.f != expctxGlobal.getVariableValue("inverseRouting", 0.f);
 
-        int tiMode = (int) expctxGlobal.getVariableValue("turnInstructionMode", 0.f);
-        if (tiMode != 1) // automatic selection from coordinate source
-        {
+        final int tiMode = (int) expctxGlobal.getVariableValue("turnInstructionMode", 0.f);
+        if (tiMode != 1) { // automatic selection from coordinate source
             turnInstructionMode = tiMode;
         }
         turnInstructionCatchingRange = expctxGlobal.getVariableValue("turnInstructionCatchingRange", 40.f);
@@ -223,17 +224,18 @@ public final class RoutingContext {
         // Max speed (before braking), in km/h in profile and m/s in code
         maxSpeed = expctxGlobal.getVariableValue("maxSpeed", 45.f) / 3.6;
         // Equivalent surface for wind, S * C_x, F = -1/2 * S * C_x * v^2 = - S_C_x * v^2
-        S_C_x = expctxGlobal.getVariableValue("S_C_x", 0.5f * 0.45f);
+        sCX = expctxGlobal.getVariableValue("S_C_x", 0.5f * 0.45f);
         // Default resistance of the road, F = - m * g * C_r (for good quality road)
-        defaultC_r = expctxGlobal.getVariableValue("C_r", 0.01f);
+        defaultCR = expctxGlobal.getVariableValue("C_r", 0.01f);
         // Constant power of the biker (in W)
         bikerPower = expctxGlobal.getVariableValue("bikerPower", 100.f);
     }
 
-    public void cleanNogolist(List<OsmNodeNamed> waypoints) {
-        if (nogopoints == null)
+    public void cleanNogolist(final List<OsmNodeNamed> waypoints) {
+        if (nogopoints == null) {
             return;
-        List<OsmNodeNamed> nogos = new ArrayList<OsmNodeNamed>();
+        }
+        final List<OsmNodeNamed> nogos = new ArrayList<OsmNodeNamed>();
         for (OsmNodeNamed nogo : nogopoints) {
             boolean goodGuy = true;
             for (OsmNodeNamed wp : waypoints) {
@@ -246,17 +248,18 @@ public final class RoutingContext {
                     break;
                 }
             }
-            if (goodGuy)
+            if (goodGuy) {
                 nogos.add(nogo);
+            }
         }
         nogopoints = nogos.isEmpty() ? null : nogos;
     }
 
     public long[] getNogoChecksums() {
-        long[] cs = new long[3];
-        int n = nogopoints == null ? 0 : nogopoints.size();
+        final long[] cs = new long[3];
+        final int n = nogopoints == null ? 0 : nogopoints.size();
         for (int i = 0; i < n; i++) {
-            OsmNodeNamed nogo = nogopoints.get(i);
+            final OsmNodeNamed nogo = nogopoints.get(i);
             cs[0] += nogo.ilon;
             cs[1] += nogo.ilat;
             // 10 is an arbitrary constant to get sub-integer precision in the checksum
@@ -265,16 +268,17 @@ public final class RoutingContext {
         return cs;
     }
 
-    public void setWaypoint(OsmNodeNamed wp, boolean endpoint) {
+    public void setWaypoint(final OsmNodeNamed wp, final boolean endpoint) {
         setWaypoint(wp, null, endpoint);
     }
 
-    public void setWaypoint(OsmNodeNamed wp, OsmNodeNamed pendingEndpoint, boolean endpoint) {
+    public void setWaypoint(final OsmNodeNamed wp, final OsmNodeNamed pendingEndpoint, final boolean endpoint) {
         keepnogopoints = nogopoints;
         nogopoints = new ArrayList<OsmNodeNamed>();
         nogopoints.add(wp);
-        if (keepnogopoints != null)
+        if (keepnogopoints != null) {
             nogopoints.addAll(keepnogopoints);
+        }
         isEndpoint = endpoint;
         this.pendingEndpoint = pendingEndpoint;
     }
@@ -296,9 +300,9 @@ public final class RoutingContext {
     }
 
     public int calcDistance(int lon1, int lat1, int lon2, int lat2) {
-        double[] lonlat2m = CheapRuler.getLonLatToMeterScales((lat1 + lat2) >> 1);
-        double dlon2m = lonlat2m[0];
-        double dlat2m = lonlat2m[1];
+        final double[] lonlat2m = CheapRulerHelper.getLonLatToMeterScales((lat1 + lat2) >> 1);
+        final double dlon2m = lonlat2m[0];
+        final double dlat2m = lonlat2m[1];
         double dx = (lon2 - lon1) * dlon2m;
         double dy = (lat2 - lat1) * dlat2m;
         double d = Math.sqrt(dy * dy + dx * dx);
@@ -307,17 +311,16 @@ public final class RoutingContext {
 
         if (nogopoints != null && !nogopoints.isEmpty() && d > 0.) {
             for (int ngidx = 0; ngidx < nogopoints.size(); ngidx++) {
-                OsmNodeNamed nogo = nogopoints.get(ngidx);
-                double x1 = (lon1 - nogo.ilon) * dlon2m;
-                double y1 = (lat1 - nogo.ilat) * dlat2m;
-                double x2 = (lon2 - nogo.ilon) * dlon2m;
-                double y2 = (lat2 - nogo.ilat) * dlat2m;
-                double r12 = x1 * x1 + y1 * y1;
-                double r22 = x2 * x2 + y2 * y2;
+                final OsmNodeNamed nogo = nogopoints.get(ngidx);
+                final double x1 = (lon1 - nogo.ilon) * dlon2m;
+                final double y1 = (lat1 - nogo.ilat) * dlat2m;
+                final double x2 = (lon2 - nogo.ilon) * dlon2m;
+                final double y2 = (lat2 - nogo.ilat) * dlat2m;
+                final double r12 = x1 * x1 + y1 * y1;
+                final double r22 = x2 * x2 + y2 * y2;
                 double radius = Math.abs(r12 < r22 ? y1 * dx - x1 * dy : y2 * dx - x2 * dy) / d;
 
-                if (radius < nogo.radius) // 20m
-                {
+                if (radius < nogo.radius) { // 20m
                     double s1 = x1 * dx + y1 * dy;
                     double s2 = x2 * dx + y2 * dy;
 
@@ -328,8 +331,9 @@ public final class RoutingContext {
                     }
                     if (s2 > 0.) {
                         radius = Math.sqrt(s1 < s2 ? r12 : r22);
-                        if (radius > nogo.radius)
+                        if (radius > nogo.radius) {
                             continue;
+                        }
                     }
                     if (nogo.isNogo) {
                         if (!(nogo instanceof OsmNogoPolygon)) {  // nogo is a circle
@@ -362,8 +366,8 @@ public final class RoutingContext {
                         // calculate remaining distance
                         if (s2 < 0.) {
                             wayfraction = -s2 / (d * d);
-                            double xm = x2 - wayfraction * dx;
-                            double ym = y2 - wayfraction * dy;
+                            final double xm = x2 - wayfraction * dx;
+                            final double ym = y2 - wayfraction * dy;
                             ilonshortest = (int) (xm / dlon2m + nogo.ilon);
                             ilatshortest = (int) (ym / dlat2m + nogo.ilat);
                         } else if (s1 > s2) {
@@ -399,22 +403,22 @@ public final class RoutingContext {
         return (int) (d + 1.0);
     }
 
-    public OsmPrePath createPrePath(OsmPath origin, OsmLink link) {
-        OsmPrePath p = pm.createPrePath();
+    public OsmPrePath createPrePath(final OsmPath origin, final OsmLink link) {
+        final OsmPrePath p = pm.createPrePath();
         if (p != null) {
             p.init(origin, link, this);
         }
         return p;
     }
 
-    public OsmPath createPath(OsmLink link) {
-        OsmPath p = pm.createPath();
+    public OsmPath createPath(final OsmLink link) {
+        final OsmPath p = pm.createPath();
         p.init(link);
         return p;
     }
 
-    public OsmPath createPath(OsmPath origin, OsmLink link, OsmTrack refTrack, boolean detailMode) {
-        OsmPath p = pm.createPath();
+    public OsmPath createPath(final OsmPath origin, final OsmLink link, final OsmTrack refTrack, final boolean detailMode) {
+        final OsmPath p = pm.createPath();
         p.init(origin, link, refTrack, detailMode, this);
         return p;
     }
