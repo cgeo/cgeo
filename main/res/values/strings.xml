@@ -258,7 +258,7 @@
     <string name="warn_no_pocket_query_found">No Pocket query found online.</string>
     <string name="warn_invalid_character">Character must be a LETTER or a DIGIT</string>
     <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
+    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally. Tap here for more information.</string>
     <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Error reading Pocket query list.</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
