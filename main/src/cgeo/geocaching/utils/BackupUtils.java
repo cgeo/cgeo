@@ -52,6 +52,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -157,12 +158,15 @@ public class BackupUtils {
     public void restoreInternal(final Activity activityContext, final ContentStorageActivityHelper contentStorageActivityHelper, final Folder backupDir, final boolean database, final boolean settings) {
         final Consumer<String> consumer = resultString -> {
 
-            // build a list of folders currently set
+            // build a list of folders currently set and a list of remaining folders
             final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues = new ArrayList<>();
+            final ArrayList<ImmutablePair<PersistableFolder, String>> unsetFolders = new ArrayList<>();
             for (PersistableFolder folder : PersistableFolder.values()) {
                 final String value = Settings.getPersistableFolderRaw(folder);
                 if (value != null) {
                     currentFolderValues.add(new ImmutableTriple<>(folder, activityContext.getString(folder.getPrefKeyId()), value));
+                } else {
+                    unsetFolders.add(new ImmutablePair<>(folder, activityContext.getString(folder.getPrefKeyId())));
                 }
             }
 
@@ -171,7 +175,7 @@ public class BackupUtils {
                 if (!resultString.isEmpty()) {
                     resultString += "\n\n";
                 }
-                restartNeeded = restoreSettingsInternal(backupDir, currentFolderValues);
+                restartNeeded = restoreSettingsInternal(backupDir, currentFolderValues, unsetFolders);
 
                 if (!restartNeeded) {
                     resultString += activityContext.getString(R.string.init_restore_settings_failed);
@@ -283,7 +287,7 @@ public class BackupUtils {
      */
 
     // returns true on success
-    private boolean restoreSettingsInternal(final Folder backupDir, final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues) {
+    private boolean restoreSettingsInternal(final Folder backupDir, final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues, final ArrayList<ImmutablePair<PersistableFolder, String>> unsetFolders) {
         try {
             // open file
             final InputStream file = ContentStorage.get().openForRead(getSettingsFile(backupDir).uri);
@@ -336,18 +340,8 @@ public class BackupUtils {
                         } else if (SettingsUtils.getType(parser.getName()) == type) {
                             boolean handled = false;
                             if (type == TYPE_STRING) {
-                                // check if persistable folder settings differ
-                                for (int i = 0; i < currentFolderValues.size(); i++) {
-                                    final ImmutableTriple<PersistableFolder, String, String> current = currentFolderValues.get(i);
-                                    if (current.middle.equals(key)) {
-                                        if (!current.right.equals(value)) {
-                                            currentFolderValues.add(new ImmutableTriple<>(current.left, current.middle, value));
-                                        }
-                                        currentFolderValues.remove(i);
-                                        handled = true;
-                                        break;
-                                    }
-                                }
+                                // check for persistable folder settings
+                                handled = checkForFolderSetting(currentFolderValues, unsetFolders, key, value);
                             }
                             if (!handled) {
                                 SettingsUtils.putValue(editor, type, key, value);
@@ -376,6 +370,33 @@ public class BackupUtils {
             Dialogs.message(activityContext, R.string.init_backup_settings_restore, R.string.settings_readingerror);
             return false;
         }
+    }
+
+    private boolean checkForFolderSetting(final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues, final ArrayList<ImmutablePair<PersistableFolder, String>> unsetFolders, final String key, final String value) {
+        // check if persistable folder settings differ
+        for (int i = 0; i < currentFolderValues.size(); i++) {
+            final ImmutableTriple<PersistableFolder, String, String> current = currentFolderValues.get(i);
+            if (current.middle.equals(key)) {
+                if (!current.right.equals(value)) {
+                    currentFolderValues.add(new ImmutableTriple<>(current.left, current.middle, value));
+                }
+                currentFolderValues.remove(i);
+                return true;
+            }
+        }
+
+        // check if this is a folder grant setting for a folder currently not set
+        for (int i = 0; i < unsetFolders.size(); i++) {
+            final ImmutablePair<PersistableFolder, String> current = unsetFolders.get(i);
+            if (current.right.equals(key)) {
+                currentFolderValues.add(new ImmutableTriple<>(current.left, current.right, value));
+                unsetFolders.remove(i);
+                return true;
+            }
+        }
+
+        // no folder-related setting found
+        return false;
     }
 
     private void restoreDatabaseInternal(final Folder backupDir, final Consumer<String> consumer) {
