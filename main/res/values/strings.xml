@@ -873,6 +873,8 @@
     <string name="persistablefolder_logfiles">Logfiles</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
     <string name="persistablefolder_spoilerimages">Spoiler Images</string>
+    <string name="persistablefolder_routingbase">Routing</string>
+    <string name="persistablefolder_routingtiles">Routing data</string>
 
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s done</string>

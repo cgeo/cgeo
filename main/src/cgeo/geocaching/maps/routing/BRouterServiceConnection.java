@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.routing;
 
+import cgeo.geocaching.brouter.IBRouterService;
+
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -7,8 +9,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import androidx.annotation.Nullable;
-
-import btools.routingapp.IBRouterService;
 
 public class BRouterServiceConnection implements ServiceConnection {
     private IBRouterService brouterService;
