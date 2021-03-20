@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string translatable="false" name="app_name">c:geo</string>
+
     <string-array translatable="false" name="waypoint_coordinate_formats">
         <item>@string/waypoint_coordinate_formats_plain</item>
         <item>DDD.DDDDD°</item>
@@ -25,7 +27,30 @@
         <item>800</item>
         <item>1024</item>
     </integer-array>
+    <string translatable="false" name="log_image_scale_option_entry">%1$d x %2$d px</string>
+    <string translatable="false" name="log_image_scale_option_entry_noimage">%1$d px</string>
 
+    <!-- location services -->
+    <string translatable="false" name="loc_gps">GPS</string>
+
+    <!-- Persistable Folders -->
+    <string translatable="false"  name="persistablefolder_gpx">GPX</string>
+
+    <!-- export -->
+    <string translatable="false" name="export_gpx">GPX</string>
+
+    <!-- map sources -->
+    <string translatable="false" name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string translatable="false" name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string translatable="false" name="map_source_osm_cyclosm">CyclOSM</string>
+
+    <!-- calendar adder -->
+    <string translatable="false" name="waypoint_latitude_null">N/S --° --.---</string>
+    <string translatable="false" name="waypoint_longitude_null">E/W --° --.---</string>
+
+    <!-- settings -->
+    <string translatable="false" name="settings_title_gpx">GPX</string>
+    <string translatable="false" name="init_signature_template_url">URL</string>
     <string translatable="false" name="settings_gc_legal_note_url">https://www.geocaching.com/account/documents/termsofuse</string>
     <string translatable="false" name="settings_send2cgeo_url">https://send2.cgeo.org/</string>
     <string translatable="false" name="settings_facebook_login_url">https://faq.cgeo.org/#facebook-login</string>
@@ -142,6 +167,7 @@
     <!-- cache menu -->
     <string translatable="false" name="caches_map_mapswithme">Maps.me</string>
     <string translatable="false" name="cache_menu_mapswithme">Maps.me</string>
+    <string translatable="false" name="cache_menu_rmaps">Rmaps</string>
     <string translatable="false" name="faq_link"><a href="">faq.cgeo.org</a></string>
     <string translatable="false" name="website_link"><a href="">cgeo.org</a></string>
     <string translatable="false" name="twitter_link"><a href="">@android_GC</a></string>
