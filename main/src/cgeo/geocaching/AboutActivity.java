@@ -12,14 +12,17 @@ import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.LiUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SystemInformation;
 import cgeo.geocaching.utils.Version;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.View;
@@ -30,9 +33,11 @@ import android.widget.TextView;
 import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
 import androidx.core.text.HtmlCompat;
+import androidx.core.util.Consumer;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -45,6 +50,8 @@ import org.apache.commons.lang3.tuple.Pair;
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
 
     private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
+
+    private final GatherSystemInformationTask systemInformationTask = new GatherSystemInformationTask();
 
     class LicenseViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
@@ -170,15 +177,23 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final AboutSystemPageBinding binding = AboutSystemPageBinding.inflate(getLayoutInflater(), parentView, false);
-            final String systemInfo = SystemInformation.getSystemInformation(AboutActivity.this);
-            binding.system.setText(systemInfo);
+            binding.system.setText("System Information is collected, please wait...");
+            binding.copy.setEnabled(false);
+            binding.share.setEnabled(false);
+            systemInformationTask.getSystemInformation(si -> {
+                    binding.system.setText(si);
+                    binding.copy.setEnabled(true);
+                    binding.copy.setOnClickListener(view1 -> {
+                        ClipboardUtils.copyToClipboard(si);
+                        showShortToast(getString(R.string.clipboard_copy_ok));
+                    });
+                    binding.share.setEnabled(true);
+                    binding.share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(AboutActivity.this, getString(R.string.about_system_info), si, null, R.string.about_system_info_send_chooser));
+
+            });
             binding.system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             binding.system.setTextIsSelectable(true);
-            binding.copy.setOnClickListener(view1 -> {
-                ClipboardUtils.copyToClipboard(systemInfo);
-                showShortToast(getString(R.string.clipboard_copy_ok));
-            });
-            binding.share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(AboutActivity.this, getString(R.string.about_system_info), systemInfo, null, R.string.about_system_info_send_chooser));
+
             binding.logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(AboutActivity.this));
             return binding.getRoot();
         }
@@ -196,9 +211,13 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 binding.aboutSpecialBuild.setText(BuildConfig.SPECIAL_BUILD);
                 binding.aboutSpecialBuild.setVisibility(View.VISIBLE);
             }
+            binding.support.setEnabled(false);
+            systemInformationTask.getSystemInformation(si -> {
+                setClickListener(binding.support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
+                    "&body=" + Uri.encode(si) + "\n");
+                binding.support.setEnabled(true);
+            });
 
-            setClickListener(binding.support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
-                    "&body=" + Uri.encode(SystemInformation.getSystemInformation(AboutActivity.this)) + "\n");
             setClickListener(binding.website, "https://www.cgeo.org/");
             setClickListener(binding.facebook, "https://www.facebook.com/pages/cgeo/297269860090");
             setClickListener(binding.fangroup, "https://facebook.com/groups/cgeo.fangruppe");
@@ -231,6 +250,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         super.onCreate(savedInstanceState, R.layout.viewpager_activity);
 
         Routing.connect();
+        systemInformationTask.execute();
 
         int startPage = Page.VERSION.ordinal();
         final Bundle extras = getIntent().getExtras();
@@ -245,6 +265,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     protected void onDestroy() {
         Routing.disconnect();
         super.onDestroy();
+        systemInformationTask.onDestroy();
     }
 
     public final void setClickListener(final View view, final String url) {
@@ -290,6 +311,48 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         final Intent intent = new Intent(fromActivity, AboutActivity.class);
         intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.CHANGELOG.ordinal());
         fromActivity.startActivity(intent);
+    }
+
+    private static class GatherSystemInformationTask extends AsyncTask<Void, Void, String> {
+
+        private final Object mutex = new Object();
+        private String systemInformation = null;
+        private final List<Consumer<String>> consumers = new ArrayList<>();
+
+        public void getSystemInformation(final Consumer<String> callback) {
+            synchronized (mutex) {
+                if (systemInformation != null) {
+                    callback.accept(systemInformation);
+                    return;
+                }
+                consumers.add(callback);
+            }
+        }
+
+        public void onDestroy() {
+            synchronized (mutex) {
+                consumers.clear();
+                systemInformation = null;
+            }
+        }
+
+        @Override
+        protected String doInBackground(final Void[] params) {
+            final Context context = CgeoApplication.getInstance().getApplicationContext();
+            return SystemInformation.getSystemInformation(context);
+        }
+
+        @Override
+        protected void onPostExecute(final String systemInformation) {
+            Log.d("SystemInformation returned");
+            synchronized (mutex) {
+                this.systemInformation = systemInformation;
+                for (Consumer<String> consumer : consumers) {
+                    consumer.accept(this.systemInformation);
+                }
+                consumers.clear();
+            }
+        }
     }
 
 }
