@@ -258,7 +258,6 @@
     <string translatable="false" name="pref_last_cache_log">last_cache_log</string>
     <string translatable="false" name="pref_last_trackable_log">last_trackable_log</string>
     <string translatable="false" name="pref_home_location">home_location</string>
-    <string translatable="false" name="pref_map_direction">map_direction</string>
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
     <string translatable="false" name="pref_localstorage_version">localstorage_version</string>
