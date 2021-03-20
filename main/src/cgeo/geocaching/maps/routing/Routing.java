@@ -67,7 +67,7 @@ public final class Routing {
 
         brouter = new BRouterServiceConnection(SERVICE_CONNECTED_CALLBACK);
         final Intent intent = new Intent();
-        intent.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
+            intent.setClassName("cgeo.geocaching", "cgeo.geocaching.brouter.BRouterService");
 
         if (!getContext().bindService(intent, brouter, Context.BIND_AUTO_CREATE)) {
             brouter = null;

@@ -44,6 +44,10 @@ public enum PersistableFolder {
     FIELD_NOTES(R.string.pref_persistablefolder_fieldnotes, R.string.persistablefolder_fieldnotes, Folder.fromPersistableFolder(BASE, "field-notes")),
     ///** Spoiler Image folder */
     SPOILER_IMAGES(R.string.pref_persistablefolder_spoilerimages, R.string.persistablefolder_spoilerimages, Folder.fromPersistableFolder(BASE, "GeocachePhotos")),
+    /** Routing base & config folder */
+    ROUTING_BASE(R.string.pref_persistablefolder_routingbase, R.string.persistablefolder_routingbase, Folder.fromPersistableFolder(BASE, "routing")),
+    /** Routing tile files */
+    ROUTING_TILES(R.string.pref_persistablefolder_routingtiles, R.string.persistablefolder_routingtiles, Folder.fromPersistableFolder(ROUTING_BASE, "segments4")),
 
     /** A Folder to use solely for Unit Test */
     TEST_FOLDER(R.string.pref_persistablefolder_testdir, 0, Folder.fromFolder(CGEO_PRIVATE_FILES,  "unittest"));

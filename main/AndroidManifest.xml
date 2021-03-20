@@ -744,6 +744,12 @@
             android:name=".speech.SpeechService"
             android:label="@string/tts_service" >
         </service>
+        <service
+            android:name=".brouter.BRouterService"
+            android:exported="false"
+            android:enabled="true"
+            android:process=":brouter_service">
+        </service>
 
         <activity
             android:name=".connector.oc.OCAuthorizationActivity"
