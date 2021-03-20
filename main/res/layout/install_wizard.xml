@@ -28,14 +28,14 @@
                 android:layout_below="@id/wizard_logo"
                 android:layout_marginTop="32dp"
                 style="@style/InstallationWizardTextViewBase"
-                android:textSize="28sp" />
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/wizard_text"
                 android:layout_below="@id/wizard_title"
                 android:layout_marginTop="32dp"
                 style="@style/InstallationWizardTextViewBase"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/wizard_button1_info"
