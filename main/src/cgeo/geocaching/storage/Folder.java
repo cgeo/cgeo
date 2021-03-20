@@ -254,7 +254,7 @@ public class Folder {
         return this.toConfig(true).hashCode();
     }
 
-    /** returns a config string for this foleer fit for reconstrucvting it using {@link Folder#fromConfig(String)}. This value is ALWAYS immutable even whne folder type is volatile */
+    /** returns a config string for this folder fit for reconstructing it using {@link Folder#fromConfig(String)}. This value is ALWAYS immutable even when folder type is volatile */
     public String toConfig() {
         return toConfig(false);
     }

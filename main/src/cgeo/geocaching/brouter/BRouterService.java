@@ -1,5 +1,6 @@
 package cgeo.geocaching.brouter;
 
+import cgeo.geocaching.brouter.util.DefaultFilesUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Service;
@@ -55,6 +56,7 @@ public class BRouterService extends Service {
     @Override
     public IBinder onBind(final Intent arg0) {
         Log.d(getClass().getSimpleName() + "onBind()");
+        DefaultFilesUtils.checkDefaultFiles();
         return myBRouterServiceStub;
     }
 
