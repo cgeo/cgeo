@@ -24,7 +24,7 @@ public final class DataBuffers {
      * construct a set of databuffers except
      * for 'iobuffer', where the given array is used
      */
-    public DataBuffers(byte[] iobuffer) {
+    public DataBuffers(final byte[] iobuffer) {
         this.iobuffer = iobuffer;
     }
 

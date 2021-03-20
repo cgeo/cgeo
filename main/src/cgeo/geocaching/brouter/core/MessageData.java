@@ -7,40 +7,40 @@ package cgeo.geocaching.brouter.core;
 
 
 final class MessageData implements Cloneable {
-    int linkdist = 0;
-    int linkelevationcost = 0;
-    int linkturncost = 0;
-    int linknodecost = 0;
-    int linkinitcost = 0;
+    public int linkdist = 0;
+    public int linkelevationcost = 0;
+    public int linkturncost = 0;
+    public int linknodecost = 0;
+    public int linkinitcost = 0;
 
-    float costfactor;
-    int priorityclassifier;
-    int classifiermask;
-    float turnangle;
-    String wayKeyValues;
-    String nodeKeyValues;
+    public float costfactor;
+    public int priorityclassifier;
+    public int classifiermask;
+    public float turnangle;
+    public String wayKeyValues;
+    public String nodeKeyValues;
 
-    int lon;
-    int lat;
-    short ele;
+    public int lon;
+    public int lat;
+    public short ele;
 
-    float time;
-    float energy;
+    public float time;
+    public float energy;
 
     // speed profile
-    int vmaxExplicit = -1;
-    int vmax = -1;
-    int vmin = -1;
-    int vnode0 = 999;
-    int vnode1 = 999;
-    int extraTime = 0;
+    public int vmaxExplicit = -1;
+    public int vmax = -1;
+    public int vmin = -1;
+    public int vnode0 = 999;
+    public int vnode1 = 999;
+    public int extraTime = 0;
 
-    String toMessage() {
+    public String toMessage() {
         if (wayKeyValues == null) {
             return null;
         }
 
-        int iCost = (int) (costfactor * 1000 + 0.5f);
+        final int iCost = (int) (costfactor * 1000 + 0.5f);
         return (lon - 180000000) + "\t"
             + (lat - 90000000) + "\t"
             + ele / 4 + "\t"
@@ -54,7 +54,7 @@ final class MessageData implements Cloneable {
             + "\t" + (nodeKeyValues == null ? "" : nodeKeyValues);
     }
 
-    void add(MessageData d) {
+    public void add(final MessageData d) {
         linkdist += d.linkdist;
         linkelevationcost += d.linkelevationcost;
         linkturncost += d.linkturncost;
@@ -62,7 +62,7 @@ final class MessageData implements Cloneable {
         linkinitcost += d.linkinitcost;
     }
 
-    MessageData copy() {
+    public MessageData copy() {
         try {
             return (MessageData) clone();
         } catch (CloneNotSupportedException e) {

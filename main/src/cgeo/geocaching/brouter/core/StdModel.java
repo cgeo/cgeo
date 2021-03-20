@@ -5,12 +5,11 @@
  */
 package cgeo.geocaching.brouter.core;
 
-import java.util.Map;
-
 import cgeo.geocaching.brouter.expressions.BExpressionContext;
 import cgeo.geocaching.brouter.expressions.BExpressionContextNode;
 import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
 
+import java.util.Map;
 
 final class StdModel extends OsmPathModel {
     protected BExpressionContextWay ctxWay;
@@ -25,11 +24,11 @@ final class StdModel extends OsmPathModel {
     }
 
     @Override
-    public void init(BExpressionContextWay expctxWay, BExpressionContextNode expctxNode, Map<String, String> keyValues) {
+    public void init(final BExpressionContextWay expctxWay, final BExpressionContextNode expctxNode, final Map<String, String> keyValues) {
         ctxWay = expctxWay;
         ctxNode = expctxNode;
 
-        BExpressionContext expctxGlobal = expctxWay; // just one of them...
+        final BExpressionContext expctxGlobal = expctxWay; // just one of them...
 
     }
 }

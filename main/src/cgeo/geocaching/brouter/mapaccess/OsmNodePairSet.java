@@ -16,13 +16,13 @@ public class OsmNodePairSet {
     private int freezecount = 0;
     private CompactLongMap<OsmNodePair> map;
 
-    public OsmNodePairSet(int maxTempNodeCount) {
+    public OsmNodePairSet(final int maxTempNodeCount) {
         maxTempNodes = maxTempNodeCount;
         n1a = new long[maxTempNodes];
         n2a = new long[maxTempNodes];
     }
 
-    public void addTempPair(long n1, long n2) {
+    public void addTempPair(final long n1, final long n2) {
         if (tempNodes < maxTempNodes) {
             n1a[tempNodes] = n1;
             n2a[tempNodes] = n2;
@@ -42,7 +42,7 @@ public class OsmNodePairSet {
         tempNodes = 0;
     }
 
-    private void addPair(long n1, long n2) {
+    private void addPair(final long n1, final long n2) {
         if (map == null) {
             map = new CompactLongMap<OsmNodePair>();
         }
@@ -81,11 +81,11 @@ public class OsmNodePairSet {
         return freezecount;
     }
 
-    public boolean hasPair(long n1, long n2) {
+    public boolean hasPair(final long n1, final long n2) {
         return map != null && (getElement(n1, n2) != null || getElement(n2, n1) != null);
     }
 
-    private OsmNodePair getElement(long n1, long n2) {
+    private OsmNodePair getElement(final long n1, final long n2) {
         OsmNodePair e = map.get(n1);
         while (e != null) {
             if (e.node2 == n2) {

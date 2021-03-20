@@ -5,10 +5,10 @@
  */
 package cgeo.geocaching.brouter.mapaccess;
 
+import cgeo.geocaching.brouter.util.ByteArrayUnifier;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import cgeo.geocaching.brouter.util.ByteArrayUnifier;
 
 public final class OsmNodesMap {
     public int nodesCreated;
@@ -27,12 +27,12 @@ public final class OsmNodesMap {
     private long currentmaxmem = 4000000; // start with 4 MB
     private ArrayList<OsmNode> nodes2check;
 
-    private static void addLinks(OsmNode[] nodes, int idx, boolean isBorder, int[] links) {
-        OsmNode n = nodes[idx];
+    private static void addLinks(final OsmNode[] nodes, final int idx, final boolean isBorder, final int[] links) {
+        final OsmNode n = nodes[idx];
         n.visitID = isBorder ? 1 : 0;
         n.selev = (short) idx;
         for (int i : links) {
-            OsmNode t = nodes[i];
+            final OsmNode t = nodes[i];
             OsmLink link = n.isLinkUnused() ? n : (t.isLinkUnused() ? t : null);
             if (link == null) {
                 link = new OsmLink();
@@ -41,8 +41,8 @@ public final class OsmNodesMap {
         }
     }
 
-    public static void main(String[] args) {
-        OsmNode[] nodes = new OsmNode[12];
+    public static void main(final String[] args) {
+        final OsmNode[] nodes = new OsmNode[12];
         for (int i = 0; i < nodes.length; i++) {
             nodes[i] = new OsmNode((i + 1000) * 1000, (i + 1000) * 1000);
 
@@ -61,7 +61,7 @@ public final class OsmNodesMap {
         addLinks(nodes, 10, false, new int[]{11});  // 10
         addLinks(nodes, 11, false, new int[]{});  // 11
 
-        OsmNodesMap nm = new OsmNodesMap();
+        final OsmNodesMap nm = new OsmNodesMap();
 
         nm.cleanupMode = 2;
 
@@ -74,7 +74,7 @@ public final class OsmNodesMap {
 
     }
 
-    public void cleanupAndCount(OsmNode[] nodes) {
+    public void cleanupAndCount(final OsmNode[] nodes) {
         if (cleanupMode == 0) {
             justCount(nodes);
         } else {
@@ -82,37 +82,35 @@ public final class OsmNodesMap {
         }
     }
 
-    private void justCount(OsmNode[] nodes) {
+    private void justCount(final OsmNode[] nodes) {
         for (int i = 0; i < nodes.length; i++) {
-            OsmNode n = nodes[i];
+            final OsmNode n = nodes[i];
             if (n.firstlink != null) {
                 nodesCreated++;
             }
         }
     }
 
-    private void cleanupPeninsulas(OsmNode[] nodes) {
+    private void cleanupPeninsulas(final OsmNode[] nodes) {
         baseID = lastVisitID++;
-        for (int i = 0; i < nodes.length; i++) // loop over nodes again just for housekeeping
-        {
-            OsmNode n = nodes[i];
-            if (n.firstlink != null) {
-                if (n.visitID == 1) {
-                    try {
-                        minVisitIdInSubtree(null, n);
-                    } catch (StackOverflowError soe) {
-                        // System.out.println( "+++++++++++++++ StackOverflowError ++++++++++++++++" );
-                    }
+        for (int i = 0; i < nodes.length; i++) { // loop over nodes again just for housekeeping
+            final OsmNode n = nodes[i];
+            if (n.firstlink != null && n.visitID == 1) {
+                try {
+                    minVisitIdInSubtree(null, n);
+                } catch (StackOverflowError soe) {
+                    // System.out.println( "+++++++++++++++ StackOverflowError ++++++++++++++++" );
                 }
             }
         }
     }
 
-    private int minVisitIdInSubtree(OsmNode source, OsmNode n) {
-        if (n.visitID == 1)
+    private int minVisitIdInSubtree(final OsmNode source, final OsmNode n) {
+        if (n.visitID == 1) {
             n.visitID = baseID; // border node
-        else
+        } else {
             n.visitID = lastVisitID++;
+        }
         int minId = n.visitID;
         nodesCreated++;
 
@@ -120,20 +118,21 @@ public final class OsmNodesMap {
         for (OsmLink l = n.firstlink; l != null; l = nextLink) {
             nextLink = l.getNext(n);
 
-            OsmNode t = l.getTarget(n);
-            if (t == source)
+            final OsmNode t = l.getTarget(n);
+            if (t == source) {
                 continue;
-            if (t.isHollow())
+            }
+            if (t.isHollow()) {
                 continue;
+            }
 
             int minIdSub = t.visitID;
             if (minIdSub == 1) {
                 minIdSub = baseID;
             } else if (minIdSub == 0) {
-                int nodesCreatedUntilHere = nodesCreated;
+                final int nodesCreatedUntilHere = nodesCreated;
                 minIdSub = minVisitIdInSubtree(n, t);
-                if (minIdSub > n.visitID) // peninsula ?
-                {
+                if (minIdSub > n.visitID) { // peninsula ?
                     nodesCreated = nodesCreatedUntilHere;
                     n.unlinkLink(l);
                     t.unlinkLink(l);
@@ -143,13 +142,14 @@ public final class OsmNodesMap {
             } else if (cleanupMode == 2) {
                 minIdSub = baseID; // in tree-mode, hitting anything is like a gateway
             }
-            if (minIdSub < minId)
+            if (minIdSub < minId) {
                 minId = minIdSub;
+            }
         }
         return minId;
     }
 
-    public boolean isInMemoryBounds(int npaths, boolean extend) {
+    public boolean isInMemoryBounds(final int npaths, final boolean extend) {
 //    long total = nodesCreated * 76L + linksCreated * 48L;
         long total = nodesCreated * 95L + npaths * 200L;
 
@@ -157,7 +157,7 @@ public final class OsmNodesMap {
             total += 100000;
 
             // when extending, try to have 1 MB  space
-            long delta = total + 1900000 - currentmaxmem;
+            final long delta = total + 1900000 - currentmaxmem;
             if (delta > 0) {
                 currentmaxmem += delta;
                 if (currentmaxmem > maxmem) {
@@ -168,7 +168,7 @@ public final class OsmNodesMap {
         return total <= currentmaxmem;
     }
 
-    private void addActiveNode(ArrayList<OsmNode> nodes2check, OsmNode n) {
+    private void addActiveNode(final ArrayList<OsmNode> nodes2check, final OsmNode n) {
         n.visitID = lastVisitID;
         nodesCreated++;
         nodes2check.add(n);
@@ -176,18 +176,18 @@ public final class OsmNodesMap {
 
     // is there an escape from this node
     // to a hollow node (or destination node) ?
-    public boolean canEscape(OsmNode n0) {
+    public boolean canEscape(final OsmNode n0) {
         boolean sawLowIDs = false;
         lastVisitID++;
         nodes2check.clear();
         nodes2check.add(n0);
         while (!nodes2check.isEmpty()) {
-            OsmNode n = nodes2check.remove(nodes2check.size() - 1);
+            final OsmNode n = nodes2check.remove(nodes2check.size() - 1);
             if (n.visitID < baseID) {
                 n.visitID = lastVisitID;
                 nodesCreated++;
                 for (OsmLink l = n.firstlink; l != null; l = l.getNext(n)) {
-                    OsmNode t = l.getTarget(n);
+                    final OsmNode t = l.getTarget(n);
                     nodes2check.add(t);
                 }
             } else if (n.visitID < lastVisitID) {
@@ -200,12 +200,12 @@ public final class OsmNodesMap {
 
         nodes2check.add(n0);
         while (!nodes2check.isEmpty()) {
-            OsmNode n = nodes2check.remove(nodes2check.size() - 1);
+            final OsmNode n = nodes2check.remove(nodes2check.size() - 1);
             if (n.visitID == lastVisitID) {
                 n.visitID = lastVisitID;
                 nodesCreated--;
                 for (OsmLink l = n.firstlink; l != null; l = l.getNext(n)) {
-                    OsmNode t = l.getTarget(n);
+                    final OsmNode t = l.getTarget(n);
                     nodes2check.add(t);
                 }
                 n.vanish();
@@ -230,17 +230,17 @@ public final class OsmNodesMap {
         baseID = lastVisitID;
 
         while (!nodes2check.isEmpty()) {
-            OsmNode n = nodes2check.remove(nodes2check.size() - 1);
+            final OsmNode n = nodes2check.remove(nodes2check.size() - 1);
             n.visitID = lastVisitID;
 
             for (OsmLink l = n.firstlink; l != null; l = l.getNext(n)) {
-                OsmNode t = l.getTarget(n);
+                final OsmNode t = l.getTarget(n);
                 if (t.visitID != lastVisitID) {
                     addActiveNode(nodes2check, t);
                 }
             }
             if (destination != null && currentMaxCost < 1000000000) {
-                int distance = n.calcDistance(destination);
+                final int distance = n.calcDistance(destination);
                 if (distance > currentMaxCost - currentPathCost + 100) {
                     n.vanish();
                 }
@@ -260,7 +260,7 @@ public final class OsmNodesMap {
      *
      * @return the node for the given id if exist, else null
      */
-    public OsmNode get(int ilon, int ilat) {
+    public OsmNode get(final int ilon, final int ilat) {
         testKey.ilon = ilon;
         testKey.ilat = ilat;
         return hmap.get(testKey);
@@ -268,9 +268,8 @@ public final class OsmNodesMap {
 
     // ********************** test cleanup **********************
 
-    public void remove(OsmNode node) {
-        if (node != endNode1 && node != endNode2) // keep endnodes in hollow-map even when loaded
-        {                                           // (needed for escape analysis)
+    public void remove(final OsmNode node) {
+        if (node != endNode1 && node != endNode2) { // keep endnodes in hollow-map even when loaded (needed for escape analysis)
             hmap.remove(node);
         }
     }
@@ -280,7 +279,7 @@ public final class OsmNodesMap {
      *
      * @return the previous node if that id existed, else null
      */
-    public OsmNode put(OsmNode node) {
+    public OsmNode put(final OsmNode node) {
         return hmap.put(node, node);
     }
 

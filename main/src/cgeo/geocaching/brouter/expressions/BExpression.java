@@ -35,11 +35,11 @@ final class BExpression {
     private int[] lookupValueIdxArray;
 
     // Parse the expression and all subexpression
-    public static BExpression parse(BExpressionContext ctx, int level) throws Exception {
+    public static BExpression parse(final BExpressionContext ctx, final int level) throws Exception {
         return parse(ctx, level, null);
     }
 
-    private static BExpression parse(BExpressionContext ctx, int level, String optionalToken) throws Exception {
+    private static BExpression parse(final BExpressionContext ctx, final int level, final String optionalToken) throws Exception {
         boolean brackets = false;
         String operator = ctx.parseToken();
         if (optionalToken != null && optionalToken.equals(operator)) {
@@ -51,19 +51,18 @@ final class BExpression {
         }
 
         if (operator == null) {
-            if (level == 0)
+            if (level == 0) {
                 return null;
-            else
+            } else {
                 throw new IllegalArgumentException("unexpected end of file");
-        }
-
-        if (level == 0) {
-            if (!"assign".equals(operator)) {
-                throw new IllegalArgumentException("operator " + operator + " is invalid on toplevel (only 'assign' allowed)");
             }
         }
 
-        BExpression exp = new BExpression();
+        if (level == 0 && !"assign".equals(operator)) {
+            throw new IllegalArgumentException("operator " + operator + " is invalid on toplevel (only 'assign' allowed)");
+        }
+
+        final BExpression exp = new BExpression();
         int nops = 3;
         boolean ifThenElse = false;
 
@@ -100,19 +99,24 @@ final class BExpression {
             } else {
                 nops = 1; // check unary expressions
                 if ("assign".equals(operator)) {
-                    if (level > 0)
+                    if (level > 0) {
                         throw new IllegalArgumentException("assign operator within expression");
+                    }
                     exp.typ = ASSIGN_EXP;
-                    String variable = ctx.parseToken();
-                    if (variable == null)
+                    final String variable = ctx.parseToken();
+                    if (variable == null) {
                         throw new IllegalArgumentException("unexpected end of file");
-                    if (variable.indexOf('=') >= 0)
+                    }
+                    if (variable.indexOf('=') >= 0) {
                         throw new IllegalArgumentException("variable name cannot contain '=': " + variable);
-                    if (variable.indexOf(':') >= 0)
+                    }
+                    if (variable.indexOf(':') >= 0) {
                         throw new IllegalArgumentException("cannot assign context-prefixed variable: " + variable);
+                    }
                     exp.variableIdx = ctx.getVariableIdx(variable, true);
-                    if (exp.variableIdx < ctx.getMinWriteIdx())
+                    if (exp.variableIdx < ctx.getMinWriteIdx()) {
                         throw new IllegalArgumentException("cannot assign to readonly variable " + variable);
+                    }
                 } else if ("not".equals(operator)) {
                     exp.typ = NOT_EXP;
                 } else {
@@ -120,45 +124,51 @@ final class BExpression {
                     int idx = operator.indexOf('=');
                     if (idx >= 0) {
                         exp.typ = LOOKUP_EXP;
-                        String name = operator.substring(0, idx);
-                        String values = operator.substring(idx + 1);
+                        final String name = operator.substring(0, idx);
+                        final String values = operator.substring(idx + 1);
 
                         exp.lookupNameIdx = ctx.getLookupNameIdx(name);
                         if (exp.lookupNameIdx < 0) {
                             throw new IllegalArgumentException("unknown lookup name: " + name);
                         }
                         ctx.markLookupIdxUsed(exp.lookupNameIdx);
-                        StringTokenizer tk = new StringTokenizer(values, "|");
-                        int nt = tk.countTokens();
-                        int nt2 = nt == 0 ? 1 : nt;
+                        final StringTokenizer tk = new StringTokenizer(values, "|");
+                        final int nt = tk.countTokens();
+                        final int nt2 = nt == 0 ? 1 : nt;
                         exp.lookupValueIdxArray = new int[nt2];
                         for (int ti = 0; ti < nt2; ti++) {
-                            String value = ti < nt ? tk.nextToken() : "";
+                            final String value = ti < nt ? tk.nextToken() : "";
                             exp.lookupValueIdxArray[ti] = ctx.getLookupValueIdx(exp.lookupNameIdx, value);
                             if (exp.lookupValueIdxArray[ti] < 0) {
                                 throw new IllegalArgumentException("unknown lookup value: " + value);
                             }
                         }
-                    } else if ((idx = operator.indexOf(':')) >= 0) {
-                        String context = operator.substring(0, idx);
-                        String varname = operator.substring(idx + 1);
-                        exp.typ = FOREIGN_VARIABLE_EXP;
-                        exp.variableIdx = ctx.getForeignVariableIdx(context, varname);
-                    } else if ((idx = ctx.getVariableIdx(operator, false)) >= 0) {
-                        exp.typ = VARIABLE_EXP;
-                        exp.variableIdx = idx;
-                    } else if ("true".equals(operator)) {
-                        exp.numberValue = 1.f;
-                        exp.typ = NUMBER_EXP;
-                    } else if ("false".equals(operator)) {
-                        exp.numberValue = 0.f;
-                        exp.typ = NUMBER_EXP;
                     } else {
-                        try {
-                            exp.numberValue = Float.parseFloat(operator);
-                            exp.typ = NUMBER_EXP;
-                        } catch (NumberFormatException nfe) {
-                            throw new IllegalArgumentException("unknown expression: " + operator);
+                        idx = operator.indexOf(':');
+                        if (idx >= 0) {
+                            final String context = operator.substring(0, idx);
+                            final String varname = operator.substring(idx + 1);
+                            exp.typ = FOREIGN_VARIABLE_EXP;
+                            exp.variableIdx = ctx.getForeignVariableIdx(context, varname);
+                        } else {
+                            idx = ctx.getVariableIdx(operator, false);
+                            if (idx >= 0) {
+                                exp.typ = VARIABLE_EXP;
+                                exp.variableIdx = idx;
+                            } else if ("true".equals(operator)) {
+                                exp.numberValue = 1.f;
+                                exp.typ = NUMBER_EXP;
+                            } else if ("false".equals(operator)) {
+                                exp.numberValue = 0.f;
+                                exp.typ = NUMBER_EXP;
+                            } else {
+                                try {
+                                    exp.numberValue = Float.parseFloat(operator);
+                                    exp.typ = NUMBER_EXP;
+                                } catch (NumberFormatException nfe) {
+                                    throw new IllegalArgumentException("unknown expression: " + operator);
+                                }
+                            }
                         }
                     }
                 }
@@ -169,13 +179,15 @@ final class BExpression {
             exp.op1 = BExpression.parse(ctx, level + 1, exp.typ == ASSIGN_EXP ? "=" : null);
         }
         if (nops > 1) {
-            if (ifThenElse)
+            if (ifThenElse) {
                 checkExpectedToken(ctx, "then");
+            }
             exp.op2 = BExpression.parse(ctx, level + 1, null);
         }
         if (nops > 2) {
-            if (ifThenElse)
+            if (ifThenElse) {
                 checkExpectedToken(ctx, "else");
+            }
             exp.op3 = BExpression.parse(ctx, level + 1, null);
         }
         if (brackets) {
@@ -184,20 +196,20 @@ final class BExpression {
         return exp;
     }
 
-    private static void checkExpectedToken(BExpressionContext ctx, String expected) throws Exception {
-        String token = ctx.parseToken();
+    private static void checkExpectedToken(final BExpressionContext ctx, final String expected) throws Exception {
+        final String token = ctx.parseToken();
         if (!expected.equals(token)) {
             throw new IllegalArgumentException("unexpected token: " + token + ", expected: " + expected);
         }
     }
 
     // Evaluate the expression
-    public float evaluate(BExpressionContext ctx) {
+    public float evaluate(final BExpressionContext ctx) {
         switch (typ) {
             case OR_EXP:
                 return op1.evaluate(ctx) != 0.f ? 1.f : (op2.evaluate(ctx) != 0.f ? 1.f : 0.f);
             case XOR_EXP:
-                return ((op1.evaluate(ctx) != 0.f) ^ (op2.evaluate(ctx) != 0.f) ? 1.f : 0.f);
+                return (op1.evaluate(ctx) != 0.f) ^ (op2.evaluate(ctx) != 0.f) ? 1.f : 0.f;
             case AND_EXP:
                 return op1.evaluate(ctx) != 0.f ? (op2.evaluate(ctx) != 0.f ? 1.f : 0.f) : 0.f;
             case ADD_EXP:
@@ -235,11 +247,11 @@ final class BExpression {
         }
     }
 
-    private float max(float v1, float v2) {
+    private float max(final float v1, final float v2) {
         return v1 > v2 ? v1 : v2;
     }
 
-    private float min(float v1, float v2) {
+    private float min(final float v1, final float v2) {
         return v1 < v2 ? v1 : v2;
     }
 }

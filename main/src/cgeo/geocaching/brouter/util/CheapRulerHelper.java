@@ -1,6 +1,6 @@
 package cgeo.geocaching.brouter.util;
 
-public final class CheapRuler {
+public final class CheapRulerHelper {
     /**
      * Cheap-Ruler Java implementation
      * See
@@ -12,16 +12,21 @@ public final class CheapRuler {
      * This is implemented as a Singleton to have a unique cache for the cosine
      * values across all the code.
      */
+
     // Conversion constants
-    public final static double ILATLNG_TO_LATLNG = 1e-6; // From integer to degrees
-    public final static int KILOMETERS_TO_METERS = 1000;
-    public final static double DEG_TO_RAD = Math.PI / 180.;
+    public static final double ILATLNG_TO_LATLNG = 1e-6; // From integer to degrees
+    public static final int KILOMETERS_TO_METERS = 1000;
+    public static final double DEG_TO_RAD = Math.PI / 180.;
 
     // Scale cache constants
-    private final static int SCALE_CACHE_LENGTH = 1800;
-    private final static int SCALE_CACHE_INCREMENT = 100000;
+    private static final int SCALE_CACHE_LENGTH = 1800;
+    private static final int SCALE_CACHE_INCREMENT = 100000;
     // SCALE_CACHE_LENGTH cached values between 0 and COS_CACHE_MAX_DEGREES degrees.
-    private final static double[][] SCALE_CACHE = new double[SCALE_CACHE_LENGTH][];
+    private static final double[][] SCALE_CACHE = new double[SCALE_CACHE_LENGTH][];
+
+    private CheapRulerHelper() {
+        // utility class
+    }
 
     /**
      * build the cache of cosine values.
@@ -32,17 +37,17 @@ public final class CheapRuler {
         }
     }
 
-    private static double[] calcKxKyFromILat(int ilat) {
-        double lat = DEG_TO_RAD * (ilat * ILATLNG_TO_LATLNG - 90);
-        double cos = Math.cos(lat);
-        double cos2 = 2 * cos * cos - 1;
-        double cos3 = 2 * cos * cos2 - cos;
-        double cos4 = 2 * cos * cos3 - cos2;
-        double cos5 = 2 * cos * cos4 - cos3;
+    private static double[] calcKxKyFromILat(final int ilat) {
+        final double lat = DEG_TO_RAD * (ilat * ILATLNG_TO_LATLNG - 90);
+        final double cos = Math.cos(lat);
+        final double cos2 = 2 * cos * cos - 1;
+        final double cos3 = 2 * cos * cos2 - cos;
+        final double cos4 = 2 * cos * cos3 - cos2;
+        final double cos5 = 2 * cos * cos4 - cos3;
 
         // Multipliers for converting integer longitude and latitude into distance
         // (http://1.usa.gov/1Wb1bv7)
-        double[] kxky = new double[2];
+        final double[] kxky = new double[2];
         kxky[0] = (111.41513 * cos - 0.09455 * cos3 + 0.00012 * cos5) * ILATLNG_TO_LATLNG * KILOMETERS_TO_METERS;
         kxky[1] = (111.13209 - 0.56605 * cos2 + 0.0012 * cos4) * ILATLNG_TO_LATLNG * KILOMETERS_TO_METERS;
         return kxky;
@@ -53,7 +58,7 @@ public final class CheapRuler {
      *
      * @return [lon-&gt;meter,lat-&gt;meter]
      */
-    public static double[] getLonLatToMeterScales(int ilat) {
+    public static double[] getLonLatToMeterScales(final int ilat) {
         return SCALE_CACHE[ilat / SCALE_CACHE_INCREMENT];
     }
 
@@ -71,10 +76,10 @@ public final class CheapRuler {
      * Integer longitude is ((longitude in degrees) + 180) * 1e6.
      * Integer latitude is ((latitude in degrees) + 90) * 1e6.
      */
-    public static double distance(int ilon1, int ilat1, int ilon2, int ilat2) {
-        double[] kxky = getLonLatToMeterScales((ilat1 + ilat2) >> 1);
-        double dlon = (ilon1 - ilon2) * kxky[0];
-        double dlat = (ilat1 - ilat2) * kxky[1];
+    public static double distance(final int ilon1, final int ilat1, final int ilon2, final int ilat2) {
+        final double[] kxky = getLonLatToMeterScales((ilat1 + ilat2) >> 1);
+        final double dlon = (ilon1 - ilon2) * kxky[0];
+        final double dlat = (ilat1 - ilat2) * kxky[1];
         return Math.sqrt(dlat * dlat + dlon * dlon); // in m
     }
 }

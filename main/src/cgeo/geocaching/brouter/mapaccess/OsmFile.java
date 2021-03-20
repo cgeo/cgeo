@@ -5,9 +5,6 @@
  */
 package cgeo.geocaching.brouter.mapaccess;
 
-import java.io.IOException;
-import java.io.RandomAccessFile;
-
 import cgeo.geocaching.brouter.codec.DataBuffers;
 import cgeo.geocaching.brouter.codec.MicroCache;
 import cgeo.geocaching.brouter.codec.MicroCache2;
@@ -15,7 +12,10 @@ import cgeo.geocaching.brouter.codec.StatCoderContext;
 import cgeo.geocaching.brouter.codec.TagValueValidator;
 import cgeo.geocaching.brouter.codec.WaypointMatcher;
 import cgeo.geocaching.brouter.util.ByteDataReader;
-import cgeo.geocaching.brouter.util.Crc32;
+import cgeo.geocaching.brouter.util.Crc32Utils;
+
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 final class OsmFile {
     public int lonDegree;
@@ -27,30 +27,30 @@ final class OsmFile {
     private MicroCache[] microCaches;
     private int divisor;
     private int cellsize;
-    private int ncaches;
     private int indexsize;
 
-    public OsmFile(PhysicalFile rafile, int lonDegree, int latDegree, DataBuffers dataBuffers) throws Exception {
+    OsmFile(final PhysicalFile rafile, final int lonDegree, final int latDegree, final DataBuffers dataBuffers) throws Exception {
         this.lonDegree = lonDegree;
         this.latDegree = latDegree;
-        int lonMod5 = lonDegree % 5;
-        int latMod5 = latDegree % 5;
-        int tileIndex = lonMod5 * 5 + latMod5;
+        final int lonMod5 = lonDegree % 5;
+        final int latMod5 = latDegree % 5;
+        final int tileIndex = lonMod5 * 5 + latMod5;
 
         if (rafile != null) {
             divisor = rafile.divisor;
 
             cellsize = 1000000 / divisor;
-            ncaches = divisor * divisor;
+            final int ncaches = divisor * divisor;
             indexsize = ncaches * 4;
 
-            byte[] iobuffer = dataBuffers.iobuffer;
+            final byte[] iobuffer = dataBuffers.iobuffer;
             filename = rafile.fileName;
 
-            long[] index = rafile.fileIndex;
+            final long[] index = rafile.fileIndex;
             fileOffset = tileIndex > 0 ? index[tileIndex - 1] : 200L;
-            if (fileOffset == index[tileIndex])
+            if (fileOffset == index[tileIndex]) {
                 return; // empty
+            }
 
             is = rafile.ra;
             posIdx = new int[ncaches];
@@ -59,13 +59,13 @@ final class OsmFile {
             is.readFully(iobuffer, 0, indexsize);
 
             if (rafile.fileHeaderCrcs != null) {
-                int headerCrc = Crc32.crc(iobuffer, 0, indexsize);
+                final int headerCrc = Crc32Utils.crc(iobuffer, 0, indexsize);
                 if (rafile.fileHeaderCrcs[tileIndex] != headerCrc) {
                     throw new IOException("sub index checksum error");
                 }
             }
 
-            ByteDataReader dis = new ByteDataReader(iobuffer);
+            final ByteDataReader dis = new ByteDataReader(iobuffer);
             for (int i = 0; i < ncaches; i++) {
                 posIdx[i] = dis.readInt();
             }
@@ -76,31 +76,31 @@ final class OsmFile {
         return microCaches != null;
     }
 
-    public MicroCache getMicroCache(int ilon, int ilat) {
-        int lonIdx = ilon / cellsize;
-        int latIdx = ilat / cellsize;
-        int subIdx = (latIdx - divisor * latDegree) * divisor + (lonIdx - divisor * lonDegree);
+    public MicroCache getMicroCache(final int ilon, final int ilat) {
+        final int lonIdx = ilon / cellsize;
+        final int latIdx = ilat / cellsize;
+        final int subIdx = (latIdx - divisor * latDegree) * divisor + (lonIdx - divisor * lonDegree);
         return microCaches[subIdx];
     }
 
-    public MicroCache createMicroCache(int ilon, int ilat, DataBuffers dataBuffers, TagValueValidator wayValidator, WaypointMatcher waypointMatcher, OsmNodesMap hollowNodes)
+    public MicroCache createMicroCache(final int ilon, final int ilat, final DataBuffers dataBuffers, final TagValueValidator wayValidator, final WaypointMatcher waypointMatcher, final OsmNodesMap hollowNodes)
         throws Exception {
-        int lonIdx = ilon / cellsize;
-        int latIdx = ilat / cellsize;
-        MicroCache segment = createMicroCache(lonIdx, latIdx, dataBuffers, wayValidator, waypointMatcher, true, hollowNodes);
-        int subIdx = (latIdx - divisor * latDegree) * divisor + (lonIdx - divisor * lonDegree);
+        final int lonIdx = ilon / cellsize;
+        final int latIdx = ilat / cellsize;
+        final MicroCache segment = createMicroCache(lonIdx, latIdx, dataBuffers, wayValidator, waypointMatcher, true, hollowNodes);
+        final int subIdx = (latIdx - divisor * latDegree) * divisor + (lonIdx - divisor * lonDegree);
         microCaches[subIdx] = segment;
         return segment;
     }
 
-    private int getPosIdx(int idx) {
+    private int getPosIdx(final int idx) {
         return idx == -1 ? indexsize : posIdx[idx];
     }
 
-    public int getDataInputForSubIdx(int subIdx, byte[] iobuffer) throws Exception {
-        int startPos = getPosIdx(subIdx - 1);
-        int endPos = getPosIdx(subIdx);
-        int size = endPos - startPos;
+    public int getDataInputForSubIdx(final int subIdx, final byte[] iobuffer) throws Exception {
+        final int startPos = getPosIdx(subIdx - 1);
+        final int endPos = getPosIdx(subIdx);
+        final int size = endPos - startPos;
         if (size > 0) {
             is.seek(fileOffset + startPos);
             if (size <= iobuffer.length) {
@@ -110,9 +110,9 @@ final class OsmFile {
         return size;
     }
 
-    public MicroCache createMicroCache(int lonIdx, int latIdx, DataBuffers dataBuffers, TagValueValidator wayValidator,
-                                       WaypointMatcher waypointMatcher, boolean reallyDecode, OsmNodesMap hollowNodes) throws Exception {
-        int subIdx = (latIdx - divisor * latDegree) * divisor + (lonIdx - divisor * lonDegree);
+    public MicroCache createMicroCache(final int lonIdx, final int latIdx, final DataBuffers dataBuffers, final TagValueValidator wayValidator,
+                                       final WaypointMatcher waypointMatcher, final boolean reallyDecode, final OsmNodesMap hollowNodes) throws Exception {
+        final int subIdx = (latIdx - divisor * latDegree) * divisor + (lonIdx - divisor * lonDegree);
 
         byte[] ab = dataBuffers.iobuffer;
         int asize = getDataInputForSubIdx(subIdx, ab);
@@ -125,7 +125,7 @@ final class OsmFile {
             asize = getDataInputForSubIdx(subIdx, ab);
         }
 
-        StatCoderContext bc = new StatCoderContext(ab);
+        final StatCoderContext bc = new StatCoderContext(ab);
 
         try {
             if (!reallyDecode) {
@@ -138,10 +138,10 @@ final class OsmFile {
             return MicroCache.emptyNonVirgin;
         } finally {
             // crc check only if the buffer has not been fully read
-            int readBytes = (bc.getReadingBitPosition() + 7) >> 3;
+            final int readBytes = (bc.getReadingBitPosition() + 7) >> 3;
             if (readBytes != asize - 4) {
-                int crcData = Crc32.crc(ab, 0, asize - 4);
-                int crcFooter = new ByteDataReader(ab, asize - 4).readInt();
+                final int crcData = Crc32Utils.crc(ab, 0, asize - 4);
+                final int crcFooter = new ByteDataReader(ab, asize - 4).readInt();
                 if (crcData == crcFooter) {
                     throw new IOException("old, unsupported data-format");
                 } else if ((crcData ^ 2) != crcFooter) {
@@ -152,13 +152,14 @@ final class OsmFile {
     }
 
     // set this OsmFile to ghost-state:
-    long setGhostState() {
+    public long setGhostState() {
         long sum = 0;
-        int nc = microCaches == null ? 0 : microCaches.length;
+        final int nc = microCaches == null ? 0 : microCaches.length;
         for (int i = 0; i < nc; i++) {
-            MicroCache mc = microCaches[i];
-            if (mc == null)
+            final MicroCache mc = microCaches[i];
+            if (mc == null) {
                 continue;
+            }
             if (mc.virgin) {
                 mc.ghost = true;
                 sum += mc.getDataSize();
@@ -169,13 +170,14 @@ final class OsmFile {
         return sum;
     }
 
-    long collectAll() {
+    public long collectAll() {
         long deleted = 0;
-        int nc = microCaches == null ? 0 : microCaches.length;
+        final int nc = microCaches == null ? 0 : microCaches.length;
         for (int i = 0; i < nc; i++) {
-            MicroCache mc = microCaches[i];
-            if (mc == null)
+            final MicroCache mc = microCaches[i];
+            if (mc == null) {
                 continue;
+            }
             if (!mc.ghost) {
                 deleted += mc.collect(0);
             }
@@ -183,13 +185,14 @@ final class OsmFile {
         return deleted;
     }
 
-    long cleanGhosts() {
-        long deleted = 0;
-        int nc = microCaches == null ? 0 : microCaches.length;
+    public long cleanGhosts() {
+        final long deleted = 0;
+        final int nc = microCaches == null ? 0 : microCaches.length;
         for (int i = 0; i < nc; i++) {
-            MicroCache mc = microCaches[i];
-            if (mc == null)
+            final MicroCache mc = microCaches[i];
+            if (mc == null) {
                 continue;
+            }
             if (mc.ghost) {
                 microCaches[i] = null;
             }
@@ -197,12 +200,13 @@ final class OsmFile {
         return deleted;
     }
 
-    void clean(boolean all) {
-        int nc = microCaches == null ? 0 : microCaches.length;
+    public void clean(final boolean all) {
+        final int nc = microCaches == null ? 0 : microCaches.length;
         for (int i = 0; i < nc; i++) {
-            MicroCache mc = microCaches[i];
-            if (mc == null)
+            final MicroCache mc = microCaches[i];
+            if (mc == null) {
                 continue;
+            }
             if (all || !mc.virgin) {
                 microCaches[i] = null;
             }

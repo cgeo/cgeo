@@ -1,11 +1,11 @@
 package cgeo.geocaching.brouter.expressions;
 
-import java.util.Arrays;
-
 import cgeo.geocaching.brouter.util.LruMapNode;
 
+import java.util.Arrays;
+
 public final class VarWrapper extends LruMapNode {
-    float[] vars;
+    public float[] vars;
 
     @Override
     public int hashCode() {
@@ -13,8 +13,8 @@ public final class VarWrapper extends LruMapNode {
     }
 
     @Override
-    public boolean equals(Object o) {
-        VarWrapper n = (VarWrapper) o;
+    public boolean equals(final Object o) {
+        final VarWrapper n = (VarWrapper) o;
         if (hash != n.hash) {
             return false;
         }

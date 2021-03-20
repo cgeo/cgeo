@@ -20,12 +20,12 @@ public final class SortedHeap<V> {
      * @return the lowest key value, or null if none
      */
     public V popLowestKeyValue() {
-        SortedBin bin = firstNonEmpty;
+        final SortedBin bin = firstNonEmpty;
         if (firstNonEmpty == null) {
             return null;
         }
         size--;
-        SortedBin minBin = firstNonEmpty.getMinBin();
+        final SortedBin minBin = firstNonEmpty.getMinBin();
         return (V) minBin.dropLowest();
     }
 
@@ -35,11 +35,10 @@ public final class SortedHeap<V> {
      * @param key   the key to insert
      * @param value the value to insert object
      */
-    public void add(int key, V value) {
+    public void add(final int key, final V value) {
         size++;
 
-        if (first.lp == 0 && second.lp == 0) // both full ?
-        {
+        if (first.lp == 0 && second.lp == 0) { // both full ?
             sortUp();
         }
         if (first.lp > 0) {
@@ -48,8 +47,7 @@ public final class SortedHeap<V> {
                 first.nextNonEmpty = firstNonEmpty;
                 firstNonEmpty = first;
             }
-        } else // second bin not full
-        {
+        } else { // second bin not full
             second.add4(key, value);
             if (first.nextNonEmpty != second) {
                 second.nextNonEmpty = first.nextNonEmpty;
@@ -68,10 +66,9 @@ public final class SortedHeap<V> {
         int cnt = 8; // value count of first 2 bins is always 8
         SortedBin tbin = second; // target bin
         SortedBin lastNonEmpty = second;
-        do
-        {
+        do {
             tbin = tbin.next();
-            int nentries = tbin.binsize - tbin.lp;
+            final int nentries = tbin.binsize - tbin.lp;
             if (nentries > 0) {
                 cnt += nentries;
                 lastNonEmpty = tbin;
@@ -79,20 +76,20 @@ public final class SortedHeap<V> {
         }
         while (cnt > tbin.binsize);
 
-        int[] al_t = tbin.al;
-        Object[] vla_t = tbin.vla;
+        final int[] alT = tbin.al;
+        final Object[] vlaT = tbin.vla;
         int tp = tbin.binsize - cnt; // target pointer
 
         // unlink any higher, non-empty arrays
-        SortedBin otherNonEmpty = lastNonEmpty.nextNonEmpty;
+        final SortedBin otherNonEmpty = lastNonEmpty.nextNonEmpty;
         lastNonEmpty.nextNonEmpty = null;
 
         // now merge the content of these non-empty bins into the target bin
         while (firstNonEmpty != null) {
             // copy current minimum to target array
-            SortedBin minBin = firstNonEmpty.getMinBin();
-            al_t[tp] = minBin.lv;
-            vla_t[tp++] = minBin.dropLowest();
+            final SortedBin minBin = firstNonEmpty.getMinBin();
+            alT[tp] = minBin.lv;
+            vlaT[tp++] = minBin.dropLowest();
         }
 
         tp = tbin.binsize - cnt;
@@ -117,17 +114,17 @@ public final class SortedHeap<V> {
         return peaksize;
     }
 
-    public int getExtract(Object[] targetArray) {
-        int tsize = targetArray.length;
-        int div = size / tsize + 1;
+    public int getExtract(final Object[] targetArray) {
+        final int tsize = targetArray.length;
+        final int div = size / tsize + 1;
         int tp = 0;
 
         int lpi = 0;
         SortedBin bin = firstNonEmpty;
         while (bin != null) {
             lpi += bin.lp;
-            Object[] vlai = bin.vla;
-            int n = bin.binsize;
+            final Object[] vlai = bin.vla;
+            final int n = bin.binsize;
             while (lpi < n) {
                 targetArray[tp++] = vlai[lpi];
                 lpi += div;
@@ -139,16 +136,16 @@ public final class SortedHeap<V> {
     }
 
     private static final class SortedBin {
-        SortedHeap parent;
-        SortedBin next;
-        SortedBin nextNonEmpty;
-        int binsize;
-        int[] al; // key array
-        Object[] vla; // value array
-        int lv; // low value
-        int lp; // low pointer
+        public SortedHeap parent;
+        public SortedBin next;
+        public SortedBin nextNonEmpty;
+        public int binsize;
+        public int[] al; // key array
+        public Object[] vla; // value array
+        public int lv; // low value
+        public int lp; // low pointer
 
-        SortedBin(int binsize, SortedHeap parent) {
+        SortedBin(final int binsize, final SortedHeap parent) {
             this.binsize = binsize;
             this.parent = parent;
             al = new int[binsize];
@@ -156,33 +153,33 @@ public final class SortedHeap<V> {
             lp = binsize;
         }
 
-        SortedBin next() {
+        public SortedBin next() {
             if (next == null) {
                 next = new SortedBin(binsize << 1, parent);
             }
             return next;
         }
 
-        Object dropLowest() {
-            int lpOld = lp;
+        public Object dropLowest() {
+            final int lpOld = lp;
             if (++lp == binsize) {
                 unlink();
             } else {
                 lv = al[lp];
             }
-            Object res = vla[lpOld];
+            final Object res = vla[lpOld];
             vla[lpOld] = null;
             return res;
         }
 
-        void unlink() {
+        public void unlink() {
             SortedBin neBin = parent.firstNonEmpty;
             if (neBin == this) {
                 parent.firstNonEmpty = nextNonEmpty;
                 return;
             }
             for (; ; ) {
-                SortedBin next = neBin.nextNonEmpty;
+                final SortedBin next = neBin.nextNonEmpty;
                 if (next == this) {
                     neBin.nextNonEmpty = nextNonEmpty;
                     return;
@@ -191,7 +188,7 @@ public final class SortedHeap<V> {
             }
         }
 
-        void add(int key, Object value) {
+        public void add(final int key, final Object value) {
             int p = lp;
             for (; ; ) {
                 if (p == binsize || key < al[p]) {
@@ -207,14 +204,16 @@ public final class SortedHeap<V> {
         }
 
         // unrolled version of above for binsize = 4
-        void add4(int key, Object value) {
+        public void add4(final int key, final Object value) {
             int p = lp--;
             if (p == 4 || key < al[p]) {
-                lv = al[p - 1] = key;
+                al[p - 1] = key;
+                lv = key;
                 vla[p - 1] = value;
                 return;
             }
-            lv = al[p - 1] = al[p];
+            al[p - 1] = al[p];
+            lv = al[p];
             vla[p - 1] = vla[p];
             p++;
 
@@ -240,133 +239,226 @@ public final class SortedHeap<V> {
         }
 
         // unrolled loop for performance sake
-        SortedBin getMinBin() {
+        public SortedBin getMinBin() {
             SortedBin minBin = this;
             SortedBin bin = this;
-            if ((bin = bin.nextNonEmpty) == null)
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
-            if ((bin = bin.nextNonEmpty) == null)
+            }
+            bin = bin.nextNonEmpty;
+            if (bin == null) {
                 return minBin;
-            if (bin.lv < minBin.lv)
+            }
+            if (bin.lv < minBin.lv) {
                 minBin = bin;
+            }
             return minBin;
         }
     }

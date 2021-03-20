@@ -11,7 +11,7 @@ public final class BExpressionContextNode extends BExpressionContext {
     private static final String[] buildInVariables =
         {"initialcost"};
 
-    public BExpressionContextNode(BExpressionMetaData meta) {
+    public BExpressionContextNode(final BExpressionMetaData meta) {
         super("node", meta);
     }
 
@@ -20,7 +20,7 @@ public final class BExpressionContextNode extends BExpressionContext {
      *
      * @param hashSize size of hashmap for result caching
      */
-    public BExpressionContextNode(int hashSize, BExpressionMetaData meta) {
+    public BExpressionContextNode(final int hashSize, final BExpressionMetaData meta) {
         super("node", hashSize, meta);
     }
 

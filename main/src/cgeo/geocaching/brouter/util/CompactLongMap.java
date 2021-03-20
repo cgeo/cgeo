@@ -17,12 +17,12 @@ import java.util.ArrayList;
 public class CompactLongMap<V> {
     protected static final int MAXLISTS = 31; // enough for size Integer.MAX_VALUE
     private static boolean earlyDuplicateCheck;
-    protected V value_in;
-    protected V value_out;
+    protected V valueIn;
+    protected V valueOut;
     private long[][] al;
     private final int[] pa;
     private int size = 0;
-    private final int _maxKeepExponent = 14; // the maximum exponent to keep the invalid arrays
+    private final int maxKeepExponent = 14; // the maximum exponent to keep the invalid arrays
     private Object[][] vla; // value list array
 
 
@@ -64,18 +64,18 @@ public class CompactLongMap<V> {
         earlyDuplicateCheck = Boolean.getBoolean("earlyDuplicateCheck");
     }
 
-    public boolean put(long id, V value) {
+    public boolean put(final long id, final V value) {
         try {
-            value_in = value;
+            valueIn = value;
             if (contains(id, true)) {
                 return true;
             }
             vla[0][0] = value;
-            _add(id);
+            add(id);
             return false;
         } finally {
-            value_in = null;
-            value_out = null;
+            valueIn = null;
+            valueOut = null;
         }
     }
 
@@ -91,12 +91,12 @@ public class CompactLongMap<V> {
      * @param value the value to insert object
      * @throws IllegalArgumentException for duplicates if enabled
      */
-    public void fastPut(long id, V value) {
+    public void fastPut(final long id, final V value) {
         if (earlyDuplicateCheck && contains(id)) {
             throw new IllegalArgumentException("duplicate key found in early check: " + id);
         }
         vla[0][0] = value;
-        _add(id);
+        add(id);
     }
 
     /**
@@ -105,14 +105,14 @@ public class CompactLongMap<V> {
      * @param id the key to query
      * @return the object, or null if id not known
      */
-    public V get(long id) {
+    public V get(final long id) {
         try {
             if (contains(id, false)) {
-                return value_out;
+                return valueOut;
             }
             return null;
         } finally {
-            value_out = null;
+            valueOut = null;
         }
     }
 
@@ -125,7 +125,7 @@ public class CompactLongMap<V> {
     }
 
 
-    private boolean _add(long id) {
+    private boolean add(final long id) {
         if (size == Integer.MAX_VALUE) {
             throw new IllegalArgumentException("cannot grow beyond size Integer.MAX_VALUE");
         }
@@ -159,9 +159,9 @@ public class CompactLongMap<V> {
             int maxIdx = -1;
 
             for (int i = 0; i < idx; i++) {
-                int p = pa[i];
+                final int p = pa[i];
                 if (p > 0) {
-                    long currentId = al[i][p - 1];
+                    final long currentId = al[i][p - 1];
                     if (maxIdx < 0 || currentId > maxId) {
                         maxIdx = i;
                         maxId = currentId;
@@ -181,7 +181,7 @@ public class CompactLongMap<V> {
         }
 
         // de-allocate empty arrays of a certain size (fix at 64kByte)
-        while (idx-- > _maxKeepExponent) {
+        while (idx-- > maxKeepExponent) {
             al[idx] = null;
             vla[idx] = null;
         }
@@ -192,25 +192,22 @@ public class CompactLongMap<V> {
     /**
      * @return true if "id" is contained in this set.
      */
-    public boolean contains(long id) {
+    public boolean contains(final long id) {
         try {
             return contains(id, false);
         } finally {
-            value_out = null;
+            valueOut = null;
         }
     }
 
-    protected boolean contains(long id, boolean doPut) {
+    protected boolean contains(final long id, final boolean doPut) {
         // determine the first empty array
         int bp = size; // treat size as bitpattern
         int idx = 1;
 
         while (bp != 0) {
-            if ((bp & 1) == 1) {
-                // array at idx is valid, check
-                if (contains(idx, id, doPut)) {
-                    return true;
-                }
+            if ((bp & 1) == 1 && contains(idx, id, doPut)) { // array at idx is valid, check
+                return true;
             }
             idx++;
             bp >>= 1;
@@ -220,42 +217,42 @@ public class CompactLongMap<V> {
 
 
     // does sorted array "a" contain "id" ?
-    private boolean contains(int idx, long id, boolean doPut) {
-        long[] a = al[idx];
+    private boolean contains(final int idx, final long id, final boolean doPut) {
+        final long[] a = al[idx];
         int offset = a.length;
         int n = 0;
 
         while ((offset >>= 1) > 0) {
-            int nn = n + offset;
+            final int nn = n + offset;
             if (a[nn] <= id) {
                 n = nn;
             }
         }
         if (a[n] == id) {
-            value_out = (V) vla[idx][n];
-            if (doPut)
-                vla[idx][n] = value_in;
+            valueOut = (V) vla[idx][n];
+            if (doPut) {
+                vla[idx][n] = valueIn;
+            }
             return true;
         }
         return false;
     }
 
-    protected void moveToFrozenArrays(long[] faid, ArrayList<V> flv) {
+    protected void moveToFrozenArrays(final long[] faid, final ArrayList<V> flv) {
         for (int i = 1; i < MAXLISTS; i++) {
             pa[i] = 0;
         }
 
-        for (int ti = 0; ti < size; ti++) // target-index
-        {
+        for (int ti = 0; ti < size; ti++) { // target-index
             int bp = size; // treat size as bitpattern
             int minIdx = -1;
             long minId = 0;
             int idx = 1;
             while (bp != 0) {
                 if ((bp & 1) == 1) {
-                    int p = pa[idx];
+                    final int p = pa[idx];
                     if (p < al[idx].length) {
-                        long currentId = al[idx][p];
+                        final long currentId = al[idx][p];
                         if (minIdx < 0 || currentId < minId) {
                             minIdx = idx;
                             minId = currentId;

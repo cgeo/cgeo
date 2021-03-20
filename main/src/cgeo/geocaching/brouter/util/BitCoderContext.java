@@ -12,19 +12,19 @@ public class BitCoderContext {
     static {
         // fill varbits lookup table
 
-        BitCoderContext bc = new BitCoderContext(new byte[4]);
+        final BitCoderContext bc = new BitCoderContext(new byte[4]);
         for (int i = 0; i < 4096; i++) {
             bc.reset();
             bc.bits = 14;
             bc.b = 0x1000 + i;
 
-            int b0 = bc.getReadingBitPosition();
+            final int b0 = bc.getReadingBitPosition();
             vl_values[i] = bc.decodeVarBits2();
             vl_length[i] = bc.getReadingBitPosition() - b0;
         }
         for (int i = 0; i < 4096; i++) {
             bc.reset();
-            int b0 = bc.getWritingBitPosition();
+            final int b0 = bc.getWritingBitPosition();
             bc.encodeVarBits2(i);
             vc_values[i] = bc.b;
             vc_length[i] = bc.getWritingBitPosition() - b0;
@@ -34,15 +34,16 @@ public class BitCoderContext {
             bc.bits = 14;
             bc.b = 0x1000 + i;
 
-            int b0 = bc.getReadingBitPosition();
+            final int b0 = bc.getReadingBitPosition();
             vl_values[i] = bc.decodeVarBits2();
             vl_length[i] = bc.getReadingBitPosition() - b0;
         }
         for (int b = 0; b < 256; b++) {
             int r = 0;
             for (int i = 0; i < 8; i++) {
-                if ((b & (1 << i)) != 0)
+                if ((b & (1 << i)) != 0) {
                     r |= 1 << (7 - i);
+                }
             }
             reverse_byte[b] = r;
         }
@@ -58,13 +59,13 @@ public class BitCoderContext {
     private int b; // buffer word
 
 
-    public BitCoderContext(byte[] ab) {
+    public BitCoderContext(final byte[] ab) {
         this.ab = ab;
         idxMax = ab.length - 1;
     }
 
-    public static void main(String[] args) {
-        byte[] ab = new byte[581969];
+    public static void main(final String[] args) {
+        final byte[] ab = new byte[581969];
         BitCoderContext ctx = new BitCoderContext(ab);
         for (int i = 0; i < 31; i++) {
             ctx.encodeVarBits((1 << i) + 3);
@@ -76,19 +77,21 @@ public class BitCoderContext {
         ctx = new BitCoderContext(ab);
 
         for (int i = 0; i < 31; i++) {
-            int value = ctx.decodeVarBits();
-            int v0 = (1 << i) + 3;
-            if (!(v0 == value))
+            final int value = ctx.decodeVarBits();
+            final int v0 = (1 << i) + 3;
+            if (v0 != value) {
                 throw new RuntimeException("value mismatch value=" + value + "v0=" + v0);
+            }
         }
         for (int i = 0; i < 100000; i += 13) {
-            int value = ctx.decodeVarBits();
-            if (!(value == i))
+            final int value = ctx.decodeVarBits();
+            if (value != i) {
                 throw new RuntimeException("value mismatch i=" + i + "v=" + value);
+            }
         }
     }
 
-    public final void reset(byte[] ab) {
+    public final void reset(final byte[] ab) {
         this.ab = ab;
         idxMax = ab.length - 1;
         reset();
@@ -121,7 +124,7 @@ public class BitCoderContext {
         encodeBounded(range, value);
     }
 
-    public final void encodeVarBits(int value) {
+    public final void encodeVarBits(final int value) {
         if ((value & 0xfff) == value) {
             flushBuffer();
             b |= vc_values[value] << bits;
@@ -144,17 +147,16 @@ public class BitCoderContext {
 
     public final int decodeVarBits() {
         fillBuffer();
-        int b12 = b & 0xfff;
-        int len = vl_length[b12];
+        final int b12 = b & 0xfff;
+        final int len = vl_length[b12];
         if (len <= 12) {
             b >>>= len;
             bits -= len;
             return vl_values[b12]; // full value lookup
         }
-        if (len <= 23) // // only length lookup
-        {
-            int len2 = len >> 1;
-            b >>>= (len2 + 1);
+        if (len <= 23) { // // only length lookup
+            final int len2 = len >> 1;
+            b >>>= len2 + 1;
             int mask = 0xffffffff >>> (32 - len2);
             mask += b & mask;
             b >>>= len2;
@@ -165,9 +167,9 @@ public class BitCoderContext {
             // here we just know len in [25..47]
             // ( fillBuffer guarantees only 24 bits! )
             b >>>= 12;
-            int len3 = 1 + (vl_length[b & 0xfff] >> 1);
+            final int len3 = 1 + (vl_length[b & 0xfff] >> 1);
             b >>>= len3;
-            int len2 = 11 + len3;
+            final int len2 = 11 + len3;
             bits -= len2 + 1;
             fillBuffer();
             int mask = 0xffffffff >>> (32 - len2);
@@ -179,7 +181,7 @@ public class BitCoderContext {
         return decodeVarBits2(); // no chance, use the slow one
     }
 
-    public final void encodeBit(boolean value) {
+    public final void encodeBit(final boolean value) {
         if (bits > 31) {
             ab[++idx] = (byte) (b & 0xff);
             b >>>= 8;
@@ -196,7 +198,7 @@ public class BitCoderContext {
             bits = 8;
             b = ab[++idx] & 0xff;
         }
-        boolean value = ((b & 1) != 0);
+        final boolean value = (b & 1) != 0;
         b >>>= 1;
         bits--;
         return value;
@@ -208,7 +210,7 @@ public class BitCoderContext {
      * this is variable length encoding, with the shorter codes
      * for the central value range
      */
-    public final void encodeBounded(int max, int value) {
+    public final void encodeBounded(int max, final int value) {
         int im = 1; // integer mask
         while (im <= max) {
             if ((value & im) != 0) {
@@ -226,7 +228,7 @@ public class BitCoderContext {
      *
      * @see #encodeBounded
      */
-    public final int decodeBounded(int max) {
+    public final int decodeBounded(final int max) {
         int value = 0;
         int im = 1; // integer mask
         while ((value | im) <= max) {
@@ -234,8 +236,9 @@ public class BitCoderContext {
                 bits = 8;
                 b = ab[++idx] & 0xff;
             }
-            if ((b & 1) != 0)
+            if ((b & 1) != 0) {
                 value |= im;
+            }
             b >>>= 1;
             bits--;
             im <<= 1;
@@ -243,10 +246,10 @@ public class BitCoderContext {
         return value;
     }
 
-    public final int decodeBits(int count) {
+    public final int decodeBits(final int count) {
         fillBuffer();
-        int mask = 0xffffffff >>> (32 - count);
-        int value = b & mask;
+        final int mask = 0xffffffff >>> (32 - count);
+        final int value = b & mask;
         b >>>= count;
         bits -= count;
         return value;
@@ -309,10 +312,10 @@ public class BitCoderContext {
         return (idx << 3) + 8 - bits;
     }
 
-    public final void setReadingBitPosition(int pos) {
+    public final void setReadingBitPosition(final int pos) {
         idx = pos >>> 3;
         bits = (idx << 3) + 8 - pos;
         b = ab[idx] & 0xff;
-        b >>>= (8 - bits);
+        b >>>= 8 - bits;
     }
 }

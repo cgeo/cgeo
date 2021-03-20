@@ -31,7 +31,7 @@ public class OsmLink {
     protected OsmLink() {
     }
 
-    public OsmLink(OsmNode source, OsmNode target) {
+    public OsmLink(final OsmNode source, final OsmNode target) {
         n1 = source;
         n2 = target;
     }
@@ -39,7 +39,7 @@ public class OsmLink {
     /**
      * Get the relevant target-node for the given source
      */
-    public final OsmNode getTarget(OsmNode source) {
+    public final OsmNode getTarget(final OsmNode source) {
         return n2 != source && n2 != null ? n2 : n1;
     /* if ( n2 != null && n2 != source )
     {
@@ -59,7 +59,7 @@ public class OsmLink {
     /**
      * Get the relevant next-pointer for the given source
      */
-    public final OsmLink getNext(OsmNode source) {
+    public final OsmLink getNext(final OsmNode source) {
         return n2 != source && n2 != null ? next : previous;
     /* if ( n2 != null && n2 != source )
     {
@@ -78,8 +78,8 @@ public class OsmLink {
     /**
      * Reset this link for the given direction
      */
-    protected final OsmLink clear(OsmNode source) {
-        OsmLink n;
+    protected final OsmLink clear(final OsmNode source) {
+        final OsmLink n;
         if (n2 != null && n2 != source) {
             n = next;
             next = null;
@@ -100,7 +100,7 @@ public class OsmLink {
         return n;
     }
 
-    public final void setFirstLinkHolder(OsmLinkHolder holder, OsmNode source) {
+    public final void setFirstLinkHolder(final OsmLinkHolder holder, final OsmNode source) {
         if (n2 != null && n2 != source) {
             firstlinkholder = holder;
         } else if (n1 != null && n1 != source) {
@@ -110,7 +110,7 @@ public class OsmLink {
         }
     }
 
-    public final OsmLinkHolder getFirstLinkHolder(OsmNode source) {
+    public final OsmLinkHolder getFirstLinkHolder(final OsmNode source) {
         if (n2 != null && n2 != source) {
             return firstlinkholder;
         } else if (n1 != null && n1 != source) {
@@ -120,7 +120,7 @@ public class OsmLink {
         }
     }
 
-    public final boolean isReverse(OsmNode source) {
+    public final boolean isReverse(final OsmNode source) {
         return n1 != source && n1 != null;
     /* if ( n2 != null && n2 != source )
     {
@@ -144,8 +144,8 @@ public class OsmLink {
         return n1 == null && n2 == null;
     }
 
-    public final void addLinkHolder(OsmLinkHolder holder, OsmNode source) {
-        OsmLinkHolder firstHolder = getFirstLinkHolder(source);
+    public final void addLinkHolder(final OsmLinkHolder holder, final OsmNode source) {
+        final OsmLinkHolder firstHolder = getFirstLinkHolder(source);
         if (firstHolder != null) {
             holder.setNextForLink(firstHolder);
         }
