@@ -245,7 +245,7 @@
     <string name="warn_no_pocket_query_found">Δεν βρέθηκε καμία Προσωπική Αναζήτηση online.</string>
     <string name="warn_invalid_character">Ο χαρακτήρας πρέπει να είναι ΓΡΑΜΜΑ ή ΑΡΙΘΜΟΣ</string>
     <string name="warn_notloggedin_title">Λειτουργία χωρίς σύνδεση</string>
-    <string name="warn_notloggedin_short">Δεν έχετε συνδεθεί. Ο ζωντανός χάρτης θα εμφανίζει μόνο τις τοπικά αποθηκευμένες κρύπτες.</string>
+    <string name="warn_notloggedin_short">Δεν είστε συνδεδεμένοι. Ο ζωντανός χάρτης θα εμφανίζει μόνο τις ηδη αποθηκευμένες κρύπτες. Πατήστε εδώ για περισσότερες πληροφορίες.</string>
     <string name="warn_notloggedin_long">Δεν έχετε συνδεθεί (ακόμη). Ο ζωντανός χάρτης θα εμφανίζει μόνο τις τοπικά αποθηκευμένες κρύπτες και οι λειτουργίες που απαιτούν σύνδεση δεν θα είναι διαθέσιμες.\n\nΕίτε δεν υπάρχει σύνδεση σε δίκτυο ή υπάρχει πρόβλημα με τον server ή πρέπει να ρυθμίσετε τις υπηρεσίες σας στο geocaching. \n\nΘέλετε να ρυθμίσετε τις υπηρεσίες τώρα;</string>
     <string name="err_read_pocket_query_list">Σφάλμα ανάγνωσης της λίστας προσωπικής αναζήτησης.</string>
     <string name="info_log_posted">Υποβλήθηκε με επιτυχία το αρχείο καταγραφής από το c:geo.</string>
@@ -1746,7 +1746,6 @@
     <string name="init_low_disk_space_message">Ο κατάλογος με τα δεδομένα κρυπτών δεν έχει πολύ χώρο αποθήκευσης. Αυτό μπορεί να προκαλέσει δυσλειτουργίες του c:geo. Παρακαλούμε να ελευθερώσετε κάποιο χώρο.</string>
     <string name="init_confirm_debug">Το c:geo εκτελείται σε λειτουργία εντοπισμού σφαλμάτων!</string>
     <string name="list_confirm_debug_message">Η λειτουργία εντοπισμού σφαλμάτων προκαλεί αστάθεια! Θέλετε να απενεργοποιήσετε την κατάσταση λειτουργίας εντοπισμού σφαλμάτων;</string>
-    <string name="err_logimage_caption_required">Απαιτείται λεζάντα για την εικόνα</string>
     <string name="waypoint_latitude_null">Β/Ν--°--.---</string>
     <string name="waypoint_longitude_null">Α/Δ--°--.---</string>
     <!-- permission handling -->
