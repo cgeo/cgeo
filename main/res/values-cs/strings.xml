@@ -245,7 +245,7 @@
     <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
     <string name="warn_invalid_character">Znak musí být písmeno nebo číslice</string>
     <string name="warn_notloggedin_title">Offline režim</string>
-    <string name="warn_notloggedin_short">Nejste přihlášen. Aktivní mapa ukazuje jen lokální uložené kešky.</string>
+    <string name="warn_notloggedin_short">Nejste přihlášeni. Živá mapa bude zobrazovat pouze kešky uložené v místním úložišti. Klepněte zde pro více informací.</string>
     <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Aktivní mapa ukazuje len lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
     <string name="err_read_pocket_query_list">Chyba čtení seznamu Pocket Queries.</string>
     <string name="info_log_posted">Log byl úspěšně odeslán.</string>
@@ -1794,7 +1794,6 @@
     <string name="init_low_disk_space_message">V úložišti, kde je složka s údaji o keškách, dochází volné místo. To může způsobit nesprávné fungování aplikace c:geo. Uvolněte prosím nějaké místo.</string>
     <string name="init_confirm_debug">c:geo běží v režimu ladění!</string>
     <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chceš režim ladění vypnout?</string>
-    <string name="err_logimage_caption_required">Obrázek musí mít titulek</string>
     <string name="waypoint_latitude_null">S/J – ° –.---</string>
     <string name="waypoint_longitude_null">V/Z – ° –.---</string>
     <!-- permission handling -->
