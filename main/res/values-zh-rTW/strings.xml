@@ -245,7 +245,6 @@
     <string name="warn_no_pocket_query_found">在線上找不到Pocket query。</string>
     <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="warn_notloggedin_title">離線模式</string>
-    <string name="warn_notloggedin_short">您沒有登入。即時地圖只顯示您存在本地裝置的cache。</string>
     <string name="warn_notloggedin_long">您沒有登入。即時地圖只顯示您存在本地裝置的cache。</string>
     <string name="err_read_pocket_query_list">讀取Pocket query列表錯誤。</string>
     <string name="info_log_posted">成功發布日誌</string>
