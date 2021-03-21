@@ -245,7 +245,6 @@
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
     <string name="warn_invalid_character">Merkin täytyy olla kirjain tai numero</string>
     <string name="warn_notloggedin_title">Offline-tila</string>
-    <string name="warn_notloggedin_short">Et ole kirjautunut sisään. Live-kartta näyttää vain paikallisesti tallennetut kätköt.</string>
     <string name="warn_notloggedin_long">Et ole kirjautunut sisään (vielä). Livekartta näyttää vain paikallisesti tallennetut kätköt ja online-toiminnot eivät toimi.\n\nJoko laitteessa ei ole verkkoyhteyttä, on ilmennyt palvelunongelma, tai sinun tulee (uudelleen)määrittäägeokätköilypalvelusi.\n\nHaluatko määrittää palvelut nyt?</string>
     <string name="err_read_pocket_query_list">Virhe luettaessa Pocket Query -listausta.</string>
     <string name="info_log_posted">c:geo latasi lokin onnistuneesti.</string>
@@ -1742,7 +1741,6 @@
     <string name="init_low_disk_space_message">Geokätkötietojen kansio on vähäisessä tallennustilassa. Tämä voi aiheuttaa c:geon toimintahäiriöitä. Vapauta tilaa lisää.</string>
     <string name="init_confirm_debug">c:geo on vianmääritystilassa!</string>
     <string name="list_confirm_debug_message">Vianmääritystila aiheuttaa epävakautta! Haluatko poistaa sen käytöstä?</string>
-    <string name="err_logimage_caption_required">Kuvateksti on pakollinen</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
