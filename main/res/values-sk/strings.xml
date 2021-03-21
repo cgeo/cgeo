@@ -245,7 +245,7 @@
     <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
     <string name="warn_invalid_character">Znak musí byť PÍSMENO alebo ČÍSLICA</string>
     <string name="warn_notloggedin_title">Offline režim</string>
-    <string name="warn_notloggedin_short">Neprihlásené. Live mapa ukazuje len lokálne uložené kešky.</string>
+    <string name="warn_notloggedin_short">Neprihlásené. Live mapa ukazuje len lokálne uložené kešky. Ťuknutím sem zobrazíte ďalšie informácie.</string>
     <string name="warn_notloggedin_long">Zatiaľ neprihlásené. Live mapa ukazuje len lokálne uložené kešky a online funkcie nie sú aktívne.\n\nMožno nie je pripojenie k sieti, prípadne ide o problém na serveri alebo je potrebné znova nakonfigurovať služby geoacachingu.\n\nChcete teraz konfigurovať služby?</string>
     <string name="err_read_pocket_query_list">Chyba pri čítaní Pocket Query.</string>
     <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
@@ -1794,7 +1794,6 @@
     <string name="init_low_disk_space_message">V priečinku s údajmi o keškách je málo miesta. Môže dôjsť k nesprávnemu fungovaniu aplikácie c:geo. Uvoľnite nejaké miesto.</string>
     <string name="init_confirm_debug">c:geo je spustené v režime ladenia!</string>
     <string name="list_confirm_debug_message">V režime ladenia dochádza k nestabilnému správaniu aplikácie! Chcete deaktivovať režim ladenia?</string>
-    <string name="err_logimage_caption_required">Obrázok musí mať popis</string>
     <string name="waypoint_latitude_null">S/J --° --.---</string>
     <string name="waypoint_longitude_null">V/Z --° --.---</string>
     <!-- permission handling -->
