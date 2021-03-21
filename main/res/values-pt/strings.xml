@@ -245,7 +245,7 @@
     <string name="warn_no_pocket_query_found">Não foram encontradas Pocket Queries on-line.</string>
     <string name="warn_invalid_character">O carácter deve ser uma LETRA ou um DÍGITO</string>
     <string name="warn_notloggedin_title">Modo Offline</string>
-    <string name="warn_notloggedin_short">Não tem a sessão iniciada. O mapa em tempo real mostrará apenas as caches armazenadas localmente.</string>
+    <string name="warn_notloggedin_short">Não tem sessão iniciada. O mapa ao vivo só mostrará as caches armazenadas localmente. Toque aqui para obter mais informações.</string>
     <string name="warn_notloggedin_long">Não tem a sessão iniciada (ainda). O mapa em tempo real mostrará apenas as caches armazenadas localmente e as funções on-line não funcionarão.\n\nOu não há uma ligação de rede, um problema com o servidor ou precisa de (re)configurar os seus serviços de geocaching.\n\nQuer configurar os serviços agora?</string>
     <string name="err_read_pocket_query_list">Erro ao ler a lista de Pocket Query.</string>
     <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
@@ -1746,7 +1746,6 @@
     <string name="init_low_disk_space_message">A pasta de dados de geocaches está com pouco espaço de armazenamento. Isso pode causar problemas no c:geo. Por favor, liberte algum espaço.</string>
     <string name="init_confirm_debug">O c:geo está a ser executado no modo de depuração!</string>
     <string name="list_confirm_debug_message">O modo de depuração provoca instabilidades! Quer desactivar o modo de depuração?</string>
-    <string name="err_logimage_caption_required">É necessária uma legenda para a imagem</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>
     <!-- permission handling -->
