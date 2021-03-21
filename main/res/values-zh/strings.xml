@@ -241,7 +241,6 @@
     <string name="warn_no_pocket_query_found">未在线找到口袋查询。</string>
     <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="warn_notloggedin_title">离线模式</string>
-    <string name="warn_notloggedin_short">未登录。实时地图只会显示本地存储的藏点。</string>
     <string name="warn_notloggedin_long">尚未登录。实时地图只会显示本地存储的藏点，在线功能将无法正常工作。\n\n要么没有网络连接，服务器出现问题，要么您需要重新配置您的地理藏宝服务。\n\n您想现在配置服务吗？</string>
     <string name="err_read_pocket_query_list">读取口袋查询列表时出错。</string>
     <string name="info_log_posted">c:geo 已成功提交日志。</string>
