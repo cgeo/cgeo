@@ -239,11 +239,10 @@
     <string name="warn_search_help_tb">Angi koden til en sporbar. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
-    <string name="warn_pocket_query_select">Ingen utvalgsspørring er valgt.</string>
+    <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
     <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
     <string name="warn_notloggedin_title">Offline-modus</string>
-    <string name="warn_notloggedin_short">Ikke logget inn. Live-kart vil bare vise cacher som er lagret lokalt.</string>
     <string name="warn_notloggedin_long">Ikke logget inn (ennå). Live-kartet vil bare viser cacher som er lagret lokalt og online-funksjoner vil ikke virke.\n\nEnten mangler du nettverksforbindelse, det er et serverproblem eller så må du endre geocaching-tjenestene i Innstillinger.\n\nVil du endre tjenestene nå?</string>
     <string name="err_read_pocket_query_list">Feil under lesing av Pocket query-listen.</string>
     <string name="info_log_posted">c:geo lyktes i å logge funnet.</string>
@@ -1679,7 +1678,6 @@
     <string name="init_low_disk_space">Lite lagringsplass</string>
     <string name="init_confirm_debug">c:geo kjører i feilsøkingsmodus!</string>
     <string name="list_confirm_debug_message">Feilsøkingsmodus vil gjøre c:geo ustabil. Vil du deaktivere feilsøkingsmodusen?</string>
-    <string name="err_logimage_caption_required">Du må skrive inn tittel på bildet</string>
     <string name="waypoint_latitude_null">N/S--°--.---</string>
     <string name="waypoint_longitude_null">Ø/V--°--.---</string>
     <!-- permission handling -->
