@@ -519,4 +519,129 @@
         <item name="android:textColorLink">?text_color_link</item>
     </style>
 
+    <!-- WhereYouGo -->
+
+    <style name="Panel">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/title_height</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="PanelTopMain" parent="@style/Panel">
+        <item name="android:id">@id/panel_top_main</item>
+        <item name="android:background">@color/title_background</item>
+    </style>
+
+    <style name="PanelBottomMain" parent="@style/Panel">
+        <item name="android:id">@id/panel_bottom_main</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">@color/title_background</item>
+    </style>
+
+    <style name="TitleText">
+        <item name="android:id">@id/title_text</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:paddingLeft">12dip</item>
+        <item name="android:paddingRight">12dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="PanelButton">
+        <item name="android:layout_width">@dimen/title_height</item>
+        <item name="android:layout_height">@dimen/title_height</item>
+        <item name="android:background">@drawable/selector_button</item>
+    </style>
+
+    <style name="PanelButton.Width">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="PanelToggleButton">
+        <item name="android:layout_width">@dimen/title_height</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@drawable/selector_toggle_button_v1</item>
+        <item name="android:textOff" />
+        <item name="android:textOn" />
+        <item name="android:padding">@dimen/title_height_quarter</item>
+    </style>
+
+    <style name="TitleProgressIndicator" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">14dip</item>
+        <item name="android:layout_marginRight">15dip</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:indeterminate">true</item>
+    </style>
+
+    <style name="SeparatorVertical">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@color/title_separator</item>
+    </style>
+
+    <style name="MainScreenLine">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="MainScreenButton">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">15dip</item>
+        <item name="android:paddingBottom">15dip</item>
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingRight">10dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">@drawable/selector_button</item>
+    </style>
+
+    <style name="SeparatorHorizontal">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/title_separator</item>
+    </style>
+
+    <style name="SeparatorVertical.Dark">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@color/title_separator_dark</item>
+    </style>
+
+    <style name="SeparatorHorizontal.Dark">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/title_separator_dark</item>
+    </style>
+
+    <style name="PanelTopBelowShadow">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/shadow_height</item>
+        <item name="android:background">@drawable/var_top_shadow</item>
+    </style>
+
+    <style name="PanelBottomAboveShadow">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/shadow_height</item>
+        <item name="android:background">@drawable/var_bottom_shadow</item>
+    </style>
+
+
 </resources>

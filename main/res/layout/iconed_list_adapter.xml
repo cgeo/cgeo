@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_layout_main"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="40dip"
+    android:padding="4dip">
+
+    <ImageView
+        android:id="@+id/layoutIconedListAdapterImageView01"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="6dip"
+        android:gravity="center_vertical"
+        android:scaleType="fitCenter" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/layoutIconedListAdapterTextView01"
+            style="@style/TextStyle18"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/layoutIconedListAdapterTextView02"
+            style="@style/TextStyle12"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="none" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/layoutIconedListAdapterImageView02"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="6dip"
+        android:gravity="center_vertical"
+        android:scaleType="fitCenter" />
+</LinearLayout>

@@ -918,6 +918,126 @@
 
         <!-- Receiver for custom tabs share intent -->
         <receiver android:name=".settings.ShareBroadcastReceiver"/>
+
+        <!-- WhereYouGo -->
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.WhereYouGoActivity"
+            android:label="WhereYouGo"
+            android:theme="@style/cgeo_main"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="wherigo.com"
+                    android:pathPrefix="/cartridge/download.aspx"
+                    android:scheme="http" />
+                <data
+                    android:host="www.wherigo.com"
+                    android:pathPrefix="/cartridge/download.aspx"
+                    android:scheme="http" />
+                <data
+                    android:host="wherigo.com"
+                    android:pathPrefix="/cartridge/details.aspx"
+                    android:scheme="http" />
+                <data
+                    android:host="www.wherigo.com"
+                    android:pathPrefix="/cartridge/details.aspx"
+                    android:scheme="http" />
+
+                <data
+                    android:host="wherigo.com"
+                    android:pathPrefix="/cartridge/download.aspx"
+                    android:scheme="https" />
+                <data
+                    android:host="www.wherigo.com"
+                    android:pathPrefix="/cartridge/download.aspx"
+                    android:scheme="https" />
+                <data
+                    android:host="wherigo.com"
+                    android:pathPrefix="/cartridge/details.aspx"
+                    android:scheme="https" />
+                <data
+                    android:host="www.wherigo.com"
+                    android:pathPrefix="/cartridge/details.aspx"
+                    android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <!--
+        <activity
+            android:name="menion.android.whereyougo.maps.mapsforge.MapsforgeActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/Mapsforge" /> -->
+        <activity
+            android:name="menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences" />
+        <activity
+            android:name="menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker" />
+<!--
+        <activity
+            android:name="ar.com.daidalos.afiledialog.FileChooserActivity" /> -->
+        <activity
+            android:name="menion.android.whereyougo.maps.mapsforge.InfoView"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.CartridgeDetailsActivity"
+            android:theme="@style/cgeo_main" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.wherigo.MainMenuActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/cgeo_main" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.wherigo.DetailsActivity"
+            android:theme="@style/cgeo_main" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.wherigo.InputScreenActivity"
+            android:theme="@style/cgeo_main" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.wherigo.ListActionsActivity"
+            android:theme="@style/cgeo_main" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.wherigo.ListTargetsActivity"
+            android:theme="@style/cgeo_main" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.wherigo.ListTasksActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.wherigo.ListThingsActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.wherigo.ListZonesActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.wherigo.PushDialogActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.GuidingActivity" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.SatelliteActivity" />
+        <activity
+            android:name="menion.android.whereyougo.gui.activity.XmlSettingsActivity"
+            android:theme="@style/ThemeSettings" />
+        <activity
+            android:name="menion.android.whereyougo.network.activity.DownloadCartridgeActivity" />
+        <!--
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity" />
+-->
+        <service android:name="menion.android.whereyougo.audio.AudioPlayService" />
+        <service
+            android:name="menion.android.whereyougo.utils.NotificationService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -38,4 +38,10 @@
     <color name="default_accuracycirclecolor">#66000000</color>
     <color name="default_accuracycirclefillcolor">#08000000</color>
 
+    <!-- WhereYouGo -->
+    <color name="title_background">#aa053a88</color>
+    <color name="title_separator">#40ffffff</color>
+    <color name="title_separator_dark">#40000000</color>
+    <color name="btn_disabled">#80aaaaaa</color>
+
 </resources>

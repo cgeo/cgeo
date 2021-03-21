@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_info"
+        android:icon="@drawable/ic_menu_info_details"
+        android:showAsAction="never"
+        android:title="@string/menu_info">
+        <menu>
+            <item
+                android:id="@+id/menu_info_map_file"
+                android:title="@string/menu_info_map_file" />
+            <item
+                android:id="@+id/menu_info_about"
+                android:title="@string/menu_info_about" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_position"
+        android:icon="@drawable/ic_menu_mylocation"
+        android:showAsAction="always"
+        android:title="@string/menu_position">
+        <menu>
+            <item
+                android:id="@+id/menu_position_my_location_enable"
+                android:title="@string/menu_position_my_location_enable" />
+            <item
+                android:id="@+id/menu_position_my_location_disable"
+                android:title="@string/menu_position_my_location_disable" />
+            <!-- 			<item android:id="@+id/menu_position_snap_to_location" android:title="@string/menu_position_snap_to_location" /> -->
+            <item
+                android:id="@+id/menu_position_last_known"
+                android:title="@string/menu_position_last_known" />
+            <item
+                android:id="@+id/menu_position_enter_coordinates"
+                android:title="@string/menu_position_enter_coordinates" />
+            <item
+                android:id="@+id/menu_position_target"
+                android:title="@string/menu_position_target" />
+            <item
+                android:id="@+id/menu_position_map_center"
+                android:title="@string/menu_position_map_file_center" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_screenshot"
+        android:icon="@drawable/ic_menu_camera"
+        android:showAsAction="never"
+        android:title="@string/menu_screenshot">
+        <menu>
+            <item
+                android:id="@+id/menu_screenshot_jpeg"
+                android:title="@string/menu_screenshot_jpeg" />
+            <item
+                android:id="@+id/menu_screenshot_png"
+                android:title="@string/menu_screenshot_png" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_preferences"
+        android:icon="@drawable/ic_menu_preferences"
+        android:showAsAction="never"
+        android:title="@string/menu_preferences" />
+    <item
+        android:id="@+id/menu_render_theme"
+        android:icon="@drawable/ic_menu_mapmode"
+        android:showAsAction="never"
+        android:title="@string/menu_render_theme">
+        <menu>
+            <item
+                android:id="@+id/menu_render_theme_osmarender"
+                android:title="@string/menu_render_theme_osmarender" />
+            <item
+                android:id="@+id/menu_render_theme_select_file"
+                android:title="@string/menu_render_theme_select_file" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_mapfile"
+        android:icon="@drawable/ic_menu_archive"
+        android:showAsAction="never"
+        android:title="@string/menu_mapfile" />
+    <item
+        android:id="@+id/menu_mapgenerator"
+        android:icon="@drawable/ic_menu_mapmode"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_mapgenerator">
+        <menu>
+            <group
+                android:id="@+id/menu_mapgenerator_group"
+                android:checkableBehavior="single" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_acquire_from_cgeo"
+        android:title="@string/menu_acquire_from_cgeo"
+        android:visible="false" />
+    <item
+        android:id="@+id/menu_refresh"
+        android:icon="@drawable/ic_menu_refresh"
+        android:showAsAction="always"
+        android:title="@string/menu_refresh" />
+</menu>

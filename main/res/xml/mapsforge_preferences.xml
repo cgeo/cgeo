@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/menu_preferences">
+    <PreferenceCategory android:title="@string/preferences_map">
+        <CheckBoxPreference
+            android:key="showScaleBar"
+            android:summary="@string/preferences_show_scale_bar_desc"
+            android:title="@string/preferences_show_scale_bar" />
+        <ListPreference
+            android:defaultValue="@string/preferences_scale_bar_unit_default"
+            android:dependency="showScaleBar"
+            android:entries="@array/preferences_scale_bar_unit_values"
+            android:entryValues="@array/preferences_scale_bar_unit_keys"
+            android:key="scaleBarUnit"
+            android:summary="@string/preferences_scale_bar_unit_desc"
+            android:title="@string/preferences_scale_bar_unit" />
+        <ListPreference
+            android:defaultValue="@string/preferences_text_scale_default"
+            android:entries="@array/preferences_text_scale_values"
+            android:entryValues="@array/preferences_text_scale_keys"
+            android:key="textScale"
+            android:summary="@string/preferences_text_scale_desc"
+            android:title="@string/preferences_text_scale" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preferences_general">
+        <CheckBoxPreference
+            android:key="fullscreen"
+            android:summary="@string/preferences_fullscreen_desc"
+            android:title="@string/preferences_fullscreen" />
+        <CheckBoxPreference
+            android:key="wakeLock"
+            android:summary="@string/preferences_wake_lock_desc"
+            android:title="@string/preferences_wake_lock" />
+        <menion.android.whereyougo.maps.mapsforge.preferences.MoveSpeedPreference
+            android:key="moveSpeed"
+            android:summary="@string/preferences_move_speed_desc"
+            android:title="@string/preferences_move_speed" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preferences_tileCache">
+        <menion.android.whereyougo.maps.mapsforge.preferences.CacheSizePreference
+            android:key="tileCacheSize"
+            android:summary="@string/preferences_tileCache_size_desc"
+            android:title="@string/preferences_tileCache_size" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="tileCachePersistence"
+            android:summary="@string/preferences_tileCache_persistence_desc"
+            android:title="@string/preferences_tileCache_persistence" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preferences_debug">
+        <CheckBoxPreference
+            android:key="showFpsCounter"
+            android:summary="@string/preferences_show_fps_counter_desc"
+            android:title="@string/preferences_show_fps_counter" />
+        <CheckBoxPreference
+            android:key="drawTileFrames"
+            android:summary="@string/preferences_show_tile_frames_desc"
+            android:title="@string/preferences_show_tile_frames" />
+        <CheckBoxPreference
+            android:key="drawTileCoordinates"
+            android:summary="@string/preferences_show_tile_coordinates_desc"
+            android:title="@string/preferences_show_tile_coordinates" />
+        <CheckBoxPreference
+            android:key="highlightWaterTiles"
+            android:summary="@string/preferences_show_water_tiles_desc"
+            android:title="@string/preferences_show_water_tiles" />
+    </PreferenceCategory>
+</PreferenceScreen>

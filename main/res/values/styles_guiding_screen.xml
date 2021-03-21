@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Whole file is from WhereYouGo! -->
+
+    <style name="CustomScreenBottomInfo">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="CustomScreenTextTitle" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:paddingRight">10dip</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+    </style>
+
+    <style name="CustomScreenTextValue" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingRight">2dip</item>
+        <item name="android:text">0</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+    </style>
+
+    <style name="CustomScreenTextTitleDark" parent="CustomScreenTextTitle">
+        <item name="android:textColor">#FF000000</item>
+    </style>
+
+    <style name="CustomScreenTextValueDark" parent="CustomScreenTextValue">
+        <item name="android:textColor">#FF000000</item>
+    </style>
+</resources>

@@ -390,6 +390,38 @@ dependencies {
 
     // Zxing barcode reader integration
     implementation 'com.google.zxing:android-integration:3.3.0'
+
+    // --- WhereYouGo ---
+
+    // Locus Maps integration
+    //noinspection GradleDependency
+    //implementation 'com.asamm:locus-api-android:0.2.7'
+
+    // openwig@cgeo
+    implementation 'com.github.cgeo:openwig:1.0.0'
+
+    // File select dialog
+    //implementation 'com.github.jfmdev:aFileDialog:v1.0.6'
+
+    //
+    //implementation 'com.github.jspricke.mapsforge-map-whereyougo:mapsforge-map:75d7c20'
+
+    // barcode scanner
+    // v4.x: Minimum SDK version 24, downgradable to 14 by using zxing:core 3.3.0, uses androidx
+    //implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+    // downgrade zxing:core to 3.3.0 or earlier for Android 14+ support
+    // AndroidManifest.xml: use tools:overrideLibrary="com.google.zxing.client.android" to force usage
+    //noinspection GradleDependency
+    implementation 'com.google.zxing:core:3.3.0'
+
+    // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
+    //noinspection GradleDependency
+    //implementation 'com.squareup.okhttp3:okhttp:3.12.13'
+
+    // ani gif support
+    // minSdk=17 from version 1.2.16
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
+
 }
 
 /*

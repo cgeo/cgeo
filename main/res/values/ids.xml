@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- WhereYouGo -->
+    <item name="panel_top_main" type="id" />
+    <item name="panel_bottom_main" type="id" />
+    <item name="title_text" type="id" />
+</resources>

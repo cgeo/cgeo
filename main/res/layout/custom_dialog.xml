@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_layout_main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@drawable/var_panel_top"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="6dip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/image_view_title_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="5dip" />
+
+            <TextView
+                android:id="@+id/text_view_title_text"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                android:maxLines="1"
+                android:textColor="@android:color/white" />
+
+            <ImageView
+                android:id="@+id/image_view_separator2"
+                style="@style/SeparatorVertical"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/image_button_title2"
+                android:layout_width="@dimen/title_height"
+                android:layout_height="@dimen/title_height"
+                android:background="@drawable/selector_button"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/image_view_separator1"
+                style="@style/SeparatorVertical"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/image_button_title1"
+                android:layout_width="@dimen/title_height"
+                android:layout_height="@dimen/title_height"
+                android:background="@drawable/selector_button"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:minWidth="200dip"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_content_top_shadow"
+            style="@style/PanelTopBelowShadow"
+            android:layout_alignLeft="@+id/linear_layout_content"
+            android:layout_alignRight="@+id/linear_layout_content"
+            android:layout_alignTop="@+id/linear_layout_content"
+            android:orientation="horizontal" />
+    </RelativeLayout>
+
+    <include layout="@layout/include_bottom_panel" />
+
+</LinearLayout>

@@ -80,6 +80,8 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
+import menion.android.whereyougo.gui.activity.WhereYouGoActivity;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class MainActivity extends AbstractActionBarActivity {
@@ -625,6 +627,9 @@ public class MainActivity extends AbstractActionBarActivity {
             return true;
         });
 
+        binding.whereyougoButton.setClickable(true);
+        binding.whereyougoButton.setOnClickListener(this::cgeoWhereYouGo);
+
         updateCacheCounter();
 
         setFilterTitle();
@@ -748,6 +753,15 @@ public class MainActivity extends AbstractActionBarActivity {
     public void cgeoSearch(final View v) {
         binding.advancedButton.setPressed(true);
         startActivity(new Intent(this, SearchActivity.class));
+    }
+
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
+    public void cgeoWhereYouGo(final View v) {
+        binding.whereyougoButton.setPressed(true);
+        startActivity(new Intent(this, WhereYouGoActivity.class));
     }
 
     /**

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Whole file is from WhereYouGo! -->
+
+    <style name="TextStyle" parent="@android:style/TextAppearance">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextStyleB" parent="TextStyle">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextStyle12" parent="TextStyle">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextStyle14" parent="TextStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextStyle14B" parent="TextStyleB">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextStyle16" parent="TextStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextStyle16B" parent="TextStyleB">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextStyle18" parent="TextStyle">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextStyle18B" parent="TextStyleB">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextStyle20B" parent="TextStyleB">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextStyle20BRed" parent="TextStyle20B">
+        <item name="android:textColor">#FFFF0000</item>
+    </style>
+
+    <style name="FontSizeSmall">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="FontSizeMedium">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="FontSizeLarge">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+</resources>

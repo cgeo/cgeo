@@ -11,4 +11,10 @@
 
     <dimen name="equation_name_width">40dip</dimen>
 
+    <!-- WhereYouGo -->
+    <dimen name="title_height">44dip</dimen>
+    <dimen name="title_height_quarter">11dip</dimen>
+    <dimen name="shadow_height">6dip</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+
 </resources>

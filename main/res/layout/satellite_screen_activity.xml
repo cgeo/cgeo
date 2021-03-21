@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/var_custom_screen_bg">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_skyplot"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/linear_layout_bottom"
+        android:layout_marginTop="40dip"
+        android:gravity="center"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout_top_coordinates"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dip">
+
+        <TextView
+            android:id="@+id/text_view_latitude"
+            style="@style/CustomScreenTextValue"
+            android:layout_width="wrap_content"
+            android:gravity="left" />
+
+        <TextView
+            android:id="@+id/text_view_provider"
+            style="@style/CustomScreenTextTitle"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/text_view_longitude"
+            style="@style/CustomScreenTextValue"
+            android:layout_width="wrap_content"
+            android:gravity="right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_layout_top_coordinates"
+        android:paddingLeft="3dip"
+        android:paddingRight="3dip">
+
+        <TextView
+            style="@style/CustomScreenTextTitle"
+            android:layout_width="wrap_content"
+            android:gravity="left"
+            android:text="@string/latitude" />
+
+        <TextView
+            style="@style/CustomScreenTextTitle"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/provider" />
+
+        <TextView
+            style="@style/CustomScreenTextTitle"
+            android:layout_width="wrap_content"
+            android:gravity="right"
+            android:text="@string/longitude" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linear_layout_bottom_2">
+
+        <LinearLayout style="@style/CustomScreenBottomInfo">
+
+            <TextView
+                style="@style/CustomScreenTextTitle"
+                android:text="@string/altitude" />
+
+            <TextView
+                android:id="@+id/text_view_altitude"
+                style="@style/CustomScreenTextValue" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/CustomScreenBottomInfo">
+
+            <TextView
+                style="@style/CustomScreenTextTitle"
+                android:text="@string/speed" />
+
+            <TextView
+                android:id="@+id/text_view_speed"
+                style="@style/CustomScreenTextValue" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/CustomScreenBottomInfo">
+
+            <TextView
+                style="@style/CustomScreenTextTitle"
+                android:text="@string/accuracy" />
+
+            <TextView
+                android:id="@+id/text_view_accuracy"
+                style="@style/CustomScreenTextValue" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_bottom_2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linear_layout_bottom_3">
+
+        <LinearLayout style="@style/CustomScreenBottomInfo">
+
+            <TextView
+                style="@style/CustomScreenTextTitle"
+                android:text="@string/satellites" />
+
+            <TextView
+                android:id="@+id/text_view_satellites"
+                style="@style/CustomScreenTextValue" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/CustomScreenBottomInfo">
+
+            <TextView
+                style="@style/CustomScreenTextTitle"
+                android:text="@string/declination" />
+
+            <TextView
+                android:id="@+id/text_view_declination"
+                style="@style/CustomScreenTextValue" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/CustomScreenBottomInfo">
+
+            <TextView
+                style="@style/CustomScreenTextTitle"
+                android:text="@string/gps_fix" />
+
+            <TextView
+                android:id="@+id/text_view_time_gps"
+                style="@style/CustomScreenTextValue" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_bottom_3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/var_panel_bottom"
+        android:padding="3dip">
+
+        <ToggleButton
+            android:id="@+id/btn_gps_on_off"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="@string/gps_off"
+            android:textOn="@string/gps_on" />
+
+        <ToggleButton
+            android:id="@+id/btn_compass_on_off"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="@string/compass"
+            android:textOn="@string/compass" />
+    </LinearLayout>
+
+</RelativeLayout>
