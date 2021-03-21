@@ -243,7 +243,6 @@
     <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
     <string name="warn_invalid_character">Символ должен быть буквой или цифрой</string>
     <string name="warn_notloggedin_title">Оффлайн-режим</string>
-    <string name="warn_notloggedin_short">Пользователь не авторизован. Онлайн-карта будет показывать только тайники, сохраненные локально.</string>
     <string name="warn_notloggedin_long">Пользователь пока не авторизован. Карта покажет только тайники, сохраненные локально и онлайн функции не будут работать.\n\nЛибо нет сетевого соединения, либо вам нужно (пере)настроить сервисы геокешинга.\n\nХотите настроить сервисы сейчас?</string>
     <string name="err_read_pocket_query_list">Ошибка чтения списка Выборок.</string>
     <string name="info_log_posted">Запись в блокнот успешно отправлена.</string>
@@ -1723,7 +1722,6 @@
     <string name="init_low_disk_space">Кончается место для хранения</string>
     <string name="init_confirm_debug">c:geo запущено в режиме отладки!</string>
     <string name="list_confirm_debug_message">Режим отладки может вызвать нестабильное поведение. Вы действительно хотите активировать режим отладки?</string>
-    <string name="err_logimage_caption_required">Необходимо добавить подпись для изображения</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
