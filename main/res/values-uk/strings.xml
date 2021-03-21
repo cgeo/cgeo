@@ -237,7 +237,6 @@
     <string name="warn_no_pocket_query_found">Немає Pocket-запиту онлайн.</string>
     <string name="warn_invalid_character">Символ повинен бути LETTER або DIGIT</string>
     <string name="warn_notloggedin_title">Офлайн режим</string>
-    <string name="warn_notloggedin_short">Вхід не виконано. Жива мапа буде відображатись лише схованки локально.</string>
     <string name="warn_notloggedin_long">Вхід в систему (поки що). Жива карта покаже лише збережені локальні та онлайн-функції не працюватимуть.\n\nАбо немає підключення до мережі, або проблема з сервером, або ви повинні (з пере)налаштувати свої сервіси геокешингу.\n\nВи хочете налаштувати сервіси зараз?</string>
     <string name="err_read_pocket_query_list">Помилка читання списку Pocket запитів.</string>
     <string name="info_log_posted">c:geo успішно відправив журнал.</string>
@@ -1517,7 +1516,6 @@
     <string name="init_low_disk_space">Недостатньо місця на диску</string>
     <string name="init_confirm_debug">c:geo запущено у режимі налагодження!</string>
     <string name="list_confirm_debug_message">Режим налагодження викликає нестабільності! Ви хочете вимкнути режим налагодження?</string>
-    <string name="err_logimage_caption_required">Заголовок необхідний для зображення</string>
     <string name="waypoint_latitude_null">Н/С --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
