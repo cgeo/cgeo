@@ -243,7 +243,6 @@
     <string name="warn_no_pocket_query_found">Det blev ikke fundet nogen Pocket Query online.</string>
     <string name="warn_invalid_character">Tegn skal være bogstaver eller tal</string>
     <string name="warn_notloggedin_title">Offline-tilstand</string>
-    <string name="warn_notloggedin_short">Ikke logget på. Kun cacher, som er gemt lokalt, vil blive vist på livekortet.</string>
     <string name="warn_notloggedin_long">Du er endnu ikke logget på. Kun cacher, som er gemt lokalt, vil blive vist på live-kortet og online-funktioner vil ikke kunne bruges.\n\nManglende logon kan skyldes netværks- eller serverproblemer eller at konfigurationen af dine geocachingtjenester ikke er korrekt.\n\nVil du indstille geocachingtjenester nu?</string>
     <string name="err_read_pocket_query_list">Fejl ved læsning af Pocket Query-liste.</string>
     <string name="info_log_posted">Logbeskeden blev sendt.</string>
@@ -1586,7 +1585,6 @@
     <string name="init_low_disk_space">Datalageret er næsten fyldt</string>
     <string name="init_confirm_debug">c:geo kører i fejlfindingstilstand!</string>
     <string name="list_confirm_debug_message">Fejlfindingstilstand kan forårsage ustabilitet! Ønsker du at deaktivere fejlfindingstilstand?</string>
-    <string name="err_logimage_caption_required">Der skal indtastes en billedtekst til billedet</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">Ø/V --° --.---</string>
     <!-- permission handling -->
