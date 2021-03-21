@@ -245,7 +245,7 @@
     <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
     <string name="warn_invalid_character">Il carattere deve essere una lettera o una cifra</string>
     <string name="warn_notloggedin_title">Modalità offline</string>
-    <string name="warn_notloggedin_short">Non connesso. Live map mostrerà solo le cache memorizzate localmente.</string>
+    <string name="warn_notloggedin_short">Non loggato. La mappa live mostrerà solo i cache memorizzati localmente. Tocca qui per ulteriori informazioni.</string>
     <string name="warn_notloggedin_long">Non connesso (ancora). Mappa live mostrerà solo le cache memorizzate localmente e le funzioni online non funzioneranno.\n\nNon c\'è nessuna connessione di rete, un problema di server oppure devi (ri)configurare i tuoi servizi di geocaching.\n\nVuoi configurare i servizi ora?</string>
     <string name="err_read_pocket_query_list">Errore nella lettura della lista di Pocket query.</string>
     <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
@@ -1746,7 +1746,6 @@
     <string name="init_low_disk_space_message">La cartella dati geocache sta esaurendo lo spazio di archiviazione. Questo può causare malfunzionamenti di c:geo. Liberare un po\' di spazio.</string>
     <string name="init_confirm_debug">c:geo è in esecuzione in modalità di debug!</string>
     <string name="list_confirm_debug_message">La modalità di debug può causare instabilità! Vuoi tornare alla modalità normale?</string>
-    <string name="err_logimage_caption_required">Una didascalia è richiesta per l\'immagine</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>
     <!-- permission handling -->
