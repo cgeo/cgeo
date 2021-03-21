@@ -61,7 +61,7 @@ public class MapSettingsUtils {
 
         final LinearLayout settingsListview = dialogView.findViewById(R.id.map_settings_listview);
         for (SettingsCheckboxModel element : settingsElementsCheckboxes) {
-            final RelativeLayout l = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.map_settings_item, null);
+            final RelativeLayout l = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.map_settings_item, settingsListview, false);
             ((ImageView) l.findViewById(R.id.settings_item_icon)).setImageResource(element.resIcon);
             ((TextView) l.findViewById(R.id.settings_item_text)).setText(element.resTitle);
             final CheckBox checkBox = l.findViewById(R.id.settings_item_checkbox);
@@ -92,7 +92,7 @@ public class MapSettingsUtils {
             autotargetCheckbox.setChecked(isAutotargetIndividualRoute);
         }
 
-        final View customTitle = activity.getLayoutInflater().inflate(R.layout.dialog_title_back, null);
+        @SuppressLint("InflateParams") final View customTitle = activity.getLayoutInflater().inflate(R.layout.dialog_title_back, null);
         final AlertDialog dialog = Dialogs.newBuilder(activity)
             .setView(dialogView)
             .setCustomTitle(customTitle)

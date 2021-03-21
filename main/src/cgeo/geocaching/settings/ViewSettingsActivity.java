@@ -115,7 +115,7 @@ public class ViewSettingsActivity extends AbstractActivity {
         public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View v = convertView;
             if (null == convertView) {
-                v = getLayoutInflater().inflate(R.layout.twotexts_twobuttons_item, null, false);
+                v = getLayoutInflater().inflate(R.layout.twotexts_twobuttons_item, parent, false);
                 ((ImageButton) v.findViewById(R.id.button_left)).setImageResource(R.drawable.ic_menu_edit);
                 ((ImageButton) v.findViewById(R.id.button_right)).setImageResource(R.drawable.ic_menu_delete);
             }
