@@ -1228,7 +1228,6 @@
     <string name="init_low_disk_space">Mabagal ang pagtakbo sa imbakan na espasyo</string>
     <string name="init_confirm_debug">ang c:geo ay tumatakbo sa debug na mode!</string>
     <string name="list_confirm_debug_message">Ang debug na mode ay nagdudulot ng kawalang tatag! Gusto mo bang i-deaktibo ang iyong debug na mode?</string>
-    <string name="err_logimage_caption_required">Ang kapsiyon ay kailangan para sa imahe</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->
