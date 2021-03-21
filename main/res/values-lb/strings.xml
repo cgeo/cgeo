@@ -237,7 +237,6 @@
     <string name="warn_no_pocket_query_found">Kee Pocket Query online fonnt.</string>
     <string name="warn_invalid_character">De Charakter muss e Buschtaf oder eng Ziffer sinn</string>
     <string name="warn_notloggedin_title">Offline modus</string>
-    <string name="warn_notloggedin_short">Net ageloggt. D\'Live Kaart weist nëmmen lokal gespäichert Cachen un.</string>
     <string name="warn_notloggedin_long">(Nach) net ageloggt. D\'Live-Kaart weist nëmmen lokal gespäichert Cachen an Onlinefunktiounen sti net zur Verfügung.\n\nEntweder gëtt et keng Internetverbindung, ee Server-Problem oder du muss deng Geocaching-Déngschter nees konfiguréieren.\n\nWëlls du d\'Déngschter elo konfiguréieren?</string>
     <string name="err_read_pocket_query_list">Feeler beim Liesen vun der Pocket Query Lëscht.</string>
     <string name="info_log_posted">c:geo huet de Log erfollegräich iwwermëttelt.</string>
