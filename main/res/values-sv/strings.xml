@@ -245,7 +245,6 @@
     <string name="warn_no_pocket_query_found">Ingen Pocket query hittades på nätet.</string>
     <string name="warn_invalid_character">Tecknet måste vara en bokstav eller en siffra</string>
     <string name="warn_notloggedin_title">Offline läge</string>
-    <string name="warn_notloggedin_short">Ej inloggad. Live kartan kommer bara visa cacher som sparats lokalt i enheten.</string>
     <string name="warn_notloggedin_long">Inte inloggad (ännu). Livekartan visar bara cacher lagrade lokalt och online-funktioner fungerar inte.\n\nAntingen finns det ingen nätverksanslutning, ett serverproblem eller så måste du (åter)konfigurera dina geocachingtjänster.\n\nVill du konfigurera tjänster nu?</string>
     <string name="err_read_pocket_query_list">Fel vid inläsning av Pocket Query-lista.</string>
     <string name="info_log_posted">c:geo har postat din logg.</string>
@@ -1746,7 +1745,6 @@
     <string name="init_low_disk_space_message">Katalogen för geocachedata håller på att få slut på utrymme. Detta kan orsaka problem med c:geo. Vänligen försök frigöra lite utrymme.</string>
     <string name="init_confirm_debug">c:geo körs i debugläge!</string>
     <string name="list_confirm_debug_message">Debug-läge kan orsaka instabilitet! Vill du återgå till normalläge?</string>
-    <string name="err_logimage_caption_required">En text krävs till bilden</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
