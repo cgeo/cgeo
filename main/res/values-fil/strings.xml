@@ -1225,7 +1225,6 @@
     <string name="init_low_disk_space">May mababang imbakan na lang natitira</string>
     <string name="init_confirm_debug">c:geo ay gumagana sa debug mode!</string>
     <string name="list_confirm_debug_message">Ang debug mode ay magsasanhi ng instabilities! Gusto mo bang e-deactivate ang debug mode?</string>
-    <string name="err_logimage_caption_required">Ang caption ay kinakailangan para sa larawan</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->
