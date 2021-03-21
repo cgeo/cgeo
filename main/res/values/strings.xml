@@ -1936,7 +1936,6 @@
     <string name="init_low_disk_space_message">The geocache data folder is running low on storage space. This can cause malfunctions of c:geo. Please free up some space.</string>
     <string name="init_confirm_debug">c:geo is running in debug mode!</string>
     <string name="list_confirm_debug_message">The debug mode causes instabilities! Do you want to deactivate the debug mode?</string>
-    <string name="err_logimage_caption_required">A caption is required for the image</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
 
