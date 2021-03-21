@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -54,14 +55,16 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
 
         if (!fixed) {
             final ActionBar bar = getSupportActionBar();
-            final View customView = getLayoutInflater().inflate(R.layout.pq_actionbar, null);
-            bar.setCustomView(customView);
-            bar.setDisplayShowCustomEnabled(true);
+            if (bar != null) {
+                @SuppressLint("InflateParams") final View customView = getLayoutInflater().inflate(R.layout.pq_actionbar, null);
+                bar.setCustomView(customView);
+                bar.setDisplayShowCustomEnabled(true);
 
-            switchCompat = customView.findViewById(R.id.switchAB);
-            switchCompat.setVisibility(View.INVISIBLE);
-            switchCompat.setChecked(!Settings.getPqShowDownloadableOnly());
-            switchCompat.setOnCheckedChangeListener((a, b) -> checkSwitchState(adapter));
+                switchCompat = customView.findViewById(R.id.switchAB);
+                switchCompat.setVisibility(View.INVISIBLE);
+                switchCompat.setChecked(!Settings.getPqShowDownloadableOnly());
+                switchCompat.setOnCheckedChangeListener((a, b) -> checkSwitchState(adapter));
+            }
         }
 
         final ProgressDialog waitDialog = ProgressDialog.show(this, getString(R.string.search_pocket_title), getString(R.string.search_pocket_loading), true, true);
