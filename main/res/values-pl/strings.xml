@@ -245,7 +245,7 @@
     <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
     <string name="warn_invalid_character">Znak musi być liter lub cyfrą</string>
     <string name="warn_notloggedin_title">Tryb offline</string>
-    <string name="warn_notloggedin_short">Nie zalogowano. Mapa na żywo pokaże skrzynki przechowywane lokalnie.</string>
+    <string name="warn_notloggedin_short">Nie zalogowano. Mapa na żywo pokaże tylko skrytki przechowywane lokalnie. Kliknij tutaj, aby uzyskać więcej informacji.</string>
     <string name="warn_notloggedin_long">Nie zalogowano (jeszcze). Mapa na żywo pokaże tylko skrzynki przechowywane lokalnie, a funkcje online nie będą działać.\n\nAlbo nie ma połączenia z siecią, wystąpił problem z serwerem lub powinieneś skonfigurować swoje usługi geocachingowe.\n\nCzy chcesz teraz skonfigurować usługi?</string>
     <string name="err_read_pocket_query_list">Błąd podczas odczytu listy Pocket query.</string>
     <string name="info_log_posted">Wpis został wysłany.</string>
@@ -1140,7 +1140,7 @@
     <string name="internal_cache_default_description">To jest skrzynka zdefiniowana przez użytkownika</string>
     <string name="internal_cache_default_owner">Ty</string>
     <string name="internal_goto_targets_title">Cele \'Idź do\'</string>
-    <string name="internal_goto_targets_description">Ta skrzynka przechowuje Twoje ostatnie cele \"Idź do\". Jest ona automatycznie tworzona po użyciu funkcji \"Idź do\" w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrzynki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrzynkę lub jej dowolny punkt. Możesz również przenieść pamięć podręczną do dowolnej wybranej przez siebie listy.</string>
+    <string name="internal_goto_targets_description">Ta skrytka przechowuje Twoje ostatnie cele \"Idź do\". Jest ona automatycznie tworzona po użyciu funkcji \"Idź do\" w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacyjnych tej skrytki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrytkę lub dowolny punkt nawigacyjny. Możesz również przenieść skrytkę do dowolnej wybranej przez siebie listy.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
     <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz skrzynkę zdefiniowaną przez użytkownika)</string>
     <string name="onetime_info_longtap_disabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy i skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie wyłączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
@@ -1794,7 +1794,6 @@
     <string name="init_low_disk_space_message">Zaczyna brakować miejsca w folderze z danymi skrytek. Może to powodować nieprawidłowe działanie c:geo. Zwolnij trochę miejsca.</string>
     <string name="init_confirm_debug">c: geo jest uruchomiony w trybie debugowania!</string>
     <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
-    <string name="err_logimage_caption_required">Podpis jest wymagany dla obrazu</string>
     <string name="waypoint_latitude_null">N/S--°--.---</string>
     <string name="waypoint_longitude_null">E/W--°--.---</string>
     <!-- permission handling -->
