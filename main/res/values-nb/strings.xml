@@ -785,7 +785,7 @@
     <string name="contentstorage_selectfolder_dialog_title">Endre mappe %s</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopier alt innhold</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Flytt alt innhold</string>
-    <string name="contentstorage_selectfolder_dialog_choice_justselect">Ingen ytterligere tiltak</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Ingen endring</string>
     <string name="contentstorage_folder_selection_success">Mappe satt til \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Avbryter filvalg</string>
     <string name="contentstorage_file_selection_success">Fil valgt: \'%s\'</string>
