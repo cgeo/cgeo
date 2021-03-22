@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Slēpnis</string>
     <string name="detail">Informācija</string>
@@ -147,7 +146,6 @@
     <string name="log_problem_archive_label">Slēpni vēlams arhivēt</string>
     <string name="log_problem_archive_text">Šis slēpņotājs ziņoja, ka slēpni vēlams arhivēt. Paziņojums nosūtīts brīvprātīgajam recenzentam.</string>
     <string name="log_image_scale_option_noscaling">Bez mēroga</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Attēls</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tulkot uz %s valodu</string>
@@ -269,7 +267,6 @@
     <string name="loc_fused">Kombinēts</string>
     <string name="loc_low_power">Maza jauda</string>
     <string name="loc_home">Mājas koordinātas</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Satelīti</string>
     <string name="loc_trying">Meklē atrašanās vietu</string>
     <string name="loc_no_addr">Nezināma adrese</string>
@@ -450,7 +447,6 @@
     <string name="settings_title_waypoints">Ceļa punkti</string>
     <string name="settings_title_map_content">Kartes saturs</string>
     <string name="settings_title_map_behavior">Kartes uzvedība</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="calculate_dataDir_title">Slēpņu datu lietojums</string>
     <string name="calculate_dataDir">Aprēķina slēpņu datu apjoma lietojumu</string>
     <string name="settings_data_dir_item">%1$s (%2$s bez maksas)</string>
@@ -524,7 +520,6 @@
     <string name="init_signature_template_name">Vārds</string>
     <string name="init_signature_template_difficulty">Sarežģītība</string>
     <string name="init_signature_template_terrain">Piekļuve</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Ieraksta teksts</string>
     <string name="init_signature_template_size">Izmērs</string>
     <string name="init_signature_template_type">Pēc tipa</string>
@@ -681,9 +676,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satelīta karte</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Bezsaistes režīmā</string>
     <string name="map_source_osm_offline_combined">Apvienota (Bezsaistes)</string>
     <string name="init_sendToCgeo">Sūtīt uz c:geo</string>
@@ -843,7 +835,6 @@
     <string name="cache_menu_sygic_drive">Sygic (braukšana)</string>
     <string name="cache_menu_radar">Radars</string>
     <string name="cache_menu_map">Karte</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Citas ārējās aplikācijas</string>
     <string name="cache_menu_streetview">Ielas skats (Street View)</string>
     <string name="cache_menu_browser">Atvērt pārlūkprogrammā</string>
@@ -1133,7 +1124,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="export_fieldnotes_upload_success">Veiksmīgi augšupielādēts geocaching.com lapā</string>
     <string name="export_fieldnotes_onlynew">Tikai kopš pēdējās eksportēšanas</string>
     <string name="export_fieldnotes_creating">Lauka piezīmju izveidošana…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX fails tiks eksportēts ar pašreizējo datumu un laiku, kā faila nosaukumu %1$s.</string>
     <string name="export_confirm_title">Eksportē %1$s</string>
     <string name="export_confirm_message">Direktorijs: %1$s\nFaila nosaukums: %2$s</string>
@@ -1480,8 +1470,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="init_low_disk_space">Ierīcē sāk pietrūkt atmiņas</string>
     <string name="init_confirm_debug">c:geo darbojas atkļūdošanas režīmā!</string>
     <string name="list_confirm_debug_message">Atkļūdošanas režīms var izraisīt nestabilu aplikācijas darbību! Vai vēlies šo režīmu deaktivizēt?</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Aizvērt lietotni</string>
     <string name="ask_again">Jautāt vēlreiz</string>
