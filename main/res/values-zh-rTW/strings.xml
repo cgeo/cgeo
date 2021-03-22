@@ -245,7 +245,6 @@
     <string name="warn_no_pocket_query_found">在線上找不到Pocket query。</string>
     <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="warn_notloggedin_title">離線模式</string>
-    <string name="warn_notloggedin_short">您沒有登入。即時地圖只顯示您存在本地裝置的cache。</string>
     <string name="warn_notloggedin_long">您沒有登入。即時地圖只顯示您存在本地裝置的cache。</string>
     <string name="err_read_pocket_query_list">讀取Pocket query列表錯誤。</string>
     <string name="info_log_posted">成功發布日誌</string>
@@ -261,6 +260,7 @@
     <string name="info_cache_saved">這個地理藏寶已經存儲到本地裝置</string>
     <string name="warn_calculator_state_save">如果你想保持计算器状态, 一定要保存航点。</string>
     <string name="feature_info_offline_counter">您有一些擁有離線日誌的cache，這些cache可能尚未在官網登錄。為了顯示您的打寶數，這些離線日誌的計數在c：geo會顯示為“ + x”。 \ n \ n此外，這些“ x”日誌將添加到您可能在日誌簽名中使用的“ NUMBER”模板中。 \ n \ n如果您不喜歡此計數器擴展名，則可以在“設置”＆gt;下將其禁用“記錄”和/或使用“ NUMBER（無脫機日誌）”模板。 \ n \ n要輕鬆查找剩餘的脫機日誌，請轉到“歷史記錄”列表，然後過濾“帶有個人數據”＆gt; “使用脫機日誌”。</string>
+    <string name="err_trackable_log_not_anonymous">不可在匿名狀態下從 c:geo 登錄到 %1$s，您是否要從 %2$s 來打開設定檔以便填寫資料?</string>
     <string name="err_trackable_no_preference_activity">抱歉，無法找到適合的螢幕。</string>
     <string name="confirm_unsaved_changes_title">未保存更改</string>
     <string name="confirm_discard_wp_changes">丢弃未保存的航点更改？</string>
@@ -661,8 +661,15 @@
     <string name="init_maptrail_length_summary">設定歷史軌跡的最大長度。預設為700點，將根據記憶體容量大小而變動。</string>
     <string name="init_summary_maptrail">當GPS開啟時，c:geo將會儲存您的移動並在地圖上顯示。</string>
     <string name="init_trailcolor">歷史軌跡的顏色</string>
+    <string name="init_trailcolor_summary">選擇歷史軌跡的顏色(不透明)</string>
     <string name="init_trailwidth">歷史軌跡的寬度</string>
+    <string name="init_trailwidth_summary">選擇歷史軌跡寬度</string>
+    <string name="init_directioncolor">方向線顏色</string>
+    <string name="init_directioncolor_summary">選擇方向線的顏色(不透明)。方向線將會是直接指向你的目標的直線或是特殊的導航路徑(如果您有安裝BRouter app)。</string>
     <string name="init_directionwidth">方向線寬度</string>
+    <string name="init_directionwidth_summary">選擇方向線寬度</string>
+    <string name="init_routecolor">各自的繞線顏色</string>
+    <string name="init_routecolor_summary">為各別的航線選擇顏色和不透明度。各別航線是您通過長按航點或是cache。 （您需要先啟用長按功能，請參考地圖設定。）</string>
     <string name="init_routewidth">各自的繞線線寬</string>
     <string name="init_routewidth_summary">選擇各自的繞線線寬</string>
     <string name="init_trackcolor">GPX航跡顏色</string>
@@ -675,6 +682,7 @@
     <string name="init_summary_trackautovisit">預設是把旅行蟲設定成已拜訪</string>
     <string name="init_sigautoinsert">自動插入</string>
     <string name="init_offlinelogs_homescreen">顯示離線日誌</string>
+    <string name="init_loaddirectionimg">方向圖示</string>
     <string name="init_summary_loaddirectionimg">如果需要，請下載箭頭圖片 (一般會員才需要)</string>
     <string name="init_default_navigation_tool">預設導航</string>
     <string name="init_secondary_navigation_tool">次要導航</string>
@@ -705,6 +713,9 @@
     <string name="init_force_orientation_sensor_title">方向感測器</string>
     <string name="init_force_orientation_sensor_note">在一些裝置上，感測器錯誤將會造成不對的方向資訊。在這樣的狀況下，使用備用感測器可以得到較好的結果。</string>
     <string name="init_force_orientation_sensor">強制使用方向感測器。</string>
+    <string name="init_create_memory_dump">建立記憶體傾印</string>
+    <string name="init_memory_dump">記憶體傾印</string>
+    <string name="init_memory_dumped">記憶體傾印到%s</string>
     <string name="init_please_wait">請稍候…</string>
     <string name="init_hardware_acceleration_title">硬體加速渲染</string>
     <string name="init_hardware_acceleration_note">硬體加速渲染元件會比螢幕還快。在部分的Andriond裝置上，文字顯示發生錯誤。當有這樣的情況時，請關閉硬體加速。</string>
@@ -832,6 +843,7 @@
     <string name="cache_offline_drop">移除</string>
     <string name="cache_delete_userdefined_waypoints">移除使用者定義航點</string>
     <string name="cache_delete_userdefined_waypoints_confirm">要移除這個cache裡的使用者定義航點(全部)?\n\n航點會被馬上移除並無法回復。</string>
+    <string name="cache_delete_userdefined_waypoints_success">使用者定義的航點已刪除。</string>
     <string name="cache_offline_store">儲存</string>
     <string name="cache_offline_stored">存儲在裝置</string>
     <string name="cache_offline_not_ready">不可以離線使用</string>
@@ -863,6 +875,7 @@
     <string name="cache_personal_note_removedwaypoints">航點已刪除。</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">沒有可移除的航點</string>
     <string name="cache_personal_note_storewaypoints_success">航點增加到個人筆記\'</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">航點已被新增至記事，但必須被縮短。(最大的個人記事容量:%1$d)</string>
     <string name="cache_personal_note_preventWaypointsExtraction">關閉輸出航點</string>
     <string name="cache_personal_note_limit">個人註解的限制</string>
     <string name="cache_personal_note_upload">上傳</string>
@@ -1167,9 +1180,11 @@
     <string name="trackable_origin">原點</string>
     <string name="trackable_unknown">未知</string>
     <string name="trackable_released">已發行</string>
+    <string name="trackable_touch">輕觸</string>
     <string name="trackable_not_activated">旅行蟲未啟動</string>
     <string name="trackable_travelbug">旅行蟲</string>
     <string name="trackable_status">狀態</string>
+    <string name="trackable_found">%1$s(%2$s)</string>
     <string name="geokret_type_traditional">傳統的cache</string>
     <string name="geokret_type_book_or_media">書或電子媒體</string>
     <string name="geokret_type_human">人類</string>
@@ -1461,9 +1476,11 @@
     <string name="settings_activate_geokrety">啟用</string>
     <string name="trackable_title_log_without_geocode">未設定 geocode</string>
     <string name="do_not_ask_me_again">不要再詢問</string>
+    <string name="command_move_caches_progress">移動cache到列表%1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="other">已移動%d個cache</item>
     </plurals>
+    <string name="command_copy_caches_progress">複製cache到列表%1s</string>
     <plurals name="command_copy_caches_result">
         <item quantity="other">已複製%d個cache</item>
     </plurals>
@@ -1473,6 +1490,7 @@
     </plurals>
     <string name="command_rename_list_result">重新命名清單</string>
     <string name="command_delete_list_result">已刪除的列表</string>
+    <string name="command_unique_list_result">刪除cache到其他列表</string>
     <string name="command_set_cache_icons_progress">設定cache圖示</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="other">設定%dcache圖示</item>

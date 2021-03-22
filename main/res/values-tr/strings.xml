@@ -245,7 +245,7 @@
     <string name="warn_no_pocket_query_found">Çevrimiçi sorgulama kaydı bulunamadı.</string>
     <string name="warn_invalid_character">Karakter bir HARF veya RAKAM olmalıdır</string>
     <string name="warn_notloggedin_title">Çevrimdışı mod</string>
-    <string name="warn_notloggedin_short">Giriş yapılmadı. Canlı harita sadece cihaza kaydedilen Cacheleri gösterecektir.</string>
+    <string name="warn_notloggedin_short">Giriş yapılmadı. Canlı harita, sadece yerel olarak depolanmış cache\'leri gösterecek. Daha fazla bilgi için buraya dokunun.</string>
     <string name="warn_notloggedin_long">Giriş yapılmadı (henüz). Canlı harita sadece cihaza kaydedilen Cacheleri gösterecektir ve çevrimiçi özelllikler çalışmayacaktır.\n\nŞebeke bağlantınız olmasa da, sunucu problemi olsa da Geocaching hizmetlerini yeniden yapılandırmanız gerekmektedir.\n\nServisi şimdi yapılandırmak ister misiniz?</string>
     <string name="err_read_pocket_query_list">Sorgulama kaydı okunmasında hata.</string>
     <string name="info_log_posted">c:geo, kayıdınızı başarıyla gönderdi.</string>
@@ -1746,7 +1746,6 @@
     <string name="init_low_disk_space_message">Geocache veri klasörünün depolama alanı yetersiz. Bu c:geo\'nun hata vermesine neden olabilir. Lütfen biraz yer açın.</string>
     <string name="init_confirm_debug">c:geo hata ayıklama modunda çalışıyor!</string>
     <string name="list_confirm_debug_message">Hata ayıklama modu dengesizliklere sebep oluyor! Bu modu devre dışı bırakmak ister misiniz?</string>
-    <string name="err_logimage_caption_required">Resim için bir başlık gerekli</string>
     <string name="waypoint_latitude_null">K/G --° --.---</string>
     <string name="waypoint_longitude_null">D/B --° --.---</string>
     <!-- permission handling -->

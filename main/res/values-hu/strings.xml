@@ -223,7 +223,6 @@
     <string name="warn_no_pocket_query_found">Online pocket lekérdezés nem található.</string>
     <string name="warn_invalid_character">A karakter BETŰ vagy SZÁMJEGY lehet</string>
     <string name="warn_notloggedin_title">Offline mód</string>
-    <string name="warn_notloggedin_short">Nem vagy bejelentkezve. Az Élő térképen csak a letöltött ládák láthatóak.</string>
     <string name="warn_notloggedin_long">Nem vagy (még) bejelentkezve. Az Élő térképen csak a letöltött ládák láthatóak és nem működnek az online funkciók.\n\nNincs hálózati kapcsolat, vagy probléma van a szerverrel, vagy be kell állítanod (újra) a szolgáltatásokat.\n\nBeállítod most a szolgáltatásokat?</string>
     <string name="err_read_pocket_query_list">Hiba a pocket lekérdezések listájának olvasásakor.</string>
     <string name="info_log_posted">A c:geo sikeresen elküldte a bejegyzést.</string>
@@ -1339,7 +1338,6 @@
     <string name="init_low_disk_space">A szabad hely kezd elfogyni</string>
     <string name="init_confirm_debug">A c:geo hibakeresési módban fut!</string>
     <string name="list_confirm_debug_message">A hibakeresési mód stabilitási problémákat okoz. Kikapcsolod a hibakeresési módot?</string>
-    <string name="err_logimage_caption_required">Képfelirat megadása szükséges</string>
     <!-- permission handling -->
     <string name="close_app">App bezárása</string>
     <string name="ask_again">Újrakérdezés</string>

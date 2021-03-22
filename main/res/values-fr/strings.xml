@@ -245,7 +245,7 @@
     <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
     <string name="warn_invalid_character">Le caractère doit être une LETTRE ou un CHIFFRE</string>
     <string name="warn_notloggedin_title">Mode hors-ligne</string>
-    <string name="warn_notloggedin_short">Non connecté. La carte en temps réel ne montrera que les caches stockées localement.</string>
+    <string name="warn_notloggedin_short">Non connecté. Seules les caches enregistrées localement seront affichées. Appuyez pour plus d\'informations.</string>
     <string name="warn_notloggedin_long">Non (encore) connecté. La carte en temps réel n\'affichera que les caches stockées localement et les fonctions en ligne ne fonctionneront pas.\n\nSoit il n\'y a pas de connexion réseau, soit il y a un problème de serveur ou bien vous devez (re)configurer vos services geocaching.\n\nSouhaitez-vous configurer les services maintenant ?</string>
     <string name="err_read_pocket_query_list">Erreur de lecture de la liste des Pocket Queries.</string>
     <string name="info_log_posted">Envoi de la visite réussi.</string>
@@ -1746,7 +1746,6 @@
     <string name="init_low_disk_space_message">L\'espace de stockage pour le dossier de données des géocaches est faible. Cela peut causer des dysfonctionnements de c:geo. Veuillez libérer de l\'espace.</string>
     <string name="init_confirm_debug">c:geo s’exécute en mode de débogage !</string>
     <string name="list_confirm_debug_message">Le mode débogage génère de l\'instabilité ! Souhaitez-vous désactiver le mode débogage ?</string>
-    <string name="err_logimage_caption_required">Une légende est requise pour l’image</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>
     <!-- permission handling -->

@@ -245,7 +245,7 @@
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_invalid_character">Das Zeichen muss ein BUCHSTABE oder eine ZIFFER sein</string>
     <string name="warn_notloggedin_title">Offlinemodus</string>
-    <string name="warn_notloggedin_short">Nicht eingeloggt. Die Live-Karte zeigt nur Caches an, die lokal gespeichert sind.</string>
+    <string name="warn_notloggedin_short">Nicht angemeldet. Live-Karte zeigt nur lokal gespeicherte Caches an. Tippe hier für weitere Informationen.</string>
     <string name="warn_notloggedin_long">(Noch) nicht eingeloggt. Die Live-Karte wird nur lokal gespeicherte Caches zeigen und Onlinefunktionen werden nicht verfügbar sein.\n\nEntweder gibt es keine Netzwerkverbindung, ein Server-Problem oder du musst deine Geocaching-Dienste (neu) konfigurieren.\n\nMöchtest du die Dienste jetzt konfigurieren?</string>
     <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket Queries.</string>
     <string name="info_log_posted">Log erfolgreich gesendet.</string>
@@ -1746,7 +1746,6 @@
     <string name="init_low_disk_space_message">Der Geocache-Datenordner hat wenig Speicherplatz. Dies kann Fehlfunktionen in c:geo verursachen. Bitte Speicherplatz freimachen.</string>
     <string name="init_confirm_debug">c:geo arbeitet im Debug-Modus!</string>
     <string name="list_confirm_debug_message">Der Debug-Modus verursacht Instabilität! Debug-Modus beenden?</string>
-    <string name="err_logimage_caption_required">Ein Bildtitel ist erforderlich</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->

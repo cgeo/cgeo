@@ -1180,7 +1180,6 @@
     <string name="init_low_disk_space">Hinay na pagpadagan sa espasyo sa imbakan</string>
     <string name="init_confirm_debug">ang c:geo kay nagdagan sa debug na pamaagi!</string>
     <string name="list_confirm_debug_message">Ang debug na pamaagi kay maoy hinungdan para ma-instabilities! Ganahan ba ka nga mag-deactivate sa debug na pamaagi?</string>
-    <string name="err_logimage_caption_required">Ang kapsyon kay kinahanglan jod para sa imahe</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->

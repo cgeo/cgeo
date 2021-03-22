@@ -237,7 +237,6 @@
     <string name="warn_no_pocket_query_found">Nerastas Pocket query internete.</string>
     <string name="warn_invalid_character">Simbolis turi būti raidė arba skaitmuo</string>
     <string name="warn_notloggedin_title">Darbas neprisijungus</string>
-    <string name="warn_notloggedin_short">Neprisijungta, tiesioginiame žemėlapyje bus rodomos tik išsaugotos slėptuvės.</string>
     <string name="warn_notloggedin_long">(Dar) neprisijungta. Tiesioginiame žemėlapyje bus rodomos tik išsaugotos slėptuvės bei internetinės funkcijos neveiks.\n\nGali būti bėda su ryšiu, bėda su serveriu ar su paslaugų konfigūracija.\n\nAr norite konfigūruoti paslaugas?</string>
     <string name="err_read_pocket_query_list">Klaida skaitant Pocket query sąrašą.</string>
     <string name="info_log_posted">c:geo sėkmingai paskelbė įrašą.</string>
@@ -1609,7 +1608,6 @@
     <string name="init_low_disk_space">Mažai talpyklos vietos</string>
     <string name="init_confirm_debug">c:geo veikia derinimo režimu!</string>
     <string name="list_confirm_debug_message">Derinimo režimas sukelia nestabilumų! Ar norite jį išjungti?</string>
-    <string name="err_logimage_caption_required">Vaizdui reikalinga antraštė</string>
     <string name="waypoint_latitude_null">Š/P --° --.---</string>
     <string name="waypoint_longitude_null">R/V --° --.---</string>
     <!-- permission handling -->

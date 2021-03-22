@@ -245,7 +245,7 @@
     <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
     <string name="warn_invalid_character">Teken moet een LETTER of een CIJFER zijn</string>
     <string name="warn_notloggedin_title">Offline modus</string>
-    <string name="warn_notloggedin_short">Niet ingelogd. Live kaart zal alleen lokaal opgeslagen caches tonen.</string>
+    <string name="warn_notloggedin_short">Niet ingelogd. Live kaart zal alleen lokaal opgeslagen caches tonen. Tik hier voor meer informatie.</string>
     <string name="warn_notloggedin_long">Nog niet ingelogd. Live-kaart toont alleen de lokaal opgeslagen caches en online functies zullen niet werken.\n\nEr is geen netwerkverbinding, een serverprobleem of het is nodig de geocaching diensten te (her) configureren.\n\nDiensten nu configureren?</string>
     <string name="err_read_pocket_query_list">Fout bij het lezen van de Pocket query lijst.</string>
     <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
@@ -1746,7 +1746,6 @@
     <string name="init_low_disk_space_message">De geocache-gegevensmap heeft nog maar weinig schijfruimte. Dit kan leiden tot storingen van c:geo. Gelieve ruimte vrij te maken.</string>
     <string name="init_confirm_debug">c:geo wordt uitgevoerd in de foutopsporingsmodus!</string>
     <string name="list_confirm_debug_message">De debug-modus zorgt voor instabiliteit! Wil je de debug-modus uitschakelen?</string>
-    <string name="err_logimage_caption_required">Een bijschrift is vereist voor de afbeelding</string>
     <string name="waypoint_latitude_null">N/Z --° --.---</string>
     <string name="waypoint_longitude_null">O/W --° --.---</string>
     <!-- permission handling -->

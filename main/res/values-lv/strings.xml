@@ -237,7 +237,6 @@
     <string name="warn_no_pocket_query_found">Tiešsaistē nav atrasta neviena Slēpņu atlase (PQ).</string>
     <string name="warn_invalid_character">Rakstzīmei jābūt BURTAM vai CIPARAM</string>
     <string name="warn_notloggedin_title">Bezsaistes režīms</string>
-    <string name="warn_notloggedin_short">Neizdevās ielogoties. Tiešsaistes karte uzrādīs tikai saglabātos slēpņus.</string>
     <string name="warn_notloggedin_long">Neizdevās ielogoties (vēl). Tiešsaistes karte uzrādīs tikai saglabātos slēpņus un tiešsaistes funkcijas nedarbosies. \n\nProblēma var būt tīkla savienojuma vai servera kļūdas dēļ, vai arī Jums ir jāmaina geocaching iestatījumi. \n\nVai vēlaties mainīt iestatījumus?</string>
     <string name="err_read_pocket_query_list">Kļūda nolasot slēpņu atlašu (PQ) sarakstu.</string>
     <string name="info_log_posted">c:geo veiksmīgi iesniedza pierakstu.</string>
@@ -1481,7 +1480,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="init_low_disk_space">Ierīcē sāk pietrūkt atmiņas</string>
     <string name="init_confirm_debug">c:geo darbojas atkļūdošanas režīmā!</string>
     <string name="list_confirm_debug_message">Atkļūdošanas režīms var izraisīt nestabilu aplikācijas darbību! Vai vēlies šo režīmu deaktivizēt?</string>
-    <string name="err_logimage_caption_required">Attēlam ir nepieciešams pievienot parakstu</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
