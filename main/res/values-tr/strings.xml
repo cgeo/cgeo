@@ -245,6 +245,7 @@
     <string name="warn_no_pocket_query_found">Çevrimiçi sorgulama kaydı bulunamadı.</string>
     <string name="warn_invalid_character">Karakter bir HARF veya RAKAM olmalıdır</string>
     <string name="warn_notloggedin_title">Çevrimdışı mod</string>
+    <string name="warn_notloggedin_short">Giriş yapılmadı. Canlı harita, sadece yerel olarak depolanmış cache\'leri gösterecek. Daha fazla bilgi için buraya dokunun.</string>
     <string name="warn_notloggedin_long">Giriş yapılmadı (henüz). Canlı harita sadece cihaza kaydedilen Cacheleri gösterecektir ve çevrimiçi özelllikler çalışmayacaktır.\n\nŞebeke bağlantınız olmasa da, sunucu problemi olsa da Geocaching hizmetlerini yeniden yapılandırmanız gerekmektedir.\n\nServisi şimdi yapılandırmak ister misiniz?</string>
     <string name="err_read_pocket_query_list">Sorgulama kaydı okunmasında hata.</string>
     <string name="info_log_posted">c:geo, kayıdınızı başarıyla gönderdi.</string>
