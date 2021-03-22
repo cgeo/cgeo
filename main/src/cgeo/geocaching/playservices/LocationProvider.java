@@ -8,6 +8,8 @@ import cgeo.geocaching.utils.Log;
 import android.content.Context;
 import android.location.Location;
 
+import androidx.annotation.NonNull;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -74,12 +76,12 @@ public class LocationProvider extends LocationCallback {
             }
             final Disposable disposable = subject.subscribeWith(new DisposableObserver<GeoData>() {
                 @Override
-                public void onNext(final GeoData value) {
+                public void onNext(@NonNull final GeoData value) {
                     emitter.onNext(value);
                 }
 
                 @Override
-                public void onError(final Throwable e) {
+                public void onError(@NonNull final Throwable e) {
                     emitter.onError(e);
                 }
 
