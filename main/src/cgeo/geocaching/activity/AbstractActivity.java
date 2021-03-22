@@ -3,7 +3,6 @@ package cgeo.geocaching.activity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -36,6 +35,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.Locale;
@@ -247,7 +247,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         if (actionBar != null) {
             if (type != null) {
                 actionBar.setDisplayShowHomeEnabled(true);
-                actionBar.setIcon(Compatibility.getDrawable(getResources(), type.markerId));
+                actionBar.setIcon(ResourcesCompat.getDrawable(getResources(), type.markerId, null));
             } else {
                 actionBar.setIcon(android.R.color.transparent);
             }

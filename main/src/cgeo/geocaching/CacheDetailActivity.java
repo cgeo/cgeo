@@ -11,7 +11,6 @@ import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.calendar.CalendarAdder;
 import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
@@ -151,6 +150,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.core.widget.NestedScrollView;
@@ -2099,13 +2099,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final Drawable icon;
             if (wpt.isVisited()) {
                 final LayerDrawable ld = new LayerDrawable(new Drawable[] {
-                        Compatibility.getDrawable(res, waypointType.markerId),
-                        Compatibility.getDrawable(res, R.drawable.tick) });
+                    ResourcesCompat.getDrawable(res, waypointType.markerId, null),
+                    ResourcesCompat.getDrawable(res, R.drawable.tick, null) });
                 ld.setLayerInset(0, 0, 0, visitedInset, visitedInset);
                 ld.setLayerInset(1, visitedInset, visitedInset, 0, 0);
                 icon = ld;
             } else {
-                icon = Compatibility.getDrawable(res, waypointType.markerId);
+                icon = ResourcesCompat.getDrawable(res, waypointType.markerId, null);
             }
             nameView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
         }
