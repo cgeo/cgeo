@@ -361,7 +361,6 @@
     <string name="settings_summary_map">Ang pagtakda ng pinagmumulan ng mapa, mga setting sa mapang naka-offline at mga detalye ng mapa.</string>
     <string name="settings_title_map_data">Ang Datos ng Mapa</string>
     <string name="settings_title_map_content">Nilalaman ng Mapa</string>
-    <string name="settings_title_gpx">Ang GPX</string>
     <string name="calculate_dataDir_title">Ang paggamit ng mga datos sa Geocache</string>
     <string name="calculate_dataDir">Pagkalkula ng mga datos na nagamit sa Geocache</string>
     <string name="settings_data_dir_item">%1$s (%2$s libri)</string>
@@ -662,7 +661,6 @@
     <string name="cache_menu_sygic_drive">Ang Sygic sa (Pagmamaneho)</string>
     <string name="cache_menu_radar">Ang radar</string>
     <string name="cache_menu_map">Ang mapa</string>
-    <string name="cache_menu_rmaps">Ang Rmaps</string>
     <string name="cache_menu_map_ext">Iba pang mga aplikasyon na panlabas</string>
     <string name="cache_menu_streetview">Ang tanawin sa Kalye</string>
     <string name="cache_menu_browser">Ibukas sa browser</string>
@@ -904,7 +902,6 @@
     <string name="export_fieldnotes_upload_success">Ang pag-upload sa geocaching.com ay Matagumpay</string>
     <string name="export_fieldnotes_onlynew">Dahil lamang sa pinakahuling pagluwas</string>
     <string name="export_fieldnotes_creating">Gumawa ng mga Nota sa Field&#8230;</string>
-    <string name="export_gpx">Ang GPX</string>
     <string name="export_gpx_info">Ang GPX file ay mai-export sa %1$s gamit ang kasalukuyang petsa at oras bilang pangalan ng file nito.</string>
     <string name="export_confirm_title">Ang Pag-eeksport %1$s</string>
     <string name="export_confirm_message">Para sa Path: %1$s\n Ang Pangalan ng Payl: %2$s</string>
