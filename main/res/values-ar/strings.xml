@@ -426,7 +426,6 @@
     <string name="init_signature_template_number">عدد</string>
     <string name="init_signature_template_owner">مالك</string>
     <string name="init_signature_template_name">الاسم</string>
-    <string name="init_signature_template_url">عنوان URL</string>
     <string name="init_signature_template_log">نص تسجيل الزيارة</string>
     <string name="init_ratingwanted">تقييم GcVote</string>
     <string name="init_summary_ratingwanted">تحميل تقييم المخبئ من GCvote.com</string>
