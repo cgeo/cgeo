@@ -54,6 +54,7 @@ public class ContentStorage {
     private final Context context;
     private final DocumentContentAccessor documentAccessor;
     private final FileContentAccessor fileAccessor;
+    private final ThreadLocal<Boolean> reportRunningFlag = new ThreadLocal<>();
 
     private static final ContentStorage INSTANCE = new ContentStorage();
 
@@ -281,7 +282,9 @@ public class ContentStorage {
         try {
             return getAccessorFor(folder).getUriForFolder(folder);
         } catch (IOException ioe) {
-            reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, folder);
+            //"getUriForFolder" is used in "reportProblem", so calling it here might create a loop-of-death
+            //reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, folder);
+            Log.v("Problem accessing folder " + folder, ioe);
         }
         return null;
     }
@@ -549,11 +552,17 @@ public class ContentStorage {
 
     private void reportProblem(@StringRes final int messageId, final Exception ex, final Object ... params) {
 
+        if (reportRunningFlag.get() != null && reportRunningFlag.get().booleanValue()) {
+            return;
+        }
+        reportRunningFlag.set(true);
+
         //prepare params message
         final ImmutablePair<String, String> messages = LocalizationUtils.getMultiPurposeString(messageId, "ContentStorage", params);
         Log.w("ContentStorage: " + messages.right, ex);
         if (context != null) {
             ActivityMixin.showToast(context, messages.left);
         }
+        reportRunningFlag.set(false);
     }
 }
