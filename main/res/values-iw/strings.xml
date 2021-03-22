@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">מטמון</string>
     <string name="detail">פירוט</string>
@@ -371,7 +370,6 @@
     <string name="settings_summary_map">קבע מקור מפה, הגדרות מפה לא-מקוונת ופרטי מפה.</string>
     <string name="settings_title_map_data">נתוני מפה</string>
     <string name="settings_title_map_content">תוכן מפה</string>
-    <string name="settings_title_gpx">GPx</string>
     <string name="settings_title_basicmembers">אפשרויות עבור משתמשים רגילים</string>
     <string name="settings_title_navigation">ניווט</string>
     <string name="settings_summary_navigation">בחר שיטות ניווט מועדפות ואפליקציות ניווט חיצוניות.</string>
@@ -413,7 +411,6 @@
     <string name="init_signature_template_number">מספר</string>
     <string name="init_signature_template_owner">בעלים</string>
     <string name="init_signature_template_name">שם</string>
-    <string name="init_signature_template_url">כתובת אינטרנט</string>
     <string name="init_ratingwanted">דירוג GCvote</string>
     <string name="init_skin">ערכת נושא קלה</string>
     <string name="init_summary_skin">השתמש בערכת נושא קלה (דרושה הפעלה מחדש)</string>
@@ -426,9 +423,6 @@
     <string name="feature_own_coordinates">אחסון נקודות ציון מעודכנות</string>
     <!-- proximity notification -->
     <!-- map sources -->
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="init_sendToCgeo_registering">Registering your device for send2cgeo&#8230;</string>
     <!-- Content Storage -->
     <!-- Persistable Folders -->

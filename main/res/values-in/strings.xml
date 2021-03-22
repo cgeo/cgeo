@@ -1196,7 +1196,6 @@
     <string name="init_low_disk_space">Ruang penyimpanan tinggal sedikit</string>
     <string name="init_confirm_debug">c:geo berjalan dalam mode debug!</string>
     <string name="list_confirm_debug_message">Mode debug menyebabkan ketidakstabilan! Apakah anda ingin untuk menonaktifkan mode debug?</string>
-    <string name="err_logimage_caption_required">Keterangan yang diperlukan untuk gambar</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->

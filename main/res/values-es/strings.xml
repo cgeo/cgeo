@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Caché</string>
     <string name="detail">Detalles</string>
@@ -146,7 +145,6 @@
     <string name="log_problem_archive_label">El caché debería archivarse</string>
     <string name="log_problem_archive_text">Este geocacher informó de que este caché debería ser archivado. Se ha notificado a un revisor voluntario de la comunidad.</string>
     <string name="log_image_scale_option_noscaling">Sin redimensionar</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Imagen</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traducir al %s</string>
@@ -234,7 +232,7 @@
     <string name="warn_no_pocket_query_found">No se ha encontrado ninguna Pocket Query en Geocaching.com.</string>
     <string name="warn_invalid_character">El carácter debe ser una LETRA o un DÍGITO</string>
     <string name="warn_notloggedin_title">Modo sin conexión</string>
-    <string name="warn_notloggedin_short">Sesión no iniciada. El mapa en vivo sólo mostrará cachés almacenados localmente.</string>
+    <string name="warn_notloggedin_short">Sesión no iniciada. El mapa en vivo sólo mostrará cachés almacenados localmente. Pulsa aquí para más información.</string>
     <string name="warn_notloggedin_long">No conectado (todavía). El mapa en vivo sólo mostrará cachés almacenados localmente y las funciones en línea no funcionarán.\n\nNo hay conexión de red, un problema con el servidor o tienes que (re)configurar tus servicios de geocaching.\n\n¿Desea configurar los servicios ahora?</string>
     <string name="err_read_pocket_query_list">Error al leer la lista de Pocket queries.</string>
     <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
@@ -267,7 +265,6 @@
     <string name="loc_fused">Combinado</string>
     <string name="loc_low_power">Ahorro de energía</string>
     <string name="loc_home">Coordenadas de casa</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Intentando ubicar</string>
     <string name="loc_no_addr">Dirección desconocida</string>
@@ -443,7 +440,6 @@
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Contenido del mapa</string>
     <string name="settings_title_map_behavior">Comportamiento del mapa</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="calculate_dataDir_title">Uso de datos de los cachés</string>
     <string name="calculate_dataDir">Calculando el uso de datos de los cachés en el disco</string>
     <string name="settings_data_dir_item">%1$s (%2$s libre)</string>
@@ -517,7 +513,6 @@
     <string name="init_signature_template_name">Nombre</string>
     <string name="init_signature_template_difficulty">Dificultad</string>
     <string name="init_signature_template_terrain">Terreno</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Texto de registro</string>
     <string name="init_signature_template_size">Tamaño</string>
     <string name="init_signature_template_type">Tipo</string>
@@ -686,9 +681,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satélite</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.org</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Desconectado</string>
     <string name="map_source_osm_offline_combined">Combinado (sin conexión)</string>
     <string name="init_sendToCgeo">Enviar a c:geo</string>
@@ -840,7 +832,6 @@
     <string name="cache_menu_sygic_drive">Sygic (Coche)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Ver en mapa</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Otras apps externas</string>
     <string name="cache_menu_browser">Abrir navegador</string>
     <string name="cache_menu_visit">Registrar visita</string>
@@ -1121,7 +1112,6 @@
     <string name="export_fieldnotes_upload_success">Subido con éxito a geocaching.com</string>
     <string name="export_fieldnotes_onlynew">Solo desde la última exportación</string>
     <string name="export_fieldnotes_creating">Creando notas de campo…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">El archivo GPX será exportado a %1$s con la fecha y hora actual como su nombre de archivo.</string>
     <string name="export_confirm_title">Exportando %1$s</string>
     <string name="export_confirm_message">Directorio: %1$s\n
@@ -1460,9 +1450,6 @@ Nombre de archivo:%2$s</string>
     <string name="init_low_disk_space">Queda poco espacio de almacenamiento</string>
     <string name="init_confirm_debug">¡c:geo se está ejecutando en modo de depuración!</string>
     <string name="list_confirm_debug_message">¡El modo de depuración provoca inestabilidades! ¿Quieres desactivar el modo depuración?</string>
-    <string name="err_logimage_caption_required">Se necesita un título para la imagen</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/O --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Cerrar aplicación</string>
     <string name="ask_again">Preguntarme de nuevo</string>

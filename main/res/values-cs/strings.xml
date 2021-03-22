@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Keška</string>
     <string name="detail">Detaily</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">Keška by měla být archivována</string>
     <string name="log_problem_archive_text">Tento hráč oznámil, že keška by měla být archivována. Reviewer byl informován.</string>
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nZměněná velikost/Komprimované:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <!-- translation -->
@@ -245,7 +242,7 @@
     <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
     <string name="warn_invalid_character">Znak musí být písmeno nebo číslice</string>
     <string name="warn_notloggedin_title">Offline režim</string>
-    <string name="warn_notloggedin_short">Nejste přihlášen. Aktivní mapa ukazuje jen lokální uložené kešky.</string>
+    <string name="warn_notloggedin_short">Nejste přihlášeni. Živá mapa bude zobrazovat pouze kešky uložené v místním úložišti. Klepněte zde pro více informací.</string>
     <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Aktivní mapa ukazuje len lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
     <string name="err_read_pocket_query_list">Chyba čtení seznamu Pocket Queries.</string>
     <string name="info_log_posted">Log byl úspěšně odeslán.</string>
@@ -279,7 +276,6 @@
     <string name="loc_fused">Kombinovaný</string>
     <string name="loc_low_power">Nízká spotřeba</string>
     <string name="loc_home">Souřadnice domova</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Zjišťování pozice</string>
     <string name="loc_no_addr">Neznámá adresa</string>
@@ -469,7 +465,6 @@
     <string name="settings_title_waypoints">Trasové body</string>
     <string name="settings_title_map_content">Obsah map</string>
     <string name="settings_title_map_behavior">Chování mapy</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
     <string name="settings_title_data_dir_usage">Složka s údaji o keškách (%1$s použito)</string>
     <string name="calculate_dataDir_title">Využití úložiště keškami</string>
@@ -548,7 +543,6 @@
     <string name="init_signature_template_name">Název</string>
     <string name="init_signature_template_difficulty">Obtížnost</string>
     <string name="init_signature_template_terrain">Terén</string>
-    <string name="init_signature_template_url">URL adresa</string>
     <string name="init_signature_template_log">Text logu</string>
     <string name="init_signature_template_size">Velikost</string>
     <string name="init_signature_template_type">Typ</string>
@@ -794,9 +788,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
     <string name="map_source_attribution_dialog_title">Zdroj mapy</string>
@@ -838,7 +829,6 @@
     <string name="persistablefolder_base">Hlavní</string>
     <string name="persistablefolder_offline_maps">Offline mapy</string>
     <string name="persistablefolder_offline_maps_themes">Motivy mapy</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Záloha</string>
     <string name="persistablefolder_logfiles">Soubory protokolů</string>
     <string name="persistablefolder_fieldnotes">Poznámky z terénu</string>
@@ -1038,7 +1028,6 @@
     <string name="cache_menu_sygic_drive">Sygic (řízení)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Zobrazit na mapě</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Další externí aplikace</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otevřít v prohlížeči</string>
@@ -1385,7 +1374,6 @@
     <string name="export_fieldnotes_upload_success">Nahrávání na geocaching.com bylo úspěšné</string>
     <string name="export_fieldnotes_onlynew">Jen od předchozího nahrání</string>
     <string name="export_fieldnotes_creating">Vytváření souboru poznámek z terénu…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX soubor bude exportován do %1$s s názvem souboru podle aktuálního data a času.</string>
     <string name="export_confirm_title">Exportovat %1$s</string>
     <string name="export_confirm_message">Umístění: %1$s\nNázev souboru: %2$s</string>
@@ -1794,9 +1782,6 @@
     <string name="init_low_disk_space_message">V úložišti, kde je složka s údaji o keškách, dochází volné místo. To může způsobit nesprávné fungování aplikace c:geo. Uvolněte prosím nějaké místo.</string>
     <string name="init_confirm_debug">c:geo běží v režimu ladění!</string>
     <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chceš režim ladění vypnout?</string>
-    <string name="err_logimage_caption_required">Obrázek musí mít titulek</string>
-    <string name="waypoint_latitude_null">S/J – ° –.---</string>
-    <string name="waypoint_longitude_null">V/Z – ° –.---</string>
     <!-- permission handling -->
     <string name="close_app">Zavřít aplikaci</string>
     <string name="ask_again">Zeptat se znova</string>

@@ -426,7 +426,6 @@
     <string name="init_signature_template_number">عدد</string>
     <string name="init_signature_template_owner">مالك</string>
     <string name="init_signature_template_name">الاسم</string>
-    <string name="init_signature_template_url">عنوان URL</string>
     <string name="init_signature_template_log">نص تسجيل الزيارة</string>
     <string name="init_ratingwanted">تقييم GcVote</string>
     <string name="init_summary_ratingwanted">تحميل تقييم المخبئ من GCvote.com</string>
@@ -1178,7 +1177,6 @@
     <string name="init_low_disk_space">تشغيل منخفض على مساحة التخزين</string>
     <string name="init_confirm_debug">c:geo قيد التشغيل في وضغ التصحيح!</string>
     <string name="list_confirm_debug_message">وضع التصحيح يسبب عدم الاستقرار! هل تريد إلغاء تنشيط وضع التصحيح؟</string>
-    <string name="err_logimage_caption_required">مطلوب تسمية توضيحية للصورة</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->

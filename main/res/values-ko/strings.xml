@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">캐시</string>
     <string name="detail">상세표시</string>
@@ -147,7 +146,6 @@
     <string name="log_problem_archive_label">캐시를 영구보관해야 함</string>
     <string name="log_problem_archive_text">이 지오캐셔가 이 캐시는 영구보관해야 한다고 신고했습니다. 커뮤니티 자원봉자자가 통지했습니다.</string>
     <string name="log_image_scale_option_noscaling">스케일링 없음</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">이미지</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s로 번역하기</string>
@@ -237,7 +235,6 @@
     <string name="warn_no_pocket_query_found">온라인에 포켓쿼리가 없습니다.</string>
     <string name="warn_invalid_character">문자 또는 숫자만 허용됩니다.</string>
     <string name="warn_notloggedin_title">오프라인 모드</string>
-    <string name="warn_notloggedin_short">로그인하지 않았습니다. 라이브 지도에는 로컬에 저장된 캐시 만 표시됩니다.</string>
     <string name="warn_notloggedin_long">로그인하지 않았습니다 (아직). 라이브 지도는 로컬에 저장된 캐시 만 표시하며 온라인 기능은 작동하지 않습니다.\n\n네트워크 연결이 없거나 서버 문제가 있거나 지오 캐싱 서비스를 다시 구성해야합니다.\n\n지금 서비스를 구성 하시겠습니까?</string>
     <string name="err_read_pocket_query_list">포켓쿼리 목록을 불러오지 못했습니다.</string>
     <string name="info_log_posted">로그를 성공적으로 제출했습니다.</string>
@@ -271,7 +268,6 @@
     <string name="loc_fused">합성 좌표</string>
     <string name="loc_low_power">저전력</string>
     <string name="loc_home">기본 위치</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">위성</string>
     <string name="loc_trying">위치 찾는 중</string>
     <string name="loc_no_addr">알 수 없는 주소</string>
@@ -447,7 +443,6 @@
     <string name="settings_title_waypoints">지점</string>
     <string name="settings_title_map_content">지도 내용</string>
     <string name="settings_title_map_behavior">지도 동작</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="calculate_dataDir_title">지오캐시 데이터 사용</string>
     <string name="calculate_dataDir">지오캐시 데이터 디스크 사용량 계산</string>
     <string name="settings_data_dir_item">%1$s (%2$s 남음)</string>
@@ -522,7 +517,6 @@
     <string name="init_signature_template_name">제목</string>
     <string name="init_signature_template_difficulty">난이도</string>
     <string name="init_signature_template_terrain">지형등급</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">로그 작성</string>
     <string name="init_signature_template_size">크기</string>
     <string name="init_signature_template_type">유형</string>
@@ -700,9 +694,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">구글 : 지도</string>
     <string name="map_source_google_satellite">구글 : 위성</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">오프라인</string>
     <string name="map_source_osm_offline_combined">결합 (오프라인)</string>
     <string name="init_sendToCgeo">c:geo로 보내기</string>
@@ -856,7 +847,6 @@
     <string name="cache_menu_sygic_drive">Sygic(자동차)</string>
     <string name="cache_menu_radar">레이더</string>
     <string name="cache_menu_map">지도</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">기타 외부 앱</string>
     <string name="cache_menu_streetview">스트리트 뷰</string>
     <string name="cache_menu_browser">브라우저에서 열기</string>
@@ -1163,7 +1153,6 @@
     <string name="export_fieldnotes_upload_success">Geocaching.com 에 올리기 성공</string>
     <string name="export_fieldnotes_onlynew">마지막 내보내기 이후만</string>
     <string name="export_fieldnotes_creating">현장 기록 생성 중…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX 파일이 현재 날짜, 시간과 함께 %1$s로 저장됩니다.</string>
     <string name="export_confirm_title">%1$s 내보내는 중</string>
     <string name="export_confirm_message">경로: %1$s\nFile 이름: %2$s</string>
@@ -1495,9 +1484,6 @@
     <string name="init_low_disk_space">디스크 공간 부족</string>
     <string name="init_confirm_debug">c:geo가 디버그 모드에서 실행됩니다!</string>
     <string name="list_confirm_debug_message">디버그 모드는 불안정해질 수 있습니다. 정상 모드로 돌아가시겠습니까?</string>
-    <string name="err_logimage_caption_required">영상에 설명이 필요합니다.</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">앱 닫기</string>
     <string name="ask_again">다시 묻기</string>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detaljer</string>
@@ -153,7 +152,6 @@
     <string name="log_problem_archive_label">Cachen bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacheren rapporterte at geocachen bør arkiveres. En frivillig kontrollør blir varslet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Bilde</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversett til %s</string>
@@ -239,11 +237,10 @@
     <string name="warn_search_help_tb">Angi koden til en sporbar. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
-    <string name="warn_pocket_query_select">Ingen utvalgsspørring er valgt.</string>
+    <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
     <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
     <string name="warn_notloggedin_title">Offline-modus</string>
-    <string name="warn_notloggedin_short">Ikke logget inn. Live-kart vil bare vise cacher som er lagret lokalt.</string>
     <string name="warn_notloggedin_long">Ikke logget inn (ennå). Live-kartet vil bare viser cacher som er lagret lokalt og online-funksjoner vil ikke virke.\n\nEnten mangler du nettverksforbindelse, det er et serverproblem eller så må du endre geocaching-tjenestene i Innstillinger.\n\nVil du endre tjenestene nå?</string>
     <string name="err_read_pocket_query_list">Feil under lesing av Pocket query-listen.</string>
     <string name="info_log_posted">c:geo lyktes i å logge funnet.</string>
@@ -277,7 +274,6 @@
     <string name="loc_fused">Kombinert</string>
     <string name="loc_low_power">Lavt strømforbruk</string>
     <string name="loc_home">Hjemkoordinater</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Satellitter</string>
     <string name="loc_trying">Prøver å lokalisere</string>
     <string name="loc_no_addr">Ukjent adresse</string>
@@ -464,7 +460,6 @@
     <string name="settings_title_waypoints">Veipunkter</string>
     <string name="settings_title_map_content">Kartinnhold</string>
     <string name="settings_title_map_behavior">Kartatferd</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="calculate_dataDir_title">Lagringsplass brukt på geocache-data</string>
     <string name="calculate_dataDir">Beregner diskforbruket til geocache-data</string>
     <string name="settings_data_dir_item">%1$s (%2$s ledig)</string>
@@ -539,7 +534,6 @@
     <string name="init_signature_template_name">Navn</string>
     <string name="init_signature_template_difficulty">Vankelighetsgrad</string>
     <string name="init_signature_template_terrain">Terrenggrad</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Loggtekst</string>
     <string name="init_signature_template_size">Størrelse</string>
     <string name="init_signature_template_type">Type</string>
@@ -766,9 +760,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: kart</string>
     <string name="map_source_google_satellite">Google: satellittbilder</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">SyklOSM</string>
     <string name="map_source_osm_offline">Lagret lokalt</string>
     <string name="map_source_osm_offline_combined">Kombinert (Lagret lokalt)</string>
     <string name="map_source_attribution_dialog_title">Kart-rettigheter</string>
@@ -786,7 +777,7 @@
     <string name="contentstorage_selectfolder_dialog_title">Endre mappe %s</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopier alt innhold</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Flytt alt innhold</string>
-    <string name="contentstorage_selectfolder_dialog_choice_justselect">Ingen ytterligere tiltak</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">Ingen endring</string>
     <string name="contentstorage_folder_selection_success">Mappe satt til \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Avbryter filvalg</string>
     <string name="contentstorage_file_selection_success">Fil valgt: \'%s\'</string>
@@ -797,7 +788,6 @@
     <string name="persistablefolder_usedefault">Bruk standard</string>
     <string name="persistablefolder_offline_maps">Offline-kart</string>
     <string name="persistablefolder_offline_maps_themes">Kart-temaer</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Sikkerhetskopi</string>
     <string name="persistablefolder_logfiles">Loggfiler</string>
     <string name="persistablefolder_fieldnotes">Feltnotater</string>
@@ -963,7 +953,6 @@
     <string name="cache_menu_sygic_drive">Sygic (Kjøre)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Vis på kartet</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andre eksterne apper</string>
     <string name="cache_menu_streetview">Gatevisning</string>
     <string name="cache_menu_browser">Åpne i nettleseren</string>
@@ -1301,7 +1290,6 @@
     <string name="export_fieldnotes_upload_success">Opplasting til geocaching.com er fullført</string>
     <string name="export_fieldnotes_onlynew">Bare siden forrige eksportering</string>
     <string name="export_fieldnotes_creating">Lager feltnotater…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX-filen blir eksportert til %1$s med dato og tidspunkt som filnavn.</string>
     <string name="export_confirm_title">Eksporterer %1$s</string>
     <string name="export_confirm_message">Bane: %1$s\nFilnavn: %2$s</string>
@@ -1679,9 +1667,6 @@
     <string name="init_low_disk_space">Lite lagringsplass</string>
     <string name="init_confirm_debug">c:geo kjører i feilsøkingsmodus!</string>
     <string name="list_confirm_debug_message">Feilsøkingsmodus vil gjøre c:geo ustabil. Vil du deaktivere feilsøkingsmodusen?</string>
-    <string name="err_logimage_caption_required">Du må skrive inn tittel på bildet</string>
-    <string name="waypoint_latitude_null">N/S--°--.---</string>
-    <string name="waypoint_longitude_null">Ø/V--°--.---</string>
     <!-- permission handling -->
     <string name="close_app">Lukk app</string>
     <string name="ask_again">Spør igjen</string>

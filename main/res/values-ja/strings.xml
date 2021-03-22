@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">キャッシュ</string>
     <string name="detail">詳細</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">要アーカイブ</string>
     <string name="log_problem_archive_text">このジオキャッシャーがキャッシュがアーカイブされるべきと報告しました。コミュニティのボランティアレビューアーに通知されました</string>
     <string name="log_image_scale_option_noscaling">実サイズ</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$dpx</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\n縮小/圧縮:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">画像</string>
     <!-- translation -->
@@ -245,7 +242,6 @@
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
     <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
     <string name="warn_notloggedin_title">オフラインモード</string>
-    <string name="warn_notloggedin_short">ログインしていません\n地図には保存されたキャッシュのみ表示されます</string>
     <string name="warn_notloggedin_long">(まだ)ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されオンライン機能は動作しません。\n\nネットワーク接続がないか、サーバーに問題があるか、ジオキャッシングサービスを(再)設定する必要があります。\n\n今すぐサービスの設定をしますか?</string>
     <string name="err_read_pocket_query_list">ポケット・クエリのリストの読み取りエラー</string>
     <string name="info_log_posted">ログを投稿しました</string>
@@ -279,7 +275,6 @@
     <string name="loc_fused">融合</string>
     <string name="loc_low_power">低消費電力</string>
     <string name="loc_home">ホーム座標値</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">衛星</string>
     <string name="loc_trying">住所確認中</string>
     <string name="loc_no_addr">住所不明</string>
@@ -466,7 +461,6 @@
     <string name="settings_title_waypoints">ウェイポイント</string>
     <string name="settings_title_map_content">地図の表示</string>
     <string name="settings_title_map_behavior">地図の動作</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">ジオキャッシュ データフォルダ</string>
     <string name="settings_title_data_dir_usage">ジオキャッシュ データフォルダ (%1$s 使用)</string>
     <string name="calculate_dataDir_title">ジオキャッシュ データ使用量</string>
@@ -545,7 +539,6 @@
     <string name="init_signature_template_name">キャッシュ名</string>
     <string name="init_signature_template_difficulty">難易度</string>
     <string name="init_signature_template_terrain">地形</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">ログの本文</string>
     <string name="init_signature_template_size">サイズ</string>
     <string name="init_signature_template_type">タイプ</string>
@@ -790,9 +783,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Googleマップ:地図</string>
     <string name="map_source_google_satellite">Googleマップ:航空写真</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">オフライン</string>
     <string name="map_source_osm_offline_combined">OSM結合 (オフライン)</string>
     <string name="map_source_attribution_dialog_title">地図の著作権</string>
@@ -834,7 +824,6 @@
     <string name="persistablefolder_base">ベース</string>
     <string name="persistablefolder_offline_maps">オフライン地図</string>
     <string name="persistablefolder_offline_maps_themes">地図テーマ</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">バックアップ</string>
     <string name="persistablefolder_logfiles">ログファイル</string>
     <string name="persistablefolder_fieldnotes">フィールドノート</string>
@@ -1006,7 +995,6 @@
     <string name="cache_menu_sygic_drive">Sygic (自動車)</string>
     <string name="cache_menu_radar">レーダー</string>
     <string name="cache_menu_map">地図</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">ほかの外部アプリ</string>
     <string name="cache_menu_streetview">Googleストリートビュー</string>
     <string name="cache_menu_browser">ブラウザで開く</string>
@@ -1348,7 +1336,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_fieldnotes_upload_success">geocaching.comにアップロードしました</string>
     <string name="export_fieldnotes_onlynew">最後にエクスポートした時から更新がある場合のみ</string>
     <string name="export_fieldnotes_creating">フィールドノートを作成中…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPXファイルは%1$sフォルダに保存され、ファイル名は現在の日時になります</string>
     <string name="export_confirm_title">エクスポート: %1$s</string>
     <string name="export_confirm_message">フォルダ: %1$s\nファイル名: %2$s</string>
@@ -1718,9 +1705,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="init_low_disk_space_message">ジオキャッシュ データフォルダのストレージ容量が不足しています。c:geoが誤動作する可能性があります。空き容量を増やしてください</string>
     <string name="init_confirm_debug">c:geoをデバッグモードで実行しています!</string>
     <string name="list_confirm_debug_message">デバッグモードは不安定の原因になります! デバッグモードを無効にしますか?</string>
-    <string name="err_logimage_caption_required">画像にキャプションが必要です</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">アプリを閉じる</string>
     <string name="ask_again">次回も確認する</string>

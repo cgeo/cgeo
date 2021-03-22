@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Тайник</string>
     <string name="detail">Детали</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">Тайник должен быть заархивирован</string>
     <string name="log_problem_archive_text">Этот пользователь сообщил, что тайник должен быть заархивирован. Сообщество добровольцев было уведомлено.</string>
     <string name="log_image_scale_option_noscaling">Без масштабирования</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Фотография</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Перевести на %s</string>
@@ -243,7 +240,6 @@
     <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
     <string name="warn_invalid_character">Символ должен быть буквой или цифрой</string>
     <string name="warn_notloggedin_title">Оффлайн-режим</string>
-    <string name="warn_notloggedin_short">Пользователь не авторизован. Онлайн-карта будет показывать только тайники, сохраненные локально.</string>
     <string name="warn_notloggedin_long">Пользователь пока не авторизован. Карта покажет только тайники, сохраненные локально и онлайн функции не будут работать.\n\nЛибо нет сетевого соединения, либо вам нужно (пере)настроить сервисы геокешинга.\n\nХотите настроить сервисы сейчас?</string>
     <string name="err_read_pocket_query_list">Ошибка чтения списка Выборок.</string>
     <string name="info_log_posted">Запись в блокнот успешно отправлена.</string>
@@ -277,7 +273,6 @@
     <string name="loc_fused">Смешанное</string>
     <string name="loc_low_power">Энергосбережение</string>
     <string name="loc_home">Домашние координаты</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Спутники</string>
     <string name="loc_trying">Пытаемся определить местоположение</string>
     <string name="loc_no_addr">Неизвестный адрес</string>
@@ -464,7 +459,6 @@
     <string name="settings_title_waypoints">Путевые точки</string>
     <string name="settings_title_map_content">Содержания карты</string>
     <string name="settings_title_map_behavior">Поведение карты</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Папка данных тайников</string>
     <string name="settings_title_data_dir_usage">Папка данных тайников (сейчас %1$s)</string>
     <string name="calculate_dataDir_title">Использование данных тайниками</string>
@@ -542,7 +536,6 @@
     <string name="init_signature_template_name">Название тайника</string>
     <string name="init_signature_template_difficulty">Сложность</string>
     <string name="init_signature_template_terrain">Местность</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Текст записи</string>
     <string name="init_signature_template_size">Размер</string>
     <string name="init_signature_template_type">Тип</string>
@@ -771,9 +764,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: карта</string>
     <string name="map_source_google_satellite">Google: спутник</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Оффлайн</string>
     <string name="map_source_osm_offline_combined">Совмещенные (оффлайн)</string>
     <string name="map_source_attribution_dialog_title">Источник</string>
@@ -810,7 +800,6 @@
     <string name="persistablefolder_base">Основная</string>
     <string name="persistablefolder_offline_maps">Оффлайн карты</string>
     <string name="persistablefolder_offline_maps_themes">Темы карты</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Резервное копирование</string>
     <string name="persistablefolder_logfiles">Логи</string>
     <string name="persistablefolder_fieldnotes">Полевые заметки</string>
@@ -998,7 +987,6 @@
     <string name="cache_menu_sygic_drive">Sygic (за рулем)</string>
     <string name="cache_menu_radar">Радар</string>
     <string name="cache_menu_map">Карта</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Другие внешние приложения</string>
     <string name="cache_menu_streetview">Просмотр улиц</string>
     <string name="cache_menu_browser">Открыть в браузере</string>
@@ -1336,7 +1324,6 @@
     <string name="export_fieldnotes_upload_success">Успешно загружено на geocaching.com</string>
     <string name="export_fieldnotes_onlynew">Только с момента последнего экспорта</string>
     <string name="export_fieldnotes_creating">Создание полевых заметок…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX файл будет экспортирован в %1$s в файл с текущей датой и временем в имени.</string>
     <string name="export_confirm_title">Экспорт %1$s</string>
     <string name="export_confirm_message">В: %1$s\nИмя файла: %2$s</string>
@@ -1723,9 +1710,6 @@
     <string name="init_low_disk_space">Кончается место для хранения</string>
     <string name="init_confirm_debug">c:geo запущено в режиме отладки!</string>
     <string name="list_confirm_debug_message">Режим отладки может вызвать нестабильное поведение. Вы действительно хотите активировать режим отладки?</string>
-    <string name="err_logimage_caption_required">Необходимо добавить подпись для изображения</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Закрыть приложение</string>
     <string name="ask_again">Спросить снова</string>

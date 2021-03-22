@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Détails</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">La cache devrait être archivée</string>
     <string name="log_problem_archive_text">Ce géocacheur a signalé que cette géocache doit être archivée. Un examinateur bénévole a été notifié.</string>
     <string name="log_image_scale_option_noscaling">Pas de mise à l\'échelle</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nMise à l\'échelle/Compressée :\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Image</string>
     <!-- translation -->
@@ -245,7 +242,7 @@
     <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
     <string name="warn_invalid_character">Le caractère doit être une LETTRE ou un CHIFFRE</string>
     <string name="warn_notloggedin_title">Mode hors-ligne</string>
-    <string name="warn_notloggedin_short">Non connecté. La carte en temps réel ne montrera que les caches stockées localement.</string>
+    <string name="warn_notloggedin_short">Non connecté. Seules les caches enregistrées localement seront affichées. Appuyez pour plus d\'informations.</string>
     <string name="warn_notloggedin_long">Non (encore) connecté. La carte en temps réel n\'affichera que les caches stockées localement et les fonctions en ligne ne fonctionneront pas.\n\nSoit il n\'y a pas de connexion réseau, soit il y a un problème de serveur ou bien vous devez (re)configurer vos services geocaching.\n\nSouhaitez-vous configurer les services maintenant ?</string>
     <string name="err_read_pocket_query_list">Erreur de lecture de la liste des Pocket Queries.</string>
     <string name="info_log_posted">Envoi de la visite réussi.</string>
@@ -279,7 +276,6 @@
     <string name="loc_fused">Unifié</string>
     <string name="loc_low_power">Éco</string>
     <string name="loc_home">Domicile</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Satellites</string>
     <string name="loc_trying">Localisation en cours…</string>
     <string name="loc_no_addr">Position inconnue</string>
@@ -467,7 +463,6 @@
     <string name="settings_title_waypoints">Points de passage</string>
     <string name="settings_title_map_content">Contenu de la carte</string>
     <string name="settings_title_map_behavior">Comportement de la carte</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Dossier de données des Geocaches</string>
     <string name="settings_title_data_dir_usage">Dossier de stockage des géocaches (actuellement %1$s)</string>
     <string name="calculate_dataDir_title">Espace utilisé par les Geocaches</string>
@@ -546,7 +541,6 @@
     <string name="init_signature_template_name">Nom de la cache</string>
     <string name="init_signature_template_difficulty">Difficulté</string>
     <string name="init_signature_template_terrain">Terrain</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Texte de la visite</string>
     <string name="init_signature_template_size">Taille</string>
     <string name="init_signature_template_type">Type</string>
@@ -792,9 +786,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">hors-ligne</string>
     <string name="map_source_osm_offline_combined">Combiné (Hors-ligne)</string>
     <string name="map_source_attribution_dialog_title">Crédits pour la carte</string>
@@ -836,7 +827,6 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Cartes hors-ligne</string>
     <string name="persistablefolder_offline_maps_themes">Thèmes des cartes</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Sauvegarde</string>
     <string name="persistablefolder_logfiles">Fichiers journaux</string>
     <string name="persistablefolder_fieldnotes">Notes de terrain</string>
@@ -1018,7 +1008,6 @@
     <string name="cache_menu_sygic_drive">Sygic (en voiture)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Carte</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Autres applications externes</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
@@ -1363,7 +1352,6 @@
     <string name="export_fieldnotes_upload_success">Envoi effectué avec succès</string>
     <string name="export_fieldnotes_onlynew">Uniquement les notes créées ou modifiées depuis le dernier export</string>
     <string name="export_fieldnotes_creating">Création des notes de terrain…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Le fichier GPX sera exporté dans %1$s avec la date et l\'heure courantes comme nom de fichier.</string>
     <string name="export_confirm_title">Export de %1$s</string>
     <string name="export_confirm_message">Dans le dossier : %1$s\nFichier : %2$s</string>
@@ -1746,9 +1734,6 @@
     <string name="init_low_disk_space_message">L\'espace de stockage pour le dossier de données des géocaches est faible. Cela peut causer des dysfonctionnements de c:geo. Veuillez libérer de l\'espace.</string>
     <string name="init_confirm_debug">c:geo s’exécute en mode de débogage !</string>
     <string name="list_confirm_debug_message">Le mode débogage génère de l\'instabilité ! Souhaitez-vous désactiver le mode débogage ?</string>
-    <string name="err_logimage_caption_required">Une légende est requise pour l’image</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/O --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Fermer l\'application</string>
     <string name="ask_again">Demander plus tard</string>

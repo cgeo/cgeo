@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Slėptuvė</string>
     <string name="detail">Informacija</string>
@@ -147,7 +146,6 @@
     <string name="log_problem_archive_label">Slėptuvė turėtų būti archyvuota</string>
     <string name="log_problem_archive_text">Šis naudotojas pranešė, kad slėptuvė turėtų būti archyvuota. Savanoriui apžvalgininkui buvo pranešta.</string>
     <string name="log_image_scale_option_noscaling">Nekeisti dydžio</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Vaizdas</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Išversti į %s</string>
@@ -237,7 +235,6 @@
     <string name="warn_no_pocket_query_found">Nerastas Pocket query internete.</string>
     <string name="warn_invalid_character">Simbolis turi būti raidė arba skaitmuo</string>
     <string name="warn_notloggedin_title">Darbas neprisijungus</string>
-    <string name="warn_notloggedin_short">Neprisijungta, tiesioginiame žemėlapyje bus rodomos tik išsaugotos slėptuvės.</string>
     <string name="warn_notloggedin_long">(Dar) neprisijungta. Tiesioginiame žemėlapyje bus rodomos tik išsaugotos slėptuvės bei internetinės funkcijos neveiks.\n\nGali būti bėda su ryšiu, bėda su serveriu ar su paslaugų konfigūracija.\n\nAr norite konfigūruoti paslaugas?</string>
     <string name="err_read_pocket_query_list">Klaida skaitant Pocket query sąrašą.</string>
     <string name="info_log_posted">c:geo sėkmingai paskelbė įrašą.</string>
@@ -270,7 +267,6 @@
     <string name="loc_fused">Sujungta</string>
     <string name="loc_low_power">Energijos taupymas</string>
     <string name="loc_home">Namų koordinatės</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Pal.</string>
     <string name="loc_trying">Bandoma nustatyti</string>
     <string name="loc_no_addr">Nežinomas adresas</string>
@@ -450,7 +446,6 @@
     <string name="settings_title_waypoints">Papildomi taškai</string>
     <string name="settings_title_map_content">Žemėlapio turinys</string>
     <string name="settings_title_map_behavior">Žemėlapio elgesys</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="calculate_dataDir_title">Slėptuvių duomenų naudojimas</string>
     <string name="calculate_dataDir">Apskaičiuojamas slėptuvių duomenų disko naudojimas</string>
     <string name="settings_data_dir_item">%1$s (%2$s laisva)</string>
@@ -524,7 +519,6 @@
     <string name="init_signature_template_name">Pavadinimas</string>
     <string name="init_signature_template_difficulty">Sudėtingumas</string>
     <string name="init_signature_template_terrain">Vietovė</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Įrašo tekstas</string>
     <string name="init_signature_template_size">Dydis</string>
     <string name="init_signature_template_type">Tipas</string>
@@ -725,9 +719,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Išsaugotas</string>
     <string name="map_source_osm_offline_combined">Kombinuotas (neprisijungus)</string>
     <string name="map_source_attribution_dialog_title">Žemėlapio atributai</string>
@@ -906,7 +897,6 @@
     <string name="cache_menu_sygic_drive">Sygic (vairuoti)</string>
     <string name="cache_menu_radar">Radaras</string>
     <string name="cache_menu_map">Žemėlapis</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Kitos išorinės programos</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Atidaryti naršyklėje</string>
@@ -1226,7 +1216,6 @@
     <string name="export_fieldnotes_upload_success">Įkėlimas į geocaching.com sėkmingas</string>
     <string name="export_fieldnotes_onlynew">Tik nuo paskutinio eksportavimo</string>
     <string name="export_fieldnotes_creating">Kuriami Lauko užrašai…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX failas bus eksportuotas į %1$s su dabartine data ir laiku failo pavadinime.</string>
     <string name="export_confirm_title">Eksportuojama %1$s</string>
     <string name="export_confirm_message">Maršrutas: %1$s\nFailo vardas: %2$s</string>
@@ -1609,9 +1598,6 @@
     <string name="init_low_disk_space">Mažai talpyklos vietos</string>
     <string name="init_confirm_debug">c:geo veikia derinimo režimu!</string>
     <string name="list_confirm_debug_message">Derinimo režimas sukelia nestabilumų! Ar norite jį išjungti?</string>
-    <string name="err_logimage_caption_required">Vaizdui reikalinga antraštė</string>
-    <string name="waypoint_latitude_null">Š/P --° --.---</string>
-    <string name="waypoint_longitude_null">R/V --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Uždaryti programėlę</string>
     <string name="ask_again">Paklausti dar kartą</string>

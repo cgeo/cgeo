@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Details</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">Cache zou moeten worden gearchiveerd</string>
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nGeschaald/gecomprimeerd:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <!-- translation -->
@@ -245,7 +242,7 @@
     <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
     <string name="warn_invalid_character">Teken moet een LETTER of een CIJFER zijn</string>
     <string name="warn_notloggedin_title">Offline modus</string>
-    <string name="warn_notloggedin_short">Niet ingelogd. Live kaart zal alleen lokaal opgeslagen caches tonen.</string>
+    <string name="warn_notloggedin_short">Niet ingelogd. Live kaart zal alleen lokaal opgeslagen caches tonen. Tik hier voor meer informatie.</string>
     <string name="warn_notloggedin_long">Nog niet ingelogd. Live-kaart toont alleen de lokaal opgeslagen caches en online functies zullen niet werken.\n\nEr is geen netwerkverbinding, een serverprobleem of het is nodig de geocaching diensten te (her) configureren.\n\nDiensten nu configureren?</string>
     <string name="err_read_pocket_query_list">Fout bij het lezen van de Pocket query lijst.</string>
     <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
@@ -279,7 +276,6 @@
     <string name="loc_fused">Gecombineerd</string>
     <string name="loc_low_power">Spaarstand</string>
     <string name="loc_home">Thuis coördinaten</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Proberen te lokaliseren</string>
     <string name="loc_no_addr">Adres onbekend</string>
@@ -467,7 +463,6 @@
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Kaartinhoud</string>
     <string name="settings_title_map_behavior">Kaart gedrag</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
     <string name="settings_title_data_dir_usage">Geocache gegevensmap (%1$s in gebruik)</string>
     <string name="calculate_dataDir_title">Geocache dataverbruik</string>
@@ -546,7 +541,6 @@
     <string name="init_signature_template_name">Naam</string>
     <string name="init_signature_template_difficulty">Moeilijkheid</string>
     <string name="init_signature_template_terrain">Terrein</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Log tekst</string>
     <string name="init_signature_template_size">Grootte</string>
     <string name="init_signature_template_type">Type</string>
@@ -792,9 +786,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kaart copyright</string>
@@ -836,7 +827,6 @@
     <string name="persistablefolder_base">Basis</string>
     <string name="persistablefolder_offline_maps">Offline kaarten</string>
     <string name="persistablefolder_offline_maps_themes">Kaart Thema\'s</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Back-up</string>
     <string name="persistablefolder_logfiles">Logbestanden</string>
     <string name="persistablefolder_fieldnotes">Veld notities</string>
@@ -1018,7 +1008,6 @@
     <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Toon op kaart</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andere externe apps</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Openen in browser</string>
@@ -1363,7 +1352,6 @@
     <string name="export_fieldnotes_upload_success">Uploaden naar geocaching.com succesvol</string>
     <string name="export_fieldnotes_onlynew">Alles sinds laatste export</string>
     <string name="export_fieldnotes_creating">Veld-notities worden gemaakt…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Het GPX bestand word geëxporteerd naar %1$s met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_confirm_title">Bezig met exporteren van %1$s</string>
     <string name="export_confirm_message">Naar pad: %1$s\nBestandsnaam: %2$s</string>
@@ -1746,9 +1734,6 @@
     <string name="init_low_disk_space_message">De geocache-gegevensmap heeft nog maar weinig schijfruimte. Dit kan leiden tot storingen van c:geo. Gelieve ruimte vrij te maken.</string>
     <string name="init_confirm_debug">c:geo wordt uitgevoerd in de foutopsporingsmodus!</string>
     <string name="list_confirm_debug_message">De debug-modus zorgt voor instabiliteit! Wil je de debug-modus uitschakelen?</string>
-    <string name="err_logimage_caption_required">Een bijschrift is vereist voor de afbeelding</string>
-    <string name="waypoint_latitude_null">N/Z --° --.---</string>
-    <string name="waypoint_longitude_null">O/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">App sluiten</string>
     <string name="ask_again">Opnieuw vragen</string>

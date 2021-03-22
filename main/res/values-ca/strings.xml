@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">geoamagatall</string>
     <string name="detail">Detalls</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">El catxé ha de ser arxivat</string>
     <string name="log_problem_archive_text">Aquest geocatxer va informar que aquest catxé hauria de ser arxivat. Un revisor ha estat avisat.</string>
     <string name="log_image_scale_option_noscaling">Sense escala</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nEscalat/Comprimit:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Imatge</string>
     <!-- translation -->
@@ -246,7 +243,7 @@
     <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
     <string name="warn_invalid_character">El caràcter ha de ser una LLETRA o un DÍGIT</string>
     <string name="warn_notloggedin_title">Fora de línia</string>
-    <string name="warn_notloggedin_short">Sessió sense iniciar. El mapa en viu només mostrarà els catxés emmagatzemats.</string>
+    <string name="warn_notloggedin_short">No heu iniciat la sessió. El mapa en viu només mostrarà catxés emmagatzemats localment. Toqueu aquí per obtenir més informació.</string>
     <string name="warn_notloggedin_long">No heu iniciat la sessió. El mapa en viu només mostrarà els catxés emmagatzemats localment i les funcions en línia no funcionaran. \n\n Si no hi ha connexió de xarxa, no hi ha cap problema de servidor o heu de (tornar) configurar els vostres serveis de geocatxing. \n\n Voleu configurar els serveis ara?</string>
     <string name="err_read_pocket_query_list">Error llegint la llista de consultes a mida.</string>
     <string name="info_log_posted">El c:geo ha tramès el registre correctament.</string>
@@ -280,7 +277,6 @@
     <string name="loc_fused">Combinat</string>
     <string name="loc_low_power">Bateria baixa</string>
     <string name="loc_home">Coordenades de casa</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Intentant ubicar</string>
     <string name="loc_no_addr">L\'adreça és desconeguda</string>
@@ -468,7 +464,6 @@
     <string name="settings_title_waypoints">Punts de ruta</string>
     <string name="settings_title_map_content">Contingut del mapa</string>
     <string name="settings_title_map_behavior">Comportament del mapa</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
     <string name="settings_title_data_dir_usage">Carpeta de dades Geocatxes (s\'utilitza %1$s)</string>
     <string name="calculate_dataDir_title">Us de dades dels geoamagatalls</string>
@@ -547,7 +542,6 @@
     <string name="init_signature_template_name">Nom</string>
     <string name="init_signature_template_difficulty">Dificultat</string>
     <string name="init_signature_template_terrain">Terreny</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Text del registre</string>
     <string name="init_signature_template_size">Mida</string>
     <string name="init_signature_template_type">Tipus</string>
@@ -793,9 +787,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: mapa</string>
     <string name="map_source_google_satellite">Google: satèl·lit</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Fora de línia</string>
     <string name="map_source_osm_offline_combined">Combinat (Fora de línia)</string>
     <string name="map_source_attribution_dialog_title">Atribucions del mapa</string>
@@ -837,7 +828,6 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mapes fora de línia</string>
     <string name="persistablefolder_offline_maps_themes">Temes de mapes</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Còpia de seguretat</string>
     <string name="persistablefolder_logfiles">Arxius de registre</string>
     <string name="persistablefolder_fieldnotes">Notes de camp</string>
@@ -1019,7 +1009,6 @@
     <string name="cache_menu_sygic_drive">Sygic (Conduir)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mapa</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Altres aplicacions externes</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Obre al navegador</string>
@@ -1364,7 +1353,6 @@
     <string name="export_fieldnotes_upload_success">La càrrega a geocaching.com s\'ha realitzat amb èxit</string>
     <string name="export_fieldnotes_onlynew">Només des de l\'última exportació</string>
     <string name="export_fieldnotes_creating">S\'estan creant notes de camp…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">El fitxer GPX s\'exportarà a %1$s amb la data i hora actuals com a nom de fitxer.</string>
     <string name="export_confirm_title">Exportant %1$s</string>
     <string name="export_confirm_message">Camí: %1$s\n Nom arxiu: %2$s</string>
@@ -1748,9 +1736,6 @@
     <string name="init_low_disk_space_message">La carpeta de dades de Geocatxés s’està quedant amb poca memòria. Això pot provocar un mal funcionament de C: geo. Allibereu una mica d’espai.</string>
     <string name="init_confirm_debug">c:Geo s\'està executant en mode de depuració!</string>
     <string name="list_confirm_debug_message">El mode de depuració provoca inestabilitat! Voleu desactivar el mode de depuració?</string>
-    <string name="err_logimage_caption_required">Cal un títol per a la imatge</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/O --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Tanca l\'aplicació</string>
     <string name="ask_again">Torna a preguntar</string>

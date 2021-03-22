@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Dettagli</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">Questo cache dovrebbe essere archiviato</string>
     <string name="log_problem_archive_text">Questo geocacher ha segnalato che il cache dovrebbe essere archiviato. Un recensore volontario della community ha ricevuto una notifica.</string>
     <string name="log_image_scale_option_noscaling">Nessun ridimensionamento</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nRidotto/Compresso:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Immagine</string>
     <!-- translation -->
@@ -245,7 +242,7 @@
     <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
     <string name="warn_invalid_character">Il carattere deve essere una lettera o una cifra</string>
     <string name="warn_notloggedin_title">Modalità offline</string>
-    <string name="warn_notloggedin_short">Non connesso. Live map mostrerà solo le cache memorizzate localmente.</string>
+    <string name="warn_notloggedin_short">Non loggato. La mappa live mostrerà solo i cache memorizzati localmente. Tocca qui per ulteriori informazioni.</string>
     <string name="warn_notloggedin_long">Non connesso (ancora). Mappa live mostrerà solo le cache memorizzate localmente e le funzioni online non funzioneranno.\n\nNon c\'è nessuna connessione di rete, un problema di server oppure devi (ri)configurare i tuoi servizi di geocaching.\n\nVuoi configurare i servizi ora?</string>
     <string name="err_read_pocket_query_list">Errore nella lettura della lista di Pocket query.</string>
     <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
@@ -279,7 +276,6 @@
     <string name="loc_fused">Combinato</string>
     <string name="loc_low_power">Risparmio energetico</string>
     <string name="loc_home">Coordinate di casa</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Localizzazione in corso</string>
     <string name="loc_no_addr">Indirizzo sconosciuto</string>
@@ -467,7 +463,6 @@
     <string name="settings_title_waypoints">Waypoint</string>
     <string name="settings_title_map_content">Contenuto Mappa</string>
     <string name="settings_title_map_behavior">Comportamento mappa</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Cartella dati geocache</string>
     <string name="settings_title_data_dir_usage">Cartella dati geocache (%1$s utilizzata)</string>
     <string name="calculate_dataDir_title">Dati Geocache usati</string>
@@ -546,7 +541,6 @@
     <string name="init_signature_template_name">Nome</string>
     <string name="init_signature_template_difficulty">Difficoltà</string>
     <string name="init_signature_template_terrain">Terreno</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Testo di Log</string>
     <string name="init_signature_template_size">Dimensione</string>
     <string name="init_signature_template_type">Tipo</string>
@@ -792,9 +786,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinato (Offline)</string>
     <string name="map_source_attribution_dialog_title">Attribuzioni Mappa</string>
@@ -836,7 +827,6 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mappe Offline</string>
     <string name="persistablefolder_offline_maps_themes">Temi Mappa</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">File di log</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
@@ -1018,7 +1008,6 @@
     <string name="cache_menu_sygic_drive">Sygic (guida)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mappa c:geo</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Altre applicazioni esterne</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Apri nel browser</string>
@@ -1363,7 +1352,6 @@
     <string name="export_fieldnotes_upload_success">Caricato su geocaching.com con successo</string>
     <string name="export_fieldnotes_onlynew">Solo quelli nuovi rispetto all\'ultima esportazione</string>
     <string name="export_fieldnotes_creating">Creazione Field Notes…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Il file GPX sarà esportato in %1$s con data ed ora correnti nel nome file.</string>
     <string name="export_confirm_title">Esportazione di %1$s</string>
     <string name="export_confirm_message">Percorso: %1$s\nNome file: %2$s</string>
@@ -1746,9 +1734,6 @@
     <string name="init_low_disk_space_message">La cartella dati geocache sta esaurendo lo spazio di archiviazione. Questo può causare malfunzionamenti di c:geo. Liberare un po\' di spazio.</string>
     <string name="init_confirm_debug">c:geo è in esecuzione in modalità di debug!</string>
     <string name="list_confirm_debug_message">La modalità di debug può causare instabilità! Vuoi tornare alla modalità normale?</string>
-    <string name="err_logimage_caption_required">Una didascalia è richiesta per l\'immagine</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/O --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Chiudi app</string>
     <string name="ask_again">Chiedimi di nuovo</string>

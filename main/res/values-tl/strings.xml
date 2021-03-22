@@ -224,7 +224,6 @@
     <string name="loc_fused">Ang pyus</string>
     <string name="loc_low_power">Mababang pawer</string>
     <string name="loc_home">Ang mga koordinate sa bahay</string>
-    <string name="loc_gps">Ang GPS</string>
     <string name="loc_sat">Ang sat</string>
     <string name="loc_trying">Sinusubukang Hanapin</string>
     <string name="loc_no_addr">Hindi alam na address</string>
@@ -367,7 +366,6 @@
     <string name="settings_summary_map">Itakda ang pinagmulan ng mapa, offline na mga setting at mga detalye ng mapa.</string>
     <string name="settings_title_map_data">Ang datos ng mapa</string>
     <string name="settings_title_map_content">Nilalaman ng mapa</string>
-    <string name="settings_title_gpx">Ang GPX</string>
     <string name="calculate_dataDir_title">Ang nagamit na datos ng Geocache</string>
     <string name="calculate_dataDir">Ang pagkalkula sa datos geocache ang nagamit sa disk</string>
     <string name="confirm_data_dir_move">Ang paglipat sa geocache ay maaaring mahabang panahon, ito ay umaasa sa iyong aparatu at sa halaga ng datos.</string>
@@ -1228,7 +1226,6 @@
     <string name="init_low_disk_space">Mabagal ang pagtakbo sa imbakan na espasyo</string>
     <string name="init_confirm_debug">ang c:geo ay tumatakbo sa debug na mode!</string>
     <string name="list_confirm_debug_message">Ang debug na mode ay nagdudulot ng kawalang tatag! Gusto mo bang i-deaktibo ang iyong debug na mode?</string>
-    <string name="err_logimage_caption_required">Ang kapsiyon ay kailangan para sa imahe</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->

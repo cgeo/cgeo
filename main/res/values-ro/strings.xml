@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cutie</string>
     <string name="detail">Detalii</string>
@@ -145,7 +144,6 @@
     <string name="log_problem_archive_label">Cache-ul trebuie arhivat</string>
     <string name="log_problem_archive_text">Acest geocacher a raportat că această geocutie ar trebui arhivată. Un examinator din comunitatea de voluntari a fost notificat.</string>
     <string name="log_image_scale_option_noscaling">Fără redimensionare</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Imagine</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradu în limba %s</string>
@@ -233,7 +231,6 @@
     <string name="warn_no_pocket_query_found">Nu a fost găsit nici un \"Pocket Query\".</string>
     <string name="warn_invalid_character">Trebuie să tastezi numai LITERE sau CIFRE</string>
     <string name="warn_notloggedin_title">Mod Neconectat (Offline)</string>
-    <string name="warn_notloggedin_short">Nu ești logat. Harta live va arăta doar geocutiile stocate local.</string>
     <string name="err_read_pocket_query_list">Eroare la citirea listei \"Pocket query\".</string>
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
     <string name="info_log_saved">c:geo a salvat însemnarea.</string>
@@ -1275,7 +1272,6 @@
     <string name="init_low_disk_space">Nu mai este suficient spaţiu de stocare disponibil</string>
     <string name="init_confirm_debug">c:geo funcţionează acum în mod \"depanare\"!</string>
     <string name="list_confirm_debug_message">Modul \"depanare\" poate cauza instabilitate. Vrei să revii la modul normal de funcţionare?</string>
-    <string name="err_logimage_caption_required">Trebuie introdusă o scurtă descriere pentru această imagine</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:гео</string>
     <!-- basics -->
     <string name="cache">Кеш</string>
     <string name="detail">Деталі</string>
@@ -147,7 +146,6 @@
     <string name="log_problem_archive_label">Кеш повинен бути заархівований</string>
     <string name="log_problem_archive_text">Цей геокешер повідомив, що цей геокеш повинен бути заархівований. Повідомлено громадського рецензента-волонтера.</string>
     <string name="log_image_scale_option_noscaling">Відсутність масштабування</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Імідж</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Перекласти на %s</string>
@@ -237,7 +235,6 @@
     <string name="warn_no_pocket_query_found">Немає Pocket-запиту онлайн.</string>
     <string name="warn_invalid_character">Символ повинен бути LETTER або DIGIT</string>
     <string name="warn_notloggedin_title">Офлайн режим</string>
-    <string name="warn_notloggedin_short">Вхід не виконано. Жива мапа буде відображатись лише схованки локально.</string>
     <string name="warn_notloggedin_long">Вхід в систему (поки що). Жива карта покаже лише збережені локальні та онлайн-функції не працюватимуть.\n\nАбо немає підключення до мережі, або проблема з сервером, або ви повинні (з пере)налаштувати свої сервіси геокешингу.\n\nВи хочете налаштувати сервіси зараз?</string>
     <string name="err_read_pocket_query_list">Помилка читання списку Pocket запитів.</string>
     <string name="info_log_posted">c:geo успішно відправив журнал.</string>
@@ -271,7 +268,6 @@
     <string name="loc_fused">Зрощений</string>
     <string name="loc_low_power">Низька потужність</string>
     <string name="loc_home">Головна Координати</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Супутник</string>
     <string name="loc_trying">Намагається знайти</string>
     <string name="loc_no_addr">Невідома адреса</string>
@@ -450,7 +446,6 @@
     <string name="settings_title_waypoints">шляхові точки</string>
     <string name="settings_title_map_content">Зміст мапи</string>
     <string name="settings_title_map_behavior">Поведінка карти</string>
-    <string name="settings_title_gpx">ГПХ</string>
     <string name="calculate_dataDir_title">Використання даних схованки</string>
     <string name="calculate_dataDir">Обчислення використання даних схованки</string>
     <string name="settings_data_dir_item">%1$s (%2$s вільно)</string>
@@ -525,7 +520,6 @@
     <string name="init_signature_template_name">Ім’я</string>
     <string name="init_signature_template_difficulty">Труднощі</string>
     <string name="init_signature_template_terrain">територія</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">текст журналу</string>
     <string name="init_signature_template_size">Розмір</string>
     <string name="init_signature_template_type">Тип</string>
@@ -734,9 +728,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Карти</string>
     <string name="map_source_google_satellite">Google: супутник</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Офлайн</string>
     <string name="map_source_osm_offline_combined">Комбіновані (офлайн)</string>
     <string name="map_source_attribution_dialog_title">атрибуція карти</string>
@@ -874,7 +865,6 @@
     <string name="cache_menu_sygic_drive">Сигіка (ходьба)</string>
     <string name="cache_menu_radar">Радар</string>
     <string name="cache_menu_map">Карта</string>
-    <string name="cache_menu_rmaps">RMaps</string>
     <string name="cache_menu_map_ext">Інші зовнішні програми</string>
     <string name="cache_menu_streetview">Перегляд вулиць</string>
     <string name="cache_menu_browser">Відкрити в браузері</string>
@@ -1192,7 +1182,6 @@
     <string name="export_fieldnotes_upload_success">завантаження до geocaching.com успішно</string>
     <string name="export_fieldnotes_onlynew">Тільки з часу останнього експорту</string>
     <string name="export_fieldnotes_creating">створення приміток до полів…</string>
-    <string name="export_gpx">ГПХ</string>
     <string name="export_gpx_info">Файл GPX буде експортовано до %1$s з поточною датою та часом в якості імені файлу.</string>
     <string name="export_confirm_title">Експорт: %1$s</string>
     <string name="export_confirm_message">До шляху: %1$s\nІм\'я файлу: %2$s</string>
@@ -1517,9 +1506,6 @@
     <string name="init_low_disk_space">Недостатньо місця на диску</string>
     <string name="init_confirm_debug">c:geo запущено у режимі налагодження!</string>
     <string name="list_confirm_debug_message">Режим налагодження викликає нестабільності! Ви хочете вимкнути режим налагодження?</string>
-    <string name="err_logimage_caption_required">Заголовок необхідний для зображення</string>
-    <string name="waypoint_latitude_null">Н/С --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Закрити додаток</string>
     <string name="ask_again">Запитайте ще раз</string>
