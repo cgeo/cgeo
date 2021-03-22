@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Zaklad</string>
     <string name="detail">Podrobnosti</string>
@@ -131,7 +130,6 @@
     <string name="log_problem_other_label">Drugo</string>
     <string name="log_problem_archive_label">Zaklad naj se arhivira</string>
     <string name="log_image_scale_option_noscaling">Brez povečave</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Prevedi v: %s</string>
     <string name="translate_to_english">Prevedi v: angleščino</string>
@@ -381,7 +379,6 @@
     <string name="settings_title_map_data">Podatki zemljevida</string>
     <string name="settings_title_map_content">Vsebina zemljevida</string>
     <string name="settings_title_map_behavior">Nastavitve zemljevida</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_basicmembers">Možnosti za Basic Member</string>
     <string name="settings_title_navigation">Navigacija</string>
     <string name="settings_summary_navigation">Izberi želeno metodo navigacije in izberi zunanje aplikacije.</string>
@@ -433,7 +430,6 @@
     <string name="init_signature_template_number">Število najdb</string>
     <string name="init_signature_template_owner">Uporabniško ime lastnika zaklada</string>
     <string name="init_signature_template_name">Ime</string>
-    <string name="init_signature_template_url">URL naslov</string>
     <string name="init_signature_template_log">Vsebina zapisa</string>
     <string name="init_ratingwanted">GCvote ocene</string>
     <string name="init_summary_ratingwanted">Naloži ocene iz GCvote.com</string>
