@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detaljer</string>
@@ -153,7 +152,6 @@
     <string name="log_problem_archive_label">Geocache bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Billede</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversæt til %s</string>
@@ -276,7 +274,6 @@
     <string name="loc_fused">Kombineret</string>
     <string name="loc_low_power">Lavt strømforbrug</string>
     <string name="loc_home">Hjemmeposition</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Bestemmer position</string>
     <string name="loc_no_addr">Ukendt adresse</string>
@@ -455,7 +452,6 @@
     <string name="settings_title_waypoints">Rutepunkter</string>
     <string name="settings_title_map_content">Kortindhold</string>
     <string name="settings_title_map_behavior">Kortbetjening</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="calculate_dataDir_title">Geocache dataforbrug</string>
     <string name="calculate_dataDir">Beregner geocache diskforbrug</string>
     <string name="settings_data_dir_item">%1$s bytes (%2$s ledig)</string>
@@ -530,7 +526,6 @@
     <string name="init_signature_template_name">Navn</string>
     <string name="init_signature_template_difficulty">Sværhedsgrad</string>
     <string name="init_signature_template_terrain">Terræn</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Logtekst</string>
     <string name="init_signature_template_size">Størrelse</string>
     <string name="init_signature_template_type">Type</string>
@@ -738,9 +733,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Kort</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombineret (offline)</string>
     <string name="map_source_attribution_dialog_title">Kort-akkrediteringer</string>
@@ -906,7 +898,6 @@
     <string name="cache_menu_sygic_drive">Sygic (kørsel)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Vis på kort</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andre eksterne apps</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Åbn i browser</string>
@@ -1224,7 +1215,6 @@
     <string name="export_fieldnotes_upload_success">Upload til geocaching.com afsluttet</string>
     <string name="export_fieldnotes_onlynew">Kun siden sidste eksport</string>
     <string name="export_fieldnotes_creating">Opret feltnoter…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX-filen vil blive eksporteret til %1$s med den aktuelle dato og tidspunkt som filnavn.</string>
     <string name="export_confirm_title">Eksporterer %1$s</string>
     <string name="export_confirm_message">Sti: %1$s\nFilnavn: %2$s</string>
@@ -1585,8 +1575,6 @@
     <string name="init_low_disk_space">Datalageret er næsten fyldt</string>
     <string name="init_confirm_debug">c:geo kører i fejlfindingstilstand!</string>
     <string name="list_confirm_debug_message">Fejlfindingstilstand kan forårsage ustabilitet! Ønsker du at deaktivere fejlfindingstilstand?</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">Ø/V --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Luk app</string>
     <string name="ask_again">Spørg igen</string>
