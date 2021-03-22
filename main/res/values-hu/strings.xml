@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Láda</string>
     <string name="detail">Adatok</string>
@@ -250,7 +249,6 @@
     <string name="loc_fused">Kombinált</string>
     <string name="loc_low_power">Takarékos üzemmód</string>
     <string name="loc_home">Otthon koordinátái</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Műhold</string>
     <string name="loc_trying">Keresés folyamatban</string>
     <string name="loc_no_addr">Ismeretlen cím</string>
@@ -417,7 +415,6 @@
     <string name="settings_summary_map">Térképválasztás, offline térképek opcióinak beállítása</string>
     <string name="settings_title_map_data">Térképek beállításai</string>
     <string name="settings_title_map_content">Térképek részletessége</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="calculate_dataDir_title">Ládaadatok keresése</string>
     <string name="calculate_dataDir">Ládaadatok méretének összegzése</string>
     <string name="settings_data_dir_item">%1$s (%2$s szabad)</string>
