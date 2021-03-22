@@ -1,9 +1,10 @@
 package cgeo.geocaching.utils.builders;
 
-import cgeo.geocaching.compatibility.Compatibility;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class InsetBuilder {
 
     public int[] build(final Resources res, final List<Drawable> layers, final int width, final int height) {
         if (drawable == null) {
-            drawable = Compatibility.getDrawable(res, id);
+            drawable = ResourcesCompat.getDrawable(res, id, null);
         }
 
         layers.add(drawable);

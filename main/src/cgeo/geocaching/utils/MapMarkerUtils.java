@@ -1,7 +1,6 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -25,6 +24,7 @@ import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -171,7 +171,7 @@ public final class MapMarkerUtils {
     private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers, final boolean cacheIsDisabled, final boolean cacheIsArchived) {
         final WaypointType waypointType = waypoint.getWaypointType();
 
-        final Drawable marker = Compatibility.getDrawable(res, waypoint.isVisited() ? R.drawable.marker_transparent : cacheIsDisabled || cacheIsArchived ? R.drawable.marker_disabled : R.drawable.marker);
+        final Drawable marker = ResourcesCompat.getDrawable(res, waypoint.isVisited() ? R.drawable.marker_transparent : cacheIsDisabled || cacheIsArchived ? R.drawable.marker_disabled : R.drawable.marker, null);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(marker));
 
@@ -217,7 +217,7 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
-        final Drawable[] layers = { Compatibility.getDrawable(res, waypoint.getWaypointType().dotMarkerId) };
+        final Drawable[] layers = { ResourcesCompat.getDrawable(res, waypoint.getWaypointType().dotMarkerId, null) };
         return new LayerDrawable(layers);
     }
 
@@ -244,7 +244,7 @@ public final class MapMarkerUtils {
         final int useEmoji = cache.getAssignedEmoji();
 
         // background: disabled or not
-        final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
+        final Drawable marker = ResourcesCompat.getDrawable(res, cache.getMapMarkerId(), null);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
 
         // Show the background circle only on map
@@ -360,7 +360,7 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
-        final Drawable[] layers = { Compatibility.getDrawable(res, cache.isFound() ? R.drawable.dot_found : cache.getType().dotMarkerId) };
+        final Drawable[] layers = { ResourcesCompat.getDrawable(res, cache.isFound() ? R.drawable.dot_found : cache.getType().dotMarkerId, null) };
         return new LayerDrawable(layers);
     }
 

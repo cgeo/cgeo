@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.databinding.WaypointPopupBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
@@ -22,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 
 import org.apache.commons.lang3.StringUtils;
@@ -83,7 +83,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             }
 
 
-            binding.actionBar.actionbarTitle.setCompoundDrawablesWithIntrinsicBounds(Compatibility.getDrawable(getResources(), waypoint.getWaypointType().markerId), null, null, null);
+            binding.actionBar.actionbarTitle.setCompoundDrawablesWithIntrinsicBounds(ResourcesCompat.getDrawable(getResources(), waypoint.getWaypointType().markerId, null), null, null, null);
 
             //getSupportActionBar().setIcon(getResources().getDrawable(waypoint.getWaypointType().markerId));
 

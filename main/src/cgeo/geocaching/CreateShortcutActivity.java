@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.MapActivity;
@@ -20,6 +19,7 @@ import android.os.Bundle;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,7 +127,9 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
 
     private Bitmap createOverlay(@DrawableRes final int drawableResourceId) {
         final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] {
-                Compatibility.getDrawable(res, drawableResourceId), Compatibility.getDrawable(res, R.drawable.cgeo_borderless) });
+            ResourcesCompat.getDrawable(res, drawableResourceId, null),
+            ResourcesCompat.getDrawable(res, R.drawable.cgeo_borderless, null)
+        });
         layerDrawable.setLayerInset(0, 0, 0, 10, 10);
         layerDrawable.setLayerInset(1, 70, 70, 0, 0);
         return ImageUtils.convertToBitmap(layerDrawable);

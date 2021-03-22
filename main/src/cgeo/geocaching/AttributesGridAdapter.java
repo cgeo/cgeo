@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.models.Geocache;
 
@@ -12,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.List;
 
@@ -62,16 +63,16 @@ public class AttributesGridAdapter extends BaseAdapter {
         final boolean strikeThrough = !CacheAttribute.isEnabled(attributeName);
         final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
         if (attrib != null) {
-            imageView.setImageDrawable(Compatibility.getDrawable(resources, attrib.drawableId));
+            imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, attrib.drawableId, null));
             if (strikeThrough) {
                 // generate strike through image with same properties as attribute image
                 final ImageView strikeThroughImage = new ImageView(context);
                 strikeThroughImage.setLayoutParams(imageView.getLayoutParams());
-                strikeThroughImage.setImageDrawable(Compatibility.getDrawable(resources, R.drawable.attribute__strikethru));
+                strikeThroughImage.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.attribute__strikethru, null));
                 attributeLayout.addView(strikeThroughImage);
             }
         } else {
-            imageView.setImageDrawable(Compatibility.getDrawable(resources, R.drawable.attribute_unknown));
+            imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.attribute_unknown, null));
         }
     }
 
