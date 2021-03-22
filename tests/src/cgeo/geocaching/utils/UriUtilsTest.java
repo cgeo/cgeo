@@ -99,9 +99,13 @@ public class UriUtilsTest {
 
     @Test
     public void pseudoTreeUris() {
-        assertThat(UriUtils.getPseudoTreeUri(Uri.parse("file:///storage/emulated/0/cgeo"))).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/primary%3Acgeo/document/primary%3Acgeo"));
-        assertThat(UriUtils.getPseudoTreeUri(Uri.parse("file:///storage/14FA-2B11/cgeo"))).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/14FA-2B11%3Acgeo/document/14FA-2B11%3Acgeo"));
-        assertThat(UriUtils.getPseudoTreeUri(Uri.parse("file:///storage/14FA-2B11/cgeo_subdir/real_base"))).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/14FA-2B11%3Acgeo_subdir%2Freal_base/document/14FA-2B11%3Acgeo_subdir%2Freal_base"));
-        assertThat(UriUtils.getPseudoTreeUri(Uri.parse("file:///storage/emulated/0/internal_subdir/another_subdir/cgeo_base"))).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/primary%3Ainternal_subdir%2Fanother_subdir%2Fcgeo_base/document/primary%3Ainternal_subdir%2Fanother_subdir%2Fcgeo_base"));
+        assertThat(UriUtils.getPseudoTreeUriForFileUri(Uri.parse("file:///storage/emulated/0/cgeo"))).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/primary%3Acgeo/document/primary%3Acgeo"));
+        assertThat(UriUtils.getPseudoTreeUriForFileUri(Uri.parse("file:///storage/14FA-2B11/cgeo"))).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/14FA-2B11%3Acgeo/document/14FA-2B11%3Acgeo"));
+        assertThat(UriUtils.getPseudoTreeUriForFileUri(Uri.parse("file:///storage/14FA-2B11/cgeo_subdir/real_base"))).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/14FA-2B11%3Acgeo_subdir%2Freal_base/document/14FA-2B11%3Acgeo_subdir%2Freal_base"));
+        assertThat(UriUtils.getPseudoTreeUriForFileUri(Uri.parse("file:///storage/emulated/0/internal_subdir/another_subdir/cgeo_base"))).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/primary%3Ainternal_subdir%2Fanother_subdir%2Fcgeo_base/document/primary%3Ainternal_subdir%2Fanother_subdir%2Fcgeo_base"));
+        //content uri stays content uri
+        assertThat(UriUtils.getPseudoTreeUriForFileUri(Uri.parse("content://com.android.externalstorage.documents/tree/primary%3Acgeo/document/primary%3Acgeo"))).isEqualTo(Uri.parse("content://com.android.externalstorage.documents/tree/primary%3Acgeo/document/primary%3Acgeo"));
+        //strangely formatted file uris stay as they are (no exception)
+        assertThat(UriUtils.getPseudoTreeUriForFileUri(Uri.parse("file:///storage"))).isEqualTo(Uri.parse("file:///storage"));
     }
 }

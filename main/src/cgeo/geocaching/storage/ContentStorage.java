@@ -54,6 +54,7 @@ public class ContentStorage {
     private final Context context;
     private final DocumentContentAccessor documentAccessor;
     private final FileContentAccessor fileAccessor;
+    private final ThreadLocal<Boolean> reportRunningFlag = new ThreadLocal<>();
 
     private static final ContentStorage INSTANCE = new ContentStorage();
 
@@ -281,7 +282,9 @@ public class ContentStorage {
         try {
             return getAccessorFor(folder).getUriForFolder(folder);
         } catch (IOException ioe) {
-            reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, folder);
+            //"getUriForFolder" is used in "reportProblem", so calling it here might create a loop-of-death
+            //reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, folder);
+            Log.v("Problem accessing folder " + folder, ioe);
         }
         return null;
     }
@@ -326,7 +329,9 @@ public class ContentStorage {
             //values "wa" (for append) and "rwt" (for overwrite) were tested on SDK21, SDK23, SDk29 and SDK30 using "ContentStorageTest"
             //Note that different values behave differently in different SDKs so be careful before changing them
             return context.getContentResolver().openOutputStream(uri, append ? "wa" : "rwt");
-        } catch (IOException | SecurityException se) {
+        } catch (IOException | SecurityException | IllegalArgumentException se) {
+            //SecurityException is thrown for valid Uri which we have no permission to access
+            //IllegalArgumentException is thrown for invalid Uri (e.g. because a folder/file was deleted meanwhile)
             reportProblem(R.string.contentstorage_err_write_failed, se, uri);
         }
         return null;
@@ -366,7 +371,9 @@ public class ContentStorage {
 
         try {
             return this.context.getContentResolver().openInputStream(uri);
-        } catch (IOException | SecurityException se) {
+        } catch (IOException | SecurityException | IllegalArgumentException se) {
+            //SecurityException is thrown for valid Uri which we have no permission to access
+            //IllegalArgumentException is thrown for invalid Uri (e.g. because a folder/file was deleted meanwhile)
             if (!suppressWarningOnFailure) {
                 reportProblem(R.string.contentstorage_err_read_failed, se, uri);
             }
@@ -549,11 +556,17 @@ public class ContentStorage {
 
     private void reportProblem(@StringRes final int messageId, final Exception ex, final Object ... params) {
 
+        if (reportRunningFlag.get() != null && reportRunningFlag.get().booleanValue()) {
+            return;
+        }
+        reportRunningFlag.set(true);
+
         //prepare params message
         final ImmutablePair<String, String> messages = LocalizationUtils.getMultiPurposeString(messageId, "ContentStorage", params);
         Log.w("ContentStorage: " + messages.right, ex);
         if (context != null) {
             ActivityMixin.showToast(context, messages.left);
         }
+        reportRunningFlag.set(false);
     }
 }

@@ -299,7 +299,12 @@ public final class UriUtils {
      *
      * @param legacyDirectory file uri which points to the directory
      */
-    public static Uri getPseudoTreeUri (final Uri legacyDirectory) {
+    public static Uri getPseudoTreeUriForFileUri(final Uri legacyDirectory) {
+
+        //works only for File Uris!
+        if (!(UriUtils.isFileUri(legacyDirectory))) {
+            return legacyDirectory;
+        }
 
         // Separate each element of the File path
         // File format: "/storage/XXXX-XXXX/sub-folder1/sub-folder2..../folder"
@@ -308,6 +313,11 @@ public final class UriUtils {
         //  ele[2] = storage number ("XXXX-XXXX" for external removable or "primary" for internal)
         //  ele[3 to n] = folders
         final String[] ele = legacyDirectory.getPath().replace("/emulated/0/", "/primary/").split("/");
+        if (ele.length < 3) {
+            //something seems not right. Log for analysis and continue
+            Log.v("[getPseudoTreeUriForFileUri] uri could not be parsed to pseudo tree: " + legacyDirectory);
+            return legacyDirectory;
+        }
 
         // Construct folders strings using SAF format
         final StringBuilder folders = new StringBuilder();
