@@ -230,7 +230,7 @@ public class ContentStorageActivityHelper {
 
         if (realStartUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (UriUtils.isFileUri(realStartUri)) {
-                realStartUri = UriUtils.getPseudoTreeUri(realStartUri);
+                realStartUri = UriUtils.getPseudoTreeUriForFileUri(realStartUri);
             }
             // Field is only supported starting with SDK26
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, realStartUri);
