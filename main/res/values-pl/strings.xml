@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Skrzynka</string>
     <string name="detail">Szczegóły</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">Cache powinien zostać archiwizowany</string>
     <string name="log_problem_archive_text">Ten geocacher poinformował, że ten cache powinien być archiwizowany. Recenzent został powiadomiony.</string>
     <string name="log_image_scale_option_noscaling">Brak skalowania</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nSkalowane/skompresowane:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Zdjęcie</string>
     <!-- translation -->
@@ -279,7 +276,6 @@
     <string name="loc_fused">Połączona</string>
     <string name="loc_low_power">Niski pobór energii</string>
     <string name="loc_home">Koordynaty domowe</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Próba lokalizacji</string>
     <string name="loc_no_addr">Nieznany adres</string>
@@ -469,7 +465,6 @@
     <string name="settings_title_waypoints">Punkty nawigacji</string>
     <string name="settings_title_map_content">Zawartość mapy</string>
     <string name="settings_title_map_behavior">Zachowanie mapy</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
     <string name="settings_title_data_dir_usage">Folder z danymi skrytek (użyto %1$s)</string>
     <string name="calculate_dataDir_title">Użycie danych</string>
@@ -548,7 +543,6 @@
     <string name="init_signature_template_name">Nazwa</string>
     <string name="init_signature_template_difficulty">Trudność</string>
     <string name="init_signature_template_terrain">Teren</string>
-    <string name="init_signature_template_url">Adres URL</string>
     <string name="init_signature_template_log">Wpis</string>
     <string name="init_signature_template_size">Rozmiar</string>
     <string name="init_signature_template_type">Typ</string>
@@ -794,9 +788,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
     <string name="map_source_attribution_dialog_title">Przypisania mapy</string>
@@ -838,7 +829,6 @@
     <string name="persistablefolder_base">Podstawowy</string>
     <string name="persistablefolder_offline_maps">Mapy offline</string>
     <string name="persistablefolder_offline_maps_themes">Motywy map</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Kopia zapasowa</string>
     <string name="persistablefolder_logfiles">Pliki dziennika</string>
     <string name="persistablefolder_fieldnotes">Notatki polowe</string>
@@ -1038,7 +1028,6 @@
     <string name="cache_menu_sygic_drive">Sygic (jazda)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Pokaż na mapie</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Inne aplikacje zewnętrzne</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otwórz w przeglądarce</string>
@@ -1385,7 +1374,6 @@
     <string name="export_fieldnotes_upload_success">Wysyłanie do geocaching.com zakończone sukcesem</string>
     <string name="export_fieldnotes_onlynew">Tylko od ostatniego eksportu</string>
     <string name="export_fieldnotes_creating">Tworzenie notatek…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Plik GPX będzie wyeksportowany do %1$s z obecną datą i czasem jako nazwą pliku.</string>
     <string name="export_confirm_title">Eksportowanie %1$s</string>
     <string name="export_confirm_message">Ścieżka: %1$s\nNazwa pliku: %2$s</string>
@@ -1794,8 +1782,6 @@
     <string name="init_low_disk_space_message">Zaczyna brakować miejsca w folderze z danymi skrytek. Może to powodować nieprawidłowe działanie c:geo. Zwolnij trochę miejsca.</string>
     <string name="init_confirm_debug">c: geo jest uruchomiony w trybie debugowania!</string>
     <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
-    <string name="waypoint_latitude_null">N/S--°--.---</string>
-    <string name="waypoint_longitude_null">E/W--°--.---</string>
     <!-- permission handling -->
     <string name="close_app">Zamknij aplikację</string>
     <string name="ask_again">Zapytaj mnie ponownie</string>
