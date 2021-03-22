@@ -245,6 +245,7 @@
     <string name="warn_no_pocket_query_found">Ingen Pocket query hittades på nätet.</string>
     <string name="warn_invalid_character">Tecknet måste vara en bokstav eller en siffra</string>
     <string name="warn_notloggedin_title">Offline läge</string>
+    <string name="warn_notloggedin_short">Inte inloggad. Livekartan kommer bara att visa cacher som är lagrade lokalt. Tryck här för mer information.</string>
     <string name="warn_notloggedin_long">Inte inloggad (ännu). Livekartan visar bara cacher lagrade lokalt och online-funktioner fungerar inte.\n\nAntingen finns det ingen nätverksanslutning, ett serverproblem eller så måste du (åter)konfigurera dina geocachingtjänster.\n\nVill du konfigurera tjänster nu?</string>
     <string name="err_read_pocket_query_list">Fel vid inläsning av Pocket Query-lista.</string>
     <string name="info_log_posted">c:geo har postat din logg.</string>
