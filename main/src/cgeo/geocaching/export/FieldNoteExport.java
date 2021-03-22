@@ -160,7 +160,7 @@ public class FieldNoteExport extends AbstractExport {
             final FieldNotes fieldNotes = new FieldNotes();
             try {
                 for (final Geocache cache : caches) {
-                    if (cache.isLogOffline()) {
+                    if (cache.hasLogOffline()) {
                         final LogEntry log = DataStore.loadLogOffline(cache.getGeocode());
                         if (log != null && (!onlyNew || log.date > Settings.getFieldnoteExportDate())) {
                             fieldNotes.add(cache, log);

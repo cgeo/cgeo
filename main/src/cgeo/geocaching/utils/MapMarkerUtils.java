@@ -94,7 +94,7 @@ public final class MapMarkerUtils {
             .append(cache.hasWillAttendForFutureEvent())
             .append(showUserModifiedCoords(cache))
             .append(cache.getPersonalNote())
-            .append(cache.isLogOffline())
+            .append(cache.hasLogOffline())
             .append(!cache.getLists().isEmpty())
             .append(cache.getOfflineLogType())
             .append(showBackground(cacheListType))

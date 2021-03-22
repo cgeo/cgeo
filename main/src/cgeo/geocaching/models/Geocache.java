@@ -495,11 +495,6 @@ public class Geocache implements IWaypoint {
         fromActivity.startActivity(LogCacheActivity.getLogCacheIntent(fromActivity, cacheId, geocode));
     }
 
-    @Deprecated //use hasLogOffline() instead
-    public boolean isLogOffline() {
-        return hasLogOffline();
-    }
-
     public boolean hasLogOffline() {
         return BooleanUtils.isTrue(hasLogOffline);
     }
