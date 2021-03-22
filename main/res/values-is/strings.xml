@@ -340,7 +340,6 @@
     <string name="init_signature_template_number">Númer</string>
     <string name="init_signature_template_owner">Eigandi</string>
     <string name="init_signature_template_name">Nafn</string>
-    <string name="init_signature_template_url">Slóð</string>
     <string name="init_signature_template_log">Færslutexti</string>
     <string name="init_ratingwanted">GCvote mat</string>
     <string name="init_summary_ratingwanted">Sjá dóma um cache frá GCvote.com</string>
@@ -752,7 +751,6 @@
     </plurals>
     <!-- calendar adder -->
     <string name="event_fail">Gat ekki bætt viðburðarkassa á dagatalið</string>
-    <string name="waypoint_longitude_null">A/V --° --.---</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->
