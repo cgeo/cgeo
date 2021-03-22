@@ -33,6 +33,6 @@ public class OfflineLogFilter extends AbstractFilter {
 
     @Override
     public boolean accepts(@NonNull final Geocache cache) {
-        return cache.isLogOffline();
+        return cache.hasLogOffline();
     }
 }

@@ -109,7 +109,7 @@ public final class CacheDetailsCreator {
     public void addCacheState(final Geocache cache) {
         final List<String> states = new ArrayList<>(5);
         String date = getVisitedDate(cache);
-        if (cache.isLogOffline()) {
+        if (cache.hasLogOffline()) {
             states.add(res.getString(R.string.cache_status_offline_log) + date);
             // reset the found date, to avoid showing it twice
             date = "";

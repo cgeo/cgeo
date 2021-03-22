@@ -88,7 +88,7 @@ public final class LoggingUI extends AbstractUIFactory {
         for (final LogType logType : logTypes) {
             list.add(new LogTypeEntry(logType, null, logType == currentLogType));
         }
-        if (cache.isLogOffline()) {
+        if (cache.hasLogOffline()) {
             list.add(new LogTypeEntry(null, SpecialLogType.CLEAR_LOG, false));
         }
         list.add(new LogTypeEntry(null, SpecialLogType.LOG_CACHE, false));

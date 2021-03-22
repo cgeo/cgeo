@@ -803,7 +803,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private boolean containsOfflineLogs() {
         for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
-            if (cache.isLogOffline()) {
+            if (cache.hasLogOffline()) {
                 return true;
             }
         }

@@ -378,11 +378,11 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     public static void updateViewHolder(final ViewHolder holder, final Geocache cache, final Resources res) {
-        if (cache.isFound() && cache.isLogOffline()) {
+        if (cache.isFound() && cache.hasLogOffline()) {
             holder.binding.logStatusMark.setImageResource(R.drawable.mark_green_orange);
         } else if (cache.isFound()) {
             holder.binding.logStatusMark.setImageResource(R.drawable.mark_green_more);
-        } else if (cache.isLogOffline()) {
+        } else if (cache.hasLogOffline()) {
             holder.binding.logStatusMark.setImageResource(R.drawable.mark_orange);
         } else if (cache.isDNF()) {
             holder.binding.logStatusMark.setImageResource(R.drawable.mark_red);
