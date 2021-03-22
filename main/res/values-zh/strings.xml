@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">藏点</string>
     <string name="detail">详细资料</string>
@@ -151,7 +150,6 @@
     <string name="log_problem_archive_label">此宝应该被存档</string>
     <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
     <string name="log_image_scale_option_noscaling">不缩放</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">图片</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">翻译为 %s</string>
@@ -272,7 +270,6 @@
     <string name="loc_net">网络</string>
     <string name="loc_low_power">低电量</string>
     <string name="loc_home">家庭坐标</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">六</string>
     <string name="loc_trying">正在尝试定位</string>
     <string name="loc_no_addr">未知地址</string>
@@ -454,7 +451,6 @@
     <string name="settings_title_waypoints">航点</string>
     <string name="settings_title_map_content">地图内容</string>
     <string name="settings_title_map_behavior">地图行为</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="calculate_dataDir_title">Geocache 数据使用情况</string>
     <string name="calculate_dataDir">计算 Geocache 数据磁盘使用情况</string>
     <string name="settings_data_dir_item">%1$s (%2$s 免费)</string>
@@ -529,7 +525,6 @@
     <string name="init_signature_template_name">名称</string>
     <string name="init_signature_template_difficulty">难度系数</string>
     <string name="init_signature_template_terrain">地形难度</string>
-    <string name="init_signature_template_url">网址</string>
     <string name="init_signature_template_log">日志文本</string>
     <string name="init_signature_template_size">尺寸</string>
     <string name="init_signature_template_type">类型</string>
