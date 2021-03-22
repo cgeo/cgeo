@@ -7,15 +7,11 @@ import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.location.Location;
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -25,7 +21,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.subjects.ReplaySubject;
 
-public class LocationProvider extends LocationCallback implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class LocationProvider extends LocationCallback {
 
     private static final LocationRequest LOCATION_REQUEST =
             LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setInterval(2000).setFastestInterval(250);
@@ -35,7 +31,7 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
     private static final AtomicInteger lowPowerCount = new AtomicInteger(0);
     private static LocationProvider instance = null;
     private static final ReplaySubject<GeoData> subject = ReplaySubject.createWithSize(1);
-    private final GoogleApiClient locationClient;
+    private final FusedLocationProviderClient fusedLocationClient;
 
     private static synchronized LocationProvider getInstance(final Context context) {
         if (instance == null) {
@@ -45,21 +41,27 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
     }
 
     private synchronized void updateRequest() {
-        if (locationClient.isConnected()) {
-            try {
-                if (mostPreciseCount.get() > 0) {
-                    Log.d("LocationProvider: requesting most precise locations");
-                    LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST, this, AndroidRxUtils.looperCallbacksLooper);
-                } else if (lowPowerCount.get() > 0) {
-                    Log.d("LocationProvider: requesting low-power locations");
-                    LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST_LOW_POWER, this, AndroidRxUtils.looperCallbacksLooper);
-                } else {
-                    Log.d("LocationProvider: stopping location requests");
-                    LocationServices.FusedLocationApi.removeLocationUpdates(locationClient, this);
-                }
-            } catch (final SecurityException e) {
-                Log.w("Security exception when accessing fused location services", e);
+        try {
+            if (mostPreciseCount.get() > 0) {
+                Log.d("LocationProvider: requesting most precise locations");
+                fusedLocationClient.requestLocationUpdates(
+                    LOCATION_REQUEST,
+                    this,
+                    AndroidRxUtils.looperCallbacksLooper
+                );
+            } else if (lowPowerCount.get() > 0) {
+                Log.d("LocationProvider: requesting low-power locations");
+                fusedLocationClient.requestLocationUpdates(
+                    LOCATION_REQUEST_LOW_POWER,
+                    this,
+                    AndroidRxUtils.looperCallbacksLooper
+                );
+            } else {
+                Log.d("LocationProvider: stopping location requests");
+                fusedLocationClient.removeLocationUpdates(this);
             }
+        } catch (final SecurityException e) {
+            Log.w("Security exception when accessing fused location services", e);
         }
     }
 
@@ -131,23 +133,8 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
     private LocationProvider(final Context context) {
         final GeoData initialLocation = GeoData.getInitialLocation(context);
         subject.onNext(initialLocation != null ? initialLocation : GeoData.DUMMY_LOCATION);
-        locationClient = new GoogleApiClient.Builder(context)
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
-        locationClient.connect();
-    }
 
-    @Override
-    public void onConnected(final Bundle bundle) {
-        updateRequest();
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull final ConnectionResult connectionResult) {
-        Log.e("cannot connect to Google Play location service: " + connectionResult);
-        subject.onError(new RuntimeException("Connection failed: " + connectionResult));
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
     }
 
     @Override
@@ -157,10 +144,5 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
             location.setProvider(GeoData.LOW_POWER_PROVIDER);
         }
         subject.onNext(new GeoData(location));
-    }
-
-    @Override
-    public void onConnectionSuspended(final int arg0) {
-        // empty
     }
 }
