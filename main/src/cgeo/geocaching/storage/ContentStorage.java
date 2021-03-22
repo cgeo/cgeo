@@ -329,7 +329,9 @@ public class ContentStorage {
             //values "wa" (for append) and "rwt" (for overwrite) were tested on SDK21, SDK23, SDk29 and SDK30 using "ContentStorageTest"
             //Note that different values behave differently in different SDKs so be careful before changing them
             return context.getContentResolver().openOutputStream(uri, append ? "wa" : "rwt");
-        } catch (IOException | SecurityException se) {
+        } catch (IOException | SecurityException | IllegalArgumentException se) {
+            //SecurityException is thrown for valid Uri which we have no permission to access
+            //IllegalArgumentException is thrown for invalid Uri (e.g. because a folder/file was deleted meanwhile)
             reportProblem(R.string.contentstorage_err_write_failed, se, uri);
         }
         return null;
@@ -369,7 +371,9 @@ public class ContentStorage {
 
         try {
             return this.context.getContentResolver().openInputStream(uri);
-        } catch (IOException | SecurityException se) {
+        } catch (IOException | SecurityException | IllegalArgumentException se) {
+            //SecurityException is thrown for valid Uri which we have no permission to access
+            //IllegalArgumentException is thrown for invalid Uri (e.g. because a folder/file was deleted meanwhile)
             if (!suppressWarningOnFailure) {
                 reportProblem(R.string.contentstorage_err_read_failed, se, uri);
             }

@@ -175,32 +175,35 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
         final String[] themeIdTokens = theme.id.split(ZIP_THEME_SEPARATOR);
         final boolean isZipTheme = themeIdTokens.length == 2;
 
-        final XmlRenderTheme xmlRenderTheme;
         if (theme.fileInfo == null || theme.fileInfo.uri == null || theme.containingFolder == null) {
-            xmlRenderTheme = null;
-        } else if (!isZipTheme) {
-            if (UriUtils.isFileUri(theme.fileInfo.uri)) {
-                xmlRenderTheme = new ExternalRenderTheme(UriUtils.toFile(theme.fileInfo.uri), this);
+            return null;
+        }
+
+        XmlRenderTheme xmlRenderTheme = null;
+        try {
+            if (!isZipTheme) {
+                if (UriUtils.isFileUri(theme.fileInfo.uri)) {
+                    xmlRenderTheme = new ExternalRenderTheme(UriUtils.toFile(theme.fileInfo.uri), this);
+                } else {
+                    xmlRenderTheme = new ContentRenderTheme(getContentResolver(), theme.fileInfo.uri, this);
+                    xmlRenderTheme.setResourceProvider(new ContentResolverResourceProvider(getContentResolver(), ContentStorage.get().getUriForFolder(theme.containingFolder), true));
+                }
             } else {
-                xmlRenderTheme = new ContentRenderTheme(getContentResolver(), theme.fileInfo.uri, this);
-                xmlRenderTheme.setResourceProvider(new ContentResolverResourceProvider(getContentResolver(), ContentStorage.get().getUriForFolder(theme.containingFolder), true));
-            }
-        } else {
-            //always cache the last used ZipResourceProvider. Check if current one can be reused, if not then reload
-            synchronized (cachedZipMutex) {
-                if (cachedZipProvider == null || !themeIdTokens[0].equals(cachedZipProviderFilename)) {
-                    try {
+                //always cache the last used ZipResourceProvider. Check if current one can be reused, if not then reload
+                synchronized (cachedZipMutex) {
+                    if (cachedZipProvider == null || !themeIdTokens[0].equals(cachedZipProviderFilename)) {
                         //reload
                         cachedZipProvider = new ZipXmlThemeResourceProvider(new ZipInputStream(ContentStorage.get().openForRead(theme.fileInfo.uri)), ZIP_RESOURCE_READ_LIMIT);
                         cachedZipProviderFilename = themeIdTokens[0];
-                    } catch (Exception ex) {
-                        Log.w("Problem loading ZIP Theme '" + theme.fileInfo.uri + "'", ex);
-                        cachedZipProvider = null;
-                        cachedZipProviderFilename = null;
                     }
+                    xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
                 }
-                xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
             }
+        } catch (Exception ex) {
+            Log.w("Problem loading Theme [" + theme.id + "]'" + theme.fileInfo.uri + "'", ex);
+            xmlRenderTheme = null;
+            cachedZipProvider = null;
+            cachedZipProviderFilename = null;
         }
         return xmlRenderTheme;
     }
