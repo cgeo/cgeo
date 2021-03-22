@@ -146,6 +146,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
     private static final String BUNDLE_ROUTE = "route";
 
+    private static final String KEY_ELAPSED_MS = "elapsedMs";
+    private static final String KEY_PROGRESS = "progress";
+    private static final String KEY_TOTAL = "total";
+
     // Those are initialized in onCreate() and will never be null afterwards
     private Resources res;
     private AppCompatActivity activity;
@@ -188,9 +192,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private final LeastRecentlyUsedSet<Waypoint> waypoints = new LeastRecentlyUsedSet<>(MAX_CACHES);
     // storing for offline
     private ProgressDialog waitDialog = null;
-    private int detailTotal = 0;
-    private int detailProgress = 0;
-    private long detailProgressTime = 0L;
     private ProgressBar spinner;
 
     // views
@@ -373,12 +374,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 final ProgressDialog waitDialog = map.waitDialog;
                 if (waitDialog != null) {
                     if (msg.what == UPDATE_PROGRESS) {
-                        final int detailProgress = map.detailProgress;
-                        final int secondsElapsed = (int) ((System.currentTimeMillis() - map.detailProgressTime) / 1000);
-                        // FIXME: the Math.max below is purely defensive programming around an issue reported
-                        // in https://github.com/cgeo/cgeo/issues/6447. This code should be rewritten to, at least,
-                        // no longer use global variables to pass information between the handler and its user.
-                        final int secondsRemaining = (map.detailTotal - detailProgress) * secondsElapsed / Math.max(detailProgress, 1);
+                        final Bundle updateProgressData = msg.getData();
+
+                        final int detailProgress = updateProgressData.getInt(KEY_PROGRESS);
+                        final int detailTotal = updateProgressData.getInt(KEY_TOTAL);
+                        final int secondsElapsed = (int) (updateProgressData.getLong(KEY_ELAPSED_MS) / 1000);
+
+                        final int secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
 
                         final Resources res = map.res;
                         waitDialog.setProgress(detailProgress);
@@ -663,14 +665,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // resume location access
         PermissionHandler.executeIfLocationPermissionGranted(this.activity,
-                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CGeoMap) {
+            new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CGeoMap) {
 
-                    @Override
-                    public void executeAfter() {
-                        mapView.onResume();
-                        resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
-                    }
-                });
+                @Override
+                public void executeAfter() {
+                    mapView.onResume();
+                    resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
+                }
+            });
 
         final List<String> toRefresh;
         synchronized (dirtyCaches) {
@@ -915,11 +917,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private boolean storeCaches(final Set<String> geocodesInViewport) {
         if (!isLoading()) {
-
-            detailTotal = geocodesInViewport.size();
-            detailProgress = 0;
-
-            if (detailTotal == 0) {
+            if (geocodesInViewport.size() == 0) {
                 ActivityMixin.showToast(activity, res.getString(R.string.warn_save_nothing));
 
                 return true;
@@ -1208,7 +1206,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 // check if map moved or zoomed
                 //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
                 final boolean moved = map.markersInvalidated || (map.mapOptions.isLiveEnabled && !map.downloaded) || previousViewport == null || zoomNow != previousZoom ||
-                        (mapMoved(previousViewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
+                    (mapMoved(previousViewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
 
                 // update title on any change
                 if (moved || !viewportNow.equals(previousViewport)) {
@@ -1238,9 +1236,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
      */
     private boolean isLoading() {
         return !loadTimer.isDisposed() &&
-                (loadExecutor.getActiveCount() > 0 ||
-                        downloadExecutor.getActiveCount() > 0 ||
-                        displayExecutor.getActiveCount() > 0);
+            (loadExecutor.getActiveCount() > 0 ||
+                downloadExecutor.getActiveCount() > 0 ||
+                displayExecutor.getActiveCount() > 0);
     }
 
     /**
@@ -1492,7 +1490,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         waitDialog.setCancelable(true);
         waitDialog.setCancelMessage(loadDetailsHandler.disposeMessage());
-        waitDialog.setMax(detailTotal);
+        waitDialog.setMax(geocodes.size());
         waitDialog.setOnCancelListener(arg0 -> {
             try {
                 if (loadDetailsThread != null) {
@@ -1503,7 +1501,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
         });
 
-        final float etaTime = detailTotal * 7.0f / 60.0f;
+        final float etaTime = geocodes.size() * 7.0f / 60.0f;
         final int roundedEta = Math.round(etaTime);
         if (etaTime < 0.4) {
             waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
@@ -1511,8 +1509,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, roundedEta, roundedEta));
         }
         waitDialog.show();
-
-        detailProgressTime = System.currentTimeMillis();
 
         loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes, listIds);
         loadDetailsThread.start();
@@ -1544,6 +1540,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 return;
             }
 
+            final long loadDetailsStartTime = System.currentTimeMillis();
+            int progress = 0;
+
             for (final String geocode : geocodes) {
                 try {
                     if (handler.isDisposed()) {
@@ -1554,8 +1553,19 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                     Log.e("CGeoMap.LoadDetails.run", e);
                 } finally {
                     // one more cache over
-                    detailProgress++;
-                    handler.sendEmptyMessage(UPDATE_PROGRESS);
+                    progress++;
+
+                    final Message updateProgressMessage = new Message();
+                    updateProgressMessage.what = UPDATE_PROGRESS;
+
+                    final Bundle updateProgressData =  new Bundle();
+
+                    updateProgressData.putLong(KEY_ELAPSED_MS,  System.currentTimeMillis() - loadDetailsStartTime);
+                    updateProgressData.putInt(KEY_PROGRESS, progress);
+                    updateProgressData.putInt(KEY_TOTAL, geocodes.size());
+
+                    updateProgressMessage.setData(updateProgressData);
+                    handler.sendMessage(updateProgressMessage);
                 }
             }
 
@@ -1566,9 +1576,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {
         return Math.abs(newViewport.getLatitudeSpan() - referenceViewport.getLatitudeSpan()) > 50e-6 ||
-                Math.abs(newViewport.getLongitudeSpan() - referenceViewport.getLongitudeSpan()) > 50e-6 ||
-                Math.abs(newViewport.center.getLatitude() - referenceViewport.center.getLatitude()) > referenceViewport.getLatitudeSpan() / 4 ||
-                Math.abs(newViewport.center.getLongitude() - referenceViewport.center.getLongitude()) > referenceViewport.getLongitudeSpan() / 4;
+            Math.abs(newViewport.getLongitudeSpan() - referenceViewport.getLongitudeSpan()) > 50e-6 ||
+            Math.abs(newViewport.center.getLatitude() - referenceViewport.center.getLatitude()) > referenceViewport.getLatitudeSpan() / 4 ||
+            Math.abs(newViewport.center.getLongitude() - referenceViewport.center.getLongitude()) > referenceViewport.getLongitudeSpan() / 4;
     }
 
     // center map to desired location
