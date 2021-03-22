@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detaylar</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">Geocache arşivlenmeli</string>
     <string name="log_problem_archive_text">Bu Geocacher kutunun arşivlenmesi gerektiğini bildirdi. Bununla ilgili olarak Gönüllü Denetçi bilgilendirilecek.</string>
     <string name="log_image_scale_option_noscaling">Ölçeklendirme yok</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nÖlçeklenmiş/Sıkıştırılmış:\n%4$d x %5$d px, ~ %6$s</string>
     <string name="log_image_titleprefix">Resim</string>
     <!-- translation -->
@@ -278,7 +275,6 @@
     <string name="loc_fused">Birleşmiş</string>
     <string name="loc_low_power">Düşük güç</string>
     <string name="loc_home">Ev koordinatları</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Uydu</string>
     <string name="loc_trying">Yerini bulmaya çalışıyor</string>
     <string name="loc_no_addr">Bilinmeyen adres</string>
@@ -466,7 +462,6 @@
     <string name="settings_title_waypoints">Yol noktaları</string>
     <string name="settings_title_map_content">Harita içeriği</string>
     <string name="settings_title_map_behavior">Harita davranışı</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache veri klasörü</string>
     <string name="settings_title_data_dir_usage">Geocache veri klasörü (%1$s kullanılmış)</string>
     <string name="calculate_dataDir_title">Geocache veri kullanımı</string>
@@ -545,7 +540,6 @@
     <string name="init_signature_template_name">İsim</string>
     <string name="init_signature_template_difficulty">Zorluk</string>
     <string name="init_signature_template_terrain">Arazi</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Kayıt metni</string>
     <string name="init_signature_template_size">Boyut</string>
     <string name="init_signature_template_type">Tür</string>
@@ -791,9 +785,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Harita</string>
     <string name="map_source_google_satellite">Google: Uydu</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Çevrimdışı</string>
     <string name="map_source_osm_offline_combined">Kombine (Çevrimdışı)</string>
     <string name="map_source_attribution_dialog_title">Harita Nitelikleri</string>
@@ -835,7 +826,6 @@
     <string name="persistablefolder_base">Temel</string>
     <string name="persistablefolder_offline_maps">Çevrimdışı Haritalar</string>
     <string name="persistablefolder_offline_maps_themes">Harita Temaları</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Yedek</string>
     <string name="persistablefolder_logfiles">Kayıt dosyası</string>
     <string name="persistablefolder_fieldnotes">Saha Notları</string>
@@ -1017,7 +1007,6 @@
     <string name="cache_menu_sygic_drive">Sygic (Arabayla)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Harita</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Diğer harici uygulamalar</string>
     <string name="cache_menu_streetview">Sokak görünümü</string>
     <string name="cache_menu_browser">Tarayıcıda aç</string>
@@ -1362,7 +1351,6 @@
     <string name="export_fieldnotes_upload_success">geocaching.com\'a yükleme başarılı</string>
     <string name="export_fieldnotes_onlynew">Son dışa aktarımdan bu yana</string>
     <string name="export_fieldnotes_creating">Saha notları oluşturuluyor…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Gpx dosyası geçerli tarih ve saati dosya adıyla %1$s klasörüne aktarıldı.</string>
     <string name="export_confirm_title">Dışa aktarılıyor %1$s</string>
     <string name="export_confirm_message">Yol: %1$s\n Dosya İsmi: %2$s</string>
@@ -1745,8 +1733,6 @@
     <string name="init_low_disk_space_message">Geocache veri klasörünün depolama alanı yetersiz. Bu c:geo\'nun hata vermesine neden olabilir. Lütfen biraz yer açın.</string>
     <string name="init_confirm_debug">c:geo hata ayıklama modunda çalışıyor!</string>
     <string name="list_confirm_debug_message">Hata ayıklama modu dengesizliklere sebep oluyor! Bu modu devre dışı bırakmak ister misiniz?</string>
-    <string name="waypoint_latitude_null">K/G --° --.---</string>
-    <string name="waypoint_longitude_null">D/B --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Aplikasyonu kapat</string>
     <string name="ask_again">Bana yine sor</string>
