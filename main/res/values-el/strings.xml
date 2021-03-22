@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Κρύπτη</string>
     <string name="detail">Λεπτομέρειες</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">Η κρύπτη πρέπει να αρχειοθετηθεί</string>
     <string name="log_problem_archive_text">Ο παίκτης ανέφερε ότι αυτή η κρύπτη πρέπει να αρχειοθετηθεί. Έχει ενημερωθεί ο εθελοντής διαχειριστής για αυτό.</string>
     <string name="log_image_scale_option_noscaling">Χωρίς κλιμάκωση</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Εικόνα</string>
     <!-- translation -->
@@ -279,7 +276,6 @@
     <string name="loc_fused">Συνδυασμένο</string>
     <string name="loc_low_power">Χαμηλής ισχύος</string>
     <string name="loc_home">Συντεταγμένες κατοικίας</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Δορυφόροι</string>
     <string name="loc_trying">Προσπάθεια εντοπισμού</string>
     <string name="loc_no_addr">Άγνωστη διεύθυνση</string>
@@ -467,7 +463,6 @@
     <string name="settings_title_waypoints">Σημεία αναφοράς</string>
     <string name="settings_title_map_content">Περιεχόμενα Χάρτη</string>
     <string name="settings_title_map_behavior">Συμπεριφορά χάρτη</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Χρήση δεδομένων της κρύπτης</string>
     <string name="settings_title_data_dir_usage">Κατάλογος δεδομένων κρύπτης (%1$s χρησιμοποιείται)</string>
     <string name="calculate_dataDir_title">Χρήση δεδομένων της κρύπτης</string>
@@ -546,7 +541,6 @@
     <string name="init_signature_template_name">Όνομα</string>
     <string name="init_signature_template_difficulty">Δυσκολία</string>
     <string name="init_signature_template_terrain">Έδαφος</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Αρχείο καταγραφής κειμένου</string>
     <string name="init_signature_template_size">Μέγεθος</string>
     <string name="init_signature_template_type">Τύπος</string>
@@ -792,9 +786,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Χάρτης</string>
     <string name="map_source_google_satellite">Google: Δορυφόρος</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Χωρίς σύνδεση</string>
     <string name="map_source_osm_offline_combined">Συνδυασμένο (Εκτός σύνδεσης)</string>
     <string name="map_source_attribution_dialog_title">Χαρακτηριστικά χάρτη</string>
@@ -836,7 +827,6 @@
     <string name="persistablefolder_base">Βάση</string>
     <string name="persistablefolder_offline_maps">Χάρτες χωρίς σύνδεση</string>
     <string name="persistablefolder_offline_maps_themes">Θέματα Χάρτη</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Αντίγραφα ασφαλείας</string>
     <string name="persistablefolder_logfiles">Αρχεία καταγραφής</string>
     <string name="persistablefolder_fieldnotes">Σημειώσεις πεδίου</string>
@@ -1018,7 +1008,6 @@
     <string name="cache_menu_sygic_drive">Sygic (Με αυτοκίνητο)</string>
     <string name="cache_menu_radar">Ραντάρ</string>
     <string name="cache_menu_map">Χάρτης</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Άλλες εξωτερικές εφαρμογές</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
@@ -1363,7 +1352,6 @@
     <string name="export_fieldnotes_upload_success">Επιτυχής μεταφόρτωση στο geocaching.com</string>
     <string name="export_fieldnotes_onlynew">Μόνο μετά την τελευταία εξαγωγή</string>
     <string name="export_fieldnotes_creating">Δημιουργία σημειώσεων πεδίου…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Το αρχείο GPX θα εξαθεί στο %1$s με την τρέχουσα ημερομηνία και ώρα ως όνομα αρχείου.</string>
     <string name="export_confirm_title">Εξαγωγή %1$s</string>
     <string name="export_confirm_message">Στη Διαδρομή: %1$s\nΌνομα αρείου: %2$s</string>
@@ -1746,8 +1734,6 @@
     <string name="init_low_disk_space_message">Ο κατάλογος με τα δεδομένα κρυπτών δεν έχει πολύ χώρο αποθήκευσης. Αυτό μπορεί να προκαλέσει δυσλειτουργίες του c:geo. Παρακαλούμε να ελευθερώσετε κάποιο χώρο.</string>
     <string name="init_confirm_debug">Το c:geo εκτελείται σε λειτουργία εντοπισμού σφαλμάτων!</string>
     <string name="list_confirm_debug_message">Η λειτουργία εντοπισμού σφαλμάτων προκαλεί αστάθεια! Θέλετε να απενεργοποιήσετε την κατάσταση λειτουργίας εντοπισμού σφαλμάτων;</string>
-    <string name="waypoint_latitude_null">Β/Ν--°--.---</string>
-    <string name="waypoint_longitude_null">Α/Δ--°--.---</string>
     <!-- permission handling -->
     <string name="close_app">Κλείσιμο εφαρμογής</string>
     <string name="ask_again">Ερώτηση ξανά</string>
