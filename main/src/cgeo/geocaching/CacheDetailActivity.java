@@ -238,7 +238,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.cachedetail_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.cachedetail_activity);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();

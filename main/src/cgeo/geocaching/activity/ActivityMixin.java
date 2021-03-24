@@ -62,7 +62,11 @@ public final class ActivityMixin {
     }
 
     public static void setTheme(final Activity activity) {
-        activity.setTheme(getThemeId());
+        setTheme(activity, false);
+    }
+
+    public static void setTheme(final Activity activity, final boolean isDialog) {
+        activity.setTheme(isDialog ? getDialogTheme() : getThemeId());
     }
 
     public static int getDialogTheme() {

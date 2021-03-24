@@ -131,15 +131,15 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         onCreateCommon();
     }
 
-    protected void onCreate(final Bundle savedInstanceState, @LayoutRes final int resourceLayoutID) {
-        Log.v(logToken + ".onCreate(Bundle, resourceLayoutId=" + resourceLayoutID + ")");
-        super.onCreate(savedInstanceState);
-        onCreateCommon();
+    protected void setThemeAndContentView(@LayoutRes final int resourceLayoutID) {
+        setThemeAndContentView(resourceLayoutID, false);
+    }
 
-        // non declarative part of layout
-        setTheme();
-
+    protected void setThemeAndContentView(@LayoutRes final int resourceLayoutID, final boolean isDialog) {
+        Log.v(logToken + ".setThemeAndContentView(resourceLayoutId=" + resourceLayoutID + ", isDialog= " + isDialog + ")");
+        ActivityMixin.setTheme(this, isDialog);
         setContentView(resourceLayoutID);
+
     }
 
     /**

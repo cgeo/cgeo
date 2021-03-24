@@ -3,7 +3,6 @@ package cgeo.geocaching.activity;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.ActionBar;
 
 /**
@@ -16,13 +15,6 @@ public class AbstractActionBarActivity extends AbstractActivity {
     }
     public AbstractActionBarActivity(final boolean keepScreenOn) {
         super(keepScreenOn);
-    }
-
-    @Override
-    protected void onCreate(final Bundle savedInstanceState, @LayoutRes final int resourceLayoutID) {
-        super.onCreate(savedInstanceState, resourceLayoutID);
-        initUpAction();
-        showProgress(false);
     }
 
     @Override

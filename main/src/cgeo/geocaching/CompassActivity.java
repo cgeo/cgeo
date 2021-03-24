@@ -68,7 +68,8 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.compass_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.compass_activity);
         binding = CompassActivityBinding.bind(getWindow().getDecorView().findViewById(android.R.id.content));
 
         deviceOrientationMode

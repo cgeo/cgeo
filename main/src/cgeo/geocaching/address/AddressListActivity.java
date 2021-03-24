@@ -28,7 +28,8 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.addresslist_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.addresslist_activity);
 
         final AddressListAdapter adapter = new AddressListAdapter(addresses, this);
         final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.address_list, false, true);

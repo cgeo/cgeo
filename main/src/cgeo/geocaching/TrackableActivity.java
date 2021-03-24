@@ -109,7 +109,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        onCreate(savedInstanceState, R.layout.cachedetail_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.cachedetail_activity);
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.trackable));
