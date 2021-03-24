@@ -83,7 +83,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                             }
                         }
                     }
-                } catch (IOException e) {
+                } catch (IOException | SecurityException e) {
                     // ignore ZIP errors
                 }
                 // if no ZIP file: continue with copying the file
@@ -209,6 +209,9 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                 } else {
                     status = doCopy(inputStream, outputUri);
                 }
+            } catch (SecurityException e) {
+                Log.e("SecurityException on receiving map file: " + e.getMessage());
+                return CopyStates.FILENOTFOUND_EXCEPTION;
             } catch (FileNotFoundException e) {
                 return CopyStates.FILENOTFOUND_EXCEPTION;
             } finally {
@@ -217,7 +220,6 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
             // clean up and refresh available map list
             if (!cancelled.get()) {
-                status = CopyStates.SUCCESS;
                 try {
                     getContentResolver().delete(uri, null, null);
                 } catch (IllegalArgumentException iae) {
