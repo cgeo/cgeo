@@ -806,6 +806,10 @@ public class Geocache implements IWaypoint {
         return getConnector().supportsDescriptionchange();
     }
 
+    public boolean supportsSettingFoundState() {
+        return getConnector().supportsSettingFoundState();
+    }
+
     private String getShareSubject() {
         final StringBuilder subject = new StringBuilder("Geocache ");
         subject.append(geocode);

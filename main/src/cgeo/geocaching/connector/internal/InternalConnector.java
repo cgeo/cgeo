@@ -128,6 +128,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
     @Override
+    public boolean supportsSettingFoundState() {
+        return true;
+    }
+
+    @Override
     public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler) {
 
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);

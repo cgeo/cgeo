@@ -146,6 +146,16 @@
                 android:visible="false">
             </item>
             <item
+                android:id="@+id/menu_set_found"
+                android:title="@string/cache_menu_set_found"
+                android:visible="false">
+            </item>
+            <item
+                android:id="@+id/menu_set_unfound"
+                android:title="@string/cache_menu_set_unfound"
+                android:visible="false">
+            </item>
+            <item
                 android:id="@+id/menu_set_cache_icon"
                 android:title="@string/cache_menu_set_cache_icon"
                 android:visible="false">

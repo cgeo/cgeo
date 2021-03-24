@@ -100,6 +100,11 @@ public interface IConnector {
     boolean supportsDescriptionchange();
 
     /**
+     * enable/disable changing found state of a cache
+     */
+    boolean supportsSettingFoundState();
+
+    /**
      * Get host name of the connector server for dynamic loading of data.
      *
      */
