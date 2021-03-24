@@ -104,6 +104,11 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public boolean supportsSettingFoundState() {
+        return false;
+    }
+
+    @Override
     @NonNull
     public String getLicenseText(@NonNull final Geocache cache) {
         return StringUtils.EMPTY;
