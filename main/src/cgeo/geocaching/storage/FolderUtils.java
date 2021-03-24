@@ -106,16 +106,18 @@ public class FolderUtils {
 
     public static class FolderInfo {
 
-        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0,  0l);
+        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0,  0l, null);
 
         public final int fileCount;
         public final int dirCount;
         public final long totalFileSize;
+        public final List<String> topLevelFiles;
 
-        public FolderInfo(final int fileCount, final int dirCount, final long totalFileSize) {
+        public FolderInfo(final int fileCount, final int dirCount, final long totalFileSize, final List<String> topLevelFiles) {
             this.fileCount = fileCount;
             this.dirCount = dirCount;
             this.totalFileSize = totalFileSize;
+            this.topLevelFiles = topLevelFiles == null ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList<>(topLevelFiles));
         }
 
         @Override
@@ -129,7 +131,8 @@ public class FolderUtils {
             final FolderInfo that = (FolderInfo) o;
             return fileCount == that.fileCount &&
                 dirCount == that.dirCount &&
-                totalFileSize == that.totalFileSize;
+                totalFileSize == that.totalFileSize &&
+                topLevelFiles.equals(that.topLevelFiles);
         }
 
         @Override
@@ -139,7 +142,10 @@ public class FolderUtils {
 
         @Override
         public String toString() {
-            return "Files:" + fileCount + ", dirs:" + dirCount + ", totalFileSize:" + Formatter.formatBytes(totalFileSize);
+            final int topLevelFilesMaximumDisplayCount = 10;
+            return "files:" + fileCount + ", dirs:" + dirCount + ", totalFileSize:" + Formatter.formatBytes(totalFileSize) +
+                ", topLevel(" + (topLevelFiles.size() > topLevelFilesMaximumDisplayCount ? "first " + topLevelFilesMaximumDisplayCount + " of " : "") +
+                topLevelFiles.size() + "):[" + CollectionStream.of(topLevelFiles).limit(topLevelFilesMaximumDisplayCount).toJoinedString(";") + "]";
         }
     }
 
@@ -148,20 +154,33 @@ public class FolderUtils {
     public FolderInfo getFolderInfo(final Folder folder) {
         try (ContextLogger cLog = new ContextLogger("FolderUtils.getFolderInfo: %s", folder)) {
 
+
             final int[] counts = new int[]{0, 0 };
             final long[] size = new long[]{0 };
+            final int[] level = new int[] { 0 };
+            final List<String> topLevelFiles = new ArrayList<>();
             treeWalk(folder, fi -> {
                 if (fi.left.isDirectory && fi.right) {
                     counts[1]++;
+                    if (level[0] == 0) {
+                        topLevelFiles.add(fi.left.name + "/");
+                    }
+                    level[0]++;
+                }
+                if (fi.left.isDirectory && !fi.right) {
+                    level[0]--;
                 }
                 if (!fi.left.isDirectory) {
                     counts[0]++;
                     size[0] += fi.left.size;
+                    if (level[0] == 0) {
+                        topLevelFiles.add(fi.left.name);
+                    }
                 }
                 return true;
             });
             cLog.add("#f:%d, #d:#%d, size:%d", counts[0], counts[1], size[0]);
-            return new FolderInfo(counts[0], counts[1], size[0]);
+            return new FolderInfo(counts[0], counts[1], size[0], topLevelFiles);
         }
     }
 

@@ -71,10 +71,10 @@ public final class LocalizationUtils {
             try {
                 if (params[i] instanceof Folder) {
                     paramsForUser[i] = ((Folder) params[i]).toUserDisplayableString();
-                    paramsForLog[i] = params[i] + "(" + ContentStorage.get() == null ? null : ContentStorage.get().getUriForFolder((Folder) params[i]) + ")";
+                    paramsForLog[i] = params[i] + "(" + (ContentStorage.get() == null ? null : ContentStorage.get().getUriForFolder((Folder) params[i])) + ")";
                 } else if (params[i] instanceof PersistableFolder) {
                     paramsForUser[i] = ((PersistableFolder) params[i]).toUserDisplayableValue();
-                    paramsForLog[i] = params[i] + "(" + ContentStorage.get() == null ? null : ContentStorage.get().getUriForFolder(((PersistableFolder) params[i]).getFolder()) + ")";
+                    paramsForLog[i] = params[i] + "(" + (ContentStorage.get() == null ? null : ContentStorage.get().getUriForFolder(((PersistableFolder) params[i]).getFolder())) + ")";
                 } else if (params[i] instanceof Uri) {
                     paramsForUser[i] = UriUtils.toUserDisplayableString((Uri) params[i]);
                     paramsForLog[i] = params[i];

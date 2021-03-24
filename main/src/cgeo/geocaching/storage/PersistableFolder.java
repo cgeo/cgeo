@@ -183,8 +183,7 @@ public enum PersistableFolder {
 
     @Override
     public String toString() {
-        return name() + ": " + toUserDisplayableValue() +
-            "[" + getFolder() + ", default: " + (isUserDefined() ? getDefaultFolder() : "(same)") + "]";
+        return name() + ": " + toUserDisplayableValue() + "[" + getFolder() + "]";
     }
 
 }
