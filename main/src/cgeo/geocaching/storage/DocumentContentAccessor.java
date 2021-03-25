@@ -368,6 +368,9 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         Cursor c = null;
         try {
             c = resolver.query(childrenUri, columns, null, null, null);
+            if (c == null) {
+                throw new IllegalArgumentException("Cursor is null");
+            }
             while (c.moveToNext()) {
                 result.add(consumer.call(c));
             }
@@ -392,6 +395,9 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         Cursor c = null;
         try {
             c = resolver.query(docUri, columns, null, null, null);
+            if (c == null) {
+                throw new IllegalArgumentException("Cursor is null");
+            }
             if (c.moveToFirst()) {
                 return consumer.call(c);
             } else {
