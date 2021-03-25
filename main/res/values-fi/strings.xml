@@ -245,6 +245,7 @@
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
     <string name="warn_invalid_character">Merkin täytyy olla kirjain tai numero</string>
     <string name="warn_notloggedin_title">Offline-tila</string>
+    <string name="warn_notloggedin_short">Et ole kirjautunut sisään. Live-kartta näyttää vain paikallisesti tallennetut kätköt. Napauta tästä saadaksesi lisätietoja.</string>
     <string name="warn_notloggedin_long">Et ole kirjautunut sisään (vielä). Livekartta näyttää vain paikallisesti tallennetut kätköt ja online-toiminnot eivät toimi.\n\nJoko laitteessa ei ole verkkoyhteyttä, on ilmennyt palvelunongelma, tai sinun tulee (uudelleen)määrittäägeokätköilypalvelusi.\n\nHaluatko määrittää palvelut nyt?</string>
     <string name="err_read_pocket_query_list">Virhe luettaessa Pocket Query -listausta.</string>
     <string name="info_log_posted">c:geo latasi lokin onnistuneesti.</string>
@@ -654,9 +655,11 @@
     <string name="init_backup_settings_restore">Palauta asetukset</string>
     <string name="settings_readingerror">Virhe asetusten lukemisessa</string>
     <string name="settings_restart">c:geo tulee käynnistää uudelleen nyt ladattujen asetusten saattamiseksi voimaan</string>
+    <string name="settings_folder_changed">Asetus kansiolle \"%1$s\" on vaihdettu \"%2$s\":ksi.\n\nNapauta \"%3$s\" pitääksesi nykyisen asetuksen tälle kansiolle.\n\nNapauta \"%4$s\" asettaaksesi vanhan kansion. Jälkimmäisessä tapauksessa sinua pyydetään asettamaan c:geolle pääsy tähän kansioon.</string>
     <string name="settings_info_offline_maps_title">Offline-karttojen tiedot</string>
     <string name="settings_info_offline_maps">c:geo tukee offline-käyttöön tarkoitettuja karttoja. Voit hankkia karttoja eri tarjoajilta tai jopa luoda omia karttoja (OSM-data). Sinun on ensin valittava kansio johon offline-kartat on tallennettava.</string>
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
+    <string name="settings_info_themes">c:geo tukee mukautettuja teemoja offline-karttoille. Näitä voidaan käyttää muuttamaan kartan väriä (esim. yönäkymäkartta) tai korostaa tiettyjä asioita kartalla, kuten pyöräilyreittejä tai korkeuslinjoja.\n\nPurettujen karttateemojen kanssa työskentely voi hidastaa karttojen prosessointia. Tässä tapauksessa teemakansio voidaan vaihtoehtoisesti synkronoida sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi (jonkin verran tallennustilaa käyttäen).</string>
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
     <string name="init_base_directory_description">Juurikansio julkiselle paikalliselle datalle</string>
@@ -807,10 +810,12 @@
     <string name="sendToCgeo_no_registration">c:geo ei onnistunut latamaan kätköjä. Kirjautuminen kohteeseen send2cgeo vanhentunut. Kirjaudu uudelleen asetuksien kautta.</string>
     <!-- Content Storage -->
     <string name="contentstorage_selectfolder_dialog_title">Vaihda kansio %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_folderdata">Kansio %1$s on tällä hetkellä asetettu \'%2$s\', sisältää %3$s ja %4$s ja kokonaiskoko on %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Voit halutessasi käyttää oletuskansiota \'%s\' tai valita käyttäjän määrittämän kansion.</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Kopioi kaikki sisältö</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Siirrä kaikki sisältö</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Ei lisätoimia</string>
+    <string name="contentstorage_selectfolder_dialog_choice">Valitsit toisen kansion kuin tällä hetkellä tallennettu. Nykyinen kansio sisältää %1$s, %2$s ja sen koko on %3$s. Miten haluat jatkaa?\n\nValitse kansio ja</string>
     <string name="contentstorage_folder_selection_aborted">Kansion valinta keskeytetään, kansio on \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Kansio \'%s\' asetettu</string>
     <string name="contentstorage_file_selection_aborted">Tiedoston valinta keskeytetään</string>
