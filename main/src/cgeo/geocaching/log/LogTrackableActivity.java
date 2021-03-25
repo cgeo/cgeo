@@ -125,7 +125,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        onCreate(savedInstanceState, R.layout.logtrackable_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.logtrackable_activity);
         binding = LogtrackableActivityBinding.bind(findViewById(R.id.logtrackable_activity_viewroot));
 
         date.init(findViewById(R.id.date), findViewById(R.id.time), getSupportFragmentManager());

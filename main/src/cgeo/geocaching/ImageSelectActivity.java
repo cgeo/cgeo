@@ -57,7 +57,8 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        onCreate(savedInstanceState, R.layout.imageselect_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.imageselect_activity);
         binding = ImageselectActivityBinding.bind(findViewById(R.id.imageselect_activity_viewroot));
 
         imageScale.setSpinner(findViewById(R.id.logImageScale))

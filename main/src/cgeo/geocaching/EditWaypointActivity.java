@@ -198,7 +198,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.editwaypoint_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.editwaypoint_activity);
 
         if (StringUtils.isBlank(geocode) && waypointId <= 0) {
             showToast(res.getString(R.string.err_waypoint_cache_unknown));

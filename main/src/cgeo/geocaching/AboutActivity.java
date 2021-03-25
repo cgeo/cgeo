@@ -247,7 +247,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.viewpager_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.viewpager_activity);
 
         Routing.connect();
         systemInformationTask.execute();

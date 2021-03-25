@@ -67,6 +67,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
 
     @Override
     protected void onCreate(final Bundle icicle) {
+        super.onCreate(icicle);
         mapBase.onCreate(icicle);
     }
 
@@ -82,16 +83,19 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         mapBase.onDestroy();
     }
 
     @Override
     protected void onPause() {
+        super.onPause();
         mapBase.onPause();
     }
 
     @Override
     protected void onResume() {
+        super.onResume();
         mapBase.onResume();
     }
 
@@ -112,6 +116,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
 
     @Override
     protected void onStart() {
+        super.onStart();
         //Target view
         mapBase.targetView = new TargetView((TextView) findViewById(R.id.target), (TextView) findViewById(R.id.targetSupersize), StringUtils.EMPTY, StringUtils.EMPTY);
         final Geocache target = mapBase.getCurrentTargetCache();
@@ -123,6 +128,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
 
     @Override
     protected void onStop() {
+        super.onStop();
         mapBase.onStop();
     }
 

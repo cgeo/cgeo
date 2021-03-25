@@ -206,7 +206,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        onCreate(savedInstanceState, R.layout.logcache_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.logcache_activity);
         binding = LogcacheActivityBinding.bind(findViewById(R.id.logcache_viewroot));
 
         date.init(binding.date, null, getSupportFragmentManager());

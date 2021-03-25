@@ -37,7 +37,8 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.pocketquery_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.pocketquery_activity);
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {

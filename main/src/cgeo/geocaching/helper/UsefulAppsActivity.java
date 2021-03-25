@@ -30,7 +30,8 @@ public final class UsefulAppsActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.usefulapps_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.usefulapps_activity);
 
         final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.apps_list, false, false);
         view.setAdapter(new HelperAppAdapter(this, HELPER_APPS, helperApp -> {

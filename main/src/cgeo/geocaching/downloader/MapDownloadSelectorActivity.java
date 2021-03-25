@@ -222,11 +222,10 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         }
     }
 
-
-    @SuppressLint("MissingSuperCall")
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.mapdownloader_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.mapdownloader_activity);
         binding = MapdownloaderActivityBinding.bind(findViewById(R.id.mapdownloader_activity_viewroot));
 
         spinnerData = OfflineMap.OfflineMapType.getOfflineMapTypes();

@@ -40,7 +40,8 @@ public class FilterActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.filter_activity);
+        super.onCreate(savedInstanceState);
+        setThemeAndContentView(R.layout.filter_activity);
         binding = FilterActivityBinding.bind(findViewById(R.id.filter_activity_viewroot));
         createListAdapter();
     }
