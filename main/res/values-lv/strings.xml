@@ -731,11 +731,6 @@
         <item quantity="other">%1$d slēpņi</item>
     </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="zero">atlikusi viena diena</item>
-        <item quantity="one">atlikusi viena diena</item>
-        <item quantity="other">atlikušas %1$d dienas</item>
-    </plurals>
     <string name="last_day_available">pieejama pēdējo dienu</string>
     <string name="cache_offline_refresh">Atjaunot</string>
     <string name="cache_offline_drop">Noņemt</string>
@@ -799,7 +794,7 @@
     <string name="cache_waypoints">Starpposmi</string>
     <plurals name="waypoints">
         <item quantity="zero">%d Starpposmi</item>
-        <item quantity="one">1 Starpposms</item>
+        <item quantity="one">%d Starpposms</item>
         <item quantity="other">%d Starpposmi</item>
     </plurals>
     <string name="cache_waypoints_add">Pievienot Starpposmu</string>
@@ -1141,7 +1136,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="export_persnotes_uploading">Augšupielādē personīgās piezīmes %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="zero">%1$d piezīmes veiksmīgi augšupielādētas</item>
-        <item quantity="one">Viena piezīme veiksmīgi augšupielādēta</item>
+        <item quantity="one">%1$d piezīme veiksmīgi augšupielādēta</item>
         <item quantity="other">%1$d piezīmes veiksmīgi augšupielādētas</item>
     </plurals>
     <string name="export_modifiedcoords">Izmainītas koordinātas</string>
