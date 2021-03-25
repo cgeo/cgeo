@@ -762,19 +762,7 @@
     <string name="err_auth_geokrety_bad_password">Netinkamas Jūsų vartotojo vardas/slaptažodis.</string>
     <string name="err_auth_geokrety_unknown">%1$s gražinta: %2$s.</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="one">Viena slėptuvė</item>
-        <item quantity="few">%1$d slėptuvės</item>
-        <item quantity="many">%1$d slėptuvių</item>
-        <item quantity="other">%1$d slėptuvių</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="one">liko viena diena</item>
-        <item quantity="few">liko %1$d dienos</item>
-        <item quantity="many">liko %1$d dienų</item>
-        <item quantity="other">liko %1$d dienų</item>
-    </plurals>
     <string name="last_day_available">liko paskutine diena</string>
     <string name="cache_offline_refresh">Naujinti</string>
     <string name="cache_offline_drop">Pašalinti</string>
@@ -1222,7 +1210,7 @@
     <string name="export_persnotes">Asmeninės pastabos</string>
     <string name="export_persnotes_uploading">Įkeliama asmeninė pastaba %1$d</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Sėkmingai nusiųsta viena pastaba</item>
+        <item quantity="one">Sėkmingai nusiųsta %1$d viena pastaba</item>
         <item quantity="few">Sėkmingai nusiųstos %1$d pastabos</item>
         <item quantity="many">Sėkmingai nusiųsta %1$d pastabų</item>
         <item quantity="other">Sėkmingai nusiųsta %1$d pastabų</item>
