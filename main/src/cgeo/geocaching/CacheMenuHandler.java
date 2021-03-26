@@ -4,16 +4,20 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.calendar.CalendarAdder;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractUIFactory;
 
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 
@@ -41,7 +45,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
 
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, @NonNull final CacheMenuHandler.ActivityInterface activityInterface, final Geocache cache) {
+    public static boolean onMenuItemSelected(final MenuItem item, @NonNull final CacheMenuHandler.ActivityInterface activityInterface, final Geocache cache, @Nullable final Runnable notifyDataSetChanged) {
         final Activity activity;
         if (activityInterface instanceof Activity) {
             activity = (Activity) activityInterface;
@@ -72,9 +76,22 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         } else if (menuItem == R.id.menu_calendar) {
             CalendarAdder.addToCalendar(activity, cache);
             return true;
+        } else if (menuItem == R.id.menu_set_found) {
+            setFoundState(activity, cache, true, notifyDataSetChanged);
+        } else if (menuItem == R.id.menu_set_unfound) {
+            setFoundState(activity, cache, false, notifyDataSetChanged);
         }
         return false;
     }
+
+    private static void setFoundState(final Activity activity, final Geocache cache, final boolean foundState, @Nullable final Runnable notifyDataSetChanged) {
+        cache.setFound(foundState);
+        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+        Toast.makeText(activity, R.string.cache_foundstate_updated, Toast.LENGTH_SHORT).show();
+        if (notifyDataSetChanged != null) {
+            notifyDataSetChanged.run();
+        }
+    };
 
     public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache, final boolean fromPopup) {
         if (cache == null) {
@@ -87,6 +104,8 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         menu.findItem(R.id.menu_navigate).setVisible(hasCoords);
         menu.findItem(R.id.menu_log_visit).setVisible(cache.supportsLogging() && !Settings.getLogOffline());
         menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
+        menu.findItem(R.id.menu_set_found).setVisible(cache.isOffline() && cache.supportsSettingFoundState() && !cache.isFound());
+        menu.findItem(R.id.menu_set_unfound).setVisible(cache.isOffline() && cache.supportsSettingFoundState() && cache.isFound());
         // some connectors don't support URL - we don't need "open in browser" for those caches
         menu.findItem(R.id.menu_show_in_browser).setVisible(cache.getUrl() != null);
         // submenu share / export

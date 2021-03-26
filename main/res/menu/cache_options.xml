@@ -31,6 +31,16 @@
         app:showAsAction="ifRoom">
     </item>
     <item
+        android:id="@+id/menu_set_found"
+        android:title="@string/cache_menu_set_found"
+        android:visible="false">
+    </item>
+    <item
+        android:id="@+id/menu_set_unfound"
+        android:title="@string/cache_menu_set_unfound"
+        android:visible="false">
+    </item>
+    <item
         android:id="@+id/menu_tts_toggle"
         android:icon="@drawable/ic_menu_start_conversation"
         android:title="@string/tts_toggle"
@@ -143,16 +153,6 @@
             <item
                 android:id="@+id/menu_ignore"
                 android:title="@string/cache_menu_ignore"
-                android:visible="false">
-            </item>
-            <item
-                android:id="@+id/menu_set_found"
-                android:title="@string/cache_menu_set_found"
-                android:visible="false">
-            </item>
-            <item
-                android:id="@+id/menu_set_unfound"
-                android:title="@string/cache_menu_set_unfound"
                 android:visible="false">
             </item>
             <item

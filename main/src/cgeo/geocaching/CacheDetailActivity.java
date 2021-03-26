@@ -693,8 +693,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (connector instanceof IgnoreCapability) {
                 menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
             }
-            menu.findItem(R.id.menu_set_found).setVisible(cache.isOffline() && cache.supportsSettingFoundState() && !cache.isFound());
-            menu.findItem(R.id.menu_set_unfound).setVisible(cache.isOffline() && cache.supportsSettingFoundState() && cache.isFound());
             menu.findItem(R.id.menu_set_cache_icon).setVisible(cache.isOffline());
             menu.findItem(R.id.menu_advanced).setVisible(cache.getCoords() != null);
         }
@@ -704,7 +702,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (CacheMenuHandler.onMenuItemSelected(item, this, cache)) {
+        if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::notifyDataSetChanged)) {
             return true;
         }
 
@@ -759,10 +757,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             NavigationAppFactory.onMenuItemSelected(item, this, cache);
         } else if (menuItem == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, cache.getCoords());
-        } else if (menuItem == R.id.menu_set_found) {
-            setFoundState(true);
-        } else if (menuItem == R.id.menu_set_unfound) {
-            setFoundState(false);
         } else if (menuItem == R.id.menu_set_cache_icon) {
             EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), cache.getType().markerId, this::setCacheIcon);
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
@@ -772,13 +766,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
         return true;
     }
-
-    private void setFoundState(final boolean foundState) {
-        cache.setFound(foundState);
-        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-        Toast.makeText(this, R.string.cache_foundstate_updated, Toast.LENGTH_SHORT).show();
-        notifyDataSetChanged();
-    };
 
     private void setCacheIcon(final int newCacheIcon) {
         cache.setAssignedEmoji(newCacheIcon);
