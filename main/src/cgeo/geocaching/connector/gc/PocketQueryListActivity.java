@@ -33,6 +33,7 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
 
     private boolean onlyDownloadable = false;
     private boolean fixed = false;
+    private boolean startDownload = false;
     private SwitchCompat switchCompat = null;
 
     @Override
@@ -42,11 +43,13 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            startDownload = false;
             onlyDownloadable = extras.getBoolean(Intents.EXTRA_PQ_LIST_IMPORT);
             if (onlyDownloadable) {
                 fixed = true;
             }
         } else {
+            startDownload = true;
             onlyDownloadable = Settings.getPqShowDownloadableOnly();
         }
 
@@ -123,6 +126,10 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
 
     public boolean onlyDownloadable() {
         return onlyDownloadable;
+    }
+
+    public boolean getStartDownload() {
+        return startDownload;
     }
 
     public void returnResult(final PocketQuery pocketQuery) {
