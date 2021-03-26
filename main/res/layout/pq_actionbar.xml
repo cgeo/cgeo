@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:gravity="left|center_horizontal"
-        style="@style/cgeo.ActionBarStyle.TitleTextStyle"
+        style="@style/cgeo.pqActionBarStyle.TitleTextStyle"
         android:text="@string/menu_pocket_queries" />
 
     <androidx.appcompat.widget.SwitchCompat
@@ -23,5 +23,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:gravity="right"
+        style="@style/cgeo.pqActionBarStyle.TitleTextStyle"
         android:text="@string/show_all" />
 </RelativeLayout>

@@ -50,6 +50,10 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="cgeo.pqActionBarStyle.TitleTextStyle" parent="cgeo.ActionBarStyle.TitleTextStyle">
+        <item name="android:textColor">@color/just_white</item>
+    </style>
+
     <style name="cgeo.ActionBarStyle.Light.Inverse" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
         <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
