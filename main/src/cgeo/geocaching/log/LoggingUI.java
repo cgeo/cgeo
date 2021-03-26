@@ -140,11 +140,8 @@ public final class LoggingUI extends AbstractUIFactory {
         if (cache == null) {
             return;
         }
-        final MenuItem itemLog = menu.findItem(R.id.menu_log_visit);
-        itemLog.setVisible(cache.supportsLogging() && !Settings.getLogOffline());
-
-        final MenuItem itemOffline = menu.findItem(R.id.menu_log_visit_offline);
-        itemOffline.setVisible(cache.supportsLogging() && Settings.getLogOffline());
+        menu.findItem(R.id.menu_log_visit).setVisible(cache.supportsLogging() && !Settings.getLogOffline());
+        menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
     }
 
     public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {
