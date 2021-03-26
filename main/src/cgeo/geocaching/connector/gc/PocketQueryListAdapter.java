@@ -46,10 +46,10 @@ class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter
 
         viewHolder.binding.download.setOnClickListener(v -> {
             final PocketQuery pocketQuery = activity.getQueries().get(viewHolder.getAdapterPosition());
-            if (activity.onlyDownloadable()) {
-                activity.returnResult(pocketQuery);
-            } else {
+            if (activity.getStartDownload()) {
                 CacheListActivity.startActivityPocketDownload(view.getContext(), pocketQuery);
+            } else {
+                activity.returnResult(pocketQuery);
             }
         });
 
