@@ -789,7 +789,7 @@
     <string name="contentstorage_folder_selection_success">Mappe satt til \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Avbryter filvalg</string>
     <string name="contentstorage_file_selection_success">Fil valgt: \'%s\'</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Brukerdefinert</string>
     <string name="persistablefolder_usertype_default">Standard</string>
     <string name="persistablefolder_pickfolder">Velg mappe</string>
