@@ -204,7 +204,6 @@
     <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
     <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
     <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
-    <string name="err_tb_find">c:geo nemůže najít sledovatelný předmět.</string>
     <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
     <string name="err_waypoint_cache_unknown">c:geo neví, k jaké kešce chceš přidat trasový bod.</string>
     <string name="err_waypoint_add_failed">c:geo nemůže přidat tvůj trasový bod.</string>
@@ -651,7 +650,6 @@
     <string name="init_backup_settings_restore">Obnovit nastavení</string>
     <string name="settings_readingerror">Chyba při čtení nastavení</string>
     <string name="settings_restart">Aplikace c:geo se musí nyní restartovat, aby se použili načtená nastavení</string>
-    <string name="settings_folder_changed">Nastavení pro složku \"%1$s\" se změnilo na \"%2$s\".\n\nKnlepnutím na \"%3$s\" zachováte aktuální nastavení pro tuto složku.\n\nKlepnutím na \"%4$s\" nastavíte starou složku. V takovém případě se objeví výzva, aby jste aplikaci c:geo znovu udělili přístup k dané složce.</string>
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy můžete získat od různých poskytovatelů nebo dokonce vytvořit si mapy vlastní (z dat OSM). Nejprve musíte vybrat složku, do které mají být offline mapy uloženy.</string>
     <string name="settings_info_themes_title">Info o stylech mapy</string>
@@ -820,7 +818,7 @@
     <string name="contentstorage_err_list_failed">Soubory ve složce \'%s\' nelze vypsat</string>
     <string name="contentstorage_err_folder_access_failed">Složka \'%s\' není přístupná</string>
     <string name="contentstorage_err_copy_failed">Soubor \'%1$s\' nelze zkopírovat/přesunout do \'%2$s\' (přesunout =%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Uživatelem definované</string>
     <string name="persistablefolder_usertype_default">Výchozí</string>
     <string name="persistablefolder_legacy">Starší</string>
@@ -1882,27 +1880,19 @@
     <string name="localfile_intenttitle">Lokální správce souborů c:geo</string>
     <string name="localfile_title">Otevřít místní soubor</string>
     <string name="localfile_cannot_handle">Chyba při čtení souboru nebo c:geo neumí s tímto typem souboru pracovat.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Získat mapový soubor</string>
-    <string name="receivemapfile_success">Mapový soubor byl úspěšně přijat jako \"%s\" a uložen do složky s mapami</string>
-    <string name="receivemapfile_error">Chyba při získávání mapového souboru</string>
-    <string name="receivemapfile_error_io_exception">I/O chyba při přijímání mapového souboru. Je vaše složka s mapami \"%s\" zapisovatelná?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Soubor nenalezen při příjmu mapového souboru.</string>
-    <string name="receivemapfile_alreadyexists">Soubor s tímto názvem již existuje. Chcete přepsat existující soubor, nebo uložit nový soubor pod jiným názvem?</string>
-    <string name="receivemapfile_option_overwrite">Přepsat</string>
-    <string name="receivemapfile_option_differentname">Přejmenovat</string>
-    <string name="receivemapfile_kb_copied">%d kB zkopírováno</string>
-    <string name="receivemapfile_cancelled">Přenos mapového souboru byl zrušen</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">Soubor s tímto názvem již existuje. Chcete přepsat existující soubor, nebo uložit nový soubor pod jiným názvem?</string>
+    <string name="receivedownload_option_overwrite">Přepsat</string>
+    <string name="receivedownload_option_differentname">Přejmenovat</string>
+    <string name="receivedownload_kb_copied">%d kB zkopírováno</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Stáhnout offline mapu</string>
     <string name="downloadmap_info">Vyberte mapový soubor pro váš region klepnutím na ikonu \"Uložit\".\n\nStahování se provádí na pozadí. Po dokončení přenosu je soubor zkopírován do složky s mapami c:geo a nastaven jako aktuální mapa.\n\nPozor: Stahování mapy může způsobit velký síťový provoz!</string>
     <string name="downloadmap_choose">Vybrat mapu</string>
     <string name="downloadmap_filename">Stahování %s</string>
-    <string name="downloadmanager_not_available">Soubor s mapou nelze stáhnout, systémový správce stahování není k dispozici</string>
     <string name="download_started">Stahování zahájeno na pozadí</string>
     <string name="downloadmap_target_not_writable">Vybraný cíl \"%s\" není zapisovatelný - stažený mapový soubor je uložen v systémové složce pro stahování a musí být ručně přesunut do složky s mapami.</string>
     <string name="downloadmap_allow_metered_network">Povolit stahování přes měřenou síť (např. mobilní připojení)</string>
-    <string name="downloadmap_confirmation">Stáhnout mapu \"%1$s\"?\n\nMůže to chvíli trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.\n\nInformace o velikosti: %2$s</string>
     <string name="downloadmap_handling">Samotné stahování bude zpracováno na pozadí správcem stahování vašeho systému. Měli byste vidět oznámení, jakmile stahování začne (to může chvíli trvat).</string>
     <string name="button_continue">Pokračovat</string>
     <string name="downloadmap_onedirup">(o úroveň výš)</string>
@@ -1946,9 +1936,6 @@
     <string name="wizard_permissions_intro">Aplikace c:geo vyžaduje na správné fungování několik povolení na vašem zařízení.\nV dalších krocích vám je vysvětlíme.</string>
     <string name="wizard_permissions_folder_title">Nastavit složku: %s</string>
     <string name="wizard_basefolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání dat, jako jsou například soubory GPX, zálohy, poznámky a protokoly. Standardně jsou tyto soubory ukládány do složky pod tzv. \"základní složku\". V dalším kroku vyberte anebo vytvořte takovou složku.\n\n Pokud jste aplikaci c:geo aktualizovali z předchozí verze, vyberte existující složku „c:geo“ v hlavním adresáři v úložišti vašeho zařízení. \nTip: Možná budete muset nejprve odkrýt interní úložiště zařízení ve volbě souborů, které se poté zobrazí.</string>
-    <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání souborů s motivy pro offline mapy. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
-    <string name="wizard_gpxfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání GPX souborů, například pro import / export kešek nebo tras. Vyberte nebo vytvořte takovou složku v dalším kroku.</string>
     <string name="wizard_platforms_title">Konfigurace služeb</string>
     <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
