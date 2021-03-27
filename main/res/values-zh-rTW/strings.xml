@@ -204,7 +204,6 @@
     <string name="err_tb_display">c:geo無法顯示您要的旅行蟲資訊，它真的是旅行蟲/地理錢幣嗎</string>
     <string name="err_tb_details_open">c:geo 無法讀取旅行從的詳細資訊</string>
     <string name="err_tb_not_loggable">這個旅行蟲或地理錢幣無法登錄到系統</string>
-    <string name="err_tb_find">無法找到旅行蟲或地理錢幣</string>
     <string name="err_tb_find_that">無法找到那個旅行蟲或地理錢幣</string>
     <string name="err_waypoint_cache_unknown">哪個地理藏寶要加入航點</string>
     <string name="err_waypoint_add_failed">c:geo無法增加您的航點</string>
@@ -775,7 +774,7 @@
     <string name="contentstorage_err_delete_failed">無法刪除%s</string>
     <string name="contentstorage_err_list_failed">無法列出在%s的檔案</string>
     <string name="contentstorage_err_folder_access_failed">無法讀取檔案%s</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">使用者定義</string>
     <string name="persistablefolder_usertype_default">預設</string>
     <string name="persistablefolder_legacy">舊版</string>
@@ -1536,14 +1535,11 @@
     <string name="add_setting">增加設定</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_title">開啟本機檔案</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">接收地圖檔案</string>
-    <string name="receivemapfile_error">接收檔案時發生錯誤</string>
-    <string name="receivemapfile_alreadyexists">檔名重複。要複寫舊檔案還是另存新黨。</string>
-    <string name="receivemapfile_option_overwrite">複寫</string>
-    <string name="receivemapfile_option_differentname">不同的名稱</string>
-    <string name="receivemapfile_kb_copied">已複製%dKB</string>
-    <string name="receivemapfile_cancelled">地圖檔案傳輸已取消。</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">檔名重複。要複寫舊檔案還是另存新黨。</string>
+    <string name="receivedownload_option_overwrite">複寫</string>
+    <string name="receivedownload_option_differentname">不同的名稱</string>
+    <string name="receivedownload_kb_copied">已複製%dKB</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">下載離線地圖</string>
     <string name="downloadmap_choose">選擇地圖</string>
