@@ -824,7 +824,7 @@
     <string name="contentstorage_err_list_failed">フォルダ「%s」内のファイルを一覧表示できません</string>
     <string name="contentstorage_err_folder_access_failed">フォルダ「%s」にアクセスできませんでした</string>
     <string name="contentstorage_err_copy_failed">ファイル「%1$s」は「%2$s」へコピー/移動できませんでした (移動=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">ユーザー定義</string>
     <string name="persistablefolder_usertype_default">デフォルト</string>
     <string name="persistablefolder_legacy">旧式</string>
