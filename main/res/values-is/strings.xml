@@ -400,7 +400,7 @@
     <string name="init_sendToCgeo_name">Nafn tækisins þíns</string>
     <string name="init_sendToCgeo_register">Óska eftir skráningu</string>
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
