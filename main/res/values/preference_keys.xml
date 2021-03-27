@@ -36,7 +36,6 @@
     <string translatable="false" name="pref_fakekey_ec_authorization">fakekey_ec_authorization</string>
     <string translatable="false" name="pref_fakekey_su_authorization">fakekey_su_authorization</string>
     <string translatable="false" name="pref_fakekey_gcvote_authorization">fakekey_gcvote_authorization</string>
-    <string translatable="false" name="preference_category_offlinerouting">fakekey_offlinerouting_category</string>
     <string translatable="false" name="pref_connectorGCActive">connectorGCActive</string>
     <string translatable="false" name="pref_username">username</string>
     <string translatable="false" name="pref_password">password</string>
@@ -91,12 +90,12 @@
     <string translatable="false" name="pref_showwaypointsthreshold">waypointsthreshold</string>
     <string translatable="false" name="pref_zoomincludingwaypoints">zoomincludingwaypoints</string>
     <string translatable="false" name="pref_brouterDistanceThreshold">brouterDistanceThreshold</string>
+    <string translatable="false" name="pref_fakekey_brouterDistanceThresholdTitle">fakekey_brouterDistanceThresholdTitle</string>
     <string translatable="false" name="pref_brouterShowBothDistances">pref_brouterShowBothDistances</string>
     <string translatable="false" name="pref_useInternalRouting">useInternalRouting</string>
     <string translatable="false" name="pref_brouterAutoTileDownloads">brouterAutoTileDownloads</string>
     <string translatable="false" name="pref_brouterAutoTileDownloadsInterval">brouterAutoTileDownloadsInterval</string>
     <string translatable="false" name="pref_brouterAutoTileDownloadsLastCheck">brouterAutoTileDownloadsLastCheck</string>
-    <string translatable="false" name="pref_fakekey_brouterTilesFolderInfo">fakekey_brouterTilesFolderInfo</string>
     <string translatable="false" name="pref_bigSmileysOnMap">pref_bigSmileysOnMap</string>
     <string translatable="false" name="pref_proximityNotificationGeneral">pref_proximityNotificationGeneral</string>
     <string translatable="false" name="pref_proximityNotificationSpecific">pref_proximityNotificationSpecific</string>
