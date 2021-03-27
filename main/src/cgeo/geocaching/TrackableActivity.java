@@ -295,7 +295,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 CacheListActivity.startActivityKeyword(this, fallbackKeywordSearch);
             } else {
                 if (StringUtils.isNotBlank(geocode)) {
-                    showToast(res.getString(R.string.err_tb_find) + " " + geocode + ".");
+                    showToast(res.getString(R.string.err_tb_not_found, geocode));
                 } else {
                     showToast(res.getString(R.string.err_tb_find_that));
                 }

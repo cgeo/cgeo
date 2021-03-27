@@ -203,7 +203,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
                     showProgress(false);
 
                     if (StringUtils.isNotBlank(geocode)) {
-                        showToast(res.getString(R.string.err_tb_find) + ' ' + geocode + '.');
+                        showToast(res.getString(R.string.err_tb_not_found, geocode));
                     } else {
                         showToast(res.getString(R.string.err_tb_find_that));
                     }
