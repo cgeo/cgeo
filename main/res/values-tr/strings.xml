@@ -204,7 +204,6 @@
     <string name="err_tb_display">c:geo istediğin Trackable\'ı görüntüleyemez. Bu gerçekten bir trackable mi?</string>
     <string name="err_tb_details_open">c:geo Trackable\'ın ayrıntılarını açamıyor.</string>
     <string name="err_tb_not_loggable">Bu trackable kaydedilebilir değil.</string>
-    <string name="err_tb_find">c:geo Trackable\'ı bulamıyor</string>
     <string name="err_tb_find_that">c:geo bu Trackable\'ı bulamıyor.</string>
     <string name="err_waypoint_cache_unknown">c:geo hangi Geocache için bir yol noktası eklemek istediğinizi bilmiyor.</string>
     <string name="err_waypoint_add_failed">c:geo yol noktanızı ekleyemedi.</string>
@@ -649,7 +648,6 @@
     <string name="init_backup_settings_restore">Ayarları geri yükle</string>
     <string name="settings_readingerror">Ayarları okuma hatası</string>
     <string name="settings_restart">Yüklenen ayarların etkin kılınması için c:geo\'nun yeniden başlatılması gerekiyor</string>
-    <string name="settings_folder_changed">\'\'%1$s\'\' klasörü için ayarları \'\'%2$s\'\' olarak değiştirildi.\n\nMevcut ayarları tutmak için \'\'%3$s\'\' basın.\n\nEski klasörü seçmek için _\'\'%4$s\'\'_ basın. Bu durumda bu dosyaya ulaşabilmeniz için yeniden c:geo izni sorulacaktır.</string>
     <string name="settings_info_offline_maps_title">Çevrimdışı haritaların bilgisi</string>
     <string name="settings_info_offline_maps">c:geo\'da çevrimdışı harita kullanabilirsiniz. Haritaları diğer kaynaklardan elde edebilir veya kendi haritalarınızı yaratabilirsiniz (OSM verilerinden). Öncelikle, çevrimdışı haritaların depolanacağı klasörü seçmelisiniz.</string>
     <string name="settings_info_themes_title">Harita temalarının bilgisi</string>
@@ -818,7 +816,7 @@
     <string name="contentstorage_err_list_failed">\'%s\' klasöründeki dosyalar listelenemiyor</string>
     <string name="contentstorage_err_folder_access_failed">\'%s\' dosyasına ulaşılamadı</string>
     <string name="contentstorage_err_copy_failed">\'%1$s\' dosyası \'%2$s\' dizinine kopyalanamıyor/taşınamıyor (taşı=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Kullanıcı tanımlı</string>
     <string name="persistablefolder_usertype_default">Varsayılan</string>
     <string name="persistablefolder_legacy">Geleneksel</string>
@@ -1830,27 +1828,19 @@
     <string name="localfile_intenttitle">c:geo Yerel dosya işleyicisi</string>
     <string name="localfile_title">Yerel bir dosyayı aç</string>
     <string name="localfile_cannot_handle">Dosyayı okurken hata oluştu ya da c:geo bu dosya türünü işleyemiyor.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Harita dosyasını al</string>
-    <string name="receivemapfile_success">Harita dosyası başarıyla \"%s\" olarak alındı ve harita klasörüne depolandı</string>
-    <string name="receivemapfile_error">Harita dosyası alınırken hata oluştu</string>
-    <string name="receivemapfile_error_io_exception">Harita dosyasını alırken G/Ç hatası alındı. Harita klasörünüz \"%s\" için yazılma yetkisi var mı?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Dosya bulunamadı. Harita dosyasını alınırken hata oluştu.</string>
-    <string name="receivemapfile_alreadyexists">Bu isimle bir dosya zaten var. Var olan dosyanın üzerine mi yazılsın yoksa farklı bir adla yeni bir dosya olarak mı kaydedilsin?</string>
-    <string name="receivemapfile_option_overwrite">Üzerine yaz</string>
-    <string name="receivemapfile_option_differentname">Farklı isim</string>
-    <string name="receivemapfile_kb_copied">%d kB kopyalandı</string>
-    <string name="receivemapfile_cancelled">Harita dosyası aktarımı iptal edildi</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">Bu isimle bir dosya zaten var. Var olan dosyanın üzerine mi yazılsın yoksa farklı bir adla yeni bir dosya olarak mı kaydedilsin?</string>
+    <string name="receivedownload_option_overwrite">Üzerine yaz</string>
+    <string name="receivedownload_option_differentname">Farklı isim</string>
+    <string name="receivedownload_kb_copied">%d kB kopyalandı</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Çevrimdışı harita indir</string>
     <string name="downloadmap_info">\"Kaydet\" düğmesine basarak bölgeniz için harita dosyası seçin.\n\nİndirme arka planda çalışacak. İndirme tamamlandığında, indirilmiş dosya c:geo\'nun harita klasörüne kopyalanacak ve c:geo için mevcut harita olarak ayarlanacak.\n\nDikkat edin: harita indirmek yoğun ağ trafiğine sebep olur!</string>
     <string name="downloadmap_choose">Harita seç</string>
     <string name="downloadmap_filename">%s İndiriliyor</string>
-    <string name="downloadmanager_not_available">Harita dosyası indirilemiyor, sistem indirme indirme yöneticisi mevcut değil</string>
     <string name="download_started">İndirme arka planda başladı</string>
     <string name="downloadmap_target_not_writable">Seçili hedef \"%s\" yazılabilir değil - indirilmiş harita dosyası, sistem indirme klasörüne kaydedildi ve elle harita klasörüne taşınması gerekiyor.</string>
     <string name="downloadmap_allow_metered_network">Kotalı ağ üzerinden indirmeye izin ver (örn: mobil veri)</string>
-    <string name="downloadmap_confirmation">\"%1$s\" haritası indirilsin mi?\n\nAğ bağlantınıza bağlı olarak uzun sürebilir ve tarifenize belirli ücretler yansıyabilir.\n\nBoyut bilgisi: %2$s</string>
     <string name="downloadmap_handling">İndirme, sisteminizin indirme yöneticisiyle arka planda çalışacaktır. İndirme başladığında bildirim göreceksiniz (biraz sürebilir).</string>
     <string name="button_continue">Devam et</string>
     <string name="downloadmap_onedirup">(bir seviye yukarı)</string>
@@ -1894,9 +1884,6 @@
     <string name="wizard_permissions_intro">c:geo\'nun düzgün çalışabilmesi için cihazınızdaki belirli izinlere ihtiyacı vardır.\nDaha fazla detayı ilerideki adımlarda açıklayacağım.</string>
     <string name="wizard_permissions_folder_title">Klasörü ayarla: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo; GPX dosyaları, yedekler, alan notları ve kayıt dosyaları gibi verileri saklamak için yerel klasöre ihtiyaç duyar. Varsayılan olarak, bu dosyalar \"temel klasör\" olarak anılan bir klasörün altındaki klasörlerde saklanır. Diğer adımda böyle bir klasör seçin veya oluşturun.\n\nEğer c:geo\'yu bir önceki sürümden güncellediyseniz, depolama alanınızın kök (root) seviyesinde bulunan mevcut \"cgeo\" klasörünü seçin.\nİpucu: Birazdan açılacak \"dosya seçici\" uygulamasından öncelikle cihazınızın dahili depolamasının gizliliğini kaldırmanız gerekebilir.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo, çevrim dışı harita dosyalarını depolamak için yerel bir klasöre ihtiyaç duyar. Bir sonraki adımda böyle bir klasör seçin veya oluşturun.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo, çevrim dışı haritaların tema dosyalarını depolamak için yerel bir klasöre ihtiyaç duyar. Bir sonraki adımda böyle bir klasör seçin veya oluşturun.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo, GPX dosyalarını (örneğin: kutuları veya yolları içe veya dışa aktarmak için) depolamak için yerel bir klasöre ihtiyaç duyar. Bir sonraki adımda böyle bir klasör seçin veya oluşturun.</string>
     <string name="wizard_platforms_title">Hizmetleri yapılandır</string>
     <string name="wizard_platforms_intro">c:geo ile Geocache\'leri bulmak için c:geo tarafından desteklenen bir Geocaching hizmetinden hesabınızın olması gerekiyor.\nTercih ettiğiniz hizmeti var olan hesabınızla giriş yaparak veya yeni bir hesap oluşturak seçebilirsiniz.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
