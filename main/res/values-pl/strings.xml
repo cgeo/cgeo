@@ -204,7 +204,6 @@
     <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
     <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
     <string name="err_tb_not_loggable">Ten przedmiot podróżny nie jest do logowania.</string>
-    <string name="err_tb_find">c:geo nie może znaleźć przedmiotu podróżnego.</string>
     <string name="err_tb_find_that">c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
     <string name="err_waypoint_cache_unknown">c:geo nie wie, do której skrzynki chcesz dodać punkt nawigacji.</string>
     <string name="err_waypoint_add_failed">c:geo nie może dodać punktu nawigacyjnego.</string>
@@ -651,7 +650,6 @@
     <string name="init_backup_settings_restore">Przywróć ustawienia</string>
     <string name="settings_readingerror">Błąd odczytu ustawień</string>
     <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
-    <string name="settings_folder_changed">Ustawienie folderu \"%1$s\" zmieniło się na \"%2$s\".\n\nDotknij \"%3$s\", aby zachować bieżące ustawienia tego folderu.\n\nDotknij \"%4$s\", aby ustawić stary folder. W takim przypadku zostaniesz poproszony o ponowne przyznanie dostępu do tego folderu.</string>
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
     <string name="settings_info_offline_maps">c:geo obsługuje mapy do użytku offline. Możesz uzyskać mapy od różnych dostawców lub nawet tworzyć własne mapy (z danych OSM). Najpierw musisz wybrać folder, w którym mapy offline mają być przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
@@ -820,7 +818,7 @@
     <string name="contentstorage_err_list_failed">Nie można wyświetlić plików w folderze \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">Nie można uzyskać dostępu do folderu \'%s\'</string>
     <string name="contentstorage_err_copy_failed">Plik \'%1$s\' nie mógł zostać skopiowany/przeniesiony do \'%2$s\' (przeniesienie=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Zdefiniowany przez użytkownika</string>
     <string name="persistablefolder_usertype_default">Domyślny</string>
     <string name="persistablefolder_legacy">Starsze</string>
@@ -1882,27 +1880,19 @@
     <string name="localfile_intenttitle">c:geo Lokalny Obsługa plików</string>
     <string name="localfile_title">Otwórz plik lokalny</string>
     <string name="localfile_cannot_handle">Błąd odczytu pliku lub c:geo nie może obsłużyć tego typu pliku.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Odbierz plik mapy</string>
-    <string name="receivemapfile_success">Pomyślnie odebrano plik mapy jako \"%s\" i zapisano go w folderze z mapami</string>
-    <string name="receivemapfile_error">Błąd podczas odbierania pliku mapy</string>
-    <string name="receivemapfile_error_io_exception">Błąd I/O podczas odbierania pliku mapy. Czy folder z mapami \"%s\" jest zapisywalny?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Nie znaleziono pliku podczas odbierania pliku mapy.</string>
-    <string name="receivemapfile_alreadyexists">Plik o tej nazwie już istnieje. Nadpisać istniejący plik lub zapisać nowy plik pod inną nazwą?</string>
-    <string name="receivemapfile_option_overwrite">Nadpisz</string>
-    <string name="receivemapfile_option_differentname">Inna nazwa</string>
-    <string name="receivemapfile_kb_copied">skopiowano %d kB</string>
-    <string name="receivemapfile_cancelled">Transfer pliku mapy anulowany</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">Plik o tej nazwie już istnieje. Nadpisać istniejący plik lub zapisać nowy plik pod inną nazwą?</string>
+    <string name="receivedownload_option_overwrite">Nadpisz</string>
+    <string name="receivedownload_option_differentname">Inna nazwa</string>
+    <string name="receivedownload_kb_copied">skopiowano %d kB</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>
     <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony \"Zapisz\".\n\n Pobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\n Bądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_choose">Wybierz mapę</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
-    <string name="downloadmanager_not_available">Nie można pobrać pliku mapy, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
     <string name="downloadmap_target_not_writable">Wybrany cel \"%s\" nie jest zapisywalny - pobrany plik mapy został zapisany w systemowym folderze pobierania i musi być przeniesiony ręcznie do folderu z mapami.</string>
     <string name="downloadmap_allow_metered_network">Zezwalaj na pobieranie przez dowolną sieć (np. połączenie komórkowe)</string>
-    <string name="downloadmap_confirmation">Pobrać mapę \"%1$s\"?\n\nMoże to zająć trochę czasu oraz wiązać się ze znacznymi kosztami, w zależności od Twojego połączenia sieciowego.\n\nInformacje o rozmiarze: %2$s</string>
     <string name="downloadmap_handling">Pobieranie będzie obsługiwane w tle przez systemowego menedżera pobierania. Powiadomienie powinno pojawić się zaraz po rozpoczęciu pobieranie (co może chwilę potrwać).</string>
     <string name="button_continue">Kontynuuj</string>
     <string name="downloadmap_onedirup">(jeden poziom w górę)</string>
@@ -1946,9 +1936,6 @@
     <string name="wizard_permissions_intro">c: geo do prawidłowego działania wymaga pewnych uprawnień na urządzeniu. \nW dalszych krokach wyjaśnię więcej szczegółów.</string>
     <string name="wizard_permissions_folder_title">Ustaw folder: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania danych takich jak pliki GPX, kopie zapasowe, notatki polowe i pliki logów. Domyślnie te pliki są przechowywane w podfolderach tak zwanego „folderu podstawowego”. Wybierz lub utwórz taki folder w następnym kroku.\n\nJeśli zaktualizowałeś c:geo z poprzedniej wersji, wybierz istniejący folder „cgeo” na głównym poziomie pamięci urządzenia.\nWskazówka: Być może musisz najpierw odkryć pamięć wewnętrzną urządzenia w kolejnym selektorze plików.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo potrzebuje folderu lokalnego do przechowywania plików map offline. Wybierz lub utwórz taki folder w następnym kroku.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania plików motywów dla map offline. Wybierz lub utwórz taki folder w następnym kroku.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania plików GPX (np. dla importowania / eksportowania skrytek lub ścieżek). Wybierz lub utwórz taki folder w następnym kroku.</string>
     <string name="wizard_platforms_title">Konfigurowanie usług</string>
     <string name="wizard_platforms_intro">Aby znaleźć skrytki z c:geo, potrzebujesz konta w usłudze geocaching obsługiwanej przez c:geo. \nWybierz żądaną usługę poniżej, aby zalogować się na istniejące konto lub utworzyć nowe.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
