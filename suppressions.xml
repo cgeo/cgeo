@@ -15,5 +15,5 @@
     <suppress files="[/\\]thirdparty[/\\]" checks=".*" />
 
     <!-- BRouter code -->
-    <suppress files="[\\/]cgeo[\\/]geocaching[\\/]brouter[\\/].*\.java$" checks=".*" />
+    <suppress files="[\\/]cgeo[\\/]geocaching[\\/]brouter[\\/].*\.java$" checks="EqualsHashCodeCheck|FinalParametersCheck|InnerAssignmentCheck|ParameterAssignmentCheck" />
 </suppressions>
