@@ -13,4 +13,7 @@
     <suppress files="[/\\]annotation_gen[/\\]" checks=".*" />
     <!-- thirdparty code in our repository -->
     <suppress files="[/\\]thirdparty[/\\]" checks=".*" />
+
+    <!-- BRouter code -->
+    <suppress files="[\\/]cgeo[\\/]geocaching[\\/]brouter[\\/].*\.java$" checks=".*" />
 </suppressions>
