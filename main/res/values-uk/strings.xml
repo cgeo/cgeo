@@ -197,7 +197,6 @@
     <string name="err_tb_display">c:geo не може відобразити те, що ви хочете. Ви дійсно хочете відстежувати?</string>
     <string name="err_tb_details_open">c:geo не вдалося відкрити подробиці, що відстежуються.</string>
     <string name="err_tb_not_loggable">Це відстежуване неможливо увійти.</string>
-    <string name="err_tb_find">c:geo не вдається знайти схованку</string>
     <string name="err_tb_find_that">c:geo не може знайти цей геокеш.</string>
     <string name="err_waypoint_cache_unknown">c:geo не знає, який кеш ви хочете додати точку.</string>
     <string name="err_waypoint_add_failed">c:geo не вдалося додати вашу точку.</string>
@@ -742,7 +741,7 @@
     <string name="sendToCgeo_download_fail">c: geo не вдалося завантажити кеші. Немає підключення до Інтернету, або send2cgeo не працює.</string>
     <string name="sendToCgeo_no_registration">c: geo не вдалося завантажити кеші. Термін реєстрації на send2cgeo закінчився. Будь ласка, зареєструйтесь у налаштуваннях.</string>
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
@@ -1584,23 +1583,17 @@
     <string name="localfile_intenttitle">c:geo локальний обробник файлів</string>
     <string name="localfile_title">Відкрити локальний файл</string>
     <string name="localfile_cannot_handle">Помилка читання файлу або c:geo не може обробляти цей тип файлу.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Отримання файлу карти</string>
-    <string name="receivemapfile_error">Помилка під час запису у файл</string>
-    <string name="receivemapfile_error_filenotfound_exception">Помилка при отриманні файлу карти.</string>
-    <string name="receivemapfile_alreadyexists">Файл з такою назвою вже існує. Перезаписати наявний файл або зберегти новий файл?</string>
-    <string name="receivemapfile_option_overwrite">Перезаписати</string>
-    <string name="receivemapfile_option_differentname">Інша назва</string>
-    <string name="receivemapfile_kb_copied">%d КБ скопійовано</string>
-    <string name="receivemapfile_cancelled">Передачу файлів відмінено</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">Файл з такою назвою вже існує. Перезаписати наявний файл або зберегти новий файл?</string>
+    <string name="receivedownload_option_overwrite">Перезаписати</string>
+    <string name="receivedownload_option_differentname">Інша назва</string>
+    <string name="receivedownload_kb_copied">%d КБ скопійовано</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Завантажити автономну карту</string>
     <string name="downloadmap_choose">Обрати мапу</string>
     <string name="downloadmap_filename">Завантаження %s</string>
-    <string name="downloadmanager_not_available">Не вдалося завантажити файл карти, системний менеджер завантажень не доступний</string>
     <string name="download_started">Завантаження розпочалося у фоновому режимі</string>
     <string name="downloadmap_allow_metered_network">Дозволити завантаження по мережі через трафік (наприклад, мобільне з\'єднання)</string>
-    <string name="downloadmap_confirmation">Завантажити карту %1$s\"?\n\nЦе може зайняти певний час і може призвести до значних витрат, залежно від підключення до мережі. \n\nРозмір інформації:%2$s</string>
     <string name="downloadmap_handling">Сам завантаження буде оброблено менеджером завантаження вашої системи у фоновому режимі. Ви побачите сповіщення, щойно почалося завантаження (що може зайняти деякий час).</string>
     <string name="button_continue">Продовжити</string>
     <!-- history track -->
