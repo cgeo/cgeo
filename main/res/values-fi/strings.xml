@@ -655,7 +655,6 @@
     <string name="init_backup_settings_restore">Palauta asetukset</string>
     <string name="settings_readingerror">Virhe asetusten lukemisessa</string>
     <string name="settings_restart">c:geo tulee käynnistää uudelleen nyt ladattujen asetusten saattamiseksi voimaan</string>
-    <string name="settings_folder_changed">Asetus kansiolle \"%1$s\" on vaihdettu \"%2$s\":ksi.\n\nNapauta \"%3$s\" pitääksesi nykyisen asetuksen tälle kansiolle.\n\nNapauta \"%4$s\" asettaaksesi vanhan kansion. Jälkimmäisessä tapauksessa sinua pyydetään asettamaan c:geolle pääsy tähän kansioon.</string>
     <string name="settings_info_offline_maps_title">Offline-karttojen tiedot</string>
     <string name="settings_info_offline_maps">c:geo tukee offline-käyttöön tarkoitettuja karttoja. Voit hankkia karttoja eri tarjoajilta tai jopa luoda omia karttoja (OSM-data). Sinun on ensin valittava kansio johon offline-kartat on tallennettava.</string>
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
@@ -827,7 +826,7 @@
     <string name="contentstorage_err_list_failed">Tiedostoja kansiossa \'%s\' ei voitu listata</string>
     <string name="contentstorage_err_folder_access_failed">Kansiota \'%s\' ei voitu käyttää</string>
     <string name="contentstorage_err_copy_failed">Tiedostoa \'%1$s\' ei voitu kopioida/siirtää kohteeseen \'%2$s\' (siirto=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Käyttäjän määrittämä</string>
     <string name="persistablefolder_usertype_default">Oletus</string>
     <string name="persistablefolder_legacy">Legacy</string>
