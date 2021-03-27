@@ -655,7 +655,6 @@
     <string name="init_backup_settings_restore">Ayarları geri yükle</string>
     <string name="settings_readingerror">Ayarları okuma hatası</string>
     <string name="settings_restart">Yüklenen ayarların etkin kılınması için c:geo\'nun yeniden başlatılması gerekiyor</string>
-    <string name="settings_folder_changed">\'\'%1$s\'\' klasörü için ayarları \'\'%2$s\'\' olarak değiştirildi.\n\nMevcut ayarları tutmak için \'\'%3$s\'\' basın.\n\nEski klasörü seçmek için _\'\'%4$s\'\'_ basın. Bu durumda bu dosyaya ulaşabilmeniz için yeniden c:geo izni sorulacaktır.</string>
     <string name="settings_info_offline_maps_title">Çevrimdışı haritaların bilgisi</string>
     <string name="settings_info_offline_maps">c:geo\'da çevrimdışı harita kullanabilirsiniz. Haritaları diğer kaynaklardan elde edebilir veya kendi haritalarınızı yaratabilirsiniz (OSM verilerinden). Öncelikle, çevrimdışı haritaların depolanacağı klasörü seçmelisiniz.</string>
     <string name="settings_info_themes_title">Harita temalarının bilgisi</string>
@@ -827,7 +826,7 @@
     <string name="contentstorage_err_list_failed">\'%s\' klasöründeki dosyalar listelenemiyor</string>
     <string name="contentstorage_err_folder_access_failed">\'%s\' dosyasına ulaşılamadı</string>
     <string name="contentstorage_err_copy_failed">\'%1$s\' dosyası \'%2$s\' dizinine kopyalanamıyor/taşınamıyor (taşı=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Kullanıcı tanımlı</string>
     <string name="persistablefolder_usertype_default">Varsayılan</string>
     <string name="persistablefolder_legacy">Geleneksel</string>
