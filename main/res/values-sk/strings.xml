@@ -204,7 +204,6 @@
     <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
     <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
     <string name="err_tb_not_loggable">Tento TB sa nedá zalogovať.</string>
-    <string name="err_tb_find">c:geo nemôže nájsť trasovateľný predmet.</string>
     <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
     <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>
     <string name="err_waypoint_add_failed">c:geo nemôže pridať bod trasy.</string>
@@ -651,7 +650,6 @@
     <string name="init_backup_settings_restore">Obnoviť nastavenia</string>
     <string name="settings_readingerror">Chyba pri čítaní nastavení</string>
     <string name="settings_restart">Aplikácia c:geo sa musí teraz reštartovať, aby sa použili načítané nastavenia</string>
-    <string name="settings_folder_changed">Nastavenie pre priečinok \"%1$s\" sa zmenilo na \"%2$s\".\n\nŤuknutím na \"%3$s\" zachováte aktuálne nastavenie pre tento priečinok.\n\nŤuknutím na \"%4$s\" nastavíte starý priečinok. V takom prípade sa objaví výzva, aby ste aplikácii c:geo znova udelili prístup k danému priečinku.</string>
     <string name="settings_info_offline_maps_title">Info o Offline mapách</string>
     <string name="settings_info_offline_maps">Aplikácia c:geo podporuje mapy na použitie offline. Mapy môžete získať od rozličných poskytovateľov, prípadne môžete dokonca vytvoriť vlastné mapy (z údajov OSM). Najprv je potrebné vybrať priečinok, do ktorého sa budú mapy offline ukladať.</string>
     <string name="settings_info_themes_title">Info o témach mapy</string>
@@ -820,7 +818,7 @@
     <string name="contentstorage_err_list_failed">Súbor v priečinku \'%s\' sa nedá uviesť</string>
     <string name="contentstorage_err_folder_access_failed">Priečinok \'%s\' nie je prístupný</string>
     <string name="contentstorage_err_copy_failed">Súbor \'%1$s\' sa nedá skopírovať/premiestniť do \'%2$s\' (presun=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Používateľom určené</string>
     <string name="persistablefolder_usertype_default">Predvolené</string>
     <string name="persistablefolder_legacy">Staršia verzia</string>
@@ -1882,27 +1880,19 @@
     <string name="localfile_intenttitle">Lokálny správca súborov c:geo</string>
     <string name="localfile_title">Otvoriť lokálny súbor</string>
     <string name="localfile_cannot_handle">Chyba počas čítania súboru alebo c:geo nevie pracovať s týmto druhom súboru.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Získať mapový súbor</string>
-    <string name="receivemapfile_success">Mapový súbor úspešne prijatý ako \"%s\" a uložený do priečinka máp</string>
-    <string name="receivemapfile_error">Chyba počas získavania mapového súboru</string>
-    <string name="receivemapfile_error_io_exception">Chyba vstupu/výstupu počas prijímania mapového súboru. Dá sa zapisovať do priečinka máp \"%s\"?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Chyba: súbor sa počas prijímania mapového súboru nenašiel.</string>
-    <string name="receivemapfile_alreadyexists">Súbor s týmto názvom už existuje. Prepísať existujúci súbor alebo uložiť nový súbor s iným názvom?</string>
-    <string name="receivemapfile_option_overwrite">Prepísať</string>
-    <string name="receivemapfile_option_differentname">Premenovať</string>
-    <string name="receivemapfile_kb_copied">%d kB skopírovaných</string>
-    <string name="receivemapfile_cancelled">Prenos mapového súboru bol zrušený</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">Súbor s týmto názvom už existuje. Prepísať existujúci súbor alebo uložiť nový súbor s iným názvom?</string>
+    <string name="receivedownload_option_overwrite">Prepísať</string>
+    <string name="receivedownload_option_differentname">Premenovať</string>
+    <string name="receivedownload_kb_copied">%d kB skopírovaných</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Prevziať offline mapu</string>
     <string name="downloadmap_info">Vyberte mapový súbor pre vašu oblasť a ťuknite na ikonu \"Uložiť\".\n\nPrevzatie prebehne na pozadí. Po dokončení prevzatia sa súbor skopíruje do priečinka máp aplikácie c:geo a nastaví sa ako aktuálna mapa.\n\nPozor: pri prevzatí mapy dôjde k prenosu veľkého množstva údajov!</string>
     <string name="downloadmap_choose">Zvoľte mapu</string>
     <string name="downloadmap_filename">Preberá sa %s</string>
-    <string name="downloadmanager_not_available">Súbor s mapou sa nedá prevziať, systémový správca preberania nie je k dispozícii</string>
     <string name="download_started">Prevzatie spustené na pozadí</string>
     <string name="downloadmap_target_not_writable">Do vybraného cieľa \"%s\" sa nedá zapisovať – prevzatý mapový súbor je uložený v systémovom priečinku prevzatých súborov a je potrebné ho ručne presunúť do priečinka máp.</string>
     <string name="downloadmap_allow_metered_network">Povoliť prevzatie cez meranú sieť (napr. mobilné pripojenie)</string>
-    <string name="downloadmap_confirmation">Prevziať mapu \"%1$s\"?\n\nMôže to nejakú dobu trvať a môžu byť účtované veľké poplatky v závislosti od sieťového pripojenia.\n\nInformácie o veľkosti: %2$s</string>
     <string name="downloadmap_handling">Samotné prevzatie bude spracované systémovým správcom preberania na pozadí. Keď sa začne preberať, uvidíte upozornenie. Prevzatie môže nejakú dobu trvať.</string>
     <string name="button_continue">Ďalej</string>
     <string name="downloadmap_onedirup">(o úroveň vyššie)</string>
@@ -1946,9 +1936,6 @@
     <string name="wizard_permissions_intro">Aplikácia c:geo vyžaduje na správne fungovanie niekoľko povolení na vašom zariadení.\nV ďalších krokoch vám ich vysvetlíme.</string>
     <string name="wizard_permissions_folder_title">Nastaviť priečinok: %s</string>
     <string name="wizard_basefolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie údajov, ako sp napríklad súbory GPX, zálohy, poznámky a súbory denníka. Štandardne sú tieto súbory ukladané do priečinkov pod tzv. „hlavným priečinkom“. Vyberte alebo vytvorte takýto priečinok v ďalšom kroku.\n\nAk ste aplikáciu c_geo inovovali z predchádzajúcej verzie, vyberte existujúci priečinok „c:geo“ v hlavnej úrovni ukladacieho priestoru zariadenia. \nPomôcka: Možno bude potrebné najprv odkryť interný ukladací priestor zariadenia vo voľbe súboru, ktorý sa potom zobrazí.</string>
-    <string name="wizard_mapfolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie mapových súborov offline. V ďalšom kroku vyberte alebo vytvorte takýto priečinok.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie súborov s motívom pre offline mapy. V ďalšom kroku vyberte alebo vytvorte takýto priečinok.</string>
-    <string name="wizard_gpxfolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie súborov GPX (napr. na import/export kešiek alebo trás). V ďalšom kroku vyberte alebo vytvorte takýto priečinok.</string>
     <string name="wizard_platforms_title">Konfigurovať služby</string>
     <string name="wizard_platforms_intro">Na hľadanie kešiek s aplikáciou c\"geo je potrebný účet na geocachingovej službe podporovanej aplikáciou c:geo.\nVyberte dole požadovanú službu, do ktorej sa prihlásite, prípadne si vytvorte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
