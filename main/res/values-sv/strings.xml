@@ -655,7 +655,6 @@
     <string name="init_backup_settings_restore">Återställ inställningar</string>
     <string name="settings_readingerror">Fel vid läsning av inställningar</string>
     <string name="settings_restart">c:geo måste startas om nu för att få igång laddade inställningar</string>
-    <string name="settings_folder_changed">Inställning för mappen \"%1$s\" har ändrats till \"%2$s\".\n\nTryck på \"%3$s\" för att behålla nuvarande inställningar för denna mapp.\n\nTryck på \"%4$s\" för att använda den gamla mappen. Du kommer i så fall att bli ombedd att ge c:geo-åtkomst till den mappen.</string>
     <string name="settings_info_offline_maps_title">Info om Offline-kartor</string>
     <string name="settings_info_offline_maps">c:geo stöder kartor för offline-användning. Du kan få kartor från olika leverantörer eller till och med skapa egna kartor (från OSM-data). Först måste du välja den mapp där offline-kartor ska lagras.</string>
     <string name="settings_info_themes_title">Info om kartteman</string>
@@ -827,7 +826,7 @@
     <string name="contentstorage_err_list_failed">Filer i mappen \'%s\' kunde inte listas</string>
     <string name="contentstorage_err_folder_access_failed">Mappen \'%s\' kunde inte öppnas</string>
     <string name="contentstorage_err_copy_failed">Filen \'%1$s\' kunde inte kopieras/flyttas till \'%2$s\' (move=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Användardefinierad</string>
     <string name="persistablefolder_usertype_default">Standard</string>
     <string name="persistablefolder_legacy">Äldre</string>
