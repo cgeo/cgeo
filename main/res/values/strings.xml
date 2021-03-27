@@ -605,7 +605,7 @@
     <string name="init_brouterThreshold_description">Maximum distance up to which the BRouter helper app (if installed) will calculate a route.</string>
     <string name="init_brouterShowBothDistances">Show straight distance</string>
     <string name="init_brouterAutoTileDownloads">Automatic download</string>
-    <string name="init_brouterAutoTileDownloads_description">Automatically offer to download missing routing tile data. BRouter data folder needs to be set in both c:geo and BRouter for this option to work.</string>
+    <string name="init_brouterAutoTileDownloads_description">Automatically offer to download missing routing tile data.</string>
     <string name="brouter_recalculating">Recalculating route in background…</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_useInternalRouting">Use internal routing</string>
@@ -2133,7 +2133,7 @@
     <string name="wizard_mapfolder_request_explanation">c:geo needs a local folder to store offline map files.</string>
     <string name="wizard_mapthemesfolder_request_explanation">c:geo needs a local folder to store theme files for offline maps.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo needs a local folder to store GPX files (e.g. for importing / exporting caches or tracks).</string>
-    <string name="wizard_broutertilesfolder_request_explanation">In order to use the BRouter routing data auto-download and -update feature you need to set a tile data folder accessible by both BRouter and c:geo.</string>
+    <string name="wizard_broutertilesfolder_request_explanation">In order to use the integrated routing tile data auto-download and -update feature you need to set a tile data folder.</string>
     <string name="wizard_select_or_create">Select or create such a folder in the next step.</string>
     <string name="wizard_platforms_title">Configure services</string>
     <string name="wizard_platforms_intro">To find geocaches with c:geo you need an account for a geocaching service supported by c:geo.\nSelect the desired service below to either login with your existing account or create a new account.</string>
