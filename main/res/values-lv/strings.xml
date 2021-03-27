@@ -197,7 +197,6 @@
     <string name="err_tb_display">c:geo nevar parādīt ceļotājus, kurus izvēlējāties. Vai tie patiešām ir ceļotāji?</string>
     <string name="err_tb_details_open">c:geo nevar atvērt ceļotāja datus.</string>
     <string name="err_tb_not_loggable">Šis ceļotājs nav reģistrējams.</string>
-    <string name="err_tb_find">c:geo nevar atrast ceļotāju</string>
     <string name="err_tb_find_that">c:feo nevar atrast šo ceļotāju.</string>
     <string name="err_waypoint_cache_unknown">c:geo, nezina, kuram slēpnim tu vēlies pievienot starpposma punktu.</string>
     <string name="err_waypoint_add_failed">c:geo neizdevās pievienot tavu starpposmu.</string>
@@ -688,7 +687,7 @@
     <string name="sendToCgeo_download_fail">c:geo neizdevās lejupielādēt slēpņus. Nav interneta savienojuma, vai send2cgeo pašlaik nedarbojas.</string>
     <string name="sendToCgeo_no_registration">c:geo neizdevās lejupielādēt slēpņus. Reģistrēšanās noilgums iekš Send2cgeo ir iestajies. Lūdzu reģistrējieties iestatījumos.</string>
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
@@ -1481,7 +1480,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <string name="map_trail_show">Rādīt pārvietojumu</string>
