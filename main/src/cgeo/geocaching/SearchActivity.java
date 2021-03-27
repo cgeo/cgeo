@@ -153,6 +153,9 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
             trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackableBrand.getId());
+            if (keywordSearch) { // keyword fallback, if desired by caller
+                trackablesIntent.putExtra(Intents.EXTRA_KEYWORD, query.trim());
+            }
             startActivity(trackablesIntent);
             return true;
         }
