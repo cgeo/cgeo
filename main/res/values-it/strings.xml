@@ -655,7 +655,6 @@
     <string name="init_backup_settings_restore">Ripristina impostazioni</string>
     <string name="settings_readingerror">Errore di lettura impostazioni</string>
     <string name="settings_restart">c:geo deve essere riavviato ora per rendere effettive le impostazioni caricate</string>
-    <string name="settings_folder_changed">L\'impostazione per la cartella \"%1$s\" è cambiata in \"%2$s\".\n\nTocca \"%3$s\" per mantenere l\'impostazione corrente per questa cartella.\n\nTocca \"%4$s\" per impostare la vecchia cartella. In questo caso verrà chiesta l\'autorizzazione a c:geo di accedere a quella cartella.</string>
     <string name="settings_info_offline_maps_title">Informazioni su mappe Offline</string>
     <string name="settings_info_offline_maps">c:geo supporta le mappe per l\'uso offline. È possibile ottenere mappe da diversi fornitori o anche creare le proprie mappe (da dati OSM). In primo luogo è necessario selezionare la cartella in cui le mappe offline devono essere memorizzate.</string>
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
@@ -827,7 +826,7 @@
     <string name="contentstorage_err_list_failed">I file nella cartella «%s» non possono essere elencati</string>
     <string name="contentstorage_err_folder_access_failed">Impossibile accedere alla cartella \'%s\'</string>
     <string name="contentstorage_err_copy_failed">Il file \'%1$s\' non può essere copiato/spostato in \'%2$s\' (sposta=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Definito dall\'utente</string>
     <string name="persistablefolder_usertype_default">Predefinito</string>
     <string name="persistablefolder_legacy">Classico</string>
