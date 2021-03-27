@@ -204,7 +204,6 @@
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
     <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
-    <string name="err_tb_find">c:geo ei löydä reissaajan tietoja</string>
     <string name="err_tb_find_that">c:geo ei löydä reissaajan tietoja.</string>
     <string name="err_waypoint_cache_unknown">c:geo ei tiedä minkä kätkön haluat lisätä välietapiksi.</string>
     <string name="err_waypoint_add_failed">c:geo epäonnistui välietapin lisäämisessä.</string>
@@ -649,7 +648,6 @@
     <string name="init_backup_settings_restore">Palauta asetukset</string>
     <string name="settings_readingerror">Virhe asetusten lukemisessa</string>
     <string name="settings_restart">c:geo tulee käynnistää uudelleen nyt ladattujen asetusten saattamiseksi voimaan</string>
-    <string name="settings_folder_changed">Asetus kansiolle \"%1$s\" on vaihdettu \"%2$s\":ksi.\n\nNapauta \"%3$s\" pitääksesi nykyisen asetuksen tälle kansiolle.\n\nNapauta \"%4$s\" asettaaksesi vanhan kansion. Jälkimmäisessä tapauksessa sinua pyydetään asettamaan c:geolle pääsy tähän kansioon.</string>
     <string name="settings_info_offline_maps_title">Offline-karttojen tiedot</string>
     <string name="settings_info_offline_maps">c:geo tukee offline-käyttöön tarkoitettuja karttoja. Voit hankkia karttoja eri tarjoajilta tai jopa luoda omia karttoja (OSM-data). Sinun on ensin valittava kansio johon offline-kartat on tallennettava.</string>
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
@@ -818,7 +816,7 @@
     <string name="contentstorage_err_list_failed">Tiedostoja kansiossa \'%s\' ei voitu listata</string>
     <string name="contentstorage_err_folder_access_failed">Kansiota \'%s\' ei voitu käyttää</string>
     <string name="contentstorage_err_copy_failed">Tiedostoa \'%1$s\' ei voitu kopioida/siirtää kohteeseen \'%2$s\' (siirto=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Käyttäjän määrittämä</string>
     <string name="persistablefolder_usertype_default">Oletus</string>
     <string name="persistablefolder_legacy">Legacy</string>
@@ -1830,27 +1828,19 @@
     <string name="localfile_intenttitle">c:geo Paikallisen tiedoston käsittelijä</string>
     <string name="localfile_title">Avaa paikallinen tiedosto</string>
     <string name="localfile_cannot_handle">Virhe luettaessa tiedostoa tao c:geo ei pysty käsittelemään tätä tiedostomuotoa.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Vastaanota karttatiedosto</string>
-    <string name="receivemapfile_success">Karttatiedosto otettu vastaan onnistuneesti ja tallennettu karttahakemistoon, nimi on \"%s\"</string>
-    <string name="receivemapfile_error">Virhe otettaessa karttatiedostoa vastaan</string>
-    <string name="receivemapfile_error_io_exception">I/O-virhe karttatiedostoa vastaanotettaessa. Onko karttahakemistosi \"%s\" kirjoitettavissa?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Tiedostoa ei löydy -virhe tapahtui vastaanottaessa karttatiedostoa.</string>
-    <string name="receivemapfile_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
-    <string name="receivemapfile_option_overwrite">Korvaa</string>
-    <string name="receivemapfile_option_differentname">Eri nimi</string>
-    <string name="receivemapfile_kb_copied">%d kB kopioitu</string>
-    <string name="receivemapfile_cancelled">Karttatiedoston siirto peruttu</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
+    <string name="receivedownload_option_overwrite">Korvaa</string>
+    <string name="receivedownload_option_differentname">Eri nimi</string>
+    <string name="receivedownload_kb_copied">%d kB kopioitu</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Lataa offline-kartta</string>
     <string name="downloadmap_info">Valitse alueesi kartta tiedosto napauttamalla \"Tallenna\" kuvaketta.\n\nLataus suoritetaan taustalla. Kun siirto on valmis, tiedosto kopioidaan c:geo karttakansioon ja se asetetaan nykyiseksi kartaksi.\n\nOle varovainen: Kartan lataaminen voi aiheuttaa suurta verkkoliikennettä!</string>
     <string name="downloadmap_choose">Valitse kartta</string>
     <string name="downloadmap_filename">Ladataan %s</string>
-    <string name="downloadmanager_not_available">Karttatiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
     <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
-    <string name="downloadmap_confirmation">Ladataanko kartta \"%1$s\"?\n\nTämä voi viedä jonkin aikaa ja voi johtaa merkittäviin kustannuksiin, verkkoyhteydestäsi riippuen.\n\nKokotieto: %2$s</string>
     <string name="downloadmap_handling">Itse lataus käsitellään taustalla järjestelmäsi latauksenhallinnan kautta. Sinun pitäisi nähdä ilmoitus heti kun lataus alkaa (tämä voi viedä jonkin aikaa).</string>
     <string name="button_continue">Jatka</string>
     <string name="downloadmap_onedirup">(yksi taso ylös)</string>
@@ -1894,9 +1884,6 @@
     <string name="wizard_permissions_intro">c:geo tarvitsee tietyt käyttöoikeudet laitteellesi toimiakseen oikein.\nSelitän lisää yksityiskohtia seuraavissa vaiheissa.</string>
     <string name="wizard_permissions_folder_title">Aseta kansio: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen tietoja kuten GPX-tiedostoja, varmuuskopioita, kenttämerkintöjä ja lokitiedostoja. Oletusarvoisesti nämä tiedostot tallennetaan kansioihin, jotka sijaitsevat \"juurikansiossa\". Valitse tai luo tällainen kansio seuraavassa vaiheessa.\n\nJos olet päivittänyt c:geon edellisestä versiosta, valitse olemassa oleva kansio \"cgeo\" laitteen tallennustilan juuritasolla.\nVihje: Saatat joutua poistamaan piilotuksen laitteesi sisäisestä tallennustilasta kun tiedostovalitsin näytetään seuraavaksi.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttatiedostoja. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttojen teematiedostot. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen GPX-tiedostoja, esim. kätköjen sekä reittien tuontiin/vientiin. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
     <string name="wizard_platforms_title">Määritä palvelut</string>
     <string name="wizard_platforms_intro">Löytääksesi geokätköjä c:geon avulla, tarvitset tilin c:geon tukemaa geokätköilypalvelua varten.\nValitse haluamasi palvelu alta, jotta voit kirjautua sisään olemassa olevalla tililläsi tai luoda uuden tilin.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
