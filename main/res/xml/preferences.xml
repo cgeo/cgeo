@@ -597,10 +597,15 @@
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/settings_title_offline_routing" android:summary="@string/settings_summary_offline_routing"
-            android:layout="@layout/preference_category"
-            android:key="@string/preference_category_offlinerouting">
+            android:layout="@layout/preference_category">
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_useInternalRouting"
+                android:summary="@string/init_summary_useInternalRouting"
+                android:title="@string/init_useInternalRouting" />
             <Preference
                 android:selectable="false"
+                android:key="@string/pref_fakekey_brouterDistanceThresholdTitle"
                 android:summary="@string/init_brouterThreshold_description"
                 android:title="@string/init_brouterThreshold" />
             <cgeo.geocaching.settings.ProximityPreference
@@ -620,15 +625,12 @@
                 android:defaultValue="false"
                 android:key="@string/pref_brouterAutoTileDownloads"
                 android:summary="@string/init_brouterAutoTileDownloads_description"
+                android:dependency="@string/pref_useInternalRouting"
                 android:title="@string/init_brouterAutoTileDownloads" />
 
             <Preference
                 android:key="@string/pref_persistablefolder_routingtiles"
                 android:title="@string/init_brouter_directory_description"
-                android:dependency="@string/pref_brouterAutoTileDownloads" />
-            <Preference
-                android:selectable="false"
-                android:key="@string/pref_fakekey_brouterTilesFolderInfo"
                 android:dependency="@string/pref_brouterAutoTileDownloads" />
 
             <Preference
@@ -691,11 +693,6 @@
                 app:min="100"
                 app:max="@integer/historytrack_length_max"
                 android:defaultValue="@integer/historytrack_length_default" />
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="@string/pref_useInternalRouting"
-                android:summary="@string/init_summary_useInternalRouting"
-                android:title="@string/init_useInternalRouting" />
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_bigSmileysOnMap"

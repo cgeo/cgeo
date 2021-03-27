@@ -489,7 +489,7 @@
     <string name="settings_summary_map">Set map source, offline map settings and map details.</string>
     <string name="settings_title_map_data">Map Data</string>
     <string name="settings_title_offline_routing">Offline routing</string>
-    <string name="settings_summary_offline_routing">Offline routing is available if helper app \"BRouter\" is installed and configured.</string>
+    <string name="settings_summary_offline_routing">Offline routing is available if either helper app \"BRouter\" is installed and configured or internal routing is enabled.</string>
     <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Map Content</string>
@@ -702,7 +702,6 @@
     <string name="init_base_directory_description">Base folder for public local data</string>
     <string name="init_map_directory_description">Folder with offline maps</string>
     <string name="init_brouter_directory_description">Folder with BRouter routing data</string>
-    <string name="init_brouter_directory_additionalinfo">(Default folder is something like \'%1$s\'. BRouter needs to be configured to use the same folder, see our online manual for details, especially when using Android 11 or higher.)</string>
     <string name="init_brouter_updateinterval_title">Update interval</string>
     <string name="init_brouter_updateinterval_description">Reminds you every x days for an update check</string>
     <string name="init_gpx_importexportdir">GPX Folder</string>

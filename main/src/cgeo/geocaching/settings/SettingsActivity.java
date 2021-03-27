@@ -537,9 +537,12 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initMapPreferences() {
-        getPreference(R.string.preference_category_offlinerouting).setEnabled(ProcessUtils.isInstalled(getString(R.string.package_brouter)));
-        getPreference(R.string.pref_fakekey_brouterTilesFolderInfo).setSummary(String.format(getString(R.string.init_brouter_directory_additionalinfo), Folder.BROUTER_TILES_SUBPATH));
-        
+        getPreference(R.string.pref_useInternalRouting).setOnPreferenceChangeListener(((preference, newValue) -> {
+            updateRoutingPrefs(!Settings.useInternalRouting());
+            return true;
+        }));
+        updateRoutingPrefs(Settings.useInternalRouting());
+
         getPreference(R.string.pref_bigSmileysOnMap).setOnPreferenceChangeListener((preference, newValue) -> {
             setResult(RESTART_NEEDED);
             return true;
@@ -549,6 +552,13 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             RenderThemeHelper.changeSyncSetting(this, (newValue instanceof Boolean) ? ((Boolean) newValue).booleanValue() : false, changedValue -> {
                 ((CheckBoxPreference) getPreference(R.string.pref_renderthemefolder_synctolocal)).setChecked(changedValue);
         }));
+    }
+
+    private void updateRoutingPrefs(final boolean useInternalRouting) {
+        final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(getString(R.string.package_brouter));
+        getPreference(R.string.pref_fakekey_brouterDistanceThresholdTitle).setEnabled(anyRoutingAvailable);
+        getPreference(R.string.pref_brouterDistanceThreshold).setEnabled(anyRoutingAvailable);
+        getPreference(R.string.pref_brouterShowBothDistances).setEnabled(anyRoutingAvailable);
     }
 
     private void initGeoDirPreferences() {
