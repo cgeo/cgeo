@@ -11,6 +11,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_STRING;
@@ -170,12 +171,24 @@ public class BackupUtils {
                 }
             }
 
+            // same for files
+            final ArrayList<ImmutableTriple<PersistableUri, String, String>> currentUriValues = new ArrayList<>();
+            final ArrayList<ImmutablePair<PersistableUri, String>> unsetUris = new ArrayList<>();
+            for (PersistableUri uri : PersistableUri.values()) {
+                final String value = Settings.getPersistableUriRaw(uri);
+                if (value != null) {
+                    currentUriValues.add(new ImmutableTriple<>(uri, activityContext.getString(uri.getPrefKeyId()), value));
+                } else {
+                    unsetUris.add(new ImmutablePair<>(uri, activityContext.getString(uri.getPrefKeyId())));
+                }
+            }
+
             boolean restartNeeded = false;
             if (settings) {
                 if (!resultString.isEmpty()) {
                     resultString += "\n\n";
                 }
-                restartNeeded = restoreSettingsInternal(backupDir, currentFolderValues, unsetFolders);
+                restartNeeded = restoreSettingsInternal(backupDir, currentFolderValues, unsetFolders, currentUriValues, unsetUris);
 
                 if (!restartNeeded) {
                     resultString += activityContext.getString(R.string.init_restore_settings_failed);
@@ -183,8 +196,8 @@ public class BackupUtils {
             }
 
             // check if folder settings changed and request grants, if necessary
-            if (currentFolderValues.size() > 0) {
-                regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, restartNeeded, resultString);
+            if (currentFolderValues.size() > 0 || currentUriValues.size() > 0) {
+                regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
             } else {
                 finishRestoreInternal(activityContext, restartNeeded, resultString);
             }
@@ -197,7 +210,7 @@ public class BackupUtils {
         }
     }
 
-    private void regrantAccess(final Activity activityContext, final ContentStorageActivityHelper contentStorageActivityHelper, final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues, final boolean restartNeeded, final String resultString) {
+    private void regrantAccess(final Activity activityContext, final ContentStorageActivityHelper contentStorageActivityHelper, final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues, final ArrayList<ImmutableTriple<PersistableUri, String, String>> currentUriValues, final boolean restartNeeded, final String resultString) {
         if (currentFolderValues.size() > 0) {
             final ImmutableTriple<PersistableFolder, String, String> current = currentFolderValues.get(0);
             final Folder folderToBeRestored = Folder.fromConfig(current.right);
@@ -209,12 +222,31 @@ public class BackupUtils {
                 (d, v) -> {
                     contentStorageActivityHelper.restorePersistableFolder(current.left, current.left.getUriForFolder(folderToBeRestored), v2 -> {
                         currentFolderValues.remove(0);
-                        regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, restartNeeded, resultString);
+                        regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
                     });
                 },
                 d2 -> {
                     currentFolderValues.remove(0);
-                    regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, restartNeeded, resultString);
+                    regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
+                });
+        } else if (currentUriValues.size() > 0) {
+            final Uri uriToBeRestored = Uri.parse(currentUriValues.get(0).right);
+            final String temp = uriToBeRestored.getPath();
+            final String displayName = temp.substring(temp.lastIndexOf('/') + 1);
+
+            Dialogs.confirm(activityContext,
+                activityContext.getString(R.string.init_backup_settings_restore),
+                String.format(activityContext.getString(R.string.settings_file_changed), activityContext.getString(currentUriValues.get(0).left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok)),
+                activityContext.getString(android.R.string.ok),
+                (d, v) -> {
+                    contentStorageActivityHelper.restorePersistableUri(PersistableUri.TRACK, uriToBeRestored, v2 -> {
+                        currentUriValues.remove(0);
+                        regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
+                    });
+                },
+                d2 -> {
+                    currentUriValues.remove(0);
+                    regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
                 });
         } else {
             finishRestoreInternal(activityContext, restartNeeded, resultString);
@@ -290,7 +322,7 @@ public class BackupUtils {
      */
 
     // returns true on success
-    private boolean restoreSettingsInternal(final Folder backupDir, final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues, final ArrayList<ImmutablePair<PersistableFolder, String>> unsetFolders) {
+    private boolean restoreSettingsInternal(final Folder backupDir, final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues, final ArrayList<ImmutablePair<PersistableFolder, String>> unsetFolders, final ArrayList<ImmutableTriple<PersistableUri, String, String>> currentUriValues, final ArrayList<ImmutablePair<PersistableUri, String>> unsetUris) {
         try {
             // open file
             final InputStream file = ContentStorage.get().openForRead(getSettingsFile(backupDir).uri);
@@ -345,6 +377,9 @@ public class BackupUtils {
                             if (type == TYPE_STRING) {
                                 // check for persistable folder settings
                                 handled = checkForFolderSetting(currentFolderValues, unsetFolders, key, value);
+                                if (!handled) {
+                                    handled = checkForUriSetting(currentUriValues, unsetUris, key, value);
+                                }
                             }
                             if (!handled) {
                                 SettingsUtils.putValue(editor, type, key, value);
@@ -399,6 +434,33 @@ public class BackupUtils {
         }
 
         // no folder-related setting found
+        return false;
+    }
+
+    private boolean checkForUriSetting(final ArrayList<ImmutableTriple<PersistableUri, String, String>> currentUriValues, final ArrayList<ImmutablePair<PersistableUri, String>> unsetUris, final String key, final String value) {
+        // check if persistable uri settings differ
+        for (int i = 0; i < currentUriValues.size(); i++) {
+            final ImmutableTriple<PersistableUri, String, String> current = currentUriValues.get(i);
+            if (current.middle.equals(key)) {
+                if (!current.right.equals(value)) {
+                    currentUriValues.add(new ImmutableTriple<>(current.left, current.middle, value));
+                }
+                currentUriValues.remove(i);
+                return true;
+            }
+        }
+
+        // check if this is a uri grant setting for a uri currently not set
+        for (int i = 0; i < unsetUris.size(); i++) {
+            final ImmutablePair<PersistableUri, String> current = unsetUris.get(i);
+            if (current.right.equals(key)) {
+                currentUriValues.add(new ImmutableTriple<>(current.left, current.right, value));
+                unsetUris.remove(i);
+                return true;
+            }
+        }
+
+        // no uri-related setting found
         return false;
     }
 

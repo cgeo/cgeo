@@ -1617,6 +1617,15 @@ public class Settings {
         return getString(persistedUri.getPrefKeyId(), getLegacyValue(persistedUri.getPrefKeyId()));
     }
 
+    /**
+     * gets current setting for a persistable uri or null if unset
+     * should be called by BackupUtils.restoreInternal only
+     */
+    @Nullable
+    public static String getPersistableUriRaw(@NonNull final PersistableUri uri) {
+        return getString(uri.getPrefKeyId(), null);
+    }
+
     private static String getLegacyValue(final int keyId) {
         for (String legacyKey : getLegacyPreferenceKeysFor(keyId)) {
             final String value = getStringDirect(legacyKey, null);

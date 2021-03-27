@@ -159,7 +159,10 @@ public class ContentStorageActivityHelper {
         selectFilesInternal(persistedDocUri.getMimeType(), persistedDocUri.getUri(), REQUEST_CODE_SELECT_FILE_PERSISTED, persistedDocUri, callback);
     }
 
-
+    /** Simplified form of selectPersistableUri used on settings' restore */
+    public void restorePersistableUri(final PersistableUri persistableUri, final Uri newUri, final Consumer<Uri> callback) {
+        selectFilesInternal(persistableUri.getMimeType(), newUri, REQUEST_CODE_SELECT_FILE_PERSISTED, persistableUri, callback);
+    }
 
     /** You MUST include in {@link Activity#onActivityResult(int, int, Intent)} of using Activity */
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent intent) {

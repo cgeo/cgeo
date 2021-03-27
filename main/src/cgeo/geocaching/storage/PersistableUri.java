@@ -5,27 +5,35 @@ import cgeo.geocaching.settings.Settings;
 
 import android.net.Uri;
 
-import androidx.annotation.AnyRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 /** Enum listing all single-document-Uris which can be persisted */
 public enum PersistableUri {
 
-    TRACK(R.string.pref_persistableuri_track, null);
-    //INDIVIDUAL_ROUTE(R.string.pref_persisteduri_individual_route, null);
+    TRACK(R.string.pref_persistableuri_track, R.string.persistableuri_track, null);
 
-    @AnyRes
+    @StringRes
     private final int prefKeyId;
+    @StringRes
+    private final int nameKeyId;
     private final String mimeType;
 
 
-    PersistableUri(@AnyRes final int prefKeyId, final String mimeType) {
+    PersistableUri(@StringRes final int prefKeyId, @StringRes final int nameKeyId, final String mimeType) {
         this.prefKeyId = prefKeyId;
+        this.nameKeyId = nameKeyId;
         this.mimeType = mimeType;
     }
 
+    @StringRes
     public int getPrefKeyId() {
         return this.prefKeyId;
+    }
+
+    @StringRes
+    public int getNameKeyId() {
+        return nameKeyId;
     }
 
     public String getMimeType() {
@@ -34,7 +42,7 @@ public enum PersistableUri {
 
     public Uri getUri() {
         final String uriString = Settings.getPersistableUri(this);
-        return uriString == null ? null : Uri.parse(Settings.getPersistableUri(this));
+        return uriString == null ? null : Uri.parse(uriString);
     }
 
     public boolean hasValue() {
