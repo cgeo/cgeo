@@ -69,6 +69,7 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
 
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
         mapBase.onSaveInstanceState(outState);
     }
 
