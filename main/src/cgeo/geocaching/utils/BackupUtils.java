@@ -212,7 +212,10 @@ public class BackupUtils {
                         regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, restartNeeded, resultString);
                     });
                 },
-                d2 -> finishRestoreInternal(activityContext, restartNeeded, resultString));
+                d2 -> {
+                    currentFolderValues.remove(0);
+                    regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, restartNeeded, resultString);
+                });
         } else {
             finishRestoreInternal(activityContext, restartNeeded, resultString);
         }

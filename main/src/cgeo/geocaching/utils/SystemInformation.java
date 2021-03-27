@@ -203,7 +203,7 @@ public final class SystemInformation {
         final List<UriPermission> uriPerms = context.getContentResolver().getPersistedUriPermissions();
         body.append("\n- Persisted Uri Permissions: #").append(uriPerms.size());
         for (UriPermission uriPerm : uriPerms) {
-            body.append("\n- ").append(UriUtils.uriPermissionToString(uriPerm));
+            body.append("\n  - ").append(UriUtils.uriPermissionToString(uriPerm));
         }
     }
 

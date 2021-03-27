@@ -32,6 +32,7 @@ import androidx.core.util.Consumer;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -75,7 +76,9 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
 
     private static final String ZIP_THEME_SEPARATOR = ":";
 
+    private static final int ZIP_FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5 MB
     private static final int ZIP_RESOURCE_READ_LIMIT = 1024 * 1024; // 1 MB
+
     private static final long FILESYNC_MAX_FILESIZE = 5 * 1024 * 1024; //5MB
 
     private  static final Object availableThemesMutex = new Object();
@@ -192,9 +195,13 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                 //always cache the last used ZipResourceProvider. Check if current one can be reused, if not then reload
                 synchronized (cachedZipMutex) {
                     if (cachedZipProvider == null || !themeIdTokens[0].equals(cachedZipProviderFilename)) {
-                        //reload
-                        cachedZipProvider = new ZipXmlThemeResourceProvider(new ZipInputStream(ContentStorage.get().openForRead(theme.fileInfo.uri)), ZIP_RESOURCE_READ_LIMIT);
-                        cachedZipProviderFilename = themeIdTokens[0];
+                        if (theme.fileInfo.size > ZIP_FILE_SIZE_LIMIT) {
+                            cachedZipProvider = null;
+                            cachedZipProviderFilename = null;
+                        } else {
+                            cachedZipProvider = new ZipXmlThemeResourceProvider(new ZipInputStream(ContentStorage.get().openForRead(theme.fileInfo.uri)), ZIP_RESOURCE_READ_LIMIT);
+                            cachedZipProviderFilename = themeIdTokens[0];
+                        }
                     }
                     xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
                 }
@@ -413,9 +420,9 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                 final String themeId = prefix + candidate.name;
                 themes.add(new ThemeData(themeId, toUserDisplayableName(candidate, null), candidate, dir));
 
-            } else if (candidate.name.endsWith(".zip")) {
-                try {
-                    for (String zipXmlTheme : ZipXmlThemeResourceProvider.scanXmlThemes(new ZipInputStream(ContentStorage.get().openForRead(candidate.uri)))) {
+            } else if (candidate.name.endsWith(".zip") && candidate.size <= ZIP_FILE_SIZE_LIMIT) {
+                try (InputStream is = ContentStorage.get().openForRead(candidate.uri)) {
+                    for (String zipXmlTheme : ZipXmlThemeResourceProvider.scanXmlThemes(new ZipInputStream(is))) {
                         final String themeId = prefix + candidate.name + ZIP_THEME_SEPARATOR + zipXmlTheme;
                         themes.add(new ThemeData(themeId, toUserDisplayableName(candidate, zipXmlTheme), candidate, dir));
                     }
