@@ -201,7 +201,6 @@
     <string name="err_tb_display">c:geo无法展示你想要的可跟踪物。它真是是一个可跟踪物吗？</string>
     <string name="err_tb_details_open">c:geo 无法打开可追踪物详情。</string>
     <string name="err_tb_not_loggable">该可追踪物的日志功能不可用。</string>
-    <string name="err_tb_find">c:geo 找不到可追踪物</string>
     <string name="err_tb_find_that">c:geo 找不到那个可追踪物。</string>
     <string name="err_waypoint_cache_unknown">c:geo 不知道您想要添加航点到哪个藏点。</string>
     <string name="err_waypoint_add_failed">c:geo 无法添加您的航点。</string>
@@ -727,7 +726,7 @@
     <string name="settings_title_proximityNotification">接近时通知</string>
     <!-- map sources -->
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
@@ -795,7 +794,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->
