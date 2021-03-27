@@ -173,7 +173,6 @@
     <string name="err_tb_display">c:geo לא יכול להציג את הTrackable שרצית. האם הוא באמת Trackable?</string>
     <string name="err_tb_details_open">c:geo לא יכול לפתוח את פרטי הTrackable.</string>
     <string name="err_tb_not_loggable">Trackable זה אינו ניתן לרישום.</string>
-    <string name="err_tb_find">c:geo לא מצליח למצוא Trackable</string>
     <string name="err_tb_find_that">c:geo לא מצליח למצוא את הTrackable הזה.</string>
     <string name="err_waypoint_cache_unknown">c:geo לא יודע לאיזה מטמון ניסית להוסיף נקודת דרך.</string>
     <string name="err_waypoint_add_failed">c:geo כשל בהוספת נקודת הדרך שלך.</string>
@@ -425,7 +424,7 @@
     <!-- map sources -->
     <string name="init_sendToCgeo_registering">Registering your device for send2cgeo&#8230;</string>
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
@@ -521,7 +520,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->
