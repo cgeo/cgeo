@@ -22,7 +22,6 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -537,10 +536,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initMapPreferences() {
-        getPreference(R.string.pref_useInternalRouting).setOnPreferenceChangeListener(((preference, newValue) -> {
+        getPreference(R.string.pref_useInternalRouting).setOnPreferenceChangeListener((preference, newValue) -> {
             updateRoutingPrefs(!Settings.useInternalRouting());
             return true;
-        }));
+        });
         updateRoutingPrefs(Settings.useInternalRouting());
 
         getPreference(R.string.pref_bigSmileysOnMap).setOnPreferenceChangeListener((preference, newValue) -> {

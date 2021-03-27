@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.storage.Folder.CGEO_PRIVATE_FILES;
 import static cgeo.geocaching.storage.Folder.DOCUMENTS_FOLDER_DEPRECATED;
-import static cgeo.geocaching.storage.Folder.LEGACY_BROUTER_TILES;
 import static cgeo.geocaching.storage.Folder.LEGACY_CGEO_PUBLIC_ROOT;
 
 import android.content.Context;
