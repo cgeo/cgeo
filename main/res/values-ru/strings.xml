@@ -801,7 +801,7 @@
     <string name="contentstorage_err_write_failed">Файл \'%s\' не может быть записан</string>
     <string name="contentstorage_err_create_failed">Файл \'%1$s\' в \'%2$s\' не может быть создан</string>
     <string name="contentstorage_err_delete_failed">Файл \'%s\' не может быть удален</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Пользовательская</string>
     <string name="persistablefolder_usertype_default">По умолчанию</string>
     <string name="persistablefolder_pickfolder">Выбрать папку</string>
