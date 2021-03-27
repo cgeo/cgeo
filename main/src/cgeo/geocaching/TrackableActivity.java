@@ -92,6 +92,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private ProgressDialog waitDialog = null;
     private CharSequence clickedItemText = null;
     private ImagesList imagesList = null;
+    private String fallbackKeywordSearch = null;
     private final CompositeDisposable createDisposables = new CompositeDisposable();
     private final CompositeDisposable geoDataDisposable = new CompositeDisposable();
     private static final GeoDirHandler locationUpdater = new GeoDirHandler() {
@@ -128,6 +129,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             geocache = extras.getString(Intents.EXTRA_GEOCACHE);
             brand = TrackableBrand.getById(extras.getInt(Intents.EXTRA_BRAND));
             trackingCode = extras.getString(Intents.EXTRA_TRACKING_CODE);
+            fallbackKeywordSearch = extras.getString(Intents.EXTRA_KEYWORD);
         }
 
         // try to get data from URI
@@ -289,10 +291,14 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         if (trackable == null) {
             Dialogs.dismiss(waitDialog);
 
-            if (StringUtils.isNotBlank(geocode)) {
-                showToast(res.getString(R.string.err_tb_find) + " " + geocode + ".");
+            if (fallbackKeywordSearch != null) {
+                CacheListActivity.startActivityKeyword(this, fallbackKeywordSearch);
             } else {
-                showToast(res.getString(R.string.err_tb_find_that));
+                if (StringUtils.isNotBlank(geocode)) {
+                    showToast(res.getString(R.string.err_tb_find) + " " + geocode + ".");
+                } else {
+                    showToast(res.getString(R.string.err_tb_find_that));
+                }
             }
 
             finish();
