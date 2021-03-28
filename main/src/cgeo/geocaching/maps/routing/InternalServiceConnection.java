@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.routing;
 
+import cgeo.geocaching.brouter.IInternalRoutingService;
+
 import android.content.ComponentName;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -7,18 +9,16 @@ import android.os.RemoteException;
 
 import androidx.annotation.Nullable;
 
-import btools.routingapp.IBRouterService;
+public class InternalServiceConnection extends AbstractServiceConnection {
 
-public class BRouterServiceConnection extends AbstractServiceConnection {
-
-    BRouterServiceConnection (final @Nullable Runnable onServiceConnectedCallback) {
+    InternalServiceConnection (final @Nullable Runnable onServiceConnectedCallback) {
         super(onServiceConnectedCallback);
     }
 
     @Override
     public void onServiceConnected(final ComponentName className, final IBinder service) {
         super.onServiceConnected(className, service);
-        routingService = IBRouterService.Stub.asInterface(service);
+        routingService = IInternalRoutingService.Stub.asInterface(service);
     }
 
     @Override
@@ -28,9 +28,10 @@ public class BRouterServiceConnection extends AbstractServiceConnection {
         }
 
         try {
-            return ((IBRouterService) routingService).getTrackFromParams(params);
+            return ((IInternalRoutingService) routingService).getTrackFromParams(params);
         } catch (final RemoteException e) {
             return null;
         }
     }
+
 }

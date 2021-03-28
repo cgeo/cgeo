@@ -11,9 +11,9 @@ import android.os.IBinder;
 
 import java.util.ArrayList;
 
-public class BRouterService extends Service {
+public class InternalRoutingService extends Service {
 
-    private final IBRouterService.Stub myBRouterServiceStub = new IBRouterService.Stub() {
+    private final IInternalRoutingService.Stub myBRouterServiceStub = new IInternalRoutingService.Stub() {
         @Override
         public String getTrackFromParams(final Bundle params) {
             final BRouterWorker worker = new BRouterWorker();
