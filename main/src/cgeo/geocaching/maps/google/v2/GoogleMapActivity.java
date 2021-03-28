@@ -19,6 +19,7 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.commons.lang3.StringUtils;
 
+@SuppressLint("MissingSuperCall") // super calls are handled via mapBase (mapBase.onCreate, mapBase.onSaveInstanceState, ...) TODO: Why is it done like that?
 public class GoogleMapActivity extends AppCompatActivity implements MapActivityImpl, FilteredActivity {
 
 
@@ -63,13 +65,11 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
 
     @Override
     protected void onCreate(final Bundle icicle) {
-        super.onCreate(icicle);
         mapBase.onCreate(icicle);
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
-        super.onSaveInstanceState(outState);
         mapBase.onSaveInstanceState(outState);
     }
 
@@ -80,19 +80,16 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mapBase.onDestroy();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         mapBase.onPause();
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         mapBase.onResume();
     }
 
@@ -113,7 +110,6 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
 
     @Override
     protected void onStart() {
-        super.onStart();
         //Target view
         mapBase.targetView = new TargetView((TextView) findViewById(R.id.target), (TextView) findViewById(R.id.targetSupersize), StringUtils.EMPTY, StringUtils.EMPTY);
         final Geocache target = mapBase.getCurrentTargetCache();
@@ -125,7 +121,6 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
 
     @Override
     protected void onStop() {
-        super.onStop();
         mapBase.onStop();
     }
 
