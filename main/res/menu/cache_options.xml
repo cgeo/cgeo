@@ -36,8 +36,13 @@
         android:visible="false">
     </item>
     <item
-        android:id="@+id/menu_set_unfound"
-        android:title="@string/cache_menu_set_unfound"
+        android:id="@+id/menu_set_DNF"
+        android:title="@string/cache_menu_set_DNF"
+        android:visible="false">
+    </item>
+    <item
+        android:id="@+id/menu_reset_foundstate"
+        android:title="@string/cache_menu_reset_foundstate"
         android:visible="false">
     </item>
     <item

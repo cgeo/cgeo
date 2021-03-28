@@ -1128,7 +1128,8 @@
     <string name="cache_menu_event">Add to calendar</string>
     <string name="cache_menu_extract_waypoints">Extract waypoints</string>
     <string name="cache_menu_set_found">Set as found</string>
-    <string name="cache_menu_set_unfound">Set as not yet found</string>
+    <string name="cache_menu_set_DNF">Set as did not find</string>
+    <string name="cache_menu_reset_foundstate">Reset found state</string>
     <string name="cache_foundstate_updated">Found state updated</string>
     <string name="cache_menu_set_cache_icon">Set cache icon</string>
     <string name="cache_icon_updated">Cache icon updated</string>
