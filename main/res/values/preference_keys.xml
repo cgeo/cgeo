@@ -280,6 +280,7 @@
     <string translatable="false" name="pref_localstorage_version">localstorage_version</string>
     <string translatable="false" name="pref_alc_advanced">alc_advanced</string>
     <string translatable="false" name="pref_alc_launcher">alc_launcher</string>
+    <string translatable="false" name="pref_next_unique_notification_id">next_unique_notification_id</string>
 
     <!-- ids for persistable folder prefs -->
     <string translatable="false" name="pref_group_localfilesystem">group_localfilesystem</string>

@@ -233,9 +233,6 @@
     <!-- fileprovider -->
     <string translatable="false" name="file_provider_authority">org.cgeo.fileprovider</string>
 
-    <!-- notification channel -->
-    <string translatable="false" name="notification_channel_id">c:geo notification channel</string>
-
     <!-- link data to WhereYouGo - must be according to WhereYouGo configuration in their AndroidManifest.xml -->
     <string translatable="false" name="whereyougo_action_Mapsforge">"menion.android.whereyougo.maps.mapsforge.MapsforgeActivity"</string>
 

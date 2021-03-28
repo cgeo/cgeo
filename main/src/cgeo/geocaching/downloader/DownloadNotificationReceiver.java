@@ -1,5 +1,6 @@
 package cgeo.geocaching.downloader;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.utils.Log;
@@ -10,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+
+import androidx.core.content.ContextCompat;
 
 class DownloadNotificationReceiver extends BroadcastReceiver {
 
@@ -31,15 +34,14 @@ class DownloadNotificationReceiver extends BroadcastReceiver {
                         switch (status) {
                             case DownloadManager.STATUS_SUCCESSFUL:
                                 PendingDownload.remove(pendingDownload);
-                                final Intent copyFileIntent = new Intent(context, ReceiveDownloadActivity.class);
+                                final Intent copyFileIntent = new Intent(context, ReceiveDownloadService.class);
                                 final Uri uri = downloadManager.getUriForDownloadedFile(pendingDownload);
                                 copyFileIntent.setData(uri);
-                                copyFileIntent.putExtra(ReceiveDownloadActivity.EXTRA_FILENAME, p.getFilename());
+                                copyFileIntent.putExtra(Intents.EXTRA_FILENAME, p.getFilename());
                                 copyFileIntent.putExtra(DownloaderUtils.RESULT_CHOSEN_URL, p.getRemoteUrl());
                                 copyFileIntent.putExtra(DownloaderUtils.RESULT_DATE, p.getDate());
                                 copyFileIntent.putExtra(DownloaderUtils.RESULT_TYPEID, p.getOfflineMapTypeId());
-                                copyFileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                context.startActivity(copyFileIntent);
+                                ContextCompat.startForegroundService(context, copyFileIntent);
                                 Log.d("download #" + pendingDownload + " successful");
                                 break;
                             case DownloadManager.STATUS_FAILED:

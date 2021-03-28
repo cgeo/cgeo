@@ -2126,10 +2126,15 @@
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
     <string name="number_input_err_format">Invalid number format</string>
 
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo notifications</string>
-    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
-    <string name="proximity_notification_title">c:geo proximity notification</string>
+    <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">proximity notifications</string>
+    <string name="notification_channel_proximity_description">used for displaying nearby caches</string>
+    <string name="notification_channel_foreground_name">foreground service</string>
+    <string name="notification_channel_foreground_description">notification is shown while c:geo is doing background work</string>
+    <string name="notification_channel_downloader_name">c:geo downloader</string>
+    <string name="notification_channel_downloader_description">result notifications for downloads (e.g. offline maps)</string>
+    <string name="notification_proximity_title">c:geo proximity notification</string>
+    <string name="notification_download_receiver_title">Importing download</string>
 
     <!-- individual routes -->
     <string name="individual_route">Individual route</string>

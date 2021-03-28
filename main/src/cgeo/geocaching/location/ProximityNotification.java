@@ -3,24 +3,21 @@ package cgeo.geocaching.location;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.TextFactory;
+import cgeo.geocaching.ui.notifications.NotificationChannels;
+import cgeo.geocaching.ui.notifications.Notifications;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 public class ProximityNotification implements Parcelable {
 
-    protected static final int NOTIFICATION_ID = 4711;
     protected static final int PROXIMITY_NOTIFICATION_MAX_DISTANCE = Settings.getKeyInt(R.integer.proximitynotification_distance_max);
 
     // notification types - correspond to @string/pref_value_pn_xxx
@@ -124,38 +121,26 @@ public class ProximityNotification implements Parcelable {
     public void setTextNotifications(final Context context) {
         useTextNotifications = context != null && Settings.isProximityNotificationTypeText();
         this.context = context;
-        // Create the NotificationChannel (needed for API 26+)
-        if (useTextNotifications && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            final NotificationChannel channel = new NotificationChannel(context.getString(R.string.notification_channel_id), context.getString(R.string.notification_channel_name), NotificationManager.IMPORTANCE_HIGH);
-            channel.setDescription(context.getString(R.string.notification_channel_description));
-            final NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
     }
 
     // show a single text notification
     protected void showNotification(final boolean near, final String notification) {
         if (useTextNotifications) {
-            final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.notification_channel_id))
+            final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NotificationChannels.PROXIMITY_NOTIFICATION.name())
                 .setSmallIcon(near ? R.drawable.proximity_notification_near : R.drawable.proximity_notification_far)
-                .setContentTitle(context.getString(R.string.proximity_notification_title))
+                .setContentTitle(context.getString(R.string.notification_proximity_title))
                 .setContentText(notification)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(notification))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-            final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-            if (null != notificationManager && null != builder) {
-                notificationManager.notify(NOTIFICATION_ID, builder.build());
-            }
+
+            Notifications.getNotificationManager(context).notify(Notifications.ID_PROXIMITY_NOTIFICATION, builder.build());
         }
     }
 
-    // cancel all text notifications
-    public void clearNotifications() {
-        final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        if (null != notificationManager) {
-            notificationManager.cancelAll();
-        }
+    // cancel proximity notification notification
+    private void clearNotification() {
+        Notifications.getNotificationManager(context).cancel(Notifications.ID_PROXIMITY_NOTIFICATION);
     }
 
     private void resetValues() {
@@ -206,7 +191,7 @@ public class ProximityNotification implements Parcelable {
 
         // clear old text notification, if too far away
         if (useTextNotifications && (meters > distanceFar)) {
-            clearNotifications();
+            clearNotification();
         }
 
         // are we disapproaching our target?

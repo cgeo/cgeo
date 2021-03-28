@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 
@@ -52,6 +53,9 @@ public class CgeoApplication extends Application {
         showOverflowMenu();
 
         initApplicationLocale();
+
+        // initialize cgeo notification channels
+        NotificationChannels.createNotificationChannels(this);
 
         // ensure initialization of lists
         DataStore.getLists();
@@ -111,7 +115,7 @@ public class CgeoApplication extends Application {
     }
 
     /**
-     * Enforce language to be English if the user decided so.
+     * Enforce a specific language if the user decided so.
      */
     private void initApplicationLocale() {
         final Configuration config = new Configuration();
