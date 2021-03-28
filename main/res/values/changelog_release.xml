@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>2021.03.22-RC (Beta):</h1>
+<h1>2021.03.28-RC (Beta):</h1>
 
 <h3>
 We had to do extensive changes to the way c:geo gets access to your file system (e.g. for storing data, reading offline maps) to be prepared for requirements on new Android versions.
