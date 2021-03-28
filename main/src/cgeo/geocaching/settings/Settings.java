@@ -34,6 +34,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
+import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -1839,6 +1840,12 @@ public class Settings {
 
     public static boolean getUseCustomTabs() {
         return getBoolean(R.string.pref_customtabs_as_browser, false);
+    }
+
+    public static int getUniqueNotificationId() {
+        final int id = getInt(R.string.pref_next_unique_notification_id, Notifications.UNIQUE_ID_RANGE_START);
+        putInt(R.string.pref_next_unique_notification_id, id + 1);
+        return id;
     }
 
     public static int getLocalStorageVersion() {

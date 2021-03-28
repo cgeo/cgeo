@@ -54,6 +54,7 @@ public class Intents {
     public static final String EXTRA_MAP_FILE = PREFIX + "map_file";
     public static final String EXTRA_GPX_FILE = PREFIX + "gpx_file";
     public static final String EXTRA_NAME = PREFIX + "name";
+    public static final String EXTRA_FILENAME = "filename";
     public static final String EXTRA_SEARCH = PREFIX + "search";
     public static final String EXTRA_START_DIR = PREFIX + "start_dir";
     public static final String EXTRA_SELECTDIR = PREFIX + "selectDir";

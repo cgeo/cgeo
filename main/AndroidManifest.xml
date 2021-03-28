@@ -9,6 +9,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -875,7 +877,6 @@
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
         <activity android:name=".downloader.DownloadConfirmationActivity" android:exported="false" />
-        <activity android:name=".downloader.ReceiveDownloadActivity" />
         <activity
             android:name="cgeo.geocaching.downloader.DownloadSelectorActivity"
             android:label="@string/download_title"
@@ -923,6 +924,8 @@
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
+
+        <service android:name=".downloader.ReceiveDownloadService" />
 
         <!-- Receiver for custom tabs share intent -->
         <receiver android:name=".settings.ShareBroadcastReceiver"/>

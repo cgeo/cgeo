@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.downloader.ReceiveDownloadActivity;
+import cgeo.geocaching.downloader.ReceiveDownloadService;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -10,6 +10,8 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
 
 public class HandleLocalFilesActivity extends AbstractActivity {
 
@@ -33,7 +35,7 @@ public class HandleLocalFilesActivity extends AbstractActivity {
                 finished = true;
                 break;
             case MAP:
-                continueWith(ReceiveDownloadActivity.class, intent);
+                continueWithForegroundService(ReceiveDownloadService.class, intent);
                 finished = true;
                 break;
             default:
@@ -48,6 +50,13 @@ public class HandleLocalFilesActivity extends AbstractActivity {
         final Intent forwarder = new Intent(intent);
         forwarder.setClass(this, clazz);
         startActivity(forwarder);
+        finish();
+    }
+
+    private void continueWithForegroundService(@SuppressWarnings("rawtypes") final Class clazz, final Intent intent) {
+        final Intent forwarder = new Intent(intent);
+        forwarder.setClass(this, clazz);
+        ContextCompat.startForegroundService(this, intent);
         finish();
     }
 
