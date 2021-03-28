@@ -219,7 +219,7 @@ public final class Routing {
         }
 
         // missing routing data?
-        if (gpx.startsWith("datafile ") && gpx.endsWith(" not found") && Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy()) {
+        if (gpx.startsWith("datafile ") && gpx.endsWith(" not found") && Settings.useInternalRouting() && Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy()) {
             synchronized (requestedTileFiles) {
                 String filename = gpx.substring(9);
                 final int pos = filename.indexOf(" ");
