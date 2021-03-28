@@ -742,7 +742,7 @@
             android:label="@string/tts_service" >
         </service>
         <service
-            android:name=".brouter.BRouterService"
+            android:name=".brouter.InternalRoutingService"
             android:exported="false"
             android:enabled="true"
             android:process=":brouter_service">

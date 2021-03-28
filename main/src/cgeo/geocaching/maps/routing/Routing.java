@@ -31,7 +31,7 @@ public final class Routing {
     private static final double UPDATE_MIN_DISTANCE_KILOMETERS = 0.005;
     private static final double MIN_ROUTING_DISTANCE_KILOMETERS = 0.04;
     private static final int UPDATE_MIN_DELAY_SECONDS = 3;
-    private static BRouterServiceConnection brouter;
+    private static AbstractServiceConnection routingServiceConnection;
     private static Geopoint lastDirectionUpdatePoint;
     @Nullable private static Geopoint[] lastRoutingPoints = null;
     private static Geopoint lastDestination;
@@ -66,21 +66,22 @@ public final class Routing {
             REGISTERED_CALLBACKS.put(callbackKey, onServiceConnectedCallback);
         }
 
-        if (brouter != null && brouter.isConnected()) {
+        if (routingServiceConnection != null && routingServiceConnection.isConnected()) {
             //already connected
             return;
         }
 
-        brouter = new BRouterServiceConnection(SERVICE_CONNECTED_CALLBACK);
         final Intent intent = new Intent();
         if (Settings.useInternalRouting()) {
-            intent.setClassName("cgeo.geocaching", "cgeo.geocaching.brouter.BRouterService");
+            routingServiceConnection = new InternalServiceConnection(SERVICE_CONNECTED_CALLBACK);
+            intent.setClassName("cgeo.geocaching", "cgeo.geocaching.brouter.InternalRoutingService");
         } else {
+            routingServiceConnection = new BRouterServiceConnection(SERVICE_CONNECTED_CALLBACK);
             intent.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
         }
 
-        if (!getContext().bindService(intent, brouter, Context.BIND_AUTO_CREATE)) {
-            brouter = null;
+        if (!getContext().bindService(intent, routingServiceConnection, Context.BIND_AUTO_CREATE)) {
+            routingServiceConnection = null;
             Log.d("Connecting brouter failed");
         } else {
             Log.d("brouter connected");
@@ -105,9 +106,9 @@ public final class Routing {
 
         if (connectCount <= 0) {
             connectCount = 0;
-            if (brouter != null && brouter.isConnected()) {
-                getContext().unbindService(brouter);
-                brouter = null;
+            if (routingServiceConnection != null && routingServiceConnection.isConnected()) {
+                getContext().unbindService(routingServiceConnection);
+                routingServiceConnection = null;
 
                 Log.d("brouter disconnected");
             }
@@ -125,7 +126,7 @@ public final class Routing {
      */
     @NonNull
     public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination) {
-        if (brouter == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
+        if (routingServiceConnection == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
             return defaultTrack(start, destination);
         }
 
@@ -171,7 +172,7 @@ public final class Routing {
      */
     @NonNull
     public static Geopoint[] getTrackNoCaching(final Geopoint start, final Geopoint destination) {
-        if (brouter == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
+        if (routingServiceConnection == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
             return defaultTrack(start, destination);
         }
 
@@ -210,7 +211,7 @@ public final class Routing {
         params.putDoubleArray("lons", new double[]{start.getLongitude(), dest.getLongitude()});
         params.putString("v", Settings.getRoutingMode().parameterValue);
 
-        final String gpx = brouter == null ? null : brouter.getTrackFromParams(params);
+        final String gpx = routingServiceConnection == null ? null : routingServiceConnection.getTrackFromParams(params);
 
         if (gpx == null) {
             Log.i("brouter returned no data");
@@ -290,7 +291,7 @@ public final class Routing {
     }
 
     public static boolean isAvailable() {
-        return brouter != null;
+        return routingServiceConnection != null;
     }
 
     public static boolean isInstalled() {
