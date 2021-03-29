@@ -577,7 +577,7 @@
             <cgeo.geocaching.settings.InfoPreference
                 android:text="@string/settings_info_themes"
                 android:title="@string/settings_info_themes_title"
-                app:url="@string/manual_url_settings_themes"
+                app:url="@string/faq_url_settings_themes"
                 app:urlButton="@string/settings_goto_url_button" />
             <Preference
                 android:key="@string/pref_persistablefolder_offlinemapthemes"
