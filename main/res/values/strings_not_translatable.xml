@@ -158,6 +158,7 @@
     · OpenStreetMap cartography (OSM:Mapnik) © OpenStreetMap contributors. Map tile data <a href="http://www.openstreetmap.org/copyright/en">licensed</a> under Creative Commons 2.0 BY-SA.\n
     · More maps based on OpenStreetMap cartography: © <a href="https://www.openstreetmap.de/">openstreetmap.de</a> and © <a href="https://www.cyclosm.org/">cyclosm.org</a>.\n
     · Map Downloader supports maps from <a href="https://github.com/mapsforge">Mapsforge</a> and <a href="https://www.openandromaps.org">OpenAndroMaps</a>.\n
+    · Routing © 2019 BRouter contributors (<a href="https://github.com/abrensch/brouter/blob/master/LICENSE">MIT license</a>)\n
 	</string>
 
     <!-- cache details -->
