@@ -1019,6 +1019,8 @@
     <string name="menu_caches">Gérer les caches</string>
     <string name="cache_menu_event">Ajouter à l\'agenda</string>
     <string name="cache_menu_extract_waypoints">Extraire les points de passage</string>
+    <string name="cache_menu_set_found">Marquer comme trouvée</string>
+    <string name="cache_menu_set_DNF">Marquer comme non trouvée</string>
     <string name="cache_menu_set_cache_icon">Définir l\'icône de la cache</string>
     <string name="cache_icon_updated">Icône cache mis à jour</string>
     <string name="cache_menu_details">Détails</string>
