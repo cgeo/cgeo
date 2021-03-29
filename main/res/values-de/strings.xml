@@ -204,6 +204,7 @@
     <string name="err_tb_display">c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
     <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
     <string name="err_tb_not_loggable">Dieser Trackable ist nicht logbar.</string>
+    <string name="err_tb_not_found">c:geo konnte keine Trackable %s finden.</string>
     <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
     <string name="err_waypoint_cache_unknown">c:geo weiß nicht, zu welchem Cache der Wegpunkt hinzugefügt werden soll.</string>
     <string name="err_waypoint_add_failed">c:geo konnte den Wegpunkt nicht hinzufügen.</string>
@@ -458,6 +459,8 @@
     <string name="settings_title_map">Karte</string>
     <string name="settings_summary_map">Konfiguriere Kartenquellen, Offline-Karten und Kartendetails.</string>
     <string name="settings_title_map_data">Kartendaten</string>
+    <string name="settings_title_offline_routing">Offline-Routing</string>
+    <string name="settings_summary_offline_routing">Offline-Routing ist verfügbar, wenn entweder die Helfer-App \"BRouter\" installiert und konfiguriert ist oder das interne Routing aktiviert ist.</string>
     <string name="settings_title_map_rotation">Kartendrehung (Google Maps)</string>
     <string name="settings_title_waypoints">Wegpunkte</string>
     <string name="settings_title_map_content">Karteninhalt</string>
@@ -568,8 +571,12 @@
     <string name="init_brouterThreshold">Routenberechnung</string>
     <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher BRouter (falls installiert) eine Route berechnet.</string>
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
+    <string name="init_brouterAutoTileDownloads">Automatisch herunterladen</string>
+    <string name="init_brouterAutoTileDownloads_description">Fehlende Routingdaten automatisch zum Herunterladen anbieten.</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
     <string name="init_summary_brouterShowBothDistances">Wenn Wegführung aktiv ist: Zeigt neben der berechneten Routenlänge die Entfernung in Luftlinie an.</string>
+    <string name="init_useInternalRouting">Internes Routing verwenden</string>
+    <string name="init_summary_useInternalRouting">Benutze c:geo internes Routing, um automatisch Routing-Daten herunterzuladen und aktualisieren zu können</string>
     <string name="init_bigSmileysOnMap">Große Symbole für geloggte Caches</string>
     <string name="init_summary_bigSmileysOnMap">Wenn aktiviert, werden große Emoticons für geloggte Caches auf der Karte anstatt des Cache-Typs angezeigt (Neustart erforderlich).</string>
     <string name="init_disabled">Deaktivierte ausblenden</string>
@@ -648,6 +655,8 @@
     <string name="init_backup_settings_restore">Einstellungen wiederherstellen</string>
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
+    <string name="settings_folder_changed">Ordner \"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diesen Ordner zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Ordnereinstellung zu behalten.</string>
+    <string name="settings_file_changed">\"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diese Datei zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Einstellung zu behalten.</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo unterstützt Karten für Offline-Nutzung. Du kannst Karten von verschiedenen Anbietern beziehen oder sogar eigene Karten erstellen (aus OSM-Daten). Du musst zuerst den Ordner auswählen, in dem Offline-Karten gespeichert werden sollen.</string>
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
@@ -656,6 +665,9 @@
     <string name="init_local_file_system">Lokales Dateisystem</string>
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>
     <string name="init_map_directory_description">Ordner mit Offline-Karten</string>
+    <string name="init_brouter_directory_description">Ordner mit BRouter Routing-Daten</string>
+    <string name="init_brouter_updateinterval_title">Aktualisierungsintervall</string>
+    <string name="init_brouter_updateinterval_description">Erinnert dich alle x Tage an eine Update-Prüfung</string>
     <string name="init_gpx_importexportdir">GPX-Ordner</string>
     <string name="init_dataDir">Datenordner wählen</string>
     <string name="init_dataDir_note">Du kannst auswählen, ob du die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf deinem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) speichern möchtest.</string>
@@ -829,6 +841,9 @@
     <string name="persistablefolder_logfiles">Logdateien</string>
     <string name="persistablefolder_fieldnotes">Feldnotizen</string>
     <string name="persistablefolder_spoilerimages">Hinweisbilder</string>
+    <string name="persistablefolder_routingbase">Routing</string>
+    <string name="persistablefolder_routingtiles">Routingdaten</string>
+    <string name="persistableuri_track">Trackdatei</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fertig</string>
     <string name="folder_process_status_currentfile">Prozess %1$s</string>
@@ -1019,6 +1034,10 @@
     <string name="menu_caches">Caches verwalten</string>
     <string name="cache_menu_event">Zum Kalender hinzufügen</string>
     <string name="cache_menu_extract_waypoints">Extrahiere Wegpunkte</string>
+    <string name="cache_menu_set_found">Als gefunden setzen</string>
+    <string name="cache_menu_set_DNF">Als nicht gefunden setzen</string>
+    <string name="cache_menu_reset_foundstate">Fundstatus zurücksetzen</string>
+    <string name="cache_foundstate_updated">Fundstatus aktualisiert</string>
     <string name="cache_menu_set_cache_icon">Cache-Symbol wählen</string>
     <string name="cache_icon_updated">Cache-Symbol aktualisiert</string>
     <string name="cache_menu_details">Details</string>
@@ -1829,18 +1848,29 @@
     <string name="localfile_title">Eine lokale Datei öffnen</string>
     <string name="localfile_cannot_handle">Fehler beim Lesen der Datei oder c:geo kennt diesen Dateityp nicht.</string>
     <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Datei empfangen</string>
+    <string name="receivedownload_success">Datei erfolgreich als \"%s \" gespeichert</string>
+    <string name="receivedownload_error">Fehler beim Empfangen der Datei</string>
+    <string name="receivedownload_error_io_exception">E/A-Fehler beim Empfangen der Datei. Ist dein Ordner \"%s\" beschreibbar?</string>
+    <string name="receivedownload_error_filenotfound_exception">Zu empfangene Datei nicht gefunden.</string>
     <string name="receivedownload_alreadyexists">Eine Datei mit diesem Namen existiert bereits. Bestehende Datei überschreiben oder neue Datei unter anderem Namen speichern?</string>
     <string name="receivedownload_option_overwrite">Überschreiben</string>
     <string name="receivedownload_option_differentname">Anderer Name</string>
     <string name="receivedownload_kb_copied">%d kB kopiert</string>
+    <string name="receivedownload_cancelled">Dateiübertragung abgebrochen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline-Karte herunterladen</string>
+    <string name="download_title">Datei herunterladen</string>
     <string name="downloadmap_info">Wähle eine Kartendatei für Deine Region aus, indem Du auf das \"Speichern\"-Symbol tippst.\n\nDer Download läuft im Hintergrund. Wenn der Download abgeschlossen ist, wird die heruntergeladene Datei in den Kartenordner von c:geo kopiert und als aktuelle Karte für c:geo gesetzt.\n\nVorsicht: Das Herunterladen einer Karte kann zu hohem Netzwerkverkehr führen!</string>
     <string name="downloadmap_choose">Karte wählen</string>
     <string name="downloadmap_filename">Lade %s</string>
+    <string name="downloadmanager_not_available">Datei kann nicht heruntergeladen werden, System-Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
     <string name="downloadmap_target_not_writable">Das ausgewählte Ziel \"%s\" ist nicht beschreibbar - die heruntergeladene Kartendatei wird im Download-Ordner des Systems gespeichert und muss manuell in den Kartenordner verschoben werden.</string>
     <string name="downloadmap_allow_metered_network">Erlaube Download über getaktetes Netz (z.B.: mobile Verbindung)</string>
+    <string name="download_confirmation">%1$sDatei herunterladen \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Updates gefunden für:\n%1$s\n\nMöchtest du aktualisieren?%2$s</string>
+    <string name="download_warning">Dieser Vorgang kann eine ganze Weile dauern und kann, abhängig von deiner Netzwerkverbindung, zu erheblichen Kosten führen.</string>
     <string name="downloadmap_handling">Das Herunterladen wird vom Download-Manager deines Systems im Hintergrund durchgeführt. Du solltest zu Beginn des Downloads (könnte eine Weile dauern) eine Benachrichtigung sehen.</string>
     <string name="button_continue">Weiter</string>
     <string name="downloadmap_onedirup">(eine Ebene höher)</string>
@@ -1853,11 +1883,17 @@
     <string name="downloadmap_checking_for_updates">Prüfe auf Updates…</string>
     <string name="downloadmap_install_theme_title">Design installieren</string>
     <string name="downloadmap_install_theme_info">Die heruntergeladene Karte erfordert eine spezielles Kartendesign. Möchtest du dieses auch herunterladen?</string>
+    <string name="downloadtile_title">Fehlende Routing-Daten</string>
+    <string name="downloadtile_info">c:geo kann die angeforderte Route nicht berechnen, da einige Routingdaten fehlen. Möchtest du die fehlenden Routingdaten herunterladen?</string>
+    <string name="tileupdate_info">Möchtest du nach Updates der heruntergeladenen Routing-Dateien suchen?</string>
+    <string name="no_updates_found">Keine Aktualisierungen gefunden</string>
+    <string name="updates_check">Prüfe auf Aktualisierungen</string>
     <string name="mapserver_mapsforge_info">Basiskarten, keine Kartendesigns erforderlich</string>
     <string name="mapserver_openandromaps_info">Detaillierte Karten, erfordern Kartendesign \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Detailliertes Kartendesign, passend für \"OpenAndroMaps\"-Karten</string>
     <string name="mapserver_freizeitkarte_info">Detaillierte Karten, benötigen eines der \"Freizeitkarte\"-Designs.</string>
     <string name="mapserver_freizeitkarte_themes_info">Detailliertes Kartendesign, passend für \"Freizeitkarte\"-Karten</string>
+    <string name="brouter_info">Offline Routing-Dienst</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
@@ -1884,6 +1920,11 @@
     <string name="wizard_permissions_intro">c:geo benötigt bestimmte Berechtigungen auf deinem Gerät, um korrekt zu funktionieren.\nIch werde weitere Details in den nächsten Schritten erklären.</string>
     <string name="wizard_permissions_folder_title">Ordner festlegen: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo benötigt einen lokalen Ordner, um Daten wie GPX-Dateien, Backups, Feldnotizen und Logdateien zu speichern. Standardmäßig werden diese Dateien in Ordnern unterhalb eines sog. \"Basisordners\" gespeichert. Wähle oder erstelle einen solchen Ordner im nächsten Schritt.\n\nWenn du c:geo von einer früheren Version aktualisiert hast, wähle den existierenden Ordner \"cgeo\" auf der Grundebene deines Gerätespeichers aus.\nHinweis: Möglicherweise musst du die Anzeige des internen Speichers deines Gerätes zuerst in der Dateiauswahl, die gleich angezeigt wird, aktivieren.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo benötigt einen lokalen Ordner, um Offline-Kartendateien zu speichern.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo benötigt einen lokalen Ordner, um Designs für Offline-Karten zu speichern.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo benötigt einen lokalen Ordner, um GPX-Dateien zu speichern (z.B. zum Importieren / Exportieren von Caches oder Tracks).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Um das automatische Herunterladen von Routingdaten zu ermöglichen, muss der Ordner für Routing-Dateien gesetzt werden.</string>
+    <string name="wizard_select_or_create">Wähle oder erstelle einen solchen Ordner im nächsten Schritt.</string>
     <string name="wizard_platforms_title">Dienste konfigurieren</string>
     <string name="wizard_platforms_intro">Um Geocaches mit c:geo zu finden, benötigst du ein Konto für einen Geocaching-Dienst, der von c:geo unterstützt wird.\nWähle unten den gewünschten Dienst aus, um dich entweder mit deinem bestehenden Konto anzumelden oder ein neues Konto zu erstellen.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
