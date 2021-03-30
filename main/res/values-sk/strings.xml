@@ -204,6 +204,7 @@
     <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
     <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
     <string name="err_tb_not_loggable">Tento TB sa nedá zalogovať.</string>
+    <string name="err_tb_not_found">c:geo nemôže nájsť trasovateľný predmet %s.</string>
     <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
     <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>
     <string name="err_waypoint_add_failed">c:geo nemôže pridať bod trasy.</string>
@@ -460,6 +461,8 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Nastavte zdroj mapy, možnosti offline máp a mapových detailov.</string>
     <string name="settings_title_map_data">Mapové podklady</string>
+    <string name="settings_title_offline_routing">Offline navigácia</string>
+    <string name="settings_summary_offline_routing">Offline navigácia je k dispozícii, ak je nainštalovaná a nakonfigurovaná pomocná aplikácia \"BRouter\", prípadne aj je povolená interná navigácia.</string>
     <string name="settings_title_map_rotation">Otáčanie mapy (Google Mapy)</string>
     <string name="settings_title_waypoints">Body trasy</string>
     <string name="settings_title_map_content">Obsah máp</string>
@@ -570,8 +573,12 @@
     <string name="init_brouterThreshold">Vypočítať trasu</string>
     <string name="init_brouterThreshold_description">Maximálna vzdialenosť, do ktorej pomocná aplikácia BRouter (ak je nainštalovaná) vypočíta trasu.</string>
     <string name="init_brouterShowBothDistances">Zobraziť priamu vzdialenosť</string>
+    <string name="init_brouterAutoTileDownloads">Automaticky prevziať</string>
+    <string name="init_brouterAutoTileDownloads_description">Automatická ponuka prevziať chýbajúce údaje pre oblasť navigácie.</string>
     <string name="brouter_recalculating">Trasa sa prepočítava na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Ak je trasovanie aktívne: zobraziť priamu vzdialenosť okrem vypočítanej dĺžky trasy.</string>
+    <string name="init_useInternalRouting">Použiť internú navigáciu</string>
+    <string name="init_summary_useInternalRouting">Použitie internej navigácie c:geo, aby bolo možné využívať automatické preberanie údajov navigácie a aktualizáciu</string>
     <string name="init_bigSmileysOnMap">Veľké ikony pre zalogované kešky</string>
     <string name="init_summary_bigSmileysOnMap">Ak je to povolené, pre zalogované kešky sa na mape zobrazujú veľké ikony namiesto ikony typu kešky (vyžaduje reštart).</string>
     <string name="init_disabled">Nezobrazovať deaktivované</string>
@@ -650,6 +657,8 @@
     <string name="init_backup_settings_restore">Obnoviť nastavenia</string>
     <string name="settings_readingerror">Chyba pri čítaní nastavení</string>
     <string name="settings_restart">Aplikácia c:geo sa musí teraz reštartovať, aby sa použili načítané nastavenia</string>
+    <string name="settings_folder_changed">Priečinok \"%1$s\" bude počas obnovenia zmenený na \"%2$s\".\n\nPokračujte ťuknutím na \"%4$s\". V takom prípade sa objaví výzva na opätovné udelenie prístupu aplikácii c:geo k danému priečinku.\n\nŤuknutím na \"%3$s\" ponecháte namiesto toho aktuálne nastavenie priečinka.</string>
+    <string name="settings_file_changed">\"%1$s\" bude počas obnovenia zmenené na \"%2$s\".\n\nPokračujte ťuknutím na \"%4$s\". V takom prípade sa objaví výzva na opätovné udelenie prístupu aplikácii c:geo k danému súboru.\n\nŤuknutím na \"%3$s\" ponecháte namiesto toho aktuálne nastavenie.</string>
     <string name="settings_info_offline_maps_title">Info o Offline mapách</string>
     <string name="settings_info_offline_maps">Aplikácia c:geo podporuje mapy na použitie offline. Mapy môžete získať od rozličných poskytovateľov, prípadne môžete dokonca vytvoriť vlastné mapy (z údajov OSM). Najprv je potrebné vybrať priečinok, do ktorého sa budú mapy offline ukladať.</string>
     <string name="settings_info_themes_title">Info o témach mapy</string>
@@ -658,6 +667,9 @@
     <string name="init_local_file_system">Lokálne systémové súbory</string>
     <string name="init_base_directory_description">Základný priečinok na verejné lokálne údaje</string>
     <string name="init_map_directory_description">Priečinok s offline mapami</string>
+    <string name="init_brouter_directory_description">Priečinok s údajmi navigácie BRouter</string>
+    <string name="init_brouter_updateinterval_title">Interval aktualizácie</string>
+    <string name="init_brouter_updateinterval_description">Pripomenúť každých x dní kontrolu aktualizácie</string>
     <string name="init_gpx_importexportdir">Priečinok GPX</string>
     <string name="init_dataDir">Vyberte priečinok s údajmi</string>
     <string name="init_dataDir_note">Môžete zvoliť ukladanie ďalších údajov k skrýšam (spoilery, obrázky z logov…) do externej pamäte (emulovaná alebo skutočná externá SD karta, závisí to od zariadenia).</string>
@@ -831,6 +843,9 @@
     <string name="persistablefolder_logfiles">Súbory denníkov</string>
     <string name="persistablefolder_fieldnotes">Poznámky</string>
     <string name="persistablefolder_spoilerimages">Obrázky s pomôckou</string>
+    <string name="persistablefolder_routingbase">Navigácia</string>
+    <string name="persistablefolder_routingtiles">Údaje navigácie</string>
+    <string name="persistableuri_track">Súbor so stopou</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s hotovo</string>
     <string name="folder_process_status_currentfile">Spracovávanie %1$s</string>
@@ -1039,6 +1054,10 @@
     <string name="menu_caches">Spravovať skrýše</string>
     <string name="cache_menu_event">Pridať do kalendára</string>
     <string name="cache_menu_extract_waypoints">Extrahovať body trasy</string>
+    <string name="cache_menu_set_found">Nastaviť ako nájdené</string>
+    <string name="cache_menu_set_DNF">Nastaviť ako nenájdené</string>
+    <string name="cache_menu_reset_foundstate">Vynulovať stav nájdenia</string>
+    <string name="cache_foundstate_updated">Stav nálezu aktualizovaný</string>
     <string name="cache_menu_set_cache_icon">Nastaviť ikonu kešky</string>
     <string name="cache_icon_updated">Ikona kešky bola aktualizovaná</string>
     <string name="cache_menu_details">Detaily</string>
@@ -1881,18 +1900,29 @@
     <string name="localfile_title">Otvoriť lokálny súbor</string>
     <string name="localfile_cannot_handle">Chyba počas čítania súboru alebo c:geo nevie pracovať s týmto druhom súboru.</string>
     <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Prijať súbor</string>
+    <string name="receivedownload_success">Súbor úspešne uložený ako \"%s\"</string>
+    <string name="receivedownload_error">Chyba počas prijímania súboru</string>
+    <string name="receivedownload_error_io_exception">Chyba vstupu/výstupu počas prijímania súboru. Dá sa zapisovať do priečinka \"%s\"?</string>
+    <string name="receivedownload_error_filenotfound_exception">Chyba: súbor sa počas prijímania súboru nenašiel.</string>
     <string name="receivedownload_alreadyexists">Súbor s týmto názvom už existuje. Prepísať existujúci súbor alebo uložiť nový súbor s iným názvom?</string>
     <string name="receivedownload_option_overwrite">Prepísať</string>
     <string name="receivedownload_option_differentname">Premenovať</string>
     <string name="receivedownload_kb_copied">%d kB skopírovaných</string>
+    <string name="receivedownload_cancelled">Prenos súboru zrušený</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Prevziať offline mapu</string>
+    <string name="download_title">Prevziať súbor</string>
     <string name="downloadmap_info">Vyberte mapový súbor pre vašu oblasť a ťuknite na ikonu \"Uložiť\".\n\nPrevzatie prebehne na pozadí. Po dokončení prevzatia sa súbor skopíruje do priečinka máp aplikácie c:geo a nastaví sa ako aktuálna mapa.\n\nPozor: pri prevzatí mapy dôjde k prenosu veľkého množstva údajov!</string>
     <string name="downloadmap_choose">Zvoľte mapu</string>
     <string name="downloadmap_filename">Preberá sa %s</string>
+    <string name="downloadmanager_not_available">Súbor sa nedá prevziať, systémový správca preberania nie je k dispozícii</string>
     <string name="download_started">Prevzatie spustené na pozadí</string>
     <string name="downloadmap_target_not_writable">Do vybraného cieľa \"%s\" sa nedá zapisovať – prevzatý mapový súbor je uložený v systémovom priečinku prevzatých súborov a je potrebné ho ručne presunúť do priečinka máp.</string>
     <string name="downloadmap_allow_metered_network">Povoliť prevzatie cez meranú sieť (napr. mobilné pripojenie)</string>
+    <string name="download_confirmation">%1$sPrevziať súbor \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Našli sa aktualizácie pre \n%1$s\n\nChcete aktualizovať?%2$s</string>
+    <string name="download_warning">Môže to nejakú dobu trvať a môžu byť účtované veľké poplatky v závislosti od sieťového pripojenia.</string>
     <string name="downloadmap_handling">Samotné prevzatie bude spracované systémovým správcom preberania na pozadí. Keď sa začne preberať, uvidíte upozornenie. Prevzatie môže nejakú dobu trvať.</string>
     <string name="button_continue">Ďalej</string>
     <string name="downloadmap_onedirup">(o úroveň vyššie)</string>
@@ -1905,11 +1935,17 @@
     <string name="downloadmap_checking_for_updates">Kontrolujú sa aktualizácie…</string>
     <string name="downloadmap_install_theme_title">Inštalácia súboru s motívom</string>
     <string name="downloadmap_install_theme_info">Vaša prevzatá mapa vyžaduje špeciálny súbor s motívom. Chcete aj ten prevziať?</string>
+    <string name="downloadtile_title">Chýbajú údaje navigácie</string>
+    <string name="downloadtile_info">Aplikácia c:geo nedokáže vypočítať požadovanú trasu, pretože chýba nejaký súbor s údajmi navigácie. Chcete prevziať chýbajúce údaje navigácie?</string>
+    <string name="tileupdate_info">Chcete skontrolovať aktualizácie prevzatých súborov s údajmi navigácie?</string>
+    <string name="no_updates_found">Nenašli sa žiadne aktualizácie</string>
+    <string name="updates_check">Kontrola aktualizácií</string>
     <string name="mapserver_mapsforge_info">Základné mapy, nie sú potrebné žiadne mapové motívy</string>
     <string name="mapserver_openandromaps_info">Podrobné mapy, vyžaduje mapový motív \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Podrobný mapový motív, zabudovaný pre mapy \"OpenAndroidMap\"</string>
     <string name="mapserver_freizeitkarte_info">Podrobné mapy, vyžadujú jeden z mapových motívov \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Podrobný mapový motív, zabudovaný pre mapy \"Freizeitkarte\"</string>
+    <string name="brouter_info">Služba offline navigácie</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazať históriu trasy</string>
     <string name="map_trailhistory_cleared">História trasy vymazaná</string>
@@ -1936,6 +1972,11 @@
     <string name="wizard_permissions_intro">Aplikácia c:geo vyžaduje na správne fungovanie niekoľko povolení na vašom zariadení.\nV ďalších krokoch vám ich vysvetlíme.</string>
     <string name="wizard_permissions_folder_title">Nastaviť priečinok: %s</string>
     <string name="wizard_basefolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie údajov, ako sp napríklad súbory GPX, zálohy, poznámky a súbory denníka. Štandardne sú tieto súbory ukladané do priečinkov pod tzv. „hlavným priečinkom“. Vyberte alebo vytvorte takýto priečinok v ďalšom kroku.\n\nAk ste aplikáciu c_geo inovovali z predchádzajúcej verzie, vyberte existujúci priečinok „c:geo“ v hlavnej úrovni ukladacieho priestoru zariadenia. \nPomôcka: Možno bude potrebné najprv odkryť interný ukladací priestor zariadenia vo voľbe súboru, ktorý sa potom zobrazí.</string>
+    <string name="wizard_mapfolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie offline mapových súborov.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie súborov s motívom pre offline mapy.</string>
+    <string name="wizard_gpxfolder_request_explanation">Aplikácia c:geo potrebuje lokálny priečinok na ukladanie súborov GPX (napr. pre import/export kešiek alebo trás).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Za účelom použitia funkcií automatického preberania a aktualizácie zabudovaných údajov oblasti pre navigáciu je potrebné nastaviť priečinok pre údaje oblasti.</string>
+    <string name="wizard_select_or_create">V ďalšom kroku vyberte alebo vytvorte takýto priečinok.</string>
     <string name="wizard_platforms_title">Konfigurovať služby</string>
     <string name="wizard_platforms_intro">Na hľadanie kešiek s aplikáciou c\"geo je potrebný účet na geocachingovej službe podporovanej aplikáciou c:geo.\nVyberte dole požadovanú službu, do ktorej sa prihlásite, prípadne si vytvorte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
