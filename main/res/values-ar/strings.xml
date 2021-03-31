@@ -281,8 +281,6 @@
     <string name="caches_select_mode_exit">إنهاء الوضع المحدد</string>
     <string name="caches_select_invert">إعكس التحديد</string>
     <string name="caches_nearby">قريب</string>
-    <string name="caches_remove_all">إزالة الكل</string>
-    <string name="caches_remove_selected">إزالة المحدد</string>
     <string name="caches_delete_events">إزالة الأحداث الماضية</string>
     <string name="caches_refresh_selected">عمل تحديث للتحديد</string>
     <string name="caches_refresh_all">تحديث الكل</string>
