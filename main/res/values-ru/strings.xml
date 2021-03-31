@@ -336,8 +336,6 @@
     <string name="caches_select_mode_exit">Выйти из режима выделения</string>
     <string name="caches_select_invert">Инвертировать выделение</string>
     <string name="caches_nearby">Поблизости</string>
-    <string name="caches_remove_all">Удалить все</string>
-    <string name="caches_remove_selected">Удалить выбранные</string>
     <string name="caches_remove_all_completely">Удалить все с устройства</string>
     <string name="caches_remove_selected_completely">Удалить выбранное с устройства</string>
     <string name="caches_delete_events">Удалить прошедшие события</string>
