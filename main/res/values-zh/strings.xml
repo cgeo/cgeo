@@ -330,8 +330,6 @@
     <string name="caches_select_mode_exit">退出选择模式</string>
     <string name="caches_select_invert">反转选择</string>
     <string name="caches_nearby">附近的</string>
-    <string name="caches_remove_all">移除所有</string>
-    <string name="caches_remove_selected">删除选中的</string>
     <string name="caches_delete_events">删除过去的事件</string>
     <string name="caches_upload_modifiedcoords">上传更改后的坐标</string>
     <string name="caches_upload_modifiedcoords_warning">您想要上传所有的 (选中的) 藏点修改过的坐标，并覆盖服务器上的现有坐标吗？这个操作不能被撤消。</string>
