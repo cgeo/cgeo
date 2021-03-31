@@ -285,6 +285,26 @@ public class WaypointParserTest {
     }
 
     /**
+     * Formula incomplete, Geopoint should not be created
+     */
+    @Test
+    public void testParseWaypointWithFormulaEvaluateIncompleteCoordinates() {
+        final String note = "@WPName X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° 42.ABC  E 9° 7.DEB |A = a*b|B=3|E=b-a|a=2| this is the description\n\"this shall NOT be part of the note\"";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp = iterator.next();
+        assertWaypoint(wp, "WPName", null, WaypointType.PUZZLE, "this is the description");
+        final String calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNotNull();
+        final CalcState calcState = CalcState.fromJSON(calcStateJson);
+        assertThat(calcState.plainLat).isEqualTo("N 45° 42.ABC'");
+        assertThat(calcState.plainLon).isEqualTo("E 9° 7.DEB'");
+    }
+
+
+    /**
      * 2 Waypoints with formula and variables should be created
      */
     @Test

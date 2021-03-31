@@ -75,6 +75,7 @@ public final class VariableData implements JSONAble {
      */
     private String getCachedString(final Context context) {
         String returnValue = "";
+        returnValue += getName();
 
         if (getExpression() == null || getExpression().length() == 0) {
             if (null != context) {
