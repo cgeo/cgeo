@@ -334,8 +334,6 @@
     <string name="caches_select_mode_exit">離開選擇模式</string>
     <string name="caches_select_invert">反轉所選區域</string>
     <string name="caches_nearby">鄰近的</string>
-    <string name="caches_remove_all">移除全部</string>
-    <string name="caches_remove_selected">刪除已選擇項目</string>
     <string name="caches_remove_all_completely">在裝置上刪除全部</string>
     <string name="caches_remove_selected_completely">在裝置上刪除所選擇的</string>
     <string name="caches_delete_events">刪除過期的聚會</string>
