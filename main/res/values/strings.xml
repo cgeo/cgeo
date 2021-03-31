@@ -362,8 +362,8 @@
     <string name="caches_select_mode_exit">Exit select mode</string>
     <string name="caches_select_invert">Invert selection</string>
     <string name="caches_nearby">Nearby</string>
-    <string name="caches_remove_all">Remove all</string>
-    <string name="caches_remove_selected">Remove selected</string>
+    <string name="caches_remove_all">Remove all from list</string>
+    <string name="caches_remove_selected">Remove selected from list</string>
     <string name="caches_remove_all_completely">Delete all from device</string>
     <string name="caches_remove_selected_completely">Delete selected from device</string>
     <string name="caches_delete_events">Delete past events</string>
