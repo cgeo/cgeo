@@ -338,8 +338,8 @@
     <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
     <string name="caches_select_invert">Auswahl invertieren</string>
     <string name="caches_nearby">In der Nähe</string>
-    <string name="caches_remove_all">Alle löschen</string>
-    <string name="caches_remove_selected">Ausgewählte löschen</string>
+    <string name="caches_remove_all">Alle von Liste löschen</string>
+    <string name="caches_remove_selected">Ausgewählte von Liste löschen</string>
     <string name="caches_remove_all_completely">Alle vom Gerät löschen</string>
     <string name="caches_remove_selected_completely">Ausgewählte vom Gerät löschen</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
