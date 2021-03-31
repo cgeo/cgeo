@@ -338,8 +338,6 @@
     <string name="caches_select_mode_exit">Surt del mode seleccionar</string>
     <string name="caches_select_invert">Inverteix la selecció</string>
     <string name="caches_nearby">Propers</string>
-    <string name="caches_remove_all">Suprimeix-los tots</string>
-    <string name="caches_remove_selected">Suprimeix els seleccionats</string>
     <string name="caches_remove_all_completely">Elimina tot del dispositiu</string>
     <string name="caches_remove_selected_completely">Esborra la selecció del dispositiu</string>
     <string name="caches_delete_events">Elimina trobades passades</string>
