@@ -338,8 +338,6 @@
     <string name="caches_select_mode_exit">Seçim modundan çıkın</string>
     <string name="caches_select_invert">Seçimi tersine çevir</string>
     <string name="caches_nearby">Yakınlarda</string>
-    <string name="caches_remove_all">Hepsini kaldır</string>
-    <string name="caches_remove_selected">Seçileni kaldır</string>
     <string name="caches_remove_all_completely">Hepsini cihazdan sil</string>
     <string name="caches_remove_selected_completely">Seçilenleri cihazdan sil</string>
     <string name="caches_delete_events">Geçmiş etkinlikleri sil</string>
