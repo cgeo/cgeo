@@ -208,7 +208,7 @@ public class Waypoint implements IWaypoint {
     public boolean isUserModified() {
         return
             isUserDefined() ||
-            (isOriginalCoordsEmpty() && getCoords() != null) ||
+            (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateJson() != null)) ||
             !StringUtils.isBlank(getUserNote());
     }
 
