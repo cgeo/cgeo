@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.EditUtils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -38,6 +39,7 @@ import android.widget.TextView;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -54,6 +56,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     private EditText eLat, eLon;
     private Button bLat, bLon;
+    private Button bCalculate;
     private EditText eLatDeg, eLatMin, eLatSec, eLatSub;
     private EditText eLonDeg, eLonMin, eLonSec, eLonSub;
     private TextView tLatSep1, tLatSep2, tLatSep3;
@@ -149,9 +152,9 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         final Spinner spinner = v.findViewById(R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
-                ArrayAdapter.createFromResource(getActivity(),
-                        R.array.waypoint_coordinate_formats,
-                        android.R.layout.simple_spinner_item);
+            ArrayAdapter.createFromResource(getActivity(),
+                R.array.waypoint_coordinate_formats,
+                android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setSelection(Settings.getCoordInputFormat().ordinal());
@@ -179,6 +182,8 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         orderedInputs = Arrays.asList(eLatDeg, eLatMin, eLatSec, eLatSub, eLonDeg, eLonMin, eLonSec, eLonSub);
 
+        bCalculate = v.findViewById(R.id.calculate);
+
         for (final EditText editText : orderedInputs) {
             editText.addTextChangedListener(new SwitchToNextFieldWatcher(editText));
             editText.setOnFocusChangeListener(new PadZerosOnFocusLostListener());
@@ -197,10 +202,10 @@ public class CoordinatesInputDialog extends DialogFragment {
         } else {
             buttonCache.setVisibility(View.GONE);
         }
-        final Button buttonCalculate = v.findViewById(R.id.calculate);
+
         if (getActivity() instanceof CalculateState) {
-            buttonCalculate.setOnClickListener(new CalculateListener());
-            buttonCalculate.setVisibility(View.VISIBLE);
+            bCalculate.setOnClickListener(new CalculateListener());
+            bCalculate.setVisibility(View.VISIBLE);
         }
 
         final Button buttonClear = v.findViewById(R.id.clear);
@@ -367,6 +372,15 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         for (final EditText editText : orderedInputs) {
             setSize(editText);
+        }
+
+        if (getActivity() instanceof CalculateState) {
+            final CalculateState calculateState = (CalculateState) getActivity();
+            final CalcState theState = calculateState.fetchCalculatorState();
+
+            if (null != theState) {
+                bCalculate.setTypeface(null, Typeface.ITALIC);
+            }
         }
     }
 
