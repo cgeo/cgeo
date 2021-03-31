@@ -654,6 +654,8 @@
     <string name="init_backup_settings_restore">復元の設定</string>
     <string name="settings_readingerror">設定の読み取りエラー</string>
     <string name="settings_restart">読み込まれた設定を有効にするにはc:geoを再起動する必要があります</string>
+    <string name="settings_folder_changed">復元中にフォルダ「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
+    <string name="settings_file_changed">復元中に「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図をサポートしています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
