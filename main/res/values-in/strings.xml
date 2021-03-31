@@ -275,8 +275,6 @@
     <string name="caches_select_mode_exit">Pilih mode keluar</string>
     <string name="caches_select_invert">Balikkan seleksi</string>
     <string name="caches_nearby">Dekat</string>
-    <string name="caches_remove_all">Hapus semua</string>
-    <string name="caches_remove_selected">Hapus yang telah dipilih</string>
     <string name="caches_delete_events">Hapus acara sebelumnya</string>
     <string name="caches_refresh_selected">Segarkan yang telah dipilih</string>
     <string name="caches_refresh_all">Segarkan semua</string>
