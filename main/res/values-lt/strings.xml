@@ -330,8 +330,6 @@
     <string name="caches_select_mode_exit">Nebesirinkti</string>
     <string name="caches_select_invert">Žymėti priešingai</string>
     <string name="caches_nearby">Netoliese</string>
-    <string name="caches_remove_all">Pašalinti visas</string>
-    <string name="caches_remove_selected">Pašalinti pasirinktas</string>
     <string name="caches_delete_events">Ištrinti praeities įvykius</string>
     <string name="caches_upload_modifiedcoords">Įkelti pakeistas koordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Ar norite įkelti pakeistas koordinates visoms (pasirinktoms) slėptuvėms ir pakeisti koordinates serveryje? To negalima anuliuoti.</string>
