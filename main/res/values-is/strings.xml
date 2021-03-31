@@ -230,8 +230,6 @@
     <string name="caches_select_mode_exit">Fara úr valstillingu</string>
     <string name="caches_select_invert">Snúa vali við</string>
     <string name="caches_nearby">Í nánd</string>
-    <string name="caches_remove_all">Fjarlægja alla</string>
-    <string name="caches_remove_selected">Fjarlægja valda</string>
     <string name="caches_delete_events">Eyða fyrri viðburðum</string>
     <string name="caches_refresh_selected">Uppfæra það sem er valið</string>
     <string name="caches_refresh_all">Uppfæra allt</string>
