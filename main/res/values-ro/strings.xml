@@ -314,8 +314,6 @@
     <string name="caches_select_mode_exit">Renunţă la modul selecţie</string>
     <string name="caches_select_invert">Inversează selecţia</string>
     <string name="caches_nearby">În apropiere</string>
-    <string name="caches_remove_all">Șterge toate</string>
-    <string name="caches_remove_selected">Şterge geocutiile selectate</string>
     <string name="caches_delete_events">Şterge evenimentele trecute</string>
     <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
     <string name="caches_refresh_all">Reîncarcă toate cutiile</string>
