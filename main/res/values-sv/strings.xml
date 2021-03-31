@@ -337,8 +337,6 @@
     <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
     <string name="caches_select_invert">Invertera valda</string>
     <string name="caches_nearby">Nära</string>
-    <string name="caches_remove_all">Ta bort alla</string>
-    <string name="caches_remove_selected">Ta bort valda</string>
     <string name="caches_remove_all_completely">Ta bort alla från enheten</string>
     <string name="caches_remove_selected_completely">Ta bort vald från enhet</string>
     <string name="caches_delete_events">Ta bort gamla event</string>
