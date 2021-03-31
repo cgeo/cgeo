@@ -329,8 +329,6 @@
     <string name="caches_select_mode_exit">Selektiounsmodus zoumaachen</string>
     <string name="caches_select_invert">Selektioun invertéieren</string>
     <string name="caches_nearby">Nobäi</string>
-    <string name="caches_remove_all">Alleguer läschen</string>
-    <string name="caches_remove_selected">Ausgewielte läschen</string>
     <string name="caches_delete_events">Vergaangen Eventer läschen</string>
     <string name="caches_upload_modifiedcoords">Geännert Koordinaten eroplueden</string>
     <string name="caches_upload_modifiedcoords_warning">Solle déi modifizéiert Koordinaten fir alle (ausgewielten) Cachen eropgelueden ginn an déi aktuell Koordinaten um Server iwwerschriwwen ginn? Dëst ka net réckgängeg gemaach ginn.</string>
