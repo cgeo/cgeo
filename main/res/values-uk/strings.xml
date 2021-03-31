@@ -331,8 +331,6 @@
     <string name="caches_select_mode_exit">Вийти з режиму вибору</string>
     <string name="caches_select_invert">Інвертувати вибране</string>
     <string name="caches_nearby">Неподалік</string>
-    <string name="caches_remove_all">Видалити все</string>
-    <string name="caches_remove_selected">Видалити вибране</string>
     <string name="caches_delete_events">Видалити минулі події</string>
     <string name="caches_upload_modifiedcoords">Вивантажити змінені координати</string>
     <string name="caches_upload_modifiedcoords_warning">Ви хочете, щоб завантажити модифіковані координати для всіх (вибраних) кеш і перезаписати наявні координати на сервері? Це не можна скасувати.</string>
