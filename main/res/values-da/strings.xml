@@ -243,6 +243,7 @@
     <string name="warn_no_pocket_query_found">Det blev ikke fundet nogen Pocket Query online.</string>
     <string name="warn_invalid_character">Tegn skal være bogstaver eller tal</string>
     <string name="warn_notloggedin_title">Offline-tilstand</string>
+    <string name="warn_notloggedin_short">Du er ikke logget ind. Live-kort vil kun vise caches der er gemt lokalt. Tryk her for mere information.</string>
     <string name="warn_notloggedin_long">Du er endnu ikke logget på. Kun cacher, som er gemt lokalt, vil blive vist på live-kortet og online-funktioner vil ikke kunne bruges.\n\nManglende logon kan skyldes netværks- eller serverproblemer eller at konfigurationen af dine geocachingtjenester ikke er korrekt.\n\nVil du indstille geocachingtjenester nu?</string>
     <string name="err_read_pocket_query_list">Fejl ved læsning af Pocket Query-liste.</string>
     <string name="info_log_posted">Logbeskeden blev sendt.</string>
@@ -341,6 +342,8 @@
     <string name="caches_nearby">I nærheden</string>
     <string name="caches_remove_all">Fjern alle</string>
     <string name="caches_remove_selected">Fjern valgte</string>
+    <string name="caches_remove_all_completely">Slet alle fra enheden</string>
+    <string name="caches_remove_selected_completely">Slet valgte fra enheden</string>
     <string name="caches_delete_events">Slet tidligere arrangementer</string>
     <string name="caches_upload_modifiedcoords">Upload ændrede positioner</string>
     <string name="caches_upload_modifiedcoords_warning">Vil du uploade ændrede positioner for alle valgte geocacher og overskrive de eksisterende positioner på serveren? Denne handling kan ikke fortydes.</string>
@@ -381,6 +384,8 @@
     <string name="caches_clear_offlinelogs_progress">Fjerner offline logbeskeder</string>
     <string name="caches_make_list_unique">Fjern cacherne i denne liste fra øvrige lister</string>
     <string name="caches_set_listmarker">Sæt listemarkering</string>
+    <string name="select_icon">Vælg ikon</string>
+    <string name="onetime_missing_unicode_info">Din Android-version understøtter ikke automatisk detektering af understøttede ikoner - nogle tegn kan mangle</string>
     <!-- caches lists -->
     <string name="menu_lists">Administrér lister</string>
     <string name="list_menu_create">Opret ny liste</string>
@@ -419,6 +424,7 @@
     <string name="about_system_write_logcat_type">Generér almindelig eller udvidet logfil?\n\nAlmindelige logfiler er som regel godt nok.\nBrug kun udvidede logfiler hvis du bliver bedt om det.</string>
     <string name="about_system_write_logcat_type_standard">Almindelig</string>
     <string name="about_system_write_logcat_type_extended">Udvidet</string>
+    <string name="about_system_write_logcat_success">Logfil \"%1$s\" skrevet til mappen \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Fejl ved skrivning af logfil</string>
     <string name="changelog_github">Liste over alle ændringer</string>
     <string name="about_nutshellmanual">Online manual</string>
@@ -456,9 +462,12 @@
     <string name="settings_title_map_content">Kortindhold</string>
     <string name="settings_title_map_behavior">Kortbetjening</string>
     <string name="settings_title_gpx">GPX</string>
+    <string name="settings_title_data_dir">Mappe til geocache-data</string>
+    <string name="settings_title_data_dir_usage">Geocache datamappe (%1$s brugt)</string>
     <string name="calculate_dataDir_title">Geocache dataforbrug</string>
     <string name="calculate_dataDir">Beregner geocache diskforbrug</string>
     <string name="settings_data_dir_item">%1$s bytes (%2$s ledig)</string>
+    <string name="confirm_data_dir_move_title">Flyt geocache-datamappe?</string>
     <string name="confirm_data_dir_move">Flytning af geocache-datamappen kan tage meget lang tid afhængig af din enhed og mængden af data.</string>
     <string name="settings_title_basicmembers">Valgmuligheder for Basismedlemmer</string>
     <string name="settings_title_navigation">Navigation</string>
@@ -519,6 +528,7 @@
     <string name="settings_service_active">Aktiv</string>
     <string name="settings_navigation_disabled">Denne app er muligvis ikke installeret</string>
     <string name="init_signature">Signatur</string>
+    <string name="init_template_help">Pladsholderstrenge - som [NAME] - udfyldes med den angivne tekst, når skabelonen bruges.</string>
     <string name="init_signature_template_button">Indsæt skabelon</string>
     <string name="init_signature_template_date">Dato</string>
     <string name="init_signature_template_time">Tidspunkt</string>
@@ -568,6 +578,8 @@
     <string name="init_summary_archived">Udelad arkiverede caches</string>
     <string name="init_global_wp_extraction_disable">Deaktivér waypoint-udtræk</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktivér ekstraktion af rutepunkter personlige cachenoter. Dette kan stadig aktiveres for individuelle cacher ved at deaktivere afkrydsningsfeltet under den personlige cache-note</string>
+    <string name="init_customtabs_as_browser">Brug Chrome webview</string>
+    <string name="init_summary_customtabs_as_browser">Eksterne hjemmesider vil blive i c:geo-appen (kun muligt, hvis Chrome er installeret)</string>
     <string name="init_save_log_img">Lagring af billeder</string>
     <string name="init_summary_save_log_img">Gem billeder fra logbeskeder</string>
     <string name="init_units">Benyt britiske afstandsmål</string>
@@ -579,6 +591,7 @@
     <string name="init_listdisplay">Vis yderligere lister i cacheliste</string>
     <string name="init_summary_listdisplay">Vis cachers tilhørsforhold til andre lister i cachelisterne</string>
     <string name="init_livelist">Vis retning til cacher i lister</string>
+    <string name="init_summary_livelist">Vis kompasretningen til caches i en liste</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Opret Sikkerhedskopi</string>
     <string name="init_backup_summary">Bemærk venligst, at denne funktion kan sikkerhedskopiere caches, waypoints &amp; indstillinger, men ikke cachebilleder. \nFor at kunne gendanne data hvis du mister din telefon, skal backupfilerne kopieres til en uafhængig placering.</string>
@@ -597,6 +610,7 @@
     <string name="init_restore_restored">Gendannelse fuldført</string>
     <string name="init_backup_start_restore">Start gendannelse</string>
     <string name="init_backup_restore_different_backup">Gendan en anden sikkerhedskopi</string>
+    <string name="init_backup_restore_different_backup_explanation">Vælg den mappe, der indeholder den sikkerhedskopi du vil gendanne</string>
     <string name="init_backup_backup_history">Sikkerhedskopieringshistorik</string>
     <string name="init_backup_history_length_title">Gem højst (x) backups</string>
     <string name="init_backup_history_length_summary">Beslut, hvor mange sikkerhedskopier du vil bevare. Når grænsen er nået, slettes de ældste automatisk.</string>
@@ -607,13 +621,17 @@
     <string name="init_backup_success">Database blev kopieret til:</string>
     <string name="init_backup_failed">Backup af database fejlede.</string>
     <string name="init_backup_unnecessary">Databasen er tom og det er ikke nødvendigt at tage backup.</string>
+    <string name="init_backup_folder_exists_error">Kunne ikke oprette en ny mappe til sikkerhedskopier. Har du allerede lavet en sikkerhedskopi inden for det sidste minut?</string>
     <string name="init_backup_no_backup_available">Ingen backupfil tilgængelig.</string>
+    <string name="backup_confirm_overwrite">Dette vil slette din ældste sikkerhedskopi fra %s. \nVil du fortsætte?</string>
     <string name="restore_confirm_overwrite_database">ADVARSEL: Dette overskriver %s på din enhed!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ADVARSEL: Dette vil overskrive %s og dine aktuelle indstillinger på din enhed!</string>
     <string name="restore_confirm_overwrite_settings">ADVARSEL: Dette vil overskrive dine aktuelle indstillinger på din enhed!</string>
     <string name="restore_information">Vælg hvad du vil gendanne:</string>
     <string name="init_restore_success">Gendannelse fuldført.</string>
     <string name="init_restore_failed_dbrecreated">Gendannelse mislykkedes: Der er fejl i backupfilen og databasen blev i stedet genskabt.</string>
+    <string name="init_restore_db_failed">Gendannelse af databasen mislykkedes.</string>
+    <string name="init_restore_settings_failed">Gendannelse af programindstillingerne mislykkedes.</string>
     <string name="init_restore_running">Gendanner cache-database…</string>
     <string name="init_restore_confirm">Databasen er tom. Vil du gendanne databasen fra backup?</string>
     <string name="init_backup_last">Dato for sidste backup</string>
@@ -630,6 +648,7 @@
     <string name="init_backup_settings_restore">Gendan opsætning</string>
     <string name="settings_readingerror">Fejl ved indlæsning af indstillinger</string>
     <string name="settings_restart">c:geo skal genstartes før at de indlæste indstillinger tager effekt</string>
+    <string name="settings_folder_changed">Mappen\"%1$s\" vil blive ændret til \"%2$s\" under genoprettelsen.\n\nTryk på \"%4$s\" for at fortsætte. I så fald vil du blive bedt om at give c:geo adgang til mappen.\n\nTryk på \"%3$s\" for at beholde den nuværende mappeindstilling i stedet.</string>
     <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
     <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
     <string name="init_mapsource_select">Vælg kortkilde</string>
