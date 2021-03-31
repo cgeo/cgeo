@@ -310,8 +310,6 @@
     <string name="caches_select_mode_exit">Kijelölés vége</string>
     <string name="caches_select_invert">Kijelölés megfordítása</string>
     <string name="caches_nearby">Közeli</string>
-    <string name="caches_remove_all">Összes törlése</string>
-    <string name="caches_remove_selected">Kijelöltek törlése</string>
     <string name="caches_delete_events">Elmúlt események törlése</string>
     <string name="caches_upload_modifiedcoords">Módosított koordináták feltöltése</string>
     <string name="caches_upload_modifiedcoords_warning">Feltöltöd az összes (kijelölt) láda módosított koordinátáját és felülírod a szerveren lévő koordinátákat? Ezt nem lehet visszavonni.</string>
