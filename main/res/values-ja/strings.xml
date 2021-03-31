@@ -337,8 +337,6 @@
     <string name="caches_select_mode_exit">選択モードを終わる</string>
     <string name="caches_select_invert">選択を反転</string>
     <string name="caches_nearby">現在地の近く</string>
-    <string name="caches_remove_all">すべての項目を削除</string>
-    <string name="caches_remove_selected">選択した項目を削除</string>
     <string name="caches_remove_all_completely">デバイスからすべてのキャッシュを削除</string>
     <string name="caches_remove_selected_completely">デバイスから選択したキャッシュを削除</string>
     <string name="caches_delete_events">過去のイベントを削除</string>
@@ -654,6 +652,8 @@
     <string name="init_backup_settings_restore">復元の設定</string>
     <string name="settings_readingerror">設定の読み取りエラー</string>
     <string name="settings_restart">読み込まれた設定を有効にするにはc:geoを再起動する必要があります</string>
+    <string name="settings_folder_changed">復元中にフォルダ「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
+    <string name="settings_file_changed">復元中に「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図をサポートしています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
@@ -1021,6 +1021,10 @@
     <string name="menu_caches">キャッシュを管理</string>
     <string name="cache_menu_event">カレンダーに登録</string>
     <string name="cache_menu_extract_waypoints">ウェイポイントを抽出</string>
+    <string name="cache_menu_set_found">「発見」に設定</string>
+    <string name="cache_menu_set_DNF">「未発見」に設定</string>
+    <string name="cache_menu_reset_foundstate">「発見」状態をリセット</string>
+    <string name="cache_foundstate_updated">「発見」状態が更新されました</string>
     <string name="cache_menu_set_cache_icon">キャッシュアイコン設定</string>
     <string name="cache_icon_updated">キャッシュアイコンを変更しました</string>
     <string name="cache_menu_details">詳細</string>
