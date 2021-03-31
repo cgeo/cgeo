@@ -294,8 +294,6 @@
     <string name="caches_select_mode_exit">צא ממצב בחירה</string>
     <string name="caches_select_invert">הפוך בחירה</string>
     <string name="caches_nearby">בקרבת מקום</string>
-    <string name="caches_remove_all">הסר הכל</string>
-    <string name="caches_remove_selected">הסר פריטים שנבחרו</string>
     <string name="caches_delete_events">מחק אירועי עבר</string>
     <string name="caches_upload_modifiedcoords">העלאת נקודות ציון מעודכנות</string>
     <string name="caches_refresh_selected">רענן את המטמונים שנבחרו</string>
