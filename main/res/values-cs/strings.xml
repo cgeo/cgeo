@@ -339,8 +339,6 @@
     <string name="caches_select_mode_exit">Opustit režim výběru</string>
     <string name="caches_select_invert">Invertovat výběr</string>
     <string name="caches_nearby">Nejbližší</string>
-    <string name="caches_remove_all">Odstranit vše</string>
-    <string name="caches_remove_selected">Odstranit vybrané</string>
     <string name="caches_remove_all_completely">Odstranit vše ze zařízení</string>
     <string name="caches_remove_selected_completely">Odstranit vybrané ze zařízení</string>
     <string name="caches_delete_events">Vymazat staré události</string>
