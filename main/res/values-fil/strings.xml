@@ -279,8 +279,6 @@
     <string name="caches_select_mode_exit">Lumabas sa napiling mode</string>
     <string name="caches_select_invert">Baliktarin ang pagpipilian</string>
     <string name="caches_nearby">Malapit sa</string>
-    <string name="caches_remove_all">Ang lahat ay tanggalin</string>
-    <string name="caches_remove_selected">Tanggalin ang mga napili</string>
     <string name="caches_delete_events">Alisin ang nakalipas na mga kaganapan</string>
     <string name="caches_refresh_selected">I-refresh ang napili</string>
     <string name="caches_refresh_all">Ang lahat ay i-refresh</string>
