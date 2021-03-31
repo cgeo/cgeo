@@ -270,8 +270,6 @@
     <string name="caches_select_mode_exit">Ang pagpili sa paggawas na paagi</string>
     <string name="caches_select_invert">Baliha ang pilianan</string>
     <string name="caches_nearby">Sa duol</string>
-    <string name="caches_remove_all">Tangtangon tanan</string>
-    <string name="caches_remove_selected">Tangtangon ang napilian</string>
     <string name="caches_delete_events">Papason ang miagi na kalilhokan</string>
     <string name="caches_refresh_selected">Bag-ohon ang napili</string>
     <string name="caches_refresh_all">Bag-ohon tanan</string>
