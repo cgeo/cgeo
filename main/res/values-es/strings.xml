@@ -326,8 +326,6 @@
     <string name="caches_select_mode_exit">Salir de modo selección</string>
     <string name="caches_select_invert">Invertir selección</string>
     <string name="caches_nearby">Cercanos</string>
-    <string name="caches_remove_all">Eliminar todos</string>
-    <string name="caches_remove_selected">Eliminar seleccionados</string>
     <string name="caches_delete_events">Borrar eventos pasados</string>
     <string name="caches_upload_modifiedcoords">Subir coordenadas modificadas</string>
     <string name="caches_upload_modifiedcoords_warning">¿Quieres subir las coordenadas modificadas para todos los cachés (seleccionados) y sobreescribir las coordenadas existentes en el servidor? Esto no se puede deshacer.</string>
