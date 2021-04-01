@@ -27,6 +27,7 @@ public class CollectionStreamTest {
     @Test
     public void testStability() {
         assertThat(CollectionStream.of((Collection<Object>) null).toJoinedString(",")).isEqualTo("");
+        assertThat(CollectionStream.of((Object[]) null).toJoinedString(",")).isEqualTo("");
         assertThat(CollectionStream.of(new Integer[]{1, 2}).map(null).filter(null).toJoinedString(",")).isEqualTo("1,2");
         assertThat(CollectionStream.of(new Integer[]{1, 2}).toJoinedString(null)).isEqualTo("12");
     }

@@ -58,7 +58,6 @@ import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
 import org.mapsforge.map.rendertheme.ZipRenderTheme;
 import org.mapsforge.map.rendertheme.ZipXmlThemeResourceProvider;
-import org.xmlpull.v1.XmlPullParserException;
 
 
 /**
@@ -158,7 +157,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_file_unreadable));
                 rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
                 selectedTheme = null;
-            } catch (final XmlPullParserException e) {
+            } catch (final Exception e) {
                 Log.w("render theme invalid", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_invalid));
                 rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
