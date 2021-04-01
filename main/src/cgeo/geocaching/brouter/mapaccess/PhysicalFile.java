@@ -5,29 +5,37 @@
  */
 package cgeo.geocaching.brouter.mapaccess;
 
+import androidx.annotation.NonNull;
+
+import org.apache.commons.io.IOUtils;
+
 import cgeo.geocaching.brouter.codec.DataBuffers;
 import cgeo.geocaching.brouter.codec.MicroCache;
 import cgeo.geocaching.brouter.util.ByteDataReader;
 import cgeo.geocaching.brouter.util.Crc32Utils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 public final class PhysicalFile {
     public long creationTime;
     public int divisor = 80;
-    RandomAccessFile ra = null;
     long[] fileIndex = new long[25];
     int[] fileHeaderCrcs;
     String fileName;
     private final int fileIndexCrc;
 
-    public PhysicalFile(final File f, final DataBuffers dataBuffers, final int lookupVersion, final int lookupMinorVersion) throws Exception {
-        fileName = f.getName();
+    private final FileChannel fileChannel;
+
+    public PhysicalFile(final FileInputStream fis, final String name, final DataBuffers dataBuffers, final int lookupVersion, final int lookupMinorVersion) throws Exception {
+        fileName = name;
+        fileChannel = fis.getChannel();
+
         final byte[] iobuffer = dataBuffers.iobuffer;
-        ra = new RandomAccessFile(f, "r");
-        ra.readFully(iobuffer, 0, 200);
+        readFully(0, 200, iobuffer);
         fileIndexCrc = Crc32Utils.crc(iobuffer, 0, 200);
         ByteDataReader dis = new ByteDataReader(iobuffer);
         for (int i = 0; i < 25; i++) {
@@ -35,13 +43,13 @@ public final class PhysicalFile {
             final short readVersion = (short) (lv >> 48);
             if (i == 0 && lookupVersion != -1 && readVersion != lookupVersion) {
                 throw new IllegalArgumentException("lookup version mismatch (old rd5?) lookups.dat="
-                    + lookupVersion + " " + f.getAbsolutePath() + "=" + readVersion);
+                    + lookupVersion + " " + fileName + "=" + readVersion);
             }
             fileIndex[i] = lv & 0xffffffffffffL;
         }
 
         // read some extra info from the end of the file, if present
-        final long len = ra.length();
+        final long len = fileChannel.size();
 
         final long pos = fileIndex[24];
         final int extraLen = 8 + 26 * 4;
@@ -54,8 +62,7 @@ public final class PhysicalFile {
             throw new IOException("file of size " + len + " too short, should be " + (pos + extraLen));
         }
 
-        ra.seek(pos);
-        ra.readFully(iobuffer, 0, extraLen);
+        readFully(pos, extraLen, iobuffer);
         dis = new ByteDataReader(iobuffer);
         creationTime = dis.readLong();
 
@@ -73,53 +80,23 @@ public final class PhysicalFile {
         }
     }
 
-    public static void main(final String[] args) {
-        MicroCache.debug = true;
-
-        final String message = checkFileIntegrity(new File(args[0]));
-
-        if (message != null) {
-            System.out.println("************************************");
-            System.out.println(message);
-            System.out.println("************************************");
+    public void readFully(final long startPos, final int length, @NonNull final byte[] buffer) throws IOException {
+        final int readBytes = readFile(this.fileChannel, startPos, length, buffer, 0);
+        if (readBytes != length) {
+            throw new IOException("Could not read requested number of bytes (" + buffer.length + "), read only " + readBytes + " bytges");
         }
     }
 
-    /**
-     * Checks the integrity of the file using the build-in checksums
-     *
-     * @return the error message if file corrupt, else null
-     */
-    public static String checkFileIntegrity(final File f) {
-        PhysicalFile pf = null;
-        try {
-            final DataBuffers dataBuffers = new DataBuffers();
-            pf = new PhysicalFile(f, dataBuffers, -1, -1);
-            final int div = pf.divisor;
-            for (int lonDegree = 0; lonDegree < 5; lonDegree++) { // doesn't really matter..
-                for (int latDegree = 0; latDegree < 5; latDegree++) { // ..where on earth we are
-                    final OsmFile osmf = new OsmFile(pf, lonDegree, latDegree, dataBuffers);
-                    if (osmf.hasData()) {
-                        for (int lonIdx = 0; lonIdx < div; lonIdx++) {
-                            for (int latIdx = 0; latIdx < div; latIdx++) {
-                                osmf.createMicroCache(lonDegree * div + lonIdx, latDegree * div + latIdx, dataBuffers, null, null, MicroCache.debug, null);
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (IllegalArgumentException iae) {
-            return iae.getMessage();
-        } catch (Exception e) {
-            return e.toString();
-        } finally {
-            if (pf != null) {
-                try {
-                    pf.ra.close();
-                } catch (Exception ignored) {
-                }
-            }
+    private static int readFile(@NonNull final FileChannel channel, final long startPos, final int length, @NonNull final byte[] buffer, final int bufferOffset) throws IOException {
+        if (bufferOffset + length >= buffer.length) {
+            throw new IllegalArgumentException("Requested read length " + length + " will not fit in given buffer length " + buffer.length + " (offset: " + bufferOffset + ")");
         }
-        return null;
+
+        final ByteBuffer bb = ByteBuffer.wrap(buffer, bufferOffset, length);
+        return channel.read(bb, startPos);
+    }
+
+    public void close() {
+        IOUtils.closeQuietly(fileChannel);
     }
 }

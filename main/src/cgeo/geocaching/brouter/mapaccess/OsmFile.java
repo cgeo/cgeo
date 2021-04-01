@@ -21,7 +21,7 @@ final class OsmFile {
     public int lonDegree;
     public int latDegree;
     public String filename;
-    private RandomAccessFile is = null;
+    private PhysicalFile rafile;
     private long fileOffset;
     private int[] posIdx;
     private MicroCache[] microCaches;
@@ -51,12 +51,12 @@ final class OsmFile {
             if (fileOffset == index[tileIndex]) {
                 return; // empty
             }
+            this.rafile = rafile;
 
-            is = rafile.ra;
             posIdx = new int[ncaches];
             microCaches = new MicroCache[ncaches];
-            is.seek(fileOffset);
-            is.readFully(iobuffer, 0, indexsize);
+
+            this.rafile.readFully(fileOffset, indexsize, iobuffer);
 
             if (rafile.fileHeaderCrcs != null) {
                 final int headerCrc = Crc32Utils.crc(iobuffer, 0, indexsize);
@@ -102,9 +102,8 @@ final class OsmFile {
         final int endPos = getPosIdx(subIdx);
         final int size = endPos - startPos;
         if (size > 0) {
-            is.seek(fileOffset + startPos);
             if (size <= iobuffer.length) {
-                is.readFully(iobuffer, 0, size);
+                this.rafile.readFully(fileOffset + startPos, size, iobuffer);
             }
         }
         return size;

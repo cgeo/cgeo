@@ -23,7 +23,6 @@ public class RoutingEngine extends Thread {
     protected List<MatchedWaypoint> matchedWaypoints;
     protected OsmTrack foundTrack = new OsmTrack();
     protected String errorMessage = null;
-    protected String segmentDir;
     protected RoutingContext routingContext;
     private NodesCache nodesCache;
     private final SortedHeap<OsmPath> openSet = new SortedHeap<OsmPath>();
@@ -46,9 +45,8 @@ public class RoutingEngine extends Thread {
 
     private final boolean directWeaving = !Boolean.getBoolean("disableDirectWeaving");
 
-    public RoutingEngine(final String outfileBase, final String logfileBase, final String segmentDir,
+    public RoutingEngine(final String outfileBase, final String logfileBase, //TODO: REMOVE!
                          final List<OsmNodeNamed> waypoints, final RoutingContext rc) {
-        this.segmentDir = segmentDir;
         this.outfileBase = outfileBase;
         this.logfileBase = logfileBase;
         this.waypoints = waypoints;
@@ -444,7 +442,7 @@ public class RoutingEngine extends Thread {
         }
         final long maxmem = routingContext.memoryclass * 1024L * 1024L; // in MB
 
-        nodesCache = new NodesCache(segmentDir, routingContext.expctxWay, maxmem, nodesCache, detailed);
+        nodesCache = new NodesCache(routingContext.expctxWay, maxmem, nodesCache, detailed);
         islandNodePairs.clearTempPairs();
     }
 

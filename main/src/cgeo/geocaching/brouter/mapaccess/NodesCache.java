@@ -9,8 +9,11 @@ import cgeo.geocaching.brouter.codec.DataBuffers;
 import cgeo.geocaching.brouter.codec.MicroCache;
 import cgeo.geocaching.brouter.codec.WaypointMatcher;
 import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +23,7 @@ public final class NodesCache {
     public WaypointMatcher waypointMatcher;
     public boolean firstFileAccessFailed = false;
     public String firstFileAccessName;
-    private final File segmentDir;
+    //private final File segmentDir;
     private final BExpressionContextWay expCtxWay;
     private final int lookupVersion;
     private final int lookupMinorVersion;
@@ -42,9 +45,9 @@ public final class NodesCache {
 
     private final boolean directWeaving = !Boolean.getBoolean("disableDirectWeaving");
 
-    public NodesCache(final String segmentDir, final BExpressionContextWay ctxWay, final long maxmem, final NodesCache oldCache, final boolean detailed) {
+    public NodesCache(final BExpressionContextWay ctxWay, final long maxmem, final NodesCache oldCache, final boolean detailed) {
         this.maxmemtiles = maxmem / 8;
-        this.segmentDir = new File(segmentDir);
+        //this.segmentDir = new File(segmentDir);
         this.nodesMap = new OsmNodesMap();
         this.nodesMap.maxmem = (2L * maxmem) / 3L;
         this.expCtxWay = ctxWay;
@@ -59,9 +62,9 @@ public final class NodesCache {
         firstFileAccessFailed = false;
         firstFileAccessName = null;
 
-        if (!this.segmentDir.isDirectory()) {
-            throw new RuntimeException("segment directory " + segmentDir + " does not exist");
-        }
+//        if (!this.segmentDir.isDirectory()) {
+//            throw new RuntimeException("segment directory " + segmentDir + " does not exist");
+//        }
 
         if (oldCache != null) {
             fileCache = oldCache.fileCache;
@@ -320,14 +323,16 @@ public final class NodesCache {
 
         PhysicalFile ra = null;
         if (!fileCache.containsKey(filenameBase)) {
-            File f = null;
-            final File primary = new File(segmentDir, filenameBase + ".rd5");
-            if (primary.exists()) {
-                f = primary;
-            }
-            if (f != null) {
-                currentFileName = f.getName();
-                ra = new PhysicalFile(f, dataBuffers, lookupVersion, lookupMinorVersion);
+            final ContentStorage.FileInformation f = ContentStorage.get().getFileInfo(PersistableFolder.ROUTING_TILES.getFolder(), filenameBase + ".rd5");
+
+//            File f = null;
+//            final File primary = new File(segmentDir, filenameBase + ".rd5");
+//            if (primary.exists()) {
+//                f = primary;
+//            }
+            if (f != null && !f.isDirectory) {
+                currentFileName = f.name;
+                ra = new PhysicalFile((FileInputStream) ContentStorage.get().openForRead(f.uri), f.name, dataBuffers, lookupVersion, lookupMinorVersion);
             }
             fileCache.put(filenameBase, ra);
         }
@@ -344,12 +349,8 @@ public final class NodesCache {
 
     public void close() {
         for (PhysicalFile f : fileCache.values()) {
-            try {
-                if (f != null) {
-                    f.ra.close();
-                }
-            } catch (IOException ioe) {
-                // ignore
+            if (f != null) {
+                f.close();
             }
         }
     }

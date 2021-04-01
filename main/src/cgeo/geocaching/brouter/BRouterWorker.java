@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BRouterWorker {
     // public String baseDir;
-    public String segmentDir;
+    //public String segmentDir;
     public String profileName;
     public String rawTrackPath;
     public List<OsmNodeNamed> waypoints;
@@ -50,7 +50,7 @@ public class BRouterWorker {
 
         waypoints = readPositions(params);
 
-        final RoutingEngine cr = new RoutingEngine(null, null, segmentDir, waypoints, rc);
+        final RoutingEngine cr = new RoutingEngine(null, null, waypoints, rc);
         cr.quite = true;
         cr.doRun(maxRunningTime);
 
