@@ -176,7 +176,6 @@
     <string name="err_tb_display">c:geo ne more prikazati željenega sledljivčka. Ali je res sledljivček?</string>
     <string name="err_tb_details_open">c:geo ne more pokazati podatke sledljivčka.</string>
     <string name="err_tb_not_loggable">Tega sledljivčka ni mogoče logirati.</string>
-    <string name="err_tb_find">c:geo ni našel sledljivčka.</string>
     <string name="err_tb_find_that">c:geo ni našel tega sledljivčka.</string>
     <string name="err_waypoint_cache_unknown">c:geo ne ve h kateremu zakladu želite dodati točko.</string>
     <string name="err_waypoint_add_failed">c:geo ni uspelo dodati točke.</string>
@@ -293,8 +292,6 @@
     <string name="caches_select_mode_exit">Izhod iz načina izbiranja</string>
     <string name="caches_select_invert">Obrni izbor</string>
     <string name="caches_nearby">V bližini</string>
-    <string name="caches_remove_all">Odstrani vse</string>
-    <string name="caches_remove_selected">Odstrani izbrane</string>
     <string name="caches_delete_events">Izbriši pretekla srečanja</string>
     <string name="caches_refresh_selected">Osveži izbrane</string>
     <string name="caches_refresh_all">Osveži vse</string>
@@ -542,7 +539,7 @@
     <string name="sendToCgeo_download_fail">c:geo ni uspel prenesti zakladov. Vaša povezava z internetom morda ne deluje, ali pa ne deluje spletna stran send2cgeo.</string>
     <string name="sendToCgeo_no_registration">c:geo ni uspel prenesti zakladov. Registracija s send2cgeo je potekla. Prosimo ponovno registrirajte napravo v nastavitvah.</string>
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
@@ -1149,7 +1146,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <string name="map_trail_show">Pokaži sled</string>

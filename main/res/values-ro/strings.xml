@@ -193,7 +193,6 @@
     <string name="err_tb_display">c:geo nu poate afişa obiectul călător solicitat. Chiar este un obiect călător?</string>
     <string name="err_tb_details_open">c:geo nu poate accesa detaliile obiectului călător.</string>
     <string name="err_tb_not_loggable">Nu se pot face însemnări cu acest obiect călător.</string>
-    <string name="err_tb_find">c:geo nu poate găsi obiectul călător</string>
     <string name="err_tb_find_that">c:geo nu poate găsi acest obiect călător.</string>
     <string name="err_waypoint_cache_unknown">c:geo nu ştie pentru ce cutie vrei sa adaugi un punct.</string>
     <string name="err_waypoint_add_failed">c:geo nu a putut adăuga punctul.</string>
@@ -315,8 +314,6 @@
     <string name="caches_select_mode_exit">Renunţă la modul selecţie</string>
     <string name="caches_select_invert">Inversează selecţia</string>
     <string name="caches_nearby">În apropiere</string>
-    <string name="caches_remove_all">Șterge toate</string>
-    <string name="caches_remove_selected">Şterge geocutiile selectate</string>
     <string name="caches_delete_events">Şterge evenimentele trecute</string>
     <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
     <string name="caches_refresh_all">Reîncarcă toate cutiile</string>
@@ -575,7 +572,7 @@
     <string name="sendToCgeo_download_fail">c:geo nu a putut descărca cutiile. Lipsă conexiune internet sau send2cgeo nu funcţionează.</string>
     <string name="sendToCgeo_no_registration">c:geo nu a putut descărca cutiile. Înregistrarea pentru send2cgeo a expirat. Te rog înregistrează la opţiuni.</string>
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
@@ -1283,7 +1280,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <string name="map_trail_show">Arată traseu</string>

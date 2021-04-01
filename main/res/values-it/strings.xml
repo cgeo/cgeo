@@ -204,7 +204,6 @@
     <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
     <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
     <string name="err_tb_not_loggable">Questo trackable non è loggabile.</string>
-    <string name="err_tb_find">c:geo non trova nessun trackable</string>
     <string name="err_tb_find_that">c:geo non trova quel trackable.</string>
     <string name="err_waypoint_cache_unknown">c:geo non conosce a quale cache vuoi aggiungere un waypoint.</string>
     <string name="err_waypoint_add_failed">c:geo non è riuscito ad aggiungere il tuo waypoint.</string>
@@ -338,8 +337,6 @@
     <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
     <string name="caches_select_invert">Inverti selezione</string>
     <string name="caches_nearby">Qui vicino</string>
-    <string name="caches_remove_all">Elimina tutti</string>
-    <string name="caches_remove_selected">Elimina selezionati</string>
     <string name="caches_remove_all_completely">Elimina tutto dal dispositivo</string>
     <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
@@ -649,7 +646,6 @@
     <string name="init_backup_settings_restore">Ripristina impostazioni</string>
     <string name="settings_readingerror">Errore di lettura impostazioni</string>
     <string name="settings_restart">c:geo deve essere riavviato ora per rendere effettive le impostazioni caricate</string>
-    <string name="settings_folder_changed">L\'impostazione per la cartella \"%1$s\" è cambiata in \"%2$s\".\n\nTocca \"%3$s\" per mantenere l\'impostazione corrente per questa cartella.\n\nTocca \"%4$s\" per impostare la vecchia cartella. In questo caso verrà chiesta l\'autorizzazione a c:geo di accedere a quella cartella.</string>
     <string name="settings_info_offline_maps_title">Informazioni su mappe Offline</string>
     <string name="settings_info_offline_maps">c:geo supporta le mappe per l\'uso offline. È possibile ottenere mappe da diversi fornitori o anche creare le proprie mappe (da dati OSM). In primo luogo è necessario selezionare la cartella in cui le mappe offline devono essere memorizzate.</string>
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
@@ -818,7 +814,7 @@
     <string name="contentstorage_err_list_failed">I file nella cartella «%s» non possono essere elencati</string>
     <string name="contentstorage_err_folder_access_failed">Impossibile accedere alla cartella \'%s\'</string>
     <string name="contentstorage_err_copy_failed">Il file \'%1$s\' non può essere copiato/spostato in \'%2$s\' (sposta=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Definito dall\'utente</string>
     <string name="persistablefolder_usertype_default">Predefinito</string>
     <string name="persistablefolder_legacy">Classico</string>
@@ -1830,27 +1826,19 @@
     <string name="localfile_intenttitle">c:geo Gestore file locale</string>
     <string name="localfile_title">Apri un file locale</string>
     <string name="localfile_cannot_handle">Errore nella lettura del file o c:geo non può gestire questo tipo di file.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Ricevi file mappa</string>
-    <string name="receivemapfile_success">File mappa ricevuto con successo come \"%s\" e memorizzato nella cartella mappa</string>
-    <string name="receivemapfile_error">Errore durante la ricezione del file mappa</string>
-    <string name="receivemapfile_error_io_exception">Errore I/O durante la ricezione del file mappa. La cartella mappa \"%s\" è scrivibile?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Errore di file non trovato durante la ricezione del file mappa.</string>
-    <string name="receivemapfile_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
-    <string name="receivemapfile_option_overwrite">Sovrascrivere</string>
-    <string name="receivemapfile_option_differentname">Nome diverso</string>
-    <string name="receivemapfile_kb_copied">%d kB copiati</string>
-    <string name="receivemapfile_cancelled">Trasferimento file mappa annullato</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
+    <string name="receivedownload_option_overwrite">Sovrascrivere</string>
+    <string name="receivedownload_option_differentname">Nome diverso</string>
+    <string name="receivedownload_kb_copied">%d kB copiati</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
     <string name="downloadmap_info">Seleziona un file mappa per la tua regione toccando l\'icona \"Salva\".\n\nIl download viene eseguito in background. Quando il trasferimento è completato, il file viene copiato nella cartella della mappa c:geo e impostato come mappa corrente.\n\nAttenzione: il download di una mappa può consumare una grande quantità di dati internet!</string>
     <string name="downloadmap_choose">Scegli mappa</string>
     <string name="downloadmap_filename">Scaricamento di %s</string>
-    <string name="downloadmanager_not_available">Impossibile scaricare il file mappa, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
     <string name="downloadmap_target_not_writable">L\'obiettivo selezionato \"%s\" non è scrivibile - il file di mappa scaricato viene salvato nella cartella di download di sistema e deve essere spostato manualmente nella cartella mappa.</string>
     <string name="downloadmap_allow_metered_network">Consenti il download tramite rete a consumo (ad esempio: connessione mobile)</string>
-    <string name="downloadmap_confirmation">Scarica la mappa \"%1$s\"?\n\nQuesto potrebbe richiedere molto tempo e portare a costi significativi, a seconda della tua connessione di rete.\n\nInformazioni sulla dimensione: %2$s</string>
     <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
     <string name="button_continue">Continua</string>
     <string name="downloadmap_onedirup">(un livello superiore)</string>
@@ -1894,9 +1882,6 @@
     <string name="wizard_permissions_intro">c:geo ha bisogno di alcuni permessi sul tuo dispositivo per funzionare correttamente.\nTi spiegherò maggiori dettagli nei prossimi passi.</string>
     <string name="wizard_permissions_folder_title">Imposta cartella: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare dati come file GPX, backup, note di campo e file di log. Come per impostazione predefinita, questi file sono memorizzati sotto una cosiddetta \"cartella di base\". Selezionare o creare questa cartella nel passaggio successivo.\n\nSe hai aggiornato c:geo da una versione precedente, seleziona la cartella esistente \"cgeo\" sul livello principale dell\'archivio del tuo dispositivo.\nSuggerimento: potrebbe essere necessario, come prima cosa, mostrare la memoria interna del dispositivo nel selettore dei file che verrà visualizzato successivamente.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file di mappa offline. Selezionare o creare una tale cartella nel passaggio successivo.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file dei temi di mappa offline. Selezionare o creare tale cartella nel passaggio successivo.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file GPX (es. per importare / esportare cache o tracce). Selezionare o creare una tale cartella nel passaggio successivo.</string>
     <string name="wizard_platforms_title">Configura servizi</string>
     <string name="wizard_platforms_intro">Per trovare le geocache con c:geo è necessario un account per un servizio di geocaching supportato da c:geo.\nSeleziona il servizio desiderato qui sotto per accedere con il tuo account esistente o creare un nuovo account.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>

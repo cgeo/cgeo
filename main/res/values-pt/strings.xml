@@ -204,7 +204,7 @@
     <string name="err_tb_display">O c:geo não consegue mostrar o trackable pretendido. É mesmo um trackable?</string>
     <string name="err_tb_details_open">O c:geo não consegue abrir os detalhes do trackable.</string>
     <string name="err_tb_not_loggable">Este trackable não pode ser registado.</string>
-    <string name="err_tb_find">O c:geo não encontra o trackable</string>
+    <string name="err_tb_not_found">O c:geo não encontra o trackable %s.</string>
     <string name="err_tb_find_that">O c:geo não encontra esse trackable.</string>
     <string name="err_waypoint_cache_unknown">O c:geo não sabe a que geocache pretende adicionar o ponto adicional.</string>
     <string name="err_waypoint_add_failed">O c:geo não conseguiu adicionar o seu ponto adicional.</string>
@@ -338,8 +338,6 @@
     <string name="caches_select_mode_exit">Sair do modo de selecção</string>
     <string name="caches_select_invert">Inverter selecção</string>
     <string name="caches_nearby">Por perto</string>
-    <string name="caches_remove_all">Remover todas</string>
-    <string name="caches_remove_selected">Remover seleccionada(s)</string>
     <string name="caches_remove_all_completely">Eliminar todas do dispositivo</string>
     <string name="caches_remove_selected_completely">Eliminar seleccionadas do dispositivo</string>
     <string name="caches_delete_events">Eliminar eventos passados</string>
@@ -459,6 +457,8 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Definir a fonte do mapa, definições de mapa offline e detalhes do mapa.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
+    <string name="settings_title_offline_routing">Encaminhamento offline</string>
+    <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
     <string name="settings_title_map_rotation">Rotação do mapa (Google Maps)</string>
     <string name="settings_title_waypoints">Pontos adicionais</string>
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
@@ -569,8 +569,12 @@
     <string name="init_brouterThreshold">Calcular rota</string>
     <string name="init_brouterThreshold_description">Distância máxima até que a aplicação BRouter (se instalada) irá calcular uma rota.</string>
     <string name="init_brouterShowBothDistances">Mostrar distância em linha recta</string>
+    <string name="init_brouterAutoTileDownloads">Transferência automática</string>
+    <string name="init_brouterAutoTileDownloads_description">Oferecer automaticamente a transferência de dados dos blocos para encaminhamento em falta.</string>
     <string name="brouter_recalculating">A recalcular a rota em segundo plano…</string>
     <string name="init_summary_brouterShowBothDistances">Se a navegação estiver activa: Mostra a distância em linha recta além do comprimento da rota.</string>
+    <string name="init_useInternalRouting">Usar encaminhamento interno</string>
+    <string name="init_summary_useInternalRouting">Use o encaminhamento interno do c:geo para poder usar o descarregamento e actualização automáticos dos dados de encaminhamento</string>
     <string name="init_bigSmileysOnMap">Grandes ícones nas caches registadas</string>
     <string name="init_summary_bigSmileysOnMap">Se activado, as caches registadas serão mostradas no mapa por grandes emoticons, ao invés dos ícones do tipo de cache (requer reinício).</string>
     <string name="init_disabled">Excluir Desactivadas</string>
@@ -649,7 +653,6 @@
     <string name="init_backup_settings_restore">Restaurar definições</string>
     <string name="settings_readingerror">Erro ao ler as definições</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
-    <string name="settings_folder_changed">A definição para a pasta \"%1$s\" mudou para \"%2$s\".\n\nToque em \"%3$s\" para manter a configuração actual para esta pasta.\n\nToque em \"%4$s\" para definir a pasta antiga. Nesse caso, será solicitado que autorize o acesso a essa pasta para o c:geo.</string>
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
     <string name="settings_info_offline_maps">O c:geo suporta mapas para uso offline. Pode obter mapas de diferentes fornecedores ou até mesmo criar os seus próprios mapas (de dados OSM). Em primeiro lugar, seleccione a pasta na qual os mapas offline serão guardados.</string>
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
@@ -658,6 +661,9 @@
     <string name="init_local_file_system">Sistema de Ficheiros Local</string>
     <string name="init_base_directory_description">Pasta base para dados locais públicos</string>
     <string name="init_map_directory_description">Pasta com mapas offline</string>
+    <string name="init_brouter_directory_description">Pasta com dados de encaminhamento do BRouter</string>
+    <string name="init_brouter_updateinterval_title">Intervalo de actualização</string>
+    <string name="init_brouter_updateinterval_description">Lembra a cada x dias para verificação de actualizações</string>
     <string name="init_gpx_importexportdir">Pasta GPX</string>
     <string name="init_dataDir">Seleccionar pasta de dados</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
@@ -818,7 +824,7 @@
     <string name="contentstorage_err_list_failed">Os ficheiros na Pasta \'%s\' não puderam ser listados</string>
     <string name="contentstorage_err_folder_access_failed">A pasta \'%s\' não pôde ser acedida</string>
     <string name="contentstorage_err_copy_failed">O ficheiro \'%1$s\' não pôde ser copiado/movido para \'%2$s\' (mover=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Definida pelo utilizador</string>
     <string name="persistablefolder_usertype_default">Padrão</string>
     <string name="persistablefolder_legacy">Antiga</string>
@@ -831,6 +837,9 @@
     <string name="persistablefolder_logfiles">Ficheiros de registo</string>
     <string name="persistablefolder_fieldnotes">Notas de Campo</string>
     <string name="persistablefolder_spoilerimages">Imagens spoiler</string>
+    <string name="persistablefolder_routingbase">Encaminhamento</string>
+    <string name="persistablefolder_routingtiles">Dados de encaminhamento</string>
+    <string name="persistableuri_track">Ficheiro dos percursos</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s concluídos</string>
     <string name="folder_process_status_currentfile">A processar %1$s</string>
@@ -1825,27 +1834,30 @@
     <string name="localfile_intenttitle">Processamento de ficheiros locais do c:geo</string>
     <string name="localfile_title">Abrir um ficheiro local</string>
     <string name="localfile_cannot_handle">Erro ao ler o ficheiro ou o c:geo não consegue processar este tipo de ficheiro.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Receber um ficheiro de mapa</string>
-    <string name="receivemapfile_success">O ficheiro de mapa foi recebido com sucesso como \"%s\" e armazenado na pasta de mapas</string>
-    <string name="receivemapfile_error">Erro ao receber ficheiro de mapa</string>
-    <string name="receivemapfile_error_io_exception">Erro ao receber o ficheiro de mapa. É possível escrever na sua pasta de mapas \"%s?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Erro de ficheiro não encontrado, ao receber o ficheiro de mapa.</string>
-    <string name="receivemapfile_alreadyexists">Já existe um ficheiro com este nome. Substituir o ficheiro existente ou guardar o novo ficheiro sob um nome diferente?</string>
-    <string name="receivemapfile_option_overwrite">Substituir</string>
-    <string name="receivemapfile_option_differentname">Nome diferente</string>
-    <string name="receivemapfile_kb_copied">%d kB copiados</string>
-    <string name="receivemapfile_cancelled">Transferência do ficheiro de mapa cancelada</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Receber ficheiro</string>
+    <string name="receivedownload_success">Ficheiro armazenado com sucesso como \"%s\"</string>
+    <string name="receivedownload_error">Erro ao receber ficheiro</string>
+    <string name="receivedownload_error_io_exception">Erro ao receber o ficheiro. A pasta \"%s permite a gravação?</string>
+    <string name="receivedownload_error_filenotfound_exception">Erro de ficheiro não encontrado, ao receber o ficheiro.</string>
+    <string name="receivedownload_alreadyexists">Já existe um ficheiro com este nome. Substituir o ficheiro existente ou guardar o novo ficheiro sob um nome diferente?</string>
+    <string name="receivedownload_option_overwrite">Substituir</string>
+    <string name="receivedownload_option_differentname">Nome diferente</string>
+    <string name="receivedownload_kb_copied">%d kB copiados</string>
+    <string name="receivedownload_cancelled">Transferência de ficheiros cancelada</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Transferir mapa offline</string>
+    <string name="download_title">Transferir ficheiro</string>
     <string name="downloadmap_info">Escolha um ficheiro de mapa para a sua região, tocando no ícone \"Guardar\".\n\nA transferência será executada em segundo plano. Quando estiver concluída, o ficheiro transferido será copiado para a pasta de mapas do c:geo e definido como o mapa actual.\n\nCuidado: Transferir um mapa pode originar tráfego de rede elevado!</string>
     <string name="downloadmap_choose">Escolher mapa</string>
     <string name="downloadmap_filename">A transferir %s</string>
-    <string name="downloadmanager_not_available">Mapa não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
+    <string name="downloadmanager_not_available">O ficheiro não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
     <string name="downloadmap_target_not_writable">O destino seleccionado \"%s\" não é gravável - o mapa transferido será gravado na pasta de transferências do sistema e deve ser movido manualmente para a pasta de mapas.</string>
     <string name="downloadmap_allow_metered_network">Permitir a transferência através de redes limitadas (por exemplo: ligação móvel)</string>
-    <string name="downloadmap_confirmation">Transferir o mapa \"%1$s\"?\n\nIsso pode levar algum tempo e pode resultar num custo significativo, dependendo da sua ligação à rede.\n\nInformação de tamanho: %2$s</string>
+    <string name="download_confirmation">%1$sTransferir o ficheiro \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Actualizações encontradas para:\n%1$s\n\nDeseja actualizar?%2$s</string>
+    <string name="download_warning">Isso pode demorar algum tempo e levar a custos significativos, dependendo da sua ligação à rede.</string>
     <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
     <string name="button_continue">Continuar</string>
     <string name="downloadmap_onedirup">(um nível acima)</string>
@@ -1858,11 +1870,17 @@
     <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
     <string name="downloadmap_install_theme_title">Instalar ficheiro de tema</string>
     <string name="downloadmap_install_theme_info">O mapa descarregado requer um ficheiro de tema especial. Também deseja descarregá-lo?</string>
+    <string name="downloadtile_title">Dados de encaminhamento em falta</string>
+    <string name="downloadtile_info">O c:geo não pode calcular a rota solicitada, pois falta algum ficheiro de dados de encaminhamento. Quer transferir os dados de encaminhamento em falta?</string>
+    <string name="tileupdate_info">Deseja verificar se há actualizações para os ficheiros de dados de encaminhamento transferidos?</string>
+    <string name="no_updates_found">Nenhuma actualização encontrada</string>
+    <string name="updates_check">Verificação de actualizações</string>
     <string name="mapserver_mapsforge_info">Mapas básicos, nenhum tema de mapa necessário</string>
     <string name="mapserver_openandromaps_info">Mapas detalhados, requer o tema do mapa \"Elevado\"</string>
     <string name="mapserver_openandromaps_themes_info">Tema de mapa detalhado, feito para mapas \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mapas detalhados, exigem um dos temas de mapa \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema de mapa detalhado, feito para mapas \"Freizeitkarte\"</string>
+    <string name="brouter_info">Serviço de encaminhamento offline</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
@@ -1889,9 +1907,11 @@
     <string name="wizard_permissions_intro">O c:geo precisa de certas permissões no seu dispositivo para funcionar correctamente.\nVou explicar mais detalhes nos próximos passos.</string>
     <string name="wizard_permissions_folder_title">Definir pasta: %s</string>
     <string name="wizard_basefolder_request_explanation">O c:geo precisa de uma pasta local para guardar dados como ficheiros GPX, cópias de segurança, notas pessoais e ficheiros de registo. Por predefinição, esses ficheiros são guardados em sub-pastas da chamada \"pasta base\". Seleccione ou crie essa pasta na próxima etapa.\n\nSe tiver actualizado o c:geo de uma versão anterior, seleccione a pasta existente \"cgeo\" no nível de raíz do armazenamento do dispositivo.\nDica: Poderá ter, em primeiro lugar, de retirar a ocultação do armazenamento interno do seu dispositivo no ecrã de selecção de ficheiro que aparecerá a seguir.</string>
-    <string name="wizard_mapfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar ficheiros de mapa offline. Seleccione ou crie essa pasta na próxima etapa.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar os ficheiros de temas para os mapas offline. Seleccione ou crie essa pasta na próxima etapa.</string>
-    <string name="wizard_gpxfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar os ficheiros GPX (ex: para importar / exportar caches ou percursos). Seleccione ou crie essa pasta na próxima etapa.</string>
+    <string name="wizard_mapfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar ficheiros de mapa offline.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar os ficheiros de temas para mapas offline.</string>
+    <string name="wizard_gpxfolder_request_explanation">O c:geo precisa de uma pasta local para armazenar ficheiros GPX (por exemplo, para importar / exportar caches ou percursos).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Para usar a funcionalidade integrada de transferência e actualização automáticas de dados dos blocos para encaminhamento, precisa definir uma pasta para os guardar.</string>
+    <string name="wizard_select_or_create">Seleccione ou crie essa pasta no próximo passo.</string>
     <string name="wizard_platforms_title">Configurar serviços</string>
     <string name="wizard_platforms_intro">Para encontrar geocaches com o c:geo, precisa de uma conta num serviço de geocaching suportado pelo c:geo.\nSeleccione abaixo o serviço pretendido, seja para iniciar a sessão com a sua conta ou para criar uma nova conta.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>

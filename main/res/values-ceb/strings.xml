@@ -153,7 +153,6 @@
     <string name="err_tb_display">ang c:geo dili maka pakita sa trackable na imong gusto. Kani ba trackable gyud?</string>
     <string name="err_tb_details_open">ang c:geo dili maka abli sa mga detalye sa trackable.</string>
     <string name="err_tb_not_loggable">Kani nga geocache trackable kay dili pwede gamiton.</string>
-    <string name="err_tb_find">ang c:geo dili maka kita sa trackable</string>
     <string name="err_tb_find_that">ang c:geo dili maka kita ni anang trackable.</string>
     <string name="err_waypoint_cache_unknown">ang c:geo wala masayud kung sa asa na cache nimo gusto i-puno ang waypoint.</string>
     <string name="err_waypoint_add_failed">ang c:geo napakyas og pag puno sa imoha nga waypoint.</string>
@@ -271,8 +270,6 @@
     <string name="caches_select_mode_exit">Ang pagpili sa paggawas na paagi</string>
     <string name="caches_select_invert">Baliha ang pilianan</string>
     <string name="caches_nearby">Sa duol</string>
-    <string name="caches_remove_all">Tangtangon tanan</string>
-    <string name="caches_remove_selected">Tangtangon ang napilian</string>
     <string name="caches_delete_events">Papason ang miagi na kalilhokan</string>
     <string name="caches_refresh_selected">Bag-ohon ang napili</string>
     <string name="caches_refresh_all">Bag-ohon tanan</string>
@@ -521,7 +518,7 @@
     <string name="sendToCgeo_download_fail">c:geo napakyas ang pag-dowbload sa caches. Walay koneksyon sa internet, o send2cgeo kay ubos pa.</string>
     <string name="sendToCgeo_no_registration">napakyas ang c:geo sa pag-download sa mga caches. Ang pagparehistro para sa send2cgeo kay natapos. Palihug parehistro sa mga kahimtangan.</string>
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
@@ -1190,7 +1187,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->

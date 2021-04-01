@@ -201,7 +201,6 @@
     <string name="err_tb_display">c:geo无法展示你想要的可跟踪物。它真是是一个可跟踪物吗？</string>
     <string name="err_tb_details_open">c:geo 无法打开可追踪物详情。</string>
     <string name="err_tb_not_loggable">该可追踪物的日志功能不可用。</string>
-    <string name="err_tb_find">c:geo 找不到可追踪物</string>
     <string name="err_tb_find_that">c:geo 找不到那个可追踪物。</string>
     <string name="err_waypoint_cache_unknown">c:geo 不知道您想要添加航点到哪个藏点。</string>
     <string name="err_waypoint_add_failed">c:geo 无法添加您的航点。</string>
@@ -331,8 +330,6 @@
     <string name="caches_select_mode_exit">退出选择模式</string>
     <string name="caches_select_invert">反转选择</string>
     <string name="caches_nearby">附近的</string>
-    <string name="caches_remove_all">移除所有</string>
-    <string name="caches_remove_selected">删除选中的</string>
     <string name="caches_delete_events">删除过去的事件</string>
     <string name="caches_upload_modifiedcoords">上传更改后的坐标</string>
     <string name="caches_upload_modifiedcoords_warning">您想要上传所有的 (选中的) 藏点修改过的坐标，并覆盖服务器上的现有坐标吗？这个操作不能被撤消。</string>
@@ -727,7 +724,7 @@
     <string name="settings_title_proximityNotification">接近时通知</string>
     <!-- map sources -->
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
@@ -795,7 +792,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->

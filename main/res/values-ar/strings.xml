@@ -165,7 +165,6 @@
     <string name="err_tb_display">c:geo لا يمكنه عرض أمتعة السفر التي تريدها. هل هي حقا أمتعة سفر؟</string>
     <string name="err_tb_details_open">c:geo لا يمكنه فتح تفاصيل أمتعة السفر.</string>
     <string name="err_tb_not_loggable">أمتعة السفر هذه غير قابل للتسجيل.</string>
-    <string name="err_tb_find">c:geo لا يستطيع العثور على أمتعة السفر</string>
     <string name="err_tb_find_that">c:geo لا يستطيع العثور على أمتعة السفر تلك.</string>
     <string name="err_waypoint_cache_unknown">c:geo لا يعرف ماهو المخبئ الذي تريد أن تضيف له إحداثية طريق.</string>
     <string name="err_waypoint_add_failed">c:geo فشل في إضافة إحداثية طريق.</string>
@@ -282,8 +281,6 @@
     <string name="caches_select_mode_exit">إنهاء الوضع المحدد</string>
     <string name="caches_select_invert">إعكس التحديد</string>
     <string name="caches_nearby">قريب</string>
-    <string name="caches_remove_all">إزالة الكل</string>
-    <string name="caches_remove_selected">إزالة المحدد</string>
     <string name="caches_delete_events">إزالة الأحداث الماضية</string>
     <string name="caches_refresh_selected">عمل تحديث للتحديد</string>
     <string name="caches_refresh_all">تحديث الكل</string>
@@ -548,7 +545,7 @@
     <string name="sendToCgeo_download_fail">c:geo فشل في تحميل المخبآت. بسبب عدم وجود اتصال بالإنترنات أو يوجد مشكل في send2cgeo.</string>
     <string name="sendToCgeo_no_registration">c:geo فشل في تحميل المخبآت. انتهت مدة التسجيل في send2cgeo. الرجاء التسجيل في الإعدادات.</string>
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
@@ -1187,7 +1184,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->

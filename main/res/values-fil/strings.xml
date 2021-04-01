@@ -157,7 +157,6 @@
     <string name="err_tb_display">c:geo ay hindi sya maka display ng gusto mong subaybayan. Kailangan ba talagang subaybayan?</string>
     <string name="err_tb_details_open">c:geo ay hindi makabukas sa mga detalye na subaybayan.</string>
     <string name="err_tb_not_loggable">Ito ay maaring subaybayan pero hindi naka-login.</string>
-    <string name="err_tb_find">c:geo ay hindi puwedeng subaybayan</string>
     <string name="err_tb_find_that">ang c:geo ay hindi nakakita sa nasusubaybayang iyon.</string>
     <string name="err_waypoint_cache_unknown">ang c:geo ay walang alam sa kung anong cache ang iyong gusto na dagdagan ng parang isang waypoint.</string>
     <string name="err_waypoint_add_failed">ang c:geo ay nabiigo sa pagdagdag ng iyong puntongdaan.</string>
@@ -280,8 +279,6 @@
     <string name="caches_select_mode_exit">Lumabas sa napiling mode</string>
     <string name="caches_select_invert">Baliktarin ang pagpipilian</string>
     <string name="caches_nearby">Malapit sa</string>
-    <string name="caches_remove_all">Ang lahat ay tanggalin</string>
-    <string name="caches_remove_selected">Tanggalin ang mga napili</string>
     <string name="caches_delete_events">Alisin ang nakalipas na mga kaganapan</string>
     <string name="caches_refresh_selected">I-refresh ang napili</string>
     <string name="caches_refresh_all">Ang lahat ay i-refresh</string>
@@ -545,7 +542,7 @@
     <string name="sendToCgeo_download_fail">pumalya sa pagda-download ng mga cache ang c:geo. Walang koneksyon sa internet, o nag-down ang send2cgeo.</string>
     <string name="sendToCgeo_no_registration">ang c;geo ay Nabigo sa pagda-download ng mga cache. Nag-expire na ang rehistrasyon para sa send2cgeo. Mangyaring magrehistro sa mga setting.</string>
     <!-- Content Storage -->
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
@@ -1234,7 +1231,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->

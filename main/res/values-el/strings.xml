@@ -204,7 +204,6 @@
     <string name="err_tb_display">Το c:geo δεν μπορεί να εμφανίσει το ανιχνεύσιμο. Είστε σίγουροι ότι είναι ανιχνεύσιμο;</string>
     <string name="err_tb_details_open">To c:geo δεν μπορεί να ανοίξει τις λεπτομέρειες του ανιχνεύσιμου.</string>
     <string name="err_tb_not_loggable">Αυτό το ανιχνεύσιμο δεν δέχεται καταγραφές.</string>
-    <string name="err_tb_find">Δεν βρέθηκε το ανιχνεύσιμο</string>
     <string name="err_tb_find_that">Το c:geo δεν μπορεί να βρει το συγκεκριμένο ανιχνεύσιμο.</string>
     <string name="err_waypoint_cache_unknown">Το c:geo δεν ξέρει για ποια κρύπτη θέλετε να προσθέσετε ένα σημείο αναφοράς.</string>
     <string name="err_waypoint_add_failed">Το c:geo απέτυχε να προσθέσει το σημείο αναφοράς.</string>
@@ -338,8 +337,8 @@
     <string name="caches_select_mode_exit">Έξοδος από τη λειτουργία επιλογής</string>
     <string name="caches_select_invert">Αντιστροφή επιλογής</string>
     <string name="caches_nearby">Σε κοντινή απόσταση</string>
-    <string name="caches_remove_all">Διαγραφή όλων</string>
-    <string name="caches_remove_selected">Διαγραφή επιλεγμένων</string>
+    <string name="caches_remove_all">Αφαίρεση όλων από τη λίστα</string>
+    <string name="caches_remove_selected">Αφαίρεση επιλογών από τη λίστα</string>
     <string name="caches_remove_all_completely">Διαγραφή όλων από τη συσκευή</string>
     <string name="caches_remove_selected_completely">Διαγραφή επιλεγμένων από τη συσκευή</string>
     <string name="caches_delete_events">Διαγραφή πρηγούμενων εκδηλώσεων</string>
@@ -459,6 +458,8 @@
     <string name="settings_title_map">Χάρτης</string>
     <string name="settings_summary_map">Ορισμός βασικού χάρτη, ρυθμίσεις χάρτη εκτός σύνδεσης και λεπτομέρειες χάρτη.</string>
     <string name="settings_title_map_data">Δεδομένα χάρτη</string>
+    <string name="settings_title_offline_routing">Δρομολόγηση εκτός σύνδεσης</string>
+    <string name="settings_summary_offline_routing">Η σύνδεση δρομολόγησης είναι διαθέσιμη αν είτε η βοηθητική εφαρμογή \"BRouter\" είναι εγκατεστημένη και ρυθμισμένη είτε η εσωτερική δρομολόγηση είναι ενεργοποιημένη.</string>
     <string name="settings_title_map_rotation">Περιστροφή χάρτη (Google Maps)</string>
     <string name="settings_title_waypoints">Σημεία αναφοράς</string>
     <string name="settings_title_map_content">Περιεχόμενα Χάρτη</string>
@@ -569,8 +570,12 @@
     <string name="init_brouterThreshold">Υπολογισμός διαδρομής</string>
     <string name="init_brouterThreshold_description">Η μέγιστη απόσταση που η βοηθητική εφαρμογή BRouter (αν είναι εγκατεστημένη) θα υπολογίσει σε μια διαδρομή.</string>
     <string name="init_brouterShowBothDistances">Εμφάνιση ευθείας απόστασης</string>
+    <string name="init_brouterAutoTileDownloads">Αυτόματη λήψη</string>
+    <string name="init_brouterAutoTileDownloads_description">Αυτόματη προσφορά για λήψη δεδομένων δρομολόγησης που λείπουν.</string>
     <string name="brouter_recalculating">Επανυπολογισμός διαδρομής στο παρασκήνιο…</string>
     <string name="init_summary_brouterShowBothDistances">Αν η δρομολόγηση είναι ενεργή: Εμφάνιση ευθείας απόστασης επιπλέον του υπολογισμένου μήκους διαδρομής.</string>
+    <string name="init_useInternalRouting">Χρήση εσωτερικής δρομολόγησης</string>
+    <string name="init_summary_useInternalRouting">Χρησιμοποιήστε εσωτερική δρομολόγηση του c:geo για να μπορείτε να χρησιμοποιήσετε την αυτόματη δρομολόγηση δεδομένων λήψης και ενημέρωσης</string>
     <string name="init_bigSmileysOnMap">Μεγάλα εικονίδια για καταγεγραμμένες κρύπτες</string>
     <string name="init_summary_bigSmileysOnMap">Εάν ενεργοποιηθεί θα φαίνονται μεγάλα emoticons στις καταγεγραμμένες κρύπτες στον χάρτη, αντί του εικονιδίου του τύπου της κρύπτης (απαιτείται επανεκκίνηση).</string>
     <string name="init_disabled">Εξαίρεση Απενεργοποιημένων</string>
@@ -649,7 +654,8 @@
     <string name="init_backup_settings_restore">Επαναφορά ρυθμίσεων</string>
     <string name="settings_readingerror">Ρυθμίσεις ανάγνωσης σφαλμάτων</string>
     <string name="settings_restart">Το c:geo χρειάζεται επανεκκίνηση για την ενεργοποίηση των νέων ρυθμίσεων</string>
-    <string name="settings_folder_changed">Η ρύθμιση για το φάκελο \"%1$s\" έχει αλλάξει σε \"%2$s\".\n\nΠατήστε \"%3$s\" για να διατηρήσετε την τρέχουσα ρύθμιση για αυτόν το φάκελο.\n\nΠατήστε \"%4$s\" για να ορίσετε τον παλιό φάκελο. Θα σας ζητηθεί να ξαναδώσετε την πρόσβαση του c:geo σε αυτόν τον φάκελο σε αυτή την περίπτωση.</string>
+    <string name="settings_folder_changed">\"%1$s\" θα αλλάξει σε \"%2$s\" κατά την επαναφορά.\n\nΠατήστε \"%4$s\" για να συνεχίσετε. Σε αυτή την περίπτωση θα σας ζητηθεί να ξαναδώσετε στο c:geo πρόσβαση σε αυτόν τον φάκελο.\n\nΠατήστε \"%3$s\" για να διατηρήσετε την τρέχουσα ρύθμιση φακέλου.</string>
+    <string name="settings_file_changed">\"%1$s\" θα αλλάξει σε \"%2$s\" κατά την επαναφορά.\n\nΠατήστε \"%4$s\" για να συνεχίσετε. Σε αυτή την περίπτωση θα σας ζητηθεί να ξαναδώσετε στο c:geo πρόσβαση σε αυτόν τον φάκελο.\n\nΠατήστε \"%3$s\" για να διατηρήσετε την τρέχουσα ρύθμιση φακέλου.</string>
     <string name="settings_info_offline_maps_title">Πληροφορίες για χάρτες εκτός σύνδεσης</string>
     <string name="settings_info_offline_maps">Το c:geo υποστηρίζει χάρτες για χρήση εκτός σύνδεσης. Μπορείτε να αποκτήσετε χάρτες από διαφορετικούς παρόχους ή ακόμα και να δημιουργήσετε δικούς σας χάρτες (από δεδομένα OSM). Πρώτα θα πρέπει να επιλέξετε το φάκελο στον οποίο θα αποθηκεύονται χάρτες εκτός σύνδεσης.</string>
     <string name="settings_info_themes_title">Πληροφορίες σχετικά με θέματα χαρτών</string>
@@ -658,6 +664,9 @@
     <string name="init_local_file_system">Τοπικό Σύστημα Αρχείων</string>
     <string name="init_base_directory_description">Βασικός Κατάλογος για δημόσια τοπικά δεδομένα</string>
     <string name="init_map_directory_description">Κατάλογος χαρτών εκτός σύνδεσης</string>
+    <string name="init_brouter_directory_description">Φάκελος με δεδομένα δρομολόγησης BRouter</string>
+    <string name="init_brouter_updateinterval_title">Διάστημα μεταξύ ενημερώσεων</string>
+    <string name="init_brouter_updateinterval_description">Σας υπενθυμίζει κάθε x ημέρες για έλεγχο ενημερώσεων</string>
     <string name="init_gpx_importexportdir">Φάκελος GPX</string>
     <string name="init_dataDir">Επιλέξτε φάκελο</string>
     <string name="init_dataDir_note">Μπορείτε να επιλέξετε την αποθήκευση των πρόσθετων δεδομένων των κρυπτών (σπόιλερ, καταγραφές, εικόνες, …) σε εξωτερική συσκευή αποθήκευσης ( πραγματική ή μη εξωτερική κάρτα SD ανάλογα με τη συσκευή σας).</string>
@@ -818,7 +827,7 @@
     <string name="contentstorage_err_list_failed">Δεν ήταν δυνατή η καταχώρηση αρχείων στο φάκελο \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">Δεν ήταν δυνατή η πρόσβαση στον φάκελο \'%s\'</string>
     <string name="contentstorage_err_copy_failed">Το αρχείο \'%1$s\' δεν μπορεί να αντιγραφεί/μετακινηθεί στο \'%2$s\' (μετακίνηση=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Ορισμένο από τον Χρήστη</string>
     <string name="persistablefolder_usertype_default">Προεπιλογή</string>
     <string name="persistablefolder_legacy">Παλαιού τύπου</string>
@@ -831,6 +840,9 @@
     <string name="persistablefolder_logfiles">Αρχεία καταγραφής</string>
     <string name="persistablefolder_fieldnotes">Σημειώσεις πεδίου</string>
     <string name="persistablefolder_spoilerimages">Εικόνες spoiler</string>
+    <string name="persistablefolder_routingbase">Δρομολόγηση</string>
+    <string name="persistablefolder_routingtiles">Δεδομένα δρομολόγησης</string>
+    <string name="persistableuri_track">Αρχείο Διαδρομής</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s ολοκληρώθηκαν</string>
     <string name="folder_process_status_currentfile">Διαδικασία %1$s</string>
@@ -1021,6 +1033,10 @@
     <string name="menu_caches">Διαχείριση κρυπτών</string>
     <string name="cache_menu_event">Προσθήκη στο ημερολόγιο</string>
     <string name="cache_menu_extract_waypoints">Εξαγωγή σημείων αναφοράς</string>
+    <string name="cache_menu_set_found">Ορισμός ως \'\'Βρέθηκε\'\'</string>
+    <string name="cache_menu_set_DNF">Ορισμός ως \'\'Δεν Βρέθηκε\'\'</string>
+    <string name="cache_menu_reset_foundstate">Επαναφορά σε \'\'Βρέθηκε\'\'</string>
+    <string name="cache_foundstate_updated">Η κατάσταση \'\'Βρέθηκε\'\' ενημερώθηκε</string>
     <string name="cache_menu_set_cache_icon">Ορισμός εικονιδίου κρύπτης</string>
     <string name="cache_icon_updated">Ενημερώθηκε το εικονίδιο κρύπτης</string>
     <string name="cache_menu_details">Λεπτομέρειες</string>
@@ -1825,28 +1841,31 @@
     <string name="localfile_intenttitle">c:geo διαχειριστής τοπικού αρχείου</string>
     <string name="localfile_title">Άνοιγμα τοπικού αρχείου</string>
     <string name="localfile_cannot_handle">Σφάλμα ανάγνωσης αρχείου ή το c:geo δεν μπορεί να διαχειριστεί αυτόν το τύπο αρχείου.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Λήψη αρχείου χάρτη</string>
-    <string name="receivemapfile_success">Η λήψη του αρχείου χάρτη ήταν επιτυχής και αποθηκεύτηκε ως \"%s\" στον κατάλογο των χαρτών</string>
-    <string name="receivemapfile_error">Σφάλμα κατά την λήψη του αρχείου χάρτη</string>
-    <string name="receivemapfile_error_io_exception">Σφάλμα I/O κατά την λήψη του αρχείου χάρτη. Μπορεί να γίνει εγγραφή στην θέση αποθήκευσης του χάρτη \"%s\";</string>
-    <string name="receivemapfile_error_filenotfound_exception">Σφάλμα δεν βρέθηκε το αρχείο κατά την λήψη του αρχείου χάρτη.</string>
-    <string name="receivemapfile_alreadyexists">Ένα αρχείο με αυτό το όνομα υπάρχει ήδη. Να γίνει αντικατάσταση του υπάρχοντος αρχείου ή να γίνει αποθήκευση του νέου αρχείου με διαφορετικό όνομα;</string>
-    <string name="receivemapfile_option_overwrite">Αντικατάσταση</string>
-    <string name="receivemapfile_option_differentname">Διαφορετικό όνομα</string>
-    <string name="receivemapfile_kb_copied">%d kB αντιγράφησαν</string>
-    <string name="receivemapfile_cancelled">Η μεταφορά του αρχείου χάρτη ακυρώθηκε</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Λήψη αρχείου</string>
+    <string name="receivedownload_success">Το αρχείο αποθηκεύτηκε επιτυχώς ως \"%s\"</string>
+    <string name="receivedownload_error">Σφάλμα κατά την λήψη του αρχείου</string>
+    <string name="receivedownload_error_io_exception">Σφάλμα I/O κατά την λήψη του αρχείου. Μπορεί να γίνει εγγραφή στην θέση αποθήκευσης \"%s\";</string>
+    <string name="receivedownload_error_filenotfound_exception">Το \'αρχείο δεν βρέθηκε\' σφάλμα κατά τη λήψη αρχείου.</string>
+    <string name="receivedownload_alreadyexists">Ένα αρχείο με αυτό το όνομα υπάρχει ήδη. Να γίνει αντικατάσταση του υπάρχοντος αρχείου ή να γίνει αποθήκευση του νέου αρχείου με διαφορετικό όνομα;</string>
+    <string name="receivedownload_option_overwrite">Αντικατάσταση</string>
+    <string name="receivedownload_option_differentname">Διαφορετικό όνομα</string>
+    <string name="receivedownload_kb_copied">%d kB αντιγράφησαν</string>
+    <string name="receivedownload_cancelled">Η μεταφορά των αρχείων ακυρώθηκε</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Λήψη χαρτών εκτός σύνδεσης</string>
+    <string name="download_title">Λήψη αρχείου</string>
     <string name="downloadmap_info">Επιλέξτε ένα αρχείο χάρτη για την περιοχή σας πατώντας το εικονίδιο \"Αποθήκευση\".\n\n
 Η λήψη θα εκτελεστεί στο παρασκήνιο. Όταν ολοκληρωθεί, το αρχείο θα αντιγραφεί στον κατάλογο χαρτών του c: geo και θα οριστεί ως τρέχων χάρτης. \n\nΠροσοχή: Η λήψη ενός χάρτη μπορεί να προκαλέσει υψηλή κίνηση στο δίκτυο!</string>
     <string name="downloadmap_choose">Επιλέξτε χάρτη</string>
     <string name="downloadmap_filename">Γίνεται λήψη του %s</string>
-    <string name="downloadmanager_not_available">Δεν είναι δυνατή η λήψη του αρχείου χάρτη, ο διαχειριστής λήψης συστήματος δεν είναι διαθέσιμος</string>
+    <string name="downloadmanager_not_available">Δεν είναι δυνατή η λήψη του αρχείου, ο διαχειριστής λήψεων δεν είναι διαθέσιμος</string>
     <string name="download_started">Η λήψη ξεκίνησε στο παρασκήνιο</string>
     <string name="downloadmap_target_not_writable">Ο επιλεγμένος στόχος \"%s\" δεν είναι εγγράψιμος - ο χάρτης αποθηκεύεται στο φάκελο λήψης του συστήματος και πρέπει να μετακινηθεί χειροκίνητα στο φάκελο χαρτών.</string>
     <string name="downloadmap_allow_metered_network">Να επιτρέπεται η λήψη σε εποπτευόμενα δίκτυα (π.χ.: δίκτυα κινητής)</string>
-    <string name="downloadmap_confirmation">Να γίνει λήψη του χάρτη \"%1$s\"; \n\nΜπορεί να χρειαστεί αρκετή ώρα και να οδηγήσει σε σημαντικό κόστος, ανάλογα με την σύνδεση δικτύου σας.\n\nΜέγεθος: %2$s</string>
+    <string name="download_confirmation">%1$sΛήψη αρχείου \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Βρέθηκαν ενημερώσεις για:\n%1$s\n\nΘέλετε να ενημερώσετε?%2$s</string>
+    <string name="download_warning">Αυτό μπορεί να πάρει αρκετό χρόνο και μπορεί να οδηγήσει σε σημαντικό κόστος, ανάλογα με τη σύνδεση του δικτύου σας.</string>
     <string name="downloadmap_handling">Θα γίνει διαχείριση της λήψης στο παρασκήνιο από το πρόγραμμα διαχείρισης λήψεων του συστήματος σας. Πρέπει να δείτε μια ειδοποίηση μόλις ξεκινήσει η λήψη (μπορεί να καθυστερήσει λίγο).</string>
     <string name="button_continue">Συνέχεια</string>
     <string name="downloadmap_onedirup">(ένα επίπεδο πάνω)</string>
@@ -1859,11 +1878,17 @@
     <string name="downloadmap_checking_for_updates">Έλεγχος για ενημερώσεις…</string>
     <string name="downloadmap_install_theme_title">Εγκατάσταση αρχείου θέματος</string>
     <string name="downloadmap_install_theme_info">Ο κατεβασμένος χάρτης σας απαιτεί ένα ειδικό αρχείο θέματος. Θέλετε να το κατεβάσετε επίσης?</string>
+    <string name="downloadtile_title">Λείπουν δεδομένα δρομολόγησης</string>
+    <string name="downloadtile_info">Το c:geo δεν μπορεί να υπολογίσει την ζητούμενη διαδρομή καθώς λείπει κάποιο αρχείο δεδομένων δρομολόγησης. Θέλετε να κατεβάσετε δεδομένα δρομολόγησης που λείπουν;</string>
+    <string name="tileupdate_info">Θέλετε να ελέγξετε για ενημερώσεις των κατεβασμένων αρχείων δρομολόγησης δεδομένων;</string>
+    <string name="no_updates_found">Δεν βρέθηκαν ενημερώσεις</string>
+    <string name="updates_check">Έλεγχος ενημερώσεων</string>
     <string name="mapserver_mapsforge_info">Βασικοί χάρτες, δεν απαιτούνται θέματα χάρτη</string>
     <string name="mapserver_openandromaps_info">Λεπτομερείς χάρτες, απαιτούν θέμα χάρτη \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Αναλυτικό θέμα χάρτη, χτισμένο για \"OpenAndroMaps\" χάρτες</string>
     <string name="mapserver_freizeitkarte_info">Λεπτομερείς χάρτες, απαιτούν ένα από τα θέματα χάρτη \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Λεπτομερές θέμα χάρτη, χτισμένο για χάρτες \"Freizeitkarte\"</string>
+    <string name="brouter_info">Offline υπηρεσία δρομολόγησης</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
     <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
@@ -1890,9 +1915,11 @@
     <string name="wizard_permissions_intro">Το c:geo χρειάζεται συγκεκριμένα δικαιώματα στην συσκευή σας για να λειτουργήσει ορθά.\nΘα σας εξηγήσω περισσότερες λεπτομέρειες στα επόμενα βήματα.</string>
     <string name="wizard_permissions_folder_title">Ορισμός φακέλου: %s</string>
     <string name="wizard_basefolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση δεδομένων όπως αρχεία GPX, αντίγραφα ασφαλείας, σημειώσεις πεδίου και αρχεία καταγραφής. Σύμφωνα με προεπιλογή, αυτά τα αρχεία αποθηκεύονται σε φακέλους κάτω από έναν αποκαλούμενο \"βασικό φάκελο\". Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.\n\nΕάν αναβαθμίσατε το c:geo από μια προηγούμενη έκδοση, επιλέξτε τον υπάρχοντα φάκελο \"cgeo\" στο ριζικό επίπεδο του χώρου αποθήκευσης της συσκευής σας.\nΥπόδειξη: Ίσως χρειαστεί να αποκρύψετε πρώτα τον εσωτερικό αποθηκευτικό χώρο της συσκευής σας στον επιλογέα αρχείων που θα εμφανιστεί στη συνέχεια.</string>
-    <string name="wizard_mapfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση αρχείων χαρτών εκτός σύνδεσης. Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση θεμάτων χαρτών εκτός σύνδεσης. Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.</string>
-    <string name="wizard_gpxfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση αρχείων GPX π. χ. για την εισαγωγή / εξαγωγή κρυπτών ή κομματιών). Επιλέξτε ή δημιουργήστε ένα τέτοιο φάκελο στο επόμενο βήμα.</string>
+    <string name="wizard_mapfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση αρχείων χάρτη εκτός σύνδεσης.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση αρχείων θεμάτων για χάρτες εκτός σύνδεσης.</string>
+    <string name="wizard_gpxfolder_request_explanation">Το c:geo χρειάζεται έναν τοπικό φάκελο για την αποθήκευση αρχείων GPX (π.χ. για εισαγωγή / εξαγωγή κρυπτών ή διαδρομών).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Για να χρησιμοποιήσετε την αυτόματη λήψη δεδομένων και το χαρακτηριστικό ενημέρωσης δρομολόγησης θα πρέπει να ορίσετε ένα φάκελο δεδομένων.</string>
+    <string name="wizard_select_or_create">Επιλέξτε ένα τέτοιο φάκελο στο επόμενο βήμα.</string>
     <string name="wizard_platforms_title">Ρύθμιση υπηρεσιών</string>
     <string name="wizard_platforms_intro">Για να βρείτε κρύπτες με το c:geo χρειάζεστε ένα λογαριασμό για μια υπηρεσία geocaching που υποστηρίζεται από το c:geo.\nΕπιλέξτε την επιθυμητή υπηρεσία παρακάτω για να συνδεθείτε με τον υπάρχοντα λογαριασμό σας ή να δημιουργήσετε ένα νέο λογαριασμό.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>

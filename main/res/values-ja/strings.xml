@@ -204,7 +204,7 @@
     <string name="err_tb_display">トラッカブルを表示することができません。本当にトラッカブルですか?</string>
     <string name="err_tb_details_open">トラッカブルの詳細を開くことができません</string>
     <string name="err_tb_not_loggable">このトラッカブルにはログを書くことができません</string>
-    <string name="err_tb_find">トラッカブルが見つかりません</string>
+    <string name="err_tb_not_found">トラッカブル「%s」が見つかりません。</string>
     <string name="err_tb_find_that">トラッカブルが見つかりません</string>
     <string name="err_waypoint_cache_unknown">ウェイポイントを追加するキャッシュが見つかりません</string>
     <string name="err_waypoint_add_failed">ウェイポイントを追加することができませんでした</string>
@@ -242,6 +242,7 @@
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
     <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
     <string name="warn_notloggedin_title">オフラインモード</string>
+    <string name="warn_notloggedin_short">ログインしていません。地図にはローカルに保存されたキャッシュのみが表示されます。詳細はここをタップしてください。</string>
     <string name="warn_notloggedin_long">(まだ)ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されオンライン機能は動作しません。\n\nネットワーク接続がないか、サーバーに問題があるか、ジオキャッシングサービスを(再)設定する必要があります。\n\n今すぐサービスの設定をしますか?</string>
     <string name="err_read_pocket_query_list">ポケット・クエリのリストの読み取りエラー</string>
     <string name="info_log_posted">ログを投稿しました</string>
@@ -336,8 +337,6 @@
     <string name="caches_select_mode_exit">選択モードを終わる</string>
     <string name="caches_select_invert">選択を反転</string>
     <string name="caches_nearby">現在地の近く</string>
-    <string name="caches_remove_all">すべての項目を削除</string>
-    <string name="caches_remove_selected">選択した項目を削除</string>
     <string name="caches_remove_all_completely">デバイスからすべてのキャッシュを削除</string>
     <string name="caches_remove_selected_completely">デバイスから選択したキャッシュを削除</string>
     <string name="caches_delete_events">過去のイベントを削除</string>
@@ -457,6 +456,8 @@
     <string name="settings_title_map">地図</string>
     <string name="settings_summary_map">地図の選択、オフライン地図の設定、地図の詳細設定</string>
     <string name="settings_title_map_data">地図データ</string>
+    <string name="settings_title_offline_routing">オフライン ルート検索</string>
+    <string name="settings_summary_offline_routing">オフラインルート検索は、BRouterアプリをインストール(セットアップも)しているか、c:geoルート検索が有効になっている場合に使用できます。</string>
     <string name="settings_title_map_rotation">地図の回転 (Googleマップ)</string>
     <string name="settings_title_waypoints">ウェイポイント</string>
     <string name="settings_title_map_content">地図の表示</string>
@@ -564,11 +565,15 @@
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示</string>
     <string name="init_zoomincludingwaypoints">ウェイポイントを表示するようにズーム</string>
     <string name="init_zoomincludingwaypoints_description">1つだけキャッシュを表示している場合にすべてのウェイポイントが表示されるようにズーム</string>
-    <string name="init_brouterThreshold">ルートを計算</string>
-    <string name="init_brouterThreshold_description">BRouter(インストールされている場合)がルートを計算するまでの最大距離</string>
+    <string name="init_brouterThreshold">ルートを検索</string>
+    <string name="init_brouterThreshold_description">BRouter(インストールされている場合)がルートを検索するまでの最大距離</string>
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
-    <string name="brouter_recalculating">バックグラウンドでルートを再計算しています…</string>
+    <string name="init_brouterAutoTileDownloads">自動ダウンロード</string>
+    <string name="init_brouterAutoTileDownloads_description">ルート検索のデータを自動的にダウンロードします</string>
+    <string name="brouter_recalculating">バックグラウンドでルートを再検索しています…</string>
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
+    <string name="init_useInternalRouting">内部ルート検索を使用する</string>
+    <string name="init_summary_useInternalRouting">c:geo内部ルート検索(Brouter互換)を使用するとルート検索データのダウンロードと更新も自動でできます</string>
     <string name="init_bigSmileysOnMap">大きなスマイルアイコン</string>
     <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルアイコンをキャッシュタイプアイコンの代わりに表示\n(c:geoの再起動が必要)</string>
     <string name="init_disabled">一時停止中キャッシュ除く</string>
@@ -647,6 +652,8 @@
     <string name="init_backup_settings_restore">復元の設定</string>
     <string name="settings_readingerror">設定の読み取りエラー</string>
     <string name="settings_restart">読み込まれた設定を有効にするにはc:geoを再起動する必要があります</string>
+    <string name="settings_folder_changed">復元中にフォルダ「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
+    <string name="settings_file_changed">復元中に「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図をサポートしています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
@@ -655,6 +662,9 @@
     <string name="init_local_file_system">ローカルファイルシステム</string>
     <string name="init_base_directory_description">データ保存のベースフォルダ</string>
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
+    <string name="init_brouter_directory_description">ルート検索データ(Brouter互換)フォルダ</string>
+    <string name="init_brouter_updateinterval_title">更新間隔</string>
+    <string name="init_brouter_updateinterval_description">自動更新の間隔(日)</string>
     <string name="init_gpx_importexportdir">GPXフォルダ</string>
     <string name="init_dataDir">データフォルダを選択</string>
     <string name="init_dataDir_note">ジオキャッシュ(スポイラー画像、ログの画像など)の追加データを外部ストレージ(お使いのデバイスに応じてエミュレートまたは実際の外部 SD カード)に格納することができます</string>
@@ -815,7 +825,7 @@
     <string name="contentstorage_err_list_failed">フォルダ「%s」内のファイルを一覧表示できません</string>
     <string name="contentstorage_err_folder_access_failed">フォルダ「%s」にアクセスできませんでした</string>
     <string name="contentstorage_err_copy_failed">ファイル「%1$s」は「%2$s」へコピー/移動できませんでした (移動=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">ユーザー定義</string>
     <string name="persistablefolder_usertype_default">デフォルト</string>
     <string name="persistablefolder_legacy">旧式</string>
@@ -828,6 +838,9 @@
     <string name="persistablefolder_logfiles">ログファイル</string>
     <string name="persistablefolder_fieldnotes">フィールドノート</string>
     <string name="persistablefolder_spoilerimages">スポイラー画像</string>
+    <string name="persistablefolder_routingbase">ルート検索</string>
+    <string name="persistablefolder_routingtiles">ルート検索データ</string>
+    <string name="persistableuri_track">トラックファイル</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s、%3$s/%4$s 完了</string>
     <string name="folder_process_status_currentfile">処理中:%1$s</string>
@@ -1008,6 +1021,10 @@
     <string name="menu_caches">キャッシュを管理</string>
     <string name="cache_menu_event">カレンダーに登録</string>
     <string name="cache_menu_extract_waypoints">ウェイポイントを抽出</string>
+    <string name="cache_menu_set_found">「発見」に設定</string>
+    <string name="cache_menu_set_DNF">「未発見」に設定</string>
+    <string name="cache_menu_reset_foundstate">「発見」状態をリセット</string>
+    <string name="cache_foundstate_updated">「発見」状態が更新されました</string>
     <string name="cache_menu_set_cache_icon">キャッシュアイコン設定</string>
     <string name="cache_icon_updated">キャッシュアイコンを変更しました</string>
     <string name="cache_menu_details">詳細</string>
@@ -1208,7 +1225,7 @@
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
     <string name="map_routing">ルート検索(現在:%s)</string>
-    <string name="map_routing_brouter">ルーティングは <a href="">Brouter</a> がインストールされている場合のみ利用できます</string>
+    <string name="map_routing_brouter">ルート検索は <a href="">Brouter</a> がインストールされている場合のみ利用できます</string>
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
@@ -1698,7 +1715,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <plurals name="extract_waypoints_result">
         <item quantity="other">%dウェイポイントを抽出しました</item>
     </plurals>
-    <string name="link_gc_checker">geocaching.com 座標チェッカーがブラウザーで利用できます</string>
+    <string name="link_gc_checker">geocaching.com座標チェッカーがブラウザで利用できます</string>
     <!-- calendar adder -->
     <string name="event_fail">イベントキャッシュをカレンダーに追加できませんでした</string>
     <string name="init_low_disk_space">ストレージ容量が不足しています</string>
@@ -1794,27 +1811,30 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="localfile_intenttitle">c:geoローカルファイルハンドラ</string>
     <string name="localfile_title">ローカルファイルを開く</string>
     <string name="localfile_cannot_handle">ファイルの読み取りエラー、またはc:geoはこのファイルタイプを処理できません</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">地図ファイルの保存</string>
-    <string name="receivemapfile_success">地図ファイル「%s」は地図フォルダに保存されました</string>
-    <string name="receivemapfile_error">地図ファイルの受信中にエラーが発生しました</string>
-    <string name="receivemapfile_error_io_exception">地図ファイルのダウンロード中にI/Oエラーが発生しました。地図フォルダ「%s」は書き込み可能ですか?</string>
-    <string name="receivemapfile_error_filenotfound_exception">地図ファイルのダウンロード中にファイルが見つかりませんでした</string>
-    <string name="receivemapfile_alreadyexists">同名ファイルが既にあります。上書きしますか? または別名(連番を付加)で保存しますか?</string>
-    <string name="receivemapfile_option_overwrite">上書き保存</string>
-    <string name="receivemapfile_option_differentname">別名で保存</string>
-    <string name="receivemapfile_kb_copied">%d がコピー済み</string>
-    <string name="receivemapfile_cancelled">ファイル転送を取り消しました</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">ファイルのダウンロード</string>
+    <string name="receivedownload_success">ファイルを「%s」として保存しました</string>
+    <string name="receivedownload_error">ファイルのダウンロード中にエラーが発生しました</string>
+    <string name="receivedownload_error_io_exception">ファイルのダウンロード中にI/Oエラーが発生しました。フォルダ「%s」は書き込み可能ですか？</string>
+    <string name="receivedownload_error_filenotfound_exception">ダウンロードするファイルが見つかりませんでした</string>
+    <string name="receivedownload_alreadyexists">同名ファイルが既にあります。上書きしますか? または別名(連番を付加)で保存しますか?</string>
+    <string name="receivedownload_option_overwrite">上書き保存</string>
+    <string name="receivedownload_option_differentname">別名で保存</string>
+    <string name="receivedownload_kb_copied">%d がコピー済み</string>
+    <string name="receivedownload_cancelled">ファイル転送がキャンセルされました</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">オフライン用に地図をダウンロード</string>
+    <string name="download_title">ファイルをダウンロード</string>
     <string name="downloadmap_info">お好みの地域の「保存アイコン」をタップするとダウンロードできます。\n\nダウンロードはバックグラウンドで実行されます。完了後に地図フォルダに保存され、表示する地図に設定されます。\n\n注意: 地図ファイルはサイズがとても大きいので、たくさんのデータ通信量が必要です!</string>
     <string name="downloadmap_choose">地図を選択</string>
     <string name="downloadmap_filename">%sをダウンロード中</string>
-    <string name="downloadmanager_not_available">地図ファイルをダウンロードできません。システムのダウンロードマネージャーが利用できません</string>
+    <string name="downloadmanager_not_available">システムのダウンロードマネージャーが利用できないため、ファイルをダウンロードできません</string>
     <string name="download_started">バックグラウンドでダウンロードを開始しました</string>
     <string name="downloadmap_target_not_writable">選択したファルダ「%s」は書き込み可能ではありません。地図ファイルはシステムのダウンロードフォルダに保存されており、地図フォルダに手動で移動する必要があります。</string>
     <string name="downloadmap_allow_metered_network">従量制課金ネットワーク経由のダウンロードを許可(例:モバイル接続)</string>
-    <string name="downloadmap_confirmation">地図ファイル「%1$s」をダウンロードしますか?\n\nネットワーク接続によっては長時間かかり通信料が高額になる場合があります。\n\nファイルサイズ:%2$s</string>
+    <string name="download_confirmation">%1$sダウンロードファイル: %2$s %3$s</string>
+    <string name="download_confirmation_updates">更新が見つかりました:\n%1$s\n\n更新しますか?%2$s</string>
+    <string name="download_warning">ネットワーク接続によってはダウンロードに長時間かかり通信料が高額になる場合があります</string>
     <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
     <string name="button_continue">続ける</string>
     <string name="downloadmap_onedirup">..</string>
@@ -1827,11 +1847,17 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_checking_for_updates">更新を確認中…</string>
     <string name="downloadmap_install_theme_title">テーマファイルのダウンロード</string>
     <string name="downloadmap_install_theme_info">ダウンロードした地図には特別なテーマファイルが必要です。これもダウンロードしますか?</string>
+    <string name="downloadtile_title">ルート検索データが見つかりません</string>
+    <string name="downloadtile_info">ルート検索データが不足しているため、c:geoはルートを検索できません。ルート検索データをダウンロードしますか？</string>
+    <string name="tileupdate_info">ダウンロードしたルート検索データの更新を確認しますか?</string>
+    <string name="no_updates_found">更新はありません。</string>
+    <string name="updates_check">更新を確認</string>
     <string name="mapserver_mapsforge_info">基本地図(地図テーマは必要ありません)</string>
     <string name="mapserver_openandromaps_info">詳細地図(地図テーマ\"Elevate\"が必要です)</string>
     <string name="mapserver_openandromaps_themes_info">「OpenAndroMaps」用の詳細な地図テーマ</string>
     <string name="mapserver_freizeitkarte_info">詳細な地図は「Freizeitkartte」用の地図テーマが必要です。</string>
     <string name="mapserver_freizeitkarte_themes_info">「Freizeitkarte」用の詳細な地図テーマ</string>
+    <string name="brouter_info">オフラインルート検索</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
     <string name="map_trailhistory_cleared">軌跡を削除しました</string>
@@ -1856,11 +1882,13 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_outro_error">設定が完了していません\nこのままでは、すべての機能が期待どおり動作するわけではありません!</string>
     <string name="wizard_permissions_title">アプリの権限の設定</string>
     <string name="wizard_permissions_intro">c:geoが正しく機能するために特定の権限が必要です\n次のステップで説明します</string>
-    <string name="wizard_permissions_folder_title">フォルダの設定: %s</string>
+    <string name="wizard_permissions_folder_title">%sフォルダの設定</string>
     <string name="wizard_basefolder_request_explanation">GPXファイル、バックアップ、フィールドノート、ログファイルなどを保存するためにローカルフォルダが必要です。デフォルトでは「ベースフォルダ」下の各フォルダにそれぞれ保存されます。次のステップでそのフォルダを選択または作成します。\n\n以前のバージョンからアップグレードされる場合はデバイスストレージのルートにある「cgeo」フォルダを選択してください。\nヒント:次のファイルセレクタで最初にデバイスの「内部ストレージを表示」にする必要があるかもしれません。</string>
-    <string name="wizard_mapfolder_request_explanation">オフライン用の地図ファイルを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
-    <string name="wizard_mapthemesfolder_request_explanation">オフライン地図のテーマファイルを保存するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
-    <string name="wizard_gpxfolder_request_explanation">GPXファイルを保存(キャッシュやトラックをインポート/エクスポート)するためにローカルフォルダが必要です。次のステップでそのフォルダを選択または作成します。</string>
+    <string name="wizard_mapfolder_request_explanation">オフライン地図を保存するためにローカルフォルダが必要です。</string>
+    <string name="wizard_mapthemesfolder_request_explanation">オフライン地図のテーマファイルを保存するためにローカルフォルダが必要です。</string>
+    <string name="wizard_gpxfolder_request_explanation">GPXファイルを保存するためにローカルフォルダが必要です(例: キャッシュやトラックのインポート/エクスポート)。</string>
+    <string name="wizard_broutertilesfolder_request_explanation">c:geo内部ルート検索を有効化してルート検索データを自動ダウンロード(更新)もするには、ルート検索データフォルダを設定する必要があります。</string>
+    <string name="wizard_select_or_create">次のステップでそのようなフォルダを選択または作成します。</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
     <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です。\nお持ちのアカウントでログインするかアカウント作成してください</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1868,7 +1896,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_welcome_advanced">追加設定</string>
     <string name="wizard_advanced_offlinemaps_label">オフライン地図のダウンロード</string>
     <string name="wizard_advanced_offlinemaps_info">ここでは追加の設定ができます\n\nオフラインで使うために地図ファイルをダウンロードできます</string>
-    <string name="wizard_advanced_brouter_label">ルーティングアプリ</string>
+    <string name="wizard_advanced_brouter_label">ルート検索アプリ</string>
     <string name="wizard_advanced_brouter_info">BRouter Offline Navigationをインストールしてセットアップすると(オフラインでも)目的地へナビゲーションしたり地図にルートを表示することができます</string>
     <string name="wizard_advanced_restore_label">復元</string>
     <string name="wizard_advanced_restore_info">バックアップからc:geo設定やキャッシュ情報を復元できます</string>

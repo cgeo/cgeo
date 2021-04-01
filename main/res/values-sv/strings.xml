@@ -204,7 +204,6 @@
     <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
     <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
     <string name="err_tb_not_loggable">Detta spårbara objekt är inte loggbart.</string>
-    <string name="err_tb_find">Tyvärr kunde c:geo inte hitta trackable</string>
     <string name="err_tb_find_that">Tyvärr kan c:geo inte hitta önskad trackable.</string>
     <string name="err_waypoint_cache_unknown">Tyvärr vet inte c:geo till vilken cache du vill lägga till en punkt.</string>
     <string name="err_waypoint_add_failed">Tyvärr misslyckades c:geo att lägga till din punkt.</string>
@@ -338,8 +337,6 @@
     <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
     <string name="caches_select_invert">Invertera valda</string>
     <string name="caches_nearby">Nära</string>
-    <string name="caches_remove_all">Ta bort alla</string>
-    <string name="caches_remove_selected">Ta bort valda</string>
     <string name="caches_remove_all_completely">Ta bort alla från enheten</string>
     <string name="caches_remove_selected_completely">Ta bort vald från enhet</string>
     <string name="caches_delete_events">Ta bort gamla event</string>
@@ -649,7 +646,6 @@
     <string name="init_backup_settings_restore">Återställ inställningar</string>
     <string name="settings_readingerror">Fel vid läsning av inställningar</string>
     <string name="settings_restart">c:geo måste startas om nu för att få igång laddade inställningar</string>
-    <string name="settings_folder_changed">Inställning för mappen \"%1$s\" har ändrats till \"%2$s\".\n\nTryck på \"%3$s\" för att behålla nuvarande inställningar för denna mapp.\n\nTryck på \"%4$s\" för att använda den gamla mappen. Du kommer i så fall att bli ombedd att ge c:geo-åtkomst till den mappen.</string>
     <string name="settings_info_offline_maps_title">Info om Offline-kartor</string>
     <string name="settings_info_offline_maps">c:geo stöder kartor för offline-användning. Du kan få kartor från olika leverantörer eller till och med skapa egna kartor (från OSM-data). Först måste du välja den mapp där offline-kartor ska lagras.</string>
     <string name="settings_info_themes_title">Info om kartteman</string>
@@ -818,7 +814,7 @@
     <string name="contentstorage_err_list_failed">Filer i mappen \'%s\' kunde inte listas</string>
     <string name="contentstorage_err_folder_access_failed">Mappen \'%s\' kunde inte öppnas</string>
     <string name="contentstorage_err_copy_failed">Filen \'%1$s\' kunde inte kopieras/flyttas till \'%2$s\' (move=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Användardefinierad</string>
     <string name="persistablefolder_usertype_default">Standard</string>
     <string name="persistablefolder_legacy">Äldre</string>
@@ -1825,27 +1821,19 @@
     <string name="localfile_intenttitle">c:geo Lokal filhanterare</string>
     <string name="localfile_title">Välj en fil lokalt</string>
     <string name="localfile_cannot_handle">Fel vid läsning av fil, eller så c:geo kan inte hantera denna filtyp.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Ta emot kartfil</string>
-    <string name="receivemapfile_success">Kartfilen togs emot korrekt som \"%s\" och lagrades i kartkatalogen</string>
-    <string name="receivemapfile_error">Fel uppstod när kartfilen togs emot</string>
-    <string name="receivemapfile_error_io_exception">I/O-fel vid mottagande av kartfil. Är kartmappen \"%s\" skrivbar?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Filen hittades inte vid mottagandet av kartfilen.</string>
-    <string name="receivemapfile_alreadyexists">En kartfil med detta namn finns redan. Ska filen skrivas över eller sparas med ett annat namn?</string>
-    <string name="receivemapfile_option_overwrite">Skriv över</string>
-    <string name="receivemapfile_option_differentname">Annat namn</string>
-    <string name="receivemapfile_kb_copied">%d kB kopierat</string>
-    <string name="receivemapfile_cancelled">Kartöverföring avbruten</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">En kartfil med detta namn finns redan. Ska filen skrivas över eller sparas med ett annat namn?</string>
+    <string name="receivedownload_option_overwrite">Skriv över</string>
+    <string name="receivedownload_option_differentname">Annat namn</string>
+    <string name="receivedownload_kb_copied">%d kB kopierat</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Ladda ner kartor för användning offline</string>
     <string name="downloadmap_info">Välj en kartfil för din region genom att trycka på \"Spara\"-ikonen.\n\nNedladdningen sker i bakgrunden. När överföringen är klar kopieras filen till mappen c:geo och anges som den aktuella kartan.\n\nVar försiktig: Att ladda ner en karta kan orsaka hög nätverkstrafik!</string>
     <string name="downloadmap_choose">Välj karta</string>
     <string name="downloadmap_filename">Laddar ner %s</string>
-    <string name="downloadmanager_not_available">Kartfilen kan inte laddas ner. Systemets program för nerladdningar är inte tillgängligt</string>
     <string name="download_started">Nerladdningen startar i bakgrunden</string>
     <string name="downloadmap_target_not_writable">Det valda målet \"%s\" är inte skrivbart - den nedladdade kartfilen sparas i mappen för systemhämtning och måste flyttas manuellt till kartmappen.</string>
     <string name="downloadmap_allow_metered_network">Tillåt nedladdning över nätverk med datapriser (t.ex.: mobilanslutning)</string>
-    <string name="downloadmap_confirmation">Ladda ner karta \"%1$s\"?\n\nDetta kan ta ganska lång tid och kan leda till betydande kostnader, beroende på din nätverksanslutning.\n\nStorleksinformation: %2$s</string>
     <string name="downloadmap_handling">Själva nedladdningen kommer att hanteras av ditt systems nedladdningshanterare i bakgrunden. Du bör se ett meddelande så snart nedladdningen startat (vilket kan ta ett tag).</string>
     <string name="button_continue">Fortsätt</string>
     <string name="downloadmap_onedirup">(en nivå upp)</string>
@@ -1889,9 +1877,6 @@
     <string name="wizard_permissions_intro">c:geo behöver vissa behörigheter på din enhet för att fungera korrekt.\nJag kommer att förklara mer detaljer i nästa steg.</string>
     <string name="wizard_permissions_folder_title">Ange mapp: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo behöver en lokal mapp för att lagra data som GPX-filer, säkerhetskopior, fältanteckningar och loggfiler. Som standard lagras dessa filer i mappar under en så kallad \"basmapp\". Välj eller skapa en sådan mapp i nästa steg.\n\nOm du uppgraderade c:geo från en tidigare version, välj den befintliga mappen \"cgeo\" på rotnivån på din enhets lagring.\nTips: Du kan behöva visa enhetens interna lagring först i filväljaren som visas härnäst.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo behöver en lokal mapp för att lagra offline-kartfiler. Välj eller skapa en sådan mapp i nästa steg.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo behöver en lokal mapp för att lagra temafiler för offline-kartor. Välj eller skapa en sådan mapp i nästa steg.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo behöver en lokal mapp för att lagra GPX-filer (t.ex. för att importera/exportera cacher eller spår). Välj eller skapa en sådan mapp i nästa steg.</string>
     <string name="wizard_platforms_title">Konfigurera tjänster</string>
     <string name="wizard_platforms_intro">För att hitta geocacher med c:geo behöver du ett konto för en geocachingtjänst som stöds av c:geo.\nVälj önskad tjänst nedan för att antingen logga in med ditt befintliga konto eller skapa ett nytt konto.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>

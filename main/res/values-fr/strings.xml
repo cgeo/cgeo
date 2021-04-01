@@ -204,7 +204,6 @@
     <string name="err_tb_display">c:geo ne peut pas afficher l\'objet voyageur demandé. S\'agit-il vraiment d\'un objet voyageur ?</string>
     <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
     <string name="err_tb_not_loggable">Cet objet voyageur n\'a pas de carnet.</string>
-    <string name="err_tb_find">c:geo ne peut pas trouver l\'objet voyageur</string>
     <string name="err_tb_find_that">c:geo ne peut pas trouver cet objet voyageur.</string>
     <string name="err_waypoint_cache_unknown">c:geo ne sait pas à quelle cache vous souhaitez ajouter un point de passage.</string>
     <string name="err_waypoint_add_failed">c:geo n\'a pas réussi à ajouter votre point de passage.</string>
@@ -338,8 +337,6 @@
     <string name="caches_select_mode_exit">Désactiver le mode sélection</string>
     <string name="caches_select_invert">Inverser la sélection</string>
     <string name="caches_nearby">Proches</string>
-    <string name="caches_remove_all">Tout supprimer</string>
-    <string name="caches_remove_selected">Supprimer la sélection</string>
     <string name="caches_remove_all_completely">Tout supprimer de l\'appareil</string>
     <string name="caches_remove_selected_completely">Supprimer les éléments sélectionnés de l\'appareil</string>
     <string name="caches_delete_events">Supprimer les événements précédents</string>
@@ -649,7 +646,6 @@
     <string name="init_backup_settings_restore">Restaurer les paramètres</string>
     <string name="settings_readingerror">Erreur lors de la lecture des paramètres</string>
     <string name="settings_restart">c:geo doit être redémarré maintenant pour prendre en compte les paramètres chargés</string>
-    <string name="settings_folder_changed">Le paramétrage du dossier \"%1$s\" a été modifié pour \"%2$s\".\n\nAppuyez sur \"%3$s\" pour conserver le paramétrage actuel .\n\nAppuyez sur \"%4$s\" pour paramétrer l\'ancien dossier. Dans ce cas, vous devrez à nouveau autoriser c:geo à accéder au dossier.</string>
     <string name="settings_info_offline_maps_title">Informations sur les cartes hors-ligne</string>
     <string name="settings_info_offline_maps">c:geo prend en charge les cartes pour une utilisation hors ligne. Vous pouvez obtenir des cartes de différents fournisseurs ou même créer vos propres cartes (à partir des données OSM). Vous devez d\'abord sélectionner le dossier dans lequel les cartes hors ligne doivent être stockées.</string>
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
@@ -818,7 +814,7 @@
     <string name="contentstorage_err_list_failed">Impossible d\'énumérer les fichiers dans le dossier \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">Impossible d\'accéder au dossier \'%s\'</string>
     <string name="contentstorage_err_copy_failed">Le fichier \'%1$s\' n\'a pas pu être copié/déplacé vers \'%2$s\' (déplacement=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Défini par l\'utilisateur</string>
     <string name="persistablefolder_usertype_default">Par défaut</string>
     <string name="persistablefolder_legacy">Obsolète</string>
@@ -1021,6 +1017,8 @@
     <string name="menu_caches">Gérer les caches</string>
     <string name="cache_menu_event">Ajouter à l\'agenda</string>
     <string name="cache_menu_extract_waypoints">Extraire les points de passage</string>
+    <string name="cache_menu_set_found">Marquer comme trouvée</string>
+    <string name="cache_menu_set_DNF">Marquer comme non trouvée</string>
     <string name="cache_menu_set_cache_icon">Définir l\'icône de la cache</string>
     <string name="cache_icon_updated">Icône cache mis à jour</string>
     <string name="cache_menu_details">Détails</string>
@@ -1828,27 +1826,19 @@
     <string name="localfile_intenttitle">Gestionnaire de fichiers locaux c:geo</string>
     <string name="localfile_title">Ouvrir un fichier local</string>
     <string name="localfile_cannot_handle">Erreur lors de la lecture du fichier ou c:geo ne peut pas gérer ce type de fichier.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Carte en cours de réception</string>
-    <string name="receivemapfile_success">Fichier de carte \"%s\" reçu avec succès et enregistré dans le dossier des cartes</string>
-    <string name="receivemapfile_error">Erreur lors de la réception du fichier carte</string>
-    <string name="receivemapfile_error_io_exception">Erreur d\'E/S lors de la réception du fichier de carte. Votre dossier des cartes \"%s\" est-il accessible en écriture ?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Fichier introuvable lors de la réception du fichier de carte.</string>
-    <string name="receivemapfile_alreadyexists">Un fichier portant ce nom existe déjà. Écraser le fichier existant ou enregistrer le nouveau fichier sous un autre nom ?</string>
-    <string name="receivemapfile_option_overwrite">Écraser</string>
-    <string name="receivemapfile_option_differentname">Nouveau nom</string>
-    <string name="receivemapfile_kb_copied">%d Ko copiés</string>
-    <string name="receivemapfile_cancelled">Réception du fichier carte annulée</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">Un fichier portant ce nom existe déjà. Écraser le fichier existant ou enregistrer le nouveau fichier sous un autre nom ?</string>
+    <string name="receivedownload_option_overwrite">Écraser</string>
+    <string name="receivedownload_option_differentname">Nouveau nom</string>
+    <string name="receivedownload_kb_copied">%d Ko copiés</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Télécharger des cartes hors ligne</string>
     <string name="downloadmap_info">Sélectionnez un fichier de carte pour votre région en appuyant sur l\'icône \"Enregistrer\".\n\nLe téléchargement est effectué en arrière-plan. Lorsque le transfert est terminé, le fichier est copié dans le dossier des cartes c:geo et défini comme la carte actuelle.\n\nAttention : Le téléchargement d\'une carte peut causer un trafic réseau élevé !</string>
     <string name="downloadmap_choose">Sélectionner la carte</string>
     <string name="downloadmap_filename">Téléchargement de %s</string>
-    <string name="downloadmanager_not_available">Impossible de télécharger la carte, le gestionnaire système de téléchargement est indisponible</string>
     <string name="download_started">Téléchargement démarré en arrière plan</string>
     <string name="downloadmap_target_not_writable">La cible sélectionnée \"%s\" n\'est pas accessible en écriture - le fichier de carte téléchargé est sauvegardé dans le dossier de téléchargement du système et doit être déplacé manuellement dans le dossier des cartes.</string>
     <string name="downloadmap_allow_metered_network">Autoriser le téléchargement sur un réseau limité (par exemple : la connexion mobile)</string>
-    <string name="downloadmap_confirmation">Télécharger la carte \"%1$s\" ?\n\nCela peut prendre un certain temps et peut entraîner des coûts significatifs, selon votre connexion réseau.\n\nInformations sur la taille : %2$s</string>
     <string name="downloadmap_handling">Le téléchargement lui-même sera géré par le gestionnaire de téléchargement de votre système en arrière-plan. Vous devriez voir une notification dès que le téléchargement a commencé (ce qui peut prendre un certain temps).</string>
     <string name="button_continue">Continuer</string>
     <string name="downloadmap_onedirup">(un niveau supérieur)</string>
@@ -1892,9 +1882,6 @@
     <string name="wizard_permissions_intro">c:geo a besoin de certaines autorisations sur votre appareil pour fonctionner correctement.\nJe vous donnerai plus de détails lors des prochaines étapes.</string>
     <string name="wizard_permissions_folder_title">Paramétrer le dossier : %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo a besoin d\'un dossier local pour stocker des données comme des fichiers GPX, des sauvegardes, des notes de terrain et des fichiers journaux. Par défaut, ces fichiers sont stockés dans des sous-dossiers d\'un \"dossier de base\". Sélectionnez ou créez un tel dossier à l\'étape suivante.\n\nSi vous avez mis à jour c:geo à partir d\'une version précédente, sélectionnez le dossier existant \"cgeo\" à la racine du stockage de votre appareil.\nAstuce : Vous devrez peut-être d\'abord afficher le stockage interne de votre appareil dans le sélecteur de fichier qui va s\'afficher tout de suite.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo a besoin d\'un dossier local pour stocker des fichiers de carte hors ligne. Sélectionnez ou créez un tel dossier à l\'étape suivante.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo utilise un dossier sur votre appareil pour stocker les cartes hors-ligne ou les thèmes d\'affichage. Sélectionnez ou créez ce dossier à l\'étape suivante.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo utilise un dossier sur votre appareil pour stocker les fichiers GPX (par ex. pour importer/exporter des caches ou des traces). Sélectionnez ou créez ce dossier à l\'étape suivante.</string>
     <string name="wizard_platforms_title">Paramétrer les services</string>
     <string name="wizard_platforms_intro">Pour trouver des géocaches avec c:geo, vous avez besoin d\'un compte pour un service de géocaching supporté par c:geo.\nSélectionnez le service souhaité ci-dessous pour vous connecter avec votre compte existant ou créer un nouveau compte.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
