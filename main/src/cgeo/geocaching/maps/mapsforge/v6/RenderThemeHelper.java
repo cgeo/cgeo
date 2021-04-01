@@ -11,6 +11,7 @@ import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -187,6 +188,8 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                 if (UriUtils.isFileUri(theme.fileInfo.uri)) {
                     xmlRenderTheme = new ExternalRenderTheme(UriUtils.toFile(theme.fileInfo.uri), this);
                 } else {
+                    //this is the SLOW THEME path. Show OneTimeDialog to warn user about this
+                    Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_THEME_FIX_SLOWNESS);
                     xmlRenderTheme = new ContentRenderTheme(getContentResolver(), theme.fileInfo.uri, this);
                     xmlRenderTheme.setResourceProvider(new ContentResolverResourceProvider(getContentResolver(), ContentStorage.get().getUriForFolder(theme.containingFolder), true));
                 }
