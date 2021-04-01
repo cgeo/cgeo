@@ -655,7 +655,8 @@
     <string name="init_backup_settings_restore">Instellingen terugzetten</string>
     <string name="settings_readingerror">Fout bij het lezen van de instellingen</string>
     <string name="settings_restart">c:geo dient nu opnieuw gestart te worden om de geladen instellingen uit te voeren</string>
-    <string name="settings_folder_changed">Instelling voor map \"%1$s\" is veranderd in \"%2$s\".\n\nTik \"%3$s\" om de huidige instelling voor deze map te behouden.\n\nTik op \"%4$s\" om de oude map in te stellen. In dat geval wordt je opnieuw gevraagd c:geo toegang te geven tot die map.</string>
+    <string name="settings_folder_changed">Map \"%1$s\" zal worden gewijzigd in \"%2$s\" tijdens herstel.\n\nTik op \"%4$s\" om verder te gaan. In dat geval word je gevraagd om c:geo toegang te geven tot die map.\n\nTik op \"%3$s\" om in plaats daarvan de huidige mapinstelling te behouden.</string>
+    <string name="settings_file_changed">\"%1$s\" zal worden gewijzigd in \"%2$s\" tijdens herstel.\n\nTik op \"%4$s\" om verder te gaan. In dat geval word je gevraagd om c:geo toegang te geven tot dat bestand.\n\nTik op \"%3$s\" om in plaats daarvan de huidige instelling te behouden.</string>
     <string name="settings_info_offline_maps_title">Info over offline kaarten</string>
     <string name="settings_info_offline_maps">c:geo ondersteunt kaarten voor offline gebruik. Je kunt kaarten verkrijgen van verschillende providers of zelfs je eigen kaarten maken (van OSM gegevens). Eerst dien je de map te selecteren waarin offline kaarten moeten worden opgeslagen.</string>
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
@@ -827,7 +828,7 @@
     <string name="contentstorage_err_list_failed">Bestanden in de map \'%s\' konden niet worden weergegeven</string>
     <string name="contentstorage_err_folder_access_failed">Map \'%s\' kon niet worden benaderd</string>
     <string name="contentstorage_err_copy_failed">Bestand \'%1$s\' kon niet worden gekopieerd/verplaatst naar \'%2$s\' (verplaats=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Gebruiker gedefinieerd</string>
     <string name="persistablefolder_usertype_default">Standaard</string>
     <string name="persistablefolder_legacy">Verouderd</string>
@@ -841,6 +842,7 @@
     <string name="persistablefolder_logfiles">Logbestanden</string>
     <string name="persistablefolder_fieldnotes">Veld notities</string>
     <string name="persistablefolder_spoilerimages">Spoiler afbeeldingen</string>
+    <string name="persistableuri_track">Spoorbestand</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s voltooid</string>
     <string name="folder_process_status_currentfile">%1$s verwerken</string>

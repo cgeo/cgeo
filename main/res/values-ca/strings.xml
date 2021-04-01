@@ -656,7 +656,6 @@
     <string name="init_backup_settings_restore">Restablir la configuració</string>
     <string name="settings_readingerror">S\'ha produït un error en llegir la configuració</string>
     <string name="settings_restart">c:geo s\'ha de reiniciar  per fer efectiva la nova configuració</string>
-    <string name="settings_folder_changed">La configuració de la carpeta \"%1$s\" ha canviat a \"%2$s\".\n\nToca \"%3$s\" per mantenir la configuració actual d\'aquesta carpeta.\n\nToca \"%4$s\" per establir la carpeta antiga. En aquest cas, se us demanarà que concediu accés C:geo a aquesta carpeta.</string>
     <string name="settings_info_offline_maps_title">Informació als mapes fora línia</string>
     <string name="settings_info_offline_maps">C:geo admet mapes per a ús fora de línia. Podeu obtenir mapes de diferents proveïdors o fins i tot crear els vostres propis mapes (a partir de dades OSM). Primer heu de seleccionar la carpeta on es desaran els mapes fora de línia.</string>
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
@@ -828,7 +827,7 @@
     <string name="contentstorage_err_list_failed">No s\'han pogut llistar els fitxers de la carpeta \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">No s\'ha pogut accedir a la carpeta \'%s\'</string>
     <string name="contentstorage_err_copy_failed">No s\'ha pogut copiar / moure el fitxer \'%1$s\' a \'%2$s\' (moure =%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Usuari definit</string>
     <string name="persistablefolder_usertype_default">Per defecte</string>
     <string name="persistablefolder_legacy">Llegat</string>

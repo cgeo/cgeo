@@ -783,7 +783,7 @@
     <string name="contentstorage_err_delete_failed">無法刪除%s</string>
     <string name="contentstorage_err_list_failed">無法列出在%s的檔案</string>
     <string name="contentstorage_err_folder_access_failed">無法讀取檔案%s</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">使用者定義</string>
     <string name="persistablefolder_usertype_default">預設</string>
     <string name="persistablefolder_legacy">舊版</string>

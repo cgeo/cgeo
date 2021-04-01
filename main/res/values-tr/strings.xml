@@ -655,7 +655,8 @@
     <string name="init_backup_settings_restore">Ayarları geri yükle</string>
     <string name="settings_readingerror">Ayarları okuma hatası</string>
     <string name="settings_restart">Yüklenen ayarların etkin kılınması için c:geo\'nun yeniden başlatılması gerekiyor</string>
-    <string name="settings_folder_changed">\'\'%1$s\'\' klasörü için ayarları \'\'%2$s\'\' olarak değiştirildi.\n\nMevcut ayarları tutmak için \'\'%3$s\'\' basın.\n\nEski klasörü seçmek için _\'\'%4$s\'\'_ basın. Bu durumda bu dosyaya ulaşabilmeniz için yeniden c:geo izni sorulacaktır.</string>
+    <string name="settings_folder_changed">\"%1$s\" klasörü, geri yükleme sırasında \"%2$s\" olarak değişecek.\n\nDevam etmek için \"%4$s\" seçeneğine dokunun.Bu durum sonucunda, bu klasör için c:geo\'ya yeniden yetki vermeniz istenecek.\n\nMevcut klasör ayarlarını tutmak için \"%3$s\" seçeneğine dokunun.</string>
+    <string name="settings_file_changed">\"%1$s\" geri yükleme sırasında \"%2$s\" olarak değişecek.\n\nDevam etmek için \"%4$s\" seçeneğine dokunun.Bu durum sonucunda, bu dosya için c:geo\'ya yeniden yetki vermeniz istenecek.\n\nMevcut dosya ayarlarını tutmak için \"%3$s\" seçeneğine dokunun.</string>
     <string name="settings_info_offline_maps_title">Çevrimdışı haritaların bilgisi</string>
     <string name="settings_info_offline_maps">c:geo\'da çevrimdışı harita kullanabilirsiniz. Haritaları diğer kaynaklardan elde edebilir veya kendi haritalarınızı yaratabilirsiniz (OSM verilerinden). Öncelikle, çevrimdışı haritaların depolanacağı klasörü seçmelisiniz.</string>
     <string name="settings_info_themes_title">Harita temalarının bilgisi</string>
@@ -827,7 +828,7 @@
     <string name="contentstorage_err_list_failed">\'%s\' klasöründeki dosyalar listelenemiyor</string>
     <string name="contentstorage_err_folder_access_failed">\'%s\' dosyasına ulaşılamadı</string>
     <string name="contentstorage_err_copy_failed">\'%1$s\' dosyası \'%2$s\' dizinine kopyalanamıyor/taşınamıyor (taşı=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Kullanıcı tanımlı</string>
     <string name="persistablefolder_usertype_default">Varsayılan</string>
     <string name="persistablefolder_legacy">Geleneksel</string>
@@ -841,6 +842,7 @@
     <string name="persistablefolder_logfiles">Kayıt dosyası</string>
     <string name="persistablefolder_fieldnotes">Saha Notları</string>
     <string name="persistablefolder_spoilerimages">İpucu Görselleri</string>
+    <string name="persistableuri_track">Trackfile</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s tamamlandı</string>
     <string name="folder_process_status_currentfile">%1$s işlemi</string>

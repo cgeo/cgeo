@@ -657,7 +657,6 @@
     <string name="init_backup_settings_restore">Obnovit nastavení</string>
     <string name="settings_readingerror">Chyba při čtení nastavení</string>
     <string name="settings_restart">Aplikace c:geo se musí nyní restartovat, aby se použili načtená nastavení</string>
-    <string name="settings_folder_changed">Nastavení pro složku \"%1$s\" se změnilo na \"%2$s\".\n\nKnlepnutím na \"%3$s\" zachováte aktuální nastavení pro tuto složku.\n\nKlepnutím na \"%4$s\" nastavíte starou složku. V takovém případě se objeví výzva, aby jste aplikaci c:geo znovu udělili přístup k dané složce.</string>
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy můžete získat od různých poskytovatelů nebo dokonce vytvořit si mapy vlastní (z dat OSM). Nejprve musíte vybrat složku, do které mají být offline mapy uloženy.</string>
     <string name="settings_info_themes_title">Info o stylech mapy</string>
@@ -829,7 +828,7 @@
     <string name="contentstorage_err_list_failed">Soubory ve složce \'%s\' nelze vypsat</string>
     <string name="contentstorage_err_folder_access_failed">Složka \'%s\' není přístupná</string>
     <string name="contentstorage_err_copy_failed">Soubor \'%1$s\' nelze zkopírovat/přesunout do \'%2$s\' (přesunout =%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Uživatelem definované</string>
     <string name="persistablefolder_usertype_default">Výchozí</string>
     <string name="persistablefolder_legacy">Starší</string>

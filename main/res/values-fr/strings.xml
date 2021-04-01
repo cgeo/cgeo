@@ -655,7 +655,6 @@
     <string name="init_backup_settings_restore">Restaurer les paramètres</string>
     <string name="settings_readingerror">Erreur lors de la lecture des paramètres</string>
     <string name="settings_restart">c:geo doit être redémarré maintenant pour prendre en compte les paramètres chargés</string>
-    <string name="settings_folder_changed">Le paramétrage du dossier \"%1$s\" a été modifié pour \"%2$s\".\n\nAppuyez sur \"%3$s\" pour conserver le paramétrage actuel .\n\nAppuyez sur \"%4$s\" pour paramétrer l\'ancien dossier. Dans ce cas, vous devrez à nouveau autoriser c:geo à accéder au dossier.</string>
     <string name="settings_info_offline_maps_title">Informations sur les cartes hors-ligne</string>
     <string name="settings_info_offline_maps">c:geo prend en charge les cartes pour une utilisation hors ligne. Vous pouvez obtenir des cartes de différents fournisseurs ou même créer vos propres cartes (à partir des données OSM). Vous devez d\'abord sélectionner le dossier dans lequel les cartes hors ligne doivent être stockées.</string>
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
@@ -827,7 +826,7 @@
     <string name="contentstorage_err_list_failed">Impossible d\'énumérer les fichiers dans le dossier \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">Impossible d\'accéder au dossier \'%s\'</string>
     <string name="contentstorage_err_copy_failed">Le fichier \'%1$s\' n\'a pas pu être copié/déplacé vers \'%2$s\' (déplacement=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Défini par l\'utilisateur</string>
     <string name="persistablefolder_usertype_default">Par défaut</string>
     <string name="persistablefolder_legacy">Obsolète</string>

@@ -655,7 +655,8 @@
     <string name="init_backup_settings_restore">Επαναφορά ρυθμίσεων</string>
     <string name="settings_readingerror">Ρυθμίσεις ανάγνωσης σφαλμάτων</string>
     <string name="settings_restart">Το c:geo χρειάζεται επανεκκίνηση για την ενεργοποίηση των νέων ρυθμίσεων</string>
-    <string name="settings_folder_changed">Η ρύθμιση για το φάκελο \"%1$s\" έχει αλλάξει σε \"%2$s\".\n\nΠατήστε \"%3$s\" για να διατηρήσετε την τρέχουσα ρύθμιση για αυτόν το φάκελο.\n\nΠατήστε \"%4$s\" για να ορίσετε τον παλιό φάκελο. Θα σας ζητηθεί να ξαναδώσετε την πρόσβαση του c:geo σε αυτόν τον φάκελο σε αυτή την περίπτωση.</string>
+    <string name="settings_folder_changed">\"%1$s\" θα αλλάξει σε \"%2$s\" κατά την επαναφορά.\n\nΠατήστε \"%4$s\" για να συνεχίσετε. Σε αυτή την περίπτωση θα σας ζητηθεί να ξαναδώσετε στο c:geo πρόσβαση σε αυτόν τον φάκελο.\n\nΠατήστε \"%3$s\" για να διατηρήσετε την τρέχουσα ρύθμιση φακέλου.</string>
+    <string name="settings_file_changed">\"%1$s\" θα αλλάξει σε \"%2$s\" κατά την επαναφορά.\n\nΠατήστε \"%4$s\" για να συνεχίσετε. Σε αυτή την περίπτωση θα σας ζητηθεί να ξαναδώσετε στο c:geo πρόσβαση σε αυτόν τον φάκελο.\n\nΠατήστε \"%3$s\" για να διατηρήσετε την τρέχουσα ρύθμιση φακέλου.</string>
     <string name="settings_info_offline_maps_title">Πληροφορίες για χάρτες εκτός σύνδεσης</string>
     <string name="settings_info_offline_maps">Το c:geo υποστηρίζει χάρτες για χρήση εκτός σύνδεσης. Μπορείτε να αποκτήσετε χάρτες από διαφορετικούς παρόχους ή ακόμα και να δημιουργήσετε δικούς σας χάρτες (από δεδομένα OSM). Πρώτα θα πρέπει να επιλέξετε το φάκελο στον οποίο θα αποθηκεύονται χάρτες εκτός σύνδεσης.</string>
     <string name="settings_info_themes_title">Πληροφορίες σχετικά με θέματα χαρτών</string>
@@ -827,7 +828,7 @@
     <string name="contentstorage_err_list_failed">Δεν ήταν δυνατή η καταχώρηση αρχείων στο φάκελο \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">Δεν ήταν δυνατή η πρόσβαση στον φάκελο \'%s\'</string>
     <string name="contentstorage_err_copy_failed">Το αρχείο \'%1$s\' δεν μπορεί να αντιγραφεί/μετακινηθεί στο \'%2$s\' (μετακίνηση=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Ορισμένο από τον Χρήστη</string>
     <string name="persistablefolder_usertype_default">Προεπιλογή</string>
     <string name="persistablefolder_legacy">Παλαιού τύπου</string>
@@ -841,6 +842,7 @@
     <string name="persistablefolder_logfiles">Αρχεία καταγραφής</string>
     <string name="persistablefolder_fieldnotes">Σημειώσεις πεδίου</string>
     <string name="persistablefolder_spoilerimages">Εικόνες spoiler</string>
+    <string name="persistableuri_track">Αρχείο Διαδρομής</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s ολοκληρώθηκαν</string>
     <string name="folder_process_status_currentfile">Διαδικασία %1$s</string>

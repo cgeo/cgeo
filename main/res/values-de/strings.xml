@@ -655,7 +655,8 @@
     <string name="init_backup_settings_restore">Einstellungen wiederherstellen</string>
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
-    <string name="settings_folder_changed">Einstellung für Ordner \"%1$s\" wurde auf \"%2$s\" geändert.\n\nTippe auf \"%3$s\", um die aktuelle Einstellung für diesen Ordner zu behalten.\n\nTippe auf \"%4$s\", um den alten Ordner festzulegen. In diesem Fall wirst du aufgefordert, c:geo Zugriff auf diesen Ordner zu geben.</string>
+    <string name="settings_folder_changed">Ordner \"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diesen Ordner zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Ordnereinstellung zu behalten.</string>
+    <string name="settings_file_changed">\"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diese Datei zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Einstellung zu behalten.</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo unterstützt Karten für Offline-Nutzung. Du kannst Karten von verschiedenen Anbietern beziehen oder sogar eigene Karten erstellen (aus OSM-Daten). Du musst zuerst den Ordner auswählen, in dem Offline-Karten gespeichert werden sollen.</string>
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
@@ -827,7 +828,7 @@
     <string name="contentstorage_err_list_failed">Dateien im Ordner \'%s\' konnten nicht angezeigt werden</string>
     <string name="contentstorage_err_folder_access_failed">Auf Ordner \'%s\' konnte nicht zugegriffen werden</string>
     <string name="contentstorage_err_copy_failed">Datei \'%1$s\' konnte nicht nach \'%2$s\' kopiert/verschoben werden (Verschieben=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Benutzerdefiniert</string>
     <string name="persistablefolder_usertype_default">Standard</string>
     <string name="persistablefolder_legacy">Veraltet</string>
@@ -841,6 +842,7 @@
     <string name="persistablefolder_logfiles">Logdateien</string>
     <string name="persistablefolder_fieldnotes">Feldnotizen</string>
     <string name="persistablefolder_spoilerimages">Hinweisbilder</string>
+    <string name="persistableuri_track">Trackdatei</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fertig</string>
     <string name="folder_process_status_currentfile">Prozess %1$s</string>
@@ -1222,6 +1224,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Diese Option kann das Öffnen der Karte auf Kosten von etwas Gerätespeicher beschleunigen.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisierung des Designordners einschalten</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Dies wird den Inhalt des Ordners für Kartendesigns dauerhaft in einem app-internen Ordner synchronisieren, um den Dateizugriff zu beschleunigen.\n\nDein Kartenordner \'%1$s\' hat derzeit %2$s, %3$s und eine Größe von %4$s.\n\nMöchtest du die Ordnersynchronisierung aktivieren?</string>
+    <string name="onetime_mapthemefixslow_title">Langsame Kartendarstellung beheben</string>
+    <string name="onetime_mapthemefixslow_message">Die Verwendung von nicht gezippten Kartendesigns könnte die Startgeschwindigkeit der Karte verringern. Du kannst die Designs zippen oder synchronisieren, um schnellere Leistung zu erreichen und die Verzögerung beim Start der Karte zu reduzieren.</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>

@@ -657,7 +657,8 @@
     <string name="init_backup_settings_restore">Przywróć ustawienia</string>
     <string name="settings_readingerror">Błąd odczytu ustawień</string>
     <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
-    <string name="settings_folder_changed">Ustawienie folderu \"%1$s\" zmieniło się na \"%2$s\".\n\nDotknij \"%3$s\", aby zachować bieżące ustawienia tego folderu.\n\nDotknij \"%4$s\", aby ustawić stary folder. W takim przypadku zostaniesz poproszony o ponowne przyznanie dostępu do tego folderu.</string>
+    <string name="settings_folder_changed">Folder \"%1$s\" zostanie zmieniony na \"%2$s\" podczas przywracania.\n\nDotknij \"%4$s\", aby kontynuować. W takim przypadku zostaniesz poproszony o ponowne przyznanie dostępu c:geo do tego folderu.\n\nDotknij \"%3$s\", aby zachować ustawienia bieżącego folderu.</string>
+    <string name="settings_file_changed">\"%1$s\" zostanie zmieniony na \"%2$s\" podczas przywracania.\n\nDotknij \"%4$s\", aby kontynuować. W takim przypadku zostaniesz poproszony o ponowne udzielenie dostępu do tego pliku.\n\nDotknij \"%3$s\", aby zachować bieżące ustawienia.</string>
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
     <string name="settings_info_offline_maps">c:geo obsługuje mapy do użytku offline. Możesz uzyskać mapy od różnych dostawców lub nawet tworzyć własne mapy (z danych OSM). Najpierw musisz wybrać folder, w którym mapy offline mają być przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
@@ -829,7 +830,7 @@
     <string name="contentstorage_err_list_failed">Nie można wyświetlić plików w folderze \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">Nie można uzyskać dostępu do folderu \'%s\'</string>
     <string name="contentstorage_err_copy_failed">Plik \'%1$s\' nie mógł zostać skopiowany/przeniesiony do \'%2$s\' (przeniesienie=%3$s)</string>
-    <!-- Persistable Folders -->
+    <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Zdefiniowany przez użytkownika</string>
     <string name="persistablefolder_usertype_default">Domyślny</string>
     <string name="persistablefolder_legacy">Starsze</string>
@@ -843,6 +844,7 @@
     <string name="persistablefolder_logfiles">Pliki dziennika</string>
     <string name="persistablefolder_fieldnotes">Notatki polowe</string>
     <string name="persistablefolder_spoilerimages">Zdjęcia ze spoilerami</string>
+    <string name="persistableuri_track">Plik śladu</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s wykonano</string>
     <string name="folder_process_status_currentfile">Przetwarzanie %1$s</string>
