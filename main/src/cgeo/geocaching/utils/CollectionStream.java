@@ -61,7 +61,7 @@ public class CollectionStream<T> {
      *
      */
     public static <TT> CollectionStream<TT> of(final TT[] coll) {
-        return new CollectionStream<>(Arrays.asList(coll), false);
+        return new CollectionStream<>(coll == null ? Collections.emptyList() : Arrays.asList(coll), false);
     }
 
     private CollectionStream(final Collection<Object> coll, final boolean forceCopy) {

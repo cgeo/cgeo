@@ -1341,6 +1341,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">This option may improve map viewer opening performance at the cost of some device storage space.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Turn on theme folder synchronization</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">This will permanently synchronize the content of the Map Theme folder into an app-private folder for faster file access.\n\nYour map Theme Folder \'%1$s\' has currently %2$s, %3$s and a size of %4$s.\n\nDo you want to turn on folder synchronization?</string>
+    <string name="onetime_mapthemefixslow_title">Fix slow map theme rendering</string>
+    <string name="onetime_mapthemefixslow_message">Working with non-zipped map themes might decrease map viewer opening performance. You can zip or sync your themes to get faster performance and reduce the delay on starting the map.</string>
     <string name="init_hidewp">Hide waypoints</string>
     <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
     <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>
