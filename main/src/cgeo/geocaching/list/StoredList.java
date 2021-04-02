@@ -117,7 +117,6 @@ public final class StoredList extends AbstractList {
                 // onClickListener is null because it is handled below to prevent closing of the dialog
                 builder.setNeutralButton(R.string.cache_list_select_last, null);
             }
-            builder.setNegativeButton(android.R.string.cancel, null);
             final AlertDialog dialog = builder.create();
             dialog.show();
             dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
