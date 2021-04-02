@@ -1228,6 +1228,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Deze optie kan de prestaties van de kaartviewer bij het openen verbeteren ten koste van de opslagruimte van sommige apparaten.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisatie van themamappen inschakelen</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Dit zal de inhoud van de kaart Thema Map permanent synchroniseren in een app-private map voor snellere bestandstoegang.\n\nDe thema map \'%1$s\' heeft op dit moment %2$s, %3$s en een grootte van %4$s.\n\nWil je de synchronisatie van mappen inschakelen?</string>
+    <string name="onetime_mapthemefixslow_title">Repareer langzame kaartthema weergave</string>
+    <string name="onetime_mapthemefixslow_message">Werken met niet ge-zipte kaart thema\'s kan de kaartviewer openingsprestatie verminderen. Je kunt je thema\'s zippen of synchroniseren om snellere prestaties te krijgen en de vertraging te verminderen bij het starten van de kaart.</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
