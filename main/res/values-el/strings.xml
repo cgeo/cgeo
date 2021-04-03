@@ -1227,6 +1227,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Αυτή η επιλογή μπορεί να βελτιώσει την απόδοση ανοίγματος του προβολέα χαρτών με κόστος κάποιο χώρο αποθήκευσης συσκευών.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ενεργοποίηση συγχρονισμού φακέλου θεμάτων</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Αυτή η ενέργεια θα συγχρονίσει μόνιμα το περιεχόμενο του φακέλου του Θέματος Χάρτη με τον εσωτερικό φάκελο της εφαρμογής για ταχύτερη προσπέλαση.\n\nΟ φάκελος του Θέματος Χάρτη \'%1$s\' έχει προς το παρόν %2$s, %3$s και μέγεθος %4$s. \n\n Θέλετε να συνεχίσετε με τον συγχρονισμό;</string>
+    <string name="onetime_mapthemefixslow_title">Διόρθωση αποτύπωσης αργού θέματος χάρτη</string>
+    <string name="onetime_mapthemefixslow_message">Εργασία με μη-συμπιεσμένα θέματα χάρτη μπορεί να μειώσει την απόδοση ανοίγματος του προβολέα χάρτη. Μπορείτε να συμπιεσετε ή να συγχρονίσετε τα θέματα σας για να πάρετε ταχύτερη απόδοση και να μειώσετε την καθυστέρηση στην προβολή του χάρτη.</string>
     <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
     <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
     <string name="init_summary_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης από τον χάρτη</string>
