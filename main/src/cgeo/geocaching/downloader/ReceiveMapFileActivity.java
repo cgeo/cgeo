@@ -116,7 +116,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
     private void handleMapFile(final Activity activity, final boolean isZipFile, final String nameWithinZip) {
         // check whether the target file or its companion file already exist
-        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(downloader.targetFolder.getFolder(), false);
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(downloader.targetFolder.getFolder(), false, false);
         Uri companionFileExists = CompanionFileUtils.companionFileExists(files, filename);
         Uri downloadFileExists = null;
         for (ContentStorage.FileInformation fi : files) {

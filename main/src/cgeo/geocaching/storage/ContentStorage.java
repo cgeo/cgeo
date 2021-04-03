@@ -107,12 +107,16 @@ public class ContentStorage {
         for (PersistableFolder folder : PersistableFolder.values()) {
             //(re)sets default folders and ensures that it is definitely accessible
             folder.setDefaultFolder(getAccessibleDefaultFolder(folder.getDefaultCandidates(), folder.needsWrite(), folder.name()));
+            //for folders pointing to default: create if not existing
+            if (!folder.isUserDefined()) {
+                ensureFolder(folder.getDefaultFolder(), folder.needsWrite());
+            }
         }
     }
 
     /** checks if folder is available and can be used, creates it if need be. */
     public boolean ensureFolder(final PersistableFolder publicFolder) {
-        final Folder folder = getFolder(publicFolder);
+        final Folder folder = getFolder(publicFolder, false);
         if (folder == null) {
             return false;
         }
@@ -149,7 +153,7 @@ public class ContentStorage {
 
     /** Creates a new file in folder and returns its Uri */
     public Uri create(final PersistableFolder folder, final FileNameCreator nameCreator, final boolean onlyIfNotExisting) {
-        return create(getFolder(folder), nameCreator, onlyIfNotExisting);
+        return create(getFolder(folder, false), nameCreator, onlyIfNotExisting);
     }
 
     /** Creates a new file in folder and returns its Uri */
@@ -174,7 +178,7 @@ public class ContentStorage {
         try {
             return getAccessorFor(folder.getBaseType()).create(folder, name);
         } catch (IOException ioe) {
-            reportProblem(R.string.contentstorage_err_create_failed, ioe, name, folder);
+            reportProblem(R.string.contentstorage_err_create_failed, ioe, false, name, folder);
         }
         return null;
     }
@@ -186,7 +190,7 @@ public class ContentStorage {
         try {
             return getAccessorFor(uri).delete(uri);
         } catch (IOException ioe) {
-            reportProblem(R.string.contentstorage_err_delete_failed, ioe, uri);
+            reportProblem(R.string.contentstorage_err_delete_failed, ioe, false, uri);
         }
         return false;
     }
@@ -194,18 +198,24 @@ public class ContentStorage {
     /** Lists all direct content of given folder */
     @NonNull
     public List<FileInformation> list(final PersistableFolder folder) {
-        return list(getFolder(folder));
+        return list(folder, false);
+    }
+
+    /** Lists all direct content of given folder */
+    @NonNull
+    public List<FileInformation> list(final PersistableFolder folder, final boolean suppressWarningForUser) {
+        return list(getFolder(folder, suppressWarningForUser), false, suppressWarningForUser);
     }
 
     /** Lists all direct content of given folder location */
     @NonNull
     public List<FileInformation> list(final Folder folder) {
-        return list(folder, false);
+        return list(folder, false, false);
     }
 
     /** Lists all direct content of given folder location */
     @NonNull
-    public List<FileInformation> list(final Folder folder, final boolean sortByName) {
+    public List<FileInformation> list(final Folder folder, final boolean sortByName, final boolean suppressWarningForUser) {
         try (ContextLogger cLog = new ContextLogger("ContentStorage.list: %s", folder)) {
             if (folder == null) {
                 return Collections.emptyList();
@@ -217,7 +227,7 @@ public class ContentStorage {
             }
             return result;
         } catch (IOException ioe) {
-            reportProblem(R.string.contentstorage_err_list_failed, ioe, folder);
+            reportProblem(R.string.contentstorage_err_list_failed, suppressWarningForUser, ioe, folder);
         }
         return Collections.emptyList();
     }
@@ -269,7 +279,7 @@ public class ContentStorage {
             final FileInformation fileInfo = getAccessorFor(parentFolder).getFileInfo(parentFolder, fileName);
             return new ImmutablePair<>(fileInfo, parentFolder);
         } catch (IOException ioe) {
-            reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, rootFolder);
+            reportProblem(R.string.contentstorage_err_folder_access_failed, ioe, false, rootFolder);
         }
         return null;
     }
@@ -309,7 +319,7 @@ public class ContentStorage {
         try {
             return getAccessorFor(uri).getFileInfo(uri);
         } catch (IOException ioe) {
-            reportProblem(R.string.contentstorage_err_read_failed, ioe, uri);
+            reportProblem(R.string.contentstorage_err_read_failed, ioe, false, uri);
         }
         return null;
     }
@@ -332,7 +342,7 @@ public class ContentStorage {
         } catch (IOException | SecurityException | IllegalArgumentException se) {
             //SecurityException is thrown for valid Uri which we have no permission to access
             //IllegalArgumentException is thrown for invalid Uri (e.g. because a folder/file was deleted meanwhile)
-            reportProblem(R.string.contentstorage_err_write_failed, se, uri);
+            reportProblem(R.string.contentstorage_err_write_failed, se, false, uri);
         }
         return null;
     }
@@ -362,9 +372,9 @@ public class ContentStorage {
 
     /**
      * Opens an Uri for reading. Remember to close stream after usage! Returns null if Uri can't be opened for reading.
-     * @param suppressWarningOnFailure if true then failure to open will NOT result in a toast to user
+     * @param suppressWarningForUser if true then failure to open will NOT result in a toast to user
      */
-    public InputStream openForRead(final Uri uri, final boolean suppressWarningOnFailure) {
+    public InputStream openForRead(final Uri uri, final boolean suppressWarningForUser) {
         if (uri == null) {
             return null;
         }
@@ -374,9 +384,7 @@ public class ContentStorage {
         } catch (IOException | SecurityException | IllegalArgumentException se) {
             //SecurityException is thrown for valid Uri which we have no permission to access
             //IllegalArgumentException is thrown for invalid Uri (e.g. because a folder/file was deleted meanwhile)
-            if (!suppressWarningOnFailure) {
-                reportProblem(R.string.contentstorage_err_read_failed, se, uri);
-            }
+            reportProblem(R.string.contentstorage_err_read_failed, se, suppressWarningForUser, uri);
         }
         return null;
     }
@@ -409,7 +417,7 @@ public class ContentStorage {
         } finally {
             closeQuietly(in, out);
             if (!success) {
-                reportProblem(R.string.contentstorage_err_copy_failed, failureEx, source, target, move);
+                reportProblem(R.string.contentstorage_err_copy_failed, failureEx, false, source, target, move);
             }
         }
         return outputUri;
@@ -417,7 +425,7 @@ public class ContentStorage {
 
     /** Write an (internal's) file content to external storage */
     public Uri writeFileToFolder(final PersistableFolder folder, final FileNameCreator nameCreator, final File file, final boolean deleteFileOnSuccess) {
-        return copy(Uri.fromFile(file), getFolder(folder), nameCreator, deleteFileOnSuccess);
+        return copy(Uri.fromFile(file), getFolder(folder, false), nameCreator, deleteFileOnSuccess);
     }
 
     /** Helper method, meant for usage in conjunction with {@link #writeFileToFolder(PersistableFolder, FileNameCreator, File, boolean)} */
@@ -435,7 +443,7 @@ public class ContentStorage {
             final File tempFile = new File(outputDir, fileName);
             return tempFile.createNewFile() ? tempFile : null;
         } catch (IOException ie) {
-            reportProblem(R.string.contentstorage_err_create_failed, ie, fileName, outputDir);
+            reportProblem(R.string.contentstorage_err_create_failed, ie, false, fileName, outputDir);
         }
         return null;
     }
@@ -454,7 +462,7 @@ public class ContentStorage {
             os = new FileOutputStream(file);
             IOUtils.copy(is, os);
         } catch (IOException ie) {
-            reportProblem(R.string.contentstorage_err_copy_failed, ie, uri, file, false);
+            reportProblem(R.string.contentstorage_err_copy_failed, ie, false, uri, file, false);
             if (file != null && !file.delete()) {
                 Log.i("File could not be deleted: " + file);
             }
@@ -469,6 +477,9 @@ public class ContentStorage {
     public void setUserDefinedFolder(final PersistableFolder folder, final Folder userDefinedFolder, final boolean setByUser) {
         folder.setUserDefinedFolder(userDefinedFolder, setByUser);
         documentAccessor.releaseOutdatedUriPermissions();
+        ensureFolder(folder);
+        //in case this shifts other default folders (e.g. when MAPS-folder is changed then default THEME folder might need new creation)
+        reevaluateFolderDefaults();
     }
 
     public void setPersistedDocumentUri(final PersistableUri persistedDocUi, final Uri uri) {
@@ -511,10 +522,10 @@ public class ContentStorage {
 
     /** Gets this folder's current location. If it is not accessible, then null is returned */
     @Nullable
-    private Folder getFolder(final PersistableFolder folder) {
+    private Folder getFolder(final PersistableFolder folder, final boolean suppressWarningForUser) {
 
         if (!ensureFolder(folder.getFolder(), folder.needsWrite())) {
-            reportProblem(R.string.contentstorage_err_folder_access_failed, folder);
+            reportProblem(R.string.contentstorage_err_folder_access_failed, suppressWarningForUser, folder);
             return null;
         }
         return folder.getFolder();
@@ -550,21 +561,21 @@ public class ContentStorage {
         return Folder.fromFolder(CGEO_PRIVATE_FILES, "public/" + fallbackName);
     }
 
-    private void reportProblem(@StringRes final int messageId, final Object ... params) {
-        reportProblem(messageId, null, params);
+    private void reportProblem(@StringRes final int messageId, final boolean suppressForUser, final Object ... params) {
+        reportProblem(messageId, null, suppressForUser, params);
     }
 
-    private void reportProblem(@StringRes final int messageId, final Exception ex, final Object ... params) {
+    private void reportProblem(@StringRes final int messageId, final Exception ex, final boolean suppressForUser, final Object ... params) {
 
-        if (reportRunningFlag.get() != null && reportRunningFlag.get().booleanValue()) {
+        if (reportRunningFlag.get() != null && reportRunningFlag.get()) {
             return;
         }
         reportRunningFlag.set(true);
 
         //prepare params message
         final ImmutablePair<String, String> messages = LocalizationUtils.getMultiPurposeString(messageId, "ContentStorage", params);
-        Log.w("ContentStorage: " + messages.right, ex);
-        if (context != null) {
+        Log.w("ContentStorage" + (suppressForUser ? "[suppressedForUser]" : "") + ": " + messages.right, ex);
+        if (!suppressForUser && context != null) {
             ActivityMixin.showToast(context, messages.left);
         }
         reportRunningFlag.set(false);

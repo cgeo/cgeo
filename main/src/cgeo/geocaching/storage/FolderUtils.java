@@ -10,6 +10,7 @@ import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Func1;
@@ -71,6 +72,8 @@ public class FolderUtils {
         return INSTANCE;
     }
 
+    private enum TreeWalkResult { CONTINUE, STOP, STOP_AFTER_FOLDER };
+
 
     public List<ImmutablePair<ContentStorage.FileInformation, String>> getAllFiles(final Folder folder) {
         return getAllFiles(folder, null);
@@ -97,7 +100,7 @@ public class FolderUtils {
                 if (!fi.left.isDirectory && (filter == null || filter.test(fi.left))) {
                     result.add(new ImmutablePair<>(fi.left, paths.peek() + fi.left.name));
                 }
-                return true;
+                return  TreeWalkResult.CONTINUE;
             });
             cLog.add("#e:%d", result.size());
             return result;
@@ -106,17 +109,19 @@ public class FolderUtils {
 
     public static class FolderInfo {
 
-        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0,  0l, null);
+        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0,  0l, true, null);
 
         public final int fileCount;
         public final int dirCount;
         public final long totalFileSize;
         public final List<String> topLevelFiles;
+        public final boolean resultIsIncomplete;
 
-        public FolderInfo(final int fileCount, final int dirCount, final long totalFileSize, final List<String> topLevelFiles) {
+        private FolderInfo(final int fileCount, final int dirCount, final long totalFileSize, final boolean resultIsIncomplete, final List<String> topLevelFiles) {
             this.fileCount = fileCount;
             this.dirCount = dirCount;
             this.totalFileSize = totalFileSize;
+            this.resultIsIncomplete = resultIsIncomplete;
             this.topLevelFiles = topLevelFiles == null ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList<>(topLevelFiles));
         }
 
@@ -130,6 +135,7 @@ public class FolderUtils {
             }
             final FolderInfo that = (FolderInfo) o;
             return fileCount == that.fileCount &&
+                resultIsIncomplete == that.resultIsIncomplete &&
                 dirCount == that.dirCount &&
                 totalFileSize == that.totalFileSize &&
                 topLevelFiles.equals(that.topLevelFiles);
@@ -143,23 +149,42 @@ public class FolderUtils {
         @Override
         public String toString() {
             final int topLevelFilesMaximumDisplayCount = 10;
-            return "files:" + fileCount + ", dirs:" + dirCount + ", totalFileSize:" + Formatter.formatBytes(totalFileSize) +
+            final String incompletePraefix = resultIsIncomplete ? ">=" : "";
+            return "files:" + incompletePraefix + fileCount + ", dirs:" + incompletePraefix + dirCount + ", totalFileSize:" + incompletePraefix + Formatter.formatBytes(totalFileSize) +
                 ", topLevel(" + (topLevelFiles.size() > topLevelFilesMaximumDisplayCount ? "first " + topLevelFilesMaximumDisplayCount + " of " : "") +
                 topLevelFiles.size() + "):[" + CollectionStream.of(topLevelFiles).limit(topLevelFilesMaximumDisplayCount).toJoinedString(";") + "]";
         }
+
+        /** returns internationalized strings for file count (left), dir count (middle) and total file size (right) */
+        public ImmutableTriple<String, String, String> getUserDisplayableFolderInfoStrings() {
+
+            //create the message
+            final String incompletePraefix = resultIsIncomplete ? ">=" : "";
+            final String fileCount = incompletePraefix + LocalizationUtils.getPlural(R.plurals.file_count, this.fileCount);
+            final String folderCount = incompletePraefix + LocalizationUtils.getPlural(R.plurals.folder_count, this.dirCount);
+            final String folderSize = incompletePraefix + Formatter.formatBytes(this.totalFileSize);
+
+            return new ImmutableTriple<>(fileCount, folderCount, folderSize);
+        }
+
     }
 
 
     /** returns folder informations with regards to files/dirs currently in folder */
     public FolderInfo getFolderInfo(final Folder folder) {
-        try (ContextLogger cLog = new ContextLogger("FolderUtils.getFolderInfo: %s", folder)) {
+        return getFolderInfo(folder, 5);
+    }
 
+    /** returns folder informations with regards to files/dirs currently in folder, restricts scan to a maximum of subfolders e.g. to reduce info gathering time */
+    public FolderInfo getFolderInfo(final Folder folder, final int maxSubfolderScan) {
+        try (ContextLogger cLog = new ContextLogger("FolderUtils.getFolderInfo: %s", folder)) {
 
             final int[] counts = new int[]{0, 0 };
             final long[] size = new long[]{0 };
             final int[] level = new int[] { 0 };
             final List<String> topLevelFiles = new ArrayList<>();
-            treeWalk(folder, fi -> {
+            final boolean result = treeWalk(folder, fi -> {
+                final boolean subdirLimitReached = maxSubfolderScan >= 0 && counts[1] >= maxSubfolderScan;
                 if (fi.left.isDirectory && fi.right) {
                     counts[1]++;
                     if (level[0] == 0) {
@@ -177,10 +202,10 @@ public class FolderUtils {
                         topLevelFiles.add(fi.left.name);
                     }
                 }
-                return true;
+                return subdirLimitReached ? TreeWalkResult.STOP_AFTER_FOLDER : TreeWalkResult.CONTINUE;
             });
             cLog.add("#f:%d, #d:#%d, size:%d", counts[0], counts[1], size[0]);
-            return new FolderInfo(counts[0], counts[1], size[0], topLevelFiles);
+            return new FolderInfo(counts[0], counts[1], size[0], !result, topLevelFiles);
         }
     }
 
@@ -190,12 +215,12 @@ public class FolderUtils {
             return treeWalk(folder, fi -> {
                 if (fi.left.isDirectory) {
                     if (fi.right) {
-                        return true;
+                        return TreeWalkResult.CONTINUE;
                     } else {
-                        return pls.delete(fi.left.uri);
+                        return pls.delete(fi.left.uri) ? TreeWalkResult.CONTINUE : TreeWalkResult.STOP;
                     }
                 } else {
-                    return pls.delete(fi.left.uri);
+                    return pls.delete(fi.left.uri) ? TreeWalkResult.CONTINUE : TreeWalkResult.STOP;
                 }
             });
         }
@@ -225,7 +250,7 @@ public class FolderUtils {
 
         sendCopyStatus(statusListener, null, 0, 0, null);
 
-        final FolderInfo sourceFolderInfo = getFolderInfo(source);
+        final FolderInfo sourceFolderInfo = getFolderInfo(source, -1);
         final ImmutablePair<Integer, Integer> sourceInfo = new ImmutablePair<>(sourceFolderInfo.fileCount, sourceFolderInfo.dirCount);
         sendCopyStatus(statusListener, null, 0, 0, sourceInfo);
 
@@ -578,7 +603,7 @@ public class FolderUtils {
         targetFolderStack.push(target);
         treeWalk(source, fi -> {
             if (cancelFlag != null && cancelFlag.get()) {
-                return false;
+                return TreeWalkResult.STOP;
             }
             if (fi.left.isDirectory) {
                 if (fi.right) {
@@ -588,14 +613,14 @@ public class FolderUtils {
                     if (onTargetNeededPath[0] >= 0) {
                         onTargetNeededPath[0]++;
                     }
-                    return true;
+                    return TreeWalkResult.CONTINUE;
                 } else {
                     markerFoundInSubdir[1] |= onTargetNeededPath[0] == 0;
                     listToCopy.add(new ImmutableTriple<>(fi.left, targetFolderStack.pop(), onTargetNeededPath[0] == 0 ? COPY_FLAG_DIR_NEEDED_FOR_TARGET : 0));
                     if (onTargetNeededPath[0] > 0) {
                         onTargetNeededPath[0]--;
                     }
-                    return true;
+                    return TreeWalkResult.CONTINUE;
                 }
             } else {
                 if (fi.left.name.equals(targetMarkerFileName)) {
@@ -605,7 +630,7 @@ public class FolderUtils {
                     copyCounts[0]++;
                     listToCopy.add(new ImmutableTriple<>(fi.left, targetFolderStack.peek(), 0));
                 }
-                return true;
+                return TreeWalkResult.CONTINUE;
             }
         });
         //delete marker file
@@ -695,10 +720,10 @@ public class FolderUtils {
                     newDirEntry.set("files", newDirContent);
                     parents.peek().add(newDirEntry);
                     parents.push(newDirContent);
-                    return true;
+                    return TreeWalkResult.CONTINUE;
                 } else {
                     parents.pop();
-                    return true;
+                    return TreeWalkResult.CONTINUE;
                 }
             } else {
                 if (extendedInfo) {
@@ -710,7 +735,7 @@ public class FolderUtils {
                 } else {
                     parents.peek().add(fi.left.name);
                 }
-                return true;
+                return TreeWalkResult.CONTINUE;
             }
         });
 
@@ -800,29 +825,45 @@ public class FolderUtils {
 
 
 
-    private boolean treeWalk(final Folder root, final Predicate<ImmutablePair<ContentStorage.FileInformation, Boolean>> callback) {
+    private boolean treeWalk(final Folder root, final Func1<ImmutablePair<ContentStorage.FileInformation, Boolean>, TreeWalkResult> callback) {
         return treeWalk(root, false, callback);
     }
 
-    private boolean treeWalk(final Folder root, final boolean ordered, final Predicate<ImmutablePair<ContentStorage.FileInformation, Boolean>> callback) {
+    private boolean treeWalk(final Folder root, final boolean ordered, final Func1<ImmutablePair<ContentStorage.FileInformation, Boolean>, TreeWalkResult> callback) {
+        return treeWalkRecursive(root, ordered, callback) == TreeWalkResult.CONTINUE;
+    }
+
+    private TreeWalkResult treeWalkRecursive(final Folder root, final boolean ordered, final Func1<ImmutablePair<ContentStorage.FileInformation, Boolean>, TreeWalkResult> callback) {
+
         final List<ContentStorage.FileInformation> files = pls.list(root);
         if (ordered) {
             Collections.sort(files, (o1, o2) -> o1.name.compareTo(o2.name));
         }
+        boolean continueWalk = true;
         for (ContentStorage.FileInformation fi : files) {
-            if (!callback.test(new ImmutablePair<>(fi, true))) {
-                return false;
+            TreeWalkResult twr = callback.call(new ImmutablePair<>(fi, true));
+            if (twr == null || twr == TreeWalkResult.STOP) {
+                return TreeWalkResult.STOP;
             }
+            continueWalk &= twr == TreeWalkResult.CONTINUE;
+
             if (fi.isDirectory) {
-                if (!treeWalk(fi.dirLocation, ordered, callback)) {
-                    return false;
+                if (continueWalk) {
+                    twr = treeWalkRecursive(fi.dirLocation, ordered, callback);
+                    if (twr == TreeWalkResult.STOP) {
+                        return TreeWalkResult.STOP;
+                    }
+                    continueWalk &= twr == TreeWalkResult.CONTINUE;
                 }
-                if (!callback.test(new ImmutablePair<>(fi, false))) {
-                    return false;
+
+                twr = callback.call(new ImmutablePair<>(fi, false));
+                if (twr == null || twr == TreeWalkResult.STOP) {
+                    return TreeWalkResult.STOP;
                 }
+                continueWalk &= twr == TreeWalkResult.CONTINUE;
             }
         }
-        return true;
+        return continueWalk ? TreeWalkResult.CONTINUE : TreeWalkResult.STOP_AFTER_FOLDER;
     }
 
     private static class FolderProcessTask extends AsyncTaskWithProgressText<Void, FolderProcessResult> {
