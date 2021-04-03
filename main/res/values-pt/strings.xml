@@ -338,6 +338,8 @@
     <string name="caches_select_mode_exit">Sair do modo de selecção</string>
     <string name="caches_select_invert">Inverter selecção</string>
     <string name="caches_nearby">Por perto</string>
+    <string name="caches_remove_all">Remover todas da lista</string>
+    <string name="caches_remove_selected">Remover as caches seleccionadas da lista</string>
     <string name="caches_remove_all_completely">Eliminar todas do dispositivo</string>
     <string name="caches_remove_selected_completely">Eliminar seleccionadas do dispositivo</string>
     <string name="caches_delete_events">Eliminar eventos passados</string>
@@ -653,6 +655,8 @@
     <string name="init_backup_settings_restore">Restaurar definições</string>
     <string name="settings_readingerror">Erro ao ler as definições</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
+    <string name="settings_folder_changed">A pasta \"%1$s\" será alterada para \"%2$s\" durante o restauro.\n\nToque em \"%4$s\" para prosseguir. Nesse caso será de novo pedido que garanta o acesso do c:geo a essa pasta.\n\nToque em \"%3$s\" para manter a pasta actual na configuração.</string>
+    <string name="settings_file_changed">\"%1$s\" será alterado para \"%2$s\" durante o restauro.\n\nToque em \"%4$s\" para prosseguir. Nesse caso será de novo pedido que garanta o acesso do c:geo a esse ficheiro.\n\nToque em \"%3$s\" para manter a actual configuração.</string>
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
     <string name="settings_info_offline_maps">O c:geo suporta mapas para uso offline. Pode obter mapas de diferentes fornecedores ou até mesmo criar os seus próprios mapas (de dados OSM). Em primeiro lugar, seleccione a pasta na qual os mapas offline serão guardados.</string>
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
@@ -663,7 +667,7 @@
     <string name="init_map_directory_description">Pasta com mapas offline</string>
     <string name="init_brouter_directory_description">Pasta com dados de encaminhamento do BRouter</string>
     <string name="init_brouter_updateinterval_title">Intervalo de actualização</string>
-    <string name="init_brouter_updateinterval_description">Lembra a cada x dias para verificação de actualizações</string>
+    <string name="init_brouter_updateinterval_description">É lembrado a cada x dias para realizar uma verificação por actualizações</string>
     <string name="init_gpx_importexportdir">Pasta GPX</string>
     <string name="init_dataDir">Seleccionar pasta de dados</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
@@ -1030,6 +1034,10 @@
     <string name="menu_caches">Gerir caches</string>
     <string name="cache_menu_event">Adicionar ao calendário</string>
     <string name="cache_menu_extract_waypoints">Extrair pontos adicionais</string>
+    <string name="cache_menu_set_found">Definir como encontrada</string>
+    <string name="cache_menu_set_DNF">Definir como não encontrada</string>
+    <string name="cache_menu_reset_foundstate">Redefinir o estado de encontrada</string>
+    <string name="cache_foundstate_updated">Estado de encontrada actualizado</string>
     <string name="cache_menu_set_cache_icon">Definir ícone da cache</string>
     <string name="cache_icon_updated">Ícone da cache actualizado</string>
     <string name="cache_menu_details">Detalhes</string>
@@ -1220,6 +1228,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Esta opção pode melhorar o desempenho na abertura do visualizador de mapas, à custa de algum espaço de armazenamento no dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronização da pasta de temas</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Isto irá sincronizar permanentemente o conteúdo da pasta Temas de Mapa com uma pasta da aplicação privada, para acesso mais rápido aos ficheiros.\n\nA sua Pasta de Temas \'%1$s\' tem actualmente %2$s, %3$s e um tamanho de %4$s.\n\nDeseja activar a sincronização de pastas?</string>
+    <string name="onetime_mapthemefixslow_title">Corrigir renderização lenta do tema de mapa</string>
+    <string name="onetime_mapthemefixslow_message">Trabalhar com temas de mapa não compactados pode diminuir o desempenho da abertura do visualizador de mapa. Pode compactar ou sincronizar os seus temas para obter um desempenho mais rápido e reduzir o atraso ao iniciar o mapa.</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
