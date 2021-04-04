@@ -655,6 +655,8 @@
     <string name="init_backup_settings_restore">Ripristina impostazioni</string>
     <string name="settings_readingerror">Errore di lettura impostazioni</string>
     <string name="settings_restart">c:geo deve essere riavviato ora per rendere effettive le impostazioni caricate</string>
+    <string name="settings_folder_changed">La cartella \"%1$s\" sarà cambiata a \"%2$s\" durante il ripristino.\n\nTocca \"%4$s per procedere. In quel caso ti sarà chiesto di garantire a c:geo l\'accesso a quella cartella.\n\nTocca invece \"%3$s\" per mantenere l\'impostazione corrente della cartella.</string>
+    <string name="settings_file_changed">\"%1$s\" sarà cambiato in \"%2$s\" durante il ripristino.\n\nTocca \"%4$s\" per procedere. In questo caso ti verrà chiesto di concedere l\'accesso a c:geo a quella cartella.\n\nTocca \"%3$s\" per mantenere invece l\'impostazione attuale della cartella.</string>
     <string name="settings_info_offline_maps_title">Informazioni su mappe Offline</string>
     <string name="settings_info_offline_maps">c:geo supporta le mappe per l\'uso offline. È possibile ottenere mappe da diversi fornitori o anche creare le proprie mappe (da dati OSM). In primo luogo è necessario selezionare la cartella in cui le mappe offline devono essere memorizzate.</string>
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
@@ -840,6 +842,7 @@
     <string name="persistablefolder_logfiles">File di log</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
     <string name="persistablefolder_spoilerimages">Immagini Spoiler</string>
+    <string name="persistableuri_track">Trackfile</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fatto</string>
     <string name="folder_process_status_currentfile">Processo %1$s</string>
@@ -1221,6 +1224,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Questa opzione può migliorare le prestazioni di apertura del visualizzatore di mappe, occupando un po\' di spazio di archiviazione del dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Attiva sincronizzazione cartella tema</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Questo sincronizzerà in modo permanente il contenuto della cartella Tema della mappa in una cartella dell\'app per un accesso più veloce ai file.\n\nLa cartella del tema della mappa \'%1$s\' ha attualmente %2$s, %3$s e una dimensione di %4$s.\n\nVuoi attivare la sincronizzazione delle cartelle?</string>
+    <string name="onetime_mapthemefixslow_title">Correggi il rendering lento del tema della mappa</string>
+    <string name="onetime_mapthemefixslow_message">Lavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. È possibile comprimere o sincronizzare i temi per ottenere prestazioni più veloci e ridurre il ritardo all\'avvio della mappa.</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
     <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
     <string name="init_summary_hidewp_parking">Nascondi i waypoint di parcheggio sulla mappa</string>
