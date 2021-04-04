@@ -340,6 +340,8 @@
     <string name="caches_select_mode_exit">Opustiť mód výberu</string>
     <string name="caches_select_invert">Inverzný výber</string>
     <string name="caches_nearby">V okolí</string>
+    <string name="caches_remove_all">Odstrániť všetko zo zoznamu</string>
+    <string name="caches_remove_selected">Odstrániť vybrané zo zoznamu</string>
     <string name="caches_remove_all_completely">Odstrániť všetko zo zariadenia</string>
     <string name="caches_remove_selected_completely">Odstrániť zvolené zo zariadenia</string>
     <string name="caches_delete_events">Odstrániť minulé Eventy</string>
@@ -1248,6 +1250,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Táto možnosť môže vylepšiť výkon otvárania prezerača na úkor nejakého obsadeného miesta v ukladacom priestore.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnúť synchronizáciu priečinka s témou</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Tým natrvalo synchronizujete obsah priečinka Map Theme do súkromného priečinka aplikácie pre rýchlejší prístup k súborom.\n\nVáš priečinok s mapovou témou \'%1$s\' má momentálne %2$s, %3$s a veľkosť %4$s.\n\nChcete zapnúť synchronizáciu priečinka?</string>
+    <string name="onetime_mapthemefixslow_title">Oprava pomalého vykresľovania mapového motívu</string>
+    <string name="onetime_mapthemefixslow_message">Práca s nezbalenými mapovými motívmi môže znižovať výkon otvárania zobrazovača mapy. Motívy môžete zbaliť alebo synchronizovať a dosiahnuť tak rýchlejší výkon a skrátiť oneskorenie pri spúšťaní mapy.</string>
     <string name="init_hidewp">Skryť body trasy</string>
     <string name="init_summary_hidewp_original">Skryť pôvodné body trasy na mape</string>
     <string name="init_summary_hidewp_parking">Skryť parkoviská na mape</string>
