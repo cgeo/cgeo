@@ -159,32 +159,33 @@ public class BackupUtils {
     public void restoreInternal(final Activity activityContext, final ContentStorageActivityHelper contentStorageActivityHelper, final Folder backupDir, final boolean database, final boolean settings) {
         final Consumer<String> consumer = resultString -> {
 
-            // build a list of folders currently set and a list of remaining folders
-            final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues = new ArrayList<>();
-            final ArrayList<ImmutablePair<PersistableFolder, String>> unsetFolders = new ArrayList<>();
-            for (PersistableFolder folder : PersistableFolder.values()) {
-                final String value = Settings.getPersistableFolderRaw(folder);
-                if (value != null) {
-                    currentFolderValues.add(new ImmutableTriple<>(folder, activityContext.getString(folder.getPrefKeyId()), value));
-                } else {
-                    unsetFolders.add(new ImmutablePair<>(folder, activityContext.getString(folder.getPrefKeyId())));
-                }
-            }
-
-            // same for files
-            final ArrayList<ImmutableTriple<PersistableUri, String, String>> currentUriValues = new ArrayList<>();
-            final ArrayList<ImmutablePair<PersistableUri, String>> unsetUris = new ArrayList<>();
-            for (PersistableUri uri : PersistableUri.values()) {
-                final String value = Settings.getPersistableUriRaw(uri);
-                if (value != null) {
-                    currentUriValues.add(new ImmutableTriple<>(uri, activityContext.getString(uri.getPrefKeyId()), value));
-                } else {
-                    unsetUris.add(new ImmutablePair<>(uri, activityContext.getString(uri.getPrefKeyId())));
-                }
-            }
-
             boolean restartNeeded = false;
+            final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues = new ArrayList<>();
+            final ArrayList<ImmutableTriple<PersistableUri, String, String>> currentUriValues = new ArrayList<>();
+
             if (settings) {
+                // build a list of folders currently set and a list of remaining folders
+                final ArrayList<ImmutablePair<PersistableFolder, String>> unsetFolders = new ArrayList<>();
+                for (PersistableFolder folder : PersistableFolder.values()) {
+                    final String value = Settings.getPersistableFolderRaw(folder);
+                    if (value != null) {
+                        currentFolderValues.add(new ImmutableTriple<>(folder, activityContext.getString(folder.getPrefKeyId()), value));
+                    } else {
+                        unsetFolders.add(new ImmutablePair<>(folder, activityContext.getString(folder.getPrefKeyId())));
+                    }
+                }
+
+                // same for files
+                final ArrayList<ImmutablePair<PersistableUri, String>> unsetUris = new ArrayList<>();
+                for (PersistableUri uri : PersistableUri.values()) {
+                    final String value = Settings.getPersistableUriRaw(uri);
+                    if (value != null) {
+                        currentUriValues.add(new ImmutableTriple<>(uri, activityContext.getString(uri.getPrefKeyId()), value));
+                    } else {
+                        unsetUris.add(new ImmutablePair<>(uri, activityContext.getString(uri.getPrefKeyId())));
+                    }
+                }
+
                 if (!resultString.isEmpty()) {
                     resultString += "\n\n";
                 }
@@ -196,7 +197,7 @@ public class BackupUtils {
             }
 
             // check if folder settings changed and request grants, if necessary
-            if (currentFolderValues.size() > 0 || currentUriValues.size() > 0) {
+            if (settings && (currentFolderValues.size() > 0 || currentUriValues.size() > 0)) {
                 regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
             } else {
                 finishRestoreInternal(activityContext, restartNeeded, resultString);
