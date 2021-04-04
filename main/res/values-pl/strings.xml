@@ -1246,6 +1246,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Ta opcja może poprawić wydajność przeglądarki map kosztem przestrzeni dyskowej urządzenia.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Włącz synchronizację folderu z motywami</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Spowoduje to ciągłą synchronizację zawartości folderu z motywami map z folderem prywatnym aplikacji dla szybszego dostępu do plików.\n\nTwój folder z motywami map \'%1$s\' ma obecnie %2$s, %3$s i rozmiar %4$s.\n\nCzy chcesz włączyć synchronizację folderów?</string>
+    <string name="onetime_mapthemefixslow_title">Napraw powolne renderowanie motywu mapy</string>
+    <string name="onetime_mapthemefixslow_message">Praca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. Możesz spakować lub zsynchronizować swoje motywy, aby uzyskać lepszą wydajność i zmniejszyć opóźnienie przy uruchamianiu mapy.</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
     <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>
