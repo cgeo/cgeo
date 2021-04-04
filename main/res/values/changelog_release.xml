@@ -42,6 +42,7 @@ Refer to <a href="https://faq.cgeo.org/#SAF">this FAQ entry</a> for more informa
 <li>Fix: Adapt to website change for \"spotted by\" trackables</li>
 <li>Fix: Show actual cache marker in OSM map multi-marker popup</li>
 <li>Fix: Prevent adding duplicate images when using Google Photos</li>
+<li>Fix: Remove \"Cancel\" from list selection to make the other items fit in one row</li>
 </ul>
 
 </ul>
