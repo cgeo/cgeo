@@ -3,7 +3,6 @@ package cgeo.geocaching.storage;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
@@ -407,14 +406,8 @@ public class ContentStorageActivityHelper {
 
     /** returns for a folder internationalized strings for file count (left), dir count (middle) and total file size (right) */
     private static ImmutableTriple<String, String, String> getInternationalizedFolderInfoStrings(final Folder folder) {
-        final FolderUtils.FolderInfo folderInfo = FolderUtils.get().getFolderInfo(folder);
-
-        //create the message;
-        final String fileCount = LocalizationUtils.getPlural(R.plurals.file_count, folderInfo.fileCount);
-        final String folderCount = LocalizationUtils.getPlural(R.plurals.folder_count, folderInfo.dirCount);
-        final String folderSize = Formatter.formatBytes(folderInfo.totalFileSize);
-
-        return new ImmutableTriple<>(fileCount, folderCount, folderSize);
+        final FolderUtils.FolderInfo folderInfo = FolderUtils.get().getFolderInfo(folder, -1);
+        return folderInfo.getUserDisplayableFolderInfoStrings();
     }
 
 }

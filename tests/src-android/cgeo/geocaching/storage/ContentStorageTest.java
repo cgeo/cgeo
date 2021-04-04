@@ -366,6 +366,41 @@ public class ContentStorageTest extends CGeoTestCase {
         assertFileInfo(allFiles.get(9), "ddd.txt", false, "/ddd.txt");
     }
 
+    public void testFileGetFolderInfo() {
+        performGetFolderInfo(Folder.FolderType.FILE);
+    }
+
+    public void testDocumentGetFolderInfo() {
+        performGetFolderInfo(Folder.FolderType.DOCUMENT);
+    }
+
+    private void performGetFolderInfo(final Folder.FolderType typeSource) {
+
+        final Folder testFolder = createTestFolder(typeSource, "getFolderInfo");
+        createTree(testFolder, COMPLEX_FOLDER_STRUCTURE);
+
+        FolderUtils.FolderInfo info = FolderUtils.get().getFolderInfo(testFolder, 1);
+        assertThat(info.resultIsIncomplete).isTrue();
+        assertThat(info.dirCount).isEqualTo(3); //subfolder "ccc" is scanned and contains two add. sufolders...
+        assertThat(info.fileCount).isEqualTo(5); //...but the subfolders of ccc are NOT scanned any more, thus files in ccc-ccc don't count
+
+        info = FolderUtils.get().getFolderInfo(testFolder, 0);
+        assertThat(info.resultIsIncomplete).isTrue();
+        assertThat(info.dirCount).isEqualTo(1); //only subfolder "ccc" is recognized...
+        assertThat(info.fileCount).isEqualTo(3); //...but files in "ccc" and "ccc-ccc" are NOT
+
+        info = FolderUtils.get().getFolderInfo(testFolder, -1);
+        assertThat(info.resultIsIncomplete).isFalse();
+        assertThat(info.dirCount).isEqualTo(3);
+        assertThat(info.fileCount).isEqualTo(7);
+
+        info = FolderUtils.get().getFolderInfo(testFolder, 3);
+        assertThat(info.resultIsIncomplete).isTrue();
+        assertThat(info.dirCount).isEqualTo(3);
+        assertThat(info.fileCount).isEqualTo(7);
+
+    }
+
     private void assertFileInfo(final ImmutablePair<ContentStorage.FileInformation, String> entry, final String fileName, final boolean isDir, final String path) {
         assertThat(entry.left.name).isEqualTo(fileName);
         assertThat(entry.left.isDirectory).isEqualTo(isDir);
@@ -610,7 +645,7 @@ public class ContentStorageTest extends CGeoTestCase {
         final ContentStorage.FileInformation fileInfo = ContentStorage.get().getFileInfo(testFolder, newName);
         assertThat(fileInfo.name).isEqualTo(newName);
         assertThat(fileInfo.uri).isNotEqualTo(fileUri);
-        list = ContentStorage.get().list(testFolder, true);
+        list = ContentStorage.get().list(testFolder, true, false);
         assertThat(list).hasSize(2);
         final Set<String> names = new HashSet<>();
         for (ContentStorage.FileInformation fi : list) {
@@ -627,7 +662,7 @@ public class ContentStorageTest extends CGeoTestCase {
         //create a subfolder
         final Folder subfolder = Folder.fromFolder(testFolder, "subfolder");
         assertThat(ContentStorage.get().ensureFolder(subfolder, true)).isTrue();
-        list = ContentStorage.get().list(testFolder, true);
+        list = ContentStorage.get().list(testFolder, true, false);
         // "subfolder" is alphabetically before "test.txt"
         assertThat(list).hasSize(2);
         assertThat(list.get(0).name).isEqualTo("subfolder");

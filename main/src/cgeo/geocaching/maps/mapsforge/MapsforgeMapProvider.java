@@ -77,7 +77,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     public static List<ContentStorage.FileInformation> getOfflineMaps() {
-        return ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS);
+        return ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true);
 
     }
 
@@ -324,7 +324,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         if (mapUri == null) {
             return null;
         }
-        return ContentStorage.get().openForRead(mapUri);
+        return ContentStorage.get().openForRead(mapUri, true);
     }
 
     private static MapFile createMapFile(final String mapFileCtx, final InputStream fis) {
