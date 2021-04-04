@@ -204,6 +204,7 @@
     <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
     <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
     <string name="err_tb_not_loggable">Questo trackable non è loggabile.</string>
+    <string name="err_tb_not_found">c:geo non riesce a trovare trackable %s.</string>
     <string name="err_tb_find_that">c:geo non trova quel trackable.</string>
     <string name="err_waypoint_cache_unknown">c:geo non conosce a quale cache vuoi aggiungere un waypoint.</string>
     <string name="err_waypoint_add_failed">c:geo non è riuscito ad aggiungere il tuo waypoint.</string>
@@ -337,6 +338,8 @@
     <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
     <string name="caches_select_invert">Inverti selezione</string>
     <string name="caches_nearby">Qui vicino</string>
+    <string name="caches_remove_all">Rimuovi tutti dalla lista</string>
+    <string name="caches_remove_selected">Rimuovi selezionati dalla lista</string>
     <string name="caches_remove_all_completely">Elimina tutto dal dispositivo</string>
     <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
@@ -456,6 +459,8 @@
     <string name="settings_title_map">Mappa</string>
     <string name="settings_summary_map">Sceglie la mappa online, le opzioni delle mappe offline ed i dettagli di mappa.</string>
     <string name="settings_title_map_data">Dati mappa</string>
+    <string name="settings_title_offline_routing">Navigazione offline</string>
+    <string name="settings_summary_offline_routing">La navigazione offline è disponibile se l\'app si supporto \"BRouter\" è installata e configurata o se il routing interno è abilitato.</string>
     <string name="settings_title_map_rotation">Rotazione mappa (Google Maps)</string>
     <string name="settings_title_waypoints">Waypoint</string>
     <string name="settings_title_map_content">Contenuto Mappa</string>
@@ -566,8 +571,12 @@
     <string name="init_brouterThreshold">Calcola percorso</string>
     <string name="init_brouterThreshold_description">Distanza massima fino alla quale l\'app di supporto BRouter (se installata) calcolerà un percorso.</string>
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
+    <string name="init_brouterAutoTileDownloads">Download automatico</string>
+    <string name="init_brouterAutoTileDownloads_description">Proponi automaticamente per scaricare i dati dei riquadri di mappa mancanti nel routing.</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
+    <string name="init_useInternalRouting">Usa navigatore integrato</string>
+    <string name="init_summary_useInternalRouting">Usa il navigatore integrato in c:geo per poter utilizzare il download e l\'aggiornamento automatico dei dati di navigazione</string>
     <string name="init_bigSmileysOnMap">Icone grandi per le cache registrati</string>
     <string name="init_summary_bigSmileysOnMap">Se abilitata, grandi emoticons saranno mostrate per le cache visitate/loggate sulla mappa invece dell\'icona che mostra il tipo di cache (richiede il riavvio).</string>
     <string name="init_disabled">Escludi disattivati</string>
@@ -646,6 +655,8 @@
     <string name="init_backup_settings_restore">Ripristina impostazioni</string>
     <string name="settings_readingerror">Errore di lettura impostazioni</string>
     <string name="settings_restart">c:geo deve essere riavviato ora per rendere effettive le impostazioni caricate</string>
+    <string name="settings_folder_changed">La cartella \"%1$s\" sarà cambiata a \"%2$s\" durante il ripristino.\n\nTocca \"%4$s per procedere. In quel caso ti sarà chiesto di garantire a c:geo l\'accesso a quella cartella.\n\nTocca invece \"%3$s\" per mantenere l\'impostazione corrente della cartella.</string>
+    <string name="settings_file_changed">\"%1$s\" sarà cambiato in \"%2$s\" durante il ripristino.\n\nTocca \"%4$s\" per procedere. In questo caso ti verrà chiesto di concedere l\'accesso a c:geo a quella cartella.\n\nTocca \"%3$s\" per mantenere invece l\'impostazione attuale della cartella.</string>
     <string name="settings_info_offline_maps_title">Informazioni su mappe Offline</string>
     <string name="settings_info_offline_maps">c:geo supporta le mappe per l\'uso offline. È possibile ottenere mappe da diversi fornitori o anche creare le proprie mappe (da dati OSM). In primo luogo è necessario selezionare la cartella in cui le mappe offline devono essere memorizzate.</string>
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
@@ -654,6 +665,9 @@
     <string name="init_local_file_system">File System Locale</string>
     <string name="init_base_directory_description">Cartella base per i dati locali pubblici</string>
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
+    <string name="init_brouter_directory_description">Cartella con i dati di navigazione di BRouter</string>
+    <string name="init_brouter_updateinterval_title">Intervallo di aggiornamento</string>
+    <string name="init_brouter_updateinterval_description">Ti ricorda ogni x giorni di controllare gli aggiornamenti</string>
     <string name="init_gpx_importexportdir">Cartella GPX</string>
     <string name="init_dataDir">Seleziona cartella dati</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
@@ -827,6 +841,9 @@
     <string name="persistablefolder_logfiles">File di log</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
     <string name="persistablefolder_spoilerimages">Immagini Spoiler</string>
+    <string name="persistablefolder_routingbase">Navigazione</string>
+    <string name="persistablefolder_routingtiles">Dati di navigazione</string>
+    <string name="persistableuri_track">Trackfile</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fatto</string>
     <string name="folder_process_status_currentfile">Processo %1$s</string>
@@ -1017,6 +1034,10 @@
     <string name="menu_caches">Gestisci i cache</string>
     <string name="cache_menu_event">Aggiungi al calendario</string>
     <string name="cache_menu_extract_waypoints">Estrazione dei waypoint</string>
+    <string name="cache_menu_set_found">Imposta come trovato</string>
+    <string name="cache_menu_set_DNF">Imposta come non trovato</string>
+    <string name="cache_menu_reset_foundstate">Resetta lo stato trovato</string>
+    <string name="cache_foundstate_updated">Stato trovato, aggiornato</string>
     <string name="cache_menu_set_cache_icon">Imposta icona cache</string>
     <string name="cache_icon_updated">Icona cache aggiornata</string>
     <string name="cache_menu_details">Dettagli</string>
@@ -1207,6 +1228,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Questa opzione può migliorare le prestazioni di apertura del visualizzatore di mappe, occupando un po\' di spazio di archiviazione del dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Attiva sincronizzazione cartella tema</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Questo sincronizzerà in modo permanente il contenuto della cartella Tema della mappa in una cartella dell\'app per un accesso più veloce ai file.\n\nLa cartella del tema della mappa \'%1$s\' ha attualmente %2$s, %3$s e una dimensione di %4$s.\n\nVuoi attivare la sincronizzazione delle cartelle?</string>
+    <string name="onetime_mapthemefixslow_title">Correggi il rendering lento del tema della mappa</string>
+    <string name="onetime_mapthemefixslow_message">Lavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. È possibile comprimere o sincronizzare i temi per ottenere prestazioni più veloci e ridurre il ritardo all\'avvio della mappa.</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
     <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
     <string name="init_summary_hidewp_parking">Nascondi i waypoint di parcheggio sulla mappa</string>
@@ -1827,18 +1850,29 @@
     <string name="localfile_title">Apri un file locale</string>
     <string name="localfile_cannot_handle">Errore nella lettura del file o c:geo non può gestire questo tipo di file.</string>
     <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Ricezione file</string>
+    <string name="receivedownload_success">File salvato con successo come \"%s\"</string>
+    <string name="receivedownload_error">Errore durante la ricezione del file</string>
+    <string name="receivedownload_error_io_exception">Errore di I/O durante la ricezione del file. La cartella \"%s\" è scrivibile?</string>
+    <string name="receivedownload_error_filenotfound_exception">Errore di file non trovato durante la ricezione.</string>
     <string name="receivedownload_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
     <string name="receivedownload_option_overwrite">Sovrascrivere</string>
     <string name="receivedownload_option_differentname">Nome diverso</string>
     <string name="receivedownload_kb_copied">%d kB copiati</string>
+    <string name="receivedownload_cancelled">Trasferimento file annullato</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
+    <string name="download_title">Scarica file</string>
     <string name="downloadmap_info">Seleziona un file mappa per la tua regione toccando l\'icona \"Salva\".\n\nIl download viene eseguito in background. Quando il trasferimento è completato, il file viene copiato nella cartella della mappa c:geo e impostato come mappa corrente.\n\nAttenzione: il download di una mappa può consumare una grande quantità di dati internet!</string>
     <string name="downloadmap_choose">Scegli mappa</string>
     <string name="downloadmap_filename">Scaricamento di %s</string>
+    <string name="downloadmanager_not_available">Impossibile scaricare il file, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
     <string name="downloadmap_target_not_writable">L\'obiettivo selezionato \"%s\" non è scrivibile - il file di mappa scaricato viene salvato nella cartella di download di sistema e deve essere spostato manualmente nella cartella mappa.</string>
     <string name="downloadmap_allow_metered_network">Consenti il download tramite rete a consumo (ad esempio: connessione mobile)</string>
+    <string name="download_confirmation">%1$sScarica il file \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Aggiornamenti trovati per:\n%1$s\n\nVuoi aggiornare?%2$s</string>
+    <string name="download_warning">Questo può richiedere un bel po\' di tempo e comportare costi significativi, a seconda della connessione di rete.</string>
     <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
     <string name="button_continue">Continua</string>
     <string name="downloadmap_onedirup">(un livello superiore)</string>
@@ -1851,11 +1885,17 @@
     <string name="downloadmap_checking_for_updates">Controllo aggiornamenti…</string>
     <string name="downloadmap_install_theme_title">Installa file tema</string>
     <string name="downloadmap_install_theme_info">La mappa scaricata richiede un file di tema speciale. Vuoi scaricare anche questo?</string>
+    <string name="downloadtile_title">Dati di navigazione mancanti</string>
+    <string name="downloadtile_info">c:geo non può calcolare il percorso richiesto in quanto manca un file di navigazione. Vuoi scaricare i dati di navigazione mancanti?</string>
+    <string name="tileupdate_info">Vuoi controllare gli aggiornamenti dei file di navigazione scaricati?</string>
+    <string name="no_updates_found">Nessun aggiornamento trovato</string>
+    <string name="updates_check">Controlla aggiornamenti</string>
     <string name="mapserver_mapsforge_info">Mappe di base, nessun tema mappa richiesto</string>
     <string name="mapserver_openandromaps_info">Mappe dettagliate, richiedono tema mappa \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Tema mappa dettagliato, creato per le mappe \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mappe dettagliate, richiedono uno dei temi della mappa \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema mappa dettagliato, creato per le mappe \"Freizeitkarte\"</string>
+    <string name="brouter_info">Servizio di navigazione offline</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
@@ -1882,6 +1922,11 @@
     <string name="wizard_permissions_intro">c:geo ha bisogno di alcuni permessi sul tuo dispositivo per funzionare correttamente.\nTi spiegherò maggiori dettagli nei prossimi passi.</string>
     <string name="wizard_permissions_folder_title">Imposta cartella: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare dati come file GPX, backup, note di campo e file di log. Come per impostazione predefinita, questi file sono memorizzati sotto una cosiddetta \"cartella di base\". Selezionare o creare questa cartella nel passaggio successivo.\n\nSe hai aggiornato c:geo da una versione precedente, seleziona la cartella esistente \"cgeo\" sul livello principale dell\'archivio del tuo dispositivo.\nSuggerimento: potrebbe essere necessario, come prima cosa, mostrare la memoria interna del dispositivo nel selettore dei file che verrà visualizzato successivamente.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare la mappa offline.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file dei temi per le mappe offline.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file GPX (ad esempio per importare / esportare cache o tracce).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Per poter utilizzare la funzione di download automatico dei riquadri di mappa e il loro aggiornamento è necessario impostare una cartella per i dati dei riquadri.</string>
+    <string name="wizard_select_or_create">Selezionare o creare una tale cartella nel passaggio successivo.</string>
     <string name="wizard_platforms_title">Configura servizi</string>
     <string name="wizard_platforms_intro">Per trovare le geocache con c:geo è necessario un account per un servizio di geocaching supportato da c:geo.\nSeleziona il servizio desiderato qui sotto per accedere con il tuo account esistente o creare un nuovo account.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
