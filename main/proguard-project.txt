@@ -30,16 +30,6 @@
 
 # Android -----------------------------------------------------------------------------------------
 
-# Our build contains a legacy http client jar without any good reason
-# https://code.google.com/p/android/issues/detail?id=194513
--dontnote android.net.http.SslCertificate
--dontnote android.net.http.SslError
--dontnote android.net.http.SslCertificate$DName
--dontnote org.apache.http.conn.scheme.SocketFactory
--dontnote org.apache.http.conn.scheme.HostNameResolver
--dontnote org.apache.http.conn.ConnectTimeoutException
--dontnote org.apache.http.params.HttpParams
-
 -keep class androidx.appcompat.widget.ShareActionProvider { <init>(...); }
 
 # Apache commons ----------------------------------------------------------------------------------
@@ -74,12 +64,6 @@
 # AssertJ -----------------------------------------------------------------------------------------
 # ignore all things in AssertJ, as long as tests are generally running fine
 -dontnote org.assertj.core.internal.**
-
-# Butter Knife ------------------------------------------------------------------------------------
-
-# Butter knife recommended settings from website, see http://jakewharton.github.io/butterknife/
--dontwarn butterknife.internal.**
--keep class **$$ViewInjector { *; }
 
 # Jackson XML -------------------------------------------------------------------------------------
 
@@ -135,7 +119,7 @@
 
 # Unsorted ----------------------------------------------------------------------------------------
 
--dontwarn  org.springframework.**
+-dontwarn org.springframework.**
 -dontwarn org.tukaani.xz.**
 
 -keepclasseswithmembers class * {
