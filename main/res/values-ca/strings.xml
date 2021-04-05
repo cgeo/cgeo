@@ -205,6 +205,7 @@
     <string name="err_tb_display">El c:geo no pot mostrar el traçable que volíeu. És realment un traçable?</string>
     <string name="err_tb_details_open">El c:geo no pot obrir els detalls del traçable.</string>
     <string name="err_tb_not_loggable">Aquest traçable no es pot registrar.</string>
+    <string name="err_tb_not_found">El c:geo no pot trobar el traçable %s.</string>
     <string name="err_tb_find_that">El c:geo no pot trobar aquest traçable.</string>
     <string name="err_waypoint_cache_unknown">El c:geo no sap a quin catxé voleu afegir la fita.</string>
     <string name="err_waypoint_add_failed">El c:geo no ha pogut afegir la fita.</string>
@@ -338,6 +339,8 @@
     <string name="caches_select_mode_exit">Surt del mode seleccionar</string>
     <string name="caches_select_invert">Inverteix la selecció</string>
     <string name="caches_nearby">Propers</string>
+    <string name="caches_remove_all">Elimina-ho tot de la llista</string>
+    <string name="caches_remove_selected">Elimina els seleccionats de la llista</string>
     <string name="caches_remove_all_completely">Elimina tot del dispositiu</string>
     <string name="caches_remove_selected_completely">Esborra la selecció del dispositiu</string>
     <string name="caches_delete_events">Elimina trobades passades</string>
@@ -457,6 +460,8 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Font del mapa, configuració del mapa de fora de línia  i detalls del mapa.</string>
     <string name="settings_title_map_data">Dades del mapa</string>
+    <string name="settings_title_offline_routing">Encaminament fora de línia</string>
+    <string name="settings_summary_offline_routing">L\'encaminament fora de línia està disponible si hi ha instal·lada i configurada l\'aplicació auxiliar \"BRouter\" o si l\'encaminament intern està habilitat.</string>
     <string name="settings_title_map_rotation">Rotació de mapes (Google Maps)</string>
     <string name="settings_title_waypoints">Punts de ruta</string>
     <string name="settings_title_map_content">Contingut del mapa</string>
@@ -567,8 +572,12 @@
     <string name="init_brouterThreshold">Calcula la ruta</string>
     <string name="init_brouterThreshold_description">Distància màxima fins a la qual l\'aplicació BRouter (si està instal·lada) calcularà una ruta.</string>
     <string name="init_brouterShowBothDistances">Mostra la distància en línia recta</string>
+    <string name="init_brouterAutoTileDownloads">Descàrrega automàtica</string>
+    <string name="init_brouterAutoTileDownloads_description">Oferiu automàticament la baixada de dades d’encaminament que falten.</string>
     <string name="brouter_recalculating">S\'està recalculant la ruta en segon pla…</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
+    <string name="init_useInternalRouting">Utilitzeu l’encaminament intern</string>
+    <string name="init_summary_useInternalRouting">Utilitzeu l\'encaminament intern per poder utilitzar la descàrrega i actualització de dades d’encaminament automàtic</string>
     <string name="init_bigSmileysOnMap">Icones grans per catxes registrats</string>
     <string name="init_summary_bigSmileysOnMap">Si està activat, es mostraran emoticones grans al mapa pels catxés registrats en lloc de la icona del tipus de catxe (cal reiniciar-lo).</string>
     <string name="init_disabled">Exclou els desactivats</string>
@@ -657,6 +666,9 @@
     <string name="init_local_file_system">Sistema de fitxers local</string>
     <string name="init_base_directory_description">Carpeta base per a dades locals públiques</string>
     <string name="init_map_directory_description">Carpeta amb mapes fora de línia</string>
+    <string name="init_brouter_directory_description">Carpeta amb dades d’encaminament BRouter</string>
+    <string name="init_brouter_updateinterval_title">Interval d\'actualització</string>
+    <string name="init_brouter_updateinterval_description">Us recorda cada x dies per comprovar les actualitzacions</string>
     <string name="init_gpx_importexportdir">Carpeta GPX</string>
     <string name="init_dataDir">Selecciona la carpeta de dades</string>
     <string name="init_dataDir_note">Podeu triar emmagatzemar les dades addicionals per als geoamagatalls (pistes, registre d\'imatges, …) en l\'emmagatzematge extern (targeta SD externa emulada o real, en funció del dispositiu).</string>
@@ -830,6 +842,8 @@
     <string name="persistablefolder_logfiles">Arxius de registre</string>
     <string name="persistablefolder_fieldnotes">Notes de camp</string>
     <string name="persistablefolder_spoilerimages">Imatges d\'ajuda</string>
+    <string name="persistablefolder_routingbase">Encaminament</string>
+    <string name="persistablefolder_routingtiles">Dades d\'encaminament</string>
     <string name="persistableuri_track">Fitxer de track</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fet</string>
@@ -1021,6 +1035,10 @@
     <string name="menu_caches">Gestiona geoamagatalls</string>
     <string name="cache_menu_event">Afegeix al calendari</string>
     <string name="cache_menu_extract_waypoints">Extreure els punts de ruta</string>
+    <string name="cache_menu_set_found">Definiu com trobat</string>
+    <string name="cache_menu_set_DNF">Definiu com no trobat</string>
+    <string name="cache_menu_reset_foundstate">Restableix l\'estat trobat</string>
+    <string name="cache_foundstate_updated">Estat trobat actualitzat</string>
     <string name="cache_menu_set_cache_icon">Definiu la icona dels catxés</string>
     <string name="cache_icon_updated">S\'ha actualitzat la icona de catxé</string>
     <string name="cache_menu_details">Detalls</string>
@@ -1829,18 +1847,29 @@
     <string name="localfile_title">Obrir un fitxer local</string>
     <string name="localfile_cannot_handle">Error en llegir el fitxer o c: geo no pot gestionar aquest tipus de fitxer.</string>
     <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Rebre fitxer</string>
+    <string name="receivedownload_success">El fitxer s\'ha emmagatzemat correctament com a \"%s\"</string>
+    <string name="receivedownload_error">Error en rebre el fitxer</string>
+    <string name="receivedownload_error_io_exception">Error en rebre el fitxer. La vostra carpeta \"%s\" es pot escriure?</string>
+    <string name="receivedownload_error_filenotfound_exception">Error del fitxer no trobat en rebre el fitxer.</string>
     <string name="receivedownload_alreadyexists">Ja existeix un fitxer amb aquest nom. Voleu sobreescriure el fitxer existent o desar-lo amb un nom diferent?</string>
     <string name="receivedownload_option_overwrite">Sobreescriu</string>
     <string name="receivedownload_option_differentname">Nom diferent</string>
     <string name="receivedownload_kb_copied">%d kB copiats</string>
+    <string name="receivedownload_cancelled">S\'ha cancel·lat la transferència de fitxers</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Descarregar mapa fora de línia</string>
+    <string name="download_title">Descarrega l\'arxiu</string>
     <string name="downloadmap_info">Seleccioneu un fitxer de mapa per a la vostra regió tocant la icona \"Desa\".\n\nLa baixada es realitza en segon pla. Quan la transferència s\'hagi completat, el fitxer es copia a la carpeta de mapes de C:geo i es defineix com a mapa actual.\n\nVés amb compte: la descàrrega d\'un mapa pot provocar un gran trànsit a la xarxa.</string>
     <string name="downloadmap_choose">Trieu el mapa</string>
     <string name="downloadmap_filename">S\'està baixant %s</string>
+    <string name="downloadmanager_not_available">El fitxer no es pot descarregar, el gestor de descàrregues del sistema no està disponible</string>
     <string name="download_started">La descàrrega s\'ha iniciat en segon pla</string>
     <string name="downloadmap_target_not_writable">L\'objectiu seleccionat \"%s\" no es pot escriure: el fitxer de mapa descarregat es desa a la carpeta de descàrrega del sistema i s\'ha de moure manualment a la carpeta de mapa.</string>
     <string name="downloadmap_allow_metered_network">Permet la baixada per xarxa (per exemple: connexió mòbil)</string>
+    <string name="download_confirmation">%1$sBaixeu el fitxer \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">S\'han trobat actualitzacions de:\n%1$s\n\nVoleu actualitzar?%2$s</string>
+    <string name="download_warning">Això pot trigar força temps i pot comportar costos importants, segons la vostra connexió de xarxa.</string>
     <string name="downloadmap_handling">El gestor de descàrregues del vostre sistema gestionarà la descàrrega en segon pla. Hauríeu de veure una notificació tan aviat com hagi començat la baixada (pot trigar una estona).</string>
     <string name="button_continue">Continua</string>
     <string name="downloadmap_onedirup">(un nivell més alt)</string>
@@ -1853,11 +1882,17 @@
     <string name="downloadmap_checking_for_updates">S\'estan cercant actualitzacions…</string>
     <string name="downloadmap_install_theme_title">Instal·leu el fitxer del tema</string>
     <string name="downloadmap_install_theme_info">El mapa descarregat requereix un fitxer de tema especial. Voleu descarregar-ho també?</string>
+    <string name="downloadtile_title">Falten dades d’encaminament</string>
+    <string name="downloadtile_info">C: geo no pot calcular la ruta sol·licitada, ja que falten alguns fitxers de dades d’encaminament. Voleu descarregar les dades d’encaminament que falten?</string>
+    <string name="tileupdate_info">Voleu comprovar si hi ha actualitzacions de fitxers de dades d’encaminament descarregats?</string>
+    <string name="no_updates_found">No s\'han trobat actualitzacions</string>
+    <string name="updates_check">Revisió de les actualitzacions</string>
     <string name="mapserver_mapsforge_info">Mapes bàsics, no es requereixen temes de mapes</string>
     <string name="mapserver_openandromaps_info">Mapes detallats, requereixen el tema del mapa \"Elevar\"</string>
     <string name="mapserver_openandromaps_themes_info">Tema detallat del mapa, creat per als mapes \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Els mapes detallats requereixen un dels temes de mapes \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema detallat del mapa, creat per als mapes \"Freizeitkarte\"</string>
+    <string name="brouter_info">Servei d’encaminament fora de línia</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
     <string name="map_trailhistory_cleared">S\'ha esborrat el traçat</string>
@@ -1884,6 +1919,11 @@
     <string name="wizard_permissions_intro">C: geo necessita certs permisos al dispositiu per funcionar correctament.\nExplicaré més detalls en els passos següents.</string>
     <string name="wizard_permissions_folder_title">Defineix la carpeta: %s</string>
     <string name="wizard_basefolder_request_explanation">C: geo necessita una carpeta local per emmagatzemar dades com fitxers GPX, còpies de seguretat, notes de camp i fitxers de registre. Per defecte, aquests fitxers s\'emmagatzemen a carpetes anomenades \"carpeta base\". Seleccioneu o creeu aquesta carpeta al pas següent.\n\nSi heu actualitzat C:geo des d\'una versió anterior, seleccioneu la carpeta existent \"cgeo\" al nivell arrel de l\'emmagatzematge del dispositiu.\nConsell: És possible que tinguis de mostrar la carpeta del dispositiu. emmagatzematge intern primer al selector de fitxers que es mostra a continuació.</string>
+    <string name="wizard_mapfolder_request_explanation">C: geo necessita una carpeta local per emmagatzemar fitxers de mapes fora de línia.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">C: geo necessita una carpeta local per emmagatzemar fitxers de temes per a mapes fora de línia.</string>
+    <string name="wizard_gpxfolder_request_explanation">C: geo necessita una carpeta local per emmagatzemar fitxers GPX (per exemple, per importar / exportar catxés o tracks).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Per utilitzar la funció de descàrrega automàtica i actualització de dades de mosaic d’encaminament integrat, heu d’establir una carpeta de dades de mosaic.</string>
+    <string name="wizard_select_or_create">Seleccioneu o creeu aquesta carpeta al pas següent.</string>
     <string name="wizard_platforms_title">Configureu els serveis</string>
     <string name="wizard_platforms_intro">Per trobar geocatxes amb C: geo, necessiteu un compte  d\'un servei de geocatxing compatible.\nSeleccioneu el servei desitjat a continuació per iniciar la sessió amb el vostre compte existent o creeu un compte nou.</string>
     <string name="wizard_platforms_gc">Geocaching.com</string>
