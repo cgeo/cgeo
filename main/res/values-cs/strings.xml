@@ -204,6 +204,7 @@
     <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
     <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
     <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
+    <string name="err_tb_not_found">c:geo nemůže najít sledovatelný %s.</string>
     <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
     <string name="err_waypoint_cache_unknown">c:geo neví, k jaké kešce chceš přidat trasový bod.</string>
     <string name="err_waypoint_add_failed">c:geo nemůže přidat tvůj trasový bod.</string>
@@ -339,6 +340,8 @@
     <string name="caches_select_mode_exit">Opustit režim výběru</string>
     <string name="caches_select_invert">Invertovat výběr</string>
     <string name="caches_nearby">Nejbližší</string>
+    <string name="caches_remove_all">Odstranit vše ze seznamu</string>
+    <string name="caches_remove_selected">Odstranit vybrané ze seznamu</string>
     <string name="caches_remove_all_completely">Odstranit vše ze zařízení</string>
     <string name="caches_remove_selected_completely">Odstranit vybrané ze zařízení</string>
     <string name="caches_delete_events">Vymazat staré události</string>
@@ -458,6 +461,8 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
+    <string name="settings_title_offline_routing">Offline směrování</string>
+    <string name="settings_summary_offline_routing">Offline směrování je k dispozici, pokud je nainstalována a nakonfigurována pomocná aplikace \"BRouter\" nebo je povoleno interní směrování.</string>
     <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
     <string name="settings_title_waypoints">Trasové body</string>
     <string name="settings_title_map_content">Obsah map</string>
@@ -568,8 +573,12 @@
     <string name="init_brouterThreshold">Vypočítat trasu</string>
     <string name="init_brouterThreshold_description">Maximální vzdálenost do které pomocná aplikace BRouter (pokud je nainstalovaná) vypočítá trasu.</string>
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
+    <string name="init_brouterAutoTileDownloads">Automatické stahování</string>
+    <string name="init_brouterAutoTileDownloads_description">Automaticky nabídnout stažení chybějících dat pro směrování.</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Pokud je směrování aktivní: Kromě vypočítané délky trasy zobrazí přímou vzdálenost.</string>
+    <string name="init_useInternalRouting">Použít interní směrování</string>
+    <string name="init_summary_useInternalRouting">Použijte interního směrování c:geo, aby bylo možné používat automatické stahování a aktualizaci dat pro směrování</string>
     <string name="init_bigSmileysOnMap">Velké ikony pro zalogované kešky</string>
     <string name="init_summary_bigSmileysOnMap">Je-li povoleno, budou se na mapě namísto ikon podle typu zalogované kešky zobrazovat velké emotikony (vyžaduje restart).</string>
     <string name="init_disabled">Nezobrazovat deaktivované keše</string>
@@ -658,6 +667,9 @@
     <string name="init_local_file_system">Místní souborový systém</string>
     <string name="init_base_directory_description">Základní složka pro veřejná místní data</string>
     <string name="init_map_directory_description">Složka s offline mapami</string>
+    <string name="init_brouter_directory_description">Složka s daty pro naviagaci BRouter</string>
+    <string name="init_brouter_updateinterval_title">Interval aktualizace</string>
+    <string name="init_brouter_updateinterval_description">Každých x dní vám připomene kontrolu aktualizací</string>
     <string name="init_gpx_importexportdir">Složka pro GPX</string>
     <string name="init_dataDir">Vybrat složku s údaji</string>
     <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro kešky (nápovědy, obrázky, …) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
@@ -831,6 +843,8 @@
     <string name="persistablefolder_logfiles">Soubory protokolů</string>
     <string name="persistablefolder_fieldnotes">Koncepty</string>
     <string name="persistablefolder_spoilerimages">Obrázky s nápovědou</string>
+    <string name="persistablefolder_routingbase">Směrování</string>
+    <string name="persistablefolder_routingtiles">Směrovací data</string>
     <string name="persistableuri_track">Soubor se stopou</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s hotovo</string>
@@ -1040,6 +1054,10 @@
     <string name="menu_caches">Spravovat kešky</string>
     <string name="cache_menu_event">Přidat do kalendáře</string>
     <string name="cache_menu_extract_waypoints">Extrahovat trasové body</string>
+    <string name="cache_menu_set_found">Nastavit jako nalezená</string>
+    <string name="cache_menu_set_DNF">Nastavit jako nenalezená</string>
+    <string name="cache_menu_reset_foundstate">Obnovit stav nálezu</string>
+    <string name="cache_foundstate_updated">Stav nálezu aktualizován</string>
     <string name="cache_menu_set_cache_icon">Natavit ikonu kešky</string>
     <string name="cache_icon_updated">Ikona kešky aktualizována</string>
     <string name="cache_menu_details">Detaily</string>
@@ -1374,7 +1392,7 @@
     <string name="export_fieldnotes_uploading">Nahrávání…</string>
     <string name="export_fieldnotes_upload_success">Nahrávání na geocaching.com bylo úspěšné</string>
     <string name="export_fieldnotes_onlynew">Jen od předchozího nahrání</string>
-    <string name="export_fieldnotes_creating">Vytváření souboru poznámek z terénu…</string>
+    <string name="export_fieldnotes_creating">Vytváření konceptů…</string>
     <string name="export_gpx_info">GPX soubor bude exportován do %1$s s názvem souboru podle aktuálního data a času.</string>
     <string name="export_confirm_title">Exportovat %1$s</string>
     <string name="export_confirm_message">Umístění: %1$s\nNázev souboru: %2$s</string>
@@ -1884,18 +1902,29 @@
     <string name="localfile_title">Otevřít místní soubor</string>
     <string name="localfile_cannot_handle">Chyba při čtení souboru nebo c:geo neumí s tímto typem souboru pracovat.</string>
     <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Přijmout soubor</string>
+    <string name="receivedownload_success">Soubor byl úspěšně uložen jako \"%s\"</string>
+    <string name="receivedownload_error">Chyba při přijímání souboru</string>
+    <string name="receivedownload_error_io_exception">I/O chyba při přijímání souboru. Je vaše složka \"%s\" zapisovatelná?</string>
+    <string name="receivedownload_error_filenotfound_exception">Soubor nebyl nenalezen během přijímání souboru.</string>
     <string name="receivedownload_alreadyexists">Soubor s tímto názvem již existuje. Chcete přepsat existující soubor, nebo uložit nový soubor pod jiným názvem?</string>
     <string name="receivedownload_option_overwrite">Přepsat</string>
     <string name="receivedownload_option_differentname">Přejmenovat</string>
     <string name="receivedownload_kb_copied">%d kB zkopírováno</string>
+    <string name="receivedownload_cancelled">Přenos souboru byl zrušen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Stáhnout offline mapu</string>
+    <string name="download_title">Stáhnout soubor</string>
     <string name="downloadmap_info">Vyberte mapový soubor pro váš region klepnutím na ikonu \"Uložit\".\n\nStahování se provádí na pozadí. Po dokončení přenosu je soubor zkopírován do složky s mapami c:geo a nastaven jako aktuální mapa.\n\nPozor: Stahování mapy může způsobit velký síťový provoz!</string>
     <string name="downloadmap_choose">Vybrat mapu</string>
     <string name="downloadmap_filename">Stahování %s</string>
+    <string name="downloadmanager_not_available">Soubor nelze stáhnout, systémový správce stahování není k dispozici</string>
     <string name="download_started">Stahování zahájeno na pozadí</string>
     <string name="downloadmap_target_not_writable">Vybraný cíl \"%s\" není zapisovatelný - stažený mapový soubor je uložen v systémové složce pro stahování a musí být ručně přesunut do složky s mapami.</string>
     <string name="downloadmap_allow_metered_network">Povolit stahování přes měřenou síť (např. mobilní připojení)</string>
+    <string name="download_confirmation">%1$sStáhnout soubor \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Byly nalezeny aktualizace:\n%1$s\n\nChcete aktualizovat?%2$s</string>
+    <string name="download_warning">To může nějakou dobu trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.</string>
     <string name="downloadmap_handling">Samotné stahování bude zpracováno na pozadí správcem stahování vašeho systému. Měli byste vidět oznámení, jakmile stahování začne (to může chvíli trvat).</string>
     <string name="button_continue">Pokračovat</string>
     <string name="downloadmap_onedirup">(o úroveň výš)</string>
@@ -1908,11 +1937,17 @@
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
     <string name="downloadmap_install_theme_title">Nainstalovat soubor motivu</string>
     <string name="downloadmap_install_theme_info">Stažená mapa vyžaduje speciální soubor motivu. Chcete ho stáhnout?</string>
+    <string name="downloadtile_title">Chybí údaje o směrování</string>
+    <string name="downloadtile_info">c:geo nemůže vypočítat požadovanou trasu, protože chybí některá data. Chcete stáhnout chybějící data pro směrování?</string>
+    <string name="tileupdate_info">Chcete zkontrolovat aktualizace stažených souborů pro směrování?</string>
+    <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>
+    <string name="updates_check">Kontrola aktualizací</string>
     <string name="mapserver_mapsforge_info">Základní mapy, nejsou vyžadovány mapové motivy</string>
     <string name="mapserver_openandromaps_info">Podrobné mapy, vyžadují mapový motiv \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Podrobný motiv mapy, vytvořený pro mapy „OpenAndroMaps“</string>
     <string name="mapserver_freizeitkarte_info">Podrobné mapy vyžadují jedno z témat map „freizeitkarte“.</string>
     <string name="mapserver_freizeitkarte_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Freizeitkarte“</string>
+    <string name="brouter_info">Offline směrovací služba</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
@@ -1939,9 +1974,11 @@
     <string name="wizard_permissions_intro">Aplikace c:geo vyžaduje na správné fungování několik povolení na vašem zařízení.\nV dalších krocích vám je vysvětlíme.</string>
     <string name="wizard_permissions_folder_title">Nastavit složku: %s</string>
     <string name="wizard_basefolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání dat, jako jsou například soubory GPX, zálohy, koncepty a protokoly. Standardně jsou tyto soubory ukládány do složky pod tzv. \"základní složku\". V dalším kroku takovou složku vyberte nebo vytvořte.\n\n Pokud jste aplikaci c:geo aktualizovali z předchozí verze, vyberte existující složku „c:geo“ v hlavním adresáři v úložišti vašeho zařízení. \nTip: Možná budete muset nejprve odkrýt interní úložiště zařízení ve volbě souborů, které se poté zobrazí.</string>
-    <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání souborů s motivy pro offline mapy. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
-    <string name="wizard_gpxfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání GPX souborů, například pro import / export kešek nebo tras. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo potřebuje místní složku pro ukládání offline mapových souborů.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo potřebuje místní složku pro ukládání souborů s motivy pro offline mapy.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo potřebuje místní složku pro ukládání GPX souborů (např. pro import/export kešek nebo stop).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Za účelem použití funkcí automatického stahování a aktualizace integrovaných údajů oblasti pro navigaci je třeba nastavit složku s údaji o oblasti.</string>
+    <string name="wizard_select_or_create">V dalším kroku takovou složku vyberte nebo vytvořte.</string>
     <string name="wizard_platforms_title">Konfigurace služeb</string>
     <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
