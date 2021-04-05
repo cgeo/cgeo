@@ -197,9 +197,11 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                 if (isZipFile) {
                     try (ZipInputStream zis = new ZipInputStream(inputStream)) {
                         ZipEntry ze;
-                        while ((ze = zis.getNextEntry()) != null) {
+                        boolean stillSearching = true;
+                        while (stillSearching && (ze = zis.getNextEntry()) != null) {
                             if (ze.getName().equals(nameWithinZip)) {
                                 status = doCopy(zis, outputUri);
+                                stillSearching = false; // don't continue here, as doCopy also closes the input stream, so further reads would lead to IOException
                             }
                         }
                     } catch (IOException e) {
@@ -273,7 +275,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     result = getString(R.string.receivemapfile_cancelled);
                     break;
                 case IO_EXCEPTION:
-                    result = String.format(getString(R.string.receivemapfile_error_io_exception), downloader.targetFolder);
+                    result = String.format(getString(R.string.receivemapfile_error_io_exception), downloader.targetFolder.toUserDisplayableValue());
                     break;
                 case FILENOTFOUND_EXCEPTION:
                     result = getString(R.string.receivemapfile_error_filenotfound_exception);
