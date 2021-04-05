@@ -1654,10 +1654,10 @@ public class Geocache implements IWaypoint {
 
     private Waypoint findWaypoint(final Waypoint searchWp) {
         //try to match prefix
-        final String prefix = searchWp.getPrefix();
-        if (null != prefix) {
+        final String searchWpPrefix = searchWp.getPrefix();
+        if (!StringUtils.isBlank(searchWpPrefix)) {
             for (final Waypoint waypoint : waypoints) {
-                if (!StringUtils.isBlank(prefix) && !StringUtils.isBlank(waypoint.getPrefix()) && prefix.equals(waypoint.getPrefix())) {
+                if (searchWpPrefix.equals(waypoint.getPrefix())) {
                     return waypoint;
                 }
             }
@@ -1674,14 +1674,14 @@ public class Geocache implements IWaypoint {
                     return waypoint;
                 }
             }
-            return null;
         }
 
-        //try to match name if prefix and coords are null
+        //try to match name if prefix is empty and coords are not equal
         final String searchWpName = searchWp.getName();
+        final String searchWpType = searchWp.getWaypointType().getL10n();
         if (!StringUtils.isBlank(searchWpName)) {
             for (final Waypoint waypoint : waypoints) {
-                if (searchWpName.equals(waypoint.getName()) && searchWp.getWaypointType().getL10n().equals(waypoint.getWaypointType().getL10n())) {
+                if (searchWpName.equals(waypoint.getName()) && searchWpType.equals(waypoint.getWaypointType().getL10n())) {
                     return waypoint;
                 }
             }
