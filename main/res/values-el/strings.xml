@@ -204,6 +204,7 @@
     <string name="err_tb_display">Το c:geo δεν μπορεί να εμφανίσει το ανιχνεύσιμο. Είστε σίγουροι ότι είναι ανιχνεύσιμο;</string>
     <string name="err_tb_details_open">To c:geo δεν μπορεί να ανοίξει τις λεπτομέρειες του ανιχνεύσιμου.</string>
     <string name="err_tb_not_loggable">Αυτό το ανιχνεύσιμο δεν δέχεται καταγραφές.</string>
+    <string name="err_tb_not_found">Δεν βρέθηκε το ανιχνεύσιμο %s.</string>
     <string name="err_tb_find_that">Το c:geo δεν μπορεί να βρει το συγκεκριμένο ανιχνεύσιμο.</string>
     <string name="err_waypoint_cache_unknown">Το c:geo δεν ξέρει για ποια κρύπτη θέλετε να προσθέσετε ένα σημείο αναφοράς.</string>
     <string name="err_waypoint_add_failed">Το c:geo απέτυχε να προσθέσει το σημείο αναφοράς.</string>
