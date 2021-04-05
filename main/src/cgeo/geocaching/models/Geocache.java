@@ -1652,21 +1652,19 @@ public class Geocache implements IWaypoint {
         return changed;
     }
 
-    private Waypoint findWaypoint(final Waypoint searchWp) {
-        //try to match prefix
+    @Nullable
+    private Waypoint findWaypoint(@NonNull final Waypoint searchWp) {
+        // try to match prefix
         final String prefix = searchWp.getPrefix();
-        if (null != prefix) {
-            for (final Waypoint waypoint : waypoints) {
-                if (!StringUtils.isBlank(prefix) && !StringUtils.isBlank(waypoint.getPrefix()) && prefix.equals(waypoint.getPrefix())) {
-                    return waypoint;
-                }
+        for (final Waypoint waypoint : waypoints) {
+            if (!StringUtils.isBlank(prefix) && !StringUtils.isBlank(waypoint.getPrefix()) && prefix.equals(waypoint.getPrefix())) {
+                return waypoint;
             }
-            return null;
         }
 
-        //try to match coordinate
+        // try to match coordinate
         final Geopoint point = searchWp.getCoords();
-        if (null != point) {
+        if (point != null) {
             for (final Waypoint waypoint : waypoints) {
                 // waypoint can have no coords such as a Final set by cache owner
                 final Geopoint coords = waypoint.getCoords();
@@ -1674,10 +1672,9 @@ public class Geocache implements IWaypoint {
                     return waypoint;
                 }
             }
-            return null;
         }
 
-        //try to match name if prefix and coords are null
+        // try to match name if prefix and coords do not match
         final String searchWpName = searchWp.getName();
         if (!StringUtils.isBlank(searchWpName)) {
             for (final Waypoint waypoint : waypoints) {
@@ -1686,6 +1683,7 @@ public class Geocache implements IWaypoint {
                 }
             }
         }
+
         return null;
     }
 
