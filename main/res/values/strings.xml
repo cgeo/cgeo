@@ -1337,10 +1337,10 @@
     <string name="map_showwp_parking">Parking waypoints</string>
     <string name="map_showwp_visited">Visited waypoints</string>
     <string name="map_show_track">Show GPX track/route</string>
-    <string name="init_renderthemefolder_synctolocal">Synchronize themes to app-private folder</string>
-    <string name="init_summary_renderthemefolder_synctolocal">This option may improve map viewer opening performance at the cost of some device storage space.</string>
+    <string name="init_renderthemefolder_synctolocal">Synchronize themes</string>
+    <string name="init_summary_renderthemefolder_synctolocal">This will synchronize your themes into an app-private folder to improve map viewer opening performance at the cost of some device storage space.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Turn on theme folder synchronization</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">This will permanently synchronize the content of the Map Theme folder into an app-private folder for faster file access.\n\nYour map Theme Folder \'%1$s\' has currently %2$s, %3$s and a size of %4$s.\n\nDo you want to turn on folder synchronization?</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">This will continuously synchronize the content of the Map Theme folder into an app-private folder for faster file access. Make sure your theme folder only contains your themes but no additional (large) data before enabling this feature.\n\nYour map Theme Folder \'%1$s\' has currently %2$s, %3$s and a size of %4$s.\n\nDo you want to turn on folder synchronization?</string>
     <string name="onetime_mapthemefixslow_title">Fix slow map theme rendering</string>
     <string name="onetime_mapthemefixslow_message">Working with non-zipped map themes might decrease map viewer opening performance. You can zip or sync your themes to get faster performance and reduce the delay on starting the map.</string>
     <string name="init_hidewp">Hide waypoints</string>
@@ -1977,8 +1977,8 @@
     <string name="map_export_individual_route">Export individual route</string>
     <string name="map_load_individual_route">Load individual route</string>
     <string name="map_load_individual_route_confirm">Overwrite existing route?</string>
-    <string name="map_autotarget_individual_route">Set as target automatically</string>
-    <string name="map_disable_autotarget_individual_route">Disabled \"Set as target automatically\"</string>
+    <string name="map_autotarget_individual_route">Set route start as target</string>
+    <string name="map_disable_autotarget_individual_route">\"Set route start as target\" disabled</string>
     <string name="map_clear_manual_targets">Clear manual targets</string>
     <string name="map_manual_targets_cleared">Manual targets cleared</string>
     <string name="map_clear_individual_route">Clear individual route</string>
