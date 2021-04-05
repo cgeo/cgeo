@@ -659,7 +659,7 @@
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図をサポートしています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
-    <string name="settings_info_themes">オフライン地図用のテーマが使用できます。カラースタイルを変更したり(例えば夜間用表示)、自転車道や等高線などを強調表示するために使われます。\n\nzip圧縮されてないテーマファイルでは表示が遅くなる時があります。そのような場合にはテーマフォルダをアプリ専用フォルダと同期してアクセス速度を早くすることもできます(少しストレージ使用量が増えますが)。</string>
+    <string name="settings_info_themes">オフライン地図用のテーマが使用できます。カラースタイルを変更したり(例えば夜間用表示)、自転車道や等高線などを強調表示するために使われます。\n\nzip圧縮されてないテーマファイルでは表示が遅くなる時があります。そのような場合にはテーマフォルダをアプリ専用フォルダと同期してアクセス速度を早くすることもできます(少しストレージ使用量が増えます)。</string>
     <string name="init_mapsource_select">地図の選択</string>
     <string name="init_local_file_system">ローカルファイルシステム</string>
     <string name="init_base_directory_description">データ保存のベースフォルダ</string>
@@ -1211,6 +1211,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">少しストレージを使用しますが地図表示の速度が改善するかもしれません</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">地図テーマフォルダの同期</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">地図テーマフォルダをアプリ専用フォルダに常に同期します。ファイルのアクセス速度が向上します。\n\n地図テーマフォルダは現在「%1$s」に設定されます。%2$sと%3$sが含まれており、合計サイズは%4$sです。\n\nフォルダを同期しますか?</string>
+    <string name="onetime_mapthemefixslow_title">地図テーマ使用時の表示の遅延について</string>
+    <string name="onetime_mapthemefixslow_message">zip圧縮されてないテーマファイルでは表示が遅くなる時があります。zip圧縮するかテーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます。</string>
     <string name="init_hidewp">ウェイポイントを隠す</string>
     <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
     <string name="init_summary_hidewp_parking">地図上でウェイポイント(駐車場)を非表示</string>
