@@ -648,6 +648,8 @@
     <string name="init_backup_settings_restore">Obnovit nastavení</string>
     <string name="settings_readingerror">Chyba při čtení nastavení</string>
     <string name="settings_restart">Aplikace c:geo se musí nyní restartovat, aby se použili načtená nastavení</string>
+    <string name="settings_folder_changed">Složka \"%1$s\" bude během obnovy změněna na \"%2$s\".\n\nPokračujte klepnutím na \"%4$s\". V takovém případě budete požádáni o opětovné získání přístupu c:geo do této složky.\n\nKlepnutím na „%3$s“ zachováte místo toho aktuální nastavení složky.</string>
+    <string name="settings_file_changed">\"%1$s\" bude během obnovy změněna na \"%2$s\".\n\nPokračujte klepnutím na \"%4$s\". V takovém případě budete požádáni o opětovné získání přístupu c:geo k danému souboru.\n\nKlepnutím na „%3$s“ místo toho zachováte aktuální nastavení.</string>
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy můžete získat od různých poskytovatelů nebo dokonce vytvořit si mapy vlastní (z dat OSM). Nejprve musíte vybrat složku, do které mají být offline mapy uloženy.</string>
     <string name="settings_info_themes_title">Info o stylech mapy</string>
@@ -827,8 +829,9 @@
     <string name="persistablefolder_offline_maps_themes">Motivy mapy</string>
     <string name="persistablefolder_backup">Záloha</string>
     <string name="persistablefolder_logfiles">Soubory protokolů</string>
-    <string name="persistablefolder_fieldnotes">Poznámky z terénu</string>
+    <string name="persistablefolder_fieldnotes">Koncepty</string>
     <string name="persistablefolder_spoilerimages">Obrázky s nápovědou</string>
+    <string name="persistableuri_track">Soubor se stopou</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s hotovo</string>
     <string name="folder_process_status_currentfile">Průběh %1$s</string>
@@ -1229,6 +1232,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Tato možnost může zlepšit výkon prohlížeče map za cenu obsazení části místa v úložišti zařízení.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnout synchronizaci složky s motivy</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Tímto trvale synchronizujete obsah složky Map Theme do soukromé složky aplikace pro rychlejší přístup k souborům.\n\nVaše složka s mapovými motivy \'%1$s\' má momentálně %2$s, %3$s a velikost %4$s.\n\nChcete zapnout synchronizaci složek?</string>
+    <string name="onetime_mapthemefixslow_title">Opravit pomalé vykreslování motivů mapy</string>
+    <string name="onetime_mapthemefixslow_message">Práce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče map. Motivy můžete zkomprimovat nebo synchronizovat, abyste získali lepší výkon a zkrátili dobu pro spouštění mapy.</string>
     <string name="init_hidewp">Skrýt trasové body</string>
     <string name="init_summary_hidewp_original">Skrýt původní trasové body na mapě</string>
     <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
@@ -1363,8 +1368,8 @@
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">Exportováno do</string>
     <string name="export_failed">Export selhal</string>
-    <string name="export_fieldnotes">Poznámky z terénu</string>
-    <string name="export_fieldnotes_info">Poznámky z terénu budou uloženy do /sdcard/field-notes s názvem souboru podle aktuálního data a času.</string>
+    <string name="export_fieldnotes">Koncepty</string>
+    <string name="export_fieldnotes_info">Koncepty budou uloženy do /sdcard/field-notes s názvem souboru podle aktuálního data a času.</string>
     <string name="export_fieldnotes_upload">Nahrát na geocaching.com</string>
     <string name="export_fieldnotes_uploading">Nahrávání…</string>
     <string name="export_fieldnotes_upload_success">Nahrávání na geocaching.com bylo úspěšné</string>
@@ -1933,7 +1938,10 @@
     <string name="wizard_permissions_title">Nastavit oprávnění aplikace</string>
     <string name="wizard_permissions_intro">Aplikace c:geo vyžaduje na správné fungování několik povolení na vašem zařízení.\nV dalších krocích vám je vysvětlíme.</string>
     <string name="wizard_permissions_folder_title">Nastavit složku: %s</string>
-    <string name="wizard_basefolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání dat, jako jsou například soubory GPX, zálohy, poznámky a protokoly. Standardně jsou tyto soubory ukládány do složky pod tzv. \"základní složku\". V dalším kroku vyberte anebo vytvořte takovou složku.\n\n Pokud jste aplikaci c:geo aktualizovali z předchozí verze, vyberte existující složku „c:geo“ v hlavním adresáři v úložišti vašeho zařízení. \nTip: Možná budete muset nejprve odkrýt interní úložiště zařízení ve volbě souborů, které se poté zobrazí.</string>
+    <string name="wizard_basefolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání dat, jako jsou například soubory GPX, zálohy, koncepty a protokoly. Standardně jsou tyto soubory ukládány do složky pod tzv. \"základní složku\". V dalším kroku takovou složku vyberte nebo vytvořte.\n\n Pokud jste aplikaci c:geo aktualizovali z předchozí verze, vyberte existující složku „c:geo“ v hlavním adresáři v úložišti vašeho zařízení. \nTip: Možná budete muset nejprve odkrýt interní úložiště zařízení ve volbě souborů, které se poté zobrazí.</string>
+    <string name="wizard_mapfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání offline mapových souborů. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání souborů s motivy pro offline mapy. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
+    <string name="wizard_gpxfolder_request_explanation">Aplikace c:geo potřebuje místní složku pro ukládání GPX souborů, například pro import / export kešek nebo tras. V dalším kroku takovou složku vyberte nebo vytvořte.</string>
     <string name="wizard_platforms_title">Konfigurace služeb</string>
     <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>

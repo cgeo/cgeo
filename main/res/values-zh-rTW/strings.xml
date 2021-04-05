@@ -241,6 +241,7 @@
     <string name="warn_no_pocket_query_found">在線上找不到Pocket query。</string>
     <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="warn_notloggedin_title">離線模式</string>
+    <string name="warn_notloggedin_short">尚未登錄，即時地圖只能顯示儲存在裝置上的寶藏，點選此處以便獲得更多資訊</string>
     <string name="warn_notloggedin_long">您沒有登入。即時地圖只顯示您存在本地裝置的cache。</string>
     <string name="err_read_pocket_query_list">讀取Pocket query列表錯誤。</string>
     <string name="info_log_posted">成功發布日誌</string>
@@ -261,6 +262,7 @@
     <string name="confirm_unsaved_changes_title">未保存更改</string>
     <string name="confirm_discard_wp_changes">丢弃未保存的航点更改？</string>
     <string name="err_request_popup_info">c:geo获取cache信息失败</string>
+    <string name="warn_log_load_additional_data">c:geo 無法為登錄載入其它資料(旅行蟲 / 最愛點)</string>
     <string name="more_information">更多資訊</string>
     <string name="undo">復原</string>
     <string name="dont_show_again">不要再顯示</string>
@@ -420,12 +422,14 @@
     <string name="about_system_write_logcat_type">產生標準的或是附加的日誌檔案</string>
     <string name="about_system_write_logcat_type_standard">標準</string>
     <string name="about_system_write_logcat_type_extended">附加的</string>
+    <string name="about_system_write_logcat_success">日誌檔案 \"%1$s\" 已寫入資料夾 \"%2$s\"</string>
     <string name="about_system_write_logcat_error">檔案寫入錯誤</string>
     <string name="changelog_github">全部标签列表</string>
     <string name="about_nutshellmanual">線上手冊</string>
     <string name="about_contributors_carnerodetails">當成是c:geo的爸爸XD</string>
     <string name="about_contributors_recent">當前的貢獻者</string>
     <string name="about_contributors_specialthanks">特別感謝</string>
+    <string name="about_contributors_specialthanksdetails">我們所有的翻譯貢獻者在 <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n所有回報問題的議題\n所有其他的支持者\n</string>
     <string name="about_contributors_other">其他貢獻者：</string>
     <string name="about_components">元件</string>
     <string name="contribution_code">程式碼（code）</string>
@@ -436,6 +440,7 @@
     <string name="contribution_graphics">圖像</string>
     <string name="debug_user_error_report_title">回報問題</string>
     <string name="debug_user_error_errortext">未預期的錯誤發生，請回報這個錯誤給我們。</string>
+    <string name="debug_user_error_explain_options">經由電子郵件傳送系統資訊以及 c:geo 的日誌檔案，藉此幫助我們改善 c:geo，請在郵件中提供詳細的問題情況，其它的聯繫方式可以在 \"關於 c:geo\" 找到</string>
     <!-- settings -->
     <string name="settings_title_open_settings">開啟設置</string>
     <string name="settings_title_services">服务</string>
@@ -564,11 +569,13 @@
     <string name="brouter_recalculating">在背景重新計算路線</string>
     <string name="init_summary_brouterShowBothDistances">如果路線啟動了，除了計算出的路線長度外，還會顯示直線距離。</string>
     <string name="init_bigSmileysOnMap">對已登錄的cache用大圖示顯示</string>
+    <string name="init_summary_bigSmileysOnMap">如果啟用大型圖式，將會在地圖上顯示已登錄的寶藏，而不是寶藏的類型圖式(必需重新啟動)</string>
     <string name="init_disabled">排除關閉的cache</string>
     <string name="init_summary_disabled">排除關閉的cache</string>
     <string name="init_archived">排除歸檔的cache</string>
     <string name="init_summary_archived">排除歸檔的cache</string>
     <string name="init_global_wp_extraction_disable">關閉輸出航點</string>
+    <string name="init_summary_global_wp_extraction_disable">關閉所有來自個人寶藏筆記的航點資訊，但還是可以在個別寶藏中的個人寶藏筆記下方的勾選框開啟它</string>
     <string name="init_customtabs_as_browser">使用Google Chrome瀏覽。</string>
     <string name="init_summary_customtabs_as_browser">在不離開c：geo的情況下將顯示外部網站（僅在安裝了Chrome的情況下才可能顯示）</string>
     <string name="init_save_log_img">儲存照片</string>
@@ -742,7 +749,9 @@
     <!-- proximity notification -->
     <string name="far_distance">遠距離</string>
     <string name="near_distance">近距離</string>
+    <string name="pn_tone_only">只有提示音</string>
     <string name="pn_text_only">純文字</string>
+    <string name="pn_tone_and_text">提示音 + 文字</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google map</string>
     <string name="map_source_google_satellite">Google map (衛星)</string>

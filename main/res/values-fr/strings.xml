@@ -827,6 +827,7 @@
     <string name="persistablefolder_logfiles">Fichiers journaux</string>
     <string name="persistablefolder_fieldnotes">Notes de terrain</string>
     <string name="persistablefolder_spoilerimages">Images indices</string>
+    <string name="persistableuri_track">Fichier de trace</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s réalisé</string>
     <string name="folder_process_status_currentfile">Traitement de : %1$s</string>
@@ -1209,6 +1210,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Cette option peut améliorer les performances d\'ouverture de la visionneuse de cartes au prix d\'un peu d\'espace de stockage de l\'appareil.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activer la synchronisation du dossier des thèmes</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Cela synchronisera en permanence le contenu du dossier des thèmes de carte dans un dossier privé de l\'application pour un accès plus rapide aux fichiers.\n\nVotre dossier des thèmes de carte \'%1$s\' a actuellement %2$s, %3$s et une taille de %4$s.\n\nVoulez-vous activer la synchronisation du dossier ?</string>
+    <string name="onetime_mapthemefixslow_title">Corrige le problème de lenteur d\'affichage du thème de carte</string>
+    <string name="onetime_mapthemefixslow_message">Utiliser les thèmes de cartes non zippés peut diminuer les performances d\'affichage de la carte. Vous pouvez zipper ou synchroniser vos thèmes et ainsi réduire le délai d’ouverture de la carte.</string>
     <string name="init_hidewp">Masquer tous les points de passage</string>
     <string name="init_summary_hidewp_original">Masquer les points de passage d\'origine sur la carte</string>
     <string name="init_summary_hidewp_parking">Masquer les points de passage de stationnement sur la carte</string>

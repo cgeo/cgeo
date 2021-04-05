@@ -44,6 +44,7 @@ import java.util.zip.ZipInputStream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.rendertheme.ContentRenderTheme;
 import org.mapsforge.map.android.rendertheme.ContentResolverResourceProvider;
@@ -573,14 +574,12 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
 
         if (doSync) {
             //this means user just turned sync on. Ask user if he/she is really shure about this.-
-            final FolderUtils.FolderInfo themeFolderInfo = FolderUtils.get().getFolderInfo(PersistableFolder.OFFLINE_MAP_THEMES.getFolder());
+            final FolderUtils.FolderInfo themeFolderInfo = FolderUtils.get().getFolderInfo(PersistableFolder.OFFLINE_MAP_THEMES.getFolder(), -1);
             final String folderName = MAP_THEMES_FOLDER.getFolder().toUserDisplayableString();
-            final String files = LocalizationUtils.getPlural(R.plurals.file_count, themeFolderInfo.fileCount);
-            final String dirs = LocalizationUtils.getPlural(R.plurals.folder_count, themeFolderInfo.dirCount);
-            final String size = Formatter.formatBytes(themeFolderInfo.totalFileSize);
+            final ImmutableTriple<String, String, String> folderInfoStrings = themeFolderInfo.getUserDisplayableFolderInfoStrings();
             Dialogs.newBuilder(activity)
                 .setTitle(R.string.init_renderthemefolder_synctolocal_dialog_title)
-                .setMessage(LocalizationUtils.getString(R.string.init_renderthemefolder_synctolocal_dialog_message, folderName, files, dirs, size))
+                .setMessage(LocalizationUtils.getString(R.string.init_renderthemefolder_synctolocal_dialog_message, folderName, folderInfoStrings.left, folderInfoStrings.middle, folderInfoStrings.right))
                 .setPositiveButton(android.R.string.ok, (d, c) -> {
                     d.dismiss();
                     //start sync

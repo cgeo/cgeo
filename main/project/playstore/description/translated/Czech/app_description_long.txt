@@ -20,7 +20,7 @@ Navigujte se ke kešce nebo trasovému bodu pomocí zabudovaného kompasu, mapy 
 Ukládejte informace o keškách do zařízení přímo z geocahing.com, tak jako přes import souboru GPX, aby jste je měly kdykoliv k dispozici.
 Uložené kešky můžete spravovat v rozličných seznamech a můžete je řadit a filtrovat podle svých potřeb.
 Uložené kešky spolu se soubory offline map můžete využít pro hledání kešek bez připojení k internetu (např. v roamingu).
-Logy můžete přidávat online anebo uložit offline a odeslat je později, případně exportovat přes Filed Notes.
+Logy můžete přidávat online anebo uložit offline a odeslat je později, případně exportovat přes koncepty.
 
 Vyhledávání a objevování trasovatelných předmětů, spravování inventářů trasovatelných předmětů a vkládání trasovatelných předmětů při přidávání logů ke keškám.
 

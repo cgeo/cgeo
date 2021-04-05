@@ -668,7 +668,7 @@ public class BackupUtils {
 
     @Nullable
     private static ArrayList<ContentStorage.FileInformation> getExistingBackupFoldersSorted() {
-        final ArrayList<ContentStorage.FileInformation> files = new ArrayList<>(ContentStorage.get().list(PersistableFolder.BACKUP.getFolder(), true));
+        final ArrayList<ContentStorage.FileInformation> files = new ArrayList<>(ContentStorage.get().list(PersistableFolder.BACKUP.getFolder(), true, false));
         CollectionUtils.filter(files, s -> s.isDirectory && s.name.matches("^[0-9]{4}-[0-9]{2}-[0-9]{2} (20|21|22|23|[01]\\d|\\d)((-[0-5]\\d){1,2})$"));
         return files.size() == 0 ? null : files;
     }
