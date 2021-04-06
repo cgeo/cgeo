@@ -1203,10 +1203,7 @@
     <string name="map_showwp_parking">Parkkipaikka-reittipisteet</string>
     <string name="map_showwp_visited">Vieraillut reittipisteet</string>
     <string name="map_show_track">Näytä GPX-rata/reitti</string>
-    <string name="init_renderthemefolder_synctolocal">Synkronoi teemat sovelluksen omaan kansioon</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Tämä valinta voi parantaa karttanäkymän avaamisen suorituskykyä, laitteen tallennustilan kustannuksella.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ota teemakansion synkronointi käyttöön</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Tämä synkronoi karttateemakansion sisällön pysyvästi sovelluksen yksityiseen kansioon, nopeamman pääsyn takaamiseksi.\n\nKarttateematiedostokansiolla \'%1$s\' on tällä hetkellä %2$s, %3$s ja on %4$s:n kokoinen.\n\nHaluatko kytkeä kansion synkronoinnin päälle?</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
     <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>
@@ -1760,8 +1757,6 @@
     <string name="map_export_individual_route">Vie yksittäinen reitti</string>
     <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
-    <string name="map_autotarget_individual_route">Aseta kohteeksi automaattisesti</string>
-    <string name="map_disable_autotarget_individual_route">Poistettu käytöstä \"Aseta kohteeksi automaattisesti\"</string>
     <string name="map_clear_manual_targets">Tyhjennä manuaaliset kohteet</string>
     <string name="map_manual_targets_cleared">Manuaaliset kohteet tyhjennetty</string>
     <string name="map_clear_individual_route">Tyhjennä yksittäinen reitti</string>
