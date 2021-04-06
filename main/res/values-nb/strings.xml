@@ -1757,8 +1757,6 @@
     <string name="map_export_individual_route">Eksporter individuell rute</string>
     <string name="map_load_individual_route">Last inn individuell rute</string>
     <string name="map_load_individual_route_confirm">Overskrive eksisterende rute?</string>
-    <string name="map_autotarget_individual_route">Sett som mål automatisk</string>
-    <string name="map_disable_autotarget_individual_route">Deaktivert \"Sett som mål automatisk\"</string>
     <string name="map_clear_manual_targets">Slett manuelle mål</string>
     <string name="map_manual_targets_cleared">Manuelle mål slettet</string>
     <string name="map_clear_individual_route">Slett individuell rute</string>
