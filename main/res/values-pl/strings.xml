@@ -340,6 +340,8 @@
     <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
     <string name="caches_select_invert">Odwróć zaznaczenie</string>
     <string name="caches_nearby">Najbliższe</string>
+    <string name="caches_remove_all">Usuń wszystkie z listy</string>
+    <string name="caches_remove_selected">Usuń wybrane z listy</string>
     <string name="caches_remove_all_completely">Usuń wszystkie z urządzenia</string>
     <string name="caches_remove_selected_completely">Usuń wybrane z urządzenia</string>
     <string name="caches_delete_events">Usuń minione wydarzenia</string>
@@ -1244,10 +1246,7 @@
     <string name="map_showwp_parking">Parkingi z punktów nawigacyjnych</string>
     <string name="map_showwp_visited">Odwiedzone punkty nawigacyjne</string>
     <string name="map_show_track">Pokaż ścieżkę/trasę GPX</string>
-    <string name="init_renderthemefolder_synctolocal">Synchronizuj motywy do folderu prywatnego aplikacji</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Ta opcja może poprawić wydajność przeglądarki map kosztem przestrzeni dyskowej urządzenia.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Włącz synchronizację folderu z motywami</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Spowoduje to ciągłą synchronizację zawartości folderu z motywami map z folderem prywatnym aplikacji dla szybszego dostępu do plików.\n\nTwój folder z motywami map \'%1$s\' ma obecnie %2$s, %3$s i rozmiar %4$s.\n\nCzy chcesz włączyć synchronizację folderów?</string>
     <string name="onetime_mapthemefixslow_title">Napraw powolne renderowanie motywu mapy</string>
     <string name="onetime_mapthemefixslow_message">Praca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. Możesz spakować lub zsynchronizować swoje motywy, aby uzyskać lepszą wydajność i zmniejszyć opóźnienie przy uruchamianiu mapy.</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
@@ -1829,8 +1828,6 @@
     <string name="map_export_individual_route">Eksportuj indywidualną trasę</string>
     <string name="map_load_individual_route">Załaduj indywidualną trasę</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
-    <string name="map_autotarget_individual_route">Automatycznie ustaw jako cel</string>
-    <string name="map_disable_autotarget_individual_route">Wyłączono \"Automatycznie ustaw jako cel\"</string>
     <string name="map_clear_manual_targets">Wyczyść ręczne cele</string>
     <string name="map_manual_targets_cleared">Ręczne cele wyczyszczone</string>
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
