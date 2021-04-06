@@ -1533,8 +1533,6 @@
     <string name="map_export_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_load_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_load_individual_route_confirm">Перезаписувати існуючі файли?</string>
-    <string name="map_autotarget_individual_route">Автоматично встановити як ціль</string>
-    <string name="map_disable_autotarget_individual_route">Автоматично встановити як ціль</string>
     <string name="map_clear_manual_targets">Очистити ручні ярлики</string>
     <string name="map_manual_targets_cleared">Елементи вручну очищено</string>
     <string name="map_clear_individual_route">Експорт за окремим маршрутом</string>
