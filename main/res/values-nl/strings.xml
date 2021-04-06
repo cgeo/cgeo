@@ -1224,10 +1224,7 @@
     <string name="map_showwp_parking">Parkeer waypoints</string>
     <string name="map_showwp_visited">Bezochte waypoints</string>
     <string name="map_show_track">GPX spoor/route tonen</string>
-    <string name="init_renderthemefolder_synctolocal">Thema\'s synchroniseren met app-private map</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Deze optie kan de prestaties van de kaartviewer bij het openen verbeteren ten koste van de opslagruimte van sommige apparaten.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisatie van themamappen inschakelen</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Dit zal de inhoud van de kaart Thema Map permanent synchroniseren in een app-private map voor snellere bestandstoegang.\n\nDe thema map \'%1$s\' heeft op dit moment %2$s, %3$s en een grootte van %4$s.\n\nWil je de synchronisatie van mappen inschakelen?</string>
     <string name="onetime_mapthemefixslow_title">Repareer langzame kaartthema weergave</string>
     <string name="onetime_mapthemefixslow_message">Werken met niet ge-zipte kaart thema\'s kan de kaartviewer openingsprestatie verminderen. Je kunt je thema\'s zippen of synchroniseren om snellere prestaties te krijgen en de vertraging te verminderen bij het starten van de kaart.</string>
     <string name="init_hidewp">Waypoints verbergen</string>
@@ -1783,8 +1780,6 @@
     <string name="map_export_individual_route">Individuele route exporteren</string>
     <string name="map_load_individual_route">Individuele route laden</string>
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
-    <string name="map_autotarget_individual_route">Automatisch als doel instellen</string>
-    <string name="map_disable_autotarget_individual_route">\"Stel automatisch als doel in\" uitgeschakeld</string>
     <string name="map_clear_manual_targets">Handmatige doelen wissen</string>
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
