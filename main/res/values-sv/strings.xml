@@ -1203,10 +1203,7 @@
     <string name="map_showwp_parking">Parkeringwaypoints</string>
     <string name="map_showwp_visited">Besökta waypoints</string>
     <string name="map_show_track">Visa GPX-spår/rutt</string>
-    <string name="init_renderthemefolder_synctolocal">Synkronisera teman till app-privat mapp</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Det här alternativet kan förbättra prestanda vid öppning av kartor på bekostnad av lagringsutrymme.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av mapp med teman</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Detta synkroniserar permanent innehållet i karttema-mappen till en app-privat mapp för snabbare åtkomst.\n\nDin karttema-mapp \'%1$s\' har för närvarande %2$s, %3$s och en storlek på %4$s.\n\nVill du aktivera synkronisering av mappar?</string>
     <string name="init_hidewp">Dölj vägpunkter</string>
     <string name="init_summary_hidewp_original">Dölj ursprungliga vägpunkter på kartan</string>
     <string name="init_summary_hidewp_parking">Dölj parkerings vägpunkter på kartan</string>
@@ -1760,8 +1757,6 @@
     <string name="map_export_individual_route">Sortera individuell rutt</string>
     <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
-    <string name="map_autotarget_individual_route">Ange som mål automatiskt</string>
-    <string name="map_disable_autotarget_individual_route">Inaktiverade \"Ange som mål automatiskt\"</string>
     <string name="map_clear_manual_targets">Rensa manuella mål</string>
     <string name="map_manual_targets_cleared">Manuella mål rensade</string>
     <string name="map_clear_individual_route">Rensa enskild rutt</string>

@@ -1613,8 +1613,6 @@
     <string name="map_export_individual_route">Eksportuoti asmeninį maršrutą</string>
     <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
     <string name="map_load_individual_route_confirm">Perrašyti esamą maršrutą?</string>
-    <string name="map_autotarget_individual_route">Nustatyti kaip tikslą automatiškai</string>
-    <string name="map_disable_autotarget_individual_route">Išjungta \'\'Nustatyti kaip tikslą automatiškai\'\'</string>
     <string name="map_clear_manual_targets">Išvalykite rankinius tikslus</string>
     <string name="map_manual_targets_cleared">Rankiniai tikslai išvalyti</string>
     <string name="map_clear_individual_route">Pašalinti asmeninį maršrutą</string>

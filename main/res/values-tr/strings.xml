@@ -1222,10 +1222,7 @@
     <string name="map_showwp_parking">Park yol noktaları</string>
     <string name="map_showwp_visited">Görülmüş yol noktaları</string>
     <string name="map_show_track">GPX yol/rotayı göster</string>
-    <string name="init_renderthemefolder_synctolocal">Temaları güvenli klasöre senkronize et</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Bu seçenek aygıt hafızasından bir miktar kullanarak harita görüntüleyicisi açılış performansını arttırır.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Tema dosyası senkronizasyonunu aç</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Bu işlem Harita Tema klasörünü daha hızlı dosya erişimi için kalıcı olarak güvenli klasöre senkronize edecektir.\n\nHarita Tema Klasörünüz \'%1$s\' %4$s boyutunda ayrıca %2$s ve %3$s içeriyor.\n\nSenkronizasyonu açmak istiyor musunuz?</string>
     <string name="init_hidewp">Yol noktalarını gizle</string>
     <string name="init_summary_hidewp_original">Haritadaki orijinal yol noktalarını gizle</string>
     <string name="init_summary_hidewp_parking">Haritadaki park alanlarını gizle</string>
@@ -1779,8 +1776,6 @@
     <string name="map_export_individual_route">Özel rotayı dışa aktar</string>
     <string name="map_load_individual_route">Özel rotayı yükle</string>
     <string name="map_load_individual_route_confirm">Mevcut rotanın üzerine yazılsın mı?</string>
-    <string name="map_autotarget_individual_route">Hedef olarak otomatik ayarla</string>
-    <string name="map_disable_autotarget_individual_route">Devre dışı \'\'Hedef olarak otomatik ayarla\'\'</string>
     <string name="map_clear_manual_targets">Elle girilen hedefleri temizle</string>
     <string name="map_manual_targets_cleared">Elle seçilmiş hedefler temizlendi</string>
     <string name="map_clear_individual_route">Özel rotayı temizle</string>

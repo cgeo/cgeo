@@ -1206,10 +1206,7 @@
     <string name="map_showwp_parking">Lieux de stationnement</string>
     <string name="map_showwp_visited">Points de passage visités</string>
     <string name="map_show_track">Afficher la trace GPX / l\'itinéraire</string>
-    <string name="init_renderthemefolder_synctolocal">Synchroniser les thèmes dans le dossier privé de l\'application</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Cette option peut améliorer les performances d\'ouverture de la visionneuse de cartes au prix d\'un peu d\'espace de stockage de l\'appareil.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activer la synchronisation du dossier des thèmes</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Cela synchronisera en permanence le contenu du dossier des thèmes de carte dans un dossier privé de l\'application pour un accès plus rapide aux fichiers.\n\nVotre dossier des thèmes de carte \'%1$s\' a actuellement %2$s, %3$s et une taille de %4$s.\n\nVoulez-vous activer la synchronisation du dossier ?</string>
     <string name="onetime_mapthemefixslow_title">Corrige le problème de lenteur d\'affichage du thème de carte</string>
     <string name="onetime_mapthemefixslow_message">Utiliser les thèmes de cartes non zippés peut diminuer les performances d\'affichage de la carte. Vous pouvez zipper ou synchroniser vos thèmes et ainsi réduire le délai d’ouverture de la carte.</string>
     <string name="init_hidewp">Masquer tous les points de passage</string>
@@ -1765,8 +1762,6 @@
     <string name="map_export_individual_route">Exporter un itinéraire individuel</string>
     <string name="map_load_individual_route">Charger un itinéraire individuel</string>
     <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
-    <string name="map_autotarget_individual_route">Définir automatiquement comme cible</string>
-    <string name="map_disable_autotarget_individual_route">\"Définir automatiquement comme cible\" désactivé</string>
     <string name="map_clear_manual_targets">Supprimer les cibles manuelles</string>
     <string name="map_manual_targets_cleared">Cibles manuelles supprimées</string>
     <string name="map_clear_individual_route">Effacer l\'itinéraire individuel</string>
