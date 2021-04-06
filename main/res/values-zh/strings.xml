@@ -146,10 +146,10 @@
     <string name="log_problem_missing_label">此藏点可能已经丢失</string>
     <string name="log_problem_missing_text">这个寻宝者报告此藏点可能已经丢失。</string>
     <string name="log_problem_other_label">其它</string>
-    <string name="log_problem_other_text">这个寻宝者报告此宝有问题。</string>
-    <string name="log_problem_archive_label">此宝应该被存档</string>
-    <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
-    <string name="log_image_scale_option_noscaling">不缩放</string>
+    <string name="log_problem_other_text">这个寻宝者报告此藏点有问题。</string>
+    <string name="log_problem_archive_label">藏点应该被存档</string>
+    <string name="log_problem_archive_text">这个寻宝者报告此藏点应该被存档。已经通知了一个社区志愿审核人。</string>
+    <string name="log_image_scale_option_noscaling">无缩放</string>
     <string name="log_image_titleprefix">图片</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">翻译为 %s</string>
@@ -201,6 +201,7 @@
     <string name="err_tb_display">c:geo无法展示你想要的可跟踪物。它真是一个可跟踪物吗？</string>
     <string name="err_tb_details_open">c:geo 无法打开可追踪物详情。</string>
     <string name="err_tb_not_loggable">该可追踪物的日志功能不可用。</string>
+    <string name="err_tb_not_found">c:geo 找不到可追踪物 %s.</string>
     <string name="err_tb_find_that">c:geo 找不到那个可追踪物。</string>
     <string name="err_waypoint_cache_unknown">c:geo 不知道您想要添加航点到哪个藏点。</string>
     <string name="err_waypoint_add_failed">c:geo 无法添加您的航点。</string>
@@ -271,7 +272,7 @@
     <string name="loc_fused">融合定位</string>
     <string name="loc_low_power">低电量</string>
     <string name="loc_home">家庭坐标</string>
-    <string name="loc_sat">六</string>
+    <string name="loc_sat">卫星地图</string>
     <string name="loc_trying">正在尝试定位</string>
     <string name="loc_no_addr">未知地址</string>
     <string name="loc_gps_disabled">GPS 已禁用</string>
@@ -332,8 +333,8 @@
     <string name="caches_select_mode_exit">退出选择模式</string>
     <string name="caches_select_invert">反转选择</string>
     <string name="caches_nearby">附近的</string>
-    <string name="caches_remove_all">移除所有</string>
-    <string name="caches_remove_selected">删除选中的</string>
+    <string name="caches_remove_all">删除列表中所有内容</string>
+    <string name="caches_remove_selected">删除列表中所选的项目</string>
     <string name="caches_remove_all_completely">删除设备中所有藏点</string>
     <string name="caches_remove_selected_completely">删除设备中所选的项目</string>
     <string name="caches_delete_events">删除过去的事件</string>
@@ -453,11 +454,12 @@
     <string name="settings_title_map">地图</string>
     <string name="settings_summary_map">设置地图来源、离线地图设置和地图详细信息。</string>
     <string name="settings_title_map_data">地图数据</string>
+    <string name="settings_title_offline_routing">离线路线规划</string>
+    <string name="settings_summary_offline_routing">如果安装并配置了辅助程序“BRouter”，或启用了内部路线规划，则离线路线规划可用。</string>
     <string name="settings_title_map_rotation">地图旋转 (谷歌地图)</string>
     <string name="settings_title_waypoints">航点</string>
     <string name="settings_title_map_content">地图内容</string>
     <string name="settings_title_map_behavior">地图行为</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">藏点数据文件夹</string>
     <string name="settings_title_data_dir_usage">藏点数据文件夹 (%1$s 已使用)</string>
     <string name="calculate_dataDir_title">Geocache 数据使用情况</string>
@@ -564,8 +566,12 @@
     <string name="init_brouterThreshold">计算路径</string>
     <string name="init_brouterThreshold_description">brouter 辅助程序 (如果已安装) 计算路径的最大距离。</string>
     <string name="init_brouterShowBothDistances">显示直线距离</string>
+    <string name="init_brouterAutoTileDownloads">自动下载</string>
+    <string name="init_brouterAutoTileDownloads_description">自动提供下载缺失的路线规划瓦片数据。</string>
     <string name="brouter_recalculating">在后台重新计算路径</string>
     <string name="init_summary_brouterShowBothDistances">如果路径是活动的：除了显示计算的路径长度外，还显示直线距离。</string>
+    <string name="init_useInternalRouting">使用内部路线规划</string>
+    <string name="init_summary_useInternalRouting">使用 c:geo 内部路线规划以使用自动路线规划的数据下载和更新</string>
     <string name="init_bigSmileysOnMap">已记录藏点的大图标</string>
     <string name="init_summary_bigSmileysOnMap">如果启用，将会在地图上为已记录藏点显示大表情，而不是藏点类型的图标 (需要重启)。</string>
     <string name="init_disabled">排除已禁用</string>
