@@ -204,6 +204,7 @@
     <string name="err_tb_display">Το c:geo δεν μπορεί να εμφανίσει το ανιχνεύσιμο. Είστε σίγουροι ότι είναι ανιχνεύσιμο;</string>
     <string name="err_tb_details_open">To c:geo δεν μπορεί να ανοίξει τις λεπτομέρειες του ανιχνεύσιμου.</string>
     <string name="err_tb_not_loggable">Αυτό το ανιχνεύσιμο δεν δέχεται καταγραφές.</string>
+    <string name="err_tb_not_found">Δεν βρέθηκε το ανιχνεύσιμο %s.</string>
     <string name="err_tb_find_that">Το c:geo δεν μπορεί να βρει το συγκεκριμένο ανιχνεύσιμο.</string>
     <string name="err_waypoint_cache_unknown">Το c:geo δεν ξέρει για ποια κρύπτη θέλετε να προσθέσετε ένα σημείο αναφοράς.</string>
     <string name="err_waypoint_add_failed">Το c:geo απέτυχε να προσθέσει το σημείο αναφοράς.</string>
@@ -1223,10 +1224,10 @@
     <string name="map_showwp_parking">Σημεία στάθμευσης</string>
     <string name="map_showwp_visited">Ενδιάμεσα σημεία που έχει γίνει επίσκεψη</string>
     <string name="map_show_track">Εμφάνιση GPX διαδρομής</string>
-    <string name="init_renderthemefolder_synctolocal">Συγχρονισμός θεμάτων σε ιδιωτικό φάκελο εφαρμογών</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Αυτή η επιλογή μπορεί να βελτιώσει την απόδοση ανοίγματος του προβολέα χαρτών με κόστος κάποιο χώρο αποθήκευσης συσκευών.</string>
+    <string name="init_renderthemefolder_synctolocal">Συγχρονισμός θεμάτων</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Αυτό θα συγχρονίσει τα θέματα σας σε έναν ιδιωτικό φάκελο εφαρμογών για να βελτιώσει την απόδοση ανοίγματος των χαρτών με κόστος κάποιο χώρο αποθήκευσης ατην συσκευή.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ενεργοποίηση συγχρονισμού φακέλου θεμάτων</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Αυτή η ενέργεια θα συγχρονίσει μόνιμα το περιεχόμενο του φακέλου του Θέματος Χάρτη με τον εσωτερικό φάκελο της εφαρμογής για ταχύτερη προσπέλαση.\n\nΟ φάκελος του Θέματος Χάρτη \'%1$s\' έχει προς το παρόν %2$s, %3$s και μέγεθος %4$s. \n\n Θέλετε να συνεχίσετε με τον συγχρονισμό;</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Αυτό θα συγχρονίζει συνεχώς το περιεχόμενο του φακέλου ΄΄θέμα χάρτη΄΄ σε αποκλειστικό φάκελο για ταχύτερη πρόσβαση. Σιγουρευτείτε ότι ο φάκελος θεμάτων σας περιέχει μόνο τα θέματα και όχι πρόσθετα (μεγάλα) αρχεία πριν ενεργοποιήσετε αυτή τη δυνατότητα.\n\nΟ φάκελος χάρτη \'%1$s\' έχει προς το παρόν %2$s, %3$s και μέγεθος %4$s.\n\nΘέλετε να ενεργοποιήσετε το συγχρονισμό φακέλων;</string>
     <string name="onetime_mapthemefixslow_title">Διόρθωση αποτύπωσης αργού θέματος χάρτη</string>
     <string name="onetime_mapthemefixslow_message">Εργασία με μη-συμπιεσμένα θέματα χάρτη μπορεί να μειώσει την απόδοση ανοίγματος του προβολέα χάρτη. Μπορείτε να συμπιεσετε ή να συγχρονίσετε τα θέματα σας για να πάρετε ταχύτερη απόδοση και να μειώσετε την καθυστέρηση στην προβολή του χάρτη.</string>
     <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
@@ -1782,8 +1783,8 @@
     <string name="map_export_individual_route">Εξαγωγή μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
-    <string name="map_autotarget_individual_route">Να τεθεί αυτομάτως σαν στόχος</string>
-    <string name="map_disable_autotarget_individual_route">Απενεργοποιημένο \"Αυτόματος ορισμός ως στόχου\"</string>
+    <string name="map_autotarget_individual_route">Ορισμός έναρξης διαδρομής ως στόχο</string>
+    <string name="map_disable_autotarget_individual_route">Ορισμός Εναρξης διαδρομής ως \'στόχο\' απενεργοποιημένη</string>
     <string name="map_clear_manual_targets">Εκκαθάριση χειροκίνητων στόχων</string>
     <string name="map_manual_targets_cleared">Έγινε εκκαθάριση των χειροκίνητων στόχων</string>
     <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
