@@ -1184,8 +1184,6 @@
     <string name="map_showwp_parking">Точки парковки</string>
     <string name="map_showwp_visited">Посещенные точки</string>
     <string name="map_show_track">Показать GPX трек/маршрут</string>
-    <string name="init_renderthemefolder_synctolocal">Синхронизировать темы в защищенную папку приложения</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Эта опция может улучшить производительность открытия карты за счет свободного места на вашем устройстве.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Включить синхронизацию папок темы</string>
     <string name="init_hidewp">Скрыть точки</string>
     <string name="init_summary_hidewp_original">Скрыть оригинальные точки на карте</string>
