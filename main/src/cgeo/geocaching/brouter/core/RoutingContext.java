@@ -131,16 +131,11 @@ public final class RoutingContext {
         return name;
     }
 
-    private void setModel(final String className) {
-        if (className == null) {
-            pm = new StdModel();
-        } else {
-            try {
-                final Class clazz = Class.forName(className);
-                pm = (OsmPathModel) clazz.newInstance();
-            } catch (Exception e) {
-                throw new RuntimeException("Cannot create path-model: " + e);
-            }
+    private void setModel(final boolean useKinematicModel) {
+        try {
+            pm = useKinematicModel ? new KinematicModel() : new StdModel();
+        } catch (Exception e) {
+            throw new RuntimeException("Cannot create path-model: " + e);
         }
         initModel();
     }
@@ -162,7 +157,7 @@ public final class RoutingContext {
     public void readGlobalConfig() {
         final BExpressionContext expctxGlobal = expctxWay; // just one of them...
 
-        setModel(expctxGlobal.modelClass);
+        setModel(expctxGlobal.useKinematicModel);
 
         downhillcostdiv = (int) expctxGlobal.getVariableValue("downhillcost", 0.f);
         downhillcutoff = (int) (expctxGlobal.getVariableValue("downhillcutoff", 0.f) * 10000);

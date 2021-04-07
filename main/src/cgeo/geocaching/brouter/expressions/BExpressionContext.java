@@ -26,7 +26,7 @@ import java.util.TreeMap;
 public abstract class BExpressionContext implements IByteArrayUnifier {
     private static final String CONTEXT_TAG = "---context:";
     private static final String MODEL_TAG = "---model:";
-    public String modelClass;
+    public boolean useKinematicModel;
     public BExpressionMetaData meta;
     private String context;
     private boolean inOurContext = false;
@@ -759,7 +759,8 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
             if (token.startsWith(CONTEXT_TAG)) {
                 inOurContext = token.substring(CONTEXT_TAG.length()).equals(context);
             } else if (token.startsWith(MODEL_TAG)) {
-                modelClass = token.substring(MODEL_TAG.length()).trim();
+                // no need to parse the name, as c:geo will only support the builtin model class (also prevents class injection)
+                useKinematicModel = true;
             } else if (inOurContext) {
                 return token;
             }
