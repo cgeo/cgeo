@@ -153,6 +153,7 @@
     <string name="log_problem_archive_label">Cachen bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacheren rapporterte at geocachen bør arkiveres. En frivillig kontrollør blir varslet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
+    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
     <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nSkalert/Komprimert:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Bilde</string>
@@ -1828,7 +1829,9 @@
     <string name="localfile_cannot_handle">Feil under lesing av fil eller c:geo kan ikke åpne denne filtypen.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Motta kartfil</string>
+    <string name="receivemapfile_success">Kartfil ble mottatt som \"%s\" og lagret til kartmappen</string>
     <string name="receivemapfile_error">Feil under mottak av kartfil</string>
+    <string name="receivemapfile_error_io_exception">I/O feil under mottak av kartfil. Er det skrivetilgang til kartmappen \"%s\"?</string>
     <string name="receivemapfile_error_filenotfound_exception">\"Fil ikke funnet\"-feil under henting av kartfil.</string>
     <string name="receivemapfile_alreadyexists">En fil med dette navnet eksisterer allerede. Vil du overskrive den eksisterende filen eller eller lagre den nye filen under et annet navn?</string>
     <string name="receivemapfile_option_overwrite">Overskriv</string>
@@ -1875,6 +1878,9 @@
     <string name="wizard_permissions_title">Angi app-tillatelser</string>
     <string name="wizard_permissions_intro">c:geo trenger noen tillatelser på din enhet for å fungere.\nJeg vil gi flere detaljer i neste trinn.</string>
     <string name="wizard_permissions_folder_title">Velg mappe: %s</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo trenger en lokal mappe for å lagre offline-kartfiler. Velg eller opprett en mappe i neste trinn.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo trenger en lokal mappe for å lagre temafiler på offline kart. Velg eller opprett en slik mappe i det neste steget.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo trenger en lokal mappe for å lagre GPX-filer (f.eks for å importere / eksportere cacher eller spor). Velg eller opprett en mappe i neste trinn.</string>
     <string name="wizard_platforms_title">Konfigurer tjenester</string>
     <string name="wizard_platforms_intro">For å finne geocacher i c:geo trenger du en konto hos en geocaching-tjeneste som støttes av c:geo.\nVelg ønsket tjeneste nedenfor for enten for å logge inn med din eksisterende konto eller opprette en ny konto.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
