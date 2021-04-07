@@ -204,6 +204,7 @@
     <string name="err_tb_display">c:geo ne peut pas afficher l\'objet voyageur demandé. S\'agit-il vraiment d\'un objet voyageur ?</string>
     <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
     <string name="err_tb_not_loggable">Cet objet voyageur n\'a pas de carnet.</string>
+    <string name="err_tb_not_found">c:geo n\'a pas trouvé l\'objet voyageur %s.</string>
     <string name="err_tb_find_that">c:geo ne peut pas trouver cet objet voyageur.</string>
     <string name="err_waypoint_cache_unknown">c:geo ne sait pas à quelle cache vous souhaitez ajouter un point de passage.</string>
     <string name="err_waypoint_add_failed">c:geo n\'a pas réussi à ajouter votre point de passage.</string>
@@ -337,6 +338,8 @@
     <string name="caches_select_mode_exit">Désactiver le mode sélection</string>
     <string name="caches_select_invert">Inverser la sélection</string>
     <string name="caches_nearby">Proches</string>
+    <string name="caches_remove_all">Tout supprimer de la liste</string>
+    <string name="caches_remove_selected">Supprimer de la liste les éléments sélectionnés</string>
     <string name="caches_remove_all_completely">Tout supprimer de l\'appareil</string>
     <string name="caches_remove_selected_completely">Supprimer les éléments sélectionnés de l\'appareil</string>
     <string name="caches_delete_events">Supprimer les événements précédents</string>
@@ -456,6 +459,7 @@
     <string name="settings_title_map">Carte</string>
     <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
+    <string name="settings_title_offline_routing">Calcul d\'itinéraire hors-ligne</string>
     <string name="settings_title_map_rotation">Rotation de la carte (Google Maps)</string>
     <string name="settings_title_waypoints">Points de passage</string>
     <string name="settings_title_map_content">Contenu de la carte</string>
@@ -566,8 +570,10 @@
     <string name="init_brouterThreshold">Calculer l\'itinéraire</string>
     <string name="init_brouterThreshold_description">Distance maximale jusqu\'à laquelle l\'application compagnon BRouter (si installée) calculera un itinéraire.</string>
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
+    <string name="init_brouterAutoTileDownloads">Téléchargement automatique</string>
     <string name="brouter_recalculating">Recalcul de l\'itinéraire en arrière-plan…</string>
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
+    <string name="init_useInternalRouting">Utiliser le calcul d\'itinéraire interne</string>
     <string name="init_bigSmileysOnMap">Gros icônes pour les caches trouvées</string>
     <string name="init_summary_bigSmileysOnMap">Si activé, de gros émoticônes seront affichés sur la carte pour les caches loguées (plutôt que les icônes type de cache). Un redémarrage de c:geo est nécessaire pour prise en compte.</string>
     <string name="init_disabled">Exclure les caches désactivées</string>
@@ -654,6 +660,7 @@
     <string name="init_local_file_system">Système de fichiers local</string>
     <string name="init_base_directory_description">Dossier de base pour les données locales publiques</string>
     <string name="init_map_directory_description">Dossier des cartes hors ligne</string>
+    <string name="init_brouter_updateinterval_title">Intervalle de mise à jour</string>
     <string name="init_gpx_importexportdir">Dossier GPX</string>
     <string name="init_dataDir">Sélectionnez un dossier de données</string>
     <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
@@ -827,6 +834,8 @@
     <string name="persistablefolder_logfiles">Fichiers journaux</string>
     <string name="persistablefolder_fieldnotes">Notes de terrain</string>
     <string name="persistablefolder_spoilerimages">Images indices</string>
+    <string name="persistablefolder_routingbase">Calcul d\'itinéraire</string>
+    <string name="persistablefolder_routingtiles">Données d\'itinéraire</string>
     <string name="persistableuri_track">Fichier de trace</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s réalisé</string>
@@ -1020,6 +1029,8 @@
     <string name="cache_menu_extract_waypoints">Extraire les points de passage</string>
     <string name="cache_menu_set_found">Marquer comme trouvée</string>
     <string name="cache_menu_set_DNF">Marquer comme non trouvée</string>
+    <string name="cache_menu_reset_foundstate">Réinitialiser le status trouvée</string>
+    <string name="cache_foundstate_updated">Status mis à jour</string>
     <string name="cache_menu_set_cache_icon">Définir l\'icône de la cache</string>
     <string name="cache_icon_updated">Icône cache mis à jour</string>
     <string name="cache_menu_details">Détails</string>
@@ -1206,6 +1217,7 @@
     <string name="map_showwp_parking">Lieux de stationnement</string>
     <string name="map_showwp_visited">Points de passage visités</string>
     <string name="map_show_track">Afficher la trace GPX / l\'itinéraire</string>
+    <string name="init_renderthemefolder_synctolocal">Synchroniser les thèmes</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activer la synchronisation du dossier des thèmes</string>
     <string name="onetime_mapthemefixslow_title">Corrige le problème de lenteur d\'affichage du thème de carte</string>
     <string name="onetime_mapthemefixslow_message">Utiliser les thèmes de cartes non zippés peut diminuer les performances d\'affichage de la carte. Vous pouvez zipper ou synchroniser vos thèmes et ainsi réduire le délai d’ouverture de la carte.</string>
@@ -1762,6 +1774,8 @@
     <string name="map_export_individual_route">Exporter un itinéraire individuel</string>
     <string name="map_load_individual_route">Charger un itinéraire individuel</string>
     <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
+    <string name="map_autotarget_individual_route">Définir le départ de l\'itinéraire comme cible</string>
+    <string name="map_disable_autotarget_individual_route">\"Définir le départ de l\'itinéraire comme cible\" désactivé</string>
     <string name="map_clear_manual_targets">Supprimer les cibles manuelles</string>
     <string name="map_manual_targets_cleared">Cibles manuelles supprimées</string>
     <string name="map_clear_individual_route">Effacer l\'itinéraire individuel</string>
@@ -1825,18 +1839,23 @@
     <string name="localfile_title">Ouvrir un fichier local</string>
     <string name="localfile_cannot_handle">Erreur lors de la lecture du fichier ou c:geo ne peut pas gérer ce type de fichier.</string>
     <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Recevoir le fichier</string>
+    <string name="receivedownload_error">Erreur pendant la réception du fichier</string>
     <string name="receivedownload_alreadyexists">Un fichier portant ce nom existe déjà. Écraser le fichier existant ou enregistrer le nouveau fichier sous un autre nom ?</string>
     <string name="receivedownload_option_overwrite">Écraser</string>
     <string name="receivedownload_option_differentname">Nouveau nom</string>
     <string name="receivedownload_kb_copied">%d Ko copiés</string>
+    <string name="receivedownload_cancelled">Transfert de fichiers annulé</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Télécharger des cartes hors ligne</string>
+    <string name="download_title">Télécharger le fichier</string>
     <string name="downloadmap_info">Sélectionnez un fichier de carte pour votre région en appuyant sur l\'icône \"Enregistrer\".\n\nLe téléchargement est effectué en arrière-plan. Lorsque le transfert est terminé, le fichier est copié dans le dossier des cartes c:geo et défini comme la carte actuelle.\n\nAttention : Le téléchargement d\'une carte peut causer un trafic réseau élevé !</string>
     <string name="downloadmap_choose">Sélectionner la carte</string>
     <string name="downloadmap_filename">Téléchargement de %s</string>
     <string name="download_started">Téléchargement démarré en arrière plan</string>
     <string name="downloadmap_target_not_writable">La cible sélectionnée \"%s\" n\'est pas accessible en écriture - le fichier de carte téléchargé est sauvegardé dans le dossier de téléchargement du système et doit être déplacé manuellement dans le dossier des cartes.</string>
     <string name="downloadmap_allow_metered_network">Autoriser le téléchargement sur un réseau limité (par exemple : la connexion mobile)</string>
+    <string name="download_confirmation">%1$s Télécharger le fichier \"%2$s\" ? %3$s</string>
     <string name="downloadmap_handling">Le téléchargement lui-même sera géré par le gestionnaire de téléchargement de votre système en arrière-plan. Vous devriez voir une notification dès que le téléchargement a commencé (ce qui peut prendre un certain temps).</string>
     <string name="button_continue">Continuer</string>
     <string name="downloadmap_onedirup">(un niveau supérieur)</string>
@@ -1849,11 +1868,14 @@
     <string name="downloadmap_checking_for_updates">Vérification des mises à jour…</string>
     <string name="downloadmap_install_theme_title">Installer un thème</string>
     <string name="downloadmap_install_theme_info">Votre carte téléchargée nécessite un fichier de thème spécial. Voulez-vous le télécharger également ?</string>
+    <string name="no_updates_found">Aucune mise à jour disponible</string>
+    <string name="updates_check">Vérification des mises à jour</string>
     <string name="mapserver_mapsforge_info">Cartes de base, aucun thème de carte n\'est requis</string>
     <string name="mapserver_openandromaps_info">Cartes détaillées, nécessitent le thème de carte \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Thème de carte détaillée et optimisé pour les cartes \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Cartes détaillées, nécessitent l\'un des thèmes de carte \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Thème de carte détaillé, construit pour les cartes \"Freizeitkarte\"</string>
+    <string name="brouter_info">Service hors-ligne de calcul d\'itinéraire</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Effacer l\'historique du parcours</string>
     <string name="map_trailhistory_cleared">L\'historique des parcours a été effacé</string>
