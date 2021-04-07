@@ -1246,7 +1246,10 @@
     <string name="map_showwp_parking">Parkovací místa</string>
     <string name="map_showwp_visited">Navštívené trasové body</string>
     <string name="map_show_track">Zobrazit GPX stopu/trasu</string>
+    <string name="init_renderthemefolder_synctolocal">Synchronizovat motivy</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Tím se synchronizují vaše motivy do soukromé složky aplikace, aby se zlepšil výkon otevírání prohlížeče map za cenu nějakého úložného prostoru zařízení.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnout synchronizaci složky s motivy</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Tím se průběžně synchronizuje obsah složky s motivy do soukromé složky aplikace pro rychlejší přístup k souborům. Než povolíte tuto funkci, ujistěte se, že vaše složka s motivy obsahuje pouze vaše motivy, ale ne žádné další (velké) soubory.\n\nVaše složka s motivy \'%1$s\' má aktuálně %2$s, %3$s a velikost %4$s.\n\nChcete zapnout synchronizaci složek?</string>
     <string name="onetime_mapthemefixslow_title">Opravit pomalé vykreslování motivů mapy</string>
     <string name="onetime_mapthemefixslow_message">Práce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče map. Motivy můžete zkomprimovat nebo synchronizovat, abyste získali lepší výkon a zkrátili dobu pro spouštění mapy.</string>
     <string name="init_hidewp">Skrýt trasové body</string>
@@ -1828,6 +1831,8 @@
     <string name="map_export_individual_route">Exportovat individuální trasu</string>
     <string name="map_load_individual_route">Načíst individuální trasu</string>
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
+    <string name="map_autotarget_individual_route">Nastavit začátek trasy jako cíl</string>
+    <string name="map_disable_autotarget_individual_route">Funkce \"Nastavit začátek trasy jako cíl\" je vypnutá</string>
     <string name="map_clear_manual_targets">Vymazat ruční cíle</string>
     <string name="map_manual_targets_cleared">Ruční cíle vymazány</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
