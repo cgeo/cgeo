@@ -142,12 +142,12 @@ public class InstallWizardActivity extends AppCompatActivity {
                 break;
             }
             case WIZARD_PERMISSIONS_STORAGE:
-                title.setText(R.string.wizard_permissions_title);
+                title.setText(R.string.wizard_status_storage_permission);
                 text.setText(R.string.storage_permission_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestStorage, 0);
                 break;
             case WIZARD_PERMISSIONS_LOCATION:
-                title.setText(R.string.wizard_permissions_title);
+                title.setText(R.string.wizard_status_location_permission);
                 text.setText(R.string.location_permission_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestLocation, 0);
                 break;
