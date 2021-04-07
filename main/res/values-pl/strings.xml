@@ -1246,7 +1246,10 @@
     <string name="map_showwp_parking">Parkingi z punktów nawigacyjnych</string>
     <string name="map_showwp_visited">Odwiedzone punkty nawigacyjne</string>
     <string name="map_show_track">Pokaż ścieżkę/trasę GPX</string>
+    <string name="init_renderthemefolder_synctolocal">Synchronizuj motywy</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Spowoduje to synchronizację Twoich motywów w prywatnym folderze aplikacji, aby poprawić wydajność przeglądarki map kosztem przestrzeni dyskowej urządzenia.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Włącz synchronizację folderu z motywami</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Spowoduje to ciągłą synchronizację zawartości folderu Map Theme w folderze prywatnym dla szybszego dostępu do plików. Upewnij się, że folder twojego motywu zawiera tylko pliki dotyczące motywu, ale nie zawiera dodatkowych (dużych) danych przed włączeniem tej funkcji.\n\nTwój folder z motywami map \'%1$s\' ma obecnie %2$s, %3$s i rozmiar %4$s.\n\nCzy chcesz włączyć synchronizację folderu?</string>
     <string name="onetime_mapthemefixslow_title">Napraw powolne renderowanie motywu mapy</string>
     <string name="onetime_mapthemefixslow_message">Praca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. Możesz spakować lub zsynchronizować swoje motywy, aby uzyskać lepszą wydajność i zmniejszyć opóźnienie przy uruchamianiu mapy.</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
@@ -1828,6 +1831,8 @@
     <string name="map_export_individual_route">Eksportuj indywidualną trasę</string>
     <string name="map_load_individual_route">Załaduj indywidualną trasę</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
+    <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
+    <string name="map_disable_autotarget_individual_route">\"Ustaw początek trasy jako cel\" wyłączony</string>
     <string name="map_clear_manual_targets">Wyczyść ręczne cele</string>
     <string name="map_manual_targets_cleared">Ręczne cele wyczyszczone</string>
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>

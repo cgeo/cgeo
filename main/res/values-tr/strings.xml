@@ -338,6 +338,8 @@
     <string name="caches_select_mode_exit">Seçim modundan çıkın</string>
     <string name="caches_select_invert">Seçimi tersine çevir</string>
     <string name="caches_nearby">Yakınlarda</string>
+    <string name="caches_remove_all">Tümünü listeden çıkar</string>
+    <string name="caches_remove_selected">Seçilenleri listeden çıkar</string>
     <string name="caches_remove_all_completely">Hepsini cihazdan sil</string>
     <string name="caches_remove_selected_completely">Seçilenleri cihazdan sil</string>
     <string name="caches_delete_events">Geçmiş etkinlikleri sil</string>
@@ -1222,7 +1224,12 @@
     <string name="map_showwp_parking">Park yol noktaları</string>
     <string name="map_showwp_visited">Görülmüş yol noktaları</string>
     <string name="map_show_track">GPX yol/rotayı göster</string>
+    <string name="init_renderthemefolder_synctolocal">Temaları senkronize et</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Bu seçenek, harita görüntüleyicisinin açılış performansını arttırmak için temalarınızı uygulamaya özel bir klasöre, depolama alanınızın birazını kullanarak, senkronize eder.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Tema dosyası senkronizasyonunu aç</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Bu seçenek Harita Temaları klasöründeki dosyaları, dosyalara daha hızlı ulaşabilmek için uygulamaya özel bir klasöre senkronize eder. Bu seçeneği etkinleştirmeden önce tema klasörünüzün sadece temalarınızı içerdiğini, fazladan (büyük) dosya içermediğine emin olun.\n\nSizin harita dosyanız \'%1$s\' %4$s boyutunda %2$s, %3$s dosyaya sahip.\n\nKlasör senkronizasyonunu etkinleştirmek istediğinize emin misiniz?</string>
+    <string name="onetime_mapthemefixslow_title">Yavaş harita teması görselleştirmesini düzelt</string>
+    <string name="onetime_mapthemefixslow_message">Sıkıştırılmamış harita temalarıyla çalışmak, harita görüntüleyicisinin açılış performansını düşürebilir. Daha hızlı performans almak ve haritanın açılışındaki gecikmeyi azaltmak için temalarınızı sıkıştırabilir veya senkronize edebilirsiniz.</string>
     <string name="init_hidewp">Yol noktalarını gizle</string>
     <string name="init_summary_hidewp_original">Haritadaki orijinal yol noktalarını gizle</string>
     <string name="init_summary_hidewp_parking">Haritadaki park alanlarını gizle</string>
@@ -1776,6 +1783,8 @@
     <string name="map_export_individual_route">Özel rotayı dışa aktar</string>
     <string name="map_load_individual_route">Özel rotayı yükle</string>
     <string name="map_load_individual_route_confirm">Mevcut rotanın üzerine yazılsın mı?</string>
+    <string name="map_autotarget_individual_route">Rota başlangıcını hedef olarak ayarla</string>
+    <string name="map_disable_autotarget_individual_route">\"Rota başlangıcını hedef olarak ayarla\" devre dışı bırakıldı</string>
     <string name="map_clear_manual_targets">Elle girilen hedefleri temizle</string>
     <string name="map_manual_targets_cleared">Elle seçilmiş hedefler temizlendi</string>
     <string name="map_clear_individual_route">Özel rotayı temizle</string>
