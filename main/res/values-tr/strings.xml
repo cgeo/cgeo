@@ -1224,6 +1224,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Bu seçenek aygıt hafızasından bir miktar kullanarak harita görüntüleyicisi açılış performansını arttırır.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Tema dosyası senkronizasyonunu aç</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Bu işlem Harita Tema klasörünü daha hızlı dosya erişimi için kalıcı olarak güvenli klasöre senkronize edecektir.\n\nHarita Tema Klasörünüz \'%1$s\' %4$s boyutunda ayrıca %2$s ve %3$s içeriyor.\n\nSenkronizasyonu açmak istiyor musunuz?</string>
+    <string name="onetime_mapthemefixslow_title">Yavaş harita teması görselleştirmesini düzelt</string>
+    <string name="onetime_mapthemefixslow_message">Sıkıştırılmamış harita temalarıyla çalışmak, harita görüntüleyicisinin açılış performansını düşürebilir. Daha hızlı performans almak ve haritanın açılışındaki gecikmeyi azaltmak için temalarınızı sıkıştırabilir veya senkronize edebilirsiniz.</string>
     <string name="init_hidewp">Yol noktalarını gizle</string>
     <string name="init_summary_hidewp_original">Haritadaki orijinal yol noktalarını gizle</string>
     <string name="init_summary_hidewp_parking">Haritadaki park alanlarını gizle</string>
