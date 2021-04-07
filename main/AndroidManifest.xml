@@ -373,6 +373,7 @@
                 <data android:mimeType="application/x-zip-compressed" />
                 <data android:mimeType="application/x-zip" />
                 <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/gpx" />
                 <data android:pathPattern=".*\\.gpx" />
                 <data android:pathPattern=".*\\.zip" />
                 <data android:pathPattern=".*\\.ggz" />
