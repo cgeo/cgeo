@@ -32,7 +32,7 @@ public class InternalRoutingService extends Service {
 
             // c:geo uses default profile mapping:
             if (mode.equals("motorcar")) {
-                worker.profileName = isFast ? "car-fast" : "moped";
+                worker.profileName = isFast ? "car-fast" : "car-eco";
             } else if (mode.equals("bicycle")) {
                 worker.profileName = isFast ? "fastbike" : "trekking";
             } else if (mode.equals("foot")) {
