@@ -426,7 +426,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void checkForRoutingTileUpdates() {
-        if (Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy()) {
+        if (Settings.useInternalRouting() && Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy()) {
             final long now = System.currentTimeMillis() / 1000;
             final int interval = Settings.getBrouterAutoTileDownloadsInterval();
             if ((Settings.getBrouterAutoTileDownloadsLastCheckInS() + (interval * 24 * 60 * 60)) <= now) {
