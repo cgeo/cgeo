@@ -1224,7 +1224,10 @@
     <string name="map_showwp_parking">Waypoint del parcheggio</string>
     <string name="map_showwp_visited">Waypoint visitati</string>
     <string name="map_show_track">Mostra traccia/percorso GPX</string>
+    <string name="init_renderthemefolder_synctolocal">Sincronizza temi</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Questo sincronizzerà i tuoi temi in una cartella privata dell\'app per migliorare le prestazioni di apertura del visualizzatore di mappe occupando un po\' di spazio di archiviazione del dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Attiva sincronizzazione cartella tema</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Questo sincronizzerà continuamente il contenuto del tema della mappa in una cartella privata dell\'app per un accesso più veloce ai file. Assicurati che la cartella del tema contenga solo i tuoi temi e che non ci siano dati aggiuntivi (di grosse dimensioni) prima di abilitare questa funzione.\n\nLa tua cartella del tema della mappa \'%1$s\' ha attualmente %2$s, %3$s e una dimensione di %4$s.\n\nVuoi attivare la sincronizzazione della cartella?</string>
     <string name="onetime_mapthemefixslow_title">Correggi il rendering lento del tema della mappa</string>
     <string name="onetime_mapthemefixslow_message">Lavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. È possibile comprimere o sincronizzare i temi per ottenere prestazioni più veloci e ridurre il ritardo all\'avvio della mappa.</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
@@ -1780,6 +1783,8 @@
     <string name="map_export_individual_route">Esporta percorso individuale</string>
     <string name="map_load_individual_route">Carica percorso individuale</string>
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
+    <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>
+    <string name="map_disable_autotarget_individual_route">\"Imposta l\'inizio del percorso come obiettivo\" disabilitato</string>
     <string name="map_clear_manual_targets">Cancella obiettivi manuali</string>
     <string name="map_manual_targets_cleared">Obiettivi manuali cancellati</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
