@@ -487,7 +487,8 @@
     <string name="settings_activate_gc">Activar</string>
     <string name="settings_activate_ec">Activar</string>
     <string name="settings_gc_legal_note">Ao usar o serviço de geocaching.com, está a aceitar os Termos de Utilização da Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Iniciar sessão com o Facebook ou Google</string>
+    <string name="settings_info_facebook_login_title">Início de Sessão com:\n
+Facebook ou Google</string>
     <string name="settings_info_facebook_login">Não consegue que o c:geo inicie a sessão em geocaching.com com a sua conta do Facebook ou Google. Mas existe uma solução simples…</string>
     <string name="settings_authorize">Autorizar c:geo</string>
     <string name="settings_reauthorize">Actualizar ou remover autorização</string>
@@ -1224,7 +1225,10 @@
     <string name="map_showwp_parking">Pontos de estacionamento</string>
     <string name="map_showwp_visited">Pont. adicionais visitados</string>
     <string name="map_show_track">Mostrar percurso/rota GPX</string>
+    <string name="init_renderthemefolder_synctolocal">Sincronizar temas</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Isto sincronizará os seus temas numa pasta privada da aplicação para melhorar o desempenho de abertura de mapas, à custa de algum espaço de armazenamento do dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronização da pasta de temas</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Isto irá sincronizar continuamente o conteúdo da pasta Temas de Mapa numa pasta privada da aplicação para acesso mais rápido aos ficheiros. Certifique-se de que a pasta do tema apenas contém os seus temas, mas nenhum dado adicional (grande) antes de activar esta funcionalidade.\n\nA sua pasta do tema \'%1$s\' tem actualmente %2$s, %3$s e um tamanho de %4$s.\n\nDeseja activar a sincronização de pastas?</string>
     <string name="onetime_mapthemefixslow_title">Corrigir renderização lenta do tema de mapa</string>
     <string name="onetime_mapthemefixslow_message">Trabalhar com temas de mapa não compactados pode diminuir o desempenho da abertura do visualizador de mapa. Pode compactar ou sincronizar os seus temas para obter um desempenho mais rápido e reduzir o atraso ao iniciar o mapa.</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
@@ -1780,6 +1784,8 @@
     <string name="map_export_individual_route">Exportar rota individual</string>
     <string name="map_load_individual_route">Carregar rota individual</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
+    <string name="map_autotarget_individual_route">Definir início da rota como destino</string>
+    <string name="map_disable_autotarget_individual_route">\"Definir início da rota como destino\" desactivado</string>
     <string name="map_clear_manual_targets">Limpar destinos manuais</string>
     <string name="map_manual_targets_cleared">Destinos manuais limpos</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
