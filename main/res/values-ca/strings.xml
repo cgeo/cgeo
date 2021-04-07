@@ -1225,7 +1225,10 @@
     <string name="map_showwp_parking">Punts ruta parking</string>
     <string name="map_showwp_visited">Punts ruta visitats</string>
     <string name="map_show_track">Mostra GPX track/ruta</string>
+    <string name="init_renderthemefolder_synctolocal">Sincronitzeu temes</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Això sincronitzarà els temes amb una carpeta privada de l\'aplicació per millorar el rendiment d\'obertura del visor de mapes a costa d\'espai d\'emmagatzematge del dispositiu.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activeu la sincronització de carpetes de temes</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Això sincronitzarà contínuament el contingut de la carpeta del tema del mapa amb una carpeta privada de l’aplicació per accedir més ràpidament als fitxers. Assegureu-vos que la carpeta de temes només contingui els vostres temes, però no hi hagi dades addicionals (grans) abans d’activar aquesta funció.\n\nLa carpeta de temes del mapa \"%1$s\" té actualment %2$s, %3$s i té una mida de %4$s.\n\nVoleu activar la sincronització de carpetes?</string>
     <string name="onetime_mapthemefixslow_title">Corregiu la representació del tema del mapa lent</string>
     <string name="onetime_mapthemefixslow_message">Treballar amb temes de mapes no comprimits pot reduir el rendiment d\'obertura del visor de mapes. Podeu comprimir o sincronitzar els temes per obtenir un rendiment més ràpid i reduir el retard en iniciar el mapa.</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
@@ -1782,6 +1785,8 @@
     <string name="map_export_individual_route">Exporta una ruta individual</string>
     <string name="map_load_individual_route">Carrega la ruta individual</string>
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
+    <string name="map_autotarget_individual_route">Estableix l’inici de la ruta com a objectiu</string>
+    <string name="map_disable_autotarget_individual_route">Desactivat \"Estableix l\'inici de ruta com a objectiu\"</string>
     <string name="map_clear_manual_targets">Esborrar objectius manuals</string>
     <string name="map_manual_targets_cleared">Objectius manuals esborrats</string>
     <string name="map_clear_individual_route">Esborra la ruta individual</string>
