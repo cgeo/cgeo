@@ -363,7 +363,7 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
     // Support Library RecyclerView
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
 
     // Support Annotations. use same version for the main app and the test app
     def annotationVersion = '1.2.0'
