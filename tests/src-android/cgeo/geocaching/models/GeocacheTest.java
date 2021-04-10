@@ -64,12 +64,20 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(cache.getGeocode()).isEqualTo("GC1234");
     }
 
+    /**
+     * The waypoint with valid coordinates.
+     * Waypoint should be extracted, so expected size is 1.
+     */
     public final void testUpdateWaypointFromNote() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(new Waypoint("", new Geopoint("N51 13.888 E007 03.444"), "", "", "", WaypointType.OWN));
         assertWaypointsParsed("Test N51 13.888 E007 03.444", wpList);
     }
 
+    /**
+     * Waypoints in a single line with valid coordinates.
+     * Waypoints should be extracted, but the user-note contains the following text, so expected size is 3 with different user-notes.
+     */
     public final void testUpdateWaypointsFromNoteSingleLine() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.888 E007 03.444"), "", "", "Test N51 13.233 E007 03.444 Test N51 09.123 E007 03.444", WaypointType.OWN));
@@ -78,6 +86,10 @@ public class GeocacheTest extends CGeoTestCase {
         assertWaypointsParsed("Test N51 13.888 E007 03.444 Test N51 13.233 E007 03.444 Test N51 09.123 E007 03.444",  wpList);
     }
 
+    /**
+     * Waypoints in different lines with valid coordinates.
+     * Waypoints should be extracted, the user-note does not contain the following text, so expected size is 3 with empty user-notes.
+     */
     public final void testUpdateWaypointsFromNote() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(new Waypoint("", new Geopoint("N51 13.888 E007 03.444"), "", "", "", WaypointType.OWN));
@@ -97,6 +109,10 @@ public class GeocacheTest extends CGeoTestCase {
         assertWaypointsParsed("Test N51 13.888 E007 03.444 \nTest N51 13.233 E007 03.444 \nTest N51 13.888 E007 03.444", wpList);
     }
 
+    /**
+     * The second waypoint has empty coordinates.
+     * Waypoint with empty coordinates should be created, so expected size is 2.
+     */
     public final void testUpdateWaypointsWithEmptyCoordsFromNote() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(new Waypoint("", new Geopoint("N51 13.888 E007 03.444"), "", "", "", WaypointType.OWN));
