@@ -1590,6 +1590,7 @@ public class Geocache implements IWaypoint {
      *            the id of the waypoint to look for
      * @return waypoint or {@code null}
      */
+    @Nullable
     public Waypoint getWaypointById(final int id) {
         for (final Waypoint waypoint : waypoints) {
             if (waypoint.getId() == id) {
@@ -1606,6 +1607,7 @@ public class Geocache implements IWaypoint {
      *            the prefix of the waypoint to look for
      * @return waypoint or {@code null}
      */
+    @Nullable
     public Waypoint getWaypointByPrefix(final String prefix) {
         for (final Waypoint waypoint : waypoints) {
             if (waypoint.getPrefix().equals(prefix)) {
@@ -1652,12 +1654,13 @@ public class Geocache implements IWaypoint {
         return changed;
     }
 
-    private Waypoint findWaypoint(final Waypoint searchWp) {
+    @Nullable
+    private Waypoint findWaypoint(@NonNull final Waypoint searchWp) {
         //try to match prefix
-        final String prefix = searchWp.getPrefix();
-        if (null != prefix) {
+        final String searchWpPrefix = searchWp.getPrefix();
+        if (!StringUtils.isBlank(searchWpPrefix)) {
             for (final Waypoint waypoint : waypoints) {
-                if (!StringUtils.isBlank(prefix) && !StringUtils.isBlank(waypoint.getPrefix()) && prefix.equals(waypoint.getPrefix())) {
+                if (searchWpPrefix.equals(waypoint.getPrefix())) {
                     return waypoint;
                 }
             }
@@ -1674,14 +1677,14 @@ public class Geocache implements IWaypoint {
                     return waypoint;
                 }
             }
-            return null;
         }
 
-        //try to match name if prefix and coords are null
+        //try to match name if prefix is empty and coords are not equal
         final String searchWpName = searchWp.getName();
+        final String searchWpType = searchWp.getWaypointType().getL10n();
         if (!StringUtils.isBlank(searchWpName)) {
             for (final Waypoint waypoint : waypoints) {
-                if (searchWpName.equals(waypoint.getName()) && searchWp.getWaypointType().getL10n().equals(waypoint.getWaypointType().getL10n())) {
+                if (searchWpName.equals(waypoint.getName()) && searchWpType.equals(waypoint.getWaypointType().getL10n())) {
                     return waypoint;
                 }
             }
@@ -2101,6 +2104,7 @@ public class Geocache implements IWaypoint {
         ActivityMixin.showToast(activity, StringUtils.defaultIfBlank(hint, activity.getString(R.string.cache_hint_not_available)));
     }
 
+    @NonNull
     public GeoitemRef getGeoitemRef() {
         return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().markerId);
     }
