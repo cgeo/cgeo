@@ -68,6 +68,7 @@ public final class SystemInformation {
             .append("\nDevice:")
             .append("\n-------")
             .append("\n- Device type: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
+            .append("\n- Available processors: ").append(Runtime.getRuntime().availableProcessors())
             .append("\n- Android version: ").append(VERSION.RELEASE)
             .append("\n- Android build: ").append(Build.DISPLAY)
             .append("\n- Sailfish OS detected: ").append(EnvironmentUtils.isSailfishOs());
@@ -94,6 +95,7 @@ public final class SystemInformation {
             .append("\n- System date format: ").append(Formatter.getShortDateFormat())
             .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
             .append("\n- Live map mode: ").append(Settings.isLiveMap())
+            .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads())
             .append("\n- Global filter: ").append(Settings.getCacheType().pattern)
             .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
             .append("\n- Routing mode: ").append(context.getString(Settings.getRoutingMode().infoResId));
