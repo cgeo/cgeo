@@ -837,8 +837,12 @@ public class Settings {
         return getInt(prefKeyId, getKeyInt(defaultValueKeyId));
     }
 
+    public static boolean hasOSMMultiThreading() {
+        return getBoolean(R.string.pref_map_osm_multithreaded, false);
+    }
+
     public static int getMapOsmThreads() {
-        return getBoolean(R.string.pref_map_osm_multithreaded, true) ? Math.max(1, getInt(R.string.pref_map_osm_threads, Math.min(Runtime.getRuntime().availableProcessors() + 1, 4))) : 1;
+        return hasOSMMultiThreading() ? Math.max(1, getInt(R.string.pref_map_osm_threads, Math.min(Runtime.getRuntime().availableProcessors() + 1, 4))) : 1;
     }
 
     public static int getCompactIconMode() {
