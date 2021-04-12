@@ -357,7 +357,7 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.ggz" />
             </intent-filter>
 
-            <!-- intent filter for ZIP files -->
+            <!-- intent filter for local ZIP / GPX files -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -374,6 +374,7 @@
                 <data android:mimeType="application/x-zip" />
                 <data android:mimeType="application/octet-stream" />
                 <data android:mimeType="application/gpx" />
+                <data android:mimeType="application/gpx+xml" />
                 <data android:pathPattern=".*\\.gpx" />
                 <data android:pathPattern=".*\\.zip" />
                 <data android:pathPattern=".*\\.ggz" />
