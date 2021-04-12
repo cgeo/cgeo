@@ -4,6 +4,8 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -94,10 +96,12 @@ public class WaypointParserTest {
         assertWaypoint(waypoint, expectedWaypoint.getName(), expectedWaypoint.getCoords(), expectedWaypoint.getWaypointType(), expectedWaypoint.getUserNote());
     }
 
-    private static void assertWaypoint(final Waypoint waypoint, final String name, final Geopoint geopoint, final WaypointType wpType, final String userNote) {
+    private static void assertWaypoint(final Waypoint waypoint, final String name, final Geopoint geopoint, final WaypointType wpType, @Nullable final String userNote) {
         assertWaypoint(waypoint, name, geopoint);
         assertThat(waypoint.getWaypointType()).isEqualTo(wpType);
-        assertThat(waypoint.getUserNote()).isEqualTo(userNote);
+        if (null != userNote) {
+           assertThat(waypoint.getUserNote()).isEqualTo(userNote);
+        }
     }
 
 
@@ -263,6 +267,23 @@ public class WaypointParserTest {
         assertThat(calcState.plainLon).isEqualTo("E 9° (A-B).(2*D)EF'");
         assertThat(calcState.equations).hasSize(6);
         assertThat(calcState.freeVariables).hasSize(2);
+    }
+
+    /**
+     * Waypoint with formula with lower case letters and variables should be created without formula
+     * - only upper case letters are supported
+     */
+    @Test
+    public void testParseWaypointWithFormulaWithLowerCase() {
+        final String note = WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° a.b(C+D)  E 9° (A-B).(2*D)EF |A = a+b||B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp = iterator.next();
+        assertWaypoint(wp, "Prefix 1", null, WaypointType.WAYPOINT, null);
+        final String calcStateJson = wp.getCalcStateJson();
+        assertThat(calcStateJson).isNull();
     }
 
     /**

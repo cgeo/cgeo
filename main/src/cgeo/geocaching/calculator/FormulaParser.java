@@ -198,7 +198,7 @@ public final class FormulaParser {
      */
     private static final class MinDecFormulaParser extends AbstractLatLonFormulaParser {
 
-        private static final String COORD_FORMULA_PATTERN_STRING = "[\\[\\]\\(\\){}" + CalculationUtils.VALID_OPERATOR_PATTERN + "A-Za-z\\d]+";
+        private static final String COORD_FORMULA_PATTERN_STRING = "[\\[\\]\\(\\){}" + CalculationUtils.VALID_OPERATOR_PATTERN + "A-Z\\d]+";
         //                                                        (    2    )                                      (      3      )
         private static final String STRING_MINDEC = "\\s*(" + COORD_FORMULA_PATTERN_STRING + ")[°\\s]+(" + COORD_FORMULA_PATTERN_STRING + "\\." + COORD_FORMULA_PATTERN_STRING + ")['′\\s]?";
 
@@ -208,9 +208,9 @@ public final class FormulaParser {
         //                                        (   1  )    (    2    )    (      3      )
         private static final String STRING_LON = "([WEO]?)" + STRING_MINDEC;
         private static final String STRING_SEPARATOR = "[^\\w'′\"″°." + WPC_DELIM + "]*";
-        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
-        private static final Pattern PATTERN_LON = Pattern.compile("\\b" + STRING_LON, Pattern.CASE_INSENSITIVE);
-        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT);
+        private static final Pattern PATTERN_LON = Pattern.compile("\\b" + STRING_LON);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON);
 
         MinDecFormulaParser() {
             super(PATTERN_LAT, PATTERN_LON, PATTERN_LATLON);
