@@ -56,17 +56,17 @@ public class ProximityPreference extends SeekbarPreference {
 
     @Override
     protected String valueToShownValue(final int value) {
-        return Settings.useImperialUnits() ? String.format(Locale.getDefault(), "%.2f", value / ((highRes ? 1 : 1000) * IConversion.MILES_TO_KILOMETER)) : String.valueOf(value);
+        return Settings.useImperialUnits() ? String.format(Locale.getDefault(), "%.2f", value / (highRes ? IConversion.FEET_TO_METER : IConversion.MILES_TO_KILOMETER)) : String.valueOf(value);
     }
 
     @Override
     protected int shownValueToValue(final float shownValue) {
-        return Math.round(Settings.useImperialUnits() ? shownValue * (highRes ? 1 : 1000) * IConversion.MILES_TO_KILOMETER : shownValue);
+        return Math.round(Settings.useImperialUnits() ? shownValue * (highRes ? IConversion.FEET_TO_METER : IConversion.MILES_TO_KILOMETER) : shownValue);
     }
 
     @Override
     protected String getValueString(final int progress) {
-        return valueToShownValue(progressToValue(progress)) + (Settings.useImperialUnits() ? " mi" : (highRes ? " m" : " km"));
+        return valueToShownValue(progressToValue(progress)) + (Settings.useImperialUnits() ? (highRes ? " ft" : " mi") : (highRes ? " m" : " km"));
     }
 
 }
