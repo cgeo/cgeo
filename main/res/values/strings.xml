@@ -229,7 +229,6 @@
     <string name="err_log_post_missing_coordinates">Coordinates are missing.</string>
     <string name="err_log_post_failed">It seems that your log was not posted. Please check it on the cache originating website.</string>
     <string name="err_log_post_failed_ec">It seems that your log was not posted. Please check it on Extremcaching.com.</string>
-    <string name="err_log_post_failed_lc">It seems that your log was not posted. Please check it on labs.geocaching.com.</string>
     <string name="err_log_post_failed_gk">It seems that your log was not posted. Please check it on GeoKrety.org.</string>
     <string name="err_logimage_post_failed">It seems that your log image was not uploaded. Please check it on the cache originating website.</string>
     <string name="err_parse_lat">c:geo can\'t parse latitude.</string>
@@ -534,8 +533,8 @@
     <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">Authorize c:geo with geocaching.com to search for caches.</string>
     <string name="settings_ec_description">Authorize c:geo with extremcaching.com to search for caches and access/filter your found caches.</string>
-    <string name="settings_lc_description">Authorize c:geo with labs.geocaching.com to search for caches and access/filter your found caches.</string>
     <string name="settings_su_description">Authorize c:geo with geocaching.su to search for caches.</string>
+    <string name="settings_lc_description">Include Adventure Lab caches on the map.</string>
     <string name="settings_activate_oc">Activate</string>
     <string name="init_summary_oc_de">Load caches from opencaching.de</string>
     <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>
@@ -1226,6 +1225,8 @@
     <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>
     <string name="cache_chirpwolf_start">Open Chirp Wolf to read the chirp data for this cache</string>
     <string name="cache_chirpwolf_install">Install Chirp Wolf to be able to read chirp data</string>
+    <string name="cache_alc_start">Open Adventure Lab to start playing this adventure</string>
+    <string name="cache_alc_install">Install Adventure Lab player to play this adventure</string>
 
     <string name="context_share_as_text">Share text</string>
     <string name="context_share_as_link">Share link</string>
@@ -1493,6 +1494,7 @@
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">BRouter provides offline routing. If it is installed and has the necessary files downloaded, c:geo will automatically show a route to the cache on the internal map.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf allows you to read the data from ANT+/Garmin chirp tags, which is needed for ANT+/chirp geocaches.</string>
+    <string name="helper_alc_description">Adventure Lab Player app for your phone or tablet.</string>
 
     <!-- export -->
     <string name="share_export">Share / Export</string>

@@ -714,10 +714,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 setAuthTitle(prefKeyId, ECConnector.getInstance());
                 setConnectedUsernameTitle(prefKeyId, ECConnector.getInstance());
                 break;
-            case R.string.pref_fakekey_lc_authorization:
-                setAuthTitle(prefKeyId, LCConnector.getInstance());
-                setConnectedUsernameTitle(prefKeyId, LCConnector.getInstance());
-                break;
             case R.string.pref_fakekey_su_authorization:
                 setSuAuthTitle();
                 setConnectedTitle(prefKeyId, Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret));
@@ -844,11 +840,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 setConnectedUsernameTitle(requestCode, ECConnector.getInstance());
                 redrawScreen(R.string.preference_screen_ec);
                 break;
-            case R.string.pref_fakekey_lc_authorization:
-                setAuthTitle(requestCode, LCConnector.getInstance());
-                setConnectedUsernameTitle(requestCode, LCConnector.getInstance());
-                redrawScreen(R.string.preference_screen_lc);
-                break;
             case R.string.pref_fakekey_gcvote_authorization:
                 setAuthTitle(requestCode, GCVote.getInstance());
                 setConnectedUsernameTitle(requestCode, GCVote.getInstance());
@@ -925,6 +916,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
             } else if (isPreference(preference, R.string.pref_connectorLCActive)) {
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_lc)).setSummary(summary);
+                setResult(RESTART_NEEDED);
             } else if (isPreference(preference, R.string.pref_connectorSUActive)) {
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_su)).setSummary(summary);
             }
