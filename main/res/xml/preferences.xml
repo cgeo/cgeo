@@ -338,10 +338,6 @@
                         android:dependency="@string/pref_connectorLCActive"
                         android:layout="@layout/text_preference"
                         android:text="@string/settings_lc_description" />
-                    <cgeo.geocaching.settings.CredentialsPreference
-                        android:dependency="@string/pref_connectorLCActive"
-                        android:summary="@string/auth_unconnected"
-                        android:key="@string/pref_fakekey_lc_authorization" />
                 </PreferenceCategory>
 
                 <PreferenceCategory android:title="@string/settings_information"

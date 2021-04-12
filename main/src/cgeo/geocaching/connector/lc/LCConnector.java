@@ -3,22 +3,15 @@ package cgeo.geocaching.connector.lc;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
-import cgeo.geocaching.connector.capability.ICredentials;
-import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
-import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
-
-import android.app.Activity;
-import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +21,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin, ICredentials {
+public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort {
 
     @NonNull
     private static final String CACHE_URL = "https://adventurelab.page.link/";
@@ -38,9 +31,6 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
      */
     @NonNull
     private static final Pattern PATTERN_LC_CODE = Pattern.compile("LC[-\\w]+", Pattern.CASE_INSENSITIVE);
-
-    @NonNull
-    private final LCLogin lcLogin = LCLogin.getInstance();
 
     private LCConnector() {
         // singleton
@@ -89,10 +79,10 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler) {
-        Log.e("searchByGeocode: geocode = " + geocode);
         if (geocode == null) {
             return null;
         }
+        Log.d("_LC searchByGeocode: geocode = " + geocode);
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
         final Geocache cache = LCApi.searchByGeocode(geocode);
         return cache != null ? new SearchResult(cache) : null;
@@ -127,40 +117,8 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isActive() {
+        Log.d("_LC isActive: " + Settings.isLCConnectorActive());
         return Settings.isLCConnectorActive();
-    }
-
-    @Override
-    public boolean login(final Handler handler, @Nullable final Activity fromActivity) {
-        // login
-        final StatusCode status = lcLogin.login();
-
-        return status == StatusCode.NO_ERROR;
-    }
-
-    @Override
-    public String getUserName() {
-        return lcLogin.getActualUserName();
-    }
-
-    @Override
-    public Credentials getCredentials() {
-        return Settings.getCredentials(R.string.pref_lcusername, R.string.pref_lcpassword);
-    }
-
-    @Override
-    public int getCachesFound() {
-        return lcLogin.getActualCachesFound();
-    }
-
-    @Override
-    public String getLoginStatusString() {
-        return lcLogin.getActualStatus();
-    }
-
-    @Override
-    public boolean isLoggedIn() {
-        return lcLogin.isActualLoginStatus();
     }
 
     @Override
@@ -175,21 +133,6 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public int getUsernamePreferenceKey() {
-        return R.string.pref_lcusername;
-    }
-
-    @Override
-    public int getPasswordPreferenceKey() {
-        return R.string.pref_lcpassword;
-    }
-
-    @Override
-    public int getAvatarPreferenceKey() {
-        return R.string.pref_lc_avatar;
-    }
-
-    @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
         final String geocode = "LC" + StringUtils.substringAfter(url, "https://adventurelab.page.link/");
@@ -197,12 +140,6 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
             return geocode;
         }
         return super.getGeocodeFromUrl(url);
-    }
-
-    @Override
-    @NonNull
-    public String getCreateAccountUrl() {
-        return "https://www.geocaching.com/account/join";
     }
 }
 

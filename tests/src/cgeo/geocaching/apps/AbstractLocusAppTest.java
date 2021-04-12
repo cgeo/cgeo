@@ -19,7 +19,7 @@ public class AbstractLocusAppTest {
     // should detect new CacheSize
     public void testToLocusTypeCount() {
 
-        assertEquals(22, CacheType.values().length);
+        assertEquals(23, CacheType.values().length);
     }
 
     @Test

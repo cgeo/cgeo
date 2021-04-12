@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.lc;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
-import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -11,6 +10,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -36,14 +36,11 @@ import okhttp3.Response;
 
 final class LCApi {
 
-    private final static Boolean minimumFunction = true;
+    private static final Boolean minimalFunction = true;
 
     private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd", Locale.getDefault());
     @NonNull
     private static final String API_HOST = "https://labs-api.geocaching.com/Api/Adventures/";
-
-    @NonNull
-    private static final LCLogin lcLogin = LCLogin.getInstance();
 
     private LCApi() {
         // utility class with static methods
@@ -51,6 +48,9 @@ final class LCApi {
 
     @Nullable
     protected static Geocache searchByGeocode(final String geocode) {
+        if (!Settings.isGCPremiumMember()) {
+            return null;
+        }
         try {
             final Response response = apiRequest(geocode.substring(2)).blockingGet();
             return importCacheFromJSON(response);
@@ -62,7 +62,7 @@ final class LCApi {
     @NonNull
     protected static Collection<Geocache> searchByBBox(final Viewport viewport) {
 
-        if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
+        if (!Settings.isGCPremiumMember() || viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
             return Collections.emptyList();
         }
 
@@ -74,6 +74,9 @@ final class LCApi {
 
     @NonNull
     protected static Collection<Geocache> searchByCenter(final Geopoint center) {
+        if (!Settings.isGCPremiumMember()) {
+            return Collections.emptyList();
+        }
         final Parameters params = new Parameters("skip", "0");
         params.add("take", "100");
         params.add("radiusMeters", "10000");
@@ -104,7 +107,7 @@ final class LCApi {
 
         // retry at most one time
         return response.flatMap((Function<Response, Single<Response>>) response1 -> {
-            if (!isRetry && response1.code() == 403 && lcLogin.login() == StatusCode.NO_ERROR) {
+            if (!isRetry && response1.code() == 403) {
                 return apiRequest(uri, params, true);
             }
             return Single.just(response1);
@@ -115,10 +118,9 @@ final class LCApi {
     private static Geocache importCacheFromJSON(final Response response) {
         try {
             final JsonNode json = JsonUtils.reader.readTree(Network.getResponseData(response));
-            //Log.e(json.toPrettyString());
             return parseCacheDetail(json);
         } catch (final Exception e) {
-            Log.w("importCacheFromJSON", e);
+            Log.w("_LC importCacheFromJSON", e);
             return null;
         }
     }
@@ -133,7 +135,6 @@ final class LCApi {
             }
             final List<Geocache> caches = new ArrayList<>(items.size());
             for (final JsonNode node : items) {
-                //Log.e(node.toPrettyString());
                 final Geocache cache = parseCache(node);
                 if (cache != null) {
                     caches.add(cache);
@@ -141,7 +142,7 @@ final class LCApi {
             }
             return caches;
         } catch (final Exception e) {
-            Log.w("importCachesFromJSON", e);
+            Log.w("_LC importCachesFromJSON", e);
             return Collections.emptyList();
         }
     }
@@ -168,7 +169,7 @@ final class LCApi {
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
-            Log.e("LCApi.parseCache", e);
+            Log.e("_LC LCApi.parseCache", e);
             return null;
         }
     }
@@ -191,7 +192,7 @@ final class LCApi {
             cache.setGeocode("LC" + uuid);
             cache.setCacheId(id);
             cache.setName(response.get("Title").asText());
-            if (minimumFunction) {
+            if (minimalFunction) {
                 cache.setDescription("");
             } else {
                 cache.setDescription("<img src=\"" + ilink + "\" </img><p><p>" + desc);
@@ -210,19 +211,20 @@ final class LCApi {
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             return cache;
         } catch (final NullPointerException e) {
-            Log.e("LCApi.parseCache", e);
+            Log.e("_LC LCApi.parseCache", e);
             return null;
         }
     }
 
     @Nullable
     private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson) {
-        if (minimumFunction) return null;
+        if (minimalFunction) {
+            return null;
+        }
         List<Waypoint> result = null;
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
         for (final JsonNode wptResponse: wptsJson) {
-            //Log.e(wptResponse.toPrettyString());
             stageCounter++;
             try {
                 final Waypoint wpt = new Waypoint(wptResponse.get("Title").asText(), WaypointType.PUZZLE, false);
@@ -253,7 +255,7 @@ final class LCApi {
 
                 result.add(wpt);
             } catch (final NullPointerException e) {
-                Log.e("LCApi.parseWaypoints", e);
+                Log.e("_LC LCApi.parseWaypoints", e);
             }
         }
         return result;

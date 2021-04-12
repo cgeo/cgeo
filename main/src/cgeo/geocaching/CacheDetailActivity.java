@@ -1238,9 +1238,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox();
 
-            // WhereYouGo and ChirpWolf
+            // WhereYouGo, ChirpWolf and Adventure Lab
             updateWhereYouGoBox();
             updateChirpWolfBox();
+            updateALCBox();
 
             // favorite points
             final ImageButton buttonFavPointAdd = view.findViewById(R.id.add_to_favpoint);
@@ -1577,17 +1578,39 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final LinearLayout boxCW = view.findViewById(R.id.chirp_box);
             boxCW.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
             final TextView msgCW = view.findViewById(R.id.chirp_text);
-            msgCW.setText(null != chirpWolf ? R.string.cache_chirpwolf_start : R.string.cache_chirpwolf_install);
+            msgCW.setText(chirpWolf != null ? R.string.cache_chirpwolf_start : R.string.cache_chirpwolf_install);
             if (isEnabled) {
                 final ImageButton buttonCW = view.findViewById(R.id.send_to_chirp);
                 buttonCW.setOnClickListener(v -> {
                     // re-check installation state, might have changed since creating the view
                     final Intent chirpWolf2 = ProcessUtils.getLaunchIntent(getString(R.string.package_chirpwolf));
-                    if (null != chirpWolf2) {
+                    if (chirpWolf2 != null) {
                         chirpWolf2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         CacheDetailActivity.this.startActivity(chirpWolf2);
                     } else {
                         ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.package_chirpwolf));
+                    }
+                });
+            }
+        }
+
+        private void updateALCBox() {
+            final boolean isEnabled = cache.getType() == CacheType.ADVLAB && StringUtils.isNotEmpty(cache.getUrl());
+            final Intent alc = ProcessUtils.getLaunchIntent(getString(R.string.package_alc));
+            final LinearLayout boxCW = view.findViewById(R.id.alc_box);
+            boxCW.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
+            final TextView msgCW = view.findViewById(R.id.alc_text);
+            msgCW.setText(alc != null ? R.string.cache_alc_start : R.string.cache_alc_install);
+            if (isEnabled) {
+                final ImageButton buttonALC = view.findViewById(R.id.send_to_alc);
+                buttonALC.setOnClickListener(v -> {
+                    // re-check installation state, might have changed since creating the view
+                    if (alc != null) {
+                      final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(cache.getUrl()));
+                      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                      CacheDetailActivity.this.startActivity(intent);
+                    } else {
+                        ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.package_alc));
                     }
                 });
             }
