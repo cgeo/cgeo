@@ -337,6 +337,8 @@
     <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
     <string name="caches_select_invert">Invertera valda</string>
     <string name="caches_nearby">Nära</string>
+    <string name="caches_remove_all">Ta bort alla från listan</string>
+    <string name="caches_remove_selected">Ta bort vald från listan</string>
     <string name="caches_remove_all_completely">Ta bort alla från enheten</string>
     <string name="caches_remove_selected_completely">Ta bort vald från enhet</string>
     <string name="caches_delete_events">Ta bort gamla event</string>
@@ -566,6 +568,7 @@
     <string name="init_brouterThreshold">Beräkna rutt</string>
     <string name="init_brouterThreshold_description">Maximalt avstånd upp till vilket BRouter hjälpappen (om installerad) kommer att beräkna en rutt.</string>
     <string name="init_brouterShowBothDistances">Visa rakt avstånd</string>
+    <string name="init_brouterAutoTileDownloads_description">Erbjuder automatiskt att ladda ner saknade routing-data.</string>
     <string name="brouter_recalculating">Beräknar rutt i bakgrunden…</string>
     <string name="init_summary_brouterShowBothDistances">Om rutten är aktiv: Visa den raka sträckan utöver den beräknade ruttlängden.</string>
     <string name="init_bigSmileysOnMap">Stora ikoner för loggade cacher</string>
@@ -646,6 +649,8 @@
     <string name="init_backup_settings_restore">Återställ inställningar</string>
     <string name="settings_readingerror">Fel vid läsning av inställningar</string>
     <string name="settings_restart">c:geo måste startas om nu för att få igång laddade inställningar</string>
+    <string name="settings_folder_changed">Mappen%1$s\" kommer att ändras till \"%2$s\" under återställning.\n\nTryck på \"%4$s\" för att fortsätta. I så fall blir du ombedd att ge c:geo åtkomst till mappen.\n\nTryck på \"%3$s\" för att behålla den aktuella mappinställningen istället.</string>
+    <string name="settings_file_changed">\"%1$s\" kommer att ändras till \"%2$s\" under återställning.\n\nTryck på \"%4$s\" för att fortsätta. I så fall blir du ombedd att ge c:geo åtkomst till den filen.\n\nTryck på \"%3$s\" för att behålla den aktuella inställningen istället.</string>
     <string name="settings_info_offline_maps_title">Info om Offline-kartor</string>
     <string name="settings_info_offline_maps">c:geo stöder kartor för offline-användning. Du kan få kartor från olika leverantörer eller till och med skapa egna kartor (från OSM-data). Först måste du välja den mapp där offline-kartor ska lagras.</string>
     <string name="settings_info_themes_title">Info om kartteman</string>
@@ -1017,6 +1022,10 @@
     <string name="menu_caches">Hantera cacher</string>
     <string name="cache_menu_event">Lägg till i kalender</string>
     <string name="cache_menu_extract_waypoints">Extrahera punkter</string>
+    <string name="cache_menu_set_found">Ange som hittad</string>
+    <string name="cache_menu_set_DNF">Ange som inte hittad</string>
+    <string name="cache_menu_reset_foundstate">Återställ hittad-status</string>
+    <string name="cache_foundstate_updated">Hittad-status uppdaterad</string>
     <string name="cache_menu_set_cache_icon">Ange cache-ikon</string>
     <string name="cache_icon_updated">Cache-ikonen uppdaterad</string>
     <string name="cache_menu_details">Detaljer</string>
@@ -1203,7 +1212,12 @@
     <string name="map_showwp_parking">Parkeringwaypoints</string>
     <string name="map_showwp_visited">Besökta waypoints</string>
     <string name="map_show_track">Visa GPX-spår/rutt</string>
+    <string name="init_renderthemefolder_synctolocal">Synkronisera teman</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Detta synkroniserar dina teman till en privat mapp för appen för att förbättra kartvisarens öppningsprestanda på bekostnad av visst lagringsutrymme.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av mapp med teman</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Detta synkroniserar kontinuerligt innehållet i mapptemamappen till en privat mapp för apen för snabbare filåtkomst. Se till att din temamapp bara innehåller dina teman men inga ytterligare (stora) data innan du aktiverar den här funktionen.\n\nDin karttemamapp \'%1$s\' har för närvarande %2$s, %3$s och en storlek på %4$s.\n\nVill du aktivera synkronisering av mappar?</string>
+    <string name="onetime_mapthemefixslow_title">Fixa rendering av långsamt karttema</string>
+    <string name="onetime_mapthemefixslow_message">Arbeta med icke-zippade kartteman kan sänka prestanda när kartvisaren öppnas. Du kan zippa eller synkronisera dina teman för att få snabbare prestanda och minska fördröjningen vid start av kartan.</string>
     <string name="init_hidewp">Dölj vägpunkter</string>
     <string name="init_summary_hidewp_original">Dölj ursprungliga vägpunkter på kartan</string>
     <string name="init_summary_hidewp_parking">Dölj parkerings vägpunkter på kartan</string>
@@ -1757,6 +1771,8 @@
     <string name="map_export_individual_route">Sortera individuell rutt</string>
     <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
+    <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>
+    <string name="map_disable_autotarget_individual_route">\"Ange ruttstart som mål\" inaktiverad</string>
     <string name="map_clear_manual_targets">Rensa manuella mål</string>
     <string name="map_manual_targets_cleared">Manuella mål rensade</string>
     <string name="map_clear_individual_route">Rensa enskild rutt</string>
@@ -1872,6 +1888,7 @@
     <string name="wizard_permissions_intro">c:geo behöver vissa behörigheter på din enhet för att fungera korrekt.\nJag kommer att förklara mer detaljer i nästa steg.</string>
     <string name="wizard_permissions_folder_title">Ange mapp: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo behöver en lokal mapp för att lagra data som GPX-filer, säkerhetskopior, fältanteckningar och loggfiler. Som standard lagras dessa filer i mappar under en så kallad \"basmapp\". Välj eller skapa en sådan mapp i nästa steg.\n\nOm du uppgraderade c:geo från en tidigare version, välj den befintliga mappen \"cgeo\" på rotnivån på din enhets lagring.\nTips: Du kan behöva visa enhetens interna lagring först i filväljaren som visas härnäst.</string>
+    <string name="wizard_broutertilesfolder_request_explanation">För att använda den integrerade funktionen för automatisk nedladdning och uppdatering av ruttdata måste du ställa in en mapp för ruttdata.</string>
     <string name="wizard_platforms_title">Konfigurera tjänster</string>
     <string name="wizard_platforms_intro">För att hitta geocacher med c:geo behöver du ett konto för en geocachingtjänst som stöds av c:geo.\nVälj önskad tjänst nedan för att antingen logga in med ditt befintliga konto eller skapa ett nytt konto.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
