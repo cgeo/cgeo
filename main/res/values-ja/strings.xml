@@ -1212,7 +1212,7 @@
     <string name="map_showwp_visited">ウェイポイント(訪問済み)</string>
     <string name="map_show_track">GPXトラック/ルートを表示</string>
     <string name="init_renderthemefolder_synctolocal">地図テーマフォルダの同期</string>
-    <string name="init_summary_renderthemefolder_synctolocal">少しストレージを使用しますが、地図テーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます。</string>
+    <string name="init_summary_renderthemefolder_synctolocal">地図テーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます(ストレージを少し余分に使用します)</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">地図テーマフォルダの同期</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">地図テーマフォルダをアプリ専用フォルダに常に同期します。ファイルのアクセス速度が向上します。同期する前に、地図テーマフォルダに地図テーマファイル以外の(大きなサイズの)ファイルが含まれてないことを確認してください。\n\n地図テーマフォルダは現在「%1$s」に設定されます。%2$sと%3$sが含まれており、合計サイズは%4$sです。\n\nフォルダを同期しますか?</string>
     <string name="onetime_mapthemefixslow_title">地図テーマ使用時の表示の遅延について</string>
