@@ -16,7 +16,7 @@ Refer to <a href="https://faq.cgeo.org/#SAF">this FAQ entry</a> for more informa
 <li>Change: Merged \"show direction\" and \"Routing mode\" settings (map quick settings popup)</li>
 <li>New: Added OpenAndroMaps to map downloader (for offline map files and map themes). Alternatively you can also use the \"Install others\" links on openandromaps.org website</li>
 <li>New: Added Freizeitkarte to map downloader (for offline map files and map themes)</li>
-<li>New: Multi-threaded rendering for OpenStreetMap maps (optional, default is on)</li>
+<li>New: Multi-threaded rendering for OpenStreetMap maps (optional)</li>
 <li>New: Support for zipped theme files - you do not have to unzip map theme files any longer, just put the zip file into your theme folder</li>
 <li>Fix: Respect \"show circles\" setting when switching from OSM map to Google map</li>
 <li>Fix: Reset circle color in OSM maps on color change in settings</li>
