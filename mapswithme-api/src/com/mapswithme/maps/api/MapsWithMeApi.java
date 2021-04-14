@@ -41,6 +41,9 @@ public final class MapsWithMeApi {
    */
   public static final double ZOOM_MIN = 1;
 
+  private MapsWithMeApi() {
+    // Utility class, not to be instantiated
+  }
 
   public static void showMapsWithMeUrl(Activity caller, PendingIntent pendingIntent, double zoomLevel, String url) {
     final Uri uri = Uri.parse(url);

@@ -50,5 +50,7 @@ public class Const {
   static final int API_VERSION = 2;
   static final String CALLBACK_PREFIX = "mapswithme.client.";
 
-  private Const() {}
+  private Const() {
+      // this class shall not have instances
+  }
 }
