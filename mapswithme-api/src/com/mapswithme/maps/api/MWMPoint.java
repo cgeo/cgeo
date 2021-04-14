@@ -39,18 +39,18 @@ public final class MWMPoint implements Serializable {
   private String mId;
   private Style mStyle;
 
-  public MWMPoint(double lat, double lon, String name) {
+  public MWMPoint(final double lat, final double lon, final String name) {
     this(lat, lon, name, null);
   }
 
-  public MWMPoint(double lat, double lon, String name, String id) {
+  public MWMPoint(final double lat, final double lon, final String name, final String id) {
     this.mLat = lat;
     this.mLon = lon;
     this.mName = name;
     this.mId = id;
   }
 
-  public MWMPoint(double lat, double lon, String name, String id, Style style) {
+  public MWMPoint(final double lat, final double lon, final String name, final String id, final Style style) {
     this.mLat = lat;
     this.mLon = lon;
     this.mName = name;
@@ -73,7 +73,7 @@ public final class MWMPoint implements Serializable {
    * it's purpose to help clients code to associate point with domain objects of their application.
    * @param id
    */
-  public void setId(String id) {
+  public void setId(final String id) {
       mId = id;
   }
 
@@ -82,7 +82,7 @@ public final class MWMPoint implements Serializable {
    *
    * @param style Style to use, or null for default (violet circle).
    */
-  public void setStyle(Style style) {
+  public void setStyle(final Style style) {
     this.mStyle = style;
   }
 
@@ -113,7 +113,7 @@ public final class MWMPoint implements Serializable {
    *  equal if they have they lat, lon, and name attributes equal.
    */
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj)
       return true;
     if (obj == null)
@@ -144,7 +144,7 @@ public final class MWMPoint implements Serializable {
 
     private String name;
 
-    Style(String name) {
+    Style(final String name) {
       this.name = name;
     }
 
