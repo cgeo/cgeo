@@ -22,8 +22,7 @@
 ******************************************************************************/
 package com.mapswithme.maps.api;
 
-public class Const
-{
+public class Const {
 
   /* Request extras */
   static final String AUTHORITY = "com.mapswithme.maps.api";

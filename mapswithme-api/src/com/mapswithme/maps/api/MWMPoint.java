@@ -30,8 +30,7 @@ import java.util.Objects;
  * Has its <code>equals()</code> and <code>hashCode()</code> methods overloaded
  * so could be used in Hash(Map/Set/etc) classes.
  */
-public final class MWMPoint implements Serializable
-{
+public final class MWMPoint implements Serializable {
   private static final long serialVersionUID = 1L;
 
   final private double mLat;
@@ -40,21 +39,18 @@ public final class MWMPoint implements Serializable
   private String mId;
   private Style mStyle;
 
-  public MWMPoint(double lat, double lon, String name)
-  {
+  public MWMPoint(double lat, double lon, String name) {
     this(lat, lon, name, null);
   }
 
-  public MWMPoint(double lat, double lon, String name, String id)
-  {
+  public MWMPoint(double lat, double lon, String name, String id) {
     this.mLat = lat;
     this.mLon = lon;
     this.mName = name;
     this.mId = id;
   }
 
-  public MWMPoint(double lat, double lon, String name, String id, Style style)
-  {
+  public MWMPoint(double lat, double lon, String name, String id, Style style) {
     this.mLat = lat;
     this.mLon = lon;
     this.mName = name;
@@ -68,28 +64,30 @@ public final class MWMPoint implements Serializable
   public String getId()        { return mId;    }
   public Style  getStyle()     { return mStyle; }
 
-  public String getStyleForUrl() { return (mStyle == null) ? null : mStyle.getName(); }
+  public String getStyleForUrl() {
+      return mStyle == null ? null : mStyle.getName();
+  }
 
   /**
    * Sets string ID for this point. Internally it is not used to distinguish point,
    * it's purpose to help clients code to associate point with domain objects of their application.
    * @param id
    */
-  public void setId(String id) { mId = id; }
+  public void setId(String id) {
+      mId = id;
+  }
 
   /**
    * Sets the style (appearance) for this point.
    *
    * @param style Style to use, or null for default (violet circle).
    */
-  public void setStyle(Style style)
-  {
+  public void setStyle(Style style) {
     this.mStyle = style;
   }
 
   @Override
-  public String toString()
-  {
+  public String toString() {
     return "MWMPoint [lat=" + mLat +
             ", lon=" + mLon +
             ", name=" + mName +
@@ -98,8 +96,7 @@ public final class MWMPoint implements Serializable
   }
 
   @Override
-  public int hashCode()
-  {
+  public int hashCode() {
     final int prime = 31;
     int result = 1;
     long temp;
@@ -116,8 +113,7 @@ public final class MWMPoint implements Serializable
    *  equal if they have they lat, lon, and name attributes equal.
    */
   @Override
-  public boolean equals(Object obj)
-  {
+  public boolean equals(Object obj) {
     if (this == obj)
       return true;
     if (obj == null)
@@ -136,8 +132,7 @@ public final class MWMPoint implements Serializable
   /**
    * Supported styles for MAPS.ME. Each appears as a small flag of the appropriate colour.
    */
-  public enum Style
-  {
+  public enum Style {
     PlacemarkRed("placemark-red"),
     PlacemarkBlue("placemark-blue"),
     PlacemarkPurple("placemark-purple"),
@@ -149,16 +144,14 @@ public final class MWMPoint implements Serializable
 
     private String name;
 
-    Style(String name)
-    {
+    Style(String name) {
       this.name = name;
     }
 
     /**
      * @return name as it should appear in the MAPS.ME URL.
      */
-    private String getName()
-    {
+    private String getName() {
       return name;
     }
   }

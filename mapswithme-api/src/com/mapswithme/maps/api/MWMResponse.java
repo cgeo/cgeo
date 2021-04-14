@@ -25,8 +25,7 @@ package com.mapswithme.maps.api;
 import android.content.Context;
 import android.content.Intent;
 
-public class MWMResponse
-{
+public class MWMResponse {
   private MWMPoint mPoint;
   private double   mZoomLevel;
 
@@ -39,8 +38,7 @@ public class MWMResponse
   public double   getZoomLevel() { return mZoomLevel; }
 
   @Override
-  public String toString()
-  {
+  public String toString() {
     return "MWMResponse [SelectedPoint=" + mPoint + "]";
   }
 
@@ -51,8 +49,7 @@ public class MWMResponse
    * @param intent
    * @return
    */
-  public static MWMResponse extractFromIntent(Context context, Intent intent)
-  {
+  public static MWMResponse extractFromIntent(Context context, Intent intent) {
     final MWMResponse response = new MWMResponse();
     // parse point
     final double lat = intent.getDoubleExtra(Const.EXTRA_MWM_RESPONSE_POINT_LAT, INVALID_LL);

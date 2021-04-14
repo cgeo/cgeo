@@ -30,8 +30,7 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 
 
-public final class MapsWithMeApi
-{
+public final class MapsWithMeApi {
 
   /**
    * Most detailed level, buildings and trees are seen.
@@ -43,8 +42,7 @@ public final class MapsWithMeApi
   public static final double ZOOM_MIN = 1;
 
 
-  public static void showMapsWithMeUrl(Activity caller, PendingIntent pendingIntent, double zoomLevel, String url)
-  {
+  public static void showMapsWithMeUrl(Activity caller, PendingIntent pendingIntent, double zoomLevel, String url) {
     final Uri uri = Uri.parse(url);
     final String latlon[] = uri.getQueryParameter("ll").split(",");
     final double lat = Double.parseDouble(latlon[0]);
@@ -55,18 +53,15 @@ public final class MapsWithMeApi
     showPointsOnMap(caller, name, zoomLevel, pendingIntent, new MWMPoint(lat, lon, name, id));
   }
 
-  public static void sendRequest(Activity caller, MwmRequest request)
-  {
+  public static void sendRequest(Activity caller, MwmRequest request) {
     final Intent mwmIntent = request.toIntent(caller);
 
-    if (isMapsWithMeInstalled(caller))
-    {
+    if (isMapsWithMeInstalled(caller)) {
       // Match activity for intent
       final ActivityInfo aInfo = caller.getPackageManager().resolveActivity(mwmIntent, 0).activityInfo;
       mwmIntent.setClassName(aInfo.packageName, aInfo.name);
       caller.startActivity(mwmIntent);
-    }
-    else
+    } else
       (new DownloadMapsWithMeDialog(caller)).show();
   }
 
@@ -78,8 +73,7 @@ public final class MapsWithMeApi
    * @param lon
    * @param name
    */
-  public static void showPointOnMap(Activity caller, double lat, double lon, String name)
-  {
+  public static void showPointOnMap(Activity caller, double lat, double lon, String name) {
     showPointsOnMap(caller, (String) null, (PendingIntent) null, new MWMPoint(lat, lon, name));
   }
 
@@ -93,8 +87,7 @@ public final class MapsWithMeApi
    * @param name
    * @param zoomLevel
    */
-  public static void showPointOnMap(Activity caller, double lat, double lon, String name, double zoomLevel)
-  {
+  public static void showPointOnMap(Activity caller, double lat, double lon, String name, double zoomLevel) {
     showPointsOnMap(caller, (String) null, zoomLevel, (PendingIntent) null, new MWMPoint(lat, lon, name));
   }
 
@@ -105,8 +98,7 @@ public final class MapsWithMeApi
    * @param title
    * @param points
    */
-  public static void showPointsOnMap(Activity caller, String title, MWMPoint... points)
-  {
+  public static void showPointsOnMap(Activity caller, String title, MWMPoint... points) {
     showPointsOnMap(caller, title, null, points);
   }
 
@@ -119,14 +111,12 @@ public final class MapsWithMeApi
    * @param pendingIntent
    * @param points
    */
-  public static void showPointsOnMap(Activity caller, String title, PendingIntent pendingIntent, MWMPoint... points)
-  {
+  public static void showPointsOnMap(Activity caller, String title, PendingIntent pendingIntent, MWMPoint... points) {
     showPointsOnMap(caller, title, -1, pendingIntent, points);
   }
 
   private static void showPointsOnMap(Activity caller, String title, double zoomLevel, PendingIntent pendingIntent,
-      MWMPoint... points)
-  {
+      MWMPoint... points) {
     final MwmRequest request = new MwmRequest()
                                     .setTitle(title)
                                     .setZoomLevel(zoomLevel)
@@ -135,8 +125,7 @@ public final class MapsWithMeApi
     sendRequest(caller, request);
   }
 
-  public static void pickPoint(Activity caller, String title, PendingIntent pi)
-  {
+  public static void pickPoint(Activity caller, String title, PendingIntent pi) {
     final MwmRequest request = new MwmRequest()
                                     .setTitle(title)
                                     .setPickPointMode(true)
@@ -151,8 +140,7 @@ public final class MapsWithMeApi
    * @param context
    * @return
    */
-  public static boolean isMapsWithMeInstalled(Context context)
-  {
+  public static boolean isMapsWithMeInstalled(Context context) {
     final Intent intent = new Intent(Const.ACTION_MWM_REQUEST);
     return context.getPackageManager().resolveActivity(intent, 0) != null;
   }
