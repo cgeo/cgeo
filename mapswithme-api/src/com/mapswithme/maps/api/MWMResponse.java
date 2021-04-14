@@ -49,7 +49,7 @@ public class MWMResponse {
    * @param intent
    * @return
    */
-  public static MWMResponse extractFromIntent(Context context, Intent intent) {
+  public static MWMResponse extractFromIntent(final Context context, final Intent intent) {
     final MWMResponse response = new MWMResponse();
     // parse point
     final double lat = intent.getDoubleExtra(Const.EXTRA_MWM_RESPONSE_POINT_LAT, INVALID_LL);

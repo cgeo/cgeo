@@ -33,7 +33,7 @@ import com.mapwithme.maps.api.R;
 
 public class DownloadMapsWithMeDialog extends Dialog implements android.view.View.OnClickListener {
 
-  public DownloadMapsWithMeDialog(Activity activity) {
+  public DownloadMapsWithMeDialog(final Activity activity) {
     super(activity);
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -45,16 +45,16 @@ public class DownloadMapsWithMeDialog extends Dialog implements android.view.Vie
   }
 
 
-  public void onDownloadButtonClicked(String url) {
-    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+  public void onDownloadButtonClicked(final String url) {
+    final Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
     getContext().startActivity(i);
     dismiss();
   }
 
 
   @Override
-  public void onClick(View v) {
-    String url = getContext().getString(R.string.url_pro);
+  public void onClick(final View v) {
+    final String url = getContext().getString(R.string.url_pro);
     onDownloadButtonClicked(url);
   }
 }

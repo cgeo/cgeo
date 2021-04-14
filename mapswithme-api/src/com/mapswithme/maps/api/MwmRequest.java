@@ -24,51 +24,51 @@ public class MwmRequest {
   private String         mCustomButtonName = "";
   // **
 
-  public MwmRequest setCustomButtonName(String buttonName) {
+  public MwmRequest setCustomButtonName(final String buttonName) {
     mCustomButtonName = buttonName != null ? buttonName : "";
     return this;
   }
 
-  public MwmRequest setTitle(String title) {
+  public MwmRequest setTitle(final String title) {
     mTitle = title;
     return this;
   }
 
-  public MwmRequest setPickPointMode(boolean pickPoint) {
+  public MwmRequest setPickPointMode(final boolean pickPoint) {
     mPickPoint = pickPoint;
     return this;
   }
 
-  public MwmRequest addPoint(MWMPoint point) {
+  public MwmRequest addPoint(final MWMPoint point) {
     mPoints.add(point);
     return this;
   }
 
-  public MwmRequest addPoint(double lat, double lon, String name, String id) {
+  public MwmRequest addPoint(final double lat, final double lon, final String name, final String id) {
     return addPoint(new MWMPoint(lat, lon, name, id));
   }
 
-  public MwmRequest setPoints(Collection<MWMPoint> points) {
+  public MwmRequest setPoints(final Collection<MWMPoint> points) {
     mPoints = new ArrayList<MWMPoint>(points);
     return this;
   }
 
-  public MwmRequest setReturnOnBalloonClick(boolean doReturn) {
+  public MwmRequest setReturnOnBalloonClick(final boolean doReturn) {
     mReturnOnBalloonClick = doReturn;
     return this;
   }
 
-  public MwmRequest setZoomLevel(double zoomLevel) {
+  public MwmRequest setZoomLevel(final double zoomLevel) {
     mZoomLevel = zoomLevel;
     return this;
   }
 
-  public MwmRequest setPendingIntent(PendingIntent pi) {
+  public MwmRequest setPendingIntent(final PendingIntent pi) {
     mPendingIntent = pi;
     return this;
   }
 
-  public Intent toIntent(Context context) {
+  public Intent toIntent(final Context context) {
     final Intent mwmIntent = new Intent(Const.ACTION_MWM_REQUEST);
 
     // url
@@ -98,13 +98,13 @@ public class MwmRequest {
    * This method is internal only.
    * Used for compatibility.
    */
-  MwmRequest setPoints(MWMPoint[] points) {
+  MwmRequest setPoints(final MWMPoint[] points) {
     return setPoints(Arrays.asList(points));
   }
 
   // Below are utilities from MapsWithMeApi because we are not "Feature Envy"
 
-  private static StringBuilder createMwmUrl(Context context, String title, double zoomLevel, List<MWMPoint> points) {
+  private static StringBuilder createMwmUrl(final Context context, final String title, final double zoomLevel, final List<MWMPoint> points) {
     final StringBuilder urlBuilder = new StringBuilder("mapswithme://map?");
     // version
     urlBuilder.append("v=").append(Const.API_VERSION).append("&");
@@ -129,26 +129,26 @@ public class MwmRequest {
     return urlBuilder;
   }
 
-  private static String getCallbackAction(Context context) {
+  private static String getCallbackAction(final Context context) {
     return Const.CALLBACK_PREFIX + context.getPackageName();
   }
 
   @SuppressLint("NewApi")
-  private static Intent addCommonExtras(Context context, Intent intent) {
+  private static Intent addCommonExtras(final Context context, final Intent intent) {
     intent.putExtra(Const.EXTRA_CALLER_APP_INFO, context.getApplicationInfo());
     intent.putExtra(Const.EXTRA_API_VERSION, Const.API_VERSION);
 
     return intent;
   }
 
-  private static StringBuilder appendIfNotNull(StringBuilder builder, String key, String value) {
+  private static StringBuilder appendIfNotNull(final StringBuilder builder, final String key, final String value) {
     if (value != null)
       builder.append(key).append("=").append(Uri.encode(value)).append("&");
 
     return builder;
   }
 
-  private static boolean isValidZoomLevel(double zoom) {
+  private static boolean isValidZoomLevel(final double zoom) {
     return zoom >= MapsWithMeApi.ZOOM_MIN && zoom <= MapsWithMeApi.ZOOM_MAX;
   }
 
