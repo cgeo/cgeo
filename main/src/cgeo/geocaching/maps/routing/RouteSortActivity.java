@@ -170,6 +170,7 @@ public class RouteSortActivity extends AbstractActivity {
                 changed = false;
                 invalidateOptionsMenu();
                 Toast.makeText(this, R.string.sorted_route_saved, Toast.LENGTH_SHORT).show();
+                finish();
             });
             return true;
         }
