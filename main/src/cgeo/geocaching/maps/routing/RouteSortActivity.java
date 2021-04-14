@@ -12,6 +12,7 @@ import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -175,4 +176,12 @@ public class RouteSortActivity extends AbstractActivity {
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (changed) {
+            Dialogs.confirm(this, R.string.confirm_unsaved_changes_title, R.string.confirm_discard_changes, (dialog, which) -> finish());
+        } else {
+            finish();
+        }
+    }
 }
