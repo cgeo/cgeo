@@ -31,11 +31,9 @@ import android.view.Window;
 
 import com.mapwithme.maps.api.R;
 
-public class DownloadMapsWithMeDialog extends Dialog implements android.view.View.OnClickListener
-{
+public class DownloadMapsWithMeDialog extends Dialog implements android.view.View.OnClickListener {
 
-  public DownloadMapsWithMeDialog(Activity activity)
-  {
+  public DownloadMapsWithMeDialog(Activity activity) {
     super(activity);
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -47,8 +45,7 @@ public class DownloadMapsWithMeDialog extends Dialog implements android.view.Vie
   }
 
 
-  public void onDownloadButtonClicked(String url)
-  {
+  public void onDownloadButtonClicked(String url) {
     Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
     getContext().startActivity(i);
     dismiss();
@@ -56,8 +53,7 @@ public class DownloadMapsWithMeDialog extends Dialog implements android.view.Vie
 
 
   @Override
-  public void onClick(View v)
-  {
+  public void onClick(View v) {
     String url = getContext().getString(R.string.url_pro);
     onDownloadButtonClicked(url);
   }

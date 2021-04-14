@@ -12,8 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-public class MwmRequest
-{
+public class MwmRequest {
 
   // **
   private List<MWMPoint> mPoints    = new ArrayList<MWMPoint>();
@@ -25,61 +24,51 @@ public class MwmRequest
   private String         mCustomButtonName = "";
   // **
 
-  public MwmRequest setCustomButtonName(String buttonName)
-  {
+  public MwmRequest setCustomButtonName(String buttonName) {
     mCustomButtonName = buttonName != null ? buttonName : "";
     return this;
   }
 
-  public MwmRequest setTitle(String title)
-  {
+  public MwmRequest setTitle(String title) {
     mTitle = title;
     return this;
   }
 
-  public MwmRequest setPickPointMode(boolean pickPoint)
-  {
+  public MwmRequest setPickPointMode(boolean pickPoint) {
     mPickPoint = pickPoint;
     return this;
   }
 
-  public MwmRequest addPoint(MWMPoint point)
-  {
+  public MwmRequest addPoint(MWMPoint point) {
     mPoints.add(point);
     return this;
   }
 
-  public MwmRequest addPoint(double lat, double lon, String name, String id)
-  {
+  public MwmRequest addPoint(double lat, double lon, String name, String id) {
     return addPoint(new MWMPoint(lat, lon, name, id));
   }
 
-  public MwmRequest setPoints(Collection<MWMPoint> points)
-  {
+  public MwmRequest setPoints(Collection<MWMPoint> points) {
     mPoints = new ArrayList<MWMPoint>(points);
     return this;
   }
 
-  public MwmRequest setReturnOnBalloonClick(boolean doReturn)
-  {
+  public MwmRequest setReturnOnBalloonClick(boolean doReturn) {
     mReturnOnBalloonClick = doReturn;
     return this;
   }
 
-  public MwmRequest setZoomLevel(double zoomLevel)
-  {
+  public MwmRequest setZoomLevel(double zoomLevel) {
     mZoomLevel = zoomLevel;
     return this;
   }
 
-  public MwmRequest setPendingIntent(PendingIntent pi)
-  {
+  public MwmRequest setPendingIntent(PendingIntent pi) {
     mPendingIntent = pi;
     return this;
   }
 
-  public Intent toIntent(Context context)
-  {
+  public Intent toIntent(Context context) {
     final Intent mwmIntent = new Intent(Const.ACTION_MWM_REQUEST);
 
     // url
@@ -109,15 +98,13 @@ public class MwmRequest
    * This method is internal only.
    * Used for compatibility.
    */
-  MwmRequest setPoints(MWMPoint[] points)
-  {
+  MwmRequest setPoints(MWMPoint[] points) {
     return setPoints(Arrays.asList(points));
   }
 
   // Below are utilities from MapsWithMeApi because we are not "Feature Envy"
 
-  private static StringBuilder createMwmUrl(Context context, String title, double zoomLevel, List<MWMPoint> points)
-  {
+  private static StringBuilder createMwmUrl(Context context, String title, double zoomLevel, List<MWMPoint> points) {
     final StringBuilder urlBuilder = new StringBuilder("mapswithme://map?");
     // version
     urlBuilder.append("v=").append(Const.API_VERSION).append("&");
@@ -129,10 +116,8 @@ public class MwmRequest
     appendIfNotNull(urlBuilder, "z", isValidZoomLevel(zoomLevel) ? String.valueOf(zoomLevel) : null);
 
     // points
-    for (final MWMPoint point : points)
-    {
-      if (point != null)
-      {
+    for (final MWMPoint point : points) {
+      if (point != null) {
         urlBuilder.append("ll=").append(String.format(Locale.US, "%f,%f&", point.getLat(), point.getLon()));
 
         appendIfNotNull(urlBuilder, "n", point.getName());
@@ -144,30 +129,26 @@ public class MwmRequest
     return urlBuilder;
   }
 
-  private static String getCallbackAction(Context context)
-  {
+  private static String getCallbackAction(Context context) {
     return Const.CALLBACK_PREFIX + context.getPackageName();
   }
 
   @SuppressLint("NewApi")
-  private static Intent addCommonExtras(Context context, Intent intent)
-  {
+  private static Intent addCommonExtras(Context context, Intent intent) {
     intent.putExtra(Const.EXTRA_CALLER_APP_INFO, context.getApplicationInfo());
     intent.putExtra(Const.EXTRA_API_VERSION, Const.API_VERSION);
 
     return intent;
   }
 
-  private static StringBuilder appendIfNotNull(StringBuilder builder, String key, String value)
-  {
+  private static StringBuilder appendIfNotNull(StringBuilder builder, String key, String value) {
     if (value != null)
       builder.append(key).append("=").append(Uri.encode(value)).append("&");
 
     return builder;
   }
 
-  private static boolean isValidZoomLevel(double zoom)
-  {
+  private static boolean isValidZoomLevel(double zoom) {
     return zoom >= MapsWithMeApi.ZOOM_MIN && zoom <= MapsWithMeApi.ZOOM_MAX;
   }
 
