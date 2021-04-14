@@ -68,7 +68,7 @@ public class MWMResponse {
     return response;
   }
 
-  private final static double INVALID_LL =  Double.MIN_VALUE;
+  private static final double INVALID_LL =  Double.MIN_VALUE;
 
   private MWMResponse() {
       // Utility class, not to be instantiated

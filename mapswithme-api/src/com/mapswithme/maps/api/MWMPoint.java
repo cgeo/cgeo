@@ -33,9 +33,9 @@ import java.util.Objects;
 public final class MWMPoint implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  final private double mLat;
-  final private double mLon;
-  final private String mName;
+  private final double mLat;
+  private final double mLon;
+  private final String mName;
   private String mId;
   private Style mStyle;
 
