@@ -132,7 +132,7 @@ public class WaypointParser {
         final ImmutablePair<String, String> parsedNameAndPrefix = parseNameAndPrefix(wordsBefore, wpType);
         String name = parsedNameAndPrefix.getLeft();
         final String prefix = parsedNameAndPrefix.getRight();
-        if (name == null) {
+        if (StringUtils.isBlank(name)) {
             name = namePrefix + " " + count;
         }
 
@@ -176,16 +176,16 @@ public class WaypointParser {
     }
 
     /**
-     * try to parse a name out of given words. If not possible, null is returned
+     * try to parse a name out of given words. If not possible, empty is returned
      */
     @NotNull
     private ImmutablePair<String, String> parseNameAndPrefix(final String[] words, final WaypointType wpType) {
         if (words.length == 0 || !words[0].startsWith(PARSING_NAME_PRAEFIX)) {
-            return new ImmutablePair<>(null, null);
+            return new ImmutablePair<>("", "");
         }
         //first word handling
         String name = words[0].substring(PARSING_NAME_PRAEFIX.length());
-        String prefix = null;
+        String prefix = "";
         final int idx = name.indexOf(PARSING_PREFIX_CLOSE);
         if (idx > 0 && name.startsWith(PARSING_PREFIX_OPEN)) {
             prefix = name.substring(PARSING_PREFIX_OPEN.length(), idx).trim();
@@ -201,7 +201,7 @@ public class WaypointParser {
                 name += words[i];
             }
         }
-        return new ImmutablePair<>(StringUtils.isBlank(name) ? null : name.trim(), prefix);
+        return new ImmutablePair<>(StringUtils.isBlank(name) ? "" : name.trim(), prefix);
     }
 
     private boolean useWordForParsedName(final String word, final boolean isLast, final WaypointType wpType) {
