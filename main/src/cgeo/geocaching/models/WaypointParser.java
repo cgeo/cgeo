@@ -426,31 +426,45 @@ public class WaypointParser {
     }
 
     public static String getParseableFormula(final Waypoint wp) {
-        return getPlainFormula(wp);
-    }
-
-    private static String getPlainFormula(final Waypoint wp) {
         final StringBuilder sb = new StringBuilder();
 
         final String calcStateJson = wp.getCalcStateJson();
         if (null != calcStateJson) {
             final CalcState calcState = CalcState.fromJSON(calcStateJson);
-            if (calcState.format == Settings.CoordInputFormatEnum.Plain) {
-                sb.append(PARSING_COORD_FORMULA_PLAIN + " ");
-                sb.append(calcState.plainLat + " " + calcState.plainLon + " ");
-                for (VariableData equ : calcState.equations) {
-                    final String equExpr = equ.getExpression().trim();
-                    if (!equExpr.isEmpty()) {
-                        sb.append("" + FormulaParser.WPC_DELIM + equ.getName() + "=" + equExpr);
-                    }
+
+            final String formulaString = getParseableFormulaString(calcState);
+            if (!formulaString.isEmpty()) {
+                sb.append(formulaString);
+                final String variableString = getParseableVariablesString(calcState);
+                if (!variableString.isEmpty()) {
+                    sb.append(FormulaParser.WPC_DELIM + variableString);
                 }
-                for (VariableData var : calcState.freeVariables) {
-                    final String varExpr = var.getExpression().trim();
-                    if (!varExpr.isEmpty()) {
-                        sb.append("" + FormulaParser.WPC_DELIM + var.getName() + "=" + varExpr);
-                    }
-                }
-                sb.append("" + FormulaParser.WPC_DELIM);
+            }
+        }
+        return sb.toString();
+    }
+
+    private static String getParseableFormulaString(final CalcState calcState) {
+        final StringBuilder sb = new StringBuilder();
+        if (calcState.format == Settings.CoordInputFormatEnum.Plain) {
+            sb.append(PARSING_COORD_FORMULA_PLAIN + " ");
+            sb.append(calcState.plainLat + " " + calcState.plainLon + " ");
+        }
+        return sb.toString();
+    }
+
+    private static String getParseableVariablesString(final CalcState calcState) {
+        final StringBuilder sb = new StringBuilder();
+        for (VariableData equ : calcState.equations) {
+            final String equExpr = equ.getExpression().trim();
+            if (!equExpr.isEmpty()) {
+                sb.append(equ.getName() + "=" + equExpr + FormulaParser.WPC_DELIM);
+            }
+        }
+        for (VariableData var : calcState.freeVariables) {
+            final String varExpr = var.getExpression().trim();
+            if (!varExpr.isEmpty()) {
+                sb.append(var.getName() + "=" + varExpr + FormulaParser.WPC_DELIM);
             }
         }
         return sb.toString();
