@@ -5,6 +5,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
@@ -15,11 +16,13 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
@@ -63,6 +66,7 @@ import android.widget.ListAdapter;
 import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
 
 import java.io.File;
@@ -575,6 +579,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         });
         updateRoutingPrefs(Settings.useInternalRouting());
 
+        updateRoutingProfilesPrefs();
+
         getPreference(R.string.pref_bigSmileysOnMap).setOnPreferenceChangeListener((preference, newValue) -> {
             setResult(RESTART_NEEDED);
             return true;
@@ -586,11 +592,45 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         }));
     }
 
+    private void updateRoutingProfilesPrefs() {
+        final ArrayList<String> profiles = new ArrayList<>();
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.ROUTING_BASE);
+        for (ContentStorage.FileInformation file : files) {
+            if (file.name.endsWith(BRouterConstants.BROUTER_PROFILE_FILEEXTENSION)) {
+                profiles.add(file.name);
+            }
+        }
+        final CharSequence[] entries = profiles.toArray(new CharSequence[0]);
+        final CharSequence[] values = profiles.toArray(new CharSequence[0]);
+        updateRoutingProfilePref(R.string.pref_brouterProfileWalk, RoutingMode.WALK, entries, values);
+        updateRoutingProfilePref(R.string.pref_brouterProfileBike, RoutingMode.BIKE, entries, values);
+        updateRoutingProfilePref(R.string.pref_brouterProfileCar, RoutingMode.CAR, entries, values);
+    }
+
+    private void updateRoutingProfilePref(@StringRes final int prefId, final RoutingMode mode, final CharSequence[] entries, final CharSequence[] values) {
+        final String current = Settings.getRoutingProfile(mode);
+        final ListPreference pref = (ListPreference) getPreference(prefId);
+        pref.setEntries(entries);
+        pref.setEntryValues(values);
+        bindSummaryToStringValue(prefId);
+        if (current != null) {
+            for (int i = 0; i < entries.length; i++) {
+                if (current.contentEquals(entries[i])) {
+                    pref.setValueIndex(i);
+                    break;
+                }
+            }
+        }
+    }
+
     private void updateRoutingPrefs(final boolean useInternalRouting) {
         final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(getString(R.string.package_brouter));
         getPreference(R.string.pref_fakekey_brouterDistanceThresholdTitle).setEnabled(anyRoutingAvailable);
         getPreference(R.string.pref_brouterDistanceThreshold).setEnabled(anyRoutingAvailable);
         getPreference(R.string.pref_brouterShowBothDistances).setEnabled(anyRoutingAvailable);
+        getPreference(R.string.pref_brouterProfileWalk).setEnabled(useInternalRouting);
+        getPreference(R.string.pref_brouterProfileBike).setEnabled(useInternalRouting);
+        getPreference(R.string.pref_brouterProfileCar).setEnabled(useInternalRouting);
     }
 
     private void initGeoDirPreferences() {

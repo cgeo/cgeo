@@ -15,7 +15,6 @@ import cgeo.geocaching.brouter.util.CheapAngleMeter;
 import cgeo.geocaching.brouter.util.CheapRulerHelper;
 
 import java.io.DataOutput;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -123,10 +122,6 @@ public final class RoutingContext {
         String name = profileFilename == null ? "unknown" : profileFilename;
         if (name.endsWith(BRouterConstants.BROUTER_PROFILE_FILEEXTENSION)) {
             name = name.substring(0, profileFilename.length() - BRouterConstants.BROUTER_PROFILE_FILEEXTENSION.length());
-        }
-        final int idx = name.lastIndexOf(File.separatorChar);
-        if (idx >= 0) {
-            name = name.substring(idx + 1);
         }
         return name;
     }

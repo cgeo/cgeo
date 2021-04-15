@@ -177,7 +177,7 @@ public class RoutingEngine extends Thread {
             if (infoLogWriter != null) {
                 try {
                     infoLogWriter.close();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
                 infoLogWriter = null;
             }
@@ -190,43 +190,6 @@ public class RoutingEngine extends Thread {
         logInfo("Error (linksProcessed=" + linksProcessed + " open paths: " + openSet.getSize() + "): " + errorMessage);
     }
 
-
-    public void doSearch() {
-        try {
-            final MatchedWaypoint seedPoint = new MatchedWaypoint();
-            seedPoint.waypoint = waypoints.get(0);
-            final List<MatchedWaypoint> listOne = new ArrayList<MatchedWaypoint>();
-            listOne.add(seedPoint);
-            matchWaypointsToNodes(listOne);
-
-            findTrack("seededSearch", seedPoint, null, null, null, false);
-        } catch (IllegalArgumentException e) {
-            logException(e);
-        } catch (Exception e) {
-            logException(e);
-            logThrowable(e);
-        } catch (Error e) {
-            cleanOnOOM();
-            logException(e);
-            logThrowable(e);
-        } finally {
-            ProfileCache.releaseProfile(routingContext);
-            if (nodesCache != null) {
-                nodesCache.close();
-                nodesCache = null;
-            }
-            openSet.clear();
-            finished = true; // this signals termination to outside
-
-            if (infoLogWriter != null) {
-                try {
-                    infoLogWriter.close();
-                } catch (Exception e) {
-                }
-                infoLogWriter = null;
-            }
-        }
-    }
 
     public void cleanOnOOM() {
         terminate();
