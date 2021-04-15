@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>2021.04.11-RC (Beta):</h1>
+<h1>2021.04.15:</h1>
 
 <h3>
 We had to do extensive changes to the way c:geo gets access to your file system (e.g. for storing data, reading offline maps) to be prepared for requirements on new Android versions.
@@ -45,9 +45,6 @@ Refer to <a href="https://faq.cgeo.org/#SAF">this FAQ entry</a> for more informa
 <li>Fix: Remove \"Cancel\" from list selection to make the other items fit in one row</li>
 <li>Fix: Opening GPX files from some mail clients did not offer c:geo as target app</li>
 </ul>
-
-</ul>
-
 </div>]]></Data>
 </string>
 </resources>
