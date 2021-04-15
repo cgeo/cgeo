@@ -120,6 +120,9 @@ public class CredentialsPreference extends AbstractClickablePreference {
         frame.setVisibility(View.VISIBLE);
         frame.addView(iconView);
 
+        final LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
+        frame.setLayoutParams(param);
+
         return preferenceView;
     }
 
