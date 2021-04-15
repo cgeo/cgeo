@@ -210,6 +210,7 @@ public final class Routing {
         params.putDoubleArray("lats", new double[]{start.getLatitude(), dest.getLatitude()});
         params.putDoubleArray("lons", new double[]{start.getLongitude(), dest.getLongitude()});
         params.putString("v", Settings.getRoutingMode().parameterValue);
+        params.putString("profile", Settings.getRoutingProfile()); // profile filename, used only by internal routing engine
 
         final String gpx = routingServiceConnection == null ? null : routingServiceConnection.getTrackFromParams(params);
 

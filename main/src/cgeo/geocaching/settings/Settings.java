@@ -3,6 +3,7 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -1096,6 +1097,22 @@ public class Settings {
 
     public static void setBrouterAutoTileDownloadsLastCheckInS(final long lastCheck) {
         putLong(R.string.pref_brouterAutoTileDownloadsLastCheck, lastCheck);
+    }
+
+    public static String getRoutingProfile() {
+        return getRoutingProfile(Settings.getRoutingMode());
+    }
+
+    public static String getRoutingProfile(final RoutingMode mode) {
+        if (mode.equals(RoutingMode.CAR)) {
+            return getString(R.string.pref_brouterProfileCar, BRouterConstants.BROUTER_PROFILE_CAR_DEFAULT);
+        } else if (mode.equals(RoutingMode.BIKE)) {
+            return getString(R.string.pref_brouterProfileBike, BRouterConstants.BROUTER_PROFILE_BIKE_DEFAULT);
+        } else if (mode.equals(RoutingMode.WALK)) {
+            return getString(R.string.pref_brouterProfileWalk, BRouterConstants.BROUTER_PROFILE_WALK_DEFAULT);
+        } else {
+            return null;
+        }
     }
 
     public static boolean isBigSmileysEnabled() {

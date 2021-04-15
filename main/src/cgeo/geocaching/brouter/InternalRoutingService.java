@@ -11,6 +11,8 @@ import android.os.IBinder;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class InternalRoutingService extends Service {
 
     private final IInternalRoutingService.Stub myBRouterServiceStub = new IInternalRoutingService.Stub() {
@@ -28,20 +30,13 @@ public class InternalRoutingService extends Service {
             final String fast = params.getString("fast");
             final boolean isFast = "1".equals(fast) || "true".equals(fast) || "yes".equals(fast);
             final String mode = params.getString("v");
-            final String modeKey = mode + "_" + (isFast ? "fast" : "short");
 
-            // c:geo uses default profile mapping:
-            if (mode.equals("motorcar")) {
-                worker.profileName = isFast ? "car-fast" : "car-eco";
-            } else if (mode.equals("bicycle")) {
-                worker.profileName = isFast ? "fastbike" : "trekking";
-            } else if (mode.equals("foot")) {
-                worker.profileName = "shortest";
-            } else {
-                Log.e("no brouter service config found, mode " + modeKey);
-                return "no brouter service config found, mode " + modeKey;
+            worker.profileFilename = params.getString("profile");
+            if (StringUtils.isBlank(worker.profileFilename)) {
+                return ""; // cannot calculate a route without a profile
             }
-            worker.rawTrackPath = baseDir + "/" + modeKey + "_rawtrack.dat";
+
+            worker.rawTrackPath = baseDir + "/" + mode + "_rawtrack.dat";
             worker.nogoList = new ArrayList<>();
 
             try {
@@ -50,7 +45,6 @@ public class InternalRoutingService extends Service {
                 return iae.getMessage();
             }
         }
-
     };
 
     @Override

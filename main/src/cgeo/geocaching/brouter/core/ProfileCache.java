@@ -13,8 +13,6 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
 
-import java.io.File;
-
 public final class ProfileCache {
 
     private static long lastLookupTimestamp = 0;
@@ -32,9 +30,8 @@ public final class ProfileCache {
     }
 
     public static synchronized boolean parseProfile(final RoutingContext rc) {
-        final File profileFile = new File(rc.profileFilename); // @todo: migrate to SAF
-
-        rc.profileTimestamp = profileFile.lastModified() + rc.getKeyValueChecksum() << 24;
+        final ContentStorage.FileInformation fi = ContentStorage.get().getFileInfo(PersistableFolder.ROUTING_BASE.getFolder(), rc.profileFilename);
+        rc.profileTimestamp = fi.lastModified + rc.getKeyValueChecksum() << 24;
 
         // invalidate cache at lookup-table update
         final ContentStorage.FileInformation lookupFile = ContentStorage.get().getFileInfo(Folder.fromPersistableFolder(PersistableFolder.ROUTING_BASE, ""), BRouterConstants.BROUTER_LOOKUPS_FILENAME);
@@ -54,7 +51,7 @@ public final class ProfileCache {
             final ProfileCache pc = apc[i];
 
             if (pc != null) {
-                if ((!pc.profilesBusy) && rc.profileFilename.equals(pc.lastProfileFilename)) {
+                if ((!pc.profilesBusy) && fi.name.equals(pc.lastProfileFilename)) {
                     if (rc.profileTimestamp == pc.lastProfileTimestamp) {
                         rc.expctxWay = pc.expctxWay;
                         rc.expctxNode = pc.expctxNode;
@@ -82,8 +79,8 @@ public final class ProfileCache {
 
         meta.readMetaData();
 
-        rc.expctxWay.parseFile(profileFile, "global");
-        rc.expctxNode.parseFile(profileFile, "global");
+        rc.expctxWay.parseFile(fi.uri, "global");
+        rc.expctxNode.parseFile(fi.uri, "global");
 
         rc.readGlobalConfig();
 
@@ -96,17 +93,17 @@ public final class ProfileCache {
             if (unusedSlot >= 0) {
                 apc[unusedSlot] = lru;
                 if (debug) {
-                    System.out.println("******* adding new profile at idx=" + unusedSlot + " for " + profileFile);
+                    System.out.println("******* adding new profile at idx=" + unusedSlot + " for " + fi.name);
                 }
             }
         }
 
         if (lru.lastProfileFilename != null && debug) {
-            System.out.println("******* replacing profile of age " + ((System.currentTimeMillis() - lru.lastUseTime) / 1000L) + " sec " + lru.lastProfileFilename + "->" + profileFile);
+            System.out.println("******* replacing profile of age " + ((System.currentTimeMillis() - lru.lastUseTime) / 1000L) + " sec " + lru.lastProfileFilename + "->" + fi.name);
         }
 
         lru.lastProfileTimestamp = rc.profileTimestamp;
-        lru.lastProfileFilename = rc.profileFilename;
+        lru.lastProfileFilename = fi.name;
         lru.expctxWay = rc.expctxWay;
         lru.expctxNode = rc.expctxNode;
         lru.profilesBusy = true;
