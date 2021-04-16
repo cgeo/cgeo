@@ -571,6 +571,24 @@
                 android:text="@string/downloadmap_info"
                 android:title="@string/downloadmap_title"
                 app:urlButton="@string/downloadmap_choose" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_mapAutoDownloads"
+                android:summary="@string/init_mapAutoDownloads_description"
+                android:title="@string/init_autoDownloads" />
+            <Preference
+                android:selectable="false"
+                android:summary="@string/init_updateinterval_description"
+                android:title="@string/init_updateinterval_title"
+                android:dependency="@string/pref_mapAutoDownloads" />
+            <cgeo.geocaching.settings.SeekbarPreference
+                android:key="@string/pref_mapAutoDownloadsInterval"
+                app:min="0"
+                app:max="@integer/map_updateinterval_max"
+                android:defaultValue="@integer/map_updateinterval_default"
+                android:dependency="@string/pref_mapAutoDownloads" />
+
             <Preference
                 android:key="@string/pref_persistablefolder_offlinemaps"
                 android:title="@string/init_map_directory_description" />
@@ -632,12 +650,12 @@
                 android:key="@string/pref_brouterAutoTileDownloads"
                 android:summary="@string/init_brouterAutoTileDownloads_description"
                 android:dependency="@string/pref_useInternalRouting"
-                android:title="@string/init_brouterAutoTileDownloads" />
+                android:title="@string/init_autoDownloads" />
 
             <Preference
                 android:selectable="false"
-                android:summary="@string/init_brouter_updateinterval_description"
-                android:title="@string/init_brouter_updateinterval_title"
+                android:summary="@string/init_updateinterval_description"
+                android:title="@string/init_updateinterval_title"
                 android:dependency="@string/pref_brouterAutoTileDownloads" />
             <cgeo.geocaching.settings.SeekbarPreference
                 android:key="@string/pref_brouterAutoTileDownloadsInterval"
