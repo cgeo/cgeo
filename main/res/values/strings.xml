@@ -604,8 +604,9 @@
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which offline routing will calculate a route.</string>
     <string name="init_brouterShowBothDistances">Show straight distance</string>
-    <string name="init_brouterAutoTileDownloads">Automatic download</string>
+    <string name="init_autoDownloads">Automatic download</string>
     <string name="init_brouterAutoTileDownloads_description">Automatically offer to download missing routing tile data.</string>
+    <string name="init_mapAutoDownloads_description">Automatically check for update of map and theme files. (Valid only for files you have downloaded with the integrated downloader.)</string>
     <string name="init_brouterProfileWalk">\"Walk\" profile</string>
     <string name="init_brouterProfileBike">\"Bike\" profile</string>
     <string name="init_brouterProfileCar">\"Car\" profile</string>
@@ -705,8 +706,8 @@
     <string name="init_base_directory_description">Base folder for public local data</string>
     <string name="init_map_directory_description">Folder with offline maps</string>
     <string name="init_brouter_directory_description">Folder with BRouter routing data</string>
-    <string name="init_brouter_updateinterval_title">Update interval</string>
-    <string name="init_brouter_updateinterval_description">Reminds you every x days for an update check</string>
+    <string name="init_updateinterval_title">Update interval</string>
+    <string name="init_updateinterval_description">Reminds you every x days for an update check</string>
     <string name="init_gpx_importexportdir">GPX Folder</string>
     <string name="init_dataDir">Select data folder</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
@@ -2101,6 +2102,7 @@
     <string name="downloadtile_title">Missing routing data</string>
     <string name="downloadtile_info">c:geo cannot calculate the requested route as there is some routing data file missing. Do you want to download missing routing data?</string>
     <string name="tileupdate_info">Do you want to check for updates of downloaded routing data files?</string>
+    <string name="mapupdate_info">Do you want to check for updates of map and theme files?</string>
     <string name="no_updates_found">No updates found</string>
     <string name="updates_check">Updates check</string>
     <string name="mapserver_mapsforge_info">Basic maps, no map themes required</string>

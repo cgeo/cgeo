@@ -11,6 +11,8 @@
     <integer name="brouter_threshold_max">120</integer>
     <integer name="brouter_updateinterval_default">30</integer>
     <integer name="brouter_updateinterval_max">366</integer>
+    <integer name="map_updateinterval_default">30</integer>
+    <integer name="map_updateinterval_max">366</integer>
     <integer name="waypoint_threshold_default">10</integer>
     <integer name="waypoint_threshold_max">200</integer>
     <integer name="proximitynotification_distance_max">1000</integer>

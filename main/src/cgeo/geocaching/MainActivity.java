@@ -345,6 +345,7 @@ public class MainActivity extends AbstractActionBarActivity {
         OneTimeDialogs.nextStatus();
 
         checkForRoutingTileUpdates();
+        checkForMapUpdates();
     }
 
     @Override
@@ -438,6 +439,22 @@ public class MainActivity extends AbstractActionBarActivity {
     private void returnFromTileUpdateCheck(final boolean updateCheckAllowed) {
         if (updateCheckAllowed) {
             Settings.setBrouterAutoTileDownloadsLastCheckInS(System.currentTimeMillis() / 1000);
+        }
+    }
+
+    private void checkForMapUpdates() {
+        if (Settings.isMapAutoDownloads()) {
+            final long now = System.currentTimeMillis() / 1000;
+            final int interval = Settings.getMapAutoDownloadsInterval();
+            if ((Settings.getMapAutoDownloadsLastCheckInS() + (interval * 24 * 60 * 60)) <= now) {
+                DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, R.string.mapupdate_info, this::returnFromMapUpdateCheck);
+            }
+        }
+    }
+
+    private void returnFromMapUpdateCheck(final boolean updateCheckAllowed) {
+        if (updateCheckAllowed) {
+            Settings.setMapAutoDownloadsLastCheckInS(System.currentTimeMillis() / 1000);
         }
     }
 

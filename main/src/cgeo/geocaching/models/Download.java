@@ -82,6 +82,7 @@ public class Download {
 
     public enum DownloadType {
         // id values must not be changed as they are referenced in the database & download companion files
+        DOWNLOADTYPE_ALL_MAPRELATED(0),         // virtual entry
         DOWNLOADTYPE_MAP_MAPSFORGE(1),
         DOWNLOADTYPE_MAP_OPENANDROMAPS(2),
         DOWNLOADTYPE_THEME_OPENANDROMAPS(3),
