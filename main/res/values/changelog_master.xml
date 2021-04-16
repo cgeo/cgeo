@@ -17,16 +17,18 @@
 <li>Fix: xyz</li>
 </ul>
 
-<h4>Routing:</h4>
+<h4>Integrated routing engine:</h4>
 <ul>
 <li>New: Integrated BRouter routing engine - you can now use either external BRouter app or the integrated routing engine</li>
 <li>New: Integrated routing engine supports automatic downloading and updating of routing tile data</li>
+<li>New: Integrated routing engine supports selecting different routing profiles</li>
 </ul>
 
 <h4>Other:</h4>
 <ul>
 <li>Fix: A couple of theming issues, esp. aligned theming of Google Maps and settings to \"rest of app\"</li>
 <li>Fix: Optimize global search: If no trackable with matching tracking code is found, execute online cache name search afterwards</li>
+<li>Fix: Avoid avatar images being displayed too wide and pushing the \"Update / remove authorization\" functionalty aside</li>
 </ul>
 
 </div>]]></Data>
