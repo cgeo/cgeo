@@ -9,6 +9,7 @@
 <li>New: Long click on waypoint coordinates to copy coordinates</li>
 <li>New: Export and import UDC with empty coordinates</li>
 <li>New: Support changing found state for user-defined caches</li>
+<li>New: Parse formula for waypoints in personal cache note</li>
 </ul>
 
 <h4>Map:</h4>
