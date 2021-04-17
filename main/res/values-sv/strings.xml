@@ -566,7 +566,6 @@
     <string name="init_zoomincludingwaypoints">Zooma inkluderar vägpunkter</string>
     <string name="init_zoomincludingwaypoints_description">Om kartläggning av en enda cache: Bör zoom justeras för att inkludera alla dess vägpunkter?</string>
     <string name="init_brouterThreshold">Beräkna rutt</string>
-    <string name="init_brouterThreshold_description">Maximalt avstånd upp till vilket BRouter hjälpappen (om installerad) kommer att beräkna en rutt.</string>
     <string name="init_brouterShowBothDistances">Visa rakt avstånd</string>
     <string name="init_brouterAutoTileDownloads_description">Erbjuder automatiskt att ladda ner saknade routing-data.</string>
     <string name="brouter_recalculating">Beräknar rutt i bakgrunden…</string>
