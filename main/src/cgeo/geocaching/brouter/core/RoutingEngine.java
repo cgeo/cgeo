@@ -7,18 +7,16 @@ import cgeo.geocaching.brouter.mapaccess.OsmLinkHolder;
 import cgeo.geocaching.brouter.mapaccess.OsmNode;
 import cgeo.geocaching.brouter.mapaccess.OsmNodePairSet;
 import cgeo.geocaching.brouter.util.SortedHeap;
+import cgeo.geocaching.utils.Log;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoutingEngine extends Thread {
     public double airDistanceCostFactor;
     public SearchBoundary boundary;
-    public boolean quite = false;
     protected List<OsmNodeNamed> waypoints = null;
     protected List<MatchedWaypoint> matchedWaypoints;
     protected OsmTrack foundTrack = new OsmTrack();
@@ -35,10 +33,6 @@ public class RoutingEngine extends Thread {
     private OsmTrack foundRawTrack = null;
     private int alternativeIndex = 0;
     private volatile boolean terminated;
-    private final String outfileBase;
-    private final String logfileBase;
-    private final boolean infoLogEnabled;
-    private Writer infoLogWriter;
     private OsmTrack guideTrack;
     private OsmPathElement matchPath;
     private long startTime;
@@ -46,38 +40,21 @@ public class RoutingEngine extends Thread {
 
     private final boolean directWeaving = !Boolean.getBoolean("disableDirectWeaving");
 
-    public RoutingEngine(final String outfileBase, final String logfileBase, final String segmentDir,
+    public RoutingEngine(final String segmentDir,
                          final List<OsmNodeNamed> waypoints, final RoutingContext rc) {
         this.segmentDir = segmentDir;
-        this.outfileBase = outfileBase;
-        this.logfileBase = logfileBase;
         this.waypoints = waypoints;
-        this.infoLogEnabled = outfileBase != null;
         this.routingContext = rc;
 
-        final boolean cachedProfile = ProfileCache.parseProfile(rc);
-        if (hasInfo()) {
-            logInfo("parsed profile " + rc.profileFilename + " cached=" + cachedProfile);
-        }
+        ProfileCache.parseProfile(rc);
     }
 
     private boolean hasInfo() {
-        return infoLogEnabled || infoLogWriter != null;
+        return Log.isEnabled(Log.LogLevel.INFO);
     }
 
     private void logInfo(final String s) {
-        if (infoLogEnabled) {
-            System.out.println(s);
-        }
-        if (infoLogWriter != null) {
-            try {
-                infoLogWriter.write(s);
-                infoLogWriter.write('\n');
-                infoLogWriter.flush();
-            } catch (IOException io) {
-                infoLogWriter = null;
-            }
-        }
+        Log.i(s);
     }
 
     private void logThrowable(final Throwable t) {
@@ -115,34 +92,13 @@ public class RoutingEngine extends Thread {
 
                 messageList.add(track.message);
                 track.messageList = messageList;
-                if (outfileBase != null) {
-                    final String filename = outfileBase + i + ".gpx";
-                    OsmTrack oldTrack = new OsmTrack();
-                    oldTrack.readGpx(filename);
-                    if (track.equalsTrack(oldTrack)) {
-                        continue;
+                if (i == routingContext.getAlternativeIdx(0, 3)) {
+                    if ("CSV".equals(System.getProperty("reportFormat"))) {
+                        track.dumpMessages(null, routingContext);
                     }
-                    oldTrack = null;
-                    track.writeGpx(filename);
                     foundTrack = track;
-                    alternativeIndex = i;
                 } else {
-                    if (i == routingContext.getAlternativeIdx(0, 3)) {
-                        if ("CSV".equals(System.getProperty("reportFormat"))) {
-                            track.dumpMessages(null, routingContext);
-                        } else {
-                            if (!quite) {
-                                System.out.println(track.formatAsGpx());
-                            }
-                        }
-                        foundTrack = track;
-                    } else {
-                        continue;
-                    }
-                }
-                if (logfileBase != null) {
-                    final String logfilename = logfileBase + i + ".csv";
-                    track.dumpMessages(logfilename, routingContext);
+                    continue;
                 }
                 break;
             }
@@ -173,15 +129,6 @@ public class RoutingEngine extends Thread {
             }
             openSet.clear();
             finished = true; // this signals termination to outside
-
-            if (infoLogWriter != null) {
-                try {
-                    infoLogWriter.close();
-                } catch (Exception ignored) {
-                }
-                infoLogWriter = null;
-            }
-
         }
     }
 

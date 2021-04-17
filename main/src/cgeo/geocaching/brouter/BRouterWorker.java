@@ -49,8 +49,7 @@ public class BRouterWorker {
 
         waypoints = readPositions(params);
 
-        final RoutingEngine cr = new RoutingEngine(null, null, segmentDir, waypoints, rc);
-        cr.quite = true;
+        final RoutingEngine cr = new RoutingEngine(segmentDir, waypoints, rc);
         cr.doRun(maxRunningTime);
 
         // store new reference track if any
