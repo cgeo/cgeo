@@ -11,6 +11,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileNameCreator;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.XmlUtils;
@@ -95,26 +96,28 @@ public class TrailHistoryExport {
             }
 
             BufferedWriter writer = null;
-            try (OutputStream os = ContentStorage.get().openForWrite(uri)) {
+            OutputStream os = null;
+            try {
+                os = ContentStorage.get().openForWrite(uri);
                 if (os == null) {
                     return null;
                 }
-                writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
+                try {
+                    writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
+                    final XmlSerializer gpx = new KXmlSerializer();
 
-                final XmlSerializer gpx = new KXmlSerializer();
+                    int countExported = 0;
+                    gpx.setOutput(writer);
+                    gpx.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
 
-                int countExported = 0;
-                gpx.setOutput(writer);
-                gpx.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                    gpx.startDocument(StandardCharsets.UTF_8.name(), true);
+                    gpx.setPrefix(PREFIX_GPX, NS_GPX);
+                    gpx.setPrefix(PREFIX_XSI, NS_XSI);
 
-                gpx.startDocument(StandardCharsets.UTF_8.name(), true);
-                gpx.setPrefix(PREFIX_GPX, NS_GPX);
-                gpx.setPrefix(PREFIX_XSI, NS_XSI);
-
-                gpx.startTag(NS_GPX, "gpx");
-                gpx.attribute("", "version", "1.1");
-                gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
-                gpx.attribute(NS_XSI, "schemaLocation", NS_GPX + " " + GPX_SCHEMA);
+                    gpx.startTag(NS_GPX, "gpx");
+                    gpx.attribute("", "version", "1.1");
+                    gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
+                    gpx.attribute(NS_XSI, "schemaLocation", NS_GPX + " " + GPX_SCHEMA);
 
                     final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
                     formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -125,29 +128,36 @@ public class TrailHistoryExport {
                     gpx.endTag(NS_GPX, "metadata");
 
                     gpx.startTag(NS_GPX, "trk");
-                        XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo history trail " + formatter.format(new Date()));
-                        gpx.startTag(NS_GPX, "trkseg");
-                            for (TrailHistoryElement trailHistoryElement : trail) {
-                                gpx.startTag(null, "trkpt");
-                                    // all decimal points have to be ".", thus use non-localizing methods
-                                    gpx.attribute(null, "lat", String.valueOf(trailHistoryElement.getLatitude()));
-                                    gpx.attribute(null, "lon", String.valueOf(trailHistoryElement.getLongitude()));
-                                    XmlUtils.simpleText(gpx, null, "ele", String.format(Locale.US, "%.2f", trailHistoryElement.getAltitude()));
-                                    XmlUtils.simpleText(gpx, null, "time", formatter.format(trailHistoryElement.getTimestamp()));
-                                gpx.endTag(null, "trkpt");
-                                countExported++;
-                                publishProgress(countExported);
-                            }
-                        gpx.endTag(NS_GPX, "trkseg");
+                    XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo history trail " + formatter.format(new Date()));
+                    gpx.startTag(NS_GPX, "trkseg");
+                    for (TrailHistoryElement trailHistoryElement : trail) {
+                        gpx.startTag(null, "trkpt");
+                        // all decimal points have to be ".", thus use non-localizing methods
+                        gpx.attribute(null, "lat", String.valueOf(trailHistoryElement.getLatitude()));
+                        gpx.attribute(null, "lon", String.valueOf(trailHistoryElement.getLongitude()));
+                        XmlUtils.simpleText(gpx, null, "ele", String.format(Locale.US, "%.2f", trailHistoryElement.getAltitude()));
+                        XmlUtils.simpleText(gpx, null, "time", formatter.format(trailHistoryElement.getTimestamp()));
+                        gpx.endTag(null, "trkpt");
+                        countExported++;
+                        publishProgress(countExported);
+                    }
+                    gpx.endTag(NS_GPX, "trkseg");
                     gpx.endTag(NS_GPX, "trk");
-                gpx.endTag(NS_GPX, "gpx");
-            } catch (final IOException e) {
-                // delete partial GPX file on error
-                ContentStorage.get().delete(uri);
+                    gpx.endTag(NS_GPX, "gpx");
+                } catch (final IOException e) {
+                    // delete partial GPX file on error
+                    Log.e("IOException on trail export: " + e.getMessage());
+                    ContentStorage.get().delete(uri);
+                    return null;
+                } finally {
+                    IOUtils.closeQuietly(writer);
+                    IOUtils.closeQuietly(os);
+                }
+            } catch (final Exception e) {
+                Log.e("Exception on trail export: " + e.getMessage());
                 return null;
-            } finally {
-                IOUtils.closeQuietly(writer);
             }
+
             return uri;
         }
 
