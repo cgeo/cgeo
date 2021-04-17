@@ -570,14 +570,12 @@
     <string name="init_zoomincludingwaypoints">El zoom inclou punts de pas</string>
     <string name="init_zoomincludingwaypoints_description">Si fiqueu al mapa un catxé: s\'ha d\'ajustar el zoom per incloure tots els seus punts de ruta?</string>
     <string name="init_brouterThreshold">Calcula la ruta</string>
-    <string name="init_brouterThreshold_description">Distància màxima fins a la qual l\'aplicació BRouter (si està instal·lada) calcularà una ruta.</string>
     <string name="init_brouterShowBothDistances">Mostra la distància en línia recta</string>
     <string name="init_brouterAutoTileDownloads">Descàrrega automàtica</string>
     <string name="init_brouterAutoTileDownloads_description">Oferiu automàticament la baixada de dades d’encaminament que falten.</string>
     <string name="brouter_recalculating">S\'està recalculant la ruta en segon pla…</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
     <string name="init_useInternalRouting">Utilitzeu l’encaminament intern</string>
-    <string name="init_summary_useInternalRouting">Utilitzeu l\'encaminament intern per poder utilitzar la descàrrega i actualització de dades d’encaminament automàtic</string>
     <string name="init_bigSmileysOnMap">Icones grans per catxes registrats</string>
     <string name="init_summary_bigSmileysOnMap">Si està activat, es mostraran emoticones grans al mapa pels catxés registrats en lloc de la icona del tipus de catxe (cal reiniciar-lo).</string>
     <string name="init_disabled">Exclou els desactivats</string>
