@@ -4608,7 +4608,7 @@ public class DataStore {
                     Log.e("DataStore.saveLogOffline: cannot log an unknown log type and no message");
                     return false;
                 }
-                if (!StringUtils.isBlank(logEntry.cacheGeocode) && !logEntry.cacheGeocode.equals(geocode)) {
+                if (StringUtils.isNotBlank(logEntry.cacheGeocode) && !logEntry.cacheGeocode.equals(geocode)) {
                     Log.e("DataStore.saveLogOffline: mismatch between geocode in LogENtry and provided geocode: " + geocode + "<->" + logEntry.cacheGeocode);
                     return false;
                 }

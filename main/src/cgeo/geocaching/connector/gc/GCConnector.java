@@ -155,7 +155,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public String getCacheLogUrl(@NonNull final Geocache cache, @NonNull final LogEntry logEntry) {
-        if (!StringUtils.isBlank(logEntry.serviceLogId)) {
+        if (StringUtils.isNotBlank(logEntry.serviceLogId)) {
             return CACHE_URL_SHORT + logEntry.serviceLogId;
         }
         return null;

@@ -824,7 +824,7 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean canShareLog(final LogEntry logEntry) {
-        return !StringUtils.isBlank(getConnector().getCacheLogUrl(this, logEntry));
+        return StringUtils.isNotBlank(getConnector().getCacheLogUrl(this, logEntry));
     }
 
     public String getServiceSpecificLogId(final LogEntry logEntry) {
@@ -1658,7 +1658,7 @@ public class Geocache implements IWaypoint {
     private Waypoint findWaypoint(@NonNull final Waypoint searchWp) {
         //try to match prefix
         final String searchWpPrefix = searchWp.getPrefix();
-        if (!StringUtils.isBlank(searchWpPrefix)) {
+        if (StringUtils.isNotBlank(searchWpPrefix)) {
             for (final Waypoint waypoint : waypoints) {
                 if (searchWpPrefix.equals(waypoint.getPrefix())) {
                     return waypoint;
@@ -1682,7 +1682,7 @@ public class Geocache implements IWaypoint {
         //try to match name if prefix is empty and coords are not equal
         final String searchWpName = searchWp.getName();
         final String searchWpType = searchWp.getWaypointType().getL10n();
-        if (!StringUtils.isBlank(searchWpName)) {
+        if (StringUtils.isNotBlank(searchWpName)) {
             for (final Waypoint waypoint : waypoints) {
                 if (searchWpName.equals(waypoint.getName()) && searchWpType.equals(waypoint.getWaypointType().getL10n())) {
                     return waypoint;

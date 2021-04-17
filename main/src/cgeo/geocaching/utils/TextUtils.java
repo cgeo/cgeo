@@ -295,7 +295,7 @@ public final class TextUtils {
         }
         String before = text.substring(0, Math.min(idx, text.length()));
 
-        if (!StringUtils.isEmpty(startToken)) {
+        if (StringUtils.isNotEmpty(startToken)) {
             final int tokenIdx = before.lastIndexOf(startToken);
             if (tokenIdx >= 0) {
                 before = before.substring(tokenIdx + startToken.length());
@@ -319,7 +319,7 @@ public final class TextUtils {
             return "";
         }
         String after = text.substring(idx < 0 ? 0 : idx + 1);
-        if (!StringUtils.isEmpty(endToken)) {
+        if (StringUtils.isNotEmpty(endToken)) {
             final int tokenIdx = after.indexOf(endToken);
             if (tokenIdx >= 0) {
                 after = after.substring(0, tokenIdx);

@@ -746,7 +746,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                     final IConnector cacheConnector = ConnectorFactory.getConnector(cache);
                     if (cacheConnector instanceof ILogin) {
                         final String username = ((ILogin) cacheConnector).getUserName();
-                        if (!"".equals(username)) {
+                        if (StringUtils.isNotBlank(username)) {
                             logBuilder.setAuthor(username);
                         }
                     }

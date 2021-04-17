@@ -516,7 +516,7 @@ public final class ImageUtils {
     }
 
     public static boolean deleteImage(final Uri uri) {
-        if (uri != null && !StringUtils.isBlank(uri.toString())) {
+        if (uri != null && StringUtils.isNotBlank(uri.toString())) {
             return ContentStorage.get().delete(uri);
         }
         return false;

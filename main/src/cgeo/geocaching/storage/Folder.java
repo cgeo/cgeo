@@ -302,7 +302,7 @@ public class Folder {
         }
         final List<String> result = new ArrayList<>();
         for (String token : names.split("/")) {
-            if (!StringUtils.isBlank(token)) {
+            if (StringUtils.isNotBlank(token)) {
                 result.add(token.trim());
             }
         }

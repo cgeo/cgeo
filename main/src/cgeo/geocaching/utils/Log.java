@@ -125,7 +125,7 @@ public final class Log {
             logThrowExceptionOnError = "true".equalsIgnoreCase(logProps.getProperty(PROP_THROW_ON_ERROR_LOG));
             if (logProps.containsKey(PROP_LOGFILE)) {
                 final String logfileNamePraefix = logProps.getProperty(PROP_LOGFILE).trim();
-                if (!StringUtils.isBlank(logfileNamePraefix)) {
+                if (StringUtils.isNotBlank(logfileNamePraefix)) {
                     final String logFileName = FileNameCreator.LOGFILE_SELF_WRITTEN.createName(logfileNamePraefix);
                     Uri logFileUri = null;
                     try {
