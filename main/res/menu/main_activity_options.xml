@@ -42,6 +42,20 @@
         app:showAsAction="ifRoom">
     </item>
     <item
+        android:title="@string/menu_update"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/menu_update_routingdata"
+                android:title="@string/menu_update_routingdata">
+            </item>
+            <item
+                android:id="@+id/menu_update_mapdata"
+                android:title="@string/menu_update_mapdata">
+            </item>
+        </menu>
+    </item>
+    <item
         android:id="@+id/menu_helpers"
         android:icon="@drawable/ic_menu_shopping"
         android:title="@string/menu_helpers"

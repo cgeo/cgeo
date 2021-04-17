@@ -549,6 +549,7 @@ public class MainActivity extends AbstractActionBarActivity {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
         menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
+        menu.findItem(R.id.menu_update_routingdata).setEnabled(Settings.useInternalRouting());
         return true;
     }
 
@@ -577,6 +578,10 @@ public class MainActivity extends AbstractActionBarActivity {
             if (Settings.isGCPremiumMember()) {
                 startActivity(new Intent(this, PocketQueryListActivity.class));
             }
+        } else if (id == R.id.menu_update_routingdata) {
+            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, this::returnFromTileUpdateCheck);
+        } else if (id == R.id.menu_update_mapdata) {
+            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, this::returnFromMapUpdateCheck);
         } else {
             return super.onOptionsItemSelected(item);
         }

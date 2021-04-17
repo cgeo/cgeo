@@ -303,6 +303,9 @@
     <string name="menu_helpers">Utility programs</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_backup">Backup / restore</string>
+    <string name="menu_update">Update</string>
+    <string name="menu_update_routingdata">Routing data</string>
+    <string name="menu_update_mapdata">Map data</string>
     <string name="menu_history">History</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
