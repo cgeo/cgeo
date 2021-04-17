@@ -1635,7 +1635,8 @@ public class Geocache implements IWaypoint {
     public boolean addWaypointsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix, final boolean forceExtraction) {
         boolean changed = false;
         if (forceExtraction || !preventWaypointsFromNote) {
-            for (final Waypoint parsedWaypoint : Waypoint.parseWaypoints(StringUtils.defaultString(text), namePrefix)) {
+            final WaypointParser waypointParser = new WaypointParser(namePrefix);
+            for (final Waypoint parsedWaypoint : waypointParser.parseWaypoints(StringUtils.defaultString(text))) {
                 final Waypoint existingWaypoint = findWaypoint(parsedWaypoint);
                 if (null == existingWaypoint) {
                     //add as new waypoint

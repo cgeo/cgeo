@@ -1,4 +1,4 @@
-package cgeo.geocaching.ui;
+package cgeo.geocaching.calculator;
 
 import org.json.JSONException;
 import org.json.JSONObject;

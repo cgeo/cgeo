@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -445,7 +446,17 @@ public final class TextUtils {
         final int charsAtEnd = maxLength - separator.length() - charsAtBegin;
 
         return text.substring(0, charsAtBegin) + separator + text.substring(text.length() - charsAtEnd);
+    }
 
+    public static boolean isLetterOrDigit(final char ch, final boolean useUpper) {
+        boolean returnValue = CharUtils.isAsciiAlphanumeric(ch);
+        if (useUpper) {
+            returnValue &= CharUtils.isAsciiAlphaUpper(ch);
+        } else {
+            returnValue &= CharUtils.isAsciiAlphaLower(ch);
+        }
+
+        return returnValue;
     }
 
     private static Pattern getTokenSearchPattern(final String startToken, final String endToken) {

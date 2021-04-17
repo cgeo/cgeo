@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.calculator;
 
 /**
  * This simple evaluation algorithm was derived from the work of user 'Boann' and released to the public domain on Stack Overflow:
@@ -11,8 +11,11 @@ package cgeo.geocaching.utils;
  */
 public final class CalculationUtils {
 
-    private int pos = -1, ch;
+    private int pos = -1;
+    private int ch;
     private final String expression;
+
+    public static final String VALID_OPERATOR_PATTERN = "+\\-*/%^*";
 
     public CalculationUtils(final String expression) {
         this.expression = expression;

@@ -1,10 +1,12 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.calculator.ButtonData;
+import cgeo.geocaching.calculator.ButtonDataFactory;
+import cgeo.geocaching.calculator.JSONAble;
+import cgeo.geocaching.calculator.JSONAbleFactory;
+import cgeo.geocaching.calculator.VariableData;
+import cgeo.geocaching.calculator.VariableDataFactory;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
-import cgeo.geocaching.ui.CalculateButton;
-import cgeo.geocaching.ui.CalculatorVariable;
-import cgeo.geocaching.ui.JSONAble;
-import cgeo.geocaching.ui.JSONAbleFactory;
 import cgeo.geocaching.utils.Log;
 
 import java.io.Serializable;
@@ -30,20 +32,20 @@ public class CalcState implements Serializable {
     public final String plainLon;
     public final char latHemisphere;
     public final char lonHemisphere;
-    public final List<CalculateButton.ButtonData> buttons;
-    public final List<CalculatorVariable.VariableData> equations;
-    public final List<CalculatorVariable.VariableData> freeVariables;
-    public final List<CalculatorVariable.VariableData> variableBank;
+    public final List<ButtonData> buttons;
+    public final List<VariableData> equations;
+    public final List<VariableData> freeVariables;
+    public final List<VariableData> variableBank;
 
     public CalcState(final CoordInputFormatEnum format,
                      final String plainLat,
                      final String plainLon,
                      final char latHem,
                      final char lonHem,
-                     final List<CalculateButton.ButtonData> buttons,
-                     final List<CalculatorVariable.VariableData> equations,
-                     final List<CalculatorVariable.VariableData> freeVariables,
-                     final List<CalculatorVariable.VariableData> bankVariables) {
+                     final List<ButtonData> buttons,
+                     final List<VariableData> equations,
+                     final List<VariableData> freeVariables,
+                     final List<VariableData> bankVariables) {
         this.format = format;
         this.plainLat = plainLat;
         this.plainLon = plainLon;
@@ -61,9 +63,9 @@ public class CalcState implements Serializable {
         plainLon = json.optString("plainLon");
         latHemisphere = (char) json.optInt("latHemisphere", ERROR_CHAR);
         lonHemisphere = (char) json.optInt("lonHemisphere", ERROR_CHAR);
-        buttons       = createJSONAbleList(json.optJSONArray("buttons"),       new CalculateButton.ButtonDataFactory());
-        equations     = createJSONAbleList(json.optJSONArray("equations"),     new CalculatorVariable.VariableDataFactory());
-        freeVariables = createJSONAbleList(json.optJSONArray("freeVariables"), new CalculatorVariable.VariableDataFactory());
+        buttons       = createJSONAbleList(json.optJSONArray("buttons"),       new ButtonDataFactory());
+        equations     = createJSONAbleList(json.optJSONArray("equations"),     new VariableDataFactory());
+        freeVariables = createJSONAbleList(json.optJSONArray("freeVariables"), new VariableDataFactory());
         variableBank = new ArrayList<>(); // "variableBank" intentionally not loaded.
     }
 
