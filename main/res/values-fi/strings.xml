@@ -564,7 +564,6 @@
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
     <string name="init_zoomincludingwaypoints_description">Jos yksittäinen kätkö näytetään kartalla, säädetäänkö zoomaus näyttämään kaikki sen reittipisteet?</string>
     <string name="init_brouterThreshold">Laske reitti</string>
-    <string name="init_brouterThreshold_description">Maksimietäisyys, jonka sisällä brouter-apusovellus (jos asennettuna) laskee reitin.</string>
     <string name="init_brouterShowBothDistances">Näytä suora etäisyys</string>
     <string name="brouter_recalculating">Lasketaan reittiä uudelleen taustalla…</string>
     <string name="init_summary_brouterShowBothDistances">Jos reititys on aktiivisena: Näytä suora etäisyys lasketun reitin etäisyyden lisäksi.</string>
