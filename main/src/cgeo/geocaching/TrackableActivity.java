@@ -30,6 +30,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
@@ -263,7 +264,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         if (itemId == R.id.menu_log_touch) {
             startActivityForResult(LogTrackableActivity.getIntent(this, trackable, geocache), LogTrackableActivity.LOG_TRACKABLE);
         } else if (itemId == R.id.menu_browser_trackable) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));
+            ShareUtils.openUrl(this, trackable.getUrl(), true);
         } else if (itemId == R.id.menu_refresh_trackable) {
             refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
         } else {
