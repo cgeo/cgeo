@@ -62,7 +62,8 @@ public class EmojiUtils {
     // should ideally be supported by the Android API level we have set as minimum (currently API 21 = Android 5),
     // but starting with API 23 (Android 6) the app automatically filters out characters not supported by their fonts
     // for a list of supported Unicode standards by API level see https://developer.android.com/guide/topics/resources/internationalization
-    // for characters by Unicode version see https://unicode.org/emoji/charts-5.0/full-emoji-list.html (v5.0)
+    // for characters by Unicode version see https://unicode.org/emoji/charts-5.0/full-emoji-list.html (v5.0 - preferred compatibility standard based on our minAPI level)
+    // The newest emoji standard can be found here: https://unicode.org/emoji/charts/full-emoji-list.html
 
     private static final EmojiSet[] symbols = {
         // category symbols
@@ -102,9 +103,11 @@ public class EmojiUtils {
         new EmojiSet(0x1f3c3, new int[]{
             /* person-sport */  0x26f7, 0x1f3c4, 0x1f6a3, 0x1f3ca, 0x1f6b4,
             /* p.-activity */   0x1f6b5, 0x1f9d7,
+            /* person-role */   0x1f575,
             /* sport */         0x26bd, 0x1f94e, 0x1f3c0, 0x1f3c8, 0x1f93f, 0x1f3bf, 0x1f3af, 0x1f9ff,
             /* tool */          0x1fa9c,
-            /* science */       0x2697, 0x1f9ea, 0x1f52c, 0x1f50e, 0x1f4dc, 0x1f4ec
+            /* science */       0x2697, 0x1f9ea, 0x1f52c,
+            /* other things */  0x1f50e, 0x1f526, 0x1f4a1, 0x1f4d4, 0x1f4dc, 0x1f4ec, 0x1f3f7
 
         }),
         // category people
