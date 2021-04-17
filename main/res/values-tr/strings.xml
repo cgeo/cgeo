@@ -1014,7 +1014,7 @@
     <string name="cache_menu_navigation_walk">Navigasyon (Yürüyerek)</string>
     <string name="cache_menu_navigation_transit">Navigasyon (Araçla)</string>
     <string name="cache_menu_navigation_bike">Navigasyon (Bisikletle)</string>
-    <string name="cache_menu_maps_directions">Google Haritalar İstikametleri</string>
+    <string name="cache_menu_maps_directions">Google Haritalar ile git</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (Yürüyerek)</string>
     <string name="cache_menu_sygic_drive">Sygic (Arabayla)</string>
@@ -1655,7 +1655,7 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">c:geo\'nun 1 yıldan daha eski bir sürümünü kullanıyorsunuz. Bazı özellikler internet sitesi ve bazı teknik değişiklikler yüzünden çalışmayabilir. Nasıl yükselteceğinizi SSS\'den okuyabilirsiniz.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Konuşan pusula</string>
-    <string name="tts_toggle">Konuşmaya başla</string>
+    <string name="tts_toggle">Sesli yönlendirme Aç/Kapat</string>
     <string name="tts_started">Konuşmaya başladı</string>
     <string name="tts_stopped">Konuşmayı bıraktı</string>
     <string name="err_tts_lang_not_supported">Geçerli dil metin okuma tarafından desteklenmiyor.</string>
