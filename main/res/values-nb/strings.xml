@@ -567,14 +567,12 @@
     <string name="init_zoomincludingwaypoints">Kartutsnitt inkluderer veipunkter</string>
     <string name="init_zoomincludingwaypoints_description">Ved visning av en enkelt cache: Skal kartutsnittet justeres slik at alle veipunktene blir synlig?</string>
     <string name="init_brouterThreshold">Beregn rute</string>
-    <string name="init_brouterThreshold_description">Maksimal avstand til hvor BRouter hjelper-app (hvis den er installert) vil kalkulere rute.</string>
     <string name="init_brouterShowBothDistances">Vis distanse i rett linje</string>
     <string name="init_brouterAutoTileDownloads">Automatisk nedlasting</string>
     <string name="init_brouterAutoTileDownloads_description">Tilby deg automatisk til å laste ned manglende rutingsflis-data.</string>
     <string name="brouter_recalculating">Beregner rute i bakgrunnen…</string>
     <string name="init_summary_brouterShowBothDistances">Om routing er aktiv: Vis distanse i rett linje i tillegg til den utregnede rutelengden.</string>
     <string name="init_useInternalRouting">Bruk intern ruting</string>
-    <string name="init_summary_useInternalRouting">Bruk c:geo intern ruting for å kunne bruke automatisk rutingsnedlasting og oppdatering</string>
     <string name="init_bigSmileysOnMap">Store ikoner for loggede cacher</string>
     <string name="init_summary_bigSmileysOnMap">Hvis aktivert, vises store uttrykksikoner for loggede cacher på kartet i stedet for ikon av cachetype (krever omstart).</string>
     <string name="init_disabled">Ekskluder deaktiverte cacher</string>
