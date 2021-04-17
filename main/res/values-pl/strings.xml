@@ -571,14 +571,12 @@
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
     <string name="init_zoomincludingwaypoints_description">Podczas mapowania pojedynczej skrzynki: czy powiększenie powinno uwzględniać wszystkie jej punkty nawigacji?</string>
     <string name="init_brouterThreshold">Obliczanie trasy</string>
-    <string name="init_brouterThreshold_description">Maksymalna odległość, do której aplikacja dodatkowa BRouter (jeśli jest zainstalowana) obliczy trasę.</string>
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
     <string name="init_brouterAutoTileDownloads">Automatyczne pobieranie</string>
     <string name="init_brouterAutoTileDownloads_description">Automatycznie zaoferuj pobieranie brakujących danych kafelków dla nawigacji.</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
     <string name="init_useInternalRouting">Użyj wewnętrznej nawigacji</string>
-    <string name="init_summary_useInternalRouting">Użyj wewnętrznej nawigacji c:geo, aby móc korzystać z automatycznego pobierania i aktualizacji danych nawigowania</string>
     <string name="init_bigSmileysOnMap">Duże ikony dla zalogowanych skrzynek</string>
     <string name="init_summary_bigSmileysOnMap">Jeśli włączone, duże ikony będą wyświetlane dla zalogowanych skrzynek zamiast ikon typu skrzynki (wymaga ponownego uruchomienia).</string>
     <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
