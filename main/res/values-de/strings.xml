@@ -569,14 +569,12 @@
     <string name="init_zoomincludingwaypoints">Zoom beinhaltet Wegpunkte</string>
     <string name="init_zoomincludingwaypoints_description">Wenn eine Karte für einen einzelnen Cache geöffnet wird: Soll der Zoom so eingestellt werden, dass alle Wegpunkte dargestellt werden?</string>
     <string name="init_brouterThreshold">Routenberechnung</string>
-    <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher BRouter (falls installiert) eine Route berechnet.</string>
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
     <string name="init_brouterAutoTileDownloads">Automatisch herunterladen</string>
     <string name="init_brouterAutoTileDownloads_description">Fehlende Routingdaten automatisch zum Herunterladen anbieten.</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
     <string name="init_summary_brouterShowBothDistances">Wenn Wegführung aktiv ist: Zeigt neben der berechneten Routenlänge die Entfernung in Luftlinie an.</string>
     <string name="init_useInternalRouting">Internes Routing verwenden</string>
-    <string name="init_summary_useInternalRouting">Benutze c:geo internes Routing, um automatisch Routing-Daten herunterzuladen und aktualisieren zu können</string>
     <string name="init_bigSmileysOnMap">Große Symbole für geloggte Caches</string>
     <string name="init_summary_bigSmileysOnMap">Wenn aktiviert, werden große Emoticons für geloggte Caches auf der Karte anstatt des Cache-Typs angezeigt (Neustart erforderlich).</string>
     <string name="init_disabled">Deaktivierte ausblenden</string>
