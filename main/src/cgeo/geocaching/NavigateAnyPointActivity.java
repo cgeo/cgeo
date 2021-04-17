@@ -118,7 +118,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
                 final String geocode;
                 if (which == 0) {
                     // create new UDC
-                    geocode = InternalConnector.createCache(context, name, null, new Geopoint(latitude, longitude), StoredList.STANDARD_LIST_ID);
+                    geocode = InternalConnector.createCache(context, name, null, 0, new Geopoint(latitude, longitude), StoredList.STANDARD_LIST_ID);
                 } else {
                     // add to an existing UDC
                     geocode = items.get(which).getGeocode();

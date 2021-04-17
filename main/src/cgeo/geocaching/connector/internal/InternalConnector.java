@@ -5,6 +5,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.databinding.DialogTitleButtonButtonBinding;
+import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -14,10 +16,14 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.content.Context;
 import android.text.InputType;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -175,10 +181,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param id            internal (numeric) id of the cache
      * @param name          cache's name (or null for default name)
      * @param description   cache's description (or null for default description)
+     * @param assignedEmoji cache's assigned emoji (or 0 for default cache type icon)
      * @param geopoint      cache's current location (or null if none)
      * @param listId        cache list's id, may be NEW_LIST
      */
-    protected static void assertCacheExists(final Context context, final long id, @Nullable final String name, @Nullable final String description, @Nullable final Geopoint geopoint, final int listId) {
+    protected static void assertCacheExists(final Context context, final long id, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
         final String geocode = geocodeFromId(id);
         if (DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB) == null) {
 
@@ -193,6 +200,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
             cache.setName(name == null ? String.format(context.getString(R.string.internal_cache_default_name), id) : name);
             cache.setOwnerDisplayName(context.getString(R.string.internal_cache_default_owner));
             cache.setDescription(description == null ? context.getString(R.string.internal_cache_default_description) : description);
+            cache.setAssignedEmoji(assignedEmoji);
             cache.setDetailed(true);
             cache.setType(CacheType.USER_DEFINED);
             final Set<Integer> lists = new HashSet<>(1);
@@ -218,7 +226,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param context   context in which this function gets called
      */
     public static void assertHistoryCacheExists(final Context context) {
-        assertCacheExists(context, ID_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), null, UDC_LIST);
+        assertCacheExists(context, ID_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), 0, null, UDC_LIST);
     }
 
     /**
@@ -226,13 +234,14 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param context       context in which this function gets called
      * @param name          cache's name (or null for default name)
      * @param description   cache's description (or null for default description)
+     * @param assignedEmoji cache's assigned emoji (or 0 for default cache type icon)
      * @param geopoint      cache's current location (or null if none)
      * @param listId        cache list's id
      * @return geocode      geocode of the newly created cache
      */
-    public static String createCache(final Context context, @Nullable final String name, @Nullable final String description, @Nullable final Geopoint geopoint, final int listId) {
+    public static String createCache(final Context context, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
         final long newId = DataStore.incSequenceInternalCache();
-        assertCacheExists(context, newId, name, description, geopoint, listId);
+        assertCacheExists(context, newId, name, description, assignedEmoji, geopoint, listId);
         return geocodeFromId(newId);
     }
 
@@ -242,19 +251,30 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param listId        cache list's id
      */
     public static void interactiveCreateCache(final Context context, final Geopoint geopoint, final int listId) {
+        final Geocache temporaryCache = new Geocache();
+        temporaryCache.setType(CacheType.USER_DEFINED);
+
         final EditText editText = new EditText(context);
         editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         editText.setText("");
 
+        final DialogTitleButtonButtonBinding titleViewBinding = DialogTitleButtonButtonBinding.inflate(LayoutInflater.from(context));
+        titleViewBinding.dialogTitleTitle.setText(R.string.create_internal_cache);
+        titleViewBinding.dialogButton1.setVisibility(View.VISIBLE);
+        titleViewBinding.dialogButton1.setImageDrawable(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable());
+        titleViewBinding.dialogButton1.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), temporaryCache.getType().markerId, assignedEmoji -> {
+            temporaryCache.setAssignedEmoji(assignedEmoji);
+            titleViewBinding.dialogButton1.setImageDrawable(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable());
+        }));
+
         Dialogs.newBuilder(context)
-            .setTitle(R.string.create_internal_cache)
-            .setView(editText)
-            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                final String geocode = createCache(context, editText.getText().toString(), null, geopoint, listId);
-                CacheDetailActivity.startActivity(context, geocode);
-            })
-            .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
-            .show()
-        ;
+                .setCustomTitle(titleViewBinding.getRoot())
+                .setView(editText)
+                .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
+                    final String geocode = createCache(context, editText.getText().toString(), null, temporaryCache.getAssignedEmoji(), geopoint, listId);
+                    CacheDetailActivity.startActivity(context, geocode);
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.cancel())
+                .show();
     }
 }
