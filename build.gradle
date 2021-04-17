@@ -1,7 +1,6 @@
 // first of all the buildscript block, then the plugins block
 buildscript {
     repositories {
-        jcenter()
         google()
     }
     dependencies {
@@ -123,7 +122,6 @@ allprojects {
 subprojects {
     repositories {
         mavenCentral()
-        jcenter()
         // viewpager fork
         maven {
             url 'https://dl.bintray.com/alexeydanilov/maven'
