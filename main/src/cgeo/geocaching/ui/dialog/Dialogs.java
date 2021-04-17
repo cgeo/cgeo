@@ -3,6 +3,7 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
+import cgeo.geocaching.databinding.DialogTextCheckboxBinding;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
@@ -26,11 +27,11 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.TextView;
@@ -568,25 +569,24 @@ public final class Dialogs {
      * @param runAfterwards
      *            runnable (may be <tt>null</tt>) will be executed when ok button is clicked
      */
-    private static void internalOneTimeMessage(@NonNull final Activity context, @Nullable final String title, final String message, @Nullable final String moreInfoURL, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
-        final View content = context.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
-        final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
-        final TextView textView = (TextView) content.findViewById(R.id.message);
-        textView.setText(message);
+    private static void internalOneTimeMessage(@NonNull final Context context, @Nullable final String title, final String message, @Nullable final String moreInfoURL, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
+        final DialogTextCheckboxBinding content = DialogTextCheckboxBinding.inflate(LayoutInflater.from(context));
+
+        content.message.setText(message);
 
         if (Settings.isLightSkin()) {
-            textView.setTextColor(context.getResources().getColor(R.color.text_light));
-            checkbox.setTextColor(context.getResources().getColor(R.color.text_light));
+            content.message.setTextColor(context.getResources().getColor(R.color.text_light));
+            content.checkBox.setTextColor(context.getResources().getColor(R.color.text_light));
             final int[][] states = {{android.R.attr.state_checked}, {}};
             final int[] colors = {context.getResources().getColor(R.color.colorAccent), context.getResources().getColor(R.color.steel)};
-            checkbox.setButtonTintList(new ColorStateList(states, colors));
+            content.checkBox.setButtonTintList(new ColorStateList(states, colors));
         }
 
         final AlertDialog.Builder builder = newBuilder(context)
-                .setView(content)
+                .setView(content.getRoot())
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                    if (checkbox.isChecked()) {
+                    if (content.checkBox.isChecked()) {
                         OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
                     }
                     if (runAfterwards != null) {
@@ -609,7 +609,6 @@ public final class Dialogs {
         builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
 
         final AlertDialog dialog = builder.create();
-        dialog.setOwnerActivity(context);
 
         if (iconObservable != null) {
             iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(dialog::setIcon);
@@ -617,9 +616,9 @@ public final class Dialogs {
         dialog.show();
 
         if (cancellable) {
-            checkbox.setOnClickListener(result -> {
+            content.checkBox.setOnClickListener(result -> {
                 final Button button = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-                button.setEnabled(!checkbox.isChecked());
+                button.setEnabled(!content.checkBox.isChecked());
             });
         }
     }
@@ -634,7 +633,7 @@ public final class Dialogs {
      *            sets title and message of the dialog
      *            used for storing the dialog status in the DB
      */
-    public static void basicOneTimeMessage(@NonNull final Activity context, final OneTimeDialogs.DialogType dialogType) {
+    public static void basicOneTimeMessage(@NonNull final Context context, final OneTimeDialogs.DialogType dialogType) {
 
         if (OneTimeDialogs.showDialog(dialogType)) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
@@ -650,7 +649,7 @@ public final class Dialogs {
      * @param dialogType
      *            used for storing the dialog status in the DB, title and message defined in the dialogType are ignored
      */
-    public static void advancedOneTimeMessage(final Activity context, final OneTimeDialogs.DialogType dialogType, final String title, final String message, final String moreInfoURL, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, @Nullable final Runnable runAfterwards) {
+    public static void advancedOneTimeMessage(final Context context, final OneTimeDialogs.DialogType dialogType, final String title, final String message, final String moreInfoURL, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, @Nullable final Runnable runAfterwards) {
         if (OneTimeDialogs.showDialog(dialogType)) {
             internalOneTimeMessage(context, title, message, moreInfoURL, dialogType, iconObservable, cancellable, runAfterwards);
         } else if (runAfterwards != null) {
