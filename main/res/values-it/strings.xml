@@ -569,14 +569,12 @@
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
     <string name="init_zoomincludingwaypoints_description">Con mappatura di un singolo cache: lo zoom deve essere regolato per includere tutti i waypoint?</string>
     <string name="init_brouterThreshold">Calcola percorso</string>
-    <string name="init_brouterThreshold_description">Distanza massima fino alla quale l\'app di supporto BRouter (se installata) calcolerà un percorso.</string>
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
     <string name="init_brouterAutoTileDownloads">Download automatico</string>
     <string name="init_brouterAutoTileDownloads_description">Proponi automaticamente per scaricare i dati dei riquadri di mappa mancanti nel routing.</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
     <string name="init_useInternalRouting">Usa navigatore integrato</string>
-    <string name="init_summary_useInternalRouting">Usa il navigatore integrato in c:geo per poter utilizzare il download e l\'aggiornamento automatico dei dati di navigazione</string>
     <string name="init_bigSmileysOnMap">Icone grandi per le cache registrati</string>
     <string name="init_summary_bigSmileysOnMap">Se abilitata, grandi emoticons saranno mostrate per le cache visitate/loggate sulla mappa invece dell\'icona che mostra il tipo di cache (richiede il riavvio).</string>
     <string name="init_disabled">Escludi disattivati</string>
