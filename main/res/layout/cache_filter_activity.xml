@@ -6,59 +6,40 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="?background_color"
+    android:layout_marginTop="10dip"
     tools:context=".filter.FilterActivity" >
 
-    <Button
-        android:id="@+id/apply_filter"
-        android:text="Apply Filter"
-        style="@style/button_full"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/clear_filter"
-        android:text="Clear Filter"
-        style="@style/button_full"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <CheckBox
-        android:id="@+id/and_or_filter"
-        android:text="Use OR instead of AND"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/inverse_filter"
-        android:text="Inverse Filter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/include_inconclusive_filter"
-        android:text="Include inconclusive matches"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/filter_additem"
+            style="@style/button_icon"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/add_filter"
-            android:text="Add Filter:"
-            android:gravity="right"
-            />
+            android:src="@drawable/ic_menu_add" />
 
-        <Spinner
-            android:id="@+id/add_filter"
+        <ImageButton
+            android:id="@+id/filter_clear"
+            style="@style/button_icon"
+            android:layout_toLeftOf="@+id/filter_apply"
+            android:src="@drawable/ic_menu_delete" />
+
+        <ImageButton
+            android:id="@+id/filter_apply"
+            style="@style/button_icon"
             android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:src="@drawable/ic_menu_send" />
+
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/filter_props_checkboxes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp" />
 
     <View
         style="@style/separator_horizontal"
@@ -83,13 +64,24 @@
             android:listSelector="?background_color"
             android:nestedScrollingEnabled="false"
             android:orientation="vertical"
-            android:padding="4dip"
+            android:paddingHorizontal="4dip"
             android:scrollbars="none"
             tools:ignore="NestedScrolling"
             tools:listitem="@layout/cache_filter_list_item">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/filter_list_empty"
+            style="@style/text_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/cache_filter_hint_on_empty_filter_list"
+            />
     </RelativeLayout>
+
 
 
 </LinearLayout>

@@ -5,13 +5,13 @@ import cgeo.geocaching.databinding.CacheFilterGenericStringBinding;
 import cgeo.geocaching.filters.core.StringFilter;
 import cgeo.geocaching.filters.core.StringGeocacheFilter;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
-import android.view.LayoutInflater;
 import android.view.View;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 import java.util.Arrays;
-
-import org.apache.commons.text.WordUtils;
 
 
 public class StringFilterViewHolder<F extends StringGeocacheFilter> extends BaseFilterViewHolder<F> {
@@ -30,11 +30,20 @@ public class StringFilterViewHolder<F extends StringGeocacheFilter> extends Base
 
     @Override
     public View createView() {
-        final View view = LayoutInflater.from(getContext()).inflate(R.layout.cache_filter_generic_string, null);
+        final View view = inflateLayout(R.layout.cache_filter_generic_string);
+
         this.binding = CacheFilterGenericStringBinding.bind(view);
-        selectSpinner.setSpinner(this.binding.select)
+        selectSpinner.setTextView(this.binding.select);
+        selectSpinner
             .setValues(Arrays.asList(StringFilter.StringFilterType.values()))
-            .setDisplayMapper(v -> WordUtils.capitalizeFully(v.name().replace('_', ' ')));
+            .setDisplayMapper(StringFilter.StringFilterType::toUserDisplayableString)
+            .setChangeListener(sft -> {
+                final boolean textEnabled = sft != StringFilter.StringFilterType.IS_NOT_PRESENT && sft != StringFilter.StringFilterType.IS_PRESENT;
+                binding.text.setVisibility(textEnabled ? VISIBLE : GONE);
+                binding.matchCase.setVisibility(textEnabled ? VISIBLE : GONE);
+            }, true)
+            .set(StringFilter.getDefaultFilterType());
+        this.binding.itemInfo.setOnClickListener(d -> Dialogs.message(getActivity(), R.string.cache_filter_stringfilter_info));
         return view;
     }
 

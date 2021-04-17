@@ -1,8 +1,11 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.SqlBuilder;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -15,6 +18,14 @@ public abstract class OneOfManyGeocacheFilter<T> extends BaseGeocacheFilter {
     public abstract T valueFromString(String stringValue);
 
     public abstract String valueToString(T value);
+
+    public String getSqlColumnName() {
+        return null;
+    }
+
+    public String valueToSqlValue(final T value) {
+        return value == null ? null : String.valueOf(value);
+    }
 
     public Set<T> getValues() {
         return values;
@@ -54,4 +65,31 @@ public abstract class OneOfManyGeocacheFilter<T> extends BaseGeocacheFilter {
         }
         return result;
     }
+
+    @Override
+    public void addToSql(final SqlBuilder sqlBuilder) {
+        final String colName = getSqlColumnName();
+        if (colName != null && !getValues().isEmpty()) {
+            final StringBuilder sb = new StringBuilder(sqlBuilder.getMainTableId() + "." + colName + " IN (");
+            final List<String> params = new ArrayList<>();
+            boolean first = true;
+            for (T v : getValues()) {
+                if (v == null) {
+                    continue;
+                }
+                if (!first) {
+                    sb.append(",");
+                }
+                first = false;
+                sb.append("?");
+                params.add(valueToSqlValue(v));
+            }
+            sb.append(")");
+            sqlBuilder.addWhere(sb.toString(), params);
+        } else {
+            sqlBuilder.addWhereAlwaysInclude();
+        }
+    }
+
+
 }

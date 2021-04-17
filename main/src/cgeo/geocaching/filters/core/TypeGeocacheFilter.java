@@ -19,4 +19,14 @@ public class TypeGeocacheFilter extends OneOfManyGeocacheFilter<CacheType> {
     public String valueToString(final CacheType value) {
         return value.name();
     }
+
+    @Override
+    public String getSqlColumnName() {
+        return "type";
+    }
+
+    @Override
+    public String valueToSqlValue(final CacheType value) {
+        return value.id;
+    }
 }

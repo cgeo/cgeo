@@ -37,16 +37,16 @@ public abstract class StringGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public String[] getConfig() {
-        return stringFilter.addToConfig(new String[3], 0);
+        return stringFilter.addToConfig(new String[4], 0);
     }
 
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         final String colName = getSqlColumnName();
         if (colName != null) {
-            sqlBuilder.addWhere(stringFilter.toSqlExpression(sqlBuilder.getMainTableId() + "." + colName));
+            stringFilter.addToSql(sqlBuilder, sqlBuilder.getMainTableId() + "." + colName);
         } else {
-            sqlBuilder.addWhereAlwaysTrue();
+            sqlBuilder.addWhereAlwaysInclude();
         }
     }
 }

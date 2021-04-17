@@ -24,4 +24,5 @@ class FindsComparator extends AbstractCacheComparator {
     public String getSortableSection(@NonNull final Geocache cache) {
         return String.format(Locale.getDefault(), "%d", cache.getFindsCount());
     }
+
 }

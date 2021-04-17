@@ -19,6 +19,8 @@
         <TextView
             android:id="@+id/filter_title"
             android:lines="1"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="6dp"
             android:textColor="?text_color"
             android:textSize="24sp"
             android:layout_width="match_parent"
@@ -31,9 +33,9 @@
             tools:visibility="visible"
             tools:text="Title of the filter, might be a bit longer"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/filter_delete"
-            style="@style/action_bar_action"
+            style="@style/button_small"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
@@ -63,6 +65,9 @@
         android:id="@+id/insert_point"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
         android:orientation="vertical"/>
 
 

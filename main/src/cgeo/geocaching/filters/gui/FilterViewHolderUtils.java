@@ -6,7 +6,7 @@ import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
 
-import android.content.Context;
+import android.app.Activity;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,39 +21,42 @@ public class FilterViewHolderUtils {
         //no instance
     }
 
-    public static IFilterViewHolder<?> createFor(final IGeocacheFilter filter, final Context ctx) {
-        return createFor(filter.getType(), ctx, filter);
+    public static IFilterViewHolder<?> createFor(final IGeocacheFilter filter, final Activity activity) {
+        return createFor(filter.getType(), activity, filter);
     }
 
-    public static IFilterViewHolder<?> createFor(final GeocacheFilterType type, final Context ctx) {
-        return createFor(type, ctx, null);
+    public static IFilterViewHolder<?> createFor(final GeocacheFilterType type, final Activity activity) {
+        return createFor(type, activity, null);
     }
 
-    private static IFilterViewHolder<?> createFor(final GeocacheFilterType type, final Context ctx, final IGeocacheFilter filter) {
+    private static IFilterViewHolder<?> createFor(final GeocacheFilterType type, final Activity activity, final IGeocacheFilter filter) {
         final IFilterViewHolder<?> result;
         switch (type) {
             case NAME:
             case OWNER:
             case DESCRIPTION:
+                result = new StringFilterViewHolder<>();
+                break;
             case PERSONAL_NOTE:
                 result = new StringFilterViewHolder<>();
                 break;
             case TYPE:
                 result = new OneOfManyFilterViewHolder<>(new CacheType[]{
-                    CacheType.TRADITIONAL, CacheType.MYSTERY, CacheType.MULTI, CacheType.EARTH, CacheType.EVENT, CacheType.WHERIGO });
+                    CacheType.TRADITIONAL, CacheType.MYSTERY, CacheType.MULTI, CacheType.EARTH, CacheType.EVENT, CacheType.WHERIGO, CacheType.VIRTUAL },
+                    ct -> ct.markerId);
                 break;
             case SIZE:
                 result = new OneOfManyFilterViewHolder<>(CacheSize.values());
                 break;
-            case OFFLINE_LOG_FILTER:
-                result = new OfflineLogFilterViewHolder();
+            case OFFLINE_LOG:
+                result = new StringFilterViewHolder<>();
                 break;
             default:
                 result = null;
                 break;
         }
         if (result != null) {
-            result.init(type, ctx);
+            result.init(type, activity);
             if (filter != null) {
                 result.getView(); //force view-create
                 fillViewFrom(result, filter);

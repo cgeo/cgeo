@@ -1,6 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.SqlBuilder;
 
 import androidx.annotation.NonNull;
 
@@ -20,5 +21,10 @@ class VoteComparator extends AbstractCacheComparator {
     @Override
     public String getSortableSection(@NonNull final Geocache cache) {
         return String.format(Locale.getDefault(), "%.2f", cache.getMyVote());
+    }
+
+    @Override
+    public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
+        sql.addOrder(sql.getMainTableId() + ".myvote", sortDesc);
     }
 }

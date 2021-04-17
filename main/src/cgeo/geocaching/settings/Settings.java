@@ -1761,4 +1761,8 @@ public class Settings {
         putString(R.string.pref_cache_filter_config, config);
     }
 
+    public static int getListInitialLoadLimit() {
+        return getInt(R.string.pref_list_initial_load_limit, 1000);
+    }
+
 }

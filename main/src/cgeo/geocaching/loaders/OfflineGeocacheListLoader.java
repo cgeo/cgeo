@@ -5,6 +5,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.storage.DataStore;
 
 import android.app.Activity;
@@ -16,16 +17,23 @@ public class OfflineGeocacheListLoader extends AbstractSearchLoader {
     private final Geopoint searchCenter;
     private final IGeocacheFilter filter;
 
-    public OfflineGeocacheListLoader(final Activity activity, final Geopoint searchCenter, final int listId, final IGeocacheFilter filter) {
+    private final CacheComparator sort;
+    private final boolean sortInverse;
+    private final int limit;
+
+    public OfflineGeocacheListLoader(final Activity activity, final Geopoint searchCenter, final int listId, final IGeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
         super(activity);
         this.searchCenter = searchCenter;
         this.listId = listId;
         this.filter = filter;
+        this.sort = sort;
+        this.sortInverse = sortInverse;
+        this.limit = limit;
     }
 
     @Override
     public SearchResult runSearch() {
-        return DataStore.getBatchOfStoredCaches(searchCenter, Settings.getCacheType(), listId, filter);
+        return DataStore.getBatchOfStoredCaches(searchCenter, Settings.getCacheType(), listId, filter, sort, sortInverse, limit);
     }
 
     /**

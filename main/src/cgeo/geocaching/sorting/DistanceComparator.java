@@ -3,11 +3,13 @@ package cgeo.geocaching.sorting;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.SqlBuilder;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * sorts caches by distance to given position
@@ -15,44 +17,35 @@ import java.util.List;
  */
 public class DistanceComparator extends AbstractCacheComparator {
 
-    private final Geopoint coords;
-    private final List<Geocache> list;
-    private boolean cachedDistances;
+    private Geopoint coords;
 
-    public static final DistanceComparator INSTANCE = new DistanceComparator();
+    private static AtomicLong gpsPosVersion = new AtomicLong(0);
+    public static final DistanceComparator DISTANCE_TO_GLOBAL_GPS = new DistanceComparator(Geopoint.ZERO);
 
-    public DistanceComparator() {
-        // This constructor should not be used as a comparator as distances will not be updated.
-        // It is needed in order to really know we are sorting by Distances in the sort menu.
-        // If you need it for sorting, please use the second constructor.
-        coords = null;
-        list = new ArrayList<>();
-    }
-
-    public DistanceComparator(final Geopoint coords, final List<Geocache> list) {
-        this.coords = coords;
-        // create new list so we can iterate over the list in parallel with the cache list adapter
-        this.list = new ArrayList<>(list);
-    }
-
-    /**
-     * calculate all distances only once to avoid costly re-calculation of the same distance during sorting
-     */
-    private void calculateAllDistances() {
-        if (cachedDistances) {
-            return;
-        }
+    @Override
+    protected void beforeSort(final List<Geocache> list) {
+        super.beforeSort(list);
+        // calculate all distances only once to avoid costly re-calculation of the same distance during sorting
         for (final Geocache cache : list) {
             if (cache.getCoords() != null) {
                 cache.setDistance(coords.distanceTo(cache.getCoords()));
             }
         }
-        cachedDistances = true;
+    }
+
+    public static void updateGlobalGps(final Geopoint gpsPosition) {
+        if (gpsPosition != null) {
+            DISTANCE_TO_GLOBAL_GPS.coords = gpsPosition;
+            gpsPosVersion.incrementAndGet();
+        }
+    }
+
+    public DistanceComparator(final Geopoint coords) {
+        this.coords = coords == null ? Geopoint.ZERO : coords;
     }
 
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
-        calculateAllDistances();
         final Float distance1 = cache1.getDistance();
         final Float distance2 = cache2.getDistance();
         if (distance1 == null) {
@@ -65,4 +58,10 @@ public class DistanceComparator extends AbstractCacheComparator {
     public String getSortableSection(@NonNull final Geocache cache) {
         return Units.getDistanceFromKilometers(cache.getDistance());
     }
+
+    @Override
+    public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
+        sql.addOrder(DataStore.getCoordDiffExpression(coords, sql.getMainTableId()), sortDesc);
+    }
+
 }

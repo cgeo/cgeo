@@ -70,6 +70,9 @@ public class ExpressionParser<T extends IExpression<T>> {
     }
 
     private String escape(final String raw) {
+        if (raw == null) {
+            return "";
+        }
         return raw.replaceAll(""  + ESCAPE_CHAR + ESCAPE_CHAR, ""  + ESCAPE_CHAR + ESCAPE_CHAR + ESCAPE_CHAR + ESCAPE_CHAR)
             .replaceAll("" + LOGIC_SEPARATOR, "" + ESCAPE_CHAR + ESCAPE_CHAR + LOGIC_SEPARATOR)
             .replaceAll("" + TYPEID_CONFIG_SEPARATOR, "" + ESCAPE_CHAR + ESCAPE_CHAR + TYPEID_CONFIG_SEPARATOR)

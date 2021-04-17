@@ -1,5 +1,6 @@
 package cgeo.geocaching.filters.core;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.StringRes;
@@ -9,13 +10,13 @@ import org.apache.commons.text.WordUtils;
 
 public enum GeocacheFilterType {
 
-    NAME("name", 0, NameGeocacheFilter::new),
-    OWNER("owner", 0, OwnerGeocacheFilter::new),
-    DESCRIPTION("description", 0, DescriptionGeocacheFilter::new),
-    TYPE("type", 0, TypeGeocacheFilter::new),
-    SIZE("size", 0, SizeGeocacheFilter::new),
-    PERSONAL_NOTE("note", 0, PersonalNoteGeocacheFilter::new),
-    OFFLINE_LOG_FILTER("offlinelog", 0, OfflineLogGeocacheFilter::new);
+    NAME("name", R.string.cache_filter_name, NameGeocacheFilter::new),
+    OWNER("owner", R.string.cache_filter_owner, OwnerGeocacheFilter::new),
+    DESCRIPTION("description", R.string.cache_filter_description, DescriptionGeocacheFilter::new),
+    TYPE("type", R.string.cache_filter_type, TypeGeocacheFilter::new),
+    SIZE("size", R.string.cache_filter_size, SizeGeocacheFilter::new),
+    PERSONAL_NOTE("note", R.string.cache_filter_personalnote, PersonalNoteGeocacheFilter::new),
+    OFFLINE_LOG("offlinelog", R.string.cache_filter_offlinelog, OfflineLogGeocacheFilter::new);
 
     private final String typeId;
     private final Supplier<BaseGeocacheFilter> supplier;

@@ -1,6 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CalendarUtils;
 
 import androidx.annotation.NonNull;
@@ -29,4 +30,10 @@ public class VisitComparator extends AbstractCacheComparator {
     public String getSortableSection(@NonNull final Geocache cache) {
         return CalendarUtils.yearMonth(cache.getVisitedDate());
     }
+
+    @Override
+    public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
+        sql.addOrder(sql.getMainTableId() + ".visiteddate", sortDesc);
+    }
+
 }

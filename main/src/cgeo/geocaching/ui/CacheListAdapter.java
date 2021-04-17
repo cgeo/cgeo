@@ -16,8 +16,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
 import cgeo.geocaching.sorting.EventDateComparator;
-import cgeo.geocaching.sorting.InverseComparator;
-import cgeo.geocaching.sorting.SeriesNameComparator;
+import cgeo.geocaching.sorting.NameComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -45,8 +44,6 @@ import androidx.core.content.ContextCompat;
 import java.lang.ref.WeakReference;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -195,10 +192,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             return EventDateComparator.INSTANCE;
         }
         if (cacheComparator == null && series) {
-            return SeriesNameComparator.INSTANCE;
+            return NameComparator.INSTANCE;
         }
         if (cacheComparator == null) {
-            return DistanceComparator.INSTANCE;
+            return DistanceComparator.DISTANCE_TO_GLOBAL_GPS;
         }
         return cacheComparator;
     }
@@ -336,7 +333,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             lastSort = 0;
             updateSortByDistance();
         } else {
-            Collections.sort(list, getPotentialInversion(getCacheComparator()));
+            getCacheComparator().sort(list, inverseSort);
         }
 
         notifyDataSetChanged();
@@ -368,7 +365,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             return;
         }
         final List<Geocache> oldList = new ArrayList<>(list);
-        Collections.sort(list, getPotentialInversion(new DistanceComparator(coords, list)));
+        DistanceComparator.updateGlobalGps(coords);
+        DistanceComparator.DISTANCE_TO_GLOBAL_GPS.sort(list, inverseSort);
 
         // avoid an update if the list has not changed due to location update
         if (list.equals(oldList)) {
@@ -378,26 +376,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         lastSort = System.currentTimeMillis();
     }
 
-    private Comparator<? super Geocache> getPotentialInversion(final CacheComparator comparator) {
-        if (inverseSort) {
-            return new InverseComparator(comparator);
-        }
-        return comparator;
-    }
-
     private boolean isSortedByDistance() {
         final CacheComparator comparator = getCacheComparator();
         return comparator == null || comparator instanceof DistanceComparator;
-    }
-
-    private boolean isSortedByEvent() {
-        final CacheComparator comparator = getCacheComparator();
-        return comparator == null || comparator instanceof EventDateComparator;
-    }
-
-    private boolean isSortedBySeries() {
-        final CacheComparator comparator = getCacheComparator();
-        return comparator == null || comparator instanceof SeriesNameComparator;
     }
 
     public void setActualHeading(final float direction) {
@@ -717,12 +698,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     public void checkSpecialSortOrder() {
         checkEvents();
         checkSeries();
-        if (!eventsOnly && isSortedByEvent()) {
-            setComparator(DistanceComparator.INSTANCE);
-        }
-        if (!series && isSortedBySeries()) {
-            setComparator(DistanceComparator.INSTANCE);
-        }
     }
 
     private void checkEvents() {
@@ -758,9 +733,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             if (StringUtils.length(commonSuffix) >= MIN_COMMON_CHARACTERS_SERIES) {
                 series = true;
             }
-        }
-        if (series) {
-            setComparator(new SeriesNameComparator());
         }
     }
 

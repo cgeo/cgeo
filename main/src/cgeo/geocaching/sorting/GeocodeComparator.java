@@ -1,6 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.SqlBuilder;
 
 import androidx.annotation.NonNull;
 
@@ -24,6 +25,11 @@ public class GeocodeComparator extends AbstractCacheComparator {
     @Override
     public String getSortableSection(@NonNull final Geocache cache) {
         return cache.getGeocode();
+    }
+
+    @Override
+    public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
+        sql.addOrder(sql.getMainTableId() + ".geocode", sortDesc);
     }
 
 }

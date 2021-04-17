@@ -4,6 +4,9 @@ import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.Log;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -66,6 +69,23 @@ abstract class AbstractCacheComparator implements CacheComparator {
     @Override
     public boolean isAutoManaged() {
         return false;
+    }
+
+    /** Can optinally be overridden to perform preparation (e.g. caching of values) before sort of a list via {@link #sort(List)} */
+    protected void beforeSort(final List<Geocache> list) {
+        //by default, do nothing
+    }
+
+    /** Can optinally be overridden to perform cleanup (e.g. deleting cached values) before sort of a list via {@link #sort(List)} */
+    protected void afterSort(final List<Geocache> list) {
+        //by default, do nothing
+    }
+
+    /** Sorts the given list of caches using this comparator. Respects implementations of {@link #beforeSort(List)} and{@link #afterSort(List)} */
+    public void sort(final List<Geocache> list, final boolean inverse) {
+        beforeSort(list);
+        Collections.sort(list, inverse ? new InverseComparator(this) : this);
+        afterSort(list);
     }
 
 }
