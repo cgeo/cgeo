@@ -625,7 +625,7 @@
             <Preference
                 android:key="@string/pref_persistablefolder_routingtiles"
                 android:title="@string/init_brouter_directory_description"
-                android:dependency="@string/pref_brouterAutoTileDownloads" />
+                android:dependency="@string/pref_useInternalRouting" />
 
             <CheckBoxPreference
                 android:defaultValue="false"
