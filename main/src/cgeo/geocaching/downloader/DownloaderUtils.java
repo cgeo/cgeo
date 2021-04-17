@@ -146,7 +146,7 @@ public class DownloaderUtils {
     }
 
     /**
-     * aks user whether to check for updates
+     * ask user whether to check for updates
      * if yes: checks whether updates are available for the type specified
      *      if yes: ask user to download them all
      *              if yes: trigger download(s)
@@ -157,6 +157,12 @@ public class DownloaderUtils {
             new CheckForDownloadsTask(activity, title, type).execute();
             callback.call(true);
         }, dialog -> callback.call(false));
+    }
+
+    // same as checkForUpdatesAndDownloadAll above, but without question
+    public static void checkForUpdatesAndDownloadAll(final Activity activity, final Download.DownloadType type, @StringRes final int title, final Action1<Boolean> callback) {
+        new CheckForDownloadsTask(activity, title, type).execute();
+        callback.call(true);
     }
 
     private static class CheckForDownloadsTask extends AsyncTaskWithProgressText<Void, List<Download>> {
