@@ -564,14 +564,12 @@
     <string name="init_zoomincludingwaypoints">缩放包括航点</string>
     <string name="init_zoomincludingwaypoints_description">如果在地图上显示单个藏点：是否应调整缩放以包括其所有航点？</string>
     <string name="init_brouterThreshold">计算路径</string>
-    <string name="init_brouterThreshold_description">brouter 辅助程序 (如果已安装) 计算路径的最大距离。</string>
     <string name="init_brouterShowBothDistances">显示直线距离</string>
     <string name="init_brouterAutoTileDownloads">自动下载</string>
     <string name="init_brouterAutoTileDownloads_description">自动提供下载缺失的路线规划瓦片数据。</string>
     <string name="brouter_recalculating">在后台重新计算路径</string>
     <string name="init_summary_brouterShowBothDistances">如果路径是活动的：除了显示计算的路径长度外，还显示直线距离。</string>
     <string name="init_useInternalRouting">使用内部路线规划</string>
-    <string name="init_summary_useInternalRouting">使用 c:geo 内部路线规划以使用自动路线规划的数据下载和更新</string>
     <string name="init_bigSmileysOnMap">已记录藏点的大图标</string>
     <string name="init_summary_bigSmileysOnMap">如果启用，将会在地图上为已记录藏点显示大表情，而不是藏点类型的图标 (需要重启)。</string>
     <string name="init_disabled">排除已禁用</string>
