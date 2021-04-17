@@ -261,6 +261,7 @@
     <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
     <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
     <string name="confirm_unsaved_changes_title">Niet opgeslagen wijzigingen</string>
+    <string name="confirm_discard_changes">Niet opgeslagen wijzigingen negeren?</string>
     <string name="confirm_discard_wp_changes">Waypoint wijzigingen niet opslaan?</string>
     <string name="err_request_popup_info">Het is c:geo niet gelukt om de cache popup info te verkrijgen.</string>
     <string name="warn_log_load_additional_data">Het is c:geo niet gelukt aanvullende gegevens (trackables/favoriet punten) te laden voor het loggen.</string>
@@ -569,14 +570,17 @@
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Wanneer een enkele cache wordt getoond: Moet zoom worden aangepast om alle waypoints te bevatten?</string>
     <string name="init_brouterThreshold">Route berekenen</string>
-    <string name="init_brouterThreshold_description">Maximale afstand tot waar de BRouter helper app (indien geïnstalleerd) een route berekent.</string>
+    <string name="init_brouterThreshold_description">Maximale afstand tot welke offline routering een route berekent.</string>
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
     <string name="init_brouterAutoTileDownloads">Automatische download</string>
     <string name="init_brouterAutoTileDownloads_description">Automatisch aanbieden om ontbrekende routering tegel gegevens te downloaden.</string>
+    <string name="init_brouterProfileWalk">\"Wandelen\" profiel</string>
+    <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
+    <string name="init_brouterProfileCar">\"Auto\" profiel</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
     <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
     <string name="init_useInternalRouting">Interne routering gebruiken</string>
-    <string name="init_summary_useInternalRouting">c:geo interne routering gebruiken om automatische routering data downloaden en bijwerken te kunnen gebruiken</string>
+    <string name="init_summary_useInternalRouting">c:geo interne routering gebruiken om automatische routering, data downloaden en andere functies te kunnen gebruiken</string>
     <string name="init_bigSmileysOnMap">Grote pictogrammen voor gelogde caches</string>
     <string name="init_summary_bigSmileysOnMap">Indien ingeschakeld zullen grote emoticons worden getoond voor gelogde caches op de kaart in plaats van het cache type icoon (vereist herstart).</string>
     <string name="init_disabled">Uitgeschakelde caches uitsluiten</string>
