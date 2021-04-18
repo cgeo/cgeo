@@ -15,13 +15,12 @@ import cgeo.geocaching.brouter.util.ByteDataReader;
 import cgeo.geocaching.brouter.util.Crc32Utils;
 
 import java.io.IOException;
-import java.io.RandomAccessFile;
 
 final class OsmFile {
     public int lonDegree;
     public int latDegree;
     public String filename;
-    private RandomAccessFile is = null;
+    private PhysicalFile rafile = null;
     private long fileOffset;
     private int[] posIdx;
     private MicroCache[] microCaches;
@@ -52,11 +51,10 @@ final class OsmFile {
                 return; // empty
             }
 
-            is = rafile.ra;
+            this.rafile = rafile;
             posIdx = new int[ncaches];
             microCaches = new MicroCache[ncaches];
-            is.seek(fileOffset);
-            is.readFully(iobuffer, 0, indexsize);
+            this.rafile.readFully(fileOffset, indexsize, iobuffer);
 
             if (rafile.fileHeaderCrcs != null) {
                 final int headerCrc = Crc32Utils.crc(iobuffer, 0, indexsize);
@@ -101,11 +99,8 @@ final class OsmFile {
         final int startPos = getPosIdx(subIdx - 1);
         final int endPos = getPosIdx(subIdx);
         final int size = endPos - startPos;
-        if (size > 0) {
-            is.seek(fileOffset + startPos);
-            if (size <= iobuffer.length) {
-                is.readFully(iobuffer, 0, size);
-            }
+        if (size > 0 && size <= iobuffer.length) {
+            this.rafile.readFully(fileOffset + startPos, size, iobuffer);
         }
         return size;
     }

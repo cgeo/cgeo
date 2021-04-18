@@ -9,13 +9,20 @@ import cgeo.geocaching.brouter.codec.DataBuffers;
 import cgeo.geocaching.brouter.codec.MicroCache;
 import cgeo.geocaching.brouter.codec.WaypointMatcher;
 import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.Log;
 
+import java.io.Closeable;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
-public final class NodesCache {
+import org.apache.commons.io.IOUtils;
+
+public final class NodesCache implements Closeable {
     public OsmNodesMap nodesMap;
     public WaypointMatcher waypointMatcher;
     public boolean firstFileAccessFailed = false;
@@ -320,14 +327,17 @@ public final class NodesCache {
 
         PhysicalFile ra = null;
         if (!fileCache.containsKey(filenameBase)) {
-            File f = null;
-            final File primary = new File(segmentDir, filenameBase + ".rd5");
-            if (primary.exists()) {
-                f = primary;
-            }
-            if (f != null) {
-                currentFileName = f.getName();
-                ra = new PhysicalFile(f, dataBuffers, lookupVersion, lookupMinorVersion);
+            final ContentStorage.FileInformation fi = ContentStorage.get().getFileInfo(PersistableFolder.ROUTING_TILES.getFolder(), filenameBase + ".rd5");
+            if (fi != null && !fi.isDirectory) {
+                currentFileName = fi.name;
+
+                final InputStream is = ContentStorage.get().openForRead(fi.uri);
+                if (is instanceof FileInputStream) {
+                    ra = new PhysicalFile(fi.name, (FileInputStream) is, dataBuffers, lookupVersion);
+                } else {
+                    Log.w("Problem opening tile file " + fi + ", is = " + is);
+                    IOUtils.closeQuietly(is);
+                }
             }
             fileCache.put(filenameBase, ra);
         }
@@ -342,15 +352,10 @@ public final class NodesCache {
         return osmf;
     }
 
+    @Override
     public void close() {
         for (PhysicalFile f : fileCache.values()) {
-            try {
-                if (f != null) {
-                    f.ra.close();
-                }
-            } catch (IOException ioe) {
-                // ignore
-            }
+            f.close();
         }
     }
 }

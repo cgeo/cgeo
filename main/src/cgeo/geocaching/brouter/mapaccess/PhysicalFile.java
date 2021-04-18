@@ -9,25 +9,30 @@ import cgeo.geocaching.brouter.codec.DataBuffers;
 import cgeo.geocaching.brouter.codec.MicroCache;
 import cgeo.geocaching.brouter.util.ByteDataReader;
 import cgeo.geocaching.brouter.util.Crc32Utils;
+import cgeo.geocaching.storage.FileByteReader;
 
-import java.io.File;
+import androidx.annotation.NonNull;
+
+import java.io.Closeable;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 
-public final class PhysicalFile {
+import org.apache.commons.io.IOUtils;
+
+public final class PhysicalFile implements Closeable {
     public long creationTime;
     public int divisor = 80;
-    RandomAccessFile ra = null;
+    private FileByteReader fbr = null;
     long[] fileIndex = new long[25];
     int[] fileHeaderCrcs;
     String fileName;
     private final int fileIndexCrc;
 
-    public PhysicalFile(final File f, final DataBuffers dataBuffers, final int lookupVersion, final int lookupMinorVersion) throws Exception {
-        fileName = f.getName();
+    public PhysicalFile(final String fileName, final FileInputStream fis, final DataBuffers dataBuffers, final int lookupVersion) throws Exception {
+        this.fileName = fileName;
         final byte[] iobuffer = dataBuffers.iobuffer;
-        ra = new RandomAccessFile(f, "r");
-        ra.readFully(iobuffer, 0, 200);
+        fbr = new FileByteReader(fis);
+        fbr.readFully(0, 200, iobuffer);
         fileIndexCrc = Crc32Utils.crc(iobuffer, 0, 200);
         ByteDataReader dis = new ByteDataReader(iobuffer);
         for (int i = 0; i < 25; i++) {
@@ -35,13 +40,13 @@ public final class PhysicalFile {
             final short readVersion = (short) (lv >> 48);
             if (i == 0 && lookupVersion != -1 && readVersion != lookupVersion) {
                 throw new IllegalArgumentException("lookup version mismatch (old rd5?) lookups.dat="
-                    + lookupVersion + " " + f.getAbsolutePath() + "=" + readVersion);
+                    + lookupVersion + " " + fileName + "=" + readVersion);
             }
             fileIndex[i] = lv & 0xffffffffffffL;
         }
 
         // read some extra info from the end of the file, if present
-        final long len = ra.length();
+        final long len = fbr.size();
 
         final long pos = fileIndex[24];
         final int extraLen = 8 + 26 * 4;
@@ -54,8 +59,7 @@ public final class PhysicalFile {
             throw new IOException("file of size " + len + " too short, should be " + (pos + extraLen));
         }
 
-        ra.seek(pos);
-        ra.readFully(iobuffer, 0, extraLen);
+        fbr.readFully(pos, extraLen, iobuffer);
         dis = new ByteDataReader(iobuffer);
         creationTime = dis.readLong();
 
@@ -73,28 +77,28 @@ public final class PhysicalFile {
         }
     }
 
-    public static void main(final String[] args) {
-        MicroCache.debug = true;
+    public void readFully(final long startPos, final int length, @NonNull final byte[] buffer) throws IOException {
+        this.fbr.readFully(startPos, length, buffer);
+    }
 
-        final String message = checkFileIntegrity(new File(args[0]));
-
-        if (message != null) {
-            System.out.println("************************************");
-            System.out.println(message);
-            System.out.println("************************************");
-        }
+    @Override
+    public void close() {
+        IOUtils.closeQuietly(fbr);
     }
 
     /**
-     * Checks the integrity of the file using the build-in checksums
+     * Checks the integrity of the file using the build-in checksums.
+     *
+     * * Provided FileInputStream will be closed
+     * * Provided fileName is just for logging purposes
      *
      * @return the error message if file corrupt, else null
      */
-    public static String checkFileIntegrity(final File f) {
+    public static String checkTileDataIntegrity(final String fileName, final FileInputStream fis) {
         PhysicalFile pf = null;
         try {
             final DataBuffers dataBuffers = new DataBuffers();
-            pf = new PhysicalFile(f, dataBuffers, -1, -1);
+            pf = new PhysicalFile(fileName, fis, dataBuffers, -1);
             final int div = pf.divisor;
             for (int lonDegree = 0; lonDegree < 5; lonDegree++) { // doesn't really matter..
                 for (int latDegree = 0; latDegree < 5; latDegree++) { // ..where on earth we are
@@ -113,13 +117,9 @@ public final class PhysicalFile {
         } catch (Exception e) {
             return e.toString();
         } finally {
-            if (pf != null) {
-                try {
-                    pf.ra.close();
-                } catch (Exception ignored) {
-                }
-            }
+            IOUtils.closeQuietly(pf);
         }
         return null;
     }
+
 }
