@@ -82,12 +82,12 @@ Keys are generated manually on request.
 For c:geo we have a semi-automatic configuration:
 1. Copy `./templates/private.properties` to `./`
 2. Edit `private.properties` with your keys
-3. The `./main/res/values/keys.xml` is created on the gradle build and filled with the data from `private.properties`
+3. The `./main/src/main/res/values/keys.xml` is created on the gradle build and filled with the data from `private.properties`
 
 The third point works only if the file `keys.xml` does not exist.
 When changing your API keys, you have to delete the `keys.xml` file.
 
-If you want to fill the `keys.xml` by hand, copy `./main/templates/keys.xml` to `./main/res/values/`, then edit the copied `keys.xml`.
+If you want to fill the `keys.xml` by hand, copy `./main/templates/keys.xml` to `./main/src/main/res/values/`, then edit the copied `keys.xml`.
 For each key, replace the value starting with `@` and ending with `@` (inclusive) with the key.
 If a key is missing, remove the value and the leading and trailing `@`.
 

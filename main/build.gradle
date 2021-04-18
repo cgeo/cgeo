@@ -121,7 +121,6 @@ android {
         main {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src', 'thirdparty', '../common/src'] // no need for annotation generated sources
-            res.srcDirs = ['res']
             assets.srcDirs = ['assets']
             aidl.srcDirs = ['src'] // default src/main/aidl creates package name conflicts in Eclipse
             jni.srcDirs = []
@@ -407,14 +406,14 @@ tasks.register('verifyCgeoKeys') {
     group = 'verification'
     description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
     doFirst {
-        def keysFile = file("res/values/keys.xml")
+        def keysFile = file("src/main/res/values/keys.xml")
         if (!keysFile.exists()) {
             // copy keys from private.properties to keys.xml. used by the CI server at least
             def propertiesFile = rootProject.file("private.properties")
             if (propertiesFile.exists()) {
                 copy {
                     from "templates/keys.xml"
-                    into ("res/values")
+                    into ("src/main/res/values")
                     def properties = new Properties()
                     propertiesFile.withInputStream {
                         properties.load(it)
@@ -615,30 +614,4 @@ tasks.register('checkstyle', Checkstyle) {
 
 tasks.named('check') {
     dependsOn tasks.named('checkstyle')
-}
-
-
-/*
- * Ribbonizer, adds ribbons to launcher icon of debug builds
- * https://github.com/gfx/gradle-android-ribbonizer-plugin
- * works fine until android 7.1, see https://github.com/cgeo/cgeo/issues/8896
- */
-apply plugin: 'com.github.gfx.ribbonizer'
-
-ribbonizer {
-    // use blue ribbon instead of default green
-    builder { variant, iconFile ->
-        def filter = customColorRibbonFilter(variant, iconFile, "#0000FF")
-        if (variant.buildType.name == "debug") {
-            return filter
-        } else if (variant.buildType.name == "nightly") {
-            return filter
-        } else if (variant.buildType.name == "rc") {
-            filter.label = "beta"
-            return filter
-        }
-    }
-
-    // force specific variants to be ribbonized
-    forcedVariantsNames "basicNightly", "basicRc"
 }
