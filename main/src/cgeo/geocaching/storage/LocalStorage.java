@@ -440,10 +440,13 @@ public final class LocalStorage {
 
                 //migrate existing Offline Log Image paths
                 if (legacyOfflineLogImagesDir.isDirectory()) {
-                    for (File offlineImage : legacyOfflineLogImagesDir.listFiles()) {
-                        if (offlineImage.isFile()) {
-                            displayProgress(offlineImage.getName());
-                            FileUtils.copy(offlineImage, ImageUtils.getFileForOfflineLogImage(offlineImage.getName()));
+                    final File[] files = legacyOfflineLogImagesDir.listFiles();
+                    if (files != null) {
+                        for (File offlineImage : files) {
+                            if (offlineImage.isFile()) {
+                                displayProgress(offlineImage.getName());
+                                FileUtils.copy(offlineImage, ImageUtils.getFileForOfflineLogImage(offlineImage.getName()));
+                            }
                         }
                     }
                 }
