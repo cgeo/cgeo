@@ -15,7 +15,6 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.Log;
 
 import java.io.Closeable;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -30,7 +29,6 @@ public final class NodesCache implements Closeable {
     public String firstFileAccessName;
     private final BExpressionContextWay expCtxWay;
     private final int lookupVersion;
-    private final int lookupMinorVersion;
     private String currentFileName;
     private final HashMap<String, PhysicalFile> fileCache;
     private final DataBuffers dataBuffers;
@@ -55,7 +53,6 @@ public final class NodesCache implements Closeable {
         this.nodesMap.maxmem = (2L * maxmem) / 3L;
         this.expCtxWay = ctxWay;
         this.lookupVersion = ctxWay.meta.lookupVersion;
-        this.lookupMinorVersion = ctxWay.meta.lookupMinorVersion;
         this.detailed = detailed;
 
         if (ctxWay != null) {
@@ -322,7 +319,7 @@ public final class NodesCache implements Closeable {
 
         PhysicalFile ra = null;
         if (!fileCache.containsKey(filenameBase)) {
-            final ContentStorage.FileInformation fi = ContentStorage.get().getFileInfo(PersistableFolder.ROUTING_TILES.getFolder(), filenameBase + ".rd5");
+            final ContentStorage.FileInformation fi = ContentStorage.get().getFileInfo(PersistableFolder.ROUTING_TILES.getFolder(), filenameBase + BRouterConstants.BROUTER_TILE_FILEEXTENSION);
             if (fi != null && !fi.isDirectory) {
                 currentFileName = fi.name;
 
@@ -350,7 +347,9 @@ public final class NodesCache implements Closeable {
     @Override
     public void close() {
         for (PhysicalFile f : fileCache.values()) {
-            f.close();
+            if (f != null) {
+                f.close();
+            }
         }
     }
 }
