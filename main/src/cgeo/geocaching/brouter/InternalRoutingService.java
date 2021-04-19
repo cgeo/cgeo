@@ -21,7 +21,6 @@ public class InternalRoutingService extends Service {
             final BRouterWorker worker = new BRouterWorker();
 
             final String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/cgeo/routing";
-            worker.segmentDir = baseDir + "/segments4/";
 
             // should be:
             // final Folder base = PersistableFolder.ROUTING_BASE.getFolder();

@@ -1,6 +1,7 @@
 package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -26,7 +27,7 @@ public class BRouterTileDownloader extends AbstractDownloader {
         super(Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.brouter_downloadurl, R.string.brouter_name, R.string.brouter_info, R.string.brouter_projecturl, 0, PersistableFolder.ROUTING_TILES);
         overwrite = true; // silently overwrite already existing files
         useCompanionFiles = false; // use single uri, and no companion files
-        forceExtension = ".rd5";
+        forceExtension = BRouterConstants.BROUTER_TILE_FILEEXTENSION;
     }
 
     @Override

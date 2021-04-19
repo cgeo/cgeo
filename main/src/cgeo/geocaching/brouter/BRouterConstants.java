@@ -8,6 +8,8 @@ public class BRouterConstants {
     public static final String BROUTER_PROFILE_BIKE_DEFAULT = "trekking.brf";
     public static final String BROUTER_PROFILE_CAR_DEFAULT = "car-eco.brf";
 
+    public static final String BROUTER_TILE_FILEEXTENSION = ".rd5";
+
     private BRouterConstants() {
         // utility class
     }
