@@ -1,14 +1,15 @@
 package cgeo.geocaching.brouter;
 
 import cgeo.geocaching.brouter.util.DefaultFilesUtils;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.IBinder;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
@@ -20,22 +21,16 @@ public class InternalRoutingService extends Service {
         public String getTrackFromParams(final Bundle params) {
             final BRouterWorker worker = new BRouterWorker();
 
-            final String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/cgeo/routing";
-
-            // should be:
-            // final Folder base = PersistableFolder.ROUTING_BASE.getFolder();
-            // worker.segmentDir = PersistableFolder.ROUTING_TILES.getFolder();
-
-            final String fast = params.getString("fast");
-            final boolean isFast = "1".equals(fast) || "true".equals(fast) || "yes".equals(fast);
-            final String mode = params.getString("v");
-
             worker.profileFilename = params.getString("profile");
             if (StringUtils.isBlank(worker.profileFilename)) {
                 return ""; // cannot calculate a route without a profile
             }
 
-            worker.rawTrackPath = baseDir + "/" + mode + "_rawtrack.dat";
+            final String mode = params.getString("v");
+            worker.rawTrackPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/routing/";
+            FileUtils.mkdirs(new File(worker.rawTrackPath));
+            worker.rawTrackPath += mode + "_rawtrack.dat";
+
             worker.nogoList = new ArrayList<>();
 
             try {
