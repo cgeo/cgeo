@@ -2321,23 +2321,23 @@ public class DataStore {
         }
     }
 
-    public static void saveLogs(final String geocode, final Iterable<LogEntry> logs, final boolean removeAllExistingLongs) {
+    public static void saveLogs(final String geocode, final Iterable<LogEntry> logs, final boolean removeAllExistingLogs) {
         database.beginTransaction();
         try {
-            saveLogsWithoutTransaction(geocode, logs, removeAllExistingLongs);
+            saveLogsWithoutTransaction(geocode, logs, removeAllExistingLogs);
             database.setTransactionSuccessful();
         } finally {
             database.endTransaction();
         }
     }
 
-    private static void saveLogsWithoutTransaction(final String geocode, final Iterable<LogEntry> logs, final boolean removeAllExistingLongs) {
+    private static void saveLogsWithoutTransaction(final String geocode, final Iterable<LogEntry> logs, final boolean removeAllExistingLogs) {
         try (ContextLogger cLog = new ContextLogger("DataStore.saveLogsWithoutTransaction(%s)", geocode)) {
             if (!logs.iterator().hasNext()) {
                 return;
             }
             // TODO delete logimages referring these logs
-            if (removeAllExistingLongs) {
+            if (removeAllExistingLogs) {
                 database.delete(dbTableLogs, "geocode = ?", new String[]{geocode});
             } else {
                 // instead of deleting all existing logs for this cache, try to merge
@@ -4608,7 +4608,7 @@ public class DataStore {
                     Log.e("DataStore.saveLogOffline: cannot log an unknown log type and no message");
                     return false;
                 }
-                if (!StringUtils.isBlank(logEntry.cacheGeocode) && !logEntry.cacheGeocode.equals(geocode)) {
+                if (StringUtils.isNotBlank(logEntry.cacheGeocode) && !logEntry.cacheGeocode.equals(geocode)) {
                     Log.e("DataStore.saveLogOffline: mismatch between geocode in LogENtry and provided geocode: " + geocode + "<->" + logEntry.cacheGeocode);
                     return false;
                 }

@@ -303,10 +303,10 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         try {
             mapFile = createMapFile(mapFileCtx, mapStream);
             if (mapFile != null && mapFile.getMapFileInfo() != null && mapFile.getMapFileInfo().fileVersion <= 5) {
-                if (!StringUtils.isBlank(mapFile.getMapFileInfo().comment)) {
+                if (StringUtils.isNotBlank(mapFile.getMapFileInfo().comment)) {
                     return mapFile.getMapFileInfo().comment;
                 }
-                if (!StringUtils.isBlank(mapFile.getMapFileInfo().createdBy)) {
+                if (StringUtils.isNotBlank(mapFile.getMapFileInfo().createdBy)) {
                     return mapFile.getMapFileInfo().createdBy;
                 }
                 //map file is valid but has no attribution -> return default value

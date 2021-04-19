@@ -265,7 +265,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
     }
 
     public boolean themeOptionsAvailable() {
-        return !StringUtils.isBlank(Settings.getSelectedMapRenderTheme());
+        return StringUtils.isNotBlank(Settings.getSelectedMapRenderTheme());
     }
 
     /**

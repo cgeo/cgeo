@@ -73,7 +73,7 @@ public class ImageListFragment extends Fragment {
      * get title for an image in the list as displayed
      */
     public String getImageTitle(final Image image, final int position) {
-        if (!StringUtils.isBlank(image.getTitle())) {
+        if (StringUtils.isNotBlank(image.getTitle())) {
             return image.getTitle();
         }
         return getString(R.string.log_image_titleprefix) + " " + (position + 1);
@@ -200,7 +200,7 @@ public class ImageListFragment extends Fragment {
             holder.binding.imageTitle.setText(getImageTitle(image, position));
             holder.binding.imageInfo.setText(getImageInfo(image));
             holder.binding.imageDescription.setText(image.getDescription());
-            holder.binding.imageDescription.setVisibility(!StringUtils.isBlank(image.getDescription()) ? View.VISIBLE : View.GONE);
+            holder.binding.imageDescription.setVisibility(StringUtils.isNotBlank(image.getDescription()) ? View.VISIBLE : View.GONE);
         }
 
         private String getImageInfo(final Image image) {

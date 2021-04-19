@@ -1391,7 +1391,7 @@ public final class GCParser {
         if (StringUtils.isNotBlank(trackable.getName())) {
             // old TB pages include TB type as "alt" attribute
             String type = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE, true, trackable.getType());
-            if (!StringUtils.isBlank(type)) {
+            if (StringUtils.isNotBlank(type)) {
                 type = TextUtils.stripHtml(type);
             } else {
                 // try alternative way on pages formatted the newer style: <title>\n\t(TBxxxx) Type - Name\n</title>

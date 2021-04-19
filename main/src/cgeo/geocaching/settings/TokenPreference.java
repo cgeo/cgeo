@@ -70,7 +70,7 @@ public class TokenPreference extends AbstractClickablePreference {
 
     @Override
     protected boolean isAuthorized() {
-        return !StringUtils.isEmpty(Settings.getTokenSecret(tokenMapping.prefKeyId));
+        return StringUtils.isNotEmpty(Settings.getTokenSecret(tokenMapping.prefKeyId));
     }
 
     @Override

@@ -41,10 +41,10 @@ public class PersonalNote {
 
             //Scan provider note entry-by-entry and preserve what is not already in local note
             //(entry-by-entry-scan prevents provider notes to get duplicated on multiple cache refreshes with minimal changes on provider side)
-            if (!StringUtils.isEmpty(this.note)) {
+            if (StringUtils.isNotEmpty(this.note)) {
                 for (String token : PATTERN_SEPARATOR_SPLIT.split(this.note)) {
                     final String realToken = token.trim();
-                    if (!StringUtils.isEmpty(realToken) && !other.note.contains(realToken)) {
+                    if (StringUtils.isNotEmpty(realToken) && !other.note.contains(realToken)) {
                         newNote.append(SEPARATOR).append(realToken);
                     }
                 }

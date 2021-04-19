@@ -147,7 +147,7 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
 
     @Override
     public String getCacheLogUrl(@NonNull final Geocache cache, @NonNull final LogEntry logEntry) {
-        if (!StringUtils.isBlank(logEntry.serviceLogId)) {
+        if (StringUtils.isNotBlank(logEntry.serviceLogId)) {
             return getCacheUrl(cache) + "#p" + logEntry.serviceLogId;
         }
         return null;

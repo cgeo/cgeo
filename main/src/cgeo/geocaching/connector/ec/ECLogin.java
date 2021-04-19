@@ -104,7 +104,7 @@ public class ECLogin extends AbstractLogin {
             final JsonNode json = JsonUtils.reader.readTree(data);
 
             final String sid = json.get("sid").asText();
-            if (!StringUtils.isBlank(sid)) {
+            if (StringUtils.isNotBlank(sid)) {
                 sessionId = sid;
                 setActualLoginStatus(true);
                 setActualUserName(json.get("username").asText());
@@ -127,7 +127,7 @@ public class ECLogin extends AbstractLogin {
     }
 
     public String getSessionId() {
-        if (!StringUtils.isBlank(sessionId) || login() == StatusCode.NO_ERROR) {
+        if (StringUtils.isNotBlank(sessionId) || login() == StatusCode.NO_ERROR) {
             return sessionId;
         }
         return StringUtils.EMPTY;

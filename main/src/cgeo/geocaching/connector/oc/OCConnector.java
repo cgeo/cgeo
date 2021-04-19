@@ -72,7 +72,7 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     @Nullable
     public String getCacheLogUrl(@NonNull final Geocache cache, final @NonNull LogEntry logEntry) {
         final String internalId = getServiceSpecificLogId(logEntry.serviceLogId);
-        if (!StringUtils.isBlank(internalId)) {
+        if (StringUtils.isNotBlank(internalId)) {
             return getCacheUrl(cache) + "&log=A#log" + internalId;
         }
         return null;

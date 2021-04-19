@@ -1174,8 +1174,8 @@ public class Settings {
     }
 
     public static boolean isTwitterLoginValid() {
-        return !StringUtils.isBlank(getTokenPublic())
-                && !StringUtils.isBlank(getTokenSecret());
+        return StringUtils.isNotBlank(getTokenPublic())
+                && StringUtils.isNotBlank(getTokenSecret());
     }
 
     public static String getTokenPublic() {

@@ -126,7 +126,7 @@ final class ECApi {
             }
 
             final String data = Network.getResponseData(response, false);
-            if (!StringUtils.isBlank(data) && StringUtils.contains(data, "success")) {
+            if (StringUtils.isNotBlank(data) && StringUtils.contains(data, "success")) {
                 if (logType.isFoundLog()) {
                     ecLogin.increaseActualCachesFound();
                 }

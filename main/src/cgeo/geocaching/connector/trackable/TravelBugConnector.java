@@ -55,7 +55,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
 
     @Override
     public String getLogUrl(@NonNull final LogEntry logEntry) {
-        if (!StringUtils.isBlank(logEntry.serviceLogId)) {
+        if (StringUtils.isNotBlank(logEntry.serviceLogId)) {
             return "https://www.geocaching.com/track/log.aspx?LUID=" + logEntry.serviceLogId;
         }
         return null;

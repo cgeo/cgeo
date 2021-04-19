@@ -374,7 +374,7 @@ public class Trackable implements ILogable {
     }
 
     public boolean canShareLog(final LogEntry logEntry) {
-        return !StringUtils.isBlank(getServiceSpecificLogUrl(logEntry));
+        return StringUtils.isNotBlank(getServiceSpecificLogUrl(logEntry));
     }
 
     public String getServiceSpecificLogUrl(final LogEntry logEntry) {

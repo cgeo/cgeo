@@ -158,7 +158,7 @@ public class Waypoint implements IWaypoint {
         return
             isUserDefined() ||
             (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateJson() != null)) ||
-            !StringUtils.isBlank(getUserNote());
+            StringUtils.isNotBlank(getUserNote());
     }
 
     public void setUserDefined() {
@@ -324,7 +324,7 @@ public class Waypoint implements IWaypoint {
         }
 
         //user note
-        if (StringUtils.isBlank(this.getUserNote()) && !StringUtils.isBlank(parsedWaypoint.getUserNote())) {
+        if (StringUtils.isBlank(this.getUserNote()) && StringUtils.isNotBlank(parsedWaypoint.getUserNote())) {
             this.setUserNote(parsedWaypoint.getUserNote());
             changed = true;
         }

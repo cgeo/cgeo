@@ -2444,8 +2444,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @SuppressLint("SetTextI18n")
     static boolean setOfflineHintText(final OnClickListener showHintClickListener, final TextView offlineHintTextView, final String hint, final String personalNote) {
         if (null != showHintClickListener) {
-            final boolean hintGiven = !StringUtils.isEmpty(hint);
-            final boolean personalNoteGiven = !StringUtils.isEmpty(personalNote);
+            final boolean hintGiven = StringUtils.isNotEmpty(hint);
+            final boolean personalNoteGiven = StringUtils.isNotEmpty(personalNote);
             if (hintGiven || personalNoteGiven) {
                 offlineHintTextView.setText((hintGiven ? hint + (personalNoteGiven ? "\r\n" : "") : "") + (personalNoteGiven ? personalNote : ""));
                 return true;
