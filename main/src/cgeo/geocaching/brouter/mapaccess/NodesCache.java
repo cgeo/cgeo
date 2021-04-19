@@ -5,6 +5,7 @@
  */
 package cgeo.geocaching.brouter.mapaccess;
 
+import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.brouter.codec.DataBuffers;
 import cgeo.geocaching.brouter.codec.MicroCache;
 import cgeo.geocaching.brouter.codec.WaypointMatcher;
@@ -27,7 +28,6 @@ public final class NodesCache implements Closeable {
     public WaypointMatcher waypointMatcher;
     public boolean firstFileAccessFailed = false;
     public String firstFileAccessName;
-    private final File segmentDir;
     private final BExpressionContextWay expCtxWay;
     private final int lookupVersion;
     private final int lookupMinorVersion;
@@ -49,9 +49,8 @@ public final class NodesCache implements Closeable {
 
     private final boolean directWeaving = !Boolean.getBoolean("disableDirectWeaving");
 
-    public NodesCache(final String segmentDir, final BExpressionContextWay ctxWay, final long maxmem, final NodesCache oldCache, final boolean detailed) {
+    public NodesCache(final BExpressionContextWay ctxWay, final long maxmem, final NodesCache oldCache, final boolean detailed) {
         this.maxmemtiles = maxmem / 8;
-        this.segmentDir = new File(segmentDir);
         this.nodesMap = new OsmNodesMap();
         this.nodesMap.maxmem = (2L * maxmem) / 3L;
         this.expCtxWay = ctxWay;
@@ -65,10 +64,6 @@ public final class NodesCache implements Closeable {
 
         firstFileAccessFailed = false;
         firstFileAccessName = null;
-
-        if (!this.segmentDir.isDirectory()) {
-            throw new RuntimeException("segment directory " + segmentDir + " does not exist");
-        }
 
         if (oldCache != null) {
             fileCache = oldCache.fileCache;
@@ -323,7 +318,7 @@ public final class NodesCache implements Closeable {
         final String slat = lat < 0 ? "S" + (-lat) : "N" + lat;
         final String filenameBase = slon + "_" + slat;
 
-        currentFileName = filenameBase + ".rd5";
+        currentFileName = filenameBase + BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
         PhysicalFile ra = null;
         if (!fileCache.containsKey(filenameBase)) {

@@ -21,7 +21,6 @@ public class RoutingEngine extends Thread {
     protected List<MatchedWaypoint> matchedWaypoints;
     protected OsmTrack foundTrack = new OsmTrack();
     protected String errorMessage = null;
-    protected String segmentDir;
     protected RoutingContext routingContext;
     private NodesCache nodesCache;
     private final SortedHeap<OsmPath> openSet = new SortedHeap<OsmPath>();
@@ -31,7 +30,6 @@ public class RoutingEngine extends Thread {
     private static final int MAXNODES_ISLAND_CHECK = 500;
     private final OsmNodePairSet islandNodePairs = new OsmNodePairSet(MAXNODES_ISLAND_CHECK);
     private OsmTrack foundRawTrack = null;
-    private int alternativeIndex = 0;
     private volatile boolean terminated;
     private OsmTrack guideTrack;
     private OsmPathElement matchPath;
@@ -40,9 +38,7 @@ public class RoutingEngine extends Thread {
 
     private final boolean directWeaving = !Boolean.getBoolean("disableDirectWeaving");
 
-    public RoutingEngine(final String segmentDir,
-                         final List<OsmNodeNamed> waypoints, final RoutingContext rc) {
-        this.segmentDir = segmentDir;
+    public RoutingEngine(final List<OsmNodeNamed> waypoints, final RoutingContext rc) {
         this.waypoints = waypoints;
         this.routingContext = rc;
 
@@ -354,7 +350,7 @@ public class RoutingEngine extends Thread {
         }
         final long maxmem = routingContext.memoryclass * 1024L * 1024L; // in MB
 
-        nodesCache = new NodesCache(segmentDir, routingContext.expctxWay, maxmem, nodesCache, detailed);
+        nodesCache = new NodesCache(routingContext.expctxWay, maxmem, nodesCache, detailed);
         islandNodePairs.clearTempPairs();
     }
 
