@@ -14,14 +14,14 @@
 
 <h4>Map:</h4>
 <ul>
-<li>New: xyz</li>
-<li>Fix: xyz</li>
+<li>New: Automatic check for updates of downloaded map and theme files (optional)</li>
 </ul>
 
 <h4>Integrated routing engine:</h4>
 <ul>
 <li>New: Integrated BRouter routing engine - you can now use either external BRouter app or the integrated routing engine</li>
-<li>New: Integrated routing engine supports automatic downloading and updating of routing tile data</li>
+<li>New: Integrated routing engine supports automatic download of missing routing tiles</li>
+<li>New: Integrated routing engine supports automatic updates of downloaded routing tiles</li>
 <li>New: Integrated routing engine supports selecting different routing profiles</li>
 </ul>
 
