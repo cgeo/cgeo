@@ -571,7 +571,6 @@
     <string name="init_zoomincludingwaypoints_description">Eğer tek bir Geocache haritalanıyorsa: harita yakınlaştırması tüm yol noktalarını da içine almalı mıdır?</string>
     <string name="init_brouterThreshold">Rotayı hesapla</string>
     <string name="init_brouterShowBothDistances">Düz mesafeyi göster</string>
-    <string name="init_brouterAutoTileDownloads">Otomatik indirme</string>
     <string name="init_brouterAutoTileDownloads_description">Eksik olan rotalama deseni dosyasını otomatik olarak indirmeyi teklif et.</string>
     <string name="brouter_recalculating">Rota arka planda yeniden hesaplanıyor…</string>
     <string name="init_summary_brouterShowBothDistances">Routing aktif ise: hesaplanan rota mesafesine ek olarak düz mesafeyi göster.</string>
@@ -665,8 +664,6 @@
     <string name="init_base_directory_description">Ortak yerel veriler için temel klasör</string>
     <string name="init_map_directory_description">Çevrim dışı haritalar klasörü</string>
     <string name="init_brouter_directory_description">BRouter rotalama dosyalı klasör</string>
-    <string name="init_brouter_updateinterval_title">Güncelleme sıklığı</string>
-    <string name="init_brouter_updateinterval_description">Her x günde bir güncelleme kontrolü yapmanızı hatırlatacak</string>
     <string name="init_gpx_importexportdir">GPX Dizini</string>
     <string name="init_dataDir">Data klasörünü seç</string>
     <string name="init_dataDir_note">Geocache için ek verileri (ipucu görselleri, kayıt görselleri, …) harici deponuzda saklamak isteyebilirsiniz. (Cihazınıza bağlı benzetilmiş veya gerçek harici hafıza kartı).</string>
