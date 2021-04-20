@@ -572,7 +572,6 @@
     <string name="init_brouterThreshold">Route berekenen</string>
     <string name="init_brouterThreshold_description">Maximale afstand tot welke offline routering een route berekent.</string>
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
-    <string name="init_brouterAutoTileDownloads">Automatische download</string>
     <string name="init_brouterAutoTileDownloads_description">Automatisch aanbieden om ontbrekende routering tegel gegevens te downloaden.</string>
     <string name="init_brouterProfileWalk">\"Wandelen\" profiel</string>
     <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
@@ -670,8 +669,6 @@
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
     <string name="init_brouter_directory_description">Map met BRouter routering data</string>
-    <string name="init_brouter_updateinterval_title">Update interval</string>
-    <string name="init_brouter_updateinterval_description">Herinnert je om de x dagen voor een update controle</string>
     <string name="init_gpx_importexportdir">GPX map</string>
     <string name="init_dataDir">Gegevensmap selecteren</string>
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
