@@ -569,7 +569,6 @@
     <string name="init_zoomincludingwaypoints_description">S\'il n\'y a qu\'une seule cache sur la carte : le zoom doit-il être ajusté pour inclure tous ses points de passage ?</string>
     <string name="init_brouterThreshold">Calculer l\'itinéraire</string>
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
-    <string name="init_brouterAutoTileDownloads">Téléchargement automatique</string>
     <string name="brouter_recalculating">Recalcul de l\'itinéraire en arrière-plan…</string>
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
     <string name="init_useInternalRouting">Utiliser le calcul d\'itinéraire interne</string>
@@ -659,7 +658,6 @@
     <string name="init_local_file_system">Système de fichiers local</string>
     <string name="init_base_directory_description">Dossier de base pour les données locales publiques</string>
     <string name="init_map_directory_description">Dossier des cartes hors ligne</string>
-    <string name="init_brouter_updateinterval_title">Intervalle de mise à jour</string>
     <string name="init_gpx_importexportdir">Dossier GPX</string>
     <string name="init_dataDir">Sélectionnez un dossier de données</string>
     <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
