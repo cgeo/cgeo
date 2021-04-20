@@ -572,7 +572,6 @@
     <string name="init_brouterThreshold">Routenberechnung</string>
     <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher eine Route berechnet wird.</string>
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
-    <string name="init_brouterAutoTileDownloads">Automatisch herunterladen</string>
     <string name="init_brouterAutoTileDownloads_description">Fehlende Routingdaten automatisch zum Herunterladen anbieten.</string>
     <string name="init_brouterProfileWalk">\"Laufen\"-Profil</string>
     <string name="init_brouterProfileBike">\"Fahrrad\"-Profil</string>
@@ -670,8 +669,6 @@
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>
     <string name="init_map_directory_description">Ordner mit Offline-Karten</string>
     <string name="init_brouter_directory_description">Ordner mit BRouter Routing-Daten</string>
-    <string name="init_brouter_updateinterval_title">Aktualisierungsintervall</string>
-    <string name="init_brouter_updateinterval_description">Erinnert dich alle x Tage an eine Update-Prüfung</string>
     <string name="init_gpx_importexportdir">GPX-Ordner</string>
     <string name="init_dataDir">Datenordner wählen</string>
     <string name="init_dataDir_note">Du kannst auswählen, ob du die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf deinem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) speichern möchtest.</string>
