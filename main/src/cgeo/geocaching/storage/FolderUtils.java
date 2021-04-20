@@ -148,11 +148,20 @@ public class FolderUtils {
 
         @Override
         public String toString() {
+            return toString(false);
+        }
+
+        public String toString(final boolean includeFileInfo) {
             final int topLevelFilesMaximumDisplayCount = 10;
             final String incompletePraefix = resultIsIncomplete ? ">=" : "";
-            return "files:" + incompletePraefix + fileCount + ", dirs:" + incompletePraefix + dirCount + ", totalFileSize:" + incompletePraefix + Formatter.formatBytes(totalFileSize) +
-                ", topLevel(" + (topLevelFiles.size() > topLevelFilesMaximumDisplayCount ? "first " + topLevelFilesMaximumDisplayCount + " of " : "") +
-                topLevelFiles.size() + "):[" + CollectionStream.of(topLevelFiles).limit(topLevelFilesMaximumDisplayCount).toJoinedString(";") + "]";
+            String result = "files:" + incompletePraefix + fileCount + ", dirs:" + incompletePraefix + dirCount + ", totalFileSize:" + incompletePraefix + Formatter.formatBytes(totalFileSize);
+
+            if (includeFileInfo) {
+                result +=
+                    ", topLevel(" + (topLevelFiles.size() > topLevelFilesMaximumDisplayCount ? "first " + topLevelFilesMaximumDisplayCount + " of " : "") +
+                        topLevelFiles.size() + "):[" + CollectionStream.of(topLevelFiles).limit(topLevelFilesMaximumDisplayCount).toJoinedString(";") + "]";
+            }
+            return result;
         }
 
         /** returns internationalized strings for file count (left), dir count (middle) and total file size (right) */

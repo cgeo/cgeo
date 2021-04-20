@@ -82,8 +82,11 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
 
     private static final long FILESYNC_MAX_FILESIZE = 5 * 1024 * 1024; //5MB
 
+    private static final int THEMESCAN_MAX_SECONDS = 5;
+
     private  static final Object availableThemesMutex = new Object();
     private static final List<ThemeData> availableThemes = new ArrayList<>();
+    private static boolean availableThemesInitialized = false;
 
     private static final Object cachedZipMutex = new Object();
 
@@ -99,14 +102,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
     private static ZipXmlThemeResourceProvider cachedZipProvider = null;
 
     private static MapThemeFolderSynchronizer syncTask = null;
-
-    static {
-        try {
-            recalculateAvailableThemes();
-        } catch (Exception e) {
-            Log.e("Error initializing RenderThemeHelper", e);
-        }
-    }
 
     private static class ThemeData {
         public final String id;
@@ -393,12 +388,15 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
     private static void recalculateAvailableThemes() {
 
         final List<ThemeData> newAvailableThemes = new ArrayList<>();
-        addAvailableThemes(isThemeSynchronizationActive() ? Folder.fromFile(MAP_THEMES_INTERNAL_FOLDER) : MAP_THEMES_FOLDER.getFolder(), newAvailableThemes, "");
+        if (addAvailableThemes(isThemeSynchronizationActive() ? Folder.fromFile(MAP_THEMES_INTERNAL_FOLDER) : MAP_THEMES_FOLDER.getFolder(), newAvailableThemes, "", System.currentTimeMillis())) {
+            ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.mapthemes_themescan_too_long_toast, THEMESCAN_MAX_SECONDS, newAvailableThemes.size()));
+        }
         Collections.sort(newAvailableThemes, (t1, t2) -> TextUtils.COLLATOR.compare(t1.userDisplayableName, t2.userDisplayableName));
 
         synchronized (availableThemesMutex) {
             availableThemes.clear();
             availableThemes.addAll(newAvailableThemes);
+            availableThemesInitialized = true;
         }
 
         synchronized (cachedZipMutex) {
@@ -409,16 +407,24 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
 
     private static List<ThemeData> getAvailableThemes() {
         synchronized (availableThemesMutex) {
+            if (!availableThemesInitialized) {
+                recalculateAvailableThemes();
+            }
             //make a copy to be thread-safe
             return new ArrayList<>(availableThemes);
         }
     }
 
-    private static void addAvailableThemes(@NonNull final Folder dir, final List<ThemeData> themes, final String prefix) {
+    private static boolean addAvailableThemes(@NonNull final Folder dir, final List<ThemeData> themes, final String prefix, final long startTime) {
+
+        if ((System.currentTimeMillis() - startTime) > THEMESCAN_MAX_SECONDS * 1000) {
+            return true;
+        }
+        boolean result = false;
 
         for (FileInformation candidate : Objects.requireNonNull(ContentStorage.get().list(dir))) {
             if (candidate.isDirectory) {
-                addAvailableThemes(candidate.dirLocation, themes, prefix + candidate.name + "/");
+                result |= addAvailableThemes(candidate.dirLocation, themes, prefix + candidate.name + "/", startTime);
             } else if (candidate.name.endsWith(".xml")) {
                 final String themeId = prefix + candidate.name;
                 themes.add(new ThemeData(themeId, toUserDisplayableName(candidate, null), candidate, dir));
@@ -436,6 +442,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                 }
             }
         }
+        return result;
     }
 
     /**
