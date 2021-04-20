@@ -261,6 +261,7 @@
     <string name="err_trackable_log_not_anonymous">c:geoから%1$sに匿名でログは投稿できません。設定を開き%2$sからアカウント情報を入力しますか?</string>
     <string name="err_trackable_no_preference_activity">申し訳ありませんが、適切な設定画面が見つかりませんでした</string>
     <string name="confirm_unsaved_changes_title">変更が保存されていません</string>
+    <string name="confirm_discard_changes">保存せずに終了しますか?</string>
     <string name="confirm_discard_wp_changes">ウェイポイントの変更を破棄しますか?</string>
     <string name="err_request_popup_info">キャッシュポップアップ情報の取得に失敗しました</string>
     <string name="warn_log_load_additional_data">ログの追加データ(トラッカブル/お気に入りポイント)を読み込めませんでした</string>
@@ -459,7 +460,7 @@
     <string name="settings_summary_map">地図の選択、オフライン地図の設定、地図の詳細設定</string>
     <string name="settings_title_map_data">地図データ</string>
     <string name="settings_title_offline_routing">オフライン ルート検索</string>
-    <string name="settings_summary_offline_routing">オフラインルート検索は、BRouterアプリをインストール(セットアップ)しているか、c:geoルート検索が有効になっている場合に使用できます。</string>
+    <string name="settings_summary_offline_routing">オフラインルート検索は、BRouterアプリをインストール(セットアップ)しているか、c:geoルート検索が有効になっている場合に使用できます</string>
     <string name="settings_title_map_rotation">地図の回転 (Googleマップ)</string>
     <string name="settings_title_waypoints">ウェイポイント</string>
     <string name="settings_title_map_content">地図の表示</string>
@@ -568,14 +569,17 @@
     <string name="init_zoomincludingwaypoints">ウェイポイントを表示するようにズーム</string>
     <string name="init_zoomincludingwaypoints_description">1つだけキャッシュを表示している場合にすべてのウェイポイントが表示されるようにズーム</string>
     <string name="init_brouterThreshold">ルートを検索</string>
-    <string name="init_brouterThreshold_description">BRouter(インストールされている場合)がルートを検索するまでの最大距離</string>
+    <string name="init_brouterThreshold_description">ルート検索する際の最大距離</string>
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
     <string name="init_brouterAutoTileDownloads">自動ダウンロード</string>
     <string name="init_brouterAutoTileDownloads_description">ルート検索のデータを自動的にダウンロードします</string>
+    <string name="init_brouterProfileWalk">「徒歩」プロファイル</string>
+    <string name="init_brouterProfileBike">「自転車」プロファイル</string>
+    <string name="init_brouterProfileCar">「自動車」プロファイル</string>
     <string name="brouter_recalculating">バックグラウンドでルートを再検索しています…</string>
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
     <string name="init_useInternalRouting">c:geoルート検索を使用する</string>
-    <string name="init_summary_useInternalRouting">c:geoルート検索(Brouter互換)を使用するとルート検索データのダウンロードと更新も自動でできます</string>
+    <string name="init_summary_useInternalRouting">c:geoルート検索(Brouter互換)を使用するとルート検索データの自動ダウンロードなどもできます。</string>
     <string name="init_bigSmileysOnMap">大きなスマイルアイコン</string>
     <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルアイコンをキャッシュタイプアイコンの代わりに表示\n(c:geoの再起動が必要)</string>
     <string name="init_disabled">一時停止中キャッシュ除く</string>
@@ -1212,7 +1216,7 @@
     <string name="map_showwp_visited">ウェイポイント(訪問済み)</string>
     <string name="map_show_track">GPXトラック/ルートを表示</string>
     <string name="init_renderthemefolder_synctolocal">地図テーマフォルダの同期</string>
-    <string name="init_summary_renderthemefolder_synctolocal">少しストレージを使用しますが、地図テーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます。</string>
+    <string name="init_summary_renderthemefolder_synctolocal">地図テーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます(ストレージを少し余分に使用します)</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">地図テーマフォルダの同期</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">地図テーマフォルダをアプリ専用フォルダに常に同期します。ファイルのアクセス速度が向上します。同期する前に、地図テーマフォルダに地図テーマファイル以外の(大きなサイズの)ファイルが含まれてないことを確認してください。\n\n地図テーマフォルダは現在「%1$s」に設定されます。%2$sと%3$sが含まれており、合計サイズは%4$sです。\n\nフォルダを同期しますか?</string>
     <string name="onetime_mapthemefixslow_title">地図テーマ使用時の表示の遅延について</string>
@@ -1756,6 +1760,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="map_export_individual_route">個別ルートのエクスポート</string>
     <string name="map_load_individual_route">個別ルートの読み込み</string>
     <string name="map_load_individual_route_confirm">現在のルートに上書きしますか?</string>
+    <string name="map_autotarget_individual_route">ルートの開始地点を目的地として設定</string>
+    <string name="map_disable_autotarget_individual_route">「ルートの開始地点を目的地として設定」は無効になっています</string>
     <string name="map_clear_manual_targets">目的地を削除</string>
     <string name="map_manual_targets_cleared">目的地を削除しました</string>
     <string name="map_clear_individual_route">個別ルート削除</string>

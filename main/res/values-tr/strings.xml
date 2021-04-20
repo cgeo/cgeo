@@ -261,6 +261,7 @@
     <string name="err_trackable_log_not_anonymous">%1$s\'u c:geo\'ya kaydetme işlemi, anonim olarak yapılamıyor. %2$s\'den kimlik bilgilerinizi doldurmak için ayarları açmayı istiyor musunuz?</string>
     <string name="err_trackable_no_preference_activity">Üzgünüz, uygun bir tercih ekranı bulamıyoruz.</string>
     <string name="confirm_unsaved_changes_title">Kaydedilmemiş değişiklikler</string>
+    <string name="confirm_discard_changes">Kaydedilmemiş değişiklikler kaldırılsın mı?</string>
     <string name="confirm_discard_wp_changes">Kaydedilmeyen Yol Noktası değişiklikleri silinsin mi?</string>
     <string name="err_request_popup_info">c:Geo Geocache açılır pencere bilgisini alamadı.</string>
     <string name="warn_log_load_additional_data">c:geo kayıt için ek bilgileri (trackable\'lar/favori puanları) yüklemede başarısız oldu.</string>
@@ -569,14 +570,12 @@
     <string name="init_zoomincludingwaypoints">Yakınlaştırmada yol noktalarını da göster</string>
     <string name="init_zoomincludingwaypoints_description">Eğer tek bir Geocache haritalanıyorsa: harita yakınlaştırması tüm yol noktalarını da içine almalı mıdır?</string>
     <string name="init_brouterThreshold">Rotayı hesapla</string>
-    <string name="init_brouterThreshold_description">BRouter yardımcı uygulaması (eğer yüklendiyse) maksimum mesafeyi hesaplayacak.</string>
     <string name="init_brouterShowBothDistances">Düz mesafeyi göster</string>
     <string name="init_brouterAutoTileDownloads">Otomatik indirme</string>
     <string name="init_brouterAutoTileDownloads_description">Eksik olan rotalama deseni dosyasını otomatik olarak indirmeyi teklif et.</string>
     <string name="brouter_recalculating">Rota arka planda yeniden hesaplanıyor…</string>
     <string name="init_summary_brouterShowBothDistances">Routing aktif ise: hesaplanan rota mesafesine ek olarak düz mesafeyi göster.</string>
     <string name="init_useInternalRouting">Dahili rotalamayı kullan</string>
-    <string name="init_summary_useInternalRouting">Otomatik olarak rotalama dosyasını indirmeyi ve güncellemeyi kullanabilmek için c:geo dahili rotalamasını kullanın</string>
     <string name="init_bigSmileysOnMap">Geocache\'ler için büyük simgeler</string>
     <string name="init_summary_bigSmileysOnMap">Eğer etkinleştirilirse, haritada kayıt girilmiş cacheler için kutu tipi ikon yerine büyük ifadeler gösterilecek (yeniden başlatma gerekir).</string>
     <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
@@ -1015,7 +1014,7 @@
     <string name="cache_menu_navigation_walk">Navigasyon (Yürüyerek)</string>
     <string name="cache_menu_navigation_transit">Navigasyon (Araçla)</string>
     <string name="cache_menu_navigation_bike">Navigasyon (Bisikletle)</string>
-    <string name="cache_menu_maps_directions">Google Haritalar İstikametleri</string>
+    <string name="cache_menu_maps_directions">Google Haritalar ile git</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (Yürüyerek)</string>
     <string name="cache_menu_sygic_drive">Sygic (Arabayla)</string>
@@ -1658,7 +1657,7 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">c:geo\'nun 1 yıldan daha eski bir sürümünü kullanıyorsunuz. Bazı özellikler internet sitesi ve bazı teknik değişiklikler yüzünden çalışmayabilir. Nasıl yükselteceğinizi SSS\'den okuyabilirsiniz.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Konuşan pusula</string>
-    <string name="tts_toggle">Konuşmaya başla</string>
+    <string name="tts_toggle">Sesli yönlendirme Aç/Kapat</string>
     <string name="tts_started">Konuşmaya başladı</string>
     <string name="tts_stopped">Konuşmayı bıraktı</string>
     <string name="err_tts_lang_not_supported">Geçerli dil metin okuma tarafından desteklenmiyor.</string>

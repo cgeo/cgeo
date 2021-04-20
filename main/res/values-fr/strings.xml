@@ -568,7 +568,6 @@
     <string name="init_zoomincludingwaypoints">Le zoom inclut les points de passage</string>
     <string name="init_zoomincludingwaypoints_description">S\'il n\'y a qu\'une seule cache sur la carte : le zoom doit-il être ajusté pour inclure tous ses points de passage ?</string>
     <string name="init_brouterThreshold">Calculer l\'itinéraire</string>
-    <string name="init_brouterThreshold_description">Distance maximale jusqu\'à laquelle l\'application compagnon BRouter (si installée) calculera un itinéraire.</string>
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
     <string name="init_brouterAutoTileDownloads">Téléchargement automatique</string>
     <string name="brouter_recalculating">Recalcul de l\'itinéraire en arrière-plan…</string>

@@ -261,6 +261,7 @@
     <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
     <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
     <string name="confirm_unsaved_changes_title">Modifiche non salvate</string>
+    <string name="confirm_discard_changes">Scartare le modifiche non salvate?</string>
     <string name="confirm_discard_wp_changes">Ignorare i waypoint non salvati?</string>
     <string name="err_request_popup_info">c:geo non riesce ad ottenere le informazioni popup del cache.</string>
     <string name="warn_log_load_additional_data">c:geo non riesce a caricare dati aggiuntivi (trackables/punti preferiti) per il logging.</string>
@@ -569,14 +570,17 @@
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
     <string name="init_zoomincludingwaypoints_description">Con mappatura di un singolo cache: lo zoom deve essere regolato per includere tutti i waypoint?</string>
     <string name="init_brouterThreshold">Calcola percorso</string>
-    <string name="init_brouterThreshold_description">Distanza massima fino alla quale l\'app di supporto BRouter (se installata) calcolerà un percorso.</string>
+    <string name="init_brouterThreshold_description">Distanza massima fino alla quale il routing offline calcolerà un percorso.</string>
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
     <string name="init_brouterAutoTileDownloads">Download automatico</string>
     <string name="init_brouterAutoTileDownloads_description">Proponi automaticamente per scaricare i dati dei riquadri di mappa mancanti nel routing.</string>
+    <string name="init_brouterProfileWalk">Profilo \"Camminata\"</string>
+    <string name="init_brouterProfileBike">Profilo \"Bici\"</string>
+    <string name="init_brouterProfileCar">Profilo \"Automobile\"</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
     <string name="init_useInternalRouting">Usa navigatore integrato</string>
-    <string name="init_summary_useInternalRouting">Usa il navigatore integrato in c:geo per poter utilizzare il download e l\'aggiornamento automatico dei dati di navigazione</string>
+    <string name="init_summary_useInternalRouting">Usa il routing interno c:geo per poter utilizzare il download automatico dei dati di routing e altre funzioni</string>
     <string name="init_bigSmileysOnMap">Icone grandi per le cache registrati</string>
     <string name="init_summary_bigSmileysOnMap">Se abilitata, grandi emoticons saranno mostrate per le cache visitate/loggate sulla mappa invece dell\'icona che mostra il tipo di cache (richiede il riavvio).</string>
     <string name="init_disabled">Escludi disattivati</string>
