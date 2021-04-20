@@ -127,14 +127,14 @@ public class Folder {
     /** Returns a representation of this folder's location fit to show to an end user. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#PERSISTABLE_FOLDER}) */
     @NonNull
     public String toUserDisplayableString() {
-        return toUserDisplayableString(false);
+        return toUserDisplayableString(false, false);
     }
 
     @NonNull
-    public String toUserDisplayableString(final boolean addLegacyFlag) {
+    public String toUserDisplayableString(final boolean addLegacyFlag, final boolean forceEnglish) {
         String result = "";
         if (addLegacyFlag && getBaseType() == Folder.FolderType.FILE) {
-            result += "[" + (CgeoApplication.getInstance() == null ? "Legacy" :
+            result += "[" + (CgeoApplication.getInstance() == null || forceEnglish ? "Legacy" :
                 CgeoApplication.getInstance().getApplicationContext().getString(R.string.persistablefolder_legacy)) + "]";
         }
         result += UriUtils.toUserDisplayableString(getBaseUri(), getSubdirsToBase());
