@@ -572,7 +572,6 @@
     <string name="init_zoomincludingwaypoints_description">Ak mapujete jednu kešku: má sa priblíženie nastaviť tak, aby mapa obsahovala všetky body trasy kešky?</string>
     <string name="init_brouterThreshold">Vypočítať trasu</string>
     <string name="init_brouterShowBothDistances">Zobraziť priamu vzdialenosť</string>
-    <string name="init_brouterAutoTileDownloads">Automaticky prevziať</string>
     <string name="init_brouterAutoTileDownloads_description">Automatická ponuka prevziať chýbajúce údaje pre oblasť navigácie.</string>
     <string name="brouter_recalculating">Trasa sa prepočítava na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Ak je trasovanie aktívne: zobraziť priamu vzdialenosť okrem vypočítanej dĺžky trasy.</string>
@@ -666,8 +665,6 @@
     <string name="init_base_directory_description">Základný priečinok na verejné lokálne údaje</string>
     <string name="init_map_directory_description">Priečinok s offline mapami</string>
     <string name="init_brouter_directory_description">Priečinok s údajmi navigácie BRouter</string>
-    <string name="init_brouter_updateinterval_title">Interval aktualizácie</string>
-    <string name="init_brouter_updateinterval_description">Pripomenúť každých x dní kontrolu aktualizácie</string>
     <string name="init_gpx_importexportdir">Priečinok GPX</string>
     <string name="init_dataDir">Vyberte priečinok s údajmi</string>
     <string name="init_dataDir_note">Môžete zvoliť ukladanie ďalších údajov k skrýšam (spoilery, obrázky z logov…) do externej pamäte (emulovaná alebo skutočná externá SD karta, závisí to od zariadenia).</string>
