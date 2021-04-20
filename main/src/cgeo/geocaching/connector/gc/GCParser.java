@@ -560,7 +560,7 @@ public final class GCParser {
         cache.setFound(TextUtils.matches(page, GCConstants.PATTERN_FOUND));
 
         // cache type
-        cache.setType(CacheType.getByGuid(TextUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getType().id)));
+        cache.setType(CacheType.getByWaypointType(TextUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getType().id)));
 
         // on watchlist
         cache.setOnWatchlist(TextUtils.matches(page, GCConstants.PATTERN_WATCHLIST));
