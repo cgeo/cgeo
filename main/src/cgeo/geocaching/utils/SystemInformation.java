@@ -98,9 +98,9 @@ public final class SystemInformation {
             .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads())
             .append("\n- Global filter: ").append(Settings.getCacheType().pattern)
             .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
-            .append("\n- Routing mode: ").append(context.getString(Settings.getRoutingMode().infoResId));
-            appendMapSourceInformation(body, context);
-            body
+            .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId));
+        appendMapSourceInformation(body, context);
+        body
             .append("\n")
             .append("\nServices:")
             .append("\n-------");
@@ -195,9 +195,10 @@ public final class SystemInformation {
             return;
         }
         final ImmutablePair<String, Boolean> mapAtts = source.calculateMapAttribution(ctx);
-        body.append(source.getName()).append("\n  - Id: ").append(source.getId())
-            .append("\n  - Atts: ").append(mapAtts == null ? "none" : mapAtts.left)
-            .append("\n  - Theme: ").append(Settings.getSelectedMapRenderTheme());
+        body.append(source.getName()) // unfortunately localized but an English string would require large refactoring. The sourceId provides an unlocalized and unique identifier.
+                .append("\n  - Id: ").append(source.getId())
+                .append("\n  - Atts: ").append(mapAtts == null ? "none" :  HtmlUtils.extractText(mapAtts.left).replace("\n", " / "))
+                .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
     }
 
 
@@ -219,7 +220,7 @@ public final class SystemInformation {
                 if (connector instanceof ILogin) {
                     final ILogin login = (ILogin) connector;
                     connectors.append(": ").append(login.isLoggedIn() ? "Logged in" : "Not logged in")
-                            .append(" (").append(login.getLoginStatusString()).append(')');
+                            .append(" (").append(login.getLoginStatusString() /* unfortunately localized but an English string would require large refactoring */).append(')');
                     if (login.getName().equals("geocaching.com") && login.isLoggedIn()) {
                         connectors.append(" / ").append(Settings.getGCMemberStatus());
                     }

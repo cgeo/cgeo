@@ -158,10 +158,16 @@ public enum PersistableFolder {
     /** Returns a representation of this folder's location fit to show to an end user */
     @NonNull
     public String toUserDisplayableValue() {
-        String result = getFolder().toUserDisplayableString(true);
+        return toUserDisplayableValue(false);
+    }
+
+    /** Returns a representation of this folder's location fit to show to an end user */
+    @NonNull
+    public String toUserDisplayableValue(final boolean forceEnglish) {
+        String result = getFolder().toUserDisplayableString(true, forceEnglish);
 
         result += " (";
-        if (CgeoApplication.getInstance() == null) {
+        if (forceEnglish || CgeoApplication.getInstance() == null) {
             //this codepath is only chosen if no translation is available (e.g. in local unit tests)
             result += isUserDefined() ? "User-Defined" : "Default";
         } else {
@@ -183,7 +189,7 @@ public enum PersistableFolder {
 
     @Override
     public String toString() {
-        return name() + ": " + toUserDisplayableValue() + "[" + getFolder() + "]";
+        return name() + ": " + toUserDisplayableValue(true) + "[" + getFolder() + "]";
     }
 
 }
