@@ -2,12 +2,13 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>Next bugfix release:</h1>
+<h1>2021.04.21:</h1>
 
 <h4>Other changes:</h4>
 <ul>
 <li>Fix: Avoid long startup time if offline theme folder contains to much data</li>
 <li>Fix: Fix rare possible crash on startup</li>
+<li>Fix: Cache type not detected due to website changes</li>
 </ul>
 
 <h1>2021.04.15:</h1>

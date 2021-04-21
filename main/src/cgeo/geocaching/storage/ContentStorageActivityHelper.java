@@ -102,7 +102,7 @@ public class ContentStorageActivityHelper {
         //create the message;
         final String folderData = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_folderdata,
             folder.toUserDisplayableName(), folder.toUserDisplayableValue(), folderInfo.left, folderInfo.middle, folderInfo.right);
-        final String defaultFolder = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true));
+        final String defaultFolder = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true, false));
 
         final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
         dialog

@@ -6,10 +6,14 @@ import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.PluralsRes;
 import androidx.annotation.StringRes;
+
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -93,6 +97,17 @@ public final class LocalizationUtils {
         return new ImmutablePair<>(getStringWithFallback(messageId, fallback, paramsForUser), getStringWithFallback(messageId, fallback, paramsForLog));
     }
 
+    @NonNull
+    public static String getEnglishString(final Context context, @StringRes final int resId) {
+        final Configuration configuration = getEnglishConfiguration(context);
+        return context.createConfigurationContext(configuration).getResources().getString(resId);
+    }
 
+    @NonNull
+    private static Configuration getEnglishConfiguration(final Context context) {
+        final Configuration configuration = new Configuration(context.getResources().getConfiguration());
+        configuration.setLocale(new Locale("en"));
+        return configuration;
+    }
 
 }
