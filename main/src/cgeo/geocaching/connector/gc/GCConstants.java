@@ -78,8 +78,8 @@ public final class GCConstants {
     /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
     static final Pattern PATTERN_CACHES_FOUND = Pattern.compile(Pattern.quote("cache-count\">") + "\\s*([\\d,.]+)", Pattern.DOTALL);
 
-    static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("src=\"(https?://(img(?:cdn)?\\.geocaching\\.com|[^>\"]+\\.cloudfront\\.net)/avatar/[0-9a-f-]+\\.(" + IMAGE_FORMATS + "))\"[^>]*alt=\"");
-    static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("ctl00_ContentBody_lbUsername\">.*<strong>(.*)</strong>");
+    static final Pattern PATTERN_AVATAR_IMAGE_SERVERPARAMETERS = Pattern.compile("\"(https?:\\/\\/(img(?:cdn)?\\.geocaching\\.com|[^>\\\"]+\\.cloudfront\\.net)\\/avatar\\/[0-9a-f-]+\\.(" + IMAGE_FORMATS + "))\\\"");
+    static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("<script type=\"text\\/javascript\">\\s*var dataLayer = \\[\\{\\s*\"username\": \"([^\"]*)\"");    
     static final Pattern PATTERN_MAP_LOGGED_IN = Pattern.compile("<a href=\"https?://www.geocaching.com/my/\" class=\"CommonUsername\"");
 
     // Patterns for parsing trackables
