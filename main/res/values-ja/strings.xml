@@ -287,6 +287,9 @@
     <string name="menu_helpers">ユーティリティアプリ</string>
     <string name="menu_settings">設定</string>
     <string name="menu_backup">バックアップ/復元</string>
+    <string name="menu_update">更新</string>
+    <string name="menu_update_routingdata">ルート検索データ</string>
+    <string name="menu_update_mapdata">地図データ</string>
     <string name="menu_history">履歴</string>
     <string name="menu_filter">フィルタ</string>
     <string name="menu_scan_geo">QRコードスキャン</string>
@@ -571,7 +574,9 @@
     <string name="init_brouterThreshold">ルートを検索</string>
     <string name="init_brouterThreshold_description">ルート検索する際の最大距離</string>
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
+    <string name="init_autoDownloads">自動ダウンロード</string>
     <string name="init_brouterAutoTileDownloads_description">ルート検索のデータを自動的にダウンロードします</string>
+    <string name="init_mapAutoDownloads_description">地図とテーマファイルの更新を自動確認します。</string>
     <string name="init_brouterProfileWalk">「徒歩」プロファイル</string>
     <string name="init_brouterProfileBike">「自転車」プロファイル</string>
     <string name="init_brouterProfileCar">「自動車」プロファイル</string>
@@ -668,6 +673,8 @@
     <string name="init_base_directory_description">データ保存のベースフォルダ</string>
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
     <string name="init_brouter_directory_description">ルート検索データ(Brouter互換)フォルダ</string>
+    <string name="init_updateinterval_title">更新間隔</string>
+    <string name="init_updateinterval_description">自動更新の間隔(日)</string>
     <string name="init_gpx_importexportdir">GPXフォルダ</string>
     <string name="init_dataDir">データフォルダを選択</string>
     <string name="init_dataDir_note">ジオキャッシュ(スポイラー画像、ログの画像など)の追加データを外部ストレージ(お使いのデバイスに応じてエミュレートまたは実際の外部 SD カード)に格納することができます</string>
@@ -1855,6 +1862,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadtile_title">ルート検索データが見つかりません</string>
     <string name="downloadtile_info">ルート検索データが不足しているため、c:geoはルートを検索できません。ルート検索データをダウンロードしますか？</string>
     <string name="tileupdate_info">ダウンロードしたルート検索データの更新を確認しますか?</string>
+    <string name="mapupdate_info">地図とテーマファイルの更新を確認しますか?</string>
     <string name="no_updates_found">更新はありません。</string>
     <string name="updates_check">更新を確認</string>
     <string name="mapserver_mapsforge_info">基本地図(地図テーマは必要ありません)</string>
@@ -1915,6 +1923,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_skip_wizard_warning">設定が完了するまでc:geoは期待通りに動作しない可能性があります。 未設定の項目によっては、オフライン地図、ジオキャッシュ、ログファイルなどのデータを読み込み/保存ができない場合があります。\n\nセットアップを再開するには、メインメニューで「設定ウィザード」を選択するか、c:geoを再起動してください。</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$sフォルダの同期が%2$sで完了しました。%3$d/%4$sが同期されました</string>
+    <string name="mapthemes_themescan_too_long_toast">地図テーマのスキャンに%1$d秒以上かかりました。%2$dテーマを見つけた後に中止されました。</string>
     <!-- default actions in dialogs -->
     <string name="previous">戻る</string>
     <string name="skip">スキップ</string>
