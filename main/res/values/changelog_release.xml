@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>Next bugfix release:</h1>
+<h1>2021.04.21:</h1>
 
 <h4>Other changes:</h4>
 <ul>
