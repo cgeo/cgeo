@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.routing;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.downloader.DownloadConfirmationActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
@@ -220,7 +221,7 @@ public final class Routing {
         }
 
         // missing routing data?
-        if (gpx.startsWith("datafile ") && gpx.endsWith(" not found") && Settings.useInternalRouting() && Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy()) {
+        if (gpx.startsWith("datafile ") && gpx.endsWith(" not found")) {
             synchronized (requestedTileFiles) {
                 String filename = gpx.substring(9);
                 final int pos = filename.indexOf(" ");
@@ -237,10 +238,16 @@ public final class Routing {
                 Log.i("routing: missing file " + filename + ", alreadyRequested=" + alreadyRequested);
                 if (!alreadyRequested) {
                     requestedTileFiles.add(filename);
-                    final Intent intent = new Intent(getContext(), DownloadConfirmationActivity.class);
-                    intent.putExtra(DownloadConfirmationActivity.BUNDLE_FILENAME, filename);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getContext().startActivity(intent);
+                    if (Settings.useInternalRouting()) {
+                        if (Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy()) {
+                            final Intent intent = new Intent(getContext(), DownloadConfirmationActivity.class);
+                            intent.putExtra(DownloadConfirmationActivity.BUNDLE_FILENAME, filename);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            getContext().startActivity(intent);
+                        }
+                    } else {
+                        ActivityMixin.showApplicationToast(String.format(getContext().getString(R.string.brouter_missing_data), filename));
+                    }
                 }
             }
         }
