@@ -1936,6 +1936,7 @@
     <string name="wizard_skip_wizard_warning">c:geo werkt mogelijk niet zoals verwacht totdat de configuratie is voltooid. Afhankelijk van de ontbrekende configuratie kan c:geo mogelijk niet in staat zijn om gegevens te lezen/opslaan zoals offline kaarten, geocaches, logbestanden etc.\n\nWanneer je de installatie wilt voltooien, kies dan \"Configuratiewizard\" in het hoofdmenu of herstart c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mapsynchronisatie voltooid na %2$s, %3$d van de %4$s behoefden synchronisatie</string>
+    <string name="mapthemes_themescan_too_long_toast">Kaartthema scan heeft meer dan %1$d seconden geduurt, afgebroken na het vinden van %2$d thema\'s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Vorige</string>
     <string name="skip">Overslaan</string>
