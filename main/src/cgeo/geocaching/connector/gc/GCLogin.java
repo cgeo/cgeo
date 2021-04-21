@@ -308,7 +308,13 @@ public class GCLogin extends AbstractLogin {
         setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
         if (isActualLoginStatus()) {
             setActualUserName(Settings.getUserName());
-            // number of caches found is not part of this page
+            int cachesCount = 0;
+            try {
+                cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_LOGIN_PAGE, true, "0")));
+                setActualCachesFound(cachesCount);
+            } catch (final NumberFormatException e) {
+                Log.e("getLoginStatus: bad cache count", e);
+            }
             return true;
         }
 
