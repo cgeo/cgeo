@@ -287,6 +287,9 @@
     <string name="menu_helpers">Hulpprogramma\'s</string>
     <string name="menu_settings">Instellingen</string>
     <string name="menu_backup">Back-up maken / terugzetten</string>
+    <string name="menu_update">Bijwerken</string>
+    <string name="menu_update_routingdata">Routering gegevens</string>
+    <string name="menu_update_mapdata">Kaartgegevens</string>
     <string name="menu_history">Geschiedenis</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
@@ -572,7 +575,9 @@
     <string name="init_brouterThreshold">Route berekenen</string>
     <string name="init_brouterThreshold_description">Maximale afstand tot welke offline routering een route berekent.</string>
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
+    <string name="init_autoDownloads">Automatische download</string>
     <string name="init_brouterAutoTileDownloads_description">Automatisch aanbieden om ontbrekende routering tegel gegevens te downloaden.</string>
+    <string name="init_mapAutoDownloads_description">Automatisch controleren op updates van kaart en thema bestanden (alleen geldig voor bestanden die je hebt gedownload met de geïntegreerde downloader).</string>
     <string name="init_brouterProfileWalk">\"Wandelen\" profiel</string>
     <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
     <string name="init_brouterProfileCar">\"Auto\" profiel</string>
@@ -669,6 +674,8 @@
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
     <string name="init_brouter_directory_description">Map met BRouter routering data</string>
+    <string name="init_updateinterval_title">Update interval</string>
+    <string name="init_updateinterval_description">Herinnert je om de x dagen voor een update controle</string>
     <string name="init_gpx_importexportdir">GPX map</string>
     <string name="init_dataDir">Gegevensmap selecteren</string>
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
@@ -1889,6 +1896,7 @@
     <string name="downloadtile_title">Ontbrekende routering gegevens</string>
     <string name="downloadtile_info">c:geo kan de gevraagde route niet berekenen omdat er enkele routering data ontbreekt. Wil je ontbrekende routering data downloaden?</string>
     <string name="tileupdate_info">Wil je controleren op updates van gedownloade routering gegevensbestanden?</string>
+    <string name="mapupdate_info">Wil je controleren op updates van kaart en themabestanden?</string>
     <string name="no_updates_found">Geen updates gevonden</string>
     <string name="updates_check">Controle op updates</string>
     <string name="mapserver_mapsforge_info">Basis kaarten, geen kaart thema\'s nodig</string>
@@ -1949,6 +1957,7 @@
     <string name="wizard_skip_wizard_warning">c:geo werkt mogelijk niet zoals verwacht totdat de configuratie is voltooid. Afhankelijk van de ontbrekende configuratie kan c:geo mogelijk niet in staat zijn om gegevens te lezen/opslaan zoals offline kaarten, geocaches, logbestanden etc.\n\nWanneer je de installatie wilt voltooien, kies dan \"Configuratiewizard\" in het hoofdmenu of herstart c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mapsynchronisatie voltooid na %2$s, %3$d van de %4$s behoefden synchronisatie</string>
+    <string name="mapthemes_themescan_too_long_toast">Kaartthema scan heeft meer dan %1$d seconden geduurt, afgebroken na het vinden van %2$d thema\'s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Vorige</string>
     <string name="skip">Overslaan</string>
