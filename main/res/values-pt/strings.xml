@@ -1931,6 +1931,7 @@
     <string name="wizard_skip_wizard_warning">O c:geo pode não funcionar como esperado até que a configuração esteja concluída. Dependendo das configurações em falta, o c:geo pode não ser capaz de ler/armazenar dados como mapas offline, geocaches, ficheiros de registos, etc\n\nQuando achar que é o momento para finalizar a configuração, pode fazê-lo escolhendo a opção \"Assistente de configuração\" no menu principal ou reiniciando o c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">A sincronização de pasta %1$s terminada após %2$s, %3$d de %4$s a precisar de sincronização</string>
+    <string name="mapthemes_themescan_too_long_toast">Verificação do tema do mapa demorou mais de %1$d segundos, abortado depois de encontrar %2$d temas</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ignorar</string>
