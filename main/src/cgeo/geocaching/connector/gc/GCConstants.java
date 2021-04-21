@@ -80,7 +80,7 @@ public final class GCConstants {
     static final Pattern PATTERN_CACHES_FOUND = Pattern.compile(Pattern.quote("cache-count\">") + "\\s*([\\d,.]+)", Pattern.DOTALL);
 
     static final Pattern PATTERN_AVATAR_IMAGE_SERVERPARAMETERS = Pattern.compile("\"(https?:\\/\\/(img(?:cdn)?\\.geocaching\\.com|[^>\\\"]+\\.cloudfront\\.net)\\/avatar\\/[0-9a-f-]+\\.(" + IMAGE_FORMATS + "))\\\"");
-    static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("ctl00_ContentBody_lbUsername\">.*<strong>(.*)</strong>");
+    static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("<script type=\"text\\/javascript\">\\s*var dataLayer = \\[\\{\\s*\"username\": \"([^\"]*)\"");
 
     // Patterns for parsing trackables
 
