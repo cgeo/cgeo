@@ -8,6 +8,7 @@
 <ul>
 <li>Fix: Avoid long startup time if offline theme folder contains to much data</li>
 <li>Fix: Fix rare possible crash on startup</li>
+<li>Fix: Cache type not detected due to website changes</li>
 </ul>
 
 <h1>2021.04.15:</h1>
