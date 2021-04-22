@@ -568,7 +568,6 @@
     <string name="init_zoomincludingwaypoints_description">Ved visning av en enkelt cache: Skal kartutsnittet justeres slik at alle veipunktene blir synlig?</string>
     <string name="init_brouterThreshold">Beregn rute</string>
     <string name="init_brouterShowBothDistances">Vis distanse i rett linje</string>
-    <string name="init_brouterAutoTileDownloads">Automatisk nedlasting</string>
     <string name="init_brouterAutoTileDownloads_description">Tilby deg automatisk til å laste ned manglende rutingsflis-data.</string>
     <string name="brouter_recalculating">Beregner rute i bakgrunnen…</string>
     <string name="init_summary_brouterShowBothDistances">Om routing er aktiv: Vis distanse i rett linje i tillegg til den utregnede rutelengden.</string>
@@ -660,8 +659,6 @@
     <string name="init_base_directory_description">Grunnmappen for offentlige lokale data</string>
     <string name="init_map_directory_description">Mappe for offline-kart</string>
     <string name="init_brouter_directory_description">Mapper med BRouter rutingsdata</string>
-    <string name="init_brouter_updateinterval_title">Oppdateringsintervall</string>
-    <string name="init_brouter_updateinterval_description">Minner deg hver x dag på en oppdateringssjekk</string>
     <string name="init_gpx_importexportdir">GPX-mappe</string>
     <string name="init_dataDir">Velg mappe for data</string>
     <string name="init_dataDir_note">Du kan velge å lagre eksterne data for geocacher(spoilere, logbilder o. l.) på din enhets eksterne minne(emulert eller SD-kort, avhengig av din enhet).</string>

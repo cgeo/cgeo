@@ -571,7 +571,6 @@
     <string name="init_zoomincludingwaypoints_description">Si fiqueu al mapa un catxé: s\'ha d\'ajustar el zoom per incloure tots els seus punts de ruta?</string>
     <string name="init_brouterThreshold">Calcula la ruta</string>
     <string name="init_brouterShowBothDistances">Mostra la distància en línia recta</string>
-    <string name="init_brouterAutoTileDownloads">Descàrrega automàtica</string>
     <string name="init_brouterAutoTileDownloads_description">Oferiu automàticament la baixada de dades d’encaminament que falten.</string>
     <string name="brouter_recalculating">S\'està recalculant la ruta en segon pla…</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
@@ -665,8 +664,6 @@
     <string name="init_base_directory_description">Carpeta base per a dades locals públiques</string>
     <string name="init_map_directory_description">Carpeta amb mapes fora de línia</string>
     <string name="init_brouter_directory_description">Carpeta amb dades d’encaminament BRouter</string>
-    <string name="init_brouter_updateinterval_title">Interval d\'actualització</string>
-    <string name="init_brouter_updateinterval_description">Us recorda cada x dies per comprovar les actualitzacions</string>
     <string name="init_gpx_importexportdir">Carpeta GPX</string>
     <string name="init_dataDir">Selecciona la carpeta de dades</string>
     <string name="init_dataDir_note">Podeu triar emmagatzemar les dades addicionals per als geoamagatalls (pistes, registre d\'imatges, …) en l\'emmagatzematge extern (targeta SD externa emulada o real, en funció del dispositiu).</string>

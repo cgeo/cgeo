@@ -287,6 +287,9 @@
     <string name="menu_helpers">Utilitários</string>
     <string name="menu_settings">Definições</string>
     <string name="menu_backup">Cópia de segurança / restauro</string>
+    <string name="menu_update">Actualizar</string>
+    <string name="menu_update_routingdata">Dados de encaminhamento</string>
+    <string name="menu_update_mapdata">Dados do mapa</string>
     <string name="menu_history">Histórico</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Ler código GC</string>
@@ -572,8 +575,9 @@
     <string name="init_brouterThreshold">Calcular rota</string>
     <string name="init_brouterThreshold_description">Distância máxima até à qual o encaminhamento offline calculará uma rota.</string>
     <string name="init_brouterShowBothDistances">Mostrar distância em linha recta</string>
-    <string name="init_brouterAutoTileDownloads">Transferência automática</string>
+    <string name="init_autoDownloads">Transferência automática</string>
     <string name="init_brouterAutoTileDownloads_description">Oferecer automaticamente a transferência de dados dos blocos para encaminhamento em falta.</string>
+    <string name="init_mapAutoDownloads_description">Verificar automaticamente por actualizações dos ficheiros do mapa e dos temas. (Válido apenas para os ficheiros que tenha transferido com o gestor de transferências integrado.)</string>
     <string name="init_brouterProfileWalk">Perfil \"Caminhar\"</string>
     <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
     <string name="init_brouterProfileCar">Perfil \"Carro\"</string>
@@ -670,8 +674,8 @@
     <string name="init_base_directory_description">Pasta base para dados locais públicos</string>
     <string name="init_map_directory_description">Pasta com mapas offline</string>
     <string name="init_brouter_directory_description">Pasta com dados de encaminhamento do BRouter</string>
-    <string name="init_brouter_updateinterval_title">Intervalo de actualização</string>
-    <string name="init_brouter_updateinterval_description">É lembrado a cada x dias para realizar uma verificação por actualizações</string>
+    <string name="init_updateinterval_title">Intervalo de actualização</string>
+    <string name="init_updateinterval_description">Lembra-o a cada x dias para verificar por actualizações</string>
     <string name="init_gpx_importexportdir">Pasta GPX</string>
     <string name="init_dataDir">Seleccionar pasta de dados</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
@@ -1887,6 +1891,8 @@
     <string name="downloadtile_title">Dados de encaminhamento em falta</string>
     <string name="downloadtile_info">O c:geo não pode calcular a rota solicitada, pois falta algum ficheiro de dados de encaminhamento. Quer transferir os dados de encaminhamento em falta?</string>
     <string name="tileupdate_info">Deseja verificar se há actualizações para os ficheiros de dados de encaminhamento transferidos?</string>
+    <string name="mapupdate_info">Deseja verificar por actualizações dos ficheiros 
+do mapa e dos temas?</string>
     <string name="no_updates_found">Nenhuma actualização encontrada</string>
     <string name="updates_check">Verificação de actualizações</string>
     <string name="mapserver_mapsforge_info">Mapas básicos, nenhum tema de mapa necessário</string>
@@ -1947,6 +1953,7 @@
     <string name="wizard_skip_wizard_warning">O c:geo pode não funcionar como esperado até que a configuração esteja concluída. Dependendo das configurações em falta, o c:geo pode não ser capaz de ler/armazenar dados como mapas offline, geocaches, ficheiros de registos, etc\n\nQuando achar que é o momento para finalizar a configuração, pode fazê-lo escolhendo a opção \"Assistente de configuração\" no menu principal ou reiniciando o c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">A sincronização de pasta %1$s terminada após %2$s, %3$d de %4$s a precisar de sincronização</string>
+    <string name="mapthemes_themescan_too_long_toast">Verificação do tema do mapa demorou mais de %1$d segundos, abortado depois de encontrar %2$d temas</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ignorar</string>

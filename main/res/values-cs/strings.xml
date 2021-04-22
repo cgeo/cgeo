@@ -287,6 +287,9 @@
     <string name="menu_helpers">Užitečné aplikace</string>
     <string name="menu_settings">Nastavení</string>
     <string name="menu_backup">Zálohovat / Obnovit</string>
+    <string name="menu_update">Aktualizace</string>
+    <string name="menu_update_routingdata">Data pro směrování</string>
+    <string name="menu_update_mapdata">Mapové podklady</string>
     <string name="menu_history">Historie</string>
     <string name="menu_filter">Filtr</string>
     <string name="menu_scan_geo">Naskenovat geokód</string>
@@ -574,8 +577,9 @@
     <string name="init_brouterThreshold">Vypočítat trasu</string>
     <string name="init_brouterThreshold_description">Maximální vzdálenost, do které offline směrování vypočítá trasu.</string>
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
-    <string name="init_brouterAutoTileDownloads">Automatické stahování</string>
+    <string name="init_autoDownloads">Automatické stahování</string>
     <string name="init_brouterAutoTileDownloads_description">Automaticky nabídnout stažení chybějících dat pro směrování.</string>
+    <string name="init_mapAutoDownloads_description">Automaticky kontrolovat aktualizace map a souborů s motivy (platí pouze pro soubory, které jste si stáhli pomocí integrovaného správce stahování.)</string>
     <string name="init_brouterProfileWalk">Profil \"Chůze\"</string>
     <string name="init_brouterProfileBike">Profil \"Kolo\"</string>
     <string name="init_brouterProfileCar">Profil \"Auto\"</string>
@@ -672,8 +676,8 @@
     <string name="init_base_directory_description">Základní složka pro veřejná místní data</string>
     <string name="init_map_directory_description">Složka s offline mapami</string>
     <string name="init_brouter_directory_description">Složka s daty pro naviagaci BRouter</string>
-    <string name="init_brouter_updateinterval_title">Interval aktualizace</string>
-    <string name="init_brouter_updateinterval_description">Každých x dní vám připomene kontrolu aktualizací</string>
+    <string name="init_updateinterval_title">Interval aktualizace</string>
+    <string name="init_updateinterval_description">Každých x dní vám připomene kontrolu aktualizací</string>
     <string name="init_gpx_importexportdir">Složka pro GPX</string>
     <string name="init_dataDir">Vybrat složku s údaji</string>
     <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro kešky (nápovědy, obrázky, …) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
@@ -1944,6 +1948,7 @@
     <string name="downloadtile_title">Chybí údaje o směrování</string>
     <string name="downloadtile_info">c:geo nemůže vypočítat požadovanou trasu, protože chybí některá data. Chcete stáhnout chybějící data pro směrování?</string>
     <string name="tileupdate_info">Chcete zkontrolovat aktualizace stažených souborů pro směrování?</string>
+    <string name="mapupdate_info">Chcete zkontrolovat aktualizace map a souborů s motivy?</string>
     <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>
     <string name="updates_check">Kontrola aktualizací</string>
     <string name="mapserver_mapsforge_info">Základní mapy, nejsou vyžadovány mapové motivy</string>
@@ -2004,6 +2009,7 @@
     <string name="wizard_skip_wizard_warning">c:geo nemusí fungovat podle očekávání, dokud nebude dokončena konfigurace. V závislosti na chybějící konfiguraci nemusí být c:geo schopen číst/ukládat data jako jsou offline mapy, kešky, poznámky atd.\n\nKdykoli se budete cítit připraveni dokončit nastavení, zvolte v hlavní nabídce „Průvodce konfigurací“ nebo c:geo restartujte.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizace %1$s složek byla dokončena po %2$s, %3$d z %4$s potřebuje synchronizaci</string>
+    <string name="mapthemes_themescan_too_long_toast">Skenování mapových motivů trvalo více než %1$d sekund, po nalezení %2$d motivů bylo přerušeno</string>
     <!-- default actions in dialogs -->
     <string name="previous">Předchozí</string>
     <string name="skip">Přeskočit</string>

@@ -261,6 +261,7 @@
     <string name="err_trackable_log_not_anonymous">Η καταγραφή %1$s από το c:geo δεν μπορεί να γίνει ανώνυμα. Θέλετε να ανοίξετε τις ρυθμίσεις για να συμπληρώσετε τα διαπιστευτήριά σας από την %2$s;</string>
     <string name="err_trackable_no_preference_activity">Συγνώμη, δεν είναι δυνατό να βρεθεί μία κατάλληλη οθόνη προτίμησης.</string>
     <string name="confirm_unsaved_changes_title">Μη αποθηκευμένες αλλαγές</string>
+    <string name="confirm_discard_changes">Απόρριψη μη αποθηκευμένων αλλαγών;</string>
     <string name="confirm_discard_wp_changes">Απόρριψη αλλαγών των μη αποθηκευμένων σημείων διαδρομής;</string>
     <string name="err_request_popup_info">το c:geo απέτυχε να ανακτήσει τις πληροφορίες της κρύπτης.</string>
     <string name="warn_log_load_additional_data">Το c:geo απέτυχε να φορτώσει πρόσθετα δεδομένα (ανιχνεύσιμα/αγαπημένα σημεία) για την καταγραφή.</string>
@@ -286,6 +287,9 @@
     <string name="menu_helpers">Βοηθητικά προγράμματα</string>
     <string name="menu_settings">Ρυθμίσεις</string>
     <string name="menu_backup">Αντίγραφα ασφαλείας / επαναφορά</string>
+    <string name="menu_update">Αναβάθμιση</string>
+    <string name="menu_update_routingdata">Δεδομένα δρομολόγησης</string>
+    <string name="menu_update_mapdata">Δεδομένα χάρτη</string>
     <string name="menu_history">Ιστορικό</string>
     <string name="menu_filter">Φίλτρο</string>
     <string name="menu_scan_geo">Σάρωση γεωκωδικού</string>
@@ -571,8 +575,9 @@
     <string name="init_brouterThreshold">Υπολογισμός διαδρομής</string>
     <string name="init_brouterThreshold_description">Μέγιστη απόσταση μέχρι την οποία η δρομολόγηση εκτός σύνδεσης θα υπολογίσει μια διαδρομή.</string>
     <string name="init_brouterShowBothDistances">Εμφάνιση ευθείας απόστασης</string>
-    <string name="init_brouterAutoTileDownloads">Αυτόματη λήψη</string>
+    <string name="init_autoDownloads">Αυτόματη λήψη</string>
     <string name="init_brouterAutoTileDownloads_description">Αυτόματη προσφορά για λήψη δεδομένων δρομολόγησης που λείπουν.</string>
+    <string name="init_mapAutoDownloads_description">Αυτόματος έλεγχος για ενημέρωση των αρχείων χάρτη και θέματος. (Ισχύει μόνο για αρχεία που έχετε κατεβάσει με τον ενσωματωμένο downloader.)</string>
     <string name="init_brouterProfileWalk">Προφίλ \"περπάτημα\"</string>
     <string name="init_brouterProfileBike">Προφίλ \"ποδήλατο\"</string>
     <string name="init_brouterProfileCar">Προφίλ \"Αυτοκίνητο\"</string>
@@ -669,8 +674,8 @@
     <string name="init_base_directory_description">Βασικός Κατάλογος για δημόσια τοπικά δεδομένα</string>
     <string name="init_map_directory_description">Κατάλογος χαρτών εκτός σύνδεσης</string>
     <string name="init_brouter_directory_description">Φάκελος με δεδομένα δρομολόγησης BRouter</string>
-    <string name="init_brouter_updateinterval_title">Διάστημα μεταξύ ενημερώσεων</string>
-    <string name="init_brouter_updateinterval_description">Σας υπενθυμίζει κάθε x ημέρες για έλεγχο ενημερώσεων</string>
+    <string name="init_updateinterval_title">Διάστημα μεταξύ ενημερώσεων</string>
+    <string name="init_updateinterval_description">Σας υπενθυμίζει κάθε x ημέρες για έλεγχο ενημερώσεων</string>
     <string name="init_gpx_importexportdir">Φάκελος GPX</string>
     <string name="init_dataDir">Επιλέξτε φάκελο</string>
     <string name="init_dataDir_note">Μπορείτε να επιλέξετε την αποθήκευση των πρόσθετων δεδομένων των κρυπτών (σπόιλερ, καταγραφές, εικόνες, …) σε εξωτερική συσκευή αποθήκευσης ( πραγματική ή μη εξωτερική κάρτα SD ανάλογα με τη συσκευή σας).</string>
@@ -1887,6 +1892,7 @@
     <string name="downloadtile_title">Λείπουν δεδομένα δρομολόγησης</string>
     <string name="downloadtile_info">Το c:geo δεν μπορεί να υπολογίσει την ζητούμενη διαδρομή καθώς λείπει κάποιο αρχείο δεδομένων δρομολόγησης. Θέλετε να κατεβάσετε δεδομένα δρομολόγησης που λείπουν;</string>
     <string name="tileupdate_info">Θέλετε να ελέγξετε για ενημερώσεις των κατεβασμένων αρχείων δρομολόγησης δεδομένων;</string>
+    <string name="mapupdate_info">Θέλετε να ελέγξετε για ενημερώσεις του χάρτη και των αρχείων θέματος;</string>
     <string name="no_updates_found">Δεν βρέθηκαν ενημερώσεις</string>
     <string name="updates_check">Έλεγχος ενημερώσεων</string>
     <string name="mapserver_mapsforge_info">Βασικοί χάρτες, δεν απαιτούνται θέματα χάρτη</string>
@@ -1947,6 +1953,7 @@
     <string name="wizard_skip_wizard_warning">το c:geo μπορεί να μην λειτουργήσει όπως αναμένεται μέχρι να ολοκληρωθούν οι ρυθμίσεις. Ανάλογα με τη ρύθμιση c:geo που λείπει μπορεί να μην είναι σε θέση να διαβάσει/αποθηκεύσει δεδομένα όπως χάρτες εκτός σύνδεσης, geocaches, αρχεία καταγραφής κλπ.\n\nΌποτε αισθάνεστε έτοιμοι να ολοκληρώσετε τις ρυθμίσεις, είτε επιλέξτε \"Οδηγός διαμόρφωσης\" στο κύριο μενού είτε επανεκκινήστε το c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s ο συγχρονισμός φακέλου ολοκληρώθηκε μετά από %2$s, %3$d από %4$s χρειάζεται συγχρονισμό</string>
+    <string name="mapthemes_themescan_too_long_toast">Η σάρωση θέματος χάρτη χρειάστηκε περισσότερο από %1$d δευτερόλεπτα, εγκαταλείφθηκε μετά την εύρεση %2$d θεμάτων</string>
     <!-- default actions in dialogs -->
     <string name="previous">Προηγούμενο</string>
     <string name="skip">Παράλειψη</string>

@@ -287,6 +287,9 @@
     <string name="menu_helpers">Yardımcı programlar</string>
     <string name="menu_settings">Ayarlar</string>
     <string name="menu_backup">Yedekle /yeniden yükle</string>
+    <string name="menu_update">Güncelle</string>
+    <string name="menu_update_routingdata">Yönlendirme verisi</string>
+    <string name="menu_update_mapdata">Harita verisi</string>
     <string name="menu_history">Geçmiş</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Geocode tara</string>
@@ -460,8 +463,8 @@
     <string name="settings_title_map">Harita</string>
     <string name="settings_summary_map">Harita kaynağını, çevrimdışı harita ayarlarını ve harita detaylarını ayarlayın.</string>
     <string name="settings_title_map_data">Harita verileri</string>
-    <string name="settings_title_offline_routing">Çevrim dışı rotalama</string>
-    <string name="settings_summary_offline_routing">Çevrim dışı rotalama \"BRouter\" yardımcı uygulaması yüklü olduğunda ve yapılandırıldığında veya dahili rotalama etkinleştirildiği zaman mevcut olacaktır.</string>
+    <string name="settings_title_offline_routing">Çevrimdışı yönlendirme</string>
+    <string name="settings_summary_offline_routing">Çevrim dışı yönlendirme \"BRouter\" yardımcı uygulaması yüklü olduğunda ve yapılandırıldığında veya dahili yönlendirme etkinleştirildiği zaman mevcut olacaktır.</string>
     <string name="settings_title_map_rotation">Harita açısı (Google Maps)</string>
     <string name="settings_title_waypoints">Yol noktaları</string>
     <string name="settings_title_map_content">Harita içeriği</string>
@@ -570,12 +573,18 @@
     <string name="init_zoomincludingwaypoints">Yakınlaştırmada yol noktalarını da göster</string>
     <string name="init_zoomincludingwaypoints_description">Eğer tek bir Geocache haritalanıyorsa: harita yakınlaştırması tüm yol noktalarını da içine almalı mıdır?</string>
     <string name="init_brouterThreshold">Rotayı hesapla</string>
+    <string name="init_brouterThreshold_description">Çevrimdışı yönlendirmenin bir rota için hesaplayabileceği maksimum mesafe.</string>
     <string name="init_brouterShowBothDistances">Düz mesafeyi göster</string>
-    <string name="init_brouterAutoTileDownloads">Otomatik indirme</string>
+    <string name="init_autoDownloads">Otomatik indirme</string>
     <string name="init_brouterAutoTileDownloads_description">Eksik olan rotalama deseni dosyasını otomatik olarak indirmeyi teklif et.</string>
+    <string name="init_mapAutoDownloads_description">Harita ve tema dosyalarının güncellemesini otomatik olarak kontrol eder. (Sadece dahili indirme yöneticisiyle indirdiğiniz dosyalar için geçerlidir.)</string>
+    <string name="init_brouterProfileWalk">Yürüme</string>
+    <string name="init_brouterProfileBike">Bisiklet</string>
+    <string name="init_brouterProfileCar">Araba</string>
     <string name="brouter_recalculating">Rota arka planda yeniden hesaplanıyor…</string>
-    <string name="init_summary_brouterShowBothDistances">Routing aktif ise: hesaplanan rota mesafesine ek olarak düz mesafeyi göster.</string>
+    <string name="init_summary_brouterShowBothDistances">Yönlendirme aktif ise: hesaplanan rota mesafesine ek olarak düz mesafeyi göster.</string>
     <string name="init_useInternalRouting">Dahili rotalamayı kullan</string>
+    <string name="init_summary_useInternalRouting">Otomatik yönledirme dosyası indirmek ve diğer işlevleri kullanabilmek için c:geo dahili yönlendirmesini kullanın</string>
     <string name="init_bigSmileysOnMap">Geocache\'ler için büyük simgeler</string>
     <string name="init_summary_bigSmileysOnMap">Eğer etkinleştirilirse, haritada kayıt girilmiş cacheler için kutu tipi ikon yerine büyük ifadeler gösterilecek (yeniden başlatma gerekir).</string>
     <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
@@ -664,9 +673,9 @@
     <string name="init_local_file_system">Yerel Dosya Sistemi</string>
     <string name="init_base_directory_description">Ortak yerel veriler için temel klasör</string>
     <string name="init_map_directory_description">Çevrim dışı haritalar klasörü</string>
-    <string name="init_brouter_directory_description">BRouter rotalama dosyalı klasör</string>
-    <string name="init_brouter_updateinterval_title">Güncelleme sıklığı</string>
-    <string name="init_brouter_updateinterval_description">Her x günde bir güncelleme kontrolü yapmanızı hatırlatacak</string>
+    <string name="init_brouter_directory_description">BRouter yönlendirme verisi içeren klasör</string>
+    <string name="init_updateinterval_title">Güncelleme sıklığı</string>
+    <string name="init_updateinterval_description">Her x günde bir güncelleme kontrolü yapmanızı hatırlatacak</string>
     <string name="init_gpx_importexportdir">GPX Dizini</string>
     <string name="init_dataDir">Data klasörünü seç</string>
     <string name="init_dataDir_note">Geocache için ek verileri (ipucu görselleri, kayıt görselleri, …) harici deponuzda saklamak isteyebilirsiniz. (Cihazınıza bağlı benzetilmiş veya gerçek harici hafıza kartı).</string>
@@ -840,8 +849,8 @@
     <string name="persistablefolder_logfiles">Kayıt dosyası</string>
     <string name="persistablefolder_fieldnotes">Saha Notları</string>
     <string name="persistablefolder_spoilerimages">İpucu Görselleri</string>
-    <string name="persistablefolder_routingbase">Rotalama</string>
-    <string name="persistablefolder_routingtiles">Rotalama dosyası</string>
+    <string name="persistablefolder_routingbase">Yönlendirme</string>
+    <string name="persistablefolder_routingtiles">Yönlendirme verisi</string>
     <string name="persistableuri_track">Trackfile</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s tamamlandı</string>
@@ -1240,8 +1249,8 @@
     <string name="map_live_disable">Anlık görüntü kapalı</string>
     <string name="map_as_list">Liste olarak göster</string>
     <string name="map_select_multiple_items">Öğe seç</string>
-    <string name="map_routing">Rotalama (Şu an: %s)</string>
-    <string name="map_routing_brouter">Rotalama sadece <a href="">BRouter</a> yüklenmişse kullanılabilir</string>
+    <string name="map_routing">Yönlendirme (Şu an: %s)</string>
+    <string name="map_routing_brouter">Yönlendirme sadece <a href="">BRouter</a> yüklenmişse kullanılabilir</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
     <string name="map_gm_autorotation_disable">Otomatik harita döndürmesini devre dışı bırakılsın mı?\n\nHarita döndürme menüsünü kullanarak tekrardan etkinleştirebilirsiniz</string>
     <string name="quick_settings">Hızlı ayarlar</string>
@@ -1355,7 +1364,7 @@
     <string name="helper_google_translate_description">Google çeviri uygulamasından çeviri paketi indirirseniz, Geocache açıklama metnine basılı tutarak (internet bağlantısı olmadan) c:geo\'daki Geocache açıklamalarını kolaylıkla çevirebilirsiniz.</string>
     <string name="helper_where_you_go_description">WhereYouGo Wherigo türündeki Geocache\'leri bulmanızı sağlar. c:geo otomatik olarak kartuşların bu uygulama üzerinden indirilmesini tetikler.</string>
     <string name="helper_brouter_title">BRouter çevrimdışı navigasyon</string>
-    <string name="helper_brouter_description">BRouter çevrimdışı rotalama sağlar. Kurulup, gerekli dosyalar indirilmişse, c:geo dahili harita üzerinde otomatik olarak Geocache\'e bir rota gösterir.</string>
+    <string name="helper_brouter_description">BRouter çevrimdışı yönlendirme sağlar. Kurulup, gerekli dosyalar indirilmişse, c:geo dahili harita üzerinde otomatik olarak Geocache\'e bir rota gösterir.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf etiketlerden veri okur, ANT+/Garmin chirp etiketli kutuları bulmanız için gereklidir.</string>
     <!-- export -->
     <string name="share_export">Paylaş / Dışa aktar</string>
@@ -1887,6 +1896,7 @@
     <string name="downloadtile_title">Rotalama dosyası eksik</string>
     <string name="downloadtile_info">c:geo, bazı rotalama dosyaları eksik olduğundan istenilen rotayı hesaplayamıyor. Eksik olan rotalama dosyalarını indirmek ister misiniz?</string>
     <string name="tileupdate_info">İndirilmiş olan rotalama dosyalarının güncellemelerini kontrol etmek ister misiniz?</string>
+    <string name="mapupdate_info">Harita ve tema dosyaları için olan güncellemeleri kontrol etmek ister misiniz?</string>
     <string name="no_updates_found">Güncelleme bulunamadı</string>
     <string name="updates_check">Güncellemelerin kontrolü</string>
     <string name="mapserver_mapsforge_info">Temel harita, harita teması gerekmez</string>
@@ -1933,7 +1943,7 @@
     <string name="wizard_welcome_advanced">Gelişmiş yapılandırma</string>
     <string name="wizard_advanced_offlinemaps_label">Çevrimdışı haritalar</string>
     <string name="wizard_advanced_offlinemaps_info">Bu sayfa, kullanılması isteğe bağlı bazı gelişmiş ayarları içerir.\n\nc:geo, harita dosyalarını çevrim dışı kullanım için indirebilir.</string>
-    <string name="wizard_advanced_brouter_label">Rotalama uygulaması</string>
+    <string name="wizard_advanced_brouter_label">Yönlendirme uygulaması</string>
     <string name="wizard_advanced_brouter_info">\"BRouter Offline Navigation\" adındaki tamamlayıcı uygulamayı yükleyerek ve ayarlayarak c:geo, hedeflere gidebilir ve haritanızdaki rota bilgilerini gösterebilir.</string>
     <string name="wizard_advanced_restore_label">Geri Yükle</string>
     <string name="wizard_advanced_restore_info">Eğer daha önceki kurulumdan kalan bir yedeğiniz varsa, ayarlarınızı ve/veya geocache verilerinizi yenileyebilirsiniz.</string>
@@ -1947,6 +1957,7 @@
     <string name="wizard_skip_wizard_warning">c:geo, yapılandırma tamamlanana kadar beklendiği gibi çalışmayabilir. Hangi ayarın yapılandırılmamış olduğuna bağlı olarak, c:geo çevrim dışı haritalar, geocache\'ler, kayıt dosyaları vb. verilerinizi okuyamayabilir/depolayamayabilir.\n\nKurulumu bitirmeye hazır olduğunuzda, ana menüdeki \"Yapılandırma sihirbazı\"na girebilir veya c:geo\'yu yeniden başlatabilirsiniz.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s klasörü senkronizasyonu %2$s sonrasında tamamlandı, %3$d/%4$s kadarı senkronizasyon gerektiriyor</string>
+    <string name="mapthemes_themescan_too_long_toast">Harita tema taraması %1$d saniyeden uzun sürdü ve %2$d tema bulduktan sonra sonlandırıldı</string>
     <!-- default actions in dialogs -->
     <string name="previous">Önceki</string>
     <string name="skip">Geç</string>
