@@ -287,6 +287,9 @@
     <string name="menu_helpers">Nützliche Apps</string>
     <string name="menu_settings">Einstellungen</string>
     <string name="menu_backup">Sichern / Wiederherstellen</string>
+    <string name="menu_update">Aktualisieren</string>
+    <string name="menu_update_routingdata">Routingdaten</string>
+    <string name="menu_update_mapdata">Kartendaten</string>
     <string name="menu_history">Verlauf</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Geocode scannen</string>
@@ -572,7 +575,9 @@
     <string name="init_brouterThreshold">Routenberechnung</string>
     <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher eine Route berechnet wird.</string>
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
+    <string name="init_autoDownloads">Automatisch herunterladen</string>
     <string name="init_brouterAutoTileDownloads_description">Fehlende Routingdaten automatisch zum Herunterladen anbieten.</string>
+    <string name="init_mapAutoDownloads_description">Automatisch auf Updates für Karten und Kartendesigns prüfen. (Betrifft nur Dateien, die mit dem integrierten Downloader geladen wurden.)</string>
     <string name="init_brouterProfileWalk">\"Laufen\"-Profil</string>
     <string name="init_brouterProfileBike">\"Fahrrad\"-Profil</string>
     <string name="init_brouterProfileCar">\"Auto\"-Profil</string>
@@ -669,6 +674,8 @@
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>
     <string name="init_map_directory_description">Ordner mit Offline-Karten</string>
     <string name="init_brouter_directory_description">Ordner mit BRouter Routing-Daten</string>
+    <string name="init_updateinterval_title">Aktualisierungsintervall</string>
+    <string name="init_updateinterval_description">Erinnert dich alle x Tage an eine Update-Prüfung</string>
     <string name="init_gpx_importexportdir">GPX-Ordner</string>
     <string name="init_dataDir">Datenordner wählen</string>
     <string name="init_dataDir_note">Du kannst auswählen, ob du die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf deinem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) speichern möchtest.</string>
@@ -1889,6 +1896,7 @@
     <string name="downloadtile_title">Fehlende Routing-Daten</string>
     <string name="downloadtile_info">c:geo kann die angeforderte Route nicht berechnen, da einige Routingdaten fehlen. Möchtest du die fehlenden Routingdaten herunterladen?</string>
     <string name="tileupdate_info">Möchtest du nach Updates der heruntergeladenen Routing-Dateien suchen?</string>
+    <string name="mapupdate_info">Möchtest du nach Updates für Karten und Kartendesigns suchen?</string>
     <string name="no_updates_found">Keine Aktualisierungen gefunden</string>
     <string name="updates_check">Prüfe auf Aktualisierungen</string>
     <string name="mapserver_mapsforge_info">Basiskarten, keine Kartendesigns erforderlich</string>
