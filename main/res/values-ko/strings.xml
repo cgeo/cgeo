@@ -1851,7 +1851,7 @@
     <string name="downloadmap_no_updates_found">지도 업데이트 없음</string>
     <string name="downloadmap_directory">폴더</string>
     <string name="downloadmap_mapfile">지도 파일</string>
-    <string name="downloadmap_retrieving_directory_data">폴더 정보 찾는 중...</string>
+    <string name="downloadmap_retrieving_directory_data">폴더 정보 찾는 중…</string>
     <string name="downloadmap_checking_for_updates">업데이트 확인중…</string>
     <string name="downloadmap_install_theme_title">테마 파일 설치</string>
     <string name="downloadmap_install_theme_info">다운로드한 지도에는 특수 테마 파일이 필요합니다. 이것도 다운로드 하시겠습니까?</string>
