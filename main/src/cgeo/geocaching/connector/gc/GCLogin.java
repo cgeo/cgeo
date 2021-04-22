@@ -35,7 +35,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 public class GCLogin extends AbstractLogin {
 
@@ -289,32 +288,17 @@ public class GCLogin extends AbstractLogin {
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
-        // on every page except login page
         final String username = GCParser.getUsername(page);
         setActualLoginStatus(StringUtils.isNotBlank(username));
         if (isActualLoginStatus()) {
             setActualUserName(username);
             int cachesCount = 0;
             try {
-                cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0")));
+                cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_LOGIN_PAGE, true, "0")));
             } catch (final NumberFormatException e) {
                 Log.e("getLoginStatus: bad cache count", e);
             }
             setActualCachesFound(cachesCount);
-            return true;
-        }
-
-        // login page
-        setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
-        if (isActualLoginStatus()) {
-            setActualUserName(Settings.getUserName());
-            int cachesCount = 0;
-            try {
-                cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_LOGIN_PAGE, true, "0")));
-                setActualCachesFound(cachesCount);
-            } catch (final NumberFormatException e) {
-                Log.e("getLoginStatus: bad cache count", e);
-            }
             return true;
         }
 
@@ -323,8 +307,12 @@ public class GCLogin extends AbstractLogin {
     }
 
     private boolean isLanguageEnglish(@NonNull final String page) {
-        final Element languageElement = Jsoup.parse(page).select("div.language-dropdown > select > option[selected=\"selected\"]").first();
-        return languageElement != null && StringUtils.equals(languageElement.text(), "English");
+        final ServerParameters params = getServerParameters();
+        try {
+            return params != null && (params.appOptions.localRegion.equals("en-US"));
+        } catch (final Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -343,6 +331,7 @@ public class GCLogin extends AbstractLogin {
             try {
                 final String page = Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/culture/set?model.SelectedCultureCode=en-US"));
                 Log.i("changed language on geocaching.com to English");
+                resetServerParameters();
                 getLoginStatus(page);
                 return true;
             } catch (final Exception ignored) {
@@ -439,6 +428,10 @@ public class GCLogin extends AbstractLogin {
         }
 
         return serverParameters;
+    }
+
+    public void resetServerParameters() {
+        serverParameters = null;
     }
 
     public static Date parseGcCustomDate(final String input, final String format) throws ParseException {
