@@ -75,13 +75,11 @@ public final class GCConstants {
     static final String PATTERN_GC_CHECKER = "ctl00_ContentBody_lblSolutionChecker";
 
     // Info box top-right
-    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("class=\"user-name\"[^>]*>(.*?)</span>", Pattern.DOTALL);
+    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\\swindow(?>\\.|\\[')headerSettings(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
     /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
-    static final Pattern PATTERN_CACHES_FOUND = Pattern.compile(Pattern.quote("cache-count\">") + "\\s*([\\d,.]+)", Pattern.DOTALL);
-    static final Pattern PATTERN_CACHES_FOUND_LOGIN_PAGE = Pattern.compile("\\swindow(?>\\.|\\[')headerSettings(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"findCount\":\\s*([0-9]*)[\\S\\s]*\\}");
+    static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("\\swindow(?>\\.|\\[')headerSettings(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"findCount\":\\s*([0-9]*)[\\S\\s]*\\}");
 
     static final Pattern PATTERN_AVATAR_IMAGE_SERVERPARAMETERS = Pattern.compile("\"(https?:\\/\\/(img(?:cdn)?\\.geocaching\\.com|[^>\\\"]+\\.cloudfront\\.net)\\/avatar\\/[0-9a-f-]+\\.(" + IMAGE_FORMATS + "))\\\"");
-    static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("\\swindow(?>\\.|\\[')headerSettings(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
 
     // Patterns for parsing trackables
 

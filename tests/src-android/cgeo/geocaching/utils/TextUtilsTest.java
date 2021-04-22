@@ -45,7 +45,7 @@ public class TextUtilsTest extends TestCase {
 
     public static void testRegEx() {
         final String page = readCachePage("GC2CJPF");
-        assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")).isEqualTo("ra_sch");
+        assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")).isEqualTo("abft");
     }
 
     public static void testReplaceWhitespaces() {
