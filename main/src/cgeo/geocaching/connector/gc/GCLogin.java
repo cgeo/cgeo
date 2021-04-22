@@ -35,7 +35,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 public class GCLogin extends AbstractLogin {
 
@@ -314,8 +313,12 @@ public class GCLogin extends AbstractLogin {
     }
 
     private boolean isLanguageEnglish(@NonNull final String page) {
-        final Element languageElement = Jsoup.parse(page).select("div.language-dropdown > select > option[selected=\"selected\"]").first();
-        return languageElement != null && StringUtils.equals(languageElement.text(), "English");
+        final ServerParameters params = getServerParameters();
+        try {
+            return params != null && (params.appOptions.localRegion.equals("en-US"));
+        } catch (final Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -334,6 +337,7 @@ public class GCLogin extends AbstractLogin {
             try {
                 final String page = Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/culture/set?model.SelectedCultureCode=en-US"));
                 Log.i("changed language on geocaching.com to English");
+                resetServerParameters();
                 getLoginStatus(page);
                 return true;
             } catch (final Exception ignored) {
@@ -435,6 +439,10 @@ public class GCLogin extends AbstractLogin {
         }
 
         return serverParameters;
+    }
+
+    public void resetServerParameters() {
+        serverParameters = null;
     }
 
     public static Date parseGcCustomDate(final String input, final String format) throws ParseException {
