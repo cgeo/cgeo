@@ -1940,12 +1940,12 @@ public final class GCParser {
 
     @Nullable
     public static String getUsername(final String page) {
-        final String username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE, null);
+        final String username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, null);
         if (StringUtils.isNotBlank(username)) {
             return username;
         }
 
-        // Old style webpage fallback
+        // Old style webpage fallback // @todo: no longer existing?
         final Document document = Jsoup.parse(page);
         final String usernameOld = TextUtils.stripHtml(document.select("span.li-user-info > span:first-child").text());
 
@@ -1955,7 +1955,7 @@ public final class GCParser {
     public static int getCachesCount(final String page) {
         int cachesCount = -1;
         try {
-            final String intStringToParse = removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_LOGIN_PAGE, true, ""));
+            final String intStringToParse = removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, ""));
             if (!intStringToParse.isEmpty()) {
                 cachesCount = Integer.parseInt(intStringToParse);
             }

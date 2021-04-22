@@ -309,9 +309,6 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testGetUsername() {
-        // Old style page
-        assertThat(GCParser.getUsername(MockedCache.readCachePage("GC2CJPF"))).isEqualTo("ra_sch");
-        // New style page
-        assertThat(GCParser.getUsername(MockedCache.readCachePage("GC5BRQK"))).isEqualTo("ra_sch");
+        assertThat(GCParser.getUsername(MockedCache.readCachePage("GC2CJPF"))).isEqualTo("abft");
     }
 }
