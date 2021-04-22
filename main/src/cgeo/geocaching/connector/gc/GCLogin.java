@@ -295,32 +295,17 @@ public class GCLogin extends AbstractLogin {
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
-        // on every page except login page
         final String username = GCParser.getUsername(page);
         setActualLoginStatus(StringUtils.isNotBlank(username));
         if (isActualLoginStatus()) {
             setActualUserName(username);
             int cachesCount = 0;
             try {
-                cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0")));
+                cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_LOGIN_PAGE, true, "0")));
             } catch (final NumberFormatException e) {
                 Log.e("getLoginStatus: bad cache count", e);
             }
             setActualCachesFound(cachesCount);
-            return true;
-        }
-
-        // login page
-        setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
-        if (isActualLoginStatus()) {
-            setActualUserName(Settings.getUserName());
-            int cachesCount = 0;
-            try {
-                cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_LOGIN_PAGE, true, "0")));
-                setActualCachesFound(cachesCount);
-            } catch (final NumberFormatException e) {
-                Log.e("getLoginStatus: bad cache count", e);
-            }
             return true;
         }
 
