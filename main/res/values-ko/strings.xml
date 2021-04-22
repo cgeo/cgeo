@@ -754,7 +754,7 @@
     <string name="init_create_memory_dump">메모리 덤프 생성</string>
     <string name="init_memory_dump">메모리 덤프</string>
     <string name="init_memory_dumped">%s에 메모리 덤프</string>
-    <string name="init_please_wait">잠시 기다려 주십시오...</string>
+    <string name="init_please_wait">잠시 기다려 주십시오…</string>
     <string name="init_hardware_acceleration_title">하드웨어 가속 렌더링</string>
     <string name="init_hardware_acceleration_note">하드웨어 가속 렌더링를 사용하면 화면이 빨리 그려집니다. 하지만, 일부 안드로이드 OS 기기의 경우 버그가 있고 문자(특히 강조문자)가 흐리게 나타나기도 합니다. 이런 상태가 발생하면 하드웨어 가속을 끄세요.</string>
     <string name="init_hardware_acceleration">하드웨어 가속 활성화</string>
