@@ -576,7 +576,7 @@
     <string name="init_brouterThreshold_description">BRouter yardımcı uygulaması (eğer yüklendiyse) maksimum mesafeyi hesaplayacak.</string>
     <string name="init_brouterShowBothDistances">Düz mesafeyi göster</string>
     <string name="brouter_recalculating">Rota arka planda yeniden hesaplanıyor…</string>
-    <string name="init_summary_brouterShowBothDistances">Routing aktif ise: hesaplanan rota mesafesine ek olarak düz mesafeyi göster.</string>
+    <string name="init_summary_brouterShowBothDistances">Yönlendirme aktif ise: hesaplanan rota mesafesine ek olarak düz mesafeyi göster.</string>
     <string name="init_bigSmileysOnMap">Geocache\'ler için büyük simgeler</string>
     <string name="init_summary_bigSmileysOnMap">Eğer etkinleştirilirse, haritada kayıt girilmiş cacheler için kutu tipi ikon yerine büyük ifadeler gösterilecek (yeniden başlatma gerekir).</string>
     <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
@@ -1237,8 +1237,8 @@
     <string name="map_live_disable">Anlık görüntü kapalı</string>
     <string name="map_as_list">Liste olarak göster</string>
     <string name="map_select_multiple_items">Öğe seç</string>
-    <string name="map_routing">Rotalama (Şu an: %s)</string>
-    <string name="map_routing_brouter">Rotalama sadece <a href="">BRouter</a> yüklenmişse kullanılabilir</string>
+    <string name="map_routing">Yönlendirme (Şu an: %s)</string>
+    <string name="map_routing_brouter">Yönlendirme sadece <a href="">BRouter</a> yüklenmişse kullanılabilir</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
     <string name="map_gm_autorotation_disable">Otomatik harita döndürmesini devre dışı bırakılsın mı?\n\nHarita döndürme menüsünü kullanarak tekrardan etkinleştirebilirsiniz</string>
     <string name="quick_settings">Hızlı ayarlar</string>
@@ -1352,7 +1352,7 @@
     <string name="helper_google_translate_description">Google çeviri uygulamasından çeviri paketi indirirseniz, Geocache açıklama metnine basılı tutarak (internet bağlantısı olmadan) c:geo\'daki Geocache açıklamalarını kolaylıkla çevirebilirsiniz.</string>
     <string name="helper_where_you_go_description">WhereYouGo Wherigo türündeki Geocache\'leri bulmanızı sağlar. c:geo otomatik olarak kartuşların bu uygulama üzerinden indirilmesini tetikler.</string>
     <string name="helper_brouter_title">BRouter çevrimdışı navigasyon</string>
-    <string name="helper_brouter_description">BRouter çevrimdışı rotalama sağlar. Kurulup, gerekli dosyalar indirilmişse, c:geo dahili harita üzerinde otomatik olarak Geocache\'e bir rota gösterir.</string>
+    <string name="helper_brouter_description">BRouter çevrimdışı yönlendirme sağlar. Kurulup, gerekli dosyalar indirilmişse, c:geo dahili harita üzerinde otomatik olarak Geocache\'e bir rota gösterir.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf etiketlerden veri okur, ANT+/Garmin chirp etiketli kutuları bulmanız için gereklidir.</string>
     <!-- export -->
     <string name="share_export">Paylaş / Dışa aktar</string>
@@ -1922,7 +1922,7 @@
     <string name="wizard_welcome_advanced">Gelişmiş yapılandırma</string>
     <string name="wizard_advanced_offlinemaps_label">Çevrimdışı haritalar</string>
     <string name="wizard_advanced_offlinemaps_info">Bu sayfa, kullanılması isteğe bağlı bazı gelişmiş ayarları içerir.\n\nc:geo, harita dosyalarını çevrim dışı kullanım için indirebilir.</string>
-    <string name="wizard_advanced_brouter_label">Rotalama uygulaması</string>
+    <string name="wizard_advanced_brouter_label">Yönlendirme uygulaması</string>
     <string name="wizard_advanced_brouter_info">\"BRouter Offline Navigation\" adındaki tamamlayıcı uygulamayı yükleyerek ve ayarlayarak c:geo, hedeflere gidebilir ve haritanızdaki rota bilgilerini gösterebilir.</string>
     <string name="wizard_advanced_restore_label">Geri Yükle</string>
     <string name="wizard_advanced_restore_info">Eğer daha önceki kurulumdan kalan bir yedeğiniz varsa, ayarlarınızı ve/veya geocache verilerinizi yenileyebilirsiniz.</string>
@@ -1936,6 +1936,7 @@
     <string name="wizard_skip_wizard_warning">c:geo, yapılandırma tamamlanana kadar beklendiği gibi çalışmayabilir. Hangi ayarın yapılandırılmamış olduğuna bağlı olarak, c:geo çevrim dışı haritalar, geocache\'ler, kayıt dosyaları vb. verilerinizi okuyamayabilir/depolayamayabilir.\n\nKurulumu bitirmeye hazır olduğunuzda, ana menüdeki \"Yapılandırma sihirbazı\"na girebilir veya c:geo\'yu yeniden başlatabilirsiniz.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s klasörü senkronizasyonu %2$s sonrasında tamamlandı, %3$d/%4$s kadarı senkronizasyon gerektiriyor</string>
+    <string name="mapthemes_themescan_too_long_toast">Harita tema taraması %1$d saniyeden uzun sürdü ve %2$d tema bulduktan sonra sonlandırıldı</string>
     <!-- default actions in dialogs -->
     <string name="previous">Önceki</string>
     <string name="skip">Geç</string>

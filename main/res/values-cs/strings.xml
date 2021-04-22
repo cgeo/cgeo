@@ -1988,6 +1988,7 @@
     <string name="wizard_skip_wizard_warning">c:geo nemusí fungovat podle očekávání, dokud nebude dokončena konfigurace. V závislosti na chybějící konfiguraci nemusí být c:geo schopen číst/ukládat data jako jsou offline mapy, kešky, poznámky atd.\n\nKdykoli se budete cítit připraveni dokončit nastavení, zvolte v hlavní nabídce „Průvodce konfigurací“ nebo c:geo restartujte.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizace %1$s složek byla dokončena po %2$s, %3$d z %4$s potřebuje synchronizaci</string>
+    <string name="mapthemes_themescan_too_long_toast">Skenování mapových motivů trvalo více než %1$d sekund, po nalezení %2$d motivů bylo přerušeno</string>
     <!-- default actions in dialogs -->
     <string name="previous">Předchozí</string>
     <string name="skip">Přeskočit</string>
