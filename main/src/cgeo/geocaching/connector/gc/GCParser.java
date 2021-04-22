@@ -1940,15 +1940,13 @@ public final class GCParser {
 
     @Nullable
     public static String getUsername(final String page) {
-        final Document document = Jsoup.parse(page);
-
-        // New website top bar
-        final String username = TextUtils.stripHtml(document.select("span.user-name").text());
-        if (StringUtils.isNotEmpty(username)) {
+        final String username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE, null);
+        if (StringUtils.isNotBlank(username)) {
             return username;
         }
 
         // Old style webpage fallback
+        final Document document = Jsoup.parse(page);
         final String usernameOld = TextUtils.stripHtml(document.select("span.li-user-info > span:first-child").text());
 
         return StringUtils.isNotEmpty(usernameOld) ? usernameOld : null;
