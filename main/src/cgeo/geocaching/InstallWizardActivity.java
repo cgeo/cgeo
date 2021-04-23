@@ -44,6 +44,8 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     public static final String BUNDLE_MODE = "wizardmode";
     private static final String BUNDLE_STEP = "step";
+    private static final String BUNDLE_CSAH = "csah";
+    private static final String BUNDLE_BACKUPUTILS = "backuputils";
 
     public enum WizardMode {
         WIZARDMODE_DEFAULT(0),
@@ -70,6 +72,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     private WizardStep step = WizardStep.WIZARD_START;
     private boolean forceSkipButton = false;
     private ContentStorageActivityHelper contentStorageActivityHelper = null;
+    private BackupUtils backupUtils;
 
     private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
 
@@ -93,6 +96,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.dark);
+        backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(BUNDLE_BACKUPUTILS));
         if (savedInstanceState != null) {
             step = WizardStep.values()[savedInstanceState.getInt(BUNDLE_STEP)];
             mode = WizardMode.values()[savedInstanceState.getInt(BUNDLE_MODE)];
@@ -116,6 +120,29 @@ public class InstallWizardActivity extends AppCompatActivity {
         prev = binding.wizardPrev;
         skip = binding.wizardSkip;
         next = binding.wizardNext;
+
+        this.contentStorageActivityHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(BUNDLE_CSAH))
+            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, pf -> {
+                final boolean needsMigration;
+                switch (pf) {
+                    case GPX:
+                        needsMigration = gpxFolderNeedsMigration();
+                        break;
+                    case BASE:
+                        needsMigration = !ContentStorageActivityHelper.baseFolderIsSet();
+                        break;
+                    case OFFLINE_MAPS:
+                        needsMigration = mapFolderNeedsMigration();
+                        break;
+                    case OFFLINE_MAP_THEMES:
+                        needsMigration = mapThemeFolderNeedsMigration();
+                        break;
+                    default:
+                        needsMigration = false;
+                        break;
+                }
+                onReturnFromFolderMigration(!needsMigration);
+            });
 
         updateDialog();
     }
@@ -197,11 +224,10 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setButton(button3, R.string.wizard_advanced_restore_label, v -> {
                     setButtonToDone();
                     DataStore.resetNewlyCreatedDatabase();
-                    final BackupUtils backupUtils = new BackupUtils(this);
                     if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
-                        backupUtils.restore(BackupUtils.newestBackupFolder(), getContentStorageHelper());
+                        backupUtils.restore(BackupUtils.newestBackupFolder());
                     } else {
-                        backupUtils.selectBackupDirIntent(getContentStorageHelper());
+                        backupUtils.selectBackupDirIntent();
                     }
                 }, button3Info, R.string.wizard_advanced_restore_info);
                 break;
@@ -397,16 +423,10 @@ public class InstallWizardActivity extends AppCompatActivity {
         forceSkipButton = false;
         if (!ContentStorageActivityHelper.baseFolderIsSet()) {
             prepareFolderDefaultValues();
-            getContentStorageHelper().migratePersistableFolder(PersistableFolder.BASE, folder -> onReturnFromFolderMigration(ContentStorageActivityHelper.baseFolderIsSet()));
+            this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.BASE);
         }
     }
 
-    private ContentStorageActivityHelper getContentStorageHelper() {
-        if (contentStorageActivityHelper == null) {
-            contentStorageActivityHelper = new ContentStorageActivityHelper(this);
-        }
-        return contentStorageActivityHelper;
-    }
 
     private void onReturnFromFolderMigration(final boolean resultOk) {
         if (resultOk) {
@@ -425,7 +445,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         forceSkipButton = false;
         if (mapFolderNeedsMigration()) {
             prepareFolderDefaultValues();
-            getContentStorageHelper().migratePersistableFolder(PersistableFolder.OFFLINE_MAPS, v -> onReturnFromFolderMigration(!mapFolderNeedsMigration()));
+            this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.OFFLINE_MAPS);
         }
     }
 
@@ -437,7 +457,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         forceSkipButton = false;
         if (mapThemeFolderNeedsMigration()) {
             prepareFolderDefaultValues();
-            getContentStorageHelper().migratePersistableFolder(PersistableFolder.OFFLINE_MAP_THEMES, v -> onReturnFromFolderMigration(!mapThemeFolderNeedsMigration()));
+            this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.OFFLINE_MAP_THEMES);
         }
     }
 
@@ -449,7 +469,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         forceSkipButton = false;
         if (gpxFolderNeedsMigration()) {
             prepareFolderDefaultValues();
-            getContentStorageHelper().migratePersistableFolder(PersistableFolder.GPX, v -> onReturnFromFolderMigration(!gpxFolderNeedsMigration()));
+            this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.GPX);
         }
     }
 
@@ -480,6 +500,8 @@ public class InstallWizardActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt(BUNDLE_MODE, mode.id);
         savedInstanceState.putInt(BUNDLE_STEP, step.ordinal());
+        savedInstanceState.putBundle(BUNDLE_CSAH, contentStorageActivityHelper.getState());
+        savedInstanceState.putBundle(BUNDLE_BACKUPUTILS, backupUtils.getState());
     }
 
     @Override

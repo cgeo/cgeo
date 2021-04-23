@@ -830,8 +830,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_compass) {
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
-            && !this.trackUtils.onOptionsItemSelected(id, tracks, this::setTracks, this::centerOnPosition)
-            && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
+            && !this.trackUtils.onOptionsItemSelected(id, tracks)
+            && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
             && !MapDownloaderUtils.onOptionsItemSelected(activity, id)) {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {
@@ -886,7 +886,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         this.trackUtils.showTrackInfo(tracks);
     }
 
-    private void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {
+    @Override
+    public void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {
         followMyLocation = false;
         switchMyLocationButton();
         mapView.zoomToBounds(viewport, new GoogleGeoPoint(new LatLng(latitude, longitude)));
@@ -905,7 +906,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         ActivityMixin.showToast(activity, res.getString(R.string.map_trailhistory_cleared));
     }
 
-    private void clearIndividualRoute() {
+    @Override
+    public void clearIndividualRoute() {
         individualRoute.clearRoute(overlayPositionAndScale);
         overlayPositionAndScale.repaintRequired();
         ActivityMixin.invalidateOptionsMenu(activity);

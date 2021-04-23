@@ -67,6 +67,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.SortActionProvider;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.CacheListAdapter;
@@ -146,6 +147,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final String STATE_LIST_TYPE = "currentListType";
     private static final String STATE_LIST_ID = "currentListId";
     private static final String STATE_MARKER_ID = "currentMarkerId";
+    private static final String STATE_CONTENT_STORAGE_ACTIVITY_HELPER = "contentStorageActivityHelper";
 
     private static final String BUNDLE_ACTION_KEY = "afterLoadAction";
 
@@ -187,6 +189,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final Handler loadCachesHandler = new LoadCachesHandler(this);
     private final DisposableHandler clearOfflineLogsHandler = new ClearOfflineLogsHandler(this);
     private final Handler importGpxAttachementFinishedHandler = new ImportGpxAttachementFinishedHandler(this);
+
+    private ContentStorageActivityHelper contentStorageActivityHelper = null;
 
     private AbstractSearchLoader currentLoader;
 
@@ -475,6 +479,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         setContentView(R.layout.cacheslist_activity);
 
+        this.contentStorageActivityHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER))
+            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importGpx);
+
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -542,6 +549,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
         savedInstanceState.putInt(STATE_LIST_ID, listId);
         savedInstanceState.putInt(STATE_MARKER_ID, markerId);
+        savedInstanceState.putBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER, contentStorageActivityHelper.getState());
     }
 
     /**
@@ -866,7 +874,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             importPq();
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_import_gpx) {
-            importGpx();
+            importGpxSelectFiles();
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_create_list) {
             new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), StringUtils.EMPTY);
@@ -1248,14 +1256,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private void importGpx() {
-        getContentStorageHelper().selectMultipleFiles(null, PersistableFolder.GPX.getUri(), uris -> {
-            final GPXImporter importer = new GPXImporter(this, listId, importGpxAttachementFinishedHandler);
-            for (Uri uri : uris) {
-                importer.importGPX(uri, null, ContentStorage.get().getName(uri));
-            }
-        });
+    private void importGpxSelectFiles() {
+        contentStorageActivityHelper.selectMultipleFiles(null, PersistableFolder.GPX.getUri());
     }
+
+    private void importGpx(final List<Uri> uris) {
+        final GPXImporter importer = new GPXImporter(this, listId, importGpxAttachementFinishedHandler);
+        for (Uri uri : uris) {
+            importer.importGPX(uri, null, ContentStorage.get().getName(uri));
+        }
+    }
+
+
 
     private void importPq() {
         PocketQueryListActivity.startSubActivity(this, REQUEST_CODE_IMPORT_PQ);
@@ -1264,6 +1276,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (contentStorageActivityHelper.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
 
         if (requestCode == REQUEST_CODE_IMPORT_PQ && resultCode == Activity.RESULT_OK) {
             if (data != null) {

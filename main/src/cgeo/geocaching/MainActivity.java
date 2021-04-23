@@ -83,6 +83,9 @@ import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
 
 public class MainActivity extends AbstractActionBarActivity {
+
+    private static final String STATE_BACKUPUTILS = "backuputils";
+
     private MainActivityBinding binding;
 
     /**
@@ -102,6 +105,8 @@ public class MainActivity extends AbstractActionBarActivity {
      * initialization with an empty subscription
      */
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
+
+    private BackupUtils backupUtils = null;
 
     private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
 
@@ -266,6 +271,8 @@ public class MainActivity extends AbstractActionBarActivity {
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
 
+        backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
+
         //check database
         final String errorMsg = DataStore.initAndCheck(false);
         if (errorMsg != null) {
@@ -340,6 +347,16 @@ public class MainActivity extends AbstractActionBarActivity {
         // reactivate dialogs which are set to show later
         OneTimeDialogs.nextStatus();
     }
+
+    @Override
+
+    public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBundle(STATE_BACKUPUTILS, backupUtils.getState());
+    }
+
+
+
 
     @Override
     public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
@@ -557,6 +574,9 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);  // call super to make lint happy
+        if (backupUtils.onActivityResult(requestCode, resultCode, intent)) {
+            return;
+        }
         if (requestCode == Intents.SETTINGS_ACTIVITY_REQUEST_CODE) {
             if (resultCode == SettingsActivity.RESTART_NEEDED) {
                 ProcessPhoenix.triggerRebirth(this);
@@ -649,7 +669,6 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void checkRestore() {
-        final BackupUtils backupUtils = new BackupUtils(MainActivity.this);
 
         if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown) {
 
@@ -663,7 +682,7 @@ public class MainActivity extends AbstractActionBarActivity {
                         .setPositiveButton(getString(android.R.string.yes), (dialog, id) -> {
                             dialog.dismiss();
                             DataStore.resetNewlyCreatedDatabase();
-                            backupUtils.restore(BackupUtils.newestBackupFolder(), getContentStorageHelper());
+                            backupUtils.restore(BackupUtils.newestBackupFolder());
                         })
                         .setNegativeButton(getString(android.R.string.no), (dialog, id) -> {
                             dialog.cancel();

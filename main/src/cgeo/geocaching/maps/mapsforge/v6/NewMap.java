@@ -138,6 +138,9 @@ import org.mapsforge.map.model.common.Observer;
 @SuppressWarnings("PMD.ExcessiveClassLength") // This is definitely a valid issue, but can't be refactored in one step
 public class NewMap extends AbstractActionBarActivity implements Observer {
 
+    private static final String STATE_INDIVIDUAlROUTEUTILS = "indrouteutils";
+    private static final String STATE_TRACKUTILS = "trackutils";
+
     private static final String ROUTING_SERVICE_KEY = "NewMap";
 
     private MfMapView mapView;
@@ -200,8 +203,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
 
     private MapMode mapMode;
 
-    private final TrackUtils trackUtils = new TrackUtils(this);
-    private final IndividualRouteUtils individualRouteUtils = new IndividualRouteUtils(this);
+    private TrackUtils trackUtils = null;
+    private IndividualRouteUtils individualRouteUtils = null;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -209,6 +212,9 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         super.onCreate(savedInstanceState);
 
         Log.d("NewMap: onCreate");
+
+        trackUtils = new TrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_TRACKUTILS), this::setTracks, this::centerOnPosition);
+        individualRouteUtils = new IndividualRouteUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_INDIVIDUAlROUTEUTILS), this::clearIndividualRoute, this::reloadIndividualRoute);
 
         ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
@@ -423,8 +429,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         } else if (id == R.id.menu_compass) {
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
-            && !this.trackUtils.onOptionsItemSelected(id, tracks, this::setTracks, this::centerOnPosition)
-            && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
+            && !this.trackUtils.onOptionsItemSelected(id, tracks)
+            && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
             && !MapDownloaderUtils.onOptionsItemSelected(this, id)) {
             final String language = MapProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT) {
@@ -903,6 +909,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putBundle(STATE_INDIVIDUAlROUTEUTILS, individualRouteUtils.getState());
+        outState.putBundle(STATE_TRACKUTILS, trackUtils.getState());
 
         Log.d("New map: onSaveInstanceState");
 
@@ -1623,7 +1631,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
             }
         }
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
-        this.individualRouteUtils.onActivityResult(requestCode, resultCode, data, this::reloadIndividualRoute);
+        this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
         MapDownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
