@@ -121,26 +121,57 @@
     </wpt>
     <wpt lat="48.885" lon="9.174999999999999">
         <name>01</name>
-        <cmt>Ttt</cmt>
+        <cmt>Coordinates are modified. No orginial coordinates for user defined wp.</cmt>
         <desc>Wegpunkt 4</desc>
         <sym>Question to Answer</sym>
         <type>Waypoint|Question to Answer</type>
         <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
             <gsak:Parent>OCDDD2</gsak:Parent>
+            <gsak:Child_ByGSAK>true</gsak:Child_ByGSAK>
         </gsak:wptExtension>
         <cgeo:userdefined>true</cgeo:userdefined>
-        <cgeo:originalCoordsEmpty>true</cgeo:originalCoordsEmpty>
     </wpt>
     <wpt lat="0.0" lon="0.0">
         <name>02</name>
-        <cmt>Ttt</cmt>
-        <desc>Wegpunkt 5</desc>
+        <cmt>Original coordinates for user defined wp are empty.</cmt>
+        <desc>Original Empty User</desc>
+        <sym>Question to Answer</sym>
+        <type>Waypoint|Question to Answer</type>
+        <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
+            <gsak:Parent>OCDDD2</gsak:Parent>
+            <gsak:Child_ByGSAK>true</gsak:Child_ByGSAK>
+        </gsak:wptExtension>
+        <cgeo:userdefined>true</cgeo:userdefined>
+    </wpt>
+    <wpt lat="0.0" lon="0.0">
+        <name>03</name>
+        <cmt>Original coordinates are empty.</cmt>
+        <desc>Original Empty</desc>
         <sym>Question to Answer</sym>
         <type>Waypoint|Question to Answer</type>
         <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
             <gsak:Parent>OCDDD2</gsak:Parent>
         </gsak:wptExtension>
-        <cgeo:userdefined>true</cgeo:userdefined>
+    </wpt>
+    <wpt lat="48.885" lon="9.174999999999999">
+        <name>04</name>
+        <cmt>Coordinates are modified. Original coordinates are empty.</cmt>
+        <desc>Original Empty Modified</desc>
+        <sym>Question to Answer</sym>
+        <type>Waypoint|Question to Answer</type>
+        <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
+            <gsak:Parent>OCDDD2</gsak:Parent>
+        </gsak:wptExtension>
         <cgeo:originalCoordsEmpty>true</cgeo:originalCoordsEmpty>
     </wpt>
+    <wpt lat="" lon="">
+        <name>05</name>
+        <cmt>Original coordinates are blank.</cmt>
+        <desc>Original Blank</desc>
+        <sym>Question to Answer</sym>
+        <type>Waypoint|Question to Answer</type>
+        <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
+            <gsak:Parent>OCDDD2</gsak:Parent>
+        </gsak:wptExtension>
+    </wpt>    
 </gpx>

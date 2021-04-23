@@ -311,10 +311,12 @@ abstract class GPXParser extends FileParser {
                         waypoint.setLookup("---");
                         // there is no lookup code in gpx file
 
-                        if (wptEmptyCoordinates) {
+                        waypoint.setCoords(cache.getCoords());
+
+                        // user defined waypoint does not have original empty coordinates
+                        if (wptEmptyCoordinates || (!waypoint.isUserDefined() && null == waypoint.getCoords())) {
                             waypoint.setOriginalCoordsEmpty(true);
                         }
-                        waypoint.setCoords(cache.getCoords());
 
                         final WaypointUserNoteCombiner wpCombiner = new WaypointUserNoteCombiner(waypoint);
                         wpCombiner.updateNoteAndUserNote(cache.getDescription());

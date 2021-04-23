@@ -124,8 +124,48 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
         final List<Waypoint> waypointList = cache.getWaypoints();
         assertThat(waypointList).isNotNull();
-        assertThat(waypointList).hasSize(2);
-        assertThat(waypointList.get(1).getCoords()).isNull();
+        assertThat(waypointList).as("Number of imported waypoints").hasSize(2);
+
+        final Waypoint wpEmpty = waypointList.get(1);
+        assertThat(wpEmpty.getCoords()).as("Empty coordinates").isNull();
+        assertThat(wpEmpty.isUserDefined()).as("UserDefined").isFalse();
+        assertThat(wpEmpty.isOriginalCoordsEmpty()).as("OriginalCoordEmpty").isTrue();
+    }
+
+
+    public void testOCddd2WptsEmptyCoord() throws IOException, ParserException {
+        removeCacheCompletely("OCDDD2");
+        final List<Geocache> caches = readGPX10(R.raw.ocddd2, R.raw.ocddd2_empty_coord);
+        assertThat(caches).hasSize(1);
+        final Geocache cache = caches.get(0);
+
+        final List<Waypoint> waypointList = cache.getWaypoints();
+        assertThat(waypointList).isNotNull();
+        assertThat(waypointList).as("Number of imported waypoints").hasSize(8);
+
+        final Waypoint wpNotEmpty = waypointList.get(3);
+        assertThat(wpNotEmpty.getCoords()).as("Not empty coordinates").isNotNull();
+        assertThat(wpNotEmpty.isOriginalCoordsEmpty()).as("OriginalCoordEmpty").isFalse();
+
+        final Waypoint wpEmptyUser = waypointList.get(4);
+        assertThat(wpEmptyUser.getCoords()).as("Empty coordinates").isNull();
+        assertThat(wpEmptyUser.isUserDefined()).as("UserDefined").isTrue();
+        assertThat(wpEmptyUser.isOriginalCoordsEmpty()).as("OriginalCoordEmpty").isFalse();
+
+        final Waypoint wpEmptyOwner = waypointList.get(5);
+        assertThat(wpEmptyOwner.getCoords()).as("Empty coordinates").isNull();
+        assertThat(wpEmptyOwner.isUserDefined()).as("UserDefined").isFalse();
+        assertThat(wpEmptyOwner.isOriginalCoordsEmpty()).as("OriginalCoordEmpty").isTrue();
+
+        final Waypoint wpEmptyOwnerModfied = waypointList.get(6);
+        assertThat(wpEmptyOwnerModfied.getCoords()).as("Not empty coordinates").isNotNull();
+        assertThat(wpEmptyOwnerModfied.isUserDefined()).as("UserDefined").isFalse();
+        assertThat(wpEmptyOwnerModfied.isOriginalCoordsEmpty()).as("OriginalCoordEmpty").isTrue();
+
+        final Waypoint wpBlank = waypointList.get(7);
+        assertThat(wpBlank.getCoords()).as("Blank coordinates").isNull();
+        assertThat(wpBlank.isUserDefined()).as("UserDefined").isFalse();
+        assertThat(wpBlank.isOriginalCoordsEmpty()).as("OriginalCoordEmpty").isTrue();
     }
 
     private static void checkWaypointType(final Collection<Geocache> caches, final String geocode, final int wpIndex, final WaypointType waypointType) {
