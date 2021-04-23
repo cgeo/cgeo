@@ -81,7 +81,7 @@ public final class GCConstants {
     static final Pattern PATTERN_CACHES_FOUND_LOGIN_PAGE = Pattern.compile("\"findCount\": ([0-9]*)\\s*\\}];\\s*<\\/script>");
 
     static final Pattern PATTERN_AVATAR_IMAGE_SERVERPARAMETERS = Pattern.compile("\"(https?:\\/\\/(img(?:cdn)?\\.geocaching\\.com|[^>\\\"]+\\.cloudfront\\.net)\\/avatar\\/[0-9a-f-]+\\.(" + IMAGE_FORMATS + "))\\\"");
-    static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("<script type=\"text\\/javascript\">\\s*var dataLayer = \\[\\{\\s*\"username\": \"([^\"]*)\"");    
+    static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("\\swindow(?>\\.|\\[')headerSettings(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
     static final Pattern PATTERN_MAP_LOGGED_IN = Pattern.compile("<a href=\"https?://www.geocaching.com/my/\" class=\"CommonUsername\"");
 
     // Patterns for parsing trackables
