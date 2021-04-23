@@ -204,6 +204,7 @@
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
     <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
+    <string name="err_tb_not_found">c:geo ei löydä reissaajaa %s.</string>
     <string name="err_tb_find_that">c:geo ei löydä reissaajan tietoja.</string>
     <string name="err_waypoint_cache_unknown">c:geo ei tiedä minkä kätkön haluat lisätä välietapiksi.</string>
     <string name="err_waypoint_add_failed">c:geo epäonnistui välietapin lisäämisessä.</string>
@@ -260,6 +261,7 @@
     <string name="err_trackable_log_not_anonymous">Kirjautumista %1$s c:geosta ei voi tehdä anonyymisti. Haluatko avata asetukset täyttääksesi tarvittavat tiedot %2$s?</string>
     <string name="err_trackable_no_preference_activity">Valitettavasti ei löydy sopivaa asetusnäyttöä.</string>
     <string name="confirm_unsaved_changes_title">Tallentamattomat muutokset</string>
+    <string name="confirm_discard_changes">Hylätäänkö tallentamattomat muutokset?</string>
     <string name="confirm_discard_wp_changes">Hylätäänkö tallentamattomat muutokset?</string>
     <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
     <string name="warn_log_load_additional_data">c:geo ei onnistunut lataamaan lisätietoja (matkalaiset/suosikkipisteet) lokkausta varten.</string>
@@ -285,6 +287,9 @@
     <string name="menu_helpers">Apuohjelmat</string>
     <string name="menu_settings">Asetukset</string>
     <string name="menu_backup">Varmuuskopioi / Palauta</string>
+    <string name="menu_update">Päivitä</string>
+    <string name="menu_update_routingdata">Reititystiedot</string>
+    <string name="menu_update_mapdata">Karttatiedot</string>
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Suodata</string>
     <string name="menu_scan_geo">Skannaa geokoodi</string>
@@ -337,6 +342,8 @@
     <string name="caches_select_mode_exit">Poistu valintatilasta</string>
     <string name="caches_select_invert">Käänteinen valinta</string>
     <string name="caches_nearby">Lähistöllä</string>
+    <string name="caches_remove_all">Poista kaikki listalta</string>
+    <string name="caches_remove_selected">Poista valitut listalta</string>
     <string name="caches_remove_all_completely">Poista kaikki laitteesta</string>
     <string name="caches_remove_selected_completely">Poista valittu laitteesta</string>
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
@@ -456,6 +463,8 @@
     <string name="settings_title_map">Kartta</string>
     <string name="settings_summary_map">Aseta kartan lähde, offline-kartta-asetukset ja kartan tiedot.</string>
     <string name="settings_title_map_data">Kartan tiedot</string>
+    <string name="settings_title_offline_routing">Offline-reititys</string>
+    <string name="settings_summary_offline_routing">Offline-reititys on käytettävissä, kun joko apusovellus \"BRouter\" on asennettu ja määritetty tai sisäinen reititys on käytössä.</string>
     <string name="settings_title_map_rotation">Kartan kääntö (Google Maps)</string>
     <string name="settings_title_waypoints">Reittipisteet</string>
     <string name="settings_title_map_content">Kartan sisältö</string>
@@ -564,9 +573,18 @@
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
     <string name="init_zoomincludingwaypoints_description">Jos yksittäinen kätkö näytetään kartalla, säädetäänkö zoomaus näyttämään kaikki sen reittipisteet?</string>
     <string name="init_brouterThreshold">Laske reitti</string>
+    <string name="init_brouterThreshold_description">Suurin sallittu etäisyys, johon offline-reititys laskee reitin.</string>
     <string name="init_brouterShowBothDistances">Näytä suora etäisyys</string>
+    <string name="init_autoDownloads">Automaattinen lataus</string>
+    <string name="init_brouterAutoTileDownloads_description">Tarjoa automaattisesti puuttuvien reititystietojen laattojen latausta.</string>
+    <string name="init_mapAutoDownloads_description">Tarkista automaattisesti kartta- ja teematiedostojen päivitys. (Pätee vain tiedostoille, jotka olet ladannut sisäisen latauksen avulla.)</string>
+    <string name="init_brouterProfileWalk">\"Kävely\"-profiili</string>
+    <string name="init_brouterProfileBike">\"Pyöräily\"-profiili</string>
+    <string name="init_brouterProfileCar">\"Autoilu\"-profiili</string>
     <string name="brouter_recalculating">Lasketaan reittiä uudelleen taustalla…</string>
     <string name="init_summary_brouterShowBothDistances">Jos reititys on aktiivisena: Näytä suora etäisyys lasketun reitin etäisyyden lisäksi.</string>
+    <string name="init_useInternalRouting">Käytä sisäistä reititystä</string>
+    <string name="init_summary_useInternalRouting">Käytä c:geon sisäistä reititystä käyttääksesi automaattista reititystietojen lataamista ja muita toimintoja</string>
     <string name="init_bigSmileysOnMap">Isot kuvakkeet kirjatuille kätköille</string>
     <string name="init_summary_bigSmileysOnMap">Jos käytössä, kirjattujen kätköjen kohdalla näytetään isot hymiöt kätkötyyppikuvakkeen sijaan (vaatii uudelleenkäynnistyksen).</string>
     <string name="init_disabled">Piilota hyllytetyt</string>
@@ -645,6 +663,8 @@
     <string name="init_backup_settings_restore">Palauta asetukset</string>
     <string name="settings_readingerror">Virhe asetusten lukemisessa</string>
     <string name="settings_restart">c:geo tulee käynnistää uudelleen nyt ladattujen asetusten saattamiseksi voimaan</string>
+    <string name="settings_folder_changed">Kansio \"%1$s\" vaihdetaan \"%2$s\"ksi palautuksen aikana.\n\nNapauta \"%4$s\" jatkaaksesi. Tässä tapauksessa sinua pyydetään antamaan c:geolle pääsy kyseiseen kansioon\n\nNapauta \"%3$s\" pitääksesi kansion asetuksen ennallaan.</string>
+    <string name="settings_file_changed">\"%1$s\" vaihdetaan \"%2$s\"ksi palautuksen aikana.\n\nNapauta \"%4$s\" jatkaaksesi. Tässä tapauksessa sinua pyydetään antamaan c:geolle pääsy kyseiseen tiedostoon.\n\nNapauta \"%3$s\" pitääksesi asetuksen ennallaan.</string>
     <string name="settings_info_offline_maps_title">Offline-karttojen tiedot</string>
     <string name="settings_info_offline_maps">c:geo tukee offline-käyttöön tarkoitettuja karttoja. Voit hankkia karttoja eri tarjoajilta tai jopa luoda omia karttoja (OSM-data). Sinun on ensin valittava kansio johon offline-kartat on tallennettava.</string>
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
@@ -653,6 +673,9 @@
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
     <string name="init_base_directory_description">Juurikansio julkiselle paikalliselle datalle</string>
     <string name="init_map_directory_description">Offline-kartat sisältävä kansio</string>
+    <string name="init_brouter_directory_description">Kansio, joka sisältää BRouterin reititystiedot</string>
+    <string name="init_updateinterval_title">Päivitysväli</string>
+    <string name="init_updateinterval_description">Muistuttaa sinua joka x päivä tarkastamaan päivitykset</string>
     <string name="init_gpx_importexportdir">GPX-kansio</string>
     <string name="init_dataDir">Valitse datakansio</string>
     <string name="init_dataDir_note">Voit valita geokätköjen lisätietojen (spoilerit, lokien kuvat, …) tallentamisen ulkoiseen muistiin (emuloitu tai aito ulkoinen SD-kortti, riippuen laitteestasi).</string>
@@ -826,6 +849,9 @@
     <string name="persistablefolder_logfiles">Lokitiedostot</string>
     <string name="persistablefolder_fieldnotes">Kenttämerkinnät</string>
     <string name="persistablefolder_spoilerimages">Spoiler-kuvat</string>
+    <string name="persistablefolder_routingbase">Reititys</string>
+    <string name="persistablefolder_routingtiles">Reititystiedot</string>
+    <string name="persistableuri_track">Reittitiedosto</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s valmiina</string>
     <string name="folder_process_status_currentfile">Eteneminen %1$s</string>
@@ -1016,6 +1042,10 @@
     <string name="menu_caches">Hallitse kätköjä</string>
     <string name="cache_menu_event">Lisää kalenteriin</string>
     <string name="cache_menu_extract_waypoints">Poimi reittipisteet</string>
+    <string name="cache_menu_set_found">Aseta löydetyksi</string>
+    <string name="cache_menu_set_DNF">Aseta DNF (ei löytynyt)</string>
+    <string name="cache_menu_reset_foundstate">Nollaa löydetty-tila</string>
+    <string name="cache_foundstate_updated">Löydetty-tila päivitetty</string>
     <string name="cache_menu_set_cache_icon">Aseta kätkökuvake</string>
     <string name="cache_icon_updated">Kätkökuvake päivitetty</string>
     <string name="cache_menu_details">Tarkat tiedot</string>
@@ -1202,7 +1232,12 @@
     <string name="map_showwp_parking">Parkkipaikka-reittipisteet</string>
     <string name="map_showwp_visited">Vieraillut reittipisteet</string>
     <string name="map_show_track">Näytä GPX-rata/reitti</string>
+    <string name="init_renderthemefolder_synctolocal">Synkronoi teemat</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Tämä synkronoi teemasi sovelluksen yksityiseen kansioon karttanäkymän avaamisen suorituskyvyn parantamiseksi, pienellä tallennustilan kustannuksella.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ota teemakansion synkronointi käyttöön</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Tämä synkronoi säännöllisesti karttateematiedostokansion sisällön sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi. Varmista, että teemakansiosi sisältää vain teematiedostot, mutta ei muita (isoja) tiedostoja ennen tämän toiminnon päälle kytkemistä.\n\nKarttateematiedostokansiossasi \'%1$s\' on tällä hetkellä %2$s, %3$s ja on %4$s:n kokoinen\n\nHaluatko ottaa kansion synkronoinnin käyttöön?</string>
+    <string name="onetime_mapthemefixslow_title">Korjaa hidas kartan teeman renderöinti</string>
+    <string name="onetime_mapthemefixslow_message">Ei-pakattujen teemojen käyttäminen voi hidastaa karttanäkymän avaamisen suorituskykyä. Voit pakata tai synkronisoida teemasi nopeuttaaksesi kartan käynnistymistä ja pienentää viivettä.</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
     <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>
@@ -1756,6 +1791,8 @@
     <string name="map_export_individual_route">Vie yksittäinen reitti</string>
     <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
+    <string name="map_autotarget_individual_route">Aseta reitin alku kohteeksi</string>
+    <string name="map_disable_autotarget_individual_route">\"Aseta reitin alku kohteeksi\" pois päältä</string>
     <string name="map_clear_manual_targets">Tyhjennä manuaaliset kohteet</string>
     <string name="map_manual_targets_cleared">Manuaaliset kohteet tyhjennetty</string>
     <string name="map_clear_individual_route">Tyhjennä yksittäinen reitti</string>
@@ -1821,18 +1858,29 @@
     <string name="localfile_title">Avaa paikallinen tiedosto</string>
     <string name="localfile_cannot_handle">Virhe luettaessa tiedostoa tao c:geo ei pysty käsittelemään tätä tiedostomuotoa.</string>
     <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Vastaanota tiedosto</string>
+    <string name="receivedownload_success">Tiedosto tallennettu onnistuneesti nimellä \"%s\"</string>
+    <string name="receivedownload_error">Virhe tiedostoa vastaanotettaessa</string>
+    <string name="receivedownload_error_io_exception">I/O-virhe tiedostoa vastaanotettaessa. Onko kansiosi \"%s\" kirjoitettavissa?</string>
+    <string name="receivedownload_error_filenotfound_exception">Tiedostoa ei löydy -virhe tapahtui vastaanottaessa tiedostoa.</string>
     <string name="receivedownload_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
     <string name="receivedownload_option_overwrite">Korvaa</string>
     <string name="receivedownload_option_differentname">Eri nimi</string>
     <string name="receivedownload_kb_copied">%d kB kopioitu</string>
+    <string name="receivedownload_cancelled">Tiedostonsiirto peruttu</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Lataa offline-kartta</string>
+    <string name="download_title">Lataa tiedosto</string>
     <string name="downloadmap_info">Valitse alueesi kartta tiedosto napauttamalla \"Tallenna\" kuvaketta.\n\nLataus suoritetaan taustalla. Kun siirto on valmis, tiedosto kopioidaan c:geo karttakansioon ja se asetetaan nykyiseksi kartaksi.\n\nOle varovainen: Kartan lataaminen voi aiheuttaa suurta verkkoliikennettä!</string>
     <string name="downloadmap_choose">Valitse kartta</string>
     <string name="downloadmap_filename">Ladataan %s</string>
+    <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
     <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
+    <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
+    <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>
     <string name="downloadmap_handling">Itse lataus käsitellään taustalla järjestelmäsi latauksenhallinnan kautta. Sinun pitäisi nähdä ilmoitus heti kun lataus alkaa (tämä voi viedä jonkin aikaa).</string>
     <string name="button_continue">Jatka</string>
     <string name="downloadmap_onedirup">(yksi taso ylös)</string>
@@ -1845,11 +1893,18 @@
     <string name="downloadmap_checking_for_updates">Tarkistetaan päivityksiä…</string>
     <string name="downloadmap_install_theme_title">Asenna teematiedosto</string>
     <string name="downloadmap_install_theme_info">Ladattu kartta vaatii erityisen teematiedoston. Haluatko ladata tämän samalla?</string>
+    <string name="downloadtile_title">Puuttuvat reititystiedot</string>
+    <string name="downloadtile_info">c:geo ei voi laskea pyydettyä reittiä, koska reititystiedosto puuttuu. Haluatko ladata puuttuvat reititystiedot?</string>
+    <string name="tileupdate_info">Haluatko tarkistaa ladattujen reititystietojen päivitykset?</string>
+    <string name="mapupdate_info">Haluatko tarkistaa kartta- ja teematiedostojen päivitykset?</string>
+    <string name="no_updates_found">Päivityksiä ei löytynyt</string>
+    <string name="updates_check">Päivitysten tarkistus</string>
     <string name="mapserver_mapsforge_info">Peruskartat, karttateemoja ei tarvita</string>
     <string name="mapserver_openandromaps_info">Yksityiskohtaiset kartat, \"Elevate\"-karttateema vaaditaan</string>
     <string name="mapserver_openandromaps_themes_info">Yksityiskohtainen karttateema, rakennettu \"OpenAndroMaps\" karttoja varten</string>
     <string name="mapserver_freizeitkarte_info">Yksityiskohtaiset kartat, vaativat yhden \"freizeitkarte\" kartan teemoista.</string>
     <string name="mapserver_freizeitkarte_themes_info">Yksityiskohtainen karttateema, rakennettu \"Freizeitkarte\" karttoja varten</string>
+    <string name="brouter_info">Offline-reitityspalvelu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
@@ -1876,6 +1931,11 @@
     <string name="wizard_permissions_intro">c:geo tarvitsee tietyt käyttöoikeudet laitteellesi toimiakseen oikein.\nSelitän lisää yksityiskohtia seuraavissa vaiheissa.</string>
     <string name="wizard_permissions_folder_title">Aseta kansio: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen tietoja kuten GPX-tiedostoja, varmuuskopioita, kenttämerkintöjä ja lokitiedostoja. Oletusarvoisesti nämä tiedostot tallennetaan kansioihin, jotka sijaitsevat \"juurikansiossa\". Valitse tai luo tällainen kansio seuraavassa vaiheessa.\n\nJos olet päivittänyt c:geon edellisestä versiosta, valitse olemassa oleva kansio \"cgeo\" laitteen tallennustilan juuritasolla.\nVihje: Saatat joutua poistamaan piilotuksen laitteesi sisäisestä tallennustilasta kun tiedostovalitsin näytetään seuraavaksi.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttatiedostoja.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen teematiedostoja offline-karttoja varten.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen GPX-tiedostoja (esim. jos haluat tuoda tai viedä kätköjä tai reittejä).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Jotta voit käyttää integroitua reitityslaattadataa automaattiseen lataukseen ja päivitykseen, sinun täytyy asettaa laattojen kansio.</string>
+    <string name="wizard_select_or_create">Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
     <string name="wizard_platforms_title">Määritä palvelut</string>
     <string name="wizard_platforms_intro">Löytääksesi geokätköjä c:geon avulla, tarvitset tilin c:geon tukemaa geokätköilypalvelua varten.\nValitse haluamasi palvelu alta, jotta voit kirjautua sisään olemassa olevalla tililläsi tai luoda uuden tilin.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -1897,6 +1957,7 @@
     <string name="wizard_skip_wizard_warning">c:geo ei ehkä toimi odotetusti ennen kuin määritys on valmis. Riippuen puuttuvista asetuksista c:geo ei ehkä pysty lukemaan tai tallentamaan tietoja, kuten offline-karttoja, geokätköjä, lokitiedostoja jne.\n\nKun olet valmis viimeistelemään määrityksen, valitse \"Configuration wizard\" päävalikosta tai käynnistä c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s kansion synkronointi päättyi %2$s jälkeen, %3$d %4$s :sta tarvitusta synkronoinnista</string>
+    <string name="mapthemes_themescan_too_long_toast">Karttateemojen skannaus vei enemmän kuin %1$d sekuntia, etsintä lopetettiin %2$d teeman löytämisen jälkeen</string>
     <!-- default actions in dialogs -->
     <string name="previous">Edellinen</string>
     <string name="skip">Ohita</string>
