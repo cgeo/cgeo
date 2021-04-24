@@ -783,9 +783,9 @@
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Powiadomienie o bliskości</string>
     <string name="init_proximityNotificationGeneral">Ogólnie powiadomienie o bliskości na mapie</string>
-    <string name="init_summary_proximityNotificationGeneral">Odtwórz pojedyncze powiadomienie jeśli dowolna skrzynka lub pubkt nawigacyjny są aktualnie widoczne na mapie i znajdują się bliżej niż daleka lub bliska odległość. Różne tony są używane dla tych dwóch odległości.</string>
+    <string name="init_summary_proximityNotificationGeneral">Odtwórz pojedyncze powiadomienie jeśli dowolna skrzynka lub punkt nawigacyjny są aktualnie widoczne na mapie i znajdują się bliżej niż daleka lub bliska odległość. Różne tony są używane dla tych dwóch odległości.</string>
     <string name="init_proximityNotificationSpecific">Powiadomienie o bliskości konkretnego punktu nawigacyjnego</string>
-    <string name="init_summary_proximityNotificationSpecific">Odtwórz wielokrotne powiadomienie jeśli dowolna skrzynka lub pubkt nawigacyjny znajdują się bliżej niż daleka lub bliska odległość. Opcja działa jeśli otworzone są szczegóły skrzynki lub pubktu nawigacyjnego, na mapie są widoczne okienka skrzynki lub waypointa lub aktywny jest kompas. Różne tony są używane dla tych dwóch odległości.</string>
+    <string name="init_summary_proximityNotificationSpecific">Odtwórz wielokrotne powiadomienie jeśli dowolna skrzynka lub punkt nawigacyjny znajdują się bliżej niż daleka lub bliska odległość. Opcja działa jeśli otworzone są szczegóły skrzynki lub punktu nawigacyjnego, na mapie są widoczne okienka skrzynki lub waypointa lub aktywny jest kompas. Różne tony są używane dla tych dwóch odległości.</string>
     <string name="far_distance">Daleka odległość</string>
     <string name="near_distance">Bliska odległość</string>
     <string name="init_proximity_notification_type">Typ powiadomienia</string>
