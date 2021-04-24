@@ -992,8 +992,8 @@
     <string name="cache_waypoints_remove_original_waypoint">Ponto adicional copiado da área de transferência para esta cache.\n\nEliminar o ponto adicional original?</string>
     <string name="cache_hint">Dica</string>
     <string name="cache_hint_not_available">Nenhuma dica disponível</string>
-    <string name="cache_logs">Registos</string>
-    <string name="cache_logs_friends_and_own">Registos de amigos/próprios</string>
+    <string name="cache_logs">Todos os registos</string>
+    <string name="cache_logs_friends_and_own">Os meus registos/Amigos</string>
     <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
     <string name="cache_dialog_loading_details_status_loadpage">A carregar a página</string>
     <string name="cache_dialog_loading_details_status_details">A processar os detalhes</string>
