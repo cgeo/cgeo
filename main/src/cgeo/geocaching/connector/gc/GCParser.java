@@ -1952,7 +1952,6 @@ public final class GCParser {
         return StringUtils.isNotEmpty(usernameOld) ? usernameOld : null;
     }
 
-    @Nullable
     public static int getCachesCount(final String page) {
         int cachesCount = -1;
         try {
@@ -1964,7 +1963,7 @@ public final class GCParser {
                 cachesCount = Integer.parseInt(intStringToParse);
             }
         } catch (final NumberFormatException e) {
-            Log.e("getLoginStatus: bad cache count", e);
+            Log.e("getCachesCount: bad cache count", e);
         }
 
         return cachesCount;
