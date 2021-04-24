@@ -1955,10 +1955,7 @@ public final class GCParser {
     public static int getCachesCount(final String page) {
         int cachesCount = -1;
         try {
-            String intStringToParse = removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_LOGIN_PAGE, true, ""));
-            if (intStringToParse.isEmpty()) {
-                intStringToParse = removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_HEADER, true, ""));
-            }
+            final String intStringToParse = removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_LOGIN_PAGE, true, ""));
             if (!intStringToParse.isEmpty()) {
                 cachesCount = Integer.parseInt(intStringToParse);
             }
@@ -1967,7 +1964,6 @@ public final class GCParser {
         }
 
         return cachesCount;
-
     }
 
 
