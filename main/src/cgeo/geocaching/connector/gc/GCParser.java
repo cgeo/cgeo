@@ -1952,4 +1952,27 @@ public final class GCParser {
         return StringUtils.isNotEmpty(usernameOld) ? usernameOld : null;
     }
 
+    @Nullable
+    public static int getCachesCount(final String page) {
+        int cachesCount = -1;
+        try {
+            String intStringToParse = removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_LOGIN_PAGE, true, ""));
+            if (intStringToParse.isEmpty()) {
+                intStringToParse = removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_HEADER, true, ""));
+            }
+            if (!intStringToParse.isEmpty()) {
+                cachesCount = Integer.parseInt(intStringToParse);
+            }
+        } catch (final NumberFormatException e) {
+            Log.e("getLoginStatus: bad cache count", e);
+        }
+
+        return cachesCount;
+
+    }
+
+
+    private static String removeDotAndComma(final String str) {
+        return StringUtils.replaceChars(str, ".,", null);
+    }
 }

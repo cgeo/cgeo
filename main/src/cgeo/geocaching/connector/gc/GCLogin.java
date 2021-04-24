@@ -271,10 +271,6 @@ public class GCLogin extends AbstractLogin {
         return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
     }
 
-    private static String removeDotAndComma(final String str) {
-        return StringUtils.replaceChars(str, ".,", null);
-    }
-
     /**
      * Check if the user has been logged in when he retrieved the data.
      *
@@ -292,12 +288,7 @@ public class GCLogin extends AbstractLogin {
         setActualLoginStatus(StringUtils.isNotBlank(username));
         if (isActualLoginStatus()) {
             setActualUserName(username);
-            int cachesCount = 0;
-            try {
-                cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND_LOGIN_PAGE, true, "0")));
-            } catch (final NumberFormatException e) {
-                Log.e("getLoginStatus: bad cache count", e);
-            }
+            final int cachesCount = GCParser.getCachesCount(page);
             setActualCachesFound(cachesCount);
             return true;
         }
