@@ -447,7 +447,7 @@
     <string name="contribution_graphics">Grafiken</string>
     <string name="debug_user_error_report_title">Problem melden</string>
     <string name="debug_user_error_errortext">Ein unerwartetes Problem ist aufgetreten, bitte melde es uns:</string>
-    <string name="debug_user_error_explain_options">Hilf uns dabei Probleme in c:geo zu beheben, indem du diese per E-Mail zusammen deinen Systeminformationen und einer c:geo Logdatei meldest. Bitte füge der E-Mail auch eine detailierte Fehlerbeschreibung hinzu. Andere Kontaktmöglichkeiten findest du in \'Über c:geo\'</string>
+    <string name="debug_user_error_explain_options">Hilf uns dabei Probleme in c:geo zu beheben, indem du diese per E-Mail zusammen deinen Systeminformationen und einer c:geo Logdatei meldest.\nBitte füge der E-Mail auch immer eine detaillierte Fehlerbeschreibung hinzu!\n\nBevor du eine Mail schickst, prüfe bitte auch unsere FAQ und/oder die sozialen Netzwerke nach bereits bekannten Problemen.\nAndere Kontaktmöglichkeiten findest du in \'Über c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Öffne Einstellungen?</string>
     <string name="settings_title_services">Dienste</string>
@@ -1648,9 +1648,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Neue Version verfügbar.\nTippen zum Installieren.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Neuer Nightly Build verfügbar.\nTippen zum Installieren.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Neuer Release Candidate verfügbar.\nTippen zum Installieren.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf geocaching.com verursachen Probleme in c:geo.\nWir sind uns dessen bewusst und arbeiten daran. Bitte gib uns etwas Zeit!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf geocaching.com verursachen Probleme auf der Live-Karte.\nWir sind uns dessen bewusst und arbeiten daran. Bitte gib uns etwas Zeit!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com ist momentan nicht (vollständig) verfügbar.\nDaher könnten einige Dinge nicht funktionieren.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Du scheinst eine ältere Version von Android zu verwenden. Diese Version von c:geo ist nicht mehr mit deinem Gerät kompatibel und kann Fehler produzieren oder sich unerwartet verhalten!\nTippe auf diese Nachricht für weitere Informationen.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Deine Version von c:geo scheint älter als ein Jahr zu sein. Möglicherweise funktionieren aufgrund von Webseiten- oder anderen technischen Änderungen einige Dinge nicht mehr. Lies unsere FAQ zum Thema Upgrade.</string>
     <!-- text-to-speech for compass view -->
