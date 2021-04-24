@@ -10,7 +10,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class GCConstantsTest extends AndroidTestCase {
 
     // adapt the following after downloading new mock html files
-    public static final int MOCK_CACHES_FOUND = 1681;
+    public static final int MOCK_CACHES_FOUND = 5890;
 
     public static void testLocation() {
         // GC37GFJ
@@ -24,8 +24,6 @@ public class GCConstantsTest extends AndroidTestCase {
     }
 
     public static void testCacheCount() {
-        assertCacheCount(1510, "<span class=\"cache-count\">1.510 Finds</span>");
-        assertCacheCount(1510, "<span class=\"cache-count\">1,510 Finds</span>");
         assertCacheCount(MOCK_CACHES_FOUND, MockedCache.readCachePage("GC2CJPF"));
     }
 
