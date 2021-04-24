@@ -31,6 +31,7 @@
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">(Reverzní) keška bez umístění</string>
+    <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Uživatelem definovaná keška</string>
     <string name="unknown">Neznámý typ</string>
     <!-- cache sizes -->
@@ -164,6 +165,7 @@
     <string name="err_captcha">Je vyžadována Captcha. Pomoc najdete v našem <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>.</string>
     <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
     <string name="err_server_ec">Nelze se připojit na Extremcaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
+    <string name="err_server_lc">Nelze se připojit k labs.geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
     <string name="err_server_su">Nelze se připojit na Geocaching.su. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
     <string name="err_server_gk">Službu GeoKrety.org nelze kontaktovat. Stránka může mít výpadek a nebo tvé připojení k Internetu nefunguje.</string>
     <string name="err_login">Nejsou uloženy žádné přihlašovací údaje</string>
@@ -492,6 +494,7 @@
     <string name="settings_goto_url_button">více …</string>
     <string name="settings_activate_gc">Aktivovat</string>
     <string name="settings_activate_ec">Aktivovat</string>
+    <string name="settings_activate_lc">Aktivovat</string>
     <string name="settings_gc_legal_note">Používáním služeb Geocaching.com souhlasíš s Podmínkami použití společnosti Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Přihlášení přes Facebook nebo Google</string>
     <string name="settings_info_facebook_login">Přes c:geo se sice na Geocaching.com svým Facebook a Google účtem nepřihlásíš, ale je tu jednoduché řešení…</string>
@@ -500,6 +503,7 @@
     <string name="settings_gc_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.com.</string>
     <string name="settings_ec_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby extremcaching.com.</string>
     <string name="settings_su_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.su.</string>
+    <string name="settings_lc_description">Zahrnout Lab kešky na mapě.</string>
     <string name="settings_activate_oc">Aktivovat</string>
     <string name="init_summary_oc_de">Načíst kešky z opencaching.de</string>
     <string name="init_oc_de_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby opencaching.de.</string>
@@ -584,6 +588,7 @@
     <string name="init_brouterProfileBike">Profil \"Kolo\"</string>
     <string name="init_brouterProfileCar">Profil \"Auto\"</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
+    <string name="brouter_missing_data">Otevřete BRouter ke stažení chybějících směrovacích dat (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Pokud je směrování aktivní: Kromě vypočítané délky trasy zobrazí přímou vzdálenost.</string>
     <string name="init_useInternalRouting">Použít interní směrování</string>
     <string name="init_summary_useInternalRouting">Použít interní směrování c:geo, aby bylo možné používat automatické stahování a další funkce</string>
@@ -1146,6 +1151,8 @@
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Otevřete Chirp Wolf a přečtěte údaje chirpu pro tuto kešku</string>
     <string name="cache_chirpwolf_install">Nainstalujte Chirp Wolf a budete moci číst údaje chirpu</string>
+    <string name="cache_alc_start">Otevřete Adventure Lab a začněte hrát toto dobrodružství</string>
+    <string name="cache_alc_install">Nainstalujte Adventure Lab pro hraní tohoto dobrodružství</string>
     <string name="context_share_as_text">Sdílet text</string>
     <string name="context_share_as_link">Sdílet odkaz</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
@@ -1388,6 +1395,7 @@
     <string name="helper_brouter_title">BRouter offline navigace</string>
     <string name="helper_brouter_description">Aplikace BRouter poskytuje offline navigaci. Je-li nainstalována a jsou-li nezbytné soubory stažené, c:geo automaticky zobrazí cestu ke kešce na interní mapě.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf vám umožňuje číst data z ANT+/Garmin chirp tagů, což je potřeba pro ANT+/chirp kešky.</string>
+    <string name="helper_alc_description">Aplikace Adventure Lab pro váš telefon nebo tablet.</string>
     <!-- export -->
     <string name="share_export">Sdílet / Exportovat</string>
     <string name="export">Export</string>
