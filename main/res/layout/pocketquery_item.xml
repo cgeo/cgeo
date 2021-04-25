@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_menu_save"
             android:gravity="left|center_vertical"
-            android:text="@null"/>
+            android:text="@null"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/cachelist"
@@ -31,7 +32,8 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@android:drawable/ic_menu_search"
             android:gravity="left|center_vertical"
-            android:text="@null"/>
+            android:text="@null"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
     <TextView
