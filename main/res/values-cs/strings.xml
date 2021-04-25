@@ -245,7 +245,7 @@
     <string name="warn_invalid_character">Znak musí být písmeno nebo číslice</string>
     <string name="warn_notloggedin_title">Offline režim</string>
     <string name="warn_notloggedin_short">Nejste přihlášeni. Živá mapa bude zobrazovat pouze kešky uložené v místním úložišti. Klepněte zde pro více informací.</string>
-    <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Aktivní mapa ukazuje len lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
+    <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Aktivní mapa ukazuje jen lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
     <string name="err_read_pocket_query_list">Chyba čtení seznamu Pocket Queries.</string>
     <string name="info_log_posted">Log byl úspěšně odeslán.</string>
     <string name="info_log_saved">Log byl úspěšně uložen.</string>
@@ -425,6 +425,7 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
     <string name="about_help">Nápověda</string>
+    <string name="about_system_collecting">Shromažďují se systémové informace, čekejte prosím…</string>
     <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
     <string name="about_system_info_send_button">Odeslat e-mailem…</string>
     <string name="about_system_info">c:geo systémové informace</string>
@@ -451,7 +452,7 @@
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Nahlásit problém</string>
     <string name="debug_user_error_errortext">Došlo k neočekávanému problému a rádi bychom vás požádali, abyste nám jej nahlásili:</string>
-    <string name="debug_user_error_explain_options">Pomozte nám vyřešit problémy s c:geo tím, že je nahlásíte e-mailem společně se systémovými informacemi a záznamem chyb c:geo. K e-mailu uveďte také podrobný popis chyby. Ostatní možnosti kontaktu naleznete v \'O aplikaci\'</string>
+    <string name="debug_user_error_explain_options">Pomozte nám vyřešit problémy s c:geo tím, že je nahlásíte e-mailem společně se systémovými informacemi a záznamem chyb c:geo.\nK e-mailu vždy prosím uveďte také podrobný popis chyby.\n\nPřed odesláním e-mailu si prosím také přečtěte naše FAQ a/nebo přítomnost řešení známých problémů na sociálních médiích.\nOstatní možnosti kontaktu naleznete v \'O aplikaci\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otevřít nastavení?</string>
     <string name="settings_title_services">Služby</string>
@@ -1691,9 +1692,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">K dispozici je nová verze.\nKlepnutím nainstalujete.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">K dispozici je nové noční sestavení.\nKlepnutím nainstalujete.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">K dispozici je nový kandidát na vydání.\nKlepnutím nainstalujete.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Právě probíhá údržba geocaching.com.\nMohou se vyskytnout různé potíže.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Změny na geocaching.com způsobují problémy v c:geo.\nJsme si toho vědomi a pracujeme na tom, dejte nám prosím čas!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Změny na geocaching.com způsobují problémy s Aktivní mapou.\nJsme si toho vědomi a pracujeme na tom, dejte nám prosím čas!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com není v tuto chvíli (plně) k dispozici.\nV c:geo se mohou vyskytnout různé problémy.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vypadá to, že používáte starší verzi sytému Android. Tato verze c:geo již není kompatibilní s vaším zařízením a může selhávat nebo se chovat neočekávaně!\nKlepněte na tuto zprávu pro další informace.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Používáte verzi c:geo, která se zdá být starší než jeden rok. Některé funkce již nemusí fungovat kvůli změnám na webu nebo jiným technickým změnám. Přečtěte si prosím naše FAQ na téma jak aktualizovat na nejnovější verzi.</string>
     <!-- text-to-speech for compass view -->
