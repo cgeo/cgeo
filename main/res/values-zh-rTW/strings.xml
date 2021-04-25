@@ -447,7 +447,6 @@
     <string name="contribution_graphics">圖像</string>
     <string name="debug_user_error_report_title">回報問題</string>
     <string name="debug_user_error_errortext">未預期的錯誤發生，請回報這個錯誤給我們。</string>
-    <string name="debug_user_error_explain_options">經由電子郵件傳送系統資訊以及 c:geo 的日誌檔案，藉此幫助我們改善 c:geo，請在郵件中提供詳細的問題情況，其它的聯繫方式可以在 \"關於 c:geo\" 找到</string>
     <!-- settings -->
     <string name="settings_title_open_settings">開啟設置</string>
     <string name="settings_title_services">服务</string>
