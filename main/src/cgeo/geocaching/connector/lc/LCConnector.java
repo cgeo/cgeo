@@ -78,6 +78,11 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public boolean supportsSettingFoundState() {
+        return true;
+    }
+
+    @Override
     public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler) {
         if (geocode == null) {
             return null;
