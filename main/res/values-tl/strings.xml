@@ -1142,9 +1142,6 @@
     <string name="market_link">&lt;a href=\'\"&gt;c:geo sa google play&lt;/a&gt;</string>
     <string name="about_twitter">Dapat ang <b>d:geo</b> ilathala ang bagong katayuan sa twitter bawat oras na iyong pag log ng cahce?</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Ang mga huling pagbabago sa geocaching.com ay sumira sa c:geo.\n tayo ang gagawa para doon, suriin muli sa lalong madaling panahon.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ang mga huling pagbabago sa geocaching.com ay sumira sa buhay na tampok sa mapa.\n tayo ang gagawa nito,suriin muli sa lalong madaling panahon.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">ang geocaching.com ay nasa ilalim ng pagpapanatili.\n tumakbo ka sa ibat-ibang mga isyu.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Nagsasalitang kumpas</string>
     <string name="tts_started">Simula ng pagsasalita</string>
