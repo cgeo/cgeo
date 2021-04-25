@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/detailScroll"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -83,11 +82,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginTop="6dip"
-                android:drawableLeft="?log_img_icon"
                 android:drawablePadding="3dip"
                 android:text="@string/cache_menu_spoilers"
                 android:textColor="?text_color"
-                android:textSize="14sp" />
+                android:textSize="14sp" app:drawableLeftCompat="?log_img_icon" />
         </LinearLayout>
 
         <!-- Personal note box -->
