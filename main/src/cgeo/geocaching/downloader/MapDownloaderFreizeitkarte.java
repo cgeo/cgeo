@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.SAXException;
@@ -93,7 +94,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
 
     @Override
     protected String toVisibleFilename(final String filename) {
-        return toInfixedString(CompanionFileUtils.getDisplayName((filename.startsWith("Freizeitkarte_") ? filename.substring(14) : filename).toLowerCase()), " (FZK)");
+        return toInfixedString(CompanionFileUtils.getDisplayName((filename.startsWith("Freizeitkarte_") ? filename.substring(14) : filename).toLowerCase(Locale.getDefault())), " (FZK)");
     }
 
     @Override
