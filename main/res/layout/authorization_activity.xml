@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -16,9 +15,9 @@
             android:id="@+id/auth_1"
             style="@style/authorization_text"
             android:layout_marginBottom="20dip"
-            android:drawableLeft="@drawable/cgeo_actionbar_squircle"
             android:drawablePadding="15dip"
-            tools:text="Auth text 1"/>
+            tools:text="Auth text 1"
+            app:drawableLeftCompat="@drawable/cgeo_actionbar_squircle" />
 
         <TextView
             android:id="@+id/auth_2"
