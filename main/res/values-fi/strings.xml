@@ -421,6 +421,7 @@
     <string name="about_license">Lisenssi</string>
     <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
     <string name="about_help">Ohjeet</string>
+    <string name="about_system_collecting">Järjestelmätiedot kerätään, ole hyvä ja odota…</string>
     <string name="about_system_include">Liitä mukaan seuraavat järjestelmätiedot lähettäessäsi virheraporttia tai tiedustellessasi lisätietoja c:geosta:</string>
     <string name="about_system_info_send_button">Lähetä sähköpostitse…</string>
     <string name="about_system_info">c:geo järjestelmätiedot</string>
@@ -447,7 +448,7 @@
     <string name="contribution_graphics">grafiikat</string>
     <string name="debug_user_error_report_title">Ilmoita ongelmasta</string>
     <string name="debug_user_error_errortext">Tapahtui odottamaton virhe, ja haluaisimme pyytää sinua raportoimaan siitä meille:</string>
-    <string name="debug_user_error_explain_options">Auta meitä korjaamaan c:geon ongelmia raportoimalla ne sähköpostin kautta. Raportti sisältää järjestelmätietoja sekä c:geon lokitiedoston. Lisääthän sähköpostiin myös yksityiskohtaisen virheselosteen. Muita yhteydenottotapoja löydät kohdasta \'Tietoja c:geosta\'</string>
+    <string name="debug_user_error_explain_options">Auta meitä korjaamaan c:geon ongelmia raportoimalla ne sähköpostin kautta. Raportti sisältää järjestelmätietoja sekä c:geon lokitiedoston.\n Lisääthän sähköpostiin myös yksityiskohtaisen virheselosteen!\n\nEnnen sähköpostin lähetystä, tarkistathan FAQmme ja/tai sosiaalisen median tilimme tiedossa olevien ongelmien varalta.\nMuita yhteydenottotapoja löydät kohdasta \'Tietoja c:geosta\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>
@@ -1648,9 +1649,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Uusi versio saatavilla.\nKlikkaa asentaaksesi.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Uusi nightly-versio saatavilla.\nKlikkaa asentaaksesi.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Uusi julkaisuehdokas saatavilla.\nAsenna napauttamalla.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com:issa rikkoivat c:geon. \n Korjaamme tilannetta, tarkistathan tilanteen pian uudestaan.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com-sivulla hajoittivat livekartta-ominaisuuden.\nAsiaa korjataan, yritä lähiaikoina uudelleen.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Muutokset geocaching.comissa aiheuttavat ongelmia c:geossa.\nOlemme tietoisia ongelmasta ja työskentelemme sen parissa, annathan meille hieman aikaa!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Muutokset geocaching.comissa aiheuttavat ongelmia live-kartassa.\nOlemme tietoisia ongelmasta ja työskentelemme sen parissa, annathan meille hieman aikaa!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com ei ole (kokonaan) saatavilla tällä hetkellä.\nSaatat kokea erilaisia ongelmia c:geossa.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Näyttää siltä, että käytät Android-käyttöjärjestelmän vanhempaa versiota. Voi olla, että päivitykset ja uusimmat ominaisuudet eivät ole välttämättä saatavilla laitteellesi.\nNapauta tästä saadaksesi lisätietoja.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Käytät c:geon versiota joka näyttää olevan vanhempi kuin yksi vuosi. Voi olla, että jotkut ominaisuudet eivät enää toimi johtuen verkkosivujen tai muiden teknisten seikkojen muutosten vuoksi. Ole hyvä ja päivitä ohjelmasi.</string>
     <!-- text-to-speech for compass view -->
