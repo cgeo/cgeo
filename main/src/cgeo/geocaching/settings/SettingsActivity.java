@@ -220,6 +220,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         }
         pref.setEntries(entries);
         pref.setEntryValues(values);
+        pref.setOnPreferenceChangeListener(this);
     }
 
     private void initNavigationMenuPreferences() {

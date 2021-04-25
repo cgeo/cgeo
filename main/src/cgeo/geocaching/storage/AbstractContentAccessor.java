@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 /** Base class for all content accessors */
 abstract class AbstractContentAccessor {
@@ -42,7 +43,7 @@ abstract class AbstractContentAccessor {
     protected String getTypeForName(@NonNull final String name) {
         final int lastDot = name.lastIndexOf('.');
         if (lastDot >= 0) {
-            final String extension = name.substring(lastDot + 1).toLowerCase();
+            final String extension = name.substring(lastDot + 1).toLowerCase(Locale.getDefault());
             final String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
             if (mime != null) {
                 return mime;

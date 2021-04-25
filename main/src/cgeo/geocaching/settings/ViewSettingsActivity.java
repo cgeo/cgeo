@@ -73,7 +73,9 @@ public class ViewSettingsActivity extends AbstractActivity {
             final Object value = entry.getValue();
             final String key = entry.getKey();
             final SettingsUtils.SettingsType type = getType(value);
-            items.add(new KeyValue(key, value.toString(), type));
+            if (value != null) { // should not happen, but...
+                items.add(new KeyValue(key, value.toString(), type));
+            }
         }
         Collections.sort(items, (o1, o2) -> o1.key.compareTo(o2.key));
 

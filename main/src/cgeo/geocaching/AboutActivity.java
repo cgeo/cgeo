@@ -177,7 +177,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final AboutSystemPageBinding binding = AboutSystemPageBinding.inflate(getLayoutInflater(), parentView, false);
-            binding.system.setText("System Information is collected, please wait...");
+            binding.system.setText(R.string.about_system_collecting);
             binding.copy.setEnabled(false);
             binding.share.setEnabled(false);
             systemInformationTask.getSystemInformation(si -> {

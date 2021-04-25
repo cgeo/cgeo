@@ -2,6 +2,14 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
+<h1>2021.xx.xx:</h1>
+
+<h4>Other changes:</h4>
+<ul>
+<li>Fix: Changing map source via settings being recognized after full restart only</li>
+<li>Fix: Crash in \"View settings\" under certain conditions</li>
+</ul>
+
 <h1>2021.04.25:</h1>
 
 <h4>Other changes:</h4>

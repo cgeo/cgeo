@@ -19,6 +19,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -64,6 +65,7 @@ public class FieldNoteExport extends AbstractExport {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private Dialog getExportOptionsDialog(final Geocache[] caches, final Activity activity) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.export_fieldnotes)));

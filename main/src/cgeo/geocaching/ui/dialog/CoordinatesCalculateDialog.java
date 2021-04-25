@@ -52,6 +52,7 @@ import androidx.gridlayout.widget.GridLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -213,7 +214,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     public static class EquationFilter implements InputFilter {
         @Override
         public CharSequence filter(final CharSequence charSequence, final int i, final int i1, final Spanned spanned, final int i2, final int i3) {
-            return charSequence.toString().replaceAll("[^0-9a-zA-Z \\-+*/%^()]", "").toLowerCase();
+            return charSequence.toString().replaceAll("[^0-9a-zA-Z \\-+*/%^()]", "").toLowerCase(Locale.getDefault());
         }
     }
 
