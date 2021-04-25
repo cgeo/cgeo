@@ -443,7 +443,6 @@
     <string name="contribution_documentation">документация</string>
     <string name="contribution_projectleader">лидер проекта</string>
     <string name="contribution_graphics">графика</string>
-    <string name="debug_user_error_explain_options">Помогите нам исправить проблемы c:geo, сообщив об этом по электронной почте (не забудьте добавить системную информацию и логи c:geo). Пожалуйста, также укажите подробное описание ошибки в вашем сообщении. Другие параметры контактов можно найти в \"О c:geo\"</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Открыть настройки?</string>
     <string name="settings_title_services">Сервисы</string>
@@ -1609,9 +1608,6 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Доступна новая версия.\nНажмите, чтобы установить.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Доступна новая ночная сборка.\nНажмите, чтобы установить.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Доступен новый релиз кандидат.\nНажмите, чтобы установить.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com сейчас не работает.\nВозможны различные проблемы.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Похоже, вы используете старую версию Android. Будущие версии c:geo могут быть недоступны для вашего устройства или работать непредсказуемо.\nНажмите на это сообщение для получения дополнительной информации.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Вы используете версию c:geo, которая, скорее всего, устарела больше, чем на год. Некоторые функции больше не работают из-за технических изменений или веб-сайта. Пожалуйста, прочтите FAQ о том, как обновить.</string>
     <!-- text-to-speech for compass view -->
