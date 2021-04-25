@@ -31,6 +31,7 @@
     <string name="gps">GPSアドベンチャー迷路展示</string>
     <string name="block">ジオキャッシング本部(HQ)ブロック・パーティー</string>
     <string name="locationless">ロケーションレス(リバース)キャッシュ</string>
+    <string name="advlab">アドベンチャー・ラボ・キャッシュ</string>
     <string name="userdefined">ユーザー定義キャッシュ</string>
     <string name="unknown">不明なタイプ</string>
     <!-- cache sizes -->
@@ -164,6 +165,7 @@
     <string name="err_captcha">CAPTCHAの入力が必要です。<a href="https://www.cgeo.org/faq#login-failed">よくある質問(英語)</a>をご確認ください</string>
     <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_ec">Extremcaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
+    <string name="err_server_lc">labs.geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_su">Geocaching.suに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_gk">GeoKrety.orgに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_login">ログイン情報が保存されていません</string>
@@ -420,6 +422,7 @@
     <string name="about_license">ライセンス</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">ヘルプ</string>
+    <string name="about_system_collecting">システム情報を収集しています。しばらくお待ちください…</string>
     <string name="about_system_include">バグ報告や問い合わせの際は以下のシステム情報もお知らせください</string>
     <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geoシステム情報</string>
@@ -446,7 +449,7 @@
     <string name="contribution_graphics">グラフィックス</string>
     <string name="debug_user_error_report_title">問題を報告</string>
     <string name="debug_user_error_errortext">予期しない問題が発生しました。報告をお願いします:</string>
-    <string name="debug_user_error_explain_options">システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。その際はエラーの詳細も含めてください。その他の連絡先などは「c:geoについて」をご覧ください。</string>
+    <string name="debug_user_error_explain_options">システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。\nその際はエラーの詳細も必ず含めてください。\n\nメールを送る前にFAQやSNSで既知の問題かどうか確認をお願いします。\nその他の連絡先などは「c:geoについて」をご覧ください。</string>
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
     <string name="settings_title_services">サービス</string>
@@ -463,7 +466,7 @@
     <string name="settings_summary_map">地図の選択、オフライン地図の設定、地図の詳細設定</string>
     <string name="settings_title_map_data">地図データ</string>
     <string name="settings_title_offline_routing">オフライン ルート検索</string>
-    <string name="settings_summary_offline_routing">オフラインルート検索は、BRouterアプリをインストール(セットアップ)しているか、c:geoルート検索が有効になっている場合に使用できます</string>
+    <string name="settings_summary_offline_routing">オフラインルート検索は、BRouterアプリをインストール(セットアップ)しているか、c:geoルート検索が有効になっていると使用できます</string>
     <string name="settings_title_map_rotation">地図の回転 (Googleマップ)</string>
     <string name="settings_title_waypoints">ウェイポイント</string>
     <string name="settings_title_map_content">地図の表示</string>
@@ -489,6 +492,7 @@
     <string name="settings_goto_url_button">詳細…</string>
     <string name="settings_activate_gc">有効化</string>
     <string name="settings_activate_ec">有効化</string>
+    <string name="settings_activate_lc">有効化</string>
     <string name="settings_gc_legal_note">Geocaching.comを使うにはGroundspeak利用規約に同意している必要があります</string>
     <string name="settings_info_facebook_login_title">FacebookやGoogleのアカウントでのログインについて</string>
     <string name="settings_info_facebook_login">c:geoからFacebookやGoogleのアカウントでgeocaching.comにログインすることはできません。 しかし回避策はあります…</string>
@@ -497,6 +501,7 @@
     <string name="settings_gc_description">geocaching.comでc:geoを認証してキャッシュを検索できるようにします</string>
     <string name="settings_ec_description">c:geoをextremcaching.comで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
     <string name="settings_su_description">c:geoをgeocaching.suで認証してキャッシュを検索できるようにします</string>
+    <string name="settings_lc_description">アドベンチャー・ラボ・キャッシュを地図上に含めます。</string>
     <string name="settings_activate_oc">有効化</string>
     <string name="init_summary_oc_de">opencaching.deからキャッシュを読み込み</string>
     <string name="init_oc_de_description">c:geoをopencaching.deで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
@@ -574,13 +579,14 @@
     <string name="init_brouterThreshold">ルートを検索</string>
     <string name="init_brouterThreshold_description">ルート検索する際の最大距離</string>
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
-    <string name="init_autoDownloads">自動ダウンロード</string>
-    <string name="init_brouterAutoTileDownloads_description">ルート検索のデータを自動的にダウンロードします</string>
-    <string name="init_mapAutoDownloads_description">地図とテーマファイルの更新を自動確認します。</string>
+    <string name="init_autoDownloads">更新確認の通知</string>
+    <string name="init_brouterAutoTileDownloads_description">ルート検索データの更新を確認するように定期的に通知します</string>
+    <string name="init_mapAutoDownloads_description">地図とテーマファイルの更新を確認するように定期的に通知します</string>
     <string name="init_brouterProfileWalk">「徒歩」プロファイル</string>
     <string name="init_brouterProfileBike">「自転車」プロファイル</string>
     <string name="init_brouterProfileCar">「自動車」プロファイル</string>
     <string name="brouter_recalculating">バックグラウンドでルートを再検索しています…</string>
+    <string name="brouter_missing_data">BRouterアプリで欠落しているルート検索データ(%s)をダウンロードします</string>
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
     <string name="init_useInternalRouting">c:geoルート検索を使用する</string>
     <string name="init_summary_useInternalRouting">c:geoルート検索(Brouter互換)を使用するとルート検索データの自動ダウンロードなどもできます。</string>
@@ -673,8 +679,8 @@
     <string name="init_base_directory_description">データ保存のベースフォルダ</string>
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
     <string name="init_brouter_directory_description">ルート検索データ(Brouter互換)フォルダ</string>
-    <string name="init_updateinterval_title">更新間隔</string>
-    <string name="init_updateinterval_description">自動更新の間隔(日)</string>
+    <string name="init_updateinterval_title">通知間隔</string>
+    <string name="init_updateinterval_description">更新確認の通知間隔(日)</string>
     <string name="init_gpx_importexportdir">GPXフォルダ</string>
     <string name="init_dataDir">データフォルダを選択</string>
     <string name="init_dataDir_note">ジオキャッシュ(スポイラー画像、ログの画像など)の追加データを外部ストレージ(お使いのデバイスに応じてエミュレートまたは実際の外部 SD カード)に格納することができます</string>
@@ -1110,10 +1116,12 @@
     <string name="cache_image_background">リストの背景画像をキャッシュ</string>
     <string name="cache_share_field">共有</string>
     <string name="cache_time_full_hours">時</string>
-    <string name="cache_whereyougo_start">WhereYouGoでWherigoカートリッジをダウンロードして始めます</string>
-    <string name="cache_whereyougo_install">WherigoカートリッジをダウンロードするにはWhereYouGoのインストールが必要です</string>
+    <string name="cache_whereyougo_start">WhereYouGoアプリでWherigoカートリッジをダウンロードして始めます</string>
+    <string name="cache_whereyougo_install">WherigoカートリッジをダウンロードするにはWhereYouGoアプリのインストールが必要です</string>
     <string name="cache_chirpwolf_start">Chirp Wolfでキャッシュのchirpデータを読み込みます</string>
     <string name="cache_chirpwolf_install">chirpデータを読み込むにはChirp Wolfのインストールが必要です</string>
+    <string name="cache_alc_start">Adventure Labアプリでこのアドベンチャーを始めます</string>
+    <string name="cache_alc_install">このアドベンチャーを始めるにはAdventure Labアプリのインストールが必要です</string>
     <string name="context_share_as_text">テキストを共有</string>
     <string name="context_share_as_link">リンクを共有</string>
     <string name="create_internal_cache">ユーザー定義のキャッシュを作成</string>
@@ -1237,7 +1245,7 @@
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
     <string name="map_routing">ルート検索(現在:%s)</string>
-    <string name="map_routing_brouter">ルート検索は <a href="">Brouter</a> がインストールされている場合のみ利用できます</string>
+    <string name="map_routing_brouter">ルート検索は<a href="">Brouter</a>がインストールされているか、c:geoルート検索が有効になっていると利用できます</string>
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
@@ -1348,10 +1356,11 @@
     <string name="helper_google_translate_title">Google 翻訳</string>
     <string name="helper_google_translate_description">キャッシュの説明でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます</string>
-    <string name="helper_where_you_go_description">WhereYouGoでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
+    <string name="helper_where_you_go_description">WhereYouGoアプリでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">BRouterはオフラインのルート検索エンジンです。インストール後に必要なファイルをダウンロードするなどのセットアップが必要です。c:geoで地図にキャッシュなどへのルートを表示できるようになります</string>
     <string name="helper_chirpwolf_description">Chirp Wolfを使用するとANT+/Garmin chirp(ジオキャッシュ ビーコン)からデータを読み取ることができます。Garmin chirpを含むジオキャッシュには必要です</string>
+    <string name="helper_alc_description">スマホやタブレット用のアドベンチャー・ラボのアプリ</string>
     <!-- export -->
     <string name="share_export">共有/エクスポート</string>
     <string name="export">エクスポート</string>
@@ -1644,9 +1653,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="status_new_release" tools:ignore="UnusedResources">新しいバージョンがあります\nタップしてインストールしてください</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">新しいナイトリービルドがあります\nタップしてインストールしてください</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">新しいRCバージョンがあります\nタップしてインストールしてください</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在作業中です。しばらくお待ちください</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在作業中です。しばらくお待ちください</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com はメンテナンス中です。 \nさまざまな問題が発生する可能性があります</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comの変更によりc:geoに問題が発生しています。\n対応できるように取り組んでいます。しばらくお待ちください!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comの変更によりc:geoのオンライン地図に問題が発生しています。\n対応できるように取り組んでいます。しばらくお待ちください!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.comは現在(完全には)利用できません。\nc:geoでさまざまな問題が発生する可能性があります。</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Androidの古いバージョンを使用しているようです。 このバージョンのc:geoはお使いのデバイスと互換性がないため、突然終了したり予期せぬ動作をする可能性があります!\n詳細についてはこのメッセージをタップしてください</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1年以上前のc:geoのバージョンをご利用中です。 一部の機能はWebサイトやそのほかの技術的な変更により動作しない可能性があります。アップグレード方法に関するFAQをお読みください</string>
     <!-- text-to-speech for compass view -->
@@ -1900,7 +1909,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_mapfolder_request_explanation">オフライン地図を保存するためにローカルフォルダが必要です。</string>
     <string name="wizard_mapthemesfolder_request_explanation">オフライン地図のテーマファイルを保存するためにローカルフォルダが必要です。</string>
     <string name="wizard_gpxfolder_request_explanation">GPXファイルを保存するためにローカルフォルダが必要です(例: キャッシュやトラックのインポート/エクスポート)。</string>
-    <string name="wizard_broutertilesfolder_request_explanation">c:geo内部ルート検索を有効化してルート検索データを自動ダウンロード(更新)もするには、ルート検索データフォルダを設定する必要があります。</string>
+    <string name="wizard_broutertilesfolder_request_explanation">c:geo内部ルート検索を有効化してルート検索データを自動ダウンロード(更新)するには、ルート検索データフォルダを設定する必要があります。</string>
     <string name="wizard_select_or_create">次のステップでそのようなフォルダを選択または作成します。</string>
     <string name="wizard_platforms_title">ジオキャッシングサイトの設定</string>
     <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です。\nお持ちのアカウントでログインするかアカウント作成してください</string>
