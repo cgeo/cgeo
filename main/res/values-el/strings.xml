@@ -421,6 +421,7 @@
     <string name="about_license">Άδεια χρήσης</string>
     <string name="about_apache_license"><a href="">Άδεια Apache, Έκδοση 2.0</a></string>
     <string name="about_help">Βοήθεια</string>
+    <string name="about_system_collecting">Οι πληροφορίες συστήματος συλλέγονται, παρακαλώ περιμένετε…</string>
     <string name="about_system_include">Παρακαλούμε να συμπεριλάβετε τις ακόλουθες πληροφορίες συστήματος κατά την αποστολή μιας αναφοράς σφάλματος ή όταν ζητάτε περισσότερες πληροφορίες σχετικά με το c:geo:</string>
     <string name="about_system_info_send_button">Αποστολή με e-mail…</string>
     <string name="about_system_info">πληροφορίες συστήματος c:geo</string>
@@ -447,7 +448,7 @@
     <string name="contribution_graphics">γραφικά</string>
     <string name="debug_user_error_report_title">Αναφορά προβλήματος</string>
     <string name="debug_user_error_errortext">Ένα αναπάντεχο σφάλμα συνέβη, το οποίο θα θέλαμε να μας το γνωστοποιήσετε:</string>
-    <string name="debug_user_error_explain_options">Βοηθήστε μαςνα βελτιώσουμε το c:geo με την αποστολή email περλαμβάνοντας πληροφορίες για το συστημα σας και την καταγραφή του προβλήματος. Για αλλες επιλογές επαφής δειτε στο \'Σχετικά με το c:geo\'</string>
+    <string name="debug_user_error_explain_options">Βοηθήστε να διορθώσουμε τα προβλήματα του c:geo αναφέροντας τα μέσω email, συμπεριλαμβάνοντας τις πληροφορίες συστήματος και το αρχείο καταγραφής του c:geo.\nΤο μήνυμα σας να συμπεριλαμβάνει πάντοτε και μια λεπτομερή περιγραφή του σφάλματος!\n\nΠριν από την αποστολή μηνύματος, ελέγξτε τις Συχνές Ερωτήσεις ή/και την παρουσία μας στα μέσα κοινωνικής δικτύωσης για γνωστά προβλήματα.\nΆλλες επιλογές επικοινωνίας μπορούν να βρεθούν στο \'Σχετικά με το c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Άνοιγμα ρυθμίσεων;</string>
     <string name="settings_title_services">Υπηρεσίες</string>
@@ -1648,9 +1649,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Νέα έκδοση διαθέσιμη. \nΚάντε κλικ για την εγκατάσταση.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Νέα νυχτερινή έκδοση διαθέσιμη.\nΚάντε κλικ για εγκατάσταση.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Νέα υποψήφια έκδοση διαθέσιμη. \nΚάντε κλικ για την εγκατάσταση.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν το c:geo.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν τον χάρτη πραγματικού χρόνου.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Γίνεται συντήρηση στο geocaching.com.\nΜπορεί να αντιμετωπίσετε διάφορα θέματα.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Οι αλλαγές στο geocaching.com προκαλούν προβλήματα στο c:geo.\nΓνωρίζουμε και εργαζόμαστε πάνω σε αυτό, παρακαλούμε δώστε μας λίγο χρόνο!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Οι αλλαγές στο geocaching.com προκαλούν προβλήματα στον live χάρτη.\nΓνωρίζουμε και εργαζόμαστε πάνω σε αυτό, παρακαλούμε δώστε μας λίγο χρόνο!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Το geocaching.com δεν είναι (πλήρως) διαθέσιμο αυτή τη στιγμή.\nΜπορεί να αντιμετωπίσετε διάφορα προβλήματα στο c:geo.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Αυτή η έκδοση του c: geo δεν είναι πλέον συμβατή με τη συσκευή σας και ενδέχεται να αποτύχει ή να συμπεριφερθεί απροσδόκητα! \nΠατήστε σε αυτό το μήνυμα για περισσότερες πληροφορίες.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Χρησιμοποιείτε μιά έκδοση του c:geo παλαιότερη. Κάποιες δυνατότητες μπορεί να μην είναι λειτουργικές λογω αλλαγών στο website ή τεχνικές αλλαγές. Παρακαλώ διαβάστε τις συχνές ερωταπαντήσεις (FAQ) για το πως θα κάνετε αναβάθμιση.</string>
     <!-- text-to-speech for compass view -->
