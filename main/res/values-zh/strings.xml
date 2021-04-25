@@ -438,7 +438,6 @@
     <string name="contribution_graphics">图形</string>
     <string name="debug_user_error_report_title">报告问题</string>
     <string name="debug_user_error_errortext">出现了一个意外的问题，我们请求您向我们报告：</string>
-    <string name="debug_user_error_explain_options">通过电子邮件报告 c:geo 的问题以帮助我们解决它们，请附上系统信息和 c:geo 日志文件。请同时在邮件中附上错误的详细描述。 其他联系选项可在 \'关于 c:geo\' 中找到。</string>
     <!-- settings -->
     <string name="settings_title_open_settings">開啟設置</string>
     <string name="settings_title_services">服务</string>
