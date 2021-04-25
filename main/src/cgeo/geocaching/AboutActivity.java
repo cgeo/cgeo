@@ -63,7 +63,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             return binding.getRoot();
         }
 
-        private String getRawResourceString(@RawRes final int resourceId) {
+        private String getRawResourceString(@SuppressWarnings("SameParameterValue") @RawRes final int resourceId) {
             InputStream ins = null;
             Scanner scanner = null;
             try {
@@ -78,7 +78,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 }
             }
         }
-
     }
 
     class ContributorsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
@@ -107,9 +106,9 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         private void setText(final TextView t, final int resId) {
             String s = getString(resId);
             final SpannableStringBuilder sb = new SpannableStringBuilder("<ul>");
-            int p1 = 0;
-            int p2 = 0;
-            int p3 = 0;
+            int p1;
+            int p2;
+            int p3;
             String name;
             String link;
             String roles;
@@ -169,7 +168,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
             return binding.getRoot();
         }
-
     }
 
     class SystemViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
@@ -197,7 +195,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             binding.logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(AboutActivity.this));
             return binding.getRoot();
         }
-
     }
 
     class VersionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
@@ -355,5 +352,4 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             }
         }
     }
-
 }
