@@ -445,7 +445,6 @@
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Zgłoś problem</string>
     <string name="debug_user_error_errortext">Wystąpił nieoczekiwany problem, prosimy o przesłanie zgłoszenia:</string>
-    <string name="debug_user_error_explain_options">Pomóż nam naprawić problemy c:geo zgłaszając je pocztą elektroniczną z informacjami systemowymi i załączonym plikiem dziennika c:geo. Proszę podać również szczegółowy opis błędu w wiadomości e-mail. Inne opcje kontaktu można znaleźć na stronie \'O c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otworzyć ustawienia?</string>
     <string name="settings_title_services">Usługi</string>
@@ -1670,9 +1669,6 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Dostępna nowa nocna wersja.\nKliknij aby zainstalować.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny kandydat na nową wersję.\nKliknij aby zainstalować.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda na to, że używasz starszej wersji Androida. Przyszłe wydania c:geo mogą nie być już dłużej dostępne dla Twojego urządzenia.\nDotknij tej wiadomości, aby uzyskać więcej informacji.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Używasz wersji c:geo, która wydaje się być starsza niż rok. Niektóre funkcje mogą nie działać już ze względu na strony internetowej lub inne zmiany techniczne. Przeczytaj nasze FAQ na temat aktualizacji aplikacji.</string>
     <!-- text-to-speech for compass view -->
