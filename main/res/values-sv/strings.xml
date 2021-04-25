@@ -447,7 +447,6 @@
     <string name="contribution_graphics">grafik</string>
     <string name="debug_user_error_report_title">Rapportera ett problem</string>
     <string name="debug_user_error_errortext">Ett oväntat problem har uppstått som vi ber er att rapportera till oss:</string>
-    <string name="debug_user_error_explain_options">Hjälp oss att rätta c:geo-problem genom att rapportera dem via e-post med systeminformation och c:geo-loggfil inkluderad. Vänligen inkludera också en detaljerad felbeskrivning med ditt mail. Andra kontaktalternativ finns i \'Om c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Öppna inställningar?</string>
     <string name="settings_title_services">Tjänster</string>
@@ -1647,9 +1646,6 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Ny version tillgänglig.\nTryck för att installera.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Ny nattlig bygge tillgängligt.\nTryck för att installera.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Ny kandidat till officiellt bygge finns tillgängligt.\nKlicka för att installera.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Du verkar använda en äldre version av Android. Framtida utgåvor av c:geo kanske inte längre är tillgängliga för din enhet.\nTryck på detta meddelande för ytterligare information.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Du använder en version av c:geo som verkar vara äldre än ett år. Vissa funktioner kanske inte fungerar längre på grund av förändringar på webbplatsen eller andra tekniska ändringar. Läs vår FAQ om hur du uppgraderar.</string>
     <!-- text-to-speech for compass view -->
