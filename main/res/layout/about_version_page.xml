@@ -28,6 +28,7 @@
                 android:orientation="vertical" >
 
                 <ImageView
+                    android:id="@+id/about_version_icon"
                     android:layout_width="200dip"
                     android:layout_height="200dip"
                     android:layout_gravity="center"

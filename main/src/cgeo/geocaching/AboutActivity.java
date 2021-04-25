@@ -211,6 +211,16 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 binding.aboutSpecialBuild.setText(BuildConfig.SPECIAL_BUILD);
                 binding.aboutSpecialBuild.setVisibility(View.VISIBLE);
             }
+            if (StringUtils.isNotEmpty(BuildConfig.BUILD_TYPE)) {
+                //noinspection ConstantConditions
+                if (BuildConfig.BUILD_TYPE.equals("debug")) {
+                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_debug);
+                } else if (BuildConfig.BUILD_TYPE.equals("nightly")) {
+                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_nightly);
+                } else if (BuildConfig.BUILD_TYPE.equals("rc")) {
+                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_beta);
+                }
+            }
             binding.support.setEnabled(false);
             systemInformationTask.getSystemInformation(si -> {
                 setClickListener(binding.support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +

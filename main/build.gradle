@@ -78,6 +78,9 @@ android {
 
             // code coverage
             testCoverageEnabled isContinuousIntegrationServer()
+
+            // replace in AndroidManifest.xml
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_debug"]
         }
         nightly {
             def nightlyName = System.getenv('NB') // NB, NB1, ...
@@ -85,6 +88,7 @@ android {
             signingConfig signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_nightly"]
         }
         rc {
             def rcName = System.getenv('RC') // RC, RC1, RC2 ...
@@ -92,14 +96,17 @@ android {
             signingConfig signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_beta"]
         }
         legacy {
             signingConfig signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher"]
         }
         release {
             signingConfig signingConfigs.release
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher"]
         }
     }
 
@@ -615,30 +622,4 @@ tasks.register('checkstyle', Checkstyle) {
 
 tasks.named('check') {
     dependsOn tasks.named('checkstyle')
-}
-
-
-/*
- * Ribbonizer, adds ribbons to launcher icon of debug builds
- * https://github.com/gfx/gradle-android-ribbonizer-plugin
- * works fine until android 7.1, see https://github.com/cgeo/cgeo/issues/8896
- */
-apply plugin: 'com.github.gfx.ribbonizer'
-
-ribbonizer {
-    // use blue ribbon instead of default green
-    builder { variant, iconFile ->
-        def filter = customColorRibbonFilter(variant, iconFile, "#0000FF")
-        if (variant.buildType.name == "debug") {
-            return filter
-        } else if (variant.buildType.name == "nightly") {
-            return filter
-        } else if (variant.buildType.name == "rc") {
-            filter.label = "beta"
-            return filter
-        }
-    }
-
-    // force specific variants to be ribbonized
-    forcedVariantsNames "basicNightly", "basicRc"
 }
