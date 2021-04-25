@@ -31,6 +31,7 @@
     <string name="gps">Fiera GPS cache</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Locationless (Reverse) Cache</string>
+    <string name="advlab">Cache Adventure Lab</string>
     <string name="userdefined">Cache definito dall\'utente</string>
     <string name="unknown">Tipo sconosciuto</string>
     <!-- cache sizes -->
@@ -164,6 +165,7 @@
     <string name="err_captcha">Captcha richiesto. Si prega di fare riferimento alla nostra <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> per una guida.</string>
     <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
+    <string name="err_server_lc">Impossibile contattare labs.geocaching.com. Il sito Web potrebbe essere non attivo o la tua connessione internet interrotta.</string>
     <string name="err_server_su">Impossibile contattare Geocaching.su. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
     <string name="err_server_gk">Impossibile contattare GeoKrety.org. Il sito Web potrebbe essere inattivo o la tua connessione internet non sta funzionando.</string>
     <string name="err_login">Informazioni di login non memorizzate</string>
@@ -287,6 +289,9 @@
     <string name="menu_helpers">Programmi utili</string>
     <string name="menu_settings">Impostazioni</string>
     <string name="menu_backup">Backup / Ripristino</string>
+    <string name="menu_update">Aggiorna</string>
+    <string name="menu_update_routingdata">Dati di navigazione</string>
+    <string name="menu_update_mapdata">Dati mappa</string>
     <string name="menu_history">Cronologia</string>
     <string name="menu_filter">Filtri</string>
     <string name="menu_scan_geo">Scansiona geocode</string>
@@ -444,7 +449,7 @@
     <string name="contribution_graphics">grafica</string>
     <string name="debug_user_error_report_title">Segnala un problema</string>
     <string name="debug_user_error_errortext">Si è verificato un problema inatteso che ti chiediamo di segnalarci:</string>
-    <string name="debug_user_error_explain_options">Aiutaci a risolvere i problemi c:geo segnalandoli via email con le informazioni di sistema, incluso il file di registro di c:geo. Si prega di includere una descrizione dettagliata con la tua mial. Altri modi per contattarci possono essere trovati su \'Informazioni su c:geo\'</string>
+    <string name="debug_user_error_explain_options">Aiutaci a risolvere i problemi c:geo segnalandoli via email con le informazioni di sistema e il file di registro di c:geo incluso.\nPer favore allega sempre una descrizione dettagliata dell\'errore con la tua mail!\n\nPrima di inviare una mail controlla anche le nostre FAQ e/o sui nostri social media per problemi noti.\nAltre opzioni di contatto possono essere trovate su \'Informazioni su c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Apri le impostazioni?</string>
     <string name="settings_title_services">Servizi</string>
@@ -487,6 +492,7 @@
     <string name="settings_goto_url_button">altro …</string>
     <string name="settings_activate_gc">Attiva</string>
     <string name="settings_activate_ec">Attiva</string>
+    <string name="settings_activate_lc">Attiva</string>
     <string name="settings_gc_legal_note">Per usare i servizi di Geocaching.com, si applicano i termini e le condizioni del Contratto Groundspeak che deve essere approvato dall\'utente.</string>
     <string name="settings_info_facebook_login_title">Accedi tramite Facebook o Google</string>
     <string name="settings_info_facebook_login">Con il tuo account Facebook o Google non puoi fare login su geocaching.com. Ma c\'è una semplice alternativa…</string>
@@ -495,6 +501,7 @@
     <string name="settings_gc_description">Autorizza c:geo per cercare cache su geocaching.com.</string>
     <string name="settings_ec_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
     <string name="settings_su_description">Autorizza c:geo per cercare cache su geocaching,su.</string>
+    <string name="settings_lc_description">Includi i cache Adventure Lab sulla mappa.</string>
     <string name="settings_activate_oc">Attiva</string>
     <string name="init_summary_oc_de">Carica cache da opencaching.de</string>
     <string name="init_oc_de_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de</string>
@@ -572,11 +579,14 @@
     <string name="init_brouterThreshold">Calcola percorso</string>
     <string name="init_brouterThreshold_description">Distanza massima fino alla quale il routing offline calcolerà un percorso.</string>
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
+    <string name="init_autoDownloads">Download automatico</string>
     <string name="init_brouterAutoTileDownloads_description">Proponi automaticamente per scaricare i dati dei riquadri di mappa mancanti nel routing.</string>
+    <string name="init_mapAutoDownloads_description">Controlla automaticamente l\'aggiornamento dei file di mappa e tema. (Valido solo per i file scaricati con il sistema di download integrato.)</string>
     <string name="init_brouterProfileWalk">Profilo \"Camminata\"</string>
     <string name="init_brouterProfileBike">Profilo \"Bici\"</string>
     <string name="init_brouterProfileCar">Profilo \"Automobile\"</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
+    <string name="brouter_missing_data">Apri BRouter per scaricare i dati di routing mancanti (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
     <string name="init_useInternalRouting">Usa navigatore integrato</string>
     <string name="init_summary_useInternalRouting">Usa il routing interno c:geo per poter utilizzare il download automatico dei dati di routing e altre funzioni</string>
@@ -669,6 +679,8 @@
     <string name="init_base_directory_description">Cartella base per i dati locali pubblici</string>
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
     <string name="init_brouter_directory_description">Cartella con i dati di navigazione di BRouter</string>
+    <string name="init_updateinterval_title">Intervallo di aggiornamento</string>
+    <string name="init_updateinterval_description">Ti ricorda ogni x giorni di controllare gli aggiornamenti</string>
     <string name="init_gpx_importexportdir">Cartella GPX</string>
     <string name="init_dataDir">Seleziona cartella dati</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
@@ -1119,6 +1131,8 @@
     <string name="cache_whereyougo_install">Installa WhereYouGo player per scaricare e avviare questa cartuccia</string>
     <string name="cache_chirpwolf_start">Apri Chirp Wolf per leggere i dati del chirp per questo cache</string>
     <string name="cache_chirpwolf_install">Installa Chirp Wolf per poter leggere i dati chirp</string>
+    <string name="cache_alc_start">Apri Adventure Lab per iniziare a giocare a questa avventura</string>
+    <string name="cache_alc_install">Installa l\'app Adventure Lab per giocare a questa avventura</string>
     <string name="context_share_as_text">Condividi testo</string>
     <string name="context_share_as_link">Condividi link</string>
     <string name="create_internal_cache">Crea cache definito dall\'utente</string>
@@ -1359,6 +1373,7 @@
     <string name="helper_brouter_title">BRouter Navigazione Offline</string>
     <string name="helper_brouter_description">BRouter fornisce il routing non in linea. Se è installato e ha scaricato i file necessari, c:geo mostrerà automaticamente un percorso per il cache sulla mappa interna.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf consente di leggere i dati dei tag di chirp ANT+/Garmin, che sono necessari per le geocache ANT+/chirp.</string>
+    <string name="helper_alc_description">App per Adventure Lab per il tuo telefono o tablet.</string>
     <!-- export -->
     <string name="share_export">Condividi / Esporta</string>
     <string name="export">Esportazione</string>
@@ -1652,9 +1667,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Una nuova versione è disponibile.\nClicca per installarla.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">I cambiamenti su geocaching.com stanno causando problemi in c:geo.\nNe siamo al correwnte e ci stiamo lavorando, ti preghiamo di darci un po\' di tempo!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">I cambiamenti su geocaching.com stanno causando problemi sulla mappa dal vivo.\nNe siamo consapevoli e ci stiamo lavorando, ti preghiamo di darci un po\' di tempo!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com non è (completamente) disponibile al momento.\nPotresti riscontrare vari problemi in c:geo.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia usando una versione precedente di Android. Questa versione di c:geo non è più compatibile con il tuo dispositivo e potrebbe fallire o comportarsi inaspettatamente!\nTocca questo messaggio per ulteriori informazioni.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Stai usando una versione di c:geo che sembra essere più vecchia di un anno. Alcune funzionalità potrebbero non funzionare più a causa del sito web o di altre modifiche tecniche. Per favore leggi le nostre FAQ su come aggiornare.</string>
     <!-- text-to-speech for compass view -->
@@ -1889,6 +1904,7 @@
     <string name="downloadtile_title">Dati di navigazione mancanti</string>
     <string name="downloadtile_info">c:geo non può calcolare il percorso richiesto in quanto manca un file di navigazione. Vuoi scaricare i dati di navigazione mancanti?</string>
     <string name="tileupdate_info">Vuoi controllare gli aggiornamenti dei file di navigazione scaricati?</string>
+    <string name="mapupdate_info">Vuoi controllare gli aggiornamenti dei file di mappa e tema?</string>
     <string name="no_updates_found">Nessun aggiornamento trovato</string>
     <string name="updates_check">Controlla aggiornamenti</string>
     <string name="mapserver_mapsforge_info">Mappe di base, nessun tema mappa richiesto</string>
@@ -1949,6 +1965,7 @@
     <string name="wizard_skip_wizard_warning">c:geo potrebbe non funzionare come previsto senza il completamento della configurazione. A seconda della configurazione mancante c:geo potrebbe non essere in grado di leggere / memorizzare dati come mappe offline, geocache, file di log, ecc.\n\nQuando ti senti pronto a completare la configurazione, scegli \"Configuration wizard\" nel menu principale o riavvia c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Sincronizzazione della cartella %1$s terminata dopo %2$s, %3$d su %4$s richiedenti sincronizzazione</string>
+    <string name="mapthemes_themescan_too_long_toast">La scansione del tema della mappa ha richiesto più di %1$d secondi, interrotta dopo aver trovato %2$d temi</string>
     <!-- default actions in dialogs -->
     <string name="previous">Precedente</string>
     <string name="skip">Salta</string>
