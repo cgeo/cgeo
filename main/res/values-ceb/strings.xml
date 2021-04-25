@@ -1091,9 +1091,6 @@
     <string name="website_title">Websayt</string>
     <string name="about_twitter">Ang <b>c:geo</b> ba magmantala og bag-o nga estado sa Twitter matag oras nya mo log ka og cache?</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Ang mga bag-o nga nausab sa geocaching.com kay nakaguba sa c:geo.\nAmo kaning gi-trabaho, tan awa kini sa madayon.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ang mga bag-o nga nausab sa geocaching.com kay nakaguba sa live nga map nga panagway.\nAmo kaning gi-trabaho, tan awa kini sa madayon.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com kay gi-ayo pa.\nBasin makaagi ka og mga isyu.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mosturya na kompas</string>
     <string name="tts_started">Nagsugod na pulong</string>
