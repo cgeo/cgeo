@@ -420,6 +420,7 @@
     <string name="about_license">ライセンス</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">ヘルプ</string>
+    <string name="about_system_collecting">システム情報を収集しています。しばらくお待ちください…</string>
     <string name="about_system_include">バグ報告や問い合わせの際は以下のシステム情報もお知らせください</string>
     <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geoシステム情報</string>
@@ -446,7 +447,7 @@
     <string name="contribution_graphics">グラフィックス</string>
     <string name="debug_user_error_report_title">問題を報告</string>
     <string name="debug_user_error_errortext">予期しない問題が発生しました。報告をお願いします:</string>
-    <string name="debug_user_error_explain_options">システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。その際はエラーの詳細も含めてください。その他の連絡先などは「c:geoについて」をご覧ください。</string>
+    <string name="debug_user_error_explain_options">システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。\nその際はエラーの詳細も必ず含めてください。\n\nメールを送る前にFAQやSNSで既知の問題かどうか確認をお願いします。\nその他の連絡先などは「c:geoについて」をご覧ください。</string>
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
     <string name="settings_title_services">サービス</string>
@@ -1098,8 +1099,8 @@
     <string name="cache_image_background">リストの背景画像をキャッシュ</string>
     <string name="cache_share_field">共有</string>
     <string name="cache_time_full_hours">時</string>
-    <string name="cache_whereyougo_start">WhereYouGoでWherigoカートリッジをダウンロードして始めます</string>
-    <string name="cache_whereyougo_install">WherigoカートリッジをダウンロードするにはWhereYouGoのインストールが必要です</string>
+    <string name="cache_whereyougo_start">WhereYouGoアプリでWherigoカートリッジをダウンロードして始めます</string>
+    <string name="cache_whereyougo_install">WherigoカートリッジをダウンロードするにはWhereYouGoアプリのインストールが必要です</string>
     <string name="cache_chirpwolf_start">Chirp Wolfでキャッシュのchirpデータを読み込みます</string>
     <string name="cache_chirpwolf_install">chirpデータを読み込むにはChirp Wolfのインストールが必要です</string>
     <string name="context_share_as_text">テキストを共有</string>
@@ -1225,7 +1226,7 @@
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
     <string name="map_routing">ルート検索(現在:%s)</string>
-    <string name="map_routing_brouter">ルート検索は <a href="">Brouter</a> がインストールされている場合のみ利用できます</string>
+    <string name="map_routing_brouter">ルート検索は<a href="">Brouter</a>がインストールされているか、c:geoルート検索が有効になっていると利用できます</string>
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
@@ -1336,7 +1337,7 @@
     <string name="helper_google_translate_title">Google 翻訳</string>
     <string name="helper_google_translate_description">キャッシュの説明でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます</string>
-    <string name="helper_where_you_go_description">WhereYouGoでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
+    <string name="helper_where_you_go_description">WhereYouGoアプリでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">BRouterはオフラインのルート検索エンジンです。インストール後に必要なファイルをダウンロードするなどのセットアップが必要です。c:geoで地図にキャッシュなどへのルートを表示できるようになります</string>
     <string name="helper_chirpwolf_description">Chirp Wolfを使用するとANT+/Garmin chirp(ジオキャッシュ ビーコン)からデータを読み取ることができます。Garmin chirpを含むジオキャッシュには必要です</string>
@@ -1633,9 +1634,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="status_new_release" tools:ignore="UnusedResources">新しいバージョンがあります\nタップしてインストールしてください</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">新しいナイトリービルドがあります\nタップしてインストールしてください</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">新しいRCバージョンがあります\nタップしてインストールしてください</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在作業中です。しばらくお待ちください</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在作業中です。しばらくお待ちください</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com はメンテナンス中です。 \nさまざまな問題が発生する可能性があります</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comの変更によりc:geoに問題が発生しています。\n対応できるように取り組んでいます。しばらくお待ちください!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comの変更によりc:geoのオンライン地図に問題が発生しています。\n対応できるように取り組んでいます。しばらくお待ちください!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.comは現在(完全には)利用できません。\nc:geoでさまざまな問題が発生する可能性があります。</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Androidの古いバージョンを使用しているようです。 このバージョンのc:geoはお使いのデバイスと互換性がないため、突然終了したり予期せぬ動作をする可能性があります!\n詳細についてはこのメッセージをタップしてください</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1年以上前のc:geoのバージョンをご利用中です。 一部の機能はWebサイトやそのほかの技術的な変更により動作しない可能性があります。アップグレード方法に関するFAQをお読みください</string>
     <!-- text-to-speech for compass view -->
