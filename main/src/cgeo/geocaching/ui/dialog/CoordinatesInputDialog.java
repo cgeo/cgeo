@@ -39,7 +39,6 @@ import android.widget.TextView;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -182,8 +181,6 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         orderedInputs = Arrays.asList(eLatDeg, eLatMin, eLatSec, eLatSub, eLonDeg, eLonMin, eLonSec, eLonSub);
 
-        bCalculate = v.findViewById(R.id.calculate);
-
         for (final EditText editText : orderedInputs) {
             editText.addTextChangedListener(new SwitchToNextFieldWatcher(editText));
             editText.setOnFocusChangeListener(new PadZerosOnFocusLostListener());
@@ -203,6 +200,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             buttonCache.setVisibility(View.GONE);
         }
 
+        bCalculate = v.findViewById(R.id.calculate);
         if (getActivity() instanceof CalculateState) {
             bCalculate.setOnClickListener(new CalculateListener());
             bCalculate.setVisibility(View.VISIBLE);
