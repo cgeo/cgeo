@@ -1,0 +1,1 @@
+This shirt design files are rather old and using the old logo.
