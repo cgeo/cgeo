@@ -420,6 +420,7 @@
     <string name="about_license">라이센스</string>
     <string name="about_apache_license"><a href="">Apache 라이센스, 버전 2.0</a></string>
     <string name="about_help">도움말</string>
+    <string name="about_system_collecting">시스템 정보를 수집 중입니다. 잠시 기다려주십시오…</string>
     <string name="about_system_include">오류 신고나 c:geo에 대한 추가정보 요청시, 다음 시스템 정보를 포함시켜 주세요.</string>
     <string name="about_system_info_send_button">메일로 보내기…</string>
     <string name="about_system_info">c:geo 시스템 정보</string>
@@ -446,6 +447,7 @@
     <string name="contribution_graphics">그래픽</string>
     <string name="debug_user_error_report_title">문제 신고하기</string>
     <string name="debug_user_error_errortext">예상치 못한 문제가 발생하여 신고를 요청합니다.</string>
+    <string name="debug_user_error_explain_options">시스템 정보 및 c:geo 로그 파일이 포함 된 이메일을 통해보고하여 c:geo 문제를 해결하도록 도와주세요.\n메일에 항상 자세한 오류 설명을 포함하십시오!\n\n메일을 보내기 전에 알려진 문제에 대한 FAQ 및/또는 소셜 미디어 존재를 확인하십시오.\n다른 연락처 옵션은 \'c:geo 정보\'에서 찾을 수 있습니다.</string>
     <!-- settings -->
     <string name="settings_title_open_settings">설정 열기?</string>
     <string name="settings_title_services">서비스</string>
@@ -1635,6 +1637,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">새 릴리스를 사용할 수 있습니다.\n눌러 설치하십시오.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">새로운 버전 사용가능\n눌러 설치하십시오.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">새로운 버전(후보) 사용가능\n눌러 설치하십시오.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.com의 변경으로 인해 c:geo에서 문제가 발생합니다.\n우리는 문제에 대해 알고 있으며 해결하고 있습니다. 시간을 좀 주시기 바랍니다!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.com의 변경 사항은 생지도에서 문제를 일으키고 있습니다.\n우리는 문제에 대해 알고 있으며 해결하고 있습니다. 시간을 좀 주시기 바랍니다!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com은 현재 (완전히) 사용할 수 없습니다.\nc:geo에서 다양한 문제가 발생할 수 있습니다.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">이전 버전의 안드로이드를 사용하고있는 것 같습니다. 이 c:geo 버전은 더 이상 장치와 호환되지 않으며 예기치 않게 작동하지 않을 수 있습니다!\n자세한 내용을 보려면이 메시지를 누르십시오.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1 년 이상 된 것으로 보이는 c:geo 버전을 사용하고 있습니다. 일부 기능은 웹 사이트 또는 기타 기술 변경으로 인해 더 이상 작동하지 않을 수 있습니다. 업그레이드 방법에 대한 FAQ를 읽어보십시오.</string>
     <!-- text-to-speech for compass view -->
