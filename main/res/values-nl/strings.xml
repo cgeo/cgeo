@@ -31,6 +31,7 @@
     <string name="gps">Gps adventures exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Locationless (Reverse) Cache</string>
+    <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Door de gebruiker gedefinieerde cache</string>
     <string name="unknown">Onbekend type</string>
     <!-- cache sizes -->
@@ -164,6 +165,7 @@
     <string name="err_captcha">Captcha is vereist. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
     <string name="err_server">Verbinding met Geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
     <string name="err_server_ec">Verbinding maken met Extremcaching.com is mislukt (geen verbinding of server niet bereikbaar).</string>
+    <string name="err_server_lc">Kan geen contact maken met labs.geocaching.com. De website kan offline zijn of je internetverbinding werkt niet.</string>
     <string name="err_server_su">Verbinding met Geocaching.su mislukt (geen verbinding of server niet bereikbaar).</string>
     <string name="err_server_gk">Niet mogelijk om GeoKrety.org te bereiken. De website kan offline zijn of je internetverbinding werkt niet goed.</string>
     <string name="err_login">Geen login informatie opgeslagen</string>
@@ -421,6 +423,7 @@
     <string name="about_license">Licentie</string>
     <string name="about_apache_license"><a href="">Apache License, Versie 2.0</a></string>
     <string name="about_help">Help</string>
+    <string name="about_system_collecting">Systeeminformatie wordt verzameld, even geduld aub…</string>
     <string name="about_system_include">Voeg volgende systeem informatie toe wanneer je een bug report stuurt of vraagt om meer informatie over c:geo:</string>
     <string name="about_system_info_send_button">Verzenden via mail…</string>
     <string name="about_system_info">c:geo systeeminformatie</string>
@@ -447,6 +450,7 @@
     <string name="contribution_graphics">graphics</string>
     <string name="debug_user_error_report_title">Probleem melden</string>
     <string name="debug_user_error_errortext">Er is een onverwacht probleem opgetreden, gelieve deze aan ons te rapporteren:</string>
+    <string name="debug_user_error_explain_options">Help ons c:geo problemen op te lossen door ze via e-mail te melden met systeeminformatie en het c:geo logbestand.\nGelieve altijd een gedetailleerde foutbeschrijving toe te voegen aan je mail!\n\nLees onze FAQ en/of sociale media voor bekende problemen voordat je een e-mail verstuurt.\nAndere contactopties zijn te vinden onder \'Over c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Instellingen openen?</string>
     <string name="settings_title_services">Diensten</string>
@@ -489,6 +493,7 @@
     <string name="settings_goto_url_button">meer…</string>
     <string name="settings_activate_gc">Activeren</string>
     <string name="settings_activate_ec">Activeren</string>
+    <string name="settings_activate_lc">Activeren</string>
     <string name="settings_gc_legal_note">Met het gebruik van de dienst van geocaching.com, accepteert u de gebruiksvoorwaarden van Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Log in met Facebook of Google</string>
     <string name="settings_info_facebook_login">Het is niet mogelijk om c:geo te laten inloggen op geocaching.com met je Facebook of Google account. Maar er is een eenvoudige workaround…</string>
@@ -497,6 +502,7 @@
     <string name="settings_gc_description">Autoriseer c:geo met geocaching.com om caches te zoeken.</string>
     <string name="settings_ec_description">Autoriseer c:geo met extremcaching.com om caches te zoeken en toegang te hebben tot jouw gevonden caches.</string>
     <string name="settings_su_description">Autoriseer c:geo met geocaching.su om caches te zoeken.</string>
+    <string name="settings_lc_description">Toon Adventure Lab caches op de kaart.</string>
     <string name="settings_activate_oc">Activeren</string>
     <string name="init_summary_oc_de">Laad caches van opencaching.de</string>
     <string name="init_oc_de_description">c:geo authoriseren met opencaching.de om naar caches te zoeken en het filteren van gevonden caches.</string>
@@ -581,6 +587,7 @@
     <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
     <string name="init_brouterProfileCar">\"Auto\" profiel</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
+    <string name="brouter_missing_data">Open BRouter om ontbrekende routeringsgegevens te downloaden (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
     <string name="init_useInternalRouting">Interne routering gebruiken</string>
     <string name="init_summary_useInternalRouting">c:geo interne routering gebruiken om automatische routering, data downloaden en andere functies te kunnen gebruiken</string>
@@ -1125,6 +1132,8 @@
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_chirpwolf_start">Open Chirp Wolf om de chirp-gegevens voor deze cache te lezen</string>
     <string name="cache_chirpwolf_install">Installeer Chirp Wolf om chirp-gegevens te kunnen lezen</string>
+    <string name="cache_alc_start">Open Adventure Lab om te beginnen met het spelen van dit avontuur</string>
+    <string name="cache_alc_install">Installeer de Adventure Lab speler om dit avontuur te spelen</string>
     <string name="context_share_as_text">Tekst delen</string>
     <string name="context_share_as_link">Link delen</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
@@ -1365,6 +1374,7 @@
     <string name="helper_brouter_title">BRouter Offline navigatie</string>
     <string name="helper_brouter_description">BRouter biedt off line routering. Als het is geïnstalleerd en de benodigde bestanden gedownload heeft, zal c:geo een route naar de cache automatisch tonen op de interne kaart.</string>
     <string name="helper_chirpwolf_description">Met Chirp Wolf kun je de gegevens lezen van ANT+/Garmin chirp tags, wat nodig is voor ANT+/chirp geocaches.</string>
+    <string name="helper_alc_description">Adventure Lab Player app voor je telefoon of tablet.</string>
     <!-- export -->
     <string name="share_export">Delen / Exporteren</string>
     <string name="export">Exporteren</string>
@@ -1658,6 +1668,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Nieuwe versie beschikbaar.\nTik om te installeren.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Nieuwe nightly build beschikbaar.\nTik om te installeren.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Nieuwe release-kandidaat beschikbaar.\nTik om te installeren.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Wijzigingen op geocaching.com veroorzaken problemen in c:geo.\nWe zijn er ons bewust van en werken eraan, geef ons wat tijd aub!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Wijzigingen op geocaching.com veroorzaken problemen op de live kaart.\nWe zijn er ons van bewust en werken eraan, geef ons wat tijd aub!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is niet (volledig) beschikbaar op dit moment.\nJe zou verschillende problemen kunnen ondervinden in c:geo.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Het lijkt erop dat je een oudere versie van Android gebruikt. Deze versie van c:geo is niet langer compatibel met je apparaat en kan mogelijk niet werken of onverwacht gedrag vertonen.\nTik op dit bericht voor meer informatie.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Je gebruikt een versie van c:geo die ouder lijkt te zijn dan één jaar. Sommige functies werken mogelijk niet meer vanwege de website of andere technische wijzigingen. Lees onze FAQ over hoe je kunt upgraden.</string>
     <!-- text-to-speech for compass view -->
