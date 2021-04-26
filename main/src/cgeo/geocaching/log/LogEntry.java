@@ -71,6 +71,8 @@ public class LogEntry implements Parcelable {
     @NonNull public final String cacheGuid; // used for trackables
     /** Spotted cache geocode */
     @NonNull public final String cacheGeocode; // used for trackables
+    /** cache rating to be set with this log */
+    public final Float rating; // move from OfflineLogEntry
 
     // Parcelable START
 
@@ -95,6 +97,8 @@ public class LogEntry implements Parcelable {
         cacheName = in.readString();
         cacheGuid = in.readString();
         cacheGeocode = in.readString();
+        rating = in.readFloat();
+
     }
 
     @Override
@@ -113,6 +117,8 @@ public class LogEntry implements Parcelable {
         dest.writeString(cacheName);
         dest.writeString(cacheGuid);
         dest.writeString(cacheGeocode);
+        dest.writeFloat(rating);
+
     }
 
     public static final Parcelable.Creator<LogEntry> CREATOR = new Parcelable.Creator<LogEntry>() {
@@ -152,6 +158,7 @@ public class LogEntry implements Parcelable {
         @NonNull protected String cacheName = ""; // used for trackables
         @NonNull protected String cacheGuid = ""; // used for trackables
         @NonNull protected String cacheGeocode = ""; // used for trackables
+        protected float rating =0;
 
 
         /**
@@ -332,6 +339,13 @@ public class LogEntry implements Parcelable {
             this.reportProblem = reportProblem;
             return (T) this;
         }
+
+        public T setRating(final float rating)
+        {
+            this.rating = rating;
+            return (T)this ;
+        }
+
     }
 
     /**
@@ -354,6 +368,8 @@ public class LogEntry implements Parcelable {
         this.cacheGuid = builder.cacheGuid;
         this.cacheGeocode = builder.cacheGeocode;
         this.reportProblem = builder.reportProblem;
+        this.rating = builder.rating;
+
     }
 
     /**
@@ -375,7 +391,9 @@ public class LogEntry implements Parcelable {
                 .setLogImages(new ArrayList<>(logImages))
                 .setCacheName(cacheName)
                 .setCacheGuid(cacheGuid)
-                .setCacheGeocode(cacheGeocode);
+                .setCacheGeocode(cacheGeocode)
+                .setRating((rating));
+
     }
 
     /**
@@ -410,7 +428,7 @@ public class LogEntry implements Parcelable {
     public int hashCode() {
         return new HashCodeBuilder()
                 .append(id).append(logType).append(author).append(log).append(date).append(found)
-                .append(friend).append(logImages).append(cacheName).append(cacheGuid).append(cacheGeocode)
+                .append(friend).append(logImages).append(cacheName).append(cacheGuid).append(cacheGeocode).append(rating)
                 .build();
     }
 

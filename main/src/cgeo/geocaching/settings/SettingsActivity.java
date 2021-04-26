@@ -12,6 +12,7 @@ import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.connector.su.SuConnector;
+import cgeo.geocaching.connector.p4n.P4NConnector;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -194,7 +195,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
                 R.string.pref_fakekey_preference_backup, R.string.pref_twitter_cache_message,
-                R.string.pref_twitter_trackable_message, R.string.pref_ec_icons, R.string.pref_selected_language }) {
+                R.string.pref_twitter_trackable_message, R.string.pref_ec_icons, R.string.pref_selected_language,
+	        R.string.pref_p4n_starthreshold, R.string.pref_p4n_maxheight }) {
             bindSummaryToStringValue(k);
         }
         bindGeocachingUserToGCVoteuser();
@@ -266,6 +268,15 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         getPreference(R.string.pref_connectorSUActive).setOnPreferenceChangeListener(this);
         setWebsite(R.string.pref_fakekey_su_website, SuConnector.getInstance().getHost());
         getPreference(R.string.preference_screen_su).setSummary(getServiceSummary(Settings.isSUConnectorActive()));
+
+        getPreference(R.string.pref_connectorP4NActive).setOnPreferenceChangeListener(this);
+        setWebsite(R.string.pref_fakekey_p4n_website, P4NConnector.getInstance().getHost());
+        getPreference(R.string.preference_screen_p4n).setSummary(getServiceSummary(Settings.isP4NConnectorActive()));
+
+        getPreference(R.string.pref_connectorWazeActive).setOnPreferenceChangeListener(this);
+        //setWebsite(R.string.pref_fakekey_p4n_website, P4NConnector.getInstance().getHost());
+        getPreference(R.string.preference_screen_waze).setSummary(getServiceSummary(Settings.isWazeConnectorActive()));
+
 
         getPreference(R.string.pref_ratingwanted).setOnPreferenceChangeListener(this);
         setWebsite(R.string.pref_fakekey_gcvote_website, GCVote.getWebsite());

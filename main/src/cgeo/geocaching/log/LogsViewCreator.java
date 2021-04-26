@@ -90,6 +90,12 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
 
         holder.binding.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
 
+        if(log.rating > 0)
+            holder.binding.rating.setRating(log.rating);
+        else
+            holder.binding.rating.setVisibility(View.GONE);
+
+
         fillCountOrLocation(holder, log);
 
         // log text, avoid parsing HTML if not necessary

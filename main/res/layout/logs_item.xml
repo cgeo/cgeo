@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -40,6 +41,16 @@
                     android:id="@+id/count_or_location"
                     style="@style/logitem_property"/>
 
+                <RatingBar
+                    android:id="@+id/rating"
+                    style="@style/cacheRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="2"
+                    android:visibility="visible"
+                    tools:visibility="visible" />
+
             </LinearLayout>
 
             <ImageView
@@ -79,10 +90,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|top"
                 android:layout_marginTop="3dip"
+                android:drawableLeft="?log_img_icon"
                 android:drawablePadding="3dip"
                 android:textColor="?text_color"
-                android:textSize="14sp"
-                app:drawableLeftCompat="?log_img_icon" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
     </RelativeLayout>

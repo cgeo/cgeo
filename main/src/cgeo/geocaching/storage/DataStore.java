@@ -242,7 +242,8 @@ public class DataStore {
             91, // add fields to cg_extension
             92, // add emoji id to cg_caches
             93,  // add emoji id to cg_lists
-            94  // add scale to offline log images
+            94  // add scale to offline log images and Move rating from OfflineLogEntry to LogEntry
+
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -374,7 +375,8 @@ public class DataStore {
             + "log TEXT, "
             + "date LONG, "
             + "found INTEGER NOT NULL DEFAULT 0, "
-            + "friend INTEGER "
+            + "friend INTEGER, "
+            + "rating FLOAT "
             + "); ";
 
     private static final String dbCreateLogCount = ""
@@ -1538,6 +1540,10 @@ public class DataStore {
                         try {
                             createColumnIfNotExists(db, dbTableLogsOfflineImages, "scale INTEGER");
 
+                            createColumnIfNotExists(db, dbTableLogs, "rating DOUBLE DEFAULT 0.0");
+                            db.execSQL("UPDATE " + dbTableLogs + " SET rating = 0.0");
+
+
                         } catch (final SQLException e) {
                             onUpgradeError(e, 94);
                         }
@@ -2372,6 +2378,7 @@ public class DataStore {
                 insertLog.bindLong(8, log.date);
                 insertLog.bindLong(9, log.found);
                 insertLog.bindLong(10, log.friend ? 1 : 0);
+                insertLog.bindDouble(11, log.rating);
                 final long logId = insertLog.executeInsert();
                 if (log.hasLogImages()) {
                     final SQLiteStatement insertImage = PreparedStatement.INSERT_LOG_IMAGE.getStatement();
@@ -3074,7 +3081,7 @@ public class DataStore {
 
             final Cursor cursor = database.rawQuery(
                 //                           0          1               2     3       4            5    6     7      8                                       9                10      11     12   13
-                "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, author_guid, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
+                "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, author_guid, log, date, found, friend, rating, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
                             + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
                             + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode});
 
@@ -3096,13 +3103,16 @@ public class DataStore {
                             .setLog(cursor.getString(5))
                             .setDate(cursor.getLong(6))
                             .setFound(cursor.getInt(7))
-                            .setFriend(cursor.getInt(8) == 1);
-                    if (!cursor.isNull(9)) {
-                        log.addLogImage(new Image.Builder().setUrl(cursor.getString(12)).setTitle(cursor.getString(11)).setDescription(cursor.getString(13)).build());
+                            .setFriend(cursor.getInt(8) == 1)
+                            .setRating(cursor.getFloat(9));
+                     if (!cursor.isNull(10)) {
+                        log.addLogImage(new Image.Builder().setUrl(cursor.getString(13)).setTitle(cursor.getString(12)).setDescription(cursor.getString(14)).build());
+
                     }
                 } else {
                     // We cannot get several lines for the same log entry if it does not contain an image.
-                  log.addLogImage(new Image.Builder().setUrl(cursor.getString(12)).setTitle(cursor.getString(11)).setDescription(cursor.getString(13)).build());
+		    log.addLogImage(new Image.Builder().setUrl(cursor.getString(13)).setTitle(cursor.getString(12)).setDescription(cursor.getString(14)).build());
+
                 }
             }
             if (log != null) {
@@ -4271,7 +4281,7 @@ public class DataStore {
         OFFLINE_LOG_ID_OF_GEOCODE("SELECT _id FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
         COUNT_CACHES_ON_STANDARD_LIST("SELECT COUNT(geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID),
         COUNT_ALL_CACHES("SELECT COUNT(DISTINCT(geocode)) FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID),
-        INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, service_log_id, type, author, author_guid, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"),
+        INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, service_log_id, type, author, author_guid, log, date, found, friend, rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"),
         CLEAN_LOG("DELETE FROM " + dbTableLogs + " WHERE geocode = ? AND date = ? AND type = ? AND author = ?"),
         INSERT_ATTRIBUTE("INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)"),
         ADD_TO_LIST("INSERT OR REPLACE INTO " + dbTableCachesLists + " (list_id, geocode) VALUES (?, ?)"),

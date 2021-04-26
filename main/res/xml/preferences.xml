@@ -354,6 +354,80 @@
 
         <PreferenceCategory android:title="@string/settings_category_geocaching_additionals"
             android:layout="@layout/preference_category" >
+	                <PreferenceScreen
+                android:key="@string/preference_screen_p4n"
+                android:title="Park4Night.com" >
+
+                <PreferenceCategory android:title="@string/settings_settings"
+                    android:layout="@layout/preference_category" >
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:key="@string/pref_connectorP4NActive"
+                        android:summary="@string/init_summary_p4n"
+                        android:title="@string/settings_activate_p4n" />
+                    <cgeo.geocaching.settings.TextPreference
+                        android:dependency="@string/pref_connectorP4NActive"
+                        android:layout="@layout/text_preference"
+                        android:text="@string/settings_p4n_description" />
+                    <Preference
+                        android:selectable="false"
+                        android:summary="@string/init_p4n_maxheight_description"
+                        android:title="@string/settings_p4n_maxheight" />
+                    <cgeo.geocaching.settings.SeekbarPreference
+                        android:defaultValue="260"
+                        app:hasDecimals="false"
+                        app:min="0"
+                        app:max="@integer/p4n_threshold_maxheight"
+
+                        android:dependency="@string/pref_connectorP4NActive"
+                        android:key="@string/pref_p4n_maxheight"
+                        />
+                    <Preference
+                        android:selectable="false"
+                        android:summary="@string/init_p4n_starnote_description"
+                        android:title="@string/settings_p4n_starnote" />
+                    <EditTextPreference
+                        android:defaultValue="4.2"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:dependency="@string/pref_connectorP4NActive"
+                        android:digits="0123456789."
+                        android:inputType="numberDecimal"
+                        android:key="@string/pref_p4n_starthreshold"
+
+                        android:dialogTitle="@string/settings_p4n_starnote"
+                       />
+
+                </PreferenceCategory>
+
+                <PreferenceCategory android:title="@string/settings_information"
+                    android:layout="@layout/preference_category" >
+                    <Preference
+                        android:key="@string/pref_fakekey_p4n_website"
+                        android:title="@string/settings_open_website" />
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="P4N" />
+                </PreferenceCategory>
+            </PreferenceScreen>
+
+              <PreferenceScreen
+                android:key="@string/preference_screen_waze"
+                android:title="Waze" >
+
+                <PreferenceCategory android:title="@string/settings_settings"
+                    android:layout="@layout/preference_category" >
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:key="@string/pref_connectorWazeActive"
+                        android:summary="@string/init_summary_waze"
+                        android:title="@string/settings_activate_waze" />
+                    <cgeo.geocaching.settings.TextPreference
+                        android:dependency="@string/pref_connectorWazeActive"
+                        android:layout="@layout/text_preference"
+                        android:text="@string/settings_waze_description" />
+                </PreferenceCategory>
+            </PreferenceScreen>
 
             <PreferenceScreen
                 android:key="@string/preference_screen_gcvote"

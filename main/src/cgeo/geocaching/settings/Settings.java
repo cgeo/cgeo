@@ -503,6 +503,19 @@ public class Settings {
         return getBoolean(R.string.pref_connectorSUActive, false);
     }
 
+    public static boolean isP4NConnectorActive() {
+        return getBoolean(R.string.pref_connectorP4NActive, false);
+    }
+    public static void setP4NConnectorActive(final boolean value) {
+        putBoolean(R.string.pref_connectorP4NActive, value);
+    }
+
+    public static boolean isWazeConnectorActive()
+    {
+        return getBoolean(R.string.pref_connectorWazeActive, false);
+    }
+
+
     public static boolean isGCPremiumMember() {
         return getGCMemberStatus().isPremium();
     }
@@ -1088,6 +1101,33 @@ public class Settings {
     public static CacheType getCacheType() {
         return CacheType.getById(getString(R.string.pref_cachetype, CacheType.ALL.id));
     }
+
+    /**
+     * The threshold for the showing of child waypoints
+     */
+    public static int getP4NHeightThreshold() {
+        return getInt(R.string.pref_p4n_maxheight, getKeyInt(R.integer.p4n_height_threshold_default));
+    }
+
+    public static float getP4NStarNoteThreshold() {
+
+
+        final float defaultValue = 4.2f;
+        if(sharedPrefs == null)
+            return defaultValue;
+
+        try {
+            final String realValue = sharedPrefs.getString(getKey(R.string.pref_p4n_starthreshold),"4.2");
+            float value = Float.parseFloat(realValue);
+           return value;
+        }
+        catch (NumberFormatException e) {
+            return defaultValue;
+        }
+
+        //return getFloat(R.string.pref_p4n_starthreshold, (float) 4.2);
+    }
+
 
     /**
      * The threshold for the showing of child waypoints

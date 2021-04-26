@@ -5,6 +5,8 @@ import cgeo.geocaching.models.Geocache;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +66,27 @@ public class AttributesGridAdapter extends BaseAdapter {
         final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
         if (attrib != null) {
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, attrib.drawableId, null));
+
+            if(attrib.rawName.startsWith("P4NService"))
+            {
+                GradientDrawable gradientDrawable = new GradientDrawable();
+                gradientDrawable.setColor(Color.argb(255,0,116,240));
+                gradientDrawable.setCornerRadius(6.0f);
+
+                imageView.setBackground(gradientDrawable);
+
+
+            }
+            if(attrib.rawName.startsWith("P4NActivite"))
+            {
+                GradientDrawable gradientDrawable = new GradientDrawable();
+                gradientDrawable.setColor(Color.argb(255,240,148,0));
+                gradientDrawable.setCornerRadius(6.0f);
+
+                imageView.setBackground(gradientDrawable);
+
+
+            }
             if (strikeThrough) {
                 // generate strike through image with same properties as attribute image
                 final ImageView strikeThroughImage = new ImageView(context);

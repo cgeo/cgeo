@@ -20,6 +20,9 @@
     <integer name="proximitynotification_near_default">20</integer>
     <integer name="backup_history_length_default">4</integer>
     <integer name="backup_history_length_max">20</integer>
+    <integer name="p4n_height_threshold_default">260</integer>
+    <item name="p4n_starnotethreshold_default" format="float" type="dimen">4.2</item>
+
 
     <!-- history track -->
     <integer name="historytrack_length_default">700</integer>

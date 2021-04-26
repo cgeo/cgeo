@@ -223,7 +223,8 @@ public final class CacheDetailsCreator {
         if (StringUtils.isEmpty(dateString)) {
             return null;
         }
-        final TextView view = add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString).right;
+        final TextView view = add(cache.isEventCache()||cache.getCacheId().startsWith("P4N") ? R.string.cache_event : R.string.cache_hidden, dateString).right;
+
         view.setId(R.id.date);
         return view;
     }

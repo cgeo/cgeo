@@ -35,7 +35,7 @@ public final class OfflineLogEntry extends LogEntry {
     /** whether tweet for this log shall be published */
     public final boolean tweet;
     /** cache rating to be set with this log */
-    public final Float rating;
+//    public final Float rating;
     /** password to use for password-protected caches (e.g. Opencaching.de) */
     public final String password;
     /** trackable trackable log settings:  "action" to invoke with log */
@@ -49,7 +49,7 @@ public final class OfflineLogEntry extends LogEntry {
         imageScale = in.readInt();
         favorite = in.readInt() == 1;
         tweet = in.readInt() == 1;
-        rating = (Float) in.readValue(Float.class.getClassLoader());
+//        rating = (Float) in.readValue(Float.class.getClassLoader());
         password = in.readString();
         trackableActions = new HashMap<>();
         in.readMap(trackableActions, LogTypeTrackable.class.getClassLoader());
@@ -62,7 +62,7 @@ public final class OfflineLogEntry extends LogEntry {
         dest.writeInt(imageScale);
         dest.writeInt(favorite ? 1 : 0);
         dest.writeInt(tweet ? 1 : 0);
-        dest.writeValue(rating);
+//        dest.writeValue(rating);
         dest.writeString(password);
         dest.writeMap(trackableActions);
     }
@@ -88,7 +88,7 @@ public final class OfflineLogEntry extends LogEntry {
         this.imageScale = builder.imageScale;
         this.favorite = builder.favorite;
         this.tweet = builder.tweet;
-        this.rating = builder.rating;
+//        this.rating = builder.rating;
         this.password = builder.password;
         this.trackableActions = Collections.unmodifiableMap(builder.trackableActions);
     }
@@ -106,7 +106,7 @@ public final class OfflineLogEntry extends LogEntry {
         private int imageScale = -1; // not set
         private boolean favorite = false;
         private boolean tweet = false;
-        private Float rating = null;
+//        private Float rating = null;
         private String password = null;
         private final Map<String, LogTypeTrackable> trackableActions = new HashMap<>();
 
@@ -138,10 +138,11 @@ public final class OfflineLogEntry extends LogEntry {
             return (T) this;
         }
 
-        public T setRating(final Float rating) {
+ /*       public T setRating(final Float rating) {
             this.rating = rating;
             return (T) this;
         }
+*/
 
         public T setPassword(final String password) {
             this.password = password;
@@ -176,7 +177,7 @@ public final class OfflineLogEntry extends LogEntry {
         changed |= !Objects.equals(date, prev.date);
         changed |= favorite != prev.favorite;
         changed |= tweet != prev.tweet;
-        changed |= !equalsFloat(rating, prev.rating, 0.2f);
+//        changed |= !equalsFloat(rating, prev.rating, 0.2f);
         changed |= !Objects.equals(password, prev.password);
         changed |= !Objects.equals(imageScale, prev.imageScale);
         changed |= !Objects.equals(imageTitlePraefix, prev.imageTitlePraefix);

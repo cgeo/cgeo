@@ -17,6 +17,7 @@ import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.gc.UncertainProperty;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.connector.p4n.P4NConnector;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -934,6 +935,10 @@ public class Geocache implements IWaypoint {
 
     public boolean showSize() {
         return !(size == CacheSize.NOT_CHOSEN || isEventCache() || isVirtual());
+    }
+
+    public boolean isP4NGoodRating(){
+        return this.geocode.startsWith("P4N") && this.rating >= Settings.getP4NStarNoteThreshold();
     }
 
     public long getUpdated() {

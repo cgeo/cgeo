@@ -143,7 +143,41 @@ public enum CacheAttribute {
     VIDEO_SURVEIL(-1, 80, "video_surveil", R.drawable.attribute_video_surveil, R.string.attribute_video_surveil_yes, R.string.attribute_video_surveil_no),
     TRACKABLES(-1, 81, "trackables", R.drawable.attribute_trackables, R.string.attribute_trackables_yes, R.string.attribute_trackables_no),
     HISTORIC(-1, 87, "historic", R.drawable.attribute_historic, R.string.attribute_historic_yes, R.string.attribute_historic_no),
-    BLIND_PEOPLE(-1, 89, "blind_people", R.drawable.attribute_blind_people, R.string.attribute_blind_people_yes, R.string.attribute_blind_people_no);
+    BLIND_PEOPLE(-1, 89, "blind_people", R.drawable.attribute_blind_people, R.string.attribute_blind_people_yes, R.string.attribute_blind_people_no),
+
+    //P4NServices
+    P4NSERVICE_WATER(-1, -1, "P4NService_point_eau", R.drawable.p4nservice_point_eau, R.string.p4nservice_point_eau, R.string.p4nservice_no_point_eau),
+    P4NSERVICE_ELECTRICITY(-1, -1, "P4NService_electricite", R.drawable.p4nservice_electricite, R.string.p4nservice_electricite, R.string.p4nservice_no_electricite),
+    P4NSERVICE_BLACK_WATER(-1, -1, "P4NService_eaunoire", R.drawable.p4nservice_eau_noire, R.string.p4nservice_eau_noire, R.string.p4nservice_no_eau_noire),
+    P4NSERVICE_WASTEWATER(-1, -1, "P4NService_eau_usee", R.drawable.p4nservice_eau_usee, R.string.p4nservice_eau_usee, R.string.p4nservice_no_eau_usee),
+    P4NSERVICE_WASTE_CONTAINER(-1, -1, "P4NService_poubelle", R.drawable.p4nservice_poubelle, R.string.p4nservice_poubelle, R.string.p4nservice_no_poubelle),
+    P4NSERVICE_BAKERY(-1, -1, "P4NService_boulangerie", R.drawable.p4nservice_boulangerie, R.string.p4nservice_boulangerie, R.string.p4nservice_no_boulangerie),
+    P4NSERVICE_PUBLIC_TOILETS(-1, -1, "P4NService_wc_public", R.drawable.p4nservice_wc_public, R.string.p4nservice_wc_public, R.string.p4nservice_no_wc_public),
+    P4NSERVICE_SHOWER(-1, -1, "P4NService_douche", R.drawable.p4nservice_douche, R.string.p4nservice_douche, R.string.p4nservice_no_douche),
+    P4NSERVICE_WIFI(-1, -1, "P4NService_wifi", R.drawable.p4nservice_wifi, R.string.p4nservice_wifi, R.string.p4nservice_no_wifi),
+    P4NSERVICE_WINTER_CAMPING(-1, -1, "P4NService_caravaneige", R.drawable.p4nservice_caravaneige, R.string.p4nservice_caravaneige, R.string.p4nservice_no_caravaneige),
+    P4NSERVICE_PETS(-1, -1, "P4NService_animaux", R.drawable.p4nservice_animaux, R.string.p4nservice_animaux, R.string.p4nservice_no_animaux),
+    P4NSERVICE_SWIMMING_POOL(-1, -1, "P4NService_piscine", R.drawable.p4nservice_piscine, R.string.p4nservice_piscine, R.string.p4nservice_no_piscine),
+    P4NSERVICE_LAUNDRY(-1, -1, "P4NService_laverie", R.drawable.p4nservice_laverie, R.string.p4nservice_laverie, R.string.p4nservice_no_laverie),
+    P4NSERVICE_GLP(-1, -1, "P4NService_gpl", R.drawable.p4nservice_gpl, R.string.p4nservice_gpl, R.string.p4nservice_no_gpl),
+    P4NSERVICE_GAS(-1, -1, "P4NService_gaz", R.drawable.p4nservice_gaz, R.string.p4nservice_gaz, R.string.p4nservice_no_gaz),
+    P4NSERVICE_3G4G_INTERNET(-1, -1, "P4NService_donnees_mobile", R.drawable.p4nservice_donnees_mobile, R.string.p4nservice_donnees_mobile, R.string.p4nservice_no_donnees_mobile),
+    P4NSERVICE_LAVAGE(-1, -1, "P4NService_lavage", R.drawable.p4nservice_lavage, R.string.p4nservice_lavage, R.string.p4nservice_no_lavage),
+
+    //P4NActivities
+    P4NACTIVITE_PLAYGROUND(-1, -1, "P4NActivite_jeux_enfants", R.drawable.p4nactivite_jeux_enfants, R.string.p4nactivite_jeux_enfants, R.string.p4nactivite_no_jeux_enfants),
+    P4NACTIVITE_POINT_OF_VIEW(-1, -1, "P4NActivite_point_de_vue", R.drawable.p4nactivite_point_de_vue, R.string.p4nactivite_point_de_vue, R.string.p4nactivite_no_point_de_vue),
+    P4NACTIVITE_SWIMMING_POSSIBLE(-1, -1, "P4NActivite_baignade", R.drawable.p4nactivite_baignade, R.string.p4nactivite_baignade, R.string.p4nactivite_no_baignade),
+    P4NACTIVITE_CLIMBING(-1, -1, "P4NActivite_escalade", R.drawable.p4nactivite_escalade, R.string.p4nactivite_escalade, R.string.p4nactivite_no_escalade),
+    P4NACTIVITE_CANOE_KAYAK(-1, -1, "P4NActivite_eaux_vives", R.drawable.p4nactivite_eaux_vives, R.string.p4nactivite_eaux_vives, R.string.p4nactivite_no_eaux_vives),
+    P4NACTIVITE_FISHING_SPOTS(-1, -1, "P4NActivite_peche", R.drawable.p4nactivite_peche, R.string.p4nactivite_peche, R.string.p4nactivite_no_peche),
+    P4NACTIVITE_BEACH_FISHERIES(-1, -1, "P4NActivite_peche_pied", R.drawable.p4nactivite_peche_pied, R.string.p4nactivite_peche_pied, R.string.p4nactivite_no_peche_pied),
+    P4NACTIVITE_HIKES(-1, -1, "P4NActivite_rando", R.drawable.p4nactivite_rando, R.string.p4nactivite_rando, R.string.p4nactivite_no_rando),
+    P4NACTIVITE_MONUMENTS_VISIT(-1, -1, "P4NActivite_visites", R.drawable.p4nactivite_visites, R.string.p4nactivite_visites, R.string.p4nactivite_no_visites),
+    P4NACTIVITE_MOUNTAIN_BIKE(-1, -1, "P4NActivite_vtt", R.drawable.p4nactivite_vtt, R.string.p4nactivite_vtt, R.string.p4nactivite_no_vtt),
+    P4NACTIVITE_WINDSURF(-1, -1, "P4NActivite_windsurf", R.drawable.p4nactivite_windsurf, R.string.p4nactivite_windsurf, R.string.p4nactivite_no_windsurf),
+    P4NACTIVITE_MOTO(-1, -1, "P4NActivite_moto", R.drawable.p4nactivite_moto, R.string.p4nactivite_moto, R.string.p4nactivite_no_moto);
+
 
     @NonNull
     private static final String INTERNAL_YES = "_yes";

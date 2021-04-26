@@ -47,7 +47,7 @@ android {
         archivesBaseName = "cgeo"
 
         // this is necessary to move .google_measurement_service into a app-specific namespace (see https://github.com/kotmyrevich/analytics-issues/issues/784)
-        applicationId = "cgeo.geocaching"
+        applicationId = "cgeo.geocachingvanlife"
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project at https://crowdin.com/project/cgeo
         // not yet enough translations (~50%): "is","iw"(="he"),"lb"
@@ -100,6 +100,7 @@ android {
         }
         release {
             signingConfig signingConfigs.release
+            applicationIdSuffix ".release"
         }
     }
 

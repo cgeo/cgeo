@@ -19,6 +19,8 @@
     <string translatable="false" name="preference_screen_ec">preference_screen_ec</string>
     <string translatable="false" name="preference_screen_lc">preference_screen_lc</string>
     <string translatable="false" name="preference_screen_su">preference_screen_su</string>
+    <string translatable="false" name="preference_screen_p4n">preference_screen_p4n</string>
+    <string translatable="false" name="preference_screen_waze">preference_screen_waze</string>
     <string translatable="false" name="preference_screen_twitter">preference_screen_twitter</string>
     <string translatable="false" name="preference_screen_navigation_menu">fakekey_navigation_menu_screen</string>
     <string translatable="false" name="preference_screen_sendtocgeo">preference_screen_sendtocgeo</string>
@@ -47,6 +49,8 @@
     <string translatable="false" name="pref_connectorOCROActive">connectorOCROActive</string>
     <string translatable="false" name="pref_connectorOCUKActive">connectorOCUKActive</string>
     <string translatable="false" name="pref_connectorSUActive">connectorSUActive</string>
+    <string translatable="false" name="pref_connectorP4NActive">connectorP4NActive</string>
+    <string translatable="false" name="pref_connectorWazeActive">connectorWazeActive</string>
     <string translatable="false" name="pref_ecusername">ecusername</string>
     <string translatable="false" name="pref_ecpassword">ecpassword</string>
     <string translatable="false" name="pref_ec_avatar">ec_avatar</string>
@@ -253,6 +257,8 @@
     <string translatable="false" name="pref_su_tokenpublic">su_tokenpublic</string>
     <string translatable="false" name="pref_temp_su_token_secret">su-temp-token-secret</string>
     <string translatable="false" name="pref_temp_su_token_public">su-temp-token-public</string>
+    <string translatable="false" name="pref_p4n_maxheight">p4n_maxheight</string>
+    <string translatable="false" name="pref_p4n_starthreshold">p4n_starthreshold</string>
 
     <string translatable="false" name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
     <string translatable="false" name="pref_fakekey_geokrety_website">fakekey_geokrety_website</string>

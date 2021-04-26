@@ -192,6 +192,11 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         assert view != null;
         final Button buttonMore = view.findViewById(R.id.more_details);
 
+        if(cache.getGeocode().startsWith("WAZ")) {
+            buttonMore.setVisibility(View.GONE);
+        }
+
+
         buttonMore.setOnClickListener(arg0 -> {
             CacheDetailActivity.startActivity(getActivity(), geocode);
             getActivity().finish();

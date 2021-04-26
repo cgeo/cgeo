@@ -99,6 +99,7 @@ public final class MapMarkerUtils {
             .append(cache.getOfflineLogType())
             .append(showBackground(cacheListType))
             .append(showFloppyOverlay(cacheListType))
+            .append(cache.isP4NGoodRating())
             .append(assignedMarkers)
             .toHashCode();
 
@@ -279,6 +280,13 @@ public final class MapMarkerUtils {
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, VERTICAL.TOP, HORIZONTAL.RIGHT));
         }
+
+	// Good P4N Rating
+        if (cache.isP4NGoodRating()) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_own, VERTICAL.TOP, HORIZONTAL.LEFT));
+        }
+
+
         // will attend / found
         if (cache.hasWillAttendForFutureEvent() && !doubleSize) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_calendar, VERTICAL.TOP, HORIZONTAL.LEFT));
