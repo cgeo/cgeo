@@ -423,6 +423,7 @@
     <string name="about_license">Licencja</string>
     <string name="about_apache_license"><a href="">Licencja Apache, wersja 2.0</a></string>
     <string name="about_help">Pomoc</string>
+    <string name="about_system_collecting">Informacje systemowe są zbierane, proszę czekać…</string>
     <string name="about_system_include">Proszę załączyć następujące informacje o systemie podczas przesyłania raportu błędu albo podczas prośby o więcej informacji odnośnie c:geo:</string>
     <string name="about_system_info_send_button">Wyślij mailem…</string>
     <string name="about_system_info">c:geo informacje systemowe</string>
@@ -449,6 +450,7 @@
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Zgłoś problem</string>
     <string name="debug_user_error_errortext">Wystąpił nieoczekiwany problem, prosimy o przesłanie zgłoszenia:</string>
+    <string name="debug_user_error_explain_options">Pomóż nam naprawiać problemy z c:geo, zgłaszając je poprzez wiadomość e-mail z załączonymi informacjami systemowymi i plikiem dziennika c:geo. \nProsimy, aby w wiadomości zawsze znajdował się szczegółowy opis błędu!\n\nProsimy również o sprawdzenie naszej sekcji FAQ i/lub mediów społecznościowych pod kątem znanych problemów, zanim wyślesz wiadomość.\nInne możliwości kontaktu można znaleźć w sekcji \"O c:geo\"</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otworzyć ustawienia?</string>
     <string name="settings_title_services">Usługi</string>
@@ -1671,6 +1673,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Dostępna nowa nocna wersja.\nKliknij aby zainstalować.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny kandydat na nową wersję.\nKliknij aby zainstalować.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Zmiany na stronie geocaching.com powodują problemy w c:geo. \nJesteśmy tego świadomi i pracujemy nad tym - prosimy o trochę czasu!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Zmiany na stronie geocaching.com powodują problemy z mapą online w c:geo. \nJesteśmy tego świadomi i pracujemy nad tym - prosimy o trochę czasu!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Strona geocaching.com nie jest w tej chwili (w pełni) dostępna. \nMożesz napotkać różne problemy w c:geo.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda na to, że używasz starszej wersji Androida. Przyszłe wydania c:geo mogą nie być już dłużej dostępne dla Twojego urządzenia.\nDotknij tej wiadomości, aby uzyskać więcej informacji.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Używasz wersji c:geo, która wydaje się być starsza niż rok. Niektóre funkcje mogą nie działać już ze względu na strony internetowej lub inne zmiany techniczne. Przeczytaj nasze FAQ na temat aktualizacji aplikacji.</string>
     <!-- text-to-speech for compass view -->
@@ -1984,6 +1989,7 @@
     <string name="wizard_skip_wizard_warning">c:geo może nie działać zgodnie z oczekiwaniami dopóki konfiguracja nie zostanie zakończona. W zależności od brakującej konfiguracji c:geo może nie być w stanie odczytywać/przechowywać danych takich jak mapy offline, skrytki, pliki logów itp.\n\nGdy będziesz gotowy do sfinalizowania konfiguracji, wybierz „Kreatora konfiguracji” w menu głównym lub zrestartuj c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizacja folderu %1$s zakończona po %2$s, %3$d z %4$s wymaga synchronizacji</string>
+    <string name="mapthemes_themescan_too_long_toast">Skanowanie motywów map zajęło dłużej niż %1$d sekund, przerwano po znalezieniu %2$d motywów</string>
     <!-- default actions in dialogs -->
     <string name="previous">Poprzedni</string>
     <string name="skip">Pomiń</string>
