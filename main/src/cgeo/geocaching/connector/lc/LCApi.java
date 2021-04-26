@@ -33,6 +33,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
+import org.apache.commons.lang3.StringUtils;
 
 final class LCApi {
 
@@ -192,11 +193,7 @@ final class LCApi {
             cache.setGeocode("LC" + uuid);
             cache.setCacheId(id);
             cache.setName(response.get("Title").asText());
-            if (minimalFunction) {
-                cache.setDescription("");
-            } else {
-                cache.setDescription("<img src=\"" + ilink + "\" </img><p><p>" + desc);
-            }
+            cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\" </img><p><p>" : "") + desc);
             cache.setCoords(new Geopoint(location.get("Latitude").asText(), location.get("Longitude").asText()));
             cache.setType(CacheType.ADVLAB);
             cache.setDifficulty((float) 1);
