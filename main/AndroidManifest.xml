@@ -857,7 +857,7 @@
         <!-- search suggestions for the search bar at the top -->
         <provider
             android:name=".search.SuggestionProvider"
-            android:authorities="cgeo.geocaching.search.SuggestionProvider" />
+            android:authorities="${applicationId}.search.SuggestionProvider" />
 
         <activity
             android:name="cgeo.geocaching.connector.gc.PocketQueryListActivity"
@@ -903,7 +903,7 @@
         <!-- fileprovider to be able to share files -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="@string/file_provider_authority"
+            android:authorities="${applicationId}.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

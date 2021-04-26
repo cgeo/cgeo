@@ -57,6 +57,13 @@ android {
         buildConfigField "String[]", "TRANSLATION_ARRAY", "new String[]{\""+locales.join("\",\"")+"\"}"
 
         resConfigs locales
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["resourcePackageName": "cgeo.geocaching"]
+            }
+        }
+
     }
 
     // signing is handled via private.properties
