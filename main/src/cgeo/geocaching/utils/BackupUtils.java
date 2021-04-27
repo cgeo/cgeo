@@ -22,8 +22,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Xml;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -46,6 +48,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -67,25 +70,105 @@ public class BackupUtils {
     private static final String TAG_MAP = "map";
     private static final String SETTINGS_FILENAME = "cgeo-settings.xml";
 
+    private static final String STATE_CSAH = "csam";
+
+    private final ContentStorageActivityHelper fileSelector;
+
     private final Activity activityContext;
 
-    public BackupUtils(final Activity activityContext) {
+    private final List<ImmutableTriple<PersistableFolder, String, String>> regrantAccessFolders = new ArrayList<>();
+    private final List<ImmutableTriple<PersistableUri, String, String>> regrantAccessUris = new ArrayList<>();
+    private boolean regrantAccessRestartNeeded = false;
+    private String regrantAccessResultString = null;
+
+    public BackupUtils(final Activity activityContext, final Bundle savedState) {
         this.activityContext = activityContext;
+        this.fileSelector = new ContentStorageActivityHelper(activityContext, savedState == null ? null : savedState.getBundle(STATE_CSAH))
+            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER, Folder.class, f -> restore(f))
+            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, pf -> triggerNextRegrantStep(pf, null))
+            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_PERSISTED, PersistableUri.class, uri -> triggerNextRegrantStep(null, uri));
     }
+
+    private void triggerNextRegrantStep(final PersistableFolder folder, final PersistableUri uri) {
+        if (folder != null) {
+            final Iterator<ImmutableTriple<PersistableFolder, String, String>> it = regrantAccessFolders.iterator();
+            while (it.hasNext()) {
+                if (it.next().left == folder) {
+                    it.remove();
+                    break;
+                }
+            }
+        }
+        if (uri != null) {
+            final Iterator<ImmutableTriple<PersistableUri, String, String>> it = regrantAccessUris.iterator();
+            while (it.hasNext()) {
+                if (it.next().left == uri) {
+                    it.remove();
+                    break;
+                }
+            }
+        }
+
+        if (!regrantAccessFolders.isEmpty()) {
+            final ImmutableTriple<PersistableFolder, String, String> current = regrantAccessFolders.get(0);
+            final Folder folderToBeRestored = Folder.fromConfig(current.right);
+
+            Dialogs.confirm(activityContext,
+                activityContext.getString(R.string.init_backup_settings_restore),
+                String.format(activityContext.getString(R.string.settings_folder_changed), activityContext.getString(current.left.getNameKeyId()), folderToBeRestored.toUserDisplayableString(), activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok)),
+                activityContext.getString(android.R.string.ok),
+                (d, v) -> {
+                    fileSelector.restorePersistableFolder(current.left, current.left.getUriForFolder(folderToBeRestored));
+                },
+                d2 -> {
+                    regrantAccessFolders.remove(0);
+                    triggerNextRegrantStep(null, null);
+                });
+        } else if (!regrantAccessUris.isEmpty()) {
+            final Uri uriToBeRestored = Uri.parse(regrantAccessUris.get(0).right);
+            final String temp = uriToBeRestored.getPath();
+            final String displayName = temp.substring(temp.lastIndexOf('/') + 1);
+
+            Dialogs.confirm(activityContext,
+                activityContext.getString(R.string.init_backup_settings_restore),
+                String.format(activityContext.getString(R.string.settings_file_changed), activityContext.getString(regrantAccessUris.get(0).left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok)),
+                activityContext.getString(android.R.string.ok),
+                (d, v) -> {
+                    fileSelector.restorePersistableUri(PersistableUri.TRACK, uriToBeRestored);
+                },
+                d2 -> {
+                    regrantAccessUris.remove(0);
+                    triggerNextRegrantStep(null, null);
+                });
+        } else {
+            finishRestoreInternal(activityContext, regrantAccessRestartNeeded, regrantAccessResultString);
+        }
+    }
+
+    public Bundle getState() {
+        final Bundle bundle = new Bundle();
+        bundle.putBundle(STATE_CSAH, fileSelector.getState());
+        return bundle;
+    }
+
+    public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        return fileSelector.onActivityResult(requestCode, resultCode, data);
+    }
+
 
 
     /* Public methods containing question dialogs, etc */
 
-    public void selectBackupDirIntent (final ContentStorageActivityHelper contentStorageHelper) {
+    public void selectBackupDirIntent () {
         Toast.makeText(activityContext, R.string.init_backup_restore_different_backup_explanation, Toast.LENGTH_LONG).show();
-        contentStorageHelper.selectFolder(PersistableFolder.BACKUP.getUri(), f -> restore(f, contentStorageHelper));
+        fileSelector.selectFolder(PersistableFolder.BACKUP.getUri());
     }
 
     /**
      * Show restore dialog
      */
     @SuppressLint("SetTextI18n")
-    public void restore(final Folder backupDir, final ContentStorageActivityHelper contentStorageActivityHelper) {
+    public void restore(final Folder backupDir) {
 
         if (backupDir == null) {
             return;
@@ -123,7 +206,7 @@ public class BackupUtils {
                 .setView(content)
                 .setPositiveButton(activityContext.getString(android.R.string.yes), (alertDialog, id) -> {
                     alertDialog.dismiss();
-                    restoreInternal(activityContext, contentStorageActivityHelper, backupDir, databaseCheckbox.isChecked(), settingsCheckbox.isChecked());
+                    restoreInternal(activityContext, backupDir, databaseCheckbox.isChecked(), settingsCheckbox.isChecked());
                 })
                 .setNegativeButton(activityContext.getString(android.R.string.no), (alertDialog, id) -> {
                     alertDialog.cancel();
@@ -156,7 +239,8 @@ public class BackupUtils {
         }
     }
 
-    public void restoreInternal(final Activity activityContext, final ContentStorageActivityHelper contentStorageActivityHelper, final Folder backupDir, final boolean database, final boolean settings) {
+    @SuppressWarnings("PMD.NPathComplexity") // split up would not help readibility
+    public void restoreInternal(final Activity activityContext, final Folder backupDir, final boolean database, final boolean settings) {
         final Consumer<String> consumer = resultString -> {
 
             boolean restartNeeded = false;
@@ -198,7 +282,13 @@ public class BackupUtils {
 
             // check if folder settings changed and request grants, if necessary
             if (settings && (currentFolderValues.size() > 0 || currentUriValues.size() > 0)) {
-                regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
+                this.regrantAccessFolders.clear();
+                this.regrantAccessFolders.addAll(currentFolderValues);
+                this.regrantAccessUris.clear();
+                this.regrantAccessUris.addAll(currentUriValues);
+                this.regrantAccessRestartNeeded = restartNeeded;
+                this.regrantAccessResultString = resultString;
+                triggerNextRegrantStep(null, null);
             } else {
                 finishRestoreInternal(activityContext, restartNeeded, resultString);
             }
@@ -208,49 +298,6 @@ public class BackupUtils {
             restoreDatabaseInternal(backupDir, consumer);
         } else {
             consumer.accept("");
-        }
-    }
-
-    private void regrantAccess(final Activity activityContext, final ContentStorageActivityHelper contentStorageActivityHelper, final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues, final ArrayList<ImmutableTriple<PersistableUri, String, String>> currentUriValues, final boolean restartNeeded, final String resultString) {
-        if (currentFolderValues.size() > 0) {
-            final ImmutableTriple<PersistableFolder, String, String> current = currentFolderValues.get(0);
-            final Folder folderToBeRestored = Folder.fromConfig(current.right);
-
-            Dialogs.confirm(activityContext,
-                activityContext.getString(R.string.init_backup_settings_restore),
-                String.format(activityContext.getString(R.string.settings_folder_changed), activityContext.getString(currentFolderValues.get(0).left.getNameKeyId()), folderToBeRestored.toUserDisplayableString(), activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok)),
-                activityContext.getString(android.R.string.ok),
-                (d, v) -> {
-                    contentStorageActivityHelper.restorePersistableFolder(current.left, current.left.getUriForFolder(folderToBeRestored), v2 -> {
-                        currentFolderValues.remove(0);
-                        regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
-                    });
-                },
-                d2 -> {
-                    currentFolderValues.remove(0);
-                    regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
-                });
-        } else if (currentUriValues.size() > 0) {
-            final Uri uriToBeRestored = Uri.parse(currentUriValues.get(0).right);
-            final String temp = uriToBeRestored.getPath();
-            final String displayName = temp.substring(temp.lastIndexOf('/') + 1);
-
-            Dialogs.confirm(activityContext,
-                activityContext.getString(R.string.init_backup_settings_restore),
-                String.format(activityContext.getString(R.string.settings_file_changed), activityContext.getString(currentUriValues.get(0).left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok)),
-                activityContext.getString(android.R.string.ok),
-                (d, v) -> {
-                    contentStorageActivityHelper.restorePersistableUri(PersistableUri.TRACK, uriToBeRestored, v2 -> {
-                        currentUriValues.remove(0);
-                        regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
-                    });
-                },
-                d2 -> {
-                    currentUriValues.remove(0);
-                    regrantAccess(activityContext, contentStorageActivityHelper, currentFolderValues, currentUriValues, restartNeeded, resultString);
-                });
-        } else {
-            finishRestoreInternal(activityContext, restartNeeded, resultString);
         }
     }
 

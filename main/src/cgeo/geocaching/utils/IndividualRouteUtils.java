@@ -16,19 +16,32 @@ import cgeo.geocaching.utils.functions.Action2;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.view.Menu;
 
 public class IndividualRouteUtils {
 
     private static final int REQUEST_SORT_INDIVIDUAL_ROUTE = 4712;
+    private static final String STATE_CSAH = "csah";
 
     private final Activity activity;
-
     private final ContentStorageActivityHelper fileSelector;
 
-    public IndividualRouteUtils(final Activity activity) {
+    private final Runnable reloadIndividualRoute;
+    private final Runnable clearIndividualRoute;
+
+    public IndividualRouteUtils(final Activity activity, final Bundle savedState, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute) {
         this.activity = activity;
-        this.fileSelector = new ContentStorageActivityHelper(activity);
+        this.clearIndividualRoute = clearIndividualRoute;
+        this.reloadIndividualRoute = reloadIndividualRoute;
+        this.fileSelector = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH))
+        .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, uri -> {
+            if (uri != null) {
+                GPXIndividualRouteImporter.doImport(activity, uri);
+                reloadIndividualRoute.run();
+            }
+        });
     }
 
     /**
@@ -53,12 +66,12 @@ public class IndividualRouteUtils {
      * @param id       menu entry id
      * @return true, if selected menu entry is individual route related and consumed / false else
      */
-    public boolean onOptionsItemSelected(final int id, final IndividualRoute route, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute, final Route.CenterOnPosition centerOnPosition, final Action2<Geopoint, String> setTarget) {
+    public boolean onOptionsItemSelected(final int id, final IndividualRoute route, final Route.CenterOnPosition centerOnPosition, final Action2<Geopoint, String> setTarget) {
         if (id == R.id.menu_load_individual_route) {
             if (null == route || route.getNumSegments() == 0) {
-                startIndividualRouteFileSelector(reloadIndividualRoute);
+                startIndividualRouteFileSelector();
             } else {
-                Dialogs.confirm(activity, R.string.map_load_individual_route, R.string.map_load_individual_route_confirm, (dialog, which) -> startIndividualRouteFileSelector(reloadIndividualRoute));
+                Dialogs.confirm(activity, R.string.map_load_individual_route, R.string.map_load_individual_route_confirm, (dialog, which) -> startIndividualRouteFileSelector());
             }
         } else if (id == R.id.menu_sort_individual_route) {
             activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);
@@ -87,17 +100,12 @@ public class IndividualRouteUtils {
         return true;
     }
 
-    private void startIndividualRouteFileSelector(final Runnable reloadIndividualRoute) {
+    private void startIndividualRouteFileSelector() {
 
-        fileSelector.selectFile(null, PersistableFolder.GPX.getUri(), uri -> {
-            if (uri != null) {
-                GPXIndividualRouteImporter.doImport(activity, uri);
-                reloadIndividualRoute.run();
-            }
-        });
+        fileSelector.selectFile(null, PersistableFolder.GPX.getUri());
     }
 
-    public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data, final Runnable reloadIndividualRoute) {
+    public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (fileSelector.onActivityResult(requestCode, resultCode, data)) {
             return true;
         }
@@ -106,6 +114,12 @@ public class IndividualRouteUtils {
             return true;
         }
         return false;
+    }
+
+    public  Bundle getState() {
+        final Bundle bundle = new Bundle();
+        bundle.putBundle(STATE_CSAH, this.fileSelector.getState());
+        return bundle;
     }
 
     public static void setAutotargetIndividualRoute(final Activity activity, final IndividualRoute route, final boolean newValue) {

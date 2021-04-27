@@ -34,11 +34,13 @@ import org.apache.commons.lang3.StringUtils;
 
 public class GoogleMapActivity extends Activity implements MapActivityImpl, FilteredActivity {
 
+    private static final String STATE_INDIVIDUAlROUTEUTILS = "indrouteutils";
+    private static final String STATE_TRACKUTILS = "trackutils";
 
     private final AbstractMap mapBase;
 
-    private final TrackUtils trackUtils = new TrackUtils(this);
-    private final IndividualRouteUtils individualRouteUtils = new IndividualRouteUtils(this);
+    private TrackUtils trackUtils = null;
+    private IndividualRouteUtils individualRouteUtils = null;
 
     public GoogleMapActivity() {
         mapBase = new CGeoMap(this);
@@ -68,11 +70,17 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     @Override
     protected void onCreate(final Bundle icicle) {
         mapBase.onCreate(icicle);
+        individualRouteUtils = new IndividualRouteUtils(this, icicle == null ? null : icicle.getBundle(STATE_INDIVIDUAlROUTEUTILS),
+            mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute);
+        trackUtils = new TrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_TRACKUTILS),
+            mapBase::setTracks, mapBase::centerOnPosition);
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         mapBase.onSaveInstanceState(outState);
+        outState.putBundle(STATE_INDIVIDUAlROUTEUTILS, individualRouteUtils.getState());
+        outState.putBundle(STATE_TRACKUTILS, trackUtils.getState());
     }
 
     @Override
@@ -223,7 +231,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
             */
         }
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
-        this.individualRouteUtils.onActivityResult(requestCode, resultCode, data, mapBase::reloadIndividualRoute);
+        this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
         MapDownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 

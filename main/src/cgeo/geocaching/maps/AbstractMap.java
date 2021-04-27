@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
@@ -99,11 +100,20 @@ public abstract class AbstractMap {
         //
     }
 
+    public void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {
+        //
+    }
+
+
     public void reloadIndividualRoute() {
         //
     }
 
-    @Nullable
+    public void clearIndividualRoute() {
+        //
+    }
+
+     @Nullable
     public Geocache getCurrentTargetCache() {
         if (StringUtils.isNotBlank(targetGeocode)) {
             return DataStore.loadCache(targetGeocode, LoadFlags.LOAD_CACHE_OR_DB);

@@ -87,15 +87,28 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     public static final int NO_RESTART_NEEDED = 1;
     public static final int RESTART_NEEDED = 2;
 
-    private final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
+    public static final String STATE_CSAH = "csah";
+    public static final String STATE_BACKUPUTILS = "backuputils";
 
-    private final ContentStorageActivityHelper contentStorageHelper = new ContentStorageActivityHelper(this);
+    private BackupUtils backupUtils = null;
+
+    private ContentStorageActivityHelper contentStorageHelper = null;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         ApplicationSettings.setLocale(this);
         setTheme(Settings.isLightSkin() ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
+
+        backupUtils = new BackupUtils(SettingsActivity.this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
+
+        this.contentStorageHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CSAH))
+            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, folder ->  {
+                getPreference(folder.getPrefKeyId()).setSummary(folder.toUserDisplayableValue());
+                if (PersistableFolder.OFFLINE_MAP_THEMES.equals(folder)) {
+                    RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+                }
+            });
 
         initDeviceSpecificPreferences();
         initUnitPreferences();
@@ -107,6 +120,13 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBundle(STATE_CSAH, contentStorageHelper.getState());
+        savedInstanceState.putBundle(STATE_BACKUPUTILS, backupUtils.getState());
     }
 
     private void openInitialScreen(final int initialScreen) {
@@ -385,12 +405,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
             bindSummaryToValue(pref, folder.toUserDisplayableValue());
             pref.setOnPreferenceClickListener(p -> {
-                contentStorageHelper.selectPersistableFolder(folder, f -> {
-                    p.setSummary(f.toUserDisplayableValue());
-                    if (PersistableFolder.OFFLINE_MAP_THEMES.equals(f)) {
-                        RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
-                    }
-                });
+                contentStorageHelper.selectPersistableFolder(folder);
                 return false;
             });
             folder.registerChangeListener(this, f -> pref.setSummary(f.toUserDisplayableValue()));
@@ -421,13 +436,13 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         final Preference restore = getPreference(R.string.pref_fakekey_preference_restore);
         restore.setOnPreferenceClickListener(preference -> {
-            backupUtils.restore(BackupUtils.newestBackupFolder(), contentStorageHelper);
+            backupUtils.restore(BackupUtils.newestBackupFolder());
             return true;
         });
 
         final Preference restoreFromDir = getPreference(R.string.pref_fakekey_preference_restore_dirselect);
         restoreFromDir.setOnPreferenceClickListener(preference -> {
-            backupUtils.selectBackupDirIntent(contentStorageHelper);
+            backupUtils.selectBackupDirIntent();
             return true;
         });
 
@@ -709,6 +724,9 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         super.onActivityResult(requestCode, resultCode, data);
 
         if (contentStorageHelper.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+        if (backupUtils.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
 
