@@ -501,7 +501,6 @@
     <string name="settings_gc_description">Autorizza c:geo per cercare cache su geocaching.com.</string>
     <string name="settings_ec_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
     <string name="settings_su_description">Autorizza c:geo per cercare cache su geocaching,su.</string>
-    <string name="settings_lc_description">Includi i cache Adventure Lab sulla mappa.</string>
     <string name="settings_activate_oc">Attiva</string>
     <string name="init_summary_oc_de">Carica cache da opencaching.de</string>
     <string name="init_oc_de_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de</string>
