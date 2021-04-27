@@ -63,11 +63,9 @@ import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
-import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
-import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import android.app.ProgressDialog;
