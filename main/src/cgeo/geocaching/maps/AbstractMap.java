@@ -14,6 +14,8 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.IndividualRouteUtils;
+import cgeo.geocaching.utils.TrackUtils;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -134,6 +136,14 @@ public abstract class AbstractMap {
             targetView.setTarget(null, null);
         }
         ActivityMixin.invalidateOptionsMenu(getActivity());
+    }
+
+    protected TrackUtils getTrackUtils() {
+        return mapActivity.getTrackUtils();
+    }
+
+    protected IndividualRouteUtils getIndividualRouteUtils() {
+        return mapActivity.getIndividualRouteUtils();
     }
 
 }
