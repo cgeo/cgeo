@@ -502,7 +502,6 @@
     <string name="settings_gc_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.com.</string>
     <string name="settings_ec_description">Επιτρέψτε στο c:geo με extremcaching.com να αναζητήσει τις κρύπτες που έχετε βρει.</string>
     <string name="settings_su_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.su.</string>
-    <string name="settings_lc_description">Συμπεριλάβετε κρύπτες Adventure Lab στο χάρτη.</string>
     <string name="settings_activate_oc">Ενεργοποίηση</string>
     <string name="init_summary_oc_de">Φόρτωση κρυπτών από opencaching.de</string>
     <string name="init_oc_de_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.de, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
