@@ -201,8 +201,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
     private static final Set<String> dirtyCaches = new HashSet<>();
-    private final TrackUtils trackUtils;
-    private final IndividualRouteUtils individualRouteUtils;
 
     /**
      * if live map is enabled, this is the minimum zoom level, independent of the stored setting
@@ -418,8 +416,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     public CGeoMap(final MapActivityImpl activity) {
         super(activity);
-        this.trackUtils = activity.getTrackUtils();
-        this.individualRouteUtils = activity.getIndividualRouteUtils();
     }
 
     protected void countVisibleCaches() {
@@ -665,7 +661,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private void resumeTrack(final boolean preventReloading) {
         if (null == tracks && !preventReloading) {
-            this.trackUtils.loadTracks(this::setTracks);
+            getTrackUtils().loadTracks(this::setTracks);
         } else if (null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
             ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(tracks);
         }
@@ -779,7 +775,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
-            this.individualRouteUtils.onPrepareOptionsMenu(menu, individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
+            getIndividualRouteUtils().onPrepareOptionsMenu(menu, individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -830,8 +826,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_compass) {
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
-            && !this.trackUtils.onOptionsItemSelected(id, tracks, this::setTracks, this::centerOnPosition)
-            && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::clearIndividualRoute, this::reloadIndividualRoute, this::centerOnPosition, this::setTarget)
+            && !getTrackUtils().onOptionsItemSelected(id, tracks)
+            && !getIndividualRouteUtils().onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
             && !DownloaderUtils.onOptionsItemSelected(activity, id)) {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {
@@ -883,10 +879,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void setTracks(final Route route) {
         tracks = route;
         resumeTrack(null == tracks);
-        this.trackUtils.showTrackInfo(tracks);
+        getTrackUtils().showTrackInfo(tracks);
     }
 
-    private void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {
+    @Override
+    public void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {
         followMyLocation = false;
         switchMyLocationButton();
         mapView.zoomToBounds(viewport, new GoogleGeoPoint(new LatLng(latitude, longitude)));
@@ -905,7 +902,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         ActivityMixin.showToast(activity, res.getString(R.string.map_trailhistory_cleared));
     }
 
-    private void clearIndividualRoute() {
+    @Override
+    public void clearIndividualRoute() {
         individualRoute.clearRoute(overlayPositionAndScale);
         overlayPositionAndScale.repaintRequired();
         ActivityMixin.invalidateOptionsMenu(activity);

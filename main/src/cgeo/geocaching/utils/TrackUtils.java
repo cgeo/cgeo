@@ -12,18 +12,36 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Toast;
 
 public class TrackUtils {
 
+    private static final String STATE_CSAH = "csam";
+
     private final Activity activity;
 
     private final ContentStorageActivityHelper fileSelector;
+    private final Route.UpdateRoute updateTracks;
+    private final Route.CenterOnPosition centerOnPosition;
 
-    public TrackUtils(final Activity activity) {
+    public TrackUtils(final Activity activity, final Bundle savedState, final Route.UpdateRoute updateTracks, final Route.CenterOnPosition centerOnPosition) {
         this.activity = activity;
-        this.fileSelector = new ContentStorageActivityHelper(activity);
+        this.updateTracks = updateTracks;
+        this.centerOnPosition = centerOnPosition;
+        this.fileSelector = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH))
+        .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, uri -> {
+            if (uri != null && this.updateTracks != null) {
+                loadTracks(this.updateTracks);
+            }
+        });
+    }
+
+    public Bundle getState() {
+        final Bundle state = new Bundle();
+        state.putBundle(STATE_CSAH, fileSelector.getState());
+        return state;
     }
 
     /**
@@ -42,13 +60,13 @@ public class TrackUtils {
      * @param id menu entry id
      * @return true, if selected menu entry is track related and consumed / false else
      */
-    public boolean onOptionsItemSelected(final int id, final Route tracks, final Route.UpdateRoute updateTracks, final Route.CenterOnPosition centerOnPosition) {
+    public boolean onOptionsItemSelected(final int id, final Route tracks) {
         if (id == R.id.menu_load_track) {
             if (null == tracks || tracks.getNumSegments() == 0) {
-                startIndividualTrackFileSelector(updateTracks);
+                startIndividualTrackFileSelector();
             } else {
                 Dialogs.confirm(activity, R.string.map_load_track, R.string.map_load_track_confirm, (dialog, which) ->
-                    startIndividualTrackFileSelector(updateTracks));
+                    startIndividualTrackFileSelector());
             }
         } else if (id == R.id.menu_unload_track) {
             ContentStorage.get().setPersistedDocumentUri(PersistableUri.TRACK, null);
@@ -63,13 +81,9 @@ public class TrackUtils {
         return true;
     }
 
-    private void startIndividualTrackFileSelector(final Route.UpdateRoute updateTracks) {
+    private void startIndividualTrackFileSelector() {
 
-        fileSelector.selectPersistableUri(PersistableUri.TRACK, uri -> {
-            if (uri != null && updateTracks != null) {
-                loadTracks(updateTracks);
-            }
-        });
+        fileSelector.selectPersistableUri(PersistableUri.TRACK);
     }
 
     /**

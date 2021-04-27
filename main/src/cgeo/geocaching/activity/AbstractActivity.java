@@ -8,7 +8,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
-import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -52,8 +51,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
     private final String logToken = "[" + this.getClass().getName() + "]";
-
-    private ContentStorageActivityHelper contentStorageHelper = null; //lazy initalized
 
     protected AbstractActivity() {
         this(false);
@@ -279,21 +276,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             return;
         }
         setCacheTitleBar(cache);
-    }
-
-    protected ContentStorageActivityHelper getContentStorageHelper() {
-        if (this.contentStorageHelper == null) {
-            this.contentStorageHelper = new ContentStorageActivityHelper(this);
-        }
-        return this.contentStorageHelper;
-    }
-
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (this.contentStorageHelper != null) {
-            this.contentStorageHelper.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     @Override

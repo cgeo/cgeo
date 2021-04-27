@@ -82,7 +82,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
 
     private static final long FILESYNC_MAX_FILESIZE = 5 * 1024 * 1024; //5MB
 
-    private static final int THEMESCAN_MAX_SECONDS = 5;
+    private static final int AVAILABLE_THEMES_SCAN_MAXDEPTH = 2;
 
     private  static final Object availableThemesMutex = new Object();
     private static final List<ThemeData> availableThemes = new ArrayList<>();
@@ -377,20 +377,15 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
      * public folder. Sync will be done in background task and reports its progress via toasts
      */
     public static void resynchronizeOrDeleteMapThemeFolder() {
-        MapThemeFolderSynchronizer.requestResynchronization(MAP_THEMES_FOLDER.getFolder(), MAP_THEMES_INTERNAL_FOLDER, isThemeSynchronizationActive(), result -> {
-            if (result == null || result.result != FolderUtils.ProcessResult.OK || result.filesModified > 0) {
-                recalculateAvailableThemes();
-            }
-        });
+        MapThemeFolderSynchronizer.requestResynchronization(MAP_THEMES_FOLDER.getFolder(), MAP_THEMES_INTERNAL_FOLDER, isThemeSynchronizationActive());
     }
 
     /** recalculate available themes out of the currently active folder */
     private static void recalculateAvailableThemes() {
 
         final List<ThemeData> newAvailableThemes = new ArrayList<>();
-        if (addAvailableThemes(isThemeSynchronizationActive() ? Folder.fromFile(MAP_THEMES_INTERNAL_FOLDER) : MAP_THEMES_FOLDER.getFolder(), newAvailableThemes, "", System.currentTimeMillis())) {
-            ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.mapthemes_themescan_too_long_toast, THEMESCAN_MAX_SECONDS, newAvailableThemes.size()));
-        }
+        addAvailableThemes(isThemeSynchronizationActive() ? Folder.fromFile(MAP_THEMES_INTERNAL_FOLDER) : MAP_THEMES_FOLDER.getFolder(), newAvailableThemes, "", 0);
+
         Collections.sort(newAvailableThemes, (t1, t2) -> TextUtils.COLLATOR.compare(t1.userDisplayableName, t2.userDisplayableName));
 
         synchronized (availableThemesMutex) {
@@ -408,6 +403,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
     private static List<ThemeData> getAvailableThemes() {
         synchronized (availableThemesMutex) {
             if (!availableThemesInitialized) {
+                //async scan not finished -> rescan synchronized and GUI-blocking!
                 recalculateAvailableThemes();
             }
             //make a copy to be thread-safe
@@ -415,16 +411,11 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
         }
     }
 
-    private static boolean addAvailableThemes(@NonNull final Folder dir, final List<ThemeData> themes, final String prefix, final long startTime) {
-
-        if ((System.currentTimeMillis() - startTime) > THEMESCAN_MAX_SECONDS * 1000) {
-            return true;
-        }
-        boolean result = false;
+    private static void addAvailableThemes(@NonNull final Folder dir, final List<ThemeData> themes, final String prefix, final int level) {
 
         for (FileInformation candidate : Objects.requireNonNull(ContentStorage.get().list(dir))) {
-            if (candidate.isDirectory) {
-                result |= addAvailableThemes(candidate.dirLocation, themes, prefix + candidate.name + "/", startTime);
+            if (candidate.isDirectory && (AVAILABLE_THEMES_SCAN_MAXDEPTH < 0 || level < AVAILABLE_THEMES_SCAN_MAXDEPTH)) {
+                addAvailableThemes(candidate.dirLocation, themes, prefix + candidate.name + "/", level + 1);
             } else if (candidate.name.endsWith(".xml")) {
                 final String themeId = prefix + candidate.name;
                 themes.add(new ThemeData(themeId, toUserDisplayableName(candidate, null), candidate, dir));
@@ -442,7 +433,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
                 }
             }
         }
-        return result;
     }
 
     /**
@@ -468,7 +458,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
 
         private final Folder source;
         private final File target;
-        private final Consumer<FolderUtils.FolderProcessResult> callback;
+        private final boolean doSync;
 
         private final AtomicBoolean cancelFlag = new AtomicBoolean(false);
 
@@ -477,34 +467,26 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
         private AfterSyncRequest afterSyncRequest = AfterSyncRequest.EXIT_NORMAL;
         private long startTime = System.currentTimeMillis();
 
-        public static void requestResynchronization(final Folder source, final File target, final boolean doSync, final Consumer<FolderUtils.FolderProcessResult> callback) {
+        public static void requestResynchronization(final Folder source, final File target, final boolean doSync) {
             synchronized (syncTaskMutex) {
                 if (syncTask == null || !syncTask.requestAfter(doSync ? MapThemeFolderSynchronizer.AfterSyncRequest.REDO : MapThemeFolderSynchronizer.AfterSyncRequest.ABORT_DELETE)) {
-                    if (doSync) {
-                        Log.i("[MapThemeFolderSync] start synchronization " + source + " -> " + target);
-                        syncTask = new MapThemeFolderSynchronizer(source, target, callback);
-                        syncTask.execute();
-                    } else {
-                        syncTask = null;
-                        FileUtils.deleteDirectory(target);
-                        if (callback != null) {
-                            callback.accept(null);
-                        }
-                    }
+                    Log.i("[MapThemeFolderSync] start synchronization " + source + " -> " + target);
+                    syncTask = new MapThemeFolderSynchronizer(source, target, doSync);
+                    syncTask.execute();
                 }
             }
         }
 
-        private MapThemeFolderSynchronizer(final Folder source, final File target, final Consumer<FolderUtils.FolderProcessResult> callback) {
+        private MapThemeFolderSynchronizer(final Folder source, final File target, final boolean doSync) {
             this.source = source;
             this.target = target;
-            this.callback = callback;
+            this.doSync = doSync;
         }
 
         /** Requests for a running task to redo sync after finished. May fail if task is already done, but in this case the task may safely be discarted */
         public boolean requestAfter(final AfterSyncRequest afterSyncRequest) {
             synchronized (requestRedoMutex) {
-                if (taskIsDone) {
+                if (taskIsDone || !doSync) {
                     return false;
                 }
                 Log.i("[MapThemeFolderSync] Requesting '" + afterSyncRequest + "' " + source + " -> " + target);
@@ -517,41 +499,52 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
 
         @Override
         protected FolderUtils.FolderProcessResult doInBackground(final Void[] params) {
-            Log.i("[MapThemeFolderSync] start synchronization " + source + " -> " + target);
-            while (true) {
-                final FolderUtils.FolderProcessResult result = FolderUtils.get().synchronizeFolder(source, target, MapThemeFolderSynchronizer::shouldBeSynced, cancelFlag, null);
-                synchronized (requestRedoMutex) {
-                    switch (afterSyncRequest) {
-                        case EXIT_NORMAL:
-                            taskIsDone = true;
-                            return result;
-                        case ABORT_DELETE:
-                            FileUtils.deleteDirectory(target);
-                            return result;
-                        case REDO:
-                            Log.i("[MapThemeFolderSync] redo synchronization " + source + " -> " + target);
-                            cancelFlag.set(false);
-                            break;
-                        default:
-                            break;
+            Log.i("[MapThemeFolderSync] start synchronization " + source + " -> " + target + " (doSync=" + doSync + ")");
+            FolderUtils.FolderProcessResult result = null;
+            if (!doSync) {
+                FileUtils.deleteDirectory(target);
+            } else {
+                boolean cont = true;
+                while (cont) {
+                    result = FolderUtils.get().synchronizeFolder(source, target, MapThemeFolderSynchronizer::shouldBeSynced, cancelFlag, null);
+                    synchronized (requestRedoMutex) {
+                        switch (afterSyncRequest) {
+                            case EXIT_NORMAL:
+                                taskIsDone = true;
+                                cont = false;
+                                break;
+                            case ABORT_DELETE:
+                                FileUtils.deleteDirectory(target);
+                                cont = false;
+                                break;
+                            case REDO:
+                                Log.i("[MapThemeFolderSync] redo synchronization " + source + " -> " + target);
+                                cancelFlag.set(false);
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }
+
+            synchronized (availableThemesMutex) {
+                if (result == null || !availableThemesInitialized || result.result != FolderUtils.ProcessResult.OK || result.filesModified > 0) {
+                    recalculateAvailableThemes();
+                }
+            }
+            return result;
         }
 
         @Override
         protected void onPostExecute(final FolderUtils.FolderProcessResult result) {
             Log.i("[MapThemeFolderSync] Finished synchronization (state=" + afterSyncRequest + ")");
             //show toast only if something actually happened
-            if (result.filesModified > 0) {
+            if (result != null && result.filesModified > 0) {
                 showToast(R.string.mapthemes_foldersync_finished_toast,
                     LocalizationUtils.getString(R.string.persistablefolder_offline_maps_themes),
                     Formatter.formatDuration(System.currentTimeMillis() - startTime),
                     result.filesModified, LocalizationUtils.getPlural(R.plurals.file_count, result.filesInSource, "file(s)"));
-            }
-            if (callback != null) {
-                //return explicit null if as a result of this task the sync folder was deleted
-                callback.accept(afterSyncRequest == AfterSyncRequest.ABORT_DELETE ? null : result);
             }
             Log.i("[MapThemeFolderSync] Finished synchronization callback");
         }
