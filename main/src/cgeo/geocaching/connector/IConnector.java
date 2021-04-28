@@ -99,6 +99,12 @@ public interface IConnector {
      */
     boolean supportsDescriptionchange();
 
+
+    /**
+     * Shall an extra description be displayed on cache detail page?
+     */
+    String getExtraDescription();
+
     /**
      * enable/disable changing found state of a cache
      */

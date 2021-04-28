@@ -44,6 +44,25 @@
                 android:indeterminateOnly="true" />
         </RelativeLayout>
 
+        <!-- Extra description -->
+
+        <RelativeLayout style="@style/separator_horizontal_layout">
+            <View style="@style/separator_horizontal" />
+            <TextView
+                android:id="@+id/extra_description_title"
+                style="@style/separator_horizontal_headline" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/extra_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dip"
+            android:layout_marginBottom="12dip"
+            android:textSize="14sp"
+            android:visibility="gone"
+            />
+
         <!-- Hint and spoiler-images box -->
 
         <LinearLayout

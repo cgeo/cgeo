@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.lc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
@@ -32,8 +33,11 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     private static final Pattern PATTERN_LC_CODE = Pattern.compile("LC[-\\w]+", Pattern.CASE_INSENSITIVE);
 
+    private final String name;
+
     private LCConnector() {
         // singleton
+        name = CgeoApplication.getInstance().getString(R.string.settings_title_lc);
     }
 
     /**
@@ -62,7 +66,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public String getName() {
-        return "labs.geocaching.com";
+        return name;
     }
 
     @Override
@@ -75,6 +79,11 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     public String getHost() {
         return "labs.geocaching.com";
+    }
+
+    @Override
+    public String getExtraDescription() {
+        return CgeoApplication.getInstance().getString(R.string.lc_default_description);
     }
 
     @Override
