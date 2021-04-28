@@ -202,6 +202,11 @@ public class Waypoint implements IWaypoint {
         return geocode;
     }
 
+    @NonNull
+    public String getShortGeocode() {
+        return (geocode.length() <= 8) ? geocode : (geocode.substring(0, 8));
+    }
+
     public void setGeocode(final String geocode) {
         this.geocode = StringUtils.upperCase(geocode);
     }

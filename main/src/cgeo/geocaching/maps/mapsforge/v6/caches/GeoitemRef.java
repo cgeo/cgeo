@@ -62,6 +62,11 @@ public class GeoitemRef implements Parcelable {
         return itemCode;
     }
 
+    @NonNull
+    public String getShortItemCode() {
+        return itemCode == null ? "" : (itemCode.length() > 8 ? itemCode.substring(0, 8) : itemCode);
+    }
+
     public CoordinatesType getType() {
         return type;
     }

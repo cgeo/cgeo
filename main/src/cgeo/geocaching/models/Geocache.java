@@ -639,6 +639,11 @@ public class Geocache implements IWaypoint {
         return geocode;
     }
 
+    @NonNull
+    public String getShortGeocode() {
+        return (geocode.length() <= 8) ? geocode : (geocode.substring(0, 8));
+    }
+
     /**
      * @return displayed owner, might differ from the real owner
      */

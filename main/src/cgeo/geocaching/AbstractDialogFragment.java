@@ -162,7 +162,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         final String cacheSize = cache.showSize() ? " (" + cache.getSize().getL10n() + ")" : "";
         details.add(R.string.cache_type, cacheType + cacheSize);
 
-        details.add(R.string.cache_geocode, cache.getGeocode());
+        details.add(R.string.cache_geocode, cache.getShortGeocode());
         details.addCacheState(cache);
 
         cacheDistance = details.addDistance(cache, cacheDistance);

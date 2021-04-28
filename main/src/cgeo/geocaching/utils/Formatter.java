@@ -183,7 +183,7 @@ public final class Formatter {
     public static String formatCacheInfoLong(final Geocache cache) {
         final List<String> infos = new ArrayList<>();
         if (StringUtils.isNotBlank(cache.getGeocode())) {
-            infos.add(cache.getGeocode());
+            infos.add(cache.getShortGeocode());
         }
 
         addShortInfos(cache, infos);
@@ -232,7 +232,7 @@ public final class Formatter {
     @NonNull
     public static String formatCacheInfoHistory(final Geocache cache) {
         final List<String> infos = new ArrayList<>(3);
-        infos.add(StringUtils.upperCase(cache.getGeocode()));
+        infos.add(StringUtils.upperCase(cache.getShortGeocode()));
         infos.add(formatDate(cache.getVisitedDate()));
         infos.add(formatTime(cache.getVisitedDate()));
         return StringUtils.join(infos, SEPARATOR);
@@ -327,7 +327,7 @@ public final class Formatter {
 
     @NonNull
     public static String formatMapSubtitle(final Geocache cache) {
-        return "D " + formatDT(cache.getDifficulty()) + SEPARATOR + "T " + formatDT(cache.getTerrain()) + SEPARATOR + cache.getGeocode();
+        return "D " + formatDT(cache.getDifficulty()) + SEPARATOR + "T " + formatDT(cache.getTerrain()) + SEPARATOR + cache.getShortGeocode();
     }
 
     @NonNull
