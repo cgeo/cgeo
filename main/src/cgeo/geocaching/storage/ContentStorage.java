@@ -184,7 +184,7 @@ public class ContentStorage {
     }
      /** Deletes the file represented by given Uri */
     public boolean delete(final Uri uri) {
-        if (uri == null) {
+        if (isEmpty(uri)) {
             return false;
         }
         try {
@@ -312,7 +312,7 @@ public class ContentStorage {
      * Unfortunately it is not possible to retrieve this info from an Uri alone.
      * */
     public FileInformation getFileInfo(final Uri uri) {
-        if (uri == null) {
+        if (isEmpty(uri)) {
             return null;
         }
 
@@ -331,7 +331,7 @@ public class ContentStorage {
     }
 
     public OutputStream openForWrite(final Uri uri, final boolean append) {
-        if (uri == null) {
+        if (isEmpty(uri)) {
             return null;
         }
 
@@ -375,7 +375,7 @@ public class ContentStorage {
      * @param suppressWarningForUser if true then failure to open will NOT result in a toast to user
      */
     public InputStream openForRead(final Uri uri, final boolean suppressWarningForUser) {
-        if (uri == null) {
+        if (isEmpty(uri)) {
             return null;
         }
 
@@ -579,5 +579,9 @@ public class ContentStorage {
             ActivityMixin.showToast(context, messages.left);
         }
         reportRunningFlag.set(false);
+    }
+
+    private static boolean isEmpty(final Uri uri) {
+        return uri == null || uri.equals(Uri.EMPTY);
     }
 }
