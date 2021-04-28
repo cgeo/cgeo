@@ -104,6 +104,11 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public String getExtraDescription() {
+        return "";
+    }
+
+    @Override
     public boolean supportsSettingFoundState() {
         return false;
     }

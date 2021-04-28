@@ -20,6 +20,7 @@ import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
@@ -1647,6 +1648,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (StringUtils.isNotBlank(cache.getDescription()) || cache.supportsDescriptionchange()) {
                 loadLongDescription(parentView);
             }
+
+            // extra description
+            final String geocode = cache.getGeocode();
+            boolean hasExtraDescription = LCConnector.getInstance().canHandle(geocode); // could be generalized, but currently it's only LC
+            if (hasExtraDescription) {
+                final IConnector conn = ConnectorFactory.getConnector(geocode);
+                if (conn != null) {
+                    binding.extraDescriptionTitle.setText(conn.getName());
+                    binding.extraDescription.setText(conn.getExtraDescription());
+                } else {
+                    hasExtraDescription = false;
+                }
+            }
+            binding.extraDescriptionTitle.setVisibility(hasExtraDescription ? View.VISIBLE : View.GONE);
+            binding.extraDescription.setVisibility(hasExtraDescription ? View.VISIBLE : View.GONE);
 
             // cache personal note
             setPersonalNote(binding.personalnote, binding.personalnoteButtonSeparator, cache.getPersonalNote());
