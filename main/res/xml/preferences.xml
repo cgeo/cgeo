@@ -70,7 +70,7 @@
                 <PreferenceCategory android:title="@string/settings_settings"
                     android:layout="@layout/preference_category" >
                     <CheckBoxPreference
-                        android:defaultValue="false"
+                        android:defaultValue="true"
                         android:key="@string/pref_connectorLCActive"
                         android:title="@string/settings_activate_lc" />
                     <cgeo.geocaching.settings.TextPreference
