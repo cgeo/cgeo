@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "cgeo.geocachingvanlife.release",
+  "variantName": "processBasicReleaseResources",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 20210427,
+      "versionName": "2021.04.27",
+      "outputFile": "cgeo-release.apk"
+    }
+  ]
+}
