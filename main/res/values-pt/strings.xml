@@ -31,6 +31,7 @@
     <string name="gps">Exibição das GPS Adventures</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Geocache Locationless (Reverse)</string>
+    <string name="advlab">Geocache Adventure Lab</string>
     <string name="userdefined">Cache definida pelo utilizador</string>
     <string name="unknown">Tipo Desconhecido</string>
     <!-- cache sizes -->
@@ -164,6 +165,7 @@
     <string name="err_captcha">Captcha necessário. Por favor, consulte a nossa <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para obter instruções.</string>
     <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
+    <string name="err_server_lc">Não é possível contactar o sítio \'labs.geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_gk">Não é possível contactar o sítio \'GeoKrety.org\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_login">Nenhuma informação de início de sessão guardada</string>
@@ -421,6 +423,7 @@
     <string name="about_license">Licença</string>
     <string name="about_apache_license"><a href="">Apache License, Versão 2.0</a></string>
     <string name="about_help">Ajuda</string>
+    <string name="about_system_collecting">As informações do sistema estão recolhidas, por favor aguarde…</string>
     <string name="about_system_include">Por favor inclua as seguintes informações de sistema quando reportar um erro ou pedir mais informações acerca do c:geo:</string>
     <string name="about_system_info_send_button">Enviar por e-mail…</string>
     <string name="about_system_info">Informação do sistema c:geo</string>
@@ -447,7 +450,7 @@
     <string name="contribution_graphics">grafismo</string>
     <string name="debug_user_error_report_title">Reportar um problema</string>
     <string name="debug_user_error_errortext">Ocorreu um problema inesperado que gostaríamos que nos reportasse:</string>
-    <string name="debug_user_error_explain_options">Ajude-nos a corrigir os problemas de c:geo relatando-os por e-mail com informações do sistema e o ficheiro de registo do c:geo incluído. Por favor, inclua no e-mail uma descrição detalhada do erro. Outras opções de contacto podem ser encontradas em \'Acerca do c:geo\'</string>
+    <string name="debug_user_error_explain_options">Ajude-nos a corrigir problemas do c:geo ao reportá-los por e-mail, incluindo as informações do sistema e o ficheiro de depuração.\nPor favor, inclua no mail a descrição detalhada do erro!\n\nAntes de enviar um mail, por favor consulte as nossas \"FAQ\" (Perguntas Frequentes) e/ou verifique nas páginas das redes sociais em que temos presença, por problemas que já sejam conhecidos.\nOutras opções de contacto podem ser encontradas em \'Acerca do c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Abrir definições?</string>
     <string name="settings_title_services">Serviços</string>
@@ -490,6 +493,7 @@
     <string name="settings_goto_url_button">mais …</string>
     <string name="settings_activate_gc">Activar</string>
     <string name="settings_activate_ec">Activar</string>
+    <string name="settings_activate_lc">Activar</string>
     <string name="settings_gc_legal_note">Ao usar o serviço de geocaching.com, está a aceitar os Termos de Utilização da Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Início de Sessão com:\nFacebook ou Google</string>
     <string name="settings_info_facebook_login">Não consegue que o c:geo inicie a sessão em geocaching.com com a sua conta do Facebook ou Google. Mas existe uma solução simples…</string>
@@ -498,6 +502,7 @@
     <string name="settings_gc_description">Autoriza o c:geo a pesquisar caches em \'geocaching.com\'.</string>
     <string name="settings_ec_description">Autorize o c:geo a pesquisar caches em extremecaching.com.</string>
     <string name="settings_su_description">Autorize o c:geo a pesquisar caches em geocaching.su.</string>
+    <string name="settings_lc_description">Incluir geocaches Adventure Lab no mapa.\n\n(Disponível apenas para membros premium \"Geocaching.com\"). Requer o serviço \"Geocaching.com\" activado.)</string>
     <string name="settings_activate_oc">Activar</string>
     <string name="init_summary_oc_de">Carregar caches a partir de \'opencaching.de\'</string>
     <string name="init_oc_de_description">Autoriza o c:geo em opencaching.de para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
@@ -582,6 +587,7 @@
     <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
     <string name="init_brouterProfileCar">Perfil \"Carro\"</string>
     <string name="brouter_recalculating">A recalcular a rota em segundo plano…</string>
+    <string name="brouter_missing_data">Abrir o BRouter para transferir os dados de encaminhamento em falta (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Se a navegação estiver activa: Mostra a distância em linha recta além do comprimento da rota.</string>
     <string name="init_useInternalRouting">Usar encaminhamento interno</string>
     <string name="init_summary_useInternalRouting">Use o encaminhamento interno do c:geo para poder usar o descarregamento automático dos dados de encaminhamento e outras funções</string>
@@ -1126,6 +1132,8 @@
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_chirpwolf_start">Abrir a aplicação Chirp Wolf para ler os dados chirp nesta cache</string>
     <string name="cache_chirpwolf_install">Instalar a aplicação Chirp Wolf para poder ler os dados chirp</string>
+    <string name="cache_alc_start">Abrir a aplicação Adventure Lab para iniciar a aventura</string>
+    <string name="cache_alc_install">Instale a aplicação Adventure Lab para dar início a esta aventura</string>
     <string name="context_share_as_text">Partilhar texto</string>
     <string name="context_share_as_link">Partilhar hiperligação</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
@@ -1366,6 +1374,7 @@
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">O BRouter fornece cálculo de percursos off-line. Se estiver instalado e tiver os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a geocache no mapa interno.</string>
     <string name="helper_chirpwolf_description">A aplicação Chirp Wolf permite que leia os dados de tags chirp ANT +/Garmin, que será necessária na realização de geocaches ANT+/chirp.</string>
+    <string name="helper_alc_description">A aplicação Adventure Lab para o seu telemóvel ou tablet.</string>
     <!-- export -->
     <string name="share_export">Partilhar / Exportar</string>
     <string name="export">Exportar</string>
@@ -1659,9 +1668,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Disponível uma nova versão.\nToque para instalar.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Disponível uma nova \'nightly build\'.\nToque para instalar.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Disponível uma nova \'release candidate\'.\nToque para instalar.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em \'geocaching.com\' fizeram com que o mapa da vista em tempo real não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações no geocaching.com estão a causar problemas no c:geo.\nJá temos conhecimento e estamos a trabalhar nisso. Pedimos-lhe que nos dê algum tempo!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações no geocaching.com estão a causar problemas no mapa em tempo real.\nJá temos conhecimento e estamos a trabalhar nisso. Pedimos-lhe que nos dê algum tempo!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">O sítio \'geocaching.com\' não se encontra (completamente) disponível de momento.\nPoderá deparar-se com vários problemas no c:geo.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a usar uma versão antiga do Android. Esta versão do c:geo não é compatível com o seu dispositivo e pode falhar ou ter um comportamento inesperado!\nToque nesta mensagem para obter mais informações.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão do c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, fruto de alterações num sítio web ou outros motivos técnicos. Por favor, leia a nossa \'FAQ\' para saber como actualizar.</string>
     <!-- text-to-speech for compass view -->

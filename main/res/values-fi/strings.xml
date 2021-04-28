@@ -31,6 +31,7 @@
     <string name="gps">GPS Adventures Exhibit -kätkö</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Sijaintivapaa (päinvastainen) kätkö</string>
+    <string name="advlab">Adventure Lab-kätkö</string>
     <string name="userdefined">Käyttäjän määrittämä kätkö</string>
     <string name="unknown">Tuntematon kätkötyyppi</string>
     <!-- cache sizes -->
@@ -164,6 +165,7 @@
     <string name="err_captcha">Captcha vaaditaan. Ole hyvä ja katso <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> saadaksesi opastusta.</string>
     <string name="err_server">Geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_ec">Extremecaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
+    <string name="err_server_lc">labs.geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_su">Geocaching.su-sivustoon ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_gk">Yhteys GeoKrety.org:iin ei onnistunut. Verkkosivu saattaa olla alhaalla tai Internet-yhteytesi ei toimi.</string>
     <string name="err_login">Kirjautumistietoja ei ole tallennettu</string>
@@ -421,6 +423,7 @@
     <string name="about_license">Lisenssi</string>
     <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
     <string name="about_help">Ohjeet</string>
+    <string name="about_system_collecting">Järjestelmätiedot kerätään, ole hyvä ja odota…</string>
     <string name="about_system_include">Liitä mukaan seuraavat järjestelmätiedot lähettäessäsi virheraporttia tai tiedustellessasi lisätietoja c:geosta:</string>
     <string name="about_system_info_send_button">Lähetä sähköpostitse…</string>
     <string name="about_system_info">c:geo järjestelmätiedot</string>
@@ -447,7 +450,7 @@
     <string name="contribution_graphics">grafiikat</string>
     <string name="debug_user_error_report_title">Ilmoita ongelmasta</string>
     <string name="debug_user_error_errortext">Tapahtui odottamaton virhe, ja haluaisimme pyytää sinua raportoimaan siitä meille:</string>
-    <string name="debug_user_error_explain_options">Auta meitä korjaamaan c:geon ongelmia raportoimalla ne sähköpostin kautta. Raportti sisältää järjestelmätietoja sekä c:geon lokitiedoston. Lisääthän sähköpostiin myös yksityiskohtaisen virheselosteen. Muita yhteydenottotapoja löydät kohdasta \'Tietoja c:geosta\'</string>
+    <string name="debug_user_error_explain_options">Auta meitä korjaamaan c:geon ongelmia raportoimalla ne sähköpostin kautta. Raportti sisältää järjestelmätietoja sekä c:geon lokitiedoston.\n Lisääthän sähköpostiin myös yksityiskohtaisen virheselosteen!\n\nEnnen sähköpostin lähetystä, tarkistathan FAQmme ja/tai sosiaalisen median tilimme tiedossa olevien ongelmien varalta.\nMuita yhteydenottotapoja löydät kohdasta \'Tietoja c:geosta\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>
@@ -490,6 +493,7 @@
     <string name="settings_goto_url_button">Lisää…</string>
     <string name="settings_activate_gc">Aktivoi</string>
     <string name="settings_activate_ec">Aktivoi</string>
+    <string name="settings_activate_lc">Aktivoi</string>
     <string name="settings_gc_legal_note">Käyttämällä geocaching.com -palvelua hyväksyt samalla Groundspeakin käyttöehdot.</string>
     <string name="settings_info_facebook_login_title">Kirjaudu käyttäen Facebookia tai Googlea</string>
     <string name="settings_info_facebook_login">c:geo ei voi kirjautua geocaching.com:iin Facebook- tai Google-tilillä, mutta se on helppo kiertää…</string>
@@ -498,6 +502,7 @@
     <string name="settings_gc_description">Anna c:geolle lupa geocaching.com-palvelun käyttöön etsiäksesi kätköjä.</string>
     <string name="settings_ec_description">Anna c:geolle lupa extremcaching.com-palvelun käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
     <string name="settings_su_description">Anna c:geolle lupa geocaching.su-palvelun käyttöön etsiäksesi kätköjä.</string>
+    <string name="settings_lc_description">Sisällytä Adventure Lab -katköt kartalla.\n\n(Saatavilla vain \"Geocaching.com\"in premium-jäsenille. Edellyttää aktivoitua \"Geocaching.com\"-palvelua.)</string>
     <string name="settings_activate_oc">Aktivoi</string>
     <string name="init_summary_oc_de">Lataa kätköt palvelusta opencaching.de</string>
     <string name="init_oc_de_description">Anna c:geolle lupa opencaching.de:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
@@ -582,6 +587,7 @@
     <string name="init_brouterProfileBike">\"Pyöräily\"-profiili</string>
     <string name="init_brouterProfileCar">\"Autoilu\"-profiili</string>
     <string name="brouter_recalculating">Lasketaan reittiä uudelleen taustalla…</string>
+    <string name="brouter_missing_data">Avaa BRouter ladataksesi puuttuvat reititystiedot (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Jos reititys on aktiivisena: Näytä suora etäisyys lasketun reitin etäisyyden lisäksi.</string>
     <string name="init_useInternalRouting">Käytä sisäistä reititystä</string>
     <string name="init_summary_useInternalRouting">Käytä c:geon sisäistä reititystä käyttääksesi automaattista reititystietojen lataamista ja muita toimintoja</string>
@@ -1126,6 +1132,8 @@
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_chirpwolf_start">Avaa Chirp Wolf lukeaksesi chirpin tiedot tälle kätkölle</string>
     <string name="cache_chirpwolf_install">Asenna Chirp Wolf pystyäksesi lukemaan chirpin tietoja</string>
+    <string name="cache_alc_start">Avaa Adventure Lab -sovellus aloittaaksesi tämän seikkailun</string>
+    <string name="cache_alc_install">Asenna Adventure Lab-sovellus pelataksesi tätä seikkailua</string>
     <string name="context_share_as_text">Jaa teksti</string>
     <string name="context_share_as_link">Jaa linkki</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
@@ -1366,6 +1374,7 @@
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">BRouter tarjoaa offline-reitityksen. Jos se on asennettuna ja tarvittavat tiedostot ladattuna, c:geo näyttää kartalla reitin kätkölle automaattisesti.</string>
     <string name="helper_chirpwolf_description">Chirp Wolfin avulla voit lukea ANT+/Garmin chirp -tageja, joita tarvitaan ANT+/chirp -geokätköihin.</string>
+    <string name="helper_alc_description">Adventure Lab -sovellus puhelimeesi tai tablettiisi.</string>
     <!-- export -->
     <string name="share_export">Jaa / Vie</string>
     <string name="export">Vienti</string>
@@ -1659,9 +1668,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Uusi versio saatavilla.\nKlikkaa asentaaksesi.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Uusi nightly-versio saatavilla.\nKlikkaa asentaaksesi.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Uusi julkaisuehdokas saatavilla.\nAsenna napauttamalla.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com:issa rikkoivat c:geon. \n Korjaamme tilannetta, tarkistathan tilanteen pian uudestaan.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com-sivulla hajoittivat livekartta-ominaisuuden.\nAsiaa korjataan, yritä lähiaikoina uudelleen.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Muutokset geocaching.comissa aiheuttavat ongelmia c:geossa.\nOlemme tietoisia ongelmasta ja työskentelemme sen parissa, annathan meille hieman aikaa!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Muutokset geocaching.comissa aiheuttavat ongelmia live-kartassa.\nOlemme tietoisia ongelmasta ja työskentelemme sen parissa, annathan meille hieman aikaa!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com ei ole (kokonaan) saatavilla tällä hetkellä.\nSaatat kokea erilaisia ongelmia c:geossa.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Näyttää siltä, että käytät Android-käyttöjärjestelmän vanhempaa versiota. Voi olla, että päivitykset ja uusimmat ominaisuudet eivät ole välttämättä saatavilla laitteellesi.\nNapauta tästä saadaksesi lisätietoja.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Käytät c:geon versiota joka näyttää olevan vanhempi kuin yksi vuosi. Voi olla, että jotkut ominaisuudet eivät enää toimi johtuen verkkosivujen tai muiden teknisten seikkojen muutosten vuoksi. Ole hyvä ja päivitä ohjelmasi.</string>
     <!-- text-to-speech for compass view -->

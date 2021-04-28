@@ -31,6 +31,7 @@
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Catxé Locationless (Reverse)</string>
+    <string name="advlab">Adventure Lab Catxé</string>
     <string name="userdefined">Catxé definit per l’usuari</string>
     <string name="unknown">Desconegut</string>
     <!-- cache sizes -->
@@ -164,6 +165,7 @@
     <string name="err_captcha">Es requereix captcha. Consulteu les nostres <a href="https://www.cgeo.org/faq#login-failed"> FAQ</a> per obtenir més informació.</string>
     <string name="err_server">No es pot contactar amb Geocaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_ec">No es pot contactar amb Extremcaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
+    <string name="err_server_lc">No es pot contactar amb labs.geocaching.com. Pot ser que el lloc web estigui inactiu o la connexió a Internet no funcioni.</string>
     <string name="err_server_su">No es pot contactar amb Geocaching.su. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_gk">No s\'ha pogut contactar amb GeoKrety.org. La pàgina web pot haver caigut o la connexió a internet no funciona.</string>
     <string name="err_login">No hi ha desada cap informació d\'accés</string>
@@ -262,6 +264,7 @@
     <string name="err_trackable_log_not_anonymous">Entreu %1$s des de c:geo no es pot fer anònimament. Voleu obrir la configuració per omplir les vostres credencials de %2$s?</string>
     <string name="err_trackable_no_preference_activity">No es troba la pantalla indicada de preferència.</string>
     <string name="confirm_unsaved_changes_title">Canvis sense desar</string>
+    <string name="confirm_discard_changes">Voleu descartar els canvis no desats?</string>
     <string name="confirm_discard_wp_changes">Descartar els canvis de punts de ruta sense desar?</string>
     <string name="err_request_popup_info">El c:geo no ha pogut obtenir la informació emergent del catxé.</string>
     <string name="warn_log_load_additional_data">c:geo no ha pogut carregar les dades addicionals (trackables/favorit punts) per al registre.</string>
@@ -287,6 +290,9 @@
     <string name="menu_helpers">Programes d\'utilitat</string>
     <string name="menu_settings">Configuració</string>
     <string name="menu_backup">Còpia de Seguretat / Restaurar</string>
+    <string name="menu_update">Actualització</string>
+    <string name="menu_update_routingdata">Dades d\'encaminament</string>
+    <string name="menu_update_mapdata">Dades del mapa</string>
     <string name="menu_history">Historial</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Escaneja un codi de catxé</string>
@@ -418,6 +424,7 @@
     <string name="about_license">Llicència</string>
     <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
     <string name="about_help">Ajuda</string>
+    <string name="about_system_collecting">Es recopila la informació del sistema, espereu…</string>
     <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar per correu…</string>
     <string name="about_system_info">Informació del sistema de c:geo</string>
@@ -444,7 +451,7 @@
     <string name="contribution_graphics">Gràfics</string>
     <string name="debug_user_error_report_title">Informar d\'un problema</string>
     <string name="debug_user_error_errortext">S\'ha produït un problema inesperat que us sol·licitaríem que ens comuniqueu:</string>
-    <string name="debug_user_error_explain_options">Ajudeu-nos a solucionar problemes de c: geo , Aviseu per correu electrònic amb la informació del sistema i el fitxer de registre c: geo. Incloeu al vostre correu també una descripció detallada de l’error Es poden trobar altres opcions de contacte a \'Quant a c: geo\'</string>
+    <string name="debug_user_error_explain_options">Ajudeu-nos a solucionar els problemes de c: geo informant-los per correu electrònic amb informació del sistema i el fitxer de registre inclòs.\nIncloeu sempre una descripció detallada de l’error al vostre correu electrònic!\n\nAbans d’enviar un missatge, consulteu també les nostres FAQ i / o presència a les xarxes socials per problemes coneguts.\nPodeu trobar altres opcions de contacte a \"Quant a c: geo\"</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Obrir la configuració?</string>
     <string name="settings_title_services">Serveis</string>
@@ -487,6 +494,7 @@
     <string name="settings_goto_url_button">més…</string>
     <string name="settings_activate_gc">Activa</string>
     <string name="settings_activate_ec">Activa</string>
+    <string name="settings_activate_lc">Activa</string>
     <string name="settings_gc_legal_note">Amb l\'ús del servei de geocaching.com, estàs acceptant les condicions d\'ús de Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Inicieu sessió amb Facebook o Google</string>
     <string name="settings_info_facebook_login">No podeu fer que el c:geo es connecti a geocaching.com amb el compte de Facebook o Google. Però hi ha una manera fàcil de solucionar-ho…</string>
@@ -570,11 +578,19 @@
     <string name="init_zoomincludingwaypoints">El zoom inclou punts de pas</string>
     <string name="init_zoomincludingwaypoints_description">Si fiqueu al mapa un catxé: s\'ha d\'ajustar el zoom per incloure tots els seus punts de ruta?</string>
     <string name="init_brouterThreshold">Calcula la ruta</string>
+    <string name="init_brouterThreshold_description">Distància màxima fins a la qual l\'encaminament calcularà una ruta, fora de línia.</string>
     <string name="init_brouterShowBothDistances">Mostra la distància en línia recta</string>
+    <string name="init_autoDownloads">Descàrrega automàtica</string>
     <string name="init_brouterAutoTileDownloads_description">Oferiu automàticament la baixada de dades d’encaminament que falten.</string>
+    <string name="init_mapAutoDownloads_description">Comproveu automàticament si hi ha actualitzacions de fitxers de mapes i temes. (Vàlid només per als fitxers que heu descarregat amb el programa de descàrrega integrat.)</string>
+    <string name="init_brouterProfileWalk">Perfil \"A peu\"</string>
+    <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
+    <string name="init_brouterProfileCar">Perfil \"Cotxe\"</string>
     <string name="brouter_recalculating">S\'està recalculant la ruta en segon pla…</string>
+    <string name="brouter_missing_data">Obriu BRouter per baixar les dades d\'encaminament que falten (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
     <string name="init_useInternalRouting">Utilitzeu l’encaminament intern</string>
+    <string name="init_summary_useInternalRouting">Utilitzeu l’encaminament intern per poder utilitzar la descàrrega automàtica de dades d’encaminament i altres funcions</string>
     <string name="init_bigSmileysOnMap">Icones grans per catxes registrats</string>
     <string name="init_summary_bigSmileysOnMap">Si està activat, es mostraran emoticones grans al mapa pels catxés registrats en lloc de la icona del tipus de catxe (cal reiniciar-lo).</string>
     <string name="init_disabled">Exclou els desactivats</string>
@@ -664,6 +680,8 @@
     <string name="init_base_directory_description">Carpeta base per a dades locals públiques</string>
     <string name="init_map_directory_description">Carpeta amb mapes fora de línia</string>
     <string name="init_brouter_directory_description">Carpeta amb dades d’encaminament BRouter</string>
+    <string name="init_updateinterval_title">Interval d\'actualització</string>
+    <string name="init_updateinterval_description">Us recorda cada x dies per comprovar les actualitzacions</string>
     <string name="init_gpx_importexportdir">Carpeta GPX</string>
     <string name="init_dataDir">Selecciona la carpeta de dades</string>
     <string name="init_dataDir_note">Podeu triar emmagatzemar les dades addicionals per als geoamagatalls (pistes, registre d\'imatges, …) en l\'emmagatzematge extern (targeta SD externa emulada o real, en funció del dispositiu).</string>
@@ -1114,6 +1132,8 @@
     <string name="cache_whereyougo_install">Instal·leu  WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_chirpwolf_start">Inicieu Chirp Wolf per llegir les dades del chirp des d\'aquesta memòria cau</string>
     <string name="cache_chirpwolf_install">Instal·leu Chirp Wolf per poder llegir les dades del chirp</string>
+    <string name="cache_alc_start">Obriu Adventure Lab per començar a jugar a aquesta aventura</string>
+    <string name="cache_alc_install">Instal·leu el reproductor Adventure Lab per jugar a aquesta aventura</string>
     <string name="context_share_as_text">Compartir text</string>
     <string name="context_share_as_link">Compartir Enllaç</string>
     <string name="create_internal_cache">Creeu catxé definit per l\'usuari</string>
@@ -1354,6 +1374,7 @@
     <string name="helper_brouter_title">Navegació fora de línia BRouter</string>
     <string name="helper_brouter_description">BRouter proporciona enrutament fora de línia. Si s\'instal·la i té els arxius necessaris descarregats, c:geo automàticament mostrarà una ruta a l\'amagatall al mapa intern.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf us permet llegir les dades de les etiquetes ANT + / Garmin, que són necessàries per a catxés ANT + / chirp.</string>
+    <string name="helper_alc_description">Aplicació Adventure Lab Player per al telèfon o la tauleta.</string>
     <!-- export -->
     <string name="share_export">Comparteix / Exporta</string>
     <string name="export">Exporta</string>
@@ -1648,9 +1669,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Nova versió disponible.\nToca per instal·lar-la.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Hi ha disponible una nova versió nocturna.\nToca per instal·lar-la.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Hi ha disponible una app candidata a nova versió.\nToca per instal·lar.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat el c:geo.\nHi estem treballant, torneu-ho a provar aviat.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat la funcionalitat del mapa en viu.\nHi estem treballant, torneu-ho a provar aviat.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">El web de geocaching.com està en manteniment.\nPer aquest motiu podeu tenir alguna dificultat.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Els canvis a geocaching.com estan provocant problemes a c: geo.\nSom conscients i hi treballem, doneu-nos una mica de temps.</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Els canvis a geocaching.com estan provocant problemes al mapa en viu.\nSom conscients i hi treballem, doneu-nos una mica de temps.</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com no està (totalment) disponible en aquest moment.\nPot experimentar diversos problemes a c: geo.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembla que utilitzeu una versió anterior d\'Android. Aquesta versió de c: geo ja no és compatible amb el vostre dispositiu i pot fallar o comportar-se de manera inesperada.\nPrem aquest missatge per obtenir més informació.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Esteu fent servir una versió de c: geo que sembla tenir més d’un any. És possible que algunes funcions ja no funcionin a causa de canvis tècnics. Llegiu les nostres FAQ sobre com actualitzar.</string>
     <!-- text-to-speech for compass view -->
@@ -1880,6 +1901,7 @@
     <string name="downloadtile_title">Falten dades d’encaminament</string>
     <string name="downloadtile_info">C: geo no pot calcular la ruta sol·licitada, ja que falten alguns fitxers de dades d’encaminament. Voleu descarregar les dades d’encaminament que falten?</string>
     <string name="tileupdate_info">Voleu comprovar si hi ha actualitzacions de fitxers de dades d’encaminament descarregats?</string>
+    <string name="mapupdate_info">Voleu buscar actualitzacions de fitxers de mapes i temes?</string>
     <string name="no_updates_found">No s\'han trobat actualitzacions</string>
     <string name="updates_check">Revisió de les actualitzacions</string>
     <string name="mapserver_mapsforge_info">Mapes bàsics, no es requereixen temes de mapes</string>
@@ -1940,6 +1962,7 @@
     <string name="wizard_skip_wizard_warning">C:geo és possible que no funcioni tal com s’esperava fins que no es completi la configuració. Depenent de la configuració que falti, C:geo pot no ser capaç de llegir / emmagatzemar dades com mapes fora de línia, catxés, registre, etc.\n\nSi estàs preparat per finalitzar la configuració, trieu \"Assistent de configuració\" al menú principal o reinicieu C:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">La sincronització de carpetes %1$s s\'ha acabat després de %2$s, s\'ha necessitat la sincronització de %3$d de %4$s</string>
+    <string name="mapthemes_themescan_too_long_toast">L\'escaneig del tema del mapa ha trigat més de %1$d segons, interromput després de trobar %2$d temes</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ometre</string>

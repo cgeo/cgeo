@@ -1120,9 +1120,6 @@
     <string name="about_twitter">Harus <b>c:geo</b> mempublikasikan sebuah status baru di Twitter setiap kali anda log cache?</string>
     <string name="faq_title">Tanya jawab</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Perubahan terbaru pada geocaching.com pecah c:geo.\nKami bekerja di atasnya, segera periksa kembali.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Perubahan terbaru pada geocaching.com fitur peta hidup pecah.\nKami bekerja di atasnya, segera periksa kembali.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com berada di bawah pemeliharaan.\nanda mungkin mengalami berbagai masalah.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Kompas yang dibicarakan</string>
     <string name="tts_started">Mulai pidato</string>

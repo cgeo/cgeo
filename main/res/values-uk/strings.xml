@@ -424,7 +424,6 @@
     <string name="contribution_documentation">Документація</string>
     <string name="contribution_projectleader">лідер проекту з відкритим кодом</string>
     <string name="contribution_graphics">Графіка</string>
-    <string name="debug_user_error_explain_options">Допоможіть нам виправити c:geo, повідомляючи про це електронною поштою з системною інформацією та c:geo logfile включено. Будь ласка, також додайте докладний опис помилки з вашою поштою. Інші параметри контактів можна знайти на \'Про\":\"geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Відкрити налаштування?</string>
     <string name="settings_title_services">Послуги</string>
@@ -1451,9 +1450,6 @@
     <string name="github_title">вишукувач</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Останні зміни на geocaching.com зламали c: geo.\nМи працюємо над цим, невдовзі перевірте ще раз.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Останні зміни на geocaching.com зламали c: geo.\nМи працюємо над цим, невдовзі перевірте ще раз.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com перебуває на технічному обслуговуванні.\nВи можете зіткнутися з різними питаннями.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Здається, ви використовуєте старішу версію Android. Ця версія c:geo більше не сумісна з вашим пристроєм, і може бути нестабільною або некоректною!\nНатисніть на це повідомлення для отримання додаткової інформації.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Ви використовуєте версію c:geo, яка, здається, старша за один рік. Деякі функції можуть не працювати більше через веб-сайт або інші технічні зміни. Будь ласка, прочитайте наші FAQ про те, як оновити їх.</string>
     <!-- text-to-speech for compass view -->

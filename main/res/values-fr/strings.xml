@@ -443,7 +443,6 @@
     <string name="contribution_graphics">graphiques</string>
     <string name="debug_user_error_report_title">Signaler un problème</string>
     <string name="debug_user_error_errortext">Une erreur est survenue, merci de nous la signaler :</string>
-    <string name="debug_user_error_explain_options">Aidez-nous à résoudre les problèmes de c:geo en nous les signalant par courrier électronique. Veuillez fournir les informations systèmes, le fichier journal de c:geo ainsi qu\'une description détaillée de l\'erreur. D\'autres possibilités de contact se trouvent dans \'A propos de c:geo\'.</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ouvrir les paramètres ?</string>
     <string name="settings_title_services">Services</string>
@@ -1639,9 +1638,6 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Une nouvelle version de c:geo est disponible.\nAppuyez pour l\'installer.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Une nouvelle version de test est disponible.\nAppuyez pour l\'installer.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez pour l\'installer.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous semblez utiliser une ancienne version d\'Android. Cette version de c:geo n\'est plus compatible avec votre appareil et pourrait ne pas fonctionner ou se comporter de façon inattendue !\nAppuyez sur ce message pour plus d\'informations.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Vous utilisez une version de c:geo qui semble avoir plus d\'un an. Certaines fonctionnalités peuvent ne plus fonctionner en raison de modifications du site Web geocaching.com ou d\'autres modifications techniques. Veuillez lire notre FAQ pour savoir comment réaliser la mise à jour.</string>
     <!-- text-to-speech for compass view -->
