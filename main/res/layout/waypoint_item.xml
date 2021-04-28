@@ -84,7 +84,7 @@
         android:maxLines="1" />
 
     <TextView
-        android:id="@+id/calculate_coordinates"
+        android:id="@+id/calculated_coordinates"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
@@ -97,7 +97,7 @@
         android:textColor="?text_color_headline"
         android:textSize="14sp"
         android:visibility="gone"
-        android:text="@string/waypoint_calculate_coordinates"
+        android:text="@string/waypoint_calculated_coordinates"
         tools:visiblity="visible" />
 
     <TextView

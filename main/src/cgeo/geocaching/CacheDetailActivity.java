@@ -2011,18 +2011,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         protected void fillViewHolder(final View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
             // coordinates
             final TextView coordinatesView = holder.binding.coordinates;
-            final TextView calculateCoordinatesView = holder.binding.calculateCoordinates;
+            final TextView calculatedCoordinatesView = holder.binding.calculatedCoordinates;
             final Geopoint coordinates = wpt.getCoords();
 
             if (coordinates != null) {
                 holder.setCoordinate(coordinates);
                 coordinatesView.setVisibility(View.VISIBLE);
-                calculateCoordinatesView.setVisibility(View.GONE);
+                calculatedCoordinatesView.setVisibility(View.GONE);
             } else {
                 coordinatesView.setVisibility(View.GONE);
                 // formula, if no coords
                 final String calcStateJson = wpt.getCalcStateJson();
-                calculateCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
+                calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
             }
 
             // info
