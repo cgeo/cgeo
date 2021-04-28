@@ -442,7 +442,6 @@
     <string name="contribution_graphics">grafik</string>
     <string name="debug_user_error_report_title">Rapportér et problem</string>
     <string name="debug_user_error_errortext">Der er opstået et uventet problem, som vi vil bede dig om at rapportere til os:</string>
-    <string name="debug_user_error_explain_options">Hjælp os med at løse fejl i c:geo ved at indberette dem. Send en e-mail med system-informationer og logfilen fra c:geo. Skriv også en detaljeret fejlbeskrivelse i mailen. Andre kontakt-måder findes under \'Om c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Åbn indstillinger?</string>
     <string name="settings_title_services">Tjenester</string>
@@ -1512,9 +1511,6 @@
     <string name="about_twitter">Skal <b>c:geo</b> sende status til Twitter hver gang du logger en cache?</string>
     <string name="faq_title">Ofte stillede spørgsmål</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer c:geo i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer Live-kortet i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er under vedligeholdelse.\nDu kan opleve uregelmæssigheder.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Din enhed bruger en ældre version af Android. Denne version af c:geo er ikke længere kompatibel med din enhed, hvilket kan medføre fejl eller uventet opførsel!\nTryk på denne besked for at få yderligere information.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Din enhed bruger en version af c:geo, som er ældre end et år. Tekniske ændringer på benyttede tjenester kan bevirke at nogle funktioner ikke længere fungerer. Læs venligst vores OSS om hvordan du opgraderer.</string>
     <!-- text-to-speech for compass view -->

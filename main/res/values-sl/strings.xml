@@ -1096,9 +1096,6 @@
     <string name="about_twitter">Naj <b>c:geo</b> objavi nov status na Twitter, ko objavite nov zapis pri zakladu?</string>
     <string name="faq_title">Pogosta vprašanja</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Spremembe na spletni strani Geocaching.com so povzročile, da c:geo ne deluje popolno.\nŽe delamo na tem! Poskusite ponovno čez nekaj časa.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Spremembe na spletni strani Geocaching.com so povzročile, da zemljevid zakladov ne deluje več.\nŽe delamo na tem! Poskusite ponovno čez nekaj časa.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Trenutno poteka vzdrževanje spletne strani geocaching.com.\nMorda boste imeli težave pri povezovanju.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Glasovni kompas</string>
     <string name="tts_started">Začel govor</string>

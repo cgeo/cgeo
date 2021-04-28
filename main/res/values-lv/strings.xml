@@ -431,7 +431,6 @@
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Ziņot par problēmu</string>
     <string name="debug_user_error_errortext">Notikusi neparedzēta kļūda, par kuru mēs vēlamies, lai Tu ziņotu:</string>
-    <string name="debug_user_error_explain_options">Palīdzi mums labot c:geo kļūdas, ziņojot par tām epastā, iekļaijot sistēmas informāciju un c:geo log dokumentu. Lūdzu vēstulē iekļaujiet arī detalizētu kļūdas aprakstu. Citas komunikācijas iespējas var atrast \'Par c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Atvērt uzstādījumus?</string>
     <string name="settings_title_services">Servisi</string>
@@ -1379,9 +1378,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="about_twitter">Vai <b>c:geo</b> publicēt jaunu statusu vietnē Twitter pēc katra atrastā slēpņa?</string>
     <string name="faq_title">BUJ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Nesenās izmaiņas geocaching.com lapā \"salauza\" c:geo.\nMēs strādājam lai to salabotu, pārbaudiet pēc brīža.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Dēļ izmaiņām geocaching.com lapā, traucēta tiešsaistes karšu darbība. \nMēs strādājam lai to salabotu, pārbaudiet pēc brīža.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tiek atjaunots. \nYou.Jūs varat saskarties ar dažādām nepilnībām.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Runājošais kompass</string>
     <string name="tts_started">Sākta runa</string>

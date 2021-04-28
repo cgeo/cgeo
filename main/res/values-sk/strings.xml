@@ -423,6 +423,7 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
     <string name="about_help">Pomoc</string>
+    <string name="about_system_collecting">Informácie o systéme sa zhromažďujú, čakajte…</string>
     <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
     <string name="about_system_info_send_button">Poslať e-mailom…</string>
     <string name="about_system_info">c:geo systémové informácie</string>
@@ -449,7 +450,7 @@
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Nahlásenie problému</string>
     <string name="debug_user_error_errortext">Vyskytol sa nečakaný problém a radi by sme vás požiadali, aby ste nám ho nahlásili:</string>
-    <string name="debug_user_error_explain_options">Pomôžte nám s opravou problémov aplikácie c:geo pomocou e-mailu s informáciami o systéme a súborom denníka z aplikácie c:geo. Do vášho e-mailu vložte aj podrobný popis chyby, prosím. Ďalšie možnosti kontaktu nájdete v časti \'O aplikácii c:geo\'</string>
+    <string name="debug_user_error_explain_options">Pomôžte nám opraviť problémy aplikácie c:geo tak, že ich nahlásite cez e-mail s informáciami o systéme a priloženým súborom denníka aplikácie c:geo.\nVo svojej e-mailovej správy vždy uveďte aj podrobný popis chyby!\n\nPred odoslaním e-mailu skontrolujte aj naše Najčastejšie otázky a spoločenské médiá, kde nájdete informácie o známych problémoch.\nĎalšie možnosti kontaktu nájdete v časti „Informácie o aplikácii c:geo“.</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otvoriť nastavenia?</string>
     <string name="settings_title_services">Služby</string>
@@ -1672,9 +1673,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Je dostupné nové vydanie.\nŤuknutím nainštalujte.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Je dostupná nová nočná zostava.\nŤuknutím nainštalujte.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Je dostupná nová verzia „release candidate“.\nŤuknutím nainštalujte.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili c:geo.\nPracujeme na tom, skúste onedlho skontrolovať aktualizácie.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Prebieha údržba na Geocaching.com \n Môžu nastať rôzne problémy.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Zmeny na geocaching.com spôsobujú problémy v aplikácii c:geo.\nVieme o tom a pracujeme na tom, dajte nám trochu času!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Zmeny na geocaching.com spôsobujú problémy na aktívnej mape.\nVieme o tom a pracujeme na tom, dajte nám trochu času!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Stránky geocaching.com nie sú (úplne) dostupné.\nV aplikácii c:geo sa môžu vyskytnúť rôzne problémy.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vyzerá to tak, že používate staršiu verziu Androidu. Ďalšie vydania c:geo už pre vaše zariadenie nemusia byť dostupné.\nKliknite na túto správu pre ďalšie informácie.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Používate verziu c:geo, ktorá vyzerá byť staršia ako jeden rok. Niektoré funkcie už nemusia fungovať z dôvodu zmien webstránky alebo technických zmien. Prečítajte si náš FAQ na tému možnosti aktualizácie.</string>
     <!-- text-to-speech for compass view -->
@@ -1988,6 +1989,7 @@
     <string name="wizard_skip_wizard_warning">Aplikácia c:geo nemusí fungovať podľa očakávania, kým nebude konfigurácia dokončená. V závislosti od chýbajúcej konfigurácie nemusí byť aplikácia c:geo schopná čítať/ukladať údaje, ako sú napríklad offline mapy, kešky, súbory denníka atď.\n\nKeď budete mať pocit, že ste pripravení na dokončenie nastavenia, vyberte v ponuke položku \"Sprievodca konfiguráciou\", prípadne reštartujte aplikáciu c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizácia priečinka %1$s dokončená po %2$s, %3$d z %4$s potrebná synchronizácia</string>
+    <string name="mapthemes_themescan_too_long_toast">Hľadanie mapovej témy zabralo viac než %1$d sekúnd, prerušené po nájdení %2$d tém</string>
     <!-- default actions in dialogs -->
     <string name="previous">Späť</string>
     <string name="skip">Preskočiť</string>

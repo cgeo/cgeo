@@ -421,6 +421,7 @@
     <string name="about_license">Licença</string>
     <string name="about_apache_license"><a href="">Apache License, Versão 2.0</a></string>
     <string name="about_help">Ajuda</string>
+    <string name="about_system_collecting">As informações do sistema estão recolhidas, por favor aguarde…</string>
     <string name="about_system_include">Por favor inclua as seguintes informações de sistema quando reportar um erro ou pedir mais informações acerca do c:geo:</string>
     <string name="about_system_info_send_button">Enviar por e-mail…</string>
     <string name="about_system_info">Informação do sistema c:geo</string>
@@ -447,7 +448,7 @@
     <string name="contribution_graphics">grafismo</string>
     <string name="debug_user_error_report_title">Reportar um problema</string>
     <string name="debug_user_error_errortext">Ocorreu um problema inesperado que gostaríamos que nos reportasse:</string>
-    <string name="debug_user_error_explain_options">Ajude-nos a corrigir os problemas de c:geo relatando-os por e-mail com informações do sistema e o ficheiro de registo do c:geo incluído. Por favor, inclua no e-mail uma descrição detalhada do erro. Outras opções de contacto podem ser encontradas em \'Acerca do c:geo\'</string>
+    <string name="debug_user_error_explain_options">Ajude-nos a corrigir problemas do c:geo ao reportá-los por e-mail, incluindo as informações do sistema e o ficheiro de depuração.\nPor favor, inclua no mail a descrição detalhada do erro!\n\nAntes de enviar um mail, por favor consulte as nossas \"FAQ\" (Perguntas Frequentes) e/ou verifique nas páginas das redes sociais em que temos presença, por problemas que já sejam conhecidos.\nOutras opções de contacto podem ser encontradas em \'Acerca do c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Abrir definições?</string>
     <string name="settings_title_services">Serviços</string>
@@ -1648,9 +1649,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Disponível uma nova versão.\nToque para instalar.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Disponível uma nova \'nightly build\'.\nToque para instalar.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Disponível uma nova \'release candidate\'.\nToque para instalar.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em \'geocaching.com\' fizeram com que o mapa da vista em tempo real não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações no geocaching.com estão a causar problemas no c:geo.\nJá temos conhecimento e estamos a trabalhar nisso. Pedimos-lhe que nos dê algum tempo!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações no geocaching.com estão a causar problemas no mapa em tempo real.\nJá temos conhecimento e estamos a trabalhar nisso. Pedimos-lhe que nos dê algum tempo!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">O sítio \'geocaching.com\' não se encontra (completamente) disponível de momento.\nPoderá deparar-se com vários problemas no c:geo.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a usar uma versão antiga do Android. Esta versão do c:geo não é compatível com o seu dispositivo e pode falhar ou ter um comportamento inesperado!\nToque nesta mensagem para obter mais informações.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão do c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, fruto de alterações num sítio web ou outros motivos técnicos. Por favor, leia a nossa \'FAQ\' para saber como actualizar.</string>
     <!-- text-to-speech for compass view -->

@@ -421,6 +421,7 @@
     <string name="about_license">Lisans</string>
     <string name="about_apache_license"><a href=""> Apache Lisansı, Sürüm 2.0 </a></string>
     <string name="about_help">Yardım</string>
+    <string name="about_system_collecting">Sistem verisi toplandı, lütfen bekleyin…</string>
     <string name="about_system_include">Bir hata raporu gönderirken ya da c:geo hakkında daha fazla bilgi almak istediğinizde lütfen aşağıdaki sistem bilgilerini de ekleyin:</string>
     <string name="about_system_info_send_button">E-posta ile gönder…</string>
     <string name="about_system_info">c:geo sistem bilgisi</string>
@@ -447,7 +448,7 @@
     <string name="contribution_graphics">grafik</string>
     <string name="debug_user_error_report_title">Bir sorun bildir</string>
     <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
-    <string name="debug_user_error_explain_options">Karşılaştığınız c:geo hatalarını düzeltmemiz için sistem bilgilerinizi ve c:geo logfile dosyasını da dahil ederek eposta yoluyla bildirebilirsiniz. Lütfen epostanızda sorunun ayrıntılarını da belirtmeyi unutmayın. Diğer iletişim seçeneklerini \' c:geo hakkında\' üzerinde bulabilirsiniz.</string>
+    <string name="debug_user_error_explain_options">Lütfen, yaşadığınız sorunları, hata dosyası ve sistem verilerini içeren eposta ile bize raporlayarak c:geo\'yu düzeltmemize yardımcı olun.\nHatanın detaylı bir açıklamasını Epostanıza ekleyin!\n\nEpostanızı göndermeden önce bilinen sorunları görüntülemek için SSS ve/veya sosyal medya hesaplarımıza göz atın.\nDiğer iletişim seçenekleri \'c:geo Hakkında\' sekmesinde bulunabilir.</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ayarları aç?</string>
     <string name="settings_title_services">Servisler</string>
@@ -1648,9 +1649,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Yeni sürüm mevcut.\nYüklemek için tıklayın.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Yeni sürüm mevcut.\nKurmak için tıklayın.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Yeni sürüm adayı mevcut.\nKurmak için tıklayın.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com üzerindeki son değişikler c:geo bozdu.\n Üstünde çalışıyoruz, sonra tekrar deneyin.</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com üzerindeki son değişikler canlı harita özelliğini bozdu.\n Üstünde çalışıyoruz, sonra tekrar deneyin.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com bakımda.\n Çeşitli sorunlarla karşılaşabilirsiniz.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.com üzerindeki değişiklikler c:geo\'da sorun yaşanmasına sebep oluyor.\nÜzerinde çalışıyoruz, lütfen bize zaman tanıyın!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.com üzerindeki değişiklikler canlı haritada sorun yaşanmasına sebep oluyor.\nÜzerinde çalışıyoruz, lütfen bize zaman tanıyın!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Şu anda geocaching.com tam olarak kullanılabilir değil.\nc:geo\'da bazı problemler yaşayabilirsiniz.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Android için eski bir sürüm kullanıyorsunuz. c:geo\'nun bu sürümü cihazınızla artık uyumlu değil ve çalışmayabilir veya beklenmedik bir şekilde çalışabilir!\nDaha fazla bilgi için bu mesaja tıklayın.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">c:geo\'nun 1 yıldan daha eski bir sürümünü kullanıyorsunuz. Bazı özellikler internet sitesi ve bazı teknik değişiklikler yüzünden çalışmayabilir. Nasıl yükselteceğinizi SSS\'den okuyabilirsiniz.</string>
     <!-- text-to-speech for compass view -->
