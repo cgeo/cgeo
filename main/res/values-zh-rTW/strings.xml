@@ -128,7 +128,7 @@
     <string name="log_images">照片</string>
     <string name="log_image_attach">附加圖片</string>
     <string name="log_image_stored">已存在</string>
-    <string name="log_image_camera">#-#-#-#-# zh_CN. po #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po (wxMaxima Head) #-#-#-#-#\n新建\n#-#-#-#-# amarok. po (amarok) #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po #-#-#-#-#\n新样式\n#-#-#-#-# knotes. po (knotes) #-#-#-#-#\n新建\n#-#-#-#-# libkleopatra. po (libkleopatra) #-#-#-#-#\n新建\n#-#-#-#-# lokalize. po (lokalize) #-#-#-#-#\n新翻译\n#-#-#-#-# tellico. po (tellico) #-#-#-#-#\n新\n#-#-#-#-# konversation. po (konversation) #-#-#-#-#\n新建\n#-#-#-#-# kraft. po #-#-#-#-#\n新建\n#-#-#-#-# ksayit. po (ksayit) #-#-#-#-#\n新建\n#-#-#-#-# amarok. po (amarok) #-#-#-#-#\n新建\n#-#-#-#-# kphotoalbum. po (kphotoalbum) #-#-#-#-#\n新建\n#-#-#-#-# libakonadi. po (libakonadi) #-#-#-#-#\n新建\n#-#-#-#-# krossmodulesheets. po (krossmodulekspread) #-#-#-#-#\n新建\n#-#-#-#-# kexi. po (kexi) #-#-#-#-#\n新建\n#-#-#-#-# krita. po (krita) #-#-#-#-#\n新建\n#-#-#-#-# VariablesPlugin. po (VariablesPlugin) #-#-#-#-#\n新建\n#-#-#-#-# sheets. po (kspread) #-#-#-#-#\n新建\n#-#-#-#-# ginkgo. po (kdelibs4) #-#-#-#-#\n新建\n#-#-#-#-# kstyle_config. po (kstyle_hicontract_config) #-#-#-#-#\n新建\n#-#-#-#-# kdevplatform. po (kdevplatform) #-#-#-#-#\n新建\n#-#-#-#-# katebuild-plugin. po (katebuild-plugin) #-#-#-#-#\n新建\n#-#-#-#-# kio_man. po (kio_man) #-#-#-#-#\n新增部分\n#-#-#-#-# rocsvisualeditor. po (rocs) #-#-#-#-#\n新建\n#-#-#-#-# ktouch. po (Ktouch) #-#-#-#-#\n新建\n#-#-#-#-# kalzium. po (kalzium) #-#-#-#-#\n新建\n#-#-#-#-# parley. po (parley) #-#-#-#-#\n新建\n#-#-#-#-# rocs. po (rocs) #-#-#-#-#\n新建\n#-#-#-#-# kbruch. po (kbruch) #-#-#-#-#\n新建\n#-#-#-#-# marble. po (marble) #-#-#-#-#\n新建\n#-#-#-#-# rocscore. po (rocs) #-#-#-#-#\n新建\n#-#-#-#-# kdeqt. po (kdeqt) #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po (pinta) #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po (aMule 2.2.7) #-#-#-#-#\n新建</string>
+    <string name="log_image_camera">新的</string>
     <string name="log_image_delete">刪除</string>
     <string name="log_image_caption">标题</string>
     <string name="log_image_description">描述信心</string>
@@ -765,6 +765,7 @@
     <string name="map_source_google_satellite">Google map (衛星)</string>
     <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">單車開放街圖</string>
     <string name="map_source_osm_offline">離線</string>
     <string name="init_sendToCgeo">傳送到c:geo</string>
     <string name="settings_info_send2cgeo_title">send2cgeo的資訊</string>
@@ -945,6 +946,7 @@
     <string name="cache_menu_navigation_bike">導航(單車)</string>
     <string name="cache_menu_radar">雷達</string>
     <string name="cache_menu_map">地圖</string>
+    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">其他外部 app</string>
     <string name="cache_menu_streetview">街景</string>
     <string name="cache_menu_browser">在瀏覽器中開啟</string>
@@ -1526,6 +1528,8 @@
     <!-- individual routes -->
     <string name="individual_route_added">新增至路徑</string>
     <string name="individual_route_removed">從航線中移除</string>
+    <string name="map_autotarget_individual_route">自動設定為目標</string>
+    <string name="map_disable_autotarget_individual_route">關閉\"自動設定為目標\"</string>
     <string name="map_clear_individual_route_confirm">要從個別航線裡移除航點嗎</string>
     <string name="save_sorted_route">儲存</string>
     <string name="center_on_route">在航線置中</string>
