@@ -503,6 +503,7 @@
     <string name="settings_gc_description">Autoritza c:geo a geocaching.com per buscar catxés.</string>
     <string name="settings_ec_description">Autoritza al c:geo a extremcaching.com per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
     <string name="settings_su_description">Autoritza c:geo a geocaching.su per buscar catxés.</string>
+    <string name="settings_lc_description">Inclou els Adventure Lab catxés al mapa.\n\n(Disponible només per a membres premium de \"Geocaching.com\". Requereix un servei \"Geocaching.com\" activat.)</string>
     <string name="settings_activate_oc">Activa</string>
     <string name="init_summary_oc_de">Carregar catxés des de opencaching.de</string>
     <string name="init_oc_de_description">Autoritza al c:geo a opencaching.de per buscar catxés i accedir/filtrar els teus catxés trobats.</string>

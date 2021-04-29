@@ -31,6 +31,7 @@
     <string name="gps">GPS冒險博覽會</string>
     <string name="block">地理藏寶總部街頭聚會</string>
     <string name="locationless">無固定座標的地理藏寶</string>
+    <string name="advlab">冒險型實驗寶藏</string>
     <string name="userdefined">玩家自訂的寶藏</string>
     <string name="unknown">未知类型</string>
     <!-- cache sizes -->
@@ -127,7 +128,7 @@
     <string name="log_images">照片</string>
     <string name="log_image_attach">附加圖片</string>
     <string name="log_image_stored">已存在</string>
-    <string name="log_image_camera">#-#-#-#-# zh_CN. po #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po (wxMaxima Head) #-#-#-#-#\n新建\n#-#-#-#-# amarok. po (amarok) #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po #-#-#-#-#\n新样式\n#-#-#-#-# knotes. po (knotes) #-#-#-#-#\n新建\n#-#-#-#-# libkleopatra. po (libkleopatra) #-#-#-#-#\n新建\n#-#-#-#-# lokalize. po (lokalize) #-#-#-#-#\n新翻译\n#-#-#-#-# tellico. po (tellico) #-#-#-#-#\n新\n#-#-#-#-# konversation. po (konversation) #-#-#-#-#\n新建\n#-#-#-#-# kraft. po #-#-#-#-#\n新建\n#-#-#-#-# ksayit. po (ksayit) #-#-#-#-#\n新建\n#-#-#-#-# amarok. po (amarok) #-#-#-#-#\n新建\n#-#-#-#-# kphotoalbum. po (kphotoalbum) #-#-#-#-#\n新建\n#-#-#-#-# libakonadi. po (libakonadi) #-#-#-#-#\n新建\n#-#-#-#-# krossmodulesheets. po (krossmodulekspread) #-#-#-#-#\n新建\n#-#-#-#-# kexi. po (kexi) #-#-#-#-#\n新建\n#-#-#-#-# krita. po (krita) #-#-#-#-#\n新建\n#-#-#-#-# VariablesPlugin. po (VariablesPlugin) #-#-#-#-#\n新建\n#-#-#-#-# sheets. po (kspread) #-#-#-#-#\n新建\n#-#-#-#-# ginkgo. po (kdelibs4) #-#-#-#-#\n新建\n#-#-#-#-# kstyle_config. po (kstyle_hicontract_config) #-#-#-#-#\n新建\n#-#-#-#-# kdevplatform. po (kdevplatform) #-#-#-#-#\n新建\n#-#-#-#-# katebuild-plugin. po (katebuild-plugin) #-#-#-#-#\n新建\n#-#-#-#-# kio_man. po (kio_man) #-#-#-#-#\n新增部分\n#-#-#-#-# rocsvisualeditor. po (rocs) #-#-#-#-#\n新建\n#-#-#-#-# ktouch. po (Ktouch) #-#-#-#-#\n新建\n#-#-#-#-# kalzium. po (kalzium) #-#-#-#-#\n新建\n#-#-#-#-# parley. po (parley) #-#-#-#-#\n新建\n#-#-#-#-# rocs. po (rocs) #-#-#-#-#\n新建\n#-#-#-#-# kbruch. po (kbruch) #-#-#-#-#\n新建\n#-#-#-#-# marble. po (marble) #-#-#-#-#\n新建\n#-#-#-#-# rocscore. po (rocs) #-#-#-#-#\n新建\n#-#-#-#-# kdeqt. po (kdeqt) #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po (pinta) #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po (aMule 2.2.7) #-#-#-#-#\n新建</string>
+    <string name="log_image_camera">新的</string>
     <string name="log_image_delete">刪除</string>
     <string name="log_image_caption">标题</string>
     <string name="log_image_description">描述信心</string>
@@ -164,6 +165,7 @@
     <string name="err_captcha">未知的錯誤。請參考<a href="https://www.cgeo.org/faq#login-failed">FAQ</a>。</string>
     <string name="err_server">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_ec">無法連線到Extremcaching.com。此網站或者您的網際網路連線可能有問題</string>
+    <string name="err_server_lc">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_su">无法联系Geocaching.su。网站可能已经关闭或您的互联网连接无法正常运行。</string>
     <string name="err_server_gk">無法連線到GeoKrety.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_login">沒有以儲存的登入資訊</string>
@@ -260,6 +262,7 @@
     <string name="err_trackable_log_not_anonymous">不可在匿名狀態下從 c:geo 登錄到 %1$s，您是否要從 %2$s 來打開設定檔以便填寫資料?</string>
     <string name="err_trackable_no_preference_activity">抱歉，無法找到適合的螢幕。</string>
     <string name="confirm_unsaved_changes_title">未保存更改</string>
+    <string name="confirm_discard_changes">放棄所有未儲存的變更。</string>
     <string name="confirm_discard_wp_changes">丢弃未保存的航点更改？</string>
     <string name="err_request_popup_info">c:geo获取cache信息失败</string>
     <string name="warn_log_load_additional_data">c:geo 無法為登錄載入其它資料(旅行蟲 / 最愛點)</string>
@@ -285,6 +288,9 @@
     <string name="menu_helpers">客户端程序</string>
     <string name="menu_settings">设置</string>
     <string name="menu_backup">备份 / 还原</string>
+    <string name="menu_update">Update（更新）</string>
+    <string name="menu_update_routingdata">路線規劃資料</string>
+    <string name="menu_update_mapdata">地圖資料</string>
     <string name="menu_history">历史</string>
     <string name="menu_filter">滤镜</string>
     <string name="menu_scan_geo">掃描geocode</string>
