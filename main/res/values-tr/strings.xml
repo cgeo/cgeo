@@ -502,6 +502,7 @@
     <string name="settings_gc_description">c:geo\'yu geocaching.com\'da Geocache arama yapmak için yetkilendir.</string>
     <string name="settings_ec_description">c:geo\'yu Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için extremcaching.com ile yetkilendirin.</string>
     <string name="settings_su_description">c:geo\'yu Geocache\'leri aramak için geocaching.su ile yetkilendirin.</string>
+    <string name="settings_lc_description">Adventure Lab cache\'leri de haritaya dahil et.\n\n(\"Geocaching.com\" ücretli üyeliği sahiplerine özeldir. \"Geocaching.com\" hizmeti c:geo\'da yetkilendirilmelidir.)</string>
     <string name="settings_activate_oc">Etkinleştir</string>
     <string name="init_summary_oc_de">opencaching.de üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_de_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencachin.de ile c:geo\'yu yetkilendirin.</string>
