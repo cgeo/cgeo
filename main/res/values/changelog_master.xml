@@ -29,6 +29,7 @@
 <li>New: Integrated routing engine supports automatic download of missing routing tiles</li>
 <li>New: Integrated routing engine supports automatic updates of downloaded routing tiles</li>
 <li>New: Integrated routing engine supports selecting different routing profiles</li>
+<li>New: Fix conversion error in some distance settings for imperial units</li>
 </ul>
 
 <h4>Other:</h4>
