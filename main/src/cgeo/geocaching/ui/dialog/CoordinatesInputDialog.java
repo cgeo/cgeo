@@ -377,6 +377,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             final CalcState theState = calculateState.fetchCalculatorState();
 
             if (null != theState) {
+                bCalculate.setText(R.string.waypoint_calculated_coordinates);
                 bCalculate.setTypeface(null, Typeface.ITALIC);
             }
         }
