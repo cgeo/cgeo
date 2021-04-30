@@ -504,7 +504,7 @@
     <string name="settings_gc_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.com.</string>
     <string name="settings_ec_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby extremcaching.com.</string>
     <string name="settings_su_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.su.</string>
-    <string name="settings_lc_description">Zahrňte na mapu Adventure Lab kešky.\n\n(K dispozici pouze prémiovým členům „Geocaching.com“. Vyžaduje aktivovanou službu „Geocaching.com“.)</string>
+    <string name="settings_lc_description">Zahrňte na mapu Adventure Lab kešky.\n\n(K dispozici pouze prémiovým členům „Geocaching.com“. Vyžaduje aktivovanou službu „Geocaching.com“.)\n\nZměna tohoto nastavení vyžaduje restart aplikace.</string>
     <string name="settings_activate_oc">Aktivovat</string>
     <string name="init_summary_oc_de">Načíst kešky z opencaching.de</string>
     <string name="init_oc_de_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby opencaching.de.</string>
