@@ -26,6 +26,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public final class Formatter {
 
+    private static final int SHORT_GEOCODE_MAX_LENGTH = 8;
+
     /** Text separator used for formatting texts */
     public static final String SEPARATOR = " · ";
     public static final int MINUTES_PER_DAY = 24 * 60;
@@ -183,7 +185,7 @@ public final class Formatter {
     public static String formatCacheInfoLong(final Geocache cache) {
         final List<String> infos = new ArrayList<>();
         if (StringUtils.isNotBlank(cache.getGeocode())) {
-            infos.add(cache.getGeocode());
+            infos.add(cache.getShortGeocode());
         }
 
         addShortInfos(cache, infos);
@@ -232,7 +234,7 @@ public final class Formatter {
     @NonNull
     public static String formatCacheInfoHistory(final Geocache cache) {
         final List<String> infos = new ArrayList<>(3);
-        infos.add(StringUtils.upperCase(cache.getGeocode()));
+        infos.add(StringUtils.upperCase(cache.getShortGeocode()));
         infos.add(formatDate(cache.getVisitedDate()));
         infos.add(formatTime(cache.getVisitedDate()));
         return StringUtils.join(infos, SEPARATOR);
@@ -327,7 +329,7 @@ public final class Formatter {
 
     @NonNull
     public static String formatMapSubtitle(final Geocache cache) {
-        return "D " + formatDT(cache.getDifficulty()) + SEPARATOR + "T " + formatDT(cache.getTerrain()) + SEPARATOR + cache.getGeocode();
+        return "D " + formatDT(cache.getDifficulty()) + SEPARATOR + "T " + formatDT(cache.getTerrain()) + SEPARATOR + cache.getShortGeocode();
     }
 
     @NonNull
@@ -395,6 +397,11 @@ public final class Formatter {
             truncatedDirs.add(title.subSequence(0, title.length() - commonEnding.length() + 1) + "\u2026");
         }
         return truncatedDirs;
+    }
+
+    @NonNull
+    public static String generateShortGeocode(final String fullGeocode) {
+        return (fullGeocode.length() <= SHORT_GEOCODE_MAX_LENGTH) ? fullGeocode : (fullGeocode.substring(0, SHORT_GEOCODE_MAX_LENGTH) + "…");
     }
 
 }

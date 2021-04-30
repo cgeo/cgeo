@@ -1373,7 +1373,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
                     final GeoitemRef item = getItem(position);
                     tv.setText(item.getName());
 
-                    final StringBuilder text = new StringBuilder(item.getItemCode());
+                    final StringBuilder text = new StringBuilder(item.getShortItemCode());
                     final String geocode = item.getGeocode();
                     if (StringUtils.isNotEmpty(geocode)) {
                         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);

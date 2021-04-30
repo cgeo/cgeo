@@ -9,6 +9,7 @@ import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
+import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -200,6 +201,11 @@ public class Waypoint implements IWaypoint {
     @Override
     public String getGeocode() {
         return geocode;
+    }
+
+    @NonNull
+    public String getShortGeocode() {
+        return generateShortGeocode(geocode);
     }
 
     public void setGeocode(final String geocode) {

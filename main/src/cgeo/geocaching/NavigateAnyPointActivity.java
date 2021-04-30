@@ -104,7 +104,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
 
                 if (null != item) {
                     title.setCompoundDrawablesWithIntrinsicBounds(item.getType().markerId, 0, 0, 0);
-                    detail.setText(item.getGeocode());
+                    detail.setText(item.getShortGeocode());
                 } else {
                     detail.setText(context.getString(R.string.create_internal_cache));
                 }

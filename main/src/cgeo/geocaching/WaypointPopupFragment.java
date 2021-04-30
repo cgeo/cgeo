@@ -79,7 +79,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             if (StringUtils.isNotBlank(waypoint.getName())) {
                 setTitle(waypoint.getName());
             } else {
-                setTitle(waypoint.getGeocode());
+                setTitle(waypoint.getShortGeocode());
             }
 
 
@@ -94,11 +94,11 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             waypointDistance = details.addDistance(waypoint, waypointDistance);
             final String note = waypoint.getNote();
             if (StringUtils.isNotBlank(note)) {
-                details.addHtml(R.string.waypoint_note, note, waypoint.getGeocode());
+                details.addHtml(R.string.waypoint_note, note, waypoint.getShortGeocode());
             }
             final String userNote = waypoint.getUserNote();
             if (StringUtils.isNotBlank(userNote)) {
-                details.addHtml(R.string.waypoint_user_note, userNote, waypoint.getGeocode());
+                details.addHtml(R.string.waypoint_user_note, userNote, waypoint.getShortGeocode());
             }
 
             binding.toggleVisited.setChecked(waypoint.isVisited());
