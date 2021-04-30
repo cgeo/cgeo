@@ -397,4 +397,11 @@ public final class Formatter {
         return truncatedDirs;
     }
 
+    private static final int SHORT_GEOCODE_MAX_LENGTH = 8;
+
+    @NonNull
+    public static String generateShortGeocode(final String fullGeocode) {
+        return (fullGeocode.length() <= SHORT_GEOCODE_MAX_LENGTH) ? fullGeocode: (fullGeocode.substring(0, SHORT_GEOCODE_MAX_LENGTH) + "…");
+    }
+
 }

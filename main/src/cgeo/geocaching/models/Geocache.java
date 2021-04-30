@@ -51,6 +51,7 @@ import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.ShareUtils;
+import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import android.app.Activity;
 import android.content.Context;
@@ -88,6 +89,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * Internal representation of a "cache"
@@ -641,7 +643,7 @@ public class Geocache implements IWaypoint {
 
     @NonNull
     public String getShortGeocode() {
-        return (geocode.length() <= 8) ? geocode : (geocode.substring(0, 8));
+       return generateShortGeocode(geocode);
     }
 
     /**

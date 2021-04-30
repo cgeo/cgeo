@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.utils.TextUtils;
+import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -64,7 +65,7 @@ public class GeoitemRef implements Parcelable {
 
     @NonNull
     public String getShortItemCode() {
-        return itemCode == null ? "" : (itemCode.length() > 8 ? itemCode.substring(0, 8) : itemCode);
+        return generateShortGeocode(itemCode);
     }
 
     public CoordinatesType getType() {
