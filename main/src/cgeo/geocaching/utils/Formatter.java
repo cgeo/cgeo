@@ -26,6 +26,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public final class Formatter {
 
+    private static final int SHORT_GEOCODE_MAX_LENGTH = 8;
+
     /** Text separator used for formatting texts */
     public static final String SEPARATOR = " · ";
     public static final int MINUTES_PER_DAY = 24 * 60;
@@ -397,11 +399,9 @@ public final class Formatter {
         return truncatedDirs;
     }
 
-    private static final int SHORT_GEOCODE_MAX_LENGTH = 8;
-
     @NonNull
     public static String generateShortGeocode(final String fullGeocode) {
-        return (fullGeocode.length() <= SHORT_GEOCODE_MAX_LENGTH) ? fullGeocode: (fullGeocode.substring(0, SHORT_GEOCODE_MAX_LENGTH) + "…");
+        return (fullGeocode.length() <= SHORT_GEOCODE_MAX_LENGTH) ? fullGeocode : (fullGeocode.substring(0, SHORT_GEOCODE_MAX_LENGTH) + "…");
     }
 
 }
