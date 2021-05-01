@@ -477,8 +477,6 @@
     <string name="confirm_data_dir_move_title">Déplacer le dossier de données des Geocaches ?</string>
     <string name="confirm_data_dir_move">Le déplacement du dossier de stockage des Geocaches peut être long et varie en fonction de votre appareil et du nombre de caches.</string>
     <string name="settings_title_basicmembers">Options pour les membres non-premium</string>
-    <string name="settings_title_navigation">Navigation</string>
-    <string name="settings_summary_navigation">Sélectionner les méthodes de navigation préférées et les applications de navigation externes.</string>
     <string name="settings_title_system">Système</string>
     <string name="settings_summary_system">Paramètres spécifiques au système et options de débogage.</string>
     <string name="settings_title_navigation_menu">Menu de navigation</string>
