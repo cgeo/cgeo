@@ -448,8 +448,6 @@
     <string name="settings_data_dir_item">%1$s (%2$s laisva)</string>
     <string name="confirm_data_dir_move">Slėptuvių duomenų perkėlimas gali užtrukti, priklausomai nuo jūsų įrenginio ir duomenų apimties.</string>
     <string name="settings_title_basicmembers">Parinktys paprastiesiems nariams</string>
-    <string name="settings_title_navigation">Navigacija</string>
-    <string name="settings_summary_navigation">Pasirinkite pageidaujamus navigacijos metodus ir išorines navigacijos programas.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
     <string name="settings_category_browser">Naršyklė</string>
