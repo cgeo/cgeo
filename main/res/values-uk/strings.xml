@@ -447,8 +447,6 @@
     <string name="settings_data_dir_item">%1$s (%2$s вільно)</string>
     <string name="confirm_data_dir_move">Переміщення даних схованки може зайняти багато часу, в залежності від пристрою та кількості даних.</string>
     <string name="settings_title_basicmembers">Налаштування для основних учасників</string>
-    <string name="settings_title_navigation">Навігація</string>
-    <string name="settings_summary_navigation">Виберіть бажані методи навігації та виберіть зовнішні навігаційні програми.</string>
     <string name="settings_title_system">Система</string>
     <string name="settings_summary_system">Параметри особливих налаштувань і відлагодження.</string>
     <string name="settings_title_navigation_menu">Навігаційне меню</string>
