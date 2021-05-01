@@ -253,7 +253,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
-        if (CacheMenuHandler.onMenuItemSelected(item, this, cache, null)) {
+        if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::init)) {
             return true;
         }
         if (LoggingUI.onMenuItemSelected(item, getActivity(), cache, dialog -> init())) {
