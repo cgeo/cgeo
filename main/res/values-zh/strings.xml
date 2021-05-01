@@ -467,8 +467,6 @@
     <string name="confirm_data_dir_move_title">移动藏点数据文件夹？</string>
     <string name="confirm_data_dir_move">移动 geocache 数据可能需要很长时间, 具体取决于您的设备和数据量。</string>
     <string name="settings_title_basicmembers">基础会员可用选项</string>
-    <string name="settings_title_navigation">导航</string>
-    <string name="settings_summary_navigation">选择首选的导航方法并选择外部导航应用程序。</string>
     <string name="settings_title_system">系统</string>
     <string name="settings_summary_system">系统特定设置和调试选项。</string>
     <string name="settings_title_navigation_menu">导航菜单</string>
