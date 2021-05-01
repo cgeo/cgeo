@@ -462,8 +462,6 @@
     <string name="confirm_data_dir_move_title">Flyt geocache-datamappe?</string>
     <string name="confirm_data_dir_move">Flytning af geocache-datamappen kan tage meget lang tid afhængig af din enhed og mængden af data.</string>
     <string name="settings_title_basicmembers">Valgmuligheder for Basismedlemmer</string>
-    <string name="settings_title_navigation">Navigation</string>
-    <string name="settings_summary_navigation">Vælg foretrukken navigationsmetode og vælg eksterne apps.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemspecifikke indstillinger og fejlfindingsindstillinger.</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
