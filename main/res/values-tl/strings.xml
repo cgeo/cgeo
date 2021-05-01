@@ -367,8 +367,6 @@
     <string name="calculate_dataDir">Ang pagkalkula sa datos geocache ang nagamit sa disk</string>
     <string name="confirm_data_dir_move">Ang paglipat sa geocache ay maaaring mahabang panahon, ito ay umaasa sa iyong aparatu at sa halaga ng datos.</string>
     <string name="settings_title_basicmembers">Ang mga opsyon sa mga baguhang miyembro</string>
-    <string name="settings_title_navigation">Ang nabigasyon</string>
-    <string name="settings_summary_navigation">Pumili ng mga gustong navigation method at pumili ng mga panlabas na nabigasyon na apps.</string>
     <string name="settings_title_system">Ang Sistema</string>
     <string name="settings_title_navigation_menu">Menu ng Nabigasyon</string>
     <string name="settings_category_browser">Ang browser</string>
