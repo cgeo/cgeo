@@ -473,8 +473,6 @@
     <string name="confirm_data_dir_move_title">移動地理藏寶目錄</string>
     <string name="confirm_data_dir_move">移动 geocache 数据可能需要很长时间, 具体取决于您的设备和数据量。</string>
     <string name="settings_title_basicmembers">一般會員的選擇項目</string>
-    <string name="settings_title_navigation">導航</string>
-    <string name="settings_summary_navigation">選擇想要使用的導航方法或者是使用其他的導航app。</string>
     <string name="settings_title_system">系統</string>
     <string name="settings_summary_system">系統的特殊設定和除錯選擇。</string>
     <string name="settings_title_navigation_menu">導航功能表 (Automatic Translation)</string>
