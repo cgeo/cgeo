@@ -8,7 +8,6 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
-import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
@@ -109,7 +108,7 @@ public final class SystemInformation {
         if (GCConnector.getInstance().isActive()) {
             body.append("\n- Geocaching.com date format: ").append(Settings.getGcCustomDate());
         }
-        body.append("\n- Routing: ").append(Settings.useInternalRouting() ? "internal" : "external").append(" / connection available: ").append(Routing.isAvailable()).append(" / BRouter installed: ").append(ProcessUtils.isInstalled(context.getString(R.string.package_brouter)));
+        body.append("\n- Routing: ").append(Settings.useInternalRouting() ? "internal" : "external").append(" / BRouter installed: ").append(ProcessUtils.isInstalled(context.getString(R.string.package_brouter)));
         appendAddons(body);
 
         body.append("\n")
