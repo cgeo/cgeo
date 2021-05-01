@@ -353,7 +353,7 @@
     <string name="calculate_dataDir">Pagkalkula sa ginamit nga data disk sa Geocache</string>
     <string name="confirm_data_dir_move">Ang pagpabalhin sa data sa geocache kay maggamit ug taas kaayo na oras, naka-depende sa device nimo ug sa kung pila ang data.</string>
     <string name="settings_title_basicmembers">Pilianan para sa sukaranon na mga miyembro</string>
-    <string name="settings_title_navigation">Pag-navigate</string>
+    <string name="settings_title_navigation">Nabigasyon</string>
     <string name="settings_summary_navigation">Pili-a ang nauyonan na nabigasyon na mga pamaagi og pili-on ang gawas sa nabigasyon na mga apps.</string>
     <string name="settings_title_system">Ang Sistema</string>
     <string name="settings_title_navigation_menu">Menu sa nabigasyon</string>
