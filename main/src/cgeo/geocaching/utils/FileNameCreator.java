@@ -18,6 +18,7 @@ public class FileNameCreator {
     public static final FileNameCreator MEMORY_DUMP = new FileNameCreator("cgeo_dump", "hprof");
     public static final FileNameCreator GPX_EXPORT = new FileNameCreator("export", "gpx");
     public static final FileNameCreator INDIVIDUAL_ROUTE_NOSUFFIX = new FileNameCreator("route", null);
+    public static final FileNameCreator INDIVIDUAL_TRACK_NOSUFFIX = new FileNameCreator("track", null);
     public static final FileNameCreator TRAIL_HISTORY = new FileNameCreator("trail", "gpx");
 
     public static final FileNameCreator OFFLINE_LOG_IMAGE = new FileNameCreator("cgeo-image-%s", "jpg");

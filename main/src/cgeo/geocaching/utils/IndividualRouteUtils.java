@@ -54,6 +54,7 @@ public class IndividualRouteUtils {
         menu.findItem(R.id.menu_sort_individual_route).setVisible(isVisible);
         menu.findItem(R.id.menu_center_on_route).setVisible(isVisible);
         menu.findItem(R.id.menu_export_individual_route).setVisible(isVisible);
+        menu.findItem(R.id.menu_export_individual_route_as_track).setVisible(isVisible);
         menu.findItem(R.id.menu_clear_individual_route).setVisible(isVisible);
         menu.findItem(R.id.menu_clear_targets).setVisible(targetIsSet || Settings.isAutotargetIndividualRoute());
         menu.findItem(R.id.menu_autotarget_individual_route).setVisible(true).setChecked(Settings.isAutotargetIndividualRoute());
@@ -62,8 +63,10 @@ public class IndividualRouteUtils {
     /**
      * Check if selected menu entry is regarding individual routes
      *
-     * @param activity calling activity
      * @param id       menu entry id
+     * @param route    current route
+     * @param centerOnPosition  method to call to center on route
+     * @param setTarget         method to call on set target
      * @return true, if selected menu entry is individual route related and consumed / false else
      */
     public boolean onOptionsItemSelected(final int id, final IndividualRoute route, final Route.CenterOnPosition centerOnPosition, final Action2<Geopoint, String> setTarget) {
@@ -78,7 +81,9 @@ public class IndividualRouteUtils {
         } else if (id == R.id.menu_center_on_route) {
             route.setCenter(centerOnPosition);
         } else if (id == R.id.menu_export_individual_route) {
-            new IndividualRouteExport(activity, route);
+            new IndividualRouteExport(activity, route, false);
+        } else if (id == R.id.menu_export_individual_route_as_track) {
+            new IndividualRouteExport(activity, route, true);
         } else if (id == R.id.menu_clear_individual_route) {
             Dialogs.confirm(activity, R.string.map_clear_individual_route, R.string.map_clear_individual_route_confirm, (dialog, which) -> {
                 clearIndividualRoute.run();
