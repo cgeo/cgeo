@@ -417,8 +417,6 @@
     <string name="settings_data_dir_item">%1$s (%2$s szabad)</string>
     <string name="confirm_data_dir_move">A ládaadatok mozgatása hosszú ideig is eltarthat az adatok mennyiségétől, a készülékedtől függően.</string>
     <string name="settings_title_basicmembers">Normál tagok beállításai</string>
-    <string name="settings_title_navigation">Navigáció</string>
-    <string name="settings_summary_navigation">Preferált navigációs eszközök és külső navigációs programok kiválasztása</string>
     <string name="settings_title_system">Rendszer</string>
     <string name="settings_title_navigation_menu">Navigációs menü</string>
     <string name="settings_category_browser">Böngésző</string>
