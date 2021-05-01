@@ -482,8 +482,8 @@
     <string name="confirm_data_dir_move_title">Přesunout složku s údaji o keškách?</string>
     <string name="confirm_data_dir_move">Přesun dat kešek může trvat dlouhou dobu v závislosti na zařízení a množství dat.</string>
     <string name="settings_title_basicmembers">Možnosti pro běžné členy</string>
-    <string name="settings_title_navigation">Navigace</string>
-    <string name="settings_summary_navigation">Výběr preferované navigační metody a externích navigačních aplikací.</string>
+    <string name="settings_title_navigation">Směrování / Navigace</string>
+    <string name="settings_summary_navigation">Nakonfigurujte offline směrování, vyberte preferované metody navigace a vyberte externí navigační aplikace.</string>
     <string name="settings_title_system">Systém</string>
     <string name="settings_summary_system">Specifická nastavení systému a možnosti ladění.</string>
     <string name="settings_title_navigation_menu">Navigační menu</string>
@@ -505,6 +505,7 @@
     <string name="settings_ec_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby extremcaching.com.</string>
     <string name="settings_su_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.su.</string>
     <string name="settings_lc_description">Zahrňte na mapu Adventure Lab kešky.\n\n(K dispozici pouze prémiovým členům „Geocaching.com“. Vyžaduje aktivovanou službu „Geocaching.com“.)\n\nZměna tohoto nastavení vyžaduje restart aplikace.</string>
+    <string name="lc_default_description">Toto je Adventure Lab keška z geocaching.com. Dobrodružství lze hrát pouze s aplikací Adventure Lab od Groundspeaku. Klepnutím na ikonu Adventure Lab na stránce „Podrobnosti“ odtud otevřete/nainstalujete aplikaci Adventure Lab pro hraní tohoto dobrodružství.\nPokud nechcete na své mapě vidět kešky typu Adventure Lab, můžete je deaktivovat pomocí nabídky „nastavení“ - Služby - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Aktivovat</string>
     <string name="init_summary_oc_de">Načíst kešky z opencaching.de</string>
     <string name="init_oc_de_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby opencaching.de.</string>
