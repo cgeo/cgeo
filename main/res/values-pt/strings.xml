@@ -480,8 +480,6 @@
     <string name="confirm_data_dir_move_title">Mover a pasta de dados de geocaches?</string>
     <string name="confirm_data_dir_move">Mover pasta de dados de geocache pode demorar muito tempo, dependendo do seu dispositivo e volume de dados.</string>
     <string name="settings_title_basicmembers">Opções para Membros Básicos</string>
-    <string name="settings_title_navigation">Navegação</string>
-    <string name="settings_summary_navigation">Escolher os modos de navegação preferidos e seleccionar aplicações de navegação externas.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Definições específicas de sistema e opções de depuração.</string>
     <string name="settings_title_navigation_menu">Menu de navegação</string>
