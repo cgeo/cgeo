@@ -479,8 +479,6 @@
     <string name="confirm_data_dir_move_title">ジオキャッシュ データフォルダを移動しますか?</string>
     <string name="confirm_data_dir_move">キャッシュデータの移動はデバイスやデータ量により非常に長い時間がかかる場合があります</string>
     <string name="settings_title_basicmembers">ベーシック会員の設定</string>
-    <string name="settings_title_navigation">ナビゲーション</string>
-    <string name="settings_summary_navigation">ナビゲーション方法や外部ナビゲーションアプリの選択</string>
     <string name="settings_title_system">システム</string>
     <string name="settings_summary_system">システム固有の設定とデバッグオプション</string>
     <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
