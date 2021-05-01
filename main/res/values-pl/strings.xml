@@ -482,8 +482,6 @@
     <string name="confirm_data_dir_move_title">Przenieść folder z danymi skrytek?</string>
     <string name="confirm_data_dir_move">Przeniesienie katalogu z danymi może zająć bardzo długo, zależnie od Twojego urządzenia i wielkości danych.</string>
     <string name="settings_title_basicmembers">Opcje dla użytkowników Basic</string>
-    <string name="settings_title_navigation">Nawigacja</string>
-    <string name="settings_summary_navigation">Wybierz preferowane metody nawigacji i zewnętrzne aplikacje nawigacyjne.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Ustawienia specyficzne dla systemu i opcje debugowania.</string>
     <string name="settings_title_navigation_menu">Menu nawigacji</string>
