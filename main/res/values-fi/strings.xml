@@ -480,8 +480,6 @@
     <string name="confirm_data_dir_move_title">Siirretäänkö kätködatan kansio?</string>
     <string name="confirm_data_dir_move">Kätködatan siirtäminen voi kestää todella kauan riippuen laitteestasi sekä datan määrästä.</string>
     <string name="settings_title_basicmembers">Peruskäyttäjän asetukset</string>
-    <string name="settings_title_navigation">Navigointi</string>
-    <string name="settings_summary_navigation">Määritä ensisijainen navigointitapa ja valitse ulkoiset navigointisovellukset.</string>
     <string name="settings_title_system">Järjestelmä</string>
     <string name="settings_summary_system">Järjestelmäkohtaiset asetukset ja vianetsintäasetukset.</string>
     <string name="settings_title_navigation_menu">Navigointivalikko</string>
