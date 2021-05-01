@@ -479,8 +479,6 @@
     <string name="confirm_data_dir_move_title">지오캐시 데이터 폴더를 이동?</string>
     <string name="confirm_data_dir_move">장치 및 데이터양에 따라, 지오캐시 데이터를 이동하려면 시간이 많이 걸릴 수 있습니다.</string>
     <string name="settings_title_basicmembers">일반 회원을 위한 선택사항</string>
-    <string name="settings_title_navigation">길찾기</string>
-    <string name="settings_summary_navigation">원하는 길찾기 방법 및 외부 길찾기 앱 선택하기</string>
     <string name="settings_title_system">시스템</string>
     <string name="settings_summary_system">시스템 특정 설정 및 디버깅 옵션.</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
