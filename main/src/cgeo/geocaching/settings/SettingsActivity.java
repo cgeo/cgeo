@@ -534,6 +534,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             DebugUtils.createLogcat(SettingsActivity.this);
             return true;
         });
+        getPreference(R.string.pref_generate_infos_downloadmanager).setOnPreferenceClickListener(preference -> {
+            DebugUtils.dumpDownloadmanagerInfos(SettingsActivity.this);
+            return true;
+        });
         getPreference(R.string.pref_view_settings).setOnPreferenceClickListener(preference -> {
             startActivity(new Intent(this, ViewSettingsActivity.class));
             return true;
