@@ -2,11 +2,8 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Download;
-import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.UriUtils;
 
 import android.net.Uri;
 
@@ -15,14 +12,13 @@ import androidx.annotation.NonNull;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class MapDownloaderOpenAndroMapsThemes extends AbstractDownloader {
+public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
 
     private static final Pattern PATTERN_LAST_UPDATED_DATE = Pattern.compile("<a href=\"https:\\/\\/www\\.openandromaps\\.org\\/wp-content\\/users\\/tobias\\/version\\.txt\">[0-9]\\.[0-9]\\.[0-9]<\\/a><\\/strong>, ([0-9]{1,2})\\.([0-9]{1,2})\\.([0-9]{2}) ");
     private static final MapDownloaderOpenAndroMapsThemes INSTANCE = new MapDownloaderOpenAndroMapsThemes();
 
     private MapDownloaderOpenAndroMapsThemes() {
-        super(Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS, R.string.mapserver_openandromaps_themes_updatecheckurl, R.string.mapserver_openandromaps_themes_name, R.string.mapserver_openandromaps_themes_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl, PersistableFolder.OFFLINE_MAP_THEMES);
-        this.forceExtension = ".zip";
+        super(Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS, R.string.mapserver_openandromaps_themes_updatecheckurl, R.string.mapserver_openandromaps_themes_name, R.string.mapserver_openandromaps_themes_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl);
     }
 
     @Override
@@ -54,16 +50,6 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractDownloader {
             return result.endsWith("/") ? result : result + "/";
         }
         return downloadPageUrl;
-    }
-
-    @Override
-    protected void onSuccessfulReceive(final Uri result) {
-
-        //resync
-        RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
-
-        //set map theme
-        RenderThemeHelper.setSelectedMapThemeDirect(UriUtils.getLastPathSegment(result));
     }
 
     @NonNull
