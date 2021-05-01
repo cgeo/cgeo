@@ -7,6 +7,8 @@ import cgeo.geocaching.downloader.BRouterTileDownloader;
 import cgeo.geocaching.downloader.CompanionFileUtils;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarte;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarteThemes;
+import cgeo.geocaching.downloader.MapDownloaderHylly;
+import cgeo.geocaching.downloader.MapDownloaderHyllyThemes;
 import cgeo.geocaching.downloader.MapDownloaderMapsforge;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
@@ -88,6 +90,8 @@ public class Download {
         DOWNLOADTYPE_THEME_OPENANDROMAPS(3),
         DOWNLOADTYPE_MAP_FREIZEITKARTE(4),
         DOWNLOADTYPE_THEME_FREIZEITKARTE(5),
+        DOWNLOADTYPE_MAP_HYLLY(6),
+        DOWNLOADTYPE_THEME_HYLLY(7),
 
         DOWNLOADTYPE_BROUTER_TILES(90);
 
@@ -124,6 +128,8 @@ public class Download {
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_OPENANDROMAPS, MapDownloaderOpenAndroMapsThemes.getInstance(), R.string.mapserver_openandromaps_themes_name));
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_FREIZEITKARTE, MapDownloaderFreizeitkarte.getInstance(), R.string.mapserver_freizeitkarte_name));
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_FREIZEITKARTE, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name));
+                offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_HYLLY, MapDownloaderHylly.getInstance(), R.string.mapserver_hylly_name));
+                offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_HYLLY, MapDownloaderHyllyThemes.getInstance(), R.string.mapserver_hylly_themes_name));
 
                 // all other download types
                 downloadTypes.addAll(offlineMapTypes);

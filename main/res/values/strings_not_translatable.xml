@@ -276,6 +276,16 @@
     <string translatable="false" name="mapserver_freizeitkarte_themes_name">Freizeitkarte Themes</string>
     <string translatable="false" name="mapserver_freizeitkarte_themes_downloadurl">http://download.freizeitkarte-osm.de/android/2012/</string>
 
+    <string translatable="false" name="mapserver_hylly_name">Hylly</string>
+    <string translatable="false" name="mapserver_hylly_updatecheckurl">https://kartat.hylly.org/</string>
+    <string translatable="false" name="mapserver_hylly_downloadurl">https://kartat-dl.hylly.org/</string>
+    <string translatable="false" name="mapserver_hylly_likeiturl">https://kartat.hylly.org/</string>
+    <string translatable="false" name="mapserver_hylly_projecturl">https://kartat.hylly.org/</string>
+
+    <string translatable="false" name="mapserver_hylly_themes_name">Hylly Themes</string>
+    <string translatable="false" name="mapserver_hylly_themes_updatecheckurl">https://kartat.hylly.org/</string>
+    <string translatable="false" name="mapserver_hylly_themes_downloadurl">https://kartat-dl.hylly.org/</string>
+
     <string translatable="false" name="brouter_name">BRouter</string>
     <string translatable="false" name="brouter_downloadurl">http://brouter.de/brouter/segments4/</string>
     <string translatable="false" name="brouter_projecturl">https://www.brouter.de/brouter/</string>

@@ -3,12 +3,9 @@ package cgeo.geocaching.downloader;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
-import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Download;
-import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.UriUtils;
 
 import android.net.Uri;
 import android.sax.Element;
@@ -26,12 +23,11 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.SAXException;
 
-public class MapDownloaderFreizeitkarteThemes extends AbstractDownloader {
+public class MapDownloaderFreizeitkarteThemes extends AbstractThemeDownloader {
     private static final MapDownloaderFreizeitkarteThemes INSTANCE = new MapDownloaderFreizeitkarteThemes();
 
     private MapDownloaderFreizeitkarteThemes() {
-        super(Download.DownloadType.DOWNLOADTYPE_THEME_FREIZEITKARTE, R.string.mapserver_freizeitkarte_downloadurl, R.string.mapserver_freizeitkarte_themes_name, R.string.mapserver_freizeitkarte_themes_info, R.string.mapserver_freizeitkarte_projecturl, R.string.mapserver_freizeitkarte_likeiturl, PersistableFolder.OFFLINE_MAP_THEMES);
-        this.forceExtension = ".zip";
+        super(Download.DownloadType.DOWNLOADTYPE_THEME_FREIZEITKARTE, R.string.mapserver_freizeitkarte_downloadurl, R.string.mapserver_freizeitkarte_themes_name, R.string.mapserver_freizeitkarte_themes_info, R.string.mapserver_freizeitkarte_projecturl, R.string.mapserver_freizeitkarte_likeiturl);
     }
 
     private static class FZKParser {
@@ -87,14 +83,6 @@ public class MapDownloaderFreizeitkarteThemes extends AbstractDownloader {
     @Override
     protected String getUpdatePageUrl(final String downloadPageUrl) {
         return CgeoApplication.getInstance().getString(R.string.mapserver_freizeitkarte_downloadurl);
-    }
-
-    @Override
-    protected void onSuccessfulReceive(final Uri result) {
-        //resync
-        RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
-        //set map theme
-        RenderThemeHelper.setSelectedMapThemeDirect(UriUtils.getLastPathSegment(result));
     }
 
     @NonNull
