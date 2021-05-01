@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.routing;
 
+import cgeo.geocaching.utils.Log;
+
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ class AbstractServiceConnection implements ServiceConnection {
 
     @Override
     public void onServiceConnected(final ComponentName className, final IBinder service) {
+        Log.d("connection to brouter established");
         if (null != onServiceConnectedCallback) {
             onServiceConnectedCallback.run();
         }
@@ -24,6 +27,7 @@ class AbstractServiceConnection implements ServiceConnection {
 
     @Override
     public void onServiceDisconnected(final ComponentName className) {
+        Log.d("connection to brouter disconnected");
         this.onServiceConnectedCallback = null;
         routingService = null;
     }

@@ -482,7 +482,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private static boolean broutertilesFolderNeedsMigration() {
-        return Settings.isBrouterAutoTileDownloads() && PersistableFolder.ROUTING_TILES.isLegacy() && Routing.isInstalled();
+        return Settings.isBrouterAutoTileDownloads() && PersistableFolder.ROUTING_TILES.isLegacy() && Routing.isExternalRoutingInstalled();
     }
 
     private void requestBroutertilesfolder() {

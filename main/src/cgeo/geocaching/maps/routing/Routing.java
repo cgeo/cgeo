@@ -67,7 +67,7 @@ public final class Routing {
             REGISTERED_CALLBACKS.put(callbackKey, onServiceConnectedCallback);
         }
 
-        if (routingServiceConnection != null && routingServiceConnection.isConnected()) {
+        if (isConnected()) {
             //already connected
             return;
         }
@@ -82,10 +82,7 @@ public final class Routing {
         }
 
         if (!getContext().bindService(intent, routingServiceConnection, Context.BIND_AUTO_CREATE)) {
-            routingServiceConnection = null;
-            Log.d("Connecting brouter failed");
-        } else {
-            Log.d("brouter connected");
+            Log.d("Connecting brouter: bindService failed or delayed");
         }
     }
 
@@ -107,7 +104,7 @@ public final class Routing {
 
         if (connectCount <= 0) {
             connectCount = 0;
-            if (routingServiceConnection != null && routingServiceConnection.isConnected()) {
+            if (isConnected()) {
                 getContext().unbindService(routingServiceConnection);
                 routingServiceConnection = null;
 
@@ -298,15 +295,23 @@ public final class Routing {
         timeLastUpdate = 0;
     }
 
+    /** Are we currently connected to any routing service (internal/external)? */
+    public static boolean isConnected() {
+        return routingServiceConnection != null && routingServiceConnection.isConnected();
+    }
+
+    /** Is any routing service available (internal/external) */
     public static boolean isAvailable() {
-        return routingServiceConnection != null;
+        return isConnected() || Settings.useInternalRouting() || isExternalRoutingInstalled();
     }
 
-    public static boolean isInstalled() {
-        return ProcessUtils.isInstalled(getPackageName());
+    /** Is external routing app installed? */
+    public static boolean isExternalRoutingInstalled() {
+        return ProcessUtils.isInstalled(getExternalRoutingPackageName());
     }
 
-    public static String getPackageName() {
+    /** Get Android package name for external routing app */
+    public static String getExternalRoutingPackageName() {
         return getContext().getString(R.string.package_brouter);
     }
 }
