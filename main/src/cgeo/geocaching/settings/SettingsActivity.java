@@ -283,6 +283,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         getPreference(R.string.pref_connectorLCActive).setOnPreferenceChangeListener(this);
         setWebsite(R.string.pref_fakekey_lc_website, LCConnector.getInstance().getHost());
         getPreference(R.string.preference_screen_lc).setSummary(getServiceSummary(Settings.isLCConnectorActive()));
+        initLCServicePreference(Settings.isGCConnectorActive());
 
         getPreference(R.string.pref_connectorSUActive).setOnPreferenceChangeListener(this);
         setWebsite(R.string.pref_fakekey_su_website, SuConnector.getInstance().getHost());
@@ -299,6 +300,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
         getPreference(R.string.preference_screen_sendtocgeo).setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
+    }
+
+    private void initLCServicePreference(final boolean gcConnectorActive) {
+        getPreference(R.string.pref_connectorLCActive).setEnabled(gcConnectorActive && Settings.isGCPremiumMember());
     }
 
     private void setWebsite(final int preferenceKey, final String urlOrHost) {
@@ -855,6 +860,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 setConnectedUsernameTitle(requestCode, GCConnector.getInstance());
                 redrawScreen(R.string.preference_screen_gc);
                 initBasicMemberPreferences();
+                initLCServicePreference(Settings.isGCConnectorActive());
                 break;
             case R.string.pref_fakekey_ec_authorization:
                 setAuthTitle(requestCode, ECConnector.getInstance());
@@ -933,6 +939,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 preference.getPreferenceManager().findPreference(getKey(prefKey.prefScreenId)).setSummary(summary);
             } else if (isPreference(preference, R.string.pref_connectorGCActive)) {
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_gc)).setSummary(summary);
+                initLCServicePreference(boolVal);
             } else if (isPreference(preference, R.string.pref_connectorECActive)) {
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
             } else if (isPreference(preference, R.string.pref_connectorLCActive)) {
