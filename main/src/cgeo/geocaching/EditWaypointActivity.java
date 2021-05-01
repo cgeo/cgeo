@@ -483,7 +483,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void saveCalculatorState(final CalcState calcState) {
-        this.calcStateJson = calcState != null ? calcState.toJSON().toString() : null;
+        this.calcStateJson = null;
+        if (calcState != null && calcState.equations.size() > 0) {
+            this.calcStateJson = calcState.toJSON().toString();
+        }
     }
 
     @Override

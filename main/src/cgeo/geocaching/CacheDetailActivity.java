@@ -2050,13 +2050,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         protected void fillViewHolder(final View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
             // coordinates
             final TextView coordinatesView = holder.binding.coordinates;
+            final TextView calculatedCoordinatesView = holder.binding.calculatedCoordinates;
             final Geopoint coordinates = wpt.getCoords();
-            if (coordinates != null) {
-                holder.setCoordinate(coordinates);
-                coordinatesView.setVisibility(View.VISIBLE);
-            } else {
-                coordinatesView.setVisibility(View.GONE);
-            }
+            final String calcStateJson = wpt.getCalcStateJson();
+
+            holder.setCoordinate(coordinates);
+            coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
+            calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
 
             // info
             final String waypointInfo = Formatter.formatWaypointInfo(wpt);
