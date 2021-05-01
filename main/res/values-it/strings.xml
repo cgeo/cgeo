@@ -479,8 +479,6 @@
     <string name="confirm_data_dir_move_title">Spostare la cartella dati geocache?</string>
     <string name="confirm_data_dir_move">Lo spostamento dei dati geocache potrebbe richiedere molto tempo, a seconda del dispositivo e la quantità di dati.</string>
     <string name="settings_title_basicmembers">Opzioni per i membri di base (non Premium)</string>
-    <string name="settings_title_navigation">Navigazione</string>
-    <string name="settings_summary_navigation">Sceglie il metodo di navigazione preferito e seleziona le app di navigazione esterna.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Impostazioni specifiche di sistema e opzioni di debug.</string>
     <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
