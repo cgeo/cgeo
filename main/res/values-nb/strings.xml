@@ -470,8 +470,6 @@
     <string name="confirm_data_dir_move_title">Flytte geocache data-mappen?</string>
     <string name="confirm_data_dir_move">Flytting av geocaching-data kan ta lang tid, avhengig av enheten din og mengden data.</string>
     <string name="settings_title_basicmembers">Alternativer for Basic-medlemmer</string>
-    <string name="settings_title_navigation">Navigasjon</string>
-    <string name="settings_summary_navigation">Velg navigasjonsmetode og velg eksterne navigasjonsapper.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemspesifikke instillinger og debugging alternativer.</string>
     <string name="settings_title_navigation_menu">Navigasjonsmenyen</string>
