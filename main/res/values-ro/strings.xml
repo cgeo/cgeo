@@ -397,8 +397,6 @@
     <string name="settings_data_dir_item">%1$s (%2$s disponibil)</string>
     <string name="confirm_data_dir_move">Mutarea dosarului cu geocutii ar putea dura un timp mai îndelungat, în funcţie de disăpzitivul tău şi de volumul de informaţii.</string>
     <string name="settings_title_basicmembers">Opţiuni pentru Basic Members</string>
-    <string name="settings_title_navigation">Navigare</string>
-    <string name="settings_summary_navigation">Alege metodele de navigare preferate şi aplicaţii externe pentru navigare.</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Meniu navigaţie</string>
     <string name="settings_category_logging_other">Alte opţiuni pentru jurnal</string>
