@@ -481,8 +481,6 @@
     <string name="confirm_data_dir_move_title">Voleu moure la carpeta de dades de Geocatxés?</string>
     <string name="confirm_data_dir_move">Moure el directori de dades dels geoamagatalls pot trigar una bona estona, en funció del dispositiu i de la quantitat de dades.</string>
     <string name="settings_title_basicmembers">Opcions per a membres bàsics</string>
-    <string name="settings_title_navigation">Navegació</string>
-    <string name="settings_summary_navigation">Tria un mètode com preferit de navegació i selecciona la aplicació de navegació externa.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Configuració i opcions de depuració específiques del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegació</string>
