@@ -482,8 +482,6 @@
     <string name="confirm_data_dir_move_title">Presunúť priečinok s údajmi o keškách?</string>
     <string name="confirm_data_dir_move">Presúvanie údajov skrýš môže trvať naozaj dlho, závisí to od zariadenia a množstva údajov.</string>
     <string name="settings_title_basicmembers">Možnosti pre bežných členov</string>
-    <string name="settings_title_navigation">Navigácia</string>
-    <string name="settings_summary_navigation">Vyberte preferované metódy navigácie a externé navigačné aplikácie.</string>
     <string name="settings_title_system">Systém</string>
     <string name="settings_summary_system">Systémové nastavenia a možnosti ladenia.</string>
     <string name="settings_title_navigation_menu">Navigačné Menu</string>
