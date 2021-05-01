@@ -16,6 +16,10 @@ public enum GeocacheFilterType {
     TYPE("type", R.string.cache_filter_type, TypeGeocacheFilter::new),
     SIZE("size", R.string.cache_filter_size, SizeGeocacheFilter::new),
     PERSONAL_NOTE("note", R.string.cache_filter_personalnote, PersonalNoteGeocacheFilter::new),
+    DIFFICULTY("difficulty", R.string.cache_filter_difficulty, DifficultyGeocacheFilter::new),
+    TERRAIN("terrain", R.string.cache_filter_terrain, TerrainGeocacheFilter::new),
+    STATUS("status", R.string.cache_filter_status, StatusGeocacheFilter::new),
+    ATTRIBUTES("attributes", R.string.cache_filter_attributes, AttributesGeocacheFilter::new),
     OFFLINE_LOG("offlinelog", R.string.cache_filter_offlinelog, OfflineLogGeocacheFilter::new);
 
     private final String typeId;

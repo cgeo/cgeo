@@ -3,7 +3,7 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 
-public class TypeGeocacheFilter extends OneOfManyGeocacheFilter<CacheType> {
+public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType> {
 
     @Override
     public CacheType getValue(final Geocache cache) {

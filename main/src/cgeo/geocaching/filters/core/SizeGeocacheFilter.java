@@ -3,7 +3,7 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.models.Geocache;
 
-public class SizeGeocacheFilter extends OneOfManyGeocacheFilter<CacheSize> {
+public class SizeGeocacheFilter extends ValueGroupGeocacheFilter<CacheSize> {
 
 
     @Override
@@ -20,4 +20,15 @@ public class SizeGeocacheFilter extends OneOfManyGeocacheFilter<CacheSize> {
     public String valueToString(final CacheSize value) {
         return value.name();
     }
+
+    @Override
+    public String getSqlColumnName() {
+        return "size";
+    }
+
+    @Override
+    public String valueToSqlValue(final CacheSize value) {
+        return value.id;
+    }
+
 }

@@ -4,12 +4,13 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 
-public abstract class OneOfManyGeocacheFilter<T> extends BaseGeocacheFilter {
+public abstract class ValueGroupGeocacheFilter<T> extends BaseGeocacheFilter {
 
     private final Set<T> values = new HashSet<>();
 
@@ -31,7 +32,7 @@ public abstract class OneOfManyGeocacheFilter<T> extends BaseGeocacheFilter {
         return values;
     }
 
-    public void setValues(final Set<T> set) {
+    public void setValues(final Collection<T> set) {
         values.clear();
         values.addAll(set);
     }
@@ -45,7 +46,7 @@ public abstract class OneOfManyGeocacheFilter<T> extends BaseGeocacheFilter {
         if (gcValue == null) {
             return null;
         }
-        return values.isEmpty() || values.contains(gcValue);
+        return values.contains(gcValue);
     }
 
     @Override

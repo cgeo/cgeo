@@ -3,7 +3,6 @@ package cgeo.geocaching.filters.gui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.databinding.CacheFilterActivityBinding;
-import cgeo.geocaching.databinding.CacheFilterCheckboxItemBinding;
 import cgeo.geocaching.databinding.CacheFilterListItemBinding;
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
@@ -15,9 +14,9 @@ import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.TextSpinner;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,12 +27,12 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -50,6 +49,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     public static final int REQUEST_SELECT_FILTER = 456;
     public static final String EXTRA_FILTER_INPUT = "efi";
     public static final String EXTRA_FILTER_RESULT = "efr";
+
+    private static final String STATE_CURRENT_FILTER = "state_current_filter";
 
     private CacheFilterActivityBinding binding;
     private FilterListAdapter filterListAdapter;
@@ -69,22 +70,41 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         binding.filterClear.setOnClickListener(b -> setResult(false));
 
 
-        this.andOrFilterCheckbox = addCheckboxProperty(R.string.cache_filter_option_and_or, R.drawable.ic_menu_logic);
-        this.inverseFilterCheckbox = addCheckboxProperty(R.string.cache_filter_option_inverse, R.drawable.ic_menu_invert);
-        this.includeInconclusiveFilterCheckbox = addCheckboxProperty(R.string.cache_filter_option_include_inconclusive, R.drawable.ic_menu_vague,
+        binding.filterPropsCheckboxes.removeAllViews();
+        this.andOrFilterCheckbox = FilterGuiUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_and_or, R.drawable.ic_menu_logic);
+        this.inverseFilterCheckbox = FilterGuiUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_inverse, R.drawable.ic_menu_invert);
+        this.includeInconclusiveFilterCheckbox = FilterGuiUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_include_inconclusive, R.drawable.ic_menu_vague,
             R.string.cache_filter_option_include_inconclusive_info);
+
+
+        filterListAdapter = new FilterListAdapter(binding.filterList);
+        initializeFilterAdd();
 
         // Get parameters from intent and basic cache information from database
         String inputFilter = null;
         final Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+
+        if (inputFilter == null && extras != null) {
             inputFilter = extras.getString(EXTRA_FILTER_INPUT);
         }
-        filterListAdapter = new FilterListAdapter(binding.filterList);
-        initializeFilterAdd();
 
         fillViewFromFilter(inputFilter);
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_CURRENT_FILTER, GeocacheFilterUtils.getFilterConfig(getFilterFromView()));
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull final Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null && savedInstanceState.getString(STATE_CURRENT_FILTER) != null) {
+            fillViewFromFilter(savedInstanceState.getString(STATE_CURRENT_FILTER));
+        }
+    }
+
 
     private void fillViewFromFilter(final String inputFilter) {
         includeInconclusiveFilterCheckbox.setChecked(false);
@@ -107,7 +127,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                     andOrFilterCheckbox.setChecked(filter instanceof OrGeocacheFilter);
                     for (IGeocacheFilter c : filter.getChildren()) {
                         //filterList.add(FilterViewHolderUtils.createFor(c, binding.filterList.getContext()));
-                        filterList.add(FilterViewHolderUtils.createFor(c, this));
+                        filterList.add(FilterViewHolderCreator.createFor(c, this));
                     }
                 }
                 filterListAdapter.submitList(filterList, this::adjustFilterEmptyView);
@@ -119,13 +139,14 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
     private void initializeFilterAdd() {
-        addFilter.setValues(Arrays.asList(GeocacheFilterType.values()))
+        final List<GeocacheFilterType> filterTypes = new ArrayList<>(Arrays.asList(GeocacheFilterType.values()));
+        Collections.sort(filterTypes, (left, right) -> TextUtils.COLLATOR.compare(left.getUserDisplayableName(), right.getUserDisplayableName()));
+        addFilter.setValues(filterTypes)
             .setDisplayMapper(GeocacheFilterType::getUserDisplayableName)
             .setTextHideSelectionMarker(true)
             .setView(binding.filterAdditem, (v, t) -> { })
             .setChangeListener(gcf -> {
-                //filterListAdapter.addItem(0, FilterViewHolderUtils.createFor(gcf, binding.filterList.getContext()));
-                filterListAdapter.addItem(0, FilterViewHolderUtils.createFor(gcf, this));
+                filterListAdapter.addItem(0, FilterViewHolderCreator.createFor(gcf, this));
                 binding.filterList.smoothScrollToPosition(0);
                 adjustFilterEmptyView();
             }, false);
@@ -147,7 +168,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             final IGeocacheFilter filter = getFilterFromView();
             resultIntent.putExtra(EXTRA_FILTER_RESULT, GeocacheFilterUtils.getFilterConfig(filter));
         }
-        FilterViewHolderUtils.clearListInfo();
+        FilterViewHolderCreator.clearListInfo();
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
     }
@@ -156,7 +177,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     private IGeocacheFilter getFilterFromView() {
         IGeocacheFilter filter = andOrFilterCheckbox.isChecked() ? new OrGeocacheFilter() : new AndGeocacheFilter();
         for (IFilterViewHolder<?> f : filterListAdapter.getItems()) {
-            filter.addChild(FilterViewHolderUtils.createFrom(f));
+            filter.addChild(FilterViewHolderCreator.createFrom(f));
         }
         if (inverseFilterCheckbox.isChecked()) {
             final IGeocacheFilter notFilter = new NotGeocacheFilter();
@@ -177,7 +198,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         if (!StringUtils.isBlank(filterString)) {
             intent.putExtra(EXTRA_FILTER_INPUT, filterString);
         }
-        FilterViewHolderUtils.setListInfo(filteredList, isComplete);
+        FilterViewHolderCreator.setListInfo(filteredList, isComplete);
         context.startActivityForResult(intent, REQUEST_SELECT_FILTER);
     }
 
@@ -244,26 +265,5 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         super.onDestroy();
     }
 
-    private CheckBox addCheckboxProperty(@StringRes final int textId, final int iconId) {
-        return addCheckboxProperty(textId, iconId, 0);
-    }
-
-
-        private CheckBox addCheckboxProperty(@StringRes final int textId, final int iconId, @StringRes final int infoTextId) {
-        final ViewGroup checkboxGroup = binding.filterPropsCheckboxes;
-        final View itemView = LayoutInflater.from(this).inflate(R.layout.cache_filter_checkbox_item, checkboxGroup, false);
-        final CacheFilterCheckboxItemBinding itemBinding = CacheFilterCheckboxItemBinding.bind(itemView);
-        itemBinding.itemText.setText(textId);
-        if (iconId > -1) {
-            itemBinding.itemIcon.setImageResource(iconId);
-        }
-        if (infoTextId != 0) {
-            itemBinding.itemInfo.setVisibility(View.VISIBLE);
-            itemBinding.itemInfo.setOnClickListener(v -> Dialogs.message(this, infoTextId));
-        }
-        checkboxGroup.addView(itemView);
-        return itemBinding.itemCheckbox;
-    }
-
-}
+ }
 

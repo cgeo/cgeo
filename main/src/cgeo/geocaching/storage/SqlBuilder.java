@@ -69,7 +69,7 @@ public class SqlBuilder {
         return addWhere(whereClause, (List<String>) null);
     }
 
-    public SqlBuilder addWhere(final String whereClause, final String[] whereArgs) {
+    public SqlBuilder addWhere(final String whereClause, final String ... whereArgs) {
         return addWhere(whereClause, Arrays.asList(whereArgs));
     }
 

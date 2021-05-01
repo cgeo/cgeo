@@ -458,6 +458,11 @@
     <string name="cache_filter_description">Description</string>
     <string name="cache_filter_offlinelog">Offline Log</string>
     <string name="cache_filter_owner">Owner</string>
+    <string name="cache_filter_difficulty">Difficulty</string>
+    <string name="cache_filter_terrain">Terrain</string>
+    <string name="cache_filter_status">Status</string>
+    <string name="cache_filter_attributes">Attributes</string>
+
 
     <string name="cache_filter_stringfilter_matchcase">Match Case</string>
     <string name="cache_filter_stringfilter_info">With option \'Pattern\', use wildcards * and ?. * represents zero, one or multiple characters, ? represents one single character. For example, pattern \'H?mburg*\' will match e.g. \'Homburg\' or \'Hamburg at Night\' but not \'A day in Hamburg\' or \'Hahmburg\'</string>
@@ -467,6 +472,9 @@
     <string name="cache_filter_stringfilter_type_starts_with">Starts With</string>
     <string name="cache_filter_stringfilter_type_ends_with">Ends With</string>
     <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
+
+    <string name="cache_filter_checkboxlist_selectallnone">Select all/none</string>
+
 
     <!-- about -->
     <string name="about_version">Version</string>
