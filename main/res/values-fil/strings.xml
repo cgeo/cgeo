@@ -367,7 +367,7 @@
     <string name="settings_data_dir_item">%1$s (%2$s libri)</string>
     <string name="confirm_data_dir_move">Ang paglipat ng datos ng geocache ay maaring tumagal ng mahabang oras, depende ito sa aparato at ang bilang ng datos.</string>
     <string name="settings_title_basicmembers">Pagpipilian sa mga Pangunahin na Miyembro</string>
-    <string name="settings_title_navigation">Ang Nabigasyon</string>
+    <string name="settings_title_navigation">Ang nabigasyon</string>
     <string name="settings_summary_navigation">Pumili ng ginusto na nabigasyon sa mga pamamaraan at pumili ng nabigasyon sa panlabas na mga app.</string>
     <string name="settings_title_system">Ang Sistema</string>
     <string name="settings_title_navigation_menu">Ang Menu ng Nabigasyon</string>
