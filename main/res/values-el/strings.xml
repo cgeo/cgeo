@@ -480,8 +480,6 @@
     <string name="confirm_data_dir_move_title">Μετακίνηση φακέλου δεδομένων geocache;</string>
     <string name="confirm_data_dir_move">Η μετακίνηση δεδομένων των κρυπτών μπορεί να πάρει πολύ χρόνο, ανάλογα με τη συσκευή σας και τον όγκο των δεδομένων.</string>
     <string name="settings_title_basicmembers">Επιλογές για βασικά μέλη</string>
-    <string name="settings_title_navigation">Πλοήγηση</string>
-    <string name="settings_summary_navigation">Επιλέξτε επιθυμητή μέθοδο πλοήγησης και εξωτερικές εφαρμογές πλοήγησης.</string>
     <string name="settings_title_system">Σύστημα</string>
     <string name="settings_summary_system">Ρυθμίσεις συστήματος και επιλογές αποσφαλμάτωσης.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
