@@ -452,7 +452,6 @@
     <string name="settings_data_dir_item">%1$s (%2$s fräi)</string>
     <string name="confirm_data_dir_move">D\'Geocache Daten ze beweegen kann zimmlech laang daueren, jee no Gerät an dem Montant un Daten.</string>
     <string name="settings_title_basicmembers">Optioune fir net-premium Membere</string>
-    <string name="settings_title_navigation">Navigatioun</string>
     <string name="settings_summary_navigation">Wiel deng favoriséiertst Navigatiounsmethoden aus a wiel extern Navigatiounsapps.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
