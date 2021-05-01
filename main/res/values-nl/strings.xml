@@ -480,8 +480,6 @@
     <string name="confirm_data_dir_move_title">Geocache gegevensmap verplaatsen?</string>
     <string name="confirm_data_dir_move">Het verplaatsen van de geocache-gegevens kan mogelijk erg lang duren, afhankelijk van uw apparaat en de hoeveelheid gegevens.</string>
     <string name="settings_title_basicmembers">Opties voor Basis leden</string>
-    <string name="settings_title_navigation">Navigatie</string>
-    <string name="settings_summary_navigation">Kies uw voorkeur voor navigatiemethoden en externe navigatie apps.</string>
     <string name="settings_title_system">Systeem</string>
     <string name="settings_summary_system">Systeemspecifieke instellingen en foutopsporingsopties.</string>
     <string name="settings_title_navigation_menu">Navigatiemenu</string>
@@ -503,6 +501,7 @@
     <string name="settings_ec_description">Autoriseer c:geo met extremcaching.com om caches te zoeken en toegang te hebben tot jouw gevonden caches.</string>
     <string name="settings_su_description">Autoriseer c:geo met geocaching.su om caches te zoeken.</string>
     <string name="settings_lc_description">Adventure Lab caches op de kaart tonen.\n\n(Alleen beschikbaar voor \"Geocaching.com\" premium leden. Vereist een geactiveerde \"Geocaching.com\" service.)\n\nWijzigen van deze instelling vereist een herstart.</string>
+    <string name="lc_default_description">Dit is een geocaching.com Adventure Lab Cache. Avonturen kunnen alleen worden gespeeld met de Groundspeak Adventure Lab App. Klik op het Adventure Lab pictogram op de \"Details\" pagina om de Adventure Lab App te openen/installeren voor dit avontuur.\nAls je geen Adventure Lab caches op je kaart en zoekopdracht wilt zien kan je ze deactiveren via het menu \"instellingen\" - Diensten - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Activeren</string>
     <string name="init_summary_oc_de">Laad caches van opencaching.de</string>
     <string name="init_oc_de_description">c:geo authoriseren met opencaching.de om naar caches te zoeken en het filteren van gevonden caches.</string>
