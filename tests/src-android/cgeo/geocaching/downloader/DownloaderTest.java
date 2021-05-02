@@ -1,23 +1,22 @@
 package cgeo.geocaching.downloader;
 
-import android.net.Uri;
-
-import org.apache.commons.lang3.StringUtils;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
+import android.net.Uri;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
 
-    private static List<Download> getList(AbstractDownloader downloader, final String url) {
+    private static List<Download> getList(final AbstractDownloader downloader, final String url) {
         final String page = Network.getResponseData(Network.getRequest(url));
         final List<Download> list = new ArrayList<>();
         downloader.analyzePage(Uri.parse(url), list, page);
@@ -34,6 +33,15 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         return i;
     }
 
+    private static Download findByName(final List<Download> list, final String name) {
+        for (Download d : list) {
+            if (StringUtils.equals(d.getName(), name)) {
+                return d;
+            }
+        }
+        return null;
+    }
+
     public static void testMapsforge() {
         final List<Download> list = getList(MapDownloaderMapsforge.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_mapsforge_downloadurl) + "europe/");
 
@@ -48,6 +56,13 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
 
         // number of non-dirs found
         assertThat(count(list, false)).isEqualTo(49);
+
+        // check one named entry
+        final Download d = findByName(list, "Portugal");
+        assertThat(d).isNotNull();
+        final String sizeInfoString = d.getSizeInfo(); // 220M
+        final int sizeInfoInt = Integer.parseInt(sizeInfoString.substring(0, sizeInfoString.length() - 1));
+        assertThat(sizeInfoInt).isBetween(200, 250);
     }
 
     public static void testOpenAndroMaps() {
@@ -64,6 +79,13 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
 
         // number of non-dirs found
         assertThat(count(list, false)).isEqualTo(58);
+
+        // check one named entry
+        final Download d = findByName(list, "Scandinavia_SouthWest");
+        assertThat(d).isNotNull();
+        final String sizeInfoString = d.getSizeInfo(); // 1.7 GB
+        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
+        assertThat(sizeInfoFloat).isBetween(1.6F, 1.8F);
     }
 
     public static void testOpenAndroMapsThemes() {
@@ -77,6 +99,11 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
 
         // number of non-dirs found
         assertThat(count(list, false)).isEqualTo(1);
+
+        // check one named entry
+        final Download d = findByName(list, "Elevate");
+        assertThat(d).isNotNull();
+        assertThat(d.getSizeInfo()).isBlank(); // no size info available
     }
 
     public static void testFreizeitkarte() {
@@ -90,6 +117,13 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
 
         // number of non-dirs found
         assertThat(count(list, false)).isEqualTo(85);
+
+        // check one named entry
+        final Download d = findByName(list, "Freizeitkarte Hamburg");
+        assertThat(d).isNotNull();
+        final String sizeInfoString = d.getSizeInfo(); // 17.9 MB
+        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
+        assertThat(sizeInfoFloat).isBetween(17.8F, 18.5F);
     }
 
     public static void testFreizeitkarteThemes() {
@@ -103,6 +137,13 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
 
         // number of non-dirs found
         assertThat(count(list, false)).isEqualTo(3);
+
+        // check one named entry
+        final Download d = findByName(list, "Outdoor design contrast v5");
+        assertThat(d).isNotNull();
+        final String sizeInfoString = d.getSizeInfo(); // 351.6 KB
+        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
+        assertThat(sizeInfoFloat).isBetween(350.0F, 360.0F);
     }
 
     public static void testBRouterTiles() {
@@ -116,6 +157,13 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
 
         // number of non-dirs found
         assertThat(count(list, false)).isEqualTo(1120);
+
+        // check one named entry
+        final Download d = findByName(list, "E5_N50.rd5");
+        assertThat(d).isNotNull();
+        final String sizeInfoString = d.getSizeInfo(); // 124.6 MB
+        final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
+        assertThat(sizeInfoFloat).isBetween(120.0F, 130.0F);
     }
 
 }
