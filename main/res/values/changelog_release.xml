@@ -8,6 +8,7 @@
 <ul>
 <li>Fix: Changing map source via settings being recognized after full restart only</li>
 <li>Fix: Crash in \"View settings\" under certain conditions</li>
+<li>Fix: Back arrow in map downloader returning to main screen</li>
 </ul>
 
 <h1>2021.04.25:</h1>
