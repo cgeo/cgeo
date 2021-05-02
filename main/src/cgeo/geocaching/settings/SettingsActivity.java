@@ -282,7 +282,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         getPreference(R.string.pref_connectorLCActive).setOnPreferenceChangeListener(this);
         setWebsite(R.string.pref_fakekey_lc_website, LCConnector.getInstance().getHost());
-        getPreference(R.string.preference_screen_lc).setSummary(getServiceSummary(Settings.isLCConnectorActive()));
         initLCServicePreference(Settings.isGCConnectorActive());
 
         getPreference(R.string.pref_connectorSUActive).setOnPreferenceChangeListener(this);
@@ -303,7 +302,9 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initLCServicePreference(final boolean gcConnectorActive) {
-        getPreference(R.string.pref_connectorLCActive).setEnabled(gcConnectorActive && Settings.isGCPremiumMember());
+        final boolean isActiveGCPM = gcConnectorActive && Settings.isGCPremiumMember();
+        getPreference(R.string.preference_screen_lc).setSummary(getServiceSummary(Settings.isLCConnectorActive() && isActiveGCPM));
+        getPreference(R.string.pref_connectorLCActive).setEnabled(isActiveGCPM);
     }
 
     private void setWebsite(final int preferenceKey, final String urlOrHost) {
