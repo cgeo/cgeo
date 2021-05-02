@@ -20,11 +20,15 @@ class MapDownloaderReceiverSchemeMapTheme extends AbstractActivity {
         final String path = uri.getPath();
         Log.i("MapDownloaderReceiverSchemeMapTheme: host=" + host + ", path=" + path);
 
-        // check for OpenAndroMaps
         if (host.equals("download.openandromaps.org") && path.startsWith("/themes/") && path.endsWith(".zip")) {
+            // check for OpenAndroMaps
             // no remapping, as they have themes only on their homepage, not on their ftp site
             final Uri newUri = Uri.parse(getString(R.string.mapserver_openandromaps_themes_downloadurl) + path.substring(8));
             DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS.id, newUri, "", "", System.currentTimeMillis(), this::callback);
+        } else if (host.equals("kartat-dl.hylly.org") && path.endsWith("kartta.zip")) {
+            // check for Hylly map themes - mf-theme://kartat-dl.hylly.org/2021-04-25/peruskartta.zip
+            final Uri newUri = Uri.parse("https://" + host + path);
+            DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_THEME_HYLLY.id, newUri, "", "", System.currentTimeMillis(), this::callback);
         } else {
             // generic map theme download - not yet supported
             Log.w("MapDownloaderReceiverSchemeMapTheme: Received map theme download intent from unknown source: " + uri.toString());
