@@ -22,6 +22,7 @@
 <ul>
 <li>New: Automatic check for updates of downloaded map and theme files (optional)</li>
 <li>New: BRouter: Show info message on missing routing data</li>
+<li>New: Export individual route as track (in addition to \"Export as route\")</li>
 </ul>
 
 <h4>Integrated routing engine:</h4>
