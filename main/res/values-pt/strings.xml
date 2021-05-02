@@ -480,6 +480,8 @@
     <string name="confirm_data_dir_move_title">Mover a pasta de dados de geocaches?</string>
     <string name="confirm_data_dir_move">Mover pasta de dados de geocache pode demorar muito tempo, dependendo do seu dispositivo e volume de dados.</string>
     <string name="settings_title_basicmembers">Opções para Membros Básicos</string>
+    <string name="settings_title_navigation">Encaminhamento / Navegação</string>
+    <string name="settings_summary_navigation">Configure o encaminhamento off-line, escolha os métodos de navegação preferidos e seleccione as aplicações de navegação externas.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Definições específicas de sistema e opções de depuração.</string>
     <string name="settings_title_navigation_menu">Menu de navegação</string>
@@ -1183,6 +1185,7 @@
     <string name="waypoint_coordinates">Coordenadas</string>
     <string name="waypoint_cache_coordinates">Coordenadas da cache</string>
     <string name="waypoint_calculate_coordinates">Calcular coordenadas</string>
+    <string name="waypoint_calculated_coordinates">Coordenadas calculadas</string>
     <string name="waypoint_custom">Personalizado</string>
     <string name="waypoint_my_coordinates">As minhas coordenadas</string>
     <string name="waypoint_bearing">Azimute em º</string>
