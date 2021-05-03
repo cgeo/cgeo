@@ -1612,7 +1612,6 @@
     <string name="individual_route_error_toggling_waypoint">fejl ved valg af rutepunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgængelig i enkelt rutepunkt-tilstand</string>
     <string name="map_sort_individual_route">Sorter individuel rute</string>
-    <string name="map_export_individual_route">Eksportér individuel rute</string>
     <string name="map_load_individual_route">Indlæs individuel rute</string>
     <string name="map_load_individual_route_confirm">Overskriv individuel rute?</string>
     <string name="map_clear_individual_route">Ryd individuel rute</string>
