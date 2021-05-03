@@ -34,7 +34,6 @@ public class ProximityPreference extends SeekbarPreference {
     protected void init() {
         minProgress = 1;
         maxProgress = valueToProgressHelper(Settings.getKeyInt(R.integer.proximitynotification_distance_max));
-        hasDecimals = Settings.useImperialUnits();
     }
 
     @Override
@@ -43,20 +42,14 @@ public class ProximityPreference extends SeekbarPreference {
     }
 
     @Override
-    protected int valueToProgress(final int value) {
-        final int progress = valueToProgressHelper(value);
-        return progress < minProgress ? minProgress : Math.min(progress, maxProgress);
-    }
-
-    @Override
     protected int progressToValue(final int progress) {
         final int value = (int) Math.pow(10, (double) progress / 250.0) - 1;
-        return value < 0 ? 0 : Math.min(value, Settings.getKeyInt(R.integer.proximitynotification_distance_max));
+        return Math.max(value, 0);
     }
 
     @Override
     protected String valueToShownValue(final int value) {
-        return Settings.useImperialUnits() ? String.format(Locale.getDefault(), "%.2f", value / (highRes ? IConversion.FEET_TO_METER : IConversion.MILES_TO_KILOMETER)) : String.valueOf(value);
+        return Settings.useImperialUnits() ? String.format(Locale.US, "%.2f", value / (highRes ? IConversion.FEET_TO_METER : IConversion.MILES_TO_KILOMETER)) : String.valueOf(value);
     }
 
     @Override
@@ -65,8 +58,13 @@ public class ProximityPreference extends SeekbarPreference {
     }
 
     @Override
-    protected String getValueString(final int progress) {
-        return valueToShownValue(progressToValue(progress)) + (Settings.useImperialUnits() ? (highRes ? " ft" : " mi") : (highRes ? " m" : " km"));
+    protected String getUnitString() {
+        return Settings.useImperialUnits() ? (highRes ? " ft" : " mi") : (highRes ? " m" : " km");
     }
 
+    @Override
+    protected boolean useDecimals() {
+        // unit settings can be changed while ProximityPreference is already initialized
+        return Settings.useImperialUnits();
+    }
 }

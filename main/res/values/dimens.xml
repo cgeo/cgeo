@@ -11,4 +11,6 @@
 
     <dimen name="equation_name_width">40dip</dimen>
 
+    <dimen name="dialog_padding_horizontal">24dip</dimen>
+
 </resources>
