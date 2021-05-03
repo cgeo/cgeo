@@ -166,7 +166,9 @@ final class LCApi {
             cache.setDifficulty((float) 1);
             cache.setTerrain((float) 1);
             cache.setSize(CacheSize.getById("virtual"));
-            cache.setFound(false);
+            if (DataStore.isThere("LC" + uuid, "", false)) {
+                cache.setFound(false);
+            }
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
@@ -199,7 +201,9 @@ final class LCApi {
             cache.setDifficulty((float) 1);
             cache.setTerrain((float) 1);
             cache.setSize(CacheSize.getById("virtual"));
-            cache.setFound(false);
+            if (DataStore.isThere("LC" + uuid, "", false)) {
+                cache.setFound(false);
+            }
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
