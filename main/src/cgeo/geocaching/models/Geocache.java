@@ -601,7 +601,7 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean supportsRefresh() {
-        return getConnector() instanceof ISearchByGeocode && getConnector() instanceof ILogin;
+        return getConnector() instanceof ISearchByGeocode;
     }
 
     public boolean supportsWatchList() {
