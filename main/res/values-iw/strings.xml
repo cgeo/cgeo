@@ -373,7 +373,6 @@
     <string name="settings_title_map_content">תוכן מפה</string>
     <string name="settings_title_gpx">GPx</string>
     <string name="settings_title_basicmembers">אפשרויות עבור משתמשים רגילים</string>
-    <string name="settings_title_navigation">ניווט</string>
     <string name="settings_summary_navigation">בחר שיטות ניווט מועדפות ואפליקציות ניווט חיצוניות.</string>
     <string name="settings_title_system">מערכת</string>
     <string name="settings_title_navigation_menu">תפריט ניווט</string>

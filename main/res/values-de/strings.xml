@@ -1780,7 +1780,7 @@
     <string name="individual_route_error_toggling_waypoint">Fehler beim Wechsel des Wegpunktes</string>
     <string name="individual_route_error_single_waypoint_mode">Nicht verfügbar im Einzelwegpunkt-Modus</string>
     <string name="map_sort_individual_route">Individuelle Route sortieren</string>
-    <string name="map_export_individual_route">Exportiere individuelle Route</string>
+    <string name="map_export_individual_route">Individuelle Route exportieren</string>
     <string name="map_load_individual_route">Individuelle Route laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Automatisch als Ziel setzen</string>
