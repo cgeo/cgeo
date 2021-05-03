@@ -1726,7 +1726,6 @@
     <string name="individual_route_error_toggling_waypoint">ошибка включения точки</string>
     <string name="individual_route_error_single_waypoint_mode">Недоступно в режиме одной точки</string>
     <string name="map_sort_individual_route">Сортировать личный маршрут</string>
-    <string name="map_export_individual_route">Экспорт персонального маршрута</string>
     <string name="map_load_individual_route">Загрузить персональный маршрут</string>
     <string name="map_load_individual_route_confirm">Перезаписать текущий маршрут?</string>
     <string name="map_clear_individual_route">Очистить индивидуальный маршрут</string>
