@@ -448,8 +448,6 @@
     <string name="settings_data_dir_item">%1$s (%2$s laisva)</string>
     <string name="confirm_data_dir_move">Slėptuvių duomenų perkėlimas gali užtrukti, priklausomai nuo jūsų įrenginio ir duomenų apimties.</string>
     <string name="settings_title_basicmembers">Parinktys paprastiesiems nariams</string>
-    <string name="settings_title_navigation">Navigacija</string>
-    <string name="settings_summary_navigation">Pasirinkite pageidaujamus navigacijos metodus ir išorines navigacijos programas.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
     <string name="settings_category_browser">Naršyklė</string>
@@ -1607,7 +1605,6 @@
     <string name="individual_route_error_toggling_waypoint">klaida perjungiant papildomą tašką</string>
     <string name="individual_route_error_single_waypoint_mode">Negalima vieno papildomo taško režimu</string>
     <string name="map_sort_individual_route">Redaguoti asmeninį maršrutą</string>
-    <string name="map_export_individual_route">Eksportuoti asmeninį maršrutą</string>
     <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
     <string name="map_load_individual_route_confirm">Perrašyti esamą maršrutą?</string>
     <string name="map_clear_manual_targets">Išvalykite rankinius tikslus</string>

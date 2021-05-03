@@ -479,8 +479,6 @@
     <string name="confirm_data_dir_move_title">지오캐시 데이터 폴더를 이동?</string>
     <string name="confirm_data_dir_move">장치 및 데이터양에 따라, 지오캐시 데이터를 이동하려면 시간이 많이 걸릴 수 있습니다.</string>
     <string name="settings_title_basicmembers">일반 회원을 위한 선택사항</string>
-    <string name="settings_title_navigation">길찾기</string>
-    <string name="settings_summary_navigation">원하는 길찾기 방법 및 외부 길찾기 앱 선택하기</string>
     <string name="settings_title_system">시스템</string>
     <string name="settings_summary_system">시스템 특정 설정 및 디버깅 옵션.</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
@@ -501,7 +499,7 @@
     <string name="settings_gc_description">캐시 검색을 위하여 geocaching.com에 c:geo를 인증하기</string>
     <string name="settings_ec_description">캐시 검색과 찾은 캐시 접근을 위하여 extremgeocaching.com에 c:geo를 인증하기</string>
     <string name="settings_su_description">캐시 검색을 위하여 geocaching.su에 c:geo를 인증하기</string>
-    <string name="settings_lc_description">지도에 어드벤처 랩 캐시를 포함합니다.\n\n( \"Geocaching.com\"프리미엄 회원에게만 제공됩니다. 활성화된 \"Geocaching.com\"서비스가 필요합니다.)</string>
+    <string name="settings_lc_description">지도에 어드벤처 랩 캐시를 포함합니다.\n\n( \"Geocaching.com\"프리미엄 회원에게만 제공됩니다. 활성화된 \"Geocaching.com\"서비스가 필요합니다.)\n\n이 설정을 변경하려면 다시 시작해야합니다.</string>
     <string name="settings_activate_oc">활성화</string>
     <string name="init_summary_oc_de">Opencaching.de 에서 캐시 불러오기</string>
     <string name="init_oc_de_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.de에 c:geo를 인증하기</string>
@@ -1773,7 +1771,6 @@
     <string name="individual_route_error_toggling_waypoint">지점 토글 오류</string>
     <string name="individual_route_error_single_waypoint_mode">단일 지점 모드에서는 사용할 수 없습니다</string>
     <string name="map_sort_individual_route">개별 경로 정렬</string>
-    <string name="map_export_individual_route">개별 경로 내보내기</string>
     <string name="map_load_individual_route">개별 경로 로드하기</string>
     <string name="map_load_individual_route_confirm">기존 경로를 덮어 쓰시겠습니까?</string>
     <string name="map_autotarget_individual_route">경로 시작을 대상으로 설정</string>

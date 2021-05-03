@@ -434,6 +434,7 @@
     <string name="about_system_write_logcat_type_extended">Erweitert</string>
     <string name="about_system_write_logcat_success">Logdatei \"%1$s\" wurde in den Ordner \"%2$s\" geschrieben</string>
     <string name="about_system_write_logcat_error">Fehler beim Schreiben der Logdatei</string>
+    <string name="about_system_write_infos_downloadmanager">Downloads anzeigen</string>
     <string name="changelog_github">Liste aller Änderungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
     <string name="about_contributors_carnerodetails">als Vater von c:geo</string>
@@ -480,8 +481,8 @@
     <string name="confirm_data_dir_move_title">Geocache-Datenordner verschieben?</string>
     <string name="confirm_data_dir_move">Das Verschieben der Geocache-Daten könnte eine sehr lange Zeit dauern, abhängig von deinem Gerät und der Datenmenge.</string>
     <string name="settings_title_basicmembers">Optionen für Basis-Mitglieder</string>
-    <string name="settings_title_navigation">Navigation</string>
-    <string name="settings_summary_navigation">Wähle die Standardnavigation und externe Navigations-Apps.</string>
+    <string name="settings_title_navigation">Routing / Navigation</string>
+    <string name="settings_summary_navigation">Konfiguriere das Offline-Routing, wähle die Standardnavigation und externe Navigations-Apps.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemeinstellungen und Optionen zur Fehlersuche.</string>
     <string name="settings_title_navigation_menu">Navigationsmenü</string>
@@ -502,7 +503,8 @@
     <string name="settings_gc_description">Autorisiere c:geo auf Geocaching.com zuzugreifen, um Caches zu suchen.</string>
     <string name="settings_ec_description">Autorisiere c:geo auf Extremcaching.com zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
     <string name="settings_su_description">Autorisiere c:geo auf geocaching.su zuzugreifen, um Caches zu suchen.</string>
-    <string name="settings_lc_description">Zeigt Adventure Lab Caches auf der Karte.\n\n(Nur verfügbar für \"Geocaching.com\" Premium-Mitglieder. Erfordert einen aktivierten \"Geocaching.com\"-Dienst.)</string>
+    <string name="settings_lc_description">Zeige Adventure Lab Caches auf der Karte.\n\n(Nur verfügbar für \"Geocaching.com\" Premium-Mitglieder. Erfordert einen aktivierten \"Geocaching.com\"-Dienst.)\n\nDas Ändern dieser Einstellung erfordert einen Neustart.</string>
+    <string name="lc_default_description">Dies ist ein Geocaching.com Adventure Lab Cache. Lab Caches können nur mit der Groundspeak Adventure Lab App gespielt werden. Tippe auf das Adventure Lab-Symbol auf der \"Details\"-Seite, um die Adventure Lab App für diesen Cache von dort aus zu öffnen/zu installieren.\nWenn du keine Adventure Lab-Caches auf deiner Karte und Suche sehen möchtest, kannst du sie im Menü \"Einstellungen\" - Dienste - Geocaching.com Adventure Lab deaktivieren</string>
     <string name="settings_activate_oc">Aktivieren</string>
     <string name="init_summary_oc_de">Caches von Opencaching.de laden</string>
     <string name="init_oc_de_description">Autorisiere c:geo auf Opencaching.de zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
@@ -1184,6 +1186,7 @@
     <string name="waypoint_coordinates">Koordinaten</string>
     <string name="waypoint_cache_coordinates">Cache-Koordinaten</string>
     <string name="waypoint_calculate_coordinates">Berechne Koordinaten</string>
+    <string name="waypoint_calculated_coordinates">Berechnete Koordinaten</string>
     <string name="waypoint_custom">Benutzerdefiniert</string>
     <string name="waypoint_my_coordinates">Meine Koordinaten</string>
     <string name="waypoint_bearing">Richtung in °</string>
@@ -1797,7 +1800,8 @@
     <string name="individual_route_error_toggling_waypoint">Fehler beim Wechsel des Wegpunktes</string>
     <string name="individual_route_error_single_waypoint_mode">Nicht verfügbar im Einzelwegpunkt-Modus</string>
     <string name="map_sort_individual_route">Individuelle Route sortieren</string>
-    <string name="map_export_individual_route">Exportiere individuelle Route</string>
+    <string name="map_export_individual_route">Exportiere als Route</string>
+    <string name="map_export_individual_route_as_track">Exportiere als Track</string>
     <string name="map_load_individual_route">Individuelle Route laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Routenstart als Ziel festlegen</string>

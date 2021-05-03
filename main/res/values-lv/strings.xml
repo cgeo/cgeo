@@ -448,8 +448,6 @@
     <string name="settings_data_dir_item">%1$s (%2$s bez maksas)</string>
     <string name="confirm_data_dir_move">Slēpņu datu pārvietošana var aizņemt ļoti ilgu laiku, atkarībā no tavas ierīces un datu apjoma.</string>
     <string name="settings_title_basicmembers">Iestatījumi bezmaksas lietotājiem</string>
-    <string name="settings_title_navigation">Navigācija</string>
-    <string name="settings_summary_navigation">Izvēlieties vēlamo navigācijas metodi un izvēlieties ārējās navigācijas aplikācijas.</string>
     <string name="settings_title_system">Sistēma</string>
     <string name="settings_title_navigation_menu">Navigācijas izvēlne</string>
     <string name="settings_category_browser">Pārlūkprogramma</string>

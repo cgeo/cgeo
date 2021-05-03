@@ -469,8 +469,6 @@
     <string name="confirm_data_dir_move_title">Flytta mapp för geocache-data?</string>
     <string name="confirm_data_dir_move">Att flytta katalogen för geocache-data kan, beroende på din enhet och mängden data, ta riktigt lång tid.</string>
     <string name="settings_title_basicmembers">Inställningar för Basic Members</string>
-    <string name="settings_title_navigation">Navigering</string>
-    <string name="settings_summary_navigation">Välj standardmetoder för navigering och välj externa navigationsappar.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemspecifika inställningar och felsökningsalternativ.</string>
     <string name="settings_title_navigation_menu">Navigeringsmeny</string>
@@ -1763,7 +1761,6 @@
     <string name="individual_route_error_toggling_waypoint">fel vid växling av vägpunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Inte tillgänglig i singel-vägpunkts läge</string>
     <string name="map_sort_individual_route">Sortera individuell rutt</string>
-    <string name="map_export_individual_route">Sortera individuell rutt</string>
     <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
     <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>

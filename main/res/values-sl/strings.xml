@@ -377,8 +377,6 @@
     <string name="settings_title_map_content">Vsebina zemljevida</string>
     <string name="settings_title_map_behavior">Nastavitve zemljevida</string>
     <string name="settings_title_basicmembers">Možnosti za Basic Member</string>
-    <string name="settings_title_navigation">Navigacija</string>
-    <string name="settings_summary_navigation">Izberi želeno metodo navigacije in izberi zunanje aplikacije.</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Navigacijski menu</string>
     <string name="settings_category_browser">Brskalnik</string>

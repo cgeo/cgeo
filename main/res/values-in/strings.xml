@@ -358,8 +358,6 @@
     <string name="settings_data_dir_item">%1$s (%2$s gratis)</string>
     <string name="confirm_data_dir_move">Memindahkan data geocache mungkin memerlukan waktu yang sangat lama, tergantung pada perangkat dan jumlah data anda.</string>
     <string name="settings_title_basicmembers">Pilihan untuk Anggota Dasar</string>
-    <string name="settings_title_navigation">Navigasi</string>
-    <string name="settings_summary_navigation">Memilih metode navigasi yang lebih disukai dan pilih aplikasi navigasi eksternal.</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Menu Navigasi</string>
     <string name="settings_category_browser">Peramban</string>

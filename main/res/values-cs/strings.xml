@@ -436,6 +436,7 @@
     <string name="about_system_write_logcat_type_extended">Rozšířený</string>
     <string name="about_system_write_logcat_success">Soubor protokolu \"%1$s\" zapsán do složky \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Chyba při zápisu souboru protokolu</string>
+    <string name="about_system_write_infos_downloadmanager">Zobrazit stažené</string>
     <string name="changelog_github">Seznam všech změn</string>
     <string name="about_nutshellmanual">Online návod</string>
     <string name="about_contributors_carnerodetails">jako otec c:geo</string>
@@ -482,8 +483,8 @@
     <string name="confirm_data_dir_move_title">Přesunout složku s údaji o keškách?</string>
     <string name="confirm_data_dir_move">Přesun dat kešek může trvat dlouhou dobu v závislosti na zařízení a množství dat.</string>
     <string name="settings_title_basicmembers">Možnosti pro běžné členy</string>
-    <string name="settings_title_navigation">Navigace</string>
-    <string name="settings_summary_navigation">Výběr preferované navigační metody a externích navigačních aplikací.</string>
+    <string name="settings_title_navigation">Směrování / Navigace</string>
+    <string name="settings_summary_navigation">Nakonfigurujte offline směrování, vyberte preferované metody navigace a vyberte externí navigační aplikace.</string>
     <string name="settings_title_system">Systém</string>
     <string name="settings_summary_system">Specifická nastavení systému a možnosti ladění.</string>
     <string name="settings_title_navigation_menu">Navigační menu</string>
@@ -504,7 +505,8 @@
     <string name="settings_gc_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.com.</string>
     <string name="settings_ec_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby extremcaching.com.</string>
     <string name="settings_su_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.su.</string>
-    <string name="settings_lc_description">Zahrňte na mapu Adventure Lab kešky.\n\n(K dispozici pouze prémiovým členům „Geocaching.com“. Vyžaduje aktivovanou službu „Geocaching.com“.)</string>
+    <string name="settings_lc_description">Zahrňte na mapu Adventure Lab kešky.\n\n(K dispozici pouze prémiovým členům „Geocaching.com“. Vyžaduje aktivovanou službu „Geocaching.com“.)\n\nZměna tohoto nastavení vyžaduje restart aplikace.</string>
+    <string name="lc_default_description">Toto je Adventure Lab keška z geocaching.com. Dobrodružství lze hrát pouze s aplikací Adventure Lab od Groundspeaku. Klepnutím na ikonu Adventure Lab na stránce „Podrobnosti“ odtud otevřete/nainstalujete aplikaci Adventure Lab pro hraní tohoto dobrodružství.\nPokud nechcete na své mapě vidět kešky typu Adventure Lab, můžete je deaktivovat pomocí nabídky „nastavení“ - Služby - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Aktivovat</string>
     <string name="init_summary_oc_de">Načíst kešky z opencaching.de</string>
     <string name="init_oc_de_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby opencaching.de.</string>
@@ -1206,6 +1208,7 @@
     <string name="waypoint_coordinates">Souřadnice</string>
     <string name="waypoint_cache_coordinates">Souřadnice kešky</string>
     <string name="waypoint_calculate_coordinates">Výpočet souřadnic</string>
+    <string name="waypoint_calculated_coordinates">Vypočítané souřadnice</string>
     <string name="waypoint_custom">Vlastní</string>
     <string name="waypoint_my_coordinates">Moje souřadnice</string>
     <string name="waypoint_bearing">Azimut [°]</string>
@@ -1845,7 +1848,8 @@
     <string name="individual_route_error_toggling_waypoint">chyba při přepínání trasového bodu</string>
     <string name="individual_route_error_single_waypoint_mode">Není dostupné v režimu jednoho trasového bodu</string>
     <string name="map_sort_individual_route">Seřadit individuální trasu</string>
-    <string name="map_export_individual_route">Exportovat individuální trasu</string>
+    <string name="map_export_individual_route">Exportovat jako trasu</string>
+    <string name="map_export_individual_route_as_track">Exportovat jako stopu</string>
     <string name="map_load_individual_route">Načíst individuální trasu</string>
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Nastavit začátek trasy jako cíl</string>

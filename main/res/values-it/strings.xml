@@ -423,6 +423,7 @@
     <string name="about_license">Licenza</string>
     <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
     <string name="about_help">Guida</string>
+    <string name="about_system_collecting">Informazioni di sistema raccolte, attendere…</string>
     <string name="about_system_include">Si prega di includere le seguenti informazioni di sistema quando si invia una segnalazione di bug o per chiedere ulteriori informazioni su c:geo:</string>
     <string name="about_system_info_send_button">Invia per email…</string>
     <string name="about_system_info">informazioni di sistema di c:geo</string>
@@ -433,6 +434,7 @@
     <string name="about_system_write_logcat_type_extended">Esteso</string>
     <string name="about_system_write_logcat_success">File di registro \"%1$s\" scritto nella cartella \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Errore durante la scrittura del file di log</string>
+    <string name="about_system_write_infos_downloadmanager">Visualizza download</string>
     <string name="changelog_github">Elenco di tutte le modifiche</string>
     <string name="about_nutshellmanual">Manuale online</string>
     <string name="about_contributors_carnerodetails">come padre di c:geo</string>
@@ -479,8 +481,8 @@
     <string name="confirm_data_dir_move_title">Spostare la cartella dati geocache?</string>
     <string name="confirm_data_dir_move">Lo spostamento dei dati geocache potrebbe richiedere molto tempo, a seconda del dispositivo e la quantità di dati.</string>
     <string name="settings_title_basicmembers">Opzioni per i membri di base (non Premium)</string>
-    <string name="settings_title_navigation">Navigazione</string>
-    <string name="settings_summary_navigation">Sceglie il metodo di navigazione preferito e seleziona le app di navigazione esterna.</string>
+    <string name="settings_title_navigation">Rotta / Navigazione</string>
+    <string name="settings_summary_navigation">Configurare la rotta offline, scegliere metodi di navigazione preferiti e selezionare le applicazioni di navigazione esterne.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Impostazioni specifiche di sistema e opzioni di debug.</string>
     <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
@@ -501,6 +503,8 @@
     <string name="settings_gc_description">Autorizza c:geo per cercare cache su geocaching.com.</string>
     <string name="settings_ec_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
     <string name="settings_su_description">Autorizza c:geo per cercare cache su geocaching,su.</string>
+    <string name="settings_lc_description">Includi le cache di Adventure Lab sulla mappa.\n\n(Disponibile solo per i membri premium \"Geocaching.com\". Richiede un servizio \"Geocaching.com\" attivato.)\n\nLa modifica di questa impostazione richiede un riavvio.</string>
+    <string name="lc_default_description">Questo è un cache Adventure Lab di geocaching.com. Le Adventure possono essere giocate solo con l\'app Adventure Lab di Groundspeak. Tocca l\'icona di Adventure Lab sulla pagina \"Dettagli\" per aprire/installare l\'app Adventure Lab per questa Adventure.\nSe non vuoi visualizzare e cercare i cache Adenture Lab sulla tua mappa, è possibile disattivarli utilizzando il menu \"impostazioni\" - Servizi - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Attiva</string>
     <string name="init_summary_oc_de">Carica cache da opencaching.de</string>
     <string name="init_oc_de_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de</string>
@@ -1182,6 +1186,7 @@
     <string name="waypoint_coordinates">Coordinate</string>
     <string name="waypoint_cache_coordinates">Coordinate cache</string>
     <string name="waypoint_calculate_coordinates">Calcola coordinate</string>
+    <string name="waypoint_calculated_coordinates">Coordinate calcolate</string>
     <string name="waypoint_custom">Personalizzato</string>
     <string name="waypoint_my_coordinates">Coordinate attuali</string>
     <string name="waypoint_bearing">Angolo in gradi</string>
@@ -1795,7 +1800,8 @@
     <string name="individual_route_error_toggling_waypoint">errore cambiando lo stato waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Non disponibile in modalità waypoint singolo</string>
     <string name="map_sort_individual_route">Ordina percorso individuale</string>
-    <string name="map_export_individual_route">Esporta percorso individuale</string>
+    <string name="map_export_individual_route">Esporta come percorso</string>
+    <string name="map_export_individual_route_as_track">Esporta come traccia</string>
     <string name="map_load_individual_route">Carica percorso individuale</string>
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
     <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>

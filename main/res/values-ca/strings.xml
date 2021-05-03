@@ -481,8 +481,6 @@
     <string name="confirm_data_dir_move_title">Voleu moure la carpeta de dades de Geocatxés?</string>
     <string name="confirm_data_dir_move">Moure el directori de dades dels geoamagatalls pot trigar una bona estona, en funció del dispositiu i de la quantitat de dades.</string>
     <string name="settings_title_basicmembers">Opcions per a membres bàsics</string>
-    <string name="settings_title_navigation">Navegació</string>
-    <string name="settings_summary_navigation">Tria un mètode com preferit de navegació i selecciona la aplicació de navegació externa.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Configuració i opcions de depuració específiques del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegació</string>
@@ -503,7 +501,6 @@
     <string name="settings_gc_description">Autoritza c:geo a geocaching.com per buscar catxés.</string>
     <string name="settings_ec_description">Autoritza al c:geo a extremcaching.com per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
     <string name="settings_su_description">Autoritza c:geo a geocaching.su per buscar catxés.</string>
-    <string name="settings_lc_description">Inclou els Adventure Lab catxés al mapa.\n\n(Disponible només per a membres premium de \"Geocaching.com\". Requereix un servei \"Geocaching.com\" activat.)</string>
     <string name="settings_activate_oc">Activa</string>
     <string name="init_summary_oc_de">Carregar catxés des de opencaching.de</string>
     <string name="init_oc_de_description">Autoritza al c:geo a opencaching.de per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
@@ -1799,7 +1796,6 @@
     <string name="individual_route_error_toggling_waypoint">error en canviar el punt de ruta</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en mode punt de ruta únic</string>
     <string name="map_sort_individual_route">Ordena la ruta individual</string>
-    <string name="map_export_individual_route">Exporta una ruta individual</string>
     <string name="map_load_individual_route">Carrega la ruta individual</string>
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
     <string name="map_autotarget_individual_route">Estableix l’inici de la ruta com a objectiu</string>

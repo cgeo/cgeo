@@ -479,8 +479,8 @@
     <string name="confirm_data_dir_move_title">ジオキャッシュ データフォルダを移動しますか?</string>
     <string name="confirm_data_dir_move">キャッシュデータの移動はデバイスやデータ量により非常に長い時間がかかる場合があります</string>
     <string name="settings_title_basicmembers">ベーシック会員の設定</string>
-    <string name="settings_title_navigation">ナビゲーション</string>
-    <string name="settings_summary_navigation">ナビゲーション方法や外部ナビゲーションアプリの選択</string>
+    <string name="settings_title_navigation">ルート検索/ナビゲーション</string>
+    <string name="settings_summary_navigation">オフラインルート検索の設定、ナビゲーション方法や外部ナビゲーションアプリの選択</string>
     <string name="settings_title_system">システム</string>
     <string name="settings_summary_system">システム固有の設定とデバッグオプション</string>
     <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
@@ -501,7 +501,8 @@
     <string name="settings_gc_description">geocaching.comでc:geoを認証してキャッシュを検索できるようにします</string>
     <string name="settings_ec_description">c:geoをextremcaching.comで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
     <string name="settings_su_description">c:geoをgeocaching.suで認証してキャッシュを検索できるようにします</string>
-    <string name="settings_lc_description">アドベンチャー・ラボ・キャッシュを地図に含めます\n\n(Geocaching.comのプレミアム会員である必要があります。Geocaching.comサービスを有効化してください)</string>
+    <string name="settings_lc_description">アドベンチャー・ラボ・キャッシュを地図に含めます\n\n(Geocaching.comのプレミアム会員である必要があります。Geocaching.comサービスを有効化してください)\n\nc:geoの再起動が必要です</string>
+    <string name="lc_default_description">これはgeocaching.comのアドベンチャー・ラボ・キャッシュです。アドベンチャーはGroundspeakの Adventure Labアプリでのみプレイできます。 「詳細」ページのアドベンチャー・ラボ アイコンをタップすると、Adventure Labアプリを開いたりインストールしたりできます。\nアドベンチャー・ラボ・キャッシュを地図や検索に表示したくない場合は「設定」&gt;「サービス 」&gt;「ジオキャッシングサイト」&gt;「Geocaching.com Adventure Lab」で無効化できます。</string>
     <string name="settings_activate_oc">有効化</string>
     <string name="init_summary_oc_de">opencaching.deからキャッシュを読み込み</string>
     <string name="init_oc_de_description">c:geoをopencaching.deで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
@@ -1770,7 +1771,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="individual_route_error_toggling_waypoint">ルートポイントの切替エラー</string>
     <string name="individual_route_error_single_waypoint_mode">一つだけのウェイポイントでは利用できません</string>
     <string name="map_sort_individual_route">個別ルートの編集</string>
-    <string name="map_export_individual_route">個別ルートのエクスポート</string>
+    <string name="map_export_individual_route">ルートとしてエクスポート</string>
+    <string name="map_export_individual_route_as_track">トラックとしてエクスポート</string>
     <string name="map_load_individual_route">個別ルートの読み込み</string>
     <string name="map_load_individual_route_confirm">現在のルートに上書きしますか?</string>
     <string name="map_autotarget_individual_route">ルートの開始地点を目的地として設定</string>
