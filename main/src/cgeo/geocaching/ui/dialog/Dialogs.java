@@ -27,12 +27,14 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -755,6 +757,83 @@ public final class Dialogs {
         enableDialogButtonIfNotEmpty(dialog, defaultValue);
 
         moveCursorToEnd(input);
+    }
+
+
+    /**
+     * Show a message dialog for input from the user. The okay button is only enabled on non empty input.
+     *
+     * @param context
+     *            activity owning the dialog
+     * @param title
+     *            message dialog title
+     * @param defaultValue
+     *            default input value
+     * @param buttonTitle
+     *            title of the okay button
+     * @param okayListener
+     *            listener to be run on okay
+     */
+    public static void input(final Context context, final String title, final int inputType, final String defaultValue, final String label, final int buttonTitle, final Action1<String> okayListener) {
+        final LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.HORIZONTAL);
+        layout.setGravity(Gravity.CENTER_HORIZONTAL);
+
+        final boolean hasUnit = StringUtils.isNotEmpty(label);
+        final int dialogPadding = context.getResources().getDimensionPixelSize(R.dimen.dialog_padding_horizontal);
+        final LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+        textParam.setMargins(dialogPadding, 0, hasUnit ? 0 : dialogPadding, 0);
+
+        final EditText editText = new EditText(context);
+        editText.setInputType(inputType);
+        editText.setText(defaultValue);
+        editText.setTextColor(context.getResources().getColor(Settings.isLightSkin() ? R.color.text_light : R.color.text_dark));
+        editText.setGravity(Gravity.RIGHT);
+        editText.setLayoutParams(textParam);
+        layout.addView(editText);
+
+        if (hasUnit) {
+            final TextView unitText = new TextView(context);
+            final LinearLayout.LayoutParams unitParam = new LinearLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+            unitParam.setMargins(0, 0, dialogPadding, 0);
+            unitText.setText(label);
+            unitText.setLayoutParams(unitParam);
+            layout.addView(unitText);
+        }
+
+        final AlertDialog.Builder builder = newBuilder(context);
+        builder.setTitle(title);
+        builder.setView(layout);
+        builder.setPositiveButton(buttonTitle, (dialog, which) -> okayListener.call(editText.getText().toString()));
+        builder.setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.dismiss());
+        final AlertDialog dialog = builder.create();
+
+        editText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+                // empty
+            }
+
+            @Override
+            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+                // empty
+            }
+
+            @Override
+            public void afterTextChanged(final Editable editable) {
+                enableDialogButtonIfNotEmpty(dialog, editable.toString());
+            }
+        });
+        // force keyboard
+        editText.requestFocus();
+        // new Keyboard(context).showDelayed(editText);
+
+        // disable button
+        dialog.show();
+        enableDialogButtonIfNotEmpty(dialog, String.valueOf(defaultValue));
+
+        moveCursorToEnd(editText);
     }
 
     /**
