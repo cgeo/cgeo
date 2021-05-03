@@ -434,6 +434,7 @@
     <string name="about_system_write_logcat_type_extended">Extendido</string>
     <string name="about_system_write_logcat_success">Ficheiro de registos \"%1$s\" gravado na pasta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Erro ao escrever no ficheiro de depuração</string>
+    <string name="about_system_write_infos_downloadmanager">Ver transferências</string>
     <string name="changelog_github">Lista de todas as alterações</string>
     <string name="about_nutshellmanual">Manual on-line</string>
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
@@ -1799,7 +1800,8 @@
     <string name="individual_route_error_toggling_waypoint">erro ao trocar de ponto adicional</string>
     <string name="individual_route_error_single_waypoint_mode">Não disponível em modo de ponto adicional único</string>
     <string name="map_sort_individual_route">Ordenar por rota individual</string>
-    <string name="map_export_individual_route">Exportar rota individual</string>
+    <string name="map_export_individual_route">Exportar como rota</string>
+    <string name="map_export_individual_route_as_track">Exportar como percurso</string>
     <string name="map_load_individual_route">Carregar rota individual</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir início da rota como destino</string>
