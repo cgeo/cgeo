@@ -1661,8 +1661,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     hasExtraDescription = false;
                 }
             }
-            binding.extraDescriptionTitle.setVisibility(hasExtraDescription ? View.VISIBLE : View.GONE);
-            binding.extraDescription.setVisibility(hasExtraDescription ? View.VISIBLE : View.GONE);
+            binding.extraDescriptionBox.setVisibility(hasExtraDescription ? View.VISIBLE : View.GONE);
 
             // cache personal note
             setPersonalNote(binding.personalnote, binding.personalnoteButtonSeparator, cache.getPersonalNote());
