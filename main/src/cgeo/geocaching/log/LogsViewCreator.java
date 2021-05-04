@@ -138,17 +138,28 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
                     .addItem(activity.getString(R.string.copy_to_clipboard), R.drawable.ic_menu_copy, i -> {
                         ClipboardUtils.copyToClipboard(holder.binding.log.getText().toString());
                         activity.showToast(activity.getString(R.string.clipboard_copy_ok));
-                    })
-                    .addItem(R.string.context_share_as_text, R.drawable.ic_menu_share, it ->
-                            ShareUtils.sharePlainText(activity, holder.binding.log.getText().toString()))
-                    .addItem(activity.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()),
-                            R.drawable.ic_menu_translate, it -> TranslationUtils.startActivityTranslate(activity, Locale.getDefault().getLanguage(), HtmlUtils.extractText(log.log)));
-            final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
+                    });
 
-            if (!localeIsEnglish) {
-                ctxMenu.addItem(R.string.translate_to_english, R.drawable.ic_menu_translate, it ->
-                        TranslationUtils.startActivityTranslate(activity, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(log.log)));
+            // translation
+            if (TranslationUtils.supportsInAppTranslationPopup()) {
+                ctxMenu.addItem(R.string.translate, R.drawable.ic_menu_translate, it ->
+                        TranslationUtils.startInAppTranslationPopup(activity, HtmlUtils.extractText(log.log)));
+            } else {
+                ctxMenu.addItem(activity.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()),
+                        R.drawable.ic_menu_translate, it -> TranslationUtils.startActivityTranslate(activity, Locale.getDefault().getLanguage(), HtmlUtils.extractText(log.log)));
+
+                final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
+                if (!localeIsEnglish) {
+                    ctxMenu.addItem(R.string.translate_to_english, R.drawable.ic_menu_translate, it ->
+                            TranslationUtils.startActivityTranslate(activity, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(log.log)));
+                }
             }
+
+            // share
+            ctxMenu.addItem(R.string.context_share_as_text, R.drawable.ic_menu_share, it ->
+                    ShareUtils.sharePlainText(activity, holder.binding.log.getText().toString()));
+
+            // subclass specific entries
             extendContextMenu(ctxMenu, log).show();
         };
 
