@@ -7,6 +7,7 @@ import cgeo.geocaching.network.Network;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -46,7 +47,7 @@ public final class TranslationUtils {
     }
 
     /**
-     * Send Intent for Google Translate. Can be caught by Google Translate App or browser.
+     * Send Intent for Google Translate. Should only be used if InAppTranslationPopup is not available.
      *
      * @param activity
      *            The activity starting the process
@@ -60,5 +61,23 @@ public final class TranslationUtils {
             ActivityMixin.showToast(activity, R.string.translate_length_warning);
         }
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(buildTranslationURI(toLang, text))));
+    }
+
+    public static boolean supportsInAppTranslationPopup() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ProcessUtils.isLaunchable(TRANSLATION_APP);
+    }
+
+    public static void startInAppTranslationPopup(final Activity activity, final String text) {
+        if (!supportsInAppTranslationPopup()) {
+            return;
+        }
+
+        final Intent intent = new Intent();
+        intent.setType("text/plain");
+        intent.setAction(Intent.ACTION_PROCESS_TEXT);
+        intent.putExtra(Intent.EXTRA_PROCESS_TEXT, text);
+        intent.putExtra(Intent.EXTRA_PROCESS_TEXT_READONLY, true);
+        intent.setPackage(TRANSLATION_APP);
+        activity.startActivity(intent);
     }
 }

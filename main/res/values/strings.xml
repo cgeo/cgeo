@@ -167,6 +167,7 @@
 
 
     <!-- translation -->
+    <string name="translate">Translate</string>
     <string name="translate_to_sys_lang">Translate to %s</string>
     <string name="translate_to_english">Translate to English</string>
     <string name="translate_length_warning">Translation may fail with a large amount of text.</string>
