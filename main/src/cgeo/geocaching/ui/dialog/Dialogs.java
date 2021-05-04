@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -18,10 +19,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -600,7 +599,7 @@ public final class Dialogs {
         }
 
         if (StringUtils.isNotBlank(moreInfoURL)) {
-            builder.setNeutralButton(R.string.more_information, (dialog, which) -> context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(moreInfoURL))));
+            builder.setNeutralButton(R.string.more_information, (dialog, which) -> ShareUtils.openUrl(context, moreInfoURL));
         }
 
         if (cancellable) {
