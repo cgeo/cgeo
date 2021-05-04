@@ -157,8 +157,9 @@ final class LCApi {
             final String[] segments = firebaseDynamicLink.split("/");
             final String id = segments[segments.length - 1];
             final String uuid = response.get("Id").asText();
+            final String geocode = "LC" + uuid;
             cache.setReliableLatLon(true);
-            cache.setGeocode("LC" + uuid);
+            cache.setGeocode(geocode);
             cache.setCacheId(id);
             cache.setName(response.get("Title").asText());
             cache.setCoords(new Geopoint(location.get("Latitude").asText(), location.get("Longitude").asText()));
@@ -166,7 +167,7 @@ final class LCApi {
             cache.setDifficulty((float) 1);
             cache.setTerrain((float) 1);
             cache.setSize(CacheSize.getById("virtual"));
-            if (DataStore.isThere("LC" + uuid, "", false)) {
+            if (DataStore.isThere(geocode, "", false)) {
                 cache.setFound(false);
             }
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
@@ -189,10 +190,11 @@ final class LCApi {
             final String[] segments = firebaseDynamicLink.split("/");
             final String id = segments[segments.length - 1];
             final String uuid = response.get("Id").asText();
+            final String geocode = "LC" + uuid;
             final String ilink = response.get("KeyImageUrl").asText();
             final String desc = response.get("Description").asText();
             cache.setReliableLatLon(true);
-            cache.setGeocode("LC" + uuid);
+            cache.setGeocode(geocode);
             cache.setCacheId(id);
             cache.setName(response.get("Title").asText());
             cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\" </img><p><p>" : "") + desc);
@@ -201,7 +203,7 @@ final class LCApi {
             cache.setDifficulty((float) 1);
             cache.setTerrain((float) 1);
             cache.setSize(CacheSize.getById("virtual"));
-            if (DataStore.isThere("LC" + uuid, "", false)) {
+            if (DataStore.isThere(geocode + uuid, "", false)) {
                 cache.setFound(false);
             }
             cache.setDisabled(false);
