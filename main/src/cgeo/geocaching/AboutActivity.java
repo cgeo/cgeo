@@ -162,7 +162,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             } else {
                 binding.changelogMaster.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             }
-            binding.changelogGithub.setOnClickListener(v -> startUrl("https://github.com/cgeo/cgeo/releases"));
+            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(AboutActivity.this, "https://github.com/cgeo/cgeo/releases"));
             binding.changelogMaster.setText(LiUtils.formatHTML(getString(R.string.changelog_master)));
             binding.changelogRelease.setText(LiUtils.formatHTML(getString(R.string.changelog_release)));
 
@@ -267,11 +267,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     }
 
     public final void setClickListener(final View view, final String url) {
-        view.setOnClickListener(v -> startUrl(url));
-    }
-
-    private void startUrl(final String url) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        view.setOnClickListener(v -> ShareUtils.openUrl(this, url));
     }
 
     @Override

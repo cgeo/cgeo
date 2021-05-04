@@ -4,9 +4,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.ShareUtils;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +37,7 @@ public final class UsefulAppsActivity extends AbstractActionBarActivity {
         view.setAdapter(new HelperAppAdapter(this, HELPER_APPS, helperApp -> {
             final String packageName = getString(helperApp.packageNameResId);
             if (packageName.startsWith("http")) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(packageName)));
+                ShareUtils.openUrl(this, packageName);
             } else {
                 ProcessUtils.openMarket(UsefulAppsActivity.this, packageName);
             }

@@ -81,6 +81,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
@@ -264,7 +265,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         });
         dialog.setPositiveButton(res.getString(R.string.license_show), (dialog12, id) -> {
             Cookies.clearCookies();
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/software/agreement.aspx?ID=0")));
+            ShareUtils.openUrl(this, "https://www.geocaching.com/software/agreement.aspx?ID=0");
         });
 
         final AlertDialog alert = dialog.create();
