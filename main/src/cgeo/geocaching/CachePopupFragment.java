@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheListType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
@@ -13,6 +14,7 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -127,6 +129,16 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             assert view != null;
             final TextView titleView = view.findViewById(R.id.actionbar_title);
             titleView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable(), null, null, null);
+            titleView.setOnLongClickListener(v -> {
+                if (cache.isOffline()) {
+                    EmojiUtils.selectEmojiPopup(CachePopupFragment.this.getContext(), cache.getAssignedEmoji(), cache.getType().markerId, newCacheIcon -> {
+                        cache.setAssignedEmoji(newCacheIcon);
+                        titleView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable(), null, null, null);
+                        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                    });
+                }
+                return true;
+            });
 
             final LinearLayout layout = view.findViewById(R.id.details_list);
             details = new CacheDetailsCreator(getActivity(), layout);
