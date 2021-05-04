@@ -434,6 +434,7 @@
     <string name="about_system_write_logcat_type_extended">Εκτεταμένο</string>
     <string name="about_system_write_logcat_success">Αρχείο καταγραφής \"%1$s\" γράφτηκε στο φάκελο \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Σφάλμα εγγραφής αρχείου</string>
+    <string name="about_system_write_infos_downloadmanager">Προβολή λήψεων</string>
     <string name="changelog_github">Λίστα με όλες τις αλλαγές</string>
     <string name="about_nutshellmanual">Online εγχειρίδιο χρήσης</string>
     <string name="about_contributors_carnerodetails">ως ο πατέρας του c:geo</string>
@@ -480,6 +481,8 @@
     <string name="confirm_data_dir_move_title">Μετακίνηση φακέλου δεδομένων geocache;</string>
     <string name="confirm_data_dir_move">Η μετακίνηση δεδομένων των κρυπτών μπορεί να πάρει πολύ χρόνο, ανάλογα με τη συσκευή σας και τον όγκο των δεδομένων.</string>
     <string name="settings_title_basicmembers">Επιλογές για βασικά μέλη</string>
+    <string name="settings_title_navigation">Δρομολόγηση / Πλοήγηση</string>
+    <string name="settings_summary_navigation">Ρυθμίστε τη δρομολόγηση εκτός σύνδεσης, επιλέξτε τις προτιμώμενες μεθόδους πλοήγησης και επιλέξτε εξωτερικές εφαρμογές πλοήγησης.</string>
     <string name="settings_title_system">Σύστημα</string>
     <string name="settings_summary_system">Ρυθμίσεις συστήματος και επιλογές αποσφαλμάτωσης.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
@@ -1183,6 +1186,7 @@
     <string name="waypoint_coordinates">Συντεταγμένες</string>
     <string name="waypoint_cache_coordinates">Συντεταγμένες κρύπτης</string>
     <string name="waypoint_calculate_coordinates">Υπολογιστής συντεταγμένων</string>
+    <string name="waypoint_calculated_coordinates">Υπολογισμένες συντεταγμένες</string>
     <string name="waypoint_custom">Προσαρμογή</string>
     <string name="waypoint_my_coordinates">Οι συντεταγμένες μου</string>
     <string name="waypoint_bearing">Κατεύθυνση σε °</string>
@@ -1796,6 +1800,8 @@
     <string name="individual_route_error_toggling_waypoint">Σφάλμα στην εναλλαγή της ορατότητας του ενδιαμέσου σταθμού</string>
     <string name="individual_route_error_single_waypoint_mode">Μη διαθέσιμο κατά την λειτουργία μοναδικού ενδιάμεσου σταθμού</string>
     <string name="map_sort_individual_route">Ταξινόμηση μεμονωμένης διαδρομής</string>
+    <string name="map_export_individual_route">Εξαγωγή ως διαδρομή</string>
+    <string name="map_export_individual_route_as_track">Εξαγωγή ίχνους</string>
     <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
     <string name="map_autotarget_individual_route">Ορισμός έναρξης διαδρομής ως στόχο</string>
@@ -1907,6 +1913,8 @@
     <string name="mapserver_openandromaps_themes_info">Αναλυτικό θέμα χάρτη, χτισμένο για \"OpenAndroMaps\" χάρτες</string>
     <string name="mapserver_freizeitkarte_info">Λεπτομερείς χάρτες, απαιτούν ένα από τα θέματα χάρτη \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Λεπτομερές θέμα χάρτη, χτισμένο για χάρτες \"Freizeitkarte\"</string>
+    <string name="mapserver_hylly_info">Λεπτομερείς χάρτες για τη Φινλανδία, απαιτούν ένα από τα θέματα χάρτη \"Hylly\"</string>
+    <string name="mapserver_hylly_themes_info">Λεπτομερές θέμα χάρτη, χτισμένο για χάρτες \"Hylly\"</string>
     <string name="brouter_info">Offline υπηρεσία δρομολόγησης</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
