@@ -344,7 +344,7 @@ public class EmojiUtils {
      * @param emoji codepoint of the emoji to display
      * @return string emoji with protection from rendering as black-and-white glyphs
      */
-    public static String getEmojiAsString(final int emoji) {
+    private static String getEmojiAsString(final int emoji) {
         return new String(Character.toChars(emoji)) + new String(Character.toChars(VariationSelectorEmoji));
     }
 
