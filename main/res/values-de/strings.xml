@@ -1917,6 +1917,8 @@
     <string name="mapserver_openandromaps_themes_info">Detailliertes Kartendesign, passend für \"OpenAndroMaps\"-Karten</string>
     <string name="mapserver_freizeitkarte_info">Detaillierte Karten, benötigen eines der \"Freizeitkarte\"-Designs.</string>
     <string name="mapserver_freizeitkarte_themes_info">Detailliertes Kartendesign, passend für \"Freizeitkarte\"-Karten</string>
+    <string name="mapserver_hylly_info">Detaillierte Karten für Finnland, benötigen eines der \"Hylly\" Kartendesigns</string>
+    <string name="mapserver_hylly_themes_info">Detailliertes Kartendesign, passend für \"Hylly\"-Karten</string>
     <string name="brouter_info">Offline Routing-Dienst</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
