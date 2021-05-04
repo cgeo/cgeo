@@ -27,6 +27,9 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     private static final String CACHE_URL = "https://adventurelab.page.link/";
 
+    @NonNull
+    protected static final String GEOCODE_PREFIX = "LC";
+
     /**
      * Pattern for LC codes
      */
@@ -72,7 +75,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public String getNameAbbreviated() {
-        return "LC";
+        return GEOCODE_PREFIX;
     }
 
     @Override

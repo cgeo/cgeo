@@ -155,7 +155,7 @@ final class LCApi {
             final JsonNode location = response.at("/Location");
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
             final String[] segments = firebaseDynamicLink.split("/");
-            final String geocode = "LC" + response.get("Id").asText();
+            final String geocode = LCConnector.GEOCODE_PREFIX + response.get("Id").asText();
             cache.setReliableLatLon(true);
             cache.setGeocode(geocode);
             cache.setCacheId(segments[segments.length - 1]);
@@ -184,7 +184,7 @@ final class LCApi {
             final JsonNode location = response.at("/Location");
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
             final String[] segments = firebaseDynamicLink.split("/");
-            final String geocode = "LC" + response.get("Id").asText();
+            final String geocode = LCConnector.GEOCODE_PREFIX + response.get("Id").asText();
             final String ilink = response.get("KeyImageUrl").asText();
             final String desc = response.get("Description").asText();
             cache.setReliableLatLon(true);
