@@ -155,22 +155,17 @@ final class LCApi {
             final JsonNode location = response.at("/Location");
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
             final String[] segments = firebaseDynamicLink.split("/");
-            final String id = segments[segments.length - 1];
-            final String uuid = response.get("Id").asText();
-            final Boolean isComplete = response.get("IsComplete").asBoolean();
-            final String geocode = "LC" + uuid;
+            final String geocode = "LC" + response.get("Id").asText();
             cache.setReliableLatLon(true);
             cache.setGeocode(geocode);
-            cache.setCacheId(id);
+            cache.setCacheId(segments[segments.length - 1]);
             cache.setName(response.get("Title").asText());
             cache.setCoords(new Geopoint(location.get("Latitude").asText(), location.get("Longitude").asText()));
             cache.setType(CacheType.ADVLAB);
             cache.setDifficulty((float) 1);
             cache.setTerrain((float) 1);
             cache.setSize(CacheSize.getById("virtual"));
-            if (DataStore.isThere(geocode, "", false)) {
-                cache.setFound(isComplete);
-            }
+            // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
@@ -189,15 +184,12 @@ final class LCApi {
             final JsonNode location = response.at("/Location");
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
             final String[] segments = firebaseDynamicLink.split("/");
-            final String id = segments[segments.length - 1];
-            final String uuid = response.get("Id").asText();
-            final Boolean isComplete = response.get("IsComplete").asBoolean();
-            final String geocode = "LC" + uuid;
+            final String geocode = "LC" + response.get("Id").asText();
             final String ilink = response.get("KeyImageUrl").asText();
             final String desc = response.get("Description").asText();
             cache.setReliableLatLon(true);
             cache.setGeocode(geocode);
-            cache.setCacheId(id);
+            cache.setCacheId(segments[segments.length - 1]);
             cache.setName(response.get("Title").asText());
             cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\" </img><p><p>" : "") + desc);
             cache.setCoords(new Geopoint(location.get("Latitude").asText(), location.get("Longitude").asText()));
@@ -205,9 +197,7 @@ final class LCApi {
             cache.setDifficulty((float) 1);
             cache.setTerrain((float) 1);
             cache.setSize(CacheSize.getById("virtual"));
-            if (DataStore.isThere(geocode, "", false)) {
-                cache.setFound(isComplete);
-            }
+            // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
