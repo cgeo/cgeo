@@ -600,7 +600,7 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean supportsRefresh() {
-        return getConnector() instanceof ISearchByGeocode;
+        return getConnector() instanceof ISearchByGeocode && !InternalConnector.getInstance().equals(getConnector());
     }
 
     public boolean supportsWatchList() {
