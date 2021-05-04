@@ -465,7 +465,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (logDate != null && logType != null) {
                 final Uri uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("LUID=" + trackable.getLogGuid()).build();
                 final TextView logView = details.add(R.string.trackable_status, res.getString(R.string.trackable_found, logType.getL10n(), Formatter.formatDate(logDate.getTime()))).right;
-                logView.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, uri)));
+                logView.setOnClickListener(v -> ShareUtils.openUrl(TrackableActivity.this, uri.toString()));
             }
 
             // trackable owner
@@ -581,7 +581,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
                 trackableImage.setClickable(true);
-                trackableImage.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage()))));
+                trackableImage.setOnClickListener(view -> ShareUtils.openUrl(TrackableActivity.this, trackable.getImage()));
 
                 AndroidRxUtils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(trackableImage::setImageDrawable);
 

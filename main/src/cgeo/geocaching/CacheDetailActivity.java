@@ -719,7 +719,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         } else if (menuItem == R.id.menu_checker) {
             ShareUtils.openUrl(this, CheckerUtils.getCheckerUrl(cache), true);
         } else if (menuItem == R.id.menu_challenge_checker) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://project-gc.com/Challenges/" + cache.getGeocode())));
+            ShareUtils.openUrl(this, "https://project-gc.com/Challenges/" + cache.getGeocode());
         } else if (menuItem == R.id.menu_ignore) {
             ignoreCache();
         } else if (menuItem == R.id.menu_extract_waypoints) {
