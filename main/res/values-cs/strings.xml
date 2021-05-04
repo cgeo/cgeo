@@ -1969,6 +1969,8 @@
     <string name="mapserver_openandromaps_themes_info">Podrobný motiv mapy, vytvořený pro mapy „OpenAndroMaps“</string>
     <string name="mapserver_freizeitkarte_info">Podrobné mapy vyžadují jedno z témat map „freizeitkarte“.</string>
     <string name="mapserver_freizeitkarte_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Freizeitkarte“</string>
+    <string name="mapserver_hylly_info">Podrobné mapy Finska vyžadují jeden z motivů mapy „Hylly“</string>
+    <string name="mapserver_hylly_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Hylly“</string>
     <string name="brouter_info">Offline směrovací služba</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
