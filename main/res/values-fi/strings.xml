@@ -1915,6 +1915,8 @@
     <string name="mapserver_openandromaps_themes_info">Yksityiskohtainen karttateema, rakennettu \"OpenAndroMaps\" karttoja varten</string>
     <string name="mapserver_freizeitkarte_info">Yksityiskohtaiset kartat, vaativat yhden \"freizeitkarte\" kartan teemoista.</string>
     <string name="mapserver_freizeitkarte_themes_info">Yksityiskohtainen karttateema, rakennettu \"Freizeitkarte\" karttoja varten</string>
+    <string name="mapserver_hylly_info">Yksityiskohtaiset kartat Suomea varten, vaativat yhden \"Hylly\" karttateemoista</string>
+    <string name="mapserver_hylly_themes_info">Yksityiskohtainen karttateema, rakennettu \"Hylly\" karttoja varten</string>
     <string name="brouter_info">Offline-reitityspalvelu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
