@@ -1,48 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the master branch -->
-  <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
-<h1>Nightly build:</h1>
-
-<h4>Connectors:</h4>
-<ul>
-<li>New: Added connector for Adventure Lab Caches - To activate it go to Settings => Services => Geocaching.com Adventure Lab</li>
-</ul>
-
-<h4>Cache details:</h4>
-<ul>
-<li>New: Long click on waypoint coordinates to copy coordinates</li>
-<li>New: Export and import UDC with empty coordinates</li>
-<li>New: Support changing found state for user-defined caches and Lab Adventures</li>
-<li>New: Parse formula for waypoints in personal cache note</li>
-<li>New: Added indicator for calculated coordinates in waypoint list</li>
-</ul>
-
-<h4>Map:</h4>
-<ul>
-<li>New: Automatic check for updates of downloaded map and theme files (optional)</li>
-<li>New: BRouter: Show info message on missing routing data</li>
-<li>New: Export individual route as track (in addition to \"Export as route\")</li>
-</ul>
-
-<h4>Integrated routing engine:</h4>
-<ul>
-<li>New: Integrated BRouter routing engine - you can now use either external BRouter app or the integrated routing engine</li>
-<li>New: Integrated routing engine supports automatic download of missing routing tiles</li>
-<li>New: Integrated routing engine supports automatic updates of downloaded routing tiles</li>
-<li>New: Integrated routing engine supports selecting different routing profiles</li>
-</ul>
-
-<h4>Other:</h4>
-<ul>
-<li>Change: \"Sort individual route\" automatically closes on saving and checks for unsaved changes on using the back arrow</li>
-<li>Fix: A couple of theming issues, esp. aligned theming of Google Maps and settings to \"rest of app\"</li>
-<li>Fix: Optimize global search: If no trackable with matching tracking code is found, execute online cache name search afterwards</li>
-<li>Fix: Avoid avatar images being displayed too wide and pushing the \"Update / remove authorization\" functionalty aside</li>
-<li>Fix: Fix conversion error in some distance settings for imperial units</li>
-<li>New: Debug view for pending downloads</li>
-</ul>
-
-</div>]]></Data>
+  <string name="changelog_master" translatable="false"><Data></Data>
   </string>
 </resources>

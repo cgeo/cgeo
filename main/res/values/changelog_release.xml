@@ -2,10 +2,45 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>2021.xx.xx:</h1>
+<h1>Beta Version :</h1>
 
-<h4>Other changes:</h4>
+<h4>Geocaching Services:</h4>
 <ul>
+<li>New: Added connector for Adventure Lab Caches - Shows starting coords of Adventure Labs with basic info on map and searches (PM-only). Use the link on the cache details page to start the Adventure Lab app to play the Adventure.</li>
+</ul>
+
+<h4>Cache details:</h4>
+<ul>
+<li>New: Long click on waypoint coordinates to copy coordinates</li>
+<li>New: Export and import UDC with empty coordinates</li>
+<li>New: Support changing found state for user-defined caches and Lab Adventures</li>
+<li>New: Parse formula for waypoints in personal cache note</li>
+<li>New: Added indicator for calculated coordinates in waypoint list</li>
+</ul>
+
+<h4>Map:</h4>
+<ul>
+<li>New: Automatic check for updates of downloaded map and theme files (optional)</li>
+<li>New: BRouter: Show info message on missing routing data</li>
+<li>New: Export individual route as track (in addition to \"Export as route\")</li>
+</ul>
+
+<h4>Integrated routing engine:</h4>
+<ul>
+<li>New: Integrated BRouter routing engine - you can now use either external BRouter app or the integrated routing engine</li>
+<li>New: Integrated routing engine supports automatic download of missing routing tiles</li>
+<li>New: Integrated routing engine supports automatic updates of downloaded routing tiles</li>
+<li>New: Integrated routing engine supports selecting different routing profiles</li>
+</ul>
+
+<h4>Other:</h4>
+<ul>
+<li>Change: \"Sort individual route\" automatically closes on saving and checks for unsaved changes on using the back arrow</li>
+<li>Fix: A couple of theming issues, esp. aligned theming of Google Maps and settings to \"rest of app\"</li>
+<li>Fix: Optimize global search: If no trackable with matching tracking code is found, execute online cache name search afterwards</li>
+<li>Fix: Avoid avatar images being displayed too wide and pushing the \"Update / remove authorization\" functionalty aside</li>
+<li>Fix: Fix conversion error in some distance settings for imperial units</li>
+<li>New: Debug view for pending downloads</li>
 <li>Fix: Directory selected by user not taken over in wizard on older devices</li>
 <li>Fix: Scan for map themes now run as background task on startup</li>
 <li>Fix: Changing map source via settings being recognized after full restart only</li>
@@ -15,74 +50,6 @@
 <li>Fix: Possible crash on map</li>
 </ul>
 
-<h1>2021.04.25:</h1>
-
-<h4>Other changes:</h4>
-<ul>
-<li>Fix: Find count on main screen was lost during usage of c:geo</li>
-<li>Fix: Functions behind click on owner in cache details did not work</li>
-</ul>
-
-<h1>2021.04.24:</h1>
-
-<h4>Other changes:</h4>
-<ul>
-<li>Fix: Annoying repeated login changes on geocaching.com and mitigate other website changes</li>
-<li>Still open: In some ocassions some owner actions are not available. We are working on it!</li>
-</ul>
-
-<h1>2021.04.21:</h1>
-
-<h4>Other changes:</h4>
-<ul>
-<li>Fix: Avoid long startup time if offline theme folder contains to much data</li>
-<li>Fix: Fix rare possible crash on startup</li>
-<li>Fix: Cache type not detected due to website changes</li>
-</ul>
-
-<h1>2021.04.15:</h1>
-
-<h3>
-We had to do extensive changes to the way c:geo gets access to your file system (e.g. for storing data, reading offline maps) to be prepared for requirements on new Android versions.
-After upgrading to this c:geo version a wizard will guide you through the needed changes. Please follow these steps carefully!
-<br>
-Refer to <a href="https://faq.cgeo.org/#SAF">this FAQ entry</a> for more information.
-</h3>
-
-<h4>Map:</h4>
-<ul>
-<li>Change: Merged \"show direction\" and \"Routing mode\" settings (map quick settings popup)</li>
-<li>New: Added OpenAndroMaps to map downloader (for offline map files and map themes). Alternatively you can also use the \"Install others\" links on openandromaps.org website</li>
-<li>New: Added Freizeitkarte to map downloader (for offline map files and map themes)</li>
-<li>New: Multi-threaded rendering for OpenStreetMap maps (optional)</li>
-<li>New: Support for zipped theme files - you do not have to unzip map theme files any longer, just put the zip file into your theme folder</li>
-<li>Fix: Respect \"show circles\" setting when switching from OSM map to Google map</li>
-<li>Fix: Reset circle color in OSM maps on color change in settings</li>
-</ul>
-
-<h4>Cache details:</h4>
-<ul>
-<li>Change: Renamed menu entries to distinguish between "remove cache(s) from this list" and "delete cache(s) from device", depending on currently selected list - no change in behavior</li>
-<li>Change: Scale offline log images on upload only</li>
-<li>New: Swipe down to refresh cache details and trackable list</li>
-<li>New: Long-click on waypoint coordinates to copy them to clipboard</li>
-<li>New: On navigate-drive show final with different coordinates as separate target</li>
-<li>New: Include traditional chinese translation</li>
-</ul>
-
-<h4>Other:</h4>
-<ul>
-<li>New: Set user-defined coords for waypoints on GPX import even when original waypoint has no coords</li>
-<li>New: Add support for cache attributes in locus connector</li>
-<li>New: Export and import UDC with empty coordinates</li>
-<li>New: Add toggle to pocket query list on mainscreen to display all/downloadable pocket queries only</li>
-<li>Fix: Minor bug fixes for the numbers template, when used by the Twitter plug-in</li>
-<li>Fix: Adapt to website change for \"spotted by\" trackables</li>
-<li>Fix: Show actual cache marker in OSM map multi-marker popup</li>
-<li>Fix: Prevent adding duplicate images when using Google Photos</li>
-<li>Fix: Remove \"Cancel\" from list selection to make the other items fit in one row</li>
-<li>Fix: Opening GPX files from some mail clients did not offer c:geo as target app</li>
-</ul>
 </div>]]></Data>
 </string>
 </resources>
