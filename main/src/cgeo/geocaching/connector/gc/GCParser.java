@@ -48,6 +48,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -88,48 +89,6 @@ public final class GCParser {
 
     @NonNull
     private static final ImmutablePair<StatusCode, Geocache> UNKNOWN_PARSE_ERROR = ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
-
-    /**
-     * Observable that fetches a list of pocket queries. Returns a single element (which may be an empty list).
-     * Executes on the network scheduler.
-     */
-    public static final Observable<List<PocketQuery>> searchPocketQueryListObservable = Observable.defer(() -> {
-        final Parameters params = new Parameters();
-
-        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", params);
-        if (StringUtils.isBlank(page)) {
-            Log.e("GCParser.searchPocketQueryList: No data from server");
-            return Observable.just(Collections.<PocketQuery>emptyList());
-        }
-
-        try {
-            final Document document = Jsoup.parse(page);
-            final Map<String, PocketQuery> downloadablePocketQueries = getDownloadablePocketQueries(document);
-            final List<PocketQuery> list = new ArrayList<>(downloadablePocketQueries.values());
-
-            final Elements rows = document.select("#pqRepeater tr:has(td)");
-            for (final Element row : rows) {
-                if (row == rows.last()) {
-                    break; // skip footer
-                }
-                final Element link = row.select("td:eq(3) > a").first();
-                final Uri uri = Uri.parse(link.attr("href"));
-                final String guid = uri.getQueryParameter("guid");
-                if (!downloadablePocketQueries.containsKey(guid)) {
-                    final String name = link.attr("title");
-                    final PocketQuery pocketQuery = new PocketQuery(guid, name, -1, false, 0, -1);
-                    list.add(pocketQuery);
-                }
-            }
-
-            Collections.sort(list, (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName()));
-
-            return Observable.just(list);
-        } catch (final Exception e) {
-            Log.e("GCParser.searchPocketQueryList: error parsing parsing html page", e);
-            return Observable.error(e);
-        }
-    }).subscribeOn(AndroidRxUtils.networkScheduler);
 
     private GCParser() {
         // Utility class
@@ -1069,6 +1028,85 @@ public final class GCParser {
     }
 
     /**
+     * Fetches a list of bookmark lists.
+     *
+     * @return A non-null list (which might be empty) on success. Null on error.
+     */
+    @Nullable
+    public static List<PocketQuery> searchBookmarkLists () {
+        final Parameters params = new Parameters();
+        params.add("skip", "0");
+        params.add("take", "100");
+        params.add("type", "bm");
+
+        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/api/proxy/web/v1/lists", params);
+        if (StringUtils.isBlank(page)) {
+            Log.e("GCParser.searchBookmarkLists: No data from server");
+            return null;
+        }
+
+        try {
+            final JsonNode json = JsonUtils.reader.readTree(page).get("data");
+            final List<PocketQuery> list = new ArrayList<>();
+
+            for (Iterator<JsonNode> it = json.elements(); it.hasNext(); ) {
+                final JsonNode row = it.next();
+
+                final String name = row.get("name").asText();
+                final String guid = row.get("referenceCode").asText();
+                final int count = row.get("count").asInt();
+
+                final PocketQuery pocketQuery = new PocketQuery(guid, name, count, true, 0, -1, true);
+                list.add(pocketQuery);
+            }
+
+            return list;
+        } catch (final Exception e) {
+            Log.e("GCParser.searchBookmarkLists: error parsing parsing html page", e);
+            return null;
+        }
+    }
+
+    /**
+     * Fetches a list of pocket queries.
+     *
+     * @return A non-null list (which might be empty) on success. Null on error.
+     */
+    @Nullable
+    public static List<PocketQuery> searchPocketQueries () {
+        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", null);
+        if (StringUtils.isBlank(page)) {
+            Log.e("GCParser.searchPocketQueryList: No data from server");
+            return null;
+        }
+
+        try {
+            final Document document = Jsoup.parse(page);
+            final Map<String, PocketQuery> downloadablePocketQueries = getDownloadablePocketQueries(document);
+            final List<PocketQuery> list = new ArrayList<>(downloadablePocketQueries.values());
+
+            final Elements rows = document.select("#pqRepeater tr:has(td)");
+            for (final Element row : rows) {
+                if (row == rows.last()) {
+                    break; // skip footer
+                }
+                final Element link = row.select("td:eq(3) > a").first();
+                final Uri uri = Uri.parse(link.attr("href"));
+                final String guid = uri.getQueryParameter("guid");
+                if (!downloadablePocketQueries.containsKey(guid)) {
+                    final String name = link.attr("title");
+                    final PocketQuery pocketQuery = new PocketQuery(guid, name, -1, false, 0, -1, false);
+                    list.add(pocketQuery);
+                }
+            }
+            return list;
+        } catch (final Exception e) {
+            Log.e("GCParser.searchPocketQueryList: error parsing parsing html page", e);
+            return null;
+        }
+    }
+
+    /**
      * Reads the downloadable pocket queries from the uxOfflinePQTable
      *
      * @param document
@@ -1118,7 +1156,7 @@ public final class GCParser {
                 }
             }
 
-            final PocketQuery pocketQuery = new PocketQuery(guid, name, count, true, lastGeneration, daysRemaining);
+            final PocketQuery pocketQuery = new PocketQuery(guid, name, count, true, lastGeneration, daysRemaining, false);
             downloadablePocketQueries.put(guid, pocketQuery);
         }
 

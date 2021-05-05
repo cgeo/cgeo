@@ -8,6 +8,7 @@ import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,6 +23,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -71,16 +73,33 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
             }
         }
 
-        final ProgressDialog waitDialog = ProgressDialog.show(this, getString(R.string.search_pocket_title), getString(R.string.search_pocket_loading), true, true);
+        final ProgressDialog waitDialog = ProgressDialog.show(this, getString(R.string.menu_lists_pocket_queries), getString(R.string.search_pocket_and_bookmark_loading), true, true);
         waitDialog.setCancelable(true);
         loadInBackground(adapter, waitDialog);
     }
 
     private void loadInBackground(final PocketQueryListAdapter adapter, final ProgressDialog waitDialog) {
-        AndroidRxUtils.bindActivity(this, GCParser.searchPocketQueryListObservable).subscribe(pocketQueryList -> {
-            waitDialog.dismiss();
-            allPocketQueries.addAll(pocketQueryList);
-            if (CollectionUtils.isEmpty(pocketQueryList)) {
+        AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
+            final List<PocketQuery> bookmarkLists = GCParser.searchBookmarkLists();
+            final List<PocketQuery> pocketQueries = GCParser.searchPocketQueries();
+
+            if (CollectionUtils.isEmpty(bookmarkLists) && CollectionUtils.isEmpty(pocketQueries)) {
+                return; // do not flood the user with multiple toasts
+            }
+
+            if (bookmarkLists != null) {
+                allPocketQueries.addAll(bookmarkLists);
+            } else {
+                ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.err_read_bookmark_list));
+            }
+            if (pocketQueries != null) {
+                allPocketQueries.addAll(pocketQueries);
+            } else {
+                ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.err_read_pocket_query_list));
+            }
+        }, () -> {
+            Collections.sort(allPocketQueries, (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName()));
+            if (CollectionUtils.isEmpty(allPocketQueries)) {
                 ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.warn_no_pocket_query_found));
                 finish();
             }
@@ -88,9 +107,7 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
             if (!fixed) {
                 switchCompat.setVisibility(View.VISIBLE);
             }
-        }, e -> {
-            ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.err_read_pocket_query_list));
-            finish();
+            waitDialog.dismiss();
         });
     }
 
