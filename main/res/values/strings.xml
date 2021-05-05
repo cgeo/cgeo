@@ -260,6 +260,7 @@
     <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally. Tap here for more information.</string>
     <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Error reading Pocket query list.</string>
+    <string name="err_read_bookmark_list">Error reading bookmark lists.</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
     <string name="info_log_saved">c:geo successfully saved the log.</string>
     <string name="info_log_post_failed">Posting log failed.</string>
@@ -312,7 +313,7 @@
     <string name="menu_history">History</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
-    <string name="menu_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_pocket_queries">Lists / pocket queries</string>
     <string name="menu_scan_description">c:geo can scan geocodes which are printed as QR code. The necessary app is not installed. Do you want to open Google Play to install it?</string>
 
     <!-- main screen -->
@@ -1409,7 +1410,8 @@
     <string name="search_address_result">Found places</string>
     <string name="search_own_caches">Search my caches</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">Loading a list of Pocket Queries</string>
+    <string name="search_bookmark_list">Bookmark list</string>
+    <string name="search_pocket_and_bookmark_loading">Loading a list of Pocket Queries and bookmark lists</string>
 
     <!-- trackable -->
     <string name="trackable">Trackable</string>

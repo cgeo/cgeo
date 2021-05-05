@@ -42,8 +42,6 @@ class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pocketquery_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
         viewHolder.binding.cachelist.setOnClickListener(view1 -> CacheListActivity.startActivityPocket(view1.getContext(), activity.getQueries().get(viewHolder.getAdapterPosition())));
-        viewHolder.binding.cachelist.setVisibility(activity.onlyDownloadable() ? View.GONE : View.VISIBLE);
-
         viewHolder.binding.download.setOnClickListener(v -> {
             final PocketQuery pocketQuery = activity.getQueries().get(viewHolder.getAdapterPosition());
             if (activity.getStartDownload()) {
@@ -60,6 +58,7 @@ class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final PocketQuery pocketQuery = activity.getQueries().get(position);
         holder.binding.download.setVisibility(pocketQuery.isDownloadable() ? View.VISIBLE : View.GONE);
+        holder.binding.cachelist.setVisibility(activity.onlyDownloadable() || pocketQuery.isBookmarkList() ? View.GONE : View.VISIBLE); // Currency, we aren't able to parse bookmark lists without download
         holder.binding.label.setText(pocketQuery.getName());
         holder.binding.info.setText(Formatter.formatPocketQueryInfo(pocketQuery));
     }

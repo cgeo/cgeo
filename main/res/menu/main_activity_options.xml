@@ -19,7 +19,7 @@
     <item
         android:id="@+id/menu_pocket_queries"
         android:icon="@drawable/ic_menu_pocket_query"
-        android:title="@string/menu_pocket_queries"
+        android:title="@string/menu_lists_pocket_queries"
         android:visible="false"
         app:showAsAction="ifRoom">
     </item>

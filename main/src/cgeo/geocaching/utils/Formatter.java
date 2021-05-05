@@ -359,8 +359,12 @@ public final class Formatter {
         final int daysRemaining = pocketQuery.getDaysRemaining();
         if (daysRemaining == 0) {
             infos.add(CgeoApplication.getInstance().getString(R.string.last_day_available));
-        } else {
-            infos.add(daysRemaining > 0 ? CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_remaining, daysRemaining, daysRemaining) : StringUtils.EMPTY);
+        } else if (daysRemaining > 0) {
+            infos.add(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_remaining, daysRemaining, daysRemaining));
+        }
+
+        if (pocketQuery.isBookmarkList()) {
+            infos.add(CgeoApplication.getInstance().getResources().getString(R.string.search_bookmark_list));
         }
 
         return StringUtils.join(infos, SEPARATOR);
