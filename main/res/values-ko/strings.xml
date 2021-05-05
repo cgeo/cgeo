@@ -1891,6 +1891,8 @@
     <string name="mapserver_openandromaps_themes_info">\"OpenAndroMaps\"지도 용으로 제작 된 상세한지도 테마</string>
     <string name="mapserver_freizeitkarte_info">상세한지도는 \"freizeitkarte\"지도 테마 중 하나가 필요합니다.</string>
     <string name="mapserver_freizeitkarte_themes_info">\"Freizeitkarte\"지도 용으로 제작 된 상세한지도 테마</string>
+    <string name="mapserver_hylly_info">핀란드의 상세지도, \"Hylly\"지도 테마 중 하나 필요합니다.</string>
+    <string name="mapserver_hylly_themes_info">\"Hylly\"지도를 위해 제작 된 상세한지도 테마</string>
     <string name="brouter_info">오프라인 라우팅 서비스</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">트레일 역사 지우기</string>
