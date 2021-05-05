@@ -242,6 +242,22 @@ public class SuApi {
         return true;
     }
 
+    public static boolean setIgnoreState(@NonNull final Geocache cache, final boolean ignored) {
+        final Parameters params = new Parameters("cacheID", cache.getCacheId());
+        params.add("ignored", ignored ? "true" : "false");
+
+        try {
+            postRequest(SuConnector.getInstance(), SuApiEndpoint.IGNORE, params);
+        } catch (final SuApiException e) {
+            return false;
+        }
+
+        //cache.setOnWatchlist(ignored);
+        //DataStore.saveChangedCache(cache);
+
+        return true;
+    }
+
     public static boolean setRecommendation(@NonNull final Geocache cache, final boolean status) {
         final Parameters params = new Parameters("cacheID", cache.getCacheId());
         params.add("recommend", status ? "true" : "false");
