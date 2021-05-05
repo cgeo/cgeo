@@ -16,6 +16,7 @@ import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IVotingCapability;
+import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
@@ -41,7 +42,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, IFavoriteCapability, IVotingCapability {
+public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, IFavoriteCapability, IVotingCapability, IgnoreCapability {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -460,6 +461,16 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     private static class Holder {
         @NonNull
         private static final SuConnector INSTANCE = new SuConnector();
+    }
+
+    @Override
+    public boolean canIgnoreCache(@NonNull final Geocache cache) {
+        return true;
+    }
+
+    @Override
+    public void ignoreCache(@NonNull final Geocache cache) {
+        SuApi.setIgnoreState(cache, true);
     }
 
 }

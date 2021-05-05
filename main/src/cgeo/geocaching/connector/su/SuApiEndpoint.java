@@ -13,6 +13,7 @@ enum SuApiEndpoint {
     CACHE_LIST_KEYWORD("/api/list_keyword.php", OAuthLevel.Level1),
     NOTE("/api/note.php", OAuthLevel.Level1),
     MARK("/api/mark.php", OAuthLevel.Level1),
+    IGNORE("/api/ignore.php", OAuthLevel.Level1),
     RECOMMENDATION("/api/recommendation.php", OAuthLevel.Level1),
     VALUE("/api/value.php", OAuthLevel.Level1),
     POST_IMAGE("/api/photo.php", OAuthLevel.Level1),
