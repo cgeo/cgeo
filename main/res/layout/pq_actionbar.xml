@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:gravity="left|center_horizontal"
         style="@style/cgeo.pqActionBarStyle.TitleTextStyle"
-        android:text="@string/menu_pocket_queries" />
+        android:text="@string/menu_lists_pocket_queries" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchAB"
