@@ -1917,6 +1917,8 @@
     <string name="mapserver_openandromaps_themes_info">Detaylı harita teması, \"OpenAndroMaps\" haritaları için yapılmıştır</string>
     <string name="mapserver_freizeitkarte_info">Detaylı haritalar, \"Freizeitkarte\" harita temalarından birini gerektirir.</string>
     <string name="mapserver_freizeitkarte_themes_info">Detaylı harita teması, \"Freizeitkarte\" haritaları için yapılmıştır</string>
+    <string name="mapserver_hylly_info">Finlandiya için detaylı haritalar, \'\'Hylly\'\' harita temalarından biri gereklidir</string>
+    <string name="mapserver_hylly_themes_info">Detaylı harita teması, \"Hylly\" haritaları için yapılmıştır</string>
     <string name="brouter_info">Çevrim dışı rotalama hizmeti</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">İz geçmişini sil</string>
