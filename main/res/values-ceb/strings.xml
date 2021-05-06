@@ -153,7 +153,6 @@
     <string name="err_tb_display">ang c:geo dili maka pakita sa trackable na imong gusto. Kani ba trackable gyud?</string>
     <string name="err_tb_details_open">ang c:geo dili maka abli sa mga detalye sa trackable.</string>
     <string name="err_tb_not_loggable">Kani nga geocache trackable kay dili pwede gamiton.</string>
-    <string name="err_tb_find">ang c:geo dili maka kita sa trackable</string>
     <string name="err_tb_find_that">ang c:geo dili maka kita ni anang trackable.</string>
     <string name="err_waypoint_cache_unknown">ang c:geo wala masayud kung sa asa na cache nimo gusto i-puno ang waypoint.</string>
     <string name="err_waypoint_add_failed">ang c:geo napakyas og pag puno sa imoha nga waypoint.</string>
@@ -271,8 +270,6 @@
     <string name="caches_select_mode_exit">Ang pagpili sa paggawas na paagi</string>
     <string name="caches_select_invert">Baliha ang pilianan</string>
     <string name="caches_nearby">Sa duol</string>
-    <string name="caches_remove_all">Tangtangon tanan</string>
-    <string name="caches_remove_selected">Tangtangon ang napilian</string>
     <string name="caches_delete_events">Papason ang miagi na kalilhokan</string>
     <string name="caches_refresh_selected">Bag-ohon ang napili</string>
     <string name="caches_refresh_all">Bag-ohon tanan</string>
@@ -353,8 +350,6 @@
     <string name="calculate_dataDir">Pagkalkula sa ginamit nga data disk sa Geocache</string>
     <string name="confirm_data_dir_move">Ang pagpabalhin sa data sa geocache kay maggamit ug taas kaayo na oras, naka-depende sa device nimo ug sa kung pila ang data.</string>
     <string name="settings_title_basicmembers">Pilianan para sa sukaranon na mga miyembro</string>
-    <string name="settings_title_navigation">Nabigasyon</string>
-    <string name="settings_summary_navigation">Pili-a ang nauyonan na nabigasyon na mga pamaagi og pili-on ang gawas sa nabigasyon na mga apps.</string>
     <string name="settings_title_system">Ang Sistema</string>
     <string name="settings_title_navigation_menu">Menu sa nabigasyon</string>
     <string name="settings_category_social">Sosyal medya</string>
@@ -1187,7 +1182,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->
