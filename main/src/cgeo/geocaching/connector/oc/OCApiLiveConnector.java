@@ -5,6 +5,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
+import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
@@ -12,7 +13,6 @@ import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
-import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -39,7 +39,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder, ISearchByFilter, WatchListCapability, IgnoreCapability, PersonalNoteCapability {
+public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder, ISearchByFilter, WatchListCapability, IIgnoreCapability, PersonalNoteCapability {
 
     private final String cS;
     private final int isActivePrefKeyId;
@@ -240,12 +240,22 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public void ignoreCache(@NonNull final Geocache cache) {
+    public boolean canRemoveFromIgnoreCache(@NonNull final Geocache cache) {
+        return false;
+    }
+
+    @Override
+    public void addToIgnorelist(@NonNull final Geocache cache) {
         final boolean ignored = OkapiClient.setIgnored(cache, this);
 
         if (ignored) {
             DataStore.saveChangedCache(cache);
         }
+    }
+
+    @Override
+    public void removeFromIgnorelist(@NonNull final Geocache cache) {
+        // Not supported
     }
 
 }

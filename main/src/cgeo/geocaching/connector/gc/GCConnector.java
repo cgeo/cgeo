@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
+import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
@@ -18,7 +19,6 @@ import cgeo.geocaching.connector.capability.ISearchByNextPage;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IVotingCapability;
-import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.Smiley;
@@ -60,7 +60,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability {
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
@@ -589,8 +589,18 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public void ignoreCache(@NonNull final Geocache cache) {
+    public boolean canRemoveFromIgnoreCache(@NonNull final Geocache cache) {
+        return false;
+    }
+
+    @Override
+    public void addToIgnorelist(@NonNull final Geocache cache) {
         GCParser.ignoreCache(cache);
+    }
+
+    @Override
+    public void removeFromIgnorelist(@NonNull final Geocache cache) {
+        // Not supported for gc.com
     }
 
     @Override
