@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">高速缓存</string>
     <string name="detail">详细资料</string>
@@ -32,6 +31,7 @@
     <string name="gps">GPS冒險博覽會</string>
     <string name="block">地理藏寶總部街頭聚會</string>
     <string name="locationless">無固定座標的地理藏寶</string>
+    <string name="advlab">冒險型實驗寶藏</string>
     <string name="userdefined">玩家自訂的寶藏</string>
     <string name="unknown">未知类型</string>
     <!-- cache sizes -->
@@ -153,8 +153,6 @@
     <string name="log_problem_archive_label">此宝应该被存档</string>
     <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
     <string name="log_image_scale_option_noscaling">原圖，不縮圖。</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d 像素</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d 像素</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">照片</string>
     <!-- translation -->
@@ -167,6 +165,7 @@
     <string name="err_captcha">未知的錯誤。請參考<a href="https://www.cgeo.org/faq#login-failed">FAQ</a>。</string>
     <string name="err_server">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_ec">無法連線到Extremcaching.com。此網站或者您的網際網路連線可能有問題</string>
+    <string name="err_server_lc">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_su">无法联系Geocaching.su。网站可能已经关闭或您的互联网连接无法正常运行。</string>
     <string name="err_server_gk">無法連線到GeoKrety.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_login">沒有以儲存的登入資訊</string>
@@ -207,7 +206,6 @@
     <string name="err_tb_display">c:geo無法顯示您要的旅行蟲資訊，它真的是旅行蟲/地理錢幣嗎</string>
     <string name="err_tb_details_open">c:geo 無法讀取旅行從的詳細資訊</string>
     <string name="err_tb_not_loggable">這個旅行蟲或地理錢幣無法登錄到系統</string>
-    <string name="err_tb_find">無法找到旅行蟲或地理錢幣</string>
     <string name="err_tb_find_that">無法找到那個旅行蟲或地理錢幣</string>
     <string name="err_waypoint_cache_unknown">哪個地理藏寶要加入航點</string>
     <string name="err_waypoint_add_failed">c:geo無法增加您的航點</string>
@@ -264,6 +262,7 @@
     <string name="err_trackable_log_not_anonymous">不可在匿名狀態下從 c:geo 登錄到 %1$s，您是否要從 %2$s 來打開設定檔以便填寫資料?</string>
     <string name="err_trackable_no_preference_activity">抱歉，無法找到適合的螢幕。</string>
     <string name="confirm_unsaved_changes_title">未保存更改</string>
+    <string name="confirm_discard_changes">放棄所有未儲存的變更。</string>
     <string name="confirm_discard_wp_changes">丢弃未保存的航点更改？</string>
     <string name="err_request_popup_info">c:geo获取cache信息失败</string>
     <string name="warn_log_load_additional_data">c:geo 無法為登錄載入其它資料(旅行蟲 / 最愛點)</string>
@@ -279,7 +278,6 @@
     <string name="loc_fused">Fused</string>
     <string name="loc_low_power">低耗電</string>
     <string name="loc_home">家裡的座標</string>
-    <string name="loc_gps">全球定位系統</string>
     <string name="loc_sat">六</string>
     <string name="loc_trying">找尋位置中</string>
     <string name="loc_no_addr">未知地址</string>
@@ -290,6 +288,9 @@
     <string name="menu_helpers">客户端程序</string>
     <string name="menu_settings">设置</string>
     <string name="menu_backup">备份 / 还原</string>
+    <string name="menu_update">Update（更新）</string>
+    <string name="menu_update_routingdata">路線規劃資料</string>
+    <string name="menu_update_mapdata">地圖資料</string>
     <string name="menu_history">历史</string>
     <string name="menu_filter">滤镜</string>
     <string name="menu_scan_geo">掃描geocode</string>
@@ -341,8 +342,6 @@
     <string name="caches_select_mode_exit">離開選擇模式</string>
     <string name="caches_select_invert">反轉所選區域</string>
     <string name="caches_nearby">鄰近的</string>
-    <string name="caches_remove_all">移除全部</string>
-    <string name="caches_remove_selected">刪除已選擇項目</string>
     <string name="caches_remove_all_completely">在裝置上刪除全部</string>
     <string name="caches_remove_selected_completely">在裝置上刪除所選擇的</string>
     <string name="caches_delete_events">刪除過期的聚會</string>
@@ -466,7 +465,6 @@
     <string name="settings_title_waypoints">航點</string>
     <string name="settings_title_map_content">地图内容</string>
     <string name="settings_title_map_behavior">地圖特性</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">地理藏寶目錄</string>
     <string name="settings_title_data_dir_usage">地理藏寶目錄(已使用%1$s)</string>
     <string name="calculate_dataDir_title">Geocache 数据使用情况</string>
@@ -475,8 +473,6 @@
     <string name="confirm_data_dir_move_title">移動地理藏寶目錄</string>
     <string name="confirm_data_dir_move">移动 geocache 数据可能需要很长时间, 具体取决于您的设备和数据量。</string>
     <string name="settings_title_basicmembers">一般會員的選擇項目</string>
-    <string name="settings_title_navigation">導航</string>
-    <string name="settings_summary_navigation">選擇想要使用的導航方法或者是使用其他的導航app。</string>
     <string name="settings_title_system">系統</string>
     <string name="settings_summary_system">系統的特殊設定和除錯選擇。</string>
     <string name="settings_title_navigation_menu">導航功能表 (Automatic Translation)</string>
@@ -545,7 +541,6 @@
     <string name="init_signature_template_name">名稱</string>
     <string name="init_signature_template_difficulty">困難度</string>
     <string name="init_signature_template_terrain">地域</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">日誌文字</string>
     <string name="init_signature_template_size">大小</string>
     <string name="init_signature_template_type">類型</string>
@@ -572,7 +567,6 @@
     <string name="init_zoomincludingwaypoints">放大(包含航點)</string>
     <string name="init_zoomincludingwaypoints_description">當在地圖顯示單一個cache時，需要校準地圖大小來顯示其他航點嗎?</string>
     <string name="init_brouterThreshold">計算路線</string>
-    <string name="init_brouterThreshold_description">Brouter Helpert程式（如果已安裝）將計算路線的最大距離。</string>
     <string name="init_brouterShowBothDistances">顯示直線距離</string>
     <string name="brouter_recalculating">在背景重新計算路線</string>
     <string name="init_summary_brouterShowBothDistances">如果路線啟動了，除了計算出的路線長度外，還會顯示直線距離。</string>
@@ -763,9 +757,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google map</string>
     <string name="map_source_google_satellite">Google map (衛星)</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">單車開放街圖</string>
     <string name="map_source_osm_offline">離線</string>
     <string name="init_sendToCgeo">傳送到c:geo</string>
     <string name="settings_info_send2cgeo_title">send2cgeo的資訊</string>
@@ -801,7 +792,6 @@
     <string name="persistablefolder_base">底座</string>
     <string name="persistablefolder_offline_maps">離線地圖</string>
     <string name="persistablefolder_offline_maps_themes">地圖主題：</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">備份</string>
     <string name="persistablefolder_logfiles">紀錄檔</string>
     <string name="persistablefolder_fieldnotes">現場備註</string>
@@ -946,7 +936,6 @@
     <string name="cache_menu_navigation_bike">導航(單車)</string>
     <string name="cache_menu_radar">雷達</string>
     <string name="cache_menu_map">地圖</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">其他外部 app</string>
     <string name="cache_menu_streetview">街景</string>
     <string name="cache_menu_browser">在瀏覽器中開啟</string>
@@ -1242,7 +1231,6 @@
     <string name="export_fieldnotes_upload">上傳到geocaching.com</string>
     <string name="export_fieldnotes_uploading">上傳中…</string>
     <string name="export_fieldnotes_upload_success">成功上傳到geocaching.com</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_confirm_title">正在匯出%1$s</string>
     <string name="export_persnotes">個人筆記</string>
     <string name="export_persnotes_uploading">上傳個人筆記 %1$d</string>
@@ -1509,8 +1497,6 @@
     <string name="event_fail">添加 uid 为“%1”的事件到日历失败</string>
     <string name="init_low_disk_space">磁盘空间过低</string>
     <string name="init_confirm_debug">c:geo正在除錯模式中</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">關閉app</string>
     <string name="ask_again">下次詢問我</string>
@@ -1528,8 +1514,6 @@
     <!-- individual routes -->
     <string name="individual_route_added">新增至路徑</string>
     <string name="individual_route_removed">從航線中移除</string>
-    <string name="map_autotarget_individual_route">自動設定為目標</string>
-    <string name="map_disable_autotarget_individual_route">關閉\"自動設定為目標\"</string>
     <string name="map_clear_individual_route_confirm">要從個別航線裡移除航點嗎</string>
     <string name="save_sorted_route">儲存</string>
     <string name="center_on_route">在航線置中</string>
@@ -1560,14 +1544,11 @@
     <string name="add_setting">增加設定</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_title">開啟本機檔案</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">接收地圖檔案</string>
-    <string name="receivemapfile_error">接收檔案時發生錯誤</string>
-    <string name="receivemapfile_alreadyexists">檔名重複。要複寫舊檔案還是另存新黨。</string>
-    <string name="receivemapfile_option_overwrite">複寫</string>
-    <string name="receivemapfile_option_differentname">不同的名稱</string>
-    <string name="receivemapfile_kb_copied">已複製%dKB</string>
-    <string name="receivemapfile_cancelled">地圖檔案傳輸已取消。</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">檔名重複。要複寫舊檔案還是另存新黨。</string>
+    <string name="receivedownload_option_overwrite">複寫</string>
+    <string name="receivedownload_option_differentname">不同的名稱</string>
+    <string name="receivedownload_kb_copied">已複製%dKB</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">下載離線地圖</string>
     <string name="downloadmap_choose">選擇地圖</string>
