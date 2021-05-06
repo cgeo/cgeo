@@ -159,7 +159,6 @@
     <string name="err_tb_display">c:geo tidak dapat menampilkan pelacak yang anda inginkan. Apakah itu benar-benar dapat dilacak?</string>
     <string name="err_tb_details_open">c: geo tidak bisa membuka rincian yang dapat dilacak.</string>
     <string name="err_tb_not_loggable">Ini hanya bisa dilacak tidak bisa ditukar.</string>
-    <string name="err_tb_find">c:geo tidak bisa menemukan yang dilacak</string>
     <string name="err_tb_find_that">c: geo tidak dapat menemukan yang bisa dilacak.</string>
     <string name="err_waypoint_cache_unknown">c:geo tidak tahu ke cache mana titik arah ingin anda tambahkan.</string>
     <string name="err_waypoint_add_failed">c:geo gagal untuk menambahkan titik arah anda.</string>
@@ -276,8 +275,6 @@
     <string name="caches_select_mode_exit">Pilih mode keluar</string>
     <string name="caches_select_invert">Balikkan seleksi</string>
     <string name="caches_nearby">Dekat</string>
-    <string name="caches_remove_all">Hapus semua</string>
-    <string name="caches_remove_selected">Hapus yang telah dipilih</string>
     <string name="caches_delete_events">Hapus acara sebelumnya</string>
     <string name="caches_refresh_selected">Segarkan yang telah dipilih</string>
     <string name="caches_refresh_all">Segarkan semua</string>
@@ -361,8 +358,6 @@
     <string name="settings_data_dir_item">%1$s (%2$s gratis)</string>
     <string name="confirm_data_dir_move">Memindahkan data geocache mungkin memerlukan waktu yang sangat lama, tergantung pada perangkat dan jumlah data anda.</string>
     <string name="settings_title_basicmembers">Pilihan untuk Anggota Dasar</string>
-    <string name="settings_title_navigation">Navigasi</string>
-    <string name="settings_summary_navigation">Memilih metode navigasi yang lebih disukai dan pilih aplikasi navigasi eksternal.</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Menu Navigasi</string>
     <string name="settings_category_browser">Peramban</string>
@@ -1203,7 +1198,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->
