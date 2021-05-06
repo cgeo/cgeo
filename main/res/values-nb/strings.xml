@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detaljer</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">Cachen bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacheren rapporterte at geocachen bør arkiveres. En frivillig kontrollør blir varslet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nSkalert/Komprimert:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Bilde</string>
     <!-- translation -->
@@ -207,7 +204,7 @@
     <string name="err_tb_display">\"Beklager, c:geo klarte ikke å finne den sporbare du etterspurte. Er det virkelig en sporbar (trackable)?</string>
     <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne detaljerene til den sporbare.</string>
     <string name="err_tb_not_loggable">Denne sporbare er ikke mulig å logge.</string>
-    <string name="err_tb_find">Beklager, c:geo klarte ikke å finne noen sporbare</string>
+    <string name="err_tb_not_found">c:geo finner ikke sporbar %s.</string>
     <string name="err_tb_find_that">Beklager, c:geo finner ikke den sporbare.</string>
     <string name="err_waypoint_cache_unknown">c:geo vet ikke hvilken cache du vil legge til et veipunkt for.</string>
     <string name="err_waypoint_add_failed">c:geo kan ikke legge til veipunktet.</string>
@@ -279,7 +276,6 @@
     <string name="loc_fused">Kombinert</string>
     <string name="loc_low_power">Lavt strømforbruk</string>
     <string name="loc_home">Hjemkoordinater</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Satellitter</string>
     <string name="loc_trying">Prøver å lokalisere</string>
     <string name="loc_no_addr">Ukjent adresse</string>
@@ -342,8 +338,6 @@
     <string name="caches_select_mode_exit">Avslutt velge-modus</string>
     <string name="caches_select_invert">Inverter merking</string>
     <string name="caches_nearby">I nærheten</string>
-    <string name="caches_remove_all">Fjern alle</string>
-    <string name="caches_remove_selected">Fjern valgte</string>
     <string name="caches_remove_all_completely">Slett alle fra enheten</string>
     <string name="caches_remove_selected_completely">Slett valgte fra enheten</string>
     <string name="caches_delete_events">Slett gamle eventer</string>
@@ -462,11 +456,12 @@
     <string name="settings_title_map">Vis på kartet</string>
     <string name="settings_summary_map">Angi kartkilde, innstillinger for lokalt lagrede kart og kartdetaljer.</string>
     <string name="settings_title_map_data">Kartdata</string>
+    <string name="settings_title_offline_routing">Frakoblet ruting</string>
+    <string name="settings_summary_offline_routing">Frakoblet ruting er tilgjengelig hvis enten hjelper-appen \"BRouter\" er installert og konfigurert, eller intern ruting er aktivert.</string>
     <string name="settings_title_map_rotation">Kartrotasjon (Google Maps)</string>
     <string name="settings_title_waypoints">Veipunkter</string>
     <string name="settings_title_map_content">Kartinnhold</string>
     <string name="settings_title_map_behavior">Kartatferd</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Mappe for geocache-data</string>
     <string name="settings_title_data_dir_usage">Mappen for geocache-data (%1$s brukt)</string>
     <string name="calculate_dataDir_title">Lagringsplass brukt på geocache-data</string>
@@ -475,8 +470,6 @@
     <string name="confirm_data_dir_move_title">Flytte geocache data-mappen?</string>
     <string name="confirm_data_dir_move">Flytting av geocaching-data kan ta lang tid, avhengig av enheten din og mengden data.</string>
     <string name="settings_title_basicmembers">Alternativer for Basic-medlemmer</string>
-    <string name="settings_title_navigation">Navigasjon</string>
-    <string name="settings_summary_navigation">Velg navigasjonsmetode og velg eksterne navigasjonsapper.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemspesifikke instillinger og debugging alternativer.</string>
     <string name="settings_title_navigation_menu">Navigasjonsmenyen</string>
@@ -545,7 +538,6 @@
     <string name="init_signature_template_name">Navn</string>
     <string name="init_signature_template_difficulty">Vankelighetsgrad</string>
     <string name="init_signature_template_terrain">Terrenggrad</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Loggtekst</string>
     <string name="init_signature_template_size">Størrelse</string>
     <string name="init_signature_template_type">Type</string>
@@ -572,10 +564,11 @@
     <string name="init_zoomincludingwaypoints">Kartutsnitt inkluderer veipunkter</string>
     <string name="init_zoomincludingwaypoints_description">Ved visning av en enkelt cache: Skal kartutsnittet justeres slik at alle veipunktene blir synlig?</string>
     <string name="init_brouterThreshold">Beregn rute</string>
-    <string name="init_brouterThreshold_description">Maksimal avstand til hvor BRouter hjelper-app (hvis den er installert) vil kalkulere rute.</string>
     <string name="init_brouterShowBothDistances">Vis distanse i rett linje</string>
+    <string name="init_brouterAutoTileDownloads_description">Tilby deg automatisk til å laste ned manglende rutingsflis-data.</string>
     <string name="brouter_recalculating">Beregner rute i bakgrunnen…</string>
     <string name="init_summary_brouterShowBothDistances">Om routing er aktiv: Vis distanse i rett linje i tillegg til den utregnede rutelengden.</string>
+    <string name="init_useInternalRouting">Bruk intern ruting</string>
     <string name="init_bigSmileysOnMap">Store ikoner for loggede cacher</string>
     <string name="init_summary_bigSmileysOnMap">Hvis aktivert, vises store uttrykksikoner for loggede cacher på kartet i stedet for ikon av cachetype (krever omstart).</string>
     <string name="init_disabled">Ekskluder deaktiverte cacher</string>
@@ -662,6 +655,7 @@
     <string name="init_local_file_system">Lokalt filsystem</string>
     <string name="init_base_directory_description">Grunnmappen for offentlige lokale data</string>
     <string name="init_map_directory_description">Mappe for offline-kart</string>
+    <string name="init_brouter_directory_description">Mapper med BRouter rutingsdata</string>
     <string name="init_gpx_importexportdir">GPX-mappe</string>
     <string name="init_dataDir">Velg mappe for data</string>
     <string name="init_dataDir_note">Du kan velge å lagre eksterne data for geocacher(spoilere, logbilder o. l.) på din enhets eksterne minne(emulert eller SD-kort, avhengig av din enhet).</string>
@@ -790,9 +784,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: kart</string>
     <string name="map_source_google_satellite">Google: satellittbilder</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">SyklOSM</string>
     <string name="map_source_osm_offline">Lagret lokalt</string>
     <string name="map_source_osm_offline_combined">Kombinert (Lagret lokalt)</string>
     <string name="map_source_attribution_dialog_title">Kart-rettigheter</string>
@@ -834,11 +825,12 @@
     <string name="persistablefolder_base">Grunnlag</string>
     <string name="persistablefolder_offline_maps">Offline-kart</string>
     <string name="persistablefolder_offline_maps_themes">Kart-temaer</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Sikkerhetskopi</string>
     <string name="persistablefolder_logfiles">Loggfiler</string>
     <string name="persistablefolder_fieldnotes">Feltnotater</string>
     <string name="persistablefolder_spoilerimages">Spoiler-bilder</string>
+    <string name="persistablefolder_routingbase">Ruting</string>
+    <string name="persistablefolder_routingtiles">Ruting data</string>
     <string name="persistableuri_track">Sporingsfil</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s ferdig</string>
@@ -1013,7 +1005,6 @@
     <string name="cache_menu_sygic_drive">Sygic (Kjøre)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Vis på kartet</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andre eksterne apper</string>
     <string name="cache_menu_streetview">Gatevisning</string>
     <string name="cache_menu_browser">Åpne i nettleseren</string>
@@ -1351,7 +1342,6 @@
     <string name="export_fieldnotes_upload_success">Opplasting til geocaching.com er fullført</string>
     <string name="export_fieldnotes_onlynew">Bare siden forrige eksportering</string>
     <string name="export_fieldnotes_creating">Lager feltnotater…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX-filen blir eksportert til %1$s med dato og tidspunkt som filnavn.</string>
     <string name="export_confirm_title">Eksporterer %1$s</string>
     <string name="export_confirm_message">Bane: %1$s\nFilnavn: %2$s</string>
@@ -1726,8 +1716,6 @@
     <string name="init_low_disk_space">Lite lagringsplass</string>
     <string name="init_confirm_debug">c:geo kjører i feilsøkingsmodus!</string>
     <string name="list_confirm_debug_message">Feilsøkingsmodus vil gjøre c:geo ustabil. Vil du deaktivere feilsøkingsmodusen?</string>
-    <string name="waypoint_latitude_null">N/S--°--.---</string>
-    <string name="waypoint_longitude_null">Ø/V--°--.---</string>
     <!-- permission handling -->
     <string name="close_app">Lukk app</string>
     <string name="ask_again">Spør igjen</string>
@@ -1755,11 +1743,8 @@
     <string name="individual_route_error_toggling_waypoint">problem med å veksle veipunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgjengelig i en-veipunktsmodus</string>
     <string name="map_sort_individual_route">Sorter individuell rute</string>
-    <string name="map_export_individual_route">Eksporter egendefinert rute</string>
     <string name="map_load_individual_route">Last inn individuell rute</string>
     <string name="map_load_individual_route_confirm">Overskrive eksisterende rute?</string>
-    <string name="map_autotarget_individual_route">Sett som mål automatisk</string>
-    <string name="map_disable_autotarget_individual_route">Deaktivert \"Sett som mål automatisk\"</string>
     <string name="map_clear_manual_targets">Slett manuelle mål</string>
     <string name="map_manual_targets_cleared">Manuelle mål slettet</string>
     <string name="map_clear_individual_route">Slett individuell rute</string>
@@ -1823,25 +1808,17 @@
     <string name="localfile_intenttitle">c:geo lokal filbehandler</string>
     <string name="localfile_title">Åpne en lokal fil</string>
     <string name="localfile_cannot_handle">Feil under lesing av fil eller c:geo kan ikke åpne denne filtypen.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Motta kartfil</string>
-    <string name="receivemapfile_success">Kartfil ble mottatt som \"%s\" og lagret til kartmappen</string>
-    <string name="receivemapfile_error">Feil under mottak av kartfil</string>
-    <string name="receivemapfile_error_io_exception">I/O feil under mottak av kartfil. Er det skrivetilgang til kartmappen \"%s\"?</string>
-    <string name="receivemapfile_error_filenotfound_exception">\"Fil ikke funnet\"-feil under henting av kartfil.</string>
-    <string name="receivemapfile_alreadyexists">En fil med dette navnet eksisterer allerede. Vil du overskrive den eksisterende filen eller eller lagre den nye filen under et annet navn?</string>
-    <string name="receivemapfile_option_overwrite">Overskriv</string>
-    <string name="receivemapfile_option_differentname">Annet navn</string>
-    <string name="receivemapfile_kb_copied">%d kB kopiert</string>
-    <string name="receivemapfile_cancelled">Kartfiloverføring avbrutt</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">En fil med dette navnet eksisterer allerede. Vil du overskrive den eksisterende filen eller eller lagre den nye filen under et annet navn?</string>
+    <string name="receivedownload_option_overwrite">Overskriv</string>
+    <string name="receivedownload_option_differentname">Annet navn</string>
+    <string name="receivedownload_kb_copied">%d kB kopiert</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Last ned offlinekart</string>
     <string name="downloadmap_choose">Velg kart</string>
     <string name="downloadmap_filename">Laster ned %s</string>
-    <string name="downloadmanager_not_available">Kartfil kan ikke lastes ned, systemnedlastingsbehandling er ikke tilgjengelig</string>
     <string name="download_started">Nedlasting startet i bakgrunnen</string>
     <string name="downloadmap_allow_metered_network">Tillat nedlasting over nettverk med forbruksmåling (f.eks. mobilnettverk)</string>
-    <string name="downloadmap_confirmation">Last ned kart \"%1$s\"?\n\nDet kan ta litt tid og kan gi betydelige kostnader, avhengig av nettverkstilkoblingen.\n\nStørrelse info: %2$s</string>
     <string name="downloadmap_handling">Nedlastningen vil bli håndtert av systemets nedlastningshåndterer i bakgrunnen. Du bør se et varsel så snart nedlastingen har startet (noe som kan ta en stund).</string>
     <string name="button_continue">Fortsett</string>
     <string name="downloadmap_onedirup">(et nivå opp)</string>
@@ -1874,9 +1851,6 @@
     <string name="wizard_permissions_title">Angi app-tillatelser</string>
     <string name="wizard_permissions_intro">c:geo trenger noen tillatelser på din enhet for å fungere.\nJeg vil gi flere detaljer i neste trinn.</string>
     <string name="wizard_permissions_folder_title">Velg mappe: %s</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo trenger en lokal mappe for å lagre offline-kartfiler. Velg eller opprett en mappe i neste trinn.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo trenger en lokal mappe for å lagre temafiler på offline kart. Velg eller opprett en slik mappe i det neste steget.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo trenger en lokal mappe for å lagre GPX-filer (f.eks for å importere / eksportere cacher eller spor). Velg eller opprett en mappe i neste trinn.</string>
     <string name="wizard_platforms_title">Konfigurer tjenester</string>
     <string name="wizard_platforms_intro">For å finne geocacher i c:geo trenger du en konto hos en geocaching-tjeneste som støttes av c:geo.\nVelg ønsket tjeneste nedenfor for enten for å logge inn med din eksisterende konto eller opprette en ny konto.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
