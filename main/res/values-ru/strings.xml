@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Тайник</string>
     <string name="detail">Детали</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">Тайник должен быть заархивирован</string>
     <string name="log_problem_archive_text">Этот пользователь сообщил, что тайник должен быть заархивирован. Сообщество добровольцев было уведомлено.</string>
     <string name="log_image_scale_option_noscaling">Без масштабирования</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Фотография</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Перевести на %s</string>
@@ -205,7 +202,6 @@
     <string name="err_tb_display">Не удалось отобразить искомый трекабл. Это точно трекабл?</string>
     <string name="err_tb_details_open">Не удалось получить информацию о трекабле.</string>
     <string name="err_tb_not_loggable">Этот трекабл не поддерживает записи.</string>
-    <string name="err_tb_find">Не удается найти трекабл</string>
     <string name="err_tb_find_that">Не удается найти данный трекабл.</string>
     <string name="err_waypoint_cache_unknown">c:geo не знает, к какому тайнику вы хотите добавить точку.</string>
     <string name="err_waypoint_add_failed">c:geo не удалось добавить вашу точку.</string>
@@ -276,7 +272,6 @@
     <string name="loc_fused">Смешанное</string>
     <string name="loc_low_power">Энергосбережение</string>
     <string name="loc_home">Домашние координаты</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Спутники</string>
     <string name="loc_trying">Пытаемся определить местоположение</string>
     <string name="loc_no_addr">Неизвестный адрес</string>
@@ -341,8 +336,6 @@
     <string name="caches_select_mode_exit">Выйти из режима выделения</string>
     <string name="caches_select_invert">Инвертировать выделение</string>
     <string name="caches_nearby">Поблизости</string>
-    <string name="caches_remove_all">Удалить все</string>
-    <string name="caches_remove_selected">Удалить выбранные</string>
     <string name="caches_remove_all_completely">Удалить все с устройства</string>
     <string name="caches_remove_selected_completely">Удалить выбранное с устройства</string>
     <string name="caches_delete_events">Удалить прошедшие события</string>
@@ -462,7 +455,6 @@
     <string name="settings_title_waypoints">Путевые точки</string>
     <string name="settings_title_map_content">Содержания карты</string>
     <string name="settings_title_map_behavior">Поведение карты</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Папка данных тайников</string>
     <string name="settings_title_data_dir_usage">Папка данных тайников (сейчас %1$s)</string>
     <string name="calculate_dataDir_title">Использование данных тайниками</string>
@@ -471,8 +463,6 @@
     <string name="confirm_data_dir_move_title">Переместить папку данных тайников?</string>
     <string name="confirm_data_dir_move">Перемещение данных тайников может занять долгое время в зависимости от вашего устройства и количества данных.</string>
     <string name="settings_title_basicmembers">Опции для Базовых участников</string>
-    <string name="settings_title_navigation">Навигация</string>
-    <string name="settings_summary_navigation">Выберите предпочитаемые способы навигации и внешние приложения-навигаторы.</string>
     <string name="settings_title_system">Система</string>
     <string name="settings_summary_system">Системные настройки и отладочные опции.</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
@@ -540,7 +530,6 @@
     <string name="init_signature_template_name">Название тайника</string>
     <string name="init_signature_template_difficulty">Сложность</string>
     <string name="init_signature_template_terrain">Местность</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Текст записи</string>
     <string name="init_signature_template_size">Размер</string>
     <string name="init_signature_template_type">Тип</string>
@@ -769,9 +758,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: карта</string>
     <string name="map_source_google_satellite">Google: спутник</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Оффлайн</string>
     <string name="map_source_osm_offline_combined">Совмещенные (оффлайн)</string>
     <string name="map_source_attribution_dialog_title">Источник</string>
@@ -808,7 +794,6 @@
     <string name="persistablefolder_base">Основная</string>
     <string name="persistablefolder_offline_maps">Оффлайн карты</string>
     <string name="persistablefolder_offline_maps_themes">Темы карты</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Резервное копирование</string>
     <string name="persistablefolder_logfiles">Логи</string>
     <string name="persistablefolder_fieldnotes">Полевые заметки</string>
@@ -996,7 +981,6 @@
     <string name="cache_menu_sygic_drive">Sygic (за рулем)</string>
     <string name="cache_menu_radar">Радар</string>
     <string name="cache_menu_map">Карта</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Другие внешние приложения</string>
     <string name="cache_menu_streetview">Просмотр улиц</string>
     <string name="cache_menu_browser">Открыть в браузере</string>
@@ -1197,8 +1181,6 @@
     <string name="map_showwp_parking">Точки парковки</string>
     <string name="map_showwp_visited">Посещенные точки</string>
     <string name="map_show_track">Показать GPX трек/маршрут</string>
-    <string name="init_renderthemefolder_synctolocal">Синхронизировать темы в защищенную папку приложения</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Эта опция может улучшить производительность открытия карты за счет свободного места на вашем устройстве.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Включить синхронизацию папок темы</string>
     <string name="init_hidewp">Скрыть точки</string>
     <string name="init_summary_hidewp_original">Скрыть оригинальные точки на карте</string>
@@ -1334,7 +1316,6 @@
     <string name="export_fieldnotes_upload_success">Успешно загружено на geocaching.com</string>
     <string name="export_fieldnotes_onlynew">Только с момента последнего экспорта</string>
     <string name="export_fieldnotes_creating">Создание полевых заметок…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX файл будет экспортирован в %1$s в файл с текущей датой и временем в имени.</string>
     <string name="export_confirm_title">Экспорт %1$s</string>
     <string name="export_confirm_message">В: %1$s\nИмя файла: %2$s</string>
@@ -1718,8 +1699,6 @@
     <string name="init_low_disk_space">Кончается место для хранения</string>
     <string name="init_confirm_debug">c:geo запущено в режиме отладки!</string>
     <string name="list_confirm_debug_message">Режим отладки может вызвать нестабильное поведение. Вы действительно хотите активировать режим отладки?</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Закрыть приложение</string>
     <string name="ask_again">Спросить снова</string>
@@ -1747,7 +1726,6 @@
     <string name="individual_route_error_toggling_waypoint">ошибка включения точки</string>
     <string name="individual_route_error_single_waypoint_mode">Недоступно в режиме одной точки</string>
     <string name="map_sort_individual_route">Сортировать личный маршрут</string>
-    <string name="map_export_individual_route">Экспорт персонального маршрута</string>
     <string name="map_load_individual_route">Загрузить персональный маршрут</string>
     <string name="map_load_individual_route_confirm">Перезаписать текущий маршрут?</string>
     <string name="map_clear_individual_route">Очистить индивидуальный маршрут</string>
@@ -1810,19 +1788,14 @@
     <string name="localfile_intenttitle">Обработчик файлов c:geo</string>
     <string name="localfile_title">Открыть файл</string>
     <string name="localfile_cannot_handle">Ошибка чтения файла или c:geo не может обработать этот тип файла.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Получить файл карты</string>
-    <string name="receivemapfile_error">Ошибка при получении файла карты</string>
-    <string name="receivemapfile_error_filenotfound_exception">Файл не найден: ошибка при получении файла карты.</string>
-    <string name="receivemapfile_alreadyexists">Файл с таким именем уже существует. Перезаписать существующий файл или сохранить новый файл под другим именем?</string>
-    <string name="receivemapfile_option_overwrite">Перезаписать</string>
-    <string name="receivemapfile_option_differentname">Другое имя</string>
-    <string name="receivemapfile_kb_copied">%d КБ скопировано</string>
-    <string name="receivemapfile_cancelled">Передача файла карты отменена</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">Файл с таким именем уже существует. Перезаписать существующий файл или сохранить новый файл под другим именем?</string>
+    <string name="receivedownload_option_overwrite">Перезаписать</string>
+    <string name="receivedownload_option_differentname">Другое имя</string>
+    <string name="receivedownload_kb_copied">%d КБ скопировано</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Скачать оффлайн-карту</string>
     <string name="downloadmap_choose">Выбрать карту</string>
-    <string name="downloadmanager_not_available">Файл карты не может быть загружен, менеджер загрузки не доступен</string>
     <string name="download_started">Загрузка началась в фоновом режиме</string>
     <string name="button_continue">Продолжить</string>
     <string name="downloadmap_onedirup">(вверх)</string>
@@ -1845,9 +1818,6 @@
     <!-- install wizard -->
     <string name="wizard_welcome_title">Добро пожаловать в c:geo</string>
     <string name="wizard_basefolder_request_explanation">c:geo необходима локальная папка для сохранения таких данных как GPX файлы, резервные копии, заметки и логи. По умолчанию эти файлы сохраняются в подпапках так называемой \"основной\" папки. Сейчас вам нужно выбрать или создать такую папку.\n\nЕсли вы обновились с прошлой версии, выберите существующую папку \"cgeo\" в корне устройства.\nПодсказка: возможно, вам понадобится выбрать внутренний носитель на следующем диалоге.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo нужна локальная папка для хранения оффлайн карт. Выберите или создайте такую папку на следующем шаге.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo нужна локальная папка для хранения тем оффлайновых карт. Выберите или создайте такую папку на следующем шаге.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo нужна локальная папка для хранения GPX файлов (например, для импорта/экспорта тайников или треков). Выберите или создайте такую папку на следующем шаге.</string>
     <string name="wizard_advanced_offlinemaps_label">Оффлайновые карты</string>
     <string name="wizard_advanced_restore_label">Восстановить</string>
     <string name="wizard_advanced_restore_info">Если у вас есть резервная копия от предыдущей установки, вы можете восстановить настройки и/или тексты тайников.</string>
