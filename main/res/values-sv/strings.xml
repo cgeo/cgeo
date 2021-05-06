@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detaljer</string>
@@ -153,8 +152,6 @@
     <string name="log_problem_archive_label">Cachen bör arkiveras</string>
     <string name="log_problem_archive_text">Denna geocacharen rapporterade att denna geocache bör arkiveras. En reviewer har blivit informerad.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalning</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nSkalad/komprimerad:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- translation -->
@@ -207,7 +204,6 @@
     <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
     <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
     <string name="err_tb_not_loggable">Detta spårbara objekt är inte loggbart.</string>
-    <string name="err_tb_find">Tyvärr kunde c:geo inte hitta trackable</string>
     <string name="err_tb_find_that">Tyvärr kan c:geo inte hitta önskad trackable.</string>
     <string name="err_waypoint_cache_unknown">Tyvärr vet inte c:geo till vilken cache du vill lägga till en punkt.</string>
     <string name="err_waypoint_add_failed">Tyvärr misslyckades c:geo att lägga till din punkt.</string>
@@ -279,7 +275,6 @@
     <string name="loc_fused">Kombinerad</string>
     <string name="loc_low_power">Strömspar</string>
     <string name="loc_home">Hemkoordinater</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Försöker hitta plats</string>
     <string name="loc_no_addr">Okänd adress</string>
@@ -342,8 +337,8 @@
     <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
     <string name="caches_select_invert">Invertera valda</string>
     <string name="caches_nearby">Nära</string>
-    <string name="caches_remove_all">Ta bort alla</string>
-    <string name="caches_remove_selected">Ta bort valda</string>
+    <string name="caches_remove_all">Ta bort alla från listan</string>
+    <string name="caches_remove_selected">Ta bort vald från listan</string>
     <string name="caches_remove_all_completely">Ta bort alla från enheten</string>
     <string name="caches_remove_selected_completely">Ta bort vald från enhet</string>
     <string name="caches_delete_events">Ta bort gamla event</string>
@@ -466,7 +461,6 @@
     <string name="settings_title_waypoints">Vägpunkter</string>
     <string name="settings_title_map_content">Kartinnehåll</string>
     <string name="settings_title_map_behavior">Kart-beteende</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
     <string name="settings_title_data_dir_usage">Geocache-datamapp (%1$s används)</string>
     <string name="calculate_dataDir_title">Användning av geocache-data katalog</string>
@@ -475,8 +469,6 @@
     <string name="confirm_data_dir_move_title">Flytta mapp för geocache-data?</string>
     <string name="confirm_data_dir_move">Att flytta katalogen för geocache-data kan, beroende på din enhet och mängden data, ta riktigt lång tid.</string>
     <string name="settings_title_basicmembers">Inställningar för Basic Members</string>
-    <string name="settings_title_navigation">Navigering</string>
-    <string name="settings_summary_navigation">Välj standardmetoder för navigering och välj externa navigationsappar.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemspecifika inställningar och felsökningsalternativ.</string>
     <string name="settings_title_navigation_menu">Navigeringsmeny</string>
@@ -545,7 +537,6 @@
     <string name="init_signature_template_name">Namn</string>
     <string name="init_signature_template_difficulty">Svårighet</string>
     <string name="init_signature_template_terrain">Terräng</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Loggtext</string>
     <string name="init_signature_template_size">Storlek</string>
     <string name="init_signature_template_type">Typ</string>
@@ -572,8 +563,8 @@
     <string name="init_zoomincludingwaypoints">Zooma inkluderar vägpunkter</string>
     <string name="init_zoomincludingwaypoints_description">Om kartläggning av en enda cache: Bör zoom justeras för att inkludera alla dess vägpunkter?</string>
     <string name="init_brouterThreshold">Beräkna rutt</string>
-    <string name="init_brouterThreshold_description">Maximalt avstånd upp till vilket BRouter hjälpappen (om installerad) kommer att beräkna en rutt.</string>
     <string name="init_brouterShowBothDistances">Visa rakt avstånd</string>
+    <string name="init_brouterAutoTileDownloads_description">Erbjuder automatiskt att ladda ner saknade routing-data.</string>
     <string name="brouter_recalculating">Beräknar rutt i bakgrunden…</string>
     <string name="init_summary_brouterShowBothDistances">Om rutten är aktiv: Visa den raka sträckan utöver den beräknade ruttlängden.</string>
     <string name="init_bigSmileysOnMap">Stora ikoner för loggade cacher</string>
@@ -792,9 +783,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Frånkopplad</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartattribut</string>
@@ -836,7 +824,6 @@
     <string name="persistablefolder_base">Bas</string>
     <string name="persistablefolder_offline_maps">Offlinekartor</string>
     <string name="persistablefolder_offline_maps_themes">Kartteman</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Säkerhetskopiering</string>
     <string name="persistablefolder_logfiles">Loggfiler</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
@@ -1018,7 +1005,6 @@
     <string name="cache_menu_sygic_drive">Sygic (körning)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Visa på karta</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andra externa program</string>
     <string name="cache_menu_streetview">Gatuvy</string>
     <string name="cache_menu_browser">Öppna i webbläsare</string>
@@ -1032,6 +1018,10 @@
     <string name="menu_caches">Hantera cacher</string>
     <string name="cache_menu_event">Lägg till i kalender</string>
     <string name="cache_menu_extract_waypoints">Extrahera punkter</string>
+    <string name="cache_menu_set_found">Ange som hittad</string>
+    <string name="cache_menu_set_DNF">Ange som inte hittad</string>
+    <string name="cache_menu_reset_foundstate">Återställ hittad-status</string>
+    <string name="cache_foundstate_updated">Hittad-status uppdaterad</string>
     <string name="cache_menu_set_cache_icon">Ange cache-ikon</string>
     <string name="cache_icon_updated">Cache-ikonen uppdaterad</string>
     <string name="cache_menu_details">Detaljer</string>
@@ -1218,10 +1208,10 @@
     <string name="map_showwp_parking">Parkeringwaypoints</string>
     <string name="map_showwp_visited">Besökta waypoints</string>
     <string name="map_show_track">Visa GPX-spår/rutt</string>
-    <string name="init_renderthemefolder_synctolocal">Synkronisera teman till app-privat mapp</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Det här alternativet kan förbättra prestanda vid öppning av kartor på bekostnad av lagringsutrymme.</string>
+    <string name="init_renderthemefolder_synctolocal">Synkronisera teman</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Detta synkroniserar dina teman till en privat mapp för appen för att förbättra kartvisarens öppningsprestanda på bekostnad av visst lagringsutrymme.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av mapp med teman</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Detta synkroniserar permanent innehållet i karttema-mappen till en app-privat mapp för snabbare åtkomst.\n\nDin karttema-mapp \'%1$s\' har för närvarande %2$s, %3$s och en storlek på %4$s.\n\nVill du aktivera synkronisering av mappar?</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Detta synkroniserar kontinuerligt innehållet i mapptemamappen till en privat mapp för apen för snabbare filåtkomst. Se till att din temamapp bara innehåller dina teman men inga ytterligare (stora) data innan du aktiverar den här funktionen.\n\nDin karttemamapp \'%1$s\' har för närvarande %2$s, %3$s och en storlek på %4$s.\n\nVill du aktivera synkronisering av mappar?</string>
     <string name="onetime_mapthemefixslow_title">Fixa rendering av långsamt karttema</string>
     <string name="onetime_mapthemefixslow_message">Arbeta med icke-zippade kartteman kan sänka prestanda när kartvisaren öppnas. Du kan zippa eller synkronisera dina teman för att få snabbare prestanda och minska fördröjningen vid start av kartan.</string>
     <string name="init_hidewp">Dölj vägpunkter</string>
@@ -1365,7 +1355,6 @@
     <string name="export_fieldnotes_upload_success">Uppladdningen till geocaching.com slutförd</string>
     <string name="export_fieldnotes_onlynew">Bara sedan senaste exporteringen</string>
     <string name="export_fieldnotes_creating">Skapar Field Notes…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX filen kommer att exporteras till %1$s med datum och tid i filnamnet.</string>
     <string name="export_confirm_title">Exporterar %1$s</string>
     <string name="export_confirm_message">Till katalog: %1$s\nFilnamn: %2$s</string>
@@ -1745,8 +1734,6 @@
     <string name="init_low_disk_space_message">Katalogen för geocachedata håller på att få slut på utrymme. Detta kan orsaka problem med c:geo. Vänligen försök frigöra lite utrymme.</string>
     <string name="init_confirm_debug">c:geo körs i debugläge!</string>
     <string name="list_confirm_debug_message">Debug-läge kan orsaka instabilitet! Vill du återgå till normalläge?</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Stäng appen</string>
     <string name="ask_again">Fråga igen</string>
@@ -1774,11 +1761,10 @@
     <string name="individual_route_error_toggling_waypoint">fel vid växling av vägpunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Inte tillgänglig i singel-vägpunkts läge</string>
     <string name="map_sort_individual_route">Sortera individuell rutt</string>
-    <string name="map_export_individual_route">Exportera individuell rutt</string>
     <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
-    <string name="map_autotarget_individual_route">Ange som mål automatiskt</string>
-    <string name="map_disable_autotarget_individual_route">Inaktiverade \"Ange som mål automatiskt\"</string>
+    <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>
+    <string name="map_disable_autotarget_individual_route">\"Ange ruttstart som mål\" inaktiverad</string>
     <string name="map_clear_manual_targets">Rensa manuella mål</string>
     <string name="map_manual_targets_cleared">Manuella mål rensade</string>
     <string name="map_clear_individual_route">Rensa enskild rutt</string>
@@ -1838,27 +1824,19 @@
     <string name="localfile_intenttitle">c:geo Lokal filhanterare</string>
     <string name="localfile_title">Välj en fil lokalt</string>
     <string name="localfile_cannot_handle">Fel vid läsning av fil, eller så c:geo kan inte hantera denna filtyp.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Ta emot kartfil</string>
-    <string name="receivemapfile_success">Kartfilen togs emot korrekt som \"%s\" och lagrades i kartkatalogen</string>
-    <string name="receivemapfile_error">Fel uppstod när kartfilen togs emot</string>
-    <string name="receivemapfile_error_io_exception">I/O-fel vid mottagande av kartfil. Är kartmappen \"%s\" skrivbar?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Filen hittades inte vid mottagandet av kartfilen.</string>
-    <string name="receivemapfile_alreadyexists">En kartfil med detta namn finns redan. Ska filen skrivas över eller sparas med ett annat namn?</string>
-    <string name="receivemapfile_option_overwrite">Skriv över</string>
-    <string name="receivemapfile_option_differentname">Annat namn</string>
-    <string name="receivemapfile_kb_copied">%d kB kopierat</string>
-    <string name="receivemapfile_cancelled">Kartöverföring avbruten</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">En kartfil med detta namn finns redan. Ska filen skrivas över eller sparas med ett annat namn?</string>
+    <string name="receivedownload_option_overwrite">Skriv över</string>
+    <string name="receivedownload_option_differentname">Annat namn</string>
+    <string name="receivedownload_kb_copied">%d kB kopierat</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Ladda ner kartor för användning offline</string>
     <string name="downloadmap_info">Välj en kartfil för din region genom att trycka på \"Spara\"-ikonen.\n\nNedladdningen sker i bakgrunden. När överföringen är klar kopieras filen till mappen c:geo och anges som den aktuella kartan.\n\nVar försiktig: Att ladda ner en karta kan orsaka hög nätverkstrafik!</string>
     <string name="downloadmap_choose">Välj karta</string>
     <string name="downloadmap_filename">Laddar ner %s</string>
-    <string name="downloadmanager_not_available">Kartfilen kan inte laddas ner. Systemets program för nerladdningar är inte tillgängligt</string>
     <string name="download_started">Nerladdningen startar i bakgrunden</string>
     <string name="downloadmap_target_not_writable">Det valda målet \"%s\" är inte skrivbart - den nedladdade kartfilen sparas i mappen för systemhämtning och måste flyttas manuellt till kartmappen.</string>
     <string name="downloadmap_allow_metered_network">Tillåt nedladdning över nätverk med datapriser (t.ex.: mobilanslutning)</string>
-    <string name="downloadmap_confirmation">Ladda ner karta \"%1$s\"?\n\nDetta kan ta ganska lång tid och kan leda till betydande kostnader, beroende på din nätverksanslutning.\n\nStorleksinformation: %2$s</string>
     <string name="downloadmap_handling">Själva nedladdningen kommer att hanteras av ditt systems nedladdningshanterare i bakgrunden. Du bör se ett meddelande så snart nedladdningen startat (vilket kan ta ett tag).</string>
     <string name="button_continue">Fortsätt</string>
     <string name="downloadmap_onedirup">(en nivå upp)</string>
@@ -1902,9 +1880,7 @@
     <string name="wizard_permissions_intro">c:geo behöver vissa behörigheter på din enhet för att fungera korrekt.\nJag kommer att förklara mer detaljer i nästa steg.</string>
     <string name="wizard_permissions_folder_title">Ange mapp: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo behöver en lokal mapp för att lagra data som GPX-filer, säkerhetskopior, fältanteckningar och loggfiler. Som standard lagras dessa filer i mappar under en så kallad \"basmapp\". Välj eller skapa en sådan mapp i nästa steg.\n\nOm du uppgraderade c:geo från en tidigare version, välj den befintliga mappen \"cgeo\" på rotnivån på din enhets lagring.\nTips: Du kan behöva visa enhetens interna lagring först i filväljaren som visas härnäst.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo behöver en lokal mapp för att lagra offline-kartfiler. Välj eller skapa en sådan mapp i nästa steg.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo behöver en lokal mapp för att lagra temafiler för offline-kartor. Välj eller skapa en sådan mapp i nästa steg.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo behöver en lokal mapp för att lagra GPX-filer (t.ex. för att importera/exportera cacher eller spår). Välj eller skapa en sådan mapp i nästa steg.</string>
+    <string name="wizard_broutertilesfolder_request_explanation">För att använda den integrerade funktionen för automatisk nedladdning och uppdatering av ruttdata måste du ställa in en mapp för ruttdata.</string>
     <string name="wizard_platforms_title">Konfigurera tjänster</string>
     <string name="wizard_platforms_intro">För att hitta geocacher med c:geo behöver du ett konto för en geocachingtjänst som stöds av c:geo.\nVälj önskad tjänst nedan för att antingen logga in med ditt befintliga konto eller skapa ett nytt konto.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
