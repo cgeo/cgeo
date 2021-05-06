@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Details</string>
@@ -32,6 +31,7 @@
     <string name="gps">Gps adventures exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Locationless (Reverse) Cache</string>
+    <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Door de gebruiker gedefinieerde cache</string>
     <string name="unknown">Onbekend type</string>
     <!-- cache sizes -->
@@ -153,8 +153,6 @@
     <string name="log_problem_archive_label">Cache zou moeten worden gearchiveerd</string>
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nGeschaald/gecomprimeerd:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <!-- translation -->
@@ -167,6 +165,7 @@
     <string name="err_captcha">Captcha is vereist. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
     <string name="err_server">Verbinding met Geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
     <string name="err_server_ec">Verbinding maken met Extremcaching.com is mislukt (geen verbinding of server niet bereikbaar).</string>
+    <string name="err_server_lc">Kan geen contact maken met labs.geocaching.com. De website kan offline zijn of je internetverbinding werkt niet.</string>
     <string name="err_server_su">Verbinding met Geocaching.su mislukt (geen verbinding of server niet bereikbaar).</string>
     <string name="err_server_gk">Niet mogelijk om GeoKrety.org te bereiken. De website kan offline zijn of je internetverbinding werkt niet goed.</string>
     <string name="err_login">Geen login informatie opgeslagen</string>
@@ -207,7 +206,7 @@
     <string name="err_tb_display">Sorry, c:geo kan de gezochte trackable niet weergeven. Is het wel een trackable?</string>
     <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
     <string name="err_tb_not_loggable">Deze Trackable kan je niet loggen.</string>
-    <string name="err_tb_find">Sorry, c:geo kan de trackable niet vinden</string>
+    <string name="err_tb_not_found">c:geo kan trackable %s niet vinden.</string>
     <string name="err_tb_find_that">Sorry, c:geo kan die trackable niet vinden.</string>
     <string name="err_waypoint_cache_unknown">Sorry, c:geo weet niet aan welke cache je een waypoint wil toevoegen.</string>
     <string name="err_waypoint_add_failed">Sorry, c:geo kon de waypoint niet toevoegen.</string>
@@ -264,6 +263,7 @@
     <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
     <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
     <string name="confirm_unsaved_changes_title">Niet opgeslagen wijzigingen</string>
+    <string name="confirm_discard_changes">Niet opgeslagen wijzigingen negeren?</string>
     <string name="confirm_discard_wp_changes">Waypoint wijzigingen niet opslaan?</string>
     <string name="err_request_popup_info">Het is c:geo niet gelukt om de cache popup info te verkrijgen.</string>
     <string name="warn_log_load_additional_data">Het is c:geo niet gelukt aanvullende gegevens (trackables/favoriet punten) te laden voor het loggen.</string>
@@ -279,7 +279,6 @@
     <string name="loc_fused">Gecombineerd</string>
     <string name="loc_low_power">Spaarstand</string>
     <string name="loc_home">Thuis coördinaten</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Proberen te lokaliseren</string>
     <string name="loc_no_addr">Adres onbekend</string>
@@ -290,6 +289,9 @@
     <string name="menu_helpers">Hulpprogramma\'s</string>
     <string name="menu_settings">Instellingen</string>
     <string name="menu_backup">Back-up maken / terugzetten</string>
+    <string name="menu_update">Bijwerken</string>
+    <string name="menu_update_routingdata">Routering gegevens</string>
+    <string name="menu_update_mapdata">Kaartgegevens</string>
     <string name="menu_history">Geschiedenis</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
@@ -342,8 +344,8 @@
     <string name="caches_select_mode_exit">Selectie modus beëindigen</string>
     <string name="caches_select_invert">Selectie omkeren</string>
     <string name="caches_nearby">Nabij</string>
-    <string name="caches_remove_all">Verwijder alles</string>
-    <string name="caches_remove_selected">Selectie verwijderen</string>
+    <string name="caches_remove_all">Alles uit lijst verwijderen</string>
+    <string name="caches_remove_selected">Geselecteerde uit lijst verwijderen</string>
     <string name="caches_remove_all_completely">Alles verwijderen van apparaat</string>
     <string name="caches_remove_selected_completely">Verwijder geselecteerden van apparaat</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
@@ -464,11 +466,12 @@
     <string name="settings_title_map">Kaart</string>
     <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
     <string name="settings_title_map_data">Kaartgegevens</string>
+    <string name="settings_title_offline_routing">Offline routeren</string>
+    <string name="settings_summary_offline_routing">Offline routeren is beschikbaar als helper app \"BRouter\" is geïnstalleerd en geconfigureerd of als interne routering is ingeschakeld.</string>
     <string name="settings_title_map_rotation">Kaart rotatie (Google Maps)</string>
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Kaartinhoud</string>
     <string name="settings_title_map_behavior">Kaart gedrag</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
     <string name="settings_title_data_dir_usage">Geocache gegevensmap (%1$s in gebruik)</string>
     <string name="calculate_dataDir_title">Geocache dataverbruik</string>
@@ -477,8 +480,6 @@
     <string name="confirm_data_dir_move_title">Geocache gegevensmap verplaatsen?</string>
     <string name="confirm_data_dir_move">Het verplaatsen van de geocache-gegevens kan mogelijk erg lang duren, afhankelijk van uw apparaat en de hoeveelheid gegevens.</string>
     <string name="settings_title_basicmembers">Opties voor Basis leden</string>
-    <string name="settings_title_navigation">Navigatie</string>
-    <string name="settings_summary_navigation">Kies uw voorkeur voor navigatiemethoden en externe navigatie apps.</string>
     <string name="settings_title_system">Systeem</string>
     <string name="settings_summary_system">Systeemspecifieke instellingen en foutopsporingsopties.</string>
     <string name="settings_title_navigation_menu">Navigatiemenu</string>
@@ -490,6 +491,7 @@
     <string name="settings_goto_url_button">meer…</string>
     <string name="settings_activate_gc">Activeren</string>
     <string name="settings_activate_ec">Activeren</string>
+    <string name="settings_activate_lc">Activeren</string>
     <string name="settings_gc_legal_note">Met het gebruik van de dienst van geocaching.com, accepteert u de gebruiksvoorwaarden van Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Log in met Facebook of Google</string>
     <string name="settings_info_facebook_login">Het is niet mogelijk om c:geo te laten inloggen op geocaching.com met je Facebook of Google account. Maar er is een eenvoudige workaround…</string>
@@ -498,6 +500,8 @@
     <string name="settings_gc_description">Autoriseer c:geo met geocaching.com om caches te zoeken.</string>
     <string name="settings_ec_description">Autoriseer c:geo met extremcaching.com om caches te zoeken en toegang te hebben tot jouw gevonden caches.</string>
     <string name="settings_su_description">Autoriseer c:geo met geocaching.su om caches te zoeken.</string>
+    <string name="settings_lc_description">Adventure Lab caches op de kaart tonen.\n\n(Alleen beschikbaar voor \"Geocaching.com\" premium leden. Vereist een geactiveerde \"Geocaching.com\" service.)\n\nWijzigen van deze instelling vereist een herstart.</string>
+    <string name="lc_default_description">Dit is een geocaching.com Adventure Lab Cache. Avonturen kunnen alleen worden gespeeld met de Groundspeak Adventure Lab App. Klik op het Adventure Lab pictogram op de \"Details\" pagina om de Adventure Lab App te openen/installeren voor dit avontuur.\nAls je geen Adventure Lab caches op je kaart en zoekopdracht wilt zien kan je ze deactiveren via het menu \"instellingen\" - Diensten - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Activeren</string>
     <string name="init_summary_oc_de">Laad caches van opencaching.de</string>
     <string name="init_oc_de_description">c:geo authoriseren met opencaching.de om naar caches te zoeken en het filteren van gevonden caches.</string>
@@ -547,7 +551,6 @@
     <string name="init_signature_template_name">Naam</string>
     <string name="init_signature_template_difficulty">Moeilijkheid</string>
     <string name="init_signature_template_terrain">Terrein</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Log tekst</string>
     <string name="init_signature_template_size">Grootte</string>
     <string name="init_signature_template_type">Type</string>
@@ -574,10 +577,19 @@
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Wanneer een enkele cache wordt getoond: Moet zoom worden aangepast om alle waypoints te bevatten?</string>
     <string name="init_brouterThreshold">Route berekenen</string>
-    <string name="init_brouterThreshold_description">Maximale afstand tot waar de BRouter helper app (indien geïnstalleerd) een route berekent.</string>
+    <string name="init_brouterThreshold_description">Maximale afstand tot welke offline routering een route berekent.</string>
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
+    <string name="init_autoDownloads">Automatische download</string>
+    <string name="init_brouterAutoTileDownloads_description">Automatisch aanbieden om ontbrekende routering tegel gegevens te downloaden.</string>
+    <string name="init_mapAutoDownloads_description">Automatisch controleren op updates van kaart en thema bestanden (alleen geldig voor bestanden die je hebt gedownload met de geïntegreerde downloader).</string>
+    <string name="init_brouterProfileWalk">\"Wandelen\" profiel</string>
+    <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
+    <string name="init_brouterProfileCar">\"Auto\" profiel</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
+    <string name="brouter_missing_data">Open BRouter om ontbrekende routeringsgegevens te downloaden (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
+    <string name="init_useInternalRouting">Interne routering gebruiken</string>
+    <string name="init_summary_useInternalRouting">c:geo interne routering gebruiken om automatische routering, data downloaden en andere functies te kunnen gebruiken</string>
     <string name="init_bigSmileysOnMap">Grote pictogrammen voor gelogde caches</string>
     <string name="init_summary_bigSmileysOnMap">Indien ingeschakeld zullen grote emoticons worden getoond voor gelogde caches op de kaart in plaats van het cache type icoon (vereist herstart).</string>
     <string name="init_disabled">Uitgeschakelde caches uitsluiten</string>
@@ -666,6 +678,9 @@
     <string name="init_local_file_system">Lokaal bestandssysteem</string>
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
+    <string name="init_brouter_directory_description">Map met BRouter routering data</string>
+    <string name="init_updateinterval_title">Update interval</string>
+    <string name="init_updateinterval_description">Herinnert je om de x dagen voor een update controle</string>
     <string name="init_gpx_importexportdir">GPX map</string>
     <string name="init_dataDir">Gegevensmap selecteren</string>
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
@@ -794,9 +809,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kaart copyright</string>
@@ -838,11 +850,12 @@
     <string name="persistablefolder_base">Basis</string>
     <string name="persistablefolder_offline_maps">Offline kaarten</string>
     <string name="persistablefolder_offline_maps_themes">Kaart Thema\'s</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Back-up</string>
     <string name="persistablefolder_logfiles">Logbestanden</string>
     <string name="persistablefolder_fieldnotes">Veld notities</string>
     <string name="persistablefolder_spoilerimages">Spoiler afbeeldingen</string>
+    <string name="persistablefolder_routingbase">Routering</string>
+    <string name="persistablefolder_routingtiles">Routering gegevens</string>
     <string name="persistableuri_track">Spoorbestand</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s voltooid</string>
@@ -1021,7 +1034,6 @@
     <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Toon op kaart</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andere externe apps</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Openen in browser</string>
@@ -1035,6 +1047,10 @@
     <string name="menu_caches">Caches beheren</string>
     <string name="cache_menu_event">Toevoegen aan kalender</string>
     <string name="cache_menu_extract_waypoints">Exporteer waypoints</string>
+    <string name="cache_menu_set_found">Instellen als gevonden</string>
+    <string name="cache_menu_set_DNF">Instellen als niet gevonden</string>
+    <string name="cache_menu_reset_foundstate">Gevonden status resetten</string>
+    <string name="cache_foundstate_updated">Gevonden status bijgewerkt</string>
     <string name="cache_menu_set_cache_icon">Cache pictogram instellen</string>
     <string name="cache_icon_updated">Cache pictogram bijgewerkt</string>
     <string name="cache_menu_details">Details</string>
@@ -1115,6 +1131,8 @@
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_chirpwolf_start">Open Chirp Wolf om de chirp-gegevens voor deze cache te lezen</string>
     <string name="cache_chirpwolf_install">Installeer Chirp Wolf om chirp-gegevens te kunnen lezen</string>
+    <string name="cache_alc_start">Open Adventure Lab om te beginnen met het spelen van dit avontuur</string>
+    <string name="cache_alc_install">Installeer de Adventure Lab speler om dit avontuur te spelen</string>
     <string name="context_share_as_text">Tekst delen</string>
     <string name="context_share_as_link">Link delen</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
@@ -1221,10 +1239,10 @@
     <string name="map_showwp_parking">Parkeer waypoints</string>
     <string name="map_showwp_visited">Bezochte waypoints</string>
     <string name="map_show_track">GPX spoor/route tonen</string>
-    <string name="init_renderthemefolder_synctolocal">Thema\'s synchroniseren met app-private map</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Deze optie kan de prestaties van de kaartviewer bij het openen verbeteren ten koste van de opslagruimte van sommige apparaten.</string>
+    <string name="init_renderthemefolder_synctolocal">Thema\'s synchroniseren</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Dit zal je thema\'s synchroniseren in een app-specifieke map om de prestaties van de kaartviewer te verbeteren ten koste van de opslagruimte van apparaat.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisatie van themamappen inschakelen</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Dit zal de inhoud van de kaart Thema Map permanent synchroniseren in een app-private map voor snellere bestandstoegang.\n\nDe thema map \'%1$s\' heeft op dit moment %2$s, %3$s en een grootte van %4$s.\n\nWil je de synchronisatie van mappen inschakelen?</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Dit zal de inhoud van de kaartthema-map continu synchroniseren in een app-specifieke map voor snellere toegang tot het bestand. Zorg ervoor dat je thema map alleen je thema\'s bevat maar geen extra (grote) gegevens voordat u deze functie inschakelt.\n\nDe thema map \'%1$s\' heeft op dit moment %2$s, %3$s en een grootte van %4$s.\n\nWil je de synchronisatie van mappen inschakelen?</string>
     <string name="onetime_mapthemefixslow_title">Repareer langzame kaartthema weergave</string>
     <string name="onetime_mapthemefixslow_message">Werken met niet ge-zipte kaart thema\'s kan de kaartviewer openingsprestatie verminderen. Je kunt je thema\'s zippen of synchroniseren om snellere prestaties te krijgen en de vertraging te verminderen bij het starten van de kaart.</string>
     <string name="init_hidewp">Waypoints verbergen</string>
@@ -1355,6 +1373,7 @@
     <string name="helper_brouter_title">BRouter Offline navigatie</string>
     <string name="helper_brouter_description">BRouter biedt off line routering. Als het is geïnstalleerd en de benodigde bestanden gedownload heeft, zal c:geo een route naar de cache automatisch tonen op de interne kaart.</string>
     <string name="helper_chirpwolf_description">Met Chirp Wolf kun je de gegevens lezen van ANT+/Garmin chirp tags, wat nodig is voor ANT+/chirp geocaches.</string>
+    <string name="helper_alc_description">Adventure Lab Player app voor je telefoon of tablet.</string>
     <!-- export -->
     <string name="share_export">Delen / Exporteren</string>
     <string name="export">Exporteren</string>
@@ -1368,7 +1387,6 @@
     <string name="export_fieldnotes_upload_success">Uploaden naar geocaching.com succesvol</string>
     <string name="export_fieldnotes_onlynew">Alles sinds laatste export</string>
     <string name="export_fieldnotes_creating">Veld-notities worden gemaakt…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Het GPX bestand word geëxporteerd naar %1$s met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_confirm_title">Bezig met exporteren van %1$s</string>
     <string name="export_confirm_message">Naar pad: %1$s\nBestandsnaam: %2$s</string>
@@ -1751,8 +1769,6 @@
     <string name="init_low_disk_space_message">De geocache-gegevensmap heeft nog maar weinig schijfruimte. Dit kan leiden tot storingen van c:geo. Gelieve ruimte vrij te maken.</string>
     <string name="init_confirm_debug">c:geo wordt uitgevoerd in de foutopsporingsmodus!</string>
     <string name="list_confirm_debug_message">De debug-modus zorgt voor instabiliteit! Wil je de debug-modus uitschakelen?</string>
-    <string name="waypoint_latitude_null">N/Z --° --.---</string>
-    <string name="waypoint_longitude_null">O/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">App sluiten</string>
     <string name="ask_again">Opnieuw vragen</string>
@@ -1780,11 +1796,10 @@
     <string name="individual_route_error_toggling_waypoint">fout bij aan-/uit-zetten waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Niet beschikbaar in één waypoint modus</string>
     <string name="map_sort_individual_route">Individuele route sorteren</string>
-    <string name="map_export_individual_route">Individuele route exporteren</string>
     <string name="map_load_individual_route">Individuele route laden</string>
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
-    <string name="map_autotarget_individual_route">Automatisch als doel instellen</string>
-    <string name="map_disable_autotarget_individual_route">\"Stel automatisch als doel in\" uitgeschakeld</string>
+    <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
+    <string name="map_disable_autotarget_individual_route">\"Zet route startpunt als doel\" uitgeschakeld</string>
     <string name="map_clear_manual_targets">Handmatige doelen wissen</string>
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
@@ -1849,27 +1864,30 @@
     <string name="localfile_intenttitle">c:geo Lokale bestandsafhandeling</string>
     <string name="localfile_title">Lokaal bestand openen</string>
     <string name="localfile_cannot_handle">Fout bij lezen van het bestand of c:geo kan dit bestandstype niet verwerken.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Kaartbestand ontvangen</string>
-    <string name="receivemapfile_success">Kaartbestand succesvol ontvangen als \"%s\" en opgeslagen in de kaarten map</string>
-    <string name="receivemapfile_error">Fout bij het ontvangen van kaartbestand</string>
-    <string name="receivemapfile_error_io_exception">I/O fout tijdens het ontvangen van een kaartbestand. Is je kaartenmap \"%s\" beschrijfbaar?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Bestand niet gevonden fout tijdens het ontvangen van kaartbestand.</string>
-    <string name="receivemapfile_alreadyexists">Een bestand met deze naam bestaat al. Bestaande bestanden overschrijven of het bestand opslaan onder een andere naam?</string>
-    <string name="receivemapfile_option_overwrite">Overschrijven</string>
-    <string name="receivemapfile_option_differentname">Andere naam</string>
-    <string name="receivemapfile_kb_copied">%d kB gekopieerd</string>
-    <string name="receivemapfile_cancelled">Kaartbestandsoverdracht geannuleerd</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Bestand ontvangen</string>
+    <string name="receivedownload_success">Bestand succesvol opgeslagen als \"%s\"</string>
+    <string name="receivedownload_error">Fout bij ontvangen van bestand</string>
+    <string name="receivedownload_error_io_exception">I/O fout tijdens het ontvangen van een kaartbestand. Is je kaartenmap \"%s\" beschrijfbaar?</string>
+    <string name="receivedownload_error_filenotfound_exception">Bestand niet gevonden fout tijdens het ontvangen van bestand.</string>
+    <string name="receivedownload_alreadyexists">Een bestand met deze naam bestaat al. Bestaande bestanden overschrijven of het bestand opslaan onder een andere naam?</string>
+    <string name="receivedownload_option_overwrite">Overschrijven</string>
+    <string name="receivedownload_option_differentname">Andere naam</string>
+    <string name="receivedownload_kb_copied">%d kB gekopieerd</string>
+    <string name="receivedownload_cancelled">Bestandsoverdracht geannuleerd</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline kaart downloaden</string>
+    <string name="download_title">Bestand downloaden</string>
     <string name="downloadmap_info">Kies een kaartbestand voor jouw regio door op het \"Opslaan\" pictogram te tikken.\n\nDe download zal op de achtergrond worden uitgevoerd. Wanneer het downloaden is voltooid, zal het gedownloade bestand worden gekopieerd naar c:geo\'s kaartenmap en worden ingesteld als huidige kaart voor c:geo.\n\nWees voorzichtig: het downloaden van een kaart kan veel netwerkverkeer veroorzaken!</string>
     <string name="downloadmap_choose">Kies kaart</string>
     <string name="downloadmap_filename">%s downloaden</string>
-    <string name="downloadmanager_not_available">Kaartbestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
+    <string name="downloadmanager_not_available">Bestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
     <string name="downloadmap_target_not_writable">Het geselecteerde doel \"%s\" is niet schrijfbaar - het gedownloade kaartbestand wordt opgeslagen in de systeem downloads map en dient handmatig te worden verplaatst naar de kaartenmap.</string>
     <string name="downloadmap_allow_metered_network">Download via data netwerk toestaan (bijv. mobiele verbinding met datalimiet)</string>
-    <string name="downloadmap_confirmation">Kaart downloaden \"%1$s\"?\n\nDit kan heel wat tijd in beslag nemen en aanzienlijke kosten met zich meebrengen, afhankelijk van je netwerkverbinding.\n\nGrootte info: %2$s</string>
+    <string name="download_confirmation">%1$sBestand downloaden \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Updates gevonden voor:\n%1$s\n\nWil je bijwerken?%2$s</string>
+    <string name="download_warning">Dit kan heel wat tijd in beslag nemen en kan tot aanzienlijke kosten leiden, afhankelijk van uw netwerkverbinding.</string>
     <string name="downloadmap_handling">De download zelf wordt afgehandeld door de downloadmanager van je systeem op de achtergrond. Je zou een melding moeten zien zodra de download is gestart (dit kan even duren).</string>
     <string name="button_continue">Doorgaan</string>
     <string name="downloadmap_onedirup">(één niveau omhoog)</string>
@@ -1882,11 +1900,18 @@
     <string name="downloadmap_checking_for_updates">Controleren op updates…</string>
     <string name="downloadmap_install_theme_title">Themabestand installeren</string>
     <string name="downloadmap_install_theme_info">Je gedownloade kaart vereist een speciaal themabestand. Wil je deze ook downloaden?</string>
+    <string name="downloadtile_title">Ontbrekende routering gegevens</string>
+    <string name="downloadtile_info">c:geo kan de gevraagde route niet berekenen omdat er enkele routering data ontbreekt. Wil je ontbrekende routering data downloaden?</string>
+    <string name="tileupdate_info">Wil je controleren op updates van gedownloade routering gegevensbestanden?</string>
+    <string name="mapupdate_info">Wil je controleren op updates van kaart en themabestanden?</string>
+    <string name="no_updates_found">Geen updates gevonden</string>
+    <string name="updates_check">Controle op updates</string>
     <string name="mapserver_mapsforge_info">Basis kaarten, geen kaart thema\'s nodig</string>
     <string name="mapserver_openandromaps_info">Gedetailleerde kaarten, vereisen thema \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Gedetailleerde kaart thema, gebouwd voor \"OpenAndroMaps\" kaarten</string>
     <string name="mapserver_freizeitkarte_info">Gedetailleerde kaarten, vereisen een van de \"freizeitkarte\" kaartthema\'s.</string>
     <string name="mapserver_freizeitkarte_themes_info">Gedetailleerde kaart thema, gebouwd voor \"Freizeitkarte\" kaarten</string>
+    <string name="brouter_info">Offline routering service</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
@@ -1913,9 +1938,11 @@
     <string name="wizard_permissions_intro">c:geo heeft bepaalde machtigingen nodig op je apparaat om correct te werken.\nIk zal meer details uitleggen in de volgende stappen.</string>
     <string name="wizard_permissions_folder_title">Map instellen: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo heeft een lokale map nodig om gegevens zoals GPX bestanden, back-ups, Field Notes en logbestanden op te slaan. Standaard worden deze bestanden opgeslagen in mappen onder de zogenaamde \"basismap\". Selecteer of creëer een dergelijke map in de volgende stap.\n\nAls je c:geo van een vorige versie bijwerkt, selecteer dan de bestaande map \"cgeo\" op hoofdniveau van je apparaatopslag.\nTip: Je kunt de interne opslag van je apparaat eerst zichtbaar maken in de bestandsselectie die hierna wordt weergegeven.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo heeft een lokale map nodig om offline kaartbestanden op te slaan. Selecteer of maak zo\'n map aan in de volgende stap.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo heeft een lokale map nodig om themabestanden op te slaan voor offline kaarten. Selecteer of maak een dergelijke map aan in de volgende stap.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo heeft een lokale map nodig om GPX bestanden op te slaan (bijv. voor het importeren / exporteren van caches of spoor). Selecteer of maak een dergelijke map aan in de volgende stap.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo heeft een lokale map nodig om offline kaartbestanden op te slaan.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo heeft een lokale map nodig om themabestanden op te slaan voor offline kaarten.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo heeft een lokale map nodig om GPX bestanden op te slaan (bijvoorbeeld voor het importeren/exporteren van caches of sporen).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Voor het gebruik van de geïntegreerde routing tegel data download en -update functie dien je een tegelmap in te stellen.</string>
+    <string name="wizard_select_or_create">Selecteer of creëer een dergelijke map in de volgende stap.</string>
     <string name="wizard_platforms_title">Services configureren</string>
     <string name="wizard_platforms_intro">Om geocaches met c:geo te vinden heb je een account nodig voor een geocaching service ondersteund door c:geo.\nSelecteer de gewenste service hieronder om in te loggen met je bestaande account of maak een nieuw account aan.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
