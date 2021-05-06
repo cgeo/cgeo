@@ -141,7 +141,6 @@
     <string name="err_acquire_image_failed">Gat ekki náð í mynd.</string>
     <string name="err_tb_details_open">c:geo getur ekki opnað upplýsingar um ferðalang.</string>
     <string name="err_tb_not_loggable">Ekki er hægt að skrá færslu fyrir þennan ferðalang.</string>
-    <string name="err_tb_find">c:geo finnur ekki ferðalang</string>
     <string name="err_tb_find_that">c:geo getur ekki fundið þennan ferðalang.</string>
     <string name="err_point_bear_and_dist_title">Þarftu aðstoð?</string>
     <string name="err_point_bear_and_dist">Skráðu inn bæði legu og vegalengd. Lega er horn frá 0 til 360 gráðum frá norðri. Vegalengd þarfnast ekki mælieiningar.</string>
@@ -231,8 +230,6 @@
     <string name="caches_select_mode_exit">Fara úr valstillingu</string>
     <string name="caches_select_invert">Snúa vali við</string>
     <string name="caches_nearby">Í nánd</string>
-    <string name="caches_remove_all">Fjarlægja alla</string>
-    <string name="caches_remove_selected">Fjarlægja valda</string>
     <string name="caches_delete_events">Eyða fyrri viðburðum</string>
     <string name="caches_refresh_selected">Uppfæra það sem er valið</string>
     <string name="caches_refresh_all">Uppfæra allt</string>
@@ -339,7 +336,6 @@
     <string name="init_signature_template_number">Númer</string>
     <string name="init_signature_template_owner">Eigandi</string>
     <string name="init_signature_template_name">Nafn</string>
-    <string name="init_signature_template_url">Slóð</string>
     <string name="init_signature_template_log">Færslutexti</string>
     <string name="init_ratingwanted">GCvote mat</string>
     <string name="init_summary_ratingwanted">Sjá dóma um cache frá GCvote.com</string>
@@ -750,7 +746,6 @@
     </plurals>
     <!-- calendar adder -->
     <string name="event_fail">Gat ekki bætt viðburðarkassa á dagatalið</string>
-    <string name="waypoint_longitude_null">A/V --° --.---</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->
@@ -763,7 +758,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->
