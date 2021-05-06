@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detailer</string>
@@ -147,7 +146,6 @@
     <string name="log_problem_archive_label">Cache misst archivéiert ginn</string>
     <string name="log_problem_archive_text">Dëse Geocacher huet gemellt datt dëse Cache archivéiert misst ginn. Ee Reviewer gouf benoriichtegt.</string>
     <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Iwwersetzen op %s</string>
@@ -199,7 +197,6 @@
     <string name="err_tb_display">c:geo kann den Trackable net uweisen deen dir wëllt. Ass et wierklech ee Trackable?</string>
     <string name="err_tb_details_open">c:geo kann d\'Detailer vum Trackable net lueden.</string>
     <string name="err_tb_not_loggable">Dësen Trackable ka net geloggt ginn.</string>
-    <string name="err_tb_find">c:geo ka keng Trackables fannen</string>
     <string name="err_tb_find_that">c:geo kann dësen Trackable net fannen.</string>
     <string name="err_waypoint_cache_unknown">c:geo weess net zu wéi engem Cache\'s du e Weepunkt bäisetze wëlls.</string>
     <string name="err_waypoint_add_failed">c:geo konnt de Weepunkt net dobäisetzen.</string>
@@ -270,7 +267,6 @@
     <string name="loc_fused">Kombinéiert</string>
     <string name="loc_low_power">Energiespueren</string>
     <string name="loc_home">Koordinaten vun Doheem</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Satelitte</string>
     <string name="loc_trying">Lokaliséieren</string>
     <string name="loc_no_addr">Onbekannten Adresse</string>
@@ -333,8 +329,6 @@
     <string name="caches_select_mode_exit">Selektiounsmodus zoumaachen</string>
     <string name="caches_select_invert">Selektioun invertéieren</string>
     <string name="caches_nearby">Nobäi</string>
-    <string name="caches_remove_all">Alleguer läschen</string>
-    <string name="caches_remove_selected">Ausgewielte läschen</string>
     <string name="caches_delete_events">Vergaangen Eventer läschen</string>
     <string name="caches_upload_modifiedcoords">Geännert Koordinaten eroplueden</string>
     <string name="caches_upload_modifiedcoords_warning">Solle déi modifizéiert Koordinaten fir alle (ausgewielten) Cachen eropgelueden ginn an déi aktuell Koordinaten um Server iwwerschriwwen ginn? Dëst ka net réckgängeg gemaach ginn.</string>
@@ -446,13 +440,11 @@
     <string name="settings_title_waypoints">Weepunkte</string>
     <string name="settings_title_map_content">Kaarteninhalt</string>
     <string name="settings_title_map_behavior">Kaartenverhalen</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="calculate_dataDir_title">Geocahce Datebenotzung</string>
     <string name="calculate_dataDir">Geocache Date-Späicherplaatz berechnen</string>
     <string name="settings_data_dir_item">%1$s (%2$s fräi)</string>
     <string name="confirm_data_dir_move">D\'Geocache Daten ze beweegen kann zimmlech laang daueren, jee no Gerät an dem Montant un Daten.</string>
     <string name="settings_title_basicmembers">Optioune fir net-premium Membere</string>
-    <string name="settings_summary_navigation">Wiel deng favoriséiertst Navigatiounsmethoden aus a wiel extern Navigatiounsapps.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
     <string name="settings_category_browser">Browser</string>
@@ -519,7 +511,6 @@
     <string name="init_signature_template_name">Numm</string>
     <string name="init_signature_template_difficulty">Schwieregkeet</string>
     <string name="init_signature_template_terrain">Terrain</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Log Text</string>
     <string name="init_signature_template_size">Gréisst</string>
     <string name="init_signature_template_type">Typ</string>
@@ -646,8 +637,6 @@
     <string name="do_not_ask_me_again">Fro mech net nach emol</string>
     <string name="list_list_headline">Lëschten:</string>
     <!-- calendar adder -->
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">App zoumaachen</string>
     <string name="ask_again">Fro mech nach emol</string>
@@ -673,7 +662,7 @@
     <string name="view_settings">Astellunge kucken</string>
     <string name="delete_setting">Astellunge läschen</string>
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->
