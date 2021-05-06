@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:гео</string>
     <!-- basics -->
     <string name="cache">Кеш</string>
     <string name="detail">Деталі</string>
@@ -147,7 +146,6 @@
     <string name="log_problem_archive_label">Кеш повинен бути заархівований</string>
     <string name="log_problem_archive_text">Цей геокешер повідомив, що цей геокеш повинен бути заархівований. Повідомлено громадського рецензента-волонтера.</string>
     <string name="log_image_scale_option_noscaling">Відсутність масштабування</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Імідж</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Перекласти на %s</string>
@@ -199,7 +197,6 @@
     <string name="err_tb_display">c:geo не може відобразити те, що ви хочете. Ви дійсно хочете відстежувати?</string>
     <string name="err_tb_details_open">c:geo не вдалося відкрити подробиці, що відстежуються.</string>
     <string name="err_tb_not_loggable">Це відстежуване неможливо увійти.</string>
-    <string name="err_tb_find">c:geo не вдається знайти схованку</string>
     <string name="err_tb_find_that">c:geo не може знайти цей геокеш.</string>
     <string name="err_waypoint_cache_unknown">c:geo не знає, який кеш ви хочете додати точку.</string>
     <string name="err_waypoint_add_failed">c:geo не вдалося додати вашу точку.</string>
@@ -270,7 +267,6 @@
     <string name="loc_fused">Зрощений</string>
     <string name="loc_low_power">Низька потужність</string>
     <string name="loc_home">Головна Координати</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Супутник</string>
     <string name="loc_trying">Намагається знайти</string>
     <string name="loc_no_addr">Невідома адреса</string>
@@ -335,8 +331,6 @@
     <string name="caches_select_mode_exit">Вийти з режиму вибору</string>
     <string name="caches_select_invert">Інвертувати вибране</string>
     <string name="caches_nearby">Неподалік</string>
-    <string name="caches_remove_all">Видалити все</string>
-    <string name="caches_remove_selected">Видалити вибране</string>
     <string name="caches_delete_events">Видалити минулі події</string>
     <string name="caches_upload_modifiedcoords">Вивантажити змінені координати</string>
     <string name="caches_upload_modifiedcoords_warning">Ви хочете, щоб завантажити модифіковані координати для всіх (вибраних) кеш і перезаписати наявні координати на сервері? Це не можна скасувати.</string>
@@ -448,14 +442,11 @@
     <string name="settings_title_waypoints">шляхові точки</string>
     <string name="settings_title_map_content">Зміст мапи</string>
     <string name="settings_title_map_behavior">Поведінка карти</string>
-    <string name="settings_title_gpx">ГПХ</string>
     <string name="calculate_dataDir_title">Використання даних схованки</string>
     <string name="calculate_dataDir">Обчислення використання даних схованки</string>
     <string name="settings_data_dir_item">%1$s (%2$s вільно)</string>
     <string name="confirm_data_dir_move">Переміщення даних схованки може зайняти багато часу, в залежності від пристрою та кількості даних.</string>
     <string name="settings_title_basicmembers">Налаштування для основних учасників</string>
-    <string name="settings_title_navigation">Навігація</string>
-    <string name="settings_summary_navigation">Виберіть бажані методи навігації та виберіть зовнішні навігаційні програми.</string>
     <string name="settings_title_system">Система</string>
     <string name="settings_summary_system">Параметри особливих налаштувань і відлагодження.</string>
     <string name="settings_title_navigation_menu">Навігаційне меню</string>
@@ -523,7 +514,6 @@
     <string name="init_signature_template_name">Ім’я</string>
     <string name="init_signature_template_difficulty">Труднощі</string>
     <string name="init_signature_template_terrain">територія</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">текст журналу</string>
     <string name="init_signature_template_size">Розмір</string>
     <string name="init_signature_template_type">Тип</string>
@@ -732,9 +722,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Карти</string>
     <string name="map_source_google_satellite">Google: супутник</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Офлайн</string>
     <string name="map_source_osm_offline_combined">Комбіновані (офлайн)</string>
     <string name="map_source_attribution_dialog_title">атрибуція карти</string>
@@ -872,7 +859,6 @@
     <string name="cache_menu_sygic_drive">Сигіка (ходьба)</string>
     <string name="cache_menu_radar">Радар</string>
     <string name="cache_menu_map">Карта</string>
-    <string name="cache_menu_rmaps">RMaps</string>
     <string name="cache_menu_map_ext">Інші зовнішні програми</string>
     <string name="cache_menu_streetview">Перегляд вулиць</string>
     <string name="cache_menu_browser">Відкрити в браузері</string>
@@ -1190,7 +1176,6 @@
     <string name="export_fieldnotes_upload_success">завантаження до geocaching.com успішно</string>
     <string name="export_fieldnotes_onlynew">Тільки з часу останнього експорту</string>
     <string name="export_fieldnotes_creating">створення приміток до полів…</string>
-    <string name="export_gpx">ГПХ</string>
     <string name="export_gpx_info">Файл GPX буде експортовано до %1$s з поточною датою та часом в якості імені файлу.</string>
     <string name="export_confirm_title">Експорт: %1$s</string>
     <string name="export_confirm_message">До шляху: %1$s\nІм\'я файлу: %2$s</string>
@@ -1512,8 +1497,6 @@
     <string name="init_low_disk_space">Недостатньо місця на диску</string>
     <string name="init_confirm_debug">c:geo запущено у режимі налагодження!</string>
     <string name="list_confirm_debug_message">Режим налагодження викликає нестабільності! Ви хочете вимкнути режим налагодження?</string>
-    <string name="waypoint_latitude_null">Н/С --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Закрити додаток</string>
     <string name="ask_again">Запитайте ще раз</string>
@@ -1541,11 +1524,8 @@
     <string name="individual_route_error_toggling_waypoint">помилка перемикання точки</string>
     <string name="individual_route_error_single_waypoint_mode">Не доступно в режимі однієї точки</string>
     <string name="map_sort_individual_route">Сортувати за окремим маршрутом</string>
-    <string name="map_export_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_load_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_load_individual_route_confirm">Перезаписувати існуючі файли?</string>
-    <string name="map_autotarget_individual_route">Автоматично встановити як ціль</string>
-    <string name="map_disable_autotarget_individual_route">Автоматично встановити як ціль</string>
     <string name="map_clear_manual_targets">Очистити ручні ярлики</string>
     <string name="map_manual_targets_cleared">Елементи вручну очищено</string>
     <string name="map_clear_individual_route">Експорт за окремим маршрутом</string>
@@ -1592,23 +1572,17 @@
     <string name="localfile_intenttitle">c:geo локальний обробник файлів</string>
     <string name="localfile_title">Відкрити локальний файл</string>
     <string name="localfile_cannot_handle">Помилка читання файлу або c:geo не може обробляти цей тип файлу.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Отримання файлу карти</string>
-    <string name="receivemapfile_error">Помилка під час запису у файл</string>
-    <string name="receivemapfile_error_filenotfound_exception">Помилка при отриманні файлу карти.</string>
-    <string name="receivemapfile_alreadyexists">Файл з такою назвою вже існує. Перезаписати наявний файл або зберегти новий файл?</string>
-    <string name="receivemapfile_option_overwrite">Перезаписати</string>
-    <string name="receivemapfile_option_differentname">Інша назва</string>
-    <string name="receivemapfile_kb_copied">%d КБ скопійовано</string>
-    <string name="receivemapfile_cancelled">Передачу файлів відмінено</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_alreadyexists">Файл з такою назвою вже існує. Перезаписати наявний файл або зберегти новий файл?</string>
+    <string name="receivedownload_option_overwrite">Перезаписати</string>
+    <string name="receivedownload_option_differentname">Інша назва</string>
+    <string name="receivedownload_kb_copied">%d КБ скопійовано</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Завантажити автономну карту</string>
     <string name="downloadmap_choose">Обрати мапу</string>
     <string name="downloadmap_filename">Завантаження %s</string>
-    <string name="downloadmanager_not_available">Не вдалося завантажити файл карти, системний менеджер завантажень не доступний</string>
     <string name="download_started">Завантаження розпочалося у фоновому режимі</string>
     <string name="downloadmap_allow_metered_network">Дозволити завантаження по мережі через трафік (наприклад, мобільне з\'єднання)</string>
-    <string name="downloadmap_confirmation">Завантажити карту %1$s\"?\n\nЦе може зайняти певний час і може призвести до значних витрат, залежно від підключення до мережі. \n\nРозмір інформації:%2$s</string>
     <string name="downloadmap_handling">Сам завантаження буде оброблено менеджером завантаження вашої системи у фоновому режимі. Ви побачите сповіщення, щойно почалося завантаження (що може зайняти деякий час).</string>
     <string name="button_continue">Продовжити</string>
     <!-- history track -->
