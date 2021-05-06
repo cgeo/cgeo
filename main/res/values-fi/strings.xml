@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Kätkö</string>
     <string name="detail">Yksityiskohdat</string>
@@ -32,6 +31,7 @@
     <string name="gps">GPS Adventures Exhibit -kätkö</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Sijaintivapaa (päinvastainen) kätkö</string>
+    <string name="advlab">Adventure Lab-kätkö</string>
     <string name="userdefined">Käyttäjän määrittämä kätkö</string>
     <string name="unknown">Tuntematon kätkötyyppi</string>
     <!-- cache sizes -->
@@ -153,8 +153,6 @@
     <string name="log_problem_archive_label">Kätkö pitäisi arkistoida</string>
     <string name="log_problem_archive_text">Tämä kätköilijä ilmoitti, että kätkö pitäisi arkistoida. Vapaaehtoiselle kätkötarkastajalle on ilmoitettu.</string>
     <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d pikseliä</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d pikseliä, %3$s\nSkaalattu/pakattu:\n%4$d x %5$d pikseliä, ~%6$s</string>
     <string name="log_image_titleprefix">Kuva</string>
     <!-- translation -->
@@ -167,6 +165,7 @@
     <string name="err_captcha">Captcha vaaditaan. Ole hyvä ja katso <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> saadaksesi opastusta.</string>
     <string name="err_server">Geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_ec">Extremecaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
+    <string name="err_server_lc">labs.geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_su">Geocaching.su-sivustoon ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_gk">Yhteys GeoKrety.org:iin ei onnistunut. Verkkosivu saattaa olla alhaalla tai Internet-yhteytesi ei toimi.</string>
     <string name="err_login">Kirjautumistietoja ei ole tallennettu</string>
@@ -207,7 +206,7 @@
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
     <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
-    <string name="err_tb_find">c:geo ei löydä reissaajan tietoja</string>
+    <string name="err_tb_not_found">c:geo ei löydä reissaajaa %s.</string>
     <string name="err_tb_find_that">c:geo ei löydä reissaajan tietoja.</string>
     <string name="err_waypoint_cache_unknown">c:geo ei tiedä minkä kätkön haluat lisätä välietapiksi.</string>
     <string name="err_waypoint_add_failed">c:geo epäonnistui välietapin lisäämisessä.</string>
@@ -264,6 +263,7 @@
     <string name="err_trackable_log_not_anonymous">Kirjautumista %1$s c:geosta ei voi tehdä anonyymisti. Haluatko avata asetukset täyttääksesi tarvittavat tiedot %2$s?</string>
     <string name="err_trackable_no_preference_activity">Valitettavasti ei löydy sopivaa asetusnäyttöä.</string>
     <string name="confirm_unsaved_changes_title">Tallentamattomat muutokset</string>
+    <string name="confirm_discard_changes">Hylätäänkö tallentamattomat muutokset?</string>
     <string name="confirm_discard_wp_changes">Hylätäänkö tallentamattomat muutokset?</string>
     <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
     <string name="warn_log_load_additional_data">c:geo ei onnistunut lataamaan lisätietoja (matkalaiset/suosikkipisteet) lokkausta varten.</string>
@@ -279,7 +279,6 @@
     <string name="loc_fused">Yhdistetty</string>
     <string name="loc_low_power">Virransäästö</string>
     <string name="loc_home">Kotikoordinaatit</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Satelliitti</string>
     <string name="loc_trying">Yritetään paikantaa</string>
     <string name="loc_no_addr">Tuntematon osoite</string>
@@ -290,6 +289,9 @@
     <string name="menu_helpers">Apuohjelmat</string>
     <string name="menu_settings">Asetukset</string>
     <string name="menu_backup">Varmuuskopioi / Palauta</string>
+    <string name="menu_update">Päivitä</string>
+    <string name="menu_update_routingdata">Reititystiedot</string>
+    <string name="menu_update_mapdata">Karttatiedot</string>
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Suodata</string>
     <string name="menu_scan_geo">Skannaa geokoodi</string>
@@ -342,8 +344,8 @@
     <string name="caches_select_mode_exit">Poistu valintatilasta</string>
     <string name="caches_select_invert">Käänteinen valinta</string>
     <string name="caches_nearby">Lähistöllä</string>
-    <string name="caches_remove_all">Poista kaikki</string>
-    <string name="caches_remove_selected">Poista valitut</string>
+    <string name="caches_remove_all">Poista kaikki listalta</string>
+    <string name="caches_remove_selected">Poista valitut listalta</string>
     <string name="caches_remove_all_completely">Poista kaikki laitteesta</string>
     <string name="caches_remove_selected_completely">Poista valittu laitteesta</string>
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
@@ -432,6 +434,7 @@
     <string name="about_system_write_logcat_type_extended">Laajennettu</string>
     <string name="about_system_write_logcat_success">Lokitiedosto \"%1$s\" kirjoitettu kansioon \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Virhe kirjoitettaessa lokitiedostoa</string>
+    <string name="about_system_write_infos_downloadmanager">Näytä lataukset</string>
     <string name="changelog_github">Kaikki muutokset</string>
     <string name="about_nutshellmanual">Online-ohjeet</string>
     <string name="about_contributors_carnerodetails">c:geon luojana</string>
@@ -464,11 +467,12 @@
     <string name="settings_title_map">Kartta</string>
     <string name="settings_summary_map">Aseta kartan lähde, offline-kartta-asetukset ja kartan tiedot.</string>
     <string name="settings_title_map_data">Kartan tiedot</string>
+    <string name="settings_title_offline_routing">Offline-reititys</string>
+    <string name="settings_summary_offline_routing">Offline-reititys on käytettävissä, kun joko apusovellus \"BRouter\" on asennettu ja määritetty tai sisäinen reititys on käytössä.</string>
     <string name="settings_title_map_rotation">Kartan kääntö (Google Maps)</string>
     <string name="settings_title_waypoints">Reittipisteet</string>
     <string name="settings_title_map_content">Kartan sisältö</string>
     <string name="settings_title_map_behavior">Kartan käyttäytyminen</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Kätködatan sisältävä kansio</string>
     <string name="settings_title_data_dir_usage">Kätködatan kansio (%1$s käytetty)</string>
     <string name="calculate_dataDir_title">Geokätköjen käyttämä tila</string>
@@ -477,8 +481,8 @@
     <string name="confirm_data_dir_move_title">Siirretäänkö kätködatan kansio?</string>
     <string name="confirm_data_dir_move">Kätködatan siirtäminen voi kestää todella kauan riippuen laitteestasi sekä datan määrästä.</string>
     <string name="settings_title_basicmembers">Peruskäyttäjän asetukset</string>
-    <string name="settings_title_navigation">Navigointi</string>
-    <string name="settings_summary_navigation">Määritä ensisijainen navigointitapa ja valitse ulkoiset navigointisovellukset.</string>
+    <string name="settings_title_navigation">Reititys / Navigointi</string>
+    <string name="settings_summary_navigation">Määritä offline-reititys, valitse ensisijainen navigointitavat ja valitse ulkoiset navigointisovellukset.</string>
     <string name="settings_title_system">Järjestelmä</string>
     <string name="settings_summary_system">Järjestelmäkohtaiset asetukset ja vianetsintäasetukset.</string>
     <string name="settings_title_navigation_menu">Navigointivalikko</string>
@@ -490,6 +494,7 @@
     <string name="settings_goto_url_button">Lisää…</string>
     <string name="settings_activate_gc">Aktivoi</string>
     <string name="settings_activate_ec">Aktivoi</string>
+    <string name="settings_activate_lc">Aktivoi</string>
     <string name="settings_gc_legal_note">Käyttämällä geocaching.com -palvelua hyväksyt samalla Groundspeakin käyttöehdot.</string>
     <string name="settings_info_facebook_login_title">Kirjaudu käyttäen Facebookia tai Googlea</string>
     <string name="settings_info_facebook_login">c:geo ei voi kirjautua geocaching.com:iin Facebook- tai Google-tilillä, mutta se on helppo kiertää…</string>
@@ -498,6 +503,8 @@
     <string name="settings_gc_description">Anna c:geolle lupa geocaching.com-palvelun käyttöön etsiäksesi kätköjä.</string>
     <string name="settings_ec_description">Anna c:geolle lupa extremcaching.com-palvelun käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
     <string name="settings_su_description">Anna c:geolle lupa geocaching.su-palvelun käyttöön etsiäksesi kätköjä.</string>
+    <string name="settings_lc_description">Sisällytä Adventure Lab -katköt kartalla.\n\n(Saatavilla vain \"Geocaching.com\"in premium-jäsenille. Edellyttää aktivoitua \"Geocaching.com\"-palvelua.)\n\nTämän asetuksen vaihto edellyttää sovelluksen uudelleenkäynnistystä.</string>
+    <string name="lc_default_description">Tämä on geocaching.com Adventure Lab Cache. Seikkailuja voi pelata vain Groundspeakin Adventure Lab -sovelluksen kanssa. Napauta Adventure Lab-kuvaketta \"Yksityiskohdat\" -sivulla avataksesi tai asentaaksesi Adventure Lab-sovelluksen tätä seikkailua varten.\nJos et halua nähdä Adventure Lab -kätköjä kartalla ja haussa, voit poistaa ne käytöstä \"asetukset\" -valikossa - Palvelut - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Aktivoi</string>
     <string name="init_summary_oc_de">Lataa kätköt palvelusta opencaching.de</string>
     <string name="init_oc_de_description">Anna c:geolle lupa opencaching.de:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
@@ -547,7 +554,6 @@
     <string name="init_signature_template_name">Nimi</string>
     <string name="init_signature_template_difficulty">Vaikeusaste</string>
     <string name="init_signature_template_terrain">Maasto</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Lokiteksti</string>
     <string name="init_signature_template_size">Koko</string>
     <string name="init_signature_template_type">Tyyppi</string>
@@ -574,10 +580,19 @@
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
     <string name="init_zoomincludingwaypoints_description">Jos yksittäinen kätkö näytetään kartalla, säädetäänkö zoomaus näyttämään kaikki sen reittipisteet?</string>
     <string name="init_brouterThreshold">Laske reitti</string>
-    <string name="init_brouterThreshold_description">Maksimietäisyys, jonka sisällä brouter-apusovellus (jos asennettuna) laskee reitin.</string>
+    <string name="init_brouterThreshold_description">Suurin sallittu etäisyys, johon offline-reititys laskee reitin.</string>
     <string name="init_brouterShowBothDistances">Näytä suora etäisyys</string>
+    <string name="init_autoDownloads">Automaattinen lataus</string>
+    <string name="init_brouterAutoTileDownloads_description">Tarjoa automaattisesti puuttuvien reititystietojen laattojen latausta.</string>
+    <string name="init_mapAutoDownloads_description">Tarkista automaattisesti kartta- ja teematiedostojen päivitys. (Pätee vain tiedostoille, jotka olet ladannut sisäisen latauksen avulla.)</string>
+    <string name="init_brouterProfileWalk">\"Kävely\"-profiili</string>
+    <string name="init_brouterProfileBike">\"Pyöräily\"-profiili</string>
+    <string name="init_brouterProfileCar">\"Autoilu\"-profiili</string>
     <string name="brouter_recalculating">Lasketaan reittiä uudelleen taustalla…</string>
+    <string name="brouter_missing_data">Avaa BRouter ladataksesi puuttuvat reititystiedot (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Jos reititys on aktiivisena: Näytä suora etäisyys lasketun reitin etäisyyden lisäksi.</string>
+    <string name="init_useInternalRouting">Käytä sisäistä reititystä</string>
+    <string name="init_summary_useInternalRouting">Käytä c:geon sisäistä reititystä käyttääksesi automaattista reititystietojen lataamista ja muita toimintoja</string>
     <string name="init_bigSmileysOnMap">Isot kuvakkeet kirjatuille kätköille</string>
     <string name="init_summary_bigSmileysOnMap">Jos käytössä, kirjattujen kätköjen kohdalla näytetään isot hymiöt kätkötyyppikuvakkeen sijaan (vaatii uudelleenkäynnistyksen).</string>
     <string name="init_disabled">Piilota hyllytetyt</string>
@@ -666,6 +681,9 @@
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
     <string name="init_base_directory_description">Juurikansio julkiselle paikalliselle datalle</string>
     <string name="init_map_directory_description">Offline-kartat sisältävä kansio</string>
+    <string name="init_brouter_directory_description">Kansio, joka sisältää BRouterin reititystiedot</string>
+    <string name="init_updateinterval_title">Päivitysväli</string>
+    <string name="init_updateinterval_description">Muistuttaa sinua joka x päivä tarkastamaan päivitykset</string>
     <string name="init_gpx_importexportdir">GPX-kansio</string>
     <string name="init_dataDir">Valitse datakansio</string>
     <string name="init_dataDir_note">Voit valita geokätköjen lisätietojen (spoilerit, lokien kuvat, …) tallentamisen ulkoiseen muistiin (emuloitu tai aito ulkoinen SD-kortti, riippuen laitteestasi).</string>
@@ -794,9 +812,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Yhdistetty (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartan attribuutiot</string>
@@ -838,11 +853,12 @@
     <string name="persistablefolder_base">Juuri</string>
     <string name="persistablefolder_offline_maps">Offline-kartat</string>
     <string name="persistablefolder_offline_maps_themes">Karttateemat</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Varmuuskopiointi</string>
     <string name="persistablefolder_logfiles">Lokitiedostot</string>
     <string name="persistablefolder_fieldnotes">Kenttämerkinnät</string>
     <string name="persistablefolder_spoilerimages">Spoiler-kuvat</string>
+    <string name="persistablefolder_routingbase">Reititys</string>
+    <string name="persistablefolder_routingtiles">Reititystiedot</string>
     <string name="persistableuri_track">Reittitiedosto</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s valmiina</string>
@@ -1021,7 +1037,6 @@
     <string name="cache_menu_sygic_drive">Sygic (ajaessa)</string>
     <string name="cache_menu_radar">Tutka</string>
     <string name="cache_menu_map">Kartta</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Muut ulkoiset sovellukset</string>
     <string name="cache_menu_streetview">Katunäkymä</string>
     <string name="cache_menu_browser">Avaa selaimessa</string>
@@ -1035,6 +1050,10 @@
     <string name="menu_caches">Hallitse kätköjä</string>
     <string name="cache_menu_event">Lisää kalenteriin</string>
     <string name="cache_menu_extract_waypoints">Poimi reittipisteet</string>
+    <string name="cache_menu_set_found">Aseta löydetyksi</string>
+    <string name="cache_menu_set_DNF">Aseta DNF (ei löytynyt)</string>
+    <string name="cache_menu_reset_foundstate">Nollaa löydetty-tila</string>
+    <string name="cache_foundstate_updated">Löydetty-tila päivitetty</string>
     <string name="cache_menu_set_cache_icon">Aseta kätkökuvake</string>
     <string name="cache_icon_updated">Kätkökuvake päivitetty</string>
     <string name="cache_menu_details">Tarkat tiedot</string>
@@ -1115,6 +1134,8 @@
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_chirpwolf_start">Avaa Chirp Wolf lukeaksesi chirpin tiedot tälle kätkölle</string>
     <string name="cache_chirpwolf_install">Asenna Chirp Wolf pystyäksesi lukemaan chirpin tietoja</string>
+    <string name="cache_alc_start">Avaa Adventure Lab -sovellus aloittaaksesi tämän seikkailun</string>
+    <string name="cache_alc_install">Asenna Adventure Lab-sovellus pelataksesi tätä seikkailua</string>
     <string name="context_share_as_text">Jaa teksti</string>
     <string name="context_share_as_link">Jaa linkki</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
@@ -1165,6 +1186,7 @@
     <string name="waypoint_coordinates">Koordinaatit</string>
     <string name="waypoint_cache_coordinates">Kätkön koordinaatit</string>
     <string name="waypoint_calculate_coordinates">Laske koordinaatit</string>
+    <string name="waypoint_calculated_coordinates">Lasketut koordinaatit</string>
     <string name="waypoint_custom">Oma</string>
     <string name="waypoint_my_coordinates">Sijaintini</string>
     <string name="waypoint_bearing">Suunnassa</string>
@@ -1221,10 +1243,10 @@
     <string name="map_showwp_parking">Parkkipaikka-reittipisteet</string>
     <string name="map_showwp_visited">Vieraillut reittipisteet</string>
     <string name="map_show_track">Näytä GPX-rata/reitti</string>
-    <string name="init_renderthemefolder_synctolocal">Synkronoi teemat sovelluksen omaan kansioon</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Tämä valinta voi parantaa karttanäkymän avaamisen suorituskykyä, laitteen tallennustilan kustannuksella.</string>
+    <string name="init_renderthemefolder_synctolocal">Synkronoi teemat</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Tämä synkronoi teemasi sovelluksen yksityiseen kansioon karttanäkymän avaamisen suorituskyvyn parantamiseksi, pienellä tallennustilan kustannuksella.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ota teemakansion synkronointi käyttöön</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Tämä synkronoi karttateemakansion sisällön pysyvästi sovelluksen yksityiseen kansioon, nopeamman pääsyn takaamiseksi.\n\nKarttateematiedostokansiolla \'%1$s\' on tällä hetkellä %2$s, %3$s ja on %4$s:n kokoinen.\n\nHaluatko kytkeä kansion synkronoinnin päälle?</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Tämä synkronoi säännöllisesti karttateematiedostokansion sisällön sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi. Varmista, että teemakansiosi sisältää vain teematiedostot, mutta ei muita (isoja) tiedostoja ennen tämän toiminnon päälle kytkemistä.\n\nKarttateematiedostokansiossasi \'%1$s\' on tällä hetkellä %2$s, %3$s ja on %4$s:n kokoinen\n\nHaluatko ottaa kansion synkronoinnin käyttöön?</string>
     <string name="onetime_mapthemefixslow_title">Korjaa hidas kartan teeman renderöinti</string>
     <string name="onetime_mapthemefixslow_message">Ei-pakattujen teemojen käyttäminen voi hidastaa karttanäkymän avaamisen suorituskykyä. Voit pakata tai synkronisoida teemasi nopeuttaaksesi kartan käynnistymistä ja pienentää viivettä.</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
@@ -1355,6 +1377,7 @@
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">BRouter tarjoaa offline-reitityksen. Jos se on asennettuna ja tarvittavat tiedostot ladattuna, c:geo näyttää kartalla reitin kätkölle automaattisesti.</string>
     <string name="helper_chirpwolf_description">Chirp Wolfin avulla voit lukea ANT+/Garmin chirp -tageja, joita tarvitaan ANT+/chirp -geokätköihin.</string>
+    <string name="helper_alc_description">Adventure Lab -sovellus puhelimeesi tai tablettiisi.</string>
     <!-- export -->
     <string name="share_export">Jaa / Vie</string>
     <string name="export">Vienti</string>
@@ -1368,7 +1391,6 @@
     <string name="export_fieldnotes_upload_success">Lähetetty onnistuneesti geocaching.com:iin</string>
     <string name="export_fieldnotes_onlynew">Vain edellisen lähetyksen jälkeiset</string>
     <string name="export_fieldnotes_creating">Luodaan kenttämerkintöjä…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX-tiedosto viedään %1$s päivämäärä ja aika sen tiedostonimenä.</string>
     <string name="export_confirm_title">Viedään %1$s</string>
     <string name="export_confirm_message">Polku: %1$s\nTiedostonimi: %2$s</string>
@@ -1751,8 +1773,6 @@
     <string name="init_low_disk_space_message">Geokätkötietojen kansio on vähäisessä tallennustilassa. Tämä voi aiheuttaa c:geon toimintahäiriöitä. Vapauta tilaa lisää.</string>
     <string name="init_confirm_debug">c:geo on vianmääritystilassa!</string>
     <string name="list_confirm_debug_message">Vianmääritystila aiheuttaa epävakautta! Haluatko poistaa sen käytöstä?</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Sulje sovellus</string>
     <string name="ask_again">Kysy uudelleen</string>
@@ -1780,11 +1800,10 @@
     <string name="individual_route_error_toggling_waypoint">virhe kytkettäessä reittipiste päälle/pois</string>
     <string name="individual_route_error_single_waypoint_mode">Ei käytettävissä yksittäisen reittipisteen tilassa</string>
     <string name="map_sort_individual_route">Lajittele yksittäinen reitti</string>
-    <string name="map_export_individual_route">Vie yksittäinen reitti</string>
     <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
-    <string name="map_autotarget_individual_route">Aseta kohteeksi automaattisesti</string>
-    <string name="map_disable_autotarget_individual_route">Poistettu käytöstä \"Aseta kohteeksi automaattisesti\"</string>
+    <string name="map_autotarget_individual_route">Aseta reitin alku kohteeksi</string>
+    <string name="map_disable_autotarget_individual_route">\"Aseta reitin alku kohteeksi\" pois päältä</string>
     <string name="map_clear_manual_targets">Tyhjennä manuaaliset kohteet</string>
     <string name="map_manual_targets_cleared">Manuaaliset kohteet tyhjennetty</string>
     <string name="map_clear_individual_route">Tyhjennä yksittäinen reitti</string>
@@ -1849,27 +1868,30 @@
     <string name="localfile_intenttitle">c:geo Paikallisen tiedoston käsittelijä</string>
     <string name="localfile_title">Avaa paikallinen tiedosto</string>
     <string name="localfile_cannot_handle">Virhe luettaessa tiedostoa tao c:geo ei pysty käsittelemään tätä tiedostomuotoa.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Vastaanota karttatiedosto</string>
-    <string name="receivemapfile_success">Karttatiedosto otettu vastaan onnistuneesti ja tallennettu karttahakemistoon, nimi on \"%s\"</string>
-    <string name="receivemapfile_error">Virhe otettaessa karttatiedostoa vastaan</string>
-    <string name="receivemapfile_error_io_exception">I/O-virhe karttatiedostoa vastaanotettaessa. Onko karttahakemistosi \"%s\" kirjoitettavissa?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Tiedostoa ei löydy -virhe tapahtui vastaanottaessa karttatiedostoa.</string>
-    <string name="receivemapfile_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
-    <string name="receivemapfile_option_overwrite">Korvaa</string>
-    <string name="receivemapfile_option_differentname">Eri nimi</string>
-    <string name="receivemapfile_kb_copied">%d kB kopioitu</string>
-    <string name="receivemapfile_cancelled">Karttatiedoston siirto peruttu</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Vastaanota tiedosto</string>
+    <string name="receivedownload_success">Tiedosto tallennettu onnistuneesti nimellä \"%s\"</string>
+    <string name="receivedownload_error">Virhe tiedostoa vastaanotettaessa</string>
+    <string name="receivedownload_error_io_exception">I/O-virhe tiedostoa vastaanotettaessa. Onko kansiosi \"%s\" kirjoitettavissa?</string>
+    <string name="receivedownload_error_filenotfound_exception">Tiedostoa ei löydy -virhe tapahtui vastaanottaessa tiedostoa.</string>
+    <string name="receivedownload_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
+    <string name="receivedownload_option_overwrite">Korvaa</string>
+    <string name="receivedownload_option_differentname">Eri nimi</string>
+    <string name="receivedownload_kb_copied">%d kB kopioitu</string>
+    <string name="receivedownload_cancelled">Tiedostonsiirto peruttu</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Lataa offline-kartta</string>
+    <string name="download_title">Lataa tiedosto</string>
     <string name="downloadmap_info">Valitse alueesi kartta tiedosto napauttamalla \"Tallenna\" kuvaketta.\n\nLataus suoritetaan taustalla. Kun siirto on valmis, tiedosto kopioidaan c:geo karttakansioon ja se asetetaan nykyiseksi kartaksi.\n\nOle varovainen: Kartan lataaminen voi aiheuttaa suurta verkkoliikennettä!</string>
     <string name="downloadmap_choose">Valitse kartta</string>
     <string name="downloadmap_filename">Ladataan %s</string>
-    <string name="downloadmanager_not_available">Karttatiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
+    <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
     <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
-    <string name="downloadmap_confirmation">Ladataanko kartta \"%1$s\"?\n\nTämä voi viedä jonkin aikaa ja voi johtaa merkittäviin kustannuksiin, verkkoyhteydestäsi riippuen.\n\nKokotieto: %2$s</string>
+    <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
+    <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>
     <string name="downloadmap_handling">Itse lataus käsitellään taustalla järjestelmäsi latauksenhallinnan kautta. Sinun pitäisi nähdä ilmoitus heti kun lataus alkaa (tämä voi viedä jonkin aikaa).</string>
     <string name="button_continue">Jatka</string>
     <string name="downloadmap_onedirup">(yksi taso ylös)</string>
@@ -1882,11 +1904,20 @@
     <string name="downloadmap_checking_for_updates">Tarkistetaan päivityksiä…</string>
     <string name="downloadmap_install_theme_title">Asenna teematiedosto</string>
     <string name="downloadmap_install_theme_info">Ladattu kartta vaatii erityisen teematiedoston. Haluatko ladata tämän samalla?</string>
+    <string name="downloadtile_title">Puuttuvat reititystiedot</string>
+    <string name="downloadtile_info">c:geo ei voi laskea pyydettyä reittiä, koska reititystiedosto puuttuu. Haluatko ladata puuttuvat reititystiedot?</string>
+    <string name="tileupdate_info">Haluatko tarkistaa ladattujen reititystietojen päivitykset?</string>
+    <string name="mapupdate_info">Haluatko tarkistaa kartta- ja teematiedostojen päivitykset?</string>
+    <string name="no_updates_found">Päivityksiä ei löytynyt</string>
+    <string name="updates_check">Päivitysten tarkistus</string>
     <string name="mapserver_mapsforge_info">Peruskartat, karttateemoja ei tarvita</string>
     <string name="mapserver_openandromaps_info">Yksityiskohtaiset kartat, \"Elevate\"-karttateema vaaditaan</string>
     <string name="mapserver_openandromaps_themes_info">Yksityiskohtainen karttateema, rakennettu \"OpenAndroMaps\" karttoja varten</string>
     <string name="mapserver_freizeitkarte_info">Yksityiskohtaiset kartat, vaativat yhden \"freizeitkarte\" kartan teemoista.</string>
     <string name="mapserver_freizeitkarte_themes_info">Yksityiskohtainen karttateema, rakennettu \"Freizeitkarte\" karttoja varten</string>
+    <string name="mapserver_hylly_info">Yksityiskohtaiset kartat Suomea varten, vaativat yhden \"Hylly\" karttateemoista</string>
+    <string name="mapserver_hylly_themes_info">Yksityiskohtainen karttateema, rakennettu \"Hylly\" karttoja varten</string>
+    <string name="brouter_info">Offline-reitityspalvelu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
@@ -1913,9 +1944,11 @@
     <string name="wizard_permissions_intro">c:geo tarvitsee tietyt käyttöoikeudet laitteellesi toimiakseen oikein.\nSelitän lisää yksityiskohtia seuraavissa vaiheissa.</string>
     <string name="wizard_permissions_folder_title">Aseta kansio: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen tietoja kuten GPX-tiedostoja, varmuuskopioita, kenttämerkintöjä ja lokitiedostoja. Oletusarvoisesti nämä tiedostot tallennetaan kansioihin, jotka sijaitsevat \"juurikansiossa\". Valitse tai luo tällainen kansio seuraavassa vaiheessa.\n\nJos olet päivittänyt c:geon edellisestä versiosta, valitse olemassa oleva kansio \"cgeo\" laitteen tallennustilan juuritasolla.\nVihje: Saatat joutua poistamaan piilotuksen laitteesi sisäisestä tallennustilasta kun tiedostovalitsin näytetään seuraavaksi.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttatiedostoja. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttojen teematiedostot. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen GPX-tiedostoja, esim. kätköjen sekä reittien tuontiin/vientiin. Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttatiedostoja.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen teematiedostoja offline-karttoja varten.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen GPX-tiedostoja (esim. jos haluat tuoda tai viedä kätköjä tai reittejä).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Jotta voit käyttää integroitua reitityslaattadataa automaattiseen lataukseen ja päivitykseen, sinun täytyy asettaa laattojen kansio.</string>
+    <string name="wizard_select_or_create">Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
     <string name="wizard_platforms_title">Määritä palvelut</string>
     <string name="wizard_platforms_intro">Löytääksesi geokätköjä c:geon avulla, tarvitset tilin c:geon tukemaa geokätköilypalvelua varten.\nValitse haluamasi palvelu alta, jotta voit kirjautua sisään olemassa olevalla tililläsi tai luoda uuden tilin.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
