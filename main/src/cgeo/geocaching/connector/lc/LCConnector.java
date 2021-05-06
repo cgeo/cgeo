@@ -143,12 +143,6 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
         return disabled ? R.drawable.marker_disabled : R.drawable.marker;
     }
 
-
-    @Override
-    public int getMaxTerrain() {
-        return 1;
-    }
-
     @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {

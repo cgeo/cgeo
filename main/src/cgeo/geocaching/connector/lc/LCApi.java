@@ -162,8 +162,6 @@ final class LCApi {
             cache.setName(response.get("Title").asText());
             cache.setCoords(new Geopoint(location.get("Latitude").asText(), location.get("Longitude").asText()));
             cache.setType(CacheType.ADVLAB);
-            cache.setDifficulty((float) 1);
-            cache.setTerrain((float) 1);
             cache.setSize(CacheSize.getById("virtual"));
             cache.setArchived(response.get("IsArchived").asBoolean()); // we get that even in passive mode!
             // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
@@ -195,8 +193,6 @@ final class LCApi {
             cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\" </img><p><p>" : "") + desc);
             cache.setCoords(new Geopoint(location.get("Latitude").asText(), location.get("Longitude").asText()));
             cache.setType(CacheType.ADVLAB);
-            cache.setDifficulty((float) 1);
-            cache.setTerrain((float) 1);
             cache.setSize(CacheSize.getById("virtual"));
             // cache.setArchived(response.get("IsArchived").asBoolean()); as soon as we're using active mode
             // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
