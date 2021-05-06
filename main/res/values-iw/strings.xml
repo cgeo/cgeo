@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">מטמון</string>
     <string name="detail">פירוט</string>
@@ -174,7 +173,6 @@
     <string name="err_tb_display">c:geo לא יכול להציג את הTrackable שרצית. האם הוא באמת Trackable?</string>
     <string name="err_tb_details_open">c:geo לא יכול לפתוח את פרטי הTrackable.</string>
     <string name="err_tb_not_loggable">Trackable זה אינו ניתן לרישום.</string>
-    <string name="err_tb_find">c:geo לא מצליח למצוא Trackable</string>
     <string name="err_tb_find_that">c:geo לא מצליח למצוא את הTrackable הזה.</string>
     <string name="err_waypoint_cache_unknown">c:geo לא יודע לאיזה מטמון ניסית להוסיף נקודת דרך.</string>
     <string name="err_waypoint_add_failed">c:geo כשל בהוספת נקודת הדרך שלך.</string>
@@ -296,8 +294,6 @@
     <string name="caches_select_mode_exit">צא ממצב בחירה</string>
     <string name="caches_select_invert">הפוך בחירה</string>
     <string name="caches_nearby">בקרבת מקום</string>
-    <string name="caches_remove_all">הסר הכל</string>
-    <string name="caches_remove_selected">הסר פריטים שנבחרו</string>
     <string name="caches_delete_events">מחק אירועי עבר</string>
     <string name="caches_upload_modifiedcoords">העלאת נקודות ציון מעודכנות</string>
     <string name="caches_refresh_selected">רענן את המטמונים שנבחרו</string>
@@ -371,9 +367,7 @@
     <string name="settings_summary_map">קבע מקור מפה, הגדרות מפה לא-מקוונת ופרטי מפה.</string>
     <string name="settings_title_map_data">נתוני מפה</string>
     <string name="settings_title_map_content">תוכן מפה</string>
-    <string name="settings_title_gpx">GPx</string>
     <string name="settings_title_basicmembers">אפשרויות עבור משתמשים רגילים</string>
-    <string name="settings_summary_navigation">בחר שיטות ניווט מועדפות ואפליקציות ניווט חיצוניות.</string>
     <string name="settings_title_system">מערכת</string>
     <string name="settings_title_navigation_menu">תפריט ניווט</string>
     <string name="settings_category_browser">דפדפן</string>
@@ -412,7 +406,6 @@
     <string name="init_signature_template_number">מספר</string>
     <string name="init_signature_template_owner">בעלים</string>
     <string name="init_signature_template_name">שם</string>
-    <string name="init_signature_template_url">כתובת אינטרנט</string>
     <string name="init_ratingwanted">דירוג GCvote</string>
     <string name="init_skin">ערכת נושא קלה</string>
     <string name="init_summary_skin">השתמש בערכת נושא קלה (דרושה הפעלה מחדש)</string>
@@ -425,9 +418,6 @@
     <string name="feature_own_coordinates">אחסון נקודות ציון מעודכנות</string>
     <!-- proximity notification -->
     <!-- map sources -->
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="init_sendToCgeo_registering">Registering your device for send2cgeo&#8230;</string>
     <!-- Content Storage -->
     <!-- Persistable Folders and Uris -->
@@ -526,7 +516,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->
