@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Láda</string>
     <string name="detail">Adatok</string>
@@ -186,7 +185,6 @@
     <string name="err_tb_display">Sajnáljuk, a c:geo nem tudja megjeleníteni az utazót. Biztos, hogy ez egy utazó?</string>
     <string name="err_tb_details_open">Sajnáljuk, a c:geo nem tudja megnyitni az utazó adatait.</string>
     <string name="err_tb_not_loggable">Ezt az utazót nem lehet logolni.</string>
-    <string name="err_tb_find">Sajnáljuk, a c:geo nem találja az utazót.</string>
     <string name="err_tb_find_that">Sajnáljuk, a c:geo nem találja azt az utazót.</string>
     <string name="err_waypoint_cache_unknown">Sajnáljuk, a c:geo nem tudja melyik ládához szeretnéd hozzáadni az útpontot.</string>
     <string name="err_waypoint_add_failed">Sajnáljuk, a c:geo nem tudta hozzáadni az útpontodat.</string>
@@ -250,7 +248,6 @@
     <string name="loc_fused">Kombinált</string>
     <string name="loc_low_power">Takarékos üzemmód</string>
     <string name="loc_home">Otthon koordinátái</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Műhold</string>
     <string name="loc_trying">Keresés folyamatban</string>
     <string name="loc_no_addr">Ismeretlen cím</string>
@@ -313,8 +310,6 @@
     <string name="caches_select_mode_exit">Kijelölés vége</string>
     <string name="caches_select_invert">Kijelölés megfordítása</string>
     <string name="caches_nearby">Közeli</string>
-    <string name="caches_remove_all">Összes törlése</string>
-    <string name="caches_remove_selected">Kijelöltek törlése</string>
     <string name="caches_delete_events">Elmúlt események törlése</string>
     <string name="caches_upload_modifiedcoords">Módosított koordináták feltöltése</string>
     <string name="caches_upload_modifiedcoords_warning">Feltöltöd az összes (kijelölt) láda módosított koordinátáját és felülírod a szerveren lévő koordinátákat? Ezt nem lehet visszavonni.</string>
@@ -417,14 +412,11 @@
     <string name="settings_summary_map">Térképválasztás, offline térképek opcióinak beállítása</string>
     <string name="settings_title_map_data">Térképek beállításai</string>
     <string name="settings_title_map_content">Térképek részletessége</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="calculate_dataDir_title">Ládaadatok keresése</string>
     <string name="calculate_dataDir">Ládaadatok méretének összegzése</string>
     <string name="settings_data_dir_item">%1$s (%2$s szabad)</string>
     <string name="confirm_data_dir_move">A ládaadatok mozgatása hosszú ideig is eltarthat az adatok mennyiségétől, a készülékedtől függően.</string>
     <string name="settings_title_basicmembers">Normál tagok beállításai</string>
-    <string name="settings_title_navigation">Navigáció</string>
-    <string name="settings_summary_navigation">Preferált navigációs eszközök és külső navigációs programok kiválasztása</string>
     <string name="settings_title_system">Rendszer</string>
     <string name="settings_title_navigation_menu">Navigációs menü</string>
     <string name="settings_category_browser">Böngésző</string>
@@ -1353,7 +1345,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->
