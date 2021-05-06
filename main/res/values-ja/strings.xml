@@ -1881,6 +1881,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="mapserver_openandromaps_themes_info">「OpenAndroMaps」用の詳細な地図テーマ</string>
     <string name="mapserver_freizeitkarte_info">詳細な地図は「Freizeitkartte」用の地図テーマが必要です。</string>
     <string name="mapserver_freizeitkarte_themes_info">「Freizeitkarte」用の詳細な地図テーマ</string>
+    <string name="mapserver_hylly_info">フィンランドの詳細な地図は「Hylly」用の地図テーマが必要です。</string>
+    <string name="mapserver_hylly_themes_info">「Hylly」用の詳細な地図テーマ</string>
     <string name="brouter_info">オフラインルート検索</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
