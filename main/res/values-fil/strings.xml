@@ -157,7 +157,6 @@
     <string name="err_tb_display">c:geo ay hindi sya maka display ng gusto mong subaybayan. Kailangan ba talagang subaybayan?</string>
     <string name="err_tb_details_open">c:geo ay hindi makabukas sa mga detalye na subaybayan.</string>
     <string name="err_tb_not_loggable">Ito ay maaring subaybayan pero hindi naka-login.</string>
-    <string name="err_tb_find">c:geo ay hindi puwedeng subaybayan</string>
     <string name="err_tb_find_that">ang c:geo ay hindi nakakita sa nasusubaybayang iyon.</string>
     <string name="err_waypoint_cache_unknown">ang c:geo ay walang alam sa kung anong cache ang iyong gusto na dagdagan ng parang isang waypoint.</string>
     <string name="err_waypoint_add_failed">ang c:geo ay nabiigo sa pagdagdag ng iyong puntongdaan.</string>
@@ -280,8 +279,6 @@
     <string name="caches_select_mode_exit">Lumabas sa napiling mode</string>
     <string name="caches_select_invert">Baliktarin ang pagpipilian</string>
     <string name="caches_nearby">Malapit sa</string>
-    <string name="caches_remove_all">Ang lahat ay tanggalin</string>
-    <string name="caches_remove_selected">Tanggalin ang mga napili</string>
     <string name="caches_delete_events">Alisin ang nakalipas na mga kaganapan</string>
     <string name="caches_refresh_selected">I-refresh ang napili</string>
     <string name="caches_refresh_all">Ang lahat ay i-refresh</string>
@@ -361,14 +358,11 @@
     <string name="settings_summary_map">Ang pagtakda ng pinagmumulan ng mapa, mga setting sa mapang naka-offline at mga detalye ng mapa.</string>
     <string name="settings_title_map_data">Ang Datos ng Mapa</string>
     <string name="settings_title_map_content">Nilalaman ng Mapa</string>
-    <string name="settings_title_gpx">Ang GPX</string>
     <string name="calculate_dataDir_title">Ang paggamit ng mga datos sa Geocache</string>
     <string name="calculate_dataDir">Pagkalkula ng mga datos na nagamit sa Geocache</string>
     <string name="settings_data_dir_item">%1$s (%2$s libri)</string>
     <string name="confirm_data_dir_move">Ang paglipat ng datos ng geocache ay maaring tumagal ng mahabang oras, depende ito sa aparato at ang bilang ng datos.</string>
     <string name="settings_title_basicmembers">Pagpipilian sa mga Pangunahin na Miyembro</string>
-    <string name="settings_title_navigation">Ang nabigasyon</string>
-    <string name="settings_summary_navigation">Pumili ng ginusto na nabigasyon sa mga pamamaraan at pumili ng nabigasyon sa panlabas na mga app.</string>
     <string name="settings_title_system">Ang Sistema</string>
     <string name="settings_title_navigation_menu">Ang Menu ng Nabigasyon</string>
     <string name="settings_category_browser">Ang Browser</string>
@@ -662,7 +656,6 @@
     <string name="cache_menu_sygic_drive">Ang Sygic sa (Pagmamaneho)</string>
     <string name="cache_menu_radar">Ang radar</string>
     <string name="cache_menu_map">Ang mapa</string>
-    <string name="cache_menu_rmaps">Ang Rmaps</string>
     <string name="cache_menu_map_ext">Iba pang mga aplikasyon na panlabas</string>
     <string name="cache_menu_streetview">Ang tanawin sa Kalye</string>
     <string name="cache_menu_browser">Ibukas sa browser</string>
@@ -904,7 +897,6 @@
     <string name="export_fieldnotes_upload_success">Ang pag-upload sa geocaching.com ay Matagumpay</string>
     <string name="export_fieldnotes_onlynew">Dahil lamang sa pinakahuling pagluwas</string>
     <string name="export_fieldnotes_creating">Gumawa ng mga Nota sa Field&#8230;</string>
-    <string name="export_gpx">Ang GPX</string>
     <string name="export_gpx_info">Ang GPX file ay mai-export sa %1$s gamit ang kasalukuyang petsa at oras bilang pangalan ng file nito.</string>
     <string name="export_confirm_title">Ang Pag-eeksport %1$s</string>
     <string name="export_confirm_message">Para sa Path: %1$s\n Ang Pangalan ng Payl: %2$s</string>
@@ -1234,7 +1226,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->
