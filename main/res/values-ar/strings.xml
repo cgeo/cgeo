@@ -165,7 +165,6 @@
     <string name="err_tb_display">c:geo لا يمكنه عرض أمتعة السفر التي تريدها. هل هي حقا أمتعة سفر؟</string>
     <string name="err_tb_details_open">c:geo لا يمكنه فتح تفاصيل أمتعة السفر.</string>
     <string name="err_tb_not_loggable">أمتعة السفر هذه غير قابل للتسجيل.</string>
-    <string name="err_tb_find">c:geo لا يستطيع العثور على أمتعة السفر</string>
     <string name="err_tb_find_that">c:geo لا يستطيع العثور على أمتعة السفر تلك.</string>
     <string name="err_waypoint_cache_unknown">c:geo لا يعرف ماهو المخبئ الذي تريد أن تضيف له إحداثية طريق.</string>
     <string name="err_waypoint_add_failed">c:geo فشل في إضافة إحداثية طريق.</string>
@@ -282,8 +281,6 @@
     <string name="caches_select_mode_exit">إنهاء الوضع المحدد</string>
     <string name="caches_select_invert">إعكس التحديد</string>
     <string name="caches_nearby">قريب</string>
-    <string name="caches_remove_all">إزالة الكل</string>
-    <string name="caches_remove_selected">إزالة المحدد</string>
     <string name="caches_delete_events">إزالة الأحداث الماضية</string>
     <string name="caches_refresh_selected">عمل تحديث للتحديد</string>
     <string name="caches_refresh_all">تحديث الكل</string>
@@ -368,8 +365,6 @@
     <string name="settings_data_dir_item">%1$s (مجاناً %2$s)</string>
     <string name="confirm_data_dir_move">نقل بيانات العلبة المخبئة قد يستغرق وقتاً طويلاً، يعتم الأمر على جهازك و كمية البيانات.</string>
     <string name="settings_title_basicmembers">خيارات للاعضاء العاديين</string>
-    <string name="settings_title_navigation">الملاحة</string>
-    <string name="settings_summary_navigation">اختر طريقة الملاحة المفضلة و اختر تطبيقات خارجية الملاحة.</string>
     <string name="settings_title_system">النظام</string>
     <string name="settings_title_navigation_menu">الملاحة</string>
     <string name="settings_category_browser">المتصفح</string>
@@ -426,7 +421,6 @@
     <string name="init_signature_template_number">عدد</string>
     <string name="init_signature_template_owner">مالك</string>
     <string name="init_signature_template_name">الاسم</string>
-    <string name="init_signature_template_url">عنوان URL</string>
     <string name="init_signature_template_log">نص تسجيل الزيارة</string>
     <string name="init_ratingwanted">تقييم GcVote</string>
     <string name="init_summary_ratingwanted">تحميل تقييم المخبئ من GCvote.com</string>
@@ -1185,7 +1179,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <!-- history track export -->
