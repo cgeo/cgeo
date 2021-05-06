@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cutie</string>
     <string name="detail">Detalii</string>
@@ -145,7 +144,6 @@
     <string name="log_problem_archive_label">Cache-ul trebuie arhivat</string>
     <string name="log_problem_archive_text">Acest geocacher a raportat că această geocutie ar trebui arhivată. Un examinator din comunitatea de voluntari a fost notificat.</string>
     <string name="log_image_scale_option_noscaling">Fără redimensionare</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_titleprefix">Imagine</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradu în limba %s</string>
@@ -195,7 +193,6 @@
     <string name="err_tb_display">c:geo nu poate afişa obiectul călător solicitat. Chiar este un obiect călător?</string>
     <string name="err_tb_details_open">c:geo nu poate accesa detaliile obiectului călător.</string>
     <string name="err_tb_not_loggable">Nu se pot face însemnări cu acest obiect călător.</string>
-    <string name="err_tb_find">c:geo nu poate găsi obiectul călător</string>
     <string name="err_tb_find_that">c:geo nu poate găsi acest obiect călător.</string>
     <string name="err_waypoint_cache_unknown">c:geo nu ştie pentru ce cutie vrei sa adaugi un punct.</string>
     <string name="err_waypoint_add_failed">c:geo nu a putut adăuga punctul.</string>
@@ -317,8 +314,6 @@
     <string name="caches_select_mode_exit">Renunţă la modul selecţie</string>
     <string name="caches_select_invert">Inversează selecţia</string>
     <string name="caches_nearby">În apropiere</string>
-    <string name="caches_remove_all">Șterge toate</string>
-    <string name="caches_remove_selected">Şterge geocutiile selectate</string>
     <string name="caches_delete_events">Şterge evenimentele trecute</string>
     <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
     <string name="caches_refresh_all">Reîncarcă toate cutiile</string>
@@ -402,8 +397,6 @@
     <string name="settings_data_dir_item">%1$s (%2$s disponibil)</string>
     <string name="confirm_data_dir_move">Mutarea dosarului cu geocutii ar putea dura un timp mai îndelungat, în funcţie de disăpzitivul tău şi de volumul de informaţii.</string>
     <string name="settings_title_basicmembers">Opţiuni pentru Basic Members</string>
-    <string name="settings_title_navigation">Navigare</string>
-    <string name="settings_summary_navigation">Alege metodele de navigare preferate şi aplicaţii externe pentru navigare.</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Meniu navigaţie</string>
     <string name="settings_category_logging_other">Alte opţiuni pentru jurnal</string>
@@ -1282,7 +1275,7 @@
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
-    <!-- ReceiveMapFileActivity -->
+    <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <string name="map_trail_show">Arată traseu</string>
