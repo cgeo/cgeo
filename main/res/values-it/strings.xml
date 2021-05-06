@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Dettagli</string>
@@ -32,6 +31,7 @@
     <string name="gps">Fiera GPS cache</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Locationless (Reverse) Cache</string>
+    <string name="advlab">Cache Adventure Lab</string>
     <string name="userdefined">Cache definito dall\'utente</string>
     <string name="unknown">Tipo sconosciuto</string>
     <!-- cache sizes -->
@@ -153,8 +153,6 @@
     <string name="log_problem_archive_label">Questo cache dovrebbe essere archiviato</string>
     <string name="log_problem_archive_text">Questo geocacher ha segnalato che il cache dovrebbe essere archiviato. Un recensore volontario della community ha ricevuto una notifica.</string>
     <string name="log_image_scale_option_noscaling">Nessun ridimensionamento</string>
-    <string name="log_image_scale_option_entry">%1$d x %2$d px</string>
-    <string name="log_image_scale_option_entry_noimage">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nRidotto/Compresso:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Immagine</string>
     <!-- translation -->
@@ -167,6 +165,7 @@
     <string name="err_captcha">Captcha richiesto. Si prega di fare riferimento alla nostra <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> per una guida.</string>
     <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
+    <string name="err_server_lc">Impossibile contattare labs.geocaching.com. Il sito Web potrebbe essere non attivo o la tua connessione internet interrotta.</string>
     <string name="err_server_su">Impossibile contattare Geocaching.su. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
     <string name="err_server_gk">Impossibile contattare GeoKrety.org. Il sito Web potrebbe essere inattivo o la tua connessione internet non sta funzionando.</string>
     <string name="err_login">Informazioni di login non memorizzate</string>
@@ -207,7 +206,7 @@
     <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
     <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
     <string name="err_tb_not_loggable">Questo trackable non è loggabile.</string>
-    <string name="err_tb_find">c:geo non trova nessun trackable</string>
+    <string name="err_tb_not_found">c:geo non riesce a trovare trackable %s.</string>
     <string name="err_tb_find_that">c:geo non trova quel trackable.</string>
     <string name="err_waypoint_cache_unknown">c:geo non conosce a quale cache vuoi aggiungere un waypoint.</string>
     <string name="err_waypoint_add_failed">c:geo non è riuscito ad aggiungere il tuo waypoint.</string>
@@ -264,6 +263,7 @@
     <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
     <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
     <string name="confirm_unsaved_changes_title">Modifiche non salvate</string>
+    <string name="confirm_discard_changes">Scartare le modifiche non salvate?</string>
     <string name="confirm_discard_wp_changes">Ignorare i waypoint non salvati?</string>
     <string name="err_request_popup_info">c:geo non riesce ad ottenere le informazioni popup del cache.</string>
     <string name="warn_log_load_additional_data">c:geo non riesce a caricare dati aggiuntivi (trackables/punti preferiti) per il logging.</string>
@@ -279,7 +279,6 @@
     <string name="loc_fused">Combinato</string>
     <string name="loc_low_power">Risparmio energetico</string>
     <string name="loc_home">Coordinate di casa</string>
-    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Localizzazione in corso</string>
     <string name="loc_no_addr">Indirizzo sconosciuto</string>
@@ -290,6 +289,9 @@
     <string name="menu_helpers">Programmi utili</string>
     <string name="menu_settings">Impostazioni</string>
     <string name="menu_backup">Backup / Ripristino</string>
+    <string name="menu_update">Aggiorna</string>
+    <string name="menu_update_routingdata">Dati di navigazione</string>
+    <string name="menu_update_mapdata">Dati mappa</string>
     <string name="menu_history">Cronologia</string>
     <string name="menu_filter">Filtri</string>
     <string name="menu_scan_geo">Scansiona geocode</string>
@@ -342,8 +344,8 @@
     <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
     <string name="caches_select_invert">Inverti selezione</string>
     <string name="caches_nearby">Qui vicino</string>
-    <string name="caches_remove_all">Elimina tutti</string>
-    <string name="caches_remove_selected">Elimina selezionati</string>
+    <string name="caches_remove_all">Rimuovi tutti dalla lista</string>
+    <string name="caches_remove_selected">Rimuovi selezionati dalla lista</string>
     <string name="caches_remove_all_completely">Elimina tutto dal dispositivo</string>
     <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
@@ -432,6 +434,7 @@
     <string name="about_system_write_logcat_type_extended">Esteso</string>
     <string name="about_system_write_logcat_success">File di registro \"%1$s\" scritto nella cartella \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Errore durante la scrittura del file di log</string>
+    <string name="about_system_write_infos_downloadmanager">Visualizza download</string>
     <string name="changelog_github">Elenco di tutte le modifiche</string>
     <string name="about_nutshellmanual">Manuale online</string>
     <string name="about_contributors_carnerodetails">come padre di c:geo</string>
@@ -464,11 +467,12 @@
     <string name="settings_title_map">Mappa</string>
     <string name="settings_summary_map">Sceglie la mappa online, le opzioni delle mappe offline ed i dettagli di mappa.</string>
     <string name="settings_title_map_data">Dati mappa</string>
+    <string name="settings_title_offline_routing">Navigazione offline</string>
+    <string name="settings_summary_offline_routing">La navigazione offline è disponibile se l\'app si supporto \"BRouter\" è installata e configurata o se il routing interno è abilitato.</string>
     <string name="settings_title_map_rotation">Rotazione mappa (Google Maps)</string>
     <string name="settings_title_waypoints">Waypoint</string>
     <string name="settings_title_map_content">Contenuto Mappa</string>
     <string name="settings_title_map_behavior">Comportamento mappa</string>
-    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Cartella dati geocache</string>
     <string name="settings_title_data_dir_usage">Cartella dati geocache (%1$s utilizzata)</string>
     <string name="calculate_dataDir_title">Dati Geocache usati</string>
@@ -477,8 +481,8 @@
     <string name="confirm_data_dir_move_title">Spostare la cartella dati geocache?</string>
     <string name="confirm_data_dir_move">Lo spostamento dei dati geocache potrebbe richiedere molto tempo, a seconda del dispositivo e la quantità di dati.</string>
     <string name="settings_title_basicmembers">Opzioni per i membri di base (non Premium)</string>
-    <string name="settings_title_navigation">Navigazione</string>
-    <string name="settings_summary_navigation">Sceglie il metodo di navigazione preferito e seleziona le app di navigazione esterna.</string>
+    <string name="settings_title_navigation">Rotta / Navigazione</string>
+    <string name="settings_summary_navigation">Configurare la rotta offline, scegliere metodi di navigazione preferiti e selezionare le applicazioni di navigazione esterne.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Impostazioni specifiche di sistema e opzioni di debug.</string>
     <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
@@ -490,6 +494,7 @@
     <string name="settings_goto_url_button">altro …</string>
     <string name="settings_activate_gc">Attiva</string>
     <string name="settings_activate_ec">Attiva</string>
+    <string name="settings_activate_lc">Attiva</string>
     <string name="settings_gc_legal_note">Per usare i servizi di Geocaching.com, si applicano i termini e le condizioni del Contratto Groundspeak che deve essere approvato dall\'utente.</string>
     <string name="settings_info_facebook_login_title">Accedi tramite Facebook o Google</string>
     <string name="settings_info_facebook_login">Con il tuo account Facebook o Google non puoi fare login su geocaching.com. Ma c\'è una semplice alternativa…</string>
@@ -498,6 +503,8 @@
     <string name="settings_gc_description">Autorizza c:geo per cercare cache su geocaching.com.</string>
     <string name="settings_ec_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
     <string name="settings_su_description">Autorizza c:geo per cercare cache su geocaching,su.</string>
+    <string name="settings_lc_description">Includi le cache di Adventure Lab sulla mappa.\n\n(Disponibile solo per i membri premium \"Geocaching.com\". Richiede un servizio \"Geocaching.com\" attivato.)\n\nLa modifica di questa impostazione richiede un riavvio.</string>
+    <string name="lc_default_description">Questo è un cache Adventure Lab di geocaching.com. Le Adventure possono essere giocate solo con l\'app Adventure Lab di Groundspeak. Tocca l\'icona di Adventure Lab sulla pagina \"Dettagli\" per aprire/installare l\'app Adventure Lab per questa Adventure.\nSe non vuoi visualizzare e cercare i cache Adenture Lab sulla tua mappa, è possibile disattivarli utilizzando il menu \"impostazioni\" - Servizi - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Attiva</string>
     <string name="init_summary_oc_de">Carica cache da opencaching.de</string>
     <string name="init_oc_de_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de</string>
@@ -547,7 +554,6 @@
     <string name="init_signature_template_name">Nome</string>
     <string name="init_signature_template_difficulty">Difficoltà</string>
     <string name="init_signature_template_terrain">Terreno</string>
-    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Testo di Log</string>
     <string name="init_signature_template_size">Dimensione</string>
     <string name="init_signature_template_type">Tipo</string>
@@ -574,10 +580,19 @@
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
     <string name="init_zoomincludingwaypoints_description">Con mappatura di un singolo cache: lo zoom deve essere regolato per includere tutti i waypoint?</string>
     <string name="init_brouterThreshold">Calcola percorso</string>
-    <string name="init_brouterThreshold_description">Distanza massima fino alla quale l\'app di supporto BRouter (se installata) calcolerà un percorso.</string>
+    <string name="init_brouterThreshold_description">Distanza massima fino alla quale il routing offline calcolerà un percorso.</string>
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
+    <string name="init_autoDownloads">Download automatico</string>
+    <string name="init_brouterAutoTileDownloads_description">Proponi automaticamente per scaricare i dati dei riquadri di mappa mancanti nel routing.</string>
+    <string name="init_mapAutoDownloads_description">Controlla automaticamente l\'aggiornamento dei file di mappa e tema. (Valido solo per i file scaricati con il sistema di download integrato.)</string>
+    <string name="init_brouterProfileWalk">Profilo \"Camminata\"</string>
+    <string name="init_brouterProfileBike">Profilo \"Bici\"</string>
+    <string name="init_brouterProfileCar">Profilo \"Automobile\"</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
+    <string name="brouter_missing_data">Apri BRouter per scaricare i dati di routing mancanti (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
+    <string name="init_useInternalRouting">Usa navigatore integrato</string>
+    <string name="init_summary_useInternalRouting">Usa il routing interno c:geo per poter utilizzare il download automatico dei dati di routing e altre funzioni</string>
     <string name="init_bigSmileysOnMap">Icone grandi per le cache registrati</string>
     <string name="init_summary_bigSmileysOnMap">Se abilitata, grandi emoticons saranno mostrate per le cache visitate/loggate sulla mappa invece dell\'icona che mostra il tipo di cache (richiede il riavvio).</string>
     <string name="init_disabled">Escludi disattivati</string>
@@ -666,6 +681,9 @@
     <string name="init_local_file_system">File System Locale</string>
     <string name="init_base_directory_description">Cartella base per i dati locali pubblici</string>
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
+    <string name="init_brouter_directory_description">Cartella con i dati di navigazione di BRouter</string>
+    <string name="init_updateinterval_title">Intervallo di aggiornamento</string>
+    <string name="init_updateinterval_description">Ti ricorda ogni x giorni di controllare gli aggiornamenti</string>
     <string name="init_gpx_importexportdir">Cartella GPX</string>
     <string name="init_dataDir">Seleziona cartella dati</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
@@ -794,9 +812,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
-    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
-    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinato (Offline)</string>
     <string name="map_source_attribution_dialog_title">Attribuzioni Mappa</string>
@@ -838,11 +853,12 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mappe Offline</string>
     <string name="persistablefolder_offline_maps_themes">Temi Mappa</string>
-    <string name="persistablefolder_gpx">GPX</string>
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">File di log</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
     <string name="persistablefolder_spoilerimages">Immagini Spoiler</string>
+    <string name="persistablefolder_routingbase">Navigazione</string>
+    <string name="persistablefolder_routingtiles">Dati di navigazione</string>
     <string name="persistableuri_track">Trackfile</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fatto</string>
@@ -1021,7 +1037,6 @@
     <string name="cache_menu_sygic_drive">Sygic (guida)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mappa c:geo</string>
-    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Altre applicazioni esterne</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Apri nel browser</string>
@@ -1035,6 +1050,10 @@
     <string name="menu_caches">Gestisci i cache</string>
     <string name="cache_menu_event">Aggiungi al calendario</string>
     <string name="cache_menu_extract_waypoints">Estrazione dei waypoint</string>
+    <string name="cache_menu_set_found">Imposta come trovato</string>
+    <string name="cache_menu_set_DNF">Imposta come non trovato</string>
+    <string name="cache_menu_reset_foundstate">Resetta lo stato trovato</string>
+    <string name="cache_foundstate_updated">Stato trovato, aggiornato</string>
     <string name="cache_menu_set_cache_icon">Imposta icona cache</string>
     <string name="cache_icon_updated">Icona cache aggiornata</string>
     <string name="cache_menu_details">Dettagli</string>
@@ -1115,6 +1134,8 @@
     <string name="cache_whereyougo_install">Installa WhereYouGo player per scaricare e avviare questa cartuccia</string>
     <string name="cache_chirpwolf_start">Apri Chirp Wolf per leggere i dati del chirp per questo cache</string>
     <string name="cache_chirpwolf_install">Installa Chirp Wolf per poter leggere i dati chirp</string>
+    <string name="cache_alc_start">Apri Adventure Lab per iniziare a giocare a questa avventura</string>
+    <string name="cache_alc_install">Installa l\'app Adventure Lab per giocare a questa avventura</string>
     <string name="context_share_as_text">Condividi testo</string>
     <string name="context_share_as_link">Condividi link</string>
     <string name="create_internal_cache">Crea cache definito dall\'utente</string>
@@ -1165,6 +1186,7 @@
     <string name="waypoint_coordinates">Coordinate</string>
     <string name="waypoint_cache_coordinates">Coordinate cache</string>
     <string name="waypoint_calculate_coordinates">Calcola coordinate</string>
+    <string name="waypoint_calculated_coordinates">Coordinate calcolate</string>
     <string name="waypoint_custom">Personalizzato</string>
     <string name="waypoint_my_coordinates">Coordinate attuali</string>
     <string name="waypoint_bearing">Angolo in gradi</string>
@@ -1221,10 +1243,10 @@
     <string name="map_showwp_parking">Waypoint del parcheggio</string>
     <string name="map_showwp_visited">Waypoint visitati</string>
     <string name="map_show_track">Mostra traccia/percorso GPX</string>
-    <string name="init_renderthemefolder_synctolocal">Sincronizza i temi nella cartella app-private</string>
-    <string name="init_summary_renderthemefolder_synctolocal">Questa opzione può migliorare le prestazioni di apertura del visualizzatore di mappe, occupando un po\' di spazio di archiviazione del dispositivo.</string>
+    <string name="init_renderthemefolder_synctolocal">Sincronizza temi</string>
+    <string name="init_summary_renderthemefolder_synctolocal">Questo sincronizzerà i tuoi temi in una cartella privata dell\'app per migliorare le prestazioni di apertura del visualizzatore di mappe occupando un po\' di spazio di archiviazione del dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Attiva sincronizzazione cartella tema</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Questo sincronizzerà in modo permanente il contenuto della cartella Tema della mappa in una cartella dell\'app per un accesso più veloce ai file.\n\nLa cartella del tema della mappa \'%1$s\' ha attualmente %2$s, %3$s e una dimensione di %4$s.\n\nVuoi attivare la sincronizzazione delle cartelle?</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Questo sincronizzerà continuamente il contenuto del tema della mappa in una cartella privata dell\'app per un accesso più veloce ai file. Assicurati che la cartella del tema contenga solo i tuoi temi e che non ci siano dati aggiuntivi (di grosse dimensioni) prima di abilitare questa funzione.\n\nLa tua cartella del tema della mappa \'%1$s\' ha attualmente %2$s, %3$s e una dimensione di %4$s.\n\nVuoi attivare la sincronizzazione della cartella?</string>
     <string name="onetime_mapthemefixslow_title">Correggi il rendering lento del tema della mappa</string>
     <string name="onetime_mapthemefixslow_message">Lavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. È possibile comprimere o sincronizzare i temi per ottenere prestazioni più veloci e ridurre il ritardo all\'avvio della mappa.</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
@@ -1355,6 +1377,7 @@
     <string name="helper_brouter_title">BRouter Navigazione Offline</string>
     <string name="helper_brouter_description">BRouter fornisce il routing non in linea. Se è installato e ha scaricato i file necessari, c:geo mostrerà automaticamente un percorso per il cache sulla mappa interna.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf consente di leggere i dati dei tag di chirp ANT+/Garmin, che sono necessari per le geocache ANT+/chirp.</string>
+    <string name="helper_alc_description">App per Adventure Lab per il tuo telefono o tablet.</string>
     <!-- export -->
     <string name="share_export">Condividi / Esporta</string>
     <string name="export">Esportazione</string>
@@ -1368,7 +1391,6 @@
     <string name="export_fieldnotes_upload_success">Caricato su geocaching.com con successo</string>
     <string name="export_fieldnotes_onlynew">Solo quelli nuovi rispetto all\'ultima esportazione</string>
     <string name="export_fieldnotes_creating">Creazione Field Notes…</string>
-    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Il file GPX sarà esportato in %1$s con data ed ora correnti nel nome file.</string>
     <string name="export_confirm_title">Esportazione di %1$s</string>
     <string name="export_confirm_message">Percorso: %1$s\nNome file: %2$s</string>
@@ -1751,8 +1773,6 @@
     <string name="init_low_disk_space_message">La cartella dati geocache sta esaurendo lo spazio di archiviazione. Questo può causare malfunzionamenti di c:geo. Liberare un po\' di spazio.</string>
     <string name="init_confirm_debug">c:geo è in esecuzione in modalità di debug!</string>
     <string name="list_confirm_debug_message">La modalità di debug può causare instabilità! Vuoi tornare alla modalità normale?</string>
-    <string name="waypoint_latitude_null">N/S --° --.---</string>
-    <string name="waypoint_longitude_null">E/O --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Chiudi app</string>
     <string name="ask_again">Chiedimi di nuovo</string>
@@ -1780,11 +1800,12 @@
     <string name="individual_route_error_toggling_waypoint">errore cambiando lo stato waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Non disponibile in modalità waypoint singolo</string>
     <string name="map_sort_individual_route">Ordina percorso individuale</string>
-    <string name="map_export_individual_route">Esporta percorso individuale</string>
+    <string name="map_export_individual_route">Esporta come percorso</string>
+    <string name="map_export_individual_route_as_track">Esporta come traccia</string>
     <string name="map_load_individual_route">Carica percorso individuale</string>
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
-    <string name="map_autotarget_individual_route">Imposta automaticamente come obiettivo</string>
-    <string name="map_disable_autotarget_individual_route">\"Imposta automaticamente come obiettivo\" disabilitato</string>
+    <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>
+    <string name="map_disable_autotarget_individual_route">\"Imposta l\'inizio del percorso come obiettivo\" disabilitato</string>
     <string name="map_clear_manual_targets">Cancella obiettivi manuali</string>
     <string name="map_manual_targets_cleared">Obiettivi manuali cancellati</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
@@ -1849,27 +1870,30 @@
     <string name="localfile_intenttitle">c:geo Gestore file locale</string>
     <string name="localfile_title">Apri un file locale</string>
     <string name="localfile_cannot_handle">Errore nella lettura del file o c:geo non può gestire questo tipo di file.</string>
-    <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Ricevi file mappa</string>
-    <string name="receivemapfile_success">File mappa ricevuto con successo come \"%s\" e memorizzato nella cartella mappa</string>
-    <string name="receivemapfile_error">Errore durante la ricezione del file mappa</string>
-    <string name="receivemapfile_error_io_exception">Errore I/O durante la ricezione del file mappa. La cartella mappa \"%s\" è scrivibile?</string>
-    <string name="receivemapfile_error_filenotfound_exception">Errore di file non trovato durante la ricezione del file mappa.</string>
-    <string name="receivemapfile_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
-    <string name="receivemapfile_option_overwrite">Sovrascrivere</string>
-    <string name="receivemapfile_option_differentname">Nome diverso</string>
-    <string name="receivemapfile_kb_copied">%d kB copiati</string>
-    <string name="receivemapfile_cancelled">Trasferimento file mappa annullato</string>
+    <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Ricezione file</string>
+    <string name="receivedownload_success">File salvato con successo come \"%s\"</string>
+    <string name="receivedownload_error">Errore durante la ricezione del file</string>
+    <string name="receivedownload_error_io_exception">Errore di I/O durante la ricezione del file. La cartella \"%s\" è scrivibile?</string>
+    <string name="receivedownload_error_filenotfound_exception">Errore di file non trovato durante la ricezione.</string>
+    <string name="receivedownload_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
+    <string name="receivedownload_option_overwrite">Sovrascrivere</string>
+    <string name="receivedownload_option_differentname">Nome diverso</string>
+    <string name="receivedownload_kb_copied">%d kB copiati</string>
+    <string name="receivedownload_cancelled">Trasferimento file annullato</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
+    <string name="download_title">Scarica file</string>
     <string name="downloadmap_info">Seleziona un file mappa per la tua regione toccando l\'icona \"Salva\".\n\nIl download viene eseguito in background. Quando il trasferimento è completato, il file viene copiato nella cartella della mappa c:geo e impostato come mappa corrente.\n\nAttenzione: il download di una mappa può consumare una grande quantità di dati internet!</string>
     <string name="downloadmap_choose">Scegli mappa</string>
     <string name="downloadmap_filename">Scaricamento di %s</string>
-    <string name="downloadmanager_not_available">Impossibile scaricare il file mappa, gestore download di sistema non disponibile</string>
+    <string name="downloadmanager_not_available">Impossibile scaricare il file, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
     <string name="downloadmap_target_not_writable">L\'obiettivo selezionato \"%s\" non è scrivibile - il file di mappa scaricato viene salvato nella cartella di download di sistema e deve essere spostato manualmente nella cartella mappa.</string>
     <string name="downloadmap_allow_metered_network">Consenti il download tramite rete a consumo (ad esempio: connessione mobile)</string>
-    <string name="downloadmap_confirmation">Scarica la mappa \"%1$s\"?\n\nQuesto potrebbe richiedere molto tempo e portare a costi significativi, a seconda della tua connessione di rete.\n\nInformazioni sulla dimensione: %2$s</string>
+    <string name="download_confirmation">%1$sScarica il file \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Aggiornamenti trovati per:\n%1$s\n\nVuoi aggiornare?%2$s</string>
+    <string name="download_warning">Questo può richiedere un bel po\' di tempo e comportare costi significativi, a seconda della connessione di rete.</string>
     <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
     <string name="button_continue">Continua</string>
     <string name="downloadmap_onedirup">(un livello superiore)</string>
@@ -1882,11 +1906,18 @@
     <string name="downloadmap_checking_for_updates">Controllo aggiornamenti…</string>
     <string name="downloadmap_install_theme_title">Installa file tema</string>
     <string name="downloadmap_install_theme_info">La mappa scaricata richiede un file di tema speciale. Vuoi scaricare anche questo?</string>
+    <string name="downloadtile_title">Dati di navigazione mancanti</string>
+    <string name="downloadtile_info">c:geo non può calcolare il percorso richiesto in quanto manca un file di navigazione. Vuoi scaricare i dati di navigazione mancanti?</string>
+    <string name="tileupdate_info">Vuoi controllare gli aggiornamenti dei file di navigazione scaricati?</string>
+    <string name="mapupdate_info">Vuoi controllare gli aggiornamenti dei file di mappa e tema?</string>
+    <string name="no_updates_found">Nessun aggiornamento trovato</string>
+    <string name="updates_check">Controlla aggiornamenti</string>
     <string name="mapserver_mapsforge_info">Mappe di base, nessun tema mappa richiesto</string>
     <string name="mapserver_openandromaps_info">Mappe dettagliate, richiedono tema mappa \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Tema mappa dettagliato, creato per le mappe \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mappe dettagliate, richiedono uno dei temi della mappa \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema mappa dettagliato, creato per le mappe \"Freizeitkarte\"</string>
+    <string name="brouter_info">Servizio di navigazione offline</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
@@ -1913,9 +1944,11 @@
     <string name="wizard_permissions_intro">c:geo ha bisogno di alcuni permessi sul tuo dispositivo per funzionare correttamente.\nTi spiegherò maggiori dettagli nei prossimi passi.</string>
     <string name="wizard_permissions_folder_title">Imposta cartella: %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare dati come file GPX, backup, note di campo e file di log. Come per impostazione predefinita, questi file sono memorizzati sotto una cosiddetta \"cartella di base\". Selezionare o creare questa cartella nel passaggio successivo.\n\nSe hai aggiornato c:geo da una versione precedente, seleziona la cartella esistente \"cgeo\" sul livello principale dell\'archivio del tuo dispositivo.\nSuggerimento: potrebbe essere necessario, come prima cosa, mostrare la memoria interna del dispositivo nel selettore dei file che verrà visualizzato successivamente.</string>
-    <string name="wizard_mapfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file di mappa offline. Selezionare o creare una tale cartella nel passaggio successivo.</string>
-    <string name="wizard_mapthemesfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file dei temi di mappa offline. Selezionare o creare tale cartella nel passaggio successivo.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file GPX (es. per importare / esportare cache o tracce). Selezionare o creare una tale cartella nel passaggio successivo.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare la mappa offline.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file dei temi per le mappe offline.</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo ha bisogno di una cartella locale per memorizzare i file GPX (ad esempio per importare / esportare cache o tracce).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Per poter utilizzare la funzione di download automatico dei riquadri di mappa e il loro aggiornamento è necessario impostare una cartella per i dati dei riquadri.</string>
+    <string name="wizard_select_or_create">Selezionare o creare una tale cartella nel passaggio successivo.</string>
     <string name="wizard_platforms_title">Configura servizi</string>
     <string name="wizard_platforms_intro">Per trovare le geocache con c:geo è necessario un account per un servizio di geocaching supportato da c:geo.\nSeleziona il servizio desiderato qui sotto per accedere con il tuo account esistente o creare un nuovo account.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
