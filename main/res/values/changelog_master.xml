@@ -5,9 +5,16 @@
  
  <h1>Nightly build:</h1>
  
-<h4>Topic:</h4>
+<h4>Cache details:</h4>
 <ul>
-<li>New/Fix: </li>
+<li>New: Make use of google translate in-app translation popup</li>
+<li>New: Allow changing the assigned icon in cache details popup via long click (stored caches only)</li>
+</ul>
+
+<h4>Other:</h4>
+<ul>
+<li>New: Download bookmark lists from geocaching.com - see \"Lists / pocket queries\" in main menu</li>
+<li>New: Advanced filtering system within cache lists (experimental)</li>
 </ul>
 
 </div>]]></Data>
