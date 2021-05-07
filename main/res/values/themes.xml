@@ -129,6 +129,7 @@
         <item name="close">@drawable/map_close_dark</item>
         <item name="log_img_icon">@drawable/log_img_dark</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_dark</item>
+        <item name="info_icon">@drawable/settings_info_icon_white</item>
         <item name="progressSpinnerLarge">@android:style/Widget.ProgressBar.Large</item>
 
         <!-- own values: other -->
@@ -156,6 +157,8 @@
         <item name="log_img_icon">@drawable/log_img_light</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_light</item>
         <item name="progressSpinnerLarge">@android:style/Widget.ProgressBar.Large.Inverse</item>
+        <item name="info_icon">@drawable/settings_info_icon_black</item>
+
 
         <!-- own values: other -->
         <item name="compass">1</item>

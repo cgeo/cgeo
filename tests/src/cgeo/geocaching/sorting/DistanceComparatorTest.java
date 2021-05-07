@@ -21,7 +21,7 @@ public class DistanceComparatorTest {
             }
             caches.add(cache);
         }
-        Collections.sort(caches, new DistanceComparator(Geopoint.ZERO, caches));
+        Collections.sort(caches, new DistanceComparator(Geopoint.ZERO));
     }
 
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_viewroot"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="?background_color"
+    android:layout_marginTop="10dip"
+    tools:context=".filter.FilterActivity" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/filter_additem"
+            style="@style/button_icon"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_menu_add" />
+
+        <ImageButton
+            android:id="@+id/filter_clear"
+            style="@style/button_icon"
+            android:layout_toLeftOf="@+id/filter_apply"
+            android:src="@drawable/ic_menu_delete" />
+
+        <ImageButton
+            android:id="@+id/filter_apply"
+            style="@style/button_icon"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_menu_send" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/filter_props_checkboxes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp" />
+
+    <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="1dp" />
+
+    <!-- Wrapping RecyclerView with a RelativeLayout is necessary for "wrap_content" to
+   work properly. See e.g. https://stackoverflow.com/questions/27475178/how-do-i-make-wrap-content-work-on-a-recyclerview -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/filter_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="?background_color"
+            android:clipToPadding="false"
+            android:divider="?background_color"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:listSelector="?background_color"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:paddingHorizontal="4dip"
+            android:scrollbars="none"
+            tools:ignore="NestedScrolling"
+            tools:listitem="@layout/cache_filter_list_item">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/filter_list_empty"
+            style="@style/text_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/cache_filter_hint_on_empty_filter_list"
+            />
+    </RelativeLayout>
+
+
+
+</LinearLayout>

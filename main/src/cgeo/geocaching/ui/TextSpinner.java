@@ -2,6 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.AlertDialog;
@@ -32,6 +33,7 @@ import java.util.Objects;
  *     <li>As text button with self-made dialog on click (e.g. selecting log type)</li>
  *     <li>As text button with onclick-change (selecting next item on click)</li>
  *     <li>As checkable text button (same as text button, but additionally with setchecked option)</li>
+ *     <li>As generic View element with a text set method to be applied</li>
  *  *
  * </ul>
  * This class can handle both display cases
@@ -53,11 +55,13 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
     private Spinner spinner;
 
-    private TextView textView;
+    private View spinnerView;
+    private Action2<View, String> spinnerViewSetter;
     private Func1<T, String> textDisplayMapper;
     private String textDialogTitle;
     private Func1<T, Boolean> setCheckedMapper;
     private boolean textViewClickThroughMode = false;
+    private boolean textHideSelectionMarker = false;
 
     public TextSpinner() {
         //initialize lists with dummy value
@@ -138,8 +142,14 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
     /** if spinner should be represented as a textview, use this method to set the view */
     public TextSpinner<T> setTextView(@NonNull final TextView textView) {
-        this.textView = textView;
-        this.textView.setOnClickListener(l -> selectTextViewItem());
+        return setView(textView, (view, text) -> ((TextView) view).setText(text));
+    }
+
+    /** if spinner should be represented as a generic view, use this method to set the view */
+    public TextSpinner<T> setView(@NonNull final View view, @Nullable final Action2<View, String> viewSetter) {
+        this.spinnerView = view;
+        this.spinnerViewSetter = viewSetter;
+        this.spinnerView.setOnClickListener(l -> selectTextViewItem());
         return this;
     }
 
@@ -174,6 +184,13 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
      */
     public TextSpinner<T> setTextClickThrough(final boolean clickThroughMode) {
         this.textViewClickThroughMode = clickThroughMode;
+        return this;
+    }
+
+    /**
+     * if spinner is be represented as a textview, set whether to hide radio buttons indicating previous selection in selection dialog */
+    public TextSpinner<T> setTextHideSelectionMarker(final boolean hideSelectionMarker) {
+        this.textHideSelectionMarker = hideSelectionMarker;
         return this;
     }
 
@@ -220,9 +237,11 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
             setChecked(spinner);
             spinner.setSelection(getPositionFor(this.selectedItem, 0));
         }
-        if (textView != null) {
-            setChecked(textView);
-            textView.setText(itemToString(this.selectedItem, true));
+        if (spinnerView != null) {
+            setChecked(spinnerView);
+            if (spinnerViewSetter != null) {
+                spinnerViewSetter.call(spinnerView, itemToString(this.selectedItem, true));
+            }
         }
     }
 
@@ -290,15 +309,22 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
             set(values.get(newPos));
         } else {
 
-            final AlertDialog.Builder alert = Dialogs.newBuilder(textView.getContext());
+            final AlertDialog.Builder alert = Dialogs.newBuilder(spinnerView.getContext());
             if (this.textDialogTitle != null) {
                 alert.setTitle(this.textDialogTitle);
             }
 
-            alert.setSingleChoiceItems(this.displayValues.toArray(new String[0]), getPositionFor(selectedItem, -1), (dialog, pos) -> {
-                set(values.get(pos));
-                dialog.dismiss();
-            });
+            if (this.textHideSelectionMarker) {
+                alert.setItems(this.displayValues.toArray(new String[0]), (dialog, pos) -> {
+                    set(values.get(pos));
+                    dialog.dismiss();
+                });
+            } else {
+                alert.setSingleChoiceItems(this.displayValues.toArray(new String[0]), getPositionFor(selectedItem, -1), (dialog, pos) -> {
+                    set(values.get(pos));
+                    dialog.dismiss();
+                });
+            }
             alert.create().show();
         }
     }

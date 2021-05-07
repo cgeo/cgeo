@@ -26,4 +26,5 @@ public class EventDateComparator extends DateComparator {
     public boolean isAutoManaged() {
         return true;
     }
+
 }

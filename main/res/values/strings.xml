@@ -330,6 +330,8 @@
     <string name="caches_more_caches_no">No more caches</string>
     <string name="caches_more_caches_loading">Loading caches…</string>
     <string name="caches_more_caches_currently">currently</string>
+    <string name="caches_more_caches_next_x">Load next %1$d caches</string>
+    <string name="caches_more_caches_remaining">Load remaining caches (%1$d / %2$d)</string>
     <string name="caches_downloading">Downloading caches…\nETA: </string>
     <string name="caches_eta_ltm">Less than a minute</string>
 
@@ -388,6 +390,7 @@
     <string name="caches_copy_all">Copy all</string>
     <string name="caches_map_locus_export">Export to Locus</string>
     <string name="caches_filter">Filter</string>
+    <string name="caches_filter_menuitem">New Cache Filter (Experimental)</string>
     <string name="caches_filter_title">Filter by</string>
     <string name="caches_filter_size">Size</string>
     <string name="caches_filter_type">Type</string>
@@ -440,6 +443,38 @@
     <string name="list_dialog_rename_title">Rename list</string>
     <string name="list_dialog_rename">Rename</string>
     <string name="list_not_available">List no longer available, switching to standard list</string>
+
+    <!-- caches lists filter -->
+    <string name="cache_filter_option_and_or">Use OR instead of AND</string>
+    <string name="cache_filter_option_inverse">Inverse Filter</string>
+    <string name="cache_filter_option_include_inconclusive">Include inconclusive matches</string>
+    <string name="cache_filter_option_include_inconclusive_info">Whether to include cache in result when a filter needs info on cache which is not available.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tap \'+\' in upper left corner to add a filter</string>
+
+    <string name="cache_filter_name">Name</string>
+    <string name="cache_filter_type">Type</string>
+    <string name="cache_filter_size">Size</string>
+    <string name="cache_filter_personalnote">Personal Note</string>
+    <string name="cache_filter_description">Description</string>
+    <string name="cache_filter_offlinelog">Offline Log</string>
+    <string name="cache_filter_owner">Owner</string>
+    <string name="cache_filter_difficulty">Difficulty</string>
+    <string name="cache_filter_terrain">Terrain</string>
+    <string name="cache_filter_status">Status</string>
+    <string name="cache_filter_attributes">Attributes</string>
+
+
+    <string name="cache_filter_stringfilter_matchcase">Match Case</string>
+    <string name="cache_filter_stringfilter_info">With option \'Pattern\', use wildcards * and ?. * represents zero, one or multiple characters, ? represents one single character. For example, pattern \'H?mburg*\' will match e.g. \'Homburg\' or \'Hamburg at Night\' but not \'A day in Hamburg\' or \'Hahmburg\'</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">Is Not Present</string>
+    <string name="cache_filter_stringfilter_type_is_present">Is Present</string>
+    <string name="cache_filter_stringfilter_type_contains">Contains</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Starts With</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Ends With</string>
+    <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
+
+    <string name="cache_filter_checkboxlist_selectallnone">Select all/none</string>
+
 
     <!-- about -->
     <string name="about_version">Version</string>
@@ -647,6 +682,8 @@
     <string name="init_choose_list">Ask for List</string>
     <string name="init_summary_choose_list">Ask which list to store caches in</string>
     <string name="init_listdisplay">Additional lists</string>
+    <string name="init_list_initial_load_limit">List Load limit</string>
+    <string name="init_summary_list_initial_load_limit">Maximum number of caches to load from database initially when displaying stored lists. Choose 0 for \'unlimited\'</string>
     <string name="init_summary_listdisplay">Show membership of caches to additional lists in a cache list</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show an arrow with compass direction for caches in a list</string>

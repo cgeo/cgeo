@@ -1,6 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.SqlBuilder;
 
 import androidx.annotation.NonNull;
 
@@ -32,5 +33,11 @@ class PopularityRatioComparator extends AbstractCacheComparator {
     public String getSortableSection(@NonNull final Geocache cache) {
         final int finds = cache.getFindsCount();
         return 0 == finds ? "--" : String.format(Locale.getDefault(), "%.2f", ((float) cache.getFavoritePoints()) / finds);
+    }
+
+    @Override
+    public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
+        //also sort by favourite count, should resemble ratio close enough
+        sql.addOrder(sql.getMainTableId() + ".favourite_cnt", sortDesc);
     }
 }

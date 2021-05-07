@@ -1,6 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,8 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public class NameComparator extends AbstractCacheComparator {
+
+    public static final NameComparator INSTANCE = new NameComparator();
 
     @Override
     protected boolean canCompare(final Geocache cache) {
@@ -26,5 +29,10 @@ public class NameComparator extends AbstractCacheComparator {
     @Override
     public String getSortableSection(@NonNull final Geocache cache) {
         return StringUtils.upperCase(StringUtils.substring(cache.getNameForSorting(), 0, 2));
+    }
+
+    @Override
+    public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
+        sql.addOrder(sql.getMainTableId() + ".name", sortDesc);
     }
 }

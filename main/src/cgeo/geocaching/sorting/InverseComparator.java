@@ -4,6 +4,8 @@ import cgeo.geocaching.models.Geocache;
 
 import androidx.annotation.NonNull;
 
+import java.util.List;
+
 /**
  * comparator which inverses the sort order of the given other comparator
  *
@@ -29,5 +31,10 @@ public class InverseComparator implements CacheComparator {
     @Override
     public String getSortableSection(@NonNull final Geocache cache) {
         return originalComparator.getSortableSection(cache);
+    }
+
+    @Override
+    public void sort(final List<Geocache> list, final boolean inverse) {
+        this.originalComparator.sort(list, inverse);
     }
 }

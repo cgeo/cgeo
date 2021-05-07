@@ -32,6 +32,9 @@ import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterActivity;
 import cgeo.geocaching.filter.IFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterUtils;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
@@ -40,7 +43,6 @@ import cgeo.geocaching.loaders.AbstractSearchLoader;
 import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
 import cgeo.geocaching.loaders.CoordsGeocacheListLoader;
 import cgeo.geocaching.loaders.FinderGeocacheListLoader;
-import cgeo.geocaching.loaders.HistoryGeocacheListLoader;
 import cgeo.geocaching.loaders.KeywordGeocacheListLoader;
 import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
 import cgeo.geocaching.loaders.NullGeocacheListLoader;
@@ -107,6 +109,7 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
+import static android.view.View.GONE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -117,6 +120,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import java.lang.ref.WeakReference;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -140,6 +144,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static final int MAX_LIST_ITEMS = 1000;
     private static final int REFRESH_WARNING_THRESHOLD = 100;
+    //private static final int OFFLINE_LIST_LOAD_LIMIT_DEFAULT = 3; //TODO: this is for test purposes only!
+    //private static final int OFFLINE_LIST_LOAD_LIMIT_INCREASE = 100; //TODO: this is for test purposes only!
 
     private static final int REQUEST_CODE_IMPORT_PQ = 3;
 
@@ -149,6 +155,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final String STATE_LIST_ID = "currentListId";
     private static final String STATE_MARKER_ID = "currentMarkerId";
     private static final String STATE_CONTENT_STORAGE_ACTIVITY_HELPER = "contentStorageActivityHelper";
+    private static final String STATE_OFFLINELISTLOADLIMIT_ID = "offlineListLoadLimit";
 
     private static final String BUNDLE_ACTION_KEY = "afterLoadAction";
 
@@ -159,7 +166,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final List<Geocache> cacheList = new ArrayList<>();
     private CacheListAdapter adapter = null;
     private View listFooter = null;
-    private TextView listFooterText = null;
+    private TextView listFooterLine1 = null;
+    private TextView listFooterLine2 = null;
     private final Progress progress = new Progress();
     private String title = "";
     private int detailTotal = 0;
@@ -167,6 +175,23 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private long detailProgressTime = 0L;
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
     private int markerId = EmojiUtils.NO_EMOJI;
+    private int offlineListLoadLimit = getOfflineListInitialLoadLimit();
+
+    /**
+     * Action bar spinner adapter. {@code null} for list types that don't allow switching (search results, ...).
+     */
+    CacheListSpinnerAdapter mCacheListSpinnerAdapter;
+
+    /**
+     * remember current filter when switching between lists, so it can be re-applied afterwards
+     */
+    private IFilter currentFilter = null;
+    private String currentCacheFilterConfig = null;
+    private CacheComparator currentSort = null;
+    private boolean currentInverseSort = false;
+
+    private SortActionProvider sortProvider;
+
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
@@ -503,6 +528,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         setTitle(title);
 
+        currentCacheFilterConfig = Settings.getCacheFilterConfig();
+
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
             // Restore value of members from saved state
@@ -511,6 +538,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             type = CacheListType.values()[savedInstanceState.getInt(STATE_LIST_TYPE, type.ordinal())];
             listId = savedInstanceState.getInt(STATE_LIST_ID);
             markerId = savedInstanceState.getInt(STATE_MARKER_ID);
+            offlineListLoadLimit = savedInstanceState.getInt(STATE_OFFLINELISTLOADLIMIT_ID);
+        } else {
+            offlineListLoadLimit = getOfflineListInitialLoadLimit();
         }
 
         initAdapter();
@@ -550,21 +580,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
         savedInstanceState.putInt(STATE_LIST_ID, listId);
         savedInstanceState.putInt(STATE_MARKER_ID, markerId);
+        savedInstanceState.putInt(STATE_OFFLINELISTLOADLIMIT_ID, offlineListLoadLimit);
         savedInstanceState.putBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER, contentStorageActivityHelper.getState());
     }
-
-    /**
-     * Action bar spinner adapter. {@code null} for list types that don't allow switching (search results, ...).
-     */
-    CacheListSpinnerAdapter mCacheListSpinnerAdapter;
-
-    /**
-     * remember current filter when switching between lists, so it can be re-applied afterwards
-     */
-    private IFilter currentFilter = null;
-    private boolean currentInverseSort = false;
-
-    private SortActionProvider sortProvider;
 
     private void initActionBarSpinner() {
         mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
@@ -650,7 +668,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && (listId >= StoredList.STANDARD_LIST_ID || listId == PseudoList.ALL_LIST.id) && search != null) {
-            final SearchResult newSearch = DataStore.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
+            final SearchResult newSearch = DataStore.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId, getCurrentFilter(), adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
             if (newSearch.getTotalCountGC() != search.getTotalCountGC()) {
                 refreshCurrentList();
             }
@@ -692,8 +710,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 // always reset the inversion for a new sorting criteria
                 adapter.resetInverseSort();
             }
+            this.currentSort = selectedComparator;
             setComparator(selectedComparator);
-            sortProvider.setSelection(selectedComparator);
         });
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(cacheList), CacheListActivity.this, getFilteredSearch()));
@@ -891,6 +909,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_filter) {
             showFilterMenu(null);
+        } else if (menuItem == R.id.menu_cache_filter) {
+            showGeocacheFilterMenu();
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
@@ -1005,9 +1025,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
+    public void showGeocacheFilterMenu() {
+        GeocacheFilterActivity.selectFilter(this, currentCacheFilterConfig, adapter.getFilteredList(), !resultIsOfflineAndLimited());
+    }
+
     private void setComparator(final CacheComparator comparator) {
         adapter.setComparator(comparator);
+        sortProvider.setSelection(adapter.getCacheComparator());
         currentInverseSort = adapter.getInverseSort();
+
+        //for Offline Lists, SORT is done via SQL select and must be redone on comparator change
+        if (type.isStoredInDatabase) {
+            refreshCurrentList();
+        }
     }
 
     @Override
@@ -1169,9 +1199,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return adapter.findCacheByGeocode(contextMenuGeocode);
     }
 
-    private void setFilter(final IFilter filter) {
+    private void setFilter(final IFilter filter, final String cacheFilterConfig) {
         currentFilter = filter;
-        adapter.setFilter(filter);
+
+        currentCacheFilterConfig = cacheFilterConfig;
+
+        adapter.setFilter(currentFilter, currentCacheFilterConfig);
         prepareFilterBar();
         updateTitle();
         invalidateOptionsMenuCompatible();
@@ -1192,13 +1225,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         adapter = new CacheListAdapter(this, cacheList, type);
         adapter.setStoredLists(Settings.showListsInCacheList() ? StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id) : null);
-        adapter.setFilter(currentFilter);
+        adapter.setFilter(currentFilter, currentCacheFilterConfig);
+        adapter.setComparator(this.currentSort);
 
         if (listFooter == null) {
             listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, listView, false);
-            listFooter.setClickable(true);
-            listFooter.setOnClickListener(new MoreCachesListener());
-            listFooterText = listFooter.findViewById(R.id.more_caches);
+            //listFooter.setClickable(true);
+            //listFooter.setOnClickListener(new MoreCachesListener());
+            listFooterLine1 = listFooter.findViewById(R.id.more_caches_1);
+            listFooterLine2 = listFooter.findViewById(R.id.more_caches_2);
             listView.addFooterView(listFooter);
         }
         setListAdapter(adapter);
@@ -1221,40 +1256,63 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (listFooter == null) {
             return;
         }
-        listFooterText.setText(res.getString(R.string.caches_more_caches_loading));
-        listFooter.setClickable(false);
-        listFooter.setOnClickListener(null);
+        setView(listFooterLine1, res.getString(R.string.caches_more_caches_loading), null);
+        setViewGone(listFooterLine2);
     }
 
     @SuppressLint("SetTextI18n")
-    private void setListFooterText(final String label, final int size) {
-        listFooterText.setText(label + (size > 0 ? " (" + res.getString(R.string.caches_more_caches_currently) + ": " + size + ")" : ""));
-    }
-
     private void showFooterMoreCaches() {
-        // no footer in offline lists
         if (listFooter == null) {
             return;
         }
 
-        boolean enableMore = type != CacheListType.OFFLINE && cacheList.size() < MAX_LIST_ITEMS;
-        if (enableMore && search != null) {
-            final int count = search.getTotalCountGC();
-            enableMore = count > 0 && cacheList.size() < count;
-        }
+        final int listSize = search == null ? cacheList.size() : search.getCount();
+        final int totalListSize = search == null ? listSize : Math.max(0, search.getTotalCountGC());
 
-        listFooter.setClickable(enableMore);
+        final boolean enableMore = !type.isStoredInDatabase && listSize < MAX_LIST_ITEMS && (search == null || (listSize > 0 && listSize < totalListSize));
+
         if (enableMore) {
-            setListFooterText(res.getString(R.string.caches_more_caches), cacheList.size());
-            listFooter.setOnClickListener(new MoreCachesListener());
-        } else if (type != CacheListType.OFFLINE) {
-            listFooterText.setText(res.getString(CollectionUtils.isEmpty(cacheList) ? R.string.caches_no_cache : R.string.caches_more_caches_no));
-            listFooter.setOnClickListener(null);
+            setViewGone(listFooterLine2);
+            setView(listFooterLine1, res.getString(R.string.caches_more_caches) + (listSize > 0 ? " (" + res.getString(R.string.caches_more_caches_currently) + ": " + listSize + ")" : ""), new MoreCachesListener());
+        } else if (!type.isStoredInDatabase) {
+            setViewGone(listFooterLine2);
+            setView(listFooterLine1, res.getString(CollectionUtils.isEmpty(cacheList) ? R.string.caches_no_cache : R.string.caches_more_caches_no), null);
+        } else if (resultIsOfflineAndLimited()) {
+            final int missingCaches = totalListSize - offlineListLoadLimit;
+            if (missingCaches > getOfflineListLimitIncrease()) {
+                setView(listFooterLine1, res.getString(R.string.caches_more_caches_next_x, getOfflineListLimitIncrease()), v -> {
+                    if (offlineListLoadLimit >= 0) {
+                        offlineListLoadLimit += getOfflineListLimitIncrease();
+                        refreshCurrentList();
+                    }
+                });
+            } else {
+                setViewGone(listFooterLine1);
+            }
+            setView(listFooterLine2, res.getString(R.string.caches_more_caches_remaining, missingCaches, totalListSize), v -> {
+                offlineListLoadLimit = -1;
+                refreshCurrentList();
+            });
         } else {
+            setViewGone(listFooterLine1);
+            setViewGone(listFooterLine2);
             // hiding footer for offline list is not possible, it must be removed instead
             // http://stackoverflow.com/questions/7576099/hiding-footer-in-listview
-            getListView().removeFooterView(listFooter);
+            //getListView().removeFooterView(listFooter);
         }
+    }
+
+    private void setViewGone(final View view) {
+        view.setVisibility(GONE);
+        view.setOnClickListener(null);
+        view.setClickable(false);
+    }
+
+    private void setView(final TextView view, final String text, final View.OnClickListener clickListener) {
+        view.setVisibility(View.VISIBLE);
+        view.setText(text);
+        view.setClickable(clickListener != null);
+        view.setOnClickListener(clickListener);
     }
 
     private void importGpxSelectFiles() {
@@ -1289,16 +1347,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         } else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
-            setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]));
+            setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]), currentCacheFilterConfig);
+        } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+            currentCacheFilterConfig = data.getStringExtra(GeocacheFilterActivity.EXTRA_FILTER_RESULT);
+            Settings.setCacheFilterConfig(currentCacheFilterConfig);
+            setFilter(currentFilter, currentCacheFilterConfig);
         }
 
-        if (type == CacheListType.OFFLINE) {
+        if (type.isStoredInDatabase) {
             refreshCurrentList();
         }
     }
 
     public void refreshStored(final List<Geocache> caches) {
-        if (type == CacheListType.OFFLINE && caches.size() > REFRESH_WARNING_THRESHOLD) {
+        if (type.isStoredInDatabase && caches.size() > REFRESH_WARNING_THRESHOLD) {
             Dialogs.confirmYesNo(this, R.string.caches_refresh_all, R.string.caches_refresh_all_warning, (dialog, id) -> {
                 refreshStoredConfirmed(caches);
                 dialog.cancel();
@@ -1319,13 +1381,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
-        if (Settings.getChooseList() && type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
+        if (Settings.getChooseList() && !type.isStoredInDatabase) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title,
                     selectedListIds -> refreshStoredInternal(caches, selectedListIds), true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.emptySet(), listNameMemento, false);
         } else {
             final Set<Integer> additionalListIds = new HashSet<>();
-            if (type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
+            if (!type.isStoredInDatabase) {
                 additionalListIds.add(StoredList.STANDARD_LIST_ID);
             }
             refreshStoredInternal(caches, additionalListIds);
@@ -1505,10 +1567,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void hideLoading() {
         final ListView list = getListView();
-        if (list.getVisibility() == View.GONE) {
+        if (list.getVisibility() == GONE) {
             list.setVisibility(View.VISIBLE);
             final View loading = findViewById(R.id.loading);
-            loading.setVisibility(View.GONE);
+            loading.setVisibility(GONE);
         }
     }
 
@@ -1524,6 +1586,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void switchListById(final int id, @NonNull final AfterLoadAction action) {
         if (id < 0) {
             return;
+        }
+
+        if (id != listId) {
+            //reset load limit
+            offlineListLoadLimit = getOfflineListInitialLoadLimit();
+            //reset selected sort (this way, default sort algorithms will be applied again e.g. for event lists and power trails)
+            currentSort = null;
+            currentInverseSort = false;
+            //do NOT reset filter!
         }
 
         final Bundle extras = new Bundle();
@@ -1629,7 +1700,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void refreshCurrentList(@NonNull final AfterLoadAction action) {
         // do not refresh any of the dynamic search result lists but history, which might have been cleared
-        if (type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
+        if (!type.isStoredInDatabase) {
             return;
         }
         refreshSpinnerAdapter();
@@ -1680,7 +1751,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void prepareFilterBar() {
         final List<String> filterNames = getFilterNames();
         if (filterNames.isEmpty()) {
-            findViewById(R.id.filter_bar).setVisibility(View.GONE);
+            findViewById(R.id.filter_bar).setVisibility(GONE);
         } else {
             final TextView filterTextView = findViewById(R.id.filter_text);
             filterTextView.setText(TextUtils.join(", ", filterNames));
@@ -1831,14 +1902,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     markerId = list.markerId;
                 }
 
-                loader = new OfflineGeocacheListLoader(this, coords, listId);
+                loader = new OfflineGeocacheListLoader(this, coords, listId, getCurrentFilter(), adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
 
                 break;
             case HISTORY:
                 title = res.getString(R.string.caches_history);
                 listId = PseudoList.HISTORY_LIST.id;
                 markerId = EmojiUtils.NO_EMOJI;
-                loader = new HistoryGeocacheListLoader(this, coords);
+                loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, getCurrentFilter(), adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
                 break;
             case NEAREST:
                 title = res.getString(R.string.caches_nearby);
@@ -1975,11 +2046,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return getCacheNumberString(getResources(), 0);
         }
         final StringBuilder result = new StringBuilder();
-        if (adapter.isFiltered()) {
-            result.append(adapter.getCount()).append('/');
+        if (adapter.isFiltered() || resultIsOfflineAndLimited()) {
+            result.append(adapter.getCount());
+            if (resultIsOfflineAndLimited()) {
+                result.append("+");
+            }
+            result.append('/');
         }
-        result.append(getCacheNumberString(getResources(), search.getCount()));
+        result.append(getCacheNumberString(getResources(), type.isStoredInDatabase ? search.getTotalCountGC() : search.getCount()));
+
         return result.toString();
+    }
+
+    private boolean resultIsOfflineAndLimited() {
+        return type.isStoredInDatabase && search.getTotalCountGC() > offlineListLoadLimit && search.getCount() == offlineListLoadLimit;
     }
 
     /**
@@ -1990,5 +2070,25 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         NO_ACTION,
         /** Check if the list is empty and prompt for deletion */
         CHECK_IF_EMPTY
+    }
+
+    public IGeocacheFilter getCurrentFilter() {
+        if (currentCacheFilterConfig == null) {
+            return null;
+        }
+        try {
+            return GeocacheFilterUtils.createFilter(currentCacheFilterConfig);
+        } catch (ParseException pe) {
+            Log.w("Could not parse filter", pe);
+            return null;
+        }
+    }
+
+    public static int getOfflineListInitialLoadLimit() {
+        return Settings.getListInitialLoadLimit();
+    }
+
+    public static int getOfflineListLimitIncrease() {
+        return 100;
     }
 }

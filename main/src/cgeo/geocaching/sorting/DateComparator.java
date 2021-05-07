@@ -1,12 +1,13 @@
 package cgeo.geocaching.sorting;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CalendarUtils;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -35,15 +36,20 @@ class DateComparator extends AbstractCacheComparator {
     }
 
     protected int sortSameDate(final Geocache cache1, final Geocache cache2) {
-        final ArrayList<Geocache> list = new ArrayList<>();
-        list.add(cache1);
-        list.add(cache2);
-        final DistanceComparator distanceComparator = new DistanceComparator(Sensors.getInstance().currentGeo().getCoords(), list);
-        return distanceComparator.compare(cache1, cache2);
+        final Geopoint gps = Sensors.getInstance().currentGeo().getCoords();
+        final Float d1 = gps.distanceTo(cache1.getCoords());
+        final Float d2 = gps.distanceTo(cache2.getCoords());
+        return d1.compareTo(d2);
     }
 
     @Override
     public String getSortableSection(@NonNull final Geocache cache) {
         return CalendarUtils.yearMonth(cache.getHiddenDate());
     }
+
+    @Override
+    public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
+        sql.addOrder(sql.getMainTableId() + ".hidden", sortDesc);
+    }
+
 }
