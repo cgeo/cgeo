@@ -150,13 +150,13 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         final List<Download> list = getList(BRouterTileDownloader.getInstance(), CgeoApplication.getInstance().getString(R.string.brouter_downloadurl));
 
         // number of tiles
-        assertThat(list.size()).isEqualTo(1120);
+        assertThat(list.size()).isBetween(1115, 1130);
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(0);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isEqualTo(1120);
+        assertThat(count(list, false)).isEqualTo(list.size());
 
         // check one named entry
         final Download d = findByName(list, "E5_N50.rd5");
