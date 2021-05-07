@@ -180,8 +180,7 @@ public class BackupUtils {
         }
 
         // We are using ContextThemeWrapper to prevent crashes caused by missing attribute definitions when starting the dialog from MainActivity
-        final Context c = new ContextThemeWrapper(activityContext, Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert);
-        final View content = LayoutInflater.from(c).inflate(R.layout.restore_dialog, null);
+        final View content = LayoutInflater.from(Dialogs.newContextThemeWrapper(activityContext)).inflate(R.layout.restore_dialog, null);
         final CheckBox databaseCheckbox = content.findViewById(R.id.database_check_box);
         final CheckBox settingsCheckbox = content.findViewById(R.id.settings_check_box);
         final TextView warningText = content.findViewById(R.id.warning);

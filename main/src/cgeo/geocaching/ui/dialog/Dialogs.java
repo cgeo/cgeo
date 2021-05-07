@@ -925,11 +925,11 @@ public final class Dialogs {
         builder.create().show();
     }
 
-    public static AlertDialog.Builder newBuilder(final Activity activity) {
-        return new AlertDialog.Builder(new ContextThemeWrapper(activity, Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert));
+    public static AlertDialog.Builder newBuilder(final Context context) {
+        return new AlertDialog.Builder(newContextThemeWrapper(context));
     }
 
-    public static AlertDialog.Builder newBuilder(final Context context) {
-        return new AlertDialog.Builder(new ContextThemeWrapper(context, Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert));
+    public static ContextThemeWrapper newContextThemeWrapper(final Context context) {
+        return new ContextThemeWrapper(context, Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert);
     }
 }
