@@ -87,8 +87,9 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
          * show a selection of all parking places and the cache itself, when using the navigation for driving
          */
         private void selectDriveTarget(final Context context, final ArrayList<IWaypoint> targets) {
-            final LayoutInflater inflater = LayoutInflater.from(context);
-            final ListAdapter adapter = new ArrayAdapter<IWaypoint>(context, R.layout.cacheslist_item_select, targets) {
+            final Context themeContext = Dialogs.newContextThemeWrapper(context);
+            final LayoutInflater inflater = LayoutInflater.from(themeContext);
+            final ListAdapter adapter = new ArrayAdapter<IWaypoint>(themeContext, R.layout.cacheslist_item_select, targets) {
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
 
