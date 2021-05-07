@@ -67,7 +67,13 @@ public class ContextLogger implements Closeable {
 
     public ContextLogger add(final String msg, final Object ... params) {
         if (doLog) {
-            message.append(String.format(msg, params)).append("(").append(System.currentTimeMillis() - startTime).append("ms);");
+            if (params != null && params.length > 0) {
+                message.append(String.format(msg, params));
+            } else {
+                message.append(msg);
+            }
+
+            message.append("(").append(System.currentTimeMillis() - startTime).append("ms);");
         }
         return this;
     }

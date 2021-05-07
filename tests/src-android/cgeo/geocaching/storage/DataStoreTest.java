@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -200,7 +201,7 @@ public class DataStoreTest extends CGeoTestCase {
         int sumCaches = 0;
         int allCaches = 0;
         for (final CacheType cacheType : CacheType.values()) {
-            final SearchResult historyOfType = DataStore.getHistoryOfCaches(cacheType);
+            final SearchResult historyOfType = DataStore.getBatchOfStoredCaches(null, cacheType, PseudoList.HISTORY_LIST.id);
             assertThat(historyOfType).isNotNull();
             if (cacheType != CacheType.ALL) {
                 sumCaches += historyOfType.getCount();
@@ -211,7 +212,7 @@ public class DataStoreTest extends CGeoTestCase {
         // check that sum of types equals 'all'
         assertThat(allCaches).isEqualTo(sumCaches);
         // check that two different routines behave the same
-        assertThat(sumCaches).isEqualTo(DataStore.getAllHistoryCachesCount());
+        assertThat(sumCaches).isEqualTo(DataStore.getAllStoredCachesCount(CacheType.ALL, PseudoList.HISTORY_LIST.id));
     }
 
     public static void testCachedMissing() {

@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/more_caches"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:id="@+id/more_caches_1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@drawable/actionbar_background"
     android:ellipsize="end"
@@ -16,3 +22,24 @@
     android:textSize="16sp"
     tools:context=".CacheListActivity"
     android:maxLines="1" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/more_caches_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/actionbar_background"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:lines="1"
+        android:padding="8dip"
+        android:scrollHorizontally="true"
+        android:text="@string/caches_no_cache"
+        android:textColor="@color/just_white"
+        android:textSize="16sp"
+        tools:context=".CacheListActivity"
+        android:maxLines="1" />
+
+
+</LinearLayout>

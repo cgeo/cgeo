@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/advancedfilter_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="1dip"
+    android:paddingBottom="0dip"
+    android:paddingLeft="0dip"
+    android:paddingRight="0dip"
+    tools:context=".filters.gui.GeocacheFilterActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/filter_title"
+            android:lines="1"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="6dp"
+            android:textColor="?text_color"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/filter_delete"
+
+            android:ellipsize="end"
+            android:focusable="false"
+            tools:visibility="visible"
+            tools:text="Title of the filter, might be a bit longer"/>
+
+        <ImageButton
+            android:id="@+id/filter_delete"
+            style="@style/button_small"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:scaleType="centerInside"
+            android:layout_toLeftOf="@+id/filter_drag"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_menu_delete"
+            tools:src="@drawable/ic_menu_delete"/>
+
+        <ImageView
+            android:id="@+id/filter_drag"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:scaleType="centerInside"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_menu_reorder"
+            tools:src="@drawable/ic_menu_reorder"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/insert_point"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:orientation="vertical"/>
+
+
+    <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="1dp" />
+
+</LinearLayout>

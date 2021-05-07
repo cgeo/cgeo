@@ -255,8 +255,12 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
     }
 
     public void addItem(final T item) {
-        this.itemList.add(item);
-        this.notifyItemInserted(this.itemList.size() - 1);
+        addItem(this.itemList.size(), item);
+    }
+
+    public void addItem(final int pos, final T item) {
+        this.itemList.add(pos, item);
+        this.notifyItemInserted(pos);
     }
 
     public void removeItem(final int pos) {

@@ -1,6 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.SqlBuilder;
 
 import androidx.annotation.NonNull;
 
@@ -26,4 +27,10 @@ class TerrainComparator extends AbstractCacheComparator {
     public String getSortableSection(@NonNull final Geocache cache) {
         return String.format(Locale.getDefault(), "%.1f", cache.getTerrain());
     }
+
+    @Override
+    public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
+        sql.addOrder(sql.getMainTableId() + ".terrain", sortDesc);
+    }
+
 }

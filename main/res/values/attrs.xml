@@ -27,6 +27,7 @@
     <attr name="close" format="integer" />
     <attr name="log_img_icon" format="integer" />
     <attr name="actionbar_compass" format="integer" />
+    <attr name="info_icon" format="integer" />
     <attr name="settings_cloud" format="integer" />
     <attr name="settings_details" format="integer" />
     <attr name="settings_eye" format="integer" />

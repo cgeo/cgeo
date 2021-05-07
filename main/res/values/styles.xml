@@ -18,6 +18,17 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
+    <style name="text">
+        <item name="android:textColor">?text_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:focusable">false</item>
+    </style>
+    <style name="text_note" parent="text">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?text_color_grey</item>
+    </style>
+
     <style name="edittext" parent="@android:style/Widget.EditText">
         <item name="android:padding">6dip</item>
         <item name="android:singleLine">true</item>
@@ -47,6 +58,9 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+    <style name="ThemeMaterialComponents" parent="Theme.MaterialComponents.Bridge"/>
+    <style name="ThemeMaterialComponentsLight" parent="Theme.MaterialComponents.Light.Bridge"/>
 
     <!-- own definitions -->
     <!-- actionbar -->
@@ -142,6 +156,14 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <!-- button: icon -->
+    <style name="button_icon" parent="button_small">
+        <item name="android:layout_width">40dip</item>
+        <item name="android:layout_height">40dip</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+
     <!-- edittext -->
     <style name="edittext_full" parent="edittext">
         <item name="android:layout_width">fill_parent</item>
@@ -206,7 +228,7 @@
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/just_white</item>
         <item name="android:background">@drawable/count_bcg</item>
-        <item name="android:text"></item>
+        <item name="android:text" />
     </style>
     <style name="icon_mainscreen_cell_counter">
         <item name="android:layout_gravity">center_horizontal</item>

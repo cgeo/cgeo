@@ -1,6 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.SqlBuilder;
 
 import androidx.annotation.NonNull;
 
@@ -37,5 +38,10 @@ class RatingComparator extends AbstractCacheComparator {
     @Override
     public String getSortableSection(@NonNull final Geocache cache) {
         return String.format(Locale.getDefault(), "%.2f", getWeightedArithmeticMean(cache));
+    }
+
+    @Override
+    public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
+        sql.addOrder(sql.getMainTableId() + ".rating", sortDesc);
     }
 }

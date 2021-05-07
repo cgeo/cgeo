@@ -15,6 +15,7 @@ import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
@@ -36,6 +37,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.search.SearchSuggestionCursor;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.storage.extension.DBDowngradeableVersions;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -232,18 +234,18 @@ public class DataStore {
      * * any change which also requires some sort of data migration
      * * {@link DbHelper#onUpgrade(SQLiteDatabase, int, int)} will fail later if db is "upgraded" again from "x-1" to x
      */
-    private static final Set<Integer> DBVERSIONS_DOWNWARD_COMPATIBLE = new HashSet<>(Arrays.asList(new Integer[]{
-            85, // adds offline logging columns/tables
-            86, // (re)create indices on c_logs and c_logImages
-            87, // adds service log id to logging tables
-            88, // add timestamp to trail history
-            89, // add altitude to trail history
-            90, // add user guid to cg_caches and cg_logs
-            91, // add fields to cg_extension
-            92, // add emoji id to cg_caches
-            93,  // add emoji id to cg_lists
-            94  // add scale to offline log images
-    }));
+    private static final Set<Integer> DBVERSIONS_DOWNWARD_COMPATIBLE = new HashSet<>(Arrays.asList(
+        85, // adds offline logging columns/tables
+        86, // (re)create indices on c_logs and c_logImages
+        87, // adds service log id to logging tables
+        88, // add timestamp to trail history
+        89, // add altitude to trail history
+        90, // add user guid to cg_caches and cg_logs
+        91, // add fields to cg_extension
+        92, // add emoji id to cg_caches
+        93,  // add emoji id to cg_lists
+        94  // add scale to offline log images
+    ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
     @NonNull private static final String dbTableLists = "cg_lists";
@@ -3249,7 +3251,9 @@ public class DataStore {
             final SQLiteStatement compiledStmnt;
             synchronized (PreparedStatement.COUNT_TYPE_LIST) {
                 // All the statements here are used only once and are protected through the current synchronized block
-                if (list == PseudoList.ALL_LIST.id) {
+                if (list == PseudoList.HISTORY_LIST.id) {
+                    compiledStmnt = PreparedStatement.HISTORY_COUNT.getStatement();
+                } else if (list == PseudoList.ALL_LIST.id) {
                     if (cacheType == CacheType.ALL) {
                         compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_ALL_LIST.getStatement();
                     } else {
@@ -3269,18 +3273,6 @@ public class DataStore {
             }
         } catch (final Exception e) {
             Log.e("DataStore.loadAllStoredCachesCount", e);
-        }
-
-        return 0;
-    }
-
-    public static int getAllHistoryCachesCount() {
-        init();
-
-        try {
-            return (int) PreparedStatement.HISTORY_COUNT.simpleQueryForLong();
-        } catch (final Exception e) {
-            Log.e("DataStore.getAllHistoricCachesCount", e);
         }
 
         return 0;
@@ -3339,74 +3331,54 @@ public class DataStore {
      * @return a non-null set of geocodes
      */
     @NonNull
-    private static Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final CacheType cacheType, final int listId) {
+    private static Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final CacheType cacheType, final int listId, final IGeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
         if (cacheType == null) {
             throw new IllegalArgumentException("cacheType must not be null");
         }
 
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "DataStore.loadBatchOfStoredGeocodes(coords=%s, type=%s, list=%d)",
                 String.valueOf(coords), String.valueOf(cacheType), listId)) {
-            final StringBuilder selection = new StringBuilder();
 
-            String[] selectionArgs = null;
+            final SqlBuilder sqlBuilder = new SqlBuilder(dbTableCaches, new String[]{"geocode"});
+
+            if (listId == PseudoList.HISTORY_LIST.id) {
+                sqlBuilder.addWhere(" ( visiteddate > 0 OR geocode IN (SELECT geocode FROM " + dbTableLogsOffline + ") )");
+            } else {
+                sqlBuilder.addWhere("geocode IN (SELECT geocode FROM " + dbTableCachesLists + " WHERE list_id " +
+                    (listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID) + ")");
+            }
+
             if (cacheType != CacheType.ALL) {
-                selection.append(" type = ? AND");
-                selectionArgs = new String[] { String.valueOf(cacheType.id) };
+                sqlBuilder.addWhere("type = '" + cacheType.id + "'");
             }
-
-            selection.append(" geocode IN (SELECT geocode FROM ");
-            selection.append(dbTableCachesLists);
-            selection.append(" WHERE list_id ");
-            selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
-            selection.append(')');
-
-            cLog.add("Sel:" + selection);
-
+            if (filter != null) {
+                filter.addToSql(sqlBuilder);
+                sqlBuilder.closeAllOpenWheres();
+            }
+            if (sort != null) {
+                sort.addSortToSql(sqlBuilder, sortInverse);
+            }
             if (coords != null) {
-                return queryToColl(dbTableCaches,
-                        new String[]{"geocode", "(ABS(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
-                                ") + ABS(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) AS dif"},
-                        selection.toString(),
-                        selectionArgs,
-                        "dif",
-                        null,
-                        new HashSet<>(),
-                        GET_STRING_0);
+                sqlBuilder.addOrder(getCoordDiffExpression(coords, null));
             }
-            return queryToColl(dbTableCaches,
-                    new String[] { "geocode" },
-                    selection.toString(),
-                    selectionArgs,
-                    "geocode",
-                    null,
-                    new HashSet<>(),
-                    GET_STRING_0);
+            if (limit > 0) {
+                sqlBuilder.setLimit(limit);
+            }
+
+            Log.w("SQL: [" + sqlBuilder.getSql() + "]");
+            cLog.add("Sel:" + sqlBuilder.getSql());
+
+            return cursorToColl(database.rawQuery(sqlBuilder.getSql(), sqlBuilder.getSqlWhereArgsArray()), new HashSet<>(), GET_STRING_0);
         } catch (final Exception e) {
             Log.e("DataStore.loadBatchOfStoredGeocodes", e);
             return Collections.emptySet();
         }
     }
 
-    @NonNull
-    private static Set<String> loadBatchOfHistoricGeocodes(final CacheType cacheType) {
-        final StringBuilder selection = new StringBuilder();
-
-        String[] selectionArgs = null;
-        if (cacheType != CacheType.ALL) {
-            selection.append(" type = ? AND ");
-            selectionArgs = new String[] { String.valueOf(cacheType.id) };
-        }
-
-        selection.append(" ( visiteddate > 0 OR geocode IN (SELECT geocode FROM " + dbTableLogsOffline + ") )");
-
-        try {
-            final Cursor cursor = database.rawQuery("SELECT geocode FROM " + dbTableCaches + " WHERE " + selection, selectionArgs);
-            return cursorToColl(cursor, new HashSet<>(), GET_STRING_0);
-        } catch (final Exception e) {
-            Log.e("DataStore.loadBatchOfHistoricGeocodes", e);
-        }
-
-        return Collections.emptySet();
+    public static String getCoordDiffExpression(@NonNull final Geopoint coords, @Nullable final String tableId) {
+        final String tableExp = tableId == null ? "" : tableId + ".";
+        return "(ABS(" + tableExp + "latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
+            ") + ABS(" + tableExp + "longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + "))";
     }
 
     /** Retrieve all stored caches from DB */
@@ -4383,14 +4355,13 @@ public class DataStore {
 
     @NonNull
     public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId) {
-        final Set<String> geocodes = loadBatchOfStoredGeocodes(coords, cacheType, listId);
-        return new SearchResult(geocodes, getAllStoredCachesCount(cacheType, listId));
+        return getBatchOfStoredCaches(coords, cacheType, listId, null, null, false, -1);
     }
 
     @NonNull
-    public static SearchResult getHistoryOfCaches(final CacheType cacheType) {
-        final Set<String> geocodes = loadBatchOfHistoricGeocodes(cacheType);
-        return new SearchResult(geocodes, getAllHistoryCachesCount());
+    public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId, final IGeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
+        final Set<String> geocodes = loadBatchOfStoredGeocodes(coords, cacheType, listId, filter, sort, sortInverse, limit);
+        return new SearchResult(geocodes, getAllStoredCachesCount(cacheType, listId));
     }
 
     public static boolean saveWaypoint(final int id, final String geocode, final Waypoint waypoint) {
