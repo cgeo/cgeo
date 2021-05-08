@@ -184,7 +184,6 @@
     <string name="menu_history">Saga</string>
     <string name="menu_filter">Sía</string>
     <string name="menu_scan_geo">Skanna geokóða</string>
-    <string name="menu_pocket_queries">Vasafyrirspurnir</string>
     <!-- main screen -->
     <string name="live_map_button">Virkt kort</string>
     <string name="caches_nearby_button">Í nánd</string>
@@ -271,6 +270,7 @@
     <string name="list_dialog_rename_title">Endurnefna lista</string>
     <string name="list_dialog_rename">Endurnefna</string>
     <string name="list_not_available">Listi ekki lengur til, skipti í staðlaðan lista</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Útgáfa</string>
     <string name="about_changelog">Breytingaskrá</string>
