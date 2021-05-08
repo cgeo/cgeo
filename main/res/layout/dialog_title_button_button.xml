@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/dialog_title_title"
-        style="@style/action_bar_title"
+        style="@style/action_bar_title_popup"
         android:ellipsize="marquee"
         android:layout_width="wrap_content"
         android:layout_alignParentStart="true"
