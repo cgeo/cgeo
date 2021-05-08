@@ -236,7 +236,6 @@
     <string name="menu_history">التأريخ</string>
     <string name="menu_filter">فلتر</string>
     <string name="menu_scan_geo">نسخ الكود المخبئ</string>
-    <string name="menu_pocket_queries">الاستفسارات</string>
     <string name="menu_scan_description">c:geo يمكنه نسخ كود المخبآت التي على كل كود QR. التطبيق المطلوب ليس مثبة. هل تريد فتح متجر جوجل لتقوم بتثبيته؟</string>
     <!-- main screen -->
     <string name="live_map_button">خريطة على نات</string>
@@ -332,6 +331,7 @@
     <string name="list_dialog_rename_title">أعد تسمية القائمة</string>
     <string name="list_dialog_rename">أعد تسمية</string>
     <string name="list_not_available">القائمة لم تعد متوفرة، الانتقال إلى القائمة الموحدة</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">الإصدار</string>
     <string name="about_changelog">سجل التغييرات</string>
@@ -805,7 +805,6 @@
     <string name="search_address_result">الأماكن المعثور عليها</string>
     <string name="search_own_caches">البحث عن المخبآت الخاص بي</string>
     <string name="search_pocket_title">الاستفسارات</string>
-    <string name="search_pocket_loading">تحميل قائمة الاستفسارات</string>
     <!-- trackable -->
     <string name="trackable">أمتعة السفر</string>
     <string name="trackable_details_loading">تحميل تفاصيل أمتعة السفر&#8230;</string>

@@ -156,6 +156,7 @@
     <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Εικόνα</string>
     <!-- translation -->
+    <string name="translate">Μετάφραση</string>
     <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
     <string name="translate_to_english">Μετάφραση στα Αγγλικά</string>
     <string name="translate_length_warning">Η μετάφραση ενδέχεται να αποτύχει σε μεγάλα κείμενα.</string>
@@ -247,6 +248,7 @@
     <string name="warn_notloggedin_short">Δεν είστε συνδεδεμένοι. Ο ζωντανός χάρτης θα εμφανίζει μόνο τις ηδη αποθηκευμένες κρύπτες. Πατήστε εδώ για περισσότερες πληροφορίες.</string>
     <string name="warn_notloggedin_long">Δεν έχετε συνδεθεί (ακόμη). Ο ζωντανός χάρτης θα εμφανίζει μόνο τις τοπικά αποθηκευμένες κρύπτες και οι λειτουργίες που απαιτούν σύνδεση δεν θα είναι διαθέσιμες.\n\nΕίτε δεν υπάρχει σύνδεση σε δίκτυο ή υπάρχει πρόβλημα με τον server ή πρέπει να ρυθμίσετε τις υπηρεσίες σας στο geocaching. \n\nΘέλετε να ρυθμίσετε τις υπηρεσίες τώρα;</string>
     <string name="err_read_pocket_query_list">Σφάλμα ανάγνωσης της λίστας προσωπικής αναζήτησης.</string>
+    <string name="err_read_bookmark_list">Σφάλμα ανάγνωσης λίστας σελιδοδεικτών.</string>
     <string name="info_log_posted">Υποβλήθηκε με επιτυχία το αρχείο καταγραφής από το c:geo.</string>
     <string name="info_log_saved">Το αρχείο καταγραφής αποθηκεύτηκε με επιτυχία στο c:geo.</string>
     <string name="info_log_post_failed">Η καταχώρηση αρχείου καταγραφής απέτυχε.</string>
@@ -295,7 +297,7 @@
     <string name="menu_history">Ιστορικό</string>
     <string name="menu_filter">Φίλτρο</string>
     <string name="menu_scan_geo">Σάρωση γεωκωδικού</string>
-    <string name="menu_pocket_queries">Προσωπικές αναζητήσεις</string>
+    <string name="menu_lists_pocket_queries">Λίστες / pocket queries</string>
     <string name="menu_scan_description">Το c:Geo μπορεί να ανιχνεύσει γεωκωδικούς που εκτυπώνονται ως κωδικός QR. Η απαραίτητη εφαρμογή δεν είναι εγκατεστημένη. Θέλετε να ανοίξετε το Google Play για να το εγκαταστήσετε;</string>
     <!-- main screen -->
     <string name="live_map_button">Live Χάρτης</string>
@@ -310,6 +312,8 @@
     <string name="caches_more_caches_no">Δεν υπάρχουν άλλες κρύπτες</string>
     <string name="caches_more_caches_loading">Φόρτωση κρυπτών…</string>
     <string name="caches_more_caches_currently">φορτωμένα</string>
+    <string name="caches_more_caches_next_x">Φόρτωση των επόμενων %1$d κρυπτών</string>
+    <string name="caches_more_caches_remaining">Φόρτωση υπολειπόμενων κρυπτών (%1$d / %2$d)</string>
     <string name="caches_downloading">Λήψη κρυπτών…\nETA: </string>
     <string name="caches_eta_ltm">Λιγότερο από ένα λεπτό</string>
     <plurals name="caches_eta_mins">
@@ -362,6 +366,7 @@
     <string name="caches_copy_all">Αντιγραφή όλων</string>
     <string name="caches_map_locus_export">Εξαγωγή στο Locus</string>
     <string name="caches_filter">Φίλτρο</string>
+    <string name="caches_filter_menuitem">Νέο Φίλτρο Κρύπτης (Πειραματικό)</string>
     <string name="caches_filter_title">Φιλτράρισμα κατά</string>
     <string name="caches_filter_size">Μέγεθος</string>
     <string name="caches_filter_type">Τύπος</string>
@@ -413,6 +418,32 @@
     <string name="list_dialog_rename_title">Μετονομασία λίστας</string>
     <string name="list_dialog_rename">Μετονομασία</string>
     <string name="list_not_available">Η λίστα δεν είναι πλέον διαθέσιμη, μετάβαση σε τυπική λίστα</string>
+    <!-- caches lists filter -->
+    <string name="cache_filter_option_and_or">Χρήση OR αντί του AND</string>
+    <string name="cache_filter_option_inverse">Ανάστροφο Φίλτρο</string>
+    <string name="cache_filter_option_include_inconclusive">Συμπερίληψη ασαφών συσχετίσεων</string>
+    <string name="cache_filter_option_include_inconclusive_info">Αν θα συμπεριληφθεί η κρύπτη στα αποτελέσματα, όταν το φίλτρο χρειάζεται πληροφορίες της κρύπτης που δεν είναι διαθέσιμες.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Πατήστε \'+\' στην επάνω αριστερή γωνία για να προσθέσετε ένα φίλτρο</string>
+    <string name="cache_filter_name">Όνομα</string>
+    <string name="cache_filter_type">Τύπος</string>
+    <string name="cache_filter_size">Μέγεθος</string>
+    <string name="cache_filter_personalnote">Προσωπική Σημείωση</string>
+    <string name="cache_filter_description">Περιγραφή</string>
+    <string name="cache_filter_offlinelog">Καταγραφή εκτός σύνδεσης</string>
+    <string name="cache_filter_owner">Ιδιοκτήτης</string>
+    <string name="cache_filter_difficulty">Δυσκολία</string>
+    <string name="cache_filter_terrain">Έδαφος</string>
+    <string name="cache_filter_status">Κατάσταση</string>
+    <string name="cache_filter_attributes">Ιδιότητες</string>
+    <string name="cache_filter_stringfilter_matchcase">Ταίριασμα Πεζών/ Κεφαλαίων</string>
+    <string name="cache_filter_stringfilter_info">Με την επιλογή \'Μοτίβο\', χρησιμοποιήστε τα μπαλαντέρ * και ?. Το * αντιπροσωπεύει κανέναν, έναν ή πολλούς χαρακτήρες, το ? αντιπροσωπεύει έναν μόνο χαρακτήρα. Για παράδειγμα, το μοτίβο \'H?mburg*\' θα ταιριάξει π.χ. \'Homburg\' ή \'Hamburg at Night\' αλλά όχι \'A day in Hamburg\' ή \'Hahmburg\'</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">Δεν Είναι Παρόν</string>
+    <string name="cache_filter_stringfilter_type_is_present">Είναι Παρόν</string>
+    <string name="cache_filter_stringfilter_type_contains">Περιέχει</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Ξεκινάει με</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Τελειώνει σε</string>
+    <string name="cache_filter_stringfilter_type_pattern">Μοτίβο</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Επιλογή όλων/κανένα</string>
     <!-- about -->
     <string name="about_version">Έκδοση</string>
     <string name="about_changelog">Τι νέο υπάρχει;</string>
@@ -612,6 +643,8 @@
     <string name="init_choose_list">Ζητήστε τη λίστα</string>
     <string name="init_summary_choose_list">Να ερωτώμαι σε ποια λίστα θα αποθηκεύονται οι κρύπτες</string>
     <string name="init_listdisplay">Πρόσθετες λίστες</string>
+    <string name="init_list_initial_load_limit">Όριο φόρτωσης λίστας</string>
+    <string name="init_summary_list_initial_load_limit">Μέγιστος αριθμός κρυπτών που θα φορτωθούν αρχικά από τη βάση δεδομένων όταν εμφανίζονται οι αποθηκευμένες λίστες. Επιλέξτε 0 για \'απεριόριστη\'</string>
     <string name="init_summary_listdisplay">Εμφάνιση ιδιότητας μέλους των κρυπτών και σε άλλες λίστες, σε μια λίστα κρυπτών</string>
     <string name="init_livelist">Εμφάνιση κατεύθυνσης</string>
     <string name="init_summary_livelist">Εμφάνιση βέλους με κατεύθυνση πυξίδας για κρύπτες σε μια λίστα</string>
@@ -1294,7 +1327,8 @@
     <string name="search_address_result">Τοποθεσίες που βρέθηκαν</string>
     <string name="search_own_caches">Αναζήτηση των κρυπτών μου</string>
     <string name="search_pocket_title">Προσωπική Αναζήτηση</string>
-    <string name="search_pocket_loading">Φόρτωση λίστας Προσωπικών Αναζητήσεων</string>
+    <string name="search_bookmark_list">Λίστα σελιδοδεικτών</string>
+    <string name="search_pocket_and_bookmark_loading">Φόρτωση λίστας Pocket Queries και σελιδοδεικτών</string>
     <!-- trackable -->
     <string name="trackable">Ανιχνεύσιμο</string>
     <string name="trackable_details_loading">Φορτώνει τις λεπτομέρειες του ανιχνεύσιμου…</string>

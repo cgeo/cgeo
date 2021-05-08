@@ -287,7 +287,6 @@
     <string name="menu_history">Historik</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Skan geokode</string>
-    <string name="menu_pocket_queries">Pocket Queries</string>
     <string name="menu_scan_description">c:geo kan skanne geokoder, som er printet som QR koder. Den nødvendige app er ikke installeret. Vil du åbne Google Play for at installere den?</string>
     <!-- main screen -->
     <string name="live_map_button">Live-kort</string>
@@ -400,6 +399,7 @@
     <string name="list_dialog_rename_title">Omdøb liste</string>
     <string name="list_dialog_rename">Omdøb</string>
     <string name="list_not_available">Listen er ikke længere tilgængelig, skifter til standard liste</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Ændringslog</string>
@@ -1137,7 +1137,6 @@
     <string name="search_address_result">Fundne steder</string>
     <string name="search_own_caches">Søg i mine cacher</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">Indlæser liste af Pocket Queries</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">Indlæser detaljer om Trackable…</string>

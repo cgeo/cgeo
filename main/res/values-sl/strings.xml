@@ -241,7 +241,6 @@
     <string name="menu_history">Zgodovina</string>
     <string name="menu_filter">Filtriraj</string>
     <string name="menu_scan_geo">Skeniraj geo-kodo</string>
-    <string name="menu_pocket_queries">Zbirke Pocket Query</string>
     <string name="menu_scan_description">c:geo lahko skenira GC kodo, ki je izpisana kot QR koda. Za to potrebujete aplikacijo, ki ni nameščena. Ali jo želite odpreti v Google Play in jo namestiti?</string>
     <!-- main screen -->
     <string name="live_map_button">Zemljevid</string>
@@ -341,6 +340,7 @@
     <string name="list_dialog_rename_title">Preimenuj seznam</string>
     <string name="list_dialog_rename">Preimenuj</string>
     <string name="list_not_available">Seznam ni več na voljo, preklapljam na standardni seznam</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Različica</string>
     <string name="about_changelog">Zadnje spremembe</string>
@@ -776,7 +776,6 @@
     <string name="search_address_started">Iskanje mest</string>
     <string name="search_address_result">Najdena mesta</string>
     <string name="search_own_caches">Iskanje mojih zakladov</string>
-    <string name="search_pocket_loading">Nalaganje seznama Pocket Query</string>
     <!-- trackable -->
     <string name="trackable">Sledljivček</string>
     <string name="trackable_details_loading">Nalaganje podatkov o sledljivčku…</string>

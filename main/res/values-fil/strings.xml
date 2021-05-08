@@ -226,7 +226,6 @@
     <string name="menu_history">Historya</string>
     <string name="menu_filter">Pagsasala</string>
     <string name="menu_scan_geo">I-iskan ang geokowd</string>
-    <string name="menu_pocket_queries">Ang mga pocket query</string>
     <string name="menu_scan_description">ang c:geo ay pwedeng iiskan ang mga geocode na na-imprinta bilang QR kowd. Ang mga kinakailangang aplikasyon ay hindi na-install. Gusto mo bang buksan ang Google Play para iinstall ito?</string>
     <!-- main screen -->
     <string name="live_map_button">Ang mapa na live</string>
@@ -330,6 +329,7 @@
     <string name="list_dialog_rename_title">Baguhin ang pangalan ng listahan</string>
     <string name="list_dialog_rename">Ang pangalan ay palitan</string>
     <string name="list_not_available">Ang listahan ay hindi pwede, lumipat sa karaniwang listahan</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Ang Bersyon</string>
     <string name="about_changelog">Baguhin ang log</string>
@@ -817,7 +817,6 @@
     <string name="search_address_result">Ang matagpuan na mga lugar</string>
     <string name="search_own_caches">Hanapin ang aking mga cache</string>
     <string name="search_pocket_title">Ang Pocket Query</string>
-    <string name="search_pocket_loading">Naglo-load ang listahan ng mga Pocket Query</string>
     <!-- trackable -->
     <string name="trackable">Ang Pagsususbaybay</string>
     <string name="trackable_details_loading">Ang mga detalye ng pagsusubaybay ay nag-load&#8230;</string>

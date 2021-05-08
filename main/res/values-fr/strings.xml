@@ -293,7 +293,6 @@
     <string name="menu_history">Historique</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Scanner un géocode</string>
-    <string name="menu_pocket_queries">Pocket Queries</string>
     <string name="menu_scan_description">c:geo peut scanner des QR codes contenant des géocodes. L\'application permettant de le faire n\'est pas installée. Voulez-vous ouvrir Google Play Store pour l\'installer ?</string>
     <!-- main screen -->
     <string name="live_map_button">Carte</string>
@@ -411,6 +410,7 @@
     <string name="list_dialog_rename_title">Renommer la liste</string>
     <string name="list_dialog_rename">Renommer</string>
     <string name="list_not_available">La liste n\'est plus disponible, basculement vers la liste standard</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Versions</string>
@@ -1276,7 +1276,6 @@
     <string name="search_address_result">Lieux trouvés</string>
     <string name="search_own_caches">Chercher mes caches</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">Chargement d\'une liste de Pocket Queries</string>
     <!-- trackable -->
     <string name="trackable">Objet voyageur</string>
     <string name="trackable_details_loading">Chargement des détails d\'un objet voyageur…</string>

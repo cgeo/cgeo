@@ -156,6 +156,7 @@
     <string name="log_image_info">%1$d x %2$d px, %3$s\nZměněná velikost/Komprimované:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <!-- translation -->
+    <string name="translate">Přeložit</string>
     <string name="translate_to_sys_lang">Přeložit do %s</string>
     <string name="translate_to_english">Přeložit do angličtiny</string>
     <string name="translate_length_warning">Při velkém množství textu může překládání selhat.</string>
@@ -247,6 +248,7 @@
     <string name="warn_notloggedin_short">Nejste přihlášeni. Živá mapa bude zobrazovat pouze kešky uložené v místním úložišti. Klepněte zde pro více informací.</string>
     <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Aktivní mapa ukazuje jen lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
     <string name="err_read_pocket_query_list">Chyba čtení seznamu Pocket Queries.</string>
+    <string name="err_read_bookmark_list">Chyba při čtení seznamů záložek.</string>
     <string name="info_log_posted">Log byl úspěšně odeslán.</string>
     <string name="info_log_saved">Log byl úspěšně uložen.</string>
     <string name="info_log_post_failed">Odeslání logu se nezdařilo.</string>
@@ -295,7 +297,7 @@
     <string name="menu_history">Historie</string>
     <string name="menu_filter">Filtr</string>
     <string name="menu_scan_geo">Naskenovat geokód</string>
-    <string name="menu_pocket_queries">Pocket Queries</string>
+    <string name="menu_lists_pocket_queries">Seznamy / Pocket Queries</string>
     <string name="menu_scan_description">C:geo může skenovat geokódy, které jsou vytištěné jako QR kód. K tomu nezbytná aplikace však není nainstalována. Chceš přejít na Google Play a nainstalovat ji?</string>
     <!-- main screen -->
     <string name="live_map_button">Aktivní mapa</string>
@@ -415,6 +417,7 @@
     <string name="list_dialog_rename_title">Přejmenovat seznam</string>
     <string name="list_dialog_rename">Přejmenovat</string>
     <string name="list_not_available">Seznam již není dostupný, přepínání na výchozí seznam</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
@@ -1316,7 +1319,8 @@
     <string name="search_address_result">Nalezená místa</string>
     <string name="search_own_caches">Hledat moje kešky</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">Načítání seznamu Pocket Queries</string>
+    <string name="search_bookmark_list">Seznam záložek</string>
+    <string name="search_pocket_and_bookmark_loading">Načítání seznamu Pocket Queries a záložek</string>
     <!-- trackable -->
     <string name="trackable">Sledovatelný předmět</string>
     <string name="trackable_details_loading">Načítání detailů…</string>

@@ -197,6 +197,7 @@
     <string name="err_tb_display">c:geo negali parodyti norimo keliauninko. Ar tai tikrai keliauninkas?</string>
     <string name="err_tb_details_open">c:geo negali atidaryti keliauninko informacijos.</string>
     <string name="err_tb_not_loggable">Šis keliauninkas neregistruojamas.</string>
+    <string name="err_tb_not_found">c:geo neranda %s keliauninko.</string>
     <string name="err_tb_find_that">c:geo neranda šito keliauninko.</string>
     <string name="err_waypoint_cache_unknown">c:geo nežino, kokiai slėptuvei norite pridėti papildomą tašką.</string>
     <string name="err_waypoint_add_failed">c:geo nepavyko pridėti papildomo taško.</string>
@@ -251,6 +252,7 @@
     <string name="err_trackable_log_not_anonymous">Anonimiškai užregistruoti %1$s per c:geo negalima. Ar norite atidaryti nustatymus ir užpildyti savo duomenis iš %2$s?</string>
     <string name="err_trackable_no_preference_activity">Atsiprašome, negalime rasti tinkamo nustatymų ekrano.</string>
     <string name="confirm_unsaved_changes_title">Neįrašyti pakeitimai</string>
+    <string name="confirm_discard_changes">Atsisakyti neišsaugotų pakeitimų?</string>
     <string name="confirm_discard_wp_changes">Atsisakyti neišsaugotų papildomų taškų pakeitimų?</string>
     <string name="err_request_popup_info">c:geo nepavyko gauti slėptuvės iškylančios informacijos.</string>
     <string name="warn_log_load_additional_data">c: geo nepavyko įkelti papildomų duomenų (keliauninkai/mėgstamiausių taškų) registravimui.</string>
@@ -276,10 +278,11 @@
     <string name="menu_helpers">Naudingos programos</string>
     <string name="menu_settings">Nustatymai</string>
     <string name="menu_backup">Atsarginė kopija / atkurti</string>
+    <string name="menu_update">Atnaujinti</string>
+    <string name="menu_update_mapdata">Žemėlapio duomenys</string>
     <string name="menu_history">Istorija</string>
     <string name="menu_filter">Filtras</string>
     <string name="menu_scan_geo">Skenuoti geo kodą</string>
-    <string name="menu_pocket_queries">Pocket query sąrašai</string>
     <string name="menu_scan_description">c:geo negali nuskaityti QR kodų. Reikalinga programa neįdiegta. Ar norite atidaryti Google Play ir ją įdiegti?</string>
     <!-- main screen -->
     <string name="live_map_button">Žemėlapis</string>
@@ -330,6 +333,7 @@
     <string name="caches_select_mode_exit">Nebesirinkti</string>
     <string name="caches_select_invert">Žymėti priešingai</string>
     <string name="caches_nearby">Netoliese</string>
+    <string name="caches_remove_all">Pašalinti viską iš sąrašo</string>
     <string name="caches_delete_events">Ištrinti praeities įvykius</string>
     <string name="caches_upload_modifiedcoords">Įkelti pakeistas koordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Ar norite įkelti pakeistas koordinates visoms (pasirinktoms) slėptuvėms ir pakeisti koordinates serveryje? To negalima anuliuoti.</string>
@@ -390,6 +394,7 @@
     <string name="list_dialog_rename_title">Pervadinti sąrašą</string>
     <string name="list_dialog_rename">Pervadinti</string>
     <string name="list_not_available">Sąrašas nebeprieinamas, pereinama į standartinį sąrašą</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
@@ -458,6 +463,7 @@
     <string name="settings_goto_url_button">Plačiau</string>
     <string name="settings_activate_gc">Aktyvuoti</string>
     <string name="settings_activate_ec">Aktyvuoti</string>
+    <string name="settings_activate_lc">Aktyvuoti</string>
     <string name="settings_gc_legal_note">Naudodamiesi geocaching.com paslaugomis, Jūs sutinkate su Groundspeak naudojimo taisyklėmis.</string>
     <string name="settings_info_facebook_login_title">Prisijunkite naudodami Facebook ar Google</string>
     <string name="settings_info_facebook_login">c:geo negali prisijungti prie geocaching.com su jūsų Facebook ar Google paskyra. Bet yra paprastas problemos sprendimas…</string>
@@ -612,6 +618,7 @@
     <string name="settings_info_offline_maps_title">Informacija apie išsaugotus žemėlapius</string>
     <string name="settings_info_themes_title">Informacija apie žemėlapio temas</string>
     <string name="init_mapsource_select">Pasirinkite žemėlapio šaltinį</string>
+    <string name="init_updateinterval_title">Atnaujinimo intervalas</string>
     <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus slėptuvių duomenis (užuominas, įrašų vaizdus, …) išorinėje atmintyje (pseudo ar tikroje išorinėje SD kortelėje, priklausomai nuo jūsų įrenginio).</string>
     <string name="init_maptrail">Rodyti pėdsaką</string>
     <string name="init_maptrail_length">Maksimalus pėdsako ilgis</string>
@@ -672,6 +679,7 @@
     <string name="init_create_memory_dump">Sukurti atminties turinio failą</string>
     <string name="init_memory_dump">Atminties turinio failas</string>
     <string name="init_memory_dumped">Atminties turinio failas išsaugotas %s</string>
+    <string name="init_please_wait">Prašome palaukti…</string>
     <string name="init_hardware_acceleration_title">Aparatinis grafikos pateikimo spartinimas</string>
     <string name="init_hardware_acceleration_note">Aparatinis spartinimas greičiau pateikia grafinius elementus ekrane. Tačiau kai kuriuose įrenginiuose Android operacinėje sistemoje yra klaidų ir kai kuris tekstas gali būti neryškus (ypač paryškinti simboliai). Jeigu taip atsitiktų, išjunkite aparatūros spartinimą.</string>
     <string name="init_hardware_acceleration">Įjungti aparatinį spartinimą</string>
@@ -728,6 +736,7 @@
     <string name="sendToCgeo_download_fail">c:geo nepavyko atsisiųsti slėptuvių. Nėra interneto ryšio arba neveikia send2cgeo.</string>
     <string name="sendToCgeo_no_registration">c:geo nepavyko atsisiųsti slėptuvių. send2cgeo registracijos galiojimo laikas pasibaigė. Prašome registruotis Nustatymuose.</string>
     <!-- Content Storage -->
+    <string name="contentstorage_selectfolder_dialog_title">Keisti %s aplanka</string>
     <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
@@ -1104,7 +1113,6 @@
     <string name="search_address_result">Rastos vietos</string>
     <string name="search_own_caches">Ieškoti mano slėptuvių</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">Įkeliami Pocket Query sąrašai</string>
     <!-- trackable -->
     <string name="trackable">Keliauninkas</string>
     <string name="trackable_details_loading">Įkeliama keliauninko informacija…</string>
