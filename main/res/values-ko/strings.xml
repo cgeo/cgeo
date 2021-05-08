@@ -156,6 +156,7 @@
     <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">이미지</string>
     <!-- translation -->
+    <string name="translate">번역</string>
     <string name="translate_to_sys_lang">%s로 번역하기</string>
     <string name="translate_to_english">영어로 번역하기</string>
     <string name="translate_length_warning">내용이 긴 경우 번역이 되지 않을수 도 있습니다.</string>
@@ -247,6 +248,7 @@
     <string name="warn_notloggedin_short">로그인하지 않았습니다. 라이브 지도는 로컬에 저장된 캐시 만 표시합니다. 자세한 내용을 보려면 여기를 누르십시오.</string>
     <string name="warn_notloggedin_long">로그인하지 않았습니다 (아직). 라이브 지도는 로컬에 저장된 캐시 만 표시하며 온라인 기능은 작동하지 않습니다.\n\n네트워크 연결이 없거나 서버 문제가 있거나 지오 캐싱 서비스를 다시 구성해야합니다.\n\n지금 서비스를 구성 하시겠습니까?</string>
     <string name="err_read_pocket_query_list">포켓쿼리 목록을 불러오지 못했습니다.</string>
+    <string name="err_read_bookmark_list">북마크 목록을 읽는 중에 오류가 발생했습니다.</string>
     <string name="info_log_posted">로그를 성공적으로 제출했습니다.</string>
     <string name="info_log_saved">로그를 성공적으로 저장했습니다.</string>
     <string name="info_log_post_failed">로그 올리기가 실패했습니다.</string>
@@ -295,7 +297,7 @@
     <string name="menu_history">지난 기록</string>
     <string name="menu_filter">필터</string>
     <string name="menu_scan_geo">지오코드 스캔</string>
-    <string name="menu_pocket_queries">포켓쿼리</string>
+    <string name="menu_lists_pocket_queries">목록 / 포켓 쿼리</string>
     <string name="menu_scan_description">QR코드에 인쇄된 지오코드를 스캔할 수 있으나 적절한 앱이 없습니다. 구글플레이에서 설치하시겠습니까?</string>
     <!-- main screen -->
     <string name="live_map_button">라이브 지도</string>
@@ -310,6 +312,8 @@
     <string name="caches_more_caches_no">더이상 캐시가 없습니다.</string>
     <string name="caches_more_caches_loading">캐시 불러오는 중…</string>
     <string name="caches_more_caches_currently">현재</string>
+    <string name="caches_more_caches_next_x">다음 %1$d 개 캐시 보기</string>
+    <string name="caches_more_caches_remaining">남은 캐시 보기 (%1$d / %2$d)</string>
     <string name="caches_downloading">캐시 다운로드 중…\n남은시간: </string>
     <string name="caches_eta_ltm">1분 이내</string>
     <plurals name="caches_eta_mins">
@@ -361,6 +365,7 @@
     <string name="caches_copy_all">전체 복사</string>
     <string name="caches_map_locus_export">Locus로 내보내기</string>
     <string name="caches_filter">필터</string>
+    <string name="caches_filter_menuitem">새로운 맞춤 필터 (실험용)</string>
     <string name="caches_filter_title">필터링 기준</string>
     <string name="caches_filter_size">크기</string>
     <string name="caches_filter_type">유형</string>
@@ -412,6 +417,32 @@
     <string name="list_dialog_rename_title">목록 이름 바꾸기</string>
     <string name="list_dialog_rename">이름변경</string>
     <string name="list_not_available">목록이 존재하지 않아, 표준 목록으로 전환합니다.</string>
+    <!-- caches lists filter -->
+    <string name="cache_filter_option_and_or">AND 대신 OR 사용</string>
+    <string name="cache_filter_option_inverse">역 필터</string>
+    <string name="cache_filter_option_include_inconclusive">결정적이지 않은 일치 포함</string>
+    <string name="cache_filter_option_include_inconclusive_info">필터에 사용할 수없는 캐시에 대한 정보가 필요할 때 결과에 캐시를 포함할지 여부입니다.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">필터를 추가하려면 왼쪽 상단의 \'+\'를 누르세요.</string>
+    <string name="cache_filter_name">제목</string>
+    <string name="cache_filter_type">유형</string>
+    <string name="cache_filter_size">크기</string>
+    <string name="cache_filter_personalnote">개인 노트</string>
+    <string name="cache_filter_description">설명</string>
+    <string name="cache_filter_offlinelog">오프라인 로그</string>
+    <string name="cache_filter_owner">소유주</string>
+    <string name="cache_filter_difficulty">난이도</string>
+    <string name="cache_filter_terrain">지형등급</string>
+    <string name="cache_filter_status">상태</string>
+    <string name="cache_filter_attributes">속성</string>
+    <string name="cache_filter_stringfilter_matchcase">일치 사례</string>
+    <string name="cache_filter_stringfilter_info">\'패턴\'옵션과 함께 와일드 카드 \'*\' 및 \'?\'를 사용하십시오. \'*\'는 0 개, 하나 또는 여러 개의 문자를 나타내고 \'?\'은 하나의 단일 문자를 나타냅니다. 예를 들어 \'H?mburg*\'패턴은 \'Homburg\'또는 \'Hamburg at Night\'예와 일치하지만 \'A day in Hamburg\'또는 \'Hahmburg\'와는 일치하지 않습니다.</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">존재하지 않음</string>
+    <string name="cache_filter_stringfilter_type_is_present">있음</string>
+    <string name="cache_filter_stringfilter_type_contains">포함</string>
+    <string name="cache_filter_stringfilter_type_starts_with">다음으로 시작</string>
+    <string name="cache_filter_stringfilter_type_ends_with">다음으로 끝남</string>
+    <string name="cache_filter_stringfilter_type_pattern">패턴</string>
+    <string name="cache_filter_checkboxlist_selectallnone">모두 선택/선택 안 함</string>
     <!-- about -->
     <string name="about_version">버전</string>
     <string name="about_changelog">변경내역</string>
@@ -611,6 +642,8 @@
     <string name="init_choose_list">목록 물어보기</string>
     <string name="init_summary_choose_list">캐시를 저장할 때 어느 목록에 저장할지 물어봅니다.</string>
     <string name="init_listdisplay">추가 목록</string>
+    <string name="init_list_initial_load_limit">목록 부하 제한</string>
+    <string name="init_summary_list_initial_load_limit">저장된 목록을 표시 할 때 처음에 데이터베이스에서 로드할 최대 캐시 수입니다. \'무제한\'으로 0을 선택하십시오.</string>
     <string name="init_summary_listdisplay">캐시 목록의 다른 목록에 캐시가 있는지 표시</string>
     <string name="init_livelist">방향 보이기</string>
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
@@ -1283,7 +1316,8 @@
     <string name="search_address_result">장소 찾기</string>
     <string name="search_own_caches">내 캐시 검색</string>
     <string name="search_pocket_title">포켓쿼리</string>
-    <string name="search_pocket_loading">포켓쿼리 목록 불러오는 중</string>
+    <string name="search_bookmark_list">북마크 목록</string>
+    <string name="search_pocket_and_bookmark_loading">포켓 쿼리 및 북마크 목록 로드</string>
     <!-- trackable -->
     <string name="trackable">추적아이템</string>
     <string name="trackable_details_loading">추적아이템 정보 불러오는 중…</string>

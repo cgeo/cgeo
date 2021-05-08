@@ -294,7 +294,6 @@
     <string name="menu_history">历史</string>
     <string name="menu_filter">滤镜</string>
     <string name="menu_scan_geo">掃描geocode</string>
-    <string name="menu_pocket_queries">Pocket Queries</string>
     <string name="menu_scan_description">c:geo可讀取用QR code顯示的geocacode。 但需要的app未安裝，是否要開啟Google play來安裝必要的app?</string>
     <!-- main screen -->
     <string name="live_map_button">線上即時地圖</string>
@@ -410,6 +409,7 @@
     <string name="list_dialog_rename_title">重命名列表</string>
     <string name="list_dialog_rename">重命名</string>
     <string name="list_not_available">這個列表不再存在，切換到標準的列表。</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日誌</string>

@@ -280,7 +280,6 @@
     <string name="menu_history">Історія</string>
     <string name="menu_filter">Фільтр</string>
     <string name="menu_scan_geo">Сканувати геокод</string>
-    <string name="menu_pocket_queries">Pocket-запити</string>
     <string name="menu_scan_description">c:geo можна сканувати гео-коди, які надруковані як QR-код. Не встановлено потрібне додатку. Відкрити Google Play, щоб встановити його?</string>
     <!-- main screen -->
     <string name="live_map_button">Жива мапа</string>
@@ -391,6 +390,7 @@
     <string name="list_dialog_rename_title">перейменувати список</string>
     <string name="list_dialog_rename">Перейменувати</string>
     <string name="list_not_available">Список більше не доступний, перемикаючись на стандартний список</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">версія</string>
     <string name="about_changelog">журнал змін</string>
@@ -1081,7 +1081,6 @@
     <string name="search_address_result">Знайдені місця</string>
     <string name="search_own_caches">Пошук моїх кешів</string>
     <string name="search_pocket_title">кишеньковий запит</string>
-    <string name="search_pocket_loading">Завантаження списку кишенькових запитів</string>
     <!-- trackable -->
     <string name="trackable">відстежуваний</string>
     <string name="trackable_details_loading">завантаження відстежуваних пристроїв…</string>

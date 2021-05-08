@@ -343,6 +343,7 @@
     <string name="list_dialog_rename_title">שינוי שם הרשימה</string>
     <string name="list_dialog_rename">שנה שם</string>
     <string name="list_not_available">הרשימה לא זמינה יותר. עובר לרשימה הסטנדרטית</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">גירסה</string>
     <string name="about_changelog">יומן שינויים</string>

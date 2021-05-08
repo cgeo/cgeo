@@ -279,7 +279,6 @@
     <string name="menu_history">Vēsture</string>
     <string name="menu_filter">Filtrēt</string>
     <string name="menu_scan_geo">Skenēt Geo code</string>
-    <string name="menu_pocket_queries">Slēpņu atlases (PQ)</string>
     <string name="menu_scan_description">c:geo var skenēt ģeokodus, kuri tiek drukāti kā QR kods. Nav instalēta nepieciešamā aplikācija. Vai vēlaties atvērt Google Play (Google veikalu), lai to instalētu?</string>
     <!-- main screen -->
     <string name="live_map_button">Karte</string>
@@ -390,6 +389,7 @@
     <string name="list_dialog_rename_title">Pārdēvēt sarakstu</string>
     <string name="list_dialog_rename">Pārdēvēt</string>
     <string name="list_not_available">Saraksts vairs nav pieejams, pārslēdzas uz standarta sarakstu</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Izmaiņas</string>
@@ -1030,7 +1030,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="search_address_result">Atrastās vietas</string>
     <string name="search_own_caches">Meklēt manus slēpņus</string>
     <string name="search_pocket_title">Slēpņu atlase (PQ)</string>
-    <string name="search_pocket_loading">Tiek ielādēts saraksts ar Slēpņu atlasēm (PQ)</string>
     <!-- trackable -->
     <string name="trackable">Ceļotājs</string>
     <string name="trackable_details_loading">Ielādē  ceļotāja informāciju…</string>

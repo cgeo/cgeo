@@ -296,7 +296,6 @@
     <string name="menu_history">Historial</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Escaneja un codi de catxé</string>
-    <string name="menu_pocket_queries">Pocket queries</string>
     <string name="menu_scan_description">El c:geo pot escanejar els codis de catxés impresos com a codis QR. L\'aplicació necessària no està instal·lada. Voleu obrir Google Play per instal·lar-la?</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
@@ -414,6 +413,7 @@
     <string name="list_dialog_rename_title">Canvia el nom de la llista</string>
     <string name="list_dialog_rename">Canvia el nom</string>
     <string name="list_not_available">La llista ja no està disponible, s\'està canviant a la llista estàndard</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
@@ -1289,7 +1289,6 @@
     <string name="search_address_result">Llocs trobats</string>
     <string name="search_own_caches">Cerca els meus catxés</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">S\'està carregant una llista de pocket queries</string>
     <!-- trackable -->
     <string name="trackable">Traçable</string>
     <string name="trackable_details_loading">Carregant les dades del traçable…</string>

@@ -285,7 +285,6 @@
     <string name="menu_history">История</string>
     <string name="menu_filter">Фильтр</string>
     <string name="menu_scan_geo">Сканировать геокод</string>
-    <string name="menu_pocket_queries">Выборки</string>
     <string name="menu_scan_description">c:geo может сканировать геокоды которые напечатаны как QR код. Необходимое приложение не установлено. Вы хотите открыть Google Play, чтобы установить его?</string>
     <!-- main screen -->
     <string name="live_map_button">Карта</string>
@@ -402,6 +401,7 @@
     <string name="list_dialog_rename_title">Переименовать список</string>
     <string name="list_dialog_rename">Переименовать</string>
     <string name="list_not_available">Этот список больше недоступен, переключаюсь на список по умолчанию</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>
@@ -1222,7 +1222,6 @@
     <string name="search_address_result">Найденные места</string>
     <string name="search_own_caches">Искать мои тайники</string>
     <string name="search_pocket_title">Выборка</string>
-    <string name="search_pocket_loading">Загрузка списка выборок</string>
     <!-- trackable -->
     <string name="trackable">Трекабл</string>
     <string name="trackable_details_loading">Загрузка деталей трекабла…</string>

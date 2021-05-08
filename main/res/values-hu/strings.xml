@@ -261,7 +261,6 @@
     <string name="menu_history">Előzmények</string>
     <string name="menu_filter">Szűrés</string>
     <string name="menu_scan_geo">Geokód szkennelése</string>
-    <string name="menu_pocket_queries">Pocket lekérdezések</string>
     <string name="menu_scan_description">A c:geo QR formátumú geokódokat is be tud olvasni, de az ehhez szükséges alkalmazás nincs telepítve. Meg szeretnéd nyitni a Google Play-t, hogy telepítsd?</string>
     <!-- main screen -->
     <string name="live_map_button">Élő térkép</string>
@@ -369,6 +368,7 @@
     <string name="list_dialog_rename_title">Lista átnevezése</string>
     <string name="list_dialog_rename">Átnevezés</string>
     <string name="list_not_available">A lista már nem elérhető, váltás az alapértelmezett listára</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Verzió</string>
     <string name="about_changelog">Változások</string>
@@ -917,7 +917,6 @@
     <string name="search_address_result">Megtalált helyek</string>
     <string name="search_own_caches">Saját ládák keresése</string>
     <string name="search_pocket_title">Pocket lekérdezés</string>
-    <string name="search_pocket_loading">Pocket lekérdezések listájának betöltése</string>
     <!-- trackable -->
     <string name="trackable">Utazó</string>
     <string name="trackable_details_loading">Utazó adatainak betöltése…</string>

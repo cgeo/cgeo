@@ -31,7 +31,7 @@
     <string name="gps">GPS Adventures Exhibit -kätkö</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Sijaintivapaa (päinvastainen) kätkö</string>
-    <string name="advlab">Adventure Lab-kätkö</string>
+    <string name="advlab">Adventure Lab -kätkö</string>
     <string name="userdefined">Käyttäjän määrittämä kätkö</string>
     <string name="unknown">Tuntematon kätkötyyppi</string>
     <!-- cache sizes -->
@@ -156,6 +156,7 @@
     <string name="log_image_info">%1$d x %2$d pikseliä, %3$s\nSkaalattu/pakattu:\n%4$d x %5$d pikseliä, ~%6$s</string>
     <string name="log_image_titleprefix">Kuva</string>
     <!-- translation -->
+    <string name="translate">Käännä</string>
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
     <string name="translate_to_english">Käännä englanniksi</string>
     <string name="translate_length_warning">Käännös saattaa epäonnistua jos tekstiä on paljon.</string>
@@ -247,6 +248,7 @@
     <string name="warn_notloggedin_short">Et ole kirjautunut sisään. Live-kartta näyttää vain paikallisesti tallennetut kätköt. Napauta tästä saadaksesi lisätietoja.</string>
     <string name="warn_notloggedin_long">Et ole kirjautunut sisään (vielä). Livekartta näyttää vain paikallisesti tallennetut kätköt ja online-toiminnot eivät toimi.\n\nJoko laitteessa ei ole verkkoyhteyttä, on ilmennyt palvelunongelma, tai sinun tulee (uudelleen)määrittäägeokätköilypalvelusi.\n\nHaluatko määrittää palvelut nyt?</string>
     <string name="err_read_pocket_query_list">Virhe luettaessa Pocket Query -listausta.</string>
+    <string name="err_read_bookmark_list">Virhe luettaessa kirjanmerkkiluetteloja.</string>
     <string name="info_log_posted">c:geo latasi lokin onnistuneesti.</string>
     <string name="info_log_saved">c:geo tallensi lokin onnistuneesti.</string>
     <string name="info_log_post_failed">Lokin lähettäminen epäonnistui.</string>
@@ -295,7 +297,7 @@
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Suodata</string>
     <string name="menu_scan_geo">Skannaa geokoodi</string>
-    <string name="menu_pocket_queries">Pocket Queries</string>
+    <string name="menu_lists_pocket_queries">Listat / pocket queryt</string>
     <string name="menu_scan_description">c:geo voi skannata geokoodeja jotka on tulostettu QR-koodeiksi. Tähän tarvittavaa sovellusta ei ole asennettuna. Haluatko avata Google Play:n asentaaksesi sen?</string>
     <!-- main screen -->
     <string name="live_map_button">Live-kartta</string>
@@ -310,6 +312,8 @@
     <string name="caches_more_caches_no">Ei enempää kätköjä</string>
     <string name="caches_more_caches_loading">Ladataan kätköjä…</string>
     <string name="caches_more_caches_currently">tällä hetkellä</string>
+    <string name="caches_more_caches_next_x">Lataa seuraavat %1$d kätköä</string>
+    <string name="caches_more_caches_remaining">Lataa loput kätköt (%1$d / %2$d)</string>
     <string name="caches_downloading">Ladataan kätköjä…\nETA: </string>
     <string name="caches_eta_ltm">Alle minuutissa</string>
     <plurals name="caches_eta_mins">
@@ -362,6 +366,7 @@
     <string name="caches_copy_all">Kopioi kaikki</string>
     <string name="caches_map_locus_export">Vie Locus:iin</string>
     <string name="caches_filter">Suodatin</string>
+    <string name="caches_filter_menuitem">Uusi kätkösuodatin (kokeellinen)</string>
     <string name="caches_filter_title">Suodata</string>
     <string name="caches_filter_size">Koko</string>
     <string name="caches_filter_type">Tyyppi</string>
@@ -413,6 +418,32 @@
     <string name="list_dialog_rename_title">Uudelleennimeä luettelo</string>
     <string name="list_dialog_rename">Nimeä uudelleen</string>
     <string name="list_not_available">Luettelo ei ole enää saatavilla, vaihdetaan oletusluetteloon</string>
+    <!-- caches lists filter -->
+    <string name="cache_filter_option_and_or">Käytä TAI:ta JA:n sijaan</string>
+    <string name="cache_filter_option_inverse">Käänteinen suodatin</string>
+    <string name="cache_filter_option_include_inconclusive">Sisällytä epävarmat osumat</string>
+    <string name="cache_filter_option_include_inconclusive_info">Sisällytä ne kätköt, joissa suodattimen valittu tieto ei ole saatavilla.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Napauta \'+\' vasemmassa yläkulmassa lisätäksesi suodattimen</string>
+    <string name="cache_filter_name">Nimi</string>
+    <string name="cache_filter_type">Tyyppi</string>
+    <string name="cache_filter_size">Koko</string>
+    <string name="cache_filter_personalnote">Omat merkinnät</string>
+    <string name="cache_filter_description">Kuvaus</string>
+    <string name="cache_filter_offlinelog">Offline-loki</string>
+    <string name="cache_filter_owner">Omistaja</string>
+    <string name="cache_filter_difficulty">Vaikeus</string>
+    <string name="cache_filter_terrain">Maasto</string>
+    <string name="cache_filter_status">Tila</string>
+    <string name="cache_filter_attributes">Attribuutit</string>
+    <string name="cache_filter_stringfilter_matchcase">Sama kirjainkoko</string>
+    <string name="cache_filter_stringfilter_info">Valinnalla \'Kuvio\', käytä jokerimerkkejä * ja ?. * edustaa nollaa, yhtä tai useampaa merkkiä, ? edustaa yhtä merkkiä. Esimerkiksi kuvio \'H?mburg*\' vastaa esim. \'Homburg\' tai \'Hampuri yöllä\', mutta ei \'Hahmburg\' tai \'Hahmburg\'</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">Ei Ole Läsnä</string>
+    <string name="cache_filter_stringfilter_type_is_present">On Läsnä</string>
+    <string name="cache_filter_stringfilter_type_contains">Sisältää</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Alkaa</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Päättyy</string>
+    <string name="cache_filter_stringfilter_type_pattern">Kuvio</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Valitse kaikki / ei mitään</string>
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
@@ -504,7 +535,7 @@
     <string name="settings_ec_description">Anna c:geolle lupa extremcaching.com-palvelun käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
     <string name="settings_su_description">Anna c:geolle lupa geocaching.su-palvelun käyttöön etsiäksesi kätköjä.</string>
     <string name="settings_lc_description">Sisällytä Adventure Lab -katköt kartalla.\n\n(Saatavilla vain \"Geocaching.com\"in premium-jäsenille. Edellyttää aktivoitua \"Geocaching.com\"-palvelua.)\n\nTämän asetuksen vaihto edellyttää sovelluksen uudelleenkäynnistystä.</string>
-    <string name="lc_default_description">Tämä on geocaching.com Adventure Lab Cache. Seikkailuja voi pelata vain Groundspeakin Adventure Lab -sovelluksen kanssa. Napauta Adventure Lab-kuvaketta \"Yksityiskohdat\" -sivulla avataksesi tai asentaaksesi Adventure Lab-sovelluksen tätä seikkailua varten.\nJos et halua nähdä Adventure Lab -kätköjä kartalla ja haussa, voit poistaa ne käytöstä \"asetukset\" -valikossa - Palvelut - Geocaching.com Adventure Lab</string>
+    <string name="lc_default_description">Tämä on geocaching.com:in Adventure Lab Cache. Seikkailuja voi pelata vain Groundspeakin Adventure Lab -sovelluksen kanssa. Napauta Adventure Lab-kuvaketta \"Yksityiskohdat\" -sivulla avataksesi tai asentaaksesi Adventure Lab -sovelluksen tätä seikkailua varten.\nJos et halua nähdä Adventure Lab -kätköjä kartalla ja haussa, voit poistaa ne käytöstä \"asetukset\" -valikossa - Palvelut - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Aktivoi</string>
     <string name="init_summary_oc_de">Lataa kätköt palvelusta opencaching.de</string>
     <string name="init_oc_de_description">Anna c:geolle lupa opencaching.de:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
@@ -612,6 +643,8 @@
     <string name="init_choose_list">Kysy listausta</string>
     <string name="init_summary_choose_list">Kysy mihin luetteloon kätköt tallennetaan</string>
     <string name="init_listdisplay">Toiset listat</string>
+    <string name="init_list_initial_load_limit">Listan latausraja</string>
+    <string name="init_summary_list_initial_load_limit">Enimmäismäärä kätköjä ladattaessa tietokannasta kun näytetään tallennetut listat. Valitse 0, valitaksesi \'rajoittamaton\'</string>
     <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
@@ -1294,7 +1327,8 @@
     <string name="search_address_result">Löydetyt paikat</string>
     <string name="search_own_caches">Etsi minun kätköni</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">Ladataan Pocket Query -listaa</string>
+    <string name="search_bookmark_list">Kirjanmerkit</string>
+    <string name="search_pocket_and_bookmark_loading">Ladataan luetteloa Pocket Queries- ja kirjanmerkkilistoista</string>
     <!-- trackable -->
     <string name="trackable">Reissaaja</string>
     <string name="trackable_details_loading">Ladataan reissaajan tietoja…</string>
@@ -1800,6 +1834,8 @@
     <string name="individual_route_error_toggling_waypoint">virhe kytkettäessä reittipiste päälle/pois</string>
     <string name="individual_route_error_single_waypoint_mode">Ei käytettävissä yksittäisen reittipisteen tilassa</string>
     <string name="map_sort_individual_route">Lajittele yksittäinen reitti</string>
+    <string name="map_export_individual_route">Vie reittinä</string>
+    <string name="map_export_individual_route_as_track">Vie polkuna</string>
     <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
     <string name="map_autotarget_individual_route">Aseta reitin alku kohteeksi</string>

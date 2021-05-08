@@ -285,7 +285,6 @@
     <string name="menu_history">历史</string>
     <string name="menu_filter">过滤器</string>
     <string name="menu_scan_geo">扫描地理编码</string>
-    <string name="menu_pocket_queries">口袋查询</string>
     <string name="menu_scan_description">c:geo 可以扫描以二维码打印的地理编码。 未安装必要的应用程序，您想要打开 Google Play 来安装吗？</string>
     <!-- main screen -->
     <string name="live_map_button">实时地图</string>
@@ -402,6 +401,7 @@
     <string name="list_dialog_rename_title">重命名列表</string>
     <string name="list_dialog_rename">重命名</string>
     <string name="list_not_available">列表不再可用，切换到标准列表</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日志</string>

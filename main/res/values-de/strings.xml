@@ -156,6 +156,7 @@
     <string name="log_image_info">%1$d x %2$d px, %3$s\nSkaliert/Komprimiert:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- translation -->
+    <string name="translate">Übersetzen</string>
     <string name="translate_to_sys_lang">Übersetze in %s</string>
     <string name="translate_to_english">Übersetze in Englisch</string>
     <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
@@ -246,7 +247,8 @@
     <string name="warn_notloggedin_title">Offlinemodus</string>
     <string name="warn_notloggedin_short">Nicht angemeldet. Live-Karte zeigt nur lokal gespeicherte Caches an. Tippe hier für weitere Informationen.</string>
     <string name="warn_notloggedin_long">(Noch) nicht eingeloggt. Die Live-Karte wird nur lokal gespeicherte Caches zeigen und Onlinefunktionen werden nicht verfügbar sein.\n\nEntweder gibt es keine Netzwerkverbindung, ein Server-Problem oder du musst deine Geocaching-Dienste (neu) konfigurieren.\n\nMöchtest du die Dienste jetzt konfigurieren?</string>
-    <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket Queries.</string>
+    <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket-Queries.</string>
+    <string name="err_read_bookmark_list">Fehler beim Lesen der Lesezeichenliste.</string>
     <string name="info_log_posted">Log erfolgreich gesendet.</string>
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>
     <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
@@ -295,7 +297,7 @@
     <string name="menu_history">Verlauf</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Geocode scannen</string>
-    <string name="menu_pocket_queries">Pocket-Queries</string>
+    <string name="menu_lists_pocket_queries">Listen / Pocket-Queries</string>
     <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchtest du Google Play öffnen, um sie zu installieren?</string>
     <!-- main screen -->
     <string name="live_map_button">Live-Karte</string>
@@ -310,6 +312,8 @@
     <string name="caches_more_caches_no">Keine weiteren Caches</string>
     <string name="caches_more_caches_loading">Lade Caches…</string>
     <string name="caches_more_caches_currently">aktuell</string>
+    <string name="caches_more_caches_next_x">Nächste %1$d Caches laden</string>
+    <string name="caches_more_caches_remaining">Verbleibende Caches laden (%1$d / %2$d)</string>
     <string name="caches_downloading">Lade Caches…\nGeschätzte Zeit: </string>
     <string name="caches_eta_ltm">Weniger als eine Minute</string>
     <plurals name="caches_eta_mins">
@@ -362,6 +366,7 @@
     <string name="caches_copy_all">Alle kopieren</string>
     <string name="caches_map_locus_export">Exportieren nach Locus</string>
     <string name="caches_filter">Filter</string>
+    <string name="caches_filter_menuitem">Neuer Cache-Filter (experimentell)</string>
     <string name="caches_filter_title">Filtern nach</string>
     <string name="caches_filter_size">Größe</string>
     <string name="caches_filter_type">Typ</string>
@@ -413,6 +418,32 @@
     <string name="list_dialog_rename_title">Liste umbenennen</string>
     <string name="list_dialog_rename">Umbenennen</string>
     <string name="list_not_available">Liste nicht mehr vorhanden, wechsele zur Standardliste</string>
+    <!-- caches lists filter -->
+    <string name="cache_filter_option_and_or">Benutze ODER statt UND</string>
+    <string name="cache_filter_option_inverse">Filter umkehren</string>
+    <string name="cache_filter_option_include_inconclusive">Unschlüssige Treffer einschließen</string>
+    <string name="cache_filter_option_include_inconclusive_info">Gibt an, ob der Cache in das Ergebnis eingebunden werden soll, wenn ein Filter Informationen benötigt die im Cache nicht verfügbar sind.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tippe auf \'+\' in der oberen linken Ecke um einen Filter hinzuzufügen</string>
+    <string name="cache_filter_name">Name</string>
+    <string name="cache_filter_type">Typ</string>
+    <string name="cache_filter_size">Größe</string>
+    <string name="cache_filter_personalnote">Persönliche Notizen</string>
+    <string name="cache_filter_description">Beschreibung</string>
+    <string name="cache_filter_offlinelog">Offline-Log</string>
+    <string name="cache_filter_owner">Besitzer</string>
+    <string name="cache_filter_difficulty">Schwierigkeit</string>
+    <string name="cache_filter_terrain">Gelände</string>
+    <string name="cache_filter_status">Status</string>
+    <string name="cache_filter_attributes">Attribute</string>
+    <string name="cache_filter_stringfilter_matchcase">Groß-/Kleinschreibung beachten</string>
+    <string name="cache_filter_stringfilter_info">Bei Option \'Muster\' können die Platzhalter * und ? Verwendet werden. * steht für 0, 1 oder mehrere Zeichen, ? steht für ein einzelnes Zeichen. Das Muster \"H?mburg*\" würde zum Beispiel \"Homburg\" oder \"Hamburg bei Nacht\" entsprechen, aber nicht \"Ein Tag in Hamburg\" oder \"Hahmburg\"</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">Nicht vorhanden</string>
+    <string name="cache_filter_stringfilter_type_is_present">Vorhanden</string>
+    <string name="cache_filter_stringfilter_type_contains">Enthält</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Beginnt mit</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Endet mit</string>
+    <string name="cache_filter_stringfilter_type_pattern">Muster</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Alles/Nichta auswählen</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
@@ -612,6 +643,8 @@
     <string name="init_choose_list">Nach Liste fragen</string>
     <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
     <string name="init_listdisplay">Zusätzliche Listen</string>
+    <string name="init_list_initial_load_limit">Ladelimit für Listen</string>
+    <string name="init_summary_list_initial_load_limit">Maximale Anzahl der zu ladenden Caches aus der Datenbank, wenn gespeicherte Listen angezeigt werden. Wähle 0 für \"unbegrenzt\"</string>
     <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
@@ -1294,7 +1327,8 @@
     <string name="search_address_result">Gefundene Orte</string>
     <string name="search_own_caches">Meine Caches suchen</string>
     <string name="search_pocket_title">Pocket-Query</string>
-    <string name="search_pocket_loading">Eine Liste von Pocket-Queries laden</string>
+    <string name="search_bookmark_list">Lesezeichenliste</string>
+    <string name="search_pocket_and_bookmark_loading">Lade eine Liste von Pocket-Queries und Lesezeichenlisten</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">Lade Details des Trackable…</string>

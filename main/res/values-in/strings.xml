@@ -227,7 +227,6 @@
     <string name="menu_helpers">Program utilitas</string>
     <string name="menu_settings">Pengaturan</string>
     <string name="menu_history">Riwayat</string>
-    <string name="menu_pocket_queries">Pocket pertanyaan</string>
     <string name="menu_scan_description">c: geo dapat memindai geocodes yang tercetak sebagai QR code. Aplikasi yang diperlukan tidak terpasang Apakah Anda ingin membuka Google Play untuk menginstalnya?</string>
     <!-- main screen -->
     <string name="live_map_button">Peta online</string>
@@ -325,6 +324,7 @@
     <string name="list_dialog_rename_title">Ganti nama daftar</string>
     <string name="list_dialog_rename">Ubah nama</string>
     <string name="list_not_available">Daftar tidak lagi tersedia, beralih ke daftar standar</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Versi</string>
     <string name="about_changelog">Perubahan</string>
@@ -799,7 +799,6 @@
     <string name="search_address_result">Tempat ditemukan</string>
     <string name="search_own_caches">Pencarian cache saya</string>
     <string name="search_pocket_title">Kantong Pertanyaan</string>
-    <string name="search_pocket_loading">Memuat daftar Pertanyaan Pocket</string>
     <!-- trackable -->
     <string name="trackable">Bisa dilacak</string>
     <string name="trackable_details_loading">Memuat rincian yang dilacak&#8230;</string>

@@ -280,7 +280,6 @@
     <string name="menu_history">Historique</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Geocode scannen</string>
-    <string name="menu_pocket_queries">Pocket queries</string>
     <string name="menu_scan_description">c:geo kann Geocodes scannen, déi als QR-Code ofgebillt sinn. Déi dofir noutwenneg App ass net installéiert. Wëlls du Google Play opmaachen, fir se ze installéieren?</string>
     <!-- main screen -->
     <string name="live_map_button">Live Kaart</string>
@@ -389,6 +388,7 @@
     <string name="list_dialog_rename_title">Lëscht ëmbenennen</string>
     <string name="list_dialog_rename">Ëmbenennen</string>
     <string name="list_not_available">D\'Lëscht ass net méi disponibel. D\'Standard-Lëscht gëtt nees agefouert</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Versioun</string>
     <string name="about_changelog">Ännerungshiwäiser</string>
