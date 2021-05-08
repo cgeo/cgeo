@@ -156,6 +156,7 @@
     <string name="log_image_info">%1$d x %2$d px, %3$s\nÖlçeklenmiş/Sıkıştırılmış:\n%4$d x %5$d px, ~ %6$s</string>
     <string name="log_image_titleprefix">Resim</string>
     <!-- translation -->
+    <string name="translate">Çeviri</string>
     <string name="translate_to_sys_lang">%s\'e çevir</string>
     <string name="translate_to_english">İngilizceye Çevir</string>
     <string name="translate_length_warning">Çeviri, metin miktarının fazla olması durumunda başarısız olabilir.</string>
@@ -247,6 +248,7 @@
     <string name="warn_notloggedin_short">Giriş yapılmadı. Canlı harita, sadece yerel olarak depolanmış cache\'leri gösterecek. Daha fazla bilgi için buraya dokunun.</string>
     <string name="warn_notloggedin_long">Giriş yapılmadı (henüz). Canlı harita sadece cihaza kaydedilen Cacheleri gösterecektir ve çevrimiçi özelllikler çalışmayacaktır.\n\nŞebeke bağlantınız olmasa da, sunucu problemi olsa da Geocaching hizmetlerini yeniden yapılandırmanız gerekmektedir.\n\nServisi şimdi yapılandırmak ister misiniz?</string>
     <string name="err_read_pocket_query_list">Sorgulama kaydı okunmasında hata.</string>
+    <string name="err_read_bookmark_list">Yer imi listesi okunurken bir hata oluştu.</string>
     <string name="info_log_posted">c:geo, kayıdınızı başarıyla gönderdi.</string>
     <string name="info_log_saved">c: geo, kayıdınızı başarıyla kaydetti.</string>
     <string name="info_log_post_failed">Kayıt gönderilemedi.</string>
@@ -295,7 +297,7 @@
     <string name="menu_history">Geçmiş</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Geocode tara</string>
-    <string name="menu_pocket_queries">Sorgulama kayıtları</string>
+    <string name="menu_lists_pocket_queries">Listeler / cep sorguları</string>
     <string name="menu_scan_description">c:geo, QR kodu olarak basılan geokodları tarayabilir. Gerekli uygulama yüklenmedi. Yüklemek için Google Play\'i açmak ister misiniz?</string>
     <!-- main screen -->
     <string name="live_map_button">Canlı harita</string>
@@ -310,6 +312,8 @@
     <string name="caches_more_caches_no">Başka Geocache yok</string>
     <string name="caches_more_caches_loading">Geocache\'ler yükleniyor…</string>
     <string name="caches_more_caches_currently">şu anda</string>
+    <string name="caches_more_caches_next_x">Sonraki %1$d cache\'i yükle</string>
+    <string name="caches_more_caches_remaining">Kalan cacheleri yükle (%1$d / %2$d)</string>
     <string name="caches_downloading">Geocache\'ler indiriliyor…\nETA: </string>
     <string name="caches_eta_ltm">Bir dakikadan az</string>
     <plurals name="caches_eta_mins">
@@ -362,6 +366,7 @@
     <string name="caches_copy_all">Tümünü kopyala</string>
     <string name="caches_map_locus_export">Locus\'a aktarma</string>
     <string name="caches_filter">Filtre</string>
+    <string name="caches_filter_menuitem">Yeni Cache Filtresi (Deneysel)</string>
     <string name="caches_filter_title">Filtreleme</string>
     <string name="caches_filter_size">Boyut</string>
     <string name="caches_filter_type">Tür</string>
@@ -413,6 +418,31 @@
     <string name="list_dialog_rename_title">Listeyi yeniden adlandır</string>
     <string name="list_dialog_rename">Yeniden Adlandır</string>
     <string name="list_not_available">Liste artık mevcut değil, standart listeye geçiliyor</string>
+    <!-- caches lists filter -->
+    <string name="cache_filter_option_and_or">VE yerine VEYA kullan</string>
+    <string name="cache_filter_option_inverse">Tersine Filtre</string>
+    <string name="cache_filter_option_include_inconclusive">Kesin olmayan eşleşmeleri de dahil et</string>
+    <string name="cache_filter_option_include_inconclusive_info">Filtrelemede aranan bir özellikle ilgili bilgi içermese de cache\'leri sonuçlara dahil et.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Sol üst köşedeki \'+\' simgesine tıklayarak bir filtre ekleyin</string>
+    <string name="cache_filter_name">İsim</string>
+    <string name="cache_filter_type">Tür</string>
+    <string name="cache_filter_size">Boyut</string>
+    <string name="cache_filter_personalnote">Kişisel Not</string>
+    <string name="cache_filter_description">Açıklama</string>
+    <string name="cache_filter_offlinelog">Çevrimdışı Kayıt</string>
+    <string name="cache_filter_owner">Sahibi</string>
+    <string name="cache_filter_difficulty">Zorluk</string>
+    <string name="cache_filter_terrain">Arazi</string>
+    <string name="cache_filter_status">Durum</string>
+    <string name="cache_filter_attributes">Özellikler</string>
+    <string name="cache_filter_stringfilter_matchcase">Büyük-Küçük Harf</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">Mevcut Değil</string>
+    <string name="cache_filter_stringfilter_type_is_present">Mevcut</string>
+    <string name="cache_filter_stringfilter_type_contains">Şunu İçeriyorsa</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Şununla Başlıyorsa</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Şununla Bitiyorsa</string>
+    <string name="cache_filter_stringfilter_type_pattern">Patern</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Tümünü/Hiçbirini seç</string>
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
@@ -612,6 +642,8 @@
     <string name="init_choose_list">Listelemek İçin Sor</string>
     <string name="init_summary_choose_list">Geocache\'lerin hangi listede depolanacağını sor</string>
     <string name="init_listdisplay">Diğer listeler</string>
+    <string name="init_list_initial_load_limit">Liste Yükleme Limiti</string>
+    <string name="init_summary_list_initial_load_limit">Kaydedilmiş listeleri görüntülerken veritabanından ilk olarak yüklenecek en fazla cache sayısı. \'Limitsiz\' olması için 0\'ı seçin</string>
     <string name="init_summary_listdisplay">Geocache listesindeki ek listelere Geocache üyeliğini göster</string>
     <string name="init_livelist">Yön göster</string>
     <string name="init_summary_livelist">Listedeki kutular için pusula yönü olan bir ok göster</string>
@@ -1294,7 +1326,8 @@
     <string name="search_address_result">Bulunan yerler</string>
     <string name="search_own_caches">Geocache\'lerimi ara</string>
     <string name="search_pocket_title">Sorgulama Kaydı</string>
-    <string name="search_pocket_loading">Sorgulama kaydı listesi yükleniyor</string>
+    <string name="search_bookmark_list">Yer imi listesi</string>
+    <string name="search_pocket_and_bookmark_loading">Cep sorgusu listesi veya bir yer imi listesi yükleniyor</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">Trackable detayları yükleniyor…</string>
