@@ -79,7 +79,7 @@ final class LCApi {
             return Collections.emptyList();
         }
         final Parameters params = new Parameters("skip", "0");
-        params.add("take", "100");
+        params.add("take", "20");
         params.add("radiusMeters", "10000");
         params.add("origin.latitude", String.valueOf(center.getLatitude()));
         params.add("origin.longitude", String.valueOf(center.getLongitude()));
