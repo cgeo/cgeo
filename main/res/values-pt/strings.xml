@@ -295,7 +295,6 @@
     <string name="menu_history">Histórico</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Ler código GC</string>
-    <string name="menu_pocket_queries">Pocket queries</string>
     <string name="menu_scan_description">O c:geo pode interpretar um código QR impresso que contenha \"geo-códigos\" (GCxxxxx). A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
@@ -413,6 +412,7 @@
     <string name="list_dialog_rename_title">Mudar o nome da lista</string>
     <string name="list_dialog_rename">Mudar o nome</string>
     <string name="list_not_available">A lista já não está disponível, a alterar para a lista geral</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
@@ -1294,7 +1294,6 @@
     <string name="search_address_result">Encontrar lugares</string>
     <string name="search_own_caches">Pesquisar as minhas caches</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">A carregar lista de Pocket Queries</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">A carregar detalhes do trackable…</string>
