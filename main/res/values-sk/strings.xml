@@ -295,7 +295,6 @@
     <string name="menu_history">História</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Nasnímať geokód</string>
-    <string name="menu_pocket_queries">Pocket queries</string>
     <string name="menu_scan_description">c:geo dokáže skenovať geokódy, ak sú vo forme QR kódu. Potrebná aplikácia nie je nainštalovaná. Chcete otvoriť Google Play a nainštalovať ju?</string>
     <!-- main screen -->
     <string name="live_map_button">Aktívna mapa</string>
@@ -415,6 +414,7 @@
     <string name="list_dialog_rename_title">Premenovať zoznam</string>
     <string name="list_dialog_rename">Premenovať</string>
     <string name="list_not_available">Zoznam nie je k dispozícii, prechod na štandardný zoznam</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Verzia</string>
     <string name="about_changelog">Zmeny</string>
@@ -1310,7 +1310,6 @@
     <string name="search_address_result">Nájdené miesta</string>
     <string name="search_own_caches">Hľadať v mojich skrýšach</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">Načítanie zoznamu Pocket Query</string>
     <!-- trackable -->
     <string name="trackable">Trasovateľné predmety</string>
     <string name="trackable_details_loading">Načítanie detailov trasovateľných predmetov…</string>
