@@ -3377,8 +3377,8 @@ public class DataStore {
 
     public static String getCoordDiffExpression(@NonNull final Geopoint coords, @Nullable final String tableId) {
         final String tableExp = tableId == null ? "" : tableId + ".";
-        return "(ABS(" + tableExp + "latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
-            ") + ABS(" + tableExp + "longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + "))";
+        return "(ABS(" + tableExp + "latitude - " + String.format((Locale) null, "%.6f", coords.getLatitude()) +
+            ") + ABS(" + tableExp + "longitude - " + String.format((Locale) null, "%.6f", coords.getLongitude()) + "))";
     }
 
     /** Retrieve all stored caches from DB */
