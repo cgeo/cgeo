@@ -283,7 +283,6 @@
     <string name="menu_history">Istorija</string>
     <string name="menu_filter">Filtras</string>
     <string name="menu_scan_geo">Skenuoti geo kodą</string>
-    <string name="menu_pocket_queries">Pocket query sąrašai</string>
     <string name="menu_scan_description">c:geo negali nuskaityti QR kodų. Reikalinga programa neįdiegta. Ar norite atidaryti Google Play ir ją įdiegti?</string>
     <!-- main screen -->
     <string name="live_map_button">Žemėlapis</string>
@@ -395,6 +394,7 @@
     <string name="list_dialog_rename_title">Pervadinti sąrašą</string>
     <string name="list_dialog_rename">Pervadinti</string>
     <string name="list_not_available">Sąrašas nebeprieinamas, pereinama į standartinį sąrašą</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
@@ -1113,7 +1113,6 @@
     <string name="search_address_result">Rastos vietos</string>
     <string name="search_own_caches">Ieškoti mano slėptuvių</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">Įkeliami Pocket Query sąrašai</string>
     <!-- trackable -->
     <string name="trackable">Keliauninkas</string>
     <string name="trackable_details_loading">Įkeliama keliauninko informacija…</string>
