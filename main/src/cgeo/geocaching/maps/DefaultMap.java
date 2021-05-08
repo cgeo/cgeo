@@ -51,12 +51,12 @@ public final class DefaultMap {
         startActivityGeoCode(fromActivity, getDefaultMapClass(), geocode);
     }
 
-    public static void startActivitySearch(final Activity fromActivity, final Class<?> cls, final SearchResult search, final String title) {
-        new MapOptions(search, title).startIntent(fromActivity, cls);
+    public static void startActivitySearch(final Activity fromActivity, final Class<?> cls, final SearchResult search, final String title, final int fromList) {
+        new MapOptions(search, title, fromList).startIntent(fromActivity, cls);
     }
 
-    public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title) {
-        startActivitySearch(fromActivity, getDefaultMapClass(), search, title);
+    public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title, final int fromList) {
+        startActivitySearch(fromActivity, getDefaultMapClass(), search, title, fromList);
     }
 
 }

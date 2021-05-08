@@ -87,6 +87,7 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
 
     void setOnTapListener(OnCacheTapListener listener);
 
+    void setListId(int listId);
 
     /* From Google MapView documentation:
      * Users of this class must forward all the life cycle methods from the Activity or Fragment

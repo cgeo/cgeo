@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.google.v2;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CGeoMap;
@@ -78,6 +79,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private WeakReference<PositionAndHistory> positionAndHistoryRef;
     private View root = null;
 
+    private int fromList = StoredList.TEMPORARY_LIST.id;
+
     public interface PostRealDistance {
         void postRealDistance (float realDistance);
     }
@@ -133,7 +136,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 if (null != cache) {
                     EditWaypointActivity.startActivityAddWaypoint(this.getContext(), cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
                 } else if (Settings.isLongTapOnMapActivated()) {
-                    InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), InternalConnector.UDC_LIST);
+                    InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), fromList, true);
                 }
             }
         });
@@ -164,6 +167,11 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             mapReadyCallback = null;
         }
         redraw();
+    }
+
+    @Override
+    public void setListId(final int listId) {
+        fromList = listId;
     }
 
     private void recognizePositionChange() {

@@ -598,6 +598,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             savedInstanceState.remove(BUNDLE_MAP_STATE);
         }
         mapView.onCreate(savedInstanceState);
+        mapView.setListId(mapOptions.fromList);
 
         mapView.onMapReady(() -> initializeMap(trailHistory));
 
