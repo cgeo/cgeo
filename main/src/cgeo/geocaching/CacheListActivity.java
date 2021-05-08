@@ -938,7 +938,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             deletePastEvents();
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_create_internal_cache) {
-            InternalConnector.interactiveCreateCache(this, coords, StoredList.getConcreteList(listId));
+            InternalConnector.interactiveCreateCache(this, coords, StoredList.getConcreteList(listId), false);
         } else if (menuItem == R.id.menu_clear_offline_logs) {
             clearOfflineLogs();
             invalidateOptionsMenuCompatible();
@@ -1691,7 +1691,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // apply filter settings (if there's a filter)
         final SearchResult searchToUse = getFilteredSearch();
-        DefaultMap.startActivitySearch(this, searchToUse, title);
+        DefaultMap.startActivitySearch(this, searchToUse, title, listId);
     }
 
     private void refreshCurrentList() {

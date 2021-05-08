@@ -3,6 +3,7 @@ package cgeo.geocaching.apps.cachelist;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractApp;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
@@ -34,6 +35,6 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
 
     @Override
     public void invoke(@NonNull final List<Geocache> caches, @NonNull final Activity activity, @NonNull final SearchResult search) {
-        DefaultMap.startActivitySearch(activity, cls != null ? cls : Settings.getMapProvider().getMapClass(), search, null);
+        DefaultMap.startActivitySearch(activity, cls != null ? cls : Settings.getMapProvider().getMapClass(), search, null, StoredList.TEMPORARY_LIST.id);
     }
 }

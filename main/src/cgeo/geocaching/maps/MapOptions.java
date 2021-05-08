@@ -4,6 +4,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 
@@ -26,6 +27,7 @@ public class MapOptions {
     public WaypointType waypointType;
     public MapState mapState;
     public String title;
+    public int fromList;
 
     public MapOptions(final Context context, @Nullable final Bundle extras) {
         if (extras != null) {
@@ -41,6 +43,7 @@ public class MapOptions {
             if (null != coords && null == waypointType) {
                 waypointType = WaypointType.WAYPOINT;
             }
+            fromList = extras.getInt(Intents.EXTRA_LIST_ID, StoredList.TEMPORARY_LIST.id);
         } else {
             mapMode = MapMode.LIVE;
             isStoredEnabled = true;
@@ -51,11 +54,12 @@ public class MapOptions {
         }
     }
 
-    public MapOptions(final SearchResult search, final String title) {
+    public MapOptions(final SearchResult search, final String title, final int fromList) {
         this.searchResult = search;
         this.title = title;
         this.mapMode = MapMode.LIST;
         this.isLiveEnabled = false;
+        this.fromList = fromList;
     }
 
     public MapOptions() {
@@ -97,6 +101,7 @@ public class MapOptions {
         intent.putExtra(Intents.EXTRA_WPTTYPE, waypointType);
         intent.putExtra(Intents.EXTRA_MAPSTATE, mapState);
         intent.putExtra(Intents.EXTRA_TITLE, title);
+        intent.putExtra(Intents.EXTRA_LIST_ID, fromList);
         return intent;
     }
 

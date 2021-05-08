@@ -6,6 +6,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.databinding.DialogTitleButtonButtonBinding;
+import cgeo.geocaching.databinding.UdcCreateBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -13,6 +14,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -21,10 +23,8 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.content.Context;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -248,15 +248,20 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     /**
      * asks user for cache name and creates a new cache if name has been entered
      * @param geopoint      cache's current location (or null if none)
-     * @param listId        cache list's id
+     * @param listId        cache list's id (either InternalConnector.UDC_LIST or interpreted as offline list id)
+     * @param askUser       false: store in given list / true: ask for list & default list (if offline list given)
+     * default list is InternalConnector.UDC_LIST
      */
-    public static void interactiveCreateCache(final Context context, final Geopoint geopoint, final int listId) {
+    public static void interactiveCreateCache(final Context context, final Geopoint geopoint, final int listId, final boolean askUser) {
+        final boolean showStoreInCurrentList = askUser && ((listId == StoredList.STANDARD_LIST_ID || listId >= DataStore.customListIdOffset));
+
         final Geocache temporaryCache = new Geocache();
         temporaryCache.setType(CacheType.USER_DEFINED);
 
-        final EditText editText = new EditText(context);
-        editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
-        editText.setText("");
+        final UdcCreateBinding binding = UdcCreateBinding.inflate(LayoutInflater.from(context));
+        binding.name.setText("");
+        binding.givenList.setVisibility(showStoreInCurrentList ? View.VISIBLE : View.GONE);
+        binding.givenList.setChecked(Settings.getCreateUDCuseGivenList());
 
         final DialogTitleButtonButtonBinding titleViewBinding = DialogTitleButtonButtonBinding.inflate(LayoutInflater.from(context));
         titleViewBinding.dialogTitleTitle.setText(R.string.create_internal_cache);
@@ -269,13 +274,15 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
 
         Dialogs.newBuilder(context)
             .setCustomTitle(titleViewBinding.getRoot())
-            .setView(editText)
+            .setView(binding.getRoot())
             .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                final String geocode = createCache(context, editText.getText().toString(), null, temporaryCache.getAssignedEmoji(), geopoint, listId);
+                final boolean useGivenList = binding.givenList.isChecked();
+                Settings.setCreateUDCuseGivenList(useGivenList);
+                final String geocode = createCache(context, binding.name.getText().toString(), null, temporaryCache.getAssignedEmoji(), geopoint, showStoreInCurrentList && !useGivenList ? InternalConnector.UDC_LIST : listId);
                 CacheDetailActivity.startActivity(context, geocode);
             })
             .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.cancel())
             .show();
-        editText.requestFocus();
+        binding.name.requestFocus();
     }
 }

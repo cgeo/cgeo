@@ -1169,6 +1169,14 @@ public class Settings {
         return getBoolean(R.string.pref_longTapOnMapActivated, true);
     }
 
+    public static boolean getCreateUDCuseGivenList() {
+        return getBoolean(R.string.pref_createUDCuseGivenList, false);
+    }
+
+    public static void setCreateUDCuseGivenList(final boolean createUDCuseGivenList) {
+        putBoolean(R.string.pref_createUDCuseGivenList, createUDCuseGivenList);
+    }
+
     public static boolean isUseTwitter() {
         return getBoolean(R.string.pref_twitter, false);
     }
