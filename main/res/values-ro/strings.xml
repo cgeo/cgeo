@@ -365,6 +365,7 @@
     <string name="list_dialog_rename_title">Redenumeşte lista</string>
     <string name="list_dialog_rename">Redenumește</string>
     <string name="list_not_available">Lista nu mai există, revenire la lista standard</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Versiune</string>
     <string name="about_changelog">Istoric modificări</string>
@@ -849,7 +850,6 @@
     <string name="search_address_started">Caută adrese</string>
     <string name="search_address_result">Adrese găsite</string>
     <string name="search_own_caches">Caută cutiile mele</string>
-    <string name="search_pocket_loading">Încărcare listă de \"Pocket Queries\"</string>
     <!-- trackable -->
     <string name="trackable">Obiecte călătoare</string>
     <string name="trackable_details_loading">Încărcare detalii obiect călător…</string>
