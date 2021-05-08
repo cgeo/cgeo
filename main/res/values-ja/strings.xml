@@ -1172,6 +1172,7 @@
     <string name="waypoint_coordinates">座標</string>
     <string name="waypoint_cache_coordinates">キャッシュ座標</string>
     <string name="waypoint_calculate_coordinates">座標を計算</string>
+    <string name="waypoint_calculated_coordinates">計算済み座標</string>
     <string name="waypoint_custom">カスタム</string>
     <string name="waypoint_my_coordinates">現在地</string>
     <string name="waypoint_bearing">方位(度[°])</string>
