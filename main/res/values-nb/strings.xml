@@ -289,7 +289,6 @@
     <string name="menu_history">Historikk</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Skann GC-kode</string>
-    <string name="menu_pocket_queries">Utvalgsspørringer</string>
     <string name="menu_scan_description">c:geo kan skanne GC-koder fra QR-koder. Den nødvendige appen er ikke installert. Vil du åpne Google Play for å installere den?</string>
     <!-- main screen -->
     <string name="live_map_button">Live-kart</string>
@@ -405,6 +404,7 @@
     <string name="list_dialog_rename_title">Endre listenavn</string>
     <string name="list_dialog_rename">Endre listenavn</string>
     <string name="list_not_available">Listen er ikke lenger tilgjengelig, bytter til standarlisten</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Versjon</string>
     <string name="about_changelog">Oppdateringslogg</string>
@@ -1246,7 +1246,6 @@
     <string name="search_address_result">Fant plasser</string>
     <string name="search_own_caches">Søk egne cacher</string>
     <string name="search_pocket_title">Utvalgsspørring</string>
-    <string name="search_pocket_loading">Laster en liste med Pocket Queries</string>
     <!-- trackable -->
     <string name="trackable">Sporbar (TB eller coin)</string>
     <string name="trackable_details_loading">Laster detaljene til den sporbare…</string>
