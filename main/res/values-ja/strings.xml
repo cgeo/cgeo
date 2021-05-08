@@ -156,6 +156,7 @@
     <string name="log_image_info">%1$d x %2$d px, %3$s\n縮小/圧縮:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">画像</string>
     <!-- translation -->
+    <string name="translate">翻訳</string>
     <string name="translate_to_sys_lang">%sに翻訳</string>
     <string name="translate_to_english">英語に翻訳</string>
     <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません</string>
@@ -247,6 +248,7 @@
     <string name="warn_notloggedin_short">ログインしていません。地図にはローカルに保存されたキャッシュのみが表示されます。詳細はここをタップしてください。</string>
     <string name="warn_notloggedin_long">(まだ)ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されオンライン機能は動作しません。\n\nネットワーク接続がないか、サーバーに問題があるか、ジオキャッシングサービスを(再)設定する必要があります。\n\n今すぐサービスの設定をしますか?</string>
     <string name="err_read_pocket_query_list">ポケット・クエリのリストの読み取りエラー</string>
+    <string name="err_read_bookmark_list">ブックマークリストの読み取りエラー</string>
     <string name="info_log_posted">ログを投稿しました</string>
     <string name="info_log_saved">ログを保存しました</string>
     <string name="info_log_post_failed">ログの投稿に失敗しました</string>
@@ -295,7 +297,7 @@
     <string name="menu_history">履歴</string>
     <string name="menu_filter">フィルタ</string>
     <string name="menu_scan_geo">QRコードスキャン</string>
-    <string name="menu_pocket_queries">ポケット・クエリ</string>
+    <string name="menu_lists_pocket_queries">リスト/ポケット・クエリ</string>
     <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playストアからインストールしますか?</string>
     <!-- main screen -->
     <string name="live_map_button">地図</string>
@@ -412,6 +414,7 @@
     <string name="list_dialog_rename_title">リスト名の変更</string>
     <string name="list_dialog_rename">変更</string>
     <string name="list_not_available">リストが利用できません。保存済みのリストへ移動します</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
@@ -1172,6 +1175,7 @@
     <string name="waypoint_coordinates">座標</string>
     <string name="waypoint_cache_coordinates">キャッシュ座標</string>
     <string name="waypoint_calculate_coordinates">座標を計算</string>
+    <string name="waypoint_calculated_coordinates">計算済み座標</string>
     <string name="waypoint_custom">カスタム</string>
     <string name="waypoint_my_coordinates">現在地</string>
     <string name="waypoint_bearing">方位(度[°])</string>
@@ -1278,7 +1282,8 @@
     <string name="search_address_result">検索結果:所在地</string>
     <string name="search_own_caches">自分のキャッシュを検索</string>
     <string name="search_pocket_title">ポケット・クエリ</string>
-    <string name="search_pocket_loading">ポケット・クエリのリストを読み込み中</string>
+    <string name="search_bookmark_list">ブックマークリスト</string>
+    <string name="search_pocket_and_bookmark_loading">ポケット・クエリのリストとブックマークリストの読み込み中</string>
     <!-- trackable -->
     <string name="trackable">トラッカブル</string>
     <string name="trackable_details_loading">トラッカブルの詳細を読み込み中…</string>
