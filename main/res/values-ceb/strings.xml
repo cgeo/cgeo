@@ -221,7 +221,6 @@
     <string name="menu_settings">Ang mga setting</string>
     <string name="menu_history">Ang mga niaagi</string>
     <string name="menu_scan_geo">I-scan ang geocode</string>
-    <string name="menu_pocket_queries">Ang mga bulsa na queries</string>
     <string name="menu_scan_description">ang c:geo kay makahimo sa pag-scan sa mga geocode nga giimprinta nga QR code. Ang gikinahanglan nga app wala ma-instalan. Gusto ka bang moabli sa Google Play aron ma-instalan kini?</string>
     <!-- main screen -->
     <string name="live_map_button">Buhi nga mapa</string>
@@ -321,6 +320,7 @@
     <string name="list_dialog_rename_title">Usba ang pangalan sa lista</string>
     <string name="list_dialog_rename">Usba ang pangan</string>
     <string name="list_not_available">Ang listahan kay dili na magamit, pagbalhin ngadto sa standard nga lista</string>
+    <!-- caches lists filter -->
     <!-- about -->
     <string name="about_version">Ang bersyon</string>
     <string name="about_system">Ang Sistema</string>
@@ -776,7 +776,6 @@
     <string name="search_address_started">Pagpangita sa mga lugar</string>
     <string name="search_address_result">Nakit-ang mga lugar</string>
     <string name="search_own_caches">Pangitaa ang akong mga cache</string>
-    <string name="search_pocket_loading">Naglo-load ng listahan ng mga Pocket Query</string>
     <!-- trackable -->
     <string name="trackable">Masundan</string>
     <string name="trackable_details_loading">Ga load pa ang gisundang mga detalye…</string>
