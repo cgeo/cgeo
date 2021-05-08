@@ -67,10 +67,25 @@ final class LCApi {
             return Collections.emptyList();
         }
 
-        final double latcenter = (viewport.getLatitudeMax()  + viewport.getLatitudeMin())  / 2;
-        final double loncenter = (viewport.getLongitudeMax() + viewport.getLongitudeMin()) / 2;
-        final Geopoint center = new Geopoint(latcenter, loncenter);
-        return searchByCenter(center);
+        final double lat1 = viewport.getLatitudeMax();
+        final double lat2 = viewport.getLatitudeMin();
+        final double lon1 = viewport.getLongitudeMax();
+        final double lon2 = viewport.getLongitudeMin();
+        final double latcenter = (lat1 + lat2) / 2;
+        final double loncenter = (lon1 + lon2) / 2;
+
+        final double radius = distance(lat1, lat2, lon1, lon2, 0, 0) / 2;
+        final Parameters params = new Parameters("skip", "0");
+        params.add("take", "500");
+        params.add("radiusMeters", String.valueOf((int) radius));
+        params.add("origin.latitude", String.valueOf(latcenter));
+        params.add("origin.longitude", String.valueOf(loncenter));
+        try {
+            final Response response = apiRequest("SearchV3", params).blockingGet();
+            return importCachesFromJSON(response);
+        } catch (final Exception ignored) {
+            return Collections.emptyList();
+        }
     }
 
     @NonNull
@@ -262,6 +277,31 @@ final class LCApi {
             return new Date(0);
         }
 
+    }
+
+    /**
+     * Calculate distance between two points in latitude and longitude taking
+     * into account height difference. If you are not interested in height
+     * difference pass 0.0. Uses Haversine method as its base.
+     *
+     * lat1, lon1 Start point lat2, lon2 End point el1 Start altitude in meters
+     * el2 End altitude in meters
+     * @returns Distance in Meters
+     */
+
+    @Nullable
+    private static double distance(final double lat1, final double lat2, final double lon1, final double lon2, final double el1, final double el2) {
+        final int radius = 6371; // Radius of the earth
+        final double latDistance = Math.toRadians(lat2 - lat1);
+        final double lonDistance = Math.toRadians(lon2 - lon1);
+        final double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+            + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+            * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        final double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = radius * c * 500; // convert to meters
+        final double height = el1 - el2;
+        distance = Math.pow(distance, 2) + Math.pow(height, 2);
+        return Math.sqrt(distance);
     }
 }
 
