@@ -268,13 +268,14 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         }));
 
         Dialogs.newBuilder(context)
-                .setCustomTitle(titleViewBinding.getRoot())
-                .setView(editText)
-                .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                    final String geocode = createCache(context, editText.getText().toString(), null, temporaryCache.getAssignedEmoji(), geopoint, listId);
-                    CacheDetailActivity.startActivity(context, geocode);
-                })
-                .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.cancel())
-                .show();
+            .setCustomTitle(titleViewBinding.getRoot())
+            .setView(editText)
+            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
+                final String geocode = createCache(context, editText.getText().toString(), null, temporaryCache.getAssignedEmoji(), geopoint, listId);
+                CacheDetailActivity.startActivity(context, geocode);
+            })
+            .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.cancel())
+            .show();
+        editText.requestFocus();
     }
 }
