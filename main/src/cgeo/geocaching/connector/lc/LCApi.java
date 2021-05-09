@@ -75,11 +75,11 @@ final class LCApi {
         final double loncenter = (lon1 + lon2) / 2;
         final Geopoint gp1 = new Geopoint(lat1, lon1);
         final Geopoint gp2 = new Geopoint(lat2, lon2);
-        final double radius = gp1.distanceTo(gp2) / 2;
+        final double radius = gp1.distanceTo(gp2) * 500; // we get diameter in km, need radius in m
         Log.d("_LC Radius: " + String.valueOf((int) radius));
         final Parameters params = new Parameters("skip", "0");
         params.add("take", "500");
-        params.add("radiusMeters", String.valueOf((int) radius * 1000));
+        params.add("radiusMeters", String.valueOf((int) radius);
         params.add("origin.latitude", String.valueOf(latcenter));
         params.add("origin.longitude", String.valueOf(loncenter));
         try {
