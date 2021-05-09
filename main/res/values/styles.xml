@@ -110,10 +110,6 @@
         <item name="android:text">c:geo</item>
     </style>
 
-    <style name="action_bar_title_popup" parent="action_bar_title">
-        <item name="android:textColor">@color/just_black</item>
-    </style>
-
     <!-- button: full width -->
     <style name="button_full" parent="button">
         <item name="android:layout_width">fill_parent</item>
