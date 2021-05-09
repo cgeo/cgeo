@@ -67,10 +67,27 @@ final class LCApi {
             return Collections.emptyList();
         }
 
-        final double latcenter = (viewport.getLatitudeMax()  + viewport.getLatitudeMin())  / 2;
-        final double loncenter = (viewport.getLongitudeMax() + viewport.getLongitudeMin()) / 2;
-        final Geopoint center = new Geopoint(latcenter, loncenter);
-        return searchByCenter(center);
+        final double lat1 = viewport.getLatitudeMax();
+        final double lat2 = viewport.getLatitudeMin();
+        final double lon1 = viewport.getLongitudeMax();
+        final double lon2 = viewport.getLongitudeMin();
+        final double latcenter = (lat1 + lat2) / 2;
+        final double loncenter = (lon1 + lon2) / 2;
+        final Geopoint gp1 = new Geopoint(lat1, lon1);
+        final Geopoint gp2 = new Geopoint(lat2, lon2);
+        final double radius = gp1.distanceTo(gp2) * 500; // we get diameter in km, need radius in m
+        Log.d("_LC Radius: " + String.valueOf((int) radius));
+        final Parameters params = new Parameters("skip", "0");
+        params.add("take", "500");
+        params.add("radiusMeters", String.valueOf((int) radius));
+        params.add("origin.latitude", String.valueOf(latcenter));
+        params.add("origin.longitude", String.valueOf(loncenter));
+        try {
+            final Response response = apiRequest("SearchV3", params).blockingGet();
+            return importCachesFromJSON(response);
+        } catch (final Exception ignored) {
+            return Collections.emptyList();
+        }
     }
 
     @NonNull
@@ -130,6 +147,7 @@ final class LCApi {
     private static List<Geocache> importCachesFromJSON(final Response response) {
         try {
             final JsonNode json = JsonUtils.reader.readTree(Network.getResponseData(response));
+            Log.d("_LC importCachesFromJson: " + json.toPrettyString());
             final JsonNode items = json.at("/Items");
             if (!items.isArray()) {
                 return Collections.emptyList();
