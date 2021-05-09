@@ -79,7 +79,7 @@ final class LCApi {
         Log.d("_LC Radius: " + String.valueOf((int) radius));
         final Parameters params = new Parameters("skip", "0");
         params.add("take", "500");
-        params.add("radiusMeters", String.valueOf((int) radius);
+        params.add("radiusMeters", String.valueOf((int) radius));
         params.add("origin.latitude", String.valueOf(latcenter));
         params.add("origin.longitude", String.valueOf(loncenter));
         try {
