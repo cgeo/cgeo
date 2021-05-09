@@ -76,10 +76,10 @@ final class LCApi {
         final Geopoint gp1 = new Geopoint(lat1, lon1);
         final Geopoint gp2 = new Geopoint(lat2, lon2);
         final double radius = gp1.distanceTo(gp2) / 2;
-        Log.d(String.valueOf((int) radius));
+        Log.d("_LC Radius: " + String.valueOf((int) radius));
         final Parameters params = new Parameters("skip", "0");
         params.add("take", "500");
-        params.add("radiusMeters", String.valueOf((int) radius));
+        params.add("radiusMeters", String.valueOf((int) radius * 1000));
         params.add("origin.latitude", String.valueOf(latcenter));
         params.add("origin.longitude", String.valueOf(loncenter));
         try {
@@ -147,6 +147,7 @@ final class LCApi {
     private static List<Geocache> importCachesFromJSON(final Response response) {
         try {
             final JsonNode json = JsonUtils.reader.readTree(Network.getResponseData(response));
+            Log.d("_LC importCachesFromJson: " + json.toPrettyString());
             final JsonNode items = json.at("/Items");
             if (!items.isArray()) {
                 return Collections.emptyList();
