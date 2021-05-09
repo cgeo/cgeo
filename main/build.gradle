@@ -80,7 +80,10 @@ android {
             testCoverageEnabled isContinuousIntegrationServer()
 
             // replace in AndroidManifest.xml
-            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_debug"]
+            manifestPlaceholders = [
+                appIcon:      "@mipmap/ic_launcher_debug",
+                appIconRound: "@mipmap/ic_launcher_debug_round"
+            ]
         }
         nightly {
             def nightlyName = System.getenv('NB') // NB, NB1, ...
@@ -88,7 +91,10 @@ android {
             signingConfig signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
-            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_nightly"]
+            manifestPlaceholders = [
+                appIcon:      "@mipmap/ic_launcher_nightly",
+                appIconRound: "@mipmap/ic_launcher_nightly_round"
+            ]
         }
         rc {
             def rcName = System.getenv('RC') // RC, RC1, RC2 ...
@@ -96,17 +102,26 @@ android {
             signingConfig signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
-            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_beta"]
+            manifestPlaceholders = [
+                appIcon:      "@mipmap/ic_launcher_rc",
+                appIconRound: "@mipmap/ic_launcher_rc_round"
+            ]
         }
         legacy {
             signingConfig signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
-            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher"]
+            manifestPlaceholders = [
+                appIcon:      "@mipmap/ic_launcher",
+                appIconRound: "@mipmap/ic_launcher_round"
+            ]
         }
         release {
             signingConfig signingConfigs.release
-            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher"]
+            manifestPlaceholders = [
+                appIcon:      "@mipmap/ic_launcher",
+                appIconRound: "@mipmap/ic_launcher_round"
+            ]
         }
     }
 

@@ -218,7 +218,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 } else if (BuildConfig.BUILD_TYPE.equals("nightly")) {
                     binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_nightly);
                 } else if (BuildConfig.BUILD_TYPE.equals("rc")) {
-                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_beta);
+                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_rc);
                 }
             }
             binding.support.setEnabled(false);
