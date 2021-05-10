@@ -119,10 +119,6 @@ allprojects {
 subprojects {
     repositories {
         mavenCentral()
-        // viewpager fork
-        maven {
-            url 'https://dl.bintray.com/alexeydanilov/maven'
-        }
         // Android Support libraries are now in an online Maven repository
         google()
         // integrate as last one - for versions by commit ID
