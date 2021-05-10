@@ -436,6 +436,7 @@
     <string name="cache_filter_status">Durum</string>
     <string name="cache_filter_attributes">Özellikler</string>
     <string name="cache_filter_stringfilter_matchcase">Büyük-Küçük Harf</string>
+    <string name="cache_filter_stringfilter_info">‘Pattern’ opsiyonu ile şu joker karakterleri kullanın: * ve ?.* sıfır, bir veya birden fazla karakteri, ? ise tek bir karakteri temsil eder. Örneğin , ‘H?mburg*’ araması ‘Homburg’ veya ‘Homburg at Night’ ile eşleşecektir ancak ‘A day in Hamburg’ veya ‘Hahmburg’ ile eşleşmeyecektir.</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Mevcut Değil</string>
     <string name="cache_filter_stringfilter_type_is_present">Mevcut</string>
     <string name="cache_filter_stringfilter_type_contains">Şunu İçeriyorsa</string>
