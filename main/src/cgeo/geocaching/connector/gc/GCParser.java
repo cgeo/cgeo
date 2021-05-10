@@ -54,6 +54,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -86,6 +87,9 @@ public final class GCParser {
 
     @NonNull
     private static final SynchronizedDateFormat DATE_TB_IN_2 = new SynchronizedDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
+
+    @NonNull
+    private static final SynchronizedDateFormat DATE_JSON = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", TimeZone.getTimeZone("UTC"), Locale.US); // 2009-03-28T18:30:31.497Z
 
     @NonNull
     private static final ImmutablePair<StatusCode, Geocache> UNKNOWN_PARSE_ERROR = ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
@@ -1055,14 +1059,15 @@ public final class GCParser {
                 final String name = row.get("name").asText();
                 final String guid = row.get("referenceCode").asText();
                 final int count = row.get("count").asInt();
+                final Date date = DATE_JSON.parse(row.get("lastUpdateUtc").asText());
 
-                final PocketQuery pocketQuery = new PocketQuery(guid, name, count, true, 0, -1, true);
+                final PocketQuery pocketQuery = new PocketQuery(guid, name, count, true, date.getTime(), -1, true);
                 list.add(pocketQuery);
             }
 
             return list;
         } catch (final Exception e) {
-            Log.e("GCParser.searchBookmarkLists: error parsing parsing html page", e);
+            Log.e("GCParser.searchBookmarkLists: error parsing html page", e);
             return null;
         }
     }
@@ -1101,7 +1106,7 @@ public final class GCParser {
             }
             return list;
         } catch (final Exception e) {
-            Log.e("GCParser.searchPocketQueryList: error parsing parsing html page", e);
+            Log.e("GCParser.searchPocketQueryList: error parsing html page", e);
             return null;
         }
     }
