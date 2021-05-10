@@ -64,6 +64,18 @@ public class FormulaParserTest {
     }
 
     @Test
+    public void testBlankAddedByAutocorrectionDot() {
+        final FormulaParser formulaParser = new FormulaParser();
+        assertThat(formulaParser.parseLatitude("N 49° 56. ABC")).isNotBlank();
+    }
+
+    @Test
+    public void testBlankAddedByAutocorrectionComma() {
+        final FormulaParser formulaParser = new FormulaParser();
+        assertThat(formulaParser.parseLatitude("N 49° 56, ABC")).isNotBlank();
+    }
+
+    @Test
     public void testParseFullCoordinatesWithFormula() {
         final FormulaParser formulaParser = new FormulaParser();
         final FormulaWrapper parsedFullCoordinates = formulaParser.parse(WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N  AB° 48.[B+C-A]^2  E (B%C)°  38.(D+F)*2 | a = 2) test");
