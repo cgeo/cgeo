@@ -31,8 +31,9 @@ public final class FormulaParser {
     public  static final String WPC_DELIM_STRING = "|";
     public  static final String WPC_DELIM_PATTERN_STRING = "\\|";
 
-    private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(\\d), (\\d{2,})");
-    private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. (\\d{2,})");
+    private static final String COORD_FORMULA_PATTERN_STRING = "[\\[\\]\\(\\){}" + CalculationUtils.VALID_OPERATOR_PATTERN + "A-Z\\d]+";
+    private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(" + COORD_FORMULA_PATTERN_STRING + "), (" + COORD_FORMULA_PATTERN_STRING + ")");
+    private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(" + COORD_FORMULA_PATTERN_STRING + ")\\. (" + COORD_FORMULA_PATTERN_STRING + ")");
 
     private static final List<AbstractFormulaParser> parsers = Arrays.asList(new MinDecFormulaParser());
 
@@ -197,8 +198,6 @@ public final class FormulaParser {
      * Parser for MinDec format: X DD° MM.MMM'.
      */
     private static final class MinDecFormulaParser extends AbstractLatLonFormulaParser {
-
-        private static final String COORD_FORMULA_PATTERN_STRING = "[\\[\\]\\(\\){}" + CalculationUtils.VALID_OPERATOR_PATTERN + "A-Z\\d]+";
         //                                                        (    2    )                                      (      3      )
         private static final String STRING_MINDEC = "\\s*(" + COORD_FORMULA_PATTERN_STRING + ")[°\\s]+(" + COORD_FORMULA_PATTERN_STRING + "\\." + COORD_FORMULA_PATTERN_STRING + ")['′\\s]?";
 
@@ -249,7 +248,8 @@ public final class FormulaParser {
     @NonNull
     private static Set<String> getParseInputs(@NonNull final String text) {
         final String inputDot = removeSpaceAfterSeparators(text);
-        return CollectionStream.of(new String[]{inputDot}).toSet();
+        final String inputComma = swapDotAndComma(inputDot);
+        return CollectionStream.of(new String[]{inputDot, inputComma}).toSet();
     }
 
     /**
@@ -265,6 +265,20 @@ public final class FormulaParser {
         return new MatcherWrapper(PATTERN_BAD_BLANK_DOT, replacedComma).replaceAll("$1.$2");
     }
 
+    @NonNull
+    private static String swapDotAndComma(@NonNull final String text) {
+        final char[] characterArray = text.toCharArray();
+        for (int i = 0; i < characterArray.length; i++) {
+            if (characterArray[i] == '.') {
+                characterArray[i] = ',';
+            } else if (characterArray[i] == ',') {
+                characterArray[i] = '.';
+            }
+        }
+
+        return new String(characterArray);
+    }
+
     /**
      * Parses latitude/longitude from the given string.
      *
@@ -276,16 +290,17 @@ public final class FormulaParser {
      */
     @Nullable
     private ResultWrapper parseHelper(@NonNull final String text, @NonNull final Geopoint.LatLon latlon) {
-        final String input = removeSpaceAfterSeparators(text.trim());
+        final Set<String> inputs = getParseInputs(text.trim());
         for (final AbstractFormulaParser parser : parsers) {
             if (isValidParser(parser)) {
-                final ResultWrapper wrapper = parser.parse(input, latlon);
-                if (wrapper != null && wrapper.matcherLength == input.length()) {
-                    return wrapper;
+                for (final String input : inputs) {
+                    final ResultWrapper wrapper = parser.parse(input, latlon);
+                    if (wrapper != null && wrapper.matcherLength == input.length()) {
+                        return wrapper;
+                    }
                 }
             }
         }
-
         return null;
     }
 
