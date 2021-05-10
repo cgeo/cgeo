@@ -5,9 +5,10 @@ import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.ShareUtils;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +64,7 @@ public class StatusFragment extends Fragment {
                     statusGroup.setVisibility(View.VISIBLE);
 
                     if (status.url != null) {
-                        statusGroup.setOnClickListener(v -> ShareUtils.openUrl(this.getContext(), status.url));
+                        statusGroup.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(status.url)))); // don't use ShareUtils here. E.g. we want to redirect directly to PlayStore even if "use WebView" is set
                     } else {
                         statusGroup.setClickable(false);
                     }
