@@ -1448,6 +1448,7 @@
     <string name="search_own_caches">Search my caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Bookmark list</string>
+    <string name="search_pocket_is_new">new</string>
     <string name="search_pocket_and_bookmark_loading">Loading a list of Pocket Queries and bookmark lists</string>
 
     <!-- trackable -->
