@@ -156,6 +156,7 @@
     <string name="log_image_info">%1$d x %2$d px, %3$s\nEscalado/Comprimido:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Imagem</string>
     <!-- translation -->
+    <string name="translate">Traduzir</string>
     <string name="translate_to_sys_lang">Traduzir para %s</string>
     <string name="translate_to_english">Traduzir para Inglês</string>
     <string name="translate_length_warning">A tradução pode falhar se o texto for muito grande.</string>
@@ -247,6 +248,7 @@
     <string name="warn_notloggedin_short">Não tem sessão iniciada. O mapa ao vivo só mostrará as caches armazenadas localmente. Toque aqui para obter mais informações.</string>
     <string name="warn_notloggedin_long">Não tem a sessão iniciada (ainda). O mapa em tempo real mostrará apenas as caches armazenadas localmente e as funções on-line não funcionarão.\n\nOu não há uma ligação de rede, um problema com o servidor ou precisa de (re)configurar os seus serviços de geocaching.\n\nQuer configurar os serviços agora?</string>
     <string name="err_read_pocket_query_list">Erro ao ler a lista de Pocket Query.</string>
+    <string name="err_read_bookmark_list">Erro ao ler as listas de marcadores.</string>
     <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
     <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
     <string name="info_log_post_failed">A publicação do registo falhou.</string>
@@ -309,6 +311,8 @@
     <string name="caches_more_caches_no">Sem mais caches</string>
     <string name="caches_more_caches_loading">A carregar caches…</string>
     <string name="caches_more_caches_currently">actualmente</string>
+    <string name="caches_more_caches_next_x">Carregar as próximas %1$d caches</string>
+    <string name="caches_more_caches_remaining">Carregar as caches restantes (%1$d / %2$d)</string>
     <string name="caches_downloading">A transferir caches…\nTempo estimado: </string>
     <string name="caches_eta_ltm">Menos de um minuto</string>
     <plurals name="caches_eta_mins">
@@ -361,6 +365,7 @@
     <string name="caches_copy_all">Copiar todas</string>
     <string name="caches_map_locus_export">Exportar para Locus</string>
     <string name="caches_filter">Filtrar</string>
+    <string name="caches_filter_menuitem">Novo Filtro de Caches (Experimental)</string>
     <string name="caches_filter_title">Filtrar por</string>
     <string name="caches_filter_size">Tamanho</string>
     <string name="caches_filter_type">Tipo</string>
@@ -413,6 +418,26 @@
     <string name="list_dialog_rename">Mudar o nome</string>
     <string name="list_not_available">A lista já não está disponível, a alterar para a lista geral</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_option_and_or">Utilizar OR (ou) em vez de AND (e)</string>
+    <string name="cache_filter_option_inverse">Filtro invertido</string>
+    <string name="cache_filter_option_include_inconclusive">Incluir correspondências incompletas</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Toque em \'+\', no canto superior esquerdo, para adicionar um filtro</string>
+    <string name="cache_filter_name">Nome</string>
+    <string name="cache_filter_type">Tipo</string>
+    <string name="cache_filter_size">Tamanho</string>
+    <string name="cache_filter_personalnote">Nota pessoal</string>
+    <string name="cache_filter_description">Descrição</string>
+    <string name="cache_filter_offlinelog">Registo Offline</string>
+    <string name="cache_filter_owner">Proprietário</string>
+    <string name="cache_filter_difficulty">Dificuldade</string>
+    <string name="cache_filter_terrain">Terreno</string>
+    <string name="cache_filter_status">Estado</string>
+    <string name="cache_filter_attributes">Atributos</string>
+    <string name="cache_filter_stringfilter_matchcase">Diferenciar maiúsc. e minúsc.</string>
+    <string name="cache_filter_stringfilter_type_contains">Contém</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Começa por</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Termina com</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Seleccionar todos/nenhum</string>
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
@@ -612,6 +637,7 @@
     <string name="init_choose_list">Pedir a escolha de lista</string>
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
     <string name="init_listdisplay">Listas adicionais</string>
+    <string name="init_list_initial_load_limit">Limite de carregamento da lista</string>
     <string name="init_summary_listdisplay">Ao aceder a uma lista de caches armazenadas, é mostrado o nome de outras listas das quais essas caches possam estar associadas</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
@@ -1294,6 +1320,7 @@
     <string name="search_address_result">Encontrar lugares</string>
     <string name="search_own_caches">Pesquisar as minhas caches</string>
     <string name="search_pocket_title">Pocket Query</string>
+    <string name="search_bookmark_list">Lista de marcadores</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">A carregar detalhes do trackable…</string>
