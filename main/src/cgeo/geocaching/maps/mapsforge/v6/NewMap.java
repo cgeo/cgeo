@@ -788,7 +788,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         this.targetView = new TargetView((TextView) findViewById(R.id.target), (TextView) findViewById(R.id.targetSupersize), StringUtils.EMPTY, StringUtils.EMPTY);
         final Geocache target = getCurrentTargetCache();
         if (target != null) {
-            targetView.setTarget(target.getGeocode(), target.getName());
+            targetView.setTarget(target.getShortGeocode(), target.getName());
         }
 
         // resume location access
@@ -1375,6 +1375,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
 
                     final StringBuilder text = new StringBuilder(item.getShortItemCode());
                     final String geocode = item.getGeocode();
+                    final String shortgeocode = item.getShortGeocode();
                     if (StringUtils.isNotEmpty(geocode)) {
                         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                         if (cache != null && item.getType() == CoordinatesType.CACHE) {
@@ -1382,7 +1383,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
                         } else {
                             tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
                             if (item.getType() == CoordinatesType.WAYPOINT) {
-                                text.append(Formatter.SEPARATOR).append(geocode);
+                                text.append(Formatter.SEPARATOR).append(shortgeocode);
                                 if (cache != null) {
                                     text.append(Formatter.SEPARATOR).append(cache.getName());
                                 }

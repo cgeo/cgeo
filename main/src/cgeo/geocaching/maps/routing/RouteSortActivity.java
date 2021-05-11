@@ -88,7 +88,7 @@ public class RouteSortActivity extends AbstractActivity {
                 final TextView title = v.findViewById(R.id.title);
                 final TextView detail = v.findViewById(R.id.detail);
                 if (null == data && cacheOrWaypointType) {
-                    title.setText(routeItem.getGeocode());
+                    title.setText(routeItem.getShortGeocode());
                     detail.setText(R.string.route_item_not_yet_loaded);
                 } else {
                     title.setText(null == data ? "" : data.getName());

@@ -7,9 +7,12 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.MatcherWrapper;
+import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -126,6 +129,11 @@ public class RouteItem implements Parcelable {
 
     public String getGeocode() {
         return cacheGeocode;
+    }
+
+    @NonNull
+    public String getShortGeocode() {
+        return generateShortGeocode(cacheGeocode);
     }
 
     public String getIdentifier() {

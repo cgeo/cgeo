@@ -1789,7 +1789,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             final int distance = (int) (1000 * coord.distanceTo(item.getCoords()));
             if (distance > 0 && distance < minDistance) {
                 minDistance = distance;
-                name = item.getGeocode() + " " + item.getName();
+                name = item.getShortGeocode() + " " + item.getName();
             }
         }
         // check waypoints
