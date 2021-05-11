@@ -404,7 +404,7 @@ public abstract class AbstractCachesOverlay {
                 final int distance = (int) (1000f * cacheCoords.distanceTo(coord));
                 if (distance > 0 && distance < minDistance) {
                     minDistance = distance;
-                    name = cache.getGeocode() + " " + cache.getName();
+                    name = cache.getShortGeocode() + " " + cache.getName();
                 }
                 final List<Waypoint> waypoints = cache.getWaypoints();
                 for (final Waypoint waypoint : waypoints) {

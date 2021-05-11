@@ -76,6 +76,11 @@ public class GeoitemRef implements Parcelable {
         return geocode;
     }
 
+    @NonNull
+    public String getShortGeocode() {
+        return generateShortGeocode(geocode);
+    }
+
     public int getId() {
         return id;
     }

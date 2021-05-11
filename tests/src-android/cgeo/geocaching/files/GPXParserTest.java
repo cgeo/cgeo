@@ -419,8 +419,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         final Geocache lab = getCache(caches, "01_Munich Olympic Walk Of Stars_Updated-Project MUNICH2014 - Mia san Giga! Olympiapark");
         assertThat(lab).isNotNull();
 
-        // parse labs as virtual for the time being
-        assertThat(lab.getType()).isEqualTo(CacheType.VIRTUAL);
+        // cache type
+        assertThat(lab.getType()).isEqualTo(CacheType.ADVLAB);
 
         // no difficulty and terrain rating
         assertThat(lab.getTerrain()).isEqualTo(0);
@@ -447,8 +447,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         for (final Geocache lab :caches) {
             assertThat(lab).isNotNull();
 
-            // parse labs as virtual for the time being
-            assertThat(lab.getType()).isEqualTo(CacheType.VIRTUAL);
+            // cache type
+            assertThat(lab.getType()).isEqualTo(CacheType.ADVLAB);
 
             // no container size
             assertThat(lab.getSize().comparable).isGreaterThan(CacheSize.VERY_LARGE.comparable);
