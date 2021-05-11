@@ -12,6 +12,9 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:gravity="left|center_horizontal"
+        android:layout_toLeftOf="@id/switchAB"
+        android:maxLines="1"
+        android:ellipsize="end"
         style="@style/cgeo.pqActionBarStyle.TitleTextStyle"
         android:text="@string/menu_lists_pocket_queries" />
 
@@ -19,10 +22,9 @@
         android:id="@+id/switchAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/title"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:gravity="right"
+        android:gravity="right|center_vertical"
         style="@style/cgeo.pqActionBarStyle.TitleTextStyle"
         android:text="@string/show_all" />
 </RelativeLayout>
