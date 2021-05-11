@@ -334,7 +334,7 @@ public final class Formatter {
             title += "D " + formatDT(cache.getDifficulty()) + SEPARATOR;
         }
         if (cache.hasTerrain()) {
-            title += "T " + formatDT(cache.getDifficulty()) + SEPARATOR;
+            title += "T " + formatDT(cache.getTerrain()) + SEPARATOR;
         }
         return title + cache.getShortGeocode();
     }
