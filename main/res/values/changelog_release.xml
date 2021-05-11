@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>Beta Version 2021.05.05-RC:</h1>
+<h1>Beta Version 2021.05.11-RC:</h1>
 
 <h4>Geocaching Services:</h4>
 <ul>
