@@ -4,6 +4,7 @@ import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.PocketqueryItemBinding;
 import cgeo.geocaching.models.PocketQuery;
+import cgeo.geocaching.storage.extension.PocketQueryHistory;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.Formatter;
 
@@ -44,6 +45,9 @@ class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter
         viewHolder.binding.cachelist.setOnClickListener(view1 -> CacheListActivity.startActivityPocket(view1.getContext(), activity.getQueries().get(viewHolder.getAdapterPosition())));
         viewHolder.binding.download.setOnClickListener(v -> {
             final PocketQuery pocketQuery = activity.getQueries().get(viewHolder.getAdapterPosition());
+            PocketQueryHistory.updateLastDownload(pocketQuery);
+            notifyDataSetChanged();
+
             if (activity.getStartDownload()) {
                 CacheListActivity.startActivityPocketDownload(view.getContext(), pocketQuery);
             } else {

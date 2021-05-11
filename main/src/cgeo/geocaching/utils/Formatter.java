@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.storage.extension.PocketQueryHistory;
 
 import android.content.Context;
 import android.text.format.DateUtils;
@@ -353,7 +354,7 @@ public final class Formatter {
 
         final long lastGenerationTime = pocketQuery.getLastGenerationTime();
         if (lastGenerationTime > 0) {
-            infos.add(Formatter.formatShortDateVerbally(lastGenerationTime));
+            infos.add(Formatter.formatShortDateVerbally(lastGenerationTime) + (PocketQueryHistory.isNew(pocketQuery) ? " (" + CgeoApplication.getInstance().getString(R.string.search_pocket_is_new) + ")" : ""));
         }
 
         final int daysRemaining = pocketQuery.getDaysRemaining();
