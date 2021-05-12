@@ -994,16 +994,19 @@ public class Settings {
         return getBoolean(R.string.pref_mapAutoDownloads, false);
     }
 
-    public static int getMapAutoDownloadsInterval() {
-        return getInt(R.string.pref_mapAutoDownloadsInterval, 30);
+    public static boolean mapAutoDownloadsNeedUpdate() {
+        final long lastCheck = getLong(R.string.pref_mapAutoDownloadsLastCheck, 0);
+        if (lastCheck == 0) {
+            setMapAutoDownloadsLastCheck();
+            return false;
+        }
+        final long now = System.currentTimeMillis() / 1000;
+        final int interval = getInt(R.string.pref_mapAutoDownloadsInterval, 30);
+        return (lastCheck + (interval * 24 * 60 * 60)) <= now;
     }
 
-    public static long getMapAutoDownloadsLastCheckInS() {
-        return getLong(R.string.pref_mapAutoDownloadsLastCheck, 0);
-    }
-
-    public static void setMapAutoDownloadsLastCheckInS(final long lastCheck) {
-        putLong(R.string.pref_mapAutoDownloadsLastCheck, lastCheck);
+    public static void setMapAutoDownloadsLastCheck() {
+        putLong(R.string.pref_mapAutoDownloadsLastCheck, System.currentTimeMillis() / 1000);
     }
 
     public static void setPqShowDownloadableOnly(final boolean showDownloadableOnly) {
@@ -1123,7 +1126,7 @@ public class Settings {
         }
         final long now = System.currentTimeMillis() / 1000;
         final int interval = getInt(R.string.pref_brouterAutoTileDownloadsInterval, 30);
-        return ((lastCheck + (interval * 24 * 60 * 60)) <= now);
+        return (lastCheck + (interval * 24 * 60 * 60)) <= now;
     }
 
     public static void setBrouterAutoTileDownloadsLastCheck() {

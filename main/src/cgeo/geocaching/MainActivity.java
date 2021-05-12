@@ -456,18 +456,14 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void checkForMapUpdates() {
-        if (Settings.isMapAutoDownloads()) {
-            final long now = System.currentTimeMillis() / 1000;
-            final int interval = Settings.getMapAutoDownloadsInterval();
-            if ((Settings.getMapAutoDownloadsLastCheckInS() + (interval * 24 * 60 * 60)) <= now) {
-                DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, R.string.mapupdate_info, this::returnFromMapUpdateCheck);
-            }
+        if (Settings.isMapAutoDownloads() && Settings.mapAutoDownloadsNeedUpdate()) {
+            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, R.string.mapupdate_info, this::returnFromMapUpdateCheck);
         }
     }
 
     private void returnFromMapUpdateCheck(final boolean updateCheckAllowed) {
         if (updateCheckAllowed) {
-            Settings.setMapAutoDownloadsLastCheckInS(System.currentTimeMillis() / 1000);
+            Settings.setMapAutoDownloadsLastCheck();
         }
     }
 
