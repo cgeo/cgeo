@@ -348,10 +348,13 @@ public class BackupUtils {
         // avoid overwriting an existing backup with an empty database
         // (can happen directly after reinstalling the app)
         if (DataStore.getAllCachesCount() == 0) {
-            Toast.makeText(activityContext, R.string.init_backup_unnecessary, Toast.LENGTH_LONG).show();
-            return;
+            Dialogs.confirmYesNo(activityContext, R.string.init_backup_backup, R.string.init_backup_unnecessary, (dialog, which) -> backupStep2(runAfterwards));
+        } else {
+            backupStep2(runAfterwards);
         }
+    }
 
+    private void backupStep2(final Runnable runAfterwards) {
         final List<ContentStorage.FileInformation> dirs = getDirsToRemove(Settings.allowedBackupsNumber());
         if (dirs != null) {
             Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, activityContext.getString(R.string.init_backup_backup), activityContext.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs.get(dirs.size() - 1).dirLocation)), null, true, null, () -> {

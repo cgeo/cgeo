@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.brouter.BRouterConstants;
+import cgeo.geocaching.brouter.util.DefaultFilesUtils;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
@@ -617,6 +618,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initOfflineRoutingPreferences() {
+        DefaultFilesUtils.checkDefaultFiles();
         getPreference(R.string.pref_useInternalRouting).setOnPreferenceChangeListener((preference, newValue) -> {
             updateRoutingPrefs(!Settings.useInternalRouting());
             return true;
@@ -645,7 +647,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         final ListPreference pref = (ListPreference) getPreference(prefId);
         pref.setEntries(entries);
         pref.setEntryValues(values);
-        bindSummaryToStringValue(prefId);
+        pref.setSummary(current);
         if (current != null) {
             for (int i = 0; i < entries.length; i++) {
                 if (current.contentEquals(entries[i])) {
