@@ -444,18 +444,14 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void checkForRoutingTileUpdates() {
-        if (Settings.useInternalRouting() && Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy()) {
-            final long now = System.currentTimeMillis() / 1000;
-            final int interval = Settings.getBrouterAutoTileDownloadsInterval();
-            if ((Settings.getBrouterAutoTileDownloadsLastCheckInS() + (interval * 24 * 60 * 60)) <= now) {
-                DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, this::returnFromTileUpdateCheck);
-            }
+        if (Settings.useInternalRouting() && Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy() && Settings.brouterAutoTileDownloadsNeedUpdate()) {
+            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, this::returnFromTileUpdateCheck);
         }
     }
 
     private void returnFromTileUpdateCheck(final boolean updateCheckAllowed) {
         if (updateCheckAllowed) {
-            Settings.setBrouterAutoTileDownloadsLastCheckInS(System.currentTimeMillis() / 1000);
+            Settings.setBrouterAutoTileDownloadsLastCheck();
         }
     }
 

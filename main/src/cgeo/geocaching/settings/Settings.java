@@ -1115,16 +1115,19 @@ public class Settings {
         return getBoolean(R.string.pref_brouterAutoTileDownloads, false);
     }
 
-    public static int getBrouterAutoTileDownloadsInterval() {
-        return getInt(R.string.pref_brouterAutoTileDownloadsInterval, 30);
+    public static boolean brouterAutoTileDownloadsNeedUpdate() {
+        final long lastCheck = getLong(R.string.pref_brouterAutoTileDownloadsLastCheck, 0);
+        if (lastCheck == 0) {
+            setBrouterAutoTileDownloadsLastCheck();
+            return false;
+        }
+        final long now = System.currentTimeMillis() / 1000;
+        final int interval = getInt(R.string.pref_brouterAutoTileDownloadsInterval, 30);
+        return ((lastCheck + (interval * 24 * 60 * 60)) <= now);
     }
 
-    public static long getBrouterAutoTileDownloadsLastCheckInS() {
-        return getLong(R.string.pref_brouterAutoTileDownloadsLastCheck, 0);
-    }
-
-    public static void setBrouterAutoTileDownloadsLastCheckInS(final long lastCheck) {
-        putLong(R.string.pref_brouterAutoTileDownloadsLastCheck, lastCheck);
+    public static void setBrouterAutoTileDownloadsLastCheck() {
+        putLong(R.string.pref_brouterAutoTileDownloadsLastCheck, System.currentTimeMillis() / 1000);
     }
 
     public static String getRoutingProfile() {
