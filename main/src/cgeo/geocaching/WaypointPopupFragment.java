@@ -90,7 +90,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);
 
             //Waypoint geocode
-            details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getGeocode().substring(2));
+            details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getShortGeocode().substring(2));
             waypointDistance = details.addDistance(waypoint, waypointDistance);
             final String note = waypoint.getNote();
             if (StringUtils.isNotBlank(note)) {
