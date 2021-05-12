@@ -5,6 +5,11 @@
  
  <h1>Nightly build:</h1>
  
+<h4>Map:</h4>
+<ul>
+<li>New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)</li>
+</ul>
+
 <h4>Cache details:</h4>
 <ul>
 <li>New: Make use of google translate in-app translation popup</li>
@@ -15,6 +20,7 @@
 <ul>
 <li>New: Download bookmark lists from geocaching.com - see \"Lists / pocket queries\" in main menu</li>
 <li>New: Advanced filtering system within cache lists (experimental)</li>
+<li>New: Ignore capability for geocaching.su</li>
 </ul>
 
 </div>]]></Data>
