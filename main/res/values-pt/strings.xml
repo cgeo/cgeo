@@ -297,6 +297,7 @@
     <string name="menu_history">Histórico</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Ler código GC</string>
+    <string name="menu_lists_pocket_queries">Listas / pocket queries</string>
     <string name="menu_scan_description">O c:geo pode interpretar um código QR impresso que contenha \"geo-códigos\" (GCxxxxx). A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
@@ -421,6 +422,7 @@
     <string name="cache_filter_option_and_or">Utilizar OR (ou) em vez de AND (e)</string>
     <string name="cache_filter_option_inverse">Filtro invertido</string>
     <string name="cache_filter_option_include_inconclusive">Incluir correspondências incompletas</string>
+    <string name="cache_filter_option_include_inconclusive_info">Se deve ser incluído nos resultados caches cuja informação que o filtro precisa se encontre em falta.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Toque em \'+\', no canto superior esquerdo, para adicionar um filtro</string>
     <string name="cache_filter_name">Nome</string>
     <string name="cache_filter_type">Tipo</string>
@@ -434,9 +436,13 @@
     <string name="cache_filter_status">Estado</string>
     <string name="cache_filter_attributes">Atributos</string>
     <string name="cache_filter_stringfilter_matchcase">Diferenciar maiúsc. e minúsc.</string>
+    <string name="cache_filter_stringfilter_info">Com a opção \'Modelo\', utilizar caracteres * e ?. * representa zero, um ou vários caracteres, ? representa um único carácter. Por exemplo, o modelo \'Barr?iro\' corresponderá a \'Barroiro\' ou \'Barreiro à noite\' mas não a \'Um dia no Barreiro\' ou \'Barrasco\'</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">Não está presente</string>
+    <string name="cache_filter_stringfilter_type_is_present">Está presente</string>
     <string name="cache_filter_stringfilter_type_contains">Contém</string>
     <string name="cache_filter_stringfilter_type_starts_with">Começa por</string>
     <string name="cache_filter_stringfilter_type_ends_with">Termina com</string>
+    <string name="cache_filter_stringfilter_type_pattern">Modelo</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleccionar todos/nenhum</string>
     <!-- about -->
     <string name="about_version">Versão</string>
@@ -638,6 +644,7 @@
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
     <string name="init_listdisplay">Listas adicionais</string>
     <string name="init_list_initial_load_limit">Limite de carregamento da lista</string>
+    <string name="init_summary_list_initial_load_limit">Número máximo de caches que são inicialmente carregadas, a partir do banco de dados, quando é exibida uma lista de caches armazenadas. Escolha 0 para \'ilimitado\'</string>
     <string name="init_summary_listdisplay">Ao aceder a uma lista de caches armazenadas, é mostrado o nome de outras listas das quais essas caches possam estar associadas</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
@@ -1321,6 +1328,7 @@
     <string name="search_own_caches">Pesquisar as minhas caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista de marcadores</string>
+    <string name="search_pocket_and_bookmark_loading">A carregar uma lista de Pocket Queries e lista de marcadores</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">A carregar detalhes do trackable…</string>
