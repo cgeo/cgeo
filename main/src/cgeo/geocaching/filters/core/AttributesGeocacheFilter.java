@@ -4,16 +4,18 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.BooleanUtils;
+
 public class AttributesGeocacheFilter extends BaseGeocacheFilter {
 
 
     private final Set<String> attributes = new HashSet<>();
+    private boolean inverse = false;
 
     public void setAttributes(final Map<CacheAttribute, Boolean> atts) {
         this.attributes.clear();
@@ -22,7 +24,14 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
                 this.attributes.add(entry.getKey().getValue(entry.getValue()));
             }
         }
+    }
 
+    public void setInverse(final boolean inverse) {
+        this.inverse = inverse;
+    }
+
+    public boolean isInverse() {
+        return inverse;
     }
 
     public Map<CacheAttribute, Boolean> getAttributes() {
@@ -47,7 +56,7 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
                 found++;
             }
         }
-        return found == attributes.size();
+        return inverse != (found == attributes.size());
     }
 
     @Override
@@ -55,12 +64,18 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
         if (attributes.isEmpty()) {
             sqlBuilder.addWhereAlwaysInclude();
         } else {
+            if (inverse) {
+                sqlBuilder.openWhere(SqlBuilder.WhereType.NOT);
+            }
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             for (String att : attributes) {
                 final String attTableId = sqlBuilder.getNewTableId();
                 sqlBuilder.addWhere("EXISTS (SELECT geocode FROM cg_attributes " + attTableId + " WHERE " + attTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND attribute = ?)", att);
             }
             sqlBuilder.closeWhere();
+            if (inverse) {
+                sqlBuilder.closeWhere();
+            }
         }
 
     }
@@ -68,11 +83,24 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     @Override
     public void setConfig(final String[] value) {
         attributes.clear();
-        attributes.addAll(Arrays.asList(value));
+        if (value.length == 0) {
+            inverse = false;
+        } else {
+            inverse = BooleanUtils.toBoolean(value[0]);
+            for (int idx = 1; idx < value.length; idx++) {
+                attributes.add(value[idx]);
+            }
+        }
     }
 
     @Override
     public String[] getConfig() {
-        return attributes.toArray(new String[0]);
+        final String[] result = new String[attributes.size() + 1];
+        result[0] = Boolean.toString(inverse);
+        int idx = 1;
+        for (String att : attributes) {
+            result[idx++] = att;
+        }
+        return result;
     }
 }

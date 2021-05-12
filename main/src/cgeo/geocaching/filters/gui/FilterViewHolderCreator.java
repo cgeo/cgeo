@@ -70,6 +70,12 @@ public class FilterViewHolderCreator {
             case ATTRIBUTES:
                 result = new AttributesFilterViewHolder();
                 break;
+            case FAVORITES:
+                result = new FavoritesFilterViewHolder();
+                break;
+            case DISTANCE:
+                result = new DistanceFilterViewHolder();
+                break;
             default:
                 result = null;
                 break;

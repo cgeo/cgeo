@@ -462,6 +462,11 @@
     <string name="cache_filter_terrain">Terrain</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Attributes</string>
+    <string name="cache_filter_favorites">Favorites</string>
+    <string name="cache_filter_distance">Distance</string>
+
+    <string name="cache_filter_include">Include</string>
+    <string name="cache_filter_exclude">Exclude</string>
 
 
     <string name="cache_filter_stringfilter_matchcase">Match Case</string>
@@ -474,6 +479,11 @@
     <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
 
     <string name="cache_filter_checkboxlist_selectallnone">Select all/none</string>
+
+    <string name="cache_filter_favorites_absolute">Absolute</string>
+    <string name="cache_filter_favorites_percentage">Percentage</string>
+
+    <string name="cache_filter_distance_use_current_position">Use current position</string>
 
 
     <!-- about -->

@@ -133,14 +133,21 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable> e
 
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
-        final String colName = getSqlColumnName();
-        if (colName != null && (minRangeValue != null || maxRangeValue != null)) {
+        addRangeToSqlBuilder(sqlBuilder, getSqlColumnName() == null ? null : sqlBuilder.getMainTableId() + "." + getSqlColumnName());
+    }
+
+    protected void addRangeToSqlBuilder(final SqlBuilder sqlBuilder, final String valueExpression) {
+        addRangeToSqlBuilder(sqlBuilder, valueExpression, null);
+    }
+
+    protected void addRangeToSqlBuilder(final SqlBuilder sqlBuilder, final String valueExpression, final Func1<T, T> valueConverter) {
+        if (valueExpression != null && (minRangeValue != null || maxRangeValue != null)) {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             if (minRangeValue != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + colName + " >= " + minRangeValue);
+                sqlBuilder.addWhere(valueExpression + " >= " + (valueConverter == null ? minRangeValue : valueConverter.call(minRangeValue)));
             }
             if (maxRangeValue != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + colName + " <= " + maxRangeValue);
+                sqlBuilder.addWhere(valueExpression + " <= " + (valueConverter == null ? maxRangeValue : valueConverter.call(maxRangeValue)));
             }
             sqlBuilder.closeWhere();
         } else {

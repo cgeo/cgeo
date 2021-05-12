@@ -3345,7 +3345,8 @@ public class DataStore {
             if (listId == PseudoList.HISTORY_LIST.id) {
                 sqlBuilder.addWhere(" ( visiteddate > 0 OR geocode IN (SELECT geocode FROM " + dbTableLogsOffline + ") )");
             } else {
-                sqlBuilder.addWhere("geocode IN (SELECT geocode FROM " + dbTableCachesLists + " WHERE list_id " +
+                final String clId = sqlBuilder.getNewTableId();
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".geocode IN (SELECT " + clId + ".geocode FROM " + dbTableCachesLists + " " + clId + " WHERE list_id " +
                     (listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID) + ")");
             }
 

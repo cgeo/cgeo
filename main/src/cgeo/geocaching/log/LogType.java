@@ -144,12 +144,17 @@ public enum LogType {
     }
 
     /**
-     * Check if the Offline Log is a Found Log.
+     * Check if the Offline Log is a Found Log. Must be synced with {@link #getFoundLogIds()}.
      *
      * @return True if the Offline LogEntry is a Found
      */
     public final boolean isFoundLog() {
         return this == FOUND_IT || this == ATTENDED || this == WEBCAM_PHOTO_TAKEN;
+    }
+
+    /** gets Ids for all log types standing for a "found". Must be synchronized with {@link #isFoundLog()} */
+    public static Integer[] getFoundLogIds() {
+        return new Integer[]{ FOUND_IT.id, ATTENDED.id, WEBCAM_PHOTO_TAKEN.id};
     }
 
     /**

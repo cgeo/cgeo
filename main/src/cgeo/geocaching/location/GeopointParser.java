@@ -1,6 +1,7 @@
 package cgeo.geocaching.location;
 
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import androidx.annotation.NonNull;
@@ -541,6 +542,17 @@ public class GeopointParser {
         return null;
     }
 
+    /** same as {@link #parse(String)}, but returns a provided default Value (instead of throwing exception) if parsing fails */
+    @NonNull
+    public static Geopoint parse(@NonNull final String text, @Nullable final Geopoint defaultValue) {
+        try {
+            return parse(text);
+        } catch (Geopoint.ParseException pe) {
+            Log.d("Parsing of a coordinate failed (default is returned): " + pe.getMessage());
+            return defaultValue;
+        }
+    }
+
     /**
      * Parses a pair of coordinates (latitude and longitude) out of the given string.
      *
@@ -581,7 +593,7 @@ public class GeopointParser {
             return best.getGeopoint();
         }
 
-        throw new Geopoint.ParseException("Cannot parse coordinates");
+        throw new Geopoint.ParseException("Cannot parse coordinates: '" + text + "'");
     }
 
     /**
