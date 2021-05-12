@@ -37,8 +37,6 @@ import org.apache.commons.lang3.StringUtils;
 
 final class LCApi {
 
-    private static final Boolean minimalFunction = true;
-
     private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd", Locale.getDefault());
     @NonNull
     private static final String API_HOST = "https://labs-api.geocaching.com/Api/Adventures/";
@@ -229,7 +227,7 @@ final class LCApi {
 
     @Nullable
     private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson) {
-        if (minimalFunction) {
+        if (!Settings.isALCAdvanced()) {
             return null;
         }
         List<Waypoint> result = null;

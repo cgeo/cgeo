@@ -86,6 +86,7 @@
     <string translatable="false" name="pref_log_offline">log_offline</string>
     <string translatable="false" name="pref_logimages">logimages</string>
     <string translatable="false" name="pref_choose_list">choose_list</string>
+    <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
     <string translatable="false" name="pref_mapsource">mapsource</string>
     <string translatable="false" name="pref_maplanguage">maplanguage</string>
     <string translatable="false" name="pref_mapRotation">mapRotation</string>
@@ -253,6 +254,9 @@
     <string translatable="false" name="pref_su_tokenpublic">su_tokenpublic</string>
     <string translatable="false" name="pref_temp_su_token_secret">su-temp-token-secret</string>
     <string translatable="false" name="pref_temp_su_token_public">su-temp-token-public</string>
+    <string translatable="false" name="pref_cache_filter_config">cache_filter_config</string>
+    <string translatable="false" name="pref_alc_advanced">alc_advanced</string>
+    <string translatable="false" name="pref_alc_launcher">alc_launcher</string>
 
     <string translatable="false" name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
     <string translatable="false" name="pref_fakekey_geokrety_website">fakekey_geokrety_website</string>
