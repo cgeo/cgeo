@@ -141,7 +141,7 @@ public class SqlBuilder {
      */
     @NonNull
     public String getSql() {
-        return constructSqlInternal(CollectionStream.of(columns).toJoinedString(", "), true, true);
+        return constructSqlInternal(CollectionStream.of(columns).map(c -> getMainTableId() + "." + c).toJoinedString(", "), true, true);
     }
 
     @NonNull
@@ -172,11 +172,8 @@ public class SqlBuilder {
         }
 
         if (!joins.isEmpty()) {
-            boolean first = true;
             for (String join : joins) {
-                sb.append(first ? " ON " : " AND ");
-                first = false;
-                sb.append(join);
+                sb.append(" ").append(join);
             }
         }
 

@@ -13,7 +13,9 @@ import cgeo.geocaching.filters.core.LogicalGeocacheFilter;
 import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -64,16 +66,18 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setThemeAndContentView(R.layout.cache_filter_activity);
+        setTheme(Settings.isLightSkin() ? R.style.light_material : R.style.dark_material);
+        setContentView(R.layout.cache_filter_activity);
+        //setThemeAndContentView(R.layout.cache_filter_activity);
         binding = CacheFilterActivityBinding.bind(findViewById(R.id.activity_viewroot));
         binding.filterApply.setOnClickListener(b -> setResult(true));
         binding.filterClear.setOnClickListener(b -> setResult(false));
 
 
         binding.filterPropsCheckboxes.removeAllViews();
-        this.andOrFilterCheckbox = FilterGuiUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_and_or, R.drawable.ic_menu_logic);
-        this.inverseFilterCheckbox = FilterGuiUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_inverse, R.drawable.ic_menu_invert);
-        this.includeInconclusiveFilterCheckbox = FilterGuiUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_include_inconclusive, R.drawable.ic_menu_vague,
+        this.andOrFilterCheckbox = ViewUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_and_or, R.drawable.ic_menu_logic);
+        this.inverseFilterCheckbox = ViewUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_inverse, R.drawable.ic_menu_invert);
+        this.includeInconclusiveFilterCheckbox = ViewUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_include_inconclusive, R.drawable.ic_menu_vague,
             R.string.cache_filter_option_include_inconclusive_info);
 
 

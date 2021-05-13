@@ -30,6 +30,7 @@ import cgeo.geocaching.ui.CacheVotingBar;
 import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.ImageListFragment;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
@@ -39,7 +40,6 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.ViewUtils;
 
 import android.R.string;
 import android.annotation.SuppressLint;

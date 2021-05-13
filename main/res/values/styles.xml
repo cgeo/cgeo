@@ -59,9 +59,6 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="ThemeMaterialComponents" parent="Theme.MaterialComponents.Bridge"/>
-    <style name="ThemeMaterialComponentsLight" parent="Theme.MaterialComponents.Light.Bridge"/>
-
     <!-- own definitions -->
     <!-- actionbar -->
     <style name="action_bar">
