@@ -117,7 +117,7 @@ public class SeekbarPreference extends Preference {
 
     @Override
     protected Object onGetDefaultValue(final TypedArray a, final int index) {
-        return valueToProgress(a.getInt(index, defaultValue));
+        return a.getInt(index, defaultValue);
     }
 
     @Override
