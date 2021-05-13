@@ -28,13 +28,13 @@ public class MapDownloaderMapsforge extends AbstractMapDownloader {
 
         final MatcherWrapper matchDir = new MatcherWrapper(PATTERN_DIR, page);
         while (matchDir.find()) {
-            final Download offlineMap = new Download(matchDir.group(1), Uri.parse(uri + matchDir.group(1)), true, "", "", offlineMapType);
+            final Download offlineMap = new Download(matchDir.group(1), Uri.parse(uri + matchDir.group(1)), true, "", "", offlineMapType, ICONRES_FOLDER);
             list.add(offlineMap);
         }
 
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_MAP, page);
         while (matchMap.find()) {
-            final Download offlineMap = new Download(matchMap.group(2), Uri.parse(uri + matchMap.group(1)), false, matchMap.group(3), matchMap.group(4), offlineMapType);
+            final Download offlineMap = new Download(matchMap.group(2), Uri.parse(uri + matchMap.group(1)), false, matchMap.group(3), matchMap.group(4), offlineMapType, iconRes);
             list.add(offlineMap);
         }
     }
@@ -45,7 +45,7 @@ public class MapDownloaderMapsforge extends AbstractMapDownloader {
         while (matchMap.find()) {
             final String filename = matchMap.group(1);
             if (filename.equals(remoteFilename)) {
-                return new Download(matchMap.group(2), Uri.parse(remoteUrl + "/" + filename), false, matchMap.group(3), matchMap.group(4), offlineMapType);
+                return new Download(matchMap.group(2), Uri.parse(remoteUrl + "/" + filename), false, matchMap.group(3), matchMap.group(4), offlineMapType, iconRes);
             }
         }
         return null;

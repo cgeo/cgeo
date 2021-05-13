@@ -34,7 +34,7 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
         final MatcherWrapper matchDate = new MatcherWrapper(PATTERN_LAST_UPDATED_DATE, page);
         if (matchDate.find()) {
             final String date = "20" + matchDate.group(3) + "-" + matchDate.group(2) + "-" + matchDate.group(1);
-            return new Download("Elevate", Uri.parse(CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl) + "Elevate.zip"), false, date, "", offlineMapType);
+            return new Download("Elevate", Uri.parse(CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl) + "Elevate.zip"), false, date, "", offlineMapType, iconRes);
         }
         return null;
     }

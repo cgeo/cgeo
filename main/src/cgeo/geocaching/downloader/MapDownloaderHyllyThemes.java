@@ -24,7 +24,7 @@ public class MapDownloaderHyllyThemes extends AbstractThemeDownloader {
     protected void analyzePage(final Uri uri, final List<Download> list, final String page) {
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_MAP, page);
         while (matchMap.find()) {
-            final Download offlineMap = new Download(matchMap.group(3), Uri.parse(matchMap.group(1)), false, matchMap.group(2), "", offlineMapType);
+            final Download offlineMap = new Download(matchMap.group(3), Uri.parse(matchMap.group(1)), false, matchMap.group(2), "", offlineMapType, iconRes);
             list.add(offlineMap);
         }
     }
@@ -35,7 +35,7 @@ public class MapDownloaderHyllyThemes extends AbstractThemeDownloader {
         while (matchMap.find()) {
             final String filename = matchMap.group(3);
             if (filename.equals(remoteFilename)) {
-                return new Download(matchMap.group(3), Uri.parse(remoteUrl + "/" + filename), false, matchMap.group(2), "", offlineMapType);
+                return new Download(matchMap.group(3), Uri.parse(remoteUrl + "/" + filename), false, matchMap.group(2), "", offlineMapType, iconRes);
             }
         }
         return null;

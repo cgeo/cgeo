@@ -16,6 +16,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 
 import android.net.Uri;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -31,8 +32,9 @@ public class Download {
     private final String sizeInfo;
     private String addInfo;
     private final DownloadType type;
+    @DrawableRes private final int iconRes;
 
-    public Download(final String name, final Uri uri, final boolean isDir, final String dateISO, final String sizeInfo, final DownloadType type) {
+    public Download(final String name, final Uri uri, final boolean isDir, final String dateISO, final String sizeInfo, final DownloadType type, @DrawableRes final int iconRes) {
         this.name = CompanionFileUtils.getDisplayName(name);
         this.uri = uri;
         this.isDir = isDir;
@@ -40,6 +42,7 @@ public class Download {
         this.addInfo = "";
         this.dateInfo = CalendarUtils.parseYearMonthDay(dateISO);
         this.type = type;
+        this.iconRes = iconRes;
     }
 
     public String getName() {
@@ -80,6 +83,10 @@ public class Download {
 
     public String getTypeAsString() {
         return DownloadType.getInstance(type.id).mapSourceName;
+    }
+
+    @DrawableRes public int getIconRes() {
+        return iconRes;
     }
 
     public enum DownloadType {

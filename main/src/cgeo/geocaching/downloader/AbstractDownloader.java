@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import android.app.Activity;
 import android.net.Uri;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
 import java.util.List;
@@ -28,6 +29,9 @@ public abstract class AbstractDownloader {
     public String forceExtension = "";
     public boolean overwrite = false; // silently overwrite existing files?
     public boolean useCompanionFiles = true; // store source info (uri etc.) in companion files (true) or use date/timestamp and identical uri only (false)?
+    @DrawableRes public int iconRes = R.drawable.ic_menu_save;
+
+    public static final int ICONRES_FOLDER = R.drawable.ic_menu_folder;
 
     AbstractDownloader(final Download.DownloadType offlineMapType, final @StringRes int mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo, final @StringRes int projectUrl, final @StringRes int likeItUrl, final PersistableFolder targetFolder) {
         this.offlineMapType = offlineMapType;
@@ -62,7 +66,7 @@ public abstract class AbstractDownloader {
                 final String oneUp = uri.toString();
                 final int endOfPreviousSegment = oneUp.lastIndexOf("/", oneUp.length() - 2); // skip trailing "/"
                 if (endOfPreviousSegment > -1) {
-                    final Download offlineMap = new Download(oneDirUp, Uri.parse(oneUp.substring(0, endOfPreviousSegment + 1)), true, "", "", offlineMapType);
+                    final Download offlineMap = new Download(oneDirUp, Uri.parse(oneUp.substring(0, endOfPreviousSegment + 1)), true, "", "", offlineMapType, ICONRES_FOLDER);
                     list.add(offlineMap);
                 }
             }
