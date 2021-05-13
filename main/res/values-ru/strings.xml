@@ -608,7 +608,6 @@
     <string name="init_user_confirmation">Я точно уверен в том, что делаю</string>
     <string name="init_backup_success">База данных c:geo была успешно скопирована в:</string>
     <string name="init_backup_failed">Резервное копирование не удалось.</string>
-    <string name="init_backup_unnecessary">База данных пуста, резервное копирование не нужно.</string>
     <string name="init_backup_folder_exists_error">Не удалось создать новую папку резервного копирования. Может, вы только что уже создали резервную копию?</string>
     <string name="init_backup_no_backup_available">Отсутствует файл резервной копии.</string>
     <string name="backup_confirm_overwrite">Это удалит вашу старую существующую папку резервного копирования из %s. \nПродолжить?</string>
