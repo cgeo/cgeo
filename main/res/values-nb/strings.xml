@@ -619,7 +619,6 @@
     <string name="init_user_confirmation">Jeg vet hva jeg gjør</string>
     <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
     <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
-    <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
     <string name="init_backup_folder_exists_error">Kunne ikke opprette en ny sikkerhetskopieringsmappe. Har du allerede tatt en sikkerhetskopi i det siste minuttet?</string>
     <string name="init_backup_no_backup_available">Det finnes ingen fil med sikkerhetskopi nå.</string>
     <string name="backup_confirm_overwrite">Dette vil slette din eldste eksisterende backup-mappe fra %s. \nØnsker du å fortsette?</string>
