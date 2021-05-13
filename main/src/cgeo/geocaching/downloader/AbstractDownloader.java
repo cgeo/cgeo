@@ -19,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractDownloader {
     public Download.DownloadType offlineMapType;
+    public Download.DownloadType companionType = null;
     public Uri mapBase;
     public String mapSourceName;
     public String mapSourceInfo;

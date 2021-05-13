@@ -50,6 +50,8 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
     private DownloaderActivityBinding binding;
     private AbstractDownloader current;
     private ArrayList<Download.DownloadTypeDescriptor> spinnerData = new ArrayList<>();
+    private List<Download> lastCompanionList = Collections.emptyList();
+    private Download.DownloadType lastCompanionType = null;
 
     protected class MapListAdapter extends RecyclerView.Adapter<MapListAdapter.ViewHolder> {
         @NonNull private final DownloadSelectorActivity activity;
@@ -91,9 +93,10 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                     new MapListTask(activity, offlineMap.getUri(), offlineMap.getName()).execute();
                 });
             } else {
+                final int typeResId = offlineMap.getType().getTypeNameResId();
                 final String addInfo = offlineMap.getAddInfo();
                 final String sizeInfo = offlineMap.getSizeInfo();
-                holder.binding.info.setText(getString(R.string.downloadmap_mapfile)
+                holder.binding.info.setText(getString(typeResId > 0 ? typeResId : R.string.downloadmap_download)
                     + Formatter.SEPARATOR + offlineMap.getDateInfoAsString()
                     + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "")
                     + (StringUtils.isNotBlank(sizeInfo) ? Formatter.SEPARATOR + offlineMap.getSizeInfo() : "")
@@ -126,6 +129,28 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
 
         @Override
         protected List<Download> doInBackgroundInternal(final Void[] none) {
+            final List<Download> list = new ArrayList<>();
+
+            // check for companion type (e. g.: themes for maps)
+            if (current.companionType != null) {
+                if (lastCompanionType == null || !lastCompanionType.equals(current.companionType) || lastCompanionList.isEmpty()) {
+                    final AbstractDownloader companion = Download.DownloadType.getInstance(current.companionType.id);
+                    if (companion != null) {
+                        lastCompanionList = doInBackgroundHelper(companion.mapBase, companion);
+                        lastCompanionType = current.companionType;
+                    }
+                }
+                if (lastCompanionList != null) {
+                    list.addAll(lastCompanionList);
+                }
+            }
+
+            // query current type
+            list.addAll(doInBackgroundHelper(uri, current));
+            return list;
+        }
+
+        private List<Download> doInBackgroundHelper(final Uri uri, final AbstractDownloader downloader) {
             final Parameters params = new Parameters();
 
             String page = "";
@@ -143,7 +168,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
             final List<Download> list = new ArrayList<>();
 
             try {
-                current.analyzePage(uri, list, page);
+                downloader.analyzePage(uri, list, page);
                 Collections.sort(list, (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName()));
                 return list;
             } catch (final Exception e) {
@@ -173,7 +198,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         @Override
         protected List<Download> doInBackgroundInternal(final Void[] none) {
             final List<Download> result = new ArrayList<>();
-            result.add(new Download(getString(R.string.downloadmap_title), current.mapBase, true, "", "", current.offlineMapType, current.iconRes));
+            result.add(new Download(getString(R.string.downloadmap_title), current.mapBase, true, "", "", current.offlineMapType, AbstractDownloader.ICONRES_FOLDER));
             for (CompanionFileUtils.DownloadedFileData installedOfflineMap : installedOfflineMaps) {
                 final Download offlineMap = checkForUpdate(installedOfflineMap);
                 if (offlineMap != null && offlineMap.getDateInfo() > installedOfflineMap.remoteDate) {
