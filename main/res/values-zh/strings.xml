@@ -615,7 +615,6 @@
     <string name="init_user_confirmation">我知道我在做什么</string>
     <string name="init_backup_success">c:geo 数据库成功复制到：</string>
     <string name="init_backup_failed">c:geo 数据库备份失败。</string>
-    <string name="init_backup_unnecessary">数据库为空，不需要备份。</string>
     <string name="init_backup_no_backup_available">没有可用的资源。</string>
     <string name="restore_confirm_overwrite_database">警告：这将覆盖您设备上的 %s！</string>
     <string name="restore_confirm_overwrite_database_and_settings">警告：这将覆盖 %s 和您设备上的当前设置！</string>
