@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -17,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,7 +73,7 @@ public class ReceiveDownloadActivity extends AbstractActivity {
                 try (BufferedInputStream bis = new BufferedInputStream(getContentResolver().openInputStream(uri));
                     ZipInputStream zis = new ZipInputStream(bis)) {
                     ZipEntry ze;
-                    while ((ze = zis.getNextEntry()) != null) {
+                    while (!foundMapInZip && (ze = zis.getNextEntry()) != null) {
                         String filename = ze.getName();
                         final int posExt = filename.lastIndexOf('.');
                         if (posExt != -1 && (StringUtils.equalsIgnoreCase(FileUtils.MAP_FILE_EXTENSION, filename.substring(posExt)))) {
@@ -178,7 +180,7 @@ public class ReceiveDownloadActivity extends AbstractActivity {
 
     protected class CopyTask extends AsyncTaskWithProgressText<String, CopyStates> {
         private long bytesCopied = 0;
-        private final String progressFormat = getString(R.string.receivedownload_kb_copied);
+        private final String progressFormat = getString(R.string.receivedownload_amount_copied);
         private final AtomicBoolean cancelled = new AtomicBoolean(false);
         private final Activity context;
         private final boolean isZipFile;
@@ -190,6 +192,7 @@ public class ReceiveDownloadActivity extends AbstractActivity {
             context = activity;
             this.isZipFile = isZipFile;
             this.nameWithinZip = nameWithinZip;
+            publishProgress(String.format(getString(R.string.receivedownload_receiving_file), filename));
         }
 
         @Override
@@ -247,14 +250,23 @@ public class ReceiveDownloadActivity extends AbstractActivity {
 
         private CopyStates doCopy(final InputStream inputStream, final Uri outputUri) {
             OutputStream outputStream = null;
+            long lastPublishTime = System.currentTimeMillis();
             try {
-                outputStream = ContentStorage.get().openForWrite(outputUri);
-                final byte[] buffer = new byte[64 << 10];
+                outputStream = new BufferedOutputStream(ContentStorage.get().openForWrite(outputUri));
+                final byte[] buffer = new byte[8192];
                 int length = 0;
                 while (!cancelled.get() && (length = inputStream.read(buffer)) > 0) {
                     outputStream.write(buffer, 0, length);
                     bytesCopied += length;
-                    publishProgress(String.format(progressFormat, bytesCopied >> 10));
+                    if ((System.currentTimeMillis() - lastPublishTime) > 1000) { // avoid message flooding
+                        publishProgress(String.format(progressFormat, Formatter.formatBytes(bytesCopied)));
+                        lastPublishTime = System.currentTimeMillis();
+                        // give UI some time to catch up
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException ignored) {
+                        }
+                    }
                 }
                 return CopyStates.SUCCESS;
             } catch (IOException e) {
