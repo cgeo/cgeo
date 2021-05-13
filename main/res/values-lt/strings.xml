@@ -591,7 +591,6 @@
     <string name="init_user_confirmation">Aš žinau, ką darau</string>
     <string name="init_backup_success">c:geo duomenų bazė sėkmingai nukopijuota į:</string>
     <string name="init_backup_failed">Nepavyko sukurti atsarginės c:geo duomenų bazės kopijos.</string>
-    <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
     <string name="init_backup_no_backup_available">Nėra atsarginės kopijos failų.</string>
     <string name="restore_confirm_overwrite_database">ĮSPĖJIMAS: Tai perrašys %s jūsų įrenginyje!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ĮSPĖJIMAS: Tai perrašys %s ir dabartinius jūsų įrenginio nustatymus!</string>
