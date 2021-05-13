@@ -877,7 +877,7 @@
         <activity android:name=".downloader.DownloadConfirmationActivity" android:exported="false" />
         <activity android:name=".downloader.ReceiveDownloadActivity" />
         <activity
-            android:name="cgeo.geocaching.downloader.MapDownloadSelectorActivity"
+            android:name="cgeo.geocaching.downloader.DownloadSelectorActivity"
             android:label="@string/download_title"
             android:parentActivityName="cgeo.geocaching.MainActivity">
             <meta-data
