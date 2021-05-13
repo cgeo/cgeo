@@ -238,7 +238,7 @@
     <string name="warn_search_help_tb">Angi koden til en sporbar. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
-    <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
+    <string name="warn_pocket_query_select">Ingen utvalgsspørring er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
     <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
     <string name="warn_notloggedin_title">Offline-modus</string>
@@ -619,7 +619,6 @@
     <string name="init_user_confirmation">Jeg vet hva jeg gjør</string>
     <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
     <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
-    <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
     <string name="init_backup_folder_exists_error">Kunne ikke opprette en ny sikkerhetskopieringsmappe. Har du allerede tatt en sikkerhetskopi i det siste minuttet?</string>
     <string name="init_backup_no_backup_available">Det finnes ingen fil med sikkerhetskopi nå.</string>
     <string name="backup_confirm_overwrite">Dette vil slette din eldste eksisterende backup-mappe fra %s. \nØnsker du å fortsette?</string>
