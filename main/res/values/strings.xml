@@ -2081,6 +2081,7 @@
 
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Receive file</string>
+    <string name="receivedownload_receiving_file">Receiving file \"%s\"</string>
     <string name="receivedownload_success">File successfully stored as \"%s\"</string>
     <string name="receivedownload_error">Error while receiving file</string>
     <string name="receivedownload_error_io_exception">I/O error while receiving file. Is your folder \"%s\" writable?</string>
@@ -2088,7 +2089,7 @@
     <string name="receivedownload_alreadyexists">A file with this name already exists. Overwrite existing file or save new file under a different name?</string>
     <string name="receivedownload_option_overwrite">Overwrite</string>
     <string name="receivedownload_option_differentname">Different name</string>
-    <string name="receivedownload_kb_copied">%d kB copied</string>
+    <string name="receivedownload_amount_copied">%s copied</string>
     <string name="receivedownload_cancelled">File transfer cancelled</string>
 
     <!-- Download map preference and menu entry -->
