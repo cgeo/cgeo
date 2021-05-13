@@ -10,7 +10,7 @@
     android:paddingLeft="5dip"
     android:paddingRight="5dip"
     android:paddingTop="7dip"
-    tools:context=".downloader.MapDownloadSelectorActivity">
+    tools:context=".downloader.DownloadSelectorActivity">
 
     <Button
         android:id="@+id/action"

@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".downloader.MapDownloadSelectorActivity" >
+    tools:context=".downloader.DownloadSelectorActivity" >
 
     <Button
         android:id="@+id/check_for_updates"
@@ -58,6 +58,6 @@
         android:dividerHeight="1dip"
         android:padding="0dip"
         android:scrollbarStyle="outsideOverlay"
-        tools:listitem="@layout/mapdownloader_item" />
+        tools:listitem="@layout/downloader_item" />
 
 </LinearLayout>

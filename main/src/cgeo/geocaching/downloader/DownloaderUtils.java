@@ -54,7 +54,7 @@ public class DownloaderUtils {
 
     public static boolean onOptionsItemSelected(final Activity activity, final int id) {
         if (id == R.id.menu_download_offlinemap) {
-            activity.startActivityForResult(new Intent(activity, MapDownloadSelectorActivity.class), REQUEST_CODE);
+            activity.startActivityForResult(new Intent(activity, DownloadSelectorActivity.class), REQUEST_CODE);
             return true;
         }
         return false;
@@ -84,7 +84,7 @@ public class DownloaderUtils {
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(title);
-        final View layout = View.inflate(activity, R.layout.mapdownloader_confirmation, null);
+        final View layout = View.inflate(activity, R.layout.downloader_confirmation, null);
         builder.setView(layout);
         final TextView downloadInfo = layout.findViewById(R.id.download_info);
         downloadInfo.setText(String.format(activity.getString(R.string.download_confirmation), StringUtils.isNotBlank(additionalInfo) ? additionalInfo + "\n\n" : "", filename, "\n\n" + activity.getString(R.string.download_warning) + (StringUtils.isNotBlank(sizeInfo) ? "\n\n" + sizeInfo : "")));
@@ -253,7 +253,7 @@ public class DownloaderUtils {
 
                     final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
                     builder.setTitle(R.string.updates_check);
-                    final View layout = View.inflate(builder.getContext(), R.layout.mapdownloader_confirmation, null);
+                    final View layout = View.inflate(builder.getContext(), R.layout.downloader_confirmation, null);
                     builder.setView(layout);
                     final TextView downloadInfo = layout.findViewById(R.id.download_info);
                     downloadInfo.setText(String.format(activity.getString(R.string.download_confirmation_updates), updates, "\n\n" + activity.getString(R.string.download_warning)));

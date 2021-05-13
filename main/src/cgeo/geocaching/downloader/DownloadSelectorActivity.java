@@ -2,8 +2,8 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.databinding.MapdownloaderActivityBinding;
-import cgeo.geocaching.databinding.MapdownloaderItemBinding;
+import cgeo.geocaching.databinding.DownloaderActivityBinding;
+import cgeo.geocaching.databinding.DownloaderItemBinding;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -41,29 +41,29 @@ import java.util.List;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 
-public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
+public class DownloadSelectorActivity extends AbstractActionBarActivity {
 
     @NonNull
     private final List<Download> maps = new ArrayList<>();
     private ArrayList<CompanionFileUtils.DownloadedFileData> installedOfflineMaps;
     private final MapListAdapter adapter = new MapListAdapter(this);
-    private MapdownloaderActivityBinding binding;
+    private DownloaderActivityBinding binding;
     private AbstractDownloader current;
     private ArrayList<Download.DownloadTypeDescriptor> spinnerData = new ArrayList<>();
 
     protected class MapListAdapter extends RecyclerView.Adapter<MapListAdapter.ViewHolder> {
-        @NonNull private final MapDownloadSelectorActivity activity;
+        @NonNull private final DownloadSelectorActivity activity;
 
         protected final class ViewHolder extends AbstractRecyclerViewHolder {
-            private final MapdownloaderItemBinding binding;
+            private final DownloaderItemBinding binding;
 
             ViewHolder(final View view) {
                 super(view);
-                binding = MapdownloaderItemBinding.bind(view);
+                binding = DownloaderItemBinding.bind(view);
             }
         }
 
-        MapListAdapter(@NonNull final MapDownloadSelectorActivity activity) {
+        MapListAdapter(@NonNull final DownloadSelectorActivity activity) {
             this.activity = activity;
         }
 
@@ -75,7 +75,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         @Override
         @NonNull
         public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-            final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mapdownloader_item, parent, false);
+            final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.downloader_item, parent, false);
             return new ViewHolder(view);
         }
 
@@ -223,8 +223,8 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setThemeAndContentView(R.layout.mapdownloader_activity);
-        binding = MapdownloaderActivityBinding.bind(findViewById(R.id.mapdownloader_activity_viewroot));
+        setThemeAndContentView(R.layout.downloader_activity);
+        binding = DownloaderActivityBinding.bind(findViewById(R.id.mapdownloader_activity_viewroot));
 
         spinnerData = Download.DownloadType.getOfflineMapTypes();
         final ArrayAdapter<Download.DownloadTypeDescriptor> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerData);
