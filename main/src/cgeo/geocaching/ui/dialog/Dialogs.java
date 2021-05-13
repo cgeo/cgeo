@@ -7,11 +7,14 @@ import cgeo.geocaching.databinding.DialogTextCheckboxBinding;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Action2;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -787,7 +790,7 @@ public final class Dialogs {
         editText.setInputType(inputType);
         editText.setText(defaultValue);
         editText.setTextColor(context.getResources().getColor(Settings.isLightSkin() ? R.color.text_light : R.color.text_dark));
-        editText.setGravity(Gravity.RIGHT);
+        editText.setGravity(Gravity.LEFT);
         editText.setLayoutParams(textParam);
         layout.addView(editText);
 
@@ -798,6 +801,7 @@ public final class Dialogs {
             unitText.setText(label);
             unitText.setLayoutParams(unitParam);
             layout.addView(unitText);
+            editText.setGravity(Gravity.RIGHT);
         }
 
         final AlertDialog.Builder builder = newBuilder(context);
@@ -881,6 +885,58 @@ public final class Dialogs {
         newBuilder(activity)
                 .setTitle(title)
                 .setAdapter(adapter, (dialog, item) -> listener.call(items.get(item))).show();
+    }
+
+    public static <T> void select(final Activity activity, final List<T> items, final Func1<T, String> displayMapper, final int preselectId, final int titleId, final int posButtonId, final int negButtonId, final Action2<Integer, T> onSelectListener) {
+
+        final int[] pos = new int[]{preselectId};
+        final AlertDialog.Builder alert = Dialogs.newBuilder(activity)
+            .setTitle(titleId)
+            .setSingleChoiceItems(CollectionStream.of(items).map(displayMapper::call).toArray(String.class), preselectId, (d, p) -> {
+                pos[0] = p;
+                enableDisableButtons((AlertDialog) d, true);
+            })
+            .setNeutralButton(android.R.string.cancel, (d, w) -> {
+                d.dismiss();
+            });
+
+        if (posButtonId != 0) {
+            alert.setPositiveButton(posButtonId, (d, w) -> {
+                if (pos[0] >= 0 && pos[0] < items.size()) {
+                    if (onSelectListener != null) {
+                        onSelectListener.call(DialogInterface.BUTTON_POSITIVE, items.get(pos[0]));
+                    }
+                    d.dismiss();
+                }
+            });
+        }
+        if (negButtonId != 0) {
+            alert.setNegativeButton(negButtonId, (d, w) -> {
+                if (pos[0] >= 0 && pos[0] < items.size()) {
+                    if (onSelectListener != null) {
+                        onSelectListener.call(DialogInterface.BUTTON_NEGATIVE, items.get(pos[0]));
+                    }
+                    d.dismiss();
+                }
+            });
+        }
+
+        final AlertDialog dialog = alert.create();
+        dialog.show();
+        if (preselectId < 0 || preselectId >= items.size()) {
+            enableDisableButtons(dialog, false);
+        }
+
+    }
+
+    private static void enableDisableButtons(final AlertDialog dialog, final boolean enable) {
+        if (dialog.getButton(DialogInterface.BUTTON_POSITIVE) != null) {
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(enable);
+        }
+        if (dialog.getButton(DialogInterface.BUTTON_NEGATIVE) != null) {
+            dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(enable);
+        }
+
     }
 
     public static void dismiss(@Nullable final ProgressDialog dialog) {

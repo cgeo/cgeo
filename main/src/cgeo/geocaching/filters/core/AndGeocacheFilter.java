@@ -36,4 +36,10 @@ public class AndGeocacheFilter extends LogicalGeocacheFilter {
 
     }
 
+    @Override
+    public String getUserDisplayableType() {
+        return ",";
+    }
+
+
 }

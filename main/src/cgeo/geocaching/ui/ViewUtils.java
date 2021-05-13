@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CacheFilterCheckboxItemBinding;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Func2;
 
 import android.app.Activity;
@@ -45,7 +46,11 @@ public class ViewUtils {
         return (int) (dp * (APP_RESSOURCES == null ? 20f : (float) APP_RESSOURCES.getDisplayMetrics().density));
     }
 
-    public static void setToolTip(final View view, final String text) {
+    public static void setTooltip(final View view, @StringRes final int textId) {
+        setTooltip(view, LocalizationUtils.getString(textId));
+    }
+
+    public static void setTooltip(final View view, final String text) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             view.setTooltipText(text);
         }

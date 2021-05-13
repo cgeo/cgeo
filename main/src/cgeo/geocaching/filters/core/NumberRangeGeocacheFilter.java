@@ -154,4 +154,19 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable> e
             sqlBuilder.addWhereAlwaysInclude();
         }
     }
+
+    @Override
+    protected String getUserDisplayableConfig() {
+
+        final StringBuilder sb = new StringBuilder();
+        if (minRangeValue != null) {
+            sb.append(minRangeValue);
+        }
+        sb.append("-");
+        if (maxRangeValue != null) {
+            sb.append(maxRangeValue);
+        }
+        return sb.toString();
+    }
+
 }

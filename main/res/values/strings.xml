@@ -449,7 +449,7 @@
     <string name="cache_filter_option_inverse">Inverse Filter</string>
     <string name="cache_filter_option_include_inconclusive">Include inconclusive matches</string>
     <string name="cache_filter_option_include_inconclusive_info">Whether to include cache in result when a filter needs info on cache which is not available.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Tap \'+\' in upper left corner to add a filter</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tap \'+\' on upper right side to add a filter</string>
 
     <string name="cache_filter_name">Name</string>
     <string name="cache_filter_type">Type</string>
@@ -467,6 +467,18 @@
 
     <string name="cache_filter_include">Include</string>
     <string name="cache_filter_exclude">Exclude</string>
+
+    <string name="cache_filter_userdisplay_complex">Complex</string>
+    <string name="cache_filter_userdisplay_none">None</string>
+    <string name="cache_filter_userdisplay_multi">Multi</string>
+
+    <string name="cache_filter_storage_load_button">Load</string>
+    <string name="cache_filter_storage_delete_button">Delete</string>
+    <string name="cache_filter_storage_load_delete_title">Load or delete an existing filter</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">No filter are stored yet.</string>
+    <string name="cache_filter_storage_save_title">Save filter with name</string>
+    <string name="cache_filter_storage_save_confirm_title">Save filter overwrite</string>
+    <string name="cache_filter_storage_save_confirm_message">A filter with name \'%s\' and different configuration already exists. Overwrite it?</string>
 
 
     <string name="cache_filter_stringfilter_matchcase">Match Case</string>

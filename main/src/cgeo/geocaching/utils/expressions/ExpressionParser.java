@@ -1,15 +1,20 @@
 package cgeo.geocaching.utils.expressions;
 
+import cgeo.geocaching.utils.Log;
+
 import androidx.annotation.NonNull;
 import androidx.core.util.Supplier;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class ExpressionParser<T extends IExpression<T>> {
 
@@ -29,8 +34,20 @@ public class ExpressionParser<T extends IExpression<T>> {
         return this;
     }
 
-    public T create(@NonNull final String config) throws ParseException {
+    public T create(final String config) throws ParseException {
+        if (config == null) {
+            return null;
+        }
         return new Parser(config).parse();
+    }
+
+    public T createWithNull(final String config)  {
+        try {
+            return create(config);
+        } catch (ParseException pe) {
+            Log.d("Could not parse expression '" + config + "'", pe);
+            return null;
+        }
     }
 
     public String getConfig(@NonNull final T exp) {
@@ -81,7 +98,36 @@ public class ExpressionParser<T extends IExpression<T>> {
 
     }
 
+    public static int parseToNextDelim(final String text, final int startIdx, final Set<Character> endChars, final StringBuilder result)  {
+        int idx = startIdx;
+        boolean nextCharIsEscaped = false;
+        while (true) {
+            if (idx >= text.length()) {
+                break;
+            }
+            final char c = text.charAt(idx);
+            if (c == ESCAPE_CHAR) {
+                if (nextCharIsEscaped) {
+                    result.append(ESCAPE_CHAR);
+                }
+                nextCharIsEscaped = !nextCharIsEscaped;
+            } else if (endChars.contains(c) && !nextCharIsEscaped) {
+                //the delim char has been reached
+                break;
+            } else {
+                result.append(c);
+                nextCharIsEscaped = false;
+            }
+            idx++;
+        }
+        return idx;
+    }
+
+
     private class Parser {
+
+        private final Set<Character> endChars = new HashSet<>(Arrays.asList(TYPEID_CONFIG_SEPARATOR, LOGIC_SEPARATOR, OPEN_PAREN, CLOSE_PAREN));
+
         private final String config;
         private int idx = 0;
 
@@ -160,42 +206,12 @@ public class ExpressionParser<T extends IExpression<T>> {
 
         private String parseToNextDelim()  {
             final StringBuilder result = new StringBuilder();
-            boolean nextCharIsEscaped = false;
-            boolean done = false;
-            while (!done) {
-                if (idx >= config.length()) {
-                    break;
-                }
-                final char c = config.charAt(idx);
-                switch (c) {
-                    case ESCAPE_CHAR:
-                        if (nextCharIsEscaped) {
-                            result.append(ESCAPE_CHAR);
-                        }
-                        nextCharIsEscaped = !nextCharIsEscaped;
-                        break;
-                    case TYPEID_CONFIG_SEPARATOR:
-                    case LOGIC_SEPARATOR:
-                    case OPEN_PAREN:
-                    case CLOSE_PAREN:
-                        if (!nextCharIsEscaped) {
-                            done = true;
-                            break;
-                        }
-                        result.append(c);
-                        nextCharIsEscaped = false;
-                        break;
-                    default:
-                        result.append(c);
-                        nextCharIsEscaped = false;
-                        break;
-                }
-                if (!done) {
-                    idx++;
-                }
-            }
+
+            idx = ExpressionParser.parseToNextDelim(config, idx, endChars, result);
+
             return result.toString();
         }
+
 
         private void moveToNextToken() {
             while (idx < config.length() && Character.isWhitespace(config.charAt(idx))) {

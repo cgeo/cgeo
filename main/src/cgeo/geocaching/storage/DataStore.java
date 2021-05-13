@@ -15,7 +15,7 @@ import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
@@ -215,7 +215,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 94;
+    private static final int dbVersion = 95;
     public static final int customListIdOffset = 10;
 
     /**
@@ -245,7 +245,8 @@ public class DataStore {
         91, // add fields to cg_extension
         92, // add emoji id to cg_caches
         93,  // add emoji id to cg_lists
-        94  // add scale to offline log images
+        94,  // add scale to offline log images
+        95   // add table to store custom filters
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -265,6 +266,7 @@ public class DataStore {
     @NonNull private static final String dbTableTrailHistory = "cg_trail_history";
     @NonNull private static final String dbTableRoute = "cg_route";
     @NonNull private static final String dbTableExtension = "cg_extension";
+    @NonNull private static final String dbTableFilters = "cg_filters";
     @NonNull private static final String dbTableSequences = "sqlite_sequence";
     @NonNull private static final String dbCreateCaches = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableCaches + " ("
@@ -489,6 +491,13 @@ public class DataStore {
             + "string4 TEXT"
             + "); ";
 
+    private static final String dbCreateFilters
+        = "CREATE TABLE IF NOT EXISTS " + dbTableFilters + " ("
+        + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+        + "name TEXT NOT NULL UNIQUE, "
+        + "treeconfig TEXT"
+        + "); ";
+
     // reminder to myself: when adding a new CREATE TABLE statement:
     // make sure to add it to both onUpgrade() and onCreate()
 
@@ -707,6 +716,30 @@ public class DataStore {
 
         public String getString4() {
             return string4;
+        }
+
+    }
+
+    public static class DBFilters {
+
+        public static List<GeocacheFilter> getAllStoredFilters() {
+            return queryToColl(dbTableFilters, new String[]{"name", "treeconfig" },
+                null, null, null, null, new ArrayList<>(),
+                c -> new GeocacheFilter(c.getString(0), c.getString(1)));
+        }
+
+        /** Saves using UPSERT on NAME (if filter with same name exists, it deleted before.  otherwise new one is created) */
+        public static int save(final GeocacheFilter filter) {
+            delete(filter.getName());
+            final ContentValues values = new ContentValues();
+            values.put("name", filter.getName());
+            values.put("treeconfig", filter.getTreeConfig());
+            return (int) database.insert(dbTableFilters, null, values);
+        }
+
+        /** deletes any entry in DB with same filterName as in supplied filter object, if exists */
+        public static boolean delete(final String filterName) {
+            return database.delete(dbTableFilters, "name = ?", new String[]{filterName}) > 0;
         }
 
     }
@@ -948,6 +981,7 @@ public class DataStore {
             db.execSQL(dbCreateTrailHistory);
             db.execSQL(dbCreateRoute);
             db.execSQL(dbCreateExtension);
+            db.execSQL(dbCreateFilters);
 
             createIndices(db, dbVersion);
         }
@@ -1546,6 +1580,15 @@ public class DataStore {
                         }
                     }
 
+                    //add table to store custom filters
+                    if (oldVersion < 95) {
+                        try {
+                            db.execSQL(dbCreateFilters);
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 95);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -1650,6 +1693,7 @@ public class DataStore {
             db.execSQL("DROP TABLE IF EXISTS " + dbTableTrailHistory);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableRoute);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableExtension);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableFilters);
             // also delete tables which have old table names
             db.execSQL("DROP TABLE IF EXISTS cg_table_route");
             db.execSQL("DROP TABLE IF EXISTS cg_table_extension");
@@ -3332,7 +3376,7 @@ public class DataStore {
      * @return a non-null set of geocodes
      */
     @NonNull
-    private static Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final CacheType cacheType, final int listId, final IGeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
+    private static Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final CacheType cacheType, final int listId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
         if (cacheType == null) {
             throw new IllegalArgumentException("cacheType must not be null");
         }
@@ -3353,8 +3397,8 @@ public class DataStore {
             if (cacheType != CacheType.ALL) {
                 sqlBuilder.addWhere("type = '" + cacheType.id + "'");
             }
-            if (filter != null) {
-                filter.addToSql(sqlBuilder);
+            if (filter != null && filter.getTree() != null) {
+                filter.getTree().addToSql(sqlBuilder);
                 sqlBuilder.closeAllOpenWheres();
             }
             if (sort != null) {
@@ -4361,7 +4405,7 @@ public class DataStore {
     }
 
     @NonNull
-    public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId, final IGeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
+    public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
         final Set<String> geocodes = loadBatchOfStoredGeocodes(coords, cacheType, listId, filter, sort, sortInverse, limit);
         return new SearchResult(geocodes, getAllStoredCachesCount(cacheType, listId));
     }

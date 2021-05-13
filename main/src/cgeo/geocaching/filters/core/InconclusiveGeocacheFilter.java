@@ -15,4 +15,10 @@ public class InconclusiveGeocacheFilter extends AndGeocacheFilter {
         return superResult == null ? true : superResult;
     }
 
+    @Override
+    public String toUserDisplayableString(final int level) {
+        return super.toUserDisplayableString(level) + "+?";
+    }
+
+
 }

@@ -12,6 +12,9 @@ public class OrGeocacheFilter extends LogicalGeocacheFilter {
 
     @Override
     public Boolean filter(final Geocache cache) {
+        if (getChildren().isEmpty()) {
+            return true;
+        }
         boolean isInconclusive = false;
         for (IGeocacheFilter child : getChildren()) {
             final Boolean childResult = child.filter(cache);
@@ -33,5 +36,10 @@ public class OrGeocacheFilter extends LogicalGeocacheFilter {
             }
             sqlBuilder.closeWhere();
         }
+    }
+
+    @Override
+    public String getUserDisplayableType() {
+        return "^";
     }
 }
