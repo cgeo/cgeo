@@ -678,7 +678,6 @@
     <string name="init_user_confirmation">Vím, co dělám</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
-    <string name="init_backup_unnecessary">Databáze je prázdná, takže není třeba zálohovat.</string>
     <string name="init_backup_folder_exists_error">Nelze vytvořit novou složku zálohy. Neprováděli jste za poslední minutu nějakou zálohu?</string>
     <string name="init_backup_no_backup_available">Není dostupný žádný záložní soubor.</string>
     <string name="backup_confirm_overwrite">Tímto odstraníte nejstarší složku zálohy z %s. \nChcete pokračovat?</string>
@@ -1193,6 +1192,7 @@
     <string name="context_share_as_link">Sdílet odkaz</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
+    <string name="create_internal_cache_currentlist">Použít aktuální seznam</string>
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
@@ -1350,6 +1350,7 @@
     <string name="search_own_caches">Hledat moje kešky</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Seznam záložek</string>
+    <string name="search_pocket_is_new">nový</string>
     <string name="search_pocket_and_bookmark_loading">Načítání seznamu Pocket Queries a záložek</string>
     <!-- trackable -->
     <string name="trackable">Sledovatelný předmět</string>
