@@ -49,7 +49,7 @@ public class MapDownloaderFreizeitkarteThemes extends AbstractThemeDownloader {
             theme.getChild("", "DescriptionEnglish").setEndTextElementListener(body -> description = body);
             theme.setEndElementListener(() -> {
                 if (StringUtils.isNotBlank(url)) {
-                    result.add(new Download(description, Uri.parse(url), false, "", Formatter.formatBytes(size), offlineMapType));
+                    result.add(new Download(description, Uri.parse(url), false, "", Formatter.formatBytes(size), offlineMapType, ICONRES_THEME));
                 }
             });
 

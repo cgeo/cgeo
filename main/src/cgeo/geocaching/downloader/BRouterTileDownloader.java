@@ -34,7 +34,7 @@ public class BRouterTileDownloader extends AbstractDownloader {
     protected void analyzePage(final Uri uri, final List<Download> list, final String page) {
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_TILE, page);
         while (matchMap.find()) {
-            final Download offlineMap = new Download(matchMap.group(1), Uri.parse(uri + matchMap.group(1)), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType);
+            final Download offlineMap = new Download(matchMap.group(1), Uri.parse(uri + matchMap.group(1)), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType, iconRes);
             list.add(offlineMap);
         }
     }
@@ -45,7 +45,7 @@ public class BRouterTileDownloader extends AbstractDownloader {
         while (matchMap.find()) {
             final String filename = matchMap.group(1);
             if (filename.equals(remoteFilename)) {
-                return new Download(filename, Uri.parse(mapBase + filename), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType);
+                return new Download(filename, Uri.parse(mapBase + filename), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType, iconRes);
             }
         }
         return null;

@@ -17,8 +17,11 @@ import java.util.List;
 
 abstract class AbstractMapDownloader extends AbstractDownloader {
 
+    public static final int ICONRES_MAP = R.drawable.ic_menu_mapmode;
+
     AbstractMapDownloader(final Download.DownloadType offlineMapType, final @StringRes int mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo, final @StringRes int projectUrl, final @StringRes int likeItUrl) {
         super(offlineMapType, mapBase, mapSourceName, mapSourceInfo, projectUrl, likeItUrl, PersistableFolder.OFFLINE_MAPS);
+        this.iconRes = ICONRES_MAP;
         this.forceExtension = FileUtils.MAP_FILE_EXTENSION;
     }
 

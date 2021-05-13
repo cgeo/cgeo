@@ -76,34 +76,20 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         @NonNull
         public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mapdownloader_item, parent, false);
-            final ViewHolder viewHolder = new ViewHolder(view);
-            viewHolder.binding.retrieve.setOnClickListener(v -> {
-                final Download offlineMap = activity.getQueries().get(viewHolder.getAdapterPosition());
-                    new MapListTask(activity, offlineMap.getUri(), offlineMap.getName()).execute();
-            });
-            viewHolder.binding.download.setOnClickListener(v -> {
-                final Download offlineMap = activity.getQueries().get(viewHolder.getAdapterPosition());
-                // return to caller with URL chosen
-                final Intent intent = new Intent();
-                intent.putExtra(DownloaderUtils.RESULT_CHOSEN_URL, offlineMap.getUri());
-                intent.putExtra(DownloaderUtils.RESULT_SIZE_INFO, offlineMap.getSizeInfo());
-                intent.putExtra(DownloaderUtils.RESULT_DATE, offlineMap.getDateInfo());
-                intent.putExtra(DownloaderUtils.RESULT_TYPEID, offlineMap.getType().id);
-                setResult(RESULT_OK, intent);
-                finish();
-            });
-            return viewHolder;
+            return new ViewHolder(view);
         }
 
         @SuppressLint("SetTextI18n")
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             final Download offlineMap = activity.getQueries().get(position);
-            holder.binding.download.setVisibility(!offlineMap.getIsDir() ? View.VISIBLE : View.GONE);
-            holder.binding.retrieve.setVisibility(offlineMap.getIsDir() ? View.VISIBLE : View.GONE);
             holder.binding.label.setText(offlineMap.getName());
             if (offlineMap.getIsDir()) {
                 holder.binding.info.setText(R.string.downloadmap_directory);
+                holder.binding.action.setBackgroundResource(R.drawable.ic_menu_folder);
+                holder.binding.getRoot().setOnClickListener(v -> {
+                    new MapListTask(activity, offlineMap.getUri(), offlineMap.getName()).execute();
+                });
             } else {
                 final String addInfo = offlineMap.getAddInfo();
                 final String sizeInfo = offlineMap.getSizeInfo();
@@ -112,6 +98,17 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
                     + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "")
                     + (StringUtils.isNotBlank(sizeInfo) ? Formatter.SEPARATOR + offlineMap.getSizeInfo() : "")
                     + Formatter.SEPARATOR + offlineMap.getTypeAsString());
+                holder.binding.action.setBackgroundResource(offlineMap.getIconRes());
+                holder.binding.getRoot().setOnClickListener(v -> {
+                    // return to caller with URL chosen
+                    final Intent intent = new Intent();
+                    intent.putExtra(DownloaderUtils.RESULT_CHOSEN_URL, offlineMap.getUri());
+                    intent.putExtra(DownloaderUtils.RESULT_SIZE_INFO, offlineMap.getSizeInfo());
+                    intent.putExtra(DownloaderUtils.RESULT_DATE, offlineMap.getDateInfo());
+                    intent.putExtra(DownloaderUtils.RESULT_TYPEID, offlineMap.getType().id);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                });
             }
         }
     }
@@ -176,7 +173,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         @Override
         protected List<Download> doInBackgroundInternal(final Void[] none) {
             final List<Download> result = new ArrayList<>();
-            result.add(new Download(getString(R.string.downloadmap_title), current.mapBase, true, "", "", current.offlineMapType));
+            result.add(new Download(getString(R.string.downloadmap_title), current.mapBase, true, "", "", current.offlineMapType, current.iconRes));
             for (CompanionFileUtils.DownloadedFileData installedOfflineMap : installedOfflineMaps) {
                 final Download offlineMap = checkForUpdate(installedOfflineMap);
                 if (offlineMap != null && offlineMap.getDateInfo() > installedOfflineMap.remoteDate) {

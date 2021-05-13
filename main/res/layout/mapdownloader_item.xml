@@ -12,29 +12,14 @@
     android:paddingTop="7dip"
     tools:context=".downloader.MapDownloadSelectorActivity">
 
-    <LinearLayout android:id="@+id/buttons"
+    <Button
+        android:id="@+id/action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true">
-
-        <Button
-            android:id="@+id/download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_menu_save"
-            android:gravity="left|center_vertical"
-            android:text="@null"
-            tools:ignore="ButtonStyle" />
-
-        <Button
-            android:id="@+id/retrieve"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@android:drawable/ic_menu_search"
-            android:gravity="left|center_vertical"
-            android:text="@null"
-            tools:ignore="ButtonStyle" />
-    </LinearLayout>
+        android:gravity="left|center_vertical"
+        android:text="@null"
+        android:layout_alignParentLeft="true"
+        tools:ignore="ButtonStyle" />
 
     <TextView
         android:id="@+id/label"
@@ -46,8 +31,8 @@
         android:textColor="?text_color"
         android:textIsSelectable="false"
         android:textSize="22sp"
-        android:paddingRight="5dip"
-        android:layout_toLeftOf="@id/buttons"
+        android:paddingLeft="10dip"
+        android:layout_toRightOf="@id/action"
         tools:text="name"/>
 
     <TextView
@@ -61,8 +46,9 @@
         android:textColor="?text_color"
         android:textIsSelectable="false"
         android:textSize="12sp"
+        android:paddingLeft="10dip"
         android:layout_below="@id/label"
-        android:layout_alignParentLeft="true"
+        android:layout_toRightOf="@id/action"
         tools:text="info"
         android:maxLines="2" />
 
