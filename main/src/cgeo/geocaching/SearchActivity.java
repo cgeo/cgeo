@@ -8,6 +8,8 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.SearchActivityBinding;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.search.AutoCompleteAdapter;
@@ -179,14 +181,19 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         setSearchAction(binding.keyword, binding.searchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
         setSearchAction(binding.finder, binding.searchFinder, this::findByFinderFn, DataStore::getSuggestionsFinderName);
         setSearchAction(binding.owner, binding.searchOwner, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
+        setSearchAction(null, binding.searchFilter, this::findByFilterFn, null);
         setSearchAction(binding.trackable, binding.displayTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
 
         binding.geocode.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
         binding.trackable.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+
+        binding.searchFilterInfo.setOnClickListener(v -> Dialogs.message(this, R.string.search_filter_info_message));
     }
 
     private static void setSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {
-        EditUtils.setActionListener(editText, runnable);
+        if (editText != null) {
+            EditUtils.setActionListener(editText, runnable);
+        }
         button.setOnClickListener(arg0 -> runnable.run());
         if (suggestionFunction != null) {
             editText.setAdapter(new AutoCompleteAdapter(editText.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
@@ -276,6 +283,22 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         }
 
         CacheListActivity.startActivityOwner(this, usernameText);
+    }
+
+    private void findByFilterFn() {
+        GeocacheFilterActivity.selectFilter(this, null, null, false);
+
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
+
+        if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+            final GeocacheFilter selectedFilter = GeocacheFilter.createFromConfig(data.getStringExtra(GeocacheFilterActivity.EXTRA_FILTER_RESULT));
+            CacheListActivity.startActivityFilter(this, selectedFilter);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void findByGeocodeFn() {

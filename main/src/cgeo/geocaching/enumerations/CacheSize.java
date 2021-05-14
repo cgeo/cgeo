@@ -15,36 +15,40 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Enum listing cache sizes
  */
+@SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass") // static maps need to be initialized later in the class
 public enum CacheSize {
-    NANO("Nano", 0, R.string.cache_size_nano, "nano"), // used by OC only
-    MICRO("Micro", 1, R.string.cache_size_micro, "micro"),
-    SMALL("Small", 2, R.string.cache_size_small, "small"),
-    REGULAR("Regular", 3, R.string.cache_size_regular, "regular"),
-    LARGE("Large", 4, R.string.cache_size_large, "large"),
-    VERY_LARGE("Very large", 5, R.string.cache_size_very_large, "xlarge"), // used by OC only
-    NOT_CHOSEN("Not chosen", 6, R.string.cache_size_notchosen, ""),
-    VIRTUAL("Virtual", 7, R.string.cache_size_virtual, "none"),
-    OTHER("Other", 8, R.string.cache_size_other, "other"),
-    UNKNOWN("Unknown", -1, R.string.cache_size_unknown, ""); // CacheSize not init. yet
+    NANO("Nano", 0, R.string.cache_size_nano, "nano", null), // used by OC only
+    MICRO("Micro", 1, R.string.cache_size_micro, "micro", new int[]{2}),
+    SMALL("Small", 2, R.string.cache_size_small, "small", new int[]{8}),
+    REGULAR("Regular", 3, R.string.cache_size_regular, "regular", new int[]{3}),
+    LARGE("Large", 4, R.string.cache_size_large, "large", new int[]{4}),
+    VERY_LARGE("Very large", 5, R.string.cache_size_very_large, "xlarge", null), // used by OC only
+    NOT_CHOSEN("Not chosen", 6, R.string.cache_size_notchosen, "", null),
+    VIRTUAL("Virtual", 7, R.string.cache_size_virtual, "none", new int[]{5}), //gc:
+    OTHER("Other", 8, R.string.cache_size_other, "other", new int[]{6, 1}), //6="normal" other, 1=earth cache
+    UNKNOWN("Unknown", -1, R.string.cache_size_unknown, "", null); // CacheSize not init. yet
 
     @NonNull
     public final String id;
     public final int comparable;
     private final int stringId;
+    private final int[] gcIds;
     /**
      * lookup for OC JSON requests (the numeric size is deprecated for OC)
      */
     private final String ocSize2;
 
-    CacheSize(@NonNull final String id, final int comparable, final int stringId, final String ocSize2) {
+    CacheSize(@NonNull final String id, final int comparable, final int stringId, final String ocSize2, final int[] gcIds) {
         this.id = id;
         this.comparable = comparable;
         this.stringId = stringId;
         this.ocSize2 = ocSize2;
+        this.gcIds = gcIds;
     }
 
     @NonNull
     private static final Map<String, CacheSize> FIND_BY_ID = new HashMap<>();
+    private static final Map<Integer, CacheSize> FIND_BY_GC_ID = new HashMap<>();
     static {
         for (final CacheSize cs : values()) {
             FIND_BY_ID.put(cs.id.toLowerCase(Locale.US), cs);
@@ -60,6 +64,37 @@ public enum CacheSize {
 
         // additional OC size names, https://github.com/opencaching/gpx-extension-v1/blob/master/schema.xsd
         FIND_BY_ID.put("No Container".toLowerCase(Locale.US), VIRTUAL);
+
+        for (final CacheSize cs : values()) {
+            if (cs.gcIds != null) {
+                for (int gcId : cs.gcIds) {
+                    FIND_BY_GC_ID.put(gcId, cs);
+                }
+            }
+        }
+    }
+
+    @NonNull
+    public static CacheSize getByGcId(final int gcId) {
+        final CacheSize result = FIND_BY_GC_ID.get(gcId);
+        return result == null ? CacheSize.UNKNOWN : result;
+    }
+
+    public static int[] getGcIdsForSize(final CacheSize size) {
+        if (size.gcIds != null) {
+            return size.gcIds;
+        }
+        //special cases:
+        switch (size) {
+            case NANO:
+                return MICRO.gcIds;
+            case VERY_LARGE:
+                return LARGE.gcIds;
+            case NOT_CHOSEN:
+                return OTHER.gcIds;
+            default:
+                return new int[0];
+        }
     }
 
     @NonNull

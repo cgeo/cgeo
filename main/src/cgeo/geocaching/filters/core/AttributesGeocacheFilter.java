@@ -47,9 +47,14 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public Boolean filter(final Geocache cache) {
-        if (cache == null || cache.getAttributes() == null) {
+        if (cache == null) {
             return null;
         }
+        //check if cache attributes are not filled -> means that this filter is inconclusive
+        if (!attributes.isEmpty() && cache.getAttributes().isEmpty() && !cache.isDetailed()) {
+            return null;
+        }
+
         int found = 0;
         for (String cacheAtt : cache.getAttributes()) {
             if (attributes.contains(cacheAtt)) {

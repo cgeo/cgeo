@@ -159,7 +159,10 @@ public class GeocacheFilter {
     }
 
     public Boolean filter(final Geocache cache) {
-        return tree == null ? true : tree.filter(cache);
+        if (tree == null) {
+            return true;
+        }
+        return tree.filter(cache);
     }
 
     public void filterList(final List<Geocache> list) {

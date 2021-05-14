@@ -152,6 +152,40 @@
 
             <TextView
                 style="@style/separator_horizontal_headline"
+                android:text="@string/search_filter" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+        <Button
+            android:id="@+id/search_filter"
+            style="@style/button_full"
+            android:text="@string/search_filter_button"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/search_filter_info"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/search_filter_info"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="?attr/info_icon"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+
+            <View style="@style/separator_horizontal" />
+
+            <TextView
+                style="@style/separator_horizontal_headline"
                 android:text="@string/search_tb" />
         </RelativeLayout>
 

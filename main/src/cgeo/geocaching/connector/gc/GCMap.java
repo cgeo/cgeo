@@ -1,16 +1,35 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.ParserException;
+import cgeo.geocaching.filters.core.AndGeocacheFilter;
+import cgeo.geocaching.filters.core.AttributesGeocacheFilter;
+import cgeo.geocaching.filters.core.BaseGeocacheFilter;
+import cgeo.geocaching.filters.core.DifficultyGeocacheFilter;
+import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
+import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.InconclusiveGeocacheFilter;
+import cgeo.geocaching.filters.core.NameGeocacheFilter;
+import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
+import cgeo.geocaching.filters.core.SizeGeocacheFilter;
+import cgeo.geocaching.filters.core.StatusGeocacheFilter;
+import cgeo.geocaching.filters.core.TerrainGeocacheFilter;
+import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -20,7 +39,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -102,97 +121,89 @@ public class GCMap {
      */
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        final SearchResult result = searchPlayMapByViewport(viewport);
+        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "GCMap.searchByViewport")) {
+            cLog.add("vp:" + viewport);
 
-        if (Settings.isDebug()) {
-            result.setUrl(result.getUrl());
+            final SearchResult searchResult = GCWebAPI.searchMap(viewport);
+
+            if (Settings.isDebug()) {
+                    searchResult.setUrl(viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
+            }
+            cLog.add("returning " + searchResult.getCount() + " caches");
+            return searchResult;
         }
-
-        Log.d(String.format(Locale.getDefault(), "GCMap: returning %d caches from search", result.getCount()));
-
-        return result;
     }
 
-
-    /**
-     * Searches the view port on the live map for caches.
-     *
-     * @param viewport
-     *            Area to search
-     */
     @NonNull
-    private static SearchResult searchPlayMapByViewport(@NonNull final Viewport viewport) {
-        Log.d("GCMap.searchPlayMapByViewport" + viewport.toString());
+    public static SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
+        final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
+        search.setOrigin(Sensors.getInstance().currentGeo().getCoords());
 
-        final SearchResult searchResult = new SearchResult();
-
-        if (Settings.isDebug()) {
-            searchResult.setUrl(viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
+        IGeocacheFilter f = filter.getTree();
+        while (f instanceof InconclusiveGeocacheFilter) {
+            f = f.getChildren().get(0);
         }
-
-        final GCWebAPI.MapSearchResultSet mapSearchResultSet = GCWebAPI.searchMap(viewport);
-        final List<Geocache> foundCaches = new ArrayList<>();
-
-        if (mapSearchResultSet.results != null) {
-            for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
-                if (r.postedCoordinates != null) {
-                    final Geocache c = new Geocache();
-                    c.setDetailed(false);
-                    c.setReliableLatLon(true);
-                    c.setGeocode(r.code);
-                    c.setName(r.name);
-                    if (r.userCorrectedCoordinates != null) {
-                        c.setCoords(new Geopoint(r.userCorrectedCoordinates.latitude, r.userCorrectedCoordinates.longitude));
-                        c.setUserModifiedCoords(true);
-                    } else {
-                        c.setCoords(new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude));
-                        c.setUserModifiedCoords(false);
-                    }
-                    c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
-                    c.setDifficulty(r.difficulty);
-                    c.setTerrain(r.terrain);
-                    c.setSize(containerTypeToCacheSize(r.containerType));
-                    c.setPremiumMembersOnly(r.premiumOnly);
-
-                    //Only set found if the map returns a "found",
-                    //the map API will possibly lag behind and break
-                    //cache merging if "not found" is set
-                    if (r.userFound) {
-                        c.setFound(true);
-                    } else if (r.userDidNotFind) {
-                        c.setDNF(true);
-                    }
-
-                    c.setFavoritePoints(r.favoritePoints);
-                    c.setDisabled(r.cacheStatus == 1);
-                    if (r.owner != null) {
-                        c.setOwnerDisplayName(r.owner.username);
-                        c.setOwnerUserId(r.owner.username);
-                    }
-                    foundCaches.add(c);
+        if (f instanceof AndGeocacheFilter) {
+            for (IGeocacheFilter fChild : f.getChildren()) {
+                if (fChild instanceof BaseGeocacheFilter) {
+                    fillForBasicFilter((BaseGeocacheFilter) fChild, search);
                 }
             }
+        } else if (f instanceof  BaseGeocacheFilter) {
+            fillForBasicFilter((BaseGeocacheFilter) f, search);
         }
 
-        searchResult.addAndPutInCache(foundCaches);
-
-        return searchResult;
+        return GCWebAPI.searchCaches(search);
     }
 
-    private static CacheSize containerTypeToCacheSize(final int containerType) {
-        switch (containerType) {
-            case 2:
-                return CacheSize.MICRO;
-            case 3:
-                return CacheSize.REGULAR;
-            case 4:
-                return CacheSize.LARGE;
-            case 6:
-                return CacheSize.OTHER;
-            case 8:
-                return CacheSize.SMALL;
+    private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
+        switch (basicFilter.getType()) {
+            case TYPE:
+                search.addCacheTypes(((TypeGeocacheFilter) basicFilter).getValues());
+                break;
+            case NAME:
+                search.setKeywords(((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue());
+                break;
+            case ATTRIBUTES: //TODO: does not work for v1!
+                search.addCacheAttributes(
+                    CollectionStream.of(((AttributesGeocacheFilter) basicFilter).getAttributes().entrySet())
+                    .filter(e -> Boolean.TRUE.equals(e.getValue())).map(Map.Entry::getKey).toArray(CacheAttribute.class));
+                break;
+            case SIZE:
+                search.addCacheSizes(((SizeGeocacheFilter) basicFilter).getValues());
+                break;
+            case DISTANCE:
+                final DistanceGeocacheFilter distanceFilter = (DistanceGeocacheFilter) basicFilter;
+                final Geopoint coord = distanceFilter.getEffectiveCoordinate();
+                if (distanceFilter.getMaxRangeValue() != null) {
+                    search.setBox(new Viewport(coord, distanceFilter.getMaxRangeValue()));
+                } else {
+                    search.setOrigin(coord);
+                }
+                break;
+            case DIFFICULTY:
+                search.setDifficulty(((DifficultyGeocacheFilter) basicFilter).getMinRangeValue(), ((DifficultyGeocacheFilter) basicFilter).getMaxRangeValue());
+                break;
+            case TERRAIN:
+                search.setTerrain(((TerrainGeocacheFilter) basicFilter).getMinRangeValue(), ((TerrainGeocacheFilter) basicFilter).getMaxRangeValue());
+                break;
+            case OWNER:
+                search.setHiddenBy(((OwnerGeocacheFilter) basicFilter).getStringFilter().getTextValue());
+                break;
+            case FAVORITES:
+                final FavoritesGeocacheFilter favFilter = (FavoritesGeocacheFilter) basicFilter;
+                if (!favFilter.isPercentage()) {
+                    search.setMinFavoritepoints(Math.round(favFilter.getMinRangeValue()));
+                }
+                break;
+            case STATUS:
+                final StatusGeocacheFilter statusFilter = (StatusGeocacheFilter) basicFilter;
+                search.setStatusFound(statusFilter.getStatusFound());
+                search.setStatusOwn(statusFilter.getStatusOwn());
+                search.setStatusEnabled(statusFilter.getStatusDisabled() == null ? null : !statusFilter.getStatusDisabled());
+                break;
             default:
-                return CacheSize.UNKNOWN;
+                break;
         }
     }
-}
+ }

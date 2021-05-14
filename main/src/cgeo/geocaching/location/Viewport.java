@@ -44,6 +44,13 @@ public final class Viewport {
         topRight = point.getCoords();
     }
 
+    /** Creates a Viewport with given center which covers the area around it with given radius */
+    public Viewport(@NonNull final ICoordinates center, final float radiusInKilometers) {
+        this.center = center.getCoords();
+        this.topRight = this.center.project(0, radiusInKilometers).project(90, radiusInKilometers);
+        this.bottomLeft = this.center.project(180, radiusInKilometers).project(270, radiusInKilometers);
+    }
+
     public double getLatitudeMin() {
         return bottomLeft.getLatitude();
     }

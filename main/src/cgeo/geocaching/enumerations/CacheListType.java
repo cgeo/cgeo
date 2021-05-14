@@ -14,7 +14,8 @@ public enum CacheListType {
     ADDRESS(false, CacheListLoaderType.ADDRESS),
     FINDER(false, CacheListLoaderType.FINDER),
     OWNER(false, CacheListLoaderType.OWNER),
-    MAP(false, CacheListLoaderType.MAP);
+    MAP(false, CacheListLoaderType.MAP),
+    SEARCH_FILTER(false, CacheListLoaderType.SEARCH_FILTER);
 
     /**
      * whether or not this list allows switching to another list

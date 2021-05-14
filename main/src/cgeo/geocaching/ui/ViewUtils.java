@@ -2,7 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.databinding.CacheFilterCheckboxItemBinding;
+import cgeo.geocaching.databinding.CheckboxItemBinding;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -43,7 +43,7 @@ public class ViewUtils {
     }
 
     public static int dpToPixel(final float dp)  {
-        return (int) (dp * (APP_RESSOURCES == null ? 20f : (float) APP_RESSOURCES.getDisplayMetrics().density));
+        return (int) (dp * (APP_RESSOURCES == null ? 20f : APP_RESSOURCES.getDisplayMetrics().density));
     }
 
     public static void setTooltip(final View view, @StringRes final int textId) {
@@ -104,18 +104,18 @@ public class ViewUtils {
         return viewGroup;
     }
 
-    public static  CheckBox addCheckboxProperty(final Activity activity, final ViewGroup viewGroup, @StringRes final int textId, final int iconId, @StringRes final int infoTextId) {
-        return addCheckboxProperty(activity, viewGroup, activity.getString(textId), iconId, infoTextId);
+    public static  CheckBox addCheckboxItem(final Activity activity, final ViewGroup viewGroup, @StringRes final int textId, final int iconId, @StringRes final int infoTextId) {
+        return addCheckboxItem(activity, viewGroup, activity.getString(textId), iconId, infoTextId);
     }
 
-    public static CheckBox addCheckboxProperty(final Activity activity, final ViewGroup viewGroup, @StringRes final int textId, final int iconId) {
-        return addCheckboxProperty(activity, viewGroup, textId, iconId, 0);
+    public static CheckBox addCheckboxItem(final Activity activity, final ViewGroup viewGroup, @StringRes final int textId, final int iconId) {
+        return addCheckboxItem(activity, viewGroup, textId, iconId, 0);
     }
 
-    public static CheckBox addCheckboxProperty(final Activity activity, final ViewGroup viewGroup, final String text, final int iconId, @StringRes final int infoTextId) {
+    public static CheckBox addCheckboxItem(final Activity activity, final ViewGroup viewGroup, final String text, final int iconId, @StringRes final int infoTextId) {
 
-        final View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cache_filter_checkbox_item, viewGroup, false);
-        final CacheFilterCheckboxItemBinding itemBinding = CacheFilterCheckboxItemBinding.bind(itemView);
+        final View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.checkbox_item, viewGroup, false);
+        final CheckboxItemBinding itemBinding = CheckboxItemBinding.bind(itemView);
         itemBinding.itemText.setText(text);
         if (iconId > -1) {
             itemBinding.itemIcon.setImageResource(iconId);
@@ -165,6 +165,14 @@ public class ViewUtils {
         }
 
         return false;
+    }
+
+    public static int getMinimalWidth(final Context ctx, final String text, final int styleId) {
+        final TextView tv = new TextView(ctx, null, 0, styleId);
+        tv.setText(text);
+        tv.measure(0, 0);
+        return tv.getMeasuredWidth();
+
     }
 
 }

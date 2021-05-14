@@ -119,14 +119,14 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         for (Map.Entry<CacheAttribute, Boolean> entry : filter.getAttributes().entrySet()) {
             setAttributeState(entry.getKey(), entry.getValue());
         }
-        inverse.select(filter.isInverse() ? 1 : 0);
+        inverse.selectValue(filter.isInverse() ? 1 : 0);
     }
 
     @Override
     public AttributesGeocacheFilter createFilterFromView() {
         final AttributesGeocacheFilter filter = createFilter();
         filter.setAttributes(this.attributeState);
-        filter.setInverse(inverse.getSelected() > 0);
+        filter.setInverse(inverse.getSelectedValue() > 0);
         return filter;
     }
 

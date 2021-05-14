@@ -63,10 +63,6 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable> e
         return maxRangeValue;
     }
 
-    public void setValuesAsFloat(final Float minValue, final Float maxValue) {
-        this.minRangeValue = parseFloat(minValue);
-        this.maxRangeValue = parseFloat(maxValue);
-    }
 
     public Collection<T> getValuesInRange(final T[] values) {
         final Set<T> set = new HashSet<>();
@@ -159,13 +155,9 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable> e
     protected String getUserDisplayableConfig() {
 
         final StringBuilder sb = new StringBuilder();
-        if (minRangeValue != null) {
-            sb.append(minRangeValue);
-        }
+        sb.append(minRangeValue == null ? "*" : minRangeValue);
         sb.append("-");
-        if (maxRangeValue != null) {
-            sb.append(maxRangeValue);
-        }
+        sb.append(maxRangeValue == null ? "*" : maxRangeValue);
         return sb.toString();
     }
 

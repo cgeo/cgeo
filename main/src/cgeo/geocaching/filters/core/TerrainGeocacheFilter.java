@@ -10,7 +10,7 @@ public  class TerrainGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     @Override
     public Float getValue(final Geocache cache) {
-        return cache.getTerrain();
+        return cache.getTerrain() < 0.5f ? null : cache.getTerrain();
     }
 
     @Override

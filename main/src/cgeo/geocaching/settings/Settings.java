@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCMemberState;
+import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
@@ -506,7 +507,7 @@ public class Settings {
     public static boolean isALCAdvanced() {
         return getBoolean(R.string.pref_alc_advanced, false);
     }
- 
+
      public static String getALCLauncher() {
         return getString(R.string.pref_alc_launcher, "");
     }
@@ -1769,12 +1770,13 @@ public class Settings {
         putInt(R.string.pref_localstorage_version, newVersion);
     }
 
-    public static String getCacheFilterConfig() {
-        return getString(R.string.pref_cache_filter_config, null);
+    public static String getCacheFilterConfig(final CacheListType listType) {
+        return getStringDirect(getKey(R.string.pref_cache_filter_config) + "_" + (listType == null ? "default" : listType.name()),
+            null);
     }
 
-    public static void setCacheFilterConfig(final String config) {
-        putString(R.string.pref_cache_filter_config, config);
+    public static void setCacheFilterConfig(final CacheListType listType, final String config) {
+        putStringDirect(getKey(R.string.pref_cache_filter_config) + "_" + (listType == null ? "default" : listType.name()), config);
     }
 
     public static int getListInitialLoadLimit() {

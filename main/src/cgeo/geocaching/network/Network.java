@@ -314,6 +314,10 @@ public final class Network {
         }
 
         addHeaders(builder, headers, cacheFile);
+        final Request request = builder.build();
+        if (Log.isDebug()) {
+            Log.d("HTTP-" + request.method() + ": " + request.url());
+        }
         return RxOkHttpUtils.request(OK_HTTP_CLIENT, builder.build());
     }
 

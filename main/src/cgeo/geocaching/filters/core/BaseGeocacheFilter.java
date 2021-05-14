@@ -46,4 +46,5 @@ public abstract class BaseGeocacheFilter implements IGeocacheFilter {
     protected String getUserDisplayableConfig() {
         return null;
     }
+
 }

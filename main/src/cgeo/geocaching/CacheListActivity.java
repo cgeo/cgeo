@@ -48,6 +48,7 @@ import cgeo.geocaching.loaders.NullGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.PocketGeocacheListLoader;
+import cgeo.geocaching.loaders.SearchFilterGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.DefaultMap;
@@ -511,6 +512,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (extras != null) {
             type = Intents.getListType(getIntent());
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
+            if (extras.getString(Intents.EXTRA_FILTER) != null) {
+                Settings.setCacheFilterConfig(type, extras.getString(Intents.EXTRA_FILTER));
+            }
         } else {
             extras = new Bundle();
         }
@@ -526,7 +530,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         setTitle(title);
 
-        currentCacheFilter = GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig());
+        currentCacheFilter = GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig(type));
+
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
@@ -1272,7 +1277,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (enableMore) {
             setViewGone(listFooterLine2);
             setView(listFooterLine1, res.getString(R.string.caches_more_caches) + (listSize > 0 ? " (" + res.getString(R.string.caches_more_caches_currently) + ": " + listSize + ")" : ""), new MoreCachesListener());
-        } else if (!type.isStoredInDatabase) {
+        } else if (!type.isStoredInDatabase && type != CacheListType.SEARCH_FILTER) {
             setViewGone(listFooterLine2);
             setView(listFooterLine1, res.getString(CollectionUtils.isEmpty(cacheList) ? R.string.caches_no_cache : R.string.caches_more_caches_no), null);
         } else if (resultIsOfflineAndLimited()) {
@@ -1348,13 +1353,30 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]), currentCacheFilter);
         } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             currentCacheFilter = GeocacheFilter.createFromConfig(data.getStringExtra(GeocacheFilterActivity.EXTRA_FILTER_RESULT));
-            Settings.setCacheFilterConfig(currentCacheFilter.toConfig());
+            Settings.setCacheFilterConfig(type, currentCacheFilter.toConfig());
             setFilter(currentFilter, currentCacheFilter);
+
+            if (type == CacheListType.SEARCH_FILTER) {
+                refreshFilterForFilterSearch();
+            }
         }
 
         if (type.isStoredInDatabase) {
             refreshCurrentList();
         }
+    }
+
+    private void refreshFilterForFilterSearch() {
+        if (type != CacheListType.SEARCH_FILTER) {
+            return;
+        }
+        //reload filter
+        final Bundle extras = new Bundle();
+        LoaderManager.getInstance(this).destroyLoader(CacheListType.SEARCH_FILTER.getLoaderId());
+        extras.putString(Intents.EXTRA_FILTER, currentCacheFilter.toConfig());
+        currentLoader = (SearchFilterGeocacheListLoader) LoaderManager.getInstance(this).restartLoader(CacheListType.SEARCH_FILTER.getLoaderId(), extras, this);
+
+
     }
 
     public void refreshStored(final List<Geocache> caches) {
@@ -1721,6 +1743,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
+    public static void startActivityFilter(final Context context, final GeocacheFilter filter) {
+        final Intent cachesIntent = new Intent(context, CacheListActivity.class);
+        Intents.putListType(cachesIntent, CacheListType.SEARCH_FILTER);
+        cachesIntent.putExtra(Intents.EXTRA_FILTER, filter.toConfig());
+        context.startActivity(cachesIntent);
+    }
+
     /**
      * Check if a given username is valid (non blank), and show a toast if it isn't.
      *
@@ -1943,6 +1972,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 markerId = EmojiUtils.NO_EMOJI;
                 if (username != null) {
                     loader = new FinderGeocacheListLoader(this, username);
+                }
+                break;
+            case SEARCH_FILTER:
+                final String filterConfig = extras.getString(Intents.EXTRA_FILTER);
+                markerId = EmojiUtils.NO_EMOJI;
+                if (filterConfig != null) {
+                    loader = new SearchFilterGeocacheListLoader(this, GeocacheFilter.createFromConfig(filterConfig));
                 }
                 break;
             case OWNER:

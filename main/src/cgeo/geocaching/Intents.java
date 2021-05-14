@@ -59,6 +59,7 @@ public class Intents {
     public static final String EXTRA_SELECTDIR = PREFIX + "selectDir";
     public static final String EXTRA_TRACKING_CODE = PREFIX + "tracking_code";
     public static final String EXTRA_USERNAME = PREFIX + "username";
+    public static final String EXTRA_FILTER = PREFIX + "filter";
     public static final String EXTRA_WAYPOINT_ID = PREFIX + "waypoint_id";
     public static final String EXTRA_POCKET_GUID = PREFIX + "pocket_guid";
 
