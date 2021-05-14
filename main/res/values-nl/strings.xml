@@ -435,6 +435,10 @@
     <string name="cache_filter_terrain">Terrein</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Attributen</string>
+    <string name="cache_filter_favorites">Favorieten</string>
+    <string name="cache_filter_distance">Afstand</string>
+    <string name="cache_filter_include">Opnemen</string>
+    <string name="cache_filter_exclude">Uitsluiten</string>
     <string name="cache_filter_stringfilter_matchcase">Hoofdlettergevoelig</string>
     <string name="cache_filter_stringfilter_info">Met de optie \'Patroon\', gebruik joker-tekens * en ?. * vertegenwoordigt nul, één of meerdere tekens, ? vertegenwoordigt één enkel teken. Bijvoorbeeld, het patroon \'H?mburg*\' zal overeenkomen met bijvoorbeeld \'Homburg\' of \'Hamburg \'s nachts\' maar niet met \'A day in Hamburg\' of \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Is niet aanwezig</string>
@@ -444,6 +448,9 @@
     <string name="cache_filter_stringfilter_type_ends_with">Eindigt met</string>
     <string name="cache_filter_stringfilter_type_pattern">Patroon</string>
     <string name="cache_filter_checkboxlist_selectallnone">Selecteer alles/niets</string>
+    <string name="cache_filter_favorites_absolute">Absoluut</string>
+    <string name="cache_filter_favorites_percentage">Percentage</string>
+    <string name="cache_filter_distance_use_current_position">Huidige positie gebruiken</string>
     <!-- about -->
     <string name="about_version">Versie</string>
     <string name="about_changelog">Changelog</string>
@@ -676,6 +683,7 @@
     <string name="init_user_confirmation">Ik weet wat ik doe</string>
     <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
     <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
+    <string name="init_backup_unnecessary">Database is leeg, geen back-up nodig. Toch een back-up maken?</string>
     <string name="init_backup_folder_exists_error">Kan geen nieuwe back-up map maken. Heb je in de laatste minuut al een back-up gemaakt?</string>
     <string name="init_backup_no_backup_available">Er is geen back-up bestand beschikbaar.</string>
     <string name="backup_confirm_overwrite">Dit zal je oudste bestaande back-up map verwijderen van %s. \nWil je doorgaan?</string>
@@ -1172,6 +1180,7 @@
     <string name="context_share_as_link">Link delen</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
+    <string name="create_internal_cache_currentlist">Huidige lijst gebruiken</string>
     <string name="internal_cache_default_name">Door gebruiker gedefinieerde cache #%1$d</string>
     <string name="internal_cache_default_description">Dit is een gebruiker gedefinieerde cache</string>
     <string name="internal_cache_default_owner">Jij</string>
@@ -1327,6 +1336,7 @@
     <string name="search_own_caches">Zoek mijn eigen caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Bladwijzerlijst</string>
+    <string name="search_pocket_is_new">nieuw</string>
     <string name="search_pocket_and_bookmark_loading">Laden van een lijst van Pocket Queries en bladwijzerlijsten</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
