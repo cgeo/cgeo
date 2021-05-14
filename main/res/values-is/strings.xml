@@ -357,7 +357,6 @@
     <string name="init_backup_running">Bý til öryggisafrit af gagnagrunninum…</string>
     <string name="init_backup_restore">Endurheimta</string>
     <string name="init_backup_failed">Það mistókst að taka afrit af gagnagrunni c:geo.</string>
-    <string name="init_backup_unnecessary">Gagnagrunnurinn er tómur, óþarfi að taka öryggisafrit.</string>
     <string name="init_backup_no_backup_available">Það er engin öryggisafritsskrá tiltæk.</string>
     <string name="init_restore_success">Endurheimt lokið.</string>
     <string name="settings_info_offline_maps_title">Upplýsingar um kort án nettengingar</string>

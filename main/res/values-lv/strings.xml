@@ -567,7 +567,6 @@
     <string name="init_backup_restore">Atjaunot</string>
     <string name="init_backup_success">c:geo datubāze tika veiksmīgi kopēta uz:</string>
     <string name="init_backup_failed">c:geo datubāzes rezerves kopijas izveide neizdevās.</string>
-    <string name="init_backup_unnecessary">Datubāze ir tukša, rezerves kopija nav nepieciešama.</string>
     <string name="init_backup_no_backup_available">Nav pieejams backup fails.</string>
     <string name="init_restore_success">Atjaunošana pabeigta.</string>
     <string name="init_restore_failed_dbrecreated">Atjaunošana nav izdevusies: Dublētais fails ir bojāts, datu bāzi bija nepieciešams izveidot no jauna.</string>

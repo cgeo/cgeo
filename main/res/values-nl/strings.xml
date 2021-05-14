@@ -434,6 +434,7 @@
     <string name="about_system_write_logcat_type_extended">Uitgebreid</string>
     <string name="about_system_write_logcat_success">Logbestand \"%1$s\" geschreven naar map \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Fout bij schrijven naar logbestand</string>
+    <string name="about_system_write_infos_downloadmanager">Bekijk downloads</string>
     <string name="changelog_github">Lijst met alle wijzigingen</string>
     <string name="about_nutshellmanual">Online handleiding</string>
     <string name="about_contributors_carnerodetails">als vader van c:geo</string>
@@ -480,6 +481,8 @@
     <string name="confirm_data_dir_move_title">Geocache gegevensmap verplaatsen?</string>
     <string name="confirm_data_dir_move">Het verplaatsen van de geocache-gegevens kan mogelijk erg lang duren, afhankelijk van uw apparaat en de hoeveelheid gegevens.</string>
     <string name="settings_title_basicmembers">Opties voor Basis leden</string>
+    <string name="settings_title_navigation">Route/navigatie</string>
+    <string name="settings_summary_navigation">Configureer offline routing, kies voorkeur navigatiemethoden en selecteer externe navigatie-apps.</string>
     <string name="settings_title_system">Systeem</string>
     <string name="settings_summary_system">Systeemspecifieke instellingen en foutopsporingsopties.</string>
     <string name="settings_title_navigation_menu">Navigatiemenu</string>
@@ -640,7 +643,7 @@
     <string name="init_user_confirmation">Ik weet wat ik doe</string>
     <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
     <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
-    <string name="init_backup_unnecessary">Database is leeg, backup niet nodig.</string>
+    <string name="init_backup_unnecessary">Database is leeg, geen back-up nodig. Toch een back-up maken?</string>
     <string name="init_backup_folder_exists_error">Kan geen nieuwe back-up map maken. Heb je in de laatste minuut al een back-up gemaakt?</string>
     <string name="init_backup_no_backup_available">Er is geen back-up bestand beschikbaar.</string>
     <string name="backup_confirm_overwrite">Dit zal je oudste bestaande back-up map verwijderen van %s. \nWil je doorgaan?</string>
@@ -966,9 +969,9 @@
     <string name="cache_personal_note_limit">Privé cachenotitie limiet</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Deze privé cachenotitie zal na %d karakters worden afgekapt door Geocaching.com.</string>
     <string name="cache_personal_note_upload">Uploaden</string>
-    <string name="cache_personal_note_uploading">Uploading persoonlijke notitie</string>
+    <string name="cache_personal_note_uploading">Persoonlijke notitie uploaden</string>
     <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
-    <string name="cache_personal_note_upload_error">Fout bij uploaden privé cachenotitie</string>
+    <string name="cache_personal_note_upload_error">Fout bij uploaden persoonlijke notitie</string>
     <string name="cache_personal_note_upload_cancelled">Persoonlijke notitie uploaden geannuleerd</string>
     <string name="cache_description">Omschrijving</string>
     <string name="cache_description_table_note">Omschrijving bevat een tabel-layout welke misschien op %s bekeken moet worden.</string>
@@ -1183,6 +1186,7 @@
     <string name="waypoint_coordinates">Coördinaten</string>
     <string name="waypoint_cache_coordinates">Cache coördinaten</string>
     <string name="waypoint_calculate_coordinates">Coördinaten berekenen</string>
+    <string name="waypoint_calculated_coordinates">Berekende coördinaten</string>
     <string name="waypoint_custom">Aangepast</string>
     <string name="waypoint_my_coordinates">Mijn coördinaten</string>
     <string name="waypoint_bearing">Richting</string>
@@ -1796,6 +1800,8 @@
     <string name="individual_route_error_toggling_waypoint">fout bij aan-/uit-zetten waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Niet beschikbaar in één waypoint modus</string>
     <string name="map_sort_individual_route">Individuele route sorteren</string>
+    <string name="map_export_individual_route">Exporteer als route</string>
+    <string name="map_export_individual_route_as_track">Exporteer als spoor</string>
     <string name="map_load_individual_route">Individuele route laden</string>
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
@@ -1911,6 +1917,8 @@
     <string name="mapserver_openandromaps_themes_info">Gedetailleerde kaart thema, gebouwd voor \"OpenAndroMaps\" kaarten</string>
     <string name="mapserver_freizeitkarte_info">Gedetailleerde kaarten, vereisen een van de \"freizeitkarte\" kaartthema\'s.</string>
     <string name="mapserver_freizeitkarte_themes_info">Gedetailleerde kaart thema, gebouwd voor \"Freizeitkarte\" kaarten</string>
+    <string name="mapserver_hylly_info">Gedetailleerde kaarten voor Finland, vereisen één van de \"Hylly\" kaart thema\'s</string>
+    <string name="mapserver_hylly_themes_info">Gedetailleerd kaart thema, gebouwd voor \"Hylly\" kaarten</string>
     <string name="brouter_info">Offline routering service</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>

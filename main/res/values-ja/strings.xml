@@ -569,7 +569,7 @@
     <string name="init_summary_address">メイン画面での現在地を座標値の代わりに地名で表示</string>
     <string name="init_select_language">言語の選択</string>
     <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
-    <string name="init_use_default_language">システムのデフォルト言語</string>
+    <string name="init_use_default_language">システムの言語</string>
     <string name="init_category_exclude">キャッシュを除外</string>
     <string name="init_exclude">所有または発見したキャッシュ除く</string>
     <string name="init_summary_exclude">自分で所有または発見したキャッシュは除く</string>
@@ -641,7 +641,6 @@
     <string name="init_user_confirmation">はい、了承します</string>
     <string name="init_backup_success">c:geoのデータベースは正常にバックアップされました: </string>
     <string name="init_backup_failed">c:geoのデータベースをバックアップできませんでした</string>
-    <string name="init_backup_unnecessary">キャッシュのデータベースは空です。バックアップの必要はありません</string>
     <string name="init_backup_folder_exists_error">新しいバックアップフォルダを作成できませんでした。1分以内に連続してバックアップはできません</string>
     <string name="init_backup_no_backup_available">バックアップファイルはありません。</string>
     <string name="backup_confirm_overwrite">一番古いバックアップ(%s)は削除されます。\n続けますか?</string>
@@ -1172,6 +1171,7 @@
     <string name="waypoint_coordinates">座標</string>
     <string name="waypoint_cache_coordinates">キャッシュ座標</string>
     <string name="waypoint_calculate_coordinates">座標を計算</string>
+    <string name="waypoint_calculated_coordinates">計算済み座標</string>
     <string name="waypoint_custom">カスタム</string>
     <string name="waypoint_my_coordinates">現在地</string>
     <string name="waypoint_bearing">方位(度[°])</string>
@@ -1881,6 +1881,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="mapserver_openandromaps_themes_info">「OpenAndroMaps」用の詳細な地図テーマ</string>
     <string name="mapserver_freizeitkarte_info">詳細な地図は「Freizeitkartte」用の地図テーマが必要です。</string>
     <string name="mapserver_freizeitkarte_themes_info">「Freizeitkarte」用の詳細な地図テーマ</string>
+    <string name="mapserver_hylly_info">フィンランドの詳細な地図は「Hylly」用の地図テーマが必要です。</string>
+    <string name="mapserver_hylly_themes_info">「Hylly」用の詳細な地図テーマ</string>
     <string name="brouter_info">オフラインルート検索</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
