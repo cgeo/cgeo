@@ -503,6 +503,14 @@ public class Settings {
         return getGCMemberStatus().isPremium();
     }
 
+    public static boolean isALCAdvanced() {
+        return getBoolean(R.string.pref_alc_advanced, false);
+    }
+ 
+     public static String getALCLauncher() {
+        return getString(R.string.pref_alc_launcher, "");
+    }
+
     public static GCMemberState getGCMemberStatus() {
         return GCMemberState.fromString(getString(R.string.pref_memberstatus, ""));
     }

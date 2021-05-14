@@ -63,7 +63,12 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public String getCacheUrl(@NonNull final Geocache cache) {
-        return CACHE_URL + cache.getCacheId();
+        final String launcher = Settings.getALCLauncher();
+        if (StringUtils.isEmpty(launcher)) {
+            return CACHE_URL + cache.getCacheId();
+        } else {
+            return launcher + cache.getGeocode().substring(2);
+        }
     }
 
     @Override
