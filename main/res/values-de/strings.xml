@@ -435,6 +435,10 @@
     <string name="cache_filter_terrain">Gelände</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Attribute</string>
+    <string name="cache_filter_favorites">Favoriten</string>
+    <string name="cache_filter_distance">Entfernung</string>
+    <string name="cache_filter_include">Mit</string>
+    <string name="cache_filter_exclude">Ohne</string>
     <string name="cache_filter_stringfilter_matchcase">Groß-/Kleinschreibung beachten</string>
     <string name="cache_filter_stringfilter_info">Bei Option \'Muster\' können die Platzhalter * und ? Verwendet werden. * steht für 0, 1 oder mehrere Zeichen, ? steht für ein einzelnes Zeichen. Das Muster \"H?mburg*\" würde zum Beispiel \"Homburg\" oder \"Hamburg bei Nacht\" entsprechen, aber nicht \"Ein Tag in Hamburg\" oder \"Hahmburg\"</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Nicht vorhanden</string>
@@ -443,7 +447,10 @@
     <string name="cache_filter_stringfilter_type_starts_with">Beginnt mit</string>
     <string name="cache_filter_stringfilter_type_ends_with">Endet mit</string>
     <string name="cache_filter_stringfilter_type_pattern">Muster</string>
-    <string name="cache_filter_checkboxlist_selectallnone">Alles/Nichta auswählen</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Alles/Nichts auswählen</string>
+    <string name="cache_filter_favorites_absolute">Absolut</string>
+    <string name="cache_filter_favorites_percentage">Prozentual</string>
+    <string name="cache_filter_distance_use_current_position">Eigene Position verwenden</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
