@@ -5,7 +5,7 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.filters.core.AttributesGeocacheFilter;
 import cgeo.geocaching.ui.ToggleButtonGroup;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
-import static cgeo.geocaching.ui.ViewUtils.setToolTip;
+import static cgeo.geocaching.ui.ViewUtils.setTooltip;
 
 import android.graphics.Color;
 import android.view.View;
@@ -51,15 +51,15 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         if (state == null) {
             icon.setColorFilter(Color.argb(150, 200, 200, 200));
             strikeThrough.setVisibility(View.INVISIBLE);
-            setToolTip(v, ca.getL10n(true));
+            setTooltip(v, ca.getL10n(true));
         } else if (state) {
             icon.clearColorFilter();
             strikeThrough.setVisibility(View.INVISIBLE);
-            setToolTip(v, ca.getL10n(true));
+            setTooltip(v, ca.getL10n(true));
         } else {
             icon.clearColorFilter();
             strikeThrough.setVisibility(View.VISIBLE);
-            setToolTip(v, ca.getL10n(false));
+            setTooltip(v, ca.getL10n(false));
         }
     }
 
@@ -146,7 +146,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         strikeThroughImage.setVisibility(View.INVISIBLE);
         attributeLayout.addView(strikeThroughImage);
 
-        setToolTip(attributeLayout, ca.getL10n(true));
+        setTooltip(attributeLayout, ca.getL10n(true));
 
         return attributeLayout;
     }

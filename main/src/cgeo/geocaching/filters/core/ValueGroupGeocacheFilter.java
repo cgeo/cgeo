@@ -1,7 +1,9 @@
 package cgeo.geocaching.filters.core;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -90,6 +92,18 @@ public abstract class ValueGroupGeocacheFilter<T> extends BaseGeocacheFilter {
         } else {
             sqlBuilder.addWhereAlwaysInclude();
         }
+    }
+
+    @Override
+    protected String getUserDisplayableConfig() {
+        if (getValues().isEmpty()) {
+            return LocalizationUtils.getString(R.string.cache_filter_userdisplay_none);
+        }
+        if (getValues().size() > 1) {
+            return LocalizationUtils.getString(R.string.cache_filter_userdisplay_multi);
+        }
+
+        return valueToString(getValues().iterator().next());
     }
 
 

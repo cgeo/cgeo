@@ -3,6 +3,8 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 
+import org.apache.commons.lang3.StringUtils;
+
 
 public abstract class StringGeocacheFilter extends BaseGeocacheFilter {
 
@@ -49,4 +51,10 @@ public abstract class StringGeocacheFilter extends BaseGeocacheFilter {
             sqlBuilder.addWhereAlwaysInclude();
         }
     }
+
+    @Override
+    protected String getUserDisplayableConfig() {
+        return StringUtils.isBlank(stringFilter.getTextValue()) ? null : stringFilter.getTextValue();
+    }
+
 }

@@ -5,8 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CacheslistItemBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.filter.IFilter;
-import cgeo.geocaching.filters.core.GeocacheFilterUtils;
-import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
@@ -42,7 +41,6 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import java.lang.ref.WeakReference;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -64,7 +62,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     private long lastSort = 0L;
     private boolean selectMode = false;
     private IFilter currentFilter = null;
-    private IGeocacheFilter currentGeocacheFilter = null;
+    private GeocacheFilter currentGeocacheFilter = null;
     private List<Geocache> originalList = null;
     private final boolean isLiveList = Settings.isLiveList();
 
@@ -217,7 +215,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
      * Called when a new page of caches was loaded.
      */
     public void reFilter() {
-        if (currentFilter != null || currentGeocacheFilter != null) {
+        if (currentFilter != null || (currentGeocacheFilter != null && currentGeocacheFilter.hasFilter())) {
             // Back up the list again
             originalList = new ArrayList<>(list);
 
@@ -228,16 +226,12 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     /**
      * Called after a user action on the filter menu.
      */
-    public void setFilter(final IFilter filter, final String advancedFilter) {
+    public void setFilter(final IFilter filter, final GeocacheFilter advancedFilter) {
 
-        IGeocacheFilter gcFilter = null;
+        GeocacheFilter gcFilter = null;
         if (advancedFilter != null) {
-            try {
-                gcFilter = GeocacheFilterUtils.createFilter(advancedFilter);
-            } catch (ParseException pe) {
-                Log.w("Could not parse filter: " + advancedFilter, pe);
-            }
-        }
+            gcFilter = advancedFilter;
+         }
 
         // Backup current caches list if it isn't backed up yet
         if (originalList == null) {
@@ -246,7 +240,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         // If there is already a filter in place, this is a request to change or clear the filter, so we have to
         // replace the original cache list
-        if (currentFilter != null || currentGeocacheFilter != null) {
+        if (currentFilter != null || (currentGeocacheFilter != null && currentGeocacheFilter.hasFilter())) {
             list.clear();
             list.addAll(originalList);
         }
@@ -264,28 +258,18 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         if (currentFilter != null) {
             currentFilter.filter(list);
         }
-        if (currentGeocacheFilter != null) {
-            final List<Geocache> itemsToKeep = new ArrayList<>();
-            for (final Geocache item : list) {
-                final Boolean fr = currentGeocacheFilter.filter(item);
-                if (fr != null && fr) {
-                    itemsToKeep.add(item);
-                }
-            }
-
-            list.clear();
-            //note that since both "list" and "itemsToKeep" are ArrayLists, the addAll-operation is very fast (two arraycopies of the references)
-            list.addAll(itemsToKeep);
+        if (currentGeocacheFilter != null && currentGeocacheFilter.hasFilter()) {
+            currentGeocacheFilter.filterList(list);
         }
     }
 
     public boolean isFiltered() {
-        return currentFilter != null || currentGeocacheFilter != null;
+        return currentFilter != null || (currentGeocacheFilter != null && currentGeocacheFilter.hasFilter());
     }
 
     public String getFilterName() {
         return (currentFilter == null ? "-" : currentFilter.getName()) + "|" +
-            (currentGeocacheFilter == null ? "-" : GeocacheFilterUtils.getFilterConfig(currentGeocacheFilter));
+            (currentGeocacheFilter == null || !currentGeocacheFilter.hasFilter() ? "-" : currentGeocacheFilter.toUserDisplayableString());
     }
 
     public int getCheckedCount() {

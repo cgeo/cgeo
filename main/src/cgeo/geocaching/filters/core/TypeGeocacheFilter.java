@@ -29,4 +29,6 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType> {
     public String valueToSqlValue(final CacheType value) {
         return value.id;
     }
+
+
 }

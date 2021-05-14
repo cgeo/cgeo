@@ -23,4 +23,8 @@ public class NotGeocacheFilter extends AndGeocacheFilter {
         sqlBuilder.closeWhere();
     }
 
+    @Override
+    public String toUserDisplayableString(final int level) {
+        return "-" + super.toUserDisplayableString(level);
+    }
 }

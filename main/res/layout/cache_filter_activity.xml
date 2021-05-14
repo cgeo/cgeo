@@ -19,24 +19,37 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/filter_additem"
+            android:id="@+id/filter_storage_manage"
             style="@style/button_icon"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/ic_menu_add" />
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_menu_manage_list" />
 
         <ImageButton
-            android:id="@+id/filter_clear"
+            android:id="@+id/filter_storage_save"
             style="@style/button_icon"
-            android:layout_toLeftOf="@+id/filter_apply"
-            android:src="@drawable/ic_menu_delete" />
+            android:layout_toRightOf="@+id/filter_storage_manage"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_menu_save" />
 
-        <ImageButton
-            android:id="@+id/filter_apply"
-            style="@style/button_icon"
+        <TextView
+            android:id="@+id/filter_storage_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/filter_storage_save"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_menu_send" />
+            android:textColor="?text_color"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            />
 
     </RelativeLayout>
+
+    <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="1dp" />
 
     <LinearLayout
         android:id="@+id/filter_props_checkboxes"
@@ -45,6 +58,19 @@
         android:orientation="vertical"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/filter_additem"
+            style="@style/button_icon"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_menu_add" />
+
+    </RelativeLayout>
+
 
     <View
         style="@style/separator_horizontal"

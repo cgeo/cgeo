@@ -20,4 +20,8 @@ public interface IGeocacheFilter extends IExpression<IGeocacheFilter> {
         sqlBuilder.addWhereAlwaysInclude();
     }
 
+    default String toUserDisplayableString(final int level) {
+        return toString();
+    }
+
 }
