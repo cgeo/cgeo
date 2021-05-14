@@ -435,6 +435,10 @@
     <string name="cache_filter_terrain">Έδαφος</string>
     <string name="cache_filter_status">Κατάσταση</string>
     <string name="cache_filter_attributes">Ιδιότητες</string>
+    <string name="cache_filter_favorites">Αγαπημένες</string>
+    <string name="cache_filter_distance">Απόσταση</string>
+    <string name="cache_filter_include">Συμπερίληψη</string>
+    <string name="cache_filter_exclude">Εξαίρεση</string>
     <string name="cache_filter_stringfilter_matchcase">Ταίριασμα Πεζών/ Κεφαλαίων</string>
     <string name="cache_filter_stringfilter_info">Με την επιλογή \'Μοτίβο\', χρησιμοποιήστε τα μπαλαντέρ * και ?. Το * αντιπροσωπεύει κανέναν, έναν ή πολλούς χαρακτήρες, το ? αντιπροσωπεύει έναν μόνο χαρακτήρα. Για παράδειγμα, το μοτίβο \'H?mburg*\' θα ταιριάξει π.χ. \'Homburg\' ή \'Hamburg at Night\' αλλά όχι \'A day in Hamburg\' ή \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Δεν Είναι Παρόν</string>
@@ -444,6 +448,9 @@
     <string name="cache_filter_stringfilter_type_ends_with">Τελειώνει σε</string>
     <string name="cache_filter_stringfilter_type_pattern">Μοτίβο</string>
     <string name="cache_filter_checkboxlist_selectallnone">Επιλογή όλων/κανένα</string>
+    <string name="cache_filter_favorites_absolute">Απόλυτη</string>
+    <string name="cache_filter_favorites_percentage">Ποσοστό</string>
+    <string name="cache_filter_distance_use_current_position">Χρήση τρέχουσας θέσης</string>
     <!-- about -->
     <string name="about_version">Έκδοση</string>
     <string name="about_changelog">Τι νέο υπάρχει;</string>
