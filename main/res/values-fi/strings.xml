@@ -435,6 +435,10 @@
     <string name="cache_filter_terrain">Maasto</string>
     <string name="cache_filter_status">Tila</string>
     <string name="cache_filter_attributes">Attribuutit</string>
+    <string name="cache_filter_favorites">Suosikit</string>
+    <string name="cache_filter_distance">Etäisyys</string>
+    <string name="cache_filter_include">Sisällytä</string>
+    <string name="cache_filter_exclude">Rajaa pois</string>
     <string name="cache_filter_stringfilter_matchcase">Sama kirjainkoko</string>
     <string name="cache_filter_stringfilter_info">Valinnalla \'Kuvio\', käytä jokerimerkkejä * ja ?. * edustaa nollaa, yhtä tai useampaa merkkiä, ? edustaa yhtä merkkiä. Esimerkiksi kuvio \'H?mburg*\' vastaa esim. \'Homburg\' tai \'Hampuri yöllä\', mutta ei \'Hahmburg\' tai \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Ei Ole Läsnä</string>
@@ -444,6 +448,9 @@
     <string name="cache_filter_stringfilter_type_ends_with">Päättyy</string>
     <string name="cache_filter_stringfilter_type_pattern">Kuvio</string>
     <string name="cache_filter_checkboxlist_selectallnone">Valitse kaikki / ei mitään</string>
+    <string name="cache_filter_favorites_absolute">Absoluuttinen</string>
+    <string name="cache_filter_favorites_percentage">Prosenttiosuus</string>
+    <string name="cache_filter_distance_use_current_position">Käytä nykyistä sijaintia</string>
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
@@ -676,6 +683,7 @@
     <string name="init_user_confirmation">Tiedän mitä olen tekemässä</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
+    <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita. Haluatko silti luoda varmuuskopion?</string>
     <string name="init_backup_folder_exists_error">Uutta varmuuskopiohakemistoa ei voitu luoda. Oletko juuri tehnyt varmuuskopion?</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
     <string name="backup_confirm_overwrite">Tämä poistaa vanhimman olemassa olevan varmuuskopiokansiosi kohteesta %s. \nHaluatko jatkaa?</string>
@@ -1172,6 +1180,7 @@
     <string name="context_share_as_link">Jaa linkki</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="create_internal_cache_short">Uusi kätkö</string>
+    <string name="create_internal_cache_currentlist">Käytä nykyistä listaa</string>
     <string name="internal_cache_default_name">Käyttäjän määrittämä kätkö #%1$d</string>
     <string name="internal_cache_default_description">Tämä on käyttäjän määrittämä kätkö</string>
     <string name="internal_cache_default_owner">Sinä</string>
@@ -1327,6 +1336,7 @@
     <string name="search_own_caches">Etsi minun kätköni</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Kirjanmerkit</string>
+    <string name="search_pocket_is_new">uusi</string>
     <string name="search_pocket_and_bookmark_loading">Ladataan luetteloa Pocket Queries- ja kirjanmerkkilistoista</string>
     <!-- trackable -->
     <string name="trackable">Reissaaja</string>
