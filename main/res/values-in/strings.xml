@@ -445,7 +445,6 @@
     <string name="init_backup_restore">Pulihkan</string>
     <string name="init_backup_success">c:geo\'s database telah berhasil di salin ke:</string>
     <string name="init_backup_failed">Cadangan data dari c:geo database yang gagal.</string>
-    <string name="init_backup_unnecessary">Database kosong, tidak perlu cadangan.</string>
     <string name="init_backup_no_backup_available">Tidak ada file cadangan yang tersedia.</string>
     <string name="init_restore_success">Pemulihan selesai.</string>
     <string name="init_restore_running">Pemulihan cache database&#8230;</string>

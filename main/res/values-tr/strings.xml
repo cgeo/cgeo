@@ -436,6 +436,7 @@
     <string name="cache_filter_status">Durum</string>
     <string name="cache_filter_attributes">Özellikler</string>
     <string name="cache_filter_stringfilter_matchcase">Büyük-Küçük Harf</string>
+    <string name="cache_filter_stringfilter_info">‘Pattern’ opsiyonu ile şu joker karakterleri kullanın: * ve ?.* sıfır, bir veya birden fazla karakteri, ? ise tek bir karakteri temsil eder. Örneğin , ‘H?mburg*’ araması ‘Homburg’ veya ‘Homburg at Night’ ile eşleşecektir ancak ‘A day in Hamburg’ veya ‘Hahmburg’ ile eşleşmeyecektir.</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Mevcut Değil</string>
     <string name="cache_filter_stringfilter_type_is_present">Mevcut</string>
     <string name="cache_filter_stringfilter_type_contains">Şunu İçeriyorsa</string>
@@ -675,7 +676,6 @@
     <string name="init_user_confirmation">Ne yaptığımı biliyorum</string>
     <string name="init_backup_success">c:geo\'nun veritabanı başarıyla kopyalandı:</string>
     <string name="init_backup_failed">c:geo\'nun veritabanı yedeklemesi başarısız oldu.</string>
-    <string name="init_backup_unnecessary">Veri tabanı boş, yedekleme gerekli değil.</string>
     <string name="init_backup_folder_exists_error">Yeni bir yedekleme klasörü oluşturulamıyor. Son zamanlarda bir yedekleme yaptınız mı?</string>
     <string name="init_backup_no_backup_available">Mevcut yedekleme dosyası bulunmuyor.</string>
     <string name="backup_confirm_overwrite">Bu işlem, %s\'de bulunan mevcut en eski yedekleme dizininizi silecektir. \nDevam etmek istiyor musunuz?</string>

@@ -435,6 +435,10 @@
     <string name="cache_filter_terrain">Gelände</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Attribute</string>
+    <string name="cache_filter_favorites">Favoriten</string>
+    <string name="cache_filter_distance">Entfernung</string>
+    <string name="cache_filter_include">Mit</string>
+    <string name="cache_filter_exclude">Ohne</string>
     <string name="cache_filter_stringfilter_matchcase">Groß-/Kleinschreibung beachten</string>
     <string name="cache_filter_stringfilter_info">Bei Option \'Muster\' können die Platzhalter * und ? Verwendet werden. * steht für 0, 1 oder mehrere Zeichen, ? steht für ein einzelnes Zeichen. Das Muster \"H?mburg*\" würde zum Beispiel \"Homburg\" oder \"Hamburg bei Nacht\" entsprechen, aber nicht \"Ein Tag in Hamburg\" oder \"Hahmburg\"</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Nicht vorhanden</string>
@@ -443,7 +447,10 @@
     <string name="cache_filter_stringfilter_type_starts_with">Beginnt mit</string>
     <string name="cache_filter_stringfilter_type_ends_with">Endet mit</string>
     <string name="cache_filter_stringfilter_type_pattern">Muster</string>
-    <string name="cache_filter_checkboxlist_selectallnone">Alles/Nichta auswählen</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Alles/Nichts auswählen</string>
+    <string name="cache_filter_favorites_absolute">Absolut</string>
+    <string name="cache_filter_favorites_percentage">Prozentual</string>
+    <string name="cache_filter_distance_use_current_position">Eigene Position verwenden</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
@@ -676,7 +683,7 @@
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
     <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
-    <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
+    <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig. Trotzdem Sicherung erstellen?</string>
     <string name="init_backup_folder_exists_error">Konnte keinen neuen Sicherungsordner erstellen. Hast du innerhalb der letzten Minute bereits eine Sicherung erstellt?</string>
     <string name="init_backup_no_backup_available">Es ist keine Sicherung verfügbar.</string>
     <string name="backup_confirm_overwrite">Dies wird deinen ältesten existierenden Sicherungsordner von %s löschen.\nMöchtest du fortfahren?</string>
@@ -714,7 +721,7 @@
     <string name="init_local_file_system">Lokales Dateisystem</string>
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>
     <string name="init_map_directory_description">Ordner mit Offline-Karten</string>
-    <string name="init_brouter_directory_description">Ordner mit BRouter Routing-Daten</string>
+    <string name="init_brouter_directory_description">Ordner mit BRouter Routingdaten</string>
     <string name="init_updateinterval_title">Aktualisierungsintervall</string>
     <string name="init_updateinterval_description">Erinnert dich alle x Tage an eine Update-Prüfung</string>
     <string name="init_gpx_importexportdir">GPX-Ordner</string>

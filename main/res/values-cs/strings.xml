@@ -312,6 +312,8 @@
     <string name="caches_more_caches_no">Žádné další kešky</string>
     <string name="caches_more_caches_loading">Načítání kešek…</string>
     <string name="caches_more_caches_currently">aktuálně</string>
+    <string name="caches_more_caches_next_x">Načíst dalších %1$d kešek</string>
+    <string name="caches_more_caches_remaining">Načíst zbývající kešky (%1$d / %2$d)</string>
     <string name="caches_downloading">Stahování kešek…\nETA: </string>
     <string name="caches_eta_ltm">Méně než minuta</string>
     <plurals name="caches_eta_mins">
@@ -366,6 +368,7 @@
     <string name="caches_copy_all">Kopírovat vše</string>
     <string name="caches_map_locus_export">Exportovat do Locusu</string>
     <string name="caches_filter">Filtr</string>
+    <string name="caches_filter_menuitem">Nový filtr kešek (experimentální)</string>
     <string name="caches_filter_title">Filtrovat podle</string>
     <string name="caches_filter_size">Velikost</string>
     <string name="caches_filter_type">Typ</string>
@@ -418,6 +421,38 @@
     <string name="list_dialog_rename">Přejmenovat</string>
     <string name="list_not_available">Seznam již není dostupný, přepínání na výchozí seznam</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_option_and_or">Použít NEBO místo A</string>
+    <string name="cache_filter_option_inverse">Invertovat filtr</string>
+    <string name="cache_filter_option_include_inconclusive">Zahrnout neprůkazné shody</string>
+    <string name="cache_filter_option_include_inconclusive_info">Zvolte, zda chce do výsledku zahrnout kešky, když filtr potřebuje informace o kešce, která není k dispozici.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Klepnutím na \'+\' v levém horním rohu přidáte filtr</string>
+    <string name="cache_filter_name">Název</string>
+    <string name="cache_filter_type">Typ</string>
+    <string name="cache_filter_size">Velikost</string>
+    <string name="cache_filter_personalnote">Osobní poznámka</string>
+    <string name="cache_filter_description">Popis</string>
+    <string name="cache_filter_offlinelog">Offline Log</string>
+    <string name="cache_filter_owner">Zakladatel</string>
+    <string name="cache_filter_difficulty">Obtížnost</string>
+    <string name="cache_filter_terrain">Terén</string>
+    <string name="cache_filter_status">Stav</string>
+    <string name="cache_filter_attributes">Atributy</string>
+    <string name="cache_filter_favorites">Oblíbené</string>
+    <string name="cache_filter_distance">Vzdálenost</string>
+    <string name="cache_filter_include">Zahrnout</string>
+    <string name="cache_filter_exclude">Vyloučit</string>
+    <string name="cache_filter_stringfilter_matchcase">Rozlišovat velikost písmen</string>
+    <string name="cache_filter_stringfilter_info">S možností \'Vzor\' použijte zástupné znaky * a ?. * představuje nulu, jeden nebo více znaků, ? představuje jeden jediný znak. Například vzor \'H?mburg*\' bude odpovídat např. \'Homburg\' nebo \'Hamburg v noci\', ale ne \'Den v Hamburgu\' nebo \'Hahmburg\'</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">Není přítomen</string>
+    <string name="cache_filter_stringfilter_type_is_present">Je přítomen</string>
+    <string name="cache_filter_stringfilter_type_contains">Obsahuje</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Začíná na</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Končí na</string>
+    <string name="cache_filter_stringfilter_type_pattern">Vzor</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Vybrat všechny/žádné</string>
+    <string name="cache_filter_favorites_absolute">Absolutní</string>
+    <string name="cache_filter_favorites_percentage">Procentuálně</string>
+    <string name="cache_filter_distance_use_current_position">Použít aktuální pozici</string>
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
@@ -617,6 +652,8 @@
     <string name="init_choose_list">Ptát se na seznam</string>
     <string name="init_summary_choose_list">Ptát se na seznam pro uložení kešky</string>
     <string name="init_listdisplay">Další seznamy</string>
+    <string name="init_list_initial_load_limit">Seznam omezení zatížení</string>
+    <string name="init_summary_list_initial_load_limit">Maximální počet kešek, které se mají načíst z databáze při zobrazení uložených seznamů. Zvolte 0 pro „neomezený“</string>
     <string name="init_summary_listdisplay">Zobrazit v seznamu kešek přítomnost kešek v dalších seznamech</string>
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
@@ -648,7 +685,7 @@
     <string name="init_user_confirmation">Vím, co dělám</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
-    <string name="init_backup_unnecessary">Databáze je prázdná, takže není třeba zálohovat.</string>
+    <string name="init_backup_unnecessary">Databáze je prázdná, není nutná žádná záloha. Přejete si i nadále vytvořit zálohu?</string>
     <string name="init_backup_folder_exists_error">Nelze vytvořit novou složku zálohy. Neprováděli jste za poslední minutu nějakou zálohu?</string>
     <string name="init_backup_no_backup_available">Není dostupný žádný záložní soubor.</string>
     <string name="backup_confirm_overwrite">Tímto odstraníte nejstarší složku zálohy z %s. \nChcete pokračovat?</string>
@@ -1163,6 +1200,7 @@
     <string name="context_share_as_link">Sdílet odkaz</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
+    <string name="create_internal_cache_currentlist">Použít aktuální seznam</string>
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
@@ -1320,6 +1358,7 @@
     <string name="search_own_caches">Hledat moje kešky</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Seznam záložek</string>
+    <string name="search_pocket_is_new">nový</string>
     <string name="search_pocket_and_bookmark_loading">Načítání seznamu Pocket Queries a záložek</string>
     <!-- trackable -->
     <string name="trackable">Sledovatelný předmět</string>

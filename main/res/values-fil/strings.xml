@@ -451,7 +451,6 @@
     <string name="init_backup_restore">I-restore</string>
     <string name="init_backup_success">ang c;geo database ay matagumpay na nakopya patungo:</string>
     <string name="init_backup_failed">Ang pagba-backup ng database ng c;geo ay nabigo.</string>
-    <string name="init_backup_unnecessary">Walang laman ang database, walang mga kinakailangan na backup.</string>
     <string name="init_backup_no_backup_available">Walang back-up file ang handa.</string>
     <string name="init_restore_success">Ang muling pagbabalik ay nakumpleto na.</string>
     <string name="init_restore_running">Ipinapanumbalik ang cache database&#8230;</string>

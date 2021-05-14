@@ -675,7 +675,7 @@
     <string name="init_user_confirmation">뭘하는지 알고 있습니다</string>
     <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
     <string name="init_backup_failed">c:geo 데이터베이스 백업이 실패했습니다.</string>
-    <string name="init_backup_unnecessary">데이터베이스가 없습니다. 백업이 불필요합니다.</string>
+    <string name="init_backup_unnecessary">데이터베이스가 비어 있으며 백업이 필요하지 않습니다. 그래도 백업을 만드시겠습니까?</string>
     <string name="init_backup_folder_exists_error">새로운 백업 폴더를 만들 수 없습니다. 마지막 순간에 이미 백업을 수행 했습니까?</string>
     <string name="init_backup_no_backup_available">백업할 파일이 없습니다.</string>
     <string name="backup_confirm_overwrite">%s에서 가장 오래된 기존 백업 폴더가 삭제됩니다. \n계속 하시겠습니까?</string>
@@ -1163,6 +1163,7 @@
     <string name="context_share_as_link">링크 공유</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="create_internal_cache_short">새로운 캐시</string>
+    <string name="create_internal_cache_currentlist">현재 목록 사용</string>
     <string name="internal_cache_default_name">사용자 정의 캐시 #%1$d</string>
     <string name="internal_cache_default_description">이것은 사용자 정의 캐시입니다</string>
     <string name="internal_cache_default_owner">당신</string>
@@ -1317,6 +1318,7 @@
     <string name="search_own_caches">내 캐시 검색</string>
     <string name="search_pocket_title">포켓쿼리</string>
     <string name="search_bookmark_list">북마크 목록</string>
+    <string name="search_pocket_is_new">새로운</string>
     <string name="search_pocket_and_bookmark_loading">포켓 쿼리 및 북마크 목록 로드</string>
     <!-- trackable -->
     <string name="trackable">추적아이템</string>

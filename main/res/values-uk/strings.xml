@@ -591,7 +591,6 @@
     <string name="init_user_confirmation">Я знаю, що я роблю</string>
     <string name="init_backup_success">c:geo базу даних успішно скопійовано до:</string>
     <string name="init_backup_failed">Резервне копіювання бази даних c:geo не вдалося.</string>
-    <string name="init_backup_unnecessary">База даних порожня, резервна копія не потрібна.</string>
     <string name="init_backup_no_backup_available">Немає доступного файлу резервної копії.</string>
     <string name="restore_confirm_overwrite_database">ПОПЕРЕДЖЕННЯ: На пристрої буде перезаписано %s!</string>
     <string name="restore_confirm_overwrite_database_and_settings">УВАГА: Це перезапише %s та поточні налаштування на вашому пристрої!</string>
