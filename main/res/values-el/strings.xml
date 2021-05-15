@@ -1874,7 +1874,6 @@
     <string name="receivedownload_alreadyexists">Ένα αρχείο με αυτό το όνομα υπάρχει ήδη. Να γίνει αντικατάσταση του υπάρχοντος αρχείου ή να γίνει αποθήκευση του νέου αρχείου με διαφορετικό όνομα;</string>
     <string name="receivedownload_option_overwrite">Αντικατάσταση</string>
     <string name="receivedownload_option_differentname">Διαφορετικό όνομα</string>
-    <string name="receivedownload_kb_copied">%d kB αντιγράφησαν</string>
     <string name="receivedownload_cancelled">Η μεταφορά των αρχείων ακυρώθηκε</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Λήψη χαρτών εκτός σύνδεσης</string>
