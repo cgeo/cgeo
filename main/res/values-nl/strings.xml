@@ -1879,7 +1879,6 @@
     <string name="receivedownload_alreadyexists">Een bestand met deze naam bestaat al. Bestaande bestanden overschrijven of het bestand opslaan onder een andere naam?</string>
     <string name="receivedownload_option_overwrite">Overschrijven</string>
     <string name="receivedownload_option_differentname">Andere naam</string>
-    <string name="receivedownload_kb_copied">%d kB gekopieerd</string>
     <string name="receivedownload_cancelled">Bestandsoverdracht geannuleerd</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline kaart downloaden</string>
