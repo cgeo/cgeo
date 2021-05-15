@@ -1879,7 +1879,6 @@
     <string name="receivedownload_alreadyexists">Eine Datei mit diesem Namen existiert bereits. Bestehende Datei überschreiben oder neue Datei unter anderem Namen speichern?</string>
     <string name="receivedownload_option_overwrite">Überschreiben</string>
     <string name="receivedownload_option_differentname">Anderer Name</string>
-    <string name="receivedownload_kb_copied">%d kB kopiert</string>
     <string name="receivedownload_cancelled">Dateiübertragung abgebrochen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline-Karte herunterladen</string>
