@@ -22,7 +22,8 @@ public enum GeocacheFilterType {
     ATTRIBUTES("attributes", R.string.cache_filter_attributes, AttributesGeocacheFilter::new),
     OFFLINE_LOG("offlinelog", R.string.cache_filter_offlinelog, OfflineLogGeocacheFilter::new),
     FAVORITES("favorites", R.string.cache_filter_favorites, FavoritesGeocacheFilter::new),
-    DISTANCE("distance", R.string.cache_filter_distance, DistanceGeocacheFilter::new);
+    DISTANCE("distance", R.string.cache_filter_distance, DistanceGeocacheFilter::new),
+    HIDDEN("hidden", 0, HiddenGeocacheFilter::new);
 
     private final String typeId;
     private final Supplier<BaseGeocacheFilter> supplier;

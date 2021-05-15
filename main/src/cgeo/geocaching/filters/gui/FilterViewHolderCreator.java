@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.gui;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.ValueGroupGeocacheFilter;
@@ -75,6 +76,9 @@ public class FilterViewHolderCreator {
                 break;
             case DISTANCE:
                 result = new DistanceFilterViewHolder();
+                break;
+            case HIDDEN:
+                result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>();
                 break;
             default:
                 result = null;

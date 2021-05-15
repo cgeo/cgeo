@@ -13,6 +13,7 @@ import cgeo.geocaching.filters.core.DifficultyGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.InconclusiveGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
@@ -201,6 +202,10 @@ public class GCMap {
                 search.setStatusFound(statusFilter.getStatusFound());
                 search.setStatusOwn(statusFilter.getStatusOwn());
                 search.setStatusEnabled(statusFilter.getStatusDisabled() == null ? null : !statusFilter.getStatusDisabled());
+                break;
+            case HIDDEN:
+                final HiddenGeocacheFilter hiddenFilter = (HiddenGeocacheFilter) basicFilter;
+                search.setPlacementDate(hiddenFilter.getMinDate(), hiddenFilter.getMaxDate());
                 break;
             default:
                 break;

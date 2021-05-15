@@ -165,6 +165,8 @@
     <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Image</string>
 
+    <string name="datetime_clear_button">Clear</string>
+    <string name="datetime_nodateset_display">No date set</string>
 
     <!-- translation -->
     <string name="translate">Translate</string>
@@ -480,7 +482,6 @@
     <string name="cache_filter_storage_save_confirm_title">Save filter overwrite</string>
     <string name="cache_filter_storage_save_confirm_message">A filter with name \'%s\' and different configuration already exists. Overwrite it?</string>
 
-
     <string name="cache_filter_stringfilter_matchcase">Match Case</string>
     <string name="cache_filter_stringfilter_info">With option \'Pattern\', use wildcards * and ?. * represents zero, one or multiple characters, ? represents one single character. For example, pattern \'H?mburg*\' will match e.g. \'Homburg\' or \'Hamburg at Night\' but not \'A day in Hamburg\' or \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Is Not Present</string>
@@ -489,6 +490,9 @@
     <string name="cache_filter_stringfilter_type_starts_with">Starts With</string>
     <string name="cache_filter_stringfilter_type_ends_with">Ends With</string>
     <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
+
+    <string name="cache_filter_datefilter_label_from">From:</string>
+    <string name="cache_filter_datefilter_label_to">To:</string>
 
     <string name="cache_filter_checkboxlist_selectallnone">Select all/none</string>
 
