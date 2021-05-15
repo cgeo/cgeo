@@ -643,6 +643,7 @@
     <string name="init_user_confirmation">Ne yaptığımı biliyorum</string>
     <string name="init_backup_success">c:geo\'nun veritabanı başarıyla kopyalandı:</string>
     <string name="init_backup_failed">c:geo\'nun veritabanı yedeklemesi başarısız oldu.</string>
+    <string name="init_backup_unnecessary">Veritabanı boş, yedekleme gerekli değil. Yine de yedeklemek istiyor musunuz?</string>
     <string name="init_backup_folder_exists_error">Yeni bir yedekleme klasörü oluşturulamıyor. Son zamanlarda bir yedekleme yaptınız mı?</string>
     <string name="init_backup_no_backup_available">Mevcut yedekleme dosyası bulunmuyor.</string>
     <string name="backup_confirm_overwrite">Bu işlem, %s\'de bulunan mevcut en eski yedekleme dizininizi silecektir. \nDevam etmek istiyor musunuz?</string>
@@ -1878,7 +1879,6 @@
     <string name="receivedownload_alreadyexists">Bu isimle bir dosya zaten var. Var olan dosyanın üzerine mi yazılsın yoksa farklı bir adla yeni bir dosya olarak mı kaydedilsin?</string>
     <string name="receivedownload_option_overwrite">Üzerine yaz</string>
     <string name="receivedownload_option_differentname">Farklı isim</string>
-    <string name="receivedownload_kb_copied">%d kB kopyalandı</string>
     <string name="receivedownload_cancelled">Dosya aktarımı iptal edildi</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Çevrimdışı harita indir</string>
