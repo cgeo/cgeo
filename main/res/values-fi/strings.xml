@@ -423,7 +423,6 @@
     <string name="cache_filter_option_inverse">Käänteinen suodatin</string>
     <string name="cache_filter_option_include_inconclusive">Sisällytä epävarmat osumat</string>
     <string name="cache_filter_option_include_inconclusive_info">Sisällytä ne kätköt, joissa suodattimen valittu tieto ei ole saatavilla.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Napauta \'+\' vasemmassa yläkulmassa lisätäksesi suodattimen</string>
     <string name="cache_filter_name">Nimi</string>
     <string name="cache_filter_type">Tyyppi</string>
     <string name="cache_filter_size">Koko</string>
@@ -1146,7 +1145,7 @@
     <string name="cache_terrain">Maasto</string>
     <string name="cache_rating">Arviointi</string>
     <string name="cache_own_rating">Sinun arviointisi</string>
-    <string name="cache_rating_of_new">%1$.1f %2$dsta</string>
+    <string name="cache_rating_of_new">%1$.1f / %2$d</string>
     <string name="cache_favorite">Suosikki</string>
     <string name="cache_owner">Omistaja</string>
     <string name="cache_hidden">Piilotettu</string>
@@ -1922,7 +1921,6 @@
     <string name="receivedownload_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
     <string name="receivedownload_option_overwrite">Korvaa</string>
     <string name="receivedownload_option_differentname">Eri nimi</string>
-    <string name="receivedownload_kb_copied">%d kB kopioitu</string>
     <string name="receivedownload_cancelled">Tiedostonsiirto peruttu</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Lataa offline-kartta</string>
