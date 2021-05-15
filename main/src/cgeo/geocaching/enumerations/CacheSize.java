@@ -16,31 +16,33 @@ import org.apache.commons.lang3.StringUtils;
  * Enum listing cache sizes
  */
 public enum CacheSize {
-    NANO("Nano", 0, R.string.cache_size_nano, "nano"), // used by OC only
-    MICRO("Micro", 1, R.string.cache_size_micro, "micro"),
-    SMALL("Small", 2, R.string.cache_size_small, "small"),
-    REGULAR("Regular", 3, R.string.cache_size_regular, "regular"),
-    LARGE("Large", 4, R.string.cache_size_large, "large"),
-    VERY_LARGE("Very large", 5, R.string.cache_size_very_large, "xlarge"), // used by OC only
-    NOT_CHOSEN("Not chosen", 6, R.string.cache_size_notchosen, ""),
-    VIRTUAL("Virtual", 7, R.string.cache_size_virtual, "none"),
-    OTHER("Other", 8, R.string.cache_size_other, "other"),
-    UNKNOWN("Unknown", -1, R.string.cache_size_unknown, ""); // CacheSize not init. yet
+    NANO("Nano", 0, R.string.cache_size_nano, "nano", "XXS"), // used by OC only
+    MICRO("Micro", 1, R.string.cache_size_micro, "micro", "XS"),
+    SMALL("Small", 2, R.string.cache_size_small, "small", "S"),
+    REGULAR("Regular", 3, R.string.cache_size_regular, "regular", "M"),
+    LARGE("Large", 4, R.string.cache_size_large, "large", "L"),
+    VERY_LARGE("Very large", 5, R.string.cache_size_very_large, "xlarge", "XL"), // used by OC only
+    NOT_CHOSEN("Not chosen", 6, R.string.cache_size_notchosen, "", "-"),
+    VIRTUAL("Virtual", 7, R.string.cache_size_virtual, "none", "V"),
+    OTHER("Other", 8, R.string.cache_size_other, "other", "O"),
+    UNKNOWN("Unknown", -1, R.string.cache_size_unknown, "", "?"); // CacheSize not init. yet
 
     @NonNull
     public final String id;
     public final int comparable;
     private final int stringId;
+    private final String shortName;
     /**
      * lookup for OC JSON requests (the numeric size is deprecated for OC)
      */
     private final String ocSize2;
 
-    CacheSize(@NonNull final String id, final int comparable, final int stringId, final String ocSize2) {
+    CacheSize(@NonNull final String id, final int comparable, final int stringId, final String ocSize2, final String shortName) {
         this.id = id;
         this.comparable = comparable;
         this.stringId = stringId;
         this.ocSize2 = ocSize2;
+        this.shortName = shortName;
     }
 
     @NonNull
@@ -103,5 +105,10 @@ public enum CacheSize {
     @NonNull
     public final String getL10n() {
         return CgeoApplication.getInstance().getBaseContext().getString(stringId);
+    }
+
+    @NonNull
+    public final String getShortName() {
+        return shortName;
     }
 }

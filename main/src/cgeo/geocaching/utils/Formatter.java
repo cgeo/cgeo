@@ -329,14 +329,15 @@ public final class Formatter {
 
     @NonNull
     public static String formatMapSubtitle(final Geocache cache) {
-        String title = "";
+        final StringBuilder title = new StringBuilder();
         if (cache.hasDifficulty()) {
-            title += "D " + formatDT(cache.getDifficulty()) + SEPARATOR;
+            title.append("D ").append(formatDT(cache.getDifficulty())).append(SEPARATOR);
         }
         if (cache.hasTerrain()) {
-            title += "T " + formatDT(cache.getTerrain()) + SEPARATOR;
+            title.append("T ").append(formatDT(cache.getTerrain())).append(SEPARATOR);
         }
-        return title + cache.getShortGeocode();
+        title.append(cache.getSize().getShortName()).append(SEPARATOR).append(cache.getShortGeocode());
+        return title.toString();
     }
 
     @NonNull
