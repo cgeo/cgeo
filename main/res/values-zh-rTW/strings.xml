@@ -1547,7 +1547,6 @@
     <string name="receivedownload_alreadyexists">檔名重複。要複寫舊檔案還是另存新黨。</string>
     <string name="receivedownload_option_overwrite">複寫</string>
     <string name="receivedownload_option_differentname">不同的名稱</string>
-    <string name="receivedownload_kb_copied">已複製%dKB</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">下載離線地圖</string>
     <string name="downloadmap_choose">選擇地圖</string>
