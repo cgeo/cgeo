@@ -422,7 +422,7 @@
     <string name="cache_filter_option_inverse">역 필터</string>
     <string name="cache_filter_option_include_inconclusive">결정적이지 않은 일치 포함</string>
     <string name="cache_filter_option_include_inconclusive_info">필터에 사용할 수없는 캐시에 대한 정보가 필요할 때 결과에 캐시를 포함할지 여부입니다.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">필터를 추가하려면 왼쪽 상단의 \'+\'를 누르세요.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">필터를 추가하려면 오른쪽 상단의 \'+\'를 누르세요</string>
     <string name="cache_filter_name">제목</string>
     <string name="cache_filter_type">유형</string>
     <string name="cache_filter_size">크기</string>
@@ -434,6 +434,20 @@
     <string name="cache_filter_terrain">지형등급</string>
     <string name="cache_filter_status">상태</string>
     <string name="cache_filter_attributes">속성</string>
+    <string name="cache_filter_favorites">호감점수</string>
+    <string name="cache_filter_distance">거리</string>
+    <string name="cache_filter_include">포함</string>
+    <string name="cache_filter_exclude">제외</string>
+    <string name="cache_filter_userdisplay_complex">복잡하게</string>
+    <string name="cache_filter_userdisplay_none">없음</string>
+    <string name="cache_filter_userdisplay_multi">멀티</string>
+    <string name="cache_filter_storage_load_button">로드</string>
+    <string name="cache_filter_storage_delete_button">삭제</string>
+    <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">아직 저장된 필터가 없습니다.</string>
+    <string name="cache_filter_storage_save_title">이름으로 필터 저장</string>
+    <string name="cache_filter_storage_save_confirm_title">필터 덮어 쓰기 저장</string>
+    <string name="cache_filter_storage_save_confirm_message">이름이 \'%s\'이고 다른 구성의 필터가 이미 있습니다. 덮어 쓰시겠습니까?</string>
     <string name="cache_filter_stringfilter_matchcase">일치 사례</string>
     <string name="cache_filter_stringfilter_info">\'패턴\'옵션과 함께 와일드 카드 \'*\' 및 \'?\'를 사용하십시오. \'*\'는 0 개, 하나 또는 여러 개의 문자를 나타내고 \'?\'은 하나의 단일 문자를 나타냅니다. 예를 들어 \'H?mburg*\'패턴은 \'Homburg\'또는 \'Hamburg at Night\'예와 일치하지만 \'A day in Hamburg\'또는 \'Hahmburg\'와는 일치하지 않습니다.</string>
     <string name="cache_filter_stringfilter_type_is_not_present">존재하지 않음</string>
@@ -443,6 +457,9 @@
     <string name="cache_filter_stringfilter_type_ends_with">다음으로 끝남</string>
     <string name="cache_filter_stringfilter_type_pattern">패턴</string>
     <string name="cache_filter_checkboxlist_selectallnone">모두 선택/선택 안 함</string>
+    <string name="cache_filter_favorites_absolute">절대적</string>
+    <string name="cache_filter_favorites_percentage">비율</string>
+    <string name="cache_filter_distance_use_current_position">현 위치 사용</string>
     <!-- about -->
     <string name="about_version">버전</string>
     <string name="about_changelog">변경내역</string>
@@ -1882,6 +1899,7 @@
     <string name="localfile_cannot_handle">파일 읽기 오류 또는 c:geo가 이 파일 유형을 처리 할 수 없습니다.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">파일 받기</string>
+    <string name="receivedownload_receiving_file">\"%s\" 파일을 받는 중</string>
     <string name="receivedownload_success">파일이 \"%s\"(으)로 성공적으로 저장되었습니다.</string>
     <string name="receivedownload_error">파일을 받는 중 오류</string>
     <string name="receivedownload_error_io_exception">파일을 받는 중 I/O 오류가 발생했습니다. \"%s\"폴더에 쓰기가 가능합니까?</string>
@@ -1889,7 +1907,7 @@
     <string name="receivedownload_alreadyexists">이 이름의 파일이 이미 존재합니다. 기존 파일을 덮어 쓰거나 다른 이름으로 새 파일을 저장 하시겠습니까?</string>
     <string name="receivedownload_option_overwrite">덮어쓰기</string>
     <string name="receivedownload_option_differentname">다른 이름</string>
-    <string name="receivedownload_kb_copied">%d kB 복사됨</string>
+    <string name="receivedownload_amount_copied">%s를 복사했습니다</string>
     <string name="receivedownload_cancelled">파일 전송이 취소되었습니다.</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">오프라인 지도 다운로드</string>
@@ -1912,6 +1930,9 @@
     <string name="downloadmap_no_updates_found">지도 업데이트 없음</string>
     <string name="downloadmap_directory">폴더</string>
     <string name="downloadmap_mapfile">지도 파일</string>
+    <string name="downloadmap_themefile">테마 파일</string>
+    <string name="downloadmap_tilefile">라우팅 데이터 파일</string>
+    <string name="downloadmap_download">다운로드</string>
     <string name="downloadmap_retrieving_directory_data">폴더 정보 찾는 중…</string>
     <string name="downloadmap_checking_for_updates">업데이트 확인중…</string>
     <string name="downloadmap_install_theme_title">테마 파일 설치</string>
