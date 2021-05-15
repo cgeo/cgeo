@@ -76,9 +76,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         binding = CacheFilterActivityBinding.bind(findViewById(R.id.activity_viewroot));
 
         binding.filterPropsCheckboxes.removeAllViews();
-        this.andOrFilterCheckbox = ViewUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_and_or, R.drawable.ic_menu_logic);
-        this.inverseFilterCheckbox = ViewUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_inverse, R.drawable.ic_menu_invert);
-        this.includeInconclusiveFilterCheckbox = ViewUtils.addCheckboxProperty(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_include_inconclusive, R.drawable.ic_menu_vague,
+        this.andOrFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_and_or, R.drawable.ic_menu_logic);
+        this.inverseFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_inverse, R.drawable.ic_menu_invert);
+        this.includeInconclusiveFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_include_inconclusive, R.drawable.ic_menu_vague,
             R.string.cache_filter_option_include_inconclusive_info);
 
 

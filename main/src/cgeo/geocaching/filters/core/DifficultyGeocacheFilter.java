@@ -10,7 +10,7 @@ public  class DifficultyGeocacheFilter extends NumberRangeGeocacheFilter<Float> 
 
     @Override
     public Float getValue(final Geocache cache) {
-        return cache.getDifficulty();
+        return cache.getDifficulty() < 0.5f ? null : cache.getDifficulty();
     }
 
     @Override

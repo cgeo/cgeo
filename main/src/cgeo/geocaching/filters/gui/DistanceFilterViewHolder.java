@@ -34,7 +34,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
-        useCurrentPosition = ViewUtils.addCheckboxProperty(getActivity(), ll, "Use Current Position", R.drawable.ic_menu_mylocation, 0);
+        useCurrentPosition = ViewUtils.addCheckboxItem(getActivity(), ll, "Use Current Position", R.drawable.ic_menu_mylocation, 0);
         useCurrentPosition.setChecked(true);
 
         coordinate = new EditText(getActivity());

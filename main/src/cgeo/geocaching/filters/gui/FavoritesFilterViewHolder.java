@@ -47,7 +47,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
     }
 
     private void resetSliderScale() {
-        if (percentage.getSelected() == 0) {
+        if (percentage.getSelectedValue() == 0) {
             maxValue = 1000;
             granularity = 1;
             slider.setScale(-0.2f, 1000.2f, f -> {
@@ -80,7 +80,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
 
     @Override
     public void setViewFromFilter(final FavoritesGeocacheFilter filter) {
-        percentage.select(filter.isPercentage() ? 1 : 0);
+        percentage.selectValue(filter.isPercentage() ? 1 : 0);
         resetSliderScale();
         slider.setRange(filter.getMinRangeValue() == null ? -10f : filter.getMinRangeValue(), filter.getMaxRangeValue() == null ? 1500f : filter.getMaxRangeValue());
     }
@@ -88,7 +88,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
     @Override
     public FavoritesGeocacheFilter createFilterFromView() {
         final FavoritesGeocacheFilter filter = createFilter();
-        filter.setPercentage(percentage.getSelected() == 1);
+        filter.setPercentage(percentage.getSelectedValue() == 1);
         final ImmutablePair<Float, Float> range = slider.getRange();
         filter.setMinMaxRange(
             range.left < 0 ? null : Math.round(range.left * granularity) / granularity,

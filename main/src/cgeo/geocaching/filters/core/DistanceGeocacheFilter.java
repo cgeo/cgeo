@@ -7,6 +7,9 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.SqlBuilder;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import org.apache.commons.lang3.BooleanUtils;
 
 public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
@@ -18,6 +21,8 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
         super(Float::valueOf, f -> f);
     }
 
+    /** Gets fixed-value coordinate set to this filter, may be null */
+    @Nullable
     public Geopoint getCoordinate() {
         return coordinate;
     }
@@ -40,6 +45,13 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
             Sensors.getInstance().currentGeo().getCoords() : coordinate;
 
         return gp.distanceTo(cache.getCoords());
+    }
+
+    /** Returns the coordinate which will effectively be used for calculation (either fixed-value or current position) */
+    @NonNull
+    public Geopoint getEffectiveCoordinate() {
+        return (useCurrentPosition || coordinate == null)  ?
+            Sensors.getInstance().currentGeo().getCoords() : coordinate;
     }
 
     @Override
@@ -79,8 +91,6 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
         //Unfortunately, SQLite in our version does not know functions like COS, SQRT or PI. So we have to perform some tricks...
         final String dxExceptLon1Lon2Square = String.valueOf(Math.pow(Math.cos(lat2 * Math.PI / 180 * 0.01745) * 111.3, 2));
         final String dyExceptLat1Lat2Square = String.valueOf(Math.pow(111.3, 2));
-
-
 
         final String dxSquare = "(" + dxExceptLon1Lon2Square + " * (" + lon1 + " - " + lon2 + ") * (" + lon1 + " - " + lon2 + "))";
         final String dySquare = "(" + dyExceptLat1Lat2Square + " * (" + lat1 + " - " + lat2 + ") * (" + lat1 + " - " + lat2 + "))";

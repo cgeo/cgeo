@@ -28,6 +28,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
         KEYWORD,
         ADDRESS,
         FINDER,
+        SEARCH_FILTER,
         OWNER,
         MAP,
         NEXT_PAGE;

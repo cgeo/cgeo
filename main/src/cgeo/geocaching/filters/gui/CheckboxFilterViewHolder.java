@@ -43,7 +43,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
 
         //selectall/none
         if (filterAccessor.getSelectableValuesAsArray().length > 1) {
-            selectAllNoneCheckbox = ViewUtils.addCheckboxProperty(getActivity(), ll, R.string.cache_filter_checkboxlist_selectallnone, R.drawable.ic_menu_selectall, 0);
+            selectAllNoneCheckbox = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_checkboxlist_selectallnone, R.drawable.ic_menu_selectall, 0);
             selectAllNoneCheckbox.setOnCheckedChangeListener((v, c) -> {
                 if (!selectAllNoneBroadcast) {
                     return;
@@ -58,7 +58,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         for (T value : filterAccessor.getSelectableValuesAsArray()) {
 
             final String vText = this.filterAccessor.getDisplayText(value) + (showStatistics ? " (" + (stats.containsKey(value) ? "" + stats.get(value) : "0") + (statsAreComplete ? "" : "+") + ")" : "");
-            this.valueCheckboxes[idx] = ViewUtils.addCheckboxProperty(getActivity(), ll, vText, this.filterAccessor.getIconFor(value), 0);
+            this.valueCheckboxes[idx] = ViewUtils.addCheckboxItem(getActivity(), ll, vText, this.filterAccessor.getIconFor(value), 0);
             this.valueCheckboxes[idx].setChecked(true);
             if (selectAllNoneCheckbox != null) {
                 this.valueCheckboxes[idx].setOnCheckedChangeListener((v, c) -> {

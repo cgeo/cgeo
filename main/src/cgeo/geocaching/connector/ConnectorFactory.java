@@ -5,6 +5,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByNextPage;
@@ -115,6 +116,9 @@ public final class ConnectorFactory {
     @NonNull
     private static final Collection<ISearchByFinder> SEARCH_BY_FINDER_CONNECTORS = getMatchingConnectors(ISearchByFinder.class);
 
+    @NonNull
+    private static final Collection<ISearchByFilter> SEARCH_BY_FILTER_CONNECTORS = getMatchingConnectors(ISearchByFilter.class);
+
     private static boolean forceRelog = false; // c:geo needs to log into cache providers
 
     private ConnectorFactory() {
@@ -161,6 +165,11 @@ public final class ConnectorFactory {
     @NonNull
     public static Collection<ISearchByFinder> getSearchByFinderConnectors() {
         return SEARCH_BY_FINDER_CONNECTORS;
+    }
+
+    @NonNull
+    public static Collection<ISearchByFilter> getSearchByFilterConnectors() {
+        return SEARCH_BY_FILTER_CONNECTORS;
     }
 
     @NonNull

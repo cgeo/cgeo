@@ -8,7 +8,7 @@ public class SizeGeocacheFilter extends ValueGroupGeocacheFilter<CacheSize> {
 
     @Override
     public CacheSize getValue(final Geocache cache) {
-        return cache.getSize();
+        return CacheSize.UNKNOWN.equals(cache.getSize()) ? null : cache.getSize();
     }
 
     @Override
