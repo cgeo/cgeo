@@ -425,7 +425,7 @@
     <string name="cache_filter_option_inverse">Invertovat filtr</string>
     <string name="cache_filter_option_include_inconclusive">Zahrnout neprůkazné shody</string>
     <string name="cache_filter_option_include_inconclusive_info">Zvolte, zda chce do výsledku zahrnout kešky, když filtr potřebuje informace o kešce, která není k dispozici.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Klepnutím na \'+\' v levém horním rohu přidáte filtr</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Klepnutím na \'+\' v pravé horní části přidáte filtr</string>
     <string name="cache_filter_name">Název</string>
     <string name="cache_filter_type">Typ</string>
     <string name="cache_filter_size">Velikost</string>
@@ -441,6 +441,16 @@
     <string name="cache_filter_distance">Vzdálenost</string>
     <string name="cache_filter_include">Zahrnout</string>
     <string name="cache_filter_exclude">Vyloučit</string>
+    <string name="cache_filter_userdisplay_complex">Komplexní</string>
+    <string name="cache_filter_userdisplay_none">Žádný</string>
+    <string name="cache_filter_userdisplay_multi">Vícenásobné</string>
+    <string name="cache_filter_storage_load_button">Načíst</string>
+    <string name="cache_filter_storage_delete_button">Vymazat</string>
+    <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">Zatím není uložen žádný filtr.</string>
+    <string name="cache_filter_storage_save_title">Uložit filtr s názvem</string>
+    <string name="cache_filter_storage_save_confirm_title">Uložit přepsání filtru</string>
+    <string name="cache_filter_storage_save_confirm_message">Filtr s názvem \'%s\' a jinou konfigurací již existuje. Chcete jej přepsat?</string>
     <string name="cache_filter_stringfilter_matchcase">Rozlišovat velikost písmen</string>
     <string name="cache_filter_stringfilter_info">S možností \'Vzor\' použijte zástupné znaky * a ?. * představuje nulu, jeden nebo více znaků, ? představuje jeden jediný znak. Například vzor \'H?mburg*\' bude odpovídat např. \'Homburg\' nebo \'Hamburg v noci\', ale ne \'Den v Hamburgu\' nebo \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Není přítomen</string>
@@ -1967,6 +1977,7 @@
     <string name="localfile_cannot_handle">Chyba při čtení souboru nebo c:geo neumí s tímto typem souboru pracovat.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Přijmout soubor</string>
+    <string name="receivedownload_receiving_file">Příjem souboru \"%s\"</string>
     <string name="receivedownload_success">Soubor byl úspěšně uložen jako \"%s\"</string>
     <string name="receivedownload_error">Chyba při přijímání souboru</string>
     <string name="receivedownload_error_io_exception">I/O chyba při přijímání souboru. Je vaše složka \"%s\" zapisovatelná?</string>
@@ -1974,7 +1985,7 @@
     <string name="receivedownload_alreadyexists">Soubor s tímto názvem již existuje. Chcete přepsat existující soubor, nebo uložit nový soubor pod jiným názvem?</string>
     <string name="receivedownload_option_overwrite">Přepsat</string>
     <string name="receivedownload_option_differentname">Přejmenovat</string>
-    <string name="receivedownload_kb_copied">%d kB zkopírováno</string>
+    <string name="receivedownload_amount_copied">%s zkopírováno</string>
     <string name="receivedownload_cancelled">Přenos souboru byl zrušen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Stáhnout offline mapu</string>
@@ -1997,6 +2008,9 @@
     <string name="downloadmap_no_updates_found">Nebyly nalezeny žádné aktualizace map</string>
     <string name="downloadmap_directory">složka</string>
     <string name="downloadmap_mapfile">Mapový soubor</string>
+    <string name="downloadmap_themefile">soubor motivu</string>
+    <string name="downloadmap_tilefile">soubor se směrovacími daty</string>
+    <string name="downloadmap_download">stáhnout</string>
     <string name="downloadmap_retrieving_directory_data">Načítání údajů ze složky…</string>
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
     <string name="downloadmap_install_theme_title">Nainstalovat soubor motivu</string>
