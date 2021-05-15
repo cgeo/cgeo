@@ -1878,7 +1878,6 @@
     <string name="receivedownload_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
     <string name="receivedownload_option_overwrite">Sovrascrivere</string>
     <string name="receivedownload_option_differentname">Nome diverso</string>
-    <string name="receivedownload_kb_copied">%d kB copiati</string>
     <string name="receivedownload_cancelled">Trasferimento file annullato</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
