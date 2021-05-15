@@ -1922,7 +1922,6 @@
     <string name="receivedownload_alreadyexists">Súbor s týmto názvom už existuje. Prepísať existujúci súbor alebo uložiť nový súbor s iným názvom?</string>
     <string name="receivedownload_option_overwrite">Prepísať</string>
     <string name="receivedownload_option_differentname">Premenovať</string>
-    <string name="receivedownload_kb_copied">%d kB skopírovaných</string>
     <string name="receivedownload_cancelled">Prenos súboru zrušený</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Prevziať offline mapu</string>
