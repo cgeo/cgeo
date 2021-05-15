@@ -1791,7 +1791,6 @@
     <string name="receivedownload_alreadyexists">Файл с таким именем уже существует. Перезаписать существующий файл или сохранить новый файл под другим именем?</string>
     <string name="receivedownload_option_overwrite">Перезаписать</string>
     <string name="receivedownload_option_differentname">Другое имя</string>
-    <string name="receivedownload_kb_copied">%d КБ скопировано</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Скачать оффлайн-карту</string>
     <string name="downloadmap_choose">Выбрать карту</string>
