@@ -1106,7 +1106,7 @@
     <string name="cache_terrain">Maasto</string>
     <string name="cache_rating">Arviointi</string>
     <string name="cache_own_rating">Sinun arviointisi</string>
-    <string name="cache_rating_of_new">%1$.1f %2$dsta</string>
+    <string name="cache_rating_of_new">%1$.1f / %2$d</string>
     <string name="cache_favorite">Suosikki</string>
     <string name="cache_owner">Omistaja</string>
     <string name="cache_hidden">Piilotettu</string>
@@ -1879,7 +1879,6 @@
     <string name="receivedownload_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
     <string name="receivedownload_option_overwrite">Korvaa</string>
     <string name="receivedownload_option_differentname">Eri nimi</string>
-    <string name="receivedownload_kb_copied">%d kB kopioitu</string>
     <string name="receivedownload_cancelled">Tiedostonsiirto peruttu</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Lataa offline-kartta</string>
