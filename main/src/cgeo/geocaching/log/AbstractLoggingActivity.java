@@ -110,7 +110,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
     }
 
     protected void requestKeyboardForLogging() {
-        new Keyboard(this).show(findViewById(R.id.log));
+        Keyboard.show(this, findViewById(R.id.log));
     }
 
 }

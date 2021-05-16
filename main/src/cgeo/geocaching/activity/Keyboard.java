@@ -12,13 +12,12 @@ import androidx.annotation.NonNull;
  *
  */
 public class Keyboard {
-    private final Activity activity;
 
-    public Keyboard(@NonNull final Activity activity) {
-        this.activity = activity;
+    private Keyboard() {
+        // utility class
     }
 
-    public void hide() {
+    public static void hide(@NonNull final Activity activity) {
         // Check if no view has focus:
         final View view = activity.getCurrentFocus();
         if (view != null) {
@@ -27,14 +26,10 @@ public class Keyboard {
         }
     }
 
-    public void show(final View view) {
+    public static void show(@NonNull final Context context, final View view) {
         view.requestFocus();
-        ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(view, 0);
-    }
-
-    public void showDelayed(final View view) {
         view.postDelayed(() -> {
-            final InputMethodManager keyboard = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            final InputMethodManager keyboard = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
             keyboard.showSoftInput(view, 0);
         }, 50);
     }
