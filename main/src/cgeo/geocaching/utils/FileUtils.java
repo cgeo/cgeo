@@ -3,13 +3,16 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StatFs;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RawRes;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -541,6 +544,26 @@ public final class FileUtils {
             }
         }
         return result;
+    }
+
+    public static String getRawResourceAsString(final Context context, @RawRes final int resId) {
+        final StringBuilder content = new StringBuilder();
+        try (BufferedReader is = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(resId)))) {
+            String line;
+            while ((line = is.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+        } catch (IOException ignored) {
+        }
+        return content.toString();
+    }
+
+    public static String getChangelogMaster(final Context context) {
+        return getRawResourceAsString(context, R.raw.changelog_master);
+    }
+
+    public static String getChangelogRelease(final Context context) {
+        return getRawResourceAsString(context, R.raw.changelog_release);
     }
 
 }

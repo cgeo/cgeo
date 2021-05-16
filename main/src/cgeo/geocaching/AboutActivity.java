@@ -11,7 +11,7 @@ import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
-import cgeo.geocaching.utils.LiUtils;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -42,6 +42,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import io.noties.markwon.Markwon;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -155,17 +156,17 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final AboutChangesPageBinding binding = AboutChangesPageBinding.inflate(getLayoutInflater(), parentView, false);
-            binding.changelogRelease.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            final String changeLogMasterString = getString(R.string.changelog_master);
-            if (StringUtils.isBlank(changeLogMasterString)) {
-                binding.changelogMaster.setVisibility(View.GONE);
-            } else {
-                binding.changelogMaster.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            }
-            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(AboutActivity.this, "https://github.com/cgeo/cgeo/releases"));
-            binding.changelogMaster.setText(LiUtils.formatHTML(getString(R.string.changelog_master)));
-            binding.changelogRelease.setText(LiUtils.formatHTML(getString(R.string.changelog_release)));
+            final Markwon markwon = Markwon.create(AboutActivity.this);
 
+            final String changelogMaster = FileUtils.getChangelogMaster(AboutActivity.this);
+            if (StringUtils.isNotBlank(changelogMaster)) {
+                markwon.setMarkdown(binding.changelogMaster, changelogMaster);
+            } else {
+                binding.changelogMaster.setVisibility(View.GONE);
+            }
+
+            markwon.setMarkdown(binding.changelogRelease, FileUtils.getChangelogRelease(AboutActivity.this));
+            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(AboutActivity.this, "https://github.com/cgeo/cgeo/releases"));
             return binding.getRoot();
         }
     }
