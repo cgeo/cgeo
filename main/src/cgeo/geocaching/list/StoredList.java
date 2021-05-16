@@ -248,10 +248,8 @@ public final class StoredList extends AbstractList {
                 return;
             }
             Dialogs.input(activity, dialogTitle, defaultValue, buttonTitle, input -> {
-                // remove whitespaces added by autocompletion of Android keyboard
-                final String listName = StringUtils.trim(input);
-                if (StringUtils.isNotBlank(listName)) {
-                    runnable.call(listName);
+                if (StringUtils.isNotBlank(input)) {
+                    runnable.call(input);
                 }
             });
         }
