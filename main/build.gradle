@@ -408,6 +408,10 @@ dependencies {
 
     // Zxing barcode reader integration
     implementation 'com.google.zxing:android-integration:3.3.0'
+
+    // MarkDown view
+    def markwonVersion = '4.6.2';
+    implementation "io.noties.markwon:core:${markwonVersion}"
 }
 
 /*

@@ -40,6 +40,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -837,7 +838,7 @@ public class MainActivity extends AbstractActionBarActivity {
         //TODO: understand and avoid if possible
         try {
             final long lastChecksum = Settings.getLastChangelogChecksum();
-            final long checksum = TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
+            final long checksum = TextUtils.checksum(FileUtils.getChangelogMaster(this) + FileUtils.getChangelogRelease(this));
             Settings.setLastChangelogChecksum(checksum);
 
             if (lastChecksum == 0) {
