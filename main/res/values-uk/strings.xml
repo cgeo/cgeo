@@ -1156,7 +1156,6 @@
     <string name="helper_bluetoothgps_description">Дозволяє використовувати зовнішній приймач GPS для отримання більш точних даних про місцезнаходження та може заощадити акумулятор вашого пристрою.</string>
     <string name="helper_gps_locker_description">GPS Locker підтримує активний сигнал GPS під час перемикання між програмами та коли екран вашого пристрою вимкнений.</string>
     <string name="helper_barcode_description">Існують сценарії та веб-сайти Greasemonkey, які дозволяють відображати геокоди як штрих-коди. За допомогою цієї програми c: geo може зчитувати такі геокоди безпосередньо з екрану вашого комп’ютера.</string>
-    <string name="helper_pocketquery_description">Дозволяє легко створювати і завантажувати кишенькові запити з центром на вашому поточному положенні, або з карти - Преміум акаунт Geocaching.com.</string>
     <string name="helper_google_translate_title">Перекладач Google</string>
     <string name="helper_google_translate_description">Якщо ви завантажите пакети перекладів у додатку Google Translate після цього ви можете легко перекладати описи кешу в c:geo довгим натисканням на текст опису кешу (без підключення до Інтернету).</string>
     <string name="helper_where_you_go_description">Тут Ви можете грати та шукати схованки типу Wherigo. c:geo може автоматично запустити завантаження картриджів у цьому додатку.</string>

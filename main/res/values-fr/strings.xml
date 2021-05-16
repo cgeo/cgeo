@@ -1351,7 +1351,6 @@
     <string name="helper_bluetoothgps_description">Vous permet d\'utiliser un GPS externe pour une localisation plus précise tout en économisant la batterie de votre appareil Android.</string>
     <string name="helper_gps_locker_description">Le verrouillage GPS conserve le signal GPS actif lors du basculement entre les applications ou si l\'écran de votre appareil s\'éteint.</string>
     <string name="helper_barcode_description">Il existe des programmes et des sites web permettant de générer un QR code contenant un géocode. En installant cette application, vous pourrez lire des QR codes et ouvrir les caches correspondantes dans c:geo.</string>
-    <string name="helper_pocketquery_description">Permet la création facile et le téléchargement de Pocket Queries centrées sur votre position actuelle ou un point sélectionné sur la carte. Nécessite un compte Premium Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Traduction</string>
     <string name="helper_google_translate_description">Si vous téléchargez des modules de traduction dans l\'application Google Traduction, vous pourrez facilement traduire les descriptions des caches dans c:geo par un appui long sur le texte de la description (même sans connexion Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permet de rechercher et de jouer avec les caches de type Wherigo. c:geo peut automatiquement lancer le téléchargement de cartouches utilisables ensuite dans l\'application WhereYouGo.</string>

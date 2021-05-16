@@ -1370,7 +1370,6 @@
     <string name="helper_bluetoothgps_description">Σας επιτρέπει να χρησιμοποιήσετε έναν εξωτερικό δέκτη GPS για να πάρετε πιο ακριβή δεδομένα τοποθεσίας, και να κάνετε οικονομία στη μπαταρία της συσκευής σας.</string>
     <string name="helper_gps_locker_description">Το κλείδωμα GPS διατηρεί το σήμα του GPS ενεργό όταν εναλλάσσονται οι εφαρμογές ή όταν η οθόνη της συσκευής είναι σβηστή.</string>
     <string name="helper_barcode_description">Υπάρχουν σενάρια και ιστοσελίδες Greasemonkey που επιτρέπουν να εμφανίζονται οι γεωκωδικοί ως γραμμωτοί κώδικες. Με αυτή την εφαρμογή το c:geo μπορεί να διαβάζει τέτοιους γεωκωδικούς κατευθείαν από την οθόνη του υπολογιστή σας.</string>
-    <string name="helper_pocketquery_description">Επιτρέπει την εύκολη δημιουργία και λήψη Προσωπικών Αναζητήσεων με επίκεντρο την τρέχουσα τοποθεσία σας ή ένα σημείο στο χάρτη. Απαιτείται λογαριασμόςPremium στο Geocaching.com.</string>
     <string name="helper_google_translate_title">Μετάφραση Google</string>
     <string name="helper_google_translate_description">Αν κατεβάσετε πακέτα μετάφρασης στην εφαρμογή Google Translate, τότε μπορείτε να μεταφράσετε εύκολα περιγραφές κρυπτών στο c:geo, με ένα παρατεταμένο πάτημα στην περιγραφής της κρύπτης (χωρίς σύνδεση στο Internet).</string>
     <string name="helper_where_you_go_description">Το WhereYouGo επιτρέπει την αναζήτηση κρυπτών του τύπου Wherigo, Το c:geo αυτόματα ενεργοποιεί τη φόρτωση των cartridges μέσα στην εφαρμογή.</string>
