@@ -441,7 +441,6 @@
     <string name="cache_filter_exclude">Ohne</string>
     <string name="cache_filter_userdisplay_complex">Komplex</string>
     <string name="cache_filter_userdisplay_none">Keine</string>
-    <string name="cache_filter_userdisplay_multi">Mehrere</string>
     <string name="cache_filter_storage_load_button">Lade</string>
     <string name="cache_filter_storage_delete_button">Löschen</string>
     <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
@@ -1925,6 +1924,7 @@
     <string name="localfile_cannot_handle">Fehler beim Lesen der Datei oder c:geo kennt diesen Dateityp nicht.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Datei empfangen</string>
+    <string name="receivedownload_receiving_file">Empfange Datei \"%s\"</string>
     <string name="receivedownload_success">Datei erfolgreich als \"%s \" gespeichert</string>
     <string name="receivedownload_error">Fehler beim Empfangen der Datei</string>
     <string name="receivedownload_error_io_exception">E/A-Fehler beim Empfangen der Datei. Ist dein Ordner \"%s\" beschreibbar?</string>
@@ -1932,6 +1932,7 @@
     <string name="receivedownload_alreadyexists">Eine Datei mit diesem Namen existiert bereits. Bestehende Datei überschreiben oder neue Datei unter anderem Namen speichern?</string>
     <string name="receivedownload_option_overwrite">Überschreiben</string>
     <string name="receivedownload_option_differentname">Anderer Name</string>
+    <string name="receivedownload_amount_copied">%s kopiert</string>
     <string name="receivedownload_cancelled">Dateiübertragung abgebrochen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline-Karte herunterladen</string>
@@ -1954,6 +1955,8 @@
     <string name="downloadmap_no_updates_found">Keine Kartenupdates gefunden</string>
     <string name="downloadmap_directory">Ordner</string>
     <string name="downloadmap_mapfile">Karte</string>
+    <string name="downloadmap_tilefile">Routendaten-Datei</string>
+    <string name="downloadmap_download">Download</string>
     <string name="downloadmap_retrieving_directory_data">Empfange Ordnerdaten…</string>
     <string name="downloadmap_checking_for_updates">Prüfe auf Updates…</string>
     <string name="downloadmap_install_theme_title">Design installieren</string>
