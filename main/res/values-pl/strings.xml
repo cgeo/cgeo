@@ -1384,7 +1384,6 @@
     <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
     <string name="helper_gps_locker_description">GPS Locker utrzymuje aktywny sygnał GPS podczas przełączania się pomiędzy aplikacjami oraz gdy ekran twojego urządzenia jest wyłączony.</string>
     <string name="helper_barcode_description">Istnieją skrypty i strony WWW, które umożliwiają wyświetlanie GC-kodu jako kodu kreskowego. Z tym programem c:geo może czytać te GC-kody bezpośrednio z ekranu Twojego komputera.</string>
-    <string name="helper_pocketquery_description">Pozwala na łatwe tworzenie i pobieranie Pocket Queries wyśrodkowanych w Twoim aktualnym położeniu lub wybranym punkcie mapy. Wymaga konta Premium w Geocaching.com.</string>
     <string name="helper_google_translate_title">Tłumacz Google</string>
     <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrzynek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
     <string name="helper_where_you_go_description">WhereYouGo pozwala na poszukiwanie skrzynek typu Wherigo. c:geo może automatycznie pobierać kardridże dzięki tej aplikacji.</string>
