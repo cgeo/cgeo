@@ -155,6 +155,8 @@
     <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
     <string name="log_image_info">%1$d x %2$d pikseliä, %3$s\nSkaalattu/pakattu:\n%4$d x %5$d pikseliä, ~%6$s</string>
     <string name="log_image_titleprefix">Kuva</string>
+    <string name="datetime_clear_button">Tyhjennä</string>
+    <string name="datetime_nodateset_display">Päivämäärää ei ole asetettu</string>
     <!-- translation -->
     <string name="translate">Käännä</string>
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
@@ -457,6 +459,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Alkaa</string>
     <string name="cache_filter_stringfilter_type_ends_with">Päättyy</string>
     <string name="cache_filter_stringfilter_type_pattern">Kuvio</string>
+    <string name="cache_filter_datefilter_label_from">Päivästä:</string>
+    <string name="cache_filter_datefilter_label_to">Päivään:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Valitse kaikki / ei mitään</string>
     <string name="cache_filter_favorites_absolute">Absoluuttinen</string>
     <string name="cache_filter_favorites_percentage">Prosenttiosuus</string>
@@ -1435,7 +1439,6 @@
     <string name="helper_bluetoothgps_description">Voit käyttää ulkoista GPS-vastaanotinta saadaksesi tarkempia sijaintitietoja ja säästääksesi laitteen akkua.</string>
     <string name="helper_gps_locker_description">GPS Locker pitää GPS-signaalin aktiivisena vaihtaessasi sovellusten välillä sekä laitteen näytön ollessa pois päältä.</string>
     <string name="helper_barcode_description">Greasemonkey komentosarjan ja sivuston avulla pystyy lukemaan viiva- ja geokoodeja. Tämän sovelluksen avulla c:geo lukee viiva- ja geokoodeja.</string>
-    <string name="helper_pocketquery_description">Tämän avulla on helppo luoda ja ladata Pocket Queryja nykyisestä sijainnistasi tai kartalta valitun pisteen ympäriltä. Vaatii Premium Geocaching.com-tilin.</string>
     <string name="helper_google_translate_title">Google-kääntäjä</string>
     <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
     <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
