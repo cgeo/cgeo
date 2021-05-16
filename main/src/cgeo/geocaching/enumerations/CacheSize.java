@@ -17,33 +17,35 @@ import org.apache.commons.lang3.StringUtils;
  */
 @SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass") // static maps need to be initialized later in the class
 public enum CacheSize {
-    NANO("Nano", 0, R.string.cache_size_nano, "nano", null), // used by OC only
-    MICRO("Micro", 1, R.string.cache_size_micro, "micro", new int[]{2}),
-    SMALL("Small", 2, R.string.cache_size_small, "small", new int[]{8}),
-    REGULAR("Regular", 3, R.string.cache_size_regular, "regular", new int[]{3}),
-    LARGE("Large", 4, R.string.cache_size_large, "large", new int[]{4}),
-    VERY_LARGE("Very large", 5, R.string.cache_size_very_large, "xlarge", null), // used by OC only
-    NOT_CHOSEN("Not chosen", 6, R.string.cache_size_notchosen, "", null),
-    VIRTUAL("Virtual", 7, R.string.cache_size_virtual, "none", new int[]{5}), //gc:
-    OTHER("Other", 8, R.string.cache_size_other, "other", new int[]{6, 1}), //6="normal" other, 1=earth cache
-    UNKNOWN("Unknown", -1, R.string.cache_size_unknown, "", null); // CacheSize not init. yet
+    NANO("Nano", 0, R.string.cache_size_nano, "nano", null, "XXS"), // used by OC only
+    MICRO("Micro", 1, R.string.cache_size_micro, "micro", new int[]{2}, "XS"),
+    SMALL("Small", 2, R.string.cache_size_small, "small", new int[]{8}, "S"),
+    REGULAR("Regular", 3, R.string.cache_size_regular, "regular", new int[]{3}, "M"),
+    LARGE("Large", 4, R.string.cache_size_large, "large", new int[]{4}, "L"),
+    VERY_LARGE("Very large", 5, R.string.cache_size_very_large, "xlarge", null, "XL"), // used by OC only
+    NOT_CHOSEN("Not chosen", 6, R.string.cache_size_notchosen, "", null, "-"),
+    VIRTUAL("Virtual", 7, R.string.cache_size_virtual, "none", new int[]{5}, "V"), //gc:
+    OTHER("Other", 8, R.string.cache_size_other, "other", new int[]{6, 1}, "O"), //6="normal" other, 1=earth cache
+    UNKNOWN("Unknown", -1, R.string.cache_size_unknown, "", null, "?"); // CacheSize not init. yet
 
     @NonNull
     public final String id;
     public final int comparable;
     private final int stringId;
     private final int[] gcIds;
+    private final String shortName;
     /**
      * lookup for OC JSON requests (the numeric size is deprecated for OC)
      */
     private final String ocSize2;
 
-    CacheSize(@NonNull final String id, final int comparable, final int stringId, final String ocSize2, final int[] gcIds) {
+    CacheSize(@NonNull final String id, final int comparable, final int stringId, final String ocSize2, final int[] gcIds, final String shortName) {
         this.id = id;
         this.comparable = comparable;
         this.stringId = stringId;
         this.ocSize2 = ocSize2;
         this.gcIds = gcIds;
+        this.shortName = shortName;
     }
 
     @NonNull
@@ -138,5 +140,10 @@ public enum CacheSize {
     @NonNull
     public final String getL10n() {
         return CgeoApplication.getInstance().getBaseContext().getString(stringId);
+    }
+
+    @NonNull
+    public final String getShortName() {
+        return shortName;
     }
 }
