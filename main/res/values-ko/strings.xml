@@ -440,7 +440,7 @@
     <string name="cache_filter_exclude">제외</string>
     <string name="cache_filter_userdisplay_complex">복잡하게</string>
     <string name="cache_filter_userdisplay_none">없음</string>
-    <string name="cache_filter_userdisplay_multi">멀티</string>
+    <string name="cache_filter_userdisplay_multi">배수</string>
     <string name="cache_filter_storage_load_button">로드</string>
     <string name="cache_filter_storage_delete_button">삭제</string>
     <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
@@ -460,6 +460,15 @@
     <string name="cache_filter_favorites_absolute">절대적</string>
     <string name="cache_filter_favorites_percentage">비율</string>
     <string name="cache_filter_distance_use_current_position">현 위치 사용</string>
+    <string name="cache_filter_status_select_all">모든</string>
+    <string name="cache_filter_status_select_only_found_yes">찾은 캐시만</string>
+    <string name="cache_filter_status_select_only_found_no">찾지 않은 캐시만</string>
+    <string name="cache_filter_status_select_only_own_yes">소유의 캐시만</string>
+    <string name="cache_filter_status_select_only_own_no">소유하지 않은 캐시만</string>
+    <string name="cache_filter_status_select_only_disabled_yes">일시정지된 캐시만</string>
+    <string name="cache_filter_status_select_only_disabled_no">활성화된 캐시만</string>
+    <string name="cache_filter_status_select_only_archived_yes">영구보관된 캐시만</string>
+    <string name="cache_filter_status_select_only_archived_no">활성화된 캐시만</string>
     <!-- about -->
     <string name="about_version">버전</string>
     <string name="about_changelog">변경내역</string>
@@ -1325,6 +1334,9 @@
     <string name="search_hbu">숨겨진 사용자</string>
     <string name="search_hbu_prefill">소유주</string>
     <string name="search_hbu_button">소유주로 검색</string>
+    <string name="search_filter">필터 (실험용)</string>
+    <string name="search_filter_button">필터로 검색</string>
+    <string name="search_filter_info_message">\'필터로 검색\'은 제공된 필터를 사용하여 온라인 서비스에서 캐시를 검색합니다. 서비스 기능에 따라 필터의 일부만 온라인으로 실행되고 나머지는 오프라인 필터링으로 실행됩니다.\n\n모든 서비스는 AND 필터 만 지원하고 필터 반전은 지원하지 않습니다.\n\nGeocaching.com은 다음을 지원합니다.\n- 이름 (전체 단어 만, 패턴은 지원되지 않음)\n- 캐시 유형\n- 캐시 크기\n- 거리 및 지형\n- 호감점수 (절대, 최소만)\n- 상태 (소유, 찾음 및 활성화됨)\n- 숨김 (정확히 사용자 ID 지정)\n- 찾을 수 없음 (정확히 사용자 ID 지정)\n- 숨긴 날짜\n\nGeocaching.com이 우리에게 필요한 API를 차단하고 있기 때문에 c:geo는 특별히 속성 필터링을 제공 할 수 없습니다.\n\nGeocaching.com을 제외한 어떤 서비스도 아직 지원하지 않습니다.</string>
     <string name="search_tb">추적아이템</string>
     <string name="search_tb_hint">추적 코드</string>
     <string name="search_tb_button">추적아이템 검색</string>
