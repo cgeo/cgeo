@@ -1359,7 +1359,6 @@
     <string name="helper_bluetoothgps_description">외부 GPS 수신기를 이용하여 좀더 정확한 위치 데이터를 잡을 수 있고, 기기의 배터리를 절약할 수 있습니다.</string>
     <string name="helper_gps_locker_description">GPS Locker는 다른 응용으로 전환하거나, 화면을 끈 상태에서도 GPS 신호를 활성으로 유지합니다.</string>
     <string name="helper_barcode_description">지오코드를 바코드로 표시해주는 웹사이트와 Greasemonkey 스크립트가 있습니다. 이 앱을 사용하면 c:geo는 컴퓨터 화면서 지오코드를 직접 읽어들일 수 있습니다.</string>
-    <string name="helper_pocketquery_description">현재의 위치나 지도에서 선택한 지점을 중심으로 포켓쿼리를 생성하고 다운로드 받을 수 있습니다. Geocaching.com 프리미엄 회원 계정이 필요합니다.</string>
     <string name="helper_google_translate_title">구글 번역</string>
     <string name="helper_google_translate_description">구글 번역(Google Translate)앱을 다운로드 받으면 c:geo에서 캐시 설명을 쉽게 번역할 수 있습니다. 캐시 설명문을 길게 누르시면 됩니다.(인터넷 연결 필요없음)</string>
     <string name="helper_where_you_go_description">WhereYouGo를 사용하면 Wherigo 유형의 지오캐시를 검색하고 즐길 수 있습니다. c:geo는 자동적으로 카트리지를 다운로드 받습니다.</string>
