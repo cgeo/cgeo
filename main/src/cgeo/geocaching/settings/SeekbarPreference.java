@@ -129,12 +129,13 @@ public class SeekbarPreference extends Preference {
     @Override
     protected void onSetInitialValue(final boolean restoreValue, final Object defaultValue) {
         final int defValue = null != defaultValue ? (Integer) defaultValue : this.defaultValue;
-        startProgress = valueToProgress(restoreValue ? getPersistedInt(defValue) : defValue);
+        final int defaultProgress = valueToProgress(restoreValue ? getPersistedInt(defValue) : defValue);
+        startProgress = defaultProgress < minProgress ? minProgress : Math.min(defaultProgress, maxProgress);
     }
 
     @Override
     protected Object onGetDefaultValue(final TypedArray a, final int index) {
-        return valueToProgress(a.getInt(index, defaultValue));
+        return a.getInt(index, defaultValue);
     }
 
     @Override
