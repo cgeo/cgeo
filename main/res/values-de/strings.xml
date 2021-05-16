@@ -1872,6 +1872,7 @@
     <string name="localfile_cannot_handle">Fehler beim Lesen der Datei oder c:geo kennt diesen Dateityp nicht.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Datei empfangen</string>
+    <string name="receivedownload_receiving_file">Empfange Datei \"%s\"</string>
     <string name="receivedownload_success">Datei erfolgreich als \"%s \" gespeichert</string>
     <string name="receivedownload_error">Fehler beim Empfangen der Datei</string>
     <string name="receivedownload_error_io_exception">E/A-Fehler beim Empfangen der Datei. Ist dein Ordner \"%s\" beschreibbar?</string>
@@ -1879,6 +1880,7 @@
     <string name="receivedownload_alreadyexists">Eine Datei mit diesem Namen existiert bereits. Bestehende Datei überschreiben oder neue Datei unter anderem Namen speichern?</string>
     <string name="receivedownload_option_overwrite">Überschreiben</string>
     <string name="receivedownload_option_differentname">Anderer Name</string>
+    <string name="receivedownload_amount_copied">%s kopiert</string>
     <string name="receivedownload_cancelled">Dateiübertragung abgebrochen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline-Karte herunterladen</string>
