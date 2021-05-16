@@ -7,6 +7,10 @@
 /main/res/values-*/strings.xml merge=ours
 /cgeo-contacts/res/values-*/strings.xml merge=ours
 
+# Ignore translated changelogs
+/main/res/raw-*/changelog_master.md merge=ours
+/main/res/raw-*/changelog_release.md merge=ours
+
 # Ignore translated playstore description 
 /main/project/playstore/description/translated/* merge=ours
 /cgeo-contacts/project/playstore/description/translated/* merge=ours
