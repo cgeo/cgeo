@@ -1872,6 +1872,7 @@
     <string name="localfile_cannot_handle">Virhe luettaessa tiedostoa tao c:geo ei pysty käsittelemään tätä tiedostomuotoa.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Vastaanota tiedosto</string>
+    <string name="receivedownload_receiving_file">Vastaanotetaan tiedostoa \"%s\"</string>
     <string name="receivedownload_success">Tiedosto tallennettu onnistuneesti nimellä \"%s\"</string>
     <string name="receivedownload_error">Virhe tiedostoa vastaanotettaessa</string>
     <string name="receivedownload_error_io_exception">I/O-virhe tiedostoa vastaanotettaessa. Onko kansiosi \"%s\" kirjoitettavissa?</string>
@@ -1879,6 +1880,7 @@
     <string name="receivedownload_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
     <string name="receivedownload_option_overwrite">Korvaa</string>
     <string name="receivedownload_option_differentname">Eri nimi</string>
+    <string name="receivedownload_amount_copied">%s kopioitu</string>
     <string name="receivedownload_cancelled">Tiedostonsiirto peruttu</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Lataa offline-kartta</string>
