@@ -1370,7 +1370,6 @@
     <string name="helper_bluetoothgps_description">Voit käyttää ulkoista GPS-vastaanotinta saadaksesi tarkempia sijaintitietoja ja säästääksesi laitteen akkua.</string>
     <string name="helper_gps_locker_description">GPS Locker pitää GPS-signaalin aktiivisena vaihtaessasi sovellusten välillä sekä laitteen näytön ollessa pois päältä.</string>
     <string name="helper_barcode_description">Greasemonkey komentosarjan ja sivuston avulla pystyy lukemaan viiva- ja geokoodeja. Tämän sovelluksen avulla c:geo lukee viiva- ja geokoodeja.</string>
-    <string name="helper_pocketquery_description">Tämän avulla on helppo luoda ja ladata Pocket Queryja nykyisestä sijainnistasi tai kartalta valitun pisteen ympäriltä. Vaatii Premium Geocaching.com-tilin.</string>
     <string name="helper_google_translate_title">Google-kääntäjä</string>
     <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
     <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
