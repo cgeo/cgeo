@@ -443,7 +443,6 @@
     <string name="cache_filter_exclude">Vyloučit</string>
     <string name="cache_filter_userdisplay_complex">Komplexní</string>
     <string name="cache_filter_userdisplay_none">Žádný</string>
-    <string name="cache_filter_userdisplay_multi">Vícenásobné</string>
     <string name="cache_filter_storage_load_button">Načíst</string>
     <string name="cache_filter_storage_delete_button">Vymazat</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
