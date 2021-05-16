@@ -729,7 +729,8 @@ public final class Dialogs {
         final AlertDialog.Builder builder = newBuilder(context);
         builder.setTitle(title);
         builder.setView(input);
-        builder.setPositiveButton(buttonTitle, (dialog, which) -> okayListener.call(input.getText().toString()));
+        // remove whitespaces added by autocompletion of Android keyboard before calling okayListener
+        builder.setPositiveButton(buttonTitle, (dialog, which) -> okayListener.call(input.getText().toString().trim()));
         builder.setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.dismiss());
         final AlertDialog dialog = builder.create();
 
@@ -806,7 +807,8 @@ public final class Dialogs {
         final AlertDialog.Builder builder = newBuilder(context);
         builder.setTitle(title);
         builder.setView(layout);
-        builder.setPositiveButton(buttonTitle, (dialog, which) -> okayListener.call(editText.getText().toString()));
+        // remove whitespaces added by autocompletion of Android keyboard before calling okayListener
+        builder.setPositiveButton(buttonTitle, (dialog, which) -> okayListener.call(editText.getText().toString().trim()));
         builder.setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.dismiss());
         final AlertDialog dialog = builder.create();
 
