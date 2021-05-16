@@ -528,36 +528,76 @@ class GCWebAPI {
         int total;
     }
 
+    //Complete example for reference
+    //    {
+    //        "id": 3866836,
+    //        "name": "Ness Bridge",
+    //        "code": "GC4KJHJ",
+    //        "premiumOnly": true,
+    //        "favoritePoints": 723,
+    //        "geocacheType": 2,
+    //        "containerType": 6,
+    //        "difficulty": 2.0,
+    //        "terrain": 1.5,
+    //        "userFound": false,
+    //        "userDidNotFind": false,
+    //        "cacheStatus": 0,
+    //        "postedCoordinates": {
+    //        "latitude": 57.476967,
+    //            "longitude": -4.2278
+    //    },
+    //        "detailsUrl": "/geocache/GC4KJHJ",
+    //        "hasGeotour": false,
+    //        "hasLogDraft": false,
+    //        "placedDate": "2013-08-22T00:00:00",
+    //        "owner": {
+    //        "code": "PR1ZE74",
+    //            "username": "Ah!"
+    //    },
+    //        "lastFoundDate": "2021-02-26T20:17:59"
+    //    },
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class MapSearchResult {
-        @JsonProperty("code")
-        String code;
+        @JsonProperty
+        int id;
         @JsonProperty("name")
         String name;
-        @JsonProperty("postedCoordinates")
-        PostedCoordinates postedCoordinates;
-        @JsonProperty("userCorrectedCoordinates")
-        PostedCoordinates userCorrectedCoordinates;
-        @JsonProperty("owner")
-        CacheOwner owner;
+        @JsonProperty("code")
+        String code;
         @JsonProperty("premiumOnly")
         boolean premiumOnly;
+        @JsonProperty("favoritePoints")
+        int favoritePoints;
         @JsonProperty("geocacheType")
         int geocacheType;
+        @JsonProperty("containerType")
+        int containerType;
+        @JsonProperty("difficulty")
+        float difficulty;
+        @JsonProperty("terrain")
+        float terrain;
         @JsonProperty("userFound")
         boolean userFound;
         @JsonProperty("userDidNotFind")
         boolean userDidNotFind;
         @JsonProperty("cacheStatus")
         int cacheStatus;
-        @JsonProperty("difficulty")
-        float difficulty;
-        @JsonProperty("terrain")
-        float terrain;
-        @JsonProperty("containerType")
-        int containerType;
-        @JsonProperty("favoritePoints")
-        int favoritePoints;
+        @JsonProperty("postedCoordinates")
+        PostedCoordinates postedCoordinates;
+        @JsonProperty("userCorrectedCoordinates")
+        PostedCoordinates userCorrectedCoordinates;
+        @JsonProperty("detailsUrl")
+        String detailsUrl;
+        @JsonProperty("hasGeotour")
+        boolean hasGeotour;
+        @JsonProperty("hasLogDraft")
+        boolean hasLogDraft;
+        @JsonProperty("placedDate")
+        Date placedDate;
+        @JsonProperty("owner")
+        CacheOwner owner;
+        @JsonProperty("lastFoundDate")
+        Date lastFoundDate;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -746,6 +786,7 @@ class GCWebAPI {
                     c.setTerrain(r.terrain);
                     c.setSize(CacheSize.getByGcId(r.containerType));
                     c.setPremiumMembersOnly(r.premiumOnly);
+                    c.setHidden(r.placedDate);
 
                     //Only set found if the map returns a "found",
                     //the map API will possibly lag behind and break

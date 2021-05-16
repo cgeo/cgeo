@@ -1,8 +1,11 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -34,6 +37,9 @@ public class DateTimeEditor {
     private FragmentManager fragmentManager;
 
     private Calendar date;
+    private final boolean[] dateUnset = new boolean[]{ false };
+    private boolean allowUserToUnset = false;
+    private Action1<Date> changeListener = null;
 
     /**
      * Initializes the instance. Typically called in an activities 'onCreate' method.
@@ -41,7 +47,7 @@ public class DateTimeEditor {
      * @param timeView textview to use for time display and picker handling. Might be null
      * @param fragmentManager manager to use for creating sub dialogs (date picker)
      */
-    public void init(@NonNull final TextView dateView, @Nullable final TextView timeView, @NonNull final FragmentManager fragmentManager) {
+    public DateTimeEditor init(@NonNull final TextView dateView, @Nullable final TextView timeView, @NonNull final FragmentManager fragmentManager) {
 
         this.dateButton = dateView;
         this.timeButton = timeView;
@@ -52,12 +58,13 @@ public class DateTimeEditor {
         if (this.timeButton != null) {
             this.timeButton.setOnClickListener(new TimeListener());
         }
-        triggerGui();
+        triggerChange();
+        return this;
     }
 
-    public void setTimeVisible(final boolean isVisible) {
+    public DateTimeEditor setTimeVisible(final boolean isVisible) {
         if (this.timeButton == null) {
-            return;
+            return this;
         }
 
         if (isVisible) {
@@ -65,39 +72,69 @@ public class DateTimeEditor {
         } else {
             this.timeButton.setVisibility(View.GONE);
         }
+        return this;
     }
 
-    public void setCalendar(final Calendar date) {
-        setDate(date.getTime());
+    public DateTimeEditor setAllowUserToUnset(final boolean allowUserToUnset) {
+        this.allowUserToUnset = allowUserToUnset;
+        return this;
     }
 
-    public void setDate(final Date date) {
-        this.date.setTime(date);
-
-        triggerGui();
+    public DateTimeEditor setCalendar(final Calendar date) {
+        return setDate(date == null ? null : date.getTime());
     }
 
-    private void triggerGui() {
-        //make it visible
-        this.dateButton.setText(Formatter.formatShortDateVerbally(this.date.getTime().getTime()));
+    public DateTimeEditor setDate(final Date date) {
+
+        this.date.setTime(date == null ? new Date() : date);
+        this.dateUnset[0] = date == null;
+
+        triggerChange();
+        return this;
+    }
+
+    public DateTimeEditor setChangeListener(final Action1<Date> changeListener) {
+        this.changeListener = changeListener;
+        return this;
+    }
+
+    /**
+     * If currently there is no date/time set, then this method sets the preselected date for later calls.
+     * If a date is selected, this method does nothing
+     */
+    public DateTimeEditor setPreselectDate(final Date preselectDate) {
+        if (dateUnset[0]) {
+            date.setTime(preselectDate);
+        }
+        return this;
+    }
+
+    private void triggerChange() {
+        //GUI: make it visible
+        this.dateButton.setText(dateUnset[0] ? LocalizationUtils.getString(R.string.datetime_nodateset_display) : Formatter.formatShortDateVerbally(this.date.getTime().getTime()));
         if (this.timeButton != null) {
-            this.timeButton.setText(Formatter.formatTime(this.date.getTime().getTime()));
+            this.timeButton.setText(dateUnset[0] ? LocalizationUtils.getString(R.string.datetime_nodateset_display) : Formatter.formatTime(this.date.getTime().getTime()));
+        }
+
+        //call listener if any
+        if (this.changeListener != null) {
+            this.changeListener.call(dateUnset[0] ? null : this.date.getTime());
         }
     }
 
     public Calendar getCalendar() {
-        return date;
+        return dateUnset[0] ? null : date;
     }
 
     public Date getDate() {
-        return date.getTime();
+        return dateUnset[0] ? null : date.getTime();
     }
 
     private class DateListener implements View.OnClickListener {
 
         @Override
         public void onClick(final View arg0) {
-            final DateDialog dateDialog = new DateDialog(date, c -> triggerGui());
+            final DateDialog dateDialog = new DateDialog(date, allowUserToUnset ? dateUnset : null, c -> triggerChange());
             dateDialog.setCancelable(true);
             dateDialog.show(fragmentManager, "date_dialog");
         }
@@ -106,7 +143,7 @@ public class DateTimeEditor {
     private class TimeListener implements View.OnClickListener {
         @Override
         public void onClick(final View arg0) {
-            final TimeDialog timeDialog = new TimeDialog(date, c -> triggerGui());
+            final TimeDialog timeDialog = new TimeDialog(date, allowUserToUnset ? dateUnset : null, c -> triggerChange());
             timeDialog.setCancelable(true);
             timeDialog.show(fragmentManager, "time_dialog");
         }
@@ -115,10 +152,12 @@ public class DateTimeEditor {
     public static class DateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
         private final Calendar date;
+        private final boolean[] dateUnset;
         private final Action1<Calendar> changeTrigger;
 
-        public DateDialog(final Calendar date, final Action1<Calendar> changeTrigger) {
+        public DateDialog(final Calendar date, final boolean[] dateUnset, final Action1<Calendar> changeTrigger) {
             this.date = date;
+            this.dateUnset = dateUnset;
             this.changeTrigger = changeTrigger;
         }
 
@@ -132,12 +171,19 @@ public class DateTimeEditor {
 
             // Create a new instance of DatePickerDialog and return it
             final DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
-            dialog.onDateChanged(dialog.getDatePicker(), year, month, day);
+            if (dateUnset != null) {
+                dialog.setButton(AlertDialog.BUTTON_NEUTRAL, LocalizationUtils.getString(R.string.datetime_clear_button), (v, b) -> {
+                    dateUnset[0] = true;
+                    date.setTime(new Date());
+                    this.changeTrigger.call(date);
+                });
+            }
             return dialog;
         }
 
         @Override
         public void onDateSet(final DatePicker view, final int year, final int monthOfYear, final int dayOfMonth) {
+            dateUnset[0] = false;
             date.set(year, monthOfYear, dayOfMonth);
             this.changeTrigger.call(date);
         }
@@ -147,10 +193,12 @@ public class DateTimeEditor {
     public static class TimeDialog extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
         private final Calendar date;
+        private final boolean[] dateUnset;
         private final Action1<Calendar> changeTrigger;
 
-        public TimeDialog(final Calendar date, final Action1<Calendar> changeTrigger) {
+        public TimeDialog(final Calendar date, final boolean[] dateUnset, final Action1<Calendar> changeTrigger) {
             this.date = date;
+            this.dateUnset = dateUnset;
             this.changeTrigger = changeTrigger;
         }
 
@@ -162,12 +210,21 @@ public class DateTimeEditor {
             final int minute = date.get(Calendar.MINUTE);
 
             // Create a new instance of TimePickerDialog and return it
-            return new TimePickerDialog(getActivity(), this, hour, minute,
+            final TimePickerDialog dialog = new TimePickerDialog(getActivity(), this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
+            if (dateUnset != null) {
+                dialog.setButton(AlertDialog.BUTTON_NEUTRAL, LocalizationUtils.getString(R.string.datetime_clear_button), (v, b) -> {
+                    dateUnset[0] = true;
+                    date.setTime(new Date());
+                    this.changeTrigger.call(date);
+                });
+            }
+            return dialog;
         }
 
         @Override
         public void onTimeSet(final TimePicker view, final int hourOfDay, final int minute) {
+            dateUnset[0] = false;
             date.set(Calendar.HOUR_OF_DAY, hourOfDay);
             date.set(Calendar.MINUTE, minute);
             changeTrigger.call(date);
