@@ -112,7 +112,8 @@ public class CoordinatesInputDialog extends DialogFragment {
     @Override
     public void onPause() {
         super.onPause();
-        new Keyboard(getActivity()).hide();
+        Keyboard.hide(getActivity());
+
     }
 
     @Override

@@ -751,8 +751,7 @@ public final class Dialogs {
             }
         });
         // force keyboard
-        input.requestFocus();
-        new Keyboard(context).showDelayed(input);
+        Keyboard.show(context, input);
 
         // disable button
         dialog.show();
@@ -829,8 +828,7 @@ public final class Dialogs {
             }
         });
         // force keyboard
-        editText.requestFocus();
-        // new Keyboard(context).showDelayed(editText);
+        Keyboard.show(context, editText);
 
         // disable button
         dialog.show();

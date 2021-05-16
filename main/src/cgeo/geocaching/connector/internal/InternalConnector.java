@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.internal;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.databinding.DialogTitleButtonButtonBinding;
@@ -283,6 +284,6 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
             })
             .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.cancel())
             .show();
-        binding.name.requestFocus();
+        Keyboard.show(context, binding.name);
     }
 }

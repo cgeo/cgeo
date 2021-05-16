@@ -249,7 +249,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     @Override
     protected void requestKeyboardForLogging() {
         if (StringUtils.isBlank(binding.tracking.getText())) {
-            new Keyboard(this).show(binding.tracking);
+            Keyboard.show(this, binding.tracking);
+
         } else {
             super.requestKeyboardForLogging();
         }

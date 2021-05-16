@@ -171,7 +171,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     protected void hideKeyboard() {
-        new Keyboard(this).hide();
+        Keyboard.hide(this);
     }
 
     protected void buildDetailsContextMenu(final ActionMode actionMode, final Menu menu, final CharSequence fieldTitle, final boolean copyOnly) {
