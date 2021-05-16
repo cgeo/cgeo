@@ -867,10 +867,6 @@ public class Geocache implements IWaypoint {
         return BooleanUtils.isTrue(didNotFound);
     }
 
-    public boolean isOwn() {
-        return StringUtils.compareIgnoreCase(Settings.getUserName(), getOwnerUserId()) == 0;
-    }
-
     /**
      *
      * @return {@code true} if the user has put a favorite point onto this cache

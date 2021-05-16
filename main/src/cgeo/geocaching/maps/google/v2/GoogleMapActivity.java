@@ -8,6 +8,7 @@ import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.models.Geocache;
@@ -231,6 +232,7 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
         DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
+        MapSettingsUtils.onActivityResult(this, requestCode, resultCode, data, mapBase::onMapSettingsPopupFinished);
     }
 
     @Override

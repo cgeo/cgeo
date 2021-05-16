@@ -115,6 +115,8 @@ public abstract class AbstractMap {
         //
     }
 
+    public abstract void onMapSettingsPopupFinished(boolean circlesSwitched);
+
      @Nullable
     public Geocache getCurrentTargetCache() {
         if (StringUtils.isNotBlank(targetGeocode)) {

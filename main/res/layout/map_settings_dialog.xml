@@ -8,6 +8,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dip"
+            android:text="@string/search_filter" />
+        <RelativeLayout
+            android:id="@+id/map_settings_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/map_settings_filter_button"
+                style="@style/button_icon"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_menu_filter"/>
+            <TextView
+                android:id="@+id/map_settings_filter_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="?text_color"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_toRightOf="@+id/map_settings_filter_button"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
         <TextView
             android:id="@+id/show_hide_title"
             android:layout_width="wrap_content"

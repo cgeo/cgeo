@@ -157,6 +157,7 @@
     <style name="button_icon" parent="button_small">
         <item name="android:layout_width">40dip</item>
         <item name="android:layout_height">40dip</item>
+        <item name="android:scaleType">fitCenter</item>
         <item name="android:layout_gravity">center</item>
     </style>
 
