@@ -1924,6 +1924,7 @@
     <string name="localfile_cannot_handle">Chyba při čtení souboru nebo c:geo neumí s tímto typem souboru pracovat.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Přijmout soubor</string>
+    <string name="receivedownload_receiving_file">Příjem souboru \"%s\"</string>
     <string name="receivedownload_success">Soubor byl úspěšně uložen jako \"%s\"</string>
     <string name="receivedownload_error">Chyba při přijímání souboru</string>
     <string name="receivedownload_error_io_exception">I/O chyba při přijímání souboru. Je vaše složka \"%s\" zapisovatelná?</string>
@@ -1931,7 +1932,7 @@
     <string name="receivedownload_alreadyexists">Soubor s tímto názvem již existuje. Chcete přepsat existující soubor, nebo uložit nový soubor pod jiným názvem?</string>
     <string name="receivedownload_option_overwrite">Přepsat</string>
     <string name="receivedownload_option_differentname">Přejmenovat</string>
-    <string name="receivedownload_kb_copied">%d kB zkopírováno</string>
+    <string name="receivedownload_amount_copied">%s zkopírováno</string>
     <string name="receivedownload_cancelled">Přenos souboru byl zrušen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Stáhnout offline mapu</string>

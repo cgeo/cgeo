@@ -1846,6 +1846,7 @@
     <string name="localfile_cannot_handle">파일 읽기 오류 또는 c:geo가 이 파일 유형을 처리 할 수 없습니다.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">파일 받기</string>
+    <string name="receivedownload_receiving_file">\"%s\" 파일을 받는 중</string>
     <string name="receivedownload_success">파일이 \"%s\"(으)로 성공적으로 저장되었습니다.</string>
     <string name="receivedownload_error">파일을 받는 중 오류</string>
     <string name="receivedownload_error_io_exception">파일을 받는 중 I/O 오류가 발생했습니다. \"%s\"폴더에 쓰기가 가능합니까?</string>
@@ -1853,7 +1854,7 @@
     <string name="receivedownload_alreadyexists">이 이름의 파일이 이미 존재합니다. 기존 파일을 덮어 쓰거나 다른 이름으로 새 파일을 저장 하시겠습니까?</string>
     <string name="receivedownload_option_overwrite">덮어쓰기</string>
     <string name="receivedownload_option_differentname">다른 이름</string>
-    <string name="receivedownload_kb_copied">%d kB 복사됨</string>
+    <string name="receivedownload_amount_copied">%s를 복사했습니다</string>
     <string name="receivedownload_cancelled">파일 전송이 취소되었습니다.</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">오프라인 지도 다운로드</string>

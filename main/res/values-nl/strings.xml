@@ -1872,6 +1872,7 @@
     <string name="localfile_cannot_handle">Fout bij lezen van het bestand of c:geo kan dit bestandstype niet verwerken.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Bestand ontvangen</string>
+    <string name="receivedownload_receiving_file">Ontvangen van bestand \"%s\"</string>
     <string name="receivedownload_success">Bestand succesvol opgeslagen als \"%s\"</string>
     <string name="receivedownload_error">Fout bij ontvangen van bestand</string>
     <string name="receivedownload_error_io_exception">I/O fout tijdens het ontvangen van een kaartbestand. Is je kaartenmap \"%s\" beschrijfbaar?</string>
@@ -1879,7 +1880,7 @@
     <string name="receivedownload_alreadyexists">Een bestand met deze naam bestaat al. Bestaande bestanden overschrijven of het bestand opslaan onder een andere naam?</string>
     <string name="receivedownload_option_overwrite">Overschrijven</string>
     <string name="receivedownload_option_differentname">Andere naam</string>
-    <string name="receivedownload_kb_copied">%d kB gekopieerd</string>
+    <string name="receivedownload_amount_copied">%s gekopieerd</string>
     <string name="receivedownload_cancelled">Bestandsoverdracht geannuleerd</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline kaart downloaden</string>

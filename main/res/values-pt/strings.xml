@@ -643,6 +643,7 @@
     <string name="init_user_confirmation">Eu sei o que estou a fazer</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
+    <string name="init_backup_unnecessary">A base de dados está vazia, não é necessário fazer uma cópia de segurança. Ainda assim, quer criar uma cópia de segurança?</string>
     <string name="init_backup_folder_exists_error">Não foi possível criar uma nova pasta de cópias de segurança. Realizou alguma cópia de segurança nos últimos 60 segundos?</string>
     <string name="init_backup_no_backup_available">Não existe nenhum ficheiro de cópia de segurança.</string>
     <string name="backup_confirm_overwrite">Isto irá apagar a sua pasta de cópias de segurança mais antiga de %s. \nDeseja continuar?</string>
@@ -1866,6 +1867,7 @@
     <string name="localfile_cannot_handle">Erro ao ler o ficheiro ou o c:geo não consegue processar este tipo de ficheiro.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Receber ficheiro</string>
+    <string name="receivedownload_receiving_file">A receber o ficheiro \"%s\"</string>
     <string name="receivedownload_success">Ficheiro armazenado com sucesso como \"%s\"</string>
     <string name="receivedownload_error">Erro ao receber ficheiro</string>
     <string name="receivedownload_error_io_exception">Erro ao receber o ficheiro. A pasta \"%s permite a gravação?</string>
@@ -1873,7 +1875,7 @@
     <string name="receivedownload_alreadyexists">Já existe um ficheiro com este nome. Substituir o ficheiro existente ou guardar o novo ficheiro sob um nome diferente?</string>
     <string name="receivedownload_option_overwrite">Substituir</string>
     <string name="receivedownload_option_differentname">Nome diferente</string>
-    <string name="receivedownload_kb_copied">%d kB copiados</string>
+    <string name="receivedownload_amount_copied">%s copiado</string>
     <string name="receivedownload_cancelled">Transferência de ficheiros cancelada</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Transferir mapa offline</string>

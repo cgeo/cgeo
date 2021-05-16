@@ -1575,7 +1575,6 @@
     <string name="receivedownload_alreadyexists">Файл з такою назвою вже існує. Перезаписати наявний файл або зберегти новий файл?</string>
     <string name="receivedownload_option_overwrite">Перезаписати</string>
     <string name="receivedownload_option_differentname">Інша назва</string>
-    <string name="receivedownload_kb_copied">%d КБ скопійовано</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Завантажити автономну карту</string>
     <string name="downloadmap_choose">Обрати мапу</string>

@@ -1675,7 +1675,6 @@
     <string name="receivedownload_alreadyexists">Failas šiuo pavadinimu jau yra. Perrašyti jį ar išsaugoti failą kitu pavadinimu?</string>
     <string name="receivedownload_option_overwrite">Perrašyti</string>
     <string name="receivedownload_option_differentname">Kitas pavadinimas</string>
-    <string name="receivedownload_kb_copied">%d kB nukopijuota</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Atsisiųsti žemėlapį naudojimui neprisijungus</string>
     <string name="downloadmap_choose">Pasirinkite žemėlapį</string>
