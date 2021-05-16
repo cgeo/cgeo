@@ -1363,7 +1363,6 @@
     <string name="helper_bluetoothgps_description">Permet utilitzar un receptor GPS extern per obtenir dades de localització més precises i estalviar bateria del dispositiu.</string>
     <string name="helper_gps_locker_description">GPS Locker manté el senyal GPS actiu quan canvieu d’aplicació i quan la pantalla del dispositiu està apagada.</string>
     <string name="helper_barcode_description">Hi ha scripts de Greasemonkey i llocs web que permeten mostrar els codis dels catxés com a codis de barres. Amb aquesta aplicació el c:geo pot llegir directament els codis dels catxés des de l\'ordinador.</string>
-    <string name="helper_pocketquery_description">Permet la fàcil creació i descàrrega de pocket queries centrats en la posició actual o en un punt seleccionat al mapa. Requereix un compte Premium de Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Si descarregueu paquets de traducció a l\'app Google Translate, llavors podeu traduir fàcilment les descripcions dels catxés al c:geo tocant uns segons sobre el text de la descripció del catxé (sense connexió a Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permet jugar i buscar catxés de tipus Wherigo. El c:geo pot descarregar automàticament els cartutxos dins d\'aquest aplicació.</string>
