@@ -643,6 +643,7 @@
     <string name="init_user_confirmation">So cosa sto facendo</string>
     <string name="init_backup_success">Il database di c:geo è stato salvato con successo nel file: </string>
     <string name="init_backup_failed">Backup del database di c:geo fallito.</string>
+    <string name="init_backup_unnecessary">Il database è vuoto, nessun backup necessario. Creare comunque un backup?</string>
     <string name="init_backup_folder_exists_error">Impossibile creare una nuova cartella di backup. Hai già eseguito un backup nell\'ultimo minuto?</string>
     <string name="init_backup_no_backup_available">Non c\'è nessun file di backup disponibile.</string>
     <string name="backup_confirm_overwrite">Questo eliminerà la cartella di backup esistente più vecchia da %s. \nVuoi continuare?</string>
@@ -1369,7 +1370,6 @@
     <string name="helper_bluetoothgps_description">Permette di utilizzare un GPS esterno, garantendo maggiore precisione, migliore ricezione e prolungando la durata della batteria del tuo dispositivo.</string>
     <string name="helper_gps_locker_description">Il blocco GPS mantiene attivo il segnale GPS quando si passa tra le applicazioni e quando lo schermo del dispositivo è spento.</string>
     <string name="helper_barcode_description">Ci sono script Greasemonkey e siti web che consentono di visualizzare un geocode come codice a barre. Con questa app c:geo può leggere il geocode direttamente dallo schermo del tuo computer.</string>
-    <string name="helper_pocketquery_description">Consente di creare facilmente Pocket Queries centrate sulla tua posizione attuale o un punto scelto dalla mappa. Richiede un account premium su Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Traduttore</string>
     <string name="helper_google_translate_description">Se si scaricano anche le lingue offline dell\'applicazione Google Traduttore, puoi facilmente tradurre le descrizioni dei cache in c:geo toccando e tenendo premuto sul testo (senza bisogno di una connessione Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permette di giocare e cercare geocache di tipo Wherigo. c:geo può automaticamente scaricare le schede tramite questa app.</string>
@@ -1871,6 +1871,7 @@
     <string name="localfile_cannot_handle">Errore nella lettura del file o c:geo non può gestire questo tipo di file.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Ricezione file</string>
+    <string name="receivedownload_receiving_file">Ricevendo il file \"%s\"</string>
     <string name="receivedownload_success">File salvato con successo come \"%s\"</string>
     <string name="receivedownload_error">Errore durante la ricezione del file</string>
     <string name="receivedownload_error_io_exception">Errore di I/O durante la ricezione del file. La cartella \"%s\" è scrivibile?</string>
@@ -1878,6 +1879,7 @@
     <string name="receivedownload_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
     <string name="receivedownload_option_overwrite">Sovrascrivere</string>
     <string name="receivedownload_option_differentname">Nome diverso</string>
+    <string name="receivedownload_amount_copied">%s copiato</string>
     <string name="receivedownload_cancelled">Trasferimento file annullato</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
@@ -1915,6 +1917,8 @@
     <string name="mapserver_openandromaps_themes_info">Tema mappa dettagliato, creato per le mappe \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mappe dettagliate, richiedono uno dei temi della mappa \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema mappa dettagliato, creato per le mappe \"Freizeitkarte\"</string>
+    <string name="mapserver_hylly_info">Le mappe dettagliate per la Finlandia, richiedono uno dei temi mappa \"Hylly\"</string>
+    <string name="mapserver_hylly_themes_info">Tema mappa dettagliato, creato per le mappe \"Hylly\"</string>
     <string name="brouter_info">Servizio di navigazione offline</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
