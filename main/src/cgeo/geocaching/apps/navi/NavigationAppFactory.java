@@ -45,8 +45,6 @@ public final class NavigationAppFactory {
         INTERNAL_MAP(new InternalMap(), 2, R.string.pref_navigation_menu_internal_map),
         /** The external Locus app */
         LOCUS(new LocusApp(), 4, R.string.pref_navigation_menu_locus),
-        /** The external RMaps app */
-        RMAPS(new RMapsApp(), 5, R.string.pref_navigation_menu_rmaps),
         /** Google Maps */
         GOOGLE_MAPS(new GoogleMapsApp(), 6, R.string.pref_navigation_menu_google_maps),
         /** Google Navigation */

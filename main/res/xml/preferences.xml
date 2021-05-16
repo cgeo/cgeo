@@ -1088,11 +1088,6 @@
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
-                    android:key="@string/pref_navigation_menu_rmaps"
-                    android:title="@string/cache_menu_rmaps" />
-                <CheckBoxPreference
-                    android:defaultValue="true"
-                    android:enabled="false"
                     android:key="@string/pref_navigation_menu_google_maps"
                     android:title="@string/cache_menu_map_ext" />
                 <CheckBoxPreference

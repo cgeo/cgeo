@@ -199,7 +199,6 @@
     <string translatable="false" name="pref_navigation_menu_radar">navigationRadar</string>
     <string translatable="false" name="pref_navigation_menu_internal_map">navigationInternalMap</string>
     <string translatable="false" name="pref_navigation_menu_locus">navigationLocus</string>
-    <string translatable="false" name="pref_navigation_menu_rmaps">navigationRmaps</string>
     <string translatable="false" name="pref_navigation_menu_google_maps">navigationGoogleMaps</string>
     <string translatable="false" name="pref_navigation_menu_google_navigation">navigationGoogleNav</string>
     <string translatable="false" name="pref_navigation_menu_google_streetview">navigationStreetView</string>
