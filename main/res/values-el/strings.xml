@@ -1867,6 +1867,7 @@
     <string name="localfile_cannot_handle">Σφάλμα ανάγνωσης αρχείου ή το c:geo δεν μπορεί να διαχειριστεί αυτόν το τύπο αρχείου.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Λήψη αρχείου</string>
+    <string name="receivedownload_receiving_file">Λήψη αρχείου \"%s\"</string>
     <string name="receivedownload_success">Το αρχείο αποθηκεύτηκε επιτυχώς ως \"%s\"</string>
     <string name="receivedownload_error">Σφάλμα κατά την λήψη του αρχείου</string>
     <string name="receivedownload_error_io_exception">Σφάλμα I/O κατά την λήψη του αρχείου. Μπορεί να γίνει εγγραφή στην θέση αποθήκευσης \"%s\";</string>
@@ -1874,6 +1875,7 @@
     <string name="receivedownload_alreadyexists">Ένα αρχείο με αυτό το όνομα υπάρχει ήδη. Να γίνει αντικατάσταση του υπάρχοντος αρχείου ή να γίνει αποθήκευση του νέου αρχείου με διαφορετικό όνομα;</string>
     <string name="receivedownload_option_overwrite">Αντικατάσταση</string>
     <string name="receivedownload_option_differentname">Διαφορετικό όνομα</string>
+    <string name="receivedownload_amount_copied">%s αντιγράφηκε</string>
     <string name="receivedownload_cancelled">Η μεταφορά των αρχείων ακυρώθηκε</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Λήψη χαρτών εκτός σύνδεσης</string>
