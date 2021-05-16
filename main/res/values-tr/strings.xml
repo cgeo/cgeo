@@ -423,7 +423,7 @@
     <string name="cache_filter_option_inverse">Tersine Filtre</string>
     <string name="cache_filter_option_include_inconclusive">Kesin olmayan eşleşmeleri de dahil et</string>
     <string name="cache_filter_option_include_inconclusive_info">Filtrelemede aranan bir özellikle ilgili bilgi içermese de cache\'leri sonuçlara dahil et.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Sol üst köşedeki \'+\' simgesine tıklayarak bir filtre ekleyin</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Bir filtre eklemek için sağ yukarıdaki \'+\' simgesine tıklayın</string>
     <string name="cache_filter_name">İsim</string>
     <string name="cache_filter_type">Tür</string>
     <string name="cache_filter_size">Boyut</string>
@@ -435,6 +435,19 @@
     <string name="cache_filter_terrain">Arazi</string>
     <string name="cache_filter_status">Durum</string>
     <string name="cache_filter_attributes">Özellikler</string>
+    <string name="cache_filter_favorites">Favoriler</string>
+    <string name="cache_filter_distance">Mesafe</string>
+    <string name="cache_filter_include">Dahil et</string>
+    <string name="cache_filter_exclude">Hariç Tut</string>
+    <string name="cache_filter_userdisplay_complex">Kompleks</string>
+    <string name="cache_filter_userdisplay_none">Hiçbiri</string>
+    <string name="cache_filter_storage_load_button">Yükle</string>
+    <string name="cache_filter_storage_delete_button">Sil</string>
+    <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">Henüz bir filtre kaydedilmedi.</string>
+    <string name="cache_filter_storage_save_title">Filtreyi isimlendirerek sakla</string>
+    <string name="cache_filter_storage_save_confirm_title">Filtreyi üzerine yazarak kaydet</string>
+    <string name="cache_filter_storage_save_confirm_message">\'%s\' isimli farklı bir filtre zaten mevcut. Üzerine yazmak ister misiniz?</string>
     <string name="cache_filter_stringfilter_matchcase">Büyük-Küçük Harf</string>
     <string name="cache_filter_stringfilter_info">‘Pattern’ opsiyonu ile şu joker karakterleri kullanın: * ve ?.* sıfır, bir veya birden fazla karakteri, ? ise tek bir karakteri temsil eder. Örneğin , ‘H?mburg*’ araması ‘Homburg’ veya ‘Homburg at Night’ ile eşleşecektir ancak ‘A day in Hamburg’ veya ‘Hahmburg’ ile eşleşmeyecektir.</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Mevcut Değil</string>
@@ -444,6 +457,9 @@
     <string name="cache_filter_stringfilter_type_ends_with">Şununla Bitiyorsa</string>
     <string name="cache_filter_stringfilter_type_pattern">Patern</string>
     <string name="cache_filter_checkboxlist_selectallnone">Tümünü/Hiçbirini seç</string>
+    <string name="cache_filter_favorites_absolute">Mutlak</string>
+    <string name="cache_filter_favorites_percentage">Yüzde</string>
+    <string name="cache_filter_distance_use_current_position">Mevcut konumu kullan</string>
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
@@ -676,6 +692,7 @@
     <string name="init_user_confirmation">Ne yaptığımı biliyorum</string>
     <string name="init_backup_success">c:geo\'nun veritabanı başarıyla kopyalandı:</string>
     <string name="init_backup_failed">c:geo\'nun veritabanı yedeklemesi başarısız oldu.</string>
+    <string name="init_backup_unnecessary">Veritabanı boş, yedekleme gerekli değil. Yine de yedeklemek istiyor musunuz?</string>
     <string name="init_backup_folder_exists_error">Yeni bir yedekleme klasörü oluşturulamıyor. Son zamanlarda bir yedekleme yaptınız mı?</string>
     <string name="init_backup_no_backup_available">Mevcut yedekleme dosyası bulunmuyor.</string>
     <string name="backup_confirm_overwrite">Bu işlem, %s\'de bulunan mevcut en eski yedekleme dizininizi silecektir. \nDevam etmek istiyor musunuz?</string>
@@ -1172,6 +1189,7 @@
     <string name="context_share_as_link">Bağlantıyı paylaş</string>
     <string name="create_internal_cache">Kullanıcı tanımlı Geocache oluşturun</string>
     <string name="create_internal_cache_short">Yeni Geocache</string>
+    <string name="create_internal_cache_currentlist">Mevcut listeyi kullan</string>
     <string name="internal_cache_default_name">Kullanıcı tanımlı cache #%1$d</string>
     <string name="internal_cache_default_description">Bu, kullanıcı tanımlı bir Geocache\'dir</string>
     <string name="internal_cache_default_owner">Siz</string>
@@ -1327,6 +1345,7 @@
     <string name="search_own_caches">Geocache\'lerimi ara</string>
     <string name="search_pocket_title">Sorgulama Kaydı</string>
     <string name="search_bookmark_list">Yer imi listesi</string>
+    <string name="search_pocket_is_new">yeni</string>
     <string name="search_pocket_and_bookmark_loading">Cep sorgusu listesi veya bir yer imi listesi yükleniyor</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
@@ -1912,7 +1931,6 @@
     <string name="receivedownload_alreadyexists">Bu isimle bir dosya zaten var. Var olan dosyanın üzerine mi yazılsın yoksa farklı bir adla yeni bir dosya olarak mı kaydedilsin?</string>
     <string name="receivedownload_option_overwrite">Üzerine yaz</string>
     <string name="receivedownload_option_differentname">Farklı isim</string>
-    <string name="receivedownload_kb_copied">%d kB kopyalandı</string>
     <string name="receivedownload_cancelled">Dosya aktarımı iptal edildi</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Çevrimdışı harita indir</string>

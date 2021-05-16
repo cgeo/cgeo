@@ -422,8 +422,8 @@
     <string name="cache_filter_option_and_or">Utilizar OR (ou) em vez de AND (e)</string>
     <string name="cache_filter_option_inverse">Filtro invertido</string>
     <string name="cache_filter_option_include_inconclusive">Incluir correspondências incompletas</string>
-    <string name="cache_filter_option_include_inconclusive_info">Se deve ser incluído nos resultados caches cuja informação que o filtro precisa se encontre em falta.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Toque em \'+\', no canto superior esquerdo, para adicionar um filtro</string>
+    <string name="cache_filter_option_include_inconclusive_info">Se uma cache, que não tenha a informação que o filtro precisa, deve ser incluída nos resultados.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Toque em \'+\', no canto superior direito, para adicionar um filtro</string>
     <string name="cache_filter_name">Nome</string>
     <string name="cache_filter_type">Tipo</string>
     <string name="cache_filter_size">Tamanho</string>
@@ -435,6 +435,20 @@
     <string name="cache_filter_terrain">Terreno</string>
     <string name="cache_filter_status">Estado</string>
     <string name="cache_filter_attributes">Atributos</string>
+    <string name="cache_filter_favorites">Favoritos</string>
+    <string name="cache_filter_distance">Distância</string>
+    <string name="cache_filter_include">Incluir</string>
+    <string name="cache_filter_exclude">Excluir</string>
+    <string name="cache_filter_userdisplay_complex">Complexo</string>
+    <string name="cache_filter_userdisplay_none">Nenhum</string>
+    <string name="cache_filter_userdisplay_multi">Múltiplo</string>
+    <string name="cache_filter_storage_load_button">Carregar</string>
+    <string name="cache_filter_storage_delete_button">Eliminar</string>
+    <string name="cache_filter_storage_load_delete_title">Carregar ou eliminar um filtro existente</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">Ainda não foi guardado nenhum filtro.</string>
+    <string name="cache_filter_storage_save_title">Guardar filtro com nome</string>
+    <string name="cache_filter_storage_save_confirm_title">Guardar e substituir filtro</string>
+    <string name="cache_filter_storage_save_confirm_message">Já existe um filtro com o nome \'%s\' e uma configuração diferente. Substituir?</string>
     <string name="cache_filter_stringfilter_matchcase">Diferenciar maiúsc. e minúsc.</string>
     <string name="cache_filter_stringfilter_info">Com a opção \'Modelo\', utilizar caracteres * e ?. * representa zero, um ou vários caracteres, ? representa um único carácter. Por exemplo, o modelo \'Barr?iro\' corresponderá a \'Barroiro\' ou \'Barreiro à noite\' mas não a \'Um dia no Barreiro\' ou \'Barrasco\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Não está presente</string>
@@ -444,6 +458,18 @@
     <string name="cache_filter_stringfilter_type_ends_with">Termina com</string>
     <string name="cache_filter_stringfilter_type_pattern">Modelo</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleccionar todos/nenhum</string>
+    <string name="cache_filter_favorites_absolute">Absoluto</string>
+    <string name="cache_filter_favorites_percentage">Percentagem</string>
+    <string name="cache_filter_distance_use_current_position">Usar posição actual</string>
+    <string name="cache_filter_status_select_all">Todos</string>
+    <string name="cache_filter_status_select_only_found_yes">Apenas Encontradas</string>
+    <string name="cache_filter_status_select_only_found_no">Apenas Não Encontradas</string>
+    <string name="cache_filter_status_select_only_own_yes">Apenas Próprias</string>
+    <string name="cache_filter_status_select_only_own_no">Apenas de Outros</string>
+    <string name="cache_filter_status_select_only_disabled_yes">Apenas Desactivadas</string>
+    <string name="cache_filter_status_select_only_disabled_no">Apenas Activas</string>
+    <string name="cache_filter_status_select_only_archived_yes">Apenas Arquivadas</string>
+    <string name="cache_filter_status_select_only_archived_no">Apenas Não arquivadas</string>
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
@@ -676,6 +702,7 @@
     <string name="init_user_confirmation">Eu sei o que estou a fazer</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
+    <string name="init_backup_unnecessary">A base de dados está vazia, não é necessário fazer uma cópia de segurança. Ainda assim, quer criar uma cópia de segurança?</string>
     <string name="init_backup_folder_exists_error">Não foi possível criar uma nova pasta de cópias de segurança. Realizou alguma cópia de segurança nos últimos 60 segundos?</string>
     <string name="init_backup_no_backup_available">Não existe nenhum ficheiro de cópia de segurança.</string>
     <string name="backup_confirm_overwrite">Isto irá apagar a sua pasta de cópias de segurança mais antiga de %s. \nDeseja continuar?</string>
@@ -1172,6 +1199,7 @@
     <string name="context_share_as_link">Partilhar hiperligação</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
+    <string name="create_internal_cache_currentlist">Usar a lista actual</string>
     <string name="internal_cache_default_name">Cache definida pelo utilizador #%1$d</string>
     <string name="internal_cache_default_description">Esta é uma cache definida pelo utilizador</string>
     <string name="internal_cache_default_owner">Você</string>
@@ -1317,6 +1345,9 @@
     <string name="search_hbu">Escondidas por</string>
     <string name="search_hbu_prefill">Proprietário</string>
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
+    <string name="search_filter">Filtro (experimental)</string>
+    <string name="search_filter_button">Pesquisar por Filtro</string>
+    <string name="search_filter_info_message">\'Pesquisar por filtro\' procura caches nos serviços online usando um filtro fornecido. Dependendo da capacidade do serviço, apenas parte do filtro é executada on-line, o restante é feito por filtragem off-line.\n\nTodos os serviços só suportam filtros AND e sem inversão de filtro\n\nGeocaching.com suporta:\n- Nome (apenas palavras completas, Padrão não suportado)\n- Tipo de Cache\n- Tamanho de Cache\n- Distância e Terreno\n- Favoritos (apenas absoluto, apenas mínimo)\n- Estado (Própria, Encontrada &amp; habilitada)\n- Escondida por (especificar exactamente a id do utilizador)\n- Não-Encontrada (especificar exactamente a id do utilizador)\n- Data de colocação\n\nNote que o c:geo não pode oferecer especificamente a filtragem de Atributos, uma vez que Geocaching.com está a bloquear-nos nos a API necessária.\n\nAinda não há suporte para além do Geocaching.com.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
@@ -1327,6 +1358,7 @@
     <string name="search_own_caches">Pesquisar as minhas caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista de marcadores</string>
+    <string name="search_pocket_is_new">novo</string>
     <string name="search_pocket_and_bookmark_loading">A carregar uma lista de Pocket Queries e lista de marcadores</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
@@ -1900,6 +1932,7 @@
     <string name="localfile_cannot_handle">Erro ao ler o ficheiro ou o c:geo não consegue processar este tipo de ficheiro.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Receber ficheiro</string>
+    <string name="receivedownload_receiving_file">A receber o ficheiro \"%s\"</string>
     <string name="receivedownload_success">Ficheiro armazenado com sucesso como \"%s\"</string>
     <string name="receivedownload_error">Erro ao receber ficheiro</string>
     <string name="receivedownload_error_io_exception">Erro ao receber o ficheiro. A pasta \"%s permite a gravação?</string>
@@ -1907,7 +1940,7 @@
     <string name="receivedownload_alreadyexists">Já existe um ficheiro com este nome. Substituir o ficheiro existente ou guardar o novo ficheiro sob um nome diferente?</string>
     <string name="receivedownload_option_overwrite">Substituir</string>
     <string name="receivedownload_option_differentname">Nome diferente</string>
-    <string name="receivedownload_kb_copied">%d kB copiados</string>
+    <string name="receivedownload_amount_copied">%s copiado</string>
     <string name="receivedownload_cancelled">Transferência de ficheiros cancelada</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Transferir mapa offline</string>
@@ -1930,6 +1963,9 @@
     <string name="downloadmap_no_updates_found">Nenhuma actualização de mapa encontrada</string>
     <string name="downloadmap_directory">pasta</string>
     <string name="downloadmap_mapfile">Ficheiro de mapa</string>
+    <string name="downloadmap_themefile">ficheiro de tema</string>
+    <string name="downloadmap_tilefile">ficheiro dos dados de encaminhamento</string>
+    <string name="downloadmap_download">transferir</string>
     <string name="downloadmap_retrieving_directory_data">A receber dados da pasta…</string>
     <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
     <string name="downloadmap_install_theme_title">Instalar ficheiro de tema</string>

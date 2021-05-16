@@ -1921,7 +1921,6 @@
     <string name="receivedownload_alreadyexists">Plik o tej nazwie już istnieje. Nadpisać istniejący plik lub zapisać nowy plik pod inną nazwą?</string>
     <string name="receivedownload_option_overwrite">Nadpisz</string>
     <string name="receivedownload_option_differentname">Inna nazwa</string>
-    <string name="receivedownload_kb_copied">skopiowano %d kB</string>
     <string name="receivedownload_cancelled">Anulowany transfer pliku</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>

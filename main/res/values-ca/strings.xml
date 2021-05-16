@@ -1866,7 +1866,6 @@
     <string name="receivedownload_alreadyexists">Ja existeix un fitxer amb aquest nom. Voleu sobreescriure el fitxer existent o desar-lo amb un nom diferent?</string>
     <string name="receivedownload_option_overwrite">Sobreescriu</string>
     <string name="receivedownload_option_differentname">Nom diferent</string>
-    <string name="receivedownload_kb_copied">%d kB copiats</string>
     <string name="receivedownload_cancelled">S\'ha cancel·lat la transferència de fitxers</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Descarregar mapa fora de línia</string>

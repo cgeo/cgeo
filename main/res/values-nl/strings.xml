@@ -423,7 +423,7 @@
     <string name="cache_filter_option_inverse">Filter omkeren</string>
     <string name="cache_filter_option_include_inconclusive">Inclusief onduidelijke overeenkomsten</string>
     <string name="cache_filter_option_include_inconclusive_info">Of een cache moet worden opgenomen als resultaat wanneer een filter informatie over de cache nodig heeft die niet beschikbaar is.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Tik op \'+\' in de linker bovenhoek om een filter toe te voegen</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tik op \'+\' aan rechterbovenzijde om een filter toe te voegen</string>
     <string name="cache_filter_name">Naam</string>
     <string name="cache_filter_type">Type</string>
     <string name="cache_filter_size">Grootte</string>
@@ -439,6 +439,15 @@
     <string name="cache_filter_distance">Afstand</string>
     <string name="cache_filter_include">Opnemen</string>
     <string name="cache_filter_exclude">Uitsluiten</string>
+    <string name="cache_filter_userdisplay_complex">Complex</string>
+    <string name="cache_filter_userdisplay_none">Geen</string>
+    <string name="cache_filter_storage_load_button">Laden</string>
+    <string name="cache_filter_storage_delete_button">Verwijderen</string>
+    <string name="cache_filter_storage_load_delete_title">Laad of verwijder een bestaand filter</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">Er zijn nog geen filters opgeslagen.</string>
+    <string name="cache_filter_storage_save_title">Filter opslaan met naam</string>
+    <string name="cache_filter_storage_save_confirm_title">Opgeslagen filter overschrijven</string>
+    <string name="cache_filter_storage_save_confirm_message">Een filter met de naam \'%s\' en andere configuratie bestaat al. Overschrijven?</string>
     <string name="cache_filter_stringfilter_matchcase">Hoofdlettergevoelig</string>
     <string name="cache_filter_stringfilter_info">Met de optie \'Patroon\', gebruik joker-tekens * en ?. * vertegenwoordigt nul, één of meerdere tekens, ? vertegenwoordigt één enkel teken. Bijvoorbeeld, het patroon \'H?mburg*\' zal overeenkomen met bijvoorbeeld \'Homburg\' of \'Hamburg \'s nachts\' maar niet met \'A day in Hamburg\' of \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Is niet aanwezig</string>
@@ -1915,6 +1924,7 @@
     <string name="localfile_cannot_handle">Fout bij lezen van het bestand of c:geo kan dit bestandstype niet verwerken.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Bestand ontvangen</string>
+    <string name="receivedownload_receiving_file">Ontvangen van bestand \"%s\"</string>
     <string name="receivedownload_success">Bestand succesvol opgeslagen als \"%s\"</string>
     <string name="receivedownload_error">Fout bij ontvangen van bestand</string>
     <string name="receivedownload_error_io_exception">I/O fout tijdens het ontvangen van een kaartbestand. Is je kaartenmap \"%s\" beschrijfbaar?</string>
@@ -1922,7 +1932,7 @@
     <string name="receivedownload_alreadyexists">Een bestand met deze naam bestaat al. Bestaande bestanden overschrijven of het bestand opslaan onder een andere naam?</string>
     <string name="receivedownload_option_overwrite">Overschrijven</string>
     <string name="receivedownload_option_differentname">Andere naam</string>
-    <string name="receivedownload_kb_copied">%d kB gekopieerd</string>
+    <string name="receivedownload_amount_copied">%s gekopieerd</string>
     <string name="receivedownload_cancelled">Bestandsoverdracht geannuleerd</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline kaart downloaden</string>
@@ -1945,6 +1955,9 @@
     <string name="downloadmap_no_updates_found">Geen kaart updates gevonden</string>
     <string name="downloadmap_directory">map</string>
     <string name="downloadmap_mapfile">kaart bestand</string>
+    <string name="downloadmap_themefile">themabestand</string>
+    <string name="downloadmap_tilefile">routeringsdatabestand</string>
+    <string name="downloadmap_download">downloaden</string>
     <string name="downloadmap_retrieving_directory_data">Mapgegevens ophalen…</string>
     <string name="downloadmap_checking_for_updates">Controleren op updates…</string>
     <string name="downloadmap_install_theme_title">Themabestand installeren</string>

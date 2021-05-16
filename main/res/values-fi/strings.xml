@@ -423,7 +423,7 @@
     <string name="cache_filter_option_inverse">Käänteinen suodatin</string>
     <string name="cache_filter_option_include_inconclusive">Sisällytä epävarmat osumat</string>
     <string name="cache_filter_option_include_inconclusive_info">Sisällytä ne kätköt, joissa suodattimen valittu tieto ei ole saatavilla.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Napauta \'+\' vasemmassa yläkulmassa lisätäksesi suodattimen</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Napauta \'+\' oikeassa yläkulmassa lisätäksesi suodattimen</string>
     <string name="cache_filter_name">Nimi</string>
     <string name="cache_filter_type">Tyyppi</string>
     <string name="cache_filter_size">Koko</string>
@@ -439,6 +439,16 @@
     <string name="cache_filter_distance">Etäisyys</string>
     <string name="cache_filter_include">Sisällytä</string>
     <string name="cache_filter_exclude">Rajaa pois</string>
+    <string name="cache_filter_userdisplay_complex">Monimutkainen</string>
+    <string name="cache_filter_userdisplay_none">Ei mitään</string>
+    <string name="cache_filter_userdisplay_multi">Useita</string>
+    <string name="cache_filter_storage_load_button">Lataa</string>
+    <string name="cache_filter_storage_delete_button">Poista</string>
+    <string name="cache_filter_storage_load_delete_title">Lataa tai poista olemassa oleva suodatin</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">Yhtään suodatinta ei ole vielä tallennettu.</string>
+    <string name="cache_filter_storage_save_title">Tallenna suodatin nimellä</string>
+    <string name="cache_filter_storage_save_confirm_title">Tallenna suodattimen ylikirjoitus</string>
+    <string name="cache_filter_storage_save_confirm_message">Suodatin, jonka nimi on \'%s\' ja eri määrityksellä on jo olemassa. Korvataanko se?</string>
     <string name="cache_filter_stringfilter_matchcase">Sama kirjainkoko</string>
     <string name="cache_filter_stringfilter_info">Valinnalla \'Kuvio\', käytä jokerimerkkejä * ja ?. * edustaa nollaa, yhtä tai useampaa merkkiä, ? edustaa yhtä merkkiä. Esimerkiksi kuvio \'H?mburg*\' vastaa esim. \'Homburg\' tai \'Hampuri yöllä\', mutta ei \'Hahmburg\' tai \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Ei Ole Läsnä</string>
@@ -451,6 +461,15 @@
     <string name="cache_filter_favorites_absolute">Absoluuttinen</string>
     <string name="cache_filter_favorites_percentage">Prosenttiosuus</string>
     <string name="cache_filter_distance_use_current_position">Käytä nykyistä sijaintia</string>
+    <string name="cache_filter_status_select_all">Kaikki</string>
+    <string name="cache_filter_status_select_only_found_yes">Vain Löydetty</string>
+    <string name="cache_filter_status_select_only_found_no">Vain Ei Löytynyt</string>
+    <string name="cache_filter_status_select_only_own_yes">Vain Omat</string>
+    <string name="cache_filter_status_select_only_own_no">Vain Ei-Omat</string>
+    <string name="cache_filter_status_select_only_disabled_yes">Vain Pois Käytöstä</string>
+    <string name="cache_filter_status_select_only_disabled_no">Vain Käytössä</string>
+    <string name="cache_filter_status_select_only_archived_yes">Vain Arkistoitu</string>
+    <string name="cache_filter_status_select_only_archived_no">Vain Aktiivinen</string>
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
@@ -1146,7 +1165,7 @@
     <string name="cache_terrain">Maasto</string>
     <string name="cache_rating">Arviointi</string>
     <string name="cache_own_rating">Sinun arviointisi</string>
-    <string name="cache_rating_of_new">%1$.1f %2$dsta</string>
+    <string name="cache_rating_of_new">%1$.1f / %2$d</string>
     <string name="cache_favorite">Suosikki</string>
     <string name="cache_owner">Omistaja</string>
     <string name="cache_hidden">Piilotettu</string>
@@ -1326,6 +1345,9 @@
     <string name="search_hbu">Piilottanut</string>
     <string name="search_hbu_prefill">Omistaja</string>
     <string name="search_hbu_button">Hae omistajan nimellä</string>
+    <string name="search_filter">Suodatin (kokeellinen)</string>
+    <string name="search_filter_button">Etsi suodattimella</string>
+    <string name="search_filter_info_message">\'Etsi suodattimella\' etsii kätköjä verkkopalveluista käyttäen tarjottua suodatinta. Palveluominaisuuksista riippuen vain osa suodatinta suoritetaan verkossa, loput tehdään offline-suodatuksella.\n\nKaikki palvelut tukevat vain JA-suodattimia, mutta ei käänteistä suodatusta\n\nGeocaching.com tukee:\n- Nimi (vain kokonaiset sanat, kuvio ei ole tuettu)\n- Kätkötyyppi\n- Kätkön koko\n- Etäisyys ja maasto\n- Suosikit (vain absoluuttinen, vain vähintään)\n- Tila (Oma, Löytyi &amp; Käytössä)\n- Piilotettu (määritä käyttäjätunnus tarkalleen)\n- (joku) Ei Löytänyt (määritä käyttäjätunnus tarkalleen)\n- Piilotuspäivä\n\nHuomaa, että c:geo ei voi tarjota suodatusta attribuutin mukaan, koska geocaching.com estää meiltä vaaditun API:n käytön.\n\nMuita kuin Geocaching.com-palvelua ei vielä tueta.</string>
     <string name="search_tb">Reissaaja</string>
     <string name="search_tb_hint">Reissaajan koodi</string>
     <string name="search_tb_button">Etsi reissaajia</string>
@@ -1915,6 +1937,7 @@
     <string name="localfile_cannot_handle">Virhe luettaessa tiedostoa tao c:geo ei pysty käsittelemään tätä tiedostomuotoa.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Vastaanota tiedosto</string>
+    <string name="receivedownload_receiving_file">Vastaanotetaan tiedostoa \"%s\"</string>
     <string name="receivedownload_success">Tiedosto tallennettu onnistuneesti nimellä \"%s\"</string>
     <string name="receivedownload_error">Virhe tiedostoa vastaanotettaessa</string>
     <string name="receivedownload_error_io_exception">I/O-virhe tiedostoa vastaanotettaessa. Onko kansiosi \"%s\" kirjoitettavissa?</string>
@@ -1922,7 +1945,7 @@
     <string name="receivedownload_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
     <string name="receivedownload_option_overwrite">Korvaa</string>
     <string name="receivedownload_option_differentname">Eri nimi</string>
-    <string name="receivedownload_kb_copied">%d kB kopioitu</string>
+    <string name="receivedownload_amount_copied">%s kopioitu</string>
     <string name="receivedownload_cancelled">Tiedostonsiirto peruttu</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Lataa offline-kartta</string>
@@ -1945,6 +1968,9 @@
     <string name="downloadmap_no_updates_found">Karttapäivityksiä ei löytynyt</string>
     <string name="downloadmap_directory">kansio</string>
     <string name="downloadmap_mapfile">karttatiedosto</string>
+    <string name="downloadmap_themefile">teematiedosto</string>
+    <string name="downloadmap_tilefile">reititysdatatiedosto</string>
+    <string name="downloadmap_download">lataa</string>
     <string name="downloadmap_retrieving_directory_data">Haetaan kansion tietoja…</string>
     <string name="downloadmap_checking_for_updates">Tarkistetaan päivityksiä…</string>
     <string name="downloadmap_install_theme_title">Asenna teematiedosto</string>

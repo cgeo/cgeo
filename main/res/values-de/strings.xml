@@ -423,7 +423,7 @@
     <string name="cache_filter_option_inverse">Filter umkehren</string>
     <string name="cache_filter_option_include_inconclusive">Unschlüssige Treffer einschließen</string>
     <string name="cache_filter_option_include_inconclusive_info">Gibt an, ob der Cache in das Ergebnis eingebunden werden soll, wenn ein Filter Informationen benötigt die im Cache nicht verfügbar sind.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Tippe auf \'+\' in der oberen linken Ecke um einen Filter hinzuzufügen</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tippe auf \'+\' oben rechts um einen Filter hinzuzufügen</string>
     <string name="cache_filter_name">Name</string>
     <string name="cache_filter_type">Typ</string>
     <string name="cache_filter_size">Größe</string>
@@ -439,6 +439,15 @@
     <string name="cache_filter_distance">Entfernung</string>
     <string name="cache_filter_include">Mit</string>
     <string name="cache_filter_exclude">Ohne</string>
+    <string name="cache_filter_userdisplay_complex">Komplex</string>
+    <string name="cache_filter_userdisplay_none">Keine</string>
+    <string name="cache_filter_storage_load_button">Lade</string>
+    <string name="cache_filter_storage_delete_button">Löschen</string>
+    <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">Es sind noch keine Filter gespeichert.</string>
+    <string name="cache_filter_storage_save_title">Filter mit Namen speichern</string>
+    <string name="cache_filter_storage_save_confirm_title">Filter überschreiben</string>
+    <string name="cache_filter_storage_save_confirm_message">Ein Filter mit dem Namen \'%s\' und einer anderen Konfiguration existiert bereits. Überschreiben?</string>
     <string name="cache_filter_stringfilter_matchcase">Groß-/Kleinschreibung beachten</string>
     <string name="cache_filter_stringfilter_info">Bei Option \'Muster\' können die Platzhalter * und ? Verwendet werden. * steht für 0, 1 oder mehrere Zeichen, ? steht für ein einzelnes Zeichen. Das Muster \"H?mburg*\" würde zum Beispiel \"Homburg\" oder \"Hamburg bei Nacht\" entsprechen, aber nicht \"Ein Tag in Hamburg\" oder \"Hahmburg\"</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Nicht vorhanden</string>
@@ -1180,6 +1189,7 @@
     <string name="context_share_as_link">Link teilen</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
+    <string name="create_internal_cache_currentlist">Verwende aktuelle Liste</string>
     <string name="internal_cache_default_name">Benutzerdefinierter Cache #%1$d</string>
     <string name="internal_cache_default_description">Dies ist ein benutzerdefinierter Cache</string>
     <string name="internal_cache_default_owner">Du</string>
@@ -1335,6 +1345,7 @@
     <string name="search_own_caches">Meine Caches suchen</string>
     <string name="search_pocket_title">Pocket-Query</string>
     <string name="search_bookmark_list">Lesezeichenliste</string>
+    <string name="search_pocket_is_new">neu</string>
     <string name="search_pocket_and_bookmark_loading">Lade eine Liste von Pocket-Queries und Lesezeichenlisten</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
@@ -1913,6 +1924,7 @@
     <string name="localfile_cannot_handle">Fehler beim Lesen der Datei oder c:geo kennt diesen Dateityp nicht.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Datei empfangen</string>
+    <string name="receivedownload_receiving_file">Empfange Datei \"%s\"</string>
     <string name="receivedownload_success">Datei erfolgreich als \"%s \" gespeichert</string>
     <string name="receivedownload_error">Fehler beim Empfangen der Datei</string>
     <string name="receivedownload_error_io_exception">E/A-Fehler beim Empfangen der Datei. Ist dein Ordner \"%s\" beschreibbar?</string>
@@ -1920,7 +1932,7 @@
     <string name="receivedownload_alreadyexists">Eine Datei mit diesem Namen existiert bereits. Bestehende Datei überschreiben oder neue Datei unter anderem Namen speichern?</string>
     <string name="receivedownload_option_overwrite">Überschreiben</string>
     <string name="receivedownload_option_differentname">Anderer Name</string>
-    <string name="receivedownload_kb_copied">%d kB kopiert</string>
+    <string name="receivedownload_amount_copied">%s kopiert</string>
     <string name="receivedownload_cancelled">Dateiübertragung abgebrochen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline-Karte herunterladen</string>
@@ -1943,6 +1955,8 @@
     <string name="downloadmap_no_updates_found">Keine Kartenupdates gefunden</string>
     <string name="downloadmap_directory">Ordner</string>
     <string name="downloadmap_mapfile">Karte</string>
+    <string name="downloadmap_tilefile">Routendaten-Datei</string>
+    <string name="downloadmap_download">Download</string>
     <string name="downloadmap_retrieving_directory_data">Empfange Ordnerdaten…</string>
     <string name="downloadmap_checking_for_updates">Prüfe auf Updates…</string>
     <string name="downloadmap_install_theme_title">Design installieren</string>
