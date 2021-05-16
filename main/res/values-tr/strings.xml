@@ -1370,7 +1370,6 @@
     <string name="helper_bluetoothgps_description">Daha kesin konum bilgisi almak için harici bir GPS alıcısı kullanmanıza izin verir ve cihaz pilini daha idareli kullanır.</string>
     <string name="helper_gps_locker_description">GPS Klilidi siz diğer applikasyonları kullanırken veya cihazınızın ekranı kilitliyken GPS sinyalini açık tutar.</string>
     <string name="helper_barcode_description">Geokodların barkod olarak görüntülenmesini sağlayan Greasemonkey komut dosyaları ve internet siteleri var. Bu uygulamayla (c:geo) bu tür geokodları doğrudan bilgisayarınızda görüntüleyebilirsiniz.</string>
-    <string name="helper_pocketquery_description">Geçerli konumunuz veya bir haritadan seçilen bir başka konuma odaklanan Sorgulama Kaydı kolay oluşturmanızı ve indirmenizi sağlar. Premium Geocaching.com hesabı gerektirir.</string>
     <string name="helper_google_translate_title">Google çeviri</string>
     <string name="helper_google_translate_description">Google çeviri uygulamasından çeviri paketi indirirseniz, Geocache açıklama metnine basılı tutarak (internet bağlantısı olmadan) c:geo\'daki Geocache açıklamalarını kolaylıkla çevirebilirsiniz.</string>
     <string name="helper_where_you_go_description">WhereYouGo Wherigo türündeki Geocache\'leri bulmanızı sağlar. c:geo otomatik olarak kartuşların bu uygulama üzerinden indirilmesini tetikler.</string>
@@ -1872,6 +1871,7 @@
     <string name="localfile_cannot_handle">Dosyayı okurken hata oluştu ya da c:geo bu dosya türünü işleyemiyor.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Dosyayı al</string>
+    <string name="receivedownload_receiving_file">\"%s\" dosyası alınıyor</string>
     <string name="receivedownload_success">Dosya \"%s\" olarak başarıyla depolandı</string>
     <string name="receivedownload_error">Dosyayı alırken hata oluştu</string>
     <string name="receivedownload_error_io_exception">Dosyayı alırken G/Ç hatası alındı. \"%s\" klasörünüzde yazma yetkisi var mı?</string>
@@ -1879,6 +1879,7 @@
     <string name="receivedownload_alreadyexists">Bu isimle bir dosya zaten var. Var olan dosyanın üzerine mi yazılsın yoksa farklı bir adla yeni bir dosya olarak mı kaydedilsin?</string>
     <string name="receivedownload_option_overwrite">Üzerine yaz</string>
     <string name="receivedownload_option_differentname">Farklı isim</string>
+    <string name="receivedownload_amount_copied">%s kopyalandı</string>
     <string name="receivedownload_cancelled">Dosya aktarımı iptal edildi</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Çevrimdışı harita indir</string>
