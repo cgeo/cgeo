@@ -1294,7 +1294,6 @@
     <string name="helper_bluetoothgps_description">Позволяет использовать внешний GPS приемник, чтобы получить более точную информацию о местоположении и сэкономить заряд батареи вашего устройства.</string>
     <string name="helper_gps_locker_description">GPS Locker сохраняет GPS активным при переключении между приложениями и при выключении экрана устройства.</string>
     <string name="helper_barcode_description">Набор Greasemonkey скриптов, позволяющих отображать геокоды как штрих-коды. С этим приложением, c:geo может распознавать такие геокоды напрямую с экрана вашего компьютера.</string>
-    <string name="helper_pocketquery_description">Позволяет создавать выборки (Pocket Queries) с текущей позиции или с точки на карте. Требует Премиум аккаунта на Geocaching.com.</string>
     <string name="helper_google_translate_title">Переводчик Google</string>
     <string name="helper_google_translate_description">Если вы загрузите переводческие пакеты в Переводчике Google, тогда вы сможете переводить описания тайников в c:geo длинным касанием описания тайника (работает оффлайн).</string>
     <string name="helper_where_you_go_description">WhereYouGo позволяет играть и искать тайники типа Wherigo. c:geo будет автоматически загружать картриджи с помощью этого приложения.</string>
