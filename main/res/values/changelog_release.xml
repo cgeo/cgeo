@@ -48,6 +48,7 @@
 <li>Fix: Back arrow in map downloader returning to main screen</li>
 <li>Fix: Avoid strange popup messages when attaching image to log</li>
 <li>Fix: Possible crash on map</li>
+<li>Change: Removed Pocket Query Creator from useful apps (app no longer maintained and does not work any more)</li>
 </ul>
 
 </div>]]></Data>
