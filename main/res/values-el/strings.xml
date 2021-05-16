@@ -441,7 +441,6 @@
     <string name="cache_filter_exclude">Εξαίρεση</string>
     <string name="cache_filter_userdisplay_complex">Σύνθετο</string>
     <string name="cache_filter_userdisplay_none">Κανένα</string>
-    <string name="cache_filter_userdisplay_multi">Πολλαπλή</string>
     <string name="cache_filter_storage_load_button">Φόρτωση</string>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
@@ -1920,6 +1919,7 @@
     <string name="localfile_cannot_handle">Σφάλμα ανάγνωσης αρχείου ή το c:geo δεν μπορεί να διαχειριστεί αυτόν το τύπο αρχείου.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Λήψη αρχείου</string>
+    <string name="receivedownload_receiving_file">Λήψη αρχείου \"%s\"</string>
     <string name="receivedownload_success">Το αρχείο αποθηκεύτηκε επιτυχώς ως \"%s\"</string>
     <string name="receivedownload_error">Σφάλμα κατά την λήψη του αρχείου</string>
     <string name="receivedownload_error_io_exception">Σφάλμα I/O κατά την λήψη του αρχείου. Μπορεί να γίνει εγγραφή στην θέση αποθήκευσης \"%s\";</string>
@@ -1927,6 +1927,7 @@
     <string name="receivedownload_alreadyexists">Ένα αρχείο με αυτό το όνομα υπάρχει ήδη. Να γίνει αντικατάσταση του υπάρχοντος αρχείου ή να γίνει αποθήκευση του νέου αρχείου με διαφορετικό όνομα;</string>
     <string name="receivedownload_option_overwrite">Αντικατάσταση</string>
     <string name="receivedownload_option_differentname">Διαφορετικό όνομα</string>
+    <string name="receivedownload_amount_copied">%s αντιγράφηκε</string>
     <string name="receivedownload_cancelled">Η μεταφορά των αρχείων ακυρώθηκε</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Λήψη χαρτών εκτός σύνδεσης</string>
@@ -1950,6 +1951,9 @@
     <string name="downloadmap_no_updates_found">Δεν βρέθηκαν ενημερώσεις χαρτών</string>
     <string name="downloadmap_directory">φάκελος</string>
     <string name="downloadmap_mapfile">Αρχείο χάρτη</string>
+    <string name="downloadmap_themefile">αρχείο θέματος</string>
+    <string name="downloadmap_tilefile">αρχείο δεδομένων δρομολόγησης</string>
+    <string name="downloadmap_download">Λήψη</string>
     <string name="downloadmap_retrieving_directory_data">Ανάκτηση δεδομένων φακέλου…</string>
     <string name="downloadmap_checking_for_updates">Έλεγχος για ενημερώσεις…</string>
     <string name="downloadmap_install_theme_title">Εγκατάσταση αρχείου θέματος</string>
