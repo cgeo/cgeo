@@ -95,6 +95,18 @@ public class Intents {
     private static final String PREFIX_INTERNAL = "cgeo.geocaching.intent.internal.";
     public static final String INTENT_CACHE_CHANGED = PREFIX_INTERNAL + "cache-changed";
 
+    /**
+     * To be used together with {@link android.content.Intent#ACTION_OPEN_DOCUMENT_TREE}
+     *
+     * The value is decide whether to show advance mode or not.
+     * If the value is true, the local/device storage root must be
+     * visible in DocumentsUI. Otherwise it depends on the users preference.
+     *
+     * This is a system internal Api, which is not officially supported and not accessible from outside. Therefore, we need to define it ourselves.
+     * Anyway, the usage of it should be uncritical. The worst thing which could happen is that the EXTRA is simply ignored.
+     */
+    public static final String EXTRA_SHOW_ADVANCED = "android.provider.extra.SHOW_ADVANCED";
+
     private Intents() {
         // Do not instantiate
     }

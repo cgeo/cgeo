@@ -1,5 +1,6 @@
 package cgeo.geocaching.storage;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -314,6 +315,9 @@ public class ContentStorageActivityHelper {
             (folder == null || folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) |
             (folder != null ? Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION : 0));
         Uri realStartUri = startUri != null ? startUri : (folder != null ? folder.getUri() : null);
+
+        // show internal storage
+        intent.putExtra(Intents.EXTRA_SHOW_ADVANCED, true);
 
         if (realStartUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (UriUtils.isFileUri(realStartUri)) {
