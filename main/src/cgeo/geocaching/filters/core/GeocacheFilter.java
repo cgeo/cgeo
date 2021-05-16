@@ -139,13 +139,16 @@ public class GeocacheFilter {
             name = sb.toString();
         }
 
-        try {
-            tree = FILTER_PARSER.create(filterConfig.substring(Math.min(idx, filterConfig.length())));
-        } catch (ParseException pe) {
-            if (throwOnParseError) {
-                throw pe;
+        final String treeConfig = filterConfig.substring(Math.min(idx, filterConfig.length()));
+        if (!StringUtils.isBlank(treeConfig)) {
+            try {
+                tree = FILTER_PARSER.create(treeConfig);
+            } catch (ParseException pe) {
+                if (throwOnParseError) {
+                    throw pe;
+                }
+                Log.w("Couldn't parse expression '" + filterConfig + "' (idx: " + idx + ")", pe);
             }
-            Log.w("Couldn't parse expression '" + filterConfig + "' (idx: " + idx + ")", pe);
         }
         return new GeocacheFilter(name, tree);
     }
@@ -165,7 +168,7 @@ public class GeocacheFilter {
         return tree.filter(cache);
     }
 
-    public void filterList(final List<Geocache> list) {
+    public void filterList(final Collection<Geocache> list) {
 
         final List<Geocache> itemsToKeep = new ArrayList<>();
         for (final Geocache item : list) {
@@ -180,9 +183,21 @@ public class GeocacheFilter {
         list.addAll(itemsToKeep);
     }
 
+    public boolean isSaved() {
+        return Storage.exists(getName());
+    }
+
+    public boolean isSavedDifferently() {
+        return Storage.existsAndDiffers(getName(), this);
+    }
+
+    public String getNameForUserDisplay() {
+        return getName() + (isSavedDifferently() ? "*" : "");
+    }
+
     public String toUserDisplayableString() {
         if (!StringUtils.isBlank(getName())) {
-            return getName();
+            return getNameForUserDisplay();
         }
 
         if (getTree() == null) {
@@ -191,7 +206,5 @@ public class GeocacheFilter {
 
         return getTree().toUserDisplayableString(0);
     }
-
-
 
 }

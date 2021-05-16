@@ -261,7 +261,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         final TypedArray a = getTheme().obtainStyledAttributes(R.style.cgeo, new int[] {R.attr.homeAsUpIndicator});
         final int upResId = a.getResourceId(0, 0);
         a.recycle();
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId));
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId, null));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -454,8 +454,11 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         if (circlesSwitched) {
             caches.switchCircles();
         }
-        caches.invalidate();
+        if (caches != null) {
+            caches.invalidate();
+        }
         Tile.cache.clear();
+
         if (null != trackLayer) {
             trackLayer.setHidden(Settings.isHideTrack());
             trackLayer.requestRedraw();
@@ -1634,6 +1637,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
         DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
+        MapSettingsUtils.onActivityResult(this, requestCode, resultCode, data, this::onMapSettingsPopupFinished);
     }
 
     private void setTracks(final Route route) {

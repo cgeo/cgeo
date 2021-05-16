@@ -11,14 +11,14 @@ import cgeo.geocaching.models.Geocache;
 
 import android.app.Activity;
 
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
 
 public class FilterViewHolderCreator {
 
     private static boolean listInfoFilled = false;
-    private static List<Geocache> listInfoFilteredList = Collections.emptyList();
+    private static Collection<Geocache> listInfoFilteredList = Collections.emptyList();
     private static boolean listInfoIsComplete = false;
 
     private FilterViewHolderCreator() {
@@ -113,7 +113,7 @@ public class FilterViewHolderCreator {
         return listInfoIsComplete;
     }
 
-    public static List<Geocache> getListInfoFilteredList() {
+    public static Collection<Geocache> getListInfoFilteredList() {
         return listInfoFilteredList;
     }
 
@@ -123,7 +123,7 @@ public class FilterViewHolderCreator {
         listInfoIsComplete = false;
     }
 
-    public static void setListInfo(final List<Geocache> filteredList, final boolean isComplete) {
+    public static void setListInfo(final Collection<Geocache> filteredList, final boolean isComplete) {
         listInfoFilled = filteredList != null && !filteredList.isEmpty();
         listInfoFilteredList = filteredList == null ? Collections.emptyList() : filteredList;
         listInfoIsComplete = isComplete;

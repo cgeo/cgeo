@@ -39,6 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -176,10 +177,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         // Handle presses on the action bar items
         final int itemId = item.getItemId();
         if (itemId == R.id.delete) {
-            setResult(false);
+            clearView();
             return true;
         } else if (itemId == R.id.menu_send) {
-            setResult(true);
+            finishWithResult();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -196,7 +197,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             try {
                 final List<IFilterViewHolder<?>> filterList = new ArrayList<>();
                 final GeocacheFilter filter = GeocacheFilter.checkConfig(inputFilter);
-                binding.filterStorageName.setText(filter.getName());
+                binding.filterStorageName.setText(filter.getNameForUserDisplay());
                 IGeocacheFilter filterTree = filter.getTree();
                 if (filterTree instanceof InconclusiveGeocacheFilter) {
                     includeInconclusiveFilterCheckbox.setChecked(true);
@@ -209,7 +210,6 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                 if (filterTree instanceof LogicalGeocacheFilter) {
                     andOrFilterCheckbox.setChecked(filterTree instanceof OrGeocacheFilter);
                     for (IGeocacheFilter c : filterTree.getChildren()) {
-                        //filterList.add(FilterViewHolderUtils.createFor(c, binding.filterList.getContext()));
                         filterList.add(FilterViewHolderCreator.createFor(c, this));
                     }
                 }
@@ -242,20 +242,17 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         binding.filterListEmpty.setVisibility(!listIsEmpty ? View.GONE : View.VISIBLE);
     }
 
+    private void clearView() {
+        filterListAdapter.clearList();
+        andOrFilterCheckbox.setChecked(false);
+        inverseFilterCheckbox.setChecked(false);
+        includeInconclusiveFilterCheckbox.setChecked(false);
+        binding.filterStorageName.setText("");
+    }
 
-
-    private void setResult(final boolean setFilter) {
+    private void finishWithResult() {
         final Intent resultIntent = new Intent();
-
-        if (setFilter) {
-            GeocacheFilter result = getFilterFromView();
-            //if current filter config does not match currently shown saved filter -> do not store under this name
-            if (GeocacheFilter.Storage.existsAndDiffers(binding.filterStorageName.getText().toString(), result)) {
-                binding.filterStorageName.setText("");
-                result = getFilterFromView();
-            }
-            resultIntent.putExtra(EXTRA_FILTER_RESULT, result.toConfig());
-        }
+        resultIntent.putExtra(EXTRA_FILTER_RESULT, getFilterFromView().toConfig());
         FilterViewHolderCreator.clearListInfo();
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
@@ -264,26 +261,30 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     @NotNull
     private GeocacheFilter getFilterFromView() {
-        IGeocacheFilter filter = andOrFilterCheckbox.isChecked() ? new OrGeocacheFilter() : new AndGeocacheFilter();
-        for (IFilterViewHolder<?> f : filterListAdapter.getItems()) {
-            filter.addChild(FilterViewHolderCreator.createFrom(f));
-        }
-        if (inverseFilterCheckbox.isChecked()) {
-            final IGeocacheFilter notFilter = new NotGeocacheFilter();
-            notFilter.addChild(filter);
-            filter = notFilter;
-        }
-        if (includeInconclusiveFilterCheckbox.isChecked()) {
-            final IGeocacheFilter incFilter = new InconclusiveGeocacheFilter();
-            incFilter.addChild(filter);
-            filter = incFilter;
+        IGeocacheFilter filter = null;
+
+        if (filterListAdapter.getItemCount() > 0) {
+            filter = andOrFilterCheckbox.isChecked() ? new OrGeocacheFilter() : new AndGeocacheFilter();
+            for (IFilterViewHolder<?> f : filterListAdapter.getItems()) {
+                filter.addChild(FilterViewHolderCreator.createFrom(f));
+            }
+            if (inverseFilterCheckbox.isChecked()) {
+                final IGeocacheFilter notFilter = new NotGeocacheFilter();
+                notFilter.addChild(filter);
+                filter = notFilter;
+            }
+            if (includeInconclusiveFilterCheckbox.isChecked()) {
+                final IGeocacheFilter incFilter = new InconclusiveGeocacheFilter();
+                incFilter.addChild(filter);
+                filter = incFilter;
+            }
         }
 
         return new GeocacheFilter(binding.filterStorageName.getText().toString(), filter);
     }
 
     public static void selectFilter(@NonNull final Activity context, final GeocacheFilter filter,
-                                    final List<Geocache> filteredList, final boolean isComplete) {
+                                    final Collection<Geocache> filteredList, final boolean isComplete) {
         final Intent intent = new Intent(context, GeocacheFilterActivity.class);
         if (filter != null) {
             intent.putExtra(EXTRA_FILTER_INPUT, filter.toConfig());

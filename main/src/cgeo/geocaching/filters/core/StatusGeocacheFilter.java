@@ -19,7 +19,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         return
             (statusDisabled == null || cache.isDisabled() == statusDisabled) &&
             (statusArchived == null || cache.isArchived() == statusArchived) &&
-            (statusOwn == null || (cache.isOwn() == statusOwn)) &&
+            (statusOwn == null || (cache.isOwner() == statusOwn)) &&
             (statusFound == null || cache.isFound() == statusFound);
     }
 

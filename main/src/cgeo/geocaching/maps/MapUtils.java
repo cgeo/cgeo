@@ -3,6 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
@@ -45,8 +46,14 @@ public class MapUtils {
         waypoints.removeAll(removeList);
     }
 
-    // filter own/found/disabled caches if required
+    /** Applies given filter to cache list. Additionally, creates a second list additionally filtered by own/found/disabled caches if required */
     public static void filter(final Collection<Geocache> caches) {
+
+        final GeocacheFilter filter = GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig(MapSettingsUtils.getMapViewerListType()));
+        if (filter != null) {
+            filter.filterList(caches);
+        }
+
         final boolean excludeMine = Settings.isExcludeMyCaches();
         final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
         final boolean excludeArchived = Settings.isExcludeArchivedCaches();
