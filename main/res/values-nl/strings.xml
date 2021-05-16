@@ -1422,7 +1422,6 @@
     <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
     <string name="helper_gps_locker_description">GPS Locker houdt het GPS signaal actief bij het schakelen tussen apps en wanneer het scherm van je apparaat is uitgeschakeld.</string>
     <string name="helper_barcode_description">Er zijn Greasemonkey scripts en websites beschikbaar die een geocode als barcode weergeven. Met deze applicatie kan c:geo deze geocode direct van het computerscherm lezen.</string>
-    <string name="helper_pocketquery_description">Makkelijk Pocket Query\'s maken en downloaden gericht op uw huidige positie of een punt geselecteerd van een kaart. Vereist een Premium account van Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
     <string name="helper_where_you_go_description">Met WhereYouGo kan je spelen en geocaches zoeken van het type Wherigo. c:geo kan automatisch cartridges downloaden binnen deze app.</string>
