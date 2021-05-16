@@ -40,7 +40,6 @@
 <li>Fix: Optimize global search: If no trackable with matching tracking code is found, execute online cache name search afterwards</li>
 <li>Fix: Avoid avatar images being displayed too wide and pushing the \"Update / remove authorization\" functionalty aside</li>
 <li>Fix: Fix conversion error in some distance settings for imperial units</li>
-<li>New: Debug view for pending downloads</li>
 <li>Fix: Directory selected by user not taken over in wizard on older devices</li>
 <li>Fix: Scan for map themes now run as background task on startup</li>
 <li>Fix: Changing map source via settings being recognized after full restart only</li>
@@ -48,6 +47,8 @@
 <li>Fix: Back arrow in map downloader returning to main screen</li>
 <li>Fix: Avoid strange popup messages when attaching image to log</li>
 <li>Fix: Possible crash on map</li>
+<li>Fix: Better support for file / folder selection on Android 5 devices</li>
+<li>New: Debug view for pending downloads</li>
 <li>Change: Removed Pocket Query Creator from useful apps (app no longer maintained and does not work any more)</li>
 </ul>
 
