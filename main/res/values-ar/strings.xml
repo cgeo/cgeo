@@ -866,7 +866,6 @@
     <string name="helper_gpsstatus_description">يمكنك استخدام الرادار في هذا التطبيق بالاشتراك مع c:geo. و سوف يوفر لك معلومات أخرى متعلقة GPS.</string>
     <string name="helper_bluetoothgps_description">يتيح لك استخدام مستقبل GPS خارجي للحصول على بيانات مواقع أكثر دقة، و يمكنك من توفير استهلاك بطاريتك.</string>
     <string name="helper_barcode_description">هناك مواقع و برامج تjتيح عرض كود المخبئ مثل كود QR، مثل هذا التطبيق. و بهذا c:geo يمكنه قراءة كود المخبئ مباشرة من شاشة حاسوبك.</string>
-    <string name="helper_pocketquery_description">يسمح بإنشاء و تحميل الاستفسارات التي تتمحور حول موقعك الحالي أو النقط المحددة في الخريطة. يتطلب حساب برميوم في Geocaching.com.</string>
     <string name="helper_google_translate_title">ترجمة جوجل</string>
     <string name="helper_google_translate_description">إذا قمت بتحميل حزم الترجمة في تطبيق ترجمة جوجل،عندها يمكنك ترجمة تفاصيل المخبئ في c:geo و ذالك من خلال الضغط مطولاً على نص وصف المخبئ (بدون الاتصال بالانترنات).</string>
     <string name="helper_where_you_go_description">WhereYouGo تتيج تشغيل و البحث عن المخبىت من نوع Wherigo. و c:geo يمكنه أن يقوم إلى التحميل التلقائي للخراطيش داخل هذا التطبيق.</string>

@@ -443,6 +443,7 @@
     <string name="cache_filter_exclude">Vyloučit</string>
     <string name="cache_filter_userdisplay_complex">Komplexní</string>
     <string name="cache_filter_userdisplay_none">Žádný</string>
+    <string name="cache_filter_userdisplay_multi">Vícenásobný</string>
     <string name="cache_filter_storage_load_button">Načíst</string>
     <string name="cache_filter_storage_delete_button">Vymazat</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
@@ -462,6 +463,15 @@
     <string name="cache_filter_favorites_absolute">Absolutní</string>
     <string name="cache_filter_favorites_percentage">Procentuálně</string>
     <string name="cache_filter_distance_use_current_position">Použít aktuální pozici</string>
+    <string name="cache_filter_status_select_all">Vše</string>
+    <string name="cache_filter_status_select_only_found_yes">Pouze nalezené</string>
+    <string name="cache_filter_status_select_only_found_no">Pouze nenalezené</string>
+    <string name="cache_filter_status_select_only_own_yes">Pouze vlastněné</string>
+    <string name="cache_filter_status_select_only_own_no">Pouze nevlastněné</string>
+    <string name="cache_filter_status_select_only_disabled_yes">Pouze vypnuté</string>
+    <string name="cache_filter_status_select_only_disabled_no">Pouze zapnuté</string>
+    <string name="cache_filter_status_select_only_archived_yes">Pouze archivované</string>
+    <string name="cache_filter_status_select_only_archived_no">Pouze aktivní</string>
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
@@ -1357,6 +1367,9 @@
     <string name="search_hbu">Ukryl</string>
     <string name="search_hbu_prefill">Vlastník</string>
     <string name="search_hbu_button">Hledat podle vlastníka</string>
+    <string name="search_filter">Filtr (experimentální)</string>
+    <string name="search_filter_button">Hledat podle filtru</string>
+    <string name="search_filter_info_message">Funkce „Hledat podle filtru“ vyhledává kešky v online službách pomocí zadaného filtru. V závislosti na možnosti služby, se online filtrování provádí pouze částečně, zbytek se pak provádí offline filtrováním.\n\nVšechny služby podporují pouze AND filtry, nikoliv inverzní filtry\n\nGeocaching.com podporuje:\n- Název (pouze celá slova, vzor není podporován)\n- Typ kešky\n- Velikost kešky\n- Vzdálenost a terén\n- Oblíbené (pouze absolutní, pouze minimální)\n- Stav (Vlastněné, Nalezené &amp; Zapnuté)\n- Skryté kým (uveďte přesné ID uživatele)\n- Nenalezené kým (uveďte přesné ID uživatele)\n- Datum umístění\n\nMějte na vědomí, že c:geo nemůže nabízet konkrétní filtrování atributů, protože nám Geocaching.com blokuje požadované API.\n\nŽádná služba kromě Geocaching.com zatím není podporována.</string>
     <string name="search_tb">Sledovatelný předmět</string>
     <string name="search_tb_hint">ID sledovatelného předmětu</string>
     <string name="search_tb_button">Hledat sledovatelné</string>
@@ -1444,7 +1457,6 @@
     <string name="helper_bluetoothgps_description">Umožňuje použít externí GPS přijímač pro přesnější lokalizaci a možná tak i ušetřit nějakou energii.</string>
     <string name="helper_gps_locker_description">GPS Locker udržuje GPS signál aktivní při přepínání aplikací a při vypnutí obrazovky vašeho zařízení.</string>
     <string name="helper_barcode_description">Jsou zde skripty Greasemonkey a stránky, které ti umožní zobrazit geokód jako čárový kód. S touto aplikací může c:geo přečíst daný geokód přímo z tvého displeje.</string>
-    <string name="helper_pocketquery_description">Umožňuje snadné vytváření a stažení PQ podle současné pozice nebo bodu na mapě. Vyžaduje Premium účet na Geocaching.com.</string>
     <string name="helper_google_translate_title">Překladač Google</string>
     <string name="helper_google_translate_description">Pokud si v aplikaci Překladač Google stáhneš překladový balíček, můžeš jednoduše překládat popisy kešek v c:geo dlouhým podržením textu (a to bez připojení k Internetu).</string>
     <string name="helper_where_you_go_description">WhereYouGo umožňuje hledání kešek typu Wherigo. S touto aplikací může c:geo automaticky stahovat údaje potřebné pro hru.</string>

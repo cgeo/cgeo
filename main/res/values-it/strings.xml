@@ -156,6 +156,7 @@
     <string name="log_image_info">%1$d x %2$d px, %3$s\nRidotto/Compresso:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Immagine</string>
     <!-- translation -->
+    <string name="translate">Traduci</string>
     <string name="translate_to_sys_lang">Traduci in %s</string>
     <string name="translate_to_english">Traduci in inglese</string>
     <string name="translate_length_warning">La traduzione può fallire quando c\'è molto testo.</string>
@@ -247,6 +248,7 @@
     <string name="warn_notloggedin_short">Non loggato. La mappa live mostrerà solo i cache memorizzati localmente. Tocca qui per ulteriori informazioni.</string>
     <string name="warn_notloggedin_long">Non connesso (ancora). Mappa live mostrerà solo le cache memorizzate localmente e le funzioni online non funzioneranno.\n\nNon c\'è nessuna connessione di rete, un problema di server oppure devi (ri)configurare i tuoi servizi di geocaching.\n\nVuoi configurare i servizi ora?</string>
     <string name="err_read_pocket_query_list">Errore nella lettura della lista di Pocket query.</string>
+    <string name="err_read_bookmark_list">Errore nella lettura degli elenchi dei segnalibri.</string>
     <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
     <string name="info_log_saved">c:geo ha salvato il log.</string>
     <string name="info_log_post_failed">Caricamento log fallito.</string>
@@ -295,6 +297,7 @@
     <string name="menu_history">Cronologia</string>
     <string name="menu_filter">Filtri</string>
     <string name="menu_scan_geo">Scansiona geocode</string>
+    <string name="menu_lists_pocket_queries">Liste / pocket query</string>
     <string name="menu_scan_description">c:geo può eseguire una scansione di geocodes stampati oppure di immagini QR code. L\'applicazione necessaria non è installata. Desideri aprire Google Play per installarla?</string>
     <!-- main screen -->
     <string name="live_map_button">Mappa</string>
@@ -309,6 +312,8 @@
     <string name="caches_more_caches_no">Nessun altro cache</string>
     <string name="caches_more_caches_loading">Caricamento dei cache…</string>
     <string name="caches_more_caches_currently">attualmente</string>
+    <string name="caches_more_caches_next_x">Carica i prossimi %1$d cache</string>
+    <string name="caches_more_caches_remaining">Carica i (%1$d / %2$d) cache rimanenti</string>
     <string name="caches_downloading">Download cache in corso…\nETA: </string>
     <string name="caches_eta_ltm">Meno di un minuto</string>
     <plurals name="caches_eta_mins">
@@ -361,6 +366,7 @@
     <string name="caches_copy_all">Copia tutto</string>
     <string name="caches_map_locus_export">Esporta in Locus</string>
     <string name="caches_filter">Filtra</string>
+    <string name="caches_filter_menuitem">Nuovo Filtro Cache (Sperimentale)</string>
     <string name="caches_filter_title">Filtra per</string>
     <string name="caches_filter_size">Dimensione</string>
     <string name="caches_filter_type">Tipo</string>
@@ -413,6 +419,57 @@
     <string name="list_dialog_rename">Rinomina</string>
     <string name="list_not_available">Elenco non più disponibile, passo a elenco standard</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_option_and_or">Usa OR invece di AND</string>
+    <string name="cache_filter_option_inverse">Filtro Inverso</string>
+    <string name="cache_filter_option_include_inconclusive">Includi confronti non conclusivi</string>
+    <string name="cache_filter_option_include_inconclusive_info">Indica se includere nel risultato i cache di cui un filtro necessita di informazioni che non sono disponibili.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tocca \'+\' in alto a destra per aggiungere un filtro</string>
+    <string name="cache_filter_name">Nome</string>
+    <string name="cache_filter_type">Tipo</string>
+    <string name="cache_filter_size">Dimensione</string>
+    <string name="cache_filter_personalnote">Note personali</string>
+    <string name="cache_filter_description">Descrizione</string>
+    <string name="cache_filter_offlinelog">Log Offline</string>
+    <string name="cache_filter_owner">Proprietario</string>
+    <string name="cache_filter_difficulty">Difficoltà</string>
+    <string name="cache_filter_terrain">Terreno</string>
+    <string name="cache_filter_status">Stato</string>
+    <string name="cache_filter_attributes">Attributi</string>
+    <string name="cache_filter_favorites">Preferiti</string>
+    <string name="cache_filter_distance">Distanza</string>
+    <string name="cache_filter_include">Includi</string>
+    <string name="cache_filter_exclude">Escludi</string>
+    <string name="cache_filter_userdisplay_complex">Complesso</string>
+    <string name="cache_filter_userdisplay_none">Nessuno</string>
+    <string name="cache_filter_userdisplay_multi">Multipli</string>
+    <string name="cache_filter_storage_load_button">Carica</string>
+    <string name="cache_filter_storage_delete_button">Elimina</string>
+    <string name="cache_filter_storage_load_delete_title">Carica o elimina un filtro esistente</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">Nessun filtro è ancora stato memorizzato.</string>
+    <string name="cache_filter_storage_save_title">Salva filtro con nome</string>
+    <string name="cache_filter_storage_save_confirm_title">Salva filtro con sovrascrittura</string>
+    <string name="cache_filter_storage_save_confirm_message">Un filtro con il nome \'%s\' e una configurazione differente esiste già. Sovrascriverlo?</string>
+    <string name="cache_filter_stringfilter_matchcase">Maiuscole/Minuscole</string>
+    <string name="cache_filter_stringfilter_info">Con l\'opzione \'Pattern\', usa caratteri jolly * e ?. * rappresenta nessuno, uno o più caratteri, ? rappresenta un singolo carattere. Per esempio, il pattern \'H?mburg*\' coinciderà ad esempio con \'Homburg\' o \'Hamburg di notte\' ma non \'Un giorno ad Hamburg\' o \'Hahmburg\'</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">Non è Presente</string>
+    <string name="cache_filter_stringfilter_type_is_present">È Presente</string>
+    <string name="cache_filter_stringfilter_type_contains">Contiene</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Inizia con</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Finisce con</string>
+    <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Seleziona tutto / niente</string>
+    <string name="cache_filter_favorites_absolute">Assoluto</string>
+    <string name="cache_filter_favorites_percentage">Percentuale</string>
+    <string name="cache_filter_distance_use_current_position">Usa posizione corrente</string>
+    <string name="cache_filter_status_select_all">Tutti</string>
+    <string name="cache_filter_status_select_only_found_yes">Solo Trovati</string>
+    <string name="cache_filter_status_select_only_found_no">Solo Non Trovati</string>
+    <string name="cache_filter_status_select_only_own_yes">Solo Posseduti</string>
+    <string name="cache_filter_status_select_only_own_no">Solo Non Posseduti</string>
+    <string name="cache_filter_status_select_only_disabled_yes">Solo Disabilitati</string>
+    <string name="cache_filter_status_select_only_disabled_no">Solo Abilitati</string>
+    <string name="cache_filter_status_select_only_archived_yes">Solo Archiviati</string>
+    <string name="cache_filter_status_select_only_archived_no">Solo Attivi</string>
     <!-- about -->
     <string name="about_version">Versione</string>
     <string name="about_changelog">Modifiche</string>
@@ -612,6 +669,8 @@
     <string name="init_choose_list">Chiedi lista</string>
     <string name="init_summary_choose_list">Chiedi la lista quando salvi un cache</string>
     <string name="init_listdisplay">Altre liste</string>
+    <string name="init_list_initial_load_limit">Limite massimo di caricamento lista</string>
+    <string name="init_summary_list_initial_load_limit">Numero massimo di cache da caricare inizialmente dal database quando vengono visualizzate le liste memorizzate. Scegli 0 per \'illimitato\'</string>
     <string name="init_summary_listdisplay">Mostra l\'appartenenza dei cache a liste aggiuntive in un elenco di cache</string>
     <string name="init_livelist">Visualizza direzione</string>
     <string name="init_summary_livelist">Mostra la direzione con la bussola per i cache in un elenco</string>
@@ -643,6 +702,7 @@
     <string name="init_user_confirmation">So cosa sto facendo</string>
     <string name="init_backup_success">Il database di c:geo è stato salvato con successo nel file: </string>
     <string name="init_backup_failed">Backup del database di c:geo fallito.</string>
+    <string name="init_backup_unnecessary">Il database è vuoto, nessun backup necessario. Creare comunque un backup?</string>
     <string name="init_backup_folder_exists_error">Impossibile creare una nuova cartella di backup. Hai già eseguito un backup nell\'ultimo minuto?</string>
     <string name="init_backup_no_backup_available">Non c\'è nessun file di backup disponibile.</string>
     <string name="backup_confirm_overwrite">Questo eliminerà la cartella di backup esistente più vecchia da %s. \nVuoi continuare?</string>
@@ -1139,6 +1199,7 @@
     <string name="context_share_as_link">Condividi link</string>
     <string name="create_internal_cache">Crea cache definito dall\'utente</string>
     <string name="create_internal_cache_short">Nuova cache</string>
+    <string name="create_internal_cache_currentlist">Usa la lista corrente</string>
     <string name="internal_cache_default_name">Cache definito dall\'utente #%1$d</string>
     <string name="internal_cache_default_description">Questo è un cache definito dall\'utente</string>
     <string name="internal_cache_default_owner">Tu</string>
@@ -1284,6 +1345,9 @@
     <string name="search_hbu">Nascosto da</string>
     <string name="search_hbu_prefill">Proprietario</string>
     <string name="search_hbu_button">Cerca per proprietario</string>
+    <string name="search_filter">Filtro (sperimentale)</string>
+    <string name="search_filter_button">Cerca con Filtro</string>
+    <string name="search_filter_info_message">\'Cerca con Filtro\' cerca i cache sui servizi online usando il filtro fornito. In base alla capacità del servizio, solo parte del filtro è eseguita online, il resto è eseguito filtrando offline.\n\nTutti i servizi supportano solo i filtri di tipo AND e non supportano l\'inversione del filtro\n\nGeocaching.com supporta:\n- Nome (solo parole intere, Pattern non supportato)\n- Tipo Cache\n- Dimensione Cache\n- Distanza e Terreno\n- Preferiti (solo assoluto, solo minimo)\n- Stato (Posseduto, Trovato e Abilitato)\n- Nascosto da (con id utente esatto)\n- Non Trovato da (con id utente esatto)\n- Data di posizionamento\n\nNota che c:geo potrebbe non offrire il filtraggio dell\'Attributo poiché Geocaching.com ci blocca l\'API necessaria.\n\nNessun servizio diverso da Geocaching.com è attualmente supportato.</string>
     <string name="search_tb">Oggetto Trackable</string>
     <string name="search_tb_hint">Identificativo Trackable</string>
     <string name="search_tb_button">Cerca per trackable</string>
@@ -1293,6 +1357,9 @@
     <string name="search_address_result">Cerca luoghi</string>
     <string name="search_own_caches">Cerca i miei cache</string>
     <string name="search_pocket_title">Pocket Query</string>
+    <string name="search_bookmark_list">Lista segnalibri</string>
+    <string name="search_pocket_is_new">nuovo</string>
+    <string name="search_pocket_and_bookmark_loading">Caricamento di un elenco di Pocket Queries e liste di segnalibri</string>
     <!-- trackable -->
     <string name="trackable">Oggetto Trackable</string>
     <string name="trackable_details_loading">Caricamento dettagli Trackable…</string>
@@ -1368,7 +1435,6 @@
     <string name="helper_bluetoothgps_description">Permette di utilizzare un GPS esterno, garantendo maggiore precisione, migliore ricezione e prolungando la durata della batteria del tuo dispositivo.</string>
     <string name="helper_gps_locker_description">Il blocco GPS mantiene attivo il segnale GPS quando si passa tra le applicazioni e quando lo schermo del dispositivo è spento.</string>
     <string name="helper_barcode_description">Ci sono script Greasemonkey e siti web che consentono di visualizzare un geocode come codice a barre. Con questa app c:geo può leggere il geocode direttamente dallo schermo del tuo computer.</string>
-    <string name="helper_pocketquery_description">Consente di creare facilmente Pocket Queries centrate sulla tua posizione attuale o un punto scelto dalla mappa. Richiede un account premium su Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Traduttore</string>
     <string name="helper_google_translate_description">Se si scaricano anche le lingue offline dell\'applicazione Google Traduttore, puoi facilmente tradurre le descrizioni dei cache in c:geo toccando e tenendo premuto sul testo (senza bisogno di una connessione Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permette di giocare e cercare geocache di tipo Wherigo. c:geo può automaticamente scaricare le schede tramite questa app.</string>
@@ -1870,6 +1936,7 @@
     <string name="localfile_cannot_handle">Errore nella lettura del file o c:geo non può gestire questo tipo di file.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Ricezione file</string>
+    <string name="receivedownload_receiving_file">Ricevendo il file \"%s\"</string>
     <string name="receivedownload_success">File salvato con successo come \"%s\"</string>
     <string name="receivedownload_error">Errore durante la ricezione del file</string>
     <string name="receivedownload_error_io_exception">Errore di I/O durante la ricezione del file. La cartella \"%s\" è scrivibile?</string>
@@ -1877,6 +1944,7 @@
     <string name="receivedownload_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
     <string name="receivedownload_option_overwrite">Sovrascrivere</string>
     <string name="receivedownload_option_differentname">Nome diverso</string>
+    <string name="receivedownload_amount_copied">%s copiato</string>
     <string name="receivedownload_cancelled">Trasferimento file annullato</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
@@ -1899,6 +1967,9 @@
     <string name="downloadmap_no_updates_found">Nessun aggiornamento mappa trovato</string>
     <string name="downloadmap_directory">cartella</string>
     <string name="downloadmap_mapfile">file mappa</string>
+    <string name="downloadmap_themefile">file del tema</string>
+    <string name="downloadmap_tilefile">file dei dati di percorso</string>
+    <string name="downloadmap_download">download</string>
     <string name="downloadmap_retrieving_directory_data">Recupero dati cartella…</string>
     <string name="downloadmap_checking_for_updates">Controllo aggiornamenti…</string>
     <string name="downloadmap_install_theme_title">Installa file tema</string>
@@ -1914,6 +1985,8 @@
     <string name="mapserver_openandromaps_themes_info">Tema mappa dettagliato, creato per le mappe \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mappe dettagliate, richiedono uno dei temi della mappa \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema mappa dettagliato, creato per le mappe \"Freizeitkarte\"</string>
+    <string name="mapserver_hylly_info">Le mappe dettagliate per la Finlandia, richiedono uno dei temi mappa \"Hylly\"</string>
+    <string name="mapserver_hylly_themes_info">Tema mappa dettagliato, creato per le mappe \"Hylly\"</string>
     <string name="brouter_info">Servizio di navigazione offline</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>

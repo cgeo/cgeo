@@ -155,6 +155,8 @@
     <string name="log_image_scale_option_noscaling">Χωρίς κλιμάκωση</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Εικόνα</string>
+    <string name="datetime_clear_button">Kαθαρισμός</string>
+    <string name="datetime_nodateset_display">Δεν έχει οριστεί ημερομηνία</string>
     <!-- translation -->
     <string name="translate">Μετάφραση</string>
     <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
@@ -441,6 +443,7 @@
     <string name="cache_filter_exclude">Εξαίρεση</string>
     <string name="cache_filter_userdisplay_complex">Σύνθετο</string>
     <string name="cache_filter_userdisplay_none">Κανένα</string>
+    <string name="cache_filter_userdisplay_multi">Πολλαπλές</string>
     <string name="cache_filter_storage_load_button">Φόρτωση</string>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
@@ -456,10 +459,21 @@
     <string name="cache_filter_stringfilter_type_starts_with">Ξεκινάει με</string>
     <string name="cache_filter_stringfilter_type_ends_with">Τελειώνει σε</string>
     <string name="cache_filter_stringfilter_type_pattern">Μοτίβο</string>
+    <string name="cache_filter_datefilter_label_from">Από:</string>
+    <string name="cache_filter_datefilter_label_to">Έως:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Επιλογή όλων/κανένα</string>
     <string name="cache_filter_favorites_absolute">Απόλυτη</string>
     <string name="cache_filter_favorites_percentage">Ποσοστό</string>
     <string name="cache_filter_distance_use_current_position">Χρήση τρέχουσας θέσης</string>
+    <string name="cache_filter_status_select_all">Όλες</string>
+    <string name="cache_filter_status_select_only_found_yes">Βρέθηκαν Μόνο</string>
+    <string name="cache_filter_status_select_only_found_no">Δεν Βρέθηκε Μόνο</string>
+    <string name="cache_filter_status_select_only_own_yes">Μόνο ιδιόκτητες</string>
+    <string name="cache_filter_status_select_only_own_no">Μόνο άλλων</string>
+    <string name="cache_filter_status_select_only_disabled_yes">Μόνο Απενεργοποιημένες</string>
+    <string name="cache_filter_status_select_only_disabled_no">Μόνο ενεργοποιημένες</string>
+    <string name="cache_filter_status_select_only_archived_yes">Μόνο Αρχειοθετημένες</string>
+    <string name="cache_filter_status_select_only_archived_no">Μόνο Ενεργές</string>
     <!-- about -->
     <string name="about_version">Έκδοση</string>
     <string name="about_changelog">Τι νέο υπάρχει;</string>
@@ -1335,6 +1349,9 @@
     <string name="search_hbu">Κρύφτηκε από</string>
     <string name="search_hbu_prefill">Ιδιοκτήτης</string>
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
+    <string name="search_filter">Φίλτρο (πειραματικό)</string>
+    <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
+    <string name="search_filter_info_message">Η \'Αναζήτηση με φίλτρο\' αναζητά κρύπτες χρησιμοποιώντας το παρεχόμενο φίλτρο. Ανάλογα με την δυνατότητες της υπηρεσίας, μόνο ένα μέρος του φίλτρου εκτελείται σε απευθείας σύνδεση, το υπόλοιπο γίνεται με φίλτρο εκτός σύνδεσης.\n\nΌλες οι υπηρεσίες υποστηρίζουν μόνο φίλτρα \'ΚΑΙ\' όπως και χωρίς αντιστροφή φίλτρου\n\nη Geocaching. com υποστηρίζει:\n- Όνομα (μόνο ολόκληρες λέξεις, Δεν υποστηρίζεται το μοτίβο)\n- Τύπος κρύπτης\n- Μέγεθος κρύπτης\n- Απόσταση και έδαφος\n- Αγαπημένα (μόνο απόλυτα, μόνο ελάχιστο)\n- Κατάσταση (Δικές μου, Βρέθηκαν &amp; Ενεργοποιημένες)\n- Κρυμένες από (καθορίστε το id του χρήστη)\n- Δεν βρέθηκε απο τον (προσδιορίστε το αναγνωριστικό χρήστη ακριβώς)\n- Ημερομηνία τοποθέτησης\n\nΣημειώστε ότι το c:geo δεν μπορεί ειδικά να προσφέρει φιλτράρισμα ιδιότητας γιατί η Geocaching.com μπλοκάρει το απαιτούμενο API για εμάς.\n\nΑυτή η υπηρεσία μέσω της Geocaching.com δεν υποστηρίζεται ακόμα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
@@ -1422,7 +1439,6 @@
     <string name="helper_bluetoothgps_description">Σας επιτρέπει να χρησιμοποιήσετε έναν εξωτερικό δέκτη GPS για να πάρετε πιο ακριβή δεδομένα τοποθεσίας, και να κάνετε οικονομία στη μπαταρία της συσκευής σας.</string>
     <string name="helper_gps_locker_description">Το κλείδωμα GPS διατηρεί το σήμα του GPS ενεργό όταν εναλλάσσονται οι εφαρμογές ή όταν η οθόνη της συσκευής είναι σβηστή.</string>
     <string name="helper_barcode_description">Υπάρχουν σενάρια και ιστοσελίδες Greasemonkey που επιτρέπουν να εμφανίζονται οι γεωκωδικοί ως γραμμωτοί κώδικες. Με αυτή την εφαρμογή το c:geo μπορεί να διαβάζει τέτοιους γεωκωδικούς κατευθείαν από την οθόνη του υπολογιστή σας.</string>
-    <string name="helper_pocketquery_description">Επιτρέπει την εύκολη δημιουργία και λήψη Προσωπικών Αναζητήσεων με επίκεντρο την τρέχουσα τοποθεσία σας ή ένα σημείο στο χάρτη. Απαιτείται λογαριασμόςPremium στο Geocaching.com.</string>
     <string name="helper_google_translate_title">Μετάφραση Google</string>
     <string name="helper_google_translate_description">Αν κατεβάσετε πακέτα μετάφρασης στην εφαρμογή Google Translate, τότε μπορείτε να μεταφράσετε εύκολα περιγραφές κρυπτών στο c:geo, με ένα παρατεταμένο πάτημα στην περιγραφής της κρύπτης (χωρίς σύνδεση στο Internet).</string>
     <string name="helper_where_you_go_description">Το WhereYouGo επιτρέπει την αναζήτηση κρυπτών του τύπου Wherigo, Το c:geo αυτόματα ενεργοποιεί τη φόρτωση των cartridges μέσα στην εφαρμογή.</string>

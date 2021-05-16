@@ -1384,7 +1384,6 @@
     <string name="helper_bluetoothgps_description">Umožňuje použitie externého GPS zariadenia pre lepší príjem, presnejšie umiestnenie a zníži využitie batérie vášho telefónu.</string>
     <string name="helper_gps_locker_description">Zámok GPS udržiava signál GPS aktívny pri prechádzaní medzi aplikáciami a pri zhasnutej obrazovke zariadenia.</string>
     <string name="helper_barcode_description">Existujú Greasemonkey skripty a stránky, ktoré geokód zobrazujú ako čiarový kód. S touto aplikáciou môže c:geo načítať geokód priamo z obrazovky vášho PC.</string>
-    <string name="helper_pocketquery_description">Umožňuje ľahké vytváranie a sťahovanie Pocket Query zamerané na vašu aktuálnu polohu alebo bod vybraný na mape. Vyžaduje Premium účet na Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Ak prevezmete balíky prekladov v aplikácii Google Translate, môžete ľahko preložiť popisy skrýš v c:geo dlhým kliknutím na text s popisom skrýše (aj bez pripojenia k internetu).</string>
     <string name="helper_where_you_go_description">WhereYouGo umožňuje hľadať skrýše typu Wherigo. c:geo môže automaticky spustiť sťahovanie súborov (cartridge) cez túto aplikáciu.</string>

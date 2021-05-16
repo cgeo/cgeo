@@ -1207,7 +1207,6 @@
     <string name="helper_bluetoothgps_description">Giver dig mulighed for at bruge en ekstern GPS-modtager som giver en mere præcis positionsbestemmelse og kan forlænge batteritiden på din enhed.</string>
     <string name="helper_gps_locker_description">GPS Locker holder GPS modtageren aktiv, når du skifter mellem applikationer og når enhedens skærm er slukket.</string>
     <string name="helper_barcode_description">Denne app kan skanne og afkode stregkoder med indlejrede geokoder.</string>
-    <string name="helper_pocketquery_description">Giver mulighed for let at oprette og downloade Pocket Queries baseret på din position eller et valgt punkt på et kort. Kræver Premium-medlemskab på geocaching.com.</string>
     <string name="helper_google_translate_title">Google Oversæt</string>
     <string name="helper_google_translate_description">Hvis du har downloadet oversættelsespakker til Google Oversæt appen, kan du let oversætte cachebeskrivelser i c:geo ved at trykke lang tid på teksten (kræver ikke Internetforbindelse).</string>
     <string name="helper_where_you_go_description">WhereYouGo giver mulighed for at afspille og søge efter geocacher af typen Wherigo. c:geo kan automatisk starte download af cartridges i denne app.</string>

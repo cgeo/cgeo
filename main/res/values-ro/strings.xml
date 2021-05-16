@@ -910,7 +910,6 @@
     <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
     <string name="helper_bluetoothgps_description">Permite utilizarea unui GPS extern pentru informaţii de poziţie mai precise, totodată conservă din autonomia bateriei dispozitivului tău.</string>
     <string name="helper_barcode_description">Există aplicaţii GreaseMonkey şi site-uri care pot afişa geocoduri sub formă de coduri de bare. Cu aceasta aplicaţie, c:geo poate citi aceste geocoduri direct de pe ecranul calculatorului.</string>
-    <string name="helper_pocketquery_description">Permite crearea de Pocket Queries centrate pe poziţia ta actuală sau a unui punct de pe hartă. Necesită cont premium pe Geocaching.com.</string>
     <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo este o aplicaţie pentru a juca aventuri de tip Wherigo. c:geo poate declanşa automat descărcarea cartuşului în această aplicaţie.</string>
     <string name="helper_brouter_title">Navigare independentă cu BRouter</string>

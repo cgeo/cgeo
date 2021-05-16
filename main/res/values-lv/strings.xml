@@ -1093,7 +1093,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="helper_gpsstatus_description">Iespējams izmantot radaru kopā ar c:geo. Tas parāda arī citu ar GPS saistītu informāciju.</string>
     <string name="helper_bluetoothgps_description">Lai iegūtu precīzāku atrašanās vietas datus, ļauj izmantot ārējo GPS uztvērēju, tas var ietaupīt ierīces akumulatoru.</string>
     <string name="helper_barcode_description">Šie ir Greasemonkey skripti un tīmekļa vietnes, kas ļauj parādīt ģeokodus kā svītrkodus. Ar šo aplikāciju c:geo var lasīt šādu ģeokodus tieši no datora ekrāna.</string>
-    <string name="helper_pocketquery_description">Atļauj viegli izveidot un lejupielādēt Slēpņu atlasi (PQ), kas centrēta uz tavu pašreizējo atrašanās vietu vai atlasīta no punkta kartē. Nepieciešams Geocaching.com Premium lietotāja konts.</string>
     <string name="helper_google_translate_title">Google tulkotājs</string>
     <string name="helper_google_translate_description">Ja ir lejupielādētas tulkojuma pakotnes Google Translate aplikācijā, tad slēpņu aprakstus vari viegli tulkot c:geo paturot uz slēpņa apraksta teksta (bez interneta pieslēguma).</string>
     <string name="helper_where_you_go_description">WhereYouGo ļauj spēlēt un meklēt Wherigo tipa slēpņus. c:geo automātiski ļauj lejupielādēt kārtridžus caur šo aplikāciju.</string>

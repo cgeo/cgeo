@@ -155,6 +155,8 @@
     <string name="log_image_scale_option_noscaling">Ölçeklendirme yok</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nÖlçeklenmiş/Sıkıştırılmış:\n%4$d x %5$d px, ~ %6$s</string>
     <string name="log_image_titleprefix">Resim</string>
+    <string name="datetime_clear_button">Temizle</string>
+    <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
     <!-- translation -->
     <string name="translate">Çeviri</string>
     <string name="translate_to_sys_lang">%s\'e çevir</string>
@@ -441,6 +443,7 @@
     <string name="cache_filter_exclude">Hariç Tut</string>
     <string name="cache_filter_userdisplay_complex">Kompleks</string>
     <string name="cache_filter_userdisplay_none">Hiçbiri</string>
+    <string name="cache_filter_userdisplay_multi">Çoklu</string>
     <string name="cache_filter_storage_load_button">Yükle</string>
     <string name="cache_filter_storage_delete_button">Sil</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
@@ -456,10 +459,21 @@
     <string name="cache_filter_stringfilter_type_starts_with">Şununla Başlıyorsa</string>
     <string name="cache_filter_stringfilter_type_ends_with">Şununla Bitiyorsa</string>
     <string name="cache_filter_stringfilter_type_pattern">Patern</string>
+    <string name="cache_filter_datefilter_label_from">Buradan:</string>
+    <string name="cache_filter_datefilter_label_to">Buraya:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Tümünü/Hiçbirini seç</string>
     <string name="cache_filter_favorites_absolute">Mutlak</string>
     <string name="cache_filter_favorites_percentage">Yüzde</string>
     <string name="cache_filter_distance_use_current_position">Mevcut konumu kullan</string>
+    <string name="cache_filter_status_select_all">Tümü</string>
+    <string name="cache_filter_status_select_only_found_yes">Sadece Bulduklarım</string>
+    <string name="cache_filter_status_select_only_found_no">Sadece Bulmadıklarım</string>
+    <string name="cache_filter_status_select_only_own_yes">Sahibi Olduklarım</string>
+    <string name="cache_filter_status_select_only_own_no">Sahibi Olmadıklarım</string>
+    <string name="cache_filter_status_select_only_disabled_yes">Sadece Devredışılar</string>
+    <string name="cache_filter_status_select_only_disabled_no">Sadece Açılanlar</string>
+    <string name="cache_filter_status_select_only_archived_yes">Sadece Arşivlenenler</string>
+    <string name="cache_filter_status_select_only_archived_no">Sacece Etkin Olanlar</string>
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
@@ -1335,6 +1349,9 @@
     <string name="search_hbu">Saklayan</string>
     <string name="search_hbu_prefill">Sahibi</string>
     <string name="search_hbu_button">Sahibine göre ara</string>
+    <string name="search_filter">Filtre (Deneysel)</string>
+    <string name="search_filter_button">Filtreye göre ara</string>
+    <string name="search_filter_info_message">\'Filtreye göre ara\' seçilen filtreye göre cacheleri çevrimiçi olarak arar. Servis gücüne göre bir kısmı çevrimiçi olarak kalanı ise çevrimdışı olarak arama yapılabilir.\n\nTüm servisler sadece VE filteleri ve Hayır filtrelerinin değişimini destekler\n\nGeocaching.com destekleri\n- İsim (sadece tam sözcükler, biçimler desteklenmez)\n- Geocache türü\n-Geocache boyutu\n- Mesafe ve Arazi\n- Favoriler (sadece minimum)\n- Durum (Sahibi olduklarım, Bulduklarım&amp;Aktifler)\n- Saklayan (sadece kullanıcı adına özel arama)\n- Bulmadıkları (sadece kullanıcı adına özel arama)\n- Saklama tarihi\n\nGeocaching.com\'un gerekli API bilgisini bizlerle artık paylaşmıyor olmasından dolayı özelliklere göre arama filtresi kullanılabilir değildir.\n\n.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable kimliği</string>
     <string name="search_tb_button">Trackable ara</string>
@@ -1422,7 +1439,6 @@
     <string name="helper_bluetoothgps_description">Daha kesin konum bilgisi almak için harici bir GPS alıcısı kullanmanıza izin verir ve cihaz pilini daha idareli kullanır.</string>
     <string name="helper_gps_locker_description">GPS Klilidi siz diğer applikasyonları kullanırken veya cihazınızın ekranı kilitliyken GPS sinyalini açık tutar.</string>
     <string name="helper_barcode_description">Geokodların barkod olarak görüntülenmesini sağlayan Greasemonkey komut dosyaları ve internet siteleri var. Bu uygulamayla (c:geo) bu tür geokodları doğrudan bilgisayarınızda görüntüleyebilirsiniz.</string>
-    <string name="helper_pocketquery_description">Geçerli konumunuz veya bir haritadan seçilen bir başka konuma odaklanan Sorgulama Kaydı kolay oluşturmanızı ve indirmenizi sağlar. Premium Geocaching.com hesabı gerektirir.</string>
     <string name="helper_google_translate_title">Google çeviri</string>
     <string name="helper_google_translate_description">Google çeviri uygulamasından çeviri paketi indirirseniz, Geocache açıklama metnine basılı tutarak (internet bağlantısı olmadan) c:geo\'daki Geocache açıklamalarını kolaylıkla çevirebilirsiniz.</string>
     <string name="helper_where_you_go_description">WhereYouGo Wherigo türündeki Geocache\'leri bulmanızı sağlar. c:geo otomatik olarak kartuşların bu uygulama üzerinden indirilmesini tetikler.</string>
@@ -1924,6 +1940,7 @@
     <string name="localfile_cannot_handle">Dosyayı okurken hata oluştu ya da c:geo bu dosya türünü işleyemiyor.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Dosyayı al</string>
+    <string name="receivedownload_receiving_file">\"%s\" dosyası alınıyor</string>
     <string name="receivedownload_success">Dosya \"%s\" olarak başarıyla depolandı</string>
     <string name="receivedownload_error">Dosyayı alırken hata oluştu</string>
     <string name="receivedownload_error_io_exception">Dosyayı alırken G/Ç hatası alındı. \"%s\" klasörünüzde yazma yetkisi var mı?</string>
@@ -1931,6 +1948,7 @@
     <string name="receivedownload_alreadyexists">Bu isimle bir dosya zaten var. Var olan dosyanın üzerine mi yazılsın yoksa farklı bir adla yeni bir dosya olarak mı kaydedilsin?</string>
     <string name="receivedownload_option_overwrite">Üzerine yaz</string>
     <string name="receivedownload_option_differentname">Farklı isim</string>
+    <string name="receivedownload_amount_copied">%s kopyalandı</string>
     <string name="receivedownload_cancelled">Dosya aktarımı iptal edildi</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Çevrimdışı harita indir</string>
@@ -1953,6 +1971,9 @@
     <string name="downloadmap_no_updates_found">Harita güncellemesi bulunamadı</string>
     <string name="downloadmap_directory">klasör</string>
     <string name="downloadmap_mapfile">harita dosyası</string>
+    <string name="downloadmap_themefile">tema dosyası</string>
+    <string name="downloadmap_tilefile">yönlendirme veri dosyası</string>
+    <string name="downloadmap_download">indir</string>
     <string name="downloadmap_retrieving_directory_data">Klasör verisi alınıyor…</string>
     <string name="downloadmap_checking_for_updates">Güncellemeler denetleniyor…</string>
     <string name="downloadmap_install_theme_title">Tema dosyasını kur</string>
