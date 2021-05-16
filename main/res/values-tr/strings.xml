@@ -441,7 +441,6 @@
     <string name="cache_filter_exclude">Hariç Tut</string>
     <string name="cache_filter_userdisplay_complex">Kompleks</string>
     <string name="cache_filter_userdisplay_none">Hiçbiri</string>
-    <string name="cache_filter_userdisplay_multi">Çoklu</string>
     <string name="cache_filter_storage_load_button">Yükle</string>
     <string name="cache_filter_storage_delete_button">Sil</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
