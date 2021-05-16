@@ -1088,7 +1088,6 @@
     <string name="helper_bluetoothgps_description">Te permite usar un GPS externo para tener mejor señal, más precisa y ahorrar batería en tu dispositivo.</string>
     <string name="helper_gps_locker_description">GPS Locker mantiene activa la señal GPS al cambiar entre aplicaciones y cuando la pantalla de tu dispositivo está apagada.</string>
     <string name="helper_barcode_description">Hay scripts de Greasemonkey y sitios web que permiten mostrar geocódigos como códigos de barras. Con esta app, c:geo puede leer esos geocódigos directamente desde la pantalla de tu PC.</string>
-    <string name="helper_pocketquery_description">Permite crear y descargar de manera sencilla Pocket Queries centrados en tu posición actual o un punto seleecionado en el mapa. Requiere cuenta Premium en geocaching.com.</string>
     <string name="helper_google_translate_title">Traductor de Google</string>
     <string name="helper_google_translate_description">Si descargas paquetes de idiomas en la app Traductor de Google, puedes traducir las descripciones de los cachés en c:geo pulsando de forma larga en el texto del caché (sin conexión a internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo te permite ejecutar y buscar cachés de tipo Wherigo. c:geo puede iniciar directamente la descarga de los cartuchos a esta aplicación.</string>
