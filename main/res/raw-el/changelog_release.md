@@ -1,39 +1,39 @@
-## Beta Version 2021.05.11-RC
+## Beta Έκδοση 2021.05.11-RC
 
-### Geocaching Services
-- New: Added connector for Adventure Lab Caches - Shows starting coords of Adventure Labs with basic info on map and searches (PM-only). Use the link on the cache details page to start the Adventure Lab app to play the Adventure.
+### Υπηρεσίες Geocaching
+- Νέα: Προστιθέμενος σύνδεσμος για το Adventure Lab Caches - Δείχνει ξεκινώντας συντεταγμένων των Adventure Lab Caches με βασικές πληροφορίες για το χάρτη και αναζητήσεις (μόνο PM). Χρησιμοποιήστε τον σύνδεσμο στη σελίδα λεπτομερειών της κρύπτης για να ξεκινήσετε την εφαρμογή Adventure Lab για να παίξετε την Περιπέτεια.
 
-### Cache details
-- New: Long click on waypoint coordinates to copy coordinates
-- New: Export and import UDC with empty coordinates
-- New: Support changing found state for user-defined caches and Lab Adventures
-- New: Parse formula for waypoints in personal cache note
-- New: Added indicator for calculated coordinates in waypoint list
-
-
-### Map
-- New: Automatic check for updates of downloaded map and theme files (optional)
-- New: BRouter: Show info message on missing routing data
-- New: Export individual route as track (in addition to "Export as route")
-
-### Integrated routing engine
-- New: Integrated BRouter routing engine - you can now use either external BRouter app or the integrated routing engine
-- New: Integrated routing engine supports automatic download of missing routing tiles
-- New: Integrated routing engine supports automatic updates of downloaded routing tiles
-- New: Integrated routing engine supports selecting different routing profiles
+### Λεπτομέρειες κρύπτης
+- Νέο: Κάντε παρατεταμένο κλικ στις συντεταγμένες του σημείου διαδρομής για αντιγραφή συντεταγμένων
+- Νέο: Εξαγωγή και εισαγωγή κρυπτών που ορίζονται από το χρήστη με κενές συντεταγμένες
+- Νέο: Υποστήριξη αλλαγής βρέθηκε κατάσταση για τους καθορισμένους από το χρήστη κρύπτες και τις Adventure Lab Caches
+- Νέο: Ανάλυση τύπου για τα σημεία στην προσωπική σημείωση cache
+- Νέο: Προστέθηκε δείκτης για υπολογισθήσες συντεταγμένες στη λίστα σημείων
 
 
-### Other
-- Change: "Sort individual route" automatically closes on saving and checks for unsaved changes on using the back arrow
-- Fix: A couple of theming issues, esp. aligned theming of Google Maps and settings to "rest of app"
-- Fix: Optimize global search: If no trackable with matching tracking code is found, execute online cache name search afterwards
-- Fix: Avoid avatar images being displayed too wide and pushing the "Update / remove authorization" functionalty aside
-- Fix: Fix conversion error in some distance settings for imperial units
-- New: Debug view for pending downloads
-- Fix: Directory selected by user not taken over in wizard on older devices
-- Fix: Scan for map themes now run as background task on startup
-- Fix: Changing map source via settings being recognized after full restart only
-- Fix: Crash in "View settings" under certain conditions
-- Fix: Back arrow in map downloader returning to main screen
-- Fix: Avoid strange popup messages when attaching image to log
-- Fix: Possible crash on map
+### Χάρτης
+- Νέο: Αυτόματος έλεγχος για ενημερώσεις του χάρτη και των αρχείων θέματος (προαιρετικό)
+- Νέο: BRouter: Εμφάνιση μηνύματος πληροφοριών σε δεδομένα δρομολόγησης που λείπουν
+- Νέο: Εξαγωγή μεμονωμένης διαδρομής ως κομμάτι (επιπλέον της "Εξαγωγή ως διαδρομή")
+
+### Ενσωματωμένο υπολογιστικό δρομολόγησης
+- Νέο: Ολοκληρωμένη μηχανή δρομολόγησης BRouter - μπορείτε τώρα να χρησιμοποιήσετε είτε την εξωτερική εφαρμογή BRouter είτε την ενσωματωμένη μηχανή δρομολόγησης
+- Νέα: Ολοκληρωμένη μηχανή δρομολόγησης υποστηρίζει αυτόματη λήψη των χαμένων πλακιδίων δρομολόγησης
+- Νέα: Ολοκληρωμένη μηχανή δρομολόγησης υποστηρίζει αυτόματη λήψη των χαμένων πλακιδίων δρομολόγησης
+- Νέο: Ολοκληρωμένη μηχανή δρομολόγησης υποστηρίζει την επιλογή διαφορετικών προφίλ δρομολόγησης
+
+
+### Άλλο
+- Αλλαγή: "Ταξινόμηση μεμονωμένης διαδρομής" κλείνει αυτόματα στην αποθήκευση και ελέγχει για μη αποθηκευμένες αλλαγές χρησιμοποιώντας το πίσω βέλος
+- Διόρθωση: Ένα ζευγάρι των θεματικών θεμάτων, πχ. σωστό θέμα σε χάρτες Google και των ρυθμίσεων σε "υπόλοιπο της εφαρμογής"
+- Διόρθωση: Βελτιστοποίηση της καθολικής αναζήτησης: Αν δεν μπορεί να ανιχνευθεί με ταιριαστό κώδικα παρακολούθησης, εκτέλεση online αναζήτησης ονόματος κρύπτης στη συνέχεια
+- Διόρθωση: Αποφυγή της υπερβολικής εμφάνισης εικόνων avatar και απόθεση της λειτουργίας "Ενημέρωση/αφαίρεση εξουσιοδότησης" στην άκρη
+- Διόρθωση: Διόρθωση σφάλματος μετατροπής σε ορισμένες ρυθμίσεις απόστασης για τις imperial μονάδες
+- Νέο: Προβολή αποσφαλμάτωσης για εκκρεμείς λήψεις
+- Διόρθωση: Κατάλογος επιλεγμένος από το χρήστη δεν αναλήφθηκε στον οδηγό σε παλαιότερες συσκευές
+- Διόρθωση: Η σάρωση για τα θέματα χάρτη εκτελείται τώρα ως εργασία στο παρασκήνιο κατά την εκκίνηση
+- Διόρθωση: Αλλαγή πηγής χάρτη μέσω των ρυθμίσεων που αναγνωρίζονται μόνο μετά από πλήρη επανεκκίνηση
+- Διόρθωση: Συντριβή στην "Προβολή ρυθμίσεων" υπό ορισμένες προϋποθέσεις
+- Διόρθωση: Πίσω βέλος στην φόρτωση χαρτη για επιστροφή στην κύρια οθόνη
+- Διόρθωση: Αποφυγή περίεργων αναδυόμενων μηνυμάτων κατά την προσάρτηση εικόνας σε καταχώρηση
+- Διόρθωση: Πιθανή κατάρρευση στο χάρτη
