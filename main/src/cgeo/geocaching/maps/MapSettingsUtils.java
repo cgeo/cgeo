@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.databinding.MapSettingsDialogBinding;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
@@ -14,11 +15,11 @@ import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Dialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -62,12 +63,11 @@ public class MapSettingsUtils {
         }
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_circles, R.drawable.ic_menu_circle, isShowCircles, Settings::setShowCircles, false));
 
-        final View dialogView = activity.getLayoutInflater().inflate(R.layout.map_settings_dialog, null);
-        currentFilterNameSetter = s -> ((TextView) dialogView.findViewById(R.id.map_settings_filter_text)).setText(s);
+        final MapSettingsDialogBinding dialogView = MapSettingsDialogBinding.inflate(LayoutInflater.from(Dialogs.newContextThemeWrapper(activity)));
+        currentFilterNameSetter = dialogView.mapSettingsFilterText::setText;
 
-        final LinearLayout settingsListview = dialogView.findViewById(R.id.map_settings_listview);
         for (SettingsCheckboxModel element : settingsElementsCheckboxes) {
-            final RelativeLayout l = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.map_settings_item, settingsListview, false);
+            final RelativeLayout l = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.map_settings_item, dialogView.mapSettingsListview, false);
             ((ImageView) l.findViewById(R.id.settings_item_icon)).setImageResource(element.resIcon);
             ((TextView) l.findViewById(R.id.settings_item_text)).setText(element.resTitle);
             final CheckBox checkBox = l.findViewById(R.id.settings_item_checkbox);
@@ -76,42 +76,37 @@ public class MapSettingsUtils {
                 element.currentValue = !element.currentValue;
                 checkBox.setChecked(element.currentValue);
             });
-            settingsListview.addView(l);
+            dialogView.mapSettingsListview.addView(l);
         }
 
         final ArrayList<ButtonChoiceModel<Integer>> compactIconChoices = new ArrayList<>();
         compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF, activity.getString(R.string.switch_off)));
         compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO, activity.getString(R.string.switch_auto)));
         compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
-        final ButtonController<Integer> compactIcon = new ButtonController<>(dialogView, null, compactIconChoices, Settings.getCompactIconMode(), setCompactIconValue);
+        final ButtonController<Integer> compactIcon = new ButtonController<>(dialogView.getRoot(), null, compactIconChoices, Settings.getCompactIconMode(), setCompactIconValue);
 
         final ArrayList<ButtonChoiceModel<RoutingMode>> routingChoices = new ArrayList<>();
         for (RoutingMode mode : RoutingMode.values()) {
             routingChoices.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
         }
-        final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView, dialogView.findViewById(R.id.routing_title), routingChoices, Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue);
+        final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView.getRoot(), dialogView.routingTitle, routingChoices, Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue);
 
-        final CheckBox autotargetCheckbox = dialogView.findViewById(R.id.map_settings_autotarget);
         if (showAutotargetIndividualRoute) {
-            final View autotargetContainer = dialogView.findViewById(R.id.map_settings_autotarget_container);
-            autotargetContainer.setVisibility(View.VISIBLE);
-            autotargetCheckbox.setChecked(isAutotargetIndividualRoute);
+            dialogView.mapSettingsAutotargetContainer.setVisibility(View.VISIBLE);
+            dialogView.mapSettingsAutotarget.setChecked(isAutotargetIndividualRoute);
         }
 
         final GeocacheFilter mapFilter = GeocacheFilter.getStoredForListType(MapUtils.getMapViewerListType());
 
-        ((TextView) dialogView.findViewById(R.id.map_settings_filter_text)).setText(mapFilter.toUserDisplayableString());
-        dialogView.findViewById(R.id.map_settings_filter_button).setOnClickListener(v -> {
+        dialogView.mapSettingsFilterText.setText(mapFilter.toUserDisplayableString());
+        dialogView.mapSettingsFilterButton.setOnClickListener(v -> {
             if (openFilter != null) {
                 openFilter.run();
             }
         });
 
-        @SuppressLint("InflateParams") final View customTitle = activity.getLayoutInflater().inflate(R.layout.dialog_title_back, null);
-        final AlertDialog dialog = Dialogs.newBuilder(activity)
-            .setView(dialogView)
-            .setCustomTitle(customTitle)
-            .setOnDismissListener(d -> {
+        final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), R.string.quick_settings);
+        dialog.setOnDismissListener(d -> {
                 currentFilterNameSetter = null;
                 for (SettingsCheckboxModel item : settingsElementsCheckboxes) {
                     item.setValue();
@@ -119,21 +114,14 @@ public class MapSettingsUtils {
                 compactIcon.setValue();
                 routing.setValue();
                 onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
-                if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != autotargetCheckbox.isChecked()) {
+                if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
                     if (route == null) {
-                        Settings.setAutotargetIndividualRoute(autotargetCheckbox.isChecked());
+                        Settings.setAutotargetIndividualRoute(dialogView.mapSettingsAutotarget.isChecked());
                     } else {
-                        IndividualRouteUtils.setAutotargetIndividualRoute(activity, route, autotargetCheckbox.isChecked());
+                        IndividualRouteUtils.setAutotargetIndividualRoute(activity, route, dialogView.mapSettingsAutotarget.isChecked());
                     }
                 }
-            })
-            .create();
-        ((TextView) customTitle.findViewById(R.id.dialog_title_title)).setText(R.string.quick_settings);
-        final ImageView backButton = customTitle.findViewById(R.id.dialog_title_back);
-        if (alternativeButtonResId != 0) {
-            backButton.setImageResource(alternativeButtonResId);
-        }
-        backButton.setOnClickListener(v -> dialog.dismiss());
+            });
         dialog.show();
 
         compactIcon.init();
@@ -147,9 +135,8 @@ public class MapSettingsUtils {
                 }
             }
 
-            final TextView brouterTextView = dialogView.findViewById(R.id.brouter_install);
-            brouterTextView.setVisibility(View.VISIBLE);
-            brouterTextView.setOnClickListener(v -> ProcessUtils.openMarket(activity, activity.getString(R.string.package_brouter)));
+            dialogView.brouterInstall.setVisibility(View.VISIBLE);
+            dialogView.brouterInstall.setOnClickListener(v -> ProcessUtils.openMarket(activity, activity.getString(R.string.package_brouter)));
         }
     }
 
