@@ -1,19 +1,19 @@
 ## Nightly-Build
 
-### Advanced filtering system (experimental)
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- This is work in progress, stay tuned!
-- The old filter systems are still available (for the time being), but will be superseeded by the new system at some point in time.
+### Erweitertes Filtersystem (experimentell)
+- c:geo führt ein neues Filtersystem ein, das flexible, kombinierbare und speicherbare Filter umfasst
+- Verfügbar sowohl in Cachelisten als auch in der Karte
+- Wir arbeiten noch daran, bleib dran!
+- Die alten Filtersysteme sind vorerst weiterhin verfügbar, werden aber zukünftig durch das neue System abgelöst werden.
 
-### Map
-- New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
+### Karte
+- Neu: Beim Erstellen eines benutzerdefinierten Caches während die Karte für eine Liste angezeigt wird: Biete dem Nutzer an den neuen Cache in der aktuellen Liste (statt in der Standardliste für benutzerdefinierte Caches) zu speichern
 
-### Cache details
-- New: Make use of google translate in-app translation popup
-- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
+### Cache-Details
+- Neu: Benutze Google Übersetzungs-Popup in der App
+- Neu: Erlaube das Ändern des zugewiesenen Symbols im Popup der Cache-Details durch langes Klicken (nur gespeicherte Caches)
 
-### Other
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### Sonstiges
+- Neu: Lesezeichenlisten von geocaching.com herunterladen - siehe "Listen / Pocket-Queries" im Hauptmenü
+- Neu: Ignorier-Funktion für geocaching.su
+- Änderung: Nicht mehr gepflegte RMAPS-Navigations-App entfernt
