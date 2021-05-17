@@ -166,7 +166,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             }
 
             markwon.setMarkdown(binding.changelogRelease, FileUtils.getChangelogRelease(AboutActivity.this));
-            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(AboutActivity.this, "https://github.com/cgeo/cgeo/releases"));
+            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(AboutActivity.this, "https://github.com/cgeo/cgeo/commits/release"));
             return binding.getRoot();
         }
     }
