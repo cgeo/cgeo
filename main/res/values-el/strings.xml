@@ -443,7 +443,6 @@
     <string name="cache_filter_exclude">Εξαίρεση</string>
     <string name="cache_filter_userdisplay_complex">Σύνθετο</string>
     <string name="cache_filter_userdisplay_none">Κανένα</string>
-    <string name="cache_filter_userdisplay_multi">Πολλαπλές</string>
     <string name="cache_filter_storage_load_button">Φόρτωση</string>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
