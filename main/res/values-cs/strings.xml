@@ -443,7 +443,6 @@
     <string name="cache_filter_exclude">Vyloučit</string>
     <string name="cache_filter_userdisplay_complex">Komplexní</string>
     <string name="cache_filter_userdisplay_none">Žádný</string>
-    <string name="cache_filter_userdisplay_multi">Vícenásobný</string>
     <string name="cache_filter_storage_load_button">Načíst</string>
     <string name="cache_filter_storage_delete_button">Vymazat</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
@@ -1369,7 +1368,6 @@
     <string name="search_hbu_button">Hledat podle vlastníka</string>
     <string name="search_filter">Filtr (experimentální)</string>
     <string name="search_filter_button">Hledat podle filtru</string>
-    <string name="search_filter_info_message">Funkce „Hledat podle filtru“ vyhledává kešky v online službách pomocí zadaného filtru. V závislosti na možnosti služby, se online filtrování provádí pouze částečně, zbytek se pak provádí offline filtrováním.\n\nVšechny služby podporují pouze AND filtry, nikoliv inverzní filtry\n\nGeocaching.com podporuje:\n- Název (pouze celá slova, vzor není podporován)\n- Typ kešky\n- Velikost kešky\n- Vzdálenost a terén\n- Oblíbené (pouze absolutní, pouze minimální)\n- Stav (Vlastněné, Nalezené &amp; Zapnuté)\n- Skryté kým (uveďte přesné ID uživatele)\n- Nenalezené kým (uveďte přesné ID uživatele)\n- Datum umístění\n\nMějte na vědomí, že c:geo nemůže nabízet konkrétní filtrování atributů, protože nám Geocaching.com blokuje požadované API.\n\nŽádná služba kromě Geocaching.com zatím není podporována.</string>
     <string name="search_tb">Sledovatelný předmět</string>
     <string name="search_tb_hint">ID sledovatelného předmětu</string>
     <string name="search_tb_button">Hledat sledovatelné</string>
