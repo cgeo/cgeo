@@ -1,30 +1,30 @@
-## Beta Version 2021.05.11-RC
+## Versão Beta 2021.05.11-RC
 
-### Geocaching Services
-- New: Added connector for Adventure Lab Caches - Shows starting coords of Adventure Labs with basic info on map and searches (PM-only). Use the link on the cache details page to start the Adventure Lab app to play the Adventure.
+### Serviços Geocaching
+- Novo: Adicionada uma ligação para as Caches Adventure Lab - Mostra as coordenadas iniciais da Aventura, com informações básicas no mapa e pesquisas (apenas Membros Premium). Use a ligação na página de detalhes da cache para iniciar a aplicação Adventure Lab e ir para a Aventura.
 
-### Cache details
+### Detalhes da Cache
 - New: Long click on waypoint coordinates to copy coordinates
-- New: Export and import UDC with empty coordinates
-- New: Support changing found state for user-defined caches and Lab Adventures
+- New: Export and import user defined caches with empty coordinates
+- Novo: Suportada a alteração do estado de 'encontrada' nas caches definidas pelo utilizador e em geocaches Adventure Lab
 - New: Parse formula for waypoints in personal cache note
-- New: Added indicator for calculated coordinates in waypoint list
+- Novo: Adicionado indicador para coordenadas calculadas na lista de pontos adicionadas
 
 
-### Map
-- New: Automatic check for updates of downloaded map and theme files (optional)
-- New: BRouter: Show info message on missing routing data
-- New: Export individual route as track (in addition to "Export as route")
+### Mapa
+- Novo: Verificação automática de actualizações do mapa e ficheiros de temas descarregados (opcional)
+- Novo: BRouter: Mostrar mensagem de informação na falta de dados de encaminhamento
+- Novo: Exportar rota individual como percurso (além de "Exportar como rota")
 
-### Integrated routing engine
-- New: Integrated BRouter routing engine - you can now use either external BRouter app or the integrated routing engine
-- New: Integrated routing engine supports automatic download of missing routing tiles
-- New: Integrated routing engine supports automatic updates of downloaded routing tiles
-- New: Integrated routing engine supports selecting different routing profiles
+### Motor de encaminhamento integrado
+- Novo: Motor de encaminhamento do BRouter integrado - agora pode usar a aplicação externa BRouter ou o mecanismo integrado de encaminhamento
+- Novo: O mecanismo de encaminhamento integrado suporta a descarga automática de blocos de encaminhamento em falta
+- Novo: O mecanismo de encaminhamento integrado suporta actualizações automáticas de blocos de encaminhamento descarregados
+- Novo: O mecanismo de encaminhamento integrado suporta a selecção de diferentes perfis de encaminhamento
 
 
-### Other
-- Change: "Sort individual route" automatically closes on saving and checks for unsaved changes on using the back arrow
+### Outro
+- Alteração: "Ordenar rota individual" fecha automaticamente ao gravar e procura por mudanças não gravadas, usando a seta para trás
 - Fix: A couple of theming issues, esp. aligned theming of Google Maps and settings to "rest of app"
 - Fix: Optimize global search: If no trackable with matching tracking code is found, execute online cache name search afterwards
 - Fix: Avoid avatar images being displayed too wide and pushing the "Update / remove authorization" functionalty aside
@@ -33,7 +33,7 @@
 - Fix: Directory selected by user not taken over in wizard on older devices
 - Fix: Scan for map themes now run as background task on startup
 - Fix: Changing map source via settings being recognized after full restart only
-- Fix: Crash in "View settings" under certain conditions
-- Fix: Back arrow in map downloader returning to main screen
-- Fix: Avoid strange popup messages when attaching image to log
-- Fix: Possible crash on map
+- Correcção: Falha em "Ver configurações", sob certas condições
+- Correcção: Seta para trás no descarregador de mapas volta ao ecrã principal
+- Correcção: Evita mensagens pop-up estranhas ao anexar imagem ao registo
+- Correcção: possível bloqueio no mapa
