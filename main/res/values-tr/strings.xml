@@ -443,7 +443,6 @@
     <string name="cache_filter_exclude">Hariç Tut</string>
     <string name="cache_filter_userdisplay_complex">Kompleks</string>
     <string name="cache_filter_userdisplay_none">Hiçbiri</string>
-    <string name="cache_filter_userdisplay_multi">Çoklu</string>
     <string name="cache_filter_storage_load_button">Yükle</string>
     <string name="cache_filter_storage_delete_button">Sil</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
@@ -1351,7 +1350,6 @@
     <string name="search_hbu_button">Sahibine göre ara</string>
     <string name="search_filter">Filtre (Deneysel)</string>
     <string name="search_filter_button">Filtreye göre ara</string>
-    <string name="search_filter_info_message">\'Filtreye göre ara\' seçilen filtreye göre cacheleri çevrimiçi olarak arar. Servis gücüne göre bir kısmı çevrimiçi olarak kalanı ise çevrimdışı olarak arama yapılabilir.\n\nTüm servisler sadece VE filteleri ve Hayır filtrelerinin değişimini destekler\n\nGeocaching.com destekleri\n- İsim (sadece tam sözcükler, biçimler desteklenmez)\n- Geocache türü\n-Geocache boyutu\n- Mesafe ve Arazi\n- Favoriler (sadece minimum)\n- Durum (Sahibi olduklarım, Bulduklarım&amp;Aktifler)\n- Saklayan (sadece kullanıcı adına özel arama)\n- Bulmadıkları (sadece kullanıcı adına özel arama)\n- Saklama tarihi\n\nGeocaching.com\'un gerekli API bilgisini bizlerle artık paylaşmıyor olmasından dolayı özelliklere göre arama filtresi kullanılabilir değildir.\n\n.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable kimliği</string>
     <string name="search_tb_button">Trackable ara</string>
