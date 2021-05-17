@@ -25,21 +25,27 @@ public class MapUtils {
     }
 
     // filter waypoints from owned caches or certain wp types if requested.
-    public static void filter(final Set<Waypoint> waypoints, final boolean checkOwnership) {
-        final boolean excludeMine = checkOwnership && Settings.isExcludeMyCaches();
+    public static void filter(final Set<Waypoint> waypoints, final boolean checkCacheFilters) {
+        final boolean excludeMine = checkCacheFilters && Settings.isExcludeMyCaches();
+        final boolean excludeDisabled = checkCacheFilters && Settings.isExcludeDisabledCaches();
+        final boolean excludeArchived = checkCacheFilters && Settings.isExcludeArchivedCaches();
+        final CacheType filterCacheType = checkCacheFilters ? null : (Settings.getCacheType() == null ? CacheType.ALL : Settings.getCacheType());
+
+        final GeocacheFilter filter = GeocacheFilter.getStoredForListType(MapSettingsUtils.getMapViewerListType());
+
         final boolean excludeWpOriginal = Settings.isExcludeWpOriginal();
         final boolean excludeWpParking = Settings.isExcludeWpParking();
         final boolean excludeWpVisited = Settings.isExcludeWpVisited();
 
-        // filtering required?
-        if (!excludeMine && !excludeWpOriginal && !excludeWpParking && !excludeWpVisited) {
-            return;
-        }
         final List<Waypoint> removeList = new ArrayList<>();
         for (final Waypoint wp : waypoints) {
             final Geocache cache = DataStore.loadCache(wp.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             final WaypointType wpt = wp.getWaypointType();
-            if ((excludeMine && cache.isOwner()) || (excludeWpOriginal && wpt == WaypointType.ORIGINAL) || (excludeWpParking && wpt == WaypointType.PARKING) || (excludeWpVisited && wp.isVisited())) {
+            if (!filterCache(cache, excludeMine, excludeDisabled, excludeArchived, filterCacheType) ||
+                !filter.filter(cache) ||
+                (excludeWpOriginal && wpt == WaypointType.ORIGINAL) ||
+                (excludeWpParking && wpt == WaypointType.PARKING) ||
+                (excludeWpVisited && wp.isVisited())) {
                 removeList.add(wp);
             }
         }
@@ -49,7 +55,7 @@ public class MapUtils {
     /** Applies given filter to cache list. Additionally, creates a second list additionally filtered by own/found/disabled caches if required */
     public static void filter(final Collection<Geocache> caches) {
 
-        final GeocacheFilter filter = GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig(MapSettingsUtils.getMapViewerListType()));
+        final GeocacheFilter filter = GeocacheFilter.getStoredForListType(MapSettingsUtils.getMapViewerListType());
         if (filter != null) {
             filter.filterList(caches);
         }
@@ -66,12 +72,17 @@ public class MapUtils {
         }
         final List<Geocache> removeList = new ArrayList<>();
         for (final Geocache cache : caches) {
-            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeArchived && cache.isArchived()) ||
-                (!filterCacheType.equals(CacheType.ALL) && !filterCacheType.equals(cache.getType()))) {
+            if (!filterCache(cache, excludeMine, excludeDisabled, excludeArchived, filterCacheType)) {
                 removeList.add(cache);
             }
         }
         caches.removeAll(removeList);
+    }
+
+    private static boolean filterCache(final Geocache cache, final boolean excludeMine, final boolean excludeDisabled, final boolean excludeArchived, final CacheType globalType) {
+        return cache != null && (!excludeMine || !cache.isFound()) && (!excludeMine || !cache.isOwner()) && (!excludeDisabled || !cache.isDisabled()) && (!excludeArchived || !cache.isArchived()) &&
+            (globalType == null || globalType.equals(CacheType.ALL) || globalType.equals(cache.getType()));
+
     }
 
     // one-time messages to be shown for maps

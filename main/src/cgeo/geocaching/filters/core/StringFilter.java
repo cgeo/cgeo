@@ -188,4 +188,15 @@ public class StringFilter {
         return sb.toString();
     }
 
+    protected String getUserDisplayableConfig() {
+        switch (this.filterType) {
+            case IS_PRESENT:
+            case IS_NOT_PRESENT:
+                return this.filterType.toUserDisplayableString();
+            default:
+                return this.filterType.toUserDisplayableString() + (getTextValue() == null ? "" : ":" + getTextValue());
+        }
+    }
+
+
 }

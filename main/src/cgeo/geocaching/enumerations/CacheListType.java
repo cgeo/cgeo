@@ -14,7 +14,8 @@ public enum CacheListType {
     ADDRESS(false, CacheListLoaderType.ADDRESS),
     FINDER(false, CacheListLoaderType.FINDER),
     OWNER(false, CacheListLoaderType.OWNER),
-    MAP(false, CacheListLoaderType.MAP),
+    MAP_AS_LIST(false, CacheListLoaderType.MAP),
+    MAP_VIEWER(false, null), // only used in Map Viewer, not in CacheListActivity
     SEARCH_FILTER(false, CacheListLoaderType.SEARCH_FILTER);
 
     /**

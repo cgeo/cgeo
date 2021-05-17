@@ -148,5 +148,9 @@ public abstract class AbstractMap {
         return mapActivity.getIndividualRouteUtils();
     }
 
+    protected MapSettingsUtils getMapSettingsUtils() {
+        return mapActivity.getMapSettingsUtils();
+    }
+
 
 }

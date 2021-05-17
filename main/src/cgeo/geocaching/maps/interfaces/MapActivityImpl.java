@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
+import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.TrackUtils;
 
@@ -42,6 +43,8 @@ public interface MapActivityImpl {
     TrackUtils getTrackUtils();
 
     IndividualRouteUtils getIndividualRouteUtils();
+
+    MapSettingsUtils getMapSettingsUtils();
 
     /**
      * called from the pseudo actionbar layout

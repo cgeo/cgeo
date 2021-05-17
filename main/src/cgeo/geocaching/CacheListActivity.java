@@ -513,7 +513,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             type = Intents.getListType(getIntent());
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
             if (extras.getString(Intents.EXTRA_FILTER) != null) {
-                Settings.setCacheFilterConfig(type, extras.getString(Intents.EXTRA_FILTER));
+                GeocacheFilter.createFromConfig(extras.getString(Intents.EXTRA_FILTER)).storeForListType(type);
             }
         } else {
             extras = new Bundle();
@@ -530,7 +530,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         setTitle(title);
 
-        currentCacheFilter = GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig(type));
+        currentCacheFilter = GeocacheFilter.getStoredForListType(type);
 
 
         // Check whether we're recreating a previously destroyed instance
@@ -1353,7 +1353,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]), currentCacheFilter);
         } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             currentCacheFilter = GeocacheFilter.createFromConfig(data.getStringExtra(GeocacheFilterActivity.EXTRA_FILTER_RESULT));
-            Settings.setCacheFilterConfig(type, currentCacheFilter.toConfig());
+            currentCacheFilter.storeForListType(type);
             setFilter(currentFilter, currentCacheFilter);
 
             if (type == CacheListType.SEARCH_FILTER) {
@@ -1856,7 +1856,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public static void startActivityMap(final Context context, final SearchResult search) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         cachesIntent.putExtra(Intents.EXTRA_SEARCH, search);
-        Intents.putListType(cachesIntent, CacheListType.MAP);
+        Intents.putListType(cachesIntent, CacheListType.MAP_AS_LIST);
         context.startActivity(cachesIntent);
     }
 

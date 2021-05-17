@@ -205,6 +205,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
 
     private TrackUtils trackUtils = null;
     private IndividualRouteUtils individualRouteUtils = null;
+    private MapSettingsUtils mapSettingsUtils = null;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -215,6 +216,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
 
         trackUtils = new TrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_TRACKUTILS), this::setTracks, this::centerOnPosition);
         individualRouteUtils = new IndividualRouteUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_INDIVIDUAlROUTEUTILS), this::clearIndividualRoute, this::reloadIndividualRoute);
+        mapSettingsUtils = new MapSettingsUtils(this, this::onMapSettingsPopupFinished);
 
         ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
@@ -261,7 +263,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         final TypedArray a = getTheme().obtainStyledAttributes(R.style.cgeo, new int[] {R.attr.homeAsUpIndicator});
         final int upResId = a.getResourceId(0, 0);
         a.recycle();
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId, null));
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> mapSettingsUtils.showSettingsPopup(individualRoute, this::routingModeChanged, this::compactIconModeChanged, upResId, null));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -1382,7 +1384,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
                     if (StringUtils.isNotEmpty(geocode)) {
                         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                         if (cache != null && item.getType() == CoordinatesType.CACHE) {
-                            tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, CacheListType.MAP).getDrawable(), null, null, null);
+                            tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, CacheListType.MAP_AS_LIST).getDrawable(), null, null, null);
                         } else {
                             tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
                             if (item.getType() == CoordinatesType.WAYPOINT) {
@@ -1637,7 +1639,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
         DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
-        MapSettingsUtils.onActivityResult(this, requestCode, resultCode, data, this::onMapSettingsPopupFinished);
+        this.mapSettingsUtils.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setTracks(final Route route) {

@@ -572,7 +572,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         final TypedArray a = activity.getTheme().obtainStyledAttributes(R.style.cgeo, new int[] {R.attr.homeAsUpIndicator});
         final int upResId = a.getResourceId(0, 0);
         a.recycle();
-        activity.findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(activity, individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId, caches));
+        activity.findViewById(R.id.map_settings_popup).setOnClickListener(v -> getMapSettingsUtils().showSettingsPopup(individualRoute, this::routingModeChanged, this::compactIconModeChanged, upResId, caches));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {

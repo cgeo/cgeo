@@ -1776,11 +1776,13 @@ public class Settings {
         putInt(R.string.pref_localstorage_version, newVersion);
     }
 
+    /** Should SOLELY be called by class {@link cgeo.geocaching.filters.core.GeocacheFilter}! */
     public static String getCacheFilterConfig(final CacheListType listType) {
         return getStringDirect(getKey(R.string.pref_cache_filter_config) + "_" + (listType == null ? "default" : listType.name()),
             null);
     }
 
+    /** Should SOLELY be called by class {@link cgeo.geocaching.filters.core.GeocacheFilter}! */
     public static void setCacheFilterConfig(final CacheListType listType, final String config) {
         putStringDirect(getKey(R.string.pref_cache_filter_config) + "_" + (listType == null ? "default" : listType.name()), config);
     }
