@@ -3,6 +3,7 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
+import cgeo.geocaching.databinding.BottomsheetDialogWithActionbarBinding;
 import cgeo.geocaching.databinding.DialogTextCheckboxBinding;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
@@ -52,6 +53,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
@@ -979,6 +982,47 @@ public final class Dialogs {
             dialog.dismiss();
         });
         builder.create().show();
+    }
+
+    public static BottomSheetDialog bottomSheetDialog(final Context context, final View contentView) {
+        final BottomSheetDialog dialog = new BottomSheetDialog(newContextThemeWrapper(context));
+        dialog.setContentView(contentView);
+        return dialog;
+    }
+
+    public static BottomSheetDialog bottomSheetDialogWithActionbar(final Context context, final View contentView, final @StringRes int titleResId) {
+        final BottomsheetDialogWithActionbarBinding dialogView = BottomsheetDialogWithActionbarBinding.inflate(LayoutInflater.from(newContextThemeWrapper(context)));
+        final BottomSheetDialog dialog = bottomSheetDialog(context, dialogView.getRoot());
+
+        dialogView.toolbar.setTitle(titleResId);
+        dialogView.contentWrapper.addView(contentView);
+
+        dialogView.toolbar.setNavigationOnClickListener(v -> {
+            if (dialog.getBehavior().getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                dialog.dismiss();
+            } else {
+                dialog.getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
+
+        dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_less_white);
+        dialog.getBehavior().addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(final @NonNull View bottomSheet, final int newState) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    dialogView.toolbar.setNavigationIcon(R.drawable.ic_close_white);
+                } else {
+                    dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_less_white);
+                }
+            }
+
+            @Override
+            public void onSlide(final @NonNull View bottomSheet, final float slideOffset) {
+                // ignore
+            }
+        });
+
+        return dialog;
     }
 
     public static AlertDialog.Builder newBuilder(final Context context) {
