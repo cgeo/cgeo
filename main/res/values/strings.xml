@@ -472,7 +472,15 @@
 
     <string name="cache_filter_userdisplay_complex">Complex</string>
     <string name="cache_filter_userdisplay_none">None</string>
-    <string name="cache_filter_userdisplay_multi">Multiple</string>
+
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="zero">%1$d items</item>
+        <item quantity="one">%1$d item</item>
+        <item quantity="two">%1$d items</item>
+        <item quantity="few">%1$d items</item>
+        <item quantity="many">%1$d items</item>
+        <item quantity="other">%1$d items</item>
+    </plurals>
 
     <string name="cache_filter_storage_load_button">Load</string>
     <string name="cache_filter_storage_delete_button">Delete</string>

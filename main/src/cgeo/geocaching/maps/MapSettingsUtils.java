@@ -37,26 +37,27 @@ import java.util.Collection;
 
 public class MapSettingsUtils {
 
-    private static final CacheListType MAP_STORE_TYPE = CacheListType.POCKET; //do NOT use MAP!
+    private int colorAccent;
+    private boolean isShowCircles;
+    private boolean isAutotargetIndividualRoute;
+    private boolean showAutotargetIndividualRoute;
 
-    private static int colorAccent;
-    private static boolean isShowCircles;
-    private static boolean isAutotargetIndividualRoute;
-    private static boolean showAutotargetIndividualRoute;
-
-    private static Action1<String> currentFilterNameSetter = null;
+    private final Activity activity;
+    private final Action1<Boolean> onMapSettingsPopupFinished;
+    private Action1<String> currentFilterNameSetter = null;
 
 
-    private MapSettingsUtils() {
-        // utility class
+    public MapSettingsUtils(final Activity activity, final Action1<Boolean> onMapSettingsPopupFinished) {
+        this.activity = activity;
+        this.onMapSettingsPopupFinished = onMapSettingsPopupFinished;
     }
 
     public static CacheListType getMapViewerListType() {
-        return MAP_STORE_TYPE;
+        return CacheListType.MAP_VIEWER;
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
-    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, @DrawableRes final int alternativeButtonResId, final Collection<Geocache> caches) {
+    public void showSettingsPopup(@Nullable final IndividualRoute route, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, @DrawableRes final int alternativeButtonResId, final Collection<Geocache> caches) {
         colorAccent = activity.getResources().getColor(R.color.colorAccent);
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
@@ -110,13 +111,13 @@ public class MapSettingsUtils {
             autotargetCheckbox.setChecked(isAutotargetIndividualRoute);
         }
 
-        final GeocacheFilter mapFilter = GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig(MAP_STORE_TYPE));
+        final GeocacheFilter mapFilter = GeocacheFilter.getStoredForListType(getMapViewerListType());
 
         ((TextView) dialogView.findViewById(R.id.map_settings_filter_text)).setText(mapFilter.toUserDisplayableString());
         dialogView.findViewById(R.id.map_settings_filter_button).setOnClickListener(v ->
             GeocacheFilterActivity.selectFilter(
                 activity,
-                GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig(MAP_STORE_TYPE)),
+                GeocacheFilter.getStoredForListType(getMapViewerListType()),
                 caches, true));
 
         @SuppressLint("InflateParams") final View customTitle = activity.getLayoutInflater().inflate(R.layout.dialog_title_back, null);
@@ -165,20 +166,20 @@ public class MapSettingsUtils {
         }
     }
 
-    public static boolean onActivityResult(final Activity activity, final int requestCode, final int resultCode, final Intent data, @NonNull final Action1<Boolean> onMapSettingsPopupFinished) {
+    public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             final String filterConfig = data.getExtras().getString(EXTRA_FILTER_RESULT);
-            Settings.setCacheFilterConfig(MAP_STORE_TYPE, filterConfig);
+            final GeocacheFilter mapFilter = GeocacheFilter.createFromConfig(filterConfig);
+            mapFilter.storeForListType(getMapViewerListType());
 
             onMapSettingsPopupFinished.call(false);
             if (currentFilterNameSetter != null) {
-                final GeocacheFilter mapFilter = GeocacheFilter.createFromConfig(filterConfig);
                 currentFilterNameSetter.call(mapFilter.toUserDisplayableString());
             }
             return true;
         }
-        return false;
+        return requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER;
     }
 
     private static class SettingsCheckboxModel {
@@ -214,7 +215,7 @@ public class MapSettingsUtils {
         }
     }
 
-    private static class ButtonController<T> {
+    private class ButtonController<T> {
         private final View dialogView;
         private final ArrayList<ButtonChoiceModel<T>> buttons;
         private final T originalValue;

@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.StringRes;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,24 +27,20 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
         final List<Integer> valueWidth = Arrays.asList(null,
-            getMaxWidth(R.string.cache_filter_status_select_only_archived_no, R.string.cache_filter_status_select_only_disabled_no,
-                R.string.cache_filter_status_select_only_found_no, R.string.cache_filter_status_select_only_own_no),
-            getMaxWidth(R.string.cache_filter_status_select_only_archived_yes, R.string.cache_filter_status_select_only_disabled_yes,
-                R.string.cache_filter_status_select_only_found_yes, R.string.cache_filter_status_select_only_own_yes));
-        statusFound = createGroup(ll, valueWidth, R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_only_found_no, R.string.cache_filter_status_select_only_found_yes);
-        statusOwn = createGroup(ll, valueWidth, R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_only_own_no, R.string.cache_filter_status_select_only_own_yes);
-        statusDisabled = createGroup(ll, valueWidth, R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_only_disabled_no, R.string.cache_filter_status_select_only_disabled_yes);
-        statusArchived = createGroup(ll, valueWidth, R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_only_archived_no, R.string.cache_filter_status_select_only_archived_yes);
+            getMaxWidth(StatusGeocacheFilter.StatusType.FOUND.noId, StatusGeocacheFilter.StatusType.OWN.noId,
+                StatusGeocacheFilter.StatusType.DISABLED.noId, StatusGeocacheFilter.StatusType.ARCHIVED.noId),
+            getMaxWidth(StatusGeocacheFilter.StatusType.FOUND.yesId, StatusGeocacheFilter.StatusType.OWN.yesId,
+            StatusGeocacheFilter.StatusType.DISABLED.yesId, StatusGeocacheFilter.StatusType.ARCHIVED.yesId));
+        statusFound = createGroup(ll, valueWidth, StatusGeocacheFilter.StatusType.FOUND);
+        statusOwn = createGroup(ll, valueWidth, StatusGeocacheFilter.StatusType.OWN);
+        statusDisabled = createGroup(ll, valueWidth, StatusGeocacheFilter.StatusType.DISABLED);
+        statusArchived = createGroup(ll, valueWidth, StatusGeocacheFilter.StatusType.ARCHIVED);
         return ll;
     }
 
-    private ToggleButtonGroup createGroup(final LinearLayout ll, final List<Integer> valueWidth, @StringRes final int ... valueResIds) {
+    private ToggleButtonGroup createGroup(final LinearLayout ll, final List<Integer> valueWidth, final StatusGeocacheFilter.StatusType statusType) {
         final ToggleButtonGroup tgb = new ToggleButtonGroup(getActivity());
-        final List<String> values = new ArrayList<>();
-        for (int valueResId : valueResIds) {
-            values.add(getActivity().getString(valueResId));
-        }
-        tgb.setValues(values, valueWidth);
+        tgb.setValues(Arrays.asList(getActivity().getString(statusType.allId), getActivity().getString(statusType.noId), getActivity().getString(statusType.yesId)), valueWidth);
         final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, ViewUtils.dpToPixel(5), 0, ViewUtils.dpToPixel(5));
         ll.addView(tgb, llp);

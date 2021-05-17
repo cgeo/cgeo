@@ -100,7 +100,7 @@ public abstract class ValueGroupGeocacheFilter<T> extends BaseGeocacheFilter {
             return LocalizationUtils.getString(R.string.cache_filter_userdisplay_none);
         }
         if (getValues().size() > 1) {
-            return LocalizationUtils.getString(R.string.cache_filter_userdisplay_multi);
+            return LocalizationUtils.getPlural(R.plurals.cache_filter_userdisplay_multi_item, getValues().size());
         }
 
         return valueToString(getValues().iterator().next());

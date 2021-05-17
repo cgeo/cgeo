@@ -1,7 +1,9 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -119,6 +121,15 @@ public class GeocacheFilter {
         }
     }
 
+    @NonNull
+    public static GeocacheFilter getStoredForListType(final CacheListType listType) {
+        return GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig(listType));
+    }
+
+    public void storeForListType(final CacheListType listType) {
+        Settings.setCacheFilterConfig(listType, this.toConfig());
+    }
+
     public static GeocacheFilter checkConfig(final String filterConfig) throws ParseException {
         return createInternal(filterConfig, true);
     }
@@ -161,19 +172,20 @@ public class GeocacheFilter {
         return "[" + (name == null ? "" : name.replaceAll("]", "\\]")) + "]" + (tree == null ? "" : FILTER_PARSER.getConfig(tree));
     }
 
-    public Boolean filter(final Geocache cache) {
+
+    public boolean filter(final Geocache cache) {
         if (tree == null) {
             return true;
         }
-        return tree.filter(cache);
+        final Boolean result = tree.filter(cache);
+        return result != null && result;
     }
 
     public void filterList(final Collection<Geocache> list) {
 
         final List<Geocache> itemsToKeep = new ArrayList<>();
         for (final Geocache item : list) {
-            final Boolean fr = filter(item);
-            if (fr != null && fr) {
+            if (filter(item)) {
                 itemsToKeep.add(item);
             }
         }

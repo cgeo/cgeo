@@ -128,12 +128,12 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             final View view = getView();
             assert view != null;
             final TextView titleView = view.findViewById(R.id.actionbar_title);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable(), null, null, null);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP_AS_LIST).getDrawable(), null, null, null);
             titleView.setOnLongClickListener(v -> {
                 if (cache.isOffline()) {
                     EmojiUtils.selectEmojiPopup(CachePopupFragment.this.getContext(), cache.getAssignedEmoji(), cache.getType().markerId, newCacheIcon -> {
                         cache.setAssignedEmoji(newCacheIcon);
-                        titleView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable(), null, null, null);
+                        titleView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP_AS_LIST).getDrawable(), null, null, null);
                         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
                     });
                 }

@@ -44,6 +44,7 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
 
     private TrackUtils trackUtils = null;
     private IndividualRouteUtils individualRouteUtils = null;
+    private MapSettingsUtils mapSettingsUtils = null;
 
     public GoogleMapActivity() {
         mapBase = new CGeoMap(this);
@@ -61,6 +62,10 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
         return individualRouteUtils;
     }
 
+    public MapSettingsUtils getMapSettingsUtils() {
+        return mapSettingsUtils;
+    }
+
     @Override
     public AppCompatActivity getActivity() {
         return this;
@@ -73,6 +78,7 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
             mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute);
         trackUtils = new TrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_TRACKUTILS),
             mapBase::setTracks, mapBase::centerOnPosition);
+        mapSettingsUtils = new MapSettingsUtils(this, mapBase::onMapSettingsPopupFinished);
     }
 
     @Override
@@ -232,7 +238,7 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
         DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
-        MapSettingsUtils.onActivityResult(this, requestCode, resultCode, data, mapBase::onMapSettingsPopupFinished);
+        this.mapSettingsUtils.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
