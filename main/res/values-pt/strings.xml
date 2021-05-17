@@ -224,7 +224,7 @@
     <string name="err_parse_dist">O c:geo não conseguiu calcular a distância.</string>
     <string name="err_parse_lat_lon">O c:geo não conseguiu extrair a latitude ou longitude.</string>
     <string name="err_rendertheme_file_unreadable">Não foi possível carregar o tema selecionado. A reverter para o tema predefinido.</string>
-    <string name="err_rendertheme_invalid">O tema selecionado não é válido para esta versão do mapsforge. A reverter para o tema predefinido.</string>
+    <string name="err_rendertheme_invalid">O tema seleccionado não é válido para esta versão do mapsforge. A reverter para o tema predefinido.</string>
     <string name="err_invalid_filename_char">Carácter \'%c\' não permitido</string>
     <string name="warn_save_nothing">Não há nada para guardar.</string>
     <string name="warn_no_cache_coord">Não há caches com coordenadas.</string>
@@ -976,7 +976,7 @@
     <string name="cache_description">Descrição</string>
     <string name="cache_description_table_note">A descrição contém formatação de tabela pelo que pode ser necessário vê-la em %s para ser vista correctamente.</string>
     <string name="cache_area_description">Descrição da Área</string>
-    <string name="cache_cache_description">Descrição da Geocache</string>
+    <string name="cache_cache_description">Descrição da Cache</string>
     <string name="cache_virtual_description">Questão Virtual</string>
     <string name="cache_traditional_description">Categoria Tradicional</string>
     <string name="cache_box_description">Conteúdo do recipiente</string>
@@ -1147,7 +1147,7 @@
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache definida pelo utilizador)</string>
-    <string name="onetime_info_longtap_disabled">Com um toque longo no mapa, pode criar rotas individuais e caches definidos pelo utilizador.\n\nO toque longo no mapa está desactivado neste momento.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
+    <string name="onetime_info_longtap_disabled">Ao manter premido o toque no mapa, pode criar rotas individuais e caches definidos pelo utilizador.\n\nA função \"toque sem soltar no mapa\" está desactivada neste momento.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
     <string name="onetime_info_longtap_enabled">Ao manter premido o toque no mapa, pode criar rotas individuais e caches personalizadas (lista: \"caches internas\").\n\nA função \"toque sem soltar no mapa\" está activa neste momento.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
@@ -1371,7 +1371,7 @@
     <string name="helper_gps_locker_description">GPS Locker mantém o sinal de GPS activo quando alterna entre aplicações e quando o ecrã do seu dispositivo está desligado.</string>
     <string name="helper_barcode_description">Existem scripts Greasemonkey e sítios web que permitem mostrar códigos GC num código de barras. Com esta aplicação o c:geo consegue ler esses códigos GC directamente do ecrã do seu computador.</string>
     <string name="helper_google_translate_title">Google Tradutor</string>
-    <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das geocaches no c:geo, ao tocar sem soltar sobre o texto da descrição da cache (mesmo sem uma ligação à Internet).</string>
+    <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das caches no c:geo, ao tocar sem soltar sobre o texto da descrição da cache (mesmo sem uma ligação à Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permite jogar e procurar geocaches do tipo Wherigo. O c:geo pode iniciar automaticamente a transferência dos cartuchos nessa aplicação.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">O BRouter fornece cálculo de percursos off-line. Se estiver instalado e tiver os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a geocache no mapa interno.</string>
