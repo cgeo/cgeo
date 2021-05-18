@@ -1,12 +1,9 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
-import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableUri;
@@ -14,12 +11,10 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.functions.Action1;
-import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_RESULT;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -33,31 +28,23 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class MapSettingsUtils {
 
-    private int colorAccent;
-    private boolean isShowCircles;
-    private boolean isAutotargetIndividualRoute;
-    private boolean showAutotargetIndividualRoute;
+    private static int colorAccent;
+    private static boolean isShowCircles;
+    private static boolean isAutotargetIndividualRoute;
+    private static boolean showAutotargetIndividualRoute;
 
-    private final Activity activity;
-    private final Action1<Boolean> onMapSettingsPopupFinished;
-    private Action1<String> currentFilterNameSetter = null;
+    private static Action1<String> currentFilterNameSetter = null;
 
 
-    public MapSettingsUtils(final Activity activity, final Action1<Boolean> onMapSettingsPopupFinished) {
-        this.activity = activity;
-        this.onMapSettingsPopupFinished = onMapSettingsPopupFinished;
-    }
-
-    public static CacheListType getMapViewerListType() {
-        return CacheListType.MAP_VIEWER;
+    private MapSettingsUtils() {
+        // utility class
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
-    public void showSettingsPopup(@Nullable final IndividualRoute route, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, @DrawableRes final int alternativeButtonResId, final Collection<Geocache> caches) {
+    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, @DrawableRes final int alternativeButtonResId, @Nullable final Runnable openFilter) {
         colorAccent = activity.getResources().getColor(R.color.colorAccent);
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
@@ -111,14 +98,14 @@ public class MapSettingsUtils {
             autotargetCheckbox.setChecked(isAutotargetIndividualRoute);
         }
 
-        final GeocacheFilter mapFilter = GeocacheFilter.getStoredForListType(getMapViewerListType());
+        final GeocacheFilter mapFilter = GeocacheFilter.getStoredForListType(MapUtils.getMapViewerListType());
 
         ((TextView) dialogView.findViewById(R.id.map_settings_filter_text)).setText(mapFilter.toUserDisplayableString());
-        dialogView.findViewById(R.id.map_settings_filter_button).setOnClickListener(v ->
-            GeocacheFilterActivity.selectFilter(
-                activity,
-                GeocacheFilter.getStoredForListType(getMapViewerListType()),
-                caches, true));
+        dialogView.findViewById(R.id.map_settings_filter_button).setOnClickListener(v -> {
+            if (openFilter != null) {
+                openFilter.run();
+            }
+        });
 
         @SuppressLint("InflateParams") final View customTitle = activity.getLayoutInflater().inflate(R.layout.dialog_title_back, null);
         final AlertDialog dialog = Dialogs.newBuilder(activity)
@@ -166,20 +153,10 @@ public class MapSettingsUtils {
         }
     }
 
-    public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-
-        if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
-            final String filterConfig = data.getExtras().getString(EXTRA_FILTER_RESULT);
-            final GeocacheFilter mapFilter = GeocacheFilter.createFromConfig(filterConfig);
-            mapFilter.storeForListType(getMapViewerListType());
-
-            onMapSettingsPopupFinished.call(false);
-            if (currentFilterNameSetter != null) {
-                currentFilterNameSetter.call(mapFilter.toUserDisplayableString());
-            }
-            return true;
+    public static void changeFilterDescription(final GeocacheFilter mapFilter) {
+        if (currentFilterNameSetter != null) {
+            currentFilterNameSetter.call(mapFilter.toUserDisplayableString());
         }
-        return requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER;
     }
 
     private static class SettingsCheckboxModel {
@@ -215,7 +192,7 @@ public class MapSettingsUtils {
         }
     }
 
-    private class ButtonController<T> {
+    private static class ButtonController<T> {
         private final View dialogView;
         private final ArrayList<ButtonChoiceModel<T>> buttons;
         private final T originalValue;

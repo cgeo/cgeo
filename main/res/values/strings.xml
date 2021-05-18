@@ -453,19 +453,20 @@
     <string name="cache_filter_option_include_inconclusive_info">Whether to include cache in result when a filter needs info on cache which is not available.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Tap \'+\' on upper right side to add a filter</string>
 
-    <string name="cache_filter_name">Name</string>
-    <string name="cache_filter_type">Type</string>
-    <string name="cache_filter_size">Size</string>
+    <string name="cache_filter_name">Cache Name</string>
+    <string name="cache_filter_type">Cache Type</string>
+    <string name="cache_filter_size">Cache Size</string>
     <string name="cache_filter_personalnote">Personal Note</string>
-    <string name="cache_filter_description">Description</string>
+    <string name="cache_filter_description">Cache Description</string>
     <string name="cache_filter_offlinelog">Offline Log</string>
-    <string name="cache_filter_owner">Owner</string>
+    <string name="cache_filter_owner">Cache Owner</string>
     <string name="cache_filter_difficulty">Difficulty</string>
     <string name="cache_filter_terrain">Terrain</string>
     <string name="cache_filter_status">Status</string>
-    <string name="cache_filter_attributes">Attributes</string>
+    <string name="cache_filter_attributes">Cache Attributes</string>
     <string name="cache_filter_favorites">Favorites</string>
     <string name="cache_filter_distance">Distance</string>
+    <string name="cache_filter_hidden">Hidden Date</string>
 
     <string name="cache_filter_include">Include</string>
     <string name="cache_filter_exclude">Exclude</string>

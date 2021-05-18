@@ -47,14 +47,13 @@ public class FilterViewHolderCreator {
             case TYPE:
                 result = new CheckboxFilterViewHolder<>(
                     ValueGroupFilterAccessor.<CacheType, ValueGroupGeocacheFilter<CacheType>>createForValueGroupFilter()
-                        .setSelectableValues(new CacheType[]{CacheType.TRADITIONAL, CacheType.MYSTERY, CacheType.MULTI, CacheType.EARTH, CacheType.EVENT, CacheType.WHERIGO, CacheType.VIRTUAL})
+                        .setSelectableValues(CacheType.values())
                         .setValueDisplayTextGetter(CacheType::getL10n)
                         .setValueDrawableGetter(ct -> ct.markerId));
                 break;
             case SIZE:
                 result = new ToggleButtonFilterViewHolder<>(
                     ValueGroupFilterAccessor.<CacheSize, ValueGroupGeocacheFilter<CacheSize>>createForValueGroupFilter()
-                        //.setSelectableValues(new CacheSize[]{CacheSize.VIRTUAL, CacheSize.NANO, CacheSize.MICRO, CacheSize.SMALL, CacheSize.REGULAR, CacheSize.LARGE, CacheSize.VERY_LARGE, CacheSize.OTHER})
                         .setSelectableValues(CacheSize.values())
                         .setValueDisplayTextGetter(CacheSize::getL10n));
                 break;

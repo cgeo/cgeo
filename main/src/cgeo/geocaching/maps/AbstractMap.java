@@ -26,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Collection;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -48,6 +50,10 @@ public abstract class AbstractMap {
 
     public Resources getResources() {
         return mapActivity.getResources();
+    }
+
+    public MapActivityImpl getMapActivity() {
+        return mapActivity;
     }
 
     public AppCompatActivity getActivity() {
@@ -148,9 +154,6 @@ public abstract class AbstractMap {
         return mapActivity.getIndividualRouteUtils();
     }
 
-    protected MapSettingsUtils getMapSettingsUtils() {
-        return mapActivity.getMapSettingsUtils();
-    }
-
+    public abstract Collection<Geocache> getCaches();
 
 }

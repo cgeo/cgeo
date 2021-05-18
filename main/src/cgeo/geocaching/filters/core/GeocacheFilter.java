@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -61,7 +62,7 @@ public class GeocacheFilter {
         public static synchronized boolean existsAndDiffers(final String newName, final GeocacheFilter filter) {
             ensureInit();
             final GeocacheFilter other = storedFilters.get(newName);
-            return other != null && !other.getTreeConfig().equals(filter.getTreeConfig());
+            return other != null && !Objects.equals(other.getTreeConfig(), filter.getTreeConfig());
         }
 
         public static synchronized void save(final GeocacheFilter filter) {
