@@ -426,17 +426,11 @@
     <string name="cache_filter_option_include_inconclusive">Zahrnout neprůkazné shody</string>
     <string name="cache_filter_option_include_inconclusive_info">Zvolte, zda chce do výsledku zahrnout kešky, když filtr potřebuje informace o kešce, která není k dispozici.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Klepnutím na \'+\' v pravé horní části přidáte filtr</string>
-    <string name="cache_filter_name">Název</string>
-    <string name="cache_filter_type">Typ</string>
-    <string name="cache_filter_size">Velikost</string>
     <string name="cache_filter_personalnote">Osobní poznámka</string>
-    <string name="cache_filter_description">Popis</string>
     <string name="cache_filter_offlinelog">Offline Log</string>
-    <string name="cache_filter_owner">Zakladatel</string>
     <string name="cache_filter_difficulty">Obtížnost</string>
     <string name="cache_filter_terrain">Terén</string>
     <string name="cache_filter_status">Stav</string>
-    <string name="cache_filter_attributes">Atributy</string>
     <string name="cache_filter_favorites">Oblíbené</string>
     <string name="cache_filter_distance">Vzdálenost</string>
     <string name="cache_filter_include">Zahrnout</string>
