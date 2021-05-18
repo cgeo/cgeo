@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+@SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass") // static maps need to be initialized later in enums
 public enum CacheAttribute {
     // read project/attributes/readme.txt
 
@@ -186,12 +187,17 @@ public enum CacheAttribute {
     @NonNull
     private static final Map<String, CacheAttribute> FIND_BY_GCRAWNAME = new HashMap<>();
     @NonNull
+    private static final Map<String, CacheAttribute> FIND_BY_GCNAME = new HashMap<>();
+    @NonNull
     private static final SparseArray<CacheAttribute> FIND_BY_ID = new SparseArray<>();
     @NonNull
     private static final SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<>();
     static {
         for (final CacheAttribute attr : values()) {
             FIND_BY_GCRAWNAME.put(attr.rawName, attr);
+            FIND_BY_GCNAME.put(attr.rawName, attr);
+            FIND_BY_GCNAME.put(attr.rawName + INTERNAL_YES, attr);
+            FIND_BY_GCNAME.put(attr.rawName + INTERNAL_NO, attr);
             if (attr.ocacode != NO_ID) {
                 FIND_BY_OCACODE.put(attr.ocacode, attr);
             }
@@ -204,6 +210,12 @@ public enum CacheAttribute {
     @Nullable
     public static CacheAttribute getByRawName(@Nullable final String rawName) {
         return rawName != null ? FIND_BY_GCRAWNAME.get(rawName) : null;
+    }
+
+    /** Finds by either raw name, yes-name or no-name */
+    @Nullable
+    public static CacheAttribute getByName(@Nullable final String rawName) {
+        return rawName != null ? FIND_BY_GCNAME.get(rawName) : null;
     }
 
     @Nullable
@@ -244,4 +256,5 @@ public enum CacheAttribute {
     public String getValue(final boolean active) {
         return rawName + (active ? INTERNAL_YES : INTERNAL_NO);
     }
+
 }
