@@ -28,7 +28,7 @@ public class GPXIndividualRouteParser extends AbstractTrackOrRouteParser impleme
         point.getChild(namespace, "name").setEndTextElementListener(body -> tempName = body);
         point.setEndElementListener(() -> {
             if (temp.size() > 0) {
-                result.add(new RouteSegment(new RouteItem(tempName, temp.get(temp.size() - 1)), temp));
+                result.add(new RouteSegment(new RouteItem(tempName, temp.get(temp.size() - 1)), temp, true));
                 temp = new ArrayList<>();
             }
         });

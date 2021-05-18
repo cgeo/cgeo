@@ -54,26 +54,39 @@ public class Route implements Parcelable {
         return numPoints;
     }
 
-    public ArrayList<Geopoint> getAllPoints() {
-        final ArrayList<Geopoint> points = new ArrayList<>();
-        if (null != segments) {
+    public ArrayList<ArrayList<Geopoint>> getAllPoints() {
+        final ArrayList<ArrayList<Geopoint>> allPoints = new ArrayList<>();
+        if (segments != null) {
             for (RouteSegment segment : segments) {
-                points.addAll(segment.getPoints());
-            }
-        }
-        return points;
-    }
-
-    public ArrayList<LatLng> getAllPointsLatLng() {
-        final ArrayList<LatLng> points = new ArrayList<>();
-        if (null != segments) {
-            for (RouteSegment segment : segments) {
-                for (Geopoint point : segment.getPoints()) {
-                    points.add(new LatLng(point.getLatitude(), point.getLongitude()));
+                // extend existing list of points, if linking of segments is requested - otherwise add new segment
+                if (allPoints.size() > 0 && segment.getLinkToPreviousSegment()) {
+                    allPoints.get(allPoints.size() - 1).addAll(segment.getPoints());
+                } else {
+                    allPoints.add(new ArrayList<>(segment.getPoints()));
                 }
             }
         }
-        return points;
+        return allPoints;
+    }
+
+    public ArrayList<ArrayList<LatLng>> getAllPointsLatLng() {
+        final ArrayList<ArrayList<LatLng>> allPoints = new ArrayList<>();
+        if (segments != null) {
+            for (RouteSegment segment : segments) {
+                // convert to list of LatLng
+                final ArrayList<LatLng> points = new ArrayList<>();
+                for (Geopoint point : segment.getPoints()) {
+                    points.add(new LatLng(point.getLatitude(), point.getLongitude()));
+                }
+                // extend existing list of points, if linking of segments is requested - otherwise add new segment
+                if (allPoints.size() > 0 && segment.getLinkToPreviousSegment()) {
+                    allPoints.get(allPoints.size() - 1).addAll(points);
+                } else {
+                    allPoints.add(points);
+                }
+            }
+        }
+        return allPoints;
     }
 
     public RouteSegment[] getSegments() {

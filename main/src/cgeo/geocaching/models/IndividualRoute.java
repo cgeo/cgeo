@@ -127,7 +127,7 @@ public class IndividualRoute extends Route implements Parcelable {
         }
         final int pos = pos(item);
         if (pos == -1) {
-            final RouteSegment segment = new RouteSegment(item, null);
+            final RouteSegment segment = new RouteSegment(item, null, true);
             if (segment.hasPoint()) {
                 segments.add(segment);
                 calculateNavigationRoute(segments.size() - 1);

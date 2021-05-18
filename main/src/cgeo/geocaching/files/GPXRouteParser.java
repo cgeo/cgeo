@@ -26,7 +26,7 @@ public class GPXRouteParser extends AbstractTrackOrRouteParser implements Abstra
 
         point.setEndElementListener(() -> {
             if (temp.size() > 0) {
-                result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp));
+                result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, false));
                 temp = new ArrayList<>();
             }
         });
