@@ -424,17 +424,11 @@
     <string name="cache_filter_option_include_inconclusive">Includi confronti non conclusivi</string>
     <string name="cache_filter_option_include_inconclusive_info">Indica se includere nel risultato i cache di cui un filtro necessita di informazioni che non sono disponibili.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Tocca \'+\' in alto a destra per aggiungere un filtro</string>
-    <string name="cache_filter_name">Nome</string>
-    <string name="cache_filter_type">Tipo</string>
-    <string name="cache_filter_size">Dimensione</string>
     <string name="cache_filter_personalnote">Note personali</string>
-    <string name="cache_filter_description">Descrizione</string>
     <string name="cache_filter_offlinelog">Log Offline</string>
-    <string name="cache_filter_owner">Proprietario</string>
     <string name="cache_filter_difficulty">Difficoltà</string>
     <string name="cache_filter_terrain">Terreno</string>
     <string name="cache_filter_status">Stato</string>
-    <string name="cache_filter_attributes">Attributi</string>
     <string name="cache_filter_favorites">Preferiti</string>
     <string name="cache_filter_distance">Distanza</string>
     <string name="cache_filter_include">Includi</string>
