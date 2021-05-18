@@ -12,6 +12,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -20,6 +21,8 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
@@ -71,10 +74,12 @@ import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TrackUtils;
+import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_RESULT;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -136,7 +141,7 @@ import org.mapsforge.map.model.common.Observer;
 
 @SuppressLint("ClickableViewAccessibility")
 @SuppressWarnings("PMD.ExcessiveClassLength") // This is definitely a valid issue, but can't be refactored in one step
-public class NewMap extends AbstractActionBarActivity implements Observer {
+public class NewMap extends AbstractActionBarActivity implements Observer, FilteredActivity {
 
     private static final String STATE_INDIVIDUAlROUTEUTILS = "indrouteutils";
     private static final String STATE_TRACKUTILS = "trackutils";
@@ -205,7 +210,6 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
 
     private TrackUtils trackUtils = null;
     private IndividualRouteUtils individualRouteUtils = null;
-    private MapSettingsUtils mapSettingsUtils = null;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -216,7 +220,6 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
 
         trackUtils = new TrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_TRACKUTILS), this::setTracks, this::centerOnPosition);
         individualRouteUtils = new IndividualRouteUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_INDIVIDUAlROUTEUTILS), this::clearIndividualRoute, this::reloadIndividualRoute);
-        mapSettingsUtils = new MapSettingsUtils(this, this::onMapSettingsPopupFinished);
 
         ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
@@ -263,7 +266,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         final TypedArray a = getTheme().obtainStyledAttributes(R.style.cgeo, new int[] {R.attr.homeAsUpIndicator});
         final int upResId = a.getResourceId(0, 0);
         a.recycle();
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> mapSettingsUtils.showSettingsPopup(individualRoute, this::routingModeChanged, this::compactIconModeChanged, upResId, null));
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId, () -> showFilterMenu(null)));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -319,7 +322,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         } else {
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
-        prepareFilterBar();
+        MapUtils.setFilterBar(this);
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
@@ -398,6 +401,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         final int id = item.getItemId();
         if (id == android.R.id.home) {
             ActivityMixin.navigateUp(this);
+        } else if (id == R.id.menu_filter) {
+            showFilterMenu(null);
         } else if (id == R.id.menu_map_live) {
             mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
             if (mapOptions.isLiveEnabled) {
@@ -553,24 +558,13 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
         }
     }
 
-    private void prepareFilterBar() {
-        // show the filter warning bar if the filter is set
-        if (Settings.getCacheType() != CacheType.ALL) {
-            final String cacheType = Settings.getCacheType().getL10n();
-            final TextView filterTitleView = findViewById(R.id.filter_text);
-            filterTitleView.setText(cacheType);
-            findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
-        } else {
-            findViewById(R.id.filter_bar).setVisibility(View.GONE);
-        }
-    }
-
     /**
      * @param view Not used here, required by layout
      */
     @SuppressWarnings("EmptyMethod")
     public void showFilterMenu(final View view) {
-        // do nothing, the filter bar only shows the global filter
+        MapUtils.openFilterActivity(this,
+            new SearchResult(caches.getVisibleCacheGeocodes()).getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
     }
 
     private void changeMapSource(@NonNull final MapSource newSource) {
@@ -1384,7 +1378,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
                     if (StringUtils.isNotEmpty(geocode)) {
                         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                         if (cache != null && item.getType() == CoordinatesType.CACHE) {
-                            tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, CacheListType.MAP_AS_LIST).getDrawable(), null, null, null);
+                            tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, CacheListType.MAP).getDrawable(), null, null, null);
                         } else {
                             tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
                             if (item.getType() == CoordinatesType.WAYPOINT) {
@@ -1636,10 +1630,14 @@ public class NewMap extends AbstractActionBarActivity implements Observer {
                 caches.invalidate(changedGeocodes);
             }
         }
+        if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+            final String filterConfig = data.getExtras().getString(EXTRA_FILTER_RESULT);
+            MapUtils.changeMapFilter(this, GeocacheFilter.createFromConfig(filterConfig));
+        }
+
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
         DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
-        this.mapSettingsUtils.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setTracks(final Route route) {

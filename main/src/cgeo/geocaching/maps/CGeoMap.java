@@ -86,7 +86,6 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 
@@ -97,6 +96,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -572,7 +572,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         final TypedArray a = activity.getTheme().obtainStyledAttributes(R.style.cgeo, new int[] {R.attr.homeAsUpIndicator});
         final int upResId = a.getResourceId(0, 0);
         a.recycle();
-        activity.findViewById(R.id.map_settings_popup).setOnClickListener(v -> getMapSettingsUtils().showSettingsPopup(individualRoute, this::routingModeChanged, this::compactIconModeChanged, upResId, caches));
+        activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->
+            MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId, () -> getMapActivity().showFilterMenu(null)));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -602,7 +603,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         mapView.onMapReady(() -> initializeMap(trailHistory));
 
-        prepareFilterBar();
+        MapUtils.setFilterBar(this.getActivity());
 
         AndroidBeam.disable(activity);
 
@@ -644,18 +645,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
      */
     private void setZoom(final int zoom) {
         mapView.getMapController().setZoom(mapOptions.isLiveEnabled ? Math.max(zoom, MIN_LIVEMAP_ZOOM) : zoom);
-    }
-
-    private void prepareFilterBar() {
-        // show the filter warning bar if the filter is set
-        if (Settings.getCacheType() != CacheType.ALL) {
-            final String cacheType = Settings.getCacheType().getL10n();
-            final TextView filterTitleView = activity.findViewById(R.id.filter_text);
-            filterTitleView.setText(cacheType);
-            activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
-        } else {
-            activity.findViewById(R.id.filter_bar).setVisibility(View.GONE);
-        }
     }
 
     private void resumeTrack(final boolean preventReloading) {
@@ -799,6 +788,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             setMapRotation(item, Settings.MAPROTATION_MANUAL);
         } else if (id == R.id.menu_map_rotation_auto) {
             setMapRotation(item, Settings.MAPROTATION_AUTO);
+        } else if (id == R.id.menu_filter) {
+            getMapActivity().showFilterMenu(null);
         } else if (id == R.id.menu_map_live) {
             mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
             if (mapOptions.mapMode == MapMode.LIVE) {
@@ -1826,6 +1817,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             CachePopup.startActivityAllowTarget(activity, cache.getGeocode());
             progress.dismiss();
         }
+    }
+
+    public Collection<Geocache> getCaches() {
+        return caches;
     }
 
 }

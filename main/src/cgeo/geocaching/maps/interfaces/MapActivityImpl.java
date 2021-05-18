@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.maps.MapSettingsUtils;
+import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.TrackUtils;
 
@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * Defines the common functions of the provider-specific
  * MapActivity implementations.
  */
-public interface MapActivityImpl {
+public interface MapActivityImpl extends FilteredActivity {
 
     Resources getResources();
 
@@ -43,8 +43,6 @@ public interface MapActivityImpl {
     TrackUtils getTrackUtils();
 
     IndividualRouteUtils getIndividualRouteUtils();
-
-    MapSettingsUtils getMapSettingsUtils();
 
     /**
      * called from the pseudo actionbar layout

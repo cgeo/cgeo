@@ -56,22 +56,31 @@ public class DateRangeSelector extends LinearLayout {
         minDateEditor
             .setAllowUserToUnset(true)
             .setPreselectDate(new Date())
-            .setChangeListener(d -> {
-                maxDateEditor.setPreselectDate(d);
-                if (changeListener != null) {
-                    changeListener.call(new ImmutablePair<>(d, maxDateEditor.getDate()));
-                }
-            });
+            .setChangeListener(d -> onChange(d, true));
         maxDateEditor.init(binding.dateTo, null, ((FragmentActivity) getContext()).getSupportFragmentManager());
         maxDateEditor
             .setAllowUserToUnset(true)
             .setPreselectDate(new Date())
-            .setChangeListener(d -> {
-                minDateEditor.setPreselectDate(d);
-                if (changeListener != null) {
-                    changeListener.call(new ImmutablePair<>(minDateEditor.getDate(), d));
-                }
-            });
+            .setChangeListener(d -> onChange(d, false));
+    }
+
+    private void onChange(final Date d, final boolean minFieldChanged) {
+        if (minFieldChanged) {
+            maxDateEditor.setPreselectDate(d);
+        } else {
+            minDateEditor.setPreselectDate(d);
+        }
+
+        if (minDateEditor.getDate() != null && maxDateEditor.getDate() != null && minDateEditor.getDate().after(maxDateEditor.getDate())) {
+            //switch
+            final Date md = minDateEditor.getDate();
+            minDateEditor.setDate(maxDateEditor.getDate());
+            maxDateEditor.setDate(md);
+        }
+
+        if (changeListener != null) {
+            changeListener.call(new ImmutablePair<>(minDateEditor.getDate(), maxDateEditor.getDate()));
+        }
     }
 
     public void setMinMaxDate(final Date minDate, final Date maxDate) {

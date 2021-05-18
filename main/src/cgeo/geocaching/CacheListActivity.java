@@ -143,8 +143,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static final int MAX_LIST_ITEMS = 1000;
     private static final int REFRESH_WARNING_THRESHOLD = 100;
-    //private static final int OFFLINE_LIST_LOAD_LIMIT_DEFAULT = 3; //TODO: this is for test purposes only!
-    //private static final int OFFLINE_LIST_LOAD_LIMIT_INCREASE = 100; //TODO: this is for test purposes only!
 
     private static final int REQUEST_CODE_IMPORT_PQ = 3;
 
@@ -911,9 +909,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.invertSelection();
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_filter) {
-            showFilterMenu(null);
+            showLegacyFilterMenu(null);
         } else if (menuItem == R.id.menu_cache_filter) {
-            showGeocacheFilterMenu();
+            showFilterMenu(null);
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
@@ -1013,11 +1011,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         });
     }
 
-    /**
-     * called from the filter bar view
-     */
-    @Override
-    public void showFilterMenu(final View view) {
+    public void showLegacyFilterMenu(final View view) {
         if (view != null && Settings.getCacheType() != CacheType.ALL) {
             Dialogs.selectGlobalTypeFilter(this, cacheType -> {
                 refreshCurrentList();
@@ -1028,7 +1022,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    public void showGeocacheFilterMenu() {
+    /**
+     * called from the filter bar view
+     */
+    @Override
+    public void showFilterMenu(final View view) {
         GeocacheFilterActivity.selectFilter(this, currentCacheFilter, adapter.getFilteredList(), !resultIsOfflineAndLimited());
     }
 
@@ -1856,7 +1854,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public static void startActivityMap(final Context context, final SearchResult search) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         cachesIntent.putExtra(Intents.EXTRA_SEARCH, search);
-        Intents.putListType(cachesIntent, CacheListType.MAP_AS_LIST);
+        Intents.putListType(cachesIntent, CacheListType.MAP);
         context.startActivity(cachesIntent);
     }
 

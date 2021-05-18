@@ -6,21 +6,25 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.maps.MapSettingsUtils;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.TrackUtils;
+import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_RESULT;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -44,7 +48,6 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
 
     private TrackUtils trackUtils = null;
     private IndividualRouteUtils individualRouteUtils = null;
-    private MapSettingsUtils mapSettingsUtils = null;
 
     public GoogleMapActivity() {
         mapBase = new CGeoMap(this);
@@ -62,10 +65,6 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
         return individualRouteUtils;
     }
 
-    public MapSettingsUtils getMapSettingsUtils() {
-        return mapSettingsUtils;
-    }
-
     @Override
     public AppCompatActivity getActivity() {
         return this;
@@ -78,7 +77,6 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
             mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute);
         trackUtils = new TrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_TRACKUTILS),
             mapBase::setTracks, mapBase::centerOnPosition);
-        mapSettingsUtils = new MapSettingsUtils(this, mapBase::onMapSettingsPopupFinished);
     }
 
     @Override
@@ -235,15 +233,19 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
             }
             */
         }
+        if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+            final String filterConfig = data.getExtras().getString(EXTRA_FILTER_RESULT);
+            MapUtils.changeMapFilter(this, GeocacheFilter.createFromConfig(filterConfig));
+        }
+
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
         DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
-        this.mapSettingsUtils.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void showFilterMenu(final View view) {
-        // do nothing, the filter bar only shows the global filter
+        MapUtils.openFilterActivity(this, mapBase.getCaches());
     }
 
 }

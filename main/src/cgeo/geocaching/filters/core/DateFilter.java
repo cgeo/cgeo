@@ -42,8 +42,13 @@ public class DateFilter  {
     }
 
     public void setMinMaxDate(final Date min, final Date max) {
-        this.minDate = min;
-        this.maxDate = max;
+        if (min != null && max != null && min.after(max)) {
+            this.minDate = max;
+            this.maxDate = min;
+        } else {
+            this.minDate = min;
+            this.maxDate = max;
+        }
     }
 
     public void setFromConfig(final String[] config, final int startPos) {

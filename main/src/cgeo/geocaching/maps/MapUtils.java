@@ -1,9 +1,12 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
@@ -12,6 +15,12 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.TextView;
+import static android.view.View.GONE;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,7 +40,7 @@ public class MapUtils {
         final boolean excludeArchived = checkCacheFilters && Settings.isExcludeArchivedCaches();
         final CacheType filterCacheType = checkCacheFilters ? null : (Settings.getCacheType() == null ? CacheType.ALL : Settings.getCacheType());
 
-        final GeocacheFilter filter = GeocacheFilter.getStoredForListType(MapSettingsUtils.getMapViewerListType());
+        final GeocacheFilter filter = GeocacheFilter.getStoredForListType(getMapViewerListType());
 
         final boolean excludeWpOriginal = Settings.isExcludeWpOriginal();
         final boolean excludeWpParking = Settings.isExcludeWpParking();
@@ -55,7 +64,7 @@ public class MapUtils {
     /** Applies given filter to cache list. Additionally, creates a second list additionally filtered by own/found/disabled caches if required */
     public static void filter(final Collection<Geocache> caches) {
 
-        final GeocacheFilter filter = GeocacheFilter.getStoredForListType(MapSettingsUtils.getMapViewerListType());
+        final GeocacheFilter filter = GeocacheFilter.getStoredForListType(getMapViewerListType());
         if (filter != null) {
             filter.filterList(caches);
         }
@@ -85,10 +94,55 @@ public class MapUtils {
 
     }
 
+    public static void openFilterActivity(final Activity activity, final Collection<Geocache> filteredList) {
+
+        GeocacheFilterActivity.selectFilter(
+            activity,
+            GeocacheFilter.getStoredForListType(MapUtils.getMapViewerListType()),
+            filteredList, true);
+    }
+
+    public static void changeMapFilter(final Activity activity, final GeocacheFilter mapFilter) {
+        mapFilter.storeForListType(MapUtils.getMapViewerListType());
+        MapSettingsUtils.changeFilterDescription(mapFilter);
+        setFilterBar(activity);
+    }
+
+    public static void setFilterBar(final Activity activity) {
+        final List<String> filterNames = getMapFilters();
+        if (filterNames.isEmpty()) {
+            activity.findViewById(R.id.filter_bar).setVisibility(GONE);
+        } else {
+            final TextView filterTextView = activity.findViewById(R.id.filter_text);
+            filterTextView.setText(TextUtils.join(", ", filterNames));
+            activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
+        }
+    }
+
+    @NonNull
+    private static List<String> getMapFilters() {
+        final List<String> filters = new ArrayList<>();
+        if (Settings.getCacheType() != CacheType.ALL) {
+            filters.add(Settings.getCacheType().getL10n());
+        }
+
+        final GeocacheFilter filter = GeocacheFilter.getStoredForListType(getMapViewerListType());
+        if (filter.hasFilter()) {
+            filters.add(filter.toUserDisplayableString());
+        }
+
+        return filters;
+    }
+
+
+
     // one-time messages to be shown for maps
     public static void showMapOneTimeMessages(final Activity activity) {
         Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
         Dialogs.basicOneTimeMessage(activity, Settings.isLongTapOnMapActivated() ? OneTimeDialogs.DialogType.MAP_LONG_TAP_ENABLED : OneTimeDialogs.DialogType.MAP_LONG_TAP_DISABLED);
     }
 
+    public static CacheListType getMapViewerListType() {
+        return CacheListType.MAP;
+    }
 }
