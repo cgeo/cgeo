@@ -425,17 +425,11 @@
     <string name="cache_filter_option_include_inconclusive">결정적이지 않은 일치 포함</string>
     <string name="cache_filter_option_include_inconclusive_info">필터에 사용할 수없는 캐시에 대한 정보가 필요할 때 결과에 캐시를 포함할지 여부입니다.</string>
     <string name="cache_filter_hint_on_empty_filter_list">필터를 추가하려면 오른쪽 상단의 \'+\'를 누르세요</string>
-    <string name="cache_filter_name">제목</string>
-    <string name="cache_filter_type">유형</string>
-    <string name="cache_filter_size">크기</string>
     <string name="cache_filter_personalnote">개인 노트</string>
-    <string name="cache_filter_description">설명</string>
     <string name="cache_filter_offlinelog">오프라인 로그</string>
-    <string name="cache_filter_owner">소유주</string>
     <string name="cache_filter_difficulty">난이도</string>
     <string name="cache_filter_terrain">지형등급</string>
     <string name="cache_filter_status">상태</string>
-    <string name="cache_filter_attributes">속성</string>
     <string name="cache_filter_favorites">호감점수</string>
     <string name="cache_filter_distance">거리</string>
     <string name="cache_filter_include">포함</string>
