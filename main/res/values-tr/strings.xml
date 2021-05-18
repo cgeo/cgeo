@@ -426,17 +426,11 @@
     <string name="cache_filter_option_include_inconclusive">Kesin olmayan eşleşmeleri de dahil et</string>
     <string name="cache_filter_option_include_inconclusive_info">Filtrelemede aranan bir özellikle ilgili bilgi içermese de cache\'leri sonuçlara dahil et.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Bir filtre eklemek için sağ yukarıdaki \'+\' simgesine tıklayın</string>
-    <string name="cache_filter_name">İsim</string>
-    <string name="cache_filter_type">Tür</string>
-    <string name="cache_filter_size">Boyut</string>
     <string name="cache_filter_personalnote">Kişisel Not</string>
-    <string name="cache_filter_description">Açıklama</string>
     <string name="cache_filter_offlinelog">Çevrimdışı Kayıt</string>
-    <string name="cache_filter_owner">Sahibi</string>
     <string name="cache_filter_difficulty">Zorluk</string>
     <string name="cache_filter_terrain">Arazi</string>
     <string name="cache_filter_status">Durum</string>
-    <string name="cache_filter_attributes">Özellikler</string>
     <string name="cache_filter_favorites">Favoriler</string>
     <string name="cache_filter_distance">Mesafe</string>
     <string name="cache_filter_include">Dahil et</string>
