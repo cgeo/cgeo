@@ -426,17 +426,11 @@
     <string name="cache_filter_option_include_inconclusive">Unschlüssige Treffer einschließen</string>
     <string name="cache_filter_option_include_inconclusive_info">Gibt an, ob der Cache in das Ergebnis eingebunden werden soll, wenn ein Filter Informationen benötigt die im Cache nicht verfügbar sind.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Tippe auf \'+\' oben rechts um einen Filter hinzuzufügen</string>
-    <string name="cache_filter_name">Name</string>
-    <string name="cache_filter_type">Typ</string>
-    <string name="cache_filter_size">Größe</string>
     <string name="cache_filter_personalnote">Persönliche Notizen</string>
-    <string name="cache_filter_description">Beschreibung</string>
     <string name="cache_filter_offlinelog">Offline-Log</string>
-    <string name="cache_filter_owner">Besitzer</string>
     <string name="cache_filter_difficulty">Schwierigkeit</string>
     <string name="cache_filter_terrain">Gelände</string>
     <string name="cache_filter_status">Status</string>
-    <string name="cache_filter_attributes">Attribute</string>
     <string name="cache_filter_favorites">Favoriten</string>
     <string name="cache_filter_distance">Entfernung</string>
     <string name="cache_filter_include">Mit</string>
