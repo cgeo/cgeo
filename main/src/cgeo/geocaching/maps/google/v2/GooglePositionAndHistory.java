@@ -69,9 +69,9 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
 
     private static Bitmap locationIcon;
 
-    private ArrayList<LatLng> route = null;
+    private ArrayList<ArrayList<LatLng>> route = null;
     private Viewport lastViewport = null;
-    private ArrayList<LatLng> track = null;
+    private ArrayList<ArrayList<LatLng>> track = null;
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
         this.mapRef = new WeakReference<>(googleMap);
@@ -306,12 +306,14 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
     private synchronized void drawRoute() {
         routeObjs.removeAll();
         if (route != null && route.size() > 1) {
-            routeObjs.addPolyline(new PolylineOptions()
-                    .addAll(route)
+            for (ArrayList<LatLng> segment : route) {
+                routeObjs.addPolyline(new PolylineOptions()
+                    .addAll(segment)
                     .color(MapLineUtils.getRouteColor())
                     .width(MapLineUtils.getRouteLineWidth())
                     .zIndex(ZINDEX_ROUTE)
-            );
+                );
+            }
         }
     }
 
@@ -336,12 +338,14 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
     private synchronized void drawTrack() {
         trackObjs.removeAll();
         if (track != null && track.size() > 1 && !Settings.isHideTrack()) {
-            trackObjs.addPolyline(new PolylineOptions()
-                .addAll(track)
-                .color(MapLineUtils.getTrackColor())
-                .width(MapLineUtils.getTrackLineWidth())
-                .zIndex(ZINDEX_TRACK)
-            );
+            for (ArrayList<LatLng> segment : track) {
+                trackObjs.addPolyline(new PolylineOptions()
+                    .addAll(segment)
+                    .color(MapLineUtils.getTrackColor())
+                    .width(MapLineUtils.getTrackLineWidth())
+                    .zIndex(ZINDEX_TRACK)
+                );
+            }
         }
     }
 

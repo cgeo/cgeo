@@ -25,7 +25,7 @@ abstract class AbstractRouteLayer extends Layer {
     private final Boolean pathLock = true;
 
     // used for caching
-    private ArrayList<Geopoint> track = null;
+    private ArrayList<ArrayList<Geopoint>> track = null;
     private Path path = null;
     private long mapSize = -1;
     private Point topLeftPoint = null;
@@ -64,7 +64,7 @@ abstract class AbstractRouteLayer extends Layer {
         }
 
         // no route or route too short?
-        if (this.track == null || this.track.size() < 2) {
+        if (this.track == null || this.track.size() < 1) {
             return;
         }
 
@@ -84,19 +84,26 @@ abstract class AbstractRouteLayer extends Layer {
         this.topLeftPoint = topLeftPoint;
         this.path = null;
 
-        final Iterator<Geopoint> iterator = track.iterator();
-        if (!iterator.hasNext()) {
+        final Iterator<ArrayList<Geopoint>> segmentIterator = track.iterator();
+        if (!segmentIterator.hasNext()) {
             return;
         }
 
-        Geopoint point = iterator.next();
         path = AndroidGraphicFactory.INSTANCE.createPath();
-        path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
+        ArrayList<Geopoint> segment = segmentIterator.next();
+        while (segment != null) {
+            final Iterator<Geopoint> geopointIterator = segment.iterator();
+            Geopoint geopoint = geopointIterator.next();
+            path.moveTo((float) (MercatorProjection.longitudeToPixelX(geopoint.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(geopoint.getLatitude(), mapSize) - topLeftPoint.y));
 
-        while (iterator.hasNext()) {
-            point = iterator.next();
-            path.lineTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
+            while (geopointIterator.hasNext()) {
+                geopoint = geopointIterator.next();
+                path.lineTo((float) (MercatorProjection.longitudeToPixelX(geopoint.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(geopoint.getLatitude(), mapSize) - topLeftPoint.y));
+            }
+
+            segment = segmentIterator.hasNext() ? segmentIterator.next() : null;
         }
+
     }
 
 }

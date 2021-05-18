@@ -11,11 +11,13 @@ public class RouteSegment implements Parcelable {
     private final RouteItem item;
     private float distance;
     private ArrayList<Geopoint> points;
+    private boolean linkToPreviousSegment = true;
 
-    public RouteSegment(final RouteItem item, final ArrayList<Geopoint> points) {
+    public RouteSegment(final RouteItem item, final ArrayList<Geopoint> points, final boolean linkToPreviousSegment) {
         this.item = item;
         distance = 0.0f;
         this.points = points;
+        this.linkToPreviousSegment = linkToPreviousSegment;
     }
 
     public float calculateDistance() {
@@ -68,6 +70,10 @@ public class RouteSegment implements Parcelable {
     public void resetPoints() {
         points = new ArrayList<>();
         distance = 0.0f;
+    }
+
+    public boolean getLinkToPreviousSegment() {
+        return linkToPreviousSegment;
     }
 
     // Parcelable methods
