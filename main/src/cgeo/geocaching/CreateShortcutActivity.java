@@ -10,7 +10,6 @@ import cgeo.geocaching.ui.dialog.Dialogs.ItemWithIcon;
 import cgeo.geocaching.utils.ImageUtils;
 
 import android.content.Intent;
-import android.content.Intent.ShortcutIconResource;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -112,12 +111,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, targetIntent);
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
-        if (iconResourceId == R.drawable.cgeo) {
-            final ShortcutIconResource iconResource = Intent.ShortcutIconResource.fromContext(this, iconResourceId);
-            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconResource);
-        } else {
-            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createOverlay(iconResourceId));
-        }
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createOverlay(iconResourceId));
 
         setResult(RESULT_OK, intent);
 
