@@ -155,6 +155,8 @@
     <string name="log_image_scale_option_noscaling">Keine Skalierung</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nSkaliert/Komprimiert:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Bild</string>
+    <string name="datetime_clear_button">Leeren</string>
+    <string name="datetime_nodateset_display">Kein Datum gewählt</string>
     <!-- translation -->
     <string name="translate">Übersetzen</string>
     <string name="translate_to_sys_lang">Übersetze in %s</string>
@@ -424,23 +426,21 @@
     <string name="cache_filter_option_include_inconclusive">Unschlüssige Treffer einschließen</string>
     <string name="cache_filter_option_include_inconclusive_info">Gibt an, ob der Cache in das Ergebnis eingebunden werden soll, wenn ein Filter Informationen benötigt die im Cache nicht verfügbar sind.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Tippe auf \'+\' oben rechts um einen Filter hinzuzufügen</string>
-    <string name="cache_filter_name">Name</string>
-    <string name="cache_filter_type">Typ</string>
-    <string name="cache_filter_size">Größe</string>
     <string name="cache_filter_personalnote">Persönliche Notizen</string>
-    <string name="cache_filter_description">Beschreibung</string>
     <string name="cache_filter_offlinelog">Offline-Log</string>
-    <string name="cache_filter_owner">Besitzer</string>
     <string name="cache_filter_difficulty">Schwierigkeit</string>
     <string name="cache_filter_terrain">Gelände</string>
     <string name="cache_filter_status">Status</string>
-    <string name="cache_filter_attributes">Attribute</string>
     <string name="cache_filter_favorites">Favoriten</string>
     <string name="cache_filter_distance">Entfernung</string>
     <string name="cache_filter_include">Mit</string>
     <string name="cache_filter_exclude">Ohne</string>
     <string name="cache_filter_userdisplay_complex">Komplex</string>
     <string name="cache_filter_userdisplay_none">Keine</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="one">%1$d Element</item>
+        <item quantity="other">%1$d Elemente</item>
+    </plurals>
     <string name="cache_filter_storage_load_button">Lade</string>
     <string name="cache_filter_storage_delete_button">Löschen</string>
     <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
@@ -456,10 +456,21 @@
     <string name="cache_filter_stringfilter_type_starts_with">Beginnt mit</string>
     <string name="cache_filter_stringfilter_type_ends_with">Endet mit</string>
     <string name="cache_filter_stringfilter_type_pattern">Muster</string>
+    <string name="cache_filter_datefilter_label_from">Von:</string>
+    <string name="cache_filter_datefilter_label_to">Bis:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alles/Nichts auswählen</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Prozentual</string>
     <string name="cache_filter_distance_use_current_position">Eigene Position verwenden</string>
+    <string name="cache_filter_status_select_all">Alle</string>
+    <string name="cache_filter_status_select_only_found_yes">Nur Gefundene</string>
+    <string name="cache_filter_status_select_only_found_no">Nur nicht Gefundene</string>
+    <string name="cache_filter_status_select_only_own_yes">Nur Eigene</string>
+    <string name="cache_filter_status_select_only_own_no">Nur nicht Eigene</string>
+    <string name="cache_filter_status_select_only_disabled_yes">Nur Deaktivierte</string>
+    <string name="cache_filter_status_select_only_disabled_no">Nur Aktivierte</string>
+    <string name="cache_filter_status_select_only_archived_yes">Nur Archivierte</string>
+    <string name="cache_filter_status_select_only_archived_no">Nur nicht Archivierte</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
@@ -1335,6 +1346,9 @@
     <string name="search_hbu">Versteckt von</string>
     <string name="search_hbu_prefill">Besitzer</string>
     <string name="search_hbu_button">Suche mit Besitzername</string>
+    <string name="search_filter">Filter (experimentell)</string>
+    <string name="search_filter_button">Suchen mit Filter</string>
+    <string name="search_filter_info_message">\'Suche nach Filter\' durchsucht Caches auf Online-Diensten mit Hilfe eines bereitgestellten Filters. Je nach Fähigkeit des Dienstes wird nur ein Teil des Filters online ausgeführt, der Rest wird durch Offline-Filterung ausgeführt.\n\nAlle Dienste unterstützen nur UND Filter und keine Filterinvertierung.\n\nGeocaching.com Unterstützung:\n- Name (nur ganze Wörter, Muster nicht unterstützt)\n- Cachetyp\n- Cachegröße\n- Entfernung\nSchwierigkeit und Gelände\n- Favoriten (nur absolut, nur Minimum)\n- Status (Eigene, Gefunden &amp; Aktiviert)\n- Versteckt von (genaue Benutzer-ID)\n- Nicht gefunden von (genaue Benutzer-ID)\n- Versteckdatum\n\nBeachte, dass c:geo keine Attribut-Filter anbieten kann, da geocaching.com die benötigte API für uns blockiert.\n\nEs werden noch keine Dienste außer Geocaching.com unterstützt.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Tracking-Code</string>
     <string name="search_tb_button">Suche nach Trackable</string>
@@ -1954,6 +1968,7 @@
     <string name="downloadmap_no_updates_found">Keine Kartenupdates gefunden</string>
     <string name="downloadmap_directory">Ordner</string>
     <string name="downloadmap_mapfile">Karte</string>
+    <string name="downloadmap_themefile">Kartendesign-Datei</string>
     <string name="downloadmap_tilefile">Routendaten-Datei</string>
     <string name="downloadmap_download">Download</string>
     <string name="downloadmap_retrieving_directory_data">Empfange Ordnerdaten…</string>

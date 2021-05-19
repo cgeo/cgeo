@@ -424,17 +424,11 @@
     <string name="cache_filter_option_include_inconclusive">Inclusief onduidelijke overeenkomsten</string>
     <string name="cache_filter_option_include_inconclusive_info">Of een cache moet worden opgenomen als resultaat wanneer een filter informatie over de cache nodig heeft die niet beschikbaar is.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Tik op \'+\' aan rechterbovenzijde om een filter toe te voegen</string>
-    <string name="cache_filter_name">Naam</string>
-    <string name="cache_filter_type">Type</string>
-    <string name="cache_filter_size">Grootte</string>
     <string name="cache_filter_personalnote">Persoonlijke Notitie</string>
-    <string name="cache_filter_description">Omschrijving</string>
     <string name="cache_filter_offlinelog">Offline Log</string>
-    <string name="cache_filter_owner">Eigenaar</string>
     <string name="cache_filter_difficulty">Moeilijkheid</string>
     <string name="cache_filter_terrain">Terrein</string>
     <string name="cache_filter_status">Status</string>
-    <string name="cache_filter_attributes">Attributen</string>
     <string name="cache_filter_favorites">Favorieten</string>
     <string name="cache_filter_distance">Afstand</string>
     <string name="cache_filter_include">Opnemen</string>

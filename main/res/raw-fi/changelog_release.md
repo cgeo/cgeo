@@ -1,39 +1,39 @@
-## Beta Version 2021.05.11-RC
+## Beta-versio 2021.05.11-RC
 
-### Geocaching Services
-- New: Added connector for Adventure Lab Caches - Shows starting coords of Adventure Labs with basic info on map and searches (PM-only). Use the link on the cache details page to start the Adventure Lab app to play the Adventure.
+### Geokätköilypalvelut
+- Uusi: Lisätty yhdistin Adventure Lab -kätköihin - Näyttää Adventure Labsin perustiedot kartalla ja haussa (vain PM). Käytä kätkön tietosivulla olevaa linkkiä avataksesi Adventure Lab -sovelluksen pelataksesi seikkailua.
 
-### Cache details
-- New: Long click on waypoint coordinates to copy coordinates
-- New: Export and import UDC with empty coordinates
-- New: Support changing found state for user-defined caches and Lab Adventures
-- New: Parse formula for waypoints in personal cache note
-- New: Added indicator for calculated coordinates in waypoint list
-
-
-### Map
-- New: Automatic check for updates of downloaded map and theme files (optional)
-- New: BRouter: Show info message on missing routing data
-- New: Export individual route as track (in addition to "Export as route")
-
-### Integrated routing engine
-- New: Integrated BRouter routing engine - you can now use either external BRouter app or the integrated routing engine
-- New: Integrated routing engine supports automatic download of missing routing tiles
-- New: Integrated routing engine supports automatic updates of downloaded routing tiles
-- New: Integrated routing engine supports selecting different routing profiles
+### Kätkön tiedot
+- Uusi: Pitkä painallus reittipisteen koordinaattien päällä niiden kopioimiseksi
+- Uusi: Vie ja tuo käyttäjän määrittämät kätköt tyhjillä koordinaateilla
+- Uusi: Tuki löydetyn tilan muuttamiseen käyttäjän määrittelemille kätköille ja Lab-seikkailuille
+- Uusi: Reittipisteiden jäsennys muistiinpanoista löytyvästä yhtälöstä
+- Uusi: Lisätty laskettujen koordinaattien indikaattori reittipisteluettelossa
 
 
-### Other
-- Change: "Sort individual route" automatically closes on saving and checks for unsaved changes on using the back arrow
-- Fix: A couple of theming issues, esp. aligned theming of Google Maps and settings to "rest of app"
-- Fix: Optimize global search: If no trackable with matching tracking code is found, execute online cache name search afterwards
-- Fix: Avoid avatar images being displayed too wide and pushing the "Update / remove authorization" functionalty aside
-- Fix: Fix conversion error in some distance settings for imperial units
-- New: Debug view for pending downloads
-- Fix: Directory selected by user not taken over in wizard on older devices
-- Fix: Scan for map themes now run as background task on startup
-- Fix: Changing map source via settings being recognized after full restart only
-- Fix: Crash in "View settings" under certain conditions
-- Fix: Back arrow in map downloader returning to main screen
-- Fix: Avoid strange popup messages when attaching image to log
-- Fix: Possible crash on map
+### Kartta
+- Uusi: Automaattinen ladattujen kartta- ja teematiedostojen päivitysten tarkistus (valinnainen)
+- Uusi: BRouter: Näytä info-viesti puuttuvista reititystiedoista
+- Uusi: Vie yksittäinen reitti poluksi (lisäksi "Vie reittinä")
+
+### Sisäinen reititysmoottori
+- Uusi: Integroitu BRouter reititysmoottori - nyt voit käyttää joko ulkoista BRouter sovellusta tai integroitua reititysmoottoria
+- Uusi: Integroitu reititysmoottori tukee automaattista puuttuvien reitityslaattojen latausta
+- Uusi: Integroitu reititysmoottori tukee aitomaattista ladattujen reitityslaattojen päivityksiä
+- Uusi: Integroitu reititysmoottori tukee eri reititysprofiilien valintaa
+
+
+### Muu
+- Muutos: "Lajittele yksittäinen reitti" sulkeutuu automaattisesti tallennuksen yhteydessä ja tarkistaa tallentamattomat muutokset käyttämällä takanuolta
+- Korjaus: Pari teemaongelmaa, kuten: teemojen yhteenlinjaus Google Maps:iin ja asetuksiin "muu sovellus"
+- Korjaus: Optimoi yleinen haku: Jos matkaajan vastaavaa seurantakoodia ei löydy, suorita sen jälkeen online-haku kätkön nimellä
+- Korjaus: Vältä profiilikuvan näyttämistä liian leveänä jatyöntämällä "Päivitä / poista valtuutus" -toimintoa sivuun
+- Korjaus: Korjaa muuntovirhe joissakin etäisyysasetuksissa imperiaalisille yksiköille
+- Uusi: Virheenkorjausnäkymä odottaville latauksille
+- Korjaus: Käyttäjän valitsemaa kansiota ei saada haltuun määrityksellä ohjattuna vanhemmilla laitteilla
+- Korjaus: Karttateemojen skannaus ajetaan nyt taustatehtävänä käynnistettäessä
+- Korjaus: Karttalähteen vaihtaminen asetusten kautta tunnistettiin vain täyden uudelleenkäynnistyksen jälkeen
+- Korjaus: Kaatuminen käytettäessä "Näytä asetukset" tietyissä olosuhteissa
+- Korjaus: Takanuoli kartan lataajassa palaa päänäytölle
+- Korjaus: Vältä outoja ponnahdusikkunaviestejä yhdistäessä kuvaa lokiin
+- Korjaus: Mahdollinen kaatuminen kartalla

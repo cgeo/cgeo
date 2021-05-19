@@ -1,19 +1,19 @@
-## Nightly build
+## Yöllinen koontiversio
 
-### Advanced filtering system (experimental)
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- This is work in progress, stay tuned!
-- The old filter systems are still available (for the time being), but will be superseeded by the new system at some point in time.
+### Kehittynyt suodatusjärjestelmä (kokeellinen)
+- Esittelyssä uusi suodatusjärjestelmä c:geoon, joka tukee joustavia, yhdistettävissä olevia ja varastoitavia suodattimia
+- Saatavilla sekä kätkölistoissa että karttanäkymässä
+- Tämä ominaisuus on työn alla, pysy kuulolla!
+- Vanhat suodatusjärjestelmät ovat edelleen käytettävissä (jonkin aikaa), mutta uusi järjestelmä korvaa ne jossain vaiheessa.
 
-### Map
-- New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
+### Kartta
+- Uusi: Luodessa käyttäjän määrittämää kätköä kun karttaa on pyydetty luettelosta esille: Tarjoa käyttäjälle uuden kätkön tallentamista nykyiseen luetteloon (käyttäjän määrittämien kätköjen oletuslistan sijaan)
 
-### Cache details
-- New: Make use of google translate in-app translation popup
-- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
+### Kätkön tiedot
+- Uusi: Käytä Google-kääntäjän ponnahdusikkunaa sovelluksessa
+- Uusi: Salli kätkön kuvakkeen muokkaus kätkön tietojen ponnahdusikkunan kautta pitkällä painalluksella (vain tallennetut kätköt)
 
-### Other
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### Muut
+- Uusi: Lataa kirjanmerkki luettelot geocaching.comista - katso "Listat / Pocket Queryt" päävalikosta
+- Uusi: Poistetaan geocaching.su:n käyttö
+- Muutos: Poistettu RMAPS navigointisovellus, jota ei ole enää pidetty yllä

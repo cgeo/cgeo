@@ -426,24 +426,21 @@
     <string name="cache_filter_option_include_inconclusive">Sisällytä epävarmat osumat</string>
     <string name="cache_filter_option_include_inconclusive_info">Sisällytä ne kätköt, joissa suodattimen valittu tieto ei ole saatavilla.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Napauta \'+\' oikeassa yläkulmassa lisätäksesi suodattimen</string>
-    <string name="cache_filter_name">Nimi</string>
-    <string name="cache_filter_type">Tyyppi</string>
-    <string name="cache_filter_size">Koko</string>
     <string name="cache_filter_personalnote">Omat merkinnät</string>
-    <string name="cache_filter_description">Kuvaus</string>
     <string name="cache_filter_offlinelog">Offline-loki</string>
-    <string name="cache_filter_owner">Omistaja</string>
     <string name="cache_filter_difficulty">Vaikeus</string>
     <string name="cache_filter_terrain">Maasto</string>
     <string name="cache_filter_status">Tila</string>
-    <string name="cache_filter_attributes">Attribuutit</string>
     <string name="cache_filter_favorites">Suosikit</string>
     <string name="cache_filter_distance">Etäisyys</string>
     <string name="cache_filter_include">Sisällytä</string>
     <string name="cache_filter_exclude">Rajaa pois</string>
     <string name="cache_filter_userdisplay_complex">Monimutkainen</string>
     <string name="cache_filter_userdisplay_none">Ei mitään</string>
-    <string name="cache_filter_userdisplay_multi">Useita</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="one">%1$d kohde</item>
+        <item quantity="other">%1$d kohdetta</item>
+    </plurals>
     <string name="cache_filter_storage_load_button">Lataa</string>
     <string name="cache_filter_storage_delete_button">Poista</string>
     <string name="cache_filter_storage_load_delete_title">Lataa tai poista olemassa oleva suodatin</string>
@@ -1351,7 +1348,7 @@
     <string name="search_hbu_button">Hae omistajan nimellä</string>
     <string name="search_filter">Suodatin (kokeellinen)</string>
     <string name="search_filter_button">Etsi suodattimella</string>
-    <string name="search_filter_info_message">\'Etsi suodattimella\' etsii kätköjä verkkopalveluista käyttäen tarjottua suodatinta. Palveluominaisuuksista riippuen vain osa suodatinta suoritetaan verkossa, loput tehdään offline-suodatuksella.\n\nKaikki palvelut tukevat vain JA-suodattimia, mutta ei käänteistä suodatusta\n\nGeocaching.com tukee:\n- Nimi (vain kokonaiset sanat, kuvio ei ole tuettu)\n- Kätkötyyppi\n- Kätkön koko\n- Etäisyys ja maasto\n- Suosikit (vain absoluuttinen, vain vähintään)\n- Tila (Oma, Löytyi &amp; Käytössä)\n- Piilotettu (määritä käyttäjätunnus tarkalleen)\n- (joku) Ei Löytänyt (määritä käyttäjätunnus tarkalleen)\n- Piilotuspäivä\n\nHuomaa, että c:geo ei voi tarjota suodatusta attribuutin mukaan, koska geocaching.com estää meiltä vaaditun API:n käytön.\n\nMuita kuin Geocaching.com-palvelua ei vielä tueta.</string>
+    <string name="search_filter_info_message">\'Etsi suodattimella\' etsii kätköjä verkkopalveluista käyttäen tarjottua suodatinta. Palveluominaisuuksista riippuen vain osa suodatinta suoritetaan verkossa, loput tehdään offline-suodatuksella.\n\nKaikki palvelut tukevat vain JA-suodattimia, mutta ei käänteistä suodatusta.\n\nGeocaching.com tukee:\n- Nimi (vain kokonaiset sanat, kuvio ei ole tuettu)\n- Kätkötyyppi\n- Kätkön koko\n- Etäisyys\n- Vaikeus ja maasto\n- Suosikit (vain absoluuttinen, vain vähintään)\n- Tila (Oma, Löytyi &amp; Käytössä)\n- Piilotettu (määritä käyttäjätunnus tarkalleen)\n- (joku) Ei Löytänyt (määritä käyttäjätunnus tarkalleen)\n- Piilotuspäivä\n\nHuomaa, että c:geo ei voi tarjota suodatusta attribuutin mukaan, koska geocaching.com estää meiltä vaaditun API:n käytön.\n\nMuita kuin Geocaching.com-palvelua ei vielä tueta.</string>
     <string name="search_tb">Reissaaja</string>
     <string name="search_tb_hint">Reissaajan koodi</string>
     <string name="search_tb_button">Etsi reissaajia</string>

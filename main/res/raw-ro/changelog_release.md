@@ -5,7 +5,7 @@
 
 ### Cache details
 - New: Long click on waypoint coordinates to copy coordinates
-- New: Export and import UDC with empty coordinates
+- New: Export and import user defined caches with empty coordinates
 - New: Support changing found state for user-defined caches and Lab Adventures
 - New: Parse formula for waypoints in personal cache note
 - New: Added indicator for calculated coordinates in waypoint list

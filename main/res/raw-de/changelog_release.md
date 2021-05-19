@@ -13,27 +13,27 @@
 
 ### Karte
 - Neu: Automatische Suche nach Updates für heruntergeladene Karten- und Design-Dateien (optional)
-- New: BRouter: Show info message on missing routing data
-- New: Export individual route as track (in addition to "Export as route")
+- Neu: BRouter: Zeige Infonachricht bei fehlenden Routingdaten an
+- Neu: Exportiere individuelle Route als Track (zusätzlich zu "Als Route exportieren")
 
-### Integrated routing engine
-- New: Integrated BRouter routing engine - you can now use either external BRouter app or the integrated routing engine
-- New: Integrated routing engine supports automatic download of missing routing tiles
-- New: Integrated routing engine supports automatic updates of downloaded routing tiles
-- New: Integrated routing engine supports selecting different routing profiles
+### Integriertes Routing
+- Neu: Integriertes Routing - du kannst nun entweder die externe BRouter App nutzen oder das integrierte Routing
+- Neu: Integriertes Routing unterstützt den automatischen Download fehlender Routingdaten
+- Neu: Integriertes Routing unterstützt automatische Updates geladener Routingdaten
+- Neu: Integriertes Routing unterstützt die Auswahl verschiedener Routingprofile
 
 
-### Other
-- Change: "Sort individual route" automatically closes on saving and checks for unsaved changes on using the back arrow
-- Fix: A couple of theming issues, esp. aligned theming of Google Maps and settings to "rest of app"
-- Fix: Optimize global search: If no trackable with matching tracking code is found, execute online cache name search afterwards
-- Fix: Avoid avatar images being displayed too wide and pushing the "Update / remove authorization" functionalty aside
-- Fix: Fix conversion error in some distance settings for imperial units
-- New: Debug view for pending downloads
-- Fix: Directory selected by user not taken over in wizard on older devices
-- Fix: Scan for map themes now run as background task on startup
-- Fix: Changing map source via settings being recognized after full restart only
-- Fix: Crash in "View settings" under certain conditions
-- Fix: Back arrow in map downloader returning to main screen
-- Fix: Avoid strange popup messages when attaching image to log
-- Fix: Possible crash on map
+### Sonstiges
+- Änderung: "Individuelle Route sortieren" schließt sich automatisch nach dem Speichern und prüft auf ungespeicherte Änderungen, wenn der "Zurück"-Pfeil verwendet wird
+- Korrektur: Ein paar Design-Probleme, speziell das Design von Google Maps und Einstellungen im "Rest der App"
+- Korrektur: Globale Suche optimieren: Wenn kein Trackable mit passendem Tracking-Code gefunden wird, wird danach die Online-Cache-Namenssuche ausgeführt
+- Korrektur: Avatar-Bilder werden nicht mehr zu breit angezeigt so dass "Aktualisieren / Entfernen der Autorisierung" nicht mehr verdrängt wird
+- Korrektur: Fehler bei der Konvertierung in einigen Entfernungseinstellungen für imperiale Einheiten
+- Neu: Debug-Übersicht für laufende Downloads
+- Korrektur: Das vom Nutzer gewählte Verzeichnis im Assistenten wird auf älteren Geräten nicht übernommen
+- Korrektur: Suche nach Kartendesigns wird beim Start als Hintergrundaufgabe ausgeführt
+- Korrektur: Ändern der Kartenquelle über die Einstellungen wurde erst nach einem vollen Neustart übernommen
+- Korrektur: Absturz in "Einstellungen ansehen" unter bestimmten Bedingungen
+- Korrektur: Pfeil zurück im Kartendownloader zum Hauptbildschirm
+- Korrektur: Vermeide seltsame Popup-Nachrichten beim Anhängen des Bildes zum Log
+- Korrektur: Möglicher Absturz auf der Karte
