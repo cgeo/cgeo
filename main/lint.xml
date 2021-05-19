@@ -46,8 +46,6 @@
 
     <!-- resources loaded by dynamic name lookup -->
     <issue id="UnusedResources">
-        <ignore path="res/*/cgeo_logo.png" />
-        <ignore path="res/*/cgeo_sendto.png" />
         <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
         <ignore path="res/*/ic_launcher_round.xml" />
         <ignore path="res/values/vpi__colors.xml" />
