@@ -31,7 +31,7 @@ public class TrackUtils {
         this.updateTracks = updateTracks;
         this.centerOnPosition = centerOnPosition;
         this.fileSelector = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH))
-        .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, uri -> {
+        .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_PERSISTED, PersistableUri.class, uri -> {
             if (uri != null && this.updateTracks != null) {
                 loadTracks(this.updateTracks);
             }
