@@ -1944,6 +1944,11 @@ public final class GCParser {
         if (StringUtils.isNotBlank(username)) {
             return username;
         }
+        // Secondary login data pattern
+        final String username2 = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME_2, null);
+        if (StringUtils.isNotBlank(username2)) {
+            return username2;
+        }
 
         // Old style webpage fallback // @todo: no longer existing?
         final Document document = Jsoup.parse(page);
