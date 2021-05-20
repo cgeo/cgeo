@@ -364,7 +364,9 @@ public class ContentStorageActivityHelper {
             }
         }
 
-        callCallback(action, action == SelectAction.SELECT_FILE_MULTIPLE ? selectedUris : selectedUris.isEmpty() ? null : selectedUris.get(0));
+        callCallback(action, action == SelectAction.SELECT_FILE_MULTIPLE ? selectedUris :
+            (action == SelectAction.SELECT_FILE_PERSISTED ? runningIntentData.persistedDocUri :
+                (selectedUris.isEmpty() ? null : selectedUris.get(0))));
     }
 
     private void handleResultFolderSelection(final Intent intent, final boolean resultOk) {
