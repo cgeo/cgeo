@@ -92,18 +92,19 @@ public class DownloaderUtils {
         builder
             .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                 final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
-
-                final DownloadManager.Request request = new DownloadManager.Request(uri)
-                    .setTitle(filename)
-                    .setDescription(String.format(activity.getString(R.string.downloadmap_filename), filename))
-                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename)
-                    .setAllowedOverMetered(allowMeteredNetwork)
-                    .setAllowedOverRoaming(allowMeteredNetwork);
-                Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
                 final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                 if (null != downloadManager) {
-                    PendingDownload.add(downloadManager.enqueue(request), filename, uri.toString(), date, type);
+                    addDownload(activity, downloadManager, type, uri, filename, allowMeteredNetwork);
+
+                    // check for required extra files (e. g.: map theme)
+                    final AbstractDownloader downloader = Download.DownloadType.getInstance(type);
+                    if (downloader != null) {
+                        final DownloadDescriptor extraFile = downloader.getExtrafile(activity);
+                        if (extraFile != null) {
+                            addDownload(activity, downloadManager, extraFile.type, extraFile.uri, extraFile.filename, allowMeteredNetwork);
+                        }
+                    }
+
                     ActivityMixin.showShortToast(activity, R.string.download_started);
                 } else {
                     ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
@@ -121,6 +122,30 @@ public class DownloaderUtils {
             })
             .create()
             .show();
+    }
+
+    private static void addDownload(final Activity activity, final DownloadManager downloadManager, final int type, final Uri uri, final String filename, final boolean allowMeteredNetwork) {
+        final DownloadManager.Request request = new DownloadManager.Request(uri)
+            .setTitle(filename)
+            .setDescription(String.format(activity.getString(R.string.downloadmap_filename), filename))
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename)
+            .setAllowedOverMetered(allowMeteredNetwork)
+            .setAllowedOverRoaming(allowMeteredNetwork);
+        Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
+        PendingDownload.add(downloadManager.enqueue(request), filename, uri.toString(), System.currentTimeMillis(), type);
+    }
+
+    public static class DownloadDescriptor {
+        public String filename;
+        public Uri uri;
+        public int type;
+
+        DownloadDescriptor(final String filename, final Uri uri, final int type) {
+            this.filename = filename;
+            this.uri = uri;
+            this.type = type;
+        }
     }
 
     public interface DirectoryWritable {
