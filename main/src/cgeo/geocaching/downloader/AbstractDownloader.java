@@ -28,7 +28,6 @@ public abstract class AbstractDownloader {
     public PersistableFolder targetFolder;
     public static final String oneDirUp = CgeoApplication.getInstance().getString(R.string.downloadmap_onedirup);
     public String forceExtension = "";
-    public boolean overwrite = false; // silently overwrite existing files?
     public boolean useCompanionFiles = true; // store source info (uri etc.) in companion files (true) or use date/timestamp and identical uri only (false)?
     @DrawableRes public int iconRes = R.drawable.ic_menu_save;
 
