@@ -93,15 +93,14 @@ public abstract class AbstractDownloader {
         }
     }
 
+    // extra file to download?
+    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity) {
+        return null;
+    }
+
     // default action to be started after having received and copied the downloaded file successfully
     protected void onSuccessfulReceive(final Uri result) {
         // default: nothing to do
-    }
-
-    // default followup action on UI thread after having received and copied the downloaded file successfully
-    protected void onFollowup(final Activity activity, final Runnable callback) {
-        // default: just continue with callback
-        callback.run();
     }
 
 }

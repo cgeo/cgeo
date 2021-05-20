@@ -304,7 +304,7 @@ public class ReceiveDownloadActivity extends AbstractActivity {
                     result = getString(R.string.receivedownload_error);
                     break;
             }
-            Dialogs.message(context, getString(R.string.receivedownload_intenttitle), result, getString(android.R.string.ok), (dialog, button) -> downloader.onFollowup(activity, ReceiveDownloadActivity.this::doFinish));
+            Dialogs.message(context, getString(R.string.receivedownload_intenttitle), result, getString(android.R.string.ok), (dialog, button) -> doFinish());
         }
 
     }

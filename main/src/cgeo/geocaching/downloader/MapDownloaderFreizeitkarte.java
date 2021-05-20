@@ -99,9 +99,8 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
     }
 
     @Override
-    protected void onFollowup(final Activity activity, final Runnable callback) {
-        // check whether a FZK theme exists in theme folder and ask whether user wants to download it as well, if it does not exist yet
-        findOrDownload(activity, THEME_FILES, activity.getString(R.string.mapserver_freizeitkarte_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_FREIZEITKARTE, callback);
+    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity) {
+        return getExtrafile(THEME_FILES, activity.getString(R.string.mapserver_freizeitkarte_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_FREIZEITKARTE);
     }
 
     @NonNull

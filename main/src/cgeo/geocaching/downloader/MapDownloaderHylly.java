@@ -50,11 +50,9 @@ public class MapDownloaderHylly extends AbstractMapDownloader {
         return CgeoApplication.getInstance().getString(R.string.mapserver_hylly_updatecheckurl);
     }
 
-
     @Override
-    protected void onFollowup(final Activity activity, final Runnable callback) {
-        // check whether theme file exists in theme folder and ask whether user wants to download it as well, if it does not exist yet
-        findOrDownload(activity, THEME_FILES, activity.getString(R.string.mapserver_hylly_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_HYLLY, callback);
+    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity) {
+        return getExtrafile(THEME_FILES, activity.getString(R.string.mapserver_hylly_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_HYLLY);
     }
 
     @NonNull
