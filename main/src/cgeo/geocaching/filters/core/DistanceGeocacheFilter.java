@@ -18,7 +18,7 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     private boolean useCurrentPosition;
 
     public DistanceGeocacheFilter() {
-        super(Float::valueOf, f -> f);
+        super(Float::valueOf);
     }
 
     /** Gets fixed-value coordinate set to this filter, may be null */

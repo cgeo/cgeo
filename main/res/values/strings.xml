@@ -38,6 +38,30 @@
     <string name="userdefined">User defined cache</string>
     <string name="unknown">Unknown Type</string>
 
+    <string name="all_types_short">All</string>
+    <string name="traditional_short">Tradi</string>
+    <string name="multi_short">Multi</string>
+    <string name="mystery_short">Mystery</string>
+    <string name="letterbox_short">Letterbox</string>
+    <string name="event_short">Event</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Earth</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webcam</string>
+    <string name="virtual_short">Virtual</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Community</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">GC HQ Cel</string>
+    <string name="gps_short">GPS Exhibit</string>
+    <string name="block_short">GCHQ Block</string>
+    <string name="locationless_short">Locationless</string>
+    <string name="advlab_short">Adv Lab</string>
+    <string name="userdefined_short">Userdefined</string>
+    <string name="unknown_short">Unknown</string>
+
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
     <string name="cache_size_small">Small</string>
@@ -447,6 +471,11 @@
     <string name="list_not_available">List no longer available, switching to standard list</string>
 
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_basic">Basic</string>
+    <string name="cache_filter_mode_advanced">Advanced</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Switch to Basic</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">Changing to \'Basic\' mode will result in loss of filter settings. Do you want to continue?</string>
+
     <string name="cache_filter_option_and_or">Use OR instead of AND</string>
     <string name="cache_filter_option_inverse">Inverse Filter</string>
     <string name="cache_filter_option_include_inconclusive">Include inconclusive matches</string>
@@ -503,7 +532,7 @@
     <string name="cache_filter_datefilter_label_from">From:</string>
     <string name="cache_filter_datefilter_label_to">To:</string>
 
-    <string name="cache_filter_checkboxlist_selectallnone">Select all/none</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Select all</string>
 
     <string name="cache_filter_favorites_absolute">Absolute</string>
     <string name="cache_filter_favorites_percentage">Percentage</string>

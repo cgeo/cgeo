@@ -16,13 +16,13 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class ItemRangeSelectorViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
 
-    private final ValueGroupFilterAccessor<T, F> filterAccessor;
+    private final ValueGroupFilterAccessor<T, ?, F> filterAccessor;
     private final Map<T, Integer> itemsToPosition = new HashMap<>();
     private final Func2<Integer, T, String> axisLabelMapper;
 
     private ItemRangeSlider<T> slider;
 
-    public ItemRangeSelectorViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final Func2<Integer, T, String> axisLabelMapper) {
+    public ItemRangeSelectorViewHolder(final ValueGroupFilterAccessor<T, ?, F> filterAccessor, final Func2<Integer, T, String> axisLabelMapper) {
         this.filterAccessor = filterAccessor;
         int idx = 0;
         for (T item : filterAccessor.getSelectableValuesAsArray()) {

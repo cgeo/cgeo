@@ -23,7 +23,7 @@ public enum GeocacheFilterType {
     OFFLINE_LOG("offlinelog", R.string.cache_filter_offlinelog, OfflineLogGeocacheFilter::new),
     FAVORITES("favorites", R.string.cache_filter_favorites, FavoritesGeocacheFilter::new),
     DISTANCE("distance", R.string.cache_filter_distance, DistanceGeocacheFilter::new),
-    HIDDEN("hidden", R.string.cache_filter_hint_on_empty_filter_list, HiddenGeocacheFilter::new);
+    HIDDEN("hidden", R.string.cache_filter_hidden, HiddenGeocacheFilter::new);
 
     private final String typeId;
     private final Supplier<BaseGeocacheFilter> supplier;

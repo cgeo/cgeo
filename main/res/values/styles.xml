@@ -321,6 +321,13 @@
         <item name="android:background">?separator_color</item>
     </style>
 
+    <style name="separator_vertical">
+        <item name="android:layout_width">1dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:background">?separator_color</item>
+    </style>
+
     <style name="separator_horizontal_layout">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>

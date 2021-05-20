@@ -15,8 +15,36 @@
         android:orientation="vertical" >
 
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <cgeo.geocaching.ui.ToggleButtonGroup
+            android:id="@+id/filter_basic_advanced"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginHorizontal="6dp"
+            android:layout_marginVertical="3dp"
+            android:layout_centerVertical="true"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageButton
+            android:id="@+id/filter_additem"
+            style="@style/button_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_menu_add"/>
+
+    </RelativeLayout>
+
+   <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="1dp" />
+
+     <RelativeLayout
+         android:id="@+id/filter_storage_options"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/filter_storage_manage"
@@ -48,6 +76,7 @@
     </RelativeLayout>
 
     <View
+        android:id="@+id/filter_storage_options_line"
         style="@style/separator_horizontal"
         android:layout_marginTop="1dp" />
 
@@ -59,20 +88,8 @@
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp" />
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:id="@+id/filter_additem"
-            style="@style/button_icon"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_menu_add" />
-
-    </RelativeLayout>
-
-
     <View
+        android:id="@+id/filter_props_checkboxes_line"
         style="@style/separator_horizontal"
         android:layout_marginTop="1dp" />
 

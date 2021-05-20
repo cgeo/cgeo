@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,13 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class ViewUtils {
 
@@ -77,28 +82,27 @@ public class ViewUtils {
     }
 
     public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, View> viewCreator) {
+        return createHorizontallyDistributedViews(ctx, root, items, viewCreator, null);
+    }
+
+    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, View> viewCreator, final Func2<Integer, T, Float> weightCreator) {
 
         final LinearLayout viewGroup = root == null ? new LinearLayout(ctx) : root;
 
         int idx = 0;
         for (T item : items) {
-            final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp.weight = 1;
+            final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.weight = weightCreator == null ? 1 : weightCreator.call(idx, item);
 
-            final RelativeLayout rl = new RelativeLayout(ctx);
-            if (DEBUG_LAYOUT) {
-                rl.setBackgroundResource(R.drawable.mark_green);
+            View itemView = viewCreator.call(idx, item);
+            if (itemView == null) {
+                itemView = new View(ctx);
             }
-            viewGroup.addView(rl, lp);
-
-            final RelativeLayout.LayoutParams rp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-            rp.addRule(RelativeLayout.CENTER_IN_PARENT);
-
-            final View itemView = viewCreator.call(idx, item);
-            if (itemView != null) {
-                rl.addView(itemView, rp);
+            if (itemView instanceof TextView) {
+                ((TextView) itemView).setGravity(Gravity.CENTER_HORIZONTAL);
             }
+            viewGroup.addView(itemView, lp);
+
             idx++;
         }
         return viewGroup;
@@ -112,9 +116,16 @@ public class ViewUtils {
         return addCheckboxItem(activity, viewGroup, textId, iconId, 0);
     }
 
-    public static CheckBox addCheckboxItem(final Activity activity, final ViewGroup viewGroup, final String text, final int iconId, @StringRes final int infoTextId) {
+    public static CheckBox addCheckboxItem(final Activity activity, @NonNull final ViewGroup viewGroup, final String text, final int iconId, @StringRes final int infoTextId) {
 
-        final View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.checkbox_item, viewGroup, false);
+        final ImmutablePair<View, CheckBox> ip = createCheckboxItem(activity, viewGroup, text, iconId, infoTextId);
+        viewGroup.addView(ip.left);
+        return ip.right;
+    }
+
+    public static ImmutablePair<View, CheckBox> createCheckboxItem(final Activity activity, @Nullable final ViewGroup context, final String text, final int iconId, @StringRes final int infoTextId) {
+
+        final View itemView = LayoutInflater.from(context == null ? activity : context.getContext()).inflate(R.layout.checkbox_item, context, false);
         final CheckboxItemBinding itemBinding = CheckboxItemBinding.bind(itemView);
         itemBinding.itemText.setText(text);
         if (iconId > -1) {
@@ -124,11 +135,21 @@ public class ViewUtils {
             itemBinding.itemInfo.setVisibility(View.VISIBLE);
             itemBinding.itemInfo.setOnClickListener(v -> Dialogs.message(activity, infoTextId));
         }
-        viewGroup.addView(itemView);
         itemBinding.itemIcon.setOnClickListener(v -> itemBinding.itemCheckbox.toggle());
         itemBinding.itemText.setOnClickListener(v -> itemBinding.itemCheckbox.toggle());
 
-        return itemBinding.itemCheckbox;
+        return new ImmutablePair<>(itemView, itemBinding.itemCheckbox);
+    }
+
+    public static View createVerticalSeparator(final Context context) {
+        final RelativeLayout llSep = new RelativeLayout(context);
+        final View separatorView = new View(context, null, 0, R.style.separator_vertical);
+        final RelativeLayout.LayoutParams rp = new RelativeLayout.LayoutParams(ViewUtils.dpToPixel(1), ViewGroup.LayoutParams.MATCH_PARENT);
+        rp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        rp.addRule(RelativeLayout.CENTER_VERTICAL);
+        rp.setMargins(0, ViewUtils.dpToPixel(10), 0, ViewUtils.dpToPixel(10));
+        llSep.addView(separatorView, rp);
+        return llSep;
     }
 
     /**
