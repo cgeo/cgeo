@@ -415,6 +415,24 @@
     <string name="list_dialog_rename">変更</string>
     <string name="list_not_available">リストが利用できません。保存済みのリストへ移動します</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_hint_on_empty_filter_list">右上の「+」をタップしてフィルタを追加</string>
+    <string name="cache_filter_name">キャッシュ名</string>
+    <string name="cache_filter_type">タイプ</string>
+    <string name="cache_filter_size">サイズ</string>
+    <string name="cache_filter_personalnote">パーソナルノート</string>
+    <string name="cache_filter_description">詳細</string>
+    <string name="cache_filter_offlinelog">オフラインログ</string>
+    <string name="cache_filter_owner">オーナー</string>
+    <string name="cache_filter_difficulty">難易度</string>
+    <string name="cache_filter_terrain">地形</string>
+    <string name="cache_filter_status">状態</string>
+    <string name="cache_filter_attributes">属性</string>
+    <string name="cache_filter_favorites">お気に入り</string>
+    <string name="cache_filter_distance">距離</string>
+    <string name="cache_filter_hidden">設置日</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="other">%1$dアイテム</item>
+    </plurals>
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
@@ -644,6 +662,7 @@
     <string name="init_user_confirmation">はい、了承します</string>
     <string name="init_backup_success">c:geoのデータベースは正常にバックアップされました: </string>
     <string name="init_backup_failed">c:geoのデータベースをバックアップできませんでした</string>
+    <string name="init_backup_unnecessary">データベースが空です。バックアップは必要ありませんが、それでもバックアップを作成しますか?</string>
     <string name="init_backup_folder_exists_error">新しいバックアップフォルダを作成できませんでした。1分以内に連続してバックアップはできません</string>
     <string name="init_backup_no_backup_available">バックアップファイルはありません。</string>
     <string name="backup_confirm_overwrite">一番古いバックアップ(%s)は削除されます。\n続けますか?</string>
@@ -1843,9 +1862,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="receivedownload_error">ファイルのダウンロード中にエラーが発生しました</string>
     <string name="receivedownload_error_io_exception">ファイルのダウンロード中にI/Oエラーが発生しました。フォルダ「%s」は書き込み可能ですか？</string>
     <string name="receivedownload_error_filenotfound_exception">ダウンロードするファイルが見つかりませんでした</string>
-    <string name="receivedownload_alreadyexists">同名ファイルが既にあります。上書きしますか? または別名(連番を付加)で保存しますか?</string>
-    <string name="receivedownload_option_overwrite">上書き保存</string>
-    <string name="receivedownload_option_differentname">別名で保存</string>
     <string name="receivedownload_cancelled">ファイル転送がキャンセルされました</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">オフライン用に地図をダウンロード</string>
