@@ -13,7 +13,11 @@
 - Novo: Utilização do Google Tradutor numa janela pop-up de tradução
 - Novo: Permite a alteração do ícone atribuído, ao tocar sem soltar sobre o nome da cache, na janela pop-up (apenas em caches armazenadas)
 
-### Outro
-- Novo: Descarregar as listas de geocaching.com - consulte "Listas / pocket queries" no menu principal
-- Novo: Ignorar capacidade para geocaching.su
-- Alteração: Removida a aplicação de navegação RMAPS, já sem manutenção
+### Downloader
+- Change: Files downloaded successfully will automatically overwrite existing files having the same name
+- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+
+### Other
+- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
+- New: Ignore capability for geocaching.su
+- Change: Removed no longer maintained RMAPS navigation app
