@@ -183,7 +183,9 @@ public class DateTimeEditor {
 
         @Override
         public void onDateSet(final DatePicker view, final int year, final int monthOfYear, final int dayOfMonth) {
-            dateUnset[0] = false;
+            if (dateUnset != null) {
+                dateUnset[0] = false;
+            }
             date.set(year, monthOfYear, dayOfMonth);
             this.changeTrigger.call(date);
         }
@@ -224,7 +226,9 @@ public class DateTimeEditor {
 
         @Override
         public void onTimeSet(final TimePicker view, final int hourOfDay, final int minute) {
-            dateUnset[0] = false;
+            if (dateUnset != null) {
+                dateUnset[0] = false;
+            }
             date.set(Calendar.HOUR_OF_DAY, hourOfDay);
             date.set(Calendar.MINUTE, minute);
             changeTrigger.call(date);
