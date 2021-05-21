@@ -13,7 +13,11 @@
 - Νέο: Κάντε χρήση του google translator στο app me μετάφραση σε αναδυόμενο παράθυρο
 - Νέο: Να επιτρέπεται η αλλαγή του αντιστοιχισμένου εικονιδίου στις λεπτομέρειες της κρύπτης σε αναδυόμενο με μακρύ κλικ παράθυρο (αποθηκευμένες κρύπτες μόνο)
 
-### Άλλο
-- Νέα: Κατεβάστε τις λίστες σελιδοδεικτών από την geocaching.com - δείτε "Λίστες / pocket queries" στο κύριο μενού
-- Νέο: Αγνοήστε την δυνατότητα για geocaching.su
+### Downloader
+- Change: Files downloaded successfully will automatically overwrite existing files having the same name
+- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+
+### Other
+- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
+- New: Ignore capability for geocaching.su
 - Change: Removed no longer maintained RMAPS navigation app
