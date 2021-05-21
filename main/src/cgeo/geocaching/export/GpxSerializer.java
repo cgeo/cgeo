@@ -159,6 +159,7 @@ public final class GpxSerializer {
             gpx.endTag(NS_GROUNDSPEAK, "cache");
 
             writeGsakExtensions(cache);
+            writeCGeoExtensions(cache);
 
             gpx.endTag(NS_GPX, "wpt");
 
@@ -175,6 +176,12 @@ public final class GpxSerializer {
         gpx.startTag(NS_GSAK, "wptExtension");
         XmlUtils.multipleTexts(gpx, NS_GSAK, "Watch", gpxBoolean(cache.isOnWatchlist()), "IsPremium", gpxBoolean(cache.isPremiumMembersOnly()), "FavPoints", Integer.toString(cache.getFavoritePoints()), "GcNote", StringUtils.trimToEmpty(cache.getPersonalNote()));
         gpx.endTag(NS_GSAK, "wptExtension");
+    }
+
+    private void writeCGeoExtensions(@NonNull final Geocache cache) throws IOException {
+        gpx.startTag(NS_CGEO, "cacheExtension");
+        XmlUtils.simpleText(gpx, NS_CGEO, "assignedEmoji", String.valueOf(cache.getAssignedEmoji()));
+        gpx.endTag(NS_CGEO, "cacheExtension");
     }
 
     private void writeGsakExtensions(@NonNull final Waypoint waypoint) throws IOException {

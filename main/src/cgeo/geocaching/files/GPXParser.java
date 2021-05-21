@@ -130,6 +130,7 @@ abstract class GPXParser extends FileParser {
     private boolean wptVisited = false;
     private boolean wptUserDefined = false;
     private boolean wptEmptyCoordinates = false;
+    private int cacheAssignedEmoji = 0;
     private List<LogEntry> logs = new ArrayList<>();
 
     /**
@@ -257,6 +258,8 @@ abstract class GPXParser extends FileParser {
                     }
 
                     createNoteFromGSAKUserdata();
+
+                    cache.setAssignedEmoji(cacheAssignedEmoji);
 
                     final String geocode = cache.getGeocode();
                     if (result.contains(geocode)) {
@@ -795,6 +798,10 @@ abstract class GPXParser extends FileParser {
 
             final Element cgeoEmptyCoords = cacheParent.getChild(cgeoNamespace, "originalCoordsEmpty");
             cgeoEmptyCoords.setEndTextElementListener(originalCoordsEmpty -> wptEmptyCoordinates = Boolean.parseBoolean(originalCoordsEmpty.trim()));
+
+            final Element cgeo = cacheParent.getChild(cgeoNamespace, "cacheExtension");
+            final Element cgeoAssignedEmoji = cgeo.getChild(cgeoNamespace, "assignedEmoji");
+            cgeoAssignedEmoji.setEndTextElementListener(assignedEmoji -> cacheAssignedEmoji = Integer.parseInt(assignedEmoji.trim()));
         }
     }
 
@@ -882,6 +889,7 @@ abstract class GPXParser extends FileParser {
         wptVisited = false;
         wptUserDefined = false;
         wptEmptyCoordinates = false;
+        cacheAssignedEmoji = 0;
         logs = new ArrayList<>();
 
         cache = createCache();
