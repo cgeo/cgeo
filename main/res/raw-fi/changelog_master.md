@@ -13,7 +13,11 @@
 - Uusi: Käytä Google-kääntäjän ponnahdusikkunaa sovelluksessa
 - Uusi: Salli kätkön kuvakkeen muokkaus kätkön tietojen ponnahdusikkunan kautta pitkällä painalluksella (vain tallennetut kätköt)
 
-### Muut
-- Uusi: Lataa kirjanmerkki luettelot geocaching.comista - katso "Listat / Pocket Queryt" päävalikosta
-- Uusi: Poistetaan geocaching.su:n käyttö
-- Muutos: Poistettu RMAPS navigointisovellus, jota ei ole enää pidetty yllä
+### Downloader
+- Change: Files downloaded successfully will automatically overwrite existing files having the same name
+- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+
+### Other
+- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
+- New: Ignore capability for geocaching.su
+- Change: Removed no longer maintained RMAPS navigation app
