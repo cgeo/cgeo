@@ -1,4 +1,4 @@
-## Beta Version 2021.05.11-RC
+## Beta Versiyon 2021.05.11-RC
 
 ### Geocaching Services
 - New: Added connector for Adventure Lab Caches - Shows starting coords of Adventure Labs with basic info on map and searches (PM-only). Use the link on the cache details page to start the Adventure Lab app to play the Adventure.
