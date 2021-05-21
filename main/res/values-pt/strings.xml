@@ -568,7 +568,7 @@
     <string name="settings_gc_description">Autoriza o c:geo a pesquisar caches em \'geocaching.com\'.</string>
     <string name="settings_ec_description">Autorize o c:geo a pesquisar caches em extremecaching.com.</string>
     <string name="settings_su_description">Autorize o c:geo a pesquisar caches em geocaching.su.</string>
-    <string name="settings_lc_description">Incluir geocaches Adventure Lab no mapa.\n\n(Disponível apenas para membros premium \"Geocaching.com\"). Requer o serviço \"Geocaching.com\" activado.)\n\nA alteração desta definição requer o reinício da aplicação.</string>
+    <string name="settings_lc_description">Incluir caches Adventure Lab no mapa.\n\n(Disponível apenas para membros premium \"Geocaching.com\". Requer o serviço \"Geocaching.com\" activado.)\n\nA alteração desta definição requer o reinício da aplicação.</string>
     <string name="lc_default_description">Esta é uma geocache Adventure Lab (do serviço \'geocaching.com\'). As aventuras apenas podem ser jogadas dentro da aplicação Adventure Lab da Groundspeak. Toque no ícone Adventure Lab na página \"Detalhes\" para abrir/instalar a aplicação Adventure Lab para prosseguir com a aventura na mesma.\nSe não deseja ver as geocaches Adventure Lab no mapa e na pesquisa, pode desactiva-las em \"Definições\" - \"Serviços\" - \"Adventure Lab (geocaching.com)\"</string>
     <string name="settings_activate_oc">Activar</string>
     <string name="init_summary_oc_de">Carregar caches a partir de \'opencaching.de\'</string>
@@ -1944,9 +1944,6 @@
     <string name="receivedownload_error">Erro ao receber ficheiro</string>
     <string name="receivedownload_error_io_exception">Erro ao receber o ficheiro. A pasta \"%s permite a gravação?</string>
     <string name="receivedownload_error_filenotfound_exception">Erro de ficheiro não encontrado, ao receber o ficheiro.</string>
-    <string name="receivedownload_alreadyexists">Já existe um ficheiro com este nome. Substituir o ficheiro existente ou guardar o novo ficheiro sob um nome diferente?</string>
-    <string name="receivedownload_option_overwrite">Substituir</string>
-    <string name="receivedownload_option_differentname">Nome diferente</string>
     <string name="receivedownload_amount_copied">%s copiado</string>
     <string name="receivedownload_cancelled">Transferência de ficheiros cancelada</string>
     <!-- Download map preference and menu entry -->
