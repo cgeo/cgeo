@@ -13,7 +13,11 @@
 - 신규: 구글 번역 인앱 번역 팝업 사용
 - 신규: 긴 클릭을 통해 캐시 세부 사항 팝업에서 할당 된 아이콘 변경 허용 (저장된 캐시 만 해당)
 
-### 추가 사항
-- 신규: geocaching.com에서 북마크 목록 다운로드 - 메인 메뉴의 "목록/포켓 쿼리" 참조
-- 신규: geocaching.su에 대한 기능 무시
-- 변경: 더 이상 유지 관리되지 않는 RMAPS 탐색 앱 제거
+### Downloader
+- Change: Files downloaded successfully will automatically overwrite existing files having the same name
+- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+
+### Other
+- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
+- New: Ignore capability for geocaching.su
+- Change: Removed no longer maintained RMAPS navigation app
