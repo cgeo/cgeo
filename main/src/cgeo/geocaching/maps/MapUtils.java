@@ -104,7 +104,6 @@ public class MapUtils {
 
     public static void changeMapFilter(final Activity activity, final GeocacheFilter mapFilter) {
         mapFilter.storeForListType(MapUtils.getMapViewerListType());
-        MapSettingsUtils.changeFilterDescription(mapFilter);
         setFilterBar(activity);
     }
 

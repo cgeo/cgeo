@@ -2,7 +2,6 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.MapSettingsDialogBinding;
-import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.IndividualRoute;
@@ -37,15 +36,12 @@ public class MapSettingsUtils {
     private static boolean isAutotargetIndividualRoute;
     private static boolean showAutotargetIndividualRoute;
 
-    private static Action1<String> currentFilterNameSetter = null;
-
-
     private MapSettingsUtils() {
         // utility class
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
-    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, @DrawableRes final int alternativeButtonResId, @Nullable final Runnable openFilter) {
+    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, @DrawableRes final int alternativeButtonResId) {
         colorAccent = activity.getResources().getColor(R.color.colorAccent);
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
@@ -64,7 +60,6 @@ public class MapSettingsUtils {
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_circles, R.drawable.ic_menu_circle, isShowCircles, Settings::setShowCircles, false));
 
         final MapSettingsDialogBinding dialogView = MapSettingsDialogBinding.inflate(LayoutInflater.from(Dialogs.newContextThemeWrapper(activity)));
-        currentFilterNameSetter = dialogView.mapSettingsFilterText::setText;
 
         for (SettingsCheckboxModel element : settingsElementsCheckboxes) {
             final RelativeLayout l = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.map_settings_item, dialogView.mapSettingsListview, false);
@@ -96,18 +91,8 @@ public class MapSettingsUtils {
             dialogView.mapSettingsAutotarget.setChecked(isAutotargetIndividualRoute);
         }
 
-        final GeocacheFilter mapFilter = GeocacheFilter.getStoredForListType(MapUtils.getMapViewerListType());
-
-        dialogView.mapSettingsFilterText.setText(mapFilter.toUserDisplayableString());
-        dialogView.mapSettingsFilterButton.setOnClickListener(v -> {
-            if (openFilter != null) {
-                openFilter.run();
-            }
-        });
-
         final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), R.string.quick_settings);
         dialog.setOnDismissListener(d -> {
-                currentFilterNameSetter = null;
                 for (SettingsCheckboxModel item : settingsElementsCheckboxes) {
                     item.setValue();
                 }
@@ -137,12 +122,6 @@ public class MapSettingsUtils {
 
             dialogView.brouterInstall.setVisibility(View.VISIBLE);
             dialogView.brouterInstall.setOnClickListener(v -> ProcessUtils.openMarket(activity, activity.getString(R.string.package_brouter)));
-        }
-    }
-
-    public static void changeFilterDescription(final GeocacheFilter mapFilter) {
-        if (currentFilterNameSetter != null) {
-            currentFilterNameSetter.call(mapFilter.toUserDisplayableString());
         }
     }
 

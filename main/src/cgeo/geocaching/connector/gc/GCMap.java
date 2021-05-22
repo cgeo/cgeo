@@ -160,7 +160,7 @@ public class GCMap {
     private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
         switch (basicFilter.getType()) {
             case TYPE:
-                search.addCacheTypes(((TypeGeocacheFilter) basicFilter).getValues());
+                search.addCacheTypes(((TypeGeocacheFilter) basicFilter).getRawValues());
                 break;
             case NAME:
                 search.setKeywords(((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue());

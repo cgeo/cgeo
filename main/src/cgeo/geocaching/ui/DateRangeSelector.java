@@ -62,6 +62,8 @@ public class DateRangeSelector extends LinearLayout {
             .setAllowUserToUnset(true)
             .setPreselectDate(new Date())
             .setChangeListener(d -> onChange(d, false));
+        minDateEditor.setDate(null);
+        maxDateEditor.setDate(null);
     }
 
     private void onChange(final Date d, final boolean minFieldChanged) {

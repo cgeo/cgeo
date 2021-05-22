@@ -573,7 +573,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         final int upResId = a.getResourceId(0, 0);
         a.recycle();
         activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->
-            MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId, () -> getMapActivity().showFilterMenu(null)));
+            MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, upResId));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -1284,11 +1284,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             caches.removeAll(cachesFromSearchResult);
             caches.addAll(cachesFromSearchResult);
 
-            if (mapMode == MapMode.LIVE || mapOptions.isLiveEnabled) {
-                synchronized (caches) {
-                    MapUtils.filter(caches);
-                }
+            synchronized (caches) {
+                MapUtils.filter(caches);
             }
+
             countVisibleCaches();
             // we don't want to see any stale waypoints
             waypoints.clear();
