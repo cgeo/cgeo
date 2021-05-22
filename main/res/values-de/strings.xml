@@ -465,7 +465,6 @@
     <string name="cache_filter_stringfilter_type_pattern">Muster</string>
     <string name="cache_filter_datefilter_label_from">Von:</string>
     <string name="cache_filter_datefilter_label_to">Bis:</string>
-    <string name="cache_filter_checkboxlist_selectallnone">Alles/Nichts auswählen</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Prozentual</string>
     <string name="cache_filter_distance_use_current_position">Eigene Position verwenden</string>
@@ -481,6 +480,8 @@
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
+    <string name="about_changelog_nightly_build">Nightly-Build</string>
+    <string name="about_changelog_next_release">Nächste Version</string>
     <string name="about_system">System</string>
     <string name="about_donate">Unterstütze uns</string>
     <string name="about_donation_more">Besuche Webseite für Infos</string>
@@ -1949,9 +1950,6 @@
     <string name="receivedownload_error">Fehler beim Empfangen der Datei</string>
     <string name="receivedownload_error_io_exception">E/A-Fehler beim Empfangen der Datei. Ist dein Ordner \"%s\" beschreibbar?</string>
     <string name="receivedownload_error_filenotfound_exception">Zu empfangene Datei nicht gefunden.</string>
-    <string name="receivedownload_alreadyexists">Eine Datei mit diesem Namen existiert bereits. Bestehende Datei überschreiben oder neue Datei unter anderem Namen speichern?</string>
-    <string name="receivedownload_option_overwrite">Überschreiben</string>
-    <string name="receivedownload_option_differentname">Anderer Name</string>
     <string name="receivedownload_amount_copied">%s kopiert</string>
     <string name="receivedownload_cancelled">Dateiübertragung abgebrochen</string>
     <!-- Download map preference and menu entry -->
