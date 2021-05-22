@@ -1,5 +1,3 @@
-## Compilação diária
-
 ### Sistema avançado de filtragem (experimental)
 - Apresentamos um novo sistema de filtragem no c:geo, que suporta filtros flexíveis, combináveis e armazenáveis
 - Disponível nas listas de caches e visualização de mapas
