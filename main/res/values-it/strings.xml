@@ -450,7 +450,6 @@
     <string name="cache_filter_stringfilter_type_starts_with">Inizia con</string>
     <string name="cache_filter_stringfilter_type_ends_with">Finisce con</string>
     <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
-    <string name="cache_filter_checkboxlist_selectallnone">Seleziona tutto / niente</string>
     <string name="cache_filter_favorites_absolute">Assoluto</string>
     <string name="cache_filter_favorites_percentage">Percentuale</string>
     <string name="cache_filter_distance_use_current_position">Usa posizione corrente</string>
@@ -1933,9 +1932,6 @@
     <string name="receivedownload_error">Errore durante la ricezione del file</string>
     <string name="receivedownload_error_io_exception">Errore di I/O durante la ricezione del file. La cartella \"%s\" è scrivibile?</string>
     <string name="receivedownload_error_filenotfound_exception">Errore di file non trovato durante la ricezione.</string>
-    <string name="receivedownload_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
-    <string name="receivedownload_option_overwrite">Sovrascrivere</string>
-    <string name="receivedownload_option_differentname">Nome diverso</string>
     <string name="receivedownload_amount_copied">%s copiato</string>
     <string name="receivedownload_cancelled">Trasferimento file annullato</string>
     <!-- Download map preference and menu entry -->
