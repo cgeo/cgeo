@@ -667,12 +667,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             loadCachesHandler.sendEmptyMessage(0);
         }
 
-        // refresh standard list if it has changed (new caches downloaded)
+        // refresh standard list if it might have changed (e.g. due to new caches downloaded or cache being added/deleted from list)
         if (type == CacheListType.OFFLINE && (listId >= StoredList.STANDARD_LIST_ID || listId == PseudoList.ALL_LIST.id) && search != null) {
-            final SearchResult newSearch = DataStore.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId, currentCacheFilter, adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
-            if (newSearch.getTotalCountGC() != search.getTotalCountGC()) {
-                refreshCurrentList();
-            }
+            refreshCurrentList();
         }
 
         // always refresh history, an offline log might have been deleted
