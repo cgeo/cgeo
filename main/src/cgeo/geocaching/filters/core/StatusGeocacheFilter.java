@@ -92,8 +92,13 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
+    public boolean isFiltering() {
+        return statusOwn != null || statusFound != null || statusDisabled != null || statusArchived != null;
+    }
+
+    @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
-        if (statusOwn == null && statusFound == null && statusDisabled == null && statusArchived == null) {
+        if (!isFiltering()) {
             sqlBuilder.addWhereAlwaysInclude();
         } else {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);

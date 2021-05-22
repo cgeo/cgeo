@@ -36,17 +36,25 @@ public abstract class LogicalGeocacheFilter implements IGeocacheFilter {
 
     @Override
     public String toUserDisplayableString(final int level) {
-        if (getChildren().size() > 3 || level >= 2) {
+        final int filteringChildrenCnt = getFilteringChildrenCount();
+        if (filteringChildrenCnt == 0) {
+            return null;
+        }
+
+        if (filteringChildrenCnt > 3 || level >= 2) {
             return LocalizationUtils.getString(R.string.cache_filter_userdisplay_complex);
         }
         final String typeString = getUserDisplayableType();
         final StringBuilder sb = new StringBuilder();
-        final boolean needParentheses = level > 0 && getChildren().size() > 1;
+        final boolean needParentheses = level > 0 && filteringChildrenCnt > 1;
         if (needParentheses) {
             sb.append("(");
         }
         boolean first = true;
         for (IGeocacheFilter child : getChildren()) {
+            if (!child.isFiltering()) {
+                continue;
+            }
             if (!first) {
                 sb.append(typeString);
             }
@@ -61,5 +69,20 @@ public abstract class LogicalGeocacheFilter implements IGeocacheFilter {
     }
 
     protected abstract String getUserDisplayableType();
+
+    private int getFilteringChildrenCount() {
+        int cnt = 0;
+        for (IGeocacheFilter child : getChildren()) {
+            if (child.isFiltering()) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+
+    @Override
+    public boolean isFiltering() {
+        return getFilteringChildrenCount() > 0;
+    }
 
 }

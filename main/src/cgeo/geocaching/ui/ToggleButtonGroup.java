@@ -76,17 +76,17 @@ public class ToggleButtonGroup extends LinearLayout {
         for (String v : values) {
             final ToggleButton tb = createAddButton(v, idx >= valueWidth.size() ? null : valueWidth.get(idx));
             final int bIdx = idx++;
-            tb.setOnClickListener(vv -> selectValue(bIdx));
+            tb.setOnClickListener(vv -> setSelectedValue(bIdx));
             buttons.add(tb);
         }
-        selectValue(Math.max(selected, 0), true);
+        setSelectedValue(Math.max(selected, 0), true);
     }
 
-    public void selectValue(final int idx) {
-        selectValue(idx, false);
+    public void setSelectedValue(final int idx) {
+        setSelectedValue(idx, false);
     }
 
-    private void selectValue(final int idx, final boolean force) {
+    private void setSelectedValue(final int idx, final boolean force) {
 
         if (force || idx != selected) {
             int i = 0;

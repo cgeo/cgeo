@@ -17,13 +17,13 @@ import com.google.android.material.chip.ChipGroup;
 
 public class ToggleButtonFilterViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
 
-    private final ValueGroupFilterAccessor<T, ?, F> filterAccessor;
+    private final ValueGroupFilterAccessor<T, F> filterAccessor;
     private final ToggleButton[] valueButtons;
 
     private ToggleButton selectAllNoneButton;
     private boolean selectAllNoneChecked = true;
 
-    public ToggleButtonFilterViewHolder(final ValueGroupFilterAccessor<T, ?, F> filterAccessor) {
+    public ToggleButtonFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
         this.filterAccessor = filterAccessor;
         this.valueButtons = new ToggleButton[filterAccessor.getSelectableValuesAsArray().length];
     }
@@ -84,7 +84,7 @@ public class ToggleButtonFilterViewHolder<T, F extends IGeocacheFilter> extends 
     public void setViewFromFilter(final F filter) {
         final Collection<T> set = filterAccessor.getValues(filter);
         for (int i = 0; i < filterAccessor.getSelectableValues().size(); i++) {
-            valueButtons[i].setChecked(set.contains(filterAccessor.getSelectableValuesAsArray()[i]));
+            valueButtons[i].setChecked(set.isEmpty() || set.contains(filterAccessor.getSelectableValuesAsArray()[i]));
         }
         checkAndSetAllNoneValue();
     }
@@ -93,9 +93,11 @@ public class ToggleButtonFilterViewHolder<T, F extends IGeocacheFilter> extends 
     public F createFilterFromView() {
         final F filter = createFilter();
         final Set<T> set = new HashSet<>();
-        for (int i = 0; i < filterAccessor.getSelectableValues().size(); i++) {
-            if (valueButtons[i].isChecked()) {
-                set.add(filterAccessor.getSelectableValuesAsArray()[i]);
+        if (!selectAllNoneChecked) {
+            for (int i = 0; i < filterAccessor.getSelectableValues().size(); i++) {
+                if (valueButtons[i].isChecked()) {
+                    set.add(filterAccessor.getSelectableValuesAsArray()[i]);
+                }
             }
         }
         filterAccessor.setValues(filter, set);

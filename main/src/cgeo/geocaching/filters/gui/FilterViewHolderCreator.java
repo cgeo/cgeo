@@ -6,7 +6,8 @@ import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
-import cgeo.geocaching.filters.core.ValueGroupGeocacheFilter;
+import cgeo.geocaching.filters.core.SizeGeocacheFilter;
+import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
 
 import android.app.Activity;
@@ -46,25 +47,16 @@ public class FilterViewHolderCreator {
                 result = new StringFilterViewHolder<>();
                 break;
             case TYPE:
-                //gc.com groups in their search their cache types as follows:
-                //* "Tradi" also includes: GCHQ, PROJECT_APE
-                //* "Event" also includes:CITO,mega,giga, gps_exhibit,commun_celeb, gchq_celeb, block_party
-                //-> unlike gc.com, currently CITO is an OWN search box below (to make number even)
                 result = new CheckboxFilterViewHolder<>(
-                    ValueGroupFilterAccessor.<CacheType, CacheType, ValueGroupGeocacheFilter<CacheType>>createForValueGroupFilter()
+                    ValueGroupFilterAccessor.<CacheType, TypeGeocacheFilter>createForValueGroupFilter()
                         .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
                             CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.ADVLAB, CacheType.USER_DEFINED))
-                        .addDisplayValues(CacheType.TRADITIONAL, CacheType.TRADITIONAL, CacheType.GCHQ, CacheType.PROJECT_APE)
-                        .addDisplayValues(CacheType.EVENT, CacheType.EVENT, CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.COMMUN_CELEBRATION,
-                            CacheType.GCHQ_CELEBRATION, CacheType.GPS_EXHIBIT, CacheType.BLOCK_PARTY)
-                        .addDisplayValues(CacheType.VIRTUAL, CacheType.VIRTUAL, CacheType.LOCATIONLESS)
-                        .addDisplayValues(CacheType.USER_DEFINED, CacheType.USER_DEFINED, CacheType.UNKNOWN)
                         .setValueDisplayTextGetter(CacheType::getShortL10n)
                         .setValueDrawableGetter(ct -> ct.markerId) , 2);
                 break;
             case SIZE:
                 result = new ToggleButtonFilterViewHolder<>(
-                    ValueGroupFilterAccessor.<CacheSize, CacheSize, ValueGroupGeocacheFilter<CacheSize>>createForValueGroupFilter()
+                    ValueGroupFilterAccessor.<CacheSize, SizeGeocacheFilter>createForValueGroupFilter()
                         .setSelectableValues(CacheSize.values())
                         .setValueDisplayTextGetter(CacheSize::getL10n));
                 break;
@@ -141,7 +133,7 @@ public class FilterViewHolderCreator {
     private static IFilterViewHolder<?> createTerrainDifficultyFilterViewHolder() {
         final Float[] range = new Float[]{1.0f, 1.5f, 2.0f, 2.5f, 3.0f, 3.5f, 4.0f, 4.5f, 5.0f};
         return new ItemRangeSelectorViewHolder<>(
-            new ValueGroupFilterAccessor<Float, Float, NumberRangeGeocacheFilter<Float>>()
+            new ValueGroupFilterAccessor<Float, NumberRangeGeocacheFilter<Float>>()
                 .setSelectableValues(range)
                 .setFilterValueGetter(f -> f.getValuesInRange(range))
                 .setFilterValueSetter(NumberRangeGeocacheFilter::setRangeFromValues)

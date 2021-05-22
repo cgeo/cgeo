@@ -166,7 +166,7 @@ public class GeocacheFilter {
     }
 
     public boolean hasFilter() {
-        return tree != null;
+        return tree != null && tree.isFiltering();
     }
 
     public String toConfig() {
@@ -216,8 +216,11 @@ public class GeocacheFilter {
         if (getTree() == null) {
             return LocalizationUtils.getString(R.string.cache_filter_userdisplay_none);
         }
-
-        return getTree().toUserDisplayableString(0);
+        final String udsTree = getTree().toUserDisplayableString(0);
+        if (udsTree == null) {
+            return LocalizationUtils.getString(R.string.cache_filter_userdisplay_none);
+        }
+        return udsTree;
     }
 
 }

@@ -76,6 +76,11 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
+    public boolean isFiltering() {
+        return !attributes.isEmpty();
+    }
+
+    @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         if (attributes.isEmpty()) {
             sqlBuilder.addWhereAlwaysInclude();

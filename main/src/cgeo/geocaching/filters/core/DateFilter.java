@@ -79,6 +79,10 @@ public class DateFilter  {
         }
     }
 
+    public boolean isFilled() {
+        return minDate != null || maxDate != null;
+    }
+
     public void addToSql(final SqlBuilder sqlBuilder, final String valueExpression) {
 
         //convert long to date in SQLite: date(hidden/1000, 'unixepoch')

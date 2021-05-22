@@ -75,7 +75,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
     }
 
     private void setFromBoolean(final ToggleButtonGroup tbg, final Boolean status) {
-        tbg.selectValue(status == null ? 0 : (status ? 2 : 1));
+        tbg.setSelectedValue(status == null ? 0 : (status ? 2 : 1));
     }
 
     private Boolean getFromGroup(final ToggleButtonGroup tbg) {
