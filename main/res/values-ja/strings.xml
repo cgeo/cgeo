@@ -433,6 +433,7 @@
     <string name="about_system_write_logcat_type_extended">拡張</string>
     <string name="about_system_write_logcat_success">ログファイル「%1$s」はフォルダ「%2$s」に保存されました</string>
     <string name="about_system_write_logcat_error">ログファイルの書き込みエラー</string>
+    <string name="about_system_write_infos_downloadmanager">ダウンロードを表示</string>
     <string name="changelog_github">すべての変更の一覧</string>
     <string name="about_nutshellmanual">マニュアル</string>
     <string name="about_contributors_carnerodetails">c:geoの父として</string>
