@@ -114,7 +114,7 @@ public class ImageListFragment extends Fragment {
 
     /** sets the list of images to display in this fragment */
     public void setImages(final List<Image> images) {
-        imageList.submitList(images);
+        imageList.setItems(images);
     }
 
     /** clears the list of images to display in this fragment */
@@ -156,7 +156,7 @@ public class ImageListFragment extends Fragment {
             imageHelper.getImageFromCamera(geocode, false));
 
         if (savedState != null) {
-            imageList.submitList(savedState.getParcelableArrayList(SAVED_STATE_IMAGELIST));
+            imageList.setItems(savedState.getParcelableArrayList(SAVED_STATE_IMAGELIST));
             imageHelper.setState(savedState.getBundle(SAVED_STATE_IMAGEHELPER));
         }
     }

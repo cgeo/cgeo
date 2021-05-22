@@ -14,7 +14,7 @@ public  class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     private boolean percentage = false;
 
     public FavoritesGeocacheFilter() {
-        super(Float::valueOf, f -> f);
+        super(Float::valueOf);
     }
 
     public boolean isPercentage() {

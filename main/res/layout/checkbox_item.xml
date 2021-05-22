@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingTop="4dp"
     android:paddingBottom="4dp">
 
@@ -11,26 +11,38 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_centerVertical="true" />
-    <TextView
-        android:id="@+id/item_text"
+
+    <RelativeLayout
+        android:id="@+id/item_text_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:lines="1"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:textColor="?text_color"
-        android:layout_marginLeft="46dp"
-        android:layout_centerVertical="true" />
-    <ImageView
-        android:id="@+id/item_info"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:visibility="gone"
-        android:src="?attr/info_icon"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="30dp"
-        android:layout_toRightOf="@+id/item_text"
-        android:layout_centerVertical="true" />
+        android:layout_toLeftOf="@+id/item_checkbox"
+        android:layout_toRightOf="@+id/item_icon"
+        android:layout_centerVertical="true"
+        >
+
+        <TextView
+            android:id="@+id/item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:lines="1"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="?text_color"
+            android:layout_marginLeft="6dp"
+            android:layout_centerVertical="true" />
+        <ImageView
+            android:id="@+id/item_info"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:visibility="gone"
+            android:src="?attr/info_icon"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_toRightOf="@+id/item_text"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
     <CheckBox
         android:id="@+id/item_checkbox"
         android:layout_width="30dp"

@@ -10,20 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-
-import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * Adapter for {@link RecyclerView} which also maintains the list of current elements inside it.
@@ -31,7 +25,7 @@ import org.apache.commons.lang3.ObjectUtils;
  * the necessary "notify" methods on adapter so list animations can work as expected.
  *
  * Adapter supports following additional features: <ul>
- * <li>Support for swapping whole lists using {@link #submitList(List)} methods</li>
+ * <li>Support for swapping whole lists using {@link #setItems(List)} methods</li>
  * <li>Support for lists where view also changed when position of item is NOT changed (using {@link Config#setNotifyOnPositionChange(boolean)}</li>
  * <li>Support for including drag/drop using {@link Config#setSupportDragDrop(boolean)}, {@link #registerStartDrag(RecyclerView.ViewHolder, View)} and {@link ItemTouchHelper} in the background</li>
  * <li>AUtomatically adapting to dark/light theme of c:geo for drap/drop support</li>
@@ -43,13 +37,12 @@ import org.apache.commons.lang3.ObjectUtils;
  * @param <T> class of items in the list managed by this adapter
  * @param <V> viewholder class
  */
-public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> extends ListAdapter<T, V> {
+public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<V> {
 
-    private List<T> itemList = new ArrayList<>();
-    private List<T> itemListReadonly = Collections.unmodifiableList(itemList);
+    private final List<T> itemList = new ArrayList<>();
+    private final List<T> itemListReadonly = Collections.unmodifiableList(itemList);
 
     private final boolean notifyOnPositionChange;
-    private final boolean supportDragDrop;
     private ItemTouchHelper touchHelper = null;
 
     /**
@@ -86,35 +79,26 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
     }
 
     protected ManagedListAdapter(final Config builder) {
-        super(new DiffUtil.ItemCallback<T>() {
-            @Override
-            public boolean areItemsTheSame(@NonNull final T oldItem, @NonNull final T newItem) {
-                //I would really simply write the following line, but it is forbidden by Codacy:
-                //return oldItem == newItem;
-
-                //So I compare identity strings instead
-                return Objects.equals(ObjectUtils.identityToString(oldItem), ObjectUtils.identityToString(newItem));
-            }
-
-            @Override
-            public boolean areContentsTheSame(@NonNull final T oldItem, @NonNull final T newItem) {
-                return Objects.equals(oldItem, newItem);
-            }
-        });
-        this.supportDragDrop = builder.supportDragDrop;
+       final boolean supportDragDrop = builder.supportDragDrop;
         this.notifyOnPositionChange = builder.notifyOnPositionChange;
 
         //initialize adapter
-        submitList(itemList);
+        setItems(itemList);
 
         //initialize recyclerView (but don't store a reference to it!)
         builder.recyclerView.setAdapter(this);
         builder.recyclerView.setLayoutManager(new LinearLayoutManager(builder.recyclerView.getContext()));
-        if (this.supportDragDrop) {
+        if (supportDragDrop) {
             this.touchHelper = createItemTouchHelper();
             this.touchHelper.attachToRecyclerView(builder.recyclerView);
         }
     }
+
+    @Override
+    public int getItemCount() {
+        return itemList.size();
+    }
+
 
     private ItemTouchHelper createItemTouchHelper() {
         return new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
@@ -124,8 +108,8 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
             @Override
             public boolean onMove(@NonNull final RecyclerView recyclerView, @NonNull final RecyclerView.ViewHolder viewHolder, @NonNull final RecyclerView.ViewHolder target) {
                 //Note: do NOT use method "swapItems" here, because the "notifyItemChanged" calls sometimes stop the drag for some reason
-                final int srcIdx = viewHolder.getAdapterPosition();
-                final int trgIdx = target.getAdapterPosition();
+                final int srcIdx = viewHolder.getBindingAdapterPosition();
+                final int trgIdx = target.getBindingAdapterPosition();
                 if (srcIdx != trgIdx) {
                     Collections.swap(itemList, srcIdx, trgIdx);
                     notifyItemMoved(srcIdx, trgIdx);
@@ -147,7 +131,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
 
                     //if DRAG starts, remember starting position
                     if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
-                        currentDragItemStart = viewHolder.getAdapterPosition();
+                        currentDragItemStart = viewHolder.getBindingAdapterPosition();
                     }
 
                      //mark view as "selected"
@@ -167,8 +151,8 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
 
                 //if necessary, pass change event to views with position change
                 if (currentDragItemStart >= 0) {
-                    if (notifyOnPositionChange && currentDragItemStart != viewHolder.getAdapterPosition()) {
-                        notifyItemRangeChanged(Math.min(currentDragItemStart, viewHolder.getAdapterPosition()), Math.abs(currentDragItemStart - viewHolder.getAdapterPosition()) + 1);
+                    if (notifyOnPositionChange && currentDragItemStart != viewHolder.getBindingAdapterPosition()) {
+                        notifyItemRangeChanged(Math.min(currentDragItemStart, viewHolder.getBindingAdapterPosition()), Math.abs(currentDragItemStart - viewHolder.getAdapterPosition()) + 1);
                     }
                     currentDragItemStart = -1;
 
@@ -190,7 +174,6 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
      * Return only READONLY list to prevent unwanted modifications
      */
     @NonNull
-    @Override
     public List<T> getCurrentList() {
         return itemListReadonly;
     }
@@ -199,41 +182,26 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
         return getCurrentList();
     }
 
-    @Override
     public T getItem(final int pos) {
         if (!checkIdx(pos)) {
             return null;
         }
-        return super.getItem(pos);
+        return itemList.get(pos);
     }
 
     public void clearList() {
-        submitList(Collections.emptyList(), null);
+        setItems(Collections.emptyList());
     }
 
-    @Override
-    public void submitList(final List<T> list) {
-        this.submitList(list, null);
-    }
-
-    @Override
-    public void submitList(@Nullable final List<T> list, @Nullable final Runnable commitCallback) {
-        final List<T> newList =  new ArrayList<>(list == null ? Collections.emptyList() : list);
-
-        Runnable usedRunnable = commitCallback;
-        if (this.notifyOnPositionChange) {
-            usedRunnable = () -> {
-                //change event will trigger recall of "onBindView"
-                this.notifyItemRangeChanged(0, newList.size());
-                if (commitCallback != null) {
-                    commitCallback.run();
-                }
-            };
-        }
-
-        super.submitList(newList, usedRunnable);
-        this.itemList = newList;
-        this.itemListReadonly = Collections.unmodifiableList(this.itemList);
+    public void setItems(final List<T> list) {
+        final int oldSize = this.itemList.size();
+        this.itemList.clear();
+        this.itemList.addAll(list);
+        //tell the recycler view that all the old items are gone
+        notifyItemRangeRemoved(0, oldSize);
+        //tell the recycler view how many new items we added
+        notifyItemRangeInserted(0, this.itemList.size());
+        //this.notifyItemRangeChanged(0, this.itemList.size());
     }
 
     public void swapItems(final int srcIdx, final int trgIdx) {
@@ -263,16 +231,17 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
         this.notifyItemInserted(pos);
     }
 
-    public void removeItem(final int pos) {
+    public T removeItem(final int pos) {
         if (!checkIdx(pos)) {
-            return;
+            return null;
         }
-        this.itemList.remove(pos);
+        final T item = this.itemList.remove(pos);
         this.notifyItemRemoved(pos);
 
         if (this.notifyOnPositionChange) {
             this.notifyItemRangeChanged(pos, this.itemList.size() - pos);
         }
+        return item;
     }
 
     public void updateItem(final T item, final int pos) {

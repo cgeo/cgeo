@@ -48,6 +48,7 @@ public abstract class BaseFilterViewHolder<T extends IGeocacheFilter> implements
         if (activity != null && activity.getWindow() != null && activity.getWindow().getDecorView() != null && activity.getWindow().getDecorView().getRootView() instanceof ViewGroup) {
             this.root = (ViewGroup) activity.getWindow().getDecorView().getRootView();
         }
+        this.view = createView();
     }
 
     protected T createFilter() {

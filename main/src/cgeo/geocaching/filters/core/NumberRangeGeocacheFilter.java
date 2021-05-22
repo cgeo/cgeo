@@ -12,17 +12,15 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 
-public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable> extends BaseGeocacheFilter {
+public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>> extends BaseGeocacheFilter {
 
     private T minRangeValue;
     private T maxRangeValue;
 
     private final Func1<String, T> numberParser;
-    private final Func1<Float, T> floatConverter;
 
-    public NumberRangeGeocacheFilter(final Func1<String, T> numberParser, final Func1<Float, T> floatConverter) {
+    public NumberRangeGeocacheFilter(final Func1<String, T> numberParser) {
         this.numberParser = numberParser;
-        this.floatConverter = floatConverter;
     }
 
     protected abstract T getValue(Geocache cache);
@@ -78,10 +76,13 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable> e
         T min = null;
         T max = null;
         for (T v : values) {
-            if (values.contains(v)) {
-                if (min == null) {
-                    min = v;
-                }
+            if (v == null) {
+                continue;
+            }
+            if (min == null || min.compareTo(v) >= 0) {
+                min = v;
+            }
+            if (max == null || max.compareTo(v) <= 0) {
                 max = v;
             }
         }
@@ -106,18 +107,6 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable> e
             return this.numberParser.call(text);
         } catch (Exception e) {
             Log.w("Problem parsing '" + text + "' as a number", e);
-            return null;
-        }
-    }
-
-    private T parseFloat(final Float f) {
-        if (f == null) {
-            return null;
-        }
-        try {
-            return this.floatConverter.call(f);
-        } catch (Exception e) {
-            Log.w("Problem convering float '" + f + "' to a number", e);
             return null;
         }
     }
@@ -153,12 +142,7 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable> e
 
     @Override
     protected String getUserDisplayableConfig() {
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(minRangeValue == null ? "*" : minRangeValue);
-        sb.append("-");
-        sb.append(maxRangeValue == null ? "*" : maxRangeValue);
-        return sb.toString();
+        return (minRangeValue == null ? "*" : minRangeValue) + "-" + (maxRangeValue == null ? "*" : maxRangeValue);
     }
 
 }

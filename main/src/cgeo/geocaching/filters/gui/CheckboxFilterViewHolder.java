@@ -9,25 +9,35 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jetbrains.annotations.Nullable;
 
 public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
 
-    private final ValueGroupFilterAccessor<T, F> filterAccessor;
+    private final ValueGroupFilterAccessor<T, ?, F> filterAccessor;
     private final CheckBox[] valueCheckboxes;
 
     private CheckBox selectAllNoneCheckbox;
     private boolean selectAllNoneBroadcast = true;
 
-    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
+    private final int columnCount;
+
+    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, ?, F> filterAccessor) {
+        this(filterAccessor, 1);
+    }
+
+    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, ?, F> filterAccessor, final int colCount) {
         this.filterAccessor = filterAccessor;
         this.valueCheckboxes = new CheckBox[filterAccessor.getSelectableValuesAsArray().length];
+        this.columnCount = colCount;
     }
 
 
@@ -41,24 +51,50 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
+        final List<Float> columnWidths = new ArrayList<>();
+        for (int c = 0 ; c < columnCount * 2 - 1; c++) {
+            columnWidths.add(c % 2 == 0 ? 1f : 0.1f);
+        }
+
         //selectall/none
         if (filterAccessor.getSelectableValuesAsArray().length > 1) {
-            selectAllNoneCheckbox = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_checkboxlist_selectallnone, R.drawable.ic_menu_selectall, 0);
-            selectAllNoneCheckbox.setOnCheckedChangeListener((v, c) -> {
-                if (!selectAllNoneBroadcast) {
-                    return;
+
+            ll.addView(ViewUtils.createHorizontallyDistributedViews(getActivity(), null, columnWidths, (i, f) -> {
+                if (i < columnWidths.size() - 1) {
+                    return null;
                 }
-                for (final CheckBox cb : this.valueCheckboxes) {
-                    cb.setChecked(c);
-                }
-            });
+                final ImmutablePair<View, CheckBox> ip = ViewUtils.createCheckboxItem(getActivity(), ll, getActivity().getString(R.string.cache_filter_checkboxlist_selectallnone), R.drawable.ic_menu_selectall, 0);
+                selectAllNoneCheckbox = ip.right;
+                selectAllNoneCheckbox.setOnCheckedChangeListener((v, c) -> {
+                    if (!selectAllNoneBroadcast) {
+                        return;
+                    }
+                    for (final CheckBox cb : this.valueCheckboxes) {
+                        cb.setChecked(c);
+                    }
+                });
+                return ip.left;
+            }, (i, f) -> f));
         }
+
+        final List<LinearLayout> columns = new ArrayList<>();
+        ll.addView(ViewUtils.createHorizontallyDistributedViews(getActivity(), null, columnWidths, (i, f) -> {
+            if (i % 2 == 1) {
+                //column separator
+                return ViewUtils.createVerticalSeparator(getActivity());
+            }
+            final LinearLayout colLl = new LinearLayout(getActivity());
+            columns.add(colLl);
+            colLl.setOrientation(LinearLayout.VERTICAL);
+            return colLl;
+        }, (i, f) -> f));
+
 
         int idx = 0;
         for (T value : filterAccessor.getSelectableValuesAsArray()) {
 
             final String vText = this.filterAccessor.getDisplayText(value) + (showStatistics ? " (" + (stats.containsKey(value) ? "" + stats.get(value) : "0") + (statsAreComplete ? "" : "+") + ")" : "");
-            this.valueCheckboxes[idx] = ViewUtils.addCheckboxItem(getActivity(), ll, vText, this.filterAccessor.getIconFor(value), 0);
+            this.valueCheckboxes[idx] = ViewUtils.addCheckboxItem(getActivity(), columns.get(idx % columns.size()), vText, this.filterAccessor.getIconFor(value), 0);
             this.valueCheckboxes[idx].setChecked(true);
             if (selectAllNoneCheckbox != null) {
                 this.valueCheckboxes[idx].setOnCheckedChangeListener((v, c) -> {

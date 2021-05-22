@@ -17,13 +17,13 @@ import com.google.android.material.chip.ChipGroup;
 
 public class ToggleButtonFilterViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
 
-    private final ValueGroupFilterAccessor<T, F> filterAccessor;
+    private final ValueGroupFilterAccessor<T, ?, F> filterAccessor;
     private final ToggleButton[] valueButtons;
 
     private ToggleButton selectAllNoneButton;
     private boolean selectAllNoneChecked = true;
 
-    public ToggleButtonFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
+    public ToggleButtonFilterViewHolder(final ValueGroupFilterAccessor<T, ?, F> filterAccessor) {
         this.filterAccessor = filterAccessor;
         this.valueButtons = new ToggleButton[filterAccessor.getSelectableValuesAsArray().length];
     }
