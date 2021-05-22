@@ -1,5 +1,3 @@
-## Son sürüm
-
 ### Gelişmiş filtre sistemi (deneysel)
 - c:geo için esnek, kombine edilebilir ve kaydedilebilir yeni bir filtre sistemini sunarız.
 - Hem Geocache listesinde hem de harita görünümünde mevcut
