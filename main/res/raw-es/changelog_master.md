@@ -1,5 +1,3 @@
-## Nightly build
-
 ### Advanced filtering system (experimental)
 - Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
 - Available in both cache lists and map view
