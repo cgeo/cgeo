@@ -465,7 +465,6 @@
     <string name="cache_filter_stringfilter_type_pattern">Patern</string>
     <string name="cache_filter_datefilter_label_from">Buradan:</string>
     <string name="cache_filter_datefilter_label_to">Buraya:</string>
-    <string name="cache_filter_checkboxlist_selectallnone">Tümünü/Hiçbirini seç</string>
     <string name="cache_filter_favorites_absolute">Mutlak</string>
     <string name="cache_filter_favorites_percentage">Yüzde</string>
     <string name="cache_filter_distance_use_current_position">Mevcut konumu kullan</string>
