@@ -1,5 +1,3 @@
-## Yöllinen koontiversio
-
 ### Kehittynyt suodatusjärjestelmä (kokeellinen)
 - Esittelyssä uusi suodatusjärjestelmä c:geoon, joka tukee joustavia, yhdistettävissä olevia ja varastoitavia suodattimia
 - Saatavilla sekä kätkölistoissa että karttanäkymässä
@@ -13,11 +11,11 @@
 - Uusi: Käytä Google-kääntäjän ponnahdusikkunaa sovelluksessa
 - Uusi: Salli kätkön kuvakkeen muokkaus kätkön tietojen ponnahdusikkunan kautta pitkällä painalluksella (vain tallennetut kätköt)
 
-### Downloader
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+### Lataaja
+- Muutos: Ladattu tiedosto korvaa automaattisesti olemassa olevat tiedostot, joilla on sama nimi
+- Muutos: Jos kartta vaatii tietyn teeman, jota ei ole vielä asennettu, c:geo lataa ja asentaa teeman automaattisesti
 
-### Other
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### Muut
+- Uusi: Lataa kirjanmerkkilistat geocaching.comista - katso "Listat / Pocket Queryt" päävalikosta
+- Uusi: Poistetaan geocaching.su:n käyttö
+- Muutos: Poistettu RMAPS navigointisovellus, jota ei ole enää pidetty yllä
