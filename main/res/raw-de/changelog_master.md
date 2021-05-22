@@ -1,5 +1,3 @@
-## Nightly-Build
-
 ### Erweitertes Filtersystem (experimentell)
 - c:geo führt ein neues Filtersystem ein, das flexible, kombinierbare und speicherbare Filter umfasst
 - Verfügbar sowohl in Cachelisten als auch in der Karte
