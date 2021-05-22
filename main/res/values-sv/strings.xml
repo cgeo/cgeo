@@ -1822,9 +1822,6 @@
     <string name="localfile_title">Välj en fil lokalt</string>
     <string name="localfile_cannot_handle">Fel vid läsning av fil, eller så c:geo kan inte hantera denna filtyp.</string>
     <!-- ReceiveDownloadActivity -->
-    <string name="receivedownload_alreadyexists">En kartfil med detta namn finns redan. Ska filen skrivas över eller sparas med ett annat namn?</string>
-    <string name="receivedownload_option_overwrite">Skriv över</string>
-    <string name="receivedownload_option_differentname">Annat namn</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Ladda ner kartor för användning offline</string>
     <string name="downloadmap_info">Välj en kartfil för din region genom att trycka på \"Spara\"-ikonen.\n\nNedladdningen sker i bakgrunden. När överföringen är klar kopieras filen till mappen c:geo och anges som den aktuella kartan.\n\nVar försiktig: Att ladda ner en karta kan orsaka hög nätverkstrafik!</string>
