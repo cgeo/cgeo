@@ -450,7 +450,6 @@
     <string name="cache_filter_stringfilter_type_starts_with">Begint met</string>
     <string name="cache_filter_stringfilter_type_ends_with">Eindigt met</string>
     <string name="cache_filter_stringfilter_type_pattern">Patroon</string>
-    <string name="cache_filter_checkboxlist_selectallnone">Selecteer alles/niets</string>
     <string name="cache_filter_favorites_absolute">Absoluut</string>
     <string name="cache_filter_favorites_percentage">Percentage</string>
     <string name="cache_filter_distance_use_current_position">Huidige positie gebruiken</string>
@@ -1922,9 +1921,6 @@
     <string name="receivedownload_error">Fout bij ontvangen van bestand</string>
     <string name="receivedownload_error_io_exception">I/O fout tijdens het ontvangen van een kaartbestand. Is je kaartenmap \"%s\" beschrijfbaar?</string>
     <string name="receivedownload_error_filenotfound_exception">Bestand niet gevonden fout tijdens het ontvangen van bestand.</string>
-    <string name="receivedownload_alreadyexists">Een bestand met deze naam bestaat al. Bestaande bestanden overschrijven of het bestand opslaan onder een andere naam?</string>
-    <string name="receivedownload_option_overwrite">Overschrijven</string>
-    <string name="receivedownload_option_differentname">Andere naam</string>
     <string name="receivedownload_amount_copied">%s gekopieerd</string>
     <string name="receivedownload_cancelled">Bestandsoverdracht geannuleerd</string>
     <!-- Download map preference and menu entry -->
