@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
 
-    private final ValueGroupFilterAccessor<T, ?, F> filterAccessor;
+    private final ValueGroupFilterAccessor<T, F> filterAccessor;
     private final CheckBox[] valueCheckboxes;
 
     private CheckBox selectAllNoneCheckbox;
@@ -30,11 +30,11 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
 
     private final int columnCount;
 
-    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, ?, F> filterAccessor) {
+    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
         this(filterAccessor, 1);
     }
 
-    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, ?, F> filterAccessor, final int colCount) {
+    public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final int colCount) {
         this.filterAccessor = filterAccessor;
         this.valueCheckboxes = new CheckBox[filterAccessor.getSelectableValuesAsArray().length];
         this.columnCount = colCount;
@@ -149,7 +149,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     public void setViewFromFilter(final F filter) {
         final Collection<T> set = filterAccessor.getValues(filter);
         for (int i = 0; i < filterAccessor.getSelectableValuesAsArray().length; i++) {
-            this.valueCheckboxes[i].setChecked(set.contains(filterAccessor.getSelectableValuesAsArray()[i]));
+            this.valueCheckboxes[i].setChecked(set.isEmpty() || set.contains(filterAccessor.getSelectableValuesAsArray()[i]));
         }
     }
 
@@ -157,9 +157,11 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     public F createFilterFromView() {
         final F filter = createFilter();
         final Set<T> set = new HashSet<>();
-        for (int i = 0; i < filterAccessor.getSelectableValuesAsArray().length; i++) {
-            if (this.valueCheckboxes[i].isChecked()) {
-                set.add(filterAccessor.getSelectableValuesAsArray()[i]);
+        if (!this.selectAllNoneCheckbox.isChecked()) {
+            for (int i = 0; i < filterAccessor.getSelectableValuesAsArray().length; i++) {
+                if (this.valueCheckboxes[i].isChecked()) {
+                    set.add(filterAccessor.getSelectableValuesAsArray()[i]);
+                }
             }
         }
         filterAccessor.setValues(filter, set);

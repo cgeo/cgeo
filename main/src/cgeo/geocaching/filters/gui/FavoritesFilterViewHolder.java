@@ -80,7 +80,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
 
     @Override
     public void setViewFromFilter(final FavoritesGeocacheFilter filter) {
-        percentage.selectValue(filter.isPercentage() ? 1 : 0);
+        percentage.setSelectedValue(filter.isPercentage() ? 1 : 0);
         resetSliderScale();
         slider.setRange(filter.getMinRangeValue() == null ? -10f : filter.getMinRangeValue(), filter.getMaxRangeValue() == null ? 1500f : filter.getMaxRangeValue());
     }

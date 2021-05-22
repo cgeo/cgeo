@@ -16,13 +16,13 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class ItemRangeSelectorViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
 
-    private final ValueGroupFilterAccessor<T, ?, F> filterAccessor;
+    private final ValueGroupFilterAccessor<T, F> filterAccessor;
     private final Map<T, Integer> itemsToPosition = new HashMap<>();
     private final Func2<Integer, T, String> axisLabelMapper;
 
     private ItemRangeSlider<T> slider;
 
-    public ItemRangeSelectorViewHolder(final ValueGroupFilterAccessor<T, ?, F> filterAccessor, final Func2<Integer, T, String> axisLabelMapper) {
+    public ItemRangeSelectorViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor, final Func2<Integer, T, String> axisLabelMapper) {
         this.filterAccessor = filterAccessor;
         int idx = 0;
         for (T item : filterAccessor.getSelectableValuesAsArray()) {
@@ -47,7 +47,7 @@ public class ItemRangeSelectorViewHolder<T, F extends IGeocacheFilter> extends B
             max = Math.max(idx, max);
         }
 
-        if (max < 0) {
+        if (max < 0 || filterAccessor.getValues(filter).isEmpty()) {
             slider.setRangeAll();
         } else {
             slider.setRange(filterAccessor.getSelectableValuesAsArray()[min], filterAccessor.getSelectableValuesAsArray()[max]);
@@ -69,8 +69,10 @@ public class ItemRangeSelectorViewHolder<T, F extends IGeocacheFilter> extends B
         final int minIdx = itemsToPosition.get(range.left);
         final int maxIdx = itemsToPosition.get(range.right);
         final Set<T> values = new HashSet<>();
-        for (int i = minIdx; i <= maxIdx; i++) {
-            values.add(filterAccessor.getSelectableValuesAsArray()[i]);
+        if (minIdx > 0 || maxIdx + 1 < filterAccessor.getSelectableValuesAsArray().length) {
+            for (int i = minIdx; i <= maxIdx; i++) {
+                values.add(filterAccessor.getSelectableValuesAsArray()[i]);
+            }
         }
         filterAccessor.setValues(filter, values);
         return filter;

@@ -41,6 +41,11 @@ public abstract class StringGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
+    public boolean isFiltering() {
+        return stringFilter.isFilled();
+    }
+
+    @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         final String colName = getSqlColumnName();
         if (colName != null) {

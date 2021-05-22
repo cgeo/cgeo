@@ -6,24 +6,41 @@ import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang3.BooleanUtils;
+/**
+ * Base class for filters where a cache can have one value out of a group of values
+ * (e.g. cache type, cache size etc). Filter checks whether the cache value is in a to-be-filtered set of such values.
+ *
+ * This class supports grouping of selectable values, e.g. a bunch of selectable values can be grouped,
+ * and by selecing the group the filter checks for the cache to have any "raw" value assigned to this group
+ * @param <T> class for "raw" cache values to filter
+ * @param <G> class for "Groups". Might be same as T, in this case the filter has autosupport for
+ *           the case that each group (of class G) has exactly one (=the same) element of class T
+ */
+public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter {
+
+    private final Set<G> values = new HashSet<>();
+    private final Map<G, Set<T>> displayToValueMap = new HashMap<>();
+    private final Map<T, G> valueToDisplayMap = new HashMap<>();
 
 
-public abstract class ValueGroupGeocacheFilter<T> extends BaseGeocacheFilter {
+    public abstract T getRawCacheValue(Geocache cache);
 
-    private final Set<T> values = new HashSet<>();
-    private boolean inverse = false;
+    public abstract G valueFromString(String stringValue);
 
-    public abstract T getValue(Geocache cache);
+    public abstract String valueToString(G value);
 
-    public abstract T valueFromString(String stringValue);
-
-    public abstract String valueToString(T value);
+    public String valueToUserDisplayableValue(final G value) {
+        return String.valueOf(value);
+    }
 
     public String getSqlColumnName() {
         return null;
@@ -33,72 +50,118 @@ public abstract class ValueGroupGeocacheFilter<T> extends BaseGeocacheFilter {
         return value == null ? null : String.valueOf(value);
     }
 
-    public Set<T> getValues() {
+    @SafeVarargs
+    protected final void addDisplayValues(final G displayValue, final T... rawValues) {
+        Set<T> raw = this.displayToValueMap.get(displayValue);
+        if (raw == null) {
+            raw = new HashSet<>();
+            this.displayToValueMap.put(displayValue, raw);
+        }
+        raw.addAll(Arrays.asList(rawValues));
+        for (T rawValue : rawValues) {
+            this.valueToDisplayMap.put(rawValue, displayValue);
+        }
+    }
+
+    public Set<G> getValues() {
         return values;
     }
 
-    public void setValues(final Collection<T> set) {
+    public void setValues(final Collection<G> set) {
         values.clear();
         values.addAll(set);
     }
 
-    public void setInverse(final boolean inverse) {
-        this.inverse = inverse;
-    }
-
-    public boolean getInverse() {
-        return this.inverse;
-    }
-
     @Override
     public Boolean filter(final Geocache cache) {
+        if (values.isEmpty()) {
+            return true;
+        }
         if (cache == null) {
             return null;
         }
-        final T gcValue = getValue(cache);
-        if (gcValue == null) {
+        final G cacheValue = getCacheValue(cache);
+        if (cacheValue == null) {
             return null;
         }
-        return values.contains(gcValue) != inverse;
+        return values.contains(cacheValue);
+    }
+
+    public G getCacheValue(final Geocache cache) {
+        final T cacheValue = getRawCacheValue(cache);
+        if (cacheValue == null) {
+            return null;
+        }
+        return rawToDisplay(cacheValue);
     }
 
     @Override
     public void setConfig(final String[] value) {
-        this.inverse = value != null && value.length >= 1 && BooleanUtils.toBoolean(value[0]);
         values.clear();
-        for (int pos = 1; pos < value.length; pos ++) {
-            values.add(valueFromString(value[pos]));
+        for (String s : value) {
+            final G g = valueFromString(s);
+            if (g != null) {
+                values.add(g);
+            }
         }
     }
 
     @Override
     public String[] getConfig() {
-        final String[] result = new String[values.size() + 1];
-        result[0] = BooleanUtils.toStringTrueFalse(this.inverse);
-        int idx = 1;
-        for (T v : this.values) {
-            result[idx++] = valueToString(v);
+        final String[] result = new String[values.size()];
+        int idx = 0;
+        for (G v : this.values) {
+            final String c = valueToString(v);
+            if (c != null) {
+                result[idx++] = c;
+            }
         }
         return result;
     }
 
     @Override
+    public boolean isFiltering() {
+        return !values.isEmpty();
+    }
+
+    @SuppressWarnings("unchecked")
+    private Set<T> displayToRaw(final G value) {
+        final Set<T> raw = this.displayToValueMap.get(value);
+        if (raw == null) {
+            return new HashSet<>(Collections.singletonList((T) value));
+        }
+        return raw;
+    }
+
+    @SuppressWarnings("unchecked")
+    private G rawToDisplay(final T rawValue) {
+        final G display = this.valueToDisplayMap.get(rawValue);
+        if (display == null) {
+            return (G) rawValue;
+        }
+        return display;
+    }
+
+
+    @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         final String colName = getSqlColumnName();
         if (colName != null && !getValues().isEmpty()) {
-            final StringBuilder sb = new StringBuilder(sqlBuilder.getMainTableId() + "." + colName + " " + (inverse ? "NOT " : "") + "IN (");
+            final StringBuilder sb = new StringBuilder(sqlBuilder.getMainTableId() + "." + colName + " IN (");
             final List<String> params = new ArrayList<>();
             boolean first = true;
-            for (T v : getValues()) {
+            for (G v : getValues()) {
                 if (v == null) {
                     continue;
                 }
-                if (!first) {
-                    sb.append(",");
+                for (T rawV : displayToRaw(v)) {
+                    if (!first) {
+                        sb.append(",");
+                    }
+                    first = false;
+                    sb.append("?");
+                    params.add(valueToSqlValue(rawV));
                 }
-                first = false;
-                sb.append("?");
-                params.add(valueToSqlValue(v));
             }
             sb.append(")");
             sqlBuilder.addWhere(sb.toString(), params);
@@ -116,7 +179,7 @@ public abstract class ValueGroupGeocacheFilter<T> extends BaseGeocacheFilter {
             return LocalizationUtils.getPlural(R.plurals.cache_filter_userdisplay_multi_item, getValues().size());
         }
 
-        return valueToString(getValues().iterator().next());
+        return valueToUserDisplayableValue(getValues().iterator().next());
     }
 
 

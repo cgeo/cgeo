@@ -119,7 +119,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         for (Map.Entry<CacheAttribute, Boolean> entry : filter.getAttributes().entrySet()) {
             setAttributeState(entry.getKey(), entry.getValue());
         }
-        inverse.selectValue(filter.isInverse() ? 1 : 0);
+        inverse.setSelectedValue(filter.isInverse() ? 1 : 0);
     }
 
     @Override

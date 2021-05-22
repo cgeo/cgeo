@@ -117,6 +117,11 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
     }
 
     @Override
+    public boolean isFiltering() {
+        return minRangeValue != null || maxRangeValue != null;
+    }
+
+    @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         addRangeToSqlBuilder(sqlBuilder, getSqlColumnName() == null ? null : sqlBuilder.getMainTableId() + "." + getSqlColumnName());
     }

@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import java.util.List;
 
+/** Base implementation for common (non-logical) geocache filters */
 public abstract class BaseGeocacheFilter implements IGeocacheFilter {
 
     private GeocacheFilterType type;
@@ -20,18 +21,20 @@ public abstract class BaseGeocacheFilter implements IGeocacheFilter {
 
     @Override
     public void addChild(final IGeocacheFilter child) {
-        //no children
-
+        //common filters have no children
     }
 
     @Override
     public List<IGeocacheFilter> getChildren() {
-        //no children
+        //common filters have no children
         return null;
     }
 
     @Override
     public String toUserDisplayableString(final int level) {
+        if (!isFiltering()) {
+            return null;
+        }
         final StringBuilder sb = new StringBuilder(getType().getUserDisplayableName());
         if (level <= 2) {
             final String userDisplayValue = getUserDisplayableConfig();

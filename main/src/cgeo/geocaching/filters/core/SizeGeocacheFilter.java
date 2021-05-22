@@ -3,11 +3,11 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.models.Geocache;
 
-public class SizeGeocacheFilter extends ValueGroupGeocacheFilter<CacheSize> {
+public class SizeGeocacheFilter extends ValueGroupGeocacheFilter<CacheSize, CacheSize> {
 
 
     @Override
-    public CacheSize getValue(final Geocache cache) {
+    public CacheSize getRawCacheValue(final Geocache cache) {
         return CacheSize.UNKNOWN.equals(cache.getSize()) ? null : cache.getSize();
     }
 
@@ -15,6 +15,12 @@ public class SizeGeocacheFilter extends ValueGroupGeocacheFilter<CacheSize> {
     public CacheSize valueFromString(final String stringValue) {
         return CacheSize.valueOf(stringValue);
     }
+
+    @Override
+    public String valueToUserDisplayableValue(final CacheSize value) {
+        return value.getShortName();
+    }
+
 
     @Override
     public String valueToString(final CacheSize value) {
