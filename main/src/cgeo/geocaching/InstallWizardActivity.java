@@ -536,7 +536,8 @@ public class InstallWizardActivity extends AppCompatActivity {
                     gotoNext();
                 }, dialog -> { });
             }
-        } else if (contentStorageActivityHelper == null || !contentStorageActivityHelper.onActivityResult(requestCode, resultCode, data)) {
+        } else if ((contentStorageActivityHelper == null || !contentStorageActivityHelper.onActivityResult(requestCode, resultCode, data)) &&
+                 !backupUtils.onActivityResult(requestCode, resultCode, data)) {
             DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
         }
     }
