@@ -160,12 +160,13 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
             final String changelogMaster = FileUtils.getChangelogMaster(AboutActivity.this);
             if (StringUtils.isNotBlank(changelogMaster)) {
-                markwon.setMarkdown(binding.changelogMaster, changelogMaster);
+                markwon.setMarkdown(binding.changelogMaster, "## " + getString(R.string.about_changelog_nightly_build) + "\n\n" + changelogMaster);
             } else {
                 binding.changelogMaster.setVisibility(View.GONE);
             }
 
-            markwon.setMarkdown(binding.changelogRelease, FileUtils.getChangelogRelease(AboutActivity.this));
+            final String versionRelease = FileUtils.getRawResourceAsString(AboutActivity.this, R.raw.version_release).trim();
+            markwon.setMarkdown(binding.changelogRelease, "## " + (StringUtils.isNotBlank(versionRelease) ? versionRelease : getString(R.string.about_changelog_next_release)) + "\n\n" + FileUtils.getChangelogRelease(AboutActivity.this));
             binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(AboutActivity.this, "https://github.com/cgeo/cgeo/releases"));
             return binding.getRoot();
         }
