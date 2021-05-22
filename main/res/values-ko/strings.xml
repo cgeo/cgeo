@@ -463,7 +463,6 @@
     <string name="cache_filter_stringfilter_type_pattern">패턴</string>
     <string name="cache_filter_datefilter_label_from">시작일:</string>
     <string name="cache_filter_datefilter_label_to">종료일:</string>
-    <string name="cache_filter_checkboxlist_selectallnone">모두 선택/선택 안 함</string>
     <string name="cache_filter_favorites_absolute">절대적</string>
     <string name="cache_filter_favorites_percentage">비율</string>
     <string name="cache_filter_distance_use_current_position">현 위치 사용</string>
@@ -1922,9 +1921,6 @@
     <string name="receivedownload_error">파일을 받는 중 오류</string>
     <string name="receivedownload_error_io_exception">파일을 받는 중 I/O 오류가 발생했습니다. \"%s\"폴더에 쓰기가 가능합니까?</string>
     <string name="receivedownload_error_filenotfound_exception">파일을 받는 중 파일을 찾을 수 없음 오류가 발생했습니다.</string>
-    <string name="receivedownload_alreadyexists">이 이름의 파일이 이미 존재합니다. 기존 파일을 덮어 쓰거나 다른 이름으로 새 파일을 저장 하시겠습니까?</string>
-    <string name="receivedownload_option_overwrite">덮어쓰기</string>
-    <string name="receivedownload_option_differentname">다른 이름</string>
     <string name="receivedownload_amount_copied">%s를 복사했습니다</string>
     <string name="receivedownload_cancelled">파일 전송이 취소되었습니다.</string>
     <!-- Download map preference and menu entry -->
