@@ -465,7 +465,6 @@
     <string name="cache_filter_stringfilter_type_pattern">Modelo</string>
     <string name="cache_filter_datefilter_label_from">De:</string>
     <string name="cache_filter_datefilter_label_to">Para:</string>
-    <string name="cache_filter_checkboxlist_selectallnone">Seleccionar todos/nenhum</string>
     <string name="cache_filter_favorites_absolute">Absoluto</string>
     <string name="cache_filter_favorites_percentage">Percentagem</string>
     <string name="cache_filter_distance_use_current_position">Usar posição actual</string>
