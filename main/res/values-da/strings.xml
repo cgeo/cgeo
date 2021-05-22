@@ -1664,9 +1664,6 @@
     <string name="localfile_title">Åbn en lokal fil</string>
     <string name="localfile_cannot_handle">Fejl ved læsning af fil eller filen har et ukendt format.</string>
     <!-- ReceiveDownloadActivity -->
-    <string name="receivedownload_alreadyexists">En fil med dette navn findes allerede. Overskriv eksisterende fil eller angiv et andet navn?</string>
-    <string name="receivedownload_option_overwrite">Overskriv</string>
-    <string name="receivedownload_option_differentname">Andet navn</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Hent kort til offline brug</string>
     <string name="downloadmap_choose">Vælg kort</string>

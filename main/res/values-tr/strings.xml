@@ -426,17 +426,28 @@
     <string name="cache_filter_option_include_inconclusive">Kesin olmayan eşleşmeleri de dahil et</string>
     <string name="cache_filter_option_include_inconclusive_info">Filtrelemede aranan bir özellikle ilgili bilgi içermese de cache\'leri sonuçlara dahil et.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Bir filtre eklemek için sağ yukarıdaki \'+\' simgesine tıklayın</string>
+    <string name="cache_filter_name">Geocache Adı</string>
+    <string name="cache_filter_type">Geocache Türü</string>
+    <string name="cache_filter_size">Geocache Boyutu</string>
     <string name="cache_filter_personalnote">Kişisel Not</string>
+    <string name="cache_filter_description">Geocache Açıklaması</string>
     <string name="cache_filter_offlinelog">Çevrimdışı Kayıt</string>
+    <string name="cache_filter_owner">Geocache Sahibi</string>
     <string name="cache_filter_difficulty">Zorluk</string>
     <string name="cache_filter_terrain">Arazi</string>
     <string name="cache_filter_status">Durum</string>
+    <string name="cache_filter_attributes">Geocache Özellikleri</string>
     <string name="cache_filter_favorites">Favoriler</string>
     <string name="cache_filter_distance">Mesafe</string>
+    <string name="cache_filter_hidden">Saklanma Tarihi</string>
     <string name="cache_filter_include">Dahil et</string>
     <string name="cache_filter_exclude">Hariç Tut</string>
     <string name="cache_filter_userdisplay_complex">Kompleks</string>
     <string name="cache_filter_userdisplay_none">Hiçbiri</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="one">%1$d öğe</item>
+        <item quantity="other">%1$d öğe</item>
+    </plurals>
     <string name="cache_filter_storage_load_button">Yükle</string>
     <string name="cache_filter_storage_delete_button">Sil</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
@@ -454,7 +465,6 @@
     <string name="cache_filter_stringfilter_type_pattern">Patern</string>
     <string name="cache_filter_datefilter_label_from">Buradan:</string>
     <string name="cache_filter_datefilter_label_to">Buraya:</string>
-    <string name="cache_filter_checkboxlist_selectallnone">Tümünü/Hiçbirini seç</string>
     <string name="cache_filter_favorites_absolute">Mutlak</string>
     <string name="cache_filter_favorites_percentage">Yüzde</string>
     <string name="cache_filter_distance_use_current_position">Mevcut konumu kullan</string>
@@ -1937,9 +1947,6 @@
     <string name="receivedownload_error">Dosyayı alırken hata oluştu</string>
     <string name="receivedownload_error_io_exception">Dosyayı alırken G/Ç hatası alındı. \"%s\" klasörünüzde yazma yetkisi var mı?</string>
     <string name="receivedownload_error_filenotfound_exception">Dosya alınırken dosya bulunamadı hatası alındı.</string>
-    <string name="receivedownload_alreadyexists">Bu isimle bir dosya zaten var. Var olan dosyanın üzerine mi yazılsın yoksa farklı bir adla yeni bir dosya olarak mı kaydedilsin?</string>
-    <string name="receivedownload_option_overwrite">Üzerine yaz</string>
-    <string name="receivedownload_option_differentname">Farklı isim</string>
     <string name="receivedownload_amount_copied">%s kopyalandı</string>
     <string name="receivedownload_cancelled">Dosya aktarımı iptal edildi</string>
     <!-- Download map preference and menu entry -->

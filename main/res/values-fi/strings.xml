@@ -34,6 +34,29 @@
     <string name="advlab">Adventure Lab -kätkö</string>
     <string name="userdefined">Käyttäjän määrittämä kätkö</string>
     <string name="unknown">Tuntematon kätkötyyppi</string>
+    <string name="all_types_short">Kaikki</string>
+    <string name="traditional_short">Tradi</string>
+    <string name="multi_short">Multi</string>
+    <string name="mystery_short">Mysteeri</string>
+    <string name="letterbox_short">Lodju</string>
+    <string name="event_short">Tapahtuma</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Earth</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webkamera</string>
+    <string name="virtual_short">Virtuaali</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Yhteisö</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">Gc HQ Cel</string>
+    <string name="gps_short">GPS Exhibit</string>
+    <string name="block_short">GCHQ Block</string>
+    <string name="locationless_short">Sijainniton</string>
+    <string name="advlab_short">Adv Lab</string>
+    <string name="userdefined_short">KäyttäjänMäärittelemä</string>
+    <string name="unknown_short">Tuntematon</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
     <string name="cache_size_small">Pieni</string>
@@ -421,18 +444,29 @@
     <string name="list_dialog_rename">Nimeä uudelleen</string>
     <string name="list_not_available">Luettelo ei ole enää saatavilla, vaihdetaan oletusluetteloon</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_basic">Perus</string>
+    <string name="cache_filter_mode_advanced">Edistynyt</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Vaihda perustilaan</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">Vaihtaminen \'Perus\' -tilaan johtaa suodattimen asetusten menetykseen. Haluatko jatkaa?</string>
     <string name="cache_filter_option_and_or">Käytä TAI:ta JA:n sijaan</string>
     <string name="cache_filter_option_inverse">Käänteinen suodatin</string>
     <string name="cache_filter_option_include_inconclusive">Sisällytä epävarmat osumat</string>
     <string name="cache_filter_option_include_inconclusive_info">Sisällytä ne kätköt, joissa suodattimen valittu tieto ei ole saatavilla.</string>
     <string name="cache_filter_hint_on_empty_filter_list">Napauta \'+\' oikeassa yläkulmassa lisätäksesi suodattimen</string>
+    <string name="cache_filter_name">Kätkön nimi</string>
+    <string name="cache_filter_type">Kätkötyyppi</string>
+    <string name="cache_filter_size">Kätkön koko</string>
     <string name="cache_filter_personalnote">Omat merkinnät</string>
+    <string name="cache_filter_description">Kätkön kuvaus</string>
     <string name="cache_filter_offlinelog">Offline-loki</string>
+    <string name="cache_filter_owner">Kätkön omistaja</string>
     <string name="cache_filter_difficulty">Vaikeus</string>
     <string name="cache_filter_terrain">Maasto</string>
     <string name="cache_filter_status">Tila</string>
+    <string name="cache_filter_attributes">Kätkön attribuutit</string>
     <string name="cache_filter_favorites">Suosikit</string>
     <string name="cache_filter_distance">Etäisyys</string>
+    <string name="cache_filter_hidden">Piilotuspäivä</string>
     <string name="cache_filter_include">Sisällytä</string>
     <string name="cache_filter_exclude">Rajaa pois</string>
     <string name="cache_filter_userdisplay_complex">Monimutkainen</string>
@@ -458,7 +492,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Kuvio</string>
     <string name="cache_filter_datefilter_label_from">Päivästä:</string>
     <string name="cache_filter_datefilter_label_to">Päivään:</string>
-    <string name="cache_filter_checkboxlist_selectallnone">Valitse kaikki / ei mitään</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Valitse kaikki</string>
     <string name="cache_filter_favorites_absolute">Absoluuttinen</string>
     <string name="cache_filter_favorites_percentage">Prosenttiosuus</string>
     <string name="cache_filter_distance_use_current_position">Käytä nykyistä sijaintia</string>
@@ -474,6 +508,8 @@
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
+    <string name="about_changelog_nightly_build">Yöllinen koontiversio</string>
+    <string name="about_changelog_next_release">Seuraava julkaisu</string>
     <string name="about_system">Järjestelmä</string>
     <string name="about_donate">Tue meitä</string>
     <string name="about_donation_more">Webbisivuilla on lisää tietoa</string>
@@ -1942,9 +1978,6 @@
     <string name="receivedownload_error">Virhe tiedostoa vastaanotettaessa</string>
     <string name="receivedownload_error_io_exception">I/O-virhe tiedostoa vastaanotettaessa. Onko kansiosi \"%s\" kirjoitettavissa?</string>
     <string name="receivedownload_error_filenotfound_exception">Tiedostoa ei löydy -virhe tapahtui vastaanottaessa tiedostoa.</string>
-    <string name="receivedownload_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
-    <string name="receivedownload_option_overwrite">Korvaa</string>
-    <string name="receivedownload_option_differentname">Eri nimi</string>
     <string name="receivedownload_amount_copied">%s kopioitu</string>
     <string name="receivedownload_cancelled">Tiedostonsiirto peruttu</string>
     <!-- Download map preference and menu entry -->

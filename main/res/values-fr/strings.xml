@@ -1847,9 +1847,6 @@
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Recevoir le fichier</string>
     <string name="receivedownload_error">Erreur pendant la réception du fichier</string>
-    <string name="receivedownload_alreadyexists">Un fichier portant ce nom existe déjà. Écraser le fichier existant ou enregistrer le nouveau fichier sous un autre nom ?</string>
-    <string name="receivedownload_option_overwrite">Écraser</string>
-    <string name="receivedownload_option_differentname">Nouveau nom</string>
     <string name="receivedownload_cancelled">Transfert de fichiers annulé</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Télécharger des cartes hors ligne</string>

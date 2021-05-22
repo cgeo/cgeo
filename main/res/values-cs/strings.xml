@@ -452,7 +452,6 @@
     <string name="cache_filter_stringfilter_type_starts_with">Začíná na</string>
     <string name="cache_filter_stringfilter_type_ends_with">Končí na</string>
     <string name="cache_filter_stringfilter_type_pattern">Vzor</string>
-    <string name="cache_filter_checkboxlist_selectallnone">Vybrat všechny/žádné</string>
     <string name="cache_filter_favorites_absolute">Absolutní</string>
     <string name="cache_filter_favorites_percentage">Procentuálně</string>
     <string name="cache_filter_distance_use_current_position">Použít aktuální pozici</string>
@@ -1985,9 +1984,6 @@
     <string name="receivedownload_error">Chyba při přijímání souboru</string>
     <string name="receivedownload_error_io_exception">I/O chyba při přijímání souboru. Je vaše složka \"%s\" zapisovatelná?</string>
     <string name="receivedownload_error_filenotfound_exception">Soubor nebyl nenalezen během přijímání souboru.</string>
-    <string name="receivedownload_alreadyexists">Soubor s tímto názvem již existuje. Chcete přepsat existující soubor, nebo uložit nový soubor pod jiným názvem?</string>
-    <string name="receivedownload_option_overwrite">Přepsat</string>
-    <string name="receivedownload_option_differentname">Přejmenovat</string>
     <string name="receivedownload_amount_copied">%s zkopírováno</string>
     <string name="receivedownload_cancelled">Přenos souboru byl zrušen</string>
     <!-- Download map preference and menu entry -->
