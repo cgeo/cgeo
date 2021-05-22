@@ -1,5 +1,3 @@
-## Νυχτερινή έκδοση
-
 ### Προηγμένο σύστημα φιλτραρίσματος (πειραματικό)
 - Παρουσιάζοντας ένα νέο σύστημα φιλτραρίσματος στο c:geo, υποστηρίζοντας ευέλικτα, συνδυασμένα και αποθηκευτικά φίλτρα
 - Διαθέσιμο και στις δύο λίστες κρυπτών και προβολής χάρτη
@@ -14,10 +12,10 @@
 - Νέο: Να επιτρέπεται η αλλαγή του αντιστοιχισμένου εικονιδίου στις λεπτομέρειες της κρύπτης σε αναδυόμενο με μακρύ κλικ παράθυρο (αποθηκευμένες κρύπτες μόνο)
 
 ### Downloader
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
+- Αλλαγή: Τα αρχεία που κατέβηκαν με επιτυχία θα αντικαταστήσουν αυτόματα τα υπάρχοντα αρχεία με το ίδιο όνομα
 - Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
 
-### Other
+### Άλλο
 - New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+- Νέο: Αγνοήστε την δυνατότητα για geocaching.su
+- Αλλαγή: Αφαιρέθηκε η χωρίς πλέον υποστήριξη εφαρμογή πλοήγησης RMAPS
