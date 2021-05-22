@@ -1806,9 +1806,6 @@
     <string name="localfile_title">Åpne en lokal fil</string>
     <string name="localfile_cannot_handle">Feil under lesing av fil eller c:geo kan ikke åpne denne filtypen.</string>
     <!-- ReceiveDownloadActivity -->
-    <string name="receivedownload_alreadyexists">En fil med dette navnet eksisterer allerede. Vil du overskrive den eksisterende filen eller eller lagre den nye filen under et annet navn?</string>
-    <string name="receivedownload_option_overwrite">Overskriv</string>
-    <string name="receivedownload_option_differentname">Annet navn</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Last ned offlinekart</string>
     <string name="downloadmap_choose">Velg kart</string>
