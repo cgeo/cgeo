@@ -167,7 +167,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
             final String versionRelease = FileUtils.getRawResourceAsString(AboutActivity.this, R.raw.version_release).trim();
             markwon.setMarkdown(binding.changelogRelease, "## " + (StringUtils.isNotBlank(versionRelease) ? versionRelease : getString(R.string.about_changelog_next_release)) + "\n\n" + FileUtils.getChangelogRelease(AboutActivity.this));
-            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(AboutActivity.this, "https://github.com/cgeo/cgeo/releases"));
+            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(AboutActivity.this, "https://github.com/cgeo/cgeo/blob/master/main/res/raw/changelog_full.md"));
             return binding.getRoot();
         }
     }
