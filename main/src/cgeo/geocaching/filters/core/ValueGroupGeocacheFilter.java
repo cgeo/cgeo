@@ -95,6 +95,17 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
         return rawToDisplay(cacheValue);
     }
 
+    public Set<T> getRawValues() {
+        final Set<T> rawValues = new HashSet<>();
+        for (G v : getValues()) {
+            if (v == null) {
+                continue;
+            }
+            rawValues.addAll(displayToRaw(v));
+        }
+        return rawValues;
+    }
+
     @Override
     public void setConfig(final String[] value) {
         values.clear();
@@ -150,18 +161,16 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
             final StringBuilder sb = new StringBuilder(sqlBuilder.getMainTableId() + "." + colName + " IN (");
             final List<String> params = new ArrayList<>();
             boolean first = true;
-            for (G v : getValues()) {
-                if (v == null) {
+            for (T rawV : getRawValues()) {
+                if (rawV == null) {
                     continue;
                 }
-                for (T rawV : displayToRaw(v)) {
-                    if (!first) {
-                        sb.append(",");
-                    }
-                    first = false;
-                    sb.append("?");
-                    params.add(valueToSqlValue(rawV));
+                if (!first) {
+                    sb.append(",");
                 }
+                first = false;
+                sb.append("?");
+                params.add(valueToSqlValue(rawV));
             }
             sb.append(")");
             sqlBuilder.addWhere(sb.toString(), params);

@@ -103,7 +103,7 @@ public class DateTimeEditor {
      * If a date is selected, this method does nothing
      */
     public DateTimeEditor setPreselectDate(final Date preselectDate) {
-        if (dateUnset[0]) {
+        if (dateUnset[0] && preselectDate != null) {
             date.setTime(preselectDate);
         }
         return this;

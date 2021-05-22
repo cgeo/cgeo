@@ -23,7 +23,7 @@ public class DateFilter  {
     private Date maxDate;
 
     public Boolean matches(final Date value) {
-        if (value == null || value.getTime() == 0) {
+        if (value == null) {
             return minDate == null && maxDate == null ? true : null;
         }
 
@@ -88,8 +88,6 @@ public class DateFilter  {
         //convert long to date in SQLite: date(hidden/1000, 'unixepoch')
 
         if (valueExpression != null && (minDate != null || maxDate != null)) {
-            sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
-            sqlBuilder.addWhere("(" + valueExpression + ") == 0"); //those are the inconclusives
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             if (minDate != null) {
                 sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') >= '" + DAY_DATE_FORMAT_SQL.format(minDate) + "'");
@@ -98,7 +96,6 @@ public class DateFilter  {
                 sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') <= '" + DAY_DATE_FORMAT_SQL.format(maxDate) + "'");
             }
             sqlBuilder.closeWhere();
-            sqlBuilder.closeWhere();
         } else {
             sqlBuilder.addWhereAlwaysInclude();
         }
@@ -106,7 +103,6 @@ public class DateFilter  {
 
 
     public String getUserDisplayableConfig() {
-
         final StringBuilder sb = new StringBuilder();
         sb.append(minDate == null ? "*" : DAY_DATE_FORMAT.format(minDate));
         sb.append("-");
