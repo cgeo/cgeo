@@ -155,6 +155,8 @@
     <string name="log_image_scale_option_noscaling">実サイズ</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\n縮小/圧縮:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">画像</string>
+    <string name="datetime_clear_button">削除</string>
+    <string name="datetime_nodateset_display">未設定</string>
     <!-- translation -->
     <string name="translate">翻訳</string>
     <string name="translate_to_sys_lang">%sに翻訳</string>
@@ -312,6 +314,8 @@
     <string name="caches_more_caches_no">キャッシュは以上です</string>
     <string name="caches_more_caches_loading">キャッシュ情報を読み込み中…</string>
     <string name="caches_more_caches_currently">現在</string>
+    <string name="caches_more_caches_next_x">次の%1$dキャッシュを読み込む</string>
+    <string name="caches_more_caches_remaining">残りのキャッシュを読み込む(%1$d/%2$d)</string>
     <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
     <string name="caches_eta_ltm">1分以内</string>
     <plurals name="caches_eta_mins">
@@ -363,6 +367,7 @@
     <string name="caches_copy_all">すべてコピー</string>
     <string name="caches_map_locus_export">Locusにエクスポート</string>
     <string name="caches_filter">フィルタ</string>
+    <string name="caches_filter_menuitem">新しいフィルタ(実験的)</string>
     <string name="caches_filter_title">フィルタ</string>
     <string name="caches_filter_size">サイズ</string>
     <string name="caches_filter_type">タイプ</string>
@@ -415,24 +420,60 @@
     <string name="list_dialog_rename">変更</string>
     <string name="list_not_available">リストが利用できません。保存済みのリストへ移動します</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_option_and_or">ANDの代わりにORを使用</string>
+    <string name="cache_filter_option_inverse">除外フィルタ</string>
+    <string name="cache_filter_option_include_inconclusive">不確定な一致を含める</string>
+    <string name="cache_filter_option_include_inconclusive_info">フィルタに使用することができないキャッシュ情報が必要なとき、結果にキャッシュを含めるかどうかを指定します。</string>
     <string name="cache_filter_hint_on_empty_filter_list">右上の「+」をタップしてフィルタを追加</string>
     <string name="cache_filter_name">キャッシュ名</string>
-    <string name="cache_filter_type">タイプ</string>
+    <string name="cache_filter_type">キャッシュタイプ</string>
     <string name="cache_filter_size">サイズ</string>
     <string name="cache_filter_personalnote">パーソナルノート</string>
-    <string name="cache_filter_description">詳細</string>
+    <string name="cache_filter_description">キャッシュの説明</string>
     <string name="cache_filter_offlinelog">オフラインログ</string>
-    <string name="cache_filter_owner">オーナー</string>
+    <string name="cache_filter_owner">キャッシュオーナー</string>
     <string name="cache_filter_difficulty">難易度</string>
     <string name="cache_filter_terrain">地形</string>
     <string name="cache_filter_status">状態</string>
-    <string name="cache_filter_attributes">属性</string>
+    <string name="cache_filter_attributes">キャッシュ属性</string>
     <string name="cache_filter_favorites">お気に入り</string>
     <string name="cache_filter_distance">距離</string>
     <string name="cache_filter_hidden">設置日</string>
+    <string name="cache_filter_include">含む</string>
+    <string name="cache_filter_exclude">除く</string>
+    <string name="cache_filter_userdisplay_none">なし</string>
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="other">%1$dアイテム</item>
     </plurals>
+    <string name="cache_filter_storage_load_button">読み込み</string>
+    <string name="cache_filter_storage_delete_button">削除</string>
+    <string name="cache_filter_storage_load_delete_title">フィルタの読み込みまたは削除</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">フィルタは保存されていません</string>
+    <string name="cache_filter_storage_save_title">名前を付けてフィルタを保存</string>
+    <string name="cache_filter_storage_save_confirm_title">フィルタの上書き保存</string>
+    <string name="cache_filter_storage_save_confirm_message">フィルタ名「%s」と異なる設定が既に存在します。上書きしますか?</string>
+    <string name="cache_filter_stringfilter_matchcase">大文字/小文字を区別</string>
+    <string name="cache_filter_stringfilter_info">検索方法の「パターン」でワイルドカード「?」と「*」を使用できます。「?」は任意の一文字、「*」は長さ0文字以上の任意の文字列を表します。 例えば、「H?mburg*」は「Homeburg」や「Hamburg at Night」などにマッチしますが、「A day in Hamburg」や「Hahmburg」にはマッチしません。</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">なし</string>
+    <string name="cache_filter_stringfilter_type_is_present">あり</string>
+    <string name="cache_filter_stringfilter_type_contains">以下を含む</string>
+    <string name="cache_filter_stringfilter_type_starts_with">以下で始まる</string>
+    <string name="cache_filter_stringfilter_type_ends_with">以下で終わる</string>
+    <string name="cache_filter_stringfilter_type_pattern">パターン</string>
+    <string name="cache_filter_datefilter_label_from">開始日:</string>
+    <string name="cache_filter_datefilter_label_to">終了日:</string>
+    <string name="cache_filter_favorites_absolute">登録数</string>
+    <string name="cache_filter_favorites_percentage">割合(%)</string>
+    <string name="cache_filter_distance_use_current_position">現在地を使用</string>
+    <string name="cache_filter_status_select_all">すべて</string>
+    <string name="cache_filter_status_select_only_found_yes">発見</string>
+    <string name="cache_filter_status_select_only_found_no">未発見</string>
+    <string name="cache_filter_status_select_only_own_yes">オーナー</string>
+    <string name="cache_filter_status_select_only_own_no">オーナーではない</string>
+    <string name="cache_filter_status_select_only_disabled_yes">一時停止中</string>
+    <string name="cache_filter_status_select_only_disabled_no">有効</string>
+    <string name="cache_filter_status_select_only_archived_yes">アーカイブ済み</string>
+    <string name="cache_filter_status_select_only_archived_no">アクティブ</string>
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
@@ -454,6 +495,7 @@
     <string name="about_system_write_logcat_type_extended">拡張</string>
     <string name="about_system_write_logcat_success">ログファイル「%1$s」はフォルダ「%2$s」に保存されました</string>
     <string name="about_system_write_logcat_error">ログファイルの書き込みエラー</string>
+    <string name="about_system_write_infos_downloadmanager">ダウンロードを表示</string>
     <string name="changelog_github">すべての変更の一覧</string>
     <string name="about_nutshellmanual">マニュアル</string>
     <string name="about_contributors_carnerodetails">c:geoの父として</string>
@@ -631,6 +673,7 @@
     <string name="init_choose_list">リストを選択</string>
     <string name="init_summary_choose_list">キャッシュ情報の保存時にリストを選択するダイアログを表示</string>
     <string name="init_listdisplay">キャッシュリストでリスト名を表示</string>
+    <string name="init_list_initial_load_limit">リストの初回読み込み数</string>
     <string name="init_summary_listdisplay">キャッシュリスト中にリスト名も表示</string>
     <string name="init_livelist">方向を表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向の矢印を表示</string>
