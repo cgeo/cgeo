@@ -35,6 +35,7 @@ This changelog contains all changes which are not intermediate developing steps.
 ### Other
 - New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
 - New: Ignore capability for geocaching.su
+- New: Support exporting/importig assigned emoji in GPX
 - Change: Removed no longer maintained RMAPS navigation app
 
 <!-- --------------------------------------------------------------------------------- --->
