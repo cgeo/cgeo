@@ -424,7 +424,6 @@
     <string name="cache_filter_option_inverse">역 필터</string>
     <string name="cache_filter_option_include_inconclusive">결정적이지 않은 일치 포함</string>
     <string name="cache_filter_option_include_inconclusive_info">필터에 사용할 수없는 캐시에 대한 정보가 필요할 때 결과에 캐시를 포함할지 여부입니다.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">필터를 추가하려면 오른쪽 상단의 \'+\'를 누르세요</string>
     <string name="cache_filter_name">캐시 이름</string>
     <string name="cache_filter_type">캐시 유형</string>
     <string name="cache_filter_size">캐시 크기</string>
@@ -502,7 +501,6 @@
     <string name="about_contributors_carnerodetails">c:geo의 아버지로서</string>
     <string name="about_contributors_recent">최근 기고자</string>
     <string name="about_contributors_specialthanks">특별히 감사함</string>
-    <string name="about_contributors_specialthanksdetails">. <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n·의 모든 번역 기고자들은 모든 이슈 제작자\n·와 다른 지지자들입니다.\n</string>
     <string name="about_contributors_other">다른 기고자</string>
     <string name="about_components">구성 요소</string>
     <string name="contribution_code">코드</string>
@@ -1342,7 +1340,6 @@
     <string name="search_hbu_button">소유주로 검색</string>
     <string name="search_filter">필터 (실험용)</string>
     <string name="search_filter_button">필터로 검색</string>
-    <string name="search_filter_info_message">\'필터로 검색\'은 제공된 필터를 사용하여 온라인 서비스에서 캐시를 검색합니다. 서비스 기능에 따라 필터의 일부만 온라인으로 실행되고 나머지는 오프라인 필터링으로 실행됩니다.\n\n모든 서비스는 AND 필터 만 지원하고 필터 반전은 지원하지 않습니다.\n\nGeocaching.com은 다음을 지원합니다.\n- 이름 (전체 단어 만, 패턴은 지원되지 않음)\n- 캐시 유형\n- 캐시 크기\n- 거리\n난이도 및 지형\n- 호감점수 (절대, 최소만)\n- 상태 (소유, 찾음 및 활성화됨)\n- 숨김 (정확히 사용자 ID 지정)\n- 찾을 수 없음 (정확히 사용자 ID 지정)\n- 숨긴 날짜\n\nGeocaching.com이 우리에게 필요한 API를 차단하고 있기 때문에 c:geo는 특별히 속성 필터링을 제공 할 수 없습니다.\n\nGeocaching.com을 제외한 어떤 서비스도 아직 지원하지 않습니다.</string>
     <string name="search_tb">추적아이템</string>
     <string name="search_tb_hint">추적 코드</string>
     <string name="search_tb_button">추적아이템 검색</string>
