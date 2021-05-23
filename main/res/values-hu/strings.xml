@@ -388,7 +388,6 @@
     <string name="about_contributors_carnerodetails">mint a c:geo szülőatyja</string>
     <string name="about_contributors_recent">2018/2019-es közreműködők</string>
     <string name="about_contributors_specialthanks">Külön köszönet</string>
-    <string name="about_contributors_specialthanksdetails">· a fordításban segédkezőknek a <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>-en!\n· a hibák megtalálóinak\n· és minden támogatónknak.\n</string>
     <string name="about_contributors_other">2018 előtti közreműködők</string>
     <string name="about_components">Komponensek</string>
     <string name="contribution_code">kódolás</string>
