@@ -415,7 +415,6 @@
     <string name="about_contributors_carnerodetails">як батько c:geo</string>
     <string name="about_contributors_recent">Останні учасники</string>
     <string name="about_contributors_specialthanks">Особлива подяка</string>
-    <string name="about_contributors_specialthanksdetails">· Усі наші учасники перекладу на <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· Всі творці проблем\n· та всі інші підтримки.\n</string>
     <string name="about_contributors_other">Останні учасники</string>
     <string name="about_components">Компоненти</string>
     <string name="contribution_code">код</string>
