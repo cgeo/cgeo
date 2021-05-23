@@ -1,10 +1,10 @@
-### Cache details
+### Geocache Ayrıntıları
 
 
-### Map
+### Harita
 
 
-### Integrated routing engine
+### Dahili yönlendirme motoru
 
 
-### Other
+### Diğer
