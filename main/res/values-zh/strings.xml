@@ -427,7 +427,6 @@
     <string name="about_contributors_carnerodetails">作为 c:geo 的创始人</string>
     <string name="about_contributors_recent">最近贡献者</string>
     <string name="about_contributors_specialthanks">特别鸣谢</string>
-    <string name="about_contributors_specialthanksdetails">· <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>上我们所有的翻译贡献者！\n· 所有问题提出者\n· 所有其他支持者\n</string>
     <string name="about_contributors_other">其他贡献者</string>
     <string name="about_components">组件</string>
     <string name="contribution_code">代码</string>
