@@ -80,7 +80,6 @@ import java.util.Locale;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.jakewharton.processphoenix.ProcessPhoenix;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -270,9 +269,11 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        /* @todo
         if (Settings.isTransparentBackground()) {
             setTheme(R.style.cgeo_main_transparent);
         }
+        */
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
 
@@ -294,7 +295,7 @@ public class MainActivity extends AbstractActionBarActivity {
         binding = MainActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         if (!Settings.isTransparentBackground()) {
-            binding.mainscreen.setBackgroundColor(getResources().getColor(Settings.isLightSkin() ? R.color.background_light_notice : R.color.background_dark_notice));
+            binding.mainscreen.setBackgroundColor(getResources().getColor(R.color.colorBackgroundNotice));
         }
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
@@ -616,7 +617,7 @@ public class MainActivity extends AbstractActionBarActivity {
         }
         if (requestCode == Intents.SETTINGS_ACTIVITY_REQUEST_CODE) {
             if (resultCode == SettingsActivity.RESTART_NEEDED) {
-                ProcessPhoenix.triggerRebirth(this);
+                ProcessUtils.restartApplication(this);
             }
         } else {
             final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);

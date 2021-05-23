@@ -114,14 +114,14 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/cgeo_main"
+            android:theme="@style/cgeo"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".InstallWizardActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/cgeo_main"
+            android:theme="@style/cgeo"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
@@ -156,7 +156,7 @@
             android:name=".CachePopup"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/popup_dark"
+            android:theme="@style/cgeo.popup"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
@@ -727,7 +727,7 @@
             android:name="WaypointPopup"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/waypoint"
-            android:theme="@style/popup_dark"
+            android:theme="@style/cgeo.popup"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity

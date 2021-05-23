@@ -15,7 +15,7 @@
         android:layout_toLeftOf="@id/switchAB"
         android:maxLines="1"
         android:ellipsize="end"
-        style="@style/cgeo.pqActionBarStyle.TitleTextStyle"
+        android:textSize="@dimen/textSize_toolbarSingle"
         android:text="@string/menu_lists_pocket_queries" />
 
     <androidx.appcompat.widget.SwitchCompat
@@ -25,6 +25,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:gravity="right|center_vertical"
-        style="@style/cgeo.pqActionBarStyle.TitleTextStyle"
+        android:textSize="@dimen/textSize_toolbarSecondary"
         android:text="@string/show_all" />
 </RelativeLayout>

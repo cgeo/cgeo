@@ -2,7 +2,6 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.ContinuousrangesliderViewBinding;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.content.Context;
@@ -59,8 +58,7 @@ public class ContinuousRangeSlider extends LinearLayout {
 
     private void init() {
         setOrientation(VERTICAL);
-        final ContextThemeWrapper ctw = new ContextThemeWrapper(getContext(),
-            Settings.isLightSkin() ? R.style.dark_material : R.style.light_material);
+        final ContextThemeWrapper ctw = new ContextThemeWrapper(getContext(), R.style.cgeo);
         inflate(ctw, R.layout.continuousrangeslider_view, this);
         binding = ContinuousrangesliderViewBinding.bind(this);
         setScale(0f, 100f, null, 11);

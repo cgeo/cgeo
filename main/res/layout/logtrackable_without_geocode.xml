@@ -13,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/trackable_log_without_geocode"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="?text_color" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     <CheckBox
         android:id="@+id/logtrackable_do_not_ask_me_again"
         android:layout_width="fill_parent"

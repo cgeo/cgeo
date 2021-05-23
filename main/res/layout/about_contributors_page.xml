@@ -16,7 +16,8 @@
             <View style="@style/separator_horizontal" />
             <TextView
                 style="@style/separator_horizontal_headline"
-                android:text="@string/contributors_carnero" />
+                android:text="@string/contributors_carnero"
+                android:textSize="@dimen/textSize_headingPrimary" />
         </RelativeLayout>
 
         <TextView
@@ -30,7 +31,8 @@
             <View style="@style/separator_horizontal" />
             <TextView
                 style="@style/separator_horizontal_headline"
-                android:text="@string/about_contributors_recent" />
+                android:text="@string/about_contributors_recent"
+                android:textSize="@dimen/textSize_headingPrimary" />
         </RelativeLayout>
 
         <TextView
@@ -44,7 +46,8 @@
             <View style="@style/separator_horizontal" />
             <TextView
                 style="@style/separator_horizontal_headline"
-                android:text="@string/about_contributors_specialthanks" />
+                android:text="@string/about_contributors_specialthanks"
+                android:textSize="@dimen/textSize_headingPrimary" />
         </RelativeLayout>
 
         <TextView
@@ -58,7 +61,8 @@
             <View style="@style/separator_horizontal" />
             <TextView
                 style="@style/separator_horizontal_headline"
-                android:text="@string/about_contributors_other" />
+                android:text="@string/about_contributors_other"
+                android:textSize="@dimen/textSize_headingPrimary" />
         </RelativeLayout>
 
         <TextView
@@ -72,7 +76,8 @@
             <View style="@style/separator_horizontal" />
             <TextView
                 style="@style/separator_horizontal_headline"
-                android:text="@string/about_components" />
+                android:text="@string/about_components"
+                android:textSize="@dimen/textSize_headingPrimary" />
         </RelativeLayout>
 
         <TextView
@@ -80,7 +85,7 @@
             android:id="@+id/about_components"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/components" />
+            android:text="@null" />
 
     </LinearLayout>
 

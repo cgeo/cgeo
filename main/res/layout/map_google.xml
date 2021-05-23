@@ -24,8 +24,7 @@
             android:paddingLeft="5dip"
             android:paddingRight="5dip"
             android:scrollHorizontally="true"
-            android:textColor="@color/text_icon"
-            android:textSize="12sp"
+            android:textSize="@dimen/textSize_detailsSecondary"
             android:visibility="gone"
             android:maxLines="1" />
 

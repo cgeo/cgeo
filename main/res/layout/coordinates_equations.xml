@@ -35,7 +35,7 @@
 
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:background="@color/just_white"/>
+            android:background="@color/colorSeparator"/>
 
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/FreeVariableTable"

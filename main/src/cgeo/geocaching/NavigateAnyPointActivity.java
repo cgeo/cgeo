@@ -8,7 +8,6 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -41,7 +40,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(Settings.isLightSkin() ? R.style.light : R.style.dark);
+        setTheme(R.style.cgeo);
 
         InternalConnector.assertHistoryCacheExists(this);
 

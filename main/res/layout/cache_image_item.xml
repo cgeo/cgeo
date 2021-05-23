@@ -24,8 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:padding="3dip"
-        android:textColor="?text_color"
-        android:textSize="14sp"
         android:visibility="gone"
         tools:text="image description"
         tools:visibility="visible"

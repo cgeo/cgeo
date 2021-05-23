@@ -18,8 +18,7 @@
     android:padding="8dip"
     android:scrollHorizontally="true"
     android:text="@string/caches_no_cache"
-    android:textColor="@color/just_white"
-    android:textSize="16sp"
+    android:textSize="@dimen/textSize_detailsPrimary"
     tools:context=".CacheListActivity"
     android:maxLines="1" />
 
@@ -36,10 +35,8 @@
         android:padding="8dip"
         android:scrollHorizontally="true"
         android:text="@string/caches_no_cache"
-        android:textColor="@color/just_white"
-        android:textSize="16sp"
+        android:textSize="@dimen/textSize_detailsPrimary"
         tools:context=".CacheListActivity"
         android:maxLines="1" />
-
 
 </LinearLayout>

@@ -173,7 +173,7 @@
             android:gravity="center"
             android:textColor="@color/text_icon"
             android:textIsSelectable="false"
-            android:textSize="14sp"
+            android:textSize="@dimen/textSize_detailsSecondary"
             android:text="@string/warn_notloggedin_short" />
 
     </RelativeLayout>

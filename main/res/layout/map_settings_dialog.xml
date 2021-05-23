@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dip"
-        android:text="@string/map_show_in_map" />
+        android:text="@string/map_show_in_map"
+	style="@style/map_quicksettings_subtitle" />
 
     <LinearLayout
         android:id="@+id/map_settings_listview"
@@ -28,7 +29,7 @@
 
         <TextView
             android:id="@+id/compacticon_title"
-            style="@style/map_quicksettings_title"
+            style="@style/map_quicksettings_subtitle"
             android:text="@string/map_dot_mode" />
 
         <LinearLayout
@@ -70,49 +71,39 @@
 
         <TextView
             android:id="@+id/routing_title"
-            style="@style/map_quicksettings_title"
+            style="@style/map_quicksettings_subtitle"
             android:text="@string/map_routing" />
 
         <ImageButton
             android:id="@+id/routing_off"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            style="@style/button_icon"
             android:layout_below="@id/routing_title"
             android:src="@drawable/routing_off" />
 
         <ImageButton
             android:id="@+id/routing_straight"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            style="@style/button_icon"
             android:layout_below="@id/routing_title"
             android:layout_toRightOf="@id/routing_off"
             android:src="@drawable/routing_straight" />
 
         <ImageButton
             android:id="@+id/routing_walk"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            style="@style/button_icon"
             android:layout_below="@id/routing_title"
             android:layout_toRightOf="@id/routing_straight"
             android:src="@drawable/routing_walk" />
 
         <ImageButton
             android:id="@+id/routing_bike"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            style="@style/button_icon"
             android:layout_below="@id/routing_title"
             android:layout_toRightOf="@id/routing_walk"
             android:src="@drawable/routing_bike" />
 
         <ImageButton
             android:id="@+id/routing_car"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            style="@style/button_icon"
             android:layout_below="@id/routing_title"
             android:layout_toRightOf="@id/routing_bike"
             android:src="@drawable/routing_car" />
@@ -139,7 +130,7 @@
 
         <TextView
             android:id="@+id/map_settings_autotarget_title"
-            style="@style/map_quicksettings_title"
+            style="@style/map_quicksettings_subtitle"
             android:text="@string/individual_route" />
 
         <CheckBox

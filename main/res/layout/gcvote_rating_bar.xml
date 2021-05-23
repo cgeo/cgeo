@@ -22,8 +22,7 @@
         android:gravity="center_horizontal"
         android:padding="10dip"
         android:text="@string/log_no_rating"
-        android:textColor="?text_color"
-        android:textSize="12sp"
+        android:textSize="@dimen/textSize_detailsSecondary"
         android:visibility="gone"
         tools:visibility="visible"/>
 

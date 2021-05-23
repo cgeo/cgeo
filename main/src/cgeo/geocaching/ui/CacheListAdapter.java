@@ -88,23 +88,11 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
      */
     private static final int PAUSE_BETWEEN_LIST_SORT = 1000;
 
-    private static final int[] RATING_BACKGROUND = new int[3];
     /**
      * automatically order cache series by name, if they all have a common suffix or prefix at least these many
      * characters
      */
     private static final int MIN_COMMON_CHARACTERS_SERIES = 4;
-    static {
-        if (Settings.isLightSkin()) {
-            RATING_BACKGROUND[0] = R.drawable.favorite_background_red_light;
-            RATING_BACKGROUND[1] = R.drawable.favorite_background_orange_light;
-            RATING_BACKGROUND[2] = R.drawable.favorite_background_green_light;
-        } else {
-            RATING_BACKGROUND[0] = R.drawable.favorite_background_red_dark;
-            RATING_BACKGROUND[1] = R.drawable.favorite_background_orange_dark;
-            RATING_BACKGROUND[2] = R.drawable.favorite_background_green_dark;
-        }
-    }
 
     // variables for section indexer
     private HashMap<String, Integer> mapFirstPosition;
@@ -439,7 +427,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         if (cache.isArchived()) { // red color
             holder.binding.text.setTextColor(ContextCompat.getColor(getContext(), R.color.archived_cache_color));
         } else {
-            holder.binding.text.setTextColor(ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark));
+            holder.binding.text.setTextColor(ContextCompat.getColor(getContext(), R.color.colorText));
         }
 
         holder.binding.text.setText(cache.getName(), TextView.BufferType.NORMAL);
@@ -493,23 +481,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         final int favCount = cache.getFavoritePoints();
         holder.binding.favorite.setText(Formatter.formatFavCount(favCount));
-
-        int favoriteBack;
-        // set default background, neither vote nor rating may be available
-        if (lightSkin) {
-            favoriteBack = R.drawable.favorite_background_light;
-        } else {
-            favoriteBack = R.drawable.favorite_background_dark;
-        }
         final float rating = cache.getRating();
-        if (rating >= 3.5) {
-            favoriteBack = RATING_BACKGROUND[2];
-        } else if (rating >= 2.1) {
-            favoriteBack = RATING_BACKGROUND[1];
-        } else if (rating > 0.0) {
-            favoriteBack = RATING_BACKGROUND[0];
-        }
-        holder.binding.favorite.setBackgroundResource(favoriteBack);
+        holder.binding.favorite.setBackgroundResource(rating >= 3.5 ? R.drawable.favorite_background_green : rating >= 2.1 ? R.drawable.favorite_background_orange : rating > 0.0 ? R.drawable.favorite_background_red : R.drawable.favorite_background);
 
         if (isHistory() && cache.getVisitedDate() > 0) {
             holder.binding.info.setText(Formatter.formatCacheInfoHistory(cache));

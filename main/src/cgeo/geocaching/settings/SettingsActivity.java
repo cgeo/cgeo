@@ -160,6 +160,9 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         root.addView(bar, 0); // insert at top
         bar.setTitle(title);
         bar.setNavigationOnClickListener(onClickListener);
+        // @todo Remove next two lines after switching to AppCompatActitivy
+        bar.setTitleTextColor(getResources().getColor(Settings.isLightSkin() ? R.color.settings_colorTextSecondaryLight : R.color.settings_colorTextSecondaryDark));
+        bar.setBackgroundColor(getResources().getColor(Settings.isLightSkin() ? R.color.colorAccent : R.color.just_black));
     }
 
     @Override
@@ -192,6 +195,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initPreferences() {
+        initAppearancePreferences();
         initMapSourcePreference();
         initExtCgeoDirPreference();
         initDefaultNavigationPreferences();
@@ -474,6 +478,13 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 ((PreferenceGroup) prefGroup).removePreference(prefToHide);
             }
         }
+    }
+
+    private void initAppearancePreferences() {
+        getPreference(R.string.pref_skin).setOnPreferenceChangeListener((preference, newValue) -> {
+            setResult(RESTART_NEEDED);
+            return true;
+        });
     }
 
     private void initBackupButtons() {

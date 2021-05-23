@@ -2,7 +2,6 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.calculator.VariableData;
-import cgeo.geocaching.settings.Settings;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -105,9 +104,8 @@ public class CalculatorVariable extends LinearLayout {
     private void setCachedValue(final double cachedValue) {
         variableData.setCachedValue(cachedValue);
 
-        final boolean lightSkin = Settings.isLightSkin();
-        final int validColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
-        final int invalidColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_hint_light : R.color.text_hint_dark);
+        final int validColour = ContextCompat.getColor(getContext(), R.color.colorText);
+        final int invalidColour = ContextCompat.getColor(getContext(), R.color.colorTextHint);
 
         // Make the name colour grey if value is invalid
         name.setTextColor(Double.isNaN(variableData.getCachedValue()) ? invalidColour : validColour);

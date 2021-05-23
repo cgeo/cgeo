@@ -3,24 +3,7 @@
 
     <!-- system definitions -->
 
-    <style name="button" parent="@android:style/Widget.Button">
-        <item name="android:padding">6dip</item>
-        <item name="android:lines">1</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:scrollHorizontally">true</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?text_color</item>
-        <item name="android:background">?button</item>
-    </style>
-
-    <style name="button_borderless" parent="button">
-        <item name="android:background">?android:attr/selectableItemBackground</item>
-    </style>
-
     <style name="text">
-        <item name="android:textColor">?text_color</item>
-        <item name="android:textSize">14sp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:focusable">false</item>
         <item name="android:layout_width">wrap_content</item>
@@ -35,47 +18,23 @@
 
 
     <style name="text_note" parent="text">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">?text_color_grey</item>
     </style>
 
-    <style name="edittext" parent="@android:style/Widget.EditText">
-        <item name="android:padding">6dip</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:autoText">true</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:textColor">?text_color</item>
-        <item name="android:textColorHint">?text_color_hint</item>
-        <item name="android:background">?input</item>
-        <item name="android:gravity">top|left</item>
-        <item name="android:capitalize">none</item>
-    </style>
-
-    <style name="checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:textColor">?text_color</item>
-    </style>
-
-    <style name="checkbox_full" parent="checkbox">
+    <style name="checkbox_full">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="radiobutton" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="android:textColor">?text_color</item>
-    </style>
-
-    <style name="radiobutton_wrap" parent="radiobutton">
+    <style name="radiobutton_wrap">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <!-- own definitions -->
     <!-- actionbar -->
     <style name="action_bar">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/actionbar_height</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:background">@drawable/actionbar_background</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -86,21 +45,12 @@
         <item name="android:scaleType">center</item>
         <item name="android:focusable">true</item>
         <item name="android:src">@drawable/cgeo_actionbar_squircle</item>
-        <item name="android:background">@drawable/actionbar_button</item>
     </style>
 
     <style name="action_bar_separator">
         <item name="android:layout_width">@dimen/actionbar_separator_width</item>
         <item name="android:layout_height">@dimen/actionbar_separator_height</item>
-        <item name="android:background">@drawable/actionbar_separator</item>
-    </style>
-
-    <style name="action_bar_progress" parent="@android:style/Widget.ProgressBar.Small">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">15dip</item>
-        <item name="android:layout_marginRight">15dip</item>
-        <item name="android:indeterminate">true</item>
+        <item name="android:background">@color/colorSeparator</item>
     </style>
 
     <style name="action_bar_title">
@@ -112,12 +62,26 @@
         <item name="android:scrollHorizontally">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:lines">1</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/just_white</item>
         <item name="android:text">c:geo</item>
+        <item name="android:textSize">@dimen/textSize_toolbarSingle</item>
     </style>
 
-    <!-- button: full width -->
+    <!-- buttons -->
+
+    <style name="button">
+        <item name="android:padding">6dip</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
+        <item name="android:background">?button</item>
+    </style>
+
+    <style name="button_borderless" parent="button">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
     <style name="button_full" parent="button">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -127,18 +91,15 @@
         <item name="android:layout_marginBottom">5dip</item>
     </style>
 
-    <!-- button: letter -->
     <style name="button_letter" parent="button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:minWidth">40sp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">22sp</item>
         <item name="android:layout_marginLeft">5dip</item>
         <item name="android:layout_marginRight">5dip</item>
         <item name="android:layout_marginBottom">5dip</item>
     </style>
 
-    <!-- button: digit -->
     <style name="button_digit" parent="button">
         <item name="android:padding">0dp</item>
         <item name="android:layout_width">0dp</item>
@@ -150,7 +111,6 @@
         <item name="layout_columnWeight">1</item>
     </style>
 
-    <!-- button: small -->
     <style name="button_small" parent="button">
         <item name="android:layout_width">125dip</item>
         <item name="android:layout_height">wrap_content</item>
@@ -160,10 +120,8 @@
         <item name="android:layout_marginTop">3dip</item>
         <item name="android:layout_marginBottom">3dip</item>
         <item name="android:padding">3dip</item>
-        <item name="android:textSize">14sp</item>
     </style>
 
-    <!-- button: icon -->
     <style name="button_icon" parent="button_small">
         <item name="android:layout_width">40dip</item>
         <item name="android:layout_height">40dip</item>
@@ -171,8 +129,16 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
-
     <!-- edittext -->
+
+    <style name="edittext" parent="@android:style/Widget.EditText">
+        <item name="android:padding">6dip</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:autoText">true</item>
+        <item name="android:gravity">top|left</item>
+        <item name="android:capitalize">none</item>
+    </style>
+
     <style name="edittext_full" parent="edittext">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -187,12 +153,10 @@
         <item name="android:layout_marginLeft">10dip</item>
         <item name="android:layout_marginRight">10dip</item>
         <item name="android:layout_marginBottom">5dip</item>
-        <item name="android:textColor">?text_color</item>
-        <item name="android:textColorHint">?text_color_hint</item>
-        <item name="android:background">@drawable/input_bcg_dark</item>
     </style>
 
     <!-- mainscreen icon -->
+
     <style name="icon_mainscreen">
         <item name="android:layout_width">48dip</item>
         <item name="android:layout_height">48dip</item>
@@ -213,9 +177,6 @@
         <item name="android:paddingRight">5dip</item>
         <item name="android:maxLines">2</item>
         <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/text_icon</item>
-        <item name="android:background">@drawable/icon_bcg</item>
     </style>
 
     <style name="icon_mainscreen_count">
@@ -233,9 +194,6 @@
         <item name="android:singleLine">true</item>
         <item name="android:lines">1</item>
         <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">11sp</item>
-        <item name="android:textColor">@color/just_white</item>
-        <item name="android:background">@drawable/count_bcg</item>
         <item name="android:text" />
     </style>
     <style name="icon_mainscreen_cell_counter">
@@ -260,6 +218,7 @@
     </style>
 
     <!-- current location -->
+
     <style name="location_current">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -270,9 +229,8 @@
         <item name="android:singleLine">true</item>
         <item name="android:scrollHorizontally">true</item>
         <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/text_icon</item>
-        <item name="android:background">@drawable/icon_bcg</item>
+        <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
+
     </style>
 
     <style name="location_current_style">
@@ -285,8 +243,8 @@
         <item name="android:singleLine">true</item>
         <item name="android:scrollHorizontally">true</item>
         <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
+
     </style>
 
     <style name="location_current_type" parent="location_current_style">
@@ -304,7 +262,6 @@
 
     <!-- single degree -->
     <style name="single_degree_style" parent="location_current_style">
-        <item name="android:textColor">?text_color_grey</item>
         <item name="android:textAlignment">viewEnd</item>
         <item name="android:width">40dip</item>
         <item name="android:textIsSelectable">false</item>
@@ -318,14 +275,14 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">1dip</item>
         <item name="android:layout_centerInParent">true</item>
-        <item name="android:background">?separator_color</item>
+        <item name="android:background">@color/colorSeparator</item>
     </style>
 
     <style name="separator_vertical">
         <item name="android:layout_width">1dip</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_centerInParent">true</item>
-        <item name="android:background">?separator_color</item>
+        <item name="android:background">@color/colorSeparator</item>
     </style>
 
     <style name="separator_horizontal_layout">
@@ -345,9 +302,8 @@
         <item name="android:singleLine">true</item>
         <item name="android:scrollHorizontally">true</item>
         <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:textColor">?text_color_headline</item>
-        <item name="android:background">?background_color</item>
+        <item name="android:textSize">@dimen/textSize_headingPrimary</item>
+        <item name="android:background">@color/colorBackground</item>
     </style>
 
     <!-- filter bar -->
@@ -355,7 +311,6 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:background">@drawable/filter_bar_background</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 
@@ -373,7 +328,6 @@
         <item name="android:scrollHorizontally">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:lines">1</item>
-        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <!-- author of a log item -->
@@ -388,8 +342,7 @@
         <item name="android:lines">1</item>
         <item name="android:scrollHorizontally">true</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">?text_color</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
     </style>
 
     <!-- date, found state on the left of a log entry -->
@@ -402,8 +355,7 @@
         <item name="android:lines">1</item>
         <item name="android:scrollHorizontally">true</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">?text_color_headline</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
     </style>
 
     <!-- separator between log author and log content -->
@@ -425,18 +377,6 @@
         <item name="android:isIndicator">true</item>
     </style>
 
-    <!-- progress dialog theme -->
-    <style name="cgeoProgressdialogTheme" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="android:textColor">?text_color</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@drawable/border_straight</item>
-    </style>
-    <style name="cgeoProgressdialogTheme_light" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:textColor">?text_color</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@drawable/border_straight_light</item>
-    </style>
-
     <!-- map progressbar style -->
     <style name="map_progressbar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:height">8dp</item>
@@ -455,7 +395,7 @@
         <item name="android:lines">1</item>
         <item name="android:textColor">@color/text_icon</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
         <item name="android:visibility">gone</item>
         <item name="android:maxLines">1</item>
     </style>
@@ -469,17 +409,12 @@
         <item name="android:layout_marginBottom">-10dp</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
-    <style name="map_quicksettings_title">
+    <style name="map_quicksettings_subtitle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">6dip</item>
         <item name="android:layout_marginTop">10dp</item>
-    </style>
-
-    <!-- splash screen style -->
-    <style name="SplashScreenTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/splashscreen_background</item>
-        <item name="android:windowActivityTransitions">false</item>
+        <item name="android:textSize">@dimen/textSize_headingSecondary</item>
     </style>
 
     <!-- authorization styles -->
@@ -490,8 +425,7 @@
         <item name="android:layout_marginLeft">10dip</item>
         <item name="android:layout_marginRight">10dip</item>
         <item name="android:gravity">left|center_vertical</item>
-        <item name="android:textColor">?text_color</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
 
     <!-- installation wizard styles -->
@@ -509,6 +443,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:gravity">center</item>
         <item name="android:padding">12dp</item>
         <item name="android:layout_marginBottom">12dp</item>
     </style>
@@ -520,7 +455,7 @@
         <item name="android:layout_marginTop">16dp</item>
     </style>
     <style name="InstallationWizardTextViewAdvanced" parent="InstallationWizardTextViewBase">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/textSize_detailsWizard</item>
     </style>
 
     <!-- about pages styles -->
@@ -529,15 +464,12 @@
         <item name="android:layout_margin">7dip</item>
         <item name="android:linksClickable">true</item>
         <item name="android:paddingLeft">3dip</item>
-        <item name="android:textColor">?text_color</item>
-        <item name="android:textColorLink">?text_color_link</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
     <style name="about_info_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">?text_color</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
     <style name="about_info_content" parent="about_info_title">
         <item name="android:layout_marginBottom">5dip</item>
@@ -546,14 +478,14 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:linksClickable">false</item>
-        <item name="android:textColorLink">?text_color_link</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
     <style name="about_changes" parent="about_info_title">
         <item name="android:layout_gravity">left</item>
         <item name="android:layout_margin">7dip</item>
         <item name="android:linksClickable">true</item>
         <item name="android:paddingLeft">3dip</item>
-        <item name="android:textColorLink">?text_color_link</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
 
 </resources>

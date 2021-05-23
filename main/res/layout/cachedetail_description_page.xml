@@ -20,10 +20,8 @@
             android:layout_marginTop="12dip"
             android:layout_marginBottom="12dip"
             android:linksClickable="true"
-            android:textColor="?text_color"
-            android:textColorLink="?text_color_link"
             android:textIsSelectable="true"
-            android:textSize="14sp"
+            android:textSize="@dimen/textSize_detailsPrimary"
             android:visibility="gone"
             tools:text="This is the cache description. It might be very long..."
             tools:visibility="visible" />
@@ -66,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dip"
-                android:textSize="14sp" />
+                android:textSize="@dimen/textSize_detailsPrimary" />
         </LinearLayout>
 
         <!-- Hint and spoiler-images box -->
@@ -95,10 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:linksClickable="true"
-                android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textIsSelectable="true"
-                android:textSize="14sp"
+                android:textSize="@dimen/textSize_detailsPrimary"
                 tools:text="A hint for finding the cache..." />
 
             <TextView
@@ -109,9 +105,8 @@
                 android:layout_marginTop="6dip"
                 android:drawablePadding="3dip"
                 android:text="@string/cache_menu_spoilers"
-                android:textColor="?text_color"
-                android:textSize="14sp"
-                app:drawableLeftCompat="?log_img_icon" />
+                android:textSize="@dimen/textSize_detailsPrimary"
+                app:drawableLeftCompat="@drawable/log_img" />
         </LinearLayout>
 
         <!-- Personal note box -->
@@ -137,9 +132,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:linksClickable="true"
-                android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
-                android:textSize="14sp"
+                android:textSize="@dimen/textSize_detailsPrimary"
                 tools:text="Personal note text\nline 2\nline 3" />
 
             <View style="@style/separator_horizontal"
@@ -160,17 +153,13 @@
 
                     <ImageButton
                         android:id="@+id/upload_personalnote"
-                        style="@style/button_small"
-                        android:src="@drawable/ic_menu_upload"
-                        android:layout_width="40dip"
-                        android:layout_height="40dip"/>
+                        style="@style/button_icon"
+                        android:src="@drawable/ic_menu_upload" />
 
                     <ImageButton
                         android:id="@+id/edit_personalnote"
-                        style="@style/button_small"
-                        android:src="@drawable/ic_menu_edit"
-                        android:layout_width="40dip"
-                        android:layout_height="40dip"/>
+                        style="@style/button_icon"
+                        android:src="@drawable/ic_menu_edit" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -182,17 +171,13 @@
 
                     <ImageButton
                         android:id="@+id/storewaypoints_personalnote"
-                        style="@style/button_small"
-                        android:src="@drawable/ic_menu_waypoint_sync"
-                        android:layout_width="40dip"
-                        android:layout_height="40dip"/>
+                        style="@style/button_icon"
+                        android:src="@drawable/ic_menu_waypoint_sync" />
 
                     <ImageButton
                         android:id="@+id/deleteewaypoints_personalnote"
-                        style="@style/button_small"
-                        android:src="@drawable/ic_menu_waypoint_delete"
-                        android:layout_width="40dip"
-                        android:layout_height="40dip"/>
+                        style="@style/button_icon"
+                        android:src="@drawable/ic_menu_waypoint_delete" />
 
                 </LinearLayout>
             </RelativeLayout>

@@ -17,8 +17,7 @@
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="?text_color"
+            android:textSize="@dimen/textSize_detailsPrimary"
             android:paddingBottom="20dp">
         </TextView>
 
@@ -31,7 +30,7 @@
                 android:id="@+id/copymove_justselect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="@dimen/textSize_detailsPrimary"
                 android:checked="true"
                 android:text="@string/contentstorage_selectfolder_dialog_choice_justselect" />
 
@@ -39,14 +38,14 @@
                 android:id="@+id/copymove_move"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="@dimen/textSize_detailsPrimary"
                 android:text="@string/contentstorage_selectfolder_dialog_choice_move" />
 
             <RadioButton
                 android:id="@+id/copymove_copy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="@dimen/textSize_detailsPrimary"
                 android:text="@string/contentstorage_selectfolder_dialog_choice_copy" />
 
         </RadioGroup>

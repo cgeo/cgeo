@@ -19,9 +19,7 @@
         android:lines="1"
         android:scrollHorizontally="false"
         android:text="@null"
-        android:textColor="?text_color_headline"
         android:textIsSelectable="false"
-        android:textSize="12sp"
         tools:text="property"/>
 
     <TextView
@@ -32,9 +30,7 @@
         android:layout_marginRight="5dip"
         android:layout_toRightOf="@+id/name"
         android:gravity="center_vertical"
-        android:textColor="?text_color"
         android:textIsSelectable="false"
-        android:textSize="14sp"
         tools:text="value"/>
 
     <RatingBar
@@ -60,9 +56,7 @@
         android:layout_marginLeft="5dip"
         android:layout_toRightOf="@+id/stars"
         android:gravity="center_vertical"
-        android:textColor="?text_color_grey"
         android:textIsSelectable="false"
-        android:textSize="12sp"
         android:visibility="gone"
         tools:text="additional text"
         tools:visibility="visible"/>

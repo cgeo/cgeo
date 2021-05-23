@@ -23,7 +23,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputType;
@@ -612,13 +611,13 @@ public final class Dialogs {
 
         content.message.setText(message);
 
+        /* @todo Check if any adaptions to Material theme necessary
         if (Settings.isLightSkin()) {
-            content.message.setTextColor(context.getResources().getColor(R.color.text_light));
-            content.checkBox.setTextColor(context.getResources().getColor(R.color.text_light));
             final int[][] states = {{android.R.attr.state_checked}, {}};
             final int[] colors = {context.getResources().getColor(R.color.colorAccent), context.getResources().getColor(R.color.steel)};
             content.checkBox.setButtonTintList(new ColorStateList(states, colors));
         }
+        */
 
         final AlertDialog.Builder builder = newBuilder(context)
                 .setView(content.getRoot())
@@ -757,7 +756,6 @@ public final class Dialogs {
         final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
         input.setText(defaultValue);
-        input.setTextColor(context.getResources().getColor(Settings.isLightSkin() ? R.color.text_light : R.color.text_dark));
 
         final AlertDialog.Builder builder = newBuilder(context);
         builder.setTitle(title);
@@ -822,7 +820,6 @@ public final class Dialogs {
         final EditText editText = new EditText(context);
         editText.setInputType(inputType);
         editText.setText(defaultValue);
-        editText.setTextColor(context.getResources().getColor(Settings.isLightSkin() ? R.color.text_light : R.color.text_dark));
         editText.setGravity(Gravity.LEFT);
         editText.setLayoutParams(textParam);
         layout.addView(editText);
@@ -1060,6 +1057,6 @@ public final class Dialogs {
     }
 
     public static ContextThemeWrapper newContextThemeWrapper(final Context context) {
-        return new ContextThemeWrapper(context, Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert);
+        return new ContextThemeWrapper(context, R.style.cgeo);
     }
 }

@@ -25,17 +25,13 @@
 
         <ImageButton
             android:id="@+id/image_add_multi"
-            style="@style/button_small"
-            android:layout_width="40dip"
-            android:layout_height="40dip"
+            style="@style/button_icon"
             android:layout_gravity="left"
             android:src="@drawable/ic_menu_image_multi" />
 
         <ImageButton
             android:id="@+id/image_add_camera"
-            style="@style/button_small"
-            android:layout_width="40dip"
-            android:layout_height="40dip"
+            style="@style/button_icon"
             android:layout_gravity="left"
             android:layout_toRightOf="@+id/image_add_multi"
             android:src="@drawable/ic_menu_camera" />
@@ -57,12 +53,9 @@
             android:layout_width="match_parent"
 
             android:layout_height="match_parent"
-            android:cacheColorHint="?background_color"
             android:clipToPadding="false"
-            android:divider="?background_color"
             android:footerDividersEnabled="false"
             android:headerDividersEnabled="false"
-            android:listSelector="?background_color"
             android:nestedScrollingEnabled="false"
             android:orientation="vertical"
             android:padding="4dip"

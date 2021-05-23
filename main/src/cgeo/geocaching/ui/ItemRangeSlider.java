@@ -2,7 +2,6 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.ItemrangesliderViewBinding;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.functions.Func2;
 
 import android.content.Context;
@@ -54,8 +53,7 @@ public class ItemRangeSlider<T> extends LinearLayout {
 
     private void init() {
         setOrientation(VERTICAL);
-        final ContextThemeWrapper ctw = new ContextThemeWrapper(getContext(),
-            Settings.isLightSkin() ? R.style.dark_material : R.style.light_material);
+        final ContextThemeWrapper ctw = new ContextThemeWrapper(getContext(), R.style.cgeo);
         inflate(ctw, R.layout.itemrangeslider_view, this);
         binding = ItemrangesliderViewBinding.bind(this);
         setScale(null, null, null);

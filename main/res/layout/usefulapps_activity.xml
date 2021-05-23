@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="?background_color"
     android:orientation="vertical"
     tools:context=".helper.UsefulAppsActivity" >
 
@@ -11,13 +10,10 @@
         android:id="@+id/apps_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:cacheColorHint="?background_color"
         android:clipToPadding="false"
-        android:divider="?background_color"
         android:fastScrollEnabled="false"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
-        android:listSelector="?background_color"
         android:padding="4dip"
         android:scrollbarStyle="outsideOverlay"
         tools:listitem="@layout/usefulapps_item" />

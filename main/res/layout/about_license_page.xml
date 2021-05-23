@@ -24,9 +24,7 @@
             android:focusable="true"
             android:linksClickable="false"
             android:text="@string/about_apache_license"
-            android:textColor="?text_color"
-            android:textColorLink="?text_color_link"
-            android:textSize="14sp" />
+            android:textSize="@dimen/textSize_headingPrimary" />
 
         <TextView
             android:id="@+id/license_text"
@@ -36,9 +34,7 @@
             android:layout_margin="7dip"
             android:paddingLeft="3dip"
             android:text="@null"
-            android:textColor="?text_color"
-            android:textSize="10sp"
-            tools:ignore="SmallSp" />
+            android:textSize="@dimen/textSize_detailsPrimary" />
     </LinearLayout>
 
 </ScrollView>

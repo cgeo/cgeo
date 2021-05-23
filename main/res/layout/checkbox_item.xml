@@ -29,15 +29,15 @@
             android:lines="1"
             android:maxLines="2"
             android:ellipsize="end"
-            android:textColor="?text_color"
             android:layout_marginLeft="6dp"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+	    android:textSize="@dimen/textSize_detailsPrimary" />
         <ImageView
             android:id="@+id/item_info"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:visibility="gone"
-            android:src="?attr/info_icon"
+            android:src="@drawable/settings_info_icon"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="30dp"
             android:layout_toRightOf="@+id/item_text"

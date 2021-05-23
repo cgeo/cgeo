@@ -13,4 +13,31 @@
 
     <dimen name="dialog_padding_horizontal">24dip</dimen>
 
+
+    <!-- font size dimensions ====================================== -->
+
+    <!-- all toolbars except main screen -->
+    <dimen name="textSize_toolbarSingle">20sp</dimen>
+    <dimen name="textSize_toolbarPrimary">18sp</dimen>
+    <dimen name="textSize_toolbarSecondary">16sp</dimen>
+
+    <!-- headings (not toolbar) -->
+    <dimen name="textSize_headingPrimary">20sp</dimen>
+    <dimen name="textSize_headingSecondary">18sp</dimen>
+
+    <!-- lists -->
+    <dimen name="textSize_listsPrimary">20sp</dimen>
+    <dimen name="textSize_listsSecondary">16sp</dimen>
+
+    <!-- calculator labels between input buttons -->
+    <dimen name="textSize_calculator">22sp</dimen>
+
+    <!--- wizard -->
+    <dimen name="textSize_headingWizard">26sp</dimen>
+    <dimen name="textSize_detailsWizard">20sp</dimen>
+
+    <!-- all other text -->
+    <dimen name="textSize_detailsPrimary">16sp</dimen>
+    <dimen name="textSize_detailsSecondary">14sp</dimen>
+
 </resources>

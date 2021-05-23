@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/LatSeparator1"
                 android:text="°"
-                android:textSize="22sp"
+                android:textSize="@dimen/textSize_calculator"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -57,7 +57,7 @@
             <TextView
                 android:id="@+id/LatSeparator2"
                 android:text=","
-                android:textSize="22sp"
+                android:textSize="@dimen/textSize_calculator"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -74,7 +74,7 @@
             <TextView
                 android:id="@+id/LatSeparator3"
                 android:text=","
-                android:textSize="22sp"
+                android:textSize="@dimen/textSize_calculator"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -113,7 +113,7 @@
             <TextView
                 android:id="@+id/LonSeparator1"
                 android:text="°"
-                android:textSize="22sp"
+                android:textSize="@dimen/textSize_calculator"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -130,7 +130,7 @@
             <TextView
                 android:id="@+id/LonSeparator2"
                 android:text=","
-                android:textSize="22sp"
+                android:textSize="@dimen/textSize_calculator"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -147,7 +147,7 @@
             <TextView
                 android:id="@+id/LonSeparator3"
                 android:text=","
-                android:textSize="22sp"
+                android:textSize="@dimen/textSize_calculator"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 

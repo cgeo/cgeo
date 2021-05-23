@@ -55,7 +55,7 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
     }
 
     public void setTheme(final int resid) {
-        super.setTheme(Settings.isLightSkin() ? R.style.light : R.style.dark);
+        super.setTheme(R.style.cgeo);
     }
 
     public TrackUtils getTrackUtils() {

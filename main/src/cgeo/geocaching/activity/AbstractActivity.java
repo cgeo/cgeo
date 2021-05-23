@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -33,6 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -124,6 +126,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     public void onCreate(final Bundle savedInstanceState) {
         Log.v(logToken + ".onCreate(Bundle)");
         ApplicationSettings.setLocale(this);
+        AppCompatDelegate.setDefaultNightMode(Settings.isLightSkin() ? AppCompatDelegate.MODE_NIGHT_NO : AppCompatDelegate.MODE_NIGHT_YES);
         super.onCreate(savedInstanceState);
         onCreateCommon();
     }

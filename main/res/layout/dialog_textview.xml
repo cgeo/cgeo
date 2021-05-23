@@ -13,5 +13,5 @@
         android:paddingBottom="20dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:textSize="16sp" />
+        android:textSize="@dimen/textSize_detailsPrimary" />
 </LinearLayout>

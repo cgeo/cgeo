@@ -10,11 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/cache_name"
-        android:inputType="text|none" />
+        android:inputType="text|none"
+	android:textSize="@dimen/textSize_detailsPrimary" />
 
     <CheckBox
         android:id="@+id/givenList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_internal_cache_currentlist" />
+        android:text="@string/create_internal_cache_currentlist"
+	android:textSize="@dimen/textSize_detailsSecondary" />
 </LinearLayout>

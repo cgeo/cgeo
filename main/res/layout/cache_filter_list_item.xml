@@ -21,8 +21,7 @@
             android:lines="1"
             android:layout_marginTop="3dp"
             android:layout_marginLeft="6dp"
-            android:textColor="?text_color"
-            android:textSize="24sp"
+            android:textSize="@dimen/textSize_headingPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -35,9 +34,7 @@
 
         <ImageButton
             android:id="@+id/filter_delete"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            style="@style/button_icon"
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:scaleType="centerInside"

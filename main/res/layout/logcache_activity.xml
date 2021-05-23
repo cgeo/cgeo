@@ -4,7 +4,6 @@
     android:id="@+id/logcache_viewroot"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="?background_color"
     android:orientation="vertical"
     android:padding="4dip"
     tools:context=".log.LogCacheActivity">
@@ -59,8 +58,7 @@
                 android:layout_marginRight="10dip"
                 android:layout_gravity="right"
                 android:visibility="gone"
-                android:textColor="?text_color"
-                android:textSize="14sp" />
+                android:textSize="@dimen/textSize_detailsSecondary" />
 
             <LinearLayout
                 android:id="@+id/log_password_box"
@@ -77,8 +75,7 @@
                     android:gravity="left"
                     android:padding="10dip"
                     android:text="@string/log_password_title"
-                    android:textColor="?text_color"
-                    android:textSize="22sp" />
+                    android:textSize="@dimen/textSize_headingPrimary" />
 
                 <EditText
                     android:id="@+id/log_password"
@@ -109,8 +106,7 @@
                     android:maxLines="1"
                     android:text="@string/log_report_problem"
                     android:textIsSelectable="false"
-                    android:textColor="?text_color"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/textSize_detailsPrimary" />
 
                 <TextView
                     android:id="@+id/report_problem"
@@ -119,11 +115,9 @@
                     android:gravity="right"
                     android:lines="1"
                     android:maxLines="1"
-                    android:textColor="?text_color"
                     android:textIsSelectable="false"
                     tools:text="report problem"
-                    android:textSize="14sp"
-                    />
+                    android:textSize="@dimen/textSize_detailsPrimary" />
 
             </LinearLayout>
 
@@ -183,12 +177,9 @@
 		        android:id="@+id/inventory"
 		        android:layout_width="fill_parent"
 		        android:layout_height="fill_parent"
-		        android:cacheColorHint="?background_color"
 		        android:clipToPadding="false"
-		        android:divider="?background_color"
 		        android:footerDividersEnabled="false"
 		        android:headerDividersEnabled="false"
-		        android:listSelector="?background_color"
 		        android:padding="4dip"
 		        android:scrollbars="none"
 		        tools:ignore="NestedScrolling"
@@ -215,8 +206,7 @@
                     android:layout_marginRight="10dip"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:text="@string/log_tb_changeall"
-                    android:textSize="14sp" />
+                    android:text="@string/log_tb_changeall" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
