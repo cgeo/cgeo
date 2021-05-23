@@ -1,10 +1,10 @@
-### Cache details
+### Cache Details
 
 
-### Map
+### Karte
 
 
-### Integrated routing engine
+### Integrierte Routing-Engine
 
 
 ### Sonstiges
