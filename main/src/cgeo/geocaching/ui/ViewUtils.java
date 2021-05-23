@@ -10,10 +10,13 @@ import cgeo.geocaching.utils.functions.Func2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -22,6 +25,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -193,6 +197,25 @@ public class ViewUtils {
         tv.setText(text);
         tv.measure(0, 0);
         return tv.getMeasuredWidth();
+
+    }
+
+    public static void extendMenuActionBarDisplayItemCount(final Context ctx, final Menu menu) {
+
+        final Configuration config = ctx.getResources().getConfiguration();
+        final int width = config.screenWidthDp;
+
+        int extendTo = 0;
+
+        //RULES to extend AS ALWAYS are decoded here. See rules of Android in {@link androidx.appcompat.view.ActionBarPoilcy#getMaxActionButtons}
+        if (width > 390) {
+            extendTo = 3;
+        }
+
+        for (int pos = 0; pos < menu.size() && pos < extendTo; pos++) {
+            final MenuItem item = menu.getItem(pos);
+            item.setShowAsAction(SHOW_AS_ACTION_ALWAYS);
+        }
 
     }
 

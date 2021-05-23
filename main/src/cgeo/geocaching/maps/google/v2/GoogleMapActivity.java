@@ -26,6 +26,7 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -120,6 +121,13 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
     public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         return mapBase.onPrepareOptionsMenu(menu);
     }
+
+    @Override
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        invalidateOptionsMenu();
+    }
+
 
     @Override
     protected void onStart() {

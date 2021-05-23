@@ -24,6 +24,7 @@ import cgeo.geocaching.utils.TextUtils;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -59,6 +60,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     public static final String EXTRA_FILTER_RESULT = "efr";
 
     private static final String STATE_CURRENT_FILTER = "state_current_filter";
+    private static final String STATE_ADVANCED_VIEW = "state_advanced_view";
 
     private static final GeocacheFilterType[] BASIC_FILTER_TYPES =
         new GeocacheFilterType[]{GeocacheFilterType.TYPE, GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN };
@@ -86,7 +88,6 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         this.inverseFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_inverse, R.drawable.ic_menu_invert);
         this.includeInconclusiveFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, R.string.cache_filter_option_include_inconclusive, R.drawable.ic_menu_vague,
             R.string.cache_filter_option_include_inconclusive_info);
-        this.binding.filterBasicAdvanced.setValues(Arrays.asList(getString(R.string.cache_filter_mode_basic), getString(R.string.cache_filter_mode_advanced)));
 
         filterListAdapter = new FilterListAdapter(binding.filterList);
         initializeFilterAdd();
@@ -100,26 +101,23 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             inputFilter = extras.getString(EXTRA_FILTER_INPUT);
         }
 
-        fillViewFromFilter(inputFilter);
+        fillViewFromFilter(inputFilter, false);
 
-        if (isBasicPossibleWithoutLoss()) {
-            this.binding.filterBasicAdvanced.setSelectedValue(0);
-            switchToBasic();
-        } else {
-            this.binding.filterBasicAdvanced.setSelectedValue(1);
-            switchToAdvanced();
-        }
-
-        this.binding.filterBasicAdvanced.setChangeListener((v, i) -> {
-            if (i == 1) {
+        this.binding.filterBasicAdvanced.setOnCheckedChangeListener((v, c) -> {
+            if (c) {
                 switchToAdvanced();
             } else if (isBasicPossibleWithoutLoss()) {
                 switchToBasic();
             } else {
                 Dialogs.confirm(this, R.string.cache_filter_mode_basic_change_confirm_loss_title, R.string.cache_filter_mode_basic_change_confirm_loss_message, android.R.string.ok,
-                    (vv, ii) -> switchToBasic(), vv -> this.binding.filterBasicAdvanced.setSelectedValue(1));
+                    (vv, ii) -> switchToBasic(), vv -> this.binding.filterBasicAdvanced.setChecked(true));
             }
         });
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     private void initializeStorageOptions() {
@@ -147,7 +145,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                     Dialogs.select(this, filters, GeocacheFilter::getName, -1, R.string.cache_filter_storage_load_delete_title, R.string.cache_filter_storage_load_button, R.string.cache_filter_storage_delete_button, (b, f) -> {
                         switch (b) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                fillViewFromFilter(f.toConfig());
+                                fillViewFromFilter(f.toConfig(), isAdvancedView());
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE:
                                 GeocacheFilter.Storage.delete(f);
@@ -176,13 +174,14 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(STATE_CURRENT_FILTER, getFilterFromView().toConfig());
+        outState.putBoolean(STATE_ADVANCED_VIEW, isAdvancedView());
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull final Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState.getString(STATE_CURRENT_FILTER) != null) {
-            fillViewFromFilter(savedInstanceState.getString(STATE_CURRENT_FILTER));
+            fillViewFromFilter(savedInstanceState.getString(STATE_CURRENT_FILTER), savedInstanceState.getBoolean(STATE_ADVANCED_VIEW));
         }
     }
 
@@ -212,7 +211,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
 
-    private void fillViewFromFilter(final String inputFilter) {
+    private void fillViewFromFilter(final String inputFilter, final boolean forceAdvanced) {
         includeInconclusiveFilterCheckbox.setChecked(false);
         inverseFilterCheckbox.setChecked(false);
         andOrFilterCheckbox.setChecked(false);
@@ -244,6 +243,15 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             } catch (ParseException pe) {
                 Log.w("Exception parsing input filter", pe);
             }
+        }
+
+        //set basic/advanced switch
+        if (!forceAdvanced && isBasicPossibleWithoutLoss()) {
+            this.binding.filterBasicAdvanced.setChecked(false);
+            switchToBasic();
+        } else {
+            this.binding.filterBasicAdvanced.setChecked(true);
+            switchToAdvanced();
         }
     }
 
@@ -341,7 +349,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
     private void switchToAdvanced() {
-        this.binding.filterBasicAdvanced.setSelectedValue(1);
+        this.binding.filterBasicAdvanced.setChecked(true);
         this.binding.filterStorageOptions.setVisibility(View.VISIBLE);
         this.binding.filterStorageOptionsLine.setVisibility(View.VISIBLE);
         this.binding.filterPropsCheckboxes.setVisibility(View.VISIBLE);
@@ -359,7 +367,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
     private void switchToBasic() {
-        this.binding.filterBasicAdvanced.setSelectedValue(0);
+        this.binding.filterBasicAdvanced.setChecked(false);
         this.binding.filterStorageName.setText("");
         this.inverseFilterCheckbox.setChecked(false);
         this.inverseFilterCheckbox.setChecked(false);
@@ -404,7 +412,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
     private boolean isAdvancedView() {
-        return this.binding.filterBasicAdvanced.getSelectedValue() == 1;
+        return this.binding.filterBasicAdvanced.isChecked();
     }
 
     private static class ItemHolder extends RecyclerView.ViewHolder {
