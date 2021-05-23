@@ -55,6 +55,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
@@ -742,6 +743,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     @Override
     public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         super.onPrepareOptionsMenu(menu);
+        if (mapOptions != null && (mapOptions.isLiveEnabled || mapOptions.isStoredEnabled)) {
+            ViewUtils.extendMenuActionBarDisplayItemCount(getActivity(), menu);
+        }
         for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
             final MenuItem menuItem = menu.findItem(mapSource.getNumericalId());
             if (menuItem != null) {

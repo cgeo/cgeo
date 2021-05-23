@@ -18,22 +18,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <cgeo.geocaching.ui.ToggleButtonGroup
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/filter_basic_advanced"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginHorizontal="6dp"
-            android:layout_marginVertical="3dp"
+            android:layout_margin="6dp"
             android:layout_centerVertical="true"
-            tools:ignore="RelativeOverlap" />
+            android:text="@string/cache_filter_mode_advanced" />
 
-        <ImageButton
+        <TextView
             android:id="@+id/filter_additem"
-            style="@style/button_icon"
+            style="@style/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/filter_basic_advanced"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_menu_add"/>
+            android:gravity="center"
+            android:layout_margin="6dp"
+            android:text="@string/cache_filter_add_button"/>
 
     </RelativeLayout>
 

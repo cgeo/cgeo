@@ -28,18 +28,18 @@
     <item
         android:id="@+id/menu_filter"
         android:icon="@drawable/ic_menu_filter"
-        android:showAsAction="ifRoom|withText"
+        android:showAsAction="ifRoom"
         android:title="@string/search_filter"
         android:visible="true"
-        app:showAsAction="ifRoom|withText">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_map_live"
         android:icon="@drawable/ic_menu_refresh"
-        android:showAsAction="ifRoom|withText"
+        android:showAsAction="ifRoom"
         android:title="@string/map_live_disable"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_hint"

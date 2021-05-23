@@ -471,16 +471,16 @@
     <string name="list_not_available">List no longer available, switching to standard list</string>
 
     <!-- caches lists filter -->
-    <string name="cache_filter_mode_basic">Basic</string>
     <string name="cache_filter_mode_advanced">Advanced</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Switch to Basic</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Changing to \'Basic\' mode will result in loss of filter settings. Do you want to continue?</string>
 
+    <string name="cache_filter_add_button">Add filter criteria</string>
     <string name="cache_filter_option_and_or">Use OR instead of AND</string>
     <string name="cache_filter_option_inverse">Inverse Filter</string>
     <string name="cache_filter_option_include_inconclusive">Include inconclusive matches</string>
     <string name="cache_filter_option_include_inconclusive_info">Whether to include cache in result when a filter needs info on cache which is not available.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Tap \'+\' on upper right side to add a filter</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tap \'Add filter criteria\' above to add a filter</string>
 
     <string name="cache_filter_name">Cache Name</string>
     <string name="cache_filter_type">Cache Type</string>
