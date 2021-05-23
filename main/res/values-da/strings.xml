@@ -425,7 +425,6 @@
     <string name="about_contributors_carnerodetails">som c:geo\'s fader</string>
     <string name="about_contributors_recent">Seneste bidragsydere</string>
     <string name="about_contributors_specialthanks">Særlig tak til</string>
-    <string name="about_contributors_specialthanksdetails">· alle vores oversættere på <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· alle fejlfindere\n· og alle andre bidragsydere.\n</string>
     <string name="about_contributors_other">Andre bidragsydere</string>
     <string name="about_components">Komponenter</string>
     <string name="contribution_code">kode</string>
