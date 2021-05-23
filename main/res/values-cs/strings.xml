@@ -34,6 +34,29 @@
     <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Uživatelem definovaná keška</string>
     <string name="unknown">Neznámý typ</string>
+    <string name="all_types_short">Vše</string>
+    <string name="traditional_short">Tradička</string>
+    <string name="multi_short">Multina</string>
+    <string name="mystery_short">Mysterka</string>
+    <string name="letterbox_short">Letterbox</string>
+    <string name="event_short">Event</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Earth</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webka</string>
+    <string name="virtual_short">Virtuálka</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Komunitní</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">GC HQ Cel</string>
+    <string name="gps_short">GPS Exhibit</string>
+    <string name="block_short">GCHQ Block</string>
+    <string name="locationless_short">Locationless</string>
+    <string name="advlab_short">Adv Lab</string>
+    <string name="userdefined_short">Vlastní</string>
+    <string name="unknown_short">Neznámá</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
     <string name="cache_size_small">Malá</string>
@@ -155,6 +178,8 @@
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nZměněná velikost/Komprimované:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Obrázek</string>
+    <string name="datetime_clear_button">Vymazat</string>
+    <string name="datetime_nodateset_display">Není nastavené datum</string>
     <!-- translation -->
     <string name="translate">Přeložit</string>
     <string name="translate_to_sys_lang">Přeložit do %s</string>
@@ -421,22 +446,39 @@
     <string name="list_dialog_rename">Přejmenovat</string>
     <string name="list_not_available">Seznam již není dostupný, přepínání na výchozí seznam</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_advanced">Rozšířené</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Přepnout na základní</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">Změna do „základního“ režimu bude mít za následek ztrátu nastavení filtru. Chceš pokračovat?</string>
+    <string name="cache_filter_add_button">Přidat kritéria filtru</string>
     <string name="cache_filter_option_and_or">Použít NEBO místo A</string>
     <string name="cache_filter_option_inverse">Invertovat filtr</string>
     <string name="cache_filter_option_include_inconclusive">Zahrnout neprůkazné shody</string>
     <string name="cache_filter_option_include_inconclusive_info">Zvolte, zda chce do výsledku zahrnout kešky, když filtr potřebuje informace o kešce, která není k dispozici.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Klepnutím na \'+\' v pravé horní části přidáte filtr</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Klepnutím na „Přidat kritéria filtru“ přidáte filtr</string>
+    <string name="cache_filter_name">Název kešky</string>
+    <string name="cache_filter_type">Typ kešky</string>
+    <string name="cache_filter_size">Velikost kešky</string>
     <string name="cache_filter_personalnote">Osobní poznámka</string>
+    <string name="cache_filter_description">Popis kešky</string>
     <string name="cache_filter_offlinelog">Offline Log</string>
+    <string name="cache_filter_owner">Vlastník kešky</string>
     <string name="cache_filter_difficulty">Obtížnost</string>
     <string name="cache_filter_terrain">Terén</string>
     <string name="cache_filter_status">Stav</string>
+    <string name="cache_filter_attributes">Atributy kešky</string>
     <string name="cache_filter_favorites">Oblíbené</string>
     <string name="cache_filter_distance">Vzdálenost</string>
+    <string name="cache_filter_hidden">Datum skrytí</string>
     <string name="cache_filter_include">Zahrnout</string>
     <string name="cache_filter_exclude">Vyloučit</string>
     <string name="cache_filter_userdisplay_complex">Komplexní</string>
     <string name="cache_filter_userdisplay_none">Žádný</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="one">%1$d položka</item>
+        <item quantity="few">%1$d položky</item>
+        <item quantity="many">%1$d položek</item>
+        <item quantity="other">%1$d položek</item>
+    </plurals>
     <string name="cache_filter_storage_load_button">Načíst</string>
     <string name="cache_filter_storage_delete_button">Vymazat</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
@@ -452,6 +494,9 @@
     <string name="cache_filter_stringfilter_type_starts_with">Začíná na</string>
     <string name="cache_filter_stringfilter_type_ends_with">Končí na</string>
     <string name="cache_filter_stringfilter_type_pattern">Vzor</string>
+    <string name="cache_filter_datefilter_label_from">Od:</string>
+    <string name="cache_filter_datefilter_label_to">Do:</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Vybrat vše</string>
     <string name="cache_filter_favorites_absolute">Absolutní</string>
     <string name="cache_filter_favorites_percentage">Procentuálně</string>
     <string name="cache_filter_distance_use_current_position">Použít aktuální pozici</string>
@@ -467,6 +512,8 @@
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
+    <string name="about_changelog_nightly_build">Noční sestavení</string>
+    <string name="about_changelog_next_release">Další vydání</string>
     <string name="about_system">Systém</string>
     <string name="about_donate">Podpoř nás</string>
     <string name="about_donation_more">Navštivte webovou stránku pro informace</string>
@@ -491,7 +538,7 @@
     <string name="about_contributors_carnerodetails">jako otec c:geo</string>
     <string name="about_contributors_recent">Nedávní přispěvatelé</string>
     <string name="about_contributors_specialthanks">Zvláštní poděkování</string>
-    <string name="about_contributors_specialthanksdetails">· Všem našim překladatelům na <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· všem oznamovatelům problémů\n· a všem ostatním podporovatelům.\n</string>
+    <string name="about_contributors_specialthanksdetails">- všem našim překladatelům na [Crowdin.net](https://crowdin.net/project/cgeo)!\n- všem ohlašovatelům problémů\n- a všem ostatním podporovatelům.\n</string>
     <string name="about_contributors_other">Další přispěvatelé</string>
     <string name="about_components">Součásti</string>
     <string name="contribution_code">kód</string>
@@ -1361,6 +1408,7 @@
     <string name="search_hbu_button">Hledat podle vlastníka</string>
     <string name="search_filter">Filtr (experimentální)</string>
     <string name="search_filter_button">Hledat podle filtru</string>
+    <string name="search_filter_info_message">Funkce „Hledat podle filtru“ vyhledává kešky v online službách pomocí zadaného filtru. V závislosti na možnosti služby, se online filtrování provádí pouze částečně, zbytek se pak provádí offline filtrováním.\n\nVšechny služby podporují pouze AND filtry, nikoliv inverzní filtry.\n\nGeocaching.com podporuje:\n- název (pouze celá slova, vzor není podporován)\n- typ kešky\n- velikost kešky\n- vzdálenost\n- obtížnost a terén\n- oblíbené (pouze absolutní, pouze minimální)\n- stav (vlastněné, nalezené &amp; zapnuté)\n- skryté kým (uveďte přesné ID uživatele)\n- nenalezené kým (uveďte přesné ID uživatele)\n- datum umístění\n\nMějte na vědomí, že c:geo nemůže nabízet konkrétní filtrování atributů, protože nám geocaching.com blokuje požadované API.\n\nŽádná služba kromě geocaching.com zatím není podporována.</string>
     <string name="search_tb">Sledovatelný předmět</string>
     <string name="search_tb_hint">ID sledovatelného předmětu</string>
     <string name="search_tb_button">Hledat sledovatelné</string>
