@@ -440,7 +440,6 @@
     <string name="about_contributors_carnerodetails">com el pare de c:geo</string>
     <string name="about_contributors_recent">Col·laboradors recents</string>
     <string name="about_contributors_specialthanks">Agraïments especials a:</string>
-    <string name="about_contributors_specialthanksdetails">· Tots els nostres col·laboradors de traduccions a <a href="https://crowdin.net/project/cgeo"> Crowdin.net </a>!\n · tots els creadors\n· i tots els altres suports.\n</string>
     <string name="about_contributors_other">Altres col·laboradors</string>
     <string name="about_components">Components</string>
     <string name="contribution_code">Codi</string>
