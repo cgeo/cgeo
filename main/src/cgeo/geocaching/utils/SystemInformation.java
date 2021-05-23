@@ -61,7 +61,7 @@ public final class SystemInformation {
         }
         final String hideCaches = (Settings.isExcludeMyCaches() ? "own/found " : "") + (Settings.isExcludeDisabledCaches() ? "disabled " : "") + (Settings.isExcludeArchivedCaches() ? "archived" : "");
         final String hideWaypoints = (Settings.isExcludeWpOriginal() ? "original " : "") + (Settings.isExcludeWpParking() ? "parking " : "") + (Settings.isExcludeWpVisited() ? "visited" : "");
-        final StringBuilder body = new StringBuilder("--- System information ---")
+        final StringBuilder body = new StringBuilder("## System information").append("\n")
             .append("\nc:geo version: ").append(Version.getVersionName(context)).append("\n")
 
             .append("\nDevice:")
@@ -125,7 +125,7 @@ public final class SystemInformation {
         appendPersistedUriPermission(body, context);
         appendDatabase(body);
 
-        body.append("\n--- End of system information ---\n");
+        body.append("\n\n--- End of system information ---\n");
         return body.toString();
     }
 
