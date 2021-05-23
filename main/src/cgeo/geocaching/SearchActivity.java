@@ -187,7 +187,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         binding.geocode.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
         binding.trackable.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
 
-        binding.searchFilterInfo.setOnClickListener(v -> Dialogs.message(this, R.string.search_filter_info_message));
+        binding.searchFilterInfo.setOnClickListener(v -> Dialogs.messageMarkdown(this, null, this.getString(R.string.search_filter_info_message)));
     }
 
     private static void setSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {

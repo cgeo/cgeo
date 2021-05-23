@@ -55,6 +55,7 @@ import java.util.Objects;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import io.noties.markwon.Markwon;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
@@ -511,6 +512,35 @@ public final class Dialogs {
             iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(dialog::setIcon);
         }
         dialog.show();
+    }
+
+    /**
+     * Show a message dialog with a single "OK" button and an eventual icon.
+     * "message" can be formatted using markdown
+     *
+     * @param context
+     *            activity owning the dialog
+     * @param title
+     *            message dialog title
+     * @param message
+     *            message dialog content
+     */
+    public static void messageMarkdown(final Activity context, @Nullable final String title, final String message) {
+        final View v = context.getLayoutInflater().inflate(R.layout.dialog_textview, null);
+        final Markwon markwon = Markwon.create(context);
+        markwon.setMarkdown(v.findViewById(R.id.info), message);
+
+        final AlertDialog.Builder builder = newBuilder(context)
+            .setCancelable(true)
+            .setPositiveButton(getString(android.R.string.ok), null);
+        if (StringUtils.isNotBlank(title)) {
+            builder.setTitle(title);
+        }
+        builder
+            .setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()))
+            .setView(v)
+            .create()
+            .show();
     }
 
     /**
