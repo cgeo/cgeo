@@ -34,6 +34,29 @@
     <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Kullanıcı tanımlı cache</string>
     <string name="unknown">Bilinmeyen Tür</string>
+    <string name="all_types_short">Tümü</string>
+    <string name="traditional_short">Gelen</string>
+    <string name="multi_short">Çoklu</string>
+    <string name="mystery_short">Gizemli</string>
+    <string name="letterbox_short">Letterbox</string>
+    <string name="event_short">Etkinlik</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Earth</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webcam</string>
+    <string name="virtual_short">Sanal</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Topluluk</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">GC HQ Kut</string>
+    <string name="gps_short">GPS Exhibit</string>
+    <string name="block_short">GCHQ Block</string>
+    <string name="locationless_short">Tersine Cache</string>
+    <string name="advlab_short">Adv Lab</string>
+    <string name="userdefined_short">KulTanımlı</string>
+    <string name="unknown_short">Bilinmeyen</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Ekstra Küçük</string>
     <string name="cache_size_small">Küçük</string>
@@ -421,11 +444,15 @@
     <string name="list_dialog_rename">Yeniden Adlandır</string>
     <string name="list_not_available">Liste artık mevcut değil, standart listeye geçiliyor</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_advanced">Gelişmiş</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Temel\'e Geç</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">\'Temel\' moda geçmek filtre ayarlarının kaybolmasına sebep olacaktır. Devam etmek istiyor musunuz?</string>
+    <string name="cache_filter_add_button">Filtre ekle</string>
     <string name="cache_filter_option_and_or">VE yerine VEYA kullan</string>
     <string name="cache_filter_option_inverse">Tersine Filtre</string>
     <string name="cache_filter_option_include_inconclusive">Kesin olmayan eşleşmeleri de dahil et</string>
     <string name="cache_filter_option_include_inconclusive_info">Filtrelemede aranan bir özellikle ilgili bilgi içermese de cache\'leri sonuçlara dahil et.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Bir filtre eklemek için sağ yukarıdaki \'+\' simgesine tıklayın</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Fitre eklemek için yukarıdaki \'Filtre ekle\'ye tıklayın</string>
     <string name="cache_filter_name">Geocache Adı</string>
     <string name="cache_filter_type">Geocache Türü</string>
     <string name="cache_filter_size">Geocache Boyutu</string>
@@ -465,6 +492,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Patern</string>
     <string name="cache_filter_datefilter_label_from">Buradan:</string>
     <string name="cache_filter_datefilter_label_to">Buraya:</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Tümünü seç</string>
     <string name="cache_filter_favorites_absolute">Mutlak</string>
     <string name="cache_filter_favorites_percentage">Yüzde</string>
     <string name="cache_filter_distance_use_current_position">Mevcut konumu kullan</string>
@@ -480,6 +508,8 @@
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
+    <string name="about_changelog_nightly_build">Son sürüm</string>
+    <string name="about_changelog_next_release">Sonraki sürüm</string>
     <string name="about_system">Sistem</string>
     <string name="about_donate">Bizi destekleyin</string>
     <string name="about_donation_more">Bilgi için web sitesini ziyaret edin</string>
@@ -504,7 +534,7 @@
     <string name="about_contributors_carnerodetails">C:geo\'nun kurucusu</string>
     <string name="about_contributors_recent">Güncel katkıda bulunanlar</string>
     <string name="about_contributors_specialthanks">Katkılarından dolayı teşekkürler</string>
-    <string name="about_contributors_specialthanksdetails">· <a href="https://crowdin.net/project/cgeo">Crowdin.net</a> üzerinden çevirilere katkıda bulunanlara!\n· tüm sorunları çözenlere\n· ve tüm diğer destekçilerimize.\n</string>
+    <string name="about_contributors_specialthanksdetails">-[Crowdin.net](https://crowdin.net/project/cgeo)! üzerinden çevirilere katkı verenler\n- tüm sorun bildirenler\n- ve diğer tüm destekçilerimiz.\n</string>
     <string name="about_contributors_other">Diğer katkıda bulunanlar</string>
     <string name="about_components">Bileşenler</string>
     <string name="contribution_code">kod</string>
@@ -1354,6 +1384,7 @@
     <string name="search_hbu_button">Sahibine göre ara</string>
     <string name="search_filter">Filtre (Deneysel)</string>
     <string name="search_filter_button">Filtreye göre ara</string>
+    <string name="search_filter_info_message">\'Filtreye göre ara\' seçilen filtreye göre Geocacheleri çevrimiçi olarak arar. Servis gücüne göre bir kısmı çevrimiçi olarak kalanı ise çevrimdışı olarak arama yapılabilir.\n\nTüm servisler sadece VE ve Hayır filtrelerinin değişimini destekler\n\nGeocaching.com destekleri\n- İsim (sadece tam sözcükler, biçimler desteklenmez)\n- Geocache türü\n-Geocache boyutu\n- Mesafe ve Arazi\n- Favoriler (sadece minimum)\n- Durum (Sahibi olduklarım, Bulduklarım &amp; Aktifler)\n- Saklayan (sadece kullanıcı adına özel arama)\n- Bulmadıkları (sadece kullanıcı adına özel arama)\n- Saklama tarihi\n\nGeocaching.com\'un gerekli API bilgisini bizlerle artık paylaşmıyor olmasından dolayı özelliklere göre arama filtresi kullanılabilir değildir.\n\n.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable kimliği</string>
     <string name="search_tb_button">Trackable ara</string>
