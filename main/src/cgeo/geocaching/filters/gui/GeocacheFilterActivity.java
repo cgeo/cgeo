@@ -13,7 +13,6 @@ import cgeo.geocaching.filters.core.LogicalGeocacheFilter;
 import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -78,7 +77,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(Settings.isLightSkin() ? R.style.light_material : R.style.dark_material);
+        setTheme(R.style.cgeo);
         setContentView(R.layout.cache_filter_activity);
         //setThemeAndContentView(R.layout.cache_filter_activity);
         binding = CacheFilterActivityBinding.bind(findViewById(R.id.activity_viewroot));

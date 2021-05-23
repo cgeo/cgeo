@@ -239,7 +239,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 if (count >= 3000) {
                     binding.logCharactersCounter.setVisibility(View.VISIBLE);
                     binding.logCharactersCounter.setText(count + "/" + LOG_MAX_LENGTH);
-                    binding.logCharactersCounter.setTextColor(count > LOG_MAX_LENGTH ? Color.RED : getResources().getColor(Settings.isLightSkin() ? R.color.text_light : R.color.text_dark));
+                    binding.logCharactersCounter.setTextColor(count > LOG_MAX_LENGTH ? Color.RED : getResources().getColor(R.color.colorText));
 
                 } else {
                     binding.logCharactersCounter.setVisibility(View.GONE);

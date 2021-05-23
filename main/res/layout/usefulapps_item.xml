@@ -35,8 +35,7 @@
             android:layout_gravity="center"
             android:layout_margin="1dip"
             android:gravity="center"
-            android:scaleType="fitXY"
-            tools:src="@drawable/helper_pocketquery"/>
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/description"
@@ -45,10 +44,8 @@
             android:layout_gravity="left"
             android:linksClickable="true"
             android:padding="3dip"
-            android:textColor="?text_color"
-            android:textColorLink="?text_color_link"
             android:textIsSelectable="false"
-            android:textSize="14sp"
+            android:textSize="@dimen/textSize_detailsPrimary"
             tools:text="description"/>
     </LinearLayout>
 

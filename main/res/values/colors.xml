@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
+    <!--
+        common colors
+
+        for light theme-specific colors see values/colors_light.xml
+        for dark theme-specific colors see values-night/colors.xml
+    -->
+
     <color name="just_white">#FFFFFFFF</color>
     <color name="just_black">#FF000000</color>
-    <color name="background_dark">#FF000000</color>
-    <color name="background_light">#FFFFFFFF</color>
-    <color name="background_dark_notice">#FF191919</color>
-    <color name="background_light_notice">#FFDFDFDF</color>
-    <color name="background_dark_transparent">#44000000</color>
-    <color name="background_light_transparent">#44FFFFFF</color>
-    <color name="separator_dark">#44FFFFFF</color>
-    <color name="separator_light">#44000000</color>
-    <color name="text_icon">#FFFFFFFF</color>
-    <color name="text_dark">#FFFFFFFF</color>
-    <color name="text_light">#FF000000</color>
-    <color name="text_headline_dark">#88FFFFFF</color>
-    <color name="text_headline_light">#88000000</color>
-    <color name="text_grey_dark">#AAFFFFFF</color>
-    <color name="text_grey_light">#AA000000</color>
-    <color name="text_hint_dark">#44FFFFFF</color>
-    <color name="text_hint_light">#44000000</color>
+    <!--
     <color name="link">#FF00C0FF</color>
     <color name="button_enabled">#FF000000</color>
     <color name="button_disabled">#66000000</color>
+    -->
     <color name="archived_cache_color">#FFAC0B0B</color>
+    <!--
     <color name="button_default">#282828</color>
     <color name="steel">#675C68</color>
+    -->
+    <color name="text_icon">#FFFFFFFF</color>
 
-    <color name="colorAccent">#F5981D</color>
+
+
+    <!-- values needed only until settings activity is based on AppCompatActivity -->
+    <color name="settings_colorTextDark">@color/just_white</color>
+    <color name="settings_colorTextLight">@color/just_black</color>
+    <color name="settings_colorTextSecondaryDark">#AAFFFFFF</color>
+    <color name="settings_colorTextSecondaryLight">#AA000000</color>
+    <color name="settings_colorBackgroundDark">@color/just_black</color>
+    <color name="settings_colorBackgroundLight">@color/just_white</color>
+
+
+
+    <!-- default colors for map lines -->
 
     <color name="default_trailcolor">#80000000</color>
     <color name="default_routecolor">#800000FF</color>

@@ -42,9 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dip"
                 android:linksClickable="true"
-                android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
-                android:textSize="14sp"
+                android:textSize="@dimen/textSize_detailsPrimary"
                 android:visibility="gone"
                 tools:visibility="visible"
                 tools:text="goal of the trackable"/>
@@ -73,9 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dip"
                 android:linksClickable="true"
-                android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
-                android:textSize="14sp"
+                android:textSize="@dimen/textSize_detailsPrimary"
                 android:visibility="gone"
                 tools:visibility="visible"
                 tools:text="details of the trackable"/>

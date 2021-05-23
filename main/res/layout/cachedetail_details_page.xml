@@ -55,10 +55,8 @@
                 android:linksClickable="true"
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
-                android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textIsSelectable="false"
-                android:textSize="14sp"
+                android:textSize="@dimen/textSize_detailsSecondary"
                 tools:text="attribute 1\nattribute 2\nattribute 3"/>
         </LinearLayout>
 
@@ -89,8 +87,7 @@
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="6dip"
                     android:paddingRight="3dip"
-                    android:textColor="?text_color"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/textSize_detailsSecondary"
                     tools:text="This cache has not been stored. Or has it? Maybe an hour ago?"
                     android:textIsSelectable="false" />
 
@@ -102,10 +99,8 @@
 
                     <ImageButton
                         android:id="@+id/offline_refresh"
-                        style="@style/button_small"
+                        style="@style/button_icon"
                         android:src="@drawable/ic_menu_refresh"
-                        android:layout_width="40dip"
-                        android:layout_height="40dip"
                         android:layout_marginLeft="2dip"
                         android:visibility="gone" />
 
@@ -127,26 +122,21 @@
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="6dip"
                     android:paddingRight="3dip"
-                    android:textColor="?text_color"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/textSize_detailsSecondary"
                     tools:text="list 1, list 2, list 3, and many, many, many, many, many more lists"
                     android:textIsSelectable="false" />
 
                 <ImageButton
                     android:id="@+id/offline_edit"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:src="@drawable/ic_menu_edit"
-                    android:layout_toLeftOf="@+id/offline_store_drop"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"/>
+                    android:layout_toLeftOf="@+id/offline_store_drop" />
 
                 <ImageButton
                     android:id="@+id/offline_store_drop"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:src="@drawable/ic_menu_save"
                     android:layout_alignParentRight="true"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:layout_marginLeft="2dip"
                     android:layout_gravity="right"/>
 
@@ -181,27 +171,22 @@
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
-                    android:textColor="?text_color"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/textSize_detailsSecondary"
                     tools:text="The cache may or may not be on your watch list."
                     android:textIsSelectable="false" />
 
                 <ImageButton
                     android:id="@+id/add_to_watchlist"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/ic_menu_add"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
                 <ImageButton
                     android:id="@+id/remove_from_watchlist"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:src="@drawable/ic_menu_remove"
                     android:visibility="gone" />
             </RelativeLayout>
@@ -236,17 +221,14 @@
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
-                    android:textColor="?text_color"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/textSize_detailsSecondary"
                     tools:text="Send to WhereYouGo"
                     android:textIsSelectable="false" />
 
                 <ImageButton
                     android:id="@+id/send_to_whereyougo"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:src="@drawable/icon_gc_wherigo"
                     android:visibility="visible"
                     tools:visibility="visible"/>
@@ -282,17 +264,14 @@
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
-                    android:textColor="?text_color"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/textSize_detailsSecondary"
                     tools:text="Start Chirp Wolf"
                     android:textIsSelectable="false" />
 
                 <ImageButton
                     android:id="@+id/send_to_chirp"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:src="@drawable/icon_gc_chirpwolf"
                     android:visibility="visible"
                     tools:visibility="visible"/>
@@ -328,17 +307,14 @@
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
-                    android:textColor="?text_color"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/textSize_detailsSecondary"
                     tools:text="Start Adventure Lab"
                     android:textIsSelectable="false" />
 
                 <ImageButton
                     android:id="@+id/send_to_alc"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:src="@drawable/icon_gc_alc"
                     android:visibility="visible"
                     tools:visibility="visible"/>
@@ -372,27 +348,22 @@
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
-                    android:textColor="?text_color"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/textSize_detailsSecondary"
                     tools:text="Probably not on your favorite list. You may have some fav points remaining."
                     android:textIsSelectable="false" />
 
                 <ImageButton
                     android:id="@+id/add_to_favpoint"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:src="@drawable/ic_menu_add"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
                 <ImageButton
                     android:id="@+id/remove_from_favpoint"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:src="@drawable/ic_menu_remove"
                     android:visibility="gone" />
             </RelativeLayout>
@@ -424,9 +395,7 @@
                 android:layout_gravity="left"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
-                android:textSize="14sp"
+                android:textSize="@dimen/textSize_detailsSecondary"
                 tools:text="some license text"/>
         </LinearLayout>
 

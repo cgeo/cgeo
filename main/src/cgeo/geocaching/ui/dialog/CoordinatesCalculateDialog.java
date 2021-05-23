@@ -986,9 +986,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         final Spannable latFormatted;
         final Spannable lonFormatted;
 
-        final boolean lightSkin = Settings.isLightSkin();
-        final int validColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
-        final int invalidColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_hint_light : R.color.text_hint_dark);
+        final int validColour = ContextCompat.getColor(getContext(), R.color.colorText);
+        final int invalidColour = ContextCompat.getColor(getContext(), R.color.colorTextHint);
         final int resultColour;
 
         if (areCurrentCoordinatesValid()) {

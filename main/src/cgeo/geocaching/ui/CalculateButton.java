@@ -1,17 +1,12 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.calculator.ButtonData;
 import cgeo.geocaching.calculator.CoordinatesCalculateUtils;
-import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.View;
-
-import androidx.core.content.ContextCompat;
 
 /**
  * This class derives from EditButton and handles all the attributes that are unique to this particular application of button.
@@ -90,6 +85,7 @@ public class CalculateButton extends EditButton {
      * Buttons displaying a custom value are given a 'steel-like' appearance so as to distinguish them from regular buttons
      */
     private  void setBackgroundColour() {
+        /* @todo adapt to new Material theme
         switch (buttonData.type) {
 
             case CUSTOM:
@@ -101,13 +97,12 @@ public class CalculateButton extends EditButton {
 
             default:
                 final boolean lightSkin = Settings.isLightSkin();
-                final int normalText = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
 
                 butt.setBackgroundResource(R.drawable.button_background_kitkat);
-                butt.setTextColor(normalText);
                 butt.setTypeface(null, Typeface.NORMAL);
                 break;
         }
+        */
     }
 
     /**

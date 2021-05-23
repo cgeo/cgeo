@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/action_bar">
+    style="@style/action_bar"
+    android:background="@color/colorBackgroundActionBar">
 
     <TextView
         android:id="@+id/actionbar_title"
+        android:drawablePadding="6dip"
+        android:gravity="center_vertical"
         style="@style/action_bar_title" />
-
-    <ProgressBar
-        android:id="@+id/actionbar_progress"
-        style="@style/action_bar_progress"
-        android:visibility="gone" />
 
     <View style="@style/action_bar_separator" />
 

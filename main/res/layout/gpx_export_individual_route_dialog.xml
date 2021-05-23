@@ -35,11 +35,9 @@
 
         <ImageButton
             android:id="@+id/button_reset"
-            style="@style/button_small"
+            style="@style/button_icon"
             android:src="@drawable/ic_menu_delete"
             android:layout_alignBottom="@id/filename"
-            android:layout_width="40dip"
-            android:layout_height="40dip"
             android:layout_alignParentRight="true" />
 
     </RelativeLayout>

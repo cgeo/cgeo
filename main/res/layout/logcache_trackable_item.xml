@@ -33,9 +33,8 @@
             android:lines="1"
             android:maxLines="1"
             android:scrollHorizontally="true"
-            android:textColor="?text_color"
             android:textIsSelectable="false"
-            android:textSize="14sp"
+            android:textSize="@dimen/textSize_detailsPrimary"
             android:layout_marginRight="5dip"
             tools:ignore="SmallSp"
             tools:text="tracking code" />
@@ -49,9 +48,8 @@
             android:gravity="left"
             android:lines="1"
             android:scrollHorizontally="true"
-            android:textColor="?text_color"
             android:textIsSelectable="false"
-            android:textSize="14sp"
+            android:textSize="@dimen/textSize_detailsPrimary"
             tools:text="name"
             android:maxLines="1" />
 
@@ -69,9 +67,8 @@
         android:gravity="right"
         android:lines="1"
         android:scrollHorizontally="true"
-        android:textColor="?text_color"
         android:textIsSelectable="false"
-        android:textSize="14sp"
+        android:textSize="@dimen/textSize_detailsPrimary"
         tools:text="action"
         android:maxLines="1" />
 

@@ -1,7 +1,6 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
 import android.content.Context;
@@ -48,7 +47,7 @@ public class ToggleButton extends androidx.appcompat.widget.AppCompatButton {
             setBackgroundColor(getResources().getColor(R.color.colorAccent));
         } else {
             setBackgroundColor(0x00000000);
-            setBackgroundResource(Settings.isLightSkin() ? R.drawable.action_button_light : R.drawable.action_button_dark);
+            setBackgroundResource(R.drawable.action_button);
         }
     }
 

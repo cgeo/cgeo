@@ -28,9 +28,7 @@
             android:linksClickable="true"
             android:paddingLeft="3dip"
             android:text="@string/about_system_include"
-            android:textColor="?text_color"
-            android:textColorLink="?text_color_link"
-            android:textSize="14sp" />
+            android:textSize="@dimen/textSize_detailsPrimary" />
 
         <TextView
             android:id="@+id/system"
@@ -40,10 +38,8 @@
             android:layout_margin="7dip"
             android:linksClickable="true"
             android:paddingLeft="3dip"
-            android:textColor="?text_color"
-            android:textColorLink="?text_color_link"
             android:textIsSelectable="true"
-            android:textSize="12sp"
+            android:textSize="@dimen/textSize_detailsPrimary"
             tools:text="long list of system properties"/>
 
         <Button android:id="@+id/logcat"

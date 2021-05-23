@@ -97,7 +97,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.dark);
+        setTheme(R.style.cgeo);
         backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(BUNDLE_BACKUPUTILS));
         if (savedInstanceState != null) {
             step = WizardStep.values()[savedInstanceState.getInt(BUNDLE_STEP)];

@@ -38,7 +38,7 @@
                 android:id="@+id/item_info"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="?attr/info_icon"
+                android:src="@drawable/settings_info_icon"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
 

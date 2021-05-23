@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="?background_color"
     android:orientation="horizontal" >
 
     <RelativeLayout
@@ -19,9 +18,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:gravity="center_horizontal"
-            android:textColor="?text_color"
-            android:textSize="14sp" />
+            android:gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/cacheinfo"
@@ -32,9 +29,7 @@
             android:layout_below="@+id/destination"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:gravity="center_horizontal"
-            android:textColor="?text_color"
-            android:textSize="14sp" />
+            android:gravity="center_horizontal" />
 
         <ToggleButton
             android:id="@+id/use_compass"
@@ -79,7 +74,6 @@
                      android:id="@+id/device_heading_label"
                      style="@style/location_current_style"
                      android:layout_alignParentLeft="true"
-                     android:textColor="?text_color_grey"
                      android:text="@string/device_heading_label"/>
 
                  <TextView
@@ -110,7 +104,6 @@
                      android:id="@+id/device_orientation_label"
                      style="@style/location_current_style"
                      android:layout_toLeftOf="@+id/device_orientation_azimuth"
-                     android:textColor="?text_color_grey"
                      android:text="@string/device_orientation_label"
                      />
              </RelativeLayout>
@@ -125,9 +118,7 @@
             android:layout_gravity="left"
             android:layout_marginLeft="3dip"
             android:layout_below="@+id/device_information"
-            android:text="@null"
-            android:textColor="?text_color"
-            android:textSize="26sp" />
+            android:text="@null" />
 
         <TextView
             android:id="@+id/distance"
@@ -138,9 +129,7 @@
             android:layout_gravity="right"
             android:layout_marginRight="3dip"
             android:layout_below="@+id/device_information"
-            android:text="@null"
-            android:textColor="?text_color"
-            android:textSize="26sp" />
+            android:text="@null" />
 
         <TextView
             android:id="@+id/nav_location"
@@ -164,18 +153,15 @@
 
             <TextView
                 android:id="@+id/nav_type"
-                style="@style/location_current_type"
-                android:textColor="?text_color_grey" />
+                style="@style/location_current_type" />
 
             <TextView
                 android:id="@+id/nav_accuracy"
-                style="@style/location_current_accuracy"
-                android:textColor="?text_color_grey" />
+                style="@style/location_current_accuracy" />
 
             <TextView
                 android:id="@+id/nav_satellites"
-                style="@style/location_current_satellites"
-                android:textColor="?text_color_grey" />
+                style="@style/location_current_satellites" />
         </RelativeLayout>
     </RelativeLayout>
 

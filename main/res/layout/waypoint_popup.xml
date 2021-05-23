@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="?background_color_transparent"
     android:orientation="vertical"
     tools:context=".WaypointPopupFragment" >
 
@@ -38,7 +37,6 @@
 
                 <CheckBox
                     android:id="@+id/toggle_visited"
-                    style="@style/checkbox"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:gravity="center_vertical"

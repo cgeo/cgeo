@@ -11,8 +11,7 @@
         android:id="@id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/export_fieldnotes_info"
-        android:textColor="?text_color" />
+        android:text="@string/export_fieldnotes_info" />
 
     <CheckBox
         android:id="@+id/upload"

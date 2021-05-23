@@ -319,7 +319,7 @@ public class BackupUtils {
             textView.setText(R.string.init_backup_history_delete_warning);
             checkbox.setText(R.string.init_user_confirmation);
 
-            final AlertDialog alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(activityContext, R.style.Dialog_Alert))
+            final AlertDialog alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(activityContext, R.style.cgeo))
                 .setView(content)
                 .setTitle(R.string.init_backup_backup_history)
                 .setCancelable(true)

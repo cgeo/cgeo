@@ -1,7 +1,5 @@
 package cgeo.geocaching.ui.dialog;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
@@ -18,7 +16,8 @@ import java.lang.reflect.Field;
 public class CustomProgressDialog extends ProgressDialog {
 
     public CustomProgressDialog(final Context context) {
-        super(context, Settings.isLightSkin() ? R.style.cgeoProgressdialogTheme_light : R.style.cgeoProgressdialogTheme);
+        super(context);
+        // @todo super(context, Settings.isLightSkin() ? R.style.cgeoProgressdialogTheme_light : R.style.cgeoProgressdialogTheme);
     }
 
     @Override

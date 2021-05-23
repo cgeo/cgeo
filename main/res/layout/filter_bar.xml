@@ -17,6 +17,7 @@
         android:id="@+id/filter_text"
         style="@style/filter_bar_text"
         android:textIsSelectable="false"
+	android:textSize="@dimen/textSize_detailsSecondary"
         tools:text="currently active filter"/>
 
 </LinearLayout>

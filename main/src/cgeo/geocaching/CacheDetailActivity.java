@@ -128,7 +128,6 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
-import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -2081,12 +2080,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // visited
             if (wpt.isVisited()) {
+                /* @todo
                 final TypedValue typedValue = new TypedValue();
                 getTheme().resolveAttribute(R.attr.text_color_grey, typedValue, true);
                 if (typedValue.type >= TypedValue.TYPE_FIRST_COLOR_INT && typedValue.type <= TypedValue.TYPE_LAST_COLOR_INT) {
                     // really should be just a color!
                     nameView.setTextColor(typedValue.data);
                 }
+                */
             }
 
             // note

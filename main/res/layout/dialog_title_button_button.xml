@@ -11,7 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:textColor="?text_color"
         android:layout_toStartOf="@+id/dialog_button_wrapper"/>
 
     <LinearLayout
@@ -24,15 +23,11 @@
         android:layout_centerVertical="true">
         <ImageButton
             android:id="@+id/dialog_button1"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            style="@style/button_icon"
             android:visibility="gone" />
         <ImageButton
             android:id="@+id/dialog_button2"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            style="@style/button_icon"
             android:visibility="gone" />
     </LinearLayout>
 </RelativeLayout>

@@ -4,7 +4,6 @@
     android:id="@+id/logtrackable_activity_viewroot"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="?background_color"
     android:orientation="vertical"
     android:padding="4dip"
     tools:context=".log.LogTrackableActivity" >
@@ -106,7 +105,7 @@
                 android:layout_gravity="left"
                 android:gravity="center"
                 android:padding="2sp"
-                android:text="@string/visit_tweet"                />
+                android:text="@string/visit_tweet" />
 
         </LinearLayout>
     </LinearLayout>

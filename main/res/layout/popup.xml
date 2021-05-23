@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="?background_color_transparent"
+    android:background="@color/colorBackgroundTransparent"
+    android:windowBackground="@color/colorBackgroundTransparent"
     android:orientation="vertical"
     tools:context=".CachePopupFragment" >
 
@@ -42,10 +43,8 @@
 
                 <ImageButton
                     android:id="@+id/offline_hint"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:src="@drawable/ic_menu_hint"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="0dp"
                     android:visibility="gone"
@@ -72,16 +71,13 @@
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="51dip"
                     android:paddingRight="3dip"
-                    android:textColor="?text_color"
                     android:textIsSelectable="false"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/textSize_detailsSecondary" />
 
                 <ImageButton
                     android:id="@+id/offline_refresh"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:src="@drawable/ic_menu_refresh"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
@@ -97,17 +93,14 @@
                     android:layout_marginLeft="6dip"
                     android:layout_toLeftOf="@id/offline_edit"
                     android:paddingRight="3dip"
-                    android:textColor="?text_color"
                     android:textIsSelectable="false"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/textSize_detailsSecondary"
                     tools:text="list 1, list 2"/>
 
                 <ImageButton
                     android:id="@+id/offline_edit"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:src="@drawable/ic_menu_edit"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:layout_toLeftOf="@id/offline_store_drop"
                     android:layout_marginLeft="0dp"
                     android:visibility="gone"
@@ -115,10 +108,8 @@
 
                 <ImageButton
                     android:id="@+id/offline_store_drop"
-                    style="@style/button_small"
+                    style="@style/button_icon"
                     android:src="@drawable/ic_menu_save"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
                     android:layout_marginLeft="0dp"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
@@ -136,9 +127,8 @@
                 android:layout_marginLeft="6dip"
                 android:layout_marginRight="6dip"
                 android:paddingRight="3dip"
-                android:textColor="?text_color"
                 android:textIsSelectable="false"
-                android:textSize="14sp"
+                android:textSize="@dimen/textSize_detailsSecondary"
                 android:visibility="gone"
                 tools:text="hint"/>
 

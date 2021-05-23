@@ -195,7 +195,7 @@ public class MapSettingsUtils {
                     }
                 } else {
                     button.button.setBackgroundColor(0x00000000);
-                    button.button.setBackgroundResource(Settings.isLightSkin() ? R.drawable.action_button_light : R.drawable.action_button_dark);
+                    button.button.setBackgroundResource(R.drawable.action_button);
                 }
             }
         }

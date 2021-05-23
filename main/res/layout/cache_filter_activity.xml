@@ -5,7 +5,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="?background_color"
     android:layout_marginTop="10dip"
     tools:context=".filter.FilterActivity" >
 
@@ -27,7 +26,7 @@
             android:layout_centerVertical="true"
             android:text="@string/cache_filter_mode_advanced" />
 
-        <TextView
+        <Button
             android:id="@+id/filter_additem"
             style="@style/button"
             android:layout_width="wrap_content"
@@ -71,8 +70,6 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/filter_storage_save"
             android:layout_alignParentRight="true"
-            android:textColor="?text_color"
-            android:textSize="18sp"
             android:ellipsize="end"
             android:maxLines="1"
             />
@@ -108,12 +105,9 @@
             android:id="@+id/filter_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:cacheColorHint="?background_color"
             android:clipToPadding="false"
-            android:divider="?background_color"
             android:footerDividersEnabled="false"
             android:headerDividersEnabled="false"
-            android:listSelector="?background_color"
             android:nestedScrollingEnabled="false"
             android:orientation="vertical"
             android:paddingHorizontal="4dip"

@@ -4,7 +4,6 @@
     android:id="@+id/imageselect_activity_viewroot"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="?background_color"
     android:orientation="vertical"
     android:padding="4dip"
     tools:context=".ImageSelectActivity" >

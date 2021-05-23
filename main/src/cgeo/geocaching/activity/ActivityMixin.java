@@ -55,7 +55,7 @@ public final class ActivityMixin {
     }
 
     private static int getThemeId() {
-        return Settings.isLightSkin() ? R.style.light : R.style.dark;
+        return R.style.cgeo;
     }
 
     public static void setTheme(final Activity activity) {
@@ -67,7 +67,7 @@ public final class ActivityMixin {
     }
 
     public static int getDialogTheme() {
-        return Settings.isLightSkin() ? R.style.popup_light : R.style.popup_dark;
+        return R.style.cgeo_popup;
     }
 
     /**
