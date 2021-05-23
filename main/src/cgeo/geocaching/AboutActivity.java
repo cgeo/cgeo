@@ -28,11 +28,9 @@ import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
-import androidx.core.text.HtmlCompat;
 import androidx.core.util.Consumer;
 
 import java.io.InputStream;
@@ -86,16 +84,14 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final AboutContributorsPageBinding binding = AboutContributorsPageBinding.inflate(getLayoutInflater(), parentView, false);
+            final Markwon markwon = Markwon.create(AboutActivity.this);
 
-            setText(binding.aboutContributorsRecent, R.string.contributors_recent);
-            setText(binding.aboutContributorsOthers, R.string.contributors_other);
+            markwon.setMarkdown(binding.aboutContributorsRecent, formatContributors(R.string.contributors_recent));
+            markwon.setMarkdown(binding.aboutContributorsOthers, formatContributors(R.string.contributors_other));
+            markwon.setMarkdown(binding.aboutSpecialthanksdetails, getString(R.string.about_contributors_specialthanksdetails));
 
-            final AnchorAwareLinkMovementMethod mm = AnchorAwareLinkMovementMethod.getInstance();
-            binding.aboutCarnerodetails.setMovementMethod(mm);
-            binding.aboutContributorsRecent.setMovementMethod(mm);
-            binding.aboutSpecialthanksdetails.setMovementMethod(mm);
-            binding.aboutContributorsOthers.setMovementMethod(mm);
-            binding.aboutComponents.setMovementMethod(mm);
+            final String indentedList = "   " + getString(R.string.components2).replace("\n", "\n  ");
+            markwon.setMarkdown(binding.aboutComponents, getString(R.string.components).replace("%1", indentedList.substring(0, indentedList.length() - 2)));
 
             return binding.getRoot();
         }
@@ -104,9 +100,9 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             return roles.indexOf(checkFor) >= 0 ? (s.isEmpty() ? "" : s + ", ") + getString(infoId) : s;
         }
 
-        private void setText(final TextView t, final int resId) {
+        private String formatContributors(@StringRes final int resId) {
             String s = getString(resId);
-            final SpannableStringBuilder sb = new SpannableStringBuilder("<ul>");
+            final SpannableStringBuilder sb = new SpannableStringBuilder();
             int p1;
             int p2;
             int p3;
@@ -136,18 +132,16 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                         temp, 's', R.string.contribution_support),
                         temp, 't', R.string.contribution_tester);
 
-                    sb.append("· ")
-                        .append(link.isEmpty() ? name : "<a href=\"" + link + "\">" + name + "</a>")
+                    sb.append("- ")
+                        .append(link.isEmpty() ? name : "[" + name + "](" + link + ")")
                         .append(roles.isEmpty() ? "" : " (" + roles + ")")
-                        .append("<br />");
+                        .append("\n");
 
                     s = s.substring(p3 + 1);
                     p1 = s.indexOf("|");
                 } while (p1 > 0);
             }
-            sb.append("</ul>");
-
-            t.setText(HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY));
+            return sb.toString();
         }
     }
 
@@ -181,14 +175,15 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             binding.copy.setEnabled(false);
             binding.share.setEnabled(false);
             systemInformationTask.getSystemInformation(si -> {
-                    binding.system.setText(si);
-                    binding.copy.setEnabled(true);
-                    binding.copy.setOnClickListener(view1 -> {
-                        ClipboardUtils.copyToClipboard(si);
-                        showShortToast(getString(R.string.clipboard_copy_ok));
-                    });
-                    binding.share.setEnabled(true);
-                    binding.share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(AboutActivity.this, getString(R.string.about_system_info), si, null, R.string.about_system_info_send_chooser));
+                final Markwon markwon = Markwon.create(AboutActivity.this);
+                markwon.setMarkdown(binding.system, si);
+                binding.copy.setEnabled(true);
+                binding.copy.setOnClickListener(view1 -> {
+                    ClipboardUtils.copyToClipboard(si);
+                    showShortToast(getString(R.string.clipboard_copy_ok));
+                });
+                binding.share.setEnabled(true);
+                binding.share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(AboutActivity.this, getString(R.string.about_system_info), si, null, R.string.about_system_info_send_chooser));
 
             });
             binding.system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
