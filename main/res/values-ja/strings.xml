@@ -34,6 +34,28 @@
     <string name="advlab">アドベンチャー・ラボ・キャッシュ</string>
     <string name="userdefined">ユーザー定義キャッシュ</string>
     <string name="unknown">不明なタイプ</string>
+    <string name="all_types_short">すべて</string>
+    <string name="traditional_short">トラディ</string>
+    <string name="multi_short">マルチ</string>
+    <string name="mystery_short">ミステリー</string>
+    <string name="letterbox_short">レターボックス</string>
+    <string name="event_short">イベント</string>
+    <string name="mega_short">メガ</string>
+    <string name="giga_short">ギガ</string>
+    <string name="earth_short">アース</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">ウェブカム</string>
+    <string name="virtual_short">バーチャル</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">コミュニティ</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">GC HQ セル</string>
+    <string name="gps_short">GPS展示</string>
+    <string name="block_short">GC HQ ブロック</string>
+    <string name="locationless_short">ロケーションレス</string>
+    <string name="advlab_short">アドラボ</string>
+    <string name="userdefined_short">ユーザー定義</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">マイクロ</string>
     <string name="cache_size_small">スモール</string>
@@ -424,7 +446,6 @@
     <string name="cache_filter_option_inverse">除外フィルタ</string>
     <string name="cache_filter_option_include_inconclusive">不確定な一致を含める</string>
     <string name="cache_filter_option_include_inconclusive_info">フィルタに使用することができないキャッシュ情報が必要なとき、結果にキャッシュを含めるかどうかを指定します。</string>
-    <string name="cache_filter_hint_on_empty_filter_list">右上の「+」をタップしてフィルタを追加</string>
     <string name="cache_filter_name">キャッシュ名</string>
     <string name="cache_filter_type">キャッシュタイプ</string>
     <string name="cache_filter_size">サイズ</string>
@@ -501,7 +522,6 @@
     <string name="about_contributors_carnerodetails">c:geoの父として</string>
     <string name="about_contributors_recent">最近の貢献者</string>
     <string name="about_contributors_specialthanks">スペシャルサンクス</string>
-    <string name="about_contributors_specialthanksdetails">· <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>のすべての翻訳者!\n· 不具合や提案などのすべての報告者\n· すべてのサポーター\n</string>
     <string name="about_contributors_other">そのほかの貢献者</string>
     <string name="about_components">コンポーネント</string>
     <string name="contribution_code">コー​​ド</string>
