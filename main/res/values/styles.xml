@@ -177,6 +177,7 @@
         <item name="android:paddingRight">5dip</item>
         <item name="android:maxLines">2</item>
         <item name="android:ellipsize">marquee</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
 
     <style name="icon_mainscreen_count">
@@ -194,6 +195,9 @@
         <item name="android:singleLine">true</item>
         <item name="android:lines">1</item>
         <item name="android:ellipsize">marquee</item>
+        <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
+        <item name="android:textColor">@color/just_white</item>
+        <item name="android:background">@drawable/count_bcg</item>
         <item name="android:text" />
     </style>
     <style name="icon_mainscreen_cell_counter">
