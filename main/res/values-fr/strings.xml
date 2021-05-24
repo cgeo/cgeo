@@ -411,6 +411,8 @@
     <string name="list_dialog_rename">Renommer</string>
     <string name="list_not_available">La liste n\'est plus disponible, basculement vers la liste standard</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_add_button">Ajouter des critères</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Appuyez ci-dessus sur \'Ajouter des critères\' pour modifier le filtre</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Versions</string>
