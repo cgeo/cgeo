@@ -34,6 +34,20 @@
     <string name="advlab">Geocache Adventure Lab</string>
     <string name="userdefined">Cache definida pelo utilizador</string>
     <string name="unknown">Tipo Desconhecido</string>
+    <string name="all_types_short">Todos</string>
+    <string name="multi_short">Multi</string>
+    <string name="mystery_short">Mistério</string>
+    <string name="letterbox_short">Letter</string>
+    <string name="event_short">Evento</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Terra</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webcam</string>
+    <string name="virtual_short">Virtual</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Comunidade</string>
+    <string name="unknown_short">Desconhecido</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
     <string name="cache_size_small">Pequeno</string>
@@ -421,10 +435,15 @@
     <string name="list_dialog_rename">Mudar o nome</string>
     <string name="list_not_available">A lista já não está disponível, a alterar para a lista geral</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_advanced">Avançado</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Mudar para básico</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">Mudar para o modo \'Básico\' resultará na perda das configurações de filtro. Deseja continuar?</string>
+    <string name="cache_filter_add_button">Adicionar critérios de filtro</string>
     <string name="cache_filter_option_and_or">Utilizar OR (ou) em vez de AND (e)</string>
     <string name="cache_filter_option_inverse">Filtro invertido</string>
     <string name="cache_filter_option_include_inconclusive">Incluir correspondências incompletas</string>
     <string name="cache_filter_option_include_inconclusive_info">Se uma cache, que não tenha a informação que o filtro precisa, deve ser incluída nos resultados.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Toque acima em \'Adicionar critérios de filtro\' para adicionar um filtro</string>
     <string name="cache_filter_name">Nome da cache</string>
     <string name="cache_filter_type">Tipo de Cache</string>
     <string name="cache_filter_size">Tamanho da cache</string>
@@ -464,6 +483,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Modelo</string>
     <string name="cache_filter_datefilter_label_from">De:</string>
     <string name="cache_filter_datefilter_label_to">Para:</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Seleccionar todas</string>
     <string name="cache_filter_favorites_absolute">Absoluto</string>
     <string name="cache_filter_favorites_percentage">Percentagem</string>
     <string name="cache_filter_distance_use_current_position">Usar posição actual</string>
@@ -479,6 +499,8 @@
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
+    <string name="about_changelog_nightly_build">Compilação diária (Nightly build)</string>
+    <string name="about_changelog_next_release">Próxima versão</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Apoie-nos</string>
     <string name="about_donation_more">Visite o website para saber mais</string>
@@ -503,6 +525,7 @@
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
     <string name="about_contributors_recent">Colaboradores recentes</string>
     <string name="about_contributors_specialthanks">Agradecimentos especiais a</string>
+    <string name="about_contributors_specialthanksdetails">- a todos os contribuidores de tradução em [Crowdin.net](https://crowdin.net/project/cgeo!\n- a todos os geradores de questões\n- e a todos os outros apoiantes.\n</string>
     <string name="about_contributors_other">Outros colaboradores</string>
     <string name="about_components">Componentes</string>
     <string name="contribution_code">programação</string>
