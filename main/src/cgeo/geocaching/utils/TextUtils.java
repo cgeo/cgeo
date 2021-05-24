@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -48,6 +49,15 @@ public final class TextUtils {
 
     private TextUtils() {
         // utility class
+    }
+
+    public static List<String> sortListLocaleAware(final List<String> listToSort) {
+        return sortListLocaleAware(listToSort, s -> s);
+    }
+
+    public static <T> List<T> sortListLocaleAware(final List<T> listToSort, final Func1<T, String> sortStringAccessor) {
+        Collections.sort(listToSort, (e1, e2) -> COLLATOR.compare(sortStringAccessor.call(e1), sortStringAccessor.call(e2)));
+        return listToSort;
     }
 
     /**
