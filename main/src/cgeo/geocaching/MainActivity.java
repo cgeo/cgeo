@@ -368,6 +368,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             PermissionHandler.executeCallbacksFor(permissions);
         } else {
