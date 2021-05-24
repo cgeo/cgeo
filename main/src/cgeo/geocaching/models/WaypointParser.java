@@ -283,12 +283,13 @@ public class WaypointParser {
                 final String lonText = parsedFullCoordinates.getFormulaLon();
                 final List<VariableData> variables = new ArrayList<>();
 
-                // all text after the formula
-                String remainingString = parsedFullCoordinates.getText().substring(parsedFullCoordinates.getEnd()).trim();
+                // all text after the formula, keep newline
+                String remainingString = parsedFullCoordinates.getText().substring(parsedFullCoordinates.getEnd() - 1);
 
                 final String[] formulaList = remainingString.split(FormulaParser.WPC_DELIM_PATTERN_STRING);
-                for (final String varText : formulaList
+                for (final String varSplitText : formulaList
                 ) {
+                    final String varText = varSplitText.trim();
                     boolean removeDelimiter = varText.isEmpty();
                     final String[] equations = varText.split("=", -1);
                     if (1 <= equations.length) {
