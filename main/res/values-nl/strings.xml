@@ -423,7 +423,6 @@
     <string name="cache_filter_option_inverse">Filter omkeren</string>
     <string name="cache_filter_option_include_inconclusive">Inclusief onduidelijke overeenkomsten</string>
     <string name="cache_filter_option_include_inconclusive_info">Of een cache moet worden opgenomen als resultaat wanneer een filter informatie over de cache nodig heeft die niet beschikbaar is.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Tik op \'+\' aan rechterbovenzijde om een filter toe te voegen</string>
     <string name="cache_filter_personalnote">Persoonlijke Notitie</string>
     <string name="cache_filter_offlinelog">Offline Log</string>
     <string name="cache_filter_difficulty">Moeilijkheid</string>
@@ -480,7 +479,6 @@
     <string name="about_contributors_carnerodetails">als vader van c:geo</string>
     <string name="about_contributors_recent">Recente bijdragers</string>
     <string name="about_contributors_specialthanks">Speciale dank aan</string>
-    <string name="about_contributors_specialthanksdetails">· al onze vertalingsbijdragers op <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· alle bevinding makers\n· en alle andere ondersteuners.\n</string>
     <string name="about_contributors_other">Andere bijdragers</string>
     <string name="about_components">Onderdelen</string>
     <string name="contribution_code">code</string>

@@ -425,7 +425,6 @@
     <string name="cache_filter_option_inverse">Filtro invertido</string>
     <string name="cache_filter_option_include_inconclusive">Incluir correspondências incompletas</string>
     <string name="cache_filter_option_include_inconclusive_info">Se uma cache, que não tenha a informação que o filtro precisa, deve ser incluída nos resultados.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Toque em \'+\', no canto superior direito, para adicionar um filtro</string>
     <string name="cache_filter_name">Nome da cache</string>
     <string name="cache_filter_type">Tipo de Cache</string>
     <string name="cache_filter_size">Tamanho da cache</string>
@@ -504,7 +503,6 @@
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
     <string name="about_contributors_recent">Colaboradores recentes</string>
     <string name="about_contributors_specialthanks">Agradecimentos especiais a</string>
-    <string name="about_contributors_specialthanksdetails">· todos os contribuidores de tradução em <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· todos os geradores de questões\n· e todos os outros apoiantes.\n</string>
     <string name="about_contributors_other">Outros colaboradores</string>
     <string name="about_components">Componentes</string>
     <string name="contribution_code">programação</string>
@@ -1354,7 +1352,6 @@
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_filter">Filtro (experimental)</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
-    <string name="search_filter_info_message">\'Pesquisar por filtro\' procura caches nos serviços online usando um filtro fornecido. Dependendo da capacidade do serviço, apenas parte do filtro é executada on-line, o restante é feito por filtragem off-line.\n\nTodos os serviços só suportam filtros AND e sem inversão de filtro.\n\nGeocaching.com suporta:\n- Nome (apenas palavras completas, Modelo não suportado)\n- Tipo de Cache\n- Tamanho de Cache\n- Distância\nDificuldade e Terreno\n- Favoritos (apenas absoluto, apenas mínimo)\n- Estado (Própria, Encontrada &amp; habilitada)\n- Escondida por (especificar exactamente a id do utilizador)\n- Não-Encontrada (especificar exactamente a id do utilizador)\n- Data de colocação\n\nNote que o c:geo não pode oferecer especificamente a filtragem de Atributos, uma vez que Geocaching.com está a bloquear-nos nos a API necessária.\n\nAinda não há suporte para além do Geocaching.com.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>

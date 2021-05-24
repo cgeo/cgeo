@@ -34,6 +34,29 @@
     <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Benutzerdefinierter Cache</string>
     <string name="unknown">Unbekannter Typ</string>
+    <string name="all_types_short">Alle</string>
+    <string name="traditional_short">Tradi</string>
+    <string name="multi_short">Multi</string>
+    <string name="mystery_short">Mystery</string>
+    <string name="letterbox_short">Letterbox</string>
+    <string name="event_short">Event</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Earth</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webcam</string>
+    <string name="virtual_short">Virtual</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Community</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">GC HQ Cel</string>
+    <string name="gps_short">GPS Exhibit</string>
+    <string name="block_short">GCHQ Block</string>
+    <string name="locationless_short">Locationless</string>
+    <string name="advlab_short">Adv Lab</string>
+    <string name="userdefined_short">Nutzerdefiniert</string>
+    <string name="unknown_short">Unbekannt</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
     <string name="cache_size_small">Small</string>
@@ -421,11 +444,13 @@
     <string name="list_dialog_rename">Umbenennen</string>
     <string name="list_not_available">Liste nicht mehr vorhanden, wechsele zur Standardliste</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_advanced">Erweitert</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Wechsel zu einfacher Ansicht</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">Der Wechsel zur einfachen Ansicht führt zum Verwerfen einiger Filtereinstellungen. Fortfahren?</string>
     <string name="cache_filter_option_and_or">Benutze ODER statt UND</string>
     <string name="cache_filter_option_inverse">Filter umkehren</string>
     <string name="cache_filter_option_include_inconclusive">Unschlüssige Treffer einschließen</string>
     <string name="cache_filter_option_include_inconclusive_info">Gibt an, ob der Cache in das Ergebnis eingebunden werden soll, wenn ein Filter Informationen benötigt die im Cache nicht verfügbar sind.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Tippe auf \'+\' oben rechts um einen Filter hinzuzufügen</string>
     <string name="cache_filter_name">Cache-Name</string>
     <string name="cache_filter_type">Cache-Typ</string>
     <string name="cache_filter_size">Cache-Größe</string>
@@ -465,6 +490,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Muster</string>
     <string name="cache_filter_datefilter_label_from">Von:</string>
     <string name="cache_filter_datefilter_label_to">Bis:</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Alle auswählen</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Prozentual</string>
     <string name="cache_filter_distance_use_current_position">Eigene Position verwenden</string>
@@ -506,7 +532,7 @@
     <string name="about_contributors_carnerodetails">als Vater von c:geo</string>
     <string name="about_contributors_recent">Neueste Mitwirkende</string>
     <string name="about_contributors_specialthanks">Besonderer Dank an</string>
-    <string name="about_contributors_specialthanksdetails">· Alle Mitwirkende an der Übersetzung auf <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· alle Issue-Ersteller\n· und alle anderen Unterstützer.\n</string>
+    <string name="about_contributors_specialthanksdetails">- Alle Mitwirkenden an der Übersetzung auf [Crowdin.net](https://crowdin.net/project/cgeo)!\n- Alle Issue-Ersteller\n- und alle anderen Unterstützer.\n</string>
     <string name="about_contributors_other">Weitere Mitwirkende</string>
     <string name="about_components">Komponenten</string>
     <string name="contribution_code">Code</string>
@@ -1356,7 +1382,6 @@
     <string name="search_hbu_button">Suche mit Besitzername</string>
     <string name="search_filter">Filter (experimentell)</string>
     <string name="search_filter_button">Suchen mit Filter</string>
-    <string name="search_filter_info_message">\'Suche nach Filter\' durchsucht Caches auf Online-Diensten mit Hilfe eines bereitgestellten Filters. Je nach Fähigkeit des Dienstes wird nur ein Teil des Filters online ausgeführt, der Rest wird durch Offline-Filterung ausgeführt.\n\nAlle Dienste unterstützen nur UND Filter und keine Filterinvertierung.\n\nGeocaching.com Unterstützung:\n- Name (nur ganze Wörter, Muster nicht unterstützt)\n- Cachetyp\n- Cachegröße\n- Entfernung\nSchwierigkeit und Gelände\n- Favoriten (nur absolut, nur Minimum)\n- Status (Eigene, Gefunden &amp; Aktiviert)\n- Versteckt von (genaue Benutzer-ID)\n- Nicht gefunden von (genaue Benutzer-ID)\n- Versteckdatum\n\nBeachte, dass c:geo keine Attribut-Filter anbieten kann, da geocaching.com die benötigte API für uns blockiert.\n\nEs werden noch keine Dienste außer Geocaching.com unterstützt.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Tracking-Code</string>
     <string name="search_tb_button">Suche nach Trackable</string>

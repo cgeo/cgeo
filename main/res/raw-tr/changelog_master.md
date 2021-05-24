@@ -1,21 +1,21 @@
 ### Gelişmiş filtre sistemi (deneysel)
 - c:geo için esnek, kombine edilebilir ve kaydedilebilir yeni bir filtre sistemini sunarız.
 - Hem Geocache listesinde hem de harita görünümünde mevcut
-- This is work in progress, stay tuned!
+- Bunun üzerinde çalışılıyor, takipte kalın!
 - The old filter systems are still available (for the time being), but will be superseeded by the new system at some point in time.
 
 ### Harita
 - New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
 
 ### Geocache Ayrıntıları
-- New: Make use of google translate in-app translation popup
-- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
+- Yeni: Açılabilir çeviri penceresinde google çevirilerinin kullanılabilmesi
+- Yeni: uzun tıklama ile Geocache detaylarındaki atanmış ikonun değiştirilebilmesi (yalnız kaydedilenler için)
 
-### Downloader
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+### İndirici
+- Değişiklik: Başarılı şekilde indirilebilen aynı isimli dosyalar otomatik olarak bir öncekinin üzerine yazılır
+- Değişiklik: Eğer bir harita halen cihazınızda yüklenmemiş bir tema gerektiriyorsa, c:geo otomatik olarak bu temayı indirip kuracaktır
 
-### Other
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
+### Diğer
+- Yeni: geocaching.com üzerinden yer imi listesi indirin- ''Listeler / cep sorguları'' sekmesini inceleyin
 - New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+- Değişiklik: Artık desteklenmeyen RMAPS navigasyon uygulaması kaldırıldı

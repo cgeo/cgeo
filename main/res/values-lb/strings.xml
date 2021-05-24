@@ -413,7 +413,6 @@
     <string name="about_contributors_carnerodetails">als Papp vum c:geo</string>
     <string name="about_contributors_recent">Rezent Mataarbechter</string>
     <string name="about_contributors_specialthanks">Ee grousse Merci un</string>
-    <string name="about_contributors_specialthanksdetails">· all Mataarbechter fir d\'Übersetzung op <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all Issue-Ersteller\n· an all aner Supportere.\n</string>
     <string name="about_contributors_other">Aner Mataarbechter</string>
     <string name="about_components">Komponenten</string>
     <string name="contribution_code">code</string>

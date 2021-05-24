@@ -441,7 +441,6 @@
     <string name="cache_filter_option_inverse">Ανάστροφο Φίλτρο</string>
     <string name="cache_filter_option_include_inconclusive">Συμπερίληψη ασαφών συσχετίσεων</string>
     <string name="cache_filter_option_include_inconclusive_info">Αν θα συμπεριληφθεί η κρύπτη στα αποτελέσματα, όταν το φίλτρο χρειάζεται πληροφορίες της κρύπτης που δεν είναι διαθέσιμες.</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Πατήστε \'+\' στην επάνω αριστερή γωνία για να προσθέσετε ένα φίλτρο</string>
     <string name="cache_filter_name">Ονομα κρύπτης</string>
     <string name="cache_filter_type">Τύπος κρύπτης</string>
     <string name="cache_filter_size">Μέγεθος κρύπτης</string>
@@ -519,7 +518,6 @@
     <string name="about_contributors_carnerodetails">ως ο πατέρας του c:geo</string>
     <string name="about_contributors_recent">Πρόσφατοι χρήστες που συνεισφέραν</string>
     <string name="about_contributors_specialthanks">Ένα μεγάλο ευχαριστώ σε</string>
-    <string name="about_contributors_specialthanksdetails">· όλους τους συνεργάτες μας στη μετάφραση στο <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· όλους τους δημιουργούς της έκδοσης\n· και όλους τους άλλους υποστηρικτές.\n</string>
     <string name="about_contributors_other">Άλλοι χρήστες που συνεισφέραν</string>
     <string name="about_components">Στοιχεία</string>
     <string name="contribution_code">κωδικός</string>
@@ -1369,7 +1367,6 @@
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
     <string name="search_filter">Φίλτρο (πειραματικό)</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
-    <string name="search_filter_info_message">Η \'Αναζήτηση με φίλτρο\' αναζητά κρύπτες χρησιμοποιώντας το παρεχόμενο φίλτρο. Ανάλογα με την δυνατότητες της υπηρεσίας, μόνο ένα μέρος του φίλτρου εκτελείται σε απευθείας σύνδεση, το υπόλοιπο γίνεται με φίλτρο εκτός σύνδεσης.\n\nΌλες οι υπηρεσίες υποστηρίζουν μόνο φίλτρα \'ΚΑΙ\' όπως και χωρίς αντιστροφή φίλτρου\n\nη Geocaching. com υποστηρίζει:\n- Όνομα (μόνο ολόκληρες λέξεις, Δεν υποστηρίζεται το μοτίβο)\n- Τύπος κρύπτης\n- Μέγεθος κρύπτης\n- Απόσταση και έδαφος\n- Αγαπημένα (μόνο απόλυτα, μόνο ελάχιστο)\n- Κατάσταση (Δικές μου, Βρέθηκαν &amp; Ενεργοποιημένες)\n- Κρυμένες από (καθορίστε το id του χρήστη)\n- Δεν βρέθηκε απο τον (προσδιορίστε το αναγνωριστικό χρήστη ακριβώς)\n- Ημερομηνία τοποθέτησης\n\nΣημειώστε ότι το c:geo δεν μπορεί ειδικά να προσφέρει φιλτράρισμα ιδιότητας γιατί η Geocaching.com μπλοκάρει το απαιτούμενο API για εμάς.\n\nΑυτή η υπηρεσία μέσω της Geocaching.com δεν υποστηρίζεται ακόμα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>

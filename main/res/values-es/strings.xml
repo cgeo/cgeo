@@ -410,7 +410,6 @@
     <string name="about_contributors_carnerodetails">como padre de c:geo</string>
     <string name="about_contributors_recent">Contribuyentes recientes</string>
     <string name="about_contributors_specialthanks">Agradecimientos especiales a</string>
-    <string name="about_contributors_specialthanksdetails">· todos nuestros colaboradores de traducción en <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· todos los creadores de incidencias\n· y todos los demás seguidores.\n</string>
     <string name="about_contributors_other">Otros colaboradores</string>
     <string name="about_components">Componentes</string>
     <string name="contribution_code">código</string>
