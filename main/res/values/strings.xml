@@ -497,6 +497,11 @@
     <string name="cache_filter_distance">Distance</string>
     <string name="cache_filter_hidden">Hidden Date</string>
 
+    <string name="cache_filtergroup_basic">Basic</string>
+    <string name="cache_filtergroup_detailed">Detailed</string>
+    <string name="cache_filtergroup_userspecific">User specific</string>
+
+
     <string name="cache_filter_include">Include</string>
     <string name="cache_filter_exclude">Exclude</string>
 

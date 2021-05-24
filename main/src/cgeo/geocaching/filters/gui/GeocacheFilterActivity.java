@@ -262,6 +262,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             .setDisplayMapper(GeocacheFilterType::getUserDisplayableName)
             .setTextHideSelectionMarker(true)
             .setView(binding.filterAdditem, (v, t) -> { })
+            .setTextGroupMapper(ft -> ft.getUserDisplayableGroup())
             .setChangeListener(gcf -> {
                 filterListAdapter.addItem(0, FilterViewHolderCreator.createFor(gcf, this));
                 binding.filterList.smoothScrollToPosition(0);
@@ -285,6 +286,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         if (!isAdvancedView()) {
             switchToBasic();
         }
+        adjustFilterEmptyView();
     }
 
     private void finishWithResult() {
