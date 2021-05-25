@@ -466,6 +466,9 @@
     <string name="cache_filter_favorites">호감점수</string>
     <string name="cache_filter_distance">거리</string>
     <string name="cache_filter_hidden">숨긴 날짜</string>
+    <string name="cache_filtergroup_basic">기본</string>
+    <string name="cache_filtergroup_detailed">상세하게</string>
+    <string name="cache_filtergroup_userspecific">사용자의 특정</string>
     <string name="cache_filter_include">포함</string>
     <string name="cache_filter_exclude">제외</string>
     <string name="cache_filter_userdisplay_complex">복잡하게</string>
