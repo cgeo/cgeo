@@ -294,9 +294,6 @@ public class MainActivity extends AbstractActionBarActivity {
 
         binding = MainActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        if (!Settings.isTransparentBackground()) {
-            binding.mainscreen.setBackgroundColor(getResources().getColor(R.color.colorBackgroundNotice));
-        }
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             // If we had been open already, start from the last used activity.
