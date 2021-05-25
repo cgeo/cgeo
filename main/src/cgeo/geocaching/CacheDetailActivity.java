@@ -2053,7 +2053,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final Geopoint coordinates = wpt.getCoords();
             final String calcStateJson = wpt.getCalcStateJson();
 
+            // coordinates
             holder.setCoordinate(coordinates);
+            addContextMenu(coordinatesView);
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
 
