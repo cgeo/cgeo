@@ -105,7 +105,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -1826,15 +1825,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
             try {
-                final int backgroundColor = Settings.isLightSkin() ? Color.WHITE : Color.BLACK;
-                descriptionView.setBackgroundColor(backgroundColor);
-
                 final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
                 final Editable description = new SpannableStringBuilder(HtmlCompat.fromHtml(descriptionString, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
                 addWarning(unknownTagsHandler, description);
                 if (StringUtils.isNotBlank(description)) {
                     fixRelativeLinks(description);
-                    fixTextColor(description, backgroundColor);
+                    fixTextColor(description, R.color.colorBackground);
 
                     try {
                         if (descriptionView.getText().length() == 0) {
