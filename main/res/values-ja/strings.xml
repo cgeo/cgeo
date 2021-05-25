@@ -673,7 +673,7 @@
     <string name="settings_folder_changed">復元中にフォルダ「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
     <string name="settings_file_changed">復元中に「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
-    <string name="settings_info_offline_maps">オフライン用の地図をサポートしています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
+    <string name="settings_info_offline_maps">オフライン用の地図に対応しています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
     <string name="settings_info_themes">オフライン地図用のテーマが使用できます。カラースタイルを変更したり(例えば夜間用表示)、自転車道や等高線などを強調表示するために使われます。\n\nzip圧縮されてないテーマファイルでは表示が遅くなる時があります。そのような場合にはテーマフォルダをアプリ専用フォルダと同期してアクセス速度を早くすることもできます(少しストレージ使用量が増えます)。</string>
     <string name="init_mapsource_select">地図の選択</string>
@@ -776,7 +776,7 @@
     <string name="init_ec_icons">地図のアイコン</string>
     <string name="settings_ec_icons_other">独自のスタイル</string>
     <string name="settings_ec_icons_oc">OCと同じ</string>
-    <string name="settings_features">サポートされている機能</string>
+    <string name="settings_features">対応している機能</string>
     <string name="feature_personal_notes">パーソナルノート</string>
     <string name="feature_online_logging">オンラインでログを投稿する</string>
     <string name="feature_log_images">ログに画像を添付する</string>
@@ -895,7 +895,7 @@
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">次の処理で<b>c:geo</b>が%sにアクセスできるようになります</string>
     <string name="auth_credentials_explain_long">すでにアカウントをお持ちの場合は、%sのアカウント情報を入力してください:</string>
-    <string name="auth_register_explain">アカウントをお持ちでない場合は新規登録してください。以下をタップするとサービスのウェブページに移動します。 c:geoはGoogle/Apple/Facebook経由でのログインをサポートしていないため、ユーザー名とパスワードを使用してアカウントを作成してください。 c:geoでログインする前に、アカウントのメールアドレス認証が必要な場合があります</string>
+    <string name="auth_register_explain">アカウントをお持ちでない場合は新規登録してください。以下をタップするとサービスのWebページに移動します。 c:geoはGoogle/Apple/Facebook経由でのログインに対応していないため、ユーザー名とパスワードを使用してアカウントを作成してください。 c:geoでログインする前に、アカウントのメールアドレス認証が必要な場合があります</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">次の処理で<b>c:geo</b>が%sにアクセスできるようになります</string>
     <string name="auth_token_explain_long">アカウント情報を入力して「c:geoを承認」ボタンをタップすると、%sに接続して認証トークンを取得します</string>
@@ -1665,7 +1665,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="tts_toggle">音声案内の切替</string>
     <string name="tts_started">音声案内を開始しました</string>
     <string name="tts_stopped">音声案内を停止しました</string>
-    <string name="err_tts_lang_not_supported">現在の言語ではテキスト読み上げ機能がサポートされていません</string>
+    <string name="err_tts_lang_not_supported">現在の言語ではテキスト読み上げ機能に対応していません</string>
     <string name="tts_one_kilometer">1キロメートル</string>
     <plurals name="tts_kilometers">
         <item quantity="other">%sキロメートル</item>
@@ -1821,7 +1821,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="delete_setting">設定キーの削除</string>
     <string name="delete_setting_warning">設定キー「%s」を削除しますか?\n\nこの操作は元に戻せません</string>
     <string name="edit_setting">「%s」設定値を編集</string>
-    <string name="edit_setting_error_unknown_type">不明な設定タイプ: 編集はサポートされていません</string>
+    <string name="edit_setting_error_unknown_type">不明な設定タイプ: 編集できません</string>
     <string name="edit_setting_error_invalid_data">無効な設定値「%s」 が入力されました。 設定値は変更されません</string>
     <string name="activate_editmode_title">編集モードを有効にする</string>
     <string name="activate_editmode_warning">ここからは危険なエリアです!\n\n設定値を直接変更するとc:geoが異常な挙動を引き起こしたり起動しなくなる可能性もあります。慎重にしてください。\n\nご自身の責任の元で続けますか?</string>
