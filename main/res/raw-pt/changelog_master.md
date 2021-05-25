@@ -13,7 +13,7 @@
 
 ### Gestor de Transferências
 - Alteração: Os ficheiros transferidos com sucesso irão substituir automaticamente os ficheiros já existentes com o mesmo nome
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+- Alteração: Se um mapa requer um determinado tema que ainda não esteja instalado, o c:geo também descarregará e instalará esse tema automaticamente
 
 ### Outro
 - Novo: Transferir as listas de geocaching.com - consulte "Listas / pocket queries" no menu principal
