@@ -124,7 +124,7 @@
     <string name="log_today">今日</string>
     <string name="log_yesterday">昨日</string>
     <string name="log_smilies">表情符号 按钮</string>
-    <string name="log_image">镜像文件</string>
+    <string name="log_image">圖片</string>
     <string name="log_images">照片</string>
     <string name="log_image_attach">附加圖片</string>
     <string name="log_image_stored">已存在</string>
@@ -577,7 +577,6 @@
     <string name="init_summary_archived">排除歸檔的cache</string>
     <string name="init_global_wp_extraction_disable">關閉輸出航點</string>
     <string name="init_summary_global_wp_extraction_disable">關閉所有來自個人寶藏筆記的航點資訊，但還是可以在個別寶藏中的個人寶藏筆記下方的勾選框開啟它</string>
-    <string name="init_customtabs_as_browser">使用Google Chrome瀏覽。</string>
     <string name="init_summary_customtabs_as_browser">在不離開c：geo的情況下將顯示外部網站（僅在安裝了Chrome的情況下才可能顯示）</string>
     <string name="init_save_log_img">儲存照片</string>
     <string name="init_summary_save_log_img">從日誌儲存照片。</string>
