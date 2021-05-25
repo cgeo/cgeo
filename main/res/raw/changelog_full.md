@@ -10,6 +10,7 @@ This changelog contains all changes which are not intermediate developing steps.
 - Fix: Selected track/route file did not get persisted
 
 ### Other
+- Fix: Fix copy coordinate via long click on waypoint coordinates
 
 <!-- --------------------------------------------------------------------------------- --->
 
@@ -37,6 +38,7 @@ This changelog contains all changes which are not intermediate developing steps.
 - New: Ignore capability for geocaching.su
 - New: Support exporting/importig assigned emoji in GPX
 - Change: Removed no longer maintained RMAPS navigation app
+- Fix: Enable editing of imported waypoints with empty coordinates
 
 <!-- --------------------------------------------------------------------------------- --->
 
