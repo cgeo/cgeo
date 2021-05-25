@@ -4,12 +4,15 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
 import java.util.Arrays;
 
 import org.apache.commons.lang3.BooleanUtils;
 
 public  class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
+
+    private static final String CONFIG_KEY_PERCENTAGE = "percentage";
 
     private boolean percentage = false;
 
@@ -61,14 +64,16 @@ public  class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     }
 
     @Override
-    public void setConfig(final String[] values) {
-        super.setConfig(values);
-        this.percentage = values != null && values.length > 2 && BooleanUtils.toBoolean(values[2]);
+    public void setConfig(final ExpressionConfig config) {
+        super.setConfig(config);
+        percentage = config.getFirstValue(CONFIG_KEY_PERCENTAGE, false, BooleanUtils::toBoolean);
     }
 
     @Override
-    public String[] getConfig() {
-        final String[] superConfig = super.getConfig();
-        return new String[]{superConfig[0], superConfig[1], Boolean.toString(percentage)};
+    public ExpressionConfig getConfig() {
+        final ExpressionConfig config = super.getConfig();
+        config.putList(CONFIG_KEY_PERCENTAGE, Boolean.toString(percentage));
+        return config;
     }
+
 }

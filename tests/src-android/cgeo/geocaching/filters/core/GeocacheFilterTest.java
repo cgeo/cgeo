@@ -17,7 +17,7 @@ public class GeocacheFilterTest {
         assertFilterFromConfig("[myname]",  "myname", null);
         assertFilterFromConfig("[myname",  "myname", null);
         assertFilterFromConfig("[]",  "", null);
-        assertFilterFromConfig("[test\\]:test]",  "test]:test", null);
+        assertFilterFromConfig("[test\\]\\:test]",  "test]:test", null);
     }
 
     @Test
@@ -32,11 +32,26 @@ public class GeocacheFilterTest {
         assertFilterFromConfig("[myfilter] AND(name)",  "myfilter", AndGeocacheFilter.class);
     }
 
+    @Test
+    public void checkInconclusive() {
+        GeocacheFilter filter = assertFilterFromConfig("[myfilter]name", "myfilter", NameGeocacheFilter.class);
+        assertThat(filter.isIncludeInconclusive()).isFalse();
+        filter = assertFilterFromConfig("[inconclusive=true:myfilter]name", "myfilter", NameGeocacheFilter.class);
+        assertThat(filter.isIncludeInconclusive()).isTrue();
+    }
 
-    private void assertFilterFromConfig(final String config, final String expectedName, final Class<? extends IGeocacheFilter> expectedFilterClass) {
+    @Test
+    public void checkAdvancedView() {
+        GeocacheFilter filter = assertFilterFromConfig("[myfilter]name", "myfilter", NameGeocacheFilter.class);
+        assertThat(filter.isOpenInAdvancedMode()).isFalse();
+        filter = assertFilterFromConfig("[advanced=true:myfilter]name", "myfilter", NameGeocacheFilter.class);
+        assertThat(filter.isOpenInAdvancedMode()).isTrue();
+    }
+
+    private GeocacheFilter assertFilterFromConfig(final String config, final String expectedName, final Class<? extends IGeocacheFilter> expectedFilterClass) {
         final GeocacheFilter filter = GeocacheFilter.createFromConfig(config);
         assertThat(filter.getName()).as("name for ' " + config + "'").isEqualTo(expectedName);
         assertThat(filter.getTree() == null ? null : filter.getTree().getClass()).as("treeclass for ' " + config + "'").isEqualTo(expectedFilterClass);
-
+        return filter;
     }
 }

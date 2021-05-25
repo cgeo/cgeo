@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.expressions.ExpressionConfig;
 import cgeo.geocaching.utils.expressions.ExpressionParser;
 
 import androidx.annotation.NonNull;
@@ -15,25 +16,25 @@ import androidx.annotation.NonNull;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class GeocacheFilter {
 
-    private static final Set<Character> DELIM_SET = new HashSet<>(Collections.singletonList(']'));
+    public static final GeocacheFilter EMPTY_FILTER = new GeocacheFilter(null, false, false, null);
+
+    private static final String CONFIG_KEY_ADV_MODE = "advanced";
+    private static final String CONFIG_KEY_INCLUDE_INCLUSIVE = "inconclusive";
 
     private static final ExpressionParser<IGeocacheFilter> FILTER_PARSER = new ExpressionParser<IGeocacheFilter>()
         .register(AndGeocacheFilter::new)
         .register(OrGeocacheFilter::new)
-        .register(NotGeocacheFilter::new)
-        .register(InconclusiveGeocacheFilter::new);
+        .register(NotGeocacheFilter::new);
 
     static {
         for (GeocacheFilterType gcf : GeocacheFilterType.values()) {
@@ -43,6 +44,9 @@ public class GeocacheFilter {
 
     private final String name;
     private final IGeocacheFilter tree;
+
+    private final boolean openInAdvancedMode;
+    private final boolean includeInconclusive;
 
     public static class Storage {
 
@@ -62,7 +66,10 @@ public class GeocacheFilter {
         public static synchronized boolean existsAndDiffers(final String newName, final GeocacheFilter filter) {
             ensureInit();
             final GeocacheFilter other = storedFilters.get(newName);
-            return other != null && !Objects.equals(other.getTreeConfig(), filter.getTreeConfig());
+            return other != null &&
+                (!Objects.equals(other.getTreeConfig(), filter.getTreeConfig()) ||
+                    filter.isIncludeInconclusive() != other.isIncludeInconclusive() ||
+                    filter.isOpenInAdvancedMode() != other.isOpenInAdvancedMode());
         }
 
         public static synchronized void save(final GeocacheFilter filter) {
@@ -87,18 +94,24 @@ public class GeocacheFilter {
         }
     }
 
-    public GeocacheFilter(final String name, final String treeConfig) {
-        this(name, FILTER_PARSER.createWithNull(treeConfig));
-    }
-
-    public GeocacheFilter(final String name, final IGeocacheFilter tree) {
+    public GeocacheFilter(final String name, final boolean openInAdvancedMode, final boolean includeInconclusive, final IGeocacheFilter tree) {
         this.name = name;
         this.tree = tree;
+        this.openInAdvancedMode = openInAdvancedMode;
+        this.includeInconclusive = includeInconclusive;
     }
 
     @NonNull
     public String getName() {
         return name == null ? "" : name;
+    }
+
+    public boolean isOpenInAdvancedMode() {
+        return openInAdvancedMode;
+    }
+
+    public boolean isIncludeInconclusive() {
+        return includeInconclusive;
     }
 
     public IGeocacheFilter getTree() {
@@ -111,14 +124,16 @@ public class GeocacheFilter {
 
     @NonNull
     public static GeocacheFilter createFromConfig(final String filterConfig) {
-        if (filterConfig == null) {
-            return new GeocacheFilter(null, (String) null);
-        }
+        return createFromConfig(null, filterConfig);
+    }
+
+    @NonNull
+    public static GeocacheFilter createFromConfig(final String pName, final String filterConfig) {
         try {
-            return createInternal(filterConfig, false);
+            return createInternal(pName, filterConfig, false);
         } catch (ParseException e) {
             //will never happen
-            return new GeocacheFilter(null, (String) null);
+            return EMPTY_FILTER;
         }
     }
 
@@ -132,23 +147,27 @@ public class GeocacheFilter {
     }
 
     public static GeocacheFilter checkConfig(final String filterConfig) throws ParseException {
-        return createInternal(filterConfig, true);
+        return createInternal(null, filterConfig, true);
     }
 
-    private static GeocacheFilter createInternal(final String filterConfig, final boolean throwOnParseError) throws ParseException {
+    private static GeocacheFilter createInternal(final String pName, final String pFilterConfig, final boolean throwOnParseError) throws ParseException {
 
-        if (filterConfig == null) {
-            return new GeocacheFilter(null, (String) null);
-        }
-        String name = null;
+        final String filterConfig = pFilterConfig == null ? "" : pFilterConfig;
+        String name = pName;
         IGeocacheFilter tree = null;
+        boolean openInAdvancedMode = false;
+        boolean includeInconclusive = false;
 
         //See if config contains info beside the filter expression itself
         int idx = 0;
         if (filterConfig.startsWith("[")) {
-            final StringBuilder sb = new StringBuilder();
-            idx = ExpressionParser.parseToNextDelim(filterConfig, 1, DELIM_SET, sb) + 1;
-            name = sb.toString();
+            final ExpressionConfig config = new ExpressionConfig();
+            idx = ExpressionParser.parseConfiguration(filterConfig, 1, config) + 1;
+            if (name == null) {
+                name = config.getDefaultList().isEmpty() ? "" : config.getDefaultList().get(0);
+            }
+            openInAdvancedMode = config.getFirstValue(CONFIG_KEY_ADV_MODE, false, BooleanUtils::toBoolean);
+            includeInconclusive = config.getFirstValue(CONFIG_KEY_INCLUDE_INCLUSIVE, false, BooleanUtils::toBoolean);
         }
 
         final String treeConfig = filterConfig.substring(Math.min(idx, filterConfig.length()));
@@ -162,7 +181,7 @@ public class GeocacheFilter {
                 Log.w("Couldn't parse expression '" + filterConfig + "' (idx: " + idx + ")", pe);
             }
         }
-        return new GeocacheFilter(name, tree);
+        return new GeocacheFilter(name, openInAdvancedMode, includeInconclusive, tree);
     }
 
     public boolean hasFilter() {
@@ -170,7 +189,12 @@ public class GeocacheFilter {
     }
 
     public String toConfig() {
-        return "[" + (name == null ? "" : name.replaceAll("]", "\\]")) + "]" + (tree == null ? "" : FILTER_PARSER.getConfig(tree));
+        final ExpressionConfig config = new ExpressionConfig();
+        config.addToDefaultList(getName());
+        config.putList(CONFIG_KEY_ADV_MODE, BooleanUtils.toStringTrueFalse(isOpenInAdvancedMode()));
+        config.putList(CONFIG_KEY_INCLUDE_INCLUSIVE, BooleanUtils.toStringTrueFalse(isIncludeInconclusive()));
+        final String configString = "[" + ExpressionParser.toConfig(config) + "]" + (tree == null ? "" : FILTER_PARSER.getConfig(tree));
+        return configString;
     }
 
 
@@ -179,7 +203,7 @@ public class GeocacheFilter {
             return true;
         }
         final Boolean result = tree.filter(cache);
-        return result != null && result;
+        return result == null ? this.includeInconclusive : result;
     }
 
     public void filterList(final Collection<Geocache> list) {

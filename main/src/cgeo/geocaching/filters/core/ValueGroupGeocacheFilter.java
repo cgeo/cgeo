@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -107,9 +108,9 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
     }
 
     @Override
-    public void setConfig(final String[] value) {
+    public void setConfig(final ExpressionConfig config) {
         values.clear();
-        for (String s : value) {
+        for (String s : config.getDefaultList()) {
             final G g = valueFromString(s);
             if (g != null) {
                 values.add(g);
@@ -118,16 +119,16 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
     }
 
     @Override
-    public String[] getConfig() {
-        final String[] result = new String[values.size()];
-        int idx = 0;
+    public ExpressionConfig getConfig() {
+        final ExpressionConfig result = new ExpressionConfig();
         for (G v : this.values) {
             final String c = valueToString(v);
             if (c != null) {
-                result[idx++] = c;
+                result.addToDefaultList(c);
             }
         }
         return result;
+
     }
 
     @Override

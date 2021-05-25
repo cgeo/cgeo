@@ -6,6 +6,7 @@ import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +14,9 @@ import androidx.annotation.Nullable;
 import org.apache.commons.lang3.BooleanUtils;
 
 public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
+
+    private static final String CONFIG_KEY_COORD = "coord";
+    private static final String CONFIG_KEY_USE_CURRENT_POS = "use_current_pos";
 
     private Geopoint coordinate;
     private boolean useCurrentPosition;
@@ -55,17 +59,18 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     }
 
     @Override
-    public void setConfig(final String[] value) {
-        super.setConfig(value);
-        useCurrentPosition = value.length > 2 && BooleanUtils.toBoolean(value[2]);
-        coordinate = value.length > 3 && !"-".equals(value[3]) ? GeopointParser.parse(value[3], null) : null;
+    public void setConfig(final ExpressionConfig config) {
+        super.setConfig(config);
+        useCurrentPosition = config.getFirstValue(CONFIG_KEY_USE_CURRENT_POS, false, BooleanUtils::toBoolean);
+        coordinate = config.getFirstValue(CONFIG_KEY_COORD, null, s -> GeopointParser.parse(s, null));
     }
 
     @Override
-    public String[] getConfig() {
-        final String[] superConfig = super.getConfig();
-        return new String[]{superConfig[0], superConfig[1],
-            Boolean.toString(useCurrentPosition), coordinate == null ? "-" : GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, coordinate)};
+    public ExpressionConfig getConfig() {
+        final ExpressionConfig config = super.getConfig();
+        config.putList(CONFIG_KEY_USE_CURRENT_POS, Boolean.toString(useCurrentPosition));
+        config.putList(CONFIG_KEY_COORD, coordinate == null ? "-" : GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, coordinate));
+        return config;
     }
 
     @Override

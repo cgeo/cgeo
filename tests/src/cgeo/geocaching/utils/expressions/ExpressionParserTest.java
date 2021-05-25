@@ -1,7 +1,12 @@
 package cgeo.geocaching.utils.expressions;
 
 import java.text.ParseException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -18,8 +23,10 @@ public class ExpressionParserTest {
             .register(() -> LambdaExpression.createValueSingleConfig("x", (s, i) -> i))
             .register(() -> LambdaExpression.createValue("length", (sa, i) -> {
                 int res = 0;
-                for (String s : sa) {
-                    res = res * 10 + s.length();
+                if (sa != null && sa.get(null) != null) {
+                    for (String s : sa.get(null)) {
+                        res = res * 10 + s.length();
+                    }
                 }
                 return res;
             }))
@@ -153,6 +160,72 @@ public class ExpressionParserTest {
         assertLambdaExpression("length:123", false, 0, 3);
         assertLambdaExpression("LENGTH:123", false, 0, 3);
         assertLambdaExpression("lenGth:123", false, 0, 3);
+    }
+
+    @Test
+    public void escape() {
+        assertThat(ExpressionParser.escape(null)).isEqualTo("");
+        //expected escaped characters are: ()=:[]\;
+        //expected NOT escaped characters are all others (e.g. $ and letters and digits and whitespaces)
+        assertThat(ExpressionParser.escape(" ()=[]:$;abc123 \n\t()\\ ")).isEqualTo(" \\(\\)\\=\\[\\]\\:$\\;abc123 \n\t\\(\\)\\\\ ");
+    }
+
+    @Test
+    public void parseAndCreateConfig() {
+        final String text = "[eins:zwei:drei:a=a1:b=b\\bb:c=\\(\\):d=\t \n:a=a2:vier]end";
+        final ExpressionConfig config = new ExpressionConfig();
+        final int idx = ExpressionParser.parseConfiguration(text, 1, config);
+        assertThat(idx).isLessThan(text.length());
+        assertThat(text.charAt(idx)).isEqualTo(']');
+        assertThat(config).hasSize(5);
+        assertThat(config.get(null)).containsExactly("eins", "zwei", "drei", "vier");
+        assertThat(config.get("a")).containsExactly("a1", "a2");
+        assertThat(config.get("b")).containsExactly("bbb");
+        assertThat(config.get("c")).containsExactly("()");
+        assertThat(config.get("d")).containsExactly("\t \n");
+
+        //add empty configs which shall NOT be reflected in config string!
+        config.put("emptyNull", null);
+        config.put("emptyEmpty", Collections.emptyList());
+
+
+        final String expectedOrderIndependent = "eins:zwei:drei:vier:a=a1:a=a2:b=bbb:c=\\(\\):d=\t \n";
+        final String expConfig = ExpressionParser.toConfig(config);
+        //the order of the elements is allowed to differ, EXCEPT for the default list which must come first
+        assertThat(expConfig).startsWith("eins:zwei:drei:vier:");
+        assertThat(expConfig).contains("a=a1:a=a2");
+        assertThat(expConfig).contains("b=bbb");
+        assertThat(expConfig).contains("c=\\(\\)");
+        assertThat(expConfig).contains("d=\t \n");
+        assertThat(expConfig).hasSize(expectedOrderIndependent.length());
+    }
+
+    @Test
+    public void parseConfigSpecialCases() {
+        final Map<String, List<String>> config = new TreeMap<>((s1, s2) -> StringUtils.compare(s1, s2, true)); //important to consistently check whether correct config is generated later
+
+        //check case when last value is determined by expression end
+        int idx = ExpressionParser.parseConfiguration("simple", 0, config);
+        assertThat(idx).isEqualTo("simple".length());
+        assertThat(config).hasSize(1);
+        assertThat(config.get(null)).containsExactly("simple");
+
+        //check case when last value is determined by some other unescaped special char
+        config.clear();
+        idx = ExpressionParser.parseConfiguration("simple(abc", 0, config);
+        assertThat(idx).isEqualTo("simple".length());
+        assertThat(config).hasSize(1);
+        assertThat(config.get(null)).containsExactly("simple");
+
+        //stability check: check that even on strange input values or empty input at least an empty list for null-key is present in result
+        config.clear();
+        assertThat(ExpressionParser.parseConfiguration("eins", 10, config)).isEqualTo("eins".length());
+        assertThat(config).hasSize(1);
+        assertThat(config.get(null)).isEmpty();
+
+        assertThat(ExpressionParser.parseConfiguration(null, 10, config)).isEqualTo(0);
+        assertThat(config).hasSize(1);
+        assertThat(config.get(null)).isEmpty();
     }
 
     private void assertParseException(final String expressionString, final String expectedMessageContains) {

@@ -7,7 +7,7 @@ import cgeo.geocaching.utils.expressions.IExpression;
 import androidx.annotation.Nullable;
 
 /** Base interface to be implemented by all Geocache-Filters */
-public interface IGeocacheFilter extends IExpression<IGeocacheFilter> {
+public interface IGeocacheFilter extends IExpression<IGeocacheFilter>  {
 
     /** Decides whether a geocache passes this filter (returns true) or not (returns false).
      * If this filter is inconclusive whether cache passes filter or nor (e.g. because data is missing in cache)

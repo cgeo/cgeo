@@ -6,7 +6,9 @@ import cgeo.geocaching.utils.Log;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
@@ -64,6 +66,20 @@ public class DateFilter  {
         }
         config[startPos] = minDate == null ? "-" : DAY_DATE_FORMAT.format(minDate);
         config[startPos + 1] = maxDate == null ? "-" : DAY_DATE_FORMAT.format(maxDate);
+        return config;
+    }
+
+    public void setConfig(final List<String> config) {
+        if (config != null) {
+            minDate = config.size() > 0 ? parseDate(config.get(0)) : null;
+            maxDate = config.size() > 1 ? parseDate(config.get(1)) : null;
+        }
+    }
+
+    public List<String> getConfig() {
+        final List<String> config = new ArrayList<>();
+        config.add(minDate == null ? "-" : DAY_DATE_FORMAT.format(minDate));
+        config.add(maxDate == null ? "-" : DAY_DATE_FORMAT.format(maxDate));
         return config;
     }
 

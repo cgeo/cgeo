@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
 import java.util.Date;
 
@@ -34,13 +35,15 @@ public abstract class DateRangeGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final String[] values) {
-        dateFilter.setFromConfig(values, 0);
+    public void setConfig(final ExpressionConfig config) {
+        dateFilter.setConfig(config.get(null));
     }
 
     @Override
-    public String[] getConfig() {
-        return dateFilter.addToConfig(new String[2], 0);
+    public ExpressionConfig getConfig() {
+        final ExpressionConfig config = new ExpressionConfig();
+        config.put(null, dateFilter.getConfig());
+        return config;
     }
 
     @Override

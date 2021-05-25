@@ -8,7 +8,6 @@ import cgeo.geocaching.filters.core.AndGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
-import cgeo.geocaching.filters.core.InconclusiveGeocacheFilter;
 import cgeo.geocaching.filters.core.LogicalGeocacheFilter;
 import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
@@ -77,9 +76,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.cgeo);
-        setContentView(R.layout.cache_filter_activity);
-        //setThemeAndContentView(R.layout.cache_filter_activity);
+        setThemeAndContentView(R.layout.cache_filter_activity);
         binding = CacheFilterActivityBinding.bind(findViewById(R.id.activity_viewroot));
 
         binding.filterPropsCheckboxes.removeAllViews();
@@ -122,16 +119,22 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     private void initializeStorageOptions() {
 
         //handling of "save" button
-        binding.filterStorageSave.setOnClickListener(v ->
-            Dialogs.input(this, getString(R.string.cache_filter_storage_save_title), InputType.TYPE_CLASS_TEXT,  binding.filterStorageName.getText().toString(), null, android.R.string.ok, newName -> {
-                final GeocacheFilter filter = getFilterFromView();
-                if (GeocacheFilter.Storage.existsAndDiffers(newName, filter)) {
-                    Dialogs.confirm(this, R.string.cache_filter_storage_save_confirm_title, getString(R.string.cache_filter_storage_save_confirm_message, newName),
-                        (dialog, which) -> saveAs(newName));
-                } else {
-                    saveAs(newName);
-                }
-            }));
+        binding.filterStorageSave.setOnClickListener(v -> {
+            String filterName = binding.filterStorageName.getText().toString();
+            if (filterName.endsWith("*")) {
+                filterName = filterName.substring(0, filterName.length() - 1);
+            }
+            Dialogs.input(this, getString(R.string.cache_filter_storage_save_title), InputType.TYPE_CLASS_TEXT,
+                filterName, null, android.R.string.ok, newName -> {
+                    final GeocacheFilter filter = getFilterFromView();
+                    if (GeocacheFilter.Storage.existsAndDiffers(newName, filter)) {
+                        Dialogs.confirm(this, R.string.cache_filter_storage_save_confirm_title, getString(R.string.cache_filter_storage_save_confirm_message, newName),
+                            (dialog, which) -> saveAs(newName));
+                    } else {
+                        saveAs(newName);
+                    }
+                });
+        });
         ViewUtils.setTooltip(binding.filterStorageSave, R.string.cache_filter_storage_save_title);
 
         //handling of "load/delete" button
@@ -215,16 +218,15 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         inverseFilterCheckbox.setChecked(false);
         andOrFilterCheckbox.setChecked(false);
 
+        boolean setAdvanced = false;
         if (inputFilter != null) {
             try {
                 final List<IFilterViewHolder<?>> filterList = new ArrayList<>();
                 final GeocacheFilter filter = GeocacheFilter.checkConfig(inputFilter);
                 binding.filterStorageName.setText(filter.getNameForUserDisplay());
+                includeInconclusiveFilterCheckbox.setChecked(filter.isIncludeInconclusive());
+                setAdvanced = filter.isOpenInAdvancedMode();
                 IGeocacheFilter filterTree = filter.getTree();
-                if (filterTree instanceof InconclusiveGeocacheFilter) {
-                    includeInconclusiveFilterCheckbox.setChecked(true);
-                    filterTree = filterTree.getChildren().get(0);
-                }
                 if (filterTree instanceof NotGeocacheFilter) {
                     inverseFilterCheckbox.setChecked(true);
                     filterTree = filterTree.getChildren().get(0);
@@ -245,7 +247,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         }
 
         //set basic/advanced switch
-        if (!forceAdvanced && isBasicPossibleWithoutLoss()) {
+        if (!forceAdvanced && !setAdvanced && isBasicPossibleWithoutLoss()) {
             this.binding.filterBasicAdvanced.setChecked(false);
             switchToBasic();
         } else {
@@ -311,14 +313,13 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                 notFilter.addChild(filter);
                 filter = notFilter;
             }
-            if (includeInconclusiveFilterCheckbox.isChecked()) {
-                final IGeocacheFilter incFilter = new InconclusiveGeocacheFilter();
-                incFilter.addChild(filter);
-                filter = incFilter;
-            }
         }
 
-        return new GeocacheFilter(binding.filterStorageName.getText().toString(), filter);
+        return new GeocacheFilter(
+            binding.filterStorageName.getText().toString(),
+            binding.filterBasicAdvanced.isChecked(),
+            this.includeInconclusiveFilterCheckbox.isChecked(),
+            filter);
     }
 
     public static void selectFilter(@NonNull final Activity context, final GeocacheFilter filter,
@@ -371,8 +372,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         this.binding.filterBasicAdvanced.setChecked(false);
         this.binding.filterStorageName.setText("");
         this.inverseFilterCheckbox.setChecked(false);
-        this.inverseFilterCheckbox.setChecked(false);
-        this.inverseFilterCheckbox.setChecked(false);
+        this.andOrFilterCheckbox.setChecked(false);
+        this.includeInconclusiveFilterCheckbox.setChecked(false);
 
         this.binding.filterStorageOptions.setVisibility(View.GONE);
         this.binding.filterStorageOptionsLine.setVisibility(View.GONE);

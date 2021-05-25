@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,13 @@ public abstract class LogicalGeocacheFilter implements IGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final String[] value) {
-        //logical filter has no config
+    public void setConfig(final ExpressionConfig config) {
+        //Logical filter has no config
     }
 
     @Override
-    public String[] getConfig() {
+    public ExpressionConfig getConfig() {
+        //Logical filter has no config
         return null;
     }
 
