@@ -550,7 +550,6 @@
     <string name="init_summary_archived">Виключити архівовані кеші</string>
     <string name="init_global_wp_extraction_disable">відключити спосіб вилучення</string>
     <string name="init_summary_global_wp_extraction_disable">Глобально вимкнути видобуток шляхових точок з особистих схованок. Воно може бути увімкнено для окремих кеш, вимикаючи прапорець під особистою приміткою кешу</string>
-    <string name="init_customtabs_as_browser">Використовувати веб-перегляд</string>
     <string name="init_summary_customtabs_as_browser">Зовнішні веб-сайти будуть відображатися без залишення c:geo (лише при встановленні Chrome)</string>
     <string name="init_save_log_img">Зберегти зображення</string>
     <string name="init_summary_save_log_img">Зберегти зображення з логів</string>
