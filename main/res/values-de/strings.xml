@@ -447,10 +447,12 @@
     <string name="cache_filter_mode_advanced">Erweitert</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Wechsel zu einfacher Ansicht</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Der Wechsel zur einfachen Ansicht führt zum Verwerfen einiger Filtereinstellungen. Fortfahren?</string>
+    <string name="cache_filter_add_button">Filterkriterium hinzufügen</string>
     <string name="cache_filter_option_and_or">Benutze ODER statt UND</string>
     <string name="cache_filter_option_inverse">Filter umkehren</string>
     <string name="cache_filter_option_include_inconclusive">Unschlüssige Treffer einschließen</string>
     <string name="cache_filter_option_include_inconclusive_info">Gibt an, ob der Cache in das Ergebnis eingebunden werden soll, wenn ein Filter Informationen benötigt die im Cache nicht verfügbar sind.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tippe oben auf \'Filterkriterium hinzufügen\' um einen Filter hinzuzufügen</string>
     <string name="cache_filter_name">Cache-Name</string>
     <string name="cache_filter_type">Cache-Typ</string>
     <string name="cache_filter_size">Cache-Größe</string>
@@ -465,6 +467,9 @@
     <string name="cache_filter_favorites">Favoriten</string>
     <string name="cache_filter_distance">Entfernung</string>
     <string name="cache_filter_hidden">Versteckdatum</string>
+    <string name="cache_filtergroup_basic">Basis</string>
+    <string name="cache_filtergroup_detailed">Detailliert</string>
+    <string name="cache_filtergroup_userspecific">Benutzerspezifisch</string>
     <string name="cache_filter_include">Mit</string>
     <string name="cache_filter_exclude">Ohne</string>
     <string name="cache_filter_userdisplay_complex">Komplex</string>
@@ -693,7 +698,7 @@
     <string name="init_summary_archived">Archivierte Caches ausblenden</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird</string>
-    <string name="init_customtabs_as_browser">Chrome Webanzeige verwenden</string>
+    <string name="init_customtabs_as_browser">Chrome WebView verwenden</string>
     <string name="init_summary_customtabs_as_browser">Externe Websites werden angezeigt, ohne c:geo zu verlassen (nur möglich, wenn Chrome installiert ist)</string>
     <string name="init_save_log_img">Logbilder</string>
     <string name="init_summary_save_log_img">Logbilder abspeichern</string>
@@ -1382,6 +1387,7 @@
     <string name="search_hbu_button">Suche mit Besitzername</string>
     <string name="search_filter">Filter (experimentell)</string>
     <string name="search_filter_button">Suchen mit Filter</string>
+    <string name="search_filter_info_message">\'Suche nach Filter\' durchsucht Caches auf Online-Diensten mit Hilfe eines bereitgestellten Filters. Je nach Fähigkeit des Dienstes wird nur ein Teil des Filters online und der Rest dann durch Offline-Filterung ausgeführt.\n\nAlle Dienste unterstützen nur UND Filter und keine Filterinvertierung.\n\nGeocaching.com Unterstützung:\n- Name (nur ganze Wörter, Muster nicht unterstützt)\n- Cachetyp\n- Cachegröße\n- Entfernung\nSchwierigkeit und Gelände\n- Favoriten (nur absolut, nur Minimum)\n- Status (Eigene, Gefunden &amp; Aktiviert)\n- Versteckt von (genaue Benutzer-ID)\n- Nicht gefunden von (genaue Benutzer-ID)\n- Versteckdatum\n\nBeachte, dass c:geo keine Attribut-Filter anbieten kann, da geocaching.com die benötigte API für uns blockiert.\n\nEs werden noch keine Dienste außer Geocaching.com unterstützt.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Tracking-Code</string>
     <string name="search_tb_button">Suche nach Trackable</string>
