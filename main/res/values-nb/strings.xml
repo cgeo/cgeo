@@ -576,7 +576,6 @@
     <string name="init_summary_archived">Ekskluder arkiverte cacher</string>
     <string name="init_global_wp_extraction_disable">Deaktiver uthenting av veipunkt</string>
     <string name="init_summary_global_wp_extraction_disable">Globalt deaktivere uthenting av veipunkt fra personlige cachenotater. Dette kan fortsatt aktiveres for enkeltcacher ved å deaktivere avmerkingsboksen under det personlige cachenotatet</string>
-    <string name="init_customtabs_as_browser">Bruk Chrome webview</string>
     <string name="init_summary_customtabs_as_browser">Eksterne nettsider vil vises uten at du forlater c:geo (kun hvis Chrome er installert)</string>
     <string name="init_save_log_img">Lagre bilder</string>
     <string name="init_summary_save_log_img">Lagre bilder fra loggene</string>
