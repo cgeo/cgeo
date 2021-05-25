@@ -469,6 +469,9 @@
     <string name="cache_filter_favorites">Oblíbené</string>
     <string name="cache_filter_distance">Vzdálenost</string>
     <string name="cache_filter_hidden">Datum skrytí</string>
+    <string name="cache_filtergroup_basic">Základní</string>
+    <string name="cache_filtergroup_detailed">Podrobné</string>
+    <string name="cache_filtergroup_userspecific">Vlastní</string>
     <string name="cache_filter_include">Zahrnout</string>
     <string name="cache_filter_exclude">Vyloučit</string>
     <string name="cache_filter_userdisplay_complex">Komplexní</string>
@@ -699,7 +702,7 @@
     <string name="init_summary_archived">Vyloučit archivované kešky</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky</string>
-    <string name="init_customtabs_as_browser">Použít Chrome webview</string>
+    <string name="init_customtabs_as_browser">Použít Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externí webové stránky budou zobrazeny bez opuštění c:geo (pouze pokud je nainstalován Chrome)</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
