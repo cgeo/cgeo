@@ -35,7 +35,6 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.CryptUtils;
-import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
@@ -1056,14 +1055,6 @@ public class Settings {
 
     public static boolean isLightSkin() {
         return getBoolean(R.string.pref_skin, false);
-    }
-
-    public static boolean isTransparentBackground() {
-        return getBoolean(R.string.pref_transparentBackground, EnvironmentUtils.defaultBackgroundTransparent());
-    }
-
-    public static void setIsTransparentBackground(final boolean value) {
-        putBoolean(R.string.pref_transparentBackground, value);
     }
 
     @NonNull
