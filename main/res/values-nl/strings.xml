@@ -467,6 +467,9 @@
     <string name="cache_filter_favorites">Favorieten</string>
     <string name="cache_filter_distance">Afstand</string>
     <string name="cache_filter_hidden">Verstopt op</string>
+    <string name="cache_filtergroup_basic">Basis</string>
+    <string name="cache_filtergroup_detailed">Gedetailleerd</string>
+    <string name="cache_filtergroup_userspecific">Gebruikerspecifiek</string>
     <string name="cache_filter_include">Opnemen</string>
     <string name="cache_filter_exclude">Uitsluiten</string>
     <string name="cache_filter_userdisplay_complex">Complex</string>
@@ -695,7 +698,7 @@
     <string name="init_summary_archived">Gearchiveerde caches uitsluiten</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
-    <string name="init_customtabs_as_browser">Gebruik Chrome webview</string>
+    <string name="init_customtabs_as_browser">Gebruik Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externe websites worden weergegeven zonder c:geo te verlaten (alleen mogelijk als Chrome is geïnstalleerd)</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
