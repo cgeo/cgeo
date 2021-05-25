@@ -35,6 +35,7 @@
     <string name="userdefined">Cache definida pelo utilizador</string>
     <string name="unknown">Tipo Desconhecido</string>
     <string name="all_types_short">Todos</string>
+    <string name="traditional_short">Tradicional</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mistério</string>
     <string name="letterbox_short">Letter</string>
@@ -47,6 +48,14 @@
     <string name="virtual_short">Virtual</string>
     <string name="wherigo_short">Wherigo</string>
     <string name="communceleb_short">Comunidade</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">Celebra. GC HQ</string>
+    <string name="gps_short">GPS Exhibit</string>
+    <string name="block_short">GCHQ Block</string>
+    <string name="locationless_short">Locationless</string>
+    <string name="advlab_short">Adv Lab</string>
+    <string name="userdefined_short">Def. utilizador</string>
     <string name="unknown_short">Desconhecido</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
@@ -458,6 +467,9 @@
     <string name="cache_filter_favorites">Favoritos</string>
     <string name="cache_filter_distance">Distância</string>
     <string name="cache_filter_hidden">Data de Colocação</string>
+    <string name="cache_filtergroup_basic">Básico</string>
+    <string name="cache_filtergroup_detailed">Detalhado</string>
+    <string name="cache_filtergroup_userspecific">Definido pelo utilizador</string>
     <string name="cache_filter_include">Incluir</string>
     <string name="cache_filter_exclude">Excluir</string>
     <string name="cache_filter_userdisplay_complex">Complexo</string>
@@ -686,7 +698,6 @@
     <string name="init_summary_archived">Exclui as caches arquivadas</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
-    <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
     <string name="init_summary_customtabs_as_browser">Sítios web externos serão exibidos sem sair do c:geo (apenas possível se o Chrome estiver instalado)</string>
     <string name="init_save_log_img">Guardar imagens</string>
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
@@ -1375,6 +1386,7 @@
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_filter">Filtro (experimental)</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
+    <string name="search_filter_info_message">\'Pesquisar por filtro\' procura caches nos serviços online usando um filtro fornecido. Dependendo da capacidade do serviço, apenas parte do filtro é executada on-line, o restante é feito por filtragem off-line.\n\nTodos os serviços só suportam filtros AND e sem inversão de filtro.\n\nGeocaching.com suporta:\n- Nome (apenas palavras completas, Modelo não suportado)\n- Tipo de Cache\n- Tamanho de Cache\n- Distância\nDificuldade e Terreno\n- Favoritos (apenas absoluto, apenas mínimo)\n- Estado (Própria, Encontrada &amp; habilitada)\n- Escondida por (especificar exactamente a id do utilizador)\n- Não-Encontrada por (especificar exactamente a id do utilizador)\n- Data de colocação\n\nNote que o c:geo não pode oferecer especificamente a filtragem de Atributos, uma vez que Geocaching.com está a bloquear-nos a API necessária.\n\nAinda não há suporte para além do Geocaching.com.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
