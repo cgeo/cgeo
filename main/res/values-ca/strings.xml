@@ -596,7 +596,6 @@
     <string name="init_summary_archived">Exclou els catxés desactivats</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
-    <string name="init_customtabs_as_browser">Utilitzeu Chrome</string>
     <string name="init_summary_customtabs_as_browser">Els llocs web externs es mostraran sense deixar c: geo (només és possible si hi ha instal·lat Chrome)</string>
     <string name="init_save_log_img">Desa les imatges</string>
     <string name="init_summary_save_log_img">Desa les imatges dels registres</string>
@@ -1661,7 +1660,6 @@
     <string name="faq_title">Preguntes freqüents</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Nova versió disponible.\nToca per instal·lar-la.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Hi ha disponible una nova versió nocturna.\nToca per instal·lar-la.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Hi ha disponible una app candidata a nova versió.\nToca per instal·lar.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Els canvis a geocaching.com estan provocant problemes a c: geo.\nSom conscients i hi treballem, doneu-nos una mica de temps.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Els canvis a geocaching.com estan provocant problemes al mapa en viu.\nSom conscients i hi treballem, doneu-nos una mica de temps.</string>
