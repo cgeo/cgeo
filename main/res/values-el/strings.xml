@@ -34,17 +34,27 @@
     <string name="advlab">Cache Εργαστηρίου Περιπέτειας</string>
     <string name="userdefined">Κρύπτη ορισμένη από τον χρήστη</string>
     <string name="unknown">Άγνωστος τύπος</string>
+    <string name="all_types_short">Όλες</string>
+    <string name="traditional_short">Κλασσικές</string>
+    <string name="multi_short">Πολλαπλές</string>
     <string name="mystery_short">Μυστηρίου</string>
     <string name="letterbox_short">Letterbox</string>
+    <string name="event_short">Εκδήλωσεις</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">earth</string>
     <string name="cito_short">CITO</string>
     <string name="webcam_short">Webcam</string>
+    <string name="virtual_short">Εικονικές</string>
     <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Κοινότητας</string>
     <string name="ape_short">APE</string>
     <string name="gchq_short">GC HQ</string>
     <string name="gchqceleb_short">GC HQ Cel</string>
     <string name="gps_short">Έκθεση GPS</string>
     <string name="block_short">Μπλοκ GCHQ</string>
     <string name="locationless_short">Χωρίς τοποθεσία</string>
+    <string name="advlab_short">Adv Lab</string>
     <string name="userdefined_short">Καθορισμένη από τον χρήστη</string>
     <string name="unknown_short">Γρίφου</string>
     <!-- cache sizes -->
@@ -437,10 +447,12 @@
     <string name="cache_filter_mode_advanced">Σύνθετες επιλογές</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Εναλλαγή σε Βασικό</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Η αλλαγή σε \'Βασική\' λειτουργία θα έχει ως αποτέλεσμα την απώλεια των ρυθμίσεων του φίλτρου. Θέλετε να συνεχίσετε;</string>
+    <string name="cache_filter_add_button">Προσθήκη κριτηρίων φίλτρου</string>
     <string name="cache_filter_option_and_or">Χρήση OR αντί του AND</string>
     <string name="cache_filter_option_inverse">Ανάστροφο Φίλτρο</string>
     <string name="cache_filter_option_include_inconclusive">Συμπερίληψη ασαφών συσχετίσεων</string>
     <string name="cache_filter_option_include_inconclusive_info">Αν θα συμπεριληφθεί η κρύπτη στα αποτελέσματα, όταν το φίλτρο χρειάζεται πληροφορίες της κρύπτης που δεν είναι διαθέσιμες.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Πατήστε \'Προσθήκη κριτηρίων φίλτρου\' παραπάνω για να προσθέσετε ένα φίλτρο</string>
     <string name="cache_filter_name">Ονομα κρύπτης</string>
     <string name="cache_filter_type">Τύπος κρύπτης</string>
     <string name="cache_filter_size">Μέγεθος κρύπτης</string>
@@ -455,6 +467,9 @@
     <string name="cache_filter_favorites">Αγαπημένες</string>
     <string name="cache_filter_distance">Απόσταση</string>
     <string name="cache_filter_hidden">Ημερ/μηνία απόκρυψης</string>
+    <string name="cache_filtergroup_basic">Βασικό</string>
+    <string name="cache_filtergroup_detailed">Με λεπτομέρειες</string>
+    <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
     <string name="cache_filter_include">Συμπερίληψη</string>
     <string name="cache_filter_exclude">Εξαίρεση</string>
     <string name="cache_filter_userdisplay_complex">Σύνθετο</string>
@@ -518,6 +533,7 @@
     <string name="about_contributors_carnerodetails">ως ο πατέρας του c:geo</string>
     <string name="about_contributors_recent">Πρόσφατοι χρήστες που συνεισφέραν</string>
     <string name="about_contributors_specialthanks">Ένα μεγάλο ευχαριστώ σε</string>
+    <string name="about_contributors_specialthanksdetails">- όλους τους συνεισφέροντες στην μετάφρασή μας στο [Crowdin.net](https://crowdin.net/project/cgeo)!\n- όλους τους δημιουργους θεμάτων\n- και όλους τους άλλους υποστηρικτές.\n</string>
     <string name="about_contributors_other">Άλλοι χρήστες που συνεισφέραν</string>
     <string name="about_components">Στοιχεία</string>
     <string name="contribution_code">κωδικός</string>
@@ -678,7 +694,6 @@
     <string name="init_summary_archived">Εξαίρεση των αρχειοθετημένων κρυπτών</string>
     <string name="init_global_wp_extraction_disable">Απενεργοποίηση εξαγωγής των σημείων ενδιαφέροντος</string>
     <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης</string>
-    <string name="init_customtabs_as_browser">Χρήση του Chrome webview</string>
     <string name="init_summary_customtabs_as_browser">Η προβολή των εξωτερικών ιστοσελίδων θα γίνεται χωρίς έξοδο από το c:geo (αυτό είναι δυνατόν μόνο εάν είναι εγκατεστημένο το Chrome)</string>
     <string name="init_save_log_img">Αποθήκευση εικόνων</string>
     <string name="init_summary_save_log_img">Αποθήκευση εικόνων από αρχεία καταγραφής</string>
@@ -1367,6 +1382,7 @@
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
     <string name="search_filter">Φίλτρο (πειραματικό)</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
+    <string name="search_filter_info_message">Η \'Αναζήτηση με φίλτρο\' αναζητά κρύπτες χρησιμοποιώντας το παρεχόμενο φίλτρο. Ανάλογα με την δυνατότητες της υπηρεσίας, μόνο ένα μέρος του φίλτρου εκτελείται σε απευθείας σύνδεση, το υπόλοιπο γίνεται με φίλτρο εκτός σύνδεσης.\n\nΌλες οι υπηρεσίες υποστηρίζουν μόνο φίλτρα \'ΚΑΙ\' όπως και χωρίς αντιστροφή φίλτρου\n\nη Geocaching. com υποστηρίζει:\n- Όνομα (μόνο ολόκληρες λέξεις, Δεν υποστηρίζεται το μοτίβο)\n- Τύπος κρύπτης\n- Μέγεθος κρύπτης\n- Απόσταση και έδαφος\n- Αγαπημένα (μόνο απόλυτα, μόνο ελάχιστο)\n- Κατάσταση (Δικές μου, Βρέθηκαν &amp; Ενεργοποιημένες)\n- Κρυμένες από (καθορίστε το id του χρήστη)\n- Δεν βρέθηκε απο τον (προσδιορίστε το αναγνωριστικό χρήστη ακριβώς)\n- Ημερομηνία τοποθέτησης\n\nΣημειώστε ότι το c:geo δεν μπορεί ειδικά να προσφέρει φιλτράρισμα ιδιότητας γιατί η Geocaching.com μπλοκάρει το απαιτούμενο API για εμάς.\n\nΑυτή η υπηρεσία μέσω της Geocaching.com δεν υποστηρίζεται ακόμα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
