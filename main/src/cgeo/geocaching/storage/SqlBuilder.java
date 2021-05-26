@@ -90,6 +90,10 @@ public class SqlBuilder {
         return this;
     }
 
+    public SqlBuilder addWhereTrue() {
+       return addWhere("1=1");
+    }
+
     /**
      * adds an SQL condition to the where clause which will always lead to an "include" of lines, never to an "exclude".
      * Normally this will be an SQl-Expression always evaluating to "true".

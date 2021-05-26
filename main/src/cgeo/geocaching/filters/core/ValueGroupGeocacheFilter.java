@@ -176,7 +176,7 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
             sb.append(")");
             sqlBuilder.addWhere(sb.toString(), params);
         } else {
-            sqlBuilder.addWhereAlwaysInclude();
+            sqlBuilder.addWhereTrue();
         }
     }
 

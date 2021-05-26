@@ -15,6 +15,7 @@ import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
@@ -146,7 +147,7 @@ public class GCMap {
                     fillForBasicFilter((BaseGeocacheFilter) fChild, search);
                 }
             }
-        } else if (f instanceof  BaseGeocacheFilter) {
+        } else if (f instanceof  BaseGeocacheFilter && f.isFiltering()) {
             fillForBasicFilter((BaseGeocacheFilter) f, search);
         }
 
@@ -202,6 +203,12 @@ public class GCMap {
             case HIDDEN:
                 final HiddenGeocacheFilter hiddenFilter = (HiddenGeocacheFilter) basicFilter;
                 search.setPlacementDate(hiddenFilter.getMinDate(), hiddenFilter.getMaxDate());
+                break;
+            case LOG_ENTRY:
+                final LogEntryGeocacheFilter foundByFilter = (LogEntryGeocacheFilter) basicFilter;
+                if (foundByFilter.isInverse()) {
+                    search.setNotFoundBy(foundByFilter.getFoundByUser());
+                }
                 break;
             default:
                 break;

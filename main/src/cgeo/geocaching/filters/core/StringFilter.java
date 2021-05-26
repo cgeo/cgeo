@@ -119,7 +119,7 @@ public class StringFilter {
 
     public void addToSql(final SqlBuilder sqlBuilder, final String columnExpression) {
         if (!isFilled()) {
-            sqlBuilder.addWhereAlwaysInclude();
+            sqlBuilder.addWhereTrue();
         } else {
             switch (filterType) {
                 case IS_NOT_PRESENT:
@@ -137,7 +137,7 @@ public class StringFilter {
 
     public void addToSqlForSubquery(final SqlBuilder sqlBuilder, final String subQuery, final boolean subQueryContainsWhere, final String subQueryColumn) {
         if (!isFilled()) {
-            sqlBuilder.addWhereAlwaysInclude();
+            sqlBuilder.addWhereTrue();
         } else {
             switch (filterType) {
                 case IS_NOT_PRESENT:
@@ -155,7 +155,7 @@ public class StringFilter {
         }
     }
 
-    private String getRawLikeSqlExpression(final String columnExpression) {
+    public String getRawLikeSqlExpression(final String columnExpression) {
         final StringBuilder sb = new StringBuilder();
 
         if (!StringUtils.isBlank(this.textValue)) {

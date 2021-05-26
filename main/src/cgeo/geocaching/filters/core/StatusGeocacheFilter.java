@@ -109,7 +109,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         if (!isFiltering()) {
-            sqlBuilder.addWhereAlwaysInclude();
+            sqlBuilder.addWhereTrue();
         } else {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             if (statusOwn != null) {
