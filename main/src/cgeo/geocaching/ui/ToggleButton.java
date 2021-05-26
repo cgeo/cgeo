@@ -47,7 +47,7 @@ public class ToggleButton extends androidx.appcompat.widget.AppCompatButton {
             setBackgroundColor(getResources().getColor(R.color.colorAccent));
         } else {
             setBackgroundColor(0x00000000);
-            setBackgroundResource(R.drawable.action_button);
+           // setBackgroundResource(R.drawable.action_button);
         }
     }
 
