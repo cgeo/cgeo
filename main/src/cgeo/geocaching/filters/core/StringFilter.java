@@ -6,6 +6,8 @@ import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.StringRes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.BooleanUtils;
@@ -70,21 +72,19 @@ public class StringFilter {
         this.matchCase = matchCase;
     }
 
-    public void setFromConfig(final String[] config, final int startPos) {
-        if (config != null && config.length > startPos) {
-            setTextValue(config[startPos]);
-            setFilterType(config.length > 1 ? EnumUtils.getEnum(StringFilterType.class,  config[startPos + 1], StringFilterType.CONTAINS) : StringFilterType.CONTAINS);
-            setMatchCase(config.length > 2 && BooleanUtils.toBoolean(config[startPos + 2]));
+    public void setConfig(final List<String> config) {
+        if (config != null) {
+            setTextValue(config.size() > 0 ? config.get(0) : null);
+            setFilterType(config.size() > 1 ? EnumUtils.getEnum(StringFilterType.class,  config.get(1), StringFilterType.CONTAINS) : StringFilterType.CONTAINS);
+            setMatchCase(config.size() > 2 && BooleanUtils.toBoolean(config.get(2)));
         }
     }
 
-    public String[] addToConfig(final String[] config, final int startPos) {
-        if (config == null || config.length < startPos + 3) {
-            return config;
-        }
-        config[startPos] = textValue;
-        config[startPos + 1] = filterType.name();
-        config[startPos + 2] = String.valueOf(matchCase);
+    public List<String> getConfig() {
+        final List<String> config = new ArrayList<>();
+        config.add(textValue);
+        config.add(filterType.name());
+        config.add(String.valueOf(matchCase));
         return config;
     }
 

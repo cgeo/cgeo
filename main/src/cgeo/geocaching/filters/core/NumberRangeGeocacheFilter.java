@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.expressions.ExpressionConfig;
 import cgeo.geocaching.utils.functions.Func1;
 
 import java.util.Collection;
@@ -89,15 +90,6 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
         setMinMaxRange(min, max);
     }
 
-    @Override
-    public void setConfig(final String[] values) {
-        if (values == null || values.length < 2) {
-            return;
-        }
-
-        minRangeValue = parseString(values[0]);
-        maxRangeValue = parseString(values[1]);
-    }
 
     private T parseString(final String text) {
         if (StringUtils.isBlank(text) || "-".equals(text)) {
@@ -112,9 +104,21 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
     }
 
     @Override
-    public String[] getConfig() {
-        return new String[]{minRangeValue == null ? "-" : String.valueOf(minRangeValue), maxRangeValue == null ? "-" : String.valueOf(maxRangeValue)};
+    public void setConfig(final ExpressionConfig config) {
+        minRangeValue = config.getDefaultList().size() > 0 ? parseString(config.getDefaultList().get(0)) : null;
+        maxRangeValue = config.getDefaultList().size() > 1 ? parseString(config.getDefaultList().get(1)) : null;
     }
+
+    @Override
+    public ExpressionConfig getConfig() {
+        final ExpressionConfig result = new ExpressionConfig();
+        result.addToDefaultList(
+            minRangeValue == null ? "-" : String.valueOf(minRangeValue),
+            maxRangeValue == null ? "-" : String.valueOf(maxRangeValue)
+        );
+        return result;
+    }
+
 
     @Override
     public boolean isFiltering() {

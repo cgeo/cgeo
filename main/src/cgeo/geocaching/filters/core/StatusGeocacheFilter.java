@@ -5,8 +5,11 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
 import androidx.annotation.StringRes;
+
+import java.util.List;
 
 import org.apache.commons.lang3.BooleanUtils;
 
@@ -78,18 +81,25 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final String[] value) {
-        statusOwn = value.length > 0 ? BooleanUtils.toBooleanObject(value[0]) : null;
-        statusFound = value.length > 1 ? BooleanUtils.toBooleanObject(value[1]) : null;
-        statusDisabled = value.length > 2 ? BooleanUtils.toBooleanObject(value[2]) : null;
-        statusArchived = value.length > 3 ? BooleanUtils.toBooleanObject(value[3]) : null;
+    public void setConfig(final ExpressionConfig config) {
+        final List<String> value = config.getDefaultList();
+        statusOwn = value.size() > 0 ? BooleanUtils.toBooleanObject(value.get(0)) : null;
+        statusFound = value.size() > 1 ? BooleanUtils.toBooleanObject(value.get(1)) : null;
+        statusDisabled = value.size() > 2 ? BooleanUtils.toBooleanObject(value.get(2)) : null;
+        statusArchived = value.size() > 3 ? BooleanUtils.toBooleanObject(value.get(3)) : null;
     }
 
     @Override
-    public String[] getConfig() {
-        return new String[]{BooleanUtils.toStringTrueFalse(statusOwn), BooleanUtils.toStringTrueFalse(statusFound),
-            BooleanUtils.toStringTrueFalse(statusDisabled), BooleanUtils.toStringTrueFalse(statusArchived)};
+    public ExpressionConfig getConfig() {
+        final ExpressionConfig result = new ExpressionConfig();
+        result.addToDefaultList(
+            BooleanUtils.toStringTrueFalse(statusOwn), BooleanUtils.toStringTrueFalse(statusFound),
+            BooleanUtils.toStringTrueFalse(statusDisabled), BooleanUtils.toStringTrueFalse(statusArchived)
+        );
+        return result;
+
     }
+
 
     @Override
     public boolean isFiltering() {

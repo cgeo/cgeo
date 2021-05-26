@@ -5,7 +5,9 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -15,6 +17,7 @@ import org.apache.commons.lang3.BooleanUtils;
 
 public class AttributesGeocacheFilter extends BaseGeocacheFilter {
 
+    private static final String CONFIG_KEY_INVERSE = "inverse";
 
     private final Map<String, String> attributes = new HashMap<>();
     private final Set<String> attributesRaw = new HashSet<>();
@@ -107,35 +110,29 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final String[] value) {
+    public void setConfig(final ExpressionConfig config) {
+
+        this.inverse = config.getFirstValue(CONFIG_KEY_INVERSE, false, BooleanUtils::toBoolean);
         attributes.clear();
         attributesRaw.clear();
-        if (value.length == 0) {
-            inverse = false;
-        } else {
-            inverse = BooleanUtils.toBoolean(value[0]);
-            for (int idx = 1; idx < value.length; idx++) {
-                final CacheAttribute ca = CacheAttribute.getByName(value[idx]);
-                if (ca != null) {
-                    final boolean isYesValue = CacheAttribute.isEnabled(value[idx]);
-                    attributes.put(value[idx], isYesValue ? ca.rawName : null);
-                    if (isYesValue) {
-                        attributesRaw.add(ca.rawName);
-                    }
+        for (String value : config.getDefaultList()) {
+            final CacheAttribute ca = CacheAttribute.getByName(value);
+            if (ca != null) {
+                final boolean isYesValue = CacheAttribute.isEnabled(value);
+                attributes.put(value, isYesValue ? ca.rawName : null);
+                if (isYesValue) {
+                    attributesRaw.add(ca.rawName);
                 }
             }
         }
     }
 
     @Override
-    public String[] getConfig() {
-        final String[] result = new String[attributes.size() + 1];
-        result[0] = Boolean.toString(inverse);
-        int idx = 1;
-        for (String att : attributes.keySet()) {
-            result[idx++] = att;
-        }
-        return result;
+    public ExpressionConfig getConfig() {
+        final ExpressionConfig config = new ExpressionConfig();
+        config.putList(CONFIG_KEY_INVERSE, Boolean.toString(inverse));
+        config.putDefaultList(new ArrayList<>(attributes.keySet()));
+        return config;
     }
 
     @Override

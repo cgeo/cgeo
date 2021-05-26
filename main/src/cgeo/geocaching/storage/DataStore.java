@@ -725,7 +725,7 @@ public class DataStore {
         public static List<GeocacheFilter> getAllStoredFilters() {
             return queryToColl(dbTableFilters, new String[]{"name", "treeconfig" },
                 null, null, null, null, new ArrayList<>(),
-                c -> new GeocacheFilter(c.getString(0), c.getString(1)));
+                c -> GeocacheFilter.createFromConfig(c.getString(0), c.getString(1)));
         }
 
         /** Saves using UPSERT on NAME (if filter with same name exists, it deleted before.  otherwise new one is created) */

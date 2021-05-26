@@ -15,7 +15,6 @@ import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
-import cgeo.geocaching.filters.core.InconclusiveGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
@@ -140,10 +139,7 @@ public class GCMap {
         final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
         search.setOrigin(Sensors.getInstance().currentGeo().getCoords());
 
-        IGeocacheFilter f = filter.getTree();
-        while (f instanceof InconclusiveGeocacheFilter) {
-            f = f.getChildren().get(0);
-        }
+        final IGeocacheFilter f = filter.getTree();
         if (f instanceof AndGeocacheFilter) {
             for (IGeocacheFilter fChild : f.getChildren()) {
                 if (fChild instanceof BaseGeocacheFilter) {
