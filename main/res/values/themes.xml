@@ -4,8 +4,6 @@
     <!-- theme for (nearly) all activities) -->
 
     <style name="cgeo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="button">@drawable/action_button</item>
-        <item name="android:buttonStyle">@style/button</item>
 
         <!-- set Material theme colors -->
         <item name="colorOnBackground">@color/colorText</item>

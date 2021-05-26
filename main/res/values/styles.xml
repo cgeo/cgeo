@@ -68,14 +68,13 @@
 
     <!-- buttons -->
 
-    <style name="button">
+    <style name="button" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:padding">6dip</item>
         <item name="android:lines">1</item>
         <item name="android:singleLine">true</item>
         <item name="android:scrollHorizontally">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
-        <item name="android:background">?button</item>
     </style>
 
     <style name="button_borderless" parent="button">
