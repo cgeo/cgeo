@@ -124,7 +124,7 @@
     <string name="log_today">今日</string>
     <string name="log_yesterday">昨日</string>
     <string name="log_smilies">表情符号 按钮</string>
-    <string name="log_image">镜像文件</string>
+    <string name="log_image">圖片</string>
     <string name="log_images">照片</string>
     <string name="log_image_attach">附加圖片</string>
     <string name="log_image_stored">已存在</string>
