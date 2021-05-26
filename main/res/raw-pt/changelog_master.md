@@ -16,6 +16,7 @@
 - Alteração: Se um mapa requer um determinado tema que ainda não esteja instalado, o c:geo também descarregará e instalará esse tema automaticamente
 
 ### Outro
-- Novo: Transferir as listas de geocaching.com - consulte "Listas / pocket queries" no menu principal
-- Novo: Ignorar a capacidade para geocaching.su
-- Alteração: Removida a aplicação de navegação RMAPS, já sem manutenção
+- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
+- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
+- New: Ignore capability for geocaching.su
+- Change: Removed no longer maintained RMAPS navigation app
