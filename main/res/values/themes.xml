@@ -73,6 +73,7 @@
     <!-- theme for splash screen -->
 
     <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/just_black</item>
         <item name="android:windowBackground">@drawable/splashscreen_background</item>
         <item name="android:windowActivityTransitions">false</item>
     </style>
