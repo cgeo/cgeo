@@ -16,6 +16,7 @@
 - Änderung: Wenn eine Karte ein bestimmtes Kartendesign benötigt, wird dieses bei Bedarf automatisch heruntergeladen
 
 ### Sonstiges
+- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Bitte berichte Fehler oder Unschönheiten entweder auf unserer [GitHub-Seite](https://www.github.com/cgeo/cgeo/issues) oder über unseren Support.
 - Neu: Lesezeichenlisten von geocaching.com herunterladen - siehe "Listen / Pocket-Queries" im Hauptmenü
-- Neu: Ignorier-Funktion für geocaching.su
-- Änderung: Nicht mehr gepflegte RMAPS-Navigations-App entfernt
+- New: Ignore capability for geocaching.su
+- Change: Removed no longer maintained RMAPS navigation app
