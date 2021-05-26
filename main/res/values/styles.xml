@@ -346,7 +346,7 @@
         <item name="android:lines">1</item>
         <item name="android:scrollHorizontally">true</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
+        <item name="android:textSize">@dimen/textSize_headingSecondary</item>
     </style>
 
     <!-- date, found state on the left of a log entry -->
