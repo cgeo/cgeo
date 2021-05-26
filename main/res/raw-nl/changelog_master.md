@@ -16,6 +16,7 @@
 - Wijziging: Als een kaart een bepaald thema vereist dat nog niet is geïnstalleerd zal c:geo dit thema automatisch downloaden en installeren
 
 ### Other
+- Wijziging: We hebben de interne technische aspecten voor c:geo thema's volledig geherstructureerd om gebruik te kunnen maken van enkele modernere componenten die door Android aangeboden worden. Dit zal een aantal neveneffecten hebben, waarvan sommige onbedoeld zijn. Gelieve fouten of storingen te melden op onze [GitHub pagina](https://www.github.com/cgeo/cgeo/issues) of door contact op te nemen met support.
 - Nieuw: Download bladwijzerlijsten van geocaching.com - zie "Lijsten / pocket queries" in het hoofdmenu
 - Nieuw: Negeer mogelijkheid voor geocaching.su
 - Wijziging: De niet langer onderhouden RMAPS navigatie-app is verwijderd
