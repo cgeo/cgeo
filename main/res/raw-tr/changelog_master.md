@@ -16,6 +16,7 @@
 - Değişiklik: Eğer bir harita halen cihazınızda yüklenmemiş bir tema gerektiriyorsa, c:geo otomatik olarak bu temayı indirip kuracaktır
 
 ### Diğer
-- Yeni: geocaching.com üzerinden yer imi listesi indirin- ''Listeler / cep sorguları'' sekmesini inceleyin
+- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
+- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
 - New: Ignore capability for geocaching.su
-- Değişiklik: Artık desteklenmeyen RMAPS navigasyon uygulaması kaldırıldı
+- Change: Removed no longer maintained RMAPS navigation app
