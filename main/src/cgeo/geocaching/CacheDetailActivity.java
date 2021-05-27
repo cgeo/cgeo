@@ -2507,7 +2507,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // check if hint is available and set onClickListener and hint button visibility accordingly
         final boolean hintButtonEnabled = setOfflineHintText(showHintClickListener, view.findViewById(R.id.offline_hint_text), cache.getHint(), cache.getPersonalNote());
-        final ImageButton offlineHint = view.findViewById(R.id.offline_hint);
+        final Button offlineHint = view.findViewById(R.id.offline_hint);
         if (null != offlineHint) {
             if (hintButtonEnabled) {
                 offlineHint.setVisibility(View.VISIBLE);

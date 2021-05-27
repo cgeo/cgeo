@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackgroundTransparent"
     android:windowBackground="@color/colorBackgroundTransparent"
     android:orientation="vertical"
-    tools:context=".CachePopupFragment" >
+    tools:context=".CachePopupFragment">
 
     <include layout="@layout/actionbar_popup" />
     <ScrollView
@@ -41,10 +42,10 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/popup_more" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/offline_hint"
                     style="@style/button_icon"
-                    android:src="@drawable/ic_menu_hint"
+                    app:icon="@drawable/ic_menu_hint"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="0dp"
                     android:visibility="gone"
