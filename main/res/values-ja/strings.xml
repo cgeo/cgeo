@@ -56,6 +56,7 @@
     <string name="locationless_short">ロケーションレス</string>
     <string name="advlab_short">アドラボ</string>
     <string name="userdefined_short">ユーザー定義</string>
+    <string name="unknown_short">不明</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">マイクロ</string>
     <string name="cache_size_small">スモール</string>
@@ -442,6 +443,9 @@
     <string name="list_dialog_rename">変更</string>
     <string name="list_not_available">リストが利用できません。保存済みのリストへ移動します</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_advanced">詳細</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">基本フィルタへ切り替え</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">基本フィルタにすると、フィルタ設定の一部またはすべてが失われます。変更しますか?</string>
     <string name="cache_filter_add_button">フィルタ条件を追加</string>
     <string name="cache_filter_option_and_or">ANDの代わりにORを使用</string>
     <string name="cache_filter_option_inverse">除外フィルタ</string>
@@ -462,6 +466,9 @@
     <string name="cache_filter_favorites">お気に入り</string>
     <string name="cache_filter_distance">距離</string>
     <string name="cache_filter_hidden">設置日</string>
+    <string name="cache_filtergroup_basic">基本</string>
+    <string name="cache_filtergroup_detailed">詳細</string>
+    <string name="cache_filtergroup_userspecific">ユーザー固有</string>
     <string name="cache_filter_include">含む</string>
     <string name="cache_filter_exclude">除く</string>
     <string name="cache_filter_userdisplay_none">なし</string>
@@ -485,6 +492,7 @@
     <string name="cache_filter_stringfilter_type_pattern">パターン</string>
     <string name="cache_filter_datefilter_label_from">開始日:</string>
     <string name="cache_filter_datefilter_label_to">終了日:</string>
+    <string name="cache_filter_checkboxlist_selectallnone">すべて選択</string>
     <string name="cache_filter_favorites_absolute">登録数</string>
     <string name="cache_filter_favorites_percentage">割合(%)</string>
     <string name="cache_filter_distance_use_current_position">現在地を使用</string>
@@ -649,8 +657,6 @@
     <string name="init_summary_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
     <string name="init_skin">明るいスキン</string>
     <string name="init_summary_skin">明るい色のスキンを使用\n(c:geoの再起動が必要)</string>
-    <string name="init_transparentBackground">透明な背景</string>
-    <string name="init_summary_transparentBackground">透明な背景を使用\n(c:geoの再起動が必要)</string>
     <string name="init_address">地名表示</string>
     <string name="init_summary_address">メイン画面での現在地を座標値の代わりに地名で表示</string>
     <string name="init_select_language">言語の選択</string>
@@ -685,6 +691,7 @@
     <string name="init_summary_archived">アーカイブ済みキャッシュは除く</string>
     <string name="init_global_wp_extraction_disable">ウェイポイント抽出を無効化</string>
     <string name="init_summary_global_wp_extraction_disable">ノート作成時に「ウェイポイント抽出をしない」をデフォルトにします。パーソナルノートでチェックボックスを外せば個別に有効化できます</string>
+    <string name="init_customtabs_as_browser">Chrome WebViewを使用</string>
     <string name="init_summary_customtabs_as_browser">外部Webサイトがc:geo内で表示されます(Chromeのインストールが必要です)</string>
     <string name="init_save_log_img">画像保存</string>
     <string name="init_summary_save_log_img">オフライン用にログの添付画像を保存</string>
@@ -696,6 +703,7 @@
     <string name="init_summary_choose_list">キャッシュ情報の保存時にリストを選択するダイアログを表示</string>
     <string name="init_listdisplay">キャッシュリストでリスト名を表示</string>
     <string name="init_list_initial_load_limit">リストの初回読み込み数</string>
+    <string name="init_summary_list_initial_load_limit">保存されたリストを表示するときにデータベースから最初に読み込むキャッシュの最大数。 0にすると無制限になります。</string>
     <string name="init_summary_listdisplay">キャッシュリスト中にリスト名も表示</string>
     <string name="init_livelist">方向を表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向の矢印を表示</string>
@@ -1213,6 +1221,7 @@
     <string name="context_share_as_link">リンクを共有</string>
     <string name="create_internal_cache">ユーザー定義のキャッシュを作成</string>
     <string name="create_internal_cache_short">新しいキャッシュ</string>
+    <string name="create_internal_cache_currentlist">現在のリストを使用</string>
     <string name="internal_cache_default_name">ユーザー定義キャッシュ #%1$d</string>
     <string name="internal_cache_default_description">これはユーザー定義キャッシュです</string>
     <string name="internal_cache_default_owner">あなた</string>
@@ -1357,6 +1366,8 @@
     <string name="search_hbu">設置したオーナー名</string>
     <string name="search_hbu_prefill">オーナー名</string>
     <string name="search_hbu_button">オーナー名で検索</string>
+    <string name="search_filter">フィルタ(実験的)</string>
+    <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message">「フィルタで検索」はジオキャッシングサイトのフィルタ検索を使用します。サイト機能に応じて、フィルタの一部のみがオンラインで実行され、残りはc:geoでフィルタリングされます。\n\nすべてのサイトではANDフィルタのみ使え、除外フィルタは適応できません。\n\nGeocaching.comは以下に対応しています:\n- キャッシュ名(単語全体のみ、パターンマッチングには未対応)\n- キャッシュタイプ\n- キャッシュサイズ\n- 距離\n- 難易度\n- お気に入り(登録数のみ、最小値のみ)\n- 状態(オーナー、発見、有効)\n- 設置したオーナー名(ユーザーIDを正確に指定)\n- 特定ユーザー未発見(ユーザーIDを正確に指定)\n- 設置日\n\nGeocaching.comが必要なAPIをブロックしているため、属性のフィルタは完全には提供できていないことにご注意ください。\n\n現在のところ、Geocaching.com以外はまだ対応していません。</string>
     <string name="search_tb">トラッカブル</string>
     <string name="search_tb_hint">トラッカブルコード</string>
@@ -1367,6 +1378,7 @@
     <string name="search_own_caches">自分のキャッシュを検索</string>
     <string name="search_pocket_title">ポケット・クエリ</string>
     <string name="search_bookmark_list">ブックマークリスト</string>
+    <string name="search_pocket_is_new">新着</string>
     <string name="search_pocket_and_bookmark_loading">ポケット・クエリのリストとブックマークリストの読み込み中</string>
     <!-- trackable -->
     <string name="trackable">トラッカブル</string>
@@ -1924,10 +1936,12 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="localfile_cannot_handle">ファイルの読み取りエラー、またはc:geoはこのファイルタイプを処理できません</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">ファイルのダウンロード</string>
+    <string name="receivedownload_receiving_file">ファイル「%s」をダウンロード中</string>
     <string name="receivedownload_success">ファイルを「%s」として保存しました</string>
     <string name="receivedownload_error">ファイルのダウンロード中にエラーが発生しました</string>
     <string name="receivedownload_error_io_exception">ファイルのダウンロード中にI/Oエラーが発生しました。フォルダ「%s」は書き込み可能ですか？</string>
     <string name="receivedownload_error_filenotfound_exception">ダウンロードするファイルが見つかりませんでした</string>
+    <string name="receivedownload_amount_copied">%sをコピーしました</string>
     <string name="receivedownload_cancelled">ファイル転送がキャンセルされました</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">オフライン用に地図をダウンロード</string>
@@ -1950,6 +1964,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_no_updates_found">地図ファイルは最新です</string>
     <string name="downloadmap_directory">フォルダ</string>
     <string name="downloadmap_mapfile">地図ファイル</string>
+    <string name="downloadmap_themefile">テーマファイル</string>
+    <string name="downloadmap_tilefile">ルート検索データ</string>
+    <string name="downloadmap_download">ダウンロード</string>
     <string name="downloadmap_retrieving_directory_data">フォルダ情報を取得中…</string>
     <string name="downloadmap_checking_for_updates">更新を確認中…</string>
     <string name="downloadmap_install_theme_title">テーマファイルのダウンロード</string>
