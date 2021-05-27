@@ -4,6 +4,7 @@
     <!-- theme for (nearly) all activities) -->
 
     <style name="cgeo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="actionBarStyle">@style/actionBarStyle</item>
 
         <!-- set Material theme colors -->
         <item name="colorOnBackground">@color/colorText</item>

@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -15,6 +16,8 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -143,5 +146,11 @@ public class MapUtils {
 
     public static CacheListType getMapViewerListType() {
         return CacheListType.MAP;
+    }
+
+    // workaround for colored ActionBar titles/subtitles
+    // @todo remove after switching map ActionBar to Toolbar
+    public static Spanned getColoredValue(final String value) {
+        return Html.fromHtml("<font color=\"" + String.format("#%06X", 0xFFFFFF & CgeoApplication.getInstance().getResources().getColor(R.color.colorTextActionBar)) + "\">" + value + "</font>");
     }
 }

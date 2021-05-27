@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         style="?attr/titleTextStyle"
         android:textSize="@dimen/textSize_toolbarPrimary"
+        android:textColor="@color/colorTextActionBar"
         android:layout_height="wrap_content"
         android:maxLines="1" />
 
@@ -26,6 +27,7 @@
         android:ellipsize="end"
         style="?attr/subtitleTextStyle"
         android:textSize="@dimen/textSize_toolbarSecondary"
+        android:textColor="@color/colorTextActionBar"
         tools:text="This is the subtitle"
         android:id="@android:id/text2"
         android:maxLines="1" />
