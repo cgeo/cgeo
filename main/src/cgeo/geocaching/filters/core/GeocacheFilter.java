@@ -232,6 +232,29 @@ public class GeocacheFilter {
         return getName() + (isSavedDifferently() ? "*" : "");
     }
 
+    /**
+     * Helper method to map filter to search providers only offering AND filter capability.
+     * * If this filter is a base filter, this base filter is returned
+     * * If this is an AND filter, extract the "AND" chain of Base filters.
+     * * Otherwise return an empty list
+     */
+    public List<BaseGeocacheFilter> getAndChainIfPossible() {
+        final List<BaseGeocacheFilter> result = new ArrayList<>();
+        getAndChainIfPossibleInternal(this.getTree(), result);
+        return result;
+    }
+
+    private void getAndChainIfPossibleInternal(final IGeocacheFilter filterToCheck, final List<BaseGeocacheFilter> chain) {
+
+        if (filterToCheck instanceof AndGeocacheFilter && (!(filterToCheck instanceof NotGeocacheFilter))) {
+            for (IGeocacheFilter fChild : filterToCheck.getChildren()) {
+                getAndChainIfPossibleInternal(fChild, chain);
+            }
+        } else if (filterToCheck instanceof  BaseGeocacheFilter) {
+            chain.add((BaseGeocacheFilter) filterToCheck);
+        }
+    }
+
     public String toUserDisplayableString() {
         if (!StringUtils.isBlank(getName())) {
             return getNameForUserDisplay();

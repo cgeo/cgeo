@@ -99,6 +99,10 @@ public enum CacheSize {
         }
     }
 
+    public String getOcSize2() {
+        return ocSize2;
+    }
+
     @NonNull
     public static CacheSize getById(@Nullable final String id) {
         if (id == null) {

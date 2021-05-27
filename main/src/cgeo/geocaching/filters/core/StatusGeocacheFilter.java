@@ -16,8 +16,6 @@ import org.apache.commons.lang3.BooleanUtils;
 public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
     public enum StatusType {
-        DISABLED(R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_only_disabled_no, R.string.cache_filter_status_select_only_disabled_yes),
-        ARCHIVED(R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_only_archived_no, R.string.cache_filter_status_select_only_archived_yes),
         OWN(R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_only_own_no, R.string.cache_filter_status_select_only_own_yes),
         FOUND(R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_only_found_no, R.string.cache_filter_status_select_only_found_yes);
 
@@ -33,8 +31,10 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
     }
 
-    private Boolean statusDisabled = null;
-    private Boolean statusArchived = null;
+    private boolean excludeActive = true;
+    private boolean excludeDisabled = true;
+    private boolean excludeArchived = true;
+
     private Boolean statusOwn = null;
     private Boolean statusFound = null;
 
@@ -42,26 +42,35 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     @Override
     public Boolean filter(final Geocache cache) {
         return
-            (statusDisabled == null || cache.isDisabled() == statusDisabled) &&
-            (statusArchived == null || cache.isArchived() == statusArchived) &&
+            ((!excludeActive && !cache.isDisabled() && !cache.isArchived()) ||
+                (!excludeDisabled && cache.isDisabled()) ||
+                (!excludeArchived && cache.isArchived())) &&
             (statusOwn == null || (cache.isOwner() == statusOwn)) &&
             (statusFound == null || cache.isFound() == statusFound);
     }
 
-    public Boolean getStatusDisabled() {
-        return statusDisabled;
+    public boolean isExcludeActive() {
+        return excludeActive;
     }
 
-    public void setStatusDisabled(final Boolean statusDisabled) {
-        this.statusDisabled = statusDisabled;
+    public void setExcludeActive(final boolean excludeActive) {
+        this.excludeActive = excludeActive;
     }
 
-    public Boolean getStatusArchived() {
-        return statusArchived;
+    public boolean isExcludeDisabled() {
+        return excludeDisabled;
     }
 
-    public void setStatusArchived(final Boolean statusArchived) {
-        this.statusArchived = statusArchived;
+    public void setExcludeDisabled(final boolean excludeDisabled) {
+        this.excludeDisabled = excludeDisabled;
+    }
+
+    public boolean isExcludeArchived() {
+        return excludeArchived;
+    }
+
+    public void setExcludeArchived(final boolean excludeArchived) {
+        this.excludeArchived = excludeArchived;
     }
 
     public Boolean getStatusOwn() {
@@ -85,8 +94,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         final List<String> value = config.getDefaultList();
         statusOwn = value.size() > 0 ? BooleanUtils.toBooleanObject(value.get(0)) : null;
         statusFound = value.size() > 1 ? BooleanUtils.toBooleanObject(value.get(1)) : null;
-        statusDisabled = value.size() > 2 ? BooleanUtils.toBooleanObject(value.get(2)) : null;
-        statusArchived = value.size() > 3 ? BooleanUtils.toBooleanObject(value.get(3)) : null;
+        excludeActive = value.size() > 2 && BooleanUtils.toBoolean(value.get(2));
+        excludeDisabled = value.size() > 3 && BooleanUtils.toBoolean(value.get(3));
+        excludeArchived = value.size() > 4 && BooleanUtils.toBoolean(value.get(4));
     }
 
     @Override
@@ -94,7 +104,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         final ExpressionConfig result = new ExpressionConfig();
         result.addToDefaultList(
             BooleanUtils.toStringTrueFalse(statusOwn), BooleanUtils.toStringTrueFalse(statusFound),
-            BooleanUtils.toStringTrueFalse(statusDisabled), BooleanUtils.toStringTrueFalse(statusArchived)
+            BooleanUtils.toStringTrueFalse(excludeActive), BooleanUtils.toStringTrueFalse(excludeDisabled),
+            BooleanUtils.toStringTrueFalse(excludeArchived)
         );
         return result;
 
@@ -103,7 +114,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public boolean isFiltering() {
-        return statusOwn != null || statusFound != null || statusDisabled != null || statusArchived != null;
+        return statusOwn != null || statusFound != null || excludeArchived || excludeDisabled || excludeActive;
     }
 
     @Override
@@ -118,11 +129,17 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             if (statusFound != null) {
                 sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".found = " + (statusFound ? "1" : "0"));
             }
-            if (statusDisabled != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".disabled = " + (statusDisabled ? "1" : "0"));
+            if (excludeActive) {
+                sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".disabled = 1");
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".archived = 1");
+                sqlBuilder.closeWhere();
             }
-            if (statusArchived != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".archived = " + (statusArchived ? "1" : "0"));
+            if (excludeDisabled) {
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".disabled = 0");
+            }
+            if (excludeArchived) {
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".archived = 0");
             }
             sqlBuilder.closeWhere();
         }
@@ -134,8 +151,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         int count = 0;
         count = addIfFirst(sb, count, statusFound, StatusType.FOUND);
         count = addIfFirst(sb, count, statusOwn, StatusType.OWN);
-        count = addIfFirst(sb, count, statusDisabled, StatusType.DISABLED);
-        count = addIfFirst(sb, count, statusArchived, StatusType.ARCHIVED);
+        count = addIfTrue(sb, count, excludeActive, R.string.cache_filter_status_exclude_active);
+        count = addIfTrue(sb, count, excludeDisabled, R.string.cache_filter_status_exclude_disabled);
+        count = addIfTrue(sb, count, excludeArchived, R.string.cache_filter_status_exclude_archived);
         if (count == 0) {
             return LocalizationUtils.getString(R.string.cache_filter_userdisplay_none);
         }
@@ -150,6 +168,16 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         if (status != null) {
             if (cnt == 0) {
                 sb.append(LocalizationUtils.getString(status ? statusType.yesId : statusType.noId));
+            }
+            return cnt + 1;
+        }
+        return cnt;
+    }
+
+    private int addIfTrue(final StringBuilder sb, final int cnt, final boolean status, @StringRes final int textId) {
+        if (status) {
+            if (cnt == 0) {
+                sb.append(LocalizationUtils.getString(textId));
             }
             return cnt + 1;
         }
