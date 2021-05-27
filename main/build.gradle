@@ -328,19 +328,22 @@ dependencies {
     implementation "com.asamm:locus-api-android:0.9.32"
 
     // Mapsforge new version
+    def mapsforgeVersion = '0.16.0'
+    implementation "org.mapsforge:mapsforge-core:$mapsforgeVersion"
+    implementation "org.mapsforge:mapsforge-map:$mapsforgeVersion"
+    implementation "org.mapsforge:mapsforge-map-android:$mapsforgeVersion"
+    implementation "org.mapsforge:mapsforge-map-reader:$mapsforgeVersion"
+    implementation "org.mapsforge:mapsforge-themes:$mapsforgeVersion"
+
+    /* use following declaration type if a specific build is needed
     def mapsforgeVersion = '905e9d48bb' // master as of 31.3.21, see https://jitpack.io/#mapsforge/mapsforge
     implementation "com.github.mapsforge.mapsforge:mapsforge-core:$mapsforgeVersion"
     implementation "com.github.mapsforge.mapsforge:mapsforge-map:$mapsforgeVersion"
     implementation "com.github.mapsforge.mapsforge:mapsforge-map-android:$mapsforgeVersion"
     implementation "com.github.mapsforge.mapsforge:mapsforge-map-reader:$mapsforgeVersion"
     implementation "com.github.mapsforge.mapsforge:mapsforge-themes:$mapsforgeVersion"
-/* previous declaration - version 0.15.0
-    implementation "org.mapsforge:mapsforge-core:$mapsforgeVersion"
-    implementation "org.mapsforge:mapsforge-map:$mapsforgeVersion"
-    implementation "org.mapsforge:mapsforge-map-android:$mapsforgeVersion"
-    implementation "org.mapsforge:mapsforge-map-reader:$mapsforgeVersion"
-    implementation "org.mapsforge:mapsforge-themes:$mapsforgeVersion"
-*/
+    */
+
     configurations {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }
