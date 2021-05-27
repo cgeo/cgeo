@@ -16,7 +16,7 @@
 - Αλλαγή: Εάν ένας χάρτης απαιτεί ένα συγκεκριμένο θέμα που δεν έχει εγκατασταθεί ακόμα, το c:geo θα το κατεβάσει και θα το εγκαταστήσει αυτόματα
 
 ### Άλλο
-- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+- Αλλαγή: Έχουμε επεξεργαστεί εντελώς τις εσωτερικές τεχνικές πτυχές c:geo theming για να είναι σε θέση να κάνουν χρήση ορισμένων πιο σύγχρονων λειτουργιών που παρέχονται από το Android. Αυτό θα έχει μερικές παρενέργειες, μερικές από τις οποίες δεν έίναι σκόπιμες. Παρακαλούμε αναφέρετε τυχόν σφάλματα ή δυσλειτουργίες είτε στη σελίδα μας [GitHub](https://www.github.com/cgeo/cgeo/issues) ή επικοινωνώντας με την υποστήριξη.
+- Νέα: Κατεβάστε τις λίστες σελιδοδεικτών από την geocaching.com - δείτε "Λίστες / pocket queries" στο κύριο μενού
+- Νέο: Αγνοήστε την δυνατότητα για geocaching.su
+- Αλλαγή: Αφαιρέθηκε πλέον η εφαρμογή πλοήγησης RMAPS
