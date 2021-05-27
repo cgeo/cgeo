@@ -12,7 +12,6 @@ import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.LayoutInflater;
@@ -28,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
@@ -81,11 +81,11 @@ public class MapSettingsUtils {
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO, activity.getString(R.string.switch_auto)));
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
 
+        final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup);
         final ArrayList<ButtonChoiceModel<RoutingMode>> routingChoices = new ArrayList<>();
         for (RoutingMode mode : RoutingMode.values()) {
-            routingChoices.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
+            routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
         }
-        final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView.getRoot(), dialogView.routingTitle, routingChoices, Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue);
 
         if (showAutotargetIndividualRoute) {
             dialogView.mapSettingsAutotargetContainer.setVisibility(View.VISIBLE);
@@ -98,7 +98,7 @@ public class MapSettingsUtils {
                     item.setValue();
                 }
                 compactIconWrapper.setValue();
-                routing.setValue();
+                routingChoiceWrapper.setValue();
                 onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
                 if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
                     if (route == null) {
@@ -111,10 +111,10 @@ public class MapSettingsUtils {
         dialog.show();
 
         compactIconWrapper.init();
-        routing.init();
+        routingChoiceWrapper.init();
 
         if (!Routing.isAvailable()) {
-            for (final ButtonChoiceModel<RoutingMode> button : routing.buttons) {
+            for (final ButtonChoiceModel<RoutingMode> button : routingChoiceWrapper.list) {
                 if (!(button.assignedValue == RoutingMode.OFF || button.assignedValue == RoutingMode.STRAIGHT)) {
                     button.button.setEnabled(false);
                     button.button.setAlpha(.3f);
@@ -187,7 +187,7 @@ public class MapSettingsUtils {
 
         public ButtonChoiceModel<T> getByAssignedValue(final T value) {
             for (ButtonChoiceModel<T> item : list) {
-                if (item.assignedValue == value) {
+                if (Objects.equals(item.assignedValue, value)) {
                     return item;
                 }
             }
@@ -195,63 +195,15 @@ public class MapSettingsUtils {
         }
 
         public void init() {
+            for (final ButtonChoiceModel<T> button : list) {
+                button.button = toggleGroup.findViewById(button.resButton);
+            }
             toggleGroup.check(getByAssignedValue(originalValue).resButton);
         }
 
         public void setValue() {
-            setValue.call(getByResId(toggleGroup.getCheckedButtonId()).assignedValue);
-        }
-    }
-
-    private static class ButtonController<T> {
-        private final View dialogView;
-        private final ArrayList<ButtonChoiceModel<T>> buttons;
-        private final T originalValue;
-        private T currentValue;
-        private final Action1<T> setValue;
-        private final String titlePreset;
-        private final TextView titleView;
-
-        ButtonController(final View dialogView, @Nullable final TextView titleView, final ArrayList<ButtonChoiceModel<T>> buttons, final T currentValue, final Action1<T> setValue) {
-            this.dialogView = dialogView;
-            this.buttons = buttons;
-            this.originalValue = currentValue;
-            this.currentValue = currentValue;
-            this.setValue = setValue;
-            this.titlePreset = titleView == null ? "" : titleView.getText().toString();
-            this.titleView = titleView;
-        }
-
-        public void init() {
-            for (final ButtonChoiceModel<T> button : buttons) {
-                button.button = dialogView.findViewById(button.resButton);
-                button.button.setOnClickListener(v -> setLocalValue(button.assignedValue));
-            }
-            update();
-        }
-
-        @SuppressLint("SetTextI18n")
-        public void update() {
-            for (final ButtonChoiceModel<T> button : buttons) {
-                if (currentValue == button.assignedValue) {
-                    button.button.setBackgroundColor(colorAccent);
-                    if (titleView != null) {
-                        titleView.setText(String.format(titlePreset, button.info));
-                    }
-                } else {
-                    button.button.setBackgroundColor(0x00000000);
-                    button.button.setBackgroundResource(R.drawable.action_button);
-                }
-            }
-        }
-
-        private void setLocalValue(final T currentValue) {
-            this.currentValue = currentValue;
-            update();
-        }
-
-        public void setValue() {
-            if (!originalValue.equals(currentValue)) {
+            final T currentValue = getByResId(toggleGroup.getCheckedButtonId()).assignedValue;
+            if (setValue != null && !originalValue.equals(currentValue)) {
                 this.setValue.call(currentValue);
             }
         }

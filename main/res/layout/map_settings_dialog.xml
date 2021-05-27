@@ -43,25 +43,25 @@
 
             <Button
                 android:id="@+id/compacticon_off"
+                style="@style/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/button"
                 android:layout_weight="1"
                 android:text="@string/switch_off" />
 
             <Button
                 android:id="@+id/compacticon_auto"
+                style="@style/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/button"
                 android:layout_weight="1"
                 android:text="@string/switch_auto" />
 
             <Button
                 android:id="@+id/compacticon_on"
+                style="@style/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/button"
                 android:layout_weight="1"
                 android:text="@string/switch_on" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -78,45 +78,46 @@
             style="@style/map_quicksettings_subtitle"
             android:text="@string/map_routing" />
 
-        <ImageButton
-            android:id="@+id/routing_off"
-            style="@style/button_icon"
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/routing_tooglegroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/routing_title"
-            android:src="@drawable/routing_off" />
+            android:layout_marginTop="6dp"
+            app:selectionRequired="true"
+            app:singleSelection="true">
 
-        <ImageButton
-            android:id="@+id/routing_straight"
-            style="@style/button_icon"
-            android:layout_below="@id/routing_title"
-            android:layout_toRightOf="@id/routing_off"
-            android:src="@drawable/routing_straight" />
+            <Button
+                android:id="@+id/routing_off"
+                style="@style/button_icon"
+                app:icon="@drawable/routing_off" />
 
-        <ImageButton
-            android:id="@+id/routing_walk"
-            style="@style/button_icon"
-            android:layout_below="@id/routing_title"
-            android:layout_toRightOf="@id/routing_straight"
-            android:src="@drawable/routing_walk" />
+            <Button
+                android:id="@+id/routing_straight"
+                style="@style/button_icon"
+                app:icon="@drawable/routing_straight" />
 
-        <ImageButton
-            android:id="@+id/routing_bike"
-            style="@style/button_icon"
-            android:layout_below="@id/routing_title"
-            android:layout_toRightOf="@id/routing_walk"
-            android:src="@drawable/routing_bike" />
+            <Button
+                android:id="@+id/routing_walk"
+                style="@style/button_icon"
+                app:icon="@drawable/routing_walk" />
 
-        <ImageButton
-            android:id="@+id/routing_car"
-            style="@style/button_icon"
-            android:layout_below="@id/routing_title"
-            android:layout_toRightOf="@id/routing_bike"
-            android:src="@drawable/routing_car" />
+            <Button
+                android:id="@+id/routing_bike"
+                style="@style/button_icon"
+                app:icon="@drawable/routing_bike" />
+
+            <Button
+                android:id="@+id/routing_car"
+                style="@style/button_icon"
+                app:icon="@drawable/routing_car" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <TextView
             android:id="@+id/brouter_install"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/routing_straight"
+            android:layout_below="@id/routing_tooglegroup"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
             android:layout_marginBottom="8dp"
