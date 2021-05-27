@@ -156,7 +156,7 @@
             android:name=".CachePopup"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/cgeo.popup"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
@@ -727,7 +727,7 @@
             android:name="WaypointPopup"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/waypoint"
-            android:theme="@style/cgeo.popup"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity

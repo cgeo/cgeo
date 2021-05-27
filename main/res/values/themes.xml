@@ -22,11 +22,14 @@
 
     <!-- theme for cache/waypoint popups -->
 
-    <style name="cgeo.popup" parent="cgeo">
+    <style name="Theme.AppCompat.Transparent.NoActionBar" parent="cgeo">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 
     <!-- theme for settings (temporary workaround, needed only as long as SettingsActivity is not derived from AppCompatActivity) -->

@@ -67,7 +67,7 @@ public final class ActivityMixin {
     }
 
     public static int getDialogTheme() {
-        return R.style.cgeo_popup;
+        return R.style.Theme_AppCompat_Transparent_NoActionBar;
     }
 
     /**
