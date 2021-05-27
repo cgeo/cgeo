@@ -161,8 +161,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         bar.setTitle(title);
         bar.setNavigationOnClickListener(onClickListener);
         // @todo Remove next two lines after switching to AppCompatActitivy
-        bar.setTitleTextColor(getResources().getColor(Settings.isLightSkin() ? R.color.settings_colorTextSecondaryLight : R.color.settings_colorTextSecondaryDark));
-        bar.setBackgroundColor(getResources().getColor(Settings.isLightSkin() ? R.color.colorAccent : R.color.just_black));
+        bar.setTitleTextColor(getResources().getColor(R.color.colorTextActionBar));
+        bar.setBackgroundColor(getResources().getColor(R.color.colorBackgroundActionBar));
     }
 
     @Override

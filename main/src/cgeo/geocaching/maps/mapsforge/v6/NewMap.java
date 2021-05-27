@@ -1047,7 +1047,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
 
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(title);
+            actionBar.setTitle(MapUtils.getColoredValue(title));
         }
     }
 
@@ -1073,7 +1073,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
 
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setSubtitle(subtitle);
+            actionBar.setSubtitle(MapUtils.getColoredValue(subtitle));
         }
     }
 

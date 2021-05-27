@@ -14,7 +14,6 @@
     <color name="colorBackground">#FFFFFFFF</color>
     <color name="colorBackgroundNotice">#FFDFDFDF</color>
     <color name="colorBackgroundTransparent">#44FFFFFF</color>
-    <color name="colorBackgroundActionBar">@color/colorAccent</color>
 
     <color name="colorSeparator">#44000000</color>
 
