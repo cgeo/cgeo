@@ -29,6 +29,8 @@ import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
 
+import com.google.android.material.button.MaterialButtonToggleGroup;
+
 public class MapSettingsUtils {
 
     private static int colorAccent;
@@ -74,11 +76,10 @@ public class MapSettingsUtils {
             dialogView.mapSettingsListview.addView(l);
         }
 
-        final ArrayList<ButtonChoiceModel<Integer>> compactIconChoices = new ArrayList<>();
-        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF, activity.getString(R.string.switch_off)));
-        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO, activity.getString(R.string.switch_auto)));
-        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
-        final ButtonController<Integer> compactIcon = new ButtonController<>(dialogView.getRoot(), null, compactIconChoices, Settings.getCompactIconMode(), setCompactIconValue);
+        final ToggleButtonWrapper<Integer> compactIconWrapper = new ToggleButtonWrapper<>(Settings.getCompactIconMode(), setCompactIconValue, dialogView.compacticonTooglegroup);
+        compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF, activity.getString(R.string.switch_off)));
+        compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO, activity.getString(R.string.switch_auto)));
+        compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
 
         final ArrayList<ButtonChoiceModel<RoutingMode>> routingChoices = new ArrayList<>();
         for (RoutingMode mode : RoutingMode.values()) {
@@ -96,7 +97,7 @@ public class MapSettingsUtils {
                 for (SettingsCheckboxModel item : settingsElementsCheckboxes) {
                     item.setValue();
                 }
-                compactIcon.setValue();
+                compactIconWrapper.setValue();
                 routing.setValue();
                 onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
                 if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
@@ -109,7 +110,7 @@ public class MapSettingsUtils {
             });
         dialog.show();
 
-        compactIcon.init();
+        compactIconWrapper.init();
         routing.init();
 
         if (!Routing.isAvailable()) {
@@ -155,6 +156,50 @@ public class MapSettingsUtils {
             this.resButton = resButton;
             this.assignedValue = assignedValue;
             this.info = info;
+        }
+    }
+
+    private static class ToggleButtonWrapper<T> {
+        private final MaterialButtonToggleGroup toggleGroup;
+        private final ArrayList<ButtonChoiceModel<T>> list;
+        private final Action1<T> setValue;
+        private final T originalValue;
+
+        ToggleButtonWrapper(final T originalValue, final Action1<T> setValue, final MaterialButtonToggleGroup toggleGroup) {
+            this.originalValue = originalValue;
+            this.toggleGroup = toggleGroup;
+            this.setValue = setValue;
+            this.list = new ArrayList<>();
+        }
+
+        public void add(final ButtonChoiceModel<T> item) {
+            list.add(item);
+        }
+
+        public ButtonChoiceModel<T> getByResId(final int id) {
+            for (ButtonChoiceModel<T> item : list) {
+                if (item.resButton == id) {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        public ButtonChoiceModel<T> getByAssignedValue(final T value) {
+            for (ButtonChoiceModel<T> item : list) {
+                if (item.assignedValue == value) {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        public void init() {
+            toggleGroup.check(getByAssignedValue(originalValue).resButton);
+        }
+
+        public void setValue() {
+            setValue.call(getByResId(toggleGroup.getCheckedButtonId()).assignedValue);
         }
     }
 
