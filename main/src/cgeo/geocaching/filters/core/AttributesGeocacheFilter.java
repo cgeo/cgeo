@@ -86,7 +86,7 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         if (attributes.isEmpty()) {
-            sqlBuilder.addWhereAlwaysInclude();
+            sqlBuilder.addWhereTrue();
         } else {
             if (inverse) {
                 sqlBuilder.openWhere(SqlBuilder.WhereType.NOT);

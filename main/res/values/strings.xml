@@ -496,9 +496,12 @@
     <string name="cache_filter_favorites">Favorites</string>
     <string name="cache_filter_distance">Distance</string>
     <string name="cache_filter_hidden">Hidden Date</string>
+    <string name="cache_filter_logs_count">Logs Count</string>
+    <string name="cache_filter_last_found">Last Found Date</string>
+    <string name="cache_filter_log_entry">Log Entry</string>
 
     <string name="cache_filtergroup_basic">Basic</string>
-    <string name="cache_filtergroup_detailed">Detailed</string>
+    <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">User specific</string>
 
 
@@ -553,6 +556,9 @@
     <string name="cache_filter_status_select_only_disabled_no">Only Enabled</string>
     <string name="cache_filter_status_select_only_archived_yes">Only Archived</string>
     <string name="cache_filter_status_select_only_archived_no">Only Active</string>
+
+    <string name="cache_filter_log_entry_foundby">Found by:</string>
+    <string name="cache_filter_log_entry_logtext">Log text:</string>
 
 
 

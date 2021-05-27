@@ -54,7 +54,7 @@ public abstract class StringGeocacheFilter extends BaseGeocacheFilter {
         if (colName != null) {
             stringFilter.addToSql(sqlBuilder, sqlBuilder.getMainTableId() + "." + colName);
         } else {
-            sqlBuilder.addWhereAlwaysInclude();
+            sqlBuilder.addWhereTrue();
         }
     }
 

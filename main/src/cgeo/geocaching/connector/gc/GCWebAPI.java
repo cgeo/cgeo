@@ -787,6 +787,7 @@ class GCWebAPI {
                     c.setSize(CacheSize.getByGcId(r.containerType));
                     c.setPremiumMembersOnly(r.premiumOnly);
                     c.setHidden(r.placedDate);
+                    c.setLastFound(r.lastFoundDate);
 
                     //Only set found if the map returns a "found",
                     //the map API will possibly lag behind and break

@@ -27,7 +27,7 @@ public interface IGeocacheFilter extends IExpression<IGeocacheFilter>  {
     /** For efficient selection of geocaches from DB passing this filter, filter classes shall implement this method */
     default void addToSql(final SqlBuilder sqlBuilder) {
         //Filters may be used in all combinations of AND and OR statements
-        //Thus in case filters do not provide their own WHERE filter, we MUST provide a statement always evaluating to TRUE
+        //Thus in case filters do not provide their own WHERE filter, we MUST provide a statement always evaluating to TRUE (resp. returning lines)
         //Otherwise caches might falsely be filtered out esp. in OR-statements
         //Example:
         //  If user wants to filter caches starting with A OR caches being of type "multi" and second filter would NOT provide any SQL-where

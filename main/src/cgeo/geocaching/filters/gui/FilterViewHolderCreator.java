@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.LastFoundGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
@@ -41,9 +42,8 @@ public class FilterViewHolderCreator {
             case NAME:
             case OWNER:
             case DESCRIPTION:
-                result = new StringFilterViewHolder<>();
-                break;
             case PERSONAL_NOTE:
+            case OFFLINE_LOG:
                 result = new StringFilterViewHolder<>();
                 break;
             case TYPE:
@@ -59,9 +59,6 @@ public class FilterViewHolderCreator {
                     ValueGroupFilterAccessor.<CacheSize, SizeGeocacheFilter>createForValueGroupFilter()
                         .setSelectableValues(CacheSize.values())
                         .setValueDisplayTextGetter(CacheSize::getL10n));
-                break;
-            case OFFLINE_LOG:
-                result = new StringFilterViewHolder<>();
                 break;
             case DIFFICULTY:
             case TERRAIN:
@@ -81,6 +78,15 @@ public class FilterViewHolderCreator {
                 break;
             case HIDDEN:
                 result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>();
+                break;
+            case LAST_FOUND:
+                result = new DateRangeFilterViewHolder<LastFoundGeocacheFilter>();
+                break;
+            case LOGS_COUNT:
+                result = new LogsCountFilterViewHolder();
+                break;
+            case LOG_ENTRY:
+                result = new LogEntryFilterViewHolder();
                 break;
             default:
                 result = null;

@@ -114,6 +114,7 @@ public class Geocache implements IWaypoint {
 
     @Nullable
     private Date hidden = null;
+    private Date lastFound = null;
     /**
      * lazy initialized
      */
@@ -218,6 +219,8 @@ public class Geocache implements IWaypoint {
         }
 
         updated = System.currentTimeMillis();
+        //storageLocation.addAll(other.getStorageLocation()); // seems correct but has side effects / failing tests
+
         // if parsed cache is not yet detailed and stored is, the information of
         // the parsed cache will be overwritten
         if (!detailed && other.detailed) {
@@ -289,6 +292,9 @@ public class Geocache implements IWaypoint {
         }
         if (hidden == null) {
             hidden = other.hidden;
+        }
+        if (lastFound == null) {
+            lastFound = other.lastFound;
         }
         if (size == CacheSize.UNKNOWN) {
             size = other.size;
@@ -421,6 +427,7 @@ public class Geocache implements IWaypoint {
                 favoritePoints == other.favoritePoints &&
                 Objects.equals(onWatchlist, other.onWatchlist) &&
                 Objects.equals(hidden, other.hidden) &&
+                Objects.equals(lastFound, other.lastFound) &&
                 StringUtils.equalsIgnoreCase(guid, other.guid) &&
                 StringUtils.equalsIgnoreCase(getHint(), other.getHint()) &&
                 StringUtils.equalsIgnoreCase(cacheId, other.cacheId) &&
@@ -887,6 +894,22 @@ public class Geocache implements IWaypoint {
         return null;
     }
 
+    @Nullable
+    public Date getLastFound() {
+        if (lastFound == null && inDatabase()) {
+            for (LogEntry logEntry : getLogs()) {
+                if (logEntry.logType.isFoundLog()) {
+                    lastFound = new Date(logEntry.date);
+                    break;
+                }
+            }
+        }
+        if (lastFound != null) {
+            return new Date(lastFound.getTime());
+        }
+        return null;
+    }
+
     @NonNull
     public List<String> getAttributes() {
         return attributes.getUnderlyingList();
@@ -908,6 +931,9 @@ public class Geocache implements IWaypoint {
      * @return a statistic how often the caches has been found, disabled, archived etc.
      */
     public Map<LogType, Integer> getLogCounts() {
+        if (logCounts.isEmpty() && inDatabase()) {
+            setLogCounts(DataStore.loadLogCounts(getGeocode()));
+        }
         return logCounts;
     }
 
@@ -987,6 +1013,10 @@ public class Geocache implements IWaypoint {
 
     public void setHidden(@Nullable final Date hidden) {
         this.hidden = hidden != null ? new Date(hidden.getTime()) : null;
+    }
+
+    public void setLastFound(@Nullable final Date lastFound) {
+        this.lastFound = lastFound != null ? new Date(lastFound.getTime()) : null;
     }
 
     public Float getDirection() {
@@ -1242,7 +1272,9 @@ public class Geocache implements IWaypoint {
      */
     @NonNull
     public List<LogEntry> getLogs() {
-        return inDatabase() ? DataStore.loadLogs(geocode) : Collections.emptyList();
+        //if a cache was freshly loaded from server, it may not have the "logs" flag although logs exist in local db.
+        return DataStore.loadLogs(geocode);
+        //return inDatabase() ? DataStore.loadLogs(geocode) : Collections.emptyList();
     }
 
     /**
@@ -2045,9 +2077,6 @@ public class Geocache implements IWaypoint {
      * TODO: 0 should be a valid value, maybe need to return -1 if the number is not known
      */
     public int getFindsCount() {
-        if (getLogCounts().isEmpty()) {
-            setLogCounts(inDatabase() ? DataStore.loadLogCounts(getGeocode()) : Collections.emptyMap());
-        }
         int sumFound = 0;
         for (final Entry<LogType, Integer> logCount : getLogCounts().entrySet()) {
             if (logCount.getKey().isFoundLog()) {

@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.SearchActivityBinding;
+import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
@@ -286,7 +287,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByFilterFn() {
-        GeocacheFilterActivity.selectFilter(this, null, null, false);
+        GeocacheFilterActivity.selectFilter(this, GeocacheFilter.getStoredForListType(CacheListType.SEARCH_FILTER), null, false);
 
     }
 

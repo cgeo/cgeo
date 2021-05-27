@@ -53,7 +53,11 @@ public abstract class DateRangeGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
-        dateFilter.addToSql(sqlBuilder, getSqlColumnName() == null ? null : sqlBuilder.getMainTableId() + "." + getSqlColumnName());
+        addToSql(sqlBuilder, getSqlColumnName() == null ? null : sqlBuilder.getMainTableId() + "." + getSqlColumnName());
+    }
+
+    protected void addToSql(final SqlBuilder sqlBuilder, final String valueExpression) {
+        dateFilter.addToSql(sqlBuilder, valueExpression);
     }
 
     @Override

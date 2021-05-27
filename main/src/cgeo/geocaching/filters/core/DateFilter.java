@@ -113,7 +113,7 @@ public class DateFilter  {
             }
             sqlBuilder.closeWhere();
         } else {
-            sqlBuilder.addWhereAlwaysInclude();
+            sqlBuilder.addWhereTrue();
         }
     }
 
