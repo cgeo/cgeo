@@ -540,8 +540,6 @@
     <string name="init_summary_openlastdetailspage">Åbn detaljesiden med de sidst indlæste oplysninger</string>
     <string name="init_skin">Light skin</string>
     <string name="init_summary_skin">Light skin (kræver genstart af c:geo)</string>
-    <string name="init_transparentBackground">Gennemsigtig baggrund</string>
-    <string name="init_summary_transparentBackground">Brug gennemsigtig baggrund (kræver genstart)</string>
     <string name="init_address">Vis adresse på hovedskærm</string>
     <string name="init_summary_address">Vis adresse på hovedskærm</string>
     <string name="init_select_language">Vælg sprog</string>
