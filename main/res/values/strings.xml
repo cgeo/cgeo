@@ -2304,8 +2304,8 @@
     <string name="wizard_welcome_advanced">Advanced configuration</string>
     <string name="wizard_advanced_offlinemaps_label">Offline maps</string>
     <string name="wizard_advanced_offlinemaps_info">This page provides some advanced functions, which are optional to use.\n\nc:geo can download map files for offline usage.</string>
-    <string name="wizard_advanced_brouter_label">Routing app</string>
-    <string name="wizard_advanced_brouter_info">By installing and configuring a companion app named \"BRouter Offline Navigation\" c:geo can navigate to targets and show routing infos on your map.</string>
+    <string name="wizard_advanced_routing_label">Activate offline routing</string>
+    <string name="wizard_advanced_routing_info">c:geo has an internal routing engine for offline routing and can automatically download missing routing data for you.</string>
     <string name="wizard_advanced_restore_label">Restore</string>
     <string name="wizard_advanced_restore_info">If you have a backup of a previous installation you can restore settings and/or geocache data.</string>
     <string name="status_not_ok">ERROR</string>
