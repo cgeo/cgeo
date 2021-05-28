@@ -518,8 +518,6 @@
     <string name="init_summary_openlastdetailspage">Mostrar última página vista al consultar los detalles del caché</string>
     <string name="init_skin">Fondo blanco</string>
     <string name="init_summary_skin">Usar fondo blanco (necesitas reiniciar c:geo)</string>
-    <string name="init_transparentBackground">Fondo trasparente</string>
-    <string name="init_summary_transparentBackground">Usar fondo transparente (requiere reiniciar)</string>
     <string name="init_address">Mostrar dirección</string>
     <string name="init_summary_address">Mostrar dirección en lugar de coordenadas en la pantalla principal</string>
     <string name="init_exclude">Excluir encontrados y propios</string>
