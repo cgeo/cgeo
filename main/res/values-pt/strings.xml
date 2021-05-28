@@ -560,7 +560,7 @@
     <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/individuais</string>
-    <string name="init_summary_friends_and_own_logs_wanted">Carrega os registos feitos por si e por amigos num livro de registos, adicionando um separador nos detalhes da cache</string>
+    <string name="init_summary_friends_and_own_logs_wanted">Mostra um livro de registos adicional num novo separador, contendo os registos feitos por si e por amigos</string>
     <string name="init_openlastdetailspage">Mem. último separador visto</string>
     <string name="init_summary_openlastdetailspage">Abre a consulta dos detalhes da cache no último separador visto</string>
     <string name="init_skin">Tema claro</string>
