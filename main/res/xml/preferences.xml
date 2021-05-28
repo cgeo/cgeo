@@ -496,11 +496,13 @@
         android:key="@string/pref_appearance"
         android:title="@string/settings_title_appearance"
         android:summary="@string/settings_summary_appearance" >
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_skin"
-            android:summary="@string/init_summary_skin"
-            android:title="@string/init_skin" />
+        <ListPreference
+            android:defaultValue="@string/pref_value_theme_dark"
+            android:entries="@array/settings_theme_entries"
+            android:entryValues="@array/pref_theme_values"
+            android:key="@string/pref_theme_setting"
+            android:title="@string/settings_theme_title"
+            android:summary="%s" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_showaddress"

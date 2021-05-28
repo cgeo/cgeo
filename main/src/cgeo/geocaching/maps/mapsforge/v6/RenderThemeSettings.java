@@ -52,7 +52,7 @@ public class RenderThemeSettings extends PreferenceActivity implements SharedPre
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        setTheme(Settings.isLightSkin() ? R.style.settings_light : R.style.settings);
+        setTheme(Settings.isLightSkin(this) ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 
         final ActionBar actionBar = getActionBar();

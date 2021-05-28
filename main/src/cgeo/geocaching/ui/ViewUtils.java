@@ -3,7 +3,6 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CheckboxItemBinding;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Func2;
@@ -74,7 +73,7 @@ public class ViewUtils {
                 tv.setText(itemText);
                 tv.setMaxLines(1);
                 if (APP_RESSOURCES != null) {
-                    tv.setTextColor(APP_RESSOURCES.getColor(Settings.isLightSkin() ? android.R.color.black : android.R.color.white));
+                    tv.setTextColor(APP_RESSOURCES.getColor(R.color.colorText));
                 }
                 if (DEBUG_LAYOUT) {
                     tv.setBackgroundResource(R.drawable.mark_orange);

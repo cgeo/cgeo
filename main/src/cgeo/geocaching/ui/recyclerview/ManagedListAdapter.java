@@ -1,9 +1,8 @@
 package cgeo.geocaching.ui.recyclerview;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 
-import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,11 +134,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
                     }
 
                      //mark view as "selected"
-                    if (Settings.isLightSkin()) {
-                        viewHolder.itemView.setBackgroundColor(Color.LTGRAY);
-                    } else {
-                        viewHolder.itemView.setBackgroundColor(Color.DKGRAY);
-                    }
+                    viewHolder.itemView.setBackgroundColor(CgeoApplication.getInstance().getResources().getColor(R.color.colorBackgroundSelected));
                 }
             }
             @Override
@@ -272,7 +267,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
 
         //special handling for "normal" case (where button is imageview with standard c:geo drag/drop image)
         if (button instanceof ImageView) {
-            ((ImageView) button).setImageResource(Settings.isLightSkin() ? R.drawable.ic_menu_reorder_black : R.drawable.ic_menu_reorder);
+            ((ImageView) button).setImageResource(R.drawable.ic_menu_reorder);
         }
 
         button.setOnTouchListener((v, e) -> {

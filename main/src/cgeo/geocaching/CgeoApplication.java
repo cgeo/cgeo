@@ -43,6 +43,8 @@ public class CgeoApplication extends Application {
 
         OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
 
+        Settings.setAppThemeAutomatically(this);
+
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
             fixUserManagerMemoryLeak();
         }

@@ -60,7 +60,6 @@
     <string translatable="false" name="pref_twitter">twitter</string>
     <string translatable="false" name="pref_webDeviceName">webDeviceName</string>
     <string translatable="false" name="pref_nativeUa">nativeUa</string>
-    <string translatable="false" name="pref_skin">skin</string>
     <string translatable="false" name="pref_showaddress">showaddress</string>
     <string translatable="false" name="old_pref_useenglish">useenglish</string>
     <string translatable="false" name="pref_units_imperial">units</string>
@@ -307,4 +306,17 @@
     <string translatable="false" name="pref_compacticon_auto">auto</string>
 
     <string translatable="false" name="pref_selected_language">selectedLanguage</string>
+
+    <!-- theme preferences -->
+    <string translatable="false" name="old_pref_skin">skin</string>
+
+    <string translatable="false" name="pref_theme_setting" >theme_setting</string>
+    <string translatable="false" name="pref_value_theme_light">LIGHT</string>
+    <string translatable="false" name="pref_value_theme_dark">DARK</string>
+    <string translatable="false" name="pref_value_theme_system_default">SYSTEM_DEFAULT</string>
+    <string-array name="pref_theme_values">
+        <item>@string/pref_value_theme_system_default</item>
+        <item>@string/pref_value_theme_light</item>
+        <item>@string/pref_value_theme_dark</item>
+    </string-array>
 </resources>

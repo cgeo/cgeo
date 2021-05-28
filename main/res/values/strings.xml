@@ -721,8 +721,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
     <string name="init_summary_openlastdetailspage">Open details with last used page</string>
-    <string name="init_skin">Light Skin</string>
-    <string name="init_summary_skin">Use light skin (restart required)</string>
     <string name="init_address">Show Address</string>
     <string name="init_summary_address">Show address instead of coordinates on main screen</string>
     <string name="init_select_language">Select language</string>
@@ -773,6 +771,14 @@
     <string name="init_summary_listdisplay">Show membership of caches to additional lists in a cache list</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show an arrow with compass direction for caches in a list</string>
+
+    <!-- app theme -->
+    <string name="settings_theme_title">Theme</string>
+    <string-array name="settings_theme_entries">
+        <item>System Default</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
 
     <!-- backup / restore -->
     <string name="init_backup_title">Create Backup</string>

@@ -42,12 +42,14 @@ import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -106,6 +108,50 @@ public class Settings {
                 return Min;
             }
             return values[id];
+        }
+    }
+
+    /**
+     * Possible values of the Dark Mode Setting.
+     * <p>
+     * The Dark Mode Setting can be stored in {@link android.content.SharedPreferences} as String by using {@link DarkModeSetting#getPreferenceValue(Context)} and received via {@link DarkModeSetting#valueOf(String)}.
+     * <p>
+     * Additionally, the equivalent {@link AppCompatDelegate}-Mode can be received via {@link #getModeId()}.
+     *
+     * @see AppCompatDelegate#MODE_NIGHT_YES
+     * @see AppCompatDelegate#MODE_NIGHT_NO
+     * @see AppCompatDelegate#MODE_NIGHT_FOLLOW_SYSTEM
+     */
+    public enum DarkModeSetting {
+
+        /**
+         * Always use light mode.
+         */
+        LIGHT(AppCompatDelegate.MODE_NIGHT_NO, R.string.pref_value_theme_light),
+        /**
+         * Always use dark mode.
+         */
+        DARK(AppCompatDelegate.MODE_NIGHT_YES, R.string.pref_value_theme_dark),
+        /**
+         * Follow the global system setting for dark mode.
+         */
+        SYSTEM_DEFAULT(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, R.string.pref_value_theme_system_default);
+
+        private final int modeId;
+        private final @StringRes
+        int preferenceValue;
+
+        DarkModeSetting(final int modeId, final @StringRes int preferenceValue) {
+            this.modeId = modeId;
+            this.preferenceValue = preferenceValue;
+        }
+
+        public int getModeId() {
+            return modeId;
+        }
+
+        public String getPreferenceValue(final @NonNull Context context) {
+            return context.getString(preferenceValue);
         }
     }
 
@@ -181,7 +227,7 @@ public class Settings {
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
             e.putBoolean(getKey(R.string.pref_livelist), prefsV0.getInt(getKey(R.string.pref_livelist), 1) != 0);
             e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), 1) != 1);
-            e.putBoolean(getKey(R.string.pref_skin), prefsV0.getInt(getKey(R.string.pref_skin), 0) != 0);
+            e.putBoolean(getKey(R.string.old_pref_skin), prefsV0.getInt(getKey(R.string.old_pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
             e.putString(getKey(R.string.pref_cachetype), prefsV0.getString(getKey(R.string.pref_cachetype), CacheType.ALL.id));
             e.putString(getKey(R.string.pref_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_twitter_token_secret), null));
@@ -1053,8 +1099,40 @@ public class Settings {
     }
 
 
-    public static boolean isLightSkin() {
-        return getBoolean(R.string.pref_skin, false);
+    public static void setAppThemeAutomatically(final @NonNull Context context) {
+        setAppTheme(getAppTheme(context));
+    }
+
+    public static void setAppTheme(final DarkModeSetting setting) {
+        AppCompatDelegate.setDefaultNightMode(setting.getModeId());
+    }
+
+    private static DarkModeSetting getAppTheme(final @NonNull Context context) {
+        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, isLightSkin() ?
+                DarkModeSetting.LIGHT.getPreferenceValue(context) : DarkModeSetting.DARK.getPreferenceValue(context)));
+    }
+
+    private static boolean isDarkThemeActive(final @NonNull Context context, final DarkModeSetting setting) {
+        if (setting == DarkModeSetting.SYSTEM_DEFAULT) {
+            return isDarkThemeActive(context);
+        } else {
+            return setting == DarkModeSetting.DARK;
+        }
+    }
+
+    private static boolean isDarkThemeActive(final @NonNull Context context) {
+        final int uiMode = context.getResources().getConfiguration().uiMode;
+        return (uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    public static boolean isLightSkin(final @NonNull Context context) {
+        return !isDarkThemeActive(context, getAppTheme(context));
+    }
+
+    /* use only for migration purposes */
+    @Deprecated
+    private static boolean isLightSkin() {
+        return getBoolean(R.string.old_pref_skin, false);
     }
 
     @NonNull

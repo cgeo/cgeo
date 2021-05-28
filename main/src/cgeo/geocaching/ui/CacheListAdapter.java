@@ -403,8 +403,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         }
         holder.cache = cache;
 
-        final boolean lightSkin = Settings.isLightSkin();
-
         final TouchListener touchListener = new TouchListener(cache, this);
         v.setOnClickListener(touchListener);
         v.setOnLongClickListener(touchListener);

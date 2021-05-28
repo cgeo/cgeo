@@ -108,7 +108,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         ApplicationSettings.setLocale(this);
-        setTheme(Settings.isLightSkin() ? R.style.settings_light : R.style.settings);
+        setTheme(Settings.isLightSkin(this) ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 
         backupUtils = new BackupUtils(SettingsActivity.this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
@@ -481,8 +481,16 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initAppearancePreferences() {
-        getPreference(R.string.pref_skin).setOnPreferenceChangeListener((preference, newValue) -> {
-            setResult(RESTART_NEEDED);
+        final Preference themePref = getPreference(R.string.pref_theme_setting);
+        themePref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+            final Settings.DarkModeSetting darkTheme = Settings.DarkModeSetting.valueOf((String) newValue);
+            Settings.setAppTheme(darkTheme);
+
+            // simulate previous view stack hierarchy
+            startActivity(new Intent(this, SettingsActivity.class));
+            openForScreen(R.string.pref_appearance, this);
+            finish();
+
             return true;
         });
     }
