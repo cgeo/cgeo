@@ -468,7 +468,6 @@
     <string name="cache_filter_distance">Etäisyys</string>
     <string name="cache_filter_hidden">Piilotuspäivä</string>
     <string name="cache_filtergroup_basic">Perus</string>
-    <string name="cache_filtergroup_detailed">Yksityiskohtainen</string>
     <string name="cache_filtergroup_userspecific">Käyttäjäkohtainen</string>
     <string name="cache_filter_include">Sisällytä</string>
     <string name="cache_filter_exclude">Rajaa pois</string>
@@ -1358,7 +1357,6 @@
     <string name="map_live_disable">Poista live</string>
     <string name="map_as_list">Näytä luettelona</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
-    <string name="map_routing">Reititys (Nykyinen: %s)</string>
     <string name="map_routing_brouter">Reititys on käytettävissä vain <a href="">BRouter</a>in ollessa asennettuna</string>
     <string name="map_gm_autorotation">Kartan automaattinen kääntö</string>
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
