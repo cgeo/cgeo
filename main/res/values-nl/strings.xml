@@ -467,8 +467,11 @@
     <string name="cache_filter_favorites">Favorieten</string>
     <string name="cache_filter_distance">Afstand</string>
     <string name="cache_filter_hidden">Verstopt op</string>
+    <string name="cache_filter_logs_count">Aantal logs</string>
+    <string name="cache_filter_last_found">Laatst Gevonden Datum</string>
+    <string name="cache_filter_log_entry">Log Invoer</string>
     <string name="cache_filtergroup_basic">Basis</string>
-    <string name="cache_filtergroup_detailed">Gedetailleerd</string>
+    <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Gebruikerspecifiek</string>
     <string name="cache_filter_include">Opnemen</string>
     <string name="cache_filter_exclude">Uitsluiten</string>
@@ -508,6 +511,8 @@
     <string name="cache_filter_status_select_only_disabled_no">Alleen ingeschakeld</string>
     <string name="cache_filter_status_select_only_archived_yes">Alleen gearchiveerd</string>
     <string name="cache_filter_status_select_only_archived_no">Alleen actief</string>
+    <string name="cache_filter_log_entry_foundby">Gevonden door:</string>
+    <string name="cache_filter_log_entry_logtext">Log tekst:</string>
     <!-- about -->
     <string name="about_version">Versie</string>
     <string name="about_changelog">Changelog</string>
@@ -662,8 +667,6 @@
     <string name="init_summary_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
     <string name="init_skin">Lichte skin</string>
     <string name="init_summary_skin">Lichte skin (c:geo herstarten)</string>
-    <string name="init_transparentBackground">Transparante achtergrond</string>
-    <string name="init_summary_transparentBackground">Transparante achtergrond gebruiken (vereist herstart)</string>
     <string name="init_address">Toon adres</string>
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_select_language">Taal selecteren</string>
@@ -1360,7 +1363,7 @@
     <string name="map_live_disable">Live uitzetten</string>
     <string name="map_as_list">Laat zien als lijst</string>
     <string name="map_select_multiple_items">Selecteer item</string>
-    <string name="map_routing">Routering (momenteel: %s)</string>
+    <string name="map_routing">Routering</string>
     <string name="map_routing_brouter">Routing is alleen beschikbaar als <a href="">BRouter</a> is geïnstalleerd</string>
     <string name="map_gm_autorotation">Automatische kaartrotatie</string>
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
