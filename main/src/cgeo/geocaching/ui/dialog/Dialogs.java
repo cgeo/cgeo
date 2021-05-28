@@ -1045,7 +1045,10 @@ public final class Dialogs {
 
             @Override
             public void onSlide(final @NonNull View bottomSheet, final float slideOffset) {
-                // ignore
+                // make closing the dialog easier
+                if (slideOffset < -0.2) {
+                    dialog.dismiss();
+                }
             }
         });
 
