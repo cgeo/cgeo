@@ -466,8 +466,11 @@
     <string name="cache_filter_favorites">호감점수</string>
     <string name="cache_filter_distance">거리</string>
     <string name="cache_filter_hidden">숨긴 날짜</string>
+    <string name="cache_filter_logs_count">로그 수</string>
+    <string name="cache_filter_last_found">마지막 찾은 날짜</string>
+    <string name="cache_filter_log_entry">로그</string>
     <string name="cache_filtergroup_basic">기본</string>
-    <string name="cache_filtergroup_detailed">상세하게</string>
+    <string name="cache_filtergroup_details">상세내용</string>
     <string name="cache_filtergroup_userspecific">사용자의 특정</string>
     <string name="cache_filter_include">포함</string>
     <string name="cache_filter_exclude">제외</string>
@@ -506,6 +509,8 @@
     <string name="cache_filter_status_select_only_disabled_no">활성화된 캐시만</string>
     <string name="cache_filter_status_select_only_archived_yes">영구보관된 캐시만</string>
     <string name="cache_filter_status_select_only_archived_no">활성화된 캐시만</string>
+    <string name="cache_filter_log_entry_foundby">찾은 사용자:</string>
+    <string name="cache_filter_log_entry_logtext">로그 내용:</string>
     <!-- about -->
     <string name="about_version">버전</string>
     <string name="about_changelog">변경내역</string>
@@ -660,8 +665,6 @@
     <string name="init_summary_openlastdetailspage">마지막으로 사용된 상세내용을 엽니다.</string>
     <string name="init_skin">간단한 스킨</string>
     <string name="init_summary_skin">간단한 스킨을 사용합니다.(재시작 필요)</string>
-    <string name="init_transparentBackground">배경 투명색</string>
-    <string name="init_summary_transparentBackground">투명한 배경 사용 (다시 시작해야 함)</string>
     <string name="init_address">주소 보기</string>
     <string name="init_summary_address">주 화면에 좌표 대신 주소를 표시합니다.</string>
     <string name="init_select_language">언어 선택</string>
@@ -1348,7 +1351,7 @@
     <string name="map_live_disable">라이브 비활성화</string>
     <string name="map_as_list">목록으로 보기</string>
     <string name="map_select_multiple_items">항목 선택</string>
-    <string name="map_routing">라우팅 (현재: %s)</string>
+    <string name="map_routing">길찾기</string>
     <string name="map_routing_brouter">라우팅은 <a href="">BRouter</a>가 설치된 경우에만 사용할 수 있습니다.</string>
     <string name="map_gm_autorotation">지도 자동 회전</string>
     <string name="map_gm_autorotation_disable">지도 자동 회전을 끄시겠습니까?\n\n지도 회전 메뉴를 사용하여 다시 켜질 수 있습니다</string>
