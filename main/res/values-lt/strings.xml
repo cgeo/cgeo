@@ -530,8 +530,6 @@
     <string name="init_summary_openlastdetailspage">Atidaryti informaciją iš paskutinio naudoto puslapio</string>
     <string name="init_skin">Šviesi tema</string>
     <string name="init_summary_skin">Naudoti šviesią programos temą (reikia pakartotinai paleisti)</string>
-    <string name="init_transparentBackground">Skaidrus fonas</string>
-    <string name="init_summary_transparentBackground">Naudoti skaidrų foną (reikės perkrauti)</string>
     <string name="init_address">Rodyti adresą</string>
     <string name="init_summary_address">Pagrindiniame ekrane vietoje koordinačių rodyti adresą</string>
     <string name="init_select_language">Pasirinkite kalbą</string>
