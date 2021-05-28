@@ -540,8 +540,6 @@
     <string name="init_summary_openlastdetailspage">Открывать последнюю использованную страницу (блокнот, детали, описание)</string>
     <string name="init_skin">Светлый стиль</string>
     <string name="init_summary_skin">Использовать Светлый стиль (требуется перезапуск)</string>
-    <string name="init_transparentBackground">Прозрачный фон</string>
-    <string name="init_summary_transparentBackground">Использовать прозрачный фон (требуется перезапуск)</string>
     <string name="init_address">Показывать адрес</string>
     <string name="init_summary_address">Показывать адрес вместо координат на главном экране</string>
     <string name="init_select_language">Выбрать язык</string>
