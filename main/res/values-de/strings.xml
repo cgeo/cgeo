@@ -468,7 +468,6 @@
     <string name="cache_filter_distance">Entfernung</string>
     <string name="cache_filter_hidden">Versteckdatum</string>
     <string name="cache_filtergroup_basic">Basis</string>
-    <string name="cache_filtergroup_detailed">Detailliert</string>
     <string name="cache_filtergroup_userspecific">Benutzerspezifisch</string>
     <string name="cache_filter_include">Mit</string>
     <string name="cache_filter_exclude">Ohne</string>
@@ -662,8 +661,6 @@
     <string name="init_summary_openlastdetailspage">Öffne Details mit zuletzt genutzter Seite</string>
     <string name="init_skin">Helle Oberfläche</string>
     <string name="init_summary_skin">Helle Oberfläche (Neustart erforderlich)</string>
-    <string name="init_transparentBackground">Transparenter Hintergrund</string>
-    <string name="init_summary_transparentBackground">Verwende transparenten Hintergrund (Neustart erforderlich)</string>
     <string name="init_address">Ort statt Koordinaten</string>
     <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
     <string name="init_select_language">Sprache auswählen</string>
@@ -1360,7 +1357,6 @@
     <string name="map_live_disable">Aktualisierung ausschalten</string>
     <string name="map_as_list">Als Liste anzeigen</string>
     <string name="map_select_multiple_items">Element auswählen</string>
-    <string name="map_routing">Routing (Aktuell: %s)</string>
     <string name="map_routing_brouter">Routing ist nur verfügbar, wenn <a href="">BRouter</a> installiert ist</string>
     <string name="map_gm_autorotation">Automatische Kartendrehung</string>
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
