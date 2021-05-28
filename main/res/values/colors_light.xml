@@ -15,6 +15,7 @@
     <color name="colorBackgroundNotice">#FFDFDFDF</color>
     <color name="colorBackgroundTransparent">#44FFFFFF</color>
     <color name="colorBackgroundDialog">#FFFFFFFF</color>
+    <color name="colorBackgroundSelected">#FFCCCCCC</color>
 
     <color name="colorSeparator">#44000000</color>
 

@@ -62,7 +62,7 @@ public final class CompassMiniView extends View {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         if (instances++ == 0) {
-            final int drawable = isInEditMode() || !Settings.isLightSkin() ? R.drawable.compass_arrow_mini_white : R.drawable.compass_arrow_mini_black;
+            final int drawable = isInEditMode() || !Settings.isLightSkin(getContext()) ? R.drawable.compass_arrow_mini_white : R.drawable.compass_arrow_mini_black;
             compassArrow = BitmapFactory.decodeResource(getResources(), drawable);
             compassArrowWidth = compassArrow.getWidth();
             compassArrowHeight = compassArrow.getWidth();
