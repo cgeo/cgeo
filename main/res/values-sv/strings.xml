@@ -547,8 +547,6 @@
     <string name="init_summary_openlastdetailspage">Visa senaste använda delsidan när detaljer öppnas</string>
     <string name="init_skin">Vitt skal</string>
     <string name="init_summary_skin">Vitt skal (kräver omstart av c:geo)</string>
-    <string name="init_transparentBackground">Genomskinlig bakgrund</string>
-    <string name="init_summary_transparentBackground">Använd genomskinlig bakgrund (omstart krävs)</string>
     <string name="init_address">Adress/koordinater</string>
     <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
     <string name="init_select_language">Välj språk</string>
@@ -1222,7 +1220,6 @@
     <string name="map_live_disable">Inaktivera live</string>
     <string name="map_as_list">Visa som lista</string>
     <string name="map_select_multiple_items">Välj objekt</string>
-    <string name="map_routing">Rutt (för tillfället: %s)</string>
     <string name="map_routing_brouter">Routning är endast tillgänglig om <a href="">BRouter</a> är installerat</string>
     <string name="map_gm_autorotation">Rotera kartan automatiskt</string>
     <string name="map_gm_autorotation_disable">Inaktivera automatisk kartrotation?\n\nDu kan aktivera det igen med hjälp av menyn</string>
