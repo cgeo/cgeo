@@ -9,7 +9,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.IndividualRouteUtils;
-import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -114,15 +113,25 @@ public class MapSettingsUtils {
         routingChoiceWrapper.init();
 
         if (!Routing.isAvailable()) {
-            for (final ButtonChoiceModel<RoutingMode> button : routingChoiceWrapper.list) {
-                if (!(button.assignedValue == RoutingMode.OFF || button.assignedValue == RoutingMode.STRAIGHT)) {
-                    button.button.setEnabled(false);
-                    button.button.setAlpha(.3f);
-                }
-            }
+            configureRoutingButtons(false, routingChoiceWrapper);
+            dialogView.routingInfo.setVisibility(View.VISIBLE);
+            dialogView.routingInfo.setOnClickListener(v -> {
+                Dialogs.confirm(activity, R.string.map_routing_activate_title, R.string.map_routing_activate, (dialog1, which) -> {
+                    Settings.setUseInternalRouting(true);
+                    Settings.setBrouterAutoTileDownloads(true);
+                    configureRoutingButtons(true, routingChoiceWrapper);
+                    dialogView.routingInfo.setVisibility(View.GONE);
+                });
+            });
+        }
+    }
 
-            dialogView.brouterInstall.setVisibility(View.VISIBLE);
-            dialogView.brouterInstall.setOnClickListener(v -> ProcessUtils.openMarket(activity, activity.getString(R.string.package_brouter)));
+    private static void configureRoutingButtons(final boolean enabled, final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper) {
+        for (final ButtonChoiceModel<RoutingMode> button : routingChoiceWrapper.list) {
+            if (!(button.assignedValue == RoutingMode.OFF || button.assignedValue == RoutingMode.STRAIGHT)) {
+                button.button.setEnabled(enabled);
+                button.button.setAlpha(enabled ? 1f : .3f);
+            }
         }
     }
 
