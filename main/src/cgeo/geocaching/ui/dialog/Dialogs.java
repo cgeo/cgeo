@@ -1017,6 +1017,14 @@ public final class Dialogs {
         return dialog;
     }
 
+    private static void updateActionbarAfterStateChange(final BottomSheetDialog dialog, final BottomsheetDialogWithActionbarBinding dialogView) {
+        if (dialog.getBehavior().getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            dialogView.toolbar.setNavigationIcon(R.drawable.ic_close_white);
+        } else {
+            dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_less_white);
+        }
+    }
+
     public static BottomSheetDialog bottomSheetDialogWithActionbar(final Context context, final View contentView, final @StringRes int titleResId) {
         final BottomsheetDialogWithActionbarBinding dialogView = BottomsheetDialogWithActionbarBinding.inflate(LayoutInflater.from(newContextThemeWrapper(context)));
         final BottomSheetDialog dialog = bottomSheetDialog(context, dialogView.getRoot());
@@ -1032,23 +1040,33 @@ public final class Dialogs {
             }
         });
 
-        dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_less_white);
+        dialog.setOnShowListener(dialog1 -> {
+            // provide rather much information directly without need to scroll up
+            // this will expand the dialog even when being in landscape mode
+            // and will set to expanded the state automatically if the dialog can't be expanded even further
+            dialog.getBehavior().setHalfExpandedRatio(0.8f);
+            dialog.getBehavior().setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
+            dialog.getBehavior().setSkipCollapsed(true);
+
+            updateActionbarAfterStateChange(dialog, dialogView);
+        });
+
         dialog.getBehavior().addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            private boolean closeOnRelease = false;
+
             @Override
             public void onStateChanged(final @NonNull View bottomSheet, final int newState) {
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    dialogView.toolbar.setNavigationIcon(R.drawable.ic_close_white);
+                if (newState != BottomSheetBehavior.STATE_DRAGGING && closeOnRelease) {
+                    dialog.dismiss();
                 } else {
-                    dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_less_white);
+                    updateActionbarAfterStateChange(dialog, dialogView);
                 }
             }
 
             @Override
             public void onSlide(final @NonNull View bottomSheet, final float slideOffset) {
                 // make closing the dialog easier
-                if (slideOffset < -0.2) {
-                    dialog.dismiss();
-                }
+                closeOnRelease = slideOffset < -0.2;
             }
         });
 
