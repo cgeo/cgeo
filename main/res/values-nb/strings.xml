@@ -548,8 +548,6 @@
     <string name="init_summary_openlastdetailspage">Åpne detaljsiden til cacher på den siste brukte fanen</string>
     <string name="init_skin">Hvitt tema</string>
     <string name="init_summary_skin">Hvitt tema</string>
-    <string name="init_transparentBackground">Gjennomsiktig bakgrunn</string>
-    <string name="init_summary_transparentBackground">Bruk gjennomsiktig bakgrunn (krever omstart)</string>
     <string name="init_address">Vis adressen i menyen</string>
     <string name="init_summary_address">Vis adressen i menyen</string>
     <string name="init_select_language">Velg språk</string>
