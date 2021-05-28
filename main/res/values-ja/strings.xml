@@ -467,7 +467,6 @@
     <string name="cache_filter_distance">距離</string>
     <string name="cache_filter_hidden">設置日</string>
     <string name="cache_filtergroup_basic">基本</string>
-    <string name="cache_filtergroup_detailed">詳細</string>
     <string name="cache_filtergroup_userspecific">ユーザー固有</string>
     <string name="cache_filter_include">含む</string>
     <string name="cache_filter_exclude">除く</string>
@@ -1341,7 +1340,6 @@
     <string name="map_live_disable">保存済みキャッシュのみ</string>
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
-    <string name="map_routing">ルート検索(現在:%s)</string>
     <string name="map_routing_brouter">ルート検索は<a href="">Brouter</a>がインストールされているか、c:geoルート検索が有効になっていると利用できます</string>
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
