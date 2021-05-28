@@ -24,6 +24,7 @@ This changelog contains all changes which are not intermediate developing steps.
 
 ### Map
 - New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
+- New: Map quick settings: Offer to activate integrated routing engine if no routing is available currently (use "i" icon)
 
 ### Cache details
 - New: Make use of google translate in-app translation popup
