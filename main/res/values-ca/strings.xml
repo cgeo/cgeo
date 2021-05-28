@@ -560,8 +560,6 @@
     <string name="init_summary_openlastdetailspage">Obre els detalls amb l\'última pàgina utilitzada</string>
     <string name="init_skin">Aparença lluminosa</string>
     <string name="init_summary_skin">Utilitza el fons clar (cal reiniciar)</string>
-    <string name="init_transparentBackground">Fons transparent</string>
-    <string name="init_summary_transparentBackground">Utilitzeu un fons transparent (cal reiniciar)</string>
     <string name="init_address">Mostra l\'adreça</string>
     <string name="init_summary_address">Mostra l\'adreça en lloc de les coordenades a la pantalla principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
@@ -1252,7 +1250,6 @@
     <string name="map_live_disable">Desactiva en viu</string>
     <string name="map_as_list">Mostra-ho com una llista</string>
     <string name="map_select_multiple_items">Seleccionar un element</string>
-    <string name="map_routing">Encaminament (actualment: %s)</string>
     <string name="map_routing_brouter">L\'encaminament només està disponible si hi ha  <a href="">BRouter</a>instal·lat</string>
     <string name="map_gm_autorotation">Mapa autorotatori</string>
     <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
