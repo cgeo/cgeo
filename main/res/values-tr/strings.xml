@@ -659,8 +659,6 @@
     <string name="init_summary_openlastdetailspage">Ayrıntıları son kullanılan sayfa ile açın</string>
     <string name="init_skin">Açık Renk</string>
     <string name="init_summary_skin">Açık Renk kullanın (Yeniden başlatma gereklidir)</string>
-    <string name="init_transparentBackground">Saydam arkaplan</string>
-    <string name="init_summary_transparentBackground">Saydam arkaplan kullan (yeniden başlatmak gereklidir)</string>
     <string name="init_address">Adres Göster</string>
     <string name="init_summary_address">Ana ekranda koordinatlar yerine adresi göster</string>
     <string name="init_select_language">Dil seçin</string>
@@ -1356,7 +1354,6 @@
     <string name="map_live_disable">Anlık görüntü kapalı</string>
     <string name="map_as_list">Liste olarak göster</string>
     <string name="map_select_multiple_items">Öğe seç</string>
-    <string name="map_routing">Yönlendirme (Şu an: %s)</string>
     <string name="map_routing_brouter">Yönlendirme sadece <a href="">BRouter</a> yüklenmişse kullanılabilir</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
     <string name="map_gm_autorotation_disable">Otomatik harita döndürmesini devre dışı bırakılsın mı?\n\nHarita döndürme menüsünü kullanarak tekrardan etkinleştirebilirsiniz</string>
