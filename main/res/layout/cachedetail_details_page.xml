@@ -57,6 +57,7 @@
                 android:paddingRight="6dp"
                 android:textIsSelectable="false"
                 android:textSize="@dimen/textSize_detailsSecondary"
+                android:textColor="@color/colorText"
                 tools:text="attribute 1\nattribute 2\nattribute 3"/>
         </LinearLayout>
 
@@ -88,6 +89,7 @@
                     android:layout_marginRight="6dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
                     tools:text="This cache has not been stored. Or has it? Maybe an hour ago?"
                     android:textIsSelectable="false" />
 
@@ -123,6 +125,7 @@
                     android:layout_marginRight="6dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
                     tools:text="list 1, list 2, list 3, and many, many, many, many, many more lists"
                     android:textIsSelectable="false" />
 
@@ -172,6 +175,7 @@
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
                     tools:text="The cache may or may not be on your watch list."
                     android:textIsSelectable="false" />
 
@@ -222,6 +226,7 @@
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
                     tools:text="Send to WhereYouGo"
                     android:textIsSelectable="false" />
 
@@ -265,6 +270,7 @@
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
                     tools:text="Start Chirp Wolf"
                     android:textIsSelectable="false" />
 
@@ -308,6 +314,7 @@
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
                     tools:text="Start Adventure Lab"
                     android:textIsSelectable="false" />
 
@@ -349,6 +356,7 @@
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
                     tools:text="Probably not on your favorite list. You may have some fav points remaining."
                     android:textIsSelectable="false" />
 
@@ -396,6 +404,7 @@
                 android:linksClickable="true"
                 android:padding="3dip"
                 android:textSize="@dimen/textSize_detailsSecondary"
+                android:textColor="@color/colorText"
                 tools:text="some license text"/>
         </LinearLayout>
 

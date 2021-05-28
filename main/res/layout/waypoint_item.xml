@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:textSize="@dimen/textSize_listsPrimary"
+                android:textColor="@color/colorText"
                 tools:text="Description of the waypoint with a lot of small words so that an incorrect layout should easily be noticed"/>
 
             <TextView
@@ -57,6 +58,7 @@
                 android:lines="1"
                 android:scrollHorizontally="true"
                 android:textSize="@dimen/textSize_listsSecondary"
+                android:textColor="@color/colorText"
                 android:visibility="gone"
                 tools:visiblity="visible"
                 tools:text="Info"
@@ -75,6 +77,7 @@
         android:lines="1"
         android:scrollHorizontally="true"
         android:textSize="@dimen/textSize_listsSecondary"
+        android:textColor="@color/colorText"
         android:visibility="gone"
         tools:visiblity="visible"
         tools:text="1.2.3.4.5N 6.7.8.9.10S"
@@ -92,6 +95,7 @@
         android:maxLines="1"
         android:scrollHorizontally="true"
         android:textSize="@dimen/textSize_listsSecondary"
+        android:textColor="@color/colorText"
         android:visibility="gone"
         android:text="@string/waypoint_calculated_coordinates"
         tools:visiblity="visible" />
@@ -104,6 +108,7 @@
         android:layout_marginLeft="12dp"
         android:focusable="false"
         android:textSize="@dimen/textSize_listsSecondary"
+        android:textColor="@color/colorText"
         android:visibility="gone"
         tools:visiblity="visible"
         tools:text="Note"/>
@@ -116,6 +121,7 @@
         android:layout_marginLeft="12dp"
         android:focusable="false"
         android:textSize="@dimen/textSize_listsSecondary"
+        android:textColor="@color/colorText"
         android:visibility="gone"
         tools:visiblity="visible"
         tools:text="User Note"/>

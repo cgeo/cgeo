@@ -20,6 +20,7 @@
         android:scrollHorizontally="false"
         android:text="@null"
         android:textIsSelectable="false"
+        android:textColor="@color/colorText"
         tools:text="property"/>
 
     <TextView
@@ -31,6 +32,7 @@
         android:layout_toRightOf="@+id/name"
         android:gravity="center_vertical"
         android:textIsSelectable="false"
+        android:textColor="@color/colorText"
         tools:text="value"/>
 
     <RatingBar
@@ -58,6 +60,7 @@
         android:gravity="center_vertical"
         android:textIsSelectable="false"
         android:visibility="gone"
+        android:textColor="@color/colorText"
         tools:text="additional text"
         tools:visibility="visible"/>
 
