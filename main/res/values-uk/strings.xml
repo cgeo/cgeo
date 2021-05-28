@@ -524,8 +524,6 @@
     <string name="init_summary_openlastdetailspage">Відкрити деталі зі останній використаний сторінкою</string>
     <string name="init_skin">Світла шкіра</string>
     <string name="init_summary_skin">Використовувати світлий скін (потрібен перезапуск)</string>
-    <string name="init_transparentBackground">прозорий фон</string>
-    <string name="init_summary_transparentBackground">Використовувати прозорий фон (необхідне перезавантаження)</string>
     <string name="init_address">Показати адресу</string>
     <string name="init_summary_address">Відображати адресу замість координат на головному екрані</string>
     <string name="init_select_language">Виберіть мову</string>
