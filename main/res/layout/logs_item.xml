@@ -70,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:gravity="left"
-                android:textSize="@dimen/textSize_detailsPrimary" />
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"/>
 
             <TextView
                 android:id="@+id/log_images"

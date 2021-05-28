@@ -22,6 +22,7 @@
             android:linksClickable="true"
             android:textIsSelectable="true"
             android:textSize="@dimen/textSize_detailsPrimary"
+            android:textColor="@color/colorText"
             android:visibility="gone"
             tools:text="This is the cache description. It might be very long..."
             tools:visibility="visible" />
@@ -64,7 +65,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dip"
-                android:textSize="@dimen/textSize_detailsPrimary" />
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
         <!-- Hint and spoiler-images box -->
@@ -95,6 +97,7 @@
                 android:linksClickable="true"
                 android:textIsSelectable="true"
                 android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
                 tools:text="A hint for finding the cache..." />
 
             <TextView
@@ -106,6 +109,7 @@
                 android:drawablePadding="3dip"
                 android:text="@string/cache_menu_spoilers"
                 android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
                 app:drawableLeftCompat="@drawable/log_img" />
         </LinearLayout>
 
@@ -133,6 +137,7 @@
                 android:layout_height="wrap_content"
                 android:linksClickable="true"
                 android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
                 tools:text="Personal note text\nline 2\nline 3" />
 
             <View style="@style/separator_horizontal"

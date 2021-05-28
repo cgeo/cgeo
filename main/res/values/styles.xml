@@ -361,6 +361,7 @@
         <item name="android:scrollHorizontally">true</item>
         <item name="android:singleLine">true</item>
         <item name="android:textSize">@dimen/textSize_headingSecondary</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <!-- date, found state on the left of a log entry -->
@@ -374,6 +375,7 @@
         <item name="android:scrollHorizontally">true</item>
         <item name="android:singleLine">true</item>
         <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <!-- separator between log author and log content -->
