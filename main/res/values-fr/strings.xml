@@ -558,8 +558,6 @@
     <string name="init_summary_openlastdetailspage">A l\'ouverture des détails d\'une cache afficher le dernier onglet consulté</string>
     <string name="init_skin">Fond blanc</string>
     <string name="init_summary_skin">Fond blanc (nécessite le redémarrage de c:geo)</string>
-    <string name="init_transparentBackground">Arrière-plan transparent</string>
-    <string name="init_summary_transparentBackground">Utiliser un arrière-plan transparent (redémarrage nécessaire)</string>
     <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
     <string name="init_summary_address">Sur l\'écran d\'accueil, afficher l\'adresse plutôt que les coordonnées</string>
     <string name="init_select_language">Sélectionner la langue</string>
@@ -1242,7 +1240,6 @@
     <string name="map_live_disable">Désactiver Temps réel</string>
     <string name="map_as_list">Lister les caches</string>
     <string name="map_select_multiple_items">Sélectionner l\'élément</string>
-    <string name="map_routing">Routage (Actuellement : %s)</string>
     <string name="map_routing_brouter">La navigation nécessite que <a href="">BRouter</a> soit installé</string>
     <string name="map_gm_autorotation">Rotation automatique de la carte</string>
     <string name="map_gm_autorotation_disable">Désactiver la rotation automatique de la carte ?\n\nVous pourrez l\'activer à nouveau depuis le menu Rotation de la carte</string>
