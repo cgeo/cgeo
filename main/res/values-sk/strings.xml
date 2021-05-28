@@ -561,8 +561,6 @@
     <string name="init_summary_openlastdetailspage">Otvoriť detaily na posledne použitej stránke</string>
     <string name="init_skin">Svetlý vzhľad</string>
     <string name="init_summary_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
-    <string name="init_transparentBackground">Priehľadné pozadie</string>
-    <string name="init_summary_transparentBackground">Použiť priehľadné pozadie (potrebný reštart)</string>
     <string name="init_address">Ukázať adresu</string>
     <string name="init_summary_address">Adresa namiesto súradníc na úvodnej obrazovke</string>
     <string name="init_select_language">Zvoľte jazyk</string>
@@ -1273,7 +1271,6 @@
     <string name="map_live_disable">Zakázať aktívnu mapu</string>
     <string name="map_as_list">Zobraziť ako zoznam</string>
     <string name="map_select_multiple_items">Vybrať položku</string>
-    <string name="map_routing">Trasa (Momentálne: %s)</string>
     <string name="map_routing_brouter">Trasovanie je k dispozícii len vtedy, ak je nainštalovaná aplikácia <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatické otáčanie mapy</string>
     <string name="map_gm_autorotation_disable">Vypnúť automatické otáčanie mapy?\n\nMôžete ho znova povoliť pomocou ponuky Otáčanie mapy.</string>
