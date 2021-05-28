@@ -21,7 +21,6 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.BackupUtils;
-import cgeo.geocaching.utils.ProcessUtils;
 
 import android.Manifest;
 import android.content.Context;
@@ -222,10 +221,14 @@ public class InstallWizardActivity extends AppCompatActivity {
                     setButtonToDone();
                     startActivityForResult(new Intent(this, DownloadSelectorActivity.class), DownloaderUtils.REQUEST_CODE);
                 }, button1Info, R.string.wizard_advanced_offlinemaps_info);
-                setButton(button2, R.string.wizard_advanced_brouter_label, v -> {
-                    setButtonToDone();
-                    ProcessUtils.openMarket(this, getString(R.string.package_brouter));
-                }, button2Info, R.string.wizard_advanced_brouter_info);
+                if (!Routing.isAvailable()) {
+                    setButton(button2, R.string.wizard_advanced_routing_label, v -> {
+                        setButtonToDone();
+                        Settings.setUseInternalRouting(true);
+                        Settings.setBrouterAutoTileDownloads(true);
+                        setButton(button2, 0, null, button2Info, 0);
+                    }, button2Info, R.string.wizard_advanced_routing_info);
+                }
                 setButton(button3, R.string.wizard_advanced_restore_label, v -> {
                     setButtonToDone();
                     DataStore.resetNewlyCreatedDatabase();
