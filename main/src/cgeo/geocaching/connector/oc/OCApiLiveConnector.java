@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
@@ -14,6 +15,7 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
@@ -35,7 +37,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder, WatchListCapability, IgnoreCapability, PersonalNoteCapability {
+public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder, ISearchByFilter, WatchListCapability, IgnoreCapability, PersonalNoteCapability {
 
     private final String cS;
     private final int isActivePrefKeyId;
@@ -191,6 +193,11 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     @Override
     public SearchResult searchByKeyword(@NonNull final String name) {
         return new SearchResult(OkapiClient.getCachesNamed(Sensors.getInstance().currentGeo().getCoords(), name, this));
+    }
+
+    @Override
+    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
+        return new SearchResult(OkapiClient.getCachesByFilter(filter, this));
     }
 
     @Override

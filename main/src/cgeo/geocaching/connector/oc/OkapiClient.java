@@ -16,6 +16,18 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.core.BaseGeocacheFilter;
+import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
+import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
+import cgeo.geocaching.filters.core.LogsCountGeocacheFilter;
+import cgeo.geocaching.filters.core.NameGeocacheFilter;
+import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
+import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
+import cgeo.geocaching.filters.core.SizeGeocacheFilter;
+import cgeo.geocaching.filters.core.StatusGeocacheFilter;
+import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Viewport;
@@ -30,11 +42,14 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+import static cgeo.geocaching.filters.core.GeocacheFilterType.DIFFICULTY;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -61,6 +76,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
+import static java.lang.Boolean.FALSE;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -156,9 +172,9 @@ final class OkapiClient {
     // the several realms of possible fields for cache retrieval:
     // Core: for livemap requests (L3 - only with level 3 auth)
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
-    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count";
+    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count|owner|founds|notfounds|rating|rating_votes|recommendations";
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
-    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd|trackables";
+    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd|trackables";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|attr_acodes|willattends|short_description";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "my_notes";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS = "is_watched";
@@ -205,7 +221,7 @@ final class OkapiClient {
         valueMap.put("limit", getCacheLimit());
         valueMap.put("radius", "200");
 
-        return requestCaches(connector, params, valueMap, false);
+        return requestCaches(connector, params, valueMap, false, false);
     }
 
     @NonNull
@@ -228,7 +244,7 @@ final class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put(userRequestParam, uuid);
 
-        return requestCaches(connector, params, valueMap, connector.isSearchForMyCaches(username));
+        return requestCaches(connector, params, valueMap, connector.isSearchForMyCaches(username), false);
     }
 
     @NonNull
@@ -248,17 +264,158 @@ final class OkapiClient {
 
         // full wildcard search, maybe we need to change this after some testing and evaluation
         valueMap.put("name", "*" + namePart + "*");
-        return requestCaches(connector, params, valueMap, false);
+        return requestCaches(connector, params, valueMap, false, false);
     }
 
     @NonNull
-    private static List<Geocache> requestCaches(@NonNull final OCApiConnector connector, @NonNull final Parameters params, @NonNull final Map<String, String> valueMap, final boolean my) {
+    public static List<Geocache> getCachesByFilter(@NonNull final GeocacheFilter filter, @NonNull final OCApiConnector connector) {
+        //fill in the defaults
+        final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
+        final Map<String, String> valueMap = new LinkedHashMap<>();
+        valueMap.put("limit", "200");
+        //search around current position by default
+        fillSearchParameterCenter(valueMap, params, null);
+
+        for (BaseGeocacheFilter baseFilter: filter.getAndChainIfPossible()) {
+            fillForBasicFilter(baseFilter, params, valueMap, connector);
+        }
+
+        //do the search
+        return requestCaches(connector, params, valueMap, false, true);
+
+    }
+
+    private static void fillForBasicFilter(final BaseGeocacheFilter basicFilter, final Parameters params, final Map<String, String> valueMap, @NonNull final OCApiConnector connector) {
+        switch (basicFilter.getType()) {
+            case TYPE:
+                valueMap.put("type", CollectionStream.of(((TypeGeocacheFilter) basicFilter).getRawValues())
+                    .map(OkapiClient::getFilterFromType).filter(StringUtils::isNotBlank).toJoinedString("|"));
+                break;
+            case NAME:
+                valueMap.put("name", "*" + ((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue().replace('?', '_') + "*");
+                break;
+            case SIZE:
+                valueMap.put("size2", CollectionStream.of(((SizeGeocacheFilter) basicFilter).getRawValues())
+                    .map(CacheSize::getOcSize2).filter(StringUtils::isNotBlank).toJoinedString("|"));
+                break;
+            case DISTANCE:
+                final DistanceGeocacheFilter distanceFilter = (DistanceGeocacheFilter) basicFilter;
+                final Geopoint coord = distanceFilter.getEffectiveCoordinate();
+                if (distanceFilter.getMaxRangeValue() != null) {
+                    fillSearchParameterBox(valueMap, params, new Viewport(coord, distanceFilter.getMaxRangeValue()));
+                } else {
+                    fillSearchParameterCenter(valueMap, params, coord);
+                }
+                break;
+            case DIFFICULTY:
+            case TERRAIN:
+                final NumberRangeGeocacheFilter<Float> nrFilter = (NumberRangeGeocacheFilter<Float>) basicFilter;
+                if (nrFilter.isFiltering()) {
+                    valueMap.put(nrFilter.getType() == DIFFICULTY ? "difficulty" : "terrain",
+                        (nrFilter.getMinRangeValue() == null ? "1" : ((int) Math.floor(nrFilter.getMinRangeValue()))) + "-" + (nrFilter.getMaxRangeValue() == null ? "5" : Math.round(nrFilter.getMaxRangeValue())));
+                }
+                break;
+            case OWNER:
+                final String uuid = getUserUUID(connector, ((OwnerGeocacheFilter) basicFilter).getStringFilter().getTextValue());
+                if (uuid != null) {
+                    valueMap.put("owner_uuid", uuid);
+                }
+                break;
+            case FAVORITES:
+                final FavoritesGeocacheFilter favFilter = (FavoritesGeocacheFilter) basicFilter;
+                if (favFilter.getMinRangeValue() != null) {
+                    valueMap.put("min_rcmds", ((int) Math.round(favFilter.getMinRangeValue())) + (favFilter.isPercentage() ? "%" : ""));
+                }
+                break;
+            case STATUS:
+                final StatusGeocacheFilter statusFilter = (StatusGeocacheFilter) basicFilter;
+                String value = "";
+                if (!statusFilter.isExcludeActive()) {
+                    value += "|Available";
+                }
+                if (!statusFilter.isExcludeDisabled()) {
+                    value += "|Temporarily unavailable";
+                }
+                if (!statusFilter.isExcludeArchived()) {
+                    value += "|Archived";
+                }
+                if (!value.isEmpty()) {
+                    valueMap.put("status", value.substring(1));
+                }
+
+                if (statusFilter.getStatusFound() != null) {
+                    valueMap.put("found_status", statusFilter.getStatusFound() ? "found_only" : "notfound_only");
+                }
+                if (FALSE.equals(statusFilter.getStatusOwn())) {
+                    valueMap.put("exclude_my_own", "true");
+                }
+                break;
+            case LOGS_COUNT:
+                final LogsCountGeocacheFilter logsCountFilter = (LogsCountGeocacheFilter) basicFilter;
+                if (logsCountFilter.getLogType().equals(LogType.FOUND_IT)) {
+                    if (logsCountFilter.getMinRangeValue() != null) {
+                        valueMap.put("min_founds", "" + logsCountFilter.getMinRangeValue());
+                    }
+                    if (logsCountFilter.getMaxRangeValue() != null) {
+                        valueMap.put("max_founds", "" + logsCountFilter.getMaxRangeValue());
+                    }
+                }
+                break;
+            case LOG_ENTRY:
+                final LogEntryGeocacheFilter logEntryFilter = (LogEntryGeocacheFilter) basicFilter;
+                if (StringUtils.isNotBlank(logEntryFilter.getFoundByUser())) {
+                    if (logEntryFilter.isInverse()) {
+                        valueMap.put("not_found_by", logEntryFilter.getFoundByUser());
+                    } else {
+                        valueMap.put("found_by", logEntryFilter.getFoundByUser());
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public static void fillSearchParameterCenter(@NonNull final Map<String, String> valueMap, @NonNull final Parameters params, @Nullable final Geopoint center) {
+        final Geopoint usedCenter = center != null ? center : Sensors.getInstance().currentGeo().getCoords();
+        final String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, usedCenter) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, usedCenter);
+        valueMap.put("center", centerString);
+        params.removeKey("search_method");
+        params.put("search_method", METHOD_SEARCH_NEAREST);
+    }
+
+    public static void fillSearchParameterBox(@NonNull final Map<String, String> valueMap, @NonNull final Parameters params, @Nullable final Viewport viewport) {
+
+        final String bboxString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.bottomLeft)
+            + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.bottomLeft)
+            + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.topRight)
+            + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.topRight);
+        valueMap.put("bbox", bboxString);
+
+        fillSearchParameterCenter(valueMap, params, viewport.getCenter());
+        params.removeKey("search_method");
+        params.put("search_method", METHOD_SEARCH_BBOX);
+    }
+
+
+
+    /** pass 'null' as value for 'my' to exclude the legacy global application of own/filtered/disabled/archived-flags */
+    @NonNull
+    private static List<Geocache> requestCaches(@NonNull final OCApiConnector connector, @NonNull final Parameters params, @NonNull final Map<String, String> valueMap, final boolean my, final boolean forFilterSearch) {
         // if a global type filter is set, and OKAPI does not know that type, then return an empty list instead of all caches
         if (Settings.getCacheType() != CacheType.ALL && StringUtils.isBlank(getFilterFromType())) {
             return Collections.emptyList();
         }
 
-        addFilterParams(valueMap, connector, my);
+        if (!forFilterSearch) {
+            addFilterParams(valueMap, connector, my);
+        }
+        // OKAPI returns ignored caches, we have to actively suppress them
+        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+            valueMap.put("ignored_status", "notignored_only");
+        }
+
         try {
             params.add("search_params", JsonUtils.writer.writeValueAsString(valueMap));
         } catch (final JsonProcessingException e) {
@@ -294,7 +451,7 @@ final class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("bbox", bboxString);
 
-        return requestCaches(connector, params, valueMap, false);
+        return requestCaches(connector, params, valueMap, false, false);
     }
 
     public static boolean setWatchState(@NonNull final Geocache cache, final boolean watched, @NonNull final OCApiConnector connector) {
@@ -462,6 +619,7 @@ final class OkapiClient {
         return cache;
     }
 
+
     @NonNull
     private static Geocache parseCache(final ObjectNode response) {
         final Geocache cache = new Geocache();
@@ -471,30 +629,6 @@ final class OkapiClient {
             parseCoreCache(response, cache);
 
             // not used: url
-            final String owner = parseUser(response.get(CACHE_OWNER));
-            cache.setOwnerDisplayName(owner);
-            // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
-            cache.setOwnerUserId(owner);
-            final String profile = response.get(CACHE_OWNER).get(CACHE_USER_PROFILE).asText();
-            if (StringUtils.isNotEmpty(profile)) {
-                final String id = StringUtils.substringAfter(profile, "userid=");
-                if (StringUtils.isNotEmpty(id)) {
-                    cache.setOwnerUserId(id);
-                }
-            }
-
-            final Map<LogType, Integer> logCounts = cache.getLogCounts();
-            logCounts.put(LogType.FOUND_IT, response.get(CACHE_FOUNDS).asInt());
-            logCounts.put(LogType.DIDNT_FIND_IT, response.get(CACHE_NOTFOUNDS).asInt());
-            // only current Api
-            logCounts.put(LogType.WILL_ATTEND, response.path(CACHE_WILLATTENDS).asInt());
-
-            if (response.has(CACHE_RATING)) {
-                cache.setRating((float) response.get(CACHE_RATING).asDouble());
-            }
-            cache.setVotes(response.get(CACHE_VOTES).asInt());
-
-            cache.setFavoritePoints(response.get(CACHE_RECOMMENDATIONS).asInt());
             // not used: req_password
             // Prepend gc-link to description if available
             final StringBuilder description = new StringBuilder(500);
@@ -572,6 +706,33 @@ final class OkapiClient {
             cache.setFound(response.get(CACHE_IS_FOUND).asBoolean());
         }
         cache.setHidden(parseDate(response.get(CACHE_HIDDEN).asText()));
+
+        final String owner = parseUser(response.get(CACHE_OWNER));
+        cache.setOwnerDisplayName(owner);
+        // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
+        cache.setOwnerUserId(owner);
+        final String profile = response.get(CACHE_OWNER).get(CACHE_USER_PROFILE).asText();
+        if (StringUtils.isNotEmpty(profile)) {
+            final String id = StringUtils.substringAfter(profile, "userid=");
+            if (StringUtils.isNotEmpty(id)) {
+                cache.setOwnerUserId(id);
+            }
+        }
+
+        final Map<LogType, Integer> logCounts = cache.getLogCounts();
+        logCounts.put(LogType.FOUND_IT, response.get(CACHE_FOUNDS).asInt());
+        logCounts.put(LogType.DIDNT_FIND_IT, response.get(CACHE_NOTFOUNDS).asInt());
+        // only current Api
+        logCounts.put(LogType.WILL_ATTEND, response.path(CACHE_WILLATTENDS).asInt());
+        cache.setLogCounts(logCounts);
+
+        if (response.has(CACHE_RATING)) {
+            cache.setRating((float) response.get(CACHE_RATING).asDouble());
+        }
+        cache.setVotes(response.get(CACHE_VOTES).asInt());
+
+        cache.setFavoritePoints(response.get(CACHE_RECOMMENDATIONS).asInt());
+
     }
 
     private static String absoluteUrl(final String url, final String geocode) {
@@ -959,10 +1120,7 @@ final class OkapiClient {
             valueMap.put("exclude_my_own", "true");
             valueMap.put("found_status", "notfound_only");
         }
-        // OKAPI returns ignored caches, we have to actively suppress them
-        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-            valueMap.put("ignored_status", "notignored_only");
-        }
+
         if (Settings.getCacheType() != CacheType.ALL) {
             valueMap.put("type", getFilterFromType());
         }
@@ -976,7 +1134,12 @@ final class OkapiClient {
 
     @NonNull
     private static String getFilterFromType() {
-        switch (Settings.getCacheType()) {
+        return getFilterFromType(Settings.getCacheType());
+    }
+
+    private static String getFilterFromType(final CacheType ct) {
+
+        switch (ct) {
             case EVENT:
                 return "Event";
             case MULTI:

@@ -7,6 +7,8 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Objects;
 
 import okhttp3.HttpUrl;
 import okhttp3.HttpUrl.Builder;
@@ -59,6 +61,16 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
         }
         for (int i = 0; i < keyValues.length; i += 2) {
             add(ImmutablePair.of(keyValues[i], keyValues[i + 1]));
+        }
+        return this;
+    }
+
+    public Parameters removeKey(final String key) {
+        final Iterator<ImmutablePair<String, String>> it = iterator();
+        while (it.hasNext()) {
+            if (Objects.equals(it.next().left, key)) {
+                it.remove();
+            }
         }
         return this;
     }

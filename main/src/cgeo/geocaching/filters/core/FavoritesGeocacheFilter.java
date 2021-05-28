@@ -31,7 +31,7 @@ public  class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     @Override
     public Float getValue(final Geocache cache) {
         if (!percentage) {
-            return (float) cache.getFindsCount();
+            return (float) cache.getFavoritePoints();
         }
         final int rawFindsCount = cache.getFindsCount();
 

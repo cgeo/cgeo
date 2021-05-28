@@ -6,7 +6,6 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.ParserException;
-import cgeo.geocaching.filters.core.AndGeocacheFilter;
 import cgeo.geocaching.filters.core.AttributesGeocacheFilter;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.DifficultyGeocacheFilter;
@@ -14,7 +13,6 @@ import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
-import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
@@ -139,16 +137,10 @@ public class GCMap {
     public static SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
         final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
         search.setOrigin(Sensors.getInstance().currentGeo().getCoords());
+        search.setPage(200, 0);
 
-        final IGeocacheFilter f = filter.getTree();
-        if (f instanceof AndGeocacheFilter) {
-            for (IGeocacheFilter fChild : f.getChildren()) {
-                if (fChild instanceof BaseGeocacheFilter) {
-                    fillForBasicFilter((BaseGeocacheFilter) fChild, search);
-                }
-            }
-        } else if (f instanceof  BaseGeocacheFilter && f.isFiltering()) {
-            fillForBasicFilter((BaseGeocacheFilter) f, search);
+        for (BaseGeocacheFilter baseFilter: filter.getAndChainIfPossible()) {
+            fillForBasicFilter(baseFilter, search);
         }
 
         return GCWebAPI.searchCaches(search);
@@ -198,7 +190,7 @@ public class GCMap {
                 final StatusGeocacheFilter statusFilter = (StatusGeocacheFilter) basicFilter;
                 search.setStatusFound(statusFilter.getStatusFound());
                 search.setStatusOwn(statusFilter.getStatusOwn());
-                search.setStatusEnabled(statusFilter.getStatusDisabled() == null ? null : !statusFilter.getStatusDisabled());
+                search.setStatusEnabled(statusFilter.isExcludeDisabled() ? Boolean.TRUE : (statusFilter.isExcludeActive() ? Boolean.FALSE : null));
                 break;
             case HIDDEN:
                 final HiddenGeocacheFilter hiddenFilter = (HiddenGeocacheFilter) basicFilter;

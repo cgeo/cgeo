@@ -552,10 +552,10 @@
     <string name="cache_filter_status_select_only_found_no">Only Not Found</string>
     <string name="cache_filter_status_select_only_own_yes">Only Owned</string>
     <string name="cache_filter_status_select_only_own_no">Only Not Owned</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Only Disabled</string>
-    <string name="cache_filter_status_select_only_disabled_no">Only Enabled</string>
-    <string name="cache_filter_status_select_only_archived_yes">Only Archived</string>
-    <string name="cache_filter_status_select_only_archived_no">Only Active</string>
+
+    <string name="cache_filter_status_exclude_active">Exclude Active</string>
+    <string name="cache_filter_status_exclude_disabled">Exclude Disabled</string>
+    <string name="cache_filter_status_exclude_archived">Exclude Archived</string>
 
     <string name="cache_filter_log_entry_foundby">Found by:</string>
     <string name="cache_filter_log_entry_logtext">Log text:</string>
@@ -1528,7 +1528,7 @@
     <string name="search_hbu_button">Search by owner name</string>
     <string name="search_filter">Filter (experimental)</string>
     <string name="search_filter_button">Search by Filter</string>
-    <string name="search_filter_info_message">\'Search by filter\' searches caches on online services using a provided filter. Depending on service capability, only part of the filter is executed online, remainder is done by offline filtering.\n\nAll services only support AND filters and no filter inversion.\n\nGeocaching.com supports:\n- name (only whole words, pattern not supported)\n- cache type\n- cache size\n- distance\n- difficulty and terrain\n- favorites (only absolute, only minimum)\n- status (own, found &amp; enabled)\n- hidden by (specify user id exactly)\n- not-found-by (specify user id exactly)\n- placement date\n\nNote that c:geo can specifically not offer attribute filtering since geocaching.com is blocking the required API to us.\n\nNo service beside geocaching.com supported yet.</string>
+    <string name="search_filter_info_message">**Search by filter** searches caches on all active online services (e.g. geocaching.com) using a provided filter. However, search capabilities of these services are usually more limited than filter capabilities of c:geo.\n\n- All services only support AND filters (no OR filters and no filter inversion).\n- The more basic filters like **cache type** or **cache size** are supported by all services. More complicated filters are often not supported or have some restrictions e.g. **favorites** or **hidden date**.\n- A detailed list on supported filters per service can be found [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters not supported by the online service will be applied by c:geo on the received results.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable identification</string>
     <string name="search_tb_button">Search for trackable</string>

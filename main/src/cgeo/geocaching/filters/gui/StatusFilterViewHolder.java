@@ -7,6 +7,7 @@ import cgeo.geocaching.ui.ViewUtils;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import androidx.annotation.StringRes;
@@ -16,8 +17,10 @@ import java.util.List;
 
 public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheFilter> {
 
-    private ToggleButtonGroup statusDisabled = null;
-    private ToggleButtonGroup statusArchived = null;
+    private CheckBox excludeActive = null;
+    private CheckBox excludeDisabled = null;
+    private CheckBox excludeArchived = null;
+
     private ToggleButtonGroup statusOwn = null;
     private ToggleButtonGroup statusFound = null;
 
@@ -27,14 +30,15 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
         final List<Integer> valueWidth = Arrays.asList(null,
-            getMaxWidth(StatusGeocacheFilter.StatusType.FOUND.noId, StatusGeocacheFilter.StatusType.OWN.noId,
-                StatusGeocacheFilter.StatusType.DISABLED.noId, StatusGeocacheFilter.StatusType.ARCHIVED.noId),
-            getMaxWidth(StatusGeocacheFilter.StatusType.FOUND.yesId, StatusGeocacheFilter.StatusType.OWN.yesId,
-            StatusGeocacheFilter.StatusType.DISABLED.yesId, StatusGeocacheFilter.StatusType.ARCHIVED.yesId));
+            getMaxWidth(StatusGeocacheFilter.StatusType.FOUND.noId, StatusGeocacheFilter.StatusType.OWN.noId),
+            getMaxWidth(StatusGeocacheFilter.StatusType.FOUND.yesId, StatusGeocacheFilter.StatusType.OWN.yesId));
         statusFound = createGroup(ll, valueWidth, StatusGeocacheFilter.StatusType.FOUND);
         statusOwn = createGroup(ll, valueWidth, StatusGeocacheFilter.StatusType.OWN);
-        statusDisabled = createGroup(ll, valueWidth, StatusGeocacheFilter.StatusType.DISABLED);
-        statusArchived = createGroup(ll, valueWidth, StatusGeocacheFilter.StatusType.ARCHIVED);
+
+        excludeActive = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_status_exclude_active, R.drawable.ic_menu_myplaces);
+        excludeDisabled = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_status_exclude_disabled, R.drawable.ic_menu_disabled);
+        excludeArchived = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_status_exclude_archived, R.drawable.ic_menu_archived);
+        excludeArchived.setChecked(true);
         return ll;
     }
 
@@ -57,8 +61,9 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
 
     @Override
     public void setViewFromFilter(final StatusGeocacheFilter filter) {
-        setFromBoolean(statusDisabled, filter.getStatusDisabled());
-        setFromBoolean(statusArchived, filter.getStatusArchived());
+        excludeActive.setChecked(filter.isExcludeActive());
+        excludeDisabled.setChecked(filter.isExcludeDisabled());
+        excludeArchived.setChecked(filter.isExcludeArchived());
         setFromBoolean(statusFound, filter.getStatusFound());
         setFromBoolean(statusOwn, filter.getStatusOwn());
     }
@@ -67,8 +72,9 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
     @Override
     public StatusGeocacheFilter createFilterFromView() {
         final StatusGeocacheFilter filter = createFilter();
-        filter.setStatusDisabled(getFromGroup(statusDisabled));
-        filter.setStatusArchived(getFromGroup(statusArchived));
+        filter.setExcludeActive(excludeActive.isChecked());
+        filter.setExcludeDisabled(excludeDisabled.isChecked());
+        filter.setExcludeArchived(excludeArchived.isChecked());
         filter.setStatusFound(getFromGroup(statusFound));
         filter.setStatusOwn(getFromGroup(statusOwn));
         return filter;

@@ -34,11 +34,15 @@ public  class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer>
 
     @Override
     public Integer getValue(final Geocache cache) {
-        if (cache == null || !cache.isDetailed()) {
+        if (cache == null) {
             return null;
         }
 
         final Map<LogType, Integer> logCounts = cache.getLogCounts();
+        if (logCounts.isEmpty() && !cache.inDatabase()) {
+            return null;
+        }
+
         final int sum;
         if (logType == null) {
             sum = getLogCountSum(logCounts, null);
