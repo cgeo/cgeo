@@ -521,8 +521,6 @@
     <string name="init_summary_openlastdetailspage">Detailer opmaachen un der leschter Säit déi besicht gouf</string>
     <string name="init_skin">Helle Skin</string>
     <string name="init_summary_skin">Helle Skin benotzen (Neistart erfuerderlech)</string>
-    <string name="init_transparentBackground">Transparente Hannergrond</string>
-    <string name="init_summary_transparentBackground">Transparente Hannergrond benotzen (Neistart erfuerderlech)</string>
     <string name="init_address">Adress uweisen</string>
     <string name="init_summary_address">Adress uweisen amplaz vun den Koordinaten op mengem Bildschierm</string>
     <string name="init_exclude">Eegen Cachen a Cachen déi ee fonnt huet ausblennen</string>
