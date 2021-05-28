@@ -545,8 +545,6 @@
     <string name="init_summary_openlastdetailspage">打开上次使用页面的详细信息</string>
     <string name="init_skin">浅皮肤</string>
     <string name="init_summary_skin">Use light skin (Restart needed)</string>
-    <string name="init_transparentBackground">透明背景</string>
-    <string name="init_summary_transparentBackground">使用透明背景 (需要重启)</string>
     <string name="init_address">显示地址</string>
     <string name="init_summary_address">在主屏幕上显示地址而不是坐标</string>
     <string name="init_select_language">选择语言</string>
