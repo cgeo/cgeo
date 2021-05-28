@@ -49,9 +49,11 @@ public class MapSettingsUtils {
         showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
 
         final ArrayList<SettingsCheckboxModel> settingsElementsCheckboxes = new ArrayList<>();
-        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_ownfound, R.drawable.ic_menu_myplaces, Settings.isExcludeMyCaches(), Settings::setExcludeMine, true));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_found, R.drawable.ic_menu_myplaces, Settings.isExcludeFound(), Settings::setExcludeFound, true));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_own, R.drawable.ic_menu_circle, Settings.isExcludeMyCaches(), Settings::setExcludeMine, true));
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_disabled, R.drawable.ic_menu_disabled, Settings.isExcludeDisabledCaches(), Settings::setExcludeDisabled, true));
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_archived, R.drawable.ic_menu_archived, Settings.isExcludeArchivedCaches(), Settings::setExcludeArchived, true));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_offlinelog, R.drawable.ic_menu_logic, Settings.isExcludeOfflineLog(), Settings::setExcludeOfflineLog, true));
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showwp_original, R.drawable.ic_menu_waypoint, Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true));
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showwp_parking, R.drawable.ic_menu_parking, Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true));
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showwp_visited, R.drawable.ic_menu_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true));

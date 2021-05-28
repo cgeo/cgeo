@@ -226,9 +226,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
         // backup user settings
         final boolean excludeMine = Settings.isExcludeMyCaches();
         final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
+        final boolean excludeFound = Settings.isExcludeFound();
         try {
             // set up settings required for test
             TestSettings.setExcludeMine(false);
+            TestSettings.setExcludeFound(false);
             TestSettings.setExcludeDisabledCaches(false);
 
             runnable.run();
@@ -236,6 +238,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         } finally {
             // restore user settings
             TestSettings.setExcludeMine(excludeMine);
+            TestSettings.setExcludeFound(excludeFound);
             TestSettings.setExcludeDisabledCaches(excludeDisabled);
         }
     }

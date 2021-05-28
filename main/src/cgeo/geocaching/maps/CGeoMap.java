@@ -1297,9 +1297,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                     //All visible waypoints
                     final CacheType type = Settings.getCacheType();
                     final boolean excludeMine = Settings.isExcludeMyCaches();
+                    final boolean excludeFound = Settings.isExcludeFound();
                     final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
                     final boolean excludeArchived = Settings.isExcludeArchivedCaches();
-                    final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeDisabled, excludeArchived, type);
+                    final boolean excludeOfflineLogs = Settings.isExcludeOfflineLog();
+                    final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLogs, type);
                     MapUtils.filter(waypointsInViewport, true);
                     waypoints.addAll(waypointsInViewport);
                 } else {

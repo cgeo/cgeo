@@ -111,14 +111,17 @@ public class DataStoreTest extends CGeoTestCase {
     // Check that queries don't throw an exception (see issue #1429).
     public static void testLoadWaypoints() {
         final Viewport viewport = new Viewport(new Geopoint(-1, -2), new Geopoint(3, 4));
-        DataStore.loadWaypoints(viewport, false, false, false, CacheType.ALL);
-        DataStore.loadWaypoints(viewport, false, true, false, CacheType.ALL);
-        DataStore.loadWaypoints(viewport, true, false, false, CacheType.ALL);
-        DataStore.loadWaypoints(viewport, true, true, false, CacheType.ALL);
-        DataStore.loadWaypoints(viewport, false, false, false, CacheType.TRADITIONAL);
-        DataStore.loadWaypoints(viewport, false, true, false, CacheType.TRADITIONAL);
-        DataStore.loadWaypoints(viewport, true, false, false, CacheType.TRADITIONAL);
-        DataStore.loadWaypoints(viewport, true, true, false, CacheType.TRADITIONAL);
+        //test all possible parameter combinations7
+        for (int i = 0; i < 64; i++) {
+            final boolean excludeMine = i % 2 == 0;
+            final boolean excludeFound = (i / 2) % 2 == 0;
+            final boolean excludeDisabled = (i / 4) % 2 == 0;
+            final boolean excludeArchived = (i / 8) % 2 == 0;
+            final boolean excludeOfflineLogs = (i / 16) % 2 == 0;
+            final CacheType cacheType = (i / 32) % 2 == 0 ? CacheType.ALL : CacheType.TRADITIONAL;
+
+            DataStore.loadWaypoints(viewport, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLogs, cacheType);
+        }
     }
 
     // Check that saving a cache and trackable without logs works (see #2199)

@@ -558,8 +558,13 @@
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_excludemine"
-                android:summary="@string/init_summary_exclude"
-                android:title="@string/init_exclude" />
+                android:summary="@string/init_summary_exclude_own"
+                android:title="@string/init_exclude_own" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_excludefound"
+                android:summary="@string/init_summary_exclude_found"
+                android:title="@string/init_exclude_found" />
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_excludedisabled"
@@ -570,6 +575,11 @@
                 android:key="@string/pref_excludearchived"
                 android:summary="@string/init_summary_archived"
                 android:title="@string/init_archived" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_excludeofflinelog"
+                android:summary="@string/init_summary_offlinelog"
+                android:title="@string/init_offlinelog" />
         </PreferenceCategory>
     </PreferenceScreen>
 

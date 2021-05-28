@@ -4243,17 +4243,24 @@ public class DataStore {
      */
 
     @NonNull
-    public static Set<Waypoint> loadWaypoints(final Viewport viewport, final boolean excludeMine, final boolean excludeDisabled, final boolean excludeArchived, final CacheType type) {
+    public static Set<Waypoint> loadWaypoints(final Viewport viewport, final boolean excludeMine, final boolean excludeFound, final boolean excludeDisabled, final boolean excludeArchived, final boolean excludeOfflineLogs, final CacheType type) {
         final StringBuilder where = buildCoordinateWhere(dbTableWaypoints, viewport);
-        if (excludeMine) {
+        if (excludeFound) {
             // found will contain the value -1 if cache was logged as DNF. Therefore we can't check if found == 0
             where.append(" AND ").append(dbTableCaches).append(".found != 1");
         }
+        if (excludeMine) {
+            where.append(" AND ").append(dbTableCaches).append(".owner_real <> '" + Settings.getUserName() + "'");
+        }
+
         if (excludeDisabled) {
             where.append(" AND ").append(dbTableCaches).append(".disabled == 0");
         }
         if (excludeArchived) {
             where.append(" AND ").append(dbTableCaches).append(".archived == 0");
+        }
+        if (excludeOfflineLogs) {
+            where.append(" AND NOT EXISTS (SELECT geocode FROM " + dbTableLogsOffline + " WHERE " + dbTableLogsOffline + ".geocode = " + dbTableWaypoints + ".geocode)");
         }
         if (type != CacheType.ALL) {
             where.append(" AND ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');

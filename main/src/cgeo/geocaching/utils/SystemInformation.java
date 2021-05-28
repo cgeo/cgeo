@@ -59,7 +59,7 @@ public final class SystemInformation {
         } else {
             usedDirectionSensor = "magnetometer & accelerometer";
         }
-        final String hideCaches = (Settings.isExcludeMyCaches() ? "own/found " : "") + (Settings.isExcludeDisabledCaches() ? "disabled " : "") + (Settings.isExcludeArchivedCaches() ? "archived" : "");
+        final String hideCaches = (Settings.isExcludeMyCaches() ? "own/ " : "") + (Settings.isExcludeFound() ? "found" : "") + (Settings.isExcludeDisabledCaches() ? "disabled " : "") + (Settings.isExcludeArchivedCaches() ? "archived" : "") + (Settings.isExcludeOfflineLog() ? "offlinelog" : "");
         final String hideWaypoints = (Settings.isExcludeWpOriginal() ? "original " : "") + (Settings.isExcludeWpParking() ? "parking " : "") + (Settings.isExcludeWpVisited() ? "visited" : "");
         final StringBuilder body = new StringBuilder("## System information").append("\n")
             .append("\nc:geo version: ").append(Version.getVersionName(context)).append("\n")

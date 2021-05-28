@@ -748,6 +748,15 @@ public class Settings {
         return getBoolean(R.string.pref_excludemine, false);
     }
 
+    public static boolean isExcludeFound() {
+        return getBoolean(R.string.pref_excludefound, false);
+    }
+
+    public static boolean isExcludeOfflineLog() {
+        return getBoolean(R.string.pref_excludeofflinelog, false);
+    }
+
+
     public static boolean isExcludeDisabledCaches() {
         return getBoolean(R.string.pref_excludedisabled, false);
     }
@@ -1511,6 +1520,14 @@ public class Settings {
 
     public static void setExcludeMine(final boolean exclude) {
         putBoolean(R.string.pref_excludemine, exclude);
+    }
+
+    public static void setExcludeFound(final boolean exclude) {
+        putBoolean(R.string.pref_excludefound, exclude);
+    }
+
+    public static void setExcludeOfflineLog(final boolean exclude) {
+        putBoolean(R.string.pref_excludeofflinelog, exclude);
     }
 
     public static void setExcludeDisabled(final boolean exclude) {
