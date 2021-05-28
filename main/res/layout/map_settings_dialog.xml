@@ -113,16 +113,13 @@
                 app:icon="@drawable/routing_car" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
-        <TextView
-            android:id="@+id/brouter_install"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/routing_tooglegroup"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/map_routing_brouter"
-            android:visibility="gone" />
+        <ImageButton
+            android:id="@+id/routing_info"
+            style="@style/button_icon"
+            android:src="@drawable/ic_info_blue"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/routing_tooglegroup"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <RelativeLayout

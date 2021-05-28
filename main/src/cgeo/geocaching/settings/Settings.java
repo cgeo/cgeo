@@ -1110,6 +1110,10 @@ public class Settings {
         return getBoolean(R.string.pref_brouterAutoTileDownloads, false);
     }
 
+    public static void setBrouterAutoTileDownloads(final boolean value) {
+        putBoolean(R.string.pref_brouterAutoTileDownloads, value);
+    }
+
     public static boolean brouterAutoTileDownloadsNeedUpdate() {
         final long lastCheck = getLong(R.string.pref_brouterAutoTileDownloadsLastCheck, 0);
         if (lastCheck == 0) {
