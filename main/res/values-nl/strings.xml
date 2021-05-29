@@ -507,10 +507,6 @@
     <string name="cache_filter_status_select_only_found_no">Alleen niet gevonden</string>
     <string name="cache_filter_status_select_only_own_yes">Alleen in bezit</string>
     <string name="cache_filter_status_select_only_own_no">Alleen niet in bezit</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Alleen uitgeschakeld</string>
-    <string name="cache_filter_status_select_only_disabled_no">Alleen ingeschakeld</string>
-    <string name="cache_filter_status_select_only_archived_yes">Alleen gearchiveerd</string>
-    <string name="cache_filter_status_select_only_archived_no">Alleen actief</string>
     <string name="cache_filter_log_entry_foundby">Gevonden door:</string>
     <string name="cache_filter_log_entry_logtext">Log tekst:</string>
     <!-- about -->
@@ -1364,7 +1360,6 @@
     <string name="map_as_list">Laat zien als lijst</string>
     <string name="map_select_multiple_items">Selecteer item</string>
     <string name="map_routing">Routering</string>
-    <string name="map_routing_brouter">Routing is alleen beschikbaar als <a href="">BRouter</a> is geïnstalleerd</string>
     <string name="map_gm_autorotation">Automatische kaartrotatie</string>
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
@@ -1390,7 +1385,6 @@
     <string name="search_hbu_button">Zoeken op eigenaar</string>
     <string name="search_filter">Filter (experimenteel)</string>
     <string name="search_filter_button">Zoeken op filter</string>
-    <string name="search_filter_info_message">\'Zoek op filter\' zoek caches op online diensten met het opgegeven filter. Afhankelijk van de servicecapaciteit wordt slechts een deel van het filter online uitgevoerd, de rest wordt gedaan door offline filteren.\n\nAlle diensten ondersteunen alleen EN filters en geen filter inversie.\n\nGeocaching.com ondersteunt:\n- naam (alleen hele woorden, patroon niet ondersteund)\n- cache type\n- cache grootte\n- afstand\n- moeilijkheidsgraad en terrein\n- favorieten (alleen absoluut, alleen minimum)\n- status (eigen, gevonden &amp; ingeschakeld)\n- verborgen door (specificeer exact gebruiker-ID)\n- niet gevonden door (specificeer exact gebruiker-ID)\n- plaatsingsdatum\n\nMerk op dat c:geo specifiek geen attribuut filtering kan aanbieden omdat geocaching.com dit blokkeert in de API voor ons.\n\nEr wordt nog geen dienst naast geocaching.com ondersteund.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable identificatie</string>
     <string name="search_tb_button">Zoeken naar trackable</string>
