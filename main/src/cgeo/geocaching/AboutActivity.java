@@ -1,13 +1,14 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.activity.AVPActivity;
+import cgeo.geocaching.activity.AVPFragment;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.AboutChangesPageBinding;
 import cgeo.geocaching.databinding.AboutContributorsPageBinding;
 import cgeo.geocaching.databinding.AboutLicensePageBinding;
 import cgeo.geocaching.databinding.AboutSystemPageBinding;
 import cgeo.geocaching.databinding.AboutVersionPageBinding;
 import cgeo.geocaching.maps.routing.Routing;
-import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
@@ -25,10 +26,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
 import androidx.core.util.Consumer;
@@ -36,27 +38,163 @@ import androidx.core.util.Consumer;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 import io.noties.markwon.Markwon;
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 
-public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
+public class AboutActivity extends AVPActivity {
 
     private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
 
-    private final GatherSystemInformationTask systemInformationTask = new GatherSystemInformationTask();
+    private static final GatherSystemInformationTask systemInformationTask = new GatherSystemInformationTask();
 
-    class LicenseViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+    private static final int CHANGELOG;
+
+    static {
+        pagesSource.add(new Page(R.string.about_version, VersionViewCreator.class));
+        CHANGELOG = pagesSource.size();
+        pagesSource.add(new Page(R.string.about_changelog, ChangeLogViewCreator.class));
+        pagesSource.add(new Page(R.string.about_system, SystemViewCreator.class));
+        pagesSource.add(new Page(R.string.about_contributors, ContributorsViewCreator.class));
+        pagesSource.add(new Page(R.string.about_license, LicenseViewCreator.class));
+    }
+
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Routing.connect();
+        if (systemInformationTask.getStatus() == AsyncTask.Status.PENDING) {
+            systemInformationTask.execute();
+        }
+
+        int startPage = 0;
+        final Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            startPage = extras.getInt(EXTRA_ABOUT_STARTPAGE, startPage);
+        }
+
+        configure(startPage, getString(R.string.about));
+    }
+
+    @Override
+    protected final String getTitle(final int page) {
+        if (page == 0) {
+            return getResources().getString(R.string.about_version) + " / " + getResources().getString(R.string.about_help);
+        }
+        return super.getTitle(page);
+    }
+
+    static class VersionViewCreator extends AVPFragment {
 
         @Override
-        public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final AboutLicensePageBinding binding = AboutLicensePageBinding.inflate(getLayoutInflater(), parentView, false);
+        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            final Activity activity = activityWeakReference.get();
+            if (activity == null) {
+                return null;
+            }
+            final AboutVersionPageBinding binding = AboutVersionPageBinding.inflate(getLayoutInflater(), container, false);
+            binding.aboutVersionString.setText(Version.getVersionName(activity));
+            setClickListener(binding.donate, "https://www.cgeo.org");
+            if (StringUtils.isNotEmpty(BuildConfig.SPECIAL_BUILD)) {
+                binding.aboutSpecialBuild.setText(BuildConfig.SPECIAL_BUILD);
+                binding.aboutSpecialBuild.setVisibility(View.VISIBLE);
+            }
+            if (StringUtils.isNotEmpty(BuildConfig.BUILD_TYPE)) {
+                //noinspection ConstantConditions
+                if (BuildConfig.BUILD_TYPE.equals("debug")) {
+                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_debug);
+                } else if (BuildConfig.BUILD_TYPE.equals("nightly")) {
+                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_nightly);
+                } else if (BuildConfig.BUILD_TYPE.equals("rc")) {
+                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_rc);
+                }
+            }
+            binding.support.setEnabled(false);
+            systemInformationTask.getSystemInformation(si -> {
+                setClickListener(binding.support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(activity)) +
+                    "&body=" + Uri.encode(si) + "\n");
+                binding.support.setEnabled(true);
+            });
+
+            setClickListener(binding.website, "https://www.cgeo.org/");
+            setClickListener(binding.facebook, "https://www.facebook.com/pages/cgeo/297269860090");
+            setClickListener(binding.fangroup, "https://facebook.com/groups/cgeo.fangruppe");
+            setClickListener(binding.twitter, "https://twitter.com/android_gc");
+            setClickListener(binding.nutshellmanual, "https://manual.cgeo.org/");
+            setClickListener(binding.faq, "https://faq.cgeo.org/");
+            setClickListener(binding.github, "https://github.com/cgeo/cgeo/issues");
+            binding.market.setOnClickListener(v -> ProcessUtils.openMarket(activity, activity.getPackageName()));
+            return binding.getRoot();
+        }
+    }
+
+    static class ChangeLogViewCreator extends AVPFragment {
+
+        @Override
+        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            final Activity activity = activityWeakReference.get();
+            if (activity == null) {
+                return null;
+            }
+            final AboutChangesPageBinding binding = AboutChangesPageBinding.inflate(getLayoutInflater(), container, false);
+            final Markwon markwon = Markwon.create(activity);
+
+            final String changelogMaster = FileUtils.getChangelogMaster(activity);
+            if (StringUtils.isNotBlank(changelogMaster)) {
+                markwon.setMarkdown(binding.changelogMaster, "## " + getString(R.string.about_changelog_nightly_build) + "\n\n" + changelogMaster);
+            } else {
+                binding.changelogMaster.setVisibility(View.GONE);
+            }
+
+            final String versionRelease = FileUtils.getRawResourceAsString(activity, R.raw.version_release).trim();
+            markwon.setMarkdown(binding.changelogRelease, "## " + (StringUtils.isNotBlank(versionRelease) ? versionRelease : getString(R.string.about_changelog_next_release)) + "\n\n" + FileUtils.getChangelogRelease(activity));
+            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(activity, "https://github.com/cgeo/cgeo/blob/master/main/res/raw/changelog_full.md"));
+            return binding.getRoot();
+        }
+    }
+
+    static class SystemViewCreator extends AVPFragment {
+
+        @Override
+        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            final Activity activity = activityWeakReference.get();
+            if (activity == null) {
+                return null;
+            }
+
+            final AboutSystemPageBinding binding = AboutSystemPageBinding.inflate(getLayoutInflater(), container, false);
+            binding.system.setText(R.string.about_system_collecting);
+            binding.copy.setEnabled(false);
+            binding.share.setEnabled(false);
+            systemInformationTask.getSystemInformation(si -> {
+                final Markwon markwon = Markwon.create(activity);
+                markwon.setMarkdown(binding.system, si);
+                binding.copy.setEnabled(true);
+                binding.copy.setOnClickListener(view1 -> {
+                    ClipboardUtils.copyToClipboard(si);
+                    ActivityMixin.showShortToast(activity, getString(R.string.clipboard_copy_ok));
+                });
+                binding.share.setEnabled(true);
+                binding.share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(activity, getString(R.string.about_system_info), si, null, R.string.about_system_info_send_chooser));
+
+            });
+            binding.system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+            binding.system.setTextIsSelectable(true);
+
+            binding.logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(activity));
+            return binding.getRoot();
+        }
+    }
+
+    static class LicenseViewCreator extends AVPFragment {
+
+        @Override
+        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            final AboutLicensePageBinding binding = AboutLicensePageBinding.inflate(getLayoutInflater(), container, false);
             setClickListener(binding.license, "https://www.apache.org/licenses/LICENSE-2.0.html");
             binding.licenseText.setText(getRawResourceString(R.raw.license));
             return binding.getRoot();
@@ -66,7 +204,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             InputStream ins = null;
             Scanner scanner = null;
             try {
-                ins = res.openRawResource(resourceId);
+                ins = getResources().openRawResource(resourceId);
                 scanner = new Scanner(ins, StandardCharsets.UTF_8.name());
                 return scanner.useDelimiter("\\A").next();
             } finally {
@@ -79,12 +217,17 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         }
     }
 
-    class ContributorsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+    static class ContributorsViewCreator extends AVPFragment {
 
         @Override
-        public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final AboutContributorsPageBinding binding = AboutContributorsPageBinding.inflate(getLayoutInflater(), parentView, false);
-            final Markwon markwon = Markwon.create(AboutActivity.this);
+        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            final Activity activity = activityWeakReference.get();
+            if (activity == null) {
+                return null;
+            }
+
+            final AboutContributorsPageBinding binding = AboutContributorsPageBinding.inflate(getLayoutInflater(), container, false);
+            final Markwon markwon = Markwon.create(activity);
 
             markwon.setMarkdown(binding.aboutContributorsRecent, formatContributors(R.string.contributors_recent));
             markwon.setMarkdown(binding.aboutContributorsOthers, formatContributors(R.string.contributors_other));
@@ -145,175 +288,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         }
     }
 
-    class ChangeLogViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
-
-        @Override
-        public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final AboutChangesPageBinding binding = AboutChangesPageBinding.inflate(getLayoutInflater(), parentView, false);
-            final Markwon markwon = Markwon.create(AboutActivity.this);
-
-            final String changelogMaster = FileUtils.getChangelogMaster(AboutActivity.this);
-            if (StringUtils.isNotBlank(changelogMaster)) {
-                markwon.setMarkdown(binding.changelogMaster, "## " + getString(R.string.about_changelog_nightly_build) + "\n\n" + changelogMaster);
-            } else {
-                binding.changelogMaster.setVisibility(View.GONE);
-            }
-
-            final String versionRelease = FileUtils.getRawResourceAsString(AboutActivity.this, R.raw.version_release).trim();
-            markwon.setMarkdown(binding.changelogRelease, "## " + (StringUtils.isNotBlank(versionRelease) ? versionRelease : getString(R.string.about_changelog_next_release)) + "\n\n" + FileUtils.getChangelogRelease(AboutActivity.this));
-            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(AboutActivity.this, "https://github.com/cgeo/cgeo/blob/master/main/res/raw/changelog_full.md"));
-            return binding.getRoot();
-        }
-    }
-
-    class SystemViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
-
-        @Override
-        public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final AboutSystemPageBinding binding = AboutSystemPageBinding.inflate(getLayoutInflater(), parentView, false);
-            binding.system.setText(R.string.about_system_collecting);
-            binding.copy.setEnabled(false);
-            binding.share.setEnabled(false);
-            systemInformationTask.getSystemInformation(si -> {
-                final Markwon markwon = Markwon.create(AboutActivity.this);
-                markwon.setMarkdown(binding.system, si);
-                binding.copy.setEnabled(true);
-                binding.copy.setOnClickListener(view1 -> {
-                    ClipboardUtils.copyToClipboard(si);
-                    showShortToast(getString(R.string.clipboard_copy_ok));
-                });
-                binding.share.setEnabled(true);
-                binding.share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(AboutActivity.this, getString(R.string.about_system_info), si, null, R.string.about_system_info_send_chooser));
-
-            });
-            binding.system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            binding.system.setTextIsSelectable(true);
-
-            binding.logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(AboutActivity.this));
-            return binding.getRoot();
-        }
-    }
-
-    class VersionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
-
-        @Override
-        public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final AboutVersionPageBinding binding = AboutVersionPageBinding.inflate(getLayoutInflater(), parentView, false);
-            binding.aboutVersionString.setText(Version.getVersionName(AboutActivity.this));
-            setClickListener(binding.donate, "https://www.cgeo.org");
-            if (StringUtils.isNotEmpty(BuildConfig.SPECIAL_BUILD)) {
-                binding.aboutSpecialBuild.setText(BuildConfig.SPECIAL_BUILD);
-                binding.aboutSpecialBuild.setVisibility(View.VISIBLE);
-            }
-            if (StringUtils.isNotEmpty(BuildConfig.BUILD_TYPE)) {
-                //noinspection ConstantConditions
-                if (BuildConfig.BUILD_TYPE.equals("debug")) {
-                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_debug);
-                } else if (BuildConfig.BUILD_TYPE.equals("nightly")) {
-                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_nightly);
-                } else if (BuildConfig.BUILD_TYPE.equals("rc")) {
-                    binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_rc);
-                }
-            }
-            binding.support.setEnabled(false);
-            systemInformationTask.getSystemInformation(si -> {
-                setClickListener(binding.support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
-                    "&body=" + Uri.encode(si) + "\n");
-                binding.support.setEnabled(true);
-            });
-
-            setClickListener(binding.website, "https://www.cgeo.org/");
-            setClickListener(binding.facebook, "https://www.facebook.com/pages/cgeo/297269860090");
-            setClickListener(binding.fangroup, "https://facebook.com/groups/cgeo.fangruppe");
-            setClickListener(binding.twitter, "https://twitter.com/android_gc");
-            setClickListener(binding.nutshellmanual, "https://manual.cgeo.org/");
-            setClickListener(binding.faq, "https://faq.cgeo.org/");
-            setClickListener(binding.github, "https://github.com/cgeo/cgeo/issues");
-            binding.market.setOnClickListener(v -> ProcessUtils.openMarket(AboutActivity.this, getPackageName()));
-            return binding.getRoot();
-        }
-    }
-
-    enum Page {
-        VERSION(R.string.about_version),
-        CHANGELOG(R.string.about_changelog),
-        SYSTEM(R.string.about_system),
-        CONTRIBUTORS(R.string.about_contributors),
-        LICENSE(R.string.about_license);
-
-        @StringRes
-        private final int resourceId;
-
-        Page(@StringRes final int resourceId) {
-            this.resourceId = resourceId;
-        }
-    }
-
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setThemeAndContentView(R.layout.viewpager_activity);
-
-        Routing.connect();
-        systemInformationTask.execute();
-
-        int startPage = Page.VERSION.ordinal();
-        final Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            startPage = extras.getInt(EXTRA_ABOUT_STARTPAGE, startPage);
-        }
-        createViewPager(startPage, position -> setTitle(res.getString(R.string.about) + " - " + getTitle(Page.values()[position])));
-        reinitializeViewPager();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Routing.disconnect();
-        super.onDestroy();
-        systemInformationTask.onDestroy();
-    }
-
-    public final void setClickListener(final View view, final String url) {
-        view.setOnClickListener(v -> ShareUtils.openUrl(this, url));
-    }
-
-    @Override
-    protected final AbstractViewPagerActivity.PageViewCreator createViewCreator(final Page page) {
-        switch (page) {
-            case VERSION:
-                return new VersionViewCreator();
-            case CHANGELOG:
-                return new ChangeLogViewCreator();
-            case SYSTEM:
-                return new SystemViewCreator();
-            case CONTRIBUTORS:
-                return new ContributorsViewCreator();
-            case LICENSE:
-                return new LicenseViewCreator();
-        }
-        throw new IllegalStateException(); // cannot happen, when switch case is enum complete
-    }
-
-    @Override
-    protected final String getTitle(final Page page) {
-        if (page == Page.VERSION) {
-            return res.getString(R.string.about_version) + " / " + res.getString(R.string.about_help);
-        }
-        return res.getString(page.resourceId);
-    }
-
-    @Override
-    protected final Pair<List<? extends Page>, Integer> getOrderedPages() {
-        final List<Page> pages = Arrays.asList(Page.values());
-        return new ImmutablePair<>(pages, 0);
-    }
-
-    public static void showChangeLog(final Activity fromActivity) {
-        final Intent intent = new Intent(fromActivity, AboutActivity.class);
-        intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.CHANGELOG.ordinal());
-        fromActivity.startActivity(intent);
-    }
-
     private static class GatherSystemInformationTask extends AsyncTask<Void, Void, String> {
 
         private final Object mutex = new Object();
@@ -355,4 +329,19 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             }
         }
     }
+
+    public static void showChangeLog(final Activity fromActivity) {
+        final Intent intent = new Intent(fromActivity, AboutActivity.class);
+        intent.putExtra(EXTRA_ABOUT_STARTPAGE, CHANGELOG);
+        fromActivity.startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        Routing.disconnect();
+        super.onDestroy();
+        systemInformationTask.onDestroy();
+    }
+
 }
+
