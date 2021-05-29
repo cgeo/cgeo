@@ -507,10 +507,6 @@
     <string name="cache_filter_status_select_only_found_no">Apenas Não Encontradas</string>
     <string name="cache_filter_status_select_only_own_yes">Apenas Próprias</string>
     <string name="cache_filter_status_select_only_own_no">Apenas de Outros</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Apenas Desactivadas</string>
-    <string name="cache_filter_status_select_only_disabled_no">Apenas Activas</string>
-    <string name="cache_filter_status_select_only_archived_yes">Apenas Arquivadas</string>
-    <string name="cache_filter_status_select_only_archived_no">Apenas Não arquivadas</string>
     <string name="cache_filter_log_entry_foundby">Encontrada por:</string>
     <string name="cache_filter_log_entry_logtext">Texto de registo:</string>
     <!-- about -->
@@ -1363,7 +1359,6 @@
     <string name="map_live_disable">Desactivar em tempo real</string>
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar item</string>
-    <string name="map_routing_brouter">O encaminhamento só está disponível se <a href="">BRouter</a> estiver instalado</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
@@ -1389,7 +1384,6 @@
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_filter">Filtro (experimental)</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
-    <string name="search_filter_info_message">\'Pesquisar por filtro\' procura caches nos serviços online usando um filtro fornecido. Dependendo da capacidade do serviço, apenas parte do filtro é executada on-line, o restante é feito por filtragem off-line.\n\nTodos os serviços só suportam filtros AND e sem inversão de filtro.\n\nGeocaching.com suporta:\n- Nome (apenas palavras completas, Modelo não suportado)\n- Tipo de Cache\n- Tamanho de Cache\n- Distância\nDificuldade e Terreno\n- Favoritos (apenas absoluto, apenas mínimo)\n- Estado (Própria, Encontrada &amp; habilitada)\n- Escondida por (especificar exactamente a id do utilizador)\n- Não-Encontrada por (especificar exactamente a id do utilizador)\n- Data de colocação\n\nNote que o c:geo não pode oferecer especificamente a filtragem de Atributos, uma vez que Geocaching.com está a bloquear-nos a API necessária.\n\nAinda não há suporte para além do Geocaching.com.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
