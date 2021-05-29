@@ -505,10 +505,9 @@
     <string name="cache_filter_status_select_only_found_no">찾지 않은 캐시만</string>
     <string name="cache_filter_status_select_only_own_yes">소유의 캐시만</string>
     <string name="cache_filter_status_select_only_own_no">소유하지 않은 캐시만</string>
-    <string name="cache_filter_status_select_only_disabled_yes">일시정지된 캐시만</string>
-    <string name="cache_filter_status_select_only_disabled_no">활성화된 캐시만</string>
-    <string name="cache_filter_status_select_only_archived_yes">영구보관된 캐시만</string>
-    <string name="cache_filter_status_select_only_archived_no">활성화된 캐시만</string>
+    <string name="cache_filter_status_exclude_active">활성캐시 제외</string>
+    <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
+    <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
     <string name="cache_filter_log_entry_foundby">찾은 사용자:</string>
     <string name="cache_filter_log_entry_logtext">로그 내용:</string>
     <!-- about -->
@@ -1352,7 +1351,8 @@
     <string name="map_as_list">목록으로 보기</string>
     <string name="map_select_multiple_items">항목 선택</string>
     <string name="map_routing">길찾기</string>
-    <string name="map_routing_brouter">라우팅은 <a href="">BRouter</a>가 설치된 경우에만 사용할 수 있습니다.</string>
+    <string name="map_routing_activate_title">라우팅 활성화</string>
+    <string name="map_routing_activate">라우팅 엔진이 활성화되어 있지 않기 때문에 일부 라우팅 모드는 현재 사용할 수 없습니다.\n\nc:geo의 내부 라우팅 엔진을 활성화하고 라우팅 데이터를 다운로드 하시겠습니까?</string>
     <string name="map_gm_autorotation">지도 자동 회전</string>
     <string name="map_gm_autorotation_disable">지도 자동 회전을 끄시겠습니까?\n\n지도 회전 메뉴를 사용하여 다시 켜질 수 있습니다</string>
     <string name="quick_settings">빠른 설정</string>
@@ -1378,7 +1378,7 @@
     <string name="search_hbu_button">소유주로 검색</string>
     <string name="search_filter">필터 (실험용)</string>
     <string name="search_filter_button">필터로 검색</string>
-    <string name="search_filter_info_message">\'필터로 검색\'은 제공된 필터를 사용하여 온라인 서비스에서 캐시를 검색합니다. 서비스 기능에 따라 필터의 일부만 온라인으로 실행되고 나머지는 오프라인 필터링으로 실행됩니다.\n\n모든 서비스는 AND 필터 만 지원하고 필터 반전은 지원하지 않습니다.\n\nGeocaching.com은 다음을 지원합니다.\n- 이름 (전체 단어 만, 패턴은 지원되지 않음)\n- 캐시 유형\n- 캐시 크기\n- 거리\n난이도 및 지형\n- 호감점수 (절대, 최소만)\n- 상태 (소유, 찾음 및 활성화됨)\n- 숨김 (정확히 사용자 ID 지정)\n- 찾을 수 없음 (정확히 사용자 ID 지정)\n- 숨긴 날짜\n\nGeocaching.com이 우리에게 필요한 API를 차단하고 있기 때문에 c:geo는 특별히 속성 필터링을 제공 할 수 없습니다.\n\nGeocaching.com을 제외한 어떤 서비스도 아직 지원하지 않습니다.</string>
+    <string name="search_filter_info_message">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
     <string name="search_tb">추적아이템</string>
     <string name="search_tb_hint">추적 코드</string>
     <string name="search_tb_button">추적아이템 검색</string>
