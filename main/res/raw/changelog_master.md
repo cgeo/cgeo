@@ -6,6 +6,7 @@
 
 ### Map
 - New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
+- Change: Additionally show cache name in poup details
 
 ### Cache details
 - New: Make use of google translate in-app translation popup
