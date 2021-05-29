@@ -1837,6 +1837,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="localfile_cannot_handle">ファイルの読み取りエラー、またはc:geoはこのファイルタイプを処理できません</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">ファイルのダウンロード</string>
+    <string name="receivedownload_receiving_file">ファイル「%s」をダウンロード中</string>
     <string name="receivedownload_success">ファイルを「%s」として保存しました</string>
     <string name="receivedownload_error">ファイルのダウンロード中にエラーが発生しました</string>
     <string name="receivedownload_error_io_exception">ファイルのダウンロード中にI/Oエラーが発生しました。フォルダ「%s」は書き込み可能ですか？</string>
@@ -1844,6 +1845,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="receivedownload_alreadyexists">同名ファイルが既にあります。上書きしますか? または別名(連番を付加)で保存しますか?</string>
     <string name="receivedownload_option_overwrite">上書き保存</string>
     <string name="receivedownload_option_differentname">別名で保存</string>
+    <string name="receivedownload_amount_copied">%sをコピーしました</string>
     <string name="receivedownload_cancelled">ファイル転送がキャンセルされました</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">オフライン用に地図をダウンロード</string>
