@@ -25,6 +25,7 @@ This changelog contains all changes which are not intermediate developing steps.
 ### Map
 - New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
 - New: Map quick settings: Offer to activate integrated routing engine if no routing is available currently (use "i" icon)
+- Change: Additionally show cache name in poup details
 
 ### Cache details
 - New: Make use of google translate in-app translation popup
@@ -35,9 +36,11 @@ This changelog contains all changes which are not intermediate developing steps.
 - Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
 
 ### Other
+- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
 - New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
 - New: Ignore capability for geocaching.su
 - New: Support exporting/importig assigned emoji in GPX
+- Change: Removed BRouter from wizard's advanced settings page and added activation of integrated routing engine instead
 - Change: Removed no longer maintained RMAPS navigation app
 - Fix: Enable editing of imported waypoints with empty coordinates
 
