@@ -1240,7 +1240,6 @@
     <string name="map_live_disable">Désactiver Temps réel</string>
     <string name="map_as_list">Lister les caches</string>
     <string name="map_select_multiple_items">Sélectionner l\'élément</string>
-    <string name="map_routing_brouter">La navigation nécessite que <a href="">BRouter</a> soit installé</string>
     <string name="map_gm_autorotation">Rotation automatique de la carte</string>
     <string name="map_gm_autorotation_disable">Désactiver la rotation automatique de la carte ?\n\nVous pourrez l\'activer à nouveau depuis le menu Rotation de la carte</string>
     <string name="quick_settings">Paramètres rapides</string>
