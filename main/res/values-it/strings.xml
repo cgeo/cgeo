@@ -457,10 +457,6 @@
     <string name="cache_filter_status_select_only_found_no">Solo Non Trovati</string>
     <string name="cache_filter_status_select_only_own_yes">Solo Posseduti</string>
     <string name="cache_filter_status_select_only_own_no">Solo Non Posseduti</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Solo Disabilitati</string>
-    <string name="cache_filter_status_select_only_disabled_no">Solo Abilitati</string>
-    <string name="cache_filter_status_select_only_archived_yes">Solo Archiviati</string>
-    <string name="cache_filter_status_select_only_archived_no">Solo Attivi</string>
     <!-- about -->
     <string name="about_version">Versione</string>
     <string name="about_changelog">Modifiche</string>
@@ -1307,7 +1303,6 @@
     <string name="map_live_disable">Disattiva live</string>
     <string name="map_as_list">Mostra lista dei cache</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
-    <string name="map_routing_brouter">Routing è disponibile solo se <a href="">BRouter</a> è installato</string>
     <string name="map_gm_autorotation">Rotazione automatica mappa</string>
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
