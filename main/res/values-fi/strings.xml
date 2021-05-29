@@ -467,7 +467,11 @@
     <string name="cache_filter_favorites">Suosikit</string>
     <string name="cache_filter_distance">Etäisyys</string>
     <string name="cache_filter_hidden">Piilotuspäivä</string>
+    <string name="cache_filter_logs_count">Lokien määrä</string>
+    <string name="cache_filter_last_found">Viimeisimmän löydön päivämäärä</string>
+    <string name="cache_filter_log_entry">Lokikirjaus</string>
     <string name="cache_filtergroup_basic">Perus</string>
+    <string name="cache_filtergroup_details">Yksityiskohdat</string>
     <string name="cache_filtergroup_userspecific">Käyttäjäkohtainen</string>
     <string name="cache_filter_include">Sisällytä</string>
     <string name="cache_filter_exclude">Rajaa pois</string>
@@ -503,10 +507,11 @@
     <string name="cache_filter_status_select_only_found_no">Vain Ei Löytynyt</string>
     <string name="cache_filter_status_select_only_own_yes">Vain Omat</string>
     <string name="cache_filter_status_select_only_own_no">Vain Ei-Omat</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Vain Pois Käytöstä</string>
-    <string name="cache_filter_status_select_only_disabled_no">Vain Käytössä</string>
-    <string name="cache_filter_status_select_only_archived_yes">Vain Arkistoitu</string>
-    <string name="cache_filter_status_select_only_archived_no">Vain Aktiivinen</string>
+    <string name="cache_filter_status_exclude_active">Rajaa pois aktiiviset</string>
+    <string name="cache_filter_status_exclude_disabled">Rajaa pois hyllytetyt</string>
+    <string name="cache_filter_status_exclude_archived">Rajaa pois arkistoidut</string>
+    <string name="cache_filter_log_entry_foundby">Löytänyt:</string>
+    <string name="cache_filter_log_entry_logtext">Lokiteksti:</string>
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
@@ -1357,7 +1362,9 @@
     <string name="map_live_disable">Poista live</string>
     <string name="map_as_list">Näytä luettelona</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
-    <string name="map_routing_brouter">Reititys on käytettävissä vain <a href="">BRouter</a>in ollessa asennettuna</string>
+    <string name="map_routing">Reititys</string>
+    <string name="map_routing_activate_title">Ota reititys käyttöön</string>
+    <string name="map_routing_activate">Joitakin reititystiloja ei ole tällä hetkellä saatavilla, koska reititysmoottori ei ole käytössä.\n\nHaluatko aktivoida c:geon sisäisen reititysmoottorin ja reititystietojen lataamisen?</string>
     <string name="map_gm_autorotation">Kartan automaattinen kääntö</string>
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <string name="quick_settings">Pika-asetukset</string>
@@ -1383,7 +1390,7 @@
     <string name="search_hbu_button">Hae omistajan nimellä</string>
     <string name="search_filter">Suodatin (kokeellinen)</string>
     <string name="search_filter_button">Etsi suodattimella</string>
-    <string name="search_filter_info_message">\'Etsi suodattimella\' etsii kätköjä verkkopalveluista käyttäen tarjottua suodatinta. Palveluominaisuuksista riippuen vain osa suodatinta suoritetaan verkossa, loput tehdään offline-suodatuksella.\n\nKaikki palvelut tukevat vain JA-suodattimia, mutta ei käänteistä suodatusta.\n\nGeocaching.com tukee:\n- nimi (vain kokonaiset sanat, kuvio ei ole tuettu)\n- kätkötyyppi\n- kätkön koko\n- etäisyys\n- vaikeus ja maasto\n- suosikit (vain absoluuttinen, vain vähintään)\n- tila (oma, löytyi &amp; käytössä)\n- piilotettu (määritä käyttäjätunnus tarkalleen)\n- (joku) ei löytänyt (määritä käyttäjätunnus tarkalleen)\n- piilotuspäivä\n\nHuomaa, että c:geo ei voi tarjota suodatusta attribuutin mukaan, koska geocaching.com estää meiltä vaaditun API:n käytön.\n\nMuita kuin Geocaching.com-palvelua ei vielä tueta.</string>
+    <string name="search_filter_info_message">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_tb">Reissaaja</string>
     <string name="search_tb_hint">Reissaajan koodi</string>
     <string name="search_tb_button">Etsi reissaajia</string>
