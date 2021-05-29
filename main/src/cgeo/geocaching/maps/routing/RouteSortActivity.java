@@ -78,7 +78,7 @@ public class RouteSortActivity extends AbstractActivity {
                 if (null == convertView) {
                     v = getLayoutInflater().inflate(R.layout.twotexts_button_image_item, parent, false);
                     ((ImageButton) v.findViewById(R.id.button_left)).setImageResource(R.drawable.ic_menu_delete);
-                    ((ImageView) v.findViewById(R.id.img_right)).setImageResource(Settings.isLightSkin() ? R.drawable.ic_menu_reorder_black : R.drawable.ic_menu_reorder);
+                    ((ImageView) v.findViewById(R.id.img_right)).setImageResource(R.drawable.ic_menu_reorder);
                 }
 
                 final RouteItem routeItem = routeItems.get(position);
