@@ -561,8 +561,6 @@
     <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
     <string name="init_skin">Light skin</string>
     <string name="init_summary_skin">Użyj light skin\n(wymaga restartu)</string>
-    <string name="init_transparentBackground">Przezroczyste tło</string>
-    <string name="init_summary_transparentBackground">Użyj przezroczystego tła (wymagany restart)</string>
     <string name="init_address">Pokaż adres</string>
     <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
     <string name="init_select_language">Wybierz język</string>
@@ -597,7 +595,6 @@
     <string name="init_summary_archived">Wyklucz zarchiwizowane skrzynki</string>
     <string name="init_global_wp_extraction_disable">Wyłącz ekstrakcję punktu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacyjnych z osobistych notatek w skrytce. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki</string>
-    <string name="init_customtabs_as_browser">Użyj widoku internetowego Chrome</string>
     <string name="init_summary_customtabs_as_browser">Witryny zewnętrzne będą wyświetlane bez opuszczania c:geo (możliwe tylko, jeśli jest zainstalowany Chrome)</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
@@ -1274,7 +1271,6 @@
     <string name="map_live_disable">Wyłącz online</string>
     <string name="map_as_list">Pokaż w postaci listy</string>
     <string name="map_select_multiple_items">Wybierz element</string>
-    <string name="map_routing">Prowadzenie (Obecnie:%s)</string>
     <string name="map_routing_brouter">Routing jest dostępny tylko wtedy, gdy zainstalowany jest <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczną rotację mapy?\n\nMożesz włączyć ją ponownie za pomocą menu rotacji mapy</string>

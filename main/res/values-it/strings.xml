@@ -612,8 +612,6 @@
     <string name="init_summary_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
     <string name="init_skin">Tema chiaro</string>
     <string name="init_summary_skin">Usa tema chiaro\n(richiede riavvio di c:geo)</string>
-    <string name="init_transparentBackground">Sfondo trasparente</string>
-    <string name="init_summary_transparentBackground">Usa sfondo trasparente (necessario riavvio)</string>
     <string name="init_address">Visualizza indirizzo</string>
     <string name="init_summary_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
     <string name="init_select_language">Seleziona lingua</string>
@@ -648,7 +646,6 @@
     <string name="init_summary_archived">Escludi cache archiviati</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
-    <string name="init_customtabs_as_browser">Usa Chrome webview</string>
     <string name="init_summary_customtabs_as_browser">I siti web esterni saranno visualizzati senza lasciare c:geo (possibile solo se Chrome è installato)</string>
     <string name="init_save_log_img">Salva immagini</string>
     <string name="init_summary_save_log_img">Salva immagini contenute nei log</string>
@@ -1310,7 +1307,6 @@
     <string name="map_live_disable">Disattiva live</string>
     <string name="map_as_list">Mostra lista dei cache</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
-    <string name="map_routing">Percorso (Attualmente: %s)</string>
     <string name="map_routing_brouter">Routing è disponibile solo se <a href="">BRouter</a> è installato</string>
     <string name="map_gm_autorotation">Rotazione automatica mappa</string>
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>

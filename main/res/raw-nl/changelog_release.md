@@ -1,10 +1,10 @@
 ### Cache details
 
 
-### Map
+### Kaart
 
 
-### Integrated routing engine
+### Geïntegreerde routeplanner
 
 
 ### Other

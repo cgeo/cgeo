@@ -11,11 +11,12 @@
 - Novo: Utilização do Google Tradutor numa janela pop-up de tradução
 - Novo: Permite a alteração do ícone atribuído, ao tocar sem soltar sobre o nome da cache, na janela pop-up (apenas em caches armazenadas)
 
-### Downloader
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+### Gestor de Transferências
+- Alteração: Os ficheiros transferidos com sucesso irão substituir automaticamente os ficheiros já existentes com o mesmo nome
+- Alteração: Se um mapa requer um determinado tema que ainda não esteja instalado, o c:geo também descarregará e instalará esse tema automaticamente
 
-### Other
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### Outro
+- Alteração: Reformulámos completamente os aspectos técnicos internos de personalização do c:geo para podermos usar alguns componentes mais modernos fornecidos pelo Android. Isto terá efeitos colaterais, alguns dos quais não intencionais. Por favor, reporte quaisquer erros ou falhas na nossa [página do GitHub](https://www.github.com/cgeo/cgeo/issues) ou entre em contacto com o suporte.
+- Novo: Transferir as listas de geocaching.com - consulte "Listas / pocket queries" no menu principal
+- Novo: Ignorar a capacidade para geocaching.su
+- Alteração: Removida a aplicação de navegação RMAPS, já sem manutenção

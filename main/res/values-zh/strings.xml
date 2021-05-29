@@ -545,8 +545,6 @@
     <string name="init_summary_openlastdetailspage">打开上次使用页面的详细信息</string>
     <string name="init_skin">浅皮肤</string>
     <string name="init_summary_skin">Use light skin (Restart needed)</string>
-    <string name="init_transparentBackground">透明背景</string>
-    <string name="init_summary_transparentBackground">使用透明背景 (需要重启)</string>
     <string name="init_address">显示地址</string>
     <string name="init_summary_address">在主屏幕上显示地址而不是坐标</string>
     <string name="init_select_language">选择语言</string>
@@ -573,7 +571,6 @@
     <string name="init_summary_archived">排除已存档藏点</string>
     <string name="init_global_wp_extraction_disable">禁用航点提取功能</string>
     <string name="init_summary_global_wp_extraction_disable">全局禁用从个人藏点笔记中提取的航点。对于单个藏点，仍然可以通过取消选择个人藏点笔记下面的复选框来启用。</string>
-    <string name="init_customtabs_as_browser">使用 Chrome 网络视图</string>
     <string name="init_summary_customtabs_as_browser">将会显示外部网站而不离开 c:geo (只有安装 Chrome 时才可能)</string>
     <string name="init_save_log_img">保存图片</string>
     <string name="init_summary_save_log_img">保存日志中的图片</string>

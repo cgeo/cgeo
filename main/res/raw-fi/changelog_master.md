@@ -16,6 +16,7 @@
 - Muutos: Jos kartta vaatii tietyn teeman, jota ei ole vielä asennettu, c:geo lataa ja asentaa teeman automaattisesti
 
 ### Muut
-- Uusi: Lataa kirjanmerkkilistat geocaching.comista - katso "Listat / Pocket Queryt" päävalikosta
+- Muutos: Olemme täysin luoneet uudelleen sisäisiä c:geon teemojen muodostuksen teknisiä ratkaisuja, jotta voimme paremmin hyödyntää Androidin moderneja komponentteja. Tämä aiheuttaa joitakin sivuvaikutuksia, joista osa on tahattomia. Ilmoita virheistä tai bugeista [GitHub-sivullamme](https://www.github.com/cgeo/cgeo/issues) tai ottamalla yhteyttä tukeen.
+- Uusi: Lataa kirjanmerkkilistat geocaching.comista - katso "Listat / pocket queryt" päävalikosta
 - Uusi: Poistetaan geocaching.su:n käyttö
 - Muutos: Poistettu RMAPS navigointisovellus, jota ei ole enää pidetty yllä

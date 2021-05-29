@@ -1,10 +1,10 @@
-### Cache details
+### 캐시 상세정보
 
 
-### Map
+### 지도
 
 
-### Integrated routing engine
+### 통합 라우팅 엔진
 
 
-### Other
+### 추가 사항

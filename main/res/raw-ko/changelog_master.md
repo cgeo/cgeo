@@ -11,11 +11,12 @@
 - 신규: 구글 번역 인앱 번역 팝업 사용
 - 신규: 긴 클릭을 통해 캐시 세부 사항 팝업에서 할당 된 아이콘 변경 허용 (저장된 캐시 만 해당)
 
-### Downloader
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+### 다운로더
+- 변경: 성공적으로 다운로드된 파일은 동일한 이름을 가진 기존 파일을 자동으로 덮어 씁니다.
+- 변경: 지도에 아직 설치되지 않은 특정 테마가 필요한 경우 c:geo는 해당 테마도 자동으로 다운로드하여 설치합니다.
 
-### Other
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### 추가 사항
+- 변경: Android에서 제공하는 최신 구성 요소를 사용할 수 있도록 내부 기술 측면 c:geo 테마를 완전히 재 작업했습니다. 이것은 몇 가지 부작용이 있을 것이며 일부는 의도하지 않은 것입니다. [GitHub 페이지](https://www.github.com/cgeo/cgeo/issues) 또는 지원팀에 문의하여 오류나 결함을 신고 해주세요.
+- 신규: geocaching.com에서 북마크 목록 다운로드 - 메인 메뉴의 "목록/포켓 쿼리" 참조
+- 신규: geocaching.su에 대한 기능 무시
+- 변경: 더 이상 유지 관리되지 않는 RMAPS 탐색 앱 제거

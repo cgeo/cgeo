@@ -447,10 +447,12 @@
     <string name="cache_filter_mode_advanced">Edistynyt</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Vaihda perustilaan</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Vaihtaminen \'Perus\' -tilaan johtaa suodattimen asetusten menetykseen. Haluatko jatkaa?</string>
+    <string name="cache_filter_add_button">Lisää suodatinkriteeri</string>
     <string name="cache_filter_option_and_or">Käytä TAI:ta JA:n sijaan</string>
     <string name="cache_filter_option_inverse">Käänteinen suodatin</string>
     <string name="cache_filter_option_include_inconclusive">Sisällytä epävarmat osumat</string>
     <string name="cache_filter_option_include_inconclusive_info">Sisällytä ne kätköt, joissa suodattimen valittu tieto ei ole saatavilla.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Napauta \'Lisää suodatinkriteeri\' -nappia yllä lisätäksesi suodattimen</string>
     <string name="cache_filter_name">Kätkön nimi</string>
     <string name="cache_filter_type">Kätkötyyppi</string>
     <string name="cache_filter_size">Kätkön koko</string>
@@ -465,6 +467,8 @@
     <string name="cache_filter_favorites">Suosikit</string>
     <string name="cache_filter_distance">Etäisyys</string>
     <string name="cache_filter_hidden">Piilotuspäivä</string>
+    <string name="cache_filtergroup_basic">Perus</string>
+    <string name="cache_filtergroup_userspecific">Käyttäjäkohtainen</string>
     <string name="cache_filter_include">Sisällytä</string>
     <string name="cache_filter_exclude">Rajaa pois</string>
     <string name="cache_filter_userdisplay_complex">Monimutkainen</string>
@@ -532,6 +536,7 @@
     <string name="about_contributors_carnerodetails">c:geon luojana</string>
     <string name="about_contributors_recent">Viimeisimmät avustajat</string>
     <string name="about_contributors_specialthanks">Erikoiskiitokset</string>
+    <string name="about_contributors_specialthanksdetails">- kaikki kääntäjämme [Crowdin.net](https://crowdin.net/project/cgeo)-sivustolla!\n- kaikki ongelmien ilmoittajat\n- ja kaikki muut tukijat.\n</string>
     <string name="about_contributors_other">Muut avustajat</string>
     <string name="about_components">Komponentit</string>
     <string name="contribution_code">koodi</string>
@@ -656,8 +661,6 @@
     <string name="init_summary_openlastdetailspage">Avaa viimeksi avattujen sivujen lisätiedot</string>
     <string name="init_skin">Vaalea sävy</string>
     <string name="init_summary_skin">Muuta sävy vaaleaksi (uudelleenkäynnistys tarvitaan)</string>
-    <string name="init_transparentBackground">Läpinäkyvä tausta</string>
-    <string name="init_summary_transparentBackground">Käytä läpinäkyvää taustaa (uudelleenkäynnistys vaaditaan)</string>
     <string name="init_address">Näytä osoite</string>
     <string name="init_summary_address">Näytä osoite koordinaattien sijaan pääsivulla</string>
     <string name="init_select_language">Valitse kieli</string>
@@ -692,7 +695,7 @@
     <string name="init_summary_archived">Älä näytä arkistoituja kätköjä</string>
     <string name="init_global_wp_extraction_disable">Poista reittipisteen nouto käytöstä</string>
     <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
-    <string name="init_customtabs_as_browser">Käytä Chromen sisäistä selainta</string>
+    <string name="init_customtabs_as_browser">Käytä Chrome WebViewiä</string>
     <string name="init_summary_customtabs_as_browser">Ulkoiset sivustot näytetään poistumatta c:geosta (mahdollista vain, jos Chrome on asennettu)</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
@@ -1354,7 +1357,6 @@
     <string name="map_live_disable">Poista live</string>
     <string name="map_as_list">Näytä luettelona</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
-    <string name="map_routing">Reititys (Nykyinen: %s)</string>
     <string name="map_routing_brouter">Reititys on käytettävissä vain <a href="">BRouter</a>in ollessa asennettuna</string>
     <string name="map_gm_autorotation">Kartan automaattinen kääntö</string>
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
@@ -1381,6 +1383,7 @@
     <string name="search_hbu_button">Hae omistajan nimellä</string>
     <string name="search_filter">Suodatin (kokeellinen)</string>
     <string name="search_filter_button">Etsi suodattimella</string>
+    <string name="search_filter_info_message">\'Etsi suodattimella\' etsii kätköjä verkkopalveluista käyttäen tarjottua suodatinta. Palveluominaisuuksista riippuen vain osa suodatinta suoritetaan verkossa, loput tehdään offline-suodatuksella.\n\nKaikki palvelut tukevat vain JA-suodattimia, mutta ei käänteistä suodatusta.\n\nGeocaching.com tukee:\n- nimi (vain kokonaiset sanat, kuvio ei ole tuettu)\n- kätkötyyppi\n- kätkön koko\n- etäisyys\n- vaikeus ja maasto\n- suosikit (vain absoluuttinen, vain vähintään)\n- tila (oma, löytyi &amp; käytössä)\n- piilotettu (määritä käyttäjätunnus tarkalleen)\n- (joku) ei löytänyt (määritä käyttäjätunnus tarkalleen)\n- piilotuspäivä\n\nHuomaa, että c:geo ei voi tarjota suodatusta attribuutin mukaan, koska geocaching.com estää meiltä vaaditun API:n käytön.\n\nMuita kuin Geocaching.com-palvelua ei vielä tueta.</string>
     <string name="search_tb">Reissaaja</string>
     <string name="search_tb_hint">Reissaajan koodi</string>
     <string name="search_tb_button">Etsi reissaajia</string>

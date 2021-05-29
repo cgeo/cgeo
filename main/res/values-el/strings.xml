@@ -34,17 +34,27 @@
     <string name="advlab">Cache Εργαστηρίου Περιπέτειας</string>
     <string name="userdefined">Κρύπτη ορισμένη από τον χρήστη</string>
     <string name="unknown">Άγνωστος τύπος</string>
+    <string name="all_types_short">Όλες</string>
+    <string name="traditional_short">Κλασσικές</string>
+    <string name="multi_short">Πολλαπλές</string>
     <string name="mystery_short">Μυστηρίου</string>
     <string name="letterbox_short">Letterbox</string>
+    <string name="event_short">Εκδήλωσεις</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">earth</string>
     <string name="cito_short">CITO</string>
     <string name="webcam_short">Webcam</string>
+    <string name="virtual_short">Εικονικές</string>
     <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Κοινότητας</string>
     <string name="ape_short">APE</string>
     <string name="gchq_short">GC HQ</string>
     <string name="gchqceleb_short">GC HQ Cel</string>
     <string name="gps_short">Έκθεση GPS</string>
     <string name="block_short">Μπλοκ GCHQ</string>
     <string name="locationless_short">Χωρίς τοποθεσία</string>
+    <string name="advlab_short">Adv Lab</string>
     <string name="userdefined_short">Καθορισμένη από τον χρήστη</string>
     <string name="unknown_short">Γρίφου</string>
     <!-- cache sizes -->
@@ -437,10 +447,12 @@
     <string name="cache_filter_mode_advanced">Σύνθετες επιλογές</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Εναλλαγή σε Βασικό</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_message">Η αλλαγή σε \'Βασική\' λειτουργία θα έχει ως αποτέλεσμα την απώλεια των ρυθμίσεων του φίλτρου. Θέλετε να συνεχίσετε;</string>
+    <string name="cache_filter_add_button">Προσθήκη κριτηρίων φίλτρου</string>
     <string name="cache_filter_option_and_or">Χρήση OR αντί του AND</string>
     <string name="cache_filter_option_inverse">Ανάστροφο Φίλτρο</string>
     <string name="cache_filter_option_include_inconclusive">Συμπερίληψη ασαφών συσχετίσεων</string>
     <string name="cache_filter_option_include_inconclusive_info">Αν θα συμπεριληφθεί η κρύπτη στα αποτελέσματα, όταν το φίλτρο χρειάζεται πληροφορίες της κρύπτης που δεν είναι διαθέσιμες.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Πατήστε \'Προσθήκη κριτηρίων φίλτρου\' παραπάνω για να προσθέσετε ένα φίλτρο</string>
     <string name="cache_filter_name">Ονομα κρύπτης</string>
     <string name="cache_filter_type">Τύπος κρύπτης</string>
     <string name="cache_filter_size">Μέγεθος κρύπτης</string>
@@ -455,6 +467,12 @@
     <string name="cache_filter_favorites">Αγαπημένες</string>
     <string name="cache_filter_distance">Απόσταση</string>
     <string name="cache_filter_hidden">Ημερ/μηνία απόκρυψης</string>
+    <string name="cache_filter_logs_count">Αριθμ. καταγραφων</string>
+    <string name="cache_filter_last_found">Ημερ/νία Τελευταίας Εύρεσης</string>
+    <string name="cache_filter_log_entry">Καταχώρηση</string>
+    <string name="cache_filtergroup_basic">Βασικό</string>
+    <string name="cache_filtergroup_details">Λεπτομέρειες</string>
+    <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
     <string name="cache_filter_include">Συμπερίληψη</string>
     <string name="cache_filter_exclude">Εξαίρεση</string>
     <string name="cache_filter_userdisplay_complex">Σύνθετο</string>
@@ -489,6 +507,8 @@
     <string name="cache_filter_status_select_only_disabled_no">Μόνο ενεργοποιημένες</string>
     <string name="cache_filter_status_select_only_archived_yes">Μόνο Αρχειοθετημένες</string>
     <string name="cache_filter_status_select_only_archived_no">Μόνο Ενεργές</string>
+    <string name="cache_filter_log_entry_foundby">Βρέθηκε από:</string>
+    <string name="cache_filter_log_entry_logtext">Κείμενο καταγραφής:</string>
     <!-- about -->
     <string name="about_version">Έκδοση</string>
     <string name="about_changelog">Τι νέο υπάρχει;</string>
@@ -518,6 +538,7 @@
     <string name="about_contributors_carnerodetails">ως ο πατέρας του c:geo</string>
     <string name="about_contributors_recent">Πρόσφατοι χρήστες που συνεισφέραν</string>
     <string name="about_contributors_specialthanks">Ένα μεγάλο ευχαριστώ σε</string>
+    <string name="about_contributors_specialthanksdetails">- όλους τους συνεισφέροντες στην μετάφρασή μας στο [Crowdin.net](https://crowdin.net/project/cgeo)!\n- όλους τους δημιουργους θεμάτων\n- και όλους τους άλλους υποστηρικτές.\n</string>
     <string name="about_contributors_other">Άλλοι χρήστες που συνεισφέραν</string>
     <string name="about_components">Στοιχεία</string>
     <string name="contribution_code">κωδικός</string>
@@ -642,8 +663,6 @@
     <string name="init_summary_openlastdetailspage">Λεπτομέρειες τελευταίας σελίδας που χρησιμοποιήσατε</string>
     <string name="init_skin">Ανοιχτόχρωμο θέμα</string>
     <string name="init_summary_skin">Χρήση ανοιχτόχρωμου θέματος (απαιτείται επανεκκίνηση)</string>
-    <string name="init_transparentBackground">Διαφανές φόντο</string>
-    <string name="init_summary_transparentBackground">Χρήση διαφανούς φόντου (απαραίτητη η επανεκκίνηση)</string>
     <string name="init_address">Προβολή διεύθυνσης</string>
     <string name="init_summary_address">Εμφάνιση διεύθυνσης αντί για συντεταγμένες στην κύρια οθόνη</string>
     <string name="init_select_language">Επιλέξτε γλώσσα</string>
@@ -1340,7 +1359,7 @@
     <string name="map_live_disable">Απενεργοποίηση live</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
-    <string name="map_routing">Δρομολόγηση (Τρέχουσα: %s)</string>
+    <string name="map_routing">Δρομολόγηση</string>
     <string name="map_routing_brouter">Η δρομολόγηση είναι διαθέσιμη μόνο εάν το <a href="">BRouter</a> είναι εγκατεστημένο</string>
     <string name="map_gm_autorotation">Αυτόματη περιστροφή χάρτη</string>
     <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
@@ -1367,6 +1386,7 @@
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
     <string name="search_filter">Φίλτρο (πειραματικό)</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
+    <string name="search_filter_info_message">Η \'Αναζήτηση με φίλτρο\' αναζητά κρύπτες χρησιμοποιώντας το παρεχόμενο φίλτρο. Ανάλογα με την δυνατότητες της υπηρεσίας, μόνο ένα μέρος του φίλτρου εκτελείται σε απευθείας σύνδεση, το υπόλοιπο γίνεται με φίλτρο εκτός σύνδεσης.\n\nΌλες οι υπηρεσίες υποστηρίζουν μόνο φίλτρα \'ΚΑΙ\' όπως και χωρίς αντιστροφή φίλτρου\n\nη Geocaching. com υποστηρίζει:\n- Όνομα (μόνο ολόκληρες λέξεις, Δεν υποστηρίζεται το μοτίβο)\n- Τύπος κρύπτης\n- Μέγεθος κρύπτης\n- Απόσταση και έδαφος\n- Αγαπημένα (μόνο απόλυτα, μόνο ελάχιστο)\n- Κατάσταση (Δικές μου, Βρέθηκαν &amp; Ενεργοποιημένες)\n- Κρυμένες από (καθορίστε το id του χρήστη)\n- Δεν βρέθηκε απο τον (προσδιορίστε το αναγνωριστικό χρήστη ακριβώς)\n- Ημερομηνία τοποθέτησης\n\nΣημειώστε ότι το c:geo δεν μπορεί ειδικά να προσφέρει φιλτράρισμα ιδιότητας γιατί η Geocaching.com μπλοκάρει το απαιτούμενο API για εμάς.\n\nΑυτή η υπηρεσία μέσω της Geocaching.com δεν υποστηρίζεται ακόμα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>

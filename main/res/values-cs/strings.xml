@@ -469,6 +469,12 @@
     <string name="cache_filter_favorites">Oblíbené</string>
     <string name="cache_filter_distance">Vzdálenost</string>
     <string name="cache_filter_hidden">Datum skrytí</string>
+    <string name="cache_filter_logs_count">Počet logů</string>
+    <string name="cache_filter_last_found">Datum posledního nálezu</string>
+    <string name="cache_filter_log_entry">Záznam logu</string>
+    <string name="cache_filtergroup_basic">Základní</string>
+    <string name="cache_filtergroup_details">Podrobnosti</string>
+    <string name="cache_filtergroup_userspecific">Vlastní</string>
     <string name="cache_filter_include">Zahrnout</string>
     <string name="cache_filter_exclude">Vyloučit</string>
     <string name="cache_filter_userdisplay_complex">Komplexní</string>
@@ -509,6 +515,8 @@
     <string name="cache_filter_status_select_only_disabled_no">Pouze zapnuté</string>
     <string name="cache_filter_status_select_only_archived_yes">Pouze archivované</string>
     <string name="cache_filter_status_select_only_archived_no">Pouze aktivní</string>
+    <string name="cache_filter_log_entry_foundby">Nalezené kým:</string>
+    <string name="cache_filter_log_entry_logtext">Text logu:</string>
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
@@ -663,8 +671,6 @@
     <string name="init_summary_openlastdetailspage">Otevřít detaily keše na naposledy použité stránce</string>
     <string name="init_skin">Používat světlý vzhled</string>
     <string name="init_summary_skin">Používat světlý vzhled (Vyžaduje restart)</string>
-    <string name="init_transparentBackground">Průhledné pozadí</string>
-    <string name="init_summary_transparentBackground">Použít průhledné pozadí (vyžaduje restartování)</string>
     <string name="init_address">Zobrazovat adresu</string>
     <string name="init_summary_address">Zobrazovat adresu místo souřadnic na hlavní obrazovce</string>
     <string name="init_select_language">Zvolte jazyk</string>
@@ -699,7 +705,7 @@
     <string name="init_summary_archived">Vyloučit archivované kešky</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky</string>
-    <string name="init_customtabs_as_browser">Použít Chrome webview</string>
+    <string name="init_customtabs_as_browser">Použít Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externí webové stránky budou zobrazeny bez opuštění c:geo (pouze pokud je nainstalován Chrome)</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
@@ -1381,7 +1387,6 @@
     <string name="map_live_disable">Zakázat aktivní mapu</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
-    <string name="map_routing">Směrování (teď: %s)</string>
     <string name="map_routing_brouter">Směrování je dostupné pouze v případě, že je nainstalován <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
