@@ -511,10 +511,6 @@
     <string name="cache_filter_status_select_only_found_no">Pouze nenalezené</string>
     <string name="cache_filter_status_select_only_own_yes">Pouze vlastněné</string>
     <string name="cache_filter_status_select_only_own_no">Pouze nevlastněné</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Pouze vypnuté</string>
-    <string name="cache_filter_status_select_only_disabled_no">Pouze zapnuté</string>
-    <string name="cache_filter_status_select_only_archived_yes">Pouze archivované</string>
-    <string name="cache_filter_status_select_only_archived_no">Pouze aktivní</string>
     <string name="cache_filter_log_entry_foundby">Nalezené kým:</string>
     <string name="cache_filter_log_entry_logtext">Text logu:</string>
     <!-- about -->
@@ -1387,7 +1383,6 @@
     <string name="map_live_disable">Zakázat aktivní mapu</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
-    <string name="map_routing_brouter">Směrování je dostupné pouze v případě, že je nainstalován <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
@@ -1413,7 +1408,6 @@
     <string name="search_hbu_button">Hledat podle vlastníka</string>
     <string name="search_filter">Filtr (experimentální)</string>
     <string name="search_filter_button">Hledat podle filtru</string>
-    <string name="search_filter_info_message">Funkce „Hledat podle filtru“ vyhledává kešky v online službách pomocí zadaného filtru. V závislosti na možnosti služby, se online filtrování provádí pouze částečně, zbytek se pak provádí offline filtrováním.\n\nVšechny služby podporují pouze AND filtry, nikoliv inverzní filtry.\n\nGeocaching.com podporuje:\n- název (pouze celá slova, vzor není podporován)\n- typ kešky\n- velikost kešky\n- vzdálenost\n- obtížnost a terén\n- oblíbené (pouze absolutní, pouze minimální)\n- stav (vlastněné, nalezené &amp; zapnuté)\n- skryté kým (uveďte přesné ID uživatele)\n- nenalezené kým (uveďte přesné ID uživatele)\n- datum umístění\n\nMějte na vědomí, že c:geo nemůže nabízet konkrétní filtrování atributů, protože nám geocaching.com blokuje požadované API.\n\nŽádná služba kromě geocaching.com zatím není podporována.</string>
     <string name="search_tb">Sledovatelný předmět</string>
     <string name="search_tb_hint">ID sledovatelného předmětu</string>
     <string name="search_tb_button">Hledat sledovatelné</string>
