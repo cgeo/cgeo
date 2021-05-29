@@ -500,10 +500,6 @@
     <string name="cache_filter_status_select_only_found_no">未発見</string>
     <string name="cache_filter_status_select_only_own_yes">オーナー</string>
     <string name="cache_filter_status_select_only_own_no">オーナーではない</string>
-    <string name="cache_filter_status_select_only_disabled_yes">一時停止中</string>
-    <string name="cache_filter_status_select_only_disabled_no">有効</string>
-    <string name="cache_filter_status_select_only_archived_yes">アーカイブ済み</string>
-    <string name="cache_filter_status_select_only_archived_no">アクティブ</string>
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
@@ -1340,7 +1336,6 @@
     <string name="map_live_disable">保存済みキャッシュのみ</string>
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
-    <string name="map_routing_brouter">ルート検索は<a href="">Brouter</a>がインストールされているか、c:geoルート検索が有効になっていると利用できます</string>
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
@@ -1366,7 +1361,6 @@
     <string name="search_hbu_button">オーナー名で検索</string>
     <string name="search_filter">フィルタ(実験的)</string>
     <string name="search_filter_button">フィルタで検索</string>
-    <string name="search_filter_info_message">「フィルタで検索」はジオキャッシングサイトのフィルタ検索を使用します。サイト機能に応じて、フィルタの一部のみがオンラインで実行され、残りはc:geoでフィルタリングされます。\n\nすべてのサイトではANDフィルタのみ使え、除外フィルタは適応できません。\n\nGeocaching.comは以下に対応しています:\n- キャッシュ名(単語全体のみ、パターンマッチングには未対応)\n- キャッシュタイプ\n- キャッシュサイズ\n- 距離\n- 難易度\n- お気に入り(登録数のみ、最小値のみ)\n- 状態(オーナー、発見、有効)\n- 設置したオーナー名(ユーザーIDを正確に指定)\n- 特定ユーザー未発見(ユーザーIDを正確に指定)\n- 設置日\n\nGeocaching.comが必要なAPIをブロックしているため、属性のフィルタは完全には提供できていないことにご注意ください。\n\n現在のところ、Geocaching.com以外はまだ対応していません。</string>
     <string name="search_tb">トラッカブル</string>
     <string name="search_tb_hint">トラッカブルコード</string>
     <string name="search_tb_button">トラッカブルを検索</string>
