@@ -467,7 +467,11 @@
     <string name="cache_filter_favorites">Favoriten</string>
     <string name="cache_filter_distance">Entfernung</string>
     <string name="cache_filter_hidden">Versteckdatum</string>
+    <string name="cache_filter_logs_count">Anzahl Logs</string>
+    <string name="cache_filter_last_found">Letztes Funddatum</string>
+    <string name="cache_filter_log_entry">Logeintrag</string>
     <string name="cache_filtergroup_basic">Basis</string>
+    <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Benutzerspezifisch</string>
     <string name="cache_filter_include">Mit</string>
     <string name="cache_filter_exclude">Ohne</string>
@@ -503,10 +507,11 @@
     <string name="cache_filter_status_select_only_found_no">Nur nicht Gefundene</string>
     <string name="cache_filter_status_select_only_own_yes">Nur Eigene</string>
     <string name="cache_filter_status_select_only_own_no">Nur nicht Eigene</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Nur Deaktivierte</string>
-    <string name="cache_filter_status_select_only_disabled_no">Nur Aktivierte</string>
-    <string name="cache_filter_status_select_only_archived_yes">Nur Archivierte</string>
-    <string name="cache_filter_status_select_only_archived_no">Nur nicht Archivierte</string>
+    <string name="cache_filter_status_exclude_active">Aktive ausschließen</string>
+    <string name="cache_filter_status_exclude_disabled">Deaktivierte ausschließen</string>
+    <string name="cache_filter_status_exclude_archived">Archivierte ausschließen</string>
+    <string name="cache_filter_log_entry_foundby">Gefunden von:</string>
+    <string name="cache_filter_log_entry_logtext">Log-Text:</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
@@ -1357,7 +1362,9 @@
     <string name="map_live_disable">Aktualisierung ausschalten</string>
     <string name="map_as_list">Als Liste anzeigen</string>
     <string name="map_select_multiple_items">Element auswählen</string>
-    <string name="map_routing_brouter">Routing ist nur verfügbar, wenn <a href="">BRouter</a> installiert ist</string>
+    <string name="map_routing">Routing</string>
+    <string name="map_routing_activate_title">Routing aktivieren</string>
+    <string name="map_routing_activate">Einige Routing-Modi sind derzeit nicht verfügbar, da keine Routing-Engine aktiv ist.\n\nMöchtest du die interne Routing-Engine von c:geo und das Herunterladen von Routing-Daten aktivieren?</string>
     <string name="map_gm_autorotation">Automatische Kartendrehung</string>
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
@@ -1383,7 +1390,7 @@
     <string name="search_hbu_button">Suche mit Besitzername</string>
     <string name="search_filter">Filter (experimentell)</string>
     <string name="search_filter_button">Suchen mit Filter</string>
-    <string name="search_filter_info_message">\'Suche nach Filter\' durchsucht Caches auf Online-Diensten mit Hilfe eines bereitgestellten Filters. Je nach Fähigkeit des Dienstes wird nur ein Teil des Filters online und der Rest dann durch Offline-Filterung ausgeführt.\n\nAlle Dienste unterstützen nur UND Filter und keine Filterinvertierung.\n\nGeocaching.com Unterstützung:\n- Name (nur ganze Wörter, Muster nicht unterstützt)\n- Cachetyp\n- Cachegröße\n- Entfernung\nSchwierigkeit und Gelände\n- Favoriten (nur absolut, nur Minimum)\n- Status (Eigene, Gefunden &amp; Aktiviert)\n- Versteckt von (genaue Benutzer-ID)\n- Nicht gefunden von (genaue Benutzer-ID)\n- Versteckdatum\n\nBeachte, dass c:geo keine Attribut-Filter anbieten kann, da geocaching.com die benötigte API für uns blockiert.\n\nEs werden noch keine Dienste außer Geocaching.com unterstützt.</string>
+    <string name="search_filter_info_message">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Tracking-Code</string>
     <string name="search_tb_button">Suche nach Trackable</string>
