@@ -1208,7 +1208,6 @@
     <string name="map_live_disable">Deaktiver live</string>
     <string name="map_as_list">Vis som liste</string>
     <string name="map_select_multiple_items">Velg objekt</string>
-    <string name="map_routing_brouter">Ruting er kun tilgjengelig hvis <a href="">BRouter</a> er installert</string>
     <string name="map_gm_autorotation">Automatisk rotering av kart</string>
     <string name="map_gm_autorotation_disable">Deaktivere kartrotasjon?\n\nDu kan aktivere det på nytt i menyen for kartrotasjon</string>
     <string name="quick_settings">Hurtiginnstillinger</string>
