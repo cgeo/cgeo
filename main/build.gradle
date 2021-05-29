@@ -413,20 +413,13 @@ dependencies {
     implementation 'com.google.zxing:android-integration:3.3.0'
 
     // MarkDown view
-    def markwonVersion = '4.6.2';
-    implementation "io.noties.markwon:core:${markwonVersion}"
+    implementation 'io.noties.markwon:core:4.6.2'
 }
 
-/*
- * un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
- */
+// un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
 apply plugin: 'de.mobilej.unmock'
 
-
-/*
- * verify existence of the necessary keys for compilation, instead of waiting for a compile error
- */
-
+// verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate{
     preBuild.dependsOn("verifyCgeoKeys")
 }
@@ -458,31 +451,24 @@ tasks.register('verifyCgeoKeys') {
     }
 }
 
-
-/*
- * version number from the current date, plus an offset defined by the build type (to define which versions overwrite each other)
- */
+// version number from the current date, plus an offset defined by the build type (to define which versions overwrite each other)
 static def versionCodeFromDate(offset) {
     def date = new Date()
     def formattedDate = date.format('yyyyMMdd')
     return Integer.valueOf(formattedDate) + offset
 }
 
-/*
- * version name based on current date
- */
+// version name based on current date
 static def versionNameFromDate() {
     def date = new Date()
     def formattedDate = date.format('yyyy.MM.dd')
     return formattedDate
 }
 
+// get the most recent git commit ID in long and short form
 class GitCommit {
     static String commitId
 
-    /*
-     * get the most recent git commit ID
-     */
     static String current() {
         if (commitId == null) {
             Process p = ['git', 'rev-parse', 'HEAD'].execute()
@@ -499,16 +485,12 @@ class GitCommit {
     }
 }
 
-/*
- * check whether this is a local build or a CI server build
- */
+// check whether this is a local build or a CI server build
 static def isContinuousIntegrationServer() {
     return System.getenv('BUILD_NUMBER') != null
 }
 
-/*
- * have a run task for our builds to launch the app directly from gradle
- */
+// have a run task for our builds to launch the app directly from gradle
 android.applicationVariants.all { variant ->
     if (variant.installProvider) {
         tasks.register("run${variant.name.capitalize()}") {
@@ -549,7 +531,6 @@ tasks.create('testDebug') {
 /*
  * signing of release APK, use a properties file like in templates/private.properties
  */
-
 // dynamically load the signing values from private.properties
 File privatePropertiesFile = rootProject.file('private.properties')
 if (privatePropertiesFile.exists()) {
