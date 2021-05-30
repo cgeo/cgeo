@@ -546,8 +546,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Vis ekstra loggbokside for venners og egne logger</string>
     <string name="init_openlastdetailspage">Sist brukte fane</string>
     <string name="init_summary_openlastdetailspage">Åpne detaljsiden til cacher på den siste brukte fanen</string>
-    <string name="init_skin">Hvitt tema</string>
-    <string name="init_summary_skin">Hvitt tema</string>
     <string name="init_address">Vis adressen i menyen</string>
     <string name="init_summary_address">Vis adressen i menyen</string>
     <string name="init_select_language">Velg språk</string>
@@ -587,6 +585,7 @@
     <string name="init_summary_listdisplay">Vis medlemskap av cacher til ekstra lister i en cache-liste</string>
     <string name="init_livelist">Vis cachers retning i listen</string>
     <string name="init_summary_livelist">Vis en pil med kompassretning for cacher i en liste</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Opprett sikkerhetskopi</string>
     <string name="init_backup_summary">Vær oppmerksom på at denne funksjonen kan sikkerhetskopiere cacher, veipunkter &amp; innstillinger, men ingen bilder fra cacher. \nFor å kunne gjenopprette dataene selv etter å ha mistet mobilen din, bør sikkerhetskopiene kopieres til en uavhengig plassering.</string>
@@ -1846,8 +1845,6 @@
     <string name="wizard_welcome_advanced">Avansert konfigurasjon</string>
     <string name="wizard_advanced_offlinemaps_label">Offline-kart</string>
     <string name="wizard_advanced_offlinemaps_info">Denne siden gir noen avanserte funksjoner, som er valgfrie å bruke.\n\nc:geo kan laste ned kartfiler for offline bruk.</string>
-    <string name="wizard_advanced_brouter_label">Ruting app</string>
-    <string name="wizard_advanced_brouter_info">Ved å installere og konfigurere en kompanjong-app kalt \"BRouter Offline Navigation\", kan c:geo navigere til mål og vise info om ruting på kartet.</string>
     <string name="wizard_advanced_restore_label">Gjenopprett</string>
     <string name="wizard_advanced_restore_info">Hvis du har en sikkerhetskopi av en tidligere installasjon, kan du gjenopprette innstillinger og/eller geocache-data.</string>
     <string name="status_not_ok">FEIL</string>
