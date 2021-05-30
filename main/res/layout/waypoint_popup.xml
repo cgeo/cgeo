@@ -70,7 +70,7 @@
 
                 <Button
                     android:id="@+id/more_details"
-                    style="@style/button_small"
+                    style="@style/button_full"
                     android:text="@string/popup_more" />
             </LinearLayout>
         </LinearLayout>
