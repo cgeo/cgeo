@@ -6,6 +6,7 @@
 
 ### 지도
 - 신규: 목록에서 맵을 표시하는 동안 사용자 정의 캐시 생성시: 사용자가 현재 목록에 새 캐시를 저장하도록 제안 (사용자 정의 캐시의 기본 목록 대신)
+- Change: Additionally show cache name in poup details
 
 ### 캐시 상세정보
 - 신규: 구글 번역 인앱 번역 팝업 사용
@@ -17,6 +18,7 @@
 
 ### 추가 사항
 - 변경: Android에서 제공하는 최신 구성 요소를 사용할 수 있도록 내부 기술 측면 c:geo 테마를 완전히 재 작업했습니다. 이것은 몇 가지 부작용이 있을 것이며 일부는 의도하지 않은 것입니다. [GitHub 페이지](https://www.github.com/cgeo/cgeo/issues) 또는 지원팀에 문의하여 오류나 결함을 신고 해주세요.
-- 신규: geocaching.com에서 북마크 목록 다운로드 - 메인 메뉴의 "목록/포켓 쿼리" 참조
-- 신규: geocaching.su에 대한 기능 무시
-- 변경: 더 이상 유지 관리되지 않는 RMAPS 탐색 앱 제거
+- New: Support day / night mode from system (optional)
+- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
+- New: Ignore capability for geocaching.su
+- Change: Removed no longer maintained RMAPS navigation app
