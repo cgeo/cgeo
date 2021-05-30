@@ -559,8 +559,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
     <string name="init_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
     <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
-    <string name="init_skin">Light skin</string>
-    <string name="init_summary_skin">Użyj light skin\n(wymaga restartu)</string>
     <string name="init_address">Pokaż adres</string>
     <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
     <string name="init_select_language">Wybierz język</string>
@@ -608,6 +606,7 @@
     <string name="init_summary_listdisplay">Pokaż członkostwo skrytek w dodatkowych listach na liście skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Utwórz kopię zapasową</string>
     <string name="init_backup_summary">Pamiętaj, że ta funkcja może tworzyć kopię zapasową skrzynek, punktów nawigacyjne i ustawień, ale nie zachowuje obrazów. \nAby móc przywrócić dane nawet po utracie telefonu, pliki kopii zapasowej powinny być kopiowane do niezależnej lokalizacji.</string>
@@ -1987,8 +1986,6 @@
     <string name="wizard_welcome_advanced">Konfiguracja zaawansowana</string>
     <string name="wizard_advanced_offlinemaps_label">Mapy offline</string>
     <string name="wizard_advanced_offlinemaps_info">Ta strona zawiera pewne zaawansowane funkcje, których użycie jest opcjonalne.\n\nc: geo może pobierać pliki map do użytku offline.</string>
-    <string name="wizard_advanced_brouter_label">Aplikacja do nawigacji</string>
-    <string name="wizard_advanced_brouter_info">Instalując i konfigurując aplikację towarzyszącą o nazwie „BRouter Offline Navigation” c:geo może nawigować do celów i wyświetlać informacje o trasach na mapie.</string>
     <string name="wizard_advanced_restore_label">Przywróć</string>
     <string name="wizard_advanced_restore_info">Jeśli masz kopię zapasową poprzedniej instalacji, możesz przywrócić ustawienia i/lub dane skrytek.</string>
     <string name="status_not_ok">BŁĄD</string>
