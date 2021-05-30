@@ -558,8 +558,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Visualitza una pàgina addicional del llibre de registre pels registres dels amics i els propis</string>
     <string name="init_openlastdetailspage">Obre l\'última pàgina de detalls</string>
     <string name="init_summary_openlastdetailspage">Obre els detalls amb l\'última pàgina utilitzada</string>
-    <string name="init_skin">Aparença lluminosa</string>
-    <string name="init_summary_skin">Utilitza el fons clar (cal reiniciar)</string>
     <string name="init_address">Mostra l\'adreça</string>
     <string name="init_summary_address">Mostra l\'adreça en lloc de les coordenades a la pantalla principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
@@ -607,6 +605,7 @@
     <string name="init_summary_listdisplay">Mostra la pertinença del catxé a una llista addicionals a la llista de catxés</string>
     <string name="init_livelist">Mostra la direcció</string>
     <string name="init_summary_livelist">Mostra una fletxa amb la direcció de la brúixola als catxés en una llista</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Fer una còpia de seguretat</string>
     <string name="init_backup_summary">Tingueu en compte que aquesta funció permet fer còpies de seguretat de catxés , punts de ruta &amp; configuracions, però sense imatges dels catxés. \n\n Per poder restaurar les dades fins i tot després de perdre el telèfon, els fitxers de còpia de seguretat s\'han de copiar a una ubicació independent.</string>
@@ -1931,8 +1930,6 @@
     <string name="wizard_welcome_advanced">Configuració avançada</string>
     <string name="wizard_advanced_offlinemaps_label">Mapes fora de línia</string>
     <string name="wizard_advanced_offlinemaps_info">Aquesta pàgina proporciona algunes funcions avançades que són opcionals .\n\nC: geo pot descarregar fitxers de mapes per fora de línia.</string>
-    <string name="wizard_advanced_brouter_label">App d’encaminament</string>
-    <string name="wizard_advanced_brouter_info">En instal·lar i configurar la aplicació complementària \"BRouter Offline Navigation\", C: geo pot navegar fins als objectius i mostrar informació sobre l\'encaminament al vostre mapa.</string>
     <string name="wizard_advanced_restore_label">Restaura</string>
     <string name="wizard_advanced_restore_info">Si teniu una còpia de seguretat d\'una instal·lació anterior, podeu restaurar la configuració i/o les dades dels catxés.</string>
     <string name="status_not_ok">ERROR</string>
