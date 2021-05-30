@@ -81,7 +81,7 @@
                 android:layout_marginTop="3dip"
                 android:drawablePadding="3dip"
                 android:textSize="@dimen/textSize_detailsPrimary"
-                app:drawableLeftCompat="@drawable/log_img" />
+                app:drawableLeftCompat="@drawable/log_img_icon" />
         </LinearLayout>
 
     </RelativeLayout>

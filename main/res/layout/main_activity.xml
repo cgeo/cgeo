@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainscreen"
     android:layout_width="fill_parent"
@@ -162,7 +163,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_margin="4dip"
-            android:src="@drawable/ic_menu_info_details"/>
+            app:srcCompat="@drawable/ic_menu_info_details"/>
 
         <TextView
             android:id="@+id/info_notloggedin_text"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/advancedfilter_list_item"
     android:layout_width="match_parent"
@@ -54,6 +55,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="right"
             android:src="@drawable/ic_menu_reorder"
+            app:srcCompat="@drawable/ic_menu_reorder"
             tools:src="@drawable/ic_menu_reorder"/>
 
     </RelativeLayout>

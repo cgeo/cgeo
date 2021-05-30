@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/button_map"
     android:layout_width="match_parent"
@@ -50,6 +51,6 @@
         android:gravity="right"
         android:scrollHorizontally="true"
         tools:text="place holder for jump to map"
-        android:src="@drawable/ic_menu_mapmode"
+        app:srcCompat="@drawable/ic_menu_mapmode"
         android:layout_alignParentRight="true" />
 </RelativeLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/image_box"
     android:layout_width="fill_parent"
@@ -27,14 +28,14 @@
             android:id="@+id/image_add_multi"
             style="@style/button_icon"
             android:layout_gravity="left"
-            android:src="@drawable/ic_menu_image_multi" />
+            app:srcCompat="@drawable/ic_menu_image_multi" />
 
         <ImageButton
             android:id="@+id/image_add_camera"
             style="@style/button_icon"
             android:layout_gravity="left"
             android:layout_toRightOf="@+id/image_add_multi"
-            android:src="@drawable/ic_menu_camera" />
+            app:srcCompat="@drawable/ic_menu_camera" />
 
     </RelativeLayout>
 

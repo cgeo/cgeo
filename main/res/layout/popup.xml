@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -44,7 +45,7 @@
                 <ImageButton
                     android:id="@+id/offline_hint"
                     style="@style/button_icon"
-                    android:src="@drawable/ic_menu_hint"
+                    app:srcCompat="@drawable/ic_menu_hint"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="0dp"
                     android:visibility="gone"
@@ -78,7 +79,7 @@
                 <ImageButton
                     android:id="@+id/offline_refresh"
                     style="@style/button_icon"
-                    android:src="@drawable/ic_menu_refresh"
+                    app:srcCompat="@drawable/ic_menu_refresh"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
@@ -102,7 +103,7 @@
                 <ImageButton
                     android:id="@+id/offline_edit"
                     style="@style/button_icon"
-                    android:src="@drawable/ic_menu_edit"
+                    app:srcCompat="@drawable/ic_menu_edit"
                     android:layout_toLeftOf="@id/offline_store_drop"
                     android:layout_marginLeft="0dp"
                     android:visibility="gone"
@@ -111,7 +112,7 @@
                 <ImageButton
                     android:id="@+id/offline_store_drop"
                     style="@style/button_icon"
-                    android:src="@drawable/ic_menu_save"
+                    app:srcCompat="@drawable/ic_menu_save"
                     android:layout_marginLeft="0dp"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>

@@ -18,7 +18,7 @@
     <ImageButton
         android:id="@+id/dialog_title_cancel"
         style="@style/action_bar_action"
-        android:src="@drawable/ic_menu_cancel_holo_dark"
+        android:src="@drawable/ic_menu_cancel"
         android:visibility="gone" />
 
 	<View style="@style/action_bar_separator"
@@ -27,7 +27,7 @@
     <ImageButton
         android:id="@+id/dialog_title_done"
         style="@style/action_bar_action"
-        android:src="@drawable/ic_menu_done_holo_dark"
+        android:src="@drawable/ic_menu_done"
         android:visibility="gone" />
 
 </LinearLayout>
