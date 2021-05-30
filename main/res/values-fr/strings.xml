@@ -556,8 +556,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Afficher une page de carnet supplémentaire avec vos visites et celles de vos amis</string>
     <string name="init_openlastdetailspage">Afficher les détails à la dernière page ouverte</string>
     <string name="init_summary_openlastdetailspage">A l\'ouverture des détails d\'une cache afficher le dernier onglet consulté</string>
-    <string name="init_skin">Fond blanc</string>
-    <string name="init_summary_skin">Fond blanc (nécessite le redémarrage de c:geo)</string>
     <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
     <string name="init_summary_address">Sur l\'écran d\'accueil, afficher l\'adresse plutôt que les coordonnées</string>
     <string name="init_select_language">Sélectionner la langue</string>
@@ -603,6 +601,7 @@
     <string name="init_summary_listdisplay">Afficher l\'adhésion des caches à des listes supplémentaires dans une liste de caches</string>
     <string name="init_livelist">Afficher la direction des caches dans les listes</string>
     <string name="init_summary_livelist">Affiche une flèche \"direction de la boussole\" dans la liste des caches</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Créer une sauvegarde</string>
     <string name="init_backup_summary">Veuillez noter que cette fonctionnalité peut sauvegarder les caches, les waypoints &amp; les paramètres, mais pas les images de cache. \nAfin de pouvoir restaurer les données même après avoir perdu votre téléphone, les fichiers de sauvegarde doivent être copiés dans un emplacement indépendant.</string>
@@ -1909,8 +1908,6 @@
     <string name="wizard_welcome_advanced">Paramètres avancés</string>
     <string name="wizard_advanced_offlinemaps_label">Cartes hors ligne</string>
     <string name="wizard_advanced_offlinemaps_info">Cette page fournit des fonctions avancées, qu\'il n\'est pas obligatoire d\'utiliser.\n\nc:geo peut télécharger des fichiers cartographiques pour une utilisation hors-ligne.</string>
-    <string name="wizard_advanced_brouter_label">Application de navigation</string>
-    <string name="wizard_advanced_brouter_info">En installant et configurant une application compagnon nommée \"BRouter Offline Navigation\" c:geo peut naviguer jusqu\'à des objectifs et afficher des informations d\'itinéraire sur votre carte.</string>
     <string name="wizard_advanced_restore_label">Restaurer</string>
     <string name="wizard_advanced_restore_info">Si vous avez une sauvegarde d\'une installation précédente, vous pouvez restaurer les paramètres et/ou les données des géocaches.</string>
     <string name="status_not_ok">ERREUR</string>
