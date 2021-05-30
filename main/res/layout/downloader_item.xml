@@ -13,7 +13,7 @@
 
     <ImageButton
         android:id="@+id/action"
-	style="@style/button_icon"
+        style="@style/button_icon"
         android:gravity="left|center_vertical"
         android:text="@null"
         android:layout_alignParentLeft="true" />
@@ -28,6 +28,7 @@
         android:textIsSelectable="false"
         android:paddingLeft="10dip"
         android:layout_toRightOf="@id/action"
+        android:textSize="@dimen/textSize_listsPrimary"
         tools:text="name"/>
 
     <TextView
@@ -42,6 +43,7 @@
         android:paddingLeft="10dip"
         android:layout_below="@id/label"
         android:layout_toRightOf="@id/action"
+        android:textSize="@dimen/textSize_listsSecondary"
         tools:text="info"
         android:maxLines="2" />
 
