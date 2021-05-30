@@ -6,6 +6,7 @@
 
 ### Χάρτης
 - Νέο: Κατά τη δημιουργία μιας κρύπτης που καθορίζεται από το χρήστη κατά την εμφάνιση ενός χάρτη από μια λίστα: Επιλογή χρήστη για την αποθήκευση νέας κρύπτης στην τρέχουσα λίστα (αντί της προεπιλεγμένης λίστας για τις κρύπτες που ορίζονται από το χρήστη)
+- Change: Additionally show cache name in poup details
 
 ### Λεπτομέρειες κρύπτης
 - Νέο: Κάντε χρήση του google translator στο app me μετάφραση σε αναδυόμενο παράθυρο
@@ -17,6 +18,7 @@
 
 ### Άλλο
 - Αλλαγή: Έχουμε επεξεργαστεί εντελώς τις εσωτερικές τεχνικές πτυχές c:geo theming για να είναι σε θέση να κάνουν χρήση ορισμένων πιο σύγχρονων λειτουργιών που παρέχονται από το Android. Αυτό θα έχει μερικές παρενέργειες, μερικές από τις οποίες δεν έίναι σκόπιμες. Παρακαλούμε αναφέρετε τυχόν σφάλματα ή δυσλειτουργίες είτε στη σελίδα μας [GitHub](https://www.github.com/cgeo/cgeo/issues) ή επικοινωνώντας με την υποστήριξη.
-- Νέα: Κατεβάστε τις λίστες σελιδοδεικτών από την geocaching.com - δείτε "Λίστες / pocket queries" στο κύριο μενού
-- Νέο: Αγνοήστε την δυνατότητα για geocaching.su
-- Αλλαγή: Αφαιρέθηκε πλέον η εφαρμογή πλοήγησης RMAPS
+- New: Support day / night mode from system (optional)
+- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
+- New: Ignore capability for geocaching.su
+- Change: Removed no longer maintained RMAPS navigation app
