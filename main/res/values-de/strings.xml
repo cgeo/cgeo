@@ -664,8 +664,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Zeige zusätzliche Logbuchseite für Logs von dir und deinen Freunden</string>
     <string name="init_openlastdetailspage">Zuletzt genutzte Seite</string>
     <string name="init_summary_openlastdetailspage">Öffne Details mit zuletzt genutzter Seite</string>
-    <string name="init_skin">Helle Oberfläche</string>
-    <string name="init_summary_skin">Helle Oberfläche (Neustart erforderlich)</string>
     <string name="init_address">Ort statt Koordinaten</string>
     <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
     <string name="init_select_language">Sprache auswählen</string>
@@ -716,6 +714,7 @@
     <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Sicherung erstellen</string>
     <string name="init_backup_summary">Bitte beachte, dass diese Funktion Caches, Wegpunkte &amp; Einstellungen, aber keine Cachebilder, sichern kann.\nDamit du die Daten auch nach dem Verlust deines Telefons wiederherstellen kannst, sollten die Sicherungsdateien an einen unabhängigen Ort kopiert werden.</string>
@@ -2066,8 +2065,8 @@
     <string name="wizard_welcome_advanced">Erweiterte Konfiguration</string>
     <string name="wizard_advanced_offlinemaps_label">Offline-Karten</string>
     <string name="wizard_advanced_offlinemaps_info">Diese Seite bietet einige erweiterte Funktionen, die optional verwendet werden können.\n\nc:geo kann Kartendateien zur Offline-Nutzung herunterladen.</string>
-    <string name="wizard_advanced_brouter_label">Routing-App</string>
-    <string name="wizard_advanced_brouter_info">Durch die Installation und Konfiguration einer Begleit-App namens \"BRouter Offline-Navigation\" kann c:geo zu Zielen navigieren und Routing-Informationen auf der Karte anzeigen.</string>
+    <string name="wizard_advanced_routing_label">Offline-Routing aktivieren</string>
+    <string name="wizard_advanced_routing_info">c:geo verfügt über eine interne Routing-Engine für Offline-Routing und kann automatisch fehlende Routing-Daten für dich herunterladen.</string>
     <string name="wizard_advanced_restore_label">Wiederherstellen</string>
     <string name="wizard_advanced_restore_info">Wenn du eine Sicherung einer vorherigen Installation hast, kannst du Einstellungen und/oder Geocache-Daten wiederherstellen.</string>
     <string name="status_not_ok">FEHLER</string>
