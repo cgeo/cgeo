@@ -664,8 +664,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Näytä erillinen lokikirjan sivu omille sekä ystävien lokeille</string>
     <string name="init_openlastdetailspage">Viimeisimmät tiedot -sivu</string>
     <string name="init_summary_openlastdetailspage">Avaa viimeksi avattujen sivujen lisätiedot</string>
-    <string name="init_skin">Vaalea sävy</string>
-    <string name="init_summary_skin">Muuta sävy vaaleaksi (uudelleenkäynnistys tarvitaan)</string>
     <string name="init_address">Näytä osoite</string>
     <string name="init_summary_address">Näytä osoite koordinaattien sijaan pääsivulla</string>
     <string name="init_select_language">Valitse kieli</string>
@@ -716,6 +714,7 @@
     <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Luo varmuuskopio</string>
     <string name="init_backup_summary">Huomaa, että tämä ominaisuus voi varmuuskopioida kätköjä, reittipisteitä &amp; asetuksia, mutta ei kätköjen kuvia. \nVoidaksesi palauttaa tiedot myös sen jälkeen, kun olet kadottanut puhelimesi, varmuuskopioidut tiedostot tulee kopioida ulkoiseen sijaintiin.</string>
@@ -2066,8 +2065,6 @@
     <string name="wizard_welcome_advanced">Edistyneet määritysasetukset</string>
     <string name="wizard_advanced_offlinemaps_label">Offline-kartat</string>
     <string name="wizard_advanced_offlinemaps_info">Tällä sivulla on joitakin lisätoimintoja, joiden käyttö on valinnaista.\n\nc:geo voi ladata karttatiedostoja offline-käyttöön.</string>
-    <string name="wizard_advanced_brouter_label">Reitityssovellus</string>
-    <string name="wizard_advanced_brouter_info">Asentamalla ja määrittämällä kumppanisovelluksen nimeltä \"BRouter Offline Navigation\", c:geo voi navigoida kohteisiin ja näyttää reititystietoja kartallasi.</string>
     <string name="wizard_advanced_restore_label">Palauta</string>
     <string name="wizard_advanced_restore_info">Jos sinulla on varmuuskopio aiemmasta asennuksesta, voit palauttaa asetukset ja/tai geokätkötiedot.</string>
     <string name="status_not_ok">VIRHE</string>
