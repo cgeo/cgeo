@@ -660,8 +660,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Εμφάνιση επιπλέον σελίδας ημερολογίου για αρχεία καταγραφής φίλων και δικών μου</string>
     <string name="init_openlastdetailspage">Τελευταία καταχώρηση</string>
     <string name="init_summary_openlastdetailspage">Λεπτομέρειες τελευταίας σελίδας που χρησιμοποιήσατε</string>
-    <string name="init_skin">Ανοιχτόχρωμο θέμα</string>
-    <string name="init_summary_skin">Χρήση ανοιχτόχρωμου θέματος (απαιτείται επανεκκίνηση)</string>
     <string name="init_address">Προβολή διεύθυνσης</string>
     <string name="init_summary_address">Εμφάνιση διεύθυνσης αντί για συντεταγμένες στην κύρια οθόνη</string>
     <string name="init_select_language">Επιλέξτε γλώσσα</string>
@@ -712,6 +710,7 @@
     <string name="init_summary_listdisplay">Εμφάνιση ιδιότητας μέλους των κρυπτών και σε άλλες λίστες, σε μια λίστα κρυπτών</string>
     <string name="init_livelist">Εμφάνιση κατεύθυνσης</string>
     <string name="init_summary_livelist">Εμφάνιση βέλους με κατεύθυνση πυξίδας για κρύπτες σε μια λίστα</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Δημιουργία αντιγράφου ασφαλείας</string>
     <string name="init_backup_summary">Παρακαλώ λάβετε υπ\' όψιν σας ότι το χαρακτηριστικό αυτό μπορεί να δημιουργήσει αντίγραφα ασφαλείας των κρυπτών, των ενδιάμεσων σημείων &amp; των ρυθμίσεων, αλλά όχι των φωτογραφιών των κρυπτών. \nΓια να μπορέσετε να επαναφέρετε τα δεδομένα σας ακόμα και εάν χάσετε το τηλέφωνο σας, το αρχεία του αντιγράφου ασφαλείας πρέπει να είναι αποθηκευμένα σε μια ανεξάρτητη τοποθεσία.</string>
@@ -2058,8 +2057,6 @@
     <string name="wizard_welcome_advanced">Προηγμένη διαμόρφωση</string>
     <string name="wizard_advanced_offlinemaps_label">Χάρτες χωρίς σύνδεση</string>
     <string name="wizard_advanced_offlinemaps_info">Αυτή η σελίδα παρέχει μερικές προηγμένες λειτουργίες, οι οποίες είναι προαιρετικές για χρήση.\n\nτο c:geo μπορεί να κατεβάσει αρχεία χάρτη για χρήση χωρίς σύνδεση.</string>
-    <string name="wizard_advanced_brouter_label">Εφαρμογή δρομολόγησης</string>
-    <string name="wizard_advanced_brouter_info">Με την εγκατάσταση και διαμόρφωση μιας συνοδευτικής εφαρμογής με το όνομα \"BRouter Offline Navigation\" το c:geo μπορεί να πλοηγηθεί σε στόχους και να εμφανίσει πληροφορίες δρομολόγησης στον χάρτη σας.</string>
     <string name="wizard_advanced_restore_label">Επαναφορά</string>
     <string name="wizard_advanced_restore_info">Εάν έχετε ένα αντίγραφο ασφαλείας μιας προηγούμενης εγκατάστασης, μπορείτε να επαναφέρετε τις ρυθμίσεις και/ή geocache δεδομένα.</string>
     <string name="status_not_ok">ΛΑΘΟΣ</string>
