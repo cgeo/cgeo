@@ -37,6 +37,7 @@ This changelog contains all changes which are not intermediate developing steps.
 
 ### Other
 - Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
+- New: Support day / night mode from system (optional)
 - New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
 - New: Ignore capability for geocaching.su
 - New: Support exporting/importig assigned emoji in GPX
