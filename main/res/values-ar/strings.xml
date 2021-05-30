@@ -428,8 +428,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">عرض صفحة السجل الإضافي الخاص بتسجيل الزيارات الخاصة بك و بأصدقائك</string>
     <string name="init_openlastdetailspage">صفحة التفاصيل الأخيرة</string>
     <string name="init_summary_openlastdetailspage">افتح التفاصيل باستخدام آخر صفحة مستخدمة</string>
-    <string name="init_skin">خلفية فاتحة اللون</string>
-    <string name="init_summary_skin">استخدم خلفية فاتحة اللون (يتطلب إعادة التشغيل)</string>
     <string name="init_address">عرض العنوان</string>
     <string name="init_summary_address">عرض العنوان بدلاً من الإحدثيات على الشاشة الرئسية</string>
     <string name="init_exclude">استبعاد الخاصة والمكتسبة</string>
@@ -447,6 +445,7 @@
     <string name="init_choose_list">اطلب القائمة</string>
     <string name="init_summary_choose_list">اسأل أي قائمة لتخزين المخبآت</string>
     <string name="init_livelist">عرض الاتجاه</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">النسخ الاحتياطي</string>
     <string name="init_backup_running">إنشاء نسخ إحتياطي لبيانات المخبئ&#8230;</string>
