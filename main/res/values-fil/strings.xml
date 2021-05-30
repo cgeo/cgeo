@@ -426,8 +426,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Ang pagpapakita ng karagdagang talaan ng pahina para sa mga kaibigan at ang sariling mga log</string>
     <string name="init_openlastdetailspage">Ang Huling mga Detalye ng Pahina</string>
     <string name="init_summary_openlastdetailspage">Buksan ang mga detalye kasama ang huling paggamit ng pahina</string>
-    <string name="init_skin">Ang maliwanag na Iskin</string>
-    <string name="init_summary_skin">Ang paggamit ng maliwanag na iskin (I-restart kung kinakailangan)</string>
     <string name="init_address">Ang Adress ay Ipakita</string>
     <string name="init_summary_address">Ang adress ang ipakita sa halip na mga koordinado sa pangunahing iskrin</string>
     <string name="init_exclude">Ibukod ang para sa Sarili at sa Natagpuan</string>
@@ -445,6 +443,7 @@
     <string name="init_choose_list">Magtanong para sa listahan</string>
     <string name="init_summary_choose_list">Magtanong kung alin sa listahan inimbak ang mga cache sa</string>
     <string name="init_livelist">Ang pagpapakita ng direksyon</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Mag-Backup</string>
     <string name="init_backup_running">Gumawa ng backup para sa cache database&#8230;</string>
