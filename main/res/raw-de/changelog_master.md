@@ -6,6 +6,7 @@
 
 ### Karte
 - Neu: Beim Erstellen eines benutzerdefinierten Caches während die Karte für eine Liste angezeigt wird: Biete dem Nutzer an den neuen Cache in der aktuellen Liste (statt in der Standardliste für benutzerdefinierte Caches) zu speichern
+- Änderung: Zusätzlich Cache-Name in den Poup-Details anzeigen
 
 ### Cache-Details
 - Neu: Benutze Google Übersetzungs-Popup in der App
@@ -17,6 +18,7 @@
 
 ### Sonstiges
 - Änderung: Wir haben interne technische Aspekte der graphischen Oberfläche von c:geo komplett überarbeitet, um einige modernere Komponenten von Android nutzen zu können. Dies wird einige Nebenwirkungen haben, von denen einige unbeabsichtigt sind. Bitte berichte Fehler oder Unschönheiten entweder auf unserer [GitHub-Seite](https://www.github.com/cgeo/cgeo/issues) oder über unseren Support.
-- Neu: Lesezeichenlisten von geocaching.com herunterladen - siehe "Listen / Pocket-Queries" im Hauptmenü
-- Neu: Ignorier-Funktion für geocaching.su
-- Änderung: Nicht mehr gepflegte RMAPS-Navigations-App entfernt
+- New: Support day / night mode from system (optional)
+- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
+- New: Ignore capability for geocaching.su
+- Change: Removed no longer maintained RMAPS navigation app
