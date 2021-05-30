@@ -661,8 +661,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Toon additionele logboek pagina voor eigen en vrienden logs</string>
     <string name="init_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
     <string name="init_summary_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
-    <string name="init_skin">Lichte skin</string>
-    <string name="init_summary_skin">Lichte skin (c:geo herstarten)</string>
     <string name="init_address">Toon adres</string>
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_select_language">Taal selecteren</string>
@@ -713,6 +711,7 @@
     <string name="init_summary_listdisplay">Lidmaatschap van caches aan extra lijsten weergeven in een cachelijst</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Back-up maken</string>
     <string name="init_backup_summary">Houd er rekening mee dat deze functie een back-up kan maken van caches, waypoints &amp; instellingen, maar niet van cache-afbeeldingen. \nOm de gegevens te kunnen herstellen, zelfs na het verliezen van je telefoon, dienen de back-upbestanden te worden gekopieerd naar een onafhankelijke locatie.</string>
@@ -2060,8 +2059,6 @@
     <string name="wizard_welcome_advanced">Geavanceerde configuratie</string>
     <string name="wizard_advanced_offlinemaps_label">Offline kaarten</string>
     <string name="wizard_advanced_offlinemaps_info">Deze pagina biedt enkele geavanceerde functies, die optioneel te gebruiken zijn.\n\nc:geo kan kaartbestanden downloaden voor offline gebruik.</string>
-    <string name="wizard_advanced_brouter_label">Routing app</string>
-    <string name="wizard_advanced_brouter_info">Door het installeren en configureren van een ondersteunende app genaamd \"BRouter Offline Navigation\" kan c:geo navigeren naar doelen en de routering info op je kaart tonen.</string>
     <string name="wizard_advanced_restore_label">Terugzetten</string>
     <string name="wizard_advanced_restore_info">Als je een backup van een eerdere installatie hebt, kun je instellingen en/of geocache gegevens herstellen.</string>
     <string name="status_not_ok">FOUT</string>
