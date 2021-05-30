@@ -538,8 +538,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Отображать дополнительную страницу блокнота для своих записей и записей друзей</string>
     <string name="init_openlastdetailspage">Запоминать страницу</string>
     <string name="init_summary_openlastdetailspage">Открывать последнюю использованную страницу (блокнот, детали, описание)</string>
-    <string name="init_skin">Светлый стиль</string>
-    <string name="init_summary_skin">Использовать Светлый стиль (требуется перезапуск)</string>
     <string name="init_address">Показывать адрес</string>
     <string name="init_summary_address">Показывать адрес вместо координат на главном экране</string>
     <string name="init_select_language">Выбрать язык</string>
@@ -576,6 +574,7 @@
     <string name="init_summary_listdisplay">Показать принадлежность тайников к другим спискам в списке тайников</string>
     <string name="init_livelist">Показывать направление</string>
     <string name="init_summary_livelist">Показывать стрелку с направлением компаса для тайников в списке</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Создание резервных копий</string>
     <string name="init_backup_summary">Резервные копии сохраняют тексты тайников, точки и настройки приложения. Фотографии тайников НЕ будут сохранены.\nЧтобы восстановить данные даже после потери телефона, вам необходимо скопировать резервные копии на независимый носитель или другой телефон.</string>
