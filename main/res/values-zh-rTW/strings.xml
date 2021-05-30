@@ -549,8 +549,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">對於朋友寫的或是自己的日誌，顯示額外的日誌頁</string>
     <string name="init_openlastdetailspage">最後的詳細資訊頁面</string>
     <string name="init_summary_openlastdetailspage">使用上次使用頁面的資料</string>
-    <string name="init_skin">淺色底色</string>
-    <string name="init_summary_skin">Use light skin (Restart needed)</string>
     <string name="init_address">顯示地址</string>
     <string name="init_summary_address">在主屏幕上顯示地址而不是坐標</string>
     <string name="init_select_language">選擇語言</string>
@@ -588,6 +586,7 @@
     <string name="init_summary_listdisplay">在附加列表裡顯示地理藏寶的會員資訊</string>
     <string name="init_livelist">顯示方向</string>
     <string name="init_summary_livelist">顯示羅盤箭頭</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">建立備份</string>
     <string name="init_restore_title">還原備份</string>
