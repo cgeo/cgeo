@@ -545,8 +545,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Visa en extra loggbok med dina vänners och egna loggar</string>
     <string name="init_openlastdetailspage">Visning av cachedetaljer</string>
     <string name="init_summary_openlastdetailspage">Visa senaste använda delsidan när detaljer öppnas</string>
-    <string name="init_skin">Vitt skal</string>
-    <string name="init_summary_skin">Vitt skal (kräver omstart av c:geo)</string>
     <string name="init_address">Adress/koordinater</string>
     <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
     <string name="init_select_language">Välj språk</string>
@@ -585,6 +583,7 @@
     <string name="init_summary_listdisplay">Visa cachernas tillhörighet till andra listor i cachelistan</string>
     <string name="init_livelist">Riktning</string>
     <string name="init_summary_livelist">Visa en pil med kompassriktning för cacher i en lista</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Skapa säkerhetskopia</string>
     <string name="init_backup_summary">Observera att den här funktionen kan säkerhetskopiera cacher, waypoints &amp; inställningar, men inga bilder från cacher. \nFör att kunna återställa data även om du skulle förlora telefonen bör säkerhetskopieringsfilerna kopieras till en annan enhet eller plats.</string>
@@ -1875,8 +1874,6 @@
     <string name="wizard_welcome_advanced">Avancerade inställningar</string>
     <string name="wizard_advanced_offlinemaps_label">Offline-kartor</string>
     <string name="wizard_advanced_offlinemaps_info">Denna sida innehåller några avancerade funktioner, som är valfria att använda.\n\nc:geo kan ladda ner kartfiler för offline-användning.</string>
-    <string name="wizard_advanced_brouter_label">Navigeringsapp</string>
-    <string name="wizard_advanced_brouter_info">Genom att installera och konfigurera en kompanjonapp som heter \"BRouter Offline Navigation\" kan c:geo navigera till mål och visa ruttinformation på kartan.</string>
     <string name="wizard_advanced_restore_label">Återställ</string>
     <string name="wizard_advanced_restore_info">Om du har en säkerhetskopia av en tidigare installation kan du återställa inställningar och/eller geocache-data.</string>
     <string name="status_not_ok">FEL</string>
