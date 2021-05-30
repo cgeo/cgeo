@@ -420,8 +420,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Tampilan tambahan halaman logbook untuk teman dan log sendiri</string>
     <string name="init_openlastdetailspage">Halaman Rincian Terakhir</string>
     <string name="init_summary_openlastdetailspage">Buka rincian dengan halaman terakhir yang di gunakan</string>
-    <string name="init_skin">Kulit putih</string>
-    <string name="init_summary_skin">Gunakan kulit ringan (Restart diperlukan)</string>
     <string name="init_address">Tampilkan Alamat</string>
     <string name="init_summary_address">Tampilkan alamat alternatif dari koordinat pada layar utama</string>
     <string name="init_exclude">Kecualikan Sendiri dan Ditemukan</string>
@@ -439,6 +437,7 @@
     <string name="init_choose_list">Meminta Daftar</string>
     <string name="init_summary_choose_list">Tanyakan daftar mana yang menyimpan cache di dalamnya</string>
     <string name="init_livelist">Menunjukkan Arah</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Cadangan</string>
     <string name="init_backup_running">Membuat cadangan dari basis data cache&#8230;</string>
