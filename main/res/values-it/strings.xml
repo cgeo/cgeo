@@ -606,8 +606,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Visualizza una pagina di log addizionale per i log dei tuoi amici e i tuoi log</string>
     <string name="init_openlastdetailspage">Carica ultima pagina usata nei dettagli</string>
     <string name="init_summary_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
-    <string name="init_skin">Tema chiaro</string>
-    <string name="init_summary_skin">Usa tema chiaro\n(richiede riavvio di c:geo)</string>
     <string name="init_address">Visualizza indirizzo</string>
     <string name="init_summary_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
     <string name="init_select_language">Seleziona lingua</string>
@@ -657,6 +655,7 @@
     <string name="init_summary_listdisplay">Mostra l\'appartenenza dei cache a liste aggiuntive in un elenco di cache</string>
     <string name="init_livelist">Visualizza direzione</string>
     <string name="init_summary_livelist">Mostra la direzione con la bussola per i cache in un elenco</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Crea backup</string>
     <string name="init_backup_summary">Si prega di notare che questa funzione può eseguire il backup dei cache, waypoint &amp; impostazioni, ma nessuna immagine cache. \nPer poter ripristinare i dati anche dopo aver perso il telefono, i file di backup devono essere copiati in una posizione indipendente.</string>
@@ -2003,8 +2002,6 @@
     <string name="wizard_welcome_advanced">Configurazione avanzata</string>
     <string name="wizard_advanced_offlinemaps_label">Mappe offline</string>
     <string name="wizard_advanced_offlinemaps_info">Questa pagina fornisce alcune funzioni avanzate, che sono facoltative da usare.\n\nc:geo può scaricare i file della mappa per l\'uso offline.</string>
-    <string name="wizard_advanced_brouter_label">App di navigazione</string>
-    <string name="wizard_advanced_brouter_info">Installando e configurando un\'app denominata \"BRouter Offline Navigation\" c:geo può navigare agli obiettivi e mostrare informazioni di percorso sulla mappa.</string>
     <string name="wizard_advanced_restore_label">Ripristina</string>
     <string name="wizard_advanced_restore_info">Se si dispone di un backup di un\'installazione precedente è possibile ripristinare le impostazioni e/o i dati cache.</string>
     <string name="status_not_ok">ERRORE</string>
