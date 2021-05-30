@@ -459,8 +459,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Afişează pagină de jurnal separată pentru însemnările proprii şi ale prietenilor</string>
     <string name="init_openlastdetailspage">Ultima pagină cu detalii</string>
     <string name="init_summary_openlastdetailspage">Arată detaliile de pe ultima pagină afişată</string>
-    <string name="init_skin">Culori luminoase</string>
-    <string name="init_summary_skin">Foloseşte culori luminoase (necesită repornirea aplicaţiei)</string>
     <string name="init_address">Arată adresa</string>
     <string name="init_summary_address">Arată adresa în locul coordonatelor pe ecranul principal</string>
     <string name="init_exclude">Exclude Găsite şi Ale mele</string>
@@ -478,6 +476,7 @@
     <string name="init_choose_list">Cere listă</string>
     <string name="init_summary_choose_list">Întreabă în care listă vor fi salvate cutiile</string>
     <string name="init_livelist">Arată direcţia</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_running">Creare salvare de siguranţă a bazei de date cu cutii…</string>
     <string name="init_backup_restore">Restaurează</string>
