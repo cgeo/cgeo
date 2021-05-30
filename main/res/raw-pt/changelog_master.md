@@ -6,6 +6,7 @@
 
 ### Mapa
 - Novo: Ao criar uma cache definida pelo utilizador enquanto exibe um mapa de uma lista – é permitido que o utilizador armazene a nova cache na lista actual (em vez da lista padrão para caches definidos pelo utilizador)
+- Change: Additionally show cache name in poup details
 
 ### Detalhes da cache
 - Novo: Utilização do Google Tradutor numa janela pop-up de tradução
@@ -17,6 +18,7 @@
 
 ### Outro
 - Alteração: Reformulámos completamente os aspectos técnicos internos de personalização do c:geo para podermos usar alguns componentes mais modernos fornecidos pelo Android. Isto terá efeitos colaterais, alguns dos quais não intencionais. Por favor, reporte quaisquer erros ou falhas na nossa [página do GitHub](https://www.github.com/cgeo/cgeo/issues) ou entre em contacto com o suporte.
-- Novo: Transferir as listas de geocaching.com - consulte "Listas / pocket queries" no menu principal
-- Novo: Ignorar a capacidade para geocaching.su
-- Alteração: Removida a aplicação de navegação RMAPS, já sem manutenção
+- New: Support day / night mode from system (optional)
+- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
+- New: Ignore capability for geocaching.su
+- Change: Removed no longer maintained RMAPS navigation app
