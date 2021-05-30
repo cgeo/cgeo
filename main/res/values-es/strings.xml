@@ -516,8 +516,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Mostrar una página adicional para los registros de amigos y propios</string>
     <string name="init_openlastdetailspage">Recordar última página</string>
     <string name="init_summary_openlastdetailspage">Mostrar última página vista al consultar los detalles del caché</string>
-    <string name="init_skin">Fondo blanco</string>
-    <string name="init_summary_skin">Usar fondo blanco (necesitas reiniciar c:geo)</string>
     <string name="init_address">Mostrar dirección</string>
     <string name="init_summary_address">Mostrar dirección en lugar de coordenadas en la pantalla principal</string>
     <string name="init_exclude">Excluir encontrados y propios</string>
@@ -545,6 +543,7 @@
     <string name="init_summary_choose_list">Preguntar en qué lista guardar el caché</string>
     <string name="init_listdisplay">Listas adicionales</string>
     <string name="init_livelist">Mostrar dirección</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Crear copia de seguridad</string>
     <string name="init_restore_title">Restaurar copia de seguridad</string>
