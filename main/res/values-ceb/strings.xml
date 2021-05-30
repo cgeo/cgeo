@@ -410,8 +410,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Ang pagpakita sa dugang nga panid sa logbook nga alang sa mga higala ug kaugalingong mga log</string>
     <string name="init_openlastdetailspage">Ang katapusang detalye nga panid</string>
     <string name="init_summary_openlastdetailspage">Ablihi ang mga detalye sa katapusang gigamit nga panid</string>
-    <string name="init_skin">Ang hayag ng panit</string>
-    <string name="init_summary_skin">Gamita ang hayag nga panit (Kinahanglanon nga bag-ohon)</string>
     <string name="init_address">Pagpakita sa Address</string>
     <string name="init_summary_address">Ipakita ang address imbis nga coordinate sa main nga screen</string>
     <string name="init_exclude">Ayaw i-apil ang Kaugalingon ug ang Nakita</string>
@@ -428,6 +426,7 @@
     <string name="init_choose_list">Pangyo og lista</string>
     <string name="init_summary_choose_list">Pangutan-a kung unsa nga lista ang ibutang sa mga caches sa</string>
     <string name="init_livelist">Ipakita ang Direksyon</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Tabang</string>
     <string name="init_backup_running">Pagbuhat ug tabang para sa cache database…</string>
