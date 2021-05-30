@@ -528,8 +528,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Rodyti draugų ir savų įrašų žurnalo papildomą puslapį</string>
     <string name="init_openlastdetailspage">Paskutinis informacijos puslapis</string>
     <string name="init_summary_openlastdetailspage">Atidaryti informaciją iš paskutinio naudoto puslapio</string>
-    <string name="init_skin">Šviesi tema</string>
-    <string name="init_summary_skin">Naudoti šviesią programos temą (reikia pakartotinai paleisti)</string>
     <string name="init_address">Rodyti adresą</string>
     <string name="init_summary_address">Pagrindiniame ekrane vietoje koordinačių rodyti adresą</string>
     <string name="init_select_language">Pasirinkite kalbą</string>
@@ -562,6 +560,7 @@
     <string name="init_listdisplay">Papildomi sąrašai</string>
     <string name="init_summary_listdisplay">Rodyti slėptuvių narių papildomus sąrašus slėptuvės sąraše</string>
     <string name="init_livelist">Rodyti kryptį</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Kurti atsarginę kopiją</string>
     <string name="init_restore_title">Atkurti atsarginę kopiją</string>
