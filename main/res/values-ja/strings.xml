@@ -650,8 +650,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">ジオ友達/自分のログの追加のページを表示</string>
     <string name="init_openlastdetailspage">最後に表示したページ</string>
     <string name="init_summary_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
-    <string name="init_skin">明るいスキン</string>
-    <string name="init_summary_skin">明るい色のスキンを使用\n(c:geoの再起動が必要)</string>
     <string name="init_address">地名表示</string>
     <string name="init_summary_address">メイン画面での現在地を座標値の代わりに地名で表示</string>
     <string name="init_select_language">言語の選択</string>
@@ -702,6 +700,7 @@
     <string name="init_summary_listdisplay">キャッシュリスト中にリスト名も表示</string>
     <string name="init_livelist">方向を表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向の矢印を表示</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">バックアップの作成</string>
     <string name="init_backup_summary">キャッシュ、ウェイポイント、c:geo設定がバックアップされますがキャッシュ画像は対象外です。\nデバイスを紛失してもデータを復元するためにはバックアップファイルをほかの場所にコピーしておく必要があります</string>
@@ -2015,8 +2014,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_welcome_advanced">追加設定</string>
     <string name="wizard_advanced_offlinemaps_label">オフライン地図のダウンロード</string>
     <string name="wizard_advanced_offlinemaps_info">ここでは追加の設定ができます\n\nオフラインで使うために地図ファイルをダウンロードできます</string>
-    <string name="wizard_advanced_brouter_label">ルート検索アプリ</string>
-    <string name="wizard_advanced_brouter_info">BRouter Offline Navigationをインストールしてセットアップすると(オフラインでも)目的地へナビゲーションしたり地図にルートを表示することができます</string>
     <string name="wizard_advanced_restore_label">復元</string>
     <string name="wizard_advanced_restore_info">バックアップからc:geo設定やキャッシュ情報を復元できます</string>
     <string name="status_not_ok">未完了</string>
