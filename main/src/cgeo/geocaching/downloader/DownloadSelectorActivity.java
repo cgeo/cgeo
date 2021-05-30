@@ -88,7 +88,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
             holder.binding.label.setText(offlineMap.getName());
             if (offlineMap.getIsDir()) {
                 holder.binding.info.setText(R.string.downloadmap_directory);
-                holder.binding.action.setBackgroundResource(R.drawable.ic_menu_folder);
+                holder.binding.action.setImageResource(R.drawable.ic_menu_folder);
                 holder.binding.getRoot().setOnClickListener(v -> {
                     new MapListTask(activity, offlineMap.getUri(), offlineMap.getName()).execute();
                 });
@@ -101,7 +101,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                     + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "")
                     + (StringUtils.isNotBlank(sizeInfo) ? Formatter.SEPARATOR + offlineMap.getSizeInfo() : "")
                     + Formatter.SEPARATOR + offlineMap.getTypeAsString());
-                holder.binding.action.setBackgroundResource(offlineMap.getIconRes());
+                holder.binding.action.setImageResource(offlineMap.getIconRes());
                 holder.binding.getRoot().setOnClickListener(v -> {
                     // return to caller with URL chosen
                     final Intent intent = new Intent();
