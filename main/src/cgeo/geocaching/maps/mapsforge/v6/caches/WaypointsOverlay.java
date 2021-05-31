@@ -43,11 +43,13 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
 
         if (showStored) {
             final boolean excludeMine = Settings.isExcludeMyCaches();
+            final boolean excludeFound = Settings.isExcludeFound();
             final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
             final boolean excludeArchived = Settings.isExcludeArchivedCaches();
+            final boolean excludeOfflineLog = Settings.isExcludeOfflineLog();
             final CacheType type = Settings.getCacheType();
 
-            final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(getViewport(), excludeMine, excludeDisabled, excludeArchived, type);
+            final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(getViewport(), excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog, type);
             MapUtils.filter(waypointsInViewport, checkOwnership);
             waypoints.addAll(waypointsInViewport);
         }

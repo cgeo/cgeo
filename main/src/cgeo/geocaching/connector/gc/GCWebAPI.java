@@ -819,7 +819,7 @@ class GCWebAPI {
             .setBox(viewport)
             .addCacheTypes(Settings.getCacheType())
             .setStatusOwn(Settings.isGCPremiumMember() && Settings.isExcludeMyCaches() ? false : null)
-            .setStatusFound(Settings.isGCPremiumMember() && Settings.isExcludeMyCaches() ? false : null)
+            .setStatusFound(Settings.isGCPremiumMember() && Settings.isExcludeFound() ? false : null)
         );
     }
 

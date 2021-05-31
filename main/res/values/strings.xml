@@ -727,8 +727,10 @@
     <string name="init_summary_select_language">Select in-app language (requires restart)\n</string>
     <string name="init_use_default_language">Use default language</string>
     <string name="init_category_exclude">Exclude caches</string>
-    <string name="init_exclude">Exclude Own and Found</string>
-    <string name="init_summary_exclude">Exclude caches you own or have found</string>
+    <string name="init_exclude_own">Exclude Own</string>
+    <string name="init_summary_exclude_own">Exclude caches you own </string>
+    <string name="init_exclude_found">Exclude Found</string>
+    <string name="init_summary_exclude_found">Exclude caches you have found</string>
     <string name="init_showwaypoints">Show Waypoints</string>
     <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
     <string name="init_zoomincludingwaypoints">Zoom includes waypoints</string>
@@ -753,6 +755,8 @@
     <string name="init_summary_disabled">Exclude disabled caches</string>
     <string name="init_archived">Exclude Archived</string>
     <string name="init_summary_archived">Exclude archived caches</string>
+    <string name="init_offlinelog">Exclude Offline Log</string>
+    <string name="init_summary_offlinelog">Exclude caches with Offline Log</string>
     <string name="init_global_wp_extraction_disable">Disable waypoint extraction</string>
     <string name="init_summary_global_wp_extraction_disable">Globally disable waypoint extraction from personal cache notes. It can still be enabled for individual caches by deactivating the checkbox below the personal cache note</string>
     <string name="init_customtabs_as_browser">Use Chrome WebView</string>
@@ -1481,9 +1485,11 @@
     <string name="map_rotation">Map rotation</string>
     <string name="map_dot_mode">Use compact icons</string>
     <string name="map_show_circles">Show circles</string>
-    <string name="map_showc_ownfound">Own/found caches</string>
+    <string name="map_showc_own">Own caches</string>
+    <string name="map_showc_found">Found caches</string>
     <string name="map_showc_disabled">Disabled caches</string>
     <string name="map_showc_archived">Archived caches</string>
+    <string name="map_showc_offlinelog">Caches with Offline Log</string>
     <string name="map_showwp_original">Original waypoints</string>
     <string name="map_showwp_parking">Parking waypoints</string>
     <string name="map_showwp_visited">Visited waypoints</string>

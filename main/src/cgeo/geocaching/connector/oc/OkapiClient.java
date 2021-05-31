@@ -1118,6 +1118,8 @@ final class OkapiClient {
         }
         if (!my && Settings.isExcludeMyCaches() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
             valueMap.put("exclude_my_own", "true");
+        }
+        if (!my && Settings.isExcludeFound() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
             valueMap.put("found_status", "notfound_only");
         }
 
