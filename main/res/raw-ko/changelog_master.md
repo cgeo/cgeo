@@ -18,7 +18,7 @@
 
 ### 추가 사항
 - 변경: Android에서 제공하는 최신 구성 요소를 사용할 수 있도록 내부 기술 측면 c:geo 테마를 완전히 재 작업했습니다. 이것은 몇 가지 부작용이 있을 것이며 일부는 의도하지 않은 것입니다. [GitHub 페이지](https://www.github.com/cgeo/cgeo/issues) 또는 지원팀에 문의하여 오류나 결함을 신고 해주세요.
-- New: Support day / night mode from system (optional)
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+- 신규: 시스템에서 주간 / 야간 모드 지원 (옵션)
+- 신규: geocaching.com에서 북마크 목록 다운로드 - 메인 메뉴의 "목록/포켓 쿼리" 참조
+- 신규: geocaching.su에 대한 기능 무시
+- 변경: 더 이상 유지 관리되지 않는 RMAPS 탐색 앱 제거
