@@ -507,6 +507,9 @@
     <string name="cache_filter_status_select_only_found_no">Alleen niet gevonden</string>
     <string name="cache_filter_status_select_only_own_yes">Alleen in bezit</string>
     <string name="cache_filter_status_select_only_own_no">Alleen niet in bezit</string>
+    <string name="cache_filter_status_exclude_active">Actieve uitsluiten</string>
+    <string name="cache_filter_status_exclude_disabled">Uitgeschakeld uitsluiten</string>
+    <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
     <string name="cache_filter_log_entry_foundby">Gevonden door:</string>
     <string name="cache_filter_log_entry_logtext">Log tekst:</string>
     <!-- about -->
@@ -712,6 +715,12 @@
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
     <!-- app theme -->
+    <string name="settings_theme_title">Thema</string>
+    <string-array name="settings_theme_entries">
+        <item>Systeemstandaard</item>
+        <item>Licht</item>
+        <item>Donker</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Back-up maken</string>
     <string name="init_backup_summary">Houd er rekening mee dat deze functie een back-up kan maken van caches, waypoints &amp; instellingen, maar niet van cache-afbeeldingen. \nOm de gegevens te kunnen herstellen, zelfs na het verliezen van je telefoon, dienen de back-upbestanden te worden gekopieerd naar een onafhankelijke locatie.</string>
@@ -1359,6 +1368,8 @@
     <string name="map_as_list">Laat zien als lijst</string>
     <string name="map_select_multiple_items">Selecteer item</string>
     <string name="map_routing">Routering</string>
+    <string name="map_routing_activate_title">Routering inschakelen</string>
+    <string name="map_routing_activate">Sommige routingingsmodes zijn momenteel niet beschikbaar, omdat er geen routplanner actief is.\n\nWil je c:geo\'s interne routeplanner activeren en data downloaden?</string>
     <string name="map_gm_autorotation">Automatische kaartrotatie</string>
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
@@ -1384,6 +1395,7 @@
     <string name="search_hbu_button">Zoeken op eigenaar</string>
     <string name="search_filter">Filter (experimenteel)</string>
     <string name="search_filter_button">Zoeken op filter</string>
+    <string name="search_filter_info_message">**Zoek op filter** zoekt caches op alle actieve online diensten (bijv. geocaching.com) met een opgegeven filter. De zoekmogelijkheden van deze diensten zijn echter meestal beperkter dan de filtermogelijkheden van c:geo.\n\n- Alle diensten ondersteunen alleen EN filters (geen OF filters en geen filterinversie).\n- De meer basisfilters zoals **cache type** of **cache grootte** worden ondersteund door alle diensten. Meer gecompliceerde filters worden vaak niet ondersteund of hebben enkele beperkingen, bijvoorbeeld **favorieten** of **verborgen datum**.\n- Een gedetailleerde lijst met ondersteunde filters per service kan worden gevonden [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters die niet worden ondersteund door de online dienst zullen worden toegepast door c:geo op de ontvangen resultaten.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable identificatie</string>
     <string name="search_tb_button">Zoeken naar trackable</string>
@@ -2059,6 +2071,8 @@
     <string name="wizard_welcome_advanced">Geavanceerde configuratie</string>
     <string name="wizard_advanced_offlinemaps_label">Offline kaarten</string>
     <string name="wizard_advanced_offlinemaps_info">Deze pagina biedt enkele geavanceerde functies, die optioneel te gebruiken zijn.\n\nc:geo kan kaartbestanden downloaden voor offline gebruik.</string>
+    <string name="wizard_advanced_routing_label">Activeer offline routering</string>
+    <string name="wizard_advanced_routing_info">c:geo heeft een interne routeplanner voor offline routeren en kan automatisch ontbrekende routeringsgegevens voor je downloaden.</string>
     <string name="wizard_advanced_restore_label">Terugzetten</string>
     <string name="wizard_advanced_restore_info">Als je een backup van een eerdere installatie hebt, kun je instellingen en/of geocache gegevens herstellen.</string>
     <string name="status_not_ok">FOUT</string>
