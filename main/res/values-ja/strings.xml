@@ -466,7 +466,11 @@
     <string name="cache_filter_favorites">お気に入り</string>
     <string name="cache_filter_distance">距離</string>
     <string name="cache_filter_hidden">設置日</string>
+    <string name="cache_filter_logs_count">ログ数</string>
+    <string name="cache_filter_last_found">発見日</string>
+    <string name="cache_filter_log_entry">ログ内容</string>
     <string name="cache_filtergroup_basic">基本</string>
+    <string name="cache_filtergroup_details">詳細</string>
     <string name="cache_filtergroup_userspecific">ユーザー固有</string>
     <string name="cache_filter_include">含む</string>
     <string name="cache_filter_exclude">除く</string>
@@ -500,6 +504,11 @@
     <string name="cache_filter_status_select_only_found_no">未発見</string>
     <string name="cache_filter_status_select_only_own_yes">オーナー</string>
     <string name="cache_filter_status_select_only_own_no">オーナーではない</string>
+    <string name="cache_filter_status_exclude_active">アクティブを除外</string>
+    <string name="cache_filter_status_exclude_disabled">一時停止中キャッシュを除外</string>
+    <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
+    <string name="cache_filter_log_entry_foundby">発見したユーザー名:</string>
+    <string name="cache_filter_log_entry_logtext">ログの本文:</string>
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
@@ -701,6 +710,12 @@
     <string name="init_livelist">方向を表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向の矢印を表示</string>
     <!-- app theme -->
+    <string name="settings_theme_title">テーマ</string>
+    <string-array name="settings_theme_entries">
+        <item>システムのデフォルト</item>
+        <item>ライト</item>
+        <item>ダーク</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">バックアップの作成</string>
     <string name="init_backup_summary">キャッシュ、ウェイポイント、c:geo設定がバックアップされますがキャッシュ画像は対象外です。\nデバイスを紛失してもデータを復元するためにはバックアップファイルをほかの場所にコピーしておく必要があります</string>
@@ -1335,6 +1350,9 @@
     <string name="map_live_disable">保存済みキャッシュのみ</string>
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
+    <string name="map_routing">ルート検索</string>
+    <string name="map_routing_activate_title">ルート検索について</string>
+    <string name="map_routing_activate">ルート検索エンジンがないためルート検索は現在使用できません。\n\nc:geoルート検索を有効にしてルート検索データをダウンロードしますか? </string>
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
@@ -1450,7 +1468,7 @@
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます</string>
     <string name="helper_where_you_go_description">WhereYouGoアプリでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
-    <string name="helper_brouter_description">BRouterはオフラインのルート検索エンジンです。インストール後に必要なファイルをダウンロードするなどのセットアップが必要です。c:geoで地図にキャッシュなどへのルートを表示できるようになります</string>
+    <string name="helper_brouter_description">BRouterはオフライン用のルート検索エンジンです。インストール後に必要なファイルをダウンロードするなどのセットアップが必要です。c:geoで地図にキャッシュなどへのルートを表示できるようになります</string>
     <string name="helper_chirpwolf_description">Chirp Wolfを使用するとANT+/Garmin chirp(ジオキャッシュ ビーコン)からデータを読み取ることができます。Garmin chirpを含むジオキャッシュには必要です</string>
     <string name="helper_alc_description">スマホやタブレット用のアドベンチャー・ラボのアプリ</string>
     <!-- export -->
