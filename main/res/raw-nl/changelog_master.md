@@ -6,7 +6,7 @@
 
 ### Kaart
 - Nieuw: Bij het maken van een door de gebruiker gedefinieerde cache tijdens het weergeven van een kaart uit een lijst: Bied gebruiker aan om een nieuwe cache op te slaan in de huidige lijst (in plaats van de standaardlijst voor caches die door de gebruiker zijn gedefinieerd)
-- Change: Additionally show cache name in poup details
+- Wijziging: ook cache naam weergeven in de popup details
 
 ### Cache details
 - Nieuw: Maak gebruik van Google translate in-app vertalingspopup
@@ -18,7 +18,7 @@
 
 ### Other
 - Wijziging: We hebben de interne technische aspecten voor c:geo thema's volledig geherstructureerd om gebruik te kunnen maken van enkele modernere componenten die door Android aangeboden worden. Dit zal een aantal neveneffecten hebben, waarvan sommige onbedoeld zijn. Gelieve fouten of storingen te melden op onze [GitHub pagina](https://www.github.com/cgeo/cgeo/issues) of door contact op te nemen met support.
-- New: Support day / night mode from system (optional)
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+- Nieuw: Ondersteuning dag / nachtmodus van het systeem (optioneel)
+- Nieuw: Download bladwijzerlijsten van geocaching.com - zie "Lijsten / pocket queries" in het hoofdmenu
+- Nieuw: Negeer mogelijkheid voor geocaching.su
+- Wijziging: De niet langer onderhouden RMAPS navigatie-app is verwijderd
