@@ -507,6 +507,9 @@
     <string name="cache_filter_status_select_only_found_no">Apenas Não Encontradas</string>
     <string name="cache_filter_status_select_only_own_yes">Apenas Próprias</string>
     <string name="cache_filter_status_select_only_own_no">Apenas de Outros</string>
+    <string name="cache_filter_status_exclude_active">Excluir Activas</string>
+    <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
+    <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
     <string name="cache_filter_log_entry_foundby">Encontrada por:</string>
     <string name="cache_filter_log_entry_logtext">Texto de registo:</string>
     <!-- about -->
@@ -712,6 +715,12 @@
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <!-- app theme -->
+    <string name="settings_theme_title">Tema</string>
+    <string-array name="settings_theme_entries">
+        <item>Predefinição do sistema</item>
+        <item>Claro</item>
+        <item>Escuro</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Tenha em consideração que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais e configurações, mas não de imagens em caches.\nPara que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
@@ -1358,6 +1367,9 @@
     <string name="map_live_disable">Desactivar em tempo real</string>
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar item</string>
+    <string name="map_routing">Encaminhamento</string>
+    <string name="map_routing_activate_title">Permitir rastreamento</string>
+    <string name="map_routing_activate">Alguns modos de rastreamento não estão disponíveis de momento, pois não há nenhum motor de encaminhamento activo.\n\nQuer activar o mecanismo de encaminhamento interno do c:geo e transferir os respectivos dados?</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
@@ -1383,6 +1395,7 @@
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_filter">Filtro (experimental)</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
+    <string name="search_filter_info_message">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
@@ -2054,6 +2067,8 @@ do mapa e dos temas?</string>
     <string name="wizard_welcome_advanced">Configurações avançadas</string>
     <string name="wizard_advanced_offlinemaps_label">Mapas offline</string>
     <string name="wizard_advanced_offlinemaps_info">Esta página fornece algumas funções avançadas, que são de uso opcional.\n\nO c:geo pode descarregar ficheiros de mapa para usar sem estar ligado à Internet.</string>
+    <string name="wizard_advanced_routing_label">Activar encaminhamento offline</string>
+    <string name="wizard_advanced_routing_info">O c:geo tem um mecanismo de encaminhamento interno para encaminhamento offline e pode transferir automaticamente esses dados em falta.</string>
     <string name="wizard_advanced_restore_label">Restaurar</string>
     <string name="wizard_advanced_restore_info">Se tiver uma cópia de segurança de uma instalação anterior, pode restaurar configurações e/ou dados de geocaches.</string>
     <string name="status_not_ok">ERRO</string>
