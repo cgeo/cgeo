@@ -659,8 +659,6 @@
     <string name="init_summary_select_language">Uygulama dilini seçiniz (yeniden başlatma gerekli)\n</string>
     <string name="init_use_default_language">Varsayılan dili kullan</string>
     <string name="init_category_exclude">Geocache\'leri hariç tut</string>
-    <string name="init_exclude">Cache\'lerimi ve Bulduklarımı Dahil Etme</string>
-    <string name="init_summary_exclude">Sahibi olduklarımı ve bulduklarımı dahil etme</string>
     <string name="init_showwaypoints">Yol Noktalarını Göster</string>
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
     <string name="init_zoomincludingwaypoints">Yakınlaştırmada yol noktalarını da göster</string>
@@ -1325,7 +1323,6 @@
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
     <string name="map_show_circles">Çemberleri göster</string>
-    <string name="map_showc_ownfound">Bulduklarım/kendi kutularım</string>
     <string name="map_showc_disabled">Devre dışı cache\'ler</string>
     <string name="map_showc_archived">Arşivlenmiş cache\'ler</string>
     <string name="map_showwp_original">Orijinal yol noktaları</string>
