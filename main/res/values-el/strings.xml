@@ -666,8 +666,6 @@
     <string name="init_summary_select_language">Επιλλέξτε γλώσσα στην εφαρμογή (Χρειάζεται επανεκκίνηση)\n</string>
     <string name="init_use_default_language">Χρήση προεπιλεγμένης Γλώσσας</string>
     <string name="init_category_exclude">Εξαίρεση κρυπτών</string>
-    <string name="init_exclude">Εξαίρεση των δικών σας και όσων έχετε βρει</string>
-    <string name="init_summary_exclude">Εξαίρεση των δικών σας κρυπτών ή όσων έχετε βρει</string>
     <string name="init_showwaypoints">Προβολή σημείων αναφοράς</string>
     <string name="init_showwaypoint_description">Αν εμφανίζονται στον χάρτη λιγότερες από τις δεδομένες κρύπτες, εμφανίζονται επιπλέον και τα σημεία τους.</string>
     <string name="init_zoomincludingwaypoints">Το επίπεδο εστίασης περιλαμβάνει τα waypoints</string>
@@ -1333,7 +1331,6 @@
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
     <string name="map_show_circles">Εμφάνιση κύκλων</string>
-    <string name="map_showc_ownfound">Ιδιόκτητες κρύπτες/ευρέσεις</string>
     <string name="map_showc_disabled">Απενεργοποιημένες κρύπτες</string>
     <string name="map_showc_archived">Αρχειοθετημένες κρύπτες</string>
     <string name="map_showwp_original">Αρχικά ενδιάμεσα σημεία</string>
