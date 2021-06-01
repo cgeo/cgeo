@@ -21,6 +21,7 @@
     <item
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_goto"
+        style="@style/menu_item"
         android:title="@string/cache_menu_navigate"
         app:actionProviderClass="cgeo.geocaching.apps.navi.NavigationSelectionActionProvider"
         app:showAsAction="ifRoom|withText"

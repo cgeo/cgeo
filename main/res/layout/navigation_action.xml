@@ -11,6 +11,7 @@
         android:layout_height="fill_parent"
         android:scaleType="centerInside"
         app:srcCompat="@drawable/ic_menu_compass"
+        style="@style/menu_item"
         android:background="@drawable/actionbar_button" />
 
 </LinearLayout>

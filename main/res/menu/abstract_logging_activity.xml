@@ -6,12 +6,14 @@
         android:id="@+id/menu_send"
         android:enabled="true"
         android:icon="@drawable/ic_menu_send"
+        style="@style/menu_item"
         android:title="@string/send"
         app:showAsAction="ifRoom|withText"> <!-- enabled=true, we show a message if logging is not possible -->
     </item>
     <item
         android:id="@+id/menu_templates"
         android:icon="@drawable/ic_menu_add"
+        style="@style/menu_item"
         android:title="@string/log_add"
         app:showAsAction="ifRoom|withText">
         <menu /> <!-- filled dynamically -->
@@ -19,6 +21,7 @@
     <item
         android:id="@+id/menu_image"
         android:icon="@drawable/ic_menu_attachment"
+        style="@style/menu_item"
         android:title="@string/log_image_attach"
         android:visible="false"
         app:showAsAction="ifRoom|withText">
@@ -26,6 +29,7 @@
     <item
         android:id="@+id/menu_smilies"
         android:icon="@drawable/ic_menu_emoticons"
+        style="@style/menu_item"
         android:title="@string/log_smilies"
         app:showAsAction="ifRoom|withText">
         <menu /> <!-- filled dynamically -->
@@ -33,12 +37,14 @@
     <item
         android:id="@+id/save"
         android:icon="@drawable/ic_menu_save"
+        style="@style/menu_item"
         android:title="@string/log_save"
         android:visible="false"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_sort_trackables_by"
+        style="@style/menu_item"
         android:title="@string/log_tb_sortby"
         app:showAsAction="ifRoom|withText">
         <menu>
@@ -65,6 +71,7 @@
     <item
         android:id="@+id/clear"
         android:icon="@drawable/ic_menu_delete"
+        style="@style/menu_item"
         android:title="@string/log_clear"
         android:visible="false"
         app:showAsAction="ifRoom|withText">

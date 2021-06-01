@@ -5,24 +5,28 @@
     <item
         android:id="@+id/menu_hint"
         android:icon="@drawable/ic_menu_hint"
+        style="@style/menu_item"
         android:title="@string/cache_hint"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_map"
         android:icon="@drawable/ic_menu_mapmode"
+        style="@style/menu_item"
         android:title="@string/caches_on_map"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_tts_toggle"
         android:icon="@drawable/ic_menu_start_conversation"
+        style="@style/menu_item"
         android:title="@string/tts_toggle"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_select_destination"
         android:icon="@drawable/ic_menu_myplaces"
+        style="@style/menu_item"
         android:orderInCategory="999"
         android:title="@string/destination_select"
         android:visible="false"

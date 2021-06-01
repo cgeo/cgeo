@@ -5,11 +5,13 @@
     <item
         android:id="@+id/menu_default_navigation"
         android:icon="@drawable/ic_menu_compass"
+        style="@style/menu_item"
         android:title="@string/cache_menu_navigate"> <!-- will be replaced -->
     </item>
     <item
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_goto"
+        style="@style/menu_item"
         android:title="@string/cache_menu_navigate"
         app:showAsAction="ifRoom|withText">
     </item>
@@ -21,18 +23,21 @@
     <item
         android:id="@+id/menu_log_visit_offline"
         android:icon="@drawable/ic_menu_edit"
+        style="@style/menu_item"
         android:title="@string/cache_menu_visit_offline"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_log_visit"
         android:icon="@drawable/ic_menu_edit"
+        style="@style/menu_item"
         android:title="@string/cache_menu_visit"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_drop_cache"
         android:icon="@drawable/ic_menu_delete"
+        style="@style/menu_item"
         android:title="@string/cache_offline_drop"
         app:showAsAction="ifRoom|withText">
     </item>
@@ -49,12 +54,14 @@
     <item
         android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_menu_refresh"
+        style="@style/menu_item"
         android:title="@string/cache_menu_refresh"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_store_cache"
         android:icon="@drawable/ic_menu_save"
+        style="@style/menu_item"
         android:title="@string/cache_offline_store"
         app:showAsAction="ifRoom|withText">
     </item>
