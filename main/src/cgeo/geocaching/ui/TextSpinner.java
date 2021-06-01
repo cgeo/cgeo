@@ -8,7 +8,6 @@ import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
@@ -23,6 +22,7 @@ import static android.text.Spanned.SPAN_INCLUSIVE_EXCLUSIVE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;

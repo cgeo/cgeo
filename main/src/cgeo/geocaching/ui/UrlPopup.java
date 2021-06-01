@@ -3,10 +3,11 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class UrlPopup {
 

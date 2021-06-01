@@ -31,7 +31,6 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -55,6 +54,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 

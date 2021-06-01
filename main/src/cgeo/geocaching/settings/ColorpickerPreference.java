@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisplayUtils;
 
+// need to use non-androidX AlertDialog until we migrate to preferenceFragment
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;

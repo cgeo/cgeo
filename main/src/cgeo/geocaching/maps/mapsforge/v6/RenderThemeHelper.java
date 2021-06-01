@@ -21,7 +21,6 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +28,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
 
 import java.io.File;

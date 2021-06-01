@@ -88,7 +88,6 @@ import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -115,6 +114,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.MenuItemCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;

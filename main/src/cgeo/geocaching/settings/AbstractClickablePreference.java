@@ -3,7 +3,6 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.preference.Preference;
 import android.util.AttributeSet;
@@ -11,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AlertDialog;
 
 abstract class AbstractClickablePreference extends Preference implements View.OnLongClickListener {
 
