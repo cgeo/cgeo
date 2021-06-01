@@ -528,8 +528,6 @@
     <string name="init_summary_select_language">Izvēlēties aplikācijas valodu (nepieciešama restartēšana)\n</string>
     <string name="init_use_default_language">Lietot noklusējuma valodu</string>
     <string name="init_category_exclude">Izņemt slēpņus</string>
-    <string name="init_exclude">Nerādīt savus un atrastos</string>
-    <string name="init_summary_exclude">Nerādīt tev piederošus vai jau atrastos slēpņus</string>
     <string name="init_showwaypoints">Rādīt starpposmus</string>
     <string name="init_showwaypoint_description">Ja skaits ir mazāks nekā norādītais attēlojamo slēpņu skaits, tad papildus kartē tiek parādīti arī to Starpposmi.</string>
     <string name="init_zoomincludingwaypoints">Tālummaiņa iekļauj ceļa punktus</string>
