@@ -562,8 +562,6 @@
     <string name="init_summary_select_language">Sélectionnez la langue de l\'application (nécessite un redémarrage)\n</string>
     <string name="init_use_default_language">Utiliser la langue par défaut</string>
     <string name="init_category_exclude">Exclure des caches</string>
-    <string name="init_exclude">Exclure mes caches et les caches trouvées</string>
-    <string name="init_summary_exclude">Exclure mes caches et les caches trouvées</string>
     <string name="init_showwaypoints">Afficher les points de passage</string>
     <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points de passage sont affichés en plus sur la carte.</string>
     <string name="init_zoomincludingwaypoints">Le zoom inclut les points de passage</string>
@@ -1217,7 +1215,6 @@
     <string name="map_rotation">Rotation de la carte</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
     <string name="map_show_circles">Afficher les cercles</string>
-    <string name="map_showc_ownfound">Caches placées / trouvées</string>
     <string name="map_showc_disabled">Caches désactivées</string>
     <string name="map_showc_archived">Caches archivées</string>
     <string name="map_showwp_original">Points de passage d\'origine</string>
