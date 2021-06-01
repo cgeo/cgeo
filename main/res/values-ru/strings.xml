@@ -544,8 +544,6 @@
     <string name="init_summary_select_language">Выберите язык приложения (требуется перезапуск)\n</string>
     <string name="init_use_default_language">Использовать язык по умолчанию</string>
     <string name="init_category_exclude">Исключить тайники</string>
-    <string name="init_exclude">Скрыть свои и найденные</string>
-    <string name="init_summary_exclude">Исключить ваши собственные и найденные вами тайники</string>
     <string name="init_showwaypoints">Показ путевых точек</string>
     <string name="init_showwaypoint_description">Если на карте меньше заданного числа тайников, то их этапы будут показаны автоматически.</string>
     <string name="init_zoomincludingwaypoints">Увеличение вместе с точками</string>
@@ -1168,7 +1166,6 @@
     <string name="map_rotation">Вращение карты</string>
     <string name="map_dot_mode">Маленькие иконки</string>
     <string name="map_show_circles">Показать круги</string>
-    <string name="map_showc_ownfound">Свои/найденные тайники</string>
     <string name="map_showc_disabled">Тайники вне игры</string>
     <string name="map_showc_archived">Архивные тайники</string>
     <string name="map_showwp_original">Оригинальные точки</string>
