@@ -430,8 +430,6 @@
     <string name="init_summary_openlastdetailspage">افتح التفاصيل باستخدام آخر صفحة مستخدمة</string>
     <string name="init_address">عرض العنوان</string>
     <string name="init_summary_address">عرض العنوان بدلاً من الإحدثيات على الشاشة الرئسية</string>
-    <string name="init_exclude">استبعاد الخاصة والمكتسبة</string>
-    <string name="init_summary_exclude">استبعاد المخبآت التي تملكها أو التي عثرت عليها</string>
     <string name="init_showwaypoints">عرض إحداثية الطريق</string>
     <string name="init_showwaypoint_description">إذا تم عرض كمية أقل من المخبآت على الخريطة، يتم عرض إحدثيات الطريق الخاصة بهم إضافة إلى ذلك.</string>
     <string name="init_disabled">الاستبعاد معطل</string>
