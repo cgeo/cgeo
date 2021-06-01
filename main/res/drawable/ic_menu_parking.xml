@@ -3,7 +3,8 @@
     android:width="24dp"
     android:viewportHeight="24"
     android:viewportWidth="24"
-    android:tint="@color/colorIcon">
+    android:tint="@color/colorIcon"
+    android:alpha="@dimen/icon_alpha">
      <path
       android:fillColor="#FF000000"
       android:pathData="M12.9974,11.1111H11.0282V8.2222h1.9692a1.2308,1.4444 0,0 1,1.2308 1.4444,1.2308 1.4444,0 0,1 -1.2308,1.4444M12.8744,5.3333H8.5667V18.3333H11.0282V14h1.8462a3.6923,4.3333 0,0 0,3.6923 -4.3333c0,-2.3978 -1.6554,-4.3333 -3.6923,-4.3333z"/>
