@@ -340,8 +340,6 @@
     <string name="init_ratingwanted">GCvote mat</string>
     <string name="init_summary_ratingwanted">Sjá dóma um cache frá GCvote.com</string>
     <string name="init_address">Sýna heimilisfang</string>
-    <string name="init_exclude">Útiloka eigin og fundin</string>
-    <string name="init_summary_exclude">Útiloka cache sem þú átt eða hefur fundið</string>
     <string name="init_disabled">Útiloka óvirk</string>
     <string name="init_summary_disabled">Útiloka óvirk cache</string>
     <string name="init_save_log_img">Vista myndir</string>
