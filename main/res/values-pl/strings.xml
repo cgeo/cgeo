@@ -565,8 +565,6 @@
     <string name="init_summary_select_language">Wybierz język aplikacji (wymaga ponownego uruchomienia)\n</string>
     <string name="init_use_default_language">Użyj domyślnego języka</string>
     <string name="init_category_exclude">Wyklucz skrytki</string>
-    <string name="init_exclude">Wyklucz własne lub już znalezione skrzynki</string>
-    <string name="init_summary_exclude">Wyklucz własne lub już znalezione skrzynki</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacji na mapie</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
@@ -1246,7 +1244,6 @@
     <string name="map_rotation">Obrót mapy</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
     <string name="map_show_circles">Pokaż okręgi</string>
-    <string name="map_showc_ownfound">Skrytki własne/znalezione</string>
     <string name="map_showc_disabled">Skrytki wyłączone</string>
     <string name="map_showc_archived">Skrytki zarchiwizowane</string>
     <string name="map_showwp_original">Oryginalne punkty nawigacyjne</string>
