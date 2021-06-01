@@ -35,7 +35,6 @@ import cgeo.geocaching.utils.Log;
 import android.R.layout;
 import android.R.string;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -49,6 +48,7 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 

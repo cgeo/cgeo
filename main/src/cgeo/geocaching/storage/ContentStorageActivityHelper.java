@@ -9,7 +9,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -24,6 +23,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
 
 import java.util.ArrayList;

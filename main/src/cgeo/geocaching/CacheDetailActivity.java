@@ -97,7 +97,6 @@ import static cgeo.geocaching.apps.cache.WhereYouGoApp.isWhereYouGoInstalled;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ClipboardManager;
@@ -149,6 +148,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.content.res.ResourcesCompat;

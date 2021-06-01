@@ -18,11 +18,12 @@ import cgeo.geocaching.utils.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.net.Uri;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

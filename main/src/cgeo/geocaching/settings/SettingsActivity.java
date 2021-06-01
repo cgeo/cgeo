@@ -41,7 +41,6 @@ import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.R.string;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
@@ -69,6 +68,7 @@ import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import java.io.File;

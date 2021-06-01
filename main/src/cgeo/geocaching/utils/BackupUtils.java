@@ -19,7 +19,6 @@ import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_UNKNOWN;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +36,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
 
 import java.io.IOException;

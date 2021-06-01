@@ -18,7 +18,6 @@ import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -44,6 +43,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
@@ -54,6 +54,7 @@ import java.util.Objects;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import io.noties.markwon.Markwon;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -1074,7 +1075,7 @@ public final class Dialogs {
     }
 
     public static AlertDialog.Builder newBuilder(final Context context) {
-        return new AlertDialog.Builder(newContextThemeWrapper(context));
+        return new MaterialAlertDialogBuilder (newContextThemeWrapper(context));
     }
 
     public static ContextThemeWrapper newContextThemeWrapper(final Context context) {

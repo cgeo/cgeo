@@ -10,13 +10,13 @@ import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;

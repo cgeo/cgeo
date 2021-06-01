@@ -13,7 +13,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Application;
 import android.content.DialogInterface;
 import android.view.View;
@@ -22,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Small dialog showing only a rating bar to vote for the cache. Confirming the dialog will send the vote over the

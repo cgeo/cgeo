@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 

@@ -9,7 +9,6 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -32,6 +31,7 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 

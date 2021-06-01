@@ -5,7 +5,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -18,6 +17,7 @@ import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 

@@ -20,12 +20,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;

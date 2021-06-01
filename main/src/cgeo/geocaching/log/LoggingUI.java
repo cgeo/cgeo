@@ -7,13 +7,13 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractUIFactory;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;

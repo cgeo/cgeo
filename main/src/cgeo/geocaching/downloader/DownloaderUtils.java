@@ -18,7 +18,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.net.Uri;
@@ -32,6 +31,7 @@ import static android.content.Context.DOWNLOAD_SERVICE;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

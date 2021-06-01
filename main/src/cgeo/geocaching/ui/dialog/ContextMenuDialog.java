@@ -3,7 +3,6 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Rect;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
