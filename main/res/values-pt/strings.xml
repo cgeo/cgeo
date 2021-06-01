@@ -670,8 +670,6 @@
     <string name="init_summary_select_language">Selecciona o idioma da aplicação (requer reinício)\n</string>
     <string name="init_use_default_language">Utilizar idioma predefinido</string>
     <string name="init_category_exclude">Excluir caches</string>
-    <string name="init_exclude">Excluir Encontradas e Minhas</string>
-    <string name="init_summary_exclude">Exclui as caches que lhe pertencem ou que tenha encontrado</string>
     <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
@@ -1343,7 +1341,6 @@
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
     <string name="map_show_circles">Mostrar círculos</string>
-    <string name="map_showc_ownfound">Caches minhas/encontradas</string>
     <string name="map_showc_disabled">Caches desactivadas</string>
     <string name="map_showc_archived">Caches arquivadas</string>
     <string name="map_showwp_original">Pont. adicionais originais</string>
