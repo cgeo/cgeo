@@ -430,8 +430,6 @@
     <string name="init_summary_openlastdetailspage">Buksan ang mga detalye sa huling ginamit na pahina</string>
     <string name="init_address">Ipakita ang address</string>
     <string name="init_summary_address">Ipakita ang address sa halip na mga koordinate sa pangunahing screen</string>
-    <string name="init_exclude">Ang sariling pagliban at natagpuan</string>
-    <string name="init_summary_exclude">Ang pagliban sa mga cache na iyong pag-aari o maaring natapuan</string>
     <string name="init_showwaypoints">Ipakita ang mga waypoint</string>
     <string name="init_showwaypoint_description">Kapang kulang sa nasabing halaga ng mga cache ay ipapakita sa mapa, ang kanilang waypoint ay idaragdag sa pagpapakita.</string>
     <string name="init_disabled">Ipagliban ang hindi paggana</string>
