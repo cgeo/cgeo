@@ -549,8 +549,6 @@
     <string name="init_summary_select_language">选择应用内语言 (需要重启)\n</string>
     <string name="init_use_default_language">使用默认语言</string>
     <string name="init_category_exclude">排除藏点</string>
-    <string name="init_exclude">排除拥有的和找到的</string>
-    <string name="init_summary_exclude">排除您拥有或找到的藏点</string>
     <string name="init_showwaypoints">显示航点</string>
     <string name="init_showwaypoint_description">如果地图上显示的藏点少于给定的数量，则额外显示其航点。</string>
     <string name="init_zoomincludingwaypoints">缩放包括航点</string>
