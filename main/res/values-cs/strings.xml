@@ -511,6 +511,9 @@
     <string name="cache_filter_status_select_only_found_no">Pouze nenalezené</string>
     <string name="cache_filter_status_select_only_own_yes">Pouze vlastněné</string>
     <string name="cache_filter_status_select_only_own_no">Pouze nevlastněné</string>
+    <string name="cache_filter_status_exclude_active">Vyloučit aktivní</string>
+    <string name="cache_filter_status_exclude_disabled">Vyloučit zakázané</string>
+    <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
     <string name="cache_filter_log_entry_foundby">Nalezené kým:</string>
     <string name="cache_filter_log_entry_logtext">Text logu:</string>
     <!-- about -->
@@ -671,8 +674,10 @@
     <string name="init_summary_select_language">Zvolte jazyk v aplikaci (vyžaduje restart)\n</string>
     <string name="init_use_default_language">Použít výchozí jazyk</string>
     <string name="init_category_exclude">Vyloučit kešky</string>
-    <string name="init_exclude">Nezobrazovat vlastní a nalezené keše</string>
-    <string name="init_summary_exclude">Nezobrazovat mé vlastní a nalezené kešky</string>
+    <string name="init_exclude_own">Vyloučit vlastní</string>
+    <string name="init_summary_exclude_own">Vyloučit vlastní kešky </string>
+    <string name="init_exclude_found">Vyloučit nalezené</string>
+    <string name="init_summary_exclude_found">Vyloučit nalezené kešky</string>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
     <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
@@ -697,6 +702,8 @@
     <string name="init_summary_disabled">Nezobrazovat deaktivované kešky</string>
     <string name="init_archived">Vyloučit archivované</string>
     <string name="init_summary_archived">Vyloučit archivované kešky</string>
+    <string name="init_offlinelog">Vyloučit offline log</string>
+    <string name="init_summary_offlinelog">Vyloučit kešky s offline logem</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky</string>
     <string name="init_customtabs_as_browser">Použít Chrome WebView</string>
@@ -716,6 +723,12 @@
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
     <!-- app theme -->
+    <string name="settings_theme_title">Motiv</string>
+    <string-array name="settings_theme_entries">
+        <item>Podle systému</item>
+        <item>Světlý</item>
+        <item>Tmavý</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvořit zálohu</string>
     <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat kešky, trasové body &amp; nastavení, ale žádné obrázky kešek. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
@@ -1358,9 +1371,11 @@
     <string name="map_rotation">Otáčení mapy</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
     <string name="map_show_circles">Zobrazit kruhy</string>
-    <string name="map_showc_ownfound">Vlastněné/nalezené kešky</string>
+    <string name="map_showc_own">Vlastní kešky</string>
+    <string name="map_showc_found">Nalezené kešky</string>
     <string name="map_showc_disabled">Deaktivované kešky</string>
     <string name="map_showc_archived">Archivované kešky</string>
+    <string name="map_showc_offlinelog">Kešky s offline logem</string>
     <string name="map_showwp_original">Původní trasové body</string>
     <string name="map_showwp_parking">Parkovací místa</string>
     <string name="map_showwp_visited">Navštívené trasové body</string>
@@ -1382,6 +1397,9 @@
     <string name="map_live_disable">Zakázat aktivní mapu</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
+    <string name="map_routing">Směrování</string>
+    <string name="map_routing_activate_title">Povolit směrování</string>
+    <string name="map_routing_activate">Některé režimy směrování nejsou momentálně k dispozici, protože není aktivní žádný směrovací modul.\n\nChcete aktivovat zabudované směrování aplikace c:geo a stahování směrovacích dat?</string>
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
@@ -1407,6 +1425,7 @@
     <string name="search_hbu_button">Hledat podle vlastníka</string>
     <string name="search_filter">Filtr (experimentální)</string>
     <string name="search_filter_button">Hledat podle filtru</string>
+    <string name="search_filter_info_message">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
     <string name="search_tb">Sledovatelný předmět</string>
     <string name="search_tb_hint">ID sledovatelného předmětu</string>
     <string name="search_tb_button">Hledat sledovatelné</string>
@@ -2112,6 +2131,8 @@
     <string name="wizard_welcome_advanced">Pokročilá nastavení</string>
     <string name="wizard_advanced_offlinemaps_label">Offline mapy</string>
     <string name="wizard_advanced_offlinemaps_info">Tato stránka poskytuje některé pokročilé funkce, které jsou pouze volitelné.\n\nc:geo může stáhnout mapové soubory pro offline použití.</string>
+    <string name="wizard_advanced_routing_label">Aktivovat offline směrování</string>
+    <string name="wizard_advanced_routing_info">c:geo má interní směrovací engine pro offline směrování a může automaticky stahovat chybějící směrovací data.</string>
     <string name="wizard_advanced_restore_label">Obnovit</string>
     <string name="wizard_advanced_restore_info">Pokud máte zálohu předchozí instalace, můžete obnovit nastavení a/nebo data kešek.</string>
     <string name="status_not_ok">CHYBA</string>
