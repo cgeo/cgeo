@@ -612,8 +612,6 @@
     <string name="init_summary_select_language">Seleziona lingua in-app (richiede riavvio)\n</string>
     <string name="init_use_default_language">Usa lingua predefinita</string>
     <string name="init_category_exclude">Escludi cache</string>
-    <string name="init_exclude">Escludi i miei e quelli trovati</string>
-    <string name="init_summary_exclude">Escludi i miei cache e queli che ho già trovato</string>
     <string name="init_showwaypoints">Mostra waypoints</string>
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
@@ -1278,7 +1276,6 @@
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_dot_mode">Usa icone compatte</string>
     <string name="map_show_circles">Mostra area cache</string>
-    <string name="map_showc_ownfound">Cache tuoi / trovati</string>
     <string name="map_showc_disabled">Cache disabilitati</string>
     <string name="map_showc_archived">Cache archiviati</string>
     <string name="map_showwp_original">Waypoint originali</string>
