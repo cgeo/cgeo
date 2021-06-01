@@ -69,7 +69,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SearchView.OnQueryTextListener;
 import androidx.appcompat.widget.SearchView.OnSuggestionListener;
@@ -711,7 +710,7 @@ public class MainActivity extends AbstractActionBarActivity {
             if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
 
                 restoreMessageShown = true;
-                new AlertDialog.Builder(this)
+                Dialogs.newBuilder(this)
                         .setTitle(res.getString(R.string.init_backup_restore))
                         .setMessage(res.getString(R.string.init_restore_confirm))
                         .setCancelable(false)

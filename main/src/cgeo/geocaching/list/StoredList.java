@@ -134,7 +134,7 @@ public final class StoredList extends AbstractList {
             final CharSequence[] items = new CharSequence[listsTitle.size()];
 
             final Activity activity = activityRef.get();
-            final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
             builder.setTitle(res.getString(titleId));
             builder.setItems(listsTitle.toArray(items), (dialogInterface, itemId) -> {
                 final AbstractList list = lists.get(itemId);

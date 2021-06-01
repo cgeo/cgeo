@@ -9,6 +9,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -111,7 +112,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
             }
         };
 
-        final AlertDialog dialog = new AlertDialog.Builder(context)
+        final AlertDialog dialog = Dialogs.newBuilder(context)
             .setTitle(R.string.add_target_to)
             .setAdapter(adapter, (dialog1, which) -> {
                 final String geocode;
