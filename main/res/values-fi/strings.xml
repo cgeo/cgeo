@@ -670,8 +670,6 @@
     <string name="init_summary_select_language">Valitse sovelluksen sisäinen kieli (vaatii uudelleenkäynnistyksen)\n</string>
     <string name="init_use_default_language">Käytä oletuskieltä</string>
     <string name="init_category_exclude">Jätä pois kätköt</string>
-    <string name="init_exclude">Piilota omat ja löydetyt</string>
-    <string name="init_summary_exclude">Älä näytä jo löytämiäsi tai omia kätköjä</string>
     <string name="init_showwaypoints">Näytä reittipisteet</string>
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
@@ -1337,7 +1335,6 @@
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
     <string name="map_show_circles">Näytä ympyrät</string>
-    <string name="map_showc_ownfound">Omat/löydetyt kätköt</string>
     <string name="map_showc_disabled">Hyllytetyt kätköt</string>
     <string name="map_showc_archived">Arkistoidut kätköt</string>
     <string name="map_showwp_original">Alkuperäiset reittipisteet</string>
