@@ -2341,7 +2341,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      */
     private AlertDialog createResetCacheCoordinatesDialog(final Waypoint wpt) {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(this);
         builder.setTitle(R.string.waypoint_reset_cache_coords);
 
         final String[] items = { res.getString(R.string.waypoint_localy_reset_cache_coords), res.getString(R.string.waypoint_reset_local_and_remote_cache_coords) };

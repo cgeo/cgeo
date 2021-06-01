@@ -26,7 +26,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Xml;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -319,7 +318,7 @@ public class BackupUtils {
             textView.setText(R.string.init_backup_history_delete_warning);
             checkbox.setText(R.string.init_user_confirmation);
 
-            final AlertDialog alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(activityContext, R.style.cgeo))
+            final AlertDialog alertDialog = Dialogs.newBuilder(activityContext)
                 .setView(content)
                 .setTitle(R.string.init_backup_backup_history)
                 .setCancelable(true)

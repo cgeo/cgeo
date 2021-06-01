@@ -71,7 +71,7 @@ public class EditNoteDialog extends DialogFragment {
         final boolean preventWaypointsFromNote = getArguments().getBoolean(ARGUMENT_INITIAL_PREVENT);
         mPreventCheckbox.setChecked(preventWaypointsFromNote);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setView(view);
         final AlertDialog dialog = builder.create();
 

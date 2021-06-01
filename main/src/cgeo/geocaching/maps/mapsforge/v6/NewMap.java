@@ -1412,7 +1412,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
                 }
             };
 
-            final AlertDialog dialog = new AlertDialog.Builder(this)
+            final AlertDialog dialog = Dialogs.newBuilder(this)
                     .setTitle(res.getString(R.string.map_select_multiple_items))
                     .setAdapter(adapter, new SelectionClickListener(sorted, longPressMode))
                     .create();

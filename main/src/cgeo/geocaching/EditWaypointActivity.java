@@ -426,7 +426,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
 
         private void showCoordinateOptionsDialog(final View view, final Geopoint geopoint, final Geocache cache) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            final AlertDialog.Builder builder = Dialogs.newBuilder(view.getContext());
             builder.setTitle(res.getString(R.string.waypoint_coordinates));
             builder.setItems(R.array.waypoint_coordinates_options, (dialog, item) -> {
                 final String selectedOption = res.getStringArray(R.array.waypoint_coordinates_options)[item];
