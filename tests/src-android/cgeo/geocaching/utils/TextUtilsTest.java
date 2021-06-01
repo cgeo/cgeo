@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.enumerations.CacheType;
 
 import android.text.SpannableString;
 
@@ -223,4 +224,25 @@ public class TextUtilsTest extends TestCase {
         assertThat(TextUtils.shortenText("", -5, 1)).isEqualTo("");
 
     }
+
+    public static void testEqualsIgnoreCaseAndSpecialChars() {
+        assertThat(TextUtils.toComparableStringIgnoreCaseAndSpecialChars(null)).isNull();
+        assertThat(TextUtils.toComparableStringIgnoreCaseAndSpecialChars("  ")).isEmpty();
+        assertThat(TextUtils.toComparableStringIgnoreCaseAndSpecialChars("abcABC123")).isEqualTo("abcabc123");
+        assertThat(TextUtils.toComparableStringIgnoreCaseAndSpecialChars("abc-def_ghi jkl\n\tMNO")).isEqualTo("abcdefghijklmno");
+
+        assertThat(TextUtils.isEqualIgnoreCaseAndSpecialChars(null, null)).isTrue();
+        assertThat(TextUtils.isEqualIgnoreCaseAndSpecialChars(null, "")).isFalse();
+        assertThat(TextUtils.isEqualIgnoreCaseAndSpecialChars("", null)).isFalse();
+        assertThat(TextUtils.isEqualIgnoreCaseAndSpecialChars("   ", "")).isTrue();
+        assertThat(TextUtils.isEqualIgnoreCaseAndSpecialChars(" 123----ABC__DEF   ", "123aBcdEf")).isTrue();
+    }
+
+    public static void testGetEnumIgnoreCaseAndSpecialChars() {
+        assertThat(TextUtils.getEnumIgnoreCaseAndSpecialChars(CacheType.class, "blOCkparTy", null)).isEqualTo(CacheType.BLOCK_PARTY);
+        assertThat(TextUtils.getEnumIgnoreCaseAndSpecialChars(CacheType.class, null, null)).isNull();
+        assertThat(TextUtils.getEnumIgnoreCaseAndSpecialChars(CacheType.class, "", null)).isNull();
+        assertThat(TextUtils.getEnumIgnoreCaseAndSpecialChars(CacheType.class, "block_party_", null)).isEqualTo(CacheType.BLOCK_PARTY);
+    }
+
 }

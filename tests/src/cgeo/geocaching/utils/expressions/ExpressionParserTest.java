@@ -3,6 +3,7 @@ package cgeo.geocaching.utils.expressions;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -226,6 +227,16 @@ public class ExpressionParserTest {
         assertThat(ExpressionParser.parseConfiguration(null, 10, config)).isEqualTo(0);
         assertThat(config).hasSize(1);
         assertThat(config.get(null)).isEmpty();
+    }
+
+    @Test
+    public void parseIgnoreSpecialChars() throws ParseException {
+        final ExpressionParser<LambdaExpression<String, String>> parser = new ExpressionParser<>(true);
+        parser.register(() -> LambdaExpression.createValueSingleConfig("a_b-c%D[1]", (config, param) ->
+            config.toUpperCase(Locale.getDefault()) + "-" + param.toUpperCase(Locale.getDefault())));
+
+        assertThat(parser.create("abcd1:test").call("abc")).isEqualTo("TEST-ABC");
+        assertThat(parser.create("AB--cd\n1:test").call("abc")).isEqualTo("TEST-ABC");
     }
 
     private void assertParseException(final String expressionString, final String expectedMessageContains) {

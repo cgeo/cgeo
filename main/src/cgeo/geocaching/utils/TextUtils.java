@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
@@ -41,6 +43,9 @@ public final class TextUtils {
     public static final Collator COLLATOR = getCollator();
 
     private static final Pattern PATTERN_REMOVE_NONPRINTABLE = Pattern.compile("\\p{Cntrl}");
+
+    private static final Pattern PATTERN_REMOVE_SPECIAL = Pattern.compile("[^a-z0-9]");
+
 
     /**
      * Internal cache for created Patterns (avoids parsing them unnecessarily often)
@@ -467,6 +472,35 @@ public final class TextUtils {
         }
 
         return returnValue;
+    }
+
+    public static boolean isEqualIgnoreCaseAndSpecialChars(final String s1, final String s2) {
+        if (Objects.equals(s1, s2)) {
+            return true;
+        }
+        if (s1 == null || s2 == null) {
+            return false;
+        }
+        return toComparableStringIgnoreCaseAndSpecialChars(s1).equals(toComparableStringIgnoreCaseAndSpecialChars(s2));
+    }
+
+    public static String toComparableStringIgnoreCaseAndSpecialChars(final String value) {
+        if (value == null) {
+            return null;
+        }
+        return PATTERN_REMOVE_SPECIAL.matcher(value.toLowerCase(Locale.US)).replaceAll("");
+    }
+
+    public static <E extends Enum<E>> E getEnumIgnoreCaseAndSpecialChars(final Class<E> enumClass, final String enumName, final E defaultEnum) {
+        if (enumName == null || !enumClass.isEnum()) {
+            return defaultEnum;
+        }
+        for (final E each : enumClass.getEnumConstants()) {
+            if (isEqualIgnoreCaseAndSpecialChars(each.name(), enumName)) {
+                return each;
+            }
+        }
+        return defaultEnum;
     }
 
     private static Pattern getTokenSearchPattern(final String startToken, final String endToken) {

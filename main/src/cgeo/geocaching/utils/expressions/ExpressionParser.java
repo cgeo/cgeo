@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils.expressions;
 
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.core.util.Supplier;
@@ -33,13 +34,23 @@ public class ExpressionParser<T extends IExpression<T>> {
         OPEN_PAREN, CLOSE_PAREN, LOGIC_SEPARATOR, CONFIG_SEPARATOR, KEYVALUE_SEPARATOR, OPEN_SQUARE_PAREN, CLOSE_SQUARE_PAREN));
     private static final Pattern ESCAPE_CHAR_FINDER = Pattern.compile("([\\\\();:=\\[\\]])");
 
-
     private final Map<String, Supplier<T>> registeredExpressions = new HashMap<>();
+    private final boolean ignoreSpecialCharsInTypeIds;
+
+    public ExpressionParser() {
+        this(false);
+    }
+
+    public ExpressionParser(final boolean ignoreSpecialCharsInTypeIds) {
+        this.ignoreSpecialCharsInTypeIds = ignoreSpecialCharsInTypeIds;
+    }
 
 
     public ExpressionParser<T> register(final Supplier<T> expressionCreator) {
         final String typeId = expressionCreator.get().getId();
-        this.registeredExpressions.put(typeId == null ? "" : typeId.trim().toLowerCase(Locale.getDefault()), expressionCreator);
+        this.registeredExpressions.put(typeId == null ? "" :
+            this.ignoreSpecialCharsInTypeIds ? TextUtils.toComparableStringIgnoreCaseAndSpecialChars(typeId) : typeId.trim().toLowerCase(Locale.getDefault()),
+            expressionCreator);
         return this;
     }
 
@@ -254,7 +265,9 @@ public class ExpressionParser<T extends IExpression<T>> {
         }
 
         @NonNull private T parseNextRawExpression() throws ParseException {
-            final String typeId = parseToNextDelim().trim().toLowerCase(Locale.getDefault());
+            final String typeId = ignoreSpecialCharsInTypeIds ?
+                TextUtils.toComparableStringIgnoreCaseAndSpecialChars(parseToNextDelim().trim()) :
+                parseToNextDelim().trim().toLowerCase(Locale.getDefault());
 
             final ExpressionConfig typeConfig = new ExpressionConfig();
             if (currentCharIs(CONFIG_SEPARATOR, false)) {
