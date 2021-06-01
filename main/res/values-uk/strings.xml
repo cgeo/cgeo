@@ -528,8 +528,6 @@
     <string name="init_summary_select_language">Оберіть мову програм (потрібен перезапуск)\n</string>
     <string name="init_use_default_language">Мова за замовчуванням</string>
     <string name="init_category_exclude">виключити кеші</string>
-    <string name="init_exclude">Виключити власні та знайдено</string>
-    <string name="init_summary_exclude">Виключити кеші ваші власні або знайдені</string>
     <string name="init_showwaypoints">Показати точки маршруту</string>
     <string name="init_showwaypoint_description">Якщо на карті відображається менше заданої кількості схованок, то додатково відображаються їхні шляхові точки.</string>
     <string name="init_zoomincludingwaypoints">Масштабування містить маршрутні точки</string>
