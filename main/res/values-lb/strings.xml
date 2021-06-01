@@ -521,8 +521,6 @@
     <string name="init_summary_openlastdetailspage">Detailer opmaachen un der leschter Säit déi besicht gouf</string>
     <string name="init_address">Adress uweisen</string>
     <string name="init_summary_address">Adress uweisen amplaz vun den Koordinaten op mengem Bildschierm</string>
-    <string name="init_exclude">Eegen Cachen a Cachen déi ee fonnt huet ausblennen</string>
-    <string name="init_summary_exclude">Eegen Cachen a Cachen déi ee fonnt huet ausblennen</string>
     <string name="init_showwaypoints">Waypoints uweisen</string>
     <string name="init_showwaypoint_description">Falls manner Cachen op der Kaart ugewisen ginn als annoncéiert, da ginn d\'Waypoints zousätzlech ugewisen.</string>
     <string name="init_zoomincludingwaypoints">Zoom beinhalt Waypoints</string>
