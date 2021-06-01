@@ -670,8 +670,6 @@
     <string name="init_summary_select_language">In-app taal selecteren (vereist herstart)\n</string>
     <string name="init_use_default_language">Standaardtaal gebruiken</string>
     <string name="init_category_exclude">Caches uitsluiten</string>
-    <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
-    <string name="init_summary_exclude">Eigen en gevonden caches uitsluiten</string>
     <string name="init_showwaypoints">Laat waypoints zien in map</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
@@ -1343,7 +1341,6 @@
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
     <string name="map_show_circles">Toon cirkels</string>
-    <string name="map_showc_ownfound">Eigen/gevonden caches</string>
     <string name="map_showc_disabled">Uitgeschakelde caches</string>
     <string name="map_showc_archived">Gearchiveerde caches</string>
     <string name="map_showwp_original">Originele waypoints</string>
