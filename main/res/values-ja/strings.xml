@@ -665,8 +665,6 @@
     <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
     <string name="init_use_default_language">システムの言語</string>
     <string name="init_category_exclude">キャッシュを除外</string>
-    <string name="init_exclude">所有または発見したキャッシュ除く</string>
-    <string name="init_summary_exclude">自分で所有または発見したキャッシュは除く</string>
     <string name="init_showwaypoints">地図でウェイポイントの表示</string>
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示</string>
     <string name="init_zoomincludingwaypoints">ウェイポイントを表示するようにズーム</string>
@@ -1326,7 +1324,6 @@
     <string name="map_rotation">地図の回転</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
     <string name="map_show_circles">0.1マイル円</string>
-    <string name="map_showc_ownfound">所有/発見したキャッシュ</string>
     <string name="map_showc_disabled">一時停止中キャッシュ</string>
     <string name="map_showc_archived">アーカイブ済みのキャッシュ</string>
     <string name="map_showwp_original">ウェイポイント(オリジナル)</string>
