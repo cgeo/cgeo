@@ -551,8 +551,6 @@
     <string name="init_summary_select_language">Välj språk i appen (kräver omstart)\n</string>
     <string name="init_use_default_language">Använd standardspråk</string>
     <string name="init_category_exclude">Exkludera cacher</string>
-    <string name="init_exclude">Egna/hittade cacher</string>
-    <string name="init_summary_exclude">Dölj egna och hittade cacher</string>
     <string name="init_showwaypoints">Extra punkter på kartan</string>
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan.</string>
     <string name="init_zoomincludingwaypoints">Zooma inkluderar vägpunkter</string>
@@ -1195,7 +1193,6 @@
     <string name="map_rotation">Kartrotering</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
     <string name="map_show_circles">Visa cirklar</string>
-    <string name="map_showc_ownfound">Egna/hittade cacher</string>
     <string name="map_showc_disabled">Inaktiverade cacher</string>
     <string name="map_showc_archived">Arkiverade cacher</string>
     <string name="map_showwp_original">Ursprungliga waypoints</string>
