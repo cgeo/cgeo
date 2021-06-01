@@ -555,8 +555,6 @@
     <string name="init_summary_select_language">顯示app的語言</string>
     <string name="init_use_default_language">使用預設語言</string>
     <string name="init_category_exclude">排除cache</string>
-    <string name="init_exclude">排除自己的和已找到的ccahe</string>
-    <string name="init_summary_exclude">您沒有登入。即時地圖只顯示您存在本地裝置的cache。</string>
     <string name="init_showwaypoints">顯示航點</string>
     <string name="init_showwaypoint_description">如果在地圖上顯示的cache少於給定的數量，則會另外顯示其它cache的waypoints。</string>
     <string name="init_zoomincludingwaypoints">放大(包含航點)</string>
@@ -1105,7 +1103,6 @@
     <string name="map_live">即時地圖</string>
     <string name="map_view_map">地圖檢視</string>
     <string name="map_rotation">旋轉地圖</string>
-    <string name="map_showc_ownfound">已尋獲/自己的寶藏</string>
     <string name="map_showc_disabled">已關閉的cache</string>
     <string name="map_showc_archived">已歸檔的cache</string>
     <string name="map_showwp_original">初始航點</string>
