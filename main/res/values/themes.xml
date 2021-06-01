@@ -18,6 +18,8 @@
         <item name="colorSecondary">@color/colorAccent</item>
         <item name="colorSecondaryVariant">@color/colorAccent</item>
 
+        <!-- circular spinner color -->
+        <item name="android:indeterminateTint">@color/colorAccent</item>
     </style>
 
     <!-- theme for cache/waypoint popups -->
