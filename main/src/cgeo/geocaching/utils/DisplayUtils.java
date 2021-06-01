@@ -15,7 +15,10 @@ import android.util.DisplayMetrics;
 import android.util.Pair;
 import android.view.WindowManager;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 public class DisplayUtils {
 
@@ -68,7 +71,12 @@ public class DisplayUtils {
         return new Pair<>(resToFitIn.getIntrinsicWidth(), resToFitIn.getIntrinsicHeight());
     }
 
+    public static Drawable getTintedDrawable(final Resources res, @DrawableRes final int menuRes, @ColorRes final int tintColor) {
+        final int textColor = res.getColor(tintColor);
 
+        final Drawable menuDrawable = ResourcesCompat.getDrawable(res, menuRes, null);
+        DrawableCompat.setTint(menuDrawable, textColor);
+        return menuDrawable;
     }
 
     /**
