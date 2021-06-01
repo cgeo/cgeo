@@ -552,8 +552,6 @@
     <string name="init_summary_select_language">Velg språk i appen (krever omstart)\n</string>
     <string name="init_use_default_language">Bruk standard språk</string>
     <string name="init_category_exclude">Ekskluder cacher</string>
-    <string name="init_exclude">Ekskluder egne og funnede cacher fra kartet</string>
-    <string name="init_summary_exclude">Ekskluder egne og funnede cacher fra kartet</string>
     <string name="init_showwaypoints">Vis veipunkter</string>
     <string name="init_showwaypoint_description">Hvis færre enn et gitt antall cacher vises på kartet, vil veipunktene som hører til også vises.</string>
     <string name="init_zoomincludingwaypoints">Kartutsnitt inkluderer veipunkter</string>
