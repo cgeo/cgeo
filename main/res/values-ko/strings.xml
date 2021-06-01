@@ -668,8 +668,10 @@
     <string name="init_summary_select_language">앱 언어 선택 (다시 시작해야 함)\n</string>
     <string name="init_use_default_language">기본 언어 사용</string>
     <string name="init_category_exclude">캐시 제외</string>
-    <string name="init_exclude">자신의 캐시와 찾은 캐시 제외</string>
-    <string name="init_summary_exclude">자신이 숨긴 캐시와 이미 찾은 캐시를 제외합니다.</string>
+    <string name="init_exclude_own">소유 제외</string>
+    <string name="init_summary_exclude_own">소유한 캐시 제외 </string>
+    <string name="init_exclude_found">찾음 제외</string>
+    <string name="init_summary_exclude_found">찾은 캐시 제외</string>
     <string name="init_showwaypoints">웨이포인트 보기</string>
     <string name="init_showwaypoint_description">지도에 지정한 캐시 이하만 보일 경우, 웨이포인트를 추가로 표시합니다.</string>
     <string name="init_zoomincludingwaypoints">확대에는 지점이 포함됩니다</string>
@@ -694,6 +696,8 @@
     <string name="init_summary_disabled">일시정지된 캐시 숨기기</string>
     <string name="init_archived">영구보관 제외</string>
     <string name="init_summary_archived">영구보관 캐시 제외</string>
+    <string name="init_offlinelog">오프라인 로그 제외</string>
+    <string name="init_summary_offlinelog">오프라인 로그한 캐시 제외</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
     <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_customtabs_as_browser">크롬 웹뷰 사용</string>
@@ -713,6 +717,12 @@
     <string name="init_livelist">방향 보이기</string>
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
     <!-- app theme -->
+    <string name="settings_theme_title">테마</string>
+    <string-array name="settings_theme_entries">
+        <item>시스템 기본</item>
+        <item>밝음</item>
+        <item>어두움</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">백업 생성하기</string>
     <string name="init_backup_summary">이 기능은 캐시, 웨이 포인트 및 설정을 백업 할 수 있지만 캐시 이미지는 백업 할 수 없습니다. \n휴대 전화를 분실 한 후에도 데이터를 복원하려면 백업 파일을 독립적 인 위치에 복사해야합니다.</string>
@@ -1325,9 +1335,11 @@
     <string name="map_rotation">지도 회전</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
     <string name="map_show_circles">원 보이기</string>
-    <string name="map_showc_ownfound">소유 / 찾은 캐시</string>
+    <string name="map_showc_own">소유한 캐시</string>
+    <string name="map_showc_found">찾은 캐시</string>
     <string name="map_showc_disabled">비활성화된 캐시</string>
     <string name="map_showc_archived">영구보관 캐시</string>
+    <string name="map_showc_offlinelog">오프라인 로그한 캐시</string>
     <string name="map_showwp_original">최초의 지점</string>
     <string name="map_showwp_parking">주차 지점</string>
     <string name="map_showwp_visited">방문한 지점</string>
@@ -2038,6 +2050,8 @@
     <string name="wizard_welcome_advanced">고급 설정</string>
     <string name="wizard_advanced_offlinemaps_label">오프라인 지도</string>
     <string name="wizard_advanced_offlinemaps_info">이 페이지는 선택적으로 사용할 수있는 몇 가지 고급 기능을 제공합니다.\n\nc:geo는 오프라인 사용을 위해 지도 파일을 다운로드할 수 있습니다.</string>
+    <string name="wizard_advanced_routing_label">오프라인 라우팅 활성화</string>
+    <string name="wizard_advanced_routing_info">c:geo에는 오프라인 라우팅을위한 내부 라우팅 엔진이 있으며 누락된 라우팅 데이터를 자동으로 다운로드 할 수 있습니다.</string>
     <string name="wizard_advanced_restore_label">복원</string>
     <string name="wizard_advanced_restore_info">이전 설치의 백업이있는 경우 설정 및 / 또는 지오캐시 데이터를 복원 할 수 있습니다.</string>
     <string name="status_not_ok">오류</string>
