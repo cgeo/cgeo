@@ -565,8 +565,6 @@
     <string name="init_summary_select_language">Zvoľte jazyk aplikácie (vyžaduje reštart)\n</string>
     <string name="init_use_default_language">Použiť predvolený jazyk</string>
     <string name="init_category_exclude">Nezahrnúť kešky</string>
-    <string name="init_exclude">Nezobrazovať vlastné a nájdené</string>
-    <string name="init_summary_exclude">Nezobrazovať vlastné a nájdené skrýše</string>
     <string name="init_showwaypoints">Body trasy na mape</string>
     <string name="init_showwaypoint_description">Ak je na mape zobrazený menší počet skrýš, ako je tento, zobrazia sa aj body trás (waypoints).</string>
     <string name="init_zoomincludingwaypoints">Priblíženie vrátane bodov trasy</string>
@@ -1246,7 +1244,6 @@
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
     <string name="map_show_circles">Zobraziť kruhy</string>
-    <string name="map_showc_ownfound">Vlastné/nájdené kešky</string>
     <string name="map_showc_disabled">Deaktivované kešky</string>
     <string name="map_showc_archived">Archivované kešky</string>
     <string name="map_showwp_original">Pôvodné body trasy</string>
