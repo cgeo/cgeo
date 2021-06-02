@@ -109,6 +109,7 @@
                 android:drawablePadding="3dip"
                 android:text="@string/cache_menu_spoilers"
                 android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
                 app:drawableLeftCompat="@drawable/log_img_icon" />
         </LinearLayout>
 
