@@ -35,7 +35,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         statusFound = createGroup(ll, valueWidth, StatusGeocacheFilter.StatusType.FOUND);
         statusOwn = createGroup(ll, valueWidth, StatusGeocacheFilter.StatusType.OWN);
 
-        excludeActive = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_status_exclude_active, R.drawable.ic_menu_myplaces);
+        excludeActive = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_status_exclude_active, R.drawable.ic_menu_circle);
         excludeDisabled = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_status_exclude_disabled, R.drawable.ic_menu_disabled);
         excludeArchived = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_status_exclude_archived, R.drawable.ic_menu_archived);
         excludeArchived.setChecked(true);

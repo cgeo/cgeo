@@ -31,7 +31,7 @@ public class GeocacheFilter {
     private static final String CONFIG_KEY_ADV_MODE = "advanced";
     private static final String CONFIG_KEY_INCLUDE_INCLUSIVE = "inconclusive";
 
-    private static final ExpressionParser<IGeocacheFilter> FILTER_PARSER = new ExpressionParser<IGeocacheFilter>()
+    private static final ExpressionParser<IGeocacheFilter> FILTER_PARSER = new ExpressionParser<IGeocacheFilter>(true)
         .register(AndGeocacheFilter::new)
         .register(OrGeocacheFilter::new)
         .register(NotGeocacheFilter::new);

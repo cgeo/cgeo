@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.R;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.StringRes;
 
@@ -10,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 
 
 public class StringFilter {
+
+    private static final String FLAG_MATCHCASE = "match_case";
 
     public enum StringFilterType {
         IS_PRESENT(R.string.cache_filter_stringfilter_type_is_present),
@@ -75,16 +76,18 @@ public class StringFilter {
     public void setConfig(final List<String> config) {
         if (config != null) {
             setTextValue(config.size() > 0 ? config.get(0) : null);
-            setFilterType(config.size() > 1 ? EnumUtils.getEnum(StringFilterType.class,  config.get(1), StringFilterType.CONTAINS) : StringFilterType.CONTAINS);
-            setMatchCase(config.size() > 2 && BooleanUtils.toBoolean(config.get(2)));
+            setFilterType(config.size() > 1 ? TextUtils.getEnumIgnoreCaseAndSpecialChars(StringFilterType.class,  config.get(1), StringFilterType.CONTAINS) : StringFilterType.CONTAINS);
+            setMatchCase(config.size() > 2 && TextUtils.isEqualIgnoreCaseAndSpecialChars(FLAG_MATCHCASE, config.get(2)));
         }
     }
 
     public List<String> getConfig() {
         final List<String> config = new ArrayList<>();
         config.add(textValue);
-        config.add(filterType.name());
-        config.add(String.valueOf(matchCase));
+        config.add(filterType.name().toLowerCase());
+        if (matchCase) {
+            config.add(FLAG_MATCHCASE);
+        }
         return config;
     }
 

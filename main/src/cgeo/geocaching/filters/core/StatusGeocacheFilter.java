@@ -9,11 +9,15 @@ import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
 import androidx.annotation.StringRes;
 
-import java.util.List;
-
-import org.apache.commons.lang3.BooleanUtils;
-
 public class StatusGeocacheFilter extends BaseGeocacheFilter {
+
+    private static final String FLAG_ONLY_OWNED = "only_owned";
+    private static final String FLAG_ONLY_NOT_OWNED = "only_not_owned";
+    private static final String FLAG_ONLY_FOUND = "only_found";
+    private static final String FLAG_ONLY_NOT_FOUND = "only_not_found";
+    private static final String FLAG_EXCLUDE_ACTIVE = "exclude_active";
+    private static final String FLAG_EXCLUDE_DISABLED = "exclude_disabled";
+    private static final String FLAG_EXCLUDE_ARCHIVED = "exclude_archived";
 
     public enum StatusType {
         OWN(R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_only_own_no, R.string.cache_filter_status_select_only_own_yes),
@@ -31,9 +35,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
     }
 
-    private boolean excludeActive = true;
-    private boolean excludeDisabled = true;
-    private boolean excludeArchived = true;
+    private boolean excludeActive = false;
+    private boolean excludeDisabled = false;
+    private boolean excludeArchived = false;
 
     private Boolean statusOwn = null;
     private Boolean statusFound = null;
@@ -91,22 +95,48 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public void setConfig(final ExpressionConfig config) {
-        final List<String> value = config.getDefaultList();
-        statusOwn = value.size() > 0 ? BooleanUtils.toBooleanObject(value.get(0)) : null;
-        statusFound = value.size() > 1 ? BooleanUtils.toBooleanObject(value.get(1)) : null;
-        excludeActive = value.size() > 2 && BooleanUtils.toBoolean(value.get(2));
-        excludeDisabled = value.size() > 3 && BooleanUtils.toBoolean(value.get(3));
-        excludeArchived = value.size() > 4 && BooleanUtils.toBoolean(value.get(4));
+        statusOwn = null;
+        statusFound = null;
+        excludeActive = false;
+        excludeDisabled = false;
+        excludeArchived = false;
+        for (String value : config.getDefaultList()) {
+            if (checkBooleanFlag(FLAG_ONLY_OWNED, value)) {
+                statusOwn = true;
+            } else if (checkBooleanFlag(FLAG_ONLY_NOT_OWNED, value)) {
+                statusOwn = false;
+            } else if (checkBooleanFlag(FLAG_ONLY_FOUND, value)) {
+                statusFound = true;
+            } else if (checkBooleanFlag(FLAG_ONLY_NOT_FOUND, value)) {
+                statusFound = false;
+            } else if (checkBooleanFlag(FLAG_EXCLUDE_ACTIVE, value)) {
+                excludeActive = true;
+            } else if (checkBooleanFlag(FLAG_EXCLUDE_DISABLED, value)) {
+                excludeDisabled = true;
+            } else if (checkBooleanFlag(FLAG_EXCLUDE_ARCHIVED, value)) {
+                excludeArchived = true;
+            }
+        }
     }
 
     @Override
     public ExpressionConfig getConfig() {
         final ExpressionConfig result = new ExpressionConfig();
-        result.addToDefaultList(
-            BooleanUtils.toStringTrueFalse(statusOwn), BooleanUtils.toStringTrueFalse(statusFound),
-            BooleanUtils.toStringTrueFalse(excludeActive), BooleanUtils.toStringTrueFalse(excludeDisabled),
-            BooleanUtils.toStringTrueFalse(excludeArchived)
-        );
+        if (statusOwn != null) {
+            result.addToDefaultList(statusOwn ? FLAG_ONLY_OWNED : FLAG_ONLY_NOT_OWNED);
+        }
+        if (statusFound != null) {
+            result.addToDefaultList(statusFound ? FLAG_ONLY_FOUND : FLAG_ONLY_NOT_FOUND);
+        }
+        if (excludeActive) {
+            result.addToDefaultList(FLAG_EXCLUDE_ACTIVE);
+        }
+        if (excludeDisabled) {
+            result.addToDefaultList(FLAG_EXCLUDE_DISABLED);
+        }
+        if (excludeArchived) {
+            result.addToDefaultList(FLAG_EXCLUDE_ARCHIVED);
+        }
         return result;
 
     }
