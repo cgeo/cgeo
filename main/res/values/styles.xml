@@ -20,6 +20,12 @@
     <style name="text_note" parent="text">
     </style>
 
+    <!-- checkbox formatting -->
+
+    <style name="checkboxStyle" parent="@style/Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="android:minHeight">32dp</item>
+    </style>
+
     <style name="checkbox_full">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -31,6 +37,7 @@
     </style>
 
     <!-- actionbar -->
+
     <style name="actionBarStyle" parent="Widget.MaterialComponents.ActionBar.Solid">
         <item name="android:textColor">@color/colorTextActionBar</item>
         <item name="background">@color/colorBackgroundActionBar</item>
