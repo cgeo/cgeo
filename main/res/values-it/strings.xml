@@ -34,6 +34,29 @@
     <string name="advlab">Cache Adventure Lab</string>
     <string name="userdefined">Cache definito dall\'utente</string>
     <string name="unknown">Tipo sconosciuto</string>
+    <string name="all_types_short">Tutti</string>
+    <string name="traditional_short">Tradizionale</string>
+    <string name="multi_short">Multi</string>
+    <string name="mystery_short">Mystery</string>
+    <string name="letterbox_short">Letterbox</string>
+    <string name="event_short">Evento</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Earth</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webcam</string>
+    <string name="virtual_short">Virtuale</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Comunità</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">GC HQ Cel</string>
+    <string name="gps_short">GPS Exhibit</string>
+    <string name="block_short">Blocco GCHQ</string>
+    <string name="locationless_short">Locationless</string>
+    <string name="advlab_short">Adv Lab</string>
+    <string name="userdefined_short">Definita dall\'utente</string>
+    <string name="unknown_short">Sconosciuto</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">micro</string>
     <string name="cache_size_small">small</string>
@@ -155,6 +178,8 @@
     <string name="log_image_scale_option_noscaling">Nessun ridimensionamento</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nRidotto/Compresso:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Immagine</string>
+    <string name="datetime_clear_button">Resetta</string>
+    <string name="datetime_nodateset_display">Nessuna data impostata</string>
     <!-- translation -->
     <string name="translate">Traduci</string>
     <string name="translate_to_sys_lang">Traduci in %s</string>
@@ -419,21 +444,43 @@
     <string name="list_dialog_rename">Rinomina</string>
     <string name="list_not_available">Elenco non più disponibile, passo a elenco standard</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_advanced">Avanzate</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Passa a Basic</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">Il passaggio alla modalità \'Basic\' comporterà la perdita delle impostazioni del filtro. Vuoi continuare?</string>
+    <string name="cache_filter_add_button">Aggiungi criteri di filtro</string>
     <string name="cache_filter_option_and_or">Usa OR invece di AND</string>
     <string name="cache_filter_option_inverse">Filtro Inverso</string>
     <string name="cache_filter_option_include_inconclusive">Includi confronti non conclusivi</string>
     <string name="cache_filter_option_include_inconclusive_info">Indica se includere nel risultato i cache di cui un filtro necessita di informazioni che non sono disponibili.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tocca \'Aggiungi criteri di filtro\' sopra per aggiungere un filtro</string>
+    <string name="cache_filter_name">Nome Cache</string>
+    <string name="cache_filter_type">Tipo di Cache</string>
+    <string name="cache_filter_size">Dimensione Cache</string>
     <string name="cache_filter_personalnote">Note personali</string>
+    <string name="cache_filter_description">Descrizione Cache</string>
     <string name="cache_filter_offlinelog">Log Offline</string>
+    <string name="cache_filter_owner">Proprietario Cache</string>
     <string name="cache_filter_difficulty">Difficoltà</string>
     <string name="cache_filter_terrain">Terreno</string>
     <string name="cache_filter_status">Stato</string>
+    <string name="cache_filter_attributes">Attributi Cache</string>
     <string name="cache_filter_favorites">Preferiti</string>
     <string name="cache_filter_distance">Distanza</string>
+    <string name="cache_filter_hidden">Data Nascosta</string>
+    <string name="cache_filter_logs_count">Conteggio Log</string>
+    <string name="cache_filter_last_found">Data ultimo trovato</string>
+    <string name="cache_filter_log_entry">Voce di Registro Log</string>
+    <string name="cache_filtergroup_basic">Base</string>
+    <string name="cache_filtergroup_details">Dettagli</string>
+    <string name="cache_filtergroup_userspecific">Specifico dell\'utente</string>
     <string name="cache_filter_include">Includi</string>
     <string name="cache_filter_exclude">Escludi</string>
     <string name="cache_filter_userdisplay_complex">Complesso</string>
     <string name="cache_filter_userdisplay_none">Nessuno</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="one">%1$d elemento</item>
+        <item quantity="other">%1$d elementi</item>
+    </plurals>
     <string name="cache_filter_storage_load_button">Carica</string>
     <string name="cache_filter_storage_delete_button">Elimina</string>
     <string name="cache_filter_storage_load_delete_title">Carica o elimina un filtro esistente</string>
@@ -449,6 +496,9 @@
     <string name="cache_filter_stringfilter_type_starts_with">Inizia con</string>
     <string name="cache_filter_stringfilter_type_ends_with">Finisce con</string>
     <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
+    <string name="cache_filter_datefilter_label_from">Da:</string>
+    <string name="cache_filter_datefilter_label_to">A:</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Seleziona tutto</string>
     <string name="cache_filter_favorites_absolute">Assoluto</string>
     <string name="cache_filter_favorites_percentage">Percentuale</string>
     <string name="cache_filter_distance_use_current_position">Usa posizione corrente</string>
@@ -457,9 +507,16 @@
     <string name="cache_filter_status_select_only_found_no">Solo Non Trovati</string>
     <string name="cache_filter_status_select_only_own_yes">Solo Posseduti</string>
     <string name="cache_filter_status_select_only_own_no">Solo Non Posseduti</string>
+    <string name="cache_filter_status_exclude_active">Escludi Attivo</string>
+    <string name="cache_filter_status_exclude_disabled">Escludi Disabilitato</string>
+    <string name="cache_filter_status_exclude_archived">Escludi Archiviato</string>
+    <string name="cache_filter_log_entry_foundby">Trovato da:</string>
+    <string name="cache_filter_log_entry_logtext">Testo del Log:</string>
     <!-- about -->
     <string name="about_version">Versione</string>
     <string name="about_changelog">Modifiche</string>
+    <string name="about_changelog_nightly_build">Nightly build</string>
+    <string name="about_changelog_next_release">Prossimo rilascio</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Sostienici</string>
     <string name="about_donation_more">Visita il sito web per info</string>
@@ -484,6 +541,7 @@
     <string name="about_contributors_carnerodetails">come padre di c:geo</string>
     <string name="about_contributors_recent">Contributori recenti</string>
     <string name="about_contributors_specialthanks">Ringraziamenti speciali a</string>
+    <string name="about_contributors_specialthanksdetails">- tutti i nostri collaboratori per le traduzioni su [Crowdin.net](https://crowdin.net/project/cgeo)!\n- tutti i bug tester\n· e tutti gli altri sostenitori.\n</string>
     <string name="about_contributors_other">Altri contributori</string>
     <string name="about_components">Componenti</string>
     <string name="contribution_code">codice</string>
@@ -612,6 +670,10 @@
     <string name="init_summary_select_language">Seleziona lingua in-app (richiede riavvio)\n</string>
     <string name="init_use_default_language">Usa lingua predefinita</string>
     <string name="init_category_exclude">Escludi cache</string>
+    <string name="init_exclude_own">Escludi Propri</string>
+    <string name="init_summary_exclude_own">Escludi i cache che possiedi </string>
+    <string name="init_exclude_found">Escludi Trovati</string>
+    <string name="init_summary_exclude_found">Escludi i cache che hai già trovato</string>
     <string name="init_showwaypoints">Mostra waypoints</string>
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
@@ -636,8 +698,11 @@
     <string name="init_summary_disabled">Escludi cache disattivati</string>
     <string name="init_archived">Escludi archiviati</string>
     <string name="init_summary_archived">Escludi cache archiviati</string>
+    <string name="init_offlinelog">Escludi Log Offline</string>
+    <string name="init_summary_offlinelog">Escludi cache con log offline</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
+    <string name="init_customtabs_as_browser">Usa Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">I siti web esterni saranno visualizzati senza lasciare c:geo (possibile solo se Chrome è installato)</string>
     <string name="init_save_log_img">Salva immagini</string>
     <string name="init_summary_save_log_img">Salva immagini contenute nei log</string>
@@ -654,6 +719,12 @@
     <string name="init_livelist">Visualizza direzione</string>
     <string name="init_summary_livelist">Mostra la direzione con la bussola per i cache in un elenco</string>
     <!-- app theme -->
+    <string name="settings_theme_title">Tema</string>
+    <string-array name="settings_theme_entries">
+        <item>Predefinito di Sistema</item>
+        <item>Chiaro</item>
+        <item>Scuro</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Crea backup</string>
     <string name="init_backup_summary">Si prega di notare che questa funzione può eseguire il backup dei cache, waypoint &amp; impostazioni, ma nessuna immagine cache. \nPer poter ripristinare i dati anche dopo aver perso il telefono, i file di backup devono essere copiati in una posizione indipendente.</string>
@@ -1276,8 +1347,11 @@
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_dot_mode">Usa icone compatte</string>
     <string name="map_show_circles">Mostra area cache</string>
+    <string name="map_showc_own">Cache propri</string>
+    <string name="map_showc_found">Cache trovati</string>
     <string name="map_showc_disabled">Cache disabilitati</string>
     <string name="map_showc_archived">Cache archiviati</string>
+    <string name="map_showc_offlinelog">Cache con log offline</string>
     <string name="map_showwp_original">Waypoint originali</string>
     <string name="map_showwp_parking">Waypoint del parcheggio</string>
     <string name="map_showwp_visited">Waypoint visitati</string>
@@ -1299,6 +1373,9 @@
     <string name="map_live_disable">Disattiva live</string>
     <string name="map_as_list">Mostra lista dei cache</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
+    <string name="map_routing">Percorso</string>
+    <string name="map_routing_activate_title">Abilita percorso</string>
+    <string name="map_routing_activate">Alcune modalità di navigazione non sono attualmente disponibili, poiché nessun motore di routing è attivo.\n\nVuoi attivare il motore di routing interno di c:geo e scaricare i dati di routing?</string>
     <string name="map_gm_autorotation">Rotazione automatica mappa</string>
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
@@ -1324,6 +1401,7 @@
     <string name="search_hbu_button">Cerca per proprietario</string>
     <string name="search_filter">Filtro (sperimentale)</string>
     <string name="search_filter_button">Cerca con Filtro</string>
+    <string name="search_filter_info_message">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
     <string name="search_tb">Oggetto Trackable</string>
     <string name="search_tb_hint">Identificativo Trackable</string>
     <string name="search_tb_button">Cerca per trackable</string>
@@ -1999,6 +2077,8 @@
     <string name="wizard_welcome_advanced">Configurazione avanzata</string>
     <string name="wizard_advanced_offlinemaps_label">Mappe offline</string>
     <string name="wizard_advanced_offlinemaps_info">Questa pagina fornisce alcune funzioni avanzate, che sono facoltative da usare.\n\nc:geo può scaricare i file della mappa per l\'uso offline.</string>
+    <string name="wizard_advanced_routing_label">Attiva routing offline</string>
+    <string name="wizard_advanced_routing_info">c:geo ha un motore di routing interno per la navigazione offline e può scaricare automaticamente i dati di routing mancanti.</string>
     <string name="wizard_advanced_restore_label">Ripristina</string>
     <string name="wizard_advanced_restore_info">Se si dispone di un backup di un\'installazione precedente è possibile ripristinare le impostazioni e/o i dati cache.</string>
     <string name="status_not_ok">ERRORE</string>
