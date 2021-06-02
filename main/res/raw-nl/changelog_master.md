@@ -6,7 +6,8 @@
 
 ### Kaart
 - Nieuw: Bij het maken van een door de gebruiker gedefinieerde cache tijdens het weergeven van een kaart uit een lijst: Bied gebruiker aan om een nieuwe cache op te slaan in de huidige lijst (in plaats van de standaardlijst voor caches die door de gebruiker zijn gedefinieerd)
-- Wijziging: ook cache naam weergeven in de popup details
+- New: Separate "own" and "found" filters in map quick settings
+- Change: Additionally show cache name in poup details
 
 ### Cache details
 - Nieuw: Maak gebruik van Google translate in-app vertalingspopup
