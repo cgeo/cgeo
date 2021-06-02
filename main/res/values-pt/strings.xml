@@ -505,7 +505,7 @@
     <string name="cache_filter_status_select_all">Todos</string>
     <string name="cache_filter_status_select_only_found_yes">Apenas Encontradas</string>
     <string name="cache_filter_status_select_only_found_no">Apenas Não Encontradas</string>
-    <string name="cache_filter_status_select_only_own_yes">Apenas Próprias</string>
+    <string name="cache_filter_status_select_only_own_yes">Apenas Minhas</string>
     <string name="cache_filter_status_select_only_own_no">Apenas de Outros</string>
     <string name="cache_filter_status_exclude_active">Excluir Activas</string>
     <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
@@ -660,7 +660,7 @@
     <string name="init_signature_template_type">Tipo</string>
     <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
-    <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/individuais</string>
+    <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/meus</string>
     <string name="init_summary_friends_and_own_logs_wanted">Mostra um livro de registos adicional num novo separador, contendo os registos feitos por si e por amigos</string>
     <string name="init_openlastdetailspage">Mem. último separador visto</string>
     <string name="init_summary_openlastdetailspage">Abre a consulta dos detalhes da cache no último separador visto</string>
@@ -670,6 +670,10 @@
     <string name="init_summary_select_language">Selecciona o idioma da aplicação (requer reinício)\n</string>
     <string name="init_use_default_language">Utilizar idioma predefinido</string>
     <string name="init_category_exclude">Excluir caches</string>
+    <string name="init_exclude_own">Excluir Minhas</string>
+    <string name="init_summary_exclude_own">Exclui caches que lhe pertencem </string>
+    <string name="init_exclude_found">Excluir Encontradas</string>
+    <string name="init_summary_exclude_found">Exclui caches que já encontrou</string>
     <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
@@ -694,6 +698,8 @@
     <string name="init_summary_disabled">Exclui as caches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>
     <string name="init_summary_archived">Exclui as caches arquivadas</string>
+    <string name="init_offlinelog">Excluir com Registo Offline</string>
+    <string name="init_summary_offlinelog">Exclui caches com Registo Offline</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
@@ -1105,7 +1111,7 @@
     <string name="cache_hint">Dica</string>
     <string name="cache_hint_not_available">Nenhuma dica disponível</string>
     <string name="cache_logs">Todos os registos</string>
-    <string name="cache_logs_friends_and_own">Os meus registos/Amigos</string>
+    <string name="cache_logs_friends_and_own">Registos: Amigos/Meus</string>
     <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
     <string name="cache_dialog_loading_details_status_loadpage">A carregar a página</string>
     <string name="cache_dialog_loading_details_status_details">A processar os detalhes</string>
@@ -1341,8 +1347,11 @@
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
     <string name="map_show_circles">Mostrar círculos</string>
+    <string name="map_showc_own">Caches minhas</string>
+    <string name="map_showc_found">Caches encontradas</string>
     <string name="map_showc_disabled">Caches desactivadas</string>
     <string name="map_showc_archived">Caches arquivadas</string>
+    <string name="map_showc_offlinelog">Caches com Registo Offline</string>
     <string name="map_showwp_original">Pont. adicionais originais</string>
     <string name="map_showwp_parking">Pontos de estacionamento</string>
     <string name="map_showwp_visited">Pont. adicionais visitados</string>
