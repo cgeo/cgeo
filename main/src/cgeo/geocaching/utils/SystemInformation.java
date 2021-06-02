@@ -138,7 +138,7 @@ public final class SystemInformation {
     }
 
     private static void appendSettings(@NonNull final StringBuilder body) {
-        body.append("\n -Settings: ").append(versionInfoToString(Settings.getActualVersion(), Settings.getExpectedVersion()))
+        body.append("\n- Settings: ").append(versionInfoToString(Settings.getActualVersion(), Settings.getExpectedVersion()))
             .append(", Count:").append(Settings.getPreferencesCount());
     }
 
