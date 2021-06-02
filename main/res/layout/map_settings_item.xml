@@ -26,6 +26,7 @@
         android:clickable="false"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
+        android:minHeight="32dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"/>
 
