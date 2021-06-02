@@ -485,12 +485,8 @@
     <string name="init_summary_friends_and_own_logs_wanted">Barátok/saját logok megjelenítése kiegészítő oldalon</string>
     <string name="init_openlastdetailspage">Utoljára használt oldaltípus</string>
     <string name="init_summary_openlastdetailspage">Utoljára használt oldaltípus megnyitása belépéskor</string>
-    <string name="init_skin">Világos felület</string>
-    <string name="init_summary_skin">Világos felület\n(a c:geo újraindítását igényli)</string>
     <string name="init_address">Cím mutatása a főablakban</string>
     <string name="init_summary_address">Cím mutatása a főablakban</string>
-    <string name="init_exclude">Saját és megtalált ládák kihagyása</string>
-    <string name="init_summary_exclude">Saját és megtalált ládák kihagyása</string>
     <string name="init_showwaypoints">Útpontok mutatása élő térképen</string>
     <string name="init_showwaypoint_description">Maximum ennyi útpontot mutasson</string>
     <string name="init_brouterThreshold">Útvonaltervezés</string>
@@ -506,6 +502,7 @@
     <string name="init_choose_list">Listaválasztás</string>
     <string name="init_summary_choose_list">Listaválasztás ládamentéséhez</string>
     <string name="init_livelist">Ládák irányának jelzése a listán</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup">Ládák / útpontok biztonsági mentése</string>
     <string name="init_backup_backup">Biztonsági mentés</string>

@@ -545,16 +545,12 @@
     <string name="init_summary_friends_and_own_logs_wanted">Visa en extra loggbok med dina vänners och egna loggar</string>
     <string name="init_openlastdetailspage">Visning av cachedetaljer</string>
     <string name="init_summary_openlastdetailspage">Visa senaste använda delsidan när detaljer öppnas</string>
-    <string name="init_skin">Vitt skal</string>
-    <string name="init_summary_skin">Vitt skal (kräver omstart av c:geo)</string>
     <string name="init_address">Adress/koordinater</string>
     <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
     <string name="init_select_language">Välj språk</string>
     <string name="init_summary_select_language">Välj språk i appen (kräver omstart)\n</string>
     <string name="init_use_default_language">Använd standardspråk</string>
     <string name="init_category_exclude">Exkludera cacher</string>
-    <string name="init_exclude">Egna/hittade cacher</string>
-    <string name="init_summary_exclude">Dölj egna och hittade cacher</string>
     <string name="init_showwaypoints">Extra punkter på kartan</string>
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan.</string>
     <string name="init_zoomincludingwaypoints">Zooma inkluderar vägpunkter</string>
@@ -585,6 +581,7 @@
     <string name="init_summary_listdisplay">Visa cachernas tillhörighet till andra listor i cachelistan</string>
     <string name="init_livelist">Riktning</string>
     <string name="init_summary_livelist">Visa en pil med kompassriktning för cacher i en lista</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Skapa säkerhetskopia</string>
     <string name="init_backup_summary">Observera att den här funktionen kan säkerhetskopiera cacher, waypoints &amp; inställningar, men inga bilder från cacher. \nFör att kunna återställa data även om du skulle förlora telefonen bör säkerhetskopieringsfilerna kopieras till en annan enhet eller plats.</string>
@@ -1196,7 +1193,6 @@
     <string name="map_rotation">Kartrotering</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
     <string name="map_show_circles">Visa cirklar</string>
-    <string name="map_showc_ownfound">Egna/hittade cacher</string>
     <string name="map_showc_disabled">Inaktiverade cacher</string>
     <string name="map_showc_archived">Arkiverade cacher</string>
     <string name="map_showwp_original">Ursprungliga waypoints</string>
@@ -1220,7 +1216,6 @@
     <string name="map_live_disable">Inaktivera live</string>
     <string name="map_as_list">Visa som lista</string>
     <string name="map_select_multiple_items">Välj objekt</string>
-    <string name="map_routing_brouter">Routning är endast tillgänglig om <a href="">BRouter</a> är installerat</string>
     <string name="map_gm_autorotation">Rotera kartan automatiskt</string>
     <string name="map_gm_autorotation_disable">Inaktivera automatisk kartrotation?\n\nDu kan aktivera det igen med hjälp av menyn</string>
     <string name="quick_settings">Snabbinställningar</string>
@@ -1876,8 +1871,6 @@
     <string name="wizard_welcome_advanced">Avancerade inställningar</string>
     <string name="wizard_advanced_offlinemaps_label">Offline-kartor</string>
     <string name="wizard_advanced_offlinemaps_info">Denna sida innehåller några avancerade funktioner, som är valfria att använda.\n\nc:geo kan ladda ner kartfiler för offline-användning.</string>
-    <string name="wizard_advanced_brouter_label">Navigeringsapp</string>
-    <string name="wizard_advanced_brouter_info">Genom att installera och konfigurera en kompanjonapp som heter \"BRouter Offline Navigation\" kan c:geo navigera till mål och visa ruttinformation på kartan.</string>
     <string name="wizard_advanced_restore_label">Återställ</string>
     <string name="wizard_advanced_restore_info">Om du har en säkerhetskopia av en tidigare installation kan du återställa inställningar och/eller geocache-data.</string>
     <string name="status_not_ok">FEL</string>

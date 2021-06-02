@@ -543,16 +543,12 @@
     <string name="init_summary_friends_and_own_logs_wanted">为朋友和自己的日志显示额外的日志页面</string>
     <string name="init_openlastdetailspage">上次详细信息页</string>
     <string name="init_summary_openlastdetailspage">打开上次使用页面的详细信息</string>
-    <string name="init_skin">浅皮肤</string>
-    <string name="init_summary_skin">Use light skin (Restart needed)</string>
     <string name="init_address">显示地址</string>
     <string name="init_summary_address">在主屏幕上显示地址而不是坐标</string>
     <string name="init_select_language">选择语言</string>
     <string name="init_summary_select_language">选择应用内语言 (需要重启)\n</string>
     <string name="init_use_default_language">使用默认语言</string>
     <string name="init_category_exclude">排除藏点</string>
-    <string name="init_exclude">排除拥有的和找到的</string>
-    <string name="init_summary_exclude">排除您拥有或找到的藏点</string>
     <string name="init_showwaypoints">显示航点</string>
     <string name="init_showwaypoint_description">如果地图上显示的藏点少于给定的数量，则额外显示其航点。</string>
     <string name="init_zoomincludingwaypoints">缩放包括航点</string>
@@ -584,6 +580,7 @@
     <string name="init_summary_listdisplay">在藏点列表中显示藏点所属的其他列表</string>
     <string name="init_livelist">显示导航</string>
     <string name="init_summary_livelist">为列表中的藏点显示带有指南针方向的箭头</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">创建备份</string>
     <string name="init_backup_summary">请注意，此功能可以备份藏点，航点和设置，但没有缓存图像。 \n为了能够在丢失您的手机后恢复数据。 备份文件应复制到独立位置。</string>

@@ -503,10 +503,9 @@
     <string name="cache_filter_status_select_only_found_no">Δεν Βρέθηκε Μόνο</string>
     <string name="cache_filter_status_select_only_own_yes">Μόνο ιδιόκτητες</string>
     <string name="cache_filter_status_select_only_own_no">Μόνο άλλων</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Μόνο Απενεργοποιημένες</string>
-    <string name="cache_filter_status_select_only_disabled_no">Μόνο ενεργοποιημένες</string>
-    <string name="cache_filter_status_select_only_archived_yes">Μόνο Αρχειοθετημένες</string>
-    <string name="cache_filter_status_select_only_archived_no">Μόνο Ενεργές</string>
+    <string name="cache_filter_status_exclude_active">Εξαίρεση Ενεργών</string>
+    <string name="cache_filter_status_exclude_disabled">Εξαίρεση Απενεργοποιημένων</string>
+    <string name="cache_filter_status_exclude_archived">Εξαίρεση των αρχειοθετημένων</string>
     <string name="cache_filter_log_entry_foundby">Βρέθηκε από:</string>
     <string name="cache_filter_log_entry_logtext">Κείμενο καταγραφής:</string>
     <!-- about -->
@@ -661,16 +660,12 @@
     <string name="init_summary_friends_and_own_logs_wanted">Εμφάνιση επιπλέον σελίδας ημερολογίου για αρχεία καταγραφής φίλων και δικών μου</string>
     <string name="init_openlastdetailspage">Τελευταία καταχώρηση</string>
     <string name="init_summary_openlastdetailspage">Λεπτομέρειες τελευταίας σελίδας που χρησιμοποιήσατε</string>
-    <string name="init_skin">Ανοιχτόχρωμο θέμα</string>
-    <string name="init_summary_skin">Χρήση ανοιχτόχρωμου θέματος (απαιτείται επανεκκίνηση)</string>
     <string name="init_address">Προβολή διεύθυνσης</string>
     <string name="init_summary_address">Εμφάνιση διεύθυνσης αντί για συντεταγμένες στην κύρια οθόνη</string>
     <string name="init_select_language">Επιλέξτε γλώσσα</string>
     <string name="init_summary_select_language">Επιλλέξτε γλώσσα στην εφαρμογή (Χρειάζεται επανεκκίνηση)\n</string>
     <string name="init_use_default_language">Χρήση προεπιλεγμένης Γλώσσας</string>
     <string name="init_category_exclude">Εξαίρεση κρυπτών</string>
-    <string name="init_exclude">Εξαίρεση των δικών σας και όσων έχετε βρει</string>
-    <string name="init_summary_exclude">Εξαίρεση των δικών σας κρυπτών ή όσων έχετε βρει</string>
     <string name="init_showwaypoints">Προβολή σημείων αναφοράς</string>
     <string name="init_showwaypoint_description">Αν εμφανίζονται στον χάρτη λιγότερες από τις δεδομένες κρύπτες, εμφανίζονται επιπλέον και τα σημεία τους.</string>
     <string name="init_zoomincludingwaypoints">Το επίπεδο εστίασης περιλαμβάνει τα waypoints</string>
@@ -713,6 +708,7 @@
     <string name="init_summary_listdisplay">Εμφάνιση ιδιότητας μέλους των κρυπτών και σε άλλες λίστες, σε μια λίστα κρυπτών</string>
     <string name="init_livelist">Εμφάνιση κατεύθυνσης</string>
     <string name="init_summary_livelist">Εμφάνιση βέλους με κατεύθυνση πυξίδας για κρύπτες σε μια λίστα</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Δημιουργία αντιγράφου ασφαλείας</string>
     <string name="init_backup_summary">Παρακαλώ λάβετε υπ\' όψιν σας ότι το χαρακτηριστικό αυτό μπορεί να δημιουργήσει αντίγραφα ασφαλείας των κρυπτών, των ενδιάμεσων σημείων &amp; των ρυθμίσεων, αλλά όχι των φωτογραφιών των κρυπτών. \nΓια να μπορέσετε να επαναφέρετε τα δεδομένα σας ακόμα και εάν χάσετε το τηλέφωνο σας, το αρχεία του αντιγράφου ασφαλείας πρέπει να είναι αποθηκευμένα σε μια ανεξάρτητη τοποθεσία.</string>
@@ -1335,7 +1331,6 @@
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
     <string name="map_show_circles">Εμφάνιση κύκλων</string>
-    <string name="map_showc_ownfound">Ιδιόκτητες κρύπτες/ευρέσεις</string>
     <string name="map_showc_disabled">Απενεργοποιημένες κρύπτες</string>
     <string name="map_showc_archived">Αρχειοθετημένες κρύπτες</string>
     <string name="map_showwp_original">Αρχικά ενδιάμεσα σημεία</string>
@@ -1360,7 +1355,8 @@
     <string name="map_as_list">Προβολή σε λίστα</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
-    <string name="map_routing_brouter">Η δρομολόγηση είναι διαθέσιμη μόνο εάν το <a href="">BRouter</a> είναι εγκατεστημένο</string>
+    <string name="map_routing_activate_title">Ενεργοποίηση δρομολόγησης</string>
+    <string name="map_routing_activate">Ορισμένες λειτουργίες δρομολόγησης δεν είναι προς το παρόν διαθέσιμες, καθώς δεν υπάρχει μηχανή δρομολόγησης ενεργή.\n\nΘέλετε να ενεργοποιήσετε την εσωτερική μηχανή δρομολόγησης c:geo και τη λήψη δεδομένων δρομολόγησης;</string>
     <string name="map_gm_autorotation">Αυτόματη περιστροφή χάρτη</string>
     <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
     <string name="quick_settings">Γρήγορες ρυθμίσεις</string>
@@ -1386,7 +1382,7 @@
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
     <string name="search_filter">Φίλτρο (πειραματικό)</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
-    <string name="search_filter_info_message">Η \'Αναζήτηση με φίλτρο\' αναζητά κρύπτες χρησιμοποιώντας το παρεχόμενο φίλτρο. Ανάλογα με την δυνατότητες της υπηρεσίας, μόνο ένα μέρος του φίλτρου εκτελείται σε απευθείας σύνδεση, το υπόλοιπο γίνεται με φίλτρο εκτός σύνδεσης.\n\nΌλες οι υπηρεσίες υποστηρίζουν μόνο φίλτρα \'ΚΑΙ\' όπως και χωρίς αντιστροφή φίλτρου\n\nη Geocaching. com υποστηρίζει:\n- Όνομα (μόνο ολόκληρες λέξεις, Δεν υποστηρίζεται το μοτίβο)\n- Τύπος κρύπτης\n- Μέγεθος κρύπτης\n- Απόσταση και έδαφος\n- Αγαπημένα (μόνο απόλυτα, μόνο ελάχιστο)\n- Κατάσταση (Δικές μου, Βρέθηκαν &amp; Ενεργοποιημένες)\n- Κρυμένες από (καθορίστε το id του χρήστη)\n- Δεν βρέθηκε απο τον (προσδιορίστε το αναγνωριστικό χρήστη ακριβώς)\n- Ημερομηνία τοποθέτησης\n\nΣημειώστε ότι το c:geo δεν μπορεί ειδικά να προσφέρει φιλτράρισμα ιδιότητας γιατί η Geocaching.com μπλοκάρει το απαιτούμενο API για εμάς.\n\nΑυτή η υπηρεσία μέσω της Geocaching.com δεν υποστηρίζεται ακόμα.</string>
+    <string name="search_filter_info_message">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
@@ -2058,8 +2054,6 @@
     <string name="wizard_welcome_advanced">Προηγμένη διαμόρφωση</string>
     <string name="wizard_advanced_offlinemaps_label">Χάρτες χωρίς σύνδεση</string>
     <string name="wizard_advanced_offlinemaps_info">Αυτή η σελίδα παρέχει μερικές προηγμένες λειτουργίες, οι οποίες είναι προαιρετικές για χρήση.\n\nτο c:geo μπορεί να κατεβάσει αρχεία χάρτη για χρήση χωρίς σύνδεση.</string>
-    <string name="wizard_advanced_brouter_label">Εφαρμογή δρομολόγησης</string>
-    <string name="wizard_advanced_brouter_info">Με την εγκατάσταση και διαμόρφωση μιας συνοδευτικής εφαρμογής με το όνομα \"BRouter Offline Navigation\" το c:geo μπορεί να πλοηγηθεί σε στόχους και να εμφανίσει πληροφορίες δρομολόγησης στον χάρτη σας.</string>
     <string name="wizard_advanced_restore_label">Επαναφορά</string>
     <string name="wizard_advanced_restore_info">Εάν έχετε ένα αντίγραφο ασφαλείας μιας προηγούμενης εγκατάστασης, μπορείτε να επαναφέρετε τις ρυθμίσεις και/ή geocache δεδομένα.</string>
     <string name="status_not_ok">ΛΑΘΟΣ</string>

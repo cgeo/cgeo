@@ -432,12 +432,8 @@
     <string name="init_summary_friends_and_own_logs_wanted">Prikaži dodaten zavihek s svojimi/prijateljevimi zapisi</string>
     <string name="init_openlastdetailspage">Odpri nazadnje odprto stran</string>
     <string name="init_summary_openlastdetailspage">Pri podrobnostih zaklada vedno odpri zadnjo uporabljeno stran</string>
-    <string name="init_skin">Svetli izgled</string>
-    <string name="init_summary_skin">Uporabi svetlo različico\n(potrebuje ponovni zagon aplikacije)</string>
     <string name="init_address">Pokaži naslov</string>
     <string name="init_summary_address">Na glavnem zaslonu pokaži naslov namesto koordinat</string>
-    <string name="init_exclude">Ne pokaži najdenih ali mojih zakladov</string>
-    <string name="init_summary_exclude">Ne pokaži mojih ali najdenih zakladov v iskanjih ali na zemljevidu</string>
     <string name="init_showwaypoints">Dodatne točke na zemljevidu</string>
     <string name="init_showwaypoint_description">Če je manj kot določeno število zakladov na zemljevidu, se pokažejo tudi dodatne točke.</string>
     <string name="init_disabled">Ne pokaži onemogočenih zakladov v iskanjih ali na zemljevidu</string>
@@ -451,6 +447,7 @@
     <string name="init_choose_list">Vprašaj za seznam</string>
     <string name="init_summary_choose_list">Pri shranjevanju zaklada za delo brez povezave vprašaj za seznam</string>
     <string name="init_livelist">Pokaži smeri</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Ustvari varnostno kopijo</string>
     <string name="init_backup_running">Ustvarjanje varnostne kopije baze…</string>

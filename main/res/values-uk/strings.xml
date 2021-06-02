@@ -522,16 +522,12 @@
     <string name="init_summary_friends_and_own_logs_wanted">Відображати додаткову сторінку логів для друзів і власних журналів</string>
     <string name="init_openlastdetailspage">Сторінка останніх деталей</string>
     <string name="init_summary_openlastdetailspage">Відкрити деталі зі останній використаний сторінкою</string>
-    <string name="init_skin">Світла шкіра</string>
-    <string name="init_summary_skin">Використовувати світлий скін (потрібен перезапуск)</string>
     <string name="init_address">Показати адресу</string>
     <string name="init_summary_address">Відображати адресу замість координат на головному екрані</string>
     <string name="init_select_language">Виберіть мову</string>
     <string name="init_summary_select_language">Оберіть мову програм (потрібен перезапуск)\n</string>
     <string name="init_use_default_language">Мова за замовчуванням</string>
     <string name="init_category_exclude">виключити кеші</string>
-    <string name="init_exclude">Виключити власні та знайдено</string>
-    <string name="init_summary_exclude">Виключити кеші ваші власні або знайдені</string>
     <string name="init_showwaypoints">Показати точки маршруту</string>
     <string name="init_showwaypoint_description">Якщо на карті відображається менше заданої кількості схованок, то додатково відображаються їхні шляхові точки.</string>
     <string name="init_zoomincludingwaypoints">Масштабування містить маршрутні точки</string>
@@ -560,6 +556,7 @@
     <string name="init_listdisplay">Додаткові списки</string>
     <string name="init_summary_listdisplay">Показати членство в кеші в додаткових списках зі схованки</string>
     <string name="init_livelist">Показати напрямок</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Створити резервну копію</string>
     <string name="init_backup_summary">Зверніть увагу, що ця функція може створювати резервні копії кешів, шляхових точок &amp; налаштувань, але немає схованок. \nДля того, щоб мати можливість відновити дані навіть після втрати телефону, резервні копії файлів слід скопіювати у незалежне місце.</string>
@@ -1596,7 +1593,6 @@
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_welcome_advanced">Розширена конфігурація</string>
     <string name="wizard_advanced_offlinemaps_label">офлайн-карти</string>
-    <string name="wizard_advanced_brouter_label">Додаток для маршрутизації</string>
     <string name="wizard_advanced_restore_label">Відновити</string>
     <string name="status_not_ok">Помилка</string>
     <string name="wizard_status_title">Налаштування статусу</string>

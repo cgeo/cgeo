@@ -505,12 +505,11 @@
     <string name="cache_filter_status_select_all">Todos</string>
     <string name="cache_filter_status_select_only_found_yes">Apenas Encontradas</string>
     <string name="cache_filter_status_select_only_found_no">Apenas Não Encontradas</string>
-    <string name="cache_filter_status_select_only_own_yes">Apenas Próprias</string>
+    <string name="cache_filter_status_select_only_own_yes">Apenas Minhas</string>
     <string name="cache_filter_status_select_only_own_no">Apenas de Outros</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Apenas Desactivadas</string>
-    <string name="cache_filter_status_select_only_disabled_no">Apenas Activas</string>
-    <string name="cache_filter_status_select_only_archived_yes">Apenas Arquivadas</string>
-    <string name="cache_filter_status_select_only_archived_no">Apenas Não arquivadas</string>
+    <string name="cache_filter_status_exclude_active">Excluir Activas</string>
+    <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
+    <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
     <string name="cache_filter_log_entry_foundby">Encontrada por:</string>
     <string name="cache_filter_log_entry_logtext">Texto de registo:</string>
     <!-- about -->
@@ -661,20 +660,20 @@
     <string name="init_signature_template_type">Tipo</string>
     <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
-    <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/individuais</string>
+    <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/meus</string>
     <string name="init_summary_friends_and_own_logs_wanted">Mostra um livro de registos adicional num novo separador, contendo os registos feitos por si e por amigos</string>
     <string name="init_openlastdetailspage">Mem. último separador visto</string>
     <string name="init_summary_openlastdetailspage">Abre a consulta dos detalhes da cache no último separador visto</string>
-    <string name="init_skin">Tema claro</string>
-    <string name="init_summary_skin">Utilização do tema claro (requer reinício)</string>
     <string name="init_address">Mostrar endereço</string>
     <string name="init_summary_address">Mostra um endereço em vez das coordenadas no ecrã principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_summary_select_language">Selecciona o idioma da aplicação (requer reinício)\n</string>
     <string name="init_use_default_language">Utilizar idioma predefinido</string>
     <string name="init_category_exclude">Excluir caches</string>
-    <string name="init_exclude">Excluir Encontradas e Minhas</string>
-    <string name="init_summary_exclude">Exclui as caches que lhe pertencem ou que tenha encontrado</string>
+    <string name="init_exclude_own">Excluir Minhas</string>
+    <string name="init_summary_exclude_own">Exclui caches que lhe pertencem </string>
+    <string name="init_exclude_found">Excluir Encontradas</string>
+    <string name="init_summary_exclude_found">Exclui caches que já encontrou</string>
     <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
@@ -699,6 +698,8 @@
     <string name="init_summary_disabled">Exclui as caches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>
     <string name="init_summary_archived">Exclui as caches arquivadas</string>
+    <string name="init_offlinelog">Excluir com Registo Offline</string>
+    <string name="init_summary_offlinelog">Exclui caches com Registo Offline</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
@@ -717,6 +718,13 @@
     <string name="init_summary_listdisplay">Ao aceder a uma lista de caches armazenadas, é mostrado o nome de outras listas das quais essas caches possam estar associadas</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
+    <!-- app theme -->
+    <string name="settings_theme_title">Tema</string>
+    <string-array name="settings_theme_entries">
+        <item>Predefinição do sistema</item>
+        <item>Claro</item>
+        <item>Escuro</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Tenha em consideração que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais e configurações, mas não de imagens em caches.\nPara que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
@@ -1103,7 +1111,7 @@
     <string name="cache_hint">Dica</string>
     <string name="cache_hint_not_available">Nenhuma dica disponível</string>
     <string name="cache_logs">Todos os registos</string>
-    <string name="cache_logs_friends_and_own">Os meus registos/Amigos</string>
+    <string name="cache_logs_friends_and_own">Registos: Amigos/Meus</string>
     <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
     <string name="cache_dialog_loading_details_status_loadpage">A carregar a página</string>
     <string name="cache_dialog_loading_details_status_details">A processar os detalhes</string>
@@ -1339,9 +1347,11 @@
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
     <string name="map_show_circles">Mostrar círculos</string>
-    <string name="map_showc_ownfound">Caches minhas/encontradas</string>
+    <string name="map_showc_own">Caches minhas</string>
+    <string name="map_showc_found">Caches encontradas</string>
     <string name="map_showc_disabled">Caches desactivadas</string>
     <string name="map_showc_archived">Caches arquivadas</string>
+    <string name="map_showc_offlinelog">Caches com Registo Offline</string>
     <string name="map_showwp_original">Pont. adicionais originais</string>
     <string name="map_showwp_parking">Pontos de estacionamento</string>
     <string name="map_showwp_visited">Pont. adicionais visitados</string>
@@ -1363,7 +1373,9 @@
     <string name="map_live_disable">Desactivar em tempo real</string>
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar item</string>
-    <string name="map_routing_brouter">O encaminhamento só está disponível se <a href="">BRouter</a> estiver instalado</string>
+    <string name="map_routing">Encaminhamento</string>
+    <string name="map_routing_activate_title">Permitir rastreamento</string>
+    <string name="map_routing_activate">Alguns modos de rastreamento não estão disponíveis de momento, pois não há nenhum motor de encaminhamento activo.\n\nQuer activar o mecanismo de encaminhamento interno do c:geo e transferir os respectivos dados?</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
@@ -1389,7 +1401,7 @@
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_filter">Filtro (experimental)</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
-    <string name="search_filter_info_message">\'Pesquisar por filtro\' procura caches nos serviços online usando um filtro fornecido. Dependendo da capacidade do serviço, apenas parte do filtro é executada on-line, o restante é feito por filtragem off-line.\n\nTodos os serviços só suportam filtros AND e sem inversão de filtro.\n\nGeocaching.com suporta:\n- Nome (apenas palavras completas, Modelo não suportado)\n- Tipo de Cache\n- Tamanho de Cache\n- Distância\nDificuldade e Terreno\n- Favoritos (apenas absoluto, apenas mínimo)\n- Estado (Própria, Encontrada &amp; habilitada)\n- Escondida por (especificar exactamente a id do utilizador)\n- Não-Encontrada por (especificar exactamente a id do utilizador)\n- Data de colocação\n\nNote que o c:geo não pode oferecer especificamente a filtragem de Atributos, uma vez que Geocaching.com está a bloquear-nos a API necessária.\n\nAinda não há suporte para além do Geocaching.com.</string>
+    <string name="search_filter_info_message">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
@@ -2061,8 +2073,8 @@ do mapa e dos temas?</string>
     <string name="wizard_welcome_advanced">Configurações avançadas</string>
     <string name="wizard_advanced_offlinemaps_label">Mapas offline</string>
     <string name="wizard_advanced_offlinemaps_info">Esta página fornece algumas funções avançadas, que são de uso opcional.\n\nO c:geo pode descarregar ficheiros de mapa para usar sem estar ligado à Internet.</string>
-    <string name="wizard_advanced_brouter_label">Aplicação de navegação</string>
-    <string name="wizard_advanced_brouter_info">Ao instalar e configurar a aplicação associada chamada \"BRouter Offline Navigation\", o c:geo pode navegar até um destino e exibir informações de direcção no seu mapa.</string>
+    <string name="wizard_advanced_routing_label">Activar encaminhamento offline</string>
+    <string name="wizard_advanced_routing_info">O c:geo tem um mecanismo de encaminhamento interno para encaminhamento offline e pode transferir automaticamente esses dados em falta.</string>
     <string name="wizard_advanced_restore_label">Restaurar</string>
     <string name="wizard_advanced_restore_info">Se tiver uma cópia de segurança de uma instalação anterior, pode restaurar configurações e/ou dados de geocaches.</string>
     <string name="status_not_ok">ERRO</string>

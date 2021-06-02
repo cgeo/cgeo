@@ -519,12 +519,8 @@
     <string name="init_summary_friends_and_own_logs_wanted">Zousätzlech Logbuchsäite fir Logs vun dir an denge Frënn uweisen</string>
     <string name="init_openlastdetailspage">Detailer uweisen vun der leschter Säit déi besicht gouf</string>
     <string name="init_summary_openlastdetailspage">Detailer opmaachen un der leschter Säit déi besicht gouf</string>
-    <string name="init_skin">Helle Skin</string>
-    <string name="init_summary_skin">Helle Skin benotzen (Neistart erfuerderlech)</string>
     <string name="init_address">Adress uweisen</string>
     <string name="init_summary_address">Adress uweisen amplaz vun den Koordinaten op mengem Bildschierm</string>
-    <string name="init_exclude">Eegen Cachen a Cachen déi ee fonnt huet ausblennen</string>
-    <string name="init_summary_exclude">Eegen Cachen a Cachen déi ee fonnt huet ausblennen</string>
     <string name="init_showwaypoints">Waypoints uweisen</string>
     <string name="init_showwaypoint_description">Falls manner Cachen op der Kaart ugewisen ginn als annoncéiert, da ginn d\'Waypoints zousätzlech ugewisen.</string>
     <string name="init_zoomincludingwaypoints">Zoom beinhalt Waypoints</string>
@@ -549,6 +545,7 @@
     <string name="init_listdisplay">Zousätzlech Lëschten</string>
     <string name="init_summary_listdisplay">Affiliatioun vu Cachen a weideren Lëschten uweisen</string>
     <string name="init_livelist">Richtung uweisen</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Backup erstellen</string>
     <string name="init_restore_title">Backup restauréieren</string>

@@ -559,16 +559,12 @@
     <string name="init_summary_friends_and_own_logs_wanted">Zobraziť ďalšiu stránku pre logy priateľov a vlastné logy</string>
     <string name="init_openlastdetailspage">Detaily na posledne použitej stránke</string>
     <string name="init_summary_openlastdetailspage">Otvoriť detaily na posledne použitej stránke</string>
-    <string name="init_skin">Svetlý vzhľad</string>
-    <string name="init_summary_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
     <string name="init_address">Ukázať adresu</string>
     <string name="init_summary_address">Adresa namiesto súradníc na úvodnej obrazovke</string>
     <string name="init_select_language">Zvoľte jazyk</string>
     <string name="init_summary_select_language">Zvoľte jazyk aplikácie (vyžaduje reštart)\n</string>
     <string name="init_use_default_language">Použiť predvolený jazyk</string>
     <string name="init_category_exclude">Nezahrnúť kešky</string>
-    <string name="init_exclude">Nezobrazovať vlastné a nájdené</string>
-    <string name="init_summary_exclude">Nezobrazovať vlastné a nájdené skrýše</string>
     <string name="init_showwaypoints">Body trasy na mape</string>
     <string name="init_showwaypoint_description">Ak je na mape zobrazený menší počet skrýš, ako je tento, zobrazia sa aj body trás (waypoints).</string>
     <string name="init_zoomincludingwaypoints">Priblíženie vrátane bodov trasy</string>
@@ -608,6 +604,7 @@
     <string name="init_summary_listdisplay">Zobraziť v zozname kešiek členstvo kešiek v ďalších zoznamoch</string>
     <string name="init_livelist">Zobrazovať smer</string>
     <string name="init_summary_livelist">Zobraziť šípku so smerom kompasu pre kešky v zozname</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvoriť zálohu</string>
     <string name="init_backup_summary">Majte na pamäti, že pomocou tejto funkcie je možné zálohovať kešky, body trasy a nastavenia, ale nie obrázky z kešiek. \nAk chcete mať možnosť obnoviť údaje aj po strate telefónu, súbory so zálohou musia byť skopírované na nezávislé miesto.</string>
@@ -1247,7 +1244,6 @@
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
     <string name="map_show_circles">Zobraziť kruhy</string>
-    <string name="map_showc_ownfound">Vlastné/nájdené kešky</string>
     <string name="map_showc_disabled">Deaktivované kešky</string>
     <string name="map_showc_archived">Archivované kešky</string>
     <string name="map_showwp_original">Pôvodné body trasy</string>
@@ -1271,7 +1267,6 @@
     <string name="map_live_disable">Zakázať aktívnu mapu</string>
     <string name="map_as_list">Zobraziť ako zoznam</string>
     <string name="map_select_multiple_items">Vybrať položku</string>
-    <string name="map_routing_brouter">Trasovanie je k dispozícii len vtedy, ak je nainštalovaná aplikácia <a href="">BRouter</a></string>
     <string name="map_gm_autorotation">Automatické otáčanie mapy</string>
     <string name="map_gm_autorotation_disable">Vypnúť automatické otáčanie mapy?\n\nMôžete ho znova povoliť pomocou ponuky Otáčanie mapy.</string>
     <string name="quick_settings">Rýchle nastavenia</string>
@@ -1988,8 +1983,6 @@
     <string name="wizard_welcome_advanced">Rozšírená konfigurácia</string>
     <string name="wizard_advanced_offlinemaps_label">Offline mapy</string>
     <string name="wizard_advanced_offlinemaps_info">Na tejto stránke sú určité rozšírené funkcie, ktoré môžete voliteľne použiť.\n\nAplikácia c:geo môže stiahnuť mapové súbory na použitie offline.</string>
-    <string name="wizard_advanced_brouter_label">Aplikácia na trasy</string>
-    <string name="wizard_advanced_brouter_info">Po inštalácii a konfigurácii sprievodnej aplikácie nazývanej \"BRouter Offline Navigation\" dokáže c:geo navigovať do cieľov a zobrazovať na mape informácie o trase.</string>
     <string name="wizard_advanced_restore_label">Obnoviť</string>
     <string name="wizard_advanced_restore_info">Ak máte zálohu predchádzajúcej inštalácie, môžete obnoviť nastavenia a/alebo údaje kešiek.</string>
     <string name="status_not_ok">CHYBA</string>

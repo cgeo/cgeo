@@ -501,10 +501,6 @@
     <string name="cache_filter_status_select_only_found_no">Sadece Bulmadıklarım</string>
     <string name="cache_filter_status_select_only_own_yes">Sahibi Olduklarım</string>
     <string name="cache_filter_status_select_only_own_no">Sahibi Olmadıklarım</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Sadece Devredışılar</string>
-    <string name="cache_filter_status_select_only_disabled_no">Sadece Açılanlar</string>
-    <string name="cache_filter_status_select_only_archived_yes">Sadece Arşivlenenler</string>
-    <string name="cache_filter_status_select_only_archived_no">Sacece Etkin Olanlar</string>
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
@@ -657,16 +653,12 @@
     <string name="init_summary_friends_and_own_logs_wanted">Arkadaşlarınızın ve kendinizin kayıt sayfasını görüntüle</string>
     <string name="init_openlastdetailspage">Son Ayrıntılar Sayfası</string>
     <string name="init_summary_openlastdetailspage">Ayrıntıları son kullanılan sayfa ile açın</string>
-    <string name="init_skin">Açık Renk</string>
-    <string name="init_summary_skin">Açık Renk kullanın (Yeniden başlatma gereklidir)</string>
     <string name="init_address">Adres Göster</string>
     <string name="init_summary_address">Ana ekranda koordinatlar yerine adresi göster</string>
     <string name="init_select_language">Dil seçin</string>
     <string name="init_summary_select_language">Uygulama dilini seçiniz (yeniden başlatma gerekli)\n</string>
     <string name="init_use_default_language">Varsayılan dili kullan</string>
     <string name="init_category_exclude">Geocache\'leri hariç tut</string>
-    <string name="init_exclude">Cache\'lerimi ve Bulduklarımı Dahil Etme</string>
-    <string name="init_summary_exclude">Sahibi olduklarımı ve bulduklarımı dahil etme</string>
     <string name="init_showwaypoints">Yol Noktalarını Göster</string>
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
     <string name="init_zoomincludingwaypoints">Yakınlaştırmada yol noktalarını da göster</string>
@@ -708,6 +700,7 @@
     <string name="init_summary_listdisplay">Geocache listesindeki ek listelere Geocache üyeliğini göster</string>
     <string name="init_livelist">Yön göster</string>
     <string name="init_summary_livelist">Listedeki kutular için pusula yönü olan bir ok göster</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Yedek Oluştur</string>
     <string name="init_backup_summary">Lütfen bu özelliğin Geocache\'leri, yol noktalarını &amp; ayarları yedekleyebileceğini, ancak Geocache görüntülerini yedekleyemeyeceğini unutmayın. \n Telefonunuzu kaybettikten sonra bile verileri geri yükleyebilmek için, yedekleme dosyalarının bağımsız bir konuma kopyalanması gerekir.</string>
@@ -1330,7 +1323,6 @@
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
     <string name="map_show_circles">Çemberleri göster</string>
-    <string name="map_showc_ownfound">Bulduklarım/kendi kutularım</string>
     <string name="map_showc_disabled">Devre dışı cache\'ler</string>
     <string name="map_showc_archived">Arşivlenmiş cache\'ler</string>
     <string name="map_showwp_original">Orijinal yol noktaları</string>
@@ -1354,7 +1346,6 @@
     <string name="map_live_disable">Anlık görüntü kapalı</string>
     <string name="map_as_list">Liste olarak göster</string>
     <string name="map_select_multiple_items">Öğe seç</string>
-    <string name="map_routing_brouter">Yönlendirme sadece <a href="">BRouter</a> yüklenmişse kullanılabilir</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
     <string name="map_gm_autorotation_disable">Otomatik harita döndürmesini devre dışı bırakılsın mı?\n\nHarita döndürme menüsünü kullanarak tekrardan etkinleştirebilirsiniz</string>
     <string name="quick_settings">Hızlı ayarlar</string>
@@ -1380,7 +1371,6 @@
     <string name="search_hbu_button">Sahibine göre ara</string>
     <string name="search_filter">Filtre (Deneysel)</string>
     <string name="search_filter_button">Filtreye göre ara</string>
-    <string name="search_filter_info_message">\'Filtreye göre ara\' seçilen filtreye göre Geocacheleri çevrimiçi olarak arar. Servis gücüne göre bir kısmı çevrimiçi olarak kalanı ise çevrimdışı olarak arama yapılabilir.\n\nTüm servisler sadece VE ve Hayır filtrelerinin değişimini destekler\n\nGeocaching.com destekleri\n- İsim (sadece tam sözcükler, biçimler desteklenmez)\n- Geocache türü\n-Geocache boyutu\n- Mesafe ve Arazi\n- Favoriler (sadece minimum)\n- Durum (Sahibi olduklarım, Bulduklarım &amp; Aktifler)\n- Saklayan (sadece kullanıcı adına özel arama)\n- Bulmadıkları (sadece kullanıcı adına özel arama)\n- Saklama tarihi\n\nGeocaching.com\'un gerekli API bilgisini bizlerle artık paylaşmıyor olmasından dolayı özelliklere göre arama filtresi kullanılabilir değildir.\n\n.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable kimliği</string>
     <string name="search_tb_button">Trackable ara</string>
@@ -2056,8 +2046,6 @@
     <string name="wizard_welcome_advanced">Gelişmiş yapılandırma</string>
     <string name="wizard_advanced_offlinemaps_label">Çevrimdışı haritalar</string>
     <string name="wizard_advanced_offlinemaps_info">Bu sayfa, kullanılması isteğe bağlı bazı gelişmiş ayarları içerir.\n\nc:geo, harita dosyalarını çevrim dışı kullanım için indirebilir.</string>
-    <string name="wizard_advanced_brouter_label">Yönlendirme uygulaması</string>
-    <string name="wizard_advanced_brouter_info">\"BRouter Offline Navigation\" adındaki tamamlayıcı uygulamayı yükleyerek ve ayarlayarak c:geo, hedeflere gidebilir ve haritanızdaki rota bilgilerini gösterebilir.</string>
     <string name="wizard_advanced_restore_label">Geri Yükle</string>
     <string name="wizard_advanced_restore_info">Eğer daha önceki kurulumdan kalan bir yedeğiniz varsa, ayarlarınızı ve/veya geocache verilerinizi yenileyebilirsiniz.</string>
     <string name="status_not_ok">HATA</string>

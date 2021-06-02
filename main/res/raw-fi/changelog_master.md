@@ -6,6 +6,8 @@
 
 ### Kartta
 - Uusi: Luodessa käyttäjän määrittämää kätköä kun karttaa on pyydetty luettelosta esille: Tarjoa käyttäjälle uuden kätkön tallentamista nykyiseen luetteloon (käyttäjän määrittämien kätköjen oletuslistan sijaan)
+- Uusi: Erillinen "omat" ja "löydetyt" -suodattimet kartan pika-asetuksissa
+- Muutos: Näytä myös kätkön nimi kätkön ponnahdusikkunassa
 
 ### Kätkön tiedot
 - Uusi: Käytä Google-kääntäjän ponnahdusikkunaa sovelluksessa
@@ -17,6 +19,7 @@
 
 ### Muut
 - Muutos: Olemme täysin luoneet uudelleen sisäisiä c:geon teemojen muodostuksen teknisiä ratkaisuja, jotta voimme paremmin hyödyntää Androidin moderneja komponentteja. Tämä aiheuttaa joitakin sivuvaikutuksia, joista osa on tahattomia. Ilmoita virheistä tai bugeista [GitHub-sivullamme](https://www.github.com/cgeo/cgeo/issues) tai ottamalla yhteyttä tukeen.
-- Uusi: Lataa kirjanmerkkilistat geocaching.comista - katso "Listat / pocket queryt" päävalikosta
+- Uusi: Tuki järjestelmän päivä/yötilalle (valinnainen)
+- Uusi: Lataa kirjanmerkkilistat geocaching.comista - katso "Listat / Pocket Queryt" päävalikosta
 - Uusi: Poistetaan geocaching.su:n käyttö
 - Muutos: Poistettu RMAPS navigointisovellus, jota ei ole enää pidetty yllä

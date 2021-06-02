@@ -522,16 +522,12 @@
     <string name="init_summary_friends_and_own_logs_wanted">Rādīt papildu lapu ar draugu un saviem apmeklējuma ierakstiem</string>
     <string name="init_openlastdetailspage">Pēdējā atvērtā sadaļa</string>
     <string name="init_summary_openlastdetailspage">Atvērt datus ar pēdējo izmantoto sadaļu</string>
-    <string name="init_skin">Gaišs fons</string>
-    <string name="init_summary_skin">Izmantot gaišu fonu (nepieciešama restartēšana)</string>
     <string name="init_address">Rādīt adresi</string>
     <string name="init_summary_address">Rādīt adresi, nevis koordinātes galvenajā ekrānā</string>
     <string name="init_select_language">Izvēlieties valodu</string>
     <string name="init_summary_select_language">Izvēlēties aplikācijas valodu (nepieciešama restartēšana)\n</string>
     <string name="init_use_default_language">Lietot noklusējuma valodu</string>
     <string name="init_category_exclude">Izņemt slēpņus</string>
-    <string name="init_exclude">Nerādīt savus un atrastos</string>
-    <string name="init_summary_exclude">Nerādīt tev piederošus vai jau atrastos slēpņus</string>
     <string name="init_showwaypoints">Rādīt starpposmus</string>
     <string name="init_showwaypoint_description">Ja skaits ir mazāks nekā norādītais attēlojamo slēpņu skaits, tad papildus kartē tiek parādīti arī to Starpposmi.</string>
     <string name="init_zoomincludingwaypoints">Tālummaiņa iekļauj ceļa punktus</string>
@@ -557,6 +553,7 @@
     <string name="init_summary_choose_list">Jautāt, kurā sarakstā saglabāt slēpņus</string>
     <string name="init_listdisplay">Papildu saraksti</string>
     <string name="init_livelist">Rādīt virzienu</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup">Dublētie slēpņi / starpposmi</string>
     <string name="init_backup_backup">Izveidot rezerves kopiju</string>

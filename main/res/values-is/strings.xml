@@ -339,11 +339,7 @@
     <string name="init_signature_template_log">Færslutexti</string>
     <string name="init_ratingwanted">GCvote mat</string>
     <string name="init_summary_ratingwanted">Sjá dóma um cache frá GCvote.com</string>
-    <string name="init_skin">Ljós hamur</string>
-    <string name="init_summary_skin">Nota ljósan ham (þarfnast endurræsingar)</string>
     <string name="init_address">Sýna heimilisfang</string>
-    <string name="init_exclude">Útiloka eigin og fundin</string>
-    <string name="init_summary_exclude">Útiloka cache sem þú átt eða hefur fundið</string>
     <string name="init_disabled">Útiloka óvirk</string>
     <string name="init_summary_disabled">Útiloka óvirk cache</string>
     <string name="init_save_log_img">Vista myndir</string>
@@ -352,6 +348,7 @@
     <string name="init_summary_units">Nota breskar mælieiningar í staðinn fyrir metrakerfið</string>
     <string name="init_log_offline">Skráning án netsambands</string>
     <string name="init_livelist">Sýna átt</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Öryggisafrit</string>
     <string name="init_backup_running">Bý til öryggisafrit af gagnagrunninum…</string>

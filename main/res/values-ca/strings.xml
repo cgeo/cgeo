@@ -558,16 +558,12 @@
     <string name="init_summary_friends_and_own_logs_wanted">Visualitza una pàgina addicional del llibre de registre pels registres dels amics i els propis</string>
     <string name="init_openlastdetailspage">Obre l\'última pàgina de detalls</string>
     <string name="init_summary_openlastdetailspage">Obre els detalls amb l\'última pàgina utilitzada</string>
-    <string name="init_skin">Aparença lluminosa</string>
-    <string name="init_summary_skin">Utilitza el fons clar (cal reiniciar)</string>
     <string name="init_address">Mostra l\'adreça</string>
     <string name="init_summary_address">Mostra l\'adreça en lloc de les coordenades a la pantalla principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_summary_select_language">Seleccioneu l\'idioma de l\'aplicació (requereix un reinici)\n</string>
     <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
     <string name="init_category_exclude">Exclou catxés</string>
-    <string name="init_exclude">Exclou els propis i els trobats</string>
-    <string name="init_summary_exclude">Exclou els teus propis catxés o els que ja has trobat</string>
     <string name="init_showwaypoints">Mostra les fites</string>
     <string name="init_showwaypoint_description">Si la quantitat de catxés mostrats al mapa és menor a l\'especificada, també es mostraran les seves fites.</string>
     <string name="init_zoomincludingwaypoints">El zoom inclou punts de pas</string>
@@ -591,7 +587,6 @@
     <string name="init_disabled">Exclou els desactivats</string>
     <string name="init_summary_disabled">Exclou els catxés desactivats</string>
     <string name="init_archived">Exclou arxivats</string>
-    <string name="init_summary_archived">Exclou els catxés desactivats</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
     <string name="init_summary_customtabs_as_browser">Els llocs web externs es mostraran sense deixar c: geo (només és possible si hi ha instal·lat Chrome)</string>
@@ -607,6 +602,7 @@
     <string name="init_summary_listdisplay">Mostra la pertinença del catxé a una llista addicionals a la llista de catxés</string>
     <string name="init_livelist">Mostra la direcció</string>
     <string name="init_summary_livelist">Mostra una fletxa amb la direcció de la brúixola als catxés en una llista</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Fer una còpia de seguretat</string>
     <string name="init_backup_summary">Tingueu en compte que aquesta funció permet fer còpies de seguretat de catxés , punts de ruta &amp; configuracions, però sense imatges dels catxés. \n\n Per poder restaurar les dades fins i tot després de perdre el telèfon, els fitxers de còpia de seguretat s\'han de copiar a una ubicació independent.</string>
@@ -1226,7 +1222,6 @@
     <string name="map_rotation">Mapa rotatori</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
     <string name="map_show_circles">Mostra els cercles</string>
-    <string name="map_showc_ownfound">Catxés Propi/Trobat</string>
     <string name="map_showc_disabled">Catxés desactivats</string>
     <string name="map_showc_archived">Catxés arxivats</string>
     <string name="map_showwp_original">Punt ruta originals</string>
@@ -1250,7 +1245,6 @@
     <string name="map_live_disable">Desactiva en viu</string>
     <string name="map_as_list">Mostra-ho com una llista</string>
     <string name="map_select_multiple_items">Seleccionar un element</string>
-    <string name="map_routing_brouter">L\'encaminament només està disponible si hi ha  <a href="">BRouter</a>instal·lat</string>
     <string name="map_gm_autorotation">Mapa autorotatori</string>
     <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
     <string name="quick_settings">Configuració ràpida</string>
@@ -1932,8 +1926,6 @@
     <string name="wizard_welcome_advanced">Configuració avançada</string>
     <string name="wizard_advanced_offlinemaps_label">Mapes fora de línia</string>
     <string name="wizard_advanced_offlinemaps_info">Aquesta pàgina proporciona algunes funcions avançades que són opcionals .\n\nC: geo pot descarregar fitxers de mapes per fora de línia.</string>
-    <string name="wizard_advanced_brouter_label">App d’encaminament</string>
-    <string name="wizard_advanced_brouter_info">En instal·lar i configurar la aplicació complementària \"BRouter Offline Navigation\", C: geo pot navegar fins als objectius i mostrar informació sobre l\'encaminament al vostre mapa.</string>
     <string name="wizard_advanced_restore_label">Restaura</string>
     <string name="wizard_advanced_restore_info">Si teniu una còpia de seguretat d\'una instal·lació anterior, podeu restaurar la configuració i/o les dades dels catxés.</string>
     <string name="status_not_ok">ERROR</string>

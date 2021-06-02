@@ -467,7 +467,11 @@
     <string name="cache_filter_favorites">Suosikit</string>
     <string name="cache_filter_distance">Etäisyys</string>
     <string name="cache_filter_hidden">Piilotuspäivä</string>
+    <string name="cache_filter_logs_count">Lokien määrä</string>
+    <string name="cache_filter_last_found">Viimeisimmän löydön päivämäärä</string>
+    <string name="cache_filter_log_entry">Lokikirjaus</string>
     <string name="cache_filtergroup_basic">Perus</string>
+    <string name="cache_filtergroup_details">Yksityiskohdat</string>
     <string name="cache_filtergroup_userspecific">Käyttäjäkohtainen</string>
     <string name="cache_filter_include">Sisällytä</string>
     <string name="cache_filter_exclude">Rajaa pois</string>
@@ -503,10 +507,11 @@
     <string name="cache_filter_status_select_only_found_no">Vain Ei Löytynyt</string>
     <string name="cache_filter_status_select_only_own_yes">Vain Omat</string>
     <string name="cache_filter_status_select_only_own_no">Vain Ei-Omat</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Vain Pois Käytöstä</string>
-    <string name="cache_filter_status_select_only_disabled_no">Vain Käytössä</string>
-    <string name="cache_filter_status_select_only_archived_yes">Vain Arkistoitu</string>
-    <string name="cache_filter_status_select_only_archived_no">Vain Aktiivinen</string>
+    <string name="cache_filter_status_exclude_active">Rajaa pois aktiiviset</string>
+    <string name="cache_filter_status_exclude_disabled">Rajaa pois hyllytetyt</string>
+    <string name="cache_filter_status_exclude_archived">Rajaa pois arkistoidut</string>
+    <string name="cache_filter_log_entry_foundby">Löytänyt:</string>
+    <string name="cache_filter_log_entry_logtext">Lokiteksti:</string>
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
@@ -659,16 +664,16 @@
     <string name="init_summary_friends_and_own_logs_wanted">Näytä erillinen lokikirjan sivu omille sekä ystävien lokeille</string>
     <string name="init_openlastdetailspage">Viimeisimmät tiedot -sivu</string>
     <string name="init_summary_openlastdetailspage">Avaa viimeksi avattujen sivujen lisätiedot</string>
-    <string name="init_skin">Vaalea sävy</string>
-    <string name="init_summary_skin">Muuta sävy vaaleaksi (uudelleenkäynnistys tarvitaan)</string>
     <string name="init_address">Näytä osoite</string>
     <string name="init_summary_address">Näytä osoite koordinaattien sijaan pääsivulla</string>
     <string name="init_select_language">Valitse kieli</string>
     <string name="init_summary_select_language">Valitse sovelluksen sisäinen kieli (vaatii uudelleenkäynnistyksen)\n</string>
     <string name="init_use_default_language">Käytä oletuskieltä</string>
     <string name="init_category_exclude">Jätä pois kätköt</string>
-    <string name="init_exclude">Piilota omat ja löydetyt</string>
-    <string name="init_summary_exclude">Älä näytä jo löytämiäsi tai omia kätköjä</string>
+    <string name="init_exclude_own">Rajaa pois omat</string>
+    <string name="init_summary_exclude_own">Rajaa pois omistamasi kätköt </string>
+    <string name="init_exclude_found">Rajaa pois löydetyt</string>
+    <string name="init_summary_exclude_found">Rajaa pois löytämäsi kätköt</string>
     <string name="init_showwaypoints">Näytä reittipisteet</string>
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
@@ -693,6 +698,8 @@
     <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
     <string name="init_archived">Älä näytä arkistoituja</string>
     <string name="init_summary_archived">Älä näytä arkistoituja kätköjä</string>
+    <string name="init_offlinelog">Rajaa pois offline-kirjatut</string>
+    <string name="init_summary_offlinelog">Rajaa pois kätköt, joissa on offline-kirjaus</string>
     <string name="init_global_wp_extraction_disable">Poista reittipisteen nouto käytöstä</string>
     <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
     <string name="init_customtabs_as_browser">Käytä Chrome WebViewiä</string>
@@ -711,6 +718,13 @@
     <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
+    <!-- app theme -->
+    <string name="settings_theme_title">Teema</string>
+    <string-array name="settings_theme_entries">
+        <item>Järjestelmän oletus</item>
+        <item>Vaalea</item>
+        <item>Tumma</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Luo varmuuskopio</string>
     <string name="init_backup_summary">Huomaa, että tämä ominaisuus voi varmuuskopioida kätköjä, reittipisteitä &amp; asetuksia, mutta ei kätköjen kuvia. \nVoidaksesi palauttaa tiedot myös sen jälkeen, kun olet kadottanut puhelimesi, varmuuskopioidut tiedostot tulee kopioida ulkoiseen sijaintiin.</string>
@@ -1333,9 +1347,11 @@
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
     <string name="map_show_circles">Näytä ympyrät</string>
-    <string name="map_showc_ownfound">Omat/löydetyt kätköt</string>
+    <string name="map_showc_own">Omat kätköt</string>
+    <string name="map_showc_found">Löydetyt kätköt</string>
     <string name="map_showc_disabled">Hyllytetyt kätköt</string>
     <string name="map_showc_archived">Arkistoidut kätköt</string>
+    <string name="map_showc_offlinelog">Kätköt joissa on offline-kirjaus</string>
     <string name="map_showwp_original">Alkuperäiset reittipisteet</string>
     <string name="map_showwp_parking">Parkkipaikka-reittipisteet</string>
     <string name="map_showwp_visited">Vieraillut reittipisteet</string>
@@ -1357,7 +1373,9 @@
     <string name="map_live_disable">Poista live</string>
     <string name="map_as_list">Näytä luettelona</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
-    <string name="map_routing_brouter">Reititys on käytettävissä vain <a href="">BRouter</a>in ollessa asennettuna</string>
+    <string name="map_routing">Reititys</string>
+    <string name="map_routing_activate_title">Ota reititys käyttöön</string>
+    <string name="map_routing_activate">Joitakin reititystiloja ei ole tällä hetkellä saatavilla, koska reititysmoottori ei ole käytössä.\n\nHaluatko aktivoida c:geon sisäisen reititysmoottorin ja reititystietojen lataamisen?</string>
     <string name="map_gm_autorotation">Kartan automaattinen kääntö</string>
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <string name="quick_settings">Pika-asetukset</string>
@@ -1383,7 +1401,7 @@
     <string name="search_hbu_button">Hae omistajan nimellä</string>
     <string name="search_filter">Suodatin (kokeellinen)</string>
     <string name="search_filter_button">Etsi suodattimella</string>
-    <string name="search_filter_info_message">\'Etsi suodattimella\' etsii kätköjä verkkopalveluista käyttäen tarjottua suodatinta. Palveluominaisuuksista riippuen vain osa suodatinta suoritetaan verkossa, loput tehdään offline-suodatuksella.\n\nKaikki palvelut tukevat vain JA-suodattimia, mutta ei käänteistä suodatusta.\n\nGeocaching.com tukee:\n- nimi (vain kokonaiset sanat, kuvio ei ole tuettu)\n- kätkötyyppi\n- kätkön koko\n- etäisyys\n- vaikeus ja maasto\n- suosikit (vain absoluuttinen, vain vähintään)\n- tila (oma, löytyi &amp; käytössä)\n- piilotettu (määritä käyttäjätunnus tarkalleen)\n- (joku) ei löytänyt (määritä käyttäjätunnus tarkalleen)\n- piilotuspäivä\n\nHuomaa, että c:geo ei voi tarjota suodatusta attribuutin mukaan, koska geocaching.com estää meiltä vaaditun API:n käytön.\n\nMuita kuin Geocaching.com-palvelua ei vielä tueta.</string>
+    <string name="search_filter_info_message">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_tb">Reissaaja</string>
     <string name="search_tb_hint">Reissaajan koodi</string>
     <string name="search_tb_button">Etsi reissaajia</string>
@@ -2059,8 +2077,8 @@
     <string name="wizard_welcome_advanced">Edistyneet määritysasetukset</string>
     <string name="wizard_advanced_offlinemaps_label">Offline-kartat</string>
     <string name="wizard_advanced_offlinemaps_info">Tällä sivulla on joitakin lisätoimintoja, joiden käyttö on valinnaista.\n\nc:geo voi ladata karttatiedostoja offline-käyttöön.</string>
-    <string name="wizard_advanced_brouter_label">Reitityssovellus</string>
-    <string name="wizard_advanced_brouter_info">Asentamalla ja määrittämällä kumppanisovelluksen nimeltä \"BRouter Offline Navigation\", c:geo voi navigoida kohteisiin ja näyttää reititystietoja kartallasi.</string>
+    <string name="wizard_advanced_routing_label">Aktivoi offline-reititys</string>
+    <string name="wizard_advanced_routing_info">c:geossa on sisäinen reititysmoottori offline-reititykseen ja se voi ladata automaattisesti puuttuvat reititystiedot puolestasi.</string>
     <string name="wizard_advanced_restore_label">Palauta</string>
     <string name="wizard_advanced_restore_info">Jos sinulla on varmuuskopio aiemmasta asennuksesta, voit palauttaa asetukset ja/tai geokätkötiedot.</string>
     <string name="status_not_ok">VIRHE</string>

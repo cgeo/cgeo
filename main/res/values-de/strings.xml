@@ -467,7 +467,11 @@
     <string name="cache_filter_favorites">Favoriten</string>
     <string name="cache_filter_distance">Entfernung</string>
     <string name="cache_filter_hidden">Versteckdatum</string>
+    <string name="cache_filter_logs_count">Anzahl Logs</string>
+    <string name="cache_filter_last_found">Letztes Funddatum</string>
+    <string name="cache_filter_log_entry">Logeintrag</string>
     <string name="cache_filtergroup_basic">Basis</string>
+    <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Benutzerspezifisch</string>
     <string name="cache_filter_include">Mit</string>
     <string name="cache_filter_exclude">Ohne</string>
@@ -503,10 +507,11 @@
     <string name="cache_filter_status_select_only_found_no">Nur nicht Gefundene</string>
     <string name="cache_filter_status_select_only_own_yes">Nur Eigene</string>
     <string name="cache_filter_status_select_only_own_no">Nur nicht Eigene</string>
-    <string name="cache_filter_status_select_only_disabled_yes">Nur Deaktivierte</string>
-    <string name="cache_filter_status_select_only_disabled_no">Nur Aktivierte</string>
-    <string name="cache_filter_status_select_only_archived_yes">Nur Archivierte</string>
-    <string name="cache_filter_status_select_only_archived_no">Nur nicht Archivierte</string>
+    <string name="cache_filter_status_exclude_active">Aktive ausschließen</string>
+    <string name="cache_filter_status_exclude_disabled">Deaktivierte ausschließen</string>
+    <string name="cache_filter_status_exclude_archived">Archivierte ausschließen</string>
+    <string name="cache_filter_log_entry_foundby">Gefunden von:</string>
+    <string name="cache_filter_log_entry_logtext">Log-Text:</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
@@ -659,16 +664,16 @@
     <string name="init_summary_friends_and_own_logs_wanted">Zeige zusätzliche Logbuchseite für Logs von dir und deinen Freunden</string>
     <string name="init_openlastdetailspage">Zuletzt genutzte Seite</string>
     <string name="init_summary_openlastdetailspage">Öffne Details mit zuletzt genutzter Seite</string>
-    <string name="init_skin">Helle Oberfläche</string>
-    <string name="init_summary_skin">Helle Oberfläche (Neustart erforderlich)</string>
     <string name="init_address">Ort statt Koordinaten</string>
     <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
     <string name="init_select_language">Sprache auswählen</string>
     <string name="init_summary_select_language">Wähle In-App-Sprache (Neustart erforderlich)\n</string>
     <string name="init_use_default_language">Systemsprache verwenden</string>
     <string name="init_category_exclude">Caches ausblenden</string>
-    <string name="init_exclude">Eigene/Gefundene ausblenden</string>
-    <string name="init_summary_exclude">Eigene/gefundene Caches ausblenden</string>
+    <string name="init_exclude_own">Eigene ausblenden</string>
+    <string name="init_summary_exclude_own">Eigene Caches ausblenden </string>
+    <string name="init_exclude_found">Gefundene ausblenden</string>
+    <string name="init_summary_exclude_found">Eigene Caches ausblenden</string>
     <string name="init_showwaypoints">Wegpunkte zeigen</string>
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
     <string name="init_zoomincludingwaypoints">Zoom beinhaltet Wegpunkte</string>
@@ -693,6 +698,8 @@
     <string name="init_summary_disabled">Deaktivierte Caches ausblenden</string>
     <string name="init_archived">Archivierte ausblenden</string>
     <string name="init_summary_archived">Archivierte Caches ausblenden</string>
+    <string name="init_offlinelog">Offline-Log ausblenden</string>
+    <string name="init_summary_offlinelog">Caches mit Offline-Log ausblenden</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird</string>
     <string name="init_customtabs_as_browser">Chrome WebView verwenden</string>
@@ -711,6 +718,7 @@
     <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
+    <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Sicherung erstellen</string>
     <string name="init_backup_summary">Bitte beachte, dass diese Funktion Caches, Wegpunkte &amp; Einstellungen, aber keine Cachebilder, sichern kann.\nDamit du die Daten auch nach dem Verlust deines Telefons wiederherstellen kannst, sollten die Sicherungsdateien an einen unabhängigen Ort kopiert werden.</string>
@@ -1333,9 +1341,11 @@
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_show_circles">Kreise anzeigen</string>
-    <string name="map_showc_ownfound">Eigene/gefundene Caches</string>
+    <string name="map_showc_own">Eigene Caches</string>
+    <string name="map_showc_found">Gefundene Caches</string>
     <string name="map_showc_disabled">Deaktivierte Caches</string>
     <string name="map_showc_archived">Archivierte Caches</string>
+    <string name="map_showc_offlinelog">Caches mit Offline-Log</string>
     <string name="map_showwp_original">Originale Wegpunkte</string>
     <string name="map_showwp_parking">Park-Wegpunkte</string>
     <string name="map_showwp_visited">Besuchte Wegpunkte</string>
@@ -1357,7 +1367,9 @@
     <string name="map_live_disable">Aktualisierung ausschalten</string>
     <string name="map_as_list">Als Liste anzeigen</string>
     <string name="map_select_multiple_items">Element auswählen</string>
-    <string name="map_routing_brouter">Routing ist nur verfügbar, wenn <a href="">BRouter</a> installiert ist</string>
+    <string name="map_routing">Routing</string>
+    <string name="map_routing_activate_title">Routing aktivieren</string>
+    <string name="map_routing_activate">Einige Routing-Modi sind derzeit nicht verfügbar, da keine Routing-Engine aktiv ist.\n\nMöchtest du die interne Routing-Engine von c:geo und das Herunterladen von Routing-Daten aktivieren?</string>
     <string name="map_gm_autorotation">Automatische Kartendrehung</string>
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
@@ -1383,7 +1395,7 @@
     <string name="search_hbu_button">Suche mit Besitzername</string>
     <string name="search_filter">Filter (experimentell)</string>
     <string name="search_filter_button">Suchen mit Filter</string>
-    <string name="search_filter_info_message">\'Suche nach Filter\' durchsucht Caches auf Online-Diensten mit Hilfe eines bereitgestellten Filters. Je nach Fähigkeit des Dienstes wird nur ein Teil des Filters online und der Rest dann durch Offline-Filterung ausgeführt.\n\nAlle Dienste unterstützen nur UND Filter und keine Filterinvertierung.\n\nGeocaching.com Unterstützung:\n- Name (nur ganze Wörter, Muster nicht unterstützt)\n- Cachetyp\n- Cachegröße\n- Entfernung\nSchwierigkeit und Gelände\n- Favoriten (nur absolut, nur Minimum)\n- Status (Eigene, Gefunden &amp; Aktiviert)\n- Versteckt von (genaue Benutzer-ID)\n- Nicht gefunden von (genaue Benutzer-ID)\n- Versteckdatum\n\nBeachte, dass c:geo keine Attribut-Filter anbieten kann, da geocaching.com die benötigte API für uns blockiert.\n\nEs werden noch keine Dienste außer Geocaching.com unterstützt.</string>
+    <string name="search_filter_info_message">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Tracking-Code</string>
     <string name="search_tb_button">Suche nach Trackable</string>
@@ -2059,8 +2071,8 @@
     <string name="wizard_welcome_advanced">Erweiterte Konfiguration</string>
     <string name="wizard_advanced_offlinemaps_label">Offline-Karten</string>
     <string name="wizard_advanced_offlinemaps_info">Diese Seite bietet einige erweiterte Funktionen, die optional verwendet werden können.\n\nc:geo kann Kartendateien zur Offline-Nutzung herunterladen.</string>
-    <string name="wizard_advanced_brouter_label">Routing-App</string>
-    <string name="wizard_advanced_brouter_info">Durch die Installation und Konfiguration einer Begleit-App namens \"BRouter Offline-Navigation\" kann c:geo zu Zielen navigieren und Routing-Informationen auf der Karte anzeigen.</string>
+    <string name="wizard_advanced_routing_label">Offline-Routing aktivieren</string>
+    <string name="wizard_advanced_routing_info">c:geo verfügt über eine interne Routing-Engine für Offline-Routing und kann automatisch fehlende Routing-Daten für dich herunterladen.</string>
     <string name="wizard_advanced_restore_label">Wiederherstellen</string>
     <string name="wizard_advanced_restore_info">Wenn du eine Sicherung einer vorherigen Installation hast, kannst du Einstellungen und/oder Geocache-Daten wiederherstellen.</string>
     <string name="status_not_ok">FEHLER</string>
