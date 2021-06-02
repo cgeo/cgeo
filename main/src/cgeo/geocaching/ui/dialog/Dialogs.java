@@ -515,7 +515,7 @@ public final class Dialogs {
     }
 
     /**
-     * Show a message dialog with a single "OK" button and an eventual icon.
+     * Show a message dialog with a single "OK" button
      * "message" can be formatted using markdown
      *
      * @param context
@@ -537,7 +537,6 @@ public final class Dialogs {
             builder.setTitle(title);
         }
         builder
-            .setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()))
             .setView(v)
             .create()
             .show();

@@ -111,7 +111,7 @@ public class DebugUtils {
             };
             while (c.moveToNext()) {
                 for (int column : columns) {
-                    sb.append(c.getColumnName(column)).append(" = ");
+                    sb.append("- ").append(c.getColumnName(column)).append(" = ");
                     if (column == columnStatus) {
                         sb.append(c.getString(column));
                         final int status = c.getInt(column);
@@ -162,10 +162,11 @@ public class DebugUtils {
                     }
                     sb.append("\n");
                 }
-                sb.append("\n------------------------\n\n");
+                sb.append("\n---\n\n");
             }
         }
-        Dialogs.message(activity, "current downloads", sb.toString());
+
+        Dialogs.messageMarkdown(activity, activity.getString(R.string.debug_current_downloads), sb.toString());
     }
 
 
