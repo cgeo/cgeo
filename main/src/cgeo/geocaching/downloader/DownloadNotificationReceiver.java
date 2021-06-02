@@ -47,6 +47,8 @@ class DownloadNotificationReceiver extends BroadcastReceiver {
                                 final int error = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_REASON));
                                 ActivityMixin.showToast(context, "map download failed with error #" + error);
                                 Log.d("download #" + pendingDownload + " failed with error #" + error);
+                                // remove file from system's download manager, which will also delete the broken file from storage
+                                downloadManager.remove(pendingDownload);
                                 break;
                             default:
                                 // ignore unknown state by logging silently
