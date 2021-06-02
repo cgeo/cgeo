@@ -35,6 +35,7 @@ This changelog contains all changes which are not intermediate developing steps.
 ### Downloader
 - Change: Files downloaded successfully will automatically overwrite existing files having the same name
 - Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+- New: Remove partial files on failed download
 
 ### Other
 - Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
