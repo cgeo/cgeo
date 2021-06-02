@@ -485,7 +485,7 @@
     <string name="cache_filter_storage_save_title">名前を付けてフィルタを保存</string>
     <string name="cache_filter_storage_save_confirm_title">フィルタの上書き保存</string>
     <string name="cache_filter_storage_save_confirm_message">フィルタ名「%s」と異なる設定が既に存在します。上書きしますか?</string>
-    <string name="cache_filter_stringfilter_matchcase">大文字/小文字を区別</string>
+    <string name="cache_filter_stringfilter_matchcase">大文字小文字を区別</string>
     <string name="cache_filter_stringfilter_info">検索方法の「パターン」でワイルドカード「?」と「*」を使用できます。「?」は任意の一文字、「*」は長さ0文字以上の任意の文字列を表します。 例えば、「H?mburg*」は「Homeburg」や「Hamburg at Night」などにマッチしますが、「A day in Hamburg」や「Hahmburg」にはマッチしません。</string>
     <string name="cache_filter_stringfilter_type_is_not_present">なし</string>
     <string name="cache_filter_stringfilter_type_is_present">あり</string>
@@ -665,6 +665,10 @@
     <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
     <string name="init_use_default_language">システムの言語</string>
     <string name="init_category_exclude">キャッシュを除外</string>
+    <string name="init_exclude_own">自分のを除外</string>
+    <string name="init_summary_exclude_own">所有しているキャッシュを除外</string>
+    <string name="init_exclude_found">発見を除外</string>
+    <string name="init_summary_exclude_found">自分で発見したキャッシュを除外</string>
     <string name="init_showwaypoints">地図でウェイポイントの表示</string>
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示</string>
     <string name="init_zoomincludingwaypoints">ウェイポイントを表示するようにズーム</string>
@@ -685,10 +689,12 @@
     <string name="init_summary_useInternalRouting">c:geoルート検索(Brouter互換)を使用するとルート検索データの自動ダウンロードなどもできます。</string>
     <string name="init_bigSmileysOnMap">大きなスマイルアイコン</string>
     <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルアイコンをキャッシュタイプアイコンの代わりに表示\n(c:geoの再起動が必要)</string>
-    <string name="init_disabled">一時停止中キャッシュ除く</string>
-    <string name="init_summary_disabled">一時停止中キャッシュは除く</string>
-    <string name="init_archived">アーカイブ済み除く</string>
-    <string name="init_summary_archived">アーカイブ済みキャッシュは除く</string>
+    <string name="init_disabled">一時停止中キャッシュを除外</string>
+    <string name="init_summary_disabled">一時停止中キャッシュを除外</string>
+    <string name="init_archived">アーカイブ済みを除外</string>
+    <string name="init_summary_archived">アーカイブ済みキャッシュを除外</string>
+    <string name="init_offlinelog">オフラインログを除外</string>
+    <string name="init_summary_offlinelog">オフラインログがあるキャッシュを除外</string>
     <string name="init_global_wp_extraction_disable">ウェイポイント抽出を無効化</string>
     <string name="init_summary_global_wp_extraction_disable">ノート作成時に「ウェイポイント抽出をしない」をデフォルトにします。パーソナルノートでチェックボックスを外せば個別に有効化できます</string>
     <string name="init_customtabs_as_browser">Chrome WebViewを使用</string>
@@ -1324,8 +1330,11 @@
     <string name="map_rotation">地図の回転</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
     <string name="map_show_circles">0.1マイル円</string>
+    <string name="map_showc_own">自分のキャッシュ</string>
+    <string name="map_showc_found">発見したキャッシュ</string>
     <string name="map_showc_disabled">一時停止中キャッシュ</string>
     <string name="map_showc_archived">アーカイブ済みのキャッシュ</string>
+    <string name="map_showc_offlinelog">オフラインログのあるキャッシュ</string>
     <string name="map_showwp_original">ウェイポイント(オリジナル)</string>
     <string name="map_showwp_parking">ウェイポイント(駐車場)</string>
     <string name="map_showwp_visited">ウェイポイント(訪問済み)</string>
@@ -1375,6 +1384,7 @@
     <string name="search_hbu_button">オーナー名で検索</string>
     <string name="search_filter">フィルタ(実験的)</string>
     <string name="search_filter_button">フィルタで検索</string>
+    <string name="search_filter_info_message">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
     <string name="search_tb_hint">トラッカブルコード</string>
     <string name="search_tb_button">トラッカブルを検索</string>
@@ -2029,6 +2039,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_welcome_advanced">追加設定</string>
     <string name="wizard_advanced_offlinemaps_label">オフライン地図のダウンロード</string>
     <string name="wizard_advanced_offlinemaps_info">ここでは追加の設定ができます\n\nオフラインで使うために地図ファイルをダウンロードできます</string>
+    <string name="wizard_advanced_routing_label">c:geoルート検索を使用する</string>
+    <string name="wizard_advanced_routing_info">c:geoルート検索(Brouter互換)はオフライン用のルート検索エンジンです。データの自動ダウンロードなどもできます。</string>
     <string name="wizard_advanced_restore_label">復元</string>
     <string name="wizard_advanced_restore_info">バックアップからc:geo設定やキャッシュ情報を復元できます</string>
     <string name="status_not_ok">未完了</string>
