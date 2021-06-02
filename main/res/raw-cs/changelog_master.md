@@ -6,6 +6,7 @@
 
 ### Mapa
 - Novinka: Při vytváření uživatelem definované kešky při zobrazení mapy ze seznamu: Nabídne uživateli uložení nové kešky do aktuálního seznamu (místo výchozího seznamu pro uživatelem definované kešky)
+- Novinka: Oddělené filtry "vlastní" a "nalezené" v rychlém nastavení mapy
 - Změna: Zobrazení názvu kešky v podrobnostech ve vyskakovacím okně
 
 ### Detaily kešky
