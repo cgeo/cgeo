@@ -670,6 +670,10 @@
     <string name="init_summary_select_language">Valitse sovelluksen sisäinen kieli (vaatii uudelleenkäynnistyksen)\n</string>
     <string name="init_use_default_language">Käytä oletuskieltä</string>
     <string name="init_category_exclude">Jätä pois kätköt</string>
+    <string name="init_exclude_own">Rajaa pois omat</string>
+    <string name="init_summary_exclude_own">Rajaa pois omistamasi kätköt </string>
+    <string name="init_exclude_found">Rajaa pois löydetyt</string>
+    <string name="init_summary_exclude_found">Rajaa pois löytämäsi kätköt</string>
     <string name="init_showwaypoints">Näytä reittipisteet</string>
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
@@ -694,6 +698,8 @@
     <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
     <string name="init_archived">Älä näytä arkistoituja</string>
     <string name="init_summary_archived">Älä näytä arkistoituja kätköjä</string>
+    <string name="init_offlinelog">Rajaa pois offline-kirjatut</string>
+    <string name="init_summary_offlinelog">Rajaa pois kätköt, joissa on offline-kirjaus</string>
     <string name="init_global_wp_extraction_disable">Poista reittipisteen nouto käytöstä</string>
     <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
     <string name="init_customtabs_as_browser">Käytä Chrome WebViewiä</string>
@@ -713,6 +719,12 @@
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
     <!-- app theme -->
+    <string name="settings_theme_title">Teema</string>
+    <string-array name="settings_theme_entries">
+        <item>Järjestelmän oletus</item>
+        <item>Vaalea</item>
+        <item>Tumma</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Luo varmuuskopio</string>
     <string name="init_backup_summary">Huomaa, että tämä ominaisuus voi varmuuskopioida kätköjä, reittipisteitä &amp; asetuksia, mutta ei kätköjen kuvia. \nVoidaksesi palauttaa tiedot myös sen jälkeen, kun olet kadottanut puhelimesi, varmuuskopioidut tiedostot tulee kopioida ulkoiseen sijaintiin.</string>
@@ -1335,8 +1347,11 @@
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
     <string name="map_show_circles">Näytä ympyrät</string>
+    <string name="map_showc_own">Omat kätköt</string>
+    <string name="map_showc_found">Löydetyt kätköt</string>
     <string name="map_showc_disabled">Hyllytetyt kätköt</string>
     <string name="map_showc_archived">Arkistoidut kätköt</string>
+    <string name="map_showc_offlinelog">Kätköt joissa on offline-kirjaus</string>
     <string name="map_showwp_original">Alkuperäiset reittipisteet</string>
     <string name="map_showwp_parking">Parkkipaikka-reittipisteet</string>
     <string name="map_showwp_visited">Vieraillut reittipisteet</string>
@@ -2062,6 +2077,8 @@
     <string name="wizard_welcome_advanced">Edistyneet määritysasetukset</string>
     <string name="wizard_advanced_offlinemaps_label">Offline-kartat</string>
     <string name="wizard_advanced_offlinemaps_info">Tällä sivulla on joitakin lisätoimintoja, joiden käyttö on valinnaista.\n\nc:geo voi ladata karttatiedostoja offline-käyttöön.</string>
+    <string name="wizard_advanced_routing_label">Aktivoi offline-reititys</string>
+    <string name="wizard_advanced_routing_info">c:geossa on sisäinen reititysmoottori offline-reititykseen ja se voi ladata automaattisesti puuttuvat reititystiedot puolestasi.</string>
     <string name="wizard_advanced_restore_label">Palauta</string>
     <string name="wizard_advanced_restore_info">Jos sinulla on varmuuskopio aiemmasta asennuksesta, voit palauttaa asetukset ja/tai geokätkötiedot.</string>
     <string name="status_not_ok">VIRHE</string>
