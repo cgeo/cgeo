@@ -14,8 +14,9 @@
 - Nuovo: Possibilità di modifica dell'icona assegnata, nel popup dei dettagli del cache tramite tocco proluganto (solo cache memorizzati)
 
 ### Downloader
-- Modifica: I file scaricati correttamente sovrascriveranno automaticamente i file esistenti aventi lo stesso nome
-- Modifica: Se una mappa richiede un certo tema ancora non installato, c:geo scaricherà e installerà automaticamente quel tema
+- Change: Downloads will now completely happen in background, a notification is shown
+- Change: Files downloaded successfully will automatically overwrite existing files having the same name
+- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
 
 ### Altro
 - Modifica: Abbiamo completamente rielaborato gli aspetti tecnici interni nella gestiuone dei temi in c:geo, per essere in grado di utilizzare alcuni componenti più moderni forniti da Android. Questo avrà alcuni effetti collaterali, alcuni di loro non intenzionali. Si prega di segnalare eventuali errori o problemi sulla nostra pagina [GitHub](https://www.github.com/cgeo/cgeo/issues) o contattando il supporto.
