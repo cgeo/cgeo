@@ -23,7 +23,7 @@
     <!-- checkbox formatting -->
 
     <style name="checkboxStyle" parent="@style/Widget.MaterialComponents.CompoundButton.CheckBox">
-        <item name="android:minHeight">@dimen/checkboxRadiobuttonMinHeight</item>
+        <item name="android:minHeight">@dimen/radioButtonCheckboxPreferredItemHeight</item>
     </style>
 
     <style name="checkbox_full">
@@ -33,13 +33,26 @@
 
     <!-- radiobutton formatting -->
 
-    <style name="radiobuttonStyle" parent="@style/Widget.MaterialComponents.CompoundButton.RadioButton">
-        <item name="android:minHeight">@dimen/checkboxRadiobuttonMinHeight</item>
+    <style name="radioButtonStyle" parent="@style/Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="android:minHeight">@dimen/radioButtonCheckboxPreferredItemHeight</item>
     </style>
 
     <style name="radiobutton_wrap">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- alert dialog formatting -->
+
+    <style name="alertDialogTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textSize">@dimen/textSize_headingPrimary</item>
+        <item name="android:textColor">@color/colorTextHeadline</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="alertDialogBodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <!-- actionbar -->
