@@ -1818,10 +1818,8 @@
     <string name="number_input_err_boundarymin">Wprowadzona wartość jest zbyt mała - zresetuj do wartości minimalnej</string>
     <string name="number_input_err_boundarymax">Wprowadzona wartość jest zbyt duża - zresetuj do wartości maksymalnej</string>
     <string name="number_input_err_format">Nieprawidłowy format numeru</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">Powiadomienia c:geo</string>
-    <string name="notification_channel_description">powiadomienia z aplikacji c:geo</string>
-    <string name="proximity_notification_title">Powiadomienie o bliskości</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">Powiadomienie o bliskości</string>
     <!-- individual routes -->
     <string name="individual_route">Indywidualna trasa</string>
     <string name="individual_route_added">dodany do trasy</string>
