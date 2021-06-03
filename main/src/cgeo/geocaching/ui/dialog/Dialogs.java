@@ -1074,7 +1074,7 @@ public final class Dialogs {
     }
 
     public static AlertDialog.Builder newBuilder(final Context context) {
-        return new MaterialAlertDialogBuilder (newContextThemeWrapper(context));
+        return new MaterialAlertDialogBuilder(newContextThemeWrapper(context));
     }
 
     public static ContextThemeWrapper newContextThemeWrapper(final Context context) {
