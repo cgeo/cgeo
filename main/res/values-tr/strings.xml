@@ -467,6 +467,12 @@
     <string name="cache_filter_favorites">Favoriler</string>
     <string name="cache_filter_distance">Mesafe</string>
     <string name="cache_filter_hidden">Saklanma Tarihi</string>
+    <string name="cache_filter_logs_count">Kayıt Sayısı</string>
+    <string name="cache_filter_last_found">Son Bulunma Tarihi</string>
+    <string name="cache_filter_log_entry">Kayıt Gir</string>
+    <string name="cache_filtergroup_basic">Temel</string>
+    <string name="cache_filtergroup_details">Detaylar</string>
+    <string name="cache_filtergroup_userspecific">Kullanıcıya özgün</string>
     <string name="cache_filter_include">Dahil et</string>
     <string name="cache_filter_exclude">Hariç Tut</string>
     <string name="cache_filter_userdisplay_complex">Kompleks</string>
@@ -501,6 +507,11 @@
     <string name="cache_filter_status_select_only_found_no">Sadece Bulmadıklarım</string>
     <string name="cache_filter_status_select_only_own_yes">Sahibi Olduklarım</string>
     <string name="cache_filter_status_select_only_own_no">Sahibi Olmadıklarım</string>
+    <string name="cache_filter_status_exclude_active">Aktifleri Dahil Etme</string>
+    <string name="cache_filter_status_exclude_disabled">Devredışıları Hariç Tut</string>
+    <string name="cache_filter_status_exclude_archived">Arşivlenmişleri Hariç Tut</string>
+    <string name="cache_filter_log_entry_foundby">Bulan:</string>
+    <string name="cache_filter_log_entry_logtext">Kayıt metni:</string>
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
@@ -542,6 +553,7 @@
     <string name="debug_user_error_report_title">Sorun bildir</string>
     <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
     <string name="debug_user_error_explain_options">Lütfen, yaşadığınız sorunları, hata dosyası ve sistem verilerini içeren eposta ile bize raporlayarak c:geo\'yu düzeltmemize yardımcı olun.\nHatanın detaylı bir açıklamasını Epostanıza ekleyin!\n\nEpostanızı göndermeden önce bilinen sorunları görüntülemek için SSS ve/veya sosyal medya hesaplarımıza göz atın.\nDiğer iletişim seçenekleri \'c:geo Hakkında\' sekmesinde bulunabilir.</string>
+    <string name="debug_current_downloads">Mevcut indirmeler</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ayarları aç?</string>
     <string name="settings_title_services">Servisler</string>
@@ -659,6 +671,10 @@
     <string name="init_summary_select_language">Uygulama dilini seçiniz (yeniden başlatma gerekli)\n</string>
     <string name="init_use_default_language">Varsayılan dili kullan</string>
     <string name="init_category_exclude">Geocache\'leri hariç tut</string>
+    <string name="init_exclude_own">Benimkileri Hariç Tut</string>
+    <string name="init_summary_exclude_own">Sahibi olduklarımı hariç tut </string>
+    <string name="init_exclude_found">Bulduklarımı Hariç Tut</string>
+    <string name="init_summary_exclude_found">Bulduğum Geocache\'leri hariç tut</string>
     <string name="init_showwaypoints">Yol Noktalarını Göster</string>
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
     <string name="init_zoomincludingwaypoints">Yakınlaştırmada yol noktalarını da göster</string>
@@ -683,8 +699,11 @@
     <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
     <string name="init_archived">Arşivlenmişleri Dahil Etme</string>
     <string name="init_summary_archived">Arşivlenmiş Geocache\'leri dahil etme</string>
+    <string name="init_offlinelog">Çevrimdışı Kayıtlıları Hariç Tut</string>
+    <string name="init_summary_offlinelog">Çevrimdışı Kayıt girilmişleri hariç tut</string>
     <string name="init_global_wp_extraction_disable">Ara nokta çıkarmayı devre dışı bırak</string>
     <string name="init_summary_global_wp_extraction_disable">Kişisel Geocache notlarından yol noktası çıkarmayı genel olarak devre dışı bırakın. Belirli Geocache\'ler için kişisel notlarınız altındaki onay kutusu devre dışı bırakılarak yine de etkinleştirilebilir</string>
+    <string name="init_customtabs_as_browser">Chrome web görüntüsünü kullan</string>
     <string name="init_summary_customtabs_as_browser">Harici siteler c:geo\'dan ayrılmadan gösterilecek (sadece Chrome yüklenmişse çalışır)</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
     <string name="init_summary_save_log_img">Kayıtlardan Resimleri Kaydet</string>
@@ -701,6 +720,12 @@
     <string name="init_livelist">Yön göster</string>
     <string name="init_summary_livelist">Listedeki kutular için pusula yönü olan bir ok göster</string>
     <!-- app theme -->
+    <string name="settings_theme_title">Tema</string>
+    <string-array name="settings_theme_entries">
+        <item>Sistem Varsayılanı</item>
+        <item>Açık</item>
+        <item>Koyu</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Yedek Oluştur</string>
     <string name="init_backup_summary">Lütfen bu özelliğin Geocache\'leri, yol noktalarını &amp; ayarları yedekleyebileceğini, ancak Geocache görüntülerini yedekleyemeyeceğini unutmayın. \n Telefonunuzu kaybettikten sonra bile verileri geri yükleyebilmek için, yedekleme dosyalarının bağımsız bir konuma kopyalanması gerekir.</string>
@@ -1323,8 +1348,11 @@
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
     <string name="map_show_circles">Çemberleri göster</string>
+    <string name="map_showc_own">Sahibi olduklarım</string>
+    <string name="map_showc_found">Bulduğum cache\'ler</string>
     <string name="map_showc_disabled">Devre dışı cache\'ler</string>
     <string name="map_showc_archived">Arşivlenmiş cache\'ler</string>
+    <string name="map_showc_offlinelog">Çevrimdışı kayıt girilmiş cache\'ler</string>
     <string name="map_showwp_original">Orijinal yol noktaları</string>
     <string name="map_showwp_parking">Park yol noktaları</string>
     <string name="map_showwp_visited">Görülmüş yol noktaları</string>
@@ -1346,6 +1374,8 @@
     <string name="map_live_disable">Anlık görüntü kapalı</string>
     <string name="map_as_list">Liste olarak göster</string>
     <string name="map_select_multiple_items">Öğe seç</string>
+    <string name="map_routing">Yönlendirme</string>
+    <string name="map_routing_activate_title">Yönlendirmeyi aktifleştir</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
     <string name="map_gm_autorotation_disable">Otomatik harita döndürmesini devre dışı bırakılsın mı?\n\nHarita döndürme menüsünü kullanarak tekrardan etkinleştirebilirsiniz</string>
     <string name="quick_settings">Hızlı ayarlar</string>
@@ -1876,10 +1906,9 @@
     <string name="number_input_err_boundarymin">Girilen rakam çok küçük-en küçük rakama ayarla</string>
     <string name="number_input_err_boundarymax">Girilen rakam çok büyük-en büyük rakama ayarla</string>
     <string name="number_input_err_format">Geçersiz sayı biçimi</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo bildirimleri</string>
-    <string name="notification_channel_description">c:geo Geocaching uygulamasından bildirimler</string>
-    <string name="proximity_notification_title">c:geo yakınlık bildirimi</string>
+    <!-- notification / channel texts -->
+    <string name="notification_channel_downloader_name">c:geo indirici</string>
+    <string name="notification_proximity_title">c:geo yakınlık bildirimi</string>
     <!-- individual routes -->
     <string name="individual_route">Özel rota</string>
     <string name="individual_route_added">rotaya eklendi</string>
@@ -2046,6 +2075,7 @@
     <string name="wizard_welcome_advanced">Gelişmiş yapılandırma</string>
     <string name="wizard_advanced_offlinemaps_label">Çevrimdışı haritalar</string>
     <string name="wizard_advanced_offlinemaps_info">Bu sayfa, kullanılması isteğe bağlı bazı gelişmiş ayarları içerir.\n\nc:geo, harita dosyalarını çevrim dışı kullanım için indirebilir.</string>
+    <string name="wizard_advanced_routing_label">Çevrimdışı yönlendirmeyi aktive et</string>
     <string name="wizard_advanced_restore_label">Geri Yükle</string>
     <string name="wizard_advanced_restore_info">Eğer daha önceki kurulumdan kalan bir yedeğiniz varsa, ayarlarınızı ve/veya geocache verilerinizi yenileyebilirsiniz.</string>
     <string name="status_not_ok">HATA</string>
