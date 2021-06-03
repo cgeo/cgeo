@@ -192,11 +192,11 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.add(Menu.NONE, R.id.delete, 0, "Delete")
-                .setIcon(DisplayUtils.getTintedDrawable(getResources(),  R.drawable.ic_menu_delete, R.color.colorIconMenu))
+                .setIcon(DisplayUtils.getTintedDrawable(getResources(),  R.drawable.ic_menu_delete, R.color.colorTextActionBar))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         menu.add(Menu.NONE, R.id.menu_send, 1, "Go!")
-            .setIcon(DisplayUtils.getTintedDrawable(getResources(),  R.drawable.ic_menu_send, R.color.colorIconMenu))
+            .setIcon(DisplayUtils.getTintedDrawable(getResources(),  R.drawable.ic_menu_send, R.color.colorTextActionBar))
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }
