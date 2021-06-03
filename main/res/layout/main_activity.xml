@@ -163,7 +163,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_margin="4dip"
-            app:srcCompat="@drawable/ic_menu_info_details"/>
+            android:tint="@color/text_icon"
+            android:src="@drawable/ic_menu_info_details"/>
 
         <TextView
             android:id="@+id/info_notloggedin_text"
