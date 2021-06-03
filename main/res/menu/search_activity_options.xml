@@ -5,7 +5,6 @@
     <item
         android:id="@+id/menu_search_own_caches"
         android:icon="@drawable/ic_menu_myplaces"
-        style="@style/menu_item"
         android:title="@string/search_own_caches"
         app:showAsAction="ifRoom|withText">
     </item>

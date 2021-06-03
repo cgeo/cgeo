@@ -6,7 +6,6 @@
     <item
         android:id="@+id/view_settings_edit"
         android:icon="@drawable/ic_menu_edit"
-        style="@style/menu_item"
         android:title="@string/activate_editmode_title"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction">
@@ -15,7 +14,6 @@
     <item
         android:id="@+id/view_settings_add"
         android:icon="@drawable/ic_menu_add"
-        style="@style/menu_item"
         android:title="@string/add_setting"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction"

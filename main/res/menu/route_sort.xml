@@ -6,7 +6,6 @@
     <item
         android:id="@+id/save_sorted_route"
         android:icon="@drawable/ic_menu_save"
-        style="@style/menu_item"
         android:title="@string/save_sorted_route"
         android:visible="false"
         app:showAsAction="always"

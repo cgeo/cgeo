@@ -5,25 +5,21 @@
     <item
         android:id="@+id/menu_show_on_map"
         android:icon="@drawable/ic_menu_mapmode"
-        style="@style/menu_item"
         android:title="@string/caches_on_map"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_filter"
         android:icon="@drawable/ic_menu_filter"
-        style="@style/menu_item"
         android:title="@string/caches_filter"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_cache_filter"
         android:icon="@drawable/ic_menu_filter"
-        style="@style/menu_item"
         android:title="@string/caches_filter_menuitem"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_sort"
         android:icon="@drawable/ic_menu_sort_alphabetically"
-        style="@style/menu_item"
         android:showAsAction="always"
         android:title="@string/caches_sort"
         app:actionProviderClass="cgeo.geocaching.sorting.SortActionProvider"
@@ -31,18 +27,15 @@
     <item
         android:id="@+id/menu_switch_select_mode"
         android:icon="@drawable/ic_menu_agenda"
-        style="@style/menu_item"
         android:title="@string/caches_select_mode"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_invert_selection"
         android:icon="@drawable/ic_menu_mark"
-        style="@style/menu_item"
         android:title="@string/caches_select_invert"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_cache_list_app"
-        style="@style/menu_item"
         android:icon="@drawable/ic_menu_goto"
         android:title="@null"
         android:visible="false"
@@ -50,7 +43,6 @@
     <item
         android:id="@+id/menu_cache_list_app_provider"
         android:icon="@drawable/ic_menu_goto"
-        style="@style/menu_item"
         android:title="@string/caches_on_map"
         android:visible="false"
         app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"

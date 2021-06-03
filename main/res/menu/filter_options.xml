@@ -5,7 +5,6 @@
     <item
         android:id="@+id/menu_reset_filter"
         android:icon="@drawable/ic_menu_delete"
-        style="@style/menu_item"
         android:title="@string/caches_filter_clear"
         app:showAsAction="ifRoom|withText">
     </item>

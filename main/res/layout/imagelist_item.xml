@@ -20,6 +20,7 @@
 
         <ImageView
             android:id="@+id/image_thumbnail"
+            style="@style/action_bar_action"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="centerInside"
@@ -82,6 +83,7 @@
 
         <ImageView
             android:id="@+id/image_delete"
+            style="@style/action_bar_action"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"

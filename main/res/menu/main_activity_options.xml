@@ -6,7 +6,6 @@
     <item
         android:id="@+id/menu_gosearch"
         android:icon="@drawable/ic_menu_search"
-        style="@style/menu_item"
         android:title="@string/search_bar_hint"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:iconifiedByDefault="true"
@@ -14,14 +13,12 @@
     <item
         android:id="@+id/menu_history"
         android:icon="@drawable/ic_menu_recent_history"
-        style="@style/menu_item"
         android:title="@string/menu_history"
         app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_pocket_queries"
         android:icon="@drawable/ic_menu_pocket_query"
-        style="@style/menu_item"
         android:title="@string/menu_lists_pocket_queries"
         android:visible="false"
         app:showAsAction="ifRoom">
@@ -29,21 +26,18 @@
     <item
         android:id="@+id/menu_wizard"
         android:icon="@drawable/ic_menu_preferences"
-        style="@style/menu_item"
         android:title="@string/wizard"
         app:showAsAction="never">
     </item>
     <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/ic_menu_preferences"
-        style="@style/menu_item"
         android:title="@string/menu_settings"
         app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_backup"
         android:icon="@drawable/ic_menu_save"
-        style="@style/menu_item"
         android:title="@string/menu_backup"
         app:showAsAction="ifRoom">
     </item>
@@ -64,21 +58,18 @@
     <item
         android:id="@+id/menu_helpers"
         android:icon="@drawable/ic_menu_shopping"
-        style="@style/menu_item"
         android:title="@string/menu_helpers"
         app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_scan"
         android:icon="@drawable/ic_menu_barcode"
-        style="@style/menu_item"
         android:title="@string/menu_scan_geo"
         app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_about"
         android:icon="@drawable/ic_menu_info_details"
-        style="@style/menu_item"
         android:title="@string/menu_about"
         app:showAsAction="ifRoom">
     </item>
@@ -86,7 +77,6 @@
     <item
         android:id="@+id/menu_report_problem"
         android:icon="@drawable/ic_menu_info_details"
-        style="@style/menu_item"
         android:title="@string/debug_user_error_report_title"
         app:showAsAction="ifRoom">
     </item>

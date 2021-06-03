@@ -6,14 +6,12 @@
     <item
         android:id="@+id/menu_toggle_mypos"
         android:icon="@drawable/ic_menu_myposition"
-        style="@style/menu_item"
         android:showAsAction="always"
         android:title="@string/menu_centerposition"
         app:showAsAction="always"/>
     <item
         android:id="@+id/menu_select_mapview"
         android:icon="@drawable/ic_action_layers"
-        style="@style/menu_item"
         android:showAsAction="ifRoom"
         android:title="@string/map_view_map"
         app:showAsAction="ifRoom">
@@ -30,7 +28,6 @@
     <item
         android:id="@+id/menu_filter"
         android:icon="@drawable/ic_menu_filter"
-        style="@style/menu_item"
         android:showAsAction="ifRoom"
         android:title="@string/search_filter"
         android:visible="true"
@@ -39,7 +36,6 @@
     <item
         android:id="@+id/menu_map_live"
         android:icon="@drawable/ic_menu_refresh"
-        style="@style/menu_item"
         android:showAsAction="ifRoom"
         android:title="@string/map_live_disable"
         android:visible="false"
@@ -48,7 +44,6 @@
     <item
         android:id="@+id/menu_hint"
         android:icon="@drawable/ic_menu_hint"
-        style="@style/menu_item"
         android:title="@string/cache_hint"
         android:visible="false"
         app:showAsAction="ifRoom|withText">
@@ -56,7 +51,6 @@
     <item
         android:id="@+id/menu_compass"
         android:icon="@drawable/ic_menu_compass"
-        style="@style/menu_item"
         android:title="@string/compass_title"
         android:visible="false"
         app:showAsAction="ifRoom|withText">
@@ -64,7 +58,6 @@
     <item
         android:id="@+id/menu_store_caches"
         android:icon="@drawable/ic_menu_set_as"
-        style="@style/menu_item"
         android:showAsAction="ifRoom|withText"
         android:title="@string/caches_store_all"
         app:showAsAction="ifRoom|withText">
@@ -72,7 +65,6 @@
     <item
         android:id="@+id/menu_store_unsaved_caches"
         android:icon="@drawable/ic_menu_set_as"
-        style="@style/menu_item"
         android:showAsAction="ifRoom|withText"
         android:title="@string/caches_store_unsaved"
         app:showAsAction="ifRoom|withText">
@@ -101,7 +93,6 @@
     <item
         android:id="@+id/menu_theme_mode"
         android:icon="@drawable/ic_menu_preferences"
-        style="@style/menu_item"
         android:showAsAction="ifRoom|withText"
         android:title="@string/map_theme_select"
         android:visible="false"
@@ -110,7 +101,6 @@
     <item
         android:id="@+id/menu_theme_options"
         android:icon="@drawable/ic_menu_preferences"
-        style="@style/menu_item"
         android:showAsAction="ifRoom|withText"
         android:title="@string/map_theme_options"
         android:visible="false"
