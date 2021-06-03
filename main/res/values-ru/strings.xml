@@ -1704,10 +1704,8 @@
     <string name="number_input_err_boundarymin">Введенное значение слишком мало - сброс до минимального значения</string>
     <string name="number_input_err_boundarymax">Введенное значение слишком велико - сброс до максимального значения</string>
     <string name="number_input_err_format">Неверный формат числа</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">Уведомления c:geo</string>
-    <string name="notification_channel_description">уведомления из геокешинг-приложения c:geo</string>
-    <string name="proximity_notification_title">уведомление о приближении c:geo</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">уведомление о приближении c:geo</string>
     <!-- individual routes -->
     <string name="individual_route">Личный маршрут</string>
     <string name="individual_route_added">добавлено в маршрут</string>
