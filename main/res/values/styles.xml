@@ -23,12 +23,18 @@
     <!-- checkbox formatting -->
 
     <style name="checkboxStyle" parent="@style/Widget.MaterialComponents.CompoundButton.CheckBox">
-        <item name="android:minHeight">32dp</item>
+        <item name="android:minHeight">@dimen/checkboxRadiobuttonMinHeight</item>
     </style>
 
     <style name="checkbox_full">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- radiobutton formatting -->
+
+    <style name="radiobuttonStyle" parent="@style/Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="android:minHeight">@dimen/checkboxRadiobuttonMinHeight</item>
     </style>
 
     <style name="radiobutton_wrap">

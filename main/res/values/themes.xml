@@ -6,6 +6,7 @@
     <style name="cgeo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="actionBarStyle">@style/actionBarStyle</item>
         <item name="checkboxStyle">@style/checkboxStyle</item>
+        <item name="radioButtonStyle">@style/radiobuttonStyle</item>
 
         <!-- set Material theme colors -->
         <item name="colorOnBackground">@color/colorText</item>
