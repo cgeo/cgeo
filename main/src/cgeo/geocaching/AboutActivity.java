@@ -49,17 +49,32 @@ public class AboutActivity extends AVPActivity {
 
     private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
 
-    private static final GatherSystemInformationTask systemInformationTask = new GatherSystemInformationTask();
+    private final GatherSystemInformationTask systemInformationTask = new GatherSystemInformationTask();
 
-    private static final int CHANGELOG;
+    enum Page {
+        VERSION(R.string.about_version),
+        CHANGELOG(R.string.about_changelog),
+        SYSTEM(R.string.about_system),
+        CONTRIBUTORS(R.string.about_contributors),
+        LICENSE(R.string.about_license);
 
-    static {
-        pagesSource.add(new Page(R.string.about_version, VersionViewCreator.class));
-        CHANGELOG = pagesSource.size();
-        pagesSource.add(new Page(R.string.about_changelog, ChangeLogViewCreator.class));
-        pagesSource.add(new Page(R.string.about_system, SystemViewCreator.class));
-        pagesSource.add(new Page(R.string.about_contributors, ContributorsViewCreator.class));
-        pagesSource.add(new Page(R.string.about_license, LicenseViewCreator.class));
+        @StringRes
+        protected final int resourceId;
+        protected final int id;
+
+        Page(@StringRes final int resourceId) {
+            this.resourceId = resourceId;
+            this.id = ordinal();
+        }
+
+        static Page find(final int pageId) {
+            for (Page page : Page.values()) {
+                if (page.id == pageId) {
+                    return page;
+                }
+            }
+            return null;
+        }
     }
 
     @Override
@@ -67,9 +82,7 @@ public class AboutActivity extends AVPActivity {
         super.onCreate(savedInstanceState);
 
         Routing.connect();
-        if (systemInformationTask.getStatus() == AsyncTask.Status.PENDING) {
-            systemInformationTask.execute();
-        }
+        systemInformationTask.execute();
 
         int startPage = 0;
         final Bundle extras = getIntent().getExtras();
@@ -77,22 +90,44 @@ public class AboutActivity extends AVPActivity {
             startPage = extras.getInt(EXTRA_ABOUT_STARTPAGE, startPage);
         }
 
-        configure(startPage, getString(R.string.about));
+        final Page[] pages = Page.values();
+        final int[] orderedPages = new int[pages.length];
+        for (int i = 0; i < pages.length; i++) {
+            orderedPages[i] = pages[i].id;
+        }
+
+        createViewPager(startPage, orderedPages, getString(R.string.about));
     }
 
     @Override
-    protected final String getTitle(final int page) {
-        if (page == 0) {
+    protected String getTitle(final int pageId) {
+        if (pageId == Page.VERSION.id) {
             return getResources().getString(R.string.about_version) + " / " + getResources().getString(R.string.about_help);
         }
-        return super.getTitle(page);
+        return this.getString(Page.find(pageId).resourceId);
+    }
+
+    @Override
+    protected AVPFragment getFragment(final int pageId) {
+        if (pageId == Page.VERSION.id) {
+            return new VersionViewCreator();
+        } else if (pageId == Page.CHANGELOG.id) {
+            return new ChangeLogViewCreator();
+        } else if (pageId == Page.SYSTEM.id) {
+            return new SystemViewCreator();
+        } else if (pageId == Page.LICENSE.id) {
+            return new LicenseViewCreator();
+        } else if (pageId == Page.CONTRIBUTORS.id) {
+            return new ContributorsViewCreator();
+        }
+        throw new IllegalStateException(); // cannot happen, when switch case is enum complete
     }
 
     static class VersionViewCreator extends AVPFragment {
 
         @Override
         public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-            final Activity activity = activityWeakReference.get();
+            final AboutActivity activity = (AboutActivity) activityWeakReference.get();
             if (activity == null) {
                 return null;
             }
@@ -114,7 +149,8 @@ public class AboutActivity extends AVPActivity {
                 }
             }
             binding.support.setEnabled(false);
-            systemInformationTask.getSystemInformation(si -> {
+
+            activity.getSystemInformationTask().getSystemInformation(si -> {
                 setClickListener(binding.support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(activity)) +
                     "&body=" + Uri.encode(si) + "\n");
                 binding.support.setEnabled(true);
@@ -161,7 +197,7 @@ public class AboutActivity extends AVPActivity {
 
         @Override
         public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-            final Activity activity = activityWeakReference.get();
+            final AboutActivity activity = (AboutActivity) activityWeakReference.get();
             if (activity == null) {
                 return null;
             }
@@ -170,7 +206,8 @@ public class AboutActivity extends AVPActivity {
             binding.system.setText(R.string.about_system_collecting);
             binding.copy.setEnabled(false);
             binding.share.setEnabled(false);
-            systemInformationTask.getSystemInformation(si -> {
+
+            activity.getSystemInformationTask().getSystemInformation(si -> {
                 final Markwon markwon = Markwon.create(activity);
                 markwon.setMarkdown(binding.system, si);
                 binding.copy.setEnabled(true);
@@ -180,8 +217,8 @@ public class AboutActivity extends AVPActivity {
                 });
                 binding.share.setEnabled(true);
                 binding.share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(activity, getString(R.string.about_system_info), si, null, R.string.about_system_info_send_chooser));
-
             });
+
             binding.system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             binding.system.setTextIsSelectable(true);
 
@@ -288,7 +325,7 @@ public class AboutActivity extends AVPActivity {
         }
     }
 
-    private static class GatherSystemInformationTask extends AsyncTask<Void, Void, String> {
+    protected static class GatherSystemInformationTask extends AsyncTask<Void, Void, String> {
 
         private final Object mutex = new Object();
         private String systemInformation = null;
@@ -332,8 +369,12 @@ public class AboutActivity extends AVPActivity {
 
     public static void showChangeLog(final Activity fromActivity) {
         final Intent intent = new Intent(fromActivity, AboutActivity.class);
-        intent.putExtra(EXTRA_ABOUT_STARTPAGE, CHANGELOG);
+        intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.CHANGELOG.id);
         fromActivity.startActivity(intent);
+    }
+
+    protected GatherSystemInformationTask getSystemInformationTask() {
+        return systemInformationTask;
     }
 
     @Override

@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 import android.view.Menu;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -14,55 +13,79 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class AVPActivity extends AppCompatActivity {
-    protected static final ArrayList<AVPFragment> pages = new ArrayList<>();
-    protected static final ArrayList<Page> pagesSource = new ArrayList<>();
+    protected Map<Integer, AVPFragment> cache = new LinkedHashMap<>();
 
     private ActionBar actionBar;
     private String prefix;
-    private int currentPage = 0;
+    private int currentPageId;
+    private int[] orderedPages;
+    private ViewPager2 viewPager = null;
 
-    protected void configure(final int currentPageNum, final String prefix) {
-        this.currentPage = currentPageNum;
+    protected void createViewPager(final int currentPageId, final int[] orderedPages, final String prefix) {
+        this.currentPageId = currentPageId;
+        setOrderedPages(orderedPages);
         this.prefix = prefix;
 
         setContentView(R.layout.avpactivity);
         actionBar = getSupportActionBar();
 
-        final ViewPager2 viewPager = (ViewPager2) findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new ViewPagerAdapter(this));
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            /*
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-            }
-            */
+        viewPager.registerOnPageChangeCallback(pageChangeCallback);
+        viewPager.setCurrentItem(pageIdToPosition(currentPageId));
 
-            @Override
-            public void onPageSelected(final int position) {
-                super.onPageSelected(position);
-                currentPage = position;
-                setActionBarTitle();
-            }
+        new TabLayoutMediator(findViewById(R.id.tab_layout), viewPager, (tab, position) -> tab.setText(getTitle(positionToPageId(position)))).attach();
+    }
 
-            /*
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                super.onPageScrollStateChanged(state);
-            }
-            */
-        });
-        viewPager.setCurrentItem(currentPage);
+    private final ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
+        /*
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+        }
+        */
 
-        new TabLayoutMediator(findViewById(R.id.tab_layout), viewPager,
-            (tab, position) -> tab.setText(getTitle(position))
-        ).attach();
+        @Override
+        public void onPageSelected(final int position) {
+        super.onPageSelected(position);
+        currentPageId = positionToPageId(position);
+        setActionBarTitle();
+        }
+
+        /*
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            super.onPageScrollStateChanged(state);
+        }
+        */
+    };
+
+    protected void setOrderedPages(final int[] orderedPages) {
+        this.orderedPages = orderedPages;
+        this.cache.clear();
+    }
+
+    private int positionToPageId(final int position) {
+        return orderedPages[Math.max(0, Math.min(position, orderedPages.length - 1))];
+    }
+
+    private int pageIdToPosition(final int page) {
+        if (orderedPages == null) {
+            return 0;
+        }
+        for (int i = 0; i < orderedPages.length; i++) {
+            if (orderedPages[i] == page) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     @Override
@@ -71,28 +94,16 @@ public abstract class AVPActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    protected String getTitle(final int page) {
-        return getResources().getString(pagesSource.get(page).resourceId);
-    }
+    protected abstract String getTitle(int page);
+    protected abstract AVPFragment getFragment(int page);
 
     private void setActionBarTitle() {
         if (actionBar != null) {
-            actionBar.setTitle((StringUtils.isNotBlank(prefix) ? prefix + " - " : "") + getTitle(currentPage));
+            actionBar.setTitle((StringUtils.isNotBlank(prefix) ? prefix + " - " : "") + getTitle(currentPageId));
         }
     }
 
-    protected static class Page {
-        @StringRes
-        private final int resourceId;
-        private final Class clazz;
-
-        public Page(@StringRes final int resourceId, final Class clazz) {
-            this.resourceId = resourceId;
-            this.clazz = clazz;
-        }
-    }
-
-    private static class ViewPagerAdapter extends FragmentStateAdapter {
+    private class ViewPagerAdapter extends FragmentStateAdapter {
         private final WeakReference<FragmentActivity> fragmentActivityWeakReference;
 
         ViewPagerAdapter(final FragmentActivity fa) {
@@ -102,33 +113,29 @@ public abstract class AVPActivity extends AppCompatActivity {
 
         @Override
         @NonNull
-        public Fragment createFragment(final int page) {
-            if (pages.size() > page) {
-                return pages.get(page);
+        public Fragment createFragment(final int position) {
+            final int pageId = positionToPageId(position);
+            AVPFragment fragment = cache.get(pageId);
+            if (fragment != null) {
+                return fragment;
             }
-            if (pagesSource.size() > page) {
-                try {
-                    final AVPFragment fragment = (AVPFragment) pagesSource.get(page).clazz.newInstance();
-                    fragment.setActivity(fragmentActivityWeakReference.get());
-                    pages.add(page, fragment);
-                    return fragment;
-                } catch (IllegalAccessException | InstantiationException e) {
-                    return null;
-                }
-            }
-            throw new IllegalStateException(); // cannot happen, when switch case is enum complete
+            fragment = getFragment(pageId);
+            fragment.setActivity(fragmentActivityWeakReference.get());
+            cache.put(pageId, fragment);
+            return fragment;
         }
 
         @Override
         public int getItemCount() {
-            return pagesSource.size();
+            return orderedPages == null ? 0 : orderedPages.length;
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        pages.clear();
+        cache.clear();
+        viewPager.unregisterOnPageChangeCallback(pageChangeCallback);
     }
 
 }
