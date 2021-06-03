@@ -1818,10 +1818,8 @@
     <string name="number_input_err_boundarymin">Zadaná hodnota je príliš malá – obnovené na min. hodnotu</string>
     <string name="number_input_err_boundarymax">Zadaná hodnota je príliš veľká – obnovené na max. hodnotu.</string>
     <string name="number_input_err_format">Neplatný formát čísla</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">Upozornenia c:geo</string>
-    <string name="notification_channel_description">upozornenia z aplikácie c:geo</string>
-    <string name="proximity_notification_title">Upozornenie c:geo na blízkosť</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">Upozornenie c:geo na blízkosť</string>
     <!-- individual routes -->
     <string name="individual_route">Individuálna trasa</string>
     <string name="individual_route_added">pridané do trasy</string>
