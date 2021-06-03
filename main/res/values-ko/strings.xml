@@ -551,6 +551,7 @@
     <string name="debug_user_error_report_title">문제 신고하기</string>
     <string name="debug_user_error_errortext">예상치 못한 문제가 발생하여 신고를 요청합니다.</string>
     <string name="debug_user_error_explain_options">시스템 정보 및 c:geo 로그 파일이 포함 된 이메일을 통해보고하여 c:geo 문제를 해결하도록 도와주세요.\n메일에 항상 자세한 오류 설명을 포함하십시오!\n\n메일을 보내기 전에 알려진 문제에 대한 FAQ 및/또는 소셜 미디어 존재를 확인하십시오.\n다른 연락처 옵션은 \'c:geo 정보\'에서 찾을 수 있습니다.</string>
+    <string name="debug_current_downloads">현재 다운로드</string>
     <!-- settings -->
     <string name="settings_title_open_settings">설정 열기?</string>
     <string name="settings_title_services">서비스</string>
@@ -1882,10 +1883,15 @@
     <string name="number_input_err_boundarymin">입력한 값이 너무 작습니다-최소값으로 재설정</string>
     <string name="number_input_err_boundarymax">입력한 값이 너무 큽니다-최대 값으로 재설정</string>
     <string name="number_input_err_format">올바르지 않은 숫자 형식</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo 알림</string>
-    <string name="notification_channel_description">c:geo 지오캐싱 앱의 알림</string>
-    <string name="proximity_notification_title">c:geo 근접성 알림</string>
+    <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">근접성 알림</string>
+    <string name="notification_channel_proximity_description">근처 캐시를 표시하는 데 사용</string>
+    <string name="notification_channel_foreground_name">포그라운드 서비스</string>
+    <string name="notification_channel_foreground_description">c:geo가 백그라운드 작업을 수행하는 동안 알림이 표시됩니다.</string>
+    <string name="notification_channel_downloader_name">c:geo 다운로더</string>
+    <string name="notification_channel_downloader_description">다운로드 결과 알림 (예: 오프라인지도)</string>
+    <string name="notification_proximity_title">c:geo 근접성 알림</string>
+    <string name="notification_download_receiver_title">다운로드 가져오는 중</string>
     <!-- individual routes -->
     <string name="individual_route">개별 경로</string>
     <string name="individual_route_added">경로에 추가했음</string>
