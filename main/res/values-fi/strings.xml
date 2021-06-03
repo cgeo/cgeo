@@ -1907,10 +1907,8 @@
     <string name="number_input_err_boundarymin">Syötetty arvo liian pieni - asetettu minimiarvoksi</string>
     <string name="number_input_err_boundarymax">Syötetty arvo liian iso - asetettu maksimiarvoksi</string>
     <string name="number_input_err_format">Väärä numeromuoto</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geon ilmoitukset</string>
-    <string name="notification_channel_description">Geokätköilysovelluksen c:geon ilmoitukset</string>
-    <string name="proximity_notification_title">c:geon läheisyysilmoitus</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">c:geon läheisyysilmoitus</string>
     <!-- individual routes -->
     <string name="individual_route">Yksittäinen reitti</string>
     <string name="individual_route_added">lisätty reittiin</string>
