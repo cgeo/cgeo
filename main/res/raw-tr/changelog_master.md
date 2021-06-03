@@ -14,8 +14,9 @@
 - Yeni: uzun tıklama ile Geocache detaylarındaki atanmış ikonun değiştirilebilmesi (yalnız kaydedilenler için)
 
 ### İndirici
-- Değişiklik: Başarılı şekilde indirilebilen aynı isimli dosyalar otomatik olarak bir öncekinin üzerine yazılır
-- Değişiklik: Eğer bir harita halen cihazınızda yüklenmemiş bir tema gerektiriyorsa, c:geo otomatik olarak bu temayı indirip kuracaktır
+- Change: Downloads will now completely happen in background, a notification is shown
+- Change: Files downloaded successfully will automatically overwrite existing files having the same name
+- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
 
 ### Diğer
 - Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
