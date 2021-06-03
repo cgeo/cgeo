@@ -553,6 +553,7 @@
     <string name="debug_user_error_report_title">Probleem melden</string>
     <string name="debug_user_error_errortext">Er is een onverwacht probleem opgetreden, gelieve deze aan ons te rapporteren:</string>
     <string name="debug_user_error_explain_options">Help ons c:geo problemen op te lossen door ze via e-mail te melden met systeeminformatie en het c:geo logbestand.\nGelieve altijd een gedetailleerde foutbeschrijving toe te voegen aan je mail!\n\nLees onze FAQ en/of sociale media voor bekende problemen voordat je een e-mail verstuurt.\nAndere contactopties zijn te vinden onder \'Over c:geo\'</string>
+    <string name="debug_current_downloads">Huidige downloads</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Instellingen openen?</string>
     <string name="settings_title_services">Diensten</string>
@@ -563,7 +564,7 @@
     <string name="settings_summary_cachedetails">De weergave van cache-informatie aanpassen.</string>
     <string name="settings_title_offlinedata">Offline gegevens</string>
     <string name="settings_summary_offlinedata">Configureer de gegevens die moeten worden opgeslagen voor offline gebruik, de opslaglocatie en mappen voor GPX bestanden.</string>
-    <string name="settings_title_logging">Logboek</string>
+    <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Configureer handtekening en stel log-opties in.</string>
     <string name="settings_title_map">Kaart</string>
     <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
@@ -670,6 +671,10 @@
     <string name="init_summary_select_language">In-app taal selecteren (vereist herstart)\n</string>
     <string name="init_use_default_language">Standaardtaal gebruiken</string>
     <string name="init_category_exclude">Caches uitsluiten</string>
+    <string name="init_exclude_own">Eigen uitsluiten</string>
+    <string name="init_summary_exclude_own">Eigen caches uitsluiten </string>
+    <string name="init_exclude_found">Gevonden uitsluiten</string>
+    <string name="init_summary_exclude_found">Sluit caches die je hebt gevonden uit</string>
     <string name="init_showwaypoints">Laat waypoints zien in map</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
@@ -694,6 +699,8 @@
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_archived">Gearchiveerden uitsluiten</string>
     <string name="init_summary_archived">Gearchiveerde caches uitsluiten</string>
+    <string name="init_offlinelog">Offline logboek uitsluiten</string>
+    <string name="init_summary_offlinelog">Caches met Offline Log uitsluiten</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
     <string name="init_customtabs_as_browser">Gebruik Chrome WebView</string>
@@ -834,7 +841,7 @@
     <string name="init_default_navigation_tool_2_description">Hier kan je de tweede navigatie-tool van jouw voorkeur instellen. Je kan deze activeren door lang op de navigatie-icoon naast de titel van de cache te klikken.</string>
     <string name="init_navigation_menu_description">Here kun je selecteren welke beschikbare navigatie methodes getoond worden in het navigatie menu voor een cache of waypoint. Uitgeschakelde tools zijn niet geïnstalleerd op uw apparaat.</string>
     <string name="init_debug_title">Foutopsporings informatie</string>
-    <string name="init_debug_note">c:geo kan een heleboel debug informatie genereren. Het activeren van deze instelling is van invloed op de stabiliteit van c:geo en wordt alleen aanbevolen als je wordt gevraagd een logboek naar de ontwikkelaars te sturen. Houd de logboekregistratie voor foutopsporing uitgeschakeld tijdens normaal gebruik van c:geo!</string>
+    <string name="init_debug_note">c:geo kan een heleboel debug informatie genereren. Het activeren van deze instelling is van invloed op de stabiliteit van c:geo en wordt alleen aanbevolen als je wordt gevraagd een logboek naar de ontwikkelaars te sturen. Houd de logging voor foutopsporing uitgeschakeld tijdens normaal gebruik van c:geo!</string>
     <string name="init_debug">Activeer foutopsporings informatie</string>
     <string name="init_dbonsdcard_title">Database locatie</string>
     <string name="init_dbonsdcard_note">Je kunt de database van c:geo intern of in een map op je gebruikersopslag opslaan. We raden aan om deze optie alleen te activeren als je regelmatig handmatige toegang tot je database nodig hebt.</string>
@@ -1341,8 +1348,11 @@
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
     <string name="map_show_circles">Toon cirkels</string>
+    <string name="map_showc_own">Eigen caches</string>
+    <string name="map_showc_found">Gevonden caches</string>
     <string name="map_showc_disabled">Uitgeschakelde caches</string>
     <string name="map_showc_archived">Gearchiveerde caches</string>
+    <string name="map_showc_offlinelog">Caches met offline log</string>
     <string name="map_showwp_original">Originele waypoints</string>
     <string name="map_showwp_parking">Parkeer waypoints</string>
     <string name="map_showwp_visited">Bezochte waypoints</string>
@@ -1898,10 +1908,8 @@
     <string name="number_input_err_boundarymin">Ingevoerde waarde is te klein - herstel naar minimale waarde</string>
     <string name="number_input_err_boundarymax">De ingevoerde waarde is te groot - herstel naar maximale waarde</string>
     <string name="number_input_err_format">Ongeldig numeriek formaat</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo meldingen</string>
-    <string name="notification_channel_description">meldingen van c:geo geocaching app</string>
-    <string name="proximity_notification_title">c:geo nabijheidsmelding</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">c:geo nabijheidsmelding</string>
     <!-- individual routes -->
     <string name="individual_route">Individuele route</string>
     <string name="individual_route_added">toegevoegd aan route</string>
