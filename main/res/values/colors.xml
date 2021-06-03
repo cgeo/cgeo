@@ -21,7 +21,6 @@
     <color name="steel">#675C68</color>
     -->
     <color name="text_icon">#FFFFFFFF</color>
-    <color name="colorIcon">@color/colorText</color>
 
     <color name="colorTextActionBar">#FFE4E4E4</color>
     <color name="colorBackgroundActionBar">#FF303030</color>
