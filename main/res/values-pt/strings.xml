@@ -1907,10 +1907,8 @@
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
     <string name="number_input_err_boundarymax">O valor introduzido é demasiado grande - redefinido para o valor máximo</string>
     <string name="number_input_err_format">Formato de número inválido</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">notificações do c:geo</string>
-    <string name="notification_channel_description">notificações da aplicação c:geo</string>
-    <string name="proximity_notification_title">notificação de proximidade</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">notificação de proximidade</string>
     <!-- individual routes -->
     <string name="individual_route">Rota individual</string>
     <string name="individual_route_added">adicionado à rota</string>
