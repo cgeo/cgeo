@@ -557,6 +557,7 @@
     <string name="debug_user_error_report_title">Nahlásit problém</string>
     <string name="debug_user_error_errortext">Došlo k neočekávanému problému a rádi bychom vás požádali, abyste nám jej nahlásili:</string>
     <string name="debug_user_error_explain_options">Pomozte nám vyřešit problémy s c:geo tím, že je nahlásíte e-mailem společně se systémovými informacemi a záznamem chyb c:geo.\nK e-mailu vždy prosím uveďte také podrobný popis chyby.\n\nPřed odesláním e-mailu si prosím také přečtěte naše FAQ a/nebo přítomnost řešení známých problémů na sociálních médiích.\nOstatní možnosti kontaktu naleznete v \'O aplikaci\'</string>
+    <string name="debug_current_downloads">Aktuální stahování</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otevřít nastavení?</string>
     <string name="settings_title_services">Služby</string>
@@ -1957,10 +1958,15 @@
     <string name="number_input_err_boundarymin">Zadaná hodnota je příliš malá – obnoveno na min. hodnotu</string>
     <string name="number_input_err_boundarymax">Zadaná hodnota je příliš velká – obnoveno na max. hodnotu</string>
     <string name="number_input_err_format">Neplatný formát čísla</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo oznámení</string>
-    <string name="notification_channel_description">oznámení z aplikace c:geo</string>
-    <string name="proximity_notification_title">c:geo upozornění na vzdálenost</string>
+    <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">oznámení o přiblížení</string>
+    <string name="notification_channel_proximity_description">slouží k zobrazení blízkých kešek</string>
+    <string name="notification_channel_foreground_name">služba v popředí</string>
+    <string name="notification_channel_foreground_description">oznámení se zobrazí, když aplikace c:geo pracuje na pozadí</string>
+    <string name="notification_channel_downloader_name">c:geo downloader</string>
+    <string name="notification_channel_downloader_description">oznámení o výsledcích stahování (např. offline mapy)</string>
+    <string name="notification_proximity_title">c:geo upozornění na vzdálenost</string>
+    <string name="notification_download_receiver_title">Importování stahování</string>
     <!-- individual routes -->
     <string name="individual_route">Individuální trasa</string>
     <string name="individual_route_added">přidáno do trasy</string>
