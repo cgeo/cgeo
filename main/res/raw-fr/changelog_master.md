@@ -14,8 +14,9 @@
 - New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
 
 ### Downloader
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+- Change: Downloads will now completely happen in background, a notification is shown
+- Modification : Les fichiers téléchargés écraseront automatiquement les fichiers existants portant le même nom
+- Modification : Si une carte nécessite un thème qui n'est pas encore installé, c:geo téléchargera et installera simultanément ce thème et la carte
 
 ### Other
 - Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
