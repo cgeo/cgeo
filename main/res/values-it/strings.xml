@@ -1907,10 +1907,8 @@
     <string name="number_input_err_boundarymin">Valore inserito è troppo piccolo - resettato al valore minimo</string>
     <string name="number_input_err_boundarymax">Il valore inserito è troppo grande - resettato al valore massimo</string>
     <string name="number_input_err_format">Formato del numero non valido</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">Notifiche c:geo</string>
-    <string name="notification_channel_description">notifiche dall\'app di geocaching c:geo</string>
-    <string name="proximity_notification_title">Notifica di prossimità c:geo</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">Notifica di prossimità c:geo</string>
     <!-- individual routes -->
     <string name="individual_route">Percorso individuale</string>
     <string name="individual_route_added">aggiunto al percorso</string>
