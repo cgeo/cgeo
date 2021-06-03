@@ -14,8 +14,9 @@
 - Uusi: Salli kätkön kuvakkeen muokkaus kätkön tietojen ponnahdusikkunan kautta pitkällä painalluksella (vain tallennetut kätköt)
 
 ### Lataaja
-- Muutos: Ladattu tiedosto korvaa automaattisesti olemassa olevat tiedostot, joilla on sama nimi
-- Muutos: Jos kartta vaatii tietyn teeman, jota ei ole vielä asennettu, c:geo lataa ja asentaa teeman automaattisesti
+- Change: Downloads will now completely happen in background, a notification is shown
+- Change: Files downloaded successfully will automatically overwrite existing files having the same name
+- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
 
 ### Muut
 - Muutos: Olemme täysin luoneet uudelleen sisäisiä c:geon teemojen muodostuksen teknisiä ratkaisuja, jotta voimme paremmin hyödyntää Androidin moderneja komponentteja. Tämä aiheuttaa joitakin sivuvaikutuksia, joista osa on tahattomia. Ilmoita virheistä tai bugeista [GitHub-sivullamme](https://www.github.com/cgeo/cgeo/issues) tai ottamalla yhteyttä tukeen.
