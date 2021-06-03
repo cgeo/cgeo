@@ -14,6 +14,7 @@
 - Novinka: Umožňuje změnit přiřazenou ikonu ve vyskakovacím okně s podrobnostmi o kešce pomocí dlouhého kliknutí (pouze uložené kešky)
 
 ### Downloader
+- Změna: Stahování nyní probíhá zcela na pozadí, zobrazí se oznámení
 - Změna: Úspěšně stažené soubory automaticky přepíší existující soubory se stejným názvem
 - Změna: Pokud mapa vyžaduje určitý motiv, který ještě není nainstalován, aplikace c:geo automaticky stáhne a nainstaluje daný motiv
 
