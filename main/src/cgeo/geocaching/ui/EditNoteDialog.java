@@ -7,7 +7,6 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -71,11 +70,7 @@ public class EditNoteDialog extends DialogFragment {
         final boolean preventWaypointsFromNote = getArguments().getBoolean(ARGUMENT_INITIAL_PREVENT);
         mPreventCheckbox.setChecked(preventWaypointsFromNote);
 
-        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        builder.setView(view);
-        final AlertDialog dialog = builder.create();
-
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        final AlertDialog dialog = Dialogs.newBuilder(activity).setView(view).create();
         final TextView title = view.findViewById(R.id.dialog_title_title);
         title.setText(R.string.cache_personal_note);
         title.setVisibility(View.VISIBLE);
