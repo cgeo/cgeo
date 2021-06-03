@@ -46,6 +46,7 @@
                     android:layout_marginRight="10dip"
                     android:layout_marginTop="5dip"
                     android:text="@string/quote"
+                    android:textColor="@color/just_white"
                     android:textSize="@dimen/textSize_detailsPrimary" />
 
                 <TextView
