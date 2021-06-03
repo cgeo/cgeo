@@ -1876,10 +1876,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="number_input_err_boundarymin">入力した数値が小さすぎます: 最小値にリセットします</string>
     <string name="number_input_err_boundarymax">入力した数値が大きすぎます: 最大値にリセットします</string>
     <string name="number_input_err_format">数値の書式が正しくありません</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo通知</string>
-    <string name="notification_channel_description">c:geoからの通知</string>
-    <string name="proximity_notification_title">c:geo接近通知</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">c:geo接近通知</string>
     <!-- individual routes -->
     <string name="individual_route">個別ルート</string>
     <string name="individual_route_added">ルートに追加しました</string>
