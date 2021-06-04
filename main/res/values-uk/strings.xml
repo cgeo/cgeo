@@ -1031,8 +1031,6 @@
     <string name="map_view_map">Перегляд карти</string>
     <string name="map_rotation">Обертання мапи</string>
     <string name="map_dot_mode">Використовуйте компактні значки</string>
-    <string name="map_show_circles">Показати кола</string>
-    <string name="map_show_track">Відображення маршруту GPX</string>
     <string name="init_hidewp">сховати шляхові точки</string>
     <string name="init_summary_hidewp_original">Сховати оригінальні маршрутні точки на карті</string>
     <string name="init_summary_hidewp_parking">Сховати на карті маршрутні точки паркування</string>
