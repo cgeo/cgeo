@@ -782,8 +782,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                             for (Image img : imageListFragment.getImages()) {
                                 ImageUtils.deleteImage(img.getUri());
                             }
-                            imageListFragment.clearImages();
-                            imageListFragment.adjustImagePersistentState();
                         }
                     }
 
@@ -870,6 +868,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 resetValues();
                 refreshGui();
                 lastSavedState = getEntryFromView();
+
+                imageListFragment.clearImages();
+                imageListFragment.adjustImagePersistentState();
 
                 showToast(res.getString(R.string.info_log_posted));
                 // Prevent from saving log after it was sent successfully.
