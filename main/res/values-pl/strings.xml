@@ -1243,13 +1243,6 @@
     <string name="map_view_map">Widok mapy</string>
     <string name="map_rotation">Obrót mapy</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
-    <string name="map_show_circles">Pokaż okręgi</string>
-    <string name="map_showc_disabled">Skrytki wyłączone</string>
-    <string name="map_showc_archived">Skrytki zarchiwizowane</string>
-    <string name="map_showwp_original">Oryginalne punkty nawigacyjne</string>
-    <string name="map_showwp_parking">Parkingi z punktów nawigacyjnych</string>
-    <string name="map_showwp_visited">Odwiedzone punkty nawigacyjne</string>
-    <string name="map_show_track">Pokaż ścieżkę/trasę GPX</string>
     <string name="init_renderthemefolder_synctolocal">Synchronizuj motywy</string>
     <string name="init_summary_renderthemefolder_synctolocal">Spowoduje to synchronizację Twoich motywów w prywatnym folderze aplikacji, aby poprawić wydajność przeglądarki map kosztem przestrzeni dyskowej urządzenia.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Włącz synchronizację folderu z motywami</string>
@@ -1271,7 +1264,6 @@
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczną rotację mapy?\n\nMożesz włączyć ją ponownie za pomocą menu rotacji mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
     <string name="quick_settings_info">Niektóre ustawienia mapy (ustawienia mapy, ukrywanie, nawigacja) zostały przeniesione do nowego okienka „Szybkie ustawienia”.\nMożesz otworzyć to okienko używając ikony w dolnym środku mapy.</string>
-    <string name="map_show_in_map">Pokaż na mapie:</string>
     <!-- search -->
     <string name="search_bar_hint">Szukaj skrytki/przedmioty podróżne</string>
     <string name="search_bar_desc">Skrzynki (GC-kod, słowo kluczowe), przedmioty podróżne (TB-kod)</string>
