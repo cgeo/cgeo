@@ -2,22 +2,20 @@ package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
+import cgeo.geocaching.ui.ButtonToggleGroup;
 import cgeo.geocaching.ui.ContinuousRangeSlider;
-import cgeo.geocaching.ui.ToggleButtonGroup;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import java.util.Arrays;
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeocacheFilter> {
 
     private ContinuousRangeSlider slider;
-    private ToggleButtonGroup percentage;
+    private ButtonToggleGroup percentage;
 
     private float maxValue = 1000;
     private float granularity = 1;
@@ -29,13 +27,13 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
-        percentage = new ToggleButtonGroup(getActivity());
-        percentage.setValues(Arrays.asList(getActivity().getString(R.string.cache_filter_favorites_absolute), getActivity().getString(R.string.cache_filter_favorites_percentage)));
+        percentage = new ButtonToggleGroup(getActivity());
+        percentage.addButtons(R.string.cache_filter_favorites_absolute, R.string.cache_filter_favorites_percentage);
 
         LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, dpToPixel(20), 0, dpToPixel(5));
         ll.addView(percentage, llp);
-        percentage.setChangeListener((v, i) -> resetSliderScale());
+        percentage.addOnButtonCheckedListener((v, i, b) -> resetSliderScale());
 
         slider = new ContinuousRangeSlider(getActivity());
         resetSliderScale();
@@ -47,7 +45,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
     }
 
     private void resetSliderScale() {
-        if (percentage.getSelectedValue() == 0) {
+        if (percentage.getCheckedButtonIndex() == 0) {
             maxValue = 1000;
             granularity = 1;
             slider.setScale(-0.2f, 1000.2f, f -> {
@@ -80,7 +78,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
 
     @Override
     public void setViewFromFilter(final FavoritesGeocacheFilter filter) {
-        percentage.setSelectedValue(filter.isPercentage() ? 1 : 0);
+        percentage.setCheckedButtonByIndex(filter.isPercentage() ? 1 : 0, true);
         resetSliderScale();
         slider.setRange(filter.getMinRangeValue() == null ? -10f : filter.getMinRangeValue(), filter.getMaxRangeValue() == null ? 1500f : filter.getMaxRangeValue());
     }
@@ -88,7 +86,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
     @Override
     public FavoritesGeocacheFilter createFilterFromView() {
         final FavoritesGeocacheFilter filter = createFilter();
-        filter.setPercentage(percentage.getSelectedValue() == 1);
+        filter.setPercentage(percentage.getCheckedButtonIndex() == 1);
         final ImmutablePair<Float, Float> range = slider.getRange();
         filter.setMinMaxRange(
             range.left < 0 ? null : Math.round(range.left * granularity) / granularity,

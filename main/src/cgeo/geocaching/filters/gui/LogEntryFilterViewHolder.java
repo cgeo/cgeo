@@ -2,7 +2,7 @@ package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
-import cgeo.geocaching.ui.ToggleButtonGroup;
+import cgeo.geocaching.ui.ButtonToggleGroup;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
 import android.view.View;
@@ -11,11 +11,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Arrays;
-
 public class LogEntryFilterViewHolder extends BaseFilterViewHolder<LogEntryGeocacheFilter> {
 
-    private ToggleButtonGroup inverseFoundBy;
+    private ButtonToggleGroup inverseFoundBy;
     private EditText foundByText;
     private EditText logText;
 
@@ -26,8 +24,8 @@ public class LogEntryFilterViewHolder extends BaseFilterViewHolder<LogEntryGeoca
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
-        inverseFoundBy = new ToggleButtonGroup(getActivity());
-        inverseFoundBy.setValues(Arrays.asList(getActivity().getString(R.string.cache_filter_include), getActivity().getString(R.string.cache_filter_exclude)));
+        inverseFoundBy = new ButtonToggleGroup(getActivity());
+        inverseFoundBy.addButtons(R.string.cache_filter_include, R.string.cache_filter_exclude);
 
         LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, dpToPixel(20), 0, dpToPixel(5));
@@ -64,7 +62,7 @@ public class LogEntryFilterViewHolder extends BaseFilterViewHolder<LogEntryGeoca
     public void setViewFromFilter(final LogEntryGeocacheFilter filter) {
         foundByText.setText(filter.getFoundByUser());
         logText.setText(filter.getLogText());
-        inverseFoundBy.setSelectedValue(filter.isInverse() ? 1 : 0);
+        inverseFoundBy.setCheckedButtonByIndex(filter.isInverse() ? 1 : 0, true);
     }
 
     @Override
@@ -72,7 +70,7 @@ public class LogEntryFilterViewHolder extends BaseFilterViewHolder<LogEntryGeoca
         final LogEntryGeocacheFilter filter = createFilter();
         filter.setFoundByUser(foundByText.getText().toString());
         filter.setLogText(logText.getText().toString());
-        filter.setInverse(inverseFoundBy.getSelectedValue() == 1);
+        filter.setInverse(inverseFoundBy.getCheckedButtonIndex() == 1);
         return filter;
     }
 

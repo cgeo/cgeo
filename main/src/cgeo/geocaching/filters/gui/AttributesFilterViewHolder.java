@@ -3,7 +3,7 @@ package cgeo.geocaching.filters.gui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.filters.core.AttributesGeocacheFilter;
-import cgeo.geocaching.ui.ToggleButtonGroup;
+import cgeo.geocaching.ui.ButtonToggleGroup;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 import static cgeo.geocaching.ui.ViewUtils.setTooltip;
 
@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 
 import androidx.core.content.res.ResourcesCompat;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +27,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
 
     private final Map<CacheAttribute, View> attributeViews = new HashMap<>();
     private final Map<CacheAttribute, Boolean> attributeState = new HashMap<>();
-    private ToggleButtonGroup inverse;
+    private ButtonToggleGroup inverse;
 
 
     private void toggleAttributeIcon(final CacheAttribute ca) {
@@ -72,9 +71,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
 
         for (CacheAttribute ca: CacheAttribute.values()) {
             final View view = createAttributeIcon(ca);
-            view.setOnClickListener(v -> {
-                toggleAttributeIcon(ca);
-            });
+            view.setOnClickListener(v -> toggleAttributeIcon(ca));
             this.attributeViews.put(ca, view);
             this.attributeState.put(ca, null);
             cg.addView(view);
@@ -83,8 +80,8 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
-        inverse = new ToggleButtonGroup(getActivity());
-        inverse.setValues(Arrays.asList(getActivity().getString(R.string.cache_filter_include), getActivity().getString(R.string.cache_filter_exclude)));
+        inverse = new ButtonToggleGroup(getActivity());
+        inverse.addButtons(R.string.cache_filter_include, R.string.cache_filter_exclude);
 
         final ImageButton clear = new ImageButton(getActivity(), null, 0, R.style.button_icon);
         clear.setImageResource(R.drawable.ic_menu_clear_playlist);
@@ -119,14 +116,14 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         for (Map.Entry<CacheAttribute, Boolean> entry : filter.getAttributes().entrySet()) {
             setAttributeState(entry.getKey(), entry.getValue());
         }
-        inverse.setSelectedValue(filter.isInverse() ? 1 : 0);
+        inverse.setCheckedButtonByIndex(filter.isInverse() ? 1 : 0, true);
     }
 
     @Override
     public AttributesGeocacheFilter createFilterFromView() {
         final AttributesGeocacheFilter filter = createFilter();
         filter.setAttributes(this.attributeState);
-        filter.setInverse(inverse.getSelectedValue() > 0);
+        filter.setInverse(inverse.getCheckedButtonIndex() > 0);
         return filter;
     }
 

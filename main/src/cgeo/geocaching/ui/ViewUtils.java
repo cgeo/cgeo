@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -216,6 +217,10 @@ public class ViewUtils {
             item.setShowAsAction(SHOW_AS_ACTION_ALWAYS);
         }
 
+    }
+
+    public static Context wrap(final Context ctx) {
+        return new ContextThemeWrapper(ctx, R.style.cgeo);
     }
 
 }
