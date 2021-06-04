@@ -1103,12 +1103,6 @@
     <string name="map_live">即時地圖</string>
     <string name="map_view_map">地圖檢視</string>
     <string name="map_rotation">旋轉地圖</string>
-    <string name="map_showc_disabled">已關閉的cache</string>
-    <string name="map_showc_archived">已歸檔的cache</string>
-    <string name="map_showwp_original">初始航點</string>
-    <string name="map_showwp_parking">停車航點</string>
-    <string name="map_showwp_visited">已拜訪航點</string>
-    <string name="map_show_track">顯示GPX的軌跡/航跡</string>
     <string name="init_hidewp">隱藏航點</string>
     <string name="init_summary_hidewp_original">在地圖上隱藏初始航點</string>
     <string name="init_summary_hidewp_parking">在地圖上隱藏停車航點</string>
@@ -1122,7 +1116,6 @@
     <string name="map_select_multiple_items">選取項目</string>
     <string name="map_gm_autorotation">自動旋轉地圖</string>
     <string name="quick_settings">快速設定</string>
-    <string name="map_show_in_map">在地圖上顯示</string>
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_bar_desc">地理藏寶(藏寶號碼, 關鍵字)，旅行蟲(號碼)</string>
