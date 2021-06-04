@@ -1192,13 +1192,6 @@
     <string name="map_view_map">Karttyp</string>
     <string name="map_rotation">Kartrotering</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
-    <string name="map_show_circles">Visa cirklar</string>
-    <string name="map_showc_disabled">Inaktiverade cacher</string>
-    <string name="map_showc_archived">Arkiverade cacher</string>
-    <string name="map_showwp_original">Ursprungliga waypoints</string>
-    <string name="map_showwp_parking">Parkeringwaypoints</string>
-    <string name="map_showwp_visited">Besökta waypoints</string>
-    <string name="map_show_track">Visa GPX-spår/rutt</string>
     <string name="init_renderthemefolder_synctolocal">Synkronisera teman</string>
     <string name="init_summary_renderthemefolder_synctolocal">Detta synkroniserar dina teman till en privat mapp för appen för att förbättra kartvisarens öppningsprestanda på bekostnad av visst lagringsutrymme.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av mapp med teman</string>
@@ -1220,7 +1213,6 @@
     <string name="map_gm_autorotation_disable">Inaktivera automatisk kartrotation?\n\nDu kan aktivera det igen med hjälp av menyn</string>
     <string name="quick_settings">Snabbinställningar</string>
     <string name="quick_settings_info">Vissa kartinställningar (mappinställningar, gömma, routing) har flyttats till popup-fönstret \"Snabbinställningar\".\nDu kan öppna denna popup med hjälp av ikonen i mitten längst ner på kartan.</string>
-    <string name="map_show_in_map">Visa på karta:</string>
     <!-- search -->
     <string name="search_bar_hint">Sök cacher/spårbara objekt</string>
     <string name="search_bar_desc">Cache (GC-kod, nyckelord), Trackable (TB-kod)</string>
