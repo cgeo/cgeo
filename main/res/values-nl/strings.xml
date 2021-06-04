@@ -462,7 +462,7 @@
     <string name="settings_summary_cachedetails">De weergave van cache-informatie aanpassen.</string>
     <string name="settings_title_offlinedata">Offline gegevens</string>
     <string name="settings_summary_offlinedata">Configureer de gegevens die moeten worden opgeslagen voor offline gebruik, de opslaglocatie en mappen voor GPX bestanden.</string>
-    <string name="settings_title_logging">Logboek</string>
+    <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Configureer handtekening en stel log-opties in.</string>
     <string name="settings_title_map">Kaart</string>
     <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
@@ -730,7 +730,7 @@
     <string name="init_default_navigation_tool_2_description">Hier kan je de tweede navigatie-tool van jouw voorkeur instellen. Je kan deze activeren door lang op de navigatie-icoon naast de titel van de cache te klikken.</string>
     <string name="init_navigation_menu_description">Here kun je selecteren welke beschikbare navigatie methodes getoond worden in het navigatie menu voor een cache of waypoint. Uitgeschakelde tools zijn niet geïnstalleerd op uw apparaat.</string>
     <string name="init_debug_title">Foutopsporings informatie</string>
-    <string name="init_debug_note">c:geo kan een heleboel debug informatie genereren. Het activeren van deze instelling is van invloed op de stabiliteit van c:geo en wordt alleen aanbevolen als je wordt gevraagd een logboek naar de ontwikkelaars te sturen. Houd de logboekregistratie voor foutopsporing uitgeschakeld tijdens normaal gebruik van c:geo!</string>
+    <string name="init_debug_note">c:geo kan een heleboel debug informatie genereren. Het activeren van deze instelling is van invloed op de stabiliteit van c:geo en wordt alleen aanbevolen als je wordt gevraagd een logboek naar de ontwikkelaars te sturen. Houd de logging voor foutopsporing uitgeschakeld tijdens normaal gebruik van c:geo!</string>
     <string name="init_debug">Activeer foutopsporings informatie</string>
     <string name="init_dbonsdcard_title">Database locatie</string>
     <string name="init_dbonsdcard_note">Je kunt de database van c:geo intern of in een map op je gebruikersopslag opslaan. We raden aan om deze optie alleen te activeren als je regelmatig handmatige toegang tot je database nodig hebt.</string>
