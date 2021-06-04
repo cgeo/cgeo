@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -171,7 +172,7 @@
                 android:id="@+id/search_filter_info"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/settings_info_icon"
+                app:srcCompat="@drawable/settings_info"
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"

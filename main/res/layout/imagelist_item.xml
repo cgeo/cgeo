@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/imagelist_item"
     android:layout_width="fill_parent"
@@ -19,7 +20,6 @@
 
         <ImageView
             android:id="@+id/image_thumbnail"
-            style="@style/action_bar_action"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="centerInside"
@@ -27,7 +27,7 @@
             android:layout_gravity="left"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_menu_add"
+            app:srcCompat="@drawable/ic_menu_add"
             tools:src="@tools:sample/avatars"/>
 
         <LinearLayout
@@ -82,7 +82,6 @@
 
         <ImageView
             android:id="@+id/image_delete"
-            style="@style/action_bar_action"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
@@ -90,7 +89,7 @@
             android:scaleType="centerInside"
             android:layout_toLeftOf="@+id/image_drag"
             android:layout_gravity="left"
-            android:src="@drawable/ic_menu_delete"
+            app:srcCompat="@drawable/ic_menu_delete"
             tools:src="@drawable/ic_menu_delete"/>
 
         <ImageView
@@ -103,7 +102,7 @@
             android:scaleType="centerInside"
             android:layout_alignParentRight="true"
             android:layout_gravity="left"
-            android:src="@drawable/ic_menu_reorder"
+            app:srcCompat="@drawable/ic_menu_reorder"
             tools:src="@drawable/ic_menu_reorder"/>
 
     </RelativeLayout>

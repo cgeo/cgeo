@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -14,7 +15,10 @@ import android.util.DisplayMetrics;
 import android.util.Pair;
 import android.view.WindowManager;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 public class DisplayUtils {
 
@@ -48,15 +52,31 @@ public class DisplayUtils {
     }
 
     /**
-     * get actual height of given drawable resource
+     * get actual width and height of given drawable resource
      * @param res - resources to load from
      * @param resToFitIn - resource to check
-     * @return actual height
+     * @return actual width and height
      */
     public static Pair<Integer, Integer> getDrawableDimensions(final Resources res, @DrawableRes final int resToFitIn) {
         final Bitmap calc = BitmapFactory.decodeResource(res, resToFitIn);
         return new Pair<>(calc.getWidth(), calc.getHeight());
+    }
 
+    /**
+     * get actual width and height of given drawable
+     * @param resToFitIn - drawable to check
+     * @return actual width and height
+     */
+    public static Pair<Integer, Integer> getDrawableDimensions(final Drawable resToFitIn) {
+        return new Pair<>(resToFitIn.getIntrinsicWidth(), resToFitIn.getIntrinsicHeight());
+    }
+
+    public static Drawable getTintedDrawable(final Resources res, @DrawableRes final int menuRes, @ColorRes final int tintColor) {
+        final int textColor = res.getColor(tintColor);
+
+        final Drawable menuDrawable = ResourcesCompat.getDrawable(res, menuRes, null);
+        DrawableCompat.setTint(menuDrawable, textColor);
+        return menuDrawable;
     }
 
     /**

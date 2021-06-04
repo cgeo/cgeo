@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -40,7 +41,7 @@
             android:layout_height="36dp"
             android:scaleType="fitCenter"
             android:visibility="gone"
-            android:src="@drawable/settings_info_icon"
+            app:srcCompat="@drawable/settings_info"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="30dp"
             android:layout_toRightOf="@+id/item_text"

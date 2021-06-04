@@ -110,7 +110,7 @@
                 android:text="@string/cache_menu_spoilers"
                 android:textSize="@dimen/textSize_detailsPrimary"
                 android:textColor="@color/colorText"
-                app:drawableLeftCompat="@drawable/log_img" />
+                app:drawableLeftCompat="@drawable/log_img_icon" />
         </LinearLayout>
 
         <!-- Personal note box -->
@@ -159,12 +159,12 @@
                     <ImageButton
                         android:id="@+id/upload_personalnote"
                         style="@style/button_icon"
-                        android:src="@drawable/ic_menu_upload" />
+                        app:srcCompat="@drawable/ic_menu_upload" />
 
                     <ImageButton
                         android:id="@+id/edit_personalnote"
                         style="@style/button_icon"
-                        android:src="@drawable/ic_menu_edit" />
+                        app:srcCompat="@drawable/ic_menu_edit" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -177,12 +177,12 @@
                     <ImageButton
                         android:id="@+id/storewaypoints_personalnote"
                         style="@style/button_icon"
-                        android:src="@drawable/ic_menu_waypoint_sync" />
+                        app:srcCompat="@drawable/ic_menu_waypoint_sync" />
 
                     <ImageButton
                         android:id="@+id/deleteewaypoints_personalnote"
                         style="@style/button_icon"
-                        android:src="@drawable/ic_menu_waypoint_delete" />
+                        app:srcCompat="@drawable/ic_menu_waypoint_delete" />
 
                 </LinearLayout>
             </RelativeLayout>

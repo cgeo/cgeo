@@ -86,6 +86,7 @@
         <item name="android:textColor">@color/colorTextActionBar</item>
     </style>
 
+
     <style name="settings_actionbar_theme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
         <!-- Customize color of back arrow -->
         <item name="android:textColorPrimary">@color/colorTextActionBar</item>

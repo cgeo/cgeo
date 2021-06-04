@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -102,7 +103,7 @@
                     <ImageButton
                         android:id="@+id/offline_refresh"
                         style="@style/button_icon"
-                        android:src="@drawable/ic_menu_refresh"
+                        app:srcCompat="@drawable/ic_menu_refresh"
                         android:layout_marginLeft="2dip"
                         android:visibility="gone" />
 
@@ -132,13 +133,13 @@
                 <ImageButton
                     android:id="@+id/offline_edit"
                     style="@style/button_icon"
-                    android:src="@drawable/ic_menu_edit"
+                    app:srcCompat="@drawable/ic_menu_edit"
                     android:layout_toLeftOf="@+id/offline_store_drop" />
 
                 <ImageButton
                     android:id="@+id/offline_store_drop"
                     style="@style/button_icon"
-                    android:src="@drawable/ic_menu_save"
+                    app:srcCompat="@drawable/ic_menu_save"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="2dip"
                     android:layout_gravity="right"/>
@@ -183,7 +184,7 @@
                     android:id="@+id/add_to_watchlist"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_menu_add"
+                    app:srcCompat="@drawable/ic_menu_add"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
@@ -191,7 +192,7 @@
                     android:id="@+id/remove_from_watchlist"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_menu_remove"
+                    app:srcCompat="@drawable/ic_menu_remove"
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
@@ -364,7 +365,7 @@
                     android:id="@+id/add_to_favpoint"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_menu_add"
+                    app:srcCompat="@drawable/ic_menu_add"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
@@ -372,7 +373,7 @@
                     android:id="@+id/remove_from_favpoint"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_menu_remove"
+                    app:srcCompat="@drawable/ic_menu_remove"
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>

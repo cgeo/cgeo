@@ -32,6 +32,7 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -143,7 +144,7 @@ public class EmojiUtils {
     public static void selectEmojiPopup(final Context context, final int currentValue, @DrawableRes final int defaultRes, final Action1<Integer> setNewCacheIcon) {
 
         // calc sizes for markers
-        final Pair<Integer, Integer> markerDimensionsTemp = DisplayUtils.getDrawableDimensions(context.getResources(), R.drawable.ic_menu_filter);
+        final Pair<Integer, Integer> markerDimensionsTemp = DisplayUtils.getDrawableDimensions(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_menu_filter, null));
         final int markerAvailable = (int) (markerDimensionsTemp.first * 0.5);
         final Pair<Integer, Integer> markerDimensions = new Pair<>(markerAvailable, markerAvailable);
         final EmojiPaint paint = new EmojiPaint(context.getResources(), markerDimensions, markerAvailable, 0, DisplayUtils.calculateMaxFontsize(35, 10, 150, markerAvailable));

@@ -18,8 +18,6 @@
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal" >
 
-
-
         <ImageView
             android:id="@+id/wpDefaultNavigation"
             style="@style/action_bar_action"
@@ -28,7 +26,7 @@
             android:clickable="true"
             android:focusable="true"
             android:longClickable="true"
-            android:src="@drawable/actionbar_compass" />
+            android:src="@drawable/ic_action_compass" />
 
         <LinearLayout
             android:layout_toLeftOf="@id/wpDefaultNavigation"

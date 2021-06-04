@@ -16,6 +16,7 @@ import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
+import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -190,9 +191,12 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
-        menu.add(Menu.NONE, R.id.delete, 0, "Delete").setIcon(R.drawable.ic_menu_delete)
+        menu.add(Menu.NONE, R.id.delete, 0, "Delete")
+                .setIcon(DisplayUtils.getTintedDrawable(getResources(),  R.drawable.ic_menu_delete, R.color.colorTextActionBar))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menu.add(Menu.NONE, R.id.menu_send, 1, "Go!").setIcon(R.drawable.ic_menu_send)
+
+        menu.add(Menu.NONE, R.id.menu_send, 1, "Go!")
+            .setIcon(DisplayUtils.getTintedDrawable(getResources(),  R.drawable.ic_menu_send, R.color.colorTextActionBar))
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }
