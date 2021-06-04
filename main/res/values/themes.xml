@@ -47,11 +47,11 @@
     <!-- theme for settings (temporary workaround, needed only as long as SettingsActivity is not derived from AppCompatActivity) -->
 
     <style name="settings" parent="cgeo">
-        <item name="android:textColor">@color/settings_colorTextDark</item>
-        <item name="android:textColorSecondary">@color/settings_colorTextSecondaryDark</item>
+        <item name="android:textColor">@color/settings_primary_selector_night</item>
+        <item name="android:textColorSecondary">@color/settings_secondary_selector_night</item>
         <item name="android:colorBackground">@color/settings_colorBackgroundDark</item>
 
-        <!-- icon resources - can be moved to drawables-night when based on AppCompatActivity -->
+        <!-- icon resources - can be moved (without suffix "_white") to drawables-night when based on AppCompatActivity -->
         <item name="settings_cloud">@drawable/settings_cloud_white</item>
         <item name="settings_details">@drawable/settings_details_white</item>
         <item name="settings_eye">@drawable/settings_eye_white</item>
@@ -66,11 +66,11 @@
     </style>
 
     <style name="settings.light" parent="cgeo">
-        <item name="android:textColor">@color/settings_colorTextLight</item>
-        <item name="android:textColorSecondary">@color/settings_colorTextSecondaryLight</item>
+        <item name="android:textColor">@color/settings_primary_selector_light</item>
+        <item name="android:textColorSecondary">@color/settings_secondary_selector_light</item>
         <item name="android:colorBackground">@color/settings_colorBackgroundLight</item>
 
-        <!-- icon resources -->
+        <!-- icon resources - can be moved (without suffix "_black") to drawables when based on AppCompatActivity -->
         <item name="settings_cloud">@drawable/settings_cloud_black</item>
         <item name="settings_details">@drawable/settings_details_black</item>
         <item name="settings_eye">@drawable/settings_eye_black</item>
