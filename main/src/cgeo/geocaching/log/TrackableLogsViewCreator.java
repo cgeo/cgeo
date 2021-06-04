@@ -33,6 +33,11 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
     }
 
     @Override
+    public void setContent() {
+        // @todo mb
+    }
+
+    @Override
     protected boolean isValid() {
         return trackable != null;
     }
