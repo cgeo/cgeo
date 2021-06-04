@@ -980,7 +980,6 @@
     <string name="map_live">Mapa activo</string>
     <string name="map_view_map">Elegir mapa</string>
     <string name="map_dot_mode">Usar iconos pequeños</string>
-    <string name="map_show_circles">Mostrar círculos</string>
     <string name="init_hidewp">Ocultar waypoints</string>
     <string name="init_summary_hidewp_original">Ocultar waypoints originales en el mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar waypoints de estacionamiento en el mapa</string>
