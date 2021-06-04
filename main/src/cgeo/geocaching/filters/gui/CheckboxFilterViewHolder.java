@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -51,16 +50,11 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
-        final List<Float> columnWidths = new ArrayList<>();
-        for (int c = 0 ; c < columnCount * 2 - 1; c++) {
-            columnWidths.add(c % 2 == 0 ? 1f : 0.1f);
-        }
-
         //selectall/none
         if (filterAccessor.getSelectableValuesAsArray().length > 1) {
 
-            ll.addView(ViewUtils.createHorizontallyDistributedViews(getActivity(), null, columnWidths, (i, f) -> {
-                if (i < columnWidths.size() - 1) {
+            ll.addView(ViewUtils.createColumnView(getActivity(), null, columnCount, false,  i -> {
+                if (i < columnCount - 1) {
                     return null;
                 }
                 final ImmutablePair<View, CheckBox> ip = ViewUtils.createCheckboxItem(getActivity(), ll, getActivity().getString(R.string.cache_filter_checkboxlist_selectallnone), R.drawable.ic_menu_selectall, 0);
@@ -74,21 +68,10 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
                     }
                 });
                 return ip.left;
-            }, (i, f) -> f));
+            }));
         }
 
-        final List<LinearLayout> columns = new ArrayList<>();
-        ll.addView(ViewUtils.createHorizontallyDistributedViews(getActivity(), null, columnWidths, (i, f) -> {
-            if (i % 2 == 1) {
-                //column separator
-                return ViewUtils.createVerticalSeparator(getActivity());
-            }
-            final LinearLayout colLl = new LinearLayout(getActivity());
-            columns.add(colLl);
-            colLl.setOrientation(LinearLayout.VERTICAL);
-            return colLl;
-        }, (i, f) -> f));
-
+        final List<LinearLayout> columns = ViewUtils.createAndAddStandardColumnView(getActivity(), null, ll, columnCount, true);
 
         int idx = 0;
         for (T value : filterAccessor.getSelectableValuesAsArray()) {
@@ -97,9 +80,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             this.valueCheckboxes[idx] = ViewUtils.addCheckboxItem(getActivity(), columns.get(idx % columns.size()), vText, this.filterAccessor.getIconFor(value), 0);
             this.valueCheckboxes[idx].setChecked(true);
             if (selectAllNoneCheckbox != null) {
-                this.valueCheckboxes[idx].setOnCheckedChangeListener((v, c) -> {
-                    checkAndSetAllNoneValue();
-                });
+                this.valueCheckboxes[idx].setOnCheckedChangeListener((v, c) -> checkAndSetAllNoneValue());
             }
             idx++;
         }
@@ -157,7 +138,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     public F createFilterFromView() {
         final F filter = createFilter();
         final Set<T> set = new HashSet<>();
-        if (!this.selectAllNoneCheckbox.isChecked()) {
+        if (this.selectAllNoneCheckbox == null || !this.selectAllNoneCheckbox.isChecked()) {
             for (int i = 0; i < filterAccessor.getSelectableValuesAsArray().length; i++) {
                 if (this.valueCheckboxes[i].isChecked()) {
                     set.add(filterAccessor.getSelectableValuesAsArray()[i]);

@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CheckboxItemBinding;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,7 +31,9 @@ import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.StyleRes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -64,6 +68,60 @@ public class ViewUtils {
         }
     }
 
+    /**
+     * creates a standard column layout and adds it to a given parent view. A standard layout consists of a vertically orientated LinearLayout per column.
+     * @param ctx context to use for creating views
+     * @param root optional. If given, then the column layout will be created IN the given view instead of returning a new one.
+     * @param parent the parent layout to add the new column view to. May be null (if root is not null)
+     * @param columnCount number of columns the layout shall have
+     * @param withSeparator if true, a vertical separator line will be drawn between columns
+     * @return created linearlayouts, one per column
+     */
+    public static List<LinearLayout> createAndAddStandardColumnView(final Context ctx, final LinearLayout root, final ViewGroup parent, final int columnCount, final boolean withSeparator) {
+        final List<LinearLayout> columns = new ArrayList<>();
+        for (int i = 0; i < columnCount; i++) {
+            final LinearLayout colLl = new LinearLayout(ctx);
+            columns.add(colLl);
+            colLl.setOrientation(LinearLayout.VERTICAL);
+        }
+
+        final ViewGroup colGroup = createColumnView(ctx, root, columnCount, withSeparator, i -> columns.get(i));
+        if (parent != null) {
+            parent.addView(colGroup);
+        }
+
+        return columns;
+
+    }
+
+    /**
+     * creates a column layout and returns it. Provides the option to specify individual layouts per column.
+     * @param ctx context to use for creating views
+     * @param root optional. If given, then the column layout will be created IN the given view instead of returning a new one.
+     * @param columnCount number of columns the layout shall have
+     * @param withSeparator if true, a vertical separator line will be drawn between columns
+     * @param columnViewCreator will be called for each column index (0 - "columnCount-1") and shall return the columns content view.
+     *    May return null for some columns, in which case those are empty
+     * @return new ViewGroup holding the column layout. If "root" was not null, then "root" is returned.
+     */
+    public static ViewGroup createColumnView(final Context ctx, final LinearLayout root, final int columnCount, final boolean withSeparator, final Func1<Integer, View> columnViewCreator) {
+
+        final List<Float> columnWidths = new ArrayList<>();
+        for (int c = 0 ; c < columnCount * 2 - 1; c++) {
+            columnWidths.add(c % 2 == 0 ? 1f : 0.1f);
+        }
+
+        final ViewGroup result = ViewUtils.createHorizontallyDistributedViews(ctx, root, columnWidths, (i, f) -> {
+            if (i % 2 == 1) {
+                //column separator
+                return ViewUtils.createVerticalSeparator(ctx, !withSeparator);
+            }
+
+            return columnViewCreator.call(i / 2);
+        }, (i, f) -> f);
+
+        return result;
+    }
 
     public static <T> ViewGroup createHorizontallyDistributedText(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, String> itemTextMapper) {
         return createHorizontallyDistributedViews(ctx, root, items, (idx, item) -> {
@@ -91,6 +149,7 @@ public class ViewUtils {
     public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, View> viewCreator, final Func2<Integer, T, Float> weightCreator) {
 
         final LinearLayout viewGroup = root == null ? new LinearLayout(ctx) : root;
+        viewGroup.setOrientation(LinearLayout.HORIZONTAL);
 
         int idx = 0;
         for (T item : items) {
@@ -126,6 +185,12 @@ public class ViewUtils {
         return ip.right;
     }
 
+    public static TextView createTextItem(final Context ctx, @StyleRes final int styleId, @StringRes final int textId) {
+        final TextView tv = new TextView(new ContextThemeWrapper(ctx, R.style.cgeo), null, 0, styleId);
+        tv.setText(textId);
+        return tv;
+    }
+
     public static ImmutablePair<View, CheckBox> createCheckboxItem(final Activity activity, @Nullable final ViewGroup context, final String text, final int iconId, @StringRes final int infoTextId) {
 
         final View itemView = LayoutInflater.from(context == null ? activity : context.getContext()).inflate(R.layout.checkbox_item, context, false);
@@ -145,8 +210,15 @@ public class ViewUtils {
     }
 
     public static View createVerticalSeparator(final Context context) {
+        return createVerticalSeparator(context, false);
+    }
+
+    private static View createVerticalSeparator(final Context context, final boolean makeTransparent) {
         final RelativeLayout llSep = new RelativeLayout(context);
         final View separatorView = new View(context, null, 0, R.style.separator_vertical);
+        if (makeTransparent) {
+            separatorView.setBackgroundResource(R.color.colorBackgroundTransparent);
+        }
         final RelativeLayout.LayoutParams rp = new RelativeLayout.LayoutParams(ViewUtils.dpToPixel(1), ViewGroup.LayoutParams.MATCH_PARENT);
         rp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         rp.addRule(RelativeLayout.CENTER_VERTICAL);

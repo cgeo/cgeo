@@ -10,6 +10,7 @@
         android:id="@+id/item_icon"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:scaleType="fitCenter"
         android:layout_centerVertical="true" />
 
     <RelativeLayout
@@ -31,11 +32,13 @@
             android:ellipsize="end"
             android:layout_marginLeft="6dp"
             android:layout_centerVertical="true"
-	    android:textSize="@dimen/textSize_detailsPrimary" />
+	        android:textSize="@dimen/textSize_detailsPrimary"
+            android:textColor="@color/colorText"/>
         <ImageView
             android:id="@+id/item_info"
             android:layout_width="36dp"
             android:layout_height="36dp"
+            android:scaleType="fitCenter"
             android:visibility="gone"
             android:src="@drawable/settings_info_icon"
             android:layout_marginLeft="5dp"
