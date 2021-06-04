@@ -1347,16 +1347,6 @@
     <string name="map_view_map">Karte</string>
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
-    <string name="map_show_circles">Kreise anzeigen</string>
-    <string name="map_showc_own">Eigene Caches</string>
-    <string name="map_showc_found">Gefundene Caches</string>
-    <string name="map_showc_disabled">Deaktivierte Caches</string>
-    <string name="map_showc_archived">Archivierte Caches</string>
-    <string name="map_showc_offlinelog">Caches mit Offline-Log</string>
-    <string name="map_showwp_original">Originale Wegpunkte</string>
-    <string name="map_showwp_parking">Park-Wegpunkte</string>
-    <string name="map_showwp_visited">Besuchte Wegpunkte</string>
-    <string name="map_show_track">GPX Track/Route anzeigen</string>
     <string name="init_renderthemefolder_synctolocal">Designs synchronisieren</string>
     <string name="init_summary_renderthemefolder_synctolocal">Dies wird deine Designs in einen app-internen Ordner synchronisieren, um die Startgeschwindigkeit der Karte zu verbessern auf Kosten von etwas Gerätespeicher.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisierung des Designordners einschalten</string>
@@ -1381,7 +1371,6 @@
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
     <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
-    <string name="map_show_in_map">Zeige auf Karte:</string>
     <!-- search -->
     <string name="search_bar_hint">Caches/Trackables suchen</string>
     <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
