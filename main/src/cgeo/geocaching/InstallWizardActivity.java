@@ -300,7 +300,7 @@ public class InstallWizardActivity extends AppCompatActivity {
             skip.setOnClickListener(v -> listenerSkip.run());
         }
 
-        final boolean useNextOutlinedButton = (nextLabelRes == R.string.skip);
+        final boolean useNextOutlinedButton = nextLabelRes == R.string.skip;
         if (listenerNext == null) {
             next.setVisibility(View.GONE);
             nextOutlined.setVisibility(View.GONE);
