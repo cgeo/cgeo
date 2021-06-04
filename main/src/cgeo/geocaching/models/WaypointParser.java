@@ -400,16 +400,18 @@ public class WaypointParser {
         //type
         sb.append(PARSING_TYPE_OPEN).append(wp.getWaypointType().getShortId().toUpperCase(Locale.US))
             .append(PARSING_TYPE_CLOSE).append(" ");
-        //coordinate
-        if (wp.getCoords() == null) {
-            final String calcStateJson = wp.getCalcStateJson();
-            if (null != calcStateJson) {
-                sb.append(getParseableFormula(wp));
-            } else {
-                sb.append(PARSING_COORD_EMPTY);
-            }
+
+        // formula
+        final String calcStateJson = wp.getCalcStateJson();
+        if (null != calcStateJson) {
+            sb.append(getParseableFormula(wp));
         } else {
-            sb.append(wp.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW));
+        //coordinate
+            if (wp.getCoords() == null) {
+                sb.append(PARSING_COORD_EMPTY);
+            } else {
+                sb.append(wp.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW));
+            }
         }
 
         //user note

@@ -260,6 +260,24 @@ public class WaypointParserTest {
     }
 
     /**
+     * Parse Waypoint with formula and variables and get parseable text.
+     * Formula and description should be correct.
+     */
+    @Test
+    public void testParseWaypointWithCompleteFormulaAndCreateParseableWaypointText() {
+        final String note = "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=1|a=2|b=47|C=10|D=4|E=2|F=3| this is the description\n\"this shall NOT be part of the note\"";
+        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
+        assertThat(waypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp = iterator.next();
+
+        final String parseableText = WaypointParser.getParseableText(wp, -1);
+        assertThat(parseableText).isEqualTo(
+            "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)' E 9° (A-B).(2*D)EF' |A=a + b|B=1|C=10|D=4|E=2|F=3|a=2|b=47| \"this is the description\"");
+    }
+
+    /**
      * Waypoint with formula and variables should be created
      */
     @Test
