@@ -1221,13 +1221,6 @@
     <string name="map_view_map">Tria el mapa</string>
     <string name="map_rotation">Mapa rotatori</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
-    <string name="map_show_circles">Mostra els cercles</string>
-    <string name="map_showc_disabled">Catxés desactivats</string>
-    <string name="map_showc_archived">Catxés arxivats</string>
-    <string name="map_showwp_original">Punt ruta originals</string>
-    <string name="map_showwp_parking">Punts ruta parking</string>
-    <string name="map_showwp_visited">Punts ruta visitats</string>
-    <string name="map_show_track">Mostra GPX track/ruta</string>
     <string name="init_renderthemefolder_synctolocal">Sincronitzeu temes</string>
     <string name="init_summary_renderthemefolder_synctolocal">Això sincronitzarà els temes amb una carpeta privada de l\'aplicació per millorar el rendiment d\'obertura del visor de mapes a costa d\'espai d\'emmagatzematge del dispositiu.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activeu la sincronització de carpetes de temes</string>
@@ -1249,7 +1242,6 @@
     <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
     <string name="quick_settings">Configuració ràpida</string>
     <string name="quick_settings_info">Algunes configuracions del mapa (Configuració del mapa, ocultació, encaminament) s\'han mogut a la nova finestra emergent \"Configuració ràpida\".\nPodeu obrir aquesta finestra emergent mitjançant la icona que hi ha al centre de la part inferior del mapa.</string>
-    <string name="map_show_in_map">Mostra al mapa:</string>
     <!-- search -->
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
     <string name="search_bar_desc">Catxés (codi del catxé, paraula clau), Traçables (codi TB)</string>
