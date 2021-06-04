@@ -1343,16 +1343,6 @@
     <string name="map_view_map">Προβολή χάρτη</string>
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
-    <string name="map_show_circles">Εμφάνιση κύκλων</string>
-    <string name="map_showc_own">Ιδιόκτητες κρύπτες</string>
-    <string name="map_showc_found">Κρύπτες που εχουν βρεθεί</string>
-    <string name="map_showc_disabled">Απενεργοποιημένες κρύπτες</string>
-    <string name="map_showc_archived">Αρχειοθετημένες κρύπτες</string>
-    <string name="map_showc_offlinelog">Κρύπτες με Καταγραφή Offline</string>
-    <string name="map_showwp_original">Αρχικά ενδιάμεσα σημεία</string>
-    <string name="map_showwp_parking">Σημεία στάθμευσης</string>
-    <string name="map_showwp_visited">Ενδιάμεσα σημεία που έχει γίνει επίσκεψη</string>
-    <string name="map_show_track">Εμφάνιση GPX διαδρομής</string>
     <string name="init_renderthemefolder_synctolocal">Συγχρονισμός θεμάτων</string>
     <string name="init_summary_renderthemefolder_synctolocal">Αυτό θα συγχρονίσει τα θέματα σας σε έναν ιδιωτικό φάκελο εφαρμογών για να βελτιώσει την απόδοση ανοίγματος των χαρτών με κόστος κάποιο χώρο αποθήκευσης ατην συσκευή.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ενεργοποίηση συγχρονισμού φακέλου θεμάτων</string>
@@ -1377,7 +1367,6 @@
     <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
     <string name="quick_settings">Γρήγορες ρυθμίσεις</string>
     <string name="quick_settings_info">Μερικές ρυθμίσεις χάρτη (Ρυθμίσεις χάρτη, απόκρυψη, δρομολόγηση) έχουν μεταφερθεί στο νέο αναδυόμενο παράθυρο \"Γρήγορες ρυθμίσεις\".\nΜπορείτε να ανοίξετε αυτό το αναδυόμενο παράθυρο χρησιμοποιώντας το εικονίδιο στο κάτω μέρος του χάρτη.</string>
-    <string name="map_show_in_map">Προβολή στο χάρτη:</string>
     <!-- search -->
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
     <string name="search_bar_desc">Κρύπτες (γεωκωδικός, λέξη-κλειδί), Ανιχνεύσιμα (Κωδικός TB)</string>
