@@ -1214,13 +1214,6 @@
     <string name="map_view_map">Afficher carte</string>
     <string name="map_rotation">Rotation de la carte</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
-    <string name="map_show_circles">Afficher les cercles</string>
-    <string name="map_showc_disabled">Caches désactivées</string>
-    <string name="map_showc_archived">Caches archivées</string>
-    <string name="map_showwp_original">Points de passage d\'origine</string>
-    <string name="map_showwp_parking">Lieux de stationnement</string>
-    <string name="map_showwp_visited">Points de passage visités</string>
-    <string name="map_show_track">Afficher la trace GPX / l\'itinéraire</string>
     <string name="init_renderthemefolder_synctolocal">Synchroniser les thèmes</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activer la synchronisation du dossier des thèmes</string>
     <string name="onetime_mapthemefixslow_title">Corrige le problème de lenteur d\'affichage du thème de carte</string>
@@ -1240,7 +1233,6 @@
     <string name="map_gm_autorotation_disable">Désactiver la rotation automatique de la carte ?\n\nVous pourrez l\'activer à nouveau depuis le menu Rotation de la carte</string>
     <string name="quick_settings">Paramètres rapides</string>
     <string name="quick_settings_info">Certains paramètres de la carte (paramètres de carte, masquage, guidage) ont été déplacés dans la nouvelle fenêtre surgissante \"Réglages rapides\".\nVous pouvez ouvrir cette fenêtre en utilisant l\'icône centrée au bas de la carte.</string>
-    <string name="map_show_in_map">Afficher sur la carte :</string>
     <!-- search -->
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
     <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (code TB)</string>
