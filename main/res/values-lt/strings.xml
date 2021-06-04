@@ -1121,9 +1121,6 @@
     <string name="map_view_map">Žemėlapio šaltinis</string>
     <string name="map_rotation">Žemėlapio sukimas</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
-    <string name="map_show_circles">Rodyti apskritimus</string>
-    <string name="map_showc_own">Nuosavos slėptuvės</string>
-    <string name="map_show_track">Rodyti GPX asmeninį kelią/maršrutą</string>
     <string name="init_hidewp">Slėpti papildomus taškus</string>
     <string name="init_summary_hidewp_original">Slėpti originalius papildomus taškus žemėlapyje</string>
     <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>
@@ -1138,7 +1135,6 @@
     <string name="map_gm_autorotation">Žemėlapio autosukimas</string>
     <string name="map_gm_autorotation_disable">Išjungti automatinį žemėlapio pasukimą?\n\nGalėsite jį vėl įjungti per žemėlapio pasukimo meniu</string>
     <string name="quick_settings">Greiti nustatymai</string>
-    <string name="map_show_in_map">Rodyti žemėlapyje:</string>
     <!-- search -->
     <string name="search_bar_desc">Slėptuvės (geo kodas, raktažodis), Keliauninkai (TB kodas)</string>
     <string name="search_coordinates">Koordinatės</string>
