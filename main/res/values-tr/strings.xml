@@ -1347,16 +1347,16 @@
     <string name="map_view_map">Harita görünümü</string>
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
-    <string name="map_show_circles">Çemberleri göster</string>
-    <string name="map_showc_own">Sahibi olduklarım</string>
-    <string name="map_showc_found">Bulduğum cache\'ler</string>
-    <string name="map_showc_disabled">Devre dışı cache\'ler</string>
-    <string name="map_showc_archived">Arşivlenmiş cache\'ler</string>
-    <string name="map_showc_offlinelog">Çevrimdışı kayıt girilmiş cache\'ler</string>
-    <string name="map_showwp_original">Orijinal yol noktaları</string>
-    <string name="map_showwp_parking">Park yol noktaları</string>
-    <string name="map_showwp_visited">Görülmüş yol noktaları</string>
-    <string name="map_show_track">GPX yol/rotayı göster</string>
+    <string name="map_show_circles">Daireler</string>
+    <string name="map_showc_own">Benim</string>
+    <string name="map_showc_found">Bulduğum</string>
+    <string name="map_showc_disabled">Devredışı</string>
+    <string name="map_showc_archived">Arşivenlendi </string>
+    <string name="map_showc_offlinelog">Çevrimdışı Kaydedildi</string>
+    <string name="map_showwp_original">Orijinal</string>
+    <string name="map_showwp_parking">Park alanı</string>
+    <string name="map_showwp_visited">Ziyaret edildi</string>
+    <string name="map_show_track">GPX yol/rota</string>
     <string name="init_renderthemefolder_synctolocal">Temaları senkronize et</string>
     <string name="init_summary_renderthemefolder_synctolocal">Bu seçenek, harita görüntüleyicisinin açılış performansını arttırmak için temalarınızı uygulamaya özel bir klasöre, depolama alanınızın birazını kullanarak, senkronize eder.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Tema dosyası senkronizasyonunu aç</string>
@@ -1380,7 +1380,9 @@
     <string name="map_gm_autorotation_disable">Otomatik harita döndürmesini devre dışı bırakılsın mı?\n\nHarita döndürme menüsünü kullanarak tekrardan etkinleştirebilirsiniz</string>
     <string name="quick_settings">Hızlı ayarlar</string>
     <string name="quick_settings_info">Bazı harita ayarları (Harita ayarları, gizleme, rotalama) yeni \"Hızlı ayarlar\" penceresine taşındı.\nBu pencereyi haritanın en alt ortasındaki ikonu kullanarak açabilirsiniz.</string>
-    <string name="map_show_in_map">Haritada göster:</string>
+    <string name="map_show_caches_title">Bu Cache\'leri Göster:</string>
+    <string name="map_show_waypoints_title">Bu yol noktalarını göster:</string>
+    <string name="map_show_other_title">Diğerlerini göster:</string>
     <!-- search -->
     <string name="search_bar_hint">Cache/trackable ara</string>
     <string name="search_bar_desc">Geocache\'ler (geocode, anahtar kelime), Trackable (TB kodu)</string>
@@ -1907,7 +1909,12 @@
     <string name="number_input_err_boundarymax">Girilen rakam çok büyük-en büyük rakama ayarla</string>
     <string name="number_input_err_format">Geçersiz sayı biçimi</string>
     <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">Mesafe bildirimleri</string>
+    <string name="notification_channel_proximity_description">yakınlardaki cache\'leri bildirmek için kullanılır</string>
+    <string name="notification_channel_foreground_name">Ön plan hizmeti</string>
+    <string name="notification_channel_foreground_description">bildirim c:geo arkada çalışırken gösterilir</string>
     <string name="notification_channel_downloader_name">c:geo indirici</string>
+    <string name="notification_channel_downloader_description">indirme sonuç bildirimleri ( ör: çevrimdışı haritalar)</string>
     <string name="notification_proximity_title">c:geo yakınlık bildirimi</string>
     <!-- individual routes -->
     <string name="individual_route">Özel rota</string>
