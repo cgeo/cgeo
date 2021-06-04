@@ -92,6 +92,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     private Button prev = null;
     private Button skip = null;
     private Button next = null;
+    private Button nextOutlined = null;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -121,6 +122,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         prev = binding.wizardPrev;
         skip = binding.wizardSkip;
         next = binding.wizardNext;
+        nextOutlined = binding.wizardNextOutlined;
 
         this.contentStorageActivityHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(BUNDLE_CSAH))
             .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, pf -> {
@@ -297,12 +299,21 @@ public class InstallWizardActivity extends AppCompatActivity {
             skip.setText(skipLabelRes == 0 ? R.string.skip : skipLabelRes);
             skip.setOnClickListener(v -> listenerSkip.run());
         }
+
+        final boolean useNextOutlinedButton = (nextLabelRes == R.string.skip);
         if (listenerNext == null) {
             next.setVisibility(View.GONE);
+            nextOutlined.setVisibility(View.GONE);
         } else {
-            next.setVisibility(View.VISIBLE);
-            next.setText(nextLabelRes == 0 ? R.string.next : nextLabelRes);
-            next.setOnClickListener(v -> listenerNext.run());
+            next.setVisibility(useNextOutlinedButton ? View.GONE : View.VISIBLE);
+            nextOutlined.setVisibility(useNextOutlinedButton ? View.VISIBLE : View.GONE);
+            if (useNextOutlinedButton) {
+                nextOutlined.setText(nextLabelRes);
+                nextOutlined.setOnClickListener(v -> listenerNext.run());
+            } else {
+                next.setText(nextLabelRes == 0 ? R.string.next : nextLabelRes);
+                next.setOnClickListener(v -> listenerNext.run());
+            }
         }
     }
 
