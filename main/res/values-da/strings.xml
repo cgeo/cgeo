@@ -1088,7 +1088,6 @@
     <string name="map_view_map">Kort-view</string>
     <string name="map_rotation">Kortrotation</string>
     <string name="map_dot_mode">Brug små ikoner</string>
-    <string name="map_show_circles">Vis cirkler</string>
     <string name="init_hidewp">Skjul rutepunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale rutepunkter på kortet</string>
     <string name="init_summary_hidewp_parking">Skjul parkeringsrutepunkter på kortet</string>
