@@ -1346,16 +1346,6 @@
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
-    <string name="map_show_circles">Mostrar círculos</string>
-    <string name="map_showc_own">Caches minhas</string>
-    <string name="map_showc_found">Caches encontradas</string>
-    <string name="map_showc_disabled">Caches desactivadas</string>
-    <string name="map_showc_archived">Caches arquivadas</string>
-    <string name="map_showc_offlinelog">Caches com Registo Offline</string>
-    <string name="map_showwp_original">Pont. adicionais originais</string>
-    <string name="map_showwp_parking">Pontos de estacionamento</string>
-    <string name="map_showwp_visited">Pont. adicionais visitados</string>
-    <string name="map_show_track">Mostrar percurso/rota GPX</string>
     <string name="init_renderthemefolder_synctolocal">Sincronizar temas</string>
     <string name="init_summary_renderthemefolder_synctolocal">Isto sincronizará os seus temas numa pasta privada da aplicação para melhorar o desempenho de abertura de mapas, à custa de algum espaço de armazenamento do dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronização da pasta de temas</string>
@@ -1380,7 +1370,6 @@
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
     <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
-    <string name="map_show_in_map">Mostrar no mapa:</string>
     <!-- search -->
     <string name="search_bar_hint">Pesquisar caches/trackables</string>
     <string name="search_bar_desc">Caches (código GC, palavra-chave), Trackables (código TB)</string>
