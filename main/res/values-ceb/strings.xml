@@ -746,7 +746,6 @@
     <string name="map_map">Mapa</string>
     <string name="map_live">Mga mapa nga live</string>
     <string name="map_view_map">View sa mapa</string>
-    <string name="map_show_circles">Ipakita nag mga bilog</string>
     <string name="map_theme_select">Pagpili ug tema sa mapa</string>
     <string name="map_live_enable">Makahimo nga mag-live</string>
     <string name="map_as_list">Ipakita ang ingulon na lista</string>
