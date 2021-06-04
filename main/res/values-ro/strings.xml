@@ -819,7 +819,6 @@
     <string name="map_map">Hartă</string>
     <string name="map_live">Hartă</string>
     <string name="map_view_map">Hărţi</string>
-    <string name="map_show_circles">Arată cercurile</string>
     <string name="map_theme_select">Alege un stil pentru hartă</string>
     <string name="map_live_enable">Ia de pe net</string>
     <string name="map_live_disable">Fără internet</string>
