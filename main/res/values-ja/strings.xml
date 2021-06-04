@@ -548,6 +548,7 @@
     <string name="debug_user_error_report_title">問題を報告</string>
     <string name="debug_user_error_errortext">予期しない問題が発生しました。報告をお願いします:</string>
     <string name="debug_user_error_explain_options">システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。\nその際はエラーの詳細も必ず含めてください。\n\nメールを送る前にFAQやSNSで既知の問題かどうか確認をお願いします。\nその他の連絡先などは「c:geoについて」をご覧ください。</string>
+    <string name="debug_current_downloads">実行中のダウンロード</string>
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
     <string name="settings_title_services">サービス</string>
@@ -665,7 +666,7 @@
     <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
     <string name="init_use_default_language">システムの言語</string>
     <string name="init_category_exclude">キャッシュを除外</string>
-    <string name="init_exclude_own">自分のを除外</string>
+    <string name="init_exclude_own">自分のものを除外</string>
     <string name="init_summary_exclude_own">所有しているキャッシュを除外</string>
     <string name="init_exclude_found">発見を除外</string>
     <string name="init_summary_exclude_found">自分で発見したキャッシュを除外</string>
@@ -1329,16 +1330,6 @@
     <string name="map_view_map">地図の変更</string>
     <string name="map_rotation">地図の回転</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
-    <string name="map_show_circles">0.1マイル円</string>
-    <string name="map_showc_own">自分のキャッシュ</string>
-    <string name="map_showc_found">発見したキャッシュ</string>
-    <string name="map_showc_disabled">一時停止中キャッシュ</string>
-    <string name="map_showc_archived">アーカイブ済みのキャッシュ</string>
-    <string name="map_showc_offlinelog">オフラインログのあるキャッシュ</string>
-    <string name="map_showwp_original">ウェイポイント(オリジナル)</string>
-    <string name="map_showwp_parking">ウェイポイント(駐車場)</string>
-    <string name="map_showwp_visited">ウェイポイント(訪問済み)</string>
-    <string name="map_show_track">GPXトラック/ルートを表示</string>
     <string name="init_renderthemefolder_synctolocal">地図テーマフォルダの同期</string>
     <string name="init_summary_renderthemefolder_synctolocal">地図テーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます(ストレージを少し余分に使用します)</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">地図テーマフォルダの同期</string>
@@ -1363,7 +1354,6 @@
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
     <string name="quick_settings_info">いくつか地図の設定(地図上の表示/非表示、ルート検索など)は新しい「クイック設定」に移動しました。\n地図の下部中央の歯車アイコンをタップすると開けます</string>
-    <string name="map_show_in_map">地図に表示:</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_desc">キャッシュ(GCコード,キーワード), トラッカブル(TBコード)</string>
