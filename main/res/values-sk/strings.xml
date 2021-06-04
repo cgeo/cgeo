@@ -1243,13 +1243,6 @@
     <string name="map_view_map">Vybrať mapu</string>
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
-    <string name="map_show_circles">Zobraziť kruhy</string>
-    <string name="map_showc_disabled">Deaktivované kešky</string>
-    <string name="map_showc_archived">Archivované kešky</string>
-    <string name="map_showwp_original">Pôvodné body trasy</string>
-    <string name="map_showwp_parking">Parkoviská</string>
-    <string name="map_showwp_visited">Navštívené body trasy</string>
-    <string name="map_show_track">Zobraziť GPX stopu/trasu</string>
     <string name="init_renderthemefolder_synctolocal">Synchronizovať motívy</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tým synchronizujete svoje motívy do súkromného priečinka aplikácie a vylepšíte tak výkon otvárania prezerača mapy na úkor určitého ukladacieho miesta v zariadení.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnúť synchronizáciu priečinka s témou</string>
@@ -1271,7 +1264,6 @@
     <string name="map_gm_autorotation_disable">Vypnúť automatické otáčanie mapy?\n\nMôžete ho znova povoliť pomocou ponuky Otáčanie mapy.</string>
     <string name="quick_settings">Rýchle nastavenia</string>
     <string name="quick_settings_info">Niektoré nastavenia mapy (nastavenie mapy, skrytie, trasy) boli presunuté do nového kontextového okna \"Rýchle nastavenia\"\nToto kontextové okno môžete otvoriť pomocou ikony na mape dole v strede.</string>
-    <string name="map_show_in_map">Zobraziť na mape:</string>
     <!-- search -->
     <string name="search_bar_hint">Hľadať kešky/trackovacie predmety</string>
     <string name="search_bar_desc">Skrýše (geokód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
