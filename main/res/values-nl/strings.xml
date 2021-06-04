@@ -1347,16 +1347,6 @@
     <string name="map_view_map">Kaart weergave</string>
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
-    <string name="map_show_circles">Toon cirkels</string>
-    <string name="map_showc_own">Eigen caches</string>
-    <string name="map_showc_found">Gevonden caches</string>
-    <string name="map_showc_disabled">Uitgeschakelde caches</string>
-    <string name="map_showc_archived">Gearchiveerde caches</string>
-    <string name="map_showc_offlinelog">Caches met offline log</string>
-    <string name="map_showwp_original">Originele waypoints</string>
-    <string name="map_showwp_parking">Parkeer waypoints</string>
-    <string name="map_showwp_visited">Bezochte waypoints</string>
-    <string name="map_show_track">GPX spoor/route tonen</string>
     <string name="init_renderthemefolder_synctolocal">Thema\'s synchroniseren</string>
     <string name="init_summary_renderthemefolder_synctolocal">Dit zal je thema\'s synchroniseren in een app-specifieke map om de prestaties van de kaartviewer te verbeteren ten koste van de opslagruimte van apparaat.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisatie van themamappen inschakelen</string>
@@ -1381,7 +1371,6 @@
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
     <string name="quick_settings_info">Enkele kaartinstellingen (kaartinstellingen, verbergen, routing) zijn verplaatst naar de nieuwe \"Snelle instellingen\" popup.\nJe kunt deze pop-up openen met behulp van het icoon in het midden onderin de kaart.</string>
-    <string name="map_show_in_map">Toon op kaart:</string>
     <!-- search -->
     <string name="search_bar_hint">Caches/trackables zoeken</string>
     <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
