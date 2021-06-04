@@ -15,14 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
+//mb/remove old vp import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.viewpagerindicator.TitlePageIndicator;
+// import com.viewpagerindicator.TitlePageIndicator;
 import org.apache.commons.lang3.tuple.Pair;
 
 /**
@@ -63,7 +63,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
     /**
      * The {@link TitlePageIndicator} for this activity.
      */
-    private TitlePageIndicator titleIndicator;
+//mb/remove old vp    private TitlePageIndicator titleIndicator;
 
     /**
      * The {@link SwipeRefreshLayout} for this activity. Might be null if page is not refreshable.
@@ -233,8 +233,10 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
 
+/* //mb/remove old vp
         titleIndicator = (TitlePageIndicator) findViewById(R.id.pager_indicator);
         titleIndicator.setViewPager(viewPager);
+*/
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
         if (swipeRefreshLayout != null) {
@@ -254,6 +256,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         if (pageSelectedListener != null) {
+/* //mb/remove old vp
             titleIndicator.setOnPageChangeListener(new OnPageChangeListener() {
                 @Override
                 public void onPageSelected(final int position) {
@@ -272,8 +275,8 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
                     }
                 }
             });
+*/
         }
-
         // switch to entry page (last used or 2)
         if (viewPagerAdapter.getCount() < startPageIndex) {
             for (int i = 0; i <= startPageIndex; i++) {
@@ -354,7 +357,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         // notify the indicator that the data has changed
-        titleIndicator.notifyDataSetChanged();
+//mb/remove old vp        titleIndicator.notifyDataSetChanged();
     }
 
     /**

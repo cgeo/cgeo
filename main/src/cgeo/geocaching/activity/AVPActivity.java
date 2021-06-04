@@ -1,14 +1,12 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
-
-import android.view.Menu;
+import cgeo.geocaching.utils.functions.Action1;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -17,29 +15,27 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.google.android.material.tabs.TabLayoutMediator;
-import org.apache.commons.lang3.StringUtils;
 
-public abstract class AVPActivity extends AppCompatActivity {
+public abstract class AVPActivity extends AbstractActionBarActivity {
     protected Map<Integer, AVPFragment> cache = new LinkedHashMap<>();
 
-    private ActionBar actionBar;
-    private String prefix;
     private int currentPageId;
+    // private int initialPageId; // gets set on every "setOrderedPages"
     private int[] orderedPages;
     private ViewPager2 viewPager = null;
+    private Action1<Integer> onPageChangeListener = null;
 
-    protected void createViewPager(final int currentPageId, final int[] orderedPages, final String prefix) {
-        this.currentPageId = currentPageId;
+    protected void createViewPager(final int initialPageId, final int[] orderedPages, final Action1<Integer> onPageChangeListener) {
+        this.currentPageId = initialPageId;
         setOrderedPages(orderedPages);
-        this.prefix = prefix;
+        this.onPageChangeListener = onPageChangeListener;
 
         setContentView(R.layout.avpactivity);
-        actionBar = getSupportActionBar();
 
         viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new ViewPagerAdapter(this));
         viewPager.registerOnPageChangeCallback(pageChangeCallback);
-        viewPager.setCurrentItem(pageIdToPosition(currentPageId));
+        viewPager.setCurrentItem(3 /*pageIdToPosition(currentPageId)*/);
 
         new TabLayoutMediator(findViewById(R.id.tab_layout), viewPager, (tab, position) -> tab.setText(getTitle(positionToPageId(position)))).attach();
     }
@@ -56,7 +52,9 @@ public abstract class AVPActivity extends AppCompatActivity {
         public void onPageSelected(final int position) {
         super.onPageSelected(position);
         currentPageId = positionToPageId(position);
-        setActionBarTitle();
+        if (onPageChangeListener != null) {
+            onPageChangeListener.call(currentPageId);
+        }
         }
 
         /*
@@ -67,12 +65,19 @@ public abstract class AVPActivity extends AppCompatActivity {
         */
     };
 
+    @SuppressWarnings("rawtypes")
     protected void setOrderedPages(final int[] orderedPages) {
         this.orderedPages = orderedPages;
+        for (AVPFragment fragment : cache.values()) {
+            fragment.notifyDataSetChanged();
+        }
         this.cache.clear();
+        if (viewPager != null) {
+            viewPager.setCurrentItem(pageIdToPosition(currentPageId));
+        }
     }
 
-    private int positionToPageId(final int position) {
+    public int positionToPageId(final int position) {
         return orderedPages[Math.max(0, Math.min(position, orderedPages.length - 1))];
     }
 
@@ -88,20 +93,9 @@ public abstract class AVPActivity extends AppCompatActivity {
         return 0;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        setActionBarTitle(); // set title here to avoid a race condition in onCreate/configure
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    protected abstract String getTitle(int page);
-    protected abstract AVPFragment getFragment(int page);
-
-    private void setActionBarTitle() {
-        if (actionBar != null) {
-            actionBar.setTitle((StringUtils.isNotBlank(prefix) ? prefix + " - " : "") + getTitle(currentPageId));
-        }
-    }
+    protected abstract String getTitle(int pageId);
+    @SuppressWarnings("rawtypes")
+    protected abstract AVPFragment getFragment(int pageId);
 
     private class ViewPagerAdapter extends FragmentStateAdapter {
         private final WeakReference<FragmentActivity> fragmentActivityWeakReference;
@@ -113,6 +107,7 @@ public abstract class AVPActivity extends AppCompatActivity {
 
         @Override
         @NonNull
+        @SuppressWarnings("rawtypes")
         public Fragment createFragment(final int position) {
             final int pageId = positionToPageId(position);
             AVPFragment fragment = cache.get(pageId);
@@ -131,11 +126,58 @@ public abstract class AVPActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressWarnings("rawtypes")
+    private void notifyAdapterDataSetChanged() {
+        final RecyclerView.Adapter adapter = viewPager.getAdapter();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    protected int getCurrentPageId() {
+        return currentPageId;
+    }
+
+    protected boolean isCurrentPage(final int pageId) {
+        return currentPageId == pageId;
+    }
+
+    @SuppressWarnings("rawtypes")
+    protected void reinitializePage(final int pageId) {
+        final AVPFragment fragment = cache.get(pageId);
+        if (fragment != null) {
+            fragment.notifyDataSetChanged();
+        }
+        notifyAdapterDataSetChanged();
+        cache.remove(pageId);
+    }
+
+    @SuppressWarnings("rawtypes")
+    protected void reinitializeViewPager() {
+        for (AVPFragment fragment : cache.values()) {
+            fragment.notifyDataSetChanged();
+        }
+        notifyAdapterDataSetChanged();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         cache.clear();
         viewPager.unregisterOnPageChangeCallback(pageChangeCallback);
+    }
+
+
+    // =======================================================================
+    // transition methods - probably to be replaced later
+    // =======================================================================
+
+    protected void setIsContentRefreshable(final boolean hey) {
+        // @todo mb: What to do with this?
+    }
+
+    public void pullToRefreshActionTrigger() {
+        // @todo mb: how to trigger that method?
     }
 
 }

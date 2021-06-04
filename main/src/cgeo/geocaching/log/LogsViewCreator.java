@@ -2,9 +2,10 @@ package cgeo.geocaching.log;
 
 import cgeo.geocaching.ImagesActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AVPFragment;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.network.SmileyImage;
-import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
@@ -17,10 +18,11 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +35,7 @@ import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
-public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCreator {
+public abstract class LogsViewCreator extends AVPFragment<LogsPageBinding> {
 
     protected final AbstractActionBarActivity activity;
 
@@ -42,16 +44,20 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
     }
 
     @Override
-    public ListView getDispatchedView(final ViewGroup parentView) {
+    public LogsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        return LogsPageBinding.inflate(inflater, container, false);
+    }
+
+    @Override
+    public void setContent() {
         if (!isValid()) {
-            return null;
+            return;
         }
 
         final List<LogEntry> logs = getLogs();
 
-        view = (ListView) activity.getLayoutInflater().inflate(R.layout.logs_page, parentView, false);
         addHeaderView();
-        view.setAdapter(new ArrayAdapter<LogEntry>(activity, R.layout.logs_item, logs) {
+        binding.getRoot().setAdapter(new ArrayAdapter<LogEntry>(activity, R.layout.logs_item, logs) {
 
             @Override
             @NonNull
@@ -73,9 +79,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
                 return rowView;
             }
         });
-        view.setOnScrollListener(new FastScrollListener(view));
-
-        return view;
+        binding.getRoot().setOnScrollListener(new FastScrollListener(binding.getRoot()));
     }
 
     protected void fillViewHolder(@SuppressWarnings("unused") final View convertView, final LogViewHolder holder, final LogEntry log) {

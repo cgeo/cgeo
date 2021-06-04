@@ -82,7 +82,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
                 final TextView countView = new TextView(activity);
                 countView.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels, ", "));
-                view.addHeaderView(countView, null, false);
+                binding.getRoot().addHeaderView(countView, null, false);
             }
         }
     }
@@ -91,7 +91,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         if (getLogs().isEmpty()) {
             final TextView countView = new TextView(activity);
             countView.setText(res.getString(R.string.log_empty_logbook));
-            view.addHeaderView(countView, null, false);
+            binding.getRoot().addHeaderView(countView, null, false);
         }
     }
 

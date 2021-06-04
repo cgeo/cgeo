@@ -1,10 +1,12 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AVPActivity;
+import cgeo.geocaching.activity.AVPFragment;
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
+import cgeo.geocaching.databinding.CachedetailImagesPageBinding;
 import cgeo.geocaching.databinding.TrackableDetailsViewBinding;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
@@ -20,7 +22,6 @@ import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.ImagesList;
@@ -48,12 +49,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.text.HtmlCompat;
-import androidx.core.widget.NestedScrollView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,10 +64,8 @@ import java.util.Locale;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 
-public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivity.Page> implements AndroidBeam.ActivitySharingInterface {
+public class TrackableActivity extends AVPActivity implements AndroidBeam.ActivitySharingInterface {
 
     public enum Page {
         DETAILS(R.string.detail),
@@ -75,9 +74,20 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
         @StringRes
         private final int resId;
+        private final int id;
 
         Page(@StringRes final int resId) {
             this.resId = resId;
+            this.id = ordinal();
+        }
+
+        static Page find(final int pageId) {
+            for (Page page : Page.values()) {
+                if (page.id == pageId) {
+                    return page;
+                }
+            }
+            return null;
         }
     }
 
@@ -196,7 +206,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         // If we have a newer Android device setup Android Beam for easy cache sharing
         AndroidBeam.enable(this, this);
 
-        createViewPager(0, position -> lazyLoadTrackableImages());
+        // @todo mb: createViewPager(0, position -> lazyLoadTrackableImages());
+        createViewPager(Page.DETAILS.id, getOrderedPages(), null);
+
         refreshTrackable(message);
     }
 
@@ -356,28 +368,35 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     @Override
-    protected PageViewCreator createViewCreator(final Page page) {
-        switch (page) {
-            case DETAILS:
-                return new DetailsViewCreator();
-            case LOGS:
-                return new TrackableLogsViewCreator(this);
-            case IMAGES:
-                return new ImagesViewCreator();
+    @SuppressWarnings("rawtypes")
+    protected AVPFragment getFragment(final int pageId) {
+        if (pageId == Page.DETAILS.id) {
+            return new DetailsViewCreator();
+        } else if (pageId == Page.LOGS.id) {
+            return new TrackableLogsViewCreator(this);
+        } else if (pageId == Page.IMAGES.id) {
+            return new ImagesViewCreator();
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
 
-    private class ImagesViewCreator extends AbstractCachingPageViewCreator<View> {
+    private static class ImagesViewCreator extends AVPFragment<CachedetailImagesPageBinding> {
 
         @Override
-        public View getDispatchedView(final ViewGroup parentView) {
-            view = getLayoutInflater().inflate(R.layout.cachedetail_images_page, parentView, false);
-            return view;
+        public CachedetailImagesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            return CachedetailImagesPageBinding.inflate(inflater, container, false);
         }
+
+        @Override
+        public void setContent() {
+            // @todo mb
+        }
+
     }
 
     private void loadTrackableImages() {
+        return;
+        /* @todo mb
         if (imagesList != null) {
             return;
         }
@@ -391,43 +410,49 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         }
         imagesList = new ImagesList(this, trackable.getGeocode(), null);
         createDisposables.add(imagesList.loadImages(imageView, trackable.getImages()));
+        */
     }
 
     /**
      * Start loading images only when on images tab
      */
     private void lazyLoadTrackableImages() {
-        if (isCurrentPage(Page.IMAGES)) {
+        if (isCurrentPage(Page.IMAGES.id)) {
             loadTrackableImages();
         }
     }
 
     @Override
-    protected String getTitle(final Page page) {
-        return res.getString(page.resId);
+    protected String getTitle(final int pageId) {
+        return this.getString(Page.find(pageId).resId);
     }
 
-    @Override
-    protected Pair<List<? extends Page>, Integer> getOrderedPages() {
-        final List<Page> pages = new ArrayList<>();
-        pages.add(Page.DETAILS);
+    protected int[] getOrderedPages() {
+        final List<Integer> pages = new ArrayList<>();
+        pages.add(Page.DETAILS.id);
         if (CollectionUtils.isNotEmpty(trackable.getLogs())) {
-            pages.add(Page.LOGS);
+            pages.add(Page.LOGS.id);
         }
         if (CollectionUtils.isNotEmpty(trackable.getImages())) {
-            pages.add(Page.IMAGES);
+            pages.add(Page.IMAGES.id);
         }
-        return new ImmutablePair<>(pages, 0);
+        final int[] result = new int[pages.size()];
+        for (int i = 0; i < pages.size(); i++) {
+            result[i] = pages.get(i);
+        }
+        return result;
     }
 
-    public class DetailsViewCreator extends AbstractCachingPageViewCreator<NestedScrollView> {
-        private TrackableDetailsViewBinding binding;
+    public class DetailsViewCreator extends AVPFragment<TrackableDetailsViewBinding> {
+
+        @Override
+        public TrackableDetailsViewBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            return TrackableDetailsViewBinding.inflate(getLayoutInflater(), container, false);
+        }
+
         @Override
         @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
-        public NestedScrollView getDispatchedView(final ViewGroup parentView) {
-            binding = TrackableDetailsViewBinding.inflate(getLayoutInflater(), parentView, false);
-            view = binding.getRoot();
-
+        public void setContent() {
             final CacheDetailsCreator details = new CacheDetailsCreator(TrackableActivity.this, binding.detailsList);
 
             // action bar icon
@@ -587,7 +612,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
                 binding.image.addView(trackableImage);
             }
-            return view;
         }
 
     }

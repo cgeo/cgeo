@@ -27,12 +27,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.util.Consumer;
 
 import java.io.InputStream;
@@ -78,7 +80,7 @@ public class AboutActivity extends AVPActivity {
     }
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Routing.connect();
@@ -96,7 +98,25 @@ public class AboutActivity extends AVPActivity {
             orderedPages[i] = pages[i].id;
         }
 
-        createViewPager(startPage, orderedPages, getString(R.string.about));
+        createViewPager(startPage, orderedPages, this::onPageChangeListener);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        setActionBarTitle(); // to avoid race conditions on first view creation
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void onPageChangeListener(final int currentPageId) {
+        setActionBarTitle();
+    }
+
+    private void setActionBarTitle() {
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            final String prefix = getString(R.string.about);
+            actionBar.setTitle((StringUtils.isNotBlank(prefix) ? prefix + " - " : "") + getTitle(getCurrentPageId()));
+        }
     }
 
     @Override
@@ -108,6 +128,7 @@ public class AboutActivity extends AVPActivity {
     }
 
     @Override
+    @SuppressWarnings("rawtypes")
     protected AVPFragment getFragment(final int pageId) {
         if (pageId == Page.VERSION.id) {
             return new VersionViewCreator();
@@ -123,15 +144,19 @@ public class AboutActivity extends AVPActivity {
         throw new IllegalStateException(); // cannot happen, when switch case is enum complete
     }
 
-    static class VersionViewCreator extends AVPFragment {
+    static class VersionViewCreator extends AVPFragment<AboutVersionPageBinding> {
 
         @Override
-        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        public AboutVersionPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            return AboutVersionPageBinding.inflate(getLayoutInflater(), container, false);
+        }
+
+        @Override
+        public void setContent() {
             final AboutActivity activity = (AboutActivity) activityWeakReference.get();
             if (activity == null) {
-                return null;
+                return;
             }
-            final AboutVersionPageBinding binding = AboutVersionPageBinding.inflate(getLayoutInflater(), container, false);
             binding.aboutVersionString.setText(Version.getVersionName(activity));
             setClickListener(binding.donate, "https://www.cgeo.org");
             if (StringUtils.isNotEmpty(BuildConfig.SPECIAL_BUILD)) {
@@ -164,19 +189,22 @@ public class AboutActivity extends AVPActivity {
             setClickListener(binding.faq, "https://faq.cgeo.org/");
             setClickListener(binding.github, "https://github.com/cgeo/cgeo/issues");
             binding.market.setOnClickListener(v -> ProcessUtils.openMarket(activity, activity.getPackageName()));
-            return binding.getRoot();
         }
     }
 
-    static class ChangeLogViewCreator extends AVPFragment {
+    static class ChangeLogViewCreator extends AVPFragment<AboutChangesPageBinding> {
 
         @Override
-        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        public AboutChangesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            return AboutChangesPageBinding.inflate(getLayoutInflater(), container, false);
+        }
+
+        @Override
+        public void setContent() {
             final Activity activity = activityWeakReference.get();
             if (activity == null) {
-                return null;
+                return;
             }
-            final AboutChangesPageBinding binding = AboutChangesPageBinding.inflate(getLayoutInflater(), container, false);
             final Markwon markwon = Markwon.create(activity);
 
             final String changelogMaster = FileUtils.getChangelogMaster(activity);
@@ -189,20 +217,23 @@ public class AboutActivity extends AVPActivity {
             final String versionRelease = FileUtils.getRawResourceAsString(activity, R.raw.version_release).trim();
             markwon.setMarkdown(binding.changelogRelease, "## " + (StringUtils.isNotBlank(versionRelease) ? versionRelease : getString(R.string.about_changelog_next_release)) + "\n\n" + FileUtils.getChangelogRelease(activity));
             binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(activity, "https://github.com/cgeo/cgeo/blob/master/main/res/raw/changelog_full.md"));
-            return binding.getRoot();
         }
     }
 
-    static class SystemViewCreator extends AVPFragment {
+    static class SystemViewCreator extends AVPFragment<AboutSystemPageBinding> {
 
         @Override
-        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        public AboutSystemPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            return AboutSystemPageBinding.inflate(getLayoutInflater(), container, false);
+        }
+
+        @Override
+        public void setContent() {
             final AboutActivity activity = (AboutActivity) activityWeakReference.get();
             if (activity == null) {
-                return null;
+                return;
             }
 
-            final AboutSystemPageBinding binding = AboutSystemPageBinding.inflate(getLayoutInflater(), container, false);
             binding.system.setText(R.string.about_system_collecting);
             binding.copy.setEnabled(false);
             binding.share.setEnabled(false);
@@ -223,18 +254,20 @@ public class AboutActivity extends AVPActivity {
             binding.system.setTextIsSelectable(true);
 
             binding.logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(activity));
-            return binding.getRoot();
         }
     }
 
-    static class LicenseViewCreator extends AVPFragment {
+    static class LicenseViewCreator extends AVPFragment<AboutLicensePageBinding> {
 
         @Override
-        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-            final AboutLicensePageBinding binding = AboutLicensePageBinding.inflate(getLayoutInflater(), container, false);
+        public AboutLicensePageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            return AboutLicensePageBinding.inflate(getLayoutInflater(), container, false);
+        }
+
+        @Override
+        public void setContent() {
             setClickListener(binding.license, "https://www.apache.org/licenses/LICENSE-2.0.html");
             binding.licenseText.setText(getRawResourceString(R.raw.license));
-            return binding.getRoot();
         }
 
         private String getRawResourceString(@SuppressWarnings("SameParameterValue") @RawRes final int resourceId) {
@@ -254,16 +287,20 @@ public class AboutActivity extends AVPActivity {
         }
     }
 
-    static class ContributorsViewCreator extends AVPFragment {
+    static class ContributorsViewCreator extends AVPFragment<AboutContributorsPageBinding> {
 
         @Override
-        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        public AboutContributorsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            return AboutContributorsPageBinding.inflate(getLayoutInflater(), container, false);
+        }
+
+        @Override
+        public void setContent() {
             final Activity activity = activityWeakReference.get();
             if (activity == null) {
-                return null;
+                return;
             }
 
-            final AboutContributorsPageBinding binding = AboutContributorsPageBinding.inflate(getLayoutInflater(), container, false);
             final Markwon markwon = Markwon.create(activity);
 
             markwon.setMarkdown(binding.aboutContributorsRecent, formatContributors(R.string.contributors_recent));
@@ -272,8 +309,6 @@ public class AboutActivity extends AVPActivity {
 
             final String indentedList = "   " + getString(R.string.components2).replace("\n", "\n  ");
             markwon.setMarkdown(binding.aboutComponents, getString(R.string.components).replace("%1", indentedList.substring(0, indentedList.length() - 2)));
-
-            return binding.getRoot();
         }
 
         private String checkRoles(final String s, final String roles, final char checkFor, final int infoId) {
