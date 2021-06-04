@@ -883,7 +883,6 @@
     <string name="map_live">Élő térkép</string>
     <string name="map_view_map">Térképek</string>
     <string name="map_dot_mode">Kompakt ikonok használata</string>
-    <string name="map_show_circles">Ládahatárok be</string>
     <string name="map_theme_select">Térképstílusok</string>
     <string name="map_theme_options">Térképstílus beállítások</string>
     <string name="map_live_enable">Élő mód</string>
