@@ -483,18 +483,31 @@
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
     </style>
-    <style name="InstallationWizardButtonFull" parent="InstallationWizardMarginsLR">
-        <item name="android:layout_width">match_parent</item>
+    <style name="InstallationWizardButtonOutlined" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+    <style name="InstallationWizardButtonFull" parent="InstallationWizardButtonOutlined">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_marginTop">12dp</item>
     </style>
-    <style name="InstallationWizardButtonFooter" parent="InstallationWizardMarginsLR">
+    <style name="InstallationWizardButtonFooter" parent="InstallationWizardButtonOutlined">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+    <style name="InstallationWizardButtonFooterSolid" parent="@style/Widget.MaterialComponents.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">12dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
         <item name="android:layout_marginBottom">12dp</item>
     </style>
     <style name="InstallationWizardTextViewBase" parent="InstallationWizardMarginsLR">
