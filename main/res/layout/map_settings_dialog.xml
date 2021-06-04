@@ -6,21 +6,13 @@
     android:orientation="vertical"
     android:paddingTop="8dp">
 
-    <TextView
-        android:id="@+id/show_hide_title"
-        style="@style/map_quicksettings_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="14dip"
-        android:text="@string/map_show_in_map" />
-
     <LinearLayout
-        android:id="@+id/map_settings_listview"
+        android:id="@+id/map_settings_columns"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:orientation="vertical" />
+        android:orientation="horizontal" />
 
     <RelativeLayout
         android:layout_width="match_parent"

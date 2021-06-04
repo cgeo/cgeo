@@ -442,12 +442,14 @@
         <item name="android:layout_marginBottom">-10dp</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
-    <style name="map_quicksettings_subtitle">
+    r<style name="map_quicksettings_subtitle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">6dip</item>
-        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:paddingTop">14dip</item>
+        <item name="android:paddingBottom">6dip</item>
+        <item name="android:paddingLeft">14dip</item>
         <item name="android:textSize">@dimen/textSize_headingSecondary</item>
+        <item name="android:textColor">@color/colorTextHeadline</item>
     </style>
 
     <!-- authorization styles -->

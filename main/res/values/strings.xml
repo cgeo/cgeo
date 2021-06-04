@@ -1485,16 +1485,16 @@
     <string name="map_view_map">Map view</string>
     <string name="map_rotation">Map rotation</string>
     <string name="map_dot_mode">Use compact icons</string>
-    <string name="map_show_circles">Show circles</string>
-    <string name="map_showc_own">Own caches</string>
-    <string name="map_showc_found">Found caches</string>
-    <string name="map_showc_disabled">Disabled caches</string>
-    <string name="map_showc_archived">Archived caches</string>
-    <string name="map_showc_offlinelog">Caches with Offline Log</string>
-    <string name="map_showwp_original">Original waypoints</string>
-    <string name="map_showwp_parking">Parking waypoints</string>
-    <string name="map_showwp_visited">Visited waypoints</string>
-    <string name="map_show_track">Show GPX track/route</string>
+    <string name="map_show_circles">Circles</string>
+    <string name="map_showc_own">Own</string>
+    <string name="map_showc_found">Found</string>
+    <string name="map_showc_disabled">Disabled</string>
+    <string name="map_showc_archived">Archived </string>
+    <string name="map_showc_offlinelog">Logged Offline</string>
+    <string name="map_showwp_original">Original</string>
+    <string name="map_showwp_parking">Parking</string>
+    <string name="map_showwp_visited">Visited</string>
+    <string name="map_show_track">GPX track/route</string>
     <string name="init_renderthemefolder_synctolocal">Synchronize themes</string>
     <string name="init_summary_renderthemefolder_synctolocal">This will synchronize your themes into an app-private folder to improve map viewer opening performance at the cost of some device storage space.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Turn on theme folder synchronization</string>
@@ -1519,7 +1519,9 @@
     <string name="map_gm_autorotation_disable">Disable map auto rotation?\n\nYou can enable it again using the Map rotation menu</string>
     <string name="quick_settings">Quick settings</string>
     <string name="quick_settings_info">Some map settings (Map settings, hide, routing) have been moved to the new \"Quick settings\" popup.\nYou can open this popup using the icon in the map\'s bottom center.</string>
-    <string name="map_show_in_map">Show on map:</string>
+    <string name="map_show_caches_title">Show Caches:</string>
+    <string name="map_show_waypoints_title">Show waypoints:</string>
+    <string name="map_show_other_title">Show other:</string>
 
     <!-- search -->
     <string name="search_bar_hint">Search caches/trackables</string>
