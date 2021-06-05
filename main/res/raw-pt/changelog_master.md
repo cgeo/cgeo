@@ -14,9 +14,9 @@
 - Novo: Permite a alteração do ícone atribuído, ao tocar sem soltar sobre o nome da cache, na janela pop-up (apenas em caches armazenadas)
 
 ### Gestor de Transferências
-- Change: Downloads will now completely happen in background, a notification is shown
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+- Alteração: As transferências agora decorrem, completamente, em segundo plano. Uma notificação é mostrada
+- Alteração: Os ficheiros transferidos com sucesso irão substituir automaticamente os ficheiros já existentes com o mesmo nome
+- Alteração: Se um mapa requer um determinado tema que ainda não esteja instalado, o c:geo também descarregará e instalará esse tema automaticamente
 
 ### Outro
 - Alteração: Reformulámos completamente os aspectos técnicos internos de personalização do c:geo para podermos usar alguns componentes mais modernos fornecidos pelo Android. Isto terá efeitos colaterais, alguns dos quais não intencionais. Por favor, reporte quaisquer erros ou falhas na nossa [página do GitHub](https://www.github.com/cgeo/cgeo/issues) ou entre em contacto com o suporte.
