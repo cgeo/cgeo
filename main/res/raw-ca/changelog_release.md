@@ -1,10 +1,10 @@
-### Cache details
+### Detalls del catxé
 
 
-### Map
+### Mapa
 
 
-### Integrated routing engine
+### Motor d’encaminament integrat
 
 
-### Other
+### Altres
