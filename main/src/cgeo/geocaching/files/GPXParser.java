@@ -411,7 +411,22 @@ abstract class GPXParser extends FileParser {
         registerTerraCachingExtensions(cacheParent);
         registerCgeoExtensions(cacheParent);
         registerOpenCachingExtensions(cacheParent);
+        registerGroundspeakExtensions(cacheParent);
 
+        try {
+            progressStream = new ProgressInputStream(stream);
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, StandardCharsets.UTF_8));
+            Xml.parse(new InvalidXMLCharacterFilterReader(reader), root.getContentHandler());
+            return DataStore.loadCaches(result, EnumSet.of(LoadFlag.DB_MINIMAL));
+        } catch (final SAXException e) {
+            throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
+        }
+    }
+
+    /**
+     * Add listeners for groundspeak extensions
+     */
+    private void registerGroundspeakExtensions(final Element cacheParent) {
         // 3 different versions of the GC schema
         for (final String nsGC : GROUNDSPEAK_NAMESPACE) {
             // waypoints.cache
@@ -609,15 +624,6 @@ abstract class GPXParser extends FileParser {
 
             // waypoint.cache.logs.log.text
             gcLog.getChild(nsGC, "text").setEndTextElementListener(logText -> logBuilder.setLog(validate(logText)));
-        }
-
-        try {
-            progressStream = new ProgressInputStream(stream);
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, StandardCharsets.UTF_8));
-            Xml.parse(new InvalidXMLCharacterFilterReader(reader), root.getContentHandler());
-            return DataStore.loadCaches(result, EnumSet.of(LoadFlag.DB_MINIMAL));
-        } catch (final SAXException e) {
-            throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
     }
 
