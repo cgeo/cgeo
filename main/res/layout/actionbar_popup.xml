@@ -24,7 +24,7 @@
         android:id="@+id/setAsTarget"
         style="@style/action_bar_action"
         android:longClickable="true"
-        android:src="@drawable/ic_menu_publish" />
+        android:src="@drawable/ic_menu_near_me" />
 
     <View
         android:id="@+id/setAsTargetSep"

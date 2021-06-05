@@ -10,9 +10,11 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -86,6 +88,15 @@ public class MapProviderFactory {
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
         parentMenu.add(R.id.menu_group_map_sources, R.id.menu_download_offlinemap, mapSources.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
+    }
+
+    public static CheckBox createLocSwitchMenuItem(final Activity activity, final Menu menu) {
+        final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
+        final CheckBox locSwitch = new CheckBox(new ContextThemeWrapper(activity, R.style.actionBarStyle));
+        locSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
+        item.setActionView(locSwitch);
+
+        return locSwitch;
     }
 
     @Nullable

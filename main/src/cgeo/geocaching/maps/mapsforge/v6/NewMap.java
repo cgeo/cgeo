@@ -345,11 +345,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         MapProviderFactory.addMapviewMenuItems(this, menu);
         MapProviderFactory.addMapViewLanguageMenuItems(menu);
 
-        final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
-        myLocSwitch = new CheckBox(this);
-        myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
-        item.setActionView(myLocSwitch);
-        initMyLocationSwitchButton(myLocSwitch);
+        initMyLocationSwitchButton(MapProviderFactory.createLocSwitchMenuItem(this, menu));
         return result;
     }
 
