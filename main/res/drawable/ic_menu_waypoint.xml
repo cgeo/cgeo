@@ -3,8 +3,7 @@
     android:height="24dp"
     android:viewportHeight="24"
     android:viewportWidth="24"
-    android:tint="?android:textColorPrimary"
-    android:alpha="@dimen/icon_alpha">
+    android:tint="?android:textColorPrimary">
   <path
       android:fillColor="#FF000000"
       android:pathData="m7 1.5c-3.04 0-5.5 2.46-5.5 5.5v10c0 3.04 2.46 5.5 5.5 5.5h10c3.04 0 5.5-2.46 5.5-5.5v-10c0-3.04-2.46-5.5-5.5-5.5h-10zm0 1h10c2.5 0 4.5 2 4.5 4.5v10c0 2.5-2 4.5-4.5 4.5h-10c-2.5 0-4.5-2-4.5-4.5v-10c0-2.5 2-4.5 4.5-4.5z"/>
