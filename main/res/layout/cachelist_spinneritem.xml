@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="?attr/spinnerDropDownItemStyle"
     android:layout_width="match_parent"
-    android:layout_height="?attr/dropdownListPreferredItemHeight"
+    android:layout_height="?attr/listPreferredItemHeight"
     android:layout_gravity="left|center_vertical"
     android:minHeight="?attr/dropdownListPreferredItemHeight"
     android:orientation="vertical"
