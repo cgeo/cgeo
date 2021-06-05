@@ -1350,7 +1350,6 @@
     <string name="map_showc_own">Omat</string>
     <string name="map_showc_found">Löydetty</string>
     <string name="map_showc_disabled">Ei käytössä</string>
-    <string name="map_showc_archived">Arkistoitu </string>
     <string name="map_showc_offlinelog">Kirjattu offline-tilassa</string>
     <string name="map_showwp_original">Alkuperäinen</string>
     <string name="map_showwp_parking">Pysäköinti</string>
