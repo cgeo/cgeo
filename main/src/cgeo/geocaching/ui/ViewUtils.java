@@ -130,7 +130,9 @@ public class ViewUtils {
                 final TextView tv = new TextView(ctx);
                 tv.setText(itemText);
                 tv.setMaxLines(1);
-                if (APP_RESSOURCES != null) {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    tv.setTextColor(ctx.getColor(R.color.colorText));
+                } else if (APP_RESSOURCES != null) {
                     tv.setTextColor(APP_RESSOURCES.getColor(R.color.colorText));
                 }
                 if (DEBUG_LAYOUT) {
