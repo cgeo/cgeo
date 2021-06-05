@@ -1347,6 +1347,15 @@
     <string name="map_view_map">Kaart weergave</string>
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
+    <string name="map_show_circles">Cirkels</string>
+    <string name="map_showc_own">Eigen</string>
+    <string name="map_showc_found">Gevonden</string>
+    <string name="map_showc_disabled">Uitgeschakeld</string>
+    <string name="map_showc_offlinelog">Offline gelogd</string>
+    <string name="map_showwp_original">Origineel</string>
+    <string name="map_showwp_parking">Parkeerplaats</string>
+    <string name="map_showwp_visited">Bezocht</string>
+    <string name="map_show_track">GPX spoor/route</string>
     <string name="init_renderthemefolder_synctolocal">Thema\'s synchroniseren</string>
     <string name="init_summary_renderthemefolder_synctolocal">Dit zal je thema\'s synchroniseren in een app-specifieke map om de prestaties van de kaartviewer te verbeteren ten koste van de opslagruimte van apparaat.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisatie van themamappen inschakelen</string>
@@ -1371,6 +1380,9 @@
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
     <string name="quick_settings_info">Enkele kaartinstellingen (kaartinstellingen, verbergen, routing) zijn verplaatst naar de nieuwe \"Snelle instellingen\" popup.\nJe kunt deze pop-up openen met behulp van het icoon in het midden onderin de kaart.</string>
+    <string name="map_show_caches_title">Toon caches:</string>
+    <string name="map_show_waypoints_title">Toon waypoints:</string>
+    <string name="map_show_other_title">Toon andere:</string>
     <!-- search -->
     <string name="search_bar_hint">Caches/trackables zoeken</string>
     <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
@@ -1898,7 +1910,14 @@
     <string name="number_input_err_boundarymax">De ingevoerde waarde is te groot - herstel naar maximale waarde</string>
     <string name="number_input_err_format">Ongeldig numeriek formaat</string>
     <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">Nabijheidsmeldingen</string>
+    <string name="notification_channel_proximity_description">gebruikt voor het weergeven van caches in de buurt</string>
+    <string name="notification_channel_foreground_name">voorgrondservice</string>
+    <string name="notification_channel_foreground_description">melding wordt getoond terwijl c:geo werk op de achtergrond doet</string>
+    <string name="notification_channel_downloader_name">c:geo downloader</string>
+    <string name="notification_channel_downloader_description">resultaat meldingen voor downloads (bijv. offline kaarten)</string>
     <string name="notification_proximity_title">c:geo nabijheidsmelding</string>
+    <string name="notification_download_receiver_title">Download importeren</string>
     <!-- individual routes -->
     <string name="individual_route">Individuele route</string>
     <string name="individual_route_added">toegevoegd aan route</string>
