@@ -405,13 +405,13 @@ abstract class GPXParser extends FileParser {
 
         // for GPX 1.0, cache info comes from waypoint node (so called private children)
         // for GPX 1.1 from extensions node
-        final Element cacheParent = getCacheParent(waypoint);
-
-        registerGsakExtensions(cacheParent);
-        registerTerraCachingExtensions(cacheParent);
-        registerCgeoExtensions(cacheParent);
-        registerOpenCachingExtensions(cacheParent);
-        registerGroundspeakExtensions(cacheParent);
+        final Element extensionNode = getNodeForExtension(waypoint);
+        if (extensionNode != null) {
+            registerExtensions(extensionNode);
+        } else {
+            //  only to support other formats for GPX1.1, standard is extension
+            registerExtensions(waypoint);
+        }
 
         try {
             progressStream = new ProgressInputStream(stream);
@@ -421,6 +421,14 @@ abstract class GPXParser extends FileParser {
         } catch (final SAXException e) {
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
+    }
+
+    private void registerExtensions(@NonNull final Element cacheParent) {
+        registerGsakExtensions(cacheParent);
+        registerTerraCachingExtensions(cacheParent);
+        registerCgeoExtensions(cacheParent);
+        registerOpenCachingExtensions(cacheParent);
+        registerGroundspeakExtensions(cacheParent);
     }
 
     /**
@@ -860,11 +868,11 @@ abstract class GPXParser extends FileParser {
      * GPX 1.0 and 1.1 use different XML elements to put the cache into, therefore needs to be overwritten in the
      * version specific subclasses
      */
-    protected abstract Element getCacheParent(Element waypoint);
+    protected abstract @Nullable Element getNodeForExtension(@NonNull final Element waypoint);
 
-    protected abstract void registerUrlAndUrlName(Element waypoint);
+    protected abstract void registerUrlAndUrlName(@NonNull Element waypoint);
 
-    protected abstract void registerScriptUrl(Element element);
+    protected abstract void registerScriptUrl(@NonNull Element element);
 
     protected static String validate(final String input) {
         if ("nil".equalsIgnoreCase(input)) {
