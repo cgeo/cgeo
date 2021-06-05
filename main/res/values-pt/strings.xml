@@ -553,6 +553,7 @@
     <string name="debug_user_error_report_title">Reportar um problema</string>
     <string name="debug_user_error_errortext">Ocorreu um problema inesperado que gostaríamos que nos reportasse:</string>
     <string name="debug_user_error_explain_options">Ajude-nos a corrigir problemas do c:geo ao reportá-los por e-mail, incluindo as informações do sistema e o ficheiro de depuração.\nPor favor, inclua no mail a descrição detalhada do erro!\n\nAntes de enviar um mail, por favor consulte as nossas \"FAQ\" (Perguntas Frequentes) e/ou verifique nas páginas das redes sociais em que temos presença, por problemas que já sejam conhecidos.\nOutras opções de contacto podem ser encontradas em \'Acerca do c:geo\'</string>
+    <string name="debug_current_downloads">Transferências em curso</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Abrir definições?</string>
     <string name="settings_title_services">Serviços</string>
@@ -1346,6 +1347,15 @@
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
+    <string name="map_show_circles">Círculos</string>
+    <string name="map_showc_own">Minhas</string>
+    <string name="map_showc_found">Encontradas</string>
+    <string name="map_showc_disabled">Desactivadas</string>
+    <string name="map_showc_offlinelog">Registadas Offline</string>
+    <string name="map_showwp_original">Originais</string>
+    <string name="map_showwp_parking">Estacionamento</string>
+    <string name="map_showwp_visited">Visitados</string>
+    <string name="map_show_track">Percurso/rota GPX</string>
     <string name="init_renderthemefolder_synctolocal">Sincronizar temas</string>
     <string name="init_summary_renderthemefolder_synctolocal">Isto sincronizará os seus temas numa pasta privada da aplicação para melhorar o desempenho de abertura de mapas, à custa de algum espaço de armazenamento do dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronização da pasta de temas</string>
@@ -1370,6 +1380,9 @@
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
     <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
+    <string name="map_show_caches_title">Mostrar Caches:</string>
+    <string name="map_show_waypoints_title">Mostrar pontos adicionais:</string>
+    <string name="map_show_other_title">Mostrar outro:</string>
     <!-- search -->
     <string name="search_bar_hint">Pesquisar caches/trackables</string>
     <string name="search_bar_desc">Caches (código GC, palavra-chave), Trackables (código TB)</string>
@@ -1897,7 +1910,14 @@
     <string name="number_input_err_boundarymax">O valor introduzido é demasiado grande - redefinido para o valor máximo</string>
     <string name="number_input_err_format">Formato de número inválido</string>
     <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">notificações de proximidade</string>
+    <string name="notification_channel_proximity_description">utilizado para mostrar caches próximas</string>
+    <string name="notification_channel_foreground_name">serviço em primeiro plano</string>
+    <string name="notification_channel_foreground_description">a notificação é exibida enquanto c:geo está a realizar trabalho em segundo plano</string>
+    <string name="notification_channel_downloader_name">gestor de transferências c:geo</string>
+    <string name="notification_channel_downloader_description">notificações acerca das transferências (ex: mapas offline)</string>
     <string name="notification_proximity_title">notificação de proximidade</string>
+    <string name="notification_download_receiver_title">A importar transferência</string>
     <!-- individual routes -->
     <string name="individual_route">Rota individual</string>
     <string name="individual_route_added">adicionado à rota</string>
