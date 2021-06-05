@@ -1351,7 +1351,6 @@
     <string name="map_showc_own">Benim</string>
     <string name="map_showc_found">Bulduğum</string>
     <string name="map_showc_disabled">Devredışı</string>
-    <string name="map_showc_archived">Arşivenlendi </string>
     <string name="map_showc_offlinelog">Çevrimdışı Kaydedildi</string>
     <string name="map_showwp_original">Orijinal</string>
     <string name="map_showwp_parking">Park alanı</string>
@@ -1376,6 +1375,7 @@
     <string name="map_select_multiple_items">Öğe seç</string>
     <string name="map_routing">Yönlendirme</string>
     <string name="map_routing_activate_title">Yönlendirmeyi aktifleştir</string>
+    <string name="map_routing_activate">Yönlendirme motorları aktif olmadıkları için bazı yönlendirme modları çalışmamaktadır.\n\nc:geo\'nun dahili yönlendirme motorunu aktive edip yönlendirme verisini indirmek istiyor musunuz?</string>
     <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
     <string name="map_gm_autorotation_disable">Otomatik harita döndürmesini devre dışı bırakılsın mı?\n\nHarita döndürme menüsünü kullanarak tekrardan etkinleştirebilirsiniz</string>
     <string name="quick_settings">Hızlı ayarlar</string>
@@ -1916,6 +1916,7 @@
     <string name="notification_channel_downloader_name">c:geo indirici</string>
     <string name="notification_channel_downloader_description">indirme sonuç bildirimleri ( ör: çevrimdışı haritalar)</string>
     <string name="notification_proximity_title">c:geo yakınlık bildirimi</string>
+    <string name="notification_download_receiver_title">İndirmeyi dışa aktarma</string>
     <!-- individual routes -->
     <string name="individual_route">Özel rota</string>
     <string name="individual_route_added">rotaya eklendi</string>
@@ -2083,6 +2084,7 @@
     <string name="wizard_advanced_offlinemaps_label">Çevrimdışı haritalar</string>
     <string name="wizard_advanced_offlinemaps_info">Bu sayfa, kullanılması isteğe bağlı bazı gelişmiş ayarları içerir.\n\nc:geo, harita dosyalarını çevrim dışı kullanım için indirebilir.</string>
     <string name="wizard_advanced_routing_label">Çevrimdışı yönlendirmeyi aktive et</string>
+    <string name="wizard_advanced_routing_info">c:geo\'nun eksik yönlendirme verilerini otomatik indirebilen dahili bir çevrimdışı yönlendirme motoru bulunmaktadır.</string>
     <string name="wizard_advanced_restore_label">Geri Yükle</string>
     <string name="wizard_advanced_restore_info">Eğer daha önceki kurulumdan kalan bir yedeğiniz varsa, ayarlarınızı ve/veya geocache verilerinizi yenileyebilirsiniz.</string>
     <string name="status_not_ok">HATA</string>
