@@ -3,7 +3,6 @@
     android:height="24dp"
     android:viewportHeight="24"
     android:viewportWidth="24"
-    android:tint="?android:textColorPrimary"
-    android:alpha="@dimen/icon_alpha">
+    android:tint="?android:textColorPrimary">
     <path android:fillColor="#FF000000" android:pathData="M12,18.4A6.4,6.4 0,0 1,5.6 12,6.4 6.4,0 0,1 12,5.6 6.4,6.4 0,0 1,18.4 12,6.4 6.4,0 0,1 12,18.4M12,4a8,8 0,0 0,-8 8,8 8,0 0,0 8,8 8,8 0,0 0,8 -8,8 8,0 0,0 -8,-8zM14.5,9.5 L12,0 9.5,9.5 0,12 9.5,14.5 12,24 14.5,14.5 24,12 14.5,9.5"/>
 </vector>
