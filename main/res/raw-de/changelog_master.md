@@ -14,9 +14,9 @@
 - Neu: Erlaube das Ändern des zugewiesenen Symbols im Popup der Cache-Details durch langes Klicken (nur gespeicherte Caches)
 
 ### Downloader
-- Change: Downloads will now completely happen in background, a notification is shown
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+- Änderung: Downloads werden nun komplett im Hintergrund durchgeführt, eine Benachrichtigung wird angezeigt
+- Änderung: Erfolgreich heruntergeladene Dateien überschreiben Dateien mit demselben Namen
+- Änderung: Wenn eine Karte ein bestimmtes Kartendesign benötigt, wird dieses bei Bedarf automatisch heruntergeladen
 
 ### Sonstiges
 - Änderung: Wir haben interne technische Aspekte der graphischen Oberfläche von c:geo komplett überarbeitet, um einige modernere Komponenten von Android nutzen zu können. Dies wird einige Nebenwirkungen haben, von denen einige unbeabsichtigt sind. Bitte berichte Fehler oder Unschönheiten entweder auf unserer [GitHub-Seite](https://www.github.com/cgeo/cgeo/issues) oder über unseren Support.
