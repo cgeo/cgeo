@@ -24,6 +24,8 @@
 
     <style name="checkboxStyle" parent="@style/Widget.MaterialComponents.CompoundButton.CheckBox">
         <item name="android:minHeight">@dimen/radioButtonCheckboxPreferredItemHeight</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="checkbox_full">

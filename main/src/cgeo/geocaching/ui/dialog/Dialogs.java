@@ -43,6 +43,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -1075,6 +1076,10 @@ public final class Dialogs {
 
     public static AlertDialog.Builder newBuilder(final Context context) {
         return new MaterialAlertDialogBuilder(newContextThemeWrapper(context));
+    }
+
+    public static AlertDialog.Builder newBuilder(final Context context, final @StyleRes int resId) {
+        return new MaterialAlertDialogBuilder(newContextThemeWrapper(context), resId);
     }
 
     public static ContextThemeWrapper newContextThemeWrapper(final Context context) {
