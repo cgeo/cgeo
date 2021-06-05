@@ -6,15 +6,16 @@
 
 ### Kaart
 - Nieuw: Bij het maken van een door de gebruiker gedefinieerde cache tijdens het weergeven van een kaart uit een lijst: Bied gebruiker aan om een nieuwe cache op te slaan in de huidige lijst (in plaats van de standaardlijst voor caches die door de gebruiker zijn gedefinieerd)
-- New: Separate "own" and "found" filters in map quick settings
-- Change: Additionally show cache name in poup details
+- Nieuw: Scheid "eigen" en "gevonden" filters in snelle kaartinstellingen
+- Wijziging: Ook cachenaam weergeven in de popup details
 
 ### Cache details
 - Nieuw: Maak gebruik van Google translate in-app vertalingspopup
 - Nieuw: Aanpassen van het toegewezen icoon in cache details popup via lange tik (alleen opgeslagen caches)
 
 ### Downloader
-- Wijziging: Bestanden die met succes gedownload zijn overschrijven de bestaande bestanden met dezelfde naam
+- Wijziging: Downloads zullen nu volledig plaatsvinden in de achtergrond, er wordt een melding getoond
+- Wijziging: Bestanden die met succes gedownload zijn zullen bestaande bestanden met dezelfde naam overschrijven
 - Wijziging: Als een kaart een bepaald thema vereist dat nog niet is geïnstalleerd zal c:geo dit thema automatisch downloaden en installeren
 
 ### Other

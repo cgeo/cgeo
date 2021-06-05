@@ -980,7 +980,6 @@
     <string name="map_live">Mapa activo</string>
     <string name="map_view_map">Elegir mapa</string>
     <string name="map_dot_mode">Usar iconos pequeños</string>
-    <string name="map_show_circles">Mostrar círculos</string>
     <string name="init_hidewp">Ocultar waypoints</string>
     <string name="init_summary_hidewp_original">Ocultar waypoints originales en el mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar waypoints de estacionamiento en el mapa</string>
@@ -1440,7 +1439,7 @@ Nombre de archivo:%2$s</string>
     <string name="storage_permission_request_explanation">c:geo escribirá datos en el almacenamiento de tu teléfono o tarjeta SD en el momento en que guardes geocachés para su uso sin conexión. Además c:geo utilizará el almacenamiento de tu teléfono para importar y exportar archivos y leer mapas sin conexión. No puede ser usado sin este permiso.</string>
     <!-- colors -->
     <!-- number input -->
-    <!-- text notification channel infos & proximity notification title -->
+    <!-- notification / channel texts -->
     <!-- individual routes -->
     <string name="individual_route_error_toggling_waypoint">error alternando waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en modo de un solo waypoint</string>

@@ -512,7 +512,7 @@
     <string name="cache_filter_status_select_only_own_yes">Pouze vlastněné</string>
     <string name="cache_filter_status_select_only_own_no">Pouze nevlastněné</string>
     <string name="cache_filter_status_exclude_active">Vyloučit aktivní</string>
-    <string name="cache_filter_status_exclude_disabled">Vyloučit zakázané</string>
+    <string name="cache_filter_status_exclude_disabled">Vyloučit deaktivované</string>
     <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
     <string name="cache_filter_log_entry_foundby">Nalezené kým:</string>
     <string name="cache_filter_log_entry_logtext">Text logu:</string>
@@ -557,6 +557,7 @@
     <string name="debug_user_error_report_title">Nahlásit problém</string>
     <string name="debug_user_error_errortext">Došlo k neočekávanému problému a rádi bychom vás požádali, abyste nám jej nahlásili:</string>
     <string name="debug_user_error_explain_options">Pomozte nám vyřešit problémy s c:geo tím, že je nahlásíte e-mailem společně se systémovými informacemi a záznamem chyb c:geo.\nK e-mailu vždy prosím uveďte také podrobný popis chyby.\n\nPřed odesláním e-mailu si prosím také přečtěte naše FAQ a/nebo přítomnost řešení známých problémů na sociálních médiích.\nOstatní možnosti kontaktu naleznete v \'O aplikaci\'</string>
+    <string name="debug_current_downloads">Aktuální stahování</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otevřít nastavení?</string>
     <string name="settings_title_services">Služby</string>
@@ -1211,7 +1212,7 @@
     <string name="cache_never_found">Nikdy nenalezena</string>
     <string name="cache_found_last_30_days">Nalezeno za posledních 30 dní</string>
     <string name="cache_status_archived">Archivována</string>
-    <string name="cache_status_disabled">Deaktivována</string>
+    <string name="cache_status_disabled">Deaktivovaná</string>
     <string name="cache_status_active">Aktivní</string>
     <string name="cache_status_premium">Pouze pro prémiové uživatele</string>
     <string name="cache_status_not_premium">Přístupná všem uživatelům</string>
@@ -1370,16 +1371,16 @@
     <string name="map_view_map">Typ mapy…</string>
     <string name="map_rotation">Otáčení mapy</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
-    <string name="map_show_circles">Zobrazit kruhy</string>
-    <string name="map_showc_own">Vlastní kešky</string>
-    <string name="map_showc_found">Nalezené kešky</string>
-    <string name="map_showc_disabled">Deaktivované kešky</string>
-    <string name="map_showc_archived">Archivované kešky</string>
-    <string name="map_showc_offlinelog">Kešky s offline logem</string>
-    <string name="map_showwp_original">Původní trasové body</string>
-    <string name="map_showwp_parking">Parkovací místa</string>
-    <string name="map_showwp_visited">Navštívené trasové body</string>
-    <string name="map_show_track">Zobrazit GPX stopu/trasu</string>
+    <string name="map_show_circles">Kruhy</string>
+    <string name="map_showc_own">Vlastní</string>
+    <string name="map_showc_found">Nalezené</string>
+    <string name="map_showc_disabled">Deaktivované</string>
+    <string name="map_showc_archived">Archivované</string>
+    <string name="map_showc_offlinelog">Zalogované offline</string>
+    <string name="map_showwp_original">Původní</string>
+    <string name="map_showwp_parking">Parkování</string>
+    <string name="map_showwp_visited">Navštívené</string>
+    <string name="map_show_track">GPX stopa/trasa</string>
     <string name="init_renderthemefolder_synctolocal">Synchronizovat motivy</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tím se synchronizují vaše motivy do soukromé složky aplikace, aby se zlepšil výkon otevírání prohlížeče map za cenu nějakého úložného prostoru zařízení.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnout synchronizaci složky s motivy</string>
@@ -1404,7 +1405,9 @@
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
     <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, směrování) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
-    <string name="map_show_in_map">Zobrazit na mapě:</string>
+    <string name="map_show_caches_title">Zobrazit kešky:</string>
+    <string name="map_show_waypoints_title">Zobrazit trasové body:</string>
+    <string name="map_show_other_title">Zobrazit ostatní:</string>
     <!-- search -->
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
     <string name="search_bar_desc">Kešky (GC-kód, klíčové slovo), sledovatelné předměty (TB-kód)</string>
@@ -1957,10 +1960,15 @@
     <string name="number_input_err_boundarymin">Zadaná hodnota je příliš malá – obnoveno na min. hodnotu</string>
     <string name="number_input_err_boundarymax">Zadaná hodnota je příliš velká – obnoveno na max. hodnotu</string>
     <string name="number_input_err_format">Neplatný formát čísla</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo oznámení</string>
-    <string name="notification_channel_description">oznámení z aplikace c:geo</string>
-    <string name="proximity_notification_title">c:geo upozornění na vzdálenost</string>
+    <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">oznámení o přiblížení</string>
+    <string name="notification_channel_proximity_description">slouží k zobrazení blízkých kešek</string>
+    <string name="notification_channel_foreground_name">služba v popředí</string>
+    <string name="notification_channel_foreground_description">oznámení se zobrazí, když aplikace c:geo pracuje na pozadí</string>
+    <string name="notification_channel_downloader_name">c:geo downloader</string>
+    <string name="notification_channel_downloader_description">oznámení o výsledcích stahování (např. offline mapy)</string>
+    <string name="notification_proximity_title">c:geo upozornění na vzdálenost</string>
+    <string name="notification_download_receiver_title">Importování stahování</string>
     <!-- individual routes -->
     <string name="individual_route">Individuální trasa</string>
     <string name="individual_route_added">přidáno do trasy</string>

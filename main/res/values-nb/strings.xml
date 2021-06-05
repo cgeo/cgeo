@@ -1187,13 +1187,6 @@
     <string name="map_view_map">Kart</string>
     <string name="map_rotation">Kartrotasjon</string>
     <string name="map_dot_mode">Bruk kompakte ikon</string>
-    <string name="map_show_circles">Vis sirkler</string>
-    <string name="map_showc_disabled">Deaktiverte cacher</string>
-    <string name="map_showc_archived">Arkiverte cacher</string>
-    <string name="map_showwp_original">Opprinnelige veipunkter</string>
-    <string name="map_showwp_parking">Parkeringsveipunkter</string>
-    <string name="map_showwp_visited">Besøkte veipunkter</string>
-    <string name="map_show_track">Vis GPX spor/rute</string>
     <string name="init_hidewp">Skjul veipunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale veipunkter på kartet</string>
     <string name="init_summary_hidewp_parking">Skjul parkeringsveipunkter på kartet</string>
@@ -1209,7 +1202,6 @@
     <string name="map_gm_autorotation_disable">Deaktivere kartrotasjon?\n\nDu kan aktivere det på nytt i menyen for kartrotasjon</string>
     <string name="quick_settings">Hurtiginnstillinger</string>
     <string name="quick_settings_info">Noen kartinnstillinger (Kartinnstillinger, skjul, ruting) er flyttet til det nye \"Hurtiginnstillinger\"-vinduet.\nDu kan åpne dette vinduet ved å bruke ikonet i nederst i midten av kartet.</string>
-    <string name="map_show_in_map">Vis på kart:</string>
     <!-- search -->
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_desc">Cacher (GC-kode, nøkkelord). Sporbare (TB-kode)</string>
@@ -1721,10 +1713,8 @@
     <string name="number_input_err_boundarymin">Verdien er for lav - settes til minimumsverdien</string>
     <string name="number_input_err_boundarymax">Verdien er for stor - settes til maksimalverdien</string>
     <string name="number_input_err_format">Feil tallformat</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo-varslinger</string>
-    <string name="notification_channel_description">varslinger fra c:geo-appen</string>
-    <string name="proximity_notification_title">c:geo nærhetsvarsling</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">c:geo nærhetsvarsling</string>
     <!-- individual routes -->
     <string name="individual_route">Individuell rute</string>
     <string name="individual_route_added">Legg til i ruten</string>

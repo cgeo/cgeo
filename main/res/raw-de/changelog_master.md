@@ -14,12 +14,13 @@
 - Neu: Erlaube das Ändern des zugewiesenen Symbols im Popup der Cache-Details durch langes Klicken (nur gespeicherte Caches)
 
 ### Downloader
+- Änderung: Downloads werden nun komplett im Hintergrund durchgeführt, eine Benachrichtigung wird angezeigt
 - Änderung: Erfolgreich heruntergeladene Dateien überschreiben Dateien mit demselben Namen
 - Änderung: Wenn eine Karte ein bestimmtes Kartendesign benötigt, wird dieses bei Bedarf automatisch heruntergeladen
 
 ### Sonstiges
 - Änderung: Wir haben interne technische Aspekte der graphischen Oberfläche von c:geo komplett überarbeitet, um einige modernere Komponenten von Android nutzen zu können. Dies wird einige Nebenwirkungen haben, von denen einige unbeabsichtigt sind. Bitte berichte Fehler oder Unschönheiten entweder auf unserer [GitHub-Seite](https://www.github.com/cgeo/cgeo/issues) oder über unseren Support.
-- New: Support day / night mode from system (optional)
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+- Neu: Verwende Tag/Nacht-Modus des Systems (optional)
+- Neu: Lesezeichenlisten von geocaching.com herunterladen - siehe "Listen / Pocket-Queries" im Hauptmenü
+- Neu: Ignorier-Funktion für geocaching.su
+- Änderung: Nicht mehr gepflegte RMAPS-Navigations-App entfernt

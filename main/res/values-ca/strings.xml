@@ -34,6 +34,29 @@
     <string name="advlab">Adventure Lab Catxé</string>
     <string name="userdefined">Catxé definit per l’usuari</string>
     <string name="unknown">Desconegut</string>
+    <string name="all_types_short">Tots</string>
+    <string name="traditional_short">Tradicional</string>
+    <string name="multi_short">Multi</string>
+    <string name="mystery_short">Misteri</string>
+    <string name="letterbox_short">Letter</string>
+    <string name="event_short">Trobada</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Earth</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webcam</string>
+    <string name="virtual_short">Virtual</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Comunitat</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">GC HQ Cel</string>
+    <string name="gps_short">GPS Exhibit</string>
+    <string name="block_short">GCHQ Block</string>
+    <string name="locationless_short">Locationless</string>
+    <string name="advlab_short">Adv Lab</string>
+    <string name="userdefined_short">Definit per l\'usuari</string>
+    <string name="unknown_short">Desconegut</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
     <string name="cache_size_small">Petit</string>
@@ -155,7 +178,10 @@
     <string name="log_image_scale_option_noscaling">Sense escala</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nEscalat/Comprimit:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Imatge</string>
+    <string name="datetime_clear_button">Esborra</string>
+    <string name="datetime_nodateset_display">No hi ha data fixada</string>
     <!-- translation -->
+    <string name="translate">Tradueix</string>
     <string name="translate_to_sys_lang">Tradueix a %s</string>
     <string name="translate_to_english">Tradueix a l\'anglès</string>
     <string name="translate_length_warning">La traducció pot fallar amb una gran quantitat de text.</string>
@@ -248,6 +274,7 @@
     <string name="warn_notloggedin_short">No heu iniciat la sessió. El mapa en viu només mostrarà catxés emmagatzemats localment. Toqueu aquí per obtenir més informació.</string>
     <string name="warn_notloggedin_long">No heu iniciat la sessió. El mapa en viu només mostrarà els catxés emmagatzemats localment i les funcions en línia no funcionaran. \n\n Si no hi ha connexió de xarxa, no hi ha cap problema de servidor o heu de (tornar) configurar els vostres serveis de geocatxing. \n\n Voleu configurar els serveis ara?</string>
     <string name="err_read_pocket_query_list">Error llegint la llista de consultes a mida.</string>
+    <string name="err_read_bookmark_list">S\'ha produït un error en llegir les llistes de marcadors.</string>
     <string name="info_log_posted">El c:geo ha tramès el registre correctament.</string>
     <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
     <string name="info_log_post_failed">Ha fallat la publicació del registre.</string>
@@ -296,6 +323,7 @@
     <string name="menu_history">Historial</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Escaneja un codi de catxé</string>
+    <string name="menu_lists_pocket_queries">Llistes / pocket queries</string>
     <string name="menu_scan_description">El c:geo pot escanejar els codis de catxés impresos com a codis QR. L\'aplicació necessària no està instal·lada. Voleu obrir Google Play per instal·lar-la?</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
@@ -310,6 +338,8 @@
     <string name="caches_more_caches_no">No hi ha més catxés</string>
     <string name="caches_more_caches_loading">S\'estan carregant els catxés…</string>
     <string name="caches_more_caches_currently">actualment</string>
+    <string name="caches_more_caches_next_x">Carregueu els següents %1$d catxés</string>
+    <string name="caches_more_caches_remaining">Carrega els catxés restants (%1$d / %2$d)</string>
     <string name="caches_downloading">S\'estan descarregant els catxés…\nETA:  </string>
     <string name="caches_eta_ltm">Menys d\'un minut</string>
     <plurals name="caches_eta_mins">
@@ -362,6 +392,7 @@
     <string name="caches_copy_all">Copiar-ho tot</string>
     <string name="caches_map_locus_export">Exporta al Locus</string>
     <string name="caches_filter">Filtre</string>
+    <string name="caches_filter_menuitem">Nou filtre de catxé (experimental)</string>
     <string name="caches_filter_title">Filtra per</string>
     <string name="caches_filter_size">Mida</string>
     <string name="caches_filter_type">Tipus</string>
@@ -414,9 +445,79 @@
     <string name="list_dialog_rename">Canvia el nom</string>
     <string name="list_not_available">La llista ja no està disponible, s\'està canviant a la llista estàndard</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_advanced">Avançat</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Canvieu a Bàsic</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">Canviar al mode \"Bàsic\" provocarà la pèrdua de la configuració del filtre. Vols continuar?</string>
+    <string name="cache_filter_add_button">Afegiu criteris de filtre</string>
+    <string name="cache_filter_option_and_or">Utilitzeu OR en lloc de AND</string>
+    <string name="cache_filter_option_inverse">Filtre invers</string>
+    <string name="cache_filter_option_include_inconclusive">Incloure coincidències poc concloents</string>
+    <string name="cache_filter_option_include_inconclusive_info">S’inclou el catxé al resultat quan un filtre necessita informació sobre el catxé que no està disponible.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Toqueu a sobre \"Afegeix criteris de filtre\" per afegir un filtre</string>
+    <string name="cache_filter_name">Nom del Catxé</string>
+    <string name="cache_filter_type">Tipus de Catxé</string>
+    <string name="cache_filter_size">Mida del Catxé</string>
+    <string name="cache_filter_personalnote">Nota personal</string>
+    <string name="cache_filter_description">Descripció del Catxé</string>
+    <string name="cache_filter_offlinelog">Registre fora de línia</string>
+    <string name="cache_filter_owner">Propietari del Catxé</string>
+    <string name="cache_filter_difficulty">Dificultat</string>
+    <string name="cache_filter_terrain">Terreny</string>
+    <string name="cache_filter_status">Estat</string>
+    <string name="cache_filter_attributes">Atributs del Catxé</string>
+    <string name="cache_filter_favorites">Preferits</string>
+    <string name="cache_filter_distance">Distància</string>
+    <string name="cache_filter_hidden">Data d\'Amagat</string>
+    <string name="cache_filter_logs_count">Recompte de registres</string>
+    <string name="cache_filter_last_found">Darrera trobada</string>
+    <string name="cache_filter_log_entry">Entrada de registre</string>
+    <string name="cache_filtergroup_basic">Bàsic</string>
+    <string name="cache_filtergroup_details">Detalls</string>
+    <string name="cache_filtergroup_userspecific">Específic de l\'usuari</string>
+    <string name="cache_filter_include">Incloure</string>
+    <string name="cache_filter_exclude">Excloure</string>
+    <string name="cache_filter_userdisplay_complex">Complex</string>
+    <string name="cache_filter_userdisplay_none">Cap</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="one">%1$d element</item>
+        <item quantity="other">%1$d elements</item>
+    </plurals>
+    <string name="cache_filter_storage_load_button">Carregar</string>
+    <string name="cache_filter_storage_delete_button">Esborra</string>
+    <string name="cache_filter_storage_load_delete_title">Carregueu o suprimiu un filtre existent</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">Encara no s’emmagatzema cap filtre.</string>
+    <string name="cache_filter_storage_save_title">Desa el filtre amb el nom</string>
+    <string name="cache_filter_storage_save_confirm_title">Desa la sobreescriptura del filtre</string>
+    <string name="cache_filter_storage_save_confirm_message">Ja existeix un filtre amb el nom \'%s\' i una configuració diferent. Voleu sobreescriure\'l?</string>
+    <string name="cache_filter_stringfilter_matchcase">Coincidència</string>
+    <string name="cache_filter_stringfilter_info">Amb l\'opció \"Patró\", utilitzeu comodins * i ?. El * representa zero, un o diversos caràcters, el ? representa un sol caràcter. Per exemple, el patró \"V?la-seca*\" coincidirà, per exemple, \"Vila-seca\" o \"Vila-seca a la nit\", però no \"Un dia a Vila-seca\" o \"Villa-seca\"</string>
+    <string name="cache_filter_stringfilter_type_is_not_present">No està present</string>
+    <string name="cache_filter_stringfilter_type_is_present">És present</string>
+    <string name="cache_filter_stringfilter_type_contains">Conté</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Comença amb</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Acaba amb</string>
+    <string name="cache_filter_stringfilter_type_pattern">Patró</string>
+    <string name="cache_filter_datefilter_label_from">De:</string>
+    <string name="cache_filter_datefilter_label_to">A:</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Seleccionar tot</string>
+    <string name="cache_filter_favorites_absolute">Complet</string>
+    <string name="cache_filter_favorites_percentage">Percentatge</string>
+    <string name="cache_filter_distance_use_current_position">Utilitzeu la posició actual</string>
+    <string name="cache_filter_status_select_all">Tots</string>
+    <string name="cache_filter_status_select_only_found_yes">Només Trobat</string>
+    <string name="cache_filter_status_select_only_found_no">Només no Trobat</string>
+    <string name="cache_filter_status_select_only_own_yes">Només Propietat</string>
+    <string name="cache_filter_status_select_only_own_no">Només no Propietat</string>
+    <string name="cache_filter_status_exclude_active">Exclou Actiu</string>
+    <string name="cache_filter_status_exclude_disabled">Exclou desactivat</string>
+    <string name="cache_filter_status_exclude_archived">Exclou arxivats</string>
+    <string name="cache_filter_log_entry_foundby">Trobat per:</string>
+    <string name="cache_filter_log_entry_logtext">Text del registre:</string>
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
+    <string name="about_changelog_nightly_build">Versions Nightly</string>
+    <string name="about_changelog_next_release">Pròxima versió</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Dona\'ns suport</string>
     <string name="about_donation_more">Visiteu el lloc web per obtenir informació</string>
@@ -435,11 +536,13 @@
     <string name="about_system_write_logcat_type_extended">Ampliat</string>
     <string name="about_system_write_logcat_success">Fitxer de registre \"%1$s\" escrit a la carpeta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error en el Fitxer de registre</string>
+    <string name="about_system_write_infos_downloadmanager">Veure descàrregues</string>
     <string name="changelog_github">Llista de tots els canvis</string>
     <string name="about_nutshellmanual">Manual en línia</string>
     <string name="about_contributors_carnerodetails">com el pare de c:geo</string>
     <string name="about_contributors_recent">Col·laboradors recents</string>
     <string name="about_contributors_specialthanks">Agraïments especials a:</string>
+    <string name="about_contributors_specialthanksdetails">- tots els nostres col·laboradors de traducció a [Crowdin.net] (https://crowdin.net/project/cgeo)!\n- tots els creadors de problemes\n- i la resta de suports.\n</string>
     <string name="about_contributors_other">Altres col·laboradors</string>
     <string name="about_components">Components</string>
     <string name="contribution_code">Codi</string>
@@ -451,6 +554,7 @@
     <string name="debug_user_error_report_title">Informar d\'un problema</string>
     <string name="debug_user_error_errortext">S\'ha produït un problema inesperat que us sol·licitaríem que ens comuniqueu:</string>
     <string name="debug_user_error_explain_options">Ajudeu-nos a solucionar els problemes de c: geo informant-los per correu electrònic amb informació del sistema i el fitxer de registre inclòs.\nIncloeu sempre una descripció detallada de l’error al vostre correu electrònic!\n\nAbans d’enviar un missatge, consulteu també les nostres FAQ i / o presència a les xarxes socials per problemes coneguts.\nPodeu trobar altres opcions de contacte a \"Quant a c: geo\"</string>
+    <string name="debug_current_downloads">Descàrregues actuals</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Obrir la configuració?</string>
     <string name="settings_title_services">Serveis</string>
@@ -480,6 +584,8 @@
     <string name="confirm_data_dir_move_title">Voleu moure la carpeta de dades de Geocatxés?</string>
     <string name="confirm_data_dir_move">Moure el directori de dades dels geoamagatalls pot trigar una bona estona, en funció del dispositiu i de la quantitat de dades.</string>
     <string name="settings_title_basicmembers">Opcions per a membres bàsics</string>
+    <string name="settings_title_navigation">Encaminament / Navegació</string>
+    <string name="settings_summary_navigation">Configureu l\'encaminament fora de línia, trieu els mètodes de navegació preferits i seleccioneu aplicacions de navegació externes.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Configuració i opcions de depuració específiques del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegació</string>
@@ -500,6 +606,8 @@
     <string name="settings_gc_description">Autoritza c:geo a geocaching.com per buscar catxés.</string>
     <string name="settings_ec_description">Autoritza al c:geo a extremcaching.com per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
     <string name="settings_su_description">Autoritza c:geo a geocaching.su per buscar catxés.</string>
+    <string name="settings_lc_description">Incloeu les Adventure Lab catxé al mapa.\n\n(disponible només per a membres premium de \"Geocaching.com\". Requereix un servei \"Geocaching.com\" activat.)\n\nPer canviar aquesta configuració, cal reiniciar.</string>
+    <string name="lc_default_description">Es tracta d’un Adventure Lab catxé de geocaching.com. Les aventures només es poden jugar amb l’aplicació Groundspeak Adventure Lab. Toqueu la icona Adventure Lab de la pàgina \"Detalls\" per obrir/instal·lar l\'aplicació Adventure Lab per a aquesta aventura des d\'allà.\nSi no voleu veure les Adventure Lab al vostre mapa i fer cerques, podeu desactivar-les mitjançant el menu \"Configuració\"- Serveis - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Activa</string>
     <string name="init_summary_oc_de">Carregar catxés des de opencaching.de</string>
     <string name="init_oc_de_description">Autoritza al c:geo a opencaching.de per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
@@ -564,6 +672,10 @@
     <string name="init_summary_select_language">Seleccioneu l\'idioma de l\'aplicació (requereix un reinici)\n</string>
     <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
     <string name="init_category_exclude">Exclou catxés</string>
+    <string name="init_exclude_own">Exclou propis</string>
+    <string name="init_summary_exclude_own">Exclou els teus catxés</string>
+    <string name="init_exclude_found">Exclou trobats</string>
+    <string name="init_summary_exclude_found">Exclou els catxés que has trobat</string>
     <string name="init_showwaypoints">Mostra les fites</string>
     <string name="init_showwaypoint_description">Si la quantitat de catxés mostrats al mapa és menor a l\'especificada, també es mostraran les seves fites.</string>
     <string name="init_zoomincludingwaypoints">El zoom inclou punts de pas</string>
@@ -587,8 +699,12 @@
     <string name="init_disabled">Exclou els desactivats</string>
     <string name="init_summary_disabled">Exclou els catxés desactivats</string>
     <string name="init_archived">Exclou arxivats</string>
+    <string name="init_summary_archived">Exclou els catxés arxivats</string>
+    <string name="init_offlinelog">Exclou registres fora de línia</string>
+    <string name="init_summary_offlinelog">Exclou els catxés amb el registre fora de línia</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
+    <string name="init_customtabs_as_browser">Utilitzeu Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Els llocs web externs es mostraran sense deixar c: geo (només és possible si hi ha instal·lat Chrome)</string>
     <string name="init_save_log_img">Desa les imatges</string>
     <string name="init_summary_save_log_img">Desa les imatges dels registres</string>
@@ -599,10 +715,18 @@
     <string name="init_choose_list">Demana una llista</string>
     <string name="init_summary_choose_list">Demana a quina llista cal desar els catxés</string>
     <string name="init_listdisplay">Llistes addicionals</string>
+    <string name="init_list_initial_load_limit">Llista de límit de càrrega</string>
+    <string name="init_summary_list_initial_load_limit">Nombre màxim de catxés que es carreguen inicialment de la base de dades quan es mostren les llistes emmagatzemades. Trieu 0 per a \"il·limitat\"</string>
     <string name="init_summary_listdisplay">Mostra la pertinença del catxé a una llista addicionals a la llista de catxés</string>
     <string name="init_livelist">Mostra la direcció</string>
     <string name="init_summary_livelist">Mostra una fletxa amb la direcció de la brúixola als catxés en una llista</string>
     <!-- app theme -->
+    <string name="settings_theme_title">Aspecte</string>
+    <string-array name="settings_theme_entries">
+        <item>Sistema per defecte</item>
+        <item>Clar</item>
+        <item>Fosc</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Fer una còpia de seguretat</string>
     <string name="init_backup_summary">Tingueu en compte que aquesta funció permet fer còpies de seguretat de catxés , punts de ruta &amp; configuracions, però sense imatges dels catxés. \n\n Per poder restaurar les dades fins i tot després de perdre el telèfon, els fitxers de còpia de seguretat s\'han de copiar a una ubicació independent.</string>
@@ -631,6 +755,7 @@
     <string name="init_user_confirmation">Sé el que estic fent</string>
     <string name="init_backup_success">La base de dades del c:geo s\'ha copiat amb èxit a:</string>
     <string name="init_backup_failed">Ha fallat la còpia de seguretat de la base de dades de c:geo.</string>
+    <string name="init_backup_unnecessary">La base de dades està buida, no cal fer cap còpia de seguretat. Encara voleu crear una còpia de seguretat?</string>
     <string name="init_backup_folder_exists_error">No es pot crear una carpeta de còpia de seguretat nova. Heu realitzat una còpia de seguretat en l\'últim minut?</string>
     <string name="init_backup_no_backup_available">No hi ha cap còpia de seguretat disponible.</string>
     <string name="backup_confirm_overwrite">Això suprimirà la carpeta de la còpia de seguretat més antiga de %s. \nVoleu continuar?</string>
@@ -1127,6 +1252,7 @@
     <string name="context_share_as_link">Compartir Enllaç</string>
     <string name="create_internal_cache">Creeu catxé definit per l\'usuari</string>
     <string name="create_internal_cache_short">Nou catxé</string>
+    <string name="create_internal_cache_currentlist">Utilitzeu la llista actual</string>
     <string name="internal_cache_default_name">Catxé definit per l’usuari #%1$d</string>
     <string name="internal_cache_default_description">Es tracta d’un catxé definit per l’usuari</string>
     <string name="internal_cache_default_owner">Tu</string>
@@ -1173,6 +1299,7 @@
     <string name="waypoint_coordinates">Coordenades</string>
     <string name="waypoint_cache_coordinates">Coordenades del catxé</string>
     <string name="waypoint_calculate_coordinates">Calcula coordenades</string>
+    <string name="waypoint_calculated_coordinates">Coordenades calculades</string>
     <string name="waypoint_custom">Personal</string>
     <string name="waypoint_my_coordinates">Les meves coordenades</string>
     <string name="waypoint_bearing">Direcció en º</string>
@@ -1221,13 +1348,15 @@
     <string name="map_view_map">Tria el mapa</string>
     <string name="map_rotation">Mapa rotatori</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
-    <string name="map_show_circles">Mostra els cercles</string>
-    <string name="map_showc_disabled">Catxés desactivats</string>
-    <string name="map_showc_archived">Catxés arxivats</string>
-    <string name="map_showwp_original">Punt ruta originals</string>
-    <string name="map_showwp_parking">Punts ruta parking</string>
-    <string name="map_showwp_visited">Punts ruta visitats</string>
-    <string name="map_show_track">Mostra GPX track/ruta</string>
+    <string name="map_show_circles">Cercles</string>
+    <string name="map_showc_own">Propi</string>
+    <string name="map_showc_found">Trobat</string>
+    <string name="map_showc_disabled">Desactivat</string>
+    <string name="map_showc_offlinelog">Registrat fora de línia</string>
+    <string name="map_showwp_original">Original</string>
+    <string name="map_showwp_parking">Aparcament</string>
+    <string name="map_showwp_visited">Visitat</string>
+    <string name="map_show_track">GPX track/ruta</string>
     <string name="init_renderthemefolder_synctolocal">Sincronitzeu temes</string>
     <string name="init_summary_renderthemefolder_synctolocal">Això sincronitzarà els temes amb una carpeta privada de l\'aplicació per millorar el rendiment d\'obertura del visor de mapes a costa d\'espai d\'emmagatzematge del dispositiu.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activeu la sincronització de carpetes de temes</string>
@@ -1245,11 +1374,16 @@
     <string name="map_live_disable">Desactiva en viu</string>
     <string name="map_as_list">Mostra-ho com una llista</string>
     <string name="map_select_multiple_items">Seleccionar un element</string>
+    <string name="map_routing">Encaminament</string>
+    <string name="map_routing_activate_title">Activa l\'encaminament</string>
+    <string name="map_routing_activate">Alguns modes d’encaminament actualment no estan disponibles, ja que no hi ha cap motor d’encaminament actiu.\n\nVoleu activar el motor d’encaminament intern de C:geo i la descàrrega de dades d’encaminament?</string>
     <string name="map_gm_autorotation">Mapa autorotatori</string>
     <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
     <string name="quick_settings">Configuració ràpida</string>
     <string name="quick_settings_info">Algunes configuracions del mapa (Configuració del mapa, ocultació, encaminament) s\'han mogut a la nova finestra emergent \"Configuració ràpida\".\nPodeu obrir aquesta finestra emergent mitjançant la icona que hi ha al centre de la part inferior del mapa.</string>
-    <string name="map_show_in_map">Mostra al mapa:</string>
+    <string name="map_show_caches_title">Mostra Catxés:</string>
+    <string name="map_show_waypoints_title">Mostra punts de referència:</string>
+    <string name="map_show_other_title">Mostra altres:</string>
     <!-- search -->
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
     <string name="search_bar_desc">Catxés (codi del catxé, paraula clau), Traçables (codi TB)</string>
@@ -1268,6 +1402,9 @@
     <string name="search_hbu">Amagat per</string>
     <string name="search_hbu_prefill">Propietari</string>
     <string name="search_hbu_button">Cerca pel nom del propietari</string>
+    <string name="search_filter">Filtre (experimental)</string>
+    <string name="search_filter_button">Cerca per Filtre</string>
+    <string name="search_filter_info_message">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
     <string name="search_tb">Traçable</string>
     <string name="search_tb_hint">Identificació del traçable</string>
     <string name="search_tb_button">Cerca de traçables</string>
@@ -1277,6 +1414,9 @@
     <string name="search_address_result">Llocs trobats</string>
     <string name="search_own_caches">Cerca els meus catxés</string>
     <string name="search_pocket_title">Pocket Query</string>
+    <string name="search_bookmark_list">Llista de marcadors</string>
+    <string name="search_pocket_is_new">nou</string>
+    <string name="search_pocket_and_bookmark_loading">S\'està carregant una llista de Pocket Queries i llistes de marcadors</string>
     <!-- trackable -->
     <string name="trackable">Traçable</string>
     <string name="trackable_details_loading">Carregant les dades del traçable…</string>
@@ -1651,6 +1791,7 @@
     <string name="faq_title">Preguntes freqüents</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Nova versió disponible.\nToca per instal·lar-la.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Hi ha disponible una nova versió nightly.\nToca per instal·lar-la.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Hi ha disponible una app candidata a nova versió.\nToca per instal·lar.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Els canvis a geocaching.com estan provocant problemes a c: geo.\nSom conscients i hi treballem, doneu-nos una mica de temps.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Els canvis a geocaching.com estan provocant problemes al mapa en viu.\nSom conscients i hi treballem, doneu-nos una mica de temps.</string>
@@ -1770,10 +1911,15 @@
     <string name="number_input_err_boundarymin">El valor introduït és massa petit: restableix el valor mínim</string>
     <string name="number_input_err_boundarymax">El valor introduït és massa gran: restableix el valor màxim</string>
     <string name="number_input_err_format">Format de número incorrecte</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo notificacions</string>
-    <string name="notification_channel_description">notificacions de l\'aplicació de c:geo geocaching</string>
-    <string name="proximity_notification_title">notificació de proximitat de c:geo</string>
+    <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">notificacions de proximitat</string>
+    <string name="notification_channel_proximity_description">s\'utilitza per mostrar catxés propers</string>
+    <string name="notification_channel_foreground_name">servei en primer pla</string>
+    <string name="notification_channel_foreground_description">es mostra la notificació mentre C:geo treballa en segon pla</string>
+    <string name="notification_channel_downloader_name">descarregador c:geo</string>
+    <string name="notification_channel_downloader_description">notificacions de resultats per a baixades (ex, mapes fora de línia)</string>
+    <string name="notification_proximity_title">notificació de proximitat de c:geo</string>
+    <string name="notification_download_receiver_title">S\'està important la baixada</string>
     <!-- individual routes -->
     <string name="individual_route">Ruta individual</string>
     <string name="individual_route_added">Afegir a la ruta</string>
@@ -1781,6 +1927,8 @@
     <string name="individual_route_error_toggling_waypoint">error en canviar el punt de ruta</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en mode punt de ruta únic</string>
     <string name="map_sort_individual_route">Ordena la ruta individual</string>
+    <string name="map_export_individual_route">Exporta com a ruta</string>
+    <string name="map_export_individual_route_as_track">Exporta com a track</string>
     <string name="map_load_individual_route">Carrega la ruta individual</string>
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
     <string name="map_autotarget_individual_route">Estableix l’inici de la ruta com a objectiu</string>
@@ -1846,10 +1994,12 @@
     <string name="localfile_cannot_handle">Error en llegir el fitxer o c: geo no pot gestionar aquest tipus de fitxer.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Rebre fitxer</string>
+    <string name="receivedownload_receiving_file">S\'està rebent el fitxer \"%s\"</string>
     <string name="receivedownload_success">El fitxer s\'ha emmagatzemat correctament com a \"%s\"</string>
     <string name="receivedownload_error">Error en rebre el fitxer</string>
     <string name="receivedownload_error_io_exception">Error en rebre el fitxer. La vostra carpeta \"%s\" es pot escriure?</string>
     <string name="receivedownload_error_filenotfound_exception">Error del fitxer no trobat en rebre el fitxer.</string>
+    <string name="receivedownload_amount_copied">%s copiat</string>
     <string name="receivedownload_cancelled">S\'ha cancel·lat la transferència de fitxers</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Descarregar mapa fora de línia</string>
@@ -1872,6 +2022,9 @@
     <string name="downloadmap_no_updates_found">No s\'ha trobat cap actualització del mapa</string>
     <string name="downloadmap_directory">carpeta</string>
     <string name="downloadmap_mapfile">fitxer de mapa</string>
+    <string name="downloadmap_themefile">fitxer de tema</string>
+    <string name="downloadmap_tilefile">fitxer de dades d’encaminament</string>
+    <string name="downloadmap_download">descarregar</string>
     <string name="downloadmap_retrieving_directory_data">Recuperant les dades de la carpeta…</string>
     <string name="downloadmap_checking_for_updates">S\'estan cercant actualitzacions…</string>
     <string name="downloadmap_install_theme_title">Instal·leu el fitxer del tema</string>
@@ -1887,6 +2040,8 @@
     <string name="mapserver_openandromaps_themes_info">Tema detallat del mapa, creat per als mapes \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Els mapes detallats requereixen un dels temes de mapes \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema detallat del mapa, creat per als mapes \"Freizeitkarte\"</string>
+    <string name="mapserver_hylly_info">Els mapes detallats de Finlàndia requereixen un dels temes de mapes \"Hylly\"</string>
+    <string name="mapserver_hylly_themes_info">Tema detallat del mapa, creat per als mapes \"Hylly\"</string>
     <string name="brouter_info">Servei d’encaminament fora de línia</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
@@ -1926,6 +2081,8 @@
     <string name="wizard_welcome_advanced">Configuració avançada</string>
     <string name="wizard_advanced_offlinemaps_label">Mapes fora de línia</string>
     <string name="wizard_advanced_offlinemaps_info">Aquesta pàgina proporciona algunes funcions avançades que són opcionals .\n\nC: geo pot descarregar fitxers de mapes per fora de línia.</string>
+    <string name="wizard_advanced_routing_label">Activeu l\'encaminament fora de línia</string>
+    <string name="wizard_advanced_routing_info">C:geo té un motor intern per a l’encaminament fora de línia i us pot descarregar automàticament les dades d’encaminament que falten.</string>
     <string name="wizard_advanced_restore_label">Restaura</string>
     <string name="wizard_advanced_restore_info">Si teniu una còpia de seguretat d\'una instal·lació anterior, podeu restaurar la configuració i/o les dades dels catxés.</string>
     <string name="status_not_ok">ERROR</string>

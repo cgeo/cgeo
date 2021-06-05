@@ -773,7 +773,6 @@
     <string name="map_map">خريطة</string>
     <string name="map_live">خريطة على نات</string>
     <string name="map_view_map">عرض الخريطة</string>
-    <string name="map_show_circles">إظهار الدوائر</string>
     <string name="map_theme_select">حدد ثيم الخريطة</string>
     <string name="map_live_enable">تمكين عرض مباشر</string>
     <string name="map_live_disable">تعطيل العرض المباشر</string>
@@ -1166,7 +1165,7 @@
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->
-    <!-- text notification channel infos & proximity notification title -->
+    <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
     <!-- distance units -->

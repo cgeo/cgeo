@@ -1165,13 +1165,6 @@
     <string name="map_view_map">Тип карты</string>
     <string name="map_rotation">Вращение карты</string>
     <string name="map_dot_mode">Маленькие иконки</string>
-    <string name="map_show_circles">Показать круги</string>
-    <string name="map_showc_disabled">Тайники вне игры</string>
-    <string name="map_showc_archived">Архивные тайники</string>
-    <string name="map_showwp_original">Оригинальные точки</string>
-    <string name="map_showwp_parking">Точки парковки</string>
-    <string name="map_showwp_visited">Посещенные точки</string>
-    <string name="map_show_track">Показать GPX трек/маршрут</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Включить синхронизацию папок темы</string>
     <string name="init_hidewp">Скрыть точки</string>
     <string name="init_summary_hidewp_original">Скрыть оригинальные точки на карте</string>
@@ -1188,7 +1181,6 @@
     <string name="map_gm_autorotation_disable">Отключить автоповорот карты?\n\nВы можете включить его снова с помощью меню поворота карты</string>
     <string name="quick_settings">Быстрые настройки</string>
     <string name="quick_settings_info">Некоторые настройки карты (настройки карты, скрытие, навигация) были перемещены в новое окно \"Быстрые настройки\"\nВы можете открыть это окно, используя иконку по центру внизу карты.</string>
-    <string name="map_show_in_map">Показать на карте:</string>
     <!-- search -->
     <string name="search_bar_desc">Тайники (геокод, название), код трекабла</string>
     <string name="search_coordinates">Координаты</string>
@@ -1704,10 +1696,8 @@
     <string name="number_input_err_boundarymin">Введенное значение слишком мало - сброс до минимального значения</string>
     <string name="number_input_err_boundarymax">Введенное значение слишком велико - сброс до максимального значения</string>
     <string name="number_input_err_format">Неверный формат числа</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">Уведомления c:geo</string>
-    <string name="notification_channel_description">уведомления из геокешинг-приложения c:geo</string>
-    <string name="proximity_notification_title">уведомление о приближении c:geo</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">уведомление о приближении c:geo</string>
     <!-- individual routes -->
     <string name="individual_route">Личный маршрут</string>
     <string name="individual_route_added">добавлено в маршрут</string>

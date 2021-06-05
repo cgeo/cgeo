@@ -1,25 +1,26 @@
-### Advanced filtering system (experimental)
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- This is work in progress, stay tuned!
-- The old filter systems are still available (for the time being), but will be superseeded by the new system at some point in time.
+### Sistema de filtratge avançat (experimental)
+- Presentació d’un nou sistema de filtratge a c: geo, que admet filtres flexibles, combinables i emmagatzemables
+- Disponible tant a les llistes del catxés com a la vista de mapa
+- Això és un treball en curs, estigueu atents!
+- Els sistemes de filtre antics encara estan disponibles (de moment), però el nou sistema els substituirà en algun moment.
 
-### Map
-- New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
-- New: Separate "own" and "found" filters in map quick settings
-- Change: Additionally show cache name in poup details
+### Mapa
+- Novetat: Crear un catxé definit per l'usuari mentre es mostra un mapa d'una llista: Ofereix a l'usuari que emmagatzemi un nou catxé a la llista actual (en lloc de la llista predeterminada per els catxés definits per l'usuari)
+- Novetat: separeu els filtres "propis" i "trobats" a la configuració ràpida del mapa
+- Canvi: Mostra també el nom del catxé als detalls emergents
 
-### Cache details
-- New: Make use of google translate in-app translation popup
-- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
+### Detalls del catxé
+- Novetat: Utilitzeu la finestra emergent de traducció de l'aplicació de Google Translate
+- Novetat: Permet canviar la icona assignada a la finestra emergent de detalls de catxé mitjançant un clic llarg (només a les memòries cau emmagatzemades)
 
-### Downloader
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+### Descarregador
+- Canvi: les descàrregues es faran completament en segon pla; es mostrarà una notificació
+- Canvi: els fitxers descarregats correctament sobreescriuran automàticament els fitxers existents amb el mateix nom
+- Canvi: si un mapa requereix un tema determinat que encara no està instal·lat, c: geo també descarregarà i instal·larà aquest tema automàticament
 
-### Other
-- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
-- New: Support day / night mode from system (optional)
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### Altres
+- Canvi: Hem reelaborat completament els aspectes tècnics interns de C:geo per poder fer ús d’alguns components més moderns proporcionats per Android. Això tindrà un parell d'efectes secundaris, alguns d'ells no desitjats. Informeu de qualsevol error a la nostra [ pàgina de GitHub ](https://www.github.com/cgeo/cgeo/issues) o contactant amb el servei d'assistència.
+- Novetat: Admet el mode dia / nit des del sistema (opcional)
+- Novetat: Descarregueu llistes de marcadors de geocaching.com; consulteu "Llistes / pocket queries" al menú principal
+- Novetat: Ignora la capacitat de geocaching.su
+- Canvi: S'ha suprimit l'aplicació de navegació RMAPS que ja no es mantenia

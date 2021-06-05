@@ -1346,16 +1346,15 @@
     <string name="map_view_map">Karttanäkymä</string>
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
-    <string name="map_show_circles">Näytä ympyrät</string>
-    <string name="map_showc_own">Omat kätköt</string>
-    <string name="map_showc_found">Löydetyt kätköt</string>
-    <string name="map_showc_disabled">Hyllytetyt kätköt</string>
-    <string name="map_showc_archived">Arkistoidut kätköt</string>
-    <string name="map_showc_offlinelog">Kätköt joissa on offline-kirjaus</string>
-    <string name="map_showwp_original">Alkuperäiset reittipisteet</string>
-    <string name="map_showwp_parking">Parkkipaikka-reittipisteet</string>
-    <string name="map_showwp_visited">Vieraillut reittipisteet</string>
-    <string name="map_show_track">Näytä GPX-rata/reitti</string>
+    <string name="map_show_circles">Ympyrät</string>
+    <string name="map_showc_own">Omat</string>
+    <string name="map_showc_found">Löydetty</string>
+    <string name="map_showc_disabled">Ei käytössä</string>
+    <string name="map_showc_offlinelog">Kirjattu offline-tilassa</string>
+    <string name="map_showwp_original">Alkuperäinen</string>
+    <string name="map_showwp_parking">Pysäköinti</string>
+    <string name="map_showwp_visited">Vierailtu</string>
+    <string name="map_show_track">GPX jälki/reitti</string>
     <string name="init_renderthemefolder_synctolocal">Synkronoi teemat</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tämä synkronoi teemasi sovelluksen yksityiseen kansioon karttanäkymän avaamisen suorituskyvyn parantamiseksi, pienellä tallennustilan kustannuksella.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ota teemakansion synkronointi käyttöön</string>
@@ -1380,7 +1379,9 @@
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <string name="quick_settings">Pika-asetukset</string>
     <string name="quick_settings_info">Jotkut kartta-asetukset (Kartan asetukset, piilota, reititys) on siirretty uuteen \"Pika-asetukset\"-ikkunaan\nVoit avata tämän ikkunan käyttämällä painiketta, joka sijaitsee karttanäkymän alareunassa keskellä.</string>
-    <string name="map_show_in_map">Näytä kartalla:</string>
+    <string name="map_show_caches_title">Näytä kätköt:</string>
+    <string name="map_show_waypoints_title">Näytä reittipisteet:</string>
+    <string name="map_show_other_title">Näytä muu:</string>
     <!-- search -->
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
     <string name="search_bar_desc">Kätköt (GC-koodi, avainsana), reissaajat (TB-koodi)</string>
@@ -1907,10 +1908,8 @@
     <string name="number_input_err_boundarymin">Syötetty arvo liian pieni - asetettu minimiarvoksi</string>
     <string name="number_input_err_boundarymax">Syötetty arvo liian iso - asetettu maksimiarvoksi</string>
     <string name="number_input_err_format">Väärä numeromuoto</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geon ilmoitukset</string>
-    <string name="notification_channel_description">Geokätköilysovelluksen c:geon ilmoitukset</string>
-    <string name="proximity_notification_title">c:geon läheisyysilmoitus</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">c:geon läheisyysilmoitus</string>
     <!-- individual routes -->
     <string name="individual_route">Yksittäinen reitti</string>
     <string name="individual_route_added">lisätty reittiin</string>

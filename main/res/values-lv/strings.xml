@@ -991,7 +991,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_view_map">Kartes skats</string>
     <string name="map_rotation">Kartes rotācija</string>
     <string name="map_dot_mode">Lietot kompakto ikonu skatu</string>
-    <string name="map_show_circles">Rādīt riņķus</string>
     <string name="init_hidewp">Slēpt ceļa punktus</string>
     <string name="init_summary_hidewp_original">Slēpt oriģinālos ceļa punktus kartē</string>
     <string name="map_theme_select">Atlasiet kartes dizainu</string>
@@ -1453,7 +1452,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Izvēlies krāsu shēmu</string>
     <!-- number input -->
-    <!-- text notification channel infos & proximity notification title -->
+    <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
     <!-- distance units -->

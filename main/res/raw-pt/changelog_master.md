@@ -14,6 +14,7 @@
 - Novo: Permite a alteração do ícone atribuído, ao tocar sem soltar sobre o nome da cache, na janela pop-up (apenas em caches armazenadas)
 
 ### Gestor de Transferências
+- Alteração: As transferências agora decorrem, completamente, em segundo plano. Uma notificação é mostrada
 - Alteração: Os ficheiros transferidos com sucesso irão substituir automaticamente os ficheiros já existentes com o mesmo nome
 - Alteração: Se um mapa requer um determinado tema que ainda não esteja instalado, o c:geo também descarregará e instalará esse tema automaticamente
 

@@ -1,10 +1,10 @@
-### Cache details
+### Szczegóły skrytki
 
 
-### Map
+### Mapa
 
 
-### Integrated routing engine
+### Zintegrowany silnik wyznaczania trasy
 
 
-### Other
+### Pozostałe

@@ -883,7 +883,6 @@
     <string name="map_live">Élő térkép</string>
     <string name="map_view_map">Térképek</string>
     <string name="map_dot_mode">Kompakt ikonok használata</string>
-    <string name="map_show_circles">Ládahatárok be</string>
     <string name="map_theme_select">Térképstílusok</string>
     <string name="map_theme_options">Térképstílus beállítások</string>
     <string name="map_live_enable">Élő mód</string>
@@ -1331,7 +1330,7 @@
     <string name="number_input_title">Adj meg egy értéket %1$s és %2$s között</string>
     <string name="number_input_err_boundarymax">A megadott érték túl nagy - állítsd vissza a megengedett maximális értékre</string>
     <string name="number_input_err_format">Érvénytelen számformátum</string>
-    <!-- text notification channel infos & proximity notification title -->
+    <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
     <!-- distance units -->

@@ -14,6 +14,7 @@
 - New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
 
 ### Downloader
+- Change: Downloads will now completely happen in background, a notification is shown
 - Change: Files downloaded successfully will automatically overwrite existing files having the same name
 - Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
 

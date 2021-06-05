@@ -1088,7 +1088,6 @@
     <string name="map_view_map">Kort-view</string>
     <string name="map_rotation">Kortrotation</string>
     <string name="map_dot_mode">Brug små ikoner</string>
-    <string name="map_show_circles">Vis cirkler</string>
     <string name="init_hidewp">Skjul rutepunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale rutepunkter på kortet</string>
     <string name="init_summary_hidewp_parking">Skjul parkeringsrutepunkter på kortet</string>
@@ -1590,10 +1589,8 @@
     <string name="number_input_err_boundarymin">Den indtastede værdi er for lav og er blevet erstattet af minimumsværdien</string>
     <string name="number_input_err_boundarymax">Den indtastede værdi er for høj og er blevet erstattet af maximumsværdien</string>
     <string name="number_input_err_format">Ugyldigt talformat</string>
-    <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo notifikationer</string>
-    <string name="notification_channel_description">notifikationer fra c:geo geocaching app</string>
-    <string name="proximity_notification_title">Afstandsnotifikation</string>
+    <!-- notification / channel texts -->
+    <string name="notification_proximity_title">Afstandsnotifikation</string>
     <!-- individual routes -->
     <string name="individual_route">Individuel rute</string>
     <string name="individual_route_added">Tilføjet til rute</string>
