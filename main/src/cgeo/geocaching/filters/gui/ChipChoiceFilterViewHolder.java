@@ -2,11 +2,14 @@ package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
-import cgeo.geocaching.ui.ToggleButton;
+import cgeo.geocaching.ui.ViewUtils;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 import java.util.Collection;
@@ -15,25 +18,24 @@ import java.util.Set;
 
 import com.google.android.material.chip.ChipGroup;
 
-public class ToggleButtonFilterViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
+public class ChipChoiceFilterViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
 
     private final ValueGroupFilterAccessor<T, F> filterAccessor;
-    private final ToggleButton[] valueButtons;
+    private final CompoundButton[] valueButtons;
 
-    private ToggleButton selectAllNoneButton;
-    private boolean selectAllNoneChecked = true;
+    private CompoundButton selectAllNoneButton;
+    private boolean userInteraction = true;
 
-    public ToggleButtonFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
+    public ChipChoiceFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
         this.filterAccessor = filterAccessor;
-        this.valueButtons = new ToggleButton[filterAccessor.getSelectableValuesAsArray().length];
+        this.valueButtons = new CompoundButton[filterAccessor.getSelectableValuesAsArray().length];
     }
 
-   private ToggleButton createAddButton(final ChipGroup viewGroup, final String text) {
-        final ToggleButton button = new ToggleButton(getActivity());
+    private CompoundButton createAddButton(final LayoutInflater inflater, final ChipGroup viewGroup, final String text) {
+
+        final CompoundButton button = (CompoundButton) inflater.inflate(R.layout.chip_choice_view, viewGroup, false);
         button.setText(text);
-        button.setPadding(dpToPixel(10), dpToPixel(10), dpToPixel(10), dpToPixel(10));
         final ChipGroup.LayoutParams clp = new ChipGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        //lp.setMargins(dpToPixel(10), dpToPixel(10), dpToPixel(10), dpToPixel(10));
         viewGroup.addView(button, clp);
         return button;
     }
@@ -41,32 +43,29 @@ public class ToggleButtonFilterViewHolder<T, F extends IGeocacheFilter> extends 
 
     public View createView() {
 
-        final ChipGroup cg = new ChipGroup(getActivity());
+        final Context ctx = ViewUtils.wrap(getActivity());
+        final LayoutInflater inflater = LayoutInflater.from(ctx);
+
+        final ChipGroup cg = new ChipGroup(ctx);
         cg.setChipSpacing(dpToPixel(10));
-        //ll.setOrientation(LinearLayout.HORIZONTAL);
 
         if (filterAccessor.getSelectableValues().size() > 1) {
-            selectAllNoneButton = createAddButton(cg, getActivity().getString(R.string.cache_filter_checkboxlist_selectallnone));
-            selectAllNoneButton.setOnClickListener(v -> {
-                selectAllNoneChecked = !selectAllNoneChecked;
-                selectAllNoneButton.setChecked(selectAllNoneChecked);
-                for (ToggleButton tb : valueButtons) {
-                    tb.setChecked(selectAllNoneChecked);
+            selectAllNoneButton = createAddButton(inflater, cg, getActivity().getString(R.string.cache_filter_checkboxlist_selectallnone));
+            selectAllNoneButton.setOnCheckedChangeListener((v, c) -> {
+                if (!userInteraction) {
+                    return;
+                }
+                for (CompoundButton tb : valueButtons) {
+                    tb.setChecked(c);
                 }
             });
         }
 
         int idx = 0;
         for (T value : filterAccessor.getSelectableValues()) {
-            this.valueButtons[idx] = new ToggleButton(getActivity());
-            this.valueButtons[idx].setText(filterAccessor.getDisplayText(value));
+            this.valueButtons[idx] = createAddButton(inflater, cg, filterAccessor.getDisplayText(value));
             this.valueButtons[idx].setChecked(true);
-            cg.addView(this.valueButtons[idx]);
-            final int bIdx = idx;
-            this.valueButtons[idx].setOnClickListener(v -> {
-                this.valueButtons[bIdx].toggle();
-                checkAndSetAllNoneValue();
-            });
+            this.valueButtons[idx].setOnCheckedChangeListener((v, c) -> checkAndSetAllNoneValue());
             idx++;
         }
         checkAndSetAllNoneValue();
@@ -93,7 +92,7 @@ public class ToggleButtonFilterViewHolder<T, F extends IGeocacheFilter> extends 
     public F createFilterFromView() {
         final F filter = createFilter();
         final Set<T> set = new HashSet<>();
-        if (!selectAllNoneChecked) {
+        if (selectAllNoneButton == null || !selectAllNoneButton.isChecked()) {
             for (int i = 0; i < filterAccessor.getSelectableValues().size(); i++) {
                 if (valueButtons[i].isChecked()) {
                     set.add(filterAccessor.getSelectableValuesAsArray()[i]);
@@ -110,14 +109,16 @@ public class ToggleButtonFilterViewHolder<T, F extends IGeocacheFilter> extends 
         }
 
         boolean allChecked = true;
-        for (int idx = 0; idx < this.valueButtons.length; idx++) {
-            if (!valueButtons[idx].isChecked()) {
+        for (CompoundButton valueButton : this.valueButtons) {
+            if (!valueButton.isChecked()) {
                 allChecked = false;
                 break;
             }
         }
-        selectAllNoneChecked = allChecked;
-        selectAllNoneButton.setChecked(selectAllNoneChecked);
+
+        userInteraction = false;
+        selectAllNoneButton.setChecked(allChecked);
+        userInteraction = true;
     }
 
 }

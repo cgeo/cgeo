@@ -55,7 +55,7 @@ public class FilterViewHolderCreator {
                         .setValueDrawableGetter(ct -> ct.markerId) , 2);
                 break;
             case SIZE:
-                result = new ToggleButtonFilterViewHolder<>(
+                result = new ChipChoiceFilterViewHolder<>(
                     ValueGroupFilterAccessor.<CacheSize, SizeGeocacheFilter>createForValueGroupFilter()
                         .setSelectableValues(CacheSize.values())
                         .setValueDisplayTextGetter(CacheSize::getL10n));
