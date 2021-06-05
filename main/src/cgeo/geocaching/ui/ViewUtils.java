@@ -290,4 +290,8 @@ public class ViewUtils {
 
     }
 
+    public static Context wrap(final Context ctx) {
+        return new ContextThemeWrapper(ctx, R.style.cgeo);
+    }
+
 }

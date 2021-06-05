@@ -154,7 +154,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         } else {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             if (statusOwn != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".owner_real " + (statusOwn ? "=" : "<>") + " ?", Settings.getUserName());
+                sqlBuilder.addWhere("LOWER(" + sqlBuilder.getMainTableId() + ".owner_real) " + (statusOwn ? "=" : "<>") + " LOWER(?)", Settings.getUserName());
             }
             if (statusFound != null) {
                 sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".found = " + (statusFound ? "1" : "0"));
