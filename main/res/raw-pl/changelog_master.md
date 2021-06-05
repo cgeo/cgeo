@@ -1,10 +1,10 @@
-### Advanced filtering system (experimental)
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- This is work in progress, stay tuned!
-- The old filter systems are still available (for the time being), but will be superseeded by the new system at some point in time.
+### Zaawansowany system filtrowania (eksperymentalne)
+- Wprowadzenie nowego systemu filtrowania do c:geo, wspierajcego elastyczne, łączone i przechowywane lokalnie filtry
+- Dostępne zarówno w opisie skrytki jak i w widoku mapy
+- Praca w toku, wypatrujcie aktualizacji!
+- Stare tryby filtrowania są nadal dostępne (na jakiś czas), ale zostaną zastąpione przez nowy za jakiś czas.
 
-### Map
+### Mapa
 - New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
 - New: Separate "own" and "found" filters in map quick settings
 - Change: Additionally show cache name in poup details
@@ -14,9 +14,9 @@
 - New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
 
 ### Downloader
-- Change: Downloads will now completely happen in background, a notification is shown
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+- Zmiana: Pobieranie będzie teraz odbywać się całkowicie w tle i wyświetlane będzie powiadomienie
+- Zmiana: Pobrane pliki automatycznie zastąpią istniejące pliki o tej samej nazwie
+- Zmiana: Jeśli mapa wymaga określonego motywu, który nie jest jeszcze zainstalowany, c:geo automatycznie pobierze i zainstaluje ten motyw
 
 ### Other
 - Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
