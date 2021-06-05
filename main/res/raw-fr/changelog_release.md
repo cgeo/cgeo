@@ -1,10 +1,10 @@
-### Cache details
+### Détails de la cache
 
 
-### Map
+### Carte
 
 
-### Integrated routing engine
+### Moteur de navigation intégré
 
 
-### Other
+### Divers
