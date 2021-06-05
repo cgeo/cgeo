@@ -6,7 +6,6 @@
     <dimen name="actionbar_separator_width">2dip</dimen>
 
     <dimen name="radioButtonCheckboxPreferredItemHeight">32dp</dimen>
-    <dimen name="listPreferredItemHeightSmall">40dp</dimen>
 
     <!-- Dimensions for Samsung Multi-Window support -->
     <dimen name="app_defaultsize_w">632.0dip</dimen>

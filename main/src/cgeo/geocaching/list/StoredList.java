@@ -108,7 +108,7 @@ public final class StoredList extends AbstractList {
             }
 
             final Activity activity = activityRef.get();
-            final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity, R.style.cgeo_compactDialogs);
             builder.setTitle(res.getString(titleId));
             builder.setMultiChoiceItems(listTitles, selectedItems, new MultiChoiceClickListener(lists, selectedListIds));
             builder.setPositiveButton(android.R.string.ok, new OnOkClickListener(selectedListIds, runAfterwards, listNameMemento));
@@ -134,7 +134,7 @@ public final class StoredList extends AbstractList {
             final CharSequence[] items = new CharSequence[listsTitle.size()];
 
             final Activity activity = activityRef.get();
-            final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity, R.style.cgeo_compactDialogs);
             builder.setTitle(res.getString(titleId));
             builder.setItems(listsTitle.toArray(items), (dialogInterface, itemId) -> {
                 final AbstractList list = lists.get(itemId);
