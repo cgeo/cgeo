@@ -171,6 +171,17 @@
         <item name="iconPadding">0dp</item>
     </style>
 
+    <!-- Chips -->
+
+    <style name="chip_choice" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="android:padding">6dip</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
+    </style>
+
     <!-- edittext -->
 
     <style name="edittext" parent="@android:style/Widget.EditText">
