@@ -436,6 +436,7 @@
     <string name="about_system_write_logcat_type_extended">Rozšírený</string>
     <string name="about_system_write_logcat_success">Súbor denníka \"%1$s\" zapísaný do priečinka \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Chyba pri zapisovaní súboru denníka</string>
+    <string name="about_system_write_infos_downloadmanager">Zobraziť prevzaté súbory</string>
     <string name="changelog_github">Zoznam všetkých zmien</string>
     <string name="about_nutshellmanual">Návod na internete</string>
     <string name="about_contributors_carnerodetails">ako otec c:geo</string>
@@ -482,6 +483,8 @@
     <string name="confirm_data_dir_move_title">Presunúť priečinok s údajmi o keškách?</string>
     <string name="confirm_data_dir_move">Presúvanie údajov skrýš môže trvať naozaj dlho, závisí to od zariadenia a množstva údajov.</string>
     <string name="settings_title_basicmembers">Možnosti pre bežných členov</string>
+    <string name="settings_title_navigation">Trasa/Navigácia</string>
+    <string name="settings_summary_navigation">Nastavte offline navigáciu, vyberte preferované metódy navigácie a externé navigačné aplikácie.</string>
     <string name="settings_title_system">Systém</string>
     <string name="settings_summary_system">Systémové nastavenia a možnosti ladenia.</string>
     <string name="settings_title_navigation_menu">Navigačné Menu</string>
@@ -502,6 +505,8 @@
     <string name="settings_gc_description">Autorizovať c:geo pre hľadanie skrýš geocaching.com.</string>
     <string name="settings_ec_description">Autorizovať c:geo pre hľadanie skrýš a prístup/filtrovanie vašich nájdených skrýš s extremcaching.com.</string>
     <string name="settings_su_description">Autorizovať c:geo pre hľadanie skrýš s geocaching.su.</string>
+    <string name="settings_lc_description">Zahrnúť do mapy Adventure Lab kešky.\n\n(K dispozícii len prémiovým členom \"Geocaching.com\". Vyžaduje aktivovanú službu \"Geocaching.com\".)\n\nZmena tohto nastavenia vyžaduje reštart aplikácie.</string>
+    <string name="lc_default_description">Toto je Adventure Lab keška z geocaching.com. Adventúry možno hrať len s aplikáciou Adventure Lab od spoločnosti Groundspeak. Ťuknutím na ikonu Adventure Lab na stránke \"Podrobnosti\" otvoríte/nainštalujete aplikáciu Adventure Lab App pre túto adventúru odtiaľto.\nAk nechcete vidieť a vyhľadávať kešky Adenture Lab na svojej mape, môžete to deaktivovať cez ponuku \"Nastavenie\" menu – Služby – Geocaching.com Adventure Lab.</string>
     <string name="settings_activate_oc">Aktivovať</string>
     <string name="init_summary_oc_de">Načítať skrýše z opencaching.de</string>
     <string name="init_oc_de_description">Autorizovať c:geo pre opencaching.de na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
@@ -640,6 +645,7 @@
     <string name="init_user_confirmation">Viem, čo robím</string>
     <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
     <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
+    <string name="init_backup_unnecessary">Databáza je prázdna, nie je potrebná žiadna záloha. Naďalej vytvárať zálohu?</string>
     <string name="init_backup_folder_exists_error">Nedá sa vytvoriť nový priečinok na zálohy. Vytvorili ste už zálohu za poslednú minútu?</string>
     <string name="init_backup_no_backup_available">Nie je dostupný žiadny súbor so zálohou.</string>
     <string name="backup_confirm_overwrite">Tým odstránite priečinok s najstaršou existujúcou zálohou zo %s. \nChcete pokračovať?</string>
@@ -1202,6 +1208,7 @@
     <string name="waypoint_coordinates">Súradnice</string>
     <string name="waypoint_cache_coordinates">Súradnice skrýše</string>
     <string name="waypoint_calculate_coordinates">Vypočítať súradnice</string>
+    <string name="waypoint_calculated_coordinates">Vypočítané súradnice</string>
     <string name="waypoint_custom">vlastný</string>
     <string name="waypoint_my_coordinates">Aktuálna poloha</string>
     <string name="waypoint_bearing">Azimut v °</string>
@@ -1840,6 +1847,8 @@
     <string name="individual_route_error_toggling_waypoint">chyba pri prepnutí bodu trasy</string>
     <string name="individual_route_error_single_waypoint_mode">Nie je dostupné v režime jedného trasového bodu</string>
     <string name="map_sort_individual_route">Zoradiť individuálnu trasu</string>
+    <string name="map_export_individual_route">Exportovať ako trasu</string>
+    <string name="map_export_individual_route_as_track">Exportovať ako stopu</string>
     <string name="map_load_individual_route">Načítať individuálnu trasu</string>
     <string name="map_load_individual_route_confirm">Prepísať existujúcu trasu?</string>
     <string name="map_autotarget_individual_route">Nastaviť začiatok trasy ako cieľ</string>
@@ -1914,6 +1923,7 @@
     <string name="localfile_cannot_handle">Chyba počas čítania súboru alebo c:geo nevie pracovať s týmto druhom súboru.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Prijať súbor</string>
+    <string name="receivedownload_receiving_file">Prijíma sa súbor \"%s\"</string>
     <string name="receivedownload_success">Súbor úspešne uložený ako \"%s\"</string>
     <string name="receivedownload_error">Chyba počas prijímania súboru</string>
     <string name="receivedownload_error_io_exception">Chyba vstupu/výstupu počas prijímania súboru. Dá sa zapisovať do priečinka \"%s\"?</string>
@@ -1921,6 +1931,7 @@
     <string name="receivedownload_alreadyexists">Súbor s týmto názvom už existuje. Prepísať existujúci súbor alebo uložiť nový súbor s iným názvom?</string>
     <string name="receivedownload_option_overwrite">Prepísať</string>
     <string name="receivedownload_option_differentname">Premenovať</string>
+    <string name="receivedownload_amount_copied">%s skopírované</string>
     <string name="receivedownload_cancelled">Prenos súboru zrušený</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Prevziať offline mapu</string>
@@ -1958,6 +1969,8 @@
     <string name="mapserver_openandromaps_themes_info">Podrobný mapový motív, zabudovaný pre mapy \"OpenAndroidMap\"</string>
     <string name="mapserver_freizeitkarte_info">Podrobné mapy, vyžadujú jeden z mapových motívov \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Podrobný mapový motív, zabudovaný pre mapy \"Freizeitkarte\"</string>
+    <string name="mapserver_hylly_info">Podrobné mapy pre Fínsko, vyžaduje jednu z mapových tém \"Hylly\"</string>
+    <string name="mapserver_hylly_themes_info">Podrobná mapová téma, zabudovaná pre mapy \"Hylly\"</string>
     <string name="brouter_info">Služba offline navigácie</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazať históriu trasy</string>

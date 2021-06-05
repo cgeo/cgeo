@@ -436,6 +436,7 @@
     <string name="about_system_write_logcat_type_extended">Rozszerzone</string>
     <string name="about_system_write_logcat_success">Plik dziennika \"%1$s\" zapisany do folderu \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Błąd zapisu pliku logu</string>
+    <string name="about_system_write_infos_downloadmanager">Zobacz pobrane</string>
     <string name="changelog_github">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
     <string name="about_contributors_carnerodetails">jako ojciec c:geo</string>
@@ -482,6 +483,8 @@
     <string name="confirm_data_dir_move_title">Przenieść folder z danymi skrytek?</string>
     <string name="confirm_data_dir_move">Przeniesienie katalogu z danymi może zająć bardzo długo, zależnie od Twojego urządzenia i wielkości danych.</string>
     <string name="settings_title_basicmembers">Opcje dla użytkowników Basic</string>
+    <string name="settings_title_navigation">Wyznaczanie trasy / Nawigacja</string>
+    <string name="settings_summary_navigation">Skonfiguruj wyznaczanie trasy offline, wybierz preferowane metody nawigacji i zewnętrzne aplikacje do nawigacji.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Ustawienia specyficzne dla systemu i opcje debugowania.</string>
     <string name="settings_title_navigation_menu">Menu nawigacji</string>
@@ -502,6 +505,8 @@
     <string name="settings_gc_description">Upoważnia c:geo przy użyciu geocaching.com do szukania skrzynek.</string>
     <string name="settings_ec_description">Upoważnia c:geo przy użyciu extremcaching.com do szukania skrzynek i dostępu/filtrowania znalezionych.</string>
     <string name="settings_su_description">Upoważnij c:geo z geocaching.su aby wyszukać skrzynki.</string>
+    <string name="settings_lc_description">Wyświetlaj Skrytki Przygodowe na mapie.\n\n(Dostępne tylko dla użytkowników premium Geocaching.com. Wymaga aktywowanej usługi Geocaching.com.)\n\nZmiana tego ustawienia wymaga ponownego uruchomienia.</string>
+    <string name="lc_default_description">To jest Skrytka Przygodowa z geocaching.com. Przygody można rozgrywać tylko w aplikacji Adventure Lab od Groundspeak. Dotknij ikony Adventure Lab w „Szczegółach”, aby otworzyć/zainstalować aplikację Adventure Lab.\nJeśli nie chcesz widzieć Skrytek Przygodowych na mapie i podczas wyszukiwania, możesz je dezaktywować w menu Ustawienia - Usługi - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Aktywuj</string>
     <string name="init_summary_oc_de">Załaduj skrzynki z opencaching.de</string>
     <string name="init_oc_de_description">Autoryzuj c:geo z opencaching.de aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
@@ -640,6 +645,7 @@
     <string name="init_user_confirmation">Wiem co robię</string>
     <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
     <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
+    <string name="init_backup_unnecessary">Baza danych jest pusta, kopia zapasowa nie jest wymagana. Utworzyć kopię zapasową mimo to?</string>
     <string name="init_backup_folder_exists_error">Nie można utworzyć nowego folderu kopii zapasowej. Czy wykonałeś już kopię zapasową w ciągu ostatniej minuty?</string>
     <string name="init_backup_no_backup_available">Plik kopii zapasowej nie jest dostępny.</string>
     <string name="backup_confirm_overwrite">Spowoduje to usunięcie najstarszego istniejącego folderu kopii zapasowej z %s. \nCzy chcesz kontynuować?</string>
@@ -1202,6 +1208,7 @@
     <string name="waypoint_coordinates">Współrzędne</string>
     <string name="waypoint_cache_coordinates">Współrzędne skrzynki</string>
     <string name="waypoint_calculate_coordinates">Oblicz współrzędne</string>
+    <string name="waypoint_calculated_coordinates">Obliczone współrzędne</string>
     <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
     <string name="waypoint_my_coordinates">Moje współrzędne</string>
     <string name="waypoint_bearing">Kierunek w stopniach</string>
@@ -1840,6 +1847,8 @@
     <string name="individual_route_error_toggling_waypoint">błąd przełączenia punktu nawigacji</string>
     <string name="individual_route_error_single_waypoint_mode">Niedostępne w trybie pojedynczego punktu nawigacyjnego</string>
     <string name="map_sort_individual_route">Sortuj indywidualną trasę</string>
+    <string name="map_export_individual_route">Eksportuj jako trasę</string>
+    <string name="map_export_individual_route_as_track">Eksportuj jako ślad</string>
     <string name="map_load_individual_route">Załaduj indywidualną trasę</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
     <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
@@ -1914,6 +1923,7 @@
     <string name="localfile_cannot_handle">Błąd odczytu pliku lub c:geo nie może obsłużyć tego typu pliku.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Odbieranie pliku</string>
+    <string name="receivedownload_receiving_file">Odbieranie pliku \"%s\"</string>
     <string name="receivedownload_success">Plik pomyślnie zapisany jako \"%s\"</string>
     <string name="receivedownload_error">Błąd podczas odbierania pliku</string>
     <string name="receivedownload_error_io_exception">Błąd I/O podczas odbierania pliku. Czy Twój folder \"%s\" jest zapisywalny?</string>
@@ -1921,6 +1931,7 @@
     <string name="receivedownload_alreadyexists">Plik o tej nazwie już istnieje. Nadpisać istniejący plik lub zapisać nowy plik pod inną nazwą?</string>
     <string name="receivedownload_option_overwrite">Nadpisz</string>
     <string name="receivedownload_option_differentname">Inna nazwa</string>
+    <string name="receivedownload_amount_copied">%s skopiowany</string>
     <string name="receivedownload_cancelled">Anulowany transfer pliku</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>
@@ -1958,6 +1969,8 @@
     <string name="mapserver_openandromaps_themes_info">Szczegółowy motyw mapy, przygotowany dla map „OpenAndroMaps”</string>
     <string name="mapserver_freizeitkarte_info">Szczegółowe mapy, wymagają jednego z motywów map „freizeitkarte”.</string>
     <string name="mapserver_freizeitkarte_themes_info">Szczegółowy motyw mapy, przygotowany dla map „Freizeitkarte”</string>
+    <string name="mapserver_hylly_info">Szczegółowe mapy dla Finlandii wymagają jednego z tematów mapy „Hylly”</string>
+    <string name="mapserver_hylly_themes_info">Szczegółowy motyw mapy, zbudowany dla map „Hylly”</string>
     <string name="brouter_info">Usługa nawigacji offline</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>

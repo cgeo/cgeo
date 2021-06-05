@@ -435,6 +435,7 @@
     <string name="about_system_write_logcat_type_extended">Ampliat</string>
     <string name="about_system_write_logcat_success">Fitxer de registre \"%1$s\" escrit a la carpeta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error en el Fitxer de registre</string>
+    <string name="about_system_write_infos_downloadmanager">Veure descàrregues</string>
     <string name="changelog_github">Llista de tots els canvis</string>
     <string name="about_nutshellmanual">Manual en línia</string>
     <string name="about_contributors_carnerodetails">com el pare de c:geo</string>
@@ -481,6 +482,8 @@
     <string name="confirm_data_dir_move_title">Voleu moure la carpeta de dades de Geocatxés?</string>
     <string name="confirm_data_dir_move">Moure el directori de dades dels geoamagatalls pot trigar una bona estona, en funció del dispositiu i de la quantitat de dades.</string>
     <string name="settings_title_basicmembers">Opcions per a membres bàsics</string>
+    <string name="settings_title_navigation">Encaminament / Navegació</string>
+    <string name="settings_summary_navigation">Configureu l\'encaminament fora de línia, trieu els mètodes de navegació preferits i seleccioneu aplicacions de navegació externes.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Configuració i opcions de depuració específiques del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegació</string>
@@ -501,6 +504,8 @@
     <string name="settings_gc_description">Autoritza c:geo a geocaching.com per buscar catxés.</string>
     <string name="settings_ec_description">Autoritza al c:geo a extremcaching.com per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
     <string name="settings_su_description">Autoritza c:geo a geocaching.su per buscar catxés.</string>
+    <string name="settings_lc_description">Incloeu les Adventure Lab catxé al mapa.\n\n(disponible només per a membres premium de \"Geocaching.com\". Requereix un servei \"Geocaching.com\" activat.)\n\nPer canviar aquesta configuració, cal reiniciar.</string>
+    <string name="lc_default_description">Es tracta d’un Adventure Lab catxé de geocaching.com. Les aventures només es poden jugar amb l’aplicació Groundspeak Adventure Lab. Toqueu la icona Adventure Lab de la pàgina \"Detalls\" per obrir/instal·lar l\'aplicació Adventure Lab per a aquesta aventura des d\'allà.\nSi no voleu veure les Adventure Lab al vostre mapa i fer cerques, podeu desactivar-les mitjançant el menu \"Configuració\"- Serveis - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Activa</string>
     <string name="init_summary_oc_de">Carregar catxés des de opencaching.de</string>
     <string name="init_oc_de_description">Autoritza al c:geo a opencaching.de per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
@@ -594,7 +599,7 @@
     <string name="init_disabled">Exclou els desactivats</string>
     <string name="init_summary_disabled">Exclou els catxés desactivats</string>
     <string name="init_archived">Exclou arxivats</string>
-    <string name="init_summary_archived">Exclou els catxés desactivats</string>
+    <string name="init_summary_archived">Exclou els catxés arxivats</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
     <string name="init_customtabs_as_browser">Utilitzeu Chrome</string>
@@ -639,6 +644,7 @@
     <string name="init_user_confirmation">Sé el que estic fent</string>
     <string name="init_backup_success">La base de dades del c:geo s\'ha copiat amb èxit a:</string>
     <string name="init_backup_failed">Ha fallat la còpia de seguretat de la base de dades de c:geo.</string>
+    <string name="init_backup_unnecessary">La base de dades està buida, no cal fer cap còpia de seguretat. Encara voleu crear una còpia de seguretat?</string>
     <string name="init_backup_folder_exists_error">No es pot crear una carpeta de còpia de seguretat nova. Heu realitzat una còpia de seguretat en l\'últim minut?</string>
     <string name="init_backup_no_backup_available">No hi ha cap còpia de seguretat disponible.</string>
     <string name="backup_confirm_overwrite">Això suprimirà la carpeta de la còpia de seguretat més antiga de %s. \nVoleu continuar?</string>
@@ -1181,6 +1187,7 @@
     <string name="waypoint_coordinates">Coordenades</string>
     <string name="waypoint_cache_coordinates">Coordenades del catxé</string>
     <string name="waypoint_calculate_coordinates">Calcula coordenades</string>
+    <string name="waypoint_calculated_coordinates">Coordenades calculades</string>
     <string name="waypoint_custom">Personal</string>
     <string name="waypoint_my_coordinates">Les meves coordenades</string>
     <string name="waypoint_bearing">Direcció en º</string>
@@ -1663,6 +1670,7 @@
     <string name="faq_title">Preguntes freqüents</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Nova versió disponible.\nToca per instal·lar-la.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Hi ha disponible una nova versió nightly.\nToca per instal·lar-la.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Hi ha disponible una app candidata a nova versió.\nToca per instal·lar.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Els canvis a geocaching.com estan provocant problemes a c: geo.\nSom conscients i hi treballem, doneu-nos una mica de temps.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Els canvis a geocaching.com estan provocant problemes al mapa en viu.\nSom conscients i hi treballem, doneu-nos una mica de temps.</string>
@@ -1793,6 +1801,8 @@
     <string name="individual_route_error_toggling_waypoint">error en canviar el punt de ruta</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en mode punt de ruta únic</string>
     <string name="map_sort_individual_route">Ordena la ruta individual</string>
+    <string name="map_export_individual_route">Exporta com a ruta</string>
+    <string name="map_export_individual_route_as_track">Exporta com a track</string>
     <string name="map_load_individual_route">Carrega la ruta individual</string>
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
     <string name="map_autotarget_individual_route">Estableix l’inici de la ruta com a objectiu</string>
@@ -1858,6 +1868,7 @@
     <string name="localfile_cannot_handle">Error en llegir el fitxer o c: geo no pot gestionar aquest tipus de fitxer.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Rebre fitxer</string>
+    <string name="receivedownload_receiving_file">S\'està rebent el fitxer \"%s\"</string>
     <string name="receivedownload_success">El fitxer s\'ha emmagatzemat correctament com a \"%s\"</string>
     <string name="receivedownload_error">Error en rebre el fitxer</string>
     <string name="receivedownload_error_io_exception">Error en rebre el fitxer. La vostra carpeta \"%s\" es pot escriure?</string>
@@ -1865,6 +1876,7 @@
     <string name="receivedownload_alreadyexists">Ja existeix un fitxer amb aquest nom. Voleu sobreescriure el fitxer existent o desar-lo amb un nom diferent?</string>
     <string name="receivedownload_option_overwrite">Sobreescriu</string>
     <string name="receivedownload_option_differentname">Nom diferent</string>
+    <string name="receivedownload_amount_copied">%s copiat</string>
     <string name="receivedownload_cancelled">S\'ha cancel·lat la transferència de fitxers</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Descarregar mapa fora de línia</string>
@@ -1902,6 +1914,8 @@
     <string name="mapserver_openandromaps_themes_info">Tema detallat del mapa, creat per als mapes \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Els mapes detallats requereixen un dels temes de mapes \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema detallat del mapa, creat per als mapes \"Freizeitkarte\"</string>
+    <string name="mapserver_hylly_info">Els mapes detallats de Finlàndia requereixen un dels temes de mapes \"Hylly\"</string>
+    <string name="mapserver_hylly_themes_info">Tema detallat del mapa, creat per als mapes \"Hylly\"</string>
     <string name="brouter_info">Servei d’encaminament fora de línia</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>

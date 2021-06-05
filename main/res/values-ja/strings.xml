@@ -572,8 +572,8 @@
     <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
     <string name="init_use_default_language">システムの言語</string>
     <string name="init_category_exclude">キャッシュを除外</string>
-    <string name="init_exclude">所有または発見したキャッシュ除く</string>
-    <string name="init_summary_exclude">自分で所有または発見したキャッシュは除く</string>
+    <string name="init_exclude">所有または発見したキャッシュを除外</string>
+    <string name="init_summary_exclude">自分で所有または発見したキャッシュを除外</string>
     <string name="init_showwaypoints">地図でウェイポイントの表示</string>
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示</string>
     <string name="init_zoomincludingwaypoints">ウェイポイントを表示するようにズーム</string>
@@ -594,10 +594,10 @@
     <string name="init_summary_useInternalRouting">c:geoルート検索(Brouter互換)を使用するとルート検索データの自動ダウンロードなどもできます。</string>
     <string name="init_bigSmileysOnMap">大きなスマイルアイコン</string>
     <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルアイコンをキャッシュタイプアイコンの代わりに表示\n(c:geoの再起動が必要)</string>
-    <string name="init_disabled">一時停止中キャッシュ除く</string>
-    <string name="init_summary_disabled">一時停止中キャッシュは除く</string>
-    <string name="init_archived">アーカイブ済み除く</string>
-    <string name="init_summary_archived">アーカイブ済みキャッシュは除く</string>
+    <string name="init_disabled">一時停止中キャッシュを除外</string>
+    <string name="init_summary_disabled">一時停止中キャッシュを除外</string>
+    <string name="init_archived">アーカイブ済みを除外</string>
+    <string name="init_summary_archived">アーカイブ済みキャッシュを除外</string>
     <string name="init_global_wp_extraction_disable">ウェイポイント抽出を無効化</string>
     <string name="init_summary_global_wp_extraction_disable">ノート作成時に「ウェイポイント抽出をしない」をデフォルトにします。パーソナルノートでチェックボックスを外せば個別に有効化できます</string>
     <string name="init_customtabs_as_browser">Chrome WebViewを使用</string>
@@ -1360,7 +1360,7 @@
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます</string>
     <string name="helper_where_you_go_description">WhereYouGoアプリでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
-    <string name="helper_brouter_description">BRouterはオフラインのルート検索エンジンです。インストール後に必要なファイルをダウンロードするなどのセットアップが必要です。c:geoで地図にキャッシュなどへのルートを表示できるようになります</string>
+    <string name="helper_brouter_description">BRouterはオフライン用のルート検索エンジンです。インストール後に必要なファイルをダウンロードするなどのセットアップが必要です。c:geoで地図にキャッシュなどへのルートを表示できるようになります</string>
     <string name="helper_chirpwolf_description">Chirp Wolfを使用するとANT+/Garmin chirp(ジオキャッシュ ビーコン)からデータを読み取ることができます。Garmin chirpを含むジオキャッシュには必要です</string>
     <string name="helper_alc_description">スマホやタブレット用のアドベンチャー・ラボのアプリ</string>
     <!-- export -->

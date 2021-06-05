@@ -432,6 +432,7 @@
     <string name="about_system_write_logcat_type_extended">Étendu</string>
     <string name="about_system_write_logcat_success">Fichier journal \"%1$s\" écrit dans le dossier \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Erreur lors de l\'écriture du fichier journal</string>
+    <string name="about_system_write_infos_downloadmanager">Afficher les téléchargements</string>
     <string name="changelog_github">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
     <string name="about_contributors_carnerodetails">comme le père de c:geo</string>
@@ -477,6 +478,8 @@
     <string name="confirm_data_dir_move_title">Déplacer le dossier de données des Geocaches ?</string>
     <string name="confirm_data_dir_move">Le déplacement du dossier de stockage des Geocaches peut être long et varie en fonction de votre appareil et du nombre de caches.</string>
     <string name="settings_title_basicmembers">Options pour les membres non-premium</string>
+    <string name="settings_title_navigation">Routage et Navigation</string>
+    <string name="settings_summary_navigation">Paramétrez la navigation hors-ligne, sélectionnez vos méthodes de navigation préférées ainsi que les applications de navigation externes.</string>
     <string name="settings_title_system">Système</string>
     <string name="settings_summary_system">Paramètres spécifiques au système et options de débogage.</string>
     <string name="settings_title_navigation_menu">Menu de navigation</string>
@@ -632,6 +635,7 @@
     <string name="init_user_confirmation">Je sais ce que je fais</string>
     <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
     <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
+    <string name="init_backup_unnecessary">La base de données est vide, aucune sauvegarde n\'est donc nécessaire. Souhaitez-vous quand même créer une sauvegarde ?</string>
     <string name="init_backup_folder_exists_error">Impossible de créer un nouveau dossier de sauvegarde. Avez-vous déjà effectué une sauvegarde au cours de la dernière minute ?</string>
     <string name="init_backup_no_backup_available">Aucun fichier de sauvegarde n\'est disponible.</string>
     <string name="backup_confirm_overwrite">Ceci supprimera votre plus ancien dossier de sauvegarde existant de %s. \nVoulez-vous continuer ?</string>
@@ -1170,6 +1174,7 @@
     <string name="waypoint_coordinates">Coordonnées</string>
     <string name="waypoint_cache_coordinates">Coordonnées de la cache</string>
     <string name="waypoint_calculate_coordinates">Calculer les coordonnées</string>
+    <string name="waypoint_calculated_coordinates">Coordonnées calculées</string>
     <string name="waypoint_custom">Personnalisé</string>
     <string name="waypoint_my_coordinates">Ma position</string>
     <string name="waypoint_bearing">Relèvement en °</string>
@@ -1779,6 +1784,8 @@
     <string name="individual_route_error_toggling_waypoint">erreur du basculement du point de passage</string>
     <string name="individual_route_error_single_waypoint_mode">Non disponible en mode point de passage unique</string>
     <string name="map_sort_individual_route">Trier les itinéraires individuels</string>
+    <string name="map_export_individual_route">Exporter comme itinéraire</string>
+    <string name="map_export_individual_route_as_track">Exporter comme trace</string>
     <string name="map_load_individual_route">Charger un itinéraire individuel</string>
     <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
     <string name="map_autotarget_individual_route">Définir le départ de l\'itinéraire comme cible</string>
@@ -1847,10 +1854,12 @@
     <string name="localfile_cannot_handle">Erreur lors de la lecture du fichier ou c:geo ne peut pas gérer ce type de fichier.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Recevoir le fichier</string>
+    <string name="receivedownload_receiving_file">Réception du fichier \"%s\"</string>
     <string name="receivedownload_error">Erreur pendant la réception du fichier</string>
     <string name="receivedownload_alreadyexists">Un fichier portant ce nom existe déjà. Écraser le fichier existant ou enregistrer le nouveau fichier sous un autre nom ?</string>
     <string name="receivedownload_option_overwrite">Écraser</string>
     <string name="receivedownload_option_differentname">Nouveau nom</string>
+    <string name="receivedownload_amount_copied">%s a été copié</string>
     <string name="receivedownload_cancelled">Transfert de fichiers annulé</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Télécharger des cartes hors ligne</string>
@@ -1882,6 +1891,8 @@
     <string name="mapserver_openandromaps_themes_info">Thème de carte détaillée et optimisé pour les cartes \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Cartes détaillées, nécessitent l\'un des thèmes de carte \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Thème de carte détaillé, construit pour les cartes \"Freizeitkarte\"</string>
+    <string name="mapserver_hylly_info">Cartes détaillées pour la Finlande, nécessite l\'un des thèmes de carte \"Hylly\"</string>
+    <string name="mapserver_hylly_themes_info">Thème de carte détaillé et optimisé pour les cartes \"Hylly\"</string>
     <string name="brouter_info">Service hors-ligne de calcul d\'itinéraire</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Effacer l\'historique du parcours</string>
