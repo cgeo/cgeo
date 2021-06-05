@@ -1489,7 +1489,7 @@
     <string name="map_showc_own">Own</string>
     <string name="map_showc_found">Found</string>
     <string name="map_showc_disabled">Disabled</string>
-    <string name="map_showc_archived">Archived </string>
+    <string name="map_showc_archived">Archived</string>
     <string name="map_showc_offlinelog">Logged Offline</string>
     <string name="map_showwp_original">Original</string>
     <string name="map_showwp_parking">Parking</string>
