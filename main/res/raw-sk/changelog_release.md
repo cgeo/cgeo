@@ -1,10 +1,10 @@
-### Cache details
+### Detaily kešky
 
 
-### Map
+### Mapa
 
 
-### Integrated routing engine
+### Zabudované prostredie navigácie
 
 
-### Other
+### Iné
