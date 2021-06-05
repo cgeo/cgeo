@@ -1347,6 +1347,16 @@
     <string name="map_view_map">Karte</string>
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
+    <string name="map_show_circles">Kreise</string>
+    <string name="map_showc_own">Eigene</string>
+    <string name="map_showc_found">Gefundene</string>
+    <string name="map_showc_disabled">Deaktivierte</string>
+    <string name="map_showc_archived">Archivierte</string>
+    <string name="map_showc_offlinelog">Offline geloggt</string>
+    <string name="map_showwp_original">Originale</string>
+    <string name="map_showwp_parking">Parken</string>
+    <string name="map_showwp_visited">Besuchte</string>
+    <string name="map_show_track">GPX-Track/Route</string>
     <string name="init_renderthemefolder_synctolocal">Designs synchronisieren</string>
     <string name="init_summary_renderthemefolder_synctolocal">Dies wird deine Designs in einen app-internen Ordner synchronisieren, um die Startgeschwindigkeit der Karte zu verbessern auf Kosten von etwas Gerätespeicher.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisierung des Designordners einschalten</string>
@@ -1371,6 +1381,9 @@
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
     <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
+    <string name="map_show_caches_title">Caches anzeigen:</string>
+    <string name="map_show_waypoints_title">Wegpunkte anzeigen:</string>
+    <string name="map_show_other_title">Weiteres anzeigen:</string>
     <!-- search -->
     <string name="search_bar_hint">Caches/Trackables suchen</string>
     <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
@@ -1898,7 +1911,14 @@
     <string name="number_input_err_boundarymax">Der eingegebene Wert ist zu groß - auf den maximalen Wert zurückgesetzt</string>
     <string name="number_input_err_format">Ungültiges Zahlenformat</string>
     <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">Annäherungs-Benachrichtigung</string>
+    <string name="notification_channel_proximity_description">genutzt für die Anzeige von Caches in der Nähe</string>
+    <string name="notification_channel_foreground_name">Vordergrunddienst</string>
+    <string name="notification_channel_foreground_description">Benachrichtigung wird angezeigt, während c:geo im Hintergrund arbeitet</string>
+    <string name="notification_channel_downloader_name">c:geo Downloader</string>
+    <string name="notification_channel_downloader_description">Ergebnisbenachrichtigung für Downloads (z.B. Offline-Karten)</string>
     <string name="notification_proximity_title">c:geo Annäherungsbenachrichtigung</string>
+    <string name="notification_download_receiver_title">Importiere Download</string>
     <!-- individual routes -->
     <string name="individual_route">Individuelle Route</string>
     <string name="individual_route_added">zur Route hinzugefügt</string>
