@@ -38,7 +38,7 @@
         <item name="android:listPreferredItemHeightSmall">40dp</item>
         <item name="materialAlertDialogTitleTextStyle">@style/alertDialogTitleTextStyle</item>
         <item name="materialAlertDialogBodyTextStyle">@style/alertDialogBodyTextStyle</item>
-        <item name="android:checkedTextViewStyle">@style/checkboxStyle</item>
+        <item name="android:checkedTextViewStyle">@style/checkboxStyleNoParent</item>
     </style>
 
     <!-- theme for cache/waypoint popups -->
