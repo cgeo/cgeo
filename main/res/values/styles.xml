@@ -28,6 +28,12 @@
         <item name="android:textColor">@color/colorText</item>
     </style>
 
+    <style name="checkboxStyleNoParent">
+        <item name="android:minHeight">@dimen/radioButtonCheckboxPreferredItemHeight</item>
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
     <style name="checkbox_full">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
