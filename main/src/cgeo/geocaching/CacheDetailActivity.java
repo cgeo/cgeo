@@ -335,10 +335,6 @@ public class CacheDetailActivity extends AVPActivity
             if (Settings.isOpenLastDetailsPage()) {
                 Settings.setLastDetailsPage(currentPageId);
             }
-            // lazy loading of cache images
-            if (currentPageId == Page.IMAGES.id) {
-                loadCacheImages();
-            }
             requireGeodata = currentPageId == Page.DETAILS.id;
             startOrStopGeoDataListener(false);
 
@@ -885,7 +881,6 @@ public class CacheDetailActivity extends AVPActivity
     }
 
     private void notifyDataSetChanged() {
-        Log.e("CacheDetailActivity.notifyDataSetChanged");
         // This might get called asynchronous when the activity is shut down
         if (isFinishing()) {
             return;
@@ -961,25 +956,6 @@ public class CacheDetailActivity extends AVPActivity
      */
     public void showNavigationMenu(@SuppressWarnings("unused") final View view) {
         NavigationAppFactory.showNavigationMenu(this, cache, null, null, true, true);
-    }
-
-    private void loadCacheImages() {
-        return;
-        /* @todo mb
-        if (imagesList != null) {
-            return;
-        }
-        final PageViewCreator creator = getViewCreator(Page.IMAGES);
-        if (creator == null) {
-            return;
-        }
-        final View imageView = creator.getView(null);
-        if (imageView == null) {
-            return;
-        }
-        imagesList = new ImagesList(this, cache.getGeocode(), cache);
-        createDisposables.add(imagesList.loadImages(imageView, cache.getNonStaticImages()));
-        */
     }
 
     public static void startActivity(final Context context, final String geocode, final boolean forceWaypointsPage) {
@@ -2231,8 +2207,9 @@ public class CacheDetailActivity extends AVPActivity
                 return;
             }
 
-            if (activity.imagesList == null && activity.isCurrentPage(Page.IMAGES.id)) {
-                activity.loadCacheImages();
+            if (activity.imagesList == null) {
+                activity.imagesList = new ImagesList(activity, cache.getGeocode(), cache);
+                activity.createDisposables.add(activity.imagesList.loadImages(binding.getRoot(), cache.getNonStaticImages()));
             }
         }
     }
@@ -2481,7 +2458,7 @@ public class CacheDetailActivity extends AVPActivity
         pages.add(Page.DETAILS.id);
         pages.add(Page.DESCRIPTION.id);
         // enforce showing the empty log book if new entries can be added
-        if (cache != null) { // @todo mb: remove this requirement
+        if (cache != null) {
             if (cache.supportsLogging() || !cache.getLogs().isEmpty()) {
                 pages.add(Page.LOGS.id);
             }

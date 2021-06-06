@@ -1,5 +1,7 @@
 package cgeo.geocaching.activity;
 
+import android.view.View;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -20,7 +22,6 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
     protected Map<Integer, AVPFragment> cache = new LinkedHashMap<>();
 
     private int currentPageId;
-    // private int initialPageId; // gets set on every "setOrderedPages"
     private int[] orderedPages;
     private ViewPager2 viewPager = null;
     private Action1<Integer> onPageChangeListener = null;
@@ -35,7 +36,7 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
         viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new ViewPagerAdapter(this));
         viewPager.registerOnPageChangeCallback(pageChangeCallback);
-        viewPager.setCurrentItem(3 /*pageIdToPosition(currentPageId)*/);
+        viewPager.setCurrentItem(pageIdToPosition(currentPageId));
 
         new TabLayoutMediator(findViewById(R.id.tab_layout), viewPager, (tab, position) -> tab.setText(getTitle(positionToPageId(position)))).attach();
     }
@@ -50,11 +51,11 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
 
         @Override
         public void onPageSelected(final int position) {
-        super.onPageSelected(position);
-        currentPageId = positionToPageId(position);
-        if (onPageChangeListener != null) {
-            onPageChangeListener.call(currentPageId);
-        }
+            super.onPageSelected(position);
+            currentPageId = positionToPageId(position);
+            if (onPageChangeListener != null) {
+                onPageChangeListener.call(currentPageId);
+            }
         }
 
         /*
@@ -162,9 +163,9 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         cache.clear();
         viewPager.unregisterOnPageChangeCallback(pageChangeCallback);
+        super.onDestroy();
     }
 
 
