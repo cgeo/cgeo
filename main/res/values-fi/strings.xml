@@ -553,6 +553,7 @@
     <string name="debug_user_error_report_title">Ilmoita ongelmasta</string>
     <string name="debug_user_error_errortext">Tapahtui odottamaton virhe, ja haluaisimme pyytää sinua raportoimaan siitä meille:</string>
     <string name="debug_user_error_explain_options">Auta meitä korjaamaan c:geon ongelmia raportoimalla ne sähköpostin kautta. Raportti sisältää järjestelmätietoja sekä c:geon lokitiedoston.\n Lisääthän sähköpostiin myös yksityiskohtaisen virheselosteen!\n\nEnnen sähköpostin lähetystä, tarkistathan FAQmme ja/tai sosiaalisen median tilimme tiedossa olevien ongelmien varalta.\nMuita yhteydenottotapoja löydät kohdasta \'Tietoja c:geosta\'</string>
+    <string name="debug_current_downloads">Nykyiset lataukset</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>
@@ -1350,6 +1351,7 @@
     <string name="map_showc_own">Omat</string>
     <string name="map_showc_found">Löydetty</string>
     <string name="map_showc_disabled">Ei käytössä</string>
+    <string name="map_showc_archived">Arkistoitu</string>
     <string name="map_showc_offlinelog">Kirjattu offline-tilassa</string>
     <string name="map_showwp_original">Alkuperäinen</string>
     <string name="map_showwp_parking">Pysäköinti</string>
@@ -1909,7 +1911,14 @@
     <string name="number_input_err_boundarymax">Syötetty arvo liian iso - asetettu maksimiarvoksi</string>
     <string name="number_input_err_format">Väärä numeromuoto</string>
     <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">läheisyysilmoitukset</string>
+    <string name="notification_channel_proximity_description">käytetään lähistöllä olevien kätköjen näyttämiseen</string>
+    <string name="notification_channel_foreground_name">etualan palvelu</string>
+    <string name="notification_channel_foreground_description">ilmoitus näytetään, kun c:geo tekee taustatyötä</string>
+    <string name="notification_channel_downloader_name">c:geon lataaja</string>
+    <string name="notification_channel_downloader_description">latausten tulosilmoitukset (kuten offline-kartat)</string>
     <string name="notification_proximity_title">c:geon läheisyysilmoitus</string>
+    <string name="notification_download_receiver_title">Tuodaan latausta</string>
     <!-- individual routes -->
     <string name="individual_route">Yksittäinen reitti</string>
     <string name="individual_route_added">lisätty reittiin</string>
