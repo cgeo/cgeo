@@ -11,6 +11,11 @@ This changelog contains all changes which are not intermediate developing steps.
 
 ### Other
 - Fix: Fix copy coordinate via long click on waypoint coordinates
+- Fix: Extract waypoint with same name but different coordinates from personal note
+- Fix: Bug in extracting user note for waypoint with formula
+- Fix: Export formula to PN instead of coordinates for completed formula
+- Fix: Offline map and themes folder incorrect after re-install and restore of backup
+
 
 <!-- --------------------------------------------------------------------------------- --->
 
