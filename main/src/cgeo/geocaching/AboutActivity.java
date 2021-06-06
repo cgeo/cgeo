@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AVPActivity;
-import cgeo.geocaching.activity.AVPFragment;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.TabbedViewPagerActivity;
+import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.AboutChangesPageBinding;
 import cgeo.geocaching.databinding.AboutContributorsPageBinding;
 import cgeo.geocaching.databinding.AboutLicensePageBinding;
@@ -47,7 +47,7 @@ import io.noties.markwon.Markwon;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class AboutActivity extends AVPActivity {
+public class AboutActivity extends TabbedViewPagerActivity {
 
     private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
 
@@ -62,7 +62,7 @@ public class AboutActivity extends AVPActivity {
 
         @StringRes
         protected final int resourceId;
-        protected final int id;
+        protected final long id;
 
         Page(@StringRes final int resourceId) {
             this.resourceId = resourceId;
@@ -93,7 +93,7 @@ public class AboutActivity extends AVPActivity {
         }
 
         final Page[] pages = Page.values();
-        final int[] orderedPages = new int[pages.length];
+        final long[] orderedPages = new long[pages.length];
         for (int i = 0; i < pages.length; i++) {
             orderedPages[i] = pages[i].id;
         }
@@ -103,19 +103,19 @@ public class AboutActivity extends AVPActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        setActionBarTitle(); // to avoid race conditions on first view creation
+        setActionBarTitle(getCurrentPageId()); // to avoid race conditions on first view creation
         return super.onCreateOptionsMenu(menu);
     }
 
     private void onPageChangeListener(final long currentPageId) {
-        setActionBarTitle();
+        setActionBarTitle(currentPageId);
     }
 
-    private void setActionBarTitle() {
+    private void setActionBarTitle(final long currentPageId) {
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             final String prefix = getString(R.string.about);
-            actionBar.setTitle((StringUtils.isNotBlank(prefix) ? prefix + " - " : "") + getTitle(getCurrentPageId()));
+            actionBar.setTitle((StringUtils.isNotBlank(prefix) ? prefix + " - " : "") + getTitle(currentPageId));
         }
     }
 
@@ -129,7 +129,7 @@ public class AboutActivity extends AVPActivity {
 
     @Override
     @SuppressWarnings("rawtypes")
-    protected AVPFragment createNewFragment(final long pageId) {
+    protected TabbedViewPagerFragment createNewFragment(final long pageId) {
         if (pageId == Page.VERSION.id) {
             return new VersionViewCreator();
         } else if (pageId == Page.CHANGELOG.id) {
@@ -144,7 +144,7 @@ public class AboutActivity extends AVPActivity {
         throw new IllegalStateException(); // cannot happen, when switch case is enum complete
     }
 
-    static class VersionViewCreator extends AVPFragment<AboutVersionPageBinding> {
+    static class VersionViewCreator extends TabbedViewPagerFragment<AboutVersionPageBinding> {
 
         @Override
         public AboutVersionPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -192,7 +192,7 @@ public class AboutActivity extends AVPActivity {
         }
     }
 
-    static class ChangeLogViewCreator extends AVPFragment<AboutChangesPageBinding> {
+    static class ChangeLogViewCreator extends TabbedViewPagerFragment<AboutChangesPageBinding> {
 
         @Override
         public AboutChangesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -220,7 +220,7 @@ public class AboutActivity extends AVPActivity {
         }
     }
 
-    static class SystemViewCreator extends AVPFragment<AboutSystemPageBinding> {
+    static class SystemViewCreator extends TabbedViewPagerFragment<AboutSystemPageBinding> {
 
         @Override
         public AboutSystemPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -257,7 +257,7 @@ public class AboutActivity extends AVPActivity {
         }
     }
 
-    static class LicenseViewCreator extends AVPFragment<AboutLicensePageBinding> {
+    static class LicenseViewCreator extends TabbedViewPagerFragment<AboutLicensePageBinding> {
 
         @Override
         public AboutLicensePageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -287,7 +287,7 @@ public class AboutActivity extends AVPActivity {
         }
     }
 
-    static class ContributorsViewCreator extends AVPFragment<AboutContributorsPageBinding> {
+    static class ContributorsViewCreator extends TabbedViewPagerFragment<AboutContributorsPageBinding> {
 
         @Override
         public AboutContributorsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {

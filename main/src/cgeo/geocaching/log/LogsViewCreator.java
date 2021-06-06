@@ -2,8 +2,8 @@ package cgeo.geocaching.log;
 
 import cgeo.geocaching.ImagesActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AVPFragment;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -35,7 +35,7 @@ import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
-public abstract class LogsViewCreator extends AVPFragment<LogsPageBinding> {
+public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBinding> {
 
     protected final AbstractActionBarActivity activity;
 

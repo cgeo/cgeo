@@ -1,11 +1,11 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AVPActivity;
-import cgeo.geocaching.activity.AVPFragment;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.activity.TabbedViewPagerActivity;
+import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
@@ -184,7 +184,7 @@ import org.apache.commons.text.StringEscapeUtils;
  *
  * e.g. details, description, logs, waypoints, inventory...
  */
-public class CacheDetailActivity extends AVPActivity
+public class CacheDetailActivity extends TabbedViewPagerActivity
         implements CacheMenuHandler.ActivityInterface, INavigationSource, AndroidBeam.ActivitySharingInterface, EditNoteDialogListener {
 
     private static final int MESSAGE_FAILED = -1;
@@ -241,7 +241,7 @@ public class CacheDetailActivity extends AVPActivity
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setThemeAndContentView(R.layout.cachedetail_activity);
+        setThemeAndContentView(R.layout.tabbed_viewpager_activity);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -982,7 +982,7 @@ public class CacheDetailActivity extends AVPActivity
         IMAGES(R.string.cache_images);
 
         private final int titleStringId;
-        private final int id;
+        private final long id;
 
         Page(final int titleStringId) {
             this.titleStringId = titleStringId;
@@ -1121,7 +1121,7 @@ public class CacheDetailActivity extends AVPActivity
      *
      * TODO: Extract inner class to own file for a better overview. Same might apply to all other view creators.
      */
-    public static class DetailsViewCreator extends AVPFragment<CachedetailDetailsPageBinding> {
+    public static class DetailsViewCreator extends TabbedViewPagerFragment<CachedetailDetailsPageBinding> {
         private ImmutablePair<RelativeLayout, TextView> favoriteLine;
         private Geocache cache;
 
@@ -1621,7 +1621,7 @@ public class CacheDetailActivity extends AVPActivity
      */
     protected ActionMode currentActionMode;
 
-    protected static class DescriptionViewCreator extends AVPFragment<CachedetailDescriptionPageBinding> {
+    protected static class DescriptionViewCreator extends TabbedViewPagerFragment<CachedetailDescriptionPageBinding> {
 
         private int maxPersonalNotesChars = 0;
         private Geocache cache;
@@ -1947,7 +1947,7 @@ public class CacheDetailActivity extends AVPActivity
         }
     }
 
-    private static class WaypointsViewCreator extends AVPFragment<CachedetailWaypointsPageBinding> {
+    private static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
         private final int visitedInset = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
         private Geocache cache;
 
@@ -2085,16 +2085,16 @@ public class CacheDetailActivity extends AVPActivity
             setWaypointIcon(activity, holder.binding.name, wpt);
 
             // visited
+            /* @todo
             if (wpt.isVisited()) {
-                /* @todo
                 final TypedValue typedValue = new TypedValue();
                 getTheme().resolveAttribute(R.attr.text_color_grey, typedValue, true);
                 if (typedValue.type >= TypedValue.TYPE_FIRST_COLOR_INT && typedValue.type <= TypedValue.TYPE_LAST_COLOR_INT) {
                     // really should be just a color!
                     nameView.setTextColor(typedValue.data);
                 }
-                */
             }
+            */
 
             // note
             final TextView noteView = holder.binding.note;
@@ -2159,7 +2159,7 @@ public class CacheDetailActivity extends AVPActivity
         }
     }
 
-    private static class InventoryViewCreator extends AVPFragment<CachedetailInventoryPageBinding> {
+    private static class InventoryViewCreator extends TabbedViewPagerFragment<CachedetailInventoryPageBinding> {
 
         @Override
         public CachedetailInventoryPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -2188,7 +2188,7 @@ public class CacheDetailActivity extends AVPActivity
         }
     }
 
-    private static class ImagesViewCreator extends AVPFragment<CachedetailImagesPageBinding> {
+    private static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
 
         @Override
         public CachedetailImagesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -2452,8 +2452,8 @@ public class CacheDetailActivity extends AVPActivity
         return this.getString(Page.find(pageId).titleStringId);
     }
 
-    protected int[] getOrderedPages() {
-        final ArrayList<Integer> pages = new ArrayList<>();
+    protected long[] getOrderedPages() {
+        final ArrayList<Long> pages = new ArrayList<>();
         pages.add(Page.WAYPOINTS.id);
         pages.add(Page.DETAILS.id);
         pages.add(Page.DESCRIPTION.id);
@@ -2472,7 +2472,7 @@ public class CacheDetailActivity extends AVPActivity
                 pages.add(Page.IMAGES.id);
             }
         }
-        final int[] result = new int[pages.size()];
+        final long[] result = new long[pages.size()];
         for (int i = 0; i < pages.size(); i++) {
             result[i] = pages.get(i);
         }
@@ -2481,7 +2481,7 @@ public class CacheDetailActivity extends AVPActivity
 
     @Override
     @SuppressWarnings("rawtypes")
-    protected AVPFragment createNewFragment(final long pageId) {
+    protected TabbedViewPagerFragment createNewFragment(final long pageId) {
         if (pageId == Page.DETAILS.id) {
             return new DetailsViewCreator();
         } else if (pageId == Page.DESCRIPTION.id) {
