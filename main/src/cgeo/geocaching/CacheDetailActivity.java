@@ -329,7 +329,7 @@ public class CacheDetailActivity extends AVPActivity
         final long pageToOpen = forceWaypointsPage ? Page.WAYPOINTS.id :
             savedInstanceState != null ?
                 savedInstanceState.getLong(STATE_PAGE_INDEX, Page.DETAILS.id) :
-                Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
+                Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : Page.DETAILS.id;
 
         createViewPager(pageToOpen, getOrderedPages(), currentPageId -> {
             if (Settings.isOpenLastDetailsPage()) {
