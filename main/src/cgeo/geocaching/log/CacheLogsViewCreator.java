@@ -55,8 +55,10 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     @Override
     protected void addHeaderView() {
-        addLogCountsHeader();
-        addEmptyLogsHeader();
+        if (binding != null && binding.getRoot().getHeaderViewsCount() < 1) {
+            addLogCountsHeader();
+            addEmptyLogsHeader();
+        }
     }
 
     @SuppressLint("SetTextI18n")
