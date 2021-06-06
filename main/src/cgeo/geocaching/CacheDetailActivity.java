@@ -326,14 +326,14 @@ public class CacheDetailActivity extends AVPActivity
             // nothing, we lost the window
         }
 
-        final int pageToOpen = forceWaypointsPage ? Page.WAYPOINTS.id :
+        final long pageToOpen = forceWaypointsPage ? Page.WAYPOINTS.id :
             savedInstanceState != null ?
-                savedInstanceState.getInt(STATE_PAGE_INDEX, Page.DETAILS.id) :
+                savedInstanceState.getLong(STATE_PAGE_INDEX, Page.DETAILS.id) :
                 Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
 
-        createViewPager(Page.DETAILS.id /*pageToOpen*/, getOrderedPages(), currentPageId -> {
+        createViewPager(pageToOpen, getOrderedPages(), currentPageId -> {
             if (Settings.isOpenLastDetailsPage()) {
-                Settings.setLastDetailsPage(currentPageId);
+                Settings.setLastDetailsPage((int) (long) currentPageId);
             }
             requireGeodata = currentPageId == Page.DETAILS.id;
             startOrStopGeoDataListener(false);
@@ -388,7 +388,7 @@ public class CacheDetailActivity extends AVPActivity
     @Override
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(STATE_PAGE_INDEX, getCurrentPageId());
+        outState.putLong(STATE_PAGE_INDEX, getCurrentPageId());
     }
 
     private void startOrStopGeoDataListener(final boolean initial) {
@@ -989,7 +989,7 @@ public class CacheDetailActivity extends AVPActivity
             this.id = ordinal();
         }
 
-        static Page find(final int pageId) {
+        static Page find(final long pageId) {
             for (Page page : Page.values()) {
                 if (page.id == pageId) {
                     return page;
@@ -2443,7 +2443,7 @@ public class CacheDetailActivity extends AVPActivity
     }
 
     @Override
-    protected String getTitle(final int pageId) {
+    protected String getTitle(final long pageId) {
         // show number of waypoints directly in waypoint title
         if (pageId == Page.WAYPOINTS.id) {
             final int waypointCount = cache == null ? 0 : cache.getWaypoints().size();
@@ -2481,7 +2481,7 @@ public class CacheDetailActivity extends AVPActivity
 
     @Override
     @SuppressWarnings("rawtypes")
-    protected AVPFragment getFragment(final int pageId) {
+    protected AVPFragment createNewFragment(final long pageId) {
         if (pageId == Page.DETAILS.id) {
             return new DetailsViewCreator();
         } else if (pageId == Page.DESCRIPTION.id) {
