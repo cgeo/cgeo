@@ -11,14 +11,18 @@
         android:id="@+id/filter_options"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:orientation="horizontal" >
+        android:baselineAligned="true"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/select"
-            style="@style/button_full"
+            style="@style/button"
+            android:layout_marginHorizontal="10dp"
+            android:layout_height="wrap_content"
             android:layout_width="0dip"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:gravity="center"
             tools:text="contains" />
 
         <RelativeLayout
@@ -26,6 +30,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:baselineAligned="false"
+            android:layout_gravity="center_vertical"
             android:orientation="horizontal">
 
             <CheckBox
@@ -37,8 +42,8 @@
 
             <ImageView
                 android:id="@+id/item_info"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 app:srcCompat="@drawable/settings_info"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
@@ -46,18 +51,26 @@
         </RelativeLayout>
     </LinearLayout>
 
-
-    <EditText
-        android:id="@+id/text"
-        style="@style/edittext_full"
-        android:layout_marginTop="5dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchtext"
+        android:hint="@string/cache_filter_stringfilter_searchtext_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/textinput_dropdown"
+        app:endIconMode="none"
         android:layout_below="@+id/filter_options"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:minLines="1"
-        android:inputType="text" />
+        android:layout_alignParentRight="true">
+
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+
+        />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 
 

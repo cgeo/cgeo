@@ -48,6 +48,7 @@ import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.settings.Settings.getMaximumMapTrailLength;
@@ -4522,16 +4523,41 @@ public class DataStore {
 
     @NonNull
     public static String[] getSuggestions(final String table, final String column, final String input) {
+        return getSuggestions(table, column, input, null);
+    }
+
+    @NonNull
+    public static String[] getSuggestions(final String table, final String column, final String input, final Func1<String, String[]> processor) {
+
         try {
             final Cursor cursor = database.rawQuery("SELECT DISTINCT " + column
                     + " FROM " + table
                     + " WHERE " + column + " LIKE ?"
                     + " ORDER BY " + column + " COLLATE NOCASE ASC;", new String[] { getSuggestionArgument(input) });
-            return cursorToColl(cursor, new LinkedList<>(), GET_STRING_0).toArray(new String[cursor.getCount()]);
+            final Collection<String> coll = cursorToColl(cursor, new LinkedList<>(), GET_STRING_0);
+            if (processor == null) {
+                return coll.toArray(new String[0]);
+            }
+            return processAndSortSuggestions(coll, input, processor).toArray(new String[0]);
         } catch (final RuntimeException e) {
             Log.e("cannot get suggestions from " + table + "->" + column + " for input '" + input + "'", e);
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
+    }
+
+    private static List<String> processAndSortSuggestions(final Collection<String> rawList, final String input, final Func1<String, String[]> processor) {
+        final String lowerInput = input.toLowerCase(Locale.getDefault());
+        final Set<String> newColl = new HashSet<>();
+        for (String value : rawList) {
+            for (String token : processor.call(value)) {
+                if (token.toLowerCase(Locale.getDefault()).contains(lowerInput)) {
+                    newColl.add(token.trim());
+                }
+            }
+        }
+        final List<String> sortedList = new ArrayList<>(newColl);
+        TextUtils.sortListLocaleAware(sortedList);
+        return sortedList;
     }
 
     @NonNull
@@ -4557,6 +4583,11 @@ public class DataStore {
     @NonNull
     public static String[] getSuggestionsKeyword(final String input) {
         return getSuggestions(dbTableCaches, "name", input);
+    }
+
+    @NonNull
+    public static String[] getSuggestionsLocation(final String input) {
+        return getSuggestions(dbTableCaches, "location", input, s -> s.split(","));
     }
 
     /**

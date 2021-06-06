@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.ui.ViewUtils;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -56,7 +57,7 @@ public abstract class BaseFilterViewHolder<T extends IGeocacheFilter> implements
     }
 
     protected View inflateLayout(@LayoutRes final int layoutId) {
-       return LayoutInflater.from(getActivity()).inflate(layoutId, getRoot(), false);
+       return LayoutInflater.from(ViewUtils.wrap(getActivity())).inflate(layoutId, getRoot(), false);
     }
 
 }

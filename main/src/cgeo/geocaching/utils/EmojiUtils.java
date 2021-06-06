@@ -426,7 +426,7 @@ public class EmojiUtils {
         public final int offsetTop;
         public final int fontsize;
 
-        EmojiPaint(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int offsetTop, final int fontsize) {
+        public EmojiPaint(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int offsetTop, final int fontsize) {
             this.res = res;
             this.bitmapDimensions = bitmapDimensions;
             this.availableSize = availableSize;
