@@ -450,6 +450,7 @@ abstract class GPXParser extends FileParser {
     /**
      * Add listeners for Groundspeak cache
      */
+    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
     private void registerGsakExtensionsCache(final String nsGC, final Element gcCache) {
         gcCache.setStartElementListener(attrs -> {
             try {
