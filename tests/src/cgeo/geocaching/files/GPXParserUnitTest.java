@@ -13,14 +13,16 @@ public class GPXParserUnitTest  {
     public void testParseDateWithFractionalSeconds() throws ParseException {
         // was experienced in GSAK file
         final String dateString = "2011-08-13T02:52:18.103Z";
-        GPXParser.parseDate(dateString);
+        final Date parsedDate = GPXParser.parseDate(dateString);
+        assertThat(parsedDate).isNotNull();
     }
 
     @Test
     public void testParseDateWithHugeFraction() throws ParseException {
         // see issue 821
         final String dateString = "2011-11-07T00:00:00.0000000-07:00";
-        GPXParser.parseDate(dateString);
+        final Date parsedDate = GPXParser.parseDate(dateString);
+        assertThat(parsedDate).isNotNull();
     }
 
     @Test
