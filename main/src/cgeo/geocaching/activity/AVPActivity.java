@@ -1,10 +1,9 @@
 package cgeo.geocaching.activity;
 
-import android.util.DisplayMetrics;
-
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
+
+import android.util.DisplayMetrics;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -74,7 +73,7 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
     private final ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
         /*
         @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
             super.onPageScrolled(position, positionOffset, positionOffsetPixels);
         }
         */
@@ -89,7 +88,7 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
         }
 
         @Override
-        public void onPageScrollStateChanged(int state) {
+        public void onPageScrollStateChanged(final int state) {
             super.onPageScrollStateChanged(state);
             if (swipeRefreshLayout != null) {
                 swipeRefreshLayout.setEnabled(state == ViewPager2.SCROLL_STATE_IDLE && isRefreshable);
