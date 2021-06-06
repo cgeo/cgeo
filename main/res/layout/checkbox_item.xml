@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/item_icon"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:scaleType="fitCenter"
         android:layout_centerVertical="true" />
 
@@ -37,8 +37,8 @@
             android:textColor="@color/colorText"/>
         <ImageView
             android:id="@+id/item_info"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:scaleType="fitCenter"
             android:visibility="gone"
             app:srcCompat="@drawable/settings_info"
