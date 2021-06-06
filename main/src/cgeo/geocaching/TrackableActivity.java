@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AVPActivity;
-import cgeo.geocaching.activity.AVPFragment;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.TabbedViewPagerActivity;
+import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
@@ -65,7 +65,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class TrackableActivity extends AVPActivity implements AndroidBeam.ActivitySharingInterface {
+public class TrackableActivity extends TabbedViewPagerActivity implements AndroidBeam.ActivitySharingInterface {
 
     public enum Page {
         DETAILS(R.string.detail),
@@ -74,7 +74,7 @@ public class TrackableActivity extends AVPActivity implements AndroidBeam.Activi
 
         @StringRes
         private final int resId;
-        private final int id;
+        private final long id;
 
         Page(@StringRes final int resId) {
             this.resId = resId;
@@ -121,7 +121,7 @@ public class TrackableActivity extends AVPActivity implements AndroidBeam.Activi
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setThemeAndContentView(R.layout.cachedetail_activity);
+        setThemeAndContentView(R.layout.tabbed_viewpager_activity);
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.trackable));
@@ -364,7 +364,7 @@ public class TrackableActivity extends AVPActivity implements AndroidBeam.Activi
 
     @Override
     @SuppressWarnings("rawtypes")
-    protected AVPFragment createNewFragment(final long pageId) {
+    protected TabbedViewPagerFragment createNewFragment(final long pageId) {
         if (pageId == Page.DETAILS.id) {
             return new DetailsViewCreator();
         } else if (pageId == Page.LOGS.id) {
@@ -375,7 +375,7 @@ public class TrackableActivity extends AVPActivity implements AndroidBeam.Activi
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
 
-    private static class ImagesViewCreator extends AVPFragment<CachedetailImagesPageBinding> {
+    private static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
 
         @Override
         public CachedetailImagesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -406,8 +406,8 @@ public class TrackableActivity extends AVPActivity implements AndroidBeam.Activi
         return this.getString(Page.find(pageId).resId);
     }
 
-    protected int[] getOrderedPages() {
-        final List<Integer> pages = new ArrayList<>();
+    protected long[] getOrderedPages() {
+        final List<Long> pages = new ArrayList<>();
         pages.add(Page.DETAILS.id);
         if (trackable != null) {
             if (CollectionUtils.isNotEmpty(trackable.getLogs())) {
@@ -417,14 +417,14 @@ public class TrackableActivity extends AVPActivity implements AndroidBeam.Activi
                 pages.add(Page.IMAGES.id);
             }
         }
-        final int[] result = new int[pages.size()];
+        final long[] result = new long[pages.size()];
         for (int i = 0; i < pages.size(); i++) {
             result[i] = pages.get(i);
         }
         return result;
     }
 
-    public static class DetailsViewCreator extends AVPFragment<TrackableDetailsViewBinding> {
+    public static class DetailsViewCreator extends TabbedViewPagerFragment<TrackableDetailsViewBinding> {
 
         @Override
         public TrackableDetailsViewBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {

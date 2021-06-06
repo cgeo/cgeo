@@ -15,7 +15,7 @@ import androidx.viewbinding.ViewBinding;
 
 import java.lang.ref.WeakReference;
 
-public abstract class AVPFragment<ViewBindingClass extends ViewBinding> extends Fragment {
+public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBinding> extends Fragment {
     protected WeakReference<Activity> activityWeakReference = null;
     protected ViewBindingClass binding;
     protected ViewGroup container;

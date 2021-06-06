@@ -19,12 +19,12 @@ import java.util.Map;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 
-public abstract class AVPActivity extends AbstractActionBarActivity {
+public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity {
     @SuppressWarnings("rawtypes")
-    private final Map<Long, AVPFragment> fragmentMap = new LinkedHashMap<>();
+    private final Map<Long, TabbedViewPagerFragment> fragmentMap = new LinkedHashMap<>();
 
     private long currentPageId;
-    private int[] orderedPages;
+    private long[] orderedPages;
     private ViewPager2 viewPager = null;
     private Action1<Long> onPageChangeListener = null;
 
@@ -38,12 +38,12 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
      */
     private boolean isRefreshable = true;
 
-    protected void createViewPager(final long initialPageId, final int[] orderedPages, final Action1<Long> onPageChangeListener) {
+    protected void createViewPager(final long initialPageId, final long[] orderedPages, final Action1<Long> onPageChangeListener) {
         this.currentPageId = initialPageId;
         setOrderedPages(orderedPages);
         this.onPageChangeListener = onPageChangeListener;
 
-        setContentView(R.layout.avpactivity);
+        setContentView(R.layout.tabbed_viewpager_activity);
 
         viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new ViewPagerAdapter(this));
@@ -97,9 +97,9 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
     };
 
     @SuppressWarnings("rawtypes")
-    protected void setOrderedPages(final int[] orderedPages) {
+    protected void setOrderedPages(final long[] orderedPages) {
         this.orderedPages = orderedPages;
-        for (AVPFragment fragment : fragmentMap.values()) {
+        for (TabbedViewPagerFragment fragment : fragmentMap.values()) {
             fragment.notifyDataSetChanged();
         }
         notifyAdapterDataSetChanged();
@@ -126,7 +126,7 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
 
     protected abstract String getTitle(long pageId);
     @SuppressWarnings("rawtypes")
-    protected abstract AVPFragment createNewFragment(long pageId);
+    protected abstract TabbedViewPagerFragment createNewFragment(long pageId);
 
     private class ViewPagerAdapter extends FragmentStateAdapter {
         private final WeakReference<FragmentActivity> fragmentActivityWeakReference;
@@ -141,7 +141,7 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
         @SuppressWarnings("rawtypes")
         public Fragment createFragment(final int position) {
             final long pageId = getItemId(position);
-            AVPFragment fragment = fragmentMap.get(pageId);
+            TabbedViewPagerFragment fragment = fragmentMap.get(pageId);
             if (fragment != null) {
                 return fragment;
             }
@@ -191,8 +191,8 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
     }
 
     @SuppressWarnings("rawtypes")
-    protected void reinitializePage(final int pageId) {
-        final AVPFragment fragment = fragmentMap.get(pageId);
+    protected void reinitializePage(final long pageId) {
+        final TabbedViewPagerFragment fragment = fragmentMap.get(pageId);
         if (fragment != null) {
             fragment.notifyDataSetChanged();
         }
@@ -201,12 +201,12 @@ public abstract class AVPActivity extends AbstractActionBarActivity {
 
     @SuppressWarnings("rawtypes")
     protected void reinitializeViewPager() {
-        for (AVPFragment fragment : fragmentMap.values()) {
+        for (TabbedViewPagerFragment fragment : fragmentMap.values()) {
             fragment.notifyDataSetChanged();
         }
 
         // force update current page, as this is not done automatically by the adapter
-        final AVPFragment current = fragmentMap.get(currentPageId);
+        final TabbedViewPagerFragment current = fragmentMap.get(currentPageId);
         if (current != null) {
             current.setContent();
         }
