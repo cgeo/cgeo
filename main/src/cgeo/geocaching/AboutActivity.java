@@ -69,7 +69,7 @@ public class AboutActivity extends AVPActivity {
             this.id = ordinal();
         }
 
-        static Page find(final int pageId) {
+        static Page find(final long pageId) {
             for (Page page : Page.values()) {
                 if (page.id == pageId) {
                     return page;
@@ -107,7 +107,7 @@ public class AboutActivity extends AVPActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void onPageChangeListener(final int currentPageId) {
+    private void onPageChangeListener(final long currentPageId) {
         setActionBarTitle();
     }
 
@@ -120,7 +120,7 @@ public class AboutActivity extends AVPActivity {
     }
 
     @Override
-    protected String getTitle(final int pageId) {
+    protected String getTitle(final long pageId) {
         if (pageId == Page.VERSION.id) {
             return getResources().getString(R.string.about_version) + " / " + getResources().getString(R.string.about_help);
         }
@@ -129,7 +129,7 @@ public class AboutActivity extends AVPActivity {
 
     @Override
     @SuppressWarnings("rawtypes")
-    protected AVPFragment getFragment(final int pageId) {
+    protected AVPFragment createNewFragment(final long pageId) {
         if (pageId == Page.VERSION.id) {
             return new VersionViewCreator();
         } else if (pageId == Page.CHANGELOG.id) {
