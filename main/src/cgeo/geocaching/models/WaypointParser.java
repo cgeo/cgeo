@@ -283,12 +283,13 @@ public class WaypointParser {
                 final String lonText = parsedFullCoordinates.getFormulaLon();
                 final List<VariableData> variables = new ArrayList<>();
 
-                // all text after the formula
-                String remainingString = parsedFullCoordinates.getText().substring(parsedFullCoordinates.getEnd()).trim();
+                // all text after the formula, keep newline
+                String remainingString = parsedFullCoordinates.getText().substring(parsedFullCoordinates.getEnd() - 1);
 
                 final String[] formulaList = remainingString.split(FormulaParser.WPC_DELIM_PATTERN_STRING);
-                for (final String varText : formulaList
+                for (final String varSplitText : formulaList
                 ) {
+                    final String varText = varSplitText.trim();
                     boolean removeDelimiter = varText.isEmpty();
                     final String[] equations = varText.split("=", -1);
                     if (1 <= equations.length) {
@@ -399,16 +400,18 @@ public class WaypointParser {
         //type
         sb.append(PARSING_TYPE_OPEN).append(wp.getWaypointType().getShortId().toUpperCase(Locale.US))
             .append(PARSING_TYPE_CLOSE).append(" ");
-        //coordinate
-        if (wp.getCoords() == null) {
-            final String calcStateJson = wp.getCalcStateJson();
-            if (null != calcStateJson) {
-                sb.append(getParseableFormula(wp));
-            } else {
-                sb.append(PARSING_COORD_EMPTY);
-            }
+
+        // formula
+        final String calcStateJson = wp.getCalcStateJson();
+        if (null != calcStateJson) {
+            sb.append(getParseableFormula(wp));
         } else {
-            sb.append(wp.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW));
+        //coordinate
+            if (wp.getCoords() == null) {
+                sb.append(PARSING_COORD_EMPTY);
+            } else {
+                sb.append(wp.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW));
+            }
         }
 
         //user note

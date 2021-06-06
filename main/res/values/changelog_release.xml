@@ -2,6 +2,19 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
+<h1>2021.06.xx:</h1>
+
+<h4>Fixes:</h4>
+<ul>
+<li> Fix: Extract waypoint with same name but different coordinates from personal note</li>
+<li> Fix: Bug in extracting user note for waypoint with formula</li>
+<li> Fix: Export formula to PN instead of coordinates for completed formula</li>
+<li> Fix: Offline map and themes folder incorrect after re-install and restore of backup</li>
+<li> Fix: Track/route cannot be updated</li>
+<li> Fix: Theming error for downloader in light theme</li>
+</ul>
+
+
 <h1>2021.05.20:</h1>
 
 <h4>Geocaching Services:</h4>

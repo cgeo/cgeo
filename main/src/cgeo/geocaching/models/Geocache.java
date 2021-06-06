@@ -1706,23 +1706,27 @@ public class Geocache implements IWaypoint {
         }
 
         //try to match coordinate
-        final Geopoint point = searchWp.getCoords();
-        if (null != point) {
+        final Geopoint searchWpPoint = searchWp.getCoords();
+        if (null != searchWpPoint) {
             for (final Waypoint waypoint : waypoints) {
                 // waypoint can have no coords such as a Final set by cache owner
                 final Geopoint coords = waypoint.getCoords();
-                if (coords != null && coords.equalsDecMinute(point)) {
+                if (coords != null && coords.equalsDecMinute(searchWpPoint)) {
                     return waypoint;
                 }
             }
         }
 
-        //try to match name if prefix is empty and coords are not equal
+        //try to match name if prefix is empty and coords are not equal.
+        //But only, if coordinates of waypoint can be updated, otherwise create a new waypoint
+        //(it's not a bug, it's a feature - otherwise the coordinates gets lost)
         final String searchWpName = searchWp.getName();
         final String searchWpType = searchWp.getWaypointType().getL10n();
         if (StringUtils.isNotBlank(searchWpName)) {
             for (final Waypoint waypoint : waypoints) {
-                if (searchWpName.equals(waypoint.getName()) && searchWpType.equals(waypoint.getWaypointType().getL10n())) {
+                final Geopoint point = waypoint.getCoords();
+                final boolean canChangeCoordinates = null == searchWpPoint || null == point;
+                if (canChangeCoordinates && searchWpName.equals(waypoint.getName()) && searchWpType.equals(waypoint.getWaypointType().getL10n())) {
                     return waypoint;
                 }
             }
