@@ -1,5 +1,6 @@
 package cgeo.geocaching.filters.gui;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
@@ -8,15 +9,22 @@ import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.LastFoundGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
+import cgeo.geocaching.filters.core.StoredListGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.CollectionStream;
 
 import android.app.Activity;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class FilterViewHolderCreator {
 
@@ -52,7 +60,7 @@ public class FilterViewHolderCreator {
                         .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
                             CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.ADVLAB, CacheType.USER_DEFINED))
                         .setValueDisplayTextGetter(CacheType::getShortL10n)
-                        .setValueDrawableGetter(ct -> ct.markerId) , 2);
+                        .setValueDrawableGetter(ct -> ct.markerId) , 2, false);
                 break;
             case SIZE:
                 result = new ChipChoiceFilterViewHolder<>(
@@ -87,6 +95,9 @@ public class FilterViewHolderCreator {
                 break;
             case LOG_ENTRY:
                 result = new LogEntryFilterViewHolder();
+                break;
+            case STORED_LISTS:
+                result = createStoredListFilterViewHolder();
                 break;
             default:
                 result = null;
@@ -145,6 +156,26 @@ public class FilterViewHolderCreator {
                 .setFilterValueSetter(NumberRangeGeocacheFilter::setRangeFromValues)
                 .setValueDisplayTextGetter(f -> String.format(Locale.getDefault(), "%.1f", f)),
             (i, f) -> i % 2 == 0 ? String.format(Locale.getDefault(), "%.1f", f) : null);
+    }
+
+    private static IFilterViewHolder<?> createStoredListFilterViewHolder() {
+
+        final List<StoredList> allLists = DataStore.getLists();
+        final Map<Integer, StoredList> allListsById = new HashMap<>();
+        for (StoredList list : allLists) {
+            allListsById.put(list.id, list);
+        }
+
+        final ValueGroupFilterAccessor<StoredList, StoredListGeocacheFilter> vgfa =
+            new ValueGroupFilterAccessor<StoredList, StoredListGeocacheFilter>()
+            .setSelectableValues(allLists)
+            .setFilterValueGetter(StoredListGeocacheFilter::getFilterLists)
+            .setFilterValueSetter(StoredListGeocacheFilter::setFilterLists)
+            .setValueDrawableGetter(f -> R.drawable.ic_menu_manage_list)
+            .setValueDisplayTextGetter(f -> f.title)
+            .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
+
+        return new CheckboxFilterViewHolder<>(vgfa, 1, true);
     }
 
 }

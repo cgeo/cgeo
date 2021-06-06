@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -43,8 +44,8 @@ public class ViewUtils {
     //if this flag is true, then layouts will be generated with background colors, for layout checking use cases
     private static final boolean DEBUG_LAYOUT = false;
 
-    private static final Context APP_CONTEXT = CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getApplicationContext();
-    private static final Resources APP_RESSOURCES = APP_CONTEXT == null ? null : APP_CONTEXT.getResources();
+    private static final Resources APP_RESOURCES = CgeoApplication.getInstance() == null || CgeoApplication.getInstance().getApplicationContext() == null ? null :
+        CgeoApplication.getInstance().getApplicationContext().getResources();
 
     private ViewUtils() {
         //no instance
@@ -55,7 +56,7 @@ public class ViewUtils {
     }
 
     public static int dpToPixel(final float dp)  {
-        return (int) (dp * (APP_RESSOURCES == null ? 20f : APP_RESSOURCES.getDisplayMetrics().density));
+        return (int) (dp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
     }
 
     public static void setTooltip(final View view, @StringRes final int textId) {
@@ -85,7 +86,7 @@ public class ViewUtils {
             colLl.setOrientation(LinearLayout.VERTICAL);
         }
 
-        final ViewGroup colGroup = createColumnView(ctx, root, columnCount, withSeparator, i -> columns.get(i));
+        final ViewGroup colGroup = createColumnView(ctx, root, columnCount, withSeparator, columns::get);
         if (parent != null) {
             parent.addView(colGroup);
         }
@@ -111,7 +112,7 @@ public class ViewUtils {
             columnWidths.add(c % 2 == 0 ? 1f : 0.1f);
         }
 
-        final ViewGroup result = ViewUtils.createHorizontallyDistributedViews(ctx, root, columnWidths, (i, f) -> {
+        return ViewUtils.createHorizontallyDistributedViews(ctx, root, columnWidths, (i, f) -> {
             if (i % 2 == 1) {
                 //column separator
                 return ViewUtils.createVerticalSeparator(ctx, !withSeparator);
@@ -119,8 +120,6 @@ public class ViewUtils {
 
             return columnViewCreator.call(i / 2);
         }, (i, f) -> f);
-
-        return result;
     }
 
     public static <T> ViewGroup createHorizontallyDistributedText(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, String> itemTextMapper) {
@@ -132,8 +131,8 @@ public class ViewUtils {
                 tv.setMaxLines(1);
                 if (Build.VERSION.SDK_INT >= 23) {
                     tv.setTextColor(ctx.getColor(R.color.colorText));
-                } else if (APP_RESSOURCES != null) {
-                    tv.setTextColor(APP_RESSOURCES.getColor(R.color.colorText));
+                } else if (APP_RESOURCES != null) {
+                    tv.setTextColor(APP_RESOURCES.getColor(R.color.colorText));
                 }
                 if (DEBUG_LAYOUT) {
                     tv.setBackgroundResource(R.drawable.mark_orange);
@@ -188,9 +187,15 @@ public class ViewUtils {
     }
 
     public static TextView createTextItem(final Context ctx, @StyleRes final int styleId, @StringRes final int textId) {
-        final TextView tv = new TextView(new ContextThemeWrapper(ctx, R.style.cgeo), null, 0, styleId);
+        final TextView tv = new TextView(wrap(ctx), null, 0, styleId);
         tv.setText(textId);
         return tv;
+    }
+
+    public static Button createButton(final Context context, @Nullable final ViewGroup root, @StringRes final int textId) {
+        final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(R.layout.button_view, root, false);
+        button.setText(textId);
+        return button;
     }
 
     public static ImmutablePair<View, CheckBox> createCheckboxItem(final Activity activity, @Nullable final ViewGroup context, final String text, final int iconId, @StringRes final int infoTextId) {
@@ -280,7 +285,7 @@ public class ViewUtils {
 
         int extendTo = 0;
 
-        //RULES to extend AS ALWAYS are decoded here. See rules of Android in {@link androidx.appcompat.view.ActionBarPoilcy#getMaxActionButtons}
+        //RULES to extend AS ALWAYS are decoded here. See rules of Android in {@link androidx.appcompat.view.ActionBarPolicy#getMaxActionButtons}
         if (width > 390) {
             extendTo = 3;
         }
@@ -293,7 +298,26 @@ public class ViewUtils {
     }
 
     public static Context wrap(final Context ctx) {
-        return new ContextThemeWrapper(ctx, R.style.cgeo);
+        //Avoid wrapping already wrapped context's
+        if (ctx instanceof ContextThemeWrapperWrapper && ((ContextThemeWrapperWrapper) ctx).getThemeResId() == R.style.cgeo) {
+            return ctx;
+        }
+        return new ContextThemeWrapperWrapper(ctx, R.style.cgeo);
+    }
+
+    /** Wrapper for the ContextThemeWrapper, so we can remember the style/theme id. Should SOLELY be used by method @{link {@link #wrap(Context)}}! */
+    private static class ContextThemeWrapperWrapper extends ContextThemeWrapper {
+
+        private final int themeResId;
+
+        ContextThemeWrapperWrapper(final Context base, @StyleRes final int themeResId) {
+            super(base, themeResId);
+            this.themeResId = themeResId;
+        }
+
+        public int getThemeResId() {
+            return themeResId;
+        }
     }
 
 }

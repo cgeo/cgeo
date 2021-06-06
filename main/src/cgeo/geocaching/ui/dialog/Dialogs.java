@@ -50,8 +50,10 @@ import androidx.core.content.res.ResourcesCompat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -890,7 +892,7 @@ public final class Dialogs {
         int getIcon();
     }
 
-    public static <T extends ItemWithIcon> void select(final Activity activity, final String title, final List<T> items, final Action1<T> listener) {
+    public static <T> void select(final Activity activity, final String title, final List<T> items, final Action1<T> listener) {
         final ListAdapter adapter = new ArrayAdapter<T>(
                 activity,
                 android.R.layout.select_dialog_item,
@@ -903,7 +905,8 @@ public final class Dialogs {
 
                 // add image
                 final TextView tv = v.findViewById(android.R.id.text1);
-                tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getIcon(), 0, 0, 0);
+                final int drawableId = items.get(position) instanceof ItemWithIcon ? ((ItemWithIcon) items.get(position)).getIcon() : 0;
+                tv.setCompoundDrawablesWithIntrinsicBounds(drawableId, 0, 0, 0);
 
                 // Add margin between image and text
                 final int dp5 = (int) (5 * activity.getResources().getDisplayMetrics().density + 0.5f);
@@ -958,6 +961,35 @@ public final class Dialogs {
             enableDisableButtons(dialog, false);
         }
 
+    }
+
+    public static <T> void selectMultiple(final Activity activity, final List<T> items, final Func1<T, CharSequence> displayMapper, final Set<T> preselected, final int titleId, final Action1<Set<T>> onSelectListener) {
+        final CharSequence[] itemTexts = new CharSequence[items.size()];
+        final boolean[] itemSelects = new boolean[items.size()];
+        final Set<T> result = preselected == null ? new HashSet<>() : new HashSet<>(preselected);
+        int idx = 0;
+        for (T item : items) {
+            itemTexts[idx] = displayMapper.call(item);
+            itemSelects[idx] = preselected != null && preselected.contains(item);
+            idx++;
+        }
+
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity, R.style.cgeo_compactDialogs);
+        builder.setTitle(titleId);
+        builder.setMultiChoiceItems(itemTexts, itemSelects, (d, i, c) -> {
+            if (c) {
+                result.add(items.get(i));
+            } else {
+                result.remove(items.get(i));
+            }
+        });
+        builder.setPositiveButton(android.R.string.ok, (d, w) -> {
+            onSelectListener.call(result);
+        });
+        builder.setNegativeButton(android.R.string.cancel, (d, w) -> d.dismiss());
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private static void enableDisableButtons(final AlertDialog dialog, final boolean enable) {
