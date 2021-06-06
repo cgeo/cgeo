@@ -26,7 +26,8 @@ public enum GeocacheFilterType {
     HIDDEN("hidden", R.string.cache_filter_hidden, R.string.cache_filtergroup_basic, HiddenGeocacheFilter::new),
     LOGS_COUNT("logs_count", R.string.cache_filter_logs_count, R.string.cache_filtergroup_details, LogsCountGeocacheFilter::new),
     LAST_FOUND("last_found", R.string.cache_filter_last_found, R.string.cache_filtergroup_details, LastFoundGeocacheFilter::new),
-    LOG_ENTRY("log_entry", R.string.cache_filter_log_entry, R.string.cache_filtergroup_details, LogEntryGeocacheFilter::new);
+    LOG_ENTRY("log_entry", R.string.cache_filter_log_entry, R.string.cache_filtergroup_details, LogEntryGeocacheFilter::new),
+    STORED_LISTS("stored_list", R.string.cache_filter_stored_lists, R.string.cache_filtergroup_userspecific, StoredListGeocacheFilter::new);
 
 
     private final String typeId;
