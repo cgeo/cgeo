@@ -5,7 +5,6 @@ import cgeo.geocaching.utils.Log;
 import android.sax.Element;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public final class GPX11Parser extends GPXParser {
 

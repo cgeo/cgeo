@@ -3,7 +3,6 @@ package cgeo.geocaching.files;
 import android.sax.Element;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class GPX10Parser extends GPXParser {
 
