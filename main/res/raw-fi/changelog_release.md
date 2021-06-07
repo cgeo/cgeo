@@ -1,6 +1,6 @@
-- Fix: Extract waypoint with same name but different coordinates from personal note
-- Fix: Bug in extracting user note for waypoint with formula
-- Fix: Export formula to PN instead of coordinates for completed formula
-- Fix: Offline map and themes folder incorrect after re-install and restore of backup
-- Fix: Track/route cannot be updated
-- Fix: Theming error for downloader in light theme
+- Korjaus: Tuo reittipiste samalla nimellä, mutta eri koordinaateilla henkilökohtaisesta muistiinpanosta
+- Korjaus: Bugi yhtälön sisältävän reittipisteen tuonnissa muistiinpanosta
+- Korjaus: Vie yhtälö henkilökohtaiseen muistiinpanoon koordinaattien sijaan, kun yhtälö on käytettävissä
+- Korjaus: Offlinekarttojen ja teemojojen kansio virheellinen asennuksen jälkeen tehdyssä varmuuskopion palauttamisessa
+- Korjaus: Jälkeä/reittiä ei voi päivittää
+- Korjaus: Teemoitusvirhe lataajan vaaleassa teemassa
