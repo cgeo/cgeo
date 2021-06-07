@@ -470,6 +470,7 @@
     <string name="cache_filter_logs_count">Αριθμ. καταγραφων</string>
     <string name="cache_filter_last_found">Ημερ/νία Τελευταίας Εύρεσης</string>
     <string name="cache_filter_log_entry">Καταχώρηση</string>
+    <string name="cache_filter_stored_lists">Αποθηκευμένες Λίστες</string>
     <string name="cache_filtergroup_basic">Βασικό</string>
     <string name="cache_filtergroup_details">Λεπτομέρειες</string>
     <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
@@ -495,6 +496,8 @@
     <string name="cache_filter_datefilter_label_from">Από:</string>
     <string name="cache_filter_datefilter_label_to">Έως:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Επιλογή όλων</string>
+    <string name="cache_filter_checkboxlist_add_items">Προσθέστε περισσότερα αντικείμενα</string>
+    <string name="cache_filter_checkboxlist_add_items_dialog_title">Προσθήκη αντικειμένων</string>
     <string name="cache_filter_favorites_absolute">Απόλυτη</string>
     <string name="cache_filter_favorites_percentage">Ποσοστό</string>
     <string name="cache_filter_distance_use_current_position">Χρήση τρέχουσας θέσης</string>
