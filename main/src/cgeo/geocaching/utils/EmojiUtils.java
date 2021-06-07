@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.DialogTitleButtonButtonBinding;
 import cgeo.geocaching.databinding.EmojiselectorBinding;
@@ -35,6 +36,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -124,6 +128,8 @@ public class EmojiUtils {
     private static boolean fontIsChecked = false;
     private static final Boolean lockGuard = false;
     private static final SparseArray<CacheMarker> emojiCache = new SparseArray<>();
+
+    private static final Map<Integer, EmojiPaint> EMOJI_PAINT_CACHE_PER_SIZE = new HashMap<>();
 
     private static class EmojiSet {
         public int tabSymbol;
@@ -417,6 +423,29 @@ public class EmojiUtils {
     }
 
     /**
+     * get a drawable with given "wantedSize" as both width and height (either from cache or freshly built)
+     * @param wantedSize wanted size of drawable (width and height) in pixel
+     * @param emoji codepoint of the emoji to display
+     * @return drawable bitmap with emoji on it
+     */
+    @NonNull
+    public static BitmapDrawable getEmojiDrawable(final int wantedSize, final int emoji) {
+
+        EmojiPaint p;
+        synchronized (EMOJI_PAINT_CACHE_PER_SIZE) {
+            p = EMOJI_PAINT_CACHE_PER_SIZE.get(wantedSize);
+            if (p == null) {
+                final Resources res = CgeoApplication.getInstance().getApplicationContext().getResources();
+                final Pair<Integer, Integer> markerDimensions = new Pair<>((int) (wantedSize * 1.2), (int) (wantedSize * 1.2));
+                p = new EmojiUtils.EmojiPaint(res, markerDimensions, wantedSize, 0, DisplayUtils.calculateMaxFontsize(wantedSize, (int) (wantedSize * 0.8), (int) (wantedSize * 1.5), wantedSize));
+                EMOJI_PAINT_CACHE_PER_SIZE.put(wantedSize, p);
+            }
+        }
+
+        return getEmojiDrawable(p, emoji);
+    }
+
+    /**
      * configuration for getEmojiDrawable
      */
     public static class EmojiPaint {
@@ -426,7 +455,7 @@ public class EmojiUtils {
         public final int offsetTop;
         public final int fontsize;
 
-        public EmojiPaint(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int offsetTop, final int fontsize) {
+        EmojiPaint(final Resources res, final Pair<Integer, Integer> bitmapDimensions, final int availableSize, final int offsetTop, final int fontsize) {
             this.res = res;
             this.bitmapDimensions = bitmapDimensions;
             this.availableSize = availableSize;

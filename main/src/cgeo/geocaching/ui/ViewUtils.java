@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -181,7 +182,7 @@ public class ViewUtils {
 
     public static CheckBox addCheckboxItem(final Activity activity, @NonNull final ViewGroup viewGroup, final String text, final int iconId, @StringRes final int infoTextId) {
 
-        final ImmutablePair<View, CheckBox> ip = createCheckboxItem(activity, viewGroup, text, iconId, infoTextId);
+        final ImmutablePair<View, CheckBox> ip = createCheckboxItem(activity, viewGroup, text, ImageParam.id(iconId), infoTextId);
         viewGroup.addView(ip.left);
         return ip.right;
     }
@@ -198,13 +199,13 @@ public class ViewUtils {
         return button;
     }
 
-    public static ImmutablePair<View, CheckBox> createCheckboxItem(final Activity activity, @Nullable final ViewGroup context, final String text, final int iconId, @StringRes final int infoTextId) {
+    public static ImmutablePair<View, CheckBox> createCheckboxItem(final Activity activity, @Nullable final ViewGroup context, final String text, final ImageParam icon, @StringRes final int infoTextId) {
 
         final View itemView = LayoutInflater.from(context == null ? activity : context.getContext()).inflate(R.layout.checkbox_item, context, false);
         final CheckboxItemBinding itemBinding = CheckboxItemBinding.bind(itemView);
         itemBinding.itemText.setText(text);
-        if (iconId > -1) {
-            itemBinding.itemIcon.setImageResource(iconId);
+        if (icon != null) {
+            icon.apply(itemBinding.itemIcon);
         }
         if (infoTextId != 0) {
             itemBinding.itemInfo.setVisibility(View.VISIBLE);
@@ -294,6 +295,31 @@ public class ViewUtils {
             final MenuItem item = menu.getItem(pos);
             item.setShowAsAction(SHOW_AS_ACTION_ALWAYS);
         }
+
+    }
+
+    /**
+     * Tries its best to return the size of a view. Returns null otherwise.
+     * Sometimes it is only possible to return width OR height. In this case the other parameter is set to 0.
+     *
+     * @return Pair where first is width in pixel and second is height in pixel
+     * */
+    @Nullable
+    public static Pair<Integer, Integer> getViewSize(final View view) {
+        view.measure(0, 0);
+        if (view.getMeasuredHeight() > 0 || view.getMeasuredWidth() > 0) {
+            return new Pair<>(view.getMeasuredWidth(), view.getMeasuredHeight());
+        }
+        //try to get size from layout parameters
+        if (view.getLayoutParams() != null) {
+            final int w = view.getLayoutParams().width > 0 ? view.getLayoutParams().width : 0;
+            final int h = view.getLayoutParams().height > 0 ? view.getLayoutParams().height : 0;
+            if (w > 0 || h > 0) {
+                return new Pair<>(w, h);
+            }
+        }
+
+        return null;
 
     }
 

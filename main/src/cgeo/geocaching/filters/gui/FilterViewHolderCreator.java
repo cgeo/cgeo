@@ -14,6 +14,7 @@ import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
 
 import android.app.Activity;
@@ -60,7 +61,7 @@ public class FilterViewHolderCreator {
                         .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
                             CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.ADVLAB, CacheType.USER_DEFINED))
                         .setValueDisplayTextGetter(CacheType::getShortL10n)
-                        .setValueDrawableGetter(ct -> ct.markerId) , 2, false);
+                        .setValueDrawableGetter(ct -> ImageParam.id(ct.markerId)) , 2, false);
                 break;
             case SIZE:
                 result = new ChipChoiceFilterViewHolder<>(
@@ -174,7 +175,7 @@ public class FilterViewHolderCreator {
             .setSelectableValues(allLists)
             .setFilterValueGetter(StoredListGeocacheFilter::getFilterLists)
             .setFilterValueSetter(StoredListGeocacheFilter::setFilterLists)
-            .setValueDrawableGetter(f -> R.drawable.ic_menu_manage_list)
+            .setValueDrawableGetter(f -> f.markerId > 0 ? ImageParam.emoji(f.markerId) : ImageParam.id(R.drawable.ic_menu_manage_list))
             .setValueDisplayTextGetter(f -> f.title)
             .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
 
