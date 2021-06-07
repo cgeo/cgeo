@@ -1,10 +1,6 @@
-### Cache details
-
-
-### Kaart
-
-
-### Geïntegreerde routeplanner
-
-
-### Other
+- Opgelost: Waypoint extractie met dezelfde naam, maar verschillende coördinaten uit persoonlijke notitie
+- Opgelost: Bug in het uitpakken van gebruikersnotitie voor waypoint met formule
+- Opgelost: Exporteer formule naar PN in plaats van coördinaten voor voltooide formule
+- Opgelost: Offline map en themamap onjuist na opnieuw installeren en herstellen van back-up
+- Opgelost: Spoor/route kan niet worden bijgewerkt
+- Opgelost: Thema-fout voor downloader in het lichte thema

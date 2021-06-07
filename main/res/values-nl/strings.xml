@@ -470,6 +470,7 @@
     <string name="cache_filter_logs_count">Aantal logs</string>
     <string name="cache_filter_last_found">Laatst Gevonden Datum</string>
     <string name="cache_filter_log_entry">Log Invoer</string>
+    <string name="cache_filter_stored_lists">Opgeslagen lijsten</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Gebruikerspecifiek</string>
@@ -499,6 +500,8 @@
     <string name="cache_filter_datefilter_label_from">Van:</string>
     <string name="cache_filter_datefilter_label_to">Aan:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alles selecteren</string>
+    <string name="cache_filter_checkboxlist_add_items">Meer items toevoegen</string>
+    <string name="cache_filter_checkboxlist_add_items_dialog_title">Items toevoegen</string>
     <string name="cache_filter_favorites_absolute">Absoluut</string>
     <string name="cache_filter_favorites_percentage">Percentage</string>
     <string name="cache_filter_distance_use_current_position">Huidige positie gebruiken</string>
@@ -1351,6 +1354,7 @@
     <string name="map_showc_own">Eigen</string>
     <string name="map_showc_found">Gevonden</string>
     <string name="map_showc_disabled">Uitgeschakeld</string>
+    <string name="map_showc_archived">Gearchiveerd</string>
     <string name="map_showc_offlinelog">Offline gelogd</string>
     <string name="map_showwp_original">Origineel</string>
     <string name="map_showwp_parking">Parkeerplaats</string>

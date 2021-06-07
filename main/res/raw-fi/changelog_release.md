@@ -1,10 +1,6 @@
-### Kätkön tiedot
-
-
-### Kartta
-
-
-### Sisäinen reititysmoottori
-
-
-### Muut
+- Korjaus: Tuo reittipiste samalla nimellä, mutta eri koordinaateilla henkilökohtaisesta muistiinpanosta
+- Korjaus: Bugi yhtälön sisältävän reittipisteen tuonnissa muistiinpanosta
+- Korjaus: Vie yhtälö henkilökohtaiseen muistiinpanoon koordinaattien sijaan, kun yhtälö on käytettävissä
+- Korjaus: Offlinekarttojen ja teemojojen kansio virheellinen asennuksen jälkeen tehdyssä varmuuskopion palauttamisessa
+- Korjaus: Jälkeä/reittiä ei voi päivittää
+- Korjaus: Teemoitusvirhe lataajan vaaleassa teemassa
