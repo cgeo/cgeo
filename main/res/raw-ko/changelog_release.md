@@ -1,6 +1,6 @@
-- Fix: Extract waypoint with same name but different coordinates from personal note
-- Fix: Bug in extracting user note for waypoint with formula
-- Fix: Export formula to PN instead of coordinates for completed formula
-- Fix: Offline map and themes folder incorrect after re-install and restore of backup
-- Fix: Track/route cannot be updated
-- Fix: Theming error for downloader in light theme
+- 수정: 개인 메모에서 이름은 같지만 좌표가 다른 지점 추출
+- 수정: 공식을 사용하여 지점에 대한 사용자 메모를 추출하는 버그
+- 수정: 완료된 공식의 좌표 대신 공식을 PN으로 내보내기
+- 수정: 백업 재설치 및 복원 후 오프라인지도 및 테마 폴더가 잘못됨
+- 수정: 트랙/경로를 업데이트 할 수 없었음
+- 수정: 라이트 테마의 다운로더에 대한 테마 오류
