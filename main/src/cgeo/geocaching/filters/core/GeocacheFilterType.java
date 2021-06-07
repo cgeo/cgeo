@@ -27,6 +27,7 @@ public enum GeocacheFilterType {
     LOGS_COUNT("logs_count", R.string.cache_filter_logs_count, R.string.cache_filtergroup_details, LogsCountGeocacheFilter::new),
     LAST_FOUND("last_found", R.string.cache_filter_last_found, R.string.cache_filtergroup_details, LastFoundGeocacheFilter::new),
     LOG_ENTRY("log_entry", R.string.cache_filter_log_entry, R.string.cache_filtergroup_details, LogEntryGeocacheFilter::new),
+    LOCATION("location", R.string.cache_filter_location, R.string.cache_filtergroup_details, LocationGeocacheFilter::new),
     STORED_LISTS("stored_list", R.string.cache_filter_stored_lists, R.string.cache_filtergroup_userspecific, StoredListGeocacheFilter::new);
 
 

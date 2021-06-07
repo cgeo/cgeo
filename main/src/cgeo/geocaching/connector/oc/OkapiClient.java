@@ -149,6 +149,8 @@ final class OkapiClient {
     private static final String CACHE_TRACKABLES_COUNT = "trackables_count";
     private static final String CACHE_TRACKABLES = "trackables";
     private static final String CACHE_USER_PROFILE = "profile_url";
+    private static final String CACHE_REGION = "region";
+    private static final String CACHE_COUNTRY = "country2";
 
     private static final String TRK_GEOCODE = "code";
     private static final String TRK_NAME = "name";
@@ -172,7 +174,7 @@ final class OkapiClient {
     // the several realms of possible fields for cache retrieval:
     // Core: for livemap requests (L3 - only with level 3 auth)
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
-    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count|owner|founds|notfounds|rating|rating_votes|recommendations";
+    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count|owner|founds|notfounds|rating|rating_votes|recommendations|region|country2";
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
     private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd|trackables";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|attr_acodes|willattends|short_description";
@@ -701,6 +703,10 @@ final class OkapiClient {
         cache.setTerrain((float) response.get(CACHE_TERRAIN).asDouble());
 
         cache.setInventoryItems(response.get(CACHE_TRACKABLES_COUNT).asInt());
+
+        final String region = response.get(CACHE_REGION) == null ? null : response.get(CACHE_REGION).asText();
+        final String country = response.get(CACHE_COUNTRY) == null ? null : response.get(CACHE_COUNTRY).asText();
+        cache.setLocation(region == null ? country : (country == null ? region : region + ", " + country));
 
         if (response.has(CACHE_IS_FOUND)) {
             cache.setFound(response.get(CACHE_IS_FOUND).asBoolean());

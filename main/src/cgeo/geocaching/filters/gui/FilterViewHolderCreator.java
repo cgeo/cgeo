@@ -96,6 +96,9 @@ public class FilterViewHolderCreator {
             case LOG_ENTRY:
                 result = new LogEntryFilterViewHolder();
                 break;
+            case LOCATION:
+                result = new StringFilterViewHolder<>(DataStore::getSuggestionsLocation);
+                break;
             case STORED_LISTS:
                 result = createStoredListFilterViewHolder();
                 break;
