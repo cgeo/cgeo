@@ -472,6 +472,8 @@
     <string name="cache_filter_logs_count">Počet logů</string>
     <string name="cache_filter_last_found">Datum posledního nálezu</string>
     <string name="cache_filter_log_entry">Záznam logu</string>
+    <string name="cache_filter_location">Místo</string>
+    <string name="cache_filter_stored_lists">Uložené seznamy</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
     <string name="cache_filtergroup_userspecific">Vlastní</string>
@@ -493,6 +495,7 @@
     <string name="cache_filter_storage_save_confirm_title">Uložit přepsání filtru</string>
     <string name="cache_filter_storage_save_confirm_message">Filtr s názvem \'%s\' a jinou konfigurací již existuje. Chcete jej přepsat?</string>
     <string name="cache_filter_stringfilter_matchcase">Rozlišovat velikost písmen</string>
+    <string name="cache_filter_stringfilter_searchtext_hint">Hledaný text</string>
     <string name="cache_filter_stringfilter_info">S možností \'Vzor\' použijte zástupné znaky * a ?. * představuje nulu, jeden nebo více znaků, ? představuje jeden jediný znak. Například vzor \'H?mburg*\' bude odpovídat např. \'Homburg\' nebo \'Hamburg v noci\', ale ne \'Den v Hamburgu\' nebo \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Není přítomen</string>
     <string name="cache_filter_stringfilter_type_is_present">Je přítomen</string>
@@ -503,6 +506,8 @@
     <string name="cache_filter_datefilter_label_from">Od:</string>
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Vybrat vše</string>
+    <string name="cache_filter_checkboxlist_add_items">Přidat více položek</string>
+    <string name="cache_filter_checkboxlist_add_items_dialog_title">Přidat položky</string>
     <string name="cache_filter_favorites_absolute">Absolutní</string>
     <string name="cache_filter_favorites_percentage">Procentuálně</string>
     <string name="cache_filter_distance_use_current_position">Použít aktuální pozici</string>
