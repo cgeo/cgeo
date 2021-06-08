@@ -58,7 +58,7 @@ public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBindi
     public void onResume() {
         super.onResume();
         synchronized (mutextContentIsUpToDate) {
-            Log.e("onResume: update=" + (!contentIsUpToDate) + " " + getClass().getName());
+            Log.d("onResume: update=" + (!contentIsUpToDate) + " " + getClass().getName());
             if (!contentIsUpToDate) {
                 setContent();
                 contentIsUpToDate = true;
