@@ -206,7 +206,22 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textinput_embedded_autocomplete">
+    <style name="textinput_edittext_full" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:padding">6dip</item>
+        <item name="android:autoText">true</item>
+        <item name="android:gravity">top|left</item>
+        <item name="android:capitalize">none</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="textinput_edittext_singleline_full" parent="textinput_edittext_full">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- for AutoCompleteTextView or EditText embedded in material TextInputLayout -->
+
+    <style name="textinput_embedded">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">text</item>
