@@ -199,23 +199,22 @@
         <item name="android:autoText">true</item>
         <item name="android:gravity">top|left</item>
         <item name="android:capitalize">none</item>
-    </style>
-
-    <style name="textinput_dropdown_full" parent="textinput_dropdown">
-        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="endIconMode">clear_text</item>
     </style>
 
-    <style name="textinput_edittext_full" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="textinput_edittext" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:padding">6dip</item>
         <item name="android:autoText">true</item>
         <item name="android:gravity">top|left</item>
         <item name="android:capitalize">none</item>
-        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="endIconMode">clear_text</item>
     </style>
 
-    <style name="textinput_edittext_singleline_full" parent="textinput_edittext_full">
+    <style name="textinput_edittext_singleline" parent="textinput_edittext">
         <item name="android:singleLine">true</item>
     </style>
 
