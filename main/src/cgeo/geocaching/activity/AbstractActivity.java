@@ -36,6 +36,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.viewbinding.ViewBinding;
 
 import java.util.Locale;
 
@@ -130,6 +131,11 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     protected void setThemeAndContentView(@LayoutRes final int resourceLayoutID) {
         setThemeAndContentView(resourceLayoutID, false);
+    }
+
+    protected void setThemeAndContentView(final ViewBinding binding) {
+        ActivityMixin.setTheme(this, false);
+        setContentView(binding.getRoot());
     }
 
     protected void setThemeAndContentView(@LayoutRes final int resourceLayoutID, final boolean isDialog) {
