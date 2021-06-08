@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/textinput_dropdown"
-        app:endIconMode="none"
+        app:endIconMode="clear_text"
         android:layout_below="@+id/filter_options"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true">
