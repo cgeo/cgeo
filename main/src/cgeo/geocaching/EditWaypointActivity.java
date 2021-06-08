@@ -167,7 +167,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 }
 
                 if (StringUtils.isBlank(activity.binding.note.getText())) {
-                    activity.binding.note.setVisibility(View.GONE);
+                    activity.binding.noteLayout.setVisibility(View.GONE);
                 }
 
             } catch (final RuntimeException e) {
@@ -232,7 +232,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             (new LoadWaypointThread()).start();
         } else { // new waypoint
             initializeWaypointTypeSelector();
-            binding.note.setVisibility(View.GONE);
+            binding.noteLayout.setVisibility(View.GONE);
             updateCoordinates(initialCoords);
         }
 

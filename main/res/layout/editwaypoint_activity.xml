@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="4dip"
-    tools:context=".EditWaypointActivity" >
+    tools:context=".EditWaypointActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -30,34 +32,50 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:importantForAutofill="noExcludeDescendants">
-            <EditText
-                android:id="@+id/bearing"
-                style="@style/edittext_full"
-                android:hint="@string/waypoint_bearing"
-                android:inputType="numberDecimal|numberSigned"
-                android:enabled="false"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/textinput_edittext_singleline_full"
+                app:endIconMode="clear_text">
+                <EditText
+                    android:id="@+id/bearing"
+                    style="@style/textinput_embedded"
+                    android:hint="@string/waypoint_bearing"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:enabled="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textinput_edittext_singleline_full"
+                    android:layout_toLeftOf="@id/distanceUnit"
+                    app:endIconMode="clear_text">
+                    <EditText
+                        android:id="@+id/distance"
+                        style="@style/textinput_embedded"
+                        android:hint="@string/waypoint_distance"
+                        android:inputType="numberDecimal"
+                        android:enabled="false"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Spinner
+                    android:id="@+id/distanceUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:entries="@array/distance_units"
+                    tools:listitem="@android:layout/simple_spinner_item"
+                    android:enabled="false"/>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <EditText
-                    android:id="@+id/distance"
-                    style="@style/edittext_full"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    android:hint="@string/waypoint_distance"
-                    android:inputType="numberDecimal"
-                    android:enabled="false"/>
-
-                <Spinner
-                    android:id="@+id/distanceUnit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/distance_units"
-                    tools:listitem="@android:layout/simple_spinner_item"
-                    android:enabled="false"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -69,26 +87,37 @@
             android:visibility="gone"
             tools:listitem="@android:layout/simple_spinner_item" />
 
-        <AutoCompleteTextView
-            android:id="@+id/name"
-            style="@style/edittext_full"
-            android:hint="@string/waypoint_name" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/textinput_dropdown_full"
+            app:endIconMode="clear_text">
+            <AutoCompleteTextView
+                android:id="@+id/name"
+                style="@style/textinput_embedded"
+                android:hint="@string/waypoint_name" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/note"
-            style="@style/edittext_full"
-            android:layout_height="wrap_content"
-            android:hint="@string/waypoint_note"
-            android:inputType="textMultiLine|textCapSentences"
-            android:minLines="5"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/note_layout"
+            style="@style/textinput_edittext_full"
+            app:endIconMode="clear_text">
+            <EditText
+                android:id="@+id/note"
+                style="@style/textinput_embedded"
+                android:hint="@string/waypoint_note"
+                android:inputType="textMultiLine|textCapSentences"
+                android:minLines="5"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/user_note"
-            style="@style/edittext_full"
-            android:layout_height="wrap_content"
-            android:hint="@string/waypoint_user_note"
-            android:inputType="textMultiLine|textCapSentences"
-            android:minLines="5" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/textinput_edittext_full"
+            app:endIconMode="clear_text">
+            <EditText
+                android:id="@+id/user_note"
+                style="@style/textinput_embedded"
+                android:hint="@string/waypoint_user_note"
+                android:inputType="textMultiLine|textCapSentences"
+                android:minLines="5" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
             android:id="@+id/wpt_visited_checkbox"

@@ -48,7 +48,7 @@
             app:endIconMode="clear_text">
             <AutoCompleteTextView
                 android:id="@+id/address"
-                style="@style/textinput_embedded_autocomplete"
+                style="@style/textinput_embedded"
                 android:hint="@string/search_address"
                 android:imeOptions="actionGo" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -71,7 +71,7 @@
             app:endIconMode="clear_text">
             <AutoCompleteTextView
                 android:id="@+id/geocode"
-                style="@style/textinput_embedded_autocomplete"
+                style="@style/textinput_embedded"
                 android:hint="@string/search_geo"
                 android:imeOptions="actionGo"
                 android:inputType="textVisiblePassword"
@@ -97,7 +97,7 @@
             app:endIconMode="clear_text">
             <AutoCompleteTextView
                 android:id="@+id/keyword"
-                style="@style/textinput_embedded_autocomplete"
+                style="@style/textinput_embedded"
                 android:hint="@string/search_kw_prefill"
                 android:imeOptions="actionGo" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -120,7 +120,7 @@
             app:endIconMode="clear_text">
             <AutoCompleteTextView
                 android:id="@+id/finder"
-                style="@style/textinput_embedded_autocomplete"
+                style="@style/textinput_embedded"
                 android:hint="@string/search_fbu_prefill"
                 android:imeOptions="actionGo" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -143,7 +143,7 @@
             app:endIconMode="clear_text">
             <AutoCompleteTextView
                 android:id="@+id/owner"
-                style="@style/textinput_embedded_autocomplete"
+                style="@style/textinput_embedded"
                 android:hint="@string/search_hbu_prefill"
                 android:imeOptions="actionGo" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -198,7 +198,7 @@
             app:endIconMode="clear_text">
             <AutoCompleteTextView
                 android:id="@+id/trackable"
-                style="@style/textinput_embedded_autocomplete"
+                style="@style/textinput_embedded"
                 android:hint="@string/search_tb_hint"
                 android:imeOptions="actionGo"
                 android:inputType="textVisiblePassword" />
