@@ -200,6 +200,17 @@
         <item name="android:capitalize">none</item>
     </style>
 
+    <style name="textinput_dropdown_full" parent="textinput_dropdown">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="textinput_embedded_autocomplete">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">text</item>
+    </style>
+
     <!-- edittext (TODO: should at some point be completely replaced by textinput) -->
 
     <style name="edittext" parent="@android:style/Widget.EditText">

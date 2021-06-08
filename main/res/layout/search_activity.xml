@@ -14,9 +14,7 @@
         android:orientation="vertical" >
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
             <TextView
                 style="@style/separator_horizontal_headline"
                 android:text="@string/search_coordinates" />
@@ -39,19 +37,21 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
             <TextView
                 style="@style/separator_horizontal_headline"
                 android:text="@string/search_address" />
         </RelativeLayout>
 
-        <AutoCompleteTextView
-            android:id="@+id/address"
-            style="@style/edittext_full"
-            android:hint="@string/search_address"
-            android:imeOptions="actionGo" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/textinput_dropdown_full"
+            app:endIconMode="clear_text">
+            <AutoCompleteTextView
+                android:id="@+id/address"
+                style="@style/textinput_embedded_autocomplete"
+                android:hint="@string/search_address"
+                android:imeOptions="actionGo" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/search_address"
@@ -60,22 +60,24 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
             <TextView
                 style="@style/separator_horizontal_headline"
                 android:text="@string/search_geo" />
         </RelativeLayout>
 
-        <AutoCompleteTextView
-            android:id="@+id/geocode"
-            style="@style/edittext_full"
-            android:hint="@string/search_geo"
-            android:imeOptions="actionGo"
-            android:inputType="textVisiblePassword"
-            android:text="GC"
-            tools:ignore="HardcodedText" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/textinput_dropdown_full"
+            app:endIconMode="clear_text">
+            <AutoCompleteTextView
+                android:id="@+id/geocode"
+                style="@style/textinput_embedded_autocomplete"
+                android:hint="@string/search_geo"
+                android:imeOptions="actionGo"
+                android:inputType="textVisiblePassword"
+                android:text="GC"
+                tools:ignore="HardcodedText" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/display_geocode"
@@ -84,19 +86,21 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
             <TextView
                 style="@style/separator_horizontal_headline"
                 android:text="@string/search_kw" />
         </RelativeLayout>
 
-        <AutoCompleteTextView
-            android:id="@+id/keyword"
-            style="@style/edittext_full"
-            android:hint="@string/search_kw_prefill"
-            android:imeOptions="actionGo" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/textinput_dropdown_full"
+            app:endIconMode="clear_text">
+            <AutoCompleteTextView
+                android:id="@+id/keyword"
+                style="@style/textinput_embedded_autocomplete"
+                android:hint="@string/search_kw_prefill"
+                android:imeOptions="actionGo" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/search_keyword"
@@ -105,19 +109,21 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
             <TextView
                 style="@style/separator_horizontal_headline"
                 android:text="@string/search_fbu" />
         </RelativeLayout>
 
-        <AutoCompleteTextView
-            android:id="@+id/finder"
-            style="@style/edittext_full"
-            android:hint="@string/search_fbu_prefill"
-            android:imeOptions="actionGo" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/textinput_dropdown_full"
+            app:endIconMode="clear_text">
+            <AutoCompleteTextView
+                android:id="@+id/finder"
+                style="@style/textinput_embedded_autocomplete"
+                android:hint="@string/search_fbu_prefill"
+                android:imeOptions="actionGo" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/search_finder"
@@ -126,19 +132,21 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
             <TextView
                 style="@style/separator_horizontal_headline"
                 android:text="@string/search_hbu" />
         </RelativeLayout>
 
-        <AutoCompleteTextView
-            android:id="@+id/owner"
-            style="@style/edittext_full"
-            android:hint="@string/search_hbu_prefill"
-            android:imeOptions="actionGo" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/textinput_dropdown_full"
+            app:endIconMode="clear_text">
+            <AutoCompleteTextView
+                android:id="@+id/owner"
+                style="@style/textinput_embedded_autocomplete"
+                android:hint="@string/search_hbu_prefill"
+                android:imeOptions="actionGo" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/search_owner"
@@ -147,9 +155,7 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
             <TextView
                 style="@style/separator_horizontal_headline"
                 android:text="@string/search_filter" />
@@ -181,20 +187,22 @@
         </RelativeLayout>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
             <TextView
                 style="@style/separator_horizontal_headline"
                 android:text="@string/search_tb" />
         </RelativeLayout>
 
-        <AutoCompleteTextView
-            android:id="@+id/trackable"
-            style="@style/edittext_full"
-            android:hint="@string/search_tb_hint"
-            android:imeOptions="actionGo"
-            android:inputType="textVisiblePassword" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/textinput_dropdown_full"
+            app:endIconMode="clear_text">
+            <AutoCompleteTextView
+                android:id="@+id/trackable"
+                style="@style/textinput_embedded_autocomplete"
+                android:hint="@string/search_tb_hint"
+                android:imeOptions="actionGo"
+                android:inputType="textVisiblePassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/display_trackable"
