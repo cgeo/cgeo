@@ -26,9 +26,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.UriPermission;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Environment;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -69,8 +72,9 @@ public final class SystemInformation {
             .append("\n- Device type: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
             .append("\n- Available processors: ").append(Runtime.getRuntime().availableProcessors())
             .append("\n- Android version: ").append(VERSION.RELEASE)
-            .append("\n- Android build: ").append(Build.DISPLAY)
-            .append("\n- Sailfish OS detected: ").append(EnvironmentUtils.isSailfishOs());
+            .append("\n- Android build: ").append(Build.DISPLAY);
+        appendScreenResolution(context, body);
+        body.append("\n- Sailfish OS detected: ").append(EnvironmentUtils.isSailfishOs());
         appendGooglePlayServicesVersion(context, body);
         body.append("\n- HW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
             .append(" (").append(Settings.useHardwareAcceleration() == HwAccel.hwAccelShouldBeEnabled() ? "default state" : "manually changed").append(')')
@@ -262,6 +266,14 @@ public final class SystemInformation {
                 body.append("unretrievable version (").append(e.getMessage()).append(')');
             }
         }
+    }
+
+    private static void appendScreenResolution(final Context context, final StringBuilder body) {
+        final Configuration config = context.getResources().getConfiguration();
+        final Point size = new Point();
+        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getSize(size);
+
+        body.append("\n- Screen resolution: ").append(size.x).append("x").append(size.y).append("px (").append(config.screenWidthDp).append("x").append(config.screenHeightDp).append("dp)");
     }
 
     private static String versionInfoToString(final int actualVersion, final int expectedVersion) {
