@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.gui;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.ValueGroupGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
@@ -27,7 +28,7 @@ public class ValueGroupFilterAccessor<D, F extends IGeocacheFilter> {
     private Func2<F, Geocache, Set<D>> geocacheValueGetter;
 
     private Func1<D, String> valueDisplayTextGetter;
-    private Func1<D, Integer> valueDrawableGetter;
+    private Func1<D, ImageParam> valueDrawableGetter;
 
    public static <DD, FF extends ValueGroupGeocacheFilter<DD, ?>>  ValueGroupFilterAccessor<DD, FF> createForValueGroupFilter() {
         return new ValueGroupFilterAccessor<DD, FF>()
@@ -63,7 +64,7 @@ public class ValueGroupFilterAccessor<D, F extends IGeocacheFilter> {
         return this;
     }
 
-    public ValueGroupFilterAccessor<D, F> setValueDrawableGetter(final Func1<D, Integer> valueDrawableGetter) {
+    public ValueGroupFilterAccessor<D, F> setValueDrawableGetter(final Func1<D, ImageParam> valueDrawableGetter) {
         this.valueDrawableGetter = valueDrawableGetter;
         return this;
     }
@@ -110,8 +111,8 @@ public class ValueGroupFilterAccessor<D, F extends IGeocacheFilter> {
         return String.valueOf(value);
     }
 
-    public int getIconFor(final D value) {
-        return value == null || this.valueDrawableGetter == null ? 0 : this.valueDrawableGetter.call(value);
+    public ImageParam getIconFor(final D value) {
+        return value == null || this.valueDrawableGetter == null ? null : this.valueDrawableGetter.call(value);
     }
 
     public boolean hasCacheValueGetter() {

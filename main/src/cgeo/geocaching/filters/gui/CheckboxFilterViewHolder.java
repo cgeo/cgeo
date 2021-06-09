@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.gui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
@@ -85,7 +86,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     }
 
     private View createSelectAllNoneView(final ViewGroup ctx) {
-        selectAllNoneCheckbox = ViewUtils.createCheckboxItem(getActivity(), ctx, getActivity().getString(R.string.cache_filter_checkboxlist_selectallnone), R.drawable.ic_menu_selectall, 0);
+        selectAllNoneCheckbox = ViewUtils.createCheckboxItem(getActivity(), ctx, getActivity().getString(R.string.cache_filter_checkboxlist_selectallnone), ImageParam.id(R.drawable.ic_menu_selectall), 0);
 
         selectAllNoneCheckbox.right.setOnCheckedChangeListener((v, c) -> {
             if (!selectAllNoneBroadcast) {
