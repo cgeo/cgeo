@@ -21,12 +21,12 @@
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_switch_select_mode"
-        android:icon="@drawable/ic_menu_agenda"
+        android:icon="@drawable/ic_menu_select_start"
         android:title="@string/caches_select_mode"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_invert_selection"
-        android:icon="@drawable/ic_menu_mark"
+        android:icon="@drawable/ic_menu_invert"
         android:title="@string/caches_select_invert"
         app:showAsAction="ifRoom|withText"/>
     <item

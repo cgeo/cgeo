@@ -745,6 +745,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         menu.findItem(itemId).setEnabled(enabled);
     }
 
+    public void updateSelectSwitchMenuItem(final MenuItem item) {
+        if (adapter.isSelectMode()) {
+            item.setIcon(R.drawable.ic_menu_select_end);
+            item.setTitle(R.string.caches_select_mode_exit);
+        } else {
+            item.setIcon(R.drawable.ic_menu_select_start);
+            item.setTitle(R.string.caches_select_mode);
+        }
+    }
+
+
     /**
      * Menu items which are not at all usable with the current list type should be hidden.
      * Menu items which are usable with the current list type but not in the current situation should be disabled.
@@ -761,18 +772,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final List<CacheListApp> listNavigationApps = CacheListApps.getActiveApps();
 
         try {
+
+
             // toplevel menu items
             setEnabled(menu, R.id.menu_show_on_map, !isEmpty);
             setVisibleEnabled(menu, R.id.menu_sort, !isHistory, !isEmpty);
-            if (adapter.isSelectMode()) {
-                menu.findItem(R.id.menu_switch_select_mode).setTitle(res.getString(R.string.caches_select_mode_exit))
-                        .setIcon(R.drawable.ic_menu_clear_playlist);
-            } else {
-                menu.findItem(R.id.menu_switch_select_mode).setTitle(res.getString(R.string.caches_select_mode))
-                        .setIcon(R.drawable.ic_menu_agenda);
-            }
+
             setEnabled(menu, R.id.menu_switch_select_mode, !isEmpty);
+            updateSelectSwitchMenuItem(menu.findItem(R.id.menu_switch_select_mode));
             setVisible(menu, R.id.menu_invert_selection, adapter.isSelectMode()); // exception to the general rule: only show in select mode
+
             setVisibleEnabled(menu, R.id.menu_cache_list_app_provider, listNavigationApps.size() > 1, !isEmpty);
             setVisibleEnabled(menu, R.id.menu_cache_list_app, listNavigationApps.size() == 1, !isEmpty);
 
@@ -901,6 +910,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             goMap();
         } else if (menuItem == R.id.menu_switch_select_mode) {
             adapter.switchSelectMode();
+            updateSelectSwitchMenuItem(item);
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_refresh_stored) {
             refreshStored(adapter.getCheckedOrAllCaches());
