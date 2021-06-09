@@ -1253,7 +1253,7 @@
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
     <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>
     <string name="init_summary_hidewp_visited">Piilota kartalta vieraillut reittipisteet</string>
-    <string name="map_theme_select">Valitse kartan ulkoasu</string>
+    <string name="map_theme_select">Valitse kartan teema</string>
     <string name="map_theme_options">Teema-asetukset</string>
     <string name="map_language">Kartan kieli</string>
     <string name="map_live_enable">Aktivoi Live</string>
