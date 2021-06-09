@@ -6,9 +6,8 @@
     android:tint="?android:textColorPrimary">
      <path
       android:fillColor="#FF000000"
-      android:pathData="m18.5939,2.8295 l-0.256,-1.28H12.5779V22.749h1.28V7.9495h3.584l0.256,1.28h4.48V2.8295Z"
-      android:strokeWidth="0.64"/>
+      android:pathData="M18.6,2.83 L18.3,1.55H12.6V22.7H13.9V7.95H17.4L17.7,9.23H22.2V2.83Z"/>
   <path
       android:fillColor="#FF000000"
-      android:pathData="m7.2094,2.7495a3,3 0,0 1,3 3,3 3,0 0,1 -3,3 3,3 0,0 1,-3 -3,3 3,0 0,1 3,-3m-1,20h-3v-6h-2V9.7495H13.2094V16.7495h-2v6H8.2094v-4h-2z"/>
+      android:pathData="M7.21,2.75A3,3 0,0 1,10.2 5.75,3 3,0 0,1 7.21,8.75 3,3 0,0 1,4.21 5.75,3 3,0 0,1 7.21,2.75M6.21,22.7H3.21V16.7H1.21V9.75H13.2V16.7H11.2V22.7H8.21V18.7H6.21Z"/>
 </vector>
