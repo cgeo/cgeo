@@ -19,7 +19,7 @@ import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
 
 import android.Manifest;
@@ -375,7 +375,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void skipWizard() {
-        Dialogs.confirmPositiveNegativeNeutral(this, getString(R.string.wizard), getString(R.string.wizard_skip_wizard_warning), getString(android.R.string.ok), getString(R.string.back), "", (dialog, which) -> finishWizard(), (dialog, which) -> updateDialog(), null);
+        SimpleDialog.of(this).setTitle(R.string.wizard).setMessage(R.string.wizard_skip_wizard_warning).setButtons(0, R.string.back).confirm((dialog, which) -> finishWizard(), (dialog, which) -> updateDialog());
     }
 
     private void finishWizard() {
@@ -546,10 +546,10 @@ public class InstallWizardActivity extends AppCompatActivity {
             if (!hasValidGCCredentials()) {
                 Toast.makeText(this, R.string.err_auth_process, Toast.LENGTH_SHORT).show();
             } else {
-                Dialogs.confirm(this, R.string.settings_title_gc, R.string.settings_gc_legal_note, android.R.string.ok, (dialog, which) -> {
+                SimpleDialog.of(this).setTitle(R.string.settings_title_gc).setMessage(R.string.settings_gc_legal_note).confirm((dialog, which) -> {
                     Settings.setGCConnectorActive(true);
                     gotoNext();
-                }, dialog -> { });
+                }, (dialog, i) -> { });
             }
         } else if ((contentStorageActivityHelper == null || !contentStorageActivityHelper.onActivityResult(requestCode, resultCode, data)) &&
                  !backupUtils.onActivityResult(requestCode, resultCode, data)) {

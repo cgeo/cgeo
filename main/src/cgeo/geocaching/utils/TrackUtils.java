@@ -7,7 +7,7 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableUri;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -65,7 +65,7 @@ public class TrackUtils {
             if (null == tracks || tracks.getNumSegments() == 0) {
                 startIndividualTrackFileSelector();
             } else {
-                Dialogs.confirm(activity, R.string.map_load_track, R.string.map_load_track_confirm, (dialog, which) ->
+                SimpleDialog.of(activity).setTitle(R.string.map_load_track).setMessage(R.string.map_load_track_confirm).confirm((dialog, which) ->
                     startIndividualTrackFileSelector());
             }
         } else if (id == R.id.menu_unload_track) {

@@ -1,9 +1,10 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.Preference;
@@ -15,6 +16,8 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.util.Consumer;
 
 import java.util.Locale;
 
@@ -187,7 +190,7 @@ public class SeekbarPreference extends Preference {
             if (useDecimals()) {
                 inputType |= InputType.TYPE_NUMBER_FLAG_DECIMAL;
             }
-            final Action1<String> listener = input -> {
+            final Consumer<String> listener = input -> {
                 int newValue;
                 try {
                     newValue = valueToProgress(shownValueToValue(Float.parseFloat(input)));
@@ -206,8 +209,7 @@ public class SeekbarPreference extends Preference {
                     Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
                 }
             };
-
-            Dialogs.input(context, title, inputType, defaultValue, getUnitString(), android.R.string.ok, listener);
+            SimpleDialog.of((Activity) context).setTitle(TextParam.text(title)).input(inputType, defaultValue, getUnitString(), listener);
         });
 
         return v;

@@ -11,7 +11,7 @@ import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -176,7 +176,7 @@ public class RouteSortActivity extends AbstractActivity {
     @Override
     public void onBackPressed() {
         if (changed) {
-            Dialogs.confirm(this, R.string.confirm_unsaved_changes_title, R.string.confirm_discard_changes, (dialog, which) -> finish());
+            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm((dialog, which) -> finish());
         } else {
             finish();
         }

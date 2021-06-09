@@ -28,6 +28,7 @@ import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog.CoordinateUpdate;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Log;
@@ -504,7 +505,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
                 sendLog();
             } else {
                 // Redirect user to concerned connector settings
-                Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
+                //Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
+                SimpleDialog.of(this).setTitle(R.string.settings_title_open_settings).setMessage(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> {
                     if (connector.getPreferenceActivity() > 0) {
                         SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
                     } else {

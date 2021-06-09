@@ -29,9 +29,11 @@ import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.CacheVotingBar;
 import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.ImageListFragment;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -41,7 +43,6 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.R.string;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -552,17 +553,17 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     private void sendLogAndConfirm() {
         if (!sendButtonEnabled) {
-            Dialogs.message(this, R.string.log_post_not_possible);
+            SimpleDialog.of(this).setMessage(R.string.log_post_not_possible).show();
             return;
         }
         if (CalendarUtils.isFuture(date.getCalendar())) {
-            Dialogs.message(this, R.string.log_date_future_not_allowed);
+            SimpleDialog.of(this).setMessage(R.string.log_date_future_not_allowed).show();
             return;
         }
         if (logType.get().mustConfirmLog()) {
-            Dialogs.confirm(this, R.string.confirm_log_title, res.getString(R.string.confirm_log_message, logType.get().getL10n()), (dialog, which) -> sendLogInternal());
+            SimpleDialog.of(this).setTitle(R.string.confirm_log_title).setMessage(R.string.confirm_log_message, logType.get().getL10n()).confirm((dialog, which) -> sendLogInternal());
         } else if (reportProblem.get() != ReportProblemType.NO_PROBLEM) {
-            Dialogs.confirm(this, R.string.confirm_report_problem_title, res.getString(R.string.confirm_report_problem_message, reportProblem.get().getL10n()), (dialog, which) -> sendLogInternal());
+            SimpleDialog.of(this).setTitle(TextParam.id(R.string.confirm_report_problem_title)).setMessage(TextParam.id(R.string.confirm_report_problem_message, reportProblem.get().getL10n())).confirm((dialog, which) -> sendLogInternal());
         } else {
             sendLogInternal();
         }
@@ -879,19 +880,12 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 showToast(res.getString(R.string.info_log_saved));
                 finish(SaveMode.SKIP);
             } else {
-                Dialogs.confirmPositiveNegativeNeutral(activity, R.string.info_log_post_failed,
-                        res.getString(R.string.info_log_post_failed_reason, status.getErrorString(res)),
-                        R.string.info_log_post_retry, // Positive Button
-                        string.cancel,                // Negative Button
-                        R.string.info_log_post_save,  // Neutral Button
-                        // Positive button: Retry
-                        (dialog, which) -> sendLogInternal(),
-                        // Negative button: dismiss popup
-                        null,
-                        // Neutral Button: SaveLog
-                        (dialogInterface, i) -> {
-                            finish(SaveMode.FORCE);
-                        });
+                SimpleDialog.of(activity)
+                    .setTitle(R.string.info_log_post_failed)
+                    .setMessage(R.string.info_log_post_failed_reason, status.getErrorString(res))
+                    .setButtons(R.string.info_log_post_retry, 0, R.string.info_log_post_save)
+                    .confirm((dialog, which) -> sendLogInternal(), SimpleDialog.DO_NOTHING, (dialogInterface, i) -> finish(SaveMode.FORCE));
+
             }
         }
     }

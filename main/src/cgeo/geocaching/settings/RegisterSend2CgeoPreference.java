@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -70,10 +70,11 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
             }).first(0)).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(pin -> {
                 progressDialog.dismiss();
                 if (pin > 0) {
-                    Dialogs.message(activity, R.string.init_sendToCgeo,
-                            activity.getString(R.string.init_sendToCgeo_register_ok, pin));
+                    SimpleDialog.of(activity).setTitle(R.string.init_sendToCgeo)
+                        .setMessage(R.string.init_sendToCgeo_register_ok, pin).show();
                 } else {
-                    Dialogs.message(activity, R.string.init_sendToCgeo, R.string.init_sendToCgeo_register_fail);
+                    SimpleDialog.of(activity).setTitle(R.string.init_sendToCgeo)
+                        .setMessage(R.string.init_sendToCgeo_register_fail).show();
                 }
             });
 

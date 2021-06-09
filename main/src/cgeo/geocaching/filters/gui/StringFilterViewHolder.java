@@ -6,7 +6,7 @@ import cgeo.geocaching.filters.core.StringFilter;
 import cgeo.geocaching.filters.core.StringGeocacheFilter;
 import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.ui.TextSpinner;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.view.View;
@@ -58,7 +58,7 @@ public class StringFilterViewHolder<F extends StringGeocacheFilter> extends Base
                 binding.matchCase.setVisibility(textEnabled ? VISIBLE : GONE);
             }, true)
             .set(StringFilter.getDefaultFilterType());
-        this.binding.itemInfo.setOnClickListener(d -> Dialogs.message(getActivity(), R.string.cache_filter_stringfilter_info));
+        this.binding.itemInfo.setOnClickListener(d -> SimpleDialog.of(getActivity()).setMessage(R.string.cache_filter_stringfilter_info).show());
 
         //initialize autocomplete,
         if (this.autoTextCompleteFunction != null) {

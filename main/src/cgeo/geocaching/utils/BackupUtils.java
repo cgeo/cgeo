@@ -13,7 +13,9 @@ import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_STRING;
 import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_UNKNOWN;
 
@@ -112,14 +114,13 @@ public class BackupUtils {
             final ImmutableTriple<PersistableFolder, String, String> current = regrantAccessFolders.get(0);
             final Folder folderToBeRestored = Folder.fromConfig(current.right);
 
-            Dialogs.confirm(activityContext,
-                activityContext.getString(R.string.init_backup_settings_restore),
-                String.format(activityContext.getString(R.string.settings_folder_changed), activityContext.getString(current.left.getNameKeyId()), folderToBeRestored.toUserDisplayableString(), activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok)),
-                activityContext.getString(android.R.string.ok),
-                (d, v) -> {
+            SimpleDialog.of(activityContext)
+                    .setTitle(R.string.init_backup_settings_restore)
+                    .setMessage(R.string.settings_folder_changed, activityContext.getString(current.left.getNameKeyId()), folderToBeRestored.toUserDisplayableString(), activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
+                    .confirm((d, v) -> {
                     fileSelector.restorePersistableFolder(current.left, current.left.getUriForFolder(folderToBeRestored));
                 },
-                d2 -> {
+                (d2, v2) -> {
                     regrantAccessFolders.remove(0);
                     triggerNextRegrantStep(null, null);
                 });
@@ -128,14 +129,13 @@ public class BackupUtils {
             final String temp = uriToBeRestored.getPath();
             final String displayName = temp.substring(temp.lastIndexOf('/') + 1);
 
-            Dialogs.confirm(activityContext,
-                activityContext.getString(R.string.init_backup_settings_restore),
-                String.format(activityContext.getString(R.string.settings_file_changed), activityContext.getString(regrantAccessUris.get(0).left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok)),
-                activityContext.getString(android.R.string.ok),
-                (d, v) -> {
+            SimpleDialog.of(activityContext)
+                .setTitle(R.string.init_backup_settings_restore)
+                .setMessage(R.string.settings_file_changed, activityContext.getString(regrantAccessUris.get(0).left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
+                .confirm((d, v) -> {
                     fileSelector.restorePersistableUri(PersistableUri.TRACK, uriToBeRestored);
                 },
-                d2 -> {
+                (d2, v2) -> {
                     regrantAccessUris.remove(0);
                     triggerNextRegrantStep(null, null);
                 });
@@ -302,9 +302,10 @@ public class BackupUtils {
     private void finishRestoreInternal(final Activity activityContext, final boolean restartNeeded, final String resultString) {
         // finish restore settings
         if (restartNeeded && !(activityContext instanceof InstallWizardActivity)) {
-            Dialogs.confirmYesNo(activityContext, R.string.init_restore_restored, resultString + activityContext.getString(R.string.settings_restart), (dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
+            SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString + activityContext.getString(R.string.settings_restart)))
+                .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
         } else {
-            Dialogs.message(activityContext, R.string.init_restore_restored, resultString);
+            SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString)).show();
         }
     }
 
@@ -347,7 +348,8 @@ public class BackupUtils {
         // avoid overwriting an existing backup with an empty database
         // (can happen directly after reinstalling the app)
         if (DataStore.getAllCachesCount() == 0) {
-            Dialogs.confirmYesNo(activityContext, R.string.init_backup_backup, R.string.init_backup_unnecessary, (dialog, which) -> backupStep2(runAfterwards));
+            SimpleDialog.of(activityContext).setTitle(R.string.init_backup_backup).setMessage(R.string.init_backup_unnecessary)
+                .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> backupStep2(runAfterwards));
         } else {
             backupStep2(runAfterwards);
         }
@@ -454,7 +456,7 @@ public class BackupUtils {
             if (null != error) {
                 Log.d("error reading settings file: " + error);
             }
-            Dialogs.message(activityContext, R.string.init_backup_settings_restore, R.string.settings_readingerror);
+            SimpleDialog.of(activityContext).setTitle(R.string.init_backup_settings_restore).setMessage(R.string.settings_readingerror).show();
             return false;
         }
     }
@@ -654,8 +656,9 @@ public class BackupUtils {
             files.add(fi.uri);
         }
 
-        Dialogs.messageNeutral(activityContext, title, msg, R.string.cache_share_field,
-            (dialog, which) -> ShareUtils.shareMultipleFiles(activityContext, files, R.string.init_backup_backup));
+        SimpleDialog.of(activityContext).setTitle(TextParam.text(title)).setMessage(TextParam.text(msg))
+            .setButtons(0, 0, R.string.cache_share_field)
+            .show(SimpleDialog.DO_NOTHING, null, (dialog, which) -> ShareUtils.shareMultipleFiles(activityContext, files, R.string.init_backup_backup));
     }
 
 

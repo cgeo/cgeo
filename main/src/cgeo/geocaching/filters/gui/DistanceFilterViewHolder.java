@@ -7,6 +7,7 @@ import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ContinuousRangeSlider;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
@@ -34,7 +35,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
-        useCurrentPosition = ViewUtils.addCheckboxItem(getActivity(), ll, "Use Current Position", R.drawable.ic_menu_mylocation, 0);
+        useCurrentPosition = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_use_current_position), R.drawable.ic_menu_mylocation, null);
         useCurrentPosition.setChecked(true);
 
         coordinate = new EditText(getActivity());

@@ -7,8 +7,10 @@ import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableUri;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -68,18 +70,18 @@ public class MapSettingsUtils {
         final LinearLayout leftColumn = columns.get(0);
         final LinearLayout rightColumn = columns.get(1);
 
-        leftColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, R.string.map_show_caches_title));
+        leftColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_caches_title)));
         foundCb.addToViewGroup(activity, leftColumn);
         ownCb.addToViewGroup(activity, leftColumn);
         disabledCb.addToViewGroup(activity, leftColumn);
         archivedCb.addToViewGroup(activity, leftColumn);
         offlineLogCb.addToViewGroup(activity, leftColumn);
 
-        rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, R.string.map_show_waypoints_title));
+        rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_waypoints_title)));
         wpOriginalCb.addToViewGroup(activity, rightColumn);
         wpParkingCb.addToViewGroup(activity, rightColumn);
         wbVisitedCb.addToViewGroup(activity, rightColumn);
-        rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, R.string.map_show_other_title));
+        rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_other_title)));
         if (trackCb != null) {
             trackCb.addToViewGroup(activity, rightColumn);
         }
@@ -125,7 +127,7 @@ public class MapSettingsUtils {
         if (!Routing.isAvailable()) {
             configureRoutingButtons(false, routingChoiceWrapper);
             dialogView.routingInfo.setVisibility(View.VISIBLE);
-            dialogView.routingInfo.setOnClickListener(v -> Dialogs.confirm(activity, R.string.map_routing_activate_title, R.string.map_routing_activate, (dialog1, which) -> {
+            dialogView.routingInfo.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.map_routing_activate_title).setMessage(R.string.map_routing_activate).confirm((dialog1, which) -> {
                 Settings.setUseInternalRouting(true);
                 Settings.setBrouterAutoTileDownloads(true);
                 configureRoutingButtons(true, routingChoiceWrapper);
@@ -169,7 +171,7 @@ public class MapSettingsUtils {
         }
 
         public void addToViewGroup(final Activity ctx, final ViewGroup viewGroup) {
-            final CheckBox cb = ViewUtils.addCheckboxItem(ctx, viewGroup, resTitle, resIcon);
+            final CheckBox cb = ViewUtils.addCheckboxItem(ctx, viewGroup, TextParam.id(resTitle), resIcon);
             cb.setChecked(currentValue);
             cb.setOnCheckedChangeListener((v, c) -> this.currentValue = !this.currentValue);
         }

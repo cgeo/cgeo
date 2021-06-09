@@ -11,7 +11,9 @@ import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.PendingDownload;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
@@ -161,10 +163,10 @@ public class DownloaderUtils {
                 if (mapDirIsReady) {
                     callback.run(folder, true);
                 } else if (beforeDownload) {
-                    Dialogs.confirm(activity, activity.getString(R.string.download_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), folder), activity.getString(R.string.button_continue),
-                        (dialog, which) -> callback.run(folder, true), dialog -> callback.run(folder, false));
+                    SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).setPositiveButton(TextParam.id(R.string.button_continue)).confirm(
+                        (dialog, which) -> callback.run(folder, true), (dialog, w) -> callback.run(folder, false));
                 } else {
-                    Dialogs.message(activity, activity.getString(R.string.download_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), folder), activity.getString(android.R.string.ok), (dialog, which) -> callback.run(folder, false));
+                    SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).show((dialog, which) -> callback.run(folder, false));
                 }
             }
         });
@@ -178,10 +180,10 @@ public class DownloaderUtils {
      * calls callback with user reaction (true=checked for updates / false=user denied check)
      */
     public static void checkForUpdatesAndDownloadAll(final Activity activity, final Download.DownloadType type, @StringRes final int title, @StringRes final int info, final Action1<Boolean> callback) {
-        Dialogs.confirm(activity, title, info, android.R.string.ok, (dialog, which) -> {
+        SimpleDialog.of(activity).setTitle(title).setMessage(info).confirm((dialog, which) -> {
             new CheckForDownloadsTask(activity, title, type).execute();
             callback.call(true);
-        }, dialog -> callback.call(false));
+        }, (dialog, w) -> callback.call(false));
     }
 
     // same as checkForUpdatesAndDownloadAll above, but without question

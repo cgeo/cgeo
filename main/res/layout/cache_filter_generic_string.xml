@@ -57,6 +57,7 @@
         android:layout_below="@+id/filter_options"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true">
+
         <AutoCompleteTextView
             style="@style/textinput_embedded"
             android:hint="@string/cache_filter_stringfilter_searchtext_hint" />

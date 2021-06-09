@@ -11,7 +11,7 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.functions.Action2;
 
 import android.app.Activity;
@@ -74,7 +74,8 @@ public class IndividualRouteUtils {
             if (null == route || route.getNumSegments() == 0) {
                 startIndividualRouteFileSelector();
             } else {
-                Dialogs.confirm(activity, R.string.map_load_individual_route, R.string.map_load_individual_route_confirm, (dialog, which) -> startIndividualRouteFileSelector());
+                SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(
+                    (dialog, which) -> startIndividualRouteFileSelector());
             }
         } else if (id == R.id.menu_sort_individual_route) {
             activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);
@@ -85,7 +86,7 @@ public class IndividualRouteUtils {
         } else if (id == R.id.menu_export_individual_route_as_track) {
             new IndividualRouteExport(activity, route, true);
         } else if (id == R.id.menu_clear_individual_route) {
-            Dialogs.confirm(activity, R.string.map_clear_individual_route, R.string.map_clear_individual_route_confirm, (dialog, which) -> {
+            SimpleDialog.of(activity).setTitle(R.string.map_clear_individual_route).setMessage(R.string.map_clear_individual_route_confirm).confirm((dialog, which) -> {
                 clearIndividualRoute.run();
                 ActivityMixin.invalidateOptionsMenu(activity);
             });
