@@ -4,16 +4,7 @@ import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-public abstract class AbstractListActivity extends AbstractActionBarActivity {
-
-    protected AbstractListActivity() {
-        this(false);
-    }
-
-    protected AbstractListActivity(final boolean keepScreenOn) {
-        super(keepScreenOn);
-    }
-
+public abstract class AbstractListActivity extends AbstractBottomNavigationActivity {
     private ListView mListView;
     protected ListView getListView() {
         if (mListView == null) {

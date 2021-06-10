@@ -24,14 +24,11 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Log;
 
-import android.app.Activity;
-import android.os.Handler;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.util.EnumSet;
@@ -158,12 +155,15 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean login(final Handler handler, @Nullable final Activity fromActivity) {
+    public boolean login() {
         if (supportsPersonalization()) {
             userInfo = OkapiClient.getUserInfo(this);
         } else {
             userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_SUPPORTED);
         }
+        // update cache counter
+        FoundNumCounter.getAndUpdateFoundNum(this);
+
         return userInfo.getStatus() == UserInfoStatus.SUCCESSFUL;
     }
 

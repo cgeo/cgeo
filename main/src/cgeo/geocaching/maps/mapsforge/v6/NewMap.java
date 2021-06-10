@@ -10,11 +10,12 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
-import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.databinding.MapMapsforgeV6Binding;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -142,8 +143,7 @@ import org.mapsforge.map.model.common.Observer;
 
 @SuppressLint("ClickableViewAccessibility")
 @SuppressWarnings("PMD.ExcessiveClassLength") // This is definitely a valid issue, but can't be refactored in one step
-public class NewMap extends AbstractActionBarActivity implements Observer, FilteredActivity {
-
+public class NewMap extends AbstractBottomNavigationActivity implements Observer, FilteredActivity {
     private static final String STATE_INDIVIDUAlROUTEUTILS = "indrouteutils";
     private static final String STATE_TRACKUTILS = "trackutils";
 
@@ -259,7 +259,9 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         // set layout
         ActivityMixin.setTheme(this);
 
-        setContentView(R.layout.map_mapsforge_v6);
+        // init BottomNavigationController to add the bottom navigation to the layout
+        setContentView(MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot());
+
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);
 
@@ -362,6 +364,11 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     }
 
     @Override
+    public int getSelectedBottomItemId() {
+        return MENU_MAP;
+    }
+
+    @Override
     public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         if (mapOptions != null && (mapOptions.isLiveEnabled || mapOptions.isStoredEnabled)) {
@@ -422,9 +429,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
-        if (id == android.R.id.home) {
-            ActivityMixin.navigateUp(this);
-        } else if (id == R.id.menu_map_live) {
+        if (id == R.id.menu_map_live) {
             mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
             if (mapOptions.isLiveEnabled) {
                 mapOptions.isStoredEnabled = true;
@@ -458,28 +463,30 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             this.renderThemeHelper.selectMapThemeOptions();
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
+            ActivityMixin.overrideTransitionToFade(this);
         } else if (id == R.id.menu_hint) {
             menuShowHint();
         } else if (id == R.id.menu_compass) {
             menuCompass();
-        } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
-            && !this.trackUtils.onOptionsItemSelected(id, tracks)
-            && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
-            && !DownloaderUtils.onOptionsItemSelected(this, id)) {
+        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
+                || this.trackUtils.onOptionsItemSelected(id, tracks)
+                || this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
+                || DownloaderUtils.onOptionsItemSelected(this, id)) {
+            return true;
+        } else {
             final String language = MapProviderFactory.getLanguage(id);
+            final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
                 item.setChecked(true);
                 changeLanguage(language);
                 return true;
-            } else {
-                final MapSource mapSource = MapProviderFactory.getMapSource(id);
-                if (mapSource != null) {
-                    item.setChecked(true);
-                    changeMapSource(mapSource);
-                } else {
-                    return false;
-                }
             }
+            if (mapSource != null) {
+                item.setChecked(true);
+                changeMapSource(mapSource);
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
         }
         return true;
     }
@@ -631,7 +638,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     private void mapRestart() {
         mapOptions.mapState = currentMapState();
         finish();
-        mapOptions.startIntent(this, Settings.getMapProvider().getMapClass());
+        mapOptions.startIntentWithoutTransition(this, Settings.getMapProvider().getMapClass());
     }
 
     /**

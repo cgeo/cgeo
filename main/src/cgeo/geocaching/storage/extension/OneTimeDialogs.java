@@ -20,9 +20,6 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         // names must not be changed, as there are database entries depending on it
         // title and text must be set when using the Dialogs.basicOneTimeMessage() function
 
-        // when an one time dialog gets removed/replaced, keep the old one in the enum anyway, so that we can be sure that the same name isn't used again in the future.
-
-        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter, DefaultBehavior.SHOW_ALWAYS, 0),
         DATABASE_CONFIRM_OVERWRITE(null, null, DefaultBehavior.SHOW_ALWAYS, 0),
         MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0),
         MAP_LONG_TAP_DISABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_disabled, DefaultBehavior.SHOW_ALWAYS, R.string.manual_url_mapbehavior),

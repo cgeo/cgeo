@@ -1,7 +1,6 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.InstallWizardActivity;
-import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -530,10 +529,6 @@ public class BackupUtils {
         final StringBuilder stringBuilder = new StringBuilder();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> stringBuilder.append(DataStore.restoreDatabaseInternal(activityContext, dbFile.uri)), () -> {
             dialog.dismiss();
-
-            if (activityContext instanceof MainActivity) {
-                ((MainActivity) activityContext).updateCacheCounter();
-            }
             consumer.accept(stringBuilder.toString());
         });
     }

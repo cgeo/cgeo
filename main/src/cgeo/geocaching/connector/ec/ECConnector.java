@@ -20,10 +20,8 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.DisposableHandler;
-
-import android.app.Activity;
-import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -160,9 +158,11 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean login(final Handler handler, @Nullable final Activity fromActivity) {
+    public boolean login() {
         // login
         final StatusCode status = ecLogin.login();
+        // update cache counter
+        FoundNumCounter.getAndUpdateFoundNum(this);
 
         return status == StatusCode.NO_ERROR;
     }
@@ -281,11 +281,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public int getPasswordPreferenceKey() {
         return R.string.pref_ecpassword;
-    }
-
-    @Override
-    public int getAvatarPreferenceKey() {
-        return R.string.pref_ec_avatar;
     }
 
     @Override

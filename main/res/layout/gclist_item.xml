@@ -27,7 +27,7 @@
         <Button
             android:id="@+id/cachelist"
             style="@style/button_icon"
-            app:icon="@android:drawable/ic_menu_search"
+            app:icon="@drawable/ic_menu_search"
             android:text="@null"
             tools:ignore="ButtonStyle" />
     </LinearLayout>

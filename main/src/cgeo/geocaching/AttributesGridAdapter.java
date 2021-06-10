@@ -58,19 +58,14 @@ public class AttributesGridAdapter extends BaseAdapter {
     }
 
     private void drawAttribute(final FrameLayout attributeLayout, final String attributeName) {
-        final ImageView imageView = (ImageView) attributeLayout.getChildAt(0);
+        final ImageView imageView = (ImageView) attributeLayout.findViewById(R.id.attribute_image);
+        final ImageView strikeThrough = (ImageView) attributeLayout.findViewById(R.id.attribute_strikethru);
 
-        final boolean strikeThrough = !CacheAttribute.isEnabled(attributeName);
+        strikeThrough.setVisibility(CacheAttribute.isEnabled(attributeName) ? View.INVISIBLE : View.VISIBLE);
+
         final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
         if (attrib != null) {
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, attrib.drawableId, null));
-            if (strikeThrough) {
-                // generate strike through image with same properties as attribute image
-                final ImageView strikeThroughImage = new ImageView(context);
-                strikeThroughImage.setLayoutParams(imageView.getLayoutParams());
-                strikeThroughImage.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.attribute__strikethru, null));
-                attributeLayout.addView(strikeThroughImage);
-            }
         } else {
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.attribute_unknown, null));
         }

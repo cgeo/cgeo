@@ -48,18 +48,9 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     protected CgeoApplication app = null;
     protected Resources res = null;
-    private boolean keepScreenOn = false;
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
     private final String logToken = "[" + this.getClass().getName() + "]";
-
-    protected AbstractActivity() {
-        this(false);
-    }
-
-    protected AbstractActivity(final boolean keepScreenOn) {
-        this.keepScreenOn = keepScreenOn;
-    }
 
     protected final void showProgress(final boolean show) {
         try {
@@ -71,6 +62,13 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     protected final void setTheme() {
         ActivityMixin.setTheme(this);
+    }
+
+    public void setUpNavigationEnabled(final boolean enabled) {
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(enabled);
+        }
     }
 
     @Override
@@ -169,7 +167,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         res = this.getResources();
         app = (CgeoApplication) this.getApplication();
 
-        ActivityMixin.onCreate(this, keepScreenOn);
+        ActivityMixin.onCreate(this, false);
     }
 
     @Override
