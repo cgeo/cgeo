@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/attribute_images"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:id="@+id/attribute_image_wrapper"
+    android:layout_width="32dp"
+    android:layout_height="32dp">
 
     <ImageView
         android:id="@+id/attribute_image"
-        android:layout_width="32dp"
-        android:layout_height="32dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:src="@drawable/attribute_wirelessbeacon" />
+
+    <ImageView
+        android:id="@+id/attribute_strikethru"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/attribute__strikethru"
+        android:visibility="invisible" />
 
 </FrameLayout>

@@ -96,7 +96,8 @@
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/SplashScreenTheme">
+            android:theme="@style/SplashScreenTheme"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -111,12 +112,20 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/cgeo"
             android:windowSoftInputMode="adjustNothing" >
             <!-- 'adjustNothing' fixes the issue described in #11610 -->
+            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
+        </activity>
+        <activity
+            android:name=".MoreActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/cgeo"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
         </activity>
         <activity
             android:name=".InstallWizardActivity"
@@ -127,12 +136,12 @@
         </activity>
         <activity
             android:name=".SearchActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:parentActivityName="cgeo.geocaching.MainActivity"
             android:windowSoftInputMode="stateHidden" >
+            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
 
             <!-- keyword based search from search widget -->
             <intent-filter>
@@ -272,10 +281,10 @@
         </activity>
         <activity
             android:name=".CacheListActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/app_name">
             <!-- don't use fixed parent activity, since we may come from main activity, pocket query activity or search activity -->
+            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
 
             <!-- intent filter for local gpx files -->
             <intent-filter>

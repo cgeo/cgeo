@@ -10,13 +10,6 @@ import androidx.appcompat.app.ActionBar;
  */
 public class AbstractActionBarActivity extends AbstractActivity {
 
-    public AbstractActionBarActivity() {
-        super(false);
-    }
-    public AbstractActionBarActivity(final boolean keepScreenOn) {
-        super(keepScreenOn);
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +21,8 @@ public class AbstractActionBarActivity extends AbstractActivity {
     private void initUpAction() {
        final ActionBar actionBar = getSupportActionBar();
        if (actionBar != null) {
-           actionBar.setDisplayHomeAsUpEnabled(true);
+           // don't display a back button it the activity is running as top-level activity with bottom navigation attached
+           actionBar.setDisplayHomeAsUpEnabled(!isTaskRoot() || !(this instanceof AbstractBottomNavigationActivity));
        }
     }
 

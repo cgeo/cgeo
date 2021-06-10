@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.address.AddressListActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -44,7 +45,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class SearchActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
+public class SearchActivity extends AbstractBottomNavigationActivity implements CoordinatesInputDialog.CoordinateUpdate {
     private SearchActivityBinding binding;
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
@@ -87,6 +88,8 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
         setTheme();
         binding = SearchActivityBinding.inflate(getLayoutInflater());
+
+        // init BottomNavigationController to add the bottom navigation to the layout
         setContentView(binding.getRoot());
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
@@ -106,6 +109,11 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     public final void onResume() {
         super.onResume();
         init();
+    }
+
+    @Override
+    public int getSelectedBottomItemId() {
+        return MENU_SEARCH;
     }
 
     /**
@@ -286,6 +294,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
         try {
             CacheListActivity.startActivityCoordinates(this, new Geopoint(StringUtils.trim(latlonText[0]), StringUtils.trim(latlonText[1])), null);
+            ActivityMixin.overrideTransitionToFade(this);
         } catch (final Geopoint.ParseException e) {
             showToast(res.getString(e.resource));
         }
@@ -305,6 +314,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         }
 
         CacheListActivity.startActivityKeyword(this, keyText);
+        ActivityMixin.overrideTransitionToFade(this);
     }
 
     private void findByAddressFn() {
@@ -333,6 +343,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         }
 
         CacheListActivity.startActivityOwner(this, usernameText);
+        ActivityMixin.overrideTransitionToFade(this);
     }
 
     private void findByFilterFn() {
@@ -344,6 +355,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             CacheListActivity.startActivityFilter(this);
+            ActivityMixin.overrideTransitionToFade(this);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }

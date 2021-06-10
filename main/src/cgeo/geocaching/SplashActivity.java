@@ -2,6 +2,11 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +32,14 @@ class SplashActivity extends AppCompatActivity {
             intent = new Intent(this, MainActivity.class);
             intent.putExtras(getIntent());
         }
+
+        // reactivate dialogs which are set to show later
+        OneTimeDialogs.nextStatus();
+
         startActivity(intent);
+
+        checkChangedInstall();
+
         finish();
     }
 
@@ -35,5 +47,27 @@ class SplashActivity extends AppCompatActivity {
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         finish();
+    }
+
+    private void checkChangedInstall() {
+        // temporary workaround for #4143
+        //TODO: understand and avoid if possible
+        try {
+            final long lastChecksum = Settings.getLastChangelogChecksum();
+            final long checksum = TextUtils.checksum(FileUtils.getChangelogMaster(this) + FileUtils.getChangelogRelease(this));
+            Settings.setLastChangelogChecksum(checksum);
+
+            if (lastChecksum == 0) {
+                // initialize oneTimeMessages after fresh install
+                OneTimeDialogs.initializeOnFreshInstall();
+                // initialize useInternalRouting setting depending on whether BRouter app is installed or not
+                Settings.setUseInternalRouting(!ProcessUtils.isInstalled(getString(R.string.package_brouter)));
+            } else if (lastChecksum != checksum) {
+                // show change log page after update
+                AboutActivity.showChangeLog(this);
+            }
+        } catch (final Exception ex) {
+            Log.e("Error checking/showing changelog!", ex);
+        }
     }
 }

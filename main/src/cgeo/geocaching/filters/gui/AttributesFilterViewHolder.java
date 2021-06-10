@@ -46,8 +46,12 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
     private void setAttributeState(final CacheAttribute ca, final Boolean state) {
         attributeState.put(ca, state);
         final FrameLayout v = (FrameLayout) attributeViews.get(ca);
-        final ImageView icon = (ImageView) v.getChildAt(0);
-        final View strikeThrough = v.getChildAt(1);
+
+        // help lint...
+        assert v != null;
+
+        final ImageView icon = (ImageView) v.findViewById(R.id.attribute_image);
+        final View strikeThrough = v.findViewById(R.id.attribute_strikethru);
 
         if (state == null) {
             icon.setColorFilter(Color.argb(150, 200, 200, 200));
@@ -137,14 +141,6 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
 
         imageView.setImageDrawable(ResourcesCompat.getDrawable(getActivity().getResources(), ca.drawableId, null));
         imageView.setColorFilter(Color.argb(150, 200, 200, 200));
-
-
-        // generate invisible strike through image with same properties as attribute image and place as second
-        final ImageView strikeThroughImage = new ImageView(getActivity());
-        strikeThroughImage.setLayoutParams(imageView.getLayoutParams());
-        strikeThroughImage.setImageDrawable(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.attribute__strikethru, null));
-        strikeThroughImage.setVisibility(View.INVISIBLE);
-        attributeLayout.addView(strikeThroughImage);
 
         setTooltip(attributeLayout, TextParam.text(ca.getL10n(true)));
 

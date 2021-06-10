@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.brouter.BRouterConstants;
+import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -1703,7 +1704,7 @@ public class Settings {
      * @return the avatar url
      */
     @NonNull
-    public static String getAvatarUrl(@NonNull final ICredentials connector) {
+    public static String getAvatarUrl(@NonNull final IAvatar connector) {
         return getString(connector.getAvatarPreferenceKey(), null);
     }
 
@@ -1713,7 +1714,7 @@ public class Settings {
      * @param connector the connector to retrieve the avatar information from
      * @param avatarUrl the avatar url information to store
      */
-    public static void setAvatarUrl(@NonNull final ICredentials connector, final String avatarUrl) {
+    public static void setAvatarUrl(@NonNull final IAvatar connector, final String avatarUrl) {
         putString(connector.getAvatarPreferenceKey(), avatarUrl);
     }
 

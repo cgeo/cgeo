@@ -223,6 +223,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private AbstractSearchLoader currentLoader;
 
+    @Override
+    public int getSelectedBottomItemId() {
+        return type.navigationMenuItem;
+    }
+
+    @Override
+    public void onNavigationItemReselected(@NonNull final MenuItem item) {
+        if (!isTaskRoot()) {
+            finish();
+        }
+    }
+
     private static class LoadCachesHandler extends WeakReferenceHandler<CacheListActivity> {
 
         protected LoadCachesHandler(final CacheListActivity activity) {
@@ -501,17 +513,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    public CacheListActivity() {
-        super(true);
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTheme();
-
-        setContentView(R.layout.cacheslist_activity);
 
         this.contentStorageActivityHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER))
             .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importGpx);
@@ -536,8 +542,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         setTitle(title);
-
-
+        setContentView(R.layout.cacheslist_activity);
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
@@ -1790,6 +1795,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // apply filter settings (if there's a filter)
         final SearchResult searchToUse = getFilteredSearch();
         DefaultMap.startActivitySearch(this, searchToUse, title, listId);
+        ActivityMixin.overrideTransitionToFade(this);
     }
 
     private void refreshCurrentList() {
