@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/location_current"
-    android:text="@string/init_login_popup_working"
-    tools:context=".MainActivity$1" />
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackgroundActionBar"
+    android:layout_margin="3dip"
+    tools:context=".downloader.DownloadSelectorActivity">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/item_icon"
+        style="@style/button_icon"
+        android:src="@drawable/avartar_placeholder"
+        android:scaleType="centerCrop"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:clickable="false"
+        android:gravity="left" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/item_icon"
+        android:paddingVertical="7dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:paddingLeft="10dip"
+            android:textColor="@color/colorTextActionBar"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/textSize_toolbarPrimary"
+            tools:text="username" />
+
+        <TextView
+            android:id="@+id/item_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingLeft="10dip"
+            android:scrollHorizontally="true"
+            android:text="@string/init_login_popup_working"
+            android:textIsSelectable="false"
+            android:textColor="@color/colorTextActionBar"
+            android:textSize="@dimen/textSize_toolbarSecondary" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -288,34 +288,25 @@ public class CgeoApplicationTest extends CGeoTestCase {
     @MediumTest
     public static void testSearchByViewport() {
         withMockedFilters(() -> {
-            // backup user settings
-            final CacheType cacheType = Settings.getCacheType();
+            // set up settings required for test
+            TestSettings.setExcludeMine(false);
 
-            try {
-                // set up settings required for test
-                TestSettings.setExcludeMine(false);
-                Settings.setCacheType(CacheType.ALL);
+            final GC3FJ5F mockedCache = new GC3FJ5F();
+            deleteCacheFromDB(mockedCache.getGeocode());
 
-                final GC3FJ5F mockedCache = new GC3FJ5F();
-                deleteCacheFromDB(mockedCache.getGeocode());
+            final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
-                final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
+            // check coords
+            final SearchResult search = ConnectorFactory.searchByViewport(viewport);
+            assertThat(search).isNotNull();
+            assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
+            final Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+            assert parsedCache != null;
+            assertThat(parsedCache).isNotNull();
 
-                // check coords
-                final SearchResult search = ConnectorFactory.searchByViewport(viewport);
-                assertThat(search).isNotNull();
-                assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
-                final Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                assert parsedCache != null;
-                assertThat(parsedCache).isNotNull();
+            assertThat(mockedCache.getCoords().equals(parsedCache.getCoords()));
+            assertThat(parsedCache.isReliableLatLon()).isEqualTo(true);
 
-                assertThat(mockedCache.getCoords().equals(parsedCache.getCoords()));
-                assertThat(parsedCache.isReliableLatLon()).isEqualTo(true);
-
-            } finally {
-                // restore user settings
-                Settings.setCacheType(cacheType);
-            }
         });
     }
 

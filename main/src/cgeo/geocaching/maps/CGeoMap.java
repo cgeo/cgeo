@@ -7,10 +7,12 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.BottomNavigationController;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
+import cgeo.geocaching.databinding.MapGoogleBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
@@ -568,7 +570,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             this.lastNavTarget = mapOptions.mapState.getLastNavTarget();
         }
 
-        activity.setContentView(mapProvider.getMapLayoutId());
+//        R.layout.map_google;
+//        R.layout.map_mapsforge_v6;
+
+        // init BottomNavigationController to add the bottom navigation to the layout
+        activity.setContentView(new BottomNavigationController(activity, BottomNavigationController.MENU_MAP,
+                MapGoogleBinding.inflate(activity.getLayoutInflater()).getRoot()).getView());
 
         // try to retrieve up indicator resId and forward it to popup
         final TypedArray a = activity.getTheme().obtainStyledAttributes(R.style.cgeo, new int[] {R.attr.homeAsUpIndicator});
@@ -586,7 +593,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // set layout
         ActivityMixin.setTheme(activity);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         setTitle();
 
@@ -1019,7 +1025,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private void mapRestart() {
         mapOptions.mapState = currentMapState();
         activity.finish();
-        mapOptions.startIntent(activity, Settings.getMapProvider().getMapClass());
+        mapOptions.startIntentWithoutTransition(activity, Settings.getMapProvider().getMapClass());
     }
 
     /**

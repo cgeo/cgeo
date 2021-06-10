@@ -348,6 +348,7 @@
     <string name="advanced_search_button">Search</string>
     <string name="stored_caches_button">Stored</string>
     <string name="any_button">Go to</string>
+    <string name="more_button">More</string>
     <string name="unknown_scan">Didn\'t find any geocodes in the scan result.</string>
 
     <!-- caches -->
@@ -448,6 +449,8 @@
     <string name="caches_set_listmarker">Set list marker</string>
     <string name="select_icon">Select icon</string>
     <string name="onetime_missing_unicode_info">Your Android version does not support automatic detection of icons supported - some characters may be missing</string>
+    <string name="user_finds">%d finds</string>
+    <string name="user_finds_offline">%d logged offline</string>
 
     <!-- caches lists -->
     <string name="menu_lists">Manage lists</string>

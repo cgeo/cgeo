@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.BottomNavigationController;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cachelist.CacheListApp;
@@ -21,6 +22,7 @@ import cgeo.geocaching.command.SetCacheIconCommand;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.databinding.CacheslistActivityBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -502,8 +504,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         setTheme();
 
-        setContentView(R.layout.cacheslist_activity);
-
         this.contentStorageActivityHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER))
             .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importGpx);
 
@@ -526,6 +526,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         setTitle(title);
+
+        // init BottomNavigationController to add the bottom navigation to the layout
+        setContentView(new BottomNavigationController(this,
+                type == CacheListType.NEAREST ? BottomNavigationController.MENU_NEARBY :
+                        type.isStoredInDatabase ? BottomNavigationController.MENU_LIST :
+                                BottomNavigationController.MENU_SEARCH,
+                CacheslistActivityBinding.inflate(getLayoutInflater()).getRoot()).getView());
+
+        // as Search is one of the five top level activities, we don't need the up indicator
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
 
         currentCacheFilter = GeocacheFilter.loadFromSettings();
 
@@ -905,7 +918,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.invertSelection();
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_filter) {
-            showLegacyFilterMenu(null);
+            FilterActivity.selectFilter(this);
         } else if (menuItem == R.id.menu_cache_filter) {
             showFilterMenu(null);
         } else if (menuItem == R.id.menu_import_web) {
@@ -1006,17 +1019,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.disposeMessage());
             clearOfflineLogs(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches());
         });
-    }
-
-    public void showLegacyFilterMenu(final View view) {
-        if (view != null && Settings.getCacheType() != CacheType.ALL) {
-            Dialogs.selectGlobalTypeFilter(this, cacheType -> {
-                refreshCurrentList();
-                prepareFilterBar();
-            });
-        } else {
-            FilterActivity.selectFilter(this);
-        }
     }
 
     /**

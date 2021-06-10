@@ -36,13 +36,13 @@
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_cache_list_app"
-        android:icon="@drawable/ic_menu_goto"
+        android:icon="@drawable/ic_menu_navigate"
         android:title="@null"
         android:visible="false"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_cache_list_app_provider"
-        android:icon="@drawable/ic_menu_goto"
+        android:icon="@drawable/ic_menu_navigate"
         android:title="@string/caches_on_map"
         android:visible="false"
         app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"

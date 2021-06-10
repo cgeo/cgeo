@@ -12,10 +12,12 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.BottomNavigationController;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.databinding.MapMapsforgeV6Binding;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -258,7 +260,16 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         // set layout
         ActivityMixin.setTheme(this);
 
-        setContentView(R.layout.map_mapsforge_v6);
+        // init BottomNavigationController to add the bottom navigation to the layout
+        setContentView(new BottomNavigationController(this, BottomNavigationController.MENU_MAP,
+                MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot()).getView());
+
+        // as Search is one of the five top level activities, we don't need the up indicator
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
+
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);
 
@@ -599,7 +610,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     private void mapRestart() {
         mapOptions.mapState = currentMapState();
         finish();
-        mapOptions.startIntent(this, Settings.getMapProvider().getMapClass());
+        mapOptions.startIntentWithoutTransition(this, Settings.getMapProvider().getMapClass());
     }
 
     /**

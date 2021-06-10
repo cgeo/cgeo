@@ -24,12 +24,10 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         // backup user settings
         final boolean excludeMine = Settings.isExcludeMyCaches();
         final boolean excludeFound = Settings.isExcludeFound();
-        final CacheType cacheType = Settings.getCacheType();
         try {
             // set up settings required for test
             TestSettings.setExcludeMine(false);
             TestSettings.setExcludeFound(false);
-            Settings.setCacheType(CacheType.ALL);
             GCLogin.getInstance().login();
 
             {
@@ -61,7 +59,6 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
             // restore user settings
             TestSettings.setExcludeMine(excludeMine);
             TestSettings.setExcludeFound(excludeFound);
-            Settings.setCacheType(cacheType);
         }
     }
 

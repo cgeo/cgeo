@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.brouter.BRouterConstants;
+import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -623,18 +624,6 @@ public class Settings {
         return getBoolean(R.string.pref_lowpowermode, false);
     }
 
-    /**
-     * @param cacheType
-     *            The cache type used for future filtering
-     */
-    public static void setCacheType(final CacheType cacheType) {
-        if (cacheType == null) {
-            remove(R.string.pref_cachetype);
-        } else {
-            putString(R.string.pref_cachetype, cacheType.id);
-        }
-    }
-
     public static int getLastDisplayedList() {
         return getInt(R.string.pref_lastusedlist, StoredList.STANDARD_LIST_ID);
     }
@@ -1167,12 +1156,14 @@ public class Settings {
     }
 
     /**
-     * @return The cache type used for filtering or ALL if no filter is active.
-     *         Returns never null
+     * Deprecated! Will be removed in the future.
+     *
+     * @return Always returns CacheType.ALL
      */
     @NonNull
     public static CacheType getCacheType() {
-        return CacheType.getById(getString(R.string.pref_cachetype, CacheType.ALL.id));
+        // todo: global filter is just disabled for now. We should remove all legacy code parts as it isn't used anymore.
+        return CacheType.ALL;
     }
 
     /**
@@ -1690,7 +1681,7 @@ public class Settings {
      * @return the avatar url
      */
     @NonNull
-    public static String getAvatarUrl(@NonNull final ICredentials connector) {
+    public static String getAvatarUrl(@NonNull final IAvatar connector) {
         return getString(connector.getAvatarPreferenceKey(), null);
     }
 
@@ -1700,7 +1691,7 @@ public class Settings {
      * @param connector the connector to retrieve the avatar information from
      * @param avatarUrl the avatar url information to store
      */
-    public static void setAvatarUrl(@NonNull final ICredentials connector, final String avatarUrl) {
+    public static void setAvatarUrl(@NonNull final IAvatar connector, final String avatarUrl) {
         putString(connector.getAvatarPreferenceKey(), avatarUrl);
     }
 

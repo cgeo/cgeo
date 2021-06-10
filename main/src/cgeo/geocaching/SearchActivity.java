@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.BottomNavigationController;
 import cgeo.geocaching.address.AddressListActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -36,12 +37,13 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class SearchActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
+public class SearchActivity extends AbstractActivity implements CoordinatesInputDialog.CoordinateUpdate {
     private SearchActivityBinding binding;
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
@@ -84,10 +86,18 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
         setTheme();
         binding = SearchActivityBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+        // init BottomNavigationController to add the bottom navigation to the layout
+        setContentView(new BottomNavigationController(this, BottomNavigationController.MENU_SEARCH, binding.getRoot()).getView());
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
+
+        // as Search is one of the five top level activities, we don't need the up indicator
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
 
         init();
     }

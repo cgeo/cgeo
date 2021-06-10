@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
+import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -58,7 +59,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar {
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;

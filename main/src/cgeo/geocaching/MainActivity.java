@@ -1,24 +1,23 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.BottomNavigationController;
 import cgeo.geocaching.address.AndroidGeocoder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.helper.UsefulAppsActivity;
-import cgeo.geocaching.list.PseudoList;
-import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
-import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
@@ -65,8 +64,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -77,7 +80,6 @@ import androidx.appcompat.widget.SearchView.OnSuggestionListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -113,6 +115,8 @@ public class MainActivity extends AbstractActionBarActivity {
 
     private BackupUtils backupUtils = null;
 
+    private final ArrayList<MenuItem> menuItems = new ArrayList<>();
+
     private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
 
         UpdateUserInfoHandler(final MainActivity activity) {
@@ -130,24 +134,27 @@ public class MainActivity extends AbstractActionBarActivity {
                 activity.binding.infoArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
                     @Override
                     public View getView(final int position, final View convertView, @NonNull final android.view.ViewGroup parent) {
-                        TextView rowView = (TextView) convertView;
-                        if (rowView == null) {
-                            rowView = (TextView) activity.getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
+                        View view = convertView;
+
+                        if (view == null) {
+                            view = activity.getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
                         }
 
                         final ILogin connector = getItem(position);
-                        fillView(rowView, connector);
-                        return rowView;
+                        fillView(view, connector);
+                        return view;
 
                     }
 
-                    private void fillView(final TextView connectorInfo, final ILogin conn) {
+                    private void fillView(final View connectorInfo, final ILogin conn) {
+                        //conn.
+
                         boolean offlineFoundsAvailable = false;
 
                         final StringBuilder userInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR);
                         if (conn.isLoggedIn()) {
-                            userInfo.append(conn.getUserName()).append(" ");
                             if (conn.getCachesFound() >= 0) {
+                                // todo - move FoundNumCounter update out of UI creation into the connector architecture.
                                 FoundNumCounter.updateFoundNum(conn.getName(), conn.getCachesFound());
                             }
                             activity.checkLoggedIn();
@@ -156,17 +163,17 @@ public class MainActivity extends AbstractActionBarActivity {
                         final FoundNumCounter f = FoundNumCounter.load(conn.getName());
                         if (f != null) {
 
-                            userInfo.append('(').append(f.getCounter(false));
+                            userInfo.append(activity.getString(R.string.user_finds, f.getCounter(false)));
 
                             if (Settings.isDisplayOfflineLogsHomescreen()) {
                                 final int offlinefounds = DataStore.getFoundsOffline(conn.getName());
                                 if (offlinefounds > 0) {
-                                    userInfo.append(" + ").append(offlinefounds);
+                                    userInfo.append(" + ").append(activity.getString(R.string.user_finds_offline, offlinefounds));
 
                                     offlineFoundsAvailable = true;
                                 }
                             }
-                            userInfo.append(')').append(Formatter.SEPARATOR);
+                            userInfo.append(Formatter.SEPARATOR);
 
                         } else if (conn.isLoggedIn()) {
                             userInfo.append(Formatter.SEPARATOR);
@@ -174,7 +181,16 @@ public class MainActivity extends AbstractActionBarActivity {
 
                         userInfo.append(conn.getLoginStatusString());
 
-                        connectorInfo.setText(userInfo);
+                        ((TextView) connectorInfo.findViewById(R.id.item_title)).setText(StringUtils.isNotBlank(conn.getUserName()) ? conn.getUserName() : activity.getString(R.string.user_unknown));
+                        ((TextView) connectorInfo.findViewById(R.id.item_info)).setText(userInfo);
+
+                        if (conn instanceof IAvatar && StringUtils.isNotBlank(Settings.getAvatarUrl((IAvatar) conn))) {
+                            final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
+                            ((ImageView) connectorInfo.findViewById(R.id.item_icon)).setImageDrawable(imgGetter.getDrawable(Settings.getAvatarUrl((IAvatar) conn)));
+                        } else {
+                            ((ImageView) connectorInfo.findViewById(R.id.item_icon)).setImageResource(R.drawable.avartar_placeholder);
+                        }
+
                         connectorInfo.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
 
                         if (offlineFoundsAvailable) {
@@ -207,7 +223,7 @@ public class MainActivity extends AbstractActionBarActivity {
         final ILogin[] activeConnectors = ConnectorFactory.getActiveLiveConnectors();
         for (final IConnector conn : activeConnectors) {
             if (((ILogin) conn).isLoggedIn()) {
-                binding.infoNotloggedin.setVisibility(View.INVISIBLE);
+                binding.infoNotloggedin.setVisibility(View.GONE);
                 return;
             }
         }
@@ -270,11 +286,6 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        /* @todo
-        if (Settings.isTransparentBackground()) {
-            setTheme(R.style.cgeo_main_transparent);
-        }
-        */
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
 
@@ -289,12 +300,15 @@ public class MainActivity extends AbstractActionBarActivity {
         // Disable the up navigation for this activity
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.cgeo_actionbar_squircle);
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(false);
         }
 
+        setTitle(R.string.more_button);
+
         binding = MainActivityBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+        // init BottomNavigationController to add the bottom navigation to the layout
+        setContentView(new BottomNavigationController(this, BottomNavigationController.MENU_MORE, binding.getRoot()).getView());
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             // If we had been open already, start from the last used activity.
@@ -354,6 +368,45 @@ public class MainActivity extends AbstractActionBarActivity {
 
         checkForRoutingTileUpdates();
         checkForMapUpdates();
+
+
+        final PopupMenu p = new PopupMenu(this, null);
+        final Menu menu = p.getMenu();
+        getMenuInflater().inflate(R.menu.bottom_navigation_more, menu);
+
+        menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
+        menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
+        menu.findItem(R.id.menu_update_routingdata).setEnabled(Settings.useInternalRouting());
+
+        for (int pos = 0; pos < menu.size(); pos++) {
+            final MenuItem menuItem = menu.getItem(pos);
+            if (menuItem.isVisible()) {
+                menuItems.add(menuItem);
+            }
+        }
+
+        final ArrayAdapter<MenuItem> menuItemAdapter = new ArrayAdapter<MenuItem>(this, 0, menuItems) {
+            @NonNull
+            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+                View v = convertView;
+                if (null == convertView) {
+                    v = getLayoutInflater().inflate(R.layout.page_more_item, parent, false);
+                }
+
+                final MenuItem menuItem = menuItems.get(position);
+                final ImageView icon = v.findViewById(R.id.item_icon);
+                final TextView text = v.findViewById(R.id.item_text);
+
+                icon.setImageDrawable(menuItem.getIcon());
+                text.setText(menuItem.getTitle());
+
+                v.setOnClickListener(v1 -> onOptionsItemSelected(menuItem));
+
+                return v;
+            }
+        };
+
+        binding.moreActions.setAdapter(menuItemAdapter);
     }
 
     @Override
@@ -556,18 +609,25 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
-        menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
-        menu.findItem(R.id.menu_update_routingdata).setEnabled(Settings.useInternalRouting());
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
+        if (item.hasSubMenu()) {
+            final SubMenu subMenu = item.getSubMenu();
+            final ArrayList<CharSequence> subMenuItems = new ArrayList<>();
+
+            for (int pos = 0; pos < subMenu.size(); pos++) {
+                final MenuItem subMenuItem = subMenu.getItem(pos);
+                subMenuItems.add(subMenuItem.getTitle());
+            }
+
+            Dialogs.newBuilder(MainActivity.this)
+                    .setTitle(item.getTitle())
+                    .setItems(subMenuItems.toArray(new CharSequence[0]), (dialog, which) -> onOptionsItemSelected(subMenu.getItem(which)))
+                    .show();
+            return true;
+        }
+
         final int id = item.getItemId();
-        if (id == android.R.id.home || id == R.id.menu_about) {
+        if (id == R.id.menu_about) {
             showAbout(null);
         } else if (id == R.id.menu_report_problem) {
             DebugUtils.askUserToReportProblem(this, null);
@@ -583,6 +643,9 @@ public class MainActivity extends AbstractActionBarActivity {
             SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
         } else if (id == R.id.menu_history) {
             startActivity(CacheListActivity.getHistoryIntent(this));
+        } else if (id == R.id.menu_goto) {
+            InternalConnector.assertHistoryCacheExists(this);
+            CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
         } else if (id == R.id.menu_scan) {
             startScannerApplication();
         } else if (id == R.id.menu_pocket_queries) {
@@ -640,10 +703,6 @@ public class MainActivity extends AbstractActionBarActivity {
         }
     }
 
-    private void setFilterTitle() {
-        binding.filterButtonTitle.setText(Settings.getCacheType().getL10n());
-    }
-
     private void init() {
         if (initialized) {
             return;
@@ -651,59 +710,8 @@ public class MainActivity extends AbstractActionBarActivity {
 
         initialized = true;
 
-        binding.map.setClickable(true);
-        binding.map.setOnClickListener(this::cgeoFindOnMap);
-
-        binding.searchOffline.setClickable(true);
-        binding.searchOffline.setOnClickListener(this::cgeoFindByOffline);
-        binding.searchOffline.setOnLongClickListener(v -> {
-            new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, selectedListId -> {
-                if (selectedListId == PseudoList.HISTORY_LIST.id) {
-                    startActivity(CacheListActivity.getHistoryIntent(this));
-                } else {
-                    Settings.setLastDisplayedList(selectedListId);
-                    CacheListActivity.startActivityOffline(MainActivity.this);
-                }
-            }, false, PseudoList.NEW_LIST.id);
-            return true;
-        });
-        binding.searchOffline.setLongClickable(true);
-
-        binding.advancedButton.setClickable(true);
-        binding.advancedButton.setOnClickListener(this::cgeoSearch);
-
-        binding.anyButton.setClickable(true);
-        binding.anyButton.setOnClickListener(this::cgeoPoint);
-
-        binding.filterButton.setClickable(true);
-        binding.filterButton.setOnClickListener(v -> selectGlobalTypeFilter());
-        binding.filterButton.setOnLongClickListener(v -> {
-            Settings.setCacheType(CacheType.ALL);
-            setFilterTitle();
-            return true;
-        });
-
-        updateCacheCounter();
-
-        setFilterTitle();
         checkRestore();
         DataStore.cleanIfNeeded(this);
-    }
-
-    protected void selectGlobalTypeFilter() {
-        Dialogs.selectGlobalTypeFilter(this, cacheType -> setFilterTitle());
-    }
-
-    public void updateCacheCounter() {
-        AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(countBubbleCnt1 -> {
-            if (countBubbleCnt1 == 0) {
-                binding.offlineCount.setVisibility(View.GONE);
-            } else {
-                binding.offlineCount.setText(String.format(Locale.getDefault(), "%d", countBubbleCnt1));
-                binding.offlineCount.bringToFront();
-                binding.offlineCount.setVisibility(View.VISIBLE);
-            }
-        }, throwable -> Log.e("Unable to add bubble count", throwable));
     }
 
     private void checkRestore() {
@@ -737,12 +745,6 @@ public class MainActivity extends AbstractActionBarActivity {
         @Override
         @SuppressLint("SetTextI18n")
         public void updateGeoData(final GeoData geo) {
-            if (!binding.nearest.isClickable()) {
-                binding.nearest.setFocusable(true);
-                binding.nearest.setClickable(true);
-                binding.nearest.setOnClickListener(MainActivity.this::cgeoFindNearest);
-                binding.nearest.setBackgroundResource(R.drawable.main_nearby);
-            }
 
             binding.navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
@@ -769,61 +771,6 @@ public class MainActivity extends AbstractActionBarActivity {
                 binding.navLocation.setText(currentCoords.toString());
             }
         }
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoFindOnMap(final View v) {
-        binding.map.setPressed(true);
-        startActivity(DefaultMap.getLiveMapIntent(this));
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoFindNearest(final View v) {
-        binding.nearest.setPressed(true);
-        startActivity(CacheListActivity.getNearestIntent(this));
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoFindByOffline(final View v) {
-        binding.searchOffline.setPressed(true);
-        CacheListActivity.startActivityOffline(this);
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoSearch(final View v) {
-        binding.advancedButton.setPressed(true);
-        startActivity(new Intent(this, SearchActivity.class));
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoPoint(final View v) {
-        binding.anyButton.setPressed(true);
-        InternalConnector.assertHistoryCacheExists(this);
-        CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoFilter(final View v) {
-        binding.filterButton.setPressed(true);
-        binding.filterButton.performClick();
     }
 
     /**

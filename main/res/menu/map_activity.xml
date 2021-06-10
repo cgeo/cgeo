@@ -204,7 +204,7 @@
     </item>
     <item
         android:id="@+id/menu_as_list"
-        android:icon="@drawable/ic_menu_agenda"
+        android:icon="@drawable/ic_menu_list"
         android:title="@string/map_as_list">
     </item>
 

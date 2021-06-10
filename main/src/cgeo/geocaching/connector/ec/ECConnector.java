@@ -241,11 +241,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public int getAvatarPreferenceKey() {
-        return R.string.pref_ec_avatar;
-    }
-
-    @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
         final String geocode = "EC" + StringUtils.substringAfter(url, "extremcaching.com/index.php/output-2/");

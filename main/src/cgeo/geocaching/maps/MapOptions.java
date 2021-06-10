@@ -8,6 +8,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -109,4 +110,10 @@ public class MapOptions {
         fromActivity.startActivity(newIntent(fromActivity, cls));
     }
 
+    public void startIntentWithoutTransition(final Activity fromActivity, final Class<?> cls) {
+        startIntent(fromActivity, cls);
+
+        // avoid weired transitions
+        fromActivity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
 }

@@ -7,6 +7,7 @@
         <item name="actionBarStyle">@style/actionBarStyle</item>
         <item name="checkboxStyle">@style/checkboxStyle</item>
         <item name="radioButtonStyle">@style/radioButtonStyle</item>
+        <item name="badgeStyle">@style/badgeStyle</item>
         <item name="materialAlertDialogTheme">@style/materialAlertDialogTheme</item>
 
         <!-- set Material theme colors -->
