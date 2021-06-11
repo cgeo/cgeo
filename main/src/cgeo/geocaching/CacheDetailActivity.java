@@ -1644,6 +1644,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 return;
             }
 
+            // reset description
+            binding.description.setText("");
+
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
                 loadDescription(activity, cache.getShortDescription(), binding.description, null);
