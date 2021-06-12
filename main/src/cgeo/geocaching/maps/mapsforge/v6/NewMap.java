@@ -21,7 +21,6 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
@@ -75,7 +74,6 @@ import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TrackUtils;
-import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_RESULT;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
 
@@ -1640,8 +1638,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             }
         }
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
-            final String filterConfig = data.getExtras().getString(EXTRA_FILTER_RESULT);
-            MapUtils.changeMapFilter(this, GeocacheFilter.createFromConfig(filterConfig));
+            MapUtils.setFilterBar(this);
         }
 
         this.trackUtils.onActivityResult(requestCode, resultCode, data);

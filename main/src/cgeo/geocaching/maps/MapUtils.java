@@ -2,7 +2,6 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -45,7 +44,7 @@ public class MapUtils {
         final boolean excludeOfflineLog = checkCacheFilters && Settings.isExcludeOfflineLog();
         final CacheType filterCacheType = checkCacheFilters ? null : (Settings.getCacheType() == null ? CacheType.ALL : Settings.getCacheType());
 
-        final GeocacheFilter filter = GeocacheFilter.getStoredForListType(getMapViewerListType());
+        final GeocacheFilter filter = GeocacheFilter.loadFromSettings();
 
         final boolean excludeWpOriginal = Settings.isExcludeWpOriginal();
         final boolean excludeWpParking = Settings.isExcludeWpParking();
@@ -69,10 +68,9 @@ public class MapUtils {
     /** Applies given filter to cache list. Additionally, creates a second list additionally filtered by own/found/disabled caches if required */
     public static void filter(final Collection<Geocache> caches) {
 
-        final GeocacheFilter filter = GeocacheFilter.getStoredForListType(getMapViewerListType());
-        if (filter != null) {
-            filter.filterList(caches);
-        }
+        final GeocacheFilter filter = GeocacheFilter.loadFromSettings();
+        filter.filterList(caches);
+
 
         final boolean excludeMine = Settings.isExcludeMyCaches();
         final boolean excludeFound = Settings.isExcludeFound();
@@ -106,13 +104,8 @@ public class MapUtils {
 
         GeocacheFilterActivity.selectFilter(
             activity,
-            GeocacheFilter.getStoredForListType(MapUtils.getMapViewerListType()),
+            GeocacheFilter.loadFromSettings(),
             filteredList, true);
-    }
-
-    public static void changeMapFilter(final Activity activity, final GeocacheFilter mapFilter) {
-        mapFilter.storeForListType(MapUtils.getMapViewerListType());
-        setFilterBar(activity);
     }
 
     public static void setFilterBar(final Activity activity) {
@@ -133,7 +126,7 @@ public class MapUtils {
             filters.add(Settings.getCacheType().getL10n());
         }
 
-        final GeocacheFilter filter = GeocacheFilter.getStoredForListType(getMapViewerListType());
+        final GeocacheFilter filter = GeocacheFilter.loadFromSettings();
         if (filter.hasFilter()) {
             filters.add(filter.toUserDisplayableString());
         }
@@ -141,18 +134,11 @@ public class MapUtils {
         return filters;
     }
 
-
-
     // one-time messages to be shown for maps
     public static void showMapOneTimeMessages(final Activity activity) {
         Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
         Dialogs.basicOneTimeMessage(activity, Settings.isLongTapOnMapActivated() ? OneTimeDialogs.DialogType.MAP_LONG_TAP_ENABLED : OneTimeDialogs.DialogType.MAP_LONG_TAP_DISABLED);
     }
-
-    public static CacheListType getMapViewerListType() {
-        return CacheListType.MAP;
-    }
-
     // workaround for colored ActionBar titles/subtitles
     // @todo remove after switching map ActionBar to Toolbar
     public static Spanned getColoredValue(final String value) {

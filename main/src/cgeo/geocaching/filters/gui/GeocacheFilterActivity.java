@@ -290,7 +290,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     private void finishWithResult() {
         final Intent resultIntent = new Intent();
-        resultIntent.putExtra(EXTRA_FILTER_RESULT, getFilterFromView().toConfig());
+        final GeocacheFilter newFilter = getFilterFromView();
+        newFilter.storeToSettings();
+        resultIntent.putExtra(EXTRA_FILTER_RESULT, newFilter.toConfig());
         FilterViewHolderCreator.clearListInfo();
         setResult(Activity.RESULT_OK, resultIntent);
         finish();

@@ -1,7 +1,6 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -138,12 +137,12 @@ public class GeocacheFilter {
     }
 
     @NonNull
-    public static GeocacheFilter getStoredForListType(final CacheListType listType) {
-        return GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig(listType));
+    public static GeocacheFilter loadFromSettings() {
+        return GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig());
     }
 
-    public void storeForListType(final CacheListType listType) {
-        Settings.setCacheFilterConfig(listType, this.toConfig());
+    public void storeToSettings() {
+        Settings.setCacheFilterConfig(this.toConfig());
     }
 
     public static GeocacheFilter checkConfig(final String filterConfig) throws ParseException {
@@ -193,8 +192,7 @@ public class GeocacheFilter {
         config.addToDefaultList(getName());
         config.putList(CONFIG_KEY_ADV_MODE, BooleanUtils.toStringTrueFalse(isOpenInAdvancedMode()));
         config.putList(CONFIG_KEY_INCLUDE_INCLUSIVE, BooleanUtils.toStringTrueFalse(isIncludeInconclusive()));
-        final String configString = "[" + ExpressionParser.toConfig(config) + "]" + (tree == null ? "" : FILTER_PARSER.getConfig(tree));
-        return configString;
+        return "[" + ExpressionParser.toConfig(config) + "]" + (tree == null ? "" : FILTER_PARSER.getConfig(tree));
     }
 
 
