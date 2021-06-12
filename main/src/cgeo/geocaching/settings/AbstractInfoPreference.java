@@ -1,8 +1,9 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.UrlPopup;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -96,7 +97,7 @@ public abstract class AbstractInfoPreference extends AbstractAttributeBasedPrefe
         setOnPreferenceClickListener(preference -> {
             if (isIntent) {
                 if (StringUtils.isNotBlank(text) && StringUtils.isNotBlank(urlButton)) {
-                    Dialogs.confirm((Activity) preference.getContext(), preference.getTitle().toString(), text, urlButton, (dialog, which) -> startIntent.run());
+                    SimpleDialog.of((Activity) preference.getContext()).setTitle(TextParam.text(preference.getTitle())).setMessage(TextParam.text(text)).setPositiveButton(TextParam.text(urlButton)).confirm((dialog, which) -> startIntent.run());
                 } else {
                     startIntent.run();
                 }

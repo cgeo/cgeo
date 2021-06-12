@@ -1,45 +1,28 @@
 package cgeo.geocaching.ui.dialog;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.databinding.BottomsheetDialogWithActionbarBinding;
 import cgeo.geocaching.databinding.DialogTextCheckboxBinding;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
-import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.functions.Action2;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
 import android.view.ContextThemeWrapper;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -50,543 +33,26 @@ import androidx.core.content.res.ResourcesCompat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import io.noties.markwon.Markwon;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Wrapper for {@link AlertDialog}. If you want to show a simple text, use one of the
- * {@link #message(Activity, String, String)} variants. If you want the user to confirm using Okay/Cancel or
- * Yes/No, select one of the {@link #confirm(Activity, String, String, String, OnClickListener)} or
- * {@link #confirmYesNo(Activity, String, String, OnClickListener)} variants.
+ * Helper class providing methods when constructing custom Dialogs.
  *
+ * To create simple dialogs, consider using {@link SimpleDialog} instead.
  */
 public final class Dialogs {
+
+
     private Dialogs() {
         // utility class
-    }
-
-    /**
-     * Confirm using two buttons "yourText" and "Cancel", where "Cancel" just closes the dialog.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param positiveButton
-     *            text of the positive button (which would typically be the OK button)
-     * @param okayListener
-     *            listener of the positive button
-     */
-    public static AlertDialog.Builder confirm(final Activity context, final String title, final String msg, final String positiveButton, final OnClickListener okayListener) {
-        final AlertDialog.Builder builder = newBuilder(context);
-        final AlertDialog dialog = builder.setTitle(title)
-                .setCancelable(true)
-                .setMessage(msg)
-                .setPositiveButton(positiveButton, okayListener)
-                .setNegativeButton(android.R.string.cancel, null)
-                .create();
-        dialog.setOwnerActivity(context);
-        dialog.show();
-        return builder;
-    }
-
-    /**
-     * Confirm using two buttons "yourText" and "Cancel", where "Cancel" just closes the dialog.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param positiveButton
-     *            text of the positive button (which would typically be the OK button)
-     * @param okayListener
-     *            listener of the positive button
-     */
-    public static AlertDialog.Builder confirm(final Activity context, final int title, final int msg, final int positiveButton, final OnClickListener okayListener) {
-        return confirm(context, getString(title), getString(msg), getString(positiveButton), okayListener);
-    }
-
-    /**
-     * Confirm using two buttons "yourText" and "Cancel", where both buttons have action listener.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param positiveButton
-     *            text of the positive button (which would typically be the OK button)
-     * @param okayListener
-     *            listener of the positive button
-     * @param cancelListener
-     *            listener of the negative button
-     */
-    public static AlertDialog.Builder confirm(final Activity context, final String title, final String msg, final String positiveButton, final OnClickListener okayListener, final DialogInterface.OnCancelListener cancelListener) {
-        final AlertDialog.Builder builder = newBuilder(context);
-        final AlertDialog dialog = builder.setTitle(title)
-                .setCancelable(true)
-                .setOnCancelListener(cancelListener)
-                .setMessage(msg)
-                .setPositiveButton(positiveButton, okayListener)
-                .setNegativeButton(android.R.string.cancel, (dialog1, which) -> dialog1.cancel())
-                .create();
-        dialog.setOwnerActivity(context);
-        dialog.show();
-        return builder;
-    }
-
-    /**
-     * Confirm using two buttons "yourText" and "Cancel", where both buttons have action listener.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param positiveButton
-     *            text of the positive button (which would typically be the OK button)
-     * @param okayListener
-     *            listener of the positive button
-     * @param cancelListener
-     *            listener of the negative button
-     */
-    public static AlertDialog.Builder confirm(final Activity context, final int title, final int msg, final int positiveButton, final OnClickListener okayListener, final DialogInterface.OnCancelListener cancelListener) {
-        return confirm(context, getString(title), getString(msg), getString(positiveButton), okayListener, cancelListener);
-    }
-
-    /**
-     * Confirm using two buttons "Yes" and "No", where "No" just closes the dialog.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param yesListener
-     *            listener of the positive button
-     */
-    public static AlertDialog.Builder confirmYesNo(final Activity context, final String title, final String msg, final OnClickListener yesListener) {
-        final AlertDialog.Builder builder = newBuilder(context);
-        final AlertDialog dialog = builder.setTitle(title)
-                .setCancelable(true)
-                .setMessage(msg)
-                .setPositiveButton(R.string.yes, yesListener)
-                .setNegativeButton(R.string.no, null)
-                .create();
-        dialog.setOwnerActivity(context);
-        dialog.show();
-        return builder;
-    }
-
-    /**
-     * Confirm using two buttons "Yes" and "No", where "No" just closes the dialog.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param yesListener
-     *            listener of the positive button
-     */
-    public static AlertDialog.Builder confirmYesNo(final Activity context, final String title, final int msg, final OnClickListener yesListener) {
-        return confirmYesNo(context, title, getString(msg), yesListener);
-    }
-
-    /**
-     * Confirm using two buttons "Yes" and "No", where "No" just closes the dialog.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param yesListener
-     *            listener of the positive button
-     */
-    public static AlertDialog.Builder confirmYesNo(final Activity context, final int title, final String msg, final OnClickListener yesListener) {
-        return confirmYesNo(context, getString(title), msg, yesListener);
-    }
-
-    /**
-     * Confirm using two buttons "Yes" and "No", where "No" just closes the dialog.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param yesListener
-     *            listener of the positive button
-     */
-    public static AlertDialog.Builder confirmYesNo(final Activity context, final int title, final int msg, final OnClickListener yesListener) {
-        return confirmYesNo(context, getString(title), getString(msg), yesListener);
-    }
-
-    /**
-     * Confirm using two buttons "OK" and "Cancel", where "Cancel" just closes the dialog.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param okayListener
-     *            listener of the positive button
-     */
-    public static AlertDialog.Builder confirm(final Activity context, final String title, final String msg, final OnClickListener okayListener) {
-        return confirm(context, title, msg, getString(android.R.string.ok), okayListener);
-    }
-
-    /**
-     * Confirm using two buttons "OK" and "Cancel", where "Cancel" just closes the dialog.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param okayListener
-     *            listener of the positive button
-     */
-    public static AlertDialog.Builder confirm(final Activity context, final int title, final String msg, final OnClickListener okayListener) {
-        return confirm(context, getString(title), msg, okayListener);
-    }
-
-    /**
-     * Confirm using two buttons "OK" and "Cancel", where "Cancel" just closes the dialog.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param okayListener
-     *            listener of the positive button
-     */
-    public static AlertDialog.Builder confirm(final Activity context, final int title, final int msg, final OnClickListener okayListener) {
-        return confirm(context, getString(title), getString(msg), okayListener);
-    }
-
-    /**
-     * Confirm using up to three configurable buttons "Positive", "Negative" and "Neutral". Buttons text are configurable.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param positiveTextButton
-     *            Text for the positive button
-     * @param negativeTextButton
-     *            Text for the negative button
-     * @param neutralTextButton
-     *            Text for the neutral button
-     * @param positiveListener
-     *            listener of the positive button
-     * @param negativeListener
-     *            listener of the negative button
-     * @param neutralListener
-     *            listener of the neutral button
-     */
-    public static AlertDialog.Builder confirmPositiveNegativeNeutral(final Activity context,
-                                                                     final String title,
-                                                                     final CharSequence msg,
-                                                                     final String positiveTextButton,
-                                                                     final String negativeTextButton,
-                                                                     final String neutralTextButton,
-                                                                     final OnClickListener positiveListener,
-                                                                     final OnClickListener negativeListener,
-                                                                     final OnClickListener neutralListener) {
-        final AlertDialog.Builder builder = newBuilder(context)
-            .setTitle(title)
-            .setCancelable(true)
-            .setMessage(msg);
-        if (null != positiveTextButton) {
-            builder.setPositiveButton(positiveTextButton, positiveListener);
-        }
-        if (null != negativeTextButton) {
-            builder.setNegativeButton(negativeTextButton, negativeListener);
-        }
-        if (null != neutralTextButton) {
-            builder.setNeutralButton(neutralTextButton, neutralListener);
-        }
-        final AlertDialog dialog = builder.create();
-        dialog.setOwnerActivity(context);
-        dialog.show();
-
-        makeLinksClickable(dialog);
-
-        return builder;
-    }
-
-    public static void makeLinksClickable(final AlertDialog dialog) {
-        try {
-            // Make the URLs in TextView clickable. Must be called after show()
-            // Note: we do NOT use the "setView()" option of AlertDialog because this screws up the layout
-            ((TextView) dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
-        }  catch (Exception e) {
-            Log.d("Trying to make dialog Links clickable failed, will be ignored", e);
-        }
-    }
-
-    /**
-     * Confirm using three configurable buttons "Positive", "Negative" and "Neutral". Buttons text are configurable.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param positiveTextButton
-     *            Text for the positive button
-     * @param negativeTextButton
-     *            Text for the negative button
-     * @param neutralTextButton
-     *            Text for the neutral button
-     * @param positiveListener
-     *            listener of the positive button
-     * @param negativeListener
-     *            listener of the negative button
-     * @param neutralListener
-     *            listener of the neutral button
-     */
-    public static AlertDialog.Builder confirmPositiveNegativeNeutral(final Activity context,
-                                                                     final int title,
-                                                                     final String msg,
-                                                                     final int positiveTextButton,
-                                                                     final int negativeTextButton,
-                                                                     final int neutralTextButton,
-                                                                     final OnClickListener positiveListener,
-                                                                     final OnClickListener negativeListener,
-                                                                     final OnClickListener neutralListener) {
-        final AlertDialog.Builder builder = newBuilder(context);
-        final AlertDialog dialog = builder.setTitle(title)
-                .setCancelable(true)
-                .setMessage(msg)
-                .setPositiveButton(positiveTextButton, positiveListener)
-                .setNegativeButton(negativeTextButton, negativeListener)
-                .setNeutralButton(neutralTextButton, neutralListener)
-                .create();
-        dialog.setOwnerActivity(context);
-        dialog.show();
-        return builder;
-    }
-
-    private static String getString(@StringRes final int resourceId) {
-        return CgeoApplication.getInstance().getString(resourceId);
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param msg
-     *            message dialog content
-     * @param positiveButton
-     *            label for positive button
-     */
-    public static AlertDialog.Builder message(final Activity context, final String title, final String msg, final String positiveButton, final OnClickListener okayListener) {
-        final AlertDialog.Builder builder = newBuilder(context);
-        final AlertDialog dialog = builder.setTitle(title)
-                .setCancelable(true)
-                .setMessage(msg)
-                .setPositiveButton(positiveButton, okayListener)
-                .create();
-        dialog.setOwnerActivity(context);
-        dialog.show();
-        return builder;
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param msg
-     *            message dialog content
-     * @param positiveButton
-     *            label for positive button
-     */
-    public static AlertDialog.Builder message(final Activity context, final int title, final int msg, final int positiveButton, final OnClickListener okayListener) {
-        return message(context, getString(title), getString(msg), getString(positiveButton), okayListener);
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param msg
-     *            message dialog content
-     */
-    public static AlertDialog.Builder message(final Activity context, final int title, final int msg, final OnClickListener okayListener) {
-        return message(context, getString(title), getString(msg), getString(android.R.string.ok), okayListener);
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param message
-     *            message dialog content
-     */
-    public static void message(final Activity context, final String message) {
-        message(context, null, message);
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param message
-     *            message dialog content
-     */
-    public static void message(final Activity context, final int message) {
-        message(context, null, getString(message));
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param title
-     *            message dialog title
-     * @param message
-     *            message dialog content
-     */
-    public static void message(final Activity context, @Nullable final String title, final String message) {
-        message(context, title, message, null);
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button and an eventual icon.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param title
-     *            message dialog title
-     * @param message
-     *            message dialog content
-     * @param iconObservable
-     *            observable (may be <tt>null</tt>) containing the icon(s) to set
-     */
-    public static void message(final Activity context, @Nullable final String title, final String message, @Nullable final Observable<Drawable> iconObservable) {
-        final AlertDialog.Builder builder = newBuilder(context)
-                .setMessage(message)
-                .setCancelable(true)
-                .setPositiveButton(getString(android.R.string.ok), null);
-        if (title != null) {
-            builder.setTitle(title);
-        }
-        builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
-
-        final AlertDialog dialog = builder.create();
-        if (iconObservable != null) {
-            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(dialog::setIcon);
-        }
-        dialog.show();
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button
-     * "message" can be formatted using markdown
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param title
-     *            message dialog title
-     * @param message
-     *            message dialog content
-     */
-    public static void messageMarkdown(final Activity context, @Nullable final String title, final String message) {
-        final View v = context.getLayoutInflater().inflate(R.layout.dialog_textview, null);
-        final Markwon markwon = Markwon.create(context);
-        markwon.setMarkdown(v.findViewById(R.id.info), message);
-
-        final AlertDialog.Builder builder = newBuilder(context)
-            .setCancelable(true)
-            .setPositiveButton(getString(android.R.string.ok), null);
-        if (StringUtils.isNotBlank(title)) {
-            builder.setTitle(title);
-        }
-        builder
-            .setView(v)
-            .create()
-            .show();
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button and an icon.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param title
-     *            message dialog title
-     * @param message
-     *            message dialog content
-     */
-    public static void message(final Activity context, final int title, final String message) {
-        message(context, getString(title), message);
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button and an icon.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param title
-     *            message dialog title
-     * @param message
-     *            message dialog content
-     */
-    public static void message(final Activity context, final int title, final int message) {
-        message(context, getString(title), getString(message));
-    }
-
-    /**
-     * Show a message dialog with a single "OK" button and an icon.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param title
-     *            message dialog title
-     * @param message
-     *            message dialog content
-     * @param iconObservable
-     *            message dialog title icon
-     */
-    public static void message(final Activity context, final int title, final int message, final Observable<Drawable> iconObservable) {
-        message(context, getString(title), getString(message), iconObservable);
     }
 
     /**
@@ -677,10 +143,12 @@ public final class Dialogs {
 
         if (OneTimeDialogs.showDialog(dialogType)) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
-            internalOneTimeMessage(context, getString(dialogType.messageTitle), getString(dialogType.messageText), dialogType.moreInfoURLResId > 0 ? getString(dialogType.moreInfoURLResId) : null, dialogType,
+            internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null, dialogType,
                 Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null);
         }
     }
+
+
 
     /**
      * OK (+ cancel) dialog which is shown, until "don't shown again" is checked. Title, text, icon and runAfterwards can be set.
@@ -698,308 +166,11 @@ public final class Dialogs {
     }
 
     /**
-     * Standard message box + additional neutral button.
-     *  @param context
-     *            activity hosting the dialog
-     * @param msg
-     *            dialog message
-     * @param neutralTextButton
-     *            Text for the neutral button
-     * @param neutralListener
-     *            listener for neutral button
-     */
-    public static void messageNeutral(final Context context, final String msg, final int neutralTextButton, final OnClickListener neutralListener) {
-        messageNeutral(context, null, msg, neutralTextButton, neutralListener);
-    }
-
-    /**
-     * Standard message box + additional neutral button.
-     *
-     * @param context
-     *            activity hosting the dialog
-     * @param title
-     *            dialog title
-     * @param msg
-     *            dialog message
-     * @param neutralTextButton
-     *            Text for the neutral button
-     * @param neutralListener
-     *            listener of the neutral button
-     */
-    public static AlertDialog.Builder messageNeutral(final Context context, @Nullable final String title, final String msg, final int neutralTextButton, final OnClickListener neutralListener) {
-        final AlertDialog.Builder builder = newBuilder(context);
-        final AlertDialog dialog = builder.setMessage(msg)
-            .setPositiveButton(android.R.string.ok, null)
-            .setNeutralButton(neutralTextButton, neutralListener)
-            .create();
-
-        if (title != null) {
-            dialog.setTitle(title);
-        }
-
-        dialog.show();
-        return builder;
-    }
-
-    /**
-     * Show a message dialog for input from the user. The okay button is only enabled on non empty input.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param title
-     *            message dialog title
-     * @param defaultValue
-     *            default input value
-     * @param buttonTitle
-     *            title of the okay button
-     * @param okayListener
-     *            listener to be run on okay
-     */
-    public static void input(final Activity context, final int title, final String defaultValue, final int buttonTitle, final Action1<String> okayListener) {
-        final EditText input = new EditText(context);
-        input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
-        input.setText(defaultValue);
-
-        final AlertDialog.Builder builder = newBuilder(context);
-        builder.setTitle(title);
-        builder.setView(input);
-        // remove whitespaces added by autocompletion of Android keyboard before calling okayListener
-        builder.setPositiveButton(buttonTitle, (dialog, which) -> okayListener.call(input.getText().toString().trim()));
-        builder.setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.dismiss());
-        final AlertDialog dialog = builder.create();
-
-        input.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-                // empty
-            }
-
-            @Override
-            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-                // empty
-            }
-
-            @Override
-            public void afterTextChanged(final Editable editable) {
-                enableDialogButtonIfNotEmpty(dialog, editable.toString());
-            }
-        });
-        // force keyboard
-        Keyboard.show(context, input);
-
-        // disable button
-        dialog.show();
-        enableDialogButtonIfNotEmpty(dialog, defaultValue);
-
-        moveCursorToEnd(input);
-    }
-
-
-    /**
-     * Show a message dialog for input from the user. The okay button is only enabled on non empty input.
-     *
-     * @param context
-     *            activity owning the dialog
-     * @param title
-     *            message dialog title
-     * @param defaultValue
-     *            default input value
-     * @param buttonTitle
-     *            title of the okay button
-     * @param okayListener
-     *            listener to be run on okay
-     */
-    public static void input(final Context context, final String title, final int inputType, final String defaultValue, final String label, final int buttonTitle, final Action1<String> okayListener) {
-        final LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.HORIZONTAL);
-        layout.setGravity(Gravity.CENTER_HORIZONTAL);
-
-        final boolean hasUnit = StringUtils.isNotEmpty(label);
-        final int dialogPadding = context.getResources().getDimensionPixelSize(R.dimen.dialog_padding_horizontal);
-        final LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
-        textParam.setMargins(dialogPadding, 0, hasUnit ? 0 : dialogPadding, 0);
-
-        final EditText editText = new EditText(context);
-        editText.setInputType(inputType);
-        editText.setText(defaultValue);
-        editText.setGravity(Gravity.LEFT);
-        editText.setLayoutParams(textParam);
-        layout.addView(editText);
-
-        if (hasUnit) {
-            final TextView unitText = new TextView(context);
-            final LinearLayout.LayoutParams unitParam = new LinearLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-            unitParam.setMargins(0, 0, dialogPadding, 0);
-            unitText.setText(label);
-            unitText.setLayoutParams(unitParam);
-            layout.addView(unitText);
-            editText.setGravity(Gravity.RIGHT);
-        }
-
-        final AlertDialog.Builder builder = newBuilder(context);
-        builder.setTitle(title);
-        builder.setView(layout);
-        // remove whitespaces added by autocompletion of Android keyboard before calling okayListener
-        builder.setPositiveButton(buttonTitle, (dialog, which) -> okayListener.call(editText.getText().toString().trim()));
-        builder.setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.dismiss());
-        final AlertDialog dialog = builder.create();
-
-        editText.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-                // empty
-            }
-
-            @Override
-            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-                // empty
-            }
-
-            @Override
-            public void afterTextChanged(final Editable editable) {
-                enableDialogButtonIfNotEmpty(dialog, editable.toString());
-            }
-        });
-        // force keyboard
-        Keyboard.show(context, editText);
-
-        // disable button
-        dialog.show();
-        enableDialogButtonIfNotEmpty(dialog, String.valueOf(defaultValue));
-
-        moveCursorToEnd(editText);
-    }
-
-    /**
      * Move the cursor to the end of the input field.
      *
      */
     public static void moveCursorToEnd(final EditText input) {
         input.setSelection(input.getText().length(), input.getText().length());
-    }
-
-    private static void enableDialogButtonIfNotEmpty(final AlertDialog dialog, final String input) {
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(StringUtils.isNotBlank(input));
-    }
-
-    public interface ItemWithIcon {
-        /**
-         * @return the drawable resource, or {@code 0} for no drawable
-         */
-        @DrawableRes
-        int getIcon();
-    }
-
-    public static <T> void select(final Activity activity, final String title, final List<T> items, final Action1<T> listener) {
-        final ListAdapter adapter = new ArrayAdapter<T>(
-                activity,
-                android.R.layout.select_dialog_item,
-                android.R.id.text1,
-                items) {
-            @Override
-            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                // standard list entry
-                final View v = super.getView(position, convertView, parent);
-
-                // add image
-                final TextView tv = v.findViewById(android.R.id.text1);
-                final int drawableId = items.get(position) instanceof ItemWithIcon ? ((ItemWithIcon) items.get(position)).getIcon() : 0;
-                tv.setCompoundDrawablesWithIntrinsicBounds(drawableId, 0, 0, 0);
-
-                // Add margin between image and text
-                final int dp5 = (int) (5 * activity.getResources().getDisplayMetrics().density + 0.5f);
-                tv.setCompoundDrawablePadding(dp5);
-
-                return v;
-            }
-        };
-
-        newBuilder(activity)
-                .setTitle(title)
-                .setAdapter(adapter, (dialog, item) -> listener.call(items.get(item))).show();
-    }
-
-    public static <T> void select(final Activity activity, final List<T> items, final Func1<T, String> displayMapper, final int preselectId, final int titleId, final int posButtonId, final int negButtonId, final Action2<Integer, T> onSelectListener) {
-
-        final int[] pos = new int[]{preselectId};
-        final AlertDialog.Builder alert = Dialogs.newBuilder(activity)
-            .setTitle(titleId)
-            .setSingleChoiceItems(CollectionStream.of(items).map(displayMapper::call).toArray(String.class), preselectId, (d, p) -> {
-                pos[0] = p;
-                enableDisableButtons((AlertDialog) d, true);
-            })
-            .setNeutralButton(android.R.string.cancel, (d, w) -> {
-                d.dismiss();
-            });
-
-        if (posButtonId != 0) {
-            alert.setPositiveButton(posButtonId, (d, w) -> {
-                if (pos[0] >= 0 && pos[0] < items.size()) {
-                    if (onSelectListener != null) {
-                        onSelectListener.call(DialogInterface.BUTTON_POSITIVE, items.get(pos[0]));
-                    }
-                    d.dismiss();
-                }
-            });
-        }
-        if (negButtonId != 0) {
-            alert.setNegativeButton(negButtonId, (d, w) -> {
-                if (pos[0] >= 0 && pos[0] < items.size()) {
-                    if (onSelectListener != null) {
-                        onSelectListener.call(DialogInterface.BUTTON_NEGATIVE, items.get(pos[0]));
-                    }
-                    d.dismiss();
-                }
-            });
-        }
-
-        final AlertDialog dialog = alert.create();
-        dialog.show();
-        if (preselectId < 0 || preselectId >= items.size()) {
-            enableDisableButtons(dialog, false);
-        }
-
-    }
-
-    public static <T> void selectMultiple(final Activity activity, final List<T> items, final Func1<T, CharSequence> displayMapper, final Set<T> preselected, final int titleId, final Action1<Set<T>> onSelectListener) {
-        final CharSequence[] itemTexts = new CharSequence[items.size()];
-        final boolean[] itemSelects = new boolean[items.size()];
-        final Set<T> result = preselected == null ? new HashSet<>() : new HashSet<>(preselected);
-        int idx = 0;
-        for (T item : items) {
-            itemTexts[idx] = displayMapper.call(item);
-            itemSelects[idx] = preselected != null && preselected.contains(item);
-            idx++;
-        }
-
-        final AlertDialog.Builder builder = Dialogs.newBuilder(activity, R.style.cgeo_compactDialogs);
-        builder.setTitle(titleId);
-        builder.setMultiChoiceItems(itemTexts, itemSelects, (d, i, c) -> {
-            if (c) {
-                result.add(items.get(i));
-            } else {
-                result.remove(items.get(i));
-            }
-        });
-        builder.setPositiveButton(android.R.string.ok, (d, w) -> {
-            onSelectListener.call(result);
-        });
-        builder.setNegativeButton(android.R.string.cancel, (d, w) -> d.dismiss());
-
-        final AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    private static void enableDisableButtons(final AlertDialog dialog, final boolean enable) {
-        if (dialog.getButton(DialogInterface.BUTTON_POSITIVE) != null) {
-            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(enable);
-        }
-        if (dialog.getButton(DialogInterface.BUTTON_NEGATIVE) != null) {
-            dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(enable);
-        }
-
     }
 
     public static void dismiss(@Nullable final ProgressDialog dialog) {
@@ -1028,23 +199,15 @@ public final class Dialogs {
 
         final int checkedItem = Math.max(0, cacheTypes.indexOf(Settings.getCacheType()));
 
-        final String[] items = new String[cacheTypes.size()];
-        for (int i = 0; i < cacheTypes.size(); i++) {
-            items[i] = cacheTypes.get(i).getL10n();
-        }
-
-        final AlertDialog.Builder builder = newBuilder(activity);
-        builder.setTitle(R.string.menu_filter);
-        builder.setSingleChoiceItems(items, checkedItem, (dialog, position) -> {
+        SimpleDialog.of(activity).setTitle(R.string.menu_filter)
+            .selectSingle(cacheTypes, (ct, i) -> TextParam.text(ct.getL10n()), checkedItem, true, (item, position) -> {
             final CacheType cacheType = cacheTypes.get(position);
             Settings.setCacheType(cacheType);
             okayListener.call(cacheType);
-            dialog.dismiss();
         });
-        builder.create().show();
     }
 
-    public static BottomSheetDialog bottomSheetDialog(final Context context, final View contentView) {
+    private static BottomSheetDialog bottomSheetDialog(final Context context, final View contentView) {
         final BottomSheetDialog dialog = new BottomSheetDialog(newContextThemeWrapper(context));
         dialog.setContentView(contentView);
         return dialog;

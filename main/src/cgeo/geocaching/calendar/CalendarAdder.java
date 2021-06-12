@@ -2,7 +2,7 @@ package cgeo.geocaching.calendar;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -28,7 +28,7 @@ public class CalendarAdder {
         final CalendarEntry entry = new CalendarEntry(cache, hiddenDate);
         if (cache.isPastEvent()) {
             // Event is in the past, only add to calendar after confirmation
-            Dialogs.confirmYesNo(activity, R.string.helper_calendar_pastevent_title, activity.getString(R.string.helper_calendar_pastevent_question),
+            SimpleDialog.of(activity).setTitle(R.string.helper_calendar_pastevent_title).setMessage(R.string.helper_calendar_pastevent_question).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(
                 (dialog, id) -> entry.addEntryToCalendar(activity));
         } else {
             entry.addEntryToCalendar(activity);

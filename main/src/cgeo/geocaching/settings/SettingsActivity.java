@@ -30,6 +30,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.BackupUtils;
@@ -400,7 +401,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 return usedBytes < freeSpaces.get(position);
             }
         }, selectedDirIndex, (dialog, itemId) -> {
-            Dialogs.confirm(SettingsActivity.this, R.string.confirm_data_dir_move_title, R.string.confirm_data_dir_move, (dialog1, which) -> {
+            SimpleDialog.of(SettingsActivity.this).setTitle(R.string.confirm_data_dir_move_title).setMessage(R.string.confirm_data_dir_move).confirm((dialog1, which) -> {
                 final File dir = extDirs.get(itemId);
                 if (!StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
                     LocalStorage.changeExternalPrivateCgeoDir(SettingsActivity.this, dir.getAbsolutePath());
@@ -519,7 +520,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         loginData.setOnPreferenceClickListener(preference -> {
             if (Settings.getBackupLoginData()) {
                 loginData.setChecked(false);
-                Dialogs.confirm(SettingsActivity.this, R.string.init_backup_settings_logins, R.string.init_backup_settings_backup_full_confirm, (dialog, which) -> loginData.setChecked(true));
+                SimpleDialog.of(SettingsActivity.this).setTitle(R.string.init_backup_settings_logins).setMessage(R.string.init_backup_settings_backup_full_confirm).confirm((dialog, which) -> loginData.setChecked(true));
             }
             return true;
         });

@@ -4,8 +4,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +87,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     }
 
     private View createSelectAllNoneView(final ViewGroup ctx) {
-        selectAllNoneCheckbox = ViewUtils.createCheckboxItem(getActivity(), ctx, getActivity().getString(R.string.cache_filter_checkboxlist_selectallnone), ImageParam.id(R.drawable.ic_menu_selectall), 0);
+        selectAllNoneCheckbox = ViewUtils.createCheckboxItem(getActivity(), ctx, TextParam.id(R.string.cache_filter_checkboxlist_selectallnone), ImageParam.id(R.drawable.ic_menu_selectall), null);
 
         selectAllNoneCheckbox.right.setOnCheckedChangeListener((v, c) -> {
             if (!selectAllNoneBroadcast) {
@@ -100,17 +101,18 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     }
 
     private View createAddItemButton(final ViewGroup vg) {
-        this.addItemsButton = ViewUtils.createButton(getActivity(), vg, R.string.cache_filter_checkboxlist_add_items);
+        this.addItemsButton = ViewUtils.createButton(getActivity(), vg, TextParam.id(R.string.cache_filter_checkboxlist_add_items));
 
         this.addItemsButton.setOnClickListener(v -> {
 
             final List<T> items = new ArrayList<>(filterAccessor.getSelectableValues());
             items.removeAll(visibleValues);
-            Dialogs.selectMultiple(getActivity(), items, filterAccessor::getDisplayText, null, R.string.cache_filter_checkboxlist_add_items_dialog_title, s -> {
+            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_filter_checkboxlist_add_items_dialog_title)).selectMultiple(items, (s, i) -> TextParam.text(filterAccessor.getDisplayText(s)), null, s -> {
                 visibleValues.addAll(s);
                 relayout();
             });
         });
+
         return this.addItemsButton;
     }
 
@@ -144,7 +146,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             final String vText = this.filterAccessor.getDisplayText(value) +
                 (statistics != null ? " (" + (statistics.containsKey(value) ? "" + statistics.get(value) : "0") + (statsAreComplete ? "" : "+") + ")" : "");
 
-            cb = ViewUtils.createCheckboxItem(getActivity(), columns.get(0), vText, this.filterAccessor.getIconFor(value), 0);
+            cb = ViewUtils.createCheckboxItem(getActivity(), columns.get(0), TextParam.text(vText), this.filterAccessor.getIconFor(value), null);
             cb.right.setChecked(true);
             this.valueCheckboxes.put(value, cb);
             cb.right.setOnCheckedChangeListener((v, c) -> checkAndSetAllNoneValue());
@@ -162,7 +164,8 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
                 final Set<T> cValues = filterAccessor.getCacheValues(filter, cache);
                 for (T cValue : cValues) {
                     if (stats.containsKey(cValue)) {
-                        stats.put(cValue, stats.get(cValue) + 1);
+                        final Integer cnt = stats.get(cValue);
+                        stats.put(cValue, cnt == null ? 1 : cnt + 1);
                     } else {
                         stats.put(cValue, 1);
                     }

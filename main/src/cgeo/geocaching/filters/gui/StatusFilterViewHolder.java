@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.gui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.ui.ButtonToggleGroup;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 
 import android.view.View;
@@ -28,9 +29,9 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         statusOwn = createGroup(ll, StatusGeocacheFilter.StatusType.OWN);
         ButtonToggleGroup.alignWidths(statusOwn, statusFound);
 
-        excludeActive = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_status_exclude_active, R.drawable.ic_menu_circle);
-        excludeDisabled = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_status_exclude_disabled, R.drawable.ic_menu_disabled);
-        excludeArchived = ViewUtils.addCheckboxItem(getActivity(), ll, R.string.cache_filter_status_exclude_archived, R.drawable.ic_menu_archived);
+        excludeActive = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_status_exclude_active), R.drawable.ic_menu_circle);
+        excludeDisabled = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_status_exclude_disabled), R.drawable.ic_menu_disabled);
+        excludeArchived = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_status_exclude_archived), R.drawable.ic_menu_archived);
         excludeArchived.setChecked(true);
         return ll;
     }

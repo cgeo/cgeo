@@ -35,8 +35,10 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
@@ -330,7 +332,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         LocalStorage.initGeocacheDataDir();
         if (LocalStorage.isRunningLowOnDiskSpace()) {
-            Dialogs.message(this, res.getString(R.string.init_low_disk_space), res.getString(R.string.init_low_disk_space_message));
+            SimpleDialog.of(this).setTitle(R.string.init_low_disk_space).setMessage(R.string.init_low_disk_space_message).show();
         }
 
         confirmDebug();
@@ -338,7 +340,8 @@ public class MainActivity extends AbstractActionBarActivity {
         // infobox "not logged in" with link to service config; display delayed by 10 seconds
         final Handler handler = new Handler();
         handler.postDelayed(this::checkLoggedIn, 10000);
-        binding.infoNotloggedin.setOnClickListener(v -> Dialogs.confirmYesNo(this, R.string.warn_notloggedin_title, R.string.warn_notloggedin_long, (dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
+        binding.infoNotloggedin.setOnClickListener(v ->
+            SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
 
         //do file migrations if necessary
         LocalStorage.migrateLocalStorage(this);
@@ -388,7 +391,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @SuppressWarnings("unused") // in Eclipse, BuildConfig.DEBUG is always true
     private void confirmDebug() {
         if (Settings.isDebug() && !BuildConfig.DEBUG) {
-            Dialogs.confirmYesNo(this, R.string.init_confirm_debug, R.string.list_confirm_debug_message, (dialog, whichButton) -> Settings.setDebug(false));
+            SimpleDialog.of(this).setTitle(R.string.init_confirm_debug).setMessage(R.string.list_confirm_debug_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, whichButton) -> Settings.setDebug(false));
         }
     }
 
@@ -631,7 +634,7 @@ public class MainActivity extends AbstractActionBarActivity {
                     if (query == null) {
                         query = "";
                     }
-                    Dialogs.message(this, res.getString(R.string.unknown_scan) + "\n\n" + query);
+                    SimpleDialog.of(this).setMessage(TextParam.text(res.getString(R.string.unknown_scan) + "\n\n" + query)).show();
                 }
             }
         }

@@ -3,8 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CheckboxItemBinding;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 
@@ -32,7 +31,6 @@ import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 
 import java.util.ArrayList;
@@ -60,13 +58,13 @@ public class ViewUtils {
         return (int) (dp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
     }
 
-    public static void setTooltip(final View view, @StringRes final int textId) {
-        setTooltip(view, LocalizationUtils.getString(textId));
+    public static int pixelToDp(final float px)  {
+        return  (int) (px / (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
     }
 
-    public static void setTooltip(final View view, final String text) {
+    public static void setTooltip(final View view, final TextParam text) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            view.setTooltipText(text);
+            view.setTooltipText(text.getText(view.getContext()));
         }
     }
 
@@ -172,44 +170,40 @@ public class ViewUtils {
         return viewGroup;
     }
 
-    public static  CheckBox addCheckboxItem(final Activity activity, final ViewGroup viewGroup, @StringRes final int textId, final int iconId, @StringRes final int infoTextId) {
-        return addCheckboxItem(activity, viewGroup, activity.getString(textId), iconId, infoTextId);
+    public static CheckBox addCheckboxItem(final Activity activity, final ViewGroup viewGroup, final TextParam text, final int iconId) {
+        return addCheckboxItem(activity, viewGroup, text, iconId, null);
     }
 
-    public static CheckBox addCheckboxItem(final Activity activity, final ViewGroup viewGroup, @StringRes final int textId, final int iconId) {
-        return addCheckboxItem(activity, viewGroup, textId, iconId, 0);
-    }
+    public static CheckBox addCheckboxItem(final Activity activity, @NonNull final ViewGroup viewGroup, final TextParam text, final int iconId, final TextParam infoText) {
 
-    public static CheckBox addCheckboxItem(final Activity activity, @NonNull final ViewGroup viewGroup, final String text, final int iconId, @StringRes final int infoTextId) {
-
-        final ImmutablePair<View, CheckBox> ip = createCheckboxItem(activity, viewGroup, text, ImageParam.id(iconId), infoTextId);
+        final ImmutablePair<View, CheckBox> ip = createCheckboxItem(activity, viewGroup, text, ImageParam.id(iconId), infoText);
         viewGroup.addView(ip.left);
         return ip.right;
     }
 
-    public static TextView createTextItem(final Context ctx, @StyleRes final int styleId, @StringRes final int textId) {
+    public static TextView createTextItem(final Context ctx, @StyleRes final int styleId, final TextParam text) {
         final TextView tv = new TextView(wrap(ctx), null, 0, styleId);
-        tv.setText(textId);
+        text.applyTo(tv);
         return tv;
     }
 
-    public static Button createButton(final Context context, @Nullable final ViewGroup root, @StringRes final int textId) {
+    public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text) {
         final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(R.layout.button_view, root, false);
-        button.setText(textId);
+        text.applyTo(button);
         return button;
     }
 
-    public static ImmutablePair<View, CheckBox> createCheckboxItem(final Activity activity, @Nullable final ViewGroup context, final String text, final ImageParam icon, @StringRes final int infoTextId) {
+    public static ImmutablePair<View, CheckBox> createCheckboxItem(final Activity activity, @Nullable final ViewGroup context, final TextParam text, final ImageParam icon, final TextParam infoText) {
 
         final View itemView = LayoutInflater.from(context == null ? activity : context.getContext()).inflate(R.layout.checkbox_item, context, false);
         final CheckboxItemBinding itemBinding = CheckboxItemBinding.bind(itemView);
-        itemBinding.itemText.setText(text);
+        text.applyTo(itemBinding.itemText);
         if (icon != null) {
             icon.apply(itemBinding.itemIcon);
         }
-        if (infoTextId != 0) {
+        if (infoText != null) {
             itemBinding.itemInfo.setVisibility(View.VISIBLE);
-            itemBinding.itemInfo.setOnClickListener(v -> Dialogs.message(activity, infoTextId));
+            itemBinding.itemInfo.setOnClickListener(v -> SimpleDialog.of(activity).setMessage(infoText).show());
         }
         itemBinding.itemIcon.setOnClickListener(v -> itemBinding.itemCheckbox.toggle());
         itemBinding.itemText.setOnClickListener(v -> itemBinding.itemCheckbox.toggle());

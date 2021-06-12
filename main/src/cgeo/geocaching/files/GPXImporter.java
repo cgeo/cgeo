@@ -3,7 +3,8 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -223,19 +224,19 @@ public class GPXImporter {
                 case IMPORT_STEP_STATIC_MAPS_SKIPPED:
                     progress.dismiss();
                     disposeProgressHandler();
-                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, res.getString(R.string.gpx_import_static_maps_skipped) + ", " + res.getQuantityString(R.plurals.gpx_import_caches_imported_with_filename, msg.arg1, msg.arg1, msg.obj));
+                    SimpleDialog.of(fromActivity).setTitle(R.string.gpx_import_title_caches_imported).setMessage(TextParam.text(res.getString(R.string.gpx_import_static_maps_skipped) + ", " + res.getQuantityString(R.plurals.gpx_import_caches_imported_with_filename, msg.arg1, msg.arg1, msg.obj))).show();
                     importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED:
                     progress.dismiss();
-                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, res.getQuantityString(R.plurals.gpx_import_caches_imported_with_filename, msg.arg1, msg.arg1, msg.obj));
+                    SimpleDialog.of(fromActivity).setMessage(R.string.gpx_import_title_caches_imported).setMessage(TextParam.text(res.getQuantityString(R.plurals.gpx_import_caches_imported_with_filename, msg.arg1, msg.arg1, msg.obj))).show();
                     importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED_WITH_ERROR:
                     progress.dismiss();
-                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_import_failed, res.getString(msg.arg1) + "\n\n" + msg.obj);
+                    SimpleDialog.of(fromActivity).setMessage(R.string.gpx_import_title_caches_import_failed).setMessage(TextParam.text(res.getString(msg.arg1) + "\n\n" + msg.obj)).show();
                     importFinished();
                     break;
 

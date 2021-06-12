@@ -4,7 +4,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
 import android.app.DownloadManager;
@@ -33,7 +34,7 @@ public class DebugUtils {
         // utility class
     }
 
-    public static void createMemoryDump(@NonNull final Context context) {
+    public static void createMemoryDump(@NonNull final Activity context) {
         Toast.makeText(context, R.string.init_please_wait, Toast.LENGTH_LONG).show();
         final File file = ContentStorage.get().createTempFile();
 
@@ -58,17 +59,14 @@ public class DebugUtils {
         }
         message.append(context.getString(R.string.debug_user_error_explain_options));
 
-        Dialogs.confirmPositiveNegativeNeutral(
-            context,
-            context.getString(R.string.debug_user_error_report_title),
-            message.toString(),
-            context.getString(R.string.about_system_info_send_button),
-            null,
-            context.getString(android.R.string.cancel),
-            (dialog, which) -> createLogcatHelper(context, true, true,
-                errorMsg == null ? null : context.getString(R.string.debug_user_error_report_title) + ": " + errorMsg),
-            null,
-            null);
+        SimpleDialog.of(context)
+            .setTitle(R.string.debug_user_error_report_title)
+            .setMessage(TextParam.text(message.toString()))
+            .setPositiveButton(TextParam.id(R.string.about_system_info_send_button))
+            .confirm(
+                (dialog, which) -> createLogcatHelper(context, true, true, errorMsg == null ? null : context.getString(R.string.debug_user_error_report_title) + ": " + errorMsg),
+                SimpleDialog.DO_NOTHING
+            );
     }
 
     public static void createLogcat(@NonNull final Activity activity) {
@@ -76,16 +74,15 @@ public class DebugUtils {
             // no differentiation possible on older systems, so no need to ask
             createLogcatHelper(activity, true, false, null);
         } else {
-            Dialogs.confirmPositiveNegativeNeutral(
-                    activity,
-                    activity.getString(R.string.about_system_write_logcat),
-                    activity.getString(R.string.about_system_write_logcat_type),
-                    activity.getString(R.string.about_system_write_logcat_type_standard),
-                    null,
-                    activity.getString(R.string.about_system_write_logcat_type_extended),
+            SimpleDialog.of(activity)
+                .setTitle(R.string.about_system_write_logcat)
+                .setMessage(R.string.about_system_write_logcat_type)
+                .setButtons(R.string.about_system_write_logcat_type_standard, 0, R.string.about_system_write_logcat_type_extended)
+                .confirm(
                     (dialog, which) -> createLogcatHelper(activity, false, false, null),
-                    null,
-                    (dialog, which) -> createLogcatHelper(activity, true, false, null));
+                    SimpleDialog.DO_NOTHING,
+                    (dialog, which) -> createLogcatHelper(activity, true, false, null)
+                );
         }
     }
 
@@ -166,7 +163,7 @@ public class DebugUtils {
             }
         }
 
-        Dialogs.messageMarkdown(activity, activity.getString(R.string.debug_current_downloads), sb.toString());
+        SimpleDialog.of(activity).setTitle(R.string.debug_current_downloads).setMessage(TextParam.text(sb.toString()).setMarkdown(true)).show();
     }
 
 
@@ -204,10 +201,16 @@ public class DebugUtils {
                 if (forceEmail) {
                     shareLogfileAsEmail(activity, additionalMessage, result.get());
                 } else {
-                    Dialogs.confirmPositiveNegativeNeutral(activity, activity.getString(R.string.about_system_write_logcat),
-                        String.format(activity.getString(R.string.about_system_write_logcat_success), UriUtils.getLastPathSegment(result.get()), PersistableFolder.LOGFILES.getFolder().toUserDisplayableString()),
-                        activity.getString(android.R.string.ok), null, activity.getString(R.string.about_system_info_send_button),
-                        null, null, (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, result.get()));
+                    SimpleDialog.of(activity)
+                        .setTitle(R.string.about_system_write_logcat)
+                        .setMessage(R.string.about_system_write_logcat_success, UriUtils.getLastPathSegment(result.get()), PersistableFolder.LOGFILES.getFolder().toUserDisplayableString())
+                        .setButtons(0, 0, R.string.about_system_info_send_button)
+                        .confirm(
+                            SimpleDialog.DO_NOTHING,
+                            null,
+                            (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, result.get())
+                        );
+
                 }
             } else {
                 ActivityMixin.showToast(activity, R.string.about_system_write_logcat_error);

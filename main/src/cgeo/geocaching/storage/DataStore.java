@@ -39,7 +39,8 @@ import cgeo.geocaching.search.SearchSuggestionCursor;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.storage.extension.DBDowngradeableVersions;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
@@ -883,7 +884,7 @@ public class DataStore {
         }).subscribeOn(Schedulers.io())).subscribe(success -> {
             dialog.dismiss();
             final String message = success ? fromActivity.getString(R.string.init_dbmove_success) : fromActivity.getString(R.string.init_dbmove_failed);
-            Dialogs.message(fromActivity, R.string.init_dbmove_dbmove, message);
+            SimpleDialog.of(fromActivity).setTitle(R.string.init_dbmove_dbmove).setMessage(TextParam.text(message)).show();
         });
     }
 

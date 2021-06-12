@@ -25,6 +25,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Log;
@@ -494,7 +495,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final ActivityData currentState = getActivityData();
 
         if (currentState != null && isWaypointChanged(currentState)) {
-            Dialogs.confirm(this, R.string.confirm_unsaved_changes_title, R.string.confirm_discard_wp_changes, (dialog, which) -> finish());
+            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_wp_changes).confirm((dialog, which) -> finish());
         } else {
             finish();
         }
@@ -532,7 +533,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             try {
                 bearing = Double.parseDouble(bearingText);
             } catch (final NumberFormatException ignored) {
-                Dialogs.message(this, R.string.err_point_bear_and_dist_title, R.string.err_point_bear_and_dist);
+                SimpleDialog.of(this).setTitle(R.string.err_point_bear_and_dist_title).setMessage(R.string.err_point_bear_and_dist).show();
                 return null;
             }
 

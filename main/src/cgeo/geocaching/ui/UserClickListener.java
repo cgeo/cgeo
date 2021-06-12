@@ -8,6 +8,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
@@ -51,13 +52,13 @@ public abstract class UserClickListener implements View.OnClickListener {
 
         final Resources res = context.getResources();
 
-        final ContextMenuDialog dialog = new ContextMenuDialog(context);
+        final ContextMenuDialog dialog = new ContextMenuDialog((Activity) context);
         dialog.setTitle(res.getString(R.string.user_menu_title) + " " + user.userName);
 
         for (UserAction action : userActions) {
             dialog.addItem(action.displayResourceId, action.iconId, null);
         }
-        dialog.setOnClickListener((d, item) -> userActions.get(item).run(user));
+        dialog.setOnClickAction(pos -> userActions.get(pos).run(user));
         dialog.show();
     }
 

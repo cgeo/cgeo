@@ -8,7 +8,7 @@ import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
@@ -330,7 +330,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         binding.downloaderInfo.setVisibility(showSpinner ? View.VISIBLE : View.GONE);
 
         if (noUpdatesFound) {
-            Dialogs.message(this, R.string.downloadmap_no_updates_found);
+            SimpleDialog.of(this).setMessage(R.string.downloadmap_no_updates_found).show();
             new MapListTask(this, current.mapBase, "").execute();
         }
     }

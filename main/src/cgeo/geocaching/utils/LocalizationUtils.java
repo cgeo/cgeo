@@ -7,12 +7,14 @@ import cgeo.geocaching.storage.PersistableFolder;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.PluralsRes;
 import androidx.annotation.StringRes;
 
+import java.util.IllegalFormatException;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
@@ -45,13 +47,18 @@ public final class LocalizationUtils {
         if (APPLICATION_CONTEXT == null) {
             return "(NoCtx)" + (fallback == null ? "" : fallback) + "[" + StringUtils.join(params, ";") + "]";
         }
-        if (resId == 0) {
-            if (fallback == null) {
-                return "--";
+        try {
+            if (resId == 0) {
+                if (fallback == null) {
+                    return "--";
+                }
+                return String.format(fallback, params);
             }
-            return String.format(fallback, params);
+            return APPLICATION_CONTEXT.getString(resId, params);
+        } catch (IllegalFormatException | Resources.NotFoundException e) {
+            Log.w("Problem trying to format '" + resId + "/" + fallback + "' with [" + StringUtils.join(params, ";") + "]", e);
+            return "(noformat)" + fallback;
         }
-        return APPLICATION_CONTEXT.getString(resId, params);
     }
 
     public static String getPlural(@PluralsRes final int pluralId, final int quantity) {

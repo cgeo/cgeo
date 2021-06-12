@@ -18,8 +18,9 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -188,7 +189,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         binding.geocode.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
         binding.trackable.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
 
-        binding.searchFilterInfo.setOnClickListener(v -> Dialogs.messageMarkdown(this, null, this.getString(R.string.search_filter_info_message)));
+        binding.searchFilterInfo.setOnClickListener(v -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show());
     }
 
     private static void setSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {
@@ -240,7 +241,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         final String keyText = StringUtils.trim(binding.keyword.getText().toString());
 
         if (StringUtils.isBlank(keyText)) {
-            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_keyword);
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_keyword).show();
             return;
         }
 
@@ -251,7 +252,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         final String addText = StringUtils.trim(binding.address.getText().toString());
 
         if (StringUtils.isBlank(addText)) {
-            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_address);
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_address).show();
             return;
         }
 
@@ -264,7 +265,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         final String usernameText = StringUtils.trim(binding.finder.getText().toString());
 
         if (StringUtils.isBlank(usernameText)) {
-            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_user);
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_user).show();
             return;
         }
 
@@ -279,7 +280,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         final String usernameText = StringUtils.trimToEmpty(userName);
 
         if (StringUtils.isBlank(usernameText)) {
-            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_user);
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_user).show();
             return;
         }
 
@@ -306,7 +307,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         final String geocodeText = StringUtils.trimToEmpty(binding.geocode.getText().toString());
 
         if (StringUtils.isBlank(geocodeText) || geocodeText.equalsIgnoreCase("GC")) {
-            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_gccode);
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_gccode).show();
             return;
         }
 
@@ -321,7 +322,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         final String trackableText = StringUtils.trimToEmpty(binding.trackable.getText().toString());
 
         if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
-            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_tb);
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_tb).show();
             return;
         }
 

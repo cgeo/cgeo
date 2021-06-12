@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.SettingsUtils;
 import static cgeo.geocaching.utils.SettingsUtils.getType;
@@ -169,7 +170,7 @@ public class ViewSettingsActivity extends AbstractActivity {
     private void deleteItem(final int position) {
         final KeyValue keyValue = items.get(position);
         final String key = keyValue.key;
-        Dialogs.confirm(this, R.string.delete_setting, String.format(getString(R.string.delete_setting_warning), key), (dialog, which) -> {
+        SimpleDialog.of(this).setTitle(R.string.delete_setting).setMessage(R.string.delete_setting_warning, key).confirm((dialog, which) -> {
             final SharedPreferences.Editor editor = prefs.edit();
             editor.remove(key);
             editor.apply();
@@ -302,7 +303,7 @@ public class ViewSettingsActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int itemId = item.getItemId();
         if (itemId == R.id.view_settings_edit && !editMode) {
-            Dialogs.confirm(this, R.string.activate_editmode_title, R.string.activate_editmode_warning, (dialog, which) -> {
+            SimpleDialog.of(this).setTitle(R.string.activate_editmode_title).setMessage(R.string.activate_editmode_warning).confirm((dialog, which) -> {
                 editMode = true;
                 invalidateOptionsMenu();
                 debugAdapter.notifyDataSetChanged();

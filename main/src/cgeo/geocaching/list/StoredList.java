@@ -5,7 +5,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -108,6 +110,7 @@ public final class StoredList extends AbstractList {
             }
 
             final Activity activity = activityRef.get();
+
             final AlertDialog.Builder builder = Dialogs.newBuilder(activity, R.style.cgeo_compactDialogs);
             builder.setTitle(res.getString(titleId));
             builder.setMultiChoiceItems(listTitles, selectedItems, new MultiChoiceClickListener(lists, selectedListIds));
@@ -247,7 +250,8 @@ public final class StoredList extends AbstractList {
             if (activity == null) {
                 return;
             }
-            Dialogs.input(activity, dialogTitle, defaultValue, buttonTitle, input -> {
+            SimpleDialog.of(activity).setTitle(dialogTitle).setPositiveButton(TextParam.id(buttonTitle))
+                .input(-1, defaultValue, null, input -> {
                 if (StringUtils.isNotBlank(input)) {
                     runnable.call(input);
                 }

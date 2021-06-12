@@ -6,9 +6,11 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.ShareBroadcastReceiver;
 import cgeo.geocaching.settings.StartWebviewActivity;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import static cgeo.geocaching.utils.ProcessUtils.CHROME_PACKAGE_NAME;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -47,8 +49,10 @@ public class ShareUtils {
     /**
      * Standard message box + additional share button for file sharing
      */
-    public static void shareOrDismissDialog(final Context context, @NonNull final Uri uri, @NonNull final String mimeType, @StringRes final int title, final String msg) {
-        Dialogs.messageNeutral(context, context.getString(title), msg, R.string.cache_share_field,
+    public static void shareOrDismissDialog(final Activity context, @NonNull final Uri uri, @NonNull final String mimeType, @StringRes final int title, final String msg) {
+        SimpleDialog.of(context).setTitle(title).setMessage(TextParam.text(msg))
+            .setButtons(0, 0, R.string.cache_share_field)
+            .show(SimpleDialog.DO_NOTHING, null,
             (dialog, which) -> {
                 final Intent intent = createShareIntentInternal(context, mimeType, null, msg, uri, null);
                 shareInternal(context, intent, title);

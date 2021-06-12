@@ -234,6 +234,7 @@
         <item name="android:autoText">true</item>
         <item name="android:gravity">top|left</item>
         <item name="android:capitalize">none</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="edittext_full" parent="edittext">

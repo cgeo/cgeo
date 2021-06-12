@@ -75,10 +75,12 @@ import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.NavigationActionProvider;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -739,7 +741,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }
             }.execute();
         } else if (menuItem == R.id.menu_clear_goto_history) {
-            Dialogs.confirm(this, R.string.clear_goto_history_title, R.string.clear_goto_history, (dialog, which) -> AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::clearGotoHistory, () -> {
+            SimpleDialog.of(this).setTitle(R.string.clear_goto_history_title).setMessage(R.string.clear_goto_history).confirm((dialog, which) -> AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::clearGotoHistory, () -> {
                 cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
                 notifyDataSetChanged();
             }));
@@ -774,7 +776,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void ignoreCache() {
-        Dialogs.confirm(this, R.string.ignore_confirm_title, R.string.ignore_confirm_message, (dialog, which) -> {
+        SimpleDialog.of(this).setTitle(R.string.ignore_confirm_title).setMessage(R.string.ignore_confirm_message).confirm((dialog, which) -> {
             AndroidRxUtils.networkScheduler.scheduleDirect(() -> ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache));
             // For consistency, remove also the local cache immediately from memory cache and database
             if (cache.isOffline()) {
@@ -841,10 +843,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     final String toastPrefix = error != StatusCode.CACHE_NOT_FOUND ? res.getString(R.string.err_dwld_details_failed) + " " : "";
 
                     if (error == StatusCode.PREMIUM_ONLY) {
-                        Dialogs.confirm(activity, R.string.cache_status_premium, R.string.err_detail_premium_log_found, R.string.cache_menu_visit, (dialog, which) -> {
+                        SimpleDialog.of(activity).setTitle(R.string.cache_status_premium).setMessage(R.string.err_detail_premium_log_found).setPositiveButton(TextParam.id(R.string.cache_menu_visit)).confirm((dialog, which) -> {
                             activity.startActivity(LogCacheActivity.getLogCacheIntent(activity, null, activity.geocode));
                             finishActivity();
-                        }, dialog -> finishActivity());
+                        }, (d, i) -> finishActivity());
 
                         dismissProgress();
 
@@ -1038,7 +1040,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (!cache.isPreventWaypointsFromNote()) {
                 info += "\n\n" + getString(R.string.cache_delete_userdefined_waypoints_note);
             }
-            Dialogs.confirm(this, getString(R.string.cache_delete_userdefined_waypoints), info, (dialog, which) -> {
+            SimpleDialog.of(this).setTitle(R.string.cache_delete_userdefined_waypoints).setMessage(TextParam.text(info)).confirm((dialog, which) -> {
                 for (Waypoint waypoint : new LinkedList<>(cache.getWaypoints())) {
                     if (waypoint.isUserDefined()) {
                         cache.deleteWaypoint(waypoint);
@@ -1815,7 +1817,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private void warnPersonalNoteExceedsLimit(final CacheDetailActivity activity) {
-            Dialogs.confirm(activity, R.string.cache_personal_note_limit, getString(R.string.cache_personal_note_truncation, maxPersonalNotesChars),
+            SimpleDialog.of(activity).setTitle(R.string.cache_personal_note_limit).setMessage(R.string.cache_personal_note_truncation, maxPersonalNotesChars).confirm(
                     (dialog, which) -> {
                         dialog.dismiss();
                         uploadPersonalNote(activity);
@@ -2049,7 +2051,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             adapter.notifyDataSetChanged();
                             activity.reinitializePage(Page.WAYPOINTS.id);
                             if (oldWaypoint.isUserDefined()) {
-                                Dialogs.confirmYesNo((Activity) v.getContext(), R.string.cache_waypoints_add_fromclipboard, R.string.cache_waypoints_remove_original_waypoint, (dialog, which) -> {
+                                SimpleDialog.of((Activity) v.getContext()).setTitle(R.string.cache_waypoints_add_fromclipboard).setMessage(R.string.cache_waypoints_remove_original_waypoint).confirm((dialog, which) -> {
                                     DataStore.deleteWaypoint(oldWaypoint.getId());
                                     ClipboardUtils.clearClipboard();
                                 });

@@ -4,7 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.downloader.ReceiveDownloadService;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -42,7 +42,7 @@ public class HandleLocalFilesActivity extends AbstractActivity {
                 break;
         }
         if (!finished) {
-            Dialogs.message(this, R.string.localfile_title, R.string.localfile_cannot_handle, (dialog, button) -> finish());
+            SimpleDialog.of(this).setTitle(R.string.localfile_title).setMessage(R.string.localfile_cannot_handle).show((dialog, button) -> finish());
         }
     }
 
