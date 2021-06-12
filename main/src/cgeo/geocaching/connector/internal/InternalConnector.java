@@ -36,6 +36,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class InternalConnector extends AbstractConnector implements ISearchByGeocode {
 
@@ -116,6 +117,12 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     @Override
     public boolean canHandle(@NonNull final String geocode) {
         return PATTERN_GEOCODE.matcher(geocode).matches();
+    }
+
+    @NotNull
+    @Override
+    public String[] getGeocodeSqlLikeExpressions() {
+        return new String[]{PREFIX + "%"};
     }
 
     @Override

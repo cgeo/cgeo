@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -15,6 +16,7 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
+import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
@@ -134,19 +136,22 @@ public class GCMap {
     }
 
     @NonNull
-    public static SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
+    public static SearchResult searchByFilter(@NonNull final GeocacheFilter filter, final IConnector connector) {
         final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
         search.setOrigin(Sensors.getInstance().currentGeo().getCoords());
         search.setPage(200, 0);
 
         for (BaseGeocacheFilter baseFilter: filter.getAndChainIfPossible()) {
+            if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
+                return new SearchResult(); //no need to search if connector is filtered out itself
+            }
             fillForBasicFilter(baseFilter, search);
         }
 
         return GCWebAPI.searchCaches(search);
     }
 
-    private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
+    private static boolean fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
         switch (basicFilter.getType()) {
             case TYPE:
                 search.addCacheTypes(((TypeGeocacheFilter) basicFilter).getRawValues());
@@ -205,5 +210,6 @@ public class GCMap {
             default:
                 break;
         }
+        return true;
     }
  }

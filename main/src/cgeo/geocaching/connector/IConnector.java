@@ -15,7 +15,7 @@ import java.util.Set;
 
 public interface IConnector {
     /**
-     * get name for display (currently only used in links)
+     * get name for display. Also used for unique identification of this connector, so make sure its uniqueness!
      *
      */
     @NonNull
@@ -29,6 +29,13 @@ public interface IConnector {
      * @return return {@code true}, if this connector is responsible for the cache
      */
     boolean canHandle(@NonNull String geocode);
+
+    /**
+     * @return a couple of SQL-Like expression, applicably to a SQL geocode column to filter caches handled by this connector
+     * (e.g. something like 'GC%')
+     */
+    @NonNull
+    String[] getGeocodeSqlLikeExpressions();
 
     /**
      * Return a new geocodes list, with only geocodes for which this connector is responsible.

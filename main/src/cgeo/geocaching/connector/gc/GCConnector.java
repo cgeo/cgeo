@@ -56,6 +56,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability {
 
@@ -142,6 +143,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public boolean canHandle(@NonNull final String geocode) {
         return PATTERN_GC_CODE.matcher(geocode).matches();
     }
+
+    @NotNull
+    @Override
+    public String[] getGeocodeSqlLikeExpressions() {
+        return new String[]{"GC%"};
+    }
+
 
     @Override
     @NonNull
@@ -273,7 +281,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
-        return GCMap.searchByFilter(filter);
+        return GCMap.searchByFilter(filter, this);
     }
 
     @Override
