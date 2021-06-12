@@ -2,6 +2,8 @@ package cgeo.geocaching.files;
 
 import android.sax.Element;
 
+import androidx.annotation.NonNull;
+
 public class GPX10Parser extends GPXParser {
 
     public GPX10Parser(final int listIdIn) {
@@ -9,8 +11,24 @@ public class GPX10Parser extends GPXParser {
     }
 
     @Override
-    protected Element getCacheParent(final Element waypoint) {
+    protected Element getNodeForExtension(@NonNull final Element waypoint) {
         return waypoint;
     }
 
+    @Override
+    protected void registerUrlAndUrlName(@NonNull final Element element) {
+        element.getChild(namespace, "url").setEndTextElementListener(body -> {
+            setUrl(body);
+        });
+        element.getChild(namespace, "urlname").setEndTextElementListener(body -> {
+            setUrlName(body);
+        });
+    }
+
+    @Override
+    protected void registerScriptUrl(@NonNull final Element element) {
+        element.getChild(namespace, "url").setEndTextElementListener(body -> {
+            scriptUrl = body;
+        });
+    }
 }

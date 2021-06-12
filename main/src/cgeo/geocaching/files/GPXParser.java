@@ -79,35 +79,35 @@ abstract class GPXParser extends FileParser {
      * supported groundspeak extensions of the GPX format
      */
     private static final String[] GROUNDSPEAK_NAMESPACE = {
-            "http://www.groundspeak.com/cache/1/1", // PQ 1.1
-            "http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
-            "http://www.groundspeak.com/cache/1/0", // PQ 1.0
+        "http://www.groundspeak.com/cache/1/1", // PQ 1.1
+        "http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
+        "http://www.groundspeak.com/cache/1/0", // PQ 1.0
     };
 
     /**
      * supported GSAK extension of the GPX format
      */
     private static final String[] GSAK_NS = {
-            "http://www.gsak.net/xmlv1/1",
-            "http://www.gsak.net/xmlv1/2",
-            "http://www.gsak.net/xmlv1/3",
-            "http://www.gsak.net/xmlv1/4",
-            "http://www.gsak.net/xmlv1/5",
-            "http://www.gsak.net/xmlv1/6"
+        "http://www.gsak.net/xmlv1/1",
+        "http://www.gsak.net/xmlv1/2",
+        "http://www.gsak.net/xmlv1/3",
+        "http://www.gsak.net/xmlv1/4",
+        "http://www.gsak.net/xmlv1/5",
+        "http://www.gsak.net/xmlv1/6"
     };
 
     /**
      * c:geo extensions of the gpx format
      */
     private static final String[] CGEO_NS = {
-            "http://www.cgeo.org/wptext/1/0"
+        "http://www.cgeo.org/wptext/1/0"
     };
 
     /**
      * opencaching extensions of the gpx format
      */
     private static final String[] OPENCACHING_NS = {
-            "https://github.com/opencaching/gpx-extension-v1"
+        "https://github.com/opencaching/gpx-extension-v1"
     };
 
     private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
@@ -208,7 +208,7 @@ abstract class GPXParser extends FileParser {
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
 
-        root.getChild(namespace, "url").setEndTextElementListener(body -> scriptUrl = body);
+        registerScriptUrl(root);
 
         root.getChild(namespace, "creator").setEndTextElementListener(body -> scriptUrl = body);
 
@@ -221,7 +221,7 @@ abstract class GPXParser extends FileParser {
                     // latitude and longitude are required attributes, but we export them (0/0) for waypoints without coordinates
                     if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
                         final Geopoint latLon = new Geopoint(Double.parseDouble(latitude),
-                                Double.parseDouble(longitude));
+                            Double.parseDouble(longitude));
                         final Geopoint pt0 = new Geopoint(0, 0);
                         if (!latLon.equals(pt0)) {
                             cache.setCoords(latLon);
@@ -400,235 +400,17 @@ abstract class GPXParser extends FileParser {
             }
         });
 
-        // waypoint.url
-        waypoint.getChild(namespace, "url").setEndTextElementListener(url -> {
-            final MatcherWrapper matcher = new MatcherWrapper(PATTERN_GUID, url);
-            if (matcher.matches()) {
-                final String guid = matcher.group(1);
-                if (StringUtils.isNotBlank(guid)) {
-                    cache.setGuid(guid);
-                }
-            }
-            final MatcherWrapper matcherCode = new MatcherWrapper(PATTERN_URL_GEOCODE, url);
-            if (matcherCode.matches()) {
-                final String geocode = matcherCode.group(1);
-                cache.setGeocode(geocode);
-            }
-        });
+        // waypoint.url and waypoint.urlname (name for waymarks)
+        registerUrlAndUrlName(waypoint);
 
-        // waypoint.urlname (name for waymarks)
-        waypoint.getChild(namespace, "urlname").setEndTextElementListener(urlName -> {
-            if (cache.getName().equals(cache.getGeocode()) && StringUtils.startsWith(cache.getGeocode(), "WM")) {
-                cache.setName(StringUtils.trim(urlName));
-            }
-        });
-
-        // for GPX 1.0, cache info comes from waypoint node (so called private children,
+        // for GPX 1.0, cache info comes from waypoint node (so called private children)
         // for GPX 1.1 from extensions node
-        final Element cacheParent = getCacheParent(waypoint);
-
-        registerGsakExtensions(cacheParent);
-        registerTerraCachingExtensions(cacheParent);
-        registerCgeoExtensions(cacheParent);
-        registerOpenCachingExtensions(cacheParent);
-
-        // 3 different versions of the GC schema
-        for (final String nsGC : GROUNDSPEAK_NAMESPACE) {
-            // waypoints.cache
-            final Element gcCache = cacheParent.getChild(nsGC, "cache");
-
-            gcCache.setStartElementListener(attrs -> {
-                try {
-                    if (attrs.getIndex("id") > -1) {
-                        cache.setCacheId(attrs.getValue("id"));
-                    }
-                    if (attrs.getIndex("archived") > -1) {
-                        cache.setArchived(attrs.getValue("archived").equalsIgnoreCase("true"));
-                    }
-                    if (attrs.getIndex("available") > -1) {
-                        cache.setDisabled(!attrs.getValue("available").equalsIgnoreCase("true"));
-                    }
-                } catch (final RuntimeException e) {
-                    Log.w("Failed to parse cache attributes", e);
-                }
-            });
-
-            // waypoint.cache.getName()
-            gcCache.getChild(nsGC, "name").setEndTextElementListener(cacheName -> cache.setName(validate(cacheName)));
-
-            // waypoint.cache.getOwner()
-            gcCache.getChild(nsGC, "owner").setEndTextElementListener(ownerUserId -> cache.setOwnerUserId(validate(ownerUserId)));
-
-            // waypoint.cache.getOwner()
-            gcCache.getChild(nsGC, "placed_by").setEndTextElementListener(ownerDisplayName -> cache.setOwnerDisplayName(validate(ownerDisplayName)));
-
-            // waypoint.cache.getType()
-            gcCache.getChild(nsGC, "type").setEndTextElementListener(bodyIn -> {
-                String body = validate(bodyIn);
-                // lab caches wrongly contain a prefix in the type
-                if (body.startsWith("Geocache|")) {
-                    body = StringUtils.substringAfter(body, "Geocache|").trim();
-                }
-                cache.setType(CacheType.getByPattern(body));
-            });
-
-            // waypoint.cache.container
-            gcCache.getChild(nsGC, "container").setEndTextElementListener(body -> cache.setSize(CacheSize.getById(validate(body))));
-
-            // waypoint.cache.getAttributes()
-            // @see issue #299
-
-            // <groundspeak:attributes>
-            //   <groundspeak:attribute id="32" inc="1">Bicycles</groundspeak:attribute>
-            //   <groundspeak:attribute id="13" inc="1">Available at all times</groundspeak:attribute>
-            // where inc = 0 => _no, inc = 1 => _yes
-            // IDs see array CACHE_ATTRIBUTES
-            final Element gcAttributes = gcCache.getChild(nsGC, "attributes");
-
-            // waypoint.cache.attribute
-            final Element gcAttribute = gcAttributes.getChild(nsGC, "attribute");
-
-            gcAttribute.setStartElementListener(attrs -> {
-                try {
-                    if (attrs.getIndex("id") > -1 && attrs.getIndex("inc") > -1) {
-                        final int attributeId = Integer.parseInt(attrs.getValue("id"));
-                        final boolean attributeActive = Integer.parseInt(attrs.getValue("inc")) != 0;
-                        final CacheAttribute attribute = CacheAttribute.getById(attributeId);
-                        if (attribute != null) {
-                            cache.getAttributes().add(attribute.getValue(attributeActive));
-                        }
-                    }
-                } catch (final NumberFormatException ignored) {
-                    // nothing
-                }
-            });
-
-            // waypoint.cache.getDifficulty()
-            gcCache.getChild(nsGC, "difficulty").setEndTextElementListener(body -> {
-                try {
-                    cache.setDifficulty(Float.parseFloat(body));
-                } catch (final NumberFormatException e) {
-                    Log.w("Failed to parse difficulty", e);
-                }
-            });
-
-            // waypoint.cache.getTerrain()
-            gcCache.getChild(nsGC, "terrain").setEndTextElementListener(body -> {
-                try {
-                    cache.setTerrain(Float.parseFloat(body));
-                } catch (final NumberFormatException e) {
-                    Log.w("Failed to parse terrain", e);
-                }
-            });
-
-            // waypoint.cache.country
-            gcCache.getChild(nsGC, "country").setEndTextElementListener(country -> {
-                if (StringUtils.isBlank(cache.getLocation())) {
-                    cache.setLocation(validate(country));
-                } else {
-                    cache.setLocation(cache.getLocation() + ", " + country.trim());
-                }
-            });
-
-            // waypoint.cache.state
-            gcCache.getChild(nsGC, "state").setEndTextElementListener(state -> {
-                final String trimmedState = state.trim();
-                if (StringUtils.isNotEmpty(trimmedState)) { // state can be completely empty
-                    if (StringUtils.isBlank(cache.getLocation())) {
-                        cache.setLocation(validate(state));
-                    } else {
-                        cache.setLocation(trimmedState + ", " + cache.getLocation());
-                    }
-                }
-            });
-
-            // waypoint.cache.encoded_hints
-            gcCache.getChild(nsGC, "encoded_hints").setEndTextElementListener(encoded -> cache.setHint(validate(encoded)));
-
-            gcCache.getChild(nsGC, "short_description").setEndTextElementListener(shortDesc -> cache.setShortDescription(validate(shortDesc)));
-
-            gcCache.getChild(nsGC, "long_description").setEndTextElementListener(desc -> cache.setDescription(validate(desc)));
-
-            // waypoint.cache.travelbugs
-            final Element gcTBs = gcCache.getChild(nsGC, "travelbugs");
-
-            // waypoint.cache.travelbug
-            final Element gcTB = gcTBs.getChild(nsGC, "travelbug");
-
-            // waypoint.cache.travelbugs.travelbug
-            gcTB.setStartElementListener(attrs -> {
-                trackable = new Trackable();
-
-                try {
-                    if (attrs.getIndex("ref") > -1) {
-                        trackable.setGeocode(attrs.getValue("ref"));
-                    }
-                } catch (final RuntimeException ignored) {
-                    // nothing
-                }
-            });
-
-            gcTB.setEndElementListener(() -> {
-                if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
-                    cache.addInventoryItem(trackable);
-                }
-            });
-
-            // waypoint.cache.travelbugs.travelbug.getName()
-            gcTB.getChild(nsGC, "name").setEndTextElementListener(tbName -> trackable.setName(validate(tbName)));
-
-            // waypoint.cache.logs
-            final Element gcLogs = gcCache.getChild(nsGC, "logs");
-
-            // waypoint.cache.log
-            final Element gcLog = gcLogs.getChild(nsGC, "log");
-
-            gcLog.setStartElementListener(attrs -> {
-                logBuilder = new LogEntry.Builder();
-
-                try {
-                    if (attrs.getIndex("id") > -1) {
-                        logBuilder.setId(Integer.parseInt(attrs.getValue("id")));
-                    }
-                } catch (final NumberFormatException ignored) {
-                    // nothing
-                }
-            });
-
-            gcLog.setEndElementListener(() -> {
-                final LogEntry log = logBuilder.build();
-                if (log.getType() != LogType.UNKNOWN) {
-                    if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
-                        final IConnector connector = ConnectorFactory.getConnector(cache);
-                        if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
-                            cache.setFound(true);
-                            cache.setVisitedDate(log.date);
-                        }
-                    }
-                    logs.add(log);
-                }
-            });
-
-            // waypoint.cache.logs.log.date
-            gcLog.getChild(nsGC, "date").setEndTextElementListener(body -> {
-                try {
-                    logBuilder.setDate(parseDate(body).getTime());
-                } catch (final Exception e) {
-                    Log.w("Failed to parse log date", e);
-                }
-            });
-
-            // waypoint.cache.logs.log.getType()
-            gcLog.getChild(nsGC, "type").setEndTextElementListener(body -> {
-                final String logType = validate(body);
-                logBuilder.setLogType(LogType.getByType(logType));
-            });
-
-            // waypoint.cache.logs.log.finder
-            gcLog.getChild(nsGC, "finder").setEndTextElementListener(finderName -> logBuilder.setAuthor(validate(finderName)));
-
-            // waypoint.cache.logs.log.text
-            gcLog.getChild(nsGC, "text").setEndTextElementListener(logText -> logBuilder.setLog(validate(logText)));
+        final Element extensionNode = getNodeForExtension(waypoint);
+        if (extensionNode != null) {
+            registerExtensions(extensionNode);
+        } else {
+            //  only to support other formats for GPX1.1, standard is extension
+            registerExtensions(waypoint);
         }
 
         try {
@@ -641,9 +423,246 @@ abstract class GPXParser extends FileParser {
         }
     }
 
+    private void registerExtensions(@NonNull final Element cacheParent) {
+        registerGsakExtensions(cacheParent);
+        registerTerraCachingExtensions(cacheParent);
+        registerCgeoExtensions(cacheParent);
+        registerOpenCachingExtensions(cacheParent);
+        registerGroundspeakExtensions(cacheParent);
+    }
+
+    /**
+     * Add listeners for groundspeak extensions
+     */
+    private void registerGroundspeakExtensions(final Element cacheParent) {
+        // 3 different versions of the GC schema
+        for (final String nsGC : GROUNDSPEAK_NAMESPACE) {
+            // waypoints.cache
+            final Element gcCache = cacheParent.getChild(nsGC, "cache");
+
+            registerGsakExtensionsCache(nsGC, gcCache);
+            registerGsakExtensionsAttribute(nsGC, gcCache);
+            registerGsakExtensionsTb(nsGC, gcCache);
+            registerGsakExtensionsLog(nsGC, gcCache);
+        }
+    }
+
+    /**
+     * Add listeners for Groundspeak cache
+     */
+    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    private void registerGsakExtensionsCache(final String nsGC, final Element gcCache) {
+        gcCache.setStartElementListener(attrs -> {
+            try {
+                if (attrs.getIndex("id") > -1) {
+                    cache.setCacheId(attrs.getValue("id"));
+                }
+                if (attrs.getIndex("archived") > -1) {
+                    cache.setArchived(attrs.getValue("archived").equalsIgnoreCase("true"));
+                }
+                if (attrs.getIndex("available") > -1) {
+                    cache.setDisabled(!attrs.getValue("available").equalsIgnoreCase("true"));
+                }
+            } catch (final RuntimeException e) {
+                Log.w("Failed to parse cache attributes", e);
+            }
+        });
+
+        // waypoint.cache.getName()
+        gcCache.getChild(nsGC, "name").setEndTextElementListener(cacheName -> cache.setName(validate(cacheName)));
+
+        // waypoint.cache.getOwner()
+        gcCache.getChild(nsGC, "owner").setEndTextElementListener(ownerUserId -> cache.setOwnerUserId(validate(ownerUserId)));
+
+        // waypoint.cache.getOwner()
+        gcCache.getChild(nsGC, "placed_by").setEndTextElementListener(ownerDisplayName -> cache.setOwnerDisplayName(validate(ownerDisplayName)));
+
+        // waypoint.cache.getType()
+        gcCache.getChild(nsGC, "type").setEndTextElementListener(bodyIn -> {
+            String body = validate(bodyIn);
+            // lab caches wrongly contain a prefix in the type
+            if (body.startsWith("Geocache|")) {
+                body = StringUtils.substringAfter(body, "Geocache|").trim();
+            }
+            cache.setType(CacheType.getByPattern(body));
+        });
+
+        // waypoint.cache.container
+        gcCache.getChild(nsGC, "container").setEndTextElementListener(body -> cache.setSize(CacheSize.getById(validate(body))));
+
+        // waypoint.cache.getDifficulty()
+        gcCache.getChild(nsGC, "difficulty").setEndTextElementListener(body -> {
+            try {
+                cache.setDifficulty(Float.parseFloat(body));
+            } catch (final NumberFormatException e) {
+                Log.w("Failed to parse difficulty", e);
+            }
+        });
+
+        // waypoint.cache.getTerrain()
+        gcCache.getChild(nsGC, "terrain").setEndTextElementListener(body -> {
+            try {
+                cache.setTerrain(Float.parseFloat(body));
+            } catch (final NumberFormatException e) {
+                Log.w("Failed to parse terrain", e);
+            }
+        });
+
+        // waypoint.cache.country
+        gcCache.getChild(nsGC, "country").setEndTextElementListener(country -> {
+            if (StringUtils.isBlank(cache.getLocation())) {
+                cache.setLocation(validate(country));
+            } else {
+                cache.setLocation(cache.getLocation() + ", " + country.trim());
+            }
+        });
+
+        // waypoint.cache.state
+        gcCache.getChild(nsGC, "state").setEndTextElementListener(state -> {
+            final String trimmedState = state.trim();
+            if (StringUtils.isNotEmpty(trimmedState)) { // state can be completely empty
+                if (StringUtils.isBlank(cache.getLocation())) {
+                    cache.setLocation(validate(state));
+                } else {
+                    cache.setLocation(trimmedState + ", " + cache.getLocation());
+                }
+            }
+        });
+
+        // waypoint.cache.encoded_hints
+        gcCache.getChild(nsGC, "encoded_hints").setEndTextElementListener(encoded -> cache.setHint(validate(encoded)));
+
+        gcCache.getChild(nsGC, "short_description").setEndTextElementListener(shortDesc -> cache.setShortDescription(validate(shortDesc)));
+
+        gcCache.getChild(nsGC, "long_description").setEndTextElementListener(desc -> cache.setDescription(validate(desc)));
+    }
+
+     /**
+      * Add listeners for Groundspeak attributes
+      */
+    private void registerGsakExtensionsAttribute(final String nsGC, final Element gcCache) {
+        // waypoint.cache.getAttributes()
+        // @see issue #299
+
+        // <groundspeak:attributes>
+        //   <groundspeak:attribute id="32" inc="1">Bicycles</groundspeak:attribute>
+        //   <groundspeak:attribute id="13" inc="1">Available at all times</groundspeak:attribute>
+        // where inc = 0 => _no, inc = 1 => _yes
+        // IDs see array CACHE_ATTRIBUTES
+        final Element gcAttributes = gcCache.getChild(nsGC, "attributes");
+
+        // waypoint.cache.attribute
+        final Element gcAttribute = gcAttributes.getChild(nsGC, "attribute");
+
+        gcAttribute.setStartElementListener(attrs -> {
+            try {
+                if (attrs.getIndex("id") > -1 && attrs.getIndex("inc") > -1) {
+                    final int attributeId = Integer.parseInt(attrs.getValue("id"));
+                    final boolean attributeActive = Integer.parseInt(attrs.getValue("inc")) != 0;
+                    final CacheAttribute attribute = CacheAttribute.getById(attributeId);
+                    if (attribute != null) {
+                        cache.getAttributes().add(attribute.getValue(attributeActive));
+                    }
+                }
+            } catch (final NumberFormatException ignored) {
+                // nothing
+            }
+        });
+    }
+
+    /**
+     * Add listeners for Groundspeak TBs
+     */
+    private void registerGsakExtensionsTb(final String nsGC, final Element gcCache) {
+        // waypoint.cache.travelbugs
+        final Element gcTBs = gcCache.getChild(nsGC, "travelbugs");
+
+        // waypoint.cache.travelbug
+        final Element gcTB = gcTBs.getChild(nsGC, "travelbug");
+
+        // waypoint.cache.travelbugs.travelbug
+        gcTB.setStartElementListener(attrs -> {
+            trackable = new Trackable();
+
+            try {
+                if (attrs.getIndex("ref") > -1) {
+                    trackable.setGeocode(attrs.getValue("ref"));
+                }
+            } catch (final RuntimeException ignored) {
+                // nothing
+            }
+        });
+
+        gcTB.setEndElementListener(() -> {
+            if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
+                cache.addInventoryItem(trackable);
+            }
+        });
+
+        // waypoint.cache.travelbugs.travelbug.getName()
+        gcTB.getChild(nsGC, "name").setEndTextElementListener(tbName -> trackable.setName(validate(tbName)));
+    }
+
+    /**
+     * Add listeners for Groundspeak logs
+     */
+    private void registerGsakExtensionsLog(final String nsGC, final Element gcCache) {
+        // waypoint.cache.logs
+        final Element gcLogs = gcCache.getChild(nsGC, "logs");
+
+        // waypoint.cache.log
+        final Element gcLog = gcLogs.getChild(nsGC, "log");
+
+        gcLog.setStartElementListener(attrs -> {
+            logBuilder = new LogEntry.Builder();
+
+            try {
+                if (attrs.getIndex("id") > -1) {
+                    logBuilder.setId(Integer.parseInt(attrs.getValue("id")));
+                }
+            } catch (final NumberFormatException ignored) {
+                // nothing
+            }
+        });
+
+        gcLog.setEndElementListener(() -> {
+            final LogEntry log = logBuilder.build();
+            if (log.getType() != LogType.UNKNOWN) {
+                if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
+                    final IConnector connector = ConnectorFactory.getConnector(cache);
+                    if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
+                        cache.setFound(true);
+                        cache.setVisitedDate(log.date);
+                    }
+                }
+                logs.add(log);
+            }
+        });
+
+        // waypoint.cache.logs.log.date
+        gcLog.getChild(nsGC, "date").setEndTextElementListener(body -> {
+            try {
+                logBuilder.setDate(parseDate(body).getTime());
+            } catch (final Exception e) {
+                Log.w("Failed to parse log date", e);
+            }
+        });
+
+        // waypoint.cache.logs.log.getType()
+        gcLog.getChild(nsGC, "type").setEndTextElementListener(body -> {
+            final String logType = validate(body);
+            logBuilder.setLogType(LogType.getByType(logType));
+        });
+
+        // waypoint.cache.logs.log.finder
+        gcLog.getChild(nsGC, "finder").setEndTextElementListener(finderName -> logBuilder.setAuthor(validate(finderName)));
+
+        // waypoint.cache.logs.log.text
+        gcLog.getChild(nsGC, "text").setEndTextElementListener(logText -> logBuilder.setLog(validate(logText)));
+    }
+
     /**
      * Add listeners for GSAK extensions
-     *
      */
     private void registerGsakExtensions(final Element cacheParent) {
         for (final String gsakNamespace : GSAK_NS) {
@@ -717,7 +736,6 @@ abstract class GPXParser extends FileParser {
 
     /**
      * Add listeners for TerraCaching extensions
-     *
      */
     private void registerTerraCachingExtensions(final Element cacheParent) {
         final String terraNamespace = "http://www.TerraCaching.com/GPX/1/0";
@@ -768,7 +786,7 @@ abstract class GPXParser extends FileParser {
         });
 
         terraLog.setEndElementListener(() -> {
-                final LogEntry log = logBuilder.build();
+            final LogEntry log = logBuilder.build();
             if (log.getType() != LogType.UNKNOWN) {
                 if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
                     final IConnector connector = ConnectorFactory.getConnector(cache);
@@ -818,7 +836,6 @@ abstract class GPXParser extends FileParser {
 
     /**
      * Add listeners for c:geo extensions
-     *
      */
     private void registerCgeoExtensions(final Element cacheParent) {
         for (final String cgeoNamespace : CGEO_NS) {
@@ -839,7 +856,6 @@ abstract class GPXParser extends FileParser {
 
     /**
      * Add listeners for opencaching extensions
-     *
      */
     private void registerOpenCachingExtensions(final Element cacheParent) {
         for (final String namespace : OPENCACHING_NS) {
@@ -866,8 +882,7 @@ abstract class GPXParser extends FileParser {
      * Overwrite this method in a GPX parser sub class to modify the {@link Geocache}, after it has been fully parsed
      * from the GPX file and before it gets stored.
      *
-     * @param cache
-     *            currently imported cache
+     * @param cache currently imported cache
      */
     protected void afterParsing(final Geocache cache) {
         if ("GC_WayPoint1".equals(cache.getShortDescription())) {
@@ -878,9 +893,12 @@ abstract class GPXParser extends FileParser {
     /**
      * GPX 1.0 and 1.1 use different XML elements to put the cache into, therefore needs to be overwritten in the
      * version specific subclasses
-     *
      */
-    protected abstract Element getCacheParent(Element waypoint);
+    protected abstract @Nullable Element getNodeForExtension(@NonNull Element waypoint);
+
+    protected abstract void registerUrlAndUrlName(@NonNull Element waypoint);
+
+    protected abstract void registerScriptUrl(@NonNull Element element);
 
     protected static String validate(final String input) {
         if ("nil".equalsIgnoreCase(input)) {
@@ -982,10 +1000,10 @@ abstract class GPXParser extends FileParser {
             return false;
         }
         final boolean valid = (type == null && subtype == null && sym == null)
-                || StringUtils.contains(type, "geocache")
-                || StringUtils.contains(sym, "geocache")
-                || StringUtils.containsIgnoreCase(sym, "waymark")
-                || (StringUtils.containsIgnoreCase(sym, "terracache") && !terraChildWaypoint);
+            || StringUtils.contains(type, "geocache")
+            || StringUtils.contains(sym, "geocache")
+            || StringUtils.containsIgnoreCase(sym, "waymark")
+            || (StringUtils.containsIgnoreCase(sym, "terracache") && !terraChildWaypoint);
         if ("GC_WayPoint1".equals(cache.getShortDescription())) {
             terraChildWaypoint = true;
         }
@@ -1007,5 +1025,33 @@ abstract class GPXParser extends FileParser {
             }
         }
         return cacheForWaypoint;
+    }
+
+    protected void setUrl(final String url) {
+        // try to find guid somewhere else
+        if (StringUtils.isBlank(cache.getGuid()) && url != null) {
+            final MatcherWrapper matcherGuid = new MatcherWrapper(PATTERN_GUID, url);
+            if (matcherGuid.matches()) {
+                final String guid = matcherGuid.group(1);
+                if (StringUtils.isNotBlank(guid)) {
+                    cache.setGuid(guid);
+                }
+            }
+        }
+
+        // try to find geocode somewhere else
+        if (StringUtils.isBlank(cache.getGeocode()) && url != null) {
+            final MatcherWrapper matcherCode = new MatcherWrapper(PATTERN_URL_GEOCODE, url);
+            if (matcherCode.matches()) {
+                final String geocode = matcherCode.group(1);
+                cache.setGeocode(geocode);
+            }
+        }
+    }
+
+    protected void setUrlName(final String urlName) {
+        if (StringUtils.isNotBlank(urlName) && StringUtils.startsWith(cache.getGeocode(), "WM") && cache.getName().equals(cache.getGeocode())) {
+            cache.setName(StringUtils.trim(urlName));
+        }
     }
 }
