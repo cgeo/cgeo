@@ -1142,6 +1142,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache == null) {
                 return;
             }
+            binding.getRoot().setVisibility(View.VISIBLE);
 
             // Reference to the details list and favorite line, so that the helper-method can access them without an additional argument
             final CacheDetailsCreator details = new CacheDetailsCreator(activity, binding.detailsList);
@@ -1643,6 +1644,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache == null) {
                 return;
             }
+            binding.getRoot().setVisibility(View.VISIBLE);
 
             // reset description
             binding.description.setText("");
@@ -1981,6 +1983,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             final ListView v = binding.getRoot();
+            v.setVisibility(View.VISIBLE);
             v.setClickable(true);
 
             // sort waypoints: PP, Sx, FI, OWN
@@ -2180,6 +2183,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache == null) {
                 return;
             }
+            binding.getRoot().setVisibility(View.VISIBLE);
 
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
@@ -2209,6 +2213,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache == null) {
                 return;
             }
+            binding.getRoot().setVisibility(View.VISIBLE);
 
             if (activity.imagesList == null) {
                 activity.imagesList = new ImagesList(activity, cache.getGeocode(), cache);

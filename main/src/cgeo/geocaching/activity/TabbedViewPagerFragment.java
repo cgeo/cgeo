@@ -39,6 +39,7 @@ public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBindi
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         binding = createView(inflater, container, savedInstanceState);
+        binding.getRoot().setVisibility(View.GONE);
         this.container = container;
         synchronized (mutextContentIsUpToDate) {
             contentIsUpToDate = false;

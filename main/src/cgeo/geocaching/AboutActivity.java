@@ -157,6 +157,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             if (activity == null) {
                 return;
             }
+            binding.getRoot().setVisibility(View.VISIBLE);
             binding.aboutVersionString.setText(Version.getVersionName(activity));
             setClickListener(binding.donate, "https://www.cgeo.org");
             if (StringUtils.isNotEmpty(BuildConfig.SPECIAL_BUILD)) {
@@ -205,6 +206,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             if (activity == null) {
                 return;
             }
+            binding.getRoot().setVisibility(View.VISIBLE);
             final Markwon markwon = Markwon.create(activity);
 
             final String changelogMaster = FileUtils.getChangelogMaster(activity);
@@ -233,6 +235,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             if (activity == null) {
                 return;
             }
+            binding.getRoot().setVisibility(View.VISIBLE);
 
             binding.system.setText(R.string.about_system_collecting);
             binding.copy.setEnabled(false);
@@ -266,6 +269,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
         @Override
         public void setContent() {
+            binding.getRoot().setVisibility(View.VISIBLE);
             setClickListener(binding.license, "https://www.apache.org/licenses/LICENSE-2.0.html");
             binding.licenseText.setText(getRawResourceString(R.raw.license));
         }
@@ -300,6 +304,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             if (activity == null) {
                 return;
             }
+            binding.getRoot().setVisibility(View.VISIBLE);
 
             final Markwon markwon = Markwon.create(activity);
 

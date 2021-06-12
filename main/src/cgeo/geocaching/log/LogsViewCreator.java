@@ -53,6 +53,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         if (!isValid()) {
             return;
         }
+        binding.getRoot().setVisibility(View.VISIBLE);
 
         final List<LogEntry> logs = getLogs();
 
