@@ -24,6 +24,7 @@ import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.LogsCountGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
+import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
@@ -279,6 +280,9 @@ final class OkapiClient {
         fillSearchParameterCenter(valueMap, params, null);
 
         for (BaseGeocacheFilter baseFilter: filter.getAndChainIfPossible()) {
+            if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
+                return new ArrayList<>(); //no need to search if connector is filtered out itself
+            }
             fillForBasicFilter(baseFilter, params, valueMap, connector);
         }
 

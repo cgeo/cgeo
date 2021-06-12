@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, IFavoriteCapability, IVotingCapability, IgnoreCapability {
 
@@ -169,6 +170,12 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     public boolean canHandle(@NonNull final String geocode) {
         return StringUtils.startsWithAny(StringUtils.upperCase(geocode), PREFIX_GENERAL, PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST, PREFIX_MYSTERY, PREFIX_MYSTERY_VIRTUAL) && isNumericId(SuConnector.geocodeToId(geocode));
+    }
+
+    @NotNull
+    @Override
+    public String[] getGeocodeSqlLikeExpressions() {
+        return new String[]{PREFIX_GENERAL + "%", PREFIX_TRADITIONAL + "%", PREFIX_MULTISTEP_VIRTUAL + "%", PREFIX_VIRTUAL + "%", PREFIX_MULTISTEP + "%", PREFIX_EVENT + "%", PREFIX_CONTEST + "%", PREFIX_MYSTERY + "%", PREFIX_MYSTERY_VIRTUAL + "%"};
     }
 
     @Override

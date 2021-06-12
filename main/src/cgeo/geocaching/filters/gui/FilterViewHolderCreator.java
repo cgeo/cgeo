@@ -1,6 +1,8 @@
 package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
@@ -8,6 +10,7 @@ import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.LastFoundGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
+import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StoredListGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
@@ -102,6 +105,13 @@ public class FilterViewHolderCreator {
                 break;
             case STORED_LISTS:
                 result = createStoredListFilterViewHolder();
+                break;
+            case ORIGIN:
+                result = new CheckboxFilterViewHolder<>(
+                    ValueGroupFilterAccessor.<IConnector, OriginGeocacheFilter>createForValueGroupFilter()
+                        .setSelectableValues(ConnectorFactory.getConnectors())
+                        .setValueDisplayTextGetter(IConnector::getName)
+                        .setValueDrawableGetter(ct -> ImageParam.id(R.drawable.ic_menu_upload)) , 1, true);
                 break;
             default:
                 result = null;

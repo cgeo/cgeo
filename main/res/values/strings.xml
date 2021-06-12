@@ -501,6 +501,7 @@
     <string name="cache_filter_log_entry">Log Entry</string>
     <string name="cache_filter_location">Location</string>
     <string name="cache_filter_stored_lists">Stored Lists</string>
+    <string name="cache_filter_origin">Origin</string>
 
     <string name="cache_filtergroup_basic">Basic</string>
     <string name="cache_filtergroup_details">Details</string>

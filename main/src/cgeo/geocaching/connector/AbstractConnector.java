@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractConnector implements IConnector {
 
@@ -51,6 +52,12 @@ public abstract class AbstractConnector implements IConnector {
             }
         }
         return strippedList;
+    }
+
+    @NotNull
+    @Override
+    public String[] getGeocodeSqlLikeExpressions() {
+        return new String[]{"%"}; //will match everything
     }
 
     @Override
@@ -338,4 +345,20 @@ public abstract class AbstractConnector implements IConnector {
     public String getCreateAccountUrl() {
         return null;
     }
+
+    @Override
+    public boolean equals(@Nullable final Object obj) {
+        if (!(obj instanceof AbstractConnector)) {
+            return false;
+        }
+
+        return ((AbstractConnector) obj).getName().equals(this.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
+
+
 }

@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort {
 
@@ -59,6 +60,13 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     public boolean canHandle(@NonNull final String geocode) {
         return PATTERN_LC_CODE.matcher(geocode).matches();
     }
+
+    @NotNull
+    @Override
+    public String[] getGeocodeSqlLikeExpressions() {
+        return new String[]{"LC%"};
+    }
+
 
     @Override
     @NonNull
