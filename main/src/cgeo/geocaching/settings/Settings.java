@@ -8,7 +8,6 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCMemberState;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
@@ -1874,14 +1873,13 @@ public class Settings {
     }
 
     /** Should SOLELY be called by class {@link cgeo.geocaching.filters.core.GeocacheFilter}! */
-    public static String getCacheFilterConfig(final CacheListType listType) {
-        return getStringDirect(getKey(R.string.pref_cache_filter_config) + "_" + (listType == null ? "default" : listType.name()),
-            null);
+    public static String getCacheFilterConfig() {
+        return getString(R.string.pref_cache_filter_config, null);
     }
 
     /** Should SOLELY be called by class {@link cgeo.geocaching.filters.core.GeocacheFilter}! */
-    public static void setCacheFilterConfig(final CacheListType listType, final String config) {
-        putStringDirect(getKey(R.string.pref_cache_filter_config) + "_" + (listType == null ? "default" : listType.name()), config);
+    public static void setCacheFilterConfig(final String config) {
+        putString(R.string.pref_cache_filter_config, config);
     }
 
     public static int getListInitialLoadLimit() {

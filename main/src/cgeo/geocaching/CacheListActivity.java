@@ -510,9 +510,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (extras != null) {
             type = Intents.getListType(getIntent());
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
-            if (extras.getString(Intents.EXTRA_FILTER) != null) {
-                GeocacheFilter.createFromConfig(extras.getString(Intents.EXTRA_FILTER)).storeForListType(type);
-            }
         } else {
             extras = new Bundle();
         }
@@ -528,7 +525,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         setTitle(title);
 
-        currentCacheFilter = GeocacheFilter.getStoredForListType(type);
+        currentCacheFilter = GeocacheFilter.loadFromSettings();
 
 
         // Check whether we're recreating a previously destroyed instance
@@ -1348,7 +1345,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]), currentCacheFilter);
         } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             currentCacheFilter = GeocacheFilter.createFromConfig(data.getStringExtra(GeocacheFilterActivity.EXTRA_FILTER_RESULT));
-            currentCacheFilter.storeForListType(type);
             setFilter(currentFilter, currentCacheFilter);
 
             if (type == CacheListType.SEARCH_FILTER) {
