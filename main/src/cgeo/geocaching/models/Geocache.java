@@ -50,6 +50,7 @@ import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import android.app.Activity;
@@ -170,7 +171,7 @@ public class Geocache implements IWaypoint {
 
     private List<Trackable> inventory = null;
     private Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);
-    private boolean userModifiedCoords = false;
+    private Boolean userModifiedCoords = null;
     // temporary values
     private boolean statusChecked = false;
     private String directionImg = "";
@@ -353,7 +354,11 @@ public class Geocache implements IWaypoint {
             logCounts = other.logCounts;
         }
 
-        if (!userModifiedCoords && other.hasUserModifiedCoords()) {
+        if (userModifiedCoords == null) {
+            userModifiedCoords = other.userModifiedCoords;
+        }
+
+        if (!hasUserModifiedCoords() && other.hasUserModifiedCoords()) {
             final Waypoint original = other.getOriginalWaypoint();
             if (original != null) {
                 original.setCoords(getCoords());
@@ -363,7 +368,9 @@ public class Geocache implements IWaypoint {
             coords = UncertainProperty.getMergedProperty(coords, other.coords);
         }
         // if cache has ORIGINAL type waypoint ... it is considered that it has modified coordinates, otherwise not
-        userModifiedCoords = getOriginalWaypoint() != null;
+        if (getOriginalWaypoint() != null) {
+            userModifiedCoords = true;
+        }
 
         if (!reliableLatLon) {
             reliableLatLon = other.reliableLatLon;
@@ -385,8 +392,15 @@ public class Geocache implements IWaypoint {
      * Returns the Original Waypoint if exists
      */
     public Waypoint getOriginalWaypoint() {
+        return getFirstMatchingWaypoint(wpt -> wpt.getWaypointType() == WaypointType.ORIGINAL);
+    }
+
+    /**
+     * Returns the first found Waypoint matching the given condition
+     */
+    public Waypoint getFirstMatchingWaypoint(final Func1<Waypoint, Boolean> condition) {
         for (final Waypoint wpt : waypoints) {
-            if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
+            if (wpt != null && condition.call(wpt)) {
                 return wpt;
             }
         }
@@ -684,6 +698,11 @@ public class Geocache implements IWaypoint {
         return BooleanUtils.isTrue(premiumMembersOnly);
     }
 
+    @Nullable
+    public Boolean isPremiumMembersOnlyRaw() {
+        return premiumMembersOnly;
+    }
+
     public void setPremiumMembersOnly(final boolean members) {
         this.premiumMembersOnly = members;
     }
@@ -880,6 +899,11 @@ public class Geocache implements IWaypoint {
      */
     public boolean isFavorite() {
         return BooleanUtils.isTrue(favorite);
+    }
+
+    @Nullable
+    public Boolean isFavoriteRaw() {
+        return favorite;
     }
 
     public void setFavorite(final boolean favorite) {
@@ -1204,6 +1228,11 @@ public class Geocache implements IWaypoint {
      */
     public boolean isOnWatchlist() {
         return BooleanUtils.isTrue(onWatchlist);
+    }
+
+    @Nullable
+    public Boolean isOnWatchlistRaw() {
+        return onWatchlist;
     }
 
     public void setOnWatchlist(final boolean onWatchlist) {
@@ -1537,6 +1566,11 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean hasUserModifiedCoords() {
+        return BooleanUtils.isTrue(userModifiedCoords);
+    }
+
+    @Nullable
+    public Boolean getUserModifiedCoordsRaw() {
         return userModifiedCoords;
     }
 

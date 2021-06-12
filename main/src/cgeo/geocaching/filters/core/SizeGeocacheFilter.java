@@ -37,4 +37,8 @@ public class SizeGeocacheFilter extends ValueGroupGeocacheFilter<CacheSize, Cach
         return value.id;
     }
 
+    @Override
+    protected int getMaxUserDisplayItemCount() {
+        return 3;
+    }
 }

@@ -131,6 +131,10 @@ public class SqlBuilder {
         return this;
     }
 
+    public boolean allWheresClosed() {
+        return whereStack.size() == 1;
+    }
+
     public SqlBuilder closeAllOpenWheres() {
         while (whereStack.size() > 1) {
             closeWhere();

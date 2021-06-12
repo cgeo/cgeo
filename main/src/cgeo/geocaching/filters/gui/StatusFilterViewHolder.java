@@ -1,79 +1,122 @@
 package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.databinding.ButtontogglegroupLabeledItemBinding;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.ui.ButtonToggleGroup;
+import cgeo.geocaching.ui.ChipChoiceGroup;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
+import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
+
+import java.util.Arrays;
+import java.util.Set;
 
 public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheFilter> {
 
-    private CheckBox excludeActive = null;
-    private CheckBox excludeDisabled = null;
-    private CheckBox excludeArchived = null;
+    private ChipChoiceGroup activeDisabledArchivedGroup = null;
 
     private ButtonToggleGroup statusOwn = null;
     private ButtonToggleGroup statusFound = null;
-
+    private ButtonToggleGroup statusStored = null;
+    private ButtonToggleGroup statusFavorite = null;
+    private ButtonToggleGroup statusWatchlist = null;
+    private ButtonToggleGroup statusPremium = null;
+    private ButtonToggleGroup statusSolvedMystery = null;
 
     @Override
     public View createView() {
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
-        statusFound = createGroup(ll, StatusGeocacheFilter.StatusType.FOUND);
-        statusOwn = createGroup(ll, StatusGeocacheFilter.StatusType.OWN);
-        ButtonToggleGroup.alignWidths(statusOwn, statusFound);
 
-        excludeActive = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_status_exclude_active), R.drawable.ic_menu_circle);
-        excludeDisabled = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_status_exclude_disabled), R.drawable.ic_menu_disabled);
-        excludeArchived = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_status_exclude_archived), R.drawable.ic_menu_archived);
-        excludeArchived.setChecked(true);
+        activeDisabledArchivedGroup = new ChipChoiceGroup(getActivity());
+        activeDisabledArchivedGroup.setChipSpacing(dpToPixel(10));
+        activeDisabledArchivedGroup.setWithSelectAllChip(false);
+
+        activeDisabledArchivedGroup.addChips(Arrays.asList(TextParam.id(R.string.cache_filter_status_active),
+            TextParam.id(R.string.cache_filter_status_disabled), TextParam.id(R.string.cache_filter_status_archived)));
+        activeDisabledArchivedGroup.setCheckedButtonByIndex(true, 0, 1, 2);
+        ll.addView(activeDisabledArchivedGroup, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        statusFound = createGroup(ll, StatusGeocacheFilter.StatusType.FOUND);
+        statusOwn = createGroup(ll, StatusGeocacheFilter.StatusType.OWNED);
+        statusStored = createGroup(ll, StatusGeocacheFilter.StatusType.STORED);
+        statusFavorite = createGroup(ll, StatusGeocacheFilter.StatusType.FAVORITE);
+        statusWatchlist = createGroup(ll, StatusGeocacheFilter.StatusType.WATCHLIST);
+        statusPremium = createGroup(ll, StatusGeocacheFilter.StatusType.PREMIUM);
+        statusSolvedMystery = createGroup(ll, StatusGeocacheFilter.StatusType.SOLVED_MYSTERY);
+        ButtonToggleGroup.alignWidths(statusOwn, statusFound, statusStored, statusFavorite, statusWatchlist, statusPremium, statusSolvedMystery);
+
         return ll;
     }
     private ButtonToggleGroup createGroup(final LinearLayout ll, final StatusGeocacheFilter.StatusType statusType) {
-        final ButtonToggleGroup tgb = new ButtonToggleGroup(getActivity());
-        tgb.setUseRelativeWidth(true);
-        tgb.addButtons(statusType.allId, statusType.noId, statusType.yesId);
+        final View view = inflateLayout(R.layout.buttontogglegroup_labeled_item);
+        final ButtontogglegroupLabeledItemBinding binding = ButtontogglegroupLabeledItemBinding.bind(view);
+        binding.itemText.setText(statusType.labelId);
+        if (statusType.icon != null) {
+            statusType.icon.apply(binding.itemIcon);
+        }
+        if (statusType.infoTextId != 0) {
+            binding.itemInfo.setVisibility(View.VISIBLE);
+            binding.itemInfo.setOnClickListener(v -> SimpleDialog.of(getActivity()).setMessage(statusType.infoTextId).show());
+        }
+
+        binding.itemTogglebuttongroup.setUseRelativeWidth(true);
+        binding.itemTogglebuttongroup.addButtons(R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_yes, R.string.cache_filter_status_select_no);
         final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llp.setMargins(0, ViewUtils.dpToPixel(5), 0, ViewUtils.dpToPixel(5));
-        ll.addView(tgb, llp);
-        return tgb;
+        ll.addView(view, llp);
+        return binding.itemTogglebuttongroup;
     }
 
     @Override
     public void setViewFromFilter(final StatusGeocacheFilter filter) {
-        excludeActive.setChecked(filter.isExcludeActive());
-        excludeDisabled.setChecked(filter.isExcludeDisabled());
-        excludeArchived.setChecked(filter.isExcludeArchived());
+        activeDisabledArchivedGroup.setCheckedButtonByIndex(false, 0, 1, 2);
+        activeDisabledArchivedGroup.setCheckedButtonByIndex(true,
+            filter.isExcludeActive() ? -1 : 0,
+            filter.isExcludeDisabled() ? -1 : 1,
+            filter.isExcludeArchived() ? -1 : 2);
+
         setFromBoolean(statusFound, filter.getStatusFound());
-        setFromBoolean(statusOwn, filter.getStatusOwn());
+        setFromBoolean(statusOwn, filter.getStatusOwned());
+        setFromBoolean(statusStored, filter.getStatusStored());
+        setFromBoolean(statusFavorite, filter.getStatusFavorite());
+        setFromBoolean(statusWatchlist, filter.getStatusWatchlist());
+        setFromBoolean(statusPremium, filter.getStatusPremium());
+        setFromBoolean(statusSolvedMystery, filter.getStatusSolvedMystery());
     }
 
 
     @Override
     public StatusGeocacheFilter createFilterFromView() {
         final StatusGeocacheFilter filter = createFilter();
-        filter.setExcludeActive(excludeActive.isChecked());
-        filter.setExcludeDisabled(excludeDisabled.isChecked());
-        filter.setExcludeArchived(excludeArchived.isChecked());
+
+        final Set<Integer> checkedSet = activeDisabledArchivedGroup.getCheckedButtonIndexes();
+        filter.setExcludeActive(!checkedSet.contains(0));
+        filter.setExcludeDisabled(!checkedSet.contains(1));
+        filter.setExcludeArchived(!checkedSet.contains(2));
+
         filter.setStatusFound(getFromGroup(statusFound));
-        filter.setStatusOwn(getFromGroup(statusOwn));
+        filter.setStatusOwned(getFromGroup(statusOwn));
+        filter.setStatusStored(getFromGroup(statusStored));
+        filter.setStatusFavorite(getFromGroup(statusFavorite));
+        filter.setStatusWatchlist(getFromGroup(statusWatchlist));
+        filter.setStatusPremium(getFromGroup(statusPremium));
+        filter.setStatusSolvedMystery(getFromGroup(statusSolvedMystery));
         return filter;
     }
 
     private void setFromBoolean(final ButtonToggleGroup btg, final Boolean status) {
-        btg.setCheckedButtonByIndex(status == null ? 0 : (status ? 2 : 1), true);
+        btg.setCheckedButtonByIndex(status == null ? 0 : (status ? 1 : 2), true);
     }
 
    private Boolean getFromGroup(final ButtonToggleGroup btg) {
         switch (btg.getCheckedButtonIndex()) {
-            case 1: return false;
-            case 2: return true;
+            case 1: return true;
+            case 2: return false;
             case 0:
             default: return null;
         }    }

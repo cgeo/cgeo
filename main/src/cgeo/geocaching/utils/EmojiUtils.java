@@ -70,6 +70,12 @@ public class EmojiUtils {
     // for characters by Unicode version see https://unicode.org/emoji/charts-5.0/full-emoji-list.html (v5.0 - preferred compatibility standard based on our minAPI level)
     // The newest emoji standard can be found here: https://unicode.org/emoji/charts/full-emoji-list.html
 
+    public static final int SMILEY_LIKE = 0x1f600;
+    public static final int SMILEY_LOVE = 0x1f60d;
+    public static final int SMILEY_MONOCLE = 0x1f9d0;
+    public static final int SPARKLES = 0x2728;
+
+
     private static final EmojiSet[] symbols = {
         // category symbols
         new EmojiSet(0x2764, new int[]{
@@ -95,7 +101,7 @@ public class EmojiUtils {
             /* plants */        0x1f332, 0x1f333, 0x1f334, 0x1f335, 0x1f340,
             /* transport */     0x1f682, 0x1f683, 0x1f686, 0x1f687, 0x1f68d, 0x1f695, 0x1f6b2, 0x1f697, 0x1f699, 0x2693, 0x26f5, 0x2708, 0x1f680,
             /* transp.-sign */  0x267f, 0x1f6bb,
-            /* time */          0x23f3, 0x231a, 0x23f1, 0x1f324, 0x2600, 0x1f319, 0x1f318, 0x2728
+            /* time */          0x23f3, 0x231a, 0x23f1, 0x1f324, 0x2600, 0x1f319, 0x1f318, SPARKLES
         }),
         // category food
         new EmojiSet(0x2615, new int[]{
@@ -117,7 +123,7 @@ public class EmojiUtils {
         }),
         // category people
         new EmojiSet(0x1f600, new int[]{
-            /* smileys */       0x1f600, 0x1f60d, 0x1f641, 0x1f621, 0x1f9d0,
+            /* smileys */       SMILEY_LIKE, SMILEY_LOVE, 0x1f641, 0x1f621, SMILEY_MONOCLE,
             /* silhouettes */   0x1f47b, 0x1f464, 0x1f465, 0x1f5e3,
             /* people */        0x1f466, 0x1f467, 0x1f468, 0x1f469, 0x1f474, 0x1f475, 0x1f46a,
             /* hands */         0x1f44d, 0x1f44e, 0x1f4aa, 0x270d

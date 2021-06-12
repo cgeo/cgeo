@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
@@ -185,11 +186,15 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
         if (getValues().isEmpty()) {
             return LocalizationUtils.getString(R.string.cache_filter_userdisplay_none);
         }
-        if (getValues().size() > 1) {
+        if (getValues().size() > getMaxUserDisplayItemCount()) {
             return LocalizationUtils.getPlural(R.plurals.cache_filter_userdisplay_multi_item, getValues().size());
         }
 
-        return valueToUserDisplayableValue(getValues().iterator().next());
+        return CollectionStream.of(getValues()).map(this::valueToUserDisplayableValue).toJoinedString(",");
+    }
+
+    protected int getMaxUserDisplayItemCount() {
+        return 1;
     }
 
 
