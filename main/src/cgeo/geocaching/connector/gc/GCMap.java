@@ -151,7 +151,7 @@ public class GCMap {
         return GCWebAPI.searchCaches(search);
     }
 
-    private static boolean fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
+    private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
         switch (basicFilter.getType()) {
             case TYPE:
                 search.addCacheTypes(((TypeGeocacheFilter) basicFilter).getRawValues());
@@ -210,6 +210,5 @@ public class GCMap {
             default:
                 break;
         }
-        return true;
     }
  }
