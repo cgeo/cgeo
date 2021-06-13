@@ -302,7 +302,9 @@ public class SearchResult implements Parcelable {
             url = other.url;
         }
         // copy the GC total search results number to be able to use "More caches" button
-        if (getTotalCountGC() == 0 && other.getTotalCountGC() != 0) {
+        // take over the larger number in order to make "more caches" work in case of cache filters (see #10567)
+        //   (otherwise a low find count of e.g. LabCaches under 20 will lead to "no more caches" shown if it is added "first")
+        if (getTotalCountGC() < other.getTotalCountGC()) {
             setViewstates(other.getViewstates());
             setTotalCountGC(other.getTotalCountGC());
         }
