@@ -32,7 +32,7 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     @NonNull
     private final String name;
     private final Pattern codePattern;
-    private final String[] sqlLikeSepressions;
+    private final String[] sqlLikeExpressions;
     private static final Pattern GPX_ZIP_FILE_PATTERN = Pattern.compile("oc[a-z]{2,3}\\d{5,}\\.zip", Pattern.CASE_INSENSITIVE);
 
     private static final List<LogType> STANDARD_LOG_TYPES = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE);
@@ -45,7 +45,7 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
         this.https = https;
         this.abbreviation = abbreviation;
         codePattern = Pattern.compile(prefix + "[A-Z0-9]+", Pattern.CASE_INSENSITIVE);
-        sqlLikeSepressions = new String[]{prefix + "%"};
+        sqlLikeExpressions = new String[]{prefix + "%"};
     }
 
     @Override
@@ -56,7 +56,7 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     @NotNull
     @Override
     public String[] getGeocodeSqlLikeExpressions() {
-        return sqlLikeSepressions;
+        return sqlLikeExpressions;
     }
 
     @Override
