@@ -1786,7 +1786,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             if (cache.supportsDescriptionchange()) {
                 binding.description.setOnClickListener(v -> {
-                    final Context context = parentView.getContext();
+                    final Context context = getContext();
                     final EditText editText = new EditText(context);
                     editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
                     editText.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
