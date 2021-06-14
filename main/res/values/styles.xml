@@ -86,6 +86,7 @@
         <item name="android:scaleType">center</item>
         <item name="android:focusable">true</item>
         <item name="android:src">@drawable/cgeo_actionbar_squircle</item>
+        <item name="android:tint">@color/colorTextActionBar</item>
     </style>
 
     <style name="action_bar_separator">
