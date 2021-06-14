@@ -37,7 +37,7 @@
     </item>
     <item
         android:id="@+id/menu_backup"
-        android:icon="@drawable/ic_menu_save"
+        android:icon="@drawable/ic_menu_rotate"
         android:title="@string/menu_backup"
         app:showAsAction="ifRoom">
     </item>
