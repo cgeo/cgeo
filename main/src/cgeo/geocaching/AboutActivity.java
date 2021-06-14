@@ -98,7 +98,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             orderedPages[i] = pages[i].id;
         }
 
-        createViewPager(startPage, orderedPages, this::onPageChangeListener);
+        createViewPager(startPage, orderedPages, this::onPageChangeListener, false);
     }
 
     @Override

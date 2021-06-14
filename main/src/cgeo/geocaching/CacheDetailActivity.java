@@ -243,7 +243,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setThemeAndContentView(R.layout.tabbed_viewpager_activity);
+        setThemeAndContentView(R.layout.tabbed_viewpager_activity_refreshable);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -344,7 +344,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (currentActionMode != null) {
                 currentActionMode.finish();
             }
-        });
+        }, true);
         requireGeodata = pageToOpen == Page.DETAILS.id;
 
         final String realGeocode = geocode;

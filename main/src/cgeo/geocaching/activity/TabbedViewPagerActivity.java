@@ -38,12 +38,13 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
      */
     private boolean isRefreshable = true;
 
-    protected void createViewPager(final long initialPageId, final long[] orderedPages, final Action1<Long> onPageChangeListener) {
+    protected void createViewPager(final long initialPageId, final long[] orderedPages, final Action1<Long> onPageChangeListener, final boolean isRefreshable) {
+        this.isRefreshable = isRefreshable;
         this.currentPageId = initialPageId;
         setOrderedPages(orderedPages);
         this.onPageChangeListener = onPageChangeListener;
 
-        setContentView(R.layout.tabbed_viewpager_activity);
+        setContentView(isRefreshable ? R.layout.tabbed_viewpager_activity_refreshable : R.layout.tabbed_viewpager_activity);
 
         viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new ViewPagerAdapter(this));
