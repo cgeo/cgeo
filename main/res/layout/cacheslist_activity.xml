@@ -14,14 +14,12 @@
         android:layout_height="fill_parent"
         tools:visibility="gone">
 
-        <ProgressBar
-            style="@android:style/Widget.ProgressBar.Large"
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:indeterminate="true"
-            android:indeterminateOnly="true" />
+            android:indeterminate="true" />
     </RelativeLayout>
 
     <ListView
