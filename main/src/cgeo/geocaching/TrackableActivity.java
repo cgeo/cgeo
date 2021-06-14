@@ -121,7 +121,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setThemeAndContentView(R.layout.tabbed_viewpager_activity);
+        setThemeAndContentView(R.layout.tabbed_viewpager_activity_refreshable);
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.trackable));
@@ -205,7 +205,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         // If we have a newer Android device setup Android Beam for easy cache sharing
         AndroidBeam.enable(this, this);
 
-        createViewPager(Page.DETAILS.id, getOrderedPages(), null);
+        createViewPager(Page.DETAILS.id, getOrderedPages(), null, true);
 
         refreshTrackable(message);
     }
@@ -392,6 +392,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             if (trackable == null) {
                 return;
             }
+            binding.getRoot().setVisibility(View.VISIBLE);
 
             if (activity.imagesList == null) {
                 activity.imagesList = new ImagesList(activity, trackable.getGeocode(), null);
@@ -442,6 +443,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             if (trackable == null) {
                 return;
             }
+            binding.getRoot().setVisibility(View.VISIBLE);
 
             final CacheDetailsCreator details = new CacheDetailsCreator(activity, binding.detailsList);
 
