@@ -81,7 +81,7 @@
     </item>
     <item
         android:id="@+id/menu_edit_fieldnote"
-        android:icon="@drawable/ic_menu_rotate"
+        android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_personal_note"
         android:visible="false">
     </item>
