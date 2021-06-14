@@ -9,6 +9,7 @@
     android:paddingLeft="5dip"
     android:paddingRight="5dip"
     android:paddingTop="7dip"
+    android:background="?android:attr/selectableItemBackground"
     tools:context=".downloader.DownloadSelectorActivity">
 
     <ImageButton
