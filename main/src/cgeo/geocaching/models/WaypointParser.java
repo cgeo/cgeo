@@ -284,7 +284,7 @@ public class WaypointParser {
                 final List<VariableData> variables = new ArrayList<>();
 
                 // all text after the formula, keep newline
-                String remainingString = parsedFullCoordinates.getText().substring(parsedFullCoordinates.getEnd() - 1);
+                String remainingString = parsedFullCoordinates.getText().substring(parsedFullCoordinates.getEnd());
 
                 final String[] formulaList = remainingString.split(FormulaParser.WPC_DELIM_PATTERN_STRING);
                 for (final String varSplitText : formulaList
@@ -292,7 +292,7 @@ public class WaypointParser {
                     final String varText = varSplitText.trim();
                     boolean removeDelimiter = varText.isEmpty();
                     final String[] equations = varText.split("=", -1);
-                    if (1 <= equations.length) {
+                    if (1 < equations.length) {
                         final String varName = equations[0].trim();
                         if (1 == varName.length()) {
                             removeDelimiter = true;
@@ -402,9 +402,9 @@ public class WaypointParser {
             .append(PARSING_TYPE_CLOSE).append(" ");
 
         // formula
-        final String calcStateJson = wp.getCalcStateJson();
-        if (null != calcStateJson) {
-            sb.append(getParseableFormula(wp));
+        final String formulaString = getParseableFormula(wp);
+        if (StringUtils.isNotEmpty(formulaString)) {
+            sb.append(formulaString);
         } else {
         //coordinate
             if (wp.getCoords() == null) {

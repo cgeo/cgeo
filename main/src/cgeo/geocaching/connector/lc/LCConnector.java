@@ -123,6 +123,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     public SearchResult searchByViewport(@NonNull final Viewport viewport) {
         final Collection<Geocache> caches = LCApi.searchByBBox(viewport);
         final SearchResult searchResult = new SearchResult(caches);
+        searchResult.setTotalCountGC(caches.size());
         return searchResult.filterSearchResults(false, false, Settings.getCacheType());
     }
 
@@ -131,6 +132,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     public SearchResult searchByCenter(@NonNull final Geopoint center) {
         final Collection<Geocache> caches = LCApi.searchByCenter(center);
         final SearchResult searchResult = new SearchResult(caches);
+        searchResult.setTotalCountGC(caches.size());
         return searchResult.filterSearchResults(false, false, Settings.getCacheType());
     }
 

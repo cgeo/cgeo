@@ -199,7 +199,7 @@ public final class FormulaParser {
      */
     private static final class MinDecFormulaParser extends AbstractLatLonFormulaParser {
         //                                                        (    2    )                                      (      3      )
-        private static final String STRING_MINDEC = "\\s*(" + COORD_FORMULA_PATTERN_STRING + ")[°\\s]+(" + COORD_FORMULA_PATTERN_STRING + "\\." + COORD_FORMULA_PATTERN_STRING + ")['′\\s]?";
+        private static final String STRING_MINDEC = "\\s*(" + COORD_FORMULA_PATTERN_STRING + ")[°\\s]+(" + COORD_FORMULA_PATTERN_STRING + "\\." + COORD_FORMULA_PATTERN_STRING + ")['′]?";
 
         //                                           (  1  )    (    2    )    (      3      )
         private static final String STRING_LAT = "([NS]?)" + STRING_MINDEC;

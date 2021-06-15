@@ -359,8 +359,8 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseTwoWaypointsWithFormulaAndNameAndDescription() {
-        final String note = "@WPName 1 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF\n" +
-            "@WPName 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45 C.A(D+B)  E 9 (D-C).(2*A)EF |A = a+b|B=|a=2|b=| \"this is the description for the second point\"";
+        final String note = "@WPName 1 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)'  E 9° (A-B).(2*D)EF\n" +
+            "@WPName 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45 C.A(D+B)'  E 9 (D-C).(2*A)EF' |A = a+b|B=|a=2|b=| \"this is the description for the second point\"";
         final WaypointParser waypointParser = new WaypointParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(2);
