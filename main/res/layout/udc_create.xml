@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="3dip">
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/cache_name"
-        android:inputType="text|none"
-	android:textSize="@dimen/textSize_detailsPrimary" />
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/textinput_edittext_singleline"
+        app:endIconMode="clear_text">
+        <EditText
+            android:id="@+id/name"
+            style="@style/textinput_embedded"
+            android:hint="@string/cache_name"
+            android:inputType="text|none"
+        android:textSize="@dimen/textSize_detailsPrimary" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
         android:id="@+id/givenList"

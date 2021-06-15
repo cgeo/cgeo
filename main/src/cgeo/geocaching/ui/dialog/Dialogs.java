@@ -322,7 +322,7 @@ public final class Dialogs {
         newBuilder(activity)
             .setView(binding.getRoot())
             .setTitle(title)
-            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> callback.accept(binding.input.getText().toString()))
+            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> callback.accept(binding.input.getText().toString().trim()))
             .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
             .show();
     }
