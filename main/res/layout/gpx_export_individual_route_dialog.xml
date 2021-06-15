@@ -5,44 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="3dip"
     tools:context=".export.IndividualRouteExport" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/filename_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:paddingLeft="8dp"
-            android:text="@string/filename_without_extension"
-            android:labelFor="@id/filename"/>
-
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/textinput_edittext_singleline"
+        app:endIconMode="clear_text">
         <EditText
             android:id="@+id/filename"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/textinput_embedded"
             android:inputType="textUri"
-            android:layout_below="@id/filename_title"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="left"
-            android:layout_marginLeft="6dip"
-            android:layout_marginRight="51dip"
-            android:paddingRight="3dip"
-            />
+            android:hint="@string/filename_without_extension" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageButton
-            android:id="@+id/button_reset"
-            style="@style/button_icon"
-            app:srcCompat="@drawable/ic_menu_delete"
-            android:layout_alignBottom="@id/filename"
-            android:layout_alignParentRight="true" />
-
-    </RelativeLayout>
-
-    <include layout="@layout/gpx_export_fragment" />
+    <include layout="@layout/gpx_export_fragment" android:id="@+id/info" />
 
 </LinearLayout>
