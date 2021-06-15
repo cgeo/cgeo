@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_viewroot"
     android:layout_width="fill_parent"
@@ -49,19 +50,19 @@
          android:layout_width="fill_parent"
          android:layout_height="wrap_content">
 
-        <ImageButton
+        <Button
             android:id="@+id/filter_storage_manage"
             style="@style/button_icon"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_menu_manage_list" />
+            app:icon="@drawable/ic_menu_manage_list" />
 
-        <ImageButton
+        <Button
             android:id="@+id/filter_storage_save"
             style="@style/button_icon"
             android:layout_toRightOf="@+id/filter_storage_manage"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_menu_save" />
+            app:icon="@drawable/ic_menu_save" />
 
         <TextView
             android:id="@+id/filter_storage_name"

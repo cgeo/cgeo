@@ -33,7 +33,7 @@
             tools:visibility="visible"
             tools:text="Title of the filter, might be a bit longer"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/filter_delete"
             style="@style/button_icon"
             android:layout_centerVertical="true"
@@ -41,7 +41,7 @@
             android:scaleType="centerInside"
             android:layout_toLeftOf="@+id/filter_drag"
             android:layout_gravity="right"
-            android:src="@drawable/ic_menu_delete"
+            app:icon="@drawable/ic_menu_delete"
             tools:src="@drawable/ic_menu_delete"/>
 
         <ImageView

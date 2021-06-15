@@ -12,7 +12,7 @@
     android:background="?android:attr/selectableItemBackground"
     tools:context=".downloader.DownloadSelectorActivity">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/action"
         style="@style/button_icon"
         android:gravity="left|center_vertical"

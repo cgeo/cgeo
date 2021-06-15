@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pocketquery_item"
     android:layout_width="fill_parent"
@@ -16,17 +17,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true">
 
-        <ImageButton
+        <Button
             android:id="@+id/download"
             style="@style/button_icon"
-            android:src="@drawable/ic_menu_save"
+            app:icon="@drawable/ic_menu_save"
             android:text="@null"
             tools:ignore="ButtonStyle" />
 
-        <ImageButton
+        <Button
             android:id="@+id/cachelist"
             style="@style/button_icon"
-            android:src="@android:drawable/ic_menu_search"
+            app:icon="@android:drawable/ic_menu_search"
             android:text="@null"
             tools:ignore="ButtonStyle" />
     </LinearLayout>

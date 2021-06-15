@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -75,11 +74,11 @@ public class EditNoteDialog extends DialogFragment {
         title.setText(R.string.cache_personal_note);
         title.setVisibility(View.VISIBLE);
 
-        final ImageButton cancel = view.findViewById(R.id.dialog_title_cancel);
+        final View cancel = view.findViewById(R.id.dialog_title_cancel);
         cancel.setOnClickListener(view1 -> dialog.dismiss());
         cancel.setVisibility(View.VISIBLE);
 
-        final ImageButton done = view.findViewById(R.id.dialog_title_done);
+        final View done = view.findViewById(R.id.dialog_title_done);
         done.setOnClickListener(view12 -> {
             // trim note to avoid unnecessary uploads for whitespace only changes
             final String personalNote = StringUtils.trim(mEditText.getText().toString());
