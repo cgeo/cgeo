@@ -2498,13 +2498,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final OnLongClickListener storeCachePreselectedListener) {
         // offline use
         final TextView offlineText = view.findViewById(R.id.offline_text);
-        final ImageButton offlineRefresh = view.findViewById(R.id.offline_refresh);
-        final ImageButton offlineStoreDrop = view.findViewById(R.id.offline_store_drop);
-        final ImageButton offlineEdit = view.findViewById(R.id.offline_edit);
+        final View offlineRefresh = view.findViewById(R.id.offline_refresh);
+        final View offlineStore = view.findViewById(R.id.offline_store);
+        final View offlineDrop = view.findViewById(R.id.offline_drop);
+        final View offlineEdit = view.findViewById(R.id.offline_edit);
 
         // check if hint is available and set onClickListener and hint button visibility accordingly
         final boolean hintButtonEnabled = setOfflineHintText(showHintClickListener, view.findViewById(R.id.offline_hint_text), cache.getHint(), cache.getPersonalNote());
-        final ImageButton offlineHint = view.findViewById(R.id.offline_hint);
+        final View offlineHint = view.findViewById(R.id.offline_hint);
         if (null != offlineHint) {
             if (hintButtonEnabled) {
                 offlineHint.setVisibility(View.VISIBLE);
@@ -2517,10 +2518,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-        offlineStoreDrop.setClickable(true);
-        offlineStoreDrop.setOnClickListener(storeCacheClickListener);
-        offlineStoreDrop.setOnLongClickListener(storeCachePreselectedListener);
+        offlineStore.setClickable(true);
+        offlineStore.setOnClickListener(storeCacheClickListener);
+        offlineStore.setOnLongClickListener(storeCachePreselectedListener);
 
+        offlineDrop.setClickable(true);
+        offlineDrop.setOnClickListener(dropCacheClickListener);
+        offlineDrop.setOnLongClickListener(null);
+
+        offlineEdit.setOnClickListener(storeCacheClickListener);
         if (moveCacheListener != null) {
             offlineEdit.setOnLongClickListener(moveCacheListener);
         }
@@ -2532,17 +2538,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (cache.isOffline()) {
             offlineText.setText(Formatter.formatStoredAgo(cache.getUpdated()));
 
-            offlineStoreDrop.setOnClickListener(dropCacheClickListener);
-            offlineStoreDrop.setOnLongClickListener(null);
-            offlineStoreDrop.setClickable(true);
-            offlineStoreDrop.setImageResource(R.drawable.ic_menu_delete);
-
+            offlineStore.setVisibility(View.GONE);
+            offlineDrop.setVisibility(View.VISIBLE);
             offlineEdit.setVisibility(View.VISIBLE);
-            offlineEdit.setOnClickListener(storeCacheClickListener);
         } else {
             offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-            offlineStoreDrop.setImageResource(R.drawable.ic_menu_save);
 
+            offlineStore.setVisibility(View.VISIBLE);
+            offlineDrop.setVisibility(View.GONE);
             offlineEdit.setVisibility(View.GONE);
         }
     }

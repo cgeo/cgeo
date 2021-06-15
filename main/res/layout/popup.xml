@@ -42,10 +42,10 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/popup_more" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/offline_hint"
                     style="@style/button_icon"
-                    app:srcCompat="@drawable/ic_menu_hint"
+                    app:icon="@drawable/ic_menu_hint"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="0dp"
                     android:visibility="gone"
@@ -76,10 +76,10 @@
                     android:textSize="@dimen/textSize_detailsSecondary"
                     android:textColor="@color/colorText"/>
 
-                <ImageButton
+                <Button
                     android:id="@+id/offline_refresh"
                     style="@style/button_icon"
-                    app:srcCompat="@drawable/ic_menu_refresh"
+                    app:icon="@drawable/ic_menu_refresh"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
@@ -100,21 +100,29 @@
                     tools:text="list 1, list 2"
                     android:textColor="@color/colorText"/>
 
-                <ImageButton
+                <Button
                     android:id="@+id/offline_edit"
                     style="@style/button_icon"
-                    app:srcCompat="@drawable/ic_menu_edit"
-                    android:layout_toLeftOf="@id/offline_store_drop"
+                    app:icon="@drawable/ic_menu_edit"
+                    android:layout_toLeftOf="@id/offline_drop"
                     android:layout_marginLeft="0dp"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
-                <ImageButton
-                    android:id="@+id/offline_store_drop"
+                <Button
+                    android:id="@+id/offline_drop"
                     style="@style/button_icon"
-                    app:srcCompat="@drawable/ic_menu_save"
+                    app:icon="@drawable/ic_menu_delete"
                     android:layout_marginLeft="0dp"
                     android:layout_alignParentRight="true"/>
+
+                <Button
+                    android:id="@+id/offline_store"
+                    style="@style/button_icon"
+                    app:icon="@drawable/ic_menu_save"
+                    android:layout_marginLeft="0dp"
+                    android:layout_alignParentRight="true"/>
+
             </RelativeLayout>
 
             <RelativeLayout
