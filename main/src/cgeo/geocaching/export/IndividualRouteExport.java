@@ -2,6 +2,7 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.databinding.GpxExportIndividualRouteDialogBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteSegment;
@@ -21,9 +22,7 @@ import cgeo.org.kxml2.io.KXmlSerializer;
 import android.app.Activity;
 import android.net.Uri;
 import android.text.InputFilter;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,17 +64,14 @@ public class IndividualRouteExport {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(R.string.export_individualroute_title);
 
-        final View layout = View.inflate(activity, R.layout.gpx_export_individual_route_dialog, null);
-        builder.setView(layout);
+        final GpxExportIndividualRouteDialogBinding binding = GpxExportIndividualRouteDialogBinding.inflate(activity.getLayoutInflater());
+        builder.setView(binding.getRoot());
 
-        final EditText editFilename = layout.findViewById(R.id.filename);
+        final EditText editFilename = binding.filename;
         editFilename.setFilters(new InputFilter[] { filter });
         editFilename.setText(filename);
 
-        final ImageButton resetFilename = layout.findViewById(R.id.button_reset);
-        resetFilename.setOnClickListener(v -> editFilename.setText(""));
-
-        final TextView text = layout.findViewById(R.id.info);
+        final TextView text = binding.info.info;
         text.setText(activity.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), filename + FileUtils.GPX_FILE_EXTENSION));
 
         builder
