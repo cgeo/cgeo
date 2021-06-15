@@ -126,7 +126,6 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.text.method.ScrollingMovementMethod;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
@@ -141,10 +140,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -1775,34 +1772,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             if (cache.supportsDescriptionchange()) {
                 binding.description.setOnClickListener(v -> {
-                    final Context context = getContext();
-                    final EditText editText = new EditText(context);
-                    editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-                    editText.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
-                    editText.setSingleLine(false);
-                    editText.setLines(5);
-                    editText.setMaxLines(10);
-                    editText.setVerticalScrollBarEnabled(true);
-                    editText.setMovementMethod(ScrollingMovementMethod.getInstance());
-                    editText.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
-                    editText.setText(cache.getDescription());
-                    Dialogs.moveCursorToEnd(editText);
-
-                    Dialogs.newBuilder(context)
-                        .setTitle(R.string.cache_description_set)
-                        .setView(editText)
-                        .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                            binding.description.setText(editText.getText().toString());
-                            cache.setDescription(editText.getText().toString());
-                            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-                            Toast.makeText(context, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
-                        })
-                        .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
-                        .show()
-                    ;
+                    Dialogs.input(activity, activity.getString(R.string.cache_description_set), cache.getDescription(), "Description", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE, 5, 10, description -> {
+                        binding.description.setText(description);
+                        cache.setDescription(description);
+                        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                        Toast.makeText(activity, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
+                    });
                 });
             }
-
         }
 
         private void warnPersonalNoteExceedsLimit(final CacheDetailActivity activity) {

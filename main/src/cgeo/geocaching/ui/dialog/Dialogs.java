@@ -18,9 +18,12 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.InputType;
+import android.text.method.ScrollingMovementMethod;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -41,8 +44,6 @@ import java.util.Objects;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
-import cgeo.geocaching.utils.functions.Func1;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
@@ -273,10 +274,51 @@ public final class Dialogs {
         return dialog;
     }
 
-    public static void input(final Activity activity, final String title, final String currentValue, final String label, final Consumer<String> callback) {
+    /**
+     * displays an input dialog (one or multiple lines)
+     *
+     * short form of input(), with default parameters for {@link InputType}, minLines and maxLines
+     */
+     public static void input(final Activity activity, final String title, final String currentValue, final String label, final Consumer<String> callback) {
+        input(activity, title, currentValue, label, -1, 1, 1, callback);
+    }
+
+    /**
+     * displays an input dialog (one or multiple lines)
+     *
+     * @param activity      calling activity
+     * @param title         dialog title
+     * @param currentValue  if non-null, this will be the prefilled value of the input field
+     * @param label         label / hint for the input field
+     * @param inputType     input type flag mask, use constants defined in class {@link InputType}. If a value below 0 is given then standard input type settings (text) are assumed
+     * @param minLines      minimum amount of input lines to display
+     * @param maxLines      maximum amount of input lines to display (make dialog scrollable, if > 1)
+     * @param callback      method to call on positive confirmation, gets current text as parameter
+     */
+    public static void input(final Activity activity, final String title, final String currentValue, final String label, final int inputType, final int minLines, final int maxLines, final Consumer<String> callback) {
         final DialogEdittextBinding binding = DialogEdittextBinding.inflate(activity.getLayoutInflater());
-        binding.input.setText(currentValue);
-        binding.inputFrame.setHint(label);
+        if (StringUtils.isNotBlank(currentValue)) {
+            binding.input.setText(currentValue);
+        }
+        if (StringUtils.isNotBlank(label)) {
+            binding.inputFrame.setHint(label);
+        }
+        if (maxLines > 1) {
+            binding.input.setSingleLine(false);
+            binding.input.setLines(minLines);
+            binding.input.setMaxLines(maxLines);
+            binding.input.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
+            binding.input.setVerticalScrollBarEnabled(true);
+            binding.input.setMovementMethod(ScrollingMovementMethod.getInstance());
+            binding.input.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
+            binding.input.invalidate();
+            moveCursorToEnd(binding.input);
+        } else {
+            binding.input.setSingleLine();
+        }
+        if (inputType >= 0) {
+            binding.input.setInputType(inputType);
+        }
         newBuilder(activity)
             .setView(binding.getRoot())
             .setTitle(title)
@@ -284,7 +326,6 @@ public final class Dialogs {
             .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
             .show();
     }
-
 
     public static AlertDialog.Builder newBuilder(final Context context) {
         return new MaterialAlertDialogBuilder(newContextThemeWrapper(context));
