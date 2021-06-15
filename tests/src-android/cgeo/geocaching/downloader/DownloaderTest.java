@@ -69,7 +69,7 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         final List<Download> list = getList(MapDownloaderOpenAndroMaps.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_downloadurl) + "europe/");
 
         // europe starting page currently has ... entries (including the "up" entry)
-        assertThat(list.size()).isEqualTo(59);
+        assertThat(list.size()).isEqualTo(60);
 
         // first entry has to be the "up" entry
         assertThat(list.get(0).getIsDir()).isTrue();
@@ -78,7 +78,7 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(count(list, true)).isEqualTo(1);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isEqualTo(58);
+        assertThat(count(list, false)).isEqualTo(59);
 
         // check one named entry
         final Download d = findByName(list, "Scandinavia_SouthWest");
