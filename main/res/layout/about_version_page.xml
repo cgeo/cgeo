@@ -4,7 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="4dip"
     tools:context=".AboutActivity$VersionViewCreator" >
 
     <LinearLayout
@@ -57,6 +56,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:text="@string/powered_by"
+                    android:textColor="@color/just_white"
                     android:textSize="@dimen/textSize_detailsPrimary" />
             </LinearLayout>
         </FrameLayout>
