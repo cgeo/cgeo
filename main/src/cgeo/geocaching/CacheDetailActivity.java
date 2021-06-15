@@ -1155,23 +1155,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             activity.addContextMenu(cachename);
             if (cache.supportsNamechange()) {
                 cachename.setOnClickListener(v -> {
-                    final Context context = getContext();
-                    final EditText editText = new EditText(context);
-                    editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
-                    editText.setText(cache.getName());
-
-                    Dialogs.newBuilder(context)
-                        .setTitle(R.string.cache_name_set)
-                        .setView(editText)
-                        .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                            cachename.setText(editText.getText().toString());
-                            cache.setName(editText.getText().toString());
-                            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-                            Toast.makeText(context, R.string.cache_name_updated, Toast.LENGTH_SHORT).show();
-                        })
-                        .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
-                        .show()
-                    ;
+                    Dialogs.input(activity, activity.getString(R.string.cache_name_set), cache.getName(), activity.getString(R.string.caches_sort_name), name -> {
+                        cachename.setText(name);
+                        cache.setName(name);
+                        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                        Toast.makeText(activity, R.string.cache_name_updated, Toast.LENGTH_SHORT).show();
+                    });
                 });
             }
 

@@ -2,6 +2,7 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.BottomsheetDialogWithActionbarBinding;
+import cgeo.geocaching.databinding.DialogEdittextBinding;
 import cgeo.geocaching.databinding.DialogTextCheckboxBinding;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
@@ -29,6 +30,7 @@ import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +41,8 @@ import java.util.Objects;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import cgeo.geocaching.utils.functions.Func1;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
@@ -268,6 +272,19 @@ public final class Dialogs {
 
         return dialog;
     }
+
+    public static void input(final Activity activity, final String title, final String currentValue, final String label, final Consumer<String> callback) {
+        final DialogEdittextBinding binding = DialogEdittextBinding.inflate(activity.getLayoutInflater());
+        binding.input.setText(currentValue);
+        binding.inputFrame.setHint(label);
+        newBuilder(activity)
+            .setView(binding.getRoot())
+            .setTitle(title)
+            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> callback.accept(binding.input.getText().toString()))
+            .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
+            .show();
+    }
+
 
     public static AlertDialog.Builder newBuilder(final Context context) {
         return new MaterialAlertDialogBuilder(newContextThemeWrapper(context));
