@@ -470,7 +470,9 @@
     <string name="cache_filter_logs_count">Aantal logs</string>
     <string name="cache_filter_last_found">Laatst Gevonden Datum</string>
     <string name="cache_filter_log_entry">Log Invoer</string>
+    <string name="cache_filter_location">Locatie</string>
     <string name="cache_filter_stored_lists">Opgeslagen lijsten</string>
+    <string name="cache_filter_origin">Oorsprong</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Gebruikerspecifiek</string>
@@ -490,6 +492,7 @@
     <string name="cache_filter_storage_save_confirm_title">Opgeslagen filter overschrijven</string>
     <string name="cache_filter_storage_save_confirm_message">Een filter met de naam \'%s\' en andere configuratie bestaat al. Overschrijven?</string>
     <string name="cache_filter_stringfilter_matchcase">Hoofdlettergevoelig</string>
+    <string name="cache_filter_stringfilter_searchtext_hint">Zoektekst</string>
     <string name="cache_filter_stringfilter_info">Met de optie \'Patroon\', gebruik joker-tekens * en ?. * vertegenwoordigt nul, één of meerdere tekens, ? vertegenwoordigt één enkel teken. Bijvoorbeeld, het patroon \'H?mburg*\' zal overeenkomen met bijvoorbeeld \'Homburg\' of \'Hamburg \'s nachts\' maar niet met \'A day in Hamburg\' of \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Is niet aanwezig</string>
     <string name="cache_filter_stringfilter_type_is_present">is aanwezig</string>

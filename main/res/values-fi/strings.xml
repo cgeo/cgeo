@@ -472,6 +472,7 @@
     <string name="cache_filter_log_entry">Lokikirjaus</string>
     <string name="cache_filter_location">Sijainti</string>
     <string name="cache_filter_stored_lists">Tallennetut listat</string>
+    <string name="cache_filter_origin">Alkuperä</string>
     <string name="cache_filtergroup_basic">Perus</string>
     <string name="cache_filtergroup_details">Yksityiskohdat</string>
     <string name="cache_filtergroup_userspecific">Käyttäjäkohtainen</string>

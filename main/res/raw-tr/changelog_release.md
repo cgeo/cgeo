@@ -1,6 +1,6 @@
-- Fix: Extract waypoint with same name but different coordinates from personal note
-- Fix: Bug in extracting user note for waypoint with formula
-- Fix: Export formula to PN instead of coordinates for completed formula
-- Fix: Offline map and themes folder incorrect after re-install and restore of backup
-- Fix: Track/route cannot be updated
-- Fix: Theming error for downloader in light theme
+- Düzeltme: Kişisel nottan aynı ada sahip ancak farklı koordinatlara sahip yol noktasını çıkarma
+- Düzeltme: Formüllü yol noktası için kullanıcı notunun çıkarılmasında hata
+- Düzeltme: Formülü tamamlanmış formül için koordinatlar yerine KN'ye aktar
+- Düzeltme: Yeniden yüklemeden ve yedek geri yüklemeden sonra çevrimdışı harita ve tema klasörü hatası
+- Düzeltme: Yol/rota güncellenemiyor
+- Düzeltme: Açık temada indirici için tema oluşturma hatası
