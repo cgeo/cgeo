@@ -209,7 +209,7 @@ public class SeekbarPreference extends Preference {
                     Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
                 }
             };
-            SimpleDialog.of((Activity) context).setTitle(TextParam.text(title)).input(inputType, defaultValue, getUnitString(), listener);
+            SimpleDialog.of((Activity) context).setTitle(TextParam.text(title)).input(inputType, defaultValue, null, getUnitString(), listener);
         });
 
         return v;

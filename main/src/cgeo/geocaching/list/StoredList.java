@@ -251,7 +251,7 @@ public final class StoredList extends AbstractList {
                 return;
             }
             SimpleDialog.of(activity).setTitle(dialogTitle).setPositiveButton(TextParam.id(buttonTitle))
-                .input(-1, defaultValue, null, input -> {
+                .input(-1, defaultValue, null, null, input -> {
                 if (StringUtils.isNotBlank(input)) {
                     runnable.call(input);
                 }

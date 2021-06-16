@@ -210,6 +210,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="endIconMode">clear_text</item>
+        <item name="endIconTint">@color/colorTextDark</item>
+        <item name="prefixTextColor">@color/colorTextDark</item>
+        <item name="suffixTextColor">@color/colorTextDark</item>
     </style>
 
     <style name="textinput_edittext" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -220,6 +223,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="endIconMode">clear_text</item>
+        <item name="endIconTint">@color/colorTextDark</item>
+        <item name="prefixTextColor">@color/colorTextDark</item>
+        <item name="suffixTextColor">@color/colorTextDark</item>
     </style>
 
     <style name="textinput_edittext_singleline" parent="textinput_edittext">
@@ -232,6 +238,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">text</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="colorOnSurface">@color/colorText</item>
     </style>
 
     <!-- edittext (TODO: should at some point be completely replaced by textinput) -->
