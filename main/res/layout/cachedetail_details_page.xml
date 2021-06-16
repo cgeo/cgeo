@@ -100,10 +100,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/offline_refresh"
                         style="@style/button_icon"
-                        app:srcCompat="@drawable/ic_menu_refresh"
+                        app:icon="@drawable/ic_menu_refresh"
                         android:layout_marginLeft="2dip"
                         android:visibility="gone" />
 
@@ -130,16 +130,24 @@
                     tools:text="list 1, list 2, list 3, and many, many, many, many, many more lists"
                     android:textIsSelectable="false" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/offline_edit"
                     style="@style/button_icon"
-                    app:srcCompat="@drawable/ic_menu_edit"
-                    android:layout_toLeftOf="@+id/offline_store_drop" />
+                    app:icon="@drawable/ic_menu_edit"
+                    android:layout_toLeftOf="@+id/offline_drop" />
 
-                <ImageButton
-                    android:id="@+id/offline_store_drop"
+                <Button
+                    android:id="@+id/offline_drop"
                     style="@style/button_icon"
-                    app:srcCompat="@drawable/ic_menu_save"
+                    app:icon="@drawable/ic_menu_delete"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="2dip"
+                    android:layout_gravity="right"/>
+
+                <Button
+                    android:id="@+id/offline_store"
+                    style="@style/button_icon"
+                    app:icon="@drawable/ic_menu_save"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="2dip"
                     android:layout_gravity="right"/>
@@ -180,19 +188,19 @@
                     tools:text="The cache may or may not be on your watch list."
                     android:textIsSelectable="false" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/add_to_watchlist"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    app:srcCompat="@drawable/ic_menu_add"
+                    app:icon="@drawable/ic_menu_add"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
-                <ImageButton
+                <Button
                     android:id="@+id/remove_from_watchlist"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    app:srcCompat="@drawable/ic_menu_remove"
+                    app:icon="@drawable/ic_menu_remove"
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
@@ -231,11 +239,11 @@
                     tools:text="Send to WhereYouGo"
                     android:textIsSelectable="false" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/send_to_whereyougo"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/icon_gc_wherigo"
+                    app:icon="@drawable/icon_gc_wherigo"
                     android:visibility="visible"
                     tools:visibility="visible"/>
             </RelativeLayout>
@@ -275,11 +283,11 @@
                     tools:text="Start Chirp Wolf"
                     android:textIsSelectable="false" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/send_to_chirp"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/icon_gc_chirpwolf"
+                    app:icon="@drawable/icon_gc_chirpwolf"
                     android:visibility="visible"
                     tools:visibility="visible"/>
             </RelativeLayout>
@@ -319,11 +327,11 @@
                     tools:text="Start Adventure Lab"
                     android:textIsSelectable="false" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/send_to_alc"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/icon_gc_alc"
+                    app:icon="@drawable/icon_gc_alc"
                     android:visibility="visible"
                     tools:visibility="visible"/>
             </RelativeLayout>
@@ -361,19 +369,19 @@
                     tools:text="Probably not on your favorite list. You may have some fav points remaining."
                     android:textIsSelectable="false" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/add_to_favpoint"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    app:srcCompat="@drawable/ic_menu_add"
+                    app:icon="@drawable/ic_menu_add"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
-                <ImageButton
+                <Button
                     android:id="@+id/remove_from_favpoint"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    app:srcCompat="@drawable/ic_menu_remove"
+                    app:icon="@drawable/ic_menu_remove"
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>

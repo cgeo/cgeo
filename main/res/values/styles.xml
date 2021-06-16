@@ -170,7 +170,7 @@
         <item name="android:padding">3dip</item>
     </style>
 
-    <style name="button_icon" parent="button">
+    <style name="button_icon_accent" parent="button">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:insetTop">0dp</item>
@@ -179,6 +179,15 @@
         <item name="android:paddingRight">12dp</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
+     </style>
+
+    <style name="button_icon" parent="button_icon_accent">
+        <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>
+    </style>
+
+     <style name="IconButtonThemeOverlay">
+        <!-- For filled buttons, your theme's colorPrimary provides the default background color of the component -->
+        <item name="colorPrimary">@color/colorText</item>
     </style>
 
     <!-- Chips -->

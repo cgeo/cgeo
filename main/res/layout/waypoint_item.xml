@@ -20,8 +20,10 @@
 
         <ImageView
             android:id="@+id/wpDefaultNavigation"
-            style="@style/action_bar_action"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
             android:layout_gravity="right"
             android:clickable="true"
             android:focusable="true"
