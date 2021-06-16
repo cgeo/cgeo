@@ -3,7 +3,6 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func2;
 
@@ -13,12 +12,11 @@ import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -34,6 +32,7 @@ import java.util.List;
 import java.util.Set;
 import static java.lang.Boolean.TRUE;
 
+import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -368,39 +367,26 @@ public class SimpleDialog {
      *
      * @param inputType    input type flag mask, use constants defined in class {@link InputType}. If a value below 0 is given then standard input type settings (text) are assumed
      * @param defaultValue if non-null, this will be the prefilled value of the input field
-     * @param label        if non-null, this will be displayed as a label on the right side of text input field (e.g. to display units like km/ft)
+     * @param label        if non-null & non-empty, this will be displayed as a hint within the input field (e.g. to display a hint)
+     * @param suffix       if non-null & non-empty, this will be displayed as a suffix at the end of the input field (e.g. to display units like km/ft)
      * @param okayListener provide the select listener called when user entered something and finishes it (called when user clicks on positive button)
      */
 
-    public void input(final int inputType, @Nullable final String defaultValue, @Nullable final String label, final Consumer<String> okayListener) {
-        final LinearLayout layout = new LinearLayout(getContext());
-        layout.setOrientation(LinearLayout.HORIZONTAL);
-        layout.setGravity(Gravity.CENTER_HORIZONTAL);
-
-        final boolean hasUnit = StringUtils.isNotEmpty(label);
-        final int dialogPadding = getContext().getResources().getDimensionPixelSize(R.dimen.dialog_padding_horizontal);
-        final LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
-        textParam.setMargins(dialogPadding, 0, hasUnit ? 0 : dialogPadding, 0);
-
-        final EditText editText = new EditText(getContext(), null, 0, R.style.edittext);
+    public void input(final int inputType, @Nullable final String defaultValue, @Nullable final String label, @Nullable final String suffix, final Consumer<String> okayListener) {
+        final TextInputLayout editTextFrame = (TextInputLayout) LayoutInflater.from(context).inflate(R.layout.dialog_edittext, null);
+        final EditText editText = editTextFrame.findViewById(R.id.input);
         editText.setInputType(inputType < 0 ? InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT : inputType);
         editText.setText(defaultValue == null ? "" : defaultValue.trim());
-        editText.setGravity(Gravity.LEFT);
-        editText.setLayoutParams(textParam);
-        layout.addView(editText);
-
-        if (hasUnit) {
-            final TextView unitText = ViewUtils.createTextItem(getContext(), R.style.text, TextParam.text(label));
-            final LinearLayout.LayoutParams unitParam = new LinearLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-            unitParam.setMargins(0, 0, dialogPadding, 0);
-            unitText.setLayoutParams(unitParam);
-            layout.addView(unitText);
-            editText.setGravity(Gravity.RIGHT);
+        if (StringUtils.isNotBlank(label)) {
+            editTextFrame.setHint("");
+        }
+        if (StringUtils.isNotBlank(suffix)) {
+            editTextFrame.setSuffixText(suffix);
         }
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
         applyCommons(builder);
-        builder.setView(layout);
+        builder.setView(editTextFrame);
         // remove whitespaces added by autocompletion of Android keyboard before calling okayListener
         builder.setPositiveButton(getPositiveButton(), (dialog, which) -> okayListener.accept(editText.getText().toString().trim()));
         builder.setNegativeButton(getNegativeButton(), (dialog, whichButton) -> dialog.dismiss());
