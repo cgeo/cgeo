@@ -128,10 +128,6 @@
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
 
-    <style name="button_borderless" parent="button">
-        <item name="android:background">?android:attr/selectableItemBackground</item>
-    </style>
-
     <style name="button_full" parent="button">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>

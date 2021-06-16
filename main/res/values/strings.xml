@@ -443,7 +443,6 @@
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_set_cache_icon">Set cache icons</string>
     <string name="caches_reset_cache_icons_title">Reset cache icons</string>
-    <string name="caches_reset_cache_icons">Do you want to reset the cache icons for all selected caches?</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
     <string name="select_icon">Select icon</string>
@@ -2249,7 +2248,6 @@
 
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Receive file</string>
-    <string name="receivedownload_receiving_file">Receiving file \"%s\"</string>
     <string name="receivedownload_success">File successfully stored as \"%s\"</string>
     <string name="receivedownload_error">Error while receiving file</string>
     <string name="receivedownload_error_io_exception">I/O error while receiving file. Is your folder \"%s\" writable?</string>
@@ -2283,8 +2281,6 @@
     <string name="downloadmap_download">download</string>
     <string name="downloadmap_retrieving_directory_data">Retrieving folder data…</string>
     <string name="downloadmap_checking_for_updates">Checking for updates…</string>
-    <string name="downloadmap_install_theme_title">Install theme file</string>
-    <string name="downloadmap_install_theme_info">Your downloaded map requires a special theme file. Do you want to download this as well?</string>
     <string name="downloadtile_title">Missing routing data</string>
     <string name="downloadtile_info">c:geo cannot calculate the requested route as there is some routing data file missing. Do you want to download missing routing data?</string>
     <string name="tileupdate_info">Do you want to check for updates of downloaded routing data files?</string>
@@ -2356,7 +2352,6 @@
 
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s folder synchronization finished after %2$s, %3$d of %4$s needed synchronization</string>
-    <string name="mapthemes_themescan_too_long_toast">Map theme scan took more that %1$d seconds, aborted after finding %2$d themes</string>
 
     <!-- default actions in dialogs -->
     <string name="previous">Previous</string>
