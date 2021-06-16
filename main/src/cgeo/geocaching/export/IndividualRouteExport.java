@@ -23,7 +23,6 @@ import android.app.Activity;
 import android.net.Uri;
 import android.text.InputFilter;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
