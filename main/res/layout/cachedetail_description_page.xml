@@ -156,15 +156,15 @@
                     android:gravity="right"
                     android:orientation="horizontal">
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/upload_personalnote"
                         style="@style/button_icon"
-                        app:srcCompat="@drawable/ic_menu_upload" />
+                        app:icon="@drawable/ic_menu_upload" />
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/edit_personalnote"
                         style="@style/button_icon"
-                        app:srcCompat="@drawable/ic_menu_edit" />
+                        app:icon="@drawable/ic_menu_edit" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -174,15 +174,15 @@
                     android:gravity="left"
                     android:orientation="horizontal">
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/storewaypoints_personalnote"
                         style="@style/button_icon"
-                        app:srcCompat="@drawable/ic_menu_waypoint_sync" />
+                        app:icon="@drawable/ic_menu_waypoint_sync" />
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/deleteewaypoints_personalnote"
                         style="@style/button_icon"
-                        app:srcCompat="@drawable/ic_menu_waypoint_delete" />
+                        app:icon="@drawable/ic_menu_waypoint_delete" />
 
                 </LinearLayout>
             </RelativeLayout>

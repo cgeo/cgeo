@@ -32,7 +32,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -138,12 +137,12 @@ public class CoordinatesInputDialog extends DialogFragment {
                 title.setText(R.string.cache_coordinates);
                 title.setVisibility(View.VISIBLE);
             }
-            final ImageButton cancel = v.findViewById(R.id.dialog_title_cancel);
+            final View cancel = v.findViewById(R.id.dialog_title_cancel);
             if (cancel != null) {
                 cancel.setOnClickListener(new InputCancelListener());
                 cancel.setVisibility(View.VISIBLE);
             }
-            final ImageButton done = v.findViewById(R.id.dialog_title_done);
+            final View done = v.findViewById(R.id.dialog_title_done);
             if (done != null) {
                 done.setOnClickListener(inputdone);
                 done.setVisibility(View.VISIBLE);

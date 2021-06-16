@@ -9,10 +9,10 @@ import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 import static cgeo.geocaching.ui.ViewUtils.setTooltip;
 
 import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,6 +22,7 @@ import androidx.core.content.res.ResourcesCompat;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.ChipGroup;
 
 public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesGeocacheFilter> {
@@ -84,8 +85,9 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         inverse = new ButtonToggleGroup(getActivity());
         inverse.addButtons(R.string.cache_filter_include, R.string.cache_filter_exclude);
 
-        final ImageButton clear = new ImageButton(getActivity(), null, 0, R.style.button_icon);
-        clear.setImageResource(R.drawable.ic_menu_clear_playlist);
+        final LayoutInflater inflater = LayoutInflater.from(getActivity());
+        final MaterialButton clear = (MaterialButton) inflater.inflate(R.layout.button_icon_view, ll, false);
+        clear.setIconResource(R.drawable.ic_menu_clear_playlist);
         clear.setOnClickListener(v -> {
             for (CacheAttribute ca : attributeViews.keySet()) {
                 setAttributeState(ca, null);

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <!-- system definitions -->
 
@@ -190,7 +192,7 @@
         <item name="colorPrimary">@color/colorText</item>
     </style>
 
-    <!-- Chips -->
+  <!-- Chips -->
 
     <style name="chip_choice" parent="@style/Widget.MaterialComponents.Chip.Choice">
         <item name="android:padding">6dip</item>

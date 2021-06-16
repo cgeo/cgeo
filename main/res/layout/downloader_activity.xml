@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mapdownloader_activity_viewroot"
     android:layout_width="fill_parent"
@@ -30,9 +31,8 @@
 
         <Button
             android:id="@+id/like_it"
-	    style="@style/button_icon"
-            android:drawableLeft="@drawable/ic_menu_heart"
-            android:gravity="right|center_vertical"
+	        style="@style/button_icon"
+            app:icon="@drawable/ic_menu_heart"
             android:layout_alignParentRight="true"
             android:text="@null"/>
 

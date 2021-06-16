@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -39,6 +38,7 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import com.google.android.material.button.MaterialButton;
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -119,18 +119,19 @@ public class ViewSettingsActivity extends AbstractActivity {
             View v = convertView;
             if (null == convertView) {
                 v = getLayoutInflater().inflate(R.layout.twotexts_twobuttons_item, parent, false);
-                ((ImageButton) v.findViewById(R.id.button_left)).setImageResource(R.drawable.ic_menu_edit);
-                ((ImageButton) v.findViewById(R.id.button_right)).setImageResource(R.drawable.ic_menu_delete);
             }
+
             final KeyValue keyValue = items.get(position);
             ((TextView) v.findViewById(R.id.title)).setText(keyValue.key);
             ((TextView) v.findViewById(R.id.detail)).setText(keyValue.value);
 
-            final View buttonDelete = v.findViewById(R.id.button_right);
+            final MaterialButton buttonDelete = v.findViewById(R.id.button_right);
+            buttonDelete.setIconResource(R.drawable.ic_menu_delete);
             buttonDelete.setOnClickListener(v2 -> deleteItem(position));
             buttonDelete.setVisibility(editMode ? View.VISIBLE : View.GONE);
 
-            final View buttonEdit = v.findViewById(R.id.button_left);
+            final MaterialButton buttonEdit = v.findViewById(R.id.button_left);
+            buttonEdit.setIconResource(R.drawable.ic_menu_edit);
             buttonEdit.setOnClickListener(v3 -> editItem(position));
             buttonEdit.setVisibility(editMode ? keyValue.type != SettingsUtils.SettingsType.TYPE_UNKNOWN ? View.VISIBLE : View.INVISIBLE : View.GONE);
 

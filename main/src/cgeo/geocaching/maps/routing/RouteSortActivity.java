@@ -24,7 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +33,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import com.google.android.material.button.MaterialButton;
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.SimpleFloatViewManager;
@@ -75,8 +75,6 @@ public class RouteSortActivity extends AbstractActivity {
                 View v = convertView;
                 if (null == convertView) {
                     v = getLayoutInflater().inflate(R.layout.twotexts_button_image_item, parent, false);
-                    ((ImageButton) v.findViewById(R.id.button_left)).setImageResource(R.drawable.ic_menu_delete);
-                    ((ImageView) v.findViewById(R.id.img_right)).setImageResource(R.drawable.ic_menu_reorder);
                 }
 
                 final RouteItem routeItem = routeItems.get(position);
@@ -114,11 +112,13 @@ public class RouteSortActivity extends AbstractActivity {
                     detail.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
                 }
 
-                final View buttonDelete = v.findViewById(R.id.button_left);
+                final MaterialButton buttonDelete = v.findViewById(R.id.button_left);
+                buttonDelete.setIconResource(R.drawable.ic_menu_delete);
                 buttonDelete.setVisibility(View.VISIBLE);
                 buttonDelete.setOnClickListener(vUp -> delete(position));
 
                 final ImageView imgReorder = v.findViewById(R.id.img_right);
+                imgReorder.setImageResource(R.drawable.ic_menu_reorder);
                 imgReorder.setVisibility(View.VISIBLE);
                 imgReorder.setOnTouchListener(controller);
 

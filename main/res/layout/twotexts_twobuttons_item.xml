@@ -39,12 +39,12 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsSecondary"
         tools:text="detail info" />
-    <ImageButton
+    <Button
         android:id="@+id/button_left"
         style="@style/button_icon"
         android:layout_toLeftOf="@id/button_right"
         android:visibility="gone" />
-    <ImageButton
+    <Button
         android:id="@+id/button_right"
         style="@style/button_icon"
         android:layout_alignParentRight="true"

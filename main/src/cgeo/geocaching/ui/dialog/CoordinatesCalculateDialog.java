@@ -39,7 +39,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -366,12 +365,12 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 title.setText(R.string.cache_calculator);
                 title.setVisibility(View.VISIBLE);
             }
-            final ImageButton cancel = v.findViewById(R.id.dialog_title_cancel);
+            final View cancel = v.findViewById(R.id.dialog_title_cancel);
             if (cancel != null) {
                 cancel.setOnClickListener(new CalculateCancelListener());
                 cancel.setVisibility(View.VISIBLE);
             }
-            final ImageButton doneButton = v.findViewById(R.id.dialog_title_done);
+            final View doneButton = v.findViewById(R.id.dialog_title_done);
             if (doneButton != null) {
                 doneButton.setOnClickListener(inputDone);
                 doneButton.setVisibility(View.VISIBLE);

@@ -24,18 +24,18 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <ImageButton
+        <Button
             android:id="@+id/image_add_multi"
             style="@style/button_icon"
             android:layout_gravity="left"
-            app:srcCompat="@drawable/ic_menu_image_multi" />
+            app:icon="@drawable/ic_menu_image_multi" />
 
-        <ImageButton
+        <Button
             android:id="@+id/image_add_camera"
             style="@style/button_icon"
             android:layout_gravity="left"
             android:layout_toRightOf="@+id/image_add_multi"
-            app:srcCompat="@drawable/ic_menu_camera" />
+            app:icon="@drawable/ic_menu_camera" />
 
     </RelativeLayout>
 
