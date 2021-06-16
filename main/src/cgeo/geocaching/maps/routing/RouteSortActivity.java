@@ -34,7 +34,6 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.shape.MarkerEdgeTreatment;
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.SimpleFloatViewManager;
