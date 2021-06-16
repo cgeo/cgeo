@@ -17,6 +17,6 @@
             android:hint="@string/filename_without_extension" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <include layout="@layout/gpx_export_fragment" android:id="@+id/info" />
+    <include layout="@layout/gpx_export_fragment" android:id="@+id/infoinclude" />
 
 </LinearLayout>

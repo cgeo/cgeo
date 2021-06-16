@@ -71,7 +71,7 @@ public class IndividualRouteExport {
         editFilename.setFilters(new InputFilter[] { filter });
         editFilename.setText(filename);
 
-        final TextView text = binding.info.info;
+        final TextView text = binding.infoinclude.info;
         text.setText(activity.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), filename + FileUtils.GPX_FILE_EXTENSION));
 
         builder
