@@ -280,7 +280,6 @@
 
     <string translatable="false" name="mapserver_hylly_name">Hylly</string>
     <string translatable="false" name="mapserver_hylly_updatecheckurl">https://kartat.hylly.org/</string>
-    <string translatable="false" name="mapserver_hylly_downloadurl">https://kartat-dl.hylly.org/</string>
     <string translatable="false" name="mapserver_hylly_likeiturl">https://kartat.hylly.org/</string>
     <string translatable="false" name="mapserver_hylly_projecturl">https://kartat.hylly.org/</string>
 
