@@ -260,9 +260,13 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(CgeoApplicationTest.testSearchByGeocode("GC68TJE").getHiddenDate()).isEqualTo("2016-01-23");
     }
 
+/*
+    temporarily disable this test until website is fixed
+        
     public static void testOnlineWatchCount() {
         assertThat(CgeoApplicationTest.testSearchByGeocode("GCK25B").getWatchlistCount()).as("Geocaching HQ watch count").isGreaterThan(50);
     }
+ */
 
     public void testSpoilerDescriptionForOwner() {
         final Geocache cache = parseCache(R.raw.gc352y3_owner_view);
