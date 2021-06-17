@@ -384,7 +384,6 @@
     <string name="caches_clear_offlinelogs_progress">清除离线服务器</string>
     <string name="caches_set_cache_icon">設定cache圖示</string>
     <string name="caches_reset_cache_icons_title">重設cache圖示</string>
-    <string name="caches_reset_cache_icons">是否要重置所有選定caches的緩存圖標？</string>
     <string name="caches_make_list_unique">使列表唯一</string>
     <string name="caches_set_listmarker">設定清單標記</string>
     <string name="select_icon">選擇圖示</string>
@@ -1535,7 +1534,6 @@
     <string name="button_continue">繼續</string>
     <string name="downloadmap_directory">資料夾</string>
     <string name="downloadmap_mapfile">地圖檔案</string>
-    <string name="downloadmap_install_theme_title">安裝主題檔</string>
     <string name="mapserver_openandromaps_themes_info">這是為了OpenAndroMaps所建立的詳細地圖主題</string>
     <string name="mapserver_freizeitkarte_themes_info">這是為了Freizeitkarte所建立的詳細地圖主題</string>
     <!-- history track -->
@@ -1565,4 +1563,5 @@
     <string name="done">已完成</string>
     <string name="finish">完成</string>
     <string name="back">後方</string>
+    <!-- ChipChoiceGroup -->
 </resources>
