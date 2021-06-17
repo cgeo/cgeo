@@ -420,7 +420,6 @@
     <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
     <string name="caches_set_cache_icon">Nastavit ikony kešky</string>
     <string name="caches_reset_cache_icons_title">Obnovit ikony kešek</string>
-    <string name="caches_reset_cache_icons">Chcete obnovit ikony kešek pro všechny vybrané kešky?</string>
     <string name="caches_make_list_unique">Vytvořit seznam jedinečných</string>
     <string name="caches_set_listmarker">Nastavit značku seznamu</string>
     <string name="select_icon">Vybrat ikonu</string>
@@ -482,6 +481,7 @@
     <string name="cache_filter_exclude">Vyloučit</string>
     <string name="cache_filter_userdisplay_complex">Komplexní</string>
     <string name="cache_filter_userdisplay_none">Žádný</string>
+    <string name="cache_filter_userdisplay_not">NE</string>
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="one">%1$d položka</item>
         <item quantity="few">%1$d položky</item>
@@ -513,10 +513,19 @@
     <string name="cache_filter_favorites_percentage">Procentuálně</string>
     <string name="cache_filter_distance_use_current_position">Použít aktuální pozici</string>
     <string name="cache_filter_status_select_all">Vše</string>
-    <string name="cache_filter_status_select_only_found_yes">Pouze nalezené</string>
-    <string name="cache_filter_status_select_only_found_no">Pouze nenalezené</string>
-    <string name="cache_filter_status_select_only_own_yes">Pouze vlastněné</string>
-    <string name="cache_filter_status_select_only_own_no">Pouze nevlastněné</string>
+    <string name="cache_filter_status_select_yes">Ano</string>
+    <string name="cache_filter_status_select_no">Ne</string>
+    <string name="cache_filter_status_select_label_found">Nalezená</string>
+    <string name="cache_filter_status_select_label_owned">Vlastněná</string>
+    <string name="cache_filter_status_select_label_stored">Uložená</string>
+    <string name="cache_filter_status_select_label_favorite">Oblíbená</string>
+    <string name="cache_filter_status_select_label_watchlist">V seznamu sledovaných</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky.\n\n Mysterka je považována za \"vyřešenou\", pokud má změněné souřadnice nebo vyplněný finální bod trasy se souřadnicemi.</string>
+    <string name="cache_filter_status_active">Aktivní</string>
+    <string name="cache_filter_status_disabled">Deaktivovaná</string>
+    <string name="cache_filter_status_archived">Archivovaná</string>
     <string name="cache_filter_status_exclude_active">Vyloučit aktivní</string>
     <string name="cache_filter_status_exclude_disabled">Vyloučit deaktivované</string>
     <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
@@ -2058,7 +2067,6 @@
     <string name="localfile_cannot_handle">Chyba při čtení souboru nebo c:geo neumí s tímto typem souboru pracovat.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Přijmout soubor</string>
-    <string name="receivedownload_receiving_file">Příjem souboru \"%s\"</string>
     <string name="receivedownload_success">Soubor byl úspěšně uložen jako \"%s\"</string>
     <string name="receivedownload_error">Chyba při přijímání souboru</string>
     <string name="receivedownload_error_io_exception">I/O chyba při přijímání souboru. Je vaše složka \"%s\" zapisovatelná?</string>
@@ -2091,8 +2099,6 @@
     <string name="downloadmap_download">stáhnout</string>
     <string name="downloadmap_retrieving_directory_data">Načítání údajů ze složky…</string>
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
-    <string name="downloadmap_install_theme_title">Nainstalovat soubor motivu</string>
-    <string name="downloadmap_install_theme_info">Stažená mapa vyžaduje speciální soubor motivu. Chcete ho stáhnout?</string>
     <string name="downloadtile_title">Chybí údaje o směrování</string>
     <string name="downloadtile_info">c:geo nemůže vypočítat požadovanou trasu, protože chybí některá data. Chcete stáhnout chybějící data pro směrování?</string>
     <string name="tileupdate_info">Chcete zkontrolovat aktualizace stažených souborů pro směrování?</string>
@@ -2159,7 +2165,6 @@
     <string name="wizard_skip_wizard_warning">c:geo nemusí fungovat podle očekávání, dokud nebude dokončena konfigurace. V závislosti na chybějící konfiguraci nemusí být c:geo schopen číst/ukládat data jako jsou offline mapy, kešky, poznámky atd.\n\nKdykoli se budete cítit připraveni dokončit nastavení, zvolte v hlavní nabídce „Průvodce konfigurací“ nebo c:geo restartujte.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizace %1$s složek byla dokončena po %2$s, %3$d z %4$s potřebuje synchronizaci</string>
-    <string name="mapthemes_themescan_too_long_toast">Skenování mapových motivů trvalo více než %1$d sekund, po nalezení %2$d motivů bylo přerušeno</string>
     <!-- default actions in dialogs -->
     <string name="previous">Předchozí</string>
     <string name="skip">Přeskočit</string>
@@ -2167,4 +2172,6 @@
     <string name="done">Hotovo</string>
     <string name="finish">Dokončit</string>
     <string name="back">Zpět</string>
+    <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Vybrat vše</string>
 </resources>
