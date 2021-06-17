@@ -418,7 +418,6 @@
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
     <string name="caches_set_cache_icon">Cache-Symbole wählen</string>
     <string name="caches_reset_cache_icons_title">Cache-Symbole zurücksetzen</string>
-    <string name="caches_reset_cache_icons">Möchtest du die Cache-Symbole für alle ausgewählten Caches zurücksetzen?</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
     <string name="select_icon">Symbol wählen</string>
@@ -503,10 +502,6 @@
     <string name="cache_filter_favorites_percentage">Prozentual</string>
     <string name="cache_filter_distance_use_current_position">Eigene Position verwenden</string>
     <string name="cache_filter_status_select_all">Alle</string>
-    <string name="cache_filter_status_select_only_found_yes">Nur Gefundene</string>
-    <string name="cache_filter_status_select_only_found_no">Nur nicht Gefundene</string>
-    <string name="cache_filter_status_select_only_own_yes">Nur Eigene</string>
-    <string name="cache_filter_status_select_only_own_no">Nur nicht Eigene</string>
     <string name="cache_filter_status_exclude_active">Aktive ausschließen</string>
     <string name="cache_filter_status_exclude_disabled">Deaktivierte ausschließen</string>
     <string name="cache_filter_status_exclude_archived">Archivierte ausschließen</string>
@@ -1998,7 +1993,6 @@
     <string name="localfile_cannot_handle">Fehler beim Lesen der Datei oder c:geo kennt diesen Dateityp nicht.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Datei empfangen</string>
-    <string name="receivedownload_receiving_file">Empfange Datei \"%s\"</string>
     <string name="receivedownload_success">Datei erfolgreich als \"%s \" gespeichert</string>
     <string name="receivedownload_error">Fehler beim Empfangen der Datei</string>
     <string name="receivedownload_error_io_exception">E/A-Fehler beim Empfangen der Datei. Ist dein Ordner \"%s\" beschreibbar?</string>
@@ -2031,8 +2025,6 @@
     <string name="downloadmap_download">Download</string>
     <string name="downloadmap_retrieving_directory_data">Empfange Ordnerdaten…</string>
     <string name="downloadmap_checking_for_updates">Prüfe auf Updates…</string>
-    <string name="downloadmap_install_theme_title">Design installieren</string>
-    <string name="downloadmap_install_theme_info">Die heruntergeladene Karte erfordert eine spezielles Kartendesign. Möchtest du dieses auch herunterladen?</string>
     <string name="downloadtile_title">Fehlende Routing-Daten</string>
     <string name="downloadtile_info">c:geo kann die angeforderte Route nicht berechnen, da einige Routingdaten fehlen. Möchtest du die fehlenden Routingdaten herunterladen?</string>
     <string name="tileupdate_info">Möchtest du nach Updates der heruntergeladenen Routing-Dateien suchen?</string>
@@ -2099,7 +2091,6 @@
     <string name="wizard_skip_wizard_warning">c:geo funktioniert möglicherweise nicht wie erwartet, bis die Konfiguration abgeschlossen ist. Abhängig von der fehlenden Konfiguration ist c:geo möglicherweise nicht in der Lage, Daten wie Offline-Karten, Geocaches, Logdateien usw. zu lesen/zu speichern.\n\nWann immer du bereit bist, das Setup abzuschließen, wähle entweder \"Konfigurations-Assistent\" im Hauptmenü oder starte c:geo neu.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s Ordnerabgleich beendet nach %2$s, %3$d von %4$s benötigten Abgleich</string>
-    <string name="mapthemes_themescan_too_long_toast">Scan nach Kartendesgins dauerte mehr als %1$d Sekunden, nach Fund von %2$d Designs abgebrochen</string>
     <!-- default actions in dialogs -->
     <string name="previous">Zurück</string>
     <string name="skip">Überspringen</string>
@@ -2107,4 +2098,5 @@
     <string name="done">Fertig</string>
     <string name="finish">Fertig</string>
     <string name="back">Zurück</string>
+    <!-- ChipChoiceGroup -->
 </resources>
