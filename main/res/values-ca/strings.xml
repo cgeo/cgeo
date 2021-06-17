@@ -419,7 +419,6 @@
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
     <string name="caches_set_cache_icon">Definiu les icones dels catxés</string>
     <string name="caches_reset_cache_icons_title">Restableix les icones de catxés</string>
-    <string name="caches_reset_cache_icons">Voleu restablir les icones de tots els catxés seleccionats?</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
     <string name="select_icon">Selecciona icona</string>
@@ -504,10 +503,6 @@
     <string name="cache_filter_favorites_percentage">Percentatge</string>
     <string name="cache_filter_distance_use_current_position">Utilitzeu la posició actual</string>
     <string name="cache_filter_status_select_all">Tots</string>
-    <string name="cache_filter_status_select_only_found_yes">Només Trobat</string>
-    <string name="cache_filter_status_select_only_found_no">Només no Trobat</string>
-    <string name="cache_filter_status_select_only_own_yes">Només Propietat</string>
-    <string name="cache_filter_status_select_only_own_no">Només no Propietat</string>
     <string name="cache_filter_status_exclude_active">Exclou Actiu</string>
     <string name="cache_filter_status_exclude_disabled">Exclou desactivat</string>
     <string name="cache_filter_status_exclude_archived">Exclou arxivats</string>
@@ -1994,7 +1989,6 @@
     <string name="localfile_cannot_handle">Error en llegir el fitxer o c: geo no pot gestionar aquest tipus de fitxer.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Rebre fitxer</string>
-    <string name="receivedownload_receiving_file">S\'està rebent el fitxer \"%s\"</string>
     <string name="receivedownload_success">El fitxer s\'ha emmagatzemat correctament com a \"%s\"</string>
     <string name="receivedownload_error">Error en rebre el fitxer</string>
     <string name="receivedownload_error_io_exception">Error en rebre el fitxer. La vostra carpeta \"%s\" es pot escriure?</string>
@@ -2027,8 +2021,6 @@
     <string name="downloadmap_download">descarregar</string>
     <string name="downloadmap_retrieving_directory_data">Recuperant les dades de la carpeta…</string>
     <string name="downloadmap_checking_for_updates">S\'estan cercant actualitzacions…</string>
-    <string name="downloadmap_install_theme_title">Instal·leu el fitxer del tema</string>
-    <string name="downloadmap_install_theme_info">El mapa descarregat requereix un fitxer de tema especial. Voleu descarregar-ho també?</string>
     <string name="downloadtile_title">Falten dades d’encaminament</string>
     <string name="downloadtile_info">C: geo no pot calcular la ruta sol·licitada, ja que falten alguns fitxers de dades d’encaminament. Voleu descarregar les dades d’encaminament que falten?</string>
     <string name="tileupdate_info">Voleu comprovar si hi ha actualitzacions de fitxers de dades d’encaminament descarregats?</string>
@@ -2095,7 +2087,6 @@
     <string name="wizard_skip_wizard_warning">C:geo és possible que no funcioni tal com s’esperava fins que no es completi la configuració. Depenent de la configuració que falti, C:geo pot no ser capaç de llegir / emmagatzemar dades com mapes fora de línia, catxés, registre, etc.\n\nSi estàs preparat per finalitzar la configuració, trieu \"Assistent de configuració\" al menú principal o reinicieu C:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">La sincronització de carpetes %1$s s\'ha acabat després de %2$s, s\'ha necessitat la sincronització de %3$d de %4$s</string>
-    <string name="mapthemes_themescan_too_long_toast">L\'escaneig del tema del mapa ha trigat més de %1$d segons, interromput després de trobar %2$d temes</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ometre</string>
@@ -2103,4 +2094,5 @@
     <string name="done">Fet</string>
     <string name="finish">Acabar</string>
     <string name="back">Enrere</string>
+    <!-- ChipChoiceGroup -->
 </resources>
