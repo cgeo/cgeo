@@ -1,6 +1,6 @@
-- Fix: Extract waypoint with same name but different coordinates from personal note
-- Fix: Bug in extracting user note for waypoint with formula
-- Fix: Export formula to PN instead of coordinates for completed formula
-- Fix: Offline map and themes folder incorrect after re-install and restore of backup
-- Fix: Track/route cannot be updated
-- Fix: Theming error for downloader in light theme
+- Oprava: Extrahovanie bodu trasy s rovnakým názvom ale odlišnými súradnicami z osobnej poznámky
+- Oprava: Chyba pri extrahovaní osobnej poznámky pre bod trasy so vzorcom
+- Oprava: Export vzorca do osobnej poznámky namiesto súradníc po vyplnení vzorca
+- Oprava: Priečinok offline máp a tém nie je po preinštalovaní a obnovení zálohy v poriadku
+- Oprava: Stopu/trasu nemožno aktualizovať
+- Oprava: Chyba témy pre preberanie súborov v svetlej téme
