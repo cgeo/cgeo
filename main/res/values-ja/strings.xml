@@ -417,7 +417,6 @@
     <string name="caches_clear_offlinelogs_progress">すべてのオフラインログを削除中</string>
     <string name="caches_set_cache_icon">キャッシュアイコン設定</string>
     <string name="caches_reset_cache_icons_title">キャッシュアイコンのリセット</string>
-    <string name="caches_reset_cache_icons">選択したすべてのキャッシュアイコンをデフォルトに戻しますか?</string>
     <string name="caches_make_list_unique">重複キャッシュを削除</string>
     <string name="caches_set_listmarker">リストマーカーを設定</string>
     <string name="select_icon">アイコンの選択</string>
@@ -506,10 +505,6 @@
     <string name="cache_filter_favorites_percentage">割合(%)</string>
     <string name="cache_filter_distance_use_current_position">現在地を使用</string>
     <string name="cache_filter_status_select_all">すべて</string>
-    <string name="cache_filter_status_select_only_found_yes">発見</string>
-    <string name="cache_filter_status_select_only_found_no">未発見</string>
-    <string name="cache_filter_status_select_only_own_yes">オーナー</string>
-    <string name="cache_filter_status_select_only_own_no">オーナーではない</string>
     <string name="cache_filter_status_exclude_active">アクティブを除外</string>
     <string name="cache_filter_status_exclude_disabled">一時停止中キャッシュを除外</string>
     <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
@@ -1959,7 +1954,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="localfile_cannot_handle">ファイルの読み取りエラー、またはc:geoはこのファイルタイプを処理できません</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">ファイルのダウンロード</string>
-    <string name="receivedownload_receiving_file">ファイル「%s」をダウンロード中</string>
     <string name="receivedownload_success">ファイルを「%s」として保存しました</string>
     <string name="receivedownload_error">ファイルのダウンロード中にエラーが発生しました</string>
     <string name="receivedownload_error_io_exception">ファイルのダウンロード中にI/Oエラーが発生しました。フォルダ「%s」は書き込み可能ですか？</string>
@@ -1992,8 +1986,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_download">ダウンロード</string>
     <string name="downloadmap_retrieving_directory_data">フォルダ情報を取得中…</string>
     <string name="downloadmap_checking_for_updates">更新を確認中…</string>
-    <string name="downloadmap_install_theme_title">テーマファイルのダウンロード</string>
-    <string name="downloadmap_install_theme_info">ダウンロードした地図には特別なテーマファイルが必要です。これもダウンロードしますか?</string>
     <string name="downloadtile_title">ルート検索データが見つかりません</string>
     <string name="downloadtile_info">ルート検索データが不足しているため、c:geoはルートを検索できません。ルート検索データをダウンロードしますか？</string>
     <string name="tileupdate_info">ダウンロードしたルート検索データの更新を確認しますか?</string>
@@ -2060,7 +2052,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_skip_wizard_warning">設定が完了するまでc:geoは期待通りに動作しない可能性があります。 未設定の項目によっては、オフライン地図、ジオキャッシュ、ログファイルなどのデータを読み込み/保存ができない場合があります。\n\nセットアップを再開するには、メインメニューで「設定ウィザード」を選択するか、c:geoを再起動してください。</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$sフォルダの同期が%2$sで完了しました。%3$d/%4$sが同期されました</string>
-    <string name="mapthemes_themescan_too_long_toast">地図テーマのスキャンに%1$d秒以上かかりました。%2$dテーマを見つけた後に中止されました。</string>
     <!-- default actions in dialogs -->
     <string name="previous">戻る</string>
     <string name="skip">スキップ</string>
@@ -2068,4 +2059,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="done">完了</string>
     <string name="finish">終了</string>
     <string name="back">戻る</string>
+    <!-- ChipChoiceGroup -->
 </resources>
