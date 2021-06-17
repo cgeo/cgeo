@@ -46,7 +46,7 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         final List<Download> list = getList(MapDownloaderMapsforge.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_mapsforge_downloadurl) + "europe/");
 
         // europe starting page currently has ... entries (including the "up" entry)
-        assertThat(list.size()).isEqualTo(54);
+        assertThat(list.size()).isBetween(52, 56);
 
         // first entry has to be the "up" entry
         assertThat(list.get(0).getIsDir()).isTrue();
@@ -55,7 +55,7 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(count(list, true)).isEqualTo(5);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isEqualTo(49);
+        assertThat(count(list, false)).isBetween(47, 51);
 
         // check one named entry
         final Download d = findByName(list, "Portugal");
@@ -69,7 +69,7 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         final List<Download> list = getList(MapDownloaderOpenAndroMaps.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_downloadurl) + "europe/");
 
         // europe starting page currently has ... entries (including the "up" entry)
-        assertThat(list.size()).isEqualTo(60);
+        assertThat(list.size()).isBetween(55, 65);
 
         // first entry has to be the "up" entry
         assertThat(list.get(0).getIsDir()).isTrue();
@@ -78,7 +78,7 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(count(list, true)).isEqualTo(1);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isEqualTo(59);
+        assertThat(count(list, false)).isBetween(54, 64);
 
         // check one named entry
         final Download d = findByName(list, "Scandinavia_SouthWest");
@@ -110,13 +110,13 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         final List<Download> list = getList(MapDownloaderFreizeitkarte.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_freizeitkarte_downloadurl));
 
         // number of maps found
-        assertThat(list.size()).isEqualTo(85);
+        assertThat(list.size()).isBetween(80, 90);
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(0);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isEqualTo(85);
+        assertThat(count(list, false)).isBetween(80, 90);
 
         // check one named entry
         final Download d = findByName(list, "Freizeitkarte Hamburg");
