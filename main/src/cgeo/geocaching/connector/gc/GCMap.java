@@ -194,7 +194,7 @@ public class GCMap {
             case STATUS:
                 final StatusGeocacheFilter statusFilter = (StatusGeocacheFilter) basicFilter;
                 search.setStatusFound(statusFilter.getStatusFound());
-                search.setStatusOwn(statusFilter.getStatusOwn());
+                search.setStatusOwn(statusFilter.getStatusOwned());
                 search.setStatusEnabled(statusFilter.isExcludeDisabled() ? Boolean.TRUE : (statusFilter.isExcludeActive() ? Boolean.FALSE : null));
                 break;
             case HIDDEN:

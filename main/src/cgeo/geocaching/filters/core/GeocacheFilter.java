@@ -195,6 +195,10 @@ public class GeocacheFilter {
         return "[" + ExpressionParser.toConfig(config) + "]" + (tree == null ? "" : FILTER_PARSER.getConfig(tree));
     }
 
+    @Override
+    public String toString() {
+        return toConfig();
+    }
 
     public boolean filter(final Geocache cache) {
         if (tree == null) {

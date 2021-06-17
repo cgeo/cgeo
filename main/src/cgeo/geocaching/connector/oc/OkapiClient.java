@@ -117,6 +117,7 @@ final class OkapiClient {
     private static final String WPT_TYPE = "type";
     private static final String WPT_NAME = "name";
     private static final String CACHE_IS_WATCHED = "is_watched";
+    private static final String CACHE_IS_RECOMMENDED = "is_recommended";
     private static final String CACHE_WPTS = "alt_wpts";
     private static final String CACHE_STATUS_ARCHIVED = "Archived";
     private static final String CACHE_STATUS_DISABLED = "Temporarily unavailable";
@@ -176,11 +177,12 @@ final class OkapiClient {
     // Core: for livemap requests (L3 - only with level 3 auth)
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
     private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count|owner|founds|notfounds|rating|rating_votes|recommendations|region|country2";
-    private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
+    private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found|is_recommended";
+    private static final String SERVICE_CACHE_CORE_CURRENT_L3_FIELDS = "is_watched";
     private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd|trackables";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|attr_acodes|willattends|short_description";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "my_notes";
-    private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS = "is_watched";
+    private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS = "";
 
     private static final String METHOD_SEARCH_ALL = "services/caches/search/all";
     private static final String METHOD_SEARCH_BBOX = "services/caches/search/bbox";
@@ -352,7 +354,7 @@ final class OkapiClient {
                 if (statusFilter.getStatusFound() != null) {
                     valueMap.put("found_status", statusFilter.getStatusFound() ? "found_only" : "notfound_only");
                 }
-                if (FALSE.equals(statusFilter.getStatusOwn())) {
+                if (FALSE.equals(statusFilter.getStatusOwned())) {
                     valueMap.put("exclude_my_own", "true");
                 }
                 break;
@@ -715,6 +717,12 @@ final class OkapiClient {
         if (response.has(CACHE_IS_FOUND)) {
             cache.setFound(response.get(CACHE_IS_FOUND).asBoolean());
         }
+        if (response.has(CACHE_IS_WATCHED)) {
+            cache.setFound(response.get(CACHE_IS_WATCHED).asBoolean());
+        }
+        if (response.has(CACHE_IS_RECOMMENDED)) {
+            cache.setFavorite(response.get(CACHE_IS_RECOMMENDED).asBoolean());
+        }
         cache.setHidden(parseDate(response.get(CACHE_HIDDEN).asText()));
 
         final String owner = parseUser(response.get(CACHE_OWNER));
@@ -743,6 +751,9 @@ final class OkapiClient {
 
         cache.setFavoritePoints(response.get(CACHE_RECOMMENDATIONS).asInt());
 
+        //set basic properties which are constant / not used for OC platforms
+        cache.setPremiumMembersOnly(false);
+        cache.setUserModifiedCoords(false);
     }
 
     private static String absoluteUrl(final String url, final String geocode) {
@@ -1036,8 +1047,14 @@ final class OkapiClient {
 
     @NonNull
     private static String getCoreFields(@NonNull final OCApiConnector connector) {
+        final StringBuilder res = new StringBuilder(SERVICE_CACHE_CORE_FIELDS);
+
         if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-            return SERVICE_CACHE_CORE_FIELDS + SEPARATOR + SERVICE_CACHE_CORE_L3_FIELDS;
+            res.append(SEPARATOR).append(SERVICE_CACHE_CORE_L3_FIELDS);
+
+            if (connector.getApiSupport() == ApiSupport.current) {
+                res.append(SEPARATOR).append(SERVICE_CACHE_CORE_CURRENT_L3_FIELDS);
+            }
         }
 
         return SERVICE_CACHE_CORE_FIELDS;
@@ -1055,7 +1072,7 @@ final class OkapiClient {
         }
         if (connector.getApiSupport() == ApiSupport.current) {
             res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS);
-            if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+            if (connector.getSupportedAuthLevel() == OAuthLevel.Level3 && !SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS.isEmpty()) {
                 res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS);
             }
         }

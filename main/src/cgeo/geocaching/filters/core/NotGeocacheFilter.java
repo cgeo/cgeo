@@ -1,7 +1,9 @@
 package cgeo.geocaching.filters.core;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 public class NotGeocacheFilter extends AndGeocacheFilter {
 
@@ -25,6 +27,6 @@ public class NotGeocacheFilter extends AndGeocacheFilter {
 
     @Override
     public String toUserDisplayableString(final int level) {
-        return "-" + super.toUserDisplayableString(level);
+        return LocalizationUtils.getString(R.string.cache_filter_userdisplay_not) + "[" + super.toUserDisplayableString(level) + "]";
     }
 }

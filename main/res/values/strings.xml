@@ -513,6 +513,7 @@
 
     <string name="cache_filter_userdisplay_complex">Complex</string>
     <string name="cache_filter_userdisplay_none">None</string>
+    <string name="cache_filter_userdisplay_not">NOT</string>
 
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="zero">%1$d items</item>
@@ -554,11 +555,21 @@
     <string name="cache_filter_distance_use_current_position">Use current position</string>
 
     <string name="cache_filter_status_select_all">All</string>
-    <string name="cache_filter_status_select_only_found_yes">Only Found</string>
-    <string name="cache_filter_status_select_only_found_no">Only Not Found</string>
-    <string name="cache_filter_status_select_only_own_yes">Only Owned</string>
-    <string name="cache_filter_status_select_only_own_no">Only Not Owned</string>
+    <string name="cache_filter_status_select_yes">Yes</string>
+    <string name="cache_filter_status_select_no">No</string>
 
+    <string name="cache_filter_status_select_label_found">Found</string>
+    <string name="cache_filter_status_select_label_owned">Owned</string>
+    <string name="cache_filter_status_select_label_stored">Stored</string>
+    <string name="cache_filter_status_select_label_favorite">Favored</string>
+    <string name="cache_filter_status_select_label_watchlist">On Watchlist</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Solved Mystery</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">This filter setting will only affect mystery caches.\n\n A mystery is considered \'solved\' if it has either changed coordinates or a valid final waypoint filled with coordinates.</string>
+
+    <string name="cache_filter_status_active">Active</string>
+    <string name="cache_filter_status_disabled">Disabled</string>
+    <string name="cache_filter_status_archived">Archived</string>
     <string name="cache_filter_status_exclude_active">Exclude Active</string>
     <string name="cache_filter_status_exclude_disabled">Exclude Disabled</string>
     <string name="cache_filter_status_exclude_archived">Exclude Archived</string>
@@ -2354,5 +2365,8 @@
     <string name="done">Done</string>
     <string name="finish">Finish</string>
     <string name="back">Back</string>
+
+    <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Select All</string>
 
 </resources>

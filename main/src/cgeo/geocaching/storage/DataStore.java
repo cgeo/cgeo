@@ -3401,6 +3401,9 @@ public class DataStore {
             }
             if (filter != null && filter.getTree() != null) {
                 filter.getTree().addToSql(sqlBuilder);
+                if (!sqlBuilder.allWheresClosed()) {
+                    Log.e("SQL Where not closed in SqlBuilder '" + sqlBuilder + "' for '" + filter + "'");
+                }
                 sqlBuilder.closeAllOpenWheres();
             }
             if (sort != null) {
