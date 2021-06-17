@@ -428,8 +428,6 @@
     <string name="cache_filter_checkboxlist_selectallnone">Pasirinkti visas</string>
     <string name="cache_filter_distance_use_current_position">Naudoti dabartinę vietą</string>
     <string name="cache_filter_status_select_all">Visos</string>
-    <string name="cache_filter_status_select_only_found_yes">Tik surastos</string>
-    <string name="cache_filter_status_select_only_found_no">Tik nesurastos</string>
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
@@ -1748,4 +1746,5 @@
     <string name="done">Atlikta</string>
     <string name="finish">Baigta</string>
     <string name="back">Atgal</string>
+    <!-- ChipChoiceGroup -->
 </resources>
