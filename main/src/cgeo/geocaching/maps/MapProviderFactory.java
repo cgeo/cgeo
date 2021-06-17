@@ -2,6 +2,7 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.databinding.LocSwitchActionBinding;
 import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -10,7 +11,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -92,11 +93,10 @@ public class MapProviderFactory {
 
     public static CheckBox createLocSwitchMenuItem(final Activity activity, final Menu menu) {
         final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
-        final CheckBox locSwitch = new CheckBox(new ContextThemeWrapper(activity, R.style.actionBarStyle));
-        locSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
-        item.setActionView(locSwitch);
+        final LocSwitchActionBinding binding = LocSwitchActionBinding.inflate(LayoutInflater.from(activity));
+        item.setActionView(binding.getRoot());
 
-        return locSwitch;
+        return binding.locSwitch;
     }
 
     @Nullable

@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
 
-    <ImageButton
+    <!-- separate view to display ripple/color change when menu item is clicked -->
+    <FrameLayout
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    <ImageButton xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/default_navigation_action"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="?actionButtonStyle"
         android:scaleType="centerInside"
-        app:srcCompat="@drawable/ic_menu_compass"
-        android:background="@drawable/actionbar_button" />
+        app:srcCompat="@drawable/ic_menu_compass" />
 
-</LinearLayout>
+</FrameLayout>
+

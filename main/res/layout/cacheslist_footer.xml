@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<TextView
     android:id="@+id/more_caches_1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/actionbar_background"
+    android:background="@color/colorBackgroundActionBar"
     android:ellipsize="end"
     android:gravity="center"
     android:lines="1"
@@ -19,16 +18,16 @@
     android:scrollHorizontally="true"
     android:text="@string/caches_no_cache"
     android:textSize="@dimen/textSize_detailsPrimary"
+    android:textColor="@color/colorTextActionBar"
     tools:context=".CacheListActivity"
     android:maxLines="1" />
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <TextView
         android:id="@+id/more_caches_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/actionbar_background"
+        android:background="@color/colorBackgroundActionBar"
         android:ellipsize="end"
         android:gravity="center"
         android:lines="1"
@@ -36,6 +35,7 @@
         android:scrollHorizontally="true"
         android:text="@string/caches_no_cache"
         android:textSize="@dimen/textSize_detailsPrimary"
+        android:textColor="@color/colorTextActionBar"
         tools:context=".CacheListActivity"
         android:maxLines="1" />
 
