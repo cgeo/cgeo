@@ -418,7 +418,6 @@
     <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
     <string name="caches_set_cache_icon">Aseta kätkön kuvakkeet</string>
     <string name="caches_reset_cache_icons_title">Nollaa kätkön kuvakkeet</string>
-    <string name="caches_reset_cache_icons">Haluatko nollata kaikkien valittujen kätköjen kuvakkeet?</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
     <string name="caches_set_listmarker">Aseta listan merkki</string>
     <string name="select_icon">Valitse kuvake</string>
@@ -509,10 +508,6 @@
     <string name="cache_filter_favorites_percentage">Prosenttiosuus</string>
     <string name="cache_filter_distance_use_current_position">Käytä nykyistä sijaintia</string>
     <string name="cache_filter_status_select_all">Kaikki</string>
-    <string name="cache_filter_status_select_only_found_yes">Vain Löydetty</string>
-    <string name="cache_filter_status_select_only_found_no">Vain Ei Löytynyt</string>
-    <string name="cache_filter_status_select_only_own_yes">Vain Omat</string>
-    <string name="cache_filter_status_select_only_own_no">Vain Ei-Omat</string>
     <string name="cache_filter_status_exclude_active">Rajaa pois aktiiviset</string>
     <string name="cache_filter_status_exclude_disabled">Rajaa pois hyllytetyt</string>
     <string name="cache_filter_status_exclude_archived">Rajaa pois arkistoidut</string>
@@ -2004,7 +1999,6 @@
     <string name="localfile_cannot_handle">Virhe luettaessa tiedostoa tao c:geo ei pysty käsittelemään tätä tiedostomuotoa.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Vastaanota tiedosto</string>
-    <string name="receivedownload_receiving_file">Vastaanotetaan tiedostoa \"%s\"</string>
     <string name="receivedownload_success">Tiedosto tallennettu onnistuneesti nimellä \"%s\"</string>
     <string name="receivedownload_error">Virhe tiedostoa vastaanotettaessa</string>
     <string name="receivedownload_error_io_exception">I/O-virhe tiedostoa vastaanotettaessa. Onko kansiosi \"%s\" kirjoitettavissa?</string>
@@ -2037,8 +2031,6 @@
     <string name="downloadmap_download">lataa</string>
     <string name="downloadmap_retrieving_directory_data">Haetaan kansion tietoja…</string>
     <string name="downloadmap_checking_for_updates">Tarkistetaan päivityksiä…</string>
-    <string name="downloadmap_install_theme_title">Asenna teematiedosto</string>
-    <string name="downloadmap_install_theme_info">Ladattu kartta vaatii erityisen teematiedoston. Haluatko ladata tämän samalla?</string>
     <string name="downloadtile_title">Puuttuvat reititystiedot</string>
     <string name="downloadtile_info">c:geo ei voi laskea pyydettyä reittiä, koska reititystiedosto puuttuu. Haluatko ladata puuttuvat reititystiedot?</string>
     <string name="tileupdate_info">Haluatko tarkistaa ladattujen reititystietojen päivitykset?</string>
@@ -2105,7 +2097,6 @@
     <string name="wizard_skip_wizard_warning">c:geo ei ehkä toimi odotetusti ennen kuin määritys on valmis. Riippuen puuttuvista asetuksista c:geo ei ehkä pysty lukemaan tai tallentamaan tietoja, kuten offline-karttoja, geokätköjä, lokitiedostoja jne.\n\nKun olet valmis viimeistelemään määrityksen, valitse \"Configuration wizard\" päävalikosta tai käynnistä c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s kansion synkronointi päättyi %2$s jälkeen, %3$d %4$s :sta tarvitusta synkronoinnista</string>
-    <string name="mapthemes_themescan_too_long_toast">Karttateemojen skannaus vei enemmän kuin %1$d sekuntia, etsintä lopetettiin %2$d teeman löytämisen jälkeen</string>
     <!-- default actions in dialogs -->
     <string name="previous">Edellinen</string>
     <string name="skip">Ohita</string>
@@ -2113,4 +2104,5 @@
     <string name="done">Valmis</string>
     <string name="finish">Valmis</string>
     <string name="back">Takaisin</string>
+    <!-- ChipChoiceGroup -->
 </resources>
