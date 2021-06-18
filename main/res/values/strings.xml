@@ -1271,6 +1271,7 @@
     <string name="cache_dialog_favorite_remove_title">Favorite</string>
     <string name="cache_dialog_favorite_remove_message">Removing cache from your favorites…</string>
     <string name="cache_menu_navigate">Navigate</string>
+    <string name="cache_menu_target">Set as target</string>
     <string name="cache_menu_navigation_drive">Navigation (Driving)</string>
     <string name="cache_menu_navigation_drive_select_target">Select target</string>
     <string name="cache_menu_navigation_walk">Navigation (Walking)</string>

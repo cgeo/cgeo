@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -127,17 +128,19 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
             final View view = getView();
             assert view != null;
-            final TextView titleView = view.findViewById(R.id.actionbar_title);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable(), null, null, null);
-            titleView.setOnLongClickListener(v -> {
+            final Toolbar toolbar = view.findViewById(R.id.toolbar);
+            toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable());
+            toolbar.setLongClickable(true);
+            toolbar.setOnLongClickListener(v -> {
                 if (cache.isOffline()) {
-                    EmojiUtils.selectEmojiPopup(CachePopupFragment.this.getContext(), cache.getAssignedEmoji(), cache.getType().markerId, newCacheIcon -> {
+                    EmojiUtils.selectEmojiPopup(CachePopupFragment.this.requireContext(), cache.getAssignedEmoji(), cache.getType().markerId, newCacheIcon -> {
                         cache.setAssignedEmoji(newCacheIcon);
-                        titleView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable(), null, null, null);
+                        toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable());
                         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
                     });
+                    return true;
                 }
-                return true;
+                return false;
             });
 
             final LinearLayout layout = view.findViewById(R.id.details_list);
@@ -294,22 +297,25 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         }
     }
 
-    @Override
-    public void navigateTo() {
-        NavigationAppFactory.startDefaultNavigationApplication(1, getActivity(), cache);
-    }
 
     @Override
     public void showNavigationMenu() {
         NavigationAppFactory.showNavigationMenu(getActivity(), cache, null, null, true, true);
     }
 
+    /**
+     * Tries to navigate to the {@link Geocache} of this activity.
+     */
+    @Override
+    public void startDefaultNavigation() {
+        NavigationAppFactory.startDefaultNavigationApplication(1, getActivity(), cache);
+    }
 
     /**
      * Tries to navigate to the {@link Geocache} of this activity.
      */
     @Override
-    protected void startDefaultNavigation2() {
+    public void startDefaultNavigation2() {
         if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.cache_coordinates_no));
             return;

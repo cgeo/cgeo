@@ -10,6 +10,13 @@
         app:showAsAction="always">
     </item>
     <item
+        android:id="@+id/menu_target"
+        android:icon="@drawable/ic_menu_near_me"
+        android:title="@string/cache_menu_target"
+        android:visible="false"
+        app:showAsAction="always">
+    </item>
+    <item
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_goto"
         android:title="@string/cache_menu_navigate"

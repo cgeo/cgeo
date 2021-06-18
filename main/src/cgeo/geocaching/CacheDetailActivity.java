@@ -8,7 +8,6 @@ import cgeo.geocaching.activity.TabbedViewPagerActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
-import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.calendar.CalendarAdder;
 import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
@@ -74,7 +73,6 @@ import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
-import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.UserClickListener;
@@ -155,7 +153,6 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -638,12 +635,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         CacheMenuHandler.addMenuItems(this, menu, cache);
-        final MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
-        final NavigationActionProvider navAction = (NavigationActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        if (navAction != null) {
-            navAction.setNavigationSource(this);
-        }
-        NavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_navigate), cache);
+        CacheMenuHandler.initNavigationMenuItems(menu, this, cache);
         return true;
     }
 
