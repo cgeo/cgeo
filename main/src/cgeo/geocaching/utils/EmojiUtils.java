@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.android.material.button.MaterialButton;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class EmojiUtils {
@@ -238,21 +239,30 @@ public class EmojiUtils {
         customTitle.dialogTitleTitle.setText(R.string.select_icon);
 
         // right button displays current value; clicking simply closes the dialog
-        customTitle.dialogButton2.setVisibility(View.VISIBLE);
+        final MaterialButton dialogButtonRight = (MaterialButton) customTitle.dialogButtonRight;
         if (currentValue == -1) {
-            customTitle.dialogButton2.setImageResource(R.drawable.ic_menu_mark);
+            dialogButtonRight.setVisibility(View.VISIBLE);
+            dialogButtonRight.setIconResource(R.drawable.ic_menu_mark);
         } else if (currentValue != 0) {
-            customTitle.dialogButton2.setImageDrawable(getEmojiDrawable(paint, currentValue));
+            dialogButtonRight.setVisibility(View.VISIBLE);
+            dialogButtonRight.setIcon(getEmojiDrawable(paint, currentValue));
+            dialogButtonRight.setIconTint(null);
         } else if (defaultRes != 0) {
-            customTitle.dialogButton2.setImageResource(defaultRes);
+            dialogButtonRight.setVisibility(View.VISIBLE);
+            dialogButtonRight.setIconResource(defaultRes);
+            dialogButtonRight.setIconTint(null);
         }
-        customTitle.dialogButton2.setOnClickListener(v -> dialog.dismiss());
+        dialogButtonRight.setOnClickListener(v -> dialog.dismiss());
 
         // left button displays default value (if different from current value)
+        final MaterialButton dialogButtonLeft = (MaterialButton) customTitle.dialogButtonLeft;
         if (currentValue != 0 && defaultRes != currentValue) {
-            customTitle.dialogButton1.setVisibility(View.VISIBLE);
-            customTitle.dialogButton1.setImageResource(defaultRes == 0 ? R.drawable.ic_menu_reset : defaultRes);
-            customTitle.dialogButton1.setOnClickListener(v -> {
+            dialogButtonLeft.setIconResource(defaultRes == 0 ? R.drawable.ic_menu_reset : defaultRes);
+            if (defaultRes != 0) {
+                dialogButtonLeft.setIconTint(null);
+            }
+            dialogButtonLeft.setVisibility(View.VISIBLE);
+            dialogButtonLeft.setOnClickListener(v -> {
                 setNewCacheIcon.call(0);
                 dialog.dismiss();
             });

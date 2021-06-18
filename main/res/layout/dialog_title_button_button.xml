@@ -19,14 +19,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="5dp"
+        android:paddingRight="5dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true">
-        <ImageButton
-            android:id="@+id/dialog_button1"
+        <Button
+            android:id="@+id/dialog_buttonLeft"
             style="@style/button_icon"
             android:visibility="gone" />
-        <ImageButton
-            android:id="@+id/dialog_button2"
+        <Button
+            android:id="@+id/dialog_buttonRight"
             style="@style/button_icon"
             android:visibility="gone" />
     </LinearLayout>

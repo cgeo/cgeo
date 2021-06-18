@@ -35,6 +35,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import com.google.android.material.button.MaterialButton;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -273,11 +274,13 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
 
         final DialogTitleButtonButtonBinding titleViewBinding = DialogTitleButtonButtonBinding.inflate(LayoutInflater.from(context));
         titleViewBinding.dialogTitleTitle.setText(R.string.create_internal_cache);
-        titleViewBinding.dialogButton1.setVisibility(View.VISIBLE);
-        titleViewBinding.dialogButton1.setImageDrawable(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable());
-        titleViewBinding.dialogButton1.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), temporaryCache.getType().markerId, assignedEmoji -> {
+        final MaterialButton dialogButton = (MaterialButton) titleViewBinding.dialogButtonRight;
+        dialogButton.setVisibility(View.VISIBLE);
+        dialogButton.setIcon(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable());
+        dialogButton.setIconTint(null);
+        dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), temporaryCache.getType().markerId, assignedEmoji -> {
             temporaryCache.setAssignedEmoji(assignedEmoji);
-            titleViewBinding.dialogButton1.setImageDrawable(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable());
+            dialogButton.setIcon(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable());
         }));
 
         Dialogs.newBuilder(context)
