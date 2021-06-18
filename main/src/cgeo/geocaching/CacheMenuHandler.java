@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.calendar.CalendarAdder;
@@ -10,6 +11,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractUIFactory;
+import cgeo.geocaching.ui.NavigationActionProvider;
 
 import android.app.Activity;
 import android.view.Menu;
@@ -133,5 +135,14 @@ public final class CacheMenuHandler extends AbstractUIFactory {
 
     public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {
         addMenuItems(activity.getMenuInflater(), menu, cache, false);
+    }
+
+    public static void initNavigationMenuItems(final Menu menu, final INavigationSource navigationSource, final Geocache cache) {
+        final MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
+        final NavigationActionProvider navAction = (NavigationActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        if (navAction != null) {
+            navAction.setNavigationSource(navigationSource);
+        }
+        NavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_navigate), cache);
     }
 }

@@ -83,9 +83,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             }
 
 
-            binding.actionBar.actionbarTitle.setCompoundDrawablesWithIntrinsicBounds(ResourcesCompat.getDrawable(getResources(), waypoint.getWaypointType().markerId, null), null, null, null);
-
-            //getSupportActionBar().setIcon(getResources().getDrawable(waypoint.getWaypointType().markerId));
+            binding.toolbar.toolbar.setLogo(ResourcesCompat.getDrawable(getResources(), waypoint.getWaypointType().markerId, null));
 
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);
 
@@ -143,8 +141,11 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
         super.onDestroy();
     }
 
+    /**
+     * Tries to navigate to the {@link Geocache} of this activity.
+     */
     @Override
-    public void navigateTo() {
+    public void startDefaultNavigation() {
         NavigationAppFactory.startDefaultNavigationApplication(1, getActivity(), waypoint);
     }
 

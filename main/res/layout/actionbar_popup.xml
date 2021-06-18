@@ -1,39 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/action_bar"
-    android:background="@color/colorBackgroundActionBar">
-
-    <TextView
-        android:id="@+id/actionbar_title"
-        android:drawablePadding="6dip"
-        android:gravity="center_vertical"
-        style="@style/action_bar_title" />
-
-    <View style="@style/action_bar_separator" />
-
-    <ImageView
-        android:id="@+id/defaultNavigation"
-        style="@style/action_bar_action"
-        android:longClickable="true"
-        android:src="@drawable/ic_menu_compass" />
-
-    <View style="@style/action_bar_separator" />
-
-    <ImageView
-        android:id="@+id/setAsTarget"
-        style="@style/action_bar_action"
-        android:longClickable="true"
-        android:src="@drawable/ic_menu_near_me" />
-
-    <View
-        android:id="@+id/setAsTargetSep"
-        style="@style/action_bar_separator" />
-
-    <ImageView
-        android:id="@+id/overflowActionBar"
-        style="@style/action_bar_action"
-        android:longClickable="true"
-        android:src="@drawable/three_dot_vertical" />
-
-</LinearLayout>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackgroundActionBar"
+    android:minHeight="?attr/actionBarSize"
+    app:contentInsetStart="5dp"
+    app:titleTextColor="@color/colorTextActionBar" />

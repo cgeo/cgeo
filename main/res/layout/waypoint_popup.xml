@@ -7,7 +7,7 @@
     tools:context=".WaypointPopupFragment" >
 
     <include
-        android:id="@+id/actionBar"
+        android:id="@+id/toolbar"
         layout="@layout/actionbar_popup" />
 
     <ScrollView
