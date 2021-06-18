@@ -87,9 +87,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             (statusWatchlist == null || cache.isOnWatchlist() == statusWatchlist) &&
             (statusPremium == null || cache.isPremiumMembersOnly() == statusPremium) &&
             (statusSolvedMystery == null || cache.getType() != CacheType.MYSTERY ||
-                (cache.hasUserModifiedCoords() ||
-                    cache.getFirstMatchingWaypoint(wp -> wp.getWaypointType() == WaypointType.FINAL && wp.getCoords() != null) != null)
-                    == statusSolvedMystery);
+                (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery);
     }
 
     public boolean isExcludeActive() {

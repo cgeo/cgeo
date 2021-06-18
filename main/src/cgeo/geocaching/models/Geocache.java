@@ -398,7 +398,7 @@ public class Geocache implements IWaypoint {
     /**
      * Returns the first found Waypoint matching the given condition
      */
-    public Waypoint getFirstMatchingWaypoint(final Func1<Waypoint, Boolean> condition) {
+    private Waypoint getFirstMatchingWaypoint(final Func1<Waypoint, Boolean> condition) {
         for (final Waypoint wpt : waypoints) {
             if (wpt != null && condition.call(wpt)) {
                 return wpt;
@@ -1556,13 +1556,7 @@ public class Geocache implements IWaypoint {
      * Reset {@code finalDefined} based on current list of stored waypoints
      */
     private void resetFinalDefined() {
-        finalDefined = false;
-        for (final Waypoint wp : waypoints) {
-            if (wp.isFinalWithCoords()) {
-                finalDefined = true;
-                break;
-            }
-        }
+        finalDefined = getFirstMatchingWaypoint(Waypoint::isFinalWithCoords) != null;
     }
 
     public boolean hasUserModifiedCoords() {
