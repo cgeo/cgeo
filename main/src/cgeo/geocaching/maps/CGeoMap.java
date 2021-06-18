@@ -693,6 +693,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
             });
         }
+        MapUtils.setFilterBar(activity);
         resumeTrack(false);
     }
 

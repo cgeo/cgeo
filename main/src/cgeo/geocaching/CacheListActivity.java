@@ -647,6 +647,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public void onResume() {
         super.onResume();
+        currentCacheFilter = GeocacheFilter.loadFromSettings();
+        adapter.setFilter(currentFilter, currentCacheFilter);
+        prepareFilterBar();
 
         // resume location access
         PermissionHandler.executeIfLocationPermissionGranted(this, new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CacheListActivity) {

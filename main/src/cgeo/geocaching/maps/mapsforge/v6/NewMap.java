@@ -712,6 +712,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         resumeRoute(false);
         resumeTrack(false);
         mapView.getModel().mapViewPosition.addObserver(this);
+        MapUtils.setFilterBar(this);
     }
 
     @Override
