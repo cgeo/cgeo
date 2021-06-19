@@ -1174,6 +1174,7 @@
     <string name="cache_dialog_favorite_remove_title">Oblíbené</string>
     <string name="cache_dialog_favorite_remove_message">Odstraňování kešky z oblíbených…</string>
     <string name="cache_menu_navigate">Navigovat</string>
+    <string name="cache_menu_target">Nastavit jako cíl</string>
     <string name="cache_menu_navigation_drive">Navigace (řízení)</string>
     <string name="cache_menu_navigation_drive_select_target">Vybrat cíl</string>
     <string name="cache_menu_navigation_walk">Navigace (chůze)</string>
