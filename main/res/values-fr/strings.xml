@@ -1098,6 +1098,7 @@
     <string name="cache_dialog_favorite_remove_title">Favori</string>
     <string name="cache_dialog_favorite_remove_message">Suppression de la cache de vos favoris…</string>
     <string name="cache_menu_navigate">Navigation</string>
+    <string name="cache_menu_target">Définir comme destination</string>
     <string name="cache_menu_navigation_drive">Navigation (voiture)</string>
     <string name="cache_menu_navigation_drive_select_target">Sélectionnez une cible</string>
     <string name="cache_menu_navigation_walk">Navigation (piéton)</string>
