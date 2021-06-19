@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -199,30 +198,19 @@ public class ViewSettingsActivity extends AbstractActivity {
                 inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL;
                 break;
         }
-        final EditText editText = new EditText(this);
-        editText.setInputType(inputType);
-        editText.setText(keyValue.value);
-
-        Dialogs.newBuilder(this)
-            .setTitle(String.format(getString(R.string.edit_setting), key))
-            .setView(editText)
-            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                final String newValue = editText.getText().toString();
-                final SharedPreferences.Editor editor = prefs.edit();
-                try {
-                    SettingsUtils.putValue(editor, type, key, newValue);
-                    editor.apply();
-                    debugAdapter.remove(keyValue);
-                    debugAdapter.insert(new KeyValue(key, newValue, type), position);
-                } catch (XmlPullParserException e) {
-                    showToast(R.string.edit_setting_error_unknown_type);
-                } catch (NumberFormatException e) {
-                    showToast(String.format(getString(R.string.edit_setting_error_invalid_data), newValue));
-                }
-            })
-            .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
-            .show()
-        ;
+        Dialogs.input(this, String.format(getString(R.string.edit_setting), key), keyValue.value, null, inputType, 1, 1, newValue -> {
+            final SharedPreferences.Editor editor = prefs.edit();
+            try {
+                SettingsUtils.putValue(editor, type, key, newValue);
+                editor.apply();
+                debugAdapter.remove(keyValue);
+                debugAdapter.insert(new KeyValue(key, newValue, type), position);
+            } catch (XmlPullParserException e) {
+                showToast(R.string.edit_setting_error_unknown_type);
+            } catch (NumberFormatException e) {
+                showToast(String.format(getString(R.string.edit_setting_error_invalid_data), newValue));
+            }
+        });
     }
 
     private void addItem() {
