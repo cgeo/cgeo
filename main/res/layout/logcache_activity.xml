@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/logcache_viewroot"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -40,25 +42,20 @@
                     tools:text="log date"/>
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/log"
-                style="@style/edittext_full"
-                android:layout_height="wrap_content"
-                android:hint="@string/log_new_log_text"
-                android:autofillHints="@string/log_new_log_text"
-                android:inputType="textMultiLine|textCapSentences"
-                android:maxLength="4000"
-                android:minLines="5"
-                tools:text="The log text is limited to 4000 characters."/>
-
-            <TextView
-                android:id="@+id/log_characters_counter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dip"
-                android:layout_gravity="right"
-                android:visibility="gone"
-                android:textSize="@dimen/textSize_detailsSecondary" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/textinput_edittext"
+                app:counterEnabled="true"
+                app:counterMaxLength="4000">
+                <EditText
+                    android:id="@+id/log"
+                    style="@style/textinput_embedded"
+                    android:hint="@string/log_new_log_text"
+                    android:autofillHints="@string/log_new_log_text"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLength="4000"
+                    android:minLines="5"
+                    tools:text="The log text is limited to 4000 characters."/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:id="@+id/log_password_box"
@@ -69,22 +66,22 @@
                 android:visibility="gone"
                 tools:visibility="visible">
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:padding="10dip"
-                    android:text="@string/log_password_title"
-                    android:textSize="@dimen/textSize_headingPrimary" />
+                <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+                    <TextView
+                        style="@style/textinput_embedded"
+                        android:padding="10dip"
+                        android:text="@string/log_password_title"
+                        android:textSize="@dimen/textSize_headingPrimary" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/log_password"
-                    style="@style/edittext_full"
-                    android:hint="@string/log_hint_log_password"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    tools:ignore="TextFields"
-                    android:maxLines="1" />
+                <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+                    <EditText
+                        android:id="@+id/log_password"
+                        style="@style/textinput_embedded"
+                        android:hint="@string/log_hint_log_password"
+                        android:importantForAutofill="no"
+                        tools:ignore="TextFields" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -165,9 +162,7 @@
             tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
-
                 <View style="@style/separator_horizontal" />
-
                 <TextView
                     style="@style/separator_horizontal_headline"
                     android:text="@string/cache_inventory" />
