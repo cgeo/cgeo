@@ -56,25 +56,29 @@
             android:visibility="gone"
             tools:visibility="visible"/>
 
-        <EditText
-            android:id="@+id/caption"
-            style="@style/edittext_full"
-            android:layout_height="wrap_content"
-            android:hint="@string/log_image_caption"
-            android:autofillHints="@string/log_image_caption"
-            android:inputType="textCapSentences"
-            android:maxLength="50"
-            android:minLines="1" />
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
+            <EditText
+                android:id="@+id/caption"
+                style="@style/textinput_embedded"
+                android:layout_height="wrap_content"
+                android:hint="@string/log_image_caption"
+                android:autofillHints="@string/log_image_caption"
+                android:inputType="textCapSentences"
+                android:maxLength="50"
+                android:minLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/description"
-            style="@style/edittext_full"
-            android:layout_height="wrap_content"
-            android:hint="@string/log_image_description"
-            android:autofillHints="@string/log_image_description"
-            android:inputType="textMultiLine|textCapSentences"
-            android:maxLength="250"
-            android:minLines="5" />
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+            <EditText
+                android:id="@+id/description"
+                style="@style/textinput_embedded"
+                android:layout_height="wrap_content"
+                android:hint="@string/log_image_description"
+                android:autofillHints="@string/log_image_description"
+                android:inputType="textMultiLine|textCapSentences"
+                android:maxLength="250"
+                android:minLines="5" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
             android:id="@+id/logImageScale"
