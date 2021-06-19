@@ -330,26 +330,24 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
         // show/hide Tracking Code Field for note type
         if (typeSelected != LogTypeTrackable.NOTE || loggingManager.isTrackingCodeNeededToPostNote()) {
-            binding.tracking.setVisibility(View.VISIBLE);
+            binding.trackingFrame.setVisibility(View.VISIBLE);
             // Request focus if field is empty
             if (StringUtils.isBlank(binding.tracking.getText())) {
                 binding.tracking.requestFocus();
             }
         } else {
-            binding.tracking.setVisibility(View.GONE);
+            binding.trackingFrame.setVisibility(View.GONE);
         }
 
         // show/hide Coordinate fields as Trackable needs
         if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates()) {
-            binding.geocode.setVisibility(View.VISIBLE);
-            binding.coordinates.setVisibility(View.VISIBLE);
+            binding.locationFrame.setVisibility(View.VISIBLE);
             // Request focus if field is empty
             if (StringUtils.isBlank(binding.geocode.getText())) {
                 binding.geocode.requestFocus();
             }
         } else {
-            binding.geocode.setVisibility(View.GONE);
-            binding.coordinates.setVisibility(View.GONE);
+            binding.locationFrame.setVisibility(View.GONE);
         }
     }
 
