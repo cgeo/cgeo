@@ -38,6 +38,9 @@
     <dimen name="textSize_headingWizard">26sp</dimen>
     <dimen name="textSize_detailsWizard">20sp</dimen>
 
+    <!-- buttons -->
+    <dimen name="textSize_buttonsPrimary">@dimen/textSize_detailsSecondary</dimen>
+w
     <!-- all other text -->
     <dimen name="textSize_detailsPrimary">16sp</dimen>
     <dimen name="textSize_detailsSecondary">14sp</dimen>
