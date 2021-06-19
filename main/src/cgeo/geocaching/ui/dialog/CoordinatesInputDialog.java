@@ -53,14 +53,27 @@ public class CoordinatesInputDialog extends DialogFragment {
     private Geopoint gp;
     private Geopoint cacheCoords;
 
-    private TextInputLayout eLatFrame, eLonFrame;
-    private EditText eLat, eLon;
-    private Button bLat, bLon;
+    private TextInputLayout eLatFrame;
+    private TextInputLayout eLonFrame;
+    private EditText eLat;
+    private EditText eLon;
+    private Button bLat;
+    private Button bLon;
     private Button bCalculate;
-    private EditText eLatDeg, eLatMin, eLatSec, eLatSub;
-    private EditText eLonDeg, eLonMin, eLonSec, eLonSub;
-    private TextView tLatSep1, tLatSep2, tLatSep3;
-    private TextView tLonSep1, tLonSep2, tLonSep3;
+    private EditText eLatDeg;
+    private EditText eLatMin;
+    private EditText eLatSec;
+    private EditText eLatSub;
+    private EditText eLonDeg;
+    private EditText eLonMin;
+    private EditText eLonSec;
+    private EditText eLonSub;
+    private TextView tLatSep1;
+    private TextView tLatSep2;
+    private TextView tLatSep3;
+    private TextView tLonSep1;
+    private TextView tLonSep2;
+    private TextView tLonSep3;
 
     private CoordInputFormatEnum currentFormat = null;
     private List<EditText> orderedInputs;
