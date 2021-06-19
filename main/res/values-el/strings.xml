@@ -418,7 +418,6 @@
     <string name="caches_clear_offlinelogs_progress">Διαγραφή καταγραφών εκτός σύνδεσης</string>
     <string name="caches_set_cache_icon">Ορισμός εικονιδίου κρύπτης</string>
     <string name="caches_reset_cache_icons_title">Επαναφορά εικονιδίων κρύπτης</string>
-    <string name="caches_reset_cache_icons">Θέλετε να επαναφέρετε τα εικονίδια των κρυπτών για ΟΛΕΣ τις επιλεγμένες κρύπτες;</string>
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
     <string name="caches_set_listmarker">Ορίστε τον δείκτη της λίστας</string>
     <string name="select_icon">Επιλέξτε εικονίδιο</string>
@@ -472,6 +471,7 @@
     <string name="cache_filter_log_entry">Καταχώρηση</string>
     <string name="cache_filter_location">Τοποθεσία</string>
     <string name="cache_filter_stored_lists">Αποθηκευμένες Λίστες</string>
+    <string name="cache_filter_origin">Προέλευση</string>
     <string name="cache_filtergroup_basic">Βασικό</string>
     <string name="cache_filtergroup_details">Λεπτομέρειες</string>
     <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
@@ -479,6 +479,7 @@
     <string name="cache_filter_exclude">Εξαίρεση</string>
     <string name="cache_filter_userdisplay_complex">Σύνθετο</string>
     <string name="cache_filter_userdisplay_none">Κανένα</string>
+    <string name="cache_filter_userdisplay_not">NOT</string>
     <string name="cache_filter_storage_load_button">Φόρτωση</string>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
@@ -504,10 +505,15 @@
     <string name="cache_filter_favorites_percentage">Ποσοστό</string>
     <string name="cache_filter_distance_use_current_position">Χρήση τρέχουσας θέσης</string>
     <string name="cache_filter_status_select_all">Όλες</string>
-    <string name="cache_filter_status_select_only_found_yes">Βρέθηκαν Μόνο</string>
-    <string name="cache_filter_status_select_only_found_no">Δεν Βρέθηκε Μόνο</string>
-    <string name="cache_filter_status_select_only_own_yes">Μόνο ιδιόκτητες</string>
-    <string name="cache_filter_status_select_only_own_no">Μόνο άλλων</string>
+    <string name="cache_filter_status_select_yes">Ναι</string>
+    <string name="cache_filter_status_select_no">Όχι</string>
+    <string name="cache_filter_status_select_label_found">Βρέθηκε</string>
+    <string name="cache_filter_status_select_label_owned">Ανήκει</string>
+    <string name="cache_filter_status_select_label_stored">Αποθηκευμένα</string>
+    <string name="cache_filter_status_select_label_favorite">Αγαπημένο</string>
+    <string name="cache_filter_status_select_label_watchlist">Σε Λίστα παρακολούθησης</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Λύμένο Μυστήριο</string>
     <string name="cache_filter_status_exclude_active">Εξαίρεση Ενεργών</string>
     <string name="cache_filter_status_exclude_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="cache_filter_status_exclude_archived">Εξαίρεση των αρχειοθετημένων</string>
@@ -1994,7 +2000,6 @@
     <string name="localfile_cannot_handle">Σφάλμα ανάγνωσης αρχείου ή το c:geo δεν μπορεί να διαχειριστεί αυτόν το τύπο αρχείου.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Λήψη αρχείου</string>
-    <string name="receivedownload_receiving_file">Λήψη αρχείου \"%s\"</string>
     <string name="receivedownload_success">Το αρχείο αποθηκεύτηκε επιτυχώς ως \"%s\"</string>
     <string name="receivedownload_error">Σφάλμα κατά την λήψη του αρχείου</string>
     <string name="receivedownload_error_io_exception">Σφάλμα I/O κατά την λήψη του αρχείου. Μπορεί να γίνει εγγραφή στην θέση αποθήκευσης \"%s\";</string>
@@ -2028,8 +2033,6 @@
     <string name="downloadmap_download">Λήψη</string>
     <string name="downloadmap_retrieving_directory_data">Ανάκτηση δεδομένων φακέλου…</string>
     <string name="downloadmap_checking_for_updates">Έλεγχος για ενημερώσεις…</string>
-    <string name="downloadmap_install_theme_title">Εγκατάσταση αρχείου θέματος</string>
-    <string name="downloadmap_install_theme_info">Ο κατεβασμένος χάρτης σας απαιτεί ένα ειδικό αρχείο θέματος. Θέλετε να το κατεβάσετε επίσης?</string>
     <string name="downloadtile_title">Λείπουν δεδομένα δρομολόγησης</string>
     <string name="downloadtile_info">Το c:geo δεν μπορεί να υπολογίσει την ζητούμενη διαδρομή καθώς λείπει κάποιο αρχείο δεδομένων δρομολόγησης. Θέλετε να κατεβάσετε δεδομένα δρομολόγησης που λείπουν;</string>
     <string name="tileupdate_info">Θέλετε να ελέγξετε για ενημερώσεις των κατεβασμένων αρχείων δρομολόγησης δεδομένων;</string>
@@ -2096,7 +2099,6 @@
     <string name="wizard_skip_wizard_warning">το c:geo μπορεί να μην λειτουργήσει όπως αναμένεται μέχρι να ολοκληρωθούν οι ρυθμίσεις. Ανάλογα με τη ρύθμιση c:geo που λείπει μπορεί να μην είναι σε θέση να διαβάσει/αποθηκεύσει δεδομένα όπως χάρτες εκτός σύνδεσης, geocaches, αρχεία καταγραφής κλπ.\n\nΌποτε αισθάνεστε έτοιμοι να ολοκληρώσετε τις ρυθμίσεις, είτε επιλέξτε \"Οδηγός διαμόρφωσης\" στο κύριο μενού είτε επανεκκινήστε το c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s ο συγχρονισμός φακέλου ολοκληρώθηκε μετά από %2$s, %3$d από %4$s χρειάζεται συγχρονισμό</string>
-    <string name="mapthemes_themescan_too_long_toast">Η σάρωση θέματος χάρτη χρειάστηκε περισσότερο από %1$d δευτερόλεπτα, εγκαταλείφθηκε μετά την εύρεση %2$d θεμάτων</string>
     <!-- default actions in dialogs -->
     <string name="previous">Προηγούμενο</string>
     <string name="skip">Παράλειψη</string>
@@ -2104,4 +2106,5 @@
     <string name="done">Ολοκληρώθηκε</string>
     <string name="finish">Ολοκληρώθηκε</string>
     <string name="back">Πίσω</string>
+    <!-- ChipChoiceGroup -->
 </resources>

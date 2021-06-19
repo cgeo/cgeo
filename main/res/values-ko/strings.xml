@@ -417,7 +417,6 @@
     <string name="caches_clear_offlinelogs_progress">오프라인 로그 삭제중</string>
     <string name="caches_set_cache_icon">캐시 아이콘 설정</string>
     <string name="caches_reset_cache_icons_title">캐시 아이콘 재설정</string>
-    <string name="caches_reset_cache_icons">선택한 모든 캐시의 캐시 아이콘을 재설정 하시겠습니까?</string>
     <string name="caches_make_list_unique">고유 목록 만들기</string>
     <string name="caches_set_listmarker">목록 표시 설정</string>
     <string name="select_icon">아이콘 선택</string>
@@ -471,6 +470,7 @@
     <string name="cache_filter_log_entry">로그</string>
     <string name="cache_filter_location">위치</string>
     <string name="cache_filter_stored_lists">저장된 목록</string>
+    <string name="cache_filter_origin">출발지</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
     <string name="cache_filtergroup_userspecific">사용자의 특정</string>
@@ -478,6 +478,7 @@
     <string name="cache_filter_exclude">제외</string>
     <string name="cache_filter_userdisplay_complex">복잡하게</string>
     <string name="cache_filter_userdisplay_none">없음</string>
+    <string name="cache_filter_userdisplay_not">아님</string>
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="other">%1$d 개 아이템</item>
     </plurals>
@@ -506,10 +507,19 @@
     <string name="cache_filter_favorites_percentage">비율</string>
     <string name="cache_filter_distance_use_current_position">현 위치 사용</string>
     <string name="cache_filter_status_select_all">모든</string>
-    <string name="cache_filter_status_select_only_found_yes">찾은 캐시만</string>
-    <string name="cache_filter_status_select_only_found_no">찾지 않은 캐시만</string>
-    <string name="cache_filter_status_select_only_own_yes">소유의 캐시만</string>
-    <string name="cache_filter_status_select_only_own_no">소유하지 않은 캐시만</string>
+    <string name="cache_filter_status_select_yes">예</string>
+    <string name="cache_filter_status_select_no">아니요</string>
+    <string name="cache_filter_status_select_label_found">찾음</string>
+    <string name="cache_filter_status_select_label_owned">소유함</string>
+    <string name="cache_filter_status_select_label_stored">저장됨</string>
+    <string name="cache_filter_status_select_label_favorite">호감캐시</string>
+    <string name="cache_filter_status_select_label_watchlist">관심목록에</string>
+    <string name="cache_filter_status_select_label_premium">프리미엄</string>
+    <string name="cache_filter_status_select_label_solved_mystery">해결된 미스터리</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">이 필터 설정은 미스터리 캐시에만 영향을 미칩니다.\n\n좌표가 변경되었거나 좌표로 채워진 유효한 최종 웨이 포인트가있는 경우 미스터리는 \'해결된\'것으로 간주됩니다.</string>
+    <string name="cache_filter_status_active">활성</string>
+    <string name="cache_filter_status_disabled">일시정지됨</string>
+    <string name="cache_filter_status_archived">영구보관됨</string>
     <string name="cache_filter_status_exclude_active">활성캐시 제외</string>
     <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
@@ -1976,7 +1986,6 @@
     <string name="localfile_cannot_handle">파일 읽기 오류 또는 c:geo가 이 파일 유형을 처리 할 수 없습니다.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">파일 받기</string>
-    <string name="receivedownload_receiving_file">\"%s\" 파일을 받는 중</string>
     <string name="receivedownload_success">파일이 \"%s\"(으)로 성공적으로 저장되었습니다.</string>
     <string name="receivedownload_error">파일을 받는 중 오류</string>
     <string name="receivedownload_error_io_exception">파일을 받는 중 I/O 오류가 발생했습니다. \"%s\"폴더에 쓰기가 가능합니까?</string>
@@ -2009,8 +2018,6 @@
     <string name="downloadmap_download">다운로드</string>
     <string name="downloadmap_retrieving_directory_data">폴더 정보 찾는 중…</string>
     <string name="downloadmap_checking_for_updates">업데이트 확인중…</string>
-    <string name="downloadmap_install_theme_title">테마 파일 설치</string>
-    <string name="downloadmap_install_theme_info">다운로드한 지도에는 특수 테마 파일이 필요합니다. 이것도 다운로드 하시겠습니까?</string>
     <string name="downloadtile_title">라우팅 데이터 누락</string>
     <string name="downloadtile_info">c:geo는 일부 라우팅 데이터 파일이 누락되어 요청 된 경로를 계산할 수 없습니다. 누락된 라우팅 데이터를 다운로드 하시겠습니까?</string>
     <string name="tileupdate_info">다운로드한 라우팅 데이터 파일의 업데이트를 확인 하시겠습니까?</string>
@@ -2077,7 +2084,6 @@
     <string name="wizard_skip_wizard_warning">c:geo는 구성이 완료 될 때까지 예상대로 작동하지 않을 수 있습니다. 누락 된 구성에 따라 c:geo는 오프라인지도, 지오캐시, 로그 파일 등과 같은 데이터를 읽고 저장하지 못할 수 있습니다.\n\n설정을 완료 할 준비가되면 주 메뉴에서 \"구성 마법사\"를 선택하거나 c:geo를 다시 시작하십시오.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%2$s 후 %1$s 폴더 동기화 완료, %4$s 중 %3$d 동기화 필요합니다</string>
-    <string name="mapthemes_themescan_too_long_toast">지도 테마 스캔이 %1$d 초 이상 걸렸으며 %2$d 개 테마를 찾은 후 중단되었습니다.</string>
     <!-- default actions in dialogs -->
     <string name="previous">이전</string>
     <string name="skip">건너뛰기</string>
@@ -2085,4 +2091,6 @@
     <string name="done">완료</string>
     <string name="finish">마침</string>
     <string name="back">뒤로가기</string>
+    <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">모두 선택</string>
 </resources>

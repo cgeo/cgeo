@@ -418,7 +418,6 @@
     <string name="caches_clear_offlinelogs_progress">Çevrimdışı kayıtlar temizleniyor</string>
     <string name="caches_set_cache_icon">Geocache simgelerini seç</string>
     <string name="caches_reset_cache_icons_title">Cache simgelerini sıfırla</string>
-    <string name="caches_reset_cache_icons">Tüm seçilenler için Geocache simgelerini sıfırlamak istiyor musunuz?</string>
     <string name="caches_make_list_unique">Listeyi özgün kıl</string>
     <string name="caches_set_listmarker">İşaretleyici ayarla</string>
     <string name="select_icon">Simge seç</string>
@@ -480,6 +479,7 @@
     <string name="cache_filter_exclude">Hariç Tut</string>
     <string name="cache_filter_userdisplay_complex">Kompleks</string>
     <string name="cache_filter_userdisplay_none">Hiçbiri</string>
+    <string name="cache_filter_userdisplay_not">DEĞİL</string>
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="one">%1$d öğe</item>
         <item quantity="other">%1$d öğe</item>
@@ -509,10 +509,19 @@
     <string name="cache_filter_favorites_percentage">Yüzde</string>
     <string name="cache_filter_distance_use_current_position">Mevcut konumu kullan</string>
     <string name="cache_filter_status_select_all">Tümü</string>
-    <string name="cache_filter_status_select_only_found_yes">Sadece Bulduklarım</string>
-    <string name="cache_filter_status_select_only_found_no">Sadece Bulmadıklarım</string>
-    <string name="cache_filter_status_select_only_own_yes">Sahibi Olduklarım</string>
-    <string name="cache_filter_status_select_only_own_no">Sahibi Olmadıklarım</string>
+    <string name="cache_filter_status_select_yes">Evet</string>
+    <string name="cache_filter_status_select_no">Hayır</string>
+    <string name="cache_filter_status_select_label_found">Buldum</string>
+    <string name="cache_filter_status_select_label_owned">Sahip olunan</string>
+    <string name="cache_filter_status_select_label_stored">Kaydedilmiş</string>
+    <string name="cache_filter_status_select_label_favorite">Favori</string>
+    <string name="cache_filter_status_select_label_watchlist">Takip listesinde</string>
+    <string name="cache_filter_status_select_label_premium">Ücretli</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Çözülmüş Gizemli</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Bu filtre ayarı sadece Gizemli cache\'ler için çalışır.\n\nEğer bir Gizemli cache\'in koordinatları değiştirilmişse veya geçerli bir yol noktasına koordinat girilmişse \'Çözülmüş\' olarak kabul edilir.</string>
+    <string name="cache_filter_status_active">Aktif</string>
+    <string name="cache_filter_status_disabled">Devredışı</string>
+    <string name="cache_filter_status_archived">Arşivenlendi</string>
     <string name="cache_filter_status_exclude_active">Aktifleri Dahil Etme</string>
     <string name="cache_filter_status_exclude_disabled">Devredışıları Hariç Tut</string>
     <string name="cache_filter_status_exclude_archived">Arşivlenmişleri Hariç Tut</string>
@@ -2004,7 +2013,6 @@
     <string name="localfile_cannot_handle">Dosyayı okurken hata oluştu ya da c:geo bu dosya türünü işleyemiyor.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Dosyayı al</string>
-    <string name="receivedownload_receiving_file">\"%s\" dosyası alınıyor</string>
     <string name="receivedownload_success">Dosya \"%s\" olarak başarıyla depolandı</string>
     <string name="receivedownload_error">Dosyayı alırken hata oluştu</string>
     <string name="receivedownload_error_io_exception">Dosyayı alırken G/Ç hatası alındı. \"%s\" klasörünüzde yazma yetkisi var mı?</string>
@@ -2037,8 +2045,6 @@
     <string name="downloadmap_download">indir</string>
     <string name="downloadmap_retrieving_directory_data">Klasör verisi alınıyor…</string>
     <string name="downloadmap_checking_for_updates">Güncellemeler denetleniyor…</string>
-    <string name="downloadmap_install_theme_title">Tema dosyasını kur</string>
-    <string name="downloadmap_install_theme_info">İndirdiğiniz harita özel bir tema dosyası gerektiriyor. Onu da indirmek ister misiniz?</string>
     <string name="downloadtile_title">Rotalama dosyası eksik</string>
     <string name="downloadtile_info">c:geo, bazı rotalama dosyaları eksik olduğundan istenilen rotayı hesaplayamıyor. Eksik olan rotalama dosyalarını indirmek ister misiniz?</string>
     <string name="tileupdate_info">İndirilmiş olan rotalama dosyalarının güncellemelerini kontrol etmek ister misiniz?</string>
@@ -2105,7 +2111,6 @@
     <string name="wizard_skip_wizard_warning">c:geo, yapılandırma tamamlanana kadar beklendiği gibi çalışmayabilir. Hangi ayarın yapılandırılmamış olduğuna bağlı olarak, c:geo çevrim dışı haritalar, geocache\'ler, kayıt dosyaları vb. verilerinizi okuyamayabilir/depolayamayabilir.\n\nKurulumu bitirmeye hazır olduğunuzda, ana menüdeki \"Yapılandırma sihirbazı\"na girebilir veya c:geo\'yu yeniden başlatabilirsiniz.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s klasörü senkronizasyonu %2$s sonrasında tamamlandı, %3$d/%4$s kadarı senkronizasyon gerektiriyor</string>
-    <string name="mapthemes_themescan_too_long_toast">Harita tema taraması %1$d saniyeden uzun sürdü ve %2$d tema bulduktan sonra sonlandırıldı</string>
     <!-- default actions in dialogs -->
     <string name="previous">Önceki</string>
     <string name="skip">Geç</string>
@@ -2113,4 +2118,6 @@
     <string name="done">Tamamlandı</string>
     <string name="finish">Bitir</string>
     <string name="back">Geri</string>
+    <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Tümünü Seç</string>
 </resources>

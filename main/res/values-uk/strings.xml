@@ -1600,4 +1600,5 @@
     <string name="skip">Пропустити</string>
     <string name="next">Наступний</string>
     <string name="finish">Закінчити</string>
+    <!-- ChipChoiceGroup -->
 </resources>

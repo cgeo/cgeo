@@ -404,7 +404,6 @@
     <string name="caches_clear_offlinelogs_progress">Suppression des visites hors-ligne</string>
     <string name="caches_set_cache_icon">Définir les icônes de la cache</string>
     <string name="caches_reset_cache_icons_title">Réinitialiser les icônes des caches</string>
-    <string name="caches_reset_cache_icons">Voulez-vous réinitialiser les icônes pour toutes les caches sélectionnées ?</string>
     <string name="caches_make_list_unique">Rendre la liste unique</string>
     <string name="caches_set_listmarker">Définir le marqueur de liste</string>
     <string name="select_icon">Sélectionnez l\'icône</string>
@@ -1946,7 +1945,6 @@
     <string name="localfile_cannot_handle">Erreur lors de la lecture du fichier ou c:geo ne peut pas gérer ce type de fichier.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Recevoir le fichier</string>
-    <string name="receivedownload_receiving_file">Réception du fichier \"%s\"</string>
     <string name="receivedownload_error">Erreur pendant la réception du fichier</string>
     <string name="receivedownload_amount_copied">%s a été copié</string>
     <string name="receivedownload_cancelled">Transfert de fichiers annulé</string>
@@ -1973,8 +1971,6 @@
     <string name="downloadmap_download">télécharger</string>
     <string name="downloadmap_retrieving_directory_data">Récupération des données du dossier …</string>
     <string name="downloadmap_checking_for_updates">Vérification des mises à jour…</string>
-    <string name="downloadmap_install_theme_title">Installer un thème</string>
-    <string name="downloadmap_install_theme_info">Votre carte téléchargée nécessite un fichier de thème spécial. Voulez-vous le télécharger également ?</string>
     <string name="mapupdate_info">Voulez-vous vérifier les mises à jour des fichiers de carte et de thème ?</string>
     <string name="no_updates_found">Aucune mise à jour disponible</string>
     <string name="updates_check">Vérification des mises à jour</string>
@@ -2032,7 +2028,6 @@
     <string name="wizard_skip_wizard_warning">c:geo peut ne pas fonctionner comme prévu tant que la configuration n\'est pas terminée. En fonction de la configuration manquante, c:geo peut ne pas être en mesure de lire/stocker des données telles que des cartes hors ligne, des géocaches, des fichiers journaux, etc.\n\nLorsque vous vous sentez prêt à finaliser la configuration, choisissez \"Assistant de configuration\" dans le menu principal ou redémarrez c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronisation du dossier %1$s terminée après %2$s, %3$d sur %4$s nécessitaient une synchro</string>
-    <string name="mapthemes_themescan_too_long_toast">L\'analyse des thèmes de carte a pris plus de %1$d secondes, elle a été annulée après %2$d thèmes.</string>
     <!-- default actions in dialogs -->
     <string name="previous">Précédent</string>
     <string name="skip">Passer</string>
@@ -2040,4 +2035,5 @@
     <string name="done">Terminé</string>
     <string name="finish">Terminer</string>
     <string name="back">Retour</string>
+    <!-- ChipChoiceGroup -->
 </resources>

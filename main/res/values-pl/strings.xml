@@ -420,7 +420,6 @@
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_set_cache_icon">Ustaw ikony skrytek</string>
     <string name="caches_reset_cache_icons_title">Zresetuj ikony skrytek</string>
-    <string name="caches_reset_cache_icons">Czy chcesz zresetować ikony skrytek dla wszystkich wybranych skrytek?</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
     <string name="select_icon">Wybierz ikonę</string>
@@ -507,10 +506,6 @@
     <string name="cache_filter_favorites_percentage">Procent</string>
     <string name="cache_filter_distance_use_current_position">Użyj bieżącej lokalizacji</string>
     <string name="cache_filter_status_select_all">Wszystkie</string>
-    <string name="cache_filter_status_select_only_found_yes">Tylko znalezione</string>
-    <string name="cache_filter_status_select_only_found_no">Tylko nieznalezione</string>
-    <string name="cache_filter_status_select_only_own_yes">Tylko własne</string>
-    <string name="cache_filter_status_select_only_own_no">Tylko innych</string>
     <string name="cache_filter_status_exclude_active">Wyklucz aktywne</string>
     <string name="cache_filter_status_exclude_disabled">Wyklucz wyłączone</string>
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
@@ -2051,7 +2046,6 @@
     <string name="localfile_cannot_handle">Błąd odczytu pliku lub c:geo nie może obsłużyć tego typu pliku.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Odbieranie pliku</string>
-    <string name="receivedownload_receiving_file">Odbieranie pliku \"%s\"</string>
     <string name="receivedownload_success">Plik pomyślnie zapisany jako \"%s\"</string>
     <string name="receivedownload_error">Błąd podczas odbierania pliku</string>
     <string name="receivedownload_error_io_exception">Błąd I/O podczas odbierania pliku. Czy Twój folder \"%s\" jest zapisywalny?</string>
@@ -2084,8 +2078,6 @@
     <string name="downloadmap_download">pobieranie</string>
     <string name="downloadmap_retrieving_directory_data">Pobieranie danych folderu…</string>
     <string name="downloadmap_checking_for_updates">Sprawdzam aktualizacje…</string>
-    <string name="downloadmap_install_theme_title">Zainstaluj plik motywu</string>
-    <string name="downloadmap_install_theme_info">Pobrana mapa wymaga specjalnego pliku motywu. Czy chcesz go również pobrać?</string>
     <string name="downloadtile_title">Brakujące dane nawigacyjne</string>
     <string name="downloadtile_info">c:geo nie może obliczyć żądanej trasy, ponieważ brakuje niektórych plików z danymi nawigacyjnmi. Czy chcesz pobrać brakujące dane nawigacyjne?</string>
     <string name="tileupdate_info">Czy chcesz sprawdzić dostępność aktualizacji pobranych plików danych nawigacyjnych?</string>
@@ -2152,7 +2144,6 @@
     <string name="wizard_skip_wizard_warning">c:geo może nie działać zgodnie z oczekiwaniami dopóki konfiguracja nie zostanie zakończona. W zależności od brakującej konfiguracji c:geo może nie być w stanie odczytywać/przechowywać danych takich jak mapy offline, skrytki, pliki logów itp.\n\nGdy będziesz gotowy do sfinalizowania konfiguracji, wybierz „Kreatora konfiguracji” w menu głównym lub zrestartuj c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizacja folderu %1$s zakończona po %2$s, %3$d z %4$s wymaga synchronizacji</string>
-    <string name="mapthemes_themescan_too_long_toast">Skanowanie motywów map zajęło dłużej niż %1$d sekund, przerwano po znalezieniu %2$d motywów</string>
     <!-- default actions in dialogs -->
     <string name="previous">Poprzedni</string>
     <string name="skip">Pomiń</string>
@@ -2160,4 +2151,5 @@
     <string name="done">Zrobione</string>
     <string name="finish">Zakończ</string>
     <string name="back">Wstecz</string>
+    <!-- ChipChoiceGroup -->
 </resources>

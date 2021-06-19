@@ -418,7 +418,6 @@
     <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
     <string name="caches_set_cache_icon">Cachepictogrammen instellen</string>
     <string name="caches_reset_cache_icons_title">Cache pictogrammen terugzetten</string>
-    <string name="caches_reset_cache_icons">Wil je de cachepictogrammen terugzetten voor alle geselecteerde caches?</string>
     <string name="caches_make_list_unique">Lijst uniek maken</string>
     <string name="caches_set_listmarker">Zet lijst marker</string>
     <string name="select_icon">Pictogram selecteren</string>
@@ -509,10 +508,6 @@
     <string name="cache_filter_favorites_percentage">Percentage</string>
     <string name="cache_filter_distance_use_current_position">Huidige positie gebruiken</string>
     <string name="cache_filter_status_select_all">Alle</string>
-    <string name="cache_filter_status_select_only_found_yes">Alleen gevonden</string>
-    <string name="cache_filter_status_select_only_found_no">Alleen niet gevonden</string>
-    <string name="cache_filter_status_select_only_own_yes">Alleen in bezit</string>
-    <string name="cache_filter_status_select_only_own_no">Alleen niet in bezit</string>
     <string name="cache_filter_status_exclude_active">Actieve uitsluiten</string>
     <string name="cache_filter_status_exclude_disabled">Uitgeschakeld uitsluiten</string>
     <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
@@ -2004,7 +1999,6 @@
     <string name="localfile_cannot_handle">Fout bij lezen van het bestand of c:geo kan dit bestandstype niet verwerken.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Bestand ontvangen</string>
-    <string name="receivedownload_receiving_file">Ontvangen van bestand \"%s\"</string>
     <string name="receivedownload_success">Bestand succesvol opgeslagen als \"%s\"</string>
     <string name="receivedownload_error">Fout bij ontvangen van bestand</string>
     <string name="receivedownload_error_io_exception">I/O fout tijdens het ontvangen van een kaartbestand. Is je kaartenmap \"%s\" beschrijfbaar?</string>
@@ -2037,8 +2031,6 @@
     <string name="downloadmap_download">downloaden</string>
     <string name="downloadmap_retrieving_directory_data">Mapgegevens ophalen…</string>
     <string name="downloadmap_checking_for_updates">Controleren op updates…</string>
-    <string name="downloadmap_install_theme_title">Themabestand installeren</string>
-    <string name="downloadmap_install_theme_info">Je gedownloade kaart vereist een speciaal themabestand. Wil je deze ook downloaden?</string>
     <string name="downloadtile_title">Ontbrekende routering gegevens</string>
     <string name="downloadtile_info">c:geo kan de gevraagde route niet berekenen omdat er enkele routering data ontbreekt. Wil je ontbrekende routering data downloaden?</string>
     <string name="tileupdate_info">Wil je controleren op updates van gedownloade routering gegevensbestanden?</string>
@@ -2105,7 +2097,6 @@
     <string name="wizard_skip_wizard_warning">c:geo werkt mogelijk niet zoals verwacht totdat de configuratie is voltooid. Afhankelijk van de ontbrekende configuratie kan c:geo mogelijk niet in staat zijn om gegevens te lezen/opslaan zoals offline kaarten, geocaches, logbestanden etc.\n\nWanneer je de installatie wilt voltooien, kies dan \"Configuratiewizard\" in het hoofdmenu of herstart c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mapsynchronisatie voltooid na %2$s, %3$d van de %4$s behoefden synchronisatie</string>
-    <string name="mapthemes_themescan_too_long_toast">Kaartthema scan heeft meer dan %1$d seconden geduurt, afgebroken na het vinden van %2$d thema\'s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Vorige</string>
     <string name="skip">Overslaan</string>
@@ -2113,4 +2104,5 @@
     <string name="done">Voltooid</string>
     <string name="finish">Voltooien</string>
     <string name="back">Terug</string>
+    <!-- ChipChoiceGroup -->
 </resources>

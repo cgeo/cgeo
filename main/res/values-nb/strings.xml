@@ -379,7 +379,6 @@
     <string name="caches_clear_offlinelogs_progress">Fjerner offline-logger</string>
     <string name="caches_set_cache_icon">Angi cacheikoner</string>
     <string name="caches_reset_cache_icons_title">Tilbakestill cacheikoner</string>
-    <string name="caches_reset_cache_icons">Vil du tilbakestille cacheikoner for alle valgte cacher?</string>
     <string name="caches_make_list_unique">Gjør listen unik</string>
     <string name="caches_set_listmarker">Sett listemarkering</string>
     <string name="select_icon">Velg ikon</string>
@@ -1848,4 +1847,5 @@
     <string name="done">Ferdig</string>
     <string name="finish">Fullfør</string>
     <string name="back">Tilbake</string>
+    <!-- ChipChoiceGroup -->
 </resources>

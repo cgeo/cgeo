@@ -417,7 +417,6 @@
     <string name="caches_clear_offlinelogs_progress">すべてのオフラインログを削除中</string>
     <string name="caches_set_cache_icon">キャッシュアイコン設定</string>
     <string name="caches_reset_cache_icons_title">キャッシュアイコンのリセット</string>
-    <string name="caches_reset_cache_icons">選択したすべてのキャッシュアイコンをデフォルトに戻しますか?</string>
     <string name="caches_make_list_unique">重複キャッシュを削除</string>
     <string name="caches_set_listmarker">リストマーカーを設定</string>
     <string name="select_icon">アイコンの選択</string>
@@ -469,6 +468,9 @@
     <string name="cache_filter_logs_count">ログ数</string>
     <string name="cache_filter_last_found">発見日</string>
     <string name="cache_filter_log_entry">ログ内容</string>
+    <string name="cache_filter_location">所在地</string>
+    <string name="cache_filter_stored_lists">保存済みリスト</string>
+    <string name="cache_filter_origin">公開元</string>
     <string name="cache_filtergroup_basic">基本</string>
     <string name="cache_filtergroup_details">詳細</string>
     <string name="cache_filtergroup_userspecific">ユーザー固有</string>
@@ -485,7 +487,8 @@
     <string name="cache_filter_storage_save_title">名前を付けてフィルタを保存</string>
     <string name="cache_filter_storage_save_confirm_title">フィルタの上書き保存</string>
     <string name="cache_filter_storage_save_confirm_message">フィルタ名「%s」と異なる設定が既に存在します。上書きしますか?</string>
-    <string name="cache_filter_stringfilter_matchcase">大文字小文字を区別</string>
+    <string name="cache_filter_stringfilter_matchcase">大小文字を区別</string>
+    <string name="cache_filter_stringfilter_searchtext_hint">検索テキスト</string>
     <string name="cache_filter_stringfilter_info">検索方法の「パターン」でワイルドカード「?」と「*」を使用できます。「?」は任意の一文字、「*」は長さ0文字以上の任意の文字列を表します。 例えば、「H?mburg*」は「Homeburg」や「Hamburg at Night」などにマッチしますが、「A day in Hamburg」や「Hahmburg」にはマッチしません。</string>
     <string name="cache_filter_stringfilter_type_is_not_present">なし</string>
     <string name="cache_filter_stringfilter_type_is_present">あり</string>
@@ -496,14 +499,12 @@
     <string name="cache_filter_datefilter_label_from">開始日:</string>
     <string name="cache_filter_datefilter_label_to">終了日:</string>
     <string name="cache_filter_checkboxlist_selectallnone">すべて選択</string>
+    <string name="cache_filter_checkboxlist_add_items">項目を追加</string>
+    <string name="cache_filter_checkboxlist_add_items_dialog_title">項目を追加</string>
     <string name="cache_filter_favorites_absolute">登録数</string>
     <string name="cache_filter_favorites_percentage">割合(%)</string>
     <string name="cache_filter_distance_use_current_position">現在地を使用</string>
     <string name="cache_filter_status_select_all">すべて</string>
-    <string name="cache_filter_status_select_only_found_yes">発見</string>
-    <string name="cache_filter_status_select_only_found_no">未発見</string>
-    <string name="cache_filter_status_select_only_own_yes">オーナー</string>
-    <string name="cache_filter_status_select_only_own_no">オーナーではない</string>
     <string name="cache_filter_status_exclude_active">アクティブを除外</string>
     <string name="cache_filter_status_exclude_disabled">一時停止中キャッシュを除外</string>
     <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
@@ -1330,6 +1331,16 @@
     <string name="map_view_map">地図の変更</string>
     <string name="map_rotation">地図の回転</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
+    <string name="map_show_circles">0.1マイル円</string>
+    <string name="map_showc_own">オーナー</string>
+    <string name="map_showc_found">発見</string>
+    <string name="map_showc_disabled">一時停止中</string>
+    <string name="map_showc_archived">アーカイブ済み</string>
+    <string name="map_showc_offlinelog">オフラインログ</string>
+    <string name="map_showwp_original">オリジナル</string>
+    <string name="map_showwp_parking">駐車場</string>
+    <string name="map_showwp_visited">訪問済み</string>
+    <string name="map_show_track">GPXトラック/ルート</string>
     <string name="init_renderthemefolder_synctolocal">地図テーマフォルダの同期</string>
     <string name="init_summary_renderthemefolder_synctolocal">地図テーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます(ストレージを少し余分に使用します)</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">地図テーマフォルダの同期</string>
@@ -1354,6 +1365,9 @@
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
     <string name="quick_settings_info">いくつか地図の設定(地図上の表示/非表示、ルート検索など)は新しい「クイック設定」に移動しました。\n地図の下部中央の歯車アイコンをタップすると開けます</string>
+    <string name="map_show_caches_title">キャッシュ表示:</string>
+    <string name="map_show_waypoints_title">ウェイポイント表示:</string>
+    <string name="map_show_other_title">他の表示:</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_desc">キャッシュ(GCコード,キーワード), トラッカブル(TBコード)</string>
@@ -1940,7 +1954,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="localfile_cannot_handle">ファイルの読み取りエラー、またはc:geoはこのファイルタイプを処理できません</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">ファイルのダウンロード</string>
-    <string name="receivedownload_receiving_file">ファイル「%s」をダウンロード中</string>
     <string name="receivedownload_success">ファイルを「%s」として保存しました</string>
     <string name="receivedownload_error">ファイルのダウンロード中にエラーが発生しました</string>
     <string name="receivedownload_error_io_exception">ファイルのダウンロード中にI/Oエラーが発生しました。フォルダ「%s」は書き込み可能ですか？</string>
@@ -1973,8 +1986,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_download">ダウンロード</string>
     <string name="downloadmap_retrieving_directory_data">フォルダ情報を取得中…</string>
     <string name="downloadmap_checking_for_updates">更新を確認中…</string>
-    <string name="downloadmap_install_theme_title">テーマファイルのダウンロード</string>
-    <string name="downloadmap_install_theme_info">ダウンロードした地図には特別なテーマファイルが必要です。これもダウンロードしますか?</string>
     <string name="downloadtile_title">ルート検索データが見つかりません</string>
     <string name="downloadtile_info">ルート検索データが不足しているため、c:geoはルートを検索できません。ルート検索データをダウンロードしますか？</string>
     <string name="tileupdate_info">ダウンロードしたルート検索データの更新を確認しますか?</string>
@@ -2041,7 +2052,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_skip_wizard_warning">設定が完了するまでc:geoは期待通りに動作しない可能性があります。 未設定の項目によっては、オフライン地図、ジオキャッシュ、ログファイルなどのデータを読み込み/保存ができない場合があります。\n\nセットアップを再開するには、メインメニューで「設定ウィザード」を選択するか、c:geoを再起動してください。</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$sフォルダの同期が%2$sで完了しました。%3$d/%4$sが同期されました</string>
-    <string name="mapthemes_themescan_too_long_toast">地図テーマのスキャンに%1$d秒以上かかりました。%2$dテーマを見つけた後に中止されました。</string>
     <!-- default actions in dialogs -->
     <string name="previous">戻る</string>
     <string name="skip">スキップ</string>
@@ -2049,4 +2059,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="done">完了</string>
     <string name="finish">終了</string>
     <string name="back">戻る</string>
+    <!-- ChipChoiceGroup -->
 </resources>

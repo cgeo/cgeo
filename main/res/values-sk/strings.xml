@@ -420,7 +420,6 @@
     <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
     <string name="caches_set_cache_icon">Nastaviť ikony kešky</string>
     <string name="caches_reset_cache_icons_title">Obnoviť ikony kešky</string>
-    <string name="caches_reset_cache_icons">Chcete obnoviť ikony kešky pre všetky vybrané kešky?</string>
     <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
     <string name="caches_set_listmarker">Nastaviť značku zoznamu</string>
     <string name="select_icon">Vybrať ikonu</string>
@@ -472,6 +471,8 @@
     <string name="cache_filter_logs_count">Počet logov</string>
     <string name="cache_filter_last_found">Dátum posledného nálezu</string>
     <string name="cache_filter_log_entry">Položka logu</string>
+    <string name="cache_filter_location">Miesto</string>
+    <string name="cache_filter_stored_lists">Uložené zoznamy</string>
     <string name="cache_filtergroup_basic">Základné</string>
     <string name="cache_filtergroup_details">Detaily</string>
     <string name="cache_filtergroup_userspecific">Vlastné</string>
@@ -479,6 +480,7 @@
     <string name="cache_filter_exclude">Vylúčiť</string>
     <string name="cache_filter_userdisplay_complex">Zložité</string>
     <string name="cache_filter_userdisplay_none">Žiadne</string>
+    <string name="cache_filter_userdisplay_not">NIE</string>
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="one">%1$d položka</item>
         <item quantity="few">%1$d položky</item>
@@ -493,6 +495,7 @@
     <string name="cache_filter_storage_save_confirm_title">Uložiť filter a prepísať</string>
     <string name="cache_filter_storage_save_confirm_message">Už existuje filter s názvom \'%s\' a odlišnou konfiguráciou. Chcete ho prepísať?</string>
     <string name="cache_filter_stringfilter_matchcase">Rozlišovať veľkosť</string>
+    <string name="cache_filter_stringfilter_searchtext_hint">Vyhľadať text</string>
     <string name="cache_filter_stringfilter_info">Pri možnosti „Vzor“ použite zástupné znaky * a?. * predstavuje nulu, jeden alebo viac znakov, ? predstavuje jeden jediný znak. Napríklad vzor „H?mburg *“ sa bude zhodovať napr. „Homburg“ alebo „Hamburg v noci“, ale nie „deň v Hamburgu“ alebo „Hahmburg“</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Nie je prítomné</string>
     <string name="cache_filter_stringfilter_type_is_present">Je prítomné</string>
@@ -503,14 +506,22 @@
     <string name="cache_filter_datefilter_label_from">Od:</string>
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Vybrať všetko</string>
+    <string name="cache_filter_checkboxlist_add_items">Pridať ďalšie položky</string>
+    <string name="cache_filter_checkboxlist_add_items_dialog_title">Pridať položky</string>
     <string name="cache_filter_favorites_absolute">Absolútne</string>
     <string name="cache_filter_favorites_percentage">Percentuálne</string>
     <string name="cache_filter_distance_use_current_position">Použiť aktuálnu pozíciu</string>
     <string name="cache_filter_status_select_all">Všetko</string>
-    <string name="cache_filter_status_select_only_found_yes">Len nájdené</string>
-    <string name="cache_filter_status_select_only_found_no">Len nenájdené</string>
-    <string name="cache_filter_status_select_only_own_yes">Len vlastnené</string>
-    <string name="cache_filter_status_select_only_own_no">Len nevlastnené</string>
+    <string name="cache_filter_status_select_yes">Áno</string>
+    <string name="cache_filter_status_select_no">Nie</string>
+    <string name="cache_filter_status_select_label_found">Nájdená</string>
+    <string name="cache_filter_status_select_label_stored">Uložená</string>
+    <string name="cache_filter_status_select_label_favorite">Obľúbená</string>
+    <string name="cache_filter_status_select_label_watchlist">V zozname sledovaných</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_active">Aktívna</string>
+    <string name="cache_filter_status_disabled">Deaktivovaná</string>
+    <string name="cache_filter_status_archived">Archivovaná</string>
     <string name="cache_filter_status_exclude_active">Okrem aktívnych</string>
     <string name="cache_filter_status_exclude_disabled">Okrem deaktivovaných</string>
     <string name="cache_filter_status_exclude_archived">Okrem archivovaných</string>
@@ -2052,7 +2063,6 @@
     <string name="localfile_cannot_handle">Chyba počas čítania súboru alebo c:geo nevie pracovať s týmto druhom súboru.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Prijať súbor</string>
-    <string name="receivedownload_receiving_file">Prijíma sa súbor \"%s\"</string>
     <string name="receivedownload_success">Súbor úspešne uložený ako \"%s\"</string>
     <string name="receivedownload_error">Chyba počas prijímania súboru</string>
     <string name="receivedownload_error_io_exception">Chyba vstupu/výstupu počas prijímania súboru. Dá sa zapisovať do priečinka \"%s\"?</string>
@@ -2085,8 +2095,6 @@
     <string name="downloadmap_download">prevziať</string>
     <string name="downloadmap_retrieving_directory_data">Načítavajú sa údaje priečinka…</string>
     <string name="downloadmap_checking_for_updates">Kontrolujú sa aktualizácie…</string>
-    <string name="downloadmap_install_theme_title">Inštalácia súboru s motívom</string>
-    <string name="downloadmap_install_theme_info">Vaša prevzatá mapa vyžaduje špeciálny súbor s motívom. Chcete aj ten prevziať?</string>
     <string name="downloadtile_title">Chýbajú údaje navigácie</string>
     <string name="downloadtile_info">Aplikácia c:geo nedokáže vypočítať požadovanú trasu, pretože chýba nejaký súbor s údajmi navigácie. Chcete prevziať chýbajúce údaje navigácie?</string>
     <string name="tileupdate_info">Chcete skontrolovať aktualizácie prevzatých súborov s údajmi navigácie?</string>
@@ -2153,7 +2161,6 @@
     <string name="wizard_skip_wizard_warning">Aplikácia c:geo nemusí fungovať podľa očakávania, kým nebude konfigurácia dokončená. V závislosti od chýbajúcej konfigurácie nemusí byť aplikácia c:geo schopná čítať/ukladať údaje, ako sú napríklad offline mapy, kešky, súbory denníka atď.\n\nKeď budete mať pocit, že ste pripravení na dokončenie nastavenia, vyberte v ponuke položku \"Sprievodca konfiguráciou\", prípadne reštartujte aplikáciu c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizácia priečinka %1$s dokončená po %2$s, %3$d z %4$s potrebná synchronizácia</string>
-    <string name="mapthemes_themescan_too_long_toast">Hľadanie mapovej témy zabralo viac než %1$d sekúnd, prerušené po nájdení %2$d tém</string>
     <!-- default actions in dialogs -->
     <string name="previous">Späť</string>
     <string name="skip">Preskočiť</string>
@@ -2161,4 +2168,6 @@
     <string name="done">Hotovo</string>
     <string name="finish">Dokončiť</string>
     <string name="back">Späť</string>
+    <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Vybrať všetko</string>
 </resources>

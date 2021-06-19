@@ -418,7 +418,6 @@
     <string name="caches_clear_offlinelogs_progress">A limpar os registos offline</string>
     <string name="caches_set_cache_icon">Definir ícones de geocaches</string>
     <string name="caches_reset_cache_icons_title">Repor ícones de geocaches</string>
-    <string name="caches_reset_cache_icons">Deseja redefinir ícones de geocaches para todas as geocaches seleccionadas?</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
     <string name="caches_set_listmarker">Definir marcador de lista</string>
     <string name="select_icon">Seleccionar ícone</string>
@@ -509,10 +508,6 @@
     <string name="cache_filter_favorites_percentage">Percentagem</string>
     <string name="cache_filter_distance_use_current_position">Usar posição actual</string>
     <string name="cache_filter_status_select_all">Todos</string>
-    <string name="cache_filter_status_select_only_found_yes">Apenas Encontradas</string>
-    <string name="cache_filter_status_select_only_found_no">Apenas Não Encontradas</string>
-    <string name="cache_filter_status_select_only_own_yes">Apenas Minhas</string>
-    <string name="cache_filter_status_select_only_own_no">Apenas de Outros</string>
     <string name="cache_filter_status_exclude_active">Excluir Activas</string>
     <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
     <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
@@ -1999,7 +1994,6 @@
     <string name="localfile_cannot_handle">Erro ao ler o ficheiro ou o c:geo não consegue processar este tipo de ficheiro.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Receber ficheiro</string>
-    <string name="receivedownload_receiving_file">A receber o ficheiro \"%s\"</string>
     <string name="receivedownload_success">Ficheiro armazenado com sucesso como \"%s\"</string>
     <string name="receivedownload_error">Erro ao receber ficheiro</string>
     <string name="receivedownload_error_io_exception">Erro ao receber o ficheiro. A pasta \"%s permite a gravação?</string>
@@ -2032,8 +2026,6 @@
     <string name="downloadmap_download">transferir</string>
     <string name="downloadmap_retrieving_directory_data">A receber dados da pasta…</string>
     <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
-    <string name="downloadmap_install_theme_title">Instalar ficheiro de tema</string>
-    <string name="downloadmap_install_theme_info">O mapa descarregado requer um ficheiro de tema especial. Também deseja descarregá-lo?</string>
     <string name="downloadtile_title">Dados de encaminhamento em falta</string>
     <string name="downloadtile_info">O c:geo não pode calcular a rota solicitada, pois falta algum ficheiro de dados de encaminhamento. Quer transferir os dados de encaminhamento em falta?</string>
     <string name="tileupdate_info">Deseja verificar se há actualizações para os ficheiros de dados de encaminhamento transferidos?</string>
@@ -2101,7 +2093,6 @@ do mapa e dos temas?</string>
     <string name="wizard_skip_wizard_warning">O c:geo pode não funcionar como esperado até que a configuração esteja concluída. Dependendo das configurações em falta, o c:geo pode não ser capaz de ler/armazenar dados como mapas offline, geocaches, ficheiros de registos, etc\n\nQuando achar que é o momento para finalizar a configuração, pode fazê-lo escolhendo a opção \"Assistente de configuração\" no menu principal ou reiniciando o c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">A sincronização de pasta %1$s terminada após %2$s, %3$d de %4$s a precisar de sincronização</string>
-    <string name="mapthemes_themescan_too_long_toast">Verificação do tema do mapa demorou mais de %1$d segundos, abortado depois de encontrar %2$d temas</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ignorar</string>
@@ -2109,4 +2100,5 @@ do mapa e dos temas?</string>
     <string name="done">Concluído</string>
     <string name="finish">Concluído</string>
     <string name="back">Anterior</string>
+    <!-- ChipChoiceGroup -->
 </resources>
