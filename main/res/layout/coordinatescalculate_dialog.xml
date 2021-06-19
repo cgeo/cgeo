@@ -49,18 +49,18 @@
                 android:gravity="end"
                 android:textAlignment="gravity"/>
 
-            <EditText
-                android:id="@+id/notes_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@style/edittext_full"
-                android:textSize="@dimen/textSize_detailsPrimary"
-                android:singleLine="false"
-                android:overScrollMode="always"
-                android:scrollbarStyle="insideInset"
-                android:scrollbars="vertical"
-                android:inputType="textMultiLine|textCapSentences"
-                android:hint="@string/waypointcalc_notes_prompt" />
+            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+                <EditText
+                    android:id="@+id/notes_text"
+                    style="@style/textinput_embedded"
+                    android:textSize="@dimen/textSize_detailsPrimary"
+                    android:singleLine="false"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:hint="@string/waypointcalc_notes_prompt" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/done"

@@ -69,17 +69,17 @@
                 android:layout_weight="1"
                 android:orientation="vertical" >
 
-                <EditText
-                    android:id="@+id/notes_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    style="@style/edittext_full"
-                    android:singleLine="false"
-                    android:overScrollMode="always"
-                    android:scrollbarStyle="insideInset"
-                    android:scrollbars="vertical"
-                    android:inputType="textMultiLine|textCapSentences"
-                    android:hint="@string/waypointcalc_notes_prompt" />
+                <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+                    <EditText
+                        android:id="@+id/notes_text"
+                        style="@style/textinput_embedded"
+                        android:singleLine="false"
+                        android:overScrollMode="always"
+                        android:scrollbarStyle="insideInset"
+                        android:scrollbars="vertical"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:hint="@string/waypointcalc_notes_prompt" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

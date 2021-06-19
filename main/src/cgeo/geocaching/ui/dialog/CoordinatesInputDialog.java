@@ -45,6 +45,7 @@ import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 
 public class CoordinatesInputDialog extends DialogFragment {
@@ -52,6 +53,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private Geopoint gp;
     private Geopoint cacheCoords;
 
+    private TextInputLayout eLatFrame, eLonFrame;
     private EditText eLat, eLon;
     private Button bLat, bLon;
     private Button bCalculate;
@@ -159,6 +161,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         spinner.setSelection(Settings.getCoordInputFormat().ordinal());
         spinner.setOnItemSelectedListener(new CoordinateFormatListener());
 
+        eLatFrame = v.findViewById(R.id.latitudeFrame);
         bLat = v.findViewById(R.id.ButtonLat);
         eLat = v.findViewById(R.id.latitude);
         eLatDeg = v.findViewById(R.id.EditTextLatDeg);
@@ -169,6 +172,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         tLatSep2 = v.findViewById(R.id.LatSeparator2);
         tLatSep3 = v.findViewById(R.id.LatSeparator3);
 
+        eLonFrame = v.findViewById(R.id.longitudeFrame);
         bLon = v.findViewById(R.id.ButtonLon);
         eLon = v.findViewById(R.id.longitude);
         eLonDeg = v.findViewById(R.id.EditTextLonDeg);
@@ -256,8 +260,8 @@ public class CoordinatesInputDialog extends DialogFragment {
         switch (currentFormat) {
             case Plain:
                 setVisible(R.id.coordTable, View.GONE);
-                eLat.setVisibility(View.VISIBLE);
-                eLon.setVisibility(View.VISIBLE);
+                eLatFrame.setVisibility(View.VISIBLE);
+                eLonFrame.setVisibility(View.VISIBLE);
                 if (gp != null) {
                     eLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
                     eLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
@@ -265,8 +269,8 @@ public class CoordinatesInputDialog extends DialogFragment {
                 break;
             case Deg: // DDD.DDDDD°
                 setVisible(R.id.coordTable, View.VISIBLE);
-                eLat.setVisibility(View.GONE);
-                eLon.setVisibility(View.GONE);
+                eLatFrame.setVisibility(View.GONE);
+                eLonFrame.setVisibility(View.GONE);
                 eLatSec.setVisibility(View.GONE);
                 eLonSec.setVisibility(View.GONE);
                 tLatSep3.setVisibility(View.GONE);
@@ -294,8 +298,8 @@ public class CoordinatesInputDialog extends DialogFragment {
                 break;
             case Min: // DDD° MM.MMM
                 setVisible(R.id.coordTable, View.VISIBLE);
-                eLat.setVisibility(View.GONE);
-                eLon.setVisibility(View.GONE);
+                eLatFrame.setVisibility(View.GONE);
+                eLonFrame.setVisibility(View.GONE);
                 eLatSec.setVisibility(View.VISIBLE);
                 eLonSec.setVisibility(View.VISIBLE);
                 tLatSep3.setVisibility(View.VISIBLE);
@@ -329,8 +333,8 @@ public class CoordinatesInputDialog extends DialogFragment {
                 break;
             case Sec: // DDD° MM SS.SSS
                 setVisible(R.id.coordTable, View.VISIBLE);
-                eLat.setVisibility(View.GONE);
-                eLon.setVisibility(View.GONE);
+                eLatFrame.setVisibility(View.GONE);
+                eLonFrame.setVisibility(View.GONE);
                 eLatSec.setVisibility(View.VISIBLE);
                 eLonSec.setVisibility(View.VISIBLE);
                 tLatSep3.setVisibility(View.VISIBLE);

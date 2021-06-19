@@ -162,20 +162,20 @@
         </TableRow>
     </TableLayout>
 
-    <EditText
-        android:id="@+id/latitude"
-        style="@style/edittext_full"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textNoSuggestions"
-        android:hint="@string/latitude" />
+    <com.google.android.material.textfield.TextInputLayout android:id="@+id/latitudeFrame" style="@style/textinput_edittext_singleline">
+        <EditText
+            android:id="@+id/latitude"
+            style="@style/textinput_embedded"
+            android:inputType="textNoSuggestions"
+            android:hint="@string/latitude" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/longitude"
-        style="@style/edittext_full"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textNoSuggestions"
-        android:hint="@string/longitude" />
+    <com.google.android.material.textfield.TextInputLayout android:id="@+id/longitudeFrame" style="@style/textinput_edittext_singleline">
+        <EditText
+            android:id="@+id/longitude"
+            style="@style/textinput_embedded"
+            android:inputType="textNoSuggestions"
+            android:hint="@string/longitude" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </merge>
