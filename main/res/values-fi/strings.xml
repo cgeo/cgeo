@@ -1152,6 +1152,7 @@
     <string name="cache_dialog_favorite_remove_title">Suosikki</string>
     <string name="cache_dialog_favorite_remove_message">Poista kätkö suosikeistasi…</string>
     <string name="cache_menu_navigate">Navigoi</string>
+    <string name="cache_menu_target">Aseta kohteeksi</string>
     <string name="cache_menu_navigation_drive">Navigointi (ajo)</string>
     <string name="cache_menu_navigation_drive_select_target">Valitse kohde</string>
     <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
