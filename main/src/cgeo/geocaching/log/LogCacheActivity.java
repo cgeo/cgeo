@@ -43,16 +43,12 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -218,38 +214,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setDisplayMapper(ReportProblemType::getL10n);
 
         this.imageListFragment = (ImageListFragment) getSupportFragmentManager().findFragmentById(R.id.imagelist_fragment);
-
-        // show remaining characters
-        binding.log.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(final CharSequence s, final int st, final int c, final int a) {
-                // do nothing
-            }
-
-            @Override
-            public void onTextChanged(final CharSequence s, final int st, final int b, final int c) {
-                // do nothing
-            }
-
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void afterTextChanged(final Editable editable) {
-                final int count = TextUtils.getNormalizedStringLength(editable.toString());
-
-                if (count >= 3000) {
-                    binding.logCharactersCounter.setVisibility(View.VISIBLE);
-                    binding.logCharactersCounter.setText(count + "/" + LOG_MAX_LENGTH);
-                    binding.logCharactersCounter.setTextColor(count > LOG_MAX_LENGTH ? Color.RED : getResources().getColor(R.color.colorText));
-
-                } else {
-                    binding.logCharactersCounter.setVisibility(View.GONE);
-                }
-            }
-
-
-
-        });
 
         //init trackable "change all" button
         trackableActionsChangeAll.setTextView(binding.changebutton)
