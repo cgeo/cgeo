@@ -33,9 +33,7 @@
             android:orientation="vertical"
             android:importantForAutofill="noExcludeDescendants">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/textinput_edittext_singleline"
-                app:endIconMode="clear_text">
+            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
                 <EditText
                     android:id="@+id/bearing"
                     style="@style/textinput_embedded"
@@ -50,8 +48,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/textinput_edittext_singleline"
-                    android:layout_toLeftOf="@id/distanceUnit"
-                    app:endIconMode="clear_text">
+                    android:layout_toLeftOf="@id/distanceUnit">
                     <EditText
                         android:id="@+id/distance"
                         style="@style/textinput_embedded"
