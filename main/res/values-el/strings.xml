@@ -1144,6 +1144,7 @@
     <string name="cache_dialog_favorite_remove_title">Αγαπημένη</string>
     <string name="cache_dialog_favorite_remove_message">Αφαιρεί την κρύπτη από τις αγαπημένες σας…</string>
     <string name="cache_menu_navigate">Πλοήγηση</string>
+    <string name="cache_menu_target">Ορισμός ως στόχος</string>
     <string name="cache_menu_navigation_drive">Πλοήγηση (Οδήγηση)</string>
     <string name="cache_menu_navigation_drive_select_target">Επίλεξε στόχο</string>
     <string name="cache_menu_navigation_walk">Πλοήγηση (Περπάτημα)</string>
