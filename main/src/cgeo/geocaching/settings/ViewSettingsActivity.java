@@ -2,6 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.databinding.ViewSettingsAddBinding;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -39,6 +40,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.radiobutton.MaterialRadioButton;
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -224,24 +226,21 @@ public class ViewSettingsActivity extends AbstractActivity {
     }
 
     private void addItem() {
-        final View layout = View.inflate(this, R.layout.view_settings_add, null);
-
-        final EditText preferenceNameEdit = layout.findViewById(R.id.preference_name);
-
+        final ViewSettingsAddBinding binding = ViewSettingsAddBinding.inflate(getLayoutInflater());
         final List<String> stringList = SettingsUtils.SettingsType.getStringList();
-        final RadioGroup rg = layout.findViewById(R.id.preference_type);
+        final RadioGroup rg = binding.preferenceType;
         for (int i = 0; i < stringList.size(); i++) {
-            final RadioButton rb = new RadioButton(this);
+            final MaterialRadioButton rb = new MaterialRadioButton(this);
             rb.setText(stringList.get(i));
             rg.addView(rb);
         }
 
         Dialogs.newBuilder(this)
             .setTitle(R.string.add_setting)
-            .setView(layout)
+            .setView(binding.getRoot())
             .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
             .setPositiveButton(android.R.string.ok, (d, which) -> {
-                final String preferenceName = preferenceNameEdit.getText().toString().trim();
+                final String preferenceName = binding.preferenceName.getText().toString().trim();
                 final int rbId = rg.getCheckedRadioButtonId();
                 if (rbId == -1) {
                     Toast.makeText(this, R.string.add_setting_missing_type, Toast.LENGTH_SHORT).show();
