@@ -104,16 +104,24 @@
         <item name="android:textColor">@color/settings_primary_selector_night</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/settings_colorDialogBackgroundDark</item>
+        <item name="android:background">@color/settings_colorDialogBackgroundDark</item>
+        <item name="android:windowBackground">@color/colorBackgroundTransparent</item>
         <item name="colorOnSurface">@color/colorAccent</item>
+        <item name="android:buttonBarButtonStyle">@style/settings.buttons</item>
     </style>
 
     <style name="settings.DialogTheme.light" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColor">@color/settings_primary_selector_light</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/settings_colorDialogBackgroundLight</item>
+        <item name="android:background">@color/settings_colorDialogBackgroundLight</item>
+        <item name="android:windowBackground">@color/colorBackgroundTransparent</item>
         <item name="colorOnSurface">@color/colorAccent</item>
+        <item name="android:buttonBarButtonStyle">@style/settings.buttons</item>
+    </style>
+
+    <style name="settings.buttons" parent="@style/button">
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <!-- theme for splash screen -->
