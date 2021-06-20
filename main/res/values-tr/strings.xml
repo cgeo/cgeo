@@ -1152,6 +1152,7 @@
     <string name="cache_dialog_favorite_remove_title">Favori</string>
     <string name="cache_dialog_favorite_remove_message">Geocache favorilerinizden çıkartılıyor…</string>
     <string name="cache_menu_navigate">Navigasyon</string>
+    <string name="cache_menu_target">Hedef olarak ayarla</string>
     <string name="cache_menu_navigation_drive">Navigasyon (Arabayla)</string>
     <string name="cache_menu_navigation_drive_select_target">Hedef seç</string>
     <string name="cache_menu_navigation_walk">Navigasyon (Yürüyerek)</string>
