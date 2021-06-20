@@ -479,6 +479,7 @@
     <string name="cache_filter_exclude">Excluir</string>
     <string name="cache_filter_userdisplay_complex">Complexo</string>
     <string name="cache_filter_userdisplay_none">Nenhum</string>
+    <string name="cache_filter_userdisplay_not">NÃO</string>
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="one"> %1$d item</item>
         <item quantity="other">%1$d itens</item>
@@ -508,6 +509,19 @@
     <string name="cache_filter_favorites_percentage">Percentagem</string>
     <string name="cache_filter_distance_use_current_position">Usar posição actual</string>
     <string name="cache_filter_status_select_all">Todos</string>
+    <string name="cache_filter_status_select_yes">Sim</string>
+    <string name="cache_filter_status_select_no">Não</string>
+    <string name="cache_filter_status_select_label_found">Encontradas</string>
+    <string name="cache_filter_status_select_label_owned">Minhas</string>
+    <string name="cache_filter_status_select_label_stored">Armazenadas</string>
+    <string name="cache_filter_status_select_label_favorite">Com Favoritos</string>
+    <string name="cache_filter_status_select_label_watchlist">Na Lista de Observação</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Mistério Resolvido</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuração de filtro afectará apenas as caches mistério.\n\n Um mistério é considerado \'resolvido\', quer tenham sido alteradas as coordenadas ou haja uma localização final válida, preenchida com coordenadas.</string>
+    <string name="cache_filter_status_active">Activas</string>
+    <string name="cache_filter_status_disabled">Desactivadas</string>
+    <string name="cache_filter_status_archived">Arquivadas</string>
     <string name="cache_filter_status_exclude_active">Excluir Activas</string>
     <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
     <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
@@ -1138,6 +1152,7 @@
     <string name="cache_dialog_favorite_remove_title">Favorita</string>
     <string name="cache_dialog_favorite_remove_message">A retirar geocache da lista de favoritas…</string>
     <string name="cache_menu_navigate">Navegar</string>
+    <string name="cache_menu_target">Definir como destino</string>
     <string name="cache_menu_navigation_drive">Navegação (Conduzir)</string>
     <string name="cache_menu_navigation_drive_select_target">Seleccionar destino</string>
     <string name="cache_menu_navigation_walk">Navegação (Caminhar)</string>
@@ -2101,4 +2116,5 @@ do mapa e dos temas?</string>
     <string name="finish">Concluído</string>
     <string name="back">Anterior</string>
     <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Seleccionar todas</string>
 </resources>
