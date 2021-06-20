@@ -32,6 +32,8 @@
     <color name="settings_colorTextSecondaryLight">#AA000000</color>
     <color name="settings_colorBackgroundDark">@color/just_black</color>
     <color name="settings_colorBackgroundLight">@color/just_white</color>
+    <color name="settings_colorDialogBackgroundDark">#FF191919</color>
+    <color name="settings_colorDialogBackgroundLight">@color/just_white</color>
 
 
 

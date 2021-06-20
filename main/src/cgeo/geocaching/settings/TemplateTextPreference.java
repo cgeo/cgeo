@@ -1,5 +1,6 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.log.LogTemplateProvider;
@@ -8,6 +9,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
@@ -50,6 +52,8 @@ public class TemplateTextPreference extends DialogPreference {
 
         editText = view.findViewById(R.id.signature_dialog_text);
         editText.setText(getPersistedString(initialValue != null ? initialValue : StringUtils.EMPTY));
+        // @todo yet another workaround to be dismissed after migration of settings to PreferenceFragment
+        editText.setTextColor(Settings.isLightSkin(getContext()) ? 0xff000000 : 0xffffffff);
         Dialogs.moveCursorToEnd(editText);
 
         final Button button = view.findViewById(R.id.signature_templates);
@@ -66,7 +70,11 @@ public class TemplateTextPreference extends DialogPreference {
                 final LogTemplate template = templates.get(position);
                 insertSignatureTemplate(template);
             });
-            alert.create().show();
+            final AlertDialog dialog = alert.create();
+            // @todo yet another workaround to be dismissed after migration of settings to PreferenceFragment
+            final int c = Build.VERSION.SDK_INT > 22 ? getContext().getColor(Settings.isLightSkin(getContext()) ? R.color.settings_colorDialogBackgroundLight : R.color.settings_colorDialogBackgroundDark) : CgeoApplication.getInstance().getResources().getColor(R.color.colorBackgroundSelected);
+            dialog.getListView().setBackgroundColor(c);
+            dialog.show();
         });
 
         super.onBindDialogView(view);
