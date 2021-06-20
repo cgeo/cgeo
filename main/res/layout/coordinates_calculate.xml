@@ -42,7 +42,9 @@
         android:id="@+id/coordTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:columnCount="17">
+        app:columnCount="17"
+        android:background="@drawable/textinputlayout_bcg_active"
+        android:padding="8dp">
 
         <Button
             android:id="@+id/ButtonLatHem"

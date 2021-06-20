@@ -33,6 +33,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
@@ -53,6 +54,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private Geopoint gp;
     private Geopoint cacheCoords;
 
+    private TableLayout coordTable;
     private TextInputLayout eLatFrame;
     private TextInputLayout eLonFrame;
     private EditText eLat;
@@ -144,6 +146,11 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         final View v = inflater.inflate(R.layout.coordinatesinput_dialog, container, false);
         final InputDoneListener inputdone = new InputDoneListener();
+
+        // change table border color depending on "any child has focus" state
+        coordTable = v.findViewById(R.id.coordTable);
+        coordTable.getViewTreeObserver().addOnGlobalFocusChangeListener((oldFocus, newFocus) -> coordTable.setBackgroundResource(coordTable.findFocus() != null ? R.drawable.textinputlayout_bcg_active : R.drawable.textinputlayout_bcg_default));
+
         if (!noTitle) {
             dialog.setTitle(R.string.cache_coordinates);
         } else {
