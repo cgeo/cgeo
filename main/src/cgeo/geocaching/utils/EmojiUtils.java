@@ -7,6 +7,7 @@ import cgeo.geocaching.databinding.EmojiselectorBinding;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.storage.extension.EmojiLRU;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -33,7 +34,6 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -156,12 +156,6 @@ public class EmojiUtils {
 
     public static void selectEmojiPopup(final Context context, final int currentValue, @DrawableRes final int defaultRes, final Action1<Integer> setNewCacheIcon) {
 
-        // calc sizes for markers
-        final Pair<Integer, Integer> markerDimensionsTemp = DisplayUtils.getDrawableDimensions(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_menu_filter, null));
-        final int markerAvailable = (int) (markerDimensionsTemp.first * 0.5);
-        final Pair<Integer, Integer> markerDimensions = new Pair<>(markerAvailable, markerAvailable);
-        final EmojiPaint paint = new EmojiPaint(context.getResources(), markerDimensions, markerAvailable, 0, DisplayUtils.calculateMaxFontsize(35, 10, 150, markerAvailable));
-
         // fill dynamic EmojiSet
         prefillCustomCircles(0);
 
@@ -196,9 +190,13 @@ public class EmojiUtils {
             .setCustomTitle(customTitle.getRoot())
             .create();
 
-        final int maxCols = DisplayUtils.calculateNoOfColumns(context, 60);
+        // calc sizes for markers
+        final int wantedEmojiSizeInDp = 24;
+        final int columnWidthInDp = 60;
+
+        final int maxCols = DisplayUtils.calculateNoOfColumns(context, columnWidthInDp);
         dialogView.emojiGrid.setLayoutManager(new GridLayoutManager(context, maxCols));
-        final EmojiViewAdapter gridAdapter = new EmojiViewAdapter(context, paint, symbols[0].symbols, symbols[0].remaining, currentValue, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
+        final EmojiViewAdapter gridAdapter = new EmojiViewAdapter(context, wantedEmojiSizeInDp, symbols[0].symbols, symbols[0].remaining, currentValue, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
         dialogView.emojiGrid.setAdapter(gridAdapter);
 
         dialogView.emojiOpacity.setLayoutManager(new GridLayoutManager(context, OPACITY_VALUES));
@@ -207,7 +205,7 @@ public class EmojiUtils {
         for (int i = 1; i < OPACITY_VALUES; i++) {
             emojiOpacities[i] = emojiOpacities[i - 1] + CUSTOM_SET_SIZE_PER_OPACITY;
         }
-        final EmojiViewAdapter opacityAdapter = new EmojiViewAdapter(context, paint, emojiOpacities, emojiOpacities.length, emojiOpacities[0], true, newgroup -> {
+        final EmojiViewAdapter opacityAdapter = new EmojiViewAdapter(context, wantedEmojiSizeInDp, emojiOpacities, emojiOpacities.length, emojiOpacities[0], true, newgroup -> {
             final int newOpacity = (newgroup - CUSTOM_ICONS_START_CIRCLES) / CUSTOM_SET_SIZE_PER_OPACITY;
             prefillCustomCircles(newOpacity);
             gridAdapter.notifyDataSetChanged();
@@ -219,7 +217,7 @@ public class EmojiUtils {
         for (int i = 0; i < symbols.length; i++) {
             emojiGroups[i] = symbols[i].tabSymbol;
         }
-        final EmojiViewAdapter groupsAdapter = new EmojiViewAdapter(context, paint, emojiGroups, emojiGroups.length, symbols[0].tabSymbol, true, newgroup -> {
+        final EmojiViewAdapter groupsAdapter = new EmojiViewAdapter(context, wantedEmojiSizeInDp, emojiGroups, emojiGroups.length, symbols[0].tabSymbol, true, newgroup -> {
             int newGroupId = 0;
             for (int i = 0; i < symbols.length; i++) {
                 if (symbols[i].tabSymbol == newgroup) {
@@ -233,7 +231,7 @@ public class EmojiUtils {
 
         dialogView.emojiLru.setLayoutManager(new GridLayoutManager(context, maxCols));
         final int[] lru = EmojiLRU.getLRU();
-        final EmojiViewAdapter lruAdapter = new EmojiViewAdapter(context, paint, lru, lru.length, 0, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
+        final EmojiViewAdapter lruAdapter = new EmojiViewAdapter(context, wantedEmojiSizeInDp, lru, lru.length, 0, false, newCacheIcon -> onItemSelected(dialog, setNewCacheIcon, newCacheIcon));
         dialogView.emojiLru.setAdapter(lruAdapter);
 
         customTitle.dialogTitleTitle.setText(R.string.select_icon);
@@ -245,7 +243,7 @@ public class EmojiUtils {
             dialogButtonRight.setIconResource(R.drawable.ic_menu_mark);
         } else if (currentValue != 0) {
             dialogButtonRight.setVisibility(View.VISIBLE);
-            dialogButtonRight.setIcon(getEmojiDrawable(paint, currentValue));
+            dialogButtonRight.setIcon(getEmojiDrawable(ViewUtils.dpToPixel(wantedEmojiSizeInDp), currentValue));
             dialogButtonRight.setIconTint(null);
         } else if (defaultRes != 0) {
             dialogButtonRight.setVisibility(View.VISIBLE);
@@ -293,13 +291,13 @@ public class EmojiUtils {
         private int remaining;
         private final LayoutInflater inflater;
         private final Action1<Integer> callback;
-        private final EmojiPaint paint;
+        private final int wantedSizeInDp;
         private int currentValue = 0;
         private final boolean highlightCurrent;
 
-        EmojiViewAdapter(final Context context, final EmojiPaint paint, final int[] data, final int remaining, final int currentValue, final boolean hightlightCurrent, final Action1<Integer> callback) {
+        EmojiViewAdapter(final Context context, final int wantedSizeInDp, final int[] data, final int remaining, final int currentValue, final boolean hightlightCurrent, final Action1<Integer> callback) {
             this.inflater = LayoutInflater.from(context);
-            this.paint = paint;
+            this.wantedSizeInDp = wantedSizeInDp;
             this.setData(data, remaining);
             this.currentValue = currentValue;
             this.highlightCurrent = hightlightCurrent;
@@ -322,11 +320,12 @@ public class EmojiUtils {
         @Override
         public void onBindViewHolder(@NonNull final EmojiViewAdapter.ViewHolder holder, final int position) {
             if (data[position] >= CUSTOM_ICONS_START && data[position] <= CUSTOM_ICONS_END) {
-                holder.iv.setImageDrawable(EmojiUtils.getEmojiDrawable(paint, data[position]));
+                holder.iv.setImageDrawable(EmojiUtils.getEmojiDrawable(ViewUtils.dpToPixel(wantedSizeInDp), data[position]));
                 holder.iv.setVisibility(View.VISIBLE);
                 holder.tv.setVisibility(View.GONE);
             } else {
                 holder.tv.setText(getEmojiAsString(data[position]));
+                holder.tv.setTextSize(wantedSizeInDp);
                 holder.iv.setVisibility(View.GONE);
                 holder.tv.setVisibility(View.VISIBLE);
             }
