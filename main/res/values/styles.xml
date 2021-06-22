@@ -194,7 +194,9 @@
 
   <!-- Chips -->
 
-    <style name="chip_choice" parent="@style/Widget.MaterialComponents.Chip.Choice">
+    <style name="chip_choice" parent="@style/Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_background_selector</item>
+        <item name="android:textColor">@color/chip_textcolor_selector</item>
         <item name="android:padding">6dip</item>
         <item name="android:lines">1</item>
         <item name="android:singleLine">true</item>
