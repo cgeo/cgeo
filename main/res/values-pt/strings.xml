@@ -518,7 +518,7 @@
     <string name="cache_filter_status_select_label_watchlist">Na Lista de Observação</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistério Resolvido</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuração de filtro afectará apenas as caches mistério.\n\n Um mistério é considerado \'resolvido\', quer tenham sido alteradas as coordenadas ou haja uma localização final válida, preenchida com coordenadas.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuração de filtro afectará apenas as caches mistério.\n\n Um mistério é considerado \'resolvido\', quer as coordenadas tenham sido alteradas ou haja uma localização final válida, preenchida com coordenadas.</string>
     <string name="cache_filter_status_active">Activas</string>
     <string name="cache_filter_status_disabled">Desactivadas</string>
     <string name="cache_filter_status_archived">Arquivadas</string>
