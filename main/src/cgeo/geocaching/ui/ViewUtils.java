@@ -205,8 +205,7 @@ public class ViewUtils {
             itemBinding.itemInfo.setVisibility(View.VISIBLE);
             itemBinding.itemInfo.setOnClickListener(v -> SimpleDialog.of(activity).setMessage(infoText).show());
         }
-        itemBinding.itemIcon.setOnClickListener(v -> itemBinding.itemCheckbox.toggle());
-        itemBinding.itemText.setOnClickListener(v -> itemBinding.itemCheckbox.toggle());
+        itemView.setOnClickListener(v -> itemBinding.itemCheckbox.toggle());
 
         return new ImmutablePair<>(itemView, itemBinding.itemCheckbox);
     }
