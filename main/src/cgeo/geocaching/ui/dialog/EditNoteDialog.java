@@ -1,28 +1,26 @@
-package cgeo.geocaching.ui;
+package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
-import cgeo.geocaching.ui.dialog.Dialogs;
 
-import android.app.Dialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
-public class EditNoteDialog extends DialogFragment {
+public class EditNoteDialog extends AbstractFullscreenDialog {
 
     public static final String ARGUMENT_INITIAL_NOTE = "initialNote";
     public static final String ARGUMENT_INITIAL_PREVENT = "initialPrevent";
 
+    private Toolbar toolbar;
     private EditText mEditText;
     private CheckBox mPreventCheckbox;
 
@@ -47,13 +45,21 @@ public class EditNoteDialog extends DialogFragment {
         return dialog;
     }
 
+    @Override
+    public View onCreateView(@NotNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        final View view = inflater.inflate(R.layout.fragment_edit_note, container, false);
+
+        toolbar = view.findViewById(R.id.toolbar);
+
+        return view;
+    }
 
     @Override
-    @androidx.annotation.NonNull
-    public Dialog onCreateDialog(final Bundle savedInstanceState) {
-        final FragmentActivity activity = getActivity();
+    public void onViewCreated(@NotNull final View view, final Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        final View view = View.inflate(activity, R.layout.fragment_edit_note, null);
+
         mEditText = view.findViewById(R.id.note);
         String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
@@ -69,28 +75,19 @@ public class EditNoteDialog extends DialogFragment {
         final boolean preventWaypointsFromNote = getArguments().getBoolean(ARGUMENT_INITIAL_PREVENT);
         mPreventCheckbox.setChecked(preventWaypointsFromNote);
 
-        final AlertDialog dialog = Dialogs.newBuilder(activity).setView(view).create();
-        final TextView title = view.findViewById(R.id.dialog_title_title);
-        title.setText(R.string.cache_personal_note);
-        title.setVisibility(View.VISIBLE);
-
-        final View cancel = view.findViewById(R.id.dialog_title_cancel);
-        cancel.setOnClickListener(view1 -> dialog.dismiss());
-        cancel.setVisibility(View.VISIBLE);
-
-        final View done = view.findViewById(R.id.dialog_title_done);
-        done.setOnClickListener(view12 -> {
-            // trim note to avoid unnecessary uploads for whitespace only changes
-            final String personalNote = StringUtils.trim(mEditText.getText().toString());
-            ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(personalNote, mPreventCheckbox.isChecked());
-            dialog.dismiss();
+        toolbar.setNavigationOnClickListener(v -> dismiss());
+        toolbar.setTitle(R.string.cache_personal_note);
+        toolbar.inflateMenu(R.menu.menu_ok_cancel);
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.menu_item_save) {
+                // trim note to avoid unnecessary uploads for whitespace only changes
+                final String personalNote = StringUtils.trim(mEditText.getText().toString());
+                ((EditNoteDialogListener) requireActivity()).onFinishEditNoteDialog(personalNote, mPreventCheckbox.isChecked());
+            }
+            dismiss();
+            return true;
         });
-        done.setVisibility(View.VISIBLE);
-        Keyboard.show(activity, mEditText);
 
-        //prevent popup window to extend under the virtual keyboard or above the top of phone display (see #8793)
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-        return dialog;
+        Keyboard.show(requireActivity(), mEditText);
     }
 }

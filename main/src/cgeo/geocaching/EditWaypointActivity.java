@@ -244,9 +244,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public boolean onOptionsItemSelected(final MenuItem item) {
 
         final int itemId = item.getItemId();
-        if (itemId == R.id.menu_edit_waypoint_cancel) {
+        if (itemId == R.id.menu_item_cancel) {
             finish();
-        } else if (itemId == R.id.menu_edit_waypoint_save) {
+        } else if (itemId == R.id.menu_item_save) {
             saveWaypoint(getActivityData());
             finish();
         } else if (itemId == android.R.id.home) {
@@ -279,7 +279,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.edit_waypoint_options, menu);
+        getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
         return true;
     }
 
