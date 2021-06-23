@@ -562,6 +562,7 @@
     </plurals>
     <!-- days remaining -->
     <string name="cache_offline_refresh">Osveži</string>
+    <string name="cache_offline_drop">Odstrani</string>
     <string name="cache_offline_store">Shrani</string>
     <string name="cache_offline_stored">Shranjeno na napravi</string>
     <string name="cache_offline_not_ready">Ni na voljo brez povezave</string>
