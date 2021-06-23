@@ -883,7 +883,6 @@
     </plurals>
     <string name="last_day_available">siste dag tilgjengelig</string>
     <string name="cache_offline_refresh">Oppdater</string>
-    <string name="cache_offline_drop">Fjern</string>
     <string name="cache_delete_userdefined_waypoints">Fjern brukerdefinerte veipunkter</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Fjerne alle brukerdefinerte veipunkter for denne cacheen?\n\nVeipunkter slettes umiddelbart, det er ingen angremulighet.</string>
     <string name="cache_delete_userdefined_waypoints_note">Merk: Du har \"veipunkter fra notat\" aktivert. Hvis du har koordinater i ditt personlige notat anerkjent av c:geo, blir veipunktene automatisk gjenopprettet for dem. Du kan deaktivere dette i dialogboksen for redigering av personlige notater.</string>
