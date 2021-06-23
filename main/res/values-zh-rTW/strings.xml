@@ -830,7 +830,6 @@
     </plurals>
     <!-- days remaining -->
     <string name="cache_offline_refresh">重新整理</string>
-    <string name="cache_offline_drop">移除</string>
     <string name="cache_delete_userdefined_waypoints">移除使用者定義航點</string>
     <string name="cache_delete_userdefined_waypoints_confirm">要移除這個cache裡的使用者定義航點(全部)?\n\n航點會被馬上移除並無法回復。</string>
     <string name="cache_delete_userdefined_waypoints_success">使用者定義的航點已刪除。</string>
