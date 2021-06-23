@@ -754,6 +754,7 @@
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
+    <string name="cache_offline_drop">移除</string>
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
     <string name="cache_found_last_30_days">最近 30 天下载</string>
     <string name="cache_geocode">地理编码</string>
