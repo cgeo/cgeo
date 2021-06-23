@@ -200,7 +200,7 @@
     <string name="err_unknown_address">O c:geo não conseguiu mapear a morada para uma localização existente</string>
     <string name="err_comm">Erro de comunicação desconhecido. Por favor, consulte a nossa <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
     <string name="err_missing_auth">Não foi definido utilizador e/ou palavra-passe</string>
-    <string name="err_wrong">Utilizador e/ou palavra-passe incorretos</string>
+    <string name="err_wrong">Utilizador e/ou palavra-passe incorrectos</string>
     <string name="err_maintenance">O sítio \'geocaching.com\' está indisponível para manutenção. No modo offline, o c:geo funciona com as geocaches guardadas em \'Armazenadas\'.</string>
     <string name="err_license">Não fez a aceitação do contrato de utilização de Geocaching.com. Por essa razão, o c:geo não consegue carregar as coordenadas da geocache.</string>
     <string name="err_unvalidated_account">Deverá primeiro validar a sua conta no sítio web \'geocaching.com\'.</string>
@@ -221,10 +221,10 @@
     <string name="err_auth_initialize">O c:geo falhou a inicialização do processo de autorização.</string>
     <string name="err_auth_process">O processo de autorização falhou.</string>
     <string name="err_cannot_log_visit">O c:geo não consegue registar a sua visita. Por favor, faça-o a partir da vista dos detalhes completos da cache.</string>
-    <string name="err_download_fail">O c:geo falhou a transferência das geocaches.</string>
-    <string name="err_dwld_details_failed">O c:geo falhou a transferência dos detalhes da geocache.</string>
+    <string name="err_download_fail">O c:geo falhou a transferência das caches.</string>
+    <string name="err_dwld_details_failed">O c:geo falhou a transferência dos detalhes da cache.</string>
     <string name="err_load_descr_failed">O c:geo não consegue carregar a descrição.</string>
-    <string name="err_location_unknown">O c:geo desconhece a localização da geocache.</string>
+    <string name="err_location_unknown">O c:geo desconhece a localização da cache.</string>
     <string name="err_missing_device_name">Por favor, introduza um nome para o dispositivo antes de o registar.</string>
     <string name="err_favorite_failed">A alteração da atribuição de favorito falhou.</string>
     <string name="err_select_logimage_failed">A selecção da imagem para o registo falhou.</string>
@@ -234,22 +234,22 @@
     <string name="err_tb_not_loggable">Este trackable não pode ser registado.</string>
     <string name="err_tb_not_found">O c:geo não encontra o trackable %s.</string>
     <string name="err_tb_find_that">O c:geo não encontra esse trackable.</string>
-    <string name="err_waypoint_cache_unknown">O c:geo não sabe a que geocache pretende adicionar o ponto adicional.</string>
+    <string name="err_waypoint_cache_unknown">O c:geo não sabe a que cache pretende adicionar o ponto adicional.</string>
     <string name="err_waypoint_add_failed">O c:geo não conseguiu adicionar o seu ponto adicional.</string>
     <string name="err_point_bear_and_dist_title">Precisa de ajuda?</string>
     <string name="err_point_bear_and_dist">Preencha a direcção e a distância. A direcção é o ângulo de 0 a 360 graus relativo ao Norte. A distância não necessita de unidades.</string>
     <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
     <string name="err_log_post_missing_tracking_code">Código de acompanhamento em falta.</string>
     <string name="err_log_post_missing_coordinates">Coordenadas em falta.</string>
-    <string name="err_log_post_failed">Parece que o seu registo não foi publicado. Por favor, verifique no sítio web referente à cache se foi publicado o registo.</string>
+    <string name="err_log_post_failed">Parece que o seu registo não foi publicado. Por favor, verifique na página web da cache se o registo foi publicado.</string>
     <string name="err_log_post_failed_ec">Parece que o seu registo não foi publicado. Por favor, verifique-o em \'Extremcaching.com\'.</string>
     <string name="err_log_post_failed_gk">Parece que o seu registo não foi publicado. Por favor, verifique-o em \'GeoKrety.org\'.</string>
-    <string name="err_logimage_post_failed">Parece que a imagem que anexou ao registo não foi enviada. Por favor, verifique no sítio web referente à cache se a imagem foi enviada.</string>
+    <string name="err_logimage_post_failed">Parece que a imagem que anexou ao registo não foi enviada. Por favor, verifique na página web da cache se a imagem foi enviada.</string>
     <string name="err_parse_lat">O c:geo não conseguiu extrair a latitude.</string>
     <string name="err_parse_lon">O c:geo não conseguiu extrair a longitude.</string>
     <string name="err_parse_dist">O c:geo não conseguiu calcular a distância.</string>
     <string name="err_parse_lat_lon">O c:geo não conseguiu extrair a latitude ou longitude.</string>
-    <string name="err_rendertheme_file_unreadable">Não foi possível carregar o tema selecionado. A reverter para o tema predefinido.</string>
+    <string name="err_rendertheme_file_unreadable">Não foi possível carregar o tema seleccionado. A reverter para o tema predefinido.</string>
     <string name="err_rendertheme_invalid">O tema seleccionado não é válido para esta versão do mapsforge. A reverter para o tema predefinido.</string>
     <string name="err_invalid_filename_char">Carácter \'%c\' não permitido</string>
     <string name="warn_save_nothing">Não há nada para guardar.</string>
@@ -271,7 +271,7 @@
     <string name="warn_invalid_character">O carácter deve ser uma LETRA ou um DÍGITO</string>
     <string name="warn_notloggedin_title">Modo Offline</string>
     <string name="warn_notloggedin_short">Não tem sessão iniciada. O mapa ao vivo só mostrará as caches armazenadas localmente. Toque aqui para obter mais informações.</string>
-    <string name="warn_notloggedin_long">Não tem a sessão iniciada (ainda). O mapa em tempo real mostrará apenas as caches armazenadas localmente e as funções on-line não funcionarão.\n\nOu não há uma ligação de rede, um problema com o servidor ou precisa de (re)configurar os seus serviços de geocaching.\n\nQuer configurar os serviços agora?</string>
+    <string name="warn_notloggedin_long">Não tem a sessão iniciada (ainda). O mapa em tempo real mostrará apenas as caches armazenadas localmente e as funções on-line não funcionarão.\n\nPode dever-se a não existir uma ligação à rede, a um problema com o servidor ou ter de (re)configurar os seus serviços de geocaching.\n\nPretende configurar os serviços agora?</string>
     <string name="err_read_pocket_query_list">Erro ao ler a lista de Pocket Query.</string>
     <string name="err_read_bookmark_list">Erro ao ler as listas de marcadores.</string>
     <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
@@ -582,7 +582,7 @@
     <string name="settings_title_logging">Registos</string>
     <string name="settings_summary_logging">Configurar a sua assinatura e as opções de registo.</string>
     <string name="settings_title_map">Mapa</string>
-    <string name="settings_summary_map">Definir a fonte do mapa, definições de mapa offline e detalhes do mapa.</string>
+    <string name="settings_summary_map">Definir o fornecedor, configurações offline e detalhes do mapa.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
     <string name="settings_title_offline_routing">Encaminhamento offline</string>
     <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
@@ -599,7 +599,7 @@
     <string name="confirm_data_dir_move">Mover pasta de dados de geocache pode demorar muito tempo, dependendo do seu dispositivo e volume de dados.</string>
     <string name="settings_title_basicmembers">Opções para Membros Básicos</string>
     <string name="settings_title_navigation">Encaminhamento / Navegação</string>
-    <string name="settings_summary_navigation">Configure o encaminhamento off-line, escolha os métodos de navegação preferidos e seleccione as aplicações de navegação externas.</string>
+    <string name="settings_summary_navigation">Configurar o encaminhamento offline, escolher os métodos de navegação preferidos e seleccionar as aplicações de navegação externas.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Definições específicas de sistema e opções de depuração.</string>
     <string name="settings_title_navigation_menu">Menu de navegação</string>
@@ -952,16 +952,16 @@
     <string name="sendToCgeo_download_fail">O c:geo falhou a transferência das geocaches. Não há ligação à Internet ou o send2cgeo encontra-se fora de serviço.</string>
     <string name="sendToCgeo_no_registration">O c:geo falhou a transferência das geocaches. O registo do send2cgeo expirou. Por favor, faça o registo nas definições.</string>
     <!-- Content Storage -->
-    <string name="contentstorage_selectfolder_dialog_title">Alterar pasta %s</string>
+    <string name="contentstorage_selectfolder_dialog_title">Alterar a pasta \'%s\'</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">A pasta %1$s está definida como \'%2$s\', contém %3$s e %4$s e tem um tamanho total de %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">Pode optar por usar a pasta padrão \'%s\' ou seleccionar uma pasta definida pelo utilizador.</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copiar todo o conteúdo</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Mover todo o conteúdo</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Nenhuma acção adicional</string>
     <string name="contentstorage_selectfolder_dialog_choice">Seleccionou uma pasta diferente da que está armazenada. A pasta actual contém %1$s, %2$s e tem um tamanho de %3$s. Como deseja prosseguir?\n\nSeleccione a pasta e</string>
-    <string name="contentstorage_folder_selection_aborted">A cancelar selecção de pasta, a pasta é \'%s\'</string>
+    <string name="contentstorage_folder_selection_aborted">A anular a selecção de pasta, a pasta é \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Pasta definida como \'%s\'</string>
-    <string name="contentstorage_file_selection_aborted">A cancelar a selecção de ficheiro</string>
+    <string name="contentstorage_file_selection_aborted">A anular a selecção de ficheiro</string>
     <string name="contentstorage_file_selection_success">Ficheiro seleccionado: \'%s\'</string>
     <string name="contentstorage_err_read_failed">O ficheiro \'%s\' não pôde ser lido</string>
     <string name="contentstorage_err_write_failed">O ficheiro \'%s\' não pôde ser escrito</string>
@@ -1048,7 +1048,7 @@
     </plurals>
     <string name="last_day_available">último dia disponível</string>
     <string name="cache_offline_refresh">Actualizar</string>
-    <string name="cache_offline_drop">Remover</string>
+    <string name="cache_offline_drop">Remover da lista</string>
     <string name="cache_delete_userdefined_waypoints">Remover pontos adicionais definidos pelo utilizador</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
     <string name="cache_delete_userdefined_waypoints_note">Nota: Tem a opção \"pontos adicionais de notas\" activada. Se tiver coordenadas em notas pessoais, reconhecidas pelo c:geo, os pontos adicionais serão recriados automaticamente por elas. Pode desactivar isto na secção de edição de anotações pessoais.</string>
@@ -1512,7 +1512,7 @@
     <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das caches no c:geo, ao tocar sem soltar sobre o texto da descrição da cache (mesmo sem uma ligação à Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permite jogar e procurar geocaches do tipo Wherigo. O c:geo pode iniciar automaticamente a transferência dos cartuchos nessa aplicação.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
-    <string name="helper_brouter_description">O BRouter fornece cálculo de percursos off-line. Se estiver instalado e tiver os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a geocache no mapa interno.</string>
+    <string name="helper_brouter_description">O BRouter fornece cálculo de percursos offline. Caso esteja instalado e tenha os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a cache no mapa interno.</string>
     <string name="helper_chirpwolf_description">A aplicação Chirp Wolf permite que leia os dados de tags chirp ANT +/Garmin, que será necessária na realização de geocaches ANT+/chirp.</string>
     <string name="helper_alc_description">A aplicação Adventure Lab para o seu telemóvel ou tablet.</string>
     <!-- export -->
@@ -1914,7 +1914,7 @@
     <string name="close_app">Fechar a aplicação</string>
     <string name="ask_again">Voltar a perguntar</string>
     <string name="location_permission_request_explanation">O c:geo precisa de aceder ao GPS do seu dispositivo para localizar a sua posição e calcular a distância e direcção para as geocaches. O mesmo não pode ser utilizado sem esta permissão.</string>
-    <string name="storage_permission_request_explanation">O c:geo irá escrever dados no armazenamento interno ou cartão SD assim que guardar geocaches para uso off-line. Além disso, o c:geo usará o armazenamento interno para importar/exportar ficheiros e para a leitura de mapas off-line. A mesma não pode ser usada sem esta permissão.</string>
+    <string name="storage_permission_request_explanation">O c:geo irá escrever dados no armazenamento interno ou cartão SD assim que guarde geocaches para uso offline. Além disso, o c:geo utilizará o armazenamento interno para importar/exportar ficheiros e para a leitura de mapas offline. A memória não pode ser utilizada sem esta permissão.</string>
     <string name="storage_permission_needed">Esta função não é possível sem permissão de armazenamento.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Seleccione o esquema de cores</string>
