@@ -792,7 +792,6 @@
     </plurals>
     <string name="last_day_available">tilgængelig for sidste dag</string>
     <string name="cache_offline_refresh">Genindlæs</string>
-    <string name="cache_offline_drop">Fjern</string>
     <string name="cache_delete_userdefined_waypoints">Slet brugerdefinerede waypoints</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Slet alle cachens brugerdefinerede waypoints?\n\nSletningen kan ikke fortrydes.</string>
     <string name="cache_delete_userdefined_waypoints_note">Bemærk: Du har aktiveret \"waypoints fra note\". Hvis du har koordinater i din personlige note som c:geo kan genkende, vil waypoints automatisk blive genskabt for dem. Du kan deaktivere dette i dialogen til redigering af personlige noter.</string>
