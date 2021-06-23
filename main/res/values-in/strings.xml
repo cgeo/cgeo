@@ -564,7 +564,7 @@
     <!-- days remaining -->
     <string name="last_day_available">tersedia dihari terakhir</string>
     <string name="cache_offline_refresh">Segarkan</string>
-    <string name="cache_offline_drop">Hapus</string>
+    <string name="cache_offline_drop">Menghapus</string>
     <string name="cache_offline_store">Toko</string>
     <string name="cache_offline_stored">Disimpan dalam perangkat</string>
     <string name="cache_offline_not_ready">Tidak tersedia secara offline</string>
