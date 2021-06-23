@@ -722,7 +722,6 @@
     </plurals>
     <string name="last_day_available">último día disponible</string>
     <string name="cache_offline_refresh">Actualizar</string>
-    <string name="cache_offline_drop">Eliminar</string>
     <string name="cache_offline_store">Guardar</string>
     <string name="cache_offline_stored">Guardado en el dispositivo</string>
     <string name="cache_offline_not_ready">No preparado\npara usar desconectado</string>
