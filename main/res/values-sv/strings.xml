@@ -881,7 +881,6 @@
     </plurals>
     <string name="last_day_available">sista dagen tillgänglig</string>
     <string name="cache_offline_refresh">Uppdatera</string>
-    <string name="cache_offline_drop">Ta bort</string>
     <string name="cache_delete_userdefined_waypoints">Ta bort användardefinierade punkter</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Ta bort alla användardefinierade waypoints i denna cache?\n\nWaypoints kommer att raderas omedelbart, och går inte att ångra.</string>
     <string name="cache_delete_userdefined_waypoints_note">Obs: Du har \"vägpunkter från anteckning\" aktiverat. Om du har koordinater i din personliga anteckning som känns igen av c:geo, kommer waypoints att återskapas för dem automatiskt. Du kan inaktivera detta i dialogrutan för redigering av personliga anteckningar.</string>
