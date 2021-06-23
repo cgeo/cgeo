@@ -581,6 +581,7 @@
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
+    <string name="cache_offline_drop">Läschen</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
