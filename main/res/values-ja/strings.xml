@@ -1038,7 +1038,6 @@
     </plurals>
     <string name="last_day_available">利用可能期限</string>
     <string name="cache_offline_refresh">更新</string>
-    <string name="cache_offline_drop">削除</string>
     <string name="cache_delete_userdefined_waypoints">ユーザー定義のウェイポイントを削除</string>
     <string name="cache_delete_userdefined_waypoints_confirm">このキャッシュのすべてのユーザー定義ウェイポイントを削除しますか?\n\nウェイポイントはすぐに削除され、元に戻すことはできません</string>
     <string name="cache_delete_userdefined_waypoints_note">注意: 「ノートからウェイポイント抽出する」が有効化されています。パーソナルノートに(c:geoが認識できる)座標値が書いてある場合はウェイポイントが自動的に再作成されます。パーソナルノートのダイアログで抽出を無効化できます</string>
