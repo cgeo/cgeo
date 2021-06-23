@@ -2,10 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>2021.06.xx:</h1>
+<h1>2021.06.23:</h1>
 
 <h4>Fixes:</h4>
 <ul>
+<li> Fix: Add/Remove to/from watchlist fixed after website change. Count of watchers corrected.</li>
 <li> Fix: Extract waypoint with same name but different coordinates from personal note</li>
 <li> Fix: Bug in extracting user note for waypoint with formula</li>
 <li> Fix: Export formula to PN instead of coordinates for completed formula</li>
