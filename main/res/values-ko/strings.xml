@@ -1042,7 +1042,6 @@
     </plurals>
     <string name="last_day_available">오늘만 가능합니다.</string>
     <string name="cache_offline_refresh">새로 고침</string>
-    <string name="cache_offline_drop">제거</string>
     <string name="cache_delete_userdefined_waypoints">사용자 정의 지점 제거</string>
     <string name="cache_delete_userdefined_waypoints_confirm">이 캐시의 모든 사용자 정의 지점을 제거 하시겠습니까?\n\n지점은 즉시 삭제되며 실행 취소할 수 없습니다.</string>
     <string name="cache_delete_userdefined_waypoints_note">참고: \"메모의 지점\"이 활성화되어 있습니다. 개인 메모에 c:geo가 인식 한 좌표가있는 경우 지점이 자동으로 다시 생성됩니다. 개인 메모 편집 대화 상자에서 비활성화 할 수 있습니다.</string>
