@@ -1056,7 +1056,6 @@
     </plurals>
     <string name="last_day_available">ostáva posledný deň</string>
     <string name="cache_offline_refresh">Obnoviť</string>
-    <string name="cache_offline_drop">Odstrániť</string>
     <string name="cache_delete_userdefined_waypoints">Odstrániť vlastné body trasy</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Odstrániť všetky vlastné body trasy tejto kešky?\n\nBody trasy budú ihneď vymazané, nie je možné vrátiť do späť.</string>
     <string name="cache_delete_userdefined_waypoints_note">Poznámka: Máte povolené \"body trasy z poznámky\". Ak máte v osobnej poznámke súradnice rozpoznané programom c:geo, body trasy sa automaticky znova vytvoria. Môžete to zakázať v dialógovom okne úpravy osobnej poznámky.</string>
