@@ -847,7 +847,6 @@
     </plurals>
     <string name="last_day_available">остался один день</string>
     <string name="cache_offline_refresh">Обновить</string>
-    <string name="cache_offline_drop">Удалить</string>
     <string name="cache_delete_userdefined_waypoints">Удалить пользовательские точки</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Удалить все пользовательские точки из этого тайника?\n\nТочки будут удалены безвозвратно!</string>
     <string name="cache_delete_userdefined_waypoints_note">Примечание: У вас включено создание точек из заметок. Если в вашей заметке есть координаты, то точки будут созданы для них автоматически. Это можно отключить в диалоговом окне редактирования заметок.</string>
