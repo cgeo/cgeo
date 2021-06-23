@@ -1278,8 +1278,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             caches.removeAll(cachesFromSearchResult);
             caches.addAll(cachesFromSearchResult);
 
-            synchronized (caches) {
-                MapUtils.filter(caches);
+
+            if (mapMode == MapMode.LIVE || mapOptions.isLiveEnabled) {
+                synchronized (caches) {
+                    MapUtils.filter(caches);
+                }
             }
 
             countVisibleCaches();
