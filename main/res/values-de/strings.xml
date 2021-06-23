@@ -373,8 +373,8 @@
     <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
     <string name="caches_select_invert">Auswahl invertieren</string>
     <string name="caches_nearby">In der Nähe</string>
-    <string name="caches_remove_all">Alle von Liste entfernen</string>
-    <string name="caches_remove_selected">Ausgewählte von Liste entfernen</string>
+    <string name="caches_remove_all">Alle aus Liste entfernen</string>
+    <string name="caches_remove_selected">Ausgewählte aus Liste entfernen</string>
     <string name="caches_remove_all_completely">Alle vom Gerät löschen</string>
     <string name="caches_remove_selected_completely">Ausgewählte vom Gerät löschen</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
@@ -1028,7 +1028,7 @@
     </plurals>
     <string name="last_day_available">letzter Tag verfügbar</string>
     <string name="cache_offline_refresh">Aktualisieren</string>
-    <string name="cache_offline_drop">Entfernen</string>
+    <string name="cache_offline_drop">Aus Liste entfernen</string>
     <string name="cache_delete_userdefined_waypoints">Benutzerdefinierte Wegpunkte löschen</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Alle benutzerdefinierten Wegpunkte dieses Caches löschen?\n\nWegpunkte werden direkt gelöscht, es gibt keine Wiederherstellen-Funktion.</string>
     <string name="cache_delete_userdefined_waypoints_note">Hinweis: Du hast \"Wegpunkte aus der Notiz\" aktiviert. Wenn du Koordinaten in deiner persönlichen Notiz hast, werden diese von c:geo erkannt und Wegpunkte automatisch wiederhergestellt. Du kannst dies im Beareitungsfenster der persönlichen Notiz deaktivieren.</string>
