@@ -1048,6 +1048,7 @@
     </plurals>
     <string name="last_day_available">mevcut olan son gün</string>
     <string name="cache_offline_refresh">Yenile</string>
+    <string name="cache_offline_drop">Listeden kaldır</string>
     <string name="cache_delete_userdefined_waypoints">Kullanıcı tanımlı ara noktaları kaldır</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Bu kutunun tüm kullanıcı tanımlı yol noktalarını kaldırmak istiyor musunuz?\\n\nYol noktaları hemen silinecek, geri alınamayacak.</string>
     <string name="cache_delete_userdefined_waypoints_note">Not: \"Nottan ara noktalar\" etkinleştirildi. Kişisel notunuzda c:geo tarafından tanınan koordinatlarınız varsa, ara noktalar onlar için otomatik olarak yeniden oluşturulacaktır. Kişisel not düzenleme iletişim kutusunda bunu devre dışı bırakabilirsiniz.</string>
