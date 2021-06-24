@@ -5,6 +5,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCUtils;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.tc.TerraCachingLogType;
 import cgeo.geocaching.connector.tc.TerraCachingType;
@@ -619,8 +621,13 @@ abstract class GPXParser extends FileParser {
             try {
                 if (attrs.getIndex("id") > -1) {
                     logBuilder.setId(Integer.parseInt(attrs.getValue("id")));
+
+                    final IConnector connector = ConnectorFactory.getConnector(cache);
+                    if (connector instanceof GCConnector) {
+                        logBuilder.setServiceLogId(GCUtils.logIdToLogCode(logBuilder.getId()));
+                    }
                 }
-            } catch (final NumberFormatException ignored) {
+            } catch (final Exception ignored) {
                 // nothing
             }
         });
