@@ -42,6 +42,7 @@ import cgeo.geocaching.storage.extension.DBDowngradeableVersions;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.EmojiUtils;
@@ -110,6 +111,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class DataStore {
 
@@ -2393,10 +2395,13 @@ public class DataStore {
                 // by deleting only those from same author, same date, same logtype
                 final SQLiteStatement deleteLog = PreparedStatement.CLEAN_LOG.getStatement();
                 for (final LogEntry log : logs) {
+                    final ImmutablePair<Long, Long> dateRange = CalendarUtils.getStartAndEndOfDay(log.date);
+
                     deleteLog.bindString(1, geocode);
-                    deleteLog.bindLong(2, log.date);
-                    deleteLog.bindLong(3, log.logType.id);
-                    deleteLog.bindString(4, log.author);
+                    deleteLog.bindLong(2, dateRange.left);
+                    deleteLog.bindLong(3, dateRange.right);
+                    deleteLog.bindLong(4, log.logType.id);
+                    deleteLog.bindString(5, log.author);
                     deleteLog.executeUpdateDelete();
                 }
             }
@@ -4302,7 +4307,7 @@ public class DataStore {
         COUNT_CACHES_ON_STANDARD_LIST("SELECT COUNT(geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID),
         COUNT_ALL_CACHES("SELECT COUNT(DISTINCT(geocode)) FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID),
         INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, service_log_id, type, author, author_guid, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"),
-        CLEAN_LOG("DELETE FROM " + dbTableLogs + " WHERE geocode = ? AND date = ? AND type = ? AND author = ?"),
+        CLEAN_LOG("DELETE FROM " + dbTableLogs + " WHERE geocode = ? AND date >= ? AND date <= ? AND type = ? AND author = ?"),
         INSERT_ATTRIBUTE("INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)"),
         ADD_TO_LIST("INSERT OR REPLACE INTO " + dbTableCachesLists + " (list_id, geocode) VALUES (?, ?)"),
         GEOCODE_OFFLINE("SELECT COUNT(l.list_id) FROM " + dbTableCachesLists + " l, " + dbTableCaches + " c WHERE c.geocode = ? AND c.geocode = l.geocode AND c.detailed = 1 AND l.list_id != " + StoredList.TEMPORARY_LIST.id),
