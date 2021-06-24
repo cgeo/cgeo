@@ -39,7 +39,9 @@ final class LCApi {
 
     private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd", Locale.getDefault());
     @NonNull
-    private static final String API_HOST = "https://labs-api.geocaching.com/Api/Adventures/";
+    private static final String API_HOST        = "https://labs-api.geocaching.com/Api/Adventures/";
+    private static final String CONSUMER_HEADER = "X-Consumer-Key";
+    private static final String CONSUMER_KEY    = "11111111-2222-3333-4444-5555555555555";
 
     private LCApi() {
         // utility class with static methods
@@ -50,8 +52,9 @@ final class LCApi {
         if (!Settings.isGCPremiumMember()) {
             return null;
         }
+        final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         try {
-            final Response response = apiRequest(geocode.substring(2)).blockingGet();
+            final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
             return importCacheFromJSON(response);
         } catch (final Exception ignored) {
             return null;
@@ -76,12 +79,13 @@ final class LCApi {
         final double radius = gp1.distanceTo(gp2) * 500; // we get diameter in km, need radius in m
         Log.d("_LC Radius: " + String.valueOf((int) radius));
         final Parameters params = new Parameters("skip", "0");
+        final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         params.add("take", "500");
         params.add("radiusMeters", String.valueOf((int) radius));
         params.add("origin.latitude", String.valueOf(latcenter));
         params.add("origin.longitude", String.valueOf(loncenter));
         try {
-            final Response response = apiRequest("SearchV3", params).blockingGet();
+            final Response response = apiRequest("SearchV3", params, headers).blockingGet();
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
@@ -98,8 +102,9 @@ final class LCApi {
         params.add("radiusMeters", "10000");
         params.add("origin.latitude", String.valueOf(center.getLatitude()));
         params.add("origin.longitude", String.valueOf(center.getLongitude()));
+        final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         try {
-            final Response response = apiRequest("SearchV3", params).blockingGet();
+            final Response response = apiRequest("SearchV3", params, headers).blockingGet();
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
@@ -112,19 +117,19 @@ final class LCApi {
     }
 
     @NonNull
-    private static Single<Response> apiRequest(final String uri, final Parameters params) {
-        return apiRequest(uri, params, false);
+    private static Single<Response> apiRequest(final String uri, final Parameters params, final Parameters headers) {
+        return apiRequest(uri, params, headers, false);
     }
 
     @NonNull
-    private static Single<Response> apiRequest(final String uri, final Parameters params, final boolean isRetry) {
+    private static Single<Response> apiRequest(final String uri, final Parameters params, final Parameters headers, final boolean isRetry) {
 
-        final Single<Response> response = Network.getRequest(API_HOST + uri, params);
+        final Single<Response> response = Network.getRequest(API_HOST + uri, params, headers);
 
         // retry at most one time
         return response.flatMap((Function<Response, Single<Response>>) response1 -> {
             if (!isRetry && response1.code() == 403) {
-                return apiRequest(uri, params, true);
+                return apiRequest(uri, params, headers, true);
             }
             return Single.just(response1);
         });
