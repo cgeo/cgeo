@@ -18,6 +18,8 @@ import java.util.Locale;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 public final class CalendarUtils {
 
     public static final String PATTERN_YYYYMM = "yyyy-MM";
@@ -28,16 +30,20 @@ public final class CalendarUtils {
         // utility class
     }
 
+    public static void resetTimeToMidnight(final Calendar date) {
+        date.set(Calendar.SECOND, 0);
+        date.set(Calendar.MINUTE, 0);
+        date.set(Calendar.HOUR_OF_DAY, 0);
+    }
+
     public static int daysSince(final long date) {
         final Calendar logDate = Calendar.getInstance();
         logDate.setTimeInMillis(date);
-        logDate.set(Calendar.SECOND, 0);
-        logDate.set(Calendar.MINUTE, 0);
-        logDate.set(Calendar.HOUR_OF_DAY, 0);
+        resetTimeToMidnight(logDate);
+
         final Calendar today = Calendar.getInstance();
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.HOUR_OF_DAY, 0);
+        resetTimeToMidnight(today);
+
         return (int) Math.round((today.getTimeInMillis() - logDate.getTimeInMillis()) / 86400000d);
     }
 
@@ -144,5 +150,16 @@ public final class CalendarUtils {
         } catch (ParseException e) {
             return 0;
         }
+    }
+
+    /**
+     * parses given date to a long
+     */
+    public static ImmutablePair<Long, Long> getStartAndEndOfDay(final long timestamp) {
+        final Calendar date = Calendar.getInstance();
+        date.setTimeInMillis(timestamp);
+        resetTimeToMidnight(date);
+
+        return new ImmutablePair<>(date.getTimeInMillis(), date.getTimeInMillis() + 86400000);
     }
 }
