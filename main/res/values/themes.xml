@@ -45,6 +45,12 @@
         <item name="android:checkedTextViewStyle">@style/checkboxStyleNoParent</item>
     </style>
 
+    <!-- Full-screen dialogs -->
+    <style name="cgeo.fullScreenDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="android:windowBackground">@color/colorBackgroundDialog</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
     <!-- theme for cache/waypoint popups -->
 
     <style name="Theme.AppCompat.Transparent.NoActionBar" parent="cgeo">

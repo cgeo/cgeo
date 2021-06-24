@@ -226,6 +226,9 @@ public final class Dialogs {
         }
     }
 
+    /**
+     * create a bottom sheet dialog with action bar
+     */
     public static BottomSheetDialog bottomSheetDialogWithActionbar(final Context context, final View contentView, final @StringRes int titleResId) {
         final BottomsheetDialogWithActionbarBinding dialogView = BottomsheetDialogWithActionbarBinding.inflate(LayoutInflater.from(newContextThemeWrapper(context)));
         final BottomSheetDialog dialog = bottomSheetDialog(context, dialogView.getRoot());

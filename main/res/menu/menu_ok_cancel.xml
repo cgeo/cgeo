@@ -4,14 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
-        android:id="@+id/menu_edit_waypoint_cancel"
+        android:id="@+id/menu_item_cancel"
         android:icon="@drawable/ic_menu_cancel"
         android:title="@string/waypoint_cancel_edit"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction">
     </item>
     <item
-        android:id="@+id/menu_edit_waypoint_save"
+        android:id="@+id/menu_item_save"
         android:icon="@drawable/ic_menu_done"
         android:title="@string/waypoint_save"
         app:showAsAction="always"
