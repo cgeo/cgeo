@@ -55,7 +55,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TimeZone;
-import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -1257,7 +1256,7 @@ public final class GCParser {
         cache.setOnWatchlist(doAdd);
         final String watchListPage = GCLogin.getInstance().postRequestLogged(cache.getLongUrl(), null);
         cache.setWatchlistCount(getWatchListCount(watchListPage));
-        return true; 
+        return true;
     }
 
     /**
