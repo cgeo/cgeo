@@ -817,7 +817,6 @@
     </plurals>
     <string name="last_day_available">liko paskutine diena</string>
     <string name="cache_offline_refresh">Naujinti</string>
-    <string name="cache_offline_drop">Pašalinti</string>
     <string name="cache_delete_userdefined_waypoints">Ištrinti vartotojo papildomus taškus</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Ištrinti visus vartotojo papildomus taškus iš šios slėptuvės?\n\nPapildomi taškai bus nedelsiant ištrinti, anuliuoti nebus galima.</string>
     <string name="cache_delete_userdefined_waypoints_success">Vartotojo papildomi taškai ištrinti</string>

@@ -479,6 +479,7 @@
     <string name="cache_filter_exclude">Uitsluiten</string>
     <string name="cache_filter_userdisplay_complex">Complex</string>
     <string name="cache_filter_userdisplay_none">Geen</string>
+    <string name="cache_filter_userdisplay_not">NIET</string>
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="one">%1$d item</item>
         <item quantity="other">%1$d items</item>
@@ -508,6 +509,19 @@
     <string name="cache_filter_favorites_percentage">Percentage</string>
     <string name="cache_filter_distance_use_current_position">Huidige positie gebruiken</string>
     <string name="cache_filter_status_select_all">Alle</string>
+    <string name="cache_filter_status_select_yes">Ja</string>
+    <string name="cache_filter_status_select_no">Nee</string>
+    <string name="cache_filter_status_select_label_found">Gevonden</string>
+    <string name="cache_filter_status_select_label_owned">Eigendom</string>
+    <string name="cache_filter_status_select_label_stored">Opgeslagen</string>
+    <string name="cache_filter_status_select_label_favorite">Favoriet</string>
+    <string name="cache_filter_status_select_label_watchlist">Op Watchlist</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches.\n\n Een mystery wordt beschouwd als \'opgelost\' als het de coördinaten heeft veranderd of een geldig eindpunt gevuld met coördinaten.</string>
+    <string name="cache_filter_status_active">Actief</string>
+    <string name="cache_filter_status_disabled">Uitgeschakeld</string>
+    <string name="cache_filter_status_archived">Gearchiveerd</string>
     <string name="cache_filter_status_exclude_active">Actieve uitsluiten</string>
     <string name="cache_filter_status_exclude_disabled">Uitgeschakeld uitsluiten</string>
     <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
@@ -1034,7 +1048,7 @@
     </plurals>
     <string name="last_day_available">laatste dag beschikbaar</string>
     <string name="cache_offline_refresh">Verversen</string>
-    <string name="cache_offline_drop">Verwijderen</string>
+    <string name="cache_offline_drop">Uit lijst verwijderen</string>
     <string name="cache_delete_userdefined_waypoints">Gebruiker gedefinieerde waypoints verwijderen</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Verwijder alle gebruiker gedefinieerde waypoints van deze cache?\n\nWaypoints worden definitief verwijderd, dit kan niet ongedaan worden gemaakt.</string>
     <string name="cache_delete_userdefined_waypoints_note">Opmerking: Je hebt \"waypoints van notitie\" ingeschakeld. Als er coördinaten in je persoonlijke notitie worden herkend door c:geo, worden hiervan automatisch waypoints aangemaakt. Je kunt dit uitschakelen in het persoonlijke notitiebewerkingsvenster.</string>
@@ -1138,6 +1152,7 @@
     <string name="cache_dialog_favorite_remove_title">Favoriet</string>
     <string name="cache_dialog_favorite_remove_message">Verwijder cache van je favorieten…</string>
     <string name="cache_menu_navigate">Navigeer</string>
+    <string name="cache_menu_target">Instellen als doel</string>
     <string name="cache_menu_navigation_drive">Navigeer (rijden)</string>
     <string name="cache_menu_navigation_drive_select_target">Selecteer doel</string>
     <string name="cache_menu_navigation_walk">Navigeer (lopen)</string>
@@ -2105,4 +2120,5 @@
     <string name="finish">Voltooien</string>
     <string name="back">Terug</string>
     <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Alles selecteren</string>
 </resources>

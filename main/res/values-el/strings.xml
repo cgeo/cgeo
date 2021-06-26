@@ -1040,7 +1040,7 @@
     </plurals>
     <string name="last_day_available">τελευταία διαθέσιμη ημέρα</string>
     <string name="cache_offline_refresh">Ανανέωση</string>
-    <string name="cache_offline_drop">Διαγραφή</string>
+    <string name="cache_offline_drop">Κατάργηση από τη λίστα</string>
     <string name="cache_delete_userdefined_waypoints">Κατάργηση σημείων που ορίσθηκαν από τον χρήστη</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Κατάργηση όλων των σημείων που ορίσθηκαν από τον χρήστη;\n\nΤα σημεία θα σβηστούν οριστικά, δεν υπάρχει αναίρεση.</string>
     <string name="cache_delete_userdefined_waypoints_note">Σημείωση: Έχετε ενεργοποιήμενη την επιλογή \"σημεία ενδιαφέροντος από τις σημειωσεις\". Εάν το c:geo αναγνωρίσει συντεταγμένες στις προσωπικές σημειώσεις, θα δημιουργήσει αυτόματα σημεία ενδιαφέροντος από αυτές. Μπορείτε να απενεργοποιήσετε την επιλογή αυτή από την επεξεργασία της προσωπικής σημείωσης.</string>
@@ -1144,6 +1144,7 @@
     <string name="cache_dialog_favorite_remove_title">Αγαπημένη</string>
     <string name="cache_dialog_favorite_remove_message">Αφαιρεί την κρύπτη από τις αγαπημένες σας…</string>
     <string name="cache_menu_navigate">Πλοήγηση</string>
+    <string name="cache_menu_target">Ορισμός ως στόχος</string>
     <string name="cache_menu_navigation_drive">Πλοήγηση (Οδήγηση)</string>
     <string name="cache_menu_navigation_drive_select_target">Επίλεξε στόχο</string>
     <string name="cache_menu_navigation_walk">Πλοήγηση (Περπάτημα)</string>

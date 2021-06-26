@@ -1060,7 +1060,6 @@
     </plurals>
     <string name="last_day_available">zbývá poslední den</string>
     <string name="cache_offline_refresh">Aktualizovat</string>
-    <string name="cache_offline_drop">Odstranit</string>
     <string name="cache_delete_userdefined_waypoints">Odstranit uživatelsky definovatelné trasové body</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Odstranit všechny uživatelsky definovatelné trasové body u této kešky?\n\nTrasové body budou okamžitě smazány, akce nelze vrátit zpět.</string>
     <string name="cache_delete_userdefined_waypoints_note">Poznámka: Máte povoleny „trasové body z poznámky“. Pokud máte souřadnice v osobní poznámce rozpoznané aplikací c:geo, budou pro ně automaticky vytvořeny trasové body. Tuto funkci můžete deaktivovat v dialogovém okně pro úpravu osobní poznámky.</string>
@@ -1174,6 +1173,7 @@
     <string name="cache_dialog_favorite_remove_title">Oblíbené</string>
     <string name="cache_dialog_favorite_remove_message">Odstraňování kešky z oblíbených…</string>
     <string name="cache_menu_navigate">Navigovat</string>
+    <string name="cache_menu_target">Nastavit jako cíl</string>
     <string name="cache_menu_navigation_drive">Navigace (řízení)</string>
     <string name="cache_menu_navigation_drive_select_target">Vybrat cíl</string>
     <string name="cache_menu_navigation_walk">Navigace (chůze)</string>

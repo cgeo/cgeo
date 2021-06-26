@@ -1027,7 +1027,6 @@
     </plurals>
     <string name="last_day_available">ultimo giorno disponibile</string>
     <string name="cache_offline_refresh">Aggiorna</string>
-    <string name="cache_offline_drop">Rimuovi</string>
     <string name="cache_delete_userdefined_waypoints">Rimuovi waypoint definiti dall\'utente</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Rimuovere tutti i waypoint definiti dall\'utente di questa cache?\n\nWaypoints verranno eliminati immediatamente, non puoi annullare.</string>
     <string name="cache_delete_userdefined_waypoints_note">Nota: è abilitata la funzione \"Estrazione Waypoint\". Se hai coordinate nelle tue note personali riconosciute da c:geo, i waypoint verranno ricreati automaticamente. Puoi disabilitare questo nella finestra di modifica delle note personali.</string>

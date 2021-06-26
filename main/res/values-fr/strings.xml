@@ -994,7 +994,6 @@
     </plurals>
     <string name="last_day_available">dernier jour de disponibilité</string>
     <string name="cache_offline_refresh">Actualiser</string>
-    <string name="cache_offline_drop">Supprimer</string>
     <string name="cache_delete_userdefined_waypoints">Supprimer les points de passage définis par l\'utilisateur</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Supprimer tous les points de passage définis par l\'utilisateur de cette cache ?\n\nLes points de passage seront immédiatement supprimés, cette action est irréversible.</string>
     <string name="cache_delete_userdefined_waypoints_note">Note : vous avez activé \"extraction des points de passage depuis la note\". Si votre note personnelle contient des coordonnées reconnues par c:geo, les points de passage seront recréés automatiquement. Vous pouvez désactiver ce fonctionnement dans la fenêtre d\'édition de la note personnelle.</string>
@@ -1098,6 +1097,7 @@
     <string name="cache_dialog_favorite_remove_title">Favori</string>
     <string name="cache_dialog_favorite_remove_message">Suppression de la cache de vos favoris…</string>
     <string name="cache_menu_navigate">Navigation</string>
+    <string name="cache_menu_target">Définir comme destination</string>
     <string name="cache_menu_navigation_drive">Navigation (voiture)</string>
     <string name="cache_menu_navigation_drive_select_target">Sélectionnez une cible</string>
     <string name="cache_menu_navigation_walk">Navigation (piéton)</string>

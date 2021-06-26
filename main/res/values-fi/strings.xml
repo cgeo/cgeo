@@ -1048,7 +1048,7 @@
     </plurals>
     <string name="last_day_available">saatavilla enää tänään</string>
     <string name="cache_offline_refresh">Päivitä</string>
-    <string name="cache_offline_drop">Poista</string>
+    <string name="cache_offline_drop">Poista listalta</string>
     <string name="cache_delete_userdefined_waypoints">Poista käyttäjän määrittämät reittipisteet</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Poistetaanko kaikki käyttäjän määrittämät reittipisteet tästä kätköstä?\n\nReittipisteet poistetaan välittömästi, eikä sitä voi perua.</string>
     <string name="cache_delete_userdefined_waypoints_note">Huomautus: Sinulla on asetus \"reittipisteet muistiinpanoista\" käytössä. Jos sinulla on koordinaatit henkilökohtaisessa muistiossasi, jonka c:geo tunnistaa, reittipisteet luodaan niihin automaattisesti. Voit poistaa tämän käytöstä henkilökohtaisen muistiinpanon muokkausikkunassa.</string>
@@ -1152,6 +1152,7 @@
     <string name="cache_dialog_favorite_remove_title">Suosikki</string>
     <string name="cache_dialog_favorite_remove_message">Poista kätkö suosikeistasi…</string>
     <string name="cache_menu_navigate">Navigoi</string>
+    <string name="cache_menu_target">Aseta kohteeksi</string>
     <string name="cache_menu_navigation_drive">Navigointi (ajo)</string>
     <string name="cache_menu_navigation_drive_select_target">Valitse kohde</string>
     <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>

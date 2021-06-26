@@ -1040,7 +1040,6 @@
     </plurals>
     <string name="last_day_available">dostępne ostatni dzień</string>
     <string name="cache_offline_refresh">Odśwież</string>
-    <string name="cache_offline_drop">Usuń</string>
     <string name="cache_delete_userdefined_waypoints">Usuń punkty zdefiniowane przez użytkownika</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Czy usunąć wszystkie zdefiniowane punkty użytkownika dla tej skrytki?\n\nPunkty zostaną zostaną natychmiast usunięte, nie można tego cofnąć.</string>
     <string name="cache_delete_userdefined_waypoints_note">Uwaga: Włączono \"Punkty orientacyjne z notatki\". Jeśli masz współrzędne w notatce rozpoznane przez c:geo, punkty orientacyjne zostaną dla nich automatycznie odtworzone. Możesz to wyłączyć w oknie dialogowym edycji notatki.</string>

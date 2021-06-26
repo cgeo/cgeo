@@ -505,6 +505,19 @@
     <string name="cache_filter_favorites_percentage">割合(%)</string>
     <string name="cache_filter_distance_use_current_position">現在地を使用</string>
     <string name="cache_filter_status_select_all">すべて</string>
+    <string name="cache_filter_status_select_yes">はい</string>
+    <string name="cache_filter_status_select_no">いいえ</string>
+    <string name="cache_filter_status_select_label_found">発見</string>
+    <string name="cache_filter_status_select_label_owned">オーナー</string>
+    <string name="cache_filter_status_select_label_stored">保存済み</string>
+    <string name="cache_filter_status_select_label_favorite">お気に入り登録済み</string>
+    <string name="cache_filter_status_select_label_watchlist">ウォッチリスト登録済み</string>
+    <string name="cache_filter_status_select_label_premium">プレミアム会員用</string>
+    <string name="cache_filter_status_select_label_solved_mystery">解決済みのミステリー</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">このフィルタ項目はミステリー・キャッシュにのみ影響します。\n\n座標が変更された場合、または座標の確定した最終ウェイポイントがある場合、ミステリーは「解決済み」とみなされます。</string>
+    <string name="cache_filter_status_active">有効</string>
+    <string name="cache_filter_status_disabled">一時停止中</string>
+    <string name="cache_filter_status_archived">アーカイブ済み</string>
     <string name="cache_filter_status_exclude_active">アクティブを除外</string>
     <string name="cache_filter_status_exclude_disabled">一時停止中キャッシュを除外</string>
     <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
@@ -1025,7 +1038,6 @@
     </plurals>
     <string name="last_day_available">利用可能期限</string>
     <string name="cache_offline_refresh">更新</string>
-    <string name="cache_offline_drop">削除</string>
     <string name="cache_delete_userdefined_waypoints">ユーザー定義のウェイポイントを削除</string>
     <string name="cache_delete_userdefined_waypoints_confirm">このキャッシュのすべてのユーザー定義ウェイポイントを削除しますか?\n\nウェイポイントはすぐに削除され、元に戻すことはできません</string>
     <string name="cache_delete_userdefined_waypoints_note">注意: 「ノートからウェイポイント抽出する」が有効化されています。パーソナルノートに(c:geoが認識できる)座標値が書いてある場合はウェイポイントが自動的に再作成されます。パーソナルノートのダイアログで抽出を無効化できます</string>
@@ -1124,6 +1136,7 @@
     <string name="cache_dialog_favorite_remove_title">お気に入り</string>
     <string name="cache_dialog_favorite_remove_message">お気に入りから削除中…</string>
     <string name="cache_menu_navigate">ナビゲーション</string>
+    <string name="cache_menu_target">目的地に設定</string>
     <string name="cache_menu_navigation_drive">ナビゲーション(自動車)</string>
     <string name="cache_menu_navigation_walk">ナビゲーション(徒歩)</string>
     <string name="cache_menu_navigation_transit">ナビゲーション(トランジット)</string>
@@ -2060,4 +2073,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="finish">終了</string>
     <string name="back">戻る</string>
     <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">すべて選択</string>
 </resources>

@@ -760,7 +760,6 @@
     <!-- days remaining -->
     <string name="last_day_available">доступний останній день</string>
     <string name="cache_offline_refresh">освіжити</string>
-    <string name="cache_offline_drop">видалити</string>
     <string name="cache_delete_userdefined_waypoints">Видаліть визначені користувачем точки</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Видавати всі визначені користувачі точки цього кешу? \n\n Шляхові точки будуть негативно видалені, а співпраця не відбудеться.</string>
     <string name="cache_delete_userdefined_waypoints_note">Примітка: у вас ввімкнено \"маршрутні точки\" з нотатки. Якщо ви маєте координати для своєї особистої ноти, що розпізнає c:ge, шляхові точки будуть створені для них автоматично. Ви можете відключити це в особистому діалозі редагування.</string>
