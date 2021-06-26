@@ -7,17 +7,22 @@ import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -53,7 +58,7 @@ public class TemplateTextPreference extends DialogPreference {
         editText = view.findViewById(R.id.signature_dialog_text);
         editText.setText(getPersistedString(initialValue != null ? initialValue : StringUtils.EMPTY));
         // @todo yet another workaround to be dismissed after migration of settings to PreferenceFragment
-        editText.setTextColor(Settings.isLightSkin(getContext()) ? 0xff000000 : 0xffffffff);
+        setCursorDrawableColor(editText, Settings.isLightSkin(getContext()) ? 0xff000000 : 0xffffffff);
         Dialogs.moveCursorToEnd(editText);
 
         final Button button = view.findViewById(R.id.signature_templates);
@@ -78,6 +83,34 @@ public class TemplateTextPreference extends DialogPreference {
         });
 
         super.onBindDialogView(view);
+    }
+
+    // @todo the whole method is yet another workaround to be dismissed after migration of settings to PreferenceFragment
+    @SuppressLint("UseCompatLoadingForDrawables")
+    public static void setCursorDrawableColor(final EditText editText, final int color) {
+        // adapted from https://stackoverflow.com/questions/11554078/set-textcursordrawable-programmatically
+        if (Build.VERSION.SDK_INT >= 29) {
+            editText.setTextCursorDrawable(R.drawable.cursor);
+        } else {
+            try {
+                final Field fCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
+                fCursorDrawableRes.setAccessible(true);
+                final int mCursorDrawableRes = fCursorDrawableRes.getInt(editText);
+                final Field fEditor = TextView.class.getDeclaredField("mEditor");
+                fEditor.setAccessible(true);
+                final Object editor = fEditor.get(editText);
+                final Field fCursorDrawable = editor.getClass().getDeclaredField("mCursorDrawable");
+                fCursorDrawable.setAccessible(true);
+                final Drawable[] drawables = new Drawable[2];
+                drawables[0] = editText.getContext().getResources().getDrawable(mCursorDrawableRes);
+                drawables[1] = editText.getContext().getResources().getDrawable(mCursorDrawableRes);
+                drawables[0].setColorFilter(color, PorterDuff.Mode.SRC_IN);
+                drawables[1].setColorFilter(color, PorterDuff.Mode.SRC_IN);
+                fCursorDrawable.set(editor, drawables);
+            } catch (Throwable ignored) {
+            }
+        }
+        editText.setTextColor(color);
     }
 
     private void insertSignatureTemplate(final LogTemplate template) {
