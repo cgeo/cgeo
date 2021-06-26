@@ -50,6 +50,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
         viewPager.setAdapter(new ViewPagerAdapter(this));
         viewPager.registerOnPageChangeCallback(pageChangeCallback);
         viewPager.setCurrentItem(pageIdToPosition(currentPageId));
+        viewPager.setOffscreenPageLimit(10);
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
         if (swipeRefreshLayout != null) {
