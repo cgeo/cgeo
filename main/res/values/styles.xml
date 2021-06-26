@@ -52,6 +52,12 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <!-- spinner popup formatting -->
+
+    <style name="spinnerStyle" parent="Base.Widget.AppCompat.Spinner">
+        <item name="android:popupBackground">@color/colorBackgroundDialog</item>
+    </style>
+
     <!-- alert dialog formatting -->
 
     <style name="alertDialogTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
