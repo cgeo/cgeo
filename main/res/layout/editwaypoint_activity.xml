@@ -77,7 +77,6 @@
             android:visibility="gone"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:popupBackground="@color/colorBackgroundDialog"
             tools:listitem="@android:layout/simple_spinner_item" />
 
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_dropdown">
