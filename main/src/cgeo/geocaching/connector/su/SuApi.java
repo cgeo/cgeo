@@ -7,6 +7,12 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.filters.core.BaseGeocacheFilter;
+import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.NameGeocacheFilter;
+import cgeo.geocaching.filters.core.OriginGeocacheFilter;
+import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogType;
@@ -16,6 +22,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -29,6 +36,7 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -140,6 +148,42 @@ public class SuApi {
 
         final JSONResult result = SuApi.getRequest(connector, SuApiEndpoint.CACHE_LIST_CENTER, params);
         return SuParser.parseCaches(result.data);
+    }
+
+    @NonNull
+    public static List<Geocache> searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final SuConnector connector) throws SuApiException {
+
+        //for now we have to assume that SUConnector supports only SINGLE criteria search
+
+        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
+        final OriginGeocacheFilter of = findInList(filters, OriginGeocacheFilter.class);
+        if (of != null && !of.allowsCachesOf(connector)) {
+            return new ArrayList<>();
+        }
+        final DistanceGeocacheFilter df = findInList(filters, DistanceGeocacheFilter.class);
+        if (df != null) {
+            return searchByCenter(df.getEffectiveCoordinate(), df.getMaxRangeValue() == null ? 20f : df.getMaxRangeValue(), connector);
+        }
+        final NameGeocacheFilter nf = findInList(filters, NameGeocacheFilter.class);
+        if (nf != null && !StringUtils.isEmpty(nf.getStringFilter().getTextValue())) {
+            return searchByKeyword(nf.getStringFilter().getTextValue(), connector);
+        }
+        final OwnerGeocacheFilter ownf = findInList(filters, OwnerGeocacheFilter.class);
+        if (ownf != null && !StringUtils.isEmpty(ownf.getStringFilter().getTextValue())) {
+            return searchByOwner(ownf.getStringFilter().getTextValue(), connector);
+        }
+
+        //by default, search around current position
+        return searchByCenter(Sensors.getInstance().currentGeo().getCoords(), 20f, connector);
+    }
+
+    private static <T extends BaseGeocacheFilter> T findInList(final List<BaseGeocacheFilter> filters, final Class<T> filterClazz) {
+        for (BaseGeocacheFilter filter : filters) {
+            if (filterClazz.isAssignableFrom(filter.getClass())) {
+                return (T) filter;
+            }
+        }
+        return null;
     }
 
     private static String getSuLogType(final LogType logType) {

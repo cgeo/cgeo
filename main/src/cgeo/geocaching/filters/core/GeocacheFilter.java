@@ -222,6 +222,21 @@ public class GeocacheFilter {
         list.addAll(itemsToKeep);
     }
 
+    /** constructs a new GeocacheFilter which is identical to this filter but adds the given AND conditions to it */
+    public GeocacheFilter and(final IGeocacheFilter ... filters) {
+
+        if (filters == null || filters.length == 0) {
+            return this;
+        }
+
+        final AndGeocacheFilter andFilter = new AndGeocacheFilter();
+        andFilter.addChild(this.tree);
+        for (IGeocacheFilter f : filters) {
+            andFilter.addChild(f);
+        }
+        return new GeocacheFilter(null, openInAdvancedMode, includeInconclusive, andFilter);
+    }
+
     public boolean isSaved() {
         return Storage.exists(getName());
     }
