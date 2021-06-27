@@ -400,6 +400,12 @@ public final class FileUtils {
     }
 
     public static String createUniqueFilename(@NonNull final String requestedName, @NonNull final List<String> existingNames) {
+        return createUniqueFilename(requestedName, existingNames, null);
+    }
+
+
+    public static String createUniqueFilename(@NonNull final String requestedName, @NonNull final List<String> existingNames, @Nullable final File dir) {
+
         //split in suffix and praefix
         final int suffIdx = requestedName.lastIndexOf(".");
         final String suffix = suffIdx >= 0 ? requestedName.substring(suffIdx) : "";
@@ -407,7 +413,7 @@ public final class FileUtils {
 
         String newPraefix = praefix;
         int idx = 1;
-        while (existingNames.contains(newPraefix + suffix)) {
+        while (existingNames.contains(newPraefix + suffix) || (dir != null && dir.isDirectory() && new File(dir, newPraefix + suffix).exists())) {
             newPraefix = praefix + " (" + (idx++) + ")";
         }
         return newPraefix + suffix;

@@ -84,6 +84,7 @@ public class ContentStorage {
             this.lastModified = lastModified;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return
@@ -553,7 +554,7 @@ public class ContentStorage {
 
         for (Folder candidate : candidates) {
             //candidate is ok if it is either directly accessible or based on another public folder (which will become accessible later)
-            if (candidate != null && (candidate.getRootPersistableFolder() != null || ensureFolder(candidate, needsWrite))) {
+            if (candidate != null && ensureFolder(candidate, needsWrite, true)) {
                 return candidate;
             }
         }

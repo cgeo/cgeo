@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
+import java.util.Objects;
 
 
 /** Implementation for File-based content  */
@@ -30,13 +30,13 @@ class FileContentAccessor extends AbstractContentAccessor {
 
     public Uri create(@NonNull final Folder folder, @NonNull final String name) throws IOException {
         final File dir = toFile(folder, true);
-        if (dir == null) {
-            return null;
+        if (dir == null || !dir.isDirectory()) {
+            throw new IOException("Dir is null or not a dir for " + folder);
         }
-        final String fileName = FileUtils.createUniqueFilename(name, Arrays.asList(dir.list()));
+        final String fileName = FileUtils.createUniqueFilename(name, Arrays.asList(Objects.requireNonNull(dir.list())), dir);
         try {
             final File newFile = new File(dir, fileName);
-            return newFile.createNewFile() ? Uri.fromFile(newFile) : null;
+           return newFile.createNewFile() ? Uri.fromFile(newFile) : null;
         } catch (IOException ioe) {
             throw new IOException("Could not create file '" + fileName + "' in dir '" + dir + "'", ioe);
         }
@@ -44,7 +44,7 @@ class FileContentAccessor extends AbstractContentAccessor {
 
     public ContentStorage.FileInformation getFileInfo(@NonNull final Folder folder, final String name) {
         final File dir = toFile(folder, false);
-        if (dir == null) {
+        if (dir == null || !dir.isDirectory()) {
             return null;
         }
         final File f = new File(dir, name);

@@ -67,7 +67,7 @@ public final class BExpressionMetaData {
             }
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("file: " + ContentStorage.get().getFileInfo(PersistableFolder.ROUTING_BASE.getFolder(), BRouterConstants.BROUTER_LOOKUPS_FILENAME), e);
         }
     }
 }
