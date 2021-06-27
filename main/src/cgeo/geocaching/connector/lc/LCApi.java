@@ -41,7 +41,7 @@ final class LCApi {
     @NonNull
     private static final String API_HOST        = "https://labs-api.geocaching.com/Api/Adventures/";
     private static final String CONSUMER_HEADER = "X-Consumer-Key";
-    private static final String CONSUMER_KEY    = "11111111-2222-3333-4444-5555555555555";
+    private static final String CONSUMER_KEY    = Settings.getALCConsumerKey();
 
     private LCApi() {
         // utility class with static methods

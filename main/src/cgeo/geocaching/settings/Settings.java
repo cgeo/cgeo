@@ -506,9 +506,13 @@ public class Settings {
     public static boolean isALCAdvanced() {
         return getBoolean(R.string.pref_alc_advanced, false);
     }
- 
-     public static String getALCLauncher() {
+
+    public static String getALCLauncher() {
         return getString(R.string.pref_alc_launcher, "");
+    }
+
+    public static String getALCConsumerKey() {
+        return getString(R.string.pref_alc_consumerkey, "");
     }
 
     public static GCMemberState getGCMemberStatus() {
