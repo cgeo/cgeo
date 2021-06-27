@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
@@ -21,6 +22,7 @@ import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
@@ -43,7 +45,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, IFavoriteCapability, IVotingCapability, IgnoreCapability {
+public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, ISearchByFilter, IFavoriteCapability, IVotingCapability, IgnoreCapability {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -257,6 +259,21 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
             return new SearchResult(StatusCode.UNKNOWN_ERROR);
         }
 
+    }
+
+    @Override
+    @NonNull
+    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
+        try {
+            return new SearchResult(SuApi.searchByFilter(filter, this));
+        } catch (final SuApi.NotAuthorizedException e) {
+            return new SearchResult(StatusCode.NOT_LOGGED_IN);
+        } catch (final SuApi.ConnectionErrorException e) {
+            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
+        } catch (final Exception e) {
+            Log.e("SuConnector.searchByFilter failed: ", e);
+            return new SearchResult(StatusCode.UNKNOWN_ERROR);
+        }
     }
 
     @Override

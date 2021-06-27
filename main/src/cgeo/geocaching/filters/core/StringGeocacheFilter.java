@@ -4,6 +4,8 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
+import androidx.annotation.NonNull;
+
 
 public abstract class StringGeocacheFilter extends BaseGeocacheFilter {
 
@@ -15,6 +17,7 @@ public abstract class StringGeocacheFilter extends BaseGeocacheFilter {
         return null;
     }
 
+    @NonNull
     public StringFilter getStringFilter() {
         return stringFilter;
     }

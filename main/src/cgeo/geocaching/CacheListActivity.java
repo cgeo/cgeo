@@ -1352,10 +1352,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             currentCacheFilter = GeocacheFilter.createFromConfig(data.getStringExtra(GeocacheFilterActivity.EXTRA_FILTER_RESULT));
             setFilter(currentFilter, currentCacheFilter);
-
-            if (type == CacheListType.SEARCH_FILTER) {
-                refreshFilterForFilterSearch();
-            }
+            refreshFilterForOnlineSearch();
         }
 
         if (type.isStoredInDatabase) {
@@ -1363,17 +1360,31 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private void refreshFilterForFilterSearch() {
-        if (type != CacheListType.SEARCH_FILTER) {
+    private void refreshFilterForOnlineSearch() {
+        //not supported yet for all online searches
+        if (type != CacheListType.SEARCH_FILTER && type != CacheListType.KEYWORD) {
             return;
         }
+
+        final Loader<SearchResult> loader = LoaderManager.getInstance(this).getLoader(type.getLoaderId());
+
         //reload filter
         final Bundle extras = new Bundle();
-        LoaderManager.getInstance(this).destroyLoader(CacheListType.SEARCH_FILTER.getLoaderId());
-        extras.putString(Intents.EXTRA_FILTER, currentCacheFilter.toConfig());
-        currentLoader = (SearchFilterGeocacheListLoader) LoaderManager.getInstance(this).restartLoader(CacheListType.SEARCH_FILTER.getLoaderId(), extras, this);
 
-
+        switch (type) {
+            case SEARCH_FILTER:
+                extras.putString(Intents.EXTRA_FILTER, currentCacheFilter.toConfig());
+                break;
+            case KEYWORD:
+                if (loader instanceof KeywordGeocacheListLoader) {
+                    extras.putString(Intents.EXTRA_KEYWORD, ((KeywordGeocacheListLoader) loader).keyword);
+                }
+                break;
+            default:
+                //do nothing
+        }
+        LoaderManager.getInstance(this).destroyLoader(type.getLoaderId());
+        currentLoader = (AbstractSearchLoader) LoaderManager.getInstance(this).restartLoader(type.getLoaderId(), extras, this);
     }
 
     public void refreshStored(final List<Geocache> caches) {
@@ -2077,15 +2088,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (search == null) {
             return getCacheNumberString(getResources(), 0);
         }
+
+        final int totalCount = type.isStoredInDatabase ? search.getTotalCountGC() : search.getCount();
+
         final StringBuilder result = new StringBuilder();
-        if (adapter.isFiltered() || resultIsOfflineAndLimited()) {
+        if ((adapter.isFiltered() && adapter.getCount() != totalCount) || resultIsOfflineAndLimited()) {
             result.append(adapter.getCount());
             if (resultIsOfflineAndLimited()) {
                 result.append("+");
             }
             result.append('/');
         }
-        result.append(getCacheNumberString(getResources(), type.isStoredInDatabase ? search.getTotalCountGC() : search.getCount()));
+        result.append(getCacheNumberString(getResources(), totalCount));
 
         return result.toString();
     }
