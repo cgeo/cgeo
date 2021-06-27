@@ -10,12 +10,12 @@
     <item
         android:id="@+id/menu_filter"
         android:icon="@drawable/ic_menu_filter"
-        android:title="@string/caches_filter"
+        android:title="@string/caches_filter_menuitem"
         app:showAsAction="ifRoom|withText"/>
     <item
-        android:id="@+id/menu_cache_filter"
+        android:id="@+id/menu_filter_legacy"
         android:icon="@drawable/ic_menu_filter"
-        android:title="@string/caches_filter_menuitem"
+        android:title="@string/caches_filter"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_sort"
