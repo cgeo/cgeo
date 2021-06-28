@@ -390,8 +390,6 @@
     <string name="caches_copy_selected">Ausgewählte kopieren</string>
     <string name="caches_copy_all">Alle kopieren</string>
     <string name="caches_map_locus_export">Exportieren nach Locus</string>
-    <string name="caches_filter">Filter</string>
-    <string name="caches_filter_menuitem">Neuer Cache-Filter (experimentell)</string>
     <string name="caches_filter_title">Filtern nach</string>
     <string name="caches_filter_size">Größe</string>
     <string name="caches_filter_type">Typ</string>
@@ -1398,7 +1396,6 @@
     <string name="search_hbu">Versteckt von</string>
     <string name="search_hbu_prefill">Besitzer</string>
     <string name="search_hbu_button">Suche mit Besitzername</string>
-    <string name="search_filter">Filter (experimentell)</string>
     <string name="search_filter_button">Suchen mit Filter</string>
     <string name="search_filter_info_message">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
     <string name="search_tb">Trackable</string>
