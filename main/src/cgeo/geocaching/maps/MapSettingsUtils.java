@@ -70,18 +70,18 @@ public class MapSettingsUtils {
         final LinearLayout leftColumn = columns.get(0);
         final LinearLayout rightColumn = columns.get(1);
 
-        leftColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_caches_title)));
+        leftColumn.addView(ViewUtils.createSubtitleTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_caches_title)));
         foundCb.addToViewGroup(activity, leftColumn);
         ownCb.addToViewGroup(activity, leftColumn);
         disabledCb.addToViewGroup(activity, leftColumn);
         archivedCb.addToViewGroup(activity, leftColumn);
         offlineLogCb.addToViewGroup(activity, leftColumn);
 
-        rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_waypoints_title)));
+        rightColumn.addView(ViewUtils.createSubtitleTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_waypoints_title)));
         wpOriginalCb.addToViewGroup(activity, rightColumn);
         wpParkingCb.addToViewGroup(activity, rightColumn);
         wbVisitedCb.addToViewGroup(activity, rightColumn);
-        rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_other_title)));
+        rightColumn.addView(ViewUtils.createSubtitleTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_other_title)));
         if (trackCb != null) {
             trackCb.addToViewGroup(activity, rightColumn);
         }

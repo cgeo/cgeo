@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -181,8 +182,11 @@ public class ViewUtils {
         return ip.right;
     }
 
-    public static TextView createTextItem(final Context ctx, @StyleRes final int styleId, final TextParam text) {
+    public static TextView createSubtitleTextItem(final Context ctx, @StyleRes final int styleId, final TextParam text) {
         final TextView tv = new TextView(wrap(ctx), null, 0, styleId);
+        tv.setEllipsize(TextUtils.TruncateAt.END);
+        tv.setHorizontallyScrolling(false);
+        tv.setSingleLine();
         text.applyTo(tv);
         return tv;
     }
