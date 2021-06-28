@@ -390,8 +390,8 @@
     <string name="caches_copy_selected">Copiar seleccionada(s)</string>
     <string name="caches_copy_all">Copiar todas</string>
     <string name="caches_map_locus_export">Exportar para Locus</string>
-    <string name="caches_filter">Filtrar</string>
-    <string name="caches_filter_menuitem">Novo Filtro de Caches (Experimental)</string>
+    <string name="caches_filter">Filtro (antigo)</string>
+    <string name="caches_filter_menuitem">Filtrar</string>
     <string name="caches_filter_title">Filtrar por</string>
     <string name="caches_filter_size">Tamanho</string>
     <string name="caches_filter_type">Tipo</string>
@@ -1418,7 +1418,7 @@
     <string name="search_hbu">Escondidas por</string>
     <string name="search_hbu_prefill">Proprietário</string>
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
-    <string name="search_filter">Filtro (experimental)</string>
+    <string name="search_filter">Filtrar</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
     <string name="search_filter_info_message">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
