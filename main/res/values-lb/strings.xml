@@ -341,7 +341,6 @@
     <string name="caches_copy_selected">Auswal kopéieren</string>
     <string name="caches_copy_all">Alles kopéieren</string>
     <string name="caches_map_locus_export">Op Locus exportéieren</string>
-    <string name="caches_filter">Filter</string>
     <string name="caches_filter_title">Filter no</string>
     <string name="caches_filter_size">Gréisst</string>
     <string name="caches_filter_type">Typ</string>
