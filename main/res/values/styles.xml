@@ -121,10 +121,15 @@
         <item name="android:textColor">@color/colorTextActionBar</item>
     </style>
 
-
     <style name="settings_actionbar_theme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
         <!-- Customize color of back arrow -->
         <item name="android:textColorPrimary">@color/colorTextActionBar</item>
+    </style>
+
+    <style name="tool_bar" parent="action_bar">
+        <item name="android:scaleType">center</item>
+        <item name="colorControlNormal">@color/colorTextActionBar</item>
+        <item name="android:background">@color/colorBackgroundActionBar</item>
     </style>
 
     <!-- buttons -->
