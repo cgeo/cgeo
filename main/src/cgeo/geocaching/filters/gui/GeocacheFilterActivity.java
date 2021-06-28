@@ -12,6 +12,7 @@ import cgeo.geocaching.filters.core.LogicalGeocacheFilter;
 import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
@@ -205,9 +206,11 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         } else if (itemId == R.id.menu_send) {
             finishWithResult();
             return true;
-        } else {
-            return super.onOptionsItemSelected(item);
+        } else if (itemId == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
+        return false;
     }
 
 
@@ -296,6 +299,15 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         FilterViewHolderCreator.clearListInfo();
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!getFilterFromView().toConfig().equals(Settings.getCacheFilterConfig())) {
+            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm((dialog, which) -> finish());
+        } else {
+            finish();
+        }
     }
 
 
