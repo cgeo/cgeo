@@ -94,6 +94,7 @@ public class MapProviderFactory {
     public static CheckBox createLocSwitchMenuItem(final Activity activity, final Menu menu) {
         final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
         final LocSwitchActionBinding binding = LocSwitchActionBinding.inflate(LayoutInflater.from(activity));
+        binding.getRoot().setOnClickListener(v -> binding.locSwitch.toggle());
         item.setActionView(binding.getRoot());
 
         return binding.locSwitch;
