@@ -338,7 +338,6 @@
     <string name="caches_copy_selected">Copiar seleccionados</string>
     <string name="caches_copy_all">Copiar todos</string>
     <string name="caches_map_locus_export">Exportar a Locus</string>
-    <string name="caches_filter">Filtrar</string>
     <string name="caches_filter_title">Filtrar por</string>
     <string name="caches_filter_size">Tamaño</string>
     <string name="caches_filter_type">Tipo</string>
