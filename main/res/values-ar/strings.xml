@@ -288,7 +288,6 @@
     <string name="caches_copy_selected">نسخ التحديد</string>
     <string name="caches_copy_all">نسخ الكل</string>
     <string name="caches_map_locus_export">التصدير إلى Locus</string>
-    <string name="caches_filter">فلتر</string>
     <string name="caches_filter_title">تصفية حسب</string>
     <string name="caches_filter_size">الحجم</string>
     <string name="caches_filter_type">النوع</string>
