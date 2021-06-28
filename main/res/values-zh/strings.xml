@@ -349,7 +349,6 @@
     <string name="caches_copy_selected">复制所选项</string>
     <string name="caches_copy_all">全部复制</string>
     <string name="caches_map_locus_export">导出到 Locus</string>
-    <string name="caches_filter">筛选</string>
     <string name="caches_filter_title">筛选方式</string>
     <string name="caches_filter_size">尺寸</string>
     <string name="caches_filter_type">类型</string>
