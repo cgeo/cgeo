@@ -286,7 +286,6 @@
     <string name="caches_copy_selected">Kopyahin ang napili</string>
     <string name="caches_copy_all">Kopyahin lahat</string>
     <string name="caches_map_locus_export">Ang mga lokus ay I-eksport</string>
-    <string name="caches_filter">Salain</string>
     <string name="caches_filter_title">Ang pagsasala ayon sa</string>
     <string name="caches_filter_size">Ang Sukat</string>
     <string name="caches_filter_type">Uri</string>
