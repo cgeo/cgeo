@@ -357,7 +357,6 @@
     <string name="caches_copy_selected">复制所选项</string>
     <string name="caches_copy_all">全部复制</string>
     <string name="caches_map_locus_export">輸出至Locas app</string>
-    <string name="caches_filter">篩選</string>
     <string name="caches_filter_title">篩選條件：</string>
     <string name="caches_filter_size">尺寸</string>
     <string name="caches_filter_type">類型</string>
