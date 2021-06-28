@@ -389,8 +389,6 @@
     <string name="caches_copy_selected">選択内容のコピー</string>
     <string name="caches_copy_all">すべてコピー</string>
     <string name="caches_map_locus_export">Locusにエクスポート</string>
-    <string name="caches_filter">フィルタ</string>
-    <string name="caches_filter_menuitem">新しいフィルタ(実験的)</string>
     <string name="caches_filter_title">フィルタ</string>
     <string name="caches_filter_size">サイズ</string>
     <string name="caches_filter_type">タイプ</string>
@@ -1399,7 +1397,6 @@
     <string name="search_hbu">設置したオーナー名</string>
     <string name="search_hbu_prefill">オーナー名</string>
     <string name="search_hbu_button">オーナー名で検索</string>
-    <string name="search_filter">フィルタ(実験的)</string>
     <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
