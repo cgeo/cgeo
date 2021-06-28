@@ -376,8 +376,7 @@
     <string name="caches_copy_selected">Copier la sélection</string>
     <string name="caches_copy_all">Tout copier</string>
     <string name="caches_map_locus_export">Exporter vers Locus</string>
-    <string name="caches_filter">Filtrer</string>
-    <string name="caches_filter_menuitem">Nouveau filtre de cache (expérimental)</string>
+    <string name="caches_filter_menuitem">Filtrer</string>
     <string name="caches_filter_title">Filtrer par</string>
     <string name="caches_filter_size">Taille</string>
     <string name="caches_filter_type">Type</string>
@@ -1356,7 +1355,7 @@
     <string name="search_hbu">Cachée par</string>
     <string name="search_hbu_prefill">Nom d\'utilisateur</string>
     <string name="search_hbu_button">Rechercher par Propriétaire</string>
-    <string name="search_filter">Filtrer (expérimental)</string>
+    <string name="search_filter">Filtrer</string>
     <string name="search_filter_button">Rechercher à l\'aide de filtres</string>
     <string name="search_tb">Objet voyageur</string>
     <string name="search_tb_hint">Code de l\'objet voyageur</string>
