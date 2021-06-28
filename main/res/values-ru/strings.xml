@@ -350,7 +350,6 @@
     <string name="caches_copy_selected">Скопировать выбранное</string>
     <string name="caches_copy_all">Копировать все</string>
     <string name="caches_map_locus_export">Экспорт в Locus</string>
-    <string name="caches_filter">Фильтр</string>
     <string name="caches_filter_title">Фильтровать по</string>
     <string name="caches_filter_size">Размер</string>
     <string name="caches_filter_type">Тип</string>
