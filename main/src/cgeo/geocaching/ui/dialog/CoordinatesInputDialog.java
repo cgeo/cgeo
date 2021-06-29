@@ -39,6 +39,7 @@ import android.widget.TextView;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -145,7 +146,6 @@ public class CoordinatesInputDialog extends DialogFragment {
         final boolean noTitle = dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         final View v = inflater.inflate(R.layout.coordinatesinput_dialog, container, false);
-        final InputDoneListener inputdone = new InputDoneListener();
 
         // change table border color depending on "any child has focus" state
         coordTable = v.findViewById(R.id.coordTable);
@@ -154,20 +154,18 @@ public class CoordinatesInputDialog extends DialogFragment {
         if (!noTitle) {
             dialog.setTitle(R.string.cache_coordinates);
         } else {
-            final TextView title = v.findViewById(R.id.dialog_title_title);
-            if (title != null) {
-                title.setText(R.string.cache_coordinates);
-                title.setVisibility(View.VISIBLE);
-            }
-            final View cancel = v.findViewById(R.id.dialog_title_cancel);
-            if (cancel != null) {
-                cancel.setOnClickListener(new InputCancelListener());
-                cancel.setVisibility(View.VISIBLE);
-            }
-            final View done = v.findViewById(R.id.dialog_title_done);
-            if (done != null) {
-                done.setOnClickListener(inputdone);
-                done.setVisibility(View.VISIBLE);
+            final Toolbar toolbar = v.findViewById(R.id.toolbar);
+            if (toolbar != null) {
+                toolbar.setTitle(R.string.cache_coordinates);
+                toolbar.inflateMenu(R.menu.menu_ok_cancel);
+                toolbar.setOnMenuItemClickListener(item -> {
+                    if (item.getItemId() == R.id.menu_item_save) {
+                        saveAndFinishDialog();
+                    } else {
+                        dismiss();
+                    }
+                    return true;
+                });
             }
         }
 
@@ -246,7 +244,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         if (noTitle) {
             buttonDone.setVisibility(View.GONE);
         } else {
-            buttonDone.setOnClickListener(inputdone);
+            buttonDone.setOnClickListener(view -> saveAndFinishDialog());
         }
 
         return v;
@@ -674,16 +672,12 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
     }
 
-    private class InputDoneListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(final View v) {
-            if (!areCurrentCoordinatesValid(true)) {
-                return;
-            }
-            ((CoordinateUpdate) getActivity()).updateCoordinates(gp);
-            dismiss();
+    private void saveAndFinishDialog () {
+        if (!areCurrentCoordinatesValid(true)) {
+            return;
         }
+        ((CoordinateUpdate) requireActivity()).updateCoordinates(gp);
+        dismiss();
     }
 
     private class ClearCoordinatesListener implements View.OnClickListener {
@@ -691,14 +685,6 @@ public class CoordinatesInputDialog extends DialogFragment {
         @Override
         public void onClick(final View v) {
             ((CoordinateUpdate) getActivity()).updateCoordinates(null);
-            dismiss();
-        }
-    }
-
-    private class InputCancelListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(final View v) {
             dismiss();
         }
     }

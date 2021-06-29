@@ -44,6 +44,7 @@ import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.gridlayout.widget.GridLayout;
@@ -148,30 +149,19 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         updateResult();
     }
 
-    private class InputDoneListener implements View.OnClickListener {
-        @Override
-        public void onClick(final View v) {
-            // Save calculator state regardless of weather the coordinates are valid or not.
-            final CalcState currentState = getCurrentState();
-            setSavedState(currentState);
-            ((CoordinatesInputDialog.CalculateState) getActivity()).saveCalculatorState(currentState);
-            ((EditWaypointActivity) getActivity()).getUserNotes().setText(notes.getText());
+    private void saveAndFinishDialog () {
+        // Save calculator state regardless of weather the coordinates are valid or not.
+        final CalcState currentState = getCurrentState();
+        setSavedState(currentState);
+        ((CoordinatesInputDialog.CalculateState) requireActivity()).saveCalculatorState(currentState);
+        ((EditWaypointActivity) requireActivity()).getUserNotes().setText(notes.getText());
 
-
-            if (areCurrentCoordinatesValid()) {
-                ((CoordinatesInputDialog.CoordinateUpdate) getActivity()).updateCoordinates(gp);
-            } else {
-                ((CoordinatesInputDialog.CoordinateUpdate) getActivity()).updateCoordinates(null);
-            }
-            close();
+        if (areCurrentCoordinatesValid()) {
+            ((CoordinatesInputDialog.CoordinateUpdate) requireActivity()).updateCoordinates(gp);
+        } else {
+            ((CoordinatesInputDialog.CoordinateUpdate) requireActivity()).updateCoordinates(null);
         }
-    }
-
-    private class CalculateCancelListener implements View.OnClickListener {
-        @Override
-        public void onClick(final View v) {
-            close();
-        }
+        close();
     }
 
     private class PlainWatcher implements TextWatcher {
@@ -355,25 +345,22 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         final boolean noTitle = dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         final View v = inflater.inflate(R.layout.coordinatescalculate_dialog, container, false);
-        final InputDoneListener inputDone = new InputDoneListener();
 
         if (!noTitle) {
             dialog.setTitle(R.string.cache_coordinates);
         } else {
-            final TextView title = v.findViewById(R.id.dialog_title_title);
-            if (title != null) {
-                title.setText(R.string.cache_calculator);
-                title.setVisibility(View.VISIBLE);
-            }
-            final View cancel = v.findViewById(R.id.dialog_title_cancel);
-            if (cancel != null) {
-                cancel.setOnClickListener(new CalculateCancelListener());
-                cancel.setVisibility(View.VISIBLE);
-            }
-            final View doneButton = v.findViewById(R.id.dialog_title_done);
-            if (doneButton != null) {
-                doneButton.setOnClickListener(inputDone);
-                doneButton.setVisibility(View.VISIBLE);
+            final Toolbar toolbar = v.findViewById(R.id.toolbar);
+            if (toolbar != null) {
+                toolbar.setTitle(R.string.cache_coordinates);
+                toolbar.inflateMenu(R.menu.menu_ok_cancel);
+                toolbar.setOnMenuItemClickListener(item -> {
+                    if (item.getItemId() == R.id.menu_item_save) {
+                        saveAndFinishDialog();
+                    } else {
+                        close();
+                    }
+                    return true;
+                });
             }
         }
 
@@ -484,7 +471,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         if (noTitle) {
             buttonDone.setVisibility(View.GONE);
         } else {
-            buttonDone.setOnClickListener(inputDone);
+            buttonDone.setOnClickListener(view -> saveAndFinishDialog());
         }
 
         ePlainLat.addTextChangedListener(new PlainWatcher());
