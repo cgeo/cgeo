@@ -84,11 +84,14 @@
         <item name="android:src">@drawable/three_dot_vertical</item>
     </style>
 
-    <style name="action_bar" parent="actionBarStyle">
+    <style name="tool_bar" parent="actionBarStyle">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/actionbar_height</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center</item>
+        <item name="android:scaleType">center</item>
+        <item name="colorControlNormal">@color/colorTextActionBar</item>
+        <item name="android:background">@color/colorBackgroundActionBar</item>
     </style>
 
     <style name="action_bar_action" parent="actionBarStyle">
@@ -124,12 +127,6 @@
     <style name="settings_actionbar_theme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
         <!-- Customize color of back arrow -->
         <item name="android:textColorPrimary">@color/colorTextActionBar</item>
-    </style>
-
-    <style name="tool_bar" parent="action_bar">
-        <item name="android:scaleType">center</item>
-        <item name="colorControlNormal">@color/colorTextActionBar</item>
-        <item name="android:background">@color/colorBackgroundActionBar</item>
     </style>
 
     <!-- buttons -->
