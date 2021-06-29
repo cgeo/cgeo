@@ -4,6 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
+        android:id="@+id/menu_item_delete"
+        android:icon="@drawable/ic_menu_delete"
+        android:title="@string/cache_filter_storage_delete_button"
+        android:visible="false"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction">
+    </item>
+    <item
         android:id="@+id/menu_item_cancel"
         android:icon="@drawable/ic_menu_cancel"
         android:title="@string/waypoint_cancel_edit"

@@ -2,7 +2,7 @@ package cgeo.geocaching.maps.routing;
 
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -39,7 +39,7 @@ import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.SimpleFloatViewManager;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class RouteSortActivity extends AbstractActivity {
+public class RouteSortActivity extends AbstractActionBarActivity {
 
     private ArrayAdapter<RouteItem> routeItemAdapter;
     private ArrayList<RouteItem> routeItems;
@@ -148,26 +148,30 @@ public class RouteSortActivity extends AbstractActivity {
         routeItems.remove(position);
         routeItemAdapter.notifyDataSetChanged();
         changed = true;
-        invalidateOptionsMenu();
         return true;
     }
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.route_sort, menu);
-        menu.findItem(R.id.save_sorted_route).setVisible(changed);
+        getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (item.getItemId() == R.id.save_sorted_route) {
+        if (item.getItemId() == R.id.menu_item_save) {
             AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.saveIndividualRoute(routeItems), () -> {
                 changed = false;
                 invalidateOptionsMenu();
                 Toast.makeText(this, R.string.sorted_route_saved, Toast.LENGTH_SHORT).show();
                 finish();
             });
+            return true;
+        } else if (item.getItemId() == R.id.menu_item_cancel) {
+            finish();
+            return true;
+        } else if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
             return true;
         }
         return false;
