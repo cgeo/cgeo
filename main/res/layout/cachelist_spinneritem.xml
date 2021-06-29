@@ -7,6 +7,7 @@
     android:layout_gravity="left|center_vertical"
     android:minHeight="?attr/dropdownListPreferredItemHeight"
     android:orientation="vertical"
+    android:background="@color/colorBackgroundActionBar"
     tools:context=".CacheListSpinnerAdapter" >
 
     <TextView
