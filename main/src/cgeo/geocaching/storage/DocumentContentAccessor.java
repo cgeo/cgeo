@@ -102,6 +102,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
             try {
                 return createInternal(folder, name, true);
             } catch (IllegalArgumentException iae2) {
+                Log.w("Problem creating document '" + name + "' in folder '" + folder + "'", iae2);
                 return null;
             }
         }

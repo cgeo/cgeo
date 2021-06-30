@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.storage.Folder.CGEO_PRIVATE_FILES;
-import static cgeo.geocaching.storage.Folder.DOCUMENTS_FOLDER_DEPRECATED;
 import static cgeo.geocaching.storage.Folder.LEGACY_CGEO_PUBLIC_ROOT;
 
 import android.content.Context;
@@ -26,7 +25,7 @@ import java.util.WeakHashMap;
 public enum PersistableFolder {
 
     /** Base directory  */
-    BASE (R.string.pref_persistablefolder_basedir, R.string.persistablefolder_base, LEGACY_CGEO_PUBLIC_ROOT, Folder.fromFolder(DOCUMENTS_FOLDER_DEPRECATED, "cgeo")),
+    BASE (R.string.pref_persistablefolder_basedir, R.string.persistablefolder_base, LEGACY_CGEO_PUBLIC_ROOT),
 
     /** Offline Maps folder where cgeo looks for offline map files (also the one where c:geo downloads its own offline maps) */
     //legacy setting: "mapDirectory", a pure file path is stored

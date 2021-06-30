@@ -54,7 +54,9 @@ public class DefaultFilesUtils {
             if (!found) {
                 Log.i("Recreating routing default file " + file.filename);
                 final Uri newFile = ContentStorage.get().create(PersistableFolder.ROUTING_BASE.getFolder(), file.filename);
-                if (newFile != null) {
+                if (newFile == null) {
+                    Log.w("Couldn't create file '" + file.filename + "' in '" + PersistableFolder.ROUTING_BASE.getFolder() + "'");
+                } else {
                     try (OutputStream os = ContentStorage.get().openForWrite(newFile); InputStream in = CgeoApplication.getInstance().getResources().openRawResource(file.resId)) {
                         final byte[] buff = new byte[1024];
                         int read;
@@ -62,7 +64,7 @@ public class DefaultFilesUtils {
                             os.write(buff, 0, read);
                         }
                     } catch (IOException e) {
-                        Log.d("error creating default file " + newFile + " (" + e.getMessage() + ")");
+                        Log.w("error creating default file " + newFile + " ' in '" + PersistableFolder.ROUTING_BASE.getFolder() + "'", e);
                     }
                 }
             }
