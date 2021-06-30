@@ -153,8 +153,8 @@ public class Geocache implements IWaypoint {
     // FIXME: this makes no sense to favor this over the other. 0 should not be a special case here as it is
     // in the range of acceptable values. This is probably the case at other places (rating etc.) too.
     private int votes = 0;
-    private float myVote = 0; // valid ratings are larger than zero
-    private int inventoryItems = 0;
+    private float myVote = 0.0f; // valid ratings are larger than zero
+    private int inventoryItems = -1;
     private final LazyInitializedList<String> attributes = new LazyInitializedList<String>() {
         @Override
         public List<String> call() {
@@ -1132,7 +1132,11 @@ public class Geocache implements IWaypoint {
      * @return the inventory size
      */
     public int getInventoryItems() {
-        return inventoryItems;
+        return Math.max(inventoryItems, 0);
+    }
+
+    public boolean hasInventoryItemsSet() {
+        return inventoryItems >= 0;
     }
 
     /**

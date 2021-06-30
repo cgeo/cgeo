@@ -29,7 +29,8 @@ public enum GeocacheFilterType {
     LOG_ENTRY("log_entry", R.string.cache_filter_log_entry, R.string.cache_filtergroup_details, LogEntryGeocacheFilter::new),
     LOCATION("location", R.string.cache_filter_location, R.string.cache_filtergroup_details, LocationGeocacheFilter::new),
     STORED_LISTS("stored_list", R.string.cache_filter_stored_lists, R.string.cache_filtergroup_userspecific, StoredListGeocacheFilter::new),
-    ORIGIN("origin", R.string.cache_filter_origin, R.string.cache_filtergroup_details, OriginGeocacheFilter::new);
+    ORIGIN("origin", R.string.cache_filter_origin, R.string.cache_filtergroup_details, OriginGeocacheFilter::new),
+    STORED_SINCE("stored_since", R.string.cache_filter_stored_since, R.string.cache_filtergroup_userspecific, StoredSinceGeocacheFilter::new);
 
 
     private final String typeId;

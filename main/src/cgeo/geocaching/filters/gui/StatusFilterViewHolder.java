@@ -26,6 +26,9 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
     private ButtonToggleGroup statusFavorite = null;
     private ButtonToggleGroup statusWatchlist = null;
     private ButtonToggleGroup statusPremium = null;
+    private ButtonToggleGroup statusHasTrackable = null;
+    private ButtonToggleGroup statusHasOwnVote = null;
+    private ButtonToggleGroup statusHasOfflineLog = null;
     private ButtonToggleGroup statusSolvedMystery = null;
 
     @Override
@@ -48,8 +51,12 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         statusFavorite = createGroup(ll, StatusGeocacheFilter.StatusType.FAVORITE);
         statusWatchlist = createGroup(ll, StatusGeocacheFilter.StatusType.WATCHLIST);
         statusPremium = createGroup(ll, StatusGeocacheFilter.StatusType.PREMIUM);
+        statusHasTrackable = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_TRACKABLE);
+        statusHasOwnVote = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OWN_VOTE);
+        statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG);
         statusSolvedMystery = createGroup(ll, StatusGeocacheFilter.StatusType.SOLVED_MYSTERY);
-        ButtonToggleGroup.alignWidths(statusOwn, statusFound, statusStored, statusFavorite, statusWatchlist, statusPremium, statusSolvedMystery);
+        ButtonToggleGroup.alignWidths(statusOwn, statusFound, statusStored, statusFavorite, statusWatchlist,
+            statusPremium, statusHasTrackable, statusHasOwnVote, statusHasOfflineLog, statusSolvedMystery);
 
         return ll;
     }
@@ -86,6 +93,9 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         setFromBoolean(statusFavorite, filter.getStatusFavorite());
         setFromBoolean(statusWatchlist, filter.getStatusWatchlist());
         setFromBoolean(statusPremium, filter.getStatusPremium());
+        setFromBoolean(statusHasTrackable, filter.getStatusHasTrackable());
+        setFromBoolean(statusHasOwnVote, filter.getStatusHasOwnVote());
+        setFromBoolean(statusHasOfflineLog, filter.getStatusHasOfflineLog());
         setFromBoolean(statusSolvedMystery, filter.getStatusSolvedMystery());
     }
 
@@ -105,6 +115,9 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         filter.setStatusFavorite(getFromGroup(statusFavorite));
         filter.setStatusWatchlist(getFromGroup(statusWatchlist));
         filter.setStatusPremium(getFromGroup(statusPremium));
+        filter.setStatusHasTrackable(getFromGroup(statusHasTrackable));
+        filter.setStatusHasOwnVote(getFromGroup(statusHasOwnVote));
+        filter.setStatusHasOfflineLog(getFromGroup(statusHasOfflineLog));
         filter.setStatusSolvedMystery(getFromGroup(statusSolvedMystery));
         return filter;
     }
