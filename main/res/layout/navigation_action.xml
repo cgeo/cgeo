@@ -14,7 +14,8 @@
         android:id="@+id/default_navigation_action"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/tool_bar"
+        style="?actionButtonStyle"
+        android:layout_gravity="center_vertical"
         android:scaleType="centerInside"
         app:srcCompat="@drawable/ic_menu_compass" />
 
