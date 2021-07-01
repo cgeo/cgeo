@@ -472,6 +472,7 @@
     <string name="cache_filter_location">Locatie</string>
     <string name="cache_filter_stored_lists">Opgeslagen lijsten</string>
     <string name="cache_filter_origin">Oorsprong</string>
+    <string name="cache_filter_stored_since">Opgeslagen sinds</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Gebruikerspecifiek</string>
@@ -514,9 +515,12 @@
     <string name="cache_filter_status_select_label_found">Gevonden</string>
     <string name="cache_filter_status_select_label_owned">Eigendom</string>
     <string name="cache_filter_status_select_label_stored">Opgeslagen</string>
-    <string name="cache_filter_status_select_label_favorite">Favoriet</string>
+    <string name="cache_filter_status_select_label_favorite">Eigen favoriet</string>
     <string name="cache_filter_status_select_label_watchlist">Op Watchlist</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Heeft Trackable</string>
+    <string name="cache_filter_status_select_label_has_own_vote">Heeft eigen stem</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Heeft offline log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches.\n\n Een mystery wordt beschouwd als \'opgelost\' als het de coördinaten heeft veranderd of een geldig eindpunt gevuld met coördinaten.</string>
     <string name="cache_filter_status_active">Actief</string>
@@ -527,6 +531,24 @@
     <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
     <string name="cache_filter_log_entry_foundby">Gevonden door:</string>
     <string name="cache_filter_log_entry_logtext">Log tekst:</string>
+    <string name="cache_filter_stored_since_notstored">Niet opgeslagen</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 uur</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0u</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 uur</item>
+        <item>24 uur</item>
+        <item>7 dagen</item>
+        <item>30 dagen</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8u</item>
+        <item>24u</item>
+        <item>7d</item>
+        <item>30d</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">het begin der tijden</string>
+    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <!-- about -->
     <string name="about_version">Versie</string>
     <string name="about_changelog">Changelog</string>
