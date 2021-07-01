@@ -508,7 +508,6 @@
     <string name="cache_filter_status_select_label_found">発見</string>
     <string name="cache_filter_status_select_label_owned">オーナー</string>
     <string name="cache_filter_status_select_label_stored">保存済み</string>
-    <string name="cache_filter_status_select_label_favorite">お気に入り登録済み</string>
     <string name="cache_filter_status_select_label_watchlist">ウォッチリスト登録済み</string>
     <string name="cache_filter_status_select_label_premium">プレミアム会員用</string>
     <string name="cache_filter_status_select_label_solved_mystery">解決済みのミステリー</string>
