@@ -518,7 +518,6 @@
     <string name="cache_filter_status_select_label_found">Nalezená</string>
     <string name="cache_filter_status_select_label_owned">Vlastněná</string>
     <string name="cache_filter_status_select_label_stored">Uložená</string>
-    <string name="cache_filter_status_select_label_favorite">Oblíbená</string>
     <string name="cache_filter_status_select_label_watchlist">V seznamu sledovaných</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
