@@ -4,6 +4,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.databinding.AuthorizationCredentialsActivityBinding;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -100,6 +101,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
             loginDialog.dismiss();
             if (statusCode == StatusCode.NO_ERROR) {
                 setCredentials(credentials);
+                ConnectorFactory.forceRelog();
                 showToast(getAuthDialogCompleted());
                 setResult(RESULT_OK);
                 finish();

@@ -3,6 +3,8 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.InstallWizardActivity;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.settings.BackupSeekbarPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
@@ -241,7 +243,7 @@ public class BackupUtils {
     public void restoreInternal(final Activity activityContext, final Folder backupDir, final boolean database, final boolean settings) {
         final Consumer<String> consumer = resultString -> {
 
-            boolean restartNeeded = false;
+            boolean settingsChanged = false;
             final ArrayList<ImmutableTriple<PersistableFolder, String, String>> currentFolderValues = new ArrayList<>();
             final ArrayList<ImmutableTriple<PersistableUri, String, String>> currentUriValues = new ArrayList<>();
 
@@ -271,9 +273,9 @@ public class BackupUtils {
                 if (!resultString.isEmpty()) {
                     resultString += "\n\n";
                 }
-                restartNeeded = restoreSettingsInternal(backupDir, currentFolderValues, unsetFolders, currentUriValues, unsetUris);
+                settingsChanged = restoreSettingsInternal(backupDir, currentFolderValues, unsetFolders, currentUriValues, unsetUris);
 
-                if (!restartNeeded) {
+                if (!settingsChanged) {
                     resultString += activityContext.getString(R.string.init_restore_settings_failed);
                 }
             }
@@ -284,11 +286,11 @@ public class BackupUtils {
                 this.regrantAccessFolders.addAll(currentFolderValues);
                 this.regrantAccessUris.clear();
                 this.regrantAccessUris.addAll(currentUriValues);
-                this.regrantAccessRestartNeeded = restartNeeded;
+                this.regrantAccessRestartNeeded = settingsChanged;
                 this.regrantAccessResultString = resultString;
                 triggerNextRegrantStep(null, null);
             } else {
-                finishRestoreInternal(activityContext, restartNeeded, resultString);
+                finishRestoreInternal(activityContext, settingsChanged, resultString);
             }
         };
 
@@ -299,9 +301,16 @@ public class BackupUtils {
         }
     }
 
-    private void finishRestoreInternal(final Activity activityContext, final boolean restartNeeded, final String resultString) {
-        // finish restore settings
-        if (restartNeeded && !(activityContext instanceof InstallWizardActivity)) {
+    private void finishRestoreInternal(final Activity activityContext, final boolean settingsChanged, final String resultString) {
+        // if the settings where edited, the user account data could have changed. Therefore logout...
+        if (settingsChanged) {
+            for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
+                AndroidRxUtils.networkScheduler.scheduleDirect(conn::logout);
+            }
+        }
+
+        // finish restore with restore if settings where changed
+        if (settingsChanged && !(activityContext instanceof InstallWizardActivity)) {
             SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString + activityContext.getString(R.string.settings_restart)))
                 .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
         } else {
