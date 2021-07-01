@@ -472,6 +472,7 @@
     <string name="cache_filter_location">Τοποθεσία</string>
     <string name="cache_filter_stored_lists">Αποθηκευμένες Λίστες</string>
     <string name="cache_filter_origin">Προέλευση</string>
+    <string name="cache_filter_stored_since">Αποθηκεύτηκε από</string>
     <string name="cache_filtergroup_basic">Βασικό</string>
     <string name="cache_filtergroup_details">Λεπτομέρειες</string>
     <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
@@ -510,15 +511,35 @@
     <string name="cache_filter_status_select_label_found">Βρέθηκε</string>
     <string name="cache_filter_status_select_label_owned">Ανήκει</string>
     <string name="cache_filter_status_select_label_stored">Αποθηκευμένα</string>
-    <string name="cache_filter_status_select_label_favorite">Αγαπημένο</string>
+    <string name="cache_filter_status_select_label_favorite">Ίδια Αγαπημένα</string>
     <string name="cache_filter_status_select_label_watchlist">Σε Λίστα παρακολούθησης</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Έχει Ανιχνεύσιμο</string>
+    <string name="cache_filter_status_select_label_has_own_vote">Εχει ψηφιστεί</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Εχει καταγραφή εκτός σύνδεσης</string>
     <string name="cache_filter_status_select_label_solved_mystery">Λύμένο Μυστήριο</string>
     <string name="cache_filter_status_exclude_active">Εξαίρεση Ενεργών</string>
     <string name="cache_filter_status_exclude_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="cache_filter_status_exclude_archived">Εξαίρεση των αρχειοθετημένων</string>
     <string name="cache_filter_log_entry_foundby">Βρέθηκε από:</string>
     <string name="cache_filter_log_entry_logtext">Κείμενο καταγραφής:</string>
+    <string name="cache_filter_stored_since_notstored">Μη αποθηκευμένες</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 ώρες</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0ω</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 ώρες</item>
+        <item>24 ώρες</item>
+        <item>7 ημέρες</item>
+        <item>30 Ημέρες</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8Ω</item>
+        <item>24Ω</item>
+        <item>7μ</item>
+        <item>30μ</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">την αυγή του χρόνου</string>
     <!-- about -->
     <string name="about_version">Έκδοση</string>
     <string name="about_changelog">Τι νέο υπάρχει;</string>
