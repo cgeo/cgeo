@@ -22,6 +22,10 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
         return null;
     }
 
+    protected String getSqlColumnExpression(final SqlBuilder sqlBuilder) {
+        return getSqlColumnName() == null ? null : sqlBuilder.getMainTableId() + "." + getSqlColumnName();
+    }
+
     @Override
     public Boolean filter(final Geocache cache) {
         if (cache == null) {
@@ -79,7 +83,7 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
 
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
-        addRangeToSqlBuilder(sqlBuilder, getSqlColumnName() == null ? null : sqlBuilder.getMainTableId() + "." + getSqlColumnName());
+        addRangeToSqlBuilder(sqlBuilder, getSqlColumnExpression(sqlBuilder));
     }
 
     protected void addRangeToSqlBuilder(final SqlBuilder sqlBuilder, final String valueExpression) {

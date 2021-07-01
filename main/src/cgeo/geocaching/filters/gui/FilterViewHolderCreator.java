@@ -13,6 +13,7 @@ import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StoredListGeocacheFilter;
+import cgeo.geocaching.filters.core.StoredSinceGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
@@ -113,6 +114,9 @@ public class FilterViewHolderCreator {
                         .setValueDisplayTextGetter(IConnector::getName)
                         .setValueDrawableGetter(ct -> ImageParam.id(R.drawable.ic_menu_upload)) , 1, true);
                 break;
+            case STORED_SINCE:
+                result = createStoredSinceFilterViewHolder();
+                break;
             default:
                 result = null;
                 break;
@@ -190,6 +194,16 @@ public class FilterViewHolderCreator {
             .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
 
         return new CheckboxFilterViewHolder<>(vgfa, 1, true);
+    }
+
+    private static IFilterViewHolder<?> createStoredSinceFilterViewHolder() {
+        return new ItemRangeSelectorViewHolder<>(
+            new ValueGroupFilterAccessor<Long, StoredSinceGeocacheFilter>()
+                .setSelectableValues(StoredSinceGeocacheFilter.getValueRange())
+                .setFilterValueGetter(f -> f.getValuesInRange(StoredSinceGeocacheFilter.getValueRange()))
+                .setFilterValueSetter(NumberRangeGeocacheFilter::setRangeFromValues)
+                .setValueDisplayTextGetter(s -> StoredSinceGeocacheFilter.toUserDisplayValue(s, false)),
+            (i, s) -> StoredSinceGeocacheFilter.toUserDisplayValue(s, true));
     }
 
 }

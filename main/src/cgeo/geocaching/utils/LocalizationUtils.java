@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 
+import androidx.annotation.ArrayRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.PluralsRes;
 import androidx.annotation.StringRes;
@@ -69,7 +70,21 @@ public final class LocalizationUtils {
         if (APPLICATION_CONTEXT == null) {
             return quantity + " " + fallback;
         }
-        return CgeoApplication.getInstance().getApplicationContext().getResources().getQuantityString(pluralId, quantity, quantity);
+        return APPLICATION_CONTEXT.getResources().getQuantityString(pluralId, quantity, quantity);
+    }
+
+    public static String[] getStringArray(@ArrayRes final int arrayId, final String ... fallback) {
+        if (APPLICATION_CONTEXT == null) {
+            return fallback == null ? new String[0] : fallback;
+        }
+        return APPLICATION_CONTEXT.getResources().getStringArray(arrayId);
+    }
+
+    public static int[] getIntArray(@ArrayRes final int arrayId, final int ... fallback) {
+        if (APPLICATION_CONTEXT == null) {
+            return fallback == null ? new int[0] : fallback;
+        }
+        return APPLICATION_CONTEXT.getResources().getIntArray(arrayId);
     }
 
     /**

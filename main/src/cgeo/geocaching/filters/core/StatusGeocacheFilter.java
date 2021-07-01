@@ -29,6 +29,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         FAVORITE(R.string.cache_filter_status_select_label_favorite, "favorite", ImageParam.emoji(EmojiUtils.SMILEY_LOVE)),
         WATCHLIST(R.string.cache_filter_status_select_label_watchlist, "watchlist", ImageParam.emoji(EmojiUtils.SMILEY_MONOCLE)),
         PREMIUM(R.string.cache_filter_status_select_label_premium, "premium", ImageParam.emoji(EmojiUtils.SPARKLES)),
+        HAS_TRACKABLE(R.string.cache_filter_status_select_label_has_trackable, "has_trackable", ImageParam.id(R.drawable.trackable_all)),
+        HAS_OWN_VOTE(R.string.cache_filter_status_select_label_has_own_vote, "has_own_vote", ImageParam.id(R.drawable.star_on)),
+        HAS_OFFLINE_LOG(R.string.cache_filter_status_select_label_has_offline_log, "has_offline_log", ImageParam.id(R.drawable.marker_note)),
         SOLVED_MYSTERY(R.string.cache_filter_status_select_label_solved_mystery, "solved_mystery", ImageParam.id(R.drawable.waypoint_puzzle), R.string.cache_filter_status_select_infotext_solved_mystery);
 
         @StringRes public final int labelId;
@@ -63,15 +66,25 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     private Boolean statusFavorite = null;
     private Boolean statusWatchlist = null;
     private Boolean statusPremium = null;
+    private Boolean statusHasTrackable = null;
+    private Boolean statusHasOwnVote = null;
+    private Boolean statusHasOfflineLog = null;
     private Boolean statusSolvedMystery = null;
 
 
     @Override
     public Boolean filter(final Geocache cache) {
+
+        if (statusHasOfflineLog != null) {
+            //trigger offline log load
+            cache.getOfflineLog();
+        }
+
         //handle a few "inconclusive" cases
         if ((statusFavorite != null && cache.isFavoriteRaw() == null) ||
             (statusWatchlist != null && cache.isOnWatchlistRaw() == null) ||
             (statusPremium != null && cache.isPremiumMembersOnlyRaw() == null) ||
+            (statusHasTrackable != null && !cache.hasInventoryItemsSet()) ||
             (statusSolvedMystery != null && cache.getUserModifiedCoordsRaw() == null)) {
             return null;
         }
@@ -86,6 +99,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             (statusFavorite == null || cache.isFavorite() == statusFavorite) &&
             (statusWatchlist == null || cache.isOnWatchlist() == statusWatchlist) &&
             (statusPremium == null || cache.isPremiumMembersOnly() == statusPremium) &&
+            (statusHasTrackable == null || (cache.getInventoryItems() > 0) == statusHasTrackable) &&
+            (statusHasOwnVote == null || (cache.getMyVote() > 0) == statusHasOwnVote) &&
+            (statusHasOfflineLog == null || cache.hasLogOffline() == statusHasOfflineLog) &&
             (statusSolvedMystery == null || cache.getType() != CacheType.MYSTERY ||
                 (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery);
     }
@@ -162,6 +178,30 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         this.statusPremium = statusPremium;
     }
 
+    public Boolean getStatusHasTrackable() {
+        return statusHasTrackable;
+    }
+
+    public void setStatusHasTrackable(final Boolean statusHasTrackable) {
+        this.statusHasTrackable = statusHasTrackable;
+    }
+
+    public Boolean getStatusHasOwnVote() {
+        return statusHasOwnVote;
+    }
+
+    public void setStatusHasOwnVote(final Boolean statusHasOwnVote) {
+        this.statusHasOwnVote = statusHasOwnVote;
+    }
+
+    public Boolean getStatusHasOfflineLog() {
+        return statusHasOfflineLog;
+    }
+
+    public void setStatusHasOfflineLog(final Boolean statusHasOfflineLog) {
+        this.statusHasOfflineLog = statusHasOfflineLog;
+    }
+
     public Boolean getStatusSolvedMystery() {
         return statusSolvedMystery;
     }
@@ -177,6 +217,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         statusStored = null;
         statusFavorite = null;
         statusWatchlist = null;
+        statusHasTrackable = null;
+        statusHasOwnVote = null;
+        statusHasOfflineLog = null;
         statusPremium = null;
 
         excludeActive = false;
@@ -189,6 +232,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             checkAndSetBooleanFlag(value, StatusType.FAVORITE, b -> statusFavorite = b);
             checkAndSetBooleanFlag(value, StatusType.WATCHLIST, b -> statusWatchlist = b);
             checkAndSetBooleanFlag(value, StatusType.PREMIUM, b -> statusPremium = b);
+            checkAndSetBooleanFlag(value, StatusType.HAS_TRACKABLE, b -> statusHasTrackable = b);
+            checkAndSetBooleanFlag(value, StatusType.HAS_OWN_VOTE, b -> statusHasOwnVote = b);
+            checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_LOG, b -> statusHasOfflineLog = b);
             checkAndSetBooleanFlag(value, StatusType.SOLVED_MYSTERY, b -> statusSolvedMystery = b);
 
             if (checkBooleanFlag(FLAG_EXCLUDE_ACTIVE, value)) {
@@ -219,6 +265,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         checkAndAddFlagToDefaultList(statusFavorite, StatusType.FAVORITE, result);
         checkAndAddFlagToDefaultList(statusWatchlist, StatusType.WATCHLIST, result);
         checkAndAddFlagToDefaultList(statusPremium, StatusType.PREMIUM, result);
+        checkAndAddFlagToDefaultList(statusHasTrackable, StatusType.HAS_TRACKABLE, result);
+        checkAndAddFlagToDefaultList(statusHasOwnVote, StatusType.HAS_OWN_VOTE, result);
+        checkAndAddFlagToDefaultList(statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG, result);
         checkAndAddFlagToDefaultList(statusSolvedMystery, StatusType.SOLVED_MYSTERY, result);
         if (excludeActive) {
             result.addToDefaultList(FLAG_EXCLUDE_ACTIVE);
@@ -244,7 +293,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     @Override
     public boolean isFiltering() {
         return statusOwned != null || statusFound != null || statusStored != null || statusFavorite != null ||
-            statusWatchlist != null || statusPremium != null || statusSolvedMystery != null ||
+            statusWatchlist != null || statusPremium != null || statusHasTrackable != null ||
+            statusHasOwnVote != null || statusHasOfflineLog != null || statusSolvedMystery != null ||
             excludeArchived || excludeDisabled || excludeActive;
     }
 
@@ -273,6 +323,22 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             if (statusPremium != null) {
                 sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".members = " + (statusPremium ? "1" : "0"));
             }
+            if (statusHasTrackable != null) {
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".inventoryunknown " + (statusHasTrackable ? "> 0" : " = 0"));
+            }
+            if (statusHasOwnVote != null) {
+                if (statusHasOwnVote) {
+                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".myvote > 0");
+                } else {
+                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".myvote IS NULL OR  " + sqlBuilder.getMainTableId() + ".myvote = 0");
+                }
+            }
+            if (statusHasOfflineLog != null) {
+                final String logTableId = sqlBuilder.getNewTableId();
+                sqlBuilder.addWhere((statusHasOfflineLog ? "" : "NOT ") +
+                    "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode)");
+            }
+
             if (statusSolvedMystery != null) {
                 sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
                 sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".type <> '" + CacheType.MYSTERY.id + "'"); // only filters mysteries
@@ -321,6 +387,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         count = addIfStillFits(sb, count, statusFavorite, StatusType.FAVORITE);
         count = addIfStillFits(sb, count, statusWatchlist, StatusType.WATCHLIST);
         count = addIfStillFits(sb, count, statusPremium, StatusType.PREMIUM);
+        count = addIfStillFits(sb, count, statusHasTrackable, StatusType.HAS_TRACKABLE);
+        count = addIfStillFits(sb, count, statusHasOwnVote, StatusType.HAS_OWN_VOTE);
+        count = addIfStillFits(sb, count, statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG);
         count = addIfStillFits(sb, count, statusSolvedMystery, StatusType.SOLVED_MYSTERY);
         count = addIfTrue(sb, count, excludeActive, R.string.cache_filter_status_exclude_active);
         count = addIfTrue(sb, count, excludeDisabled, R.string.cache_filter_status_exclude_disabled);
