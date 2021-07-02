@@ -647,6 +647,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public void onResume() {
         super.onResume();
+
+        // save current position
+        final LastPositionHelper lastPosition = new LastPositionHelper(this);
+
         currentCacheFilter = GeocacheFilter.loadFromSettings();
         adapter.setFilter(currentFilter, currentCacheFilter);
         prepareFilterBar();
@@ -669,14 +673,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             loadCachesHandler.sendEmptyMessage(0);
         }
 
-        // refresh standard list if it might have changed (e.g. due to new caches downloaded or cache being added/deleted from list)
-        if (type == CacheListType.OFFLINE && (listId >= StoredList.STANDARD_LIST_ID || listId == PseudoList.ALL_LIST.id) && search != null) {
-            refreshCurrentList();
-        }
 
-        // always refresh history, an offline log might have been deleted
-        if (type == CacheListType.HISTORY) {
-            new LastPositionHelper(this).refreshListAtLastPosition();
+        lastPosition.refreshListAtLastPosition();
+
+        // refresh list if it might have changed (e.g. due to changed filter, new caches downloaded, cache being added/deleted from list)
+        if (type.isStoredInDatabase) {
+            lastPosition.refreshListAtLastPosition();
         }
     }
 
@@ -1354,10 +1356,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setFilter(currentFilter, currentCacheFilter);
             refreshFilterForOnlineSearch();
         }
-
-        if (type.isStoredInDatabase) {
-            refreshCurrentList();
-        }
     }
 
     private void refreshFilterForOnlineSearch() {
@@ -1502,11 +1500,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final class LastPositionHelper {
         private final WeakReference<CacheListActivity> activityRef;
         private final int lastListPosition;
+        private final int onTopSpace;
 
         LastPositionHelper(@NonNull final CacheListActivity context) {
             super();
             this.lastListPosition = context.getListView().getFirstVisiblePosition();
             this.activityRef = new WeakReference<>(context);
+
+            final View firstChild = context.getListView().getChildAt(0);
+            onTopSpace = (firstChild == null) ? 0 : (firstChild.getTop() - context.getListView().getPaddingTop());
+
         }
 
         public void refreshListAtLastPosition() {
@@ -1515,8 +1518,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 activity.adapter.setSelectMode(false);
                 activity.refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
                 activity.replaceCacheListFromSearch();
-                if (lastListPosition > 0) {
-                    activity.getListView().setSelection(lastListPosition);
+                if (lastListPosition > 0 && lastListPosition < activity.adapter.getCount()) {
+                    activity.getListView().setSelectionFromTop(lastListPosition, onTopSpace);
                 }
             }
         }
