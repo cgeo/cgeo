@@ -6,7 +6,7 @@
         android:id="@+id/menu_show_on_map"
         android:icon="@drawable/ic_menu_mapmode"
         android:title="@string/caches_on_map"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_filter"
         android:icon="@drawable/ic_menu_filter"
