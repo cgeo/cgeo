@@ -23,15 +23,15 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     private static final String FLAG_EXCLUDE_ARCHIVED = "exclude_archived";
 
     public enum StatusType {
-        OWNED(R.string.cache_filter_status_select_label_owned, "owned", ImageParam.id(R.drawable.ic_menu_myplaces)),
-        FOUND(R.string.cache_filter_status_select_label_found, "found", ImageParam.id(R.drawable.ic_menu_found)),
-        STORED(R.string.cache_filter_status_select_label_stored, "stored", ImageParam.id(R.drawable.ic_menu_save)),
+        OWNED(R.string.cache_filter_status_select_label_owned, "owned", ImageParam.id(R.drawable.marker_own)),
+        FOUND(R.string.cache_filter_status_select_label_found, "found", ImageParam.id(R.drawable.marker_found)),
+        STORED(R.string.cache_filter_status_select_label_stored, "stored", ImageParam.id(R.drawable.marker_stored)),
         FAVORITE(R.string.cache_filter_status_select_label_favorite, "favorite", ImageParam.emoji(EmojiUtils.SMILEY_LOVE)),
         WATCHLIST(R.string.cache_filter_status_select_label_watchlist, "watchlist", ImageParam.emoji(EmojiUtils.SMILEY_MONOCLE)),
         PREMIUM(R.string.cache_filter_status_select_label_premium, "premium", ImageParam.emoji(EmojiUtils.SPARKLES)),
         HAS_TRACKABLE(R.string.cache_filter_status_select_label_has_trackable, "has_trackable", ImageParam.id(R.drawable.trackable_all)),
         HAS_OWN_VOTE(R.string.cache_filter_status_select_label_has_own_vote, "has_own_vote", ImageParam.id(R.drawable.star_on)),
-        HAS_OFFLINE_LOG(R.string.cache_filter_status_select_label_has_offline_log, "has_offline_log", ImageParam.id(R.drawable.marker_note)),
+        HAS_OFFLINE_LOG(R.string.cache_filter_status_select_label_has_offline_log, "has_offline_log", ImageParam.id(R.drawable.marker_found_offline)),
         SOLVED_MYSTERY(R.string.cache_filter_status_select_label_solved_mystery, "solved_mystery", ImageParam.id(R.drawable.waypoint_puzzle), R.string.cache_filter_status_select_infotext_solved_mystery);
 
         @StringRes public final int labelId;

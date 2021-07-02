@@ -181,6 +181,13 @@ public class ViewUtils {
         return ip.right;
     }
 
+    public static CheckBox addCheckboxItem(final Activity activity, @NonNull final ViewGroup viewGroup, final TextParam text, final ImageParam imageParam) {
+
+        final ImmutablePair<View, CheckBox> ip = createCheckboxItem(activity, viewGroup, text, imageParam, null);
+        viewGroup.addView(ip.left);
+        return ip.right;
+    }
+
     public static TextView createTextItem(final Context ctx, @StyleRes final int styleId, final TextParam text) {
         final TextView tv = new TextView(wrap(ctx), null, 0, styleId);
         text.applyTo(tv);
