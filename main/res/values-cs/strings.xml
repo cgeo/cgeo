@@ -474,6 +474,7 @@
     <string name="cache_filter_location">Místo</string>
     <string name="cache_filter_stored_lists">Uložené seznamy</string>
     <string name="cache_filter_origin">Původ</string>
+    <string name="cache_filter_stored_since">Uložené od</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
     <string name="cache_filtergroup_userspecific">Vlastní</string>
@@ -518,8 +519,12 @@
     <string name="cache_filter_status_select_label_found">Nalezená</string>
     <string name="cache_filter_status_select_label_owned">Vlastněná</string>
     <string name="cache_filter_status_select_label_stored">Uložená</string>
+    <string name="cache_filter_status_select_label_favorite">Vlastní oblíbené</string>
     <string name="cache_filter_status_select_label_watchlist">V seznamu sledovaných</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Má trackovatelný předmět</string>
+    <string name="cache_filter_status_select_label_has_own_vote">Má vlastní hlas</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky.\n\n Mysterka je považována za \"vyřešenou\", pokud má změněné souřadnice nebo vyplněný finální bod trasy se souřadnicemi.</string>
     <string name="cache_filter_status_active">Aktivní</string>
@@ -530,6 +535,24 @@
     <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
     <string name="cache_filter_log_entry_foundby">Nalezené kým:</string>
     <string name="cache_filter_log_entry_logtext">Text logu:</string>
+    <string name="cache_filter_stored_since_notstored">Neuložené</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 hodin</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 hodin</item>
+        <item>24 hodin</item>
+        <item>7 dní</item>
+        <item>30 dní</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8h</item>
+        <item>24h</item>
+        <item>7d</item>
+        <item>30d</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">úsvit</string>
+    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
