@@ -7,10 +7,12 @@ import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableUri;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -53,16 +55,17 @@ public class MapSettingsUtils {
         showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
 
         final ArrayList<SettingsCheckboxModel> allCbs = new ArrayList<>();
-        final SettingsCheckboxModel foundCb = createCb(allCbs, R.string.map_showc_found, R.drawable.ic_menu_found, Settings.isExcludeFound(), Settings::setExcludeFound, true);
-        final SettingsCheckboxModel ownCb = createCb(allCbs, R.string.map_showc_own, R.drawable.ic_menu_myplaces, Settings.isExcludeMyCaches(), Settings::setExcludeMine, true);
-        final SettingsCheckboxModel disabledCb = createCb(allCbs, R.string.map_showc_disabled, R.drawable.ic_menu_disabled, Settings.isExcludeDisabledCaches(), Settings::setExcludeDisabled, true);
-        final SettingsCheckboxModel archivedCb = createCb(allCbs, R.string.map_showc_archived, R.drawable.ic_menu_archived, Settings.isExcludeArchivedCaches(), Settings::setExcludeArchived, true);
-        final SettingsCheckboxModel offlineLogCb = createCb(allCbs, R.string.map_showc_offlinelog, R.drawable.ic_menu_edit, Settings.isExcludeOfflineLog(), Settings::setExcludeOfflineLog, true);
-        final SettingsCheckboxModel wpOriginalCb = createCb(allCbs, R.string.map_showwp_original, R.drawable.ic_menu_waypoint, Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true);
-        final SettingsCheckboxModel wpParkingCb = createCb(allCbs, R.string.map_showwp_parking, R.drawable.ic_menu_parking, Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true);
-        final SettingsCheckboxModel wbVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.ic_menu_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
-        final SettingsCheckboxModel trackCb = !PersistableUri.TRACK.hasValue() ? null : createCb(allCbs, R.string.map_show_track, R.drawable.ic_menu_hidetrack, Settings.isHideTrack(), Settings::setHideTrack, true);
-        final SettingsCheckboxModel circlesCb = createCb(allCbs, R.string.map_show_circles, R.drawable.ic_menu_circle, isShowCircles, Settings::setShowCircles, false);
+
+        final SettingsCheckboxModel foundCb = createCb(allCbs, R.string.map_showc_found, ImageParam.id(R.drawable.marker_found), Settings.isExcludeFound(), Settings::setExcludeFound, true);
+        final SettingsCheckboxModel ownCb = createCb(allCbs, R.string.map_showc_own, ImageParam.id(R.drawable.marker_own), Settings.isExcludeMyCaches(), Settings::setExcludeMine, true);
+        final SettingsCheckboxModel disabledCb = createCb(allCbs, R.string.map_showc_disabled,  R.drawable.map_status_disabled, Settings.isExcludeDisabledCaches(), Settings::setExcludeDisabled, true);
+        final SettingsCheckboxModel archivedCb = createCb(allCbs, R.string.map_showc_archived, R.drawable.map_status_archived, Settings.isExcludeArchivedCaches(), Settings::setExcludeArchived, true);
+        final SettingsCheckboxModel offlineLogCb = createCb(allCbs, R.string.map_showc_offlinelog, R.drawable.marker_found_offline, Settings.isExcludeOfflineLog(), Settings::setExcludeOfflineLog, true);
+        final SettingsCheckboxModel wpOriginalCb = createCb(allCbs, R.string.map_showwp_original, R.drawable.waypoint_waypoint, Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true);
+        final SettingsCheckboxModel wpParkingCb = createCb(allCbs, R.string.map_showwp_parking, R.drawable.waypoint_pkg, Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true);
+        final SettingsCheckboxModel wbVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.tick, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
+        final SettingsCheckboxModel trackCb = !PersistableUri.TRACK.hasValue() ? null : createCb(allCbs, R.string.map_show_track, R.drawable.map_hidetrack, Settings.isHideTrack(), Settings::setHideTrack, true);
+        final SettingsCheckboxModel circlesCb = createCb(allCbs, R.string.map_show_circles, R.drawable.map_circle, isShowCircles, Settings::setShowCircles, false);
 
         final MapSettingsDialogBinding dialogView = MapSettingsDialogBinding.inflate(LayoutInflater.from(Dialogs.newContextThemeWrapper(activity)));
 
@@ -151,16 +154,30 @@ public class MapSettingsUtils {
         return result;
     }
 
+    private static SettingsCheckboxModel createCb(final Collection<SettingsCheckboxModel> coll, @StringRes final int resTitle,  final ImageParam imageParam, final boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
+        final SettingsCheckboxModel result = new SettingsCheckboxModel(resTitle, imageParam, currentValue, setValue, isNegated);
+        coll.add(result);
+        return result;
+    }
+
     private static class SettingsCheckboxModel {
         @StringRes private final int resTitle;
-        @DrawableRes private final int resIcon;
+        private final ImageParam imageParam;
         private boolean currentValue;
         private final Action1<Boolean> setValue;
         private final boolean isNegated;
 
         SettingsCheckboxModel(@StringRes final int resTitle, @DrawableRes final int resIcon, final boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
             this.resTitle = resTitle;
-            this.resIcon = resIcon;
+            this.imageParam = ImageParam.id(resIcon);
+            this.currentValue = isNegated != currentValue;
+            this.setValue = setValue;
+            this.isNegated = isNegated;
+        }
+
+        SettingsCheckboxModel(@StringRes final int resTitle, final ImageParam imageParam, final boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
+            this.resTitle = resTitle;
+            this.imageParam = imageParam;
             this.currentValue = isNegated != currentValue;
             this.setValue = setValue;
             this.isNegated = isNegated;
@@ -171,7 +188,7 @@ public class MapSettingsUtils {
         }
 
         public void addToViewGroup(final Activity ctx, final ViewGroup viewGroup) {
-            final CheckBox cb = ViewUtils.addCheckboxItem(ctx, viewGroup, TextParam.id(resTitle), resIcon);
+            final CheckBox cb = ViewUtils.addCheckboxItem(ctx, viewGroup, TextParam.id(resTitle), imageParam);
             cb.setChecked(currentValue);
             cb.setOnCheckedChangeListener((v, c) -> this.currentValue = !this.currentValue);
         }
