@@ -35,7 +35,7 @@
     <string name="userdefined">ユーザー定義キャッシュ</string>
     <string name="unknown">不明なタイプ</string>
     <string name="all_types_short">すべて</string>
-    <string name="traditional_short">トラディ</string>
+    <string name="traditional_short">トラディショナル</string>
     <string name="multi_short">マルチ</string>
     <string name="mystery_short">ミステリー</string>
     <string name="letterbox_short">レターボックス</string>
@@ -389,6 +389,8 @@
     <string name="caches_copy_selected">選択内容のコピー</string>
     <string name="caches_copy_all">すべてコピー</string>
     <string name="caches_map_locus_export">Locusにエクスポート</string>
+    <string name="caches_filter">フィルタ(旧)</string>
+    <string name="caches_filter_menuitem">フィルタ</string>
     <string name="caches_filter_title">フィルタ</string>
     <string name="caches_filter_size">サイズ</string>
     <string name="caches_filter_type">タイプ</string>
@@ -469,6 +471,7 @@
     <string name="cache_filter_location">所在地</string>
     <string name="cache_filter_stored_lists">保存済みリスト</string>
     <string name="cache_filter_origin">公開元</string>
+    <string name="cache_filter_stored_since">保存日時</string>
     <string name="cache_filtergroup_basic">基本</string>
     <string name="cache_filtergroup_details">詳細</string>
     <string name="cache_filtergroup_userspecific">ユーザー固有</string>
@@ -508,8 +511,12 @@
     <string name="cache_filter_status_select_label_found">発見</string>
     <string name="cache_filter_status_select_label_owned">オーナー</string>
     <string name="cache_filter_status_select_label_stored">保存済み</string>
+    <string name="cache_filter_status_select_label_favorite">お気に入り登録済み</string>
     <string name="cache_filter_status_select_label_watchlist">ウォッチリスト登録済み</string>
     <string name="cache_filter_status_select_label_premium">プレミアム会員用</string>
+    <string name="cache_filter_status_select_label_has_trackable">トラッカブルあり</string>
+    <string name="cache_filter_status_select_label_has_own_vote">評価済み</string>
+    <string name="cache_filter_status_select_label_has_offline_log">オフラインログあり</string>
     <string name="cache_filter_status_select_label_solved_mystery">解決済みのミステリー</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">このフィルタ項目はミステリー・キャッシュにのみ影響します。\n\n座標が変更された場合、または座標の確定した最終ウェイポイントがある場合、ミステリーは「解決済み」とみなされます。</string>
     <string name="cache_filter_status_active">有効</string>
@@ -520,6 +527,20 @@
     <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
     <string name="cache_filter_log_entry_foundby">発見したユーザー名:</string>
     <string name="cache_filter_log_entry_logtext">ログの本文:</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 hours</item>
+        <item>24時間前</item>
+        <item>7日前</item>
+        <item>30日前</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8h</item>
+        <item>24h</item>
+        <item>7日</item>
+        <item>30日</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">時の始まり</string>
+    <string name="cache_filter_stored_since_stored_max_short">最大</string>
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
@@ -1035,6 +1056,7 @@
     </plurals>
     <string name="last_day_available">利用可能期限</string>
     <string name="cache_offline_refresh">更新</string>
+    <string name="cache_offline_drop">リストから削除</string>
     <string name="cache_delete_userdefined_waypoints">ユーザー定義のウェイポイントを削除</string>
     <string name="cache_delete_userdefined_waypoints_confirm">このキャッシュのすべてのユーザー定義ウェイポイントを削除しますか?\n\nウェイポイントはすぐに削除され、元に戻すことはできません</string>
     <string name="cache_delete_userdefined_waypoints_note">注意: 「ノートからウェイポイント抽出する」が有効化されています。パーソナルノートに(c:geoが認識できる)座標値が書いてある場合はウェイポイントが自動的に再作成されます。パーソナルノートのダイアログで抽出を無効化できます</string>
@@ -1396,6 +1418,7 @@
     <string name="search_hbu">設置したオーナー名</string>
     <string name="search_hbu_prefill">オーナー名</string>
     <string name="search_hbu_button">オーナー名で検索</string>
+    <string name="search_filter">フィルタ</string>
     <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
