@@ -602,6 +602,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
 
                 AndroidRxUtils.bindActivity(activity, new HtmlImage(activity.geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(trackableImage::setImageDrawable);
 
+                binding.image.removeAllViews();
                 binding.image.addView(trackableImage);
             }
         }
