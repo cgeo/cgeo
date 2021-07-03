@@ -47,6 +47,7 @@
                     style="@style/button_icon"
                     app:icon="@drawable/ic_menu_hint"
                     android:layout_alignParentRight="true"
+                    android:layout_alignBaseline="@id/more_details"
                     android:layout_marginLeft="0dp"
                     android:visibility="gone"
                     tools:visibility="visible"/>

@@ -17,7 +17,6 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
-import cgeo.geocaching.utils.TextUtils;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -39,7 +38,6 @@ import java.util.Collections;
 import java.util.Set;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import org.apache.commons.lang3.StringUtils;
 
 public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotification {
     private final Progress progress = new Progress();
@@ -120,15 +118,10 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 proximityNotification.setTextNotifications(getContext());
             }
 
-            if (StringUtils.isNotBlank(cache.getName())) {
-                setTitle(TextUtils.coloredCacheText(cache, cache.getName()));
-            } else {
-                setTitle(geocode);
-            }
-
             final View view = getView();
             assert view != null;
             final Toolbar toolbar = view.findViewById(R.id.toolbar);
+            toolbar.setTitle(geocode);
             toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable());
             toolbar.setLongClickable(true);
             toolbar.setOnLongClickListener(v -> {

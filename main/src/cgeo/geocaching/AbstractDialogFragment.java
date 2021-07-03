@@ -78,15 +78,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
     }
 
-    public final void setTitle(final CharSequence title) {
-        final View view = getView();
-        assert view != null;
-        final Toolbar toolbar = view.findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            toolbar.setTitle(title);
-        }
-    }
-
     @Override
     public void onStart() {
         super.onStart();
