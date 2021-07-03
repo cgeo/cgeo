@@ -42,7 +42,10 @@
 
     <!-- buttons -->
     <dimen name="textSize_buttonsPrimary">@dimen/textSize_detailsSecondary</dimen>
-w
+
+    <!-- icons -->
+    <dimen name="icon_size">42dp</dimen>
+
     <!-- all other text -->
     <dimen name="textSize_detailsPrimary">16sp</dimen>
     <dimen name="textSize_detailsSecondary">14sp</dimen>
