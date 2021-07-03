@@ -45,6 +45,7 @@ public class GeoitemLayers implements Iterable<GeoitemLayer> {
 
     public synchronized void clear() {
         this.geoitems.clear();
+        this.cacheCodes.clear();
     }
 
     @Override
