@@ -76,19 +76,14 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
         }
 
         try {
-            if (StringUtils.isNotBlank(waypoint.getName())) {
-                setTitle(waypoint.getName());
-            } else {
-                setTitle(waypoint.getShortGeocode());
-            }
-
-
+            final String wpCode = waypoint.getPrefix() + waypoint.getShortGeocode().substring(2);
+            binding.toolbar.toolbar.setTitle(wpCode);
             binding.toolbar.toolbar.setLogo(ResourcesCompat.getDrawable(getResources(), waypoint.getWaypointType().markerId, null));
 
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);
 
             //Waypoint geocode
-            details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getShortGeocode().substring(2));
+            details.add(R.string.cache_geocode, wpCode);
             waypointDistance = details.addDistance(waypoint, waypointDistance);
             final String note = waypoint.getNote();
             if (StringUtils.isNotBlank(note)) {
