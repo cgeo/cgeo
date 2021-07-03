@@ -7,7 +7,7 @@
 
     <color name="colorText">@color/just_black</color>
     <color name="colorTextDark">#AA000000</color>
-    <color name="colorTextHint">#44000000</color>
+    <color name="colorTextHint">#FFAAAAAA</color>
 
     <color name="colorTextHeadline">#88000000</color>
 
