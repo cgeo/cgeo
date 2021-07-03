@@ -42,7 +42,7 @@
         style="@style/cacheRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="false"
+        android:layout_centerVertical="true"
         android:layout_gravity="center_horizontal"
         android:layout_toRightOf="@+id/value"
         android:baselineAligned="false"
