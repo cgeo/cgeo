@@ -82,6 +82,7 @@
             <Button
                 android:id="@+id/routing_off"
                 style="@style/button_icon_accent"
+                android:layout_margin="0dp"
                 app:icon="@drawable/routing_off" />
 
             <Button
