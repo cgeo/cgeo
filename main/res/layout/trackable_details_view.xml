@@ -28,12 +28,8 @@
             tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
-
                 <View style="@style/separator_horizontal" />
-
-                <TextView
-                    style="@style/separator_horizontal_headline"
-                    android:text="@string/trackable_goal" />
+                <TextView style="@style/separator_horizontal_headline" android:text="@string/trackable_goal" />
             </RelativeLayout>
 
             <TextView
@@ -43,6 +39,7 @@
                 android:layout_marginBottom="10dip"
                 android:linksClickable="true"
                 android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
                 android:visibility="gone"
                 tools:visibility="visible"
                 tools:text="goal of the trackable"/>
@@ -57,12 +54,8 @@
             tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
-
                 <View style="@style/separator_horizontal" />
-
-                <TextView
-                    style="@style/separator_horizontal_headline"
-                    android:text="@string/trackable_details" />
+                <TextView style="@style/separator_horizontal_headline" android:text="@string/trackable_details" />
             </RelativeLayout>
 
             <TextView
@@ -72,6 +65,7 @@
                 android:layout_marginBottom="10dip"
                 android:linksClickable="true"
                 android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
                 android:visibility="gone"
                 tools:visibility="visible"
                 tools:text="details of the trackable"/>
@@ -86,12 +80,8 @@
             tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
-
                 <View style="@style/separator_horizontal" />
-
-                <TextView
-                    style="@style/separator_horizontal_headline"
-                    android:text="@string/trackable_image" />
+                <TextView style="@style/separator_horizontal_headline" android:text="@string/trackable_image" />
             </RelativeLayout>
 
             <LinearLayout
