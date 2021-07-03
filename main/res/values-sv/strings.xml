@@ -353,7 +353,6 @@
     <string name="caches_copy_selected">Kopiera valda</string>
     <string name="caches_copy_all">Kopiera alla</string>
     <string name="caches_map_locus_export">Exportera till Locus</string>
-    <string name="caches_filter">Filtrera</string>
     <string name="caches_filter_title">Filtrera efter</string>
     <string name="caches_filter_size">Storlek</string>
     <string name="caches_filter_type">Typ</string>

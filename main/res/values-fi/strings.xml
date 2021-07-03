@@ -390,8 +390,8 @@
     <string name="caches_copy_selected">Kopioi valitut</string>
     <string name="caches_copy_all">Kopioi kaikki</string>
     <string name="caches_map_locus_export">Vie Locus:iin</string>
-    <string name="caches_filter">Suodatin</string>
-    <string name="caches_filter_menuitem">Uusi kätkösuodatin (kokeellinen)</string>
+    <string name="caches_filter">Suodatin (aiempi)</string>
+    <string name="caches_filter_menuitem">Suodatin</string>
     <string name="caches_filter_title">Suodata</string>
     <string name="caches_filter_size">Koko</string>
     <string name="caches_filter_type">Tyyppi</string>
@@ -472,6 +472,7 @@
     <string name="cache_filter_location">Sijainti</string>
     <string name="cache_filter_stored_lists">Tallennetut listat</string>
     <string name="cache_filter_origin">Alkuperä</string>
+    <string name="cache_filter_stored_since">Tallennettuna</string>
     <string name="cache_filtergroup_basic">Perus</string>
     <string name="cache_filtergroup_details">Yksityiskohdat</string>
     <string name="cache_filtergroup_userspecific">Käyttäjäkohtainen</string>
@@ -514,9 +515,12 @@
     <string name="cache_filter_status_select_label_found">Löydetty</string>
     <string name="cache_filter_status_select_label_owned">Omat</string>
     <string name="cache_filter_status_select_label_stored">Tallennettu</string>
-    <string name="cache_filter_status_select_label_favorite">Suositellut</string>
+    <string name="cache_filter_status_select_label_favorite">Oma suosikki</string>
     <string name="cache_filter_status_select_label_watchlist">Seurantalistalla</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Sisältää reissaajan</string>
+    <string name="cache_filter_status_select_label_has_own_vote">Sisältää oman äänen</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Sisältää offline-lokin</string>
     <string name="cache_filter_status_select_label_solved_mystery">Ratkaistu mysteeri</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Tämä suodatinasetus vaikuttaa vain mysteerikätköihin\n\n Mysteeri oletetaan olevan \'ratkaistu\' jos sillä on joko muutetut koordinaatit tai pätevä koordinaatit sisältävä viimeinen reittipiste.</string>
     <string name="cache_filter_status_active">Aktiivinen</string>
@@ -527,6 +531,24 @@
     <string name="cache_filter_status_exclude_archived">Rajaa pois arkistoidut</string>
     <string name="cache_filter_log_entry_foundby">Löytänyt:</string>
     <string name="cache_filter_log_entry_logtext">Lokiteksti:</string>
+    <string name="cache_filter_stored_since_notstored">Ei tallennettu</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 tuntia</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 tuntia</item>
+        <item>24 tuntia</item>
+        <item>7 päivää</item>
+        <item>30 päivää</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8h</item>
+        <item>24h</item>
+        <item>7pv</item>
+        <item>30pv</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">ajan alkamisen jälkeen</string>
+    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
@@ -1418,7 +1440,7 @@
     <string name="search_hbu">Piilottanut</string>
     <string name="search_hbu_prefill">Omistaja</string>
     <string name="search_hbu_button">Hae omistajan nimellä</string>
-    <string name="search_filter">Suodatin (kokeellinen)</string>
+    <string name="search_filter">Suodata</string>
     <string name="search_filter_button">Etsi suodattimella</string>
     <string name="search_filter_info_message">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_tb">Reissaaja</string>

@@ -299,7 +299,6 @@
     <string name="caches_copy_selected">Kopiraj izbrane</string>
     <string name="caches_copy_all">Kopiraj vse</string>
     <string name="caches_map_locus_export">Izvozi v Locus</string>
-    <string name="caches_filter">Filtriraj</string>
     <string name="caches_filter_title">Filtriraj po</string>
     <string name="caches_filter_size">Velikosti</string>
     <string name="caches_filter_type">Tipu</string>

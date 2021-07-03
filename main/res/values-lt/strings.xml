@@ -358,7 +358,6 @@
     <string name="caches_copy_selected">Kopijuoti pasirinktas</string>
     <string name="caches_copy_all">Kopijuoti visas</string>
     <string name="caches_map_locus_export">Eksportuoti į Locus</string>
-    <string name="caches_filter">Filtruoti</string>
     <string name="caches_filter_title">Filtruoti</string>
     <string name="caches_filter_size">Dydis</string>
     <string name="caches_filter_type">Tipas</string>

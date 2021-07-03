@@ -322,7 +322,6 @@
     <string name="caches_copy_selected">Copiază selecţia</string>
     <string name="caches_copy_all">Copiază tot</string>
     <string name="caches_map_locus_export">Exportă către Locus</string>
-    <string name="caches_filter">Filtru</string>
     <string name="caches_filter_title">Filtrează după</string>
     <string name="caches_filter_size">Dimensiune</string>
     <string name="caches_filter_type">Tip</string>

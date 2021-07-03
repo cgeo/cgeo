@@ -392,8 +392,8 @@
     <string name="caches_copy_selected">Kopírovat vybrané</string>
     <string name="caches_copy_all">Kopírovat vše</string>
     <string name="caches_map_locus_export">Exportovat do Locusu</string>
-    <string name="caches_filter">Filtr</string>
-    <string name="caches_filter_menuitem">Nový filtr kešek (experimentální)</string>
+    <string name="caches_filter">Filtr (legacy)</string>
+    <string name="caches_filter_menuitem">Filtr</string>
     <string name="caches_filter_title">Filtrovat podle</string>
     <string name="caches_filter_size">Velikost</string>
     <string name="caches_filter_type">Typ</string>
@@ -474,6 +474,7 @@
     <string name="cache_filter_location">Místo</string>
     <string name="cache_filter_stored_lists">Uložené seznamy</string>
     <string name="cache_filter_origin">Původ</string>
+    <string name="cache_filter_stored_since">Uložené od</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
     <string name="cache_filtergroup_userspecific">Vlastní</string>
@@ -518,9 +519,12 @@
     <string name="cache_filter_status_select_label_found">Nalezená</string>
     <string name="cache_filter_status_select_label_owned">Vlastněná</string>
     <string name="cache_filter_status_select_label_stored">Uložená</string>
-    <string name="cache_filter_status_select_label_favorite">Oblíbená</string>
+    <string name="cache_filter_status_select_label_favorite">Vlastní oblíbené</string>
     <string name="cache_filter_status_select_label_watchlist">V seznamu sledovaných</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Má trackovatelný předmět</string>
+    <string name="cache_filter_status_select_label_has_own_vote">Má vlastní hlas</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky.\n\n Mysterka je považována za \"vyřešenou\", pokud má změněné souřadnice nebo vyplněný finální bod trasy se souřadnicemi.</string>
     <string name="cache_filter_status_active">Aktivní</string>
@@ -531,6 +535,24 @@
     <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
     <string name="cache_filter_log_entry_foundby">Nalezené kým:</string>
     <string name="cache_filter_log_entry_logtext">Text logu:</string>
+    <string name="cache_filter_stored_since_notstored">Neuložené</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 hodin</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 hodin</item>
+        <item>24 hodin</item>
+        <item>7 dní</item>
+        <item>30 dní</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8h</item>
+        <item>24h</item>
+        <item>7d</item>
+        <item>30d</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">úsvit</string>
+    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
@@ -1060,6 +1082,7 @@
     </plurals>
     <string name="last_day_available">zbývá poslední den</string>
     <string name="cache_offline_refresh">Aktualizovat</string>
+    <string name="cache_offline_drop">Odstranit ze seznamu</string>
     <string name="cache_delete_userdefined_waypoints">Odstranit uživatelsky definovatelné trasové body</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Odstranit všechny uživatelsky definovatelné trasové body u této kešky?\n\nTrasové body budou okamžitě smazány, akce nelze vrátit zpět.</string>
     <string name="cache_delete_userdefined_waypoints_note">Poznámka: Máte povoleny „trasové body z poznámky“. Pokud máte souřadnice v osobní poznámce rozpoznané aplikací c:geo, budou pro ně automaticky vytvořeny trasové body. Tuto funkci můžete deaktivovat v dialogovém okně pro úpravu osobní poznámky.</string>
@@ -1441,7 +1464,7 @@
     <string name="search_hbu">Ukryl</string>
     <string name="search_hbu_prefill">Vlastník</string>
     <string name="search_hbu_button">Hledat podle vlastníka</string>
-    <string name="search_filter">Filtr (experimentální)</string>
+    <string name="search_filter">Filtr</string>
     <string name="search_filter_button">Hledat podle filtru</string>
     <string name="search_filter_info_message">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
     <string name="search_tb">Sledovatelný předmět</string>

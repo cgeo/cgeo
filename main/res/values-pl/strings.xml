@@ -392,8 +392,6 @@
     <string name="caches_copy_selected">Skopiuj zaznaczone</string>
     <string name="caches_copy_all">Skopiuj wszystkie</string>
     <string name="caches_map_locus_export">Eksportuj do Locus</string>
-    <string name="caches_filter">Filtruj</string>
-    <string name="caches_filter_menuitem">Filtr nowych skrytek (Eksperymentalny)</string>
     <string name="caches_filter_title">Filtruj według</string>
     <string name="caches_filter_size">Rozmiar</string>
     <string name="caches_filter_type">Typ</string>
@@ -1419,7 +1417,6 @@
     <string name="search_hbu">Ukryte przez</string>
     <string name="search_hbu_prefill">Właściciel</string>
     <string name="search_hbu_button">Szukaj według właściciela</string>
-    <string name="search_filter">Filtr (eksperymentalny)</string>
     <string name="search_filter_button">Szukaj według filtru</string>
     <string name="search_filter_info_message">**Szukaj według filtrów** wyszukuje skrytki we wszystkich aktywnych usługach online (np. geocaching.com) za pomocą podanego filtra. Jednakże możliwości wyszukiwania tych usług są zazwyczaj bardziej ograniczone niż możliwości filtrowania c:geo.\n\n- Wszystkie usługi obsługują tylko filtry AND (bez filtrów OR i bez odwrócenia filtrów).\n- Wszystkie usługi obsługują bardziej podstawowe filtry takie jak **typ skrytki** lub **rozmiar skrytki**. Bardziej skomplikowane filtry często nie są obsługiwane lub mają pewne ograniczenia, np. **ulubione** lub **datę ukrycia**.\n- Można znaleźć szczegółową listę obsługiwanych filtrów dla każdej usługi [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry nieobsługiwane przez usługę online zostaną zastosowane przez c:geo na otrzymanych wynikach.</string>
     <string name="search_tb">Przedmioty podróżne</string>

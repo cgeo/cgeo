@@ -303,7 +303,6 @@
     <string name="caches_copy_selected">העתק בחירה</string>
     <string name="caches_copy_all">העתק הכל</string>
     <string name="caches_map_locus_export">יצא לLocus</string>
-    <string name="caches_filter">מיין</string>
     <string name="caches_filter_title">מיין לפי</string>
     <string name="caches_filter_size">גודל</string>
     <string name="caches_filter_type">סוג</string>

@@ -389,8 +389,8 @@
     <string name="caches_copy_selected">선택 복사</string>
     <string name="caches_copy_all">전체 복사</string>
     <string name="caches_map_locus_export">Locus로 내보내기</string>
-    <string name="caches_filter">필터</string>
-    <string name="caches_filter_menuitem">새로운 맞춤 필터 (실험용)</string>
+    <string name="caches_filter">필터 (레가시)</string>
+    <string name="caches_filter_menuitem">필터</string>
     <string name="caches_filter_title">필터링 기준</string>
     <string name="caches_filter_size">크기</string>
     <string name="caches_filter_type">유형</string>
@@ -471,6 +471,7 @@
     <string name="cache_filter_location">위치</string>
     <string name="cache_filter_stored_lists">저장된 목록</string>
     <string name="cache_filter_origin">출발지</string>
+    <string name="cache_filter_stored_since">이후 저장</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
     <string name="cache_filtergroup_userspecific">사용자의 특정</string>
@@ -512,9 +513,12 @@
     <string name="cache_filter_status_select_label_found">찾음</string>
     <string name="cache_filter_status_select_label_owned">소유함</string>
     <string name="cache_filter_status_select_label_stored">저장됨</string>
-    <string name="cache_filter_status_select_label_favorite">호감캐시</string>
+    <string name="cache_filter_status_select_label_favorite">호감점수를 준 캐시</string>
     <string name="cache_filter_status_select_label_watchlist">관심목록에</string>
     <string name="cache_filter_status_select_label_premium">프리미엄</string>
+    <string name="cache_filter_status_select_label_has_trackable">추적아이템 있음</string>
+    <string name="cache_filter_status_select_label_has_own_vote">나의 투표 있음</string>
+    <string name="cache_filter_status_select_label_has_offline_log">오프라인 로그 있음</string>
     <string name="cache_filter_status_select_label_solved_mystery">해결된 미스터리</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">이 필터 설정은 미스터리 캐시에만 영향을 미칩니다.\n\n좌표가 변경되었거나 좌표로 채워진 유효한 최종 웨이 포인트가있는 경우 미스터리는 \'해결된\'것으로 간주됩니다.</string>
     <string name="cache_filter_status_active">활성</string>
@@ -525,6 +529,24 @@
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
     <string name="cache_filter_log_entry_foundby">찾은 사용자:</string>
     <string name="cache_filter_log_entry_logtext">로그 내용:</string>
+    <string name="cache_filter_stored_since_notstored">저장되지 않음</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0시간</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0시간</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8시간</item>
+        <item>24시간</item>
+        <item>7 일</item>
+        <item>30일</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8시간</item>
+        <item>24 시간</item>
+        <item>7일</item>
+        <item>30일</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">시간의 여명</string>
+    <string name="cache_filter_stored_since_stored_max_short">최대</string>
     <!-- about -->
     <string name="about_version">버전</string>
     <string name="about_changelog">변경내역</string>
@@ -1406,7 +1428,7 @@
     <string name="search_hbu">숨겨진 사용자</string>
     <string name="search_hbu_prefill">소유주</string>
     <string name="search_hbu_button">소유주로 검색</string>
-    <string name="search_filter">필터 (실험용)</string>
+    <string name="search_filter">필터</string>
     <string name="search_filter_button">필터로 검색</string>
     <string name="search_filter_info_message">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
     <string name="search_tb">추적아이템</string>

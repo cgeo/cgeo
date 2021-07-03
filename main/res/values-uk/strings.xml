@@ -343,7 +343,6 @@
     <string name="caches_copy_selected">Копіювати виділене</string>
     <string name="caches_copy_all">Скопіювати все</string>
     <string name="caches_map_locus_export">Експорт в Locus</string>
-    <string name="caches_filter">Фільтр</string>
     <string name="caches_filter_title">Фільтрувати за</string>
     <string name="caches_filter_size">Розмір</string>
     <string name="caches_filter_type">Тип</string>

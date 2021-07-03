@@ -350,7 +350,6 @@
     <string name="caches_copy_selected">Kopiér valgte</string>
     <string name="caches_copy_all">Kopiér alle</string>
     <string name="caches_map_locus_export">Eksportér til Locus</string>
-    <string name="caches_filter">Filter</string>
     <string name="caches_filter_title">Filtrér efter</string>
     <string name="caches_filter_size">Størrelse</string>
     <string name="caches_filter_type">Type</string>

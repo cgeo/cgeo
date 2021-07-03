@@ -322,7 +322,6 @@
     <string name="caches_copy_selected">Kijelöltek másolása</string>
     <string name="caches_copy_all">Összes másolása</string>
     <string name="caches_map_locus_export">Exportálás Locus-ba</string>
-    <string name="caches_filter">Szűrés</string>
     <string name="caches_filter_title">Szűrés eszerint</string>
     <string name="caches_filter_size">Méret</string>
     <string name="caches_filter_type">Típus</string>

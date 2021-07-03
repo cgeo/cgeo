@@ -342,7 +342,6 @@
     <string name="caches_copy_selected">Kopēt atlasīto</string>
     <string name="caches_copy_all">Kopēt visu</string>
     <string name="caches_map_locus_export">Eksportēt uz Locus</string>
-    <string name="caches_filter">Filtrēt</string>
     <string name="caches_filter_title">Filtrēt</string>
     <string name="caches_filter_size">Pēc lieluma</string>
     <string name="caches_filter_type">Pēc tipa</string>

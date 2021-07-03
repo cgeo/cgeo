@@ -237,7 +237,6 @@
     <string name="caches_copy_selected">Afrita valda</string>
     <string name="caches_copy_all">Afrita alla</string>
     <string name="caches_map_locus_export">Flytja út í Locus</string>
-    <string name="caches_filter">Sía frá</string>
     <string name="caches_filter_title">Sía eftir</string>
     <string name="caches_filter_size">Stærð</string>
     <string name="caches_filter_type">Tegund</string>
