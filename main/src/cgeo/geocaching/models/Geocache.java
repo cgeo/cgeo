@@ -599,6 +599,7 @@ public class Geocache implements IWaypoint {
     public void clearOfflineLog() {
         DataStore.clearLogOffline(geocode);
         setHasLogOffline(false);
+        DataStore.clearVisitDate(Collections.singleton(geocode));
         notifyChange();
     }
 
