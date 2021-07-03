@@ -55,7 +55,7 @@ public abstract class AbstractCachesOverlay {
     }
 
     public void onDestroy() {
-        Log.d(String.format(Locale.ENGLISH, "AbtsractCacheOverlay: onDestroy overlay %d", overlayId));
+        Log.d(String.format(Locale.ENGLISH, "AbstractCacheOverlay: onDestroy overlay %d", overlayId));
         clearLayers();
     }
 

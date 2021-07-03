@@ -24,7 +24,7 @@ import org.mapsforge.map.layer.LayerManager;
 public class CachesBundle {
 
     private static final int CIRCLES_SEPARATOR = 0;
-    private static final int WP_SEPERATOR = 1;
+    private static final int WP_SEPARATOR = 1;
     private static final int BASE_SEPARATOR = 2;
     private static final int STORED_SEPARATOR = 3;
     private static final int LIVE_SEPARATOR = 4;
@@ -41,7 +41,7 @@ public class CachesBundle {
     private static final int INITIAL_ENTRY_COUNT = 200;
     private final Set<GeoEntry> geoEntries = Collections.synchronizedSet(new GeoEntrySet(INITIAL_ENTRY_COUNT));
 
-    private final WaypointsOverlay wpOverlay;
+    private WaypointsOverlay wpOverlay;
     private AbstractCachesOverlay baseOverlay;
     private AbstractCachesOverlay storedOverlay;
     private LiveCachesOverlay liveOverlay;
@@ -75,7 +75,7 @@ public class CachesBundle {
         this.separators.add(separator5);
         this.mapView.getLayerManager().getLayers().add(separator5);
 
-        this.wpOverlay = new WaypointsOverlay(map, WP_OVERLAY_ID, this.geoEntries, this, separators.get(WP_SEPERATOR), this.mapHandlers);
+        this.wpOverlay = new WaypointsOverlay(map, WP_OVERLAY_ID, this.geoEntries, this, separators.get(WP_SEPARATOR), this.mapHandlers);
     }
 
     /**
@@ -157,6 +157,10 @@ public class CachesBundle {
         if (this.liveOverlay != null) {
             this.liveOverlay.onDestroy();
             this.liveOverlay = null;
+        }
+        if (this.wpOverlay != null) {
+            this.wpOverlay.onDestroy();
+            this.wpOverlay = null;
         }
         for (final SeparatorLayer layer : this.separators) {
             this.mapView.getLayerManager().getLayers().remove(layer);
@@ -324,7 +328,7 @@ public class CachesBundle {
 
     public WaypointDistanceInfo getClosestDistanceInM(final Geopoint coord) {
         WaypointDistanceInfo info = new WaypointDistanceInfo("", 50000000);
-        WaypointDistanceInfo temp = info;
+        WaypointDistanceInfo temp;
         if (baseOverlay != null) {
             temp = baseOverlay.getClosestDistanceInM(coord);
             if (temp.meters > 0 && temp.meters < info.meters) {

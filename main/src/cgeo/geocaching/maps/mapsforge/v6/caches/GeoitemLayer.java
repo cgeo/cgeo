@@ -7,6 +7,10 @@ import cgeo.geocaching.utils.MapLineUtils;
 
 import android.util.DisplayMetrics;
 
+import androidx.annotation.Nullable;
+
+import java.util.Objects;
+
 import org.mapsforge.core.graphics.Bitmap;
 import org.mapsforge.core.graphics.Paint;
 import org.mapsforge.core.graphics.Style;
@@ -104,5 +108,15 @@ public class GeoitemLayer extends Marker {
         final Rectangle rect = new Rectangle(layerXY.x + getHorizontalOffset() - halfXSpan, layerXY.y + getVerticalOffset() - halfYSpan, layerXY.x + getHorizontalOffset() + halfXSpan, layerXY.y + getVerticalOffset() + halfYSpan);
 
         return rect.intersectsCircle(tapXY.x, tapXY.y, tapSpanRadius);
+    }
+
+    @Override
+    public boolean equals(@Nullable final Object obj) {
+        return obj instanceof GeoitemLayer && Objects.equals(getItem(), ((GeoitemLayer) obj).getItem());
+    }
+
+    @Override
+    public int hashCode() {
+        return getItem() == null ? -13 : getItem().hashCode();
     }
 }
