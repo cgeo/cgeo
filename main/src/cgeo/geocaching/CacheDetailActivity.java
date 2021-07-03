@@ -1916,7 +1916,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private Geocache cache;
 
         private void setClipboardButtonVisibility(final Button createFromClipboard) {
-            createFromClipboard.setVisibility(Waypoint.hasClipboardWaypoint() >= 0 ? View.VISIBLE : View.INVISIBLE);
+            createFromClipboard.setVisibility(Waypoint.hasClipboardWaypoint() >= 0 ? View.VISIBLE : View.GONE);
         }
 
         private void addWaypointAndSort(final List<Waypoint> sortedWaypoints, final Waypoint newWaypoint) {
